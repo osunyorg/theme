@@ -1,0 +1,31 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- with .data -}}
+  <section class="block-video{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        <div>
+          {{ if $title -}}
+            <div class="top">
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            </div>
+          {{ end -}}
+
+          {{ if .url }}
+            <div class="video">
+              {{ partial "blocks/templates/video/GetIframe" ( dict
+                  "url" .url
+                  "title" .video_title
+                )}}
+            </div>
+          {{ end }}
+
+          {{ partial "commons/transcription" ( dict
+            "transcription" .transcription
+            "position" $position
+          ) }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{- end -}}

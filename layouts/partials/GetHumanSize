@@ -1,0 +1,15 @@
+{{ $weight := . }}
+{{ $unit := "b" }}
+
+{{ if ge $weight (pow 1024 3) }}
+  {{ $weight = math.Ceil (div $weight (pow 1024 3)) }}
+  {{ $unit = "Go" }}
+{{ else if ge $weight (pow 1024 2) }}
+  {{ $weight = math.Ceil (div $weight (pow 1024 2)) }}
+  {{ $unit = "Mo" }}
+{{ else if ge $weight 1024 }}
+  {{ $weight = math.Ceil (div $weight 1024) }}
+  {{ $unit = "ko" }}
+{{ end }}
+
+{{ return printf "%s %s" (string $weight) $unit }}

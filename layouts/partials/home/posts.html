@@ -1,0 +1,7 @@
+<div class="posts">
+  {{ range (where site.RegularPages "Type" "posts" | first 6) }}
+    <div>
+      {{ partial "posts/post.html" . }}
+    </div>
+  {{ end }}
+</div>

@@ -1,0 +1,32 @@
+{{ define "main" }}
+  {{ partial "pages/hero.html" . }}
+
+  {{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}
+  {{- if .Params.blocks }}
+    {{ $need_aside := false }}
+    {{ range .Params.blocks }}
+      {{ if .title }}
+        {{ $need_aside = true }}
+      {{ end }}
+    {{ end }}
+
+    <div class="content-blocks">
+      {{- if $need_aside }}
+      {{ partial "pages/aside.html"
+          (dict
+              "category" $category
+              "context" .
+          )
+      }}
+      {{ end -}}
+      {{ partial "blocks/list.html" .Params.blocks }}
+    </div>
+  {{ else }}
+    {{ partial "pages/image.html" .Params.image }}
+    {{/* LEGACY */}}{{ partial "pages/body.html" .Content }}
+    {{/* LEGACY */}}{{ partial "pages/body.html" .Params.legacy_text }}
+    {{ partial "pages/children.html" .Params.children }}
+    {{/* LEGACY */}}{{ partial "posts/related.html" $category }}
+  {{ end }}
+
+{{ end }}

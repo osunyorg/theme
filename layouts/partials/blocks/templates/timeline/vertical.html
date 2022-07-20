@@ -1,0 +1,22 @@
+<div class="block-content">
+  {{ if .title -}}
+    <div class="top">
+      <h2>{{ partial "PrepareHTML" .title }}</h2>
+    </div>
+  {{- end }}
+
+  {{ with .data -}}
+    <div class="events">
+      {{ range .events -}}
+        <div class="event">
+          {{ if .title -}}
+            <p><strong>{{ partial "PrepareHTML" .title }}</strong></p>
+          {{- end }}
+          {{ if .text -}}
+            <p>{{ partial "PrepareText" .text }}</p>
+          {{- end }}
+        </div>
+      {{ end -}}
+    </div>
+  {{ end -}}
+</div>

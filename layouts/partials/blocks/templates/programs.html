@@ -1,0 +1,31 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- with .data -}}
+  <section class="block-programs{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        {{ if $title -}}
+          <div class="top">
+            <h2>{{ partial "PrepareHTML" $title }}</h2>
+          </div>
+        {{ end -}}
+
+        <ol class="programs">
+          {{- range .programs -}}
+            <li>
+              {{ $program := site.GetPage (printf "/programs/%s" .slug) }}
+              {{- $title := partial "PrepareHTML" $program.Title -}}
+              <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+                {{- $title -}}
+              </a>
+            </li>
+          {{ end }}
+        </ol>
+        {{/*   TODO : use program list partial ?
+          {{ partial "programs/programs-list.html" .programs }}
+        */}}
+      
+      </div>
+    </div>
+  </section>
+{{- end -}}

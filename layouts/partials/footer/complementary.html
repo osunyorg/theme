@@ -1,0 +1,19 @@
+<div class="complementary">
+  {{ if site.Data.menus.legal }}
+    {{ partial "commons/menu.html"
+          (dict
+            "items"       site.Data.menus.legal
+            "level"       1
+            "class"       "nav-legal"
+          )}}
+  {{ end }}
+  {{ partial "footer/credit.html" }}
+  {{ if site.Data.menus.social }}
+    {{ partial "commons/menu.html"
+          (dict
+            "items"       site.Data.menus.social
+            "level"       1
+            "class"       "nav-social"
+          )}}
+  {{ end }}
+</div>

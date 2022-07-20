@@ -1,0 +1,20 @@
+<article class="volume">
+  <div>
+    <p class="suptitle">{{ i18n "volumes.volume_number" (dict "Number" .Params.Number) }}</p>
+    <p class="title"><a href="{{ .Permalink }}" title="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">{{ partial "PrepareHTML" .Title }}</a></p>
+  </div>
+  <div class="media">
+    {{- if .Params.image -}}
+      {{- partial "commons/image.html"
+            (dict
+              "image"    .Params.image
+              "alt"      .Title
+              "mobile"   "327x388"
+              "tablet"   "208x247"
+              "desktop"  "408x485"
+            ) -}}
+    {{- else if site.Params.default_image.url -}}
+      {{- partial "commons/image-default.html" (dict "class" "img-fluid") -}}
+    {{- end -}}
+  </div>
+</article>

@@ -1,0 +1,10 @@
+{{ $directoryName := slicestr . 0 2 }}
+{{ $directory := "" }}
+{{ $media := "" }}
+{{ if isset site.Data.media $directoryName }}
+  {{ $directory = index site.Data.media $directoryName }}
+  {{ if isset $directory . }}
+    {{ $media = index $directory . }}
+  {{ end }}
+{{ end }}
+{{ return $media }}

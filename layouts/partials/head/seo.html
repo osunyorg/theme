@@ -1,0 +1,73 @@
+{{- $seoTitle := htmlUnescape site.Title -}}
+{{- if .Title -}}
+  {{- $seoTitle = printf "%s | %s" (chomp (htmlUnescape .Title)) $seoTitle -}}
+{{- end -}}
+{{- $seoDescription := "" -}}
+{{- if .Params.description -}}
+  {{- $seoDescription = partial "PrepareHTML" .Params.description -}}
+{{- else if .Params.description_short -}}
+  {{- $seoDescription = partial "PrepareHTML" .Params.description_short -}}
+{{- else if .Content -}}
+  {{- $seoDescription = partial "GetTruncateContent" .Content -}}
+{{- else if .Params.legacy_text -}}
+  {{- $seoDescription = partial "GetTruncateContent" .Params.legacy_text -}}
+{{- else if .Params.blocks -}}
+  {{- range first 1 .Params.blocks -}}
+    {{- if .title -}}
+      {{- $seoDescription = partial "GetTruncateContent" .title -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $seoImage := "" -}}
+{{- if os.FileExists "static/assets/images/share.png" -}}
+  {{- $seoImage = printf "%sassets/images/share.png" site.BaseURL -}}
+{{- end -}}
+{{- if os.FileExists "static/assets/images/share.jpg" -}}
+  {{- $seoImage = printf "%sassets/images/share.jpg" site.BaseURL -}}
+{{- end -}}
+{{- $ogImage := $seoImage -}}
+{{- $twitterImage := $seoImage -}}
+{{- with .Params.image -}}
+  {{- $id := . -}}
+  {{ if isset . "id" -}}
+    {{- $id = .id -}}
+  {{- end -}}
+  {{- $image := partial "GetMedia" $id -}}
+  {{- $ogImage = partial "GetImageUrl" (dict
+          "media" $image
+          "size" "1200x630"
+          "crop" true
+        ) -}}
+  {{- $twitterImage = partial "GetImageUrl" (dict
+          "media" $image
+          "size" "1200x675"
+          "crop" true
+        ) -}}
+{{- end -}}
+{{- $seoUrl := .Permalink -}}
+
+<!-- HTML Meta Tags -->
+<title>{{ $seoTitle }}</title>
+<meta name="description" content="{{ $seoDescription }}">
+
+<!-- Facebook Meta Tags -->
+<meta property="og:title" content="{{ $seoTitle }}">
+<meta property="og:description" content="{{ $seoDescription }}">
+{{- with $ogImage }}
+<meta property="og:image" content="{{ . }}">
+{{ end -}}
+<meta property="og:url" content="{{ $seoUrl }}">
+<meta property="og:type" content="website">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:title" content="{{ $seoTitle }}">
+<meta name="twitter:description" content="{{ $seoDescription }}">
+{{- with $twitterImage }}
+<meta name="twitter:image" content="{{ . }}">
+{{ end -}}
+<meta name="twitter:card" content="summary_large_image">
+{{- if site.Data.school.twitter }}
+<meta name="twitter:site" content="@{{ site.Data.school.twitter }}" />
+{{ else if site.Data.journal.twitter }}
+<meta name="twitter:site" content="@{{ site.Data.journal.twitter }}" />
+{{ end -}}

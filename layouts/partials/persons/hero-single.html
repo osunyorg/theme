@@ -1,0 +1,22 @@
+<header class="hero">
+  <div class="container">
+    <div class="title-avatar">
+      <h1>{{ safeHTML (partial "CorrectPunctuation" .Title) }}</h1>
+      <div>
+        {{ if .Params.image }}
+          <div class="avatar">
+            {{ partial "commons/image.html"
+                  (dict
+                    "image"    .Params.image
+                    "class"    "img-fluid"
+                    "mobile"   "202x202"
+                    "tablet"   "192x192"
+                    "desktop"  "196x196"
+                  )}}
+          </div>
+        {{ end }}
+      </div>
+    </div>
+    {{ partial "header/breadcrumbs.html" . }}
+  </div>
+</header>

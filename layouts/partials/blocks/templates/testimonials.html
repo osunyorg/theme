@@ -1,0 +1,77 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- $is_carousel := false -}}
+
+{{- with .data -}}
+  {{ if gt (len .testimonials) 1 }}
+    {{- $is_carousel = true -}}
+  {{ end }}
+  <section class="block-testimonials{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        {{ if $title -}}
+          <div class="top">
+            <h2>{{ partial "PrepareHTML" $title }}</h2>
+          </div>
+        {{ end -}}
+
+        <div class="testimonials">
+
+          {{- if $is_carousel }}
+          <div class="splide" data-splide='{"arrows":false,"autoplay":true,"pauseOnHover":false,"pauseOnFocus":false,"type":"loop","autoHeight":true}'>
+            <div class="splide__slider">
+              <div class="splide__track">
+                <div class="splide__list">
+          {{ end -}}
+
+          {{ range .testimonials }}
+            {{ $is_long := gt (len .text) 150 }}
+            <figure{{ if $is_carousel }} class="splide__slide"{{ end }}>
+              <blockquote {{- if $is_long }} class="is-long" {{- end }}>
+                <p>{{- partial "PrepareHTML" .text -}}</p>
+              </blockquote>
+              {{ if or .photo .author .job -}}
+              <figcaption>
+                {{ if .photo -}}
+                  <div class="avatar">
+                    {{- partial "commons/image.html"
+                          (dict
+                            "image"    .photo
+                            "alt"      .author
+                            "mobile"   "192x192"
+                            "tablet"   "192x192"
+                            "desktop"  "192x192"
+                          ) -}}
+                  </div>
+                {{- end }}
+                {{ if or .author .job -}}
+                  <span>
+                    {{- if .author -}}
+                      <b>{{ partial "PrepareHTML" .author }}</b><br>
+                    {{- end }}
+                    {{- partial "PrepareHTML" .job -}}
+                  </span>
+                {{- end }}
+              </figcaption>
+              {{ end }}
+            </figure>
+          {{ end }}
+
+          {{- if $is_carousel }}
+                </div>
+              </div>
+            </div>
+
+            <div class="splide__autoplay is-active">
+              <button class="splide__play"></button>
+              <button class="splide__pause"></button>
+            </div>
+          </div>
+          {{ end -}}
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+{{- end -}}

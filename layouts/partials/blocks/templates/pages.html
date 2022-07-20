@@ -1,0 +1,86 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- $layout_class := "block-pages--grid" -}}
+{{- with .data -}}
+  {{- $layout := .layout -}}
+
+  {{- $show_main_page := false -}}
+  {{- $show_main_description := .show_main_description -}}
+  {{- $show_descriptions := .show_descriptions -}}
+  {{- $show_images := .show_images -}}
+
+  {{/* LEGACY */}}
+  {{- with .show_description -}}
+    {{- $show_descriptions = . -}}
+  {{- end -}}
+  {{- with .show_image -}}
+    {{- $show_images = . -}}
+  {{- end -}}
+
+  {{- if $layout -}}
+    {{- $layout_class = printf "block-pages--%s" .layout -}}
+  {{- end -}}
+
+  {{- $page_class := "" -}}
+
+  {{ $page := partial "GetPageByUrl" .page }}
+  {{- with $page }}
+    {{- $show_main_page = true -}}
+    {{ if eq $title "" }}
+      {{ $title = .Title }}
+    {{ end }}
+    {{ if .Params.bodyclass }}
+      {{- $page_class = partial "GetBodyclass" . }}
+      {{- $page_class = printf "block-%s" $page_class }}
+    {{ end }}
+  {{ end -}}
+
+  <section class="block-pages{{ if $title }} block-with-title{{ end }} {{ $layout_class }} {{ $page_class }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+
+        {{- if and $title (not $show_main_page) }}
+          <div class="top">
+            <h2>{{ partial "PrepareHTML" $title }}</h2>
+          </div>
+        {{ end -}}
+
+        {{- with $page -}}
+
+          {{- .Scratch.Set "class" "main-page" -}}
+          {{- .Scratch.Set "show_description" $show_main_description -}}
+          {{- partial "pages/page.html" . -}}
+          {{- .Scratch.Delete "class" -}}
+          {{- .Scratch.Delete "show_description" -}}
+
+        {{- end -}}
+
+        <div class="pages">
+          {{- range .pages }}
+            {{- $page := partial "GetPageByUrl" .page -}}
+            {{- if .slug -}}
+              {{- $page = partial "GetPageByUrl" .slug -}}
+            {{- end -}}
+            {{ with $page }}
+              <div>
+
+                {{- .Scratch.Set "show_image" $show_images -}}
+                {{- .Scratch.Set "show_description" $show_descriptions -}}
+                {{- if eq $layout "cards" -}}
+                  {{- .Scratch.Set "show_more" true -}}
+                {{- end -}}
+                {{- partial "pages/page.html" . -}}
+                {{- .Scratch.Delete "show_image" -}}
+                {{- .Scratch.Delete "show_description" -}}
+                {{- if eq $layout "cards" -}}
+                  {{- .Scratch.Delete "show_more" -}}
+                {{- end -}}
+
+              </div>
+            {{ end }}
+          {{ end -}}
+        </div>
+      </div>
+    </div>
+  </section>
+{{- end -}}

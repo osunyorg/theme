@@ -1,0 +1,29 @@
+{{- range . }}
+  <h3>{{ .title }}</h3>
+  <div class="persons">
+    {{- range .persons -}}
+      {{ $slug := . }}
+      {{ with site.GetPage "persons" }}
+        {{ with .GetPage $slug }}
+          <div>
+            <div class="person">
+              <p class="name">
+                <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
+              </p>
+              {{ if .Params.email }}
+                <p class="contact">
+                  <a href="mailto:{{ .Params.email }}" rel="noreferrer" target="_blank">{{ .Params.email }}</a>
+                </p>
+              {{ end }}
+              {{ if .Params.phone }}
+                <p class="contact">
+                  {{ safeHTML .Params.phone }}
+                </p>
+              {{ end }}
+            </div>
+          </div>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end -}}

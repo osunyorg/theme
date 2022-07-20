@@ -1,0 +1,46 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- $class := "block-chapter" -}}
+{{- with .data -}}
+  {{ if .image }}
+    {{- $class = printf "%s block-chapter--with-image" $class -}}
+  {{ end }}
+  <section class="{{ $class }}{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+
+        <div class="chapter">
+          {{ if $title -}}
+            <div class="top">
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            </div>
+          {{ end -}}
+          {{ if (partial "GetTextFromHTML" .text) -}}
+          <div>
+            {{ partial "PrepareHTML" .text }}
+          </div>
+          {{ end -}}
+          {{ if (partial "GetTextFromHTML" .notes) }}
+            <div class="notes">
+              {{ partial "PrepareHTML" .notes }}
+            </div>
+          {{ end -}}
+        </div>
+        {{ with .image }}
+          <figure>
+            {{ partial "commons/image.html"
+              (dict
+                "image"    .
+                "mobile"   "351x351"
+                "tablet"   "336x336"
+                "desktop"  "636x636"
+              )}}
+            {{ if partial "GetTextFromHTML" .credit }}
+              <figcaption>{{ partial "PrepareHTML" .credit }}</figcaption>
+            {{ end }}
+          </figure>
+        {{ end -}}
+      </div>
+    </div>
+  </section>
+{{- end -}}

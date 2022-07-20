@@ -1,0 +1,17 @@
+{{ if . }}
+  <figure class="featured-image">
+  {{ partial "commons/image.html"
+        (dict
+          "image"    .
+          "mobile"   "351x168"
+          "tablet"   "456x219"
+          "desktop"  "856x410"
+          "itemprop" true
+        )}}
+    {{- if isset . "credit" -}}
+      {{ if partial "GetTextFromHTML" .credit }}
+        <figcaption>{{ partial "PrepareHTML" .credit }}</figcaption>
+      {{ end }}
+    {{- end -}}
+  </figure>
+{{ end }}

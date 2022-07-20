@@ -1,0 +1,15 @@
+{{- if .Site.Taxonomies -}}
+  <ul class="taxonomies">
+    {{- range $name, $t := .Site.Taxonomies }}
+      {{- if and (ne $name "categories") (ne $name "diplomas") }}
+        {{- with $.Site.GetPage "taxonomyTerm" $name}}
+          {{- if .Pages }}
+            <li>
+              <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
+            </li>
+          {{ end -}}
+        {{ end -}}
+      {{ end -}}
+    {{ end -}}
+  </ul>
+{{- end -}}

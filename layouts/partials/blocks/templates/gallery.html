@@ -1,0 +1,34 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- $layout_class := "block-gallery--grid" -}}
+{{- with .data -}}
+  {{- $layout := .layout -}}
+  {{- if $layout -}}
+    {{- $layout_class = printf "block-gallery--%s" .layout -}}
+  {{- end -}}
+  <section class="block-gallery{{ if $title }} block-with-title{{ end }} {{ $layout_class }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        {{- if (or $title .description) }}
+          <div class="top">
+            {{- if $title }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ end -}}
+            {{- if .description }}
+              <div class="description">
+                {{ partial "PrepareHTML"  .description }}
+              </div>
+            {{ end -}}
+          </div>
+        {{ end -}}
+
+        {{- if eq .layout "carousel" -}}
+          {{ partial "blocks/templates/gallery/layout-carousel" . }}
+        {{- else -}}
+          {{ partial "blocks/templates/gallery/layout-grid" . }}
+        {{- end -}}
+
+      </div>
+    </div>
+  </section>
+{{- end -}}

@@ -1,0 +1,46 @@
+header[role="banner"]
+    @if $header-sticky-enabled
+        background-color: $header-background-color
+        position: sticky
+        top: 0
+        transition: transform 0.3s
+        z-index: 10
+        html.is-scrolling-down:not(.is-menu-open) &
+            &:not(:hover)
+                transform: translateY(-100%)
+
+        &.is-sticky
+            position: sticky
+
+    nav[role="navigation"]
+        button[type="button"]
+            border: 0
+            color: $body-color
+            position: relative
+            &:focus
+                box-shadow: none
+            &:focus-visible
+                outline-color: gray
+                outline-offset: 5px
+                outline-style: dashed
+                outline-width: 1px
+            span:first-of-type
+                font-size: px2rem(14)
+                text-transform: uppercase
+            span:last-of-type
+                background: none
+                height: calc(1.063rem + .3125rem * 2)
+                padding: px2rem(5) 0 px2rem(5) px2rem(5)
+                width: calc(1.5rem + .3125rem)
+                &::before
+                    font-size: px2rem(17)
+                    vertical-align: top
+            &[aria-expanded="true"]
+                span:last-of-type
+                    &::before
+                        content: map-get($icons, "close")
+
+    .logo
+        img
+            height: 20px
+            width: auto

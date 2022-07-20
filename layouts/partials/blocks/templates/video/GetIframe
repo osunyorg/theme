@@ -1,0 +1,55 @@
+{{ $url := .url }}
+{{ $identifier := false }}
+{{ $title := partial "PrepareHTML" .title }}
+
+{{ $vimeo := (dict
+    "name" "vimeo"
+    "urls" (slice "vimeo.com")
+) }}
+
+{{ $youtube := (dict
+  "name" "youtube"
+  "urls" (slice "youtube.com" "youtu.be")
+) }}
+
+{{ $dailymotion := (dict
+  "name" "dailymotion"
+  "urls" (slice "dailymotion.com" "dai.ly")
+) }}
+
+{{ $providers := slice $vimeo $youtube $dailymotion }}
+
+{{ range $provider := $providers }}
+  {{ range $provider_url := $provider.urls }}
+    {{ if in $url $provider_url }}
+      {{ if eq $provider.name "vimeo" }}
+        {{ $parts := split $url "/" }}
+        {{ $identifier = (index (last 1 $parts) 0) }}
+      {{ else if eq $provider.name "youtube" }}
+        {{ if eq $provider_url "youtu.be" }}
+          {{ $parts := split $url "/" }}
+          {{ $identifier = (index (last 1 $parts) 0) }}
+        {{ else if eq $provider_url "youtube.com" }}
+          {{ $parts := split $url "v=" }}
+          {{ $identifier = (index (last 1 $parts) 0) }}
+        {{ end }}
+      {{ else if eq $provider.name "dailymotion" }}
+        {{ if eq $provider_url "dai.ly" }}
+          {{ $parts := split $url "dai.ly/" }}
+          {{ $identifier = (index (last 1 $parts) 0) }}
+        {{ else if eq $provider_url "dailymotion.com" }}
+          {{ $parts := split $url "video/" }}
+          {{ $identifier = (index (last 1 $parts) 0) }}
+        {{ end }}
+      {{ end }}
+
+      {{ if $identifier }}
+        {{ $partial := printf  "blocks/templates/video/%s.html" $provider.name }}
+        {{ partial $partial (dict
+          "id" $identifier
+          "title" $title
+          )}}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}

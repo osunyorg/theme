@@ -1,0 +1,11 @@
+{{ define "main" }}
+  {{- partial "header/hero.html"
+        (dict
+          "title" .Title
+          "context" .
+        ) -}}
+  <div class="container">
+    {{ partial "programs/programs.html" .Paginator.Pages }}
+    {{ partial "commons/pagination.html" . }}
+  </div>
+{{ end }}

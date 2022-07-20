@@ -1,0 +1,10 @@
+<div class="posts">
+  {{ if not .Pages }}
+    <p>{{ i18n "categories.no_post" }}</p>
+  {{ end }}
+  {{ range .Paginator.Pages }}
+    <div>
+      {{ partial "posts/post.html" . }}
+    </div>
+  {{ end }}
+</div>

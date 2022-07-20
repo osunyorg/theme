@@ -1,0 +1,23 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- with .data -}}
+  <section class="block-definitions{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        {{- if $title }}
+          <div class="top">
+            <h2>{{ partial "PrepareHTML" $title }}</h2>
+          </div>
+        {{ end -}}
+        <div class="definitions">
+          {{- range .elements }}
+            <details itemscope itemtype="https://schema.org/DefinedTerm">
+              <summary itemprop="name">{{ .title }}</summary>
+              <p itemprop="description">{{ .description }}</p>
+            </details>
+          {{ end -}}
+        </div>
+      </div>
+    </div>
+  </section>
+{{- end -}}

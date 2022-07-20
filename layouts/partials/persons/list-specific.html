@@ -1,0 +1,11 @@
+<div class="persons">
+  {{ range (.Paginate (.Pages.ByParam "last_name")).Pages }}
+    {{ $person := site.GetPage (printf "/persons/%s" .Slug) }}
+    {{ if $person }}
+      <div>
+        {{ partial "persons/person.html" $person }}
+      </div>
+    {{ end }}
+  {{ end }}
+</div>
+{{ partial "commons/pagination.html" . }}

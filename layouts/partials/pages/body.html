@@ -1,0 +1,13 @@
+{{ if (partial "GetTextFromHTML" .) }}
+  <section>
+    <div class="container">
+      <div itemprop="articleBody" id="page-informations">
+        {{
+          partial "PrepareHTML" (
+            partial "H2AddId" .
+          )
+        }}
+      </div>
+    </div>
+  </section>
+{{ end }}

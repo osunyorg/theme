@@ -1,0 +1,18 @@
+{{- if . -}}
+<ol class="programs">
+  {{- range . -}}
+    <li>
+      {{- $title := partial "PrepareHTML" .Title -}}
+      <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+        {{- $title -}}
+      </a>
+      {{- with .Params.diplomas -}}
+        {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
+        {{- with $diploma -}}
+          <a href="{{ .Permalink }}" title="{{ partial "PrepareHTML" .Title }}">{{ partial "PrepareHTML" .Params.short_name }}</a>
+        {{- end -}}
+      {{- end -}}
+    </li>
+  {{- end -}}
+</ol>
+{{- end -}}

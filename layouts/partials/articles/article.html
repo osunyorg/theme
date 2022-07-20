@@ -1,0 +1,11 @@
+<article class="article">
+  <p class="title">
+    <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
+  </p>
+  {{ range .Params.Volumes }}
+    {{ $volume := site.GetPage (printf "/volumes%s" .) }}
+    {{ if $volume }}
+      <p>{{ i18n "commons.in" }} “<a href="{{ $volume.Permalink }}">{{ $volume.Title }}</a>”</p>
+    {{ end }}
+  {{ end }}
+</article>

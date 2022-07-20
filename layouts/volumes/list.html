@@ -1,0 +1,11 @@
+{{ define "main" }}
+  {{ partial "volumes/hero.html" . }}
+  <div class="container">
+    {{ partial "volumes/volumes.html" . }}
+    {{ partial "commons/pagination.html" . }}
+  </div>
+
+  {{ if .Params.blocks }}
+    {{ partial "blocks/list.html" .Params.blocks }}
+  {{ end }}
+{{ end }}

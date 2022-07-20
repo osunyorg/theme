@@ -1,0 +1,22 @@
+{{ if .Params.Researchers }}
+  <section>
+    <h2>{{ i18n "volumes.authors" }}</h2>
+    <div class="authors">
+      {{ range .Params.Researchers }}
+
+        {{ with site.GetPage (printf "/persons/%s" .) }}
+          <div itemprop="author" itemscope itemtype="https://schema.org/Person">
+            <meta itemprop="name" content="{{ trim .Title "\n" }}">
+            <meta itemprop="url" content="{{ .Permalink }}">
+            <meta itemprop="description" content="{{ trim .Content "\n" }}">
+            {{ if .Params.image }}
+              <meta itemprop="image" content="{{ .Params.image }}">
+            {{ end }}
+            {{ partial "persons/person.html" . }}
+          </div>
+        {{ end }}
+
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

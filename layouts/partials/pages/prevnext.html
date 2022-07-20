@@ -1,0 +1,20 @@
+<div class="container">
+  <nav aria-label="{{ i18n "commons.pagination.between.pages" }}">
+    <ul class="pagination pagination-between-pages">
+      {{with .Site.RegularPages.Prev . }}
+        <li class="previous">
+          <a href="{{.RelPermalink}}" aria-label="{{htmlEscape .Title}}">
+            {{ safeHTML .Title }}
+          </a>
+        </li>
+      {{end}}
+      {{with .Site.RegularPages.Next . }}
+        <li class="next">
+          <a href="{{.RelPermalink}}" aria-label="{{htmlEscape .Title}}">
+            {{ safeHTML .Title }}
+          </a>
+        </li>
+      {{end}}
+  </ul>
+  </nav>
+</div>

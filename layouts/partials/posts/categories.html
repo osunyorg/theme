@@ -1,0 +1,11 @@
+{{- if .Params.Categories -}}
+<ul class="post-categories">
+  {{- range $index, $s := .GetTerms "categories" -}}
+    <li>
+      <a href="{{ .Permalink }}">
+        {{- safeHTML .Title -}}
+      </a>
+    </li>
+  {{- end }}
+</ul>
+{{- end -}}

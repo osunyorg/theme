@@ -1,0 +1,30 @@
+<div itemprop="articleBody">
+  {{- $params := .params -}}
+  {{- $contactsExist := or $params.contacts $params.roles -}}
+  {{- range .chapters -}}
+    {{- $content := index $params . -}}
+    {{- $chapterExists := $content -}}
+    {{ if eq "contacts" . }}
+      {{- $chapterExists = $contactsExist -}}
+    {{ end }}
+    {{- if $chapterExists }}
+      <section>
+        {{ $title := i18n (printf "programs._%s" .) -}}
+        <h2 id="page-{{ . }}">{{ $title }}</h2>
+        {{ if eq . "contacts" }}
+          {{- partial "programs/content.html" $content -}}
+          {{- partial "programs/roles.html" $params.roles -}}
+        {{ else if eq . "teachers" }}
+          {{- partial "programs/teachers.html"
+                        (dict
+                          "title" $title
+                          "teachers" $params.teachers
+                          "descriptions" $params.teachers_description
+                        ) -}}
+        {{ else }}
+          {{- partial "programs/content.html" $content -}}
+        {{ end }}
+      </section>
+    {{ end -}}
+  {{- end -}}
+</div>

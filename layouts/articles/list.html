@@ -1,0 +1,16 @@
+{{ define "main" }}
+  {{- partial "header/hero.html"
+        (dict
+          "title" .Title
+          "image" .Params.image
+          "context" .
+        ) -}}
+  <div class="container">
+    {{ partial "articles/articles.html" . }}
+    {{ partial "commons/pagination.html" . }}
+  </div>
+
+  {{ if .Params.blocks }}
+    {{ partial "blocks/list.html" .Params.blocks }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,31 @@
+{%/ $url is deprecated, media should be used instead %}
+{{ $url := .url }}
+{{ if .media }}
+  {{ $url = .media.direct_url }}
+{{ end }}
+{{ $parsedUrl := urls.Parse $url }}
+{{ $result := printf "%s%s?" site.Params.keycdn $parsedUrl.Path }}
+{{ with .format }}
+  {{ $result = printf "%sformat=%s&" $result . }}
+{{ end }}
+{{ $scale := .scale }}
+{{ $fit := "" }}
+{{ with .size }}
+  {{ $sizes := split . "x" }}
+  {{ $width := int (index $sizes 0) }}
+  {{ $height := int (index $sizes 1) }}
+  {{ with $scale }}
+    {{ $width = mul $width $scale }}
+    {{ $height = mul $height $scale }}
+  {{ end }}
+  {{ $fit = "inside" }}
+  {{ $result = printf "%swidth=%d&height=%d&" $result $width $height }}
+{{ end }}
+{{ with .crop }}
+  {{ $fit = "crop" }}
+  {{ $result = printf "%scrop=smart" $result }}
+{{ end }}
+{{ if ne $fit "" }}
+  {{ $result = printf "%s&fit=%s" $result $fit }}
+{{ end }}
+{{ return $result }}

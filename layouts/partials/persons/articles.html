@@ -1,0 +1,14 @@
+{{ $researchers := site.GetPage (printf "/researchers/%s" .slug) }}
+<section>
+  <div class="top">
+    <h2>{{ i18n "persons.publications" }}</h2>
+    <a href="{{ $researchers.Permalink }}" class="link">{{ i18n "persons.publications" }}</a>
+  </div>
+  <div class="articles">
+    {{ range first 3 .articles }}
+      <div>
+        {{ partial "articles/article.html" . }}
+      </div>
+    {{ end }}
+  </div>
+</section>

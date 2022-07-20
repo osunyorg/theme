@@ -1,0 +1,17 @@
+{{ $slug := .slug }}
+<section>
+  <div class="top">
+    <h2>{{ i18n "persons.programs" }}</h2>
+  </div>
+  <table class="table-resume">
+    <caption>{{ i18n "persons.programs" }}</caption>
+    <tbody>
+      {{ range .programs }}
+      <tr>
+        <th>{{ safeHTML (index .Params.teachers_description $slug) }}</th>
+        <td><a href="{{ .Permalink }}" class="link link-more">{{ safeHTML .Title }}</a></td>
+      </tr>
+      {{ end }}
+    </tbody>
+  </table>
+</section>

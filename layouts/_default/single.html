@@ -1,0 +1,11 @@
+{{ define "main" }}
+  {{- partial "header/hero.html"
+        (dict
+          "title" .Title
+          "image" .Params.image
+          "context" .
+        ) -}}
+  <div class="container">
+    {{ partial "PrepareHTML" .Content }}
+  </div>
+{{ end }}

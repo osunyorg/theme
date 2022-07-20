@@ -1,0 +1,22 @@
+<table class="table-persons">
+  <caption>{{ .title }}</caption>
+  <tbody>
+    {{- $descriptions := .descriptions -}}
+    {{- range .teachers -}}
+      {{- $slug := . -}}
+      {{- $person := site.GetPage (printf "/persons/%s" $slug) -}}
+      {{- with $person -}}
+        <tr>
+          <th scope="row">
+            <a href="{{ .Permalink }}">
+              {{- partial "PrepareHTML" .Title -}}
+            </a>
+          </th>
+          <td>
+            {{- partial "PrepareHTML" (index $descriptions $slug) -}}
+          </td>
+        </tr>
+      {{- end -}}
+    {{- end -}}
+  </tbody>
+</table>

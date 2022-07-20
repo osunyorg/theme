@@ -1,0 +1,22 @@
+<div class="content">
+  <div>
+    {{ partial "footer/logo.html" }}
+  </div>
+  <div>
+    {{ partial "footer/site.html" }}
+  </div>
+  <div>
+    {{ if site.Data.menus.primary }}
+      <nav role="navigation" aria-label="{{ i18n "commons.menu.main" }}">
+        {{ partial "commons/menu.html"
+              (dict
+                "items"       site.Data.menus.primary
+                "level"       1
+                "stop"        1
+              )}}
+      </nav>
+    {{ end }}
+  </div>
+</div>
+
+{{ partial "footer/complementary.html" }}

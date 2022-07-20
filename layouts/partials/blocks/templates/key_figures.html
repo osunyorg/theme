@@ -1,0 +1,32 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- with .data -}}
+  <section class="block-key_figures{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        {{- if (or $title .description) }}
+          <div class="top">
+            {{- if $title }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ end -}}
+            {{- if .description }}
+              <div class="description">
+                {{ partial "PrepareHTML"  .description }}
+              </div>
+            {{ end -}}
+          </div>
+        {{ end -}}
+        <ul>
+          {{- range .figures }}
+            <li>
+                <dl>
+                    <dt><strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}</dt>
+                    <dd>{{ partial "PrepareHTML" .description }}</dd>
+                </dl>
+            </li>
+          {{ end -}}
+        </ul>
+      </div>
+    </div>
+  </section>
+{{- end -}}

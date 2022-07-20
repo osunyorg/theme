@@ -1,0 +1,13 @@
+<section>
+  <div class="top">
+    <h2>{{ i18n "persons.posts" }}</h2>
+    <a href="{{ .Permalink }}" class="link">{{ i18n "posts.see_all" }}</a>
+  </div>
+  <div class="posts">
+    {{ range first 3 .Pages }}
+      <div>
+        {{ partial "posts/post.html" . }}
+      </div>
+    {{ end }}
+  </div>
+</section>

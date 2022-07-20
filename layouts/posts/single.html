@@ -1,0 +1,46 @@
+{{ define "main" }}
+  {{ partial "posts/hero-single.html" . }}
+
+  <article itemscope itemtype="https://schema.org/NewsArticle">
+    <meta itemprop="headline" content="{{ partial "PrepareHTML" .Title }}">
+    <meta itemprop="url" content="{{ .Permalink }}">
+    {{ if .Date }}<meta itemprop="datePublished" content="{{ .Date.Format "2006-01-02T15:04" }}">{{ end }}
+    {{ if .Params.description_short }}<meta itemprop="abstract" content="{{ partial "PrepareHTML" .Params.description_short }}">{{ end }}
+    {{ if .Summary }}<meta itemprop="description" content="{{ partial "PrepareHTML" .Summary }}">{{ end }}
+
+    {{- if .Params.blocks }}
+      <div class="content-blocks">
+        {{ partial "posts/aside.html" . }}
+        <div class="blocks blocks-chapo">
+          <div class="container">
+            <div class="block-content">
+              {{ partial "posts/chapo.html" .Params.description_short }}
+              {{ partial "posts/image.html" .Params.image }}
+            </div>
+          </div>
+        </div>
+        {{ partial "blocks/list.html" .Params.blocks }}
+        <div class="blocks blocks-pagination">
+          <div class="container">
+            <div class="block-content">
+              {{ partial "posts/prevnext.html" . }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ else }}
+      <div class="container">
+        <div class="content">
+          {{ partial "posts/aside.html" . }}
+          <div>
+            {{ partial "posts/chapo.html" .Params.description_short }}
+            {{ partial "posts/image.html" .Params.image }}
+            {{ partial "posts/body.html" . }}
+            {{ partial "posts/prevnext.html" . }}
+          </div>
+        </div>
+      </div>
+    {{ end -}}
+
+  </article>
+{{ end }}

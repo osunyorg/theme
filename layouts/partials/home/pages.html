@@ -1,0 +1,16 @@
+{{ if .children }}
+  <div class="pages">
+    {{ range .children }}
+      {{ if and .target (not (eq .kind "url")) }}
+        {{ $page := partial "GetPageByUrl" .target }}
+        {{ if $page }}
+          <div>
+            {{ $page.Scratch.Set "show_description" true }}
+            {{ partial "pages/page.html" $page }}
+            {{ $page.Scratch.Delete "show_description" }}
+          </div>
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}

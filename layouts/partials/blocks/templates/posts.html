@@ -1,0 +1,38 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- $term := false -}}
+{{- with .data }}
+  {{ if .category }}
+    {{- $term = site.GetPage (printf "/categories%s" .category) -}}
+  {{ end }}
+  <section class="block-posts{{ if $title }} block-with-title{{ end }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        {{ if $title -}}
+          <div class="top">
+            <h2>
+              {{- if $term -}}
+                <a href="{{ $term.Permalink }}">
+              {{- end -}}
+                {{- partial "PrepareHTML" $title -}}
+              {{- if $term -}}
+                </a>
+              {{- end -}}
+            </h2>
+          </div>
+        {{- end }}
+
+        <div class="posts">
+          {{ range $post := .posts -}}
+            {{ with site.GetPage (printf "/posts/%s" $post) }}
+              <div>
+                {{ partial "posts/post" . }}
+              </div>
+            {{ end }}
+          {{ end }}
+        </div>
+
+      </div>
+    </div>
+  </section>
+{{ end -}}

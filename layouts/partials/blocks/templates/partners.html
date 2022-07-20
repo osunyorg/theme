@@ -1,0 +1,66 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- with .data -}}
+  <section class="block-partners{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        {{ if (or $title .description) -}}
+          <div class="top">
+            {{- if $title }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ end -}}
+            {{- if .description }}
+              <div class="description">
+                {{ partial "PrepareHTML"  .description }}
+              </div>
+            {{ end -}}
+          </div>
+        {{- end }}
+
+        <div class="organizations">
+          {{- range .partners }}
+            <div>
+
+              {{- if .slug }}
+                {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
+                  {{- partial "organizations/organization.html" . -}}
+                {{ end }}
+              {{- else -}}
+                <article class="organization">
+                  {{- $title := "" -}}
+                  {{ if .name }}
+                    <div>
+                      {{ $title = partial "PrepareHTML" .name -}}
+                      <p class="title">
+                        {{- if .url }}
+                        <a href="{{ .url }}">
+                        {{ end }}
+                          {{- $title -}}
+                        {{ if .url }}
+                        </a>
+                        {{ end -}}
+                      </p>
+                    </div>
+                  {{ end -}}
+                  <div class="media">
+                    {{- if .logo -}}
+                      {{- partial "commons/image.html"
+                            (dict
+                              "image"    .logo
+                              "alt"      $title
+                              "mobile"   "164"
+                              "tablet"   "216"
+                              "desktop"  "196"
+                            ) -}}
+                    {{- end -}}
+                  </div>
+                </article>
+              {{ end -}}
+
+            </div>
+          {{ end -}}
+        </div>
+      </div>
+    </div>
+  </section>
+{{- end -}}

@@ -1,0 +1,13 @@
+{{- if .Params.image -}}
+  <div>
+    {{- partial "commons/image.html"
+          (dict
+            "image"    .Params.image
+            "alt"      .Title
+            "mobile"   "327x388"
+            "tablet"   "208x247"
+            "desktop"  "300x356"
+            "class"    "img-fluid"
+          ) -}}
+  </div>
+{{- end -}}

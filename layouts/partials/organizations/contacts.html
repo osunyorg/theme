@@ -1,0 +1,36 @@
+<ul class="contacts-list">
+  {{ if .Params.linkedin }}
+    <li>
+      <span>Linkedin</span>
+      <a href="mailto:{{ .Params.linkedin }}" target="_blank" rel="noopener" itemprop="url">{{ .Params.linkedin }}</a>
+    </li>
+  {{ end }}
+
+  {{ if .Params.twitter }}
+    <li>
+      <span>Twitter</span>
+      <a href="https://twitter.com/{{ .Params.twitter }}" target="_blank" rel="noopener" itemprop="url">{{ .Params.twitter }}</a>
+    </li>
+  {{ end }}
+
+  {{ if .Params.website }}
+    <li>
+      <span>{{ i18n "commons.contact.website" }}</span>
+      <a href="{{ .Params.website }}" target="_blank" rel="noopener" itemprop="url">{{ .Params.website }}</a>
+    </li>
+  {{ end }}
+
+  {{ if .Params.email }}
+    <li>
+      <span>{{ i18n "commons.contact.email" }}</span>
+      <a href="mailto:{{ .Params.email }}" itemprop="email">{{ .Params.email }}</a>
+    </li>
+  {{ end }}
+
+  {{ if .Params.phone }}
+    <li>
+      <span>{{ i18n "commons.contact.phone" }}</span>
+      <a href="tel:{{ .Params.phone }}" itemprop="telephone">{{ .Params.phone }}</a>
+    </li>
+  {{ end }}
+</ul>

@@ -1,0 +1,24 @@
+<section id="results">
+  <div class="container">
+    <div class="content">
+      <div>
+        <h2>{{ i18n "programs.toc.results" }}</h2>
+      </div>
+      <div>
+        {{- if partial "GetTextFromHTML" .Params.opportunities -}}
+          <div class="subpart">
+            <h3>{{ i18n "programs._opportunities" }}</h3>
+            {{- partial "PrepareHTML" .Params.opportunities -}}
+          </div>
+        {{- end -}}
+
+        {{- if partial "GetTextFromHTML" .Params.results -}}
+          <div class="subpart">
+            <h3>{{ i18n "programs._results" }}</h3>
+            {{- partial "PrepareHTML" .Params.results -}}
+          </div>
+        {{- end -}}
+      </div>
+    </div>
+  </div>
+</section>

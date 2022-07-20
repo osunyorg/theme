@@ -1,0 +1,51 @@
+{{- $is_carousel := false -}}
+{{ if gt (len .images) 1 }}
+  {{- $is_carousel = true -}}
+{{ end }}
+
+{{- if $is_carousel }}
+<div class="splide" role="group" data-splide='{"arrows":true,"gap":"24px","pagination":false,"autoWidth":true,"autoplay":false}'>
+  <div class="splide__track">
+    <div class="splide__list">
+{{ end -}}
+
+  {{ range .images }}
+    {{ if .file }}
+      {{- $image := partial "GetMedia" .file -}}
+      {{- if $image -}}
+        {{/*  TODO: refactor  */}}
+        {{- $url := $image.url -}}
+        {{- if site.Params.keycdn -}}
+          {{- $url = $image.direct_url -}}
+        {{- end -}}
+        {{- $lightbox_sizes := "1280x2560" -}}
+        <figure{{ if $is_carousel }} class="splide__slide"{{ end }}>
+          <a class="glightbox"
+            data-glightbox="type: image;"
+            href="{{ partial "GetImageUrl" (dict "url" $url "size" $lightbox_sizes ) }}">
+            {{ partial "commons/image.html"
+              (dict
+                "image"    .id
+                "alt"      .alt
+                "mobile"   "164"
+                "tablet"   "336"
+                "desktop"  "967x679"
+              )}}
+          </a>
+          <figcaption>
+            {{ if .text }}
+              <p>{{ partial "PrepareHTML" .text }}</p>
+            {{ end }}
+            {{ if .credit }}
+              <p class="credit">{{ partial "PrepareHTML" .credit }}</p>
+            {{ end }}
+          </figcaption>
+        </figure>
+      {{- end -}}
+    {{ end }}
+  {{ end }}
+
+{{- if $is_carousel }}
+  </div>
+</div>
+{{ end -}}

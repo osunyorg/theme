@@ -1,0 +1,9 @@
+{{ if (partial "GetTextFromHTML" .Content) }}
+  <div itemprop="articleBody">
+  {{
+    partial "PrepareHTML" (
+      partial "H2AddId" .Content
+    )
+  }}
+  </div>
+{{ end }}

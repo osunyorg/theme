@@ -1,0 +1,44 @@
+{{ define "main" }}
+  {{- partial "header/hero.html"
+        (dict
+          "title" .Title
+          "image" .Params.image
+          "context" .
+        ) -}}
+  <div class="container">
+    <div class="content">
+      <aside>
+        <div>
+          <nav class="toc" id="nav-toc" aria-label="Table des matières">
+            <ol>
+              {{ range site.Sections }}
+                {{ if ne .Type "sitemap" }}
+                  <li>
+                    <a class="nav-link" href="#{{ .Type }}">{{ safeHTML .Title }}</a>
+                  </li>
+                {{ end }}
+              {{ end }}
+            </ol>
+          </nav>
+        </div>
+      </aside>
+      <div>
+        {{ range site.Sections }}
+          {{ if ne .Type "sitemap" }}
+            {{ $permalink := .Permalink }}
+            <h3 id="{{ .Type }}">
+              <a href="{{ $permalink }}">{{ safeHTML .Title }}</a>
+            </h3>
+            <ul>
+              {{ range where .Site.Pages "Section" .Type }}
+                {{ if ne $permalink .Permalink }}
+                  <li><a href="{{ .Permalink }}">{{ safeHTML .Title }}</a></li>
+                {{ end }}
+              {{ end }}
+            </ul>
+          {{ end }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}

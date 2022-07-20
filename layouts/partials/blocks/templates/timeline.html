@@ -1,0 +1,10 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- $layout := .data.layout | default "vertical" -}}
+<section class="block-timeline{{ if $title }} block-with-title{{ end }} block-timeline--{{ $layout }}" id="block-{{ $position }}">
+  <div class="container">
+    {{ $template := printf "blocks/templates/timeline/%s.html" $layout }}
+    {{ partial $template . }}
+  </div>
+</section>
+

@@ -1,0 +1,20 @@
+{{ define "main" }}
+  {{- partial "header/hero.html"
+        (dict
+          "title" .Title
+          "image" .Params.image
+          "context" .
+        ) -}}
+  <div class="container">
+    <div class="pages">
+      {{ range .Paginator.Pages }}
+        <div>
+          <h2>
+            <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
+          </h2>
+        </div>
+      {{ end }}
+    </div>
+    {{ partial "commons/pagination.html" . }}
+  </div>
+{{ end }}

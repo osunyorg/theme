@@ -1,0 +1,13 @@
+{{ define "main" }}
+  {{ partial "diplomas/hero-list.html" . }}
+
+  <div class="container">
+    {{ partial "programs/image.html" .Params.image }}
+    {{ partial "diplomas/chapo.html" .Params.description_short }}
+  </div>
+  {{ partial "blocks/list.html" .Params.blocks }}
+  <div class="container">
+    {{ partial "diplomas/diplomas.html" . }}
+  </div>
+
+{{ end }}

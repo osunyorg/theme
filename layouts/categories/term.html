@@ -1,0 +1,9 @@
+{{ define "main" }}
+  {{ partial "categories/hero-term.html" . }}
+
+  <div class="container">
+    {{ partial "categories/chapo.html" .Params.description_short }}
+    {{ partial "posts/posts.html" . }}
+    {{ partial "commons/pagination.html" . }}
+  </div>
+{{ end }}

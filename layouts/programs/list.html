@@ -1,0 +1,9 @@
+{{ define "main" }}
+  {{ partial "programs/hero.html" . }}
+
+  {{ if or (eq .Params.diplomas "") (.Params.diplomas) }}
+    {{ partial "programs/show.html" . }}
+  {{ else }}
+    {{ partial "programs/index.html" . }}
+  {{ end }}
+{{ end }}

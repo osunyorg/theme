@@ -1,0 +1,96 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- $class := "block-contact" -}}
+{{- with .data -}}
+  <section class="{{ $class }}{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        {{ if $title -}}
+          <div class="top">
+            <h2>{{ partial "PrepareHTML" $title }}</h2>
+          </div>
+        {{ end -}}
+        <address  itemscope itemtype="https://schema.org/Organization">
+          <p>
+          {{ if .name }}
+            <b itemprop="name">{{ .name }}</b><br>
+          {{ end }}
+          {{ range .phone_numbers }}
+            <a itemprop="telephone" href="tel:{{ . }}">{{ . }}</a><br>
+          {{ end }}
+          {{ range .emails }}
+            <a itemprop="email" href="mailto:{{ . }}">{{ . }}</a><br>
+          {{ end }}
+          </p>
+
+          {{ with .address }}
+            {{ if or .street .locality .postal_code .country }}
+              <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                {{ if .street }}
+                <span itemprop="streetAddress">
+                  {{ partial "PrepareHTML" .street }},
+                </span>
+                {{ end }}
+                {{ if .locality }}
+                <span itemprop="addressLocality">
+                  {{ partial "PrepareHTML" .locality }}
+                </span>
+                {{ end }}
+                {{ if .postal_code }}
+                <span itemprop="postalCode">
+                  {{ partial "PrepareHTML" .postal_code }}
+                </span>
+                {{ end }}
+              </div>
+            {{ end }}
+          {{ end }}
+        </address>
+
+        {{ if .timetable}}
+        <ul>
+            {{ range .timetable }}
+              {{ if or
+                .time_slot_morning.from
+                .time_slot_morning.to
+                .time_slot_afternoon.from
+                .time_slot_afternoon.to
+              }}
+                <li>
+                  <span>{{ .title }}</span>
+                  {{ if or
+                    .time_slot_morning.from
+                    .time_slot_morning.to
+                  }}
+                  <span>
+                    {{- if .time_slot_morning.from }}
+                      <time datetime="{{ .time_slot_morning.from }}">{{ .time_slot_morning.from }}</time>
+                    {{ end -}}
+                    {{- if .time_slot_morning.to }}
+                      <time datetime="{{ .time_slot_morning.to }}">{{ .time_slot_morning.to }}</time>
+                    {{ end -}}
+                  </span>
+                  {{ end }}
+                  {{ if or
+                    .time_slot_afternoon.from
+                    .time_slot_afternoon.to
+                  }}
+                  <span>
+                    {{- if .time_slot_afternoon.from }}
+                      <time datetime="{{ .time_slot_afternoon.from }}">{{ .time_slot_afternoon.from }}</time>
+                    {{ end -}}
+                    {{- if .time_slot_afternoon.to }}
+                      <time datetime="{{ .time_slot_afternoon.to }}">{{ .time_slot_afternoon.to }}</time>
+                    {{ end -}}
+                  </span>
+                  {{ end -}}
+                </li>
+              {{ end }}
+            {{ end }}
+        </ul>
+        {{ end }}
+      </div>
+
+
+    </div>
+  </section>
+{{- end -}}

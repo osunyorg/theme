@@ -1,0 +1,7 @@
+<div>
+  {{- if (partial "GetTextFromHTML" .Content) -}}
+  <div itemprop="description">
+    {{ partial "PrepareHTML" .Content }}
+  </div>
+  {{- end -}}
+</div>

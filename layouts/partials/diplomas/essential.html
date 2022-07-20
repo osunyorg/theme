@@ -1,0 +1,18 @@
+{{- with . -}}
+  <dl class="essential">
+    <dt>{{ i18n "programs.diploma" }}</dt>
+    <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></dd>
+    {{- if .Params.level -}}
+      <dt>{{ i18n "programs.level" }}</dt>
+      <dd>{{ partial "PrepareHTML" .Params.level }}</dd>
+    {{- end -}}
+    {{- if .Params.duration -}}
+      <dt>{{ i18n "programs.duration" }}</dt>
+      <dd>{{ partial "PrepareHTML" .Params.duration }}</dd>
+    {{- end -}}
+    {{- if .Params.ects -}}
+      <dt>{{ i18n "programs.ects_credits" }}</dt>
+      <dd>{{ partial "PrepareHTML" .Params.ects }}</dd>
+    {{- end -}}
+  </dl>
+{{- end -}}

@@ -1,0 +1,18 @@
+{{ if .Pages }}
+<section class="related">
+  <div class="top">
+    <h2 id="page-posts">{{ i18n "posts.title" }}</h2>
+    <a href="{{ .Permalink }}" class="link">
+      {{ $category_name := safeHTML .Title | truncate 30 }}
+      {{ i18n "posts.see_all_in_category" (dict "Title" $category_name) }}
+    </a>
+  </div>
+  <div class="posts">
+    {{ range first 2 .Pages }}
+      <div>
+        {{ partial "posts/post.html" . }}
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

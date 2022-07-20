@@ -1,0 +1,12 @@
+{{- if .Params.logo -}}
+  <div class="media">
+    {{- partial "commons/image.html"
+          (dict
+            "image"    .Params.logo
+            "alt"      .Title
+            "mobile"   "331"
+            "tablet"   "196"
+            "desktop"  "396"
+          ) -}}
+  </div>
+{{- end -}}

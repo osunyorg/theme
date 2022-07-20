@@ -1,0 +1,17 @@
+<aside>
+  <dl>
+    {{ if .Params.keywords }}
+      {{ if gt ( len .Params.keywords ) 0 }}
+        <dt>{{ i18n "volumes.keywords" }}</dt>
+        <dd itemprop="keywords">{{ delimit .Params.Keywords " " }}</dd>
+      {{ end }}
+    {{ end }}
+
+    {{ if .Date }}
+      <dt>{{ i18n "commons.date" }}</dt>
+      <dd>
+        <time itemprop="datePublished" datetime="{{ .Date | time.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
+      </dd>
+    {{ end }}
+  </dl>
+</aside>

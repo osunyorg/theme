@@ -1,0 +1,53 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- with .data -}}
+  {{- $buttons := and .button.text .button_secondary.text -}}
+  <section class="block-call_to_action{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image">
+          <div>
+            {{- if $title }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{- end -}}
+
+            {{- if (partial "GetTextFromHTML" .text) }}
+            <div>
+              {{ partial "PrepareHTML" .text }}
+            </div>
+            {{ end -}}
+
+            {{- if .buttons }}
+            <div {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
+              {{- range .buttons -}}
+                {{ if .title }}
+                  {{- $title := partial "PrepareHTML" .title -}}
+                  <a href="{{ .url }}"
+                    {{ if .target_blank }}
+                      title="{{ i18n "commons.link.blank_aria" (dict "Title" $title) }}"
+                      target="_blank"
+                    {{ else }}
+                      title="{{ $title }}"
+                    {{ end }}
+                    >{{ $title }}</a>
+                {{ end -}}
+              {{- end -}}
+            </div>
+            {{- end -}}
+
+          </div>
+
+          {{ partial "commons/image.html"
+            (dict
+              "image"    .image.file
+              "alt"      .image.alt
+              "mobile"   "164x164"
+              "tablet"   "336x336"
+              "desktop"  "416x416"
+            )}}
+
+        </div>
+      </div>
+    </div>
+  </section>
+{{- end -}}

@@ -1,0 +1,25 @@
+{{ define "main" }}
+
+  {{- $is_organigram_present := false -}}
+  {{ range .Params.blocks }}
+    {{- if eq .template "organization_chart" -}}
+      {{- $is_organigram_present = true -}}
+    {{ end }}
+  {{ end }}
+
+  {{ partial "persons/hero.html" . }}
+
+  <div class="container">
+    {{ partial "persons/image.html" .Params.image }}
+    {{ partial "persons/chapo.html" .Params.description_short }}
+    {{- if not $is_organigram_present -}}
+      {{ partial "persons/taxonomies.html" . }}
+      {{ partial "persons/list.html" . }}
+    {{- end -}}
+  </div>
+
+  {{ if .Params.blocks }}
+    {{ partial "blocks/list.html" .Params.blocks }}
+  {{ end }}
+
+{{ end }}

@@ -1,0 +1,25 @@
+<div class="timeline">
+  {{ if .title }}
+    <h2>{{ partial "PrepareHTML" .title }}</h2>
+  {{ end }}
+
+  {{ with .data }}
+    <div class="events">
+      <ol>
+        {{ range .events }}
+          <li class="event">
+            <p class="title"><strong>{{- partial "PrepareHTML" .title -}}</strong></p>
+            <div class="line"></div>
+            <p>{{- partial "PrepareHTML" .text -}}</p>
+          </li>
+        {{ end }}
+      </ol>
+      {{ if  (gt (len .events) 0) }}
+        <div class="timeline-arrows">
+          <button class="previous" disabled title="{{ i18n "blocks.timeline.prev"}}"></button>
+          <button class="next" title="{{ i18n "blocks.timeline.next"}}"></button>
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+</div>

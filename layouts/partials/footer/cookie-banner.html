@@ -1,0 +1,14 @@
+{{ if site.Params.cookie_banner.enable }}
+  <div class="gdpr-cookie-consent js-gdpr-cookie-consent" tabindex="-1" role="dialog" aria-label="{{ i18n "cookie_banner.label" }}">
+    <div>
+      <p>
+        {{ i18n "cookie_banner.text" }}
+        <a href="{{ site.Params.cookie_banner.page | default "https://gdpr.eu/cookies/" }}"{{ if site.Params.cookie_banner.blank }} target="_blank" ref="noopener"{{ end }}>{{ i18n "cookie_banner.more" }}</a>
+      </p>
+    </div>
+    <div role="group">
+      <button type="button" class="js-gdpr-cookie-consent-btn-ok">{{ i18n "cookie_banner.accept" }}</button>
+      <button type="button" class="js-gdpr-cookie-consent-btn-ko">{{ i18n "cookie_banner.refuse" }}</button>
+    </div>
+  </div>
+{{ end }}

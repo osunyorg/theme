@@ -1,0 +1,7 @@
+{{ range . -}}
+  {{- if .title }}
+    <li>
+      <a class="nav-link" href="#block-{{ .position }}">{{ partial "PrepareHTML" .title }}</a>
+    </li>
+  {{ end -}}
+{{- end -}}

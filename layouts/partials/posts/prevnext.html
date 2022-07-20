@@ -1,0 +1,30 @@
+<nav aria-label="{{ i18n "commons.pagination.between.posts" }}">
+  <ul class="pagination pagination-between-pages">
+    {{- if .PrevInSection -}}
+      {{with .Site.RegularPages.Prev . }}
+        <li class="previous">
+          {{ $title := partial "PrepareHTML" .Title -}}
+          <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.previous_aria" (dict "Title" $title)) }}">
+            <span>
+              {{- i18n "posts.previous" -}}
+            </span><br>
+            {{- $title -}}
+          </a>
+        </li>
+      {{end}}
+    {{- end -}}
+    {{- if .NextInSection -}}
+      {{with .Site.RegularPages.Next . }}
+        <li class="next">
+          {{ $title := partial "PrepareHTML" .Title -}}
+          <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.next_aria" (dict "Title" $title)) }}">
+            <span>
+              {{- i18n "posts.next" -}}
+            </span><br>
+            {{- $title -}}
+          </a>
+        </li>
+      {{end}}
+    {{- end -}}
+  </ul>
+</nav>

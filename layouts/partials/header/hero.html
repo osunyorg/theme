@@ -1,0 +1,20 @@
+<header class="hero">
+  {{- if .image }}
+    {{ partial "commons/image.html"
+        (dict
+          "image"    .image
+          "mobile"   "351x168"
+          "tablet"   "456x219"
+          "desktop"  "856x410"
+          "lazy"     false
+        ) }}
+  {{ end -}}
+  <div class="container">
+    <div>
+      <h1>{{ partial "PrepareHTML" .title }}</h1>
+    </div>
+    {{- if .breadcrumb | default true -}}
+      {{ partial "header/breadcrumbs.html" .context }}
+    {{- end -}}
+  </div>
+</header>

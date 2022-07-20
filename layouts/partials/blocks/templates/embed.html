@@ -1,0 +1,24 @@
+{{- $position := .position -}}
+{{- $title := .title -}}
+{{- with .data -}}
+  <section class="block-embed{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        {{- if $title }}
+          <div class="top">
+            <h2>{{ partial "PrepareHTML" $title }}</h2>
+          </div>
+        {{ end -}}
+
+        {{- if .code }}
+          {{ partial "PrepareHTML" .code }}
+        {{ end -}}
+
+        {{ partial "commons/transcription" ( dict
+            "transcription" .transcription
+            "position" $position
+          ) }}
+      </div>
+    </div>
+  </section>
+{{- end -}}

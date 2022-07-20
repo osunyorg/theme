@@ -1,0 +1,48 @@
+{{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}
+{{- $chapters := slice
+                "objectives"
+                "opportunities"
+                "results"
+                "informations"
+                "accessibility"
+                "duration"
+                "pricing"
+                "content"
+                "pedagogy"
+                "evaluation"
+                "prerequisites"
+                "registration"
+                "other"
+                "contacts"
+                "teachers"
+                -}}
+<article itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+  <meta itemprop="url" content="{{ .Permalink }}">
+
+  {{- partial "programs/aside.html"
+    (dict
+        "category" $category
+        "chapters" $chapters
+        "context" .
+    )
+  -}}
+
+  {{- partial "blocks/list.html" .Params.blocks -}}
+
+  <div>
+    <div class="container">
+      {{- partial "programs/image.html" .Params.image -}}
+      {{- partial "programs/abstract.html" .Params.presentation -}}
+      {{- partial "programs/programs.html" .Pages -}}
+      {{- partial "programs/chapters.html"
+        (dict
+          "chapters" $chapters
+          "params" .Params
+        )
+      -}}
+      {{- partial "posts/related.html" $category -}}
+    </div>
+  </div>
+
+</article>

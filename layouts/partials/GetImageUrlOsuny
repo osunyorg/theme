@@ -1,0 +1,59 @@
+{{ $cropValues := slice "top" "left" "right" "bottom" "center" }}
+{{ $scaleValues := slice "2" "3" }}
+
+{%/ $url is deprecated, media should be used instead %}
+{{ $url := .url }}
+{{ if .media }}
+  {{ $url = .media.url }}
+{{ end }}
+{{ $parsedUrl := urls.Parse $url }}
+
+{{ $pathParts := split $parsedUrl.Path "/" }}
+{{ $lastIndex := sub (len $pathParts) 1 }}
+{{ $filename := index $pathParts $lastIndex }}
+{{ $pathParts = first $lastIndex $pathParts }}
+
+{{ $baseFilename := strings.TrimSuffix (path.Ext $filename) $filename }}
+{{ $baseFilename = delimit (slice $baseFilename .size) "_" }}
+
+{{ $crop := "" }}
+{{ if .crop }}
+  {{ range $cropValues }}
+    {{ if eq .crop . }}
+      {{ $crop = . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if ne $crop "" }}
+  {{ $baseFilename = delimit (slice $baseFilename $crop) "_crop_" }}
+{{ end }}
+
+{{ $scale := "" }}
+{{ if .scale }}
+  {{ $rawStringScale := string .scale }}
+  {{ range $scaleValues }}
+    {{ if eq $rawStringScale . }}
+      {{ $scale = . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if ne $scale "" }}
+  {{ $baseFilename = delimit (slice $baseFilename "@" $scale "x") "" }}
+{{ end }}
+
+{{ $pathParts = $pathParts | append $baseFilename }}
+{{ $joinedPath := path.Join $pathParts }}
+
+{{ $fileExtension := "" }}
+{{ if .format }}
+  {{ $fileExtension = delimit (slice "." .format) "" }}
+{{ else }}
+  {{ $fileExtension = path.Ext $filename }}
+{{ end }}
+
+{{ $domain := printf "%s://%s/" $parsedUrl.Scheme $parsedUrl.Host }}
+
+{{ $resultSlice := slice $domain $joinedPath $fileExtension }}
+{{ $result := delimit $resultSlice "" }}
+
+{{ return $result }}

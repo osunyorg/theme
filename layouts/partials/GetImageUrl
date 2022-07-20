@@ -1,0 +1,7 @@
+{{ $result := "" }}
+{{ if site.Params.keycdn }}
+  {{ $result = partial "GetImageUrlKeycdn" . }}
+{{ else }}
+  {{ $result = partial "GetImageUrlOsuny" . }}
+{{ end }}
+{{ return $result }}

@@ -1,0 +1,68 @@
+{{ define "main" }}
+  {{- $slug := .Slug -}}
+  {{- $programsForTeacher := slice -}}
+  {{ if isset site.Taxonomies "teachers" -}}
+    {{ $programsForTeacher = index site.Taxonomies.teachers $slug}}
+  {{- end }}
+  {{- $programsForAdministrator := slice -}}
+  {{ if isset site.Taxonomies "administrators" -}}
+    {{ $programsForAdministrator = index site.Taxonomies.administrators $slug}}
+  {{- end }}
+  {{- $articlesForResearcher := slice -}}
+  {{- if isset site.Taxonomies "researchers" -}}
+    {{ $articlesForResearcher = index site.Taxonomies.researchers $slug}}
+  {{ end }}
+  {{ $author := site.GetPage (printf "/authors/%s" $slug) }}
+
+  {{ partial "persons/hero-single.html" . }}
+
+  <div class="container">
+    <article itemscope itemtype="https://schema.org/Person">
+      <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+      <meta itemprop="url" content="{{ .Permalink }}">
+      {{- if .Params.image -}}
+        {{- $image := partial "GetMedia" .Params.image -}}
+        {{- if $image -}}
+          <meta itemprop="image" content="{{ $image.url }}">
+          {{- end -}}
+      {{- end -}}
+
+      <div class="content">
+        <div>
+          {{ if (partial "GetTextFromHTML" .Content) }}
+            <div class="lead" itemprop="description">
+              {{ partial "PrepareHTML" .Content }}
+            </div>
+          {{ end }}
+        </div>
+        <div>
+          {{ range $programsForAdministrator }}
+            {{ $program := . }}
+            {{ range .Params.roles }}
+              {{ $role := .title }}
+              {{ if in .persons $slug }}
+                <p>
+                  {{ safeHTML $role }}<br>
+                  <a href="{{ $program.Permalink }}" class="link link-more">{{ safeHTML $program.Title }}</a>
+                </p>
+              {{ end }}
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    </article>
+
+    {{ if $programsForTeacher }}
+      {{ partial "persons/programs.html" (dict "programs" $programsForTeacher "slug" $slug) }}
+    {{ end }}
+
+    {{ if $author.Pages }}
+      {{ partial "persons/posts.html" $author }}
+    {{ end }}
+
+    {{ if $articlesForResearcher }}
+      {{ partial "persons/articles.html" (dict "articles" $articlesForResearcher "slug" $slug) }}
+    {{ end }}
+
+  </div>
+{{ end }}
