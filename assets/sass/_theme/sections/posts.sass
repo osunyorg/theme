@@ -1,4 +1,5 @@
 .post
+    position: relative
     display: flex
     flex-direction: column
     .media
@@ -8,19 +9,26 @@
             content: ""
             display: block
             padding-top: $post-media-aspect-ratio
+
     a
         @include stretched-link
 
     .author,
     .post-categories
-        // @extend .card-text
         @extend .small
         &,
         a
-            // color: $gray-700
+            color: $post-categories-color
+
+    time
+        color: $post-time-color
+        display: block
+        font-size: px2rem(14)
 
 .posts
-    @include grid(3)
+    @include grid(2)
+    @include grid(3, xl)
+
 .post-categories
     @extend .small
     list-style: none
@@ -30,7 +38,7 @@
         display: inline-block
         vertical-align: middle
         &::after
-            content: ', '
+            content: ", "
             margin-left: -3px
         &:last-child
             &::after

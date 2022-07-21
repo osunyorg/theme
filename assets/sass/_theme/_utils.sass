@@ -74,12 +74,11 @@
     margin-right: auto
     width: 100%
 
-@mixin grid($cols: 12)
-    @include media-breakpoint-up(md)
+@mixin grid($cols: 12, $breakpoint: md)
+    @include media-breakpoint-up($breakpoint)
         display: grid
         grid-gap: 0 $grid-gutter
         grid-template-columns: repeat($cols, 1fr)
-
 
 @mixin stretched-link($pseudo-element: after)
     &::#{$pseudo-element}
