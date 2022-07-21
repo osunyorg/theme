@@ -1,3 +1,5 @@
+// TODO: ranger
+
 // MAIN COLORS
 $main-color: black !default // Text color
 $main-background-color: white !default // Background color
@@ -14,16 +16,19 @@ $link-color: $main-color !default
 $body-font-family: "Georgia", serif !default
 $heading-font-family: "Helvetica", "Arial", sans-serif !default
 
-// Fonts sizes
-$body-font-size: 16 !default
-$small-font-size: 14 !default
+$font-size-base: 1rem
+$line-height-base: 1.4
 
-$h1-size: 60 !default
-$h2-size: 40 !default
-$h3-size: 30 !default
-$h4-size: 20 !default
-$h5-size: 18 !default
-$h6-size: 14 !default
+// Fonts sizes
+$body-font-size: 16px !default
+$small-font-size: 14px !default
+
+$h1-size: px2rem(60) !default
+$h2-size: px2rem(40) !default
+$h3-size: px2rem(30) !default
+$h4-size: px2rem(20) !default
+$h5-size: px2rem(18) !default
+$h6-size: px2rem(16) !default
 
 // Font weight
 $heading-font-weight: normal !default
@@ -45,6 +50,10 @@ $spacing3: 64px !default
 $spacing4: 128px !default
 $spacing5: 256px !default
 
+// Grid
+$grid-gutter: 60px
+$grid-max-width: 1980px
+
 // Z-index
 $zindex-nav-accessibility: 1010 !default
 
@@ -53,6 +62,9 @@ $header-color: $main-color !default
 $header-hover-color: rgba($main-color, 0.7) !default // TODO : Réflechir à plus élégant / générique
 $header-background-color: $main-background-color !default
 $header-sticky-enabled: true
+$header-sticky-transition: 0.3s
+$header-height: 74px
+$header-height-md: 74px
 
 // Footer
 $footer-color: $main-color !default
@@ -92,3 +104,30 @@ $icons: map-merge($icons, ("twitter": "\e90d"))
 // Breakpoints
 // TODO: réécrire en sass les mixins bootstrap
 $grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px)
+ 
+// BLOCKS
+
+// Block call to action
+$block-call-to-action-background: $main-background-color !default
+$block-call-to-action-color: $main-color !default
+
+// Block pages
+$block-pages-card-background: lighten($main-background-color, 1) !default
+$block-pages-card-page-background: white !default
+$block-pages-card-page-color: $main-color !default
+$block-pages-card-page-background-hover: lighten($main-background-color, 2) !default
+$block-pages-card-page-color-hover: white !default
+
+// Block timeline
+$block-timeline-horizontal-background: black !default
+$block-timeline-horizontal-color: white !default
+
+
+// Sections
+$post-media-background: darken($main-background-color, 2) !default
+$post-media-aspect-ratio: 50%
+// MISC
+
+// Animations
+$arrow-ease-transition: cubic-bezier(0, 0.65, 0.4, 1.2) !default
+$arrow-ease-transition-2: cubic-bezier(0, 0.65, 0.4, 1) !default

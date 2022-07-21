@@ -1,44 +1,107 @@
 %heading
     font-family: $heading-font-family
 
-h1,
-.h1
+h1, .h1
     @extend %heading
     font-size: $h1-size
 
-h2,
-.h2
+h2, .h2
     @extend %heading
     font-size: $h2-size
 
-h3,
-.h3
+h3, .h3
     @extend %heading
     font-size: $h3-size
 
-h4,
-.h4
+h4, .h4
     @extend %heading
     font-size: $h4-size
 
-h5,
-.h5
+h5, .h5
     @extend %heading
     font-size: $h5-size
 
-h6,
-.h6
+h6, .h6
     @extend %heading
     font-size: $h6-size
 
+h1, .h1,
+h2, .h2
+    a
+        text-decoration-thickness: 0
+        &:hover
+            text-decoration-thickness: 1px
+
 body
     font-family: $body-font-family
+    -moz-osx-font-smoothing: grayscale
+    -webkit-font-smoothing: antialiased
+    font-variant-ligatures: common-ligatures
+    text-rendering: optimizelegibility
+    line-height: $line-height-base
 
-p
+p, .p
     font-size: $body-font-size
 
-small
+small, .small
     font-size: $small-font-size
 
-a, .link
+blockquote, .blockquote
+    font-style: italic
+    cite
+        font-size: px2rem(18)
+        font-style: normal
+
+a,
+.link
     @include link
+    overflow-wrap: break-word
+    &[target="_blank"]
+        @include icon("link-blank", "after")
+        &::after
+            font-size: px2rem(10)
+            margin-left: px2rem(5)
+    &[href^="mailto"]
+        &::after
+            content: none
+
+.link-more
+    @include link
+    @include icon('arrow', before)
+    &::before
+        font-size: px2rem(10)
+        margin-right: px2rem(5)
+
+::selection
+    background: rgba($main-color, .7)
+    color: $main-background-color
+    text-shadow: none
+
+*:focus-visible
+    outline-color: gray
+    outline-offset: 5px
+    outline-style: dashed
+    outline-width: 1px
+
+@media (prefers-reduced-motion: no-preference)
+    *:focus-visible
+        transition: outline-offset .3s ease
+
+
+
+// ICONS
+
+@font-face
+    font-display: block
+    font-family: 'Icon'
+    font-style: normal
+    font-weight: 400
+    src: url('../fonts/icons/icomoon.woff') format("woff")
+
+@each $name in $icons
+    .icon-#{$name}
+        @include icon($name)
+    .btn-#{$name}
+        @include icon($name)
+        &::before
+            margin-right: px2rem(5)

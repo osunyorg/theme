@@ -1,0 +1,37 @@
+.post
+    display: flex
+    flex-direction: column
+    .media
+        background: $post-media-background
+        order: -1
+        &::before
+            content: ""
+            display: block
+            padding-top: $post-media-aspect-ratio
+    a
+        @include stretched-link
+
+    .author,
+    .post-categories
+        // @extend .card-text
+        @extend .small
+        &,
+        a
+            // color: $gray-700
+
+.posts
+    @include grid(3)
+.post-categories
+    @extend .small
+    list-style: none
+    margin: 0
+    padding: 0
+    li
+        display: inline-block
+        vertical-align: middle
+        &::after
+            content: ', '
+            margin-left: -3px
+        &:last-child
+            &::after
+                content: none

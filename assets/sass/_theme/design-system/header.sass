@@ -3,7 +3,7 @@ header[role="banner"]
         background-color: $header-background-color
         position: sticky
         top: 0
-        transition: transform 0.3s
+        transition: transform $header-sticky-transition
         z-index: 10
         html.is-scrolling-down:not(.is-menu-open) &
             &:not(:hover)
@@ -15,7 +15,8 @@ header[role="banner"]
     nav[role="navigation"]
         .container
             display: flex
-            padding: $spacing1
+            padding-bottom: $grid-gutter / 2
+            padding-top: $grid-gutter / 2
             justify-content: space-between
         button[type="button"]
             display: none

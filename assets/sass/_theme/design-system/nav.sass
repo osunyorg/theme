@@ -21,23 +21,26 @@
     .dropdown-menu
         display: none
         background: $header-background-color
+        padding-bottom: $spacing1
+        padding-top: $spacing1
+        inset: 100% 0 auto 0
+        position: absolute
 
     .nav-level-1
         display: flex
-        > li > a
-            padding: $spacing1
+        > li
+            > a
+                padding: $spacing1
+            &:last-child a
+                padding-right: 0
         li.has-children:hover
             .dropdown-menu
-                padding: $spacing1
-                inset: 100% 0 auto 0
                 display: block
-                position: absolute
 
     .nav-level-2
-        @include media-breakpoint-up(lg)
-            display: grid
-            grid-gap: $spacing1 $spacing1
-            grid-template-columns: repeat(4, 1fr)
+        @include media-breakpoint-up(md)
+            @include container
+            @include grid(4)
         > li
             &,
             & > a,

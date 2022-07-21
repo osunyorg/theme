@@ -1,7 +1,28 @@
+*,
+*::before,
+*::after
+    box-sizing: border-box
+
 body
     color: $body-color
     background: $body-background-color
+    @media (prefers-reduced-motion: reduce)
+        *
+            transition-duration: 0s !important
+    &:not(.is-loaded)
+        *
+            transition-duration: 0s !important
 
+figure
+    margin: 0
 img
     max-width: 100%
     height: auto
+    &::selection
+        background: transparent
+
+.container
+    @include container
+
+ul
+    padding-left: px2rem(15)

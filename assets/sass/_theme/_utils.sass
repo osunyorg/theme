@@ -1,3 +1,5 @@
+// TODO : ranger
+
 @function px2rem($size)
     $remSize: $size / 16
     @return #{$remSize}rem
@@ -8,7 +10,7 @@
 
 @function col($nb, $base: 12)
     $nb: $nb/$base * 12
-    $nbCol: calc( (100% + #{$grid-gutter-width}) / 12 * #{$nb} )
+    $nbCol: calc( (100% + #{$grid-gutter}) / 12 * #{$nb} )
     @return #{$nbCol}
 
 @mixin in-page-with-aside
@@ -39,29 +41,52 @@
         &::#{$pseudo}
             transform: translateX(#{px2rem($distance)})
 
-@mixin sticky($top-md: calc(#{$header-height-md} + #{$grid-gutter-width}), $top-sm: calc(#{$header-height} + #{$grid-gutter-width}))
+@mixin sticky($top-md: calc(#{$header-height-md} + #{$spacing1}), $top-sm: calc(#{$header-height} + #{$spacing1}))
     position: sticky
-    top: $grid-gutter-width
-    @if $enable-header-sticky
-        transition: top $header-transition
+    top: $spacing1
+    @if $header-sticky-enabled
+        transition: top $header-sticky-transition
         html:not(.is-scrolling-down) &
             top: $top-sm
             @include media-breakpoint-up(md)
                 top: $top-md
 
-
-
 // NEW UTILS
 
-@mixin icon($icon-name)
-    display: inline-block
-    font-family: 'Icon'
-    font-style: normal
-    font-variant: normal
-    font-weight: normal
-    line-height: 1
-    speak: never
-    text-transform: none
-    vertical-align: middle
-    content: map-get($icons, $icon-name)
-    font-family: $font-icons-code
+@mixin icon($icon-name: '', $pseudo-element: before)
+    &::#{$pseudo-element}
+        display: inline-block
+        font-family: 'Icon'
+        font-style: normal
+        font-variant: normal
+        font-weight: normal
+        line-height: 1
+        speak: never
+        text-transform: none
+        vertical-align: middle
+        content: map-get($icons, $icon-name)
+
+@mixin container
+    max-width: $grid-max-width
+    padding-left: $grid-gutter
+    padding-right: $grid-gutter
+    margin-left: auto
+    margin-right: auto
+    width: 100%
+
+@mixin grid($cols: 12)
+    @include media-breakpoint-up(md)
+        display: grid
+        grid-gap: 0 $grid-gutter
+        grid-template-columns: repeat($cols, 1fr)
+
+
+@mixin stretched-link($pseudo-element: after)
+    &::#{$pseudo-element}
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        z-index: 2
+        content: ""
