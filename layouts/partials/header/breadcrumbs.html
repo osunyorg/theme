@@ -1,28 +1,25 @@
 <nav aria-label="{{ i18n "commons.breadcrumb" }}">
   <ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
-    {{- $permalink := .RelPermalink -}}
-    {{- $path := strings.TrimSuffix "/" $permalink -}}
-    {{- $crumbs := split $path "/" -}}
-    {{- $currentPath := "" -}}
-    {{- $index := 0 -}}
-    {{- range $crumb := $crumbs -}}
-      {{- $currentPath = printf "%s%s/" $currentPath $crumb -}}
-      {{- $page := partial "GetPageByUrl" $currentPath -}}
-      {{- if $page -}}
-        {{- $index = add $index 1 -}}
-        {{- $title := or $page.Params.breadcrumb_title $page.Title -}}
-        {{- $active := eq $page.RelPermalink $permalink }}
-      <li class="breadcrumb-item{{ if $active }} active{{ end }}"{{ if $active }} aria-current="page"{{ end }} itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        {{ if not $active -}}
-          <a href="{{ $page.Permalink}}" itemprop="item">
-        {{- end -}}
-          <span itemprop="name">{{ htmlUnescape $title }}</span>
-        {{- if not $active }}
-          </a>
-        {{ end -}}
-        <meta itemprop="position" content="{{ $index }}">
-      </li>
-      {{- end -}}
-    {{- end }}
+    {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
   </ol>
 </nav>
+{{ define "breadcrumbnav" }}
+  {{- if .p1.Parent -}}
+    {{- template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 )  -}}
+  {{- else if not .p1.IsHome }}
+    {{- template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  -}}
+  {{- end -}}
+  {{- if not (eq .p1.RelPermalink "/pages/") -}}
+    {{- $title := .p1.Params.breadcrumb_title -}}
+    {{- if not $title -}}{{- $title = .p1.Title -}}{{- end }}
+    {{ if eq .p1 .p2 -}}
+      <li class="breadcrumb-item active" aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        {{- $title -}}
+      </li>
+    {{ else -}}
+      <li class="breadcrumb-item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a href="{{ .p1.Permalink }}">{{ $title }}</a>
+      </li>
+    {{ end -}}
+  {{- end -}}
+{{- end -}}
