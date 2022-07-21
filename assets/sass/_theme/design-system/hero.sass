@@ -1,0 +1,60 @@
+.hero
+    align-items: flex-end
+    background-color: $hero-background-color
+    color: $hero-color
+    display: flex
+    margin-bottom: 3rem
+    min-height: $hero-height
+    overflow: hidden
+    padding-bottom: 2rem
+    padding-top: 2rem
+    position: relative
+    @include media-breakpoint-up(md)
+        min-height: $hero-height-md
+
+    .page-with-blocks &
+        margin-bottom: 0
+
+    *:focus-visible
+        outline-color: white
+
+    p
+        margin-bottom: 0
+
+    > div:first-of-type
+        > div
+            margin-top: $spacing1
+            @include media-breakpoint-up(xl)
+                margin-top: px2rem(70)
+
+    > div + div
+        margin-top: auto
+        .container
+            padding-bottom: $spacing1
+            padding-top: $spacing1
+        @include media-breakpoint-up(md)
+            &::before
+                background-color: rgba(white, .2)
+                content: ''
+                display: block
+                height: 1px
+                width: 100%
+        & + aside
+            margin-top: 0
+    > div
+        position: relative
+        z-index: 1
+    > picture
+        img
+            height: 100%
+            inset: 0
+            object-fit: cover
+            opacity: 0.3
+            position: absolute
+            width: 100%
+            // polyfill for inset
+            @supports not (inset: 0)
+                bottom: 0
+                left: 0
+                right: 0
+                top: 0

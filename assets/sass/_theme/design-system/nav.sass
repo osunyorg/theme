@@ -1,0 +1,53 @@
+.menu
+    a,
+    a:hover,
+    a:focus,
+    a:active
+        color: $header-color
+    ul
+        display: flex
+        list-style: none
+        margin: 0
+        padding: 0
+    a,
+    span
+        font-size: px2rem(18)
+        line-height: px2rem(26)
+        color: $header-color
+    a:hover,
+    a:focus
+        color: $header-hover-color
+
+    .dropdown-menu
+        display: none
+        background: $header-background-color
+
+    .nav-level-1
+        display: flex
+        > li > a
+            padding: $spacing1
+        li.has-children:hover
+            .dropdown-menu
+                padding: $spacing1
+                inset: 100% 0 auto 0
+                display: block
+                position: absolute
+
+    .nav-level-2
+        @include media-breakpoint-up(lg)
+            display: grid
+            grid-gap: $spacing1 $spacing1
+            grid-template-columns: repeat(4, 1fr)
+        > li
+            &,
+            & > a,
+            & > span
+                font-size: px2rem(16)
+                line-height: px2rem(26)
+                @include media-breakpoint-up(lg)
+                    font-size: px2rem(18)
+
+    .nav-level-3
+        a,
+        span
+            font-size: px2rem(14)
