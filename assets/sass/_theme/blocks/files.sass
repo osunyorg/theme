@@ -1,36 +1,32 @@
-// .block-files
-//     ul
-//         --bs-gutter-y: 1.5rem
-//         @extend .row
-//         list-style: none
-//         margin-bottom: 0
-//         padding-left: 0
-//     a
-//         @extend .icon
-//         @extend .icon-download
-//         align-items: center
-//         display: flex
-//         text-decoration: none
-//         &::before
-//             align-items: center
-//             border: $border-width solid $border-color
-//             display: flex
-//             flex-shrink: 0
-//             height: px2rem(60)
-//             justify-content: center
-//             margin-right: px2rem(15)
-//             transition: background .3s ease
-//             width: px2rem(60)
-//         &::after
-//             content: none
-//         &:hover
-//             &::before
-//                 background-color: $border-color
-//         span span
-//             @extend .small
-//     @include in-page-with-aside
-//         li
-//             @extend .col-md-6
-//     @include in-page-without-aside
-//         li
-//             @extend .col-md-4
+.block-files
+    ul
+        list-style: none
+        margin-bottom: 0
+        padding-left: 0
+        @include in-page-with-aside
+            @include grid(2)
+        @include in-page-without-aside
+            @include grid(3)
+    a
+        @include icon("download", before)
+        align-items: center
+        display: flex
+        text-decoration: none
+        &::before
+            align-items: center
+            border: 1px solid $main-border-color
+            display: flex
+            flex-shrink: 0
+            height: px2rem(60)
+            justify-content: center
+            // margin-right: px2rem(15)
+            transition: background 0.3s ease, border 0.3s ease
+            width: px2rem(60)
+        &::after
+            content: none
+        &:hover
+            &::before
+                background-color: $main-border-color
+                border-color: transparent
+        span span
+            font-size: $small-font-size
