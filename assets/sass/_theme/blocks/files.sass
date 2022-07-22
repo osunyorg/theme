@@ -1,6 +1,5 @@
 .block-files
     ul
-        --bs-gutter-y: 1.5rem
         list-style: none
         margin-bottom: 0
         padding-left: 0
@@ -9,25 +8,25 @@
         @include in-page-without-aside
             @include grid(3)
     a
+        @include icon("download", before)
         align-items: center
         display: flex
-        @include icon("download", before)
         text-decoration: none
         &::before
             align-items: center
-            border: 1px solid rgba($main-border-color, .1)
+            border: 1px solid $main-border-color
             display: flex
             flex-shrink: 0
             height: px2rem(60)
             justify-content: center
             // margin-right: px2rem(15)
-            transition: background .3s ease, border .3s ease
+            transition: background 0.3s ease, border 0.3s ease
             width: px2rem(60)
         &::after
             content: none
         &:hover
             &::before
-                background-color: rgba($main-border-color, .1)
+                background-color: $main-border-color
                 border-color: transparent
         span span
             font-size: $small-font-size
