@@ -9,12 +9,13 @@
     @return #{$remSize}rem
 
 @mixin in-page-with-aside
-    aside ~ .blocks &
+    body:not(.full-width) aside ~ .blocks &
         @content
 
 @mixin in-page-without-aside
     main > .blocks &,
-    main > article > .blocks &
+    main > article > .blocks &,
+    body.full-width &,
         @content
 
 @mixin link

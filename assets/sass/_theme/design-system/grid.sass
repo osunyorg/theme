@@ -3,20 +3,25 @@
 
 .content-blocks
     position: relative
-    > aside
-        @include container
-        pointer-events: none
-        @include media-breakpoint-up(md)
-            height: 100%
-            left: 50%
-            position: absolute
-            transform: translateX(-50%)
-            width: 100%
-        > div
-            @include sticky
-            > *
-                width: col(4)
-                pointer-events: auto
-    > .blocks
-        .block-content
-            padding-left: col(4)
+    body:not(.full-width) &
+        > aside
+            @include container
+            pointer-events: none
+            @include media-breakpoint-up(md)
+                height: 100%
+                left: 50%
+                position: absolute
+                transform: translateX(-50%)
+                width: 100%
+            > div
+                @include sticky
+                > *
+                    width: col(4)
+                    pointer-events: auto
+        > .blocks
+            .block-content
+                padding-left: col(4)
+
+    body.full-width &
+        aside
+            display: none
