@@ -1,47 +1,43 @@
-// .block-definitions
-//     details
-//         &:not([open]):hover
-//             &::after
-//                 border-bottom-color: black
-//             summary::after
-//                 transform: translateY(5px)
-//         summary, p
-//             font-size: px2rem(20)
-//             line-height: px2rem(30)
-//         &::after
-//             content: ''
-//             border-bottom: 1px solid $border-color
-//             display: block
-//             transition: border-color 0.5s
+.block-definitions
+    details
+        &:not([open]):hover
+            &::after
+                border-bottom-color: $main-border-color
+            summary::after
+                transform: translateY(5px)
+        summary, p
+            // font-size: px2rem(20)
+            // line-height: px2rem(30)
+        &::after
+            content: ''
+            border-bottom: 1px solid rgba($main-border-color, .1)
+            display: block
+            transition: border-color 0.5s
 
-//     summary
-//         padding-bottom: px2rem(15)
-//         padding-top: px2rem(20)
-//         position: relative
-//         display: flex
-//         justify-content: space-between
-//         align-items: baseline
-//         &::after
-//             @include icon
-//             content: map-get($icons, "caret")
-//             font-size: px2rem(5)
-//             line-height: px2rem(22)
-//             text-decoration: none
-//             transition: transform 0.25s
-//         &::marker
-//             content: none
-//         &::-webkit-details-marker 
-//             display: none
-//     details[open]
-//         summary::after
-//             content: map-get($icons, "caret-top")
-//         &:hover
-//             summary::after
-//                 transform: translateY(-5px)
+    summary
+        // padding-bottom: px2rem(15)
+        // padding-top: px2rem(20)
+        position: relative
+        display: flex
+        justify-content: space-between
+        align-items: baseline
+        @include icon("caret", after)
+        &::after
+            // font-size: px2rem(5)
+            // line-height: px2rem(22)
+            transition: transform 0.25s
+        &::marker
+            content: none
+        &::-webkit-details-marker 
+            display: none
+    details[open]
+        summary
+            @include icon("caret-top", after)
+        &:hover
+            summary::after
+                transform: translateY(-5px)
 
     
-//     @include in-page-without-aside
-//         .definitions
-//             @extend .row
-//             details
-//                 @extend .col-md-6
+    @include in-page-without-aside
+        .definitions
+            @include grid(2)
