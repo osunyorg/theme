@@ -1,44 +1,40 @@
-// .block-contact
-//     @include in-page-without-aside
-//         .block-content
-//             --bs-gutter-y: 3rem
-//             @extend .row
-//             .top
-//                 @extend .col-12
-//             address, ul
-//                 @extend .col-md-6
-//     @include in-page-with-aside
-//         address + ul
-//             margin-top: px2rem(40)
-//     ul
-//         padding-left: 0
-//         li
-//             border-bottom: $table-border-width solid $table-border-color
-//             display: flex
-//             flex-wrap: wrap
-//             padding-bottom: calc(#{$line-height-base/2}rem + 1px)
-//             padding-top: calc(#{$line-height-base/2}rem + 1px)
-//             &:first-child
-//                 padding-top: 0
-//             @include media-breakpoint-down(md)
-//                 justify-content: end
-//                 flex-wrap: wrap
-//                 span
-//                     min-width: 50%
-//                     &:nth-child(n+2)
-//                         text-align: right
-//             @include media-breakpoint-up(md)
-//                 justify-content: space-between
-//                 span
-//                     min-width: 33.33%
-//                 span + span
-//                     text-align: center
-//                     &:last-child
-//                         text-align: right
-//     time + time
-//         &::before
-//             @extend .icon
-//             content: map-get($icons, "arrow-right")
-//             display: inline-block
-//             font-size: 12px
-//             padding: 0 5px 0 3px
+.block-contact
+    @include in-page-without-aside
+        @include media-breakpoint-up(md)
+            .block-content
+                display: flex
+                address,
+                ul
+                    width: col(6)
+
+    ul
+        list-style: none
+        margin-bottom: 0
+        padding-left: 0
+        li
+            border-bottom: 1px solid $main-border-color
+            display: flex
+            flex-wrap: wrap
+            padding-bottom: calc(#{$line-height-base/2}rem + 1px)
+            padding-top: calc(#{$line-height-base/2}rem + 1px)
+            @include media-breakpoint-down(md)
+                justify-content: end
+                flex-wrap: wrap
+                span
+                    min-width: 50%
+                    &:nth-child(n+2)
+                        text-align: right
+            @include media-breakpoint-up(md)
+                justify-content: space-between
+                span
+                    min-width: calc(100% / 3)
+                span + span
+                    text-align: center
+                    &:last-child
+                        text-align: right
+    time + time
+        @include icon("arrow-right", before)
+        &::before
+            display: inline-block
+            font-size: px2rem(12)
+            padding: 0 px2rem(7) 0 px2rem(3)
