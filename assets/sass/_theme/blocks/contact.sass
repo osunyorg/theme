@@ -1,5 +1,4 @@
 .block-contact
-
     @include in-page-without-aside
         @include media-breakpoint-up(md)
             .block-content
@@ -13,7 +12,7 @@
         margin-bottom: 0
         padding-left: 0
         li
-            // border-bottom: 1px solid $main-border-color
+            border-bottom: 1px solid $main-border-color
             display: flex
             flex-wrap: wrap
             padding-bottom: calc(#{$line-height-base/2}rem + 1px)
@@ -34,9 +33,8 @@
                     &:last-child
                         text-align: right
     time + time
+        @include icon("arrow-right", before)
         &::before
-            // @extend .icon
-            // content: map-get($icons, "arrow-right")
             display: inline-block
-            font-size: 12px
-            padding: 0 5px 0 3px
+            font-size: px2rem(12)
+            padding: 0 px2rem(7) 0 px2rem(3)
