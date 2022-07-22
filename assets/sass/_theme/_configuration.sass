@@ -16,7 +16,7 @@ $link-color: $main-color !default
 $body-font-family: "Georgia", serif !default
 $heading-font-family: "Helvetica", "Arial", sans-serif !default
 
-$font-size-base: 1rem
+// $font-size-base: 1rem
 $line-height-base: 1.4
 
 // Fonts sizes
@@ -41,7 +41,7 @@ $h5-weight: $heading-font-weight !default
 $h6-weight: $heading-font-weight !default
 
 // Breadcrumb
-$breadcrumb-color: white !default
+$breadcrumb-color: invert($main-color) !default
 
 // Spacing
 $spacing1: 24px !default
@@ -56,15 +56,16 @@ $grid-max-width: 1980px
 
 // Z-index
 $zindex-nav-accessibility: 1010 !default
+$zindex-stretched-link: 2 !default
 
 // Header
 $header-color: $main-color !default
-$header-hover-color: rgba($main-color, 0.7) !default // TODO : Réflechir à plus élégant / générique
+$header-hover-color: rgba($header-color, 0.7) !default // TODO : Réflechir à plus élégant / générique
 $header-background-color: $main-background-color !default
-$header-sticky-enabled: true
-$header-sticky-transition: 0.3s
-$header-height: 74px
-$header-height-md: 74px
+$header-sticky-enabled: true !default
+$header-sticky-transition: 0.3s !default
+$header-height: 74px !default
+$header-height-md: 74px !default
 
 // Footer
 $footer-color: $main-color !default
@@ -73,8 +74,8 @@ $footer-background-color: darken($main-background-color, 2.5) !default
 // Hero
 $hero-height: 375px !default
 $hero-height-md: 450px !default
-$hero-color: white !default
-$hero-background-color: black !default
+$hero-color: invert($main-color) !default
+$hero-background-color: invert($main-background-color) !default
 
 // Icons
 $icons: ()

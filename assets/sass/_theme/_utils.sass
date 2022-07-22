@@ -8,11 +8,6 @@
     $remSize: $size / 16 / 2
     @return #{$remSize}rem
 
-@function col($nb, $base: 12)
-    $nb: $nb/$base * 12
-    $nbCol: calc( (100% + #{$grid-gutter}) / 12 * #{$nb} )
-    @return #{$nbCol}
-
 @mixin in-page-with-aside
     aside ~ .blocks &
         @content
@@ -80,6 +75,11 @@
         grid-gap: 0 $grid-gutter
         grid-template-columns: repeat($cols, 1fr)
 
+@function col($nb, $base: 12)
+    $nb: $nb/$base * 12
+    $nbCol: calc( (100% + #{$grid-gutter}) / 12 * #{$nb} )
+    @return #{$nbCol}
+
 @mixin stretched-link($pseudo-element: after)
     &::#{$pseudo-element}
         position: absolute
@@ -87,5 +87,6 @@
         right: 0
         bottom: 0
         left: 0
-        z-index: 2
+        z-index: $zindex-stretched-link
         content: ""
+

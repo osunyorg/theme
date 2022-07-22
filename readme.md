@@ -439,3 +439,21 @@ Syntaxe de transformation type Shopify (à revoir)
 - `https://demo.osuny.org/media/media-id/mon_image_500x500.webp`
 - `https://demo.osuny.org/media/media-id/mon_image_500x500_crop_center.webp`
 
+
+
+## Intégration
+
+### CSS Grid Overlay
+
+```
+[
+  {
+    "columns": 12,
+    "from": 840,
+    "gutters": 30,
+    "margins": 60,
+    "maxWidth": 1980,
+    "to": 7680
+  }
+]
+```
