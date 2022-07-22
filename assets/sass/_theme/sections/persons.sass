@@ -1,6 +1,7 @@
 .person
-    // @extend .card
-    border: 0
+    position: relative
+    display: flex
+    flex-direction: column
     & > a
         display: flex
         flex-direction: column
@@ -23,7 +24,7 @@
         margin-bottom: 0
 
     .avatar
-        order: 1
+        order: -1
         width: px2rem(76)
         @include media-breakpoint-down(md)
             float: right
@@ -44,8 +45,14 @@
         // @extend .small
 
 .persons
-    // --bs-gutter-y: 3rem
-    // @extend .row
-    > *
-        // @extend .col-md-6
-        // @extend .col-lg-4
+    @include grid(2)
+    @include grid(3, lg)
+
+.avatar
+    background-color: #f8f9fa
+    border-radius: 50%
+    overflow: hidden
+    img
+        object-fit: cover
+        display: block
+
