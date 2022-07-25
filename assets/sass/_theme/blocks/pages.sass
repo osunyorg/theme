@@ -19,6 +19,7 @@
                     flex: 1
 
         .pages
+            @include grid(1)
             --bs-gutter-y: 0
             @include media-breakpoint-up(lg)
                 margin-top: 4.5rem
@@ -44,8 +45,7 @@
         padding-bottom: $grid-gutter
         padding-top: $grid-gutter
         .pages
-            > *
-                @include grid(4)
+            @include grid(3)
             .page
                 aspect-ratio: 0.887
                 background-color: $block-pages-card-page-background
@@ -53,11 +53,15 @@
                 &,
                 a
                     color: $block-pages-card-page-color
-                a
-                    transition: text-decoration-color .3s ease, color .3s
                 .more
                     @include link
+                    bottom: 10px
+                    margin-top: 100%
+                    position: absolute
                     text-decoration-color: $block-pages-card-page-color
+                a,
+                .more
+                    transition: text-decoration-color .3s ease, color .3s ease
                 > div:first-child
                     display: flex
                     flex-direction: column
@@ -69,7 +73,8 @@
                 &:hover
                     background-color: $block-pages-card-page-background-hover
                     &,
-                    a
+                    a,
+                    .more
                         color: $block-pages-card-page-color-hover
                     .more
                         text-decoration-color: $block-pages-card-page-color-hover
