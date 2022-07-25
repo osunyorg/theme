@@ -1,6 +1,7 @@
 .block-gallery
     .top
         @include grid(2, md)
+        align-items: center
         .description
             width: col(7)
             // @extend .col-md-7
@@ -52,6 +53,9 @@
 
             figure
                 max-width: 80%
+                min-width: 80% // to check
+                @include in-page-without-aside
+                    min-width: 50%
                 &:last-of-type
                     max-width: 100%
                     padding-right: 20%
@@ -77,7 +81,13 @@
             &__arrow
                 &--prev,
                 &--next
+                    @include button-reset
+                    @include icon("arrow-left", before)
                     height: 48px
                     padding: 0
                     position: static
                     width: 48px
+                    svg
+                        display: none
+                &--next
+                    @include icon("arrow-right", before)
