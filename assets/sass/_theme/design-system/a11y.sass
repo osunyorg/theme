@@ -1,6 +1,5 @@
 .nav-accessibility
-    list-style: none
-    margin: 0
+    @include list-reset
     padding: $spacing1
     position: absolute
     transform: translateY(-100%)
@@ -11,3 +10,11 @@
     &:focus-within
         position: relative
         transform: translateY(0)
+
+.transcription
+    button
+        @include icon("caret-bottom", after)
+        @include button-reset
+        &::after
+            font-size: px2rem(5)
+            line-height: px2rem(22)

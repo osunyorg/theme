@@ -9,12 +9,13 @@
     @return #{$remSize}rem
 
 @mixin in-page-with-aside
-    aside ~ .blocks &
+    body:not(.full-width) aside ~ .blocks &
         @content
 
 @mixin in-page-without-aside
     main > .blocks &,
-    main > article > .blocks &
+    main > article > .blocks &,
+    body.full-width &,
         @content
 
 @mixin link
@@ -107,3 +108,17 @@
             position: absolute
             right: 0
             top: 0
+
+@mixin button-reset
+    background: transparent
+    border: none
+    cursor: pointer
+    &:active,
+    &:focus
+        box-shadow: 0 0 0 0.25rem rgba($main-color, 0.25)
+        outline: 0
+
+@mixin list-reset
+    list-style: none
+    padding-left: 0
+    margin-bottom: 0
