@@ -1,0 +1,73 @@
+.splide
+    button
+        appearance: none
+        background: transparent
+        border: 0
+    &__arrow
+        // @extend .icon
+        position: absolute
+        top: 50%
+        svg
+            display: none
+        &--prev
+            // @extend .icon-arrow-left
+            right: 100%
+        &--next
+            // @extend .icon-arrow-right
+            left: 100%
+    &__pagination
+        display: flex
+        list-style: none
+        margin: 0
+        padding: 0
+        button
+            display: block
+            height: 48px
+            padding: 0
+            width: 48px
+            &::before
+                background-color: rgba($link-color, .3)
+                border-radius: 50%
+                content: ''
+                display: block
+                height: 10px
+                margin: auto
+                transition: background .3s ease
+                width: 10px
+            &:hover
+                &::before
+                    background-color: rgba($link-color, .6)
+            &.is-active
+                &::before
+                    background-color: $link-color
+
+    &__autoplay
+        bottom: 0
+        position: absolute
+        right: 0
+
+        &.is-active
+            .splide__play
+                display: none
+            .splide__pause
+                display: inline-block
+
+    &__pause,
+    &__play
+        // @extend .icon
+        height: 48px
+        padding: 0
+        width: 48px
+
+    &__play
+        // @extend .icon-play
+
+    &__pause
+        // @extend .icon-pause
+        display: none
+
+
+    &[data-slides-length="1"]
+        .splide
+            &__autoplay, &__pagination, &__arrow
+                display: none
