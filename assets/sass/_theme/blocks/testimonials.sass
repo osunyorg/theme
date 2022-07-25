@@ -1,83 +1,103 @@
-// .block-testimonials
+.block-testimonials
+    blockquote
+        @extend .blockquote
+        padding-top: calc(#{$block-testimonials-font-size} * 2)
+        p
+            font-size: $block-testimonials-font-size
+            line-height: $block-testimonials-line-height
+            @include media-breakpoint-up(md)
+                font-size: px2rem(30) // TODO : on peut peut-être la sortir avec du RFS ?
+            @include media-breakpoint-up(xl)
+                font-size: $block-testimonials-xl-font-size
+                line-height: $block-testimonials-xl-line-height
+        &.is-long
+            p
+                @include media-breakpoint-up(xl)
+                    font-size: $block-testimonials-xl-font-size-long-text
+                    line-height: $block-testimonials-xl-line-height-long-text
+        &::before
+            content: "“"
+            font-size: calc(#{$block-testimonials-font-size} * 3)
+            line-height: 1
+            position: absolute
+            // TODO : ajuster en fonctiond e la typo
 
-//     @include in-page-without-aside
-//         .block-content
-//             @extend .row
-//         .testimonials
-//             @extend .col-md-8
+    figure
+        font-size: px2rem(16)
+        margin-bottom: 0
 
-//     blockquote
-//         @extend .blockquote
-//         padding-top: calc(#{$blockquote-font-size} * 2)
-//         &::before
-//             content: '“'
-//             font-size: calc(#{$blockquote-font-size} * 3)
-//             line-height: 1
-//             position: absolute
-//             transform: translate(-15%, -50%)
+    figcaption
+        align-items: center
+        display: flex
+        .avatar
+            flex-shrink: 0
+            margin-right: $grid-gutter
 
-//     figure
-//         font-size: px2rem(16)
-//         margin-bottom: 0
+    .avatar
+        max-width: 96px
+        @include media-breakpoint-up(lg)
+            max-width: 136px
+        @include media-breakpoint-up(xl)
+            max-width: 166px
+        @include media-breakpoint-up(xxl)
+            max-width: 192px
 
-//     figcaption
-//         align-items: center
-//         display: flex
-//         .avatar
-//             flex-shrink: 0
-//             margin-right: $grid-gutter-width
+    .splide
+        display: flex
+        flex-direction: column-reverse
+        &__autoplay
+            bottom: auto
+            top: 0
+            button
+                @include button-reset
+                font-size: px2rem(14)
+                line-height: 1
+                &::after
+                    border: 1px solid black // TODO : variable
+                    border-radius: 50%
+                    content: ""
+                    height: 42px
+                    left: 50%
+                    position: absolute
+                    top: 50%
+                    transform: translate(-50%, -50%)
+                    width: 42px
+            .splide__play
+                &::before
+                    margin-left: 2px
+        &__pagination
+            justify-content: unset
+            margin-right: 55px
+            li
+                flex: 1
+                margin-right: 10px
+            button
+                @include button-reset
+                position: relative
+                width: 100%
+                &::before,
+                i
+                    height: 1px
+                    left: 0
+                    top: 50%
+                    position: absolute
+                &::before
+                    background-color: $block-testimonials-pagination-background
+                    border-radius: 0
+                    width: 100%
+                i
+                    background-color: $block-testimonials-pagination-progress-background
+                    width: 0
 
-//     .avatar
-//         max-width: 96px
-//         @include media-breakpoint-up(lg)
-//             max-width: 136px
-//         @include media-breakpoint-up(xl)
-//             max-width: 166px
-//         @include media-breakpoint-up(xxl)
-//             max-width: 192px
+    @include in-page-without-aside
+        .testimonials
+            @include media-breakpoint-up(md)
+                padding-right: col(4)
 
-//     .splide
-//         display: flex
-//         flex-direction: column-reverse
-//         &__autoplay
-//             bottom: auto
-//             top: 0
-//             button
-//                 font-size: px2rem(14)
-//                 line-height: 1
-//                 &::after
-//                     border: $border-width solid $border-color
-//                     border-radius: 50%
-//                     content: ''
-//                     height: 42px
-//                     left: 50%
-//                     position: absolute
-//                     top: 50%
-//                     transform: translate(-50%, -50%)
-//                     width: 42px
-//             .splide__play
-//                 &::before
-//                     margin-left: 2px
-//         &__pagination
-//             justify-content: unset
-//             margin-right: 55px
-//             li
-//                 flex: 1
-//                 margin-right: 10px
-//             button
-//                 position: relative
-//                 width: 100%
-//                 &::before,
-//                 i
-//                     height: 1px
-//                     left: 0
-//                     top: 50%
-//                     position: absolute
-
-//                 &::before
-//                     background-color: $border-color
-//                     border-radius: 0
-//                     width: 100%
-//                 i
-//                     background-color: $primary
-//                     width: 0
+        // figure
+        //     display: flex
+        //     figcaption
+        //         order: -1
+        //         display: block
+        //         .avatar
+        //             margin-bottom: $spacing1

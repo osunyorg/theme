@@ -1,91 +1,89 @@
-// .block-call_to_action
-//     .call_to_action
-//         color: $block-call-to-action-color
-//         img
-//             @extend .img-fluid
+.block-call_to_action
+    .call_to_action
+        color: $block-call-to-action-color
+        p:last-of-type
+            margin-bottom: 0
 
-//         p:last-of-type
-//             margin-bottom: 0
+        > div
+            // button
+            div + div,
+            & >
+                a
+                    @extend .btn
+                    margin-top: 1rem
+                    background: $block-call-to-action-button-background
+                    color: $block-call-to-action-button-color
+        @include in-page-with-aside
+            display: flex
+            flex-direction: column
+            > *
+                order: 2
+            picture
+                order: 1
+                padding-left: $grid-gutter
+                position: relative
+            img
+                margin-bottom: -50px
+            > div
+                background-color: $block-call-to-action-background
+                padding: $grid-gutter
+                width: 100%
+            &--with-image
+                > div
+                    padding-top: calc(#{$grid-gutter} + 50px)
 
-//         > div
-//             // button
-//             div + div,
-//             & >
-//                 a
-//                     @extend .btn
-//                     @extend .btn-light
-//                     margin-top: 1rem
+            @include media-breakpoint-up(md)
+                picture
+                    padding-left: col(1, 8)
+                    padding-right: col(3, 8)
+                > div
+                    padding: col(1, 8)
 
-//         @include in-page-with-aside
-//             display: flex
-//             flex-direction: column
-//             > *
-//                 order: 2
-//             picture
-//                 order: 1
-//                 padding-left: $grid-gutter-width
-//                 position: relative
-//             img
-//                 margin-bottom: -50px
-//             > div
-//                 background-color: $block-call-to-action-background
-//                 padding: $grid-gutter-width
-//                 width: 100%
-//             &--with-image
-//                 > div
-//                     padding-top: calc(#{$grid-gutter-width} + 50px)
-
-//             @include media-breakpoint-up(md)
-//                 picture
-//                     padding-left: col(1, 8)
-//                     padding-right: col(3, 8)
-//                 > div
-//                     padding: col(1, 8)
-
-//     @include in-page-without-aside
-//         .block-content
-//             background-color: $block-call-to-action-background
-//             padding: col(1)
-//         .call_to_action--with-image
-//             @include media-breakpoint-down(md)
-//                 display: flex
-//                 flex-direction: column
-//                 > *
-//                     order: 2
-//                 picture
-//                     margin-bottom: col(1)
-//                     order: 1
-//             @include media-breakpoint-up(md)
-//                 @include make-row
-//                 align-items: center
-//                 > *
-//                     @include make-col-ready
-//                 > div
-//                     @include make-col(6)
-//                     > *
-//                         margin-right: col(1, 5)
-//                 picture
-//                     @include make-col(6)
-//                 div + div
-//                     a
-//                         margin-right: 1rem
-//         .call_to_action--without-image
-//             @include media-breakpoint-up(md)
-//                 display: block
-//                 > div
-//                     column-gap: $grid-gutter-width
-//                     display: grid
-//                     grid-template-columns: repeat(10,1fr)
-//                     > *
-//                         grid-column: 1/5
-//                     div + div,
-//                     & > a
-//                         grid-column: 6/11
-//                     div + div
-//                         align-items: flex-start
-//                         display: flex
-//                         flex-direction: column
-//                     div + div,
-//                     & >
-//                         a:first-of-type
-//                             margin-top: 0
+    @include in-page-without-aside
+        .block-content
+            background-color: $block-call-to-action-background
+            padding: col(1)
+        .call_to_action--with-image
+            @include media-breakpoint-down(md)
+                display: flex
+                flex-direction: column
+                > *
+                    order: 2
+                picture
+                    margin-bottom: col(1)
+                    order: 1
+            @include media-breakpoint-up(md)
+                // @include make-row
+                @include grid(2, md)
+                align-items: center
+                > *
+                    // @include make-col-ready
+                > div
+                    // @include make-col(6)
+                    > *
+                        margin-right: col(1, 5)
+                picture
+                    // @include make-col(6)
+                div + div
+                    a
+                        margin-right: 1rem
+        .call_to_action--without-image
+            @include media-breakpoint-up(md)
+                display: block
+                > div
+                    column-gap: $grid-gutter
+                    display: grid
+                    grid-template-columns: repeat(10,1fr)
+                    > *
+                        grid-column: 1/5
+                    div + div,
+                    & > a
+                        grid-column: 6/11
+                    div + div
+                        align-items: flex-start
+                        display: flex
+                        flex-direction: column
+                    div + div,
+                    & >
+                        a:first-of-type
+                            margin-top: 0

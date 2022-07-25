@@ -1,5 +1,6 @@
 %heading
     font-family: $heading-font-family
+    margin-top: 0
 
 h1, .h1
     @extend %heading
@@ -47,7 +48,7 @@ small, .small
     font-size: $small-font-size
 
 blockquote, .blockquote
-    font-style: italic
+    margin: 0
     cite
         font-size: px2rem(18)
         font-style: normal
@@ -67,6 +68,12 @@ a,
     &[href^="mailto"]
         &::after
             content: none
+
+.btn
+    font-size: $btn-font-size
+    padding: $btn-padding-y $btn-padding-x
+    text-decoration: none
+    display: inline-block
 
 .link-more
     @include link
