@@ -10,10 +10,10 @@
         svg
             display: none
         &--prev
-            // @extend .icon-arrow-left
+            @include icon('arrow-left')
             right: 100%
         &--next
-            // @extend .icon-arrow-right
+            @include icon('arrow-right')
             left: 100%
     &__pagination
         display: flex
@@ -26,17 +26,17 @@
             padding: 0
             width: 48px
             &::before
-                background-color: rgba($link-color, .3)
+                background-color: rgba($link-color, 0.3)
                 border-radius: 50%
-                content: ''
+                content: ""
                 display: block
                 height: 10px
                 margin: auto
-                transition: background .3s ease
+                transition: background 0.3s ease
                 width: 10px
             &:hover
                 &::before
-                    background-color: rgba($link-color, .6)
+                    background-color: rgba($link-color, 0.6)
             &.is-active
                 &::before
                     background-color: $link-color
@@ -60,10 +60,12 @@
         width: 48px
 
     &__play
+        @include icon('play')
         // @extend .icon-play
 
     &__pause
         // @extend .icon-pause
+        @include icon('pause')
         display: none
 
 

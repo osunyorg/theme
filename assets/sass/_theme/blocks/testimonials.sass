@@ -23,11 +23,11 @@
                     font-size: $block-testimonials-xl-font-size-long-text
                     line-height: $block-testimonials-xl-line-height-long-text
         &::before
-            content: '“'
+            content: "“"
             font-size: calc(#{$block-testimonials-font-size} * 3)
             line-height: 1
             position: absolute
-            transform: translate(-15%, -50%)
+            // TODO : ajuster en fonctiond e la typo
 
     figure
         font-size: px2rem(16)
@@ -62,7 +62,7 @@
                 &::after
                     border: 1px solid black // TODO : variable
                     border-radius: 50%
-                    content: ''
+                    content: ""
                     height: 42px
                     left: 50%
                     position: absolute
@@ -88,11 +88,10 @@
                     left: 0
                     top: 50%
                     position: absolute
-
                 &::before
-                    background-color: black // TODO : variable
+                    background-color: $block-testimonials-pagination-background
                     border-radius: 0
                     width: 100%
                 i
-                    background-color: black // TODO : variable
+                    background-color: $block-testimonials-pagination-progress-background
                     width: 0
