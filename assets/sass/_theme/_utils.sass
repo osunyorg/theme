@@ -9,12 +9,13 @@
     @return #{$remSize}rem
 
 @mixin in-page-with-aside
-    aside ~ .blocks &
+    body:not(.full-width) aside ~ .blocks &
         @content
 
 @mixin in-page-without-aside
     main > .blocks &,
-    main > article > .blocks &
+    main > article > .blocks &,
+    body.full-width &,
         @content
 
 @mixin link
@@ -50,6 +51,7 @@
 
 @mixin icon($icon-name: '', $pseudo-element: before)
     &::#{$pseudo-element}
+        content: map-get($icons, $icon-name)
         display: inline-block
         font-family: 'Icon'
         font-style: normal
@@ -59,14 +61,13 @@
         speak: never
         text-transform: none
         vertical-align: middle
-        content: map-get($icons, $icon-name)
 
 @mixin container
+    margin-left: auto
+    margin-right: auto
     max-width: $grid-max-width
     padding-left: $grid-gutter
     padding-right: $grid-gutter
-    margin-left: auto
-    margin-right: auto
     width: 100%
 
 @mixin grid($cols: 12, $breakpoint: md)
@@ -82,11 +83,27 @@
 
 @mixin stretched-link($pseudo-element: after)
     &::#{$pseudo-element}
-        position: absolute
-        top: 0
-        right: 0
         bottom: 0
+        content: ''
         left: 0
+        position: absolute
+        right: 0
+        top: 0
         z-index: $zindex-stretched-link
-        content: ""
 
+@mixin button-reset
+    appearance: none
+    background: transparent
+    border: none
+    border-radius: none
+    cursor: pointer
+    user-select: none
+    &:active,
+    &:focus
+        box-shadow: 0 0 0 0.25rem rgba($main-color, 0.25)
+        outline: 0
+
+@mixin list-reset
+    list-style: none
+    padding-left: 0
+    margin-bottom: 0

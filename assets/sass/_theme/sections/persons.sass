@@ -1,0 +1,58 @@
+.person
+    position: relative
+    display: flex
+    flex-direction: column
+    & > a
+        display: flex
+        flex-direction: column
+
+    &,
+    & > a
+        @include media-breakpoint-down(md)
+            display: block
+        > div:first-of-type
+            // @extend .card-body
+            padding-left: 0
+            padding-right: 0
+            @include media-breakpoint-down(md)
+                float: left
+                max-width: calc(100% - 6rem)
+                padding-bottom: 0
+                padding-top: 0
+
+    p
+        margin-bottom: 0
+
+    .avatar
+        order: -1
+        width: px2rem(76)
+        @include media-breakpoint-down(md)
+            float: right
+
+    .name
+        // @extend .card-title
+        margin-bottom: 0
+        @include media-breakpoint-down(md)
+            font-size: px2rem(22)
+        a
+            @include stretched-link
+            @include link
+
+    .name + p
+        font-size: px2rem(16)
+
+    .name ~ .contact
+        // @extend .small
+
+.persons
+    @include grid(2)
+    @include grid(3, lg)
+
+.avatar
+    background-color: #f8f9fa
+    border-radius: 50%
+    overflow: hidden
+    img
+        object-fit: cover
+        display: block
+

@@ -3,6 +3,7 @@
 // MAIN COLORS
 $main-color: black !default // Text color
 $main-background-color: white !default // Background color
+$main-border-color: lightgray !default // Border color
 
 $body-color: $main-color !default
 $body-background-color: $main-background-color !default
@@ -105,12 +106,16 @@ $icons: map-merge($icons, ("twitter": "\e90d"))
 // Breakpoints
 // TODO: réécrire en sass les mixins bootstrap
 $grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1400px)
- 
+
 // BLOCKS
 
 // Block call to action
 $block-call-to-action-background: $main-background-color !default
 $block-call-to-action-color: $main-color !default
+
+// Block definitions
+$definition-border-color: $main-border-color !default
+$definition-border-color-hovered: darken($definition-border-color, 100) !default
 
 // Block pages
 $block-pages-card-background: lighten($main-background-color, 1) !default
@@ -129,6 +134,10 @@ $post-media-background: darken($main-background-color, 2) !default
 $post-media-aspect-ratio: 50%
 $post-categories-color: lighten($main-color, 2) !default
 $post-time-color: lighten($main-color, 2) !default
+
+// Table of content
+$toc-color: $main-color !default
+$toc-active-color: $main-color !default // TODO : checker ce que ça fait
 
 // MISC
 

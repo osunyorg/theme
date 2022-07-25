@@ -4,4 +4,8 @@
   {{- $bodyclass = printf "page-%s" $bodyclass -}}
 {{- end -}}
 
+{{- if .Params.full_width -}}
+  {{- $bodyclass = printf "full-width %s" $bodyclass -}}
+{{- end -}}
+
 {{- return $bodyclass -}}
