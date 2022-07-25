@@ -4,11 +4,8 @@
     .video
         @include aspect-ratio(16, 9, 'iframe')
 
-    // @include media-breakpoint-up(md)
-    //     @include in-page-without-aside
-    //         .block-content
-    //             @include make-row()
-    //             > *
-    //                 @include make-col-ready()
-    //                 @include make-col(8)
-    //                 @include make-col-offset(2)
+    @include media-breakpoint-up(md)
+        @include in-page-without-aside
+            .block-content
+                margin-left: col(2)
+                width: col(8)
