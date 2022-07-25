@@ -1,118 +1,116 @@
-// .block-timeline--vertical
-//     .events
-//         padding-left: $grid-gutter-width
-//         position: relative
-//         &::before
-//             background: $primary
-//             bottom: 0
-//             content: ''
-//             left: 4px
-//             position: absolute
-//             top: 10px
-//             width: 1px
-//     .event
-//         &:not(:last-child)
-//             margin-bottom: $grid-gutter-width
-//         &::before
-//             background: $primary
-//             border-radius: 50%
-//             content: ''
-//             height: 9px
-//             left: 0
-//             margin-top: 10px
-//             position: absolute
-//             width: 9px
-//         p:last-child
-//             margin-bottom: 0
+.block-timeline--vertical
+    .events
+        padding-left: $grid-gutter
+        position: relative
+        &::before
+            background: $main-color
+            bottom: 0
+            content: ''
+            left: 4px
+            position: absolute
+            top: 10px
+            width: 1px
+    .event
+        &:not(:last-child)
+            margin-bottom: $grid-gutter
+        &::before
+            background: $main-color
+            border-radius: 50%
+            content: ''
+            height: 9px
+            left: 0
+            margin-top: 10px
+            position: absolute
+            width: 9px
+        p:last-child
+            margin-bottom: 0
 
 
-// .block-timeline--horizontal
-//     --min-title-height: 0px
-//     background: $block-timeline-horizontal-background
-//     color: $block-timeline-horizontal-color
-//     margin-bottom: 8rem
-//     overflow: hidden
-//     padding-bottom: $grid-gutter-width
-//     padding-top: $grid-gutter-width
+.block-timeline--horizontal
+    // --min-title-height: 0px
+    background: $block-timeline-horizontal-background
+    color: $block-timeline-horizontal-color
+    margin-bottom: 8rem
+    overflow: hidden
+    padding-bottom: $grid-gutter
+    padding-top: $grid-gutter
     
-//     @include media-breakpoint-down(md)
-//         margin-bottom: 3rem
-//     &:first-of-type
-//         margin-top: 4rem
-//         @include media-breakpoint-down(md)
-//             margin-top: 1rem
-//     &::before
-//         display: none
-//     .timeline
-//         &:hover
-//             cursor: grab
-//         &.is-grabbing
-//             cursor: grabbing
+    // @include media-breakpoint-down(md)
+    //     margin-bottom: 3rem
+    // &:first-of-type
+    //     margin-top: 4rem
+    //     @include media-breakpoint-down(md)
+    //         margin-top: 1rem
+    &::before
+        display: none
+    .timeline
+        &:hover
+            cursor: grab
+        &.is-grabbing
+            cursor: grabbing
         
-//     .timeline-arrows
-//         display: flex
-//         > button
-//             -webkit-appearance: button
-//             background: none
-//             border: none
-//             color: $block-timeline-horizontal-color
-//             cursor: pointer
-//             font-size: 1rem
-//             padding: calc(#{$grid-gutter-width}*.5)
-//             &:first-child
-//                 @extend .icon
-//                 @extend .icon-arrow-left
-//             &:last-child
-//                 @extend .icon
-//                 @extend .icon-arrow-right
-//             &:disabled
-//                 cursor: default
-//                 opacity: .3
-//     .events
-//         margin-left: calc(#{$grid-gutter-width}/-2)
-//         margin-right: calc(#{$grid-gutter-width}/-2)
-//         ol
-//             display: flex
-//             flex-flow: row nowrap
-//             list-style: none
-//             padding-left: 0
-//             transition: margin 0.4s ease-in-out
-//             width: 100%
-//     .event
-//         flex: none
-//         padding: 0 calc(#{$grid-gutter-width}/2)
-//         scroll-snap-align: start
-//         transition: 0.3s opacity
-//         width: 50%
-//         .title
-//             min-height: var(--min-title-height)
-//         .line
-//             background: $block-timeline-horizontal-color
-//             height: 1px
-//             margin-bottom: $paragraph-margin-bottom
-//             opacity: 1
-//             overflow: visible
-//             width: calc(100% + #{$grid-gutter-width})
-//             &::before
-//                 background: $block-timeline-horizontal-color
-//                 border-radius: 50%
-//                 content: ''
-//                 display: block
-//                 height: 9px
-//                 position: relative
-//                 top: -4px
-//                 width: 9px
-//         &.is-passed
-//             opacity: 0.15
+    .timeline-arrows
+        display: flex
+        > button
+            -webkit-appearance: button
+            background: none
+            border: none
+            color: $block-timeline-horizontal-color
+            cursor: pointer
+            font-size: 1rem
+            // padding: calc(#{$grid-gutter}*.5)
+            &:first-child
+                @include icon("arrow-left", before)
+            &:last-child
+                @include icon("arrow-right", before)
+            &:disabled
+                cursor: default
+                opacity: .3
+    .events
+        margin-left: calc(#{$grid-gutter}/-2)
+        margin-right: calc(#{$grid-gutter}/-2)
+        ol
+            display: flex
+            flex-flow: row nowrap
+            list-style: none
+            padding-left: 0
+            transition: margin 0.4s ease-in-out
+            width: 100%
+    .event
+        flex: none
+        padding: 0 calc(#{$grid-gutter}/2)
+        scroll-snap-align: start
+        transition: 0.3s opacity
+        width: 50%
+        .title
+            min-height: var(--min-title-height)
+        .line
+            background: $block-timeline-horizontal-color
+            height: 1px
+            // margin-bottom: $paragraph-margin-bottom
+            opacity: 1
+            overflow: visible
+            width: calc(100% + #{$grid-gutter})
+            &::before
+                background: $block-timeline-horizontal-color
+                border-radius: 50%
+                content: ''
+                display: block
+                height: 9px
+                position: relative
+                top: -4px
+                width: 9px
+        &.is-passed
+            opacity: 0.15
 
-//     @include media-breakpoint-down(md)
-//         .event
-//             width: 85%
-//             .line
-//                 margin-bottom: px2rem(90)
-//         .events
-//             position: relative
-//         .timeline-arrows
-//             left: 0
-//             position: absolute
-//             top: calc(#{px2rem(30)} + var(--min-title-height))
+    @include media-breakpoint-down(md)
+        .event
+            width: 85%
+            .line
+                // margin-bottom: px2rem(90)
+        .events
+            position: relative
+        .timeline-arrows
+            left: 0
+            position: absolute
+            // top: calc(#{px2rem(30)} + var(--min-title-height))
