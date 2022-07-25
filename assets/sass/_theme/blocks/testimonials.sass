@@ -1,11 +1,4 @@
 .block-testimonials
-
-    @include in-page-without-aside
-        .block-content
-            // @extend .row
-        .testimonials
-            // @extend .col-md-8
-
     blockquote
         @extend .blockquote
         padding-top: calc(#{$block-testimonials-font-size} * 2)
@@ -95,3 +88,15 @@
                 i
                     background-color: $block-testimonials-pagination-progress-background
                     width: 0
+
+    @include in-page-without-aside
+        .testimonials
+            padding-right: col(4)
+
+        // figure
+        //     display: flex
+        //     figcaption
+        //         order: -1
+        //         display: block
+        //         .avatar
+        //             margin-bottom: $spacing1
