@@ -1,22 +1,8 @@
 /* TODO refacto widget */
-
 .person
     position: relative
     display: flex
     flex-direction: column
-    & > a
-        display: flex
-        flex-direction: column
-
-    &,
-    & > a
-        @include media-breakpoint-down(md)
-            display: block
-        > div:first-of-type
-            @include media-breakpoint-down(md)
-                float: left
-                margin-bottom: $spacing1
-                max-width: calc(100% - 6rem)
 
     p
         margin-bottom: 0
@@ -26,27 +12,33 @@
         margin-bottom: $spacing1
         order: -1
         width: px2rem(76)
-        @include media-breakpoint-down(md)
-            float: right
 
     .name
-        // @extend .card-title
-        // margin-bottom: 0
-        // @include media-breakpoint-down(md)
-        //     font-size: px2rem(22)
         a
             @include stretched-link
             // @include link
 
-    // .name + p
-    //     font-size: px2rem(16)
+    .name ~ p
+        @extend .small
 
-    // .name ~ .contact
-        // @extend .small
+    @include media-breakpoint-down(md)
+        display: block
+        &::after
+            content: ''
+            clear: both
+            display: table
+        > div:first-of-type
+            float: left
+            margin-bottom: $spacing1
+            max-width: calc(100% - 6rem)
+        .avatar
+            float: right
+
 
 .persons
     @include grid(2, md)
     @include grid(3, lg)
+
 
 .avatar
     @include aspect-ratio(50, 50, 'img')
