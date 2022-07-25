@@ -90,3 +90,20 @@
         z-index: $zindex-stretched-link
         content: ""
 
+@mixin aspect-ratio($width, $height, $tag: 'iframe')
+    #{$tag}
+        aspect-ratio: #{$width}/#{$height}
+        display: block
+        width: 100%
+    @supports not (aspect-ratio: 1)
+        position: relative
+        &::before
+            content: ''
+            padding-top: ($height / $width) * 100%
+            width: 100%
+        #{$tag}
+            bottom: 0
+            left: 0
+            position: absolute
+            right: 0
+            top: 0

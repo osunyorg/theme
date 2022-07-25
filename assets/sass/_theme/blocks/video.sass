@@ -1,37 +1,14 @@
-// .block-video
-//     iframe
-//         aspect-ratio: 16/9
-//         display: block
-//         width: 100%
+/* TODO : https://developer.mozilla.org/fr/docs/Web/HTML/Element/details */
 
-//     @supports not (aspect-ratio: 16/9)
-//         .video
-//             position: relative
-//             &::before
-//                 content: ''
-//                 display: block
-//                 padding-top: 56.25%
-//             iframe
-//                 bottom: 0
-//                 height: 100%
-//                 left: 0
-//                 position: absolute
-//                 top: 0
-//                 width: 100%
+.block-video
+    .video
+        @include aspect-ratio(16, 9, 'iframe')
 
-//     @include media-breakpoint-down(md)
-//         .container
-//             padding-left: 0
-//             padding-right: 0
-//         .transcription
-//             padding-left: $grid-gutter-width
-//             padding-right: $grid-gutter-width
-
-//     @include media-breakpoint-up(md)
-//         @include in-page-without-aside
-//             .block-content
-//                 @include make-row()
-//                 > *
-//                     @include make-col-ready()
-//                     @include make-col(8)
-//                     @include make-col-offset(2)
+    // @include media-breakpoint-up(md)
+    //     @include in-page-without-aside
+    //         .block-content
+    //             @include make-row()
+    //             > *
+    //                 @include make-col-ready()
+    //                 @include make-col(8)
+    //                 @include make-col-offset(2)
