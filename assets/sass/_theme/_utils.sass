@@ -77,9 +77,9 @@
     @if $breakpoint
         @include media-breakpoint-up($breakpoint)
             display: grid
-            grid-gap: 0 $grid-gutter
+            grid-gap: calc(#{$grid-gutter} / 2) $grid-gutter
             grid-template-columns: repeat($cols, 1fr)
-    @else 
+    @else
         display: grid
         grid-gap: calc(#{$grid-gutter} / 2) $grid-gutter
         grid-template-columns: repeat($cols, 1fr)
