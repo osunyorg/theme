@@ -37,9 +37,9 @@
         &::#{$pseudo}
             transform: translateX(#{px2rem($distance)})
 
-@mixin sticky($top-md: calc(#{$header-height-md} + #{$spacing1}), $top-sm: calc(#{$header-height} + #{$spacing1}))
+@mixin sticky($top-md: $header-height-md, $top-sm: $header-height)
     position: sticky
-    top: $spacing1
+    top: 0
     @if $header-sticky-enabled
         transition: top $header-sticky-transition
         html:not(.is-scrolling-down) &
@@ -66,9 +66,12 @@
     margin-left: auto
     margin-right: auto
     max-width: $grid-max-width
-    padding-left: $grid-gutter
-    padding-right: $grid-gutter
+    padding-left: $grid-gutter-sm
+    padding-right: $grid-gutter-sm
     width: 100%
+    @include media-breakpoint-up(md)
+        padding-left: $grid-gutter
+        padding-right: $grid-gutter
 
 @mixin grid($cols: 12, $breakpoint: md)
     @include media-breakpoint-up($breakpoint)

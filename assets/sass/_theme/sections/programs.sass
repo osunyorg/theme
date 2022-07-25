@@ -1,0 +1,78 @@
+// .programs__section
+//     .page-with-blocks
+//         .hero
+//             margin-bottom: 3rem
+
+//     main > article
+//         position: relative
+//         > aside
+//             align-self: flex-start
+//             margin-bottom: $spacing5
+//             pointer-events: none
+//             .toc + p
+//                 margin-top: $grid-gutter
+//             p:last-of-type
+//                 margin-bottom: 0
+//             @include media-breakpoint-down(md)
+//                 position: relative
+//             @include media-breakpoint-up(md)
+//                 height: 100%
+//                 margin-bottom: 0
+//                 position: absolute
+//                 width: 100%
+//                 ~ *
+//                     .container
+//                         > *
+//                             &:not(.call_to_action)
+//                                 padding-left: col(4)
+//                             &.call_to_action
+//                                 margin-left: col(4)
+//                             &:is(picture)
+//                                 display: block
+//             > div
+//                 // @extend .container
+//                 // @extend .sticky
+//                 padding: 0
+//                 > *
+//                     // @extend .col-md-3
+//                     padding-left: #{$grid-gutter / 2}
+//                     padding-right: #{$grid-gutter / 2}
+//                     pointer-events: auto
+//         [itemprop="articleBody"]
+//             margin-bottom: $spacing5
+//     article
+//         .persons
+//             margin-bottom: 3rem
+//             margin-top: -2rem
+//             @include grid(2, lg)
+
+.programs__section
+    aside
+        @include container
+        @include sticky($header-height)
+        overflow: auto
+        background: darken($main-background-color, 3)
+        z-index: 50
+    .toc
+        max-width: 100%
+        ol
+            display: flex
+            flex-direction: row
+            flex-wrap: nowrap
+            white-space: nowrap
+            margin: 0 #{-$spacing1}
+            li
+                padding: $spacing1/2 $spacing1
+                margin-bottom: 0
+    [itemprop="articleBody"]
+        section
+            border-top: 1px solid $main-color
+            @include grid(12)
+            @include media-breakpoint-up(md)
+                position: relative
+                > *
+                    grid-column: 7/13
+                h2
+                    @include sticky(calc($header-height + $spacing4))
+                    align-self: start
+                    grid-column: 1/6
