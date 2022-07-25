@@ -91,6 +91,24 @@
         top: 0
         z-index: $zindex-stretched-link
 
+@mixin aspect-ratio($width, $height, $selector: 'iframe')
+    #{$selector}
+        aspect-ratio: #{$width}/#{$height}
+        display: block
+        width: 100%
+    @supports not (aspect-ratio: 1)
+        position: relative
+        &::before
+            content: ''
+            padding-top: ($height / $width) * 100%
+            width: 100%
+        #{$selector}
+            bottom: 0
+            left: 0
+            position: absolute
+            right: 0
+            top: 0
+
 @mixin button-reset
     appearance: none
     background: transparent
