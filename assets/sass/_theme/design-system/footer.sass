@@ -1,8 +1,8 @@
 footer[role="contentinfo"]
     background: $footer-background-color
     color: $footer-color
-    padding-bottom: $spacing1
-    padding-top: $spacing1
+    padding-bottom: $spacing3
+    padding-top: $spacing3
     address
         font-size: px2rem(14)
         line-height: px2rem(26)
@@ -13,11 +13,8 @@ footer[role="contentinfo"]
             max-width: 100%
             width: auto
 
-    .credit
-        padding-bottom: $spacing1
-        padding-top: $spacing1
-
     .content
+        @include grid(3, md)
         margin-bottom: $spacing1
         @include media-breakpoint-up(md)
             margin-bottom: $spacing2
@@ -30,33 +27,44 @@ footer[role="contentinfo"]
         @include media-breakpoint-up(md)
             align-items: center
             display: flex
+            [class^="nav-"]
+                margin-top: 0
             .credit + [class^="nav-"],
             [class^="nav-"] + [class^="nav-"]
                 margin-left: auto
                 margin-right: -$spacing1
+
+    .credit
+        a
+            padding: 0
+
+    // TODO : add padding on every link in typography ?
+    [class^="nav-"]
+        margin-left: calc(#{$spacing1} / -2)
+        a
+            padding: calc(#{$spacing1} / 2)
+    // END TODO
+
 
     @include media-breakpoint-up(md)
         [class^="nav-"] + .credit,
         small + .credit
             &::before
                 content: '—'
-                margin-right: calc(#{$spacing1} / 2),
+                margin: 0 calc(#{$spacing1} / 2) 0 0
 
-        [class^="nav-"] + .credit
-            margin-left: calc(#{$spacing1} / -2)
+        [class^="nav-"]
 
-        small + .credit
-            margin-left: calc(#{$spacing1} / 2)
+        // small + .credit
+        //     margin-left: calc(#{$spacing1} / 2)
 
 
+    ul
+        @include list-reset
 
     .nav-level-1
         align-items: flex-start
         flex-direction: column
-        margin-left: -$spacing1
-        ul
-            @include list-reset
-            margin-left: 0
         a,
         span
             color: $footer-color
