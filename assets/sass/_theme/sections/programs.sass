@@ -64,15 +64,20 @@
             li
                 padding: $spacing1/2 $spacing1
                 margin-bottom: 0
+    .blocks
+        .block-content
+            padding-left: col(5)
     [itemprop="articleBody"]
         section
+            padding-top: $spacing1
+            padding-bottom: $spacing4
             border-top: 1px solid $main-color
             @include grid(12, md)
             @include media-breakpoint-up(md)
                 position: relative
                 > *
-                    grid-column: 7/13
+                    grid-column: 6/13
                 h2
                     @include sticky(calc($header-height + $spacing4))
                     align-self: start
-                    grid-column: 1/6
+                    grid-column: 1/5
