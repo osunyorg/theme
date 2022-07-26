@@ -78,6 +78,9 @@
                 > *
                     grid-column: 6/13
                 h2
-                    @include sticky(calc($header-height + $spacing4))
+                    $sticky-top-offset: 90px
+                    @include sticky(#{$header-height + $sticky-top-offset})
+                    top: $sticky-top-offset
                     align-self: start
                     grid-column: 1/5
+                    margin-bottom: 0

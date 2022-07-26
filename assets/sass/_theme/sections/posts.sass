@@ -42,3 +42,25 @@
         &:last-child
             &::after
                 content: none
+
+.table-infos
+    border-top: 1px solid $main-border-color
+    font-size: px2rem(14)
+    margin-bottom: 0
+    ul
+        @include list-reset
+    caption
+        @include visually-hidden
+        position: relative !important // Fix safari iOS border issue
+    th
+        // color: $gray-600
+        font-weight: 400
+        padding-left: 0
+        white-space: nowrap
+    tr
+        border-color: $main-border-color
+    td:last-of-type
+        padding-right: 0
+        text-align: right
+    .share
+        justify-content: flex-end

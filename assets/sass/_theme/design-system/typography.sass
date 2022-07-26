@@ -60,7 +60,7 @@ a,
 .link
     @include link
     overflow-wrap: break-word
-    &[target="_blank"]
+    &[target="_blank"]:not(.icon)
         @include icon("link-blank", "after")
         &::after
             font-size: px2rem(10)
@@ -97,10 +97,7 @@ a,
     *:focus-visible
         transition: outline-offset .3s ease
 
-
-
 // ICONS
-
 @font-face
     font-display: block
     font-family: 'Icon'
@@ -108,9 +105,9 @@ a,
     font-weight: 400
     src: url('../fonts/icons/icomoon.woff') format("woff")
 
-@each $name in $icons
+@each $name, $glyph in $icons
     .icon-#{$name}
-        @include icon($name)
+        @include icon($name, before)
     .btn-#{$name}
         @include icon($name)
         &::before
