@@ -21,15 +21,14 @@ events.forEach((event) => {
             });
             
             dropdownBtns.forEach((dropdownBtn) => {
-                dropdownBtn.addEventListener("click", function(e){
-                    this.href = "javascript:void(0)"
-                    // e.stopPropagation() 
+                dropdownBtn.addEventListener("click", (e) => {
+                    e.preventDefault() 
             
-                    if(this.getAttribute('aria-expanded') == "true") {
-                        this.setAttribute('aria-expanded', 'false')
-                    } 
+                    if(dropdownBtn.getAttribute('aria-expanded') == "true") {
+                        dropdownBtn.setAttribute('aria-expanded', 'false')
+                    }
                     else {
-                        this.setAttribute('aria-expanded', 'true')
+                        dropdownBtn.setAttribute('aria-expanded', 'true')
                     }
                 })
             })

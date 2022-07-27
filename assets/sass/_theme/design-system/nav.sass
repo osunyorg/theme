@@ -22,9 +22,10 @@
         font-size: px2rem(18)
         line-height: px2rem(26)
         color: $header-color
-    a:hover,
-    a:focus
-        color: $header-hover-color
+        @include media-breakpoint-up(md)
+            a:hover,
+            a:focus
+                color: $header-hover-color
 
     .dropdown-menu
         display: none
@@ -92,10 +93,6 @@
                 
                 a[aria-expanded=true]
                     @include icon("caret-top", after)
-                    &:hover,
-                    &:focus,
-                    &:active
-                        color: $header-color
 
                     + .dropdown-menu
                         display: block
