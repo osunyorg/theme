@@ -1,13 +1,15 @@
+{{- if or (partial "GetTextFromHTML" .Params.content) (partial "GetTextFromHTML" .Params.pedagogy) (partial "GetTextFromHTML" .Params.evaluation) (.Params.teachers) -}}
 <section id="pedagogy">
   <div class="container">
     <div class="content">
+      <h2>{{ i18n "programs.toc.pedagogy" }}</h2>
       <div>
-        <h2>{{ i18n "programs.toc.pedagogy" }}</h2>
-      </div>
-      <div>
-        <div class="subpart">
-          {{- partial "PrepareHTML" .Params.content -}}
-        </div>
+        {{- if partial "GetTextFromHTML" .Params.content -}}
+          <div class="subpart">
+            <h3>{{ i18n "programs._content" }}</h3>
+            {{- partial "PrepareHTML" .Params.content -}}
+          </div>
+        {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pedagogy -}}
           <div class="subpart">
@@ -39,3 +41,4 @@
     </div>
   </div>
 </section>
+{{- end -}}
