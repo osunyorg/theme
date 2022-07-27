@@ -99,23 +99,26 @@
         top: 0
         z-index: $zindex-stretched-link
 
-@mixin aspect-ratio($width, $height, $selector: 'iframe')
-    #{$selector}
-        aspect-ratio: #{$width}/#{$height}
-        display: block
-        width: 100%
-    @supports not (aspect-ratio: 1)
-        position: relative
-        &::before
-            content: ''
-            padding-top: ($height / $width) * 100%
-            width: 100%
+@mixin aspect-ratio($width, $height, $selector: null)
+    @if $selector
         #{$selector}
-            bottom: 0
-            left: 0
-            position: absolute
-            right: 0
-            top: 0
+            aspect-ratio: #{$width}/#{$height}
+            display: block
+            width: 100%
+        @supports not (aspect-ratio: 1)
+            position: relative
+            &::before
+                content: ''
+                padding-top: ($height / $width) * 100%
+                width: 100%
+            #{$selector}
+                bottom: 0
+                left: 0
+                position: absolute
+                right: 0
+                top: 0
+    @else 
+        aspect-ratio: #{$width}/#{$height}
 
 @mixin visually-hidden
     clip: rect(0,0,0,0) !important

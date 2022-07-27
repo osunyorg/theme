@@ -1,28 +1,20 @@
-{{- $params := .context.Params -}}
-{{- $contactsExist := or $params.contacts $params.roles -}}
 {{/* nav-link required for toggle active class */}}
 <nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
   <ol>
-    {{- range .chapters -}}
-      {{- $content := index $params . -}}
-      {{- $chapterExists := $content -}}
-      {{ if eq "contacts" . }}
-        {{- $chapterExists = $contactsExist -}}
-      {{ end }}
-      {{- if $chapterExists }}
-      <li>
-        <a class="nav-link" href="#page-{{ . }}">
-          {{- i18n (printf "programs._%s" .) -}}
-        </a>
-      </li>
-      {{- end -}}
-    {{- end -}}
-    {{- if .category.Pages }}
-      <li>
-        <a class="nav-link" href="#page-posts">
-          {{- i18n "programs.posts" -}}
-        </a>
-      </li>
-    {{ end -}}
+    <li>
+      <a class="nav-link" href="#essential">{{ i18n "programs.toc.essential" }}</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#presentation">{{ i18n "programs.toc.presentation" }}</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#pedagogy">{{ i18n "programs.toc.pedagogy" }}</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#results">{{ i18n "programs.toc.results" }}</a>
+    </li>
+    <li>
+      <a class="nav-link" href="#admission">{{ i18n "programs.toc.admission" }}</a>
+    </li>
   </ol>
 </nav>

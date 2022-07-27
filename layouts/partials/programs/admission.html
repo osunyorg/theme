@@ -1,9 +1,8 @@
+{{- if or (partial "GetTextFromHTML" .Params.prerequisites) (partial "GetTextFromHTML" .Params.pricing) (partial "GetTextFromHTML" .Params.registration) (partial "GetTextFromHTML" .Params.accessibility) (partial "GetTextFromHTML" .Params.other) -}}
 <section id="admission">
   <div class="container">
     <div class="content">
-      <div>
-        <h2>{{ i18n "programs.toc.admission" }}</h2>
-      </div>
+      <h2>{{ i18n "programs.toc.admission" }}</h2>
       <div>
         {{- if partial "GetTextFromHTML" .Params.prerequisites -}}
           <div class="subpart">
@@ -19,17 +18,20 @@
           </div>
         {{- end -}}
 
-        {{- if partial "GetTextFromHTML" .Params.accessibility -}}
-          <div class="subpart">
-            <h3>{{ i18n "programs._accessibility" }}</h3>
-            {{- partial "PrepareHTML" .Params.accessibility -}}
-          </div>
-        {{- end -}}
-
         {{- if partial "GetTextFromHTML" .Params.registration -}}
           <div class="subpart">
             <h3>{{ i18n "programs._registration" }}</h3>
             {{- partial "PrepareHTML" .Params.registration -}}
+            {{- if partial "GetTextFromHTML" .Params.registration_url -}}
+              <p><a href="{{- partial "PrepareHTML" .Params.registration_url -}}" class="registration">{{ i18n "programs.apply" }}</a></p>
+            {{- end -}}
+          </div>
+        {{- end -}}
+
+        {{- if partial "GetTextFromHTML" .Params.accessibility -}}
+          <div class="subpart">
+            <h3>{{ i18n "programs._accessibility" }}</h3>
+            {{- partial "PrepareHTML" .Params.accessibility -}}
           </div>
         {{- end -}}
 
@@ -40,13 +42,48 @@
           </div>
         {{- end -}}
 
-        {{- if partial "GetTextFromHTML" .Params.contacts -}}
+        {{- if .Params.roles -}}
           <div class="subpart">
-            <h3>{{ i18n "programs._contacts" }}</h3>
-            {{- partial "PrepareHTML" .Params.contacts -}}
+            <h3>{{ i18n "programs._roles" }}</h3>
+            {{- with .Params.roles -}}
+              {{- range . }}
+                {{ $title := .title }}
+                {{- range .persons -}}
+                  {{ $slug := . }}
+                  {{ with site.GetPage "persons" }}
+                    {{ with .GetPage $slug }}
+                      <p>
+                        <b>{{ $title }}</b>
+                        <br>
+                        <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
+                        {{ if .Params.phone }}
+                          <br>
+                          {{ safeHTML .Params.phone }}
+                        {{ end }}
+                        {{ if .Params.email }}
+                          <br>
+                          <a href="mailto:{{ .Params.email }}" rel="noreferrer" target="_blank">{{ .Params.email }}</a>
+                        {{ end }}
+                      </p>
+                    {{ end }}
+                  {{ end }}
+                {{ end }}
+              {{ end -}}
+            {{- end -}}
           </div>
         {{- end -}}
+
+        {{- if  partial "GetTextFromHTML" .Params.contacts -}}
+          <div class="subpart">
+            <h3>{{ i18n "programs._contacts" }}</h3>
+            {{- if or (partial "GetTextFromHTML" .Params.contacts) -}}
+              {{- partial "PrepareHTML" .Params.contacts -}}
+            {{- end -}}
+          </div>
+        {{- end -}}
+
       </div>
     </div>
   </div>
 </section>
+{{- end -}}
