@@ -11,7 +11,6 @@
         @include media-breakpoint-down(md)
             display: block
         > div:first-of-type
-            // @extend .card-body
             padding-left: 0
             padding-right: 0
             @include media-breakpoint-down(md)
@@ -30,29 +29,31 @@
             float: right
 
     .name
-        // @extend .card-title
-        margin-bottom: 0
         @include media-breakpoint-down(md)
             font-size: px2rem(22)
         a
             @include stretched-link
             @include link
 
-    .name + p
-        font-size: px2rem(16)
-
-    .name ~ .contact
-        // @extend .small
+        + p, ~ .contact 
+            @extend .small
 
 .persons
+    @include grid(1)
     @include grid(2, md)
     @include grid(3, lg)
 
 .avatar
-    background-color: #f8f9fa
+    background-color: $persons-avatar-background-color
     border-radius: 50%
     overflow: hidden
+    position: relative
+    &::after
+        display: block
+        content: ""
+        padding-top: 100%
     img
         object-fit: cover
         display: block
+        position: absolute
 
