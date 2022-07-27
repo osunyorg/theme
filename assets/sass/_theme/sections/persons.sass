@@ -43,8 +43,22 @@
 
 .avatar
     @include aspect-ratio(50, 50, 'img')
-    background-color: lightgray
+    background-color: $persons-avatar-background-color
     border-radius: 50%
     overflow: hidden
+    position: relative
+    width: 100%
+    &::before
+        content: ""
+        display: block
+        padding-top: 100%
+
+    picture,
+    img
+        @include inset(0)
+        height: 100%
+        width: 100%
+        position: absolute
+
     img
         object-fit: cover

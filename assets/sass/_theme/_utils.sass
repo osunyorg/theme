@@ -14,7 +14,7 @@
 
 @mixin in-page-without-aside
     main > .blocks &,
-    main > article > .blocks &,
+    // main > .blocks &,
     body.full-width &,
         @content
 
@@ -77,11 +77,11 @@
     @if $breakpoint
         @include media-breakpoint-up($breakpoint)
             display: grid
-            grid-gap: calc(#{$grid-gutter} / 2) $grid-gutter
+            grid-gap: $grid-gutter/2 $grid-gutter
             grid-template-columns: repeat($cols, 1fr)
     @else
         display: grid
-        grid-gap: calc(#{$grid-gutter} / 2) $grid-gutter
+        grid-gap: $grid-gutter/2 $grid-gutter
         grid-template-columns: repeat($cols, 1fr)
 
 @function col($nb, $base: 12)
@@ -99,23 +99,37 @@
         top: 0
         z-index: $zindex-stretched-link
 
-@mixin aspect-ratio($width, $height, $selector: 'iframe')
-    #{$selector}
-        aspect-ratio: #{$width}/#{$height}
-        display: block
-        width: 100%
-    @supports not (aspect-ratio: 1)
-        position: relative
-        &::before
-            content: ''
-            padding-top: ($height / $width) * 100%
-            width: 100%
+@mixin aspect-ratio($width, $height, $selector: null)
+    @if $selector
         #{$selector}
-            bottom: 0
-            left: 0
-            position: absolute
-            right: 0
-            top: 0
+            aspect-ratio: #{$width}/#{$height}
+            display: block
+            width: 100%
+        @supports not (aspect-ratio: 1)
+            position: relative
+            &::before
+                content: ''
+                padding-top: ($height / $width) * 100%
+                width: 100%
+            #{$selector}
+                bottom: 0
+                left: 0
+                position: absolute
+                right: 0
+                top: 0
+    @else
+        aspect-ratio: #{$width}/#{$height}
+
+@mixin visually-hidden
+    clip: rect(0,0,0,0) !important
+    border: 0 !important
+    height: 1px !important
+    margin: -1px !important
+    overflow: hidden !important
+    padding: 0 !important
+    position: absolute !important
+    white-space: nowrap !important
+    width: 1px !important
 
 @mixin button-reset
     appearance: none
@@ -133,3 +147,12 @@
     list-style: none
     padding-left: 0
     margin-bottom: 0
+
+@mixin inset($top: 0, $right: $top, $bottom: $top, $left: $top)
+    inset: $top $right $bottom $left
+    // polyfill for inset
+    @supports not (inset: $top)
+        bottom: $bottom
+        left: $left
+        right: $right
+        top: $top

@@ -5,26 +5,32 @@
 h1, .h1
     @extend %heading
     font-size: $h1-size
+    font-weight: $h1-weight
 
-h2, .h2
+h2, .h2, .lead
     @extend %heading
     font-size: $h2-size
+    font-weight: $h2-weight
 
 h3, .h3
     @extend %heading
     font-size: $h3-size
+    font-weight: $h3-weight
 
 h4, .h4
     @extend %heading
     font-size: $h4-size
+    font-weight: $h4-weight
 
 h5, .h5
     @extend %heading
     font-size: $h5-size
+    font-weight: $h5-weight
 
 h6, .h6
     @extend %heading
     font-size: $h6-size
+    font-weight: $h6-weight
 
 h1, .h1,
 h2, .h2
@@ -42,6 +48,7 @@ body
     line-height: $line-height-base
 
 p, .p
+    margin-top: 0
     font-size: $body-font-size
 
 small, .small
@@ -60,7 +67,7 @@ a,
 .link
     @include link
     overflow-wrap: break-word
-    &[target="_blank"]
+    &[target="_blank"]:not(.icon)
         @include icon("link-blank", "after")
         &::after
             font-size: px2rem(10)
@@ -97,10 +104,7 @@ a,
     *:focus-visible
         transition: outline-offset .3s ease
 
-
-
 // ICONS
-
 @font-face
     font-display: block
     font-family: 'Icon'
@@ -108,9 +112,9 @@ a,
     font-weight: 400
     src: url('../fonts/icons/icomoon.woff') format("woff")
 
-@each $name in $icons
+@each $name, $glyph in $icons
     .icon-#{$name}
-        @include icon($name)
+        @include icon($name, before)
     .btn-#{$name}
         @include icon($name)
         &::before

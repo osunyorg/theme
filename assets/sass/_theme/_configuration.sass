@@ -4,6 +4,8 @@
 $main-color: black !default // Text color
 $main-background-color: white !default // Background color
 $main-border-color: lightgray !default // Border color
+$main-light-color: #f8f9fa !default
+// TODO : faut-il mettre les largeur de border dans le config ? overkill ?
 
 $body-color: $main-color !default
 $body-background-color: $main-background-color !default
@@ -14,8 +16,8 @@ $link-color: $main-color !default
 
 // Fonts family
 // TODO: choisir typo system par défaut
-$body-font-family: "Georgia", serif !default
-$heading-font-family: "Helvetica", "Arial", sans-serif !default
+$body-font-family: "Georgia", "Times", serif !default
+$heading-font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif !default
 
 // $font-size-base: 1rem
 $line-height-base: 1.4 !default
@@ -49,6 +51,7 @@ $btn-padding-y: px2rem(6) !default
 $breadcrumb-color: invert($main-color) !default
 
 // Spacing
+$spacing0: 12px !default
 $spacing1: 24px !default
 $spacing2: 48px !default
 $spacing3: 64px !default
@@ -56,13 +59,14 @@ $spacing4: 128px !default
 $spacing5: 256px !default
 
 // Grid
-$grid-gutter: 60px
+$grid-gutter: $spacing3 !default
 $grid-max-width: 1980px
-$grid-gutter-sm: 20px
+$grid-gutter-sm: $spacing1 !default
 
 // Z-index
 $zindex-nav-accessibility: 1010 !default
 $zindex-stretched-link: 2 !default
+$zindex-toc: 50 !default
 
 // Header
 $header-color: $main-color !default
@@ -128,7 +132,7 @@ $definition-border-color-hovered: darken($definition-border-color, 100) !default
 $block-pages-card-background: lighten($main-background-color, 1) !default
 $block-pages-card-page-background: white !default
 $block-pages-card-page-color: $main-color !default
-$block-pages-card-page-background-hover: lighten($main-background-color, 2) !default
+$block-pages-card-page-background-hover: darken($main-background-color, 100) !default
 $block-pages-card-page-color-hover: white !default
 
 // Block timeline
@@ -145,6 +149,8 @@ $block-testimonials-line-height: px2rem(28.8) !default
 $block-testimonials-pagination-background: $main-border-color !default
 $block-testimonials-pagination-progress-background: $main-color !default
 
+// Block key_figures
+$block-key_figures-number-font-size: px2rem(60)
 
 // Sections
 $post-media-background: darken($main-background-color, 2) !default
@@ -155,6 +161,12 @@ $post-time-color: lighten($main-color, 2) !default
 // Table of content
 $toc-color: $main-color !default
 $toc-active-color: $main-color !default // TODO : checker ce que ça fait
+
+// Person
+$persons-avatar-background-color: $main-light-color !default
+
+// Program
+$program-zindex-toc: $zindex-toc !default
 
 // MISC
 
