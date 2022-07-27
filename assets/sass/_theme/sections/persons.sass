@@ -11,8 +11,7 @@
         @include media-breakpoint-down(md)
             display: block
         > div:first-of-type
-            padding-left: 0
-            padding-right: 0
+            padding: $spacing0 0
             @include media-breakpoint-down(md)
                 float: left
                 max-width: calc(100% - 6rem)
@@ -48,12 +47,18 @@
     border-radius: 50%
     overflow: hidden
     position: relative
-    &::after
-        display: block
+    width: 100%
+    &::before
         content: ""
-        padding-top: 100%
-    img
-        object-fit: cover
         display: block
+        padding-top: 100%
+
+    picture,
+    img
+        @include inset(0)
+        height: 100%
+        width: 100%
         position: absolute
 
+    img
+        object-fit: cover
