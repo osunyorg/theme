@@ -1,6 +1,7 @@
 const events = ['load', 'resize'];
 let navBtn = document.querySelector('nav[role="navigation"] button'),
     menuHeader = document.querySelector('.menu'),
+    bodyOverlay = document.querySelector('body'),
     dropdownBtns = document.querySelectorAll('.has-children a[role="button"]'),
     breckpointMd = 768,
     classMobile = 'show';
@@ -18,6 +19,7 @@ events.forEach((event) => {
                     navBtn.setAttribute('aria-expanded', 'true')
                 }
                 menuHeader.classList.toggle(classMobile)
+                bodyOverlay.classList.toggle('has-overlay')
             });
             
             dropdownBtns.forEach((dropdownBtn) => {

@@ -12,6 +12,14 @@ body
     &:not(.is-loaded)
         *
             transition-duration: 0s !important
+    &.has-overlay
+        &::after
+            animation-name: showIn
+            background-color: rgba(0,0,0,.3)
+            content: ""
+            display: block
+            inset: 82px 0 0 0
+            position: fixed
 
 figure
     margin: 0
