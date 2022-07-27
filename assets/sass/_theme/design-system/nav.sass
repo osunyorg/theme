@@ -1,4 +1,12 @@
 .menu
+    @include media-breakpoint-down(md)
+        -webkit-flex-basis: 100vw
+        display: none
+        flex-basis: 100vw
+        margin-top: 1.875rem
+        max-height: 70vh
+        overflow: auto
+
     a,
     a:hover,
     a:focus,
@@ -23,11 +31,14 @@
         background: $header-background-color
         padding-bottom: $spacing1
         padding-top: $spacing1
-        inset: 100% 0 auto 0
-        position: absolute
+        @include media-breakpoint-up(md)
+            inset: 100% 0 auto 0
+            position: absolute
 
     .nav-level-1
         display: flex
+        @include media-breakpoint-down(md)
+            @include grid(1)
         > li
             > a
                 padding: $spacing1
@@ -39,9 +50,10 @@
                 display: block
 
     .nav-level-2
+        @include grid(1)
         @include media-breakpoint-up(md)
             @include container
-            @include grid(4, md)
+            @include grid(4, md)            
         > li
             &,
             & > a,
@@ -56,6 +68,37 @@
         span
             font-size: px2rem(14)
 
+    &.show
+        flex-grow: 1
+        display: block
+        a
+            text-decoration: none
+        .nav-level-1
+            > li:not(:last-child) 
+                border-bottom: 1px solid #adb5bd
+            li.has-children
+                a[role="button"]
+                    align-items: center
+                    display: flex
+                    justify-content: space-between
+                    padding: 1rem 0
+                    @include icon("caret-bottom", after)
+                    &::after
+                        font-size: .375rem
+                        line-height: 1
+                .dropdown-menu
+                    display: none
+                    padding-top: 0
+                
+                a[aria-expanded=true]
+                    @include icon("caret-top", after)
+                    &:hover,
+                    &:focus,
+                    &:active
+                        color: $header-color
+
+                    + .dropdown-menu
+                        display: block
 
 .share
     display: flex
