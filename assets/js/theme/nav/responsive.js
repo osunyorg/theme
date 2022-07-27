@@ -1,6 +1,5 @@
 const events = ['load', 'resize'];
-let header = document.querySelector('header[role="banner"]'),
-    navBtn = document.querySelector('nav[role="navigation"] button'),
+let navBtn = document.querySelector('nav[role="navigation"] button'),
     menuHeader = document.querySelector('.menu'),
     dropdownBtns = document.querySelectorAll('.has-children a[role="button"]'),
     breckpointMd = 768,
@@ -22,8 +21,9 @@ events.forEach((event) => {
             });
             
             dropdownBtns.forEach((dropdownBtn) => {
-                dropdownBtn.addEventListener("click", function(){
+                dropdownBtn.addEventListener("click", function(e){
                     this.href = "javascript:void(0)"
+                    // e.stopPropagation() 
             
                     if(this.getAttribute('aria-expanded') == "true") {
                         this.setAttribute('aria-expanded', 'false')
