@@ -29,8 +29,13 @@
 
       <div class="content">
         <div>
-          {{ if (partial "GetTextFromHTML" .Content) }}
+          {{ if (partial "GetTextFromHTML" .Params.description_short) }}
             <div class="lead" itemprop="description">
+              {{ partial "PrepareHTML" .Params.description_short }}
+            </div>
+          {{ end }}
+          {{ if (partial "GetTextFromHTML" .Content) }}
+            <div>
               {{ partial "PrepareHTML" .Content }}
             </div>
           {{ end }}

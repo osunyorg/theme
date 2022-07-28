@@ -1,9 +1,8 @@
+{{- if or (partial "GetTextFromHTML" .Params.opportunities) (partial "GetTextFromHTML" .Params.results) -}}
 <section id="results">
   <div class="container">
     <div class="content">
-      <div>
-        <h2>{{ i18n "programs.toc.results" }}</h2>
-      </div>
+      <h2>{{ i18n "programs.toc.results" }}</h2>
       <div>
         {{- if partial "GetTextFromHTML" .Params.opportunities -}}
           <div class="subpart">
@@ -22,3 +21,4 @@
     </div>
   </div>
 </section>
+{{- end -}}

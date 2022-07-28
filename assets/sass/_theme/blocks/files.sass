@@ -1,6 +1,7 @@
 .block-files
     ul
         @include list-reset
+        @include grid(1)
         @include in-page-with-aside
             @include grid(2, md)
         @include in-page-without-aside
@@ -17,11 +18,11 @@
             flex-shrink: 0
             height: px2rem(60)
             justify-content: center
-            // margin-right: px2rem(15)
+            margin-right: $spacing0
             transition: background 0.3s ease, border 0.3s ease
             width: px2rem(60)
         &::after
-            content: none
+            content: none !important // Remove default icon _blank
         &:hover
             &::before
                 background-color: $main-border-color

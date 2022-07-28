@@ -11,14 +11,12 @@
     {{ end }}
 
     <div class="content-blocks">
-      {{- if $need_aside }}
       {{ partial "pages/aside.html"
           (dict
               "category" $category
               "context" .
           )
       }}
-      {{ end -}}
       {{ partial "blocks/list.html" .Params.blocks }}
     </div>
   {{ else }}
