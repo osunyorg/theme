@@ -1,17 +1,11 @@
 .post
-    position: relative
-    display: flex
-    flex-direction: column
+    @include widget($post-media-background)
     .media
-        background: $post-media-background
-        order: -1
-        &::before
-            content: ""
-            display: block
-            padding-top: $post-media-aspect-ratio
-
-    a
-        @include stretched-link
+        // background: $post-media-background
+        // &::before
+        //     content: ""
+        //     display: block
+        //     padding-top: $post-media-aspect-ratio
 
     .author,
     .post-categories
