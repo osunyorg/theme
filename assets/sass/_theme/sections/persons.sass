@@ -54,3 +54,18 @@
 
     img
         object-fit: cover
+
+.taxonomies
+    @include list-reset
+    margin-bottom: $spacing3
+    @include media-breakpoint-down(md)
+        flex-direction: column
+    @include media-breakpoint-up(md)
+        text-align: right
+    li
+        @include media-breakpoint-up(md)
+            display: inline-block
+            &:not(:last-child)
+                margin-right: $spacing1
+    a
+        @extend .link-more
