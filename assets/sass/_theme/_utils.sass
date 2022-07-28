@@ -120,6 +120,25 @@
             right: 0
             top: 0
 
+@mixin widget($background: null)
+    position: relative
+    display: flex
+    flex-direction: column
+    .media
+        @include aspect-ratio(2, 1, 'img', $background)
+        margin-bottom: $spacing1
+        order: -1
+        overflow: hidden
+    .title
+        font-size: $widget-title-size
+        margin-bottom: px2rem(5)
+    a
+        @include stretched-link
+    p
+        margin-bottom: 0
+        margin-top: 0
+
+
 @mixin visually-hidden
     clip: rect(0,0,0,0) !important
     border: 0 !important
@@ -156,19 +175,3 @@
         left: $left
         right: $right
         top: $top
-
-
-@mixin widget($background: null)
-    position: relative
-    display: flex
-    flex-direction: column
-    .media
-        @include aspect-ratio(2, 1, 'img', $background)
-        margin-bottom: $spacing1
-        order: -1
-        overflow: hidden
-    a
-        @include stretched-link
-    p
-        margin-bottom: 0
-        margin-top: 0
