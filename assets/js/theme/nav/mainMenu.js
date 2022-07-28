@@ -2,9 +2,8 @@ import breakpoints from '../utils/breakpoints';
 
 const CLASSES = {
     mainMenuOpened: 'is-opened',
-    bodyOverlay: 'has-overlay',
     scrollingDown: 'is-scrolling-down',
-    menusOpened: 'is-menu-opened',
+    menusOpened: 'has-menu-opened',
     sticky: 'is-sticky'
 };
 class MainMenu {
@@ -45,7 +44,7 @@ class MainMenu {
         this.isOpened = !this.state.isOpened;
         this.mainButton.setAttribute('aria-expanded', this.state.isOpened);
         this.menu.classList.toggle(CLASSES.mainMenuOpened);
-        document.body.classList.toggle(CLASSES.bodyOverlay);
+        document.documentElement.classList.toggle(CLASSES.menusOpened);
     }
 
     toggleDropdown (button) {
@@ -55,17 +54,16 @@ class MainMenu {
 
     onScroll () {
         const offset = this.element.offsetHeight,
-            y = window.scrollY;
+            y = window.scrollY,
+            isNearTop = y < offset;
 
-        console.log(y > offset);
-
-        if (y > offset) {
-            this.element.classList.add(CLASSES.sticky);
-        } else {
+        if (isNearTop) {
             this.element.classList.remove(CLASSES.sticky);
+        } else {
+            this.element.classList.add(CLASSES.sticky);
         }
 
-        if (y > this.state.previousScrollY && y > offset) {
+        if (y > this.state.previousScrollY && !isNearTop) {
             document.documentElement.classList.add(CLASSES.scrollingDown);
         } else {
             document.documentElement.classList.remove(CLASSES.scrollingDown);
