@@ -1,4 +1,20 @@
+@keyframes showIn
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+    0%
+        opacity: 0
+
 .menu
+    @include media-breakpoint-down(md)
+        -webkit-flex-basis: 100vw
+        display: none
+        flex-basis: 100vw
+        margin-top: 1.875rem
+        max-height: 70vh
+        overflow: auto
+
     a,
     a:hover,
     a:focus,
@@ -14,31 +30,39 @@
         font-size: px2rem(18)
         line-height: px2rem(26)
         color: $header-color
-    a:hover,
-    a:focus
-        color: $header-hover-color
+        @include media-breakpoint-up(md)
+            a:hover,
+            a:focus
+                color: $header-hover-color
 
     .dropdown-menu
         display: none
         background: $header-background-color
         padding-bottom: $spacing1
         padding-top: $spacing1
-        inset: 100% 0 auto 0
-        position: absolute
+        @include media-breakpoint-up(md)
+            inset: 100% 0 auto 0
+            position: absolute
 
     .nav-level-1
         display: flex
+        @include media-breakpoint-down(md)
+            @include grid(1)
         > li
             > a
                 padding: $spacing1
                 display: block
             &:last-child a
                 padding-right: 0
-        li.has-children:hover
-            .dropdown-menu
+        li.has-children
+            a[aria-expanded="true"] + .dropdown-menu
                 display: block
+                animation-duration: $header-dropdown-transition
+                animation-fill-mode: both
+                animation-name: showIn
 
     .nav-level-2
+        @include grid(1)
         @include media-breakpoint-up(md)
             @include container
             @include grid(4, md)
@@ -56,6 +80,51 @@
         span
             font-size: px2rem(14)
 
+    @include media-breakpoint-down(md)
+        &.is-opened
+            flex-grow: 1
+            display: block
+            a
+                text-decoration: none
+            .nav-level-1
+                li 
+                    a
+                        padding: 1rem 0
+                > li:not(:last-child) 
+                    border-bottom: 1px solid #adb5bd
+                li.has-children
+                    a[role="button"]
+                        align-items: center
+                        display: flex
+                        justify-content: space-between
+                        @include icon("caret-bottom", after)
+                        &::after
+                            font-size: .375rem
+                            line-height: 1
+                    .dropdown-menu
+                        display: none
+                        padding-top: 0
+                    
+                    a[aria-expanded=true]
+                        @include icon("caret-top", after)
+
+                        + .dropdown-menu
+                            display: block
+
+body
+    &::after
+        background-color: $body-overlay-color
+        content: ""
+        display: none
+        inset: 82px 0 0 0
+        position: fixed
+        z-index: $zindex-body-overlay
+    html.has-menu-opened &
+        &::after
+            display: block
+            animation-duration: $header-dropdown-transition
+            animation-fill-mode: both
+            animation-name: showIn
 
 .share
     display: flex

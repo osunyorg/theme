@@ -125,7 +125,6 @@ class BlockTimeline {
             this.next.disabled = this.index === this.items.length - 1;
         }
     }
-
 }
 
 timelines.forEach((timeline) => {
