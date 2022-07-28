@@ -1,7 +1,6 @@
 header[role="banner"]
     background-color: $header-background-color
-    position: fixed
-    z-index: 10
+    z-index: $zindex-header
     @include media-breakpoint-up(md)
         @if $header-sticky-enabled
             position: sticky
@@ -14,6 +13,7 @@ header[role="banner"]
             &.is-sticky
                 position: sticky
     @include media-breakpoint-down(md)
+        position: fixed
         padding: 1rem 0
         width: 100%
 
@@ -60,5 +60,3 @@ header[role="banner"]
         img
             height: 20px
             width: auto
-
-    
