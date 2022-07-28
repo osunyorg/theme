@@ -3,7 +3,7 @@
   {{- range . -}}
     <li>
       {{- $title := partial "PrepareHTML" .Title -}}
-      <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+      <a href="{{ .Permalink }}" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
         {{- $title -}}
       </a>
       {{- with .Params.diplomas -}}
