@@ -1,3 +1,11 @@
+@keyframes showIn
+    0%
+        opacity: 0
+    100%
+        opacity: 1
+    0%
+        opacity: 0
+
 .menu
     @include media-breakpoint-down(md)
         -webkit-flex-basis: 100vw
@@ -49,12 +57,15 @@
         li.has-children
             a[aria-expanded="true"] + .dropdown-menu
                 display: block
+                animation-duration: $header-dropdown-transition
+                animation-fill-mode: both
+                animation-name: showIn
 
     .nav-level-2
         @include grid(1)
         @include media-breakpoint-up(md)
             @include container
-            @include grid(4, md)            
+            @include grid(4, md)
         > li
             &,
             & > a,
@@ -99,6 +110,21 @@
 
                         + .dropdown-menu
                             display: block
+
+body
+    &::after
+        background-color: $body-overlay-color
+        content: ""
+        display: none
+        inset: 82px 0 0 0
+        position: fixed
+        z-index: $zindex-body-overlay
+    html.has-menu-opened &
+        &::after
+            display: block
+            animation-duration: $header-dropdown-transition
+            animation-fill-mode: both
+            animation-name: showIn
 
 .share
     display: flex
