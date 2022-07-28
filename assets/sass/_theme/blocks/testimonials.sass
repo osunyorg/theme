@@ -20,7 +20,8 @@
             font-size: calc(#{$block-testimonials-font-size} * 3)
             line-height: 1
             position: absolute
-            // TODO : ajuster en fonctiond e la typo
+            transform: translateY(-50%)
+            // TODO : ajuster en fonction de la typo
 
     figure
         font-size: px2rem(16)
@@ -89,11 +90,13 @@
                     background-color: $block-testimonials-pagination-progress-background
                     width: 0
 
-    @include in-page-without-aside
-        .testimonials
-            @include media-breakpoint-up(md)
-                padding-right: col(4)
+    body:not(.programs__section)
+        @include in-page-without-aside
+            .testimonials
+                @include media-breakpoint-up(md)
+                    padding-right: col(4)
 
+        // TODO : en discuter en créa
         // figure
         //     display: flex
         //     figcaption

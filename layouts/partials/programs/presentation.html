@@ -1,15 +1,50 @@
 <section id="presentation">
-  {{ if .Params.objectives }}
     <div class="container">
       <div class="content">
-        <div>
-          <h2>{{ i18n "programs.toc.presentation" }}</h2>
-        </div>
+        <h2>{{ i18n "programs.toc.presentation" }}</h2>
+
         <div>
           {{- partial "programs/image.html" .Params.image -}}
-          {{- partial "PrepareHTML" .Params.objectives -}}
+          {{- if partial "GetTextFromHTML" .Params.objectives -}}
+            {{- partial "PrepareHTML" .Params.objectives -}}
+          {{- end -}}
+
+          <div class="subpart">
+            <h3>{{ i18n "programs._administrative_information" }}</h3>
+            <table class="table table-infos">
+              <caption>{{ i18n "programs._administrative_information" }}</caption>
+              <tbody>
+                {{- with .Params.diplomas -}}
+                  {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
+                  {{- with $diploma.Params.ects -}}
+                    <tr>
+                      <th>{{ i18n "programs.ects_credits" }}</th>
+                      <td>{{ partial "PrepareHTML" . }}</td>
+                    </tr>
+                  {{- end -}}
+                {{- end -}}
+                <tr>
+                  <th>{{ i18n "programs.type.initial" }}</th>
+                  <td>{{ if .Params.initial }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+                </tr>
+                <tr>
+                  <th>{{ i18n "programs.type.continuing" }}</th>
+                  <td>{{ if .Params.continuing }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+                </tr>
+                <tr>
+                  <th>{{ i18n "programs.type.apprenticeship" }}</th>
+                  <td>{{ if .Params.apprenticeship }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+                </tr>
+                {{- if partial "GetTextFromHTML" .Params.capacity -}}
+                <tr>
+                  <th>{{ i18n "programs.capacity" }}</th>
+                  <td>{{ partial "PrepareHTML" .Params.capacity }}</td>
+                </tr>
+                {{- end -}}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-  {{ end }}
 </section>

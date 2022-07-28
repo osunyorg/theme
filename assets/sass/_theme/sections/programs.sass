@@ -47,18 +47,21 @@
 //             @include grid(2, lg)
 
 .programs__section
+    .lead
+        padding-top: $spacing4
     aside
         @include container
         @include sticky($header-height)
         overflow: auto
         background: darken($main-background-color, 3)
-        z-index: 50
+        z-index: $program-zindex-toc
     .toc
         max-width: 100%
         ol
             display: flex
             flex-direction: row
             flex-wrap: nowrap
+            justify-content: space-between
             white-space: nowrap
             margin: 0 #{-$spacing1}
             li
@@ -67,17 +70,18 @@
     .blocks
         .block-content
             padding-left: col(5)
-    [itemprop="articleBody"]
-        section
-            padding-top: $spacing1
-            padding-bottom: $spacing4
-            border-top: 1px solid $main-color
-            @include grid(12, md)
-            @include media-breakpoint-up(md)
+
+    @include media-breakpoint-up(md)
+        article
+            .content
+                @include grid(12, md)
+                padding-top: $spacing1
+                padding-bottom: $spacing4
+                border-top: 1px solid $main-color
                 position: relative
                 > *
                     grid-column: 6/13
-                h2
+                > h2
                     $sticky-top-offset: 90px
                     @include sticky(#{$header-height + $sticky-top-offset})
                     top: $sticky-top-offset

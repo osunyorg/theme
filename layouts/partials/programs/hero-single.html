@@ -1,0 +1,26 @@
+{{- $title := or .Params.header_text .Title -}}
+<header class="hero">
+  <div class="container">
+    {{- if .Params.breadcrumb | default true -}}
+      {{ partial "header/breadcrumbs.html" . }}
+    {{- end -}}
+    <div>
+      <h1>{{ partial "PrepareHTML" $title }}</h1>
+    </div>
+  </div>
+  <div id="essential">
+    <div class="container">
+      {{- with .Params.diplomas -}}
+        {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
+        {{- partial "diplomas/essential" $diploma -}}
+      {{- end -}}
+      <div class="dropdown-share dropup">
+        <button type="button" id="shareProgram" data-bs-toggle="dropdown" aria-expanded="false">{{ i18n "commons.share" }}</button>
+        <div class="dropdown-menu">
+          {{ partial "commons/share.html" . }}
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+{{ partial "programs/aside.html" . }}

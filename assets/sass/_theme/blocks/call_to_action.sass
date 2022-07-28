@@ -5,14 +5,23 @@
             margin-bottom: 0
 
         > div
+            [role="group"]
+                @include media-breakpoint-down(md)
+                    display: flex
+                    flex-direction: column
             // button
             div + div,
             & >
                 a
-                    @extend .btn
                     margin-top: 1rem
-                    background: $block-call-to-action-button-background
-                    color: $block-call-to-action-button-color
+                    color: $block-call-to-action-color
+                    text-decoration-color: rgba($block-call-to-action-color, .3)
+                    &:hover
+                        text-decoration-color: $block-call-to-action-color
+                    &:first-of-type
+                        @extend .btn
+                        background: $block-call-to-action-button-background
+                        color: $block-call-to-action-button-color
         @include in-page-with-aside
             display: flex
             flex-direction: column
@@ -38,6 +47,9 @@
                     padding-right: col(3, 8)
                 > div
                     padding: col(1, 8)
+                [role="group"]
+                    a
+                        margin-right: px2rem(20)
 
     @include in-page-without-aside
         .block-content
