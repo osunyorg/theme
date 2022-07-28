@@ -15,7 +15,8 @@ class MainMenu {
 
         this.state = {
             isOpened: false,
-            isActive: false,
+            isMobile: false,
+            hasDropdownOpened: false,
             previousScrollY: window.scrollY
         };
 
@@ -24,31 +25,61 @@ class MainMenu {
 
     listen () {
         window.addEventListener('resize', this.resize.bind(this));
-        this.mainButton.addEventListener('click', this.toggleMain.bind(this));
+
+        this.mainButton.addEventListener('click', () => {
+            this.toggleMainMenu();
+        });
+
         this.dropdownsButtons.forEach((button) => {
             button.addEventListener('click', (event) => {
                 event.preventDefault();
                 this.toggleDropdown(button);
             });
         });
+
         ['scroll', 'touchmove'].forEach(event => {
             window.addEventListener(event, this.onScroll.bind(this));
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === document.body) {
+                this.closeEverything();
+            }
         });
     }
 
     resize () {
-        this.state.isActive = window.innerWidth <= breakpoints.md;
+        const isMobile = window.innerWidth <= breakpoints.md;
+
+        // is state changed ?
+        if (this.state.isMobile === isMobile) {
+            return null;
+        }
+
+        this.state.isMobile = isMobile;
+
+        this.closeEverything();
     }
 
-    toggleMain () {
-        this.isOpened = !this.state.isOpened;
+    toggleMainMenu (open = !this.state.isOpened) {
+        let classAction;
+        this.state.isOpened = open;
+        classAction = this.state.isOpened ? 'add' : 'remove';
         this.mainButton.setAttribute('aria-expanded', this.state.isOpened);
-        this.menu.classList.toggle(CLASSES.mainMenuOpened);
-        document.documentElement.classList.toggle(CLASSES.menusOpened);
+        this.menu.classList[classAction](CLASSES.mainMenuOpened);
+        document.documentElement.classList[classAction](CLASSES.menusOpened);
+
+        // Update global overlay
+        this.updateOverlay();
     }
 
     toggleDropdown (clickedButton) {
-        const isExpanded = clickedButton.getAttribute('aria-expanded') === 'true';
+        let isExpanded = true;
+
+        if (clickedButton) {
+            isExpanded = clickedButton.getAttribute('aria-expanded') === 'true';
+        }
+
         // Close all dropdowns except selected
         this.dropdownsButtons.forEach(button => {
             if (clickedButton === button) {
@@ -57,6 +88,24 @@ class MainMenu {
                 button.setAttribute('aria-expanded', 'false');
             }
         });
+
+        // Now menu is expanded or closed
+        isExpanded = !isExpanded;
+        this.state.hasDropdownOpened = isExpanded;
+
+        // Update global overlay
+        this.updateOverlay();
+    }
+
+    updateOverlay () {
+        const classAction = this.state.hasDropdownOpened || this.state.isOpened ? 'add' : 'remove';
+        document.documentElement.classList[classAction](CLASSES.menusOpened);
+    }
+
+    closeEverything () {
+        this.state.isOpened = false;
+        this.toggleDropdown(false);
+        this.toggleMainMenu(false);
     }
 
     onScroll () {
