@@ -6,8 +6,10 @@
         order: -1
         width: px2rem(76)
 
-    .name ~ p
-        @extend .small
+    .name
+        margin-bottom: px2rem(5)
+        & ~ p
+            @extend .small
 
     @include media-breakpoint-down(md)
         display: block
@@ -27,6 +29,8 @@
     @include grid(1)
     @include grid(2, md)
     @include grid(3, lg)
+    @include grid(4, xl)
+    @include grid(5, xxl)
 
 
 .avatar
