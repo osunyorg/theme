@@ -69,35 +69,36 @@
         span
             font-size: px2rem(14)
 
-    &.show
-        flex-grow: 1
-        display: block
-        a
-            text-decoration: none
-        .nav-level-1
-            li 
-                a
-                    padding: 1rem 0
-            > li:not(:last-child) 
-                border-bottom: 1px solid #adb5bd
-            li.has-children
-                a[role="button"]
-                    align-items: center
-                    display: flex
-                    justify-content: space-between
-                    @include icon("caret-bottom", after)
-                    &::after
-                        font-size: .375rem
-                        line-height: 1
-                .dropdown-menu
-                    display: none
-                    padding-top: 0
-                
-                a[aria-expanded=true]
-                    @include icon("caret-top", after)
+    @include media-breakpoint-down(md)
+        &.is-opened
+            flex-grow: 1
+            display: block
+            a
+                text-decoration: none
+            .nav-level-1
+                li 
+                    a
+                        padding: 1rem 0
+                > li:not(:last-child) 
+                    border-bottom: 1px solid #adb5bd
+                li.has-children
+                    a[role="button"]
+                        align-items: center
+                        display: flex
+                        justify-content: space-between
+                        @include icon("caret-bottom", after)
+                        &::after
+                            font-size: .375rem
+                            line-height: 1
+                    .dropdown-menu
+                        display: none
+                        padding-top: 0
+                    
+                    a[aria-expanded=true]
+                        @include icon("caret-top", after)
 
-                    + .dropdown-menu
-                        display: block
+                        + .dropdown-menu
+                            display: block
 
 .share
     display: flex

@@ -1,7 +1,7 @@
 const events = ['load', 'resize'];
 let navBtn = document.querySelector('nav[role="navigation"] button'),
     menuHeader = document.querySelector('.menu'),
-    bodyOverlay = document.querySelector('body'),
+    bodyOverlay = document.querySelector('body'), // document.body 
     dropdownBtns = document.querySelectorAll('.has-children a[role="button"]'),
     breckpointMd = 768,
     classMobile = 'show';
