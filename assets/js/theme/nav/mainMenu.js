@@ -47,9 +47,16 @@ class MainMenu {
         document.documentElement.classList.toggle(CLASSES.menusOpened);
     }
 
-    toggleDropdown (button) {
-        const isExpanded = button.getAttribute('aria-expanded') === 'true';
-        button.setAttribute('aria-expanded', !isExpanded);
+    toggleDropdown (clickedButton) {
+        const isExpanded = clickedButton.getAttribute('aria-expanded') === 'true';
+        // Close all dropdowns except selected
+        this.dropdownsButtons.forEach(button => {
+            if (clickedButton === button) {
+                clickedButton.setAttribute('aria-expanded', !isExpanded);
+            } else {
+                button.setAttribute('aria-expanded', 'false');
+            }
+        });
     }
 
     onScroll () {
