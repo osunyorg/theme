@@ -1,0 +1,28 @@
+/* TODO à renomer */
+.top
+    align-items: baseline
+    display: flex
+    flex-wrap: wrap
+    justify-content: space-between
+    margin-bottom: $spacing1
+    position: relative
+    h2, p
+        margin-bottom: 0
+    h2
+        a
+            @include stretched-link
+    div
+        margin-top: px2rem(5)
+        p
+            @include media-breakpoint-up(lg)
+                width: col(8)
+    .link
+        @extend .link-more
+
+    // Polyfill flex-wrap
+    @supports not (flex-wrap: wrap)
+        display: block
+        h2
+            display: inline-block
+        .link
+            float: right
