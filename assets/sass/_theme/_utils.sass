@@ -48,12 +48,12 @@
                 top: $top-md
 
 // NEW UTILS
-
-@mixin icon($icon-name: '', $pseudo-element: before, $font-size: px2rem(7))
+@mixin icon($icon-name: '', $pseudo-element: before, $font-size: px2rem(10))
     &::#{$pseudo-element}
         content: map-get($icons, $icon-name)
         display: inline-block
         font-family: 'Icon'
+        font-size: $font-size
         font-style: normal
         font-variant: normal
         font-weight: normal
@@ -100,26 +100,45 @@
         top: 0
         z-index: $zindex-stretched-link
 
-@mixin aspect-ratio($width, $height, $selector: null)
-    @if $selector
-        #{$selector}
-            aspect-ratio: #{$width}/#{$height}
-            display: block
-            width: 100%
-        @supports not (aspect-ratio: 1)
-            position: relative
-            &::before
-                content: ''
-                padding-top: ($height / $width) * 100%
-                width: 100%
-            #{$selector}
-                bottom: 0
-                left: 0
-                position: absolute
-                right: 0
-                top: 0
-    @else
+@mixin aspect-ratio($width, $height, $selector: 'iframe', $background: false)
+    @if $background
         aspect-ratio: #{$width}/#{$height}
+        background: $background
+    #{$selector}
+        aspect-ratio: #{$width}/#{$height}
+        display: block
+        width: 100%
+    @supports not (aspect-ratio: 1)
+        position: relative
+        &::before
+            content: ''
+            padding-top: ($height / $width) * 100%
+            width: 100%
+        #{$selector}
+            bottom: 0
+            left: 0
+            position: absolute
+            right: 0
+            top: 0
+
+@mixin widget($background: null)
+    position: relative
+    display: flex
+    flex-direction: column
+    .media
+        @include aspect-ratio(2, 1, 'img', $background)
+        margin-bottom: $spacing1
+        order: -1
+        overflow: hidden
+    .title
+        font-size: $widget-title-size
+        margin-bottom: px2rem(5)
+    a
+        @include stretched-link
+    p
+        margin-bottom: 0
+        margin-top: 0
+
 
 @mixin visually-hidden
     clip: rect(0,0,0,0) !important
@@ -148,6 +167,7 @@
     list-style: none
     padding-left: 0
     margin-bottom: 0
+    margin-top: 0
 
 @mixin inset($top: 0, $right: $top, $bottom: $top, $left: $top)
     inset: $top $right $bottom $left

@@ -1,18 +1,7 @@
 .post
-    position: relative
-    display: flex
-    flex-direction: column
-    .media
-        background: $post-media-background
-        order: -1
-        &::before
-            content: ""
-            display: block
-            padding-top: $post-media-aspect-ratio
+    @include widget($post-media-background)
 
-    a
-        @include stretched-link
-
+    /* TODO toujours d'actualité ou propre à un site ?
     .author,
     .post-categories
         @extend .small

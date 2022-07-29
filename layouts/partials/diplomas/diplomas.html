@@ -1,3 +1,7 @@
+{{ $show_programs := false }}
+{{- if .Scratch.Get "show_programs" }}
+  {{ $show_programs = true }}
+{{ end -}}
 <ul class="diplomas">
   {{ range .Paginator.Pages }}
     <li>
@@ -7,6 +11,15 @@
           ({{ partial "PrepareHTML" . }})
         {{ end }}
       </a>
+      {{- if $show_programs }}
+        <ol class="programs">
+          {{- range .Pages -}}
+            <li>
+              {{ partial "programs/program.html" . }}
+            </li>
+          {{- end -}}
+        </ol>
+      {{ end -}}
     </li>
   {{ end }}
 </ul>

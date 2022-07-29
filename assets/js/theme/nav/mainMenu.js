@@ -2,6 +2,7 @@ import breakpoints from '../utils/breakpoints';
 
 const CLASSES = {
     mainMenuOpened: 'is-opened',
+    isAnimating: 'is-animating',
     scrollingDown: 'is-scrolling-down',
     menusOpened: 'has-menu-opened',
     sticky: 'is-sticky'
@@ -100,6 +101,15 @@ class MainMenu {
     updateOverlay () {
         const classAction = this.state.hasDropdownOpened || this.state.isOpened ? 'add' : 'remove';
         document.documentElement.classList[classAction](CLASSES.menusOpened);
+
+        // Add class for animation transition
+        let transitionDuration = window.getComputedStyle(this.element).transitionDuration;
+        // TODO : regex for getting 'ms' or other units value
+        transitionDuration = parseFloat(transitionDuration.replace('s', ''));
+        document.documentElement.classList.add(CLASSES.isAnimating);
+        setTimeout(() => {
+            document.documentElement.classList.remove(CLASSES.isAnimating);
+        }, transitionDuration * 1000);
     }
 
     closeEverything () {
