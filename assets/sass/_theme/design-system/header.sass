@@ -1,27 +1,38 @@
 header[role="banner"]
+    z-index: $zindex-header
+    @include media-breakpoint-down(md)
+        position: fixed
+        padding: 1rem 0
+        width: 100%
+
     @if $header-sticky-enabled
         background-color: $header-background-color
-        position: sticky
         top: 0
         transition: transform $header-sticky-transition
-        z-index: 10
-        html.is-scrolling-down:not(.is-menu-open) &
-            &:not(:hover)
-                transform: translateY(-100%)
-
-        &.is-sticky
+        @include media-breakpoint-up(md)
             position: sticky
+        html.is-scrolling-down:not(.has-menu-opened) &
+            @include media-breakpoint-down(md)
+                transform: translateY(-100%)
+            @include media-breakpoint-up(md)
+                &:not(:hover)
+                    transform: translateY(-100%)
 
     nav[role="navigation"]
         .container
             align-items: center
             display: flex
+            flex-wrap: wrap
             justify-content: space-between
         button[type="button"]
+            @include button-reset
             display: none
             border: 0
             color: $body-color
             position: relative
+            @include media-breakpoint-down(md)
+                display: flex
+                align-items: center
             &:focus
                 box-shadow: none
             &:focus-visible
@@ -33,6 +44,7 @@ header[role="banner"]
                 font-size: px2rem(14)
                 text-transform: uppercase
             span:last-of-type
+                @include icon("burger", before)
                 background: none
                 height: calc(1.063rem + .3125rem * 2)
                 padding: px2rem(5) 0 px2rem(5) px2rem(5)
