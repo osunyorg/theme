@@ -23,7 +23,7 @@ class Dropdown {
 }
 
 // Selectors
-['.diplomas-select'].map(selector => {
+['.diplomas-select', '.dropdown-share'].map(selector => {
     if (document.querySelector(selector)) {
         new Dropdown(selector);
     }
