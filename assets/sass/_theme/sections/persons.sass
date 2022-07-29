@@ -25,12 +25,34 @@
             margin-bottom: 0
 
 
-.persons
+section.persons,
+div.persons
     @include grid(1)
     @include grid(2, md)
     @include grid(3, lg)
     @include grid(4, xl)
     @include grid(5, xxl)
+
+
+ol.persons
+    @include list-reset
+    > li
+        border-bottom: 1px solid $main-border-color
+        padding-bottom: $spacing1
+        padding-top: $spacing1
+        position: relative
+        p
+            margin-bottom: 0
+        a
+            @include stretched-link
+
+        @include media-breakpoint-up(md)
+            align-items: baseline
+            display: flex
+            > p
+                width: col(5)
+                & + p
+                    width: col(7)
 
 
 .avatar
