@@ -94,31 +94,30 @@
 
     @include media-breakpoint-down(md)
         &.is-opened
-            flex-grow: 1
             display: block
-            a
-                text-decoration: none
-            .nav-level-1
-                li 
-                    a
-                        padding: 1rem 0
-                > li:not(:last-child) 
-                    border-bottom: 1px solid #adb5bd
-                li.has-children
-                    [role="button"]
-                        align-items: center
-                        display: flex
-                        justify-content: space-between
-                        @include icon("caret-bottom", after)
-                        &::after
-                            font-size: .375rem
-                            line-height: 1
-                    .dropdown-menu
-                        display: none
-                        padding-top: 0
-                    
-                    [aria-expanded=true] + .dropdown-menu
-                        display: block
+        a, span
+            text-decoration: none
+        .nav-level-1
+            display: block
+            li 
+                a, span
+                    padding: 1rem 0
+            > li:not(:last-child) 
+                border-bottom: 1px solid #adb5bd
+            li.has-children
+                [role="button"]
+                    align-items: center
+                    display: flex
+                    justify-content: space-between
+                    @include icon("caret-bottom", after)
+                    &::after
+                        font-size: .375rem
+                        line-height: 1
+                .dropdown-menu
+                    display: none
+                    padding-top: 0
+                [aria-expanded=true] + .dropdown-menu
+                    display: block
 
 // TODO : Est-ce au bon endroit ?
 body
