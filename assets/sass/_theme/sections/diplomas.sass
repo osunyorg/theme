@@ -27,6 +27,7 @@ ul.diplomas
     .dropdown-menu
         @include inset(100%, 0, auto, auto)
         background-color: black
+        display: none
         position: absolute
         @include media-breakpoint-down(md)
             // padding-left: $container-gutter-width
@@ -34,8 +35,8 @@ ul.diplomas
         &,
         a
             color: white
-            display: block
         a
+            display: block
             padding: $spacing0
             white-space: normal
             &:not(:first-child)
@@ -46,3 +47,20 @@ ul.diplomas
                 background-color: lighten(black, 3)
             &:focus
                 color: black
+
+    button[aria-expanded="true"] 
+        @include icon('caret-top', 'after')
+        + .dropdown-menu
+            display: block
+
+    
+    // TODO : style de l'icone
+    // button::after,
+    // button[aria-expanded="true"]::after
+    //     display: inline-block
+    //     font-family: Icon
+    //     font-size: .375rem
+    //     font-weight: 400
+    //     line-height: 1
+    //     margin-left: 0.3125rem
+    //     vertical-align: middle
