@@ -49,11 +49,12 @@
 
 // NEW UTILS
 
-@mixin icon($icon-name: '', $pseudo-element: before)
+@mixin icon($icon-name: '', $pseudo-element: before, $font-size: px2rem(10))
     &::#{$pseudo-element}
         content: map-get($icons, $icon-name)
         display: inline-block
         font-family: 'Icon'
+        font-size: $font-size
         font-style: normal
         font-variant: normal
         font-weight: normal

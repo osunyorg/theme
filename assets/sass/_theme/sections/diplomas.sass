@@ -15,3 +15,34 @@ ul.diplomas
                         width: col(6)
             .title
                 @extend .h4
+
+.diplomas-select
+    text-align: right
+    position: relative
+    @extend .h3
+    button
+        @include button-reset
+        @include icon('caret', 'after')
+
+    .dropdown-menu
+        @include inset(100%, 0, auto, auto)
+        background-color: black
+        position: absolute
+        @include media-breakpoint-down(md)
+            // padding-left: $container-gutter-width
+            // padding-right: $container-gutter-width
+        &,
+        a
+            color: white
+            display: block
+        a
+            padding: $spacing0
+            white-space: normal
+            &:not(:first-child)
+                border-top: 1px solid $main-border-color
+            @include media-breakpoint-up(md)
+                font-size: px2rem(22)
+            &:hover
+                background-color: lighten(black, 3)
+            &:focus
+                color: black
