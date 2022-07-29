@@ -170,14 +170,16 @@ body
         vertical-align: middle
 
 .dropdown-share
-    // @extend .dropdown
     > button
-        // @extend .btn
-        // @extend .btn-lg
-        // @extend .btn-outline-light
+        @include button-reset
+        color: $hero-color
+        border: 1px solid $hero-color
+        padding: $spacing0 $spacing1
+        font-size: $program-share-font-size
         @include icon(social, after)
             margin-left: px2rem(10)
-
+    ul
+        display: none
     .dropdown-menu
         padding: 0
         .share
