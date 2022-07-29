@@ -17,12 +17,14 @@ class Dropdown {
     }
 
     toggleDropdown (open = !this.state.isOpened) {
-        console.log('lalala')
-        let classAction;
         this.state.isOpened = open;
-        classAction = this.state.isOpened ? 'add' : 'remove';
         this.dropdownButton.setAttribute('aria-expanded', this.state.isOpened);
     }
 }
 
-export default new Dropdown('.diplomas-select');
+// Selectors
+['.diplomas-select'].map(selector => {
+    if (document.querySelector(selector)) {
+        new Dropdown(selector);
+    }
+});
