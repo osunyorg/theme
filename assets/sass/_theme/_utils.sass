@@ -49,7 +49,7 @@
 
 // NEW UTILS
 
-@mixin icon($icon-name: '', $pseudo-element: before)
+@mixin icon($icon-name: '', $pseudo-element: before, $font-size: px2rem(7))
     &::#{$pseudo-element}
         content: map-get($icons, $icon-name)
         display: inline-block
@@ -61,6 +61,7 @@
         speak: never
         text-transform: none
         vertical-align: middle
+        @content // TODO : important de documenter ça
 
 @mixin container
     margin-left: auto

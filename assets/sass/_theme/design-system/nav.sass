@@ -30,6 +30,19 @@
         font-size: px2rem(18)
         line-height: px2rem(26)
         color: $header-color
+        cursor: pointer
+        transition: text-decoration 0.15s
+        &:not(:hover)
+            text-decoration-color: transparent
+        &[aria-expanded]
+            @include icon('caret', 'after')
+                font-size: px2rem(6)
+                margin-left: px2rem(5)
+                transition: transform  0.15s
+            &[aria-expanded="true"]
+                &::after
+                    transform: rotate(180deg)
+
         @include media-breakpoint-up(md)
             a:hover,
             a:focus
@@ -50,12 +63,12 @@
             @include grid(1)
         > li
             > a, span
-                padding: $spacing1
                 display: block
+                padding: $spacing1
             &:last-child a
                 padding-right: 0
         li.has-children
-            a[aria-expanded="true"] + .dropdown-menu
+            [aria-expanded="true"] + .dropdown-menu
                 display: block
                 animation-duration: $header-dropdown-transition
                 animation-fill-mode: both
@@ -67,9 +80,8 @@
             @include container
             @include grid(4, md)
         > li
-            &,
-            & > a,
-            & > span
+            > a,
+            > span
                 font-size: px2rem(16)
                 line-height: px2rem(26)
                 @include media-breakpoint-up(lg)
@@ -93,7 +105,7 @@
                 > li:not(:last-child) 
                     border-bottom: 1px solid #adb5bd
                 li.has-children
-                    a[role="button"]
+                    [role="button"]
                         align-items: center
                         display: flex
                         justify-content: space-between
@@ -105,11 +117,8 @@
                         display: none
                         padding-top: 0
                     
-                    a[aria-expanded=true]
-                        @include icon("caret-top", after)
-
-                        + .dropdown-menu
-                            display: block
+                    [aria-expanded=true] + .dropdown-menu
+                        display: block
 
 body
     &::after
