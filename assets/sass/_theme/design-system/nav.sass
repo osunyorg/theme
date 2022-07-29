@@ -30,6 +30,19 @@
         font-size: px2rem(18)
         line-height: px2rem(26)
         color: $header-color
+        cursor: pointer
+        transition: text-decoration 0.15s
+        &:not(:hover)
+            text-decoration-color: transparent
+        &[aria-expanded]
+            @include icon(caret, after)
+                font-size: px2rem(6)
+                margin-left: px2rem(5)
+                transition: transform  0.15s
+            &[aria-expanded="true"]
+                &::after
+                    transform: rotate(180deg)
+
         @include media-breakpoint-up(md)
             a:hover,
             a:focus
@@ -50,14 +63,12 @@
             @include grid(1)
         > li
             > a, span
-                @include icon('caret', 'after')
                 display: block
                 padding: $spacing1
-
             &:last-child a
                 padding-right: 0
         li.has-children
-            a[aria-expanded="true"] + .dropdown-menu
+            [aria-expanded="true"] + .dropdown-menu
                 display: block
                 animation-duration: $header-dropdown-transition
                 animation-fill-mode: both
@@ -69,9 +80,8 @@
             @include container
             @include grid(4, md)
         > li
-            &,
-            & > a,
-            & > span
+            > a,
+            > span
                 font-size: px2rem(16)
                 line-height: px2rem(26)
                 @include media-breakpoint-up(lg)
@@ -84,34 +94,30 @@
 
     @include media-breakpoint-down(md)
         &.is-opened
-            flex-grow: 1
             display: block
-            a
-                text-decoration: none
-            .nav-level-1
-                li 
-                    a
-                        padding: 1rem 0
-                > li:not(:last-child) 
-                    border-bottom: 1px solid #adb5bd
-                li.has-children
-                    a[role="button"]
-                        align-items: center
-                        display: flex
-                        justify-content: space-between
-                        @include icon("caret-bottom", after)
-                        &::after
-                            font-size: .375rem
-                            line-height: 1
-                    .dropdown-menu
-                        display: none
-                        padding-top: 0
-                    
-                    a[aria-expanded=true]
-                        @include icon("caret-top", after)
-
-                        + .dropdown-menu
-                            display: block
+        a, span
+            text-decoration: none
+        .nav-level-1
+            display: block
+            li 
+                a, span
+                    padding: 1rem 0
+            > li:not(:last-child) 
+                border-bottom: 1px solid #adb5bd
+            li.has-children
+                [role="button"]
+                    align-items: center
+                    display: flex
+                    justify-content: space-between
+                    @include icon("caret-bottom", after)
+                    &::after
+                        font-size: .375rem
+                        line-height: 1
+                .dropdown-menu
+                    display: none
+                    padding-top: 0
+                [aria-expanded=true] + .dropdown-menu
+                    display: block
 
 // TODO : Est-ce au bon endroit ?
 body
@@ -163,21 +169,22 @@ body
         display: none
         vertical-align: middle
 
-// .dropdown-share
-//     @extend .dropdown
-//     > button
-//         @extend .btn
-//         @extend .btn-lg
-//         @extend .btn-outline-light
-//         &::after
-//             @include icon
-//             content: map-get($icons, "social")
-//             margin-left: px2rem(10)
-//     .dropdown-menu
-//         padding: 0
-//         .share
-//             li
-//                 margin: 0
-//         a
-//             @extend .dropdown-item
-//             color: $body-color
+.dropdown-share
+    > button
+        @include button-reset
+        color: $hero-color
+        border: 1px solid $hero-color
+        padding: $spacing0 $spacing1
+        font-size: $program-share-font-size
+        @include icon(social, after)
+            margin-left: px2rem(10)
+    ul
+        display: none
+    .dropdown-menu
+        padding: 0
+        .share
+            li
+                margin: 0
+        a
+            // @extend .dropdown-item
+            color: $body-color

@@ -22,7 +22,7 @@ ul.diplomas
     @extend .h3
     button
         @include button-reset
-        @include icon('caret', 'after')
+        @include icon(caret, after)
 
     .dropdown-menu
         @include inset(100%, 0, auto, auto)
@@ -64,3 +64,23 @@ ul.diplomas
     //     line-height: 1
     //     margin-left: 0.3125rem
     //     vertical-align: middle
+
+.essential
+    @include grid(12, false, 0)
+    flex-wrap: wrap
+    font-size: $program-essential-font-size
+    margin-bottom: 0
+    dt,
+    dd
+        margin: 0
+        padding-bottom: $spacing0
+        padding-top: $spacing0
+    dt
+        grid-column: 1/4
+        opacity: .8
+        @include media-breakpoint-down(md)
+            padding-bottom: 0
+    dd
+        grid-column: 5/13
+        @include media-breakpoint-down(md)
+            padding-top: 0

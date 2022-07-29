@@ -12,7 +12,7 @@ class MainMenu {
         this.element = document.querySelector(selector);
         this.menu = this.element.querySelector('.menu');
         this.mainButton = this.element.querySelector('button');
-        this.dropdownsButtons = this.element.querySelectorAll('.has-children a[role="button"]');
+        this.dropdownsButtons = this.element.querySelectorAll('.has-children [role="button"]');
 
         this.state = {
             isOpened: false,
@@ -123,7 +123,7 @@ class MainMenu {
             y = window.scrollY,
             isNearTop = y < offset;
 
-        if (isNearTop) {
+        if (isNearTop) {    
             this.element.classList.remove(CLASSES.sticky);
         } else {
             this.element.classList.add(CLASSES.sticky);

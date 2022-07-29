@@ -48,7 +48,6 @@
                 top: $top-md
 
 // NEW UTILS
-
 @mixin icon($icon-name: '', $pseudo-element: before, $font-size: px2rem(10))
     &::#{$pseudo-element}
         content: map-get($icons, $icon-name)
@@ -62,6 +61,7 @@
         speak: never
         text-transform: none
         vertical-align: middle
+        @content // TODO : important de documenter ça
 
 @mixin container
     margin-left: auto
@@ -74,15 +74,15 @@
         padding-left: $grid-gutter
         padding-right: $grid-gutter
 
-@mixin grid($cols: 12, $breakpoint: false)
+@mixin grid($cols: 12, $breakpoint: false, $gap-y: $grid-gutter/2)
     @if $breakpoint
         @include media-breakpoint-up($breakpoint)
             display: grid
-            grid-gap: $grid-gutter/2 $grid-gutter
+            grid-gap: $gap-y $grid-gutter
             grid-template-columns: repeat($cols, 1fr)
     @else
         display: grid
-        grid-gap: $grid-gutter/2 $grid-gutter
+        grid-gap: $gap-y $grid-gutter
         grid-template-columns: repeat($cols, 1fr)
 
 @function col($nb, $base: 12)
