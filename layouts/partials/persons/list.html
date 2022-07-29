@@ -1,9 +1,12 @@
-<div class="persons">
+<ol class="persons">
   {{ $persons := .Pages.ByParam "last_name" }}
   {{ range (.Paginate $persons).Pages }}
-    <div>
-      {{ partial "persons/person.html" . }}
-    </div>
+    <li>
+      <p class="name"><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></p>
+      {{- if partial "GetTextFromHTML" .Params.description_short }}
+        <p>{{- partial "PrepareHTML" .Params.description_short -}}</p>
+      {{ end -}}
+    </li>
   {{ end }}
-</div>
+</ol>
 {{ partial "commons/pagination.html" . }}

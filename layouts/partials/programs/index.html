@@ -2,24 +2,10 @@
   {{ partial "programs/image.html" .Params.image }}
   {{ partial "programs/chapo.html" .Params.description_short }}
 </div>
-
 {{ partial "blocks/list.html" .Params.blocks }}
-
-{{ $len := (len .Pages) }}
-{{ range $index, $programs := sort .Pages ".Params.position" }}
-  <div class="container">
-    <div class="programs">
-      <div class="highlighted">
-        {{ partial "programs/program.html" . }}
-      </div>
-      {{ range sort .Pages ".Params.position"  }}
-      <div>
-        {{ .Scratch.Set "with_image" true }}
-        {{ partial "programs/program.html" . }}
-        {{ .Scratch.Delete "with_image" }}
-      </div>
-      {{ end }}
-    </div>
-    {{ if ne (add $index 1) $len }}<hr>{{ end }}
-  </div>
-{{ end }}
+<div class="container">
+  {{ partial "diplomas/diplomas-select.html" . }}
+  {{ $programs := where .Site.Pages "Section" "programs" }}
+  {{ $programs = where $programs "Permalink" "!=" .FirstSection.Permalink }}
+  {{ partial "programs/programs-list.html" $programs }}
+</div>

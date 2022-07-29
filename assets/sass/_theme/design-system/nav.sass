@@ -50,8 +50,10 @@
             @include grid(1)
         > li
             > a, span
-                padding: $spacing1
+                @include icon('caret', 'after')
                 display: block
+                padding: $spacing1
+
             &:last-child a
                 padding-right: 0
         li.has-children
@@ -111,20 +113,31 @@
                         + .dropdown-menu
                             display: block
 
+// TODO : Est-ce au bon endroit ?
 body
     &::after
+        @include inset(0)
         background-color: $body-overlay-color
         content: ""
-        display: none
-        inset: 82px 0 0 0
+        pointer-events: none
         position: fixed
+        opacity: 0
+        visibility: hidden
+        transition: opacity $header-transition
         z-index: $zindex-body-overlay
+
     html.has-menu-opened &
         &::after
             display: block
-            animation-duration: $header-dropdown-transition
-            animation-fill-mode: both
-            animation-name: showIn
+            opacity: 1
+            pointer-events: inherit
+            visibility: inherit
+
+    html.is-animating:not(.has-menu-opened) &
+        &::after
+            display: block
+            visibility: inherit
+            opacity: 0
 
 .share
     display: flex

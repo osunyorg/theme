@@ -4,24 +4,19 @@
         align-items: center
         .description
             width: col(7)
-            // @extend .col-md-7
-            // @include media-breakpoint-down(md)
-            //     margin-top: 2rem
 
     figure
+        display: block
         margin-bottom: 0
         > a,
-        > picture
-            // @extend .figure-img
+        img,
+        picture
             display: block
 
         > a
             transition: opacity .3s ease
             &:hover
                 opacity: .7
-
-        picture
-            display: block
 
         img
             height: auto
@@ -41,6 +36,8 @@
     &--grid
         .gallery
             @include grid(3, md)
+            @include in-page-without-aside
+                @include grid(5, md)
 
     &--carousel
         .container
@@ -75,7 +72,6 @@
             &__arrows
                 margin-left: -13px
                 order: 2
-                // padding-top: $grid-gutter-width
                 @media (min-height: 800px)
                     padding-top: px2rem(40)
             &__arrow
