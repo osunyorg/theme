@@ -63,13 +63,18 @@ ol.programs
         padding-top: $spacing1
         > .title
             @extend .h3
+        a
+            text-decoration: none
 
+        @include media-breakpoint-down(md)
+            a, p
+                display: block
         @include media-breakpoint-up(md)
             align-items: baseline
             display: flex
-            > a,
-            > p
-                width: col(6)
+            justify-content: space-between
+            a:first-child, p:first-child
+                padding-right: $spacing2
             > .title
                 & + a
                     text-align: right
@@ -81,7 +86,7 @@ ol.programs
         .dropdown-share
             margin-top: $spacing1
             @include media-breakpoint-up(md)
-                bottom: $spacing1
+                bottom: $spacing1 + $spacing0 
                 margin-top: 0
                 position: absolute
                 right: $grid-gutter
