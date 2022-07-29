@@ -1,7 +1,3 @@
-const CLASSES = {
-    DropdownOpened: 'is-opened'
-};
-
 class Dropdown {
     constructor (selector) {
         this.element = document.querySelector(selector);
@@ -26,7 +22,6 @@ class Dropdown {
         this.state.isOpened = open;
         classAction = this.state.isOpened ? 'add' : 'remove';
         this.dropdownButton.setAttribute('aria-expanded', this.state.isOpened);
-        this.element.classList[classAction](CLASSES.DropdownOpened);
     }
 }
 
