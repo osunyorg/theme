@@ -77,6 +77,7 @@ ol.persons
     img
         object-fit: cover
 
+/* TODO revoir ce nom */
 .taxonomies
     @include list-reset
     margin-bottom: $spacing3
@@ -85,6 +86,9 @@ ol.persons
     @include media-breakpoint-up(md)
         text-align: right
     li
+        @include media-breakpoint-down(md)
+            &:not(last-child)
+                margin-bottom: $spacing1
         @include media-breakpoint-up(md)
             display: inline-block
             &:not(:last-child)
