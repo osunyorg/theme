@@ -121,7 +121,7 @@
             right: 0
             top: 0
 
-@mixin widget($background: null)
+@mixin article($background: null)
     position: relative
     display: flex
     flex-direction: column
@@ -131,7 +131,7 @@
         order: -1
         overflow: hidden
     .title
-        font-size: $widget-title-size
+        font-size: $article-title-size
         margin-bottom: px2rem(5)
         @include media-breakpoint-up(md)
             font-size: $widget-title-size-md
@@ -179,3 +179,8 @@
         left: $left
         right: $right
         top: $top
+
+@function color-contrast($color, $amount)
+    @if lightness($color) > 50%
+        $amount: $amount * -1
+    @return scale-color($color, $lightness: $amount)
