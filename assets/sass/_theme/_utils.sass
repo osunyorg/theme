@@ -179,7 +179,6 @@
         top: $top
 
 @function color-contrast($color, $amount)
-    @debug lightness($color) 
     @if lightness($color) > 50%
         $amount: $amount * -1
     @return scale-color($color, $lightness: $amount)
