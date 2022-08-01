@@ -34,7 +34,7 @@
 
 .table-infos
     border-top: 1px solid $main-border-color
-    font-size: px2rem(14)
+    font-size: $small-font-size
     margin-bottom: 0
     ul
         @include list-reset
@@ -42,7 +42,7 @@
         @include visually-hidden
         position: relative !important // Fix safari iOS border issue
     th
-        // color: $gray-600
+        color: color-contrast($main-color, 35%)
         font-weight: 400
         padding-left: 0
         white-space: nowrap
@@ -53,6 +53,8 @@
         text-align: right
     .share
         justify-content: flex-end
+        li:last-child
+            margin-right: -$spacing0
 
 .related
     margin-top: $spacing1

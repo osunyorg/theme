@@ -22,30 +22,30 @@
                     // @extend .icon
             &:first-child
                 a
-                    // @extend .icon-arrow-first
+                    @include icon(arrow-first)
             &:nth-child(2)
                 a
-                    // @extend .icon-arrow-left
+                    @include icon(arrow-left)
             &:nth-last-child(2)
                 a
-                    // @extend .icon-arrow-right
+                    @include icon(arrow-right)
             &:last-child
                 a
-                    // @extend .icon-arrow-last
+                    @include icon(arrow-last)
             a::before
                 font-size: px2rem(12)
 
     &-between-pages
+        @include list-reset
+        display: flex
         justify-content: space-between
-        // margin-left: -$pagination-padding-x
-        // margin-right: -$pagination-padding-x
-        // margin-top: map-get($spacers, 5)
+        margin-top: $spacing3
         li
             flex: 1
-
         a
             background-color: transparent
             border: 0
+            text-decoration: none
             &:hover
                 background-color: transparent
                 text-decoration: underline
@@ -54,23 +54,21 @@
 
         span
             // color: $gray-600
+            &::before, &::after
+                font-size: px2rem(12)
 
         .previous
             padding-left: 0
             span
-                // @extend .icon
-                // @extend .icon-arrow-left
+                @include icon(arrow-left, before)
                 &::before
-                    font-size: px2rem(12)
                     margin-right: px2rem(5)
         .next
             padding-right: 0
             text-align: right
             span
+                @include icon(arrow-right, after)
                 &::after
-                    // @include icon
-                    // content: map-get($icons, "arrow-right")
-                    font-size: px2rem(12)
                     margin-left: px2rem(5)
 
         @include media-breakpoint-down(md)
@@ -97,9 +95,9 @@
                         content: none
 
             li.previous
-                // border-bottom: 1px solid $gray-500
-                a::after
-                    // content: map-get($icons, "arrow-left")
+                border-bottom: 1px solid $main-border-color
+                a
+                    @include icon(arrow-left)
             li.next
-                a::after
-                    // content: map-get($icons, "arrow-right")
+                a
+                    @include icon(arrow-right)
