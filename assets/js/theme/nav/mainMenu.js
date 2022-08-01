@@ -68,7 +68,11 @@ class MainMenu {
         classAction = this.state.isOpened ? 'add' : 'remove';
         this.mainButton.setAttribute('aria-expanded', this.state.isOpened);
         this.menu.classList[classAction](CLASSES.mainMenuOpened);
-        document.documentElement.classList[classAction](CLASSES.menusOpened);
+
+        // Close dropdown to avoid keeping overlay when mobile and menu closed 
+        if (this.state.isMobile && !this.state.isOpened) {
+            this.state.hasDropdownOpened = false;
+        }
 
         // Update global overlay
         this.updateOverlay();
@@ -123,7 +127,7 @@ class MainMenu {
             y = window.scrollY,
             isNearTop = y < offset;
 
-        if (isNearTop) {    
+        if (isNearTop) {
             this.element.classList.remove(CLASSES.sticky);
         } else {
             this.element.classList.add(CLASSES.sticky);
