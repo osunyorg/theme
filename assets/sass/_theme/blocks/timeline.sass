@@ -52,7 +52,7 @@
     .timeline-arrows
         display: flex
         > button
-            -webkit-appearance: button
+            @include button-reset
             background: none
             border: none
             color: $block-timeline-horizontal-color
@@ -88,7 +88,7 @@
         .line
             background: $block-timeline-horizontal-color
             height: 1px
-            // margin-bottom: $paragraph-margin-bottom
+            margin-bottom: $spacing1
             opacity: 1
             overflow: visible
             width: calc(100% + #{$grid-gutter})
@@ -109,13 +109,14 @@
             padding-left: col(5)
 
     @include media-breakpoint-down(md)
-        .event
-            width: 85%
-            .line
-                // margin-bottom: px2rem(90)
         .events
             position: relative
         .timeline-arrows
             left: 0
             position: absolute
-            // top: calc(#{px2gitrem(30)} + var(--min-title-height))
+            top: calc(#{$spacing2/2} + var(--min-title-height))
+        .event
+            padding-right: 0
+            width: 75%
+            .line
+                margin-bottom: calc(#{$spacing2} + var(--min-title-height))

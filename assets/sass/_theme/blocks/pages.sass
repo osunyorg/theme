@@ -17,22 +17,26 @@
                 display: flex
                 > *
                     flex: 1
+        .main-page
+            .title
+                @extend .h4
+                margin-bottom: 0
+            p:not(.title)
+                @extend .h3
+                @include media-breakpoint-up(lg)
+                    margin-top: $spacing1
 
         .pages
-            @include grid(1)
-            --bs-gutter-y: 0
+            @include grid(1, false, $spacing0)
+            margin-top: $spacing1
             @include media-breakpoint-up(lg)
-                margin-top: 4.5rem
-            > *
-                margin-top: px2rem(10)
-                width: 100%
-
+                margin-top: calc(#{$spacing2} + #{$h4-size-md})
             .page
                 .title
-                    @extend .h4
+                    margin-bottom: 0
                     a
                         @include hover-translate-icon(before, 3)
-                        font-size: px2rem(18)
+                        @extend .h4
                         text-decoration-color: transparent
                         &:hover
                             text-decoration-color: black
@@ -46,6 +50,7 @@
         padding-top: $grid-gutter
         .pages
             @include grid(3, md)
+            margin-top: $spacing2
             .page
                 aspect-ratio: 0.887
                 background-color: $block-pages-card-page-background
