@@ -66,10 +66,11 @@ ul.diplomas
     //     vertical-align: middle
 
 .essential
-    @include grid(12, false, 0)
     flex-wrap: wrap
     font-size: $program-essential-font-size
     margin-bottom: 0
+    @include media-breakpoint-up(md)
+        @include grid(12, false, 0)
     dt,
     dd
         margin: 0
