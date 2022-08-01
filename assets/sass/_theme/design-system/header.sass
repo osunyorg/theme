@@ -19,6 +19,8 @@ header[role="banner"]
                     transform: translateY(-100%)
 
     nav[role="navigation"]
+        padding-bottom: $spacing0
+        padding-top: $spacing0
         .container
             align-items: center
             display: flex
@@ -59,5 +61,7 @@ header[role="banner"]
 
     .logo
         img
-            height: 20px
+            height: $header-logo-height
             width: auto
+            @include media-breakpoint-up(md)
+                height: $header-logo-height-md
