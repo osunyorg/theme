@@ -1,5 +1,5 @@
 .post
-    @include widget($post-media-background)
+    @include article($post-media-background)
 
     /* TODO toujours d'actualité ou propre à un site ?
     .author,
@@ -53,3 +53,11 @@
         text-align: right
     .share
         justify-content: flex-end
+
+.related
+    margin-top: $spacing1
+    .posts
+        @include grid(2, md)
+        margin-bottom: 0
+    .link
+        @extend .link-more
