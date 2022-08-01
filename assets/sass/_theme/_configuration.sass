@@ -71,9 +71,11 @@ $spacing3: 64px !default
 $spacing4: 128px !default
 $spacing5: 256px !default
 
+// TODO: choisir entre margin top / bottom --> https://matthewjamestaylor.com/css-margin-top-vs-bottom
+
 // Grid
 $grid-gutter: $spacing3 !default
-$grid-max-width: 1980px
+$grid-max-width: 1980px !default
 $grid-gutter-sm: $spacing1 !default
 
 // Z-index
@@ -99,7 +101,7 @@ $body-overlay-color: rgba(0, 0, 0, 0.3) !default
 
 // Footer
 $footer-color: $main-color !default
-$footer-background-color: darken($main-background-color, 2.5) !default
+$footer-background-color: color-contrast($main-background-color, 3%) !default
 
 // Hero
 $hero-height: 375px !default
@@ -146,13 +148,13 @@ $block-call-to-action-button-color: invert($block-call-to-action-color) !default
 
 // Block definitions
 $definition-border-color: $main-border-color !default
-$definition-border-color-hovered: darken($definition-border-color, 100) !default
+$definition-border-color-hovered: color-contrast($definition-border-color, 100%) !default
 
 // Block pages
-$block-pages-card-background: lighten($main-background-color, 1) !default
+$block-pages-card-background: color-contrast($main-background-color, 10%) !default
 $block-pages-card-page-background: white !default
 $block-pages-card-page-color: $main-color !default
-$block-pages-card-page-background-hover: darken($main-background-color, 100) !default
+$block-pages-card-page-background-hover: color-contrast($main-background-color, 100%) !default
 $block-pages-card-page-color-hover: white !default
 
 // Block timeline
@@ -160,8 +162,8 @@ $block-timeline-horizontal-background: black !default
 $block-timeline-horizontal-color: white !default
 
 // Block testimonials
-$block-testimonials-xl-font-size: px2rem(50) !default
-$block-testimonials-xl-line-height: px2rem(55) !default
+$block-testimonials-xl-font-size: $h1-size !default
+$block-testimonials-xl-line-height: px2rem(65) !default
 $block-testimonials-xl-font-size-long-text: px2rem(36) !default
 $block-testimonials-xl-line-height-long-text: px2rem(39.6) !default
 $block-testimonials-font-size: px2rem(24) !default
@@ -170,16 +172,18 @@ $block-testimonials-pagination-background: $main-border-color !default
 $block-testimonials-pagination-progress-background: $main-color !default
 
 // Block key_figures
-$block-key_figures-number-font-size: px2rem(60)
+$block-key_figures-number-font-size: px2rem(60) !default
 
 // Sections
-$widget-media-background: darken($main-background-color, 2) !default
-$widget-title-size: $h4-size !default
-$widget-title-size-md: $h4-size-md !default
-$post-media-background: $widget-media-background !default
+$article-title-size: $h4-size !default
+$article-title-size-md: $h4-size-md !default
+$article-media-background: color-contrast($main-background-color, 3%) !default
+$article-title-size: $h4-size !default
+
+$post-media-background: $article-media-background !default
 $post-media-aspect-ratio: 50% !default
-$post-categories-color: lighten($main-color, 2) !default
-$post-time-color: lighten($main-color, 2) !default
+$post-categories-color: color-contrast($main-color, 20%) !default
+$post-time-color: color-contrast($main-color, 20%) !default
 
 // Table of content
 $toc-color: $main-color !default
