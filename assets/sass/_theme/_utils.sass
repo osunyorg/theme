@@ -37,15 +37,16 @@
         &::#{$pseudo}
             transform: translateX(#{px2rem($distance)})
 
-@mixin sticky($top-md: get-header-height(md), $top-sm: get-header-height())
+@mixin sticky($offset-y: false)
     position: sticky
     top: 0
     @if $header-sticky-enabled
         transition: top $header-sticky-transition
         html:not(.is-scrolling-down) &
-            top: $top-sm
-            @include media-breakpoint-up(md)
-                top: $top-md
+            @if $offset-y
+                top: calc(var(--header-height) + #{$offset-y})
+            @else 
+                top: var(--header-height)
 
 // NEW UTILS
 @mixin icon($icon-name: '', $pseudo-element: before, $font-size: px2rem(10))
@@ -198,9 +199,3 @@
         @include icon($icon, after)
             font-size: px2rem(20) 
             margin-left: px2rem(10)
-
-@function get-header-height($breakpoint: false)
-    @if $breakpoint == md
-        @return $header-logo-height-md + $header-nav-padding-y
-    @else 
-        @return $header-logo-height + $header-nav-padding-y

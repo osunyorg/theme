@@ -3,6 +3,9 @@
 *::after
     box-sizing: border-box
 
+\:root
+    --header-height: $header-nav-padding-y * 2 + $header-logo-height
+
 body
     color: $body-color
     background: $body-background-color
@@ -17,7 +20,7 @@ body
 main
     // Create padding-top for fixed header under md
     @include media-breakpoint-down(md)
-        padding-top: get-header-height(md)
+        padding-top: var(--header-height)
 
 figure
     margin: 0

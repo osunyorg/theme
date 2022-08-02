@@ -22,6 +22,7 @@ class MainMenu {
         };
 
         this.listen();
+        this.resize();
     }
 
     listen () {
@@ -51,7 +52,7 @@ class MainMenu {
 
     resize () {
         const isMobile = window.innerWidth <= breakpoints.md;
-
+        document.documentElement.style.setProperty('--header-height', this.element.offsetHeight + 'px');
         // is state changed ?
         if (this.state.isMobile === isMobile) {
             return null;
@@ -60,6 +61,7 @@ class MainMenu {
         this.state.isMobile = isMobile;
 
         this.closeEverything();
+        
     }
 
     toggleMainMenu (open = !this.state.isOpened) {
