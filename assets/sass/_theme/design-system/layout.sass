@@ -22,23 +22,35 @@ main
     @include media-breakpoint-down(md)
         padding-top: var(--header-height)
 
-figure
-    margin: 0
-img
-    max-width: 100%
-    height: auto
-    &::selection
-        background: transparent
-
 .container
     @include container
 
 ul
     padding-left: px2rem(15)
 
-main
-    padding-bottom: $spacing3
-
 .blocks
     > *
         margin-top: $spacing3
+
+details
+    &:not([open]):hover
+       summary::after
+            transform: translateY(5px)
+    summary
+        padding-bottom: $spacing1
+        padding-top: $spacing1
+        position: relative
+        @include icon(caret, after, px2rem(5))
+            margin-left: px2rem(10)
+            line-height: px2rem(22)
+            transition: transform 0.25s
+        &::marker
+            content: none
+        &::-webkit-details-marker 
+            display: none
+    &[open]
+        summary
+            @include icon(caret-top, after, px2rem(5))
+        &:hover
+            summary::after
+                transform: translateY(-5px)
