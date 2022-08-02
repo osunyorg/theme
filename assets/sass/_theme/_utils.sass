@@ -37,7 +37,7 @@
         &::#{$pseudo}
             transform: translateX(#{px2rem($distance)})
 
-@mixin sticky($top-md: $header-height-md, $top-sm: $header-height)
+@mixin sticky($top-md: get-header-height(md), $top-sm: get-header-height())
     position: sticky
     top: 0
     @if $header-sticky-enabled
@@ -199,4 +199,8 @@
             font-size: px2rem(20) 
             margin-left: px2rem(10)
 
-    
+@function get-header-height($breakpoint: false)
+    @if $breakpoint == md
+        @return $header-logo-height-md + $header-nav-padding-y
+    @else 
+        @return $header-logo-height + $header-nav-padding-y
