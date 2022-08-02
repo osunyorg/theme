@@ -15,9 +15,14 @@
         font-size: px2rem(14)
 
 .posts
-    @include grid(1)
-    @include grid(2, md)
-    @include grid(3, xl)
+        @include grid(1)
+        @include grid(2, md)
+        @include grid(3, xl)
+
+.posts__section
+    @include layout-posts
+    .hero
+        margin-bottom: $spacing4
 
 .post-categories
     @include list-reset
