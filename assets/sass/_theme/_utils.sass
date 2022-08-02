@@ -18,15 +18,15 @@
     body.full-width &,
         @content
 
-@mixin link
-    color: $link-color
-    text-decoration-color: rgba($link-color, 0.3)
+@mixin link($color: $link-color)
+    color: $color
+    text-decoration-color: rgba($color, 0.3)
     text-decoration-line: underline
     text-decoration-thickness: 1px
     text-underline-offset: 3px
     transition: text-decoration-color .3s ease
     &:hover
-        text-decoration-color: rgba($link-color, 1)
+        text-decoration-color: rgba($color, 1)
         text-decoration-thickness: 1px
 
 @mixin hover-translate-icon($pseudo: after, $distance: 10)
