@@ -29,7 +29,6 @@
     span
         font-size: px2rem(18)
         line-height: px2rem(26)
-        color: $header-color
         cursor: pointer
         transition: text-decoration 0.15s
         &:not(:hover)
@@ -50,12 +49,14 @@
 
     .dropdown-menu
         display: none
-        background: $header-background-color
+        background: $header-dropdown-background
         padding-bottom: $spacing1
         padding-top: $spacing1
         @include media-breakpoint-up(md)
             inset: 100% 0 auto 0
             position: absolute
+        a
+            color: $header-dropdown-color 
 
     .nav-level-1
         display: flex
