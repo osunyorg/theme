@@ -1,21 +1,11 @@
 {{ if (partial "GetTextFromHTML" .transcription) }}
 <div class="transcription">
-  <div class="top">
-    <button
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#transcription-{{ .position }}"
-      aria-expanded="false"
-      aria-controls="transcription-{{ .position }}"
-      aria-label="{{ i18n "commons.accessibility.transcription" }}">
-      {{ i18n "commons.accessibility.transcription" }}
-    </button>
-  </div>
-  <div class="transcription-content collapse" id="transcription-{{ .position }}">
+  <details>
+    <summary>{{ i18n "commons.accessibility.transcription" }}</summary>
     <p>
       {{- $transcription := partial "PrepareHTML" .transcription -}}
       {{ safeHTML (replace $transcription "\n" "<br/>") }}
     </p>
-  </div>
+  </details>
 </div>
 {{ end }}
