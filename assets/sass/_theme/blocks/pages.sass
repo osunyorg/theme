@@ -4,23 +4,22 @@
 
 .block-pages
     .main-page
-        @include media-breakpoint-up(lg)
-            > div:first-child
-                padding-right: $spacing1
+        // @include media-breakpoint-up(lg)
+            // > div:first-child
+            //     padding-right: $spacing1
         .title
             a::before
                 content: none
     &--list
         .block-content
-            @include media-breakpoint-up(lg)
-                align-items: flex-start
-                display: flex
-                > *
-                    flex: 1
+            @include grid(2, lg)
+            align-items: start
+
         .main-page
             .title
                 @extend .h4
-                margin-bottom: 0
+                @include media-breakpoint-up(lg)
+                    margin-bottom: 0
             p:not(.title)
                 @extend .h3
                 @include media-breakpoint-up(lg)
@@ -28,15 +27,15 @@
 
         .pages
             @include grid(1, false, $spacing0)
-            margin-top: $spacing1
+            margin-top: $spacing2
             @include media-breakpoint-up(lg)
-                margin-top: calc(#{$spacing2} + #{$h4-size-md})
+                margin-top: calc(#{$spacing2} + #{$h6-size-md})
             .page
                 .title
                     margin-bottom: 0
                     a
                         @include hover-translate-icon(before, 3)
-                        @extend .h4
+                        @extend .h6
                         text-decoration-color: transparent
                         &:hover
                             text-decoration-color: black
