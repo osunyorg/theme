@@ -82,17 +82,37 @@ ol.programs
 .programs__section
     .hero
         display: block
-        .dropdown-share
+        // .dropdown-share
+        //     margin-top: $spacing1
+        //     @include media-breakpoint-up(md)
+        //         bottom: $spacing1 + $spacing0 
+        //         margin-top: 0
+        //         position: absolute
+        //         right: $grid-gutter
+            // > button
+            //     @include media-breakpoint-down(md)
+            //         width: 100%
+        .buttons
             margin-top: $spacing1
             @include media-breakpoint-up(md)
-                bottom: $spacing1 + $spacing0 
+                bottom: 2.25rem
                 margin-top: 0
                 position: absolute
                 right: $grid-gutter
-            > button
-                @include media-breakpoint-down(md)
-                    width: 100%
-
+            button, a
+                display: flex
+                align-items: center
+                justify-content: space-between
+                width: 100%
+            a[download]
+                @include button-icon(download)
+                color: $hero-background-color
+                background: $hero-color
+                border-color: $hero-color
+                font-size: $program-share-font-size
+                margin-top: $spacing1
+                @include media-breakpoint-up(md)
+                    font-size: $program-share-font-size-md
     .lead
         padding-top: $spacing4
     aside

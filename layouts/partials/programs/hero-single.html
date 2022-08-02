@@ -10,15 +10,24 @@
   </div>
   <div id="essential">
     <div class="container">
-      {{- with .Params.diplomas -}}
-        {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
-        {{- partial "diplomas/essential" $diploma -}}
-      {{- end -}}
-      <div class="dropdown-share dropup">
-        <button type="button" id="shareProgram" data-bs-toggle="dropdown" aria-expanded="false">{{ i18n "commons.share" }}</button>
-        <div class="dropdown-menu">
-          {{ partial "commons/share.html" . }}
+      {{- partial "programs/essential" . -}}
+      <div class="buttons">
+        <div class="dropdown-share dropup">
+          <button type="button" id="shareProgram" data-bs-toggle="dropdown" aria-expanded="false">{{ i18n "commons.share" }}</button>
+          <div class="dropdown-menu">
+            {{ partial "commons/share.html" . }}
+          </div>
         </div>
+        {{ with .Params.downloadable_summary }}
+          {{- $file := partial "GetMedia" . -}}
+          {{- if $file -}}
+            {{- $url := $file.url -}}
+            {{- if site.Params.keycdn -}}
+              {{- $url = $file.direct_url -}}
+            {{- end -}}
+            <a href="{{ $url }}" download target="_blank">{{ i18n "commons.download.singular_name" }}</a>
+          {{- end -}}
+        {{ end }}
       </div>
     </div>
   </div>

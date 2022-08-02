@@ -187,3 +187,16 @@
     @if lightness($color) > 50%
         $amount: $amount * -1
     @return scale-color($color, $lightness: $amount)
+
+@mixin button-icon($icon: false)
+    @include button-reset
+    line-height: $line-height-base
+    border: 1px solid $hero-color
+    padding: $spacing0 $spacing1
+    white-space: nowrap
+    @if $icon
+        @include icon($icon, after)
+            font-size: px2rem(20) 
+            margin-left: px2rem(10)
+
+    
