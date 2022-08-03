@@ -27,17 +27,22 @@
                 margin-bottom: $spacing3
                 padding-bottom: $spacing3
                 .post
-                    @include grid(4, md)
+                    @include grid(12, md)
                     flex-direction: row
-                    div:first-child
-                        width: col(24)
+                    div:not(.media)
+                        grid-column: 4/13
+                        p,
+                        a
+                            max-width: col(8)
                     time 
                         font-size: $h5-size
                         position: absolute
                         right: 0
                         top: 0
                     .media
+                        grid-column: 1/4
                         margin: 0
+                        
     @else 
         .posts
             @include grid(1)
