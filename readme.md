@@ -450,8 +450,8 @@ Syntaxe de transformation type Shopify (à revoir)
   {
     "columns": 12,
     "from": 840,
-    "gutters": 30,
-    "margins": 60,
+    "gutters": 32,
+    "margins": 64,
     "maxWidth": 1980,
     "to": 7680
   }
