@@ -199,3 +199,26 @@
         @include icon($icon, after)
             font-size: px2rem(20) 
             margin-left: px2rem(10)
+
+
+@mixin layout-posts
+    @if $posts-list-horizontal
+        .posts 
+            @include grid(1)
+            grid-gap: 0
+            > div 
+                border-bottom: 1px solid $main-border-color
+                margin-bottom: $spacing3
+                padding-bottom: $spacing3
+                .post
+                    @include grid(4, md)
+                    flex-direction: row
+                    div:first-child
+                        width: col(24)
+                    time 
+                        font-size: $h5-size
+                        position: absolute
+                        right: 0
+                        top: 0
+                    .media
+                        margin: 0
