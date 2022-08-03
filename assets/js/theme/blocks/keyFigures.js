@@ -26,11 +26,7 @@ class KeyFigures {
             target = parseFloat(figure.innerHTML, 10);
             this.values.push(0);
             this.targets.push(target);
-            figure.style.minWidth = figure.offsetWidth + 'px';
-            // Show format value if reduced motion
-            if (isReducedMotionPrefered()) {
-                figure.innerText = this.formatValue(target);
-            }
+            figure.innerText = this.formatValue(target);
         });
 
         // Show format value if reduced motion
@@ -39,6 +35,13 @@ class KeyFigures {
             this.intersectionObserver.POLL_INTERVAL = 100;
             this.intersectionObserver.observe(this.dom);
         }
+
+        this.resize();
+        this.listen();
+    }
+
+    listen () {
+        window.addEventListener('resize', this.resize.bind(this));
     }
 
     observe (entries) {
@@ -80,6 +83,13 @@ class KeyFigures {
 
     formatValue (value, separator = " ") {
         return value.toLocaleString('en').replace(',', separator);
+    }
+
+    resize () {
+        this.figures.forEach((figure) => {
+            figure.style.minWidth = 0;
+            figure.style.minWidth = figure.offsetWidth + 'px';
+        });
     }
 
     static easeInOutQuart (t, b, c, d) {
