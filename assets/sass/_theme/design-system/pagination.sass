@@ -43,6 +43,11 @@
         margin-top: $spacing3
         li
             flex: 1
+            position: relative
+            border-top: 1px solid #adb5bd
+            @include media-breakpoint-up(md)
+                border: 0
+                padding: $spacing0/2 $spacing0
         a
             background-color: transparent
             border: 0
@@ -52,6 +57,18 @@
                 text-decoration: underline
                 span
                     text-decoration: none
+            @include media-breakpoint-down(md)
+                display: block
+                padding: px2rem(20) px2rem(40) px2rem(20) 0
+                &::before 
+                    opacity: .5
+                    position: absolute
+                    right: 0
+                    text-transform: none
+                    top: 50%
+                    transform: translateY(-50%)
+                    vertical-align: middle
+                                    
 
         span
             // color: $gray-600
