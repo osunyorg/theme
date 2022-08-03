@@ -4,6 +4,7 @@
     justify-content: center
     margin: #{$grid-gutter * 2.5} 0 0
     li
+        @include list-reset
         // @extend .page-item
     a
         // @extend .page-link
@@ -101,3 +102,21 @@
             li.next
                 a
                     @include icon(arrow-right)
+
+.posts
+    + nav
+        .pagination
+            align-items: center
+            display: flex
+            margin: auto
+            li
+                a
+                    line-height: 140%
+                    padding: $spacing0/2 $spacing0
+                    text-decoration: none
+                    transition: background-color .15s ease-in-out
+                &.disabled
+                    pointer-events: none
+                &:not(.disabled)
+                    a:hover
+                        background-color: #e9ecef
