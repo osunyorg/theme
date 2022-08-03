@@ -14,15 +14,52 @@
         display: block
         font-size: px2rem(14)
 
-.posts
-        @include grid(1)
-        @include grid(2, md)
-        @include grid(3, xl)
-
 .posts__section
-    @include layout-posts
     .hero
         margin-bottom: $spacing4
+    
+    @if $posts-list-horizontal
+        .posts 
+            @include grid(1)
+            grid-gap: 0
+            > div 
+                border-bottom: 1px solid $main-border-color
+                margin-bottom: $spacing3
+                padding-bottom: $spacing3
+                .post
+                    display: flex
+                    flex-direction: row
+                    @include media-breakpoint-up(md)
+                        @include grid(12, md)
+                    div:not(.media)
+                        grid-column: 4/13
+                        @include media-breakpoint-down(md)
+                            flex: 1
+                            margin-left: $spacing0
+                        p:not(.title)
+                            @include media-breakpoint-down(md)
+                                display: none
+                    .media
+                        background: none
+                        margin: 0
+                        @include media-breakpoint-up(md)
+                            grid-column: 1/4
+                    @include media-breakpoint-up(md)
+                        time 
+                            font-size: $h5-size
+                            position: absolute
+                            right: 0
+                            top: 0
+                        div:not(.media)
+                            p,
+                            a
+                                max-width: col(8)
+                        
+    @else 
+        .posts
+            @include grid(1)
+            @include grid(2, md)
+            @include grid(3, xl)
 
 .post-categories
     @include list-reset
