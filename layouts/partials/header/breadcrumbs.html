@@ -52,7 +52,7 @@
       {{- else -}}
         <a itemprop="item" href="{{ .page.Permalink }}">
       {{- end }}
-        <span itemprop="name">{{- $title -}}</span>
+        <span itemprop="name">{{- partial "PrepareHTML" $title -}}</span>
         <meta itemprop="position" content="{{- .position -}}">
       {{ if .active -}}
         </span>

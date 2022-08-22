@@ -28,3 +28,5 @@ class Dropdown {
         new Dropdown(selector);
     }
 });
+
+// TODO : A11Y fermer dropdown avec la touche escap + s'assurer de conserver l'emplacement du focus
