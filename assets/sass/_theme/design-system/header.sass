@@ -1,23 +1,31 @@
 header[role="banner"]
+    background: $header-background
+    position: fixed
+    left: 0
+    transition: transform $header-sticky-transition, background $header-sticky-transition
+    top: 0
+    width: 100%
     z-index: $zindex-header
     @include media-breakpoint-down(md)
-        position: fixed
         padding: 1rem 0
         width: 100%
-
-    @if $header-sticky-enabled
-        background-color: $header-background-color
-        top: 0
-        transition: transform $header-sticky-transition
+    &.is-sticky
+        background: $header-sticky-background
+        color: $header-sticky-color
+        .menu
+            a,
+            a:hover,
+            a:focus,
+            a:active
+                @include link($header-sticky-color)
+            span
+                color: $header-sticky-color
+    html.is-scrolling-down:not(.has-menu-opened) &
+        @include media-breakpoint-down(md)
+            transform: translateY(-100%)
         @include media-breakpoint-up(md)
-            position: sticky
-        html.is-scrolling-down:not(.has-menu-opened) &
-            @include media-breakpoint-down(md)
+            &:not(:hover)
                 transform: translateY(-100%)
-            @include media-breakpoint-up(md)
-                &:not(:hover)
-                    transform: translateY(-100%)
-
     nav[role="navigation"]
         padding-bottom: $header-nav-padding-y
         padding-top: $header-nav-padding-y

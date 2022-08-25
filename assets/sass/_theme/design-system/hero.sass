@@ -1,12 +1,15 @@
 .hero
     align-items: flex-end
+    // Support gradients
+    background: $hero-background-color
+    // Fallback color
     background-color: $hero-background-color
     color: $hero-color
     display: flex
     min-height: $hero-height
     overflow: hidden
     padding-bottom: 2rem
-    padding-top: 2rem
+    padding-top: calc(2rem + var(--header-height))
     position: relative
     @include media-breakpoint-up(md)
         min-height: $hero-height-md
