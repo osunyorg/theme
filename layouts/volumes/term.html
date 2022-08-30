@@ -4,7 +4,7 @@
 <article itemscope itemtype="https://schema.org/PublicationVolume">
   <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
   {{- if .Params.image -}}
-    {{- $image := partial "GetMedia" .Params.image -}}
+    {{- $image := partial "GetMedia" .Params.image.id -}}
     {{- if $image -}}
       {{- $url := $image.url -}}
       <meta itemprop="image" content="{{ $url }}">

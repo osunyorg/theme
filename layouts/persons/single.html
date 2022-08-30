@@ -8,9 +8,9 @@
   {{ if isset site.Taxonomies "administrators" -}}
     {{ $programsForAdministrator = index site.Taxonomies.administrators $slug}}
   {{- end }}
-  {{- $articlesForResearcher := slice -}}
+  {{- $papersForResearcher := slice -}}
   {{- if isset site.Taxonomies "researchers" -}}
-    {{ $articlesForResearcher = index site.Taxonomies.researchers $slug}}
+    {{ $papersForResearcher = index site.Taxonomies.researchers $slug}}
   {{ end }}
   {{ $author := site.GetPage (printf "/authors/%s" $slug) }}
 
@@ -65,8 +65,8 @@
       {{ partial "persons/posts.html" $author }}
     {{ end }}
 
-    {{ if $articlesForResearcher }}
-      {{ partial "persons/articles.html" (dict "articles" $articlesForResearcher "slug" $slug) }}
+    {{ if $papersForResearcher }}
+      {{ partial "persons/papers.html" (dict "papers" $papersForResearcher "slug" $slug) }}
     {{ end }}
 
   </div>
