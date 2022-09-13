@@ -6,13 +6,13 @@ footer[role="contentinfo"]
     address
         font-size: px2rem(14)
         line-height: px2rem(26)
-
     .logo
         img
-            height: 60px
+            height: $footer-logo-height
             max-width: 100%
             width: auto
-
+            @include media-breakpoint-up(md)
+                height: $footer-logo-height-md
     .content
         @include grid(3, md)
         margin-bottom: $spacing1
