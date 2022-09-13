@@ -3,7 +3,7 @@
 ## Installer le thème
 
 ```
-git submodule add https://github.com/noesya/osuny-hugo-theme.git themes/osuny-hugo-theme-AAA
+git submodule add https://github.com/noesya/osuny-hugo-theme-AAA.git themes/osuny-hugo-theme-AAA
 ```
 
 Dans le config.yaml
