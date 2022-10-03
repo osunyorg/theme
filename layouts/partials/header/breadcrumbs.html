@@ -47,18 +47,14 @@
     {{- end -}}
     {{- $title = chomp $title }}
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item{{- if .active }} active{{ end }}"{{- if .active }} aria-current="page"{{ end }}>
-      {{ if .active -}}
-        <span itemprop="item">
-      {{- else -}}
+      {{ if not .active -}}
         <a itemprop="item" href="{{ .page.Permalink }}">
       {{- end }}
         <span itemprop="name">{{- partial "PrepareHTML" $title -}}</span>
-        <meta itemprop="position" content="{{- .position -}}">
-      {{ if .active -}}
-        </span>
-      {{- else -}}
-      </a>
+      {{ if not .active -}}
+        </a>
       {{- end }}
+      <meta itemprop="position" content="{{- .position -}}">
     </li>
   {{- end -}}
 {{- end -}}
