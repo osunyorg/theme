@@ -29,10 +29,15 @@ footer[role="contentinfo"]
             display: flex
             [class^="nav-"]
                 margin-top: 0
+                display: block
+                li
+                    display: inline-block
+                    a
+                        display: block
             .credit + [class^="nav-"],
             [class^="nav-"] + [class^="nav-"]
                 margin-left: auto
-                margin-right: -$spacing1
+                margin-right: -$spacing0
 
     .credit
         a
@@ -40,9 +45,9 @@ footer[role="contentinfo"]
 
     // TODO : add padding on every link in typography ?
     [class^="nav-"]
-        margin-left: calc(#{$spacing1} / -2)
+        margin-left: calc(#{$spacing0} / -2)
         a
-            padding: calc(#{$spacing1} / 2)
+            padding: calc(#{$spacing0} / 2)
     // END TODO
 
     @include media-breakpoint-up(md)
@@ -50,7 +55,7 @@ footer[role="contentinfo"]
         small + .credit
             &::before
                 content: '—'
-                margin: 0 calc(#{$spacing1} / 2) 0 0
+                margin: 0 calc(#{$spacing0} / 2) 0 0
 
     ul
         @include list-reset
@@ -69,9 +74,9 @@ footer[role="contentinfo"]
         .nav-legal,
         .nav-social
             flex-direction: row
-        .nav-legal
-            li:not(:first-child)
-                margin-left: -$spacing1
-        .nav-social
-            li:not(:last-child)
-                margin-right: -$spacing1
+        // .nav-legal
+        //     li:not(:first-child)
+        //         margin-left: -$spacing0
+        // .nav-social
+        //     li:not(:last-child)
+        //         margin-right: -$spacing0
