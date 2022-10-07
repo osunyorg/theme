@@ -15,14 +15,12 @@
         max-height: 70vh
         overflow: auto
     a,
-    a:hover,
     a:focus,
     a:active
         @include link($header-color)
     span
         color: $header-color
     ul
-        display: flex
         list-style: none
         margin: 0
         padding: 0
@@ -51,22 +49,23 @@
     .dropdown-menu
         display: none
         background: $header-dropdown-background
-        padding-bottom: $spacing1
-        padding-top: $spacing1
+        @include media-breakpoint-down(md)
+            padding-bottom: $spacing1
         @include media-breakpoint-up(md)
-            inset: 100% 0 auto 0
+            padding: $spacing1
             position: absolute
         a
             color: $header-dropdown-color 
+            &:hover,
+            &:focus
+                text-decoration-color: $header-dropdown-color
 
     .nav-level-1
         display: flex
-        @include media-breakpoint-down(md)
-            @include grid(1)
         > li
             > a, span
                 display: block
-                padding: $spacing1
+                padding: $spacing0
             &:last-child a
                 padding-right: 0
         li.has-children
@@ -77,10 +76,6 @@
                 animation-name: showIn
 
     .nav-level-2
-        @include grid(1)
-        @include media-breakpoint-up(md)
-            @include container
-            @include grid(4, md)
         > li
             > a,
             > span
@@ -94,6 +89,25 @@
         a,
         span
             font-size: px2rem(14)
+
+    @include media-breakpoint-up(md)
+        @if $header-dropdown-full
+            .dropdown-menu
+                inset: 100% 0 auto 0
+            .nav-level-2
+                @include container
+                @include grid(4, md)
+        @else 
+            .dropdown-menu
+                padding-bottom: $spacing0/2
+                padding-left: $spacing0
+                padding-top: $spacing0/2
+                padding-right: $spacing0
+            .nav-level-2
+                > li > a
+                    padding-bottom: $spacing0/2
+                    padding-top: $spacing0/2
+                    display: block
 
     @include media-breakpoint-down(md)
         &.is-opened
@@ -121,6 +135,11 @@
                     padding-top: 0
                 [aria-expanded=true] + .dropdown-menu
                     display: block
+        .dropdown-menu
+            padding-left: 0
+
+        .nav-level-2
+            @include grid(1)
 
 // TODO : Est-ce au bon endroit ?
 body
