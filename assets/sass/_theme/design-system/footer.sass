@@ -34,11 +34,9 @@ footer[role="contentinfo"]
                     display: inline-block
                     a
                         display: block
-            .credit + [class^="nav-"],
             [class^="nav-"] + [class^="nav-"]
                 margin-left: auto
                 margin-right: -$spacing0
-
     .credit
         a
             padding: 0
@@ -50,12 +48,6 @@ footer[role="contentinfo"]
             padding: calc(#{$spacing0} / 2)
     // END TODO
 
-    @include media-breakpoint-up(md)
-        [class^="nav-"] + .credit,
-        small + .credit
-            &::before
-                content: '—'
-                margin: 0 calc(#{$spacing0} / 2) 0 0
 
     ul
         @include list-reset
