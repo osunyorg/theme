@@ -2,17 +2,17 @@
     .pages
         @include grid(2, md)
 
-.block-pages
     .main-page
-        // @include media-breakpoint-up(lg)
-            // > div:first-child
-            //     padding-right: $spacing1
         .title
             a::before
                 content: none
     &--grid
         .main-page
             margin-bottom: $spacing2
+        @include in-page-without-aside
+            .pages
+                @include grid(3, xl)
+
     &--list
         .block-content
             @include grid(2, lg)
