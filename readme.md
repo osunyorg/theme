@@ -1,14 +1,14 @@
-# Osuny School Theme
+# Thème Osuny AAA
 
 ## Installer le thème
 
 ```
-git submodule add https://github.com/noesya/osuny-hugo-theme-AAA.git themes/osuny-hugo-theme-AAA
+git submodule add https://github.com/noesya/osuny-hugo-theme-aaa.git themes/osuny-hugo-theme-aaa
 ```
 
 Dans le config.yaml
 ```
-theme: osuny-hugo-theme-AAA
+theme: osuny-hugo-theme-aaa
 ```
 
 Puis il faut créer un package.json avec ```yarn init``` et y ajouter :
