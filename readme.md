@@ -1,3 +1,3 @@
-# Thème Hugo Osuny AAA
+# Thème Osuny
 
 [Documentation officielle sur developers.osuny.org](https://developers.osuny.org)
