@@ -68,23 +68,25 @@
     margin-left: auto
     margin-right: auto
     max-width: $grid-max-width
-    padding-left: $grid-gutter-sm
-    padding-right: $grid-gutter-sm
+    padding-left: $grid-gutter-sm / 2
+    padding-right: $grid-gutter-sm / 2
     width: 100%
     @include media-breakpoint-up(md)
         padding-left: $grid-gutter
         padding-right: $grid-gutter
 
-@mixin grid($cols: 12, $breakpoint: false, $gap-y: $grid-gutter)
+@mixin grid($cols: 12, $breakpoint: false, $gap-y: $grid-gutter, $gap-x: $grid-gutter)
     @if $breakpoint
         @include media-breakpoint-up($breakpoint)
             display: grid
-            grid-gap: $gap-y $grid-gutter
+            grid-gap: $gap-y $gap-x
             grid-template-columns: repeat($cols, 1fr)
     @else
         display: grid
-        grid-gap: $gap-y $grid-gutter
+        grid-gap: $gap-y $gap-x
         grid-template-columns: repeat($cols, 1fr)
+    @include media-breakpoint-down(md)
+        grid-gap: $grid-gutter-sm
 
 @function col($nb, $base: 12)
     $nb: $nb/$base * 12
