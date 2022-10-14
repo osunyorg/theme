@@ -63,7 +63,6 @@
 .posts__page
     aside
         @include container
-        margin-top: $spacing1
 
 .post-categories
     @include list-reset
@@ -75,14 +74,16 @@
         &::after
             content: ", "
             margin-left: -3px
+            margin-right: 3px
         &:last-child
             &::after
                 content: none
 
 .table-infos
     border-top: 1px solid $main-border-color
-    font-size: $small-font-size
     margin-bottom: 0
+    &, li
+        font-size: $small-font-size    
     ul
         @include list-reset
     caption

@@ -88,10 +88,17 @@
     @include media-breakpoint-down(md)
         grid-gap: $grid-gutter-sm
 
-@function col($nb, $base: 12)
-    $nb: $nb/$base * 12
-    $nbCol: calc( (100% + #{$grid-gutter}) / 12 * #{$nb} )
-    @return #{$nbCol}
+// This must be used for content inside columns
+@function col($quantity, $base: 12)
+    $quantity-on-base: $quantity / $base * 12
+    $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} - #{$grid-gutter} )
+    @return #{$width}
+
+// This must be used for offset, outside columns
+@function offset($quantity, $base: 12)
+    $quantity-on-base: $quantity / $base * 12
+    $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} )
+    @return #{$width}
 
 @mixin stretched-link($pseudo-element: after)
     &::#{$pseudo-element}
