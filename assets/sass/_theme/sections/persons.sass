@@ -54,7 +54,6 @@ ol.persons
                 & + p
                     width: col(7)
 
-
 .avatar
     @include aspect-ratio(50, 50, 'img')
     background-color: $persons-avatar-background-color
@@ -99,6 +98,9 @@ ol.persons
 
 @include media-breakpoint-up(lg)
     .persons__page
+        main
+            .container
+                margin-top: $spacing2
         .informations
             @include grid
             margin-bottom: $spacing2
@@ -110,3 +112,6 @@ ol.persons
 
             .lead + div
                 margin-top: $spacing2
+
+        .posts 
+            @include grid(3)
