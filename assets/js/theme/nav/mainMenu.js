@@ -52,7 +52,8 @@ class MainMenu {
 
     resize () {
         const isMobile = window.innerWidth <= breakpoints.md;
-        // document.documentElement.style.setProperty('--header-height', this.element.offsetHeight + 'px');
+        document.documentElement.style.setProperty('--header-height', this.element.offsetHeight + 'px');
+
         // is state changed ?
         if (this.state.isMobile === isMobile) {
             return null;
