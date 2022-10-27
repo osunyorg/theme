@@ -1,7 +1,8 @@
-{{- $position := .position -}}
-{{- $title := .title -}}
+{{- $context := .context -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
 {{- $layout_class := "block-gallery--grid" -}}
-{{- with .data -}}
+{{- with .block.data -}}
   {{- $layout := .layout -}}
   {{- if $layout -}}
     {{- $layout_class = printf "block-gallery--%s" .layout -}}
@@ -12,7 +13,10 @@
         {{- if (or $title .description) }}
           <div class="top">
             {{- if $title }}
-              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ partial "blocks/title" (dict 
+              "title" $title
+              "context" $context
+              ) }}
             {{ end -}}
             {{- if .description }}
               <div class="description">

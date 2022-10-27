@@ -1,8 +1,12 @@
-{{- if . -}}
+{{ $context := . }}
+{{- if .Params.blocks -}}
   <div class="blocks">
-  {{- range . -}}
+  {{- range .Params.blocks -}}
     {{ $template := printf "blocks/templates/%s.html" .template }}
-    {{ partial $template . }}
+    {{ partial $template (dict 
+        "block" . 
+        "context" $context
+    )}}
   {{- end -}}
   </div>
 {{- end -}}

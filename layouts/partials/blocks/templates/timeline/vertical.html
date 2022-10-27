@@ -1,7 +1,10 @@
 <div class="block-content">
   {{ if .title -}}
     <div class="top">
-      <h2>{{ partial "PrepareHTML" .title }}</h2>
+      {{ partial "blocks/title" (dict 
+        "title" .title
+        "context" .context
+        ) }}
     </div>
   {{- end }}
 

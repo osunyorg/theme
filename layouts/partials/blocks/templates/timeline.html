@@ -1,10 +1,14 @@
-{{- $position := .position -}}
-{{- $title := .title -}}
-{{- $layout := .data.layout | default "vertical" -}}
+{{- $context := .context -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+{{- $layout := .block.data.layout | default "vertical" -}}
 <section class="block-timeline{{ if $title }} block-with-title{{ end }} block-timeline--{{ $layout }}" id="block-{{ $position }}">
   <div class="container">
     {{ $template := printf "blocks/templates/timeline/%s.html" $layout }}
-    {{ partial $template . }}
+    {{ partial $template (dict 
+        "block" .
+        "context" $context
+      ) }}
   </div>
 </section>
 

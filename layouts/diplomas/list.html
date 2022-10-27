@@ -5,7 +5,7 @@
     {{ partial "diplomas/image.html" .Params.image }}
     {{ partial "diplomas/chapo.html" .Params.description_short }}
   </div>
-  {{ partial "blocks/list.html" .Params.blocks }}
+  {{ partial "blocks/list.html" . }}
   <div class="container">
     {{ .Scratch.Set "show_programs" true }}
     {{ partial "diplomas/diplomas.html" . }}

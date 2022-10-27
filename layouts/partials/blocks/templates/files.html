@@ -1,12 +1,16 @@
-{{- $position := .position -}}
-{{- $title := .title -}}
-{{- with .data -}}
+{{- $context := .context -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+{{- with .block.data -}}
   <section class="block-files{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
         {{- if $title }}
           <div class="top">
-            <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ partial "blocks/title" (dict 
+              "title" $title
+              "context" $context
+              ) }}
           </div>
         {{ end -}}
         {{- if .description }}

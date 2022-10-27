@@ -1,16 +1,17 @@
-{{- $position := .position -}}
-{{- $title := .title -}}
-{{- with .data -}}
+{{- $context := .context -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+{{- with .block.data -}}
   {{- $buttons := and .button.text .button_secondary.text -}}
   <section class="block-call_to_action{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
         <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image">
           <div>
-            {{- if $title }}
-              <h2>{{ partial "PrepareHTML" $title }}</h2>
-            {{- end -}}
-
+            {{ partial "blocks/title" (dict 
+              "title" $title
+              "context" $context
+              ) }}
             {{- if (partial "GetTextFromHTML" .text) }}
             <div>
               {{ partial "PrepareHTML" .text }}

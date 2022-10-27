@@ -1,0 +1,23 @@
+{{- if .title }}
+  {{- if ne .context.Type "programs" }}
+    <h2>
+      {{- if .link -}}
+        <a href="{{ .link }}">
+      {{- end -}}
+      {{ partial "PrepareHTML" .title }}
+      {{- if .link -}}
+        </a>
+      {{- end -}}
+    </h2>
+  {{ else }}
+    <h3>
+      {{- if .link -}}
+        <a href="{{ .link }}">
+      {{- end -}}
+      {{ partial "PrepareHTML" .title }}
+      {{- if .link -}}
+        </a>
+      {{- end -}}
+    </h3>
+  {{ end -}}
+{{ end -}}

@@ -7,9 +7,8 @@
     {{ partial "persons/chapo.html" .Params.description_short }}
   </div>
 
-  {{ if .Params.blocks }}
-    {{ partial "blocks/list.html" .Params.blocks }}
-  {{ end }}
+
+  {{ partial "blocks/list.html" . }}
 
   <div class="container">
     {{ partial "persons/list-specific.html" . }}

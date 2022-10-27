@@ -1,14 +1,11 @@
-{{- $position := .position -}}
-{{- $title := .title -}}
-{{- with .data -}}
+{{- $context := .context -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+{{- with .block.data -}}
   {{- $buttons := and .button.text .button_secondary.text -}}
   <section class="block-image{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
-        <div>
-          {{- if $title }}
-          {{ end -}}
-        </div>
         {{/*  TODO: refactor  */}}
         {{- with .image -}}
           {{- $image := partial "GetMedia" .file -}}

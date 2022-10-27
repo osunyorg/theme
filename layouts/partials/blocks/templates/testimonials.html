@@ -1,8 +1,9 @@
-{{- $position := .position -}}
-{{- $title := .title -}}
+{{- $context := .context -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
 {{- $is_carousel := false -}}
 
-{{- with .data -}}
+{{- with .block.data -}}
   {{ if gt (len .testimonials) 1 }}
     {{- $is_carousel = true -}}
   {{ end }}
@@ -11,7 +12,10 @@
       <div class="block-content">
         {{ if $title -}}
           <div class="top">
-            <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ partial "blocks/title" (dict 
+              "title" $title
+              "context" $context
+              ) }}
           </div>
         {{ end -}}
 

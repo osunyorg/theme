@@ -2,7 +2,7 @@
   {{ partial "programs/image.html" .Params.image }}
   {{ partial "programs/chapo.html" .Params.description_short }}
 </div>
-{{ partial "blocks/list.html" .Params.blocks }}
+{{ partial "blocks/list.html" . }}
 <div class="container">
   {{ partial "diplomas/diplomas-select.html" . }}
   {{ $programs := where .Site.Pages "Section" "programs" }}

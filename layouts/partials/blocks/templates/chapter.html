@@ -1,7 +1,8 @@
-{{- $position := .position -}}
-{{- $title := .title -}}
+{{- $context := .context -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
 {{- $class := "block-chapter" -}}
-{{- with .data -}}
+{{- with .block.data -}}
   {{ if .image }}
     {{- $class = printf "%s block-chapter--with-image" $class -}}
   {{ end }}
@@ -12,7 +13,10 @@
         <div class="chapter">
           {{ if $title -}}
             <div class="top">
-              <h2>{{ partial "PrepareHTML" $title }}</h2>
+              {{ partial "blocks/title" (dict 
+                "title" $title
+                "context" $context
+                ) }}
             </div>
           {{ end -}}
           {{ if (partial "GetTextFromHTML" .text) -}}

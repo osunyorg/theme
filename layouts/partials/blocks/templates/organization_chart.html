@@ -1,15 +1,17 @@
-{{- $position := .position -}}
-{{- $title := .title -}}
-{{- with .data -}}
+{{- $context := .context -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+{{- with .block.data -}}
   {{- $with_link := .with_link -}}
 <section class="block-organization_chart{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
   <div class="container">
     <div class="block-content">
         {{ if (or $title .description) -}}
           <div class="top">
-            {{- if $title }}
-              <h2>{{ partial "PrepareHTML" $title }}</h2>
-            {{ end -}}
+            {{ partial "blocks/title" (dict 
+              "title" $title
+              "context" $context
+              ) }}
             {{- if .description }}
               <div class="description">
                 {{ partial "PrepareHTML"  .description }}

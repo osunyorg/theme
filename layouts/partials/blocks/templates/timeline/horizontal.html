@@ -1,6 +1,9 @@
 <div class="timeline">
   {{ if .title }}
-    <h2>{{ partial "PrepareHTML" .title }}</h2>
+    {{ partial "blocks/title" (dict 
+    "title" .title
+    "context" .context
+    ) }}
   {{ end }}
 
   {{ with .data }}

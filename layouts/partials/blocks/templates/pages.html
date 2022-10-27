@@ -1,7 +1,8 @@
-{{- $position := .position -}}
-{{- $title := .title -}}
+{{- $context := .context -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
 {{- $layout_class := "block-pages--grid" -}}
-{{- with .data -}}
+{{- with .block.data -}}
   {{- $layout := .layout -}}
 
   {{- $show_main_page := false -}}
@@ -41,7 +42,10 @@
 
         {{- if and $title (not $show_main_page) }}
           <div class="top">
-            <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ partial "blocks/title" (dict 
+              "title" $title
+              "context" $context
+              ) }}
           </div>
         {{ end -}}
 

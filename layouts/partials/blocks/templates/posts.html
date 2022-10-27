@@ -1,7 +1,8 @@
-{{- $position := .position -}}
-{{- $title := .title -}}
+{{- $context := .context -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
 {{- $term := false -}}
-{{- with .data }}
+{{- with .block.data }}
   {{ if .category }}
     {{- $term = site.GetPage (printf "/categories%s" .category) -}}
   {{ end }}
@@ -10,15 +11,18 @@
       <div class="block-content">
         {{ if $title -}}
           <div class="top">
-            <h2>
-              {{- if $term -}}
-                <a href="{{ $term.Permalink }}">
-              {{- end -}}
-                {{- partial "PrepareHTML" $title -}}
-              {{- if $term -}}
-                </a>
-              {{- end -}}
-            </h2>
+
+            {{ $title_link := false }}
+            {{- if $term }}
+              {{ $title_link = $term.Permalink }}
+            {{ end -}}
+
+            {{ partial "blocks/title" (dict 
+              "title" $title
+              "context" $context
+              "link" $title_link
+              ) }}
+
           </div>
         {{- end }}
 
