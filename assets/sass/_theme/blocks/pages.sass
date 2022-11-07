@@ -38,6 +38,7 @@
                     a
                         @include hover-translate-icon(before, 3)
                         text-decoration-color: transparent
+                        line-height: px2rem(30)
                         &:hover
                             text-decoration-color: black
         .page
@@ -48,6 +49,12 @@
         background-color: $block-pages-card-background
         padding-bottom: $grid-gutter
         padding-top: $grid-gutter
+        .main-page
+            a
+                @include icon("arrow-right", after)
+                @include hover-translate-icon(before, 3)
+                &::after
+                    font-size: px2rem(14)
         .pages
             @include grid(3, md)
             margin-top: $spacing2
@@ -59,17 +66,33 @@
                 a
                     color: $block-pages-card-page-color
                 .more
+                    @include icon("arrow-right", after)
                     @include link($block-pages-card-page-color)
-                    @extend .small
+                    // @extend .small
+                    font-size: px2rem(16)
+                    position: relative
                     text-decoration-color: $block-pages-card-page-color
                     text-decoration-line: underline
                     text-decoration-thickness: 1px
                     text-underline-offset: 3px
+                    margin-top: auto
+                    &::after
+                        font-size: $small-font-size
+                        opacity: 0
+                        position: absolute
+                        right: 0
+                        transform: translateX(-20px)
+                        transition: 0.55s $arrow-ease-transition
+                &:hover
+                    .more:after
+                        opacity: 1
+                        transform: translateX(0)
                 a,
                 .more
                     transition: text-decoration-color .3s ease, color .3s ease
                 > div:first-child
                     display: flex
+                    flex: auto
                     flex-direction: column
                 .title
                     a
