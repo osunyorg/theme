@@ -7,7 +7,6 @@ header[role="banner"]
     width: 100%
     z-index: $zindex-header
     @include media-breakpoint-down(md)
-        padding: 1rem 0
         width: 100%
     &.is-sticky
         background: $header-sticky-background
@@ -26,9 +25,10 @@ header[role="banner"]
         @include media-breakpoint-up(md)
             &:not(:hover)
                 transform: translateY(-100%)
-    
+
     .logo
         img
+            display: block
             height: $header-logo-height
             width: auto
             @include media-breakpoint-up(md)
