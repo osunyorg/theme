@@ -21,7 +21,8 @@ body
 
 
 main
-    padding-bottom: $spacing3
+    &:not(.page-with-blocks)
+        padding-bottom: $spacing3
     // Create padding-top for fixed header under md
     @include media-breakpoint-down(md)
         padding-top: var(--header-height)

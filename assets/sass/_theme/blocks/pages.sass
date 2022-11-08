@@ -1,11 +1,12 @@
 .block-pages
     .pages
         @include grid(2, md)
-
     .main-page
         .title
-            a::before
-                content: none
+            a
+                display: block
+                &::before
+                    content: none
     &--grid
         .main-page
             margin-bottom: $spacing2
@@ -23,22 +24,22 @@
                 @extend .h4
                 @include media-breakpoint-up(lg)
                     margin-bottom: 0
-            p:not(.title)
+            p
                 @extend .h3
                 @include media-breakpoint-up(lg)
                     margin-top: $spacing1
 
         .pages
-            @include grid(1, false, $spacing0)
+            display: block
             margin-top: $spacing2
             @include media-breakpoint-up(lg)
-                margin-top: calc(#{$spacing2} + #{$h6-size-md})
+                margin-top: calc(#{$spacing2} + #{$h4-size-md})
             .page
                 .title
+                    margin: calc(#{$spacing1} / 2) 0
                     a
                         @include hover-translate-icon(before, 3)
                         text-decoration-color: transparent
-                        line-height: px2rem(30)
                         &:hover
                             text-decoration-color: black
         .page
@@ -59,12 +60,16 @@
             @include grid(3, md)
             margin-top: $spacing2
             .page
-                aspect-ratio: 0.887
+                aspect-ratio: 0.8
                 background-color: $block-pages-card-page-background
                 transition: background 0.3s, color 0.3s
                 &,
                 a
                     color: $block-pages-card-page-color
+                .title + p
+                    margin-top: $spacing0
+                .media
+                    margin-bottom: 0
                 .more
                     @include icon("arrow-right", after)
                     @include link($block-pages-card-page-color)
