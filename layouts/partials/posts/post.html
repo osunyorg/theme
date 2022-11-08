@@ -1,7 +1,10 @@
 <article class="post">
   <div>
     {{- $title := partial "PrepareHTML" .Title -}}
-    <p class="title"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></p>
+    <h2 class="h4"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h2>
+    {{- if (partial "GetTextFromHTML" .Params.description_short) -}}
+      <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
+    {{- end -}}
     <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
   </div>
   <div class="media">
