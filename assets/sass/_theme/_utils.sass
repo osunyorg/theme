@@ -110,19 +110,19 @@
         top: 0
         z-index: $zindex-stretched-link
 
-@mixin aspect-ratio($width, $height, $selector: 'iframe', $background: false)
+@mixin aspect-ratio($ratio, $selector: 'iframe', $background: false)
     @if $background
-        aspect-ratio: #{$width}/#{$height}
+        aspect-ratio: #{$ratio}
         background: $background
     #{$selector}
-        aspect-ratio: #{$width}/#{$height}
+        aspect-ratio: #{$ratio}
         display: block
         width: 100%
     @supports not (aspect-ratio: 1)
         position: relative
         &::before
             content: ''
-            padding-top: ($height / $width) * 100%
+            padding-top: (1 / $ratio) * 100%
             width: 100%
         #{$selector}
             bottom: 0
@@ -136,7 +136,8 @@
     display: flex
     flex-direction: column
     .media
-        @include aspect-ratio(2, 1, 'img', $background)
+        @if $article-media-aspect-ratio
+            @include aspect-ratio($article-media-aspect-ratio, 'img', $background)
         margin-bottom: $spacing1
         order: -1
         overflow: hidden
