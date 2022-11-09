@@ -84,8 +84,9 @@ a,
     &[target="_blank"]:not(.icon)
         @include icon("link-blank", "after")
         &::after
+            content: " #{map-get($icons, "link-blank")}"
+            display: inline
             font-size: px2rem(10)
-            margin-left: px2rem(5)
     &[href^="mailto"]
         &::after
             content: none
@@ -136,4 +137,4 @@ dd
     .btn-#{$name}
         @include icon($name)
         &::before
-            margin-right: px2rem(5)
+            margin-inline-end: px2rem(5)
