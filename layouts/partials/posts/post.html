@@ -1,11 +1,11 @@
-<article class="post">
+<article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
   <div>
     {{- $title := partial "PrepareHTML" .Title -}}
-    <h2 class="h4"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h2>
+    <h2 class="h4" itemprop="headline"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h2>
     {{- if (partial "GetTextFromHTML" .Params.description_short) -}}
-      <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
+      <p itemprop="articleBody">{{ partial "PrepareHTML" .Params.description_short }}</p>
     {{- end -}}
-    <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
+    <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
   </div>
   <div class="media">
     {{- if .Params.image -}}
