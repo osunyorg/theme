@@ -92,27 +92,63 @@ ol.programs
             // > button
             //     @include media-breakpoint-down(md)
             //         width: 100%
-        .buttons
+            
+    .dropdown-share
+        position: relative
+        > button
+            @include button-icon(social)
+            color: $hero-color
+            border-color: $hero-color
+            font-size: $program-share-font-size
+            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+            &:hover,
+            &:active,
+            &:focus
+                background: $main-background-color
+                color: $main-color
+            // a11y
+            &:active,
+            &:focus
+                box-shadow: 0 0 0 0.25rem rgba(white, .5)
+            @include media-breakpoint-up(md)
+                font-size: $program-share-font-size-md
+        .dropdown-menu
+            background: $hero-color
+            padding: 0
+            position: absolute
+            width: 100%
+            bottom: 100%
+            .share
+                display: flex
+                li
+                    margin: 0
+                    flex: 1 1
+                    text-align: center
+            a
+                display: block
+                color: invert($hero-color)
+    .buttons
+        margin-top: $spacing1
+        @include media-breakpoint-up(md)
+            bottom: 2.25rem
+            margin-top: 0
+            position: absolute
+            right: $grid-gutter
+        button, > a
+            display: flex
+            align-items: center
+            justify-content: space-between
+            width: 100%
+        a[download]
+            @include button-icon(download)
+            color: $hero-background-color
+            background: $hero-color
+            border-color: $hero-color
+            font-size: $program-share-font-size
             margin-top: $spacing1
             @include media-breakpoint-up(md)
-                bottom: 2.25rem
-                margin-top: 0
-                position: absolute
-                right: $grid-gutter
-            button, > a
-                display: flex
-                align-items: center
-                justify-content: space-between
-                width: 100%
-            a[download]
-                @include button-icon(download)
-                color: $hero-background-color
-                background: $hero-color
-                border-color: $hero-color
-                font-size: $program-share-font-size
-                margin-top: $spacing1
-                @include media-breakpoint-up(md)
-                    font-size: $program-share-font-size-md
+                font-size: $program-share-font-size-md
+
     .lead
         padding-top: $spacing2
     aside
