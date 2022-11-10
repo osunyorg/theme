@@ -10,12 +10,15 @@
             &:not(:last-child)
                 margin-bottom: 1rem
             a
-                // TODO : nav link style ?
                 color: $toc-color
                 display: block
-                font-size: px2rem(18)
-                line-height: px2rem(20)
+                font-size: $toc-font-size
+                font-family: $toc-font-family
+                font-weight: $toc-font-weight
+                line-height: $toc-line-height
                 text-decoration: none
+                @include media-breakpoint-up(md)
+                    font-size: $toc-font-size-md
                 &:hover
                     text-decoration: underline
     .active
