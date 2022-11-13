@@ -6,7 +6,8 @@
   <div class="container">
     {{ $template := printf "blocks/templates/timeline/%s.html" $layout }}
     {{ partial $template (dict 
-        "block" .
+        "title" $title
+        "block" .block
         "context" $context
       ) }}
   </div>
