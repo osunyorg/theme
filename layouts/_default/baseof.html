@@ -24,5 +24,8 @@
     {{- partial "footer/cookie-banner.html" . -}}
     {{- partial "footer/js.html" . -}}
     {{- partial "footer/script.html" . -}}
+    {{- if not hugo.IsProduction -}}
+      {{- partial "footer/debug.html" . -}}
+    {{- end -}}
   </body>
 </html>
