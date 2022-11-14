@@ -37,16 +37,13 @@
         &::#{$pseudo}
             transform: translateX(#{px2rem($distance)})
 
-@mixin sticky($offset-y: false)
+@mixin sticky($offset-y: 0)
     position: sticky
-    top: 0
+    top: $offset-y
     @if $header-sticky-enabled
         transition: top $header-sticky-transition
         html:not(.is-scrolling-down) &
-            @if $offset-y
-                top: calc(var(--header-height) + #{$offset-y})
-            @else 
-                top: var(--header-height)
+            top: calc(var(--header-height) + #{$offset-y})
 
 // NEW UTILS
 @mixin icon($icon-name: '', $pseudo-element: before, $font-size: px2rem(10))
