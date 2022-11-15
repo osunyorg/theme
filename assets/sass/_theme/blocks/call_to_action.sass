@@ -54,7 +54,7 @@
     @include in-page-without-aside
         .block-content
             background-color: $block-call-to-action-background
-            padding: $grid-gutter-sm
+            padding: offset(1)
         .call_to_action--with-image
             @include media-breakpoint-down(md)
                 display: flex
@@ -62,20 +62,14 @@
                 > *
                     order: 2
                 picture
-                    margin-bottom: col(1)
+                    margin-bottom: offset(1)
                     order: 1
             @include media-breakpoint-up(md)
-                // @include make-row
                 @include grid(2, md)
                 align-items: center
-                > *
-                    // @include make-col-ready
                 > div
-                    // @include make-col(6)
                     > *
-                        margin-right: col(1, 5)
-                picture
-                    // @include make-col(6)
+                        margin-right: offset(1, 5) // ???
                 div + div
                     a
                         margin-right: 1rem
