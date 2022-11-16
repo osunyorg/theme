@@ -18,6 +18,10 @@
     body.full-width &,
         @content
 
+@mixin full-page
+    @include in-page-without-aside
+        @content
+
 @mixin link($color: $link-color)
     color: $color
     text-decoration-color: rgba($color, 0.3)

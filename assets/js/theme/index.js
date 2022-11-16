@@ -1,7 +1,5 @@
 import './body.js';
+import './design-system/dropdowns';
+import './design-system/mainMenu';
 import './blocks/keyFigures';
 import './blocks/timeline';
-import './design-system/dropdowns';
-import './nav/stickyNav';
-// import './nav/responsive';
-import './nav/mainMenu';

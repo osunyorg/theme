@@ -4,10 +4,19 @@
     box-sizing: border-box
 
 \:root
+    --spacing0: #{$spacing0}
+    --spacing1: #{$spacing1}
+    --spacing2: #{$spacing2}
+    --spacing3: #{$spacing3}
+    --spacing4: #{$spacing4}
+    --spacing5: #{$spacing5}
+    --grid-gutter: #{$grid-gutter}
+    --grid-max-width: #{$grid-max-width}
     --header-height: #{$header-height}
-    @include media-breakpoint-up(md)
+     @include media-breakpoint-up(md)
         --header-height: #{$header-height-md}
 
+// TODO: choisir entre margin top / bottom --> https://matthewjamestaylor.com/css-margin-top-vs-bottom
 
 body
     color: $body-color
@@ -29,6 +38,8 @@ main
 
 .container
     @include container
+    .hero + &
+        margin-top: $spacing3
 
 ul
     padding-left: px2rem(15)
