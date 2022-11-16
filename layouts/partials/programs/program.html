@@ -5,11 +5,11 @@
 {{- $title := partial "PrepareHTML" .Title -}}
 <article class="program">
   <div>
-    <p class="title">
+    <h1>
       <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
         {{- $title -}}
       </a>
-    </p>
+    </h1>
     {{ if (partial "GetTextFromHTML" .Params.presentation) }}
       <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
     {{ end }}
