@@ -3,7 +3,7 @@
     {{ range site.Sections }}
       {{ if ne .Type "sitemap" }}
         <li>
-          <a class="nav-link" href="#{{ .Type }}">{{ safeHTML .Title }}</a>
+          <a href="#{{ .Type }}">{{ safeHTML .Title }}</a>
         </li>
       {{ end }}
     {{ end }}

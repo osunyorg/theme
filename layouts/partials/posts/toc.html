@@ -4,12 +4,12 @@
   <ol>
     {{- if and (not $h2s) (partial "GetTextFromHTML" .Content) }}
       <li>
-        <a class="nav-link" href="#page-informations">{{ i18n "pages.informations" }}</a>
+        <a href="#page-informations">{{ i18n "pages.informations" }}</a>
       </li>
     {{ end -}}
     {{- range $index, $h2 := $h2s }}
       <li>
-        <a class="nav-link" href="#page-h2-{{$index}}">{{ plainify $h2 }}</a>
+        <a href="#page-h2-{{$index}}">{{ plainify $h2 }}</a>
       </li>
     {{- end -}}
     {{- partial "blocks/toc.html" .Params.blocks -}}
