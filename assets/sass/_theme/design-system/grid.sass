@@ -5,7 +5,7 @@
     position: relative
     @include media-breakpoint-up(md)
         body:not(.full-width) &
-            > aside
+            > aside, > .document-nav
                 @include container
                 pointer-events: none
                 height: 100%
@@ -24,9 +24,9 @@
                     padding-left: offset(5)
 
     @include media-breakpoint-down(md)
-        aside
+        aside, .document-nav
             display: none
     // TODO: mieux gérer la gestion de l'aside dans l'html
     body.full-width &
-        aside
+        aside, .document-nav
             display: none

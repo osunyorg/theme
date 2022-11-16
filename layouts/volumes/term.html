@@ -1,7 +1,7 @@
 {{ define "main" }}
   {{ partial "volumes/hero.html" . }}
 
-<article itemscope itemtype="https://schema.org/PublicationVolume">
+<div class="document-content" itemscope itemtype="https://schema.org/PublicationVolume">
   <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
   {{- if .Params.image -}}
     {{- $image := partial "GetMedia" .Params.image.id -}}
@@ -15,10 +15,10 @@
     <div class="content">
       {{ partial "volumes/image.html" . }}
       {{ partial "volumes/description.html" . }}
-      {{ partial "volumes/aside.html" . }}
+      {{ partial "volumes/document-aside.html" . }}
       {{ partial "volumes/table-contents.html" . }}
     </div>
   </div>
-</article>
+</div>
 
 {{ end }}

@@ -8,18 +8,17 @@
     $remSize: $size / 16 / 2
     @return #{$remSize}rem
 
-@mixin in-page-with-aside
-    body:not(.full-width) aside ~ .blocks &
+@mixin in-page-with-nav
+    body:not(.full-width) .document-nav ~ .blocks &
         @content
 
-@mixin in-page-without-aside
+@mixin in-page-without-nav
     main > .blocks &,
-    // main > .blocks &,
     body.full-width &,
         @content
 
 @mixin full-page
-    @include in-page-without-aside
+    @include in-page-without-nav
         @content
 
 @mixin link($color: $link-color)
