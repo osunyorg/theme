@@ -20,6 +20,7 @@
   .d-grid {
     bottom: 0;
     display: none;
+    display: grid;
     grid-gap: var(--d-grid-margin);
     grid-template-columns: repeat(12, 1fr);
     opacity: 0.5;
@@ -29,7 +30,9 @@
     margin: auto;
     max-width: 100%;
     top: 0;
-    width: 1920px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(1920px + var(--d-grid-margin));
     z-index: 9999;
   }
   .d-grid.is-visible {

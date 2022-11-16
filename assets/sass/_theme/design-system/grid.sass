@@ -19,11 +19,14 @@
                 //     > *
                 //         width: col(4)
                 //         pointer-events: auto
-                position: sticky
+                // position: sticky
+                // top: 0
+                // @include sticky($spacing1)
+                position: absolute
                 top: 0
+                --grid-width: Min(100vw, (#{$grid-max-width}))
                 margin-left: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
-                // width: calc(calc(100vw - #{$grid-max-width} / 2) * (3 / 12))
-                width: calc(min(100vw, #{$grid-max-width}) * (3/12))
+                width: calc((var(--grid-width) + #{$grid-gutter} * 2) / 12 * 4 - #{$grid-gutter} * 2)
             > .blocks
                 .block-content
                     padding-left: offset(5)
