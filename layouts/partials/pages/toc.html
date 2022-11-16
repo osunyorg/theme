@@ -27,43 +27,47 @@
 {{- end -}}
 
 {{- if $show_aside }}
-<nav class="toc toc-pages" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
-  <ol>
+  <nav class="toc toc-pages" id="nav-toc" aria-labelledby="toc-title">
+    <ol>
 
-    {{- if .context.Params.blocks -}}
+      {{- if .context.Params.blocks -}}
 
-      {{- partial "blocks/toc.html" .context.Params.blocks -}}
+        {{- partial "blocks/toc.html" .context.Params.blocks -}}
 
-    {{- else -}}
+      {{- else -}}
 
-      {{/* TODO: Delete it */}}
-      {{ $h2s := partial "H2Extract" .context.Content }}
-      {{- if and (not $h2s) (partial "GetTextFromHTML" .context.Content) }}
-        <li>
-          <a href="#page-informations">{{ i18n "pages.informations" }}</a>
-        </li>
-      {{ end -}}
+        {{/* TODO: Delete it */}}
+        {{ $h2s := partial "H2Extract" .context.Content }}
+        {{- if and (not $h2s) (partial "GetTextFromHTML" .context.Content) }}
+          <li>
+            <a href="#page-informations">{{ i18n "pages.informations" }}</a>
+          </li>
+        {{ end -}}
 
-      {{- range $index, $h2 := $h2s }}
-        <li>
-          <a href="#page-h2-{{$index}}">{{ plainify $h2 }}</a>
-        </li>
-      {{ end -}}
+        {{- range $index, $h2 := $h2s }}
+          <li>
+            <a href="#page-h2-{{$index}}">{{ plainify $h2 }}</a>
+          </li>
+        {{ end -}}
 
-      {{- if .context.Pages }}
-        <li>
-          <a href="#page-children">{{ i18n "pages.details" }}</a>
-        </li>
-      {{ end -}}
+        {{- if .context.Pages }}
+          <li>
+            <a href="#page-children">{{ i18n "pages.details" }}</a>
+          </li>
+        {{ end -}}
 
-      {{- if .category.Pages }}
-        <li>
-          <a href="#page-posts">{{ i18n "pages.posts" }}</a>
-        </li>
-      {{ end -}}
+        {{- if .category.Pages }}
+          <li>
+            <a href="#page-posts">{{ i18n "pages.posts" }}</a>
+          </li>
+        {{ end -}}
 
-    {{- end -}}
+      {{- end -}}
 
-  </ol>
-</nav>
+    </ol>
+
+  </nav>
+
 {{ end -}}
+
+

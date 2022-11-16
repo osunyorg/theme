@@ -151,7 +151,6 @@ body
         pointer-events: none
         position: fixed
         opacity: 0
-        visibility: hidden
         transition: opacity $header-transition
         z-index: $zindex-body-overlay
 
@@ -160,12 +159,10 @@ body
             display: block
             opacity: 1
             pointer-events: inherit
-            visibility: inherit
 
     html.is-animating:not(.has-menu-opened) &
         &::after
             display: block
-            visibility: inherit
             opacity: 0
 
 header[role="banner"]

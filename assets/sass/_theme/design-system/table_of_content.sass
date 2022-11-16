@@ -1,3 +1,64 @@
+.toc-cta
+    display: flex
+    justify-content: end
+    cursor: pointer
+    @include media-breakpoint-up(md)
+        @include container
+        text-align: right
+        padding: $spacing1 0
+    @include media-breakpoint-down(md)
+        position: fixed
+        bottom: 0
+        background: white
+        justify-content: space-between
+        left: 0
+        width: 100%
+        padding: $spacing0
+        z-index: $zindex-toc-cta
+    button
+        margin-inline-start: $spacing0 
+
+.toc-container
+    background: white
+    position: fixed
+    top: 0
+    right: 0
+    bottom: 0
+    z-index: $zindex-toc
+    display: flex
+    flex-direction: column
+    margin-left: offset(3)
+    transform: translateX(100%)
+    transition: 0.35s transform ease-in-out
+    &.is-opened
+        transform: translateX(0)
+
+    .toc-title
+        border-bottom: 1px solid $main-border-color
+        padding: $spacing0 $spacing1
+
+    .toc
+        flex: 1
+        display: flex
+        flex-direction: column
+        max-height: calc(100% - 45px)
+        ol
+            flex: 1
+            overflow-y: auto
+            max-height: 100%
+            padding: $spacing1
+
+    button
+        @include button-reset
+        height: 45px
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: $spacing0 $spacing1
+        border-top: 1px solid $main-border-color
+        @include icon(close, after)
+
+
 .toc
     ol
         @include list-reset
@@ -23,3 +84,30 @@
                     text-decoration: underline
     .active
         color: $toc-active-color
+
+
+
+        // > aside, > .document-nav, > .toc, > .toc-container
+                // @include container
+                // pointer-events: none
+                // height: 100%
+                // left: 50%
+                // position: absolute
+                // transform: translateX(-50%)
+                // width: 100%
+                // > div
+                //     @include sticky($spacing1)
+                //     margin-bottom: $spacing1
+                //     > *
+                //         width: col(4)
+                //         pointer-events: auto
+                // position: sticky
+                // top: 0
+                // @include sticky($spacing1)
+          
+          
+                // position: absolute
+                // top: 0
+                // --grid-width: Min(100vw, (#{$grid-max-width}))
+                // margin-left: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+                // width: calc((var(--grid-width) + #{$grid-gutter} * 2) / 12 * 4 - #{$grid-gutter} * 2)

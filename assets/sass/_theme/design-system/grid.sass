@@ -5,36 +5,6 @@
     position: relative
     @include media-breakpoint-up(md)
         body:not(.full-width) &
-            > aside, > .document-nav, > .toc
-                // @include container
-                // pointer-events: none
-                // height: 100%
-                // left: 50%
-                // position: absolute
-                // transform: translateX(-50%)
-                // width: 100%
-                // > div
-                //     @include sticky($spacing1)
-                //     margin-bottom: $spacing1
-                //     > *
-                //         width: col(4)
-                //         pointer-events: auto
-                // position: sticky
-                // top: 0
-                // @include sticky($spacing1)
-                position: absolute
-                top: 0
-                --grid-width: Min(100vw, (#{$grid-max-width}))
-                margin-left: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
-                width: calc((var(--grid-width) + #{$grid-gutter} * 2) / 12 * 4 - #{$grid-gutter} * 2)
             > .blocks
                 .block-content
                     padding-left: offset(5)
-
-    @include media-breakpoint-down(md)
-        aside, .document-nav
-            display: none
-    // TODO: mieux gérer la gestion de l'aside dans l'html
-    body.full-width &
-        aside, .document-nav
-            display: none
