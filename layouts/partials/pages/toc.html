@@ -40,25 +40,25 @@
       {{ $h2s := partial "H2Extract" .context.Content }}
       {{- if and (not $h2s) (partial "GetTextFromHTML" .context.Content) }}
         <li>
-          <a class="nav-link" href="#page-informations">{{ i18n "pages.informations" }}</a>
+          <a href="#page-informations">{{ i18n "pages.informations" }}</a>
         </li>
       {{ end -}}
 
       {{- range $index, $h2 := $h2s }}
         <li>
-          <a class="nav-link" href="#page-h2-{{$index}}">{{ plainify $h2 }}</a>
+          <a href="#page-h2-{{$index}}">{{ plainify $h2 }}</a>
         </li>
       {{ end -}}
 
       {{- if .context.Pages }}
         <li>
-          <a class="nav-link" href="#page-children">{{ i18n "pages.details" }}</a>
+          <a href="#page-children">{{ i18n "pages.details" }}</a>
         </li>
       {{ end -}}
 
       {{- if .category.Pages }}
         <li>
-          <a class="nav-link" href="#page-posts">{{ i18n "pages.posts" }}</a>
+          <a href="#page-posts">{{ i18n "pages.posts" }}</a>
         </li>
       {{ end -}}
 
