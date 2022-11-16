@@ -5,20 +5,25 @@
     position: relative
     @include media-breakpoint-up(md)
         body:not(.full-width) &
-            > aside, > .document-nav
-                @include container
-                pointer-events: none
-                height: 100%
-                left: 50%
-                position: absolute
-                transform: translateX(-50%)
-                width: 100%
-                > div
-                    @include sticky($spacing1)
-                    margin-bottom: $spacing1
-                    > *
-                        width: col(4)
-                        pointer-events: auto
+            > aside, > .document-nav, > .toc
+                // @include container
+                // pointer-events: none
+                // height: 100%
+                // left: 50%
+                // position: absolute
+                // transform: translateX(-50%)
+                // width: 100%
+                // > div
+                //     @include sticky($spacing1)
+                //     margin-bottom: $spacing1
+                //     > *
+                //         width: col(4)
+                //         pointer-events: auto
+                position: sticky
+                top: 0
+                margin-left: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+                // width: calc(calc(100vw - #{$grid-max-width} / 2) * (3 / 12))
+                width: calc(min(100vw, #{$grid-max-width}) * (3/12))
             > .blocks
                 .block-content
                     padding-left: offset(5)
