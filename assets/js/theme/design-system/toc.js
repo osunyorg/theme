@@ -1,7 +1,7 @@
 
 const CLASSES = {
   // TODO : refacto classnames et modifier le nom de la class pour "is-overlay-visible"
-  menusOpened: 'has-menu-opened',
+  offcanvasOpened: 'has-offcanvas-opened',
 };
 
 class TableOfContent {
@@ -34,7 +34,7 @@ class TableOfContent {
 
     const classAction = this.state.opened ? 'add' : 'remove';
     this.element.classList[classAction]('is-opened');
-    document.documentElement.classList[classAction](CLASSES.menusOpened);
+    document.documentElement.classList[classAction](CLASSES.offcanvasOpened);
   }
   update() {
     // WIP
