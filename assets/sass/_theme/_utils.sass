@@ -100,6 +100,15 @@
     $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} )
     @return #{$width}
 
+@function col-outside-container($quantity)
+    $responsive-grid-width: Min(100vw, (#{$grid-max-width}))
+    @return calc((#{$responsive-grid-width} + #{$grid-gutter} * 2) / 12 * #{$quantity} - #{$grid-gutter} * 2)
+
+@mixin container-margin-left
+    margin-left: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+
+
+
 @mixin stretched-link($pseudo-element: after)
     &::#{$pseudo-element}
         bottom: 0

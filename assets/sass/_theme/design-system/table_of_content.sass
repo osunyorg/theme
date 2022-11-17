@@ -1,3 +1,41 @@
+@mixin offcanvas-toc
+    background: white
+    position: fixed
+    top: 0
+    right: 0
+    bottom: 0
+    z-index: $zindex-toc
+    margin-left: offset(3)
+    transform: translateX(100%)
+    transition: 0.35s transform ease-in-out
+    &.is-opened
+        transform: translateX(0)
+    .toc-content
+        display: flex
+        flex-direction: column
+        height: 100%
+    .toc-title
+        border-bottom: 1px solid $main-border-color
+        padding: $spacing0 $spacing1
+    .toc
+        flex: 1
+        display: flex
+        flex-direction: column
+        overflow-y: auto
+        max-height: 100%
+        ol
+            flex: 1
+            padding: $spacing1
+    button
+        @include button-reset
+        height: 45px
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: $spacing0 $spacing1
+        border-top: 1px solid $main-border-color
+        @include icon(close, after)
+
 .toc-cta
     display: flex
     justify-content: end
@@ -6,6 +44,8 @@
         @include container
         text-align: right
         padding: $spacing1 0
+        @include in-page-with-sidebar
+            display: none
     @include media-breakpoint-down(md)
         position: fixed
         bottom: 0
@@ -16,73 +56,46 @@
         padding: $spacing0
         z-index: $zindex-toc-cta
     button
-        margin-inline-start: $spacing0 
-    @include in-page-with-sidebar
-        display: none
+        margin-inline-start: $spacing0
+   
 
 .toc-container
+    // in full width page or under md breakpoint (mobile)
     @include in-page-without-sidebar
-        background: white
-        position: fixed
-        top: 0
-        right: 0
-        bottom: 0
-        z-index: $zindex-toc
-        display: flex
-        flex-direction: column
-        margin-left: offset(3)
-        transform: translateX(100%)
-        transition: 0.35s transform ease-in-out
-        &.is-opened
-            transform: translateX(0)
-        .toc-title
-            border-bottom: 1px solid $main-border-color
-            padding: $spacing0 $spacing1
+        @include offcanvas-toc
+    @include media-breakpoint-down(md)
+        @include offcanvas-toc
 
-        .toc
-            flex: 1
-            display: flex
-            flex-direction: column
-            ol
-                flex: 1
+    // Only desktop and in page with sidebar
+    @include media-breakpoint-up(md)
+        @include in-page-with-sidebar
+            @include container-margin-left
+            pointer-events: none
+            top: 0
+            left: 0
+            height: 100%
+            position: absolute
+            width: col-outside-container(4)
+            .toc-content
+                position: sticky
+                top: var(--header-height)
                 overflow-y: auto
-                max-height: 100%
-                padding: $spacing1
-        button
-            @include button-reset
-            height: 45px
-            display: flex
-            justify-content: space-between
-            align-items: center
-            padding: $spacing0 $spacing1
-            border-top: 1px solid $main-border-color
-            @include icon(close, after)
-    @include in-page-with-sidebar
-        @include container
-        pointer-events: none
-        height: 100%
-        left: 50%
-        position: absolute
-        transform: translateX(-50%)
-        width: 100%
-        .toc
-            @include sticky($spacing1)
-            margin-bottom: $spacing1
-            pointer-events: auto
-        button
-            display: none
+                max-height: calc(100vh - var(--header-height))
+                margin-bottom: $spacing1
+                padding-bottom: $spacing5
+                pointer-events: auto
+            button
+                display: none
 
 .toc
     ol
         @include list-reset
         align-items: flex-start
-        margin: 0
+        display: flex
         flex-direction: column
-        padding-top: $spacing0
-        padding-bottom: $spacing0
+        margin: 0
         li
-            &:not(:last-child)
-                margin-bottom: 1rem
+            margin-top: 1rem
             a
                 color: $toc-color
                 display: block
@@ -95,30 +108,12 @@
                     font-size: $toc-font-size-md
                 &:hover
                     text-decoration: underline
-    .active
-        color: $toc-active-color
+        .active
+            color: $toc-active-color
+            text-decoration: underline
+            pointer-events: none
 
 
-
-        // > aside, > .document-nav, > .toc, > .toc-container
-                // @include container
-                // pointer-events: none
-                // height: 100%
-                // left: 50%
-                // position: absolute
-                // transform: translateX(-50%)
-                // width: 100%
-                // > div
-                //     @include sticky($spacing1)
-                //     margin-bottom: $spacing1
-                //     > *
-                //         width: col(4)
-                //         pointer-events: auto
-                // position: sticky
-                // top: 0
-                // @include sticky($spacing1)
-          
-          
                 // position: absolute
                 // top: 0
                 // --grid-width: Min(100vw, (#{$grid-max-width}))
