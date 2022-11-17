@@ -17,47 +17,61 @@
         z-index: $zindex-toc-cta
     button
         margin-inline-start: $spacing0 
+    @include in-page-with-sidebar
+        display: none
 
 .toc-container
-    background: white
-    position: fixed
-    top: 0
-    right: 0
-    bottom: 0
-    z-index: $zindex-toc
-    display: flex
-    flex-direction: column
-    margin-left: offset(3)
-    transform: translateX(100%)
-    transition: 0.35s transform ease-in-out
-    &.is-opened
-        transform: translateX(0)
-
-    .toc-title
-        border-bottom: 1px solid $main-border-color
-        padding: $spacing0 $spacing1
-
-    .toc
-        flex: 1
+    @include in-page-without-sidebar
+        background: white
+        position: fixed
+        top: 0
+        right: 0
+        bottom: 0
+        z-index: $zindex-toc
         display: flex
         flex-direction: column
-        max-height: calc(100% - 45px)
-        ol
+        margin-left: offset(3)
+        transform: translateX(100%)
+        transition: 0.35s transform ease-in-out
+        &.is-opened
+            transform: translateX(0)
+        .toc-title
+            border-bottom: 1px solid $main-border-color
+            padding: $spacing0 $spacing1
+
+        .toc
             flex: 1
-            overflow-y: auto
-            max-height: 100%
-            padding: $spacing1
-
-    button
-        @include button-reset
-        height: 45px
-        display: flex
-        justify-content: space-between
-        align-items: center
-        padding: $spacing0 $spacing1
-        border-top: 1px solid $main-border-color
-        @include icon(close, after)
-
+            display: flex
+            flex-direction: column
+            max-height: calc(100% - 45px)
+            ol
+                flex: 1
+                overflow-y: auto
+                max-height: 100%
+                padding: $spacing1
+        button
+            @include button-reset
+            height: 45px
+            display: flex
+            justify-content: space-between
+            align-items: center
+            padding: $spacing0 $spacing1
+            border-top: 1px solid $main-border-color
+            @include icon(close, after)
+    @include in-page-with-sidebar
+        @include container
+        pointer-events: none
+        height: 100%
+        left: 50%
+        position: absolute
+        transform: translateX(-50%)
+        width: 100%
+        .toc
+            @include sticky($spacing1)
+            margin-bottom: $spacing1
+            pointer-events: auto
+            button
+                display: none
 
 .toc
     ol
