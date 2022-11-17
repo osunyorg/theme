@@ -6,6 +6,11 @@
     </li>
     <li>
       <a href="#presentation">{{ i18n "programs.toc.presentation" }}</a>
+      {{- if .context.Params.blocks -}}
+        <ol>
+          {{- partial "blocks/toc" .context.Params.blocks -}}
+        </ol>
+      {{- end -}}
     </li>
     <li>
       <a href="#pedagogy">{{ i18n "programs.toc.pedagogy" }}</a>

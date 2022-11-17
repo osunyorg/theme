@@ -1,4 +1,4 @@
-export default {
+const breakpoints = {
     xs: 0,
     sm: 576,
     md: 768,
@@ -6,3 +6,12 @@ export default {
     xl: 1200,
     xxl: 1400
 };
+
+const isMobile = function() {
+    return window.innerWidth <= breakpoints.md 
+}
+
+export {
+    breakpoints,
+    isMobile
+}

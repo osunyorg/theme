@@ -1,4 +1,10 @@
-<article itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+{{ partial "toc/container.html"
+    (dict
+        "toc" "programs/toc.html"
+        "context" .
+    )
+}}
+<div class="document-content" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
   <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
   <meta itemprop="url" content="{{ .Permalink }}">
   {{- if .Params.image -}}
@@ -24,4 +30,4 @@
   {{- partial "programs/results.html" . -}}
   {{- partial "programs/admission.html" . -}}
   {{- partial "hooks/before-program-end.html" . -}}
-</article>
+</div>

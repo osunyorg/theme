@@ -1,4 +1,4 @@
-import breakpoints from '../utils/breakpoints';
+import { breakpoints } from '../utils/breakpoints';
 
 const CLASSES = {
     mainMenuOpened: 'is-opened',
