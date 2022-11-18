@@ -59,6 +59,7 @@ class TableOfContent {
     this.sections.forEach(section => {
       if (section.offsetTop <= scroll) {
         id = section.id;
+        this.toggle(false);
       }
     });
 

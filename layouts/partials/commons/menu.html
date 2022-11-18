@@ -19,7 +19,7 @@
     {{- end -}}
     {{- if and (gt (len .children) 0) $dropdown (eq $level 1) -}}
       {{- $hasDropdown = true -}}
-      {{- $attr = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" $slug -}}
+      {{- $attr = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" aria-pressed=\"false\" tabindex=\"0\"" $slug -}}
     {{- end -}}
     {{- if and (hasPrefix .target "http") (eq .kind "url") -}}
       {{- $attr = " target=\"_blank\" rel=\"noreferrer\"" -}}
