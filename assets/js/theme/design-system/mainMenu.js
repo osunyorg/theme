@@ -1,4 +1,5 @@
 import { breakpoints } from '../utils/breakpoints';
+import { a11yClick } from '../utils/a11y';
 
 const CLASSES = {
     mainMenuOpened: 'is-opened',
@@ -33,7 +34,7 @@ class MainMenu {
         });
 
         this.dropdownsButtons.forEach((button) => {
-            button.addEventListener('click', (event) => {
+            a11yClick(button, (event) => {
                 event.preventDefault();
                 this.toggleDropdown(button);
             });
