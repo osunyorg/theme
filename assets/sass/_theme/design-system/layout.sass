@@ -35,6 +35,8 @@ main
     // Create padding-top for fixed header under md
     @include media-breakpoint-down(md)
         padding-top: var(--header-height)
+    > * + *
+        margin-top: $spacing3
 
 .container
     @include container
@@ -45,11 +47,22 @@ ul
     padding-left: px2rem(15)
 
 .blocks
-    > *
+    // > *
+    //     margin-top: $spacing3
+    //     padding-bottom: $spacing3
+    //     &:last-child
+    //         padding-bottom: $spacing4
+    > * + *
         margin-top: $spacing3
+    > *:not(:last-child)
         padding-bottom: $spacing3
-        &:last-child
-            padding-bottom: $spacing4
+    > *:last-child
+        padding-bottom: $spacing4
+    section
+        * + p
+            margin-bottom: 0 // TODO : vérifier les cas particuliers
+            margin-top: $spacing1
+
 
 details
     &:not([open]):hover
