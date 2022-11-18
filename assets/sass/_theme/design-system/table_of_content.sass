@@ -48,12 +48,11 @@
 
 .toc-cta
     display: flex
-    justify-content: end
     position: relative
     @include media-breakpoint-up(md)
         @include container
-        margin-bottom: $spacing1
-        padding: $spacing1 0
+        justify-content: end
+        padding-bottom: $spacing3
         text-align: right
         &::after
             background-color: #000000
@@ -66,21 +65,28 @@
         @include in-page-with-sidebar
             display: none
     @include media-breakpoint-down(md)
+        border-top: 1px solid $main-border-color
         position: fixed
         bottom: 0
         background: white
-        justify-content: flex-end
         left: 0
         width: 100%
         padding: $spacing0
         z-index: $zindex-toc-cta
+
+
     button
         @include icon(toc, after)
         @include button-icon(toc)
         cursor: pointer
-        @include media-breakpoint-up(md)
-            padding: 0
-            margin-bottom: $spacing2
+        padding: 0
+        @include media-breakpoint-down(md)
+            display: flex
+            justify-content: space-between
+            align-items: center
+            width: 100% 
+
+
 
 .toc-container
     // in full width page or under md breakpoint (mobile)
@@ -96,6 +102,7 @@
             pointer-events: none
             top: 0
             left: 0
+            margin-top: 0
             height: 100%
             position: absolute
             width: col-outside-container(4)
@@ -138,7 +145,6 @@
                     text-decoration: underline
         .active
             color: $toc-active-color
-            text-decoration: underline
             pointer-events: none
         ol
             padding-left: 0

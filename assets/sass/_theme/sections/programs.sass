@@ -31,19 +31,11 @@ ol.programs
                     text-align: right
 
 .programs__section
-    .hero
-        display: block
-        // .dropdown-share
-        //     margin-top: $spacing1
-        //     @include media-breakpoint-up(md)
-        //         bottom: $spacing1 + $spacing0 
-        //         margin-top: 0
-        //         position: absolute
-        //         right: $grid-gutter
-            // > button
-            //     @include media-breakpoint-down(md)
-            //         width: 100%
-            
+    .hero-program
+        flex-direction: column
+        justify-content: end
+        .container
+            position: relative
     .dropdown-share
         position: relative
         > button
@@ -106,12 +98,15 @@ ol.programs
     .document-content
         .content
             padding-top: $spacing2
+            .blocks
+                .container
+                    padding-left: 0
+                    padding-right: 0
 
     @include media-breakpoint-up(md)
         .document-content
             .content
                 @include grid(12, md)
-                padding-bottom: $spacing4
                 border-top: 1px solid $main-color
                 position: relative
                 > *
@@ -127,11 +122,8 @@ ol.programs
             section:first-of-type
                     .content
                         border-top: none
-            .blocks
-                .container
-                    padding-left: 0
-                    padding-right: 0
 
-    table 
+    table
+        margin-block-start: 2em
         caption 
             @include visually-hidden

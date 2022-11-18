@@ -1,34 +1,33 @@
 {{- $title := or .Params.header_text .Title -}}
-<header class="hero">
+<header class="hero hero-program">
   <div class="container">
-    {{- if .Params.breadcrumb | default true -}}
-      {{ partial "header/breadcrumbs.html" . }}
-    {{- end -}}
     <div>
       <h1>{{ partial "PrepareHTML" $title }}</h1>
     </div>
+    {{- if .Params.breadcrumb | default true -}}
+      {{ partial "header/breadcrumbs.html" . }}
+    {{- end -}}
   </div>
-  <div id="essential">
-    <div class="container">
-      {{- partial "programs/essential" . -}}
-      <div class="buttons">
-        <div class="dropdown-share dropup">
-          <button type="button" id="shareProgram" data-bs-toggle="dropdown" aria-expanded="false">{{ i18n "commons.share" }}</button>
-          <div class="dropdown-menu">
-            {{ partial "commons/share.html" . }}
-          </div>
+
+  <section class="container" id="essential">
+    {{- partial "programs/essential" . -}}
+    <div class="buttons">
+      <div class="dropdown-share dropup">
+        <button type="button" id="shareProgram" data-bs-toggle="dropdown" aria-expanded="false">{{ i18n "commons.share" }}</button>
+        <div class="dropdown-menu">
+          {{ partial "commons/share.html" . }}
         </div>
-        {{ with .Params.downloadable_summary }}
-          {{- $file := partial "GetMedia" . -}}
-          {{- if $file -}}
-            {{- $url := $file.url -}}
-            {{- if site.Params.keycdn -}}
-              {{- $url = $file.direct_url -}}
-            {{- end -}}
-            <a href="{{ $url }}" download target="_blank">{{ i18n "commons.download.singular_name" }}</a>
-          {{- end -}}
-        {{ end }}
       </div>
+      {{ with .Params.downloadable_summary }}
+        {{- $file := partial "GetMedia" . -}}
+        {{- if $file -}}
+          {{- $url := $file.url -}}
+          {{- if site.Params.keycdn -}}
+            {{- $url = $file.direct_url -}}
+          {{- end -}}
+          <a href="{{ $url }}" download target="_blank">{{ i18n "commons.download.singular_name" }}</a>
+        {{- end -}}
+      {{ end }}
     </div>
-  </div>
+  </section>
 </header>
