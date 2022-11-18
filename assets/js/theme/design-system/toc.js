@@ -10,9 +10,6 @@ const CLASSES = {
 class TableOfContent {
   constructor() {
     this.element = document.querySelector('.toc-container');
-
-    if (!this.element) return;
-
     this.content = this.element.querySelector('.toc-content');
     this.nav = this.element.querySelector('.toc');
     this.links = this.element.querySelectorAll('a');
@@ -34,6 +31,12 @@ class TableOfContent {
     this.togglers.forEach(toggler => {
       toggler.addEventListener('click', () => {
         this.toggle();
+      });
+    })
+
+    this.links.forEach(links => {
+      links.addEventListener('click', () => {
+        this.toggle(false);
       });
     })
 
@@ -62,7 +65,6 @@ class TableOfContent {
     this.sections.forEach(section => {
       if (section.offsetTop <= scroll) {
         id = section.id;
-        this.toggle(false);
       }
     });
 
