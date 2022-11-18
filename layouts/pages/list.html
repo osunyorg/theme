@@ -10,17 +10,16 @@
           {{ $need_aside = true }}
         {{ end }}
       {{ end }}
-  
-      <div class="content-blocks">
-        {{ partial "toc/container.html"
-            (dict
-                "category" $category
-                "toc" "pages/toc.html"
-                "context" .
-            )
-        }}
-        {{ partial "blocks/list.html" . }}
-      </div>
+
+      {{ partial "toc/container.html"
+          (dict
+              "category" $category
+              "toc" "pages/toc.html"
+              "context" .
+          )
+      }}
+      {{ partial "blocks/list.html" . }}
+
     {{ else }}
       {{ partial "pages/image.html" .Params.image }}
       {{ partial "pages/children.html" .Params.children }}
