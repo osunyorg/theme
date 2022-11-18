@@ -15,7 +15,7 @@ class TableOfContent {
     this.links = this.element.querySelectorAll('a');
     this.sections = document.querySelectorAll('section');
     this.ctaTitle = document.querySelector('.toc-cta-title');
-    this.togglers = document.querySelectorAll('.toc-cta, .toc-container button');
+    this.togglers = document.querySelectorAll('.toc-cta button, .toc-container button');
     this.state = {
       opened: false,
       currentId: null
@@ -36,7 +36,13 @@ class TableOfContent {
 
     window.addEventListener('click', (event) => {
       if (event.target === document.body) {
-          this.toggle(false);
+        this.toggle(false);
+      }
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.keyCode === 27 || event.key === 'Escape') {
+        this.toggle(false);
       }
     });
   }
@@ -47,9 +53,8 @@ class TableOfContent {
     this.element.classList[classAction](CLASSES.isOpened);
     document.documentElement.classList[classAction](CLASSES.offcanvasOpened);
   }
-  update(event) {
+  update() {
     const scroll = document.documentElement.scrollTop || document.body.scrollTop;
-    console.log(event)
     let id = null;
     this.sections.forEach(section => {
       if (section.offsetTop <= scroll) {
@@ -83,10 +88,6 @@ class TableOfContent {
     const container = this.isOffcanvas() ? this.nav : this.content;
     // TODO: ne fonctionne pas avec le  behavior-scroll: smooth
     container.scrollTop = progression * window.innerHeight/2;
-    // container.scrollTo({
-    //   top: progression * window.innerHeight/2,
-    //   behavior: 'smooth'
-    // });
   }
 }
 

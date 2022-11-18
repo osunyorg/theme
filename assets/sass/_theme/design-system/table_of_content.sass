@@ -23,7 +23,7 @@
         flex-direction: column
         overflow-y: auto
         max-height: 100%
-        ol
+        > ol
             flex: 1
             padding: $spacing1
     button
@@ -39,7 +39,6 @@
 .toc-cta
     display: flex
     justify-content: end
-    cursor: pointer
     @include media-breakpoint-up(md)
         @include container
         text-align: right
@@ -56,8 +55,10 @@
         padding: $spacing0
         z-index: $zindex-toc-cta
     button
-        margin-inline-start: $spacing0
-   
+        @include icon(toc, after)
+        @include button-icon(toc)
+        cursor: pointer
+
 
 .toc-container
     // in full width page or under md breakpoint (mobile)
@@ -112,3 +113,5 @@
             color: $toc-active-color
             text-decoration: underline
             pointer-events: none
+        ol
+            padding-left: $spacing0

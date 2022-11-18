@@ -48,6 +48,12 @@ class MainMenu {
                 this.closeEverything();
             }
         });
+
+        window.addEventListener('keydown', (event) => {
+            if (event.keyCode === 27 || event.key === 'Escape') {
+                this.closeEverything();
+            }
+        });
     }
 
     resize () {
