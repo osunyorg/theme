@@ -59,33 +59,35 @@
 
         {{- end -}}
 
-        <div class="pages">
-          {{- range .pages }}
-            {{- $page := partial "GetPageByUrl" .page -}}
-            {{- if .slug -}}
-              {{- $page = partial "GetPageByUrl" .slug -}}
-            {{- end -}}
-            {{ with $page }}
-              <div>
+        {{- if .pages -}}
+          <div class="pages">
+            {{- range .pages }}
+              {{- $page := partial "GetPageByUrl" .page -}}
+              {{- if .slug -}}
+                {{- $page = partial "GetPageByUrl" .slug -}}
+              {{- end -}}
+              {{ with $page }}
+                <div>
 
-                {{- .Scratch.Set "show_image" $show_images -}}
-                {{- .Scratch.Set "show_description" $show_descriptions -}}
-                {{- .Scratch.Set "heading" "h3" -}}
-                {{- if eq $layout "cards" -}}
-                  {{- .Scratch.Set "show_more" true -}}
-                {{- end -}}
-                {{- partial "pages/page.html" . -}}
-                {{- .Scratch.Delete "show_image" -}}
-                {{- .Scratch.Delete "show_description" -}}
-                {{- .Scratch.Delete "heading" -}}
-                {{- if eq $layout "cards" -}}
-                  {{- .Scratch.Delete "show_more" -}}
-                {{- end -}}
+                  {{- .Scratch.Set "show_image" $show_images -}}
+                  {{- .Scratch.Set "show_description" $show_descriptions -}}
+                  {{- .Scratch.Set "heading" "h3" -}}
+                  {{- if eq $layout "cards" -}}
+                    {{- .Scratch.Set "show_more" true -}}
+                  {{- end -}}
+                  {{- partial "pages/page.html" . -}}
+                  {{- .Scratch.Delete "show_image" -}}
+                  {{- .Scratch.Delete "show_description" -}}
+                  {{- .Scratch.Delete "heading" -}}
+                  {{- if eq $layout "cards" -}}
+                    {{- .Scratch.Delete "show_more" -}}
+                  {{- end -}}
 
-              </div>
-            {{ end }}
-          {{ end -}}
-        </div>
+                </div>
+              {{ end }}
+            {{ end -}}
+          </div>
+        {{- end -}}
       </div>
     </div>
   </section>

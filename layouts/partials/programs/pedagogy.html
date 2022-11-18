@@ -5,37 +5,29 @@
       <h2>{{ i18n "programs.toc.pedagogy" }}</h2>
       <div>
         {{- if partial "GetTextFromHTML" .Params.content -}}
-          <div class="subpart">
-            <h3>{{ i18n "programs._content" }}</h3>
-            {{- partial "PrepareHTML" .Params.content -}}
-          </div>
+          <h3>{{ i18n "programs._content" }}</h3>
+          {{- partial "PrepareHTML" .Params.content -}}
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pedagogy -}}
-          <div class="subpart">
-            <h3>{{ i18n "programs._pedagogy" }}</h3>
-            {{- partial "PrepareHTML" .Params.pedagogy -}}
-          </div>
+          <h3>{{ i18n "programs._pedagogy" }}</h3>
+          {{- partial "PrepareHTML" .Params.pedagogy -}}
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.evaluation -}}
-          <div class="subpart">
-            <h3>{{ i18n "programs._evaluation" }}</h3>
-            {{- partial "PrepareHTML" .Params.evaluation -}}
-          </div>
+          <h3>{{ i18n "programs._evaluation" }}</h3>
+          {{- partial "PrepareHTML" .Params.evaluation -}}
         {{- end -}}
 
         {{- if .Params.teachers -}}
           {{ $title := i18n "programs._teachers" -}}
-          <div class="subpart">
-            <h3>{{ $title }}</h3>
-            {{- partial "programs/teachers.html"
-                          (dict
-                            "title" $title
-                            "teachers" .Params.teachers
-                            "descriptions" .Params.teachers_description
-                          ) -}}
-          </div>
+          <h3>{{ $title }}</h3>
+          {{- partial "programs/teachers.html"
+                        (dict
+                          "title" $title
+                          "teachers" .Params.teachers
+                          "descriptions" .Params.teachers_description
+                        ) -}}
         {{- end -}}
       </div>
     </div>
