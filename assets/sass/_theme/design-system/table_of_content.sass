@@ -6,8 +6,12 @@
     bottom: 0
     z-index: $zindex-toc
     margin-left: offset(3)
+    max-width: $toc-max-width
     transform: translateX(100%)
     transition: 0.35s transform ease-in-out
+    
+    @include media-breakpoint-up(md)
+        width: 33.333%
     &.is-opened
         transform: translateX(0)
     .toc-content
@@ -16,7 +20,12 @@
         height: 100%
     .toc-title
         border-bottom: 1px solid $main-border-color
-        padding: $spacing0 $spacing1
+        font-size: px2rem(18)
+        line-height: 1.625rem
+        padding: $header-nav-padding-y
+        @include media-breakpoint-up(md)
+            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) $grid-gutter
+        
     .toc
         flex: 1
         display: flex
@@ -25,31 +34,45 @@
         max-height: 100%
         > ol
             flex: 1
-            padding: $spacing1
+            padding: calc(#{$grid-gutter-sm} / 2)
+            @include media-breakpoint-up(md)
+                padding: $spacing2 $grid-gutter
     button
         @include button-reset
-        height: 45px
+        // height: 45px
         display: flex
         justify-content: space-between
         align-items: center
-        padding: $spacing0 $spacing1
+        padding: $header-nav-padding-y calc(#{$grid-gutter-sm} / 2)
         border-top: 1px solid $main-border-color
         @include icon(close, after)
+        @include media-breakpoint-up(md)
+            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) $grid-gutter
 
 .toc-cta
     display: flex
     justify-content: end
+    position: relative
     @include media-breakpoint-up(md)
         @include container
-        text-align: right
+        margin-bottom: $spacing1
         padding: $spacing1 0
+        text-align: right
+        &::after
+            background-color: #000000
+            bottom: 0
+            content: ''
+            height: 1px 
+            left: $grid-gutter
+            position: absolute
+            right: $grid-gutter
         @include in-page-with-sidebar
             display: none
     @include media-breakpoint-down(md)
         position: fixed
         bottom: 0
         background: white
-        justify-content: space-between
+        justify-content: flex-end
         left: 0
         width: 100%
         padding: $spacing0
@@ -58,6 +81,10 @@
         @include icon(toc, after)
         @include button-icon(toc)
         cursor: pointer
+        font-size: $h5-size
+        @include media-breakpoint-up(md)
+            padding: 0
+            margin-bottom: $spacing2
 
 
 .toc-container
@@ -95,8 +122,10 @@
         display: flex
         flex-direction: column
         margin: 0
-        li
+        > * + li
             margin-top: 1rem
+        li
+            
             a
                 color: $toc-color
                 display: block
