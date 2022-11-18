@@ -1,0 +1,13 @@
+<div class="document-content">
+  <div class="container">
+    {{ partial "programs/image.html" .Params.image }}
+    {{ partial "programs/chapo.html" .Params.description_short }}
+  </div>
+  {{ partial "blocks/list.html" . }}
+  <div class="container">
+    {{ partial "diplomas/diplomas-select.html" . }}
+    {{ $programs := where .Site.Pages "Section" "programs" }}
+    {{ $programs = where $programs "Permalink" "!=" .FirstSection.Permalink }}
+    {{ partial "programs/programs-list.html" $programs }}
+  </div>
+</div>

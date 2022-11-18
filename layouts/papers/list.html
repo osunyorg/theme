@@ -5,10 +5,12 @@
           "image" .Params.image
           "context" .
         ) -}}
-  <div class="container">
-    {{ partial "papers/papers.html" . }}
-    {{ partial "commons/pagination.html" . }}
+  <div class="document-content">
+    <div class="container">
+      {{ partial "papers/papers.html" . }}
+      {{ partial "commons/pagination.html" . }}
+    </div>
+  
+    {{ partial "blocks/list.html" . }}
   </div>
-
-  {{ partial "blocks/list.html" . }}
 {{ end }}

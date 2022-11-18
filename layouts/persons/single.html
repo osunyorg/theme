@@ -16,8 +16,8 @@
 
   {{ partial "persons/hero-single.html" . }}
 
-  <div class="container">
-    <div class="document-content" itemscope itemtype="https://schema.org/Person">
+  <div class="document-content container">
+    <div itemscope itemtype="https://schema.org/Person">
       <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
       <meta itemprop="url" content="{{ .Permalink }}">
       {{- if .Params.image -}}
@@ -68,6 +68,5 @@
     {{ if $papersForResearcher }}
       {{ partial "persons/papers.html" (dict "papers" $papersForResearcher "slug" $slug) }}
     {{ end }}
-
   </div>
 {{ end }}

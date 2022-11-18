@@ -1,7 +1,7 @@
 {{ define "main" }}
   {{ partial "posts/hero-single.html" . }}
 
-  <section itemscope itemtype="https://schema.org/NewsArticle">
+  <div class="document-content" itemscope itemtype="https://schema.org/NewsArticle">
     <meta itemprop="headline" content="{{ partial "PrepareHTML" .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ if .Date }}<meta itemprop="datePublished" content="{{ .Date.Format "2006-01-02T15:04" }}">{{ end }}
@@ -9,7 +9,7 @@
     {{ if .Summary }}<meta itemprop="description" content="{{ partial "PrepareHTML" .Summary }}">{{ end }}
 
     <div class="content-blocks">
-      {{ partial "posts/document-nav.html" . }}
+      {{ partial "posts/aside.html" . }}
       <div class="blocks blocks-chapo">
         <div class="container">
           <div class="block-content">
@@ -28,5 +28,5 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 {{ end }}

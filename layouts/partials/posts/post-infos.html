@@ -1,43 +1,41 @@
-<div>
-  <table class="table-infos">
-    <caption>{{ i18n "posts.informations" }}</caption>
-    <tbody>
+<table class="table-infos">
+  <caption>{{ i18n "posts.informations" }}</caption>
+  <tbody>
+    <tr>
+      <th scope="row">{{ i18n "posts.date" }}</th>
+      <td>
+        <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
+      </td>
+    </tr>
+    {{ range .GetTerms "authors" }}
       <tr>
-        <th scope="row">{{ i18n "posts.date" }}</th>
-        <td>
-          <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
+        <th scope="row">{{ i18n "posts.author" }}</th>
+        <td itemscope itemtype="https://schema.org/Person" itemprop="author">
+          <a href="{{ .Permalink }}" itemprop="url">
+            <span itemprop="name">{{ safeHTML .Params.person }}</span>
+          </a>
         </td>
       </tr>
-      {{ range .GetTerms "authors" }}
-        <tr>
-          <th scope="row">{{ i18n "posts.author" }}</th>
-          <td itemscope itemtype="https://schema.org/Person" itemprop="author">
-            <a href="{{ .Permalink }}" itemprop="url">
-              <span itemprop="name">{{ safeHTML .Params.person }}</span>
-            </a>
-          </td>
-        </tr>
-      {{ end }}
-      {{ if .Params.Categories }}
-        <tr>
-          <th scope="row">
-            {{- if gt (len .Params.Categories) 1 -}}
-              {{ i18n "posts.categories" }}
-            {{- else -}}
-              {{ i18n "posts.category" }}
-            {{- end -}}
-          </th>
-          <td itemprop="articleSection">
-            {{ partial "posts/categories.html" . }}
-          </td>
-        </tr>
-      {{ end }}
+    {{ end }}
+    {{ if .Params.Categories }}
       <tr>
-        <th scope="row">{{ i18n "posts.share" }}</th>
-        <td>
-          {{ partial "commons/share.html" }}
+        <th scope="row">
+          {{- if gt (len .Params.Categories) 1 -}}
+            {{ i18n "posts.categories" }}
+          {{- else -}}
+            {{ i18n "posts.category" }}
+          {{- end -}}
+        </th>
+        <td itemprop="articleSection">
+          {{ partial "posts/categories.html" . }}
         </td>
       </tr>
-    </tbody>
-  </table>
-</div>
+    {{ end }}
+    <tr>
+      <th scope="row">{{ i18n "posts.share" }}</th>
+      <td>
+        {{ partial "commons/share.html" }}
+      </td>
+    </tr>
+  </tbody>
+</table>

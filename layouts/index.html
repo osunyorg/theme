@@ -1,36 +1,38 @@
 {{ define "main" }}
   {{ partial "home/hero.html" . }}
 
-  {{- if .Params.blocks }}
-
-    {{- partial "blocks/list.html" . -}}
-
-  {{ else }}
-
-    <div class="container">
-      {{ if (partial "GetTextFromHTML" .Content) }}
-      <section>
-        {{- partial "PrepareHTML" .Content -}}
-      </section>
-      {{ end }}
-
-      {{- range site.Data.menus.primary -}}
+  <div class="document-content">
+    {{- if .Params.blocks }}
+  
+      {{- partial "blocks/list.html" . -}}
+  
+    {{ else }}
+  
+      <div class="container">
+        {{ if (partial "GetTextFromHTML" .Content) }}
         <section>
-          {{ partial "home/top.html" . }}
-
-          {{ if eq .kind "news" }}
-            {{ partial "home/posts.html" . }}
-          {{ else }}
-            {{ if .children }}
-              {{ partial "home/pages.html" . }}
-            {{ end }}
-          {{ end }}
+          {{- partial "PrepareHTML" .Content -}}
         </section>
-      {{ end }}
-
-      {{ partial "home/volumes.html" . }}
-    </div>
-
-  {{ end -}}
+        {{ end }}
+  
+        {{- range site.Data.menus.primary -}}
+          <section>
+            {{ partial "home/top.html" . }}
+  
+            {{ if eq .kind "news" }}
+              {{ partial "home/posts.html" . }}
+            {{ else }}
+              {{ if .children }}
+                {{ partial "home/pages.html" . }}
+              {{ end }}
+            {{ end }}
+          </section>
+        {{ end }}
+  
+        {{ partial "home/volumes.html" . }}
+      </div>
+  
+    {{ end -}}
+  </div>
 
 {{ end }}
