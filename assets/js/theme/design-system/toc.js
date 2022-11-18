@@ -10,6 +10,9 @@ const CLASSES = {
 class TableOfContent {
   constructor() {
     this.element = document.querySelector('.toc-container');
+
+    if (!this.element) return;
+
     this.content = this.element.querySelector('.toc-content');
     this.nav = this.element.querySelector('.toc');
     this.links = this.element.querySelectorAll('a');
