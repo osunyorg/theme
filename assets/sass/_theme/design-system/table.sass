@@ -4,24 +4,37 @@ table
     vertical-align: top
     width: 100%
     text-align: left
-
     caption
         padding: $spacing0 0
         text-align: left
+        font-size: $small-font-size
 
     th,
     td
         padding: $spacing0 0
 
     thead
+        font-size: $table-head-font-size
+        @include media-breakpoint-up(md)
+            font-size: $table-head-font-size-md
         th
             text-align: left
+            + th
+                padding-left: $spacing1
 
     tbody
+        font-size: $table-body-font-size
+        @include media-breakpoint-up(md)
+            font-size: $table-body-font-size-md
         th,
         td
             border-bottom: 1px solid $main-border-color
+            + th, + td
+                padding-left: $spacing1
         tr:first-child
             th,
             td
                 border-top: 1px solid $main-border-color
+
+.table-responsive
+    overflow-x: auto
