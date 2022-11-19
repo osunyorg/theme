@@ -5,17 +5,13 @@
       <h2>{{ i18n "programs.toc.results" }}</h2>
       <div>
         {{- if partial "GetTextFromHTML" .Params.opportunities -}}
-          <div class="subpart">
-            <h3>{{ i18n "programs._opportunities" }}</h3>
-            {{- partial "PrepareHTML" .Params.opportunities -}}
-          </div>
+          <h3>{{ i18n "programs._opportunities" }}</h3>
+          {{- partial "PrepareHTML" .Params.opportunities -}}
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.results -}}
-          <div class="subpart">
-            <h3>{{ i18n "programs._results" }}</h3>
-            {{- partial "PrepareHTML" .Params.results -}}
-          </div>
+          <h3>{{ i18n "programs._results" }}</h3>
+          {{- partial "PrepareHTML" .Params.results -}}
         {{- end -}}
       </div>
     </div>

@@ -36,6 +36,7 @@ main
     @include media-breakpoint-down(md)
         padding-top: var(--header-height)
 
+
 .container
     @include container
     .hero + &
@@ -44,12 +45,24 @@ main
 ul
     padding-left: px2rem(15)
 
-.blocks
-    > *
+.document-content, .blocks
+    margin-top: $spacing3
+    > * + *
         margin-top: $spacing3
-        padding-bottom: $spacing3
-        &:last-child
-            padding-bottom: $spacing4
+    // > *
+    //     margin-top: $spacing3
+    //     padding-bottom: $spacing3
+    //     &:last-child
+    //         padding-bottom: $spacing4
+    // > *:not(:last-child)
+    //     padding-bottom: $spacing3
+    // > *:last-child
+    //     padding-bottom: $spacing4
+    // section
+    //     * + p
+    //         margin-bottom: 0 // TODO : vérifier les cas particuliers
+    //         margin-top: $spacing1
+
 
 details
     &:not([open]):hover
@@ -73,3 +86,6 @@ details
         &:hover
             summary::after
                 transform: translateY(-5px)
+
+section
+    scroll-margin-top: var(--header-height)

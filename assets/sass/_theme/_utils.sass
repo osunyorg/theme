@@ -8,18 +8,26 @@
     $remSize: $size / 16 / 2
     @return #{$remSize}rem
 
-@mixin in-page-with-aside
-    body:not(.full-width) aside ~ .blocks &
+@mixin in-page-with-sidebar
+    body:not(.full-width) &
         @content
 
-@mixin in-page-without-aside
+@mixin in-page-without-sidebar
     main > .blocks &,
-    // main > .blocks &,
     body.full-width &,
         @content
 
+// Aliases
 @mixin full-page
-    @include in-page-without-aside
+    @include in-page-without-sidebar
+        @content
+
+@mixin not-full-page
+    @include in-page-with-sidebar
+        @content
+
+@mixin in-page-program
+    .programs__section &
         @content
 
 @mixin link($color: $link-color)
@@ -100,6 +108,15 @@
     $quantity-on-base: $quantity / $base * 12
     $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} )
     @return #{$width}
+
+@function col-outside-container($quantity)
+    $responsive-grid-width: Min(100vw, (#{$grid-max-width}))
+    @return calc((#{$responsive-grid-width} + #{$grid-gutter} * 2) / 12 * #{$quantity} - #{$grid-gutter} * 2)
+
+@mixin container-margin-left
+    margin-left: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+
+
 
 @mixin stretched-link($pseudo-element: after)
     &::#{$pseudo-element}
@@ -210,3 +227,4 @@
         @include icon($icon, after)
             font-size: px2rem(20) 
             margin-left: px2rem(10)
+

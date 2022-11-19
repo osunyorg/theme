@@ -1,0 +1,11 @@
+<nav class="toc" id="nav-toc" aria-label="Table des matières">
+  <ol>
+    {{ range site.Sections }}
+      {{ if ne .Type "sitemap" }}
+        <li>
+          <a href="#{{ .Type }}">{{ safeHTML .Title }}</a>
+        </li>
+      {{ end }}
+    {{ end }}
+  </ol>
+</nav>

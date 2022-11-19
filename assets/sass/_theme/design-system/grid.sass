@@ -1,32 +1,10 @@
 .container
     @include container
 
-.content-blocks
+.document-content
     position: relative
     @include media-breakpoint-up(md)
-        body:not(.full-width) &
-            > aside
-                @include container
-                pointer-events: none
-                height: 100%
-                left: 50%
-                position: absolute
-                transform: translateX(-50%)
-                width: 100%
-                > div
-                    @include sticky($spacing1)
-                    margin-bottom: $spacing1
-                    > *
-                        width: col(4)
-                        pointer-events: auto
-            > .blocks
+        @include in-page-with-sidebar
+            .blocks
                 .block-content
                     padding-left: offset(5)
-
-    @include media-breakpoint-down(md)
-        aside
-            display: none
-    // TODO: mieux gérer la gestion de l'aside dans l'html
-    body.full-width &
-        aside
-            display: none

@@ -19,7 +19,7 @@
     {{- end -}}
     {{- if and (gt (len .children) 0) $dropdown (eq $level 1) -}}
       {{- $hasDropdown = true -}}
-      {{- $attr = printf "id=\"dropdown-%s\" role=\"button\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\"" $slug -}}
+      {{- $attr = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" aria-pressed=\"false\" tabindex=\"0\"" $slug -}}
     {{- end -}}
     {{- if and (hasPrefix .target "http") (eq .kind "url") -}}
       {{- $attr = " target=\"_blank\" rel=\"noreferrer\"" -}}
@@ -34,7 +34,6 @@
       {{- end -}}
       {{- if ne $stop $level -}}
         {{- if $hasDropdown }}
-          {{/* dropdown-menu class is required for bootstrap js */}}
           <div class="dropdown-menu" aria-labelledby="dropdown-{{ $slug }}">
         {{- end -}}
         {{- if gt (len .children) 0 -}}

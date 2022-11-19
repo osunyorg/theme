@@ -5,13 +5,17 @@
                 border-bottom-color: $definition-border-color-hovered
         summary,
         p
-            font-size: px2rem(20)
-            line-height: px2rem(30)
+            font-size: $definition-font-size
+            @include media-breakpoint-up(md)
+                font-size: $definition-font-size-md
+        p
+            margin-block-start: 0
+            margin-block-end: $spacing1
         &::after
             content: ""
             border-bottom: 1px solid $definition-border-color
             display: block
             transition: border-color 0.5s
-    @include in-page-without-aside
+    @include in-page-without-sidebar
         .definitions
             @include grid(2, md)

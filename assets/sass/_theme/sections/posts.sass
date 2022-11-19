@@ -15,7 +15,8 @@
         font-size: px2rem(14)
 
 .posts__section,
-.authors__term
+.authors__term,
+.categories__term
     @if $posts-layout-list
         .posts 
             @include grid(1)
@@ -64,7 +65,15 @@
 
 .posts__page
     aside
-        @include container
+        @include container-margin-left
+        margin-top: 0
+        top: 0
+        left: 0
+        height: 100%
+        position: absolute
+        width: col-outside-container(4)
+        .table-infos
+            @include sticky($spacing1)
 
 .post-categories
     @include list-reset

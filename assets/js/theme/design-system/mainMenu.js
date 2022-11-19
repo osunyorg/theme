@@ -1,4 +1,5 @@
-import breakpoints from '../utils/breakpoints';
+import { breakpoints } from '../utils/breakpoints';
+import { a11yClick } from '../utils/a11y';
 
 const CLASSES = {
     mainMenuOpened: 'is-opened',
@@ -33,7 +34,7 @@ class MainMenu {
         });
 
         this.dropdownsButtons.forEach((button) => {
-            button.addEventListener('click', (event) => {
+            a11yClick(button, (event) => {
                 event.preventDefault();
                 this.toggleDropdown(button);
             });
@@ -45,6 +46,12 @@ class MainMenu {
 
         window.addEventListener('click', (event) => {
             if (event.target === document.body) {
+                this.closeEverything();
+            }
+        });
+
+        window.addEventListener('keydown', (event) => {
+            if (event.keyCode === 27 || event.key === 'Escape') {
                 this.closeEverything();
             }
         });

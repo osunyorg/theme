@@ -13,6 +13,15 @@
   <div>12</div>
 </div>
 
+<div class="d-spacing">
+  <div><span>0</span></div>
+  <div><span>1</span></div>
+  <div><span>2</span></div>
+  <div><span>3</span></div>
+  <div><span>4</span></div>
+  <div><span>5</span></div>
+</div>
+
 <style>
   :root {
     --d-grid-margin: 64px;
@@ -29,7 +38,9 @@
     margin: auto;
     max-width: 100%;
     top: 0;
-    width: 1920px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(1920px + var(--d-grid-margin));
     z-index: 9999;
   }
   .d-grid.is-visible {
@@ -43,12 +54,58 @@
     */
     text-align: center;
   }
+  .d-spacing {
+    display: none;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+  }
+  .d-spacing.is-visible {
+    display: block;
+  }
+  .d-spacing > div {
+    position: relative;
+  }
+  .d-spacing > div span {
+    position: absolute;
+  }
+  .d-spacing > div {
+    width: 100%;
+    border-bottom: 1px solid #000;
+    display: block;
+  }
+  .d-spacing > div:nth-child(1){
+    border-top: 1px solid #000;
+    height: var(--spacing0);
+  }
+  .d-spacing > div:nth-child(1) span{
+    margin-top: -10px;
+  }
+  .d-spacing > div:nth-child(2){
+    height: var(--spacing1);
+  }
+  .d-spacing > div:nth-child(3){
+    height: var(--spacing2);
+  }
+  .d-spacing > div:nth-child(4){
+    height: var(--spacing3);
+  }
+  .d-spacing > div:nth-child(5){
+    height: var(--spacing4);
+  }
+  .d-spacing > div:nth-child(6){
+    height: var(--spacing5);
+  }
 </style>
 
 <script>
   window.addEventListener('keydown', e => {
     if (e.ctrlKey && e.key === 'g') {
       document.querySelector('.d-grid').classList.toggle('is-visible');
+      document.querySelector('.d-spacing').classList.toggle('is-visible');
     }
   });
 </script>

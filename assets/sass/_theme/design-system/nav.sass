@@ -151,21 +151,22 @@ body
         pointer-events: none
         position: fixed
         opacity: 0
-        visibility: hidden
         transition: opacity $header-transition
         z-index: $zindex-body-overlay
 
-    html.has-menu-opened &
+    html.has-menu-opened &,
+    html.has-offcanvas-opened &
         &::after
             display: block
             opacity: 1
             pointer-events: inherit
-            visibility: inherit
+    html.has-offcanvas-opened &
+        &::after
+            z-index: $zindex-header + 1
 
     html.is-animating:not(.has-menu-opened) &
         &::after
             display: block
-            visibility: inherit
             opacity: 0
 
 header[role="banner"]

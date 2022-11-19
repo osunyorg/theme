@@ -9,15 +9,17 @@
 
   {{ partial "persons/hero.html" . }}
 
-  <div class="container">
-    {{ partial "persons/image.html" .Params.image }}
-    {{ partial "persons/chapo.html" .Params.description_short }}
-    {{- if not $is_organigram_present -}}
-      {{ partial "persons/taxonomies.html" . }}
-      {{ partial "persons/list.html" . }}
-    {{- end -}}
+  <div class="document-content">
+    <div class="container">
+      {{ partial "persons/image.html" .Params.image }}
+      {{ partial "persons/chapo.html" .Params.description_short }}
+      {{- if not $is_organigram_present -}}
+        {{ partial "persons/taxonomies.html" . }}
+        {{ partial "persons/list.html" . }}
+      {{- end -}}
+    </div>
+  
+    {{ partial "blocks/list.html" . }}
   </div>
-
-  {{ partial "blocks/list.html" . }}
 
 {{ end }}

@@ -2,6 +2,7 @@
 
 // MAIN COLORS
 $main-color: black !default // Text color
+$main-active-color: blue !default
 $main-background-color: white !default // Background color
 $main-border-color: lightgray !default // Border color
 $main-light-color: #f8f9fa !default
@@ -24,6 +25,7 @@ $line-height-base: 1.4 !default
 
 // Fonts sizes
 $body-font-size: px2rem(20) !default
+$body-font-size-md: $body-font-size !default
 $small-font-size: px2rem(14) !default
 
 $h1-size-md: px2rem(60) !default
@@ -83,7 +85,9 @@ $zindex-nav-accessibility: 1010 !default
 $zindex-stretched-link: 2 !default
 $zindex-header: 52 !default
 $zindex-body-overlay: 51 !default
-$zindex-toc: 50 !default
+$zindex-toc: 60 !default
+$zindex-toc-cta: 49 !default
+$zindex-aside: 48 !default
 
 // Header
 $header-color: $main-color !default
@@ -135,13 +139,16 @@ $icons: map-merge($icons, ("caret-top": "\e914"))
 $icons: map-merge($icons, ("close": "\e90e"))
 $icons: map-merge($icons, ("download": "\e900"))
 $icons: map-merge($icons, ("eye": "\e901"))
-$icons: map-merge($icons, ("link-blank": "\e903"))
-$icons: map-merge($icons, ("play": "\e910"))
-$icons: map-merge($icons, ("pause": "\e90f"))
-$icons: map-merge($icons, ("social": "\e915"))
-$icons: map-merge($icons, ("instagram": "\e90a"))
 $icons: map-merge($icons, ("facebook": "\e90b"))
+$icons: map-merge($icons, ("instagram": "\e90a"))
+$icons: map-merge($icons, ("link-blank": "\e903"))
 $icons: map-merge($icons, ("linkedin": "\e90c"))
+$icons: map-merge($icons, ("list-hyphen": "\e917"))
+$icons: map-merge($icons, ("pause": "\e90f"))
+$icons: map-merge($icons, ("play": "\e910"))
+$icons: map-merge($icons, ("search": "\e916"))
+$icons: map-merge($icons, ("social": "\e915"))
+$icons: map-merge($icons, ("toc": "\e918"))
 $icons: map-merge($icons, ("twitter": "\e90d"))
 
 // Breakpoints
@@ -159,6 +166,8 @@ $block-call-to-action-button-color: invert($block-call-to-action-color) !default
 // Block definitions
 $definition-border-color: $main-border-color !default
 $definition-border-color-hovered: color-contrast($definition-border-color, 100%) !default
+$definition-font-size: $body-font-size !default
+$definition-font-size-md: $body-font-size-md !default
 
 // Block pages
 $block-pages-card-background: color-contrast($main-background-color, 10%) !default
@@ -209,13 +218,14 @@ $post-time-color: color-contrast($main-color, 20%) !default
 
 // Table of content
 $toc-color: $main-color !default
-$toc-active-color: $main-color !default // TODO : checker ce que ça fait
+$toc-active-color: $main-active-color !default // TODO : checker ce que ça fait
 $toc-font-family: $body-font-family !default
-$toc-font-size: $h4-size !default
-$toc-font-size-md: $h4-size-md !default
+$toc-font-size: $body-font-size !default
+$toc-font-size-md: $body-font-size-md !default
+$toc-title-font-size: $body-font-size !default
+$toc-title-font-size-md: $body-font-size-md !default
 $toc-line-height: $h4-line-height !default
 $toc-font-weight: normal !default
-
 
 // Person
 $persons-avatar-background-color: $main-light-color !default

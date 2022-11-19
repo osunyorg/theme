@@ -1,15 +1,17 @@
 {{ define "main" }}
   {{ partial "diplomas/hero-list.html" . }}
 
-  <div class="container">
-    {{ partial "diplomas/image.html" .Params.image }}
-    {{ partial "diplomas/chapo.html" .Params.description_short }}
-  </div>
-  {{ partial "blocks/list.html" . }}
-  <div class="container">
-    {{ .Scratch.Set "show_programs" true }}
-    {{ partial "diplomas/diplomas.html" . }}
-    {{ .Scratch.Delete "show_programs" }}
+  <div class="document-content">
+    <div class="container">
+      {{ partial "diplomas/image.html" .Params.image }}
+      {{ partial "diplomas/chapo.html" .Params.description_short }}
+    </div>
+    {{ partial "blocks/list.html" . }}
+    <div class="container">
+      {{ .Scratch.Set "show_programs" true }}
+      {{ partial "diplomas/diplomas.html" . }}
+      {{ .Scratch.Delete "show_programs" }}
+    </div>
   </div>
 
 {{ end }}

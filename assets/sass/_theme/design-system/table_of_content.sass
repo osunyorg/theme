@@ -1,14 +1,139 @@
+@mixin offcanvas-toc
+    background: white
+    position: fixed
+    top: 0
+    right: 0
+    bottom: 0
+    margin-top: 0
+    z-index: $zindex-toc
+    width: calc(#{col-outside-container(4)} + #{$grid-gutter})
+    transform: translateX(100%)
+    transition: 0.35s transform ease-in-out
+    @include media-breakpoint-down(md)
+        width: calc(100% - #{$grid-gutter})
+    @include media-breakpoint-up(md)
+        width: calc(#{col-outside-container(6)} + #{$grid-gutter})
+    &.is-opened
+        transform: translateX(0)
+    .toc-content
+        display: flex
+        flex-direction: column
+        height: 100%
+    .toc-title
+        border-bottom: 1px solid $main-border-color
+        font-size: $toc-title-font-size
+        padding: $header-nav-padding-y
+        @include media-breakpoint-up(md)
+            font-size: $toc-title-font-size-md
+            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) $spacing1
+    .toc
+        flex: 1
+        display: flex
+        flex-direction: column
+        overflow-y: auto
+        max-height: 100%
+        > ol
+            flex: 1
+            padding: $spacing1
+            > li:first-child
+                margin-top: 0
+    button
+        @include button-reset
+        display: flex
+        justify-content: space-between
+        align-items: center
+        padding: $header-nav-padding-y $spacing1
+        border-top: 1px solid $main-border-color
+        @include icon(close, after)
+        @include media-breakpoint-up(md)
+            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) $spacing1
+
+.toc-cta
+    display: flex
+    position: relative
+    @include media-breakpoint-up(md)
+        @include container
+        justify-content: end
+        padding-bottom: $spacing3
+        text-align: right
+        &::after
+            background-color: #000000
+            bottom: 0
+            content: ''
+            height: 1px 
+            left: $grid-gutter
+            position: absolute
+            right: $grid-gutter
+        @include in-page-with-sidebar
+            display: none
+    @include media-breakpoint-down(md)
+        border-top: 1px solid $main-border-color
+        position: fixed
+        bottom: 0
+        background: white
+        left: 0
+        width: 100%
+        padding: $spacing0
+        z-index: $zindex-toc-cta
+
+    button
+        @include icon(toc, after)
+        @include button-icon(toc)
+        cursor: pointer
+        padding: 0
+        &::after
+            font-size: px2rem(13)
+        @include media-breakpoint-down(md)
+            display: flex
+            justify-content: space-between
+            align-items: center
+            width: 100% 
+
+
+
+.toc-container
+    // in full width page or under md breakpoint (mobile)
+    @include in-page-without-sidebar
+        @include offcanvas-toc
+    @include media-breakpoint-down(md)
+        @include offcanvas-toc
+
+    // Only desktop and in page with sidebar
+    @include media-breakpoint-up(md)
+        @include in-page-with-sidebar
+            @include container-margin-left
+            pointer-events: none
+            top: 0
+            left: 0
+            margin-top: 0
+            height: 100%
+            position: absolute
+            width: col-outside-container(4)
+            .toc-content
+                position: sticky
+                top: var(--header-height)
+                overflow-y: auto
+                max-height: calc(100vh - var(--header-height))
+                margin-bottom: $spacing1
+                padding-bottom: $spacing5
+                pointer-events: auto
+            button
+                display: none
+
+.toc-title, .toc-cta, .toc-container button
+    font-size: $toc-title-font-size
+    @include media-breakpoint-up(md)
+        font-size: $toc-title-font-size-md
+
 .toc
     ol
         @include list-reset
         align-items: flex-start
-        margin: 0
+        display: flex
         flex-direction: column
-        padding-top: $spacing0
-        padding-bottom: $spacing0
+        margin: 0
         li
-            &:not(:last-child)
-                margin-bottom: 1rem
+            margin-top: 1rem
             a
                 color: $toc-color
                 display: block
@@ -21,5 +146,14 @@
                     font-size: $toc-font-size-md
                 &:hover
                     text-decoration: underline
-    .active
-        color: $toc-active-color
+        .active
+            color: $toc-active-color
+            pointer-events: none
+        ol
+            padding-left: 0
+            li a
+                @include icon(list-hyphen)
+                &::before
+                    opacity: 0.3
+                    font-size: 6px
+                    margin-inline-end: 6px

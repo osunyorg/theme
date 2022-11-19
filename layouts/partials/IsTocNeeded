@@ -1,0 +1,11 @@
+{{ $isNeeded := false }}
+
+{{ if eq .context.Type "programs" }}
+  {{ $isNeeded = true }}
+{{ end }}
+
+{{ if gt (len .context.Params.blocks) 1 }}
+  {{ $isNeeded = true }}
+{{ end }}
+
+{{ return $isNeeded }}

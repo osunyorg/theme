@@ -5,23 +5,9 @@
           "image" .Params.image
           "context" .
         ) -}}
-  <div class="container">
+  <div class="document-content container">
     <div class="content">
-      <aside>
-        <div>
-          <nav class="toc" id="nav-toc" aria-label="Table des matières">
-            <ol>
-              {{ range site.Sections }}
-                {{ if ne .Type "sitemap" }}
-                  <li>
-                    <a class="nav-link" href="#{{ .Type }}">{{ safeHTML .Title }}</a>
-                  </li>
-                {{ end }}
-              {{ end }}
-            </ol>
-          </nav>
-        </div>
-      </aside>
+      {{- partial "sitemap/document-nav" . -}}
       <div>
         {{ range site.Sections }}
           {{ if ne .Type "sitemap" }}

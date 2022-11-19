@@ -1,30 +1,29 @@
 {{ define "main" }}
   {{ partial "pages/hero.html" . }}
 
-  {{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}
-  {{- if .Params.blocks }}
-    {{ $need_aside := false }}
-    {{ range .Params.blocks }}
-      {{ if .title }}
-        {{ $need_aside = true }}
+  <div class="document-content">
+    {{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}
+    {{- if .Params.blocks }}
+      {{ $need_aside := false }}
+      {{ range .Params.blocks }}
+        {{ if .title }}
+          {{ $need_aside = true }}
+        {{ end }}
       {{ end }}
-    {{ end }}
 
-    <div class="content-blocks">
-      {{ partial "pages/aside.html"
+      {{ partial "toc/container.html"
           (dict
               "category" $category
+              "toc" "pages/toc.html"
               "context" .
           )
       }}
       {{ partial "blocks/list.html" . }}
-    </div>
-  {{ else }}
-    {{ partial "pages/image.html" .Params.image }}
-    {{/* LEGACY */}}{{ partial "pages/body.html" .Content }}
-    {{/* LEGACY */}}{{ partial "pages/body.html" .Params.legacy_text }}
-    {{ partial "pages/children.html" .Params.children }}
-    {{/* LEGACY */}}{{ partial "posts/related.html" $category }}
-  {{ end }}
+
+    {{ else }}
+      {{ partial "pages/image.html" .Params.image }}
+      {{ partial "pages/children.html" .Params.children }}
+    {{ end }}
+  </div>
 
 {{ end }}

@@ -1,52 +1,3 @@
-//.programs__section
-//     .page-with-blocks
-//         .hero
-//             margin-bottom: 3rem
-
-//     main > article
-//         position: relative
-//         > aside
-//             align-self: flex-start
-//             margin-bottom: $spacing5
-//             pointer-events: none
-//             .toc + p
-//                 margin-top: $grid-gutter
-//             p:last-of-type
-//                 margin-bottom: 0
-//             @include media-breakpoint-down(md)
-//                 position: relative
-//             @include media-breakpoint-up(md)
-//                 height: 100%
-//                 margin-bottom: 0
-//                 position: absolute
-//                 width: 100%
-//                 ~ *
-//                     .container
-//                         > *
-//                             &:not(.call_to_action)
-//                                 padding-left: col(4)
-//                             &.call_to_action
-//                                 margin-left: col(4)
-//                             &:is(picture)
-//                                 display: block
-//             > div
-//                 // @extend .container
-//                 // @extend .sticky
-//                 padding: 0
-//                 > *
-//                     // @extend .col-md-3
-//                     padding-left: #{$grid-gutter / 2}
-//                     padding-right: #{$grid-gutter / 2}
-//                     pointer-events: auto
-//         [itemprop="articleBody"]
-//             margin-bottom: $spacing5
-//     article
-//         .persons
-//             margin-bottom: 3rem
-//             margin-top: -2rem
-//             @include grid(2, lg)
-
-
 .program
     @include article
 
@@ -80,19 +31,11 @@ ol.programs
                     text-align: right
 
 .programs__section
-    .hero
-        display: block
-        // .dropdown-share
-        //     margin-top: $spacing1
-        //     @include media-breakpoint-up(md)
-        //         bottom: $spacing1 + $spacing0 
-        //         margin-top: 0
-        //         position: absolute
-        //         right: $grid-gutter
-            // > button
-            //     @include media-breakpoint-down(md)
-            //         width: 100%
-            
+    .hero-program
+        flex-direction: column
+        justify-content: end
+        .container
+            position: relative
     .dropdown-share
         position: relative
         > button
@@ -151,43 +94,19 @@ ol.programs
 
     .lead
         padding-top: $spacing2
-    aside
-        @include container
-        @include sticky
-        overflow: auto
-        background: darken($main-background-color, 3)
-        z-index: $program-zindex-toc
-    .toc
-        max-width: 100%
-        ol
-            display: flex
-            flex-direction: row
-            flex-wrap: nowrap
-            justify-content: space-between
-            white-space: nowrap
-            margin: 0 #{-$spacing1}
-            padding: px2rem(20) 0
-            li
-                padding: calc(#{$spacing1}/3) calc(#{$spacing1}/2)
-                margin-bottom: 0
-    // .blocks
-    //     .container
-    //         padding-left: 0
-    //         padding-right: 0
-        // .block-content
-            // @include media-breakpoint-up(md)
-                // padding-left: offset(5)
 
-    article
+    .document-content
         .content
-            padding-top: $spacing1
-            padding-bottom: $spacing2
+            padding-top: $spacing2
+            .blocks
+                .container
+                    padding-left: 0
+                    padding-right: 0
 
     @include media-breakpoint-up(md)
-        article
+        .document-content
             .content
                 @include grid(12, md)
-                padding-bottom: $spacing4
                 border-top: 1px solid $main-color
                 position: relative
                 > *
@@ -196,6 +115,7 @@ ol.programs
                     $sticky-top-offset: 90px
                     @include sticky($sticky-top-offset)
                     top: $sticky-top-offset
+                    margin-top: -0.3em
                     align-self: start
                     grid-column: 1/5
                     margin-bottom: 0
@@ -203,6 +123,7 @@ ol.programs
                     .content
                         border-top: none
 
-    table 
+    table
+        margin-block-start: 2em
         caption 
             @include visually-hidden
