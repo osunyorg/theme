@@ -7,9 +7,12 @@
     margin-top: 0
     z-index: $zindex-toc
     width: calc(#{col-outside-container(4)} + #{$grid-gutter})
-    min-width: 320px
     transform: translateX(100%)
     transition: 0.35s transform ease-in-out
+    @include media-breakpoint-down(md)
+        width: calc(100% - #{$grid-gutter})
+    @include media-breakpoint-up(md)
+        width: calc(#{col-outside-container(6)} + #{$grid-gutter})
     &.is-opened
         transform: translateX(0)
     .toc-content
