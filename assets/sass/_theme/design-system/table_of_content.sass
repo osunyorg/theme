@@ -36,7 +36,6 @@
                 margin-top: 0
     button
         @include button-reset
-        // height: 45px
         display: flex
         justify-content: space-between
         align-items: center
@@ -74,12 +73,13 @@
         padding: $spacing0
         z-index: $zindex-toc-cta
 
-
     button
         @include icon(toc, after)
         @include button-icon(toc)
         cursor: pointer
         padding: 0
+        &::after
+            font-size: px2rem(13)
         @include media-breakpoint-down(md)
             display: flex
             justify-content: space-between
