@@ -119,7 +119,10 @@
             margin-top: 0
             height: 100%
             position: absolute
-            width: col-outside-container(4)
+            @include media-breakpoint-up(md)
+                width: col-outside-container(4)
+            @include media-breakpoint-up(xxl)
+                width: col-outside-container(5)
             .toc-content
                 position: sticky
                 top: var(--header-height)

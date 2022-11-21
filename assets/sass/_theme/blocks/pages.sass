@@ -50,15 +50,18 @@
         background-color: $block-pages-card-background
         padding-bottom: $grid-gutter
         padding-top: $grid-gutter
+        .block-gallery + &, .block-pages--card + &
+            margin-top: 0
         .main-page
             a
                 @include icon("arrow-right", after)
                 @include hover-translate-icon(before, 3)
                 &::after
                     font-size: px2rem(14)
+        .main-page + .pages
+            margin-top: $spacing2
         .pages
             @include grid(3, md)
-            margin-top: $spacing2
             @include in-page-with-sidebar
                 @include grid(2, md)
             .page
