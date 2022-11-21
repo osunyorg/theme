@@ -121,11 +121,17 @@
                 display: none
 
 .toc-title, .toc-cta, .toc-container button
+    font-family: $toc-font-family
     font-size: $toc-title-font-size
     @include media-breakpoint-up(md)
         font-size: $toc-title-font-size-md
 
 .toc
+    font-size: $toc-font-size
+    font-family: $toc-font-family
+    line-height: $toc-line-height
+    @include media-breakpoint-up(md)
+        font-size: $toc-font-size-md
     ol
         @include list-reset
         align-items: flex-start
@@ -137,13 +143,7 @@
             a
                 color: $toc-color
                 display: block
-                font-size: $toc-font-size
-                font-family: $toc-font-family
-                font-weight: $toc-font-weight
-                line-height: $toc-line-height
-                text-decoration: none
-                @include media-breakpoint-up(md)
-                    font-size: $toc-font-size-md
+                text-decoration-color: transparent
                 &:hover
                     text-decoration: underline
         .active
