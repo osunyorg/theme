@@ -12,7 +12,7 @@
     @include media-breakpoint-down(md)
         width: calc(100% - #{$grid-gutter})
     @include media-breakpoint-up(md)
-        width: calc(#{col-outside-container(6)} + #{$grid-gutter})
+        width: calc(#{col-outside-container(4)} + #{$grid-gutter} * 2)
     &.is-opened
         transform: translateX(0)
     .toc-content
@@ -24,8 +24,10 @@
         font-size: $toc-title-font-size
         padding: $header-nav-padding-y
         @include media-breakpoint-up(md)
+            padding: $header-nav-padding-y $grid-gutter
+        @include media-breakpoint-up(md)
             font-size: $toc-title-font-size-md
-            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) $spacing1
+            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) $grid-gutter
     .toc
         flex: 1
         display: flex
@@ -35,6 +37,8 @@
         > ol
             flex: 1
             padding: $spacing1
+            @include media-breakpoint-up(md)
+                padding: $spacing1 $grid-gutter
             > li:first-child
                 margin-top: 0
     button
@@ -48,10 +52,10 @@
         @include icon(close, after)
         @include media-breakpoint-up(md)
             border-top: 0
-            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) $spacing1
+            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) 0
             position: absolute
             top: 0
-            right: 0
+            right: $grid-gutter
             &::after
                 margin-left: $spacing0
 
