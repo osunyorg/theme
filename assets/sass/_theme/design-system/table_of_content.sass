@@ -44,9 +44,16 @@
         align-items: center
         padding: $header-nav-padding-y $spacing1
         border-top: 1px solid $main-border-color
+        line-height: inherit
         @include icon(close, after)
         @include media-breakpoint-up(md)
+            border-top: 0
             padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) $spacing1
+            position: absolute
+            top: 0
+            right: 0
+            &::after
+                margin-left: $spacing0
 
 .toc-cta
     display: flex
@@ -79,6 +86,8 @@
     button
         @include icon(toc, after)
         @include button-icon(toc)
+        border: 0
+        line-height: inherit
         cursor: pointer
         padding: 0
         &::after
