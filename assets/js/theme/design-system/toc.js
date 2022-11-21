@@ -14,7 +14,7 @@ class TableOfContent {
     this.nav = this.element.querySelector('.toc');
     this.links = this.element.querySelectorAll('a');
     this.sections = document.querySelectorAll('section');
-    this.ctaTitle = document.querySelector('.toc-cta-title');
+    this.ctaTitle = document.querySelector('.toc-cta-title span');
     this.togglers = document.querySelectorAll('.toc-cta button, .toc-container button');
     this.state = {
       opened: false,

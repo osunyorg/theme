@@ -116,8 +116,6 @@
 @mixin container-margin-left
     margin-left: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
 
-
-
 @mixin stretched-link($pseudo-element: after)
     &::#{$pseudo-element}
         bottom: 0
@@ -167,7 +165,7 @@
         @include media-breakpoint-up(md)
             font-size: $article-title-size-md
     a
-        @include stretched-link(before)
+        @include stretched-link
     p
         margin-bottom: 0
         margin-top: 0

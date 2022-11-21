@@ -50,14 +50,19 @@
         background-color: $block-pages-card-background
         padding-bottom: $grid-gutter
         padding-top: $grid-gutter
-        .block-gallery + &, .block-pages--card + &
+        .block-gallery + &,
+        .block-pages--cards + &
             margin-top: 0
         .main-page
             a
                 @include icon("arrow-right", after)
-                @include hover-translate-icon(before, 3)
+                @include hover-translate-icon(after, 3)
+                @include stretched-link(before)
                 &::after
                     font-size: px2rem(14)
+                    position: relative
+                    margin-left: $spacing0
+
         .main-page + .pages
             margin-top: $spacing2
         .pages
