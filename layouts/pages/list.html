@@ -10,7 +10,6 @@
           {{ $need_aside = true }}
         {{ end }}
       {{ end }}
-      {{ partial "hooks/after-page-hero.html" . }}
       {{ partial "toc/container.html"
           (dict
               "category" $category
@@ -18,6 +17,7 @@
               "context" .
           )
       }}
+      {{ partial "hooks/after-page-hero.html" . }}
       {{ partial "blocks/list.html" . }}
 
     {{ else }}
