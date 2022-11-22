@@ -38,11 +38,17 @@ h5, .h5
     @extend %heading
     font-size: $h5-size
     font-weight: $h5-weight
-
+    line-height: $h5-line-height
+    @include media-breakpoint-up(md)
+        font-size: $h5-size-md
+        
 h6, .h6
     @extend %heading
     font-size: $h6-size
     font-weight: $h6-weight
+    line-height: $h6-line-height
+    @include media-breakpoint-up(md)
+        font-size: $h6-size-md
 
 h1, .h1,
 h2, .h2
@@ -60,11 +66,6 @@ h2, .h2
     @include media-breakpoint-up(md)
         font-size: $lead-size-md
 
-[itemprop="articleBody"]
-    h1, h2, h3, h4, h5, h6
-        margin-block-start: 2em
-        &:first-child, meta + &
-            margin-block-start: 0
 
 body
     font-family: $body-font-family
@@ -74,17 +75,41 @@ body
     font-variant-ligatures: common-ligatures
     text-rendering: optimizelegibility
     line-height: $line-height-base
+    @include media-breakpoint-up(md)
+        font-size: $body-font-size-md
 
 p, .p,
 li, .li
     font-size: $body-font-size
-
-small, .small
-    font-size: $small-font-size
+    @include media-breakpoint-up(md)
+        font-size: $body-font-size-md
 
 p
     margin-top: 0
     margin-bottom: 0
+
+.meta
+    font-family: $meta-font-family
+    font-size: $meta-size
+    font-weight: $meta-weight
+    line-height: $meta-line-height
+    @include media-breakpoint-up(md)
+        font-size: $meta-size-md
+    
+small, .small
+    font-family: $small-font-family
+    font-size: $small-size
+    font-weight: $small-weight
+    line-height: $small-line-height
+    @include media-breakpoint-up(md)
+        font-size: $small-size-md
+
+
+[itemprop="articleBody"]
+    h1, h2, h3, h4, h5, h6
+        margin-block-start: 2em
+        &:first-child, meta + &
+            margin-block-start: 0
 
 blockquote, .blockquote
     margin: 0
