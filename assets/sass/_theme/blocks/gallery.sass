@@ -58,10 +58,12 @@
                 @include media-breakpoint-up(md)
                     padding-right: calc(#{$grid-gutter} / 2)
         .splide
-            display: flex
+            display: flext
             flex-direction: column
             &__track
-                margin-right: -$grid-gutter
+                margin-right: -calc(#{$grid-gutter-sm} / 2)
+                @include media-breakpoint-up(md)
+                    margin-right: -calc(#{$grid-gutter} / 2)
             &__slide
                 flex-shrink: initial
                 &:last-child
