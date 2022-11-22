@@ -1,16 +1,30 @@
 .block-key_figures
+    .top
+        margin-bottom: 0
     ul
-        @include grid(4, md)
+        @include grid(3, md)
         @include list-reset
+        @include in-page-with-sidebar
+            @include grid(2, md)
+    .top + ul
+        margin-top: $spacing2
+    @include media-breakpoint-down(md)
+        li + li
+            margin-top: $spacing2
     dl
         margin-bottom: 0
         margin-top: 0
         dt
             white-space: nowrap
+            font-family: $heading-font-family
             font-size: $block-key_figures-font-size
+            font-weight: $heading-font-weight
+            font-weight: bold
+            line-height: 1
             strong
                 display: inline-block
                 font-size: $block-key_figures-number-font-size
+                margin-inline-end: 0.1em
             @include media-breakpoint-up(md)
                 font-size: $block-key_figures-font-size-md
                 strong
@@ -30,3 +44,6 @@
         dd
             margin-bottom: 0
             margin-left: 0
+        dt + dd
+            margin-top: $spacing0
+            
