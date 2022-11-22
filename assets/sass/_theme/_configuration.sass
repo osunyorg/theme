@@ -8,18 +8,11 @@ $color-border: rgba(0, 0, 0, 0.30) !default
 $color-background-alt: #F2F2F2 !default
 $color-background: #FFFFFF !default
 
-// legacy
-$main-color: $color-text !default // Text color
-$main-active-color: $color-accent !default
-$main-background-color: $color-background !default // Background color
-$main-border-color: $color-border !default // Border color
-$main-light-color: $color-background-alt !default
 // TODO : faut-il mettre les largeur de border dans le config ? overkill ?
 
-$body-color: $main-color !default
-$body-background-color: $main-background-color !default
-
-$link-color: $main-color !default
+$body-color: $color-text !default
+$body-background-color: $color-background !default
+$link-color: $color-text !default
 
 // TYPOGRAPHY
 
@@ -63,15 +56,15 @@ $h4-weight: bold !default
 $h4-text-transform: none !default
 
 // h5 or Section
-$h5-size-md: px2rem(20) !default
-$h5-size: px2rem(24) !default
+$h5-size-md: px2rem(24) !default
+$h5-size: px2rem(20) !default
 $h5-line-height: 130% !default
 $h5-weight: $heading-font-weight !default
 $h5-text-transform: uppercase !default
 
 // h6 or Tab
-$h6-size-md: px2rem(14) !default
-$h6-size: px2rem(20) !default
+$h6-size-md: px2rem(20) !default
+$h6-size: px2rem(14) !default
 $h6-line-height: 18% !default
 $h6-weight: $heading-font-weight !default
 $h6-text-transform: uppercase !default
@@ -98,8 +91,8 @@ $small-weight: normal !default
 
 // Signature
 $signature-font-family: $heading-font-family !default
-$signature-size: px2rem(18)
 $signature-size-md: px2rem(22)
+$signature-size: px2rem(18)
 $signature-line-height: 130% !default
 $signature-weight: $heading-font-weight !default
 
@@ -120,11 +113,14 @@ $quote-weight: normal !default
 // Buttons
 $btn-font-size-md: px2rem(18) !default // TODO
 $btn-font-size: px2rem(14) !default
-$btn-padding-x: px2rem(12) !default
-$btn-padding-y: px2rem(6) !default
+$btn-padding-x-md: px2rem(50) !default
+$btn-padding-y-md: px2rem(15) !default
+$btn-padding-x: px2rem(20) !default
+$btn-padding-y: px2rem(13) !default
+$btn-border-radius: px2rem(4) !default
 
 // Breadcrumb
-$breadcrumb-color: invert($main-color) !default
+$breadcrumb-color: invert($color-text) !default
 
 // Spacing
 $spacing0: px2rem(12) !default
@@ -151,9 +147,9 @@ $zindex-toc-cta: 49 !default
 $zindex-aside: 48 !default
 
 // Header
-$header-color: $main-color !default
+$header-color: $color-text !default
 $header-hover-color: rgba($header-color, 0.7) !default // TODO : Réflechir à plus élégant / générique
-$header-background: $main-background-color !default
+$header-background: $color-background !default
 $header-sticky-enabled: true !default
 $header-sticky-background: $header-background !default
 $header-sticky-color: $header-color !default
@@ -173,16 +169,16 @@ $header-height-md: 74px !default
 $body-overlay-color: rgba(0, 0, 0, 0.3) !default
 
 // Footer
-$footer-color: $main-color !default
-$footer-background-color: color-contrast($main-background-color, 3%) !default
+$footer-color: $color-text !default
+$footer-background-color: color-contrast($color-background, 3%) !default
 $footer-logo-height: $header-logo-height !default
 $footer-logo-height-md: $footer-logo-height !default
 
 // Hero
 $hero-height: 375px !default
 $hero-height-md: 550px !default
-$hero-color: invert($main-color) !default
-$hero-background-color: invert($main-background-color) !default
+$hero-color: invert($color-text) !default
+$hero-background-color: invert($color-background) !default
 
 // Icons
 $icons: ()
@@ -219,8 +215,8 @@ $grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 144
 // System
 
 // Table of content
-$toc-color: $main-color !default
-$toc-active-color: $main-active-color !default // TODO : checker ce que ça fait
+$toc-color: $color-text !default
+$toc-active-color: $color-accent !default // TODO : checker ce que ça fait
 $toc-font-family: $body-font-family !default
 $toc-font-size: $body-size !default
 $toc-font-size-md: $body-size-md !default
@@ -238,23 +234,23 @@ $table-body-size-md: $small-size-md !default
 // BLOCKS
 
 // Block call to action
-$block-call-to-action-background: invert($main-background-color) !default
-$block-call-to-action-color: invert($main-color) !default
-$block-call-to-action-button-background: invert($block-call-to-action-background) !default
-$block-call-to-action-button-color: invert($block-call-to-action-color) !default
+$block-call-to-action-background: $color-accent !default
+$block-call-to-action-color: $color-background !default
+$block-call-to-action-button-background: $color-background !default
+$block-call-to-action-button-color: $color-text !default
 
 // Block definitions
-$block-definition-border-color: $main-border-color !default
-$block-block-definition-border-color-hovered: color-contrast($block-definition-border-color, 100%) !default
+$block-definition-border-color: $color-border !default
+$block-definition-border-color-hovered: color-contrast($block-definition-border-color, 100%) !default
 $block-definition-font-size: $body-size !default
 $block-definition-font-size-md: $body-size-md !default
 
 // Block pages
-$block-pages-card-background: color-contrast($main-background-color, 10%) !default
-$block-pages-card-page-background: invert($main-color) !default
-$block-pages-card-page-color: $main-color !default
-$block-pages-card-page-background-hover: color-contrast($main-background-color, 100%) !default
-$block-pages-card-page-color-hover: invert($main-color) !default
+$block-pages-card-background: color-contrast($color-background, 10%) !default
+$block-pages-card-page-background: invert($color-text) !default
+$block-pages-card-page-color: $color-text !default
+$block-pages-card-page-background-hover: color-contrast($color-background, 100%) !default
+$block-pages-card-page-color-hover: invert($color-text) !default
 
 // Block timeline
 $block-timeline-horizontal-background: black !default
@@ -267,8 +263,8 @@ $block-testimonials-xl-font-size-long-text: $quote-size-long !default
 $block-testimonials-xl-line-height-long-text: $quote-line-height !default
 $block-testimonials-font-size: $quote-size-md !default
 $block-testimonials-line-height: $quote-line-height !default
-$block-testimonials-pagination-background: $main-border-color !default
-$block-testimonials-pagination-progress-background: $main-color !default
+$block-testimonials-pagination-background: $color-border !default
+$block-testimonials-pagination-progress-background: $color-text !default
 
 // Block key_figures
 $block-key_figures-font-size: px2rem(16) !default
@@ -287,20 +283,20 @@ $block-key_figures-font-size-xxl: $block-key_figures-font-size-xl !default
 $block-key_figures-number-font-size-xxl: px2rem(80) !default
 
 // Block gallery
-$block-gallery-carousel-background: $main-light-color
+$block-gallery-carousel-background: $color-background-alt
 
 // Sections
 $article-title-size: $h4-size !default
 $article-title-size-md: $h4-size-md !default
-$article-media-background: color-contrast($main-background-color, 3%) !default
+$article-media-background: color-contrast($color-background, 3%) !default
 $article-media-aspect-ratio: 2 !default
 
 $post-media-background: $article-media-background !default
-$post-categories-color: color-contrast($main-color, 20%) !default
-$post-time-color: color-contrast($main-color, 20%) !default
+$post-categories-color: color-contrast($color-text, 20%) !default
+$post-time-color: color-contrast($color-text, 20%) !default
 
 // Person
-$persons-avatar-background-color: $main-light-color !default
+$persons-avatar-background-color: $color-background-alt !default
 
 // Program
 $program-essential-font-size: $h5-size !default

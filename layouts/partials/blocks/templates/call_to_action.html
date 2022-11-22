@@ -13,13 +13,13 @@
               "context" $context
               ) }}
             {{- if (partial "GetTextFromHTML" .text) }}
-            <div>
+            <div class="description">
               {{ partial "PrepareHTML" .text }}
             </div>
             {{ end -}}
 
             {{- if .buttons }}
-            <div {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
+            <div class="actions" {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
               {{- range .buttons -}}
                 {{ if .title }}
                   {{- $title := partial "PrepareHTML" .title -}}
@@ -30,7 +30,8 @@
                     {{ else }}
                       title="{{ $title }}"
                     {{ end }}
-                    >{{ $title }}</a>
+                    >{{- $title -}}
+                  </a>
                 {{ end -}}
               {{- end -}}
             </div>

@@ -1,101 +1,115 @@
 .block-call_to_action
+    @include in-page-with-or-without-sidebar
+        h2, h3
+            @extend .h5
+            margin-bottom: $spacing0
     .call_to_action
         color: $block-call-to-action-color
-        p:last-of-type
-            margin-bottom: 0
-
-        > div
+        .description 
+            p
+                @extend .h2
+        .actions
             [role="group"]
                 @include media-breakpoint-down(md)
                     display: flex
                     flex-direction: column
-            // button
-            div + div,
-            & >
+            a
+                @extend .meta
+                color: $block-call-to-action-color
+                margin-right: $spacing2
+                margin-top: $spacing1
+                text-decoration-color: rgba($block-call-to-action-color, .3)
+                display: inline-block
+                &:hover
+                    text-decoration-color: $block-call-to-action-color
+                &:first-child
+                    @extend .btn
+                    background: $block-call-to-action-button-background
+                    color: $block-call-to-action-button-color
+                &:last-child
+                    margin-bottom: 0
+        * + .actions
+            margin-top: calc(#{$spacing2} - #{$spacing1})
+
+    @include media-breakpoint-down(md)
+        background-color: $block-call-to-action-background
+        .call_to_action
+            padding: $spacing3 0
+            .actions
                 a
-                    margin-top: 1rem
-                    color: $block-call-to-action-color
-                    text-decoration-color: rgba($block-call-to-action-color, .3)
-                    &:hover
-                        text-decoration-color: $block-call-to-action-color
-                    &:first-of-type
-                        @extend .btn
-                        background: $block-call-to-action-button-background
-                        color: $block-call-to-action-button-color
-        @include in-page-with-sidebar
+                    margin-right: $spacing1
+                    &:last-child
+                        margin-bottom: 0
+        .call_to_action--with-image
+            padding-top: calc(#{$grid-gutter-sm} / 2)
             display: flex
             flex-direction: column
             > *
                 order: 2
             picture
+                margin-bottom: offset(1)
                 order: 1
-                padding-left: $grid-gutter
-                position: relative
-            img
-                margin-bottom: -50px
-            > div
-                background-color: $block-call-to-action-background
-                padding: $grid-gutter
-                width: 100%
-            &--with-image
-                > div
-                    padding-top: calc(#{$grid-gutter} + 50px)
 
-            @include media-breakpoint-up(md)
-                picture
-                    padding-left: offset(1, 8)
-                    padding-right: offset(3, 8)
-                    @include media-breakpoint-up(xxl)
-                        padding-left: offset(1, 7)
-                        padding-right: offset(3, 7)
-                > div
-                    padding: offset(1, 8)
-                    @include media-breakpoint-up(xxl)
-                        padding: offset(1, 7)
-
-                [role="group"]
-                    a
-                        margin-right: px2rem(20)
-
-    @include in-page-without-sidebar
-        .block-content
-            background-color: $block-call-to-action-background
-            padding: offset(1)
-        .call_to_action--with-image
-            @include media-breakpoint-down(md)
+    @include media-breakpoint-up(md)
+        @include in-page-with-sidebar
+            .call_to_action
                 display: flex
                 flex-direction: column
+                margin-left: -$grid-gutter
+                margin-right: -$grid-gutter
                 > *
                     order: 2
-                picture
-                    margin-bottom: offset(1)
-                    order: 1
-            @include media-breakpoint-up(md)
-                @include grid(2, md)
-                align-items: center
                 > div
-                    > *
-                        margin-right: offset(1, 5) // ???
-                div + div
-                    a
-                        margin-right: 1rem
-        .call_to_action--without-image
-            @include media-breakpoint-up(md)
+                    background-color: $block-call-to-action-background
+                    padding: $grid-gutter
+                    width: 100%
+                &--with-image
+                    picture
+                        order: 1
+                        padding-left: $grid-gutter
+                        padding-right: $grid-gutter
+                        position: relative
+                    img
+                        margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
+                    > div
+                        padding-top: calc(#{$grid-gutter} + #{$spacing3})
+  
+        @include in-page-without-sidebar
+            .block-content
+                background-color: $block-call-to-action-background
+                padding: $spacing4 $grid-gutter
+                margin-left: -$grid-gutter
+                margin-right: -$grid-gutter
+            .call_to_action--with-image
+                align-items: start
+                display: grid
+                grid-template-columns: repeat(12,1fr)
+                > div
+                    grid-column: 1/7
+                > picture
+                    grid-column: 8/13
+            .call_to_action--without-image
                 display: block
                 > div
                     column-gap: $grid-gutter
                     display: grid
-                    grid-template-columns: repeat(10,1fr)
-                    > *
-                        grid-column: 1/5
-                    div + div,
-                    & > a
-                        grid-column: 6/11
-                    div + div
+                    grid-template-columns: repeat(12,1fr)
+                    h2, h3, .description
+                        grid-column: 1/9
+                    .actions
                         align-items: flex-start
                         display: flex
                         flex-direction: column
-                    div + div,
-                    & >
-                        a:first-of-type
-                            margin-top: 0
+                        grid-column: 10/13
+                        margin-top: 0
+                        a
+                            margin-right: 0
+                        a + a
+                            margin-top: $spacing0
+                @include media-breakpoint-down(lg)
+                    > div
+                        h2, h3, .description
+                            grid-column: 1/8
+                        .actions
+                            grid-column: 9/13
+

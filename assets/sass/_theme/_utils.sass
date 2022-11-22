@@ -16,6 +16,15 @@
     main > .blocks &,
     body.full-width &,
         @content
+@mixin in-page-with-sidebar
+    body:not(.full-width) &
+        @content
+
+@mixin in-page-with-or-without-sidebar
+    body:not(.full-width) &,
+    main > .blocks &,
+    body.full-width &,
+        @content
 
 // Aliases
 @mixin full-page
@@ -35,7 +44,7 @@
     text-decoration-color: rgba($color, 0.3)
     text-decoration-line: underline
     text-decoration-thickness: 1px
-    text-underline-offset: 3px
+    text-underline-offset: 6px
     transition: text-decoration-color .3s ease
     &:hover
         text-decoration-color: rgba($color, 1)
@@ -191,7 +200,7 @@
     user-select: none
     &:active,
     &:focus
-        box-shadow: 0 0 0 0.25rem rgba($main-color, 0.25)
+        box-shadow: 0 0 0 0.25rem rgba($color-text, 0.25)
         // TODO : vérifier si l'outline 0 est vraiment nécessaire
         // outline: 0
 
