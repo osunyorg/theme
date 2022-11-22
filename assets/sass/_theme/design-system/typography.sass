@@ -10,7 +10,7 @@ h1, .h1
     @include media-breakpoint-up(md)
         font-size: $h1-size-md
 
-h2, .h2, .lead
+h2, .h2
     @extend %heading
     font-size: $h2-size
     font-weight: $h2-weight
@@ -51,6 +51,15 @@ h2, .h2
         &:hover
             text-decoration-thickness: 1px
 
+.lead
+    margin-top: 0
+    font-family: $lead-font-family
+    font-size: $lead-size
+    font-weight: $lead-weight
+    line-height: $lead-line-height
+    @include media-breakpoint-up(md)
+        font-size: $lead-size-md
+
 [itemprop="articleBody"]
     h1, h2, h3, h4, h5, h6
         margin-block-start: 2em
@@ -72,6 +81,10 @@ li, .li
 
 small, .small
     font-size: $small-font-size
+
+p
+    margin-top: 0
+    margin-bottom: 0
 
 blockquote, .blockquote
     margin: 0

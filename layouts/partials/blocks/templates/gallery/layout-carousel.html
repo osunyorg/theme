@@ -4,7 +4,7 @@
 {{ end }}
 
 {{- if $is_carousel }}
-<div class="splide" role="group" data-splide='{"arrows":true,"gap":"24px","pagination":false,"autoWidth":true,"autoplay":false}'>
+<div class="splide" role="group" data-splide='{"arrows":true,"pagination":false,"autoWidth":true,"autoplay":false}'>
   <div class="splide__track">
     <div class="splide__list">
 {{ end -}}
@@ -21,7 +21,7 @@
         {{- $lightbox_sizes := "1280x2560" -}}
         <figure{{ if $is_carousel }} class="splide__slide"{{ end }}>
           <a class="glightbox"
-            data-glightbox="type: image;"
+            data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
             href="{{ partial "GetImageUrl" (dict "url" $url "size" $lightbox_sizes ) }}">
             {{ partial "commons/image.html"
               (dict
@@ -32,20 +32,23 @@
                 "desktop"  "967x679"
               )}}
           </a>
-          <figcaption>
-            {{ if .text }}
-              <p>{{ partial "PrepareHTML" .text }}</p>
-            {{ end }}
-            {{ if .credit }}
-              <p class="credit">{{ partial "PrepareHTML" .credit }}</p>
-            {{ end }}
-          </figcaption>
+          {{ if or .text .credit }}
+            <figcaption>
+              {{ if .text }}
+                <div>{{ partial "PrepareHTML" .text }}</div>
+              {{ end }}
+              {{ if .credit }}
+                <div class="credit">{{ partial "PrepareHTML" .credit }}</div>
+              {{ end }}
+            </figcaption>
+          {{ end }}
         </figure>
       {{- end -}}
     {{ end }}
   {{ end }}
 
 {{- if $is_carousel }}
+    </div>
   </div>
 </div>
 {{ end -}}

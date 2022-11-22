@@ -1,10 +1,8 @@
 .block-gallery
-    .top
-        @include grid(2, md)
-        align-items: center
-        .description
-            width: col(7)
-
+    @include in-page-without-sidebar
+        .top
+            @include grid(2, md)
+            align-items: baseline
     figure
         display: block
         margin-bottom: 0
@@ -12,6 +10,7 @@
         img,
         picture
             display: block
+            margin-bottom: $spacing0
         > a
             transition: opacity .3s ease
             &:hover
@@ -34,49 +33,64 @@
 
     &--grid
         .gallery
-            @include grid(3, md)
+            align-items: baseline
+            @include in-page-with-sidebar
+                @include grid(3, md, calc(#{$grid-gutter} / 2), calc(#{$grid-gutter} / 2))
             @include in-page-without-sidebar
-                @include grid(5, md)
+                @include grid(4, md)
+            @include media-breakpoint-down(md)
+                @include grid(2)
+                grid-gap: calc(#{$grid-gutter-sm} / 2) !important
+            figure
+                &:after
+                    content: ' ' // This is used to allow align baseline without figcaption
 
     &--carousel
+        background: $block-gallery-carousel-background
+        padding-bottom: $grid-gutter
+        padding-top: $grid-gutter
+        .block-gallery + &,
+        .block-pages--cards + &
+            margin-top: 0
         .container
             padding-right: 0
+            .top
+                padding-right: calc(#{$grid-gutter-sm} / 2)
+                @include media-breakpoint-up(md)
+                    padding-right: calc(#{$grid-gutter} / 2)
+            
         .splide
             display: flex
             flex-direction: column
             &__slide
                 flex-shrink: initial
-
-            figure // TODO : affichage écrasé
-                max-width: 80%
-                min-width: 80% // to check
-                @include in-page-without-sidebar
-                    min-width: 50%
-                // &:last-of-type
-                //     max-width: 100%
-                //     padding-right: 20%
-                picture
-                    height: 50vh
-                    overflow: hidden // solution provisoire : j'ai créé un masque avec le picture
-                    width: 100%
-                    @media (min-height: 800px)
-                        height: 680px
-                        max-height: 100%
+                &:last-child
+                    min-width: 100%
+                    padding-right: 20%
                     img
-                        height: auto
                         width: 100%
-                        @media (min-height: 800px)
-                            height: 100%
-                            max-width: unset
+            figure 
+                margin-right: $grid-gutter
+                picture
+                    img
+                        max-height: 70vh
+                        width: auto
+                        height: auto
+                        max-width: calc(100vw - #{$grid-gutter-sm} * 2)
+                @include media-breakpoint-up(md)
+                    picture
+                        img
+                            max-height: 70vh
                             width: auto
-                        // @include media-breakpoint-up(md)
-                        //     height: 100%
-                        //     max-height: 45vh
-                        //     min-height: 45vh
-                    
-                p
-                    @media (min-height: 800px)
-                        font-size: px2rem(16)
+                            height: auto
+                            max-width: 50vw
+                            @include in-page-without-sidebar
+                                height: 70vh
+                                max-width: none
+                    figcaption
+                        display: flex
+                        justify-content: space-between
+
             &__arrows
                 margin-left: -13px
                 order: 2
@@ -95,3 +109,10 @@
                         display: none
                 &--next
                     @include icon("arrow-right", before)
+        @include in-page-without-sidebar
+            .splide
+                &__slide
+                    &:first-child
+                        margin-left: $grid-gutter
+                &__track
+                    margin-left: -$grid-gutter
