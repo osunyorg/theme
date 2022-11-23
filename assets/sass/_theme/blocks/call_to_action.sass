@@ -5,7 +5,7 @@
             margin-bottom: $spacing0
     .call_to_action
         color: $block-call-to-action-color
-        .description 
+        .description
             p
                 @extend .h2
         .actions
@@ -66,9 +66,9 @@
                 &--with-image
                     picture
                         order: 1
-                        padding-left: $grid-gutter
-                        padding-right: $grid-gutter
+                        margin-left: $grid-gutter
                         position: relative
+                        width: 33.3333%
                     img
                         margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
                     > div
@@ -104,8 +104,10 @@
                         margin-top: 0
                         a
                             margin-right: 0
+                            &:first-child
+                                margin-top: 0
                         a + a
-                            margin-top: $spacing0
+                            margin-top: $spacing1
                 @include media-breakpoint-down(lg)
                     > div
                         h2, h3, .description
