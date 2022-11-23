@@ -13,7 +13,7 @@
       {{ range .events -}}
         <div class="event">
           {{ if .title -}}
-            <p><strong>{{ partial "PrepareHTML" .title }}</strong></p>
+            <p class="event-title">{{ partial "PrepareHTML" .title }}</p>
           {{- end }}
           {{ if .text -}}
             <p>{{ partial "PrepareText" .text }}</p>

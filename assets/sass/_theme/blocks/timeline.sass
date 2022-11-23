@@ -1,29 +1,59 @@
 .block-timeline--vertical
     .events
-        padding-left: calc(#{$grid-gutter} / 2)
         position: relative
-        &::before
-            background: $color-text
-            bottom: 0
-            content: ""
-            left: 4px
-            position: absolute
-            top: 10px
-            width: 1px
     .event
+        position: relative
         &:not(:last-child)
-            margin-bottom: $grid-gutter
+            padding-bottom: $spacing2
         &::before
             background: $color-text
             border-radius: 50%
             content: ""
             height: 9px
-            left: 0
-            margin-top: 10px
+            left: calc(-#{$grid-gutter} / 2)
+            margin-top: 0.5em
             position: absolute
             width: 9px
+            margin-left: -4px
+        &::after
+            background: $color-text
+            bottom: -0.5em
+            content: ""
+            left: calc(-#{$grid-gutter} / 2)
+            position: absolute
+            top: 0.5em
+            width: 1px
         p:last-child
             margin-bottom: 0
+        &:last-child::after
+            display: none
+        &-title
+            @extend .h4
+            margin-bottom: $spacing0
+    @include media-breakpoint-down(md)
+        .event
+            padding-left: calc(#{$grid-gutter-sm} / 2)
+            &::after, &::before
+                left: 0
+    @include media-breakpoint-up(md)
+        @include in-page-without-sidebar
+            .events
+                padding-left: 0
+            .event
+                display: flex
+                &::before, &::after
+                    left: col(3)
+                    margin-left: calc(#{$grid-gutter} / 2)
+                &::before
+                    transform: translateX(-4px)
+                p:first-child
+                    width: col(3)
+                    text-align: right
+                p:last-child
+                    padding-left: $grid-gutter
+                    width: col(7)
+
+
 
 
 .block-timeline--horizontal
