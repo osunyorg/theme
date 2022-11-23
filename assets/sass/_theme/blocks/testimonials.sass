@@ -86,11 +86,18 @@
                     width: 0
     @include media-breakpoint-up(md)
         @include in-page-without-sidebar
+            // .splide
+            .splide__pagination
+                padding-left: offset(2)
+                padding-right: offset(1)
+            .splide__autoplay
+                margin-right: offset(1)
+
             figure
+                padding-left: offset(2)
                 padding-right: offset(1)
                 &.with-picture
                     position: relative
-                    padding-left: offset(2)
                     figcaption
                         display: block
                         margin-top: $spacing0
@@ -99,10 +106,6 @@
                             left: 0
                             top: 0
                             width: col(2)
-                    
-                    
-            
-
 
         // TODO : en discuter en créa
         // figure
