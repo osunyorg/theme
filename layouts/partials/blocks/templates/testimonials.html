@@ -20,7 +20,6 @@
         {{ end -}}
 
         <div class="testimonials">
-
           {{- if $is_carousel }}
           <div class="splide" data-splide='{"arrows":false,"autoplay":true,"pauseOnHover":false,"pauseOnFocus":false,"type":"loop","autoHeight":true}'>
             <div class="splide__slider">
@@ -30,7 +29,7 @@
 
           {{ range .testimonials }}
             {{ $is_long := gt (len .text) 150 }}
-            <figure{{ if $is_carousel }} class="splide__slide"{{ end }}>
+            <figure  class="{{ if $is_carousel }}splide__slide{{ end }} {{ if .photo }}with-picture{{ end }}">
               <blockquote {{- if $is_long }} class="is-long" {{- end }}>
                 <p>{{- partial "PrepareHTML" .text -}}</p>
               </blockquote>
@@ -49,12 +48,17 @@
                   </div>
                 {{- end }}
                 {{ if or .author .job -}}
-                  <span>
+                  <p>
                     {{- if .author -}}
-                      <b>{{ partial "PrepareHTML" .author }}</b><br>
+                      <span class="signature">{{ partial "PrepareHTML" .author }}</span>
                     {{- end }}
-                    {{- partial "PrepareHTML" .job -}}
-                  </span>
+                    {{- if and .author .job -}}
+                      <br>
+                    {{- end -}}
+                    {{- if .job -}}
+                      <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
+                    {{- end }}
+                  </p>
                 {{- end }}
               </figcaption>
               {{ end }}
