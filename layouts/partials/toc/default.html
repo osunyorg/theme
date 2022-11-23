@@ -1,0 +1,40 @@
+{{- $show_aside := false -}}
+
+{{- $has_blocks := false -}}
+{{- range .context.Params.blocks -}}
+  {{- $has_blocks = true -}}
+  {{- if .title -}}
+    {{- $show_aside = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if .context.Pages -}}
+  {{- if eq $has_blocks false -}}
+    {{- $show_aside = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if .context.Content -}}
+  {{- if eq $has_blocks false -}}
+    {{- $show_aside = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if .category -}}
+  {{- if eq $has_blocks false -}}
+    {{- $show_aside = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $show_aside }}
+  <nav class="toc toc-pages" id="nav-toc" aria-labelledby="toc-title">
+    <ol>
+      {{- if .context.Params.blocks -}}
+        {{- partial "blocks/toc.html" .context.Params.blocks -}}
+      {{- end -}}
+    </ol>
+  </nav>
+
+{{ end -}}
+
+
