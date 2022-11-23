@@ -1,3 +1,21 @@
+// https://developers.osuny.org/docs/theme/architecture/typographie/
+
+body
+    font-family: $body-font-family
+    -moz-osx-font-smoothing: grayscale
+    -webkit-font-smoothing: antialiased
+    font-size: $body-size
+    font-variant-ligatures: common-ligatures
+    text-rendering: optimizelegibility
+    line-height: $line-height-base
+    @include media-breakpoint-up(md)
+        font-size: $body-size-md
+
+// Experimental, not implemented yet
+p, h1, h2, h3, h4, h5, h6, li, a, th, td, span
+    text-edge: cap alphabetic
+    leading-trim: both
+
 %heading
     font-family: $heading-font-family
     margin-top: 0
@@ -72,17 +90,6 @@ h2, .h2
     line-height: $lead-line-height
     @include media-breakpoint-up(md)
         font-size: $lead-size-md
-
-body
-    font-family: $body-font-family
-    -moz-osx-font-smoothing: grayscale
-    -webkit-font-smoothing: antialiased
-    font-size: $body-size
-    font-variant-ligatures: common-ligatures
-    text-rendering: optimizelegibility
-    line-height: $line-height-base
-    @include media-breakpoint-up(md)
-        font-size: $body-size-md
 
 p, .p,
 li, .li
