@@ -7,7 +7,7 @@ const CLASSES = {
   fullWidth: 'full-width'
 };
 
-class TableOfContent {
+class TableOfContents {
   constructor() {
     this.element = document.querySelector('.toc-container');
     this.content = this.element.querySelector('.toc-content');
@@ -97,4 +97,4 @@ class TableOfContent {
   }
 }
 
-new TableOfContent()
+new TableOfContents()
