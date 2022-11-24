@@ -23,7 +23,9 @@ class Carousel {
         var splide = new Splide(this.element).mount(),
             toggleButton = splide.root.querySelector('.splide__autoplay'),
             stepButtons = splide.root.querySelectorAll('.splide__pagination button'),
+            elements = splide.root.querySelectorAll('.splide__pagination, .splide__slide'),
             autoplay = splide.Components.Autoplay;
+
 
         if (toggleButton) {
             stepButtons.forEach((stepButton) => {
@@ -43,12 +45,15 @@ class Carousel {
                 toggleButton.classList.remove('is-active');
             });
 
-            // TODO: WIP
-            // this.element.addEventListener('click', function () {
-            //     if (!autoplay.isPaused()) {
-            //         autoplay.pause();
-            //     }
-            // });
+            elements.forEach(function(element) {
+                element.addEventListener('click', () => {
+                    autoplay.pause();
+                })
+            });
+
+            splide.on('drag', function() {
+                autoplay.pause();
+            });
         }
     }
 }
