@@ -9,15 +9,7 @@
         flex-shrink: 0
         white-space: nowrap
         &, a
-            // FIXME Arnaud : il doit y avoir plus élégant, non ? Hériter de .meta ?
-            font-family: $meta-font-family
-            font-size: $meta-size
-            font-weight: $meta-weight
-            line-height: $meta-line-height
-            @include media-breakpoint-up(md)
-                font-size: $meta-size-md
-            // End of FIXME
-
+            @extend .meta
         a
             color: $breadcrumb-color
             text-decoration-color: rgba($breadcrumb-color, 0.3)
