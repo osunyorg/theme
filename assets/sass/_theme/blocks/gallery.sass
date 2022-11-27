@@ -12,9 +12,10 @@
             display: block
             margin-bottom: $spacing0
         > a
-            transition: opacity .3s ease
+            transition: filter .3s ease
             &:hover
-                opacity: .7
+                // if low opacity means not selected, selected needs to be darker
+                filter: brightness(95%)
 
         img
             height: auto
@@ -22,14 +23,11 @@
 
         figcaption
             position: relative
-            @include media-breakpoint-up(md)
-                align-items: baseline
-                display: flex
-                justify-content: space-between
             p
                 margin-bottom: 0
         .credit
-            @extend .small
+            *
+                @extend .meta
 
     &--grid
         .gallery
@@ -46,9 +44,10 @@
                     content: ' ' // This is used to allow align baseline without figcaption
 
     &--carousel
-        background: $block-gallery-carousel-background
         padding-bottom: $grid-gutter
         padding-top: $grid-gutter
+        @include in-page-without-sidebar
+            background: $block-gallery-carousel-background
         .block-gallery + &,
         .block-pages--cards + &
             margin-top: 0
@@ -62,6 +61,10 @@
             flex-direction: column
             &__track
                 margin-right: -calc(#{$grid-gutter-sm} / 2)
+                .splide__slide
+                    transition: opacity  .3s ease
+                    &[aria-hidden=true]
+                        opacity: 0.2
                 @include media-breakpoint-up(md)
                     margin-right: -calc(#{$grid-gutter} / 2)
             &__slide
@@ -72,7 +75,7 @@
                     img
                         max-width: 100%
             figure 
-                margin-right: $grid-gutter
+                margin-right: calc(#{$grid-gutter} / 2)
                 picture
                     img
                         max-height: 70vh
@@ -82,19 +85,16 @@
                 @include media-breakpoint-up(md)
                     picture
                         img
-                            max-height: 70vh
+                            height: 70vh
                             width: auto
                             height: auto
-                            max-width: 50vw
+                            max-width: none
                             @include in-page-without-sidebar
                                 height: 70vh
                                 max-width: none
-                    figcaption
-                        display: flex
-                        justify-content: space-between
 
             &__arrows
-                margin-left: -13px
+                margin-left: -18px
                 order: 2
                 @media (min-height: 800px)
                     padding-top: px2rem(40)
