@@ -84,6 +84,7 @@
         cursor: pointer
         padding: 0
         span
+            @extend .meta
             text-overflow: ellipsis
             overflow: hidden
         &::after
@@ -92,9 +93,7 @@
             display: flex
             justify-content: space-between
             align-items: center
-            width: 100% 
-
-
+            width: 100%
 
 .toc-container
     // in full width page or under md breakpoint (mobile)
@@ -132,7 +131,6 @@
         font-size: $toc-title-font-size-md
 
 .toc
-    font-size: $toc-font-size
     font-family: $toc-font-family
     line-height: $toc-line-height
     @include media-breakpoint-up(md)
