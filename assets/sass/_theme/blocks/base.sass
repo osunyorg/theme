@@ -1,7 +1,11 @@
-[class^="block-"]
-    @include in-page-with-sidebar
-        h2, h3
-            @extend .h2
-    @include in-page-without-sidebar
-        h2, h3
-            @extend .h5
+.blocks
+    .block:first-of-type
+        margin-top: 0
+    .block
+        margin-top: $spacing5
+        @include in-page-with-sidebar
+            h2, h3
+                @extend .h2
+        @include in-page-without-sidebar
+            h2, h3
+                @extend .h5

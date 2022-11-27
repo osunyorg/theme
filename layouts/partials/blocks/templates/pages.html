@@ -1,7 +1,7 @@
 {{- $context := .context -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
-{{- $layout_class := "block-pages--grid" -}}
+{{- $layout_class := "block block-pages--grid" -}}
 {{- with .block.data -}}
   {{- $layout := .layout -}}
 
@@ -36,7 +36,7 @@
     {{ end }}
   {{ end -}}
 
-  <section class="block-pages{{ if $title }} block-with-title{{ end }} {{ $layout_class }} {{ $page_class }}" id="block-{{ $position }}">
+  <section class="block block-pages{{ if $title }} block-with-title{{ end }} {{ $layout_class }} {{ $page_class }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
 
