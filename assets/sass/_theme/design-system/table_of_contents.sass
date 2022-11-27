@@ -1,5 +1,5 @@
 @mixin offcanvas-toc
-    background: white
+    background: $toc-background-color
     position: fixed
     top: 0
     right: 0
@@ -85,10 +85,12 @@
         padding: 0
         span
             @extend .meta
+            color: $toc-color
             text-overflow: ellipsis
             overflow: hidden
         &::after
             font-size: px2rem(13)
+            color: $toc-color
         @include media-breakpoint-down(md)
             display: flex
             justify-content: space-between
