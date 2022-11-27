@@ -1,171 +1,172 @@
-.block-timeline--vertical
-    .events
-        position: relative
-    .event
-        position: relative
-        &:not(:last-child)
-            padding-bottom: $spacing2
-        &::before
-            background: $color-text
-            border-radius: 50%
-            content: ""
-            height: 9px
-            left: calc(-#{$grid-gutter} / 2)
-            margin-top: 0.5em
-            position: absolute
-            width: 9px
-            margin-left: -4px
-        &::after
-            background: $color-text
-            bottom: -0.5em
-            content: ""
-            left: calc(-#{$grid-gutter} / 2)
-            position: absolute
-            top: 0.5em
-            width: 1px
-        p:last-child
-            margin-bottom: 0
-        &:last-child::after
-            display: none
-        &-title
-            @extend .h4
-            margin-bottom: $spacing0
-    @include media-breakpoint-down(md)
-        .event
-            padding-left: calc(#{$grid-gutter-sm} / 2)
-            &::after, &::before
-                left: 0
-    @include media-breakpoint-up(md)
-        @include in-page-without-sidebar
-            .events
-                padding-left: 0
-            .event
-                display: flex
-                &::before, &::after
-                    left: col(3)
-                    margin-left: calc(#{$grid-gutter} / 2)
-                &::before
-                    transform: translateX(-4px)
-                p:first-child
-                    width: col(3)
-                    text-align: right
-                p:last-child
-                    padding-left: $grid-gutter
-                    width: col(7)
-
-.block-timeline--horizontal
-    --min-title-height: 0px
-    background: $block-timeline-horizontal-background
-    color: $block-timeline-horizontal-color
-    margin-bottom: 8rem
-    overflow: hidden
-    padding-bottom: $grid-gutter
-    padding-top: $grid-gutter
-    // @include media-breakpoint-down(md)
-    //     margin-bottom: 3rem
-    // &:first-of-type
-    //     margin-top: 4rem
-    //     @include media-breakpoint-down(md)
-    //         margin-top: 1rem
-    &::before
-        display: none
-    .timeline
-        &:hover
-            cursor: grab
-        &.is-grabbing
-            cursor: grabbing
-        
-    .timeline-arrows
-        display: flex
-        > button
-            @include button-reset
-            background: none
-            border: none
-            color: $block-timeline-horizontal-color
-            cursor: pointer
-            font-size: 1rem
-            padding: calc(#{$grid-gutter} / 2)
-            &:first-child
-                @include icon(arrow-left, before)
-            &:last-child
-                @include icon(arrow-right, before)
-            &:disabled
-                cursor: default
-                opacity: 0.3
-    .events
-        margin-left: calc(#{$grid-gutter} / -2)
-        margin-right: calc(#{$grid-gutter} / -2)
-        // TODO : fixer le px gap en desktop entre chaque event
-        ol
-            display: flex
-            flex-flow: row nowrap
-            list-style: none
-            padding-left: 0
-            margin-top: $spacing1
-            transition: margin 0.4s ease-in-out
-            width: 100%
-    .event
-        flex: none
-        padding: 0 calc(#{$grid-gutter} / 2)
-        scroll-snap-align: start
-        transition: 0.3s opacity
-        width: 50%
-        .title
-            min-height: var(--min-title-height)
-            margin-bottom: $spacing1
-        .line
-            background: $block-timeline-horizontal-color
-            height: 1px
-            margin-bottom: $spacing1
-            opacity: 1
-            overflow: visible
-            width: calc(100% + #{$grid-gutter} / 2)
-            &::before
-                background: $block-timeline-horizontal-color
-                border-radius: 50%
-                content: ""
-                display: block
-                height: 9px
-                position: relative
-                top: -4px
-                width: 9px
-        &.is-passed
-            opacity: 0.15
-        &:last-child
-            .line
-                background: transparent
-
-    @include media-breakpoint-up(md)
-        .events
-            ol
-                margin-top: $spacing2
-        .event
-            .line
-                width: calc(100% + #{$grid-gutter})
-    
-    @include in-page-with-sidebar
-        @include media-breakpoint-up(md)
-            .timeline
-                padding-left: offset(4)
-        @include media-breakpoint-up(xxl)
-            .timeline
-                padding-left: offset(5)
-
-    @include in-page-without-sidebar
-        @include media-breakpoint-up(xxl)
-            .event
-                width: 25%
-
-
-    @include media-breakpoint-down(md)
+.block-timeline
+    &--vertical
         .events
             position: relative
-        .timeline-arrows
-            left: 0
-            position: absolute
-            top: calc(#{$spacing2/2} + var(--min-title-height))
         .event
-            padding-right: 0
-            width: 75%
+            position: relative
+            &:not(:last-child)
+                padding-bottom: $spacing2
+            &::before
+                background: $color-text
+                border-radius: 50%
+                content: ""
+                height: 9px
+                left: calc(-#{$grid-gutter} / 2)
+                margin-top: 0.5em
+                position: absolute
+                width: 9px
+                margin-left: -4px
+            &::after
+                background: $color-text
+                bottom: -0.5em
+                content: ""
+                left: calc(-#{$grid-gutter} / 2)
+                position: absolute
+                top: 0.5em
+                width: 1px
+            p:last-child
+                margin-bottom: 0
+            &:last-child::after
+                display: none
+            &-title
+                @extend .h4
+                margin-bottom: $spacing0
+        @include media-breakpoint-down(md)
+            .event
+                padding-left: calc(#{$grid-gutter-sm} / 2)
+                &::after, &::before
+                    left: 0
+        @include media-breakpoint-up(md)
+            @include in-page-without-sidebar
+                .events
+                    padding-left: 0
+                .event
+                    display: flex
+                    &::before, &::after
+                        left: col(3)
+                        margin-left: calc(#{$grid-gutter} / 2)
+                    &::before
+                        transform: translateX(-4px)
+                    p:first-child
+                        width: col(3)
+                        text-align: right
+                    p:last-child
+                        padding-left: $grid-gutter
+                        width: col(7)
+
+    &--horizontal
+        --min-title-height: 0px
+        background: $block-timeline-horizontal-background
+        color: $block-timeline-horizontal-color
+        margin-bottom: 8rem
+        overflow: hidden
+        padding-bottom: $grid-gutter
+        padding-top: $grid-gutter
+        // @include media-breakpoint-down(md)
+        //     margin-bottom: 3rem
+        // &:first-of-type
+        //     margin-top: 4rem
+        //     @include media-breakpoint-down(md)
+        //         margin-top: 1rem
+        &::before
+            display: none
+        .timeline
+            &:hover
+                cursor: grab
+            &.is-grabbing
+                cursor: grabbing
+            
+        .timeline-arrows
+            display: flex
+            > button
+                @include button-reset
+                background: none
+                border: none
+                color: $block-timeline-horizontal-color
+                cursor: pointer
+                font-size: 1rem
+                padding: calc(#{$grid-gutter} / 2)
+                &:first-child
+                    @include icon(arrow-left, before)
+                &:last-child
+                    @include icon(arrow-right, before)
+                &:disabled
+                    cursor: default
+                    opacity: 0.3
+        .events
+            margin-left: calc(#{$grid-gutter} / -2)
+            margin-right: calc(#{$grid-gutter} / -2)
+            // TODO : fixer le px gap en desktop entre chaque event
+            ol
+                display: flex
+                flex-flow: row nowrap
+                list-style: none
+                padding-left: 0
+                margin-top: $spacing1
+                transition: margin 0.4s ease-in-out
+                width: 100%
+        .event
+            flex: none
+            padding: 0 calc(#{$grid-gutter} / 2)
+            scroll-snap-align: start
+            transition: 0.3s opacity
+            width: 50%
+            .title
+                min-height: var(--min-title-height)
+                margin-bottom: $spacing1
             .line
-                margin-bottom: calc(#{$spacing2} + var(--min-title-height))
+                background: $block-timeline-horizontal-color
+                height: 1px
+                margin-bottom: $spacing1
+                opacity: 1
+                overflow: visible
+                width: calc(100% + #{$grid-gutter} / 2)
+                &::before
+                    background: $block-timeline-horizontal-color
+                    border-radius: 50%
+                    content: ""
+                    display: block
+                    height: 9px
+                    position: relative
+                    top: -4px
+                    width: 9px
+            &.is-passed
+                opacity: 0.15
+            &:last-child
+                .line
+                    background: transparent
+
+        @include media-breakpoint-up(md)
+            .events
+                ol
+                    margin-top: $spacing2
+            .event
+                .line
+                    width: calc(100% + #{$grid-gutter})
+        
+        @include in-page-with-sidebar
+            @include media-breakpoint-up(md)
+                .timeline
+                    padding-left: offset(4)
+            @include media-breakpoint-up(xxl)
+                .timeline
+                    padding-left: offset(5)
+
+        @include in-page-without-sidebar
+            @include media-breakpoint-up(xxl)
+                .event
+                    width: 25%
+
+
+        @include media-breakpoint-down(md)
+            .events
+                position: relative
+            .timeline-arrows
+                left: 0
+                position: absolute
+                top: calc(#{$spacing2/2} + var(--min-title-height))
+            .event
+                padding-right: 0
+                width: 75%
+                .line
+                    margin-bottom: calc(#{$spacing2} + var(--min-title-height))
