@@ -44,6 +44,7 @@
                     content: ' ' // This is used to allow align baseline without figcaption
 
     &--carousel
+        overflow: hidden
         padding-bottom: $grid-gutter
         padding-top: $grid-gutter
         @include in-page-without-sidebar
@@ -60,11 +61,15 @@
             display: flex
             flex-direction: column
             &__track
+                overflow: visible
                 margin-right: -calc(#{$grid-gutter-sm} / 2)
                 .splide__slide
                     transition: opacity  .3s ease
-                    &[aria-hidden=true]
-                        opacity: 0.2
+                    opacity: 0.1
+                    &.is-next
+                        opacity: 0.6
+                    &.is-active
+                        opacity: 1
                 @include media-breakpoint-up(md)
                     margin-right: -calc(#{$grid-gutter} / 2)
             &__slide
@@ -78,6 +83,7 @@
                 margin-right: calc(#{$grid-gutter} / 2)
                 picture
                     img
+                        // FIXME Arnaud: I would like images at constant height, can't manage to get it right.
                         max-height: 70vh
                         width: auto
                         height: auto
