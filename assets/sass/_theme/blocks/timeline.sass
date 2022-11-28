@@ -11,7 +11,7 @@
                 border-radius: 50%
                 content: ""
                 height: 9px
-                left: calc(-#{$grid-gutter} / 2)
+                left: half(-$grid-gutter)
                 margin-top: 0.5em
                 position: absolute
                 width: 9px
@@ -20,7 +20,7 @@
                 background: $color-text
                 bottom: -0.5em
                 content: ""
-                left: calc(-#{$grid-gutter} / 2)
+                left: half(-$grid-gutter)
                 position: absolute
                 top: 0.5em
                 width: 1px
@@ -33,7 +33,7 @@
                 margin-bottom: $spacing0
         @include media-breakpoint-down(md)
             .event
-                padding-left: calc(#{$grid-gutter-sm} / 2)
+                padding-left: half($grid-gutter-sm)
                 &::after, &::before
                     left: 0
         @include media-breakpoint-up(md)
@@ -44,7 +44,7 @@
                     display: flex
                     &::before, &::after
                         left: col(3)
-                        margin-left: calc(#{$grid-gutter} / 2)
+                        margin-left: half($grid-gutter)
                     &::before
                         transform: translateX(-4px)
                     p:first-child
@@ -79,7 +79,7 @@
                 color: $block-timeline-horizontal-color
                 cursor: pointer
                 font-size: 1rem
-                padding: calc(#{$grid-gutter} / 2)
+                padding: half($grid-gutter)
                 &:first-child
                     @include icon(arrow-left, before)
                 &:last-child
@@ -101,7 +101,7 @@
                 width: 100%
         .event
             flex: none
-            padding: 0 calc(#{$grid-gutter} / 2)
+            padding: 0 half($grid-gutter)
             scroll-snap-align: start
             transition: 0.3s opacity
             width: 50%
@@ -114,7 +114,7 @@
                 margin-bottom: $spacing1
                 opacity: 1
                 overflow: visible
-                width: calc(100% + #{$grid-gutter} / 2)
+                width: calc(100% + half($grid-gutter))
                 &::before
                     background: $block-timeline-horizontal-color
                     border-radius: 50%
