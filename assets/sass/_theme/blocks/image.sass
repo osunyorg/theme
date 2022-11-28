@@ -4,13 +4,23 @@
         height: auto
         max-width: 100%
     figcaption
-        margin-top: $spacing1
+        margin-top: $spacing0
         p
             margin-bottom: 0
             margin-top: 0
+            + .credit
+                margin-top: $spacing0
         .credit
             p
-                @extend .small
+                @extend .meta
+
+    @include media-breakpoint-down(md)
+        .container
+            padding-left: 0
+            padding-right: 0
+        figcaption
+            padding: 0 calc(#{$grid-gutter-sm} / 2)
+
     @include in-page-with-sidebar
         @include media-breakpoint-up(md)
             img
