@@ -5,9 +5,12 @@
         @include aspect-ratio(16/9, 'iframe')
         iframe
             background: black
+    @include in-page-without-sidebar
+        .transcription
+            width: col(7)
+            margin-left: auto
+    @include media-breakpoint-down(md)
+        .video
+            margin-left: calc(-#{$grid-gutter-sm} / 2)
+            margin-right: calc(-#{$grid-gutter-sm} / 2)
 
-    // @include media-breakpoint-up(md)
-    //     @include in-page-without-sidebar
-    //         .block-content
-    //             margin-left: col(2)
-    //             width: col(8)
