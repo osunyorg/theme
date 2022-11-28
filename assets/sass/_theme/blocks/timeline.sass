@@ -62,12 +62,6 @@
         overflow: hidden
         padding-bottom: $grid-gutter
         padding-top: $grid-gutter
-        // @include media-breakpoint-down(md)
-        //     margin-bottom: 3rem
-        // &:first-of-type
-        //     margin-top: 4rem
-        //     @include media-breakpoint-down(md)
-        //         margin-top: 1rem
         &::before
             display: none
         .timeline
@@ -157,7 +151,6 @@
                 .event
                     width: 25%
 
-
         @include media-breakpoint-down(md)
             .events
                 position: relative
@@ -170,3 +163,6 @@
                 width: 75%
                 .line
                     margin-bottom: calc(#{$spacing2} + var(--min-title-height))
+        @include in-page-with-or-without-sidebar
+            h2, h3
+                @extend .h5
