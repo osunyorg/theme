@@ -118,6 +118,12 @@
     $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} )
     @return #{$width}
 
+// This must be used for offset, inside columns
+@function col-offset($quantity, $base: 12)
+    $quantity-on-base: $quantity / $base * 12
+    $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} + #{$grid-gutter})
+    @return #{$width}
+
 @function col-outside-container($quantity)
     $responsive-grid-width: Min(100vw, (#{$grid-max-width}))
     @return calc((#{$responsive-grid-width} + #{$grid-gutter} * 2) / 12 * #{$quantity} - #{$grid-gutter} * 2)
