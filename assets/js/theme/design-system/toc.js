@@ -8,8 +8,8 @@ const CLASSES = {
 };
 
 class TableOfContents {
-  constructor() {
-    this.element = document.querySelector('.toc-container');
+  constructor(element) {
+    this.element = element;
     this.content = this.element.querySelector('.toc-content');
     this.nav = this.element.querySelector('.toc');
     this.links = this.element.querySelectorAll('a');
@@ -97,4 +97,8 @@ class TableOfContents {
   }
 }
 
-new TableOfContents()
+const toc = document.querySelector('.toc-container');
+
+if (toc) {
+  new TableOfContents(toc);
+}
