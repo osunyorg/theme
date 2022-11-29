@@ -148,11 +148,7 @@ a,
     @include link
     overflow-wrap: break-word
     &[target="_blank"]:not(.icon)
-        @include icon("link-blank", "after")
-        &::after
-            content: " #{map-get($icons, "link-blank")}"
-            display: inline
-            font-size: px2rem(10)
+        @include icon("link-blank", "after", px2rem(10), true)
     &[href^="mailto"]
         &::after
             content: none

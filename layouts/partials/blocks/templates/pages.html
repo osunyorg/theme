@@ -10,6 +10,7 @@
   {{- $show_main_description := .show_main_description -}}
   {{- $show_descriptions := .show_descriptions -}}
   {{- $show_images := .show_images -}}
+  {{- $page_link := false -}}
 
   {{/* LEGACY */}}
   {{- with .show_description -}}
@@ -20,7 +21,7 @@
   {{- end -}}
 
   {{- if $layout -}}
-    {{- $layout_class = printf "block-pages--%s" .layout -}}
+    {{- $layout_class = printf "block-pages--%s" $layout -}}
   {{- end -}}
 
   {{ $class = printf "{{$class}} %s" $layout_class }}
@@ -30,6 +31,7 @@
   {{ $page := partial "GetPageByUrl" .page }}
   {{- with $page }}
     {{- $show_main_page = true -}}
+    {{- $page_link = $page.Permalink }}
     {{ if eq $title "" }}
       {{ $title = .Title }}
     {{ end }}
@@ -42,25 +44,26 @@
   <section class="block block-pages{{ if $title }} block-with-title{{ end }} {{ $layout_class }} {{ $page_class }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
-
-        {{- if and $title (not $show_main_page) }}
+        {{- if $title }}
           <div class="top">
+            {{/*  Quand le bloc a un titre, est-ce qu'on prend le titre de la page principale ou le titre du bloc ?  */}}
             {{ partial "blocks/title" (dict 
               "title" $title
               "context" $context
+              "link" $page_link
               ) }}
+
+            {{ if  $show_main_description }}
+              <p>{{ partial "PrepareHTML" $page.Params.description_short }}</p>
+            {{ end }}
           </div>
         {{ end -}}
 
-        {{- with $page -}}
-
-          {{- .Scratch.Set "class" "main-page" -}}
-          {{- .Scratch.Set "show_description" $show_main_description -}}
-          {{- partial "pages/page.html" . -}}
-          {{- .Scratch.Delete "class" -}}
-          {{- .Scratch.Delete "show_description" -}}
-
-        {{- end -}}
+        {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
+          "pages" .pages
+          "show_images" $show_images
+          "show_descriptions" $show_descriptions
+          ) }}
 
         {{- if .pages -}}
           <div class="pages">
@@ -69,7 +72,8 @@
               {{- if .slug -}}
                 {{- $page = partial "GetPageByUrl" .slug -}}
               {{- end -}}
-              {{ with $page }}
+              
+              {{/*  {{ with $page }}
                 <div>
 
                   {{- .Scratch.Set "show_image" $show_images -}}
@@ -87,7 +91,7 @@
                   {{- end -}}
 
                 </div>
-              {{ end }}
+              {{ end }}  */}}
             {{ end -}}
           </div>
         {{- end -}}

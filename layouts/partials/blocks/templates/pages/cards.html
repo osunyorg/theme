@@ -1,0 +1,30 @@
+{{ $show_descriptions := .show_descriptions }}
+{{ $show_images := .show_images }}
+
+<div class="pages">
+  {{ range .pages }}
+    {{- $page := partial "GetPageByUrl" .page -}}
+    {{- if .slug -}}
+      {{- $page = partial "GetPageByUrl" .slug -}}
+    {{- end -}}
+    {{ with $page }}
+      <article class="card">
+        <h1>
+          <a href="{{- .Permalink -}}">
+            {{- partial "PrepareHTML" .Title -}}
+          </a>
+        </h1>
+
+        {{ if and $show_descriptions .Params.description_short }}
+          <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
+        {{ end }}
+
+        <p class="more meta">{{- i18n "commons.more" -}}</p>
+
+        {{ if $show_images }}
+          {{- partial "pages/page-media.html" . -}}
+        {{ end }}
+      </article>
+    {{- end -}}
+  {{ end }}
+</div>
