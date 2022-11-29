@@ -98,11 +98,17 @@
                 @include container
                 @include grid(4, md)
         @else 
+            .has-children
+                position: relative
             .dropdown-menu
+                margin-top: 0.75rem
+                min-width: 400px
                 padding-bottom: calc(#{$spacing0}/2)
                 padding-left: $spacing0
                 padding-top: calc(#{$spacing0}/2)
                 padding-right: $spacing0
+                right: 0
+                text-align: right
             .nav-level-2
                 > li > a
                     padding-bottom: calc(#{$spacing0}/2)
@@ -195,8 +201,7 @@ header[role="banner"]
                 outline-style: dashed
                 outline-width: 1px
             span:first-of-type
-                font-size: px2rem(14)
-                text-transform: uppercase
+                @extend .meta
             span:last-of-type
                 @include icon("burger", before)
                 background: none
