@@ -1,0 +1,15 @@
+<ul>
+  {{ range .pages }}
+    {{- $page := partial "GetPageByUrl" .page -}}
+    {{- if .slug -}}
+      {{- $page = partial "GetPageByUrl" .slug -}}
+    {{- end -}}
+    {{ with $page }}
+      <li>
+        <a href="{{- .Permalink -}}">
+          {{- partial "PrepareHTML" .Title -}}
+        </a>
+      </li>
+    {{- end -}}
+  {{ end }}
+</ul>

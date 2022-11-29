@@ -4,6 +4,8 @@
         h2, h3
             + p
                 margin-top: $spacing1
+        a
+            text-decoration: none
     .pages
         article
             display: flex
@@ -11,6 +13,10 @@
             .media
                 order: -1
                 margin-bottom: $spacing1
+                img
+                    display: block
+                    aspect-ratio: 16/9
+                    object-fit: cover
         h1
             @extend .h3
             a
@@ -18,20 +24,22 @@
             + p
                 margin-top: $spacing0
 
-
     @include in-page-without-sidebar
         .top
-            @include grid
-            h2, h3
-                grid-column: 1 / 5
-                a
-                    text-decoration: none
-                    @include icon("arrow-right", "after", px2rem(16), true)
-                        position: static
             p
-                @extend .h2
+                @extend .h2 
                 grid-column: 5 / 13
                 margin-top: -0.25em
+        @include media-breakpoint-up(md)
+            .top
+                @include grid
+                h2, h3
+                    grid-column: 1 / 5
+                    a
+                        text-decoration: none
+                        @include icon("arrow-right", "after", px2rem(16), true)
+                            position: static
+                
     &--grid
         .pages
             @include grid(2, md)
@@ -72,10 +80,6 @@
                 margin-left: -$spacing1
                 margin-right: -$spacing1
                 margin-top: -$spacing1
-                img
-                    display: block
-                    aspect-ratio: 16/9
-                    object-fit: cover
             .more
                 @include icon("arrow-right", after, px2rem(16))
                     font-size: $small-size
@@ -116,6 +120,53 @@
                     color: $block-pages-card-page-color-hover
                 .more
                     text-decoration-color: $block-pages-card-page-color-hover
+    &--list
+        ul
+            @include list-reset
+            li
+                display: block
+                line-height: 1
+                + li
+                    margin-top: $spacing0
+                a
+                    @extend .meta
+                    text-decoration: none
+                    @include icon("arrow-right", before, px2rem(10))
+                        padding-right: $spacing0
+        @include in-page-with-sidebar
+            .block-content
+                .top
+                    margin-bottom: $spacing1
+                .description
+                    margin-bottom: $spacing1
+                ul
+                    @include grid(2, md)
+        @include in-page-without-sidebar
+            .block-content
+                @include grid
+                grid-row-gap: $spacing1
+                .top
+                    display: block
+                    grid-column: 1 / 8
+                    margin-bottom: 0
+                .top + .description
+                    grid-column: 1 / 8
+                    grid-row: 2 / 3
+                // Default behavior (without page description)
+                ul
+                    @include grid(4, md)
+                    grid-column: 1 / 13
+                    li
+                        margin-top: 0
+                // If page description
+                .description + ul
+                    grid-column: 8 / 13
+                    grid-row: 2 / 3
+                    display: block
+                    li + li
+                        margin-top: $spacing0
+
+
 
 .block-pages-
     margin-top: $spacing4
