@@ -7,6 +7,7 @@
             text-decoration: none
     .grid, .cards
         article
+            position: relative
             display: flex
             flex-direction: column
             .media
@@ -20,7 +21,8 @@
             @include h3
             a
                 text-decoration: none
-            + .description
+                @include stretched-link(before)
+            + p
                 margin-top: $spacing0
 
     @include media-breakpoint-up(md)
@@ -42,7 +44,6 @@
                     a
                         text-decoration: none
                         @include icon("arrow-right", "after", px2rem(16), true)
-                            position: static
             .description
                 @include h2
                 grid-column: 5 / 13
@@ -102,7 +103,7 @@
                     position: absolute
                     right: 0
                 @include link($block-pages-card-page-color)
-                text-decoration-color: $block-pages-card-page-color
+                text-decoration-color: $color-border
                 text-decoration-line: underline
                 text-decoration-thickness: 1px
                 text-underline-offset: 3px
