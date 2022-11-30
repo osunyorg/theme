@@ -5,11 +5,6 @@
                 margin-top: $spacing0
     ul
         @include list-reset
-        @include grid(1)
-        @include in-page-with-sidebar
-            @include grid(2, md)
-        @include in-page-without-sidebar
-            @include grid(3, md)
     li
         @include icon("download", before)
         align-items: start
@@ -36,3 +31,21 @@
                 border-color: transparent
     figcaption
         @include meta
+    @include media-breakpoint-down(md)
+        li + li
+            margin-top: $spacing1
+    @include media-breakpoint-up(md)
+        @include in-page-with-sidebar
+            ul
+                @include grid(2, md, half($grid-gutter))
+        @include in-page-without-sidebar
+            .top
+                display: flex
+                h2, h3
+                    width: col(4)
+                .description
+                    margin-top: 0
+                    width: col(8)
+                    margin-left: $grid-gutter
+            ul
+                @include grid(3, md, half($grid-gutter))
