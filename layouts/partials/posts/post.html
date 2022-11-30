@@ -1,5 +1,5 @@
 <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-  <div>
+  <div class="post-content">
     {{- $title := partial "PrepareHTML" .Title -}}
     <h1 itemprop="headline"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h1>
     {{- if (partial "GetTextFromHTML" .Params.description_short) -}}

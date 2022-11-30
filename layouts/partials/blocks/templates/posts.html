@@ -2,11 +2,12 @@
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- $term := false -}}
+{{- $layout := "list" -}}
 {{- with .block.data }}
   {{ if .category }}
     {{- $term = site.GetPage (printf "/categories%s" .category) -}}
   {{ end }}
-  <section class="block block-posts--grid block-posts{{ if $title }} block-with-title{{ end }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}" id="block-{{ $position }}">
+  <section class="block block-posts--{{- $layout }} block-posts{{ if $title }} block-with-title{{ end }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
         {{ if $title -}}
@@ -25,7 +26,7 @@
           </div>
         {{- end }}
 
-        {{- partial "blocks/templates/posts/grid.html" . -}}
+        {{- partial (printf "blocks/templates/posts/%s.html" $layout) . -}}
 
       </div>
     </div>

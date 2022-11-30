@@ -1,7 +1,22 @@
 .block-posts
+    .top
+        margin-bottom: $spacing2
+        a
+            @include icon("arrow-right", "after", px2rem(16), true)
+            text-decoration: none
     .posts
         @include grid(1)
         @include grid(3, md)
+    article
+        h1
+            a
+                @include stretched-link
+                text-decoration: none
+        .post-content
+            > * + * 
+                margin-top: $spacing0
+            .media
+                margin-top: 0
     &--grid
         @include media-breakpoint-down(md)
             article + article
@@ -13,3 +28,136 @@
             @include in-page-without-sidebar
                 .grid
                     @include grid(3)
+    &--list
+        article
+            border-bottom: 1px solid $color-border
+            .media
+                background: none
+                margin: 0
+                &, img
+                    aspect-ratio: auto
+        @include media-breakpoint-down(md)
+            article
+                position: relative
+                padding-bottom: half($spacing3)
+                + article
+                    margin-top: half($spacing3)
+                .post-content
+                    display: flex
+                    flex-direction: column
+                    h1
+                        margin-bottom: 0
+                    time
+                        margin-top: half($spacing0)
+                        order: 2
+                    p
+                        margin-top: half($spacing0)
+                        order: 4
+                    h1, time
+                        padding-right: calc(30% + #{$spacing1})
+                .media
+                    order: 3
+                    position: absolute
+                    width: 30%
+                    top: 0
+                    right: 0
+        @include media-breakpoint-up(md)
+            article
+                display: flex
+                flex-direction: row
+            @include in-page-with-sidebar
+                article
+                    padding-bottom: $spacing1
+                    + article
+                        margin-top: $spacing1
+                    .media
+                        width: calc(#{col(2, 8)} + #{half($grid-gutter)})
+                    .post-content
+                        width: col(6, 8)
+                        margin-left: half($grid-gutter)
+
+            @include in-page-without-sidebar
+                 article
+                    padding-bottom: $spacing3
+                    border-bottom: 1px solid $color-border
+                    position: relative
+                    .media
+                        width: col(3)
+                    .post-content
+                        width: col(6)
+                        margin-left: $grid-gutter
+                    + article
+                        margin-top: $spacing3
+                    time
+                        position: absolute
+                        right: 0
+                        top: 0
+                        margin-top: 0.3em
+    &--highlight
+        .highlight-post
+            h1
+                margin-bottom: $spacing0
+            .media
+                margin-bottom: $spacing0
+                background: none
+                &, img
+                    aspect-ratio: auto
+        .list
+            margin-top: half($spacing3)
+            border-top: 1px solid $color-border
+            article
+                @include article
+                border-bottom: 1px solid $color-border
+                position: relative
+                padding-bottom: half($spacing3)
+                margin-top: half($spacing3)
+        article
+            > * + * 
+                margin-top: $spacing0
+            .media
+                margin-top: 0
+
+        @include media-breakpoint-down(md)
+            .list
+                border-top: 1px solid $color-border
+        @include media-breakpoint-up(md)
+            .highlight
+                h1
+                    @include h2
+            .list
+                article
+                    h1
+                        @include h4
+            @include in-page-with-sidebar
+                .highlight-post
+                    .post
+                        flex-direction: row
+                        .media
+                            width: calc(#{col(3, 8)} + #{half($grid-gutter)})
+                            margin-bottom: 0
+                        .post-content
+                            width: col(5, 8)
+                            margin-left: half($grid-gutter)
+                .list
+                    article
+                        @include grid(8, md, 0, 0)
+                        h1
+                            grid-column: 1 / 7
+                        time
+                            grid-column: 7 / 9
+                            text-align: right
+                            order: 2
+                            margin-top: 0
+                        p
+                            grid-column: 1 / 7
+                            order: 3
+
+            @include in-page-without-sidebar
+                .highlight
+                    @include grid(2)
+                .list
+                    border-top: 0
+                    margin-top: 0
+                    article:first-child
+                        margin-top: 0
+            
