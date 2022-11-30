@@ -1,15 +1,24 @@
 {{ $weight := . }}
-{{ $unit := "b" }}
+{{ $unit := i18n "commons.units.B" }}
+{{ $full_unit := i18n "commons.units.bytes" }}
 
 {{ if ge $weight (pow 1024 3) }}
   {{ $weight = math.Ceil (div $weight (pow 1024 3)) }}
-  {{ $unit = "Go" }}
+  {{ $unit = i18n "commons.units.GB" }}
+  {{ $full_unit = i18n "commons.units.gigabytes" }}
 {{ else if ge $weight (pow 1024 2) }}
   {{ $weight = math.Ceil (div $weight (pow 1024 2)) }}
-  {{ $unit = "Mo" }}
+  {{ $unit = i18n "commons.units.MB" }}
+  {{ $full_unit = i18n "commons.units.megabytes" }}
 {{ else if ge $weight 1024 }}
   {{ $weight = math.Ceil (div $weight 1024) }}
-  {{ $unit = "ko" }}
+  {{ $unit = i18n "commons.units.kB" }}
+  {{ $full_unit = i18n "commons.units.kilobytes" }}
 {{ end }}
 
-{{ return printf "%s %s" (string $weight) $unit }}
+{{ return (dict 
+    "weight" $weight
+    "unit" $unit
+    "full_unit" $full_unit
+  )
+}}

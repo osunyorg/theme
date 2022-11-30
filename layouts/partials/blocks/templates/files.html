@@ -11,13 +11,14 @@
               "title" $title
               "context" $context
               ) }}
+            {{- if .description }}
+              <div class="description">
+                {{ partial "PrepareHTML"  .description }}
+              </div>
+            {{ end -}}
           </div>
         {{ end -}}
-        {{- if .description }}
-          <div class="description">
-            {{ partial "PrepareHTML"  .description }}
-          </div>
-        {{ end -}}
+        
         <ul>
           {{- range .files }}
             {{ if ne .id "" }}
@@ -29,17 +30,24 @@
                     {{ $title = $file.name }}
                   {{ end -}}
                   {{- $size := partial "GetHumanSize" $file.size -}}
-                  {{- $extention := partial "GetExtensionFile" $file.name -}}
-                  {{- $extention_with_size := printf "%s - %s" $extention $size -}}
-                  {{- $title_with_size := printf "%s (%s)" $title $extention_with_size -}}
+                  {{- $extension := partial "GetExtensionFile" $file.name -}}
+                  {{- $extension_with_size := (printf "%.2f %s - %s" $size.weight $size.unit $extension) -}}
+                  {{- $title_with_size := printf "%s (%s)" $title $extension_with_size -}}
                   {{- $url := $file.url -}}
                   {{- if site.Params.keycdn -}}
                     {{- $url = $file.direct_url -}}
                   {{- end -}}
                   {{ if $file }}
-                    <a href="{{ $url }}" download="{{ partial "PrepareHTML" $file.name }}" target="_blank" title="{{ i18n "commons.link.blank_aria" (dict "Title" $title_with_size) }}">
-                      <span>{{ $title }}<br><span>{{ $extention_with_size }}</span></span>
-                    </a>
+                    <figure>
+                      <a href="{{ $url }}" download="{{ partial "PrepareHTML" $file.name }}" target="_blank" title="{{ i18n "commons.link.blank_aria" (dict "Title" $title_with_size) }}">
+                        {{ $title }}
+                      </a>
+                      <figcaption>
+                        <abbr title="{{ i18n (printf "commons.extensions.%s" $extension) }}">{{ $extension }}</abbr>
+                        <abbr title="{{ $size.full_unit }}">{{ $size.weight }} {{ $size.unit }}</abbr>
+                      </figcaption>
+                    </figure>
+
                   {{ end }}
                 </li>
               {{ end -}}
