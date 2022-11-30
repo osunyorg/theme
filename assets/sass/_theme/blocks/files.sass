@@ -9,6 +9,7 @@
         @include icon("download", before)
         align-items: start
         display: flex
+        position: relative
         &::before
             align-items: center
             border: 1px solid $color-border
@@ -20,15 +21,17 @@
             margin-right: $spacing0
             transition: background 0.3s ease, border 0.3s ease
             width: px2rem(60)
-    a
-        @include small
-        text-decoration: none
-        &::after
-            content: none !important // Remove default icon _blank
         &:hover
             &::before
                 background-color: $color-border
                 border-color: transparent
+    a
+        @include stretched-link(before)
+        @include small
+        text-decoration: none
+        &::after
+            content: none !important // Remove default icon _blank
+
     figcaption
         @include meta
     @include media-breakpoint-down(md)
