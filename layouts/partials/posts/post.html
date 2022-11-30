@@ -1,7 +1,7 @@
 <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
   <div>
     {{- $title := partial "PrepareHTML" .Title -}}
-    <h1 class="h4" itemprop="headline"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h1>
+    <h1 itemprop="headline"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h1>
     {{- if (partial "GetTextFromHTML" .Params.description_short) -}}
       <p itemprop="articleBody">{{ partial "PrepareHTML" .Params.description_short }}</p>
     {{- end -}}

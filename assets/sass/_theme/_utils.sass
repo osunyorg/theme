@@ -178,17 +178,19 @@
         overflow: hidden
         img
             object-fit: cover
-    .title
-        font-size: $article-title-size
-        margin-bottom: px2rem(5) // faire une variable ?
-        @include media-breakpoint-up(md)
-            font-size: $article-title-size-md
+    h1
+        @include h3
+        margin-bottom: $spacing0
     a
         @include stretched-link
+        text-decoration: none
     p
         margin-bottom: 0
         margin-top: 0
-
+    time
+        @include meta
+        display: block
+        margin-top: $spacing0
 
 @mixin visually-hidden
     clip: rect(0,0,0,0) !important

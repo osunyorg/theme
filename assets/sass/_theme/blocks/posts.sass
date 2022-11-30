@@ -2,3 +2,14 @@
     .posts
         @include grid(1)
         @include grid(3, md)
+    &--grid
+        @include media-breakpoint-down(md)
+            article + article
+                margin-top: $spacing3
+        @include media-breakpoint-up(md)
+            @include in-page-with-sidebar
+                .grid
+                    @include grid(2, md, $grid-gutter, half($grid-gutter))
+            @include in-page-without-sidebar
+                .grid
+                    @include grid(3)

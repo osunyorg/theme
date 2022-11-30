@@ -1,0 +1,7 @@
+<div class="grid">
+  {{ range $post := .posts -}}
+    {{ with site.GetPage (printf "/posts/%s" $post) }}
+      {{ partial "posts/post" . }}
+    {{ end }}
+  {{ end }}
+</div>
