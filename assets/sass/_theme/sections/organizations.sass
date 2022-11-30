@@ -1,9 +1,16 @@
 .organization
     @include article
+    position: relative
     h1
-        @include h4
+        @include meta
+        a
+            @include stretched-link
+            text-decoration: none
     .media
+        background: $color-background-alt
         aspect-ratio: 1/1
+        padding: $spacing1
+        margin-bottom: half($spacing0)
         img
             width: 100%
             height: 100%
@@ -19,6 +26,9 @@
         @include grid(3, md)
         @include grid(3, lg)
         @include grid(3, xl)
+    @include media-breakpoint-down(md)
+        grid-column-gap: $spacing1 !important
+
 
 .organizations__section
     .organizations
