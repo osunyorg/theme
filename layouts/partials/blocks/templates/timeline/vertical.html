@@ -11,14 +11,14 @@
   {{ with .block.data -}}
     <div class="events">
       {{ range .events -}}
-        <div class="event">
-          {{ if .title -}}
-            <p class="event-title">{{ partial "PrepareHTML" .title }}</p>
-          {{- end }}
-          {{ if .text -}}
+        <article class="event">
+          {{ if .title }}
+            <h1 class="event-title">{{ partial "PrepareHTML" .title }}</h1>
+          {{ end }}
+          {{ if .text }}
             <p>{{ partial "PrepareText" .text }}</p>
-          {{- end }}
-        </div>
+          {{ end }}
+        </article>
       {{ end -}}
     </div>
   {{ end -}}
