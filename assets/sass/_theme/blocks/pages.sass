@@ -17,7 +17,7 @@
                     aspect-ratio: 16/9
                     object-fit: cover
         h1
-            @extend .h3
+            @include h3
             a
                 text-decoration: none
             + .description
@@ -132,7 +132,7 @@
                 + li
                     margin-top: $spacing0
                 a
-                    @extend .meta
+                    @include meta
                     text-decoration: none
                     @include icon("arrow-right", before, px2rem(10))
                         padding-right: $spacing0
@@ -205,9 +205,9 @@
             .page
                 .title
                     a
-                        @extend .h3
+                        @include h3
                 p
-                    @extend .small
+                    @include small
                     margin-top: half($spacing1)
         @include in-page-without-sidebar
             .pages
@@ -220,11 +220,11 @@
 
         .main-page
             .title
-                @extend .h5
+                @include h5
                 @include media-breakpoint-up(lg)
                     margin-bottom: 0
             p
-                @extend .h2
+                @include h2
                 @include media-breakpoint-up(lg)
                     margin-top: $spacing1
 
@@ -237,7 +237,7 @@
                 .title
                     margin-top: half($spacing1)
                     a
-                        @extend .meta
+                        @include meta
                         @include hover-translate-icon(before, 3)
                         text-decoration-color: transparent
                         text-transform: none // FIXME Arnaud
@@ -284,7 +284,6 @@
                 .more
                     @include icon("arrow-right", after)
                     @include link($block-pages-card-page-color)
-                    // @extend .small
                     font-size: px2rem(16)
                     position: relative
                     text-decoration-color: $block-pages-card-page-color

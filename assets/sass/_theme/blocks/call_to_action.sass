@@ -1,20 +1,20 @@
 .block-call_to_action
     @include in-page-with-or-without-sidebar
         h2, h3
-            @extend .h5
+            @include h5
             margin-bottom: $spacing0
     .call_to_action
         color: $block-call-to-action-color
         .description
             p
-                @extend .h2
+                @include h2
         .actions
             [role="group"]
                 @include media-breakpoint-down(md)
                     display: flex
                     flex-direction: column
             a
-                @extend .meta
+                @include meta
                 color: $block-call-to-action-color
                 margin-right: $spacing2
                 margin-top: $spacing1
@@ -23,7 +23,7 @@
                 &:hover
                     text-decoration-color: $block-call-to-action-color
                 &:first-child
-                    @extend .btn
+                    @include btn
                     background: $block-call-to-action-button-background
                     color: $block-call-to-action-button-color
                 &:last-child
