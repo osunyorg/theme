@@ -3,7 +3,6 @@
         h2, h3
             + .description
                 margin-top: $spacing0
-
     ul
         @include list-reset
         @include grid(1)
@@ -11,11 +10,10 @@
             @include grid(2, md)
         @include in-page-without-sidebar
             @include grid(3, md)
-    a
+    li
         @include icon("download", before)
-        align-items: center
+        align-items: start
         display: flex
-        text-decoration: none
         &::before
             align-items: center
             border: 1px solid $color-border
@@ -27,11 +25,14 @@
             margin-right: $spacing0
             transition: background 0.3s ease, border 0.3s ease
             width: px2rem(60)
+    a
+        @include small
+        text-decoration: none
         &::after
             content: none !important // Remove default icon _blank
         &:hover
             &::before
                 background-color: $color-border
                 border-color: transparent
-        span span
-            @include small
+    figcaption
+        @include meta
