@@ -268,3 +268,14 @@
         &:after
             opacity: 1
             transform: translateX(0)
+
+@mixin top-flex
+    @include media-breakpoint-up(md)
+        @include in-page-without-sidebar
+            display: flex
+            h2, h3
+                width: col(4)
+            .description
+                margin-top: 0
+                width: col(8)
+                margin-left: $grid-gutter

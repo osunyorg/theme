@@ -1,20 +1,45 @@
 .block-contact
+    .top
+        @include top-flex
+        margin-bottom: 0
+        .description
+            margin-top: $spacing1
+        + .informations
+            margin-top: $spacing2
     @include in-page-without-sidebar
         @include media-breakpoint-up(md)
-            .block-content
+            .top
+                margin-bottom: $spacing2
+            .informations
                 display: flex
-                address,
+                margin-top: 0
+                address
+                    width: col(4)
+                    margin-top: 0
                 ul
-                    width: col(6)
-
+                    margin-top: 0
+                    width: col(8)
+                    margin-left: $grid-gutter
+    
+    address
+        [itemprop="name"]
+            @include h4
+        a
+            &:not(:hover)
+                text-decoration-color: transparent
+        + ul
+            margin-top: $spacing2
     ul
         @include list-reset
         li
-            border-bottom: 1px solid $color-border
             display: flex
             flex-wrap: wrap
-            padding-bottom: calc(#{$line-height-base/2}rem + 1px)
-            padding-top: calc(#{$line-height-base/2}rem + 1px)
+            padding-bottom: $spacing0
+            &:first-of-type
+                padding-top: 0
+            + li
+                padding-top: $spacing0
+                border-top: 1px solid $color-border
             @include media-breakpoint-down(md)
                 justify-content: end
                 flex-wrap: wrap
