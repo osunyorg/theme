@@ -43,11 +43,11 @@
                         text-decoration: none
                         @include icon("arrow-right", "after", px2rem(16), true)
                             position: static
-                .description
-                    @include h2
-                    grid-column: 5 / 13
-                    margin-top: -0.25em
-                    font-style: $h2-size-md
+            .description
+                @include h2
+                grid-column: 5 / 13
+                margin-top: -0.25em
+                font-style: $h2-size-md
 
     &--grid
         .grid
@@ -57,8 +57,9 @@
         @include media-breakpoint-up(md)
             .grid
                 @include grid(2, md)
-            @include in-page-without-sidebar
-                .grid
+                @include in-page-with-sidebar
+                    grid-gap: half($grid-gutter) !important
+                @include in-page-without-sidebar
                     @include grid(3, md)
 
     &--cards
@@ -67,8 +68,9 @@
         padding-top: $grid-gutter
         .cards
             @include grid(2, md)
-        @include in-page-without-sidebar
-            .cards
+            @include in-page-with-sidebar
+                grid-gap: half($grid-gutter) !important
+            @include in-page-without-sidebar
                 @include grid(3, md)
         // TODO: move this //
         .block-gallery + &,
