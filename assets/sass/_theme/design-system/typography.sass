@@ -16,62 +16,80 @@ p, h1, h2, h3, h4, h5, h6, li, a, th, td, span
     text-edge: cap alphabetic
     leading-trim: both
 
-%heading
+@mixin heading
     font-family: $heading-font-family
     margin-top: 0
     margin-bottom: 0
 
-h1, .h1
-    @extend %heading
+@mixin h1
+    @include heading
     font-size: $h1-size
     font-weight: $h1-weight
     line-height: $h1-line-height
     text-transform: $h1-text-transform
+
+h1, .h1
+    @include h1
     @include media-breakpoint-up(md)
         font-size: $h1-size-md
 
-h2, .h2
-    @extend %heading
+@mixin h2
+    @include heading
     font-size: $h2-size
     font-weight: $h2-weight
     line-height: $h2-line-height
     text-transform: $h2-text-transform
+
+h2, .h2
+    @include h2
     @include media-breakpoint-up(md)
         font-size: $h2-size-md
 
-h3, .h3
-    @extend %heading
+@mixin h3
+    @include heading
     font-size: $h3-size
     font-weight: $h3-weight
     line-height: $h3-line-height
     text-transform: $h3-text-transform
+
+h3, .h3
+    @include h3
     @include media-breakpoint-up(md)
         font-size: $h3-size-md
 
-h4, .h4
-    @extend %heading
+@mixin h4
+    @include heading
     font-size: $h4-size
     font-weight: $h4-weight
     line-height: $h4-line-height
     text-transform: $h4-text-transform
+
+h4, .h4
+    @include h4
     @include media-breakpoint-up(md)
         font-size: $h4-size-md
 
-h5, .h5
-    @extend %heading
+@mixin h5
+    @include heading
     font-size: $h5-size
     font-weight: $h5-weight
     line-height: $h5-line-height
     text-transform: $h5-text-transform
+
+h5, .h5
+    @include h5
     @include media-breakpoint-up(md)
         font-size: $h5-size-md
 
-h6, .h6
-    @extend %heading
+@mixin h6
+    @include heading
     font-size: $h6-size
     font-weight: $h6-weight
     line-height: $h6-line-height
     text-transform: $h6-text-transform
+
+h6, .h6
+    @include h6
     @include media-breakpoint-up(md)
         font-size: $h6-size-md
 
@@ -82,12 +100,15 @@ h2, .h2
         &:hover
             text-decoration-thickness: 1px
 
-.lead
-    margin-top: 0
+@mixin lead
     font-family: $lead-font-family
     font-size: $lead-size
     font-weight: $lead-weight
     line-height: $lead-line-height
+
+.lead
+    @include lead
+    margin-top: 0
     @include media-breakpoint-up(md)
         font-size: $lead-size-md
 

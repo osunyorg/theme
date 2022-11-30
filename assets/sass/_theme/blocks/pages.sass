@@ -1,12 +1,11 @@
 .block-pages
     .top
-        margin-bottom: $spacing2
         h2, h3
-            + p
+            + .description
                 margin-top: $spacing1
         a
             text-decoration: none
-    .pages
+    .grid, .cards
         article
             display: flex
             flex-direction: column
@@ -21,15 +20,20 @@
             @extend .h3
             a
                 text-decoration: none
-            + p
+            + .description
                 margin-top: $spacing0
 
-    @include in-page-without-sidebar
+    @include media-breakpoint-up(md)
         .top
-            p
-                @extend .h2 
-                grid-column: 5 / 13
-                margin-top: -0.25em
+            margin-bottom: $spacing2
+
+    @include media-breakpoint-down(md)
+        .description
+            @include h2
+        article
+            margin-top: $spacing1
+
+    @include in-page-without-sidebar
         @include media-breakpoint-up(md)
             .top
                 @include grid
@@ -39,25 +43,32 @@
                         text-decoration: none
                         @include icon("arrow-right", "after", px2rem(16), true)
                             position: static
-                
+                .description
+                    @include h2
+                    grid-column: 5 / 13
+                    margin-top: -0.25em
+                    font-style: $h2-size-md
+
     &--grid
-        .pages
-            @include grid(2, md)
+        .grid
             a
                 @include icon("arrow-right", "after", px2rem(16), true)
                 @include hover-translate-icon(after, 3)
-        @include in-page-without-sidebar
-            .pages
-                @include grid(3, md)
+        @include media-breakpoint-up(md)
+            .grid
+                @include grid(2, md)
+            @include in-page-without-sidebar
+                .grid
+                    @include grid(3, md)
 
     &--cards
         background-color: $block-pages-card-background
         padding-bottom: $grid-gutter
         padding-top: $grid-gutter
-        .pages
+        .cards
             @include grid(2, md)
         @include in-page-without-sidebar
-            .pages
+            .cards
                 @include grid(3, md)
         // TODO: move this //
         .block-gallery + &,
@@ -99,7 +110,6 @@
                 display: flex
                 justify-content: space-between
                 align-items: center
-
             &:hover
                 .more:after
                     opacity: 1
@@ -107,16 +117,9 @@
             a,
             .more
                 transition: text-decoration-color .3s ease, color .3s ease
-            .title
-                a
-                    text-decoration: none
-                + p:not(.more)
-                    margin-bottom: 1rem
             &:hover
                 background-color: $block-pages-card-page-background-hover
-                &,
-                a,
-                .more
+                &, a, .more
                     color: $block-pages-card-page-color-hover
                 .more
                     text-decoration-color: $block-pages-card-page-color-hover
@@ -133,40 +136,47 @@
                     text-decoration: none
                     @include icon("arrow-right", before, px2rem(10))
                         padding-right: $spacing0
-        @include in-page-with-sidebar
-            .block-content
-                .top
-                    margin-bottom: $spacing1
-                .description
-                    margin-bottom: $spacing1
-                ul
-                    @include grid(2, md)
-        @include in-page-without-sidebar
-            .block-content
-                @include grid
-                grid-row-gap: $spacing1
-                .top
-                    display: block
-                    grid-column: 1 / 8
-                    margin-bottom: 0
-                .top + .description
-                    grid-column: 1 / 8
-                    grid-row: 2 / 3
-                // Default behavior (without page description)
-                ul
-                    @include grid(4, md)
-                    grid-column: 1 / 13
-                    li
-                        margin-top: 0
-                // If page description
-                .description + ul
-                    grid-column: 7 / 13
-                    grid-row: 2 / 3
-                    display: block
-                    li + li
-                        margin-top: $spacing0
-
-
+        @include media-breakpoint-down(md)
+            .top
+                margin-bottom: $spacing0
+            ul
+                margin-top: $spacing1
+        @include media-breakpoint-up(md)
+            @include in-page-with-sidebar
+                .block-content
+                    .top
+                        margin-bottom: $spacing1
+                    .description
+                        margin-bottom: $spacing1
+                    ul
+                        @include grid(2, md)
+                        grid-row-gap: $spacing0 !important
+                        li
+                            margin-top: 0
+            @include in-page-without-sidebar
+                .block-content
+                    @include grid
+                    grid-row-gap: $spacing1
+                    .top
+                        display: block
+                        grid-column: 1 / 8
+                        margin-bottom: 0
+                    .top + .description
+                        grid-column: 1 / 8
+                        grid-row: 2 / 3
+                    // Default behavior (without page description)
+                    ul
+                        @include grid(4, md)
+                        grid-column: 1 / 13
+                        li
+                            margin-top: 0
+                    // If page description
+                    .description + ul
+                        grid-column: 7 / 13
+                        grid-row: 2 / 3
+                        display: block
+                        li + li
+                            margin-top: $spacing0
 
 .block-pages-
     margin-top: $spacing4

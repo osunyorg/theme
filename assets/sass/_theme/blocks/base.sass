@@ -7,9 +7,11 @@
             margin-top: $spacing4
 
 .block
-    @include in-page-with-sidebar
-        h2, h3
-            @extend .h2
-    @include in-page-without-sidebar
-        h2, h3
-            @extend .h5
+    // Mobile & full-width
+    h2, h3
+        @extend .h5
+    // Desktop with sidebar
+    @include media-breakpoint-up(md)
+        @include in-page-with-sidebar
+            h2, h3
+                @include h2
