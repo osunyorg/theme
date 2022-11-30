@@ -3,6 +3,14 @@
         &:not([open]):hover
             &::after
                 border-bottom-color: $block-definition-border-color-hovered
+        summary
+            @include signature
+            display: flex
+            justify-content: space-between
+            align-items: center
+            transition: color 0.3s
+            &:hover
+                color: $color-accent
         summary,
         p
             font-size: $block-definition-font-size
@@ -16,6 +24,9 @@
             border-bottom: 1px solid $block-definition-border-color
             display: block
             transition: border-color 0.5s
-    @include in-page-without-sidebar
-        .definitions
-            @include grid(2, md)
+    @include media-breakpoint-up(md)
+        @include in-page-without-sidebar
+            .definitions
+                @include grid(2, md)
+                grid-row-gap: 0 !important
+
