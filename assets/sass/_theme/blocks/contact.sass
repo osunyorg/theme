@@ -50,14 +50,15 @@
             @include media-breakpoint-up(md)
                 justify-content: space-between
                 span
-                    min-width: calc(100% / 3)
+                    width: 25%
+                    &:first-child
+                        width: 50%
                 span + span
-                    text-align: center
+                    text-align: right
                     &:last-child
                         text-align: right
     time + time
         @include icon("arrow-right", before)
-        &::before
             display: inline-block
             font-size: px2rem(12)
             padding: 0 px2rem(7) 0 px2rem(3)
