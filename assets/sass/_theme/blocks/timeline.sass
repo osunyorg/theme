@@ -105,9 +105,14 @@
             scroll-snap-align: start
             transition: 0.3s opacity
             width: 50%
+            
             .title
                 min-height: var(--min-title-height)
                 margin-bottom: $spacing1
+                @include signature
+            .description
+                @include small
+
             .line
                 background: $block-timeline-horizontal-color
                 height: 1px
@@ -124,6 +129,7 @@
                     position: relative
                     top: -4px
                     width: 9px
+
             &.is-passed
                 opacity: 0.15
             &:last-child
