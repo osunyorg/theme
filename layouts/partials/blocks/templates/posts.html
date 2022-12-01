@@ -2,8 +2,11 @@
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- $term := false -}}
-{{- $layout := "list" -}}
+{{- $layout := "grid" -}}
 {{- with .block.data }}
+  {{ if .layout }}
+    {{- $layout = .layout -}}
+  {{ end }}
   {{ if .category }}
     {{- $term = site.GetPage (printf "/categories%s" .category) -}}
   {{ end }}
