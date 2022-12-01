@@ -1,0 +1,8 @@
+{{ $image := partial "GetMedia" .id }}
+{{ $ratio := 1 }}
+
+{{ if $image }}
+  {{ $ratio = div (float $image.width) (float $image.height) }}
+{{ end }}
+
+{{ return $ratio }}

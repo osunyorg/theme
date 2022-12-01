@@ -1,0 +1,10 @@
+{{ $ratio := partial "GetImageRatio" . }}
+{{ $direction := "square" }}
+
+{{ if gt $ratio 1 }}
+  {{ $direction = "landscape" }}
+{{ else if lt $ratio 1 }}
+  {{ $direction = "portrait" }}
+{{ end }}
+
+{{ return $direction }}

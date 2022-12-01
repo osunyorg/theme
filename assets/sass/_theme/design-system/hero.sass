@@ -10,47 +10,65 @@
     position: relative
     @include media-breakpoint-up(md)
         min-height: $hero-height-md
-
     *:focus-visible
         outline-color: $hero-color
     
     nav + .content
         margin-top: $spacing3
+
     .content
-        picture
-            img
+        figure
+            display: block
+            img, picture
                 display: block
-    // &--with-image
-    //     margin-bottom: $spacing4
-    //     .content
-    //         display: flex
-    //         justify-content: space-between
-    //         h1
-    //             width: col(7)
-    //         picture
-    //             width: col(5)
-    //             margin-bottom: -$spacing4
+            figcaption
+                @include meta
+                color: $color-text-alt
+                margin-top: $spacing0
+                text-align: right
+                a
+                    color: inherit
 
     @include media-breakpoint-down(md)
         &--with-image
             padding-bottom: 0
-            picture
-                display: block
+        &--image-landscape
+            figure
                 margin: half($spacing3) half(-$grid-gutter-sm) 0
+        &--image-portrait, &--image-square
+            .container
+                display: flex
+                flex-direction: column
+                margin-bottom: $spacing5
+            figure
+                margin-bottom: calc(#{-$spacing5} + #{$spacing2})
+                margin-top: $spacing1
     @include media-breakpoint-up(md)
+        $negative-margin-bottom: px2rem(200)
         .content
             h1
                 width: col(9)
         &--with-image
-            margin-bottom: $spacing4
+            margin-bottom: $negative-margin-bottom
             .content
                 display: flex
                 justify-content: space-between
                 h1
                     width: col(7)
-                picture
+                figure
                     width: col(5)
-                    margin-bottom: -$spacing4
+                    margin-bottom: -$negative-margin-bottom
+                    // If there's no credits
+                    picture:last-child
+                        margin-bottom: $spacing2
+        &--image-portrait, &--image-square
+            .content
+                h1
+                    width: col(8)
+                figure
+                    margin-top: calc(-#{$spacing3} - #{$spacing2})
+                    width: col(3)
+
     // In what case ?
     // p
     //     margin-bottom: 0

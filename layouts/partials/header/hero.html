@@ -1,4 +1,9 @@
-<header class="hero {{ if .image -}}hero--with-image{{- end -}}">
+{{- $direction := "" -}}
+{{ if .image }}
+  {{- $direction = partial "GetImageDirection" .image -}}
+{{ end }}
+
+<header class="hero {{ if .image -}}hero--with-image hero--image-{{- $direction -}}{{- end -}}">
   <div class="container">
     {{- if .breadcrumb | default true -}}
       {{ partial "header/breadcrumbs.html" .context }}
@@ -6,14 +11,20 @@
     <div class="content">
       <h1>{{ partial "PrepareHTML" .title }}</h1>
       {{- if .image }}
-        {{ partial "commons/image.html"
+        <figure>
+          {{ partial "commons/image.html"
             (dict
               "image"    .image
-              "mobile"   "351x168"
-              "tablet"   "456x219"
-              "desktop"  "856x410"
-              "lazy"     false
+              "mobile"   "351"
+              "tablet"   "456"
+              "desktop"  "856"
             ) }}
+          {{ if .image.credit }}
+            <figcaption>
+              {{- partial "PrepareHTML" .image.credit -}}
+            </figcaption>
+          {{ end }}
+        </figure>
       {{ end -}}
     </div>
   </div>
