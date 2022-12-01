@@ -1,12 +1,12 @@
 {{- $title := or .Params.header_text .Title -}}
 <header class="hero hero-program">
   <div class="container">
-    <div>
-      <h1>{{ partial "PrepareHTML" $title }}</h1>
-    </div>
     {{- if .Params.breadcrumb | default true -}}
       {{ partial "header/breadcrumbs.html" . }}
     {{- end -}}
+    <div>
+      <h1>{{ partial "PrepareHTML" $title }}</h1>
+    </div>
   </div>
 
   <section class="container" id="essential">

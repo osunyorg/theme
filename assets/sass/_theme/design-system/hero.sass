@@ -1,75 +1,78 @@
 .hero
-    align-items: flex-end
     // Support gradients
     background: $hero-background-color
     // Fallback color
     background-color: $hero-background-color
     color: $hero-color
-    display: flex
     min-height: $hero-height
-    overflow: hidden
-    padding-bottom: 2rem
+    padding-bottom: $spacing3
     padding-top: calc(2rem + var(--header-height))
     position: relative
     @include media-breakpoint-up(md)
         min-height: $hero-height-md
 
-    .page-with-blocks &
-        margin-bottom: 0
-
     *:focus-visible
-        outline-color: white
-
-    p
-        margin-bottom: 0
-    a
-        color: $hero-color
-        text-decoration-color: rgba($hero-color, 0.3)
-        &:hover
-            text-decoration-color: $hero-color
-            
-
-    > div:first-of-type
-        > div
-            margin-top: $spacing1
-            @include media-breakpoint-up(xl)
-                margin-top: px2rem(70)
-
-    > div + div
-        margin-top: auto
-        .container
-            padding-bottom: $spacing1
-            padding-top: $spacing1
-        & + .document-nav
-            margin-top: 0
-    > div
-        position: relative
-        z-index: 1
-    > picture
-        img
-            height: 100%
-            inset: 0
-            object-fit: cover
-            opacity: 0.3
-            position: absolute
-            width: 100%
-            // polyfill for inset
-            @supports not (inset: 0)
-                bottom: 0
-                left: 0
-                right: 0
-                top: 0
-
-    /* TODO refacto */
-    .title-avatar
-        @include media-breakpoint-up(md)
-            align-items: flex-end
+        outline-color: $hero-color
+    
+    nav + .content
+        margin-top: $spacing3
+    .content
+        h1
+            width: col(9)
+        picture
+            img
+                display: block
+    &--with-image
+        margin-bottom: $spacing4
+        .content
             display: flex
             justify-content: space-between
-            margin-bottom: $spacing1
             h1
-                margin-bottom: 0
-        > div
-            width: col(8)
-            @include media-breakpoint-up(md)
-                width: col(2)
+                width: col(7)
+            picture
+                width: col(5)
+                margin-bottom: -$spacing4
+
+
+    // In what case ?
+    // p
+    //     margin-bottom: 0
+    // a
+    //     color: $hero-color
+    //     text-decoration-color: rgba($hero-color, 0.3)
+    //     &:hover
+    //         text-decoration-color: $hero-color
+            
+
+    // > div:first-of-type
+    //     > div
+    //         margin-top: $spacing1
+    //         @include media-breakpoint-up(xl)
+    //             margin-top: px2rem(70)
+
+    // > div + div
+    //     margin-top: auto
+    //     .container
+    //         padding-bottom: $spacing1
+    //         padding-top: $spacing1
+    //     & + .document-nav
+    //         margin-top: 0
+    // > div
+    //     position: relative
+    //     z-index: 1
+    // picture
+    //     position: relative
+
+    // /* TODO refacto */
+    // .title-avatar
+    //     @include media-breakpoint-up(md)
+    //         align-items: flex-end
+    //         display: flex
+    //         justify-content: space-between
+    //         margin-bottom: $spacing1
+    //         h1
+    //             margin-bottom: 0
+    //     > div
+    //         width: col(8)
+    //         @include media-breakpoint-up(md)
+    //             width: col(2)
