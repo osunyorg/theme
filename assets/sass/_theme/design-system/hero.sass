@@ -22,18 +22,36 @@
         picture
             img
                 display: block
-    &--with-image
-        margin-bottom: $spacing4
-        .content
-            display: flex
-            justify-content: space-between
-            h1
-                width: col(7)
+    // &--with-image
+    //     margin-bottom: $spacing4
+    //     .content
+    //         display: flex
+    //         justify-content: space-between
+    //         h1
+    //             width: col(7)
+    //         picture
+    //             width: col(5)
+    //             margin-bottom: -$spacing4
+
+    @include media-breakpoint-down(md)
+        &--with-image
+            padding-bottom: 0
             picture
-                width: col(5)
-                margin-bottom: -$spacing4
-
-
+                display: block
+                margin-left: -$grid-gutter-sm
+                margin-right: -$grid-gutter-sm
+                margin-top: half($spacing3)
+    @include media-breakpoint-up(md)
+        &--with-image
+            margin-bottom: $spacing4
+            .content
+                display: flex
+                justify-content: space-between
+                h1
+                    width: col(7)
+                picture
+                    width: col(5)
+                    margin-bottom: -$spacing4
     // In what case ?
     // p
     //     margin-bottom: 0
