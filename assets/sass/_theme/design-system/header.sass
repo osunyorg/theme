@@ -8,15 +8,19 @@ header[role="banner"]
     z-index: $zindex-header
     @include media-breakpoint-down(md)
         width: 100%
-    &.is-sticky
+    .dropdown-menu
+        transition: background $header-sticky-transition
+    &.is-sticky, html.has-menu-opened &
         background: $header-sticky-background
         color: $header-sticky-color
+        .dropdown-menu
+            background: $header-sticky-dropdown-background
         .menu
             a,
             a:hover,
             a:focus,
             a:active
-                @include link($header-sticky-color)
+                // @include link($header-sticky-color)
             span
                 color: $header-sticky-color
     html.is-scrolling-down:not(.has-menu-opened) &
@@ -25,7 +29,6 @@ header[role="banner"]
         @include media-breakpoint-up(md)
             &:not(:hover)
                 transform: translateY(-100%)
-
     .logo
         img
             display: block
