@@ -4,9 +4,6 @@ footer[role="contentinfo"]
     padding-bottom: $spacing3
     padding-top: $spacing3
     margin-top: $spacing4
-    address
-        font-size: px2rem(14)
-        line-height: px2rem(26)
     .logo
         img
             height: $footer-logo-height
@@ -14,64 +11,32 @@ footer[role="contentinfo"]
             width: auto
             @include media-breakpoint-up(md)
                 height: $footer-logo-height-md
-    .content
-        @include grid(3, md)
-        margin-bottom: $spacing1
-        @include media-breakpoint-up(md)
-            margin-bottom: $spacing2
-        > div
-            &:first-of-type
-                @include media-breakpoint-down(md)
-                    margin-bottom: $spacing1
-
-    .complementary
-        @include media-breakpoint-up(md)
-            align-items: center
-            display: flex
-            [class^="nav-"]
-                margin-top: 0
-                display: block
-                li
-                    display: inline-block
-                    a
-                        display: block
-            [class^="nav-"] + [class^="nav-"]
-                margin-left: auto
-                margin-right: -$spacing0
-    .credit
-        small, a
-            font-size: $meta-size
-        a
-            padding: 0
-
-    // TODO : add padding on every link in typography ?
-    [class^="nav-"]
-        margin-left: half(-$spacing0)
-        a
-            padding: half($spacing0)
-    // END TODO
-
-
     ul
         @include list-reset
+        li
+            + li
+                margin-top: $spacing0
+            a:not(:hover)
+                text-decoration-color: transparent
+    .footer
+        &-site
+            @include small
+        &-social, &-legals, &-credit
+            @include meta
+        &-credit
+            display: block
+            margin-top: $spacing0
 
-    .nav-level-1
-        align-items: flex-start
-        flex-direction: column
-        a,
-        span
-            color: $footer-color
-            display: inline-block
-            font-size: px2rem(14)
-            line-height: 1.4
-
+    @include media-breakpoint-down(md)
+        .container
+            > * + *
+                margin-top: $spacing3
     @include media-breakpoint-up(md)
-        .nav-legal,
-        .nav-social
-            flex-direction: row
-        // .nav-legal
-        //     li:not(:first-child)
-        //         margin-left: -$spacing0
-        // .nav-social
-        //     li:not(:last-child)
-        //         margin-right: -$spacing0
+        .container
+            @include grid(2, md, $spacing4)
+        .footer
+            &-site, &-social
+                text-align: right
+            &-social
+                order: 4
+                align-self: end
