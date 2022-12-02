@@ -12,12 +12,12 @@
             @include meta
         a
             color: $breadcrumb-color
-            text-decoration-color: rgba($breadcrumb-color, 0.3)
+            text-decoration-color: rgba($breadcrumb-color, 0)
+            line-height: 1
             &:hover
                 text-decoration-color: rgba($breadcrumb-color, 1)
         &:not(:first-child)
-            padding-left: 0.5rem
-            &::before
-                color: lighten($breadcrumb-color, 0.5)
-                content: "/"
-                padding-right: 0.5rem
+            padding-left: $spacing0
+            @include icon($breadcrumb-icon)
+                padding-right: $spacing0
+                color: $breadcrumb-icon-color
