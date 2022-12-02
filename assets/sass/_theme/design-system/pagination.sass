@@ -4,7 +4,8 @@
     justify-content: center
     margin-top: $spacing-section-y
     li
-        @include list-reset
+        a
+            color: inherit
         &.active
             color: $color-accent
         &.disabled
@@ -14,120 +15,92 @@
         &:not(.disabled)
             a:hover
                 background-color: #e9ecef
-        a
-            color: inherit
-    &:not(&-between-pages)
-        li
-            &:first-child
-                a
-                    @include icon(arrow-first, before, px2rem(10))
-            &:nth-child(2)
-                a
-                    @include icon(arrow-left, before, px2rem(10))
-            &:nth-last-child(2)
-                a
-                    @include icon(arrow-right, before, px2rem(10))
-            &:last-child
-                a
-                    @include icon(arrow-last, before, px2rem(10))
+        &:first-child
+            a
+                @include icon(arrow-first, before, px2rem(10))
+        &:nth-child(2)
+            a
+                @include icon(arrow-left, before, px2rem(10))
+        &:nth-last-child(2)
+            a
+                @include icon(arrow-right, before, px2rem(10))
+        &:last-child
+            a
+                @include icon(arrow-last, before, px2rem(10))
 
-    &-between-pages
+.posts-navigation
+    border-top: 1px solid $color-border
+    margin-top: $spacing3
+    ul
         @include list-reset
-        display: flex
-        justify-content: space-between
-        margin-top: $spacing3
+        @include grid(2, md)
         li
             flex: 1
             position: relative
-            border-top: 1px solid $color-border
-            @include media-breakpoint-up(md)
-                border: 0
-                padding: calc(#{$spacing0}/2) $spacing0
         a
-            background-color: transparent
+            @include small
             border: 0
-            text-decoration: none
-            &:hover
-                background-color: transparent
-                text-decoration: underline
-                span
-                    text-decoration: none
-            @include media-breakpoint-down(md)
-                display: block
-                padding: px2rem(20) px2rem(40) px2rem(20) 0
-                &::before 
-                    opacity: .5
-                    position: absolute
-                    right: 0
-                    text-transform: none
-                    top: 50%
-                    transform: translateY(-50%)
-                    vertical-align: middle
-                                    
-
-        span
-            &::before, &::after
-                font-size: px2rem(12)
-
-        .previous
-            padding-left: 0
+            &:not(:hover)
+                text-decoration-color: transparent
             span
-                @include icon(arrow-left, before)
+                @include meta
+                text-decoration: none
+                display: block
+                margin-bottom: $spacing0
+        .previous
+            span
+                @include icon(arrow-left, before, px2rem(12))
                     margin-right: px2rem(5)
         .next
-            padding-right: 0
             text-align: right
             span
-                @include icon(arrow-right, after)
+                @include icon(arrow-right, after, px2rem(12))
                     margin-left: px2rem(5)
 
-        @include media-breakpoint-down(md)
+    @include media-breakpoint-up(md)
+        ul
+            padding-top: $spacing1
+            
+    @include media-breakpoint-down(md)
+        ul
             flex-direction: column-reverse
-            margin-left: 0
-            margin-right: 0
-            li.previous,
-            li.next
-                // border-top: 1px solid $gray-500
-                text-align: left
-                a
-                    padding: px2rem(20) px2rem(40) px2rem(20) 0
-                    &::after
-                        @include icon
-                        font-size: px2rem(12)
-                        opacity: 0.5
-                        position: absolute
-                        right: 0
-                        top: 50%
-                        transform: translateY(-50%)
+            .previous,
+            .next
+                border-bottom: 1px solid $color-border
+                display: flex
+                align-items: center
                 span
+                    margin-bottom: 0
                     &::after,
                     &::before
                         content: none
+                a
+                    display: block
+                    padding: $spacing1 0
+            .previous
+                @include icon(arrow-left, before, px2rem(12))
+                    margin-right: $spacing0
+            .next
+                @include icon(arrow-right, after, px2rem(12))
+                    margin-left: $spacing0
 
-            li.previous
-                border-bottom: 1px solid $color-border
-                a
-                    @include icon(arrow-left)
-            li.next
-                a
-                    @include icon(arrow-right)
 
-.posts
-    + nav
-        .pagination
-            align-items: center
-            display: flex
-            margin-left: auto
-            margin-right: auto
-            // margin-top: 0
-            li
-                a
-                    line-height: 140%
-                    padding: calc(#{$spacing0}/2) $spacing0
-                    text-decoration: none
-                    transition: background-color .15s ease-in-out
-                &.disabled
-                    pointer-events: none
-                &:not(.disabled)
-                    a:hover
-                        background-color: #e9ecef
+// .posts
+//     + nav
+//         .pagination
+//             align-items: center
+//             display: flex
+//             margin-left: auto
+//             margin-right: auto
+//             // margin-top: 0
+//             li
+//                 a
+//                     line-height: 140%
+//                     padding: calc(#{$spacing0}/2) $spacing0
+//                     text-decoration: none
+//                     transition: background-color .15s ease-in-out
+//                 &.disabled
+//                     pointer-events: none
+//                 &:not(.disabled)
+//                     a:hover
+//                         background-color: #e9ecef
