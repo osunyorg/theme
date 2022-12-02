@@ -2,10 +2,15 @@
     @include list-reset
     @include meta
     justify-content: center
+    align-items: center
+    display: flex
     margin-top: $spacing-section-y
     li
         a
             color: inherit
+            padding: calc(#{$spacing0}/2) $spacing0
+            text-decoration: none
+            transition: background-color .15s ease-in-out
         &.active
             color: $color-accent
         &.disabled
@@ -14,7 +19,7 @@
                 opacity: .3
         &:not(.disabled)
             a:hover
-                background-color: #e9ecef
+                background-color: $color-background-alt
         &:first-child
             a
                 @include icon(arrow-first, before, px2rem(10))
@@ -81,26 +86,6 @@
                 @include icon(arrow-left, before, px2rem(12))
                     margin-right: $spacing0
             .next
+                justify-content: end
                 @include icon(arrow-right, after, px2rem(12))
                     margin-left: $spacing0
-
-
-// .posts
-//     + nav
-//         .pagination
-//             align-items: center
-//             display: flex
-//             margin-left: auto
-//             margin-right: auto
-//             // margin-top: 0
-//             li
-//                 a
-//                     line-height: 140%
-//                     padding: calc(#{$spacing0}/2) $spacing0
-//                     text-decoration: none
-//                     transition: background-color .15s ease-in-out
-//                 &.disabled
-//                     pointer-events: none
-//                 &:not(.disabled)
-//                     a:hover
-//                         background-color: #e9ecef
