@@ -64,13 +64,14 @@
             &__track
                 overflow: visible
                 margin-right: half(-$grid-gutter-sm)
-                .splide__slide
-                    transition: opacity  .3s ease
-                    opacity: 0.1
-                    &.is-next
-                        opacity: 0.6
-                    &.is-active
-                        opacity: 1
+                @include in-page-with-sidebar
+                    .splide__slide
+                        transition: opacity  .3s ease
+                        opacity: 0.1
+                        &.is-next
+                            opacity: 0.6
+                        &.is-active
+                            opacity: 1
                 @include media-breakpoint-up(md)
                     margin-right: half(-$grid-gutter)
             &__slide
