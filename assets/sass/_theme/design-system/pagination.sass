@@ -1,40 +1,35 @@
 .pagination
-    // font-family: $font-family-sans-serif
-    font-size: px2rem(14)
+    @include list-reset
+    @include meta
     justify-content: center
-    margin: calc(#{$grid-gutter} * 2.5) 0 0
+    margin-top: $spacing-section-y
     li
         @include list-reset
-        // @extend .page-item
-    a
-        // @extend .page-link
-
-    .disabled
-        a::before
-            opacity: .3
-
+        &.active
+            color: $color-accent
+        &.disabled
+            pointer-events: none
+            a::before
+                opacity: .3
+        &:not(.disabled)
+            a:hover
+                background-color: #e9ecef
+        a
+            color: inherit
     &:not(&-between-pages)
         li
-            &:first-child,
-            &:nth-child(2),
-            &:nth-last-child(2),
-            &:last-child
-                a
-                    // @extend .icon
             &:first-child
                 a
-                    @include icon(arrow-first)
+                    @include icon(arrow-first, before, px2rem(10))
             &:nth-child(2)
                 a
-                    @include icon(arrow-left)
+                    @include icon(arrow-left, before, px2rem(10))
             &:nth-last-child(2)
                 a
-                    @include icon(arrow-right)
+                    @include icon(arrow-right, before, px2rem(10))
             &:last-child
                 a
-                    @include icon(arrow-last)
-            a::before
-                font-size: px2rem(12)
+                    @include icon(arrow-last, before, px2rem(10))
 
     &-between-pages
         @include list-reset
@@ -44,7 +39,7 @@
         li
             flex: 1
             position: relative
-            border-top: 1px solid #adb5bd
+            border-top: 1px solid $color-border
             @include media-breakpoint-up(md)
                 border: 0
                 padding: calc(#{$spacing0}/2) $spacing0
@@ -71,7 +66,6 @@
                                     
 
         span
-            // color: $gray-600
             &::before, &::after
                 font-size: px2rem(12)
 
@@ -79,14 +73,12 @@
             padding-left: 0
             span
                 @include icon(arrow-left, before)
-                &::before
                     margin-right: px2rem(5)
         .next
             padding-right: 0
             text-align: right
             span
                 @include icon(arrow-right, after)
-                &::after
                     margin-left: px2rem(5)
 
         @include media-breakpoint-down(md)
@@ -127,7 +119,7 @@
             display: flex
             margin-left: auto
             margin-right: auto
-            margin-top: 0
+            // margin-top: 0
             li
                 a
                     line-height: 140%
