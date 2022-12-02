@@ -81,8 +81,6 @@
             > a,
             > span
                 @include signature
-            + li.has-children
-                margin-top: $spacing1
 
     .nav-level-3
         display: block
@@ -111,10 +109,13 @@
                 right: 0
                 text-align: right
             .nav-level-2
-                > li > a
-                    padding-bottom: half($spacing0)
-                    padding-top: half($spacing0)
-                    display: block
+                > li 
+                    > a
+                        padding-bottom: half($spacing0)
+                        padding-top: half($spacing0)
+                        display: block
+                    + li.has-children
+                        margin-top: $spacing1
 
     @include media-breakpoint-down(md)
         &.is-opened
