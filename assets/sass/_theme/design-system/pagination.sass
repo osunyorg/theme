@@ -38,7 +38,7 @@
     margin-top: $spacing3
     ul
         @include list-reset
-        @include grid(2, md)
+        display: flex
         li
             flex: 1
             position: relative
@@ -65,7 +65,8 @@
     @include media-breakpoint-up(md)
         ul
             padding-top: $spacing1
-            
+            .next:first-child
+
     @include media-breakpoint-down(md)
         ul
             flex-direction: column-reverse

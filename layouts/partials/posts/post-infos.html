@@ -10,7 +10,7 @@
             {{ i18n "posts.category" }}
           {{- end -}}
         </th>
-        <td itemprop="articleSection">
+        <td itemprop="articleSection" {{ if gt (len .Params.Categories) 1 }} class="multiple" {{ end }}>
           {{ partial "posts/categories.html" . }}
         </td>
       </tr>
