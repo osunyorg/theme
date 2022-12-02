@@ -63,6 +63,7 @@
         display: flex
         > li
             > a, span
+                @include meta
                 display: block
                 padding: calc(#{$spacing0} * 0.5) $spacing0
             &:last-child 
@@ -79,16 +80,16 @@
         > li
             > a,
             > span
-                font-size: px2rem(16)
-                line-height: px2rem(26)
-                @include media-breakpoint-up(lg)
-                    font-size: px2rem(18)
+                @include signature
+            + li.has-children
+                margin-top: $spacing1
 
     .nav-level-3
         display: block
+        padding-top: half($spacing0)
         a,
         span
-            font-size: px2rem(14)
+            @include meta
 
     @include media-breakpoint-up(md)
         @if $header-dropdown-full
@@ -103,16 +104,16 @@
             .dropdown-menu
                 margin-top: $header-nav-padding-y
                 min-width: 400px
-                padding-bottom: calc(#{$spacing0}/2)
+                padding-bottom: half($spacing0)
                 padding-left: $spacing0
-                padding-top: calc(#{$spacing0}/2)
+                padding-top: half($spacing0)
                 padding-right: $spacing0
                 right: 0
                 text-align: right
             .nav-level-2
                 > li > a
-                    padding-bottom: calc(#{$spacing0}/2)
-                    padding-top: calc(#{$spacing0}/2)
+                    padding-bottom: half($spacing0)
+                    padding-top: half($spacing0)
                     display: block
 
     @include media-breakpoint-down(md)
@@ -124,9 +125,13 @@
             display: block
             li 
                 a, span
-                    padding: 1rem 0
+                    padding: half($spacing1) 0
+                    display: block
             > li:not(:last-child) 
                 border-bottom: 1px solid #adb5bd
+                > a, > span
+                    padding-bottom: $spacing1
+                    padding-top: $spacing1
             li.has-children
                 [role="button"]
                     align-items: center
