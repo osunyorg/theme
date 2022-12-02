@@ -1,6 +1,20 @@
 <table class="post-infos">
   <caption>{{ i18n "posts.informations" }}</caption>
   <tbody>
+    {{ if .Params.Categories }}
+      <tr>
+        <th scope="row">
+          {{- if gt (len .Params.Categories) 1 -}}
+            {{ i18n "posts.categories" }}
+          {{- else -}}
+            {{ i18n "posts.category" }}
+          {{- end -}}
+        </th>
+        <td itemprop="articleSection">
+          {{ partial "posts/categories.html" . }}
+        </td>
+      </tr>
+    {{ end }}
     <tr>
       <th scope="row">{{ i18n "posts.date" }}</th>
       <td>
@@ -17,20 +31,7 @@
         </td>
       </tr>
     {{ end }}
-    {{ if .Params.Categories }}
-      <tr>
-        <th scope="row">
-          {{- if gt (len .Params.Categories) 1 -}}
-            {{ i18n "posts.categories" }}
-          {{- else -}}
-            {{ i18n "posts.category" }}
-          {{- end -}}
-        </th>
-        <td itemprop="articleSection">
-          {{ partial "posts/categories.html" . }}
-        </td>
-      </tr>
-    {{ end }}
+    
     <tr>
       <th scope="row">{{ i18n "posts.share" }}</th>
       <td>
