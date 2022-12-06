@@ -65,7 +65,8 @@
         justify-content: end
         text-align: right
         @include in-page-with-sidebar
-            display: none
+            body:not(.offcanvas-toc) &
+                display: none
     @include media-breakpoint-down(md)
         border-top: 1px solid $color-border
         position: fixed
@@ -99,14 +100,21 @@
 
 .toc-container
     // in full width page or under md breakpoint (mobile)
+    
     @include in-page-without-sidebar
         @include offcanvas-toc
     @include media-breakpoint-down(md)
+        @include offcanvas-toc
+    // Program tweak : use offcanvas
+    body.offcanvas-toc &
         @include offcanvas-toc
 
     // Only desktop and in page with sidebar
     @include media-breakpoint-up(md)
         @include in-page-with-sidebar
+
+        // Program tweak : use offcanvas
+        body:not(.offcanvas-toc) &
             @include container-margin-left
             pointer-events: none
             top: 0

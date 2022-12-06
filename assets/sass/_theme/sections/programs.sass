@@ -95,10 +95,14 @@ ol.programs
     .document-content
         .content
             padding-top: $spacing2
+            > div > * + *
+                margin-top: 1em
             .blocks
                 .container
                     padding-left: 0
                     padding-right: 0
+                .block-content
+                    padding-left: 0
 
     @include media-breakpoint-up(md)
         .document-content
@@ -107,7 +111,7 @@ ol.programs
                 border-top: 1px solid $color-border
                 position: relative
                 > *
-                    grid-column: 6/13
+                    grid-column: 5/13
                 > h2
                     $sticky-top-offset: 90px
                     @include sticky($sticky-top-offset)
@@ -117,8 +121,8 @@ ol.programs
                     grid-column: 1/5
                     margin-bottom: 0
             section:first-of-type
-                    .content
-                        border-top: none
+                .content
+                    border-top: none
 
     table
         margin-block-start: 2em
