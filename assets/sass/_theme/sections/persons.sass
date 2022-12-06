@@ -102,11 +102,33 @@ ol.persons
     a
         @extend .link-more
 
+/* HERO *///R
+.persons__page
+    .hero
+        @include media-breakpoint-down(md)
+            padding-bottom: 0
+            margin-bottom: $spacing4
+            .avatar
+                width: col(6)
+                margin-top: $spacing1
+                margin-left: auto
+                transform: translateY(100px)
+                margin-top: calc(#{$spacing1} - 100px)
+        @include media-breakpoint-up(md)
+            .content
+                align-items: center
+                display: flex
+                justify-content: space-between
+                margin-top: 0
+                h1
+                    margin-bottom: 0
+                    width: col(8)
+                .avatar
+                    margin-bottom: 0
+                    width: col(3)
+
 @include media-breakpoint-up(lg)
     .persons__page
-        main
-            .container
-                margin-top: $spacing2
         .informations
             @include grid
             margin-bottom: $spacing2
