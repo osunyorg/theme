@@ -21,8 +21,31 @@
       {{ partial "blocks/list.html" . }}
 
     {{ else }}
-      {{ partial "pages/image.html" .Params.image }}
-      {{ partial "pages/children.html" .Params.children }}
+      <!-- FIXME -->
+      <section class="block block-pages block-pages--grid">
+        <div class="container">
+          <div class="block-content">
+            <div class="grid">
+              {{ range .Params.children }}
+                {{- $page := partial "GetPageByUrl" . -}}
+                {{ with $page }}
+                  <article>
+                    <h1>
+                      <a href="{{- .Permalink -}}">
+                        {{- partial "PrepareHTML" .Title -}}
+                      </a>
+                    </h1>
+                    {{ if .Params.description_short }}
+                      <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
+                    {{ end }}
+                    {{- partial "pages/page-media.html" . -}}
+                  </article>
+                {{- end -}}
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </section>
     {{ end }}
   </div>
 
