@@ -105,16 +105,10 @@
         @include offcanvas-toc
     @include media-breakpoint-down(md)
         @include offcanvas-toc
-    // Program tweak : use offcanvas
-    body.offcanvas-toc &
-        @include offcanvas-toc
 
     // Only desktop and in page with sidebar
     @include media-breakpoint-up(md)
         @include in-page-with-sidebar
-
-        // Program tweak : use offcanvas
-        body:not(.offcanvas-toc) &
             @include container-margin-left
             pointer-events: none
             top: 0
@@ -133,6 +127,22 @@
                 pointer-events: auto
             button
                 display: none
+
+    // Program tweak : use offcanvas
+    // TODO : find a better way to cancel sidebar props
+    body.offcanvas-toc &
+        @include offcanvas-toc
+        margin-left: 0
+        pointer-events: inherit
+        left: auto
+        .toc-content
+            position: relative
+            top: 0
+            max-height: none
+            padding-bottom: 0
+            margin-top: 0
+            margin-bottom: 0
+
 
 .toc-title, .toc-cta, .toc-container button
     font-family: $toc-font-family
