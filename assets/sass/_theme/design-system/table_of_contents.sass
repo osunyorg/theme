@@ -65,8 +65,10 @@
         justify-content: end
         text-align: right
         @include in-page-with-sidebar
-            body:not(.offcanvas-toc) &
-                display: none
+            display: none
+        body.offcanvas-toc &
+            display: flex
+
     @include media-breakpoint-down(md)
         border-top: 1px solid $color-border
         position: fixed
