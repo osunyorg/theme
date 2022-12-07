@@ -52,15 +52,19 @@
               "context" $context
               "link" $page_link
               ) }}
-
+            
             {{ if and $show_main_description (ne $layout "list")}}
-              <p class="description">{{ partial "PrepareHTML" $page.Params.description_short }}</p>
+              {{- with $page }}
+                <p class="description">{{ partial "PrepareHTML" .Params.description_short }}</p>
+              {{ end }}
             {{ end }}
           </div>
         {{ end -}}
 
         {{ if and $show_main_description (eq $layout "list")}}
-          <p class="description">{{ partial "PrepareHTML" $page.Params.description_short }}</p>
+          {{- with $page }}
+            <p class="description">{{ partial "PrepareHTML" .Params.description_short }}</p>
+          {{ end }}
         {{ end }}
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
