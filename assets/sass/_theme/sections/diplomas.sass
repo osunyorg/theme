@@ -100,18 +100,6 @@ ul.diplomas
         + .dropdown-menu
             display: block
 
-    
-    // TODO : style de l'icone
-    // button::after,
-    // button[aria-expanded="true"]::after
-    //     display: inline-block
-    //     font-family: Icon
-    //     font-size: .375rem
-    //     font-weight: 400
-    //     line-height: 1
-    //     margin-left: 0.3125rem
-    //     vertical-align: middle
-
 .essential
     flex-wrap: wrap
     font-size: $program-essential-font-size
@@ -133,3 +121,9 @@ ul.diplomas
         grid-column: 3/13
         @include media-breakpoint-down(md)
             padding-top: 0
+
+.diplomas__term
+    ol.programs
+        li
+            @include grid(2, md)
+            align-items: start

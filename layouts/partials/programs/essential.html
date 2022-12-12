@@ -2,7 +2,7 @@
 {{- with .Params.diplomas -}}
   {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
   {{- with $diploma -}}
-    <dl class="essential">
+    <dl class="essential meta">
       <dt>{{ i18n "programs.diploma" }}</dt>
       <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></dd>
       {{- if .Params.level -}}
