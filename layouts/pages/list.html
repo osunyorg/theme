@@ -19,35 +19,15 @@
       }}
       {{ partial "hooks/after-page-hero.html" . }}
       {{ partial "blocks/list.html" . }}
-
     {{ else }}
-      <!-- FIXME -->
-      {{/*  {{- partial "blocks/templates/pages/grid.html" (dict 
-          "pages" .Params.children
-          "show_images" true
-          "show_descriptions" true
-          ) }}  */}}
       <section class="block block-pages block-pages--grid">
         <div class="container">
           <div class="block-content">
-            <div class="grid">
-              {{ range .Params.children }}
-                {{- $page := partial "GetPageByUrl" . -}}
-                {{ with $page }}
-                  <article>
-                    <h1>
-                      <a href="{{- .Permalink -}}">
-                        {{- partial "PrepareHTML" .Title -}}
-                      </a>
-                    </h1>
-                    {{ if .Params.description_short }}
-                      <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
-                    {{ end }}
-                    {{- partial "pages/page-media.html" . -}}
-                  </article>
-                {{- end -}}
-              {{ end }}
-            </div>
+            {{- partial "blocks/templates/pages/grid.html" (dict 
+                "pages" .Params.children
+                "show_images" true
+                "show_descriptions" true
+                ) }}
           </div>
         </div>
       </section>
