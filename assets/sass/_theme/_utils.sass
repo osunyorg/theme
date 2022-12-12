@@ -51,6 +51,10 @@
         text-decoration-color: rgba($color, 1)
         text-decoration-thickness: 1px
 
+@mixin link-hovered-underline-only
+    &:not(:hover)
+        text-decoration: transparent
+
 @mixin hover-translate-icon($pseudo: after, $distance: 10)
     &::#{$pseudo}
         transition: transform 0.55s $arrow-ease-transition

@@ -33,13 +33,6 @@ div.persons
     @include grid(4, xl)
     @include grid(5, xxl)
 
-.persons__section
-    @include in-page-without-sidebar
-        .lead
-            padding-top: $spacing2
-            @include media-breakpoint-up(md)
-                width: col(7)
-
 ol.persons
     @include list-reset
     > li
@@ -51,7 +44,7 @@ ol.persons
             margin-bottom: 0
         a
             @include stretched-link
-
+            @include link-hovered-underline-only
         @include media-breakpoint-up(md)
             align-items: baseline
             display: flex
@@ -84,25 +77,31 @@ ol.persons
         object-fit: cover
 
 /* TODO revoir ce nom */
-.taxonomies
+.taxonomies-persons
     @include list-reset
-    margin-bottom: $spacing3
-    @include media-breakpoint-down(md)
-        flex-direction: column
-    @include media-breakpoint-up(md)
-        text-align: right
     li
         @include media-breakpoint-down(md)
-            &:not(last-child)
-                margin-bottom: $spacing1
+            margin-bottom: $spacing1
+            a
+                display: block
         @include media-breakpoint-up(md)
             display: inline-block
-            &:not(:last-child)
-                margin-right: $spacing1
+            margin-right: $spacing2
     a
-        @extend .link-more
+        @include link
+        @include link-hovered-underline-only
+        @include meta
+        @include icon(arrow, after)
+            margin-left: $spacing1
 
-/* HERO *///R
+
+.lead + .taxonomies-persons
+    margin-top: $spacing-section-y
+
+.persons__section
+    * + .persons
+        margin-top: $spacing-section-y
+
 .persons__page
     .hero
         @include media-breakpoint-down(md)
