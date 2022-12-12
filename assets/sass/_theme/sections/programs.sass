@@ -7,28 +7,7 @@ section.programs
     @include grid(3, xl)
 
 ol.programs
-    @include list-reset
-    > li
-        border-bottom: 1px solid $color-border
-        padding-bottom: $spacing1
-        padding-top: $spacing1
-        > .title
-            @include h2
-        a
-            text-decoration: none
-
-        @include media-breakpoint-down(md)
-            a, p
-                display: block
-        @include media-breakpoint-up(md)
-            align-items: baseline
-            display: flex
-            justify-content: space-between
-            a:first-child, p:first-child
-            > .title
-                & + a
-                    margin-left: $spacing1
-                    text-align: right
+    @include list-section
 
 .programs__section
     .hero-program

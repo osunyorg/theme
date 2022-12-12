@@ -195,6 +195,50 @@
         color: $color-text-alt
         display: block
 
+@mixin list-section
+    @include list-reset
+    > li
+        border-bottom: 1px solid $color-border
+        padding-bottom: $spacing1
+        padding-top: $spacing1
+        position: relative
+        > .title
+            @include h2
+            transition: color 0.55s
+            @include media-breakpoint-down(md)
+                @include icon("arrow-right", "after", px2rem(16), true)
+                    bottom: $spacing0
+                    position: absolute
+                    right: 0
+            @include media-breakpoint-up(md)
+                @include arrow-right-hover
+                display: block
+                &::after
+                    font-size: $font-size-base
+                    transform: translateX(0)
+                    position: relative
+                &:hover
+                    color: $color-accent
+                    &::after
+                        transform: translateX($spacing0)
+        a
+            text-decoration: none
+
+        @include media-breakpoint-down(md)
+            a, p
+                display: block
+        @include media-breakpoint-up(md)
+            align-items: baseline
+            display: flex
+            justify-content: space-between
+            a:first-child, p:first-child
+            > .title
+                & + a,
+                & + p
+                    margin-left: $spacing1
+                    text-align: right
+                    white-space: nowrap
+
 @mixin visually-hidden
     clip: rect(0,0,0,0) !important
     border: 0 !important
