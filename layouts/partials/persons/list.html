@@ -1,13 +1,7 @@
 <ol class="persons">
   {{ $persons := .Pages.ByParam "last_name" }}
   {{ range (.Paginate $persons).Pages }}
-    <li itemscope itemtype="https://schema.org/Person">
-      <p itemprop="name"><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></p>
-      {{- if partial "GetTextFromHTML" .Params.description_short }}
-        <p itemprop="jobTitle">{{- partial "PrepareHTML" .Params.description_short -}}</p>
-      {{ end -}}
-    </li>
-    {{/*  {{ partial "persons/list-item" . }}  */}}
+    {{ partial "persons/list-item" . }}
   {{ end }}
 </ol>
 {{ partial "commons/pagination.html" . }}
