@@ -19,7 +19,7 @@ ul.diplomas
 .diplomas-select
     text-align: right
     position: relative
-    @include h3
+    @include meta
     button
         @include button-reset
         @include icon(caret, after)
@@ -27,31 +27,36 @@ ul.diplomas
             margin-left: 5px
 
     .dropdown-menu
-        @include inset(100%, 0, auto, auto)
-        background-color: black
+        @include inset(calc(100% + #{$spacing0}), 0, auto, auto)
+        background-color: $color-background-alt
         display: none
         position: absolute
         @include media-breakpoint-down(md)
-            // padding-left: $container-gutter-width
-            // padding-right: $container-gutter-width
+            right: half(-$grid-gutter-sm)
+            left: half(-$grid-gutter-sm)
         &,
         a
-            color: white
+            color: black
         a
+            
             display: block
-            padding: $spacing0
+            font-size: $body-size
+            padding: $spacing1
+            text-decoration: none
             white-space: normal
+            @include media-breakpoint-down(md)
+                padding: $spacing0 $spacing1
             &:not(:first-child)
                 border-top: 1px solid $color-border
-            @include media-breakpoint-up(md)
-                font-size: px2rem(22)
             &:hover
-                background-color: lighten(black, 3)
+                background-color: $color-accent
+                color: white
             &:focus
                 color: black
 
     button[aria-expanded="true"] 
         @include icon('caret-top', 'after')
+            font-size: px2rem(6)
         + .dropdown-menu
             display: block
 
