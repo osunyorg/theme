@@ -40,19 +40,34 @@ ol.persons
         padding-bottom: $spacing1
         padding-top: $spacing1
         position: relative
-        p
-            margin-bottom: 0
+        transition: color 0.5s
+        @include icon(arrow, after)
+            margin-left: auto
+        &:hover
+            color: $color-accent
+            justify-self: end
         a
             @include stretched-link
-            @include link-hovered-underline-only
+            text-decoration: none
+            color: inherit
+        [itemprop="jobTitle"]
+            @include small
+            margin-top: 0
         @include media-breakpoint-up(md)
             align-items: baseline
             display: flex
-            > p
+            [itemprop="name"]
                 width: col(5)
-                & + p
-                    width: col(7)
-
+            [itemprop="jobTitle"]
+                width: col(7)
+                margin-left: $grid-gutter
+        @include media-breakpoint-down(md)
+            &::after
+                position: absolute
+                right: 0
+                top: calc(#{$spacing1} + 10px)
+            
+                
 .avatar
     @include aspect-ratio(50, 'img')
     background-color: $persons-avatar-background-color

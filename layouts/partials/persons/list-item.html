@@ -1,0 +1,6 @@
+<li itemscope itemtype="https://schema.org/Person">
+  <p itemprop="name"><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></p>
+  {{- if partial "GetTextFromHTML" .Params.description_short }}
+    <p itemprop="jobTitle">{{- partial "PrepareHTML" .Params.description_short -}}</p>
+  {{ end -}}
+</li>
