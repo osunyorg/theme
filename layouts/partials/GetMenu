@@ -1,0 +1,4 @@
+{{ $kind := . }}
+{{ $menus := index site.Data.menus (printf "%s" site.Language) }}
+{{ $menu := index $menus $kind }}
+{{ return $menu }}
