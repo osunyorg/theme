@@ -1,13 +1,18 @@
 <ol class="persons">
   {{ range (.Paginate (.Pages.ByParam "last_name")).Pages }}
-    {{ $person := site.GetPage (printf "/persons/%s" .Slug) }}
-    {{ with $person }}
-      <li>
-        <p class="name"><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></p>
-        {{- if partial "GetTextFromHTML" .Params.description_short }}
-          <p>{{- partial "PrepareHTML" .Params.description_short -}}</p>
-        {{ end -}}
-      </li>
+    {{ if .Slug }}
+      {{ $slug := printf "/persons/%s" .Slug }}
+      {{ $person := site.GetPage $slug }}
+      {{ if $person }}
+        {{ with $person }}
+          <li>
+            <p class="name"><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></p>
+            {{- if partial "GetTextFromHTML" .Params.description_short }}
+              <p>{{- partial "PrepareHTML" .Params.description_short -}}</p>
+            {{ end -}}
+          </li>
+        {{ end }}
+      {{ end }}
     {{ end }}
   {{ end }}
 </ol>
