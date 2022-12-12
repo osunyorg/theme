@@ -13,15 +13,23 @@
           </span>
         {{ end }}
       </a>
-      {{- if $show_programs }}
-        <ol class="programs">
-          {{- range .Pages -}}
-            <li>
-              {{ partial "programs/program.html" . }}
-            </li>
-          {{- end -}}
-        </ol>
-      {{ end -}}
+      <div class="content">
+        <div class="description">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Esse labore aliquid nobis quasi, molestiae voluptatum ullam et consequatur voluptas. Eligendi quaerat veniam, sequi repellat illo dignissimos quasi libero itaque dolorum?
+          {{- partial "PrepareHTML" .Params.description_short -}}
+        </div>
+        {{- if $show_programs }}
+          <ol class="programs">
+            {{- range .Pages -}}
+              <li>
+                <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .Title)) }}">
+                  {{- partial "PrepareHTML" .Title -}}
+                </a>
+              </li>
+            {{- end -}}
+          </ol>
+        {{ end -}}
+      </div>
     </li>
   {{ end }}
 </ul>
