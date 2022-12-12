@@ -1,20 +1,21 @@
 .persons__page
     ol.programs
         li
+            @include grid(2)
+            align-items: center
+            justify-content: flex-start
             @include icon("arrow-right", "after", px2rem(16), true)
                 color: inherit
+                position: absolute
+                right: 0
                 @include media-breakpoint-down(md)
-                    position: absolute
-                    right: 0
                     top: $spacing1
-            justify-content: flex-start
             a
                 color: inherit
                 @include stretched-link(before)
                 @include media-breakpoint-down(md)
                     margin-right: $spacing1
             p
-                flex: 1
                 &:nth-child(2)
                     @include small
             &:hover
