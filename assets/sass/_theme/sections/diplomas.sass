@@ -1,12 +1,52 @@
 ul.diplomas
     @include list-reset
     > li
-        margin-bottom: $spacing3
+        margin-bottom: $spacing0
+        @include media-breakpoint-up(md)
+            margin-bottom: $spacing3
         > a
-            @include h3
+            @include h2
+            display: block
+            text-decoration: none
+            padding-bottom: $spacing1
+            padding-top: $spacing1
+            border-bottom: 1px solid $color-border
+            @include icon("arrow-right", after,  $small-size)
+                align-self: center
+                margin-left: auto
+            &:hover
+                color: $color-accent
+            @include media-breakpoint-down(md)
+                position: relative
+                padding-right: $spacing1
+                &::after
+                    position: absolute
+                    bottom: $spacing1
+                    right: 0
+            @include media-breakpoint-up(md)
+                display: flex
+                align-items: baseline
+                span
+                    margin-left: $spacing1
+                
+        .content
+            @include grid(2, md)
+            padding-bottom: $spacing1
+            padding-top: $spacing1
+
         .programs
+            @include media-breakpoint-down(md)
+                margin-top: $spacing1
             li
+                @include h3
                 display: block
+                border-bottom: 0
+                padding: 0
+                + li
+                    margin-top: $spacing1
+                a:hover
+                    color: $color-accent
+                        
         .program
             div
                 @include media-breakpoint-up(md)
