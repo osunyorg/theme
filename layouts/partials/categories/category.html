@@ -1,15 +1,1 @@
 <a href="{{ .Permalink }}" class="title" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">{{ partial "PrepareHTML" .Title }}</a>
-<div class="media">
-  {{- if .Params.image -}}
-    {{- partial "commons/image.html"
-          (dict
-            "image"    .Params.image
-            "alt"      .Title
-            "mobile"   "351x291"
-            "tablet"   "334x167"
-            "desktop"  "634x317"
-          ) -}}
-  {{- else -}}
-    {{- partial "commons/image-default.html" (dict "class" "img-fluid") -}}
-  {{- end -}}
-</div>

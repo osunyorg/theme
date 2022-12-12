@@ -51,6 +51,22 @@
             @include grid(2, md)
             @include grid(3, xl)
 
+.categories__term
+    @if $posts-layout-list
+        @include media-breakpoint-down(md)
+            .posts 
+                grid-gap: $spacing3
+                article 
+                    border: none
+                    padding-bottom: 0
+                    margin-bottom: 0
+                    flex-direction: column
+                    div:not(.media)
+                        margin-left: unset
+                        margin-top: $spacing0
+                    .media
+                        width: 100%
+
 .posts__page
     @include media-breakpoint-down(md)
         .document-content
