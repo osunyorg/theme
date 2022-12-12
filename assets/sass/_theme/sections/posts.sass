@@ -10,41 +10,40 @@
         .posts 
             @include grid(1)
             grid-gap: 0
-            > div 
+            article
                 border-bottom: 1px solid $color-border
                 margin-bottom: $spacing3
                 padding-bottom: $spacing3
-                .post
-                    display: flex
-                    flex-direction: row
+                display: flex
+                flex-direction: row
+                @include media-breakpoint-up(md)
+                    @include grid
+                div:not(.media)
+                    grid-column: 4/13
+                    @include media-breakpoint-down(md)
+                        flex: 1
+                        margin-left: $spacing0
+                    p:not(.title)
+                        @include media-breakpoint-down(md)
+                            display: none
+                .media
+                    background: none
+                    margin: 0
+                    @include media-breakpoint-down(md)
+                        width: 33.33333%
                     @include media-breakpoint-up(md)
-                        @include grid
+                        grid-column: 1/4
+                @include media-breakpoint-up(md)
+                    time 
+                        font-size: $h5-size
+                        position: absolute
+                        right: 0
+                        top: 0
                     div:not(.media)
-                        grid-column: 4/13
-                        @include media-breakpoint-down(md)
-                            flex: 1
-                            margin-left: $spacing0
-                        p:not(.title)
-                            @include media-breakpoint-down(md)
-                                display: none
-                    .media
-                        background: none
-                        margin: 0
-                        @include media-breakpoint-down(md)
-                            width: 33.33333%
-                        @include media-breakpoint-up(md)
-                            grid-column: 1/4
-                    @include media-breakpoint-up(md)
-                        time 
-                            font-size: $h5-size
-                            position: absolute
-                            right: 0
-                            top: 0
-                        div:not(.media)
-                            h1,
-                            p,
-                            a
-                                max-width: col(6, 9)
+                        h1,
+                        p,
+                        a
+                            max-width: col(6, 9)
 
     @else 
         .posts
