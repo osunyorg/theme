@@ -8,7 +8,9 @@
       <a href="{{ .Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">
         {{- partial "PrepareHTML" .Title -}}
         {{ with .Params.short_name }}
-          ({{ partial "PrepareHTML" . }})
+          <span class="meta">
+            {{ partial "PrepareHTML" . }}
+          </span>
         {{ end }}
       </a>
       {{- if $show_programs }}

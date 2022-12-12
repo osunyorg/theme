@@ -3,10 +3,19 @@
 
 <div class="grid">
   {{ range .pages }}
-    {{- $page := partial "GetPageByUrl" .page -}}
-    {{- if .slug -}}
-      {{- $page = partial "GetPageByUrl" .slug -}}
-    {{- end -}}
+    {{- $page := false -}}
+
+    {{/*  Check if . is a map or page url  */}}
+    {{ if reflect.IsMap . }}
+      {{- if .page -}}
+        {{- $page = partial "GetPageByUrl" .page -}}
+      {{- else if .slug -}}
+        {{- $page = partial "GetPageByUrl" .slug -}}
+      {{ end }}
+    {{ else }}
+      {{- $page =  partial "GetPageByUrl" . -}}
+    {{ end }}
+
     {{ with $page }}
       <article>
         <h1>
