@@ -1,5 +1,3 @@
-// TODO : ranger
-
 @function px2rem($size)
     $remSize: $size / 16
     @return #{$remSize}rem
@@ -330,7 +328,7 @@
 		@return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
 	@return $string
     
-@mixin font-face($name, $path, $weight: null, $style: null, $exts: (eot woff2 woff ttf svg))
+@mixin font-face($name, $path, $weight: 400, $style: "normal", $exts: (eot woff2 woff ttf svg))
   $src: null
 
   $extmods: (eot:"?", svg:"#" + str-replace($name," ","_"))
