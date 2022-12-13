@@ -76,7 +76,7 @@
             aside
                 order: 2
                 padding: 0 half($grid-gutter-sm)
-            .blocks-pagination
+            .block-pagination
                 order: 3
     @include media-breakpoint-up(md)
         aside
@@ -92,7 +92,6 @@
 
 .post-categories
     @include list-reset
-    @include small
     margin: 0
     li
         display: inline-block
@@ -104,23 +103,24 @@
 
 .post-infos
     margin-bottom: 0
-    &, li
-        @include small
+    @include meta
     ul
         @include list-reset
     caption
         @include visually-hidden
         position: relative !important // Fix safari iOS border issue
     th
-        @include h4
+        @include meta
+        color: $color-text-alt
         padding-left: 0
         white-space: nowrap
         vertical-align: top
     tr
-        @include meta
         border-color: $color-border
+        @include meta
         a
             color: $color-accent
+            @include meta
             &:not(:hover)
                 text-decoration-color: transparent
     th, td
