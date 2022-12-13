@@ -40,20 +40,20 @@
             </div>
           {{ end }}
         </div>
-        <div>
-          {{ range $programsForAdministrator }}
-            {{ $program := . }}
+        {{ range $programsForAdministrator }}
+        {{ $program := . }}
+          <div class="roles">
             {{ range .Params.roles }}
               {{ $role := .title }}
               {{ if in .persons $slug }}
                 <p>
                   {{ safeHTML $role }}<br>
-                  <a href="{{ $program.Permalink }}" class="link link-more">{{ safeHTML $program.Title }}</a>
+                  <a href="{{ $program.Permalink }}" class="link">{{ safeHTML $program.Title }}</a>
                 </p>
               {{ end }}
             {{ end }}
-          {{ end }}
-        </div>
+          </div>
+        {{ end }}
       </div>
     </div>
 
