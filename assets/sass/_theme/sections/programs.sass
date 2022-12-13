@@ -136,14 +136,35 @@ ol.programs
         @include list-reset
         > li
             border-bottom: 1px solid $color-border
+            justify-content: flex-start
             position: relative
             padding-bottom: $spacing0
             padding-top: $spacing0
-            @include grid(2)
+            @include media-breakpoint-up(md)
+                @include grid(2)
+                align-items: center
+            @include icon("arrow-right", "after", px2rem(12), true)
+                color: inherit
+                position: absolute
+                right: 0
+                @include media-breakpoint-down(md)
+                    top: $spacing1
+            a
+                color: inherit
+                text-decoration: none
+                @include stretched-link(before)
+                @include media-breakpoint-down(md)
+                    margin-right: $spacing1
+            p
+                align-self: center
+                margin-top: unset
+                @include small
+            &:hover
+                color: $color-accent
             &:first-child
                 border-top: 1px solid $color-border
             a
-                text-decoration: none
             p
                 @include small
-                align-self: center
+                
+        
