@@ -8,12 +8,14 @@
                 text-decoration: none
             + p
                 margin-top: half($spacing0)
+
     @include media-breakpoint-up(md)
         @include in-page-with-sidebar
             .persons
                 @include grid(2, md)
             article
                 flex-direction: row
+                align-items: start
                 .avatar
                     margin-right: $spacing1
                     width: calc(#{col(1, 4)} + #{$grid-gutter})
@@ -21,7 +23,8 @@
                     margin-top: $spacing1
         @include in-page-without-sidebar
             .persons
-                @include grid(6, md)
+                @include grid(4, lg)
+                @include grid(6, xl)
             article
                 text-align: center
                 .avatar

@@ -36,6 +36,9 @@
         // & ~ p
             // @include small
 
+    .description
+        @include small
+
     @include media-breakpoint-down(md)
         display: block
         &::after
@@ -93,25 +96,22 @@ ol.persons
                 top: calc(#{$spacing1} + 10px)
 
 .avatar
-    @include aspect-ratio(50, 'img')
+    // @include aspect-ratio(50, 'img')
     background-color: $persons-avatar-background-color
     border-radius: 50%
-    margin-bottom: $spacing2
+    // margin-bottom: $spacing2
     overflow: hidden
     position: relative
-    width: 100%
+    // width: 100%
     &::before
         content: ""
         display: block
         padding-top: 100%
-
-    picture,
-    img
+    picture, img
         @include inset(0)
         height: 100%
         width: 100%
         position: absolute
-
     img
         object-fit: cover
 

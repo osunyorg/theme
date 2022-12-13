@@ -1,5 +1,5 @@
 <article class="person">
-  <div>
+  <div class="description">
     {{- $title := partial "PrepareHTML" .Title }}
     <p class="name"><a href="{{ .Permalink }}">{{- $title -}}</a></p>
     {{- if partial "GetTextFromHTML" .Params.description_short }}
@@ -14,9 +14,9 @@
             (dict
               "alt"    .Title
               "image"    .Params.image
-              "mobile"   "76x76"
-              "tablet"   "76x76"
-              "desktop"  "76x76"
+              "mobile"   "80x80"
+              "tablet"   "100x100"
+              "desktop"  "255x255"
             )}}
     {{ end -}}
   </div>
