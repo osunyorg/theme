@@ -36,10 +36,11 @@ ol.programs
                 font-size: $program-share-font-size-md
         .dropdown-menu
             background: $hero-color
+            border-radius: px2rem(4)
             padding: 0
             position: absolute
             width: 100%
-            bottom: 100%
+            bottom: 0%
             .share
                 display: flex
                 li
@@ -48,8 +49,9 @@ ol.programs
                     text-align: center
             a
                 display: block
-                color: invert($hero-color)
+                color: $hero-background-color
     .buttons
+        @include meta
         margin-top: $spacing1
         @include media-breakpoint-up(md)
             bottom: 2.25rem
@@ -61,6 +63,7 @@ ol.programs
             align-items: center
             justify-content: space-between
             width: 100%
+            border-radius: px2rem(4)
         a[download]
             @include button-icon(download)
             color: $hero-background-color
