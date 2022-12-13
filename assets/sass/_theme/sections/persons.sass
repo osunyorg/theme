@@ -4,13 +4,14 @@
             justify-content: flex-start
             @include media-breakpoint-up(md)
                 @include grid(2)
-                align-items: center
             @include icon("arrow-right", "after", px2rem(16), true)
                 color: inherit
                 position: absolute
                 right: 0
-                @include media-breakpoint-down(md)
-                    top: $spacing1
+                top: $spacing1
+                transform: translateY(half($spacing0))
+                @include media-breakpoint-up(md)
+                    transform: translateY(half($spacing1))
             a
                 color: inherit
                 @include stretched-link(before)

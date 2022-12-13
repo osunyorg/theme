@@ -143,13 +143,14 @@ ol.programs
             padding-top: $spacing0
             @include media-breakpoint-up(md)
                 @include grid(2)
-                align-items: center
             @include icon("arrow-right", "after", px2rem(12), true)
                 color: inherit
                 position: absolute
                 right: 0
-                @include media-breakpoint-down(md)
-                    top: $spacing1
+                top: $spacing0
+                transform: translateY(calc(#{half($spacing0)} + 25%))
+                @include media-breakpoint-up(md)
+                    transform: translateY(100%)
             a
                 color: inherit
                 text-decoration: none
@@ -160,6 +161,8 @@ ol.programs
                 align-self: center
                 margin-top: unset
                 @include small
+                @include media-breakpoint-up(md)
+                    margin-right: $spacing1
             &:hover
                 color: $color-accent
             &:first-child
