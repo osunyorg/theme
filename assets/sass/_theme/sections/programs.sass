@@ -76,7 +76,8 @@ ol.programs
 
     .document-content
         .content
-            padding-top: $spacing2
+            &:not(:first-of-type)
+                padding-top: $spacing2
             > div > * + *
                 margin-top: 1em
             .blocks
@@ -90,8 +91,9 @@ ol.programs
         .document-content
             .content
                 @include grid(12, md)
-                border-top: 1px solid $color-border
                 position: relative
+                &:not(:first-of-type)
+                    padding-top: $spacing5
                 > *
                     grid-column: 5/13
                 > h2
@@ -113,18 +115,37 @@ ol.programs
         margin-block-start: 2em
         &.post-infos
             tr
+                &:first-child 
+                    border-top: 1px solid $color-border
+                    th,
+                    td
+                        padding: 1rem 0
+                &:last-child
+                    border-bottom: 1px solid $color-border
                 font-size: unset
                 line-height: 160%
                 font-family: unset
             th
                 @include meta
                 vertical-align: middle
-        &.table-persons
-            td
-                @include small
         caption 
             @include visually-hidden
         th
             font-weight: normal
             a
                 text-decoration: none
+    .list-persons
+        @include list-reset
+        > li
+            border-bottom: 1px solid $color-border
+            position: relative
+            padding-bottom: $spacing0
+            padding-top: $spacing0
+            @include grid(2)
+            &:first-child
+                border-top: 1px solid $color-border
+            a
+                text-decoration: none
+            p
+                @include small
+                align-self: center

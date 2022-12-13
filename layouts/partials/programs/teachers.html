@@ -1,22 +1,17 @@
-<table class="table-persons">
-  <caption>{{ .title }}</caption>
-  <tbody>
-    {{- $descriptions := .descriptions -}}
+<ul class="list-persons">
+  {{- $descriptions := .descriptions -}}
     {{- range .teachers -}}
       {{- $slug := . -}}
       {{- $person := site.GetPage (printf "/persons/%s" $slug) -}}
       {{- with $person -}}
-        <tr>
-          <th scope="row">
-            <a href="{{ .Permalink }}">
-              {{- partial "PrepareHTML" .Title -}}
-            </a>
-          </th>
-          <td>
-            {{- partial "PrepareHTML" (index $descriptions $slug) -}}
-          </td>
-        </tr>
-      {{- end -}}
+      <li>
+        <a href="{{ .Permalink }}">
+          {{- partial "PrepareHTML" .Title -}}
+        </a>
+        <p>
+          {{- partial "PrepareHTML" (index $descriptions $slug) -}}
+        </p>
+      </li>
     {{- end -}}
-  </tbody>
-</table>
+  {{- end -}}
+</ul>
