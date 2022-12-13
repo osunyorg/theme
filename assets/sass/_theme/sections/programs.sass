@@ -95,6 +95,7 @@ ol.programs
                 > *
                     grid-column: 5/13
                 > h2
+                    @include h5
                     $sticky-top-offset: 90px
                     @include sticky($sticky-top-offset)
                     top: $sticky-top-offset
@@ -102,11 +103,28 @@ ol.programs
                     align-self: start
                     grid-column: 1/5
                     margin-bottom: 0
+                h3:not(:first-of-type)
+                    margin-top: $spacing4
             section:first-of-type
                 .content
                     border-top: none
 
     table
         margin-block-start: 2em
+        &.post-infos
+            tr
+                font-size: unset
+                line-height: 160%
+                font-family: unset
+            th
+                @include meta
+                vertical-align: middle
+        &.table-persons
+            td
+                @include small
         caption 
             @include visually-hidden
+        th
+            font-weight: normal
+            a
+                text-decoration: none
