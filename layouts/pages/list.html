@@ -2,6 +2,8 @@
   {{ partial "pages/hero.html" . }}
 
   <div class="document-content">
+
+    {{/*  TOC PART  */}}
     {{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}
     {{- if .Params.blocks }}
       {{ $need_aside := false }}
@@ -17,7 +19,19 @@
               "context" .
           )
       }}
-      {{ partial "hooks/after-page-hero.html" . }}
+    {{ end }}
+
+    {{ partial "hooks/after-page-hero.html" . }}
+
+    <section class="block block-chapo">
+      <div class="container">
+        <div class="block-content">
+          {{- partial "pages/chapo.html" .Params.description_short -}}
+        </div>
+      </div>
+    </section>
+
+    {{ if .Params.blocks }}
       {{ partial "blocks/list.html" . }}
     {{ else }}
       <section class="block block-pages block-pages--grid">
