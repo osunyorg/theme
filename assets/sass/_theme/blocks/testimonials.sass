@@ -33,9 +33,11 @@
     .avatar
         flex-shrink: 0
         width: calc(#{col(1, 8)} + #{$grid-gutter} / 2)
-        margin-right: calc(#{$grid-gutter} / 2)
+        min-width: px2rem(80)
+        margin-right: $spacing0
         margin-bottom: 0
-        // @include media-breakpoint-up(xxl)
+        @include media-breakpoint-up(md)
+            margin-right: calc(#{$grid-gutter} / 2)
         //     width: calc(#{col(1, 7)} + #{$grid-gutter} / 2)
 
     .splide
@@ -99,6 +101,8 @@
             figure
                 padding-left: offset(2)
                 padding-right: offset(1)
+                // TODO: explain this, add min height equal with 2 cols width to avoid overflow on square picture
+                min-height: calc(#{col-outside-container(2)} + #{half($grid-gutter)})
                 &.with-picture
                     position: relative
                     figcaption

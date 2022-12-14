@@ -135,7 +135,9 @@ class MainMenu {
     onScroll () {
         const offset = this.element.offsetHeight,
             y = window.scrollY,
-            isNearTop = y < offset;
+            isNearTop = y < offset,
+            threshold = 50;
+        let hasChanged = false;
 
         if (isNearTop) {
             this.element.classList.remove(CLASSES.sticky);
@@ -143,13 +145,17 @@ class MainMenu {
             this.element.classList.add(CLASSES.sticky);
         }
 
-        if (y > this.state.previousScrollY && !isNearTop) {
+        if (y > this.state.previousScrollY + threshold && !isNearTop) {
             document.documentElement.classList.add(CLASSES.scrollingDown);
-        } else {
+            hasChanged = true;
+        } else if (y < this.state.previousScrollY - threshold){
             document.documentElement.classList.remove(CLASSES.scrollingDown);
+            hasChanged = true;
         }
 
-        this.state.previousScrollY = y;
+        if (hasChanged) {
+            this.state.previousScrollY = y;
+        }
     }
 }
 

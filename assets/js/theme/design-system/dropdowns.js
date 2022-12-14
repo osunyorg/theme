@@ -14,6 +14,12 @@ class Dropdown {
         this.dropdownButton.addEventListener('click', () => {
             this.toggleDropdown();
         });
+
+        window.addEventListener('keydown', (event) => {
+            if (event.keyCode === 27 || event.key === 'Escape') {
+                this.toggleDropdown(false);
+            }
+        });
     }
 
     toggleDropdown (open = !this.state.isOpened) {
