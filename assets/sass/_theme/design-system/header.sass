@@ -8,6 +8,18 @@ header[role="banner"]
     z-index: $zindex-header
     @include media-breakpoint-down(md)
         width: 100%
+    html.has-menu-opened &
+        &::after
+            background-color: $color-border
+            bottom: 0
+            content: ""
+            height: 1px
+            left: 0
+            position: absolute
+            -o-transition: background-color .4s
+            -moz-transition: background-color .4s
+            transition: background-color .4s
+            width: 100%
     .dropdown-menu
         transition: background $header-sticky-transition
     &.is-sticky, html.has-menu-opened &
@@ -20,7 +32,7 @@ header[role="banner"]
             a:hover,
             a:focus,
             a:active
-                // @include link($header-sticky-color)
+                @include link($header-sticky-color)
             span
                 color: $header-sticky-color
     html.is-scrolling-down:not(.has-menu-opened) &
