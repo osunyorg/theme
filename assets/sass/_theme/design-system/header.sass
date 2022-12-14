@@ -37,6 +37,9 @@ header[role="banner"]
                 text-decoration-color: transparent
             span
                 color: $header-sticky-color
+        @if $header-sticky-invert-logo
+            .logo img
+                filter: invert(1)
     html.is-scrolling-down:not(.has-menu-opened) &
         @include media-breakpoint-down(md)
             transform: translateY(-100%)
@@ -48,5 +51,7 @@ header[role="banner"]
             display: block
             height: $header-logo-height
             width: auto
+            @if $header-sticky-invert-logo
+                transition: filter $header-sticky-transition
             @include media-breakpoint-up(md)
                 height: $header-logo-height-md
