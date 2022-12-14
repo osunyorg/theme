@@ -1,4 +1,5 @@
 @mixin offcanvas-toc
+    --toc-transition-duration: 0.35s
     background: $toc-background-color
     position: fixed
     top: 0
@@ -8,11 +9,13 @@
     z-index: $zindex-toc
     width: calc(#{col-outside-container(4)} + #{$grid-gutter} * 2)
     transform: translateX(100%)
-    transition: 0.35s transform ease-in-out
+    transition: var(--toc-transition-duration) transform ease-in-out
     @include media-breakpoint-down(md)
         width: calc(100% - #{$grid-gutter})
     &.is-opened
         transform: translateX(0)
+    &[aria-expanded="false"]
+        display: none
     .toc-content
         display: flex
         flex-direction: column

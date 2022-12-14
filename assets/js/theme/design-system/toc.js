@@ -21,6 +21,10 @@ class TableOfContents {
       currentId: null
     }
     this.listen();
+
+    if (this.isOffcanvas) {
+      this.element.setAttribute("aria-expanded", false);
+    }
   }
   isOffcanvas() {
     return isMobile() || document.body.classList.contains(CLASSES.fullWidth);
@@ -54,10 +58,24 @@ class TableOfContents {
   }
   toggle(open) {
     this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
-
     const classAction = this.state.opened ? 'add' : 'remove';
-    this.element.classList[classAction](CLASSES.isOpened);
+    const transitionDuration = this.state.opened ? 0 : this.getTransitionDuration();
+
+    // TODO: refacto timeout and css transition
+    setTimeout(() => {
+      this.element.setAttribute("aria-expanded", this.state.opened);
+    }, transitionDuration * 1000);
+
+    setTimeout(() => {
+      this.element.classList[classAction](CLASSES.isOpened);
+    }, 10)
+    
     document.documentElement.classList[classAction](CLASSES.offcanvasOpened);
+  }
+  getTransitionDuration() {
+    let transitionDuration = getComputedStyle(this.element).getPropertyValue('--toc-transition-duration');
+    transitionDuration = parseFloat(transitionDuration.replace('s', ''))
+    return transitionDuration;
   }
   update() {
     const scroll = document.documentElement.scrollTop || document.body.scrollTop;
