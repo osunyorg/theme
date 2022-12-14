@@ -58,22 +58,30 @@
             .call_to_action
                 display: flex
                 flex-direction: column
-                margin-left: -$grid-gutter
-                margin-right: -$grid-gutter
                 > *
                     order: 2
                 > div
                     background-color: $block-call-to-action-background
-                    padding: $grid-gutter
+                    padding: col(1, 8)
                     width: 100%
+                    position: relative
+                    &::after
+                        background-color: $block-call-to-action-background
+                        content: ''
+                        display: block
+                        position: absolute
+                        top: 0
+                        bottom: 0
+                        left: 100%
+                        width: Max(#{$grid-gutter}, calc(50vw - #{half($grid-max-width)} + #{$grid-gutter}))
                 &--with-image
                     picture
                         order: 1
-                        padding-left: $grid-gutter
-                        padding-right: $grid-gutter
+                        padding-left: col(1, 8)
+                        padding-right: col(1, 8)
                         position: relative
                         img
-                            width: col(3, 7)
+                            width: col(3, 6)
                             margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
                     > div
                         padding-top: calc(#{$grid-gutter} + #{$spacing3})
