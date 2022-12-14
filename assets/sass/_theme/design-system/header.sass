@@ -32,7 +32,9 @@ header[role="banner"]
             a:hover,
             a:focus,
             a:active
-                @include link($header-sticky-color)
+                color: inherit
+            a:not(:hover)
+                text-decoration-color: transparent
             span
                 color: $header-sticky-color
     html.is-scrolling-down:not(.has-menu-opened) &
