@@ -4,7 +4,7 @@
   {{- $bodyclass = printf "page-%s" $bodyclass -}}
 {{- end -}}
 
-{{- if or .Params.full_width (and (eq .Kind "section") (eq .Type "posts")) -}}
+{{- if or .Params.full_width (and (eq .Kind "section") (eq .Type "posts")) (and (or (eq .Type "programs") (eq .Type "diplomas") ) (not .Params.diplomas)) -}}
   {{- $bodyclass = printf "full-width %s" $bodyclass -}}
 {{- end -}}
 
