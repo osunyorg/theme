@@ -1,6 +1,7 @@
 {{- $context := .context -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
+{{- $figures := .figures}}
 {{- with .block.data -}}
   <section class="block block-key_figures{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
@@ -18,9 +19,14 @@
             {{ end -}}
           </div>
         {{ end -}}
-        <ul>
+
+        {{ if (modBool $figures 2)}}
+          <ul class="even-items">
+          {{ else }}
+            <ul class="odd-items">
+        {{ end }}
           {{- range .figures }}
-            <li>
+              <li>
                 <dl>
                     <dt><strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}</dt>
                     <dd>{{ partial "PrepareHTML" .description }}</dd>
