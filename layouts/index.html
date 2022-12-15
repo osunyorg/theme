@@ -9,9 +9,10 @@
         )
     }}
 
-    <div class="container">
-      {{ partial "persons/chapo.html" .Params.description_short }}
-    </div>
+    {{ partial "home/chapo.html" (dict
+        "with_container" true
+        "context" .
+      ) }}
 
     {{- if .Params.blocks }}
   

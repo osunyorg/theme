@@ -3,9 +3,10 @@
   <div class="document-content">
     {{ partial "commons/list-content.html" . }}
   
-    <div class="container">
-      {{ partial "posts/chapo.html" .Params.description_short }}
-    </div>
+    {{ partial "posts/chapo.html" (dict
+        "with_container" true
+        "context" .
+      ) }}
   
     {{ partial "blocks/list.html" . }}
   

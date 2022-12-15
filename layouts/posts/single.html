@@ -9,13 +9,12 @@
     {{ if .Summary }}<meta itemprop="description" content="{{ partial "PrepareHTML" .Summary }}">{{ end }}
 
     {{ partial "posts/aside.html" . }}
-    <div class="block block-chapo">
-      <div class="container">
-        <div class="block-content">
-          {{ partial "posts/chapo.html" .Params.description_short }}
-        </div>
-      </div>
-    </div>
+
+    {{ partial "posts/chapo.html" (dict
+        "context" .
+        "block_wrapped" true
+      ) }}
+
     {{ partial "blocks/list.html" . }}
     <div class="block block-pagination">
       <div class="container">

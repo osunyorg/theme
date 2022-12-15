@@ -2,10 +2,14 @@
   {{ partial "diplomas/hero-list.html" . }}
 
   <div class="document-content">
-    <div class="container">
-      {{ partial "diplomas/chapo.html" .Params.description_short }}
-    </div>
+
+    {{ partial "diplomas/chapo.html" (dict
+        "with_container" true
+        "context" .
+      ) }}
+
     {{ partial "blocks/list.html" . }}
+
     <div class="container">
       {{ partial "diplomas/diplomas.html" . }}
     </div>

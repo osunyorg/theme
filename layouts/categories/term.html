@@ -2,7 +2,9 @@
   {{ partial "categories/hero-term.html" . }}
 
   <div class=" document-content container">
-    {{ partial "categories/chapo.html" .Params.description_short }}
+    {{ partial "categories/chapo.html" (dict
+        "context" .
+      ) }}
     {{ partial "posts/posts.html" . }}
     {{ partial "commons/pagination.html" . }}
   </div>

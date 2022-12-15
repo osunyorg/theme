@@ -3,9 +3,11 @@
   {{ partial "persons/hero.html" . }}
 
   <div class="document-content">
-    <div class="container">
-      {{ partial "persons/chapo.html" .Params.description_short }}
-    </div>
+
+    {{ partial "persons/chapo.html" (dict
+        "with_container" true
+        "context" .
+      ) }}
   
     {{ partial "blocks/list.html" . }}
   

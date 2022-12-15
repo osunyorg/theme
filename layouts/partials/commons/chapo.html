@@ -1,5 +1,25 @@
-{{- if (partial "GetTextFromHTML" .) -}}
-  <p class="lead">
-    {{ partial "PrepareHTML" . }}
-  </p>
-{{ end }}
+{{- $text := (partial "GetTextFromHTML" .context.Params.description_short) -}}
+
+{{- if $text -}}
+
+  {{- if .block_wrapped -}}
+  <section class="block block-chapo">
+    <div class="container">
+      <div class="block-content">
+  {{- else if .with_container -}}
+  <div class="container">
+  {{- end -}}
+
+    <p class="lead">
+      {{ partial "PrepareHTML" .context.Params.description_short }}
+    </p>
+
+
+  {{- if .block_wrapped -}}
+      </div>
+    </div>
+  </section>
+  {{- else if .with_container -}}
+  </div>
+  {{- end -}}
+{{- end -}}

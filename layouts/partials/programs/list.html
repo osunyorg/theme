@@ -1,7 +1,8 @@
 <div class="document-content">
-  <div class="container">
-    {{ partial "programs/chapo.html" .Params.description_short }}
-  </div>
+  {{ partial "programs/chapo.html" (dict
+      "with_container" true
+      "context" .
+    ) }}
   {{ partial "blocks/list.html" . }}
   <div class="container">
     {{ partial "diplomas/diplomas-select.html" . }}
