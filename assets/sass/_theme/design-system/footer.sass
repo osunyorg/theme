@@ -11,8 +11,8 @@ footer[role="contentinfo"]
             height: $footer-logo-height
             max-width: 100%
             width: auto
-            @include media-breakpoint-up(md)
-                height: $footer-logo-height-md
+            @include media-breakpoint-up(desktop)
+                height: $footer-logo-height-desktop
     ul
         @include list-reset
         li
@@ -29,11 +29,11 @@ footer[role="contentinfo"]
             display: block
             margin-top: $spacing0
 
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         .container
             > * + *
                 margin-top: $spacing3
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         .container
             @include grid(2, md, $spacing4)
         .footer

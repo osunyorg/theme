@@ -95,7 +95,7 @@
     padding-left: half($grid-gutter-sm)
     padding-right: half($grid-gutter-sm)
     width: 100%
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         padding-left: $grid-gutter
         padding-right: $grid-gutter
 
@@ -109,7 +109,7 @@
         display: grid
         grid-gap: $gap-y $gap-x
         grid-template-columns: repeat($cols, 1fr)
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         grid-gap: $grid-gutter-sm
 
 // This must be used for content inside columns
@@ -203,16 +203,16 @@
         > .title
             @include h2
             transition: color 0.55s
-            @include media-breakpoint-down(md)
+            @include media-breakpoint-down(desktop)
                 @include icon("arrow-right", "after", px2rem(16), true)
                     bottom: $spacing0
                     position: absolute
                     right: 0
-            @include media-breakpoint-up(md)
+            @include media-breakpoint-up(desktop)
                 @include arrow-right-hover
                 display: block
                 &::after
-                    font-size: $font-size-base
+                    font-size: px2rem(16)
                     transform: translateX(0)
                     position: relative
                 &:hover
@@ -222,10 +222,10 @@
         a
             text-decoration: none
 
-        @include media-breakpoint-down(md)
+        @include media-breakpoint-down(desktop)
             a, p
                 display: block
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             align-items: baseline
             display: flex
             justify-content: space-between
@@ -277,7 +277,7 @@
 
 @mixin button-icon($icon: false)
     @include button-reset
-    line-height: $line-height-base
+    line-height: $body-line-height
     border: 1px solid $hero-color
     padding: $spacing0 $spacing1
     white-space: nowrap
@@ -299,7 +299,7 @@
     display: flex
     justify-content: space-between
     align-items: center
-    @include icon("arrow-right", after,  $small-size)
+    @include icon("arrow-right", after, $small-size)
         opacity: 0
         transform: translateX(-20px)
         transition: 0.55s $arrow-ease-transition
@@ -311,7 +311,7 @@
             transform: translateX(0)
 
 @mixin top-flex
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         @include in-page-without-sidebar
             display: flex
             h2, h3
