@@ -9,7 +9,15 @@
       {{ partial "header/breadcrumbs.html" .context }}
     {{- end -}}
     <div class="content">
-      <h1>{{ partial "PrepareHTML" .title }}</h1>
+      {{- if .subtitle -}}
+        <hgroup>
+          <h1>{{ partial "PrepareHTML" .title }}</h1>
+          <p>{{ partial "PrepareHTML" .subtitle }}</p>
+        </hgroup>
+      {{- else -}}
+        <h1>{{ partial "PrepareHTML" .title }}</h1>
+      {{- end -}}
+      </hgroup>
       {{- if .image }}
         <figure>
           {{ partial "commons/image.html"
