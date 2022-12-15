@@ -212,7 +212,7 @@
                 @include arrow-right-hover
                 display: block
                 &::after
-                    font-size: $font-size-base
+                    font-size: px2rem(16)
                     transform: translateX(0)
                     position: relative
                 &:hover
@@ -277,7 +277,7 @@
 
 @mixin button-icon($icon: false)
     @include button-reset
-    line-height: $line-height-base
+    line-height: $body-line-height
     border: 1px solid $hero-color
     padding: $spacing0 $spacing1
     white-space: nowrap
@@ -299,7 +299,7 @@
     display: flex
     justify-content: space-between
     align-items: center
-    @include icon("arrow-right", after,  $small-size)
+    @include icon("arrow-right", after, $small-size)
         opacity: 0
         transform: translateX(-20px)
         transition: 0.55s $arrow-ease-transition
