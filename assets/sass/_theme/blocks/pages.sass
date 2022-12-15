@@ -60,11 +60,11 @@
                 @include hover-translate-icon(after, 3)
         @include media-breakpoint-up(desktop)
             .grid
-                @include grid(2, md)
+                @include grid(2, desktop)
                 @include in-page-with-sidebar
                     grid-column-gap: half($grid-gutter) !important
                 @include in-page-without-sidebar
-                    @include grid(3, md)
+                    @include grid(3, desktop)
 
     &--cards
         background-color: $block-pages-card-background
@@ -73,11 +73,11 @@
         .blocks &:last-of-type
             margin-bottom: 0
         .cards
-            @include grid(2, md)
+            @include grid(2, desktop)
             @include in-page-with-sidebar
                 grid-gap: half($grid-gutter) !important
             @include in-page-without-sidebar
-                @include grid(3, md)
+                @include grid(3, desktop)
         // TODO: move this //
         .block-gallery + &,
         .block-pages--cards + &
@@ -148,7 +148,7 @@
                     .description
                         margin-bottom: $spacing1
                     ul
-                        @include grid(2, md)
+                        @include grid(2, desktop)
                         grid-row-gap: $spacing0 !important
                         grid-column-gap: half($grid-gutter) !important
                         li
@@ -166,7 +166,7 @@
                         grid-row: 2 / 3
                     // Default behavior (without page description)
                     ul
-                        @include grid(4, md)
+                        @include grid(4, desktop)
                         grid-column: 1 / 13
                         li
                             margin-top: 0

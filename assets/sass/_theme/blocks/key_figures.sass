@@ -2,10 +2,10 @@
     .top
         margin-bottom: 0
     ul
-        @include grid(3, md)
+        @include grid(3, desktop)
         @include list-reset
         @include in-page-with-sidebar
-            @include grid(2, md)
+            @include grid(2, desktop)
     .top + ul
         margin-top: $spacing2
     @include media-breakpoint-down(desktop)
@@ -25,7 +25,7 @@
                 display: inline-block
                 font-size: $block-key_figures-number-font-size
                 margin-inline-end: 0.1em
-            @include media-breakpoint-up(desktop)
+            @include media-breakpoint-up(md)
                 font-size: $block-key_figures-font-size-desktop
                 strong
                     font-size: $block-key_figures-number-font-size-desktop

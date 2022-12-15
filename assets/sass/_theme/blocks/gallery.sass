@@ -1,7 +1,7 @@
 .block-gallery
     @include in-page-without-sidebar
         .top
-            @include grid(2, md)
+            @include grid(2, desktop)
             align-items: baseline
     figure
         display: block
@@ -34,9 +34,9 @@
         .gallery
             align-items: baseline
             @include in-page-with-sidebar
-                @include grid(3, md, half($grid-gutter), half($grid-gutter))
+                @include grid(3, desktop, half($grid-gutter), half($grid-gutter))
             @include in-page-without-sidebar
-                @include grid(4, md)
+                @include grid(4, desktop)
             @include media-breakpoint-down(desktop)
                 @include grid(2)
                 grid-gap: half($grid-gutter-sm) !important
