@@ -1,5 +1,6 @@
 header[role="banner"]
     background: $header-background
+    border-bottom: 1px solid $color-border
     color: $header-color
     position: fixed
     left: 0
@@ -9,16 +10,6 @@ header[role="banner"]
     z-index: $zindex-header
     @include media-breakpoint-down(md)
         width: 100%
-    html.has-menu-opened &
-        &::after
-            background-color: $color-border
-            bottom: 0
-            content: ""
-            height: 1px
-            left: 0
-            position: absolute
-            transition: background-color $header-sticky-transition
-            width: 100%
     .dropdown-menu
         transition: background $header-sticky-transition
     &.is-sticky, html.has-menu-opened &
