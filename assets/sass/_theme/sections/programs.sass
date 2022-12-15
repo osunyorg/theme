@@ -13,7 +13,7 @@ ol.programs
             white-space: nowrap
             @include media-breakpoint-up(desktop)
                 margin-left: $spacing1
-    
+
 .programs__section
     .hero-program
         flex-direction: column
@@ -86,11 +86,15 @@ ol.programs
             > div > * + *
                 margin-top: 1em
             .blocks
-                .container
-                    padding-left: 0
-                    padding-right: 0
-                .block-content
-                    padding-left: 0
+                @include media-breakpoint-down(desktop)
+                    margin-left: half(-$grid-gutter-sm)
+                    margin-right: half(-$grid-gutter-sm)
+                @include media-breakpoint-up(desktop)
+                    .container
+                        padding-left: 0
+                        padding-right: 0
+                    .block-content
+                        padding-left: 0
 
     @include media-breakpoint-up(desktop)
         .document-content
