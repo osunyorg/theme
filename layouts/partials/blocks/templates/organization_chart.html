@@ -23,35 +23,39 @@
           {{- range .persons -}}
             {{ $person := site.GetPage (printf "/persons/%s" .slug) }}
             <div>
-              {{- if (partial "GetTextFromHTML" .role) }}
-                <article class="person" itemscope itemtype="https://schema.org/Person">
-                  <div class="description">
-                    <h1 class="name" itemprop="name">
-                      {{ if $with_link }}
-                      <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
+              <article class="person" itemscope itemtype="https://schema.org/Person">
+                <div class="description">
+                  <h1 class="name" itemprop="name">
+                    {{ if $with_link }}
+                    <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
                       {{ end }}
-                        {{- partial "PrepareHTML" $person.Title -}}
+                      {{- partial "PrepareHTML" $person.Title -}}
                       {{ if $with_link }}
-                      </a>
-                      {{ end }}
-                    </h1>
-                    <p itemprop="jobTitle">{{ partial "PrepareHTML" .role }}</p>
-                  </div>
-                  <div class="avatar" itemprop="image">
-                    {{- if $person.Params.image }}
-                      {{ partial "commons/image.html"
-                            (dict
-                              "image"    $person.Params.image
-                              "mobile"   "80x80"
-                              "tablet"   "100x100"
-                              "desktop"  "255x255"
-                            )}}
+                    </a>
+                    {{ end }}
+                  </h1>
+                  <p itemprop="jobTitle"></p>
+                    {{- if (partial "GetTextFromHTML" .role) }}
+                      {{ partial "PrepareHTML" .role }}
+                    {{- else if partial "GetTextFromHTML" $person.Params.description_short }}
+                      {{- partial "PrepareHTML" $person.Params.description_short -}}
+                    {{ else if (partial "GetTextFromHTML" $person.Content) }}
+                      {{- partial "GetTruncateContent" $person.Content -}}
                     {{ end -}}
-                  </div>
-                </article>
-              {{ else }}
-                {{ partial "persons/person.html" $person }}
-              {{ end -}}
+                  </p>
+                </div>
+                <div class="avatar" itemprop="image">
+                  {{- if $person.Params.image }}
+                    {{ partial "commons/image.html"
+                          (dict
+                            "image"    $person.Params.image
+                            "mobile"   "80x80"
+                            "tablet"   "100x100"
+                            "desktop"  "255x255"
+                          )}}
+                  {{ end -}}
+                </div>
+              </article>
             </div>
           {{- end -}}
         </div>
