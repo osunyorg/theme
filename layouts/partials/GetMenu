@@ -1,4 +1,13 @@
 {{ $kind := . }}
 {{ $menus := index site.Data.menus (printf "%s" site.Language) }}
-{{ $menu := index $menus $kind }}
+{{ $menu := "" }}
+// Try to get menus from the data/menus/<lang> directory
+{{ if (and $menus (isset $menus $kind)) }}
+  // Menu found in data/menus/<lang>
+  {{ $menu = index $menus $kind }}
+{{ else }}
+  // Fallback to menu in the data/menus directory
+  {{ $menu = index site.Data.menus $kind }}
+{{ end }}
+
 {{ return $menu }}
