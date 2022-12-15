@@ -8,7 +8,7 @@ header[role="banner"]
     top: 0
     width: 100%
     z-index: $zindex-header
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         width: 100%
     .dropdown-menu
         transition: background $header-sticky-transition
@@ -31,9 +31,9 @@ header[role="banner"]
             .logo img
                 filter: invert(1)
     html.is-scrolling-down:not(.has-menu-opened) &
-        @include media-breakpoint-down(md)
+        @include media-breakpoint-down(desktop)
             transform: translateY(-100%)
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             &:not(:hover)
                 transform: translateY(-100%)
     .logo
@@ -43,7 +43,7 @@ header[role="banner"]
             width: auto
             @if $header-sticky-invert-logo
                 transition: filter $header-sticky-transition
-            @include media-breakpoint-up(md)
+            @include media-breakpoint-up(desktop)
                 height: $header-logo-height-desktop
 
 // TODO : Est-ce au bon endroit ?
@@ -88,7 +88,7 @@ header[role="banner"]
             color: inherit
             padding: 0
             position: relative
-            @include media-breakpoint-down(md)
+            @include media-breakpoint-down(desktop)
                 display: flex
                 align-items: center
             &:focus

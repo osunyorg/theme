@@ -10,7 +10,7 @@
     width: calc(#{col-outside-container(4)} + #{$grid-gutter} * 2)
     transform: translateX(100%)
     transition: var(--toc-transition-duration) transform ease-in-out
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         width: calc(100% - #{$grid-gutter})
     &.is-opened
         transform: translateX(0)
@@ -24,9 +24,9 @@
         border-bottom: 1px solid $color-border
         font-size: $toc-title-font-size
         padding: $header-nav-padding-y
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             padding: $header-nav-padding-y $grid-gutter
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             font-size: $toc-title-font-size-desktop
             padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) $grid-gutter
     .toc
@@ -38,7 +38,7 @@
         > ol
             flex: 1
             padding: $spacing1
-            @include media-breakpoint-up(md)
+            @include media-breakpoint-up(desktop)
                 padding: $spacing1 $grid-gutter
             > li:first-child
                 margin-top: 0
@@ -51,7 +51,7 @@
         border-top: 1px solid $color-border
         line-height: inherit
         @include icon(close, after)
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             border-top: 0
             padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) 0
             position: absolute
@@ -63,7 +63,7 @@
 .toc-cta
     display: flex
     position: relative
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         @include container
         justify-content: end
         text-align: right
@@ -72,7 +72,7 @@
         body.offcanvas-toc &
             display: flex
 
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         border-top: 1px solid $color-border
         position: fixed
         bottom: 0
@@ -97,7 +97,7 @@
         &::after
             font-size: px2rem(13)
             color: $toc-color
-        @include media-breakpoint-down(md)
+        @include media-breakpoint-down(desktop)
             display: flex
             justify-content: space-between
             align-items: center
@@ -108,11 +108,11 @@
     
     @include in-page-without-sidebar
         @include offcanvas-toc
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         @include offcanvas-toc
 
     // Only desktop and in page with sidebar
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         @include in-page-with-sidebar
             @include container-margin-left
             pointer-events: none
@@ -153,13 +153,13 @@
     font-family: $toc-title-font-family
     font-size: $toc-title-font-size
     color: $toc-color
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         font-size: $toc-title-font-size-desktop
 
 .toc
     font-family: $toc-font-family
     line-height: $toc-line-height
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         font-size: $toc-font-size-desktop
     ol
         @include list-reset

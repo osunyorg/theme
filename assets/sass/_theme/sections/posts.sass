@@ -17,24 +17,24 @@
                 padding-bottom: $spacing3
                 display: flex
                 flex-direction: row
-                @include media-breakpoint-up(md)
+                @include media-breakpoint-up(desktop)
                     @include grid
                 div:not(.media)
                     grid-column: 4/13
-                    @include media-breakpoint-down(md)
+                    @include media-breakpoint-down(desktop)
                         flex: 1
                         margin-left: $spacing0
                     p:not(.title)
-                        @include media-breakpoint-down(md)
+                        @include media-breakpoint-down(desktop)
                             display: none
                 .media
                     background: none
                     margin: 0
-                    @include media-breakpoint-down(md)
+                    @include media-breakpoint-down(desktop)
                         width: 33.33333%
-                    @include media-breakpoint-up(md)
+                    @include media-breakpoint-up(desktop)
                         grid-column: 1/4
-                @include media-breakpoint-up(md)
+                @include media-breakpoint-up(desktop)
                     time 
                         font-size: $h5-size
                         position: absolute
@@ -54,7 +54,7 @@
 
 .categories__term
     @if $posts-layout-list
-        @include media-breakpoint-down(md)
+        @include media-breakpoint-down(desktop)
             .posts 
                 grid-gap: $spacing3
                 article 
@@ -69,7 +69,7 @@
                         width: 100%
 
 .posts__page
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         .document-content
             display: flex
             flex-direction: column
@@ -78,7 +78,7 @@
                 padding: 0 half($grid-gutter-sm)
             .block-pagination
                 order: 3
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         aside
             @include container-margin-left
             margin-top: 0
