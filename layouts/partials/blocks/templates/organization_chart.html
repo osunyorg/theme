@@ -34,7 +34,7 @@
                     </a>
                     {{ end }}
                   </h1>
-                  <p itemprop="jobTitle"></p>
+                  <p itemprop="jobTitle">
                     {{- if (partial "GetTextFromHTML" .role) }}
                       {{ partial "PrepareHTML" .role }}
                     {{- else if partial "GetTextFromHTML" $person.Params.description_short }}
