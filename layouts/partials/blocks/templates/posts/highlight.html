@@ -13,20 +13,17 @@
     {{ with $list }}
       {{ $first := true }}
       <div class="list">
-        {{ range . }}
-          {{ if not $first }}
-            {{ with site.GetPage (printf "/posts/%s" .) }}
-              <article>
-                {{- $title := partial "PrepareHTML" .Title -}}
-                <h1 itemprop="headline"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h1>
-                {{- if (partial "GetTextFromHTML" .Params.description_short) -}}
-                <p itemprop="articleBody">{{ partial "PrepareHTML" .Params.description_short }}</p>
-                {{- end -}}
-                <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
-              </article>
-            {{ end }}
+        {{ range after 1 . }}
+          {{ with site.GetPage (printf "/posts/%s" .) }}
+            <article>
+              {{- $title := partial "PrepareHTML" .Title -}}
+              <h1 itemprop="headline"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h1>
+              {{- if (partial "GetTextFromHTML" .Params.description_short) -}}
+              <p itemprop="articleBody">{{ partial "PrepareHTML" .Params.description_short }}</p>
+              {{- end -}}
+              <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
+            </article>
           {{ end }}
-          {{ $first = false }}
         {{ end }}
       </div>
     {{ end }}
