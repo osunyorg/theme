@@ -3,8 +3,10 @@
         h2, h3
             + .description
                 margin-top: $spacing1
-        a
-            text-decoration: none
+    a
+        @include link
+        text-decoration: underline
+        text-decoration-color: rgba(0,0,0,0)
     .grid, .cards
         article
             position: relative
@@ -20,7 +22,6 @@
         h1
             @include h3
             a
-                text-decoration: none
                 @include stretched-link(before)
             + p
                 margin-top: $spacing0
@@ -45,7 +46,6 @@
                 h2, h3
                     grid-column: 1 / 5
                     a
-                        text-decoration: none
                         @include icon("arrow-right", "after", px2rem(16), true)
                         @include hover-translate-icon
                         &::after
@@ -128,11 +128,6 @@
                 .more
                     text-decoration-color: $block-pages-card-page-color-hover
     &--list
-        .top h2 a,
-        a
-            @include in-page-with-or-without-sidebar
-                @include link
-                text-decoration-color: rgba(0,0,0,0)
         ul
             @include list-reset
             li
