@@ -46,7 +46,10 @@ header[role="banner"]
                 transition: filter $header-sticky-transition
             @include media-breakpoint-up(desktop)
                 height: $header-logo-height-desktop
-
+    @include media-breakpoint-down(desktop)
+        html.has-menu-opened &
+            nav[role="navigation"]
+                padding-bottom: 0
 // TODO : Est-ce au bon endroit ?
 body
     &::after
@@ -76,8 +79,7 @@ body
 header[role="banner"]
     nav[role="navigation"]
         padding-top: $header-nav-padding-y
-        @include media-breakpoint-up(desktop)
-            padding-bottom: $header-nav-padding-y
+        padding-bottom: $header-nav-padding-y
         .container
             align-items: center
             display: flex

@@ -56,6 +56,18 @@
             figure
                 margin-bottom: calc(#{-$spacing5} + #{$spacing2})
                 margin-top: $spacing1
+        figcaption
+            position: absolute
+            left: 0
+            right: 0
+            bottom: 0
+            padding-top: $spacing0
+            transform: translateY(100%)
+            padding-left: half($grid-gutter-sm)
+            padding-right: half($grid-gutter-sm)
+        picture:not(last-child)
+            margin-bottom: $spacing2
+
     @include media-breakpoint-up(desktop)
         $negative-margin-bottom: px2rem(150)
         .content
