@@ -5,17 +5,17 @@
       <h2>{{ i18n "programs.toc.admission" }}</h2>
       <div>
         {{- if partial "GetTextFromHTML" .Params.prerequisites -}}
-          <h3>{{ i18n "programs._prerequisites" }}</h3>
+          <h3>{{ i18n "programs.prerequisites" }}</h3>
           {{- partial "PrepareHTML" .Params.prerequisites -}}
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pricing -}}
-          <h3>{{ i18n "programs._pricing" }}</h3>
+          <h3>{{ i18n "programs.pricing" }}</h3>
           {{- partial "PrepareHTML" .Params.pricing -}}
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.registration -}}
-          <h3>{{ i18n "programs._registration" }}</h3>
+          <h3>{{ i18n "programs.registration" }}</h3>
           {{- partial "PrepareHTML" .Params.registration -}}
           {{- if partial "GetTextFromHTML" .Params.registration_url -}}
             <p><a href="{{- partial "PrepareHTML" .Params.registration_url -}}" class="registration">{{ i18n "programs.apply" }}</a></p>
@@ -23,7 +23,7 @@
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.accessibility -}}
-          <h3>{{ i18n "programs._accessibility" }}</h3>
+          <h3>{{ i18n "programs.accessibility" }}</h3>
           {{- partial "PrepareHTML" .Params.accessibility -}}
         {{- end -}}
 
@@ -34,7 +34,7 @@
 
         {{- if .Params.roles -}}
 
-          <h3>{{ i18n "programs._roles" }}</h3>
+          <h3>{{ i18n "programs.roles" }}</h3>
           {{- with .Params.roles -}}
             {{- range . }}
               {{ $title := .title }}
@@ -63,7 +63,7 @@
         {{- end -}}
 
         {{- if  partial "GetTextFromHTML" .Params.contacts -}}
-          <h3>{{ i18n "programs._contacts" }}</h3>
+          <h3>{{ i18n "programs.contacts" }}</h3>
           {{- if or (partial "GetTextFromHTML" .Params.contacts) -}}
             {{- partial "PrepareHTML" .Params.contacts -}}
           {{- end -}}

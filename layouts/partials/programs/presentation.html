@@ -9,9 +9,9 @@
             {{- partial "PrepareHTML" .Params.objectives -}}
           {{- end -}}
 
-          <h3>{{ i18n "programs._administrative_information" }}</h3>
+          <h3 id="{{ anchorize (i18n "programs.administrative_information") }}">{{ i18n "programs.administrative_information" }}</h3>
           <table class="post-infos">
-            <caption>{{ i18n "programs._administrative_information" }}</caption>
+            <caption>{{ i18n "programs.administrative_information" }}</caption>
             <tbody>
               {{- with .Params.diplomas -}}
                 {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
