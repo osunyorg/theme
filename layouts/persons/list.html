@@ -17,9 +17,15 @@
         )
     }}
 
-    {{ $chapo_block := gt (len .Params.blocks) 1 }}
+    {{ $chapo_block := false }}
+    {{ if .Params.blocks }}
+      {{ if gt (len .Params.blocks) 1 }}
+        {{ $chapo_block = true }}
+      {{ end }}
+    {{ end }}
     {{ partial "persons/chapo.html" (dict
         "context" .
+        "with_container" (not $chapo_block)
         "block_wrapped" $chapo_block
       ) }}
 
