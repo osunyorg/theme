@@ -17,16 +17,19 @@
         )
     }}
 
+    {{ $chapo_block := gt (len .Params.blocks) 1 }}
     {{ partial "persons/chapo.html" (dict
-          "context" .
-          "block_wrapped" true
-        ) }}
+        "context" .
+        "block_wrapped" $chapo_block
+      ) }}
+
     <div class="container">
       {{- if not $is_organigram_present -}}
         {{ partial "persons/taxonomies.html" . }}
         {{ partial "persons/list.html" . }}
       {{- end -}}
     </div>
+
   
     {{ partial "blocks/list.html" . }}
   </div>
