@@ -1,35 +1,85 @@
-{{ $pedagogy := (dict 
+{{ $content := partial "GetTextFromHTML" .context.Params.content}}
+{{ $pedagogy :=  partial "GetTextFromHTML" .context.Params.pedagogy }}
+{{ $evaluation :=  partial "GetTextFromHTML" .context.Params.evaluation }}
+{{ $teachers :=  partial "GetTextFromHTML" .context.Params.teachers }}
 
-  )}}
+{{ $opportunities := partial "GetTextFromHTML" .context.Params.opportunities }}
+{{ $results := partial "GetTextFromHTML" .context.Params.results }}
+
+{{ $prerequisites := partial "GetTextFromHTML" .context.Params.prerequisites }}
+{{ $pricing := partial "GetTextFromHTML" .context.Params.pricing }}
+{{ $registration := partial "GetTextFromHTML" .context.Params.registration }}
+{{ $accessibility := partial "GetTextFromHTML" .context.Params.accessibility }}
+{{ $other := partial "GetTextFromHTML" .context.Params.other }}
 
 {{/* nav-link required for toggle active class */}}
 <nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
   <ol>
     <li>
-      <a href="#essential">{{ i18n "programs.toc.essential" }}</a>
+      <a href="#{{ anchorize (i18n "programs.toc.essential") }}">{{ i18n "programs.toc.essential" }}</a>
     </li>
     <li>
-      <a href="#presentation">{{ i18n "programs.toc.presentation" }}</a>
+      <a href="#{{ anchorize (i18n "programs.toc.presentation") }}">{{ i18n "programs.toc.presentation" }}</a>
        <ol>
           <li><a href="#{{ anchorize (i18n "programs.administrative_information") }}">{{ i18n "programs.administrative_information" }}</a></li>
           {{- if .context.Params.blocks -}}
-          {{- partial "blocks/toc" .context.Params.blocks -}}
+            {{- partial "blocks/toc" .context.Params.blocks -}}
           {{- end -}}
         </ol>
     </li>
     <li>
       <a href="#pedagogy">{{ i18n "programs.toc.pedagogy" }}</a>
+      {{- if or $content $pedagogy $evaluation $teachers }}
       <ol>
-        {{- if partial "GetTextFromHTML" .context.Params.content -}}
+        {{- if $content -}}
           <li><a href="#{{ anchorize (i18n "programs.content") }}">{{ i18n "programs.content" }}</a></li>
         {{- end -}}
+        {{- if $pedagogy -}}
+          <li><a href="#{{ anchorize (i18n "programs.pedagogy") }}">{{ i18n "programs.pedagogy" }}</a></li>
+        {{- end -}}
+        {{- if $evaluation -}}
+          <li><a href="#{{ anchorize (i18n "programs.evaluation") }}">{{ i18n "programs.evaluation" }}</a></li>
+        {{- end -}}
+        {{- if $teachers -}}
+          <li><a href="#{{ anchorize (i18n "programs.teachers") }}">{{ i18n "programs.evaluation" }}</a></li>
+        {{- end -}}
       </ol>
+      {{ end -}}
     </li>
     <li>
       <a href="#results">{{ i18n "programs.toc.results" }}</a>
+      {{- if or $opportunities $results }}
+      <ol>
+        {{- if $opportunities -}}
+          <li><a href="#{{ anchorize (i18n "programs.opportunities") }}">{{ i18n "programs.opportunities" }}</a></li>
+        {{- end -}}
+        {{- if $results -}}
+          <li><a href="#{{ anchorize (i18n "programs.results") }}">{{ i18n "programs.results" }}</a></li>
+        {{- end -}}
+      </ol>
+      {{ end -}}
     </li>
     <li>
       <a href="#admission">{{ i18n "programs.toc.admission" }}</a>
+      {{- if or $prerequisites $pricing $registration $accessibility $other }}
+      <ol>
+        {{- if $prerequisites -}}
+          <li><a href="#{{ anchorize (i18n "programs.prerequisites") }}">{{ i18n "programs.prerequisites" }}</a></li>
+        {{- end -}}
+        {{- if $pricing -}}
+          <li><a href="#{{ anchorize (i18n "programs.pricing") }}">{{ i18n "programs.pricing" }}</a></li>
+        {{- end -}}
+        {{- if $registration -}}
+          <li><a href="#{{ anchorize (i18n "programs.registration") }}">{{ i18n "programs.registration" }}</a></li>
+        {{- end -}}
+        {{- if $accessibility -}}
+          <li><a href="#{{ anchorize (i18n "programs.accessibility") }}">{{ i18n "programs.accessibility" }}</a></li>
+        {{- end -}}
+        {{- if $other -}}
+          <li><a href="#{{ anchorize (i18n "programs._other") }}">{{ i18n "programs._other" }}</a></li>
+        {{- end -}}
+      </ol>
+      {{ end -}}
     </li>
   </ol>
 </nav>
