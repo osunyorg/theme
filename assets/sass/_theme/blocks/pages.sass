@@ -47,6 +47,9 @@
                     a
                         text-decoration: none
                         @include icon("arrow-right", "after", px2rem(16), true)
+                        @include hover-translate-icon
+                        &::after
+                            display: inline-block
             .description
                 @include h2
                 grid-column: 5 / 13
@@ -125,6 +128,11 @@
                 .more
                     text-decoration-color: $block-pages-card-page-color-hover
     &--list
+        .top h2 a,
+        a
+            @include in-page-with-or-without-sidebar
+                @include link
+                text-decoration-color: rgba(0,0,0,0)
         ul
             @include list-reset
             li
@@ -134,9 +142,9 @@
                     margin-top: $spacing0
                 a
                     @include meta
-                    text-decoration: none
                     @include icon("arrow-right", before, px2rem(10))
                         padding-right: $spacing0
+                    @include hover-translate-icon(before)
         @include media-breakpoint-down(desktop)
             .top
                 margin-bottom: $spacing0
