@@ -3,10 +3,8 @@
         h2, h3
             + .description
                 margin-top: $spacing1
-    a
-        @include link
-        text-decoration: underline
-        text-decoration-color: rgba(0,0,0,0)
+        a
+            text-decoration: none
     .grid, .cards
         article
             position: relative
@@ -22,6 +20,7 @@
         h1
             @include h3
             a
+                text-decoration: none
                 @include stretched-link(before)
             + p
                 margin-top: $spacing0
@@ -46,6 +45,7 @@
                 h2, h3
                     grid-column: 1 / 5
                     a
+                        text-decoration: none
                         @include icon("arrow-right", "after", px2rem(16), true)
                         @include hover-translate-icon
                         &::after
@@ -140,6 +140,8 @@
                     @include icon("arrow-right", before, px2rem(10))
                         padding-right: $spacing0
                     @include hover-translate-icon(before)
+                    @include link
+                    text-decoration-color: rgba(0,0,0,0)
         @include media-breakpoint-down(desktop)
             .top
                 margin-bottom: $spacing0
