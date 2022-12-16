@@ -1,4 +1,5 @@
 .block-call_to_action
+    --cta-background-color: #{$block-call-to-action-background}
     @include in-page-with-or-without-sidebar
         h2, h3
             @include h5
@@ -35,7 +36,7 @@
             margin-top: calc(#{$spacing2} - #{$spacing1})
 
     @include media-breakpoint-down(desktop)
-        background-color: $block-call-to-action-background
+        background-color: var(--cta-background-color)
         .call_to_action
             padding: $spacing3 0
             .actions
@@ -61,12 +62,12 @@
                 > *
                     order: 2
                 > div
-                    background-color: $block-call-to-action-background
+                    background-color: var(--cta-background-color)
                     padding: col(1, 8)
                     width: 100%
                     position: relative
                     &::after
-                        background-color: $block-call-to-action-background
+                        background-color: var(--cta-background-color)
                         content: ''
                         display: block
                         position: absolute
@@ -88,7 +89,7 @@
   
         @include in-page-without-sidebar
             .block-content
-                background-color: $block-call-to-action-background
+                background-color: var(--cta-background-color)
                 padding: $spacing4 $grid-gutter
                 margin-left: -$grid-gutter
                 margin-right: -$grid-gutter
