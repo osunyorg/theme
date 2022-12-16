@@ -11,8 +11,8 @@
         -webkit-flex-basis: 100vw
         display: none
         flex-basis: 100vw
-        margin-top: 1.875rem
-        max-height: 70vh
+        margin-top: $spacing1
+        max-height: calc(100vh - var(--header-height) - #{$spacing1})
         overflow: auto
     a,
     a:focus,
@@ -132,6 +132,7 @@
                     display: block
             > li:not(:last-child) 
                 border-bottom: 1px solid #adb5bd
+            > li
                 > a, > span
                     padding-bottom: $spacing1
                     padding-top: $spacing1
