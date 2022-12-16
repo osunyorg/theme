@@ -3,8 +3,11 @@ footer[role="contentinfo"]
     color: $footer-color
     padding-bottom: $spacing3
     padding-top: $spacing3
+    position: relative
+    @include media-breakpoint-down(desktop)
+        z-index: $zindex-footer
     a
-        color: inherit
+        @include link($footer-color)
     .logo
         img
             height: $footer-logo-height
@@ -31,14 +34,20 @@ footer[role="contentinfo"]
 
     @include media-breakpoint-down(desktop)
         .container
+            + .container,
             > * + *
                 margin-top: $spacing3
+
     @include media-breakpoint-up(desktop)
         .container
-            @include grid(2, desktop, $spacing4)
+            display: flex
+            justify-content: space-between
+            padding-bottom: $spacing3
+            + .container
+                padding-top: $spacing3
+                padding-bottom: 0
         .footer
             &-site, &-social
                 text-align: right
             &-social
-                order: 4
-                align-self: end
+                order: 2
