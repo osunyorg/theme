@@ -128,11 +128,6 @@
                 .more
                     text-decoration-color: $block-pages-card-page-color-hover
     &--list
-        .top h2 a,
-        a
-            @include in-page-with-or-without-sidebar
-                @include link
-                text-decoration-color: rgba(0,0,0,0)
         ul
             @include list-reset
             li
@@ -145,6 +140,8 @@
                     @include icon("arrow-right", before, px2rem(10))
                         padding-right: $spacing0
                     @include hover-translate-icon(before)
+                    @include link
+                    text-decoration-color: rgba(0,0,0,0)
         @include media-breakpoint-down(desktop)
             .top
                 margin-bottom: $spacing0
