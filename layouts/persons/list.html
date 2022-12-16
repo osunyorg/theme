@@ -10,10 +10,18 @@
   {{ partial "persons/hero.html" . }}
 
   <div class="document-content">
-    <div class="container">
-      {{ partial "persons/chapo.html" (dict
+    {{ partial "toc/container.html"
+        (dict
+            "toc" "toc/default.html"
+            "context" .
+        )
+    }}
+
+    {{ partial "persons/chapo.html" (dict
           "context" .
+          "block_wrapped" true
         ) }}
+    <div class="container">
       {{- if not $is_organigram_present -}}
         {{ partial "persons/taxonomies.html" . }}
         {{ partial "persons/list.html" . }}
