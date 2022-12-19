@@ -30,7 +30,7 @@
       {{- if ne .kind "blank" -}}
         <a href="{{ .target }}"{{ if ne $linkClass ""}} class="{{ $linkClass }}"{{ end }} {{ safeHTMLAttr $attr }} {{ safeHTMLAttr $attr_title }}>{{ .title }}</a>
       {{- else -}}
-        <span class="{{ if ne $linkClass ""}} {{ $linkClass }}{{ end }}{{ if gt .level 1 }} disabled{{ end }}"{{ safeHTMLAttr $attr }}>{{ .title }}</span>
+        <span class="{{ if ne $linkClass ""}} {{ $linkClass }}{{ end }}{{ if gt .level 1 }} disabled{{ end }}" {{ safeHTMLAttr $attr }}>{{ .title }}</span>
       {{- end -}}
       {{- if ne $stop $level -}}
         {{- if $hasDropdown }}

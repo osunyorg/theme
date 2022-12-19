@@ -159,4 +159,4 @@ class MainMenu {
     }
 }
 
-export default new MainMenu('header[role="banner"]');
+export default new MainMenu('header#document-header');

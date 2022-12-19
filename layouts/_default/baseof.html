@@ -16,7 +16,7 @@
   <body class="{{ $body_class }}">
     {{- partial "header/accessibility.html" -}}
     {{- partial "header/header.html" -}}
-    <main{{ if .Params.blocks }} class="page-with-blocks"{{ end }} id="main" role="main" tabindex="-1">
+    <main{{ if .Params.blocks }} class="page-with-blocks"{{ end }} id="main" tabindex="-1">
       {{- block "main" . }}{{- end }}
       {{- partial "hooks/before-main-end" . -}}
     </main>

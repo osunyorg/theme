@@ -13,7 +13,7 @@ class TableOfContents {
     this.content = this.element.querySelector('.toc-content');
     this.nav = this.element.querySelector('.toc');
     this.links = this.element.querySelectorAll('a');
-    this.sections = document.querySelectorAll('section');
+    this.sections = document.querySelectorAll('section[id]');
     // TODO : handle sublinks update in toc 
     this.ctaTitle = document.querySelector('.toc-cta-title span');
     this.togglers = document.querySelectorAll('.toc-cta button, .toc-container button');
@@ -24,7 +24,7 @@ class TableOfContents {
     this.listen();
 
     if (this.isOffcanvas) {
-      this.element.setAttribute("aria-expanded", false);
+      this.element.setAttribute("aria-hidden", true);
     }
   }
   isOffcanvas() {
@@ -64,12 +64,12 @@ class TableOfContents {
 
     // TODO: refacto timeout and css transition
     setTimeout(() => {
-      this.element.setAttribute("aria-expanded", this.state.opened);
+      this.element.setAttribute("aria-hidden", !this.state.opened);
     }, transitionDuration * 1000);
 
     setTimeout(() => {
       this.element.classList[classAction](CLASSES.isOpened);
-    }, 10)
+    }, 50)
     
     document.documentElement.classList[classAction](CLASSES.offcanvasOpened);
   }
@@ -82,7 +82,7 @@ class TableOfContents {
     const scroll = document.documentElement.scrollTop || document.body.scrollTop;
     let id = null;
     this.sections.forEach(section => {
-      if (section.offsetTop <= scroll) {
+      if (this.getAbsoluteOffsetTop(section) <= scroll) {
         id = section.id;
       }
     });
@@ -92,7 +92,11 @@ class TableOfContents {
     }
     this.updateScrollspy(scroll);
   }
+  getAbsoluteOffsetTop(element) {
+    return element.getBoundingClientRect().top
+  }
   activateLink(id) {
+    console.log(id)
     const currentLink = this.element.querySelector(`[href*=${ id }]`);
     this.state.id = id;
     this.links.forEach(link => link.classList.remove(CLASSES.linkActive));
