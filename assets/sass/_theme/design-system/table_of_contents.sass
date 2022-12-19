@@ -27,6 +27,7 @@
         @include media-breakpoint-up(desktop)
             font-size: $toc-title-font-size-desktop
             padding: $header-nav-padding-y $grid-gutter calc(#{$header-nav-padding-y} + 1px)
+            padding: calc((var(--header-height)) / 2 - #{$body-size}) $grid-gutter
     .toc
         flex: 1
         display: flex
@@ -53,7 +54,10 @@
             border-top: 0
             position: absolute
             padding-right: 0
-            top: $spacing0
+            top: 0
+            padding-top: 0
+            padding-bottom: 0
+            line-height: var(--header-height)
             right: $grid-gutter
             &::after
                 margin-left: $spacing0
