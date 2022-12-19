@@ -23,12 +23,10 @@
     .toc-title
         border-bottom: 1px solid $color-border
         font-size: $toc-title-font-size
-        padding: $header-nav-padding-y
-        @include media-breakpoint-up(desktop)
-            padding: $header-nav-padding-y $grid-gutter
+        padding: $spacing0 $spacing1
         @include media-breakpoint-up(desktop)
             font-size: $toc-title-font-size-desktop
-            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) $grid-gutter
+            padding: $header-nav-padding-y $grid-gutter calc(#{$header-nav-padding-y} + 1px)
     .toc
         flex: 1
         display: flex
@@ -47,9 +45,9 @@
         display: flex
         justify-content: space-between
         align-items: center
-        padding: $header-nav-padding-y $spacing1
+        padding: $spacing0 $spacing1 calc(#{$spacing0} - 1px)
         border-top: 1px solid $color-border
-        line-height: inherit
+        line-height: $body-line-height
         @include icon(close, after)
         @include media-breakpoint-up(desktop)
             border-top: 0
