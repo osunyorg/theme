@@ -29,7 +29,9 @@
             ) }}
           {{ if .image.credit }}
             <figcaption tabindex="0">
-              {{- partial "PrepareHTML" .image.credit -}}
+              <p>
+                {{- partial "GetTextFromHTML" .image.credit -}}
+              </p>
             </figcaption>
           {{ end }}
         </figure>
