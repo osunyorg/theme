@@ -28,8 +28,10 @@
               "desktop"  "856"
             ) }}
           {{ if .image.credit }}
-            <figcaption>
-              {{- partial "PrepareHTML" .image.credit -}}
+            <figcaption tabindex="0">
+              <p>
+                {{- partial "PrepareHTML" .image.credit -}}
+              </p>
             </figcaption>
           {{ end }}
         </figure>

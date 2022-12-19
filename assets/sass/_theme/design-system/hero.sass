@@ -21,14 +21,11 @@
         h1 + p
             margin-top: $spacing1
         figure
-            display: block
-            img, picture
+            &, img, picture
                 display: block
             figcaption
                 @include meta
                 color: $color-text-alt
-                margin-top: $spacing0
-                text-align: right
                 a
                     color: inherit
 
@@ -42,6 +39,31 @@
     //         .breadcrumb-nav
     //             order: 3
     //             margin-top: $spacing3
+
+    figure
+        position: relative
+        figcaption
+            position: absolute
+            display: block
+            left: 0
+            right: 0
+            z-index: 10
+            &::before
+                content: '©'
+                position: absolute
+                right: 0
+                top: 0
+                padding: half($spacing0) $spacing0
+                background: $color-background-alt
+                display: block
+            p
+                background: $color-background-alt
+                display: none
+                padding: half($spacing0) $spacing0
+            &:focus, &:hover
+                p
+                    display: block
+
 
     @include media-breakpoint-down(desktop)
         &--with-image
@@ -57,17 +79,6 @@
             figure
                 margin-bottom: calc(#{-$spacing5} + #{$spacing2})
                 margin-top: $spacing1
-        figcaption
-            position: absolute
-            left: 0
-            right: 0
-            bottom: 0
-            padding-top: $spacing0
-            transform: translateY(100%)
-            padding-left: half($grid-gutter-sm)
-            padding-right: half($grid-gutter-sm)
-        picture:not(last-child)
-            margin-bottom: $spacing2
 
     @include media-breakpoint-up(desktop)
         $negative-margin-bottom: px2rem(150)
@@ -75,7 +86,7 @@
             > h1, > hgroup
                 width: col(9)
         &--with-image
-            // margin-bottom: $negative-margin-bottom
+            margin-bottom: $negative-margin-bottom
             .content
                 display: flex
                 justify-content: space-between
