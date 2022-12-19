@@ -45,13 +45,13 @@
         display: flex
         justify-content: space-between
         align-items: center
-        padding: $spacing0 $spacing1 calc(#{$spacing0} - 1px)
+        padding: calc(#{$spacing0} - 1px) $spacing1 $spacing0
         border-top: 1px solid $color-border
         line-height: $body-line-height
         @include icon(close, after)
         @include media-breakpoint-up(desktop)
             border-top: 0
-            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) 0
+            padding: calc(#{$header-nav-padding-y} + 1px) 0 calc(#{$header-nav-padding-y})
             position: absolute
             top: 0
             right: $grid-gutter
