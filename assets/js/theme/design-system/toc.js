@@ -4,7 +4,8 @@ const CLASSES = {
   offcanvasOpened: 'has-offcanvas-opened',
   linkActive: 'active',
   isOpened: 'is-opened',
-  fullWidth: 'full-width'
+  fullWidth: 'full-width',
+  offcanvas: 'offcanvas-toc'
 };
 
 class TableOfContents {
@@ -19,7 +20,8 @@ class TableOfContents {
     this.togglers = document.querySelectorAll('.toc-cta button, .toc-container button');
     this.state = {
       opened: false,
-      currentId: null
+      currentId: null,
+      currentLink: 0
     }
     this.listen();
 
@@ -28,7 +30,7 @@ class TableOfContents {
     }
   }
   isOffcanvas() {
-    return isMobile() || document.body.classList.contains(CLASSES.fullWidth);
+    return isMobile() || document.body.classList.contains(CLASSES.fullWidth) || document.body.classList.contains(CLASSES.offcanvas);
   }
   listen() {
     window.addEventListener('scroll', this.update.bind(this), false);
@@ -82,7 +84,7 @@ class TableOfContents {
     const scroll = document.documentElement.scrollTop || document.body.scrollTop;
     let id = null;
     this.sections.forEach(section => {
-      if (this.getAbsoluteOffsetTop(section) <= scroll) {
+      if (this.getAbsoluteOffsetTop(section) <= scroll + window.innerHeight/2) {
         id = section.id;
       }
     });
@@ -93,17 +95,26 @@ class TableOfContents {
     this.updateScrollspy(scroll);
   }
   getAbsoluteOffsetTop(element) {
-    return element.getBoundingClientRect().top
+    let top = 0;
+    do {
+        top += element.offsetTop  || 0;
+        element = element.offsetParent;
+    } while(element);
+    return top
   }
   activateLink(id) {
-    console.log(id)
     const currentLink = this.element.querySelector(`[href*=${ id }]`);
-    this.state.id = id;
-    this.links.forEach(link => link.classList.remove(CLASSES.linkActive));
-    if (currentLink) {
-      currentLink.classList.add(CLASSES.linkActive);
-      this.updateCtaTitle(currentLink);
-    }
+    // console.log(currentLink.hash)
+    this.links.forEach((link, index) => {
+      if (link == currentLink) {
+        link.classList.add(CLASSES.linkActive);
+        this.updateCtaTitle(link);
+        this.state.id = id;
+        this.state.currentLink = link;
+      } else {
+        link.classList.remove(CLASSES.linkActive)
+      }
+    });
   }
   updateCtaTitle(link) {
     if (isMobile()) {
@@ -113,10 +124,14 @@ class TableOfContents {
     }
   }
   updateScrollspy(scroll) {
-    const progression = Math.max((scroll - window.innerHeight) / document.body.offsetHeight, 0);
     const container = this.isOffcanvas() ? this.nav : this.content;
-    // TODO: ne fonctionne pas avec le  behavior-scroll: smooth
-    container.scrollTop = progression * window.innerHeight/2;
+    if (this.state.currentLink) {
+      let progress = (this.getAbsoluteOffsetTop(this.state.currentLink) - container.offsetHeight/2);
+      progress = this.isOffcanvas() ? progress : progress - scroll;
+      container.scrollTo({
+        top: progress
+      })
+    }
   }
 }
 

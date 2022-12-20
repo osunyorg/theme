@@ -1,25 +1,25 @@
 {{- if or (partial "GetTextFromHTML" .Params.prerequisites) (partial "GetTextFromHTML" .Params.pricing) (partial "GetTextFromHTML" .Params.registration) (partial "GetTextFromHTML" .Params.accessibility) (partial "GetTextFromHTML" .Params.other) -}}
-<section id="{{ anchorize (i18n "programs.toc.admission") }}">
+<section id="{{ urlize (i18n "programs.toc.admission") }}">
   <div class="container">
     <div class="content">
       <h2>{{ i18n "programs.toc.admission" }}</h2>
       <div>
         {{- if partial "GetTextFromHTML" .Params.prerequisites -}}
-          <section id="{{ anchorize (i18n "programs.prerequisites") }}">
+          <section id="{{ urlize (i18n "programs.prerequisites") }}">
             <h3>{{ i18n "programs.prerequisites" }}</h3>
             {{- partial "PrepareHTML" .Params.prerequisites -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pricing -}}
-          <section id="{{ anchorize (i18n "programs.pricing") }}">
+          <section id="{{ urlize (i18n "programs.pricing") }}">
             <h3>{{ i18n "programs.pricing" }}</h3>
             {{- partial "PrepareHTML" .Params.pricing -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.registration -}}
-          <section id="{{ anchorize (i18n "programs.registration") }}">
+          <section id="{{ urlize (i18n "programs.registration") }}">
             <h3>{{ i18n "programs.registration" }}</h3>
             {{- partial "PrepareHTML" .Params.registration -}}
             {{- if partial "GetTextFromHTML" .Params.registration_url -}}
@@ -29,21 +29,21 @@
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.accessibility -}}
-          <section id="{{ anchorize (i18n "programs.accessibility") }}">
+          <section id="{{ urlize (i18n "programs.accessibility") }}">
             <h3>{{ i18n "programs.accessibility" }}</h3>
             {{- partial "PrepareHTML" .Params.accessibility -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.other -}}
-          <section id="{{ anchorize (i18n "programs._other") }}">
+          <section id="{{ urlize (i18n "programs._other") }}">
             <h3>{{ i18n "programs._other" }}</h3>
             {{- partial "PrepareHTML" .Params.other -}}
           </section>
         {{- end -}}
 
         {{- if .Params.roles -}}
-          <section id="{{ anchorize (i18n "programs.roles") }}">
+          <section id="{{ urlize (i18n "programs.roles") }}">
             <h3>{{ i18n "programs.roles" }}</h3>
             {{- with .Params.roles -}}
               {{- range . }}
@@ -74,7 +74,7 @@
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.contacts -}}
-          <section id="{{ anchorize (i18n "programs.contacts") }}">
+          <section id="{{ urlize (i18n "programs.contacts") }}">
             <h3>{{ i18n "programs.contacts" }}</h3>
             {{- if or (partial "GetTextFromHTML" .Params.contacts) -}}
               {{- partial "PrepareHTML" .Params.contacts -}}

@@ -1,25 +1,25 @@
 {{- if or (partial "GetTextFromHTML" .Params.content) (partial "GetTextFromHTML" .Params.pedagogy) (partial "GetTextFromHTML" .Params.evaluation) (.Params.teachers) -}}
-<section id="{{ anchorize ( i18n "programs.toc.pedagogy" ) }}">
+<section id="{{ urlize ( i18n "programs.toc.pedagogy" ) }}">
   <div class="container">
     <div class="content">
       <h2>{{ i18n "programs.toc.pedagogy" }}</h2>
       <div>
         {{- if partial "GetTextFromHTML" .Params.content -}}
-          <section id="{{ anchorize (i18n "programs.content") }}">
+          <section id="{{ urlize (i18n "programs.content") }}">
             <h3>{{ i18n "programs.content" }}</h3>
             {{- partial "PrepareHTML" .Params.content -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pedagogy -}}
-          <section id="{{ anchorize (i18n "programs.pedagogy") }}">
+          <section id="{{ urlize (i18n "programs.pedagogy") }}">
             <h3>{{ i18n "programs.pedagogy" }}</h3>
             {{- partial "PrepareHTML" .Params.pedagogy -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.evaluation -}}
-          <section id="{{ anchorize (i18n "programs.evaluation") }}">
+          <section id="{{ urlize (i18n "programs.evaluation") }}">
             <h3>{{ i18n "programs.evaluation" }}</h3>
             {{- partial "PrepareHTML" .Params.evaluation -}}
           </section>
@@ -27,7 +27,7 @@
 
         {{- if .Params.teachers -}}
           {{ $title := i18n "programs.teachers" -}}
-          <section >
+          <section id="{{ urlize $title }}">
             <h3>{{ $title }}</h3>
             {{- partial "programs/teachers.html"
                           (dict
