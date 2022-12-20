@@ -1,4 +1,4 @@
-<section id="presentation">
+<section id="{{ urlize (i18n "programs.toc.presentation") }}">
     <div class="container">
       <div class="content">
         <h2>{{ i18n "programs.toc.presentation" }}</h2>
@@ -9,39 +9,41 @@
             {{- partial "PrepareHTML" .Params.objectives -}}
           {{- end -}}
 
-          <h3 id="{{ anchorize (i18n "programs.administrative_information") }}">{{ i18n "programs.administrative_information" }}</h3>
-          <table class="post-infos">
-            <caption>{{ i18n "programs.administrative_information" }}</caption>
-            <tbody>
-              {{- with .Params.diplomas -}}
-                {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
-                {{- with $diploma.Params.ects -}}
-                  <tr>
-                    <th>{{ i18n "programs.ects_credits" }}</th>
-                    <td>{{ partial "PrepareHTML" . }}</td>
-                  </tr>
+          <section id="{{ urlize (i18n "programs.administrative_information") }}">
+            <h3>{{ i18n "programs.administrative_information" }}</h3>
+            <table class="post-infos">
+              <caption>{{ i18n "programs.administrative_information" }}</caption>
+              <tbody>
+                {{- with .Params.diplomas -}}
+                  {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
+                  {{- with $diploma.Params.ects -}}
+                    <tr>
+                      <th>{{ i18n "programs.ects_credits" }}</th>
+                      <td>{{ partial "PrepareHTML" . }}</td>
+                    </tr>
+                  {{- end -}}
                 {{- end -}}
-              {{- end -}}
-              <tr>
-                <th>{{ i18n "programs.type.initial" }}</th>
-                <td>{{ if .Params.initial }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
-              </tr>
-              <tr>
-                <th>{{ i18n "programs.type.continuing" }}</th>
-                <td>{{ if .Params.continuing }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
-              </tr>
-              <tr>
-                <th>{{ i18n "programs.type.apprenticeship" }}</th>
-                <td>{{ if .Params.apprenticeship }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
-              </tr>
-              {{- if partial "GetTextFromHTML" .Params.capacity -}}
-              <tr>
-                <th>{{ i18n "programs.capacity" }}</th>
-                <td>{{ partial "PrepareHTML" .Params.capacity }}</td>
-              </tr>
-              {{- end -}}
-            </tbody>
-          </table>
+                <tr>
+                  <th>{{ i18n "programs.type.initial" }}</th>
+                  <td>{{ if .Params.initial }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+                </tr>
+                <tr>
+                  <th>{{ i18n "programs.type.continuing" }}</th>
+                  <td>{{ if .Params.continuing }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+                </tr>
+                <tr>
+                  <th>{{ i18n "programs.type.apprenticeship" }}</th>
+                  <td>{{ if .Params.apprenticeship }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+                </tr>
+                {{- if partial "GetTextFromHTML" .Params.capacity -}}
+                <tr>
+                  <th>{{ i18n "programs.capacity" }}</th>
+                  <td>{{ partial "PrepareHTML" .Params.capacity }}</td>
+                </tr>
+                {{- end -}}
+              </tbody>
+            </table>
+          </section>
 
         </div>
         {{- partial "blocks/list.html" . }}

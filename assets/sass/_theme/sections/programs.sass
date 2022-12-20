@@ -83,9 +83,11 @@ ol.programs
     .document-content
         .content
             padding-bottom: $spacing2
-            > div > * + *
+            section > * + *
                 margin-top: 1em
             .blocks
+                h3
+                    @include h3
                 @include media-breakpoint-down(desktop)
                     margin-left: half(-$grid-gutter-sm)
                     margin-right: half(-$grid-gutter-sm)
@@ -113,8 +115,9 @@ ol.programs
                     align-self: start
                     grid-column: 1/5
                     margin-bottom: 0
-                h3:not(:first-of-type)
+                section:not(:first-of-type)
                     margin-top: $spacing4
+                
             section:first-of-type
                 .content
                     border-top: none

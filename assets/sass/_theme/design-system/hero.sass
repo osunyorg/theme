@@ -21,6 +21,7 @@
         h1 + p
             margin-top: $spacing1
         figure
+            position: relative
             &, img, picture
                 display: block
             figcaption
@@ -28,6 +29,37 @@
                 color: $color-text-alt
                 a
                     color: inherit
+
+                position: absolute
+                display: block
+                left: 0
+                right: 0
+                z-index: 10
+                p
+                    @include meta
+                &::before
+                    @include meta
+                    content: '©'
+                    position: absolute
+                    right: 0
+                    top: 0
+                    background: $color-background-alt
+                    text-align: center
+                    line-height: px2rem(30)
+                    width: px2rem(30)
+                    height: px2rem(30)
+                    display: block
+                p
+                    background: $color-background-alt
+                    display: none
+                    padding: half($spacing0)
+                    padding-right: $spacing2
+                &:focus
+                    p
+                        display: block
+            &:hover
+                figcaption p
+                    display: block
 
     // TODO : handle hero with image
     // @if $breadcrumb-below-h1
@@ -39,37 +71,6 @@
     //         .breadcrumb-nav
     //             order: 3
     //             margin-top: $spacing3
-
-    figure
-        position: relative
-        figcaption
-            position: absolute
-            display: block
-            left: 0
-            right: 0
-            z-index: 10
-            &::before
-                content: '©'
-                position: absolute
-                right: 0
-                top: 0
-                background: $color-background-alt
-                text-align: center
-                line-height: px2rem(30)
-                width: px2rem(30)
-                height: px2rem(30)
-                display: block
-            p
-                background: $color-background-alt
-                display: none
-                padding: half($spacing0)
-                padding-right: $spacing2
-            &:focus
-                p
-                    display: block
-        &:hover
-            figcaption p
-                display: block
 
     @include media-breakpoint-down(desktop)
         &--with-image
