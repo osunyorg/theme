@@ -1,49 +1,55 @@
 {{- $context := .context -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
+{{- $layout := .block.data.layout | default "no_background" -}}
 {{- $class := "block block-chapter" -}}
 {{- with .block.data -}}
   {{ if .image }}
     {{- $class = printf "%s block-chapter--with-image" $class -}}
   {{ end }}
+  {{- $layout_class := printf "block-chapter--%s" $layout -}}
+  {{- $class = printf "%s %s" $class $layout_class -}}
+
   <section class="{{ $class }}{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
-
+        
         <div class="chapter">
-          {{ if $title -}}
-            <div class="top">
-              {{ partial "blocks/title" (dict 
-                "title" $title
-                "context" $context
-                ) }}
+          <div class="text">
+            {{ if $title -}}
+              <div class="top">
+                {{ partial "blocks/title" (dict 
+                  "title" $title
+                  "context" $context
+                  ) }}
+              </div>
+            {{ end -}}
+            {{ if (partial "GetTextFromHTML" .text) -}}
+            <div class="rich-text">
+              {{ partial "PrepareHTML" .text }}
             </div>
-          {{ end -}}
-          {{ if (partial "GetTextFromHTML" .text) -}}
-          <div class="rich-text">
-            {{ partial "PrepareHTML" .text }}
+            {{ end -}}
+            {{ if (partial "GetTextFromHTML" .notes) }}
+              <div class="notes">
+                {{ partial "PrepareHTML" .notes }}
+              </div>
+            {{ end -}}
           </div>
-          {{ end -}}
-          {{ if (partial "GetTextFromHTML" .notes) }}
-            <div class="notes">
-              {{ partial "PrepareHTML" .notes }}
-            </div>
-          {{ end -}}
-        </div>
-        {{ with .image }}
+          {{ if .image }}
           <figure>
             {{ partial "commons/image.html"
               (dict
-                "image"    .
-                "mobile"   "351x351"
-                "tablet"   "336x336"
-                "desktop"  "636x636"
+                "image"    .image
+                "mobile"   "350x350"
+                "tablet"   "450x450"
+                "desktop"  "1280x1280"
               )}}
             {{ if partial "GetTextFromHTML" .credit }}
               <figcaption>{{ partial "PrepareHTML" .credit }}</figcaption>
             {{ end }}
           </figure>
         {{ end -}}
+        </div>
       </div>
     </div>
   </section>

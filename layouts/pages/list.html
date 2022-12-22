@@ -5,13 +5,35 @@
 
     {{/*  TOC PART  */}}
     {{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}
-    {{- if .Params.blocks }}
-      {{ $need_aside := false }}
-      {{ range .Params.blocks }}
-        {{ if .title }}
-          {{ $need_aside = true }}
-        {{ end }}
-      {{ end }}
+    {{- $show_aside := false -}}
+
+    {{- $has_blocks := false -}}
+    {{- range .Params.blocks -}}
+      {{- $has_blocks = true -}}
+      {{- if .title -}}
+        {{- $show_aside = true -}}
+      {{- end -}}
+    {{- end -}}
+    
+    {{- if .Pages -}}
+      {{- if eq $has_blocks false -}}
+        {{- $show_aside = true -}}
+      {{- end -}}
+    {{- end -}}
+    
+    {{- if .Content -}}
+      {{- if eq $has_blocks false -}}
+        {{- $show_aside = true -}}
+      {{- end -}}
+    {{- end -}}
+    
+    {{- if $category -}}
+      {{- if eq $has_blocks false -}}
+        {{- $show_aside = true -}}
+      {{- end -}}
+    {{- end -}}
+    
+    {{- if $show_aside }}
       {{ partial "toc/container.html"
           (dict
               "category" $category

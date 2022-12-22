@@ -21,11 +21,12 @@ class TableOfContents {
     this.state = {
       opened: false,
       currentId: null,
-      currentLink: 0
+      currentLink: 0,
+      isOffcanvas : this.isOffcanvas()
     }
     this.listen();
 
-    if (this.isOffcanvas) {
+    if (this.state.isOffcanvas) {
       this.element.setAttribute("aria-hidden", true);
     }
   }
@@ -124,10 +125,10 @@ class TableOfContents {
     }
   }
   updateScrollspy(scroll) {
-    const container = this.isOffcanvas() ? this.nav : this.content;
-    if (this.state.currentLink) {
+    const container = this.state.isOffcanvas ? this.nav : this.content;
+    if (this.state.currentLink && scroll > window.innerHeight) {
       let progress = (this.getAbsoluteOffsetTop(this.state.currentLink) - container.offsetHeight/2);
-      progress = this.isOffcanvas() ? progress : progress - scroll;
+      progress = this.state.isOffcanvas ? progress : progress - scroll;
       container.scrollTo({
         top: progress
       })

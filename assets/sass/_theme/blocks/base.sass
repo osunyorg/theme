@@ -1,14 +1,6 @@
-.blocks
-    .block
-        margin-top: $spacing4
-        &:first-of-type
-            margin-top: 0
-        // &-with-title
-            // margin-top: $spacing4
-        &:last-of-type
-            margin-bottom: $spacing4
-
 .block
+    padding-top: $spacing3
+    padding-bottom: $spacing3
     // Mobile & full-width
     h2, h3
         @include h2
@@ -17,3 +9,8 @@
         @include in-page-without-sidebar
             h2, h3
                 @include h5
+    .top
+        h2, h3
+            + .description
+                margin-top: $spacing2
+
