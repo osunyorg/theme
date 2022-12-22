@@ -112,10 +112,6 @@ h2, .h2
 
 .lead
     @include lead
-    margin-top: 0
-    margin-bottom: $spacing3
-    @include media-breakpoint-up(desktop)
-        margin-bottom: $spacing4
 
 .p,
 .li
@@ -165,8 +161,8 @@ small, .small
 @mixin rich-text
     h1, h2, h3, h4, h5, h6, p
         margin-top: 2em
-    &:first-child, meta + &
-        margin-top: 0
+        &:first-child, meta + &
+            margin-top: 0
 
 .rich-text
     @include rich-text

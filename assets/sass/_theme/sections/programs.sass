@@ -81,11 +81,16 @@ ol.programs
                 font-size: $program-share-font-size-desktop
 
     .document-content
+        @include media-breakpoint-up(desktop)
+            .lead
+                padding: $spacing2 0
         .content
             padding-bottom: $spacing2
-            section > * + *
+            section:not(.block) > * + *
                 margin-top: 1em
             .blocks
+                section > * + *
+                    margin-top: 0
                 h3
                     @include h3
                 @include media-breakpoint-down(desktop)
@@ -97,7 +102,13 @@ ol.programs
                         padding-right: 0
                     .block-content
                         padding-left: 0
-
+    @include media-breakpoint-down(desktop)
+        .document-content
+            .content
+                h2
+                    margin-bottom: $spacing2
+            section:not(:first-child):not(.block)
+                margin-top: $spacing3
     @include media-breakpoint-up(desktop)
         .document-content
             .content
@@ -115,9 +126,8 @@ ol.programs
                     align-self: start
                     grid-column: 1/5
                     margin-bottom: 0
-                section:not(:first-of-type)
+                section:not(:first-child):not(.block)
                     margin-top: $spacing4
-                
             section:first-of-type
                 .content
                     border-top: none

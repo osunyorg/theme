@@ -54,22 +54,6 @@
             @include grid(2, desktop)
             @include grid($posts-grid-columns, xxl)
 
-.categories__term
-    @if $posts-layout-list
-        @include media-breakpoint-down(desktop)
-            .posts 
-                grid-gap: $spacing3
-                article 
-                    border: none
-                    padding-bottom: 0
-                    margin-bottom: 0
-                    flex-direction: column
-                    div:not(.media)
-                        margin-left: unset
-                        margin-top: $spacing0
-                    .media
-                        width: 100%
-
 .posts__page
     @include media-breakpoint-down(desktop)
         .document-content
@@ -96,8 +80,7 @@
             min-height: 350px
     .lead
         @include h3
-        @include media-breakpoint-up(desktop)
-            margin-bottom: $spacing3
+
 
 .post-categories
     @include list-reset

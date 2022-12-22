@@ -30,6 +30,10 @@
             a
                 @include link($block-chapter-layout-accent-color)
 
+    @include media-breakpoint-down(desktop)
+        &--with-image
+            &.block-chapter--alt_background, &.block-chapter--accent_background
+                padding-top: half($grid-gutter-sm)
     @include media-breakpoint-up(desktop)
         @include in-page-with-sidebar
             &--alt_background, &--accent_background
