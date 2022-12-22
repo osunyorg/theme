@@ -10,22 +10,45 @@
     figcaption
         @include small
         margin-top: 0.5rem
-    .block-content
+    .chapter
         flex-direction: column
         display: flex
-        .chapter
+        .text
             order: 2
         figure
             margin-bottom: $spacing1
+    &--alt_background
+        background: $block-chapter-layout-alt-background
+        .block-content
+            color: $block-chapter-layout-alt-color
+            a
+                @include link($block-chapter-layout-accent-color)
+    &--accent_background
+        background: $block-chapter-layout-accent-background
+        .block-content
+            color: $block-chapter-layout-accent-color
+            a
+                @include link($block-chapter-layout-accent-color)
+
     @include media-breakpoint-up(desktop)
         @include in-page-with-sidebar
-            picture
-                margin-top: $spacing1
+            &--alt_background, &--accent_background
+                background: none
+                .chapter .text
+                    padding: $grid-gutter col(1, 8)
+            figcaption
+                padding: 0 col(1, 8)
+            &--alt_background
+                .chapter
+                    background: $block-chapter-layout-alt-background
+            &--accent_background
+                .chapter
+                    background: $block-chapter-layout-accent-background
         @include in-page-without-sidebar
-            .block-content
+            .chapter
                 flex-direction: row
                 align-items: center
-                .chapter
+                .text
                     order: 0
                     width: col(7)
                 figure
