@@ -75,6 +75,32 @@
             width: col-outside-container(4)
             .post-infos
                 @include sticky($spacing1)
+                border-collapse: collapse
+                caption-side: bottom
+                font-size: $table-body-size
+                vertical-align: top
+                width: 100%
+                text-align: left
+                @include media-breakpoint-up(desktop)
+                    font-size: $table-body-size-desktop
+                > li
+                    display: flex
+                    justify-content: space-between
+                    padding-top: $spacing0
+                    padding-bottom: $spacing0
+                    padding-right: $spacing0
+                    border-top: 1px solid $color-border
+                    &:first-child
+                        border-top: 0
+                    > ul, time
+                        text-align: right
+                        flex: 1
+                    > ul:not(.share)
+                        > li
+                            a
+                                @include link
+                                color: $color-accent
+                                text-decoration-color: rgba(0,0,0,0)
         // Safe spacing if post is empty
         .document-content
             min-height: 350px
