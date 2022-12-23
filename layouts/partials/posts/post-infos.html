@@ -1,30 +1,30 @@
 <ul class="post-infos">
   {{ if .Params.Categories }}
     <li>
-      
+      <span>
         {{- if gt (len .Params.Categories) 1 -}}
           {{ i18n "posts.categories" }}
         {{- else -}}
           {{ i18n "posts.category" }}
         {{- end -}}
+      </span>
       {{ partial "posts/categories.html" . }}
     </li>
   {{ end }}
   <li>
-    {{ i18n "posts.date" }}
+    <span>{{ i18n "posts.date" }}</span>
     <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
   </li>
   {{ range .GetTerms "authors" }}
     <li>
-      {{ i18n "posts.author" }}
+      <span>{{ i18n "posts.author" }}</span>
       <a href="{{ .Permalink }}" itemprop="url">
         <span itemprop="name">{{ safeHTML .Params.person }}
       </a>
     </li>
   {{ end }}
   <li>
-    {{ i18n "posts.share" }}
+    <span>{{ i18n "posts.share" }}</span>
     {{ partial "commons/share.html" }}
   </li>
-
 </ul>

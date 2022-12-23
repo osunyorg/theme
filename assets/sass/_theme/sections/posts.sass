@@ -75,32 +75,6 @@
             width: col-outside-container(4)
             .post-infos
                 @include sticky($spacing1)
-                border-collapse: collapse
-                caption-side: bottom
-                font-size: $table-body-size
-                vertical-align: top
-                width: 100%
-                text-align: left
-                @include media-breakpoint-up(desktop)
-                    font-size: $table-body-size-desktop
-                > li
-                    display: flex
-                    justify-content: space-between
-                    padding-top: $spacing0
-                    padding-bottom: $spacing0
-                    padding-right: $spacing0
-                    border-top: 1px solid $color-border
-                    &:first-child
-                        border-top: 0
-                    > ul, time
-                        text-align: right
-                        flex: 1
-                    > ul:not(.share)
-                        > li
-                            a
-                                @include link
-                                color: $color-accent
-                                text-decoration-color: rgba(0,0,0,0)
         // Safe spacing if post is empty
         .document-content
             min-height: 350px
@@ -122,43 +96,37 @@
 .post-infos
     margin-bottom: 0
     @include meta
-    ul
-        @include list-reset
-    caption
-        @include visually-hidden
-        position: relative !important // Fix safari iOS border issue
-    th
+    @include list-reset
+    font-size: $table-body-size
+    @include media-breakpoint-up(desktop)
+        font-size: $table-body-size-desktop
+    > li
         @include meta
-        color: $color-text-alt
-        padding-left: 0
-        white-space: nowrap
-        vertical-align: top
-    tr
+        display: flex
+        justify-content: space-between
+        padding-top: $spacing0
+        padding-bottom: $spacing0
         border-color: $color-border
-        @include meta
-        a
-            color: $color-accent
-            @include meta
-            &:not(:hover)
-                text-decoration-color: transparent
-    th, td
         padding: 1rem 0
-    .multiple
-
-    td:last-of-type
-        padding-right: 0
-        text-align: right
-    tr:first-of-type
-        border-top: 0
-        th, td
-            padding-top: 0
-    tr:last-of-type
-        border-bottom: 0
+        &:not(:first-child)
+            border-top: 1px solid $color-border
+        > span
+            @include meta
+            color: $color-text-alt
+            padding-left: 0
+            white-space: nowrap
+            vertical-align: top
+        > ul
+            text-align: right
+            flex: 1
+    a
+        @include meta
+        @include link($color-accent)
     .share
         justify-content: flex-end
         a
             color: inherit
-        li:last-child
+        li:last-child a
             margin-right: -$spacing0
 
 .related
