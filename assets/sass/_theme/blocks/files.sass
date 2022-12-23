@@ -3,43 +3,44 @@
         h2, h3
             + .description
                 margin-top: $spacing0
-    ul
+    .files
         @include list-reset
-    li
-        @include icon("download", before)
-        align-items: start
-        display: flex
-        position: relative
-        &::before
-            align-items: center
-            border: 1px solid $color-border
+        li
+            @include icon("download", before)
+            align-items: start
             display: flex
-            flex-shrink: 0
-            font-size: px2rem(18)
-            height: px2rem(60)
-            justify-content: center
-            margin-right: $spacing0
-            transition: background 0.3s ease, border 0.3s ease
-            width: px2rem(60)
-        &:hover
+            position: relative
             &::before
-                background-color: $color-border
-                border-color: transparent
-    a
-        @include stretched-link(before)
-        @include small
-        text-decoration: none
-        &::after
-            content: none !important // Remove default icon _blank
+                align-items: center
+                border: 1px solid $color-border
+                display: flex
+                flex-shrink: 0
+                font-size: px2rem(18)
+                height: px2rem(60)
+                justify-content: center
+                margin-right: $spacing0
+                transition: background 0.3s ease, border 0.3s ease
+                width: px2rem(60)
+            &:hover
+                &::before
+                    background-color: $color-border
+                    border-color: transparent
+        a
+            @include stretched-link(before)
+            @include small
+            text-decoration: none
+            &::after
+                content: none !important // Remove default icon _blank
 
     figcaption
         @include meta
     @include media-breakpoint-down(desktop)
-        li + li
-            margin-top: $spacing1
+        .files
+            li + li
+                margin-top: $spacing1
     @include media-breakpoint-up(desktop)
         @include in-page-with-sidebar
-            ul
+            .files
                 @include grid(2, desktop, half($grid-gutter))
         @include in-page-without-sidebar
             .top
@@ -50,5 +51,5 @@
                     margin-top: 0
                     width: col(8)
                     margin-left: $grid-gutter
-            ul
+            .files
                 @include grid(3, desktop, half($grid-gutter))

@@ -20,11 +20,11 @@
           </div>
         {{ end -}}
 
-        {{ if (modBool $figures 2)}}
-          <ul class="even-items">
-          {{ else }}
-            <ul class="odd-items">
+        {{ $list_class := "odd-items" }}
+        {{ if (modBool $figures 2) }}
+          {{ $list_class = "even-items" }}
         {{ end }}
+        <ul class="{{ $list_class }}">
           {{- range .figures }}
               <li>
                 <dl>
