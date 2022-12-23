@@ -15,7 +15,6 @@
   <section class="{{ $class }}{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
-        
         <div class="chapter">
           <div class="text">
             {{ if $title -}}
@@ -38,19 +37,23 @@
             {{ end -}}
           </div>
           {{ if .image }}
-          <figure class="{{- $image_class -}}">
-            {{ partial "commons/image.html"
-              (dict
-                "image"    .image
-                "mobile"   "350x350"
-                "tablet"   "450x450"
-                "desktop"  "1280x1280"
-              )}}
-            {{ if partial "GetTextFromHTML" .credit }}
-              <figcaption>{{ partial "PrepareHTML" .credit }}</figcaption>
-            {{ end }}
-          </figure>
-        {{ end -}}
+            <figure class="{{- $image_class -}}">
+              <a class="glightbox"
+                data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
+                href="{{ partial "GetLightboxUrl" .image }}">
+                {{ partial "commons/image.html"
+                  (dict
+                    "image"    .image
+                    "mobile"   "350x350"
+                    "tablet"   "450x450"
+                    "desktop"  "1280x1280"
+                  )}}
+              </a>
+              {{ if partial "GetTextFromHTML" .credit }}
+                <figcaption>{{ partial "PrepareHTML" .credit }}</figcaption>
+              {{ end }}
+            </figure>
+          {{ end -}}
         </div>
       </div>
     </div>

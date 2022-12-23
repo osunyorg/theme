@@ -19,20 +19,24 @@
       {{- end -}}
       {{- if .image }}
         <figure>
-          {{ partial "commons/image.html"
-            (dict
-              "image"    .image
-              "mobile"   "351"
-              "tablet"   "456"
-              "desktop"  "856"
-            ) }}
-          {{ if .image.credit }}
-            <figcaption tabindex="0">
-              <p>
-                {{- partial "GetTextFromHTML" .image.credit -}}
-              </p>
-            </figcaption>
-          {{ end }}
+          <a class="glightbox"
+            data-glightbox="type: image;{{ if .image.credit }}description: {{ partial "PrepareHTML" .image.credit }}{{ end }}"
+            href="{{ partial "GetLightboxUrl" .image }}">
+            {{ partial "commons/image.html"
+              (dict
+                "image"    .image
+                "mobile"   "400"
+                "tablet"   "800"
+                "desktop"  "900"
+              ) }}
+              {{ if .image.credit }}
+                <figcaption tabindex="0">
+                  <p>
+                    {{- partial "GetTextFromHTML" .image.credit -}}
+                  </p>
+                </figcaption>
+              {{ end }}
+          </a>
         </figure>
       {{ end -}}
     </div>
