@@ -5,7 +5,7 @@
         margin-top: $spacing1
         *
             @include small
-    picture
+    picture, img
         display: block
     figcaption
         @include small
@@ -15,7 +15,7 @@
         display: flex
         .text
             order: 2
-        figure
+        figcaption
             margin-bottom: $spacing1
     &--alt_background
         background: $block-chapter-layout-alt-background
@@ -27,13 +27,16 @@
             color: $block-chapter-layout-accent-color
             a
                 @include link($block-chapter-layout-accent-color)
-
     @include media-breakpoint-down(desktop)
         &--with-image
             &.block-chapter--alt_background, &.block-chapter--accent_background
                 padding-top: half($grid-gutter-sm)
     @include media-breakpoint-up(desktop)
         @include in-page-with-sidebar
+            figure
+                max-width: col(6, 8)
+                &.image-portrait
+                    max-width: col(4, 8)
             &--alt_background, &--accent_background
                 background: none
                 .chapter .text
