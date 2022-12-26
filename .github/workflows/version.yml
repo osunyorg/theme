@@ -1,4 +1,7 @@
 on:
+  push:
+    tags:
+      - '*'
   release:
     types: [published]
 
@@ -10,10 +13,14 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: GitHub Tag Name
+        run: |
+          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
       - name: Get current version
         uses: dolittle/write-version-to-file-action@v2
         with:
-          version: test
+          version: ${{ github.ref_name }}
           path: ./.osuny-theme-version
           user-email: osuny@noesya.coop
           user-name: osuny-bot
