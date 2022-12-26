@@ -13,7 +13,7 @@ jobs:
       - name: Get current version
         uses: dolittle/write-version-to-file-action@v2
         with:
-          version: ${{ github.ref_name }}
+          version: ${{ GITHUB_REF }}
           path: ./.osuny-theme-version
           user-email: osuny@noesya.coop
           user-name: osuny-bot
