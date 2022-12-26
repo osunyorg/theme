@@ -128,13 +128,13 @@
         position: absolute
         width: col-outside-container(4)
         .toc-content
-            position: sticky
-            top: var(--header-height)
             overflow-y: auto
             max-height: calc(100vh - var(--header-height))
             margin-bottom: $spacing1
             padding-bottom: $spacing5
             pointer-events: auto
+            @include sticky($spacing1)
+
         button
             display: none
 
