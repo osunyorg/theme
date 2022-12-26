@@ -1,13 +1,1 @@
-{{ $isNeeded := false }}
-
-{{ if eq .context.Type "programs" }}
-  {{ $isNeeded = true }}
-{{ end }}
-
-{{ if .context.Params.blocks }}
-  {{ if gt (len .context.Params.blocks) 1 }}
-    {{ $isNeeded = true }}
-  {{ end }}
-{{ end }}
-
-{{ return $isNeeded }}
+{{ return .context.Params.layout.toc.present }}
