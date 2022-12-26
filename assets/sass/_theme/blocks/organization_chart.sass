@@ -9,21 +9,20 @@
             + p
                 margin-top: half($spacing0)
 
-
+    @include in-page-with-sidebar
+        .persons
+            @include grid(1, sm)
+            @include grid(2, desktop)
+        article
+            flex-direction: row
+            align-items: start
+            .avatar
+                margin-right: $spacing1
+                width: calc(#{col(1, 4)} + #{$grid-gutter})
+            .description
+                flex: 1
+                margin-top: $spacing1
     @include media-breakpoint-up(sm)
-        @include in-page-with-sidebar
-            .persons
-                @include grid(1, sm)
-                @include grid(2, desktop)
-            article
-                flex-direction: row
-                align-items: start
-                .avatar
-                    margin-right: $spacing1
-                    width: calc(#{col(1, 4)} + #{$grid-gutter})
-                .description
-                    flex: 1
-                    margin-top: $spacing1
         @include in-page-without-sidebar
             .persons
                 @include grid(4, lg)

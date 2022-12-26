@@ -147,19 +147,19 @@
                 margin-bottom: $spacing0
             ul
                 margin-top: $spacing1
+        @include in-page-with-sidebar
+            .block-content
+                .top
+                    margin-bottom: $spacing1
+                .description
+                    margin-bottom: $spacing1
+                ul
+                    @include grid(2, desktop)
+                    grid-row-gap: $spacing0 !important
+                    grid-column-gap: half($grid-gutter) !important
+                    li
+                        margin-top: 0
         @include media-breakpoint-up(desktop)
-            @include in-page-with-sidebar
-                .block-content
-                    .top
-                        margin-bottom: $spacing1
-                    .description
-                        margin-bottom: $spacing1
-                    ul
-                        @include grid(2, desktop)
-                        grid-row-gap: $spacing0 !important
-                        grid-column-gap: half($grid-gutter) !important
-                        li
-                            margin-top: 0
             @include in-page-without-sidebar
                 h2
                     a

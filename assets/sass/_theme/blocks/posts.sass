@@ -21,10 +21,10 @@
         @include media-breakpoint-down(desktop)
             article + article
                 margin-top: $spacing3
+        @include in-page-with-sidebar
+            .grid
+                @include grid(2, desktop, $grid-gutter, half($grid-gutter))
         @include media-breakpoint-up(desktop)
-            @include in-page-with-sidebar
-                .grid
-                    @include grid(2, desktop, $grid-gutter, half($grid-gutter))
             @include in-page-without-sidebar
                 .grid
                     @include grid($block-posts-grid-columns)
@@ -67,20 +67,21 @@
                     // top: 0
                     // right: 0
 
+        @include in-page-with-sidebar
+            article
+                padding-bottom: $spacing1
+                + article
+                    margin-top: $spacing1
+                .media
+                    width: calc(#{col(2, 8)} + #{half($grid-gutter)})
+                .post-content
+                    width: col(6, 8)
+                    margin-left: half($grid-gutter)
+
         @include media-breakpoint-up(desktop)
             article
                 display: flex
                 flex-direction: row
-            @include in-page-with-sidebar
-                article
-                    padding-bottom: $spacing1
-                    + article
-                        margin-top: $spacing1
-                    .media
-                        width: calc(#{col(2, 8)} + #{half($grid-gutter)})
-                    .post-content
-                        width: col(6, 8)
-                        margin-left: half($grid-gutter)
 
             @include in-page-without-sidebar
                  article
@@ -123,9 +124,34 @@
             .media
                 margin-top: 0
 
+        @include in-page-with-sidebar
+            .highlight-post
+                .post
+                    flex-direction: row
+                    .media
+                        width: calc(#{col(3, 8)} + #{half($grid-gutter)})
+                        margin-bottom: 0
+                    .post-content
+                        width: col(5, 8)
+                        margin-left: half($grid-gutter)
+            .list
+                article
+                    @include grid(8, desktop, 0, 0)
+                    h1
+                        grid-column: 1 / 7
+                    time
+                        grid-column: 7 / 9
+                        text-align: right
+                        order: 2
+                        margin-top: 0
+                    p
+                        grid-column: 1 / 7
+                        order: 3
+        
         @include media-breakpoint-down(desktop)
             .list
                 border-top: 1px solid $color-border
+
         @include media-breakpoint-up(desktop)
             .highlight
                 h1
@@ -134,30 +160,6 @@
                 article
                     h1
                         @include h4
-            @include in-page-with-sidebar
-                .highlight-post
-                    .post
-                        flex-direction: row
-                        .media
-                            width: calc(#{col(3, 8)} + #{half($grid-gutter)})
-                            margin-bottom: 0
-                        .post-content
-                            width: col(5, 8)
-                            margin-left: half($grid-gutter)
-                .list
-                    article
-                        @include grid(8, desktop, 0, 0)
-                        h1
-                            grid-column: 1 / 7
-                        time
-                            grid-column: 7 / 9
-                            text-align: right
-                            order: 2
-                            margin-top: 0
-                        p
-                            grid-column: 1 / 7
-                            order: 3
-
             @include in-page-without-sidebar
                 .highlight
                     @include grid(2)
@@ -166,4 +168,3 @@
                     margin-top: 0
                     article:first-child
                         margin-top: 0
-            
