@@ -1,4 +1,4 @@
-{{- $isTocPresent := partial "IsTocPresent" . -}}
+{{- $isTocPresent := .context.Params.design.toc.present -}}
 
 {{- if $isTocPresent -}}
   {{- partial "toc/cta" -}}
