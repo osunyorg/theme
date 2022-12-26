@@ -1,15 +1,14 @@
 {{ define "main" }}
   {{ partial "posts/hero-single.html" . }}
 
-  <div class="document-content" itemscope itemtype="https://schema.org/NewsArticle">
-
-    {{ partial "toc/container.html"
-        (dict
-            "toc" "toc/default.html"
-            "context" .
-        )
+  {{ partial "toc/container.html"
+      (dict
+          "toc" "toc/default.html"
+          "context" .
+      )
     }}
 
+  <div class="document-content" itemscope itemtype="https://schema.org/NewsArticle">
     <meta itemprop="headline" content="{{ partial "PrepareHTML" .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ if .Date }}<meta itemprop="datePublished" content="{{ .Date.Format "2006-01-02T15:04" }}">{{ end }}
@@ -17,7 +16,6 @@
     {{ if .Summary }}<meta itemprop="description" content="{{ partial "PrepareHTML" .Summary }}">{{ end }}
 
     {{ partial "posts/aside.html" . }}
-
 
     {{ partial "posts/chapo.html" (dict
         "context" .

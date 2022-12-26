@@ -1,6 +1,6 @@
-{{- $isTocNeeded := partial "IsTocNeeded" . -}}
+{{- $isTocPresent := .context.Params.design.toc.present -}}
 
-{{- if $isTocNeeded -}}
+{{- if $isTocPresent -}}
   {{- partial "toc/cta" -}}
 
   <div class="toc-container" aria-hidden="false" aria-labelledby="toc-title">

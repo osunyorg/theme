@@ -31,29 +31,29 @@
         &--with-image
             &.block-chapter--alt_background, &.block-chapter--accent_background
                 padding-top: half($grid-gutter-sm)
-    @include media-breakpoint-up(desktop)
-        @include in-page-with-sidebar
+    @include in-page-with-sidebar
+        figure
+            max-width: col(6, 8)
+            &.image-portrait
+                max-width: col(4, 8)
+        &--alt_background, &--accent_background
+            background: none
+            .chapter .text
+                padding: $grid-gutter col(1, 8)
             figure
-                max-width: col(6, 8)
+                margin-bottom: 0
+                figcaption
+                    padding: 0 col(1, 6)
                 &.image-portrait
-                    max-width: col(4, 8)
-            &--alt_background, &--accent_background
-                background: none
-                .chapter .text
-                    padding: $grid-gutter col(1, 8)
-                figure
-                    margin-bottom: 0
                     figcaption
-                        padding: 0 col(1, 6)
-                    &.image-portrait
-                        figcaption
-                            padding: 0 col(1, 4)
-            &--alt_background
-                .chapter
-                    background: $block-chapter-layout-alt-background
-            &--accent_background
-                .chapter
-                    background: $block-chapter-layout-accent-background
+                        padding: 0 col(1, 4)
+        &--alt_background
+            .chapter
+                background: $block-chapter-layout-alt-background
+        &--accent_background
+            .chapter
+                background: $block-chapter-layout-accent-background
+    @include media-breakpoint-up(desktop)
         @include in-page-without-sidebar
             .chapter
                 flex-direction: row

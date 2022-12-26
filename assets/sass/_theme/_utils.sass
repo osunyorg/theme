@@ -7,8 +7,9 @@
     @return #{$remSize}rem
 
 @mixin in-page-with-sidebar
-    body:not(.full-width) &
-        @content
+    @include media-breakpoint-up(desktop)
+        body:not(.full-width) &
+            @content
 
 @mixin in-page-without-sidebar
     main > .blocks &,

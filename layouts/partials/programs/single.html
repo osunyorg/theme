@@ -1,12 +1,15 @@
 <div class="document-content" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+
+  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+  <meta itemprop="url" content="{{ .Permalink }}">
+
   {{ partial "toc/container.html"
-      (dict
+    (dict
           "toc" "programs/toc.html"
           "context" .
       )
-  }}
-  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
-  <meta itemprop="url" content="{{ .Permalink }}">
+    }}
+
   {{- if .Params.image -}}
     {{- $id := .Params.image -}}
     {{- if isset .Params.image "id" -}}

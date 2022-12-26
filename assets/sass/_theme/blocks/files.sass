@@ -38,10 +38,10 @@
         .files
             li + li
                 margin-top: $spacing1
+    @include in-page-with-sidebar
+        .files
+            @include grid(2, desktop, half($grid-gutter))
     @include media-breakpoint-up(desktop)
-        @include in-page-with-sidebar
-            .files
-                @include grid(2, desktop, half($grid-gutter))
         @include in-page-without-sidebar
             .top
                 display: flex

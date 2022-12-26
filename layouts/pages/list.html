@@ -2,46 +2,14 @@
   {{ partial "pages/hero.html" . }}
 
   <div class="document-content">
-
-    {{/*  TOC PART  */}}
     {{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}
-    {{- $show_aside := false -}}
-
-    {{- $has_blocks := false -}}
-    {{- range .Params.blocks -}}
-      {{- $has_blocks = true -}}
-      {{- if .title -}}
-        {{- $show_aside = true -}}
-      {{- end -}}
-    {{- end -}}
-    
-    {{- if .Pages -}}
-      {{- if eq $has_blocks false -}}
-        {{- $show_aside = true -}}
-      {{- end -}}
-    {{- end -}}
-    
-    {{- if .Content -}}
-      {{- if eq $has_blocks false -}}
-        {{- $show_aside = true -}}
-      {{- end -}}
-    {{- end -}}
-    
-    {{- if $category -}}
-      {{- if eq $has_blocks false -}}
-        {{- $show_aside = true -}}
-      {{- end -}}
-    {{- end -}}
-    
-    {{- if $show_aside }}
-      {{ partial "toc/container.html"
-          (dict
-              "category" $category
-              "toc" "pages/toc.html"
-              "context" .
-          )
-      }}
-    {{ end }}
+    {{ partial "toc/container.html"
+        (dict
+            "category" $category
+            "toc" "pages/toc.html"
+            "context" .
+        )
+    }}
 
     {{ partial "hooks/after-page-hero.html" . }}
 

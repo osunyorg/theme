@@ -54,39 +54,39 @@
                 margin-bottom: offset(1)
                 order: 1
 
-    @include media-breakpoint-up(desktop)
-        @include in-page-with-sidebar
-            .call_to_action
-                display: flex
-                flex-direction: column
-                > *
-                    order: 2
-                > div
+    @include in-page-with-sidebar
+        .call_to_action
+            display: flex
+            flex-direction: column
+            > *
+                order: 2
+            > div
+                background-color: var(--cta-background-color)
+                padding: col(1, 8)
+                width: 100%
+                position: relative
+                &::after
                     background-color: var(--cta-background-color)
-                    padding: col(1, 8)
-                    width: 100%
+                    content: ''
+                    display: block
+                    position: absolute
+                    top: 0
+                    bottom: 0
+                    left: 100%
+                    width: Max(#{$grid-gutter}, calc(50vw - #{half($grid-max-width)} + #{$grid-gutter}))
+            &--with-image
+                picture
+                    order: 1
+                    padding-left: col(1, 8)
+                    padding-right: col(1, 8)
                     position: relative
-                    &::after
-                        background-color: var(--cta-background-color)
-                        content: ''
-                        display: block
-                        position: absolute
-                        top: 0
-                        bottom: 0
-                        left: 100%
-                        width: Max(#{$grid-gutter}, calc(50vw - #{half($grid-max-width)} + #{$grid-gutter}))
-                &--with-image
-                    picture
-                        order: 1
-                        padding-left: col(1, 8)
-                        padding-right: col(1, 8)
-                        position: relative
-                        img
-                            width: col(3, 6)
-                            margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
-                    > div
-                        padding-top: calc(#{$grid-gutter} + #{$spacing3})
-  
+                    img
+                        width: col(3, 6)
+                        margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
+                > div
+                    padding-top: calc(#{$grid-gutter} + #{$spacing3})
+
+    @include media-breakpoint-up(desktop)
         @include in-page-without-sidebar
             background-color: var(--cta-background-color)
             padding-top: 0

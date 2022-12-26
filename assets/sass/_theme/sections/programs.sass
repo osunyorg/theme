@@ -58,12 +58,6 @@ ol.programs
                 color: $hero-background-color
     .buttons
         @include meta
-        margin-top: $spacing1
-        @include media-breakpoint-up(desktop)
-            bottom: 2.25rem
-            margin-top: 0
-            position: absolute
-            right: $grid-gutter
         button, > a
             display: flex
             align-items: center
@@ -76,14 +70,17 @@ ol.programs
             background: $hero-color
             border-color: $hero-color
             font-size: $program-share-font-size
-            margin-top: $spacing1
+            width: auto
             @include media-breakpoint-up(desktop)
                 font-size: $program-share-font-size-desktop
+
+        @include media-breakpoint-down(desktop)
+            margin-top: $spacing1
 
     .document-content
         @include media-breakpoint-up(desktop)
             .lead
-                padding: $spacing2 0
+                padding-bottom: $spacing2
         .content
             padding-bottom: $spacing2
             section:not(.block) > * + *

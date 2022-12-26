@@ -1,19 +1,15 @@
-{{- $bodyclass := .Params.bodyclass | default "" -}}
+{{ $bodyclass := .Params.bodyclass | default "" }}
 
-{{- if ne $bodyclass "" -}}
-  {{- $bodyclass = printf "page-%s" $bodyclass -}}
-{{- end -}}
+{{ if ne $bodyclass "" }}
+  {{ $bodyclass = printf "page%s" $bodyclass }}
+{{ end }}
 
-{{- if or .Params.full_width (and (eq .Kind "section") (eq .Type "posts")) (and (or (eq .Type "programs") (eq .Type "diplomas") ) (not .Params.diplomas)) -}}
-  {{- $bodyclass = printf "full-width %s" $bodyclass -}}
-{{- end -}}
+{{ if .Params.design.full_width }}
+  {{ $bodyclass = printf "full-width %s" $bodyclass }}
+{{ end }}
 
-{{- if and (eq .Kind "page") (eq .Type "posts") -}}
-  {{- $bodyclass = printf "offcanvas-toc %s" $bodyclass -}}
-{{- end -}}
+{{ if .Params.design.toc.offcanvas }}
+  {{ $bodyclass = printf "offcanvas-toc %s" $bodyclass }}
+{{ end }}
 
-{{- if .Params.diplomas -}}
-  {{- $bodyclass = printf "offcanvas-toc %s" $bodyclass -}}
-{{- end -}}
-
-{{- return $bodyclass -}}
+{{ return $bodyclass }}

@@ -69,12 +69,13 @@
 .toc-cta
     display: flex
     position: relative
+    @include in-page-with-sidebar
+        display: none
     @include media-breakpoint-up(desktop)
         @include container
         justify-content: end
         text-align: right
-        @include in-page-with-sidebar
-            display: none
+        margin-bottom: $spacing3
         body.offcanvas-toc &
             display: flex
 
@@ -117,26 +118,25 @@
         @include offcanvas-toc
 
     // Only desktop and in page with sidebar
-    @include media-breakpoint-up(desktop)
-        @include in-page-with-sidebar
-            @include container-margin-left
-            pointer-events: none
-            top: 0
-            left: 0
-            margin-top: 0
-            height: 100%
-            position: absolute
-            width: col-outside-container(4)
-            .toc-content
-                position: sticky
-                top: var(--header-height)
-                overflow-y: auto
-                max-height: calc(100vh - var(--header-height))
-                margin-bottom: $spacing1
-                padding-bottom: $spacing5
-                pointer-events: auto
-            button
-                display: none
+    @include in-page-with-sidebar
+        @include container-margin-left
+        pointer-events: none
+        top: 0
+        left: 0
+        margin-top: 0
+        height: 100%
+        position: absolute
+        width: col-outside-container(4)
+        .toc-content
+            position: sticky
+            top: var(--header-height)
+            overflow-y: auto
+            max-height: calc(100vh - var(--header-height))
+            margin-bottom: $spacing1
+            padding-bottom: $spacing5
+            pointer-events: auto
+        button
+            display: none
 
     // Program tweak : use offcanvas
     // TODO : find a better way to cancel sidebar props
