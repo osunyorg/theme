@@ -1,8 +1,4 @@
 .hero
-    // Support gradients
-    background: $hero-background-color
-    // Fallback color
-    background-color: $hero-background-color
     color: $hero-color
     min-height: $hero-height
     padding-bottom: $spacing3
@@ -13,7 +9,21 @@
         min-height: $hero-height-desktop
     *:focus-visible
         outline-color: $hero-color
-    
+
+    &::before
+        content: ''
+        position: absolute
+        // Support gradients
+        background: $hero-background-color
+        // Fallback color
+        background-color: $hero-background-color
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+        z-index: -1
+
+
     nav + .content
         margin-top: $spacing3
 
@@ -84,18 +94,21 @@
             .container
                 display: flex
                 flex-direction: column
-                margin-bottom: $spacing5
+                // margin-bottom: $spacing5
             figure
-                margin-bottom: calc(#{-$spacing5} + #{$spacing2})
+                // margin-bottom: calc(#{-$spacing5} + #{$spacing2})
                 margin-top: $spacing1
 
     @include media-breakpoint-up(desktop)
-        $negative-margin-bottom: px2rem(150)
+        // $negative-margin-bottom: $spacing4
         .content
             > h1, > hgroup
                 width: col(9)
         &--with-image
-            margin-bottom: $negative-margin-bottom
+            padding-bottom: 0
+            min-height: calc(#{$hero-height-desktop} + #{$spacing3})
+            &::before
+                bottom: $spacing3
             .content
                 display: flex
                 justify-content: space-between
@@ -103,10 +116,7 @@
                     width: col(7)
                 figure
                     width: col(5)
-                    margin-bottom: -$negative-margin-bottom
-                    // If there's no credits
-                    picture:last-child
-                        margin-bottom: $spacing2
+
         &--image-portrait, &--image-square
             .breadcrumb-nav
                 width: calc(#{col(9)} + #{half($grid-gutter)})
@@ -118,6 +128,6 @@
                 > h1, > hgroup
                     width: col(8)
                 figure
-                    margin-top: calc(-#{$spacing3} - #{$spacing2})
+                    margin-top: calc(-#{$spacing3} - #{$spacing1})
                     width: col(3)
 
