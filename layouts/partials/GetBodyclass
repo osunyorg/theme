@@ -8,6 +8,10 @@
   {{- $bodyclass = printf "full-width %s" $bodyclass -}}
 {{- end -}}
 
+{{- if and (eq .Kind "page") (eq .Type "posts") -}}
+  {{- $bodyclass = printf "offcanvas-toc %s" $bodyclass -}}
+{{- end -}}
+
 {{- if .Params.diplomas -}}
   {{- $bodyclass = printf "offcanvas-toc %s" $bodyclass -}}
 {{- end -}}

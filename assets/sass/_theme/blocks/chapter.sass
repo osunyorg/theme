@@ -35,18 +35,19 @@
         @include in-page-with-sidebar
             figure
                 max-width: col(6, 8)
-                figcaption
-                    padding: 0 col(1, 6)
                 &.image-portrait
                     max-width: col(4, 8)
-                    figcaption
-                        padding: 0 col(1, 4)
             &--alt_background, &--accent_background
                 background: none
                 .chapter .text
                     padding: $grid-gutter col(1, 8)
                 figure
                     margin-bottom: 0
+                    figcaption
+                        padding: 0 col(1, 6)
+                    &.image-portrait
+                        figcaption
+                            padding: 0 col(1, 4)
             &--alt_background
                 .chapter
                     background: $block-chapter-layout-alt-background
