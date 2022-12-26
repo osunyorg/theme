@@ -23,11 +23,8 @@
         bottom: 0
         z-index: -1
 
-
-    nav + .content
-        margin-top: $spacing3
-
     .content
+        margin-top: calc(#{$spacing3} + #{$spacing1} + #{$meta-size-desktop})
         h1 + p
             margin-top: $spacing1
         figure
@@ -70,6 +67,9 @@
             &:hover
                 figcaption p
                     display: block
+
+    nav + .content
+        margin-top: $spacing3
 
     // TODO : handle hero with image
     // @if $breadcrumb-below-h1
@@ -119,6 +119,11 @@
                 figure
                     width: col(5)
 
+        &--image-landscape
+            .content
+                figure
+                    font-size: $h1-size-desktop
+                    margin-top: 0.5ex
         &--image-portrait, &--image-square
             .breadcrumb-nav
                 width: calc(#{col(9)} + #{half($grid-gutter)})
@@ -131,5 +136,5 @@
                     width: col(8)
                 figure
                     margin-top: calc(-#{$spacing3} - #{$spacing1})
-                    width: col(3)
+                    width: col(4)
 
