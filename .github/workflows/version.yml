@@ -9,13 +9,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Release tag
+        run: |
+          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+
       - name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
         with:
           path: ./.osuny-theme-version
           write-mode: overwrite
-          contents: echo "$GITHUB_REF_NAME"
-            
+          contents: ${{  github.ref_name }}"
+
       - name: Commit & Push
         uses: Andro999b/push@v1.3
         with:
@@ -32,6 +37,7 @@ jobs:
 #       - name: GitHub Tag Name
 #         run: |
 #           echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+#           echo "Tag name from github.ref_name: ${{  github.ref_name }}"
 #       - name: Get current version
 #         uses: dolittle/write-version-to-file-action@v2
 #         with:
