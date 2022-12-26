@@ -3,21 +3,42 @@ on:
   release:
     types: [published]
 jobs:
-  context:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: GitHub Tag Name
-        run: |
-          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
-      - name: Get current version
-        uses: dolittle/write-version-to-file-action@v2
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Overwrite file
+        uses: "DamianReeves/write-file-action@master"
         with:
-          version: echo "$GITHUB_REF_NAME"
           path: ./.osuny-theme-version
-          user-email: osuny@noesya.coop
-          user-name: osuny-bot
+          write-mode: overwrite
+          contents: echo "$GITHUB_REF_NAME"
+            
+      - name: Commit & Push
+        uses: Andro999b/push@v1.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          force: true
+          message: 'Overwritten by Github Actions - ${date}'
+# jobs:
+#   context:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+#       - name: GitHub Tag Name
+#         run: |
+#           echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+#       - name: Get current version
+#         uses: dolittle/write-version-to-file-action@v2
+#         with:
+#           version: echo "$GITHUB_REF_NAME"
+#           path: ./.osuny-theme-version
+#           user-email: osuny@noesya.coop
+#           user-name: osuny-bot
 
 # jobs:
 #     resources:
