@@ -4,15 +4,11 @@
   {{- $bodyclass = printf "page-%s" $bodyclass -}}
 {{- end -}}
 
-{{- if or .Params.full_width (and (eq .Kind "section") (eq .Type "posts")) (and (or (eq .Type "programs") (eq .Type "diplomas") ) (not .Params.diplomas)) -}}
+{{- if .Params.layout.full_width  -}}
   {{- $bodyclass = printf "full-width %s" $bodyclass -}}
 {{- end -}}
 
-{{- if and (eq .Kind "page") (eq .Type "posts") -}}
-  {{- $bodyclass = printf "offcanvas-toc %s" $bodyclass -}}
-{{- end -}}
-
-{{- if .Params.diplomas -}}
+{{- if .Params.layout.offcanvas  -}}
   {{- $bodyclass = printf "offcanvas-toc %s" $bodyclass -}}
 {{- end -}}
 
