@@ -2,41 +2,40 @@ name: Write version to file
 on:
   release:
     types: [published]
-# jobs:
-#   context:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
-#       - name: GitHub Tag Name
-#         run: |
-#           echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
-#           echo "Tag name from github.ref_name: ${{  github.ref_name }}"
-#       - name: Get current version
-#         uses: dolittle/write-version-to-file-action@v2
-#         with:
-#           version: "$GITHUB_REF_NAME"
-#           path: ./.osuny-theme-version
-#           user-email: osuny@noesya.coop
-#           user-name: osuny-bot
-
 jobs:
-    resources:
-        name: Update resources
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v1
+  context:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: GitHub Tag Name
+        run: |
+          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+      - name: Get current version
+        uses: dolittle/write-version-to-file-action@v2
+        with:
+          version: echo "$GITHUB_REF_NAME"
+          path: ./.osuny-theme-version
+          user-email: osuny@noesya.coop
+          user-name: osuny-bot
 
-            - uses: actions/setup-node@v1
+# jobs:
+#     resources:
+#         name: Update resources
+#         runs-on: ubuntu-latest
+#         steps:
+#             - uses: actions/checkout@v1
 
-            - name: Fetch resources
-              run: echo "$GITHUB_REF_NAME"
+#             - uses: actions/setup-node@v1
 
-            - name: Update resources
-              uses: test-room-7/action-update-file@v1
-              with:
-                  file-path: ./.osuny-theme-version
-                  commit-msg: Write Osuny theme version
-                  github-token: ${{ secrets.GITHUB_TOKEN }}
-                  committer-email: osuny@noesya.coop
-                  committer-name: osuny-bot
+#             - name: Fetch resources
+#               run: echo "$GITHUB_REF_NAME"
+
+#             - name: Update resources
+#               uses: test-room-7/action-update-file@v1
+#               with:
+#                   file-path: ./.osuny-theme-version
+#                   commit-msg: Write Osuny theme version
+#                   github-token: ${{ secrets.GITHUB_TOKEN }}
+#                   committer-email: osuny@noesya.coop
+#                   committer-name: osuny-bot
