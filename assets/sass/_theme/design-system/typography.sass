@@ -8,7 +8,6 @@ body
     font-variant-ligatures: common-ligatures
     text-rendering: optimizelegibility
     line-height: $body-line-height
-    word-break: break-word
     @include media-breakpoint-up(desktop)
         font-size: $body-size-desktop
 
@@ -159,6 +158,7 @@ small, .small
     @include small
 
 @mixin rich-text
+    word-break: break-word
     h1, h2, h3, h4, h5, h6, p
         margin-top: 2em
         &:first-child, meta + &
