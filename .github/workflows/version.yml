@@ -1,17 +1,24 @@
-name: Write Version to File
 on:
   push:
     branches:
-      - main
+    - '**'
+  pull_request:
+    types: [closed]
+
+name: GitHub action workflow name
 
 jobs:
-  write-version:
+  context:
+    name: Job name
     runs-on: ubuntu-latest
-    name: Write Version to File
     steps:
-    - uses: actions/checkout@master
-    - name: Update version
-      id: version
-      uses: brettdorrans/write-version-to-file@master
-      with:
-        filename: '/.osuny-theme-version'
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Get current version
+        uses: dolittle/write-version-to-file-action@v2
+        with:
+          version: ${{ steps.context.outputs.current-version }}
+          path: ./.osuny-theme-version
+          user-email: osuny@noesya.coop
+          user-name: osuny-bot
+          merge-strategy: merge
