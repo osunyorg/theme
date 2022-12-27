@@ -135,8 +135,11 @@
     $responsive-grid-width: Min(100vw, (#{$grid-max-width}))
     @return calc((#{$responsive-grid-width} + #{$grid-gutter} * 2) / #{$base} * #{$quantity} - #{$grid-gutter} * 2)
 
+@function container-gutter
+    @return Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+
 @mixin container-margin-left
-    margin-left: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+    margin-left: container-gutter()
 
 @mixin stretched-link($pseudo-element: after)
     &::#{$pseudo-element}
