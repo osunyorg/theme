@@ -1,11 +1,24 @@
 {{ define "main" }}
   {{ partial "categories/hero-term.html" . }}
 
-  <div class=" document-content container">
-    {{ partial "categories/chapo.html" (dict
-        "context" .
+  <div class="document-content">
+    {{ partial "toc/container.html"
+        (dict
+            "toc" "toc/default.html"
+            "context" .
+        )
+    }}
+
+    {{ partial "posts/chapo.html" (dict
+      "context" .
+      "block_wrapped" true
       ) }}
-    {{ partial "posts/posts.html" . }}
-    {{ partial "commons/pagination.html" . }}
+
+    {{ partial "blocks/list.html" . }}
+
+    <div class="container">
+      {{ partial "posts/posts.html" . }}
+      {{ partial "commons/pagination.html" . }}
+    </div>
   </div>
 {{ end }}
