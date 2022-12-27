@@ -1,13 +1,6 @@
 {{ define "main" }}
   {{ partial "posts/hero-single.html" . }}
 
-  {{ partial "toc/container.html"
-      (dict
-          "toc" "toc/default.html"
-          "context" .
-      )
-    }}
-
   <div class="document-content" itemscope itemtype="https://schema.org/NewsArticle">
     <meta itemprop="headline" content="{{ partial "PrepareHTML" .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
