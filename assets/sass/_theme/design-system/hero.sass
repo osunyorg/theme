@@ -25,41 +25,8 @@
             position: relative
             &, img, picture
                 display: block
-            figcaption
-                @include meta
-                position: absolute
-                display: block
-                left: 0
-                right: 0
-                z-index: 10
-                color: $color-text-alt
-                a
-                    color: inherit
-                p
-                    @include meta
-                &::before
-                    @include meta
-                    content: '©'
-                    position: absolute
-                    right: 0
-                    top: 0
-                    background: $color-background-alt
-                    text-align: center
-                    line-height: px2rem(30)
-                    width: px2rem(30)
-                    height: px2rem(30)
-                    display: block
-                p
-                    background: $color-background-alt
-                    display: none
-                    padding: half($spacing0)
-                    padding-right: $spacing2
-                &:focus
-                    p
-                        display: block
-            &:hover
-                figcaption p
-                    display: block
+            @include collapsed-figcaption
+
     nav + .content
         > h1, > hgroup
             padding-top: 0
