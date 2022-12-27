@@ -15,36 +15,22 @@
       ) }}
 
     {{- if .Params.blocks }}
-  
       {{- partial "blocks/list.html" . -}}
-  
     {{ else }}
-  
-      <div class="container">
-        {{ if (partial "GetTextFromHTML" .Content) }}
-        <section>
-          {{- partial "PrepareHTML" .Content -}}
-        </section>
-        {{ end }}
-  
-        {{- range site.Data.menus.primary -}}
-          <section>
-            {{ partial "home/top.html" . }}
-  
-            {{ if eq .kind "news" }}
-              {{ partial "home/posts.html" . }}
-            {{ else }}
-              {{ if .children }}
-                {{ partial "home/pages.html" . }}
-              {{ end }}
-            {{ end }}
-          </section>
-        {{ end }}
-  
-        {{ partial "home/volumes.html" . }}
-      </div>
-  
-    {{ end -}}
+      <section class="block block-pages block-pages--grid">
+        <div class="container">
+          <div class="block-content">
+            {{- partial "blocks/templates/pages/grid.html" (dict 
+                "pages" .Params.children
+                "show_images" true
+                "show_descriptions" true
+                ) }}
+          </div>
+        </div>
+      </section>
+    {{ end }}
   </div>
 
 {{ end }}
+
+{{/*  TODO: refacto avec pages/list.html  */}}

@@ -101,18 +101,19 @@ h2, .h2
         &:hover
             text-decoration-thickness: 1px
 
-@mixin lead
+@mixin lead($handle-sidebar: true)
     font-family: $lead-font-family
     font-size: $lead-size
     font-weight: $lead-weight
     line-height: $lead-line-height
     @include media-breakpoint-up(desktop)
         font-size: $lead-size-desktop
-    @include in-page-with-sidebar
-        font-family: $lead-sidebar-font-family
-        font-size: $lead-sidebar-size-desktop
-        font-weight: $lead-sidebar-weight
-        line-height: $lead-sidebar-line-height
+    @if $handle-sidebar
+        @include in-page-with-sidebar
+            font-family: $lead-sidebar-font-family
+            font-size: $lead-sidebar-size-desktop
+            font-weight: $lead-sidebar-weight
+            line-height: $lead-sidebar-line-height
 
 .lead
     @include lead
@@ -122,12 +123,6 @@ h2, .h2
     font-size: $body-size
     @include media-breakpoint-up(desktop)
         font-size: $body-size-desktop
-
-p
-    margin-top: 0
-    margin-bottom: 0
-    + p
-        margin-top: $spacing0
 
 @mixin meta
     font-family: $meta-font-family
@@ -172,10 +167,6 @@ small, .small
 .rich-text
     @include rich-text
 
-figcaption
-    a
-        color: inherit
-
 @mixin inherit-text
     font-family: inherit
     font-weight: inherit
@@ -194,6 +185,18 @@ figcaption
 
 blockquote, .blockquote
     @include blockquote
+
+p
+    margin-top: 0
+    margin-bottom: 0
+    + p
+        margin-top: $spacing0
+p + ul
+    margin-top: 0
+
+figcaption
+    a
+        color: inherit
 
 address
     font-style: normal

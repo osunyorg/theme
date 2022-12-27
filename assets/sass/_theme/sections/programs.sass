@@ -20,6 +20,8 @@ ol.programs
         justify-content: end
         .container
             position: relative
+    ol.programs
+        margin-bottom: $spacing3
     .dropdown-share
         position: relative
         > button
@@ -129,25 +131,26 @@ ol.programs
                 .content
                     border-top: none
 
-    table
-        margin-block-start: 2em
-        &.post-infos
-            tr
-                &:first-child 
-                    border-top: 1px solid $color-border
-                    th,
-                    td
-                        padding: 1rem 0
-                &:last-child
-                    border-bottom: 1px solid $color-border
-                font-size: unset
-                line-height: 160%
-            th
-                @include meta
-                vertical-align: middle
-            td
-                font-family: $body-font-family
-        caption 
+
+    .program-table
+        tr
+            font-size: unset
+            line-height: 160%
+            &:first-child 
+                border-top: 1px solid $color-border
+                th,
+                td
+                    padding: 1rem 0
+            &:last-child
+                border-bottom: 1px solid $color-border
+        th
+            @include small
+            color: $color-text-alt
+            vertical-align: middle
+        td
+            text-align: right
+            padding-right: 0
+        caption
             @include visually-hidden
         th
             font-weight: normal
