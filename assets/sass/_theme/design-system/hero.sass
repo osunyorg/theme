@@ -8,26 +8,16 @@
         min-height: $hero-height-desktop
     *:focus-visible
         outline-color: $hero-color
+
+    .breadcrumb-container
+        margin-bottom: $spacing3
+
     .content
         padding-bottom: $spacing3
         position: relative
         h1 + p
             margin-top: $spacing1
-        &::before
-            content: ''
-            position: absolute
-            // Support gradients
-            background: $hero-background-color
-            // Fallback color
-            background-color: $hero-background-color
-            top: calc(-#{$spacing3} - var(--header-height) - #{$breadcrumb-height})
-            min-height: $hero-height-desktop
-            left: 0
-            right: 0
-            bottom: 0
-            width: 100vw
-            left: calc(#{container-gutter()} * -1)
-            z-index: -1
+
     figure
         position: relative
         &, img, picture
@@ -35,55 +25,7 @@
         img
             width: 100%
             height: auto
-        figcaption
-            @include meta
-            color: $color-text-alt
-            position: absolute
-            display: block
-            left: 0
-            right: 0
-            z-index: 10
-            a
-                color: inherit
-            p
-                @include meta
-            &::before
-                @include meta
-                content: '©'
-                position: absolute
-                right: 0
-                top: 0
-                background: $color-background-alt
-                text-align: center
-                line-height: px2rem(30)
-                width: px2rem(30)
-                height: px2rem(30)
-                display: block
-            p
-                background: $color-background-alt
-                display: none
-                padding: half($spacing0)
-                padding-right: $spacing2
-            &:focus
-                p
-                    display: block
-        &:hover
-            figcaption p
-                display: block
-
-    .breadcrumb-container
-        margin-bottom: $spacing3
-
-    // TODO : handle hero with image
-    // @if $breadcrumb-below-h1
-    //     .container:first-child
-    //         display: flex
-    //         flex-direction: column
-    //         nav + .content
-    //             margin-top: 0
-    //         .breadcrumb-nav
-    //             order: 3
-    //             margin-top: $spacing3
+        @include collapsed-figcaption
 
     @include media-breakpoint-down(desktop)
         // Support gradients
@@ -98,17 +40,35 @@
                 margin-left: half(-$grid-gutter-sm)
                 margin-right: half(-$grid-gutter-sm)
         &--image-portrait, &--image-square
-            .container
+            .container:not(.breadcrumb-container)
                 display: flex
                 flex-direction: column
+                margin-bottom: $spacing4
+                figure
+                    margin-bottom: -$spacing4
 
     @include media-breakpoint-up(desktop)
         .content
             width: col(9)
             padding-bottom: $spacing2
+            &::before
+                content: ''
+                position: absolute
+                // Support gradients
+                background: $hero-background-color
+                // Fallback color
+                background-color: $hero-background-color
+                top: calc(-#{$spacing3} - var(--header-height) - #{$breadcrumb-height})
+                min-height: $hero-height-desktop
+                left: 0
+                right: 0
+                bottom: 0
+                width: 100vw
+                left: calc(#{container-gutter()} * -1)
+                z-index: -1
 
         &--with-image
-            .container
+            .container:not(.breadcrumb-container)
                 display: flex
                 justify-content: space-between
                 align-items: start
@@ -118,7 +78,7 @@
                     width: col(5)
 
         &--image-landscape
-            .container
+            .container:not(.breadcrumb-container)
                 figure
                     font-size: $h1-size-desktop
                     margin-top: 0.5ex
@@ -129,10 +89,20 @@
                 mask-image: linear-gradient(to right, black 0%, black 90%, transparent 100%)
                 .breadcrumb
                     padding-right: 50px
-            .container
+            .container:not(.breadcrumb-container)
                 .content
                     width: col(8)
                 figure
-                    margin-top: calc(-#{$spacing3} - #{$spacing1})
+                    margin-top: calc(-#{$spacing3} - #{half($breadcrumb-height)})
                     width: col(3)
 
+    // TODO : handle hero with image
+    // @if $breadcrumb-below-h1
+    //     .container:first-child
+    //         display: flex
+    //         flex-direction: column
+    //         nav + .content
+    //             margin-top: 0
+    //         .breadcrumb-nav
+    //             order: 3
+    //             margin-top: $spacing3

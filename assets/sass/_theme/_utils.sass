@@ -328,6 +328,43 @@
                 width: col(8)
                 margin-left: $grid-gutter
 
+@mixin collapsed-figcaption
+    figcaption
+        @include meta
+        color: $color-text-alt
+        position: absolute
+        display: block
+        left: 0
+        right: 0
+        z-index: 10
+        a
+            color: inherit
+        p
+            @include meta
+        &::before
+            @include meta
+            content: '©'
+            position: absolute
+            right: 0
+            top: 0
+            background: $color-background-alt
+            text-align: center
+            line-height: px2rem(30)
+            width: px2rem(30)
+            height: px2rem(30)
+            display: block
+        p
+            background: $color-background-alt
+            display: none
+            padding: half($spacing0)
+            padding-right: $spacing2
+        &:focus
+            p
+                display: block
+    &:hover
+        figcaption p
+            display: block
+
 // https://gist.github.com/jonathantneal/d0460e5c2d5d7f9bc5e6
 @function str-replace($string, $search, $replace: "")
 	$index: str-index($string, $search)
