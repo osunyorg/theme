@@ -1,8 +1,12 @@
 .hero
+    // Support gradients
+    background: $hero-background-color
+    // Fallback color
+    background-color: $hero-background-color
     color: $hero-color
     min-height: $hero-height
     padding-bottom: $spacing3
-    padding-top: calc(2rem + var(--header-height))
+    padding-top: var(--header-height)
     position: relative
     margin-bottom: $spacing3
     @include media-breakpoint-up(desktop)
@@ -10,21 +14,11 @@
     *:focus-visible
         outline-color: $hero-color
 
-    &::before
-        content: ''
-        position: absolute
-        // Support gradients
-        background: $hero-background-color
-        // Fallback color
-        background-color: $hero-background-color
-        top: 0
-        left: 0
-        right: 0
-        bottom: 0
-        z-index: -1
-
     .content
-        margin-top: calc(#{$spacing3} + #{$spacing1} + #{$meta-size-desktop})
+        align-items: start
+        > h1, > hgroup
+            padding-top: $spacing3
+            margin-top: $spacing3
         h1 + p
             margin-top: $spacing1
         figure
@@ -33,15 +27,14 @@
                 display: block
             figcaption
                 @include meta
-                color: $color-text-alt
-                a
-                    color: inherit
-
                 position: absolute
                 display: block
                 left: 0
                 right: 0
                 z-index: 10
+                color: $color-text-alt
+                a
+                    color: inherit
                 p
                     @include meta
                 &::before
@@ -67,10 +60,9 @@
             &:hover
                 figcaption p
                     display: block
-
     nav + .content
-        margin-top: $spacing3
-
+        > h1, > hgroup
+            padding-top: 0
     // TODO : handle hero with image
     // @if $breadcrumb-below-h1
     //     .container:first-child
@@ -83,36 +75,33 @@
     //             margin-top: $spacing3
 
     @include media-breakpoint-down(desktop)
-        // &:not(.hero--with-image)
-        //     margin-bottom: 0
+        .breadcrumb-nav
+            margin-left: half(-$grid-gutter-sm)
+            margin-right: half(-$grid-gutter-sm)
+            > ol
+                padding: 0 half($grid-gutter-sm)
         &--with-image
             padding-bottom: 0
-            &::before
-                bottom: $spacing3
+            .content
+                > h1, > hgroup
+                    margin-bottom: $spacing2
         &--image-landscape
             figure
-                margin: half($spacing3) half(-$grid-gutter-sm) 0
+                margin-left: half(-$grid-gutter-sm)
+                margin-right: half(-$grid-gutter-sm)
         &--image-portrait, &--image-square
             .container
                 display: flex
                 flex-direction: column
-                // margin-bottom: $spacing5
+                margin-bottom: $spacing5
             figure
-                // margin-bottom: calc(#{-$spacing5} + #{$spacing2})
-                margin-top: $spacing1
+                margin-bottom: calc(#{-$spacing5} + #{$spacing2})
 
     @include media-breakpoint-up(desktop)
-        // $negative-margin-bottom: $spacing4
         .content
             > h1, > hgroup
                 width: col(9)
-                padding-bottom: $spacing4
-
         &--with-image
-            padding-bottom: 0
-            min-height: calc(#{$hero-height-desktop} + #{$spacing3})
-            &::before
-                bottom: $spacing3
             .content
                 display: flex
                 justify-content: space-between
@@ -121,11 +110,6 @@
                 figure
                     width: col(5)
 
-        &--image-landscape
-            .content
-                figure
-                    font-size: $h1-size-desktop
-                    margin-top: 0.5ex
         &--image-portrait, &--image-square
             .breadcrumb-nav
                 width: calc(#{col(9)} + #{half($grid-gutter)})
@@ -137,6 +121,5 @@
                 > h1, > hgroup
                     width: col(8)
                 figure
-                    margin-top: calc(-#{$spacing3} - #{$spacing1})
-                    width: col(4)
+                    width: col(3)
 
