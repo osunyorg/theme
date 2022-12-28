@@ -92,6 +92,9 @@ header#document-header
             color: inherit
             padding: 0
             position: relative
+            text-transform: uppercase
+            line-height: 1
+
             @include media-breakpoint-down(desktop)
                 display: flex
                 align-items: center
@@ -104,16 +107,16 @@ header#document-header
                 outline-width: 1px
             span:first-of-type
                 @include meta
+                font-size: 14px
             span:last-of-type
-                @include icon("burger", before)
                 background: none
-                height: calc(1.063rem + .3125rem * 2)
-                padding: px2rem(5) 0 px2rem(5) px2rem(5)
-                width: calc(1.5rem + .3125rem)
-                &::before
-                    font-size: px2rem(17)
-                    vertical-align: top
+                display: block
+                padding: half($spacing0) 0 half($spacing0) half($spacing0)
+                line-height: 1
+                @include icon("burger", before, 11px)
+                    vertical-align: baseline
             &[aria-expanded="true"]
                 span:last-of-type
                     &::before
                         content: map-get($icons, "close")
+                        font-size: 12px
