@@ -179,18 +179,30 @@ small, .small
 
 @mixin blockquote
     margin: 0
+    font-family: $quote-font-family
+    font-size: $quote-size
+    font-weight: $quote-weight
+    font-style: $quote-style
+    line-height: $quote-line-height
+    @include media-breakpoint-up(desktop)
+        font-size: $quote-size-desktop-long
     cite
         font-size: px2rem(18)
         font-style: normal
 
 blockquote, .blockquote
     @include blockquote
+    font-style: italic
 
 p
     margin-top: 0
     margin-bottom: 0
     + p
         margin-top: $spacing0
+
+p:empty
+    display: none
+
 p + ul
     margin-top: 0
 
