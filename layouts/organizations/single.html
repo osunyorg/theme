@@ -2,6 +2,14 @@
   {{ partial "organizations/hero.html" . }}
 
   <div class="document-content">
+
+    {{ partial "toc/container.html"
+      (dict
+            "toc" "toc/default.html"
+            "context" .
+        )
+      }}
+
     <div class="container">
       {{ partial "organizations/content.html" . }}
       <div class="organization-meta">
@@ -9,5 +17,6 @@
         {{ partial "organizations/contacts.html" . }}
       </div>
     </div>
+    {{ partial "blocks/list.html" . }}
   </div>
 {{ end }}
