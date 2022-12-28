@@ -80,6 +80,9 @@ header#document-header
     nav
         padding-top: $header-nav-padding-y
         padding-bottom: $header-nav-padding-y
+        @include media-breakpoint-up(desktop)
+            padding-top: $header-nav-padding-y-desktop
+            padding-bottom: $header-nav-padding-y-desktop
         .container
             align-items: center
             display: flex
@@ -94,7 +97,6 @@ header#document-header
             position: relative
             text-transform: uppercase
             line-height: 1
-
             @include media-breakpoint-down(desktop)
                 display: flex
                 align-items: center
