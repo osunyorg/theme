@@ -1,5 +1,6 @@
 {{- if .Params.logo -}}
-  <div class="media">
+  <figure class="logo">
+    <figcaption>{{ i18n "organizations.logo" }}</figcaption>
     {{- partial "commons/image.html"
           (dict
             "image"    .Params.logo
@@ -8,5 +9,5 @@
             "tablet"   "196"
             "desktop"  "396"
           ) -}}
-  </div>
+  </figure>
 {{- end -}}

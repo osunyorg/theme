@@ -35,14 +35,59 @@
         margin-top: $spacing2
 
 .organizations__page
-    .content
-        margin-top: $spacing2
-        @include grid(2, md)
-    .media
-        max-width: 200px
-    .contacts-list
-        padding-left: 0
-        li
-            list-style-type: none
-            span
-                display: block
+    .document-content
+        padding-bottom: $spacing3
+        .organization-meta
+            .logo
+                figcaption
+                    text-align: right
+                    @include meta
+                    margin-bottom: $spacing0
+                picture
+                    aspect-ratio: 1/1
+                    background: $color-background-alt
+                    display: block
+                    padding: $spacing2
+                    margin-bottom: half($spacing0)
+                img
+                    width: 100%
+                    height: 100%
+                    object-fit: contain
+                    object-position: center
+        .contacts-list
+            @include list-reset
+            padding-left: 0
+            text-align: right
+            margin-top: $spacing1
+            li
+                list-style-type: none
+                + li
+                    margin-top: $spacing1
+                span
+                    @include meta
+                    display: block
+    @include media-breakpoint-down(desktop)
+        .document-content
+            .organization-meta
+                margin-top: $spacing3
+                .logo
+                    display: flex
+                    justify-content: space-between
+                    picture
+                        width: 66.6%
+                .contacts-list
+                    li
+                        display: flex
+                        justify-content: space-between
+                        align-items: baseline
+                        
+    @include media-breakpoint-up(desktop)
+        .document-content
+            > .container
+                display: flex
+                justify-content: space-between
+                gap: $grid-gutter
+            [itemprop="articleBody"]
+                width: col(8)
+            .organization-meta
+                width: col(3)
