@@ -101,6 +101,7 @@
         padding-right: $grid-gutter
 
 @mixin grid($cols: 12, $breakpoint: false, $gap-y: $grid-gutter, $gap-x: $grid-gutter)
+    word-break: break-word
     @if $breakpoint
         @include media-breakpoint-up($breakpoint)
             display: grid
@@ -183,9 +184,9 @@
             object-fit: cover
     h1
         @include h3
-    a
-        @include stretched-link
-        text-decoration: none
+        a
+            @include stretched-link
+            text-decoration: none
     p
         + time
             margin-top: $spacing0

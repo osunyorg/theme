@@ -113,7 +113,6 @@
             margin-top: half($spacing3)
             border-top: 1px solid $color-border
             article
-                @include article
                 border-bottom: 1px solid $color-border
                 position: relative
                 padding-bottom: half($spacing3)
@@ -139,7 +138,10 @@
                     @include grid(8, desktop, 0, 0)
                     h1
                         grid-column: 1 / 7
+                    .post-categories
+                        grid-column: 1 / 7
                     time
+                        grid-row: 1
                         grid-column: 7 / 9
                         text-align: right
                         order: 2
