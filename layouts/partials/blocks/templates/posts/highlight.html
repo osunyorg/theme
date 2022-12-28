@@ -22,7 +22,14 @@
                 {{- partial "posts/categories" . -}}
               {{ end }}
               {{- if (partial "GetTextFromHTML" .Params.description_short) -}}
-                <p itemprop="articleBody">{{ partial "PrepareHTML" .Params.description_short }}</p>
+                {{ if site.Params.posts.list.truncate_description }}
+                  <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
+                    "text" .Params.description_short
+                    "length" site.Params.posts.list.truncate_description
+                    ) }}</p>
+                {{ else }}
+                  <p itemprop="articleBody">{{ partial "PrepareHTML" .Params.description_short }}</p>
+                {{ end }}
               {{- end -}}
               <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
             </article>
