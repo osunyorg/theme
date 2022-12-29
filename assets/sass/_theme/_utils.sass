@@ -56,6 +56,7 @@
 
 @mixin hover-translate-icon($pseudo: after, $distance: 10)
     &::#{$pseudo}
+        display: inline-block
         transition: transform 0.55s $arrow-ease-transition
         transform: translateX(0)
     &:hover
@@ -305,7 +306,7 @@
     display: flex
     justify-content: space-between
     align-items: center
-    @include icon("arrow-right", after)
+    @include icon(arrow, after)
         opacity: 0
         transform: translateX(-20px)
         transition: 0.55s $arrow-ease-transition
