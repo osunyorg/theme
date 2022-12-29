@@ -112,13 +112,11 @@ header#document-header
                 font-size: 14px
             span:last-of-type
                 background: none
-                display: block
-                padding: half($spacing0) 0 half($spacing0) half($spacing0)
-                line-height: 1
-                @include icon("burger", before, 11px)
+                @include icon-block(burger, before)
                     vertical-align: baseline
+                    margin-right: $icon-burger-margin-right
             &[aria-expanded="true"]
                 span:last-of-type
                     &::before
                         content: map-get($icons, "close")
-                        font-size: 12px
+                        margin-right: $icon-close-margin-right

@@ -47,13 +47,14 @@
                 margin-top: 0
     button
         @include button-reset
+        @include icon-block(close, after)
+            margin-right: -14px
+        align-items: center
+        border-top: 1px solid $color-border
         display: flex
         justify-content: space-between
-        align-items: center
-        padding: $spacing0 $spacing1 calc(#{$spacing0} - 1px)
-        border-top: 1px solid $color-border
+        padding: 0 $spacing1
         line-height: $body-line-height
-        @include icon(close, after)
         @include media-breakpoint-up(desktop)
             border-top: 0
             position: absolute
@@ -78,7 +79,6 @@
         margin-bottom: $spacing3
         body.offcanvas-toc &
             display: flex
-
     @include media-breakpoint-down(desktop)
         border-top: 1px solid $color-border
         position: fixed
@@ -86,11 +86,9 @@
         background: white
         left: 0
         width: 100%
-        padding: $spacing0
+        padding: 0 half($grid-gutter-sm)
         z-index: $zindex-toc-cta
-
     button
-        @include icon(toc, after)
         @include button-icon(toc)
         border: 0
         line-height: inherit
@@ -102,8 +100,8 @@
             text-overflow: ellipsis
             overflow: hidden
         &::after
-            font-size: 11px
             color: $toc-color
+            margin-right: $icon-toc-margin-right
         @include media-breakpoint-down(desktop)
             display: flex
             justify-content: space-between
@@ -192,5 +190,4 @@
                 @include icon(list-hyphen)
                 &::before
                     opacity: 0.3
-                    font-size: 6px
                     margin-inline-end: 6px

@@ -81,7 +81,7 @@
                     padding-right: 20%
                     img
                         max-width: 100%
-            figure 
+            figure
                 margin-right: half($grid-gutter)
                 picture
                     img
@@ -110,7 +110,7 @@
                 &--prev,
                 &--next
                     @include button-reset
-                    @include icon("arrow-left", before)
+                    @include icon(arrow-left, before)
                     height: 48px
                     padding: 0
                     position: static
@@ -118,8 +118,13 @@
                     svg
                         display: none
                 &--next
-                    @include icon("arrow-right", before)
+                    @include icon(arrow-right, before)
         @include in-page-without-sidebar
+            @include media-breakpoint-up(desktop)
+                .splide
+                    figure
+                        margin-left: $grid-gutter
+                        margin-right: half(-$grid-gutter)
             .splide
                 &__slide
                     &:first-child

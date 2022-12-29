@@ -26,6 +26,8 @@ ol.programs
         position: relative
         > button
             @include button-icon(social)
+            &:after
+                margin-right: $icon-social-margin-right
             color: $hero-color
             border-color: $color-border
             font-size: $program-share-font-size
@@ -51,6 +53,8 @@ ol.programs
             width: 100%
             .share
                 display: flex
+                align-items: center
+                height: 100%
                 li
                     margin: 0
                     flex: 1 1
@@ -166,7 +170,7 @@ ol.programs
             padding-top: $spacing0
             @include media-breakpoint-up(desktop)
                 @include grid(2)
-            @include icon("arrow-right", "after", px2rem(12), true)
+            @include icon(arrow-right, after, true)
                 color: inherit
                 position: absolute
                 right: 0

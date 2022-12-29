@@ -6,7 +6,7 @@
     .files
         @include list-reset
         li
-            @include icon("download", before)
+            @include icon-block(download, before)
             align-items: start
             display: flex
             position: relative
@@ -15,7 +15,6 @@
                 border: 1px solid $color-border
                 display: flex
                 flex-shrink: 0
-                font-size: px2rem(18)
                 height: px2rem(60)
                 justify-content: center
                 margin-right: $spacing0
@@ -23,17 +22,20 @@
                 width: px2rem(60)
             &:hover
                 &::before
-                    background-color: $color-border
+                    background-color: $color-text
                     border-color: transparent
+                    color: $color-background
         a
             @include stretched-link(before)
             @include small
             text-decoration: none
+            display: block
             &::after
                 content: none !important // Remove default icon _blank
 
     figcaption
         @include meta
+        margin-top: half($spacing0)
     @include media-breakpoint-down(desktop)
         .files
             li + li

@@ -56,6 +56,7 @@
 
 @mixin hover-translate-icon($pseudo: after, $distance: 10)
     &::#{$pseudo}
+        display: inline-block
         transition: transform 0.55s $arrow-ease-transition
         transform: translateX(0)
     &:hover
@@ -71,12 +72,11 @@
             top: calc(var(--header-height) + #{$offset-y})
 
 // NEW UTILS
-@mixin icon($icon-name: '', $pseudo-element: before, $font-size: px2rem(10), $non-breaking: false)
+@mixin icon($icon-name: '', $pseudo-element: before, $non-breaking: false)
     &::#{$pseudo-element}
         content: map-get($icons, $icon-name)
         display: inline-block
         font-family: 'Icon'
-        font-size: $font-size
         font-style: normal
         font-variant: normal
         font-weight: normal
@@ -88,6 +88,12 @@
             content: " #{map-get($icons, $icon-name)}"
             display: inline
         @content // TODO : important de documenter ça
+
+@mixin icon-block($icon-name: '', $pseudo-element: before, $non-breaking: false)
+    @include icon($icon-name, $pseudo-element, $non-breaking)
+        font-size: 44px
+        display: inline
+        @content
 
 @mixin container
     margin-left: auto
@@ -206,7 +212,7 @@
             @include h2
             transition: color 0.55s
             @include media-breakpoint-down(desktop)
-                @include icon("arrow-right", "after", px2rem(16), true)
+                @include icon(arrow-right, after, true)
                     bottom: $spacing0
                     position: absolute
                     right: 0
@@ -214,7 +220,6 @@
                 @include arrow-right-hover
                 display: block
                 &::after
-                    font-size: px2rem(16)
                     transform: translateX(0)
                     position: relative
                 &:hover
@@ -284,12 +289,10 @@
     @include button-reset
     line-height: $body-line-height
     border: 1px solid $hero-color
-    padding: $spacing0 $spacing1
+    padding: half($spacing0) $spacing1
     white-space: nowrap
     @if $icon
-        @include icon($icon, after)
-            font-size: px2rem(20) 
-            margin-left: px2rem(10)
+        @include icon-block($icon, after)
 
 @mixin text-underline
     text-decoration-color: $color-border
@@ -298,13 +301,12 @@
     text-underline-offset: 3px
     text-decoration-line: underline
 
-
 @mixin arrow-right-hover
     position: relative
     display: flex
     justify-content: space-between
     align-items: center
-    @include icon("arrow-right", after, $small-size)
+    @include icon(arrow, after)
         opacity: 0
         transform: translateX(-20px)
         transition: 0.55s $arrow-ease-transition
@@ -334,11 +336,8 @@
         display: block
         left: 0
         right: 0
+        text-align: right
         z-index: 10
-        a
-            color: inherit
-        p
-            @include meta
         &::before
             @include meta
             content: '©'
@@ -347,21 +346,28 @@
             top: 0
             background: $color-background-alt
             text-align: center
-            line-height: px2rem(30)
-            width: px2rem(30)
-            height: px2rem(30)
+            padding: half($spacing0)
             display: block
         p
+            @include meta
             background: $color-background-alt
             display: none
             padding: half($spacing0)
-            padding-right: $spacing2
+            padding-right: $spacing1
+        a
+            color: inherit
         &:focus
             p
                 display: block
+        @include media-breakpoint-up(desktop)
+            &:before
+                padding-bottom: 0
+                padding-top: 0
+
     &:hover
         figcaption p
             display: block
+
 // https://gist.github.com/jonathantneal/d0460e5c2d5d7f9bc5e6
 @function str-replace($string, $search, $replace: "")
 	$index: str-index($string, $search)
