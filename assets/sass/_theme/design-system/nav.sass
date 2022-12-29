@@ -29,6 +29,7 @@
         @include meta
         cursor: pointer
         transition: text-decoration 0.15s
+        display: block
         &:not(:hover)
             text-decoration-color: transparent
         &[aria-expanded]
@@ -89,6 +90,9 @@
             @include meta
 
     @include media-breakpoint-up(desktop)
+        .nav-level-3
+            li
+                margin-top: $spacing0
         @if $header-dropdown-full
             .dropdown-menu
                 inset: 100% 0 auto 0
@@ -127,7 +131,7 @@
             display: block
             li 
                 a, span
-                    padding: half($spacing1) 0
+                    padding: half($spacing0) 0
                     display: block
             > li:not(:last-child) 
                 border-bottom: 1px solid #adb5bd
@@ -156,6 +160,8 @@
         .nav-level-2
             > .has-children + .has-children
                 margin-top: $spacing1
+        .nav-level-3
+            padding-top: 0
 
 .share
     display: flex
