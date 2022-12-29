@@ -277,6 +277,8 @@ abbr, abbr[title]
 @each $name, $glyph in $icons
     .icon-#{$name}
         @include icon($name, before)
+    .icon-block-#{$name}
+        @include icon-block($name, before)
     .btn-#{$name}
         @include icon($name)
         &::before
