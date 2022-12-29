@@ -46,7 +46,7 @@
                     grid-column: 1 / 5
                     a
                         text-decoration: none
-                        @include icon("arrow-right", "after", px2rem(16), true)
+                        @include icon(arrow, after)
                         @include hover-translate-icon
                         &::after
                             display: inline-block
@@ -59,7 +59,7 @@
     &--grid
         .grid
             a
-                @include icon("arrow-right", "after", px2rem(16), true)
+                @include icon(arrow, after, true)
                 @include hover-translate-icon(after, 3)
         @include media-breakpoint-up(desktop)
             .grid
@@ -137,7 +137,7 @@
                     margin-top: $spacing0
                 a
                     @include meta
-                    @include icon("arrow-right", before, px2rem(10))
+                    @include icon(arrow, before, true)
                         padding-right: $spacing0
                     @include hover-translate-icon(before)
                     @include link

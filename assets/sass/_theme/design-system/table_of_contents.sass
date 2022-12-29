@@ -47,13 +47,14 @@
                 margin-top: 0
     button
         @include button-reset
+        @include button-icon(close)
         display: flex
         justify-content: space-between
         align-items: center
         padding: $spacing0 $spacing1 calc(#{$spacing0} - 1px)
         border-top: 1px solid $color-border
         line-height: $body-line-height
-        @include icon(close, after)
+
         @include media-breakpoint-up(desktop)
             border-top: 0
             position: absolute
@@ -90,7 +91,6 @@
         z-index: $zindex-toc-cta
 
     button
-        @include icon(toc, after)
         @include button-icon(toc)
         border: 0
         line-height: inherit
@@ -102,7 +102,6 @@
             text-overflow: ellipsis
             overflow: hidden
         &::after
-            font-size: 11px
             color: $toc-color
         @include media-breakpoint-down(desktop)
             display: flex
@@ -192,5 +191,4 @@
                 @include icon(list-hyphen)
                 &::before
                     opacity: 0.3
-                    font-size: 6px
                     margin-inline-end: 6px

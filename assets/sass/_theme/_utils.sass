@@ -71,12 +71,11 @@
             top: calc(var(--header-height) + #{$offset-y})
 
 // NEW UTILS
-@mixin icon($icon-name: '', $pseudo-element: before, $font-size: px2rem(10), $non-breaking: false)
+@mixin icon($icon-name: '', $pseudo-element: before, $non-breaking: false)
     &::#{$pseudo-element}
         content: map-get($icons, $icon-name)
         display: inline-block
         font-family: 'Icon'
-        // font-size: $font-size
         font-style: normal
         font-variant: normal
         font-weight: normal
@@ -88,6 +87,12 @@
             content: " #{map-get($icons, $icon-name)}"
             display: inline
         @content // TODO : important de documenter ça
+
+@mixin icon-block($icon-name: '', $pseudo-element: before, $non-breaking: false)
+    @include icon($icon-name, $pseudo-element, $non-breaking)
+        font-size: 44px
+        display: inline
+        @content
 
 @mixin container
     margin-left: auto
@@ -206,7 +211,7 @@
             @include h2
             transition: color 0.55s
             @include media-breakpoint-down(desktop)
-                @include icon("arrow-right", "after", px2rem(16), true)
+                @include icon("arrow-right", "after", true)
                     bottom: $spacing0
                     position: absolute
                     right: 0
@@ -214,7 +219,6 @@
                 @include arrow-right-hover
                 display: block
                 &::after
-                    font-size: px2rem(16)
                     transform: translateX(0)
                     position: relative
                 &:hover
@@ -287,9 +291,7 @@
     padding: $spacing0 $spacing1
     white-space: nowrap
     @if $icon
-        @include icon($icon, after)
-            font-size: px2rem(20) 
-            margin-left: px2rem(10)
+        @include icon-block($icon, after)
 
 @mixin text-underline
     text-decoration-color: $color-border
@@ -298,13 +300,12 @@
     text-underline-offset: 3px
     text-decoration-line: underline
 
-
 @mixin arrow-right-hover
     position: relative
     display: flex
     justify-content: space-between
     align-items: center
-    @include icon("arrow-right", after, $small-size)
+    @include icon("arrow-right", after)
         opacity: 0
         transform: translateX(-20px)
         transition: 0.55s $arrow-ease-transition
