@@ -40,7 +40,7 @@
                     {{- else if partial "GetTextFromHTML" $person.Params.description_short }}
                       {{- partial "PrepareHTML" $person.Params.description_short -}}
                     {{ else if (partial "GetTextFromHTML" $person.Content) }}
-                      {{- partial "GetTruncateContent" $person.Content -}}
+                      {{- partial "GetTruncateContent" ( dict "text" $person.Content ) -}}
                     {{ end -}}
                   </p>
                 </div>

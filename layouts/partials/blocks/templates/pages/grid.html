@@ -24,7 +24,14 @@
           </a>
         </h1>
         {{ if and $show_descriptions .Params.description_short }}
-          <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
+          {{ if site.Params.pages.list.truncate_description }}
+            <p>{{ partial "GetTruncateContent" ( dict 
+              "text" .Params.description_short
+              "length" site.Params.pages.list.truncate_description
+              ) }}</p>
+          {{ else }}
+            <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
+          {{ end }}
         {{ end }}
         {{ if $show_images }}
           {{- partial "pages/page-media.html" . -}}

@@ -5,7 +5,7 @@
     {{- if partial "GetTextFromHTML" .Params.description_short }}
       <p>{{- partial "PrepareHTML" .Params.description_short -}}</p>
     {{ else if (partial "GetTextFromHTML" .Content) }}
-      <p>{{- partial "GetTruncateContent"  .Content -}}</p>
+      <p>{{- partial "GetTruncateContent" ( dict "text" .Content ) -}}</p>
     {{ end -}}
   </div>
   <div class="avatar">

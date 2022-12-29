@@ -10,6 +10,7 @@
   {{- $show_main_description := .show_main_description -}}
   {{- $show_descriptions := .show_descriptions -}}
   {{- $show_images := .show_images -}}
+  {{- $main_description := "" -}}
   {{- $page_link := false -}}
 
   {{/* LEGACY */}}
@@ -39,6 +40,14 @@
       {{- $page_class = partial "GetBodyclass" . }}
       {{- $page_class = printf "block-%s" $page_class }}
     {{ end }}
+    {{ if site.Params.pages.list.truncate_description }}
+      {{- $main_description = partial "GetTruncateContent" ( dict 
+          "text" .Params.description_short
+          "length" site.Params.pages.list.truncate_description
+          ) -}}
+    {{ else }}
+      {{- $main_description = partial "PrepareHTML" .Params.description_short -}}
+    {{ end }}
   {{ end -}}
 
   <section class="block block-pages{{ if $title }} block-with-title{{ end }} {{ $layout_class }} {{ $page_class }}" id="block-{{ $position }}">
@@ -55,7 +64,7 @@
             
             {{ if and $show_main_description (ne $layout "list")}}
               {{- with $page }}
-                <p class="description">{{ partial "PrepareHTML" .Params.description_short }}</p>
+                <p class="description">{{- $main_description -}}</p>
               {{ end }}
             {{ end }}
           </div>
@@ -63,7 +72,7 @@
 
         {{ if and $show_main_description (eq $layout "list")}}
           {{- with $page }}
-            <p class="description">{{ partial "PrepareHTML" .Params.description_short }}</p>
+            <p class="description">{{- $main_description -}}</p>
           {{ end }}
         {{ end }}
 
