@@ -6,7 +6,9 @@
         <figure>
           <a class="glightbox"
             data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
-            href="{{ partial "GetLightboxUrl" (dict "id" .id) }}">
+            href="{{ partial "GetLightboxUrl" (dict "id" .id) }}"
+            title="{{- i18n "commons.lightbox.link.title" -}}"
+            >
             {{ partial "commons/image.html"
               (dict
                 "image"    .file

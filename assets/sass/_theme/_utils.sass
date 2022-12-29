@@ -336,11 +336,8 @@
         display: block
         left: 0
         right: 0
+        text-align: right
         z-index: 10
-        a
-            color: inherit
-        p
-            @include meta
         &::before
             @include meta
             content: '©'
@@ -349,15 +346,16 @@
             top: 0
             background: $color-background-alt
             text-align: center
-            line-height: px2rem(30)
-            width: px2rem(30)
-            height: px2rem(30)
+            padding: half($spacing0) 0
             display: block
         p
+            @include meta
             background: $color-background-alt
             display: none
             padding: half($spacing0)
-            padding-right: $spacing2
+            padding-right: $spacing1
+        a
+            color: inherit
         &:focus
             p
                 display: block
