@@ -346,7 +346,7 @@
             top: 0
             background: $color-background-alt
             text-align: center
-            padding: half($spacing0) 0
+            padding: half($spacing0)
             display: block
         p
             @include meta
@@ -359,9 +359,15 @@
         &:focus
             p
                 display: block
+        @include media-breakpoint-up(desktop)
+            &:before
+                padding-bottom: 0
+                padding-top: 0
+
     &:hover
         figcaption p
             display: block
+
 // https://gist.github.com/jonathantneal/d0460e5c2d5d7f9bc5e6
 @function str-replace($string, $search, $replace: "")
 	$index: str-index($string, $search)

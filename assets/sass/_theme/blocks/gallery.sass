@@ -81,9 +81,8 @@
                     padding-right: 20%
                     img
                         max-width: 100%
-            figure 
-                margin-left: $grid-gutter
-                margin-right: half(-$grid-gutter)
+            figure
+                margin-right: half($grid-gutter)
                 picture
                     img
                         // FIXME Arnaud: I would like images at constant height, can't manage to get it right.
@@ -121,6 +120,11 @@
                 &--next
                     @include icon(arrow-right, before)
         @include in-page-without-sidebar
+            @include media-breakpoint-up(desktop)
+                .splide
+                    figure
+                        margin-left: $grid-gutter
+                        margin-right: half(-$grid-gutter)
             .splide
                 &__slide
                     &:first-child
