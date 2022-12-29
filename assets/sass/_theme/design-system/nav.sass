@@ -29,11 +29,11 @@
         @include meta
         cursor: pointer
         transition: text-decoration 0.15s
+        display: block
         &:not(:hover)
             text-decoration-color: transparent
         &[aria-expanded]
             @include icon(caret, after)
-                font-size: px2rem(6)
                 margin-left: px2rem(5)
                 transition: transform 0.15s
             &[aria-expanded="true"]
@@ -90,6 +90,9 @@
             @include meta
 
     @include media-breakpoint-up(desktop)
+        .nav-level-3
+            li
+                margin-top: $spacing0
         @if $header-dropdown-full
             .dropdown-menu
                 inset: 100% 0 auto 0
@@ -128,7 +131,7 @@
             display: block
             li 
                 a, span
-                    padding: half($spacing1) 0
+                    padding: half($spacing0) 0
                     display: block
             > li:not(:last-child) 
                 border-bottom: 1px solid #adb5bd
@@ -141,9 +144,10 @@
                     align-items: center
                     display: flex
                     justify-content: space-between
-                    @include icon("caret-bottom", after)
+                    text-decoration: none
+                    @include icon(caret-bottom, after)
+                        display: block
                     &::after
-                        font-size: .375rem
                         line-height: 1
                 .dropdown-menu
                     display: none
@@ -156,6 +160,8 @@
         .nav-level-2
             > .has-children + .has-children
                 margin-top: $spacing1
+        .nav-level-3
+            padding-top: 0
 
 .share
     display: flex
@@ -165,11 +171,9 @@
     li:not(:last-child)
         margin-right: 1rem
     a
-        font-size: px2rem(13)
         text-decoration: none
         padding: $spacing0
-        &::before
-            font-size: px2rem(13)
+        font-size: px2rem(24)
         &:hover
             opacity: 0.7
         &::after

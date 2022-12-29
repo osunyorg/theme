@@ -1,5 +1,6 @@
 {{ define "main" }}
   {{ partial "pages/hero.html" . }}
+  {{ partial "hooks/after-page-hero.html" . }}
 
   <div class="document-content">
     {{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}
@@ -10,8 +11,6 @@
             "context" .
         )
     }}
-
-    {{ partial "hooks/after-page-hero.html" . }}
 
     {{ partial "pages/chapo.html" (dict
         "context" .

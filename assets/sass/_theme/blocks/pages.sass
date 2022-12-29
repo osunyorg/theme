@@ -46,10 +46,8 @@
                     grid-column: 1 / 5
                     a
                         text-decoration: none
-                        @include icon("arrow-right", "after", px2rem(16), true)
+                        @include icon(arrow, after, true)
                         @include hover-translate-icon
-                        &::after
-                            display: inline-block
             .description
                 @include h2
                 grid-column: 5 / 13
@@ -59,8 +57,8 @@
     &--grid
         .grid
             a
-                @include icon("arrow-right", "after", px2rem(16), true)
-                @include hover-translate-icon(after, 3)
+                @include icon(arrow, after, true)
+                @include hover-translate-icon(after)
         @include media-breakpoint-up(desktop)
             .grid
                 @include grid(2, desktop)
@@ -106,6 +104,7 @@
                     min-width: 100%
             .more
                 @include arrow-right-hover
+                @include icon-block(arrow-right, after)
                 @include link($block-pages-card-page-color)
                 @include text-underline
                 position: relative
@@ -137,9 +136,10 @@
                     margin-top: $spacing0
                 a
                     @include meta
-                    @include icon("arrow-right", before, px2rem(10))
+                    @include icon(arrow, before, true)
                         padding-right: $spacing0
-                    @include hover-translate-icon(before)
+                        
+                    @include hover-translate-icon(before, 5)
                     @include link
                     text-decoration-color: rgba(0,0,0,0)
         @include media-breakpoint-down(desktop)

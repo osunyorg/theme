@@ -76,24 +76,24 @@
             
         .timeline-arrows
             display: flex
+            padding-left: half($grid-gutter)
             > button
                 @include button-reset
                 background: none
                 border: none
                 color: $block-timeline-horizontal-color
                 cursor: pointer
-                font-size: 1rem
-                padding: half($grid-gutter)
                 &:first-child
-                    @include icon(arrow-left, before)
+                    @include icon-block(arrow-previous, before)
+                    margin-left: $icon-arrow-previous-margin-left
                 &:last-child
-                    @include icon(arrow-right, before)
+                    @include icon-block(arrow-next, before)
                 &:disabled
                     cursor: default
                     opacity: 0.3
         .events
-            margin-left: calc(#{$grid-gutter} / -2)
-            margin-right: calc(#{$grid-gutter} / -2)
+            margin-left: half(-$grid-gutter)
+            margin-right: half(-$grid-gutter)
             // TODO : fixer le px gap en desktop entre chaque event
             ol
                 display: flex
@@ -151,9 +151,6 @@
         @include in-page-with-sidebar
             .timeline
                 padding-left: offset(4)
-            // @include media-breakpoint-up(xxl)
-            //     .timeline
-            //         padding-left: offset(5)
 
         @include in-page-without-sidebar
             @include media-breakpoint-up(xxl)

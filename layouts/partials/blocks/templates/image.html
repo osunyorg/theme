@@ -29,7 +29,9 @@
           <figure>
             <a class="glightbox"
               data-glightbox="type: image;"
-              href="{{ partial "GetImageUrl" (dict "url" $url "size" $lightbox_sizes ) }}">
+              href="{{ partial "GetImageUrl" (dict "url" $url "size" $lightbox_sizes ) }}"
+              title="{{- i18n "commons.lightbox.link.title" -}}"
+              >
               {{ partial "commons/image.html"
                 (dict
                   "image"    .
