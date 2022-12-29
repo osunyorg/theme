@@ -24,7 +24,11 @@
       <meta itemprop="image" content="{{ $url }}">
     {{- end -}}
   {{- end -}}
-  {{- partial "programs/abstract.html" .Params.presentation -}}
+
+  {{ partial "programs/chapo.html" (dict
+      "with_container" true
+      "context" .
+    ) }}
   {{- partial "programs/presentation.html" . -}}
   {{- partial "programs/children.html" .Pages -}}
   {{- partial "programs/pedagogy.html" . -}}

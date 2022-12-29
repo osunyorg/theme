@@ -1,4 +1,6 @@
-{{ $content := partial "GetTextFromHTML" .context.Params.content}}
+{{ $content := partial "GetTextFromHTML" .context.Params.content }}
+{{ $presentation :=  partial "GetTextFromHTML" .context.Params.presentation }}
+{{ $objectives :=  partial "GetTextFromHTML" .context.Params.objectives }}
 {{ $pedagogy :=  partial "GetTextFromHTML" .context.Params.pedagogy }}
 {{ $evaluation :=  partial "GetTextFromHTML" .context.Params.evaluation }}
 {{ $teachers := .context.Params.teachers }}
@@ -24,6 +26,12 @@
     <li>
       <a href="#{{ urlize (i18n "programs.toc.presentation") }}">{{ i18n "programs.toc.presentation" }}</a>
        <ol>
+          {{- if $presentation -}}
+            <li><a href="#{{ urlize (i18n "programs.presentation") }}">{{ i18n "programs.presentation" }}</a></li>
+          {{- end -}}
+          {{- if $objectives -}}
+            <li><a href="#{{ urlize (i18n "programs.objectives") }}">{{ i18n "programs.objectives" }}</a></li>
+          {{- end -}}
           <li><a href="#{{ urlize (i18n "programs.administrative_information") }}">{{ i18n "programs.administrative_information" }}</a></li>
           {{- if .context.Params.blocks -}}
             {{- partial "blocks/toc" .context.Params.blocks -}}

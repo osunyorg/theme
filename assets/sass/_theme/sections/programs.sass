@@ -20,6 +20,14 @@ ol.programs
         justify-content: end
         .container
             position: relative
+    &:not(.full-width)
+        .lead
+            font-family: $lead-font-family
+            font-weight: $lead-weight
+            line-height: $lead-line-height
+            @include media-breakpoint-up(desktop)
+                font-size: $lead-size-desktop
+
     ol.programs
         margin-bottom: $spacing3
     .dropdown-share
@@ -135,7 +143,6 @@ ol.programs
                 .content
                     border-top: none
 
-
     .program-table
         tr
             font-size: unset
@@ -195,5 +202,4 @@ ol.programs
             a
             p
                 @include small
-                
-        
+    
