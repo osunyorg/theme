@@ -22,17 +22,20 @@
                 width: px2rem(60)
             &:hover
                 &::before
-                    background-color: $color-border
+                    background-color: $color-text
                     border-color: transparent
+                    color: $color-background
         a
             @include stretched-link(before)
             @include small
             text-decoration: none
+            display: block
             &::after
                 content: none !important // Remove default icon _blank
 
     figcaption
         @include meta
+        margin-top: half($spacing0)
     @include media-breakpoint-down(desktop)
         .files
             li + li
