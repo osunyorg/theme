@@ -1,8 +1,17 @@
-{{- $lightbox_sizes := "1920x2560" -}}
-{{- $image := partial "GetMedia" .id -}}
-{{- $url := $image.url -}}
-{{- if site.Params.keycdn -}}
-  {{- $url = $image.direct_url -}}
+{{ $id := . }}
+{{ if isset . "id" }}
+  {{ $id = .id }}
+{{ end }}
+{{ $lightbox_sizes := "1920x2560" }}
+{{ $image := partial "GetMedia" $id }}
+{{ $url := "" }}
+
+{{ if $image }}
+  {{- $url = $image.url -}}
+  {{- if site.Params.keycdn -}}
+    {{- $url = $image.direct_url -}}
+  {{- end -}}
+  {{ $url = partial "GetImageUrl" (dict "url" $url "size" $lightbox_sizes ) }}
 {{- end -}}
 
-{{ return partial "GetImageUrl" (dict "url" $url "size" $lightbox_sizes ) }}
+{{ return $url }}
