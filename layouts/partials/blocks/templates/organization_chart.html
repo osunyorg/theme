@@ -3,6 +3,7 @@
 {{- $title := .block.title -}}
 {{- with .block.data -}}
   {{- $with_link := .with_link -}}
+  {{- $with_photo := .with_photo -}}
 <section class="block block-organization_chart{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
   <div class="container">
     <div class="block-content">
@@ -44,17 +45,19 @@
                     {{ end -}}
                   </p>
                 </div>
-                <div class="avatar" itemprop="image">
-                  {{- if $person.Params.image }}
-                    {{ partial "commons/image.html"
-                          (dict
-                            "image"    $person.Params.image
-                            "mobile"   "80x80"
-                            "tablet"   "100x100"
-                            "desktop"  "255x255"
-                          )}}
-                  {{ end -}}
-                </div>
+                {{- if $with_photo }}
+                  <div class="avatar" itemprop="image">
+                    {{- if $person.Params.image }}
+                      {{ partial "commons/image.html"
+                            (dict
+                              "image"    $person.Params.image
+                              "mobile"   "80x80"
+                              "tablet"   "100x100"
+                              "desktop"  "255x255"
+                            )}}
+                    {{ end -}}
+                  </div>
+                {{ end -}}
               </article>
             </div>
           {{- end -}}
