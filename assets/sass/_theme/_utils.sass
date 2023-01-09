@@ -163,18 +163,6 @@
         aspect-ratio: #{$ratio}
         display: block
         width: 100%
-    @supports not (aspect-ratio: 1)
-        position: relative
-        &::before
-            content: ''
-            padding-top: (1 / $ratio) * 100%
-            width: 100%
-        #{$selector}
-            bottom: 0
-            left: 0
-            position: absolute
-            right: 0
-            top: 0
 
 @mixin article($background: null)
     position: relative
@@ -391,3 +379,11 @@
     font-weight: $weight
     font-display: swap
     src: $src
+
+
+// Old browsers support
+
+@mixin browser-under-safari-16
+    @media not all and (min-resolution:.001dpcm) 
+            @supports (-webkit-appearance:none) and (display:flow-root)
+                @content
