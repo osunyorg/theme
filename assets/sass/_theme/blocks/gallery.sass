@@ -36,12 +36,18 @@
             @include browser-under-safari-16
                 align-items: start
             @include in-page-with-sidebar
-                @include grid(3, desktop, half($grid-gutter), half($grid-gutter))
+                display: flex
+                flex-wrap: wrap
+                gap: half($grid-gutter)
+                > *
+                    width: calc(33.333% - #{$grid-gutter} / 3)
             @include in-page-without-sidebar
-                @include grid(4, desktop)
-            @include media-breakpoint-down(desktop)
-                @include grid(2)
-                grid-gap: half($grid-gutter-sm) !important
+                @include media-breakpoint-up(desktop)
+                    display: flex
+                    flex-wrap: wrap
+                    gap: $grid-gutter
+                    > *
+                        width: calc(25% - #{$grid-gutter} / 1.333)
             figure
                 &:after
                     content: ' ' // This is used to allow align baseline without figcaption
