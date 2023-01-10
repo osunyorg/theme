@@ -161,8 +161,39 @@
       document.body.classList.toggle('full-width');
     }
   });
+
   window.addEventListener('pointermove', e => {
     document.querySelector('.d-cross').style.left = e.clientX + "px";
     document.querySelector('.d-cross').style.top = e.clientY + "px";
+  });
+
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('click', e => {
+      if (e.altKey) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        responsiveImageDebugOutput(img)
+      }
+    })
   })
+
+  function responsiveImageDebugOutput(img) {
+    if (!img) {
+      throw new TypeError("Expected an image node. Got none.");
+    }
+    const listener = function () {
+      const dimensionWidth = img.naturalWidth * window.devicePixelRatio;
+      const dimensionHeight = img.naturalHeight * window.devicePixelRatio;
+      console.log(`
+        -------------------------
+        Device Pixel Ratio: ${window.devicePixelRatio}
+        Rendered size: ${img.width}x${img.height}
+        Intrinsic size: ${dimensionWidth}x${dimensionHeight}
+        Device Pixel Ratio: ${window.devicePixelRatio}
+        -------------------------
+      `);
+    };
+    if (img.complete) listener();
+    //img.addEventListener('load', listener);
+  }
 </script>
