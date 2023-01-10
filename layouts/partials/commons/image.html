@@ -24,6 +24,14 @@
     {{- if .crop -}}
       {{- $crop = true -}}
     {{- end -}}
+    {{ $desktop := .desktop }}
+    {{ $tablet := .tablet }}
+    {{ $mobile := .mobile }}
+    {{- if .sizes -}}
+      {{ $desktop = .sizes.desktop }}
+      {{ $tablet = .sizes.tablet }}
+      {{ $mobile = .sizes.mobile }}
+    {{- end -}}
     <picture>
 
       {{- if strings.HasSuffix $image.name "svg" -}}
@@ -39,32 +47,32 @@
 
       {{- else -}}
 
-        {{ with .desktop -}}
+        {{ with $desktop -}}
         <source srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop ) }},
                         {{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x"
                         media="(min-width: 1024px)" type="image/webp">
         {{- end }}
-        {{ with .tablet -}}
+        {{ with $tablet -}}
         <source srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop) }},
                         {{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x"
                         media="(min-width: 768px)" type="image/webp">
         {{- end }}
-        {{ with .mobile -}}
+        {{ with $mobile -}}
         <source srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop) }},
                         {{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x"
                         type="image/webp">
         {{- end }}
-        {{ with .desktop -}}
+        {{ with $desktop -}}
         <source srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "crop" $crop ) }},
                         {{ partial "GetImageUrl" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x"
                         media="(min-width: 1024px)">
         {{- end }}
-        {{ with .tablet -}}
+        {{ with $tablet -}}
         <source srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "crop" $crop ) }},
                         {{ partial "GetImageUrl" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x"
                         media="(min-width: 768px)">
         {{- end }}
-        {{ with .mobile -}}
+        {{ with $mobile -}}
         <source srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "crop" $crop ) }},
                         {{ partial "GetImageUrl" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x">
         {{- end }}

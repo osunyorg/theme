@@ -12,11 +12,9 @@
     {{- if .Params.image }}
       {{ partial "commons/image.html"
             (dict
-              "alt"    .Title
+              "alt"      .Title
               "image"    .Params.image
-              "mobile"   "80x80"
-              "tablet"   "100x100"
-              "desktop"  "255x255"
+              "sizes"    site.Params.image_sizes.sections.persons.item
             )}}
     {{ end -}}
   </div>

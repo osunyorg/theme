@@ -2,7 +2,7 @@
 {{ if isset . "id" }}
   {{ $id = .id }}
 {{ end }}
-{{ $lightbox_sizes := "1920x2560" }}
+{{ $lightbox_sizes := site.Params.image_sizes.design_system.lightbox.desktop }}
 {{ $image := partial "GetMedia" $id }}
 {{ $url := "" }}
 

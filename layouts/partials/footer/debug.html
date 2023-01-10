@@ -161,9 +161,20 @@
       document.body.classList.toggle('full-width');
     }
   });
+
   window.addEventListener('pointermove', e => {
     document.querySelector('.d-cross').style.left = e.clientX + "px";
     document.querySelector('.d-cross').style.top = e.clientY + "px";
+  });
+
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('click', e => {
+      if (e.altKey) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        responsiveImageDebugOutput(img)
+      }
+    })
   })
 
   function responsiveImageDebugOutput(img) {
