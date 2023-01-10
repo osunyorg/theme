@@ -23,6 +23,7 @@
         {{ $chapo_block = true }}
       {{ end }}
     {{ end }}
+    
     {{ partial "persons/chapo.html" (dict
         "context" .
         "with_container" (not $chapo_block)
@@ -36,7 +37,6 @@
       {{- end -}}
     </div>
 
-  
     {{ partial "blocks/list.html" . }}
   </div>
 

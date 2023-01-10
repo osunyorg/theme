@@ -1,14 +1,12 @@
 {{ define "main" }}
   {{ partial "organizations/hero.html" . }}
 
-  <div class="document-content">
+  <div class="document-content" itemscope itemtype="https://schema.org/Organization">
 
-    {{ partial "toc/container.html"
-      (dict
-            "toc" "toc/default.html"
-            "context" .
-        )
-      }}
+    {{ partial "toc/container.html" (dict
+          "toc" "toc/default.html"
+          "context" .
+        ) }}
 
     <div class="container">
       <div itemprop="articleBody" class="rich-text">
@@ -18,15 +16,14 @@
 
         {{ if (partial "GetTextFromHTML" .Content) }}
           {{ partial "PrepareHTML" (
-                partial "H2AddId" .Content
-              ) }}
+              partial "H2AddId" .Content
+            ) }}
         {{ end }}
       </div>
-
-      <div class="organization-meta">
-        {{ partial "organizations/logo.html" . }}
-        {{ partial "organizations/contacts.html" . }}
-      </div>
+      {{ partial "organizations/logo.html" . }}
+    </div>
+    <div class="container">
+      {{ partial "organizations/contact-details.html" . }}
     </div>
     {{ partial "blocks/list.html" . }}
   </div>
