@@ -11,7 +11,18 @@
       }}
 
     <div class="container">
-      {{ partial "organizations/content.html" . }}
+      <div itemprop="articleBody" class="rich-text">
+        {{ partial "pages/chapo.html" (dict
+          "context" .
+        ) }}
+
+        {{ if (partial "GetTextFromHTML" .Content) }}
+          {{ partial "PrepareHTML" (
+                partial "H2AddId" .Content
+              ) }}
+        {{ end }}
+      </div>
+
       <div class="organization-meta">
         {{ partial "organizations/logo.html" . }}
         {{ partial "organizations/contacts.html" . }}
