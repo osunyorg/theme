@@ -17,7 +17,7 @@
         <ol class="programs">
           {{- range .programs -}}
             <li>
-              {{ $program := site.GetPage (printf "/programs/%s" .slug) }}
+              {{ $program := site.GetPage (printf "/programs%s" .path) }}
               {{- $title := partial "PrepareHTML" $program.Title -}}
               <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
                 {{- $title -}}
@@ -25,10 +25,6 @@
             </li>
           {{ end }}
         </ol>
-        {{/*   TODO : use program list partial ?
-          {{ partial "programs/programs-list.html" .programs }}
-        */}}
-      
       </div>
     </div>
   </section>
