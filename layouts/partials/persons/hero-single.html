@@ -6,13 +6,11 @@
       {{ if .Params.image }}
         <div class="avatar">
           {{ partial "commons/image.html"
-                (dict
-                  "image"    .Params.image
-                  "class"    "img-fluid"
-                  "mobile"   "202x202"
-                  "tablet"   "192x192"
-                  "desktop"  "415x415"
-                )}}
+              (dict
+                "image"    .Params.image
+                "class"    "img-fluid"
+                "sizes"    site.Params.image_sizes.sections.persons.hero_single
+              )}}
         </div>
       {{ end }}
     </div>

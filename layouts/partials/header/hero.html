@@ -27,9 +27,7 @@
             {{ partial "commons/image.html"
               (dict
                 "image"    .image
-                "mobile"   "400"
-                "tablet"   "800"
-                "desktop"  "900"
+                "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
                 "lazy"     false
               ) }}
               {{ if .image.credit }}

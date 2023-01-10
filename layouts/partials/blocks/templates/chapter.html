@@ -46,9 +46,7 @@
                 {{ partial "commons/image.html"
                   (dict
                     "image"    .image
-                    "mobile"   "350x350"
-                    "tablet"   "450x450"
-                    "desktop"  "1280x1280"
+                    "sizes"    site.Params.image_sizes.blocks.chapter
                   )}}
               </a>
               {{ if partial "GetTextFromHTML" .credit }}

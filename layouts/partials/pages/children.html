@@ -6,9 +6,7 @@
           <div>
             {{ $page := partial "GetPageByUrl" . }}
             {{ with $page }}
-              {{ .Scratch.Set "show_description" true }}
               {{ partial "pages/page.html" . }}
-              {{ .Scratch.Delete "show_description" }}
             {{ end }}
           </div>
         {{ end }}

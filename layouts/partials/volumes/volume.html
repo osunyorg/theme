@@ -9,9 +9,7 @@
             (dict
               "image"    .Params.image
               "alt"      .Title
-              "mobile"   "327x388"
-              "tablet"   "208x247"
-              "desktop"  "408x485"
+              "sizes"    site.Params.image_sizes.sections.volumes.item
             ) -}}
     {{- else if site.Params.default_image.url -}}
       {{- partial "commons/image-default.html" (dict "class" "img-fluid") -}}

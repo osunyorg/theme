@@ -1,7 +1,3 @@
-{{- $with_image := false -}}
-{{- if .Scratch.Get "with_image" -}}
-  {{- $with_image = true -}}
-{{- end -}}
 {{- $title := partial "PrepareHTML" .Title -}}
 <article class="program">
   <div>
@@ -14,18 +10,4 @@
       <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
     {{ end }}
   </div>
-  {{- if $with_image }}
-    {{- if .Params.image }}
-      <div class="media">
-        {{ partial "commons/image.html"
-              (dict
-                "image"    .Params.image
-                "mobile"   "351x168"
-                "tablet"   "456x219"
-                "desktop"  "856x410"
-                "itemprop" true
-              )}}
-      </div>
-    {{ end -}}
-  {{ end -}}
 </article>
