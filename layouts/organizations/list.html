@@ -3,6 +3,9 @@
 
   <div class="document-content">
     <div class="container">
+      {{ partial "pages/summary.html" (dict
+          "context" .
+        ) }}
       {{ partial "organizations/organizations.html" . }}
       {{ partial "commons/pagination.html" . }}
     </div>
