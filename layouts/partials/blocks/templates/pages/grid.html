@@ -23,14 +23,14 @@
             {{- partial "PrepareHTML" .Title -}}
           </a>
         </h1>
-        {{ if and $show_descriptions .Params.description_short }}
+        {{ if and $show_descriptions .Params.summary }}
           {{ if site.Params.pages.list.truncate_description }}
             <p>{{ partial "GetTruncateContent" ( dict 
-              "text" .Params.description_short
+              "text" .Params.summary
               "length" site.Params.pages.list.truncate_description
               ) }}</p>
           {{ else }}
-            <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
+            <p>{{ partial "PrepareHTML" .Params.summary }}</p>
           {{ end }}
         {{ end }}
         {{ if $show_images }}

@@ -2,8 +2,8 @@
   <div class="description">
     {{- $title := partial "PrepareHTML" .Title }}
     <p class="name"><a href="{{ .Permalink }}">{{- $title -}}</a></p>
-    {{- if partial "GetTextFromHTML" .Params.description_short }}
-      <p>{{- partial "PrepareHTML" .Params.description_short -}}</p>
+    {{- if partial "GetTextFromHTML" .Params.summary }}
+      <p>{{- partial "PrepareHTML" .Params.summary -}}</p>
     {{ else if (partial "GetTextFromHTML" .Content) }}
       <p>{{- partial "GetTruncateContent" ( dict "text" .Content ) -}}</p>
     {{ end -}}

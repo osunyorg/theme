@@ -42,11 +42,11 @@
     {{ end }}
     {{ if site.Params.pages.list.truncate_description }}
       {{- $main_description = partial "GetTruncateContent" ( dict 
-          "text" .Params.description_short
+          "text" .Params.summary
           "length" site.Params.pages.list.truncate_description
           ) -}}
     {{ else }}
-      {{- $main_description = partial "PrepareHTML" .Params.description_short -}}
+      {{- $main_description = partial "PrepareHTML" .Params.summary -}}
     {{ end }}
   {{ end -}}
 

@@ -16,8 +16,8 @@
         {{- partial "PrepareHTML" .Title -}}
       </a>
     {{- partial "PrepareHTML" (printf "</%s>" $heading) -}}
-    {{- if .Params.description_short }}
-      <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
+    {{- if .Params.summary }}
+      <p>{{ partial "PrepareHTML" .Params.summary }}</p>
     {{ end -}}
   </div>
 </article>
