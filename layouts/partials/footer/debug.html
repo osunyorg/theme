@@ -182,8 +182,9 @@
       throw new TypeError("Expected an image node. Got none.");
     }
     const listener = function () {
-      const dimensionWidth = img.naturalWidth * window.devicePixelRatio;
-      const dimensionHeight = img.naturalHeight * window.devicePixelRatio;
+      const pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
+      const dimensionWidth = img.naturalWidth * pixelRatio;
+      const dimensionHeight = img.naturalHeight * pixelRatio;
       console.log(`
         -------------------------
         Rendered size: ${img.width}x${img.height}

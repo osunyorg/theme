@@ -10,6 +10,7 @@
 {{ end }}
 {{ $scale := .scale }}
 {{ $fit := "" }}
+{{ $quality := "" }}
 {{ with .size }}
   {{ $sizes := split . "x" }}
   {{ $width := int (index $sizes 0) }}
@@ -17,6 +18,7 @@
   {{ with $scale }}
     {{ $width = mul $width $scale }}
     {{ $height = mul $height $scale }}
+    {{ $quality = 50 }}
   {{ end }}
   {{ $fit = "inside" }}
   {{ $result = printf "%swidth=%d&height=%d&" $result $width $height }}
@@ -27,5 +29,8 @@
 {{ end }}
 {{ if ne $fit "" }}
   {{ $result = printf "%s&fit=%s" $result $fit }}
+{{ end }}
+{{ if ne $quality "" }}
+  {{ $result = printf "%s&quality=%d" $result $quality }}
 {{ end }}
 {{ return $result }}
