@@ -17,13 +17,6 @@
                 @include media-breakpoint-up(xl)
                     font-size: $block-testimonials-xl-font-size-long-text
                     line-height: $block-testimonials-xl-line-height-long-text
-        // &::before
-        //     content: "“"
-        //     font-size: calc(#{$block-testimonials-font-size} * 3)
-        //     line-height: 1
-        //     position: absolute
-        //     transform: translateY(-50%)
-            // TODO : ajuster en fonction de la typo
 
     figure
         margin-bottom: 0
@@ -41,7 +34,6 @@
         margin-bottom: 0
         @include media-breakpoint-up(desktop)
             margin-right: calc(#{$grid-gutter} / 2)
-        //     width: calc(#{col(1, 7)} + #{$grid-gutter} / 2)
 
     .splide
         display: flex
@@ -102,11 +94,12 @@
             .splide__autoplay
                 margin-right: offset(1)
             figure
-                padding-left: offset(2)
-                padding-right: offset(1)
+                padding-right: offset(3)
                 // TODO: explain this, add min height equal with 2 cols width to avoid overflow on square picture
                 min-height: calc(#{col-outside-container(2)} + #{half($grid-gutter)})
                 &.with-picture
+                    padding-right: offset(1)
+                    padding-left: offset(2)
                     position: relative
                     figcaption
                         display: block

@@ -36,9 +36,8 @@
   {{- partial "programs/results.html" . -}}
   {{- partial "programs/admission.html" . -}}
 
-  {{/*  TODO: fixer les posts liés  */}}
-  {{/*  {{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}  */}}
-  {{/*  {{- partial "posts/related.html" $category -}}  */}}
+  {{- $category := site.GetPage (printf "/categories/%s" .Params.related_category ) -}}
+  {{- partial "programs/related.html" $category -}}
 
   {{- partial "hooks/before-program-end.html" . -}}
 </div>

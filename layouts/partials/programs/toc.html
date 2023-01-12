@@ -17,6 +17,9 @@
 {{ $roles := .context.Params.roles }}
 {{ $contacts := partial "GetTextFromHTML" .context.Params.contacts }}
 
+{{ $category := site.GetPage (printf "/categories/%s" .context.Params.related_category ) }}
+{{ $related_posts := $category.Pages }}
+
 {{/* nav-link required for toggle active class */}}
 <nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
   <ol>
@@ -98,5 +101,10 @@
       </ol>
       {{ end -}}
     </li>
+    {{- if gt (len $related_posts) 0 -}}
+      <li>
+        <a href="#{{ urlize (i18n "programs.toc.related") }}">{{ i18n "programs.toc.related" }}</a>
+      </li>
+    {{- end -}}
   </ol>
 </nav>

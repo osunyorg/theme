@@ -133,7 +133,7 @@ ol.programs
                     $sticky-top-offset: 90px
                     @include sticky($sticky-top-offset)
                     top: $sticky-top-offset
-                    margin-top: -0.3em
+                    // margin-top: -0.3em
                     align-self: start
                     grid-column: 1/5
                     margin-bottom: 0
@@ -149,9 +149,6 @@ ol.programs
             line-height: 160%
             &:first-child 
                 border-top: 1px solid $color-border
-                th,
-                td
-                    padding: 1rem 0
             &:last-child
                 border-bottom: 1px solid $color-border
         th
@@ -202,4 +199,11 @@ ol.programs
             a
             p
                 @include small
-    
+    .related-posts
+        .category-link
+            display: block
+            text-decoration: none
+            @include icon(arrow, after, true)
+            @include hover-translate-icon
+            @include media-breakpoint-down(desktop)
+                margin-bottom: $spacing1
