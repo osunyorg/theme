@@ -63,6 +63,10 @@
         .splide
             display: flex
             flex-direction: column
+            @include in-page-with-sidebar
+                &.is-moving
+                    .splide__slide.is-active
+                        opacity: 0.1
             &__track
                 overflow: visible
                 margin-right: half(-$grid-gutter-sm)
