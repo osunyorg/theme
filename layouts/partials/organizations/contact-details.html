@@ -3,31 +3,31 @@
     <div class="contacts-details">
       {{ if or .website .linkedin .twitter .email }}
         <ul>
-          {{ if .website }}
+          {{ with .website }}
             <li>
               <span>{{ i18n "commons.contact.website" }}</span>
-              <a href="{{ .website }}" target="_blank" rel="noopener" itemprop="url">{{ .website }}</a>
+              <a href="{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
             </li>
           {{ end }}
 
-          {{ if .linkedin }}
+          {{ with .linkedin }}
             <li>
               <span>LinkedIn</span>
-              <a href="{{ .linkedin }}" target="_blank" rel="noopener" itemprop="url">{{ .linkedin }}</a>
+              <a href="{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
             </li>
           {{ end }}
         
-          {{ if .twitter }}
+          {{ with .twitter }}
             <li>
               <span>Twitter</span>
-              <a href="https://twitter.com/{{ .twitter }}" target="_blank" rel="noopener" itemprop="url">{{ .twitter }}</a>
+              <a href="https://twitter.com/{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
             </li>
           {{ end }}
 
-          {{ if .email }}
+          {{ with .email }}
             <li>
               <span>{{ i18n "commons.contact.email" }}</span>
-              <a href="mailto:{{ .email }}" itemprop="email">{{ .email }}</a>
+              <a href="mailto:{{ chomp . }}" itemprop="email">{{ chomp . }}</a>
             </li>
           {{ end }}
         </ul>
