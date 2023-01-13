@@ -74,9 +74,16 @@
         display: none
     @include media-breakpoint-up(desktop)
         @include container
+        background: $color-background
         justify-content: end
-        text-align: right
         margin-bottom: $spacing3
+        position: sticky
+        text-align: right
+        top: -$header-height-desktop
+        transition: top $toc-sticky-transition
+        z-index: $zindex-toc-cta
+        html:not(.is-scrolling-down) &
+            top: $header-height-desktop
         body.offcanvas-toc &
             display: flex
     @include media-breakpoint-down(desktop)
