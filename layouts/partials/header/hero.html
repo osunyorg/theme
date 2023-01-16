@@ -5,8 +5,10 @@
 
 <header class="hero {{ if .image -}}hero--with-image hero--image-{{- $direction -}}{{- end -}}">
   <div class="container">
-    {{- if .breadcrumb | default true -}}
-      {{ partial "header/breadcrumbs.html" .context }}
+    {{- if eq site.Params.breadcrumb.position "hero-start" -}}
+      {{- if .breadcrumb | default true -}}
+        {{ partial "header/breadcrumbs.html" .context }}
+      {{- end -}}
     {{- end -}}
     <div class="content">
       {{- if .subtitle -}}
@@ -41,5 +43,18 @@
         </figure>
       {{ end -}}
     </div>
+    {{- if eq site.Params.breadcrumb.position "hero-end" -}}
+      {{- if .breadcrumb | default true -}}
+        {{ partial "header/breadcrumbs.html" .context }}
+      {{- end -}}
+    {{- end -}}
   </div>
 </header>
+
+{{- if eq site.Params.breadcrumb.position "after-hero" -}}
+  {{- if .breadcrumb | default true -}}
+    <div class="container">
+      {{ partial "header/breadcrumbs.html" .context }}
+    </div>
+  {{- end -}}
+{{- end -}}
