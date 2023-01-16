@@ -78,11 +78,11 @@
         margin-bottom: $spacing3
         position: sticky
         text-align: right
-        top: -$header-height-desktop
+        top: calc(var(--header-height) * -1)
         transition: top $toc-sticky-transition
         z-index: $zindex-toc-cta
         html:not(.is-scrolling-down) &
-            top: $header-height-desktop
+            top: var(--header-height)
         body.offcanvas-toc &
             display: flex
     @include media-breakpoint-down(desktop)
