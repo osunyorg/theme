@@ -5,6 +5,7 @@
   {{ range .pages }}
     {{- $page := partial "GetPageByUrl" .page -}}
     {{- if .slug -}}
+      {{/*  LEGACY  */}}
       {{- $page = partial "GetPageByUrl" .slug -}}
     {{- end -}}
     {{ with $page }}
