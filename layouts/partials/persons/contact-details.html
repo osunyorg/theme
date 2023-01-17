@@ -1,0 +1,45 @@
+{{ with .Params }}
+  {{ if or .website .linkedin .twitter .email .phone }}
+    <div class="contacts-details">
+      {{ if or .website .linkedin .twitter .email .phone }}
+        <ul>
+          {{ with .website }}
+            <li>
+              <span>{{ i18n "commons.contact.website" }}</span>
+              <a href="{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
+            </li>
+          {{ end }}
+
+          {{ with .linkedin }}
+            <li>
+              <span>LinkedIn</span>
+              <a href="{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
+            </li>
+          {{ end }}
+        
+          {{ with .twitter }}
+            <li>
+              <span>Twitter</span>
+              <a href="https://twitter.com/{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
+            </li>
+          {{ end }}
+
+          {{ with .email }}
+            <li>
+              <span>{{ i18n "commons.contact.email" }}</span>
+              <a href="mailto:{{ chomp . }}" itemprop="email">{{ chomp . }}</a>
+            </li>
+          {{ end }}
+
+          {{ with .phone }}
+            <li>
+              <span>{{ i18n "commons.contact.phone" }}</span>
+              <a href="tel:{{ . }}" itemprop="telephone">{{ . }}</a>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+
+    </div>
+  {{ end }}
+{{ end }}
