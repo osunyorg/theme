@@ -20,54 +20,52 @@
 .authors__term,
 .categories__term,
 .persons__page
-    @if $posts-layout-list
-        .posts
-            article
-                border-bottom: 1px solid $color-border
-                display: flex
-                margin-bottom: $spacing1
-                padding-bottom: $spacing1
-                flex-direction: row
-                h1 + p
-                    margin-top: $spacing0
-                @include media-breakpoint-up(desktop)
-                    @include grid
-                    margin-bottom: $spacing3
-                    padding-bottom: $spacing3
-                div:not(.media)
-                    grid-column: 4/13
-                    @include media-breakpoint-down(desktop)
-                        flex: 1
-                        margin-left: $spacing0
-                    p:not(.title)
-                        @include media-breakpoint-down(desktop)
-                            display: none
-                .media
-                    background: none
-                    margin: 0
-                    @include media-breakpoint-down(desktop)
-                        width: 33.33333%
-                    @include media-breakpoint-up(desktop)
-                        grid-column: 1/4
-                    &, img
-                        aspect-ratio: auto
-                @include media-breakpoint-up(desktop)
-                    time 
-                        font-size: $h5-size
-                        position: absolute
-                        right: 0
-                        top: 0
-                    div:not(.media)
-                        h1,
-                        p,
-                        a
-                            max-width: col(6, 9)
 
-    @else 
-        .posts
-            @include grid(1)
-            @include grid(2, desktop)
-            @include grid($posts-grid-columns, xxl)
+    .posts--list
+        article
+            border-bottom: 1px solid $color-border
+            display: flex
+            margin-bottom: $spacing1
+            padding-bottom: $spacing1
+            flex-direction: row
+            h1 + p
+                margin-top: $spacing0
+            @include media-breakpoint-up(desktop)
+                @include grid
+                margin-bottom: $spacing3
+                padding-bottom: $spacing3
+            div:not(.media)
+                grid-column: 4/13
+                @include media-breakpoint-down(desktop)
+                    flex: 1
+                    margin-left: $spacing0
+                p:not(.title)
+                    @include media-breakpoint-down(desktop)
+                        display: none
+            .media
+                background: none
+                margin: 0
+                @include media-breakpoint-down(desktop)
+                    width: 33.33333%
+                @include media-breakpoint-up(desktop)
+                    grid-column: 1/4
+                &, img
+                    aspect-ratio: auto
+            @include media-breakpoint-up(desktop)
+                time 
+                    font-size: $h5-size
+                    position: absolute
+                    right: 0
+                    top: 0
+                div:not(.media)
+                    h1,
+                    p,
+                    a
+                        max-width: col(6, 9)
+    .posts--grid
+        @include grid(1)
+        @include grid(2, desktop)
+        @include grid($posts-grid-columns, xxl)
 
 .posts__page
     @include media-breakpoint-down(desktop)
