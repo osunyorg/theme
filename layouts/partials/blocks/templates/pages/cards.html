@@ -17,10 +17,10 @@
         </h1>
 
         {{ if and $show_descriptions .Params.summary }}
-          {{ if site.Params.pages.list.truncate_description }}
+          {{ if site.Params.pages.index.truncate_description }}
             <p>{{ partial "GetTruncateContent" ( dict 
               "text" .Params.summary
-              "length" site.Params.pages.list.truncate_description
+              "length" site.Params.pages.index.truncate_description
               ) }}</p>
           {{ else }}
             <p>{{ partial "PrepareHTML" .Params.summary }}</p>

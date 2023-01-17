@@ -31,38 +31,39 @@
         margin-bottom: $spacing1
         order: -1
         width: px2rem(76)
-
     .name
-        margin-bottom: px2rem(5)
-        // & ~ p
-            // @include small
-
+        @include h4
+        a
+            @include stretched-link
+            text-decoration: none
+        + p
+            margin-top: half($spacing0)
     .description
         @include small
-
-    @include media-breakpoint-down(desktop)
-        display: block
-        &::after
-            content: ''
-            clear: both
-            display: table
-        > div:first-of-type
-            float: left
-            max-width: calc(100% - 6rem)
+    @include media-breakpoint-down(md)
+        flex-direction: row
+        justify-content: space-between
         .avatar
-            float: right
+            align-self: start
+            flex-shrink: 0
+            order: 2
+            margin-left: $spacing0
             margin-bottom: 0
-
+    @include media-breakpoint-up(desktop)
+        @include in-page-without-sidebar
+            text-align: center
+            .avatar
+                width: 100%
 
 section.persons,
 div.persons
     @include grid(1)
     @include grid(2, md)
     @include grid(3, lg)
-    @include grid(4, xl)
-    @include grid(5, xxl)
+    @include grid(5, xl)
+    @include grid(6, xxl)
 
-ol.persons
+ol.persons--list
     @include list-reset
     > li
         border-bottom: 1px solid $color-border
