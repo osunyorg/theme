@@ -33,7 +33,10 @@
     <div class="container">
       {{- if not $is_organigram_present -}}
         {{ partial "persons/taxonomies.html" . }}
-        {{ partial "persons/list.html" . }}
+        {{ $persons := .Pages.ByParam "last_name" }}
+        {{ $persons = (.Paginate $persons).Pages }}
+        {{ partial "persons/list.html" (dict "persons" $persons) }}
+        {{ partial "commons/pagination.html" . }}
       {{- end -}}
     </div>
 

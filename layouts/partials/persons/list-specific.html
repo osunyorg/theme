@@ -1,14 +1,14 @@
-<ol class="persons">
-  {{ range (.Paginate (.Pages.ByParam "last_name")).Pages }}
-    {{ if .Slug }}
-      {{ $slug := printf "/persons/%s" .Slug }}
-      {{ $person := site.GetPage $slug }}
-      {{ if $person }}
-        {{ with $person }}
-          {{ partial "persons/list-item" $person }}
-        {{ end }}
-      {{ end }}
+{{ $persons := slice }}
+
+{{ range (.Paginate (.Pages.ByParam "last_name")).Pages }}
+  {{ if .Slug }}
+    {{ $slug := printf "/persons/%s" .Slug }}
+    {{ $person := site.GetPage $slug }}
+    {{ if $person }}
+      {{ $persons = $persons | append $person }}
     {{ end }}
   {{ end }}
-</ol>
+{{ end }}
+
+{{ partial "persons/list.html" (dict "persons" $persons) }}
 {{ partial "commons/pagination.html" . }}

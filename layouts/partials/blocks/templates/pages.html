@@ -40,10 +40,10 @@
       {{- $page_class = partial "GetBodyclass" . }}
       {{- $page_class = printf "block-%s" $page_class }}
     {{ end }}
-    {{ if site.Params.pages.list.truncate_description }}
+    {{ if site.Params.pages.index.truncate_description }}
       {{- $main_description = partial "GetTruncateContent" ( dict 
           "text" .Params.summary
-          "length" site.Params.pages.list.truncate_description
+          "length" site.Params.pages.index.truncate_description
           ) -}}
     {{ else }}
       {{- $main_description = partial "PrepareHTML" .Params.summary -}}
