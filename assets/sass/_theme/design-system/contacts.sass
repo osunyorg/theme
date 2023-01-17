@@ -1,5 +1,4 @@
 .contacts-details
-    @include grid(2, md)
     margin-top: $spacing3
     ul
         @include list-reset
@@ -18,9 +17,13 @@
         ul + ul
             margin-top: $spacing1
         li
-            display: flex
-            justify-content: space-between
             align-items: baseline
-            span
+            justify-content: space-between
+            // display: flex
+            // text-align: right
+            > span
                 flex-shrink: 0
                 margin-right: $spacing1
+                text-align: left
+            address
+                text-align: right

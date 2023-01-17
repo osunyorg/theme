@@ -45,8 +45,6 @@
               {{ partial "PrepareHTML" .Content }}
             </div>
           {{ end }}
-
-          {{ partial "persons/contact-details.html" . }}
         </div>
         {{ range $programsForAdministrator }}
         {{ $program := . }}
@@ -63,6 +61,9 @@
           </div>
         {{ end }}
       </div>
+
+      {{ partial "persons/contact-details.html" . }}
+
     </div>
 
     {{ partial "blocks/list.html" . }}

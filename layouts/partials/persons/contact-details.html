@@ -1,6 +1,6 @@
 {{ with .Params }}
   {{ if or .website .linkedin .twitter .email .phone }}
-    <div class="contacts-details">
+    <div class="contacts-details contacts-details--person">
       {{ if or .website .linkedin .twitter .email .phone }}
         <ul>
           {{ with .website }}
@@ -39,7 +39,6 @@
           {{ end }}
         </ul>
       {{ end }}
-
     </div>
   {{ end }}
 {{ end }}
