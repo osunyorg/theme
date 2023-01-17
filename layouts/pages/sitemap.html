@@ -5,19 +5,25 @@
           "image" .Params.image
           "context" .
         ) -}}
+
   <div class="document-content">
     {{ partial "toc/container.html"
       (dict
           "toc" "sitemap/toc.html"
           "context" .
-      )
-    }}
-    <div class="container">
-      <div class="content">
-        {{- partial "sitemap/document-nav" . -}}
-      
-        <div>
-          {{ range site.Sections }}
+      ) }}
+
+    {{ partial "sitemap/summary.html" (dict
+      "context" .
+      "block_wrapped" true
+      ) }}
+
+    {{ partial "blocks/list.html" . }}
+
+    <section class="block block-sitemap">
+      <div class="container">
+        <div class="block-content">
+          {{ range .Site.Sections }}
             {{ if ne .Type "sitemap" }}
               {{ $permalink := .Permalink }}
               <h3 id="{{ .Type }}">
@@ -34,6 +40,7 @@
           {{ end }}
         </div>
       </div>
-    </div>
+    </section>
+    
   </div>
 {{ end }}

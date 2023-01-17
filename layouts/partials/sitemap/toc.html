@@ -1,5 +1,8 @@
 <nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
   <ol>
+    {{- if .context.Params.blocks -}}
+      {{- partial "blocks/toc.html" .context.Params.blocks -}}
+    {{- end -}}
     {{ range site.Sections }}
       {{ if ne .Type "sitemap" }}
         <li>
