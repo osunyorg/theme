@@ -1,0 +1,46 @@
+{{ define "main" }}
+  {{- partial "header/hero.html"
+        (dict
+          "title" .Title
+          "image" .Params.image
+          "context" .
+        ) -}}
+
+  <div class="document-content">
+    {{ partial "toc/container.html"
+      (dict
+          "toc" "sitemap/toc.html"
+          "context" .
+      ) }}
+
+    {{ partial "sitemap/summary.html" (dict
+      "context" .
+      "block_wrapped" true
+      ) }}
+
+    {{ partial "blocks/list.html" . }}
+
+    <section class="block block-sitemap">
+      <div class="container">
+        <div class="block-content">
+          {{ range .Site.Sections }}
+            {{ if ne .Type "sitemap" }}
+              {{ $permalink := .Permalink }}
+              <h3 id="{{ .Type }}">
+                <a href="{{ $permalink }}">{{ safeHTML .Title }}</a>
+              </h3>
+              <ul>
+                {{ range where .Site.Pages "Section" .Type }}
+                  {{ if ne $permalink .Permalink }}
+                    <li><a href="{{ .Permalink }}">{{ safeHTML .Title }}</a></li>
+                  {{ end }}
+                {{ end }}
+              </ul>
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    </section>
+    
+  </div>
+{{ end }}
