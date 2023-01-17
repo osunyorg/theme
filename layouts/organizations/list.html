@@ -1,15 +1,24 @@
 {{ define "main" }}
+  {{- $is_partners_block_present := false -}}
+  {{ range .Params.blocks }}
+    {{- if eq .template "partners" -}}
+      {{- $is_partners_block_present = true -}}
+    {{ end }}
+  {{ end }}
+
   {{ partial "organizations/hero.html" . }}
 
   <div class="document-content">
+    {{ partial "blocks/list.html" . }}
+
     <div class="container">
       {{ partial "pages/summary.html" (dict
           "context" .
         ) }}
-      {{ partial "organizations/organizations.html" . }}
-      {{ partial "commons/pagination.html" . }}
+      {{- if not $is_partners_block_present -}}
+        {{ partial "organizations/organizations.html" . }}
+        {{ partial "commons/pagination.html" . }}
+      {{ end }}
     </div>
-  
-    {{ partial "blocks/list.html" . }}
   </div>
 {{ end }}

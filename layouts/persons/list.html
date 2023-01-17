@@ -30,6 +30,8 @@
         "block_wrapped" $summary_block
       ) }}
 
+    {{ partial "blocks/list.html" . }}
+
     <div class="container">
       {{- if not $is_organigram_present -}}
         {{ partial "persons/taxonomies.html" . }}
@@ -40,7 +42,6 @@
       {{- end -}}
     </div>
 
-    {{ partial "blocks/list.html" . }}
   </div>
 
 {{ end }}
