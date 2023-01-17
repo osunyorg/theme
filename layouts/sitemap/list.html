@@ -5,25 +5,34 @@
           "image" .Params.image
           "context" .
         ) -}}
-  <div class="document-content container">
-    <div class="content">
-      {{- partial "sitemap/document-nav" . -}}
-      <div>
-        {{ range site.Sections }}
-          {{ if ne .Type "sitemap" }}
-            {{ $permalink := .Permalink }}
-            <h3 id="{{ .Type }}">
-              <a href="{{ $permalink }}">{{ safeHTML .Title }}</a>
-            </h3>
-            <ul>
-              {{ range where .Site.Pages "Section" .Type }}
-                {{ if ne $permalink .Permalink }}
-                  <li><a href="{{ .Permalink }}">{{ safeHTML .Title }}</a></li>
+  <div class="document-content">
+    {{ partial "toc/container.html"
+      (dict
+          "toc" "sitemap/toc.html"
+          "context" .
+      )
+    }}
+    <div class="container">
+      <div class="content">
+        {{- partial "sitemap/document-nav" . -}}
+      
+        <div>
+          {{ range site.Sections }}
+            {{ if ne .Type "sitemap" }}
+              {{ $permalink := .Permalink }}
+              <h3 id="{{ .Type }}">
+                <a href="{{ $permalink }}">{{ safeHTML .Title }}</a>
+              </h3>
+              <ul>
+                {{ range where .Site.Pages "Section" .Type }}
+                  {{ if ne $permalink .Permalink }}
+                    <li><a href="{{ .Permalink }}">{{ safeHTML .Title }}</a></li>
+                  {{ end }}
                 {{ end }}
-              {{ end }}
-            </ul>
+              </ul>
+            {{ end }}
           {{ end }}
-        {{ end }}
+        </div>
       </div>
     </div>
   </div>
