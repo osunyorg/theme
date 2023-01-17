@@ -2,7 +2,7 @@
   <div class="top">
     <h2 class="h5"><a href="{{ .Permalink }}">{{ i18n "persons.posts" }}</a></h2>
   </div>
-  <div class="posts">
+  <div class="posts posts--{{- site.Params.posts.index.layout -}}">
     {{ range first 3 .Pages }}
       {{ partial "posts/post.html" . }}
     {{ end }}
