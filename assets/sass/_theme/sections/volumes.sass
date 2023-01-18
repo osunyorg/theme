@@ -33,17 +33,32 @@
                             &:hover
                                 text-decoration-color: rgba(0,0,0,1)    
                         .item--informations
+                            margin-top: $spacing1
                             a, button
                                 @include meta
-                                background-color: white
-                                border: 1px solid $color-border
+                                @include button-reset
                                 cursor: pointer
+                                &::before 
+                                    background-color: white
+                                    border: 1px solid $color-border
+                                    margin-right: $spacing1
+                                    padding: half($spacing0)
+                                    transition: background 0.3s ease, border 0.3s ease
+                                &:hover::before
+                                    background-color: $color-text
+                                    border-color: transparent
+                                    color: $color-background
+                            button
+                                @include icon-block(eye, before)
+                            a
+                                @include icon-block(download, before)
                             * + *
-                                margin-left: $spacing0
+                                margin-left: $spacing4
                         .modal
                             display: none
             .document-aside
                 @include media-breakpoint-up(desktop)
                     grid-column: 9 / 12
+                    order: 2
                 dt
                     @include meta
