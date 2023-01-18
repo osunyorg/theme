@@ -29,7 +29,11 @@
           </div>
         {{- end }}
 
-        {{- partial (printf "blocks/templates/posts/%s.html" $layout) . -}}
+        {{ $article_heading := partial "GetArticleHeading" (dict "block_title" $title "context" $context) }}
+        {{- partial (printf "blocks/templates/posts/%s.html" $layout) (dict
+          "context" .
+          "article_heading" $article_heading
+          ) -}}
       </div>
     </div>
   </section>

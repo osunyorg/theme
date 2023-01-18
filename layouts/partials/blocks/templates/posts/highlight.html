@@ -1,8 +1,8 @@
-{{ if .posts }}
+{{ if .context.posts }}
   <div class="highlight">
-    {{ $highlight := index .posts 0 }}
+    {{ $highlight := index .context.posts 0 }}
     {{ $highlight = site.GetPage (printf "/posts/%s" $highlight)}}
-    {{ $list := .posts }}
+    {{ $list := .context.posts }}
 
     {{ with $highlight }}
       <div class="highlight-post">

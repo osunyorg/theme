@@ -1,5 +1,5 @@
 <div class="list">
-  {{ range $post := .posts -}}
+  {{ range $post := .context.posts -}}
     {{ with site.GetPage (printf "/posts/%s" $post) }}
       {{ partial "posts/post" . }}
     {{ end }}
