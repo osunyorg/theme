@@ -6,42 +6,42 @@
           {{ with .website }}
             <li>
               <span>{{ i18n "commons.contact.website" }}</span>
-              <a href="{{ chomp .url }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
             </li>
           {{ end }}
 
           {{ with .linkedin }}
             <li>
               <span>LinkedIn</span>
-              <a href="{{ chomp .url }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
             </li>
           {{ end }}
-        
+
           {{ with .mastodon }}
             <li>
               <span>Mastodon</span>
-              <a href="https://mastodon.social/{{ chomp .url }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
             </li>
           {{ end }}
 
           {{ with .twitter }}
             <li>
               <span>Twitter</span>
-              <a href="https://twitter.com/{{ chomp .url }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
             </li>
           {{ end }}
 
           {{ with .email }}
             <li>
               <span>{{ i18n "commons.contact.email" }}</span>
-              <a href="mailto:{{ chomp .label }}" itemprop="email">{{ chomp .url }}</a>
+              <a href="{{ chomp .value }}" itemprop="email">{{ chomp .label }}</a>
             </li>
           {{ end }}
 
           {{ with .phone }}
             <li>
               <span>{{ i18n "commons.contact.phone" }}</span>
-              <a href="tel:{{ . }}" itemprop="telephone">{{ . }}</a>
+              <a href="{{ .value }}" itemprop="telephone">{{ .label }}</a>
             </li>
           {{ end }}
         </ul>
