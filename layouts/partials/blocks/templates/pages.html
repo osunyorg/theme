@@ -76,10 +76,12 @@
           {{ end }}
         {{ end }}
 
+        {{ $article_heading := partial "GetArticleHeading" (dict "block_title" $title "context" $context) }}
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
           "pages" .pages
           "show_images" $show_images
           "show_descriptions" $show_descriptions
+          "article_heading" $article_heading
           ) }}
       </div>
     </div>

@@ -8,7 +8,7 @@
         @include grid(1)
         @include grid($block-posts-grid-columns, desktop)
     article
-        h1
+        h2, h3, h4
             a
                 @include stretched-link
                 text-decoration: none
@@ -40,15 +40,12 @@
             article
                 position: relative
                 padding-bottom: half($spacing3)
-                // display: flex
-                // flex-direction: row
                 + article
                     margin-top: half($spacing3)
                 .post-content
                     display: flex
                     flex-direction: column
-                    // width: 70%
-                    h1
+                    h2, h3, h4
                         margin-bottom: 0
                     time
                         margin-top: half($spacing0)
@@ -56,16 +53,9 @@
                     p
                         margin-top: half($spacing0)
                         order: 4
-                    // h1, time, p
-                    //     padding-right: calc(30% + #{$spacing1})
                 .media
                     display: none
                     order: 3
-                    // position: absolute
-                    // width: 30%
-
-                    // top: 0
-                    // right: 0
 
         @include in-page-with-sidebar
             article
@@ -102,7 +92,7 @@
                         margin-top: 0.3em
     &--highlight
         .highlight-post
-            h1
+            h2, h3, h4
                 margin-bottom: $spacing0
             .media
                 margin-bottom: $spacing0
@@ -134,7 +124,7 @@
             .list
                 article
                     @include grid(8, desktop, 0, 0)
-                    h1
+                    h2, h3, h4
                         grid-column: 1 / 7
                     .post-categories
                         grid-column: 1 / 7
@@ -154,11 +144,11 @@
 
         @include media-breakpoint-up(desktop)
             .highlight
-                h1
+                h2, h3, h4
                     @include h2
             .list
                 article
-                    h1
+                    h2, h3, h4
                         @include h4
             @include in-page-without-sidebar
                 .highlight

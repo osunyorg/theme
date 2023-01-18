@@ -1,0 +1,15 @@
+{{ $level := 2 }}
+
+{{ if .block_title }}
+  {{ $level = 3 }}
+{{ end }}
+
+{{ if eq .context.Type "programs" }}
+  {{ $level = add $level 1 }}
+{{ end }}
+
+{{ return (dict 
+  "open" (( printf "<h%d>" $level) | safeHTML )
+  "close" (( printf "</h%d>" $level) | safeHTML )
+  )
+}}

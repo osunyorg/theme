@@ -1,5 +1,6 @@
 {{ $show_descriptions := .show_descriptions }}
 {{ $show_images := .show_images }}
+{{ $article_heading := .article_heading }}
 
 <div class="grid">
   {{ range .pages }}
@@ -19,11 +20,12 @@
 
     {{ with $page }}
       <article>
-        <h1>
+        {{- $article_heading.open -}}
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}
           </a>
-        </h1>
+        {{- $article_heading.close -}}
+
         {{ if and $show_descriptions .Params.summary }}
           {{ if site.Params.pages.index.truncate_description }}
             <p>{{ partial "GetTruncateContent" ( dict 
