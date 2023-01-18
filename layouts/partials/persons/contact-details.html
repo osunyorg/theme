@@ -17,6 +17,13 @@
             </li>
           {{ end }}
         
+          {{ with .mastodon }}
+            <li>
+              <span>Mastodon</span>
+              <a href="https://mastodon.social/{{ chomp .url }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
+            </li>
+          {{ end }}
+
           {{ with .twitter }}
             <li>
               <span>Twitter</span>
