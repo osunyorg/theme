@@ -1,4 +1,4 @@
-{{ if os.FileExists "static/assets/images/default.png" }}
+{{- if os.FileExists "static/assets/images/default.png" -}}
   {{ $file := "/assets/images/default.png" }}
   {{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file "static" true) }}
   {{- $lazy := default true .lazy -}}
@@ -14,4 +14,4 @@
     {{- if .class }} class="{{ .class }}"{{- end -}}
     {{- if $lazy }} loading="lazy"{{- end -}}
     >
-{{ end }}
+{{- end -}}
