@@ -21,8 +21,8 @@
               <span itemprop="author" itemscope itemtype="https://schema.org/Person"><a href="{{ $author.Permalink }}" itemprop="url"><span itemprop="name">{{ trim $author.Title "\n" }}</span></a></span>
             {{- end -}}
           </p>
-          <div role="group">
-            <a href="{{ .Permalink }}" itemprop="url">{{ i18n "commons.read" }}</a>
+          <div class="item--informations" role="group">
+            {{/*  <a href="{{ .Permalink }}" itemprop="url">{{ i18n "commons.read" }}</a>  */}}
             <button type="button" data-bs-toggle="modal" data-bs-target="#{{ $modalId }}">{{ i18n "volumes.abstract" }}</button>
             {{ if .Params.pdf }}
               {{- $pdf := partial "GetMedia" .Params.pdf -}}

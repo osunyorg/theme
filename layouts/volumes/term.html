@@ -12,12 +12,17 @@
     {{- end -}}
 
     <div class="container">
+
       <div class="content">
-        {{ partial "volumes/image.html" . }}
         {{ partial "volumes/description.html" . }}
-        {{ partial "volumes/document-aside.html" . }}
         {{ partial "volumes/table-contents.html" . }}
       </div>
+
+      {{ partial "volumes/document-aside.html" . }}
+
     </div>
+
+    {{ partial "blocks/list.html" . }}
+
   </div>
 {{ end }}

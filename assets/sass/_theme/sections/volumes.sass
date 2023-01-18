@@ -1,6 +1,49 @@
 .volume
     @include article
+    .suptitle
+        @include meta
 
 .volumes
     @include grid(2, md)
     @include grid(3, lg)
+    
+.volumes__taxonomy
+    .volume
+        .media
+            img
+                aspect-ratio: 1 / 1.2
+.volumes__term
+    .document-content
+        .container
+            @include media-breakpoint-up(desktop)
+                @include grid
+            .content
+                @include media-breakpoint-up(desktop)
+                    grid-column: 1 / 9
+                > div
+                    margin-bottom: $spacing4
+                .volume-table
+                    list-style: none
+                    margin-block-start: half($spacing3)
+                    li
+                        + li
+                            margin-top: $spacing3
+                        a
+                            text-decoration-color: rgba(0,0,0,0)
+                            &:hover
+                                text-decoration-color: rgba(0,0,0,1)    
+                        .item--informations
+                            a, button
+                                @include meta
+                                background-color: white
+                                border: 1px solid $color-border
+                                cursor: pointer
+                            * + *
+                                margin-left: $spacing0
+                        .modal
+                            display: none
+            .document-aside
+                @include media-breakpoint-up(desktop)
+                    grid-column: 9 / 12
+                dt
+                    @include meta
