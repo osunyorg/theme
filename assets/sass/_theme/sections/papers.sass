@@ -4,3 +4,28 @@
 .papers
     @include grid(2, md)
     @include grid(3, lg)
+
+.papers__page
+    .document-content
+        .container
+            @include media-breakpoint-up(desktop)
+                @include grid
+            .content
+                @include media-breakpoint-up(desktop)
+                    grid-column: 1 / 9
+                section + section
+                    margin-top: $spacing2
+                    @include media-breakpoint-up(desktop)
+                        margin-top: $spacing4
+                .paper-authors
+                    h2
+                        @include h3
+                    .authors
+                        @include grid(2, desktop)
+                        article
+                            margin-top: $spacing2
+                            .name
+                                a
+                                    @include h4
+                                    @include stretched-link(before)
+                                    text-decoration: none
