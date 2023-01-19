@@ -1,6 +1,6 @@
 <article class="paper">
   <div>
-    <h2><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></h2>
+    <h3><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></h3>
     <p>
       {{- range $index, $authors := .Params.Researchers -}}
         {{- $author := site.GetPage (printf "/persons/%s" .) -}}
@@ -17,6 +17,13 @@
       {{ end }}
     </p>
   </div>
-  <div role="group"></div>
-
+  <div role="group">
+    {{ if .Params.pdf }}
+      {{- $pdf := partial "GetMedia" .Params.pdf -}}
+      {{- $pdf_size := partial "GetHumanSize" $pdf.size -}}
+      <a href="{{ $pdf.url }}" download>
+        {{- i18n "commons.pdf_with_size" (dict "Size" $pdf_size) }}
+      </a>
+    {{ end }}
+  </div>
 </article>
