@@ -1,4 +1,4 @@
-{{ with .Params }}
+{{ with .Params.contact_details }}
   {{ if or .website .linkedin .twitter .email .phone }}
     <div class="contacts-details contacts-details--person">
       {{ if or .website .linkedin .twitter .email .phone }}
@@ -6,35 +6,42 @@
           {{ with .website }}
             <li>
               <span>{{ i18n "commons.contact.website" }}</span>
-              <a href="{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
             </li>
           {{ end }}
 
           {{ with .linkedin }}
             <li>
               <span>LinkedIn</span>
-              <a href="{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
             </li>
           {{ end }}
-        
+
+          {{ with .mastodon }}
+            <li>
+              <span>Mastodon</span>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
+            </li>
+          {{ end }}
+
           {{ with .twitter }}
             <li>
               <span>Twitter</span>
-              <a href="https://twitter.com/{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
             </li>
           {{ end }}
 
           {{ with .email }}
             <li>
               <span>{{ i18n "commons.contact.email" }}</span>
-              <a href="mailto:{{ chomp . }}" itemprop="email">{{ chomp . }}</a>
+              <a href="{{ chomp .value }}" itemprop="email">{{ chomp .label }}</a>
             </li>
           {{ end }}
 
           {{ with .phone }}
             <li>
               <span>{{ i18n "commons.contact.phone" }}</span>
-              <a href="tel:{{ . }}" itemprop="telephone">{{ . }}</a>
+              <a href="{{ .value }}" itemprop="telephone">{{ .label }}</a>
             </li>
           {{ end }}
         </ul>

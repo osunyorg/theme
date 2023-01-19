@@ -1,4 +1,4 @@
-{{ with .Params }}
+{{ with .Params.contact_details }}
   {{ if or .website .linkedin .twitter .email .address .city .zipcode .country .phone }}
     <div class="contacts-details">
       {{ if or .website .linkedin .twitter .email }}
@@ -6,28 +6,35 @@
           {{ with .website }}
             <li>
               <span>{{ i18n "commons.contact.website" }}</span>
-              <a href="{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
             </li>
           {{ end }}
 
           {{ with .linkedin }}
             <li>
               <span>LinkedIn</span>
-              <a href="{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
             </li>
           {{ end }}
         
+          {{ with .mastodon }}
+            <li>
+              <span>Mastodon</span>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
+            </li>
+          {{ end }}
+
           {{ with .twitter }}
             <li>
               <span>Twitter</span>
-              <a href="https://twitter.com/{{ chomp . }}" target="_blank" rel="noopener" itemprop="url">{{ chomp . }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
             </li>
           {{ end }}
 
           {{ with .email }}
             <li>
               <span>{{ i18n "commons.contact.email" }}</span>
-              <a href="mailto:{{ chomp . }}" itemprop="email">{{ chomp . }}</a>
+              <a href="{{ chomp .value }}" itemprop="email">{{ chomp .label }}</a>
             </li>
           {{ end }}
         </ul>
@@ -41,33 +48,33 @@
               <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
                 {{ with .address }}
                   <span itemprop="streetAddress">
-                    {{ partial "PrepareHTML" . }},
+                    {{ partial "PrepareHTML" .label }},
                   </span>
                   <br>
                 {{ end }}
                 {{ with .city }}
                   <span itemprop="addressLocality">
-                    {{ partial "PrepareHTML" . }}
+                    {{ partial "PrepareHTML" .label }}
                   </span>
                 {{ end }}
                 {{ with .zipcode }}
                   <span itemprop="postalCode">
-                    {{ partial "PrepareHTML" . }}
+                    {{ partial "PrepareHTML" .label }}
                   </span>
                 {{ end }}
                 {{ with .country }}
                   <span itemprop="postalCode">
-                    {{ partial "PrepareHTML" . }}
+                    {{ partial "PrepareHTML" .label }}
                   </span>
                 {{ end }}
               </address>
             </li>
           {{ end }}
 
-          {{ if .phone }}
+          {{ with .phone }}
             <li>
               <span>{{ i18n "commons.contact.phone" }}</span>
-              <a href="tel:{{ .phone }}" itemprop="telephone">{{ .phone }}</a>
+              <a href="{{ .value }}" itemprop="telephone">{{ .label }}</a>
             </li>
           {{ end }}
         </ul>
