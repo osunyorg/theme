@@ -21,7 +21,9 @@
                 @include media-breakpoint-up(desktop)
                     grid-column: 1 / 9
                 > div
-                    margin-bottom: $spacing4
+                    margin-bottom: $spacing1
+                    @include media-breakpoint-up(desktop)
+                        margin-bottom: $spacing4
                 .volume-table
                     list-style: none
                     margin-block-start: half($spacing3)
@@ -33,27 +35,38 @@
                             &:hover
                                 text-decoration-color: rgba(0,0,0,1)    
                         .item--informations
-                            margin-top: $spacing1
+                            @include grid(2, desktop)
+                            margin-top: $spacing0
+                            @include media-breakpoint-up(desktop)
+                                margin-top: $spacing1
                             a, button
                                 @include meta
                                 @include button-reset
+                                align-items: center
                                 cursor: pointer
+                                display: flex
+                                padding: 0
                                 &::before 
                                     background-color: white
                                     border: 1px solid $color-border
-                                    margin-right: $spacing1
+                                    margin-right: $spacing0
                                     padding: half($spacing0)
                                     transition: background 0.3s ease, border 0.3s ease
-                                &:hover::before
-                                    background-color: $color-text
-                                    border-color: transparent
-                                    color: $color-background
+                                    @include media-breakpoint-up(desktop)
+                                        margin-right: $spacing1
+                                &:hover
+                                    text-decoration: none
+                                    &::before
+                                        background-color: $color-text
+                                        border-color: transparent
+                                        color: $color-background
                             button
                                 @include icon-block(eye, before)
                             a
                                 @include icon-block(download, before)
-                            * + *
-                                margin-left: $spacing4
+                            @include media-breakpoint-down(desktop)
+                                * + *
+                                    margin-top: $spacing0
                         .modal
                             display: none
             .document-aside
