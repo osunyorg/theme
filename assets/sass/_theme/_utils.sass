@@ -164,11 +164,17 @@
         display: block
         width: 100%
 
+@mixin handle-svg-fit
+    picture.is-svg
+        img
+            object-fit: contain
+
 @mixin article($background: null)
     position: relative
     display: flex
     flex-direction: column
     .media
+        @include handle-svg-fit
         @if $article-media-aspect-ratio
             @include aspect-ratio($article-media-aspect-ratio, 'img', $background)
         margin-bottom: $spacing1

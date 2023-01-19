@@ -32,7 +32,8 @@
       {{ $tablet = .sizes.tablet }}
       {{ $mobile = .sizes.mobile }}
     {{- end -}}
-    <picture>
+    {{ $is_svg := strings.HasSuffix $image.name "svg" }}
+    <picture {{ if $is_svg }}class="is-svg"{{ end }}>
 
       {{- if strings.HasSuffix $image.name "svg" -}}
 
