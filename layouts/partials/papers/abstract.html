@@ -1,3 +1,10 @@
 <section>
   <p itemprop="abstract">{{ partial "PrepareHTML" .Params.Abstract }}</p>
+  <div role="group">
+    {{ if isset .Params "pdf" }}
+      {{- $pdf := partial "GetMedia" .Params.pdf -}}
+      <a href="{{ $pdf.url }}" download>{{ i18n "commons.download.pdf" }}</a><br>
+    {{ end }}
+    <a href="#" class="squared-button" download>PDF (435 ko)</a>
+  </div>
 </section>

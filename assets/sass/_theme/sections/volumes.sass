@@ -19,74 +19,30 @@
                 @include grid
             .content
                 @include media-breakpoint-up(desktop)
-                    grid-column: 1 / 9
+                    grid-column: 1 / 8
                 > div
                     margin-bottom: $spacing1
                     @include media-breakpoint-up(desktop)
                         margin-bottom: $spacing4
-                .volume-table
-                    list-style: none
-                    margin-block-start: half($spacing3)
-                    li
-                        + li
-                            margin-top: $spacing3
-                        a
-                            text-decoration-color: rgba(0,0,0,0)
-                            &:hover
-                                text-decoration-color: rgba(0,0,0,1)    
-                        .item--informations
-                            @include grid(2, desktop)
-                            margin-top: $spacing0
+                    .modal
+                        background-color: $body-overlay-color
+                        .modal-content
+                            background-color: $color-background-alt
+                            padding: $spacing3
+                            position: relative
                             @include media-breakpoint-up(desktop)
-                                margin-top: $spacing1
-                            a, button
-                                @include meta
-                                @include button-reset
-                                align-items: center
-                                cursor: pointer
-                                display: flex
-                                padding: 0
-                                &::before 
-                                    background-color: white
-                                    border: 1px solid $color-border
-                                    margin-right: $spacing0
-                                    padding: half($spacing0)
-                                    transition: background 0.3s ease, border 0.3s ease
-                                    @include media-breakpoint-up(desktop)
-                                        margin-right: $spacing1
-                                &:hover
-                                    text-decoration: none
-                                    &::before
-                                        background-color: $color-text
-                                        border-color: transparent
-                                        color: $color-background
-                            button
-                                @include icon-block(eye, before)
-                            a
-                                @include icon-block(download, before)
-                            @include media-breakpoint-down(desktop)
-                                * + *
-                                    margin-top: $spacing0
-                        .modal
-                            // display: none
-                            background-color: $body-overlay-color
-                            .modal-content
-                                background-color: $color-background-alt
-                                padding: $spacing3
-                                position: relative
-                                @include media-breakpoint-up(desktop)
-                                    // width: col(8)
-                                    margin: auto
-                                .modal-header
-                                    margin-bottom: $spacing0
-                                    .btn-close
-                                        @include button-reset
-                                        @include icon-block(close, before)
-                                        position: absolute
-                                        right: 0
-                                        top: 0
-                                    h5
-                                        @include h3
+                                // width: col(8)
+                                margin: auto
+                            .modal-header
+                                margin-bottom: $spacing0
+                                .btn-close
+                                    @include button-reset
+                                    @include icon-block(close, before)
+                                    position: absolute
+                                    right: 0
+                                    top: 0
+                                h5
+                                    @include h3
             .document-aside
                 @include media-breakpoint-up(desktop)
                     grid-column: 9 / 12
@@ -99,3 +55,27 @@
                             margin-top: $spacing2
     .paper
         display: block
+        @include media-breakpoint-down(desktop)
+            > div
+                &:first-of-type
+                    .paper-volume
+                        display: inline-flex
+                        margin-left: $spacing0
+        @include media-breakpoint-up(desktop)
+            > div
+                &:first-of-type
+                    display: flex
+                    flex-wrap: wrap
+                    justify-content: space-between
+                    h3 
+                        flex: 1
+                    > span
+                        order: 3
+                        width: 100%
+                    .paper-volume
+                        padding-left: $spacing1
+                &:last-of-type
+                    gap: $grid-gutter
+                    margin-top: $spacing1
+                    a, button
+                        width: unset
