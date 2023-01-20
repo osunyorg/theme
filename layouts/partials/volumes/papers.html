@@ -2,8 +2,14 @@
   <div class="top">
     <h2>{{ i18n "volumes.table_contents" }}</h2>
   </div>
-  <div class="papers">
-    {{ partial "papers/papers.html" (dict
-      "paper" .) }}
-  </div>
+  <ul class="papers">
+    {{ range .Paginator.Pages }}
+      <li>
+        {{ partial "papers/paper.html" (dict 
+          "paper" .
+          "inside_volume" true
+          ) }}
+      </li>
+    {{ end }}
+  </ul>
 </section>

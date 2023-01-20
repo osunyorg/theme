@@ -3,9 +3,11 @@
   <div class="top">
     <h2><a href="{{ $researchers.Permalink }}">{{ i18n "persons.papers" }}</a></h2>
   </div>
-  <div class="papers">
+  <ul class="papers">
     {{ range first 3 .papers }}
-        {{ partial "papers/paper.html" . }}
+      <li>
+        {{ partial "papers/paper.html" (dict "paper" . ) }}
+      </li>
     {{ end }}
-  </div>
+  </ul>
 </section>
