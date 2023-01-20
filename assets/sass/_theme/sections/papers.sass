@@ -55,6 +55,9 @@
                     margin-top: $spacing2
                     @include media-breakpoint-up(desktop)
                         margin-top: $spacing4
+                .squared-button
+                    margin-bottom: 0
+                    margin-top: $spacing2
                 .paper-authors
                     h2
                         @include h3
@@ -75,5 +78,12 @@
                     margin: 0
                     dt
                         @include meta
+                        margin-bottom: $spacing0
                         &:not(:first-of-type)
                             margin-top: $spacing2
+                    dd:first-of-type
+                        a
+                            display: flex
+                            flex-direction: column
+                            span
+                                order: 3
