@@ -20,13 +20,13 @@
 
     {{ partial "blocks/list.html" . }}
 
-    <section class="block block-sitemap">
-      <div class="container">
-        <div class="block-content">
-          {{ range .Site.Sections }}
-            {{ if ne .Type "sitemap" }}
-              {{ $permalink := .Permalink }}
-              <h3 id="{{ .Type }}">
+    {{ range .Site.Sections }}
+      {{ if ne .Type "sitemap" }}
+        {{ $permalink := .Permalink }}
+        <section class="block block-sitemap" id="{{ .Type }}">
+          <div class="container">
+            <div class="block-content">
+              <h3>
                 <a href="{{ $permalink }}">{{ safeHTML .Title }}</a>
               </h3>
               <ul>
@@ -36,11 +36,10 @@
                   {{ end }}
                 {{ end }}
               </ul>
-            {{ end }}
-          {{ end }}
-        </div>
-      </div>
-    </section>
-    
+            </div>
+          </div>
+        </section>
+      {{ end }}
+    {{ end }}
   </div>
 {{ end }}
