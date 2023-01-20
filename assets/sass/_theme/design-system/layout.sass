@@ -90,3 +90,31 @@ details
         &:hover
             summary::after
                 transform: translateY(-5px)
+.modal
+    align-items: center
+    background-color: $body-overlay-color
+    display: none
+    justify-content: center
+    height: 100vh
+    left: 0
+    overflow: hidden
+    position: fixed
+    top: 0
+    width: 100%
+    z-index: $zindex-toc
+    > div
+        position: relative
+        background-color: $color-background-alt
+        padding: $spacing3 
+        @include media-breakpoint-up(desktop)
+            width: col(8)
+        .modal-header
+            margin-bottom: $spacing0
+            button
+                @include button-reset
+                @include icon-block(close, before)
+                position: absolute
+                right: 0
+                top: 0
+            h5
+                @include h3

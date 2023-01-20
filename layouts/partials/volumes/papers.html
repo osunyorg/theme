@@ -3,11 +3,12 @@
     <h2>{{ i18n "volumes.table_contents" }}</h2>
   </div>
   <ul class="papers">
-    {{ range .Paginator.Pages }}
+    {{ range $index, $element := .Paginator.Pages }}
       <li>
         {{ partial "papers/paper.html" (dict 
           "paper" .
           "inside_volume" true
+          "index" $index
           ) }}
       </li>
     {{ end }}

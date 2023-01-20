@@ -1,4 +1,5 @@
 {{ $inside_volume := .inside_volume | default false }}
+{{ $modalId := print "modalID_" .index }}
 
 {{ with .paper }}
   <article class="paper" itemscope itemtype="https://schema.org/ScholarlyArticle" {{- if $inside_volume }} itemProp="hasPart" {{- end -}}>
@@ -25,24 +26,22 @@
         {{ end }}
       </p>
     </div>
-    <div role="group">
-      <button class="squared-button" type="button" data-bs-toggle="modal">Résumé</button>
+    <div class="paper-actions" role="group">
+      {{/*  <button class="squared-button" type="button" data-bs-toggle="modal" data-bs-target="#{{ $modalId }}">{{ i18n "volumes.abstract" }}</button>  */}}
+      {{ if .Params.pdf }}
+      {{- $pdf := partial "GetMedia" .Params.pdf -}}
+      {{- $pdf_size := partial "GetHumanSize" $pdf.size -}}
+      <a href="{{ $pdf.url }}" download>
+        {{- i18n "commons.pdf_with_size" (dict "Size" $pdf_size) }}
+      </a>
+      {{ end }}
       <a class="squared-button" href="#" download>PDF (435 ko)</a>
-      {{/*  <button type="button" data-bs-toggle="modal" data-bs-target="#{{ $modalId }}">{{ i18n "volumes.abstract" }}</button>
-        {{ if .Params.pdf }}
-          {{- $pdf := partial "GetMedia" .Params.pdf -}}
-          {{- $pdf_size := partial "GetHumanSize" $pdf.size -}}
-          <a href="{{ $pdf.url }}" download>
-            {{- i18n "commons.pdf_with_size" (dict "Size" $pdf_size) }}
-          </a>
-        {{ end }}
-      </div>
+    </div>
       {{ partial "papers/modal.html"
             (dict
               "modalId" $modalId
               "title" .Title
               "abstract" .Params.abstract
-            ) }}  */}}
-    </div>
+            ) }}
   </article>
 {{ end }}
