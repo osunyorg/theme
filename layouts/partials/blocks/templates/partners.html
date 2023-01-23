@@ -33,7 +33,7 @@
                   {{ if .name }}
                     <div>
                       {{ $title = partial "PrepareHTML" .name -}}
-                      <h1>
+                      <h3>
                         {{- if .url }}
                         <a href="{{ .url }}" title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
                         {{ end }}
@@ -41,7 +41,7 @@
                         {{ if .url }}
                         </a>
                         {{ end -}}
-                      </h1>
+                      </h3>
                     </div>
                   {{ end -}}
                   <div class="media">

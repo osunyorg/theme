@@ -14,7 +14,9 @@
         {{- if not $title -}}
           {{ partial "blocks/default_title.html" $template }}
         {{ else }}
-          <h2>{{ partial "PrepareHTML" $title }}</h2>
+          <div class="top">
+            <h2>{{ partial "PrepareHTML" $title }}</h2>
+          </div>
         {{ end -}}
 
         {{- with .image -}}
