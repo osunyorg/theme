@@ -10,11 +10,13 @@
             h2
                 @include h5
     .top
-        h2:not(.hidden)
+        h2
             + .description
                 margin-top: $spacing1
                 @include media-breakpoint-up(desktop)
                     margin-top: $spacing2
+        h2.hidden + .description
+                margin-top: 0
 
 // Specific
 $backgrounded_blocks: ".block-call_to_action, .block-chapter--accent_background, .block-chapter--alt_background, .block-timeline--horizontal, .block-pages--cards"
