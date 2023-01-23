@@ -1,4 +1,4 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- with .block.data -}}
@@ -9,10 +9,11 @@
     <div class="block-content">
         {{ if (or $title .description) -}}
           <div class="top">
-            {{ partial "blocks/title" (dict 
-              "title" $title
-              "context" $context
-              ) }}
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ end -}}
             {{- if .description }}
               <div class="description">
                 {{ partial "PrepareHTML"  .description }}
@@ -25,7 +26,7 @@
             {{ $person := site.GetPage (printf "/persons/%s" .slug) }}
             <article class="person" itemscope itemtype="https://schema.org/Person">
               <div class="description">
-                <h1 class="name" itemprop="name">
+                <h3 class="name" itemprop="name">
                   {{ if $with_link }}
                   <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
                     {{ end }}
@@ -33,7 +34,7 @@
                     {{ if $with_link }}
                   </a>
                   {{ end }}
-                </h1>
+                </h3>
                 <p itemprop="jobTitle">
                   {{- if (partial "GetTextFromHTML" .role) }}
                     {{ partial "PrepareHTML" .role }}
@@ -48,10 +49,10 @@
                 <div class="avatar" itemprop="image">
                   {{- if $person.Params.image }}
                     {{ partial "commons/image.html"
-                          (dict
-                            "image"    $person.Params.image
-                            "sizes"    site.Params.image_sizes.blocks.organization_chart
-                          )}}
+                      (dict
+                        "image"    $person.Params.image
+                        "sizes"    site.Params.image_sizes.blocks.organization_chart
+                      )}}
                   {{ end -}}
                 </div>
               {{ end -}}

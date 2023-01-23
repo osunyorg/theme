@@ -2,17 +2,19 @@
     padding-top: $spacing3
     padding-bottom: $spacing3
     // Mobile & full-width
-    h2, h3
+    h2
         @include h2
     // Desktop with sidebar
     @include media-breakpoint-up(desktop)
         @include in-page-without-sidebar
-            h2, h3
+            h2
                 @include h5
     .top
-        h2, h3
+        h2:not(.hidden)
             + .description
-                margin-top: $spacing2
+                margin-top: $spacing1
+                @include media-breakpoint-up(desktop)
+                    margin-top: $spacing2
 
 // Specific
 $backgrounded_blocks: ".block-call_to_action, .block-chapter--accent_background, .block-chapter--alt_background, .block-timeline--horizontal, .block-pages--cards"

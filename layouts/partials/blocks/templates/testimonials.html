@@ -1,4 +1,4 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- $is_carousel := false -}}
@@ -10,13 +10,10 @@
   <section class="block block-testimonials{{ if $title }} block-with-title{{ end }}{{ if $is_carousel}} with-carousel{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
-        {{ if $title -}}
-          <div class="top">
-            {{ partial "blocks/title" (dict 
-              "title" $title
-              "context" $context
-              ) }}
-          </div>
+        {{- if not $title -}}
+          {{ partial "blocks/default_title.html" $template }}
+        {{ else }}
+          <h2 class="hidden">{{ partial "PrepareHTML" $title }}</h2>
         {{ end -}}
 
         <div class="testimonials">

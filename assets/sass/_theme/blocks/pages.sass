@@ -19,7 +19,7 @@
                     aspect-ratio: 16/9
                     object-fit: cover
                     width: 100%
-        h1
+        h3
             @include h3
             a
                 text-decoration: none
@@ -33,7 +33,7 @@
 
     @include media-breakpoint-down(desktop)
         .top
-            h2, h3
+            h2
                 @include h5
         .description
             @include h2
@@ -44,7 +44,7 @@
         @include media-breakpoint-up(desktop)
             .top
                 @include grid
-                h2, h3
+                h2
                     grid-column: 1 / 5
                     a
                         text-decoration: none
@@ -140,7 +140,6 @@
                     @include meta
                     @include icon(arrow, before, true)
                         padding-right: $spacing0
-                        
                     @include hover-translate-icon(before, 5)
                     @include link
                     text-decoration-color: rgba(0,0,0,0)
@@ -173,7 +172,7 @@
                         display: block
                         grid-column: 1 / 8
                         margin-bottom: 0
-                    .top + .description
+                    .top:not(.hidden) + .description
                         grid-column: 1 / 8
                         grid-row: 2 / 3
                     // Default behavior (without page description)

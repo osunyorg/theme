@@ -19,11 +19,11 @@
 
     {{ with $page }}
       <article>
-        <h1>
+        <h3>
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}
           </a>
-        </h1>
+        </h3>
         {{ if and $show_descriptions .Params.summary }}
           {{ if site.Params.pages.index.truncate_description }}
             <p>{{ partial "GetTruncateContent" ( dict 

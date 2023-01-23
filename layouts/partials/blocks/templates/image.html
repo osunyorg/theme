@@ -1,35 +1,29 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
+{{- $image_class := "" -}}
 {{- with .block.data -}}
   {{- $text := .text -}}
   {{- $buttons := and .button.text .button_secondary.text -}}
-  <section class="block block-image{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+  {{- if .image -}}
+    {{- $image_class = printf "image-%s" (partial "GetImageDirection" .image ) -}}
+  {{- end -}}
+  <section class="block block-image{{ if $title }} block-with-title{{ end }} {{ $image_class -}}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
-
-        {{ if $title -}}
+        {{- if not $title -}}
+          {{ partial "blocks/default_title.html" $template }}
+        {{ else }}
           <div class="top">
-            {{ partial "blocks/title" (dict 
-              "title" $title
-              "context" $context
-              ) }}
+            <h2>{{ partial "PrepareHTML" $title }}</h2>
           </div>
         {{ end -}}
 
         {{- with .image -}}
-          {{/*  TODO: refactor  */}}
-          {{- $image := partial "GetMedia" .file -}}
-          {{- $url := $image.url -}}
-          {{- if site.Params.keycdn -}}
-            {{- $url = $image.direct_url -}}
-          {{- end -}}
-
-          {{- $lightbox_sizes := "2048x3640" -}}
-          <figure>
+          <figure class="{{ $image_class }}">
             <a class="glightbox"
-              data-glightbox="type: image;"
-              href="{{ partial "GetImageUrl" (dict "url" $url "size" $lightbox_sizes ) }}"
+              data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
+              href="{{- partial "GetLightboxUrl" . -}}"
               title="{{- i18n "commons.lightbox.link.title" -}}"
               >
               {{ partial "commons/image.html"
@@ -41,7 +35,7 @@
             </a>
             <figcaption>
               {{- if $text }}
-                <p>{{ partial "PrepareHTML" $text }}</p>
+                {{ partial "PrepareHTML" $text }}
               {{ end -}}
               {{- if partial "PrepareHTML" .credit }}
                 <div class="credit">{{ partial "PrepareHTML" .credit }}</div>

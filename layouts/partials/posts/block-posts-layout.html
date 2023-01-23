@@ -4,7 +4,7 @@
     <div class="block-content">
       <div class="{{ $layout }}">
         {{ range .posts }}
-          {{ partial "posts/post" . }}
+          {{ partial "posts/post.html" (dict "post" . ) }}
         {{ end }}
       </div>
     </div>
