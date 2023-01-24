@@ -69,10 +69,12 @@ body
             display: block
             opacity: 1
             pointer-events: inherit
-    html.has-offcanvas-opened &,
-    html.has-modal-opened &
+    html.has-offcanvas-opened &
         &::after
             z-index: $zindex-header + 1
+    html.has-modal-opened &
+        &::after
+            z-index: $zindex-modal - 1
     html.is-animating:not(.has-menu-opened) &
         &::after
             display: block
