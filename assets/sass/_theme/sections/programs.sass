@@ -103,11 +103,13 @@ ol.programs
             .blocks
                 section > * + *
                     margin-top: 0
-                h3
+                h2
                     @include h3
                 @include media-breakpoint-down(desktop)
+                    padding-top: $spacing3
                     margin-left: half(-$grid-gutter-sm)
                     margin-right: half(-$grid-gutter-sm)
+
                 @include media-breakpoint-up(desktop)
                     .container
                         padding-left: 0
@@ -117,7 +119,7 @@ ol.programs
     @include media-breakpoint-down(desktop)
         .document-content
             .content
-                h2
+                > h2
                     margin-bottom: $spacing2
             section:not(:first-child):not(.block)
                 margin-top: $spacing3

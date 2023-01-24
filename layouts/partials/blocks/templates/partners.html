@@ -1,4 +1,4 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- with .block.data -}}
@@ -7,11 +7,10 @@
       <div class="block-content">
         {{ if (or $title .description) -}}
           <div class="top">
-            {{- if $title }}
-              {{ partial "blocks/title" (dict 
-                "title" $title
-                "context" $context
-                ) }}
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
             {{ end -}}
             {{- if .description }}
               <div class="description">
@@ -23,45 +22,52 @@
 
         <div class="organizations">
           {{- range .partners }}
-            <div>
-              {{- if .slug }}
-                {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
-                  {{- partial "organizations/organization.html" . -}}
-                {{ end }}
-              {{- else -}}
-                <article class="organization">
-                  {{- $title := "" -}}
-                  {{ if .name }}
-                    <div>
-                      {{ $title = partial "PrepareHTML" .name -}}
-                      <h1>
-                        {{- if .url }}
-                        <a href="{{ .url }}" title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
-                        {{ end }}
-                          {{- $title -}}
-                        {{ if .url }}
-                        </a>
-                        {{ end -}}
-                      </h1>
-                    </div>
-                  {{ end -}}
-                  <div class="media">
-                    {{- if .logo -}}
-                      {{- partial "commons/image.html"
-                            (dict
-                              "image"    .logo
-                              "alt"      $title
-                              "sizes"    site.Params.image_sizes.blocks.partners
-                            ) -}}
-                    {{- end -}}
-                  </div>
-                </article>
-              {{ end -}}
-
-            </div>
+            {{ if .slug }}
+              {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
+                {{ template "partner" (dict 
+                    "title" .Title
+                    "url" .Permalink
+                    "logo"  .Params.logo
+                  )}}
+              {{ end }}
+            {{ else }}
+              {{ template "partner" (dict 
+                  "title" .name
+                  "url" .url
+                  "logo" .logo
+                )}}
+            {{ end }}
           {{ end -}}
         </div>
       </div>
     </div>
   </section>
 {{- end -}}
+
+{{- define "partner" -}}
+<article class="organization">
+  {{ $title := "" }}
+  {{ if .title }}
+    {{ $title = partial "PrepareHTML" .title -}}
+    <h3>
+      {{- if .url }}
+        <a href="{{ .url }}" title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
+      {{ end -}}
+        {{- $title -}}
+      {{- if .url }}
+        </a>
+      {{ end -}}
+    </h3>
+  {{ end -}}
+  <div class="media">
+    {{- if .logo -}}
+      {{- partial "commons/image.html"
+        (dict
+          "image"    .logo
+          "alt"      $title
+          "sizes"    site.Params.image_sizes.blocks.partners
+        ) -}}
+    {{- end -}}
+  </div>
+</article>
+{{- end  -}}

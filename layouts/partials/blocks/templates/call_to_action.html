@@ -1,5 +1,5 @@
-{{- $context := .context -}}
 {{- $position := .block.position -}}
+{{- $template := .block.template -}}
 {{- $title := .block.title -}}
 {{- with .block.data -}}
   {{- $buttons := and .button.text .button_secondary.text -}}
@@ -8,10 +8,12 @@
       <div class="block-content">
         <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image">
           <div>
-            {{ partial "blocks/title" (dict 
-              "title" $title
-              "context" $context
-              ) }}
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ end -}}
+
             {{- if (partial "GetTextFromHTML" .text) }}
             <div class="description">
               {{ partial "PrepareHTML" .text }}
@@ -36,7 +38,6 @@
               {{- end -}}
             </div>
             {{- end -}}
-
           </div>
 
           {{ partial "commons/image.html"

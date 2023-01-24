@@ -4,7 +4,7 @@
   </div>
   <div class="posts posts--{{- site.Params.posts.index.layout -}}">
     {{ range first 3 .Pages }}
-      {{ partial "posts/post.html" . }}
+      {{ partial "posts/post.html" (dict "post" . ) }}
     {{ end }}
   </div>
 </section>

@@ -1,7 +1,7 @@
 <article class="organization">
   <div>
     {{ $title := partial "PrepareHTML" .Title }}
-    <h1><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h1>
+    <h2><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h2>
   </div>
   <div class="media">
     {{- if .Params.logo -}}

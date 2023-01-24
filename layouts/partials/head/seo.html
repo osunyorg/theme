@@ -8,7 +8,7 @@
 {{- else if .Params.description -}}
   {{- $seoDescription = partial "PrepareHTML" .Params.description -}} {{/*  LEGACY  */}}
 {{- else if .Params.summary -}}
-  {{- $seoDescription = partial "PrepareHTML" .Params.summary -}}
+  {{- $seoDescription = partial "PrepareText" .Params.summary -}}
 {{- else if .Content -}}
   {{- $seoDescription = partial "GetTruncateContent" ( dict "text" .Content ) -}}
 {{- else if .Params.legacy_text -}}
