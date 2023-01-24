@@ -9,6 +9,13 @@
             justify-content: space-between
             align-items: center
             transition: color 0.3s
+            @include browser-under-safari-16
+                position: relative
+                &::after
+                    display: block
+                    position: absolute
+                    right: 0
+                    bottom: 10px
             &:hover
                 color: $block-definition-color-hovered
         summary,
@@ -27,6 +34,8 @@
     @include media-breakpoint-up(desktop)
         @include in-page-without-sidebar
             .definitions
-                @include grid(2, desktop)
-                grid-row-gap: 0 !important
+                details
+                    p
+                        padding-left: col(4)
+                        margin-left: $grid-gutter
 

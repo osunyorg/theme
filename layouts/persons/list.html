@@ -17,27 +17,31 @@
         )
     }}
 
-    {{ $chapo_block := false }}
+    {{ $summary_block := false }}
     {{ if .Params.blocks }}
       {{ if gt (len .Params.blocks) 1 }}
-        {{ $chapo_block = true }}
+        {{ $summary_block = true }}
       {{ end }}
     {{ end }}
-    {{ partial "persons/chapo.html" (dict
+    
+    {{ partial "persons/summary.html" (dict
         "context" .
-        "with_container" (not $chapo_block)
-        "block_wrapped" $chapo_block
+        "with_container" (not $summary_block)
+        "block_wrapped" $summary_block
       ) }}
+
+    {{ partial "blocks/list.html" . }}
 
     <div class="container">
       {{- if not $is_organigram_present -}}
         {{ partial "persons/taxonomies.html" . }}
-        {{ partial "persons/list.html" . }}
+        {{ $persons := .Pages.ByParam "last_name" }}
+        {{ $persons = (.Paginate $persons).Pages }}
+        {{ partial "persons/list.html" (dict "persons" $persons) }}
+        {{ partial "commons/pagination.html" . }}
       {{- end -}}
     </div>
 
-  
-    {{ partial "blocks/list.html" . }}
   </div>
 
 {{ end }}

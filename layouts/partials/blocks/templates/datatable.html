@@ -1,4 +1,4 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- $title := .block.title -}}
@@ -6,12 +6,11 @@
   <section class="block block-datatable{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
-        {{- if $title }}
+        {{- if not $title -}}
+          {{ partial "blocks/default_title.html" $template }}
+        {{ else }}
           <div class="top">
-            {{ partial "blocks/title" (dict 
-              "title" $title
-              "context" $context
-              ) }}
+            <h2>{{ partial "PrepareHTML" $title }}</h2>
           </div>
         {{ end -}}
         <div class="table-responsive">
@@ -31,7 +30,7 @@
               {{ range .rows }}
                 <tr>
                   {{ range . }}
-                    <td>{{ . }}</td>
+                    <td>{{ .  | markdownify }}</td>
                   {{ end }}
                 </tr>
               {{ end }}

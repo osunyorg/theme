@@ -8,7 +8,7 @@
                   "p2" . 
                   "path" $path 
                   "position" $length
-                ) }}
+                ) -}}
   </ol>
 </nav>
 
@@ -47,13 +47,13 @@
     {{- end -}}
     {{- $title = chomp $title }}
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item{{- if .active }} active{{ end }}"{{- if .active }} aria-current="page"{{ end }}>
-      {{ if not .active -}}
+      {{- if not .active -}}
         <a itemprop="item" href="{{ .page.Permalink }}">
-      {{- end }}
+      {{- end -}}
         <span itemprop="name">{{- partial "PrepareHTML" $title -}}</span>
-      {{ if not .active -}}
+      {{- if not .active -}}
         </a>
-      {{- end }}
+      {{- end -}}
       <meta itemprop="position" content="{{- .position -}}">
     </li>
   {{- end -}}

@@ -3,10 +3,12 @@
   {{- $seoTitle = printf "%s | %s" (chomp (htmlUnescape .Title)) $seoTitle -}}
 {{- end -}}
 {{- $seoDescription := "" -}}
-{{- if .Params.description -}}
-  {{- $seoDescription = partial "PrepareHTML" .Params.description -}}
-{{- else if .Params.description_short -}}
-  {{- $seoDescription = partial "PrepareHTML" .Params.description_short -}}
+{{- if .Params.meta_description -}}
+  {{- $seoDescription = partial "PrepareHTML" .Params.meta_description -}}
+{{- else if .Params.description -}}
+  {{- $seoDescription = partial "PrepareHTML" .Params.description -}} {{/*  LEGACY  */}}
+{{- else if .Params.summary -}}
+  {{- $seoDescription = partial "PrepareHTML" .Params.summary -}}
 {{- else if .Content -}}
   {{- $seoDescription = partial "GetTruncateContent" ( dict "text" .Content ) -}}
 {{- else if .Params.legacy_text -}}

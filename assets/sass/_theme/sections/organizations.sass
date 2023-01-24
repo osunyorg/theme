@@ -1,16 +1,18 @@
 .organization
     @include article
     position: relative
-    h1
+    h2
         @include meta
         a
             @include stretched-link
             text-decoration: none
     .media
         background: $color-background-alt
-        aspect-ratio: 1/1
         padding: $spacing1
         margin-bottom: half($spacing0)
+        picture
+            aspect-ratio: 1/1
+            display: block
         img
             width: 100%
             height: 100%
@@ -35,54 +37,42 @@
         margin-top: $spacing2
 
 .organizations__page
+    .lead
+        font-family: $lead-sidebar-font-family
+        font-weight: $lead-sidebar-weight
+        line-height: $lead-sidebar-line-height
+        margin-bottom: $spacing1
+        @include media-breakpoint-up(desktop)
+            font-size: $lead-sidebar-size-desktop
     .document-content
-        .organization-meta
-            .logo
-                figcaption
-                    text-align: right
-                    @include meta
-                    margin-bottom: $spacing0
-                picture
-                    aspect-ratio: 1/1
-                    background: $color-background-alt
-                    display: block
-                    padding: $spacing2
-                    margin-bottom: half($spacing0)
-                img
-                    width: 100%
-                    height: 100%
-                    object-fit: contain
-                    object-position: center
+        .logo
+            figcaption
+                text-align: right
+                @include meta
+                margin-bottom: $spacing0
+            picture
+                aspect-ratio: 1/1
+                background: $color-background-alt
+                display: block
+                padding: $spacing2
+                margin-bottom: half($spacing0)
+                width: auto
+            img
+                width: 100%
+                height: 100%
+                object-fit: contain
+                object-position: center
         .blocks
             margin-top: $spacing3
-        .contacts-list
-            @include list-reset
-            padding-left: 0
-            text-align: right
-            margin-top: $spacing1
-            li
-                list-style-type: none
-                + li
-                    margin-top: $spacing1
-                span
-                    @include meta
-                    display: block
-    @include media-breakpoint-down(desktop)
+        .contacts-details
+            @include grid(2, md)
+    @include media-breakpoint-down(md)
         .document-content
-            .organization-meta
+            .logo
                 margin-top: $spacing3
-                .logo
-                    display: flex
-                    justify-content: space-between
-                    picture
-                        width: 66.6%
-                .contacts-list
-                    li
-                        display: flex
-                        justify-content: space-between
-                        align-items: baseline
-                        
-    @include media-breakpoint-up(desktop)
+                display: flex
+                justify-content: space-between
+    @include media-breakpoint-up(md)
         .document-content
             > .container
                 display: flex
@@ -90,5 +80,5 @@
                 gap: $grid-gutter
             [itemprop="articleBody"]
                 width: col(8)
-            .organization-meta
+            .logo
                 width: col(3)

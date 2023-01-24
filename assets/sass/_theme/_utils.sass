@@ -163,24 +163,18 @@
         aspect-ratio: #{$ratio}
         display: block
         width: 100%
-    @supports not (aspect-ratio: 1)
-        position: relative
-        &::before
-            content: ''
-            padding-top: (1 / $ratio) * 100%
-            width: 100%
-        #{$selector}
-            bottom: 0
-            left: 0
-            position: absolute
-            right: 0
-            top: 0
+
+@mixin handle-svg-fit
+    picture.is-svg
+        img
+            object-fit: contain
 
 @mixin article($background: null)
     position: relative
     display: flex
     flex-direction: column
     .media
+        @include handle-svg-fit
         @if $article-media-aspect-ratio
             @include aspect-ratio($article-media-aspect-ratio, 'img', $background)
         margin-bottom: $spacing1
@@ -188,9 +182,10 @@
         overflow: hidden
         img
             object-fit: cover
-    h1
+    h2, h3
         @include h3
         a
+            display: block
             @include stretched-link
             text-decoration: none
     p
@@ -391,3 +386,11 @@
     font-weight: $weight
     font-display: swap
     src: $src
+
+
+// Old browsers support
+
+@mixin browser-under-safari-16
+    @media not all and (min-resolution:.001dpcm) 
+            @supports (-webkit-appearance:none) and (display:flow-root)
+                @content

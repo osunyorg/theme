@@ -1,6 +1,9 @@
 .block-video
     .video
         @include aspect-ratio(16/9, 'iframe')
+        @supports not (aspect-ratio: 1)
+            iframe
+                min-height: 400px
         iframe
             background: black
     @include in-page-without-sidebar

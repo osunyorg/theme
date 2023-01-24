@@ -80,6 +80,7 @@ ol.programs
             border-radius: px2rem(4)
         a[download]
             @include button-icon(download)
+            text-decoration: none
             color: $hero-background-color
             background: $hero-color
             border-color: $hero-color
@@ -102,11 +103,13 @@ ol.programs
             .blocks
                 section > * + *
                     margin-top: 0
-                h3
+                h2
                     @include h3
                 @include media-breakpoint-down(desktop)
+                    padding-top: $spacing3
                     margin-left: half(-$grid-gutter-sm)
                     margin-right: half(-$grid-gutter-sm)
+
                 @include media-breakpoint-up(desktop)
                     .container
                         padding-left: 0
@@ -116,7 +119,7 @@ ol.programs
     @include media-breakpoint-down(desktop)
         .document-content
             .content
-                h2
+                > h2
                     margin-bottom: $spacing2
             section:not(:first-child):not(.block)
                 margin-top: $spacing3
@@ -133,7 +136,7 @@ ol.programs
                     $sticky-top-offset: 90px
                     @include sticky($sticky-top-offset)
                     top: $sticky-top-offset
-                    margin-top: -0.3em
+                    // margin-top: -0.3em
                     align-self: start
                     grid-column: 1/5
                     margin-bottom: 0
@@ -149,9 +152,6 @@ ol.programs
             line-height: 160%
             &:first-child 
                 border-top: 1px solid $color-border
-                th,
-                td
-                    padding: 1rem 0
             &:last-child
                 border-bottom: 1px solid $color-border
         th
@@ -202,4 +202,11 @@ ol.programs
             a
             p
                 @include small
-    
+    .related-posts
+        .category-link
+            display: block
+            text-decoration: none
+            @include icon(arrow, after, true)
+            @include hover-translate-icon
+            @include media-breakpoint-down(desktop)
+                margin-bottom: $spacing1

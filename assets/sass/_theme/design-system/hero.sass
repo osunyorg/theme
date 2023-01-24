@@ -19,6 +19,7 @@
         padding-top: $spacing3
         > h1, > hgroup
             margin-top: $spacing3
+            
         h1 + p
             margin-top: $spacing1
         figure
@@ -30,18 +31,10 @@
                 height: auto
             @include collapsed-figcaption
 
-    nav + .content
+    .breadcrumb-nav + .content
         padding-top: 0
-    // TODO : handle hero with image
-    @if $breadcrumb-below-h1
-        .container:first-child
-            display: flex
-            flex-direction: column
-            nav + .content
-                margin-top: 0
-            .breadcrumb-nav
-                order: 3
-                margin-top: $spacing3
+    .content + .breadcrumb-nav
+        margin-top: $spacing3
 
     @include media-breakpoint-down(desktop)
         .breadcrumb-nav

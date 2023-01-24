@@ -31,7 +31,6 @@
             padding-top: 0
             padding-bottom: 0
             line-height: calc(var(--header-height) - 1px)
-
     .toc
         flex: 1
         display: flex
@@ -74,9 +73,16 @@
         display: none
     @include media-breakpoint-up(desktop)
         @include container
+        background: $color-background
         justify-content: end
-        text-align: right
         margin-bottom: $spacing3
+        position: sticky
+        text-align: right
+        top: calc(var(--header-height) * -1)
+        transition: top $toc-sticky-transition
+        z-index: $zindex-toc-cta
+        html:not(.is-scrolling-down) &
+            top: var(--header-height)
         body.offcanvas-toc &
             display: flex
     @include media-breakpoint-down(desktop)
@@ -180,7 +186,7 @@
                 display: block
                 text-decoration-color: transparent
                 &:hover
-                    text-decoration: underline
+                    text-decoration-color: $toc-color
         .active
             color: $toc-active-color
             pointer-events: none

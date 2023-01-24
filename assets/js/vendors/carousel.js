@@ -20,41 +20,52 @@ class Carousel {
     }
 
     init () {
-        var splide = new Splide(this.element).mount(),
-            toggleButton = splide.root.querySelector('.splide__autoplay'),
-            stepButtons = splide.root.querySelectorAll('.splide__pagination button'),
-            elements = splide.root.querySelectorAll('.splide__pagination, .splide__slide'),
-            autoplay = splide.Components.Autoplay;
+        this.splide = new Splide(this.element).mount();
+        const toggleButton = this.splide.root.querySelector('.splide__autoplay'),
+            stepButtons = this.splide.root.querySelectorAll('.splide__pagination button'),
+            elements = this.splide.root.querySelectorAll('.splide__pagination, .splide__slide'),
+            autoplay = this.splide.Components.Autoplay;
 
+        this.listen();
 
         if (toggleButton) {
             stepButtons.forEach((stepButton) => {
                 stepButton.innerHTML = '<i></i>';
             });
 
-            splide.on('autoplay:play', function () {
+            this.splide.on('autoplay:play', () => {
                 toggleButton.classList.add('is-active');
             });
 
-            splide.on('autoplay:playing', function (rate) {
-                var activeStepButton = splide.root.querySelector('.splide__pagination .is-active i');
+            this.splide.on('autoplay:playing', (rate) => {
+                var activeStepButton = this.splide.root.querySelector('.splide__pagination .is-active i');
                 activeStepButton.style.width = rate * 100 + '%';
             });
 
-            splide.on('autoplay:pause', function () {
+            this.splide.on('autoplay:pause', () => {
                 toggleButton.classList.remove('is-active');
             });
 
-            elements.forEach(function(element) {
+            elements.forEach(element => {
                 element.addEventListener('click', () => {
                     autoplay.pause();
                 })
             });
 
-            splide.on('drag', function() {
+            this.splide.on('drag', () => {
                 autoplay.pause();
             });
         }
+    }
+
+    listen() {
+        this.splide.on('move', () => {
+            this.splide.root.classList.add('is-moving')
+        });
+
+        this.splide.on('moved', () => {
+            this.splide.root.classList.remove('is-moving')
+        });
     }
 }
 

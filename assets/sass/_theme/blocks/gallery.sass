@@ -32,7 +32,7 @@
 
     &--grid
         .gallery
-            align-items: baseline
+            align-items: start
             @include in-page-with-sidebar
                 @include grid(3, desktop, half($grid-gutter), half($grid-gutter))
             @include in-page-without-sidebar
@@ -48,6 +48,8 @@
         overflow: hidden
         padding-bottom: $grid-gutter
         padding-top: $grid-gutter
+        position: relative
+        z-index: 0
         @include in-page-without-sidebar
             background: $block-gallery-carousel-background
         .block-gallery + &,
@@ -61,6 +63,10 @@
         .splide
             display: flex
             flex-direction: column
+            @include in-page-with-sidebar
+                &.is-moving
+                    .splide__slide.is-active
+                        opacity: 0.1
             &__track
                 overflow: visible
                 margin-right: half(-$grid-gutter-sm)

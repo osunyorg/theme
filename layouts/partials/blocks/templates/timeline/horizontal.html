@@ -1,10 +1,9 @@
 <div class="timeline">
-  {{ if .title }}
-    {{ partial "blocks/title" (dict 
-    "title" .title
-    "context" .context
-    ) }}
-  {{ end }}
+  {{- if not .title -}}
+    {{ partial "blocks/default_title.html" .template }}
+  {{ else }}
+    <h2>{{ partial "PrepareHTML" .title }}</h2>
+  {{ end -}}
 
   {{ with .block.data }}
     <div class="events">

@@ -1,9 +1,10 @@
-{{- $context := .context -}}
 {{- $position := .block.position -}}
+{{- $template := .block.template -}}
 {{- $title := .block.title -}}
 {{- $layout := .block.data.layout | default "no_background" -}}
 {{- $class := "block block-chapter" -}}
 {{- $image_class := "" -}}
+
 {{- with .block.data -}}
   {{ if .image }}
     {{- $class = printf "%s block-chapter--with-image" $class -}}
@@ -17,12 +18,11 @@
       <div class="block-content">
         <div class="chapter">
           <div class="text">
-            {{ if $title -}}
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
               <div class="top">
-                {{ partial "blocks/title" (dict 
-                  "title" $title
-                  "context" $context
-                  ) }}
+                <h2>{{ partial "PrepareHTML" $title }}</h2>
               </div>
             {{ end -}}
             {{ if (partial "GetTextFromHTML" .text) -}}
@@ -46,9 +46,7 @@
                 {{ partial "commons/image.html"
                   (dict
                     "image"    .image
-                    "mobile"   "350x350"
-                    "tablet"   "450x450"
-                    "desktop"  "1280x1280"
+                    "sizes"    site.Params.image_sizes.blocks.chapter
                   )}}
               </a>
               {{ if partial "GetTextFromHTML" .credit }}

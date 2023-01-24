@@ -1,20 +1,29 @@
 <header class="hero">
   <div class="container">
-    {{ partial "header/breadcrumbs.html" . }}
+    {{- if eq site.Params.breadcrumb.position "hero-start" -}}
+      {{ partial "header/breadcrumbs.html" . }}
+    {{- end -}}
     <div class="content">
       <h1>{{ safeHTML (partial "CorrectPunctuation" .Title) }}</h1>
       {{ if .Params.image }}
         <div class="avatar">
           {{ partial "commons/image.html"
-                (dict
-                  "image"    .Params.image
-                  "class"    "img-fluid"
-                  "mobile"   "202x202"
-                  "tablet"   "192x192"
-                  "desktop"  "400x400"
-                )}}
+              (dict
+                "image"    .Params.image
+                "class"    "img-fluid"
+                "sizes"    site.Params.image_sizes.sections.persons.hero_single
+              )}}
         </div>
       {{ end }}
     </div>
+    {{- if eq site.Params.breadcrumb.position "hero-end" -}}
+      {{ partial "header/breadcrumbs.html" . }}
+    {{- end -}}
   </div>
 </header>
+
+{{- if eq site.Params.breadcrumb.position "after-hero" -}}
+  <div class="container">
+    {{ partial "header/breadcrumbs.html" . }}
+  </div>
+{{- end -}}

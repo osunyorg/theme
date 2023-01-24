@@ -5,24 +5,25 @@
   {{ range .pages }}
     {{- $page := partial "GetPageByUrl" .page -}}
     {{- if .slug -}}
+      {{/*  LEGACY  */}}
       {{- $page = partial "GetPageByUrl" .slug -}}
     {{- end -}}
     {{ with $page }}
       <article class="card">
-        <h1>
+        <h3>
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}
           </a>
-        </h1>
+        </h3>
 
-        {{ if and $show_descriptions .Params.description_short }}
-          {{ if site.Params.pages.list.truncate_description }}
+        {{ if and $show_descriptions .Params.summary }}
+          {{ if site.Params.pages.index.truncate_description }}
             <p>{{ partial "GetTruncateContent" ( dict 
-              "text" .Params.description_short
-              "length" site.Params.pages.list.truncate_description
+              "text" .Params.summary
+              "length" site.Params.pages.index.truncate_description
               ) }}</p>
           {{ else }}
-            <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
+            <p>{{ partial "PrepareHTML" .Params.summary }}</p>
           {{ end }}
         {{ end }}
 

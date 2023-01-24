@@ -1,4 +1,4 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- $class := "block block-pages" -}}
@@ -40,28 +40,27 @@
       {{- $page_class = partial "GetBodyclass" . }}
       {{- $page_class = printf "block-%s" $page_class }}
     {{ end }}
-    {{ if site.Params.pages.list.truncate_description }}
+    {{ if site.Params.pages.index.truncate_description }}
       {{- $main_description = partial "GetTruncateContent" ( dict 
-          "text" .Params.description_short
-          "length" site.Params.pages.list.truncate_description
+          "text" .Params.summary
+          "length" site.Params.pages.index.truncate_description
           ) -}}
     {{ else }}
-      {{- $main_description = partial "PrepareHTML" .Params.description_short -}}
+      {{- $main_description = partial "PrepareHTML" .Params.summary -}}
     {{ end }}
   {{ end -}}
 
   <section class="block block-pages{{ if $title }} block-with-title{{ end }} {{ $layout_class }} {{ $page_class }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
-        {{- if $title }}
+        {{- if not $title -}}
+          {{ partial "blocks/default_title.html" $template }}
+        {{ else }}
           <div class="top">
-            {{/*  Quand le bloc a un titre, est-ce qu'on prend le titre de la page principale ou le titre du bloc ?  */}}
-            {{ partial "blocks/title" (dict 
+            {{ partial "blocks/title_with_link.html" (dict 
               "title" $title
-              "context" $context
               "link" $page_link
               ) }}
-            
             {{ if and $show_main_description (ne $layout "list")}}
               {{- with $page }}
                 <p class="description">{{- $main_description -}}</p>

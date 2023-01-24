@@ -3,9 +3,7 @@
     {{- partial "commons/image.html"
           (dict
             "image"    .Params.image
-            "mobile"   "350x350"
-            "tablet"   "400x400"
-            "desktop"  "900x900"
+            "sizes"    site.Params.image_sizes.sections.pages.item
           ) -}}
   {{- else -}}
     {{- partial "commons/image-default.html" -}}

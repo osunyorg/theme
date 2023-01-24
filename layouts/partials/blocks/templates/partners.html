@@ -1,4 +1,4 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- with .block.data -}}
@@ -7,11 +7,10 @@
       <div class="block-content">
         {{ if (or $title .description) -}}
           <div class="top">
-            {{- if $title }}
-              {{ partial "blocks/title" (dict 
-                "title" $title
-                "context" $context
-                ) }}
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
             {{ end -}}
             {{- if .description }}
               <div class="description">
@@ -34,7 +33,7 @@
                   {{ if .name }}
                     <div>
                       {{ $title = partial "PrepareHTML" .name -}}
-                      <h1>
+                      <h3>
                         {{- if .url }}
                         <a href="{{ .url }}" title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
                         {{ end }}
@@ -42,7 +41,7 @@
                         {{ if .url }}
                         </a>
                         {{ end -}}
-                      </h1>
+                      </h3>
                     </div>
                   {{ end -}}
                   <div class="media">
@@ -51,9 +50,7 @@
                             (dict
                               "image"    .logo
                               "alt"      $title
-                              "mobile"   "164"
-                              "tablet"   "216"
-                              "desktop"  "196"
+                              "sizes"    site.Params.image_sizes.blocks.partners
                             ) -}}
                     {{- end -}}
                   </div>

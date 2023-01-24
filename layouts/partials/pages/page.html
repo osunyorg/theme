@@ -16,17 +16,8 @@
         {{- partial "PrepareHTML" .Title -}}
       </a>
     {{- partial "PrepareHTML" (printf "</%s>" $heading) -}}
-
-    {{- if .Scratch.Get "show_description" }}
-      {{- if .Params.description_short }}
-        <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
-      {{ end -}}
-    {{ end -}}
-    {{- if .Scratch.Get "show_more" }}
-      <p class="more">{{- i18n "commons.more" -}}</p>
+    {{- if .Params.summary }}
+      <p>{{ partial "PrepareHTML" .Params.summary }}</p>
     {{ end -}}
   </div>
-  {{ if .Scratch.Get "show_image" }}
-    {{- partial "pages/page-media.html" . -}}
-  {{- end }}
 </article>

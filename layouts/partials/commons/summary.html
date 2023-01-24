@@ -1,17 +1,17 @@
-{{- $text := (partial "GetTextFromHTML" .context.Params.description_short) -}}
+{{- $text := (partial "GetTextFromHTML" .context.Params.summary) -}}
 
 {{- if $text -}}
 
   {{- if .block_wrapped -}}
-  <section class="block block-chapo">
+  <section class="block block-summary">
     <div class="container">
       <div class="block-content">
   {{- else if .with_container -}}
   <div class="container">
   {{- end -}}
 
-    <p class="lead">
-      {{ partial "PrepareHTML" .context.Params.description_short }}
+    <p class="lead" role="heading" aria-level="2">
+      {{ partial "PrepareHTML" .context.Params.summary }}
     </p>
 
   {{- if .block_wrapped -}}
