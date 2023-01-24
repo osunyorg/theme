@@ -98,8 +98,7 @@ details
                 transform: translateY(-5px)
 .modal
     align-items: center
-    background-color: $body-overlay-color
-    display: none
+    display: flex
     justify-content: center
     height: 100vh
     left: 0
@@ -107,8 +106,11 @@ details
     position: fixed
     top: 0
     width: 100%
+    margin: 0
     z-index: $zindex-toc
-    > div
+    &[aria-hidden="true"]
+        display: none
+    .modal-content
         position: relative
         background-color: $color-background-alt
         padding: $spacing3 
@@ -122,5 +124,3 @@ details
                 position: absolute
                 right: 0
                 top: 0
-            h5
-                @include h3

@@ -37,26 +37,24 @@
     .paper
         display: block
         @include media-breakpoint-down(desktop)
-            > div
-                &:first-of-type
-                    .paper-volume
-                        display: inline-flex
-                        margin-left: $spacing0
+            > div:first-of-type
+                .paper-volume
+                    display: inline-flex
+                    margin-left: $spacing0
         @include media-breakpoint-up(desktop)
-            > div
-                &:first-of-type
-                    display: flex
-                    flex-wrap: wrap
-                    justify-content: space-between
-                    h3 
-                        flex: 1
-                    > span
-                        order: 3
-                        width: 100%
-                    .paper-volume
-                        padding-left: $spacing1
-                &:last-of-type
-                    gap: $grid-gutter
-                    margin-top: $spacing1
-                    a, button
-                        width: unset
+            > div:first-of-type
+                display: flex
+                flex-wrap: wrap
+                justify-content: space-between
+                h3 
+                    flex: 1
+                > span
+                    order: 3
+                    width: 100%
+                .paper-volume
+                    padding-left: $spacing1
+            .paper-actions
+                gap: $grid-gutter
+                margin-top: $spacing1
+                a, button
+                    width: unset
