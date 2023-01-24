@@ -26,22 +26,6 @@
         {{ end }}
       </p>
     </div>
-    <div class="paper-actions" role="group">
-      <button class="squared-button" type="button" data-open-modal="{{ $modalId }}">{{ i18n "volumes.abstract" }}</button>
-      {{ if .Params.pdf }}
-      {{- $pdf := partial "GetMedia" .Params.pdf -}}
-      {{- $pdf_size := partial "GetHumanSize" $pdf.size -}}
-        <a href="{{ $pdf.url }}" download>
-          {{- i18n "commons.pdf_with_size" (dict "Size" $pdf_size) }}
-        </a>
-      {{ end }}
-      <a class="squared-button" href="#" download>PDF (435 ko)</a>
-    </div>
-    {{ partial "papers/modal.html"
-        (dict
-          "modalId" $modalId
-          "title" .Title
-          "abstract" .Params.abstract
-        ) }}
+    {{ partial "papers/actions.html" (dict "paper" . ) }}
   </article>
 {{ end }}
