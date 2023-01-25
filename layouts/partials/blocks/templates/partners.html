@@ -1,6 +1,10 @@
 {{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
+{{ $logo_index := "logo" }}
+{{ if site.Params.organizations.dark_logo_background }}
+  {{ $logo_index = "logo_on_dark_background" }}
+{{ end }}
 {{- with .block.data -}}
   <section class="block block-partners{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
@@ -27,7 +31,7 @@
                 {{ template "partner" (dict 
                     "title" .Title
                     "url" .Permalink
-                    "logo"  .Params.logo
+                    "logo" (index .Params $logo_index)
                   )}}
               {{ end }}
             {{ else }}
