@@ -1,0 +1,5 @@
+{{ $chunks := split . "<iframe" }}
+{{ $text := delimit $chunks "<iframe loading=\"lazy\"" }}
+{{ $chunks = split $text "</iframe>" }}
+{{ $text = delimit $chunks "</iframe>" }}
+{{ return $text }}
