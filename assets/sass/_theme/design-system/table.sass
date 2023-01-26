@@ -13,19 +13,22 @@ table
         padding-top: $spacing0
         padding-bottom: $spacing0
         padding-right: $spacing0
+        @include in-page-with-sidebar
+            padding-top: calc(#{$spacing0} / 2)
+            padding-bottom: calc(#{$spacing0} / 2)
 
     thead
         @include h4
         font-size: $table-head-font-size
-        @include media-breakpoint-up(md)
-            font-size: $table-head-font-size-md
+        @include media-breakpoint-up(desktop)
+            font-size: $table-head-font-size-desktop
         th
             text-align: left
 
     tbody
         font-size: $table-body-size
-        @include media-breakpoint-up(md)
-            font-size: $table-body-size-md
+        @include media-breakpoint-up(desktop)
+            font-size: $table-body-size-desktop
         tr
             border-bottom: 1px solid $color-border
         tr:first-child
@@ -37,7 +40,7 @@ table
     margin-right: half(-$grid-gutter-sm)
     padding-left: half($grid-gutter-sm)
     padding-right: half($grid-gutter-sm)
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         margin-left: half(-$grid-gutter)
         margin-right: half(-$grid-gutter)
         padding-left: half($grid-gutter)

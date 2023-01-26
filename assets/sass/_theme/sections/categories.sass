@@ -1,4 +1,11 @@
 ul.categories
     @include list-section
-    article
-        @include article
+    li
+        a:first-child
+            & + p 
+                text-align: right
+                white-space: nowrap
+
+.categories__term
+    main
+        padding-bottom: $spacing3

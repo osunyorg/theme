@@ -1,22 +1,27 @@
-footer[role="contentinfo"]
+footer#document-footer
     background: $footer-background-color
     color: $footer-color
     padding-bottom: $spacing3
     padding-top: $spacing3
-    margin-top: $spacing4
+    position: relative
+    @include media-breakpoint-down(desktop)
+        z-index: $zindex-footer
+    a
+        @include link($footer-color)
     .logo
         img
             height: $footer-logo-height
             max-width: 100%
             width: auto
-            @include media-breakpoint-up(md)
-                height: $footer-logo-height-md
+            @include media-breakpoint-up(desktop)
+                height: $footer-logo-height-desktop
     ul
         @include list-reset
         li
             + li
                 margin-top: $spacing0
-            a:not(:hover)
+            a
+                @include link($footer-color)
                 text-decoration-color: transparent
     .footer
         &-site
@@ -27,16 +32,22 @@ footer[role="contentinfo"]
             display: block
             margin-top: $spacing0
 
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         .container
+            + .container,
             > * + *
                 margin-top: $spacing3
-    @include media-breakpoint-up(md)
+
+    @include media-breakpoint-up(desktop)
         .container
-            @include grid(2, md, $spacing4)
+            display: flex
+            justify-content: space-between
+            padding-bottom: $spacing3
+            + .container
+                padding-top: $spacing3
+                padding-bottom: 0
         .footer
             &-site, &-social
                 text-align: right
             &-social
-                order: 4
-                align-self: end
+                order: 2

@@ -1,12 +1,14 @@
 {{- if .Params.logo -}}
-  <div class="media">
+  {{ $logo_index := "logo" }}
+  {{ if site.Params.organizations.dark_logo_background }}
+    {{ $logo_index = "logo_on_dark_background" }}
+  {{ end }}
+  <figure class="logo">
     {{- partial "commons/image.html"
-          (dict
-            "image"    .Params.logo
-            "alt"      .Title
-            "mobile"   "331"
-            "tablet"   "196"
-            "desktop"  "396"
-          ) -}}
-  </div>
+        (dict
+          "image"    (index .Params $logo_index)
+          "alt"      .Title
+          "sizes"    site.Params.image_sizes.sections.organizations.logo
+        ) -}}
+  </figure>
 {{- end -}}

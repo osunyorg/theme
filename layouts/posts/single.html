@@ -5,24 +5,20 @@
     <meta itemprop="headline" content="{{ partial "PrepareHTML" .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ if .Date }}<meta itemprop="datePublished" content="{{ .Date.Format "2006-01-02T15:04" }}">{{ end }}
-    {{ if .Params.description_short }}<meta itemprop="abstract" content="{{ partial "PrepareHTML" .Params.description_short }}">{{ end }}
-    {{ if .Summary }}<meta itemprop="description" content="{{ partial "PrepareHTML" .Summary }}">{{ end }}
+    {{ if .Params.summary }}<meta itemprop="abstract" content="{{ partial "PrepareText" .Params.summary }}">{{ end }}
+    {{ if .Summary }}<meta itemprop="description" content="{{ partial "PrepareText" .Summary }}">{{ end }}
 
-    {{ partial "posts/aside.html" . }}
-    <div class="blocks blocks-chapo">
-      <div class="container">
-        <div class="block-content">
-          {{ partial "posts/chapo.html" .Params.description_short }}
-        </div>
-      </div>
-    </div>
+    {{ partial "posts/sidebar.html" . }}
+
+    {{ partial "posts/summary.html" (dict
+        "context" .
+        "block_wrapped" true
+      ) }}
+
     {{ partial "blocks/list.html" . }}
-    <div class="blocks blocks-pagination">
-      <div class="container">
-        <div class="block-content">
-          {{ partial "posts/prevnext.html" . }}
-        </div>
-      </div>
-    </div>
+
+    {{ partial "posts/prevnext.html" . }}
+
+    {{ partial "hooks/before-document-content-end.html" . }}
   </div>
 {{ end }}

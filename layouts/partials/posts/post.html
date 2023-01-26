@@ -1,10 +1,33 @@
+{{ $post := .post }}
+{{ $heading := .heading | default "h2" }}
+{{ $heading_tag := (dict 
+    "open" ((printf "<%s itemprop='headline'>" $heading) | safeHTML)
+    "close" ((printf "</%s>" $heading) | safeHTML)
+    ) }}
+
+{{ with $post }}
 <article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
   <div class="post-content">
     {{- $title := partial "PrepareHTML" .Title -}}
-    <h1 itemprop="headline"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h1>
-    {{- if (partial "GetTextFromHTML" .Params.description_short) -}}
-      <p itemprop="articleBody">{{ partial "PrepareHTML" .Params.description_short }}</p>
+
+    {{ $heading_tag.open }}
+      <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+    {{ $heading_tag.close }}
+
+    {{ if site.Params.posts.index.show_categories }}
+      {{- partial "posts/categories" . -}}
+    {{ end }}
+    {{- if (partial "GetTextFromHTML" .Params.summary) -}}
+      {{ if site.Params.posts.index.truncate_description }}
+        <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
+          "text" .Params.summary
+          "length" site.Params.posts.index.truncate_description
+          ) }}</p>
+      {{ else }}
+        <p itemprop="articleBody">{{ partial "PrepareText" .Params.summary }}</p>
+      {{ end }}
     {{- end -}}
+    
     <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
   </div>
   <div class="media">
@@ -12,12 +35,11 @@
       {{- partial "commons/image.html"
             (dict
               "image"    .Params.image
-              "mobile"   "351x291"
-              "tablet"   "334x167"
-              "desktop"  "634x317"
+              "sizes"    site.Params.image_sizes.sections.posts.item
             ) -}}
     {{- else -}}
       {{- partial "commons/image-default.html" -}}
     {{- end -}}
   </div>
 </article>
+{{ end }}

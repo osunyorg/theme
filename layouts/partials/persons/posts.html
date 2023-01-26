@@ -1,13 +1,10 @@
 <section>
   <div class="top">
-    <h2>{{ i18n "persons.posts" }}</h2>
-    <a href="{{ .Permalink }}" class="link">{{ i18n "posts.see_all" }}</a>
+    <h2 class="h5"><a href="{{ .Permalink }}">{{ i18n "persons.posts" }}</a></h2>
   </div>
-  <div class="posts">
+  <div class="posts posts--{{- site.Params.posts.index.layout -}}">
     {{ range first 3 .Pages }}
-      <div>
-        {{ partial "posts/post.html" . }}
-      </div>
+      {{ partial "posts/post.html" (dict "post" . ) }}
     {{ end }}
   </div>
 </section>

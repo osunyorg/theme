@@ -1,4 +1,4 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- $term := false -}}
@@ -10,7 +10,7 @@
   {{ if .category }}
     {{- $term = site.GetPage (printf "/categories%s" .category) -}}
   {{ end }}
-  <section class="block block-posts--{{- $layout }} block-posts{{ if $title }} block-with-title{{ end }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}" id="block-{{ $position }}">
+  <section itemscope itemtype="http://schema.org/Blog" class="block block-posts--{{- $layout }} block-posts{{ if $title }} block-with-title{{ end }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
         {{ if $title -}}
@@ -20,11 +20,14 @@
               {{ $title_link = $term.Permalink }}
             {{ end -}}
 
-            {{ partial "blocks/title" (dict 
-              "title" $title
-              "context" $context
-              "link" $title_link
-              ) }}
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
+              {{ partial "blocks/title_with_link.html" (dict 
+                "title" $title
+                "link" $title_link
+                ) }}
+            {{ end -}}
 
           </div>
         {{- end }}

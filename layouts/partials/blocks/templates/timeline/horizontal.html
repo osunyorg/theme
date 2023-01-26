@@ -1,10 +1,9 @@
 <div class="timeline">
-  {{ if .title }}
-    {{ partial "blocks/title" (dict 
-    "title" .title
-    "context" .context
-    ) }}
-  {{ end }}
+  {{- if not .title -}}
+    {{ partial "blocks/default_title.html" .template }}
+  {{ else }}
+    <h2>{{ partial "PrepareHTML" .title }}</h2>
+  {{ end -}}
 
   {{ with .block.data }}
     <div class="events">
@@ -19,7 +18,7 @@
       </ol>
       {{ if  (gt (len .events) 0) }}
         <div class="timeline-arrows">
-          <button class="previous" disabled title="{{ i18n "blocks.timeline.prev"}}"></button>
+          <button class="previous" disabled title="{{ i18n "blocks.timeline.previous"}}"></button>
           <button class="next" title="{{ i18n "blocks.timeline.next"}}"></button>
         </div>
       {{ end }}

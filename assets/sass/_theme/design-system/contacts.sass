@@ -1,0 +1,29 @@
+.contacts-details
+    margin-top: $spacing3
+    ul
+        @include list-reset
+        padding-left: 0
+        li
+            list-style-type: none
+            + li
+                margin-top: $spacing1
+            address
+                @extend .p
+            > span
+                @include meta
+                display: block
+    @include media-breakpoint-down(md)
+        width: auto
+        ul + ul
+            margin-top: $spacing1
+        li
+            align-items: baseline
+            justify-content: space-between
+            // display: flex
+            // text-align: right
+            > span
+                flex-shrink: 0
+                margin-right: $spacing1
+                text-align: left
+            address
+                text-align: right

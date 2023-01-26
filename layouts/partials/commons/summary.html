@@ -1,0 +1,24 @@
+{{- $text := (partial "GetTextFromHTML" .context.Params.summary) -}}
+
+{{- if $text -}}
+
+  {{- if .block_wrapped -}}
+  <section class="block block-summary">
+    <div class="container">
+      <div class="block-content">
+  {{- else if .with_container -}}
+  <div class="container">
+  {{- end -}}
+
+  <p class="lead" role="heading" aria-level="2">
+    {{ partial "PrepareText" .context.Params.summary }}
+  </p>
+
+  {{- if .block_wrapped -}}
+      </div>
+    </div>
+  </section>
+  {{- else if .with_container -}}
+  </div>
+  {{- end -}}
+{{- end -}}

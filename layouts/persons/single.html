@@ -16,8 +16,14 @@
 
   {{ partial "persons/hero-single.html" . }}
 
-  <div class="document-content container">
-    <div itemscope itemtype="https://schema.org/Person">
+  <div class="document-content">
+    {{ partial "toc/container.html"
+        (dict
+            "toc" "toc/default.html"
+            "context" .
+        )
+    }}
+    <div itemscope itemtype="https://schema.org/Person" class="container">
       <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
       <meta itemprop="url" content="{{ .Permalink }}">
       {{- if .Params.image -}}
@@ -29,9 +35,9 @@
 
       <div class="informations">
         <div>
-          {{ if (partial "GetTextFromHTML" .Params.description_short) }}
+          {{ if (partial "GetTextFromHTML" .Params.summary) }}
             <div class="lead" itemprop="description">
-              {{ partial "PrepareHTML" .Params.description_short }}
+              {{ partial "PrepareText" .Params.summary }}
             </div>
           {{ end }}
           {{ if (partial "GetTextFromHTML" .Content) }}
@@ -40,33 +46,40 @@
             </div>
           {{ end }}
         </div>
-        <div>
-          {{ range $programsForAdministrator }}
-            {{ $program := . }}
+        {{ range $programsForAdministrator }}
+        {{ $program := . }}
+          <div class="roles">
             {{ range .Params.roles }}
               {{ $role := .title }}
               {{ if in .persons $slug }}
                 <p>
                   {{ safeHTML $role }}<br>
-                  <a href="{{ $program.Permalink }}" class="link link-more">{{ safeHTML $program.Title }}</a>
+                  <a href="{{ $program.Permalink }}" class="link">{{ safeHTML $program.Title }}</a>
                 </p>
               {{ end }}
             {{ end }}
-          {{ end }}
-        </div>
+          </div>
+        {{ end }}
       </div>
+
+      {{ partial "persons/contact-details.html" . }}
+
     </div>
 
-    {{ if $programsForTeacher }}
-      {{ partial "persons/programs.html" (dict "programs" $programsForTeacher "slug" $slug) }}
-    {{ end }}
+    {{ partial "blocks/list.html" . }}
 
-    {{ if $author.Pages }}
-      {{ partial "persons/posts.html" $author }}
-    {{ end }}
-
-    {{ if $papersForResearcher }}
-      {{ partial "persons/papers.html" (dict "papers" $papersForResearcher "slug" $slug) }}
-    {{ end }}
+    <div class="container">
+      {{ if $programsForTeacher }}
+        {{ partial "persons/programs.html" (dict "programs" $programsForTeacher "slug" $slug) }}
+      {{ end }}
+  
+      {{ if $author.Pages }}
+        {{ partial "persons/posts.html" $author }}
+      {{ end }}
+  
+      {{ if $papersForResearcher }}
+        {{ partial "persons/papers.html" (dict "papers" $papersForResearcher "slug" $slug) }}
+      {{ end }}
+    </div>
   </div>
 {{ end }}

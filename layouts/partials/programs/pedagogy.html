@@ -1,33 +1,41 @@
 {{- if or (partial "GetTextFromHTML" .Params.content) (partial "GetTextFromHTML" .Params.pedagogy) (partial "GetTextFromHTML" .Params.evaluation) (.Params.teachers) -}}
-<section id="pedagogy">
+<section id="{{ urlize ( i18n "programs.toc.pedagogy" ) }}">
   <div class="container">
     <div class="content">
       <h2>{{ i18n "programs.toc.pedagogy" }}</h2>
       <div>
         {{- if partial "GetTextFromHTML" .Params.content -}}
-          <h3>{{ i18n "programs._content" }}</h3>
-          {{- partial "PrepareHTML" .Params.content -}}
+          <section id="{{ urlize (i18n "programs.content") }}">
+            <h3>{{ i18n "programs.content" }}</h3>
+            {{- partial "PrepareHTML" .Params.content -}}
+          </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pedagogy -}}
-          <h3>{{ i18n "programs._pedagogy" }}</h3>
-          {{- partial "PrepareHTML" .Params.pedagogy -}}
+          <section id="{{ urlize (i18n "programs.pedagogy") }}">
+            <h3>{{ i18n "programs.pedagogy" }}</h3>
+            {{- partial "PrepareHTML" .Params.pedagogy -}}
+          </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.evaluation -}}
-          <h3>{{ i18n "programs._evaluation" }}</h3>
-          {{- partial "PrepareHTML" .Params.evaluation -}}
+          <section id="{{ urlize (i18n "programs.evaluation") }}">
+            <h3>{{ i18n "programs.evaluation" }}</h3>
+            {{- partial "PrepareHTML" .Params.evaluation -}}
+          </section>
         {{- end -}}
 
         {{- if .Params.teachers -}}
-          {{ $title := i18n "programs._teachers" -}}
-          <h3>{{ $title }}</h3>
-          {{- partial "programs/teachers.html"
-                        (dict
-                          "title" $title
-                          "teachers" .Params.teachers
-                          "descriptions" .Params.teachers_description
-                        ) -}}
+          {{ $title := i18n "programs.teachers" -}}
+          <section id="{{ urlize $title }}">
+            <h3>{{ $title }}</h3>
+            {{- partial "programs/teachers.html"
+                          (dict
+                            "title" $title
+                            "teachers" .Params.teachers
+                            "descriptions" .Params.teachers_description
+                          ) -}}
+          </section>
         {{- end -}}
       </div>
     </div>

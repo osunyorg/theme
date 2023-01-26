@@ -1,4 +1,5 @@
 @mixin offcanvas-toc
+    --toc-transition-duration: 0.35s
     background: $toc-background-color
     position: fixed
     top: 0
@@ -8,11 +9,13 @@
     z-index: $zindex-toc
     width: calc(#{col-outside-container(4)} + #{$grid-gutter} * 2)
     transform: translateX(100%)
-    transition: 0.35s transform ease-in-out
-    @include media-breakpoint-down(md)
+    transition: var(--toc-transition-duration) transform ease-in-out
+    @include media-breakpoint-down(desktop)
         width: calc(100% - #{$grid-gutter})
     &.is-opened
         transform: translateX(0)
+    &[aria-hidden="true"]
+        display: none
     .toc-content
         display: flex
         flex-direction: column
@@ -20,12 +23,14 @@
     .toc-title
         border-bottom: 1px solid $color-border
         font-size: $toc-title-font-size
-        padding: $header-nav-padding-y
-        @include media-breakpoint-up(md)
-            padding: $header-nav-padding-y $grid-gutter
-        @include media-breakpoint-up(md)
-            font-size: $toc-title-font-size-md
-            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) $grid-gutter
+        padding: $spacing0 $spacing1
+        @include media-breakpoint-up(desktop)
+            font-size: $toc-title-font-size-desktop
+            padding: $header-nav-padding-y $grid-gutter calc(#{$header-nav-padding-y} + 1px)
+            padding: calc((var(--header-height)) / 2 - #{$body-size}) $grid-gutter
+            padding-top: 0
+            padding-bottom: 0
+            line-height: calc(var(--header-height) - 1px)
     .toc
         flex: 1
         display: flex
@@ -35,24 +40,28 @@
         > ol
             flex: 1
             padding: $spacing1
-            @include media-breakpoint-up(md)
+            @include media-breakpoint-up(desktop)
                 padding: $spacing1 $grid-gutter
             > li:first-child
                 margin-top: 0
     button
         @include button-reset
+        @include icon-block(close, after)
+            margin-right: -14px
+        align-items: center
+        border-top: 1px solid $color-border
         display: flex
         justify-content: space-between
-        align-items: center
-        padding: $header-nav-padding-y $spacing1
-        border-top: 1px solid $color-border
-        line-height: inherit
-        @include icon(close, after)
-        @include media-breakpoint-up(md)
+        padding: 0 $spacing1
+        line-height: $body-line-height
+        @include media-breakpoint-up(desktop)
             border-top: 0
-            padding: calc(#{$spacing0} * 0.5 + #{$header-nav-padding-y}) 0
             position: absolute
+            padding-right: 0
             top: 0
+            padding-top: 0
+            padding-bottom: 0
+            line-height: var(--header-height)
             right: $grid-gutter
             &::after
                 margin-left: $spacing0
@@ -60,27 +69,32 @@
 .toc-cta
     display: flex
     position: relative
-    @include media-breakpoint-up(md)
+    @include in-page-with-sidebar
+        display: none
+    @include media-breakpoint-up(desktop)
         @include container
+        background: $color-background
         justify-content: end
+        margin-bottom: $spacing3
+        position: sticky
         text-align: right
-        @include in-page-with-sidebar
-            display: none
+        top: calc(var(--header-height) * -1)
+        transition: top $toc-sticky-transition
+        z-index: $zindex-toc-cta
+        html:not(.is-scrolling-down) &
+            top: var(--header-height)
         body.offcanvas-toc &
             display: flex
-
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         border-top: 1px solid $color-border
         position: fixed
         bottom: 0
-        background: white
+        background: $toc-background-color
         left: 0
         width: 100%
-        padding: $spacing0
+        padding: 0 half($grid-gutter-sm)
         z-index: $zindex-toc-cta
-
     button
-        @include icon(toc, after)
         @include button-icon(toc)
         border: 0
         line-height: inherit
@@ -92,9 +106,9 @@
             text-overflow: ellipsis
             overflow: hidden
         &::after
-            font-size: px2rem(13)
             color: $toc-color
-        @include media-breakpoint-down(md)
+            margin-right: $icon-toc-margin-right
+        @include media-breakpoint-down(desktop)
             display: flex
             justify-content: space-between
             align-items: center
@@ -102,33 +116,33 @@
 
 .toc-container
     // in full width page or under md breakpoint (mobile)
-    
     @include in-page-without-sidebar
         @include offcanvas-toc
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         @include offcanvas-toc
 
     // Only desktop and in page with sidebar
-    @include media-breakpoint-up(md)
-        @include in-page-with-sidebar
-            @include container-margin-left
-            pointer-events: none
-            top: 0
-            left: 0
-            margin-top: 0
-            height: 100%
-            position: absolute
-            width: col-outside-container(4)
-            .toc-content
-                position: sticky
-                top: var(--header-height)
-                overflow-y: auto
-                max-height: calc(100vh - var(--header-height))
-                margin-bottom: $spacing1
-                padding-bottom: $spacing5
-                pointer-events: auto
-            button
-                display: none
+    @include in-page-with-sidebar
+        @include container-margin-left
+        pointer-events: none
+        top: 0
+        left: 0
+        margin-top: 0
+        height: 100%
+        position: absolute
+        width: col-outside-container(4)
+        .toc-content
+            overflow-y: auto
+            max-height: calc(100vh - var(--header-height))
+            padding-bottom: $spacing2
+            pointer-events: auto
+            @include sticky($spacing1)
+            html.is-scrolling-down &
+                max-height: calc(100vh - #{$spacing1})
+        .toc-title
+            color: $color-text-alt
+        button
+            display: none
 
     // Program tweak : use offcanvas
     // TODO : find a better way to cancel sidebar props
@@ -139,25 +153,26 @@
         left: auto
         .toc-content
             position: relative
-            top: 0
+            top: 0 !important
             max-height: none
             padding-bottom: 0
             margin-top: 0
             margin-bottom: 0
-
+            html.is-scrolling-down &
+                max-height: none
 
 .toc-title, .toc-cta, .toc-container button
-    font-family: $toc-font-family
+    font-family: $toc-title-font-family
     font-size: $toc-title-font-size
     color: $toc-color
-    @include media-breakpoint-up(md)
-        font-size: $toc-title-font-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $toc-title-font-size-desktop
 
 .toc
     font-family: $toc-font-family
     line-height: $toc-line-height
-    @include media-breakpoint-up(md)
-        font-size: $toc-font-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $toc-font-size-desktop
     ol
         @include list-reset
         align-items: flex-start
@@ -171,7 +186,7 @@
                 display: block
                 text-decoration-color: transparent
                 &:hover
-                    text-decoration: underline
+                    text-decoration-color: $toc-color
         .active
             color: $toc-active-color
             pointer-events: none
@@ -180,6 +195,4 @@
             li a
                 @include icon(list-hyphen)
                 &::before
-                    opacity: 0.3
-                    font-size: 6px
-                    margin-inline-end: 6px
+                    margin-right: 6px

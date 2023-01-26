@@ -4,7 +4,10 @@
     justify-content: center
     align-items: center
     display: flex
-    margin-top: $spacing-section-y
+    flex-wrap: wrap
+    margin-top: $spacing3
+    main.page-with-blocks &
+        padding-bottom: $spacing3
     li
         a
             color: inherit
@@ -22,20 +25,27 @@
                 background-color: $color-background-alt
         &:first-child
             a
-                @include icon(arrow-first, before, px2rem(10))
+                @include icon-block(arrow-first, before)
+                padding-left: 0
+                padding-right: 0
         &:nth-child(2)
             a
-                @include icon(arrow-left, before, px2rem(10))
+                @include icon-block(arrow-previous, before)
+                padding-left: 0
+                padding-right: 0
         &:nth-last-child(2)
             a
-                @include icon(arrow-right, before, px2rem(10))
+                @include icon-block(arrow-next, before)
+                padding-left: 0
+                padding-right: 0
         &:last-child
             a
-                @include icon(arrow-last, before, px2rem(10))
+                @include icon-block(arrow-last, before)
+                padding-left: 0
+                padding-right: 0
 
 .posts-navigation
     border-top: 1px solid $color-border
-    margin-top: $spacing3
     ul
         @include list-reset
         display: flex
@@ -45,8 +55,10 @@
         a
             @include small
             border: 0
-            &:not(:hover)
-                text-decoration-color: transparent
+            display: block
+            text-decoration: none
+            &:hover
+                color: $color-accent
             span
                 @include meta
                 text-decoration: none
@@ -54,20 +66,20 @@
                 margin-bottom: $spacing0
         .previous
             span
-                @include icon(arrow-left, before, px2rem(12))
+                @include icon(arrow-left, before)
                     margin-right: px2rem(5)
         .next
             text-align: right
             span
-                @include icon(arrow-right, after, px2rem(12))
+                @include icon(arrow-right, after)
                     margin-left: px2rem(5)
 
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         ul
             padding-top: $spacing1
-            .next:first-child
+            gap: $spacing1
 
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         ul
             flex-direction: column-reverse
             .previous,
@@ -84,9 +96,9 @@
                     display: block
                     padding: $spacing1 0
             .previous
-                @include icon(arrow-left, before, px2rem(12))
+                @include icon(arrow-left, before)
                     margin-right: $spacing0
             .next
                 justify-content: end
-                @include icon(arrow-right, after, px2rem(12))
+                @include icon(arrow-right, after)
                     margin-left: $spacing0

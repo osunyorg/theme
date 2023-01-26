@@ -1,0 +1,15 @@
+{{ $layout := site.Params.posts.index.layout | default "list" }}
+<div class="block-posts block-posts--{{- $layout -}}">
+  <div class="container">
+    <div class="block-content">
+      <div class="{{ $layout }}">
+        {{ range .posts }}
+          {{ partial "posts/post.html" (dict 
+            "post" .
+            "heading" "h3"
+            ) }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

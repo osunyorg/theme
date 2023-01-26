@@ -1,7 +1,7 @@
 .block-gallery
     @include in-page-without-sidebar
         .top
-            @include grid(2, md)
+            @include grid(2, desktop)
             align-items: baseline
     figure
         display: block
@@ -32,12 +32,12 @@
 
     &--grid
         .gallery
-            align-items: baseline
+            align-items: start
             @include in-page-with-sidebar
-                @include grid(3, md, half($grid-gutter), half($grid-gutter))
+                @include grid(3, desktop, half($grid-gutter), half($grid-gutter))
             @include in-page-without-sidebar
-                @include grid(4, md)
-            @include media-breakpoint-down(md)
+                @include grid(4, desktop)
+            @include media-breakpoint-down(desktop)
                 @include grid(2)
                 grid-gap: half($grid-gutter-sm) !important
             figure
@@ -48,6 +48,8 @@
         overflow: hidden
         padding-bottom: $grid-gutter
         padding-top: $grid-gutter
+        position: relative
+        z-index: 0
         @include in-page-without-sidebar
             background: $block-gallery-carousel-background
         .block-gallery + &,
@@ -56,11 +58,15 @@
         .container
             .top
                 padding-right: half($grid-gutter-sm)
-                @include media-breakpoint-up(md)
+                @include media-breakpoint-up(desktop)
                     padding-right: half($grid-gutter)
         .splide
             display: flex
             flex-direction: column
+            @include in-page-with-sidebar
+                &.is-moving
+                    .splide__slide.is-active
+                        opacity: 0.1
             &__track
                 overflow: visible
                 margin-right: half(-$grid-gutter-sm)
@@ -72,7 +78,7 @@
                             opacity: 0.6
                         &.is-active
                             opacity: 1
-                @include media-breakpoint-up(md)
+                @include media-breakpoint-up(desktop)
                     margin-right: half(-$grid-gutter)
             &__slide
                 flex-shrink: initial
@@ -81,7 +87,7 @@
                     padding-right: 20%
                     img
                         max-width: 100%
-            figure 
+            figure
                 margin-right: half($grid-gutter)
                 picture
                     img
@@ -90,7 +96,7 @@
                         width: auto
                         height: auto
                         max-width: calc(100vw - #{$grid-gutter-sm} * 2)
-                @include media-breakpoint-up(md)
+                @include media-breakpoint-up(desktop)
                     picture
                         img
                             height: 70vh
@@ -110,7 +116,7 @@
                 &--prev,
                 &--next
                     @include button-reset
-                    @include icon("arrow-left", before)
+                    @include icon(arrow-left, before)
                     height: 48px
                     padding: 0
                     position: static
@@ -118,8 +124,13 @@
                     svg
                         display: none
                 &--next
-                    @include icon("arrow-right", before)
+                    @include icon(arrow-right, before)
         @include in-page-without-sidebar
+            @include media-breakpoint-up(desktop)
+                .splide
+                    figure
+                        margin-left: $grid-gutter
+                        margin-right: half(-$grid-gutter)
             .splide
                 &__slide
                     &:first-child

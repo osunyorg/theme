@@ -2,33 +2,34 @@
     .top
         margin-bottom: 0
     ul
-        @include grid(3, md)
         @include list-reset
         @include in-page-with-sidebar
-            @include grid(2, md)
-    .top + ul
+            @include grid(2)
+        &.even-items
+            @include grid(2)
+            @include grid(4, desktop)
+        &.odd-items
+            @include grid(3, desktop)
+    .top:not(.hidden) + ul
         margin-top: $spacing2
-    @include media-breakpoint-down(md)
-        li + li
-            margin-top: $spacing2
     dl
         margin-bottom: 0
         margin-top: 0
         dt
             white-space: nowrap
-            font-family: $heading-font-family
+            font-family: $block-key_figures-number-font-family
             font-size: $block-key_figures-font-size
-            font-weight: $heading-font-weight
-            font-weight: bold
+            font-weight: $block-key_figures-unit-font-weight
             line-height: 1
             strong
                 display: inline-block
                 font-size: $block-key_figures-number-font-size
+                font-weight: $block-key_figures-number-font-weight
                 margin-inline-end: 0.1em
             @include media-breakpoint-up(md)
-                font-size: $block-key_figures-font-size-md
+                font-size: $block-key_figures-font-size-desktop
                 strong
-                    font-size: $block-key_figures-number-font-size-md
+                    font-size: $block-key_figures-number-font-size-desktop
             @include media-breakpoint-up(lg)
                 font-size: $block-key_figures-font-size-lg
                 strong

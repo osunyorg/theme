@@ -53,3 +53,9 @@
     {{ end }}
   {{ end }}
 {{ end }}
+{{ if not $identifier }}
+  {{ partial "blocks/templates/video/iframe.html" (dict
+    "url" $url
+    "title" $title
+    )}}
+{{ end }}

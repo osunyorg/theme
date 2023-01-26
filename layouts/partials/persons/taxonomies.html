@@ -1,15 +1,15 @@
-{{- if .Site.Taxonomies -}}
-  <ul class="taxonomies taxonomies-persons">
-    {{- range $name, $t := .Site.Taxonomies }}
-      {{- if and (ne $name "categories") (ne $name "diplomas") }}
-        {{- with $.Site.GetPage "taxonomyTerm" $name}}
-          {{- if .Pages }}
-            <li>
-              <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
-            </li>
-          {{ end -}}
+{{ $taxonomies := slice "administrators" "authors" "researchers" "teachers" }}
+{{ $has := .Params.has }}
+<ul class="taxonomies taxonomies-persons">
+  {{- range $taxonomies -}}
+    {{- if index $has ( printf "%s" . ) -}}
+      {{- with $.Site.GetPage "taxonomyTerm" . }}
+        {{- if .Pages }}
+          <li>
+            <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
+          </li>
         {{ end -}}
       {{ end -}}
     {{ end -}}
-  </ul>
-{{- end -}}
+  {{ end -}}
+</ul>

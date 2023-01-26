@@ -1,42 +1,30 @@
-<table class="post-infos">
-  <caption>{{ i18n "posts.informations" }}</caption>
-  <tbody>
-    {{ if .Params.Categories }}
-      <tr>
-        <th scope="row">
-          {{- if gt (len .Params.Categories) 1 -}}
-            {{ i18n "posts.categories" }}
-          {{- else -}}
-            {{ i18n "posts.category" }}
-          {{- end -}}
-        </th>
-        <td itemprop="articleSection" {{ if gt (len .Params.Categories) 1 }} class="multiple" {{ end }}>
-          {{ partial "posts/categories.html" . }}
-        </td>
-      </tr>
-    {{ end }}
-    <tr>
-      <th scope="row">{{ i18n "posts.date" }}</th>
-      <td>
-        <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
-      </td>
-    </tr>
-    {{ range .GetTerms "authors" }}
-      <tr>
-        <th scope="row">{{ i18n "posts.author" }}</th>
-        <td itemscope itemtype="https://schema.org/Person" itemprop="author">
-          <a href="{{ .Permalink }}" itemprop="url">
-            <span itemprop="name">{{ safeHTML .Params.person }}</span>
-          </a>
-        </td>
-      </tr>
-    {{ end }}
-    
-    <tr>
-      <th scope="row">{{ i18n "posts.share" }}</th>
-      <td>
-        {{ partial "commons/share.html" }}
-      </td>
-    </tr>
-  </tbody>
-</table>
+<ul class="post-infos">
+  {{ if .Params.Categories }}
+    <li>
+      <span>
+        {{- if gt (len .Params.Categories) 1 -}}
+          {{ i18n "posts.categories" }}
+        {{- else -}}
+          {{ i18n "posts.category" }}
+        {{- end -}}
+      </span>
+      {{ partial "posts/categories.html" . }}
+    </li>
+  {{ end }}
+  <li>
+    <span>{{ i18n "posts.date" }}</span>
+    <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
+  </li>
+  {{ range .GetTerms "authors" }}
+    <li>
+      <span>{{ i18n "posts.author" }}</span>
+      <a href="{{ .Permalink }}" itemprop="url">
+        <span itemprop="name">{{ safeHTML .Params.person }}
+      </a>
+    </li>
+  {{ end }}
+  <li>
+    <span>{{ i18n "posts.share" }}</span>
+    {{ partial "commons/share.html" }}
+  </li>
+</ul>

@@ -7,9 +7,9 @@ body
     font-size: $body-size
     font-variant-ligatures: common-ligatures
     text-rendering: optimizelegibility
-    line-height: $line-height-base
-    @include media-breakpoint-up(md)
-        font-size: $body-size-md
+    line-height: $body-line-height
+    @include media-breakpoint-up(desktop)
+        font-size: $body-size-desktop
 
 // Experimental, not implemented yet
 p, h1, h2, h3, h4, h5, h6, li, a, th, td, span
@@ -20,77 +20,76 @@ h1, h2, h3, h4, h5, h6
     margin-top: 0
     margin-bottom: 0
 
-@mixin heading
-    font-family: $heading-font-family
-
 @mixin h1
-    @include heading
+    font-family: $h1-font-family
     font-size: $h1-size
     font-weight: $h1-weight
     line-height: $h1-line-height
     text-transform: $h1-text-transform
-    @include media-breakpoint-up(md)
-        font-size: $h1-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $h1-size-desktop
 
 h1, .h1
     @include h1
 
 @mixin h2
-    @include heading
+    font-family: $h2-font-family
     font-size: $h2-size
     font-weight: $h2-weight
     line-height: $h2-line-height
     text-transform: $h2-text-transform
-    @include media-breakpoint-up(md)
-        font-size: $h2-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $h2-size-desktop
 
 h2, .h2
     @include h2
 
 @mixin h3
-    @include heading
+    font-family: $h3-font-family
     font-size: $h3-size
     font-weight: $h3-weight
     line-height: $h3-line-height
     text-transform: $h3-text-transform
-    @include media-breakpoint-up(md)
-        font-size: $h3-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $h3-size-desktop
 
 h3, .h3
     @include h3
 
 @mixin h4
-    @include heading
+    font-family: $h4-font-family
     font-size: $h4-size
     font-weight: $h4-weight
     line-height: $h4-line-height
     text-transform: $h4-text-transform
-    @include media-breakpoint-up(md)
-        font-size: $h4-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $h4-size-desktop
 
 h4, .h4
     @include h4
 
 @mixin h5
-    @include heading
+    font-family: $h5-font-family
     font-size: $h5-size
     font-weight: $h5-weight
     line-height: $h5-line-height
     text-transform: $h5-text-transform
-    @include media-breakpoint-up(md)
-        font-size: $h5-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $h5-size-desktop
+    a
+        text-decoration: none
 
 h5, .h5
     @include h5
 
 @mixin h6
-    @include heading
+    font-family: $h6-font-family
     font-size: $h6-size
     font-weight: $h6-weight
     line-height: $h6-line-height
     text-transform: $h6-text-transform
-    @include media-breakpoint-up(md)
-        font-size: $h6-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $h6-size-desktop
 
 h6, .h6
     @include h6
@@ -102,37 +101,36 @@ h2, .h2
         &:hover
             text-decoration-thickness: 1px
 
-@mixin lead
+@mixin lead($handle-sidebar: true)
     font-family: $lead-font-family
     font-size: $lead-size
     font-weight: $lead-weight
     line-height: $lead-line-height
-    @include media-breakpoint-up(md)
-        font-size: $lead-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $lead-size-desktop
+    @if $handle-sidebar
+        @include in-page-with-sidebar
+            font-family: $lead-sidebar-font-family
+            font-size: $lead-sidebar-size-desktop
+            font-weight: $lead-sidebar-weight
+            line-height: $lead-sidebar-line-height
 
 .lead
     @include lead
-    margin-top: 0
 
 .p,
 .li
     font-size: $body-size
-    @include media-breakpoint-up(md)
-        font-size: $body-size-md
-
-p
-    margin-top: 0
-    margin-bottom: 0
-    + p
-        margin-top: $spacing0
+    @include media-breakpoint-up(desktop)
+        font-size: $body-size-desktop
 
 @mixin meta
     font-family: $meta-font-family
     font-size: $meta-size
     font-weight: $meta-weight
     line-height: $meta-line-height
-    @include media-breakpoint-up(md)
-        font-size: $meta-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $meta-size-desktop
 
 .meta
     @include meta
@@ -142,8 +140,8 @@ p
     font-size: $signature-size
     font-weight: $signature-weight
     line-height: $signature-line-height
-    @include media-breakpoint-up(md)
-        font-size: $signature-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $signature-size-desktop
 
 .signature
     @include signature
@@ -153,26 +151,65 @@ p
     font-size: $small-size
     font-weight: $small-weight
     line-height: $small-line-height
-    @include media-breakpoint-up(md)
-        font-size: $small-size-md
+    @include media-breakpoint-up(desktop)
+        font-size: $small-size-desktop
 
 small, .small
     @include small
 
-[itemprop="articleBody"]
-    h1, h2, h3, h4, h5, h6
-        margin-block-start: 2em
+@mixin rich-text
+    word-break: break-word
+    h1, h2, h3, h4, h5, h6, p
+        margin-top: 2em
         &:first-child, meta + &
-            margin-block-start: 0
+            margin-top: 0
+
+.rich-text
+    @include rich-text
+
+@mixin inherit-text
+    font-family: inherit
+    font-weight: inherit
+    font-style: inherit
+    font-size: inherit
+    line-height: inherit
+
+[itemprop="articleBody"]
+    @include rich-text
 
 @mixin blockquote
     margin: 0
+    font-family: $quote-font-family
+    font-size: $quote-size
+    font-weight: $quote-weight
+    font-style: $quote-style
+    line-height: $quote-line-height
+    @include media-breakpoint-up(desktop)
+        font-size: $quote-size-desktop-long
     cite
         font-size: px2rem(18)
         font-style: normal
 
 blockquote, .blockquote
     @include blockquote
+    font-style: italic
+
+p
+    margin-top: 0
+    margin-bottom: 0
+    + p
+        margin-top: $spacing0
+
+p:empty
+    display: none
+
+p + ul,
+p + ol
+    margin-top: 0
+
+figcaption
+    a
+        color: inherit
 
 address
     font-style: normal
@@ -182,7 +219,7 @@ a,
     @include link
     overflow-wrap: break-word
     &[target="_blank"]:not(.icon)
-        @include icon("link-blank", "after", px2rem(10), true)
+        @include icon(link-blank, after, true)
     &[href^="mailto"]
         &::after
             content: none
@@ -193,9 +230,9 @@ a,
     text-decoration: none
     display: inline-block
     border-radius: $btn-border-radius
-    @include media-breakpoint-up(md)
-        font-size: $btn-font-size-md
-        padding: $btn-padding-y-md $btn-padding-x-md
+    @include media-breakpoint-up(desktop)
+        font-size: $btn-font-size-desktop
+        padding: $btn-padding-y-desktop $btn-padding-x-desktop
 
 .btn
     @include btn
@@ -220,6 +257,11 @@ abbr, abbr[title]
     color: $color-background
     text-shadow: none
 
+sub,
+sup
+    font-size: 60%
+    margin-left: px2rem(2)
+
 *:focus-visible
     outline-color: gray
     outline-offset: 5px
@@ -236,11 +278,13 @@ abbr, abbr[title]
     font-family: 'Icon'
     font-style: normal
     font-weight: 400
-    src: url('../fonts/icons/icomoon.woff') format("woff")
+    src: url('../fonts/fonticons/IconFont.woff') format("woff")
 
 @each $name, $glyph in $icons
     .icon-#{$name}
         @include icon($name, before)
+    .icon-block-#{$name}
+        @include icon-block($name, before)
     .btn-#{$name}
         @include icon($name)
         &::before

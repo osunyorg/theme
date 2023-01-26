@@ -1,15 +1,30 @@
 {{ define "main" }}
   {{ partial "organizations/hero.html" . }}
 
-  <div class="document-content container">
-    <div class="content">
-      <div>
-        {{ partial "organizations/logo.html" . }}
+  <div class="document-content" itemscope itemtype="https://schema.org/Organization">
+
+    {{ partial "toc/container.html" (dict
+          "toc" "toc/default.html"
+          "context" .
+        ) }}
+
+    <div class="container">
+      <div itemprop="articleBody" class="rich-text">
+        {{ partial "pages/summary.html" (dict
+          "context" .
+        ) }}
+
+        {{ if (partial "GetTextFromHTML" .Content) }}
+          {{ partial "PrepareHTML" (
+              partial "H2AddId" .Content
+            ) }}
+        {{ end }}
+        
+        {{ partial "organizations/contact-details.html" . }}
+
       </div>
-      <div>
-        {{ partial "organizations/content.html" . }}
-        {{ partial "organizations/contacts.html" . }}
-      </div>
+      {{ partial "organizations/logo.html" . }}
     </div>
+    {{ partial "blocks/list.html" . }}
   </div>
 {{ end }}

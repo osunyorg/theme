@@ -2,67 +2,82 @@
     @include article($post-media-background)
     time
         color: $post-time-color
+    .post-categories
+        @include meta
+        margin-top: $spacing0
+        margin-bottom: $spacing0
+        position: relative
+        display: flex
+        flex-wrap: wrap
+        gap: 0 $spacing0
+        z-index: 2
+        a
+            @include link($color-accent)
+        li
+            margin: 0
 
 .posts__section,
 .authors__term,
-.categories__term
-    @if $posts-layout-list
-        .posts 
-            @include grid(1)
-            grid-gap: 0
-            article
-                border-bottom: 1px solid $color-border
+.categories__term,
+.persons__page
+
+    .posts--list
+        article
+            border-bottom: 1px solid $color-border
+            display: flex
+            margin-bottom: $spacing1
+            padding-bottom: $spacing1
+            flex-direction: row
+            h2 + p, h3 + p
+                margin-top: $spacing0
+            @include media-breakpoint-up(desktop)
+                @include grid
                 margin-bottom: $spacing3
                 padding-bottom: $spacing3
-                display: flex
-                flex-direction: row
-                @include media-breakpoint-up(md)
-                    @include grid
+            div:not(.media)
+                grid-column: 4/13
+                @include media-breakpoint-down(desktop)
+                    flex: 1
+                    margin-left: $spacing0
+                p:not(.title)
+                    @include media-breakpoint-down(desktop)
+                        display: none
+            .media
+                background: none
+                margin: 0
+                @include media-breakpoint-down(desktop)
+                    width: 33.33333%
+                @include media-breakpoint-up(desktop)
+                    grid-column: 1/4
+                &, img
+                    aspect-ratio: auto
+            @include media-breakpoint-up(desktop)
+                time 
+                    font-size: $h5-size
+                    position: absolute
+                    right: 0
+                    top: 0
                 div:not(.media)
-                    grid-column: 4/13
-                    @include media-breakpoint-down(md)
-                        flex: 1
-                        margin-left: $spacing0
-                    p:not(.title)
-                        @include media-breakpoint-down(md)
-                            display: none
-                .media
-                    background: none
-                    margin: 0
-                    @include media-breakpoint-down(md)
-                        width: 33.33333%
-                    @include media-breakpoint-up(md)
-                        grid-column: 1/4
-                @include media-breakpoint-up(md)
-                    time 
-                        font-size: $h5-size
-                        position: absolute
-                        right: 0
-                        top: 0
-                    div:not(.media)
-                        h1,
-                        p,
-                        a
-                            max-width: col(6, 9)
-
-    @else 
-        .posts
-            @include grid(1)
-            @include grid(2, md)
-            @include grid(3, xl)
+                    h2, h3,
+                    p
+                        max-width: col(6, 9)
+    .posts--grid
+        @include grid(1)
+        @include grid(2, desktop)
+        @include grid($posts-grid-columns, xxl)
 
 .posts__page
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         .document-content
             display: flex
             flex-direction: column
             aside
                 order: 2
                 padding: 0 half($grid-gutter-sm)
-            .blocks-pagination
+            .block-pagination
                 order: 3
-    @include media-breakpoint-up(md)
-        aside
+    @include media-breakpoint-up(desktop)
+        .post-sidebar
             @include container-margin-left
             margin-top: 0
             top: 0
@@ -70,12 +85,21 @@
             height: 100%
             position: absolute
             width: col-outside-container(4)
-            .post-infos
+            > div
                 @include sticky($spacing1)
+            .toc-container
+                border-top: 1px solid $color-border
+                padding-top: $spacing1
+                position: static
+                margin-left: 0
+        // Safe spacing if post is empty
+        .document-content
+            min-height: 350px
+    .lead
+        @include h3
 
 .post-categories
     @include list-reset
-    @include small
     margin: 0
     li
         display: inline-block
@@ -87,49 +111,46 @@
 
 .post-infos
     margin-bottom: 0
-    &, li
-        @include small
-    ul
-        @include list-reset
-    caption
-        @include visually-hidden
-        position: relative !important // Fix safari iOS border issue
-    th
-        @include h4
-        padding-left: 0
-        white-space: nowrap
-        vertical-align: top
-    tr
+    @include meta
+    @include list-reset
+    font-size: $table-body-size
+    @include media-breakpoint-up(desktop)
+        font-size: $table-body-size-desktop
+    > li
         @include meta
+        display: flex
+        justify-content: space-between
+        padding-top: $spacing0
+        padding-bottom: $spacing0
         border-color: $color-border
-        a
-            color: $color-accent
-            &:not(:hover)
-                text-decoration-color: transparent
-    th, td
         padding: 1rem 0
-    .multiple
+        &:not(:first-child)
+            align-items: center
 
-    td:last-of-type
-        padding-right: 0
-        text-align: right
-    tr:first-of-type
-        border-top: 0
-        th, td
-            padding-top: 0
-    tr:last-of-type
-        border-bottom: 0
+            border-top: 1px solid $color-border
+        > span
+            @include meta
+            color: $color-text-alt
+            padding-left: 0
+            white-space: nowrap
+            vertical-align: top
+        > ul
+            text-align: right
+            flex: 1
+    a
+        // @include meta
+        @include link($color-accent)
     .share
         justify-content: flex-end
         a
             color: inherit
-        li:last-child
+        li:last-child a
             margin-right: -$spacing0
 
 .related
     margin-top: $spacing1
     .posts
-        @include grid(2, md)
+        @include grid(2, desktop)
         margin-bottom: 0
     .link
         @extend .link-more

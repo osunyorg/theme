@@ -1,4 +1,4 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- $layout := .block.data.layout | default "vertical" -}}
@@ -8,7 +8,7 @@
     {{ partial $template (dict 
         "title" $title
         "block" .block
-        "context" $context
+        "template" $template
       ) }}
   </div>
 </section>

@@ -1,21 +1,31 @@
 .organization
     @include article
     position: relative
-    h1
+    h2, h3
         @include meta
         a
             @include stretched-link
             text-decoration: none
+            display: block
     .media
         background: $color-background-alt
-        aspect-ratio: 1/1
         padding: $spacing1
         margin-bottom: half($spacing0)
+        picture
+            aspect-ratio: 1
+            display: block
         img
             width: 100%
             height: 100%
             object-fit: contain
             object-position: center
+        &:empty
+            position: relative
+            &::after
+                content: ''
+                display: block
+                padding-bottom: 100%
+
 
 .organizations
     max-width: 100%
@@ -27,7 +37,7 @@
         @include grid(3, md)
         @include grid(3, lg)
         @include grid(3, xl)
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         grid-column-gap: $spacing1 !important
 
 .organizations__section
@@ -35,14 +45,48 @@
         margin-top: $spacing2
 
 .organizations__page
-    .content
-        margin-top: $spacing2
-        @include grid(2, md)
-    .media
-        max-width: 200px
-    .contacts-list
-        padding-left: 0
-        li
-            list-style-type: none
-            span
+    .lead
+        font-family: $lead-sidebar-font-family
+        font-weight: $lead-sidebar-weight
+        line-height: $lead-sidebar-line-height
+        margin-bottom: $spacing1
+        @include media-breakpoint-up(desktop)
+            font-size: $lead-sidebar-size-desktop
+    .document-content
+        .logo
+            figcaption
+                text-align: right
+                @include meta
+                margin-bottom: $spacing0
+            picture
+                aspect-ratio: 1/1
+                background: $color-background-alt
                 display: block
+                padding: $spacing2
+                margin-bottom: half($spacing0)
+                width: auto
+            img
+                width: 100%
+                height: 100%
+                object-fit: contain
+                object-position: center
+        .blocks
+            margin-top: $spacing3
+        .contacts-details
+            @include grid(2, md)
+    @include media-breakpoint-down(md)
+        .document-content
+            .logo
+                margin-top: $spacing3
+                display: flex
+                justify-content: space-between
+    @include media-breakpoint-up(md)
+        .document-content
+            > .container
+                display: flex
+                justify-content: space-between
+                gap: $grid-gutter
+            [itemprop="articleBody"]
+                width: col(8)
+            .logo
+                width: col(3)

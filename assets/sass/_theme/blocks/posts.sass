@@ -2,13 +2,13 @@
     .top
         margin-bottom: $spacing2
         a
-            @include icon("arrow-right", "after", px2rem(16), true)
+            @include icon(arrow-right, after, true)
             text-decoration: none
     .posts
         @include grid(1)
-        @include grid(3, md)
+        @include grid($block-posts-grid-columns, desktop)
     article
-        h1
+        h3
             a
                 @include stretched-link
                 text-decoration: none
@@ -18,16 +18,16 @@
             .media
                 margin-top: 0
     &--grid
-        @include media-breakpoint-down(md)
+        @include media-breakpoint-down(desktop)
             article + article
                 margin-top: $spacing3
-        @include media-breakpoint-up(md)
-            @include in-page-with-sidebar
-                .grid
-                    @include grid(2, md, $grid-gutter, half($grid-gutter))
+        @include in-page-with-sidebar
+            .grid
+                @include grid(2, desktop, $grid-gutter, half($grid-gutter))
+        @include media-breakpoint-up(desktop)
             @include in-page-without-sidebar
                 .grid
-                    @include grid(3)
+                    @include grid($block-posts-grid-columns)
     &--list
         article
             border-bottom: 1px solid $color-border
@@ -36,16 +36,19 @@
                 margin: 0
                 &, img
                     aspect-ratio: auto
-        @include media-breakpoint-down(md)
+        @include media-breakpoint-down(desktop)
             article
                 position: relative
                 padding-bottom: half($spacing3)
+                // display: flex
+                // flex-direction: row
                 + article
                     margin-top: half($spacing3)
                 .post-content
                     display: flex
                     flex-direction: column
-                    h1
+                    // width: 70%
+                    h3
                         margin-bottom: 0
                     time
                         margin-top: half($spacing0)
@@ -53,28 +56,25 @@
                     p
                         margin-top: half($spacing0)
                         order: 4
-                    h1, time
-                        padding-right: calc(30% + #{$spacing1})
                 .media
+                    display: none
                     order: 3
-                    position: absolute
-                    width: 30%
-                    top: 0
-                    right: 0
-        @include media-breakpoint-up(md)
+
+        @include in-page-with-sidebar
+            article
+                padding-bottom: $spacing1
+                + article
+                    margin-top: $spacing1
+                .media
+                    width: calc(#{col(2, 8)} + #{half($grid-gutter)})
+                .post-content
+                    width: col(6, 8)
+                    margin-left: half($grid-gutter)
+
+        @include media-breakpoint-up(desktop)
             article
                 display: flex
                 flex-direction: row
-            @include in-page-with-sidebar
-                article
-                    padding-bottom: $spacing1
-                    + article
-                        margin-top: $spacing1
-                    .media
-                        width: calc(#{col(2, 8)} + #{half($grid-gutter)})
-                    .post-content
-                        width: col(6, 8)
-                        margin-left: half($grid-gutter)
 
             @include in-page-without-sidebar
                  article
@@ -95,18 +95,15 @@
                         margin-top: 0.3em
     &--highlight
         .highlight-post
-            h1
+            h3
                 margin-bottom: $spacing0
             .media
                 margin-bottom: $spacing0
                 background: none
-                &, img
-                    aspect-ratio: auto
         .list
             margin-top: half($spacing3)
             border-top: 1px solid $color-border
             article
-                @include article
                 border-bottom: 1px solid $color-border
                 position: relative
                 padding-bottom: half($spacing3)
@@ -117,41 +114,45 @@
             .media
                 margin-top: 0
 
-        @include media-breakpoint-down(md)
+        @include in-page-with-sidebar
+            .highlight-post
+                .post
+                    flex-direction: row
+                    .media
+                        width: calc(#{col(3, 8)} + #{half($grid-gutter)})
+                        margin-bottom: 0
+                    .post-content
+                        width: col(5, 8)
+                        margin-left: half($grid-gutter)
+            .list
+                article
+                    @include grid(8, desktop, 0, 0)
+                    h3
+                        grid-column: 1 / 7
+                    .post-categories
+                        grid-column: 1 / 7
+                    time
+                        grid-row: 1
+                        grid-column: 7 / 9
+                        text-align: right
+                        order: 2
+                        margin-top: 0
+                    p
+                        grid-column: 1 / 7
+                        order: 3
+        
+        @include media-breakpoint-down(desktop)
             .list
                 border-top: 1px solid $color-border
-        @include media-breakpoint-up(md)
+
+        @include media-breakpoint-up(desktop)
             .highlight
-                h1
+                h3
                     @include h2
             .list
                 article
-                    h1
+                    h3
                         @include h4
-            @include in-page-with-sidebar
-                .highlight-post
-                    .post
-                        flex-direction: row
-                        .media
-                            width: calc(#{col(3, 8)} + #{half($grid-gutter)})
-                            margin-bottom: 0
-                        .post-content
-                            width: col(5, 8)
-                            margin-left: half($grid-gutter)
-                .list
-                    article
-                        @include grid(8, md, 0, 0)
-                        h1
-                            grid-column: 1 / 7
-                        time
-                            grid-column: 7 / 9
-                            text-align: right
-                            order: 2
-                            margin-top: 0
-                        p
-                            grid-column: 1 / 7
-                            order: 3
-
             @include in-page-without-sidebar
                 .highlight
                     @include grid(2)
@@ -160,4 +161,3 @@
                     margin-top: 0
                     article:first-child
                         margin-top: 0
-            

@@ -1,28 +1,29 @@
 {{ define "main" }}
   {{ partial "pages/hero.html" . }}
+  {{ partial "hooks/after-page-hero.html" . }}
 
   <div class="document-content">
     {{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}
-    {{- if .Params.blocks }}
-      {{ $need_aside := false }}
-      {{ range .Params.blocks }}
-        {{ if .title }}
-          {{ $need_aside = true }}
-        {{ end }}
-      {{ end }}
-      {{ partial "toc/container.html"
-          (dict
-              "category" $category
-              "toc" "pages/toc.html"
-              "context" .
-          )
-      }}
-      {{ partial "hooks/after-page-hero.html" . }}
+    {{ partial "toc/container.html"
+        (dict
+            "category" $category
+            "toc" "pages/toc.html"
+            "context" .
+        )
+    }}
+
+    {{ partial "pages/summary.html" (dict
+        "context" .
+        "block_wrapped" true
+      ) }}
+
+    {{ if .Params.blocks }}
       {{ partial "blocks/list.html" . }}
     {{ else }}
       <section class="block block-pages block-pages--grid">
         <div class="container">
           <div class="block-content">
+            {{- partial "blocks/default_title.html" "pages" -}}
             {{- partial "blocks/templates/pages/grid.html" (dict 
                 "pages" .Params.children
                 "show_images" true

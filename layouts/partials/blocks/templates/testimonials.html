@@ -1,4 +1,4 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- $is_carousel := false -}}
@@ -7,16 +7,13 @@
   {{ if gt (len .testimonials) 1 }}
     {{- $is_carousel = true -}}
   {{ end }}
-  <section class="block block-testimonials{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+  <section class="block block-testimonials{{ if $title }} block-with-title{{ end }}{{ if $is_carousel}} with-carousel{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
-        {{ if $title -}}
-          <div class="top">
-            {{ partial "blocks/title" (dict 
-              "title" $title
-              "context" $context
-              ) }}
-          </div>
+        {{- if not $title -}}
+          {{ partial "blocks/default_title.html" $template }}
+        {{ else }}
+          <h2 class="hidden">{{ partial "PrepareHTML" $title }}</h2>
         {{ end -}}
 
         <div class="testimonials">
@@ -51,9 +48,7 @@
                           (dict
                             "image"    .photo
                             "alt"      .author
-                            "mobile"   "192x192"
-                            "tablet"   "192x192"
-                            "desktop"  "192x192"
+                            "sizes"    site.Params.image_sizes.blocks.testimonials
                           ) -}}
                   </div>
                 {{- end }}
@@ -62,9 +57,6 @@
                     {{- if .author -}}
                       <span class="signature">{{ partial "PrepareHTML" .author }}</span>
                     {{- end }}
-                    {{- if and .author .job -}}
-                      <br>
-                    {{- end -}}
                     {{- if .job -}}
                       <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
                     {{- end }}

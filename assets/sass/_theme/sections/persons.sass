@@ -1,39 +1,72 @@
+.persons__page
+    ol.programs
+        li
+            justify-content: flex-start
+            @include media-breakpoint-up(desktop)
+                @include grid(2)
+            @include icon(arrow-right, after, true)
+                color: inherit
+                position: absolute
+                right: 0
+                top: $spacing1
+                transform: translateY(half($spacing0))
+                @include media-breakpoint-up(desktop)
+                    transform: translateY(half($spacing1))
+            a
+                color: inherit
+                @include stretched-link(before)
+                @include media-breakpoint-down(desktop)
+                    margin-right: $spacing1
+            p
+                margin-top: unset
+                &:nth-child(2)
+                    @include small
+            &:hover
+                color: $color-accent
+
 .person
     @include article
-
+    word-break: break-word
     .avatar
-        margin-bottom: $spacing1
+        align-self: start
+        flex-shrink: 0
         order: -1
-        width: px2rem(76)
+        margin-bottom: $spacing1
 
     .name
-        margin-bottom: px2rem(5)
-        // & ~ p
-            // @include small
-
+        @include h4
+        a
+            @include stretched-link
+            text-decoration: none
+        + p
+            margin-top: half($spacing0)
+    .description
+        @include small
     @include media-breakpoint-down(md)
-        display: block
-        &::after
-            content: ''
-            clear: both
-            display: table
-        > div:first-of-type
-            float: left
-            max-width: calc(100% - 6rem)
+        flex-direction: row
+        justify-content: space-between
         .avatar
-            float: right
+            align-self: start
+            flex-shrink: 0
+            order: 2
+            margin-left: $spacing0
             margin-bottom: 0
-
+            width: 100px
+    @include media-breakpoint-up(desktop)
+        @include in-page-without-sidebar
+            text-align: center
+            .avatar
+                width: 100%
 
 section.persons,
 div.persons
     @include grid(1)
     @include grid(2, md)
     @include grid(3, lg)
-    @include grid(4, xl)
-    @include grid(5, xxl)
+    @include grid(5, xl)
+    @include grid(6, xxl)
 
-ol.persons
+ol.persons--list
     @include list-reset
     > li
         border-bottom: 1px solid $color-border
@@ -53,41 +86,37 @@ ol.persons
         [itemprop="jobTitle"]
             @include small
             margin-top: 0
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             align-items: baseline
             display: flex
             [itemprop="name"]
                 width: col(5)
             [itemprop="jobTitle"]
-                width: col(7)
+                width: col(6)
                 margin-left: $grid-gutter
-        @include media-breakpoint-down(md)
+        @include media-breakpoint-down(desktop)
             &::after
                 position: absolute
                 right: 0
                 top: calc(#{$spacing1} + 10px)
-            
-                
+
 .avatar
-    @include aspect-ratio(50, 'img')
+    // @include aspect-ratio(50, 'img')
     background-color: $persons-avatar-background-color
     border-radius: 50%
-    margin-bottom: $spacing2
+    // margin-bottom: $spacing2
     overflow: hidden
     position: relative
-    width: 100%
+    // width: 100%
     &::before
         content: ""
         display: block
         padding-top: 100%
-
-    picture,
-    img
+    picture, img
         @include inset(0)
         height: 100%
         width: 100%
         position: absolute
-
     img
         object-fit: cover
 
@@ -95,11 +124,11 @@ ol.persons
 .taxonomies-persons
     @include list-reset
     li
-        @include media-breakpoint-down(md)
+        @include media-breakpoint-down(desktop)
             margin-bottom: $spacing1
             a
                 display: block
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             display: inline-block
             margin-right: $spacing2
     a
@@ -109,17 +138,18 @@ ol.persons
         @include icon(arrow, after)
             margin-left: $spacing1
 
-
 .lead + .taxonomies-persons
     margin-top: $spacing-section-y
 
 .persons__section
     * + .persons
         margin-top: $spacing-section-y
+    .persons:last-child
+        padding-bottom: $spacing3
 
 .persons__page
     .hero
-        @include media-breakpoint-down(md)
+        @include media-breakpoint-down(desktop)
             padding-bottom: 0
             margin-bottom: $spacing4
             .avatar
@@ -128,7 +158,7 @@ ol.persons
                 margin-left: auto
                 transform: translateY(100px)
                 margin-top: calc(#{$spacing1} - 100px)
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             .content
                 align-items: center
                 display: flex
@@ -140,20 +170,29 @@ ol.persons
                 .avatar
                     margin-bottom: 0
                     width: col(3)
-
-@include media-breakpoint-up(lg)
-    .persons__page
+    .roles
+        a
+            @include small
+    .blocks
+        margin-top: $spacing3
+    .person-programs
+        margin-top: $spacing4
+    @include media-breakpoint-down(lg)
+        .roles
+            margin-top: $spacing2
+    @include media-breakpoint-up(lg)
         .informations
             @include grid
             margin-bottom: $spacing2
-            > div
-                &:first-of-type
-                    grid-column: 1 / 9
-                &:nth-of-type(2)
-                    grid-column: 9 / 13
-
+            > div:first-of-type
+                grid-column: 1 / 9
+            .roles
+                grid-column: 9 / 13
+                text-align: right
             .lead + div
                 margin-top: $spacing2
-
-        .posts 
-            @include grid(3)
+    .contacts-details ul
+        @include grid(2, md, 0)
+        li
+            margin-top: 0
+            margin-bottom: $spacing1

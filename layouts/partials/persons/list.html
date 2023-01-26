@@ -1,7 +1,13 @@
-<ol class="persons">
-  {{ $persons := .Pages.ByParam "last_name" }}
-  {{ range (.Paginate $persons).Pages }}
-    {{ partial "persons/list-item" . }}
-  {{ end }}
-</ol>
-{{ partial "commons/pagination.html" . }}
+{{ if eq site.Params.persons.index.layout "list" }}
+  <ol class="persons persons--list">
+    {{ range .persons }}
+      {{ partial "persons/list-item" . }}
+    {{ end }}
+  </ol>
+{{ else if eq site.Params.persons.index.layout "grid" }}
+  <div class="persons">
+    {{ range .persons }}
+      {{ partial "persons/person" . }}
+    {{ end }}
+  </div>
+{{ end }}

@@ -1,47 +1,60 @@
-<section id="presentation">
+<section id="{{ urlize (i18n "programs.toc.presentation") }}">
     <div class="container">
       <div class="content">
         <h2>{{ i18n "programs.toc.presentation" }}</h2>
 
         <div>
           {{- partial "programs/image.html" .Params.image -}}
-          {{- if partial "GetTextFromHTML" .Params.objectives -}}
-            {{- partial "PrepareHTML" .Params.objectives -}}
+
+          {{- if partial "GetTextFromHTML" .Params.presentation -}}
+            <section id="{{ urlize (i18n "programs.presentation") }}">
+              <h3>{{ i18n "programs.presentation" }}</h3>
+              <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
+            </section>
           {{- end -}}
 
-          <h3>{{ i18n "programs._administrative_information" }}</h3>
-          <table class="post-infos">
-            <caption>{{ i18n "programs._administrative_information" }}</caption>
-            <tbody>
-              {{- with .Params.diplomas -}}
-                {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
-                {{- with $diploma.Params.ects -}}
-                  <tr>
-                    <th>{{ i18n "programs.ects_credits" }}</th>
-                    <td>{{ partial "PrepareHTML" . }}</td>
-                  </tr>
+          {{- if partial "GetTextFromHTML" .Params.objectives -}}
+            <section id="{{ urlize (i18n "programs.objectives") }}">
+              <h3>{{ i18n "programs.objectives" }}</h3>
+              {{- partial "PrepareHTML" .Params.objectives -}}
+            </section>
+          {{- end -}}
+
+          <section id="{{ urlize (i18n "programs.administrative_information") }}">
+            <h3>{{ i18n "programs.administrative_information" }}</h3>
+            <table class="program-table">
+              <caption>{{ i18n "programs.administrative_information" }}</caption>
+              <tbody>
+                {{- with .Params.diplomas -}}
+                  {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
+                  {{- with $diploma.Params.ects -}}
+                    <tr>
+                      <th scope="row">{{ i18n "programs.ects_credits" }}</th>
+                      <td>{{ partial "PrepareHTML" . }}</td>
+                    </tr>
+                  {{- end -}}
                 {{- end -}}
-              {{- end -}}
-              <tr>
-                <th>{{ i18n "programs.type.initial" }}</th>
-                <td>{{ if .Params.initial }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
-              </tr>
-              <tr>
-                <th>{{ i18n "programs.type.continuing" }}</th>
-                <td>{{ if .Params.continuing }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
-              </tr>
-              <tr>
-                <th>{{ i18n "programs.type.apprenticeship" }}</th>
-                <td>{{ if .Params.apprenticeship }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
-              </tr>
-              {{- if partial "GetTextFromHTML" .Params.capacity -}}
-              <tr>
-                <th>{{ i18n "programs.capacity" }}</th>
-                <td>{{ partial "PrepareHTML" .Params.capacity }}</td>
-              </tr>
-              {{- end -}}
-            </tbody>
-          </table>
+                <tr>
+                  <th scope="row">{{ i18n "programs.type.initial" }}</th>
+                  <td>{{ if .Params.initial }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">{{ i18n "programs.type.continuing" }}</th>
+                  <td>{{ if .Params.continuing }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+                </tr>
+                <tr>
+                  <th scope="row">{{ i18n "programs.type.apprenticeship" }}</th>
+                  <td>{{ if .Params.apprenticeship }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+                </tr>
+                {{- if partial "GetTextFromHTML" .Params.capacity -}}
+                <tr>
+                  <th>{{ i18n "programs.capacity" }}</th>
+                  <td>{{ partial "PrepareHTML" .Params.capacity }}</td>
+                </tr>
+                {{- end -}}
+              </tbody>
+            </table>
+          </section>
 
         </div>
         {{- partial "blocks/list.html" . }}

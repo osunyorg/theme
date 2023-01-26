@@ -1,22 +1,20 @@
 <article class="person">
-  <div>
+  <div class="description">
     {{- $title := partial "PrepareHTML" .Title }}
     <p class="name"><a href="{{ .Permalink }}">{{- $title -}}</a></p>
-    {{- if partial "GetTextFromHTML" .Params.description_short }}
-      <p>{{- partial "PrepareHTML" .Params.description_short -}}</p>
+    {{- if partial "GetTextFromHTML" .Params.summary }}
+      <p>{{- partial "PrepareText" .Params.summary -}}</p>
     {{ else if (partial "GetTextFromHTML" .Content) }}
-      <p>{{- partial "GetTruncateContent"  .Content -}}</p>
+      <p>{{- partial "GetTruncateContent" ( dict "text" .Content ) -}}</p>
     {{ end -}}
   </div>
   <div class="avatar">
     {{- if .Params.image }}
       {{ partial "commons/image.html"
             (dict
-              "alt"    .Title
+              "alt"      .Title
               "image"    .Params.image
-              "mobile"   "76x76"
-              "tablet"   "76x76"
-              "desktop"  "76x76"
+              "sizes"    site.Params.image_sizes.sections.persons.item
             )}}
     {{ end -}}
   </div>

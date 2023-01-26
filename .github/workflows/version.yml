@@ -1,0 +1,30 @@
+name: Write version to file
+on:
+  release:
+    types: [published]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Release tag
+        run: |
+          echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
+          echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+
+      - name: Overwrite file
+        uses: "DamianReeves/write-file-action@master"
+        with:
+          path: ./static/osuny-theme-version
+          write-mode: overwrite
+          contents: ${{  github.ref_name }}
+
+      - name: Commit & Push
+        uses: Andro999b/push@v1.3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
+          force: true
+          message: 'Write version to file'

@@ -1,0 +1,17 @@
+{{ $id := . }}
+{{ if isset . "id" }}
+  {{ $id = .id }}
+{{ end }}
+{{ $lightbox_sizes := site.Params.image_sizes.design_system.lightbox.desktop }}
+{{ $image := partial "GetMedia" $id }}
+{{ $url := "" }}
+
+{{ if $image }}
+  {{- $url = $image.url -}}
+  {{- if site.Params.keycdn -}}
+    {{- $url = $image.direct_url -}}
+  {{- end -}}
+  {{ $url = partial "GetImageUrl" (dict "url" $url "size" $lightbox_sizes ) }}
+{{- end -}}
+
+{{ return $url }}

@@ -1,17 +1,14 @@
 {{ $slug := .slug }}
-<section>
+<section class="person-programs">
   <div class="top">
-    <h2>{{ i18n "persons.programs" }}</h2>
+    <h2 class="h5">{{ i18n "persons.programs" }}</h2>
   </div>
-  <table class="table-resume">
-    <caption>{{ i18n "persons.programs" }}</caption>
-    <tbody>
-      {{ range .programs }}
-      <tr>
-        <th>{{ safeHTML (index .Params.teachers_description $slug) }}</th>
-        <td><a href="{{ .Permalink }}" class="link link-more">{{ safeHTML .Title }}</a></td>
-      </tr>
-      {{ end }}
-    </tbody>
-  </table>
+  <ol class="programs" itemscope itemtype="https://schema.org/CreativeWork">
+    {{ range .programs }}
+      <li>
+        <p itemscope itemtype="https://schema.org/EducationalOccupationalProgram"><a href="{{ .Permalink }}" itemprop="name">{{ safeHTML .Title }}</a></p>
+        <p itemprop="educationalRole">{{ safeHTML (index .Params.teachers_description $slug) }}</p>
+      </li>
+    {{ end }}
+  </ul>
 </section>

@@ -13,8 +13,8 @@
     --grid-gutter: #{$grid-gutter}
     --grid-max-width: #{$grid-max-width}
     --header-height: #{$header-height}
-     @include media-breakpoint-up(md)
-        --header-height: #{$header-height-md}
+    @include media-breakpoint-up(desktop)
+        --header-height: #{$header-height-desktop}
 
 // TODO: choisir entre margin top / bottom --> https://matthewjamestaylor.com/css-margin-top-vs-bottom
 
@@ -30,34 +30,47 @@ body
 
 main
     &:not(.page-with-blocks)
-        padding-bottom: $spacing-section-y
+        padding-bottom: $spacing3
+
+iframe
+    border: none
+
+[id]
+    scroll-margin-top: var(--header-height)
 
 .container
     @include container
     .hero + &
         margin-top: $spacing3
 
-ul
-    padding-left: px2rem(15)
+.hidden
+    display: none
 
-.document-content, .blocks
-    margin-top: $spacing-section-y
-    > * + *
-        margin-top: $spacing-section-y
-    // > *
-    //     margin-top: $spacing3
-    //     padding-bottom: $spacing3
-    //     &:last-child
-    //         padding-bottom: $spacing4
-    // > *:not(:last-child)
-    //     padding-bottom: $spacing3
-    // > *:last-child
-    //     padding-bottom: $spacing4
-    // section
-    //     * + p
-    //         margin-bottom: 0 // TODO : vérifier les cas particuliers
-    //         margin-top: $spacing1
+ul,
+ol
+    // https://since1979.dev/aligning-your-lists-with-your-text/
+    padding-left: 0
+    list-style-position: inside
+    > li
+        > p
+            display: inline
 
+.document-content
+    .container > .lead
+        margin-bottom: $spacing3
+
+// .document-content
+//     margin-top: $spacing-section-y
+
+.document-content
+    position: relative
+    @include in-page-with-sidebar
+        .block
+            .block-content
+                @include media-breakpoint-up(desktop)
+                    padding-left: offset(4)
+    // > .container:last-of-type
+    //     margin-bottom: $spacing4
 
 details
     &:not([open]):hover
@@ -69,7 +82,7 @@ details
         padding-top: $spacing0
         position: relative
         cursor: pointer
-        @include icon(caret, after, px2rem(5))
+        @include icon(caret, after)
             margin-left: px2rem(10)
             line-height: px2rem(22)
             transition: transform 0.25s
@@ -79,10 +92,7 @@ details
             display: none
     &[open]
         summary
-            @include icon(caret-top, after, px2rem(5))
+            @include icon(caret-top, after)
         &:hover
             summary::after
                 transform: translateY(-5px)
-
-section
-    scroll-margin-top: var(--header-height)

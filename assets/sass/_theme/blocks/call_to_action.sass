@@ -1,4 +1,5 @@
 .block-call_to_action
+    --cta-background-color: #{$block-call-to-action-background}
     @include in-page-with-or-without-sidebar
         h2, h3
             @include h5
@@ -13,7 +14,7 @@
                 @include h2
         .actions
             [role="group"]
-                @include media-breakpoint-down(md)
+                @include media-breakpoint-down(desktop)
                     display: flex
                     flex-direction: column
             a
@@ -34,8 +35,10 @@
         * + .actions
             margin-top: calc(#{$spacing2} - #{$spacing1})
 
-    @include media-breakpoint-down(md)
-        background-color: $block-call-to-action-background
+    @include media-breakpoint-down(desktop)
+        background-color: var(--cta-background-color)
+        padding-top: 0
+        padding-bottom: 0
         .call_to_action
             padding: $spacing3 0
             .actions
@@ -53,34 +56,45 @@
                 margin-bottom: offset(1)
                 order: 1
 
-    @include media-breakpoint-up(md)
-        @include in-page-with-sidebar
-            .call_to_action
-                display: flex
-                flex-direction: column
-                margin-left: -$grid-gutter
-                margin-right: -$grid-gutter
-                > *
-                    order: 2
+    @include in-page-with-sidebar
+        .call_to_action
+            display: flex
+            flex-direction: column
+            > *
+                order: 2
+            > div
+                background-color: var(--cta-background-color)
+                padding: $grid-gutter
+                width: 100%
+                position: relative
+                &::after
+                    background-color: var(--cta-background-color)
+                    content: ''
+                    display: block
+                    position: absolute
+                    top: 0
+                    bottom: 0
+                    left: 100%
+                    width: Max(#{$grid-gutter}, calc(50vw - #{half($grid-max-width)} + #{$grid-gutter}))
+            &--with-image
+                picture
+                    order: 1
+                    padding-left: $grid-gutter
+                    padding-right: $grid-gutter
+                    position: relative
+                    z-index: 2
+                    img
+                        width: col(3, 6)
+                        margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
                 > div
-                    background-color: $block-call-to-action-background
-                    padding: $grid-gutter
-                    width: 100%
-                &--with-image
-                    picture
-                        order: 1
-                        padding-left: $grid-gutter
-                        padding-right: $grid-gutter
-                        position: relative
-                        img
-                            width: col(3, 7)
-                            margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
-                    > div
-                        padding-top: calc(#{$grid-gutter} + #{$spacing3})
-  
+                    padding-top: calc(#{$grid-gutter} + #{$spacing3})
+
+    @include media-breakpoint-up(desktop)
         @include in-page-without-sidebar
+            background-color: var(--cta-background-color)
+            padding-top: 0
+            padding-bottom: 0
             .block-content
-                background-color: $block-call-to-action-background
                 padding: $spacing4 $grid-gutter
                 margin-left: -$grid-gutter
                 margin-right: -$grid-gutter

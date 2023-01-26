@@ -9,13 +9,20 @@
             justify-content: space-between
             align-items: center
             transition: color 0.3s
+            @include browser-under-safari-16
+                position: relative
+                &::after
+                    display: block
+                    position: absolute
+                    right: 0
+                    bottom: 10px
             &:hover
-                color: $color-accent
+                color: $block-definition-color-hovered
         summary,
         p
             font-size: $block-definition-font-size
-            @include media-breakpoint-up(md)
-                font-size: $block-definition-font-size-md
+            @include media-breakpoint-up(desktop)
+                font-size: $block-definition-font-size-desktop
         p
             margin-block-start: 0
             margin-block-end: $spacing1
@@ -24,9 +31,11 @@
             border-bottom: 1px solid $block-definition-border-color
             display: block
             transition: border-color 0.5s
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         @include in-page-without-sidebar
             .definitions
-                @include grid(2, md)
-                grid-row-gap: 0 !important
+                details
+                    p
+                        padding-left: col(4)
+                        margin-left: $grid-gutter
 

@@ -6,35 +6,51 @@
     color: $hero-color
     min-height: $hero-height
     padding-bottom: $spacing3
-    padding-top: calc(2rem + var(--header-height))
+    padding-top: var(--header-height)
     position: relative
-    @include media-breakpoint-up(md)
-        min-height: $hero-height-md
+    margin-bottom: $spacing3
+    @include media-breakpoint-up(desktop)
+        min-height: $hero-height-desktop
     *:focus-visible
         outline-color: $hero-color
-    
-    nav + .content
-        margin-top: $spacing3
 
     .content
+        align-items: start
+        padding-top: $spacing3
+        > h1, > hgroup
+            margin-top: $spacing3
+            
+        h1 + p
+            margin-top: $spacing1
         figure
-            display: block
-            img, picture
+            position: relative
+            &, img, picture
                 display: block
-            figcaption
-                @include meta
-                color: $color-text-alt
-                margin-top: $spacing0
-                text-align: right
-                a
-                    color: inherit
+            img
+                width: 100%
+                height: auto
+            @include collapsed-figcaption
 
-    @include media-breakpoint-down(md)
+    .breadcrumb-nav + .content
+        padding-top: 0
+    .content + .breadcrumb-nav
+        margin-top: $spacing3
+
+    @include media-breakpoint-down(desktop)
+        .breadcrumb-nav
+            margin-left: half(-$grid-gutter-sm)
+            margin-right: half(-$grid-gutter-sm)
+            > ol
+                padding: 0 half($grid-gutter-sm)
         &--with-image
             padding-bottom: 0
+            .content
+                > h1, > hgroup
+                    margin-bottom: $spacing2
         &--image-landscape
             figure
-                margin: half($spacing3) half(-$grid-gutter-sm) 0
+                margin-left: half(-$grid-gutter-sm)
+                margin-right: half(-$grid-gutter-sm)
         &--image-portrait, &--image-square
             .container
                 display: flex
@@ -42,58 +58,30 @@
                 margin-bottom: $spacing5
             figure
                 margin-bottom: calc(#{-$spacing5} + #{$spacing2})
-                margin-top: $spacing1
-    @include media-breakpoint-up(md)
-        $negative-margin-bottom: px2rem(150)
+
+    @include media-breakpoint-up(desktop)
         .content
-            h1
+            > h1, > hgroup
                 width: col(9)
         &--with-image
-            margin-bottom: $negative-margin-bottom
             .content
                 display: flex
                 justify-content: space-between
-                h1
+                > h1, > hgroup
                     width: col(7)
                 figure
                     width: col(5)
-                    margin-bottom: -$negative-margin-bottom
-                    // If there's no credits
-                    picture:last-child
-                        margin-bottom: $spacing2
+
         &--image-portrait, &--image-square
+            .breadcrumb-nav
+                width: calc(#{col(9)} + #{half($grid-gutter)})
+                -webkit-mask-image: linear-gradient(to right, black 0%, black 90%, transparent 100%)
+                mask-image: linear-gradient(to right, black 0%, black 90%, transparent 100%)
+                .breadcrumb
+                    padding-right: 50px
             .content
-                h1
+                > h1, > hgroup
                     width: col(8)
                 figure
-                    margin-top: calc(-#{$spacing3} - #{$spacing2})
                     width: col(3)
 
-    // In what case ?
-    // p
-    //     margin-bottom: 0
-    // a
-    //     color: $hero-color
-    //     text-decoration-color: rgba($hero-color, 0.3)
-    //     &:hover
-    //         text-decoration-color: $hero-color
-            
-
-    // > div:first-of-type
-    //     > div
-    //         margin-top: $spacing1
-    //         @include media-breakpoint-up(xl)
-    //             margin-top: px2rem(70)
-
-    // > div + div
-    //     margin-top: auto
-    //     .container
-    //         padding-bottom: $spacing1
-    //         padding-top: $spacing1
-    //     & + .document-nav
-    //         margin-top: 0
-    // > div
-    //     position: relative
-    //     z-index: 1
-    // picture
-    //     position: relative

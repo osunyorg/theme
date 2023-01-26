@@ -1,11 +1,37 @@
 {{ define "main" }}
-  {{- partial "header/hero.html"
+  {{ partial "pages/hero.html" . }}
+  {{ partial "hooks/after-page-hero.html" . }}
+
+  <div class="document-content">
+    {{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}
+    {{ partial "toc/container.html"
         (dict
-          "title" .Title
-          "image" .Params.image
-          "context" .
-        ) -}}
-  <div class="document-content container">
-    {{ partial "PrepareHTML" .Content }}
+            "category" $category
+            "toc" "pages/toc.html"
+            "context" .
+        )
+    }}
+
+    {{ partial "pages/summary.html" (dict
+        "context" .
+        "block_wrapped" true
+      ) }}
+
+    {{ if .Params.blocks }}
+      {{ partial "blocks/list.html" . }}
+    {{ else }}
+      <section class="block block-pages block-pages--grid">
+        <div class="container">
+          <div class="block-content">
+            {{- partial "blocks/templates/pages/grid.html" (dict 
+                "pages" .Params.children
+                "show_images" true
+                "show_descriptions" true
+                ) }}
+          </div>
+        </div>
+      </section>
+    {{ end }}
   </div>
+
 {{ end }}

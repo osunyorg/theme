@@ -10,6 +10,7 @@
       {{- if .page -}}
         {{- $page = partial "GetPageByUrl" .page -}}
       {{- else if .slug -}}
+        {{/*  LEGACY  */}}
         {{- $page = partial "GetPageByUrl" .slug -}}
       {{ end }}
     {{ else }}
@@ -18,13 +19,20 @@
 
     {{ with $page }}
       <article>
-        <h1>
+        <h3>
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}
           </a>
-        </h1>
-        {{ if and $show_descriptions .Params.description_short }}
-          <p>{{ partial "PrepareHTML" .Params.description_short }}</p>
+        </h3>
+        {{ if and $show_descriptions .Params.summary }}
+          {{ if site.Params.pages.index.truncate_description }}
+            <p>{{ partial "GetTruncateContent" ( dict 
+              "text" .Params.summary
+              "length" site.Params.pages.index.truncate_description
+              ) }}</p>
+          {{ else }}
+            <p>{{ partial "PrepareText" .Params.summary }}</p>
+          {{ end }}
         {{ end }}
         {{ if $show_images }}
           {{- partial "pages/page-media.html" . -}}

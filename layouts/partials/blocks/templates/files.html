@@ -1,16 +1,17 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- with .block.data -}}
   <section class="block block-files{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
-        {{- if $title }}
+        {{- if or $title .description }}
           <div class="top">
-            {{ partial "blocks/title" (dict 
-              "title" $title
-              "context" $context
-              ) }}
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ end -}}
             {{- if .description }}
               <div class="description">
                 {{ partial "PrepareHTML"  .description }}
@@ -19,7 +20,7 @@
           </div>
         {{ end -}}
         
-        <ul>
+        <ul class="files">
           {{- range .files }}
             {{ if ne .id "" }}
               {{- $file := partial "GetMedia" .id -}}

@@ -4,7 +4,20 @@
   <div class="document-content">
     {{ partial "blocks/list.html" . }}
     <div class="container">
-      {{ partial "programs/programs-list.html" .Pages }}
+      <ol class="programs">
+        {{- range .Pages -}}
+          <li>
+            {{- $title := partial "PrepareHTML" .Title -}}
+            <a href="{{ .Permalink }}" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+              {{- $title -}}
+            </a>
+            <p class="description">
+              {{/*  TODO: replace with description_short  */}}
+              {{- partial "PrepareHTML" .Params.presentation -}}
+            </p>
+          </li>
+        {{- end -}}
+      </ol>
     </div>
   </div>
 {{ end }}

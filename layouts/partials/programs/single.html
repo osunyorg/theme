@@ -1,12 +1,15 @@
 <div class="document-content" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
+
+  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+  <meta itemprop="url" content="{{ .Permalink }}">
+
   {{ partial "toc/container.html"
-      (dict
+    (dict
           "toc" "programs/toc.html"
           "context" .
       )
-  }}
-  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
-  <meta itemprop="url" content="{{ .Permalink }}">
+    }}
+
   {{- if .Params.image -}}
     {{- $id := .Params.image -}}
     {{- if isset .Params.image "id" -}}
@@ -21,13 +24,20 @@
       <meta itemprop="image" content="{{ $url }}">
     {{- end -}}
   {{- end -}}
-  <div class="container">
-    {{- partial "programs/abstract.html" .Params.presentation -}}
-  </div>
-  {{- partial "programs/children.html" .Pages -}}
+
+  {{ partial "programs/summary.html" (dict
+      "with_container" true
+      "context" .
+    ) }}
+
   {{- partial "programs/presentation.html" . -}}
+  {{- partial "programs/children.html" .Pages -}}
   {{- partial "programs/pedagogy.html" . -}}
   {{- partial "programs/results.html" . -}}
   {{- partial "programs/admission.html" . -}}
+
+  {{- $category := site.GetPage (printf "/categories/%s" .Params.related_category ) -}}
+  {{- partial "programs/related.html" $category -}}
+
   {{- partial "hooks/before-program-end.html" . -}}
 </div>

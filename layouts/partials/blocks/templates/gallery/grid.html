@@ -3,23 +3,17 @@
     {{ if .id }}
       {{- $image := partial "GetMedia" .id -}}
       {{- if $image -}}
-        {{/*  TODO: refactor  */}}
-        {{- $url := $image.url -}}
-        {{- if site.Params.keycdn -}}
-          {{- $url = $image.direct_url -}}
-        {{- end -}}
-        {{- $lightbox_sizes := "1280x2560" -}}
         <figure>
           <a class="glightbox"
             data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
-            href="{{ partial "GetImageUrl" (dict "url" $url "size" $lightbox_sizes ) }}">
+            href="{{ partial "GetLightboxUrl" (dict "id" .id) }}"
+            title="{{- i18n "commons.lightbox.link.title" -}}"
+            >
             {{ partial "commons/image.html"
               (dict
                 "image"    .file
                 "alt"      .alt
-                "mobile"   "164"
-                "tablet"   "336"
-                "desktop"  "416"
+                "sizes"    site.Params.image_sizes.blocks.gallery.grid
               )}}
           </a>
           {{ if .text }}

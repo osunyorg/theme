@@ -1,6 +1,30 @@
 {{- $title := or .Params.header_text .Title -}}
-{{- partial "header/hero.html"
-      (dict
-        "title" $title
-        "context" .
-      ) -}}
+<header class="hero">
+  <div class="container">
+    {{- if .Params.breadcrumb | default true -}}
+      {{ partial "header/breadcrumbs.html" . }}
+    {{- end -}}
+    <div class="content">
+      <h1>{{ partial "PrepareHTML" $title }}</h1>
+      {{- if .Params.image }}
+        <figure>
+          {{ partial "commons/image.html"
+            (dict
+              "image"    .image
+              "sizes"    site.Params.image_sizes.sections.diplomas.hero_single
+            ) }}
+          {{ if .image.credit }}
+            <figcaption>
+              {{- partial "PrepareHTML" .image.credit -}}
+            </figcaption>
+          {{ end }}
+        </figure>
+      {{ end -}}
+    </div>
+  </div>
+  <div class="essential-container" id="#{{ urlize (i18n "programs.toc.essential") }}">
+    <div class="container">
+      {{- partial "diplomas/essential" . -}}
+    </div>
+  </div>
+</header>

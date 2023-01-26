@@ -7,12 +7,12 @@
         opacity: 0
 
 .menu
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         -webkit-flex-basis: 100vw
         display: none
         flex-basis: 100vw
-        margin-top: 1.875rem
-        max-height: 70vh
+        margin-top: $spacing1
+        max-height: calc(100vh - var(--header-height) - #{$spacing1})
         overflow: auto
     a,
     a:focus,
@@ -29,18 +29,18 @@
         @include meta
         cursor: pointer
         transition: text-decoration 0.15s
+        display: block
         &:not(:hover)
             text-decoration-color: transparent
         &[aria-expanded]
             @include icon(caret, after)
-                font-size: px2rem(6)
                 margin-left: px2rem(5)
                 transition: transform 0.15s
             &[aria-expanded="true"]
                 &::after
                     transform: rotate(180deg)
 
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             a:hover,
             a:focus
                 color: $header-hover-color
@@ -48,9 +48,9 @@
     .dropdown-menu
         display: none
         background: $header-dropdown-background
-        @include media-breakpoint-down(md)
+        @include media-breakpoint-down(desktop)
             padding-bottom: $spacing1
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             padding: $spacing1
             position: absolute
         a
@@ -89,25 +89,28 @@
         span
             @include meta
 
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
+        .nav-level-3
+            li
+                margin-top: $spacing0
         @if $header-dropdown-full
             .dropdown-menu
                 inset: 100% 0 auto 0
                 padding-left: 0
                 padding-right: 0
+                padding-bottom: $spacing2
             .nav-level-2
                 @include container
-                @include grid(4, md)
+                @include grid(4, desktop)
         @else 
             .has-children
                 position: relative
             .dropdown-menu
                 margin-top: $header-nav-padding-y
                 min-width: 400px
-                padding-bottom: half($spacing0)
-                padding-left: $spacing0
-                padding-top: half($spacing0)
-                padding-right: $spacing0
+                padding-left: $spacing1
+                padding-top: $spacing0
+                padding-right: $spacing1
                 right: 0
                 text-align: right
             .nav-level-2
@@ -119,7 +122,7 @@
                     + li.has-children
                         margin-top: $spacing1
 
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         &.is-opened
             display: block
         a, span
@@ -128,10 +131,11 @@
             display: block
             li 
                 a, span
-                    padding: half($spacing1) 0
+                    padding: half($spacing0) 0
                     display: block
             > li:not(:last-child) 
                 border-bottom: 1px solid #adb5bd
+            > li
                 > a, > span
                     padding-bottom: $spacing1
                     padding-top: $spacing1
@@ -140,9 +144,10 @@
                     align-items: center
                     display: flex
                     justify-content: space-between
-                    @include icon("caret-bottom", after)
+                    text-decoration: none
+                    @include icon(caret-bottom, after)
+                        display: block
                     &::after
-                        font-size: .375rem
                         line-height: 1
                 .dropdown-menu
                     display: none
@@ -155,74 +160,8 @@
         .nav-level-2
             > .has-children + .has-children
                 margin-top: $spacing1
-
-// TODO : Est-ce au bon endroit ?
-body
-    &::after
-        @include inset(0)
-        background-color: $body-overlay-color
-        content: ""
-        pointer-events: none
-        position: fixed
-        opacity: 0
-        transition: opacity $header-transition
-        z-index: $zindex-body-overlay
-
-    html.has-menu-opened &,
-    html.has-offcanvas-opened &
-        &::after
-            display: block
-            opacity: 1
-            pointer-events: inherit
-    html.has-offcanvas-opened &
-        &::after
-            z-index: $zindex-header + 1
-    html.is-animating:not(.has-menu-opened) &
-        &::after
-            display: block
-            opacity: 0
-
-header[role="banner"]
-    nav[role="navigation"]
-        padding-bottom: $header-nav-padding-y
-        padding-top: $header-nav-padding-y
-        .container
-            align-items: center
-            display: flex
-            flex-wrap: wrap
-            justify-content: space-between
-        button[type="button"]
-            @include button-reset
-            display: none
-            border: 0
-            color: $body-color
-            padding: 0
-            position: relative
-            @include media-breakpoint-down(md)
-                display: flex
-                align-items: center
-            &:focus
-                box-shadow: none
-            &:focus-visible
-                outline-color: gray
-                outline-offset: 5px
-                outline-style: dashed
-                outline-width: 1px
-            span:first-of-type
-                @include meta
-            span:last-of-type
-                @include icon("burger", before)
-                background: none
-                height: calc(1.063rem + .3125rem * 2)
-                padding: px2rem(5) 0 px2rem(5) px2rem(5)
-                width: calc(1.5rem + .3125rem)
-                &::before
-                    font-size: px2rem(17)
-                    vertical-align: top
-            &[aria-expanded="true"]
-                span:last-of-type
-                    &::before
-                        content: map-get($icons, "close")
+        .nav-level-3
+            padding-top: 0
 
 .share
     display: flex
@@ -232,11 +171,9 @@ header[role="banner"]
     li:not(:last-child)
         margin-right: 1rem
     a
-        font-size: px2rem(13)
         text-decoration: none
         padding: $spacing0
-        &::before
-            font-size: px2rem(13)
+        font-size: px2rem(24)
         &:hover
             opacity: 0.7
         &::after
