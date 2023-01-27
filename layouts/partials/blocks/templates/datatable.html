@@ -12,7 +12,9 @@
           <div class="top">
             <h2>{{ partial "PrepareHTML" $title }}</h2>
             {{ with .description }}
-              <p>{{ partial "PrepareHTML" . }}</p>
+              <div class="description">
+                {{ partial "PrepareHTML" . }}
+              </div>
             {{ end }}
           </div>
         {{ end -}}
