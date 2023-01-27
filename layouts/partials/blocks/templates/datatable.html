@@ -11,8 +11,8 @@
         {{ else }}
           <div class="top">
             <h2>{{ partial "PrepareHTML" $title }}</h2>
-            {{- if .description }}
-              <p>{{ partial "PrepareHTML" .description }}</p>
+            {{ with .description }}
+              <p>{{ partial "PrepareHTML" . }}</p>
             {{ end }}
           </div>
         {{ end -}}
