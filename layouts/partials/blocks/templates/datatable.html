@@ -11,6 +11,9 @@
         {{ else }}
           <div class="top">
             <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{- if .description }}
+              <p>{{ partial "PrepareHTML" .description }}</p>
+            {{ end }}
           </div>
         {{ end -}}
         <div class="table-responsive">
