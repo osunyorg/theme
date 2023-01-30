@@ -4,6 +4,7 @@ table
     vertical-align: top
     width: 100%
     text-align: left
+    empty-cells: hide
     caption
         @include meta
         padding: $spacing0 0
@@ -29,10 +30,10 @@ table
         font-size: $table-body-size
         @include media-breakpoint-up(desktop)
             font-size: $table-body-size-desktop
-        tr
-            border-bottom: 1px solid $color-border
-        tr:first-child
+        td
             border-top: 1px solid $color-border
+            &:empty
+                border-top: none
 
 .table-responsive
     overflow-x: auto
