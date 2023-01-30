@@ -33,7 +33,7 @@
                     // max-height: calc(100vh - var(--header-height))
                     width: auto
                     max-width: 100%
-            &.image-portrait
+            &.image-portrait, &.image-square
                 .block-content
                     position: relative
                     .top
@@ -56,9 +56,13 @@
                         display: block
                         text-align: right
             &.image-landscape
+                
                 picture
-                    margin-left: 0
-                    margin-right: 0
+                    margin-left: -$grid-gutter
+                    margin-right: -$grid-gutter
+                    @media screen and (min-width: 1400px)
+                        margin-left: 0
+                        margin-right: 0
                 figcaption
                     display: flex
                     justify-content: space-between
