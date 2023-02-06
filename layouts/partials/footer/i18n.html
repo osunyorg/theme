@@ -1,0 +1,22 @@
+{{ $page := . }}
+{{ $siteLang := "" }}
+{{ $url := "" }}
+
+<div class="container">
+  <div class="footer-i18n">
+    {{ with site.Languages }}
+      <ul class="small">
+        {{ range site.Languages }}
+          {{ $siteLang := . }}
+          {{ $url = printf "/%s/" .Lang }}
+          {{ range $page.Translations }}
+            {{ if eq .Lang $siteLang.Lang }}
+              {{ $url = .Permalink }}
+            {{ end }}
+          {{ end }}
+          <li><a href="{{ $url }}">{{ $siteLang.LanguageName }}</a></li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  </div>
+</div>
