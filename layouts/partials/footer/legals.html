@@ -1,5 +1,6 @@
 <div class="footer-legal">
-  {{ if site.Data.menus.legal }}
+  {{ $menu := partial "GetMenu" "legal" }}
+  {{ if $menu }}
     {{ partial "commons/menu.html"
       (dict
         "kind"        "legal"

@@ -1,5 +1,6 @@
 <div class="footer-social">
-  {{ if site.Data.menus.social }}
+  {{ $menu := partial "GetMenu" "social" }}
+  {{ if $menu }}
     {{ partial "commons/menu.html"
       (dict
         "kind"        "social"
