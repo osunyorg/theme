@@ -1,7 +1,7 @@
 {{ $page := . }}
 {{ $siteLang := "" }}
 {{ $url := "" }}
-
+{{ if gt (len site.Languages) 1 }}
 <div class="container">
   <div class="footer-i18n">
     {{ with site.Languages }}
@@ -20,3 +20,4 @@
     {{ end }}
   </div>
 </div>
+{{ end }}
