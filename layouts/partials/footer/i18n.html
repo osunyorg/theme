@@ -1,4 +1,5 @@
 {{ $page := . }}
+{{ $pageWithTranslations := $page.Translations | append $page }}
 {{ $siteLang := "" }}
 {{ $url := "" }}
 {{ if gt (len site.Languages) 1 }}
@@ -9,7 +10,7 @@
         {{ range site.Languages }}
           {{ $siteLang := . }}
           {{ $url = printf "/%s/" .Lang }}
-          {{ range $page.Translations }}
+          {{ range $pageWithTranslations }}
             {{ if eq .Lang $siteLang.Lang }}
               {{ $url = .Permalink }}
             {{ end }}
