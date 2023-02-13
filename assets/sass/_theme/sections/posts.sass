@@ -2,6 +2,8 @@
     @include article($post-media-background)
     time
         color: $post-time-color
+        display: inline-block
+        vertical-align: middle
     .post-categories
         @include meta
         margin-top: $spacing0
@@ -15,12 +17,14 @@
             @include link($color-accent)
         li
             margin: 0
+    .post-author
+        @include meta
+        color: $color-text-alt
 
 .posts__section,
 .authors__term,
 .categories__term,
 .persons__page
-
     .posts--list
         article
             border-bottom: 1px solid $color-border
@@ -34,7 +38,7 @@
                 @include grid
                 margin-bottom: $spacing3
                 padding-bottom: $spacing3
-            div:not(.media)
+            .post-content
                 grid-column: 4/13
                 @include media-breakpoint-down(desktop)
                     flex: 1
@@ -52,19 +56,25 @@
                 &, img
                     aspect-ratio: auto
             @include media-breakpoint-up(desktop)
-                time 
-                    font-size: $h5-size
+                .post-meta
                     position: absolute
                     right: 0
+                    text-align: right
                     top: 0
-                div:not(.media)
+                    time
+                        font-size: $h5-size
+                .post-content
                     h2, h3,
-                    p
+                    > p
                         max-width: col(6, 9)
     .posts--grid
         @include grid(1)
         @include grid(2, desktop)
         @include grid($posts-grid-columns, xxl)
+        .post
+            @include post-time-author-flex
+            .post-meta
+                margin-top: $spacing0
 
 .posts__page
     @include media-breakpoint-down(desktop)

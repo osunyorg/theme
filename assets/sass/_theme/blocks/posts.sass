@@ -17,6 +17,8 @@
                 margin-top: $spacing0
             .media
                 margin-top: 0
+        @include post-time-author-flex
+
     &--grid
         @include media-breakpoint-down(desktop)
             article + article
@@ -40,25 +42,21 @@
             article
                 position: relative
                 padding-bottom: half($spacing3)
-                // display: flex
-                // flex-direction: row
                 + article
                     margin-top: half($spacing3)
                 .post-content
                     display: flex
                     flex-direction: column
-                    // width: 70%
+                    padding-top: $spacing0
                     h3
                         margin-bottom: 0
-                    time
+                    .post-categories
+                        margin-bottom: 0
+                    p[itemprop="articleBody"]
                         margin-top: half($spacing0)
-                        order: 2
-                    p
-                        margin-top: half($spacing0)
-                        order: 4
                 .media
-                    display: none
-                    order: 3
+                    order: -1
+                    max-width: 33%
 
         @include in-page-with-sidebar
             article
@@ -88,7 +86,7 @@
                         margin-left: $grid-gutter
                     + article
                         margin-top: $spacing3
-                    time
+                    .post-meta
                         position: absolute
                         right: 0
                         top: 0
@@ -131,19 +129,24 @@
                         grid-column: 1 / 7
                     .post-categories
                         grid-column: 1 / 7
-                    time
+                    .post-meta
                         grid-row: 1
                         grid-column: 7 / 9
                         text-align: right
                         order: 2
+                        display: block
                         margin-top: 0
-                    p
+                        .post-author p::before
+                            content: ''
+                    p[itemprop="articleBody"]
                         grid-column: 1 / 7
                         order: 3
         
         @include media-breakpoint-down(desktop)
             .list
                 border-top: 1px solid $color-border
+                p[itemprop="articleBody"]
+                    margin-top: 0
 
         @include media-breakpoint-up(desktop)
             .highlight
