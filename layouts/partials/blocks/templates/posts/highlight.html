@@ -38,10 +38,7 @@
               <div class="post-meta">
                 <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
                 {{ if site.Params.posts.index.show_author }}
-                  {{/*  {{- partial "posts/author" . -}}  */}}
-                  <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
-                    <p itemprop="name">Magali Anglès</p>
-                  </div>
+                  {{- partial "posts/author" . -}}
                 {{ end }}
               </div>
             </article>
