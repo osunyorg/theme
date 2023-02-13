@@ -34,7 +34,13 @@
                   <p itemprop="articleBody">{{ partial "PrepareText" .Params.summary }}</p>
                 {{ end }}
               {{- end -}}
-              <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
+
+              <div class="post-meta">
+                <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
+                {{ if site.Params.posts.index.show_author }}
+                  {{- partial "posts/author" . -}}
+                {{ end }}
+              </div>
             </article>
           {{ end }}
         {{ end }}
