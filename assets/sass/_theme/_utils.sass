@@ -175,13 +175,13 @@
     flex-direction: column
     .media
         @include handle-svg-fit
-        @if $article-media-aspect-ratio
-            @include aspect-ratio($article-media-aspect-ratio, 'img', $background)
         margin-bottom: $spacing1
         order: -1
         overflow: hidden
         img
             object-fit: cover
+            @if $article-media-aspect-ratio
+                aspect-ratio: $article-media-aspect-ratio
     h2, h3
         @include h3
         a
