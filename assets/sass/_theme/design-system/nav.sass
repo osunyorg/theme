@@ -17,7 +17,7 @@
     a,
     a:focus,
     a:active
-        @include link($header-color)
+        @include link($header-color, false)
     span
         color: $header-color
     ul
@@ -30,8 +30,8 @@
         cursor: pointer
         transition: text-decoration 0.15s
         display: block
-        &:not(:hover)
-            text-decoration-color: transparent
+        // &:not(:hover)
+        //     text-decoration-color: transparent
         &[aria-expanded]
             @include icon(caret, after)
                 margin-left: px2rem(5)
