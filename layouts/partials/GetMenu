@@ -10,4 +10,11 @@
   {{ $menu = index site.Data.menus $kind }}
 {{ end }}
 
+{{ if reflect.IsSlice $menu }}
+  {{/*  LEGACY  */}}
+  {{ $menu = (dict
+    "items" $menu
+  ) }}
+{{ end }}
+
 {{ return $menu }}
