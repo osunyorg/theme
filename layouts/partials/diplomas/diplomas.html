@@ -16,24 +16,30 @@
 
         <ol class="programs">
           {{- range .Params.programs -}}
-            <li>
-              <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
-                {{- partial "PrepareHTML" .label -}}
-              </a>
-              {{- range .children -}}
-                <ol>
-                  <li>
-                    <a href="{{ .path }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
-                      {{- partial "PrepareHTML" .label -}}
-                    </a>
-                  </li>
-                </ol>
-              {{ end }}
-            </li>
+            {{- template "programsList" . -}}
           {{- end -}}
         </ol>
-
       </div>
     </li>
   {{ end }}
 </ul>
+
+{{- define "programsList" -}}
+  <li>
+    <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
+      {{- partial "PrepareHTML" .label -}}
+    </a>
+    <ol>
+      {{- range .children -}}
+      <li>
+        <a href="{{ .path }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
+          {{- partial "PrepareHTML" .label -}}
+        </a>
+        {{ if .children }}
+          {{- template "programsList" . -}}
+        {{ end }}
+      </li>
+      {{ end }}
+    </ol>
+  </li>
+{{- end -}}
