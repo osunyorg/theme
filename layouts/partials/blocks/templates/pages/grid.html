@@ -4,15 +4,9 @@
 <div class="grid">
   {{ range .pages }}
     {{- $page := false -}}
-
-    {{/*  Check if . is a map or page url  */}}
+    {{/*  Check if . is a map or page url, necessary when pages/grid is called outside block context */}}
     {{ if reflect.IsMap . }}
-      {{- if .page -}}
-        {{- $page = partial "GetPageByUrl" .page -}}
-      {{- else if .slug -}}
-        {{/*  LEGACY  */}}
-        {{- $page = partial "GetPageByUrl" .slug -}}
-      {{ end }}
+      {{- $page = partial "GetPageByUrl" .page -}}
     {{ else }}
       {{- $page =  partial "GetPageByUrl" . -}}
     {{ end }}
