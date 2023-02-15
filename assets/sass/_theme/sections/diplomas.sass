@@ -155,3 +155,14 @@ ul.diplomas
         li
             @include grid(2, desktop)
             align-items: start
+            a
+                @include media-breakpoint-between(sm, desktop)
+                display: flex
+                margin-right: $spacing0
+                &::after
+                    bottom: unset
+                + p
+                    margin-top: $spacing0
+                @include media-breakpoint-down(sm)
+                    &::after
+                        transform: translateY(50%)
