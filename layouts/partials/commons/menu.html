@@ -2,7 +2,8 @@
 {{ $items := .items }}
 {{ $context := .context }}
 {{ if $kind }}
-  {{ $items = partial "GetMenu" $kind }}
+  {{ $menu := partial "GetMenu" $kind }}
+  {{ $items = $menu.items }}
 {{ end }}
 {{- $level := .level -}}
 {{- $stop := .stop -}}
