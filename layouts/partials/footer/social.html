@@ -1,11 +1,10 @@
-<div class="footer-social">
-  {{ $menu := partial "GetMenu" "social" }}
-  {{ if $menu }}
-    {{ partial "commons/menu.html"
-      (dict
-        "kind"        "social"
-        "level"       1
-        "class"       "nav-social"
-      )}}
-  {{ end }}
-</div>
+{{ $menu := partial "GetMenu" "social" }}
+{{ if $menu }}
+  {{ partial "commons/menu.html"
+    (dict
+      "kind"        "social"
+      "level"       1
+      "class"       "nav-social"
+    )}}
+{{ end }}
+
