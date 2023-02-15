@@ -46,11 +46,14 @@ ul.diplomas
                     margin-top: $spacing1
                 a:hover
                     color: $color-accent
-                ol 
+                ol
                     ol
                         margin-left: $spacing1
-                    li 
-                        @include icon(list-hyphen, before)
+                    @include media-breakpoint-up(sm)
+                        li 
+                            a
+                                @include icon(list-hyphen, before)
+                                    margin-right: $spacing0
                         
         .program
             div
