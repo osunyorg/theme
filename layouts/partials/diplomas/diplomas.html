@@ -15,11 +15,20 @@
         </div>
 
         <ol class="programs">
-          {{- range .Pages -}}
+          {{- range .Params.programs -}}
             <li>
-              <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .Title)) }}">
-                {{- partial "PrepareHTML" .Title -}}
+              <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
+                {{- partial "PrepareHTML" .label -}}
               </a>
+              {{- range .children -}}
+                <ol>
+                  <li>
+                    <a href="{{ .path }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
+                      {{- partial "PrepareHTML" .label -}}
+                    </a>
+                  </li>
+                </ol>
+              {{ end }}
             </li>
           {{- end -}}
         </ol>
