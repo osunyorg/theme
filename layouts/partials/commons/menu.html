@@ -1,5 +1,6 @@
 {{- $kind := .kind -}}
 {{ $items := .items }}
+{{ $context := .context }}
 {{ if $kind }}
   {{ $items = partial "GetMenu" $kind }}
 {{ end }}
@@ -19,6 +20,9 @@
     {{- $attr := "" -}}
     {{- $attr_title := "" -}}
     {{- $hasDropdown := false -}}
+    {{ if eq $context.RelPermalink .target }}
+      {{ $linkClass = "active" }}
+    {{ end }}
     {{- if gt (len .children) 0 -}}
       {{- $itemClass = printf "%shas-children" $itemClass -}}
     {{- end -}}
@@ -47,6 +51,7 @@
                 (dict
                   "items" .children
                   "level" $nextLevel
+                  "context" $context
                 ) -}}
         {{- end -}}
         {{- if $hasDropdown -}}
