@@ -13,6 +13,7 @@
     {{ $papersForResearcher = index site.Taxonomies.researchers $slug}}
   {{ end }}
   {{ $author := site.GetPage (printf "/authors/%s" $slug) }}
+  {{ $publications := .Params.publications }}
 
   {{ partial "persons/hero-single.html" . }}
 
@@ -79,6 +80,10 @@
   
       {{ if $papersForResearcher }}
         {{ partial "persons/papers.html" (dict "papers" $papersForResearcher "slug" $slug) }}
+      {{ end }}
+  
+      {{ if $publications }}
+        {{ partial "persons/publications.html" $publications }}
       {{ end }}
     </div>
   </div>
