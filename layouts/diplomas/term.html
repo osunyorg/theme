@@ -12,10 +12,9 @@
             <a href="{{ .Permalink }}" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
               {{- $title -}}
             </a>
-            {{ if .Params.presentation }}
+            {{ if .Params.summary }}
               <p class="description">
-                {{/*  TODO: replace with description_short  */}}
-                {{- partial "PrepareHTML" .Params.presentation -}}
+                {{- partial "PrepareHTML" .Params.summary -}}
               </p>
             {{ end }}
           </li>
