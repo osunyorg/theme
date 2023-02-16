@@ -38,14 +38,28 @@ ul.diplomas
             @include media-breakpoint-down(desktop)
                 margin-top: $spacing1
             li
-                @include h3
                 display: block
                 border-bottom: 0
                 padding: 0
-                + li
-                    margin-top: $spacing1
+                + li, > ol
+                    margin-top: $spacing0
+                    @include media-breakpoint-up(sm) 
+                        margin-top: $spacing1
                 a:hover
                     color: $color-accent
+                ol li a   
+                    @include inherit-text
+                    @include media-breakpoint-up(sm)
+                        @include h3
+                    @include icon(list-hyphen, before)
+                        margin-right: half($spacing0)
+                        @include media-breakpoint-up(sm)
+                            margin-right: $spacing0
+                    display: flex
+                    ol
+                        margin-left: $spacing1
+            > li a 
+                @include h3
                         
         .program
             div
@@ -150,3 +164,14 @@ ul.diplomas
         li
             @include grid(2, desktop)
             align-items: start
+            a
+                @include media-breakpoint-between(sm, desktop)
+                    display: flex
+                    margin-right: $spacing0
+                    &::after
+                        bottom: unset
+                + p
+                    margin-top: $spacing0
+                @include media-breakpoint-down(sm)
+                    &::after
+                        transform: translateY(50%)
