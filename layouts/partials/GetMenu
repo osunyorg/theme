@@ -1,13 +1,20 @@
 {{ $kind := . }}
 {{ $menus := index site.Data.menus (printf "%s" site.Language) }}
 {{ $menu := "" }}
-// Try to get menus from the data/menus/<lang> directory
+{{/*  Try to get menus from the data/menus/<lang> directory  */}}
 {{ if (and $menus (isset $menus $kind)) }}
-  // Menu found in data/menus/<lang>
+  {{/* Menu found in data/menus/<lang>  */}}
   {{ $menu = index $menus $kind }}
 {{ else }}
-  // Fallback to menu in the data/menus directory
+  {{/*  Fallback to menu in the data/menus directory  */}}
   {{ $menu = index site.Data.menus $kind }}
+{{ end }}
+
+{{ if reflect.IsSlice $menu }}
+  {{/*  LEGACY  */}}
+  {{ $menu = (dict
+    "items" $menu
+  ) }}
 {{ end }}
 
 {{ return $menu }}

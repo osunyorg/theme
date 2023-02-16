@@ -1,12 +1,10 @@
-<div class="footer-legal">
-  {{ $menu := partial "GetMenu" "legal" }}
-  {{ if $menu }}
-    {{ partial "commons/menu.html"
-      (dict
-        "kind"        "legal"
-        "level"       1
-        "class"       "nav-legal"
-      )}}
-  {{ end }}
-  {{ partial "footer/credit.html" }}
-</div>
+{{ $menu := partial "GetMenu" "legal" }}
+{{ if $menu }}
+  {{ partial "commons/menu.html"
+    (dict
+      "kind"        "legal"
+      "level"       1
+      "class"       "nav-legal"
+    )}}
+{{ end }}
+{{ partial "footer/credit.html" }}
