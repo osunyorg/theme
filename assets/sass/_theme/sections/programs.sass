@@ -177,26 +177,30 @@ ol.programs
             position: relative
             padding-bottom: $spacing0
             padding-top: $spacing0
-            @include media-breakpoint-up(desktop)
+            @include media-breakpoint-up(sm)
                 @include grid(2)
-            @include icon(arrow-right, after, true)
-                color: inherit
-                position: absolute
-                right: 0
-                top: $spacing0
-                margin-top: px2rem(12)
             a
+                align-items: center
+                display: flex
                 color: inherit
                 text-decoration: none
                 @include stretched-link(before)
                 @include media-breakpoint-down(desktop)
                     margin-right: $spacing1
+                @include icon(arrow-right, after, true)
+                    color: inherit
+                    position: absolute
+                    right: 0
+                @include media-breakpoint-down(sm)
+                    width: 100%
             p
                 align-self: center
                 margin-top: unset
                 @include small
                 @include media-breakpoint-up(desktop)
                     margin-right: $spacing1
+                @include media-breakpoint-down(sm)
+                    display: block
             &:hover
                 color: $color-accent
             &:first-child
