@@ -1,9 +1,10 @@
 {{- $direction := "" -}}
+{{- $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero"  -}}
 {{ if .image }}
   {{- $direction = partial "GetImageDirection" .image -}}
 {{ end }}
 
-<header class="hero {{ if .image -}}hero--with-image hero--image-{{- $direction -}}{{- end -}}">
+<header class="hero {{ if .image -}}hero--with-image hero--image-{{- $direction -}}{{- end }} {{ if $breadcrumb_is_after_hero -}} hero--no-margin {{- end }}">
   <div class="container">
     {{- if eq site.Params.breadcrumb.position "hero-start" -}}
       {{- if .breadcrumb | default true -}}
@@ -51,9 +52,9 @@
   </div>
 </header>
 
-{{- if eq site.Params.breadcrumb.position "after-hero" -}}
+{{- if $breadcrumb_is_after_hero -}}
   {{- if .breadcrumb | default true -}}
-    <div class="container">
+    <div class="container breadcrumb-container">
       {{ partial "header/breadcrumbs.html" .context }}
     </div>
   {{- end -}}
