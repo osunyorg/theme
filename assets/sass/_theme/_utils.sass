@@ -368,6 +368,15 @@
         @include media-breakpoint-up(desktop)
             &:before
                 padding-right: 0
+        @include media-breakpoint-down(desktop)
+            position: relative
+            background: $color-background
+            &::before
+                background: transparent
+            p
+                display: block
+                background: transparent
+                position: relative
 
     &:hover
         figcaption p
