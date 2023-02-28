@@ -166,7 +166,10 @@ ul.diplomas
         li
             @include grid(2, desktop)
             align-items: start
+            position: relative
             a
+                @include stretched-link(before)
+                position: initial
                 @include media-breakpoint-down(desktop)
                     margin-right: $spacing0
                     &::after
