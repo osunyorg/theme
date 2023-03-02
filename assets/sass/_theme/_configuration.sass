@@ -125,7 +125,6 @@ $btn-padding-x: px2rem(20) !default
 $btn-padding-y: px2rem(13) !default
 $btn-border-radius: px2rem(4) !default
 
-
 // Spacing
 $spacing0: px2rem(12) !default
 $spacing1: px2rem(24) !default
@@ -135,7 +134,10 @@ $spacing4: px2rem(128) !default
 $spacing5: px2rem(256) !default
 $spacing-section-y: px2rem(36) !default
 
-// TODO: choisir entre margin top / bottom --> https://matthewjamestaylor.com/css-margin-top-vs-bottom
+// Form
+$form-btn-color: $color-background !default
+$form-btn-background-color: $color-accent !default
+$form-input-border-radius: 4px !default
 
 // Grid
 $grid-gutter: px2rem(64) !default
@@ -151,7 +153,7 @@ $zindex-toc: 60 !default
 $zindex-toc-cta: 49 !default
 $zindex-modal: 72 !default
 $zindex-aside: 48 !default
-$zindex-footer: 70 !default
+$zindex-footer: 50 !default
 
 // Header
 $header-color: $color-text !default
@@ -199,34 +201,35 @@ $breadcrumb-icon-color: $color-text-alt !default
 
 // Icons
 $icons: ()
-$icons: map-merge($icons, ("toc": "\e918"))
-$icons: map-merge($icons, ("search": "\e916"))
-$icons: map-merge($icons, ("play": "\e910"))
-$icons: map-merge($icons, ("pause": "\e90f"))
-$icons: map-merge($icons, ("eye": "\e901"))
-$icons: map-merge($icons, ("download": "\e900"))
-$icons: map-merge($icons, ("close": "\e90e"))
-$icons: map-merge($icons, ("burger": "\e902"))
-$icons: map-merge($icons, ("burger-close": "\e905"))
+$icons: map-merge($icons, ("arrow": "\ff01"))
+$icons: map-merge($icons, ("arrow-first": "\e906"))
+$icons: map-merge($icons, ("arrow-last": "\e907"))
+$icons: map-merge($icons, ("arrow-left": "\ff02"))
 $icons: map-merge($icons, ("arrow-next": "\e909"))
 $icons: map-merge($icons, ("arrow-previous": "\e908"))
-$icons: map-merge($icons, ("arrow-last": "\e907"))
-$icons: map-merge($icons, ("arrow-first": "\e906"))
 $icons: map-merge($icons, ("arrow-right": "\ff00"))
+$icons: map-merge($icons, ("burger": "\e902"))
+$icons: map-merge($icons, ("burger-close": "\e905"))
 $icons: map-merge($icons, ("caret": "\e904"))
 $icons: map-merge($icons, ("caret-top": "\e914"))
 $icons: map-merge($icons, ("caret-right": "\e913"))
 $icons: map-merge($icons, ("caret-left": "\e912"))
 $icons: map-merge($icons, ("caret-bottom": "\e911"))
-$icons: map-merge($icons, ("list-hyphen": "\e917"))
-$icons: map-merge($icons, ("link-blank": "\e903"))
-$icons: map-merge($icons, ("twitter": "\e90d"))
-$icons: map-merge($icons, ("social": "\e915"))
-$icons: map-merge($icons, ("linkedin": "\e90c"))
-$icons: map-merge($icons, ("instagram": "\e90a"))
+$icons: map-merge($icons, ("close": "\e90e"))
+$icons: map-merge($icons, ("download": "\e900"))
+$icons: map-merge($icons, ("eye": "\e901"))
 $icons: map-merge($icons, ("facebook": "\e90b"))
-$icons: map-merge($icons, ("arrow": "\ff01"))
-$icons: map-merge($icons, ("arrow-left": "\ff02"))
+$icons: map-merge($icons, ("globe": "\ff10"))
+$icons: map-merge($icons, ("instagram": "\e90a"))
+$icons: map-merge($icons, ("link-blank": "\e903"))
+$icons: map-merge($icons, ("linkedin": "\e90c"))
+$icons: map-merge($icons, ("list-hyphen": "\e917"))
+$icons: map-merge($icons, ("pause": "\e90f"))
+$icons: map-merge($icons, ("play": "\e910"))
+$icons: map-merge($icons, ("search": "\e916"))
+$icons: map-merge($icons, ("social": "\e915"))
+$icons: map-merge($icons, ("toc": "\e918"))
+$icons: map-merge($icons, ("twitter": "\e90d"))
 
 // Breakpoints
 // TODO: réécrire en sass les mixins bootstrap
@@ -246,6 +249,7 @@ $toc-title-font-family: $meta-font-family !default
 $toc-title-font-size: $meta-size !default
 $toc-title-font-size-desktop: $meta-size-desktop !default
 $toc-sticky-transition: 0.4s
+$toc-overlay-color: $body-overlay-color !default
 
 // Table
 $table-head-font-size: $h4-size !default

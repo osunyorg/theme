@@ -13,6 +13,7 @@
     {{ $papersForResearcher = index site.Taxonomies.researchers $slug}}
   {{ end }}
   {{ $author := site.GetPage (printf "/authors/%s" $slug) }}
+  {{ $publications := .Params.publications }}
 
   {{ partial "persons/hero-single.html" . }}
 
@@ -37,7 +38,7 @@
         <div>
           {{ if (partial "GetTextFromHTML" .Params.summary) }}
             <div class="lead" itemprop="description">
-              {{ partial "PrepareHTML" .Params.summary }}
+              {{ partial "PrepareText" .Params.summary }}
             </div>
           {{ end }}
           {{ if (partial "GetTextFromHTML" .Content) }}
@@ -68,7 +69,7 @@
 
     {{ partial "blocks/list.html" . }}
 
-    <div class="container">
+    <div class="container person-objects">
       {{ if $programsForTeacher }}
         {{ partial "persons/programs.html" (dict "programs" $programsForTeacher "slug" $slug) }}
       {{ end }}
@@ -79,6 +80,10 @@
   
       {{ if $papersForResearcher }}
         {{ partial "persons/papers.html" (dict "papers" $papersForResearcher "slug" $slug) }}
+      {{ end }}
+  
+      {{ if $publications }}
+        {{ partial "persons/publications.html" $publications }}
       {{ end }}
     </div>
   </div>

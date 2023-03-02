@@ -37,8 +37,7 @@
       {{ $title = .Title }}
     {{ end }}
     {{ if .Params.bodyclass }}
-      {{- $page_class = partial "GetBodyclass" . }}
-      {{- $page_class = printf "block-%s" $page_class }}
+      {{- $page_class = printf "block-page-%s" .Params.bodyclass }}
     {{ end }}
     {{ if site.Params.pages.index.truncate_description }}
       {{- $main_description = partial "GetTruncateContent" ( dict 
@@ -46,7 +45,7 @@
           "length" site.Params.pages.index.truncate_description
           ) -}}
     {{ else }}
-      {{- $main_description = partial "PrepareHTML" .Params.summary -}}
+      {{- $main_description = partial "PrepareText" .Params.summary -}}
     {{ end }}
   {{ end -}}
 

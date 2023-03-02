@@ -1,3 +1,10 @@
+{{- $kind := .kind -}}
+{{ $items := .items }}
+{{ $context := .context }}
+{{ if $kind }}
+  {{ $menu := partial "GetMenu" $kind }}
+  {{ $items = $menu.items }}
+{{ end }}
 {{- $level := .level -}}
 {{- $stop := .stop -}}
 {{- $dropdown := .dropdown }}
@@ -7,13 +14,16 @@
 {{- end -}}
 {{ $extern_link := i18n "commons.link.blank" }}
 <ul class="{{ $ulClass }}{{ if $level }}nav-level-{{ $level }}{{ end }}">
-  {{ range .items -}}
+  {{ range $items -}}
     {{- $slug := urlize .title -}}
     {{- $itemClass := "" -}}
     {{- $linkClass := "" -}}
     {{- $attr := "" -}}
     {{- $attr_title := "" -}}
     {{- $hasDropdown := false -}}
+    {{ if eq $context.RelPermalink .target }}
+      {{ $linkClass = "active" }}
+    {{ end }}
     {{- if gt (len .children) 0 -}}
       {{- $itemClass = printf "%shas-children" $itemClass -}}
     {{- end -}}
@@ -42,6 +52,7 @@
                 (dict
                   "items" .children
                   "level" $nextLevel
+                  "context" $context
                 ) -}}
         {{- end -}}
         {{- if $hasDropdown -}}

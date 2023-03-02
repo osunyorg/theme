@@ -118,11 +118,15 @@ h2, .h2
 .lead
     @include lead
 
-.p,
-.li
+@mixin body-text
+    font-family: $body-font-family
     font-size: $body-size
     @include media-breakpoint-up(desktop)
         font-size: $body-size-desktop
+
+.p,
+.li
+    @include body-text
 
 @mixin meta
     font-family: $meta-font-family
@@ -220,6 +224,7 @@ a,
     overflow-wrap: break-word
     &[target="_blank"]:not(.icon)
         @include icon(link-blank, after, true)
+            vertical-align: baseline
     &[href^="mailto"]
         &::after
             content: none

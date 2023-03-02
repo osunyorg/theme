@@ -15,7 +15,7 @@
   {{ $body_class = printf "%s %s" $body_class $pageclass }}
   <body class="{{ $body_class }}">
     {{- partial "header/accessibility.html" -}}
-    {{- partial "header/header.html" -}}
+    {{- partial "header/header.html" . -}}
     <main{{ if .Params.blocks }} class="page-with-blocks"{{ end }} id="main" tabindex="-1">
       {{- block "main" . }}{{- end }}
       {{- partial "hooks/before-main-end" . -}}

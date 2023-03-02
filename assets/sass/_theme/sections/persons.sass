@@ -63,6 +63,7 @@
             order: 2
             margin-left: $spacing0
             margin-bottom: 0
+            width: 100px
     @include media-breakpoint-up(desktop)
         @include in-page-without-sidebar
             text-align: center
@@ -169,6 +170,11 @@ ol.persons--list
                 margin-left: auto
                 transform: translateY(100px)
                 margin-top: calc(#{$spacing1} - 100px)
+        @include media-breakpoint-down(sm)
+            margin-bottom: $spacing4
+            .avatar
+                transform: translateY(18vw)
+                margin-top: calc(#{$spacing1} - 18vw)
         @include media-breakpoint-up(desktop)
             .content
                 align-items: center
@@ -186,8 +192,20 @@ ol.persons--list
             @include small
     .blocks
         margin-top: $spacing3
-    .person-programs
+    .person-programs,
+    .person-objects,
+    .person-publications
         margin-top: $spacing4
+        .publication
+            border-bottom: 1px solid $color-border
+            padding-bottom: $spacing1
+            padding-top: $spacing0
+            .title
+                margin-bottom: calc(#{$spacing0}/2)
+            .ref
+                color: $color-text-alt
+                margin-top: 0
+                @include small
     @include media-breakpoint-down(lg)
         .roles
             margin-top: $spacing2

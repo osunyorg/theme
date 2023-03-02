@@ -1,7 +1,8 @@
 {{ $researchers := site.GetPage (printf "/researchers/%s" .slug) }}
 <section>
   <div class="top">
-    <h2><a href="{{ $researchers.Permalink }}">{{ i18n "persons.papers" }}</a></h2>
+    <h2>{{ i18n "persons.papers" }}</h2>
+    <a href="{{ $researchers.Permalink }}" class="link">{{ i18n "persons.papers" }}</a>
   </div>
   <ul class="papers">
     {{ range first 3 .papers }}
