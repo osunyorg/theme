@@ -1,3 +1,9 @@
 <section>
   <p itemprop="abstract">{{ partial "PrepareHTML" .Params.Abstract }}</p>
+  <div role="group">
+    {{ partial "papers/actions.html" (dict 
+      "paper" .
+      "only_file" true
+      ) }}
+  </div>
 </section>

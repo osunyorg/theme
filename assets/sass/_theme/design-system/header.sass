@@ -62,6 +62,7 @@ body
         z-index: $zindex-body-overlay
 
     html.has-menu-opened &,
+    html.has-modal-opened &
     html.has-offcanvas-opened &
         overflow: hidden
         height: 100%
@@ -74,6 +75,9 @@ body
         &::after
             background-color: $toc-overlay-color
             z-index: $zindex-header + 1
+    html.has-modal-opened &
+        &::after
+            z-index: $zindex-modal - 1
     html.is-animating:not(.has-menu-opened) &
         &::after
             display: block

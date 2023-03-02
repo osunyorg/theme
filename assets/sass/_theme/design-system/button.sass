@@ -1,0 +1,30 @@
+.squared-button
+    @include meta
+    @include button-reset
+    align-items: center
+    cursor: pointer
+    display: flex
+    padding: 0
+    @include media-breakpoint-up(desktop)
+        width: col(2,1)
+    &:first-child
+        margin-bottom: $spacing0
+    &::before 
+        background-color: white
+        border: 1px solid $color-border
+        margin-right: $spacing0
+        padding: half($spacing0)
+        transition: background 0.3s ease, border 0.3s ease
+        @include media-breakpoint-up(desktop)
+            margin-right: $spacing1
+    &:hover
+        text-decoration: none
+        &::before
+            background-color: $color-text
+            border-color: transparent
+            color: $color-background
+    text-decoration: none
+button.squared-button
+    @include icon-block(eye, before)
+a.squared-button
+    @include icon-block(download, before)

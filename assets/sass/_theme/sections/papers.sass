@@ -1,6 +1,92 @@
 .paper
-    @include article
+    a
+        text-decoration-color: transparent
+        transition: color 0.3s ease
+    > div
+        &:first-of-type
+            grid-column: 1 / 7
+        &.paper-actions
+            grid-column: 8 / 12
+            align-items: start
+            display: flex
+            @include media-breakpoint-down(desktop)
+                flex-wrap: wrap
+                justify-content: space-between
+                margin-top: $spacing1
+    h3
+        a:hover
+            color: $color-accent
+    .paper-volume
+        @include meta
+        text-transform: lowercase
+        a
+            @include link($color-text)
+            text-transform: none
+        span
+            text-transform: uppercase
 
 .papers
-    @include grid(2, md)
-    @include grid(3, lg)
+    @include list-reset
+    margin-block-start: half($spacing3)
+    li
+        + li
+            margin-top: $spacing2
+            @include media-breakpoint-up(desktop)
+                margin-top: $spacing3
+        article
+            @include media-breakpoint-up(desktop)
+                @include grid
+            + article
+                margin-top: $spacing2
+                @include media-breakpoint-up(desktop)
+                    margin-top: $spacing3
+            
+
+.papers__page
+    .document-content
+        .container
+            @include media-breakpoint-up(desktop)
+                @include grid
+            .content
+                @include media-breakpoint-up(desktop)
+                    grid-column: 1 / 9
+                section + section
+                    margin-top: $spacing2
+                    @include media-breakpoint-up(desktop)
+                        margin-top: $spacing4
+                .squared-button
+                    margin-bottom: 0
+                    margin-top: $spacing2
+                    width: auto
+                .paper-body
+                    h2
+                        margin-bottom: $spacing2
+                .paper-authors
+                    h2
+                        @include h3
+                    .authors
+                        @include grid(2, desktop)
+                        article
+                            margin-top: $spacing2
+                            .name
+                                a
+                                    @include h4
+                                    @include stretched-link(before)
+                                    text-decoration: none
+            .document-nav
+                @include media-breakpoint-up(desktop)
+                    grid-column: 9 / 12
+                    order: 2
+                dl
+                    margin: 0
+                    dt
+                        @include meta
+                        margin-bottom: $spacing0
+                        &:not(:first-of-type)
+                            margin-top: $spacing2
+                    dd:first-of-type
+                        a
+                            display: flex
+                            flex-direction: column
+                            span
+                                order: 3
