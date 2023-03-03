@@ -1,8 +1,8 @@
 {{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
-{{- $figures := .figures}}
 {{- with .block.data -}}
+  {{- $figures := .figures }}
   <section class="block block-key_figures{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
@@ -22,7 +22,7 @@
         {{ end -}}
 
         {{ $list_class := "odd-items" }}
-        {{ if (modBool $figures 2) }}
+        {{ if (modBool (len $figures) 2) }}
           {{ $list_class = "even-items" }}
         {{ end }}
         <ul class="{{ $list_class }}">
