@@ -44,6 +44,13 @@
               <a href="{{ .value }}" itemprop="telephone">{{ .label }}</a>
             </li>
           {{ end }}
+
+          {{ with .phone_professional }}
+            <li>
+              <span>{{ i18n "commons.contact.phone_professional" }}</span>
+              <a href="{{ .value }}" itemprop="telephone">{{ .label }}</a>
+            </li>
+          {{ end }}
         </ul>
       {{ end }}
     </div>
