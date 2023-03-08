@@ -1,0 +1,70 @@
+{{ $logo_index := .logo_index }}
+{{ $latitude := .latitude }}
+{{ $longitude := .longitude }}
+
+<div class="map" id="map">
+  {{- range .partners }}
+    {{ if .slug }}
+      {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
+        {{ template "partner" (dict 
+            "title" .Title
+            "url" .Permalink
+            "logo" (index .Params $logo_index)
+            "latitude" (index .Params $latitude)
+            "longitude" (index .Params $longitude)
+          )}}
+      {{ end }}
+    {{ else }}
+      {{ template "partner" (dict 
+          "title" .name
+          "url" .url
+          "external" true
+          "logo" .logo
+          "latitude" .latitude
+          "longitude" .longitude
+        )}}
+    {{ end }}
+  {{ end -}}
+</div>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+        crossorigin=""></script>
+
+<script>
+  var dom = document.querySelector('#map'),
+      map = L.map('map').setView([44.833328, -0.56667], 13);
+  let partners = dom.querySelectorAll('.organization')
+  
+  const themeMarker = L.icon({
+    iconUrl: '/assets/images/map-marker.svg',
+    iconSize: [26, 17],
+  });
+
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  
+  partners.forEach((partner) => {
+    let latitude = parseFloat(partner.getAttribute('data-latitude')),
+        longitude = parseFloat(partner.getAttribute('data-longitude'));
+        
+    if (!!latitude && !!longitude) {
+      setLocation = [latitude, longitude];
+      
+      function newMarker (setLocation) {
+        var marker = new L.marker(setLocation, {
+          draggable: false
+        });
+        map.addLayer(marker);
+      }   
+      newMarker(setLocation)
+    }
+  });
+
+
+</script>

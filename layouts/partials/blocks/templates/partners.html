@@ -1,12 +1,24 @@
 {{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
+
+{{- $layout_class := "block-pages--grid" -}}
 {{ $logo_index := "logo" }}
+{{ $longitude := "longitude" }}
+{{ $latitude := "latitude" }}
+
 {{ if site.Params.organizations.dark_logo_background }}
   {{ $logo_index = "logo_on_dark_background" }}
 {{ end }}
+
 {{- with .block.data -}}
-  <section class="block block-partners{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+  {{- $layout := .layout -}}
+
+  {{- if $layout -}}
+    {{- $layout_class = printf "block-partners--%s" $layout -}}
+  {{- end -}}
+
+  <section class="block block-partners{{ if $title }} block-with-title{{ end }} {{ $layout_class }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
         {{ if (or $title .description) -}}
@@ -24,33 +36,20 @@
           </div>
         {{- end }}
 
-        <div class="organizations">
-          {{- range .partners }}
-            {{ if .slug }}
-              {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
-                {{ template "partner" (dict 
-                    "title" .Title
-                    "url" .Permalink
-                    "logo" (index .Params $logo_index)
-                  )}}
-              {{ end }}
-            {{ else }}
-              {{ template "partner" (dict 
-                  "title" .name
-                  "url" .url
-                  "external" true
-                  "logo" .logo
-                )}}
-            {{ end }}
-          {{ end -}}
-        </div>
+        {{- partial (printf "blocks/templates/partners/%s.html" $layout) (dict 
+            "partners" .partners
+            "logo_index" $logo_index
+            "longitude" $longitude
+            "latitude" $latitude
+          ) }}
       </div>
     </div>
   </section>
 {{- end -}}
 
+
 {{- define "partner" -}}
-<article class="organization">
+<article class="organization" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
   {{ $title := "" }}
   {{ if .title }}
     {{ $title = partial "PrepareHTML" .title -}}

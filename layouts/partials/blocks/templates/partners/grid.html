@@ -1,0 +1,22 @@
+{{ $logo_index := .logo_index }}
+
+<div class="grid">
+  {{- range .partners }}
+    {{ if .slug }}
+      {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
+        {{ template "partner" (dict 
+            "title" .Title
+            "url" .Permalink
+            "logo" (index .Params $logo_index)
+          )}}
+      {{ end }}
+    {{ else }}
+      {{ template "partner" (dict 
+          "title" .name
+          "url" .url
+          "external" true
+          "logo" .logo
+        )}}
+    {{ end }}
+  {{ end -}}
+</div>
