@@ -27,21 +27,16 @@ class BlockPartners {
         }).addTo(map);
 
         this.partnersList.forEach((partner) => {
-            this.setLocation(map, partner);
+            let latitude = parseFloat(partner.getAttribute('data-latitude')),
+                longitude = parseFloat(partner.getAttribute('data-longitude')),
+                mapLocation = [latitude, longitude];
+            if (!!latitude && !!longitude) {
+                this.newMarker(map, mapLocation, partner);
+            }
         });
     }
 
-    setLocation(map, partner) {
-        let latitude = parseFloat(partner.getAttribute('data-latitude')),
-            longitude = parseFloat(partner.getAttribute('data-longitude'));
-        
-        if (!!latitude && !!longitude) {
-            this.mapLocation = [latitude, longitude];
-        }
-        this.newMarker(this.mapLocation, map, partner);
-    }
-
-    newMarker(mapLocation, map, partner) {
+    newMarker(map, mapLocation, partner) {
         let marker = new L.marker(mapLocation, {
             draggable: false,
             icon: this.themeMarker
