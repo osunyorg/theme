@@ -60,8 +60,9 @@
         var marker = new L.marker(setLocation, {
           draggable: false
         });
+        marker.bindPopup(partner.innerHTML).openPopup();
         map.addLayer(marker);
-      }   
+      }
       newMarker(setLocation)
     }
   });
