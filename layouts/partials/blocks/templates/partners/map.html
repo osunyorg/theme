@@ -41,7 +41,7 @@
   
   const themeMarker = L.icon({
     iconUrl: '/assets/images/map-marker.svg',
-    iconSize: [26, 17],
+    iconSize: [17, 26],
   });
 
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -58,9 +58,10 @@
       
       function newMarker (setLocation) {
         var marker = new L.marker(setLocation, {
-          draggable: false
+          draggable: false,
+          icon: themeMarker
         });
-        marker.bindPopup(partner.innerHTML).openPopup();
+        marker.bindPopup('<article class="organization">' + partner.innerHTML + '</article>').openPopup();
         map.addLayer(marker);
       }
       newMarker(setLocation)

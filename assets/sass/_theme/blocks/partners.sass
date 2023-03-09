@@ -17,5 +17,27 @@
 
     .map
         height: 600px
-        .organization
+        z-index: 1
+        > .organization
             display: none
+        .leaflet-popup
+            &-tip-container
+                display: none
+            &-content-wrapper
+                border-radius: 0
+                padding: 0
+                .media
+                    margin-bottom: 0
+                h3 a
+                    @include meta
+                    color: black
+                    padding: half($spacing0)
+            &-content
+                margin: 0
+                z-index: 2
+            &-close-button
+                z-index: 4
+    @include in-page-without-sidebar
+        .map
+            margin-left: -$grid-gutter
+            margin-right: -$grid-gutter
