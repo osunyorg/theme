@@ -4,11 +4,11 @@
     <h2>{{ i18n "persons.papers" }}</h2>
     <a href="{{ $researchers.Permalink }}" class="link">{{ i18n "persons.papers" }}</a>
   </div>
-  <div class="papers">
+  <ul class="papers">
     {{ range first 3 .papers }}
-      <div>
-        {{ partial "papers/paper.html" . }}
-      </div>
+      <li>
+        {{ partial "papers/paper.html" (dict "paper" . ) }}
+      </li>
     {{ end }}
-  </div>
+  </ul>
 </section>

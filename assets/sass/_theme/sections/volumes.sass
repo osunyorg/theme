@@ -1,6 +1,60 @@
 .volume
     @include article
+    .suptitle
+        @include meta
 
 .volumes
     @include grid(2, md)
     @include grid(3, lg)
+    
+.volumes__taxonomy
+    .volume
+        .media
+            img
+                aspect-ratio: 1 / 1.2
+.volumes__term
+    .document-content
+        .container
+            @include media-breakpoint-up(desktop)
+                @include grid
+            .content
+                @include media-breakpoint-up(desktop)
+                    grid-column: 1 / 8
+                > div
+                    margin-bottom: $spacing1
+                    @include media-breakpoint-up(desktop)
+                        margin-bottom: $spacing4
+            .document-aside
+                @include media-breakpoint-up(desktop)
+                    grid-column: 9 / 12
+                    order: 2
+                dl
+                    margin: 0
+                    dt
+                        @include meta
+                        &:not(:first-of-type)
+                            margin-top: $spacing2
+    .paper
+        display: block
+        @include media-breakpoint-down(desktop)
+            > div:first-of-type
+                .paper-volume
+                    display: inline-flex
+                    margin-left: $spacing0
+        @include media-breakpoint-up(desktop)
+            > div:first-of-type
+                display: flex
+                flex-wrap: wrap
+                justify-content: space-between
+                h3 
+                    flex: 1
+                > span
+                    order: 3
+                    width: 100%
+                .paper-volume
+                    padding-left: $spacing1
+            .paper-actions
+                gap: $grid-gutter
+                margin-top: $spacing1
+                a, button
+                    width: unset

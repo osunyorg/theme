@@ -166,14 +166,16 @@ ul.diplomas
         li
             @include grid(2, desktop)
             align-items: start
+            position: relative
             a
-                @include media-breakpoint-between(sm, desktop)
-                    display: flex
+                @include stretched-link(before)
+                position: initial
+                @include media-breakpoint-down(desktop)
                     margin-right: $spacing0
                     &::after
+                        align-self: center
                         bottom: unset
-                + p
-                    margin-top: $spacing0
-                @include media-breakpoint-down(sm)
-                    &::after
-                        transform: translateY(50%)
+                        position: relative
+                        margin-left: half($spacing0)
+                    + p
+                        margin-top: $spacing0
