@@ -2,7 +2,6 @@
 
 <div class="map" id="map">
   {{- range .partners }}
-  {{ . }}
     {{ if .slug }}
       {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
         {{ template "partner" (dict 
