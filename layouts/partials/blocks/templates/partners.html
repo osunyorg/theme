@@ -5,8 +5,8 @@
 {{- $class := "block block-partners" -}}
 {{- $layout_class := "block-partners--grid" -}}
 {{ $logo_index := "logo" }}
-{{ $longitude := "longitude" }}
-{{ $latitude := "latitude" }}
+{{ $longitude := "" }}
+{{ $latitude := "" }}
 
 {{ if site.Params.organizations.dark_logo_background }}
   {{ $logo_index = "logo_on_dark_background" }}
@@ -40,8 +40,8 @@
         {{- partial (printf "blocks/templates/partners/%s.html" $layout) (dict 
             "partners" .partners
             "logo_index" $logo_index
-            "longitude" $longitude
-            "latitude" $latitude
+            "" $longitude
+            "" $latitude
           ) }}
       </div>
     </div>

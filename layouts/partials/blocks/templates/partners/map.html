@@ -1,17 +1,16 @@
 {{ $logo_index := .logo_index }}
-{{ $latitude := .latitude }}
-{{ $longitude := .longitude }}
 
 <div class="map" id="map">
   {{- range .partners }}
+  {{ . }}
     {{ if .slug }}
       {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
         {{ template "partner" (dict 
             "title" .Title
             "url" .Permalink
             "logo" (index .Params $logo_index)
-            "latitude" (index .Params $latitude)
-            "longitude" (index .Params $longitude)
+            "latitude" .Params.contact_details.geolocation.latitude
+            "longitude" .Params.contact_details.geolocation.longitude
           )}}
       {{ end }}
     {{ else }}
@@ -20,8 +19,8 @@
           "url" .url
           "external" true
           "logo" .logo
-          "latitude" .latitude
-          "longitude" .longitude
+          "latitude" .Params.contact_details.geolocation.latitude
+          "longitude" .Params.contact_details.geolocation.longitude
         )}}
     {{ end }}
   {{ end -}}
