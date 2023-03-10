@@ -7,12 +7,14 @@ class BlockPartners {
     }
     init() {
         this.content = this.dom.querySelector('#map');
-        this.partnersList = this.content.querySelectorAll('.organization')
+        this.partnersList = this.content.querySelectorAll('.organization');
 
         this.classPartner = 'organization';
         this.markers = [];
         
-        let map = L.map('map').setView([44.833328, -0.56667], 13);
+        let map = L.map('map', {
+            scrollWheelZoom: false
+        });
         this.themeMarker = L.icon({
             iconUrl: '/assets/images/map-marker.svg',
             iconSize: [17, 26],
@@ -48,7 +50,6 @@ class BlockPartners {
     }
 
     getMapBounds(map) {
-        console.log(L.featureGroup(this.markers))
         this.group = L.featureGroup(this.markers).addTo(map);
         map.fitBounds(this.group.getBounds());
     }
