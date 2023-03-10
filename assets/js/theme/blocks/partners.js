@@ -10,14 +10,15 @@ class BlockPartners {
         this.partnersList = this.content.querySelectorAll('.organization')
 
         this.classPartner = 'organization';
+        this.markers = [];
         
         let map = L.map('map').setView([44.833328, -0.56667], 13);
         this.themeMarker = L.icon({
             iconUrl: '/assets/images/map-marker.svg',
             iconSize: [17, 26],
         });
-
         this.listen(map);
+        this.getMapBounds(map);
     }
 
     listen (map) {
@@ -43,6 +44,13 @@ class BlockPartners {
         });
         marker.bindPopup('<article class="' + this.classPartner + '">' + partner.innerHTML + '</article>').openPopup();
         map.addLayer(marker);
+        this.markers.push(marker);
+    }
+
+    getMapBounds(map) {
+        console.log(L.featureGroup(this.markers))
+        this.group = L.featureGroup(this.markers).addTo(map);
+        map.fitBounds(this.group.getBounds());
     }
 
 }
