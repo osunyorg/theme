@@ -28,8 +28,8 @@ class BlockPartners {
             this.listen(map);
             this.getMapBounds(map);
         } else { 
-            this.content.classList.add(this.classHidden);
-            this.content.setAttribute("aria-hidden", "true")
+            this.dom.classList.add(this.classHidden);
+            this.dom.setAttribute("aria-hidden", "true")
             return;
         }
     }
