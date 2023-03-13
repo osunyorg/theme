@@ -3,14 +3,17 @@ const partnersMaps = document.querySelectorAll('.block-partners--map');
 class BlockPartners {
     constructor (dom) {
         this.dom = dom;
+        
         this.init();
     }
     init() {
+        this.markers = [];
+        this.setMap = false;
         this.content = this.dom.querySelector('#map');
         this.partnersList = this.content.querySelectorAll('.organization');
 
         this.classPartner = 'organization';
-        this.markers = [];
+        this.classHidden = 'not-active';
         
         let map = L.map('map', {
             scrollWheelZoom: false
@@ -19,24 +22,33 @@ class BlockPartners {
             iconUrl: '/assets/images/map-marker.svg',
             iconSize: [17, 26],
         });
-        this.listen(map);
-        this.getMapBounds(map);
+        this.setPartners(map);
+
+        if (this.setMap) {
+            this.listen(map);
+            this.getMapBounds(map);
+        } else { 
+            this.content.classList.add(this.classHidden);
+            this.content.setAttribute("aria-hidden", "true")
+            return;
+        }
     }
-
-    listen (map) {
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-
+    setPartners (map) {
         this.partnersList.forEach((partner) => {
             let latitude = parseFloat(partner.getAttribute('data-latitude')),
                 longitude = parseFloat(partner.getAttribute('data-longitude')),
                 mapLocation = [latitude, longitude];
             if (!!latitude && !!longitude) {
                 this.newMarker(map, mapLocation, partner);
+                this.setMap = true;
             }
         });
+    }
+    listen (map) {
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
     }
 
     newMarker(map, mapLocation, partner) {
