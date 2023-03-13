@@ -4,7 +4,7 @@
             .top .description
                 max-width: col(8)
     @include in-page-with-sidebar
-        .organizations
+        .grid
             @include grid(2, md)
             @include grid(3, lg)
             @include grid(4, xl)
@@ -15,3 +15,32 @@
             @include icon(link-blank, after, true)
                 position: relative
 
+    .map
+        height: 600px
+        z-index: 1
+        > .organization,
+        .leaflet-popup-tip-container
+            display: none
+        .leaflet-popup
+            &-content-wrapper
+                border-radius: 0
+                box-shadow: none
+                overflow: hidden
+                padding: 0
+                width: 192px
+                .media
+                    margin-bottom: 0
+                h3 a
+                    @include meta
+                    color: black
+                    padding: half($spacing0)
+            &-content
+                margin: 0
+                width: 100%
+                z-index: 2
+            &-close-button
+                z-index: 4
+    @include in-page-without-sidebar
+        .map
+            margin-left: -$grid-gutter
+            margin-right: -$grid-gutter

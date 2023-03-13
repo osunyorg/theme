@@ -105,7 +105,7 @@ class TableOfContents {
   }
   activateLink(id) {
     const currentLink = this.element.querySelector(`[href*=${ id }]`);
-    // console.log(currentLink.hash)
+
     this.links.forEach((link, index) => {
       if (link == currentLink) {
         link.classList.add(CLASSES.linkActive);
