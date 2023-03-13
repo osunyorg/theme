@@ -13,7 +13,7 @@ class BlockPartners {
         this.partnersList = this.content.querySelectorAll('.organization');
 
         this.classPartner = 'organization';
-        this.classHidden = 'not-active';
+        this.classHidden = 'hidden';
         
         let map = L.map('map', {
             scrollWheelZoom: false
