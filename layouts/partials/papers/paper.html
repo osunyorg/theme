@@ -9,7 +9,10 @@
           <span itemprop="name">{{ partial "PrepareHTML" .Title }}</span>
         </a>
       </h3>
-      <div class="paper-authors">
+      <p>
+        {{ with .Params.paper_kind }}
+          <span class="paper-kind">{{ . }}</span>
+        {{ end }}
         {{- range $index, $authors := .Params.Researchers -}}
           {{- $author := site.GetPage (printf "/persons/%s" .) -}}
           {{ if $author }}
@@ -21,18 +24,17 @@
             </span>
           {{- end -}}
         {{- end -}}
-      </div>
-      <p class="paper-volume">
-        <span>{{ .Params.paper_kind }}</span>
-        {{ if not $inside_volume }}
+      </p>
+      {{ if not $inside_volume }}
+        <p class="paper-volume">
           {{ range .Params.Volumes }}
             {{ $volume := site.GetPage (printf "/volumes/%s" .) }}
             {{ if $volume }}
               {{ i18n "commons.in" }} “<a href="{{ $volume.Permalink }}">{{ $volume.Title }}</a>”
             {{ end }}
           {{ end }}
-        {{ end }}
-      </p>
+        </p>
+      {{ end }}
     </div>
     {{ partial "papers/actions.html" (dict "paper" . ) }}
   </article>
