@@ -53,15 +53,21 @@
                 @include grid
             .content
                 @include media-breakpoint-up(desktop)
-                    grid-column: 1 / 9
+                    grid-column: 5 / 12
                 section + section
                     margin-top: $spacing2
                     @include media-breakpoint-up(desktop)
                         margin-top: $spacing4
                 .squared-button
                     margin-bottom: 0
-                    margin-top: $spacing2
+                    margin-top: $spacing0
                     width: auto
+                .paper-essentials
+                    h2
+                        @include meta
+                        margin-top: $spacing2
+                        &:first-of-type
+                            margin-top: 0
                 .paper-body
                     h2
                         margin-bottom: $spacing2
@@ -79,8 +85,9 @@
                                     text-decoration: none
             .document-nav
                 @include media-breakpoint-up(desktop)
-                    grid-column: 9 / 12
-                    order: 2
+                    grid-column: 1 / 5
+                    img
+                        width: col(2, 4)
                 dl
                     margin: 0
                     dt
