@@ -9,21 +9,26 @@
         ) -}}
 <div class="document-content" itemscope itemtype="https://schema.org/ScholarlyArticle">
   <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+  {{ partial "papers/sidebar.html" . }}
 
   <div class="container">
-    
-    {{ partial "papers/document-nav.html" . }}
 
-    <div class="content">
-      {{ partial "papers/abstract.html" . }}
-      {{ partial "papers/authors.html" . }}
-      {{ partial "papers/body.html" . }}
-      {{ partial "papers/references.html" . }}
+    <div class="blocks">
+      <div class="block">
+        <div class="container">
+          <div class="block-content">
+            {{ partial "papers/abstract.html" . }}
+            {{ partial "papers/authors.html" . }}
+            {{ partial "papers/body.html" . }}
+            {{ partial "papers/references.html" . }}
+          </div>
+        </div>
+      </div>
     </div>
+    {{ partial "blocks/list.html" . }}
     
   </div>
 </div>
-{{ partial "blocks/list.html" . }}
 
 
 {{ end }}

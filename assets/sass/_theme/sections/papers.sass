@@ -47,57 +47,81 @@
             
 
 .papers__page
+    @include media-breakpoint-down(desktop)
+        .document-content
+            display: flex
+            flex-direction: column
+            aside
+                order: 2
+                padding: 0 half($grid-gutter-sm)
+    @include media-breakpoint-up(desktop)
+        .paper-sidebar
+            @include container-margin-left
+            margin-top: 0
+            top: 0
+            left: 0
+            height: 100%
+            position: absolute
+            width: col-outside-container(4)
+            > div
+                @include sticky($spacing1)
+            .toc-container
+                border-top: 1px solid $color-border
+                padding-top: $spacing1
+                position: static
+                margin-left: 0
+
     .document-content
-        .container
+        // .container
+        //     @include media-breakpoint-up(desktop)
+        //         @include grid
+        .content
             @include media-breakpoint-up(desktop)
-                @include grid
-            .content
+                grid-column: 5 / 12
+            section + section
+                margin-top: $spacing2
                 @include media-breakpoint-up(desktop)
-                    grid-column: 5 / 12
-                section + section
+                    margin-top: $spacing4
+            .squared-button
+                margin-bottom: 0
+                margin-top: $spacing0
+                width: auto
+            .paper-essentials
+                h2
+                    @include meta
                     margin-top: $spacing2
-                    @include media-breakpoint-up(desktop)
-                        margin-top: $spacing4
-                .squared-button
-                    margin-bottom: 0
-                    margin-top: $spacing0
-                    width: auto
-                .paper-essentials
-                    h2
-                        @include meta
+                    &:first-of-type
+                        margin-top: 0
+            .paper-body
+                h2
+                    margin-bottom: $spacing2
+            .paper-authors
+                h2
+                    @include h3
+                .authors
+                    @include grid(2, desktop)
+                    article
                         margin-top: $spacing2
-                        &:first-of-type
-                            margin-top: 0
-                .paper-body
-                    h2
-                        margin-bottom: $spacing2
-                .paper-authors
-                    h2
-                        @include h3
-                    .authors
-                        @include grid(2, desktop)
-                        article
-                            margin-top: $spacing2
-                            .name
-                                a
-                                    @include h4
-                                    @include stretched-link(before)
-                                    text-decoration: none
-            .document-nav
-                @include media-breakpoint-up(desktop)
-                    grid-column: 1 / 5
-                    img
-                        width: col(2, 4)
-                dl
-                    margin: 0
-                    dt
-                        @include meta
-                        margin-bottom: $spacing0
-                        &:not(:first-of-type)
-                            margin-top: $spacing2
-                    dd:first-of-type
-                        a
-                            display: flex
-                            flex-direction: column
-                            span
-                                order: 3
+                        .name
+                            a
+                                @include h4
+                                @include stretched-link(before)
+                                text-decoration: none
+        .document-nav
+            @include media-breakpoint-up(desktop)
+                grid-column: 1 / 5
+                img
+                    width: col(2, 4)
+            dl
+                margin: 0
+                dt
+                    @include meta
+                    margin-bottom: $spacing0
+                    &:not(:first-of-type)
+                        margin-top: $spacing2
+                dd:first-of-type
+                    a
+                        display: flex
+                        flex-direction: column
+                        span
+                            order: 3
