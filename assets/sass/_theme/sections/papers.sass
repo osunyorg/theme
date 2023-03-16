@@ -47,34 +47,34 @@
             
 
 .papers__page
-    @include media-breakpoint-down(desktop)
-        .document-content
-            display: flex
-            flex-direction: column
-            aside
-                order: 2
-                padding: 0 half($grid-gutter-sm)
-    @include media-breakpoint-up(desktop)
-        .paper-sidebar
-            @include container-margin-left
-            margin-top: 0
-            top: 0
-            left: 0
-            height: 100%
-            position: absolute
-            width: col-outside-container(4)
-            > div
-                @include sticky($spacing1)
-            .toc-container
-                border-top: 1px solid $color-border
-                padding-top: $spacing1
-                position: static
-                margin-left: 0
+    // @include media-breakpoint-down(desktop)
+    //     .document-content
+    //         display: flex
+    //         flex-direction: column
+    //         aside
+    //             order: 2
+    //             padding: 0 half($grid-gutter-sm)
+    // @include media-breakpoint-up(desktop)
+    //     .paper-sidebar
+    //         @include container-margin-left
+    //         margin-top: 0
+    //         top: 0
+    //         left: 0
+    //         height: 100%
+    //         position: absolute
+    //         width: col-outside-container(4)
+    //         > div
+    //             @include sticky($spacing1)
+    //         .toc-container
+    //             border-top: 1px solid $color-border
+    //             padding-top: $spacing1
+    //             position: static
+    //             margin-left: 0
 
     .document-content
-        // .container
-        //     @include media-breakpoint-up(desktop)
-        //         @include grid
+        .container
+            @include media-breakpoint-up(desktop)
+                @include grid
         .content
             @include media-breakpoint-up(desktop)
                 grid-column: 5 / 12
