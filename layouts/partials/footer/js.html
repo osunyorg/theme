@@ -5,14 +5,14 @@
     {{ if eq .template "partners"}}
       {{ with .data }}
         {{ if eq .layout "map" }}
-          {{ $isLeafletNeeded := true }}
+          {{ $isLeafletNeeded = true }}
         {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
 
-{{ if $isLeafletNeeded = true }}
+{{ if $isLeafletNeeded }}
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
         integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
         crossorigin=""/>
