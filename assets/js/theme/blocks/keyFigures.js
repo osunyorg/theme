@@ -60,6 +60,7 @@ class KeyFigures {
 
     loop () {
         this.time = Math.min(new Date().getTime() - this.start, OPTIONS.DURATION);
+        console.log(this.time)
         this.figures.forEach((figure, index) => {
             this.values[index] = this.getValues(this.time, 0, this.targets[index], OPTIONS.DURATION);
             figure.innerHTML = this.formatValue(parseFloat(this.values[index], 10));
@@ -67,11 +68,14 @@ class KeyFigures {
 
         if (this.time < OPTIONS.DURATION) {
             window.requestAnimationFrame(this.loop.bind(this));
+        } else {
+            this.onEnded();
         }
     }
 
     getValues (time, from, to, duration) {
         const decimalsLength = to.decimals();
+
         let value = KeyFigures.easeOutQuad(time, from, to, duration);
         if (decimalsLength) {
             value = Math.round(value * decimalsLength * 10) / (decimalsLength * 10);
@@ -83,6 +87,12 @@ class KeyFigures {
 
     formatValue (value, separator = " ") {
         return value.toLocaleString('en').replace(',', separator);
+    }
+
+    onEnded() {
+        this.figures.forEach((figure, index) => {
+            figure.innerHTML = this.formatValue(this.targets[index]);
+        });
     }
 
     resize () {
