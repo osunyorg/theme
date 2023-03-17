@@ -47,37 +47,35 @@
             
 
 .papers__page
-    // @include media-breakpoint-down(desktop)
-    //     .document-content
-    //         display: flex
-    //         flex-direction: column
-    //         aside
-    //             order: 2
-    //             padding: 0 half($grid-gutter-sm)
-    // @include media-breakpoint-up(desktop)
-    //     .paper-sidebar
-    //         @include container-margin-left
-    //         margin-top: 0
-    //         top: 0
-    //         left: 0
-    //         height: 100%
-    //         position: absolute
-    //         width: col-outside-container(4)
-    //         > div
-    //             @include sticky($spacing1)
-    //         .toc-container
-    //             border-top: 1px solid $color-border
-    //             padding-top: $spacing1
-    //             position: static
-    //             margin-left: 0
+    @include media-breakpoint-down(desktop)
+        .document-content
+            aside
+                order: 2
+                padding: 0 half($grid-gutter-sm)
+    @include media-breakpoint-up(desktop)
+        .paper-sidebar
+            @include container-margin-left
+            margin-top: 0
+            top: 0
+            left: 0
+            height: 100%
+            position: absolute
+            width: col-outside-container(4)
+            // > div
+            //     @include sticky($spacing1)
+            .toc-container
+                border-top: 1px solid $color-border
+                padding-top: $spacing1
+                position: static
+                margin-left: 0
+            .media
+                width: col(2, 4)
 
     .document-content
-        .container
-            @include media-breakpoint-up(desktop)
-                @include grid
         .content
+            margin-bottom: $spacing4
             @include media-breakpoint-up(desktop)
-                grid-column: 5 / 12
+                padding-left: offset(4)
             section + section
                 margin-top: $spacing2
                 @include media-breakpoint-up(desktop)
@@ -86,6 +84,8 @@
                 margin-bottom: 0
                 margin-top: $spacing0
                 width: auto
+            h2
+                margin-bottom: $spacing0
             .paper-essentials
                 h2
                     @include meta
@@ -108,10 +108,10 @@
                                 @include stretched-link(before)
                                 text-decoration: none
         .document-nav
-            @include media-breakpoint-up(desktop)
-                grid-column: 1 / 5
-                img
-                    width: col(2, 4)
+            // @include media-breakpoint-up(desktop)
+            //     grid-column: 1 / 5
+            //     img
+            //         width: col(2, 4)
             dl
                 margin: 0
                 dt
