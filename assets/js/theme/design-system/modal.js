@@ -36,7 +36,8 @@ class Modal {
             if (event.keyCode === 27 || event.key === 'Escape') {
                 this.toggle(false);
             } else if (event.key === "Tab") {
-                this.innerFocus(event);
+                // TODO fix a11y inner focus
+                // this.innerFocus(event);
             }
         });
 
@@ -55,6 +56,7 @@ class Modal {
         const firstFocusable = focusableInDialog[0];
         const lastFocusable = focusableInDialog.at(-1);
 
+        console.log(firstFocusable, lastFocusable)
         if (!this.state.isOpened) {
             return;
         }
@@ -65,6 +67,8 @@ class Modal {
         else if (!this.element.contains(event.target)) {
             firstFocusable.focus();
         }
+
+        this.closeButtons[0].focus();
     }
 
     toggle(open = !this.state.isOpened) {
