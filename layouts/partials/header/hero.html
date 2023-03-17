@@ -33,14 +33,14 @@
                 "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
                 "lazy"     false
               ) }}
-              {{ if partial "GetTextFromHTML" .image.credit }}
-                <figcaption tabindex="0">
-                  <p>
-                    {{- partial "GetTextFromHTML" .image.credit -}}
-                  </p>
-                </figcaption>
-              {{ end }}
-          </a>
+            </a>
+            {{ if partial "GetTextFromHTML" .image.credit }}
+              <figcaption tabindex="0">
+                <p>
+                  {{- partial "GetTextFromHTML" .image.credit -}}
+                </p>
+              </figcaption>
+            {{ end }}
         </figure>
       {{ end -}}
     </div>
