@@ -9,17 +9,17 @@ class BlockPartners {
     init() {
         this.markers = [];
         this.setMap = false;
-        this.content = this.dom.querySelector('#map');
+        this.content = this.dom.querySelector('.map');
         this.partnersList = this.content.querySelectorAll('.organization');
+        let map = L.map(this.content, {
+            scrollWheelZoom: false
+        });
 
         this.classPartner = 'organization';
         this.classHidden = 'hidden';
-        
-        let map = L.map('map', {
-            scrollWheelZoom: false
-        });
+
         this.themeMarker = L.icon({
-            iconUrl: '/assets/images/map-marker.svg',
+            iconUrl: this.content.getAttribute('data-marker-icon') || '/assets/images/map-marker.svg',
             iconSize: [17, 26],
         });
         this.setPartners(map);
