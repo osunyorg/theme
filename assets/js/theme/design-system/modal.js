@@ -56,7 +56,6 @@ class Modal {
         const firstFocusable = focusableInDialog[0];
         const lastFocusable = focusableInDialog.at(-1);
 
-        console.log(firstFocusable, lastFocusable)
         if (!this.state.isOpened) {
             return;
         }

@@ -60,7 +60,7 @@ class KeyFigures {
 
     loop () {
         this.time = Math.min(new Date().getTime() - this.start, OPTIONS.DURATION);
-        console.log(this.time)
+
         this.figures.forEach((figure, index) => {
             this.values[index] = this.getValues(this.time, 0, this.targets[index], OPTIONS.DURATION);
             figure.innerHTML = this.formatValue(parseFloat(this.values[index], 10));
