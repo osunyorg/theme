@@ -52,14 +52,14 @@
         {{ with .Params.dates.accepted }}
           <dt>{{ i18n "papers.dates.accepted" }}</dt>
           <dd>
-            <time itemprop="datePublished" datetime="{{ . | time.Format "2006-01-02T15:04" }}">{{ . | time.Format ":date_long" }}</time>
+            <time datetime="{{ . | time.Format "2006-01-02T15:04" }}">{{ . | time.Format ":date_long" }}</time>
           </dd>
         {{ end }}
     
         {{ with .Params.dates.received }}
           <dt>{{ i18n "papers.dates.received" }}</dt>
           <dd>
-            <time itemprop="datePublished" datetime="{{ . | time.Format "2006-01-02T15:04" }}">{{ . | time.Format ":date_long" }}</time>
+            <time datetime="{{ . | time.Format "2006-01-02T15:04" }}">{{ . | time.Format ":date_long" }}</time>
           </dd>
         {{ end }}
       </dl>
