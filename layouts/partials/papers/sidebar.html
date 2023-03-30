@@ -42,13 +42,6 @@
           <dd itemprop="inLanguage" content="{{ .Params.Lang_iso }}">{{ .Params.Lang }}</dd>
         {{ end }}
     
-        {{ if .Date }}
-          <dt>{{ i18n "commons.date" }}</dt>
-          <dd>
-            <time itemprop="datePublished" datetime="{{ .Date | time.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
-          </dd>
-        {{ end }}
-    
         {{ with .Params.dates.published }}
           <dt>{{ i18n "papers.dates.published" }}</dt>
           <dd>
