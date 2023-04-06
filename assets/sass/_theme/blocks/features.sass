@@ -8,18 +8,21 @@
             margin-top: $spacing3
         h3
             margin-bottom: $spacing0
-        picture
+        figure
             order: -1
             margin-bottom: $spacing1
             img
                 display: block
                 margin: auto
-
+            figcaption
+                @include meta
+                margin-top: $spacing0
+                text-align: right
     @include media-breakpoint-up(md)
         @include in-page-with-sidebar
             li
                 flex-direction: row
-                picture
+                figure
                     width: calc(#{col(2, 8)} + #{half($grid-gutter)})
                     flex-shrink: 0
                     margin-right: half($grid-gutter)
