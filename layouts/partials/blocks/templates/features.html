@@ -1,0 +1,49 @@
+{{- $template := .block.template -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+{{- with .block.data -}}
+  {{- $features := .elements }}
+  <section class="block block-features{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
+        {{- if (or $title .description) }}
+          <div class="top">
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ end -}}
+            {{- if .description }}
+              <div class="description">
+                {{ partial "PrepareHTML"  .description }}
+              </div>
+            {{ end -}}
+          </div>
+        {{ end -}}
+        {{ if $features }}
+          {{ $list_class := "odd-items" }}
+          {{ if (modBool (len $features) 2) }}
+            {{ $list_class = "even-items" }}
+          {{ end }}
+          <ul class="{{ $list_class }}">
+            {{- range $features }}
+              <li>
+                <div>
+                  <h3>{{ partial "PrepareText" .title }}</h3>
+                  <p>{{ partial "PrepareText" .description }}</p>
+                </div>
+                {{- if .image -}}
+                  {{- partial "commons/image.html"
+                    (dict
+                      "image"    .image
+                      "sizes"    site.Params.image_sizes.blocks.features
+                    ) -}}
+                {{- end -}}
+              </li>
+            {{ end -}}
+          </ul>
+        {{ end -}}
+      </div>
+    </div>
+  </section>
+{{ end }}
