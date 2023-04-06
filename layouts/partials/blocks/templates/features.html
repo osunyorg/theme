@@ -21,11 +21,7 @@
           </div>
         {{ end -}}
         {{ if $features }}
-          {{ $list_class := "odd-items" }}
-          {{ if (modBool (len $features) 2) }}
-            {{ $list_class = "even-items" }}
-          {{ end }}
-          <ul class="{{ $list_class }}">
+          <ul>
             {{- range $features }}
               <li>
                 <div>
