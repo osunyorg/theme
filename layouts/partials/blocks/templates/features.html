@@ -33,12 +33,13 @@
                     {{- partial "commons/image.html"
                       (dict
                         "image"    .image
+                        "alt"      .alt
                         "sizes"    site.Params.image_sizes.blocks.features
                       ) -}}
                       {{- if .credit -}}
-                      <figcaption>
-                        {{ partial "PrepareText" .credit }}
-                      </figcaption>
+                        <figcaption>
+                          {{ partial "PrepareText" .credit }}
+                        </figcaption>
                       {{- end -}}
                   </figure>
                 {{- end -}}
