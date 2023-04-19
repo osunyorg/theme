@@ -13,7 +13,7 @@
   {{ end }}
   <li>
     <span>{{ i18n "posts.date" }}</span>
-    <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
+    <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
   </li>
   {{ range .GetTerms "authors" }}
     <li>
