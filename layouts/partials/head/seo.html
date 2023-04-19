@@ -1,6 +1,8 @@
+{{- $title := chomp (htmlUnescape .Title) -}}
 {{- $seoTitle := htmlUnescape site.Title -}}
+{{- $seoTitleSeparator := htmlUnescape site.Params.seo.title.separator -}}
 {{- if .Title -}}
-  {{- $seoTitle = printf "%s | %s" (chomp (htmlUnescape .Title)) $seoTitle -}}
+  {{- $seoTitle = printf "%s %s %s" $title $seoTitleSeparator $seoTitle -}}
 {{- end -}}
 {{- $seoDescription := "" -}}
 {{- if .Params.meta_description -}}
