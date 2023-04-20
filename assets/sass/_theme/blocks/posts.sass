@@ -163,3 +163,18 @@
                     margin-top: 0
                     article:first-child
                         margin-top: 0
+    &--alternate .alternate
+        @include media-breakpoint-up(desktop)
+            margin-left: calc(#{$grid-gutter} * 2)
+            margin-right: calc(#{$grid-gutter} * 2)
+            .post
+                width: col(4, 10)
+                &.right
+                    margin-left: auto
+                &:not(:first-child)
+                    &.portrait
+                        margin-top: -30%
+                    &.square
+                        margin-top: -15%
+        .post .media img
+            aspect-ratio: unset

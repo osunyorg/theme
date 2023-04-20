@@ -1,12 +1,20 @@
 {{ $post := .post }}
+{{- $direction := "" -}}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
     "open" ((printf "<%s itemprop='headline'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
+{{ $index := .index}}
+{{ $alternate := .alternate}}
 
 {{ with $post }}
-<article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+
+{{ if .Params.image }}
+  {{- $direction = partial "GetImageDirection" .Params.image -}}
+{{ end }}
+
+<article class='post {{ if $alternate }}{{ $direction }} {{if not (modBool $index 2)}}left{{ else}}right{{end}}{{end}}' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
   <div class="post-content">
     {{- $title := partial "PrepareHTML" .Title -}}
 
