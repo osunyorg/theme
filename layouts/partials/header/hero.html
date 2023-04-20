@@ -22,18 +22,21 @@
       {{- end -}}
       {{- if .image }}
         <figure>
-          <a class="glightbox"
-            data-glightbox="type: image;{{ if .image.credit }}description: {{ partial "PrepareHTML" .image.credit }}{{ end }}"
-            href="{{ partial "GetLightboxUrl" .image }}"
-            title="{{- i18n "commons.lightbox.link.title" -}}"
-            >
+          {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+            <a  class="glightbox"
+                data-glightbox="type: image;{{ if .image.credit }}description: {{ partial "PrepareHTML" .image.credit }}{{ end }}"
+                href="{{ partial "GetLightboxUrl" .image }}"
+                title="{{- i18n "commons.lightbox.link.title" -}}">
+          {{ end }}
             {{ partial "commons/image.html"
               (dict
                 "image"    .image
                 "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
                 "lazy"     false
               ) }}
+          {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             </a>
+          {{ end }}
             {{ if partial "GetTextFromHTML" .image.credit }}
               <figcaption tabindex="0">
                 <p>
