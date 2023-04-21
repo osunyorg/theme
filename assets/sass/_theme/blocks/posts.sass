@@ -165,17 +165,21 @@
                         margin-top: 0
     &--alternate .alternate
         @include media-breakpoint-up(desktop)
-            margin-left: calc(#{$grid-gutter} * 2)
-            margin-right: calc(#{$grid-gutter} * 2)
             .post
-                width: col(4, 10)
+                width: col(3,8)
                 &.right
                     margin-left: auto
-                &.left
-                    &.portrait
+                &.portrait
+                    + .portrait
                         margin-top: -30%
-                    &.square,
-                    &.landscape
+                    + .square,
+                    + .landscape
                         margin-top: -15%
+            @include in-page-without-sidebar
+                width: col(10)
+                margin-left: auto
+                margin-right: auto
+                .post
+                    width: col(4, 10)
         .post .media img
             aspect-ratio: unset
