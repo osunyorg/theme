@@ -4,6 +4,7 @@
 {{- if .Title -}}
   {{- $seoTitle = printf "%s %s %s" $title $seoTitleSeparator $seoTitle -}}
 {{- end -}}
+{{- $seoTitle = partial "GetPaginateTitle" ( dict "title" $seoTitle "separator" $seoTitleSeparator "context" .) -}}
 {{- $seoDescription := "" -}}
 {{- if .Params.meta_description -}}
   {{- $seoDescription = partial "PrepareHTML" .Params.meta_description -}}
