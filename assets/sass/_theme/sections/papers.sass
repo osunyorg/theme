@@ -66,13 +66,17 @@
             height: 100%
             position: absolute
             width: col-outside-container(4)
-            // > div
-            //     @include sticky($spacing1)
+            > div
+                height: 100%
+                position: relative
+            aside
+                border-bottom: 1px solid $color-border
+                padding-bottom: $spacing1
             .toc-container
-                border-top: 1px solid $color-border
-                padding-top: $spacing1
-                position: static
+                height: unset
                 margin-left: 0
+                padding-top: $spacing1
+                @include sticky(-1px)
             .media
                 width: col(2, 4)
     
