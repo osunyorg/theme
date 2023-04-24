@@ -1,0 +1,14 @@
+{{ $content := partial "GetTextFromHTML" .context.Params.content }}
+{{ $references :=  partial "GetTextFromHTML" .context.Params.references }}
+{{ $researchers :=  partial "GetTextFromHTML" .context.Params.researchers }}
+{{ $abstract :=  partial "GetTextFromHTML" .context.Params.Abstract }}
+
+
+<nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
+    <ol>
+      <li>
+        <a href="#{{ urlize (i18n "programs.toc.essential") }}">{{ i18n "programs.toc.essential" }}</a>
+      </li>
+    </ol>
+  </nav>
+  
