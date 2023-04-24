@@ -24,9 +24,11 @@
         <figure>
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             <a  class="glightbox"
+                role="button"
                 data-glightbox="type: image;{{ if .image.credit }}description: {{ partial "PrepareHTML" .image.credit }}{{ end }}"
                 href="{{ partial "GetLightboxUrl" .image }}"
-                title="{{- i18n "commons.lightbox.link.title" -}}">
+                title="{{- i18n "commons.lightbox.link.title" -}}"
+                aria-label="{{- i18n "commons.lightbox.link.title" -}}">
           {{ end }}
             {{ partial "commons/image.html"
               (dict
