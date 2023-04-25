@@ -1,14 +1,22 @@
-{{ $content := partial "GetTextFromHTML" .context.Params.content }}
-{{ $references :=  partial "GetTextFromHTML" .context.Params.references }}
-{{ $researchers :=  partial "GetTextFromHTML" .context.Params.researchers }}
-{{ $abstract :=  partial "GetTextFromHTML" .context.Params.Abstract }}
-
+{{ $content := .context.Content }}
+{{ $references := .context.Params.References }}
+{{ $researchers := .context.Params.researchers }}
+{{ $abstract := .context.Params.Abstract }}
 
 <nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
     <ol>
-      <li>
-        <a href="#{{ urlize (i18n "programs.toc.essential") }}">{{ i18n "programs.toc.essential" }}</a>
-      </li>
+      {{- if $abstract -}}
+        <li><a href="#abstract">{{ i18n "papers.toc.abstract" }}</a></li>
+      {{- end -}}
+      {{- if $researchers -}}
+        <li><a href="#authors">{{ i18n "papers.toc.researchers" }}</a></li>
+      {{- end -}}
+      {{- if $content -}}
+        <li><a href="#content">{{ i18n "papers.toc.content" }}</a></li>
+      {{- end -}}
+      {{- if $references -}}
+        <li><a href="#references">{{ i18n "papers.toc.references" }}</a></li>
+      {{- end -}}
     </ol>
   </nav>
   
