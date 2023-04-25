@@ -2,6 +2,7 @@
 {{ $references := .context.Params.References }}
 {{ $researchers := .context.Params.researchers }}
 {{ $abstract := .context.Params.Abstract }}
+{{ $blocks := .context.Params.blocks}}
 
 <nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
     <ol>
@@ -16,6 +17,9 @@
       {{- end -}}
       {{- if $references -}}
         <li><a href="#references">{{ i18n "papers.toc.references" }}</a></li>
+      {{- end -}}
+      {{- if $blocks -}}
+        {{- partial "blocks/toc.html" $blocks -}}
       {{- end -}}
     </ol>
   </nav>
