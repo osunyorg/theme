@@ -29,15 +29,16 @@ class Modal {
         this.closeButtons.forEach(button => {
             button.addEventListener('click', () => {
                 this.toggle(false);
+                this.button.focus()
             });
         });
 
         window.addEventListener('keydown', (event) => {
             if (event.keyCode === 27 || event.key === 'Escape') {
                 this.toggle(false);
-            } else if (event.key === "Tab") {
-                // TODO fix a11y inner focus
-                // this.innerFocus(event);
+            } else if (this.state.isOpened && event.key === "Tab") {
+                this.innerFocus(event);
+                event.preventDefault();
             }
         });
 
@@ -67,7 +68,8 @@ class Modal {
             firstFocusable.focus();
         }
 
-        this.closeButtons[0].focus();
+        // this.closeButtons[0].focus();
+        firstFocusable.focus();
     }
 
     toggle(open = !this.state.isOpened) {
@@ -77,9 +79,9 @@ class Modal {
         this.element.setAttribute('aria-hidden', !this.state.isOpened);
         document.documentElement.classList[classAction](CLASSES.modalOpened);
 
-        if (!this.state.isOpened) {
-            this.button.focus();
-        }
+        // if (!this.state.isOpened) {
+            // this.button.focus();
+        // }
     }
 
 }
