@@ -1,0 +1,26 @@
+{{ $content := .context.Content }}
+{{ $references := .context.Params.References }}
+{{ $researchers := .context.Params.researchers }}
+{{ $abstract := .context.Params.Abstract }}
+{{ $blocks := .context.Params.blocks}}
+
+<nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
+    <ol>
+      {{- if $abstract -}}
+        <li><a href="#abstract">{{ i18n "papers.toc.abstract" }}</a></li>
+      {{- end -}}
+      {{- if $researchers -}}
+        <li><a href="#authors">{{ i18n "papers.toc.researchers" }}</a></li>
+      {{- end -}}
+      {{- if $content -}}
+        <li><a href="#full-text">{{ i18n "papers.toc.content" }}</a></li>
+      {{- end -}}
+      {{- if $references -}}
+        <li><a href="#references">{{ i18n "papers.toc.references" }}</a></li>
+      {{- end -}}
+      {{- if $blocks -}}
+        {{- partial "blocks/toc.html" $blocks -}}
+      {{- end -}}
+    </ol>
+  </nav>
+  
