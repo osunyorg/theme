@@ -36,7 +36,7 @@ class Modal {
         window.addEventListener('keydown', (event) => {
             if (event.keyCode === 27 || event.key === 'Escape') {
                 this.toggle(false);
-            } else if (this.state.isOpened && event.key === "Tab") {
+            } else if (event.key === "Tab" && this.state.isOpened) {
                 this.innerFocus(event);
                 event.preventDefault();
             }
@@ -67,8 +67,6 @@ class Modal {
         else if (!this.element.contains(event.target)) {
             firstFocusable.focus();
         }
-
-        // this.closeButtons[0].focus();
         firstFocusable.focus();
     }
 
@@ -78,10 +76,6 @@ class Modal {
 
         this.element.setAttribute('aria-hidden', !this.state.isOpened);
         document.documentElement.classList[classAction](CLASSES.modalOpened);
-
-        // if (!this.state.isOpened) {
-            // this.button.focus();
-        // }
     }
 
 }
