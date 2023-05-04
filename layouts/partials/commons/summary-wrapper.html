@@ -1,0 +1,21 @@
+{{ $summary := .summary | default (partial "PrepareText" .context.Params.summary) }}
+
+{{- if eq .site.Params.summary.position "content" -}}
+  {{- if .block_wrapped -}}
+  <section class="block block-summary">
+    <div class="container">
+      <div class="block-content">
+  {{- else if .with_container -}}
+  <div class="container">
+  {{- end -}}
+
+  <p class="lead" role="heading" aria-level="2">{{ $summary }}</p>
+
+  {{- if .block_wrapped -}}
+      </div>
+    </div>
+  </section>
+  {{- else if .with_container -}}
+  </div>
+  {{- end -}}
+{{- end -}}
