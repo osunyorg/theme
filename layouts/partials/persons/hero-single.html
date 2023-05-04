@@ -1,10 +1,24 @@
+{{ $subtitle := "" }}
+{{- $summary := partial "PrepareText" .Params.summary -}}
+{{ if and (eq site.Params.summary.position "hero") $summary }}
+  {{ $subtitle = $summary }}
+{{ end }}
+
 <header class="hero">
   <div class="container">
     {{- if eq site.Params.breadcrumb.position "hero-start" -}}
       {{ partial "header/breadcrumbs.html" . }}
     {{- end -}}
     <div class="content">
-      <h1>{{ safeHTML (partial "CorrectPunctuation" .Title) }}</h1>
+      {{- if $subtitle -}}
+        <hgroup>
+          <h1>{{ partial "PrepareHTML" .Title }}</h1>
+          <p class="lead">{{ partial "PrepareHTML" $subtitle }}</p>
+        </hgroup>
+      {{- else -}}
+        <h1>{{ partial "PrepareHTML" .Title }}</h1>
+      {{- end -}}
+
       {{ if .Params.image }}
         <div class="avatar">
           {{ partial "commons/image.html"

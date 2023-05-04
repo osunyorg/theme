@@ -6,10 +6,12 @@
 {{ end }}
 
 {{- $summary := partial "PrepareText" .context.Params.summary -}}
+{{- $subtitle_is_summary := false -}}
 
 {{ if not $subtitle }}
   {{ if and (eq site.Params.summary.position "hero") $summary }}
    {{ $subtitle = $summary }}
+   {{ $subtitle_is_summary = true }}
   {{ end }}
 {{ end }}
 
@@ -24,7 +26,7 @@
       {{- if $subtitle -}}
         <hgroup>
           <h1>{{ partial "PrepareHTML" .title }}</h1>
-          <p>{{ partial "PrepareHTML" $subtitle }}</p>
+          <p {{ if $subtitle_is_summary -}} class="lead" {{- end -}}>{{ partial "PrepareHTML" $subtitle }}</p>
         </hgroup>
       {{- else -}}
         <h1>{{ partial "PrepareHTML" .title }}</h1>
