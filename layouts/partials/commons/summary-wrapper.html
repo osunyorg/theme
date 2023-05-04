@@ -1,6 +1,5 @@
 {{ $summary := .summary | default (partial "PrepareText" .context.Params.summary) }}
-
-{{- if eq .site.Params.summary.position "content" -}}
+{{- if eq site.Params.summary.position "content" -}}
   {{- if .block_wrapped -}}
   <section class="block block-summary">
     <div class="container">

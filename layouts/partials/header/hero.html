@@ -1,7 +1,16 @@
 {{- $direction := "" -}}
 {{- $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero"  -}}
+{{- $subtitle := .subtitle -}}
 {{ if .image }}
   {{- $direction = partial "GetImageDirection" .image -}}
+{{ end }}
+
+{{- $summary := partial "PrepareText" .context.Params.summary -}}
+
+{{ if not $subtitle }}
+  {{ if and (eq site.Params.summary.position "hero") $summary }}
+   {{ $subtitle = $summary }}
+  {{ end }}
 {{ end }}
 
 <header class="hero {{ if .image -}}hero--with-image hero--image-{{- $direction -}}{{- end }} {{ if $breadcrumb_is_after_hero -}} hero--no-margin {{- end }}">
@@ -12,10 +21,10 @@
       {{- end -}}
     {{- end -}}
     <div class="content">
-      {{- if .subtitle -}}
+      {{- if $subtitle -}}
         <hgroup>
           <h1>{{ partial "PrepareHTML" .title }}</h1>
-          <p>{{ partial "PrepareHTML" .subtitle }}</p>
+          <p>{{ partial "PrepareHTML" $subtitle }}</p>
         </hgroup>
       {{- else -}}
         <h1>{{ partial "PrepareHTML" .title }}</h1>
