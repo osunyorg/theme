@@ -4,9 +4,30 @@ params:
     enable: false
     blank: true
     page: https://gdpr.eu/cookies/
+  plausible: false
+  seo:
+    title:
+      separator: "|"
+  logo:
+    header: "/assets/images/logo.svg"
+    footer: "/assets/images/logo.svg"
   breadcrumb:
     position: hero-start #  hero-start |  hero-end | after-hero | none
-  plausible: 
+  summary:
+    position: content # content | hero
+  home:
+    toc:
+      disabled: true
+  organizations:
+    dark_logo_background: false
+  pages:
+    index:
+      truncate_description: 200 # Set to 0 to disable truncate
+  partners:
+    map_marker_icon: '/assets/images/map-marker.svg'
+  persons:
+    index:
+      layout: list # grid | list
   posts:
     default_image: false
     date_format: ":date_long"
@@ -16,28 +37,9 @@ params:
       show_description: true
       truncate_description: 200 # Set to 0 to disable truncate
       layout: list # grid | list
-  pages:
-    index:
-      truncate_description: 200 # Set to 0 to disable truncate
-  partners:
-    map_marker_icon: '/assets/images/map-marker.svg'
-  persons:
-    index:
-      layout: list # grid | list
   programs:
     related_posts:
       quantity: 4
-  home:
-    toc:
-      disabled: true
-  logo:
-    header: "/assets/images/logo.svg"
-    footer: "/assets/images/logo.svg"
-  organizations:
-    dark_logo_background: false
-  seo:
-    title:
-      separator: "|"
   image_sizes:
     design_system:
       lightbox:
@@ -136,10 +138,6 @@ params:
           desktop:  900
       papers:
         hero:
-          mobile:   400
-          tablet:   800
-          desktop:  900
-        hero_single:
           mobile:   400
           tablet:   800
           desktop:  900

@@ -2,6 +2,11 @@
   {{ partial "diplomas/hero-single.html" . }}
 
   <div class="document-content">
+
+    {{ partial "posts/summary.html" (dict
+        "context" .
+        "block_wrapped" true
+      ) }}
     {{ partial "blocks/list.html" . }}
     <div class="container">
       <ol class="programs">

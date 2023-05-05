@@ -36,11 +36,9 @@
 
       <div class="informations">
         <div>
-          {{ if (partial "GetTextFromHTML" .Params.summary) }}
-            <div class="lead" itemprop="description">
-              {{ partial "PrepareText" .Params.summary }}
-            </div>
-          {{ end }}
+          {{ partial "persons/summary.html" (dict
+            "context" .
+          ) }}
           {{ if (partial "GetTextFromHTML" .Content) }}
             <div class="rich-text">
               {{ partial "PrepareHTML" .Content }}

@@ -1,7 +1,5 @@
-{{- $text := (partial "GetTextFromHTML" .context.Params.summary) -}}
-
-{{- if $text -}}
-
+{{ $summary := .summary | default (partial "PrepareText" .context.Params.summary) }}
+{{- if eq site.Params.summary.position "content" -}}
   {{- if .block_wrapped -}}
   <section class="block block-summary">
     <div class="container">
@@ -10,9 +8,7 @@
   <div class="container">
   {{- end -}}
 
-  <p class="lead" role="heading" aria-level="2">
-    {{ partial "PrepareText" .context.Params.summary }}
-  </p>
+  <p class="lead" role="heading" aria-level="2">{{ $summary }}</p>
 
   {{- if .block_wrapped -}}
       </div>
