@@ -21,18 +21,23 @@
 
         {{- with .image -}}
           <figure class="{{ $image_class }}">
-            <a class="glightbox"
-              data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
-              href="{{- partial "GetLightboxUrl" . -}}"
-              title="{{- i18n "commons.lightbox.link.title" -}}"
-              >
-              {{ partial "commons/image.html"
-                (dict
-                  "image"    .
-                  "alt"      .alt
-                  "sizes"    site.Params.image_sizes.blocks.image
-                )}}
-            </a>
+            {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+              <a  class="glightbox"
+                  role="button"
+                  data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
+                  href="{{- partial "GetLightboxUrl" . -}}"
+                  title="{{- i18n "commons.lightbox.link.title" -}}"
+                  aria-label="{{- i18n "commons.lightbox.link.title" -}}">
+            {{ end }}
+                {{ partial "commons/image.html"
+                  (dict
+                    "image"    .
+                    "alt"      .alt
+                    "sizes"    site.Params.image_sizes.blocks.image
+                  )}}
+            {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+              </a>
+            {{ end }}
             <figcaption>
               {{- if $text }}
                 {{ partial "PrepareHTML" $text }}

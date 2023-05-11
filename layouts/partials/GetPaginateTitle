@@ -1,0 +1,14 @@
+{{ $seoTitle := .title }} 
+{{ $seoTitleSeparator := .separator}}
+{{ $page := i18n "commons.pagination.title" }}
+
+{{if not .context.IsHome }}
+    {{ with .context.Paginator }}
+        {{ if or .HasPrev .HasNext }}
+            {{ $currentPageNumber := .PageNumber}}
+            {{ $seoTitle = printf "%s %s %s %d" $seoTitle $seoTitleSeparator $page $currentPageNumber }} 
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ return $seoTitle }}

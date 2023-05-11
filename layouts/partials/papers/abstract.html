@@ -1,13 +1,15 @@
-<section class="paper-essentials">
+<section class="paper-essentials" id="abstract">
   {{ with .Params.Abstract }}
     <h2>{{ i18n "papers.abstract" }}</h2>
     <p itemprop="abstract">{{ partial "PrepareHTML" . }}</p>
   {{ end }}
-  <h2>{{ i18n "papers.download" }}</h2>
-  <div role="group">
-    {{ partial "papers/actions.html" (dict 
-      "paper" .
-      "only_file" true
-    ) }}
-  </div>
+  {{ if .Params.Pdf }}
+    <h2>{{ i18n "papers.download" }}</h2>
+    <div role="group">
+      {{ partial "papers/actions.html" (dict 
+        "paper" .
+        "only_file" true
+      ) }}
+    </div>
+  {{ end }}
 </section>

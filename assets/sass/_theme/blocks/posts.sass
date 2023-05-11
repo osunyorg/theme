@@ -166,3 +166,33 @@
                     margin-top: 0
                     article:first-child
                         margin-top: 0
+    &--alternate .alternate
+        @include media-breakpoint-up(desktop)
+            .post
+                width: col(3,8)
+                &.right
+                    margin-left: auto
+                &.portrait
+                    + .portrait
+                        margin-top: -30%
+                    + .square,
+                    + .landscape
+                        margin-top: -15%
+                    + .post:not(.portrait, .square, .landscape)
+                        margin-top: -5%
+            @include in-page-without-sidebar
+                width: col(10)
+                margin-left: auto
+                margin-right: auto
+                .post
+                    width: col(4, 10)
+        @include media-breakpoint-down(desktop)
+            .post 
+                .post-meta
+                    margin-top: half($spacing0)
+                .media
+                    margin-bottom: $spacing0
+                + .post
+                    margin-top: $spacing3
+        .post .media img
+            aspect-ratio: unset

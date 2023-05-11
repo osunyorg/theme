@@ -1,7 +1,18 @@
 {{- $direction := "" -}}
 {{- $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero"  -}}
+{{- $subtitle := .subtitle -}}
 {{ if .image }}
   {{- $direction = partial "GetImageDirection" .image -}}
+{{ end }}
+
+{{- $summary := partial "PrepareText" .context.Params.summary -}}
+{{- $subtitle_is_summary := false -}}
+
+{{ if not $subtitle }}
+  {{ if and (eq site.Params.summary.position "hero") $summary }}
+   {{ $subtitle = $summary }}
+   {{ $subtitle_is_summary = true }}
+  {{ end }}
 {{ end }}
 
 <header class="hero {{ if .image -}}hero--with-image hero--image-{{- $direction -}}{{- end }} {{ if $breadcrumb_is_after_hero -}} hero--no-margin {{- end }}">
@@ -12,28 +23,33 @@
       {{- end -}}
     {{- end -}}
     <div class="content">
-      {{- if .subtitle -}}
+      {{- if $subtitle -}}
         <hgroup>
           <h1>{{ partial "PrepareHTML" .title }}</h1>
-          <p>{{ partial "PrepareHTML" .subtitle }}</p>
+          <p {{ if $subtitle_is_summary -}} class="lead" {{- end -}}>{{ partial "PrepareHTML" $subtitle }}</p>
         </hgroup>
       {{- else -}}
         <h1>{{ partial "PrepareHTML" .title }}</h1>
       {{- end -}}
       {{- if .image }}
         <figure>
-          <a class="glightbox"
-            data-glightbox="type: image;{{ if .image.credit }}description: {{ partial "PrepareHTML" .image.credit }}{{ end }}"
-            href="{{ partial "GetLightboxUrl" .image }}"
-            title="{{- i18n "commons.lightbox.link.title" -}}"
-            >
+          {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+            <a  class="glightbox"
+                role="button"
+                data-glightbox="type: image;{{ if .image.credit }}description: {{ partial "PrepareHTML" .image.credit }}{{ end }}"
+                href="{{ partial "GetLightboxUrl" .image }}"
+                title="{{- i18n "commons.lightbox.link.title" -}}"
+                aria-label="{{- i18n "commons.lightbox.link.title" -}}">
+          {{ end }}
             {{ partial "commons/image.html"
               (dict
                 "image"    .image
                 "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
                 "lazy"     false
               ) }}
+          {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             </a>
+          {{ end }}
             {{ if partial "GetTextFromHTML" .image.credit }}
               <figcaption tabindex="0">
                 <p>

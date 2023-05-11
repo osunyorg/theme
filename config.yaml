@@ -4,16 +4,22 @@ params:
     enable: false
     blank: true
     page: https://gdpr.eu/cookies/
+  plausible: false
+  seo:
+    title:
+      separator: "|"
+  logo:
+    header: "/assets/images/logo.svg"
+    footer: "/assets/images/logo.svg"
   breadcrumb:
-    position: hero-start #  hero-start |  hero-end | after-hero
-  plausible: 
-  posts:
-    default_image: false
-    index:
-      show_categories: false
-      show_author: false
-      truncate_description: 200 # Set to 0 to disable truncate
-      layout: list # grid | list
+    position: hero-start #  hero-start |  hero-end | after-hero | none
+  summary:
+    position: content # content | hero
+  home:
+    toc:
+      disabled: true
+  organizations:
+    dark_logo_background: false
   pages:
     index:
       truncate_description: 200 # Set to 0 to disable truncate
@@ -22,20 +28,22 @@ params:
   persons:
     index:
       layout: list # grid | list
+  posts:
+    default_image: false
+    date_format: ":date_long"
+    index:
+      show_categories: false
+      show_author: false
+      show_description: true
+      truncate_description: 200 # Set to 0 to disable truncate
+      layout: list # grid | list
   programs:
     related_posts:
       quantity: 4
-  home:
-    toc:
-      disabled: true
-  logo:
-    header: "/assets/images/logo.svg"
-    footer: "/assets/images/logo.svg"
-  organizations:
-    dark_logo_background: false
   image_sizes:
     design_system:
       lightbox:
+        disabled: false
         # TODO mobile et tablet
         mobile:   1920x2560
         tablet:   1920x2560
@@ -70,6 +78,8 @@ params:
         tablet:   216
         desktop:  196
       testimonials:
+        mobile:   80
+        tablet:   160
         desktop:  200
       gallery:
         carousel:
@@ -128,10 +138,6 @@ params:
           desktop:  900
       papers:
         hero:
-          mobile:   400
-          tablet:   800
-          desktop:  900
-        hero_single:
           mobile:   400
           tablet:   800
           desktop:  900

@@ -1,12 +1,6 @@
 {{ define "main" }}
-  {{- $title := or .Params.header_text .Title -}}
-  {{- partial "header/hero.html"
-        (dict
-          "title" $title
-          "image" .Params.image
-          "sizes" site.Params.image_sizes.sections.papers.hero
-          "context" .
-        ) -}}
+{{ partial "papers/hero.html" . }}
+
   <div class="document-content">
     <div class="container">
       <ul class="papers">

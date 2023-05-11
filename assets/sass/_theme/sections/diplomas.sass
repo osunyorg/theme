@@ -114,23 +114,29 @@ ul.diplomas
 
 .essential-container
     .container
+        @include media-breakpoint-down(sm)
+            .buttons > *
+                width: col(8)
         @include media-breakpoint-down(md)
             .buttons
                 display: flex
                 gap: $spacing1
                 flex-wrap: wrap
+                > *
+                    min-width: 150px
+                    width: col(7)
         @include media-breakpoint-up(md)
             @include grid(2, md)
             align-items: flex-end
             .buttons
-                display: flex
-                justify-content: flex-end
-                flex-direction: column
                 align-items: end
+                display: flex
+                flex-direction: column
                 gap: $spacing1
+                justify-content: flex-end
                 > *
-                    width: col(2, 6)
                     min-width: 200px
+                    width: col(2, 6)
             
     .essential
         color: $header-color

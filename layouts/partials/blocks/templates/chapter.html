@@ -39,9 +39,11 @@
           {{ if .image }}
             <figure class="{{- $image_class -}}">
               <a class="glightbox"
+                role="button"
                 data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
                 href="{{- partial "GetLightboxUrl" .image -}}"
                 title="{{- i18n "commons.lightbox.link.title" -}}"
+                aria-label="{{- i18n "commons.lightbox.link.title" -}}"
                 >
                 {{ partial "commons/image.html"
                   (dict
