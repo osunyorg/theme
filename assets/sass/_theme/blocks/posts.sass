@@ -1,5 +1,6 @@
 .block-posts
     .top
+        margin-bottom: $spacing2
         a
             @include icon(arrow-right, after, true)
             text-decoration: none
@@ -29,6 +30,8 @@
             @include in-page-without-sidebar
                 .grid
                     @include grid($block-posts-grid-columns)
+                    .media picture img
+                        width: 100%
     &--list
         article
             border-bottom: 1px solid $color-border
