@@ -6,7 +6,20 @@
     @include in-page-with-sidebar
         .persons
             @include grid(1, sm)
-            @include grid(2, desktop)
+            &:not(.is-column)
+                @include grid(2, desktop)
+            &.is-column
+                @include grid(2, xl)
+                @include media-breakpoint-between(desktop, xl)
+                    .person
+                        justify-content: space-between
+                    .avatar
+                        margin-right: 0
+                        margin-left: $spacing1
+                        order: 1
+                        width: col(3)
+                    .description
+                        margin-top: 0
         article
             flex-direction: row
             .avatar
