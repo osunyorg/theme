@@ -1,12 +1,15 @@
 {{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
+{{- $charLimit := 30 -}}
+{{- $isColumn := false -}}
+
 {{- with .block.data -}}
   {{- $with_link := .with_link -}}
   {{- $with_photo := .with_photo -}}
-<section class="block block-organization_chart{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
-  <div class="container">
-    <div class="block-content">
+  <section class="block block-organization_chart{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
         {{ if (or $title .description) -}}
           <div class="top">
             {{- if not $title -}}
@@ -24,6 +27,7 @@
         <div class="persons">
           {{- range .persons -}}
             {{ $person := site.GetPage (printf "/persons/%s" .slug) }}
+            {{ $summaryLength := len $person.Params.summary}}
             <article class="person" itemscope itemtype="https://schema.org/Person">
               <div class="description">
                 <h3 class="name" itemprop="name">
@@ -35,7 +39,7 @@
                   </a>
                   {{ end }}
                 </h3>
-                <p itemprop="jobTitle">
+                <p itemprop="jobTitle" {{- if ge $summaryLength $charLimit -}} data-column="true" {{- end -}}>
                   {{- if (partial "GetTextFromHTML" .role) }}
                     {{ partial "PrepareHTML" .role }}
                   {{- else if partial "GetTextFromHTML" $person.Params.summary }}
