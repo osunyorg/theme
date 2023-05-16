@@ -48,18 +48,16 @@
 
 
   </div>
-  {{- if .Params.image -}}
-    <div class="media">
+  <div class="media">
+    {{- if .Params.image -}}
       {{- partial "commons/image.html"
             (dict
               "image"    .Params.image
               "sizes"    site.Params.image_sizes.sections.posts.item
             ) -}}
-    </div>
-  {{- else if site.Params.posts.default_image -}}
-    <div class="media">
+    {{- else if site.Params.posts.default_image -}}
       {{- partial "commons/image-default.html" -}}
-    </div>
-  {{- end -}}
+    {{- end -}}
+  </div>
 </article>
 {{ end }}
