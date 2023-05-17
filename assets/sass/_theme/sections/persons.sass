@@ -44,7 +44,6 @@
         flex-shrink: 0
         order: -1
         margin-bottom: $spacing1
-
     .name
         @include h4
         a
@@ -54,16 +53,20 @@
             margin-top: half($spacing0)
     .description
         @include small
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(lg)
         flex-direction: row
-        justify-content: space-between
+        gap: $spacing1
         .avatar
             align-self: start
             flex-shrink: 0
-            order: 2
-            margin-left: $spacing0
             margin-bottom: 0
             width: 100px
+    @include media-breakpoint-down(md)
+        justify-content: space-between
+        .avatar
+            order: 1
+            margin-right: 0
+            width: 68px
     @include media-breakpoint-up(desktop)
         @include in-page-without-sidebar
             text-align: center

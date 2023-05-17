@@ -29,19 +29,3 @@
                     width: calc(#{col(1, 4)} + #{$grid-gutter})
             .description
                 margin-top: $spacing1
-body
-    &:not(.full-width)
-        @include media-breakpoint-between(md, desktop)
-            .person
-                flex-direction: row-reverse
-                gap: $spacing1
-                .avatar
-                    width: calc(#{col(1, 4)} + #{$grid-gutter})
-    &.full-width
-        @include media-breakpoint-up(md)
-            .persons .avatar 
-                width: 100%
-        @include media-breakpoint-up(sm)
-            .persons
-                @include grid(4, md)
-                @include grid(6, xl)
