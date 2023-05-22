@@ -27,7 +27,7 @@
         <div class="persons">
           {{- range .persons -}}
             {{ $person := site.GetPage (printf "/persons/%s" .slug) }}
-            {{ $summaryLength := len $person.Params.summary}}
+            
             <article class="person" itemscope itemtype="https://schema.org/Person">
               <div class="description">
                 <h3 class="name" itemprop="name">
@@ -39,7 +39,11 @@
                   </a>
                   {{ end }}
                 </h3>
-                <p itemprop="jobTitle" {{- if ge $summaryLength $charLimit -}} data-column="true" {{- end -}}>
+                <p itemprop="jobTitle" 
+                    {{- if $person.Params.summary -}}
+                      {{ $summaryLength := len $person.Params.summary}}
+                      {{- if ge $summaryLength $charLimit -}} data-column="true" {{- end -}}
+                    {{- end -}}>
                   {{- if (partial "GetTextFromHTML" .role) }}
                     {{ partial "PrepareHTML" .role }}
                   {{- else if partial "GetTextFromHTML" $person.Params.summary }}
