@@ -1,7 +1,7 @@
 {{ $siteUrl := site.BaseURL }}
 {{ $lang := site.LanguageCode }}
 
-{{ if $lang }}
+{{ if and $lang (gt (len site.Languages) 1) }}
   {{ $siteUrl = printf "%s%s/" $siteUrl $lang }}
 {{ end }}
 
