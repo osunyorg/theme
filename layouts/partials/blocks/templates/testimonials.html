@@ -4,8 +4,10 @@
 {{- $is_carousel := false -}}
 
 {{- with .block.data -}}
-  {{ if gt (len .testimonials) 1 }}
-    {{- $is_carousel = true -}}
+  {{ if .testimonials }}
+    {{ if gt (len .testimonials) 1 }}
+      {{- $is_carousel = true -}}
+    {{ end }}
   {{ end }}
   <section class="block block-testimonials{{ if $title }} block-with-title{{ end }}{{ if $is_carousel}} with-carousel{{ end }}" id="block-{{ $position }}">
     <div class="container">
