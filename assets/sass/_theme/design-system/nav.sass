@@ -133,8 +133,10 @@
         .header-i18n
             position: relative
             [role="button"]
-                @include icon-block(globe, after)
-                    margin-left: half(-$spacing0)
+                @include icon(globe, after)
+                &[aria-expanded][aria-expanded="true"]
+                    &::after
+                        transform: none
             .dropdown-menu
                 margin-top: $header-nav-padding-y
                 padding-left: $spacing1
@@ -187,9 +189,6 @@
                     padding-top: 0
                 [aria-expanded=true] + .dropdown-menu
                     display: block
-                // &.header-i18n
-                //     [role="button"]
-                //         justify-content: center
         .dropdown-menu
             padding-left: 0
         .nav-level-2
