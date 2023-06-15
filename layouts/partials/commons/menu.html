@@ -62,4 +62,8 @@
     </li>
     {{- end -}}
   {{ end -}}
+
+  {{ if and (eq $kind "primary") (site.Params.menu.i18n.display) }}
+    {{ partial "header/i18n.html" . }}
+  {{ end }}
 </ul>
