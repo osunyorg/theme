@@ -1,3 +1,3 @@
 {{ $file := site.Params.logo.footer }}
 {{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file "static" true) }}
-<a class="logo" href="{{ partial "GetSiteUrl" }}"><img src="{{ $file }}" alt="{{ site.Title }}" height="{{ index $fileDimensions 1 }}" width="{{ index $fileDimensions 0 }}" loading="lazy"></a>
+<a class="logo" href="{{ site.Home.Permalink }}"><img src="{{ $file }}" alt="{{ site.Title }}" height="{{ index $fileDimensions 1 }}" width="{{ index $fileDimensions 0 }}" loading="lazy"></a>
