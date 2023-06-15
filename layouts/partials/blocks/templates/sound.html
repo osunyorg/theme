@@ -2,7 +2,7 @@
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- with .block.data -}}
-  <section class="block block-video{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+  <section class="block block-sound{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
         <div>
@@ -14,17 +14,15 @@
             </div>
           {{ end -}}
 
-          {{ if .url }}
-            <div class="video">
-              {{ partial "blocks/templates/video/GetIframe" ( dict
-                  "url" .url
-                  "title" .video_title
-                )}}
-            </div>
+          {{ if .file }}
+            {{ $file := partial "GetMedia" .file.id }}
+            {{ if $file }}
+              <audio src="{{ $file.url }}" controls title="{{ partial "PrepareText" .title }}"></audio>
+            {{ end }}
           {{ end }}
 
-          {{ if .video_title }}
-            <p>{{- partial "PrepareHTML" .video_title -}}</p>
+          {{ if .title }}
+            <p>{{- partial "PrepareHTML" .title -}}</p>
           {{ end }}
 
           {{ partial "commons/transcription" ( dict
