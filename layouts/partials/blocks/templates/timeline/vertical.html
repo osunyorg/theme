@@ -1,19 +1,18 @@
 <div class="block-content">
-  {{ if .title -}}
+  {{- if not .title -}}
+    {{ partial "blocks/default_title.html" .template }}
+  {{ else }}
     <div class="top">
-      {{ partial "blocks/title" (dict 
-        "title" .title
-        "context" .context
-        ) }}
+      <h2>{{ partial "PrepareHTML" .title }}</h2>
     </div>
-  {{- end }}
+  {{ end -}}
 
   {{ with .block.data -}}
     <div class="events">
       {{ range .events -}}
         <article class="event">
           {{ if .title }}
-            <h1 class="event-title">{{ partial "PrepareHTML" .title }}</h1>
+            <h3 class="event-title">{{ partial "PrepareHTML" .title }}</h3>
           {{ end }}
           {{ if .text }}
             <p>{{ partial "PrepareText" .text }}</p>

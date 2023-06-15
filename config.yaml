@@ -4,24 +4,46 @@ params:
     enable: false
     blank: true
     page: https://gdpr.eu/cookies/
-  posts:
-    list:
-      show_categories: false
-      truncate_description: 200 # Set to 0 to disable truncate
-      layout: list # grid | list
-  pages:
-    list:
-      truncate_description: 200 # Set to 0 to disable truncate
-  home:
-    toc:
-      disabled: true
+  plausible: false
+  seo:
+    title:
+      separator: "|"
   logo:
     header: "/assets/images/logo.svg"
     footer: "/assets/images/logo.svg"
-
+  breadcrumb:
+    position: hero-start #  hero-start |  hero-end | after-hero | none
+  summary:
+    position: content # content | hero
+  home:
+    toc:
+      disabled: true
+  organizations:
+    dark_logo_background: false
+  pages:
+    index:
+      truncate_description: 200 # Set to 0 to disable truncate
+  partners:
+    map_marker_icon: '/assets/images/map-marker.svg'
+  persons:
+    index:
+      layout: grid # grid | list
+  posts:
+    default_image: false
+    date_format: ":date_long"
+    index:
+      show_categories: false
+      show_author: false
+      show_description: true
+      truncate_description: 200 # Set to 0 to disable truncate
+      layout: list # grid | list
+  programs:
+    related_posts:
+      quantity: 4
   image_sizes:
     design_system:
       lightbox:
+        disabled: false
         # TODO mobile et tablet
         mobile:   1920x2560
         tablet:   1920x2560
@@ -39,6 +61,10 @@ params:
         mobile:   350
         tablet:   450
         desktop:  1280
+      features:
+        mobile:   350
+        tablet:   400
+        desktop:  900
       image:
         mobile:   480x850
         tablet:   768x1360
@@ -52,7 +78,9 @@ params:
         tablet:   216
         desktop:  196
       testimonials:
-        desktop:  200
+        mobile:   80
+        tablet:   160
+        desktop:  260
       gallery:
         carousel:
           mobile:   400
@@ -110,10 +138,6 @@ params:
           desktop:  900
       papers:
         hero:
-          mobile:   400
-          tablet:   800
-          desktop:  900
-        hero_single:
           mobile:   400
           tablet:   800
           desktop:  900

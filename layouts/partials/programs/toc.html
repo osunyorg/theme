@@ -42,7 +42,7 @@
         </ol>
     </li>
     <li>
-      <a href="#pedagogy">{{ i18n "programs.toc.pedagogy" }}</a>
+      <a href="#{{ urlize (i18n "programs.toc.pedagogy") }}">{{ i18n "programs.toc.pedagogy" }}</a>
       {{- if or $content $pedagogy $evaluation $teachers }}
       <ol>
         {{- if $content -}}
@@ -61,7 +61,7 @@
       {{ end -}}
     </li>
     <li>
-      <a href="#results">{{ i18n "programs.toc.results" }}</a>
+      <a href="#{{ urlize (i18n "programs.toc.results") }}">{{ i18n "programs.toc.results" }}</a>
       {{- if or $opportunities $results }}
       <ol>
         {{- if $opportunities -}}
@@ -74,7 +74,7 @@
       {{ end -}}
     </li>
     <li>
-      <a href="#admission">{{ i18n "programs.toc.admission" }}</a>
+      <a href="#{{ urlize (i18n "programs.toc.admission") }}">{{ i18n "programs.toc.admission" }}</a>
       {{- if or $prerequisites $pricing $registration $accessibility $other $roles $contacts }}
       <ol>
         {{- if $prerequisites -}}

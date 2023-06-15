@@ -13,14 +13,16 @@
         min-height: $hero-height-desktop
     *:focus-visible
         outline-color: $hero-color
-
     .content
         align-items: start
         padding-top: $spacing3
         > h1, > hgroup
             margin-top: $spacing3
+            
         h1 + p
             margin-top: $spacing1
+        .lead
+            @include lead-hero
         figure
             position: relative
             &, img, picture
@@ -30,19 +32,12 @@
                 height: auto
             @include collapsed-figcaption
 
-    nav + .content
+    .breadcrumb-nav + .content
         padding-top: 0
-    // TODO : handle hero with image
-    @if $breadcrumb-below-h1
-        .container:first-child
-            display: flex
-            flex-direction: column
-            nav + .content
-                margin-top: 0
-            .breadcrumb-nav
-                order: 3
-                margin-top: $spacing3
-
+    .content + .breadcrumb-nav
+        margin-top: $spacing3
+    &--no-margin
+        margin-bottom: 0
     @include media-breakpoint-down(desktop)
         .breadcrumb-nav
             margin-left: half(-$grid-gutter-sm)
@@ -55,9 +50,10 @@
                 > h1, > hgroup
                     margin-bottom: $spacing2
         &--image-landscape
-            figure
-                margin-left: half(-$grid-gutter-sm)
-                margin-right: half(-$grid-gutter-sm)
+            .content
+                figure
+                    margin-left: half(-$grid-gutter-sm)
+                    margin-right: half(-$grid-gutter-sm)
         &--image-portrait, &--image-square
             .container
                 display: flex
@@ -91,4 +87,6 @@
                     width: col(8)
                 figure
                     width: col(3)
+    + .breadcrumb-container
+        margin-top: 0
 

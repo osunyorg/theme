@@ -118,11 +118,24 @@ h2, .h2
 .lead
     @include lead
 
-.p,
-.li
+@mixin lead-hero
+    font-family: $lead-hero-font-family
+    font-size: $lead-hero-size
+    font-weight: $lead-hero-weight
+    line-height: $lead-hero-line-height
+    @include media-breakpoint-up(desktop)
+        font-size: $lead-hero-size-desktop
+
+
+@mixin body-text
+    font-family: $body-font-family
     font-size: $body-size
     @include media-breakpoint-up(desktop)
         font-size: $body-size-desktop
+
+.p,
+.li
+    @include body-text
 
 @mixin meta
     font-family: $meta-font-family
@@ -159,7 +172,7 @@ small, .small
 
 @mixin rich-text
     word-break: break-word
-    h1, h2, h3, h4, h5, h6, p
+    h1, h2, h3, h4, h5, h6, p, ul
         margin-top: 2em
         &:first-child, meta + &
             margin-top: 0
@@ -220,9 +233,12 @@ a,
     overflow-wrap: break-word
     &[target="_blank"]:not(.icon)
         @include icon(link-blank, after, true)
+            vertical-align: baseline
     &[href^="mailto"]
         &::after
             content: none
+    &.glightbox
+        text-decoration: none
 
 @mixin btn
     font-size: $btn-font-size
@@ -263,7 +279,7 @@ sup
     margin-left: px2rem(2)
 
 *:focus-visible
-    outline-color: gray
+    outline-color: inherit
     outline-offset: 5px
     outline-style: dashed
     outline-width: 1px

@@ -1,5 +1,0 @@
-{{ $chunks := split . "<iframe" }}
-{{ $text := delimit $chunks "<div class=\"ratio ratio-16x9\"><iframe loading=\"lazy\" title=\"\"" }}
-{{ $chunks = split $text "</iframe>" }}
-{{ $text = delimit $chunks "</iframe></div>" }}
-{{ return $text }}

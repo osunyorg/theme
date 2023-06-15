@@ -39,13 +39,16 @@
 @function half($size)
     @return calc(#{$size} / 2)
 
-@mixin link($color: $link-color)
+@mixin link($color: $link-color, $unhover_decorated: true)
     color: $color
-    text-decoration-color: rgba($color, 0.3)
     text-decoration-line: underline
     text-decoration-thickness: 1px
     text-underline-offset: $link-underline-offset
     transition: text-decoration-color .3s ease
+    @if $unhover_decorated
+        text-decoration-color: rgba($color, 0.3)
+    @else 
+        text-decoration-color: transparent
     &:hover
         text-decoration-color: rgba($color, 1)
         text-decoration-thickness: 1px
@@ -145,6 +148,9 @@
 @mixin container-margin-left
     margin-left: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
 
+@mixin container-margin-right
+    margin-right: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+
 @mixin stretched-link($pseudo-element: after)
     &::#{$pseudo-element}
         bottom: 0
@@ -164,21 +170,28 @@
         display: block
         width: 100%
 
+@mixin handle-svg-fit
+    picture.is-svg
+        img
+            object-fit: contain
+
 @mixin article($background: null)
     position: relative
     display: flex
     flex-direction: column
     .media
-        @if $article-media-aspect-ratio
-            @include aspect-ratio($article-media-aspect-ratio, 'img', $background)
+        @include handle-svg-fit
         margin-bottom: $spacing1
         order: -1
         overflow: hidden
         img
             object-fit: cover
-    h1
+            @if $article-media-aspect-ratio
+                aspect-ratio: $article-media-aspect-ratio
+    h2, h3
         @include h3
         a
+            display: block
             @include stretched-link
             text-decoration: none
     p
@@ -188,6 +201,14 @@
         @include meta
         color: $color-text-alt
         display: block
+
+@mixin post-time-author-flex
+    .post-meta
+        display: flex
+        flex-wrap: wrap
+    .post-author p::before
+        content: ' • '
+
 
 @mixin list-section
     @include list-reset
@@ -350,6 +371,15 @@
         @include media-breakpoint-up(desktop)
             &:before
                 padding-right: 0
+        @include media-breakpoint-down(desktop)
+            position: relative
+            background: $color-background
+            &::before
+                background: transparent
+            p
+                display: block
+                background: transparent
+                position: relative
 
     &:hover
         figcaption p

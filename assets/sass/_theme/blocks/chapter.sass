@@ -38,7 +38,8 @@
     @include in-page-with-sidebar
         figure
             max-width: col(6, 8)
-            &.image-portrait
+            &.image-portrait,
+            &.image-square
                 max-width: col(4, 8)
         &--alt_background, &--accent_background
             background: none
@@ -69,6 +70,16 @@
                     width: col(4)
                     margin-left: col-offset(1)
                     margin-bottom: 0
+                    text-align: right
+                    img
+                        margin-left: auto
     @include in-page-with-or-without-sidebar
         h2, h3
             @include h2
+
+// .blocks
+//     @include media-breakpoint-up(desktop)
+//         @include in-page-without-sidebar
+//             .block:not(.block-chapter) + .block-chapter + .block-chapter
+//                 flex-direction: row-reverse
+

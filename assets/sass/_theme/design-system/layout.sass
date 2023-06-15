@@ -11,8 +11,10 @@
     --spacing4: #{$spacing4}
     --spacing5: #{$spacing5}
     --grid-gutter: #{$grid-gutter}
+    --grid-gutter-sm: #{$grid-gutter-sm}
     --grid-max-width: #{$grid-max-width}
     --header-height: #{$header-height}
+    --header-menu-max-height: calc(100vh - var(--header-height) - #{$spacing4})
     @include media-breakpoint-up(desktop)
         --header-height: #{$header-height-desktop}
 
@@ -43,11 +45,17 @@ iframe
     .hero + &
         margin-top: $spacing3
 
+.hidden
+    display: none
+
 ul,
 ol
     // https://since1979.dev/aligning-your-lists-with-your-text/
     padding-left: 0
     list-style-position: inside
+    > li
+        > p
+            display: inline
 
 .document-content
     .container > .lead
@@ -90,3 +98,36 @@ details
         &:hover
             summary::after
                 transform: translateY(-5px)
+.modal
+    align-items: center
+    display: flex
+    justify-content: center
+    height: 100vh
+    left: 0
+    overflow: hidden
+    position: fixed
+    top: 0
+    width: 100%
+    margin: 0
+    z-index: $zindex-modal
+    &[aria-hidden="true"]
+        display: none
+    .modal-content
+        position: relative
+        background-color: $color-background-alt
+        padding: $spacing2
+        width: auto
+        max-height: 100vh
+        overflow-y: auto
+        @include media-breakpoint-up(desktop)
+            padding: $spacing3
+            width: col(8)
+        .modal-header
+            margin-bottom: $spacing0
+            button
+                @include button-reset
+                @include icon-block(close, before)
+                position: absolute
+                padding: 0
+                right: 0
+                top: 0

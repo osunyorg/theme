@@ -1,11 +1,23 @@
 {{- $title := or .Params.header_text .Title -}}
+{{ $subtitle := "" }}
+{{- $summary := partial "PrepareText" .Params.summary -}}
+{{ if and (eq site.Params.summary.position "hero") $summary }}
+  {{ $subtitle = $summary }}
+{{ end }}
 <header class="hero hero-program">
   <div class="container">
     {{- if .Params.breadcrumb | default true -}}
       {{ partial "header/breadcrumbs.html" . }}
     {{- end -}}
     <div class="content">
-      <h1>{{ partial "PrepareHTML" $title }}</h1>
+      {{- if $subtitle -}}
+        <hgroup>
+          <h1>{{ partial "PrepareHTML" $title }}</h1>
+          <p class="lead">{{ partial "PrepareHTML" $subtitle }}</p>
+        </hgroup>
+      {{- else -}}
+        <h1>{{ partial "PrepareHTML" $title }}</h1>
+      {{- end -}}
     </div>
   </div>
 

@@ -2,6 +2,8 @@
     @include article($post-media-background)
     time
         color: $post-time-color
+        display: inline-block
+        vertical-align: middle
     .post-categories
         @include meta
         margin-top: $spacing0
@@ -15,59 +17,64 @@
             @include link($color-accent)
         li
             margin: 0
+    .post-author
+        @include meta
+        color: $color-text-alt
 
 .posts__section,
 .authors__term,
 .categories__term,
 .persons__page
-    @if $posts-layout-list
-        .posts
-            article
-                border-bottom: 1px solid $color-border
-                display: flex
-                margin-bottom: $spacing1
-                padding-bottom: $spacing1
-                flex-direction: row
-                h1 + p
-                    margin-top: $spacing0
-                @include media-breakpoint-up(desktop)
-                    @include grid
-                    margin-bottom: $spacing3
-                    padding-bottom: $spacing3
-                div:not(.media)
-                    grid-column: 4/13
+    .posts--list
+        article
+            border-bottom: 1px solid $color-border
+            display: flex
+            margin-bottom: $spacing1
+            padding-bottom: $spacing1
+            flex-direction: row
+            h2 + p, h3 + p
+                margin-top: $spacing0
+            @include media-breakpoint-up(desktop)
+                @include grid
+                margin-bottom: $spacing3
+                padding-bottom: $spacing3
+            .post-content
+                grid-column: 4/13
+                @include media-breakpoint-down(desktop)
+                    flex: 1
+                    margin-left: $spacing0
+                p:not(.title)
                     @include media-breakpoint-down(desktop)
-                        flex: 1
-                        margin-left: $spacing0
-                    p:not(.title)
-                        @include media-breakpoint-down(desktop)
-                            display: none
-                .media
-                    background: none
-                    margin: 0
-                    @include media-breakpoint-down(desktop)
-                        width: 33.33333%
-                    @include media-breakpoint-up(desktop)
-                        grid-column: 1/4
-                    &, img
-                        aspect-ratio: auto
+                        display: none
+            .media
+                background: none
+                margin: 0
+                @include media-breakpoint-down(desktop)
+                    width: 33.33333%
                 @include media-breakpoint-up(desktop)
-                    time 
+                    grid-column: 1/4
+                &, img
+                    aspect-ratio: auto
+            @include media-breakpoint-up(desktop)
+                .post-meta
+                    position: absolute
+                    right: 0
+                    text-align: right
+                    top: 0
+                    time
                         font-size: $h5-size
-                        position: absolute
-                        right: 0
-                        top: 0
-                    div:not(.media)
-                        h1,
-                        p,
-                        a
-                            max-width: col(6, 9)
-
-    @else 
-        .posts
-            @include grid(1)
-            @include grid(2, desktop)
-            @include grid($posts-grid-columns, xxl)
+                .post-content
+                    h2, h3,
+                    > p
+                        max-width: col(6, 9)
+    .posts--grid
+        @include grid(1)
+        @include grid(2, desktop)
+        @include grid($posts-grid-columns, xxl)
+        .post
+            @include post-time-author-flex
+            .post-meta
+                margin-top: $spacing0
 
 .posts__page
     @include media-breakpoint-down(desktop)
@@ -157,3 +164,8 @@
         margin-bottom: 0
     .link
         @extend .link-more
+
+.authors__term,
+.categories__term
+    .blocks + .container
+        margin-top: $spacing3

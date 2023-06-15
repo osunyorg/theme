@@ -9,4 +9,4 @@
 {{ if hugo.IsProduction }}
   {{- $styles = resources.Get "sass/main.sass" | toCSS $cssOpts | postCSS | minify | fingerprint -}}
 {{ end }}
-<link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" media="screen">
+<link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">

@@ -1,17 +1,18 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
-{{- $figures := .figures}}
 {{- with .block.data -}}
+  {{- $figures := .figures }}
   <section class="block block-key_figures{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
         {{- if (or $title .description) }}
           <div class="top">
-            {{ partial "blocks/title" (dict 
-              "title" $title
-              "context" $context
-              ) }}
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ end -}}
             {{- if .description }}
               <div class="description">
                 {{ partial "PrepareHTML"  .description }}
@@ -20,20 +21,22 @@
           </div>
         {{ end -}}
 
-        {{ $list_class := "odd-items" }}
-        {{ if (modBool $figures 2) }}
-          {{ $list_class = "even-items" }}
-        {{ end }}
-        <ul class="{{ $list_class }}">
-          {{- range .figures }}
-              <li>
-                <dl>
-                    <dt><strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}</dt>
-                    <dd>{{ partial "PrepareHTML" .description }}</dd>
-                </dl>
-            </li>
-          {{ end -}}
-        </ul>
+        {{ if $figures }}
+          {{ $list_class := "odd-items" }}
+          {{ if (modBool (len $figures) 2) }}
+            {{ $list_class = "even-items" }}
+          {{ end }}
+          <ul class="{{ $list_class }}">
+            {{- range .figures }}
+                <li>
+                  <dl>
+                      <dt><strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}</dt>
+                      <dd>{{ partial "PrepareHTML" .description }}</dd>
+                  </dl>
+              </li>
+            {{ end -}}
+          </ul>
+        {{ end -}}
       </div>
     </div>
   </section>

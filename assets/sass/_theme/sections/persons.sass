@@ -1,4 +1,16 @@
 .persons__page
+    h2
+        @include h5
+        a
+            @include icon(arrow-right, after, true)
+                display: inline-flex
+                margin-left: half($spacing0)
+                transition: transform .3s ease
+            &:hover::after
+                transform: translateX($spacing0)
+    // TODO : voir comment gérer les marges comme pour les blocs (pb footer)
+    section
+        padding-bottom:  $grid-gutter
     ol.programs
         li
             justify-content: flex-start
@@ -28,41 +40,48 @@
     @include article
     word-break: break-word
     .avatar
-        margin-bottom: $spacing1
+        align-self: start
+        flex-shrink: 0
         order: -1
-        width: px2rem(76)
-
+        margin-bottom: $spacing1
     .name
-        margin-bottom: px2rem(5)
-        // & ~ p
-            // @include small
-
+        @include h4
+        a
+            @include stretched-link
+            text-decoration: none
+        + p
+            margin-top: half($spacing0)
     .description
         @include small
-
-    @include media-breakpoint-down(desktop)
-        display: block
-        &::after
-            content: ''
-            clear: both
-            display: table
-        > div:first-of-type
-            float: left
-            max-width: calc(100% - 6rem)
+    @include media-breakpoint-down(lg)
+        flex-direction: row
+        gap: $spacing1
         .avatar
-            float: right
+            align-self: start
+            flex-shrink: 0
             margin-bottom: 0
-
+            width: 100px
+    @include media-breakpoint-down(md)
+        justify-content: space-between
+        .avatar
+            order: 1
+            margin-right: 0
+            width: 68px
+    @include media-breakpoint-up(desktop)
+        @include in-page-without-sidebar
+            text-align: center
+            .avatar
+                width: 100%
 
 section.persons,
 div.persons
     @include grid(1)
     @include grid(2, md)
     @include grid(3, lg)
-    @include grid(4, xl)
-    @include grid(5, xxl)
+    @include grid(5, xl)
+    @include grid(6, xxl)
 
-ol.persons
+ol.persons--list
     @include list-reset
     > li
         border-bottom: 1px solid $color-border
@@ -140,6 +159,8 @@ ol.persons
 .persons__section
     * + .persons
         margin-top: $spacing-section-y
+    .persons:last-child
+        padding-bottom: $spacing3
 
 .persons__page
     .hero
@@ -152,6 +173,11 @@ ol.persons
                 margin-left: auto
                 transform: translateY(100px)
                 margin-top: calc(#{$spacing1} - 100px)
+        @include media-breakpoint-down(sm)
+            margin-bottom: $spacing4
+            .avatar
+                transform: translateY(18vw)
+                margin-top: calc(#{$spacing1} - 18vw)
         @include media-breakpoint-up(desktop)
             .content
                 align-items: center
@@ -167,8 +193,22 @@ ol.persons
     .roles
         a
             @include small
-    .person-programs
+    .blocks
+        margin-top: $spacing3
+    .person-programs,
+    .person-objects,
+    .person-publications
         margin-top: $spacing4
+        .publication
+            border-bottom: 1px solid $color-border
+            padding-bottom: $spacing1
+            padding-top: $spacing0
+            .title
+                margin-bottom: calc(#{$spacing0}/2)
+            .ref
+                color: $color-text-alt
+                margin-top: 0
+                @include small
     @include media-breakpoint-down(lg)
         .roles
             margin-top: $spacing2
@@ -183,4 +223,8 @@ ol.persons
                 text-align: right
             .lead + div
                 margin-top: $spacing2
-
+    .contacts-details ul
+        @include grid(2, md, 0)
+        li
+            margin-top: 0
+            margin-bottom: $spacing1

@@ -24,17 +24,13 @@
 
 <div class="d-cross"></div>
 <style>
-  :root {
-    --d-grid-margin: 64px;
-    --d-grid-sm-margin: 44px;
-  }
   .d-grid {
     bottom: 0;
     display: none;
-    grid-gap: var(--d-grid-margin);
+    grid-gap: var(--grid-gutter);
     grid-template-columns: repeat(12, 1fr);
     opacity: 0.3;
-    padding: 0 var(--d-grid-margin);
+    padding: 0 var(--grid-gutter);
     pointer-events: none;
     position: fixed;
     margin: auto;
@@ -42,7 +38,7 @@
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(1920px + var(--d-grid-margin));
+    width: var(--grid-max-width);
     z-index: 9999;
     font-family: sans-serif;
     font-size: 12px;
@@ -143,8 +139,8 @@
       display: none;
     }
     .d-grid {
-      border-left: calc(var(--d-grid-sm-margin) / 2) solid fuchsia;
-      border-right: calc(var(--d-grid-sm-margin) / 2) solid fuchsia;
+      border-left: calc(var(--grid-gutter-sm) / 2) solid fuchsia;
+      border-right: calc(var(--grid-gutter-sm) / 2) solid fuchsia;
     }
   }
 

@@ -1,14 +1,15 @@
 {{ define "main" }}
-  {{- partial "header/hero.html"
-        (dict
-          "title" .Title
-          "image" .Params.image
-          "sizes" site.Params.image_sizes.sections.papers.hero
-          "context" .
-        ) -}}
+{{ partial "papers/hero.html" . }}
+
   <div class="document-content">
     <div class="container">
-      {{ partial "papers/papers.html" . }}
+      <ul class="papers">
+        {{ range .Paginator.Pages }}
+          <li>
+            {{ partial "papers/paper.html" (dict "paper" . ) }}
+          </li>
+        {{ end }}
+      </ul>
       {{ partial "commons/pagination.html" . }}
     </div>
   

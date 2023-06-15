@@ -1,22 +1,52 @@
-<article class="post" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+{{ $post := .post }}
+{{- $direction := "" -}}
+{{ $heading := .heading | default "h2" }}
+{{ $heading_tag := (dict 
+    "open" ((printf "<%s itemprop='headline'>" $heading) | safeHTML)
+    "close" ((printf "</%s>" $heading) | safeHTML)
+    ) }}
+{{ $index := .index}}
+{{ $alternate := .alternate}}
+
+{{ with $post }}
+
+{{ if .Params.image }}
+  {{- $direction = partial "GetImageDirection" .Params.image -}}
+{{ end }}
+
+<article class='post {{ if $alternate }}{{ $direction }} {{if not (modBool $index 2)}}left{{ else}}right{{end}}{{end}}' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
   <div class="post-content">
     {{- $title := partial "PrepareHTML" .Title -}}
-    <h1 itemprop="headline"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h1>
-    {{ if $.Site.Params.posts.list.show_categories }}
+
+    {{ $heading_tag.open }}
+      <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+    {{ $heading_tag.close }}
+
+    {{ if site.Params.posts.index.show_categories }}
       {{- partial "posts/categories" . -}}
     {{ end }}
-    {{- if (partial "GetTextFromHTML" .Params.summary) -}}
-      {{ if $.Site.Params.posts.list.truncate_description }}
-        <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
-          "text" .Params.summary
-          "length" $.Site.Params.posts.list.truncate_description
-          ) }}</p>
-      {{ else }}
-        <p itemprop="articleBody">{{ partial "PrepareHTML" .Params.summary }}</p>
-      {{ end }}
+
+    {{ if site.Params.posts.index.show_description }}
+      {{- if (partial "GetTextFromHTML" .Params.summary) -}}
+        {{ if site.Params.posts.index.truncate_description }}
+          <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
+            "text" .Params.summary
+            "length" site.Params.posts.index.truncate_description
+            ) }}</p>
+        {{ else }}
+          <p itemprop="articleBody">{{ partial "PrepareText" .Params.summary }}</p>
+        {{ end }}
+      {{- end -}}
     {{- end -}}
     
-    <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
+    <div class="post-meta">
+      <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
+      {{ if site.Params.posts.index.show_author }}
+        {{- partial "posts/author" . -}}
+      {{ end }}
+    </div>
+
+
   </div>
   <div class="media">
     {{- if .Params.image -}}
@@ -25,8 +55,9 @@
               "image"    .Params.image
               "sizes"    site.Params.image_sizes.sections.posts.item
             ) -}}
-    {{- else -}}
+    {{- else if site.Params.posts.default_image -}}
       {{- partial "commons/image-default.html" -}}
     {{- end -}}
   </div>
 </article>
+{{ end }}

@@ -5,8 +5,8 @@
     <meta itemprop="headline" content="{{ partial "PrepareHTML" .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ if .Date }}<meta itemprop="datePublished" content="{{ .Date.Format "2006-01-02T15:04" }}">{{ end }}
-    {{ if .Params.summary }}<meta itemprop="abstract" content="{{ partial "PrepareHTML" .Params.summary }}">{{ end }}
-    {{ if .Summary }}<meta itemprop="description" content="{{ partial "PrepareHTML" .Summary }}">{{ end }}
+    {{ if .Params.summary }}<meta itemprop="abstract" content="{{ partial "PrepareText" .Params.summary }}">{{ end }}
+    {{ if .Summary }}<meta itemprop="description" content="{{ partial "PrepareText" .Summary }}">{{ end }}
 
     {{ partial "posts/sidebar.html" . }}
 
@@ -17,13 +17,7 @@
 
     {{ partial "blocks/list.html" . }}
 
-    <div class="block block-pagination">
-      <div class="container">
-        <div class="block-content">
-          {{ partial "posts/prevnext.html" . }}
-        </div>
-      </div>
-    </div>
+    {{ partial "posts/prevnext.html" . }}
 
     {{ partial "hooks/before-document-content-end.html" . }}
   </div>

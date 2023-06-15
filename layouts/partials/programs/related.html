@@ -7,9 +7,14 @@
         {{ $category_name := safeHTML .Title | truncate 30 }}
         {{ i18n "posts.see_all_in_program" (dict "Title" $category_name) }}
       </a>
-      <div class="blocks">
-        {{ partial "posts/block-posts-layout.html" (dict "posts" .Pages) }}
-      </div>
+
+      {{/*  Related posts  */}}
+      {{ $posts := first site.Params.programs.related_posts.quantity .Pages }}
+      {{ if gt (len $posts) 0 }}
+        <div class="blocks">
+          {{ partial "posts/block-posts-layout.html" (dict "posts" $posts ) }}
+        </div>
+      {{ end }}
     </div>
   </div>
 </section>

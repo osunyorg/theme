@@ -1,8 +1,6 @@
-{{ if isset .Params "references" }}
-  <section>
+{{ with .Params.references }}
+  <section id="references">
     <h2>{{ i18n "volumes.references" }}</h2>
-    <p>
-      {{ partial "PrepareHTML" .Params.References }}
-    </p>
+    {{ partial "PrepareHTML" . }}
   </section>
 {{ end }}

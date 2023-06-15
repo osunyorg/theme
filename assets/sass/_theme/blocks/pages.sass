@@ -1,8 +1,5 @@
 .block-pages
     .top
-        h2, h3
-            + .description
-                margin-top: $spacing1
         a
             text-decoration: none
     .grid, .cards
@@ -11,6 +8,7 @@
             display: flex
             flex-direction: column
             .media
+                @include handle-svg-fit
                 order: -1
                 margin-bottom: $spacing1
                 img
@@ -18,11 +16,11 @@
                     aspect-ratio: 16/9
                     object-fit: cover
                     width: 100%
-        h1
+        h3
             @include h3
             a
-                text-decoration: none
                 @include stretched-link(before)
+                text-decoration: none
             + p
                 margin-top: $spacing0
 
@@ -32,7 +30,7 @@
 
     @include media-breakpoint-down(desktop)
         .top
-            h2, h3
+            h2
                 @include h5
         .description
             @include h2
@@ -43,12 +41,14 @@
         @include media-breakpoint-up(desktop)
             .top
                 @include grid
-                h2, h3
+                h2
                     grid-column: 1 / 5
                     a
-                        text-decoration: none
                         @include icon(arrow, after, true)
                         @include hover-translate-icon
+                        align-items: flex-end
+                        display: flex
+                        text-decoration: none
             .description
                 @include h2
                 grid-column: 5 / 13
@@ -136,10 +136,8 @@
                 + li
                     margin-top: $spacing0
                 a
-                    @include meta
                     @include icon(arrow, before, true)
                         padding-right: $spacing0
-                        
                     @include hover-translate-icon(before, 5)
                     @include link
                     text-decoration-color: rgba(0,0,0,0)
@@ -172,7 +170,7 @@
                         display: block
                         grid-column: 1 / 8
                         margin-bottom: 0
-                    .top + .description
+                    .top:not(.hidden) + .description
                         grid-column: 1 / 8
                         grid-row: 2 / 3
                     // Default behavior (without page description)

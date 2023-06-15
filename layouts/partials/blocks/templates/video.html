@@ -1,4 +1,4 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- with .block.data -}}
@@ -6,12 +6,11 @@
     <div class="container">
       <div class="block-content">
         <div>
-          {{ if $title -}}
+          {{- if not $title -}}
+            {{ partial "blocks/default_title.html" $template }}
+          {{ else }}
             <div class="top">
-              {{ partial "blocks/title" (dict 
-                "title" $title
-                "context" $context
-                ) }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
             </div>
           {{ end -}}
 

@@ -1,15 +1,13 @@
 {{ $bodyclass := .Params.bodyclass | default "" }}
 
-{{ if ne $bodyclass "" }}
-  {{ $bodyclass = printf "page%s" $bodyclass }}
-{{ end }}
+{{ $bodyclass = printf "%s__%s %s" .Type .Kind $bodyclass }}
 
 {{ if .Params.design.full_width }}
-  {{ $bodyclass = printf "full-width %s" $bodyclass }}
+  {{ $bodyclass = printf "%s full-width" $bodyclass }}
 {{ end }}
 
 {{ if .Params.design.toc.offcanvas }}
-  {{ $bodyclass = printf "offcanvas-toc %s" $bodyclass }}
+  {{ $bodyclass = printf "%s offcanvas-toc" $bodyclass }}
 {{ end }}
 
 {{ return $bodyclass }}

@@ -11,6 +11,20 @@ $body-background-color: $color-background !default
 $link-color: $color-text !default
 $link-underline-offset: 0.2em !default
 
+// Grid
+$grid-gutter: px2rem(64) !default
+$grid-max-width: px2rem(1980) !default
+$grid-gutter-sm: px2rem(44) !default
+
+// Spacing
+$spacing0: px2rem(12) !default
+$spacing1: px2rem(24) !default
+$spacing2: px2rem(48) !default
+$spacing3: px2rem(64) !default
+$spacing4: px2rem(128) !default
+$spacing5: px2rem(256) !default
+$spacing-section-y: px2rem(36) !default
+
 // TYPOGRAPHY
 
 // Fonts family
@@ -80,6 +94,12 @@ $lead-sidebar-size-desktop: px2rem(32) !default
 $lead-sidebar-line-height: $lead-line-height !default
 $lead-sidebar-weight: $lead-weight !default
 
+$lead-hero-font-family: $lead-sidebar-font-family !default
+$lead-hero-size: $lead-size !default
+$lead-hero-size-desktop: $lead-sidebar-size-desktop !default
+$lead-hero-line-height: $lead-sidebar-line-height !default
+$lead-hero-weight: $lead-sidebar-weight !default
+
 // Body
 $body-size-desktop: px2rem(22) !default
 $body-size: px2rem(18) !default
@@ -119,28 +139,16 @@ $quote-style: italic !default
 // Buttons
 $btn-font-size-desktop: px2rem(18) !default // TODO
 $btn-font-size: px2rem(14) !default
-$btn-padding-x-desktop: px2rem(50) !default
+$btn-padding-x-desktop: $spacing1 !default
 $btn-padding-y-desktop: px2rem(15) !default
-$btn-padding-x: px2rem(20) !default
-$btn-padding-y: px2rem(13) !default
+$btn-padding-x: $spacing1 !default
+$btn-padding-y: $spacing0 !default
 $btn-border-radius: px2rem(4) !default
 
-
-// Spacing
-$spacing0: px2rem(12) !default
-$spacing1: px2rem(24) !default
-$spacing2: px2rem(48) !default
-$spacing3: px2rem(64) !default
-$spacing4: px2rem(128) !default
-$spacing5: px2rem(256) !default
-$spacing-section-y: px2rem(36) !default
-
-// TODO: choisir entre margin top / bottom --> https://matthewjamestaylor.com/css-margin-top-vs-bottom
-
-// Grid
-$grid-gutter: px2rem(64) !default
-$grid-max-width: px2rem(1980) !default
-$grid-gutter-sm: px2rem(44) !default
+// Form
+$form-btn-color: $color-background !default
+$form-btn-background-color: $color-accent !default
+$form-input-border-radius: 4px !default
 
 // Z-index
 $zindex-nav-accessibility: 1010 !default
@@ -149,8 +157,9 @@ $zindex-header: 52 !default
 $zindex-body-overlay: 51 !default
 $zindex-toc: 60 !default
 $zindex-toc-cta: 49 !default
+$zindex-modal: 72 !default
 $zindex-aside: 48 !default
-$zindex-footer: 70 !default
+$zindex-footer: 50 !default
 
 // Header
 $header-color: $color-text !default
@@ -191,7 +200,6 @@ $hero-color: $color-text !default
 $hero-background-color: $color-background-alt !default
 
 // Breadcrumb
-$breadcrumb-below-h1: false !default // NOT READY YET!
 $breadcrumb-color: $hero-color !default
 $breadcrumb-color-active: $hero-color !default
 $breadcrumb-icon: "caret-right" !default
@@ -199,34 +207,35 @@ $breadcrumb-icon-color: $color-text-alt !default
 
 // Icons
 $icons: ()
-$icons: map-merge($icons, ("toc": "\e918"))
-$icons: map-merge($icons, ("search": "\e916"))
-$icons: map-merge($icons, ("play": "\e910"))
-$icons: map-merge($icons, ("pause": "\e90f"))
-$icons: map-merge($icons, ("eye": "\e901"))
-$icons: map-merge($icons, ("download": "\e900"))
-$icons: map-merge($icons, ("close": "\e90e"))
-$icons: map-merge($icons, ("burger": "\e902"))
-$icons: map-merge($icons, ("burger-close": "\e905"))
+$icons: map-merge($icons, ("arrow": "\ff01"))
+$icons: map-merge($icons, ("arrow-first": "\e906"))
+$icons: map-merge($icons, ("arrow-last": "\e907"))
+$icons: map-merge($icons, ("arrow-left": "\ff02"))
 $icons: map-merge($icons, ("arrow-next": "\e909"))
 $icons: map-merge($icons, ("arrow-previous": "\e908"))
-$icons: map-merge($icons, ("arrow-last": "\e907"))
-$icons: map-merge($icons, ("arrow-first": "\e906"))
 $icons: map-merge($icons, ("arrow-right": "\ff00"))
+$icons: map-merge($icons, ("burger": "\e902"))
+$icons: map-merge($icons, ("burger-close": "\e905"))
 $icons: map-merge($icons, ("caret": "\e904"))
 $icons: map-merge($icons, ("caret-top": "\e914"))
 $icons: map-merge($icons, ("caret-right": "\e913"))
 $icons: map-merge($icons, ("caret-left": "\e912"))
 $icons: map-merge($icons, ("caret-bottom": "\e911"))
-$icons: map-merge($icons, ("list-hyphen": "\e917"))
-$icons: map-merge($icons, ("link-blank": "\e903"))
-$icons: map-merge($icons, ("twitter": "\e90d"))
-$icons: map-merge($icons, ("social": "\e915"))
-$icons: map-merge($icons, ("linkedin": "\e90c"))
-$icons: map-merge($icons, ("instagram": "\e90a"))
+$icons: map-merge($icons, ("close": "\e90e"))
+$icons: map-merge($icons, ("download": "\e900"))
+$icons: map-merge($icons, ("eye": "\e901"))
 $icons: map-merge($icons, ("facebook": "\e90b"))
-$icons: map-merge($icons, ("arrow": "\ff01"))
-$icons: map-merge($icons, ("arrow-left": "\ff02"))
+$icons: map-merge($icons, ("globe": "\ff10"))
+$icons: map-merge($icons, ("instagram": "\e90a"))
+$icons: map-merge($icons, ("link-blank": "\e903"))
+$icons: map-merge($icons, ("linkedin": "\e90c"))
+$icons: map-merge($icons, ("list-hyphen": "\e917"))
+$icons: map-merge($icons, ("pause": "\e90f"))
+$icons: map-merge($icons, ("play": "\e910"))
+$icons: map-merge($icons, ("search": "\e916"))
+$icons: map-merge($icons, ("social": "\e915"))
+$icons: map-merge($icons, ("toc": "\e918"))
+$icons: map-merge($icons, ("twitter": "\e90d"))
 
 // Breakpoints
 // TODO: réécrire en sass les mixins bootstrap
@@ -246,6 +255,7 @@ $toc-title-font-family: $meta-font-family !default
 $toc-title-font-size: $meta-size !default
 $toc-title-font-size-desktop: $meta-size-desktop !default
 $toc-sticky-transition: 0.4s
+$toc-overlay-color: $body-overlay-color !default
 
 // Table
 $table-head-font-size: $h4-size !default
@@ -260,6 +270,8 @@ $block-call-to-action-background: $color-accent !default
 $block-call-to-action-color: $color-background !default
 $block-call-to-action-button-background: $color-background !default
 $block-call-to-action-button-color: $color-text !default
+$block-call-to-action-button-hover-background: $color-text-alt !default
+$block-call-to-action-button-hover-color: white !default
 
 // Block chapter
 $block-chapter-layout-accent-background: $color-accent !default
@@ -324,7 +336,7 @@ $block-key_figures-font-size-xxl: $block-key_figures-font-size-xl !default
 $block-key_figures-number-font-size-xxl: px2rem(80) !default
 
 // Block gallery
-$block-gallery-carousel-background: $color-background-alt
+$block-gallery-carousel-background: $color-background-alt !default
 
 // Block image
 $block-image-max-height-with-sidebar: calc(100vh - var(--header-height)) !default
@@ -337,8 +349,6 @@ $article-media-aspect-ratio: 2 !default
 $post-media-background: $article-media-background !default
 $post-categories-color: color-contrast($color-text, 20%) !default
 $post-time-color: $color-text-alt !default
-// Layout posts list (ne concerne pas les blocks posts)
-$posts-layout-list: true !default
 // Si layout posts grid (ne concerne pas les blocks posts)
 $posts-grid-columns: $block-posts-grid-columns !default
 

@@ -1,4 +1,4 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- $term := false -}}
@@ -18,14 +18,19 @@
             {{ $title_link := false }}
             {{- if $term }}
               {{ $title_link = $term.Permalink }}
+            {{- else if .all -}}
+              {{ $posts_page := site.GetPage "/posts" }}
+              {{ $title_link = $posts_page.Permalink }}
+            {{- end -}}
+
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
+              {{ partial "blocks/title_with_link.html" (dict 
+                "title" $title
+                "link" $title_link
+                ) }}
             {{ end -}}
-
-            {{ partial "blocks/title" (dict 
-              "title" $title
-              "context" $context
-              "link" $title_link
-              ) }}
-
           </div>
         {{- end }}
 

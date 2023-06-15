@@ -1,14 +1,28 @@
 <aside class="document-nav">
-  <div role="group">
-    {{ if isset .Params "pdf" }}
-      {{- $pdf := partial "GetMedia" .Params.pdf -}}
-      <a href="{{ $pdf.url }}" download>{{ i18n "commons.download.pdf" }}</a><br>
-    {{ end }}
-    {{ if .Content }}
-      <a href="#full-text" class="btn-eye">{{ i18n "commons.read_online" }}</a>
-    {{ end }}
-  </div>
   <dl>
+    {{ range .GetTerms "volumes" }}
+      <dt>{{ i18n "volumes.singular_name" }}</dt>
+      <dd itemprop="isPartOf" itemscope itemtype="https://schema.org/PublicationVolume">
+        <a href="{{ .Permalink }}" itemprop="url">
+          <span itemprop="name">{{ .Title }}</span>
+          <div class="media">
+            {{- if .Params.image -}}
+              {{- partial "commons/image.html"
+                    (dict
+                      "image"    .Params.image
+                      "alt"      .Title
+                      "mobile"   "327x388"
+                      "tablet"   "208x247"
+                      "desktop"  "408x485"
+                    ) -}}
+            {{- else if site.Params.default_image.url -}}
+              {{- partial "commons/image-default.html" (dict "class" "img-fluid") -}}
+            {{- end -}}
+          </div>
+        </a>
+      </dd>
+    {{ end }}
+    
     {{ if isset .Params "type" }}
       <dt>{{ i18n "volumes.nature" }}</dt>
       <dd>{{ partial "PrepareHTML" .Params.Type }}</dd>
@@ -26,19 +40,31 @@
       <dd itemprop="inLanguage" content="{{ .Params.Lang_iso }}">{{ .Params.Lang }}</dd>
     {{ end }}
 
-    {{ range .GetTerms "volumes" }}
-      <dt>{{ i18n "volumes.singular_name" }}</dt>
-      <dd itemprop="isPartOf" itemscope itemtype="https://schema.org/PublicationVolume">
-        <a href="{{ .Permalink }}" itemprop="url">
-          <span itemprop="name">{{ .Title }}</span>
-        </a>
-      </dd>
-    {{ end }}
-
     {{ if .Date }}
       <dt>{{ i18n "commons.date" }}</dt>
       <dd>
         <time itemprop="datePublished" datetime="{{ .Date | time.Format "2006-01-02T15:04" }}">{{ .Date | time.Format ":date_long" }}</time>
+      </dd>
+    {{ end }}
+
+    {{ with .Params.dates.published }}
+      <dt>{{ i18n "papers.dates.published" }}</dt>
+      <dd>
+        <time itemprop="datePublished" datetime="{{ . | time.Format "2006-01-02T15:04" }}">{{ . | time.Format ":date_long" }}</time>
+      </dd>
+    {{ end }}
+
+    {{ with .Params.dates.accepted }}
+      <dt>{{ i18n "papers.dates.accepted" }}</dt>
+      <dd>
+        <time itemprop="datePublished" datetime="{{ . | time.Format "2006-01-02T15:04" }}">{{ . | time.Format ":date_long" }}</time>
+      </dd>
+    {{ end }}
+
+    {{ with .Params.dates.received }}
+      <dt>{{ i18n "papers.dates.received" }}</dt>
+      <dd>
+        <time itemprop="datePublished" datetime="{{ . | time.Format "2006-01-02T15:04" }}">{{ . | time.Format ":date_long" }}</time>
       </dd>
     {{ end }}
   </dl>

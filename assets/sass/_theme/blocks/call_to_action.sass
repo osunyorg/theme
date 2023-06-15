@@ -20,7 +20,7 @@
             a
                 @include meta
                 color: $block-call-to-action-color
-                margin-right: $spacing2
+                margin-right: $spacing1
                 margin-top: $spacing1
                 text-decoration-color: rgba($block-call-to-action-color, .3)
                 display: inline-block
@@ -30,6 +30,12 @@
                     @include btn
                     background: $block-call-to-action-button-background
                     color: $block-call-to-action-button-color
+                    transition: background .3s ease, color .3s ease
+                    &:hover,
+                    &:focus-visible,
+                    &:focus
+                        background: $block-call-to-action-button-hover-background
+                        color: $block-call-to-action-button-hover-color
                 &:last-child
                     margin-bottom: 0
         * + .actions
@@ -43,7 +49,6 @@
             padding: $spacing3 0
             .actions
                 a
-                    margin-right: $spacing1
                     &:last-child
                         margin-bottom: 0
         .call_to_action--with-image

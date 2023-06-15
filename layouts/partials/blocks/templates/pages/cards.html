@@ -4,29 +4,26 @@
 <div class="cards">
   {{ range .pages }}
     {{- $page := partial "GetPageByUrl" .page -}}
-    {{- if .slug -}}
-      {{- $page = partial "GetPageByUrl" .slug -}}
-    {{- end -}}
     {{ with $page }}
       <article class="card">
-        <h1>
+        <h3>
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}
           </a>
-        </h1>
+        </h3>
 
         {{ if and $show_descriptions .Params.summary }}
-          {{ if site.Params.pages.list.truncate_description }}
+          {{ if site.Params.pages.index.truncate_description }}
             <p>{{ partial "GetTruncateContent" ( dict 
               "text" .Params.summary
-              "length" site.Params.pages.list.truncate_description
+              "length" site.Params.pages.index.truncate_description
               ) }}</p>
           {{ else }}
-            <p>{{ partial "PrepareHTML" .Params.summary }}</p>
+            <p>{{ partial "PrepareText" .Params.summary }}</p>
           {{ end }}
         {{ end }}
 
-        <p class="more meta">{{- i18n "commons.more" -}}</p>
+        <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
 
         {{ if $show_images }}
           {{- partial "pages/page-media.html" . -}}

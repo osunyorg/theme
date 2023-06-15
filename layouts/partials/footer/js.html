@@ -1,2 +1,25 @@
+{{ $isLeafletNeeded := false }}
+
+{{ if .Params.blocks }}
+  {{ range .Params.blocks }}
+    {{ if eq .template "partners"}}
+      {{ with .data }}
+        {{ if eq .layout "map" }}
+          {{ $isLeafletNeeded = true }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if $isLeafletNeeded }}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+          integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+          crossorigin=""></script>
+{{ end }}
+
 {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

@@ -2,13 +2,16 @@
     .top
         margin-bottom: $spacing2
         a
+            @include hover-translate-icon
             @include icon(arrow-right, after, true)
+            align-items: flex-end
+            display: flex
             text-decoration: none
     .posts
         @include grid(1)
         @include grid($block-posts-grid-columns, desktop)
     article
-        h1
+        h3
             a
                 @include stretched-link
                 text-decoration: none
@@ -17,6 +20,8 @@
                 margin-top: $spacing0
             .media
                 margin-top: 0
+        @include post-time-author-flex
+
     &--grid
         @include media-breakpoint-down(desktop)
             article + article
@@ -28,6 +33,8 @@
             @include in-page-without-sidebar
                 .grid
                     @include grid($block-posts-grid-columns)
+                    .media picture img
+                        width: 100%
     &--list
         article
             border-bottom: 1px solid $color-border
@@ -40,32 +47,21 @@
             article
                 position: relative
                 padding-bottom: half($spacing3)
-                // display: flex
-                // flex-direction: row
                 + article
                     margin-top: half($spacing3)
                 .post-content
                     display: flex
                     flex-direction: column
-                    // width: 70%
-                    h1
+                    padding-top: $spacing0
+                    h3
                         margin-bottom: 0
-                    time
+                    .post-categories
+                        margin-bottom: 0
+                    p[itemprop="articleBody"]
                         margin-top: half($spacing0)
-                        order: 2
-                    p
-                        margin-top: half($spacing0)
-                        order: 4
-                    // h1, time, p
-                    //     padding-right: calc(30% + #{$spacing1})
                 .media
-                    display: none
-                    order: 3
-                    // position: absolute
-                    // width: 30%
-
-                    // top: 0
-                    // right: 0
+                    order: -1
+                    max-width: 33%
 
         @include in-page-with-sidebar
             article
@@ -85,30 +81,28 @@
 
             @include in-page-without-sidebar
                  article
-                    padding-bottom: $spacing3
                     border-bottom: 1px solid $color-border
+                    gap: $grid-gutter
+                    padding-bottom: $spacing3
                     position: relative
                     .media
                         width: col(3)
                     .post-content
                         width: col(6)
-                        margin-left: $grid-gutter
                     + article
                         margin-top: $spacing3
-                    time
+                    .post-meta
                         position: absolute
                         right: 0
                         top: 0
                         margin-top: 0.3em
     &--highlight
         .highlight-post
-            h1
+            h3
                 margin-bottom: $spacing0
             .media
                 margin-bottom: $spacing0
                 background: none
-                &, img
-                    aspect-ratio: 1
         .list
             margin-top: half($spacing3)
             border-top: 1px solid $color-border
@@ -136,31 +130,36 @@
             .list
                 article
                     @include grid(8, desktop, 0, 0)
-                    h1
+                    h3
                         grid-column: 1 / 7
                     .post-categories
                         grid-column: 1 / 7
-                    time
+                    .post-meta
                         grid-row: 1
                         grid-column: 7 / 9
                         text-align: right
                         order: 2
+                        display: block
                         margin-top: 0
-                    p
+                        .post-author p::before
+                            content: ''
+                    p[itemprop="articleBody"]
                         grid-column: 1 / 7
                         order: 3
         
         @include media-breakpoint-down(desktop)
             .list
                 border-top: 1px solid $color-border
+                p[itemprop="articleBody"]
+                    margin-top: 0
 
         @include media-breakpoint-up(desktop)
             .highlight
-                h1
+                h3
                     @include h2
             .list
                 article
-                    h1
+                    h3
                         @include h4
             @include in-page-without-sidebar
                 .highlight
@@ -170,3 +169,33 @@
                     margin-top: 0
                     article:first-child
                         margin-top: 0
+    &--alternate .alternate
+        @include media-breakpoint-up(desktop)
+            .post
+                width: col(3,8)
+                &.right
+                    margin-left: auto
+                &.portrait
+                    + .portrait
+                        margin-top: -30%
+                    + .square,
+                    + .landscape
+                        margin-top: -15%
+                    + .post:not(.portrait, .square, .landscape)
+                        margin-top: -5%
+            @include in-page-without-sidebar
+                width: col(10)
+                margin-left: auto
+                margin-right: auto
+                .post
+                    width: col(4, 10)
+        @include media-breakpoint-down(desktop)
+            .post 
+                .post-meta
+                    margin-top: half($spacing0)
+                .media
+                    margin-bottom: $spacing0
+                + .post
+                    margin-top: $spacing3
+        .post .media img
+            aspect-ratio: unset

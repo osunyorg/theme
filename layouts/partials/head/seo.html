@@ -1,12 +1,17 @@
+{{- $title := chomp (htmlUnescape .Title) -}}
 {{- $seoTitle := htmlUnescape site.Title -}}
+{{- $seoTitleSeparator := htmlUnescape site.Params.seo.title.separator -}}
 {{- if .Title -}}
-  {{- $seoTitle = printf "%s | %s" (chomp (htmlUnescape .Title)) $seoTitle -}}
+  {{- $seoTitle = printf "%s %s %s" $title $seoTitleSeparator $seoTitle -}}
 {{- end -}}
+{{- $seoTitle = partial "GetPaginateTitle" ( dict "title" $seoTitle "separator" $seoTitleSeparator "context" .) -}}
 {{- $seoDescription := "" -}}
-{{- if .Params.description -}}
-  {{- $seoDescription = partial "PrepareHTML" .Params.description -}}
+{{- if .Params.meta_description -}}
+  {{- $seoDescription = partial "PrepareHTML" .Params.meta_description -}}
+{{- else if .Params.description -}}
+  {{- $seoDescription = partial "PrepareHTML" .Params.description -}} {{/*  LEGACY  */}}
 {{- else if .Params.summary -}}
-  {{- $seoDescription = partial "PrepareHTML" .Params.summary -}}
+  {{- $seoDescription = partial "PrepareText" .Params.summary -}}
 {{- else if .Content -}}
   {{- $seoDescription = partial "GetTruncateContent" ( dict "text" .Content ) -}}
 {{- else if .Params.legacy_text -}}

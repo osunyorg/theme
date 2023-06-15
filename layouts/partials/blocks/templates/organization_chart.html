@@ -1,18 +1,22 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
+{{- $charLimit := 30 -}}
+{{- $isColumn := false -}}
+
 {{- with .block.data -}}
   {{- $with_link := .with_link -}}
   {{- $with_photo := .with_photo -}}
-<section class="block block-organization_chart{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
-  <div class="container">
-    <div class="block-content">
+  <section class="block block-organization_chart{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+    <div class="container">
+      <div class="block-content">
         {{ if (or $title .description) -}}
           <div class="top">
-            {{ partial "blocks/title" (dict 
-              "title" $title
-              "context" $context
-              ) }}
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
+            {{ end -}}
             {{- if .description }}
               <div class="description">
                 {{ partial "PrepareHTML"  .description }}
@@ -23,41 +27,45 @@
         <div class="persons">
           {{- range .persons -}}
             {{ $person := site.GetPage (printf "/persons/%s" .slug) }}
-            <div>
-              <article class="person" itemscope itemtype="https://schema.org/Person">
-                <div class="description">
-                  <h1 class="name" itemprop="name">
-                    {{ if $with_link }}
-                    <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
-                      {{ end }}
-                      {{- partial "PrepareHTML" $person.Title -}}
-                      {{ if $with_link }}
-                    </a>
+            
+            <article class="person" itemscope itemtype="https://schema.org/Person">
+              <div class="description">
+                <h3 class="name" itemprop="name">
+                  {{ if $with_link }}
+                  <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
                     {{ end }}
-                  </h1>
-                  <p itemprop="jobTitle">
-                    {{- if (partial "GetTextFromHTML" .role) }}
-                      {{ partial "PrepareHTML" .role }}
-                    {{- else if partial "GetTextFromHTML" $person.Params.summary }}
-                      {{- partial "PrepareHTML" $person.Params.summary -}}
-                    {{ else if (partial "GetTextFromHTML" $person.Content) }}
-                      {{- partial "GetTruncateContent" ( dict "text" $person.Content ) -}}
-                    {{ end -}}
-                  </p>
+                    {{- partial "PrepareHTML" $person.Title -}}
+                    {{ if $with_link }}
+                  </a>
+                  {{ end }}
+                </h3>
+                <p itemprop="jobTitle" 
+                    {{- if $person.Params.summary -}}
+                      {{ $summaryLength := len $person.Params.summary}}
+                      {{- if ge $summaryLength $charLimit -}} data-column="true" {{- end -}}
+                    {{- end -}}>
+                  {{- if (partial "GetTextFromHTML" .role) }}
+                    {{ partial "PrepareHTML" .role }}
+                  {{- else if partial "GetTextFromHTML" $person.Params.summary }}
+                    {{- partial "PrepareHTML" $person.Params.summary -}}
+                  {{ else if (partial "GetTextFromHTML" $person.Content) }}
+                    {{- partial "GetTruncateContent" ( dict "text" $person.Content ) -}}
+                  {{ end -}}
+                </p>
+              </div>
+              {{- if $with_photo }}
+                <div class="avatar" itemprop="image">
+                  {{- if $person.Params.image }}
+                    {{ partial "commons/image.html"
+                      (dict
+                        "image"    $person.Params.image
+                        "sizes"    site.Params.image_sizes.blocks.organization_chart
+                      )}}
+                  {{ end -}}
                 </div>
-                {{- if $with_photo }}
-                  <div class="avatar" itemprop="image">
-                    {{- if $person.Params.image }}
-                      {{ partial "commons/image.html"
-                            (dict
-                              "image"    $person.Params.image
-                              "sizes"    site.Params.image_sizes.blocks.organization_chart
-                            )}}
-                    {{ end -}}
-                  </div>
-                {{ end -}}
-              </article>
-            </div>
+              {{ end -}}
+            </article>
+
           {{- end -}}
         </div>
       </div>

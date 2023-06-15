@@ -32,14 +32,15 @@
       {{ $tablet = .sizes.tablet }}
       {{ $mobile = .sizes.mobile }}
     {{- end -}}
-    <picture>
+    {{ $is_svg := strings.HasSuffix $image.name "svg" }}
+    <picture {{ if $is_svg }}class="is-svg"{{ end }}>
 
       {{- if strings.HasSuffix $image.name "svg" -}}
 
         <img src="{{ partial "GetImageUrl" (dict "url" $url) }}"
              alt="{{ chomp (plainify $alt) }}"
-             width="{{ $width }}"
-             height="{{ $height }}"
+             {{ if $width }}width="{{ $width }}"{{ end }}
+             {{ if $height }}height="{{ $height }}"{{ end }}
              {{- if .class }} class="{{ .class }}"{{- end -}}
              {{- if $lazy }} loading="lazy"{{- end -}}
              {{- if .itemprop }} itemprop="image"{{- end -}}

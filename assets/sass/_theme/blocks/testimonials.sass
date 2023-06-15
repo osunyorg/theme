@@ -57,6 +57,10 @@
                     width: 42px
                 &::before
                     color: $color-accent
+            &:not(.is-active)
+                + .splide__pagination
+                    .is-active i
+                        width: 100% !important
 
             .splide__play
                 &::before
@@ -87,9 +91,9 @@
     @include media-breakpoint-up(desktop)
         @include in-page-without-sidebar
             .top
-                padding-left: offset(2)
+                padding-left: offset(3)
             .splide__pagination
-                padding-left: offset(2)
+                padding-left: offset(3)
                 padding-right: offset(1)
             .splide__autoplay
                 margin-right: offset(1)
@@ -99,15 +103,16 @@
                 min-height: calc(#{col-outside-container(2)} + #{half($grid-gutter)})
                 &.with-picture
                     padding-right: offset(1)
-                    padding-left: offset(2)
+                    padding-left: offset(3)
                     position: relative
                     figcaption
                         display: block
                         margin-top: $spacing0
                         .avatar
                             position: absolute
-                            left: 0
+                            left: col(1)
                             top: 0
+                            margin-left: $grid-gutter
                             width: col(2)
 
         // TODO : en discuter en créa

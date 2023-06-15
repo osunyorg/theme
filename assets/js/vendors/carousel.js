@@ -33,39 +33,39 @@ class Carousel {
                 stepButton.innerHTML = '<i></i>';
             });
 
-            this.splide.on('autoplay:play', function () {
+            this.splide.on('autoplay:play', () => {
                 toggleButton.classList.add('is-active');
             });
 
-            this.splide.on('autoplay:playing', function (rate) {
+            this.splide.on('autoplay:playing', (rate) => {
                 var activeStepButton = this.splide.root.querySelector('.splide__pagination .is-active i');
                 activeStepButton.style.width = rate * 100 + '%';
             });
 
-            this.splide.on('autoplay:pause', function () {
+            this.splide.on('autoplay:pause', () => {
                 toggleButton.classList.remove('is-active');
             });
 
-            elements.forEach(function(element) {
+            elements.forEach(element => {
                 element.addEventListener('click', () => {
                     autoplay.pause();
                 })
             });
 
-            this.splide.on('drag', function() {
+            this.splide.on('drag', () => {
                 autoplay.pause();
             });
         }
     }
 
     listen() {
-        this.splide.on('move', function() {
+        this.splide.on('move', () => {
             this.splide.root.classList.add('is-moving')
-        }.bind(this));
+        });
 
-        this.splide.on('moved', function() {
+        this.splide.on('moved', () => {
             this.splide.root.classList.remove('is-moving')
-        }.bind(this));
+        });
     }
 }
 

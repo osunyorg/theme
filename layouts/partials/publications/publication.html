@@ -1,7 +1,8 @@
 <article class="publication">
-  <div class="post-content">
-    {{- $title := partial "PrepareHTML" .Title -}}
-    <h1 itemprop="headline"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h1>
-    <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_short" }}</time>
-  </div>
+  <p class="title">
+    {{ partial "PrepareHTML" .title }}
+  </p>
+  <p class="ref">
+    {{ partial "PrepareHTML" .ref }}
+  </p>
 </article>

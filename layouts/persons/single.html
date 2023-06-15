@@ -13,6 +13,7 @@
     {{ $papersForResearcher = index site.Taxonomies.researchers $slug}}
   {{ end }}
   {{ $author := site.GetPage (printf "/authors/%s" $slug) }}
+  {{ $publications := .Params.publications }}
 
   {{ partial "persons/hero-single.html" . }}
 
@@ -30,16 +31,14 @@
         {{- $image := partial "GetMedia" .Params.image -}}
         {{- if $image -}}
           <meta itemprop="image" content="{{ $image.url }}">
-          {{- end -}}
+        {{- end -}}
       {{- end -}}
 
       <div class="informations">
         <div>
-          {{ if (partial "GetTextFromHTML" .Params.summary) }}
-            <div class="lead" itemprop="description">
-              {{ partial "PrepareHTML" .Params.summary }}
-            </div>
-          {{ end }}
+          {{ partial "persons/summary.html" (dict
+            "context" .
+          ) }}
           {{ if (partial "GetTextFromHTML" .Content) }}
             <div class="rich-text">
               {{ partial "PrepareHTML" .Content }}
@@ -61,11 +60,14 @@
           </div>
         {{ end }}
       </div>
+
+      {{ partial "persons/contact-details.html" . }}
+
     </div>
 
     {{ partial "blocks/list.html" . }}
 
-    <div class="container">
+    <div class="container person-objects">
       {{ if $programsForTeacher }}
         {{ partial "persons/programs.html" (dict "programs" $programsForTeacher "slug" $slug) }}
       {{ end }}
@@ -76,6 +78,10 @@
   
       {{ if $papersForResearcher }}
         {{ partial "persons/papers.html" (dict "papers" $papersForResearcher "slug" $slug) }}
+      {{ end }}
+  
+      {{ if $publications }}
+        {{ partial "persons/publications.html" $publications }}
       {{ end }}
     </div>
   </div>

@@ -1,17 +1,33 @@
-{{- $context := .context -}}
+{{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
+
+{{- $class := "block block-partners" -}}
+{{- $layout_class := "block-partners--grid" -}}
+{{ $logo_index := "logo" }}
+{{ $longitude := "" }}
+{{ $latitude := "" }}
+
+{{ if site.Params.organizations.dark_logo_background }}
+  {{ $logo_index = "logo_on_dark_background" }}
+{{ end }}
+
 {{- with .block.data -}}
-  <section class="block block-partners{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+  {{- $layout := .layout -}}
+
+  {{- if $layout -}}
+    {{- $layout_class = printf "block-partners--%s" $layout -}}
+  {{- end -}}
+
+  <section class="block block-partners{{ if $title }} block-with-title{{ end }} {{ $layout_class }}" id="block-{{ $position }}">
     <div class="container">
       <div class="block-content">
         {{ if (or $title .description) -}}
           <div class="top">
-            {{- if $title }}
-              {{ partial "blocks/title" (dict 
-                "title" $title
-                "context" $context
-                ) }}
+            {{- if not $title -}}
+              {{ partial "blocks/default_title.html" $template }}
+            {{ else }}
+              <h2>{{ partial "PrepareHTML" $title }}</h2>
             {{ end -}}
             {{- if .description }}
               <div class="description">
@@ -21,47 +37,40 @@
           </div>
         {{- end }}
 
-        <div class="organizations">
-          {{- range .partners }}
-            <div>
-              {{- if .slug }}
-                {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
-                  {{- partial "organizations/organization.html" . -}}
-                {{ end }}
-              {{- else -}}
-                <article class="organization">
-                  {{- $title := "" -}}
-                  {{ if .name }}
-                    <div>
-                      {{ $title = partial "PrepareHTML" .name -}}
-                      <h1>
-                        {{- if .url }}
-                        <a href="{{ .url }}" title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
-                        {{ end }}
-                          {{- $title -}}
-                        {{ if .url }}
-                        </a>
-                        {{ end -}}
-                      </h1>
-                    </div>
-                  {{ end -}}
-                  <div class="media">
-                    {{- if .logo -}}
-                      {{- partial "commons/image.html"
-                            (dict
-                              "image"    .logo
-                              "alt"      $title
-                              "sizes"    site.Params.image_sizes.blocks.partners
-                            ) -}}
-                    {{- end -}}
-                  </div>
-                </article>
-              {{ end -}}
-
-            </div>
-          {{ end -}}
-        </div>
+        {{- partial (printf "blocks/templates/partners/%s.html" $layout) (dict 
+            "partners" .partners
+            "logo_index" $logo_index
+          ) }}
       </div>
     </div>
   </section>
 {{- end -}}
+
+
+{{- define "partner" -}}
+<article class="organization" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
+  {{ $title := "" }}
+  {{ if .title }}
+    {{ $title = partial "PrepareHTML" .title -}}
+    <h3>
+      {{- if .url }}
+        <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
+      {{ end -}}
+        {{- $title -}}
+      {{- if .url }}
+        </a>
+      {{ end -}}
+    </h3>
+  {{ end -}}
+  <div class="media">
+    {{- if .logo -}}
+      {{- partial "commons/image.html"
+        (dict
+          "image"    .logo
+          "alt"      $title
+          "sizes"    site.Params.image_sizes.blocks.partners
+        ) -}}
+    {{- end -}}
+  </div>
+</article>
+{{- end  -}}

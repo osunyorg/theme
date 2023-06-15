@@ -10,18 +10,16 @@
     {{ partial "head/script.html" . }}
     {{ partial "head/extras.html" . }}
   </head>
-  {{ $body_class := printf "%s__%s" .Type .Kind }}
-  {{ $pageclass := partial "GetBodyclass" . }}
-  {{ $body_class = printf "%s %s" $body_class $pageclass }}
-  <body class="{{ $body_class }}">
+  <body class="{{ partial "GetBodyclass" . }}">
     {{- partial "header/accessibility.html" -}}
-    {{- partial "header/header.html" -}}
+    {{- partial "header/header.html" . -}}
     <main{{ if .Params.blocks }} class="page-with-blocks"{{ end }} id="main" tabindex="-1">
       {{- block "main" . }}{{- end }}
       {{- partial "hooks/before-main-end" . -}}
     </main>
     {{- partial "footer/footer.html" . -}}
     {{- partial "footer/cookie-banner.html" . -}}
+    {{- partial "footer/plausible.html" . -}}
     {{- partial "footer/js.html" . -}}
     {{- partial "footer/script.html" . -}}
     {{- if not hugo.IsProduction -}}

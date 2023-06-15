@@ -1,14 +1,16 @@
 .nav-accessibility
-    @include list-reset
     padding: $spacing1
     position: absolute
     transform: translateY(calc(-100% - 24px))
     z-index: $zindex-nav-accessibility
+    ul
+        @include list-reset
     li
         display: inline-block
         margin-right: px2rem(5)
     &:focus-within
-        position: relative
+        background: white
+        color: black
         transform: translateY(0)
 
 .transcription

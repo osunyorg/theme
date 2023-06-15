@@ -1,13 +1,21 @@
 <article class="organization">
   <div>
     {{ $title := partial "PrepareHTML" .Title }}
-    <h1><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h1>
+    <h2>
+      <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+        {{ $title }}
+      </a>
+    </h2>
   </div>
   <div class="media">
     {{- if .Params.logo -}}
+    {{ $logo_index := "logo" }}
+    {{ if site.Params.organizations.dark_logo_background }}
+      {{ $logo_index = "logo_on_dark_background" }}
+    {{ end }}
       {{- partial "commons/image.html"
             (dict
-              "image"    .Params.logo
+              "image"    (index .Params  $logo_index)
               "alt"      $title
               "sizes"    site.Params.image_sizes.sections.organizations.item
             ) -}}
