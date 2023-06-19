@@ -1,8 +1,7 @@
 .block-call_to_action
     --cta-background-color: #{$block-call-to-action-background}
     @include in-page-with-or-without-sidebar
-        h2, h3
-            @include h5
+        .block-title
             margin-bottom: $spacing0
     .call_to_action
         color: $block-call-to-action-color
@@ -117,7 +116,7 @@
                     column-gap: $grid-gutter
                     display: grid
                     grid-template-columns: repeat(12,1fr)
-                    h2, h3, .description
+                    .block-title, .description
                         grid-column: 1/9
                     .actions
                         align-items: flex-start
@@ -133,7 +132,7 @@
                             margin-top: $spacing1
                 @include media-breakpoint-down(lg)
                     > div
-                        h2, h3, .description
+                        .block-title, .description
                             grid-column: 1/8
                         .actions
                             grid-column: 9/13

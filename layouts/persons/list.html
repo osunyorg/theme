@@ -18,8 +18,8 @@
     }}
 
     {{ $summary_block := false }}
-    {{ if .Params.blocks }}
-      {{ if gt (len .Params.blocks) 1 }}
+    {{ if .Params.content }}
+      {{ if gt (len .Params.content) 1 }}
         {{ $summary_block = true }}
       {{ end }}
     {{ end }}
@@ -30,7 +30,7 @@
         "block_wrapped" $summary_block
       ) }}
 
-    {{ partial "blocks/list.html" . }}
+    {{ partial "content/list.html" . }}
 
     <div class="container">
       {{- if not $is_organigram_present -}}

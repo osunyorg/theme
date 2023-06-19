@@ -3,14 +3,14 @@
 {{- $title := .block.title -}}
 {{- $class := "block block-contact" -}}
 {{- with .block.data -}}
-  <section class="{{ $class }}{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+  <section class="{{ $class }}{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         {{- if not $title -}}
           {{ partial "blocks/default_title.html" $template }}
         {{ else }}
           <div class="top">
-              <h2>{{ partial "PrepareHTML" $title }}</h2>
+              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
               {{- if .description }}
               <div class="description">
                 {{ partial "PrepareHTML" .description }}

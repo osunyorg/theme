@@ -8,14 +8,14 @@
   {{- if .image -}}
     {{- $image_class = printf "image-%s" (partial "GetImageDirection" .image ) -}}
   {{- end -}}
-  <section class="block block-image{{ if $title }} block-with-title{{ end }} {{ $image_class -}}" id="block-{{ $position }}">
+  <section class="block block-image{{ if $title }} block-with-title{{ end }} {{ $image_class -}}">
     <div class="container">
       <div class="block-content">
         {{- if not $title -}}
           {{ partial "blocks/default_title.html" $template }}
         {{ else }}
           <div class="top">
-            <h2>{{ partial "PrepareHTML" $title }}</h2>
+            <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
           </div>
         {{ end -}}
 

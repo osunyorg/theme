@@ -9,13 +9,13 @@
       {{- $is_carousel = true -}}
     {{ end }}
   {{ end }}
-  <section class="block block-testimonials{{ if $title }} block-with-title{{ end }}{{ if $is_carousel}} with-carousel{{ end }}" id="block-{{ $position }}">
+  <section class="block block-testimonials{{ if $title }} block-with-title{{ end }}{{ if $is_carousel}} with-carousel{{ end }}">
     <div class="container">
       <div class="block-content">
         {{- if not $title -}}
           {{ partial "blocks/default_title.html" $template }}
         {{ else }}
-          <h2 class="hidden">{{ partial "PrepareHTML" $title }}</h2>
+          <p class="block-title hidden">{{ partial "PrepareHTML" $title }}</p>
         {{ end -}}
 
         <div class="testimonials">

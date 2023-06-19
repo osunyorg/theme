@@ -3,7 +3,7 @@
 {{- $title := .block.title -}}
 {{- with .block.data -}}
   {{- $features := .elements }}
-  <section class="block block-features{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+  <section class="block block-features{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         {{- if (or $title .description) }}
@@ -11,7 +11,7 @@
             {{- if not $title -}}
               {{ partial "blocks/default_title.html" $template }}
             {{ else }}
-              <h2>{{ partial "PrepareHTML" $title }}</h2>
+              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
             {{ end -}}
             {{- if .description }}
               <div class="description">

@@ -1,0 +1,18 @@
+{{ $context := . }}
+{{- if .Params.content -}}
+  <div class="blocks">
+  {{- range .Params.content -}}
+    {{ if eq .kind "block" }}
+      {{ $template := printf "blocks/templates/%s.html" .template }}
+      {{ partial $template (dict 
+          "block" . 
+          "context" $context
+      )}}
+    {{- else if (eq .kind "heading") -}}
+      <div class="heading container">
+        <h2>{{ partial "PrepareHTML" .title }}</h2>
+      </div>
+    {{- end -}}
+  {{- end -}}
+  </div>
+{{- end -}}
