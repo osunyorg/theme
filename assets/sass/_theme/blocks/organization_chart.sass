@@ -1,8 +1,4 @@
 .block-organization_chart
-    @include media-breakpoint-up(desktop)
-        @include in-page-without-sidebar
-            .top .description
-                max-width: col(8)
     @include in-page-with-sidebar
         .persons
             @include grid(1, sm)
@@ -29,3 +25,7 @@
                     width: calc(#{col(1, 4)} + #{$grid-gutter})
             .description
                 margin-top: $spacing1
+
+    @include in-page-without-sidebar
+        .top .description
+            max-width: col(8)

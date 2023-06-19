@@ -32,32 +32,33 @@
                 @include h4
                 + p
                     margin-top: $spacing0
+
         @include media-breakpoint-down(desktop)
             .event
                 padding-left: half($grid-gutter-sm)
                 &::after, &::before
                     left: 0
-        @include media-breakpoint-up(desktop)
-            @include in-page-without-sidebar
-                .events
-                    padding-left: 0
-                .event
-                    display: flex
-                    &::before, &::after
-                        left: col(3)
-                        margin-left: half($grid-gutter)
-                    &::before
-                        transform: translateX(-4px)
-                    &-title
-                        width: col(3)
-                        text-align: right
-                        + p
-                            margin-top: 0
-                    p
-                        padding-left: $grid-gutter
-                        width: col(7)
-                        &:first-child
-                            margin-left: col(3)
+
+        @include in-page-without-sidebar
+            .events
+                padding-left: 0
+            .event
+                display: flex
+                &::before, &::after
+                    left: col(3)
+                    margin-left: half($grid-gutter)
+                &::before
+                    transform: translateX(-4px)
+                &-title
+                    width: col(3)
+                    text-align: right
+                    + p
+                        margin-top: 0
+                p
+                    padding-left: $grid-gutter
+                    width: col(7)
+                    &:first-child
+                        margin-left: col(3)
 
     &--horizontal
         --min-title-height: 0px
@@ -148,15 +149,6 @@
             .event
                 .line
                     width: calc(100% + #{$grid-gutter})
-        
-        @include in-page-with-sidebar
-            .timeline
-                padding-left: offset(4)
-
-        @include in-page-without-sidebar
-            @include media-breakpoint-up(xxl)
-                .event
-                    width: 25%
 
         @include media-breakpoint-down(desktop)
             .events
@@ -170,6 +162,17 @@
                 width: 75%
                 .line
                     margin-bottom: calc(#{$spacing2} + var(--min-title-height))
-        // @include in-page-with-or-without-sidebar
-        //     .block-title
-        //         @include h5
+
+
+        @include in-page-with-sidebar
+            .timeline
+                padding-left: offset(4)
+
+        @include in-page-without-sidebar
+            @include media-breakpoint-up(xxl)
+                .event
+                    width: 25%
+
+        @include in-page-with-or-without-sidebar
+            .block-title
+                @include h5

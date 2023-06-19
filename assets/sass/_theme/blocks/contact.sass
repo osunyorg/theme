@@ -4,21 +4,6 @@
         margin-bottom: 0
         + .informations
             margin-top: $spacing2
-    @include in-page-without-sidebar
-        @include media-breakpoint-up(desktop)
-            .top
-                margin-bottom: $spacing2
-            .informations
-                display: flex
-                margin-top: 0
-                address
-                    width: col(4)
-                    margin-top: 0
-                ul
-                    margin-top: 0
-                    width: col(8)
-                    margin-left: $grid-gutter
-    
     address
         [itemprop="name"]
             @include h4
@@ -57,3 +42,17 @@
         @include icon(arrow-right, before)
             display: inline-block
             padding: 0 px2rem(7) 0 px2rem(3)
+
+    @include in-page-without-sidebar
+        .top
+            margin-bottom: $spacing2
+        .informations
+            display: flex
+            margin-top: 0
+            address
+                width: col(4)
+                margin-top: 0
+            ul
+                margin-top: 0
+                width: col(8)
+                margin-left: $grid-gutter

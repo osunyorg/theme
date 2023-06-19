@@ -19,10 +19,11 @@
 
 // Use this mixin to override with-aside or without-aside rules
 @mixin in-page-with-or-without-sidebar
-    body:not(.full-width) &,
-    main > .blocks &,
-    body.full-width &,
-        @content
+    @include media-breakpoint-up(desktop)
+        body:not(.full-width) &,
+        main > .blocks &,
+        body.full-width &,
+            @content
 
 // Aliases
 @mixin full-page
@@ -328,15 +329,14 @@
             transform: translateX(0)
 
 @mixin top-flex
-    @include media-breakpoint-up(desktop)
-        @include in-page-without-sidebar
-            display: flex
-            h2, h3
-                width: col(4)
-            .description
-                margin-top: 0
-                width: col(8)
-                margin-left: $grid-gutter
+    @include in-page-without-sidebar
+        display: flex
+        h2, h3
+            width: col(4)
+        .description
+            margin-top: 0
+            width: col(8)
+            margin-left: $grid-gutter
 
 @mixin collapsed-figcaption
     figcaption

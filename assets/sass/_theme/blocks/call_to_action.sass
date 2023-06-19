@@ -1,8 +1,5 @@
 .block-call_to_action
     --cta-background-color: #{$block-call-to-action-background}
-    @include in-page-with-or-without-sidebar
-        .block-title
-            margin-bottom: $spacing0
     .call_to_action
         color: $block-call-to-action-color
         .description
@@ -93,47 +90,49 @@
                 > div
                     padding-top: calc(#{$grid-gutter} + #{$spacing3})
 
-    @include media-breakpoint-up(desktop)
-        @include in-page-without-sidebar
-            background-color: var(--cta-background-color)
-            padding-top: 0
-            padding-bottom: 0
-            .block-content
-                padding: $spacing4 $grid-gutter
-                margin-left: -$grid-gutter
-                margin-right: -$grid-gutter
-            .call_to_action--with-image
-                align-items: start
+    @include in-page-without-sidebar
+        background-color: var(--cta-background-color)
+        padding-top: 0
+        padding-bottom: 0
+        .block-content
+            padding: $spacing4 $grid-gutter
+            margin-left: -$grid-gutter
+            margin-right: -$grid-gutter
+        .call_to_action--with-image
+            align-items: start
+            display: grid
+            grid-template-columns: repeat(12,1fr)
+            > div
+                grid-column: 1/7
+            > picture
+                grid-column: 8/13
+        .call_to_action--without-image
+            display: block
+            > div
+                column-gap: $grid-gutter
                 display: grid
                 grid-template-columns: repeat(12,1fr)
+                h2, h3, .description
+                    grid-column: 1/9
+                .actions
+                    align-items: flex-start
+                    display: flex
+                    flex-direction: column
+                    grid-column: 10/13
+                    margin-top: 0
+                    a
+                        margin-right: 0
+                        &:first-child
+                            margin-top: 0
+                    a + a
+                        margin-top: $spacing1
+            @include media-breakpoint-down(lg)
                 > div
-                    grid-column: 1/7
-                > picture
-                    grid-column: 8/13
-            .call_to_action--without-image
-                display: block
-                > div
-                    column-gap: $grid-gutter
-                    display: grid
-                    grid-template-columns: repeat(12,1fr)
                     .block-title, .description
-                        grid-column: 1/9
+                        grid-column: 1/8
                     .actions
-                        align-items: flex-start
-                        display: flex
-                        flex-direction: column
-                        grid-column: 10/13
-                        margin-top: 0
-                        a
-                            margin-right: 0
-                            &:first-child
-                                margin-top: 0
-                        a + a
-                            margin-top: $spacing1
-                @include media-breakpoint-down(lg)
-                    > div
-                        .block-title, .description
-                            grid-column: 1/8
-                        .actions
-                            grid-column: 9/13
+                        grid-column: 9/13
 
+    @include in-page-with-or-without-sidebar
+        .block-title
+            margin-bottom: $spacing0
