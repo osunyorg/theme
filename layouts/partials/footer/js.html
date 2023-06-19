@@ -1,7 +1,7 @@
 {{ $isLeafletNeeded := false }}
 
-{{ if .Params.content }}
-  {{ range .Params.blocks }}
+{{ if .Params.contents }}
+  {{ range .Params.contents }}
     {{ if eq .template "partners"}}
       {{ with .data }}
         {{ if eq .layout "map" }}

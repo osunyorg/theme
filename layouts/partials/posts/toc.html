@@ -1,5 +1,5 @@
 {{ $h2s := partial "H2Extract" .Content }}
-{{- if or .Params.blocks $h2s }}
+{{- if or .Params.contents $h2s }}
 <nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
   <ol>
     {{- if and (not $h2s) (partial "GetTextFromHTML" .Content) }}
@@ -12,7 +12,7 @@
         <a href="#page-h2-{{$index}}">{{ plainify $h2 }}</a>
       </li>
     {{- end -}}
-    {{- partial "blocks/toc.html" .Params.blocks -}}
+    {{- partial "blocks/toc.html" .Params.contents -}}
   </ol>
 </nav>
 {{ end -}}

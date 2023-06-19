@@ -1,5 +1,5 @@
 {{ range . -}}
-  {{- if .title }}
+  {{- if eq .kind "heading" }}
     <li>
       <a href="#block-{{ .position }}">{{ partial "PrepareHTML" .title }}</a>
     </li>

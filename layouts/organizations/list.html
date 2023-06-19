@@ -1,6 +1,6 @@
 {{ define "main" }}
   {{- $is_partners_block_present := false -}}
-  {{ range .Params.blocks }}
+  {{ range .Params.contents }}
     {{- if eq .template "partners" -}}
       {{- $is_partners_block_present = true -}}
     {{ end }}
@@ -14,7 +14,7 @@
       "with_container" true
     ) }}
 
-    {{ partial "content/list.html" . }}
+    {{ partial "contents/list.html" . }}
 
     <div class="container">
       {{- if not $is_partners_block_present -}}

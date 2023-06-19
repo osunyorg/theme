@@ -13,7 +13,7 @@
   <body class="{{ partial "GetBodyclass" . }}">
     {{- partial "header/accessibility.html" -}}
     {{- partial "header/header.html" . -}}
-    <main{{ if .Params.content }} class="page-with-blocks"{{ end }} id="main" tabindex="-1">
+    <main{{ if .Params.contents }} class="page-with-blocks"{{ end }} id="main" tabindex="-1">
       {{- block "main" . }}{{- end }}
       {{- partial "hooks/before-main-end" . -}}
     </main>
