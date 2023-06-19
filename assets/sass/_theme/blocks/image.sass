@@ -25,49 +25,49 @@
         img
             max-height: $block-image-max-height-with-sidebar
             width: auto
+
     @include in-page-without-sidebar
-        @include media-breakpoint-up(desktop)
+        figure
+            img
+                max-height: $block-image-max-height-without-sidebar
+                // max-height: calc(100vh - var(--header-height))
+                width: auto
+                max-width: 100%
+        &.image-portrait, &.image-square
+            .block-content
+                position: relative
+                .top
+                    position: absolute
+                    width: col(5)
             figure
-                img
-                    max-height: $block-image-max-height-without-sidebar
-                    // max-height: calc(100vh - var(--header-height))
-                    width: auto
-                    max-width: 100%
-            &.image-portrait, &.image-square
-                .block-content
-                    position: relative
-                    .top
-                        position: absolute
-                        width: col(5)
-                figure
-                    display: flex
-                    align-items: flex-end
-                    > a 
-                        width: col(7)
-                        margin-left: half($grid-gutter)
-                        display: block
-                        order: 2
-                    picture
-                        margin-left: 0
-                        margin-right: -$grid-gutter
-                    figcaption
-                        width: calc(#{col(5)} + #{$grid-gutter} / 2)
-                        order: 1
-                        display: block
-                        text-align: right
-            &.image-landscape
+                display: flex
+                align-items: flex-end
+                > a 
+                    width: col(7)
+                    margin-left: half($grid-gutter)
+                    display: block
+                    order: 2
                 picture
-                    margin-left: -$grid-gutter
+                    margin-left: 0
                     margin-right: -$grid-gutter
-                    @media screen and (min-width: 1400px)
-                        margin-left: 0
-                        margin-right: 0
                 figcaption
-                    display: flex
-                    justify-content: space-between
-                    align-items: baseline
-                    *
-                        flex: 1 1
-                    .credit
-                        margin-top: 0
-                        text-align: right
+                    width: calc(#{col(5)} + #{$grid-gutter} / 2)
+                    order: 1
+                    display: block
+                    text-align: right
+        &.image-landscape
+            picture
+                margin-left: -$grid-gutter
+                margin-right: -$grid-gutter
+                @media screen and (min-width: 1400px)
+                    margin-left: 0
+                    margin-right: 0
+            figcaption
+                display: flex
+                justify-content: space-between
+                align-items: baseline
+                *
+                    flex: 1 1
+                .credit
+                    margin-top: 0
+                    text-align: right

@@ -38,22 +38,21 @@
             margin-top: $spacing1
 
     @include in-page-without-sidebar
-        @include media-breakpoint-up(desktop)
-            .top
-                @include grid
-                h2
-                    grid-column: 1 / 5
-                    a
-                        @include icon(arrow, after, true)
-                        @include hover-translate-icon
-                        align-items: flex-end
-                        display: flex
-                        text-decoration: none
-            .description
-                @include h2
-                grid-column: 5 / 13
-                margin-top: -0.25em
-                font-style: $h2-size-desktop
+        .top
+            @include grid
+            h2
+                grid-column: 1 / 5
+                a
+                    @include icon(arrow, after, true)
+                    @include hover-translate-icon
+                    align-items: flex-end
+                    display: flex
+                    text-decoration: none
+        .description
+            @include h2
+            grid-column: 5 / 13
+            margin-top: -0.25em
+            font-style: $h2-size-desktop
 
     &--grid
         .grid
@@ -141,11 +140,13 @@
                     @include hover-translate-icon(before, 5)
                     @include link
                     text-decoration-color: rgba(0,0,0,0)
+
         @include media-breakpoint-down(desktop)
             .top
                 margin-bottom: $spacing0
             ul
                 margin-top: $spacing1
+
         @include in-page-with-sidebar
             .block-content
                 .top
@@ -158,31 +159,31 @@
                     grid-column-gap: half($grid-gutter) !important
                     li
                         margin-top: 0
-        @include media-breakpoint-up(desktop)
-            @include in-page-without-sidebar
-                h2
-                    a
-                        @include stretched-link(before)
-                .block-content
-                    @include grid
-                    grid-row-gap: $spacing1
-                    .top
-                        display: block
-                        grid-column: 1 / 8
-                        margin-bottom: 0
-                    .top:not(.hidden) + .description
-                        grid-column: 1 / 8
-                        grid-row: 2 / 3
-                    // Default behavior (without page description)
-                    ul
-                        @include grid(4, desktop)
-                        grid-column: 1 / 13
-                        li
-                            margin-top: 0
-                    // If page description
-                    .description + ul
-                        grid-column: 9 / 13
-                        grid-row: 2 / 3
-                        display: block
-                        li + li
-                            margin-top: $spacing0
+
+        @include in-page-without-sidebar
+            h2
+                a
+                    @include stretched-link(before)
+            .block-content
+                @include grid
+                grid-row-gap: $spacing1
+                .top
+                    display: block
+                    grid-column: 1 / 8
+                    margin-bottom: 0
+                .top:not(.hidden) + .description
+                    grid-column: 1 / 8
+                    grid-row: 2 / 3
+                // Default behavior (without page description)
+                ul
+                    @include grid(4, desktop)
+                    grid-column: 1 / 13
+                    li
+                        margin-top: 0
+                // If page description
+                .description + ul
+                    grid-column: 9 / 13
+                    grid-row: 2 / 3
+                    display: block
+                    li + li
+                        margin-top: $spacing0

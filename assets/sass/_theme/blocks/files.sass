@@ -36,18 +36,19 @@
         .files
             li + li
                 margin-top: $spacing1
+
     @include in-page-with-sidebar
         .files
             @include grid(2, desktop, half($grid-gutter))
-    @include media-breakpoint-up(desktop)
-        @include in-page-without-sidebar
-            .top
-                display: flex
-                h2, h3
-                    width: col(4)
-                .description
-                    margin-top: 0
-                    width: col(8)
-                    margin-left: $grid-gutter
-            .files
-                @include grid(3, desktop, half($grid-gutter))
+
+    @include in-page-without-sidebar
+        .top
+            display: flex
+            h2, h3
+                width: col(4)
+            .description
+                margin-top: 0
+                width: col(8)
+                margin-left: $grid-gutter
+        .files
+            @include grid(3, desktop, half($grid-gutter))

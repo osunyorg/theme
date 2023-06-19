@@ -29,12 +29,11 @@
         @include in-page-with-sidebar
             .grid
                 @include grid(2, desktop, $grid-gutter, half($grid-gutter))
-        @include media-breakpoint-up(desktop)
-            @include in-page-without-sidebar
-                .grid
-                    @include grid($block-posts-grid-columns)
-                    .media picture img
-                        width: 100%
+        @include in-page-without-sidebar
+            .grid
+                @include grid($block-posts-grid-columns)
+                .media picture img
+                    width: 100%
     &--list
         article
             border-bottom: 1px solid $color-border
@@ -43,6 +42,7 @@
                 margin: 0
                 &, img
                     aspect-ratio: auto
+
         @include media-breakpoint-down(desktop)
             article
                 position: relative
@@ -63,6 +63,11 @@
                     order: -1
                     max-width: 33%
 
+        @include media-breakpoint-up(desktop)
+            article
+                display: flex
+                flex-direction: row
+
         @include in-page-with-sidebar
             article
                 padding-bottom: $spacing1
@@ -74,28 +79,24 @@
                     width: col(6, 8)
                     margin-left: half($grid-gutter)
 
-        @include media-breakpoint-up(desktop)
+        @include in-page-without-sidebar
             article
-                display: flex
-                flex-direction: row
+                border-bottom: 1px solid $color-border
+                gap: $grid-gutter
+                padding-bottom: $spacing3
+                position: relative
+                .media
+                    width: col(3)
+                .post-content
+                    width: col(6)
+                + article
+                    margin-top: $spacing3
+                .post-meta
+                    position: absolute
+                    right: 0
+                    top: 0
+                    margin-top: 0.3em
 
-            @include in-page-without-sidebar
-                 article
-                    border-bottom: 1px solid $color-border
-                    gap: $grid-gutter
-                    padding-bottom: $spacing3
-                    position: relative
-                    .media
-                        width: col(3)
-                    .post-content
-                        width: col(6)
-                    + article
-                        margin-top: $spacing3
-                    .post-meta
-                        position: absolute
-                        right: 0
-                        top: 0
-                        margin-top: 0.3em
     &--highlight
         .highlight-post
             h3
@@ -116,6 +117,21 @@
                 margin-top: $spacing0
             .media
                 margin-top: 0
+
+        @include media-breakpoint-down(desktop)
+            .list
+                border-top: 1px solid $color-border
+                p[itemprop="articleBody"]
+                    margin-top: 0
+
+        @include media-breakpoint-up(desktop)
+            .highlight
+                h3
+                    @include h2
+            .list
+                article
+                    h3
+                        @include h4
 
         @include in-page-with-sidebar
             .highlight-post
@@ -146,30 +162,20 @@
                     p[itemprop="articleBody"]
                         grid-column: 1 / 7
                         order: 3
-        
-        @include media-breakpoint-down(desktop)
+
+        @include in-page-without-sidebar
+            .highlight
+                @include grid(2)
             .list
-                border-top: 1px solid $color-border
-                p[itemprop="articleBody"]
+                border-top: 0
+                margin-top: 0
+                article:first-child
                     margin-top: 0
 
-        @include media-breakpoint-up(desktop)
-            .highlight
-                h3
-                    @include h2
-            .list
-                article
-                    h3
-                        @include h4
-            @include in-page-without-sidebar
-                .highlight
-                    @include grid(2)
-                .list
-                    border-top: 0
-                    margin-top: 0
-                    article:first-child
-                        margin-top: 0
     &--alternate .alternate
+        .post .media img
+            aspect-ratio: unset
+
         @include media-breakpoint-up(desktop)
             .post
                 width: col(3,8)
@@ -183,12 +189,7 @@
                         margin-top: -15%
                     + .post:not(.portrait, .square, .landscape)
                         margin-top: -5%
-            @include in-page-without-sidebar
-                width: col(10)
-                margin-left: auto
-                margin-right: auto
-                .post
-                    width: col(4, 10)
+
         @include media-breakpoint-down(desktop)
             .post 
                 .post-meta
@@ -197,5 +198,10 @@
                     margin-bottom: $spacing0
                 + .post
                     margin-top: $spacing3
-        .post .media img
-            aspect-ratio: unset
+
+        @include in-page-without-sidebar
+            width: col(10)
+            margin-left: auto
+            margin-right: auto
+            .post
+                width: col(4, 10)

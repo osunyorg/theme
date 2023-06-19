@@ -1,8 +1,4 @@
 .block-gallery
-    @include in-page-without-sidebar
-        .top
-            @include grid(2, desktop)
-            align-items: baseline
     figure
         display: block
         margin-bottom: 0
@@ -16,11 +12,9 @@
             &:hover
                 // if low opacity means not selected, selected needs to be darker
                 filter: brightness(95%)
-
         img
             height: auto
             width: 100%
-
         figcaption
             @include small
             position: relative
@@ -29,6 +23,11 @@
         .credit
             *
                 @include meta
+
+    @include in-page-without-sidebar
+        .top
+            @include grid(2, desktop)
+            align-items: baseline
 
     &--grid
         .gallery
@@ -106,7 +105,6 @@
                             @include in-page-without-sidebar
                                 height: 70vh
                                 max-width: none
-
             &__arrows
                 margin-left: -18px
                 order: 2
@@ -125,13 +123,12 @@
                         display: none
                 &--next
                     @include icon(arrow-right, before)
+
         @include in-page-without-sidebar
-            @include media-breakpoint-up(desktop)
-                .splide
-                    figure
-                        margin-left: $grid-gutter
-                        margin-right: half(-$grid-gutter)
             .splide
+                figure
+                    margin-left: $grid-gutter
+                    margin-right: half(-$grid-gutter)
                 &__slide
                     &:first-child
                         margin-left: $grid-gutter
