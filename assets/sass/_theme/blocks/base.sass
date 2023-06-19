@@ -10,9 +10,20 @@
         .block-title.hidden + .description
                 margin-top: 0
 
+.heading
+    @include in-page-without-sidebar
+        h2
+            width: col(8)
+
 // Specific
 $backgrounded_blocks: ".block-call_to_action, .block-chapter--accent_background, .block-chapter--alt_background, .block-timeline--horizontal, .block-pages--cards"
 .blocks
     .block:first-child
         &:not(#{$backgrounded_blocks})
             padding-top: 0
+
+// Heading + block_cta + full-width
+.heading + .block-call_to_action
+    margin-top: $spacing3
+    padding-top: 0
+    
