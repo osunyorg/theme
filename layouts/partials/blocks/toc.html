@@ -1,7 +1,7 @@
 {{ range . -}}
   {{- if eq .kind "heading" }}
     <li>
-      <a href="#block-{{ .position }}">{{ partial "PrepareHTML" .title }}</a>
+      <a href="#{{ urlize .title }}">{{ partial "PrepareHTML" .title }}</a>
     </li>
   {{ end -}}
 {{- end -}}

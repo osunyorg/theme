@@ -14,7 +14,7 @@ class TableOfContents {
     this.content = this.element.querySelector('.toc-content');
     this.nav = this.element.querySelector('.toc');
     this.links = this.element.querySelectorAll('a');
-    this.sections = document.querySelectorAll('section[id]');
+    this.sections = document.querySelectorAll('.heading[id]');
     // TODO : handle sublinks update in toc 
     this.ctaTitle = document.querySelector('.toc-cta-title span');
     this.togglers = document.querySelectorAll('.toc-cta button, .toc-container button');
