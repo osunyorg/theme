@@ -178,7 +178,6 @@
         
         @include media-breakpoint-up(desktop)
             .post
-                width: col(3,8)
                 &.right
                     margin-left: auto
                 &.portrait
@@ -198,6 +197,10 @@
                     margin-bottom: $spacing0
                 + .post
                     margin-top: $spacing3
+
+        @include in-page-with-sidebar
+            .post
+                width: col(4,8)
 
         @include in-page-without-sidebar
             width: col(10)
