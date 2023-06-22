@@ -1,4 +1,5 @@
 {{ $isLeafletNeeded := false }}
+{{ $isSplideNeed := false }}
 
 {{ if .Params.blocks }}
   {{ range .Params.blocks }}
@@ -9,7 +10,20 @@
         {{ end }}
       {{ end }}
     {{ end }}
+
+    {{ if eq .template "gallery"}}
+      {{ with .data }}
+        {{ if eq .layout "carousel" }}
+          {{ $isSplideNeed = true }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
   {{ end }}
+{{ end }}
+
+{{ if $isSplideNeed }}
+  {{ $splide_js := resources.Get "js/vendors/carousel.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
+  <script src="{{ $splide_js.RelPermalink }}" integrity="{{ $splide_js.Data.Integrity }}"></script>
 {{ end }}
 
 {{ if $isLeafletNeeded }}
@@ -27,7 +41,6 @@
 
   {{ $leaflet_js := resources.Get "js/vendors/leaflet.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
   <script src="{{ $leaflet_js.RelPermalink }}" integrity="{{ $leaflet_js.Data.Integrity }}"></script>
-  
 {{ end }}
 
 {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
