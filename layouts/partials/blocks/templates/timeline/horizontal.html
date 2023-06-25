@@ -12,7 +12,7 @@
           <li class="event">
             <p class="title">{{- partial "PrepareHTML" .title -}}</p>
             <div class="line"></div>
-            <p class="description">{{- partial "PrepareHTML" .text -}}</p>
+            <div class="description text">{{- partial "PrepareHTML" .text | markdownify -}}</div>
           </li>
         {{ end }}
       </ol>
