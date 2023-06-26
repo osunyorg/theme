@@ -10,7 +10,7 @@
   {{ if .category }}
     {{- $term = site.GetPage (printf "/categories%s" .category) -}}
   {{ end }}
-  <section itemscope itemtype="http://schema.org/Blog" class="block block-posts--{{- $layout }} block-posts{{ if $title }} block-with-title{{ end }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}" id="block-{{ $position }}">
+  <div itemscope itemtype="http://schema.org/Blog" class="block block-posts--{{- $layout }} block-posts{{ if $title }} block-with-title{{ end }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}">
     <div class="container">
       <div class="block-content">
         {{ if $title -}}
@@ -37,5 +37,5 @@
         {{- partial (printf "blocks/templates/posts/%s.html" $layout) . -}}
       </div>
     </div>
-  </section>
+  </div>
 {{ end -}}

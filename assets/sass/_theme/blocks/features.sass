@@ -10,7 +10,6 @@
             margin-bottom: $spacing0
         figure
             order: -1
-            margin-bottom: $spacing1
             img
                 display: block
                 margin: auto
@@ -18,22 +17,25 @@
                 @include meta
                 margin-top: $spacing0
                 text-align: right
-    @include media-breakpoint-up(md)
-        @include in-page-with-sidebar
-            li
-                flex-direction: row
-                figure
-                    width: calc(#{col(2, 8)} + #{half($grid-gutter)})
-                    flex-shrink: 0
-                    margin-right: half($grid-gutter)
 
-        @include in-page-without-sidebar
-            .top
-                width: col(8)
-            ul
-                @include list-reset
-                @include grid(3, desktop)
-            li
-                display: flex
-                + li
-                    margin-top: 0
+    @include in-page-with-sidebar
+        li
+            flex-direction: row
+            figure
+                width: calc(#{col(2, 8)} + #{half($grid-gutter)})
+                flex-shrink: 0
+                margin-right: half($grid-gutter)
+
+    @include in-page-without-sidebar
+        .top
+            width: col(8)
+        ul
+            @include list-reset
+            @include grid(3, desktop)
+        li
+            display: flex
+            + li
+                margin-top: 0
+            h3
+                margin-top: $spacing1
+

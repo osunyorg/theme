@@ -7,7 +7,7 @@
   {{- if $layout -}}
     {{- $layout_class = printf "block-gallery--%s" .layout -}}
   {{- end -}}
-  <section class="block block-gallery{{ if $title }} block-with-title{{ end }} {{ $layout_class }}" id="block-{{ $position }}">
+  <div class="block block-gallery{{ if $title }} block-with-title{{ end }} {{ $layout_class }}">
     <div class="container">
       <div class="block-content">
         {{- if (or $title .description) }}
@@ -15,7 +15,7 @@
             {{- if not $title -}}
               {{ partial "blocks/default_title.html" $template }}
             {{ else }}
-              <h2>{{ partial "PrepareHTML" $title }}</h2>
+              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
             {{ end -}}
             {{- if .description }}
               <div class="description">
@@ -33,5 +33,5 @@
 
       </div>
     </div>
-  </section>
+  </div>
 {{- end -}}

@@ -12,16 +12,18 @@
             @content
 
 @mixin in-page-without-sidebar
-    main > .blocks &,
-    body.full-width &,
-        @content
+    @include media-breakpoint-up(desktop)
+        main > .blocks &,
+        body.full-width &,
+            @content
 
 // Use this mixin to override with-aside or without-aside rules
 @mixin in-page-with-or-without-sidebar
-    body:not(.full-width) &,
-    main > .blocks &,
-    body.full-width &,
-        @content
+    @include media-breakpoint-up(desktop)
+        body:not(.full-width) &,
+        main > .blocks &,
+        body.full-width &,
+            @content
 
 // Aliases
 @mixin full-page
@@ -270,7 +272,7 @@
     user-select: none
     &:active,
     &:focus
-        box-shadow: 0 0 0 0.25rem rgba($color-text, 0.25)
+        box-shadow: inset 0 0 0 0.25rem rgba($color-text, 0.25)
         // TODO : vérifier si l'outline 0 est vraiment nécessaire
         // outline: 0
 
@@ -327,15 +329,14 @@
             transform: translateX(0)
 
 @mixin top-flex
-    @include media-breakpoint-up(desktop)
-        @include in-page-without-sidebar
-            display: flex
-            h2, h3
-                width: col(4)
-            .description
-                margin-top: 0
-                width: col(8)
-                margin-left: $grid-gutter
+    @include in-page-without-sidebar
+        display: flex
+        .block-title
+            width: col(4)
+        .description
+            margin-top: 0
+            width: col(8)
+            margin-left: $grid-gutter
 
 @mixin collapsed-figcaption
     figcaption

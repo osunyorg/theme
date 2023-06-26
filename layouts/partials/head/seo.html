@@ -16,8 +16,8 @@
   {{- $seoDescription = partial "GetTruncateContent" ( dict "text" .Content ) -}}
 {{- else if .Params.legacy_text -}}
   {{- $seoDescription = partial "GetTruncateContent" ( dict "text" .Params.legacy_text ) -}}
-{{- else if .Params.blocks -}}
-  {{- range first 1 .Params.blocks -}}
+{{- else if .Params.contents -}}
+  {{- range first 1 .Params.contents -}}
     {{- if .title -}}
       {{- $seoDescription = partial "GetTruncateContent" ( dict "text" .title ) -}}
     {{- end -}}

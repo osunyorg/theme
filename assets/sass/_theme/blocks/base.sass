@@ -1,24 +1,32 @@
 .block
-    padding-top: $spacing3
-    padding-bottom: $spacing3
-    // Mobile & full-width
-    h2
-        @include h2
-    // Desktop with sidebar
-    @include media-breakpoint-up(desktop)
-        @include in-page-without-sidebar
-            h2
-                @include h5
+    margin-top: $spacing3
+    margin-bottom: $spacing3
+    .block-title
+        @include h5
     .top
-        h2
+        .block-title
             + .description
                 margin-top: $spacing1
-        h2.hidden + .description
+        .block-title.hidden + .description
                 margin-top: 0
+
+.heading
+    &:not(:first-child)
+        margin-top: $spacing4
+    @include in-page-without-sidebar
+        h2
+            width: col(8)
 
 // Specific
 $backgrounded_blocks: ".block-call_to_action, .block-chapter--accent_background, .block-chapter--alt_background, .block-timeline--horizontal, .block-pages--cards"
 .blocks
     .block:first-child
+        margin-top: 0
         &:not(#{$backgrounded_blocks})
             padding-top: 0
+
+// Heading + block_cta + full-width
+// .heading + .block-call_to_action
+//     margin-top: $spacing3
+//     padding-top: 0
+    
