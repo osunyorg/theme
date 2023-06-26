@@ -6,9 +6,9 @@
             a
                 color: inherit
                 text-decoration-color:  $block-call-to-action-color
-            .block-title
+            p
                 @include h2
-                margin-bottom: $spacing0
+                // margin-bottom: $spacing0
         .actions
             [role="group"]
                 @include media-breakpoint-down(desktop)
@@ -134,3 +134,7 @@
                         grid-column: 1/8
                     .actions
                         grid-column: 9/13
+    @include in-page-with-or-without-sidebar
+        .block-title
+            @include h5
+            margin-bottom: $spacing0
