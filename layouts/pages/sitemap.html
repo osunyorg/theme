@@ -24,7 +24,7 @@
     {{ range .Site.Sections }}
       {{ if ne .Type "sitemap" }}
         {{ $permalink := .Permalink }}
-        <section class="block block-sitemap" id="{{ .Type }}">
+        <div class="block block-sitemap" id="{{ .Type }}">
           <div class="container">
             <div class="block-content">
               <h2>
@@ -39,7 +39,7 @@
               </ul>
             </div>
           </div>
-        </section>
+        </div>
       {{ end }}
     {{ end }}
   </div>

@@ -1,7 +1,7 @@
 {{ $summary := .summary | default (partial "PrepareText" .context.Params.summary) }}
 {{- if and (eq site.Params.summary.position "content") $summary -}}
   {{- if .block_wrapped -}}
-  <section class="block block-summary">
+  <div class="block block-summary">
     <div class="container">
       <div class="block-content">
   {{- else if .with_container -}}
@@ -13,7 +13,7 @@
   {{- if .block_wrapped -}}
       </div>
     </div>
-  </section>
+  </div>
   {{- else if .with_container -}}
   </div>
   {{- end -}}
