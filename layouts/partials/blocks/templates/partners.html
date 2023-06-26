@@ -19,7 +19,7 @@
     {{- $layout_class = printf "block-partners--%s" $layout -}}
   {{- end -}}
 
-  <section class="block block-partners{{ if $title }} block-with-title{{ end }} {{ $layout_class }}">
+  <div class="block block-partners{{ if $title }} block-with-title{{ end }} {{ $layout_class }}">
     <div class="container">
       <div class="block-content">
         {{ if (or $title .description) -}}
@@ -43,7 +43,7 @@
           ) }}
       </div>
     </div>
-  </section>
+  </div>
 {{- end -}}
 
 

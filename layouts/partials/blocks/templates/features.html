@@ -3,7 +3,7 @@
 {{- $title := .block.title -}}
 {{- with .block.data -}}
   {{- $features := .elements }}
-  <section class="block block-features{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-features{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         {{- if (or $title .description) }}
@@ -49,5 +49,5 @@
         {{ end -}}
       </div>
     </div>
-  </section>
+  </div>
 {{ end }}

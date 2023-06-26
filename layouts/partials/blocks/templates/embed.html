@@ -2,7 +2,7 @@
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- with .block.data -}}
-  <section class="block block-embed{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-embed{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         {{- if not $title -}}
@@ -23,5 +23,5 @@
           ) }}
       </div>
     </div>
-  </section>
+  </div>
 {{- end -}}

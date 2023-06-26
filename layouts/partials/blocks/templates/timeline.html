@@ -2,7 +2,7 @@
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- $layout := .block.data.layout | default "vertical" -}}
-<section class="block block-timeline{{ if $title }} block-with-title{{ end }} block-timeline--{{ $layout }}">
+<div class="block block-timeline{{ if $title }} block-with-title{{ end }} block-timeline--{{ $layout }}">
   <div class="container">
     {{ $template := printf "blocks/templates/timeline/%s.html" $layout }}
     {{ partial $template (dict 
@@ -11,5 +11,5 @@
         "template" $template
       ) }}
   </div>
-</section>
+</div>
 

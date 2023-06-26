@@ -7,7 +7,7 @@
 {{- with .block.data -}}
   {{- $with_link := .with_link -}}
   {{- $with_photo := .with_photo -}}
-  <section class="block block-organization_chart{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-organization_chart{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         {{ if (or $title .description) -}}
@@ -70,5 +70,5 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 {{- end -}}

@@ -3,7 +3,7 @@
 {{- $title := .block.title -}}
 {{- with .block.data -}}
   {{- $figures := .figures }}
-  <section class="block block-key_figures{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-key_figures{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         {{- if (or $title .description) }}
@@ -39,5 +39,5 @@
         {{ end -}}
       </div>
     </div>
-  </section>
+  </div>
 {{- end -}}

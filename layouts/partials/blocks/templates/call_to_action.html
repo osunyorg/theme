@@ -3,7 +3,7 @@
 {{- $title := .block.title -}}
 {{- with .block.data -}}
   {{- $buttons := and .button.text .button_secondary.text -}}
-  <section class="block block-call_to_action{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-call_to_action{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image">
@@ -50,5 +50,5 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 {{- end -}}
