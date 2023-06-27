@@ -358,7 +358,7 @@
             text-align: center
             padding: half($spacing0)
             display: block
-        p
+        .credit-content
             @include meta
             background: $hero-background-color
             display: none
@@ -366,8 +366,9 @@
             padding-right: $spacing1
         a
             color: inherit
+            text-decoration-color: inherit
         &:focus
-            p
+            .credit-content
                 display: block
         @include media-breakpoint-up(desktop)
             &:before
@@ -377,13 +378,13 @@
             background: $color-background
             &::before
                 background: transparent
-            p
+            .credit-content
                 display: block
                 background: transparent
                 position: relative
 
     &:hover
-        figcaption p
+        figcaption .credit-content
             display: block
 
 // https://gist.github.com/jonathantneal/d0460e5c2d5d7f9bc5e6
