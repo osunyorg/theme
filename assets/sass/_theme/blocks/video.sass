@@ -6,14 +6,15 @@
                 min-height: 400px
         iframe
             background: black
-    @include media-breakpoint-up(desktop)
-        @include in-page-without-sidebar
-            .transcription
-                width: col(7)
-                margin-left: auto
+        + p
+            margin-top: $spacing0
+
     @include media-breakpoint-down(desktop)
         .video
             margin-left: half(-$grid-gutter-sm)
             margin-right: half(-$grid-gutter-sm)
-    .video + p
-        margin-top: $spacing0
+
+    @include in-page-without-sidebar
+        .transcription
+            width: col(7)
+            margin-left: auto

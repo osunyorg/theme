@@ -17,15 +17,15 @@
         "block_wrapped" true
       ) }}
 
-    {{ if .Params.blocks }}
-      {{ partial "blocks/list.html" . }}
+    {{ if .Params.contents }}
+      {{ partial "contents/list.html" . }}
     {{ else }}
 
       {{ $page_class := "" }}
       {{ if .Params.bodyclass }}
         {{- $page_class = printf "block-page-%s" .Params.bodyclass }}
       {{ end }}
-      <section class="block block-pages block-pages--grid {{ $page_class }}">
+      <div class="block block-pages block-pages--grid {{ $page_class }}">
         <div class="container">
           <div class="block-content">
             {{- partial "blocks/default_title.html" "pages" -}}
@@ -36,7 +36,7 @@
                 ) }}
           </div>
         </div>
-      </section>
+      </div>
     {{ end }}
   </div>
 

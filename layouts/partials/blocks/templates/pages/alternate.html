@@ -1,0 +1,34 @@
+{{ $show_descriptions := .show_descriptions }}
+{{ $show_images := .show_images }}
+
+<div class="cards">
+  {{ range .pages }}
+    {{- $page := partial "GetPageByUrl" .page -}}
+    {{ with $page }}
+      <article class="card">
+        <h3>
+          <a href="{{- .Permalink -}}">
+            {{- partial "PrepareHTML" .Title -}}
+          </a>
+        </h3>
+
+        {{ if and $show_descriptions .Params.summary }}
+          {{ if site.Params.pages.index.truncate_description }}
+            <p>{{ partial "GetTruncateContent" ( dict 
+              "text" .Params.summary
+              "length" site.Params.pages.index.truncate_description
+              ) }}</p>
+          {{ else }}
+            <p>{{ partial "PrepareText" .Params.summary }}</p>
+          {{ end }}
+        {{ end }}
+
+        <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+
+        {{ if $show_images }}
+          {{- partial "pages/page-media.html" . -}}
+        {{ end }}
+      </article>
+    {{- end -}}
+  {{ end }}
+</div>

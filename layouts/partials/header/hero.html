@@ -59,9 +59,9 @@
           {{ end }}
             {{ if partial "GetTextFromHTML" .image.credit }}
               <figcaption tabindex="0">
-                <p>
-                  {{- partial "GetTextFromHTML" .image.credit -}}
-                </p>
+                <div class="credit-content">
+                  {{- partial "PrepareHTML" .image.credit -}}
+                </div>
               </figcaption>
             {{ end }}
         </figure>

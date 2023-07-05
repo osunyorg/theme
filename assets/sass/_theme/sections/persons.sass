@@ -53,6 +53,7 @@
             margin-top: half($spacing0)
     .description
         @include small
+
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing1
@@ -61,17 +62,18 @@
             flex-shrink: 0
             margin-bottom: 0
             width: 100px
+
     @include media-breakpoint-down(md)
         justify-content: space-between
         .avatar
             order: 1
             margin-right: 0
             width: 68px
-    @include media-breakpoint-up(desktop)
-        @include in-page-without-sidebar
-            text-align: center
-            .avatar
-                width: 100%
+
+    @include in-page-without-sidebar
+        text-align: center
+        .avatar
+            width: 100%
 
 section.persons,
 div.persons

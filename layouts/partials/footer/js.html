@@ -1,7 +1,8 @@
 {{ $isLeafletNeeded := false }}
+{{ $isSplideNeed := false }}
 
-{{ if .Params.blocks }}
-  {{ range .Params.blocks }}
+{{ if .Params.contents }}
+  {{ range .Params.contents }}
     {{ if eq .template "partners"}}
       {{ with .data }}
         {{ if eq .layout "map" }}
@@ -9,16 +10,40 @@
         {{ end }}
       {{ end }}
     {{ end }}
+
+    {{ if eq .template "gallery"}}
+      {{ with .data }}
+        {{ if eq .layout "carousel" }}
+          {{ $isSplideNeed = true }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ if eq .template "testimonials"}}
+      {{ $isSplideNeed = true }}
+    {{ end }}
   {{ end }}
 {{ end }}
 
+{{ if $isSplideNeed }}
+  {{ $splide_js := resources.Get "js/vendors/carousel.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
+  <script src="{{ $splide_js.RelPermalink }}" integrity="{{ $splide_js.Data.Integrity }}"></script>
+{{ end }}
+
 {{ if $isLeafletNeeded }}
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-        crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-          integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-          crossorigin=""></script>
+  <!-- CSS -->
+  {{- $cssOpts := (dict
+    "targetPath" "assets/css/leaflet.css"
+    "enableSourceMap" true
+    "includePaths" (slice "node_modules")
+  ) -}}
+  {{- $styles := resources.Get "sass/_theme/dependencies/leaflet.sass" | toCSS $cssOpts -}}
+  {{ if hugo.IsProduction }}
+    {{- $styles = resources.Get "sass/_theme/dependencies/leaflet.sass" | toCSS $cssOpts | postCSS | minify | fingerprint -}}
+  {{ end }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
+
+  {{ $leaflet_js := resources.Get "js/vendors/leaflet.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
+  <script src="{{ $leaflet_js.RelPermalink }}" integrity="{{ $leaflet_js.Data.Integrity }}"></script>
 {{ end }}
 
 {{ $js := resources.Get "js/main.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}

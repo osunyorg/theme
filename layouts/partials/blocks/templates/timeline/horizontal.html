@@ -2,7 +2,7 @@
   {{- if not .title -}}
     {{ partial "blocks/default_title.html" .template }}
   {{ else }}
-    <h2>{{ partial "PrepareHTML" .title }}</h2>
+    <p class="block-title">{{ partial "PrepareHTML" .title }}</p>
   {{ end -}}
 
   {{ with .block.data }}
@@ -12,7 +12,7 @@
           <li class="event">
             <p class="title">{{- partial "PrepareHTML" .title -}}</p>
             <div class="line"></div>
-            <p class="description">{{- partial "PrepareHTML" .text -}}</p>
+            <div class="description text">{{- partial "PrepareHTML" .text | markdownify -}}</div>
           </li>
         {{ end }}
       </ol>

@@ -1,9 +1,9 @@
 {{ if . }}
-  <section class="programs">
+  <div class="programs">
     {{ range sort . ".Params.position" -}}
       <div>
         {{- partial "programs/program.html" . -}}
       </div>
     {{- end }}
-  </section>
+  </div>
 {{- end }}

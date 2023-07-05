@@ -35,6 +35,7 @@
         &--with-image
             &.block-chapter--alt_background, &.block-chapter--accent_background
                 padding-top: half($grid-gutter-sm)
+
     @include in-page-with-sidebar
         figure
             max-width: col(6, 8)
@@ -58,28 +59,21 @@
         &--accent_background
             .chapter
                 background: $block-chapter-layout-accent-background
-    @include media-breakpoint-up(desktop)
-        @include in-page-without-sidebar
-            .chapter
-                flex-direction: row
-                align-items: center
-                .text
-                    order: 0
-                    width: col(7)
-                figure
-                    width: col(4)
-                    margin-left: col-offset(1)
-                    margin-bottom: 0
-                    text-align: right
-                    img
-                        margin-left: auto
-    @include in-page-with-or-without-sidebar
-        h2, h3
-            @include h2
 
-// .blocks
-//     @include media-breakpoint-up(desktop)
-//         @include in-page-without-sidebar
-//             .block:not(.block-chapter) + .block-chapter + .block-chapter
-//                 flex-direction: row-reverse
-
+    @include in-page-without-sidebar
+        &--alt_background, &--accent_background
+            padding-top: $grid-gutter
+            padding-bottom: $grid-gutter
+            margin-bottom: 0
+        .chapter
+            flex-direction: row
+            .text
+                order: 0
+                width: col(7)
+            figure
+                width: col(4)
+                margin-left: col-offset(1)
+                margin-bottom: 0
+                text-align: right
+                img
+                    margin-left: auto

@@ -52,7 +52,7 @@ ol.programs
             // a11y
             &:active,
             &:focus
-                box-shadow: 0 0 0 0.25rem rgba(white, .5)
+                box-shadow: inset 0 0 0 0.25rem rgba(white, .5)
             @include media-breakpoint-up(desktop)
                 font-size: $program-share-font-size-desktop
         .dropdown-menu
@@ -104,9 +104,8 @@ ol.programs
             section:not(.block) > * + *
                 margin-top: 1em
             .blocks
-                section > * + *
+                section > * + * // TODO : check that
                     margin-top: 0
-                h2
                     @include h3
                 @include media-breakpoint-down(desktop)
                     padding-top: $spacing3
@@ -117,6 +116,9 @@ ol.programs
                     .container
                         padding-left: 0
                         padding-right: 0
+                    .heading
+                        h2
+                            padding-left: 0
                     .block-content
                         padding-left: 0
     @include media-breakpoint-down(desktop)

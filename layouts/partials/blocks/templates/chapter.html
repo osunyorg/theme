@@ -13,7 +13,7 @@
   {{- $layout_class := printf "block-chapter--%s" $layout -}}
   {{- $class = printf "%s %s" $class $layout_class -}}
 
-  <section class="{{ $class }}{{ if $title }} block-with-title{{ end }}" id="block-{{ $position }}">
+  <div class="{{ $class }}{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         <div class="chapter">
@@ -22,7 +22,7 @@
               {{ partial "blocks/default_title.html" $template }}
             {{ else }}
               <div class="top">
-                <h2>{{ partial "PrepareHTML" $title }}</h2>
+                <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
               </div>
             {{ end -}}
             {{ if (partial "GetTextFromHTML" .text) -}}
@@ -59,5 +59,5 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 {{- end -}}

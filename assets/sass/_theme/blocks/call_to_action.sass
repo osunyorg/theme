@@ -1,9 +1,6 @@
 .block-call_to_action
     --cta-background-color: #{$block-call-to-action-background}
-    @include in-page-with-or-without-sidebar
-        h2, h3
-            @include h5
-            margin-bottom: $spacing0
+    margin-bottom: 0
     .call_to_action
         color: $block-call-to-action-color
         .description
@@ -12,6 +9,7 @@
                 text-decoration-color:  $block-call-to-action-color
             p
                 @include h2
+                // margin-bottom: $spacing0
         .actions
             [role="group"]
                 @include media-breakpoint-down(desktop)
@@ -68,6 +66,7 @@
             > *
                 order: 2
             > div
+                // TODO : simplifier l'application d'une couleur de fond sur le CTA avec sidebar et sans sidebar
                 background-color: var(--cta-background-color)
                 padding: $grid-gutter
                 width: 100%
@@ -94,47 +93,49 @@
                 > div
                     padding-top: calc(#{$grid-gutter} + #{$spacing3})
 
-    @include media-breakpoint-up(desktop)
-        @include in-page-without-sidebar
-            background-color: var(--cta-background-color)
-            padding-top: 0
-            padding-bottom: 0
-            .block-content
-                padding: $spacing4 $grid-gutter
-                margin-left: -$grid-gutter
-                margin-right: -$grid-gutter
-            .call_to_action--with-image
-                align-items: start
+    @include in-page-without-sidebar
+        background-color: var(--cta-background-color)
+        padding-top: 0
+        padding-bottom: 0
+        .block-content
+            padding: $spacing4 $grid-gutter
+            margin-left: -$grid-gutter
+            margin-right: -$grid-gutter
+        .call_to_action--with-image
+            align-items: start
+            display: grid
+            grid-template-columns: repeat(12,1fr)
+            > div
+                grid-column: 1/7
+            > picture
+                grid-column: 8/13
+        .call_to_action--without-image
+            display: block
+            > div
+                column-gap: $grid-gutter
                 display: grid
                 grid-template-columns: repeat(12,1fr)
+                .block-title, .description
+                    grid-column: 1/9
+                .actions
+                    align-items: flex-start
+                    display: flex
+                    flex-direction: column
+                    grid-column: 10/13
+                    margin-top: 0
+                    a
+                        margin-right: 0
+                        &:first-child
+                            margin-top: 0
+                    a + a
+                        margin-top: $spacing1
+            @include media-breakpoint-down(lg)
                 > div
-                    grid-column: 1/7
-                > picture
-                    grid-column: 8/13
-            .call_to_action--without-image
-                display: block
-                > div
-                    column-gap: $grid-gutter
-                    display: grid
-                    grid-template-columns: repeat(12,1fr)
-                    h2, h3, .description
-                        grid-column: 1/9
+                    .block-title, .description
+                        grid-column: 1/8
                     .actions
-                        align-items: flex-start
-                        display: flex
-                        flex-direction: column
-                        grid-column: 10/13
-                        margin-top: 0
-                        a
-                            margin-right: 0
-                            &:first-child
-                                margin-top: 0
-                        a + a
-                            margin-top: $spacing1
-                @include media-breakpoint-down(lg)
-                    > div
-                        h2, h3, .description
-                            grid-column: 1/8
-                        .actions
-                            grid-column: 9/13
-
+                        grid-column: 9/13
+    @include in-page-with-or-without-sidebar
+        .block-title
+            @include h5
+            margin-bottom: $spacing0

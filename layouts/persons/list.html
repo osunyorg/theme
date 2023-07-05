@@ -1,7 +1,7 @@
 {{ define "main" }}
 
   {{- $is_organigram_present := false -}}
-  {{ range .Params.blocks }}
+  {{ range .Params.contents }}
     {{- if eq .template "organization_chart" -}}
       {{- $is_organigram_present = true -}}
     {{ end }}
@@ -18,8 +18,8 @@
     }}
 
     {{ $summary_block := false }}
-    {{ if .Params.blocks }}
-      {{ if gt (len .Params.blocks) 1 }}
+    {{ if .Params.contents }}
+      {{ if gt (len .Params.contents) 1 }}
         {{ $summary_block = true }}
       {{ end }}
     {{ end }}
@@ -30,7 +30,7 @@
         "block_wrapped" $summary_block
       ) }}
 
-    {{ partial "blocks/list.html" . }}
+    {{ partial "contents/list.html" . }}
 
     <div class="container">
       {{- if not $is_organigram_present -}}

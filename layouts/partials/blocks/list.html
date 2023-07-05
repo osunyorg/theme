@@ -1,7 +1,7 @@
 {{ $context := . }}
-{{- if .Params.blocks -}}
+{{- if .Params.contents -}}
   <div class="blocks">
-  {{- range .Params.blocks -}}
+  {{- range .Params.contents -}}
     {{ $template := printf "blocks/templates/%s.html" .template }}
     {{ partial $template (dict 
         "block" . 

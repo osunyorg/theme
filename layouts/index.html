@@ -16,10 +16,10 @@
         "context" .
       ) }}
 
-    {{- if .Params.blocks }}
-      {{- partial "blocks/list.html" . -}}
+    {{- if .Params.contents }}
+      {{- partial "contents/list.html" . -}}
     {{ else }}
-      <section class="block block-pages block-pages--grid">
+      <div class="block block-pages block-pages--grid">
         <div class="container">
           <div class="block-content">
             {{- partial "blocks/templates/pages/grid.html" (dict 
@@ -29,7 +29,7 @@
                 ) }}
           </div>
         </div>
-      </section>
+      </div>
     {{ end }}
   </div>
 {{ end }}

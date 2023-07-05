@@ -3,7 +3,7 @@ const partnersMaps = document.querySelectorAll('.block-partners--map');
 class BlockPartners {
     constructor (dom) {
         this.dom = dom;
-        
+
         this.init();
     }
     init() {
