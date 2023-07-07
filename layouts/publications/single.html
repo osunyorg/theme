@@ -20,9 +20,13 @@
           <p>{{ partial "PrepareHTML" . }}</p>
         {{ end }}
         {{ partial "publications/quotations.html" . }}
-        {{ partial "publications/links.html" . }}
+        {{ partial "publications/downloads.html" . }}
       </div>
-      {{ partial "commons/siblings-navigation.html" . }}
+      {{ partial "commons/siblings-navigation.html" (dict
+        "context" .
+        "previous_label" (i18n "siblings_navigation.previous")
+        "next_label" (i18n "siblings_navigation.next")
+        ) }}
     </div>
   </div>
 </div>
