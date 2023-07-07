@@ -265,7 +265,7 @@ a,
         @include icon-block(eye, after)
     &:hover
         background: $btn-hover-background
-
+    
 .link-more
     @include link
     @include icon(arrow, before)
@@ -290,6 +290,13 @@ sub,
 sup
     font-size: 60%
     margin-left: px2rem(2)
+
+[data-click-to-copy]
+    cursor: pointer
+    @include icon(copy, after)
+    &.is-copied
+        @include icon(caret-bottom, after)
+
 
 *:focus-visible
     outline-color: inherit

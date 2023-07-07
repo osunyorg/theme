@@ -1,7 +1,10 @@
 {{ if gt .Params.links 0 }}
-  <div class="links">
-    {{ range .Params.links }}
-      <a href="{{ .url }}" target="_blank" rel="noopener" class="link-btn">{{ .label }}</a>
-    {{ end }}
+<div class="links">
+    <h2 class="h5">Téléchargements</h2>
+    <nav>
+      {{ range .Params.links }}
+        <a href="{{ .url }}" target="_blank" rel="noopener" class="link-btn">{{ .label }}</a>
+      {{ end }}
+    </nav>
   </div>
 {{ end }}

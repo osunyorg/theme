@@ -28,7 +28,6 @@
         @include media-breakpoint-up(desktop)
             @include grid(3)
             align-items: baseline
-
         a
             @include h3
             grid-column: 1 / 3
@@ -56,6 +55,7 @@
             @include media-breakpoint-up(desktop)
             grid-column: 1 / 9
         .document-sidebar
+            margin-bottom: $spacing3
             @include media-breakpoint-up(desktop)
                 grid-column: 9 / 13
                 order: 2
@@ -67,25 +67,43 @@
                     align-items: center
                     display: flex
                     gap: $spacing1
+                    .name
+                        @include signature
                     .avatar
                         margin-bottom: 0
             > * + *
                 margin-top: $spacing3
     .links
-        display: flex
-        flex-wrap: wrap
-        gap: $spacing0
-        @include media-breakpoint-up(xxl)
-            gap: $spacing0 $grid-gutter
         &:not(:first-child)
             margin-top: $spacing3
-        > a
-            width: 100%
-            @include media-breakpoint-up(xl)
-                width: col(4, 8)
+        nav
+            margin-top: $spacing1
+            @include grid(2, desktop)
+            @include grid(4, xxl)
             @include media-breakpoint-up(xxl)
-                width: col(2, 8)
+                grid-gap: $spacing0 $grid-gutter
+            @include media-breakpoint-down(xxl)
+                grid-gap: $spacing0
+            > a
+                width: 100%
+                display: block
+                @include media-breakpoint-down(desktop)
+                    margin-bottom: $spacing1
+    .quotations
+        margin-top: $spacing3
+        > div
+            margin-top: $spacing1
+            @include grid(1)
+            @include grid(2, md, $spacing1)
+            @include media-breakpoint-down(md)
+                row-gap: $spacing1
 
+        .quotation
+            a
+                display: block
+            p
+                @include meta
+                margin-top: $spacing0
     .block-siblings-navigation
         .block-content
             padding-left: 0 !important
