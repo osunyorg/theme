@@ -1,0 +1,26 @@
+{{ define "main" }}
+{{ partial "publications/hero.html" . }}
+
+<div class="document-content" itemscope itemtype="https://schema.org/ScholarlyArticle">
+  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+
+  <div class="publication-sidebar">
+    <div>
+      {{ partial "publications/researchers.html" . }}
+      <div class="paper-ref">
+        <p>{{ partial "PrepareHTML" .Params.ref }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="content">
+      <div class="rich-text">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus, eligendi quod odit minus nemo eius ipsam fugit at, sit reiciendis, velit atque et optio debitis vero veritatis repudiandae. Dignissimos, temporibus.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{{ end }}

@@ -1,0 +1,18 @@
+{{ define "main" }}
+{{ partial "papers/hero.html" . }}
+
+  <div class="document-content">
+    <div class="container">
+      <ul class="papers">
+        {{ range .Paginator.Pages }}
+          <li>
+            {{ partial "publications/publication.html" . }}
+          </li>
+        {{ end }}
+      </ul>
+      {{ partial "commons/pagination.html" . }}
+    </div>
+  
+    {{ partial "contents/list.html" . }}
+  </div>
+{{ end }}
