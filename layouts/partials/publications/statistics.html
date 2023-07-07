@@ -1,7 +1,15 @@
 <div class="publications-statistics">
-  {{ range first 6 (.Pages.GroupByDate "2006") }}
-    {{ len .Pages }}
-    {{ i18n "publications.stats.label"}}
-    {{ .Key }}  
-  {{ end }}  
+  <ol>
+    {{ range first 6 (.Pages.GroupByDate "2006") }}
+      <li>
+        <p>
+          <b>{{ len .Pages }}</b>
+          <span>{{ i18n "publications.stats.label"}}</span>
+          <span>{{ .Key }}</span>
+        </p>
+      </li>
+    {{ end }}  
+  </ol>
+
+   
 </div>
