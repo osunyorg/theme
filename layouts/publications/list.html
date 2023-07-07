@@ -1,18 +1,14 @@
 {{ define "main" }}
-{{ partial "papers/hero.html" . }}
-
+  {{ partial "publications/hero-list.html" . }}
   <div class="document-content">
+    {{ partial "commons/list-content.html" . }}
+    {{ partial "blocks/list.html" . }}
+  
     <div class="container">
-      <ul class="papers">
-        {{ range .Paginator.Pages }}
-          <li>
-            {{ partial "publications/publication.html" . }}
-          </li>
-        {{ end }}
-      </ul>
+      {{ partial "publications/stats.html" . }}
+      {{ partial "publications/publications.html" . }}
       {{ partial "commons/pagination.html" . }}
     </div>
-  
-    {{ partial "contents/list.html" . }}
   </div>
+
 {{ end }}
