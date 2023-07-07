@@ -1,0 +1,40 @@
+{{/*  TODO: Create a generic previous / next section for single section  */}}
+
+{{- if or .PrevInSection .NextInSection -}}
+<div class="block block-siblings-navigation">
+  <div class="container">
+    <div class="block-content">
+      <nav class="siblings-navigation" aria-label="{{ i18n "commons.pagination.between.posts" }}">
+        <ul>
+          {{- if .PrevInSection -}}
+            {{with .Site.RegularPages.Prev . }}
+              <li class="previous">
+                {{ $title := partial "PrepareHTML" .Title -}}
+                <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.previous_aria" (dict "Title" $title)) }}">
+                  <span>
+                    {{- i18n "posts.previous" -}}
+                  </span>
+                  {{- $title -}}
+                </a>
+              </li>
+            {{end}}
+          {{- end -}}
+          {{- if .NextInSection -}}
+            {{with .Site.RegularPages.Next . }}
+              <li class="next">
+                {{ $title := partial "PrepareHTML" .Title -}}
+                <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.next_aria" (dict "Title" $title)) }}">
+                  <span>
+                    {{- i18n "posts.next" -}}
+                  </span>
+                  {{- $title -}}
+                </a>
+              </li>
+            {{end}}
+          {{- end -}}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+{{- end -}}
