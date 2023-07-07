@@ -6,11 +6,26 @@
           <div itemprop="author" itemscope itemtype="https://schema.org/Person">
             <meta itemprop="name" content="{{ trim .Title "\n" }}">
             <meta itemprop="url" content="{{ .Permalink }}">
-            <meta itemprop="description" content="{{ trim .Content "\n" }}">
+            <meta itemprop="description" content="{{ trim .Content "\n" | safeHTML }}">
             {{ if .Params.image }}
               <meta itemprop="image" content="{{ .Params.image }}">
             {{ end }}
-            {{ partial "persons/person.html" . }}
+            <article class="person">
+              <div class="description">
+                {{- $title := partial "PrepareHTML" .Title }}
+                <p class="name"><a href="{{ .Permalink }}">{{- $title -}}</a></p>
+              </div>
+              <div class="avatar">
+                {{- if .Params.image }}
+                  {{ partial "commons/image.html"
+                    (dict
+                      "alt"      .Title
+                      "image"    .Params.image
+                      "sizes"    site.Params.image_sizes.sections.persons.item
+                    )}}
+                {{ end -}}
+              </div>
+            </article>
           </div>
         {{ end }}
       {{ end }}

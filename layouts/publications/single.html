@@ -3,8 +3,7 @@
 
 <div class="document-content" itemscope itemtype="https://schema.org/ScholarlyArticle">
   <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
-
-  <div class="publication-sidebar">
+  <div class="document-sidebar">
     <div>
       {{ partial "publications/researchers.html" . }}
       <div class="paper-ref">
@@ -12,11 +11,15 @@
       </div>
     </div>
   </div>
-
   <div class="container">
     <div class="content">
       <div class="rich-text">
-        {{ partial "PrepareHTML" .Params.abstract }}
+        {{ with .Params.abstract }}
+          <p>{{ partial "PrepareHTML" . }}</p>
+        {{ end }}
+        {{ with .Params.citation_full }}
+          <p>{{ partial "PrepareHTML" . }}</p>
+        {{ end }}
       </div>
     </div>
   </div>

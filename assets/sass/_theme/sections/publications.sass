@@ -3,6 +3,26 @@
     h1, hgroup
       width: 100%
 
+  .document-content
+      @include media-breakpoint-up(desktop)
+          @include grid
+      .container
+          @include media-breakpoint-up(desktop)
+            grid-column: 1 / 8
+      .document-sidebar
+          @include media-breakpoint-up(desktop)
+              grid-column: 9 / 12
+              order: 2
+      [itemprop="author"]
+        + *
+          margin-top: $spacing1
+        .person
+          flex-direction: row
+          align-items: center
+          display: flex
+          gap: $spacing1
+          .avatar
+            margin-bottom: 0
 // STYLE PUBLICATIONS
 
 // .persons__page,
