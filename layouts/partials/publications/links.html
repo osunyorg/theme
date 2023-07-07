@@ -1,0 +1,33 @@
+{{/*  hal: "https://hal.science/hal-02455856"
+doi: ""
+raw: ""
+file: ""  */}}
+
+{{ with .Params.links }}
+<div class="links">
+  {{ with .hal }}
+    <a href="{{ . }}" target="_blank" rel="noopener" class="link-btn">HAL</a>
+  {{ end }}
+  {{ with .hal }}
+    <a href="{{ . }}" target="_blank" rel="noopener" class="link-btn">HAL</a>
+  {{ end }}
+  {{ with .hal }}
+    <a href="{{ . }}" target="_blank" rel="noopener" class="link-btn">HAL</a>
+  {{ end }}
+  {{ with .hal }}
+    <a href="{{ . }}" target="_blank" rel="noopener" class="link-btn">HAL</a>
+  {{ end }}
+
+  {{ with .doi }}
+    <a href="{{ . }}" target="_blank" rel="noopener" class="link-btn">HAL</a>
+  {{ end }}
+
+  {{ with .raw }}
+    <a href="{{ . }}" target="_blank" rel="noopener" class="link-btn">HAL</a>
+  {{ end }}
+
+  {{ with .file }}
+    <a href="{{ . }}" download class="link-btn">HAL</a>
+  {{ end }}
+</div>
+{{ end }}
