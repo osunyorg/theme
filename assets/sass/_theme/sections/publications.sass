@@ -1,3 +1,6 @@
+.publications__section
+    
+
 .publications__page
     .hero
         h1, hgroup
@@ -31,7 +34,7 @@
         gap: $spacing0
         @include media-breakpoint-up(xxl)
             gap: $spacing0 $grid-gutter
-        * + &
+        &:not(:first-child)
             margin-top: $spacing3
         > a
             width: 100%
@@ -40,3 +43,9 @@
             @include media-breakpoint-up(xxl)
                 width: col(2, 8)
 
+    .block-siblings-navigation
+        .block-content
+            padding-left: 0 !important
+        .container
+            padding-left: 0
+            padding-right: 0
