@@ -10,4 +10,8 @@
   {{ $bodyclass = printf "%s offcanvas-toc" $bodyclass }}
 {{ end }}
 
+{{ range .Params.categories }}
+  {{ $bodyclass = printf "%s category--%s" $bodyclass . }}
+{{ end }}
+
 {{ return $bodyclass }}
