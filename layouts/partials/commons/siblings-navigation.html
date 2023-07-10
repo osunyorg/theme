@@ -9,32 +9,28 @@
       <div class="block-content">
         <nav class="siblings-navigation" aria-label="{{ i18n "commons.pagination.between.posts" }}">
           <ul>
-            {{- if .PrevInSection -}}
-              {{ with .PrevInSection }}
-                <li class="previous">
-                  {{ $title := partial "PrepareHTML" .Title -}}
-                  <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.previous_aria" (dict "Title" $title)) }}">
-                    <span>
-                      {{- $previous_label -}}
-                    </span>
-                    {{- $title -}}
-                  </a>
-                </li>
-              {{end}}
-            {{- end -}}
-            {{- if .NextInSection -}}
-              {{with .NextInSection }}
-                <li class="next">
-                  {{ $title := partial "PrepareHTML" .Title -}}
-                  <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.next_aria" (dict "Title" $title)) }}">
-                    <span>
-                      {{- $next_label -}}
-                    </span>
-                    {{- $title -}}
-                  </a>
-                </li>
-              {{end}}
-            {{- end -}}
+            {{ with .PrevInSection }}
+              <li class="previous">
+                {{ $title := partial "PrepareHTML" .Title -}}
+                <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.previous_aria" (dict "Title" $title)) }}">
+                  <span>
+                    {{- $previous_label -}}
+                  </span>
+                  {{- $title -}}
+                </a>
+              </li>
+            {{ end }}
+            {{ with .NextInSection }}
+              <li class="next">
+                {{ $title := partial "PrepareHTML" .Title -}}
+                <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.next_aria" (dict "Title" $title)) }}">
+                  <span>
+                    {{- $next_label -}}
+                  </span>
+                  {{- $title -}}
+                </a>
+              </li>
+            {{ end }}
           </ul>
         </nav>
       </div>
