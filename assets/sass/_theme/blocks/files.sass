@@ -1,4 +1,6 @@
 .block-files
+    .top
+        @include top-flex
     .files
         @include list-reset
         li
@@ -42,13 +44,5 @@
             @include grid(2, desktop, half($grid-gutter))
 
     @include in-page-without-sidebar
-        .top
-            display: flex
-            .block-title
-                width: col(4)
-            .description
-                margin-top: 0
-                width: col(8)
-                margin-left: $grid-gutter
         .files
             @include grid(3, desktop, half($grid-gutter))

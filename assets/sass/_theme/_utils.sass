@@ -333,10 +333,11 @@
         display: flex
         .block-title
             width: col(4)
+            &:not(.hidden) + .description
+                margin-left: $grid-gutter
         .description
             margin-top: 0
             width: col(8)
-            margin-left: $grid-gutter
 
 @mixin collapsed-figcaption
     figcaption
