@@ -8,11 +8,9 @@
       <div class="block-content">
         <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image">
           <div>
-            {{- if not $title -}}
-              {{ partial "blocks/default_title.html" $template }}
-            {{ else }}
+            {{ if $title }}
               <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-            {{ end -}}
+            {{ end }}
 
             {{- if (partial "GetTextFromHTML" .text) }}
             <div class="description">

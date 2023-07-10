@@ -6,9 +6,7 @@
   <div class="block block-datatable{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
-        {{- if not $title -}}
-          {{ partial "blocks/default_title.html" $template }}
-        {{ else }}
+        {{ if or $title .description }}
           <div class="top">
             <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
             {{ with .description }}
@@ -17,7 +15,8 @@
               </div>
             {{ end }}
           </div>
-        {{ end -}}
+        {{ end }}
+
         <div class="table-responsive">
           <table>
             {{- if .caption }}

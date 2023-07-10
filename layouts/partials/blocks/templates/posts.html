@@ -23,9 +23,7 @@
               {{ $title_link = $posts_page.Permalink }}
             {{- end -}}
 
-            {{- if not $title -}}
-              {{ partial "blocks/default_title.html" $template }}
-            {{ else }}
+            {{- if $title -}}
               {{ partial "blocks/title_with_link.html" (dict 
                 "title" $title
                 "link" $title_link

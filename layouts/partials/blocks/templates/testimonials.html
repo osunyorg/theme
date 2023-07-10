@@ -12,9 +12,7 @@
   <div class="block block-testimonials{{ if $title }} block-with-title{{ end }}{{ if $is_carousel}} with-carousel{{ end }}">
     <div class="container">
       <div class="block-content">
-        {{- if not $title -}}
-          {{ partial "blocks/default_title.html" $template }}
-        {{ else }}
+        {{- if $title -}}
           <p class="block-title hidden">{{ partial "PrepareHTML" $title }}</p>
         {{ end -}}
 
