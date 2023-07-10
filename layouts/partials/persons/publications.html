@@ -2,10 +2,16 @@
   <div class="top">
     <h2 class="h5">{{ i18n "persons.publications" }}</h2>
   </div>
-  <ul class="publications">
+  <ul>
     {{ range .publications }}
       <li>
-        {{ partial "publications/publication.html" . }}
+        <article class="publication">
+          {{ $title := .Title }}
+          <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ partial "PrepareHTML" $title }}</a>
+          <p class="meta">
+            {{ partial "PrepareHTML" .Params.ref }}
+          </p>
+        </article>
       </li>
     {{ end }}
   </ul>

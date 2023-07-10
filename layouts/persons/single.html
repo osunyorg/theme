@@ -72,6 +72,10 @@
         {{ partial "persons/programs.html" (dict "programs" $programsForTeacher "slug" $slug) }}
       {{ end }}
 
+      {{ if $publications }}
+        {{ partial "persons/publications.html" (dict "publications" $publications) }}
+      {{ end }}
+
       {{ if $posts }}
         {{ partial "persons/posts.html" (dict "posts" $posts) }}
       {{ end }}
@@ -80,9 +84,6 @@
         {{ partial "persons/papers.html" (dict "papers" $papers "slug" $slug) }}
       {{ end }}
 
-      {{ if $publications }}
-        {{ partial "persons/publications.html" (dict "publications" $publications) }}
-      {{ end }}
     </div>
   </div>
 {{ end }}
