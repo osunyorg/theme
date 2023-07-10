@@ -253,6 +253,19 @@ a,
 .btn
     @include btn
 
+.link-btn
+    @include btn
+    border: $btn-border
+    @include media-breakpoint-up(desktop)
+        padding: $spacing0
+    &[target="_blank"]:not(.icon)
+        display: flex
+        justify-content: space-between
+        align-items: center
+        @include icon-block(link-blank-block, after)
+    &:hover
+        background: $btn-hover-background
+    
 .link-more
     @include link
     @include icon(arrow, before)
@@ -277,6 +290,15 @@ sub,
 sup
     font-size: 60%
     margin-left: px2rem(2)
+
+[data-click-to-copy]
+    cursor: pointer
+    text-decoration: none
+    @include icon(copy-inline, after)
+        margin-left: $spacing0
+        vertical-align: text-top
+    &.is-copied
+        @include icon(check-inline, after)
 
 *:focus-visible
     outline-color: inherit

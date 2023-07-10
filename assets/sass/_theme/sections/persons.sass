@@ -44,6 +44,7 @@
         flex-shrink: 0
         order: -1
         margin-bottom: $spacing1
+        min-width: $spacing3
     .name
         @include h4
         a
@@ -201,12 +202,15 @@ ol.persons--list
     .person-objects,
     .person-publications
         margin-top: $spacing4
+        ul
+            @include list-reset
         .publication
             border-bottom: 1px solid $color-border
             padding-bottom: $spacing1
             padding-top: $spacing0
-            .title
+            a
                 margin-bottom: calc(#{$spacing0}/2)
+                text-decoration: none
             .ref
                 color: $color-text-alt
                 margin-top: 0

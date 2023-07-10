@@ -1,46 +1,97 @@
+.publications-statistics
+    ol
+        @include list-reset
+        @include grid(2)
+        @include grid(3, md)
+        @include grid(4, desktop)
+        @include grid(6, xxl)
+        b
+            @include lead
+        span
+            @include meta
+        b, span
+            display: block
 
-// STYLE PUBLICATIONS
+.publications
+    margin-top: $spacing3
+    article
+        padding-bottom: $spacing2
+        padding-top: $spacing2
+        border-bottom: 1px solid $color-border
+        position: relative
+        @include media-breakpoint-down(desktop)
+            padding-right: $spacing2
+            a + .meta
+                margin-top: $spacing1
+            a::before
+                margin-top: px2rem(-6)
+        @include media-breakpoint-up(desktop)
+            @include grid(3)
+            align-items: baseline
+        a
+            @include h3
+            grid-column: 1 / 3
+            display: block
+            text-decoration: none
+            @include stretched-link(after)
+            &:hover
+                color: $color-accent
+            @include icon-block(arrow-right, before)
+                position: absolute
+                right: 0px
+        .meta
+            padding-right: $spacing2
 
-// .persons__page,
-// .researchers__term
-//     .paper
-//         border-bottom: 1px solid $color-border
-//         padding: $spacing0 0
-//         h2
-//             a
-//                 @include stretched-link(before)
-//         &:hover
-//             h2 a,
-//             &::after
-//                 color: $color-accent
+.publications__page
+    .hero
+        h1, hgroup
+            width: 100%
 
-// .persons__page
-//     .papers
-//         h2
-//             @include inherit-text
-//             a
-//                 @include stretched-link(before)
-//                 display: flex
-//                 @include media-breakpoint-up(desktop)
-//                     @include icon(arrow-right, after)
-//                         transition: color 0.3s ease
-//                 &::after
-//                     margin-left: auto
-//         p
-//             @include small
+    .document-content > .container
+        @include media-breakpoint-up(desktop)
+            @include grid
+        .content
+            @include media-breakpoint-up(desktop)
+            grid-column: 1 / 9
+        .document-sidebar
+            margin-bottom: $spacing3
+            @include media-breakpoint-up(desktop)
+                grid-column: 9 / 13
+                order: 2
+            [itemprop="author"] 
+                + *
+                    margin-top: $spacing1
+                .person
+                    flex-direction: row
+                    align-items: center
+                    display: flex
+                    gap: $spacing1
+                    .name
+                        @include signature
+                    .avatar
+                        margin-bottom: 0
+            > * + *
+                margin-top: $spacing3
+    .downloads
+        &:not(:first-child)
+            margin-top: $spacing3
+        nav
+            margin-top: $spacing1
+            @include grid(2, desktop)
+            @include grid(4, xxl)
+            @include media-breakpoint-up(xxl)
+                grid-gap: $spacing0 $grid-gutter
+            @include media-breakpoint-down(xxl)
+                grid-gap: $spacing0
+            > a
+                width: 100%
+                display: block
+                @include media-breakpoint-down(desktop)
+                    margin-bottom: $spacing1
 
-// .researchers__term
-//     .papers
-//         @include grid(2, desktop)
-//         @include media-breakpoint-up(desktop)
-//             grid-row-gap: 0
-//         .paper
-//             @include media-breakpoint-up(desktop)
-//                 @include icon(arrow-right, after)
-//                     bottom: 0
-//                     position: absolute
-//                     right: 0
-//                     transition: color 0.3s ease
-//             p
-//                 @include meta
-                
+    .block-siblings-navigation
+        .block-content
+            padding-left: 0 !important
+        .container
+            padding-left: 0
+            padding-right: 0
