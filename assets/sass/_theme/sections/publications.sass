@@ -88,16 +88,16 @@
                 display: block
                 @include media-breakpoint-down(desktop)
                     margin-bottom: $spacing1
-    .quotations
-        margin-top: $spacing3
+    .citations
+        &:not(:first-child)
+            margin-top: $spacing3
         > div
             margin-top: $spacing1
             @include grid(1)
             @include grid(2, md, $spacing1)
             @include media-breakpoint-down(md)
                 row-gap: $spacing1
-
-        .quotation
+        .citation
             a
                 display: block
             p

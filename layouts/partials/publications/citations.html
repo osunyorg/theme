@@ -1,9 +1,9 @@
 {{ if gt .Params.citations 0 }}
-<div class="quotations">
-  <h2 class="h5">{{ i18n "publications.quotations" }}</h2>
+<div class="citations">
+  <h2 class="h5">{{ i18n "publications.citations" }}</h2>
   <div>
     {{ range .Params.citations }}
-      <div class="quotation">
+      <div class="citation">
         <a data-click-to-copy="{{- partial "PrepareText" .content -}}" role="button" title="{{ i18n "commons.click_to_copy.button_title" }}" aria-label="{{ i18n "commons.click_to_copy.aria_label" (dict "description" .label )}}" tabindex="0">{{ .label }}</a>
         <p>{{ partial "PrepareHTML" .content }}</p>
       </div>
