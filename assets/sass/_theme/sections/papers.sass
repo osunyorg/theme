@@ -135,3 +135,18 @@
                         flex-direction: column
                         span
                             order: 3
+.citations
+    &:not(:first-child)
+        margin-top: $spacing3
+    > div
+        margin-top: $spacing1
+        @include grid(1)
+        @include grid(2, md, $spacing1)
+        @include media-breakpoint-down(md)
+            row-gap: $spacing1
+    .citation
+        a
+            display: block
+        p
+            @include meta
+            margin-top: $spacing0
