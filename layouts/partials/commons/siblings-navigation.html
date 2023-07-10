@@ -1,6 +1,6 @@
 {{/*  TODO: Create a generic previous / next section for single section  */}}
-{{ $previous_label := .previous_label | default "" }}
-{{ $next_label := .next_label | default "" }}
+{{ $previous_label := .previous_label | default (i18n "posts.previous") }}
+{{ $next_label := .next_label | default (i18n "posts.next") }}
 
 {{ with .context }}
   {{- if or .PrevInSection .NextInSection -}}
