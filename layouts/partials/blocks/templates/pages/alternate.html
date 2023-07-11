@@ -1,11 +1,17 @@
 {{ $show_descriptions := .show_descriptions }}
 {{ $show_images := .show_images }}
+{{ $image_class := "" }}
 
-<div class="cards">
+<div class="grid">
   {{ range .pages }}
     {{- $page := partial "GetPageByUrl" .page -}}
     {{ with $page }}
-      <article class="card">
+      {{ if .Params.image }}
+        {{ $image_class = printf "image-%s" (partial "GetImageDirection" .Params.image) }}
+      {{ else }}
+        {{ $image_class = "" }}
+      {{ end }}
+      <article class="{{ $image_class }}">
         <h3>
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}
@@ -22,8 +28,6 @@
             <p>{{ partial "PrepareText" .Params.summary }}</p>
           {{ end }}
         {{ end }}
-
-        <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
 
         {{ if $show_images }}
           {{- partial "pages/page-media.html" . -}}

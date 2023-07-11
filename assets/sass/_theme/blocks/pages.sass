@@ -183,9 +183,29 @@
                         margin-top: $spacing0
 
     &--alternate
-        .cards
+        .grid
             article .media img
                 aspect-ratio: unset
-        @include in-page-with-sidebar
-            .cards
-                @include grid(2)
+        @include media-breakpoint-up(desktop)
+            article
+                width: col(4, 8)
+                &:not(:first-child)
+                    margin-top: -5%
+                &:nth-child(even)
+                    margin-left: auto
+                &.image-portrait
+                    + .image-portrait
+                        margin-top: -30%
+                    + .image-square,
+                    + .image-landscape
+                        margin-top: -15%
+        @include in-page-without-sidebar
+            .top
+                .description
+                    @include body-text
+            .grid
+                width: col(10)
+                margin-left: auto
+                margin-right: auto
+                article
+                    width: col(4, 10)
