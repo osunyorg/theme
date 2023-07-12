@@ -10,11 +10,9 @@
   <div class="block block-gallery{{ if $title }} block-with-title{{ end }} {{ $layout_class }}">
     <div class="container">
       <div class="block-content">
-        {{- if (or $title .description) }}
+        {{- if or $title .description }}
           <div class="top">
-            {{- if not $title -}}
-              {{ partial "blocks/default_title.html" $template }}
-            {{ else }}
+            {{- if $title -}}
               <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
             {{ end -}}
             {{- if .description }}

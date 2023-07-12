@@ -1,5 +1,6 @@
 .block-pages
     .top
+        @include top-flex
         a
             text-decoration: none
     .grid, .cards
@@ -39,17 +40,11 @@
 
     @include in-page-without-sidebar
         .top
-            @include grid
-            .block-title
-                grid-column: 1 / 5
-                a
-                    @include icon(arrow, after, true)
-                    @include hover-translate-icon
-        .description
-            @include h2
-            grid-column: 5 / 13
-            margin-top: -0.25em
-            font-style: $h2-size-desktop
+            a
+                @include icon(arrow, after, true)
+                @include hover-translate-icon
+            .description
+                @include h2
 
     &--grid
         .grid
@@ -186,3 +181,31 @@
                     display: block
                     li + li
                         margin-top: $spacing0
+
+    &--alternate
+        .grid
+            article .media img
+                aspect-ratio: unset
+        @include media-breakpoint-up(desktop)
+            article
+                width: col(4, 8)
+                &:not(:first-child)
+                    margin-top: -5%
+                &:nth-child(even)
+                    margin-left: auto
+                &.image-portrait
+                    + .image-portrait
+                        margin-top: -30%
+                    + .image-square,
+                    + .image-landscape
+                        margin-top: -15%
+        @include in-page-without-sidebar
+            .top
+                .description
+                    @include body-text
+            .grid
+                width: col(10)
+                margin-left: auto
+                margin-right: auto
+                article
+                    width: col(4, 10)

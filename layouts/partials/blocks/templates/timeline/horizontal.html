@@ -1,7 +1,5 @@
 <div class="timeline">
-  {{- if not .title -}}
-    {{ partial "blocks/default_title.html" .template }}
-  {{ else }}
+  {{- if .title -}}
     <p class="block-title">{{ partial "PrepareHTML" .title }}</p>
   {{ end -}}
 

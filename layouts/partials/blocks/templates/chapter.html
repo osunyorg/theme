@@ -18,13 +18,11 @@
       <div class="block-content">
         <div class="chapter">
           <div class="text">
-            {{- if not $title -}}
-              {{ partial "blocks/default_title.html" $template }}
-            {{ else }}
+            {{ if $title }}
               <div class="top">
                 <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
               </div>
-            {{ end -}}
+            {{ end }}
             {{ if (partial "GetTextFromHTML" .text) -}}
             <div class="rich-text">
               {{ partial "PrepareHTML" .text }}

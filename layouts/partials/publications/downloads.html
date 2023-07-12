@@ -3,7 +3,9 @@
   <h2 class="h5">{{ i18n "publications.downloads" }}</h2>
   <nav>
     {{ range .Params.links }}
-      <a href="{{ .url }}" target="_blank" rel="noopener" class="link-btn">{{ .label }}</a>
+      {{ if .url }}
+        <a href="{{ .url }}" target="_blank" rel="noopener" class="link-btn">{{ .label }}</a>
+      {{ end }}
     {{ end }}
   </nav>
 </div>

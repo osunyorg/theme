@@ -5,9 +5,7 @@
   <div class="block block-embed{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
-        {{- if not $title -}}
-          {{ partial "blocks/default_title.html" $template }}
-        {{ else }}
+        {{- if  $title -}}
           <div class="top">
             <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
           </div>

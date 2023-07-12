@@ -6,12 +6,12 @@
   <div class="{{ $class }}{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
-        {{- if not $title -}}
-          {{ partial "blocks/default_title.html" $template }}
-        {{ else }}
+        {{ if or $title .description }}
           <div class="top">
+            {{ if $title }}
               <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-              {{- if .description }}
+            {{ end }}
+            {{- if .description }}
               <div class="description">
                 {{ partial "PrepareHTML" .description }}
               </div>
