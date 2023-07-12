@@ -31,7 +31,7 @@
 
     &--grid
         .gallery
-            align-items: start
+            align-items: end
             @include in-page-with-sidebar
                 @include grid(3, desktop, half($grid-gutter), half($grid-gutter))
             @include in-page-without-sidebar
@@ -82,10 +82,7 @@
             &__slide
                 flex-shrink: initial
                 &:last-child
-                    min-width: 100%
                     padding-right: 20%
-                    img
-                        max-width: 100%
             figure
                 margin-right: half($grid-gutter)
                 picture
@@ -100,11 +97,8 @@
                         img
                             height: 70vh
                             width: auto
-                            height: auto
                             max-width: none
-                            @include in-page-without-sidebar
-                                height: 70vh
-                                max-width: none
+
             &__arrows
                 margin-left: -18px
                 order: 2
