@@ -1,9 +1,9 @@
 <section class="person-publications">
   <div class="top">
-    <h2 class="h5">{{ i18n "persons.publications" }}</h2>
+    <h2 class="h5"><a href="{{ .researcher.Permalink }}">{{ i18n "persons.publications" }}</a></h2>
   </div>
   <ul>
-    {{ range .publications }}
+    {{ range first 3 .publications }}
       <li>
         <article class="publication">
           {{ $title := .Title }}
