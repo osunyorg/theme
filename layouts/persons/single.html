@@ -73,18 +73,8 @@
         {{ partial "persons/programs.html" (dict "programs" $programsForTeacher "slug" $slug) }}
       {{ end }}
 
-
       {{ if $publications }}
-
-        {{ $paginator := $researcher.Paginate $publications 3 }}
-
-        {{ range $paginator.Pages }}
-          {{ partial "publications/publication.html" . }}
-        {{ end }}
-        
-        {{ partial "commons/pagination.html" (
-          dict "Paginator" $paginator 
-          ) }}
+        {{ partial "persons/publications.html" (dict "publications" $publications "researcher" $researcher) }}
       {{ end }}
 
       {{ if $posts }}
@@ -94,7 +84,6 @@
       {{ if $papers }}
         {{ partial "persons/papers.html" (dict "papers" $papers "slug" $slug) }}
       {{ end }}
-
     </div>
   </div>
 {{ end }}
