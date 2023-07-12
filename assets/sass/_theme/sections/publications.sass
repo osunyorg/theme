@@ -12,41 +12,56 @@
         b, span
             display: block
 
+.publication
+    border-bottom: 1px solid $color-border
+    padding-bottom: $spacing0
+    padding-top: $spacing0
+    a
+        display: block
+        text-decoration: none
+
+    .publication-ref
+        @include small
+        color: $color-text-alt
+        margin-top: half($spacing0)
+    .publication-meta
+        @include meta
+
 .publications
     margin-top: $spacing3
-    article
+
+.publications__section
+    .publication
         padding-bottom: $spacing2
         padding-top: $spacing2
-        border-bottom: 1px solid $color-border
         position: relative
-        @include media-breakpoint-down(desktop)
+        p
             padding-right: $spacing2
-            a + .meta
-                margin-top: $spacing1
-            a::before
-                margin-top: px2rem(-6)
         @include media-breakpoint-up(desktop)
             @include grid(3)
             align-items: baseline
+        @include media-breakpoint-down(desktop)
+            padding-right: $spacing2
+            a + p
+                margin-top: $spacing1
+            a::before
+                margin-top: px2rem(-6)
+        .publication-ref
+            display: none
         a
             @include h3
             grid-column: 1 / 3
-            display: block
-            text-decoration: none
             @include stretched-link(after)
             &:hover
                 color: $color-accent
             @include icon-block(arrow-right, before)
                 position: absolute
                 right: 0px
-        .meta
-            padding-right: $spacing2
 
 .publications__page
     .hero
         h1, hgroup
             width: 100%
-
     .document-content > .container
         @include media-breakpoint-up(desktop)
             @include grid

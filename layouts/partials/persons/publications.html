@@ -5,13 +5,7 @@
   <ul>
     {{ range first 3 .publications }}
       <li>
-        <article class="publication">
-          {{ $title := .Title }}
-          <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ partial "PrepareHTML" $title }}</a>
-          <p class="meta">
-            {{ partial "PrepareHTML" .Params.ref }}
-          </p>
-        </article>
+        {{ partial "publications/publication.html" . }}
       </li>
     {{ end }}
   </ul>

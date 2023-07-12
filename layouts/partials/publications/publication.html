@@ -1,7 +1,10 @@
 <article class="publication">
   {{ $title := .Title }}
   <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ partial "PrepareHTML" $title }}</a>
-  <p class="meta">
+  <p class="publication-meta">
     {{ .Date.Format "2006" -}}{{- if .Params.authors -}},{{- end }} {{ .Params.authors }}
+  </p>
+  <p class="publication-ref">
+    {{ partial "PrepareHTML" .Params.ref }}
   </p>
 </article>
