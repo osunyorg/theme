@@ -85,6 +85,10 @@
                     padding-right: 20%
             figure
                 margin-right: half($grid-gutter)
+                @include media-breakpoint-down(desktop)
+                    display: flex
+                    flex-direction: column
+                    justify-content: end
                 picture
                     img
                         // FIXME Arnaud: I would like images at constant height, can't manage to get it right.
@@ -92,9 +96,7 @@
                         width: auto
                         height: auto
                         max-width: calc(100vw - #{$grid-gutter-sm} * 2)
-                @include media-breakpoint-up(desktop)
-                    picture
-                        img
+                        @include media-breakpoint-up(desktop)
                             height: 70vh
                             width: auto
                             max-width: none
