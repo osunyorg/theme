@@ -10,9 +10,10 @@
   {{- end }}
 
   {{ $author := site.GetPage (printf "/authors/%s" $slug) }}
+  {{ $researcher := site.GetPage (printf "/researchers/%s" $slug) }}
 
   {{ $posts := where $author.Pages "Section" "posts" }}
-  {{ $publications := where $author.Pages "Section" "publications" }}
+  {{ $publications := where $researcher.Pages "Section" "publications" }}
   {{ $papers := where $author.Pages "Section" "papers" }}
 
   {{ partial "persons/hero-single.html" . }}
@@ -72,6 +73,7 @@
         {{ partial "persons/programs.html" (dict "programs" $programsForTeacher "slug" $slug) }}
       {{ end }}
 
+      {{ $publications }}
       {{ if $publications }}
         {{ partial "persons/publications.html" (dict "publications" $publications) }}
       {{ end }}
