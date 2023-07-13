@@ -31,6 +31,11 @@
             a
                 @include link($block-chapter-layout-accent-color)
 
+    &--alt_background, &--accent_background
+        margin-bottom: 0
+        + .block-chapter--alt_background, + .block-chapter--accent_background
+            margin-top: 0
+
     @include media-breakpoint-down(desktop)
         &--alt_background, &--accent_background
             padding-top: $grid-gutter
@@ -63,7 +68,6 @@
         &--accent_background
             .chapter
                 background: $block-chapter-layout-accent-background
-
     @include in-page-without-sidebar
         &--alt_background, &--accent_background
             padding-top: $grid-gutter
