@@ -24,6 +24,9 @@
             {{ if .name }}
               <p itemprop="name">{{ .name }}</p>
             {{ end }}
+            {{ with .information }}
+              {{ partial "PrepareHTML" . }}
+            {{ end }}
             {{ with .address }}
               {{ if or .address .city .zipcode .country }}
                 <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
@@ -50,6 +53,9 @@
                   {{ end }}
                 </div>
               {{ end }}
+            {{ end }}
+            {{ with .url }}
+              <a href="{{ . }}" target="_blank" rel="noreferrer">{{ . }}</a>
             {{ end }}
             <p>
               {{ range .phone_numbers }}
