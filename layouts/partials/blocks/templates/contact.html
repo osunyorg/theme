@@ -55,16 +55,14 @@
               {{ end }}
             {{ end }}
             {{ with .url }}
-              <a href="{{ . }}" target="_blank" rel="noreferrer">{{ . }}</a>
+              <p><a href="{{ . }}" target="_blank" rel="noreferrer">{{ . }}</a></p>
             {{ end }}
-            <p>
-              {{ range .phone_numbers }}
-                <a itemprop="telephone" href="tel:{{ . }}">{{ . }}</a><br>
-              {{ end }}
-              {{ range .emails }}
-                <a itemprop="email" href="mailto:{{ . }}">{{ . }}</a><br>
-              {{ end }}
-            </p>
+            {{ range .phone_numbers }}
+              <p><a itemprop="telephone" href="tel:{{ . }}">{{ . }}</a></p>
+            {{ end }}
+            {{ range .emails }}
+              <p><a itemprop="email" href="mailto:{{ . }}">{{ . }}</a></p>
+            {{ end }}
           </address>
   
           {{ if .timetable}}
