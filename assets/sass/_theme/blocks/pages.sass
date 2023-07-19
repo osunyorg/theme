@@ -160,11 +160,14 @@
                     @include stretched-link(before)
             .block-content
                 @include grid
-                grid-row-gap: $spacing1
+                // grid-column-gap: $spacing1
+                // grid-row-gap: $spacing1
                 .top
                     display: block
                     grid-column: 1 / 8
                     margin-bottom: 0
+                    .block-title
+                        width: auto
                 .top:not(.hidden) + .description
                     grid-column: 1 / 8
                     grid-row: 2 / 3
