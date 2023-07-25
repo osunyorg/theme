@@ -36,19 +36,23 @@
           </div>
           {{ if .image }}
             <figure class="{{- $image_class -}}">
-              <a class="glightbox"
-                role="button"
-                data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
-                href="{{- partial "GetLightboxUrl" .image -}}"
-                title="{{- i18n "commons.lightbox.link.title" -}}"
-                aria-label="{{- i18n "commons.lightbox.link.title" -}}"
-                >
+              {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+                <a class="glightbox"
+                  role="button"
+                  data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
+                  href="{{- partial "GetLightboxUrl" .image -}}"
+                  title="{{- i18n "commons.lightbox.link.title" -}}"
+                  aria-label="{{- i18n "commons.lightbox.link.title" -}}"
+                  >
+              {{ end }}
                 {{ partial "commons/image.html"
                   (dict
                     "image"    .image
                     "sizes"    site.Params.image_sizes.blocks.chapter
                   )}}
-              </a>
+              {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+                </a>
+              {{ end }}
               {{ if partial "GetTextFromHTML" .credit }}
                 <figcaption>{{ partial "PrepareHTML" .credit }}</figcaption>
               {{ end }}
