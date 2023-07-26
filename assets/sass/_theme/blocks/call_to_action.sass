@@ -9,7 +9,6 @@
                 text-decoration-color:  $block-call-to-action-color
             p
                 @include h2
-                // margin-bottom: $spacing0
         .actions
             [role="group"]
                 @include media-breakpoint-down(desktop)
@@ -68,7 +67,7 @@
             > div
                 // TODO : simplifier l'application d'une couleur de fond sur le CTA avec sidebar et sans sidebar
                 background-color: var(--cta-background-color)
-                padding: $grid-gutter
+                padding: $grid-gutter col(1, 8)
                 width: 100%
                 position: relative
                 &::after
@@ -83,12 +82,11 @@
             &--with-image
                 picture
                     order: 1
-                    padding-left: $grid-gutter
-                    padding-right: $grid-gutter
+                    padding-left: col(1, 8)
+                    padding-right: offset(4, 8)
                     position: relative
                     z-index: 2
                     img
-                        width: col(3, 6)
                         margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
                 > div
                     padding-top: calc(#{$grid-gutter} + #{$spacing3})
@@ -102,9 +100,7 @@
             margin-left: -$grid-gutter
             margin-right: -$grid-gutter
         .call_to_action--with-image
-            align-items: start
-            display: grid
-            grid-template-columns: repeat(12,1fr)
+            @include grid
             > div
                 grid-column: 1/7
             > picture
@@ -112,9 +108,8 @@
         .call_to_action--without-image
             display: block
             > div
-                column-gap: $grid-gutter
-                display: grid
-                grid-template-columns: repeat(12,1fr)
+                @include grid
+                row-gap: 0px
                 .block-title, .description
                     grid-column: 1/9
                 .actions
