@@ -1,0 +1,24 @@
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+{{- with .block.data -}}
+  <div class="block block-license{{ if $title }} block-with-title{{ end }}">
+    <div class="container">
+      <div class="block-content">
+        {{- if  $title -}}
+          <div class="top">
+            <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
+          </div>
+        {{ end -}}
+        {{ with .creative_commons }}
+          <div class="license">
+            {{ $file := (printf "/assets/images/blocks/license/%s.svg" .identifier ) }}
+            <a href="{{ .url }}" title="{{ .label }}" target="_blank" rel="noopener">
+              <img src="{{ $file }}" alt="{{ .label }}">
+            </a>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{- end -}}
+
