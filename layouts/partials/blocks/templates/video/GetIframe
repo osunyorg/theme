@@ -17,7 +17,12 @@
   "urls" (slice "dailymotion.com" "dai.ly")
 ) }}
 
-{{ $providers := slice $vimeo $youtube $dailymotion }}
+{{ $peertube := (dict
+  "name" "peertube"
+  "urls" (slice "peertube.fr")
+) }}
+
+{{ $providers := slice $vimeo $youtube $dailymotion $peertube }}
 
 {{ range $provider := $providers }}
   {{ range $provider_url := $provider.urls }}
@@ -41,6 +46,9 @@
           {{ $parts := split $url "video/" }}
           {{ $identifier = (index (last 1 $parts) 0) }}
         {{ end }}
+      {{ else if eq $provider.name "peertube" }}
+        {{ $parts := split $url "w/" }}
+        {{ $identifier = (index (last 1 $parts) 0) }}
       {{ end }}
 
       {{ if $identifier }}
