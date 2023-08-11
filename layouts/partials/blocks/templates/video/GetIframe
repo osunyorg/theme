@@ -1,6 +1,7 @@
 {{ $url := .url }}
 {{ $identifier := false }}
 {{ $title := partial "PrepareHTML" .title }}
+{{ $domain := "" }}
 
 {{ $vimeo := (dict
     "name" "vimeo"
@@ -19,7 +20,7 @@
 
 {{ $peertube := (dict
   "name" "peertube"
-  "urls" (slice "peertube.fr")
+  "urls" (slice "peertube")
 ) }}
 
 {{ $providers := slice $vimeo $youtube $dailymotion $peertube }}
@@ -49,6 +50,7 @@
       {{ else if eq $provider.name "peertube" }}
         {{ $parts := split $url "w/" }}
         {{ $identifier = (index (last 1 $parts) 0) }}
+        {{ $domain = (index (first 1 $parts) 0)}}
       {{ end }}
 
       {{ if $identifier }}
@@ -56,6 +58,7 @@
         {{ partial $partial (dict
           "id" $identifier
           "title" $title
+          "domain" $domain
           )}}
       {{ end }}
     {{ end }}
