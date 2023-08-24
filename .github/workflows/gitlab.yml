@@ -18,7 +18,7 @@ jobs:
         target-username: ${{ secrets.GITLAB_TARGET_USERNAME }}
         target-token: ${{ secrets.GITLAB_TARGET_TOKEN }}
 
-    - uses: muinmomin/webhook-action@v1.0.0
+    - uses: dkershner6/post-api-call-action@v1
       with:
         url: ${{ secrets.OSUNY_API_AUTOUPDATE_THEME_URL }}
-        data: "{OSUNY_API_AUTOUPDATE_THEME_KEY:${{ secrets.OSUNY_API_AUTOUPDATE_THEME_KEY }}}"
+        data: "{\"OSUNY_API_AUTOUPDATE_THEME_KEY\":\"${{ secrets.OSUNY_API_AUTOUPDATE_THEME_KEY }}\"}"
