@@ -17,3 +17,10 @@ jobs:
         target-url: ${{ secrets.GITLAB_TARGET_URL }}
         target-username: ${{ secrets.GITLAB_TARGET_USERNAME }}
         target-token: ${{ secrets.GITLAB_TARGET_TOKEN }}
+
+    - name: Autoupdate Osuny theme
+      uses: muinmomin/webhook-action@v1.0.0
+      with:
+        url: ${{ secrets.OSUNY_API_AUTOUPDATE_THEME_URL }}
+        data: 
+          OSUNY_API_AUTOUPDATE_THEME_KEY: ${{ secrets.OSUNY_API_AUTOUPDATE_THEME_KEY }}
