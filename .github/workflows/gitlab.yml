@@ -17,8 +17,3 @@ jobs:
         target-url: ${{ secrets.GITLAB_TARGET_URL }}
         target-username: ${{ secrets.GITLAB_TARGET_USERNAME }}
         target-token: ${{ secrets.GITLAB_TARGET_TOKEN }}
-
-    - uses: dkershner6/post-api-call-action@v1
-      with:
-        url: ${{ secrets.OSUNY_API_AUTOUPDATE_THEME_URL }}
-        data: "{\"OSUNY_API_AUTOUPDATE_THEME_KEY\":\"${{ secrets.OSUNY_API_AUTOUPDATE_THEME_KEY }}\"}"
