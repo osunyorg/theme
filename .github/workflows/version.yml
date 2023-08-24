@@ -33,4 +33,5 @@ jobs:
         uses: muinmomin/webhook-action@v1.0.0
         with:
           url: ${{ secrets.OSUNY_API_AUTOUPDATE_THEME_URL }}
-          data: "{'OSUNY_API_AUTOUPDATE_THEME_KEY': '${{ secrets.OSUNY_API_AUTOUPDATE_THEME_KEY }}'}"
+          data: 
+            OSUNY_API_AUTOUPDATE_THEME_KEY: ${{ secrets.OSUNY_API_AUTOUPDATE_THEME_KEY }}
