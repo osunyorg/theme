@@ -22,13 +22,15 @@
         {{ partial "publications/citations.html" . }}
         {{ partial "publications/downloads.html" . }}
       </div>
-      {{ partial "commons/siblings-navigation.html" (dict
-        "context" .
-        "previous_label" (i18n "publications.previous")
-        "next_label" (i18n "publications.next")
-        ) }}
     </div>
   </div>
+</div>
+<div class="container">
+  {{ partial "commons/siblings-navigation.html" (dict
+  "context" .
+  "previous_label" (i18n "publications.previous")
+  "next_label" (i18n "publications.next")
+  ) }}
 </div>
 
 {{ end }}
