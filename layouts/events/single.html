@@ -1,0 +1,25 @@
+{{ define "main" }}
+  {{ partial "events/hero-single.html" . }}
+
+  <div class="document-content" itemscope itemtype="https://schema.org/Event">
+    <meta itemprop="headline" content="{{ partial "PrepareHTML" .Title }}">
+    <meta itemprop="url" content="{{ .Permalink }}">
+    {{ if .Params.summary }}<meta itemprop="abstract" content="{{ partial "PrepareText" .Params.summary }}">{{ end }}
+    {{ if .Summary }}<meta itemprop="description" content="{{ partial "PrepareText" .Summary }}">{{ end }}
+
+    {{ partial "events/sidebar.html" . }}
+
+    {{ partial "posts/summary.html" (dict
+        "context" .
+        "block_wrapped" true
+      ) }}
+
+    {{ partial "contents/list.html" . }}
+
+    {{ partial "posts/after-contents.html" . }}
+
+    {{ partial "posts/prevnext.html" . }}
+
+    {{ partial "hooks/before-document-content-end.html" . }}
+  </div>
+{{ end }}

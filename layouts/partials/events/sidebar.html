@@ -1,0 +1,14 @@
+<div class="post-sidebar">
+  <div>
+    <aside>
+      {{- partial "events/event-infos.html" . -}}
+    </aside>
+
+    {{ partial "toc/container.html"
+      (dict
+          "toc" "toc/default.html"
+          "context" .
+      )
+    }}
+  </div>
+</div>
