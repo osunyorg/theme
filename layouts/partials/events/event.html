@@ -22,25 +22,34 @@
       <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
     {{ $heading_tag.close }}
 
-    {{ if site.Params.events.index.show_categories }}
-      {{- partial "events/categories" . -}}
-    {{ end }}
-
     {{ if site.Params.events.index.show_description }}
       {{- if (partial "GetTextFromHTML" .Params.summary) -}}
-        {{ if site.Params.events.index.truncate_description }}
-          <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
-            "text" .Params.summary
-            "length" site.Params.events.index.truncate_description
-            ) }}</p>
-        {{ else }}
-          <p itemprop="articleBody">{{ partial "PrepareText" .Params.summary }}</p>
-        {{ end }}
+        <p itemprop="articleBody">
+          {{ if site.Params.events.index.truncate_description }}
+            {{ partial "GetTruncateContent" ( dict 
+              "text" .Params.summary
+              "length" site.Params.events.index.truncate_description
+              ) }}
+          {{ else }}
+            {{ partial "PrepareText" .Params.summary }}
+          {{ end }}
+        </p>
       {{- end -}}
     {{- end -}}
     
-    <div class="event-meta">
-      
+    <div class="event-dates">
+      {{ with .Params.dates.from }}
+        <span class="from">
+          {{ .day }}
+          {{ .hour }}
+        </span>
+      {{ end }}
+      {{ with .Params.dates.to }}
+        <span class="to">
+          {{ .day }}
+          {{ .hour }}
+        </span>
+      {{ end }}
     </div>
   </div>
   <div class="media">

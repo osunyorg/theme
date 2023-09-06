@@ -1,0 +1,69 @@
+.events__page
+    @include media-breakpoint-down(desktop)
+        .document-content
+            display: flex
+            flex-direction: column
+            aside
+                order: 2
+                padding: 0 half($grid-gutter-sm)
+            .block-pagination
+                order: 3
+    @include media-breakpoint-up(desktop)
+        .event-sidebar
+            @include container-margin-left
+            margin-top: 0
+            top: 0
+            left: 0
+            height: 100%
+            position: absolute
+            width: col-outside-container(4)
+            > div
+                @include sticky($spacing1)
+            .toc-container
+                border-top: 1px solid $color-border
+                padding-top: $spacing1
+                position: static
+                margin-left: 0
+        // Safe spacing if post is empty
+        .document-content
+            min-height: 350px
+    .lead
+        @include h3
+
+.event-infos
+    margin-bottom: 0
+    @include meta
+    @include list-reset
+    font-size: $table-body-size
+    @include media-breakpoint-up(desktop)
+        font-size: $table-body-size-desktop
+    > li
+        @include meta
+        display: flex
+        justify-content: space-between
+        padding-top: $spacing0
+        padding-bottom: $spacing0
+        border-color: $color-border
+        padding: 1rem 0
+        &:not(:first-child)
+            align-items: center
+
+            border-top: 1px solid $color-border
+        > span
+            @include meta
+            color: $color-text-alt
+            padding-left: 0
+            white-space: nowrap
+            vertical-align: top
+        > ul
+            text-align: right
+            flex: 1
+    a
+        // @include meta
+        @include link($color-accent)
+    .share
+        justify-content: flex-end
+        a
+            color: inherit
+        li:last-child a
+            margin-right: -$spacing0

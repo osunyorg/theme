@@ -1,0 +1,38 @@
+{{- if or .PrevInSection .NextInSection -}}
+<div class="block block-pagination">
+  <div class="container">
+    <div class="block-content">
+      <nav class="posts-navigation" aria-label="{{ i18n "commons.pagination.between.events" }}">
+        <ul>
+          {{- if .PrevInSection -}}
+            {{with .Site.RegularPages.Prev . }}
+              <li class="previous">
+                {{ $title := partial "PrepareHTML" .Title -}}
+                <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "events.previous_aria" (dict "Title" $title)) }}">
+                  <span>
+                    {{- i18n "events.previous" -}}
+                  </span>
+                  {{- $title -}}
+                </a>
+              </li>
+            {{end}}
+          {{- end -}}
+          {{- if .NextInSection -}}
+            {{with .Site.RegularPages.Next . }}
+              <li class="next">
+                {{ $title := partial "PrepareHTML" .Title -}}
+                <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "events.next_aria" (dict "Title" $title)) }}">
+                  <span>
+                    {{- i18n "events.next" -}}
+                  </span>
+                  {{- $title -}}
+                </a>
+              </li>
+            {{end}}
+          {{- end -}}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+{{- end -}}

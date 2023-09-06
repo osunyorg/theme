@@ -1,4 +1,50 @@
-<ul class="post-infos">
+{{ $unique_day := eq .Params.dates.from.day .Params.dates.to.day }}
+<ul class="event-infos">
+  {{ if $unique_day }}
+    <li>
+      <span>{{ i18n "events.unique_day" }}</span>
+      {{ .Params.dates.from.day }}
+    </li>
+    {{ with .Params.dates.from.hour }}
+      <li>
+        <span>{{ i18n "events.from.hour" }}</span>
+        {{ . }}
+      </li>
+    {{ end }}
+    {{ with .Params.dates.to.hour }}
+      <li>
+        <span>{{ i18n "events.to.hour" }}</span>
+        {{ . }}
+      </li>
+    {{ end }}
+  {{ else }}
+    {{ with .Params.dates.from }}
+      <li>
+        <span>{{ i18n "events.from.day" }}</span>
+        {{ .day }}
+      </li>
+      {{ with .hour }}
+        <li>
+          <span>{{ i18n "events.from.hour" }}</span>
+          {{ . }}
+        </li>
+      {{ end }}
+    {{ end }}
+
+    {{ with .Params.dates.to }}
+      <li>
+        <span>{{ i18n "events.to.day" }}</span>
+        {{ .day }}
+      </li>
+      {{ with .hour }}
+        <li>
+          <span>{{ i18n "events.to.hour" }}</span>
+          {{ . }}
+        </li>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
   <li>
     <span>{{ i18n "posts.share" }}</span>
     {{ partial "commons/share.html" . }}
