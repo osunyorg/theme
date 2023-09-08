@@ -37,6 +37,8 @@
     font-size: $table-body-size
     @include media-breakpoint-up(desktop)
         font-size: $table-body-size-desktop
+    .event-date
+        text-transform: capitalize
     > li
         @include meta
         padding-top: $spacing0
@@ -57,6 +59,8 @@
             flex: 1
         time + time
             @include icon(arrow)
+            &::before
+                padding-right: 0.3rem
     a
         @include link($color-accent)
     .share
