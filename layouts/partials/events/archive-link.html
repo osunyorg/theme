@@ -1,4 +1,6 @@
-{{ with .Params.archives }}
-  <a href="{{ . }}">{{ i18n "events.archives" }}</a>
+{{ if .IsSection }}
+  {{ range where .Pages "Kind" "section" }}
+    <a href="{{ .Permalink }}">{{ i18n "events.archives" }}</a>
+  {{ end }}
 {{ end }}
 
