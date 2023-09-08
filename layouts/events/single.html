@@ -16,7 +16,9 @@
 
     {{ partial "contents/list.html" . }}
 
-    {{ partial "events/prevnext.html" . }}
+    {{ partial "commons/siblings-navigation.html" (dict
+      "context" .
+      ) }}
 
     {{ partial "hooks/before-document-content-end.html" . }}
   </div>

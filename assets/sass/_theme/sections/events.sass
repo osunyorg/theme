@@ -39,31 +39,62 @@
         font-size: $table-body-size-desktop
     > li
         @include meta
-        display: flex
-        justify-content: space-between
         padding-top: $spacing0
         padding-bottom: $spacing0
-        border-color: $color-border
         padding: 1rem 0
+        font-family: $body-font-family
         &:not(:first-child)
             align-items: center
-
-            border-top: 1px solid $color-border
         > span
             @include meta
             color: $color-text-alt
             padding-left: 0
+            display: block
             white-space: nowrap
             vertical-align: top
         > ul
             text-align: right
             flex: 1
+        time + time
+            @include icon(arrow)
     a
-        // @include meta
         @include link($color-accent)
     .share
-        justify-content: flex-end
         a
             color: inherit
-        li:last-child a
-            margin-right: -$spacing0
+        li:first-child a
+            padding-left: 0
+
+.events
+    .event
+        border-bottom: 1px solid $color-border
+        margin-bottom: $spacing1
+        padding-bottom: $spacing1
+        display: flex
+        flex-direction: column
+        h2, h3
+            @include h3
+            a
+                text-decoration: none
+        &-dates
+            order: 1
+        &-content
+            order: 2
+        .media
+            order: 0
+        @include media-breakpoint-up(desktop)
+            @include grid
+            &-dates
+                order: 0
+                grid-column: 1 / 4
+            &-content
+                order: 1
+                grid-column: 4 / 10
+            .media
+                order: 2
+                grid-column: 11 / 13
+        @include media-breakpoint-up(md)
+            .media
+                grid-column: 10 / 13
+        
+    

@@ -5,8 +5,8 @@
     "open" ((printf "<%s itemprop='headline'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
-{{ $index := .index}}
-{{ $alternate := .alternate}}
+{{ $index := .index }}
+{{ $alternate := .alternate }}
 
 {{ with $event }}
 
@@ -36,11 +36,12 @@
         </p>
       {{- end -}}
     {{- end -}}
-    
-    <div class="event-dates">
-      {{ .Params.dates.computed.short }}
-    </div>
   </div>
+
+  <div class="event-dates">
+    {{ .Params.dates.computed.short }}
+  </div>
+
   <div class="media">
     {{- if .Params.image -}}
       {{- partial "commons/image.html"
