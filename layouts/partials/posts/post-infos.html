@@ -23,6 +23,12 @@
       </a>
     </li>
   {{ end }}
+  {{ with .Params.contents_reading_time }}
+    <li>
+      <span>{{ i18n "posts.reading_time" }}</span>
+      {{ .text }}
+    </li>
+  {{ end }}
   <li>
     <span>{{ i18n "posts.share" }}</span>
     {{ partial "commons/share.html" . }}
