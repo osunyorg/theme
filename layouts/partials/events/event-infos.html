@@ -7,15 +7,17 @@
         {{ .long }}
       </li>
     {{ end }}
-    <li>
-      <span>{{ i18n "events.hour" }}</span>
-      {{ with .from }}
-        <time datetime="{{ .hour }}">{{ .hour }}</time>
-      {{ end }}
-      {{ with .to }}
-        <time datetime="{{ .hour }}">{{ .hour }}</time>
-      {{ end }}
-    </li>
+    {{ if .from.hour }}
+      <li>
+        <span>{{ i18n "events.hour" }}</span>
+        {{ with .from.hour }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+        {{ with .to.hour }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+      </li>
+    {{ end }}
   {{ end }}
   <li>
     <span>{{ i18n "posts.share" }}</span>
