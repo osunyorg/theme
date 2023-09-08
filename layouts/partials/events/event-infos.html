@@ -1,0 +1,26 @@
+{{ $unique_day := eq .Params.dates.from.day .Params.dates.to.day }}
+<ul class="event-infos">
+  {{ with .Params.dates }}
+    {{ with .computed }}
+      <li class="event-date">
+        <span>{{ i18n "events.date" }}</span>
+        {{ .long }}
+      </li>
+    {{ end }}
+    {{ if .from.hour }}
+      <li>
+        <span>{{ i18n "events.hour" }}</span>
+        {{ with .from.hour }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+        {{ with .to.hour }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+      </li>
+    {{ end }}
+  {{ end }}
+  <li>
+    <span>{{ i18n "posts.share" }}</span>
+    {{ partial "commons/share.html" . }}
+  </li>
+</ul>

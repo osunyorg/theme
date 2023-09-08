@@ -1,0 +1,115 @@
+.events__page
+    @include media-breakpoint-down(desktop)
+        .document-content
+            display: flex
+            flex-direction: column
+            aside
+                order: 2
+                padding: 0 half($grid-gutter-sm)
+            .block-pagination
+                order: 3
+    @include media-breakpoint-up(desktop)
+        .event-sidebar
+            @include container-margin-left
+            margin-top: 0
+            top: 0
+            left: 0
+            height: 100%
+            position: absolute
+            width: col-outside-container(4)
+            > div
+                @include sticky($spacing1)
+            .toc-container
+                border-top: 1px solid $color-border
+                padding-top: $spacing1
+                position: static
+                margin-left: 0
+        // Safe spacing if post is empty
+        .document-content
+            min-height: 350px
+    .lead
+        @include h3
+
+.events__section
+    .archive-link
+        @include icon(arrow, after, true)
+        @include hover-translate-icon(after)
+        display: block
+        text-align: right
+        text-decoration: none
+
+.event-infos
+    margin-bottom: 0
+    @include meta
+    @include list-reset
+    font-size: $table-body-size
+    @include media-breakpoint-up(desktop)
+        font-size: $table-body-size-desktop
+    .event-date
+        text-transform: capitalize
+    > li
+        @include meta
+        padding-top: $spacing0
+        padding-bottom: $spacing0
+        padding: 1rem 0
+        font-family: $body-font-family
+        &:not(:first-child)
+            align-items: center
+        > span
+            @include meta
+            color: $color-text-alt
+            padding-left: 0
+            display: block
+            white-space: nowrap
+            vertical-align: top
+        > ul
+            text-align: right
+            flex: 1
+        time + time
+            @include icon(arrow)
+            &::before
+                padding-right: 0.3rem
+    a
+        @include link($color-accent)
+    .share
+        a
+            color: inherit
+        li:first-child a
+            padding-left: 0
+
+.events
+    .event
+        border-bottom: 1px solid $color-border
+        display: flex
+        flex-direction: column
+        margin-bottom: $spacing1
+        padding-bottom: $spacing1
+        position: relative
+        h2, h3
+            @include h3
+            margin-bottom: $spacing0
+            a
+                @include stretched-link
+                text-decoration: none
+        &-dates
+            order: 1
+        &-content
+            order: 2
+        .media
+            order: 0
+        @include media-breakpoint-up(desktop)
+            @include grid
+            &-dates
+                order: 0
+                grid-column: 1 / 4
+            &-content
+                order: 1
+                grid-column: 4 / 10
+            .media
+                order: 2
+                grid-column: 11 / 13
+        @include media-breakpoint-up(md)
+            .media
+                grid-column: 10 / 13
+        
+    
