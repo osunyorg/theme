@@ -38,18 +38,7 @@
     {{- end -}}
     
     <div class="event-dates">
-      {{ with .Params.dates.from }}
-        <span class="from">
-          {{ .day }}
-          {{ .hour }}
-        </span>
-      {{ end }}
-      {{ with .Params.dates.to }}
-        <span class="to">
-          {{ .day }}
-          {{ .hour }}
-        </span>
-      {{ end }}
+      {{ .Params.dates.computed.short }}
     </div>
   </div>
   <div class="media">
