@@ -6,11 +6,11 @@
   {{ end -}}
 
   {{ with .block.data -}}
-    <div class="events">
+    <div class="timeline-events">
       {{ range .events -}}
-        <article class="event">
+        <article class="timeline-event">
           {{ if .title }}
-            <h3 class="event-title">{{ partial "PrepareHTML" .title }}</h3>
+            <h3 class="title">{{ partial "PrepareHTML" .title }}</h3>
           {{ end }}
           {{ if .text }}
             <p>{{ partial "PrepareText" .text }}</p>
