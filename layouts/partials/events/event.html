@@ -38,8 +38,16 @@
     {{- end -}}
   </div>
 
-  <div class="event-dates">
+  <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}} {{- if .Params.dates.from.hour -}}{{ .Params.dates.from.hour }}{{- end -}}">
     {{ .Params.dates.computed.short }}
+    <div class="event-time">
+      {{ if .Params.dates.from.hour }}
+        <span>{{ .Params.dates.from.hour }}</span>
+      {{ end }}
+      {{ if .Params.dates.to.hour }}
+        <span> {{ .Params.dates.to.hour }}</span>
+      {{ end }}
+    </div>
   </div>
 
   <div class="media">

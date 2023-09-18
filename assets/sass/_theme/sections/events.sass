@@ -96,6 +96,9 @@
             order: 1
         &-content
             order: 2
+        &-time
+            span + span
+                @include icon(arrow-right, before)
         .media
             order: 0
         @include media-breakpoint-up(desktop)
@@ -116,10 +119,19 @@
                     order: 1
                     grid-column: 1 / 10
                     margin-top: half($spacing0)
+                &-time
+                    display: inline
             .media
                 order: 2
         @include media-breakpoint-up(md)
             .media
                 grid-column: 11 / 13
-        
+        @include media-breakpoint-down(md)
+            .media
+                order: 0
+            &-content
+                order: 1
+            &-dates
+                order: 3
+            
     
