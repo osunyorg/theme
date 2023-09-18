@@ -76,7 +76,7 @@
             color: inherit
         li:first-child a
             padding-left: 0
-
+.block-agenda__events,
 .events
     .event
         border-bottom: 1px solid $color-border
@@ -92,6 +92,7 @@
                 @include stretched-link
                 text-decoration: none
         &-dates
+            @include meta
             order: 1
         &-content
             order: 2
@@ -99,17 +100,26 @@
             order: 0
         @include media-breakpoint-up(desktop)
             @include grid
-            &-dates
-                order: 0
-                grid-column: 1 / 4
-            &-content
-                order: 1
-                grid-column: 4 / 10
+            @include in-page-without-sidebar
+                &-dates
+                    order: 0
+                    grid-column: 1 / 4
+                &-content
+                    order: 1
+                    grid-column: 4 / 10
+            @include in-page-with-sidebar
+                grid-gap: 0 $grid-gutter
+                &-dates
+                    order: 0
+                    grid-column: 1 / 10
+                &-content
+                    order: 1
+                    grid-column: 1 / 10
+                    margin-top: half($spacing0)
             .media
                 order: 2
-                grid-column: 11 / 13
         @include media-breakpoint-up(md)
             .media
-                grid-column: 10 / 13
+                grid-column: 11 / 13
         
     

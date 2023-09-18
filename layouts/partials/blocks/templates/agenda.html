@@ -20,24 +20,24 @@
         {{ end -}}
 
         <div class="block-agenda__events">
-          {{ range .events }}
-            <article class='event' itemprop="events" itemscope itemtype="https://schema.org/Event">
-              {{ if .Params.image }}
-                {{- $direction = partial "GetImageDirection" .Params.image -}}
+          {{ range .elements }}
+            <article class="event" itemprop="events" itemscope itemtype="https://schema.org/Event">
+              {{ if .data.image }}
+                {{- $direction = partial "GetImageDirection" .data.image -}}
               {{ end }}  
               <div class="event-content">
-                {{- $title := partial "PrepareHTML" .Title -}}
-                <h3><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h3>
+                {{- $title := partial "PrepareHTML" .title -}}
+                <h3><a href="{{ .url }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h3>
                 {{ if site.Params.events.index.show_description }}
-                  {{- if (partial "GetTextFromHTML" .Params.summary) -}}
+                  {{- if (partial "GetTextFromHTML" .summary) -}}
                     <p itemprop="articleBody">
                       {{ if site.Params.events.index.truncate_description }}
                         {{ partial "GetTruncateContent" ( dict 
-                          "text" .Params.summary
+                          "text" .summary
                           "length" site.Params.events.index.truncate_description
                           ) }}
                       {{ else }}
-                        {{ partial "PrepareText" .Params.summary }}
+                        {{ partial "PrepareText" .summary }}
                       {{ end }}
                     </p>
                   {{- end -}}
@@ -45,14 +45,14 @@
               </div>
             
               <div class="event-dates">
-                {{ .Params.dates.computed.short }}
+                {{ .dates.computed.short }}
               </div>
             
               <div class="media">
-                {{- if .Params.image -}}
+                {{- if .image -}}
                   {{- partial "commons/image.html"
                         (dict
-                          "image"    .Params.image
+                          "image"    .image
                           "sizes"    site.Params.image_sizes.sections.events.item
                         ) -}}
                 {{- else if site.Params.events.default_image -}}
