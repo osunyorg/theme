@@ -3,45 +3,31 @@
 {{- $title := .block.title -}}
 
 {{- with .block.data }}
+  <div itemscope itemtype="http://schema.org/Blog" class="block block-agenda--list block-agenda{{ if $title }} block-with-title{{ end }}">
+    <div class="container">
+      <div class="block-content">
+        {{ if or $title .description }}
+          <div class="top">
+            {{ if $title }}
+              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
+            {{ end }}
+            {{- if .description }}
+              <div class="description">
+                {{ partial "PrepareHTML" .description }}
+              </div>
+            {{ end -}}
+          </div>
+        {{ end -}}
 
-  {{ $event := .event }}
-  {{- $direction := "" -}}
-  {{ $heading := .heading | default "h2" }}
-  {{ $heading_tag := (dict 
-      "open" ((printf "<%s itemprop='headline'>" $heading) | safeHTML)
-      "close" ((printf "</%s>" $heading) | safeHTML)
-      ) }}
-  {{ $index := .index }}
-
-  {{ with $event }}
-    {{ if .Params.image }}
-      {{- $direction = partial "GetImageDirection" .Params.image -}}
-    {{ end }}
-
-    <div itemscope itemtype="http://schema.org/Blog" class="block block-agenda--list block-agenda{{ if $title }} block-with-title{{ end }}">
-      <div class="container">
-        <div class="block-content">
-          {{ if or $title .description }}
-            <div class="top">
-              {{ if $title }}
-                <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-              {{ end }}
-              {{- if .description }}
-                <div class="description">
-                  {{ partial "PrepareHTML" .description }}
-                </div>
-              {{ end -}}
-            </div>
-          {{ end -}}
+        <div class="block-agenda__events">
           {{ range .events }}
-          <article class='event' itemprop="events" itemscope itemtype="https://schema.org/Event">
+            <article class='event' itemprop="events" itemscope itemtype="https://schema.org/Event">
+              {{ if .Params.image }}
+                {{- $direction = partial "GetImageDirection" .Params.image -}}
+              {{ end }}  
               <div class="event-content">
                 {{- $title := partial "PrepareHTML" .Title -}}
-            
-                {{ $heading_tag.open }}
-                  <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-                {{ $heading_tag.close }}
-            
+                <h3><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h3>
                 {{ if site.Params.events.index.show_description }}
                   {{- if (partial "GetTextFromHTML" .Params.summary) -}}
                     <p itemprop="articleBody">
@@ -73,11 +59,11 @@
                   {{- partial "commons/image-default.html" -}}
                 {{- end -}}
               </div>
-          </article>
+            </article>
           {{ end -}}
         </div>
+        
       </div>
     </div>
-
-  {{ end -}}
+  </div>
 {{ end -}}
