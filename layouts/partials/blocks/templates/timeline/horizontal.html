@@ -4,10 +4,10 @@
   {{ end -}}
 
   {{ with .block.data }}
-    <div class="events">
+    <div class="timeline-events">
       <ol>
         {{ range .events }}
-          <li class="event">
+          <li class="timeline-event">
             <p class="title">{{- partial "PrepareHTML" .title -}}</p>
             <div class="line"></div>
             <div class="description text">{{- partial "PrepareHTML" .text | markdownify -}}</div>

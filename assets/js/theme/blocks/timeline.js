@@ -4,8 +4,8 @@ class BlockTimeline {
     constructor (block) {
         this.block = block;
         this.content = this.block.querySelector('.timeline');
-        this.list = this.block.querySelector('.events ol');
-        this.items = this.list.querySelectorAll('.event');
+        this.list = this.block.querySelector('.timeline-events ol');
+        this.items = this.list.querySelectorAll('.timeline-event');
         this.previous = this.block.querySelector('.previous');
         this.next = this.block.querySelector('.next');
         this.isManipulated = false;
