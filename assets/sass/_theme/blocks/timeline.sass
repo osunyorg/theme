@@ -1,8 +1,8 @@
 .block-timeline
     &--vertical
-        .events
+        .timeline-events
             position: relative
-        .event
+        .timeline-event
             position: relative
             &:not(:last-child)
                 padding-bottom: $spacing2
@@ -28,28 +28,28 @@
                 margin-bottom: 0
             &:last-child::after
                 display: none
-            &-title
+            .title
                 @include h4
                 + p
                     margin-top: $spacing0
 
         @include media-breakpoint-down(desktop)
-            .event
+            .timeline-event
                 padding-left: half($grid-gutter-sm)
                 &::after, &::before
                     left: 0
 
         @include in-page-without-sidebar
-            .events
+            .timeline-events
                 padding-left: 0
-            .event
+            .timeline-event
                 display: flex
                 &::before, &::after
                     left: col(3)
                     margin-left: half($grid-gutter)
                 &::before
                     transform: translateX(-4px)
-                &-title
+                .title
                     width: col(3)
                     text-align: right
                     + p
@@ -92,7 +92,7 @@
                 &:disabled
                     cursor: default
                     opacity: 0.3
-        .events
+        .timeline-events
             margin-left: half(-$grid-gutter)
             margin-right: half(-$grid-gutter)
             // TODO : fixer le px gap en desktop entre chaque event
@@ -104,13 +104,12 @@
                 margin-top: $spacing1
                 transition: margin 0.4s ease-in-out
                 width: 100%
-        .event
+        .timeline-event
             flex: none
             padding: 0 half($grid-gutter)
             scroll-snap-align: start
             transition: 0.3s opacity
             width: 50%
-            
             .title
                 display: block
                 min-height: var(--min-title-height)
@@ -143,21 +142,21 @@
                     background: transparent
 
         @include media-breakpoint-up(desktop)
-            .events
+            .timeline-events
                 ol
                     margin-top: $spacing2
-            .event
+            .timeline-event
                 .line
                     width: calc(100% + #{$grid-gutter})
 
         @include media-breakpoint-down(desktop)
-            .events
+            .timeline-events
                 position: relative
             .timeline-arrows
                 left: 0
                 position: absolute
                 top: calc(#{$spacing2/2} + var(--min-title-height))
-            .event
+            .timeline-event
                 padding-right: 0
                 width: 75%
                 .line
@@ -170,7 +169,7 @@
 
         @include in-page-without-sidebar
             @include media-breakpoint-up(xxl)
-                .event
+                .timeline-event
                     width: 25%
 
         @include in-page-with-or-without-sidebar
