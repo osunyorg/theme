@@ -12,7 +12,6 @@
       "close" ((printf "</%s>" $heading) | safeHTML)
       ) }}
   {{ $index := .index }}
-  {{ $alternate := .alternate }}
 
   {{ with $event }}
     {{ if .Params.image }}
@@ -35,7 +34,7 @@
             </div>
           {{ end -}}
           {{ range .events }}
-          <article class='event {{ if $alternate }}{{ $direction }} {{if not (modBool $index 2)}}left{{ else}}right{{end}}{{end}}' itemprop="events" itemscope itemtype="https://schema.org/Event">
+          <article class='event' itemprop="events" itemscope itemtype="https://schema.org/Event">
               <div class="event-content">
                 {{- $title := partial "PrepareHTML" .Title -}}
             
