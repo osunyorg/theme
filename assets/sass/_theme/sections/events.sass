@@ -114,26 +114,26 @@
                 order: 3
         @include media-breakpoint-up(desktop)
             @include grid
-            @include in-page-without-sidebar
-                &-dates
-                    order: 0
-                    grid-column: 1 / 4
-                &-content
-                    order: 1
-                    grid-column: 4 / 10
-                .media
-                    grid-column: 11 / 13
-            @include in-page-with-sidebar
-                grid-gap: 0 $grid-gutter
-                &-dates
-                    order: 0
-                    grid-column: 1 / 10
-                &-content
-                    order: 1
-                    grid-column: 1 / 10
-                    margin-top: half($spacing0)
-                &-time
-                    display: inline
             .media
                 order: 2
+        @include in-page-without-sidebar
+            &-dates
+                order: 0
+                grid-column: 1 / 4
+            &-content
+                order: 1
+                grid-column: 4 / 10
+            .media
+                grid-column: 11 / 13
+        @include in-page-with-sidebar
+            grid-gap: 0 $grid-gutter
+            &-dates
+                order: 0
+                grid-column: 1 / 10
+            &-content
+                order: 1
+                grid-column: 1 / 10
+                margin-top: half($spacing0)
+            &-time
+                display: inline
     
