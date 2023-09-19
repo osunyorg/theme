@@ -3,7 +3,7 @@
 {{- $title := .block.title -}}
 
 {{- with .block.data }}
-  <div itemscope itemtype="http://schema.org/Blog" class="block block-agenda{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-agenda{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         {{ if or $title .description }}
@@ -21,16 +21,16 @@
 
         <div class="events">
           {{ range .elements }}
-            <article class="event" itemprop="events" itemscope itemtype="https://schema.org/Event">
+            <article class="event" itemscope itemtype="https://schema.org/Event">
               {{ if .data.image }}
                 {{- $direction = partial "GetImageDirection" .data.image -}}
               {{ end }}  
               <div class="event-content">
                 {{- $title := partial "PrepareHTML" .title -}}
-                <h3><a href="{{ .url }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h3>
+                <h3><a href="{{ .url }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}" itemprop="name">{{ $title }}</a></h3>
                 {{ if site.Params.events.index.show_description }}
                   {{- if (partial "GetTextFromHTML" .summary) -}}
-                    <p itemprop="articleBody">
+                    <p itemprop="description">
                       {{ if site.Params.events.index.truncate_description }}
                         {{ partial "GetTruncateContent" ( dict 
                           "text" .summary
