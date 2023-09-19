@@ -31,6 +31,23 @@ footer#document-footer
         &-credit
             display: block
             margin-top: $spacing0
+        @if $footer-icons-enabled
+            &-social li a
+                &.facebook
+                    @include icon(facebook, after)
+                &.instagram
+                    @include icon(instagram, after)
+                &.linkedin
+                    @include icon(linkedin, after)
+                &.mastodon
+                &.youtube
+                &.x
+                &::after
+                    margin-left: $spacing0
+                    font-size: $h3-size
+        @if $footer-text-hidden
+            &-social li
+                font-size: 0
 
     @include media-breakpoint-down(desktop)
         .container
