@@ -101,6 +101,16 @@
                 @include icon(arrow-right, before)
         .media
             order: 0
+        @include media-breakpoint-up(md)
+            .media
+                grid-column: 10 / 13
+        @include media-breakpoint-down(md)
+            .media
+                order: 0
+            &-content
+                order: 1
+            &-dates
+                order: 3
         @include media-breakpoint-up(desktop)
             @include grid
             @include in-page-without-sidebar
@@ -110,6 +120,8 @@
                 &-content
                     order: 1
                     grid-column: 4 / 10
+                .media
+                    grid-column: 11 / 13
             @include in-page-with-sidebar
                 grid-gap: 0 $grid-gutter
                 &-dates
@@ -123,15 +135,4 @@
                     display: inline
             .media
                 order: 2
-        @include media-breakpoint-up(md)
-            .media
-                grid-column: 10 / 13
-        @include media-breakpoint-down(md)
-            .media
-                order: 0
-            &-content
-                order: 1
-            &-dates
-                order: 3
-            
     
