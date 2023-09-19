@@ -3,7 +3,7 @@
 {{- $title := .block.title -}}
 
 {{- with .block.data }}
-  <div itemscope itemtype="http://schema.org/Blog" class="block block-agenda--list block-agenda{{ if $title }} block-with-title{{ end }}">
+  <div itemscope itemtype="http://schema.org/Blog" class="block block-agenda{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         {{ if or $title .description }}
@@ -19,7 +19,7 @@
           </div>
         {{ end -}}
 
-        <div class="block-agenda__events">
+        <div class="events">
           {{ range .elements }}
             <article class="event" itemprop="events" itemscope itemtype="https://schema.org/Event">
               {{ if .data.image }}
