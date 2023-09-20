@@ -32,28 +32,36 @@ footer#document-footer
             display: block
             margin-top: $spacing0
         @if $footer-icons-enabled
-            &-social li a
-                &.facebook
+            &-social li
+                a.facebook
                     @include icon(social-facebook, after)
-                &.instagram
+                a.instagram
                     @include icon(social-instagram, after)
-                &.linkedin
+                a.linkedin
                     @include icon(social-linkedin, after)
-                &.mastodon
+                a.mastodon
                     @include icon(social-mastodon, after)
-                &.youtube
+                a.youtube
                     @include icon(social-youtube, after)
-                &.x
+                a.x
                     @include icon(social-x, after)
-                &.peertube
+                a.peertube
                     @include icon(social-peertube, after)
-                &.vimeo
+                a.vimeo
                     @include icon(social-vimeo, after)
-                &.tiktok
+                a.tiktok
                     @include icon(social-tiktok, after)
-                &::after
-                    margin-left: $spacing0
+                a::after
                     font-size: $h3-size
+                    @include media-breakpoint-up(md)
+                        margin-left: $spacing0
+                @include media-breakpoint-down(desktop)
+                    width: fit-content
+                    a
+                        display: flex
+                        flex-direction: row-reverse
+                    a::after
+                        margin-right: $spacing0
         @if $footer-text-hidden
             &-social li
                 font-size: 0
