@@ -33,6 +33,10 @@ footer#document-footer
             margin-top: $spacing0
         @if $footer-icons-enabled
             &-social li
+                a
+                    display: flex
+                    align-items: center
+                    justify-content: flex-end
                 a.facebook
                     @include icon(social-facebook, after)
                 a.instagram
@@ -58,7 +62,6 @@ footer#document-footer
                 @include media-breakpoint-down(desktop)
                     width: fit-content
                     a
-                        display: flex
                         flex-direction: row-reverse
                     a::after
                         margin-right: $spacing0
