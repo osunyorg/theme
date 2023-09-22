@@ -1,20 +1,69 @@
+
+.pagefind-ui__toggle
+    @include meta
+    cursor: pointer
+    padding: half($spacing0) $spacing0
+.search
+    &__close
+        @include button-reset
+        @include meta
+        @include icon-block(close, after)
+        position: absolute
+        right: $spacing3
 #search
-    top: $spacing1
-    right: $spacing1
-    position: absolute
-    z-index: 100
-    max-width: 400px
+    background: $color-background
+    height: 100vh
+    left: 0
+    padding: $spacing4 $spacing3 $spacing3
+    position: fixed
+    top: 0
+    width: 100vw
+    z-index: 80
+    &[aria-hidden=true]
+        display: none
     .pagefind-ui
         &__search-input
-        &__clear
+            border-left: 0
+            border-right: 0
+            border-radius: 0
+            border-top: 0
+            padding-right: $spacing1 !important
+            position: relative
+        &__form
+            position: relative
+        &__message
+            text-align: right
+            position: absolute
+            top: $spacing3
+        &__search-clear
+            @include button-reset
+            color: $color-accent
         &__drawer
             z-index: 99
         &__results-area
-            position: fixed
-            background: $color-background
-            left: 0
-            right: 0
-            top: 200px
-            bottom: 0
-            padding: $spacing3
-            z-index: 101
+            margin-top: $spacing3
+        &__result
+            list-style: none
+            position: relative
+            &-thumb
+                grid-column: 1/3
+                @include media-breakpoint-down(md)
+                    display: none
+            + li
+                margin-top: half($spacing3)
+            @include media-breakpoint-up(md)
+                @include grid
+                &-inner
+                    grid-column: 3/9
+        &__inner 
+            mark
+                background-color: $color-accent
+        &__result-title a
+            @include h4
+            @include stretched-link
+        @include media-breakpoint-up(md)
+            &__form
+                width: col(8)
+            &__search-input,
+            &__message
+                    width: col(8,8)
