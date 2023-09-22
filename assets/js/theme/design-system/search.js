@@ -17,11 +17,16 @@ class Search {
     listen() {
         this.button.addEventListener('click', () => {
             this.toggle(true);
-            this.searchInput = this.element.querySelector('.pagefind-ui__search-input');
-            this.searchInput.focus();
+            this.closeButton.focus();        
+            this.removedItems = this.element.querySelector('.pagefind-ui__suppressed', '.pagefind-ui__search-clear');
+            if (this.removedItems) {
+                this.removedItems.remove();
+            }
         });
         this.closeButton.addEventListener('click', () => {
+            this.element.querySelector('form').reset();
             this.toggle(false);
+            this.button.focus();
         });
 
         window.addEventListener('keydown', (event) => {
@@ -30,7 +35,7 @@ class Search {
                 this.button.focus();
             } else if (event.key === "Tab" && this.state.isOpened) {
                 this.innerFocus(event);
-                event.preventDefault();
+                // event.preventDefault();
             }
         });
     }
@@ -38,7 +43,7 @@ class Search {
     innerFocus(event) {
         const focusables = 'a, button, input, textarea, select, details, [tabindex], [contenteditable="true"]';
         const elements = this.element.querySelectorAll(focusables);
-
+        
         const focusableInDialog = Array.from(elements).filter(element => element.tabIndex >= 0);
         const firstFocusable = focusableInDialog[0];
         const lastFocusable = focusableInDialog.at(-1);
@@ -48,17 +53,23 @@ class Search {
         }
         if (!this.element.contains(event.target) && event.shiftKey) {
             lastFocusable.focus();
+            event.preventDefault();
         }
-        else if (!this.element.contains(event.target)) {
+        else if (!this.element.contains(event.target)) {            
             firstFocusable.focus();
+            event.preventDefault();
         }
-        firstFocusable.focus();
     }
 
     toggle(open = !this.state.isOpened) {
         this.state.isOpened = open;
         this.element.setAttribute('aria-hidden', !this.state.isOpened);
         this.button.setAttribute('aria-expanded', this.state.isOpened);
+        if (open) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
     }
 }
 
