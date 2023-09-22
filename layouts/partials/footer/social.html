@@ -1,60 +1,62 @@
 {{ $menu := partial "GetMenu" "social" }}
-{{ $social_links := index site.Data.website.social }}
+{{ $site_social_links := index site.Data.website.social }}
 
-{{ if $social_links }}
-  <ul class="nav-social nav-level-1">
-    {{ with $social_links.mastodon}}
-    <li>
-      <a href="{{ . }}" rel="noreferrer" title="Mastodon" target="_blank" class="mastodon">Mastodon</a>
-    </li>
-    {{ end}}
-    {{ with $social_links.peertube}}
-    <li>
-      <a href="{{ . }}" rel="noreferrer" title="Peertube" target="_blank" class="peertube">Peertube</a>
-    </li>
-    {{ end}}
-    {{ with $social_links.x}}
-    <li>
-      <a href="{{ . }}" rel="noreferrer" title="X, ex-Twitter" target="_blank" class="x">X</a>
-    </li>
-    {{ end}}
-    {{ with $social_links.linkedin}}
-    <li>
-      <a href="{{ . }}" rel="noreferrer" title="LinkedIn" target="_blank" class="linkedin">LinkedIn</a>
-    </li>
-    {{ end}}
-    {{ with $social_links.youtube}}
-    <li>
-      <a href="{{ . }}" rel="noreferrer" title="Youtube" target="_blank" class="youtube">Youtube</a>
-    </li>
-    {{ end}}
-    {{ with $social_links.vimeo}}
-    <li>
-      <a href="{{ . }}" rel="noreferrer" title="Vimeo" target="_blank" class="vimeo">Vimeo</a>
-    </li>
-    {{ end}}
-    {{ with $social_links.instagram}}
-    <li>
-      <a href="{{ . }}" rel="noreferrer" title="Instagram" target="_blank" class="instagram">Instagram</a>
-    </li>
-    {{ end}}
-    {{ with $social_links.facebook}}
-    <li>
-      <a href="{{ . }}" rel="noreferrer" title="" target="_blank" class="facebook">Facebook</a>
-    </li>
-    {{ end}}
-    {{ with $social_links.tiktok}}
-    <li>
-      <a href="{{ . }}" rel="noreferrer" title="TikTok" target="_blank" class="tiktok">TikTok</a>
-    </li>
-    {{ end}}
-  </ul>
-{{ else if $menu }}
+
+{{ if $menu }}
   {{ partial "commons/menu.html"
     (dict
       "kind"        "social"
       "level"       1
       "class"       "nav-social"
-    )}}
+  )}}
 {{ end }}
 
+{{ if $site_social_links }}
+  <ul class="footer-social site-links">
+    {{ with $site_social_links.mastodon}}
+    <li class="mastodon">
+      <a href="{{ . }}" rel="noreferrer" title="Mastodon" target="_blank">Mastodon</a>
+    </li>
+    {{ end}}
+    {{ with $site_social_links.peertube}}
+    <li class="peertube">
+      <a href="{{ . }}" rel="noreferrer" title="Peertube" target="_blank">Peertube</a>
+    </li>
+    {{ end}}
+    {{ with $site_social_links.x}}
+    <li class="x">
+      <a href="{{ . }}" rel="noreferrer" title="X, ex-Twitter" target="_blank">X</a>
+    </li>
+    {{ end}}
+    {{ with $site_social_links.linkedin}}
+    <li class="linkedin">
+      <a href="{{ . }}" rel="noreferrer" title="LinkedIn" target="_blank">LinkedIn</a>
+    </li>
+    {{ end}}
+    {{ with $site_social_links.youtube}}
+    <li class="youtube">
+      <a href="{{ . }}" rel="noreferrer" title="Youtube" target="_blank">Youtube</a>
+    </li>
+    {{ end}}
+    {{ with $site_social_links.vimeo}}
+    <li class="vimeo">
+      <a href="{{ . }}" rel="noreferrer" title="Vimeo" target="_blank">Vimeo</a>
+    </li>
+    {{ end}}
+    {{ with $site_social_links.instagram}}
+    <li class="instagram">
+      <a href="{{ . }}" rel="noreferrer" title="Instagram" target="_blank">Instagram</a>
+    </li>
+    {{ end}}
+    {{ with $site_social_links.facebook}}
+    <li class="facebook">
+      <a href="{{ . }}" rel="noreferrer" title="" target="_blank">Facebook</a>
+    </li>
+    {{ end}}
+    {{ with $site_social_links.tiktok}}
+    <li class="tiktok">
+      <a href="{{ . }}" rel="noreferrer" title="TikTok" target="_blank">TikTok</a>
+    </li>
+    {{ end}}
+  </ul>
+{{ end }}

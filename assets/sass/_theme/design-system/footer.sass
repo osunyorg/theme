@@ -32,41 +32,45 @@ footer#document-footer
             display: block
             margin-top: $spacing0
         @if $footer-icons-enabled
-            &-social li
-                a
-                    display: flex
+            &-social 
+                .nav-social + .site-links
+                    margin-top: $spacing1
+                &.site-links li
                     align-items: center
+                    display: flex
                     justify-content: flex-end
-                a.facebook
-                    @include icon(social-facebook, after)
-                a.instagram
-                    @include icon(social-instagram, after)
-                a.linkedin
-                    @include icon(social-linkedin, after)
-                a.mastodon
-                    @include icon(social-mastodon, after)
-                a.youtube
-                    @include icon(social-youtube, after)
-                a.x
-                    @include icon(social-x, after)
-                a.peertube
-                    @include icon(social-peertube, after)
-                a.vimeo
-                    @include icon(social-vimeo, after)
-                a.tiktok
-                    @include icon(social-tiktok, after)
-                a::after
-                    font-size: $h3-size
-                    @include media-breakpoint-up(md)
-                        margin-left: $spacing0
-                @include media-breakpoint-down(desktop)
-                    width: fit-content
+                    position: relative
                     a
+                        @include stretched-link
+                    &.facebook
+                        @include icon(social-facebook, after)
+                    &.instagram
+                        @include icon(social-instagram, after)
+                    &.linkedin
+                        @include icon(social-linkedin, after)
+                    &.mastodon
+                        @include icon(social-mastodon, after)
+                    &.youtube
+                        @include icon(social-youtube, after)
+                    &.x
+                        @include icon(social-x, after)
+                    &.peertube
+                        @include icon(social-peertube, after)
+                    &.vimeo
+                        @include icon(social-vimeo, after)
+                    &.tiktok
+                        @include icon(social-tiktok, after)
+                    &::after
+                        font-size: $h3-size
+                        @include media-breakpoint-up(md)
+                            padding-left: $spacing0
+                    @include media-breakpoint-down(desktop)
+                        width: fit-content
                         flex-direction: row-reverse
-                    a::after
-                        margin-right: $spacing0
+                        &::after
+                            margin-right: $spacing0
         @if $footer-text-hidden
-            &-social li
+            &-social.site-links li
                 font-size: 0
 
     @include media-breakpoint-down(desktop)
