@@ -24,10 +24,10 @@
     background: $color-background
     height: 100vh
     left: 0
-    padding-top: $spacing4
     padding-bottom: $spacing3
-    padding-right: $spacing1
     padding-left: $spacing1
+    padding-right: $spacing1
+    padding-top: $spacing4
     position: fixed
     overflow: auto
     top: 0
@@ -36,13 +36,14 @@
     @include media-breakpoint-up(md)
         padding-right: $spacing3
         padding-left: $spacing3
+        padding-top: $spacing3
     &[aria-hidden=true]
         display: none
     .pagefind-ui
         &::before
             content: ""
             background: $color-background
-            height: calc(#{$spacing3} + #{$spacing1} + #{$spacing4})
+            height: calc(#{$spacing3} + #{$spacing1} + #{$spacing2} + #{$spacing1})
             width: 100%
             position: fixed
             top: 0
@@ -71,7 +72,7 @@
             text-align: right
             z-index: 11
             position: fixed
-            top: calc(#{$spacing2} + #{$spacing4})
+            top: $spacing4
         &__search-clear,
         &__suppressed
             display: none
@@ -108,7 +109,7 @@
             &__message
                 width: col(8,8)
             &__results-area
-                padding-top: $spacing4
+                padding-top: calc(#{$spacing4} - #{$spacing1})
             &__search-input,
             &__message
                 width: col(8)
@@ -116,5 +117,7 @@
             &__search-input,
             &__message
                 width: calc(100% - #{$spacing2})
+            &__message
+                top: calc(#{$spacing4} + #{$spacing2})
             &__results-area
                 padding-top: calc(#{$spacing3} + #{half($spacing0)})
