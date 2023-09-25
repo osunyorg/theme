@@ -64,7 +64,7 @@
   {{ end -}}
   {{ if and (eq $kind "primary") (site.Params.search.active)}}
     <button class="pagefind-ui__toggle" aria-expanded="false">
-      {{ i18n (printf "commons.search.title") }}
+      {{- i18n (printf "commons.search.title") -}}
     </button>
     {{- partial "header/search.html" . -}}
   {{ end }}

@@ -5,9 +5,14 @@
     @include meta
     box-shadow: none !important
 .pagefind-ui__toggle
+    @include icon(search, after)
     cursor: pointer
     padding: half($spacing0) $spacing0
     text-align: left
+    &::after
+        line-height: inherit
+        font-size: $body-size-desktop
+        margin-left: px2rem(8)
     @include media-breakpoint-down(md)
         border-bottom: 1px solid #adb5bd
         padding: $spacing1 0
@@ -51,12 +56,18 @@
             z-index: 5
             @include media-breakpoint-down(md)
                 height: calc(#{$spacing3} + #{half($spacing0)} + #{$spacing4})
+        &__form
+            @include icon(search, after)
+            &::after
+                position: absolute
+                right: 0
+                z-index: 7
         &__search-input
             border-left: 0
             border-right: 0
             border-radius: 0
             border-top: 0
-            padding-right: $spacing1 !important
+            padding-right: half($spacing1) !important
             position: fixed
             z-index: 6
             @include media-breakpoint-down(md)
@@ -107,12 +118,9 @@
                 width: col(8)
             &__search-input,
             &__message
-                width: col(8,8)
+                width: calc(#{col(8,12)} - #{$spacing3} - #{$spacing1})
             &__results-area
                 padding-top: calc(#{$spacing4} - #{$spacing1})
-            &__search-input,
-            &__message
-                width: col(8)
         @include media-breakpoint-down(md)
             &__search-input,
             &__message
