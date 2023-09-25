@@ -21,7 +21,13 @@
     @include icon-block(close, after)
     position: fixed
     right: $spacing3
+    padding: 0
     z-index: 9
+    &::after
+        display: inline-flex
+        justify-content: center
+        margin-left: $spacing0
+        width: px2rem(15)
     @include media-breakpoint-down(md)
         right: 0
         top: half($spacing0)
@@ -76,6 +82,7 @@
             border-right: 0
             border-radius: 0
             border-top: 0
+            padding-left: 0
             padding-right: half($spacing1) !important
             position: fixed
             z-index: 6
