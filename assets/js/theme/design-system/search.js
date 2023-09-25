@@ -15,7 +15,6 @@ class Search {
     }
 
     listen() {
-        
         this.button.addEventListener('click', () => {
             this.toggle(true);      
             this.removedItems = this.element.querySelector('.pagefind-ui__suppressed', '.pagefind-ui__search-clear');

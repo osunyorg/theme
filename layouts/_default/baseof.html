@@ -15,6 +15,12 @@
     {{- partial "header/accessibility.html" -}}
     {{- partial "header/header.html" . -}}
     <main{{ if .Params.contents }} class="page-with-blocks"{{ end }} id="main" tabindex="-1">
+      {{ if and (site.Params.search.active) (eq site.Params.search.position "fixed")}}
+        <button id="search-button" class="pagefind-ui__toggle pagefind-fixed " aria-expanded="false">
+          {{- i18n (printf "commons.search.title") -}}
+        </button>
+        {{- partial "header/search.html" . -}}
+      {{ end }}
       {{- block "main" . }}{{- end }}
       {{- partial "hooks/before-main-end" . -}}
     </main>
