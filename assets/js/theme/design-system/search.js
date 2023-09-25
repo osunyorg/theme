@@ -3,7 +3,6 @@ class Search {
         this.button = button;
         this.element = document.querySelector('.search__modal');
         this.closeButton = this.element.querySelector('.search__close');
-        // this.searchContent = this.element.querySelector('.pagefind-ui__drawer');
 
         if (!this.element) {
             return;
@@ -16,9 +15,9 @@ class Search {
     }
 
     listen() {
+        
         this.button.addEventListener('click', () => {
-            this.toggle(true);
-            this.closeButton.focus();        
+            this.toggle(true);      
             this.removedItems = this.element.querySelector('.pagefind-ui__suppressed', '.pagefind-ui__search-clear');
             if (this.removedItems) {
                 this.removedItems.remove();
@@ -26,10 +25,7 @@ class Search {
         });
         this.closeButton.addEventListener('click', () => {
             this.element.querySelector('form').reset();
-            this.element.querySelector('input').blur();
-            // this.searchContent.classList.add('pagefind-ui__hidden');
             this.toggle(false);
-            this.button.focus();
         });
 
         window.addEventListener('keydown', (event) => {
@@ -67,7 +63,11 @@ class Search {
         this.state.isOpened = open;
         this.element.setAttribute('aria-hidden', !this.state.isOpened);
         this.button.setAttribute('aria-expanded', this.state.isOpened);
+
         if (open) {
+            this.input = this.element.querySelector('input');
+            this.input.focus();
+
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'unset';
