@@ -14,9 +14,10 @@
         line-height: inherit
         margin-left: px2rem(8)
     @include media-breakpoint-down(md)
-        border-bottom: 1px solid #adb5bd
-        padding: $spacing1 0
-        width: 100%
+        &:not(.pagefind-fixed)
+            border-bottom: 1px solid #adb5bd
+            padding: $spacing1 0
+            width: 100%
 .search__close
     @include icon-block(close, after)
     position: fixed
@@ -29,7 +30,7 @@
         margin-left: $spacing0
         width: px2rem(15)
     @include media-breakpoint-down(md)
-        right: 0
+        right: $spacing1
         top: half($spacing0)
 #search
     background: $color-background
@@ -156,3 +157,8 @@
     &::after
         position: absolute
         right: $spacing0
+    @include media-breakpoint-down(md)
+        left: 0
+        width: 100vw
+        &.in-page-with-toc
+            bottom: px2rem(44)

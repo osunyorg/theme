@@ -15,6 +15,9 @@ class Search {
     }
 
     listen() {
+        if (document.body.querySelector(".toc-cta")) {
+            this.button.classList.add('in-page-with-toc');
+        }
         this.button.addEventListener('click', () => {
             this.toggle(true);      
             this.removedItems = this.element.querySelector('.pagefind-ui__suppressed', '.pagefind-ui__search-clear');
