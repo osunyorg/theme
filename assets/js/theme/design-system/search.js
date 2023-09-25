@@ -3,6 +3,7 @@ class Search {
         this.button = button;
         this.element = document.querySelector('.search__modal');
         this.closeButton = this.element.querySelector('.search__close');
+        // this.searchContent = this.element.querySelector('.pagefind-ui__drawer');
 
         if (!this.element) {
             return;
@@ -25,6 +26,8 @@ class Search {
         });
         this.closeButton.addEventListener('click', () => {
             this.element.querySelector('form').reset();
+            this.element.querySelector('input').blur();
+            // this.searchContent.classList.add('pagefind-ui__hidden');
             this.toggle(false);
             this.button.focus();
         });
@@ -35,7 +38,6 @@ class Search {
                 this.button.focus();
             } else if (event.key === "Tab" && this.state.isOpened) {
                 this.innerFocus(event);
-                // event.preventDefault();
             }
         });
     }

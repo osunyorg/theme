@@ -49,19 +49,26 @@
             content: ""
             background: $color-background
             height: calc(#{$spacing3} + #{$spacing1} + #{$spacing2} + #{$spacing1})
-            width: 100%
+            left: 0
             position: fixed
             top: 0
-            left: 0
+            width: 100%
             z-index: 5
             @include media-breakpoint-down(md)
                 height: calc(#{$spacing3} + #{half($spacing0)} + #{$spacing4})
         &__form
             @include icon(search, after)
             &::after
+                align-items: center
+                display: flex
+                height: half($spacing3)
                 position: absolute
                 right: 0
+                top: 0
                 z-index: 7
+                @include media-breakpoint-down(md)
+                    right: $spacing1
+                    top: $spacing4
         &__search-input
             border-left: 0
             border-right: 0
