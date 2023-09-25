@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-const shell = require("shelljs")
+const shell = require("shelljs");
 
 console.log("");
 console.log(" .=*#%%#*=        -*#%%#*=.      =+-      ++.     .+ .+#%%#+.     :++      -+-      ");
