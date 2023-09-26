@@ -12,6 +12,14 @@
     {{ partial "footer/social.html" }}
   </div>
   <div class="footer-legals">
+    {{ if and (site.Params.search.active) (eq site.Params.search.position "footer")}}
+      {{ partial "header/search.html"
+        (dict
+            "position" "footer"
+            "context" .
+        )
+      }}
+    {{ end }}
     {{ partial "footer/legals.html" }}
   </div>
 </div>
