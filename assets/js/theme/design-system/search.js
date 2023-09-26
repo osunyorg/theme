@@ -1,8 +1,10 @@
 class Search {
-    constructor(button) {
+    constructor(button, pageFind) {
         this.button = button;
         this.element = document.querySelector('.search__modal');
         this.closeButton = this.element.querySelector('.search__close');
+        this.searchInstance = pageFind;
+
 
         if (!this.element) {
             return;
@@ -26,7 +28,7 @@ class Search {
             }
         });
         this.closeButton.addEventListener('click', () => {
-            this.element.querySelector('form').reset();
+            this.searchInstance.triggerSearch(' ');
             this.toggle(false);
         });
 
@@ -78,7 +80,17 @@ class Search {
 }
 
 // Selectors
-(function () {
-    const searchButton = document.querySelector(".pagefind-ui__toggle");
-    new Search(searchButton);
-})();
+window.addEventListener('DOMContentLoaded', (event) => {
+    const pageFindSearch = document.querySelector("#search");
+    
+    if (pageFindSearch) {
+        let pageFind = new PagefindUI({ element: pageFindSearch, showSubResults: true });
+        (function () {
+            const searchButton = document.querySelector(".pagefind-ui__toggle");
+            new Search(searchButton, pageFind);
+        })();
+    } 
+    else {
+        return;
+    }
+});
