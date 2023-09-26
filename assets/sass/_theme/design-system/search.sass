@@ -13,7 +13,7 @@
         font-size: $body-size-desktop
         line-height: inherit
         margin-left: px2rem(8)
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         &.pagefind-menu
             border-bottom: 1px solid #adb5bd
             padding: $spacing1 0
@@ -68,12 +68,12 @@
             &::after
                 align-items: center
                 display: flex
-                height: half($spacing3)
                 padding-right: px2rem(2)
                 position: absolute
                 pointer-events: none
                 right: 0
-                top: 0
+                top: half($spacing0)
+                transform: translate(0,20%)
                 z-index: 7
                 @include media-breakpoint-down(md)
                     right: $spacing1
@@ -167,7 +167,3 @@
 
 .pagefind-footer
     padding: 0
-    margin-bottom: calc(#{$spacing3} + #{half($spacing3)})
-    @include media-breakpoint-down(md)
-        margin-bottom: $spacing3
-

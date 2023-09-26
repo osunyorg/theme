@@ -105,9 +105,6 @@ header#document-header
             position: relative
             text-transform: uppercase
             line-height: 1
-            @include media-breakpoint-down(desktop)
-                display: flex
-                align-items: center
             &:focus
                 box-shadow: none
             &:focus-visible
@@ -115,6 +112,9 @@ header#document-header
                 outline-offset: 5px
                 outline-style: dashed
                 outline-width: 1px
+            @include media-breakpoint-down(desktop)
+                display: flex
+                align-items: center
             span:first-of-type
                 @include meta
                 font-size: 14px

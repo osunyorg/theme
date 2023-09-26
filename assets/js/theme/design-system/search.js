@@ -28,7 +28,9 @@ class Search {
             }
         });
         this.closeButton.addEventListener('click', () => {
-            this.searchInstance.triggerSearch(' ');
+            this.input = this.element.querySelector('input');
+            this.input.value = "";
+            this.searchInstance.triggerSearch(" ");
             this.toggle(false);
         });
 

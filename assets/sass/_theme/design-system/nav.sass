@@ -131,31 +131,12 @@
                             margin-top: $spacing1
 
         .header-i18n
-            position: relative
-            [role="button"]
+            @include dropdown-i18n
+            [role="button"],
                 @include icon(globe, after)
                 &[aria-expanded][aria-expanded="true"]
                     &::after
                         transform: none
-            .dropdown-menu
-                margin-top: $header-nav-padding-y
-                padding-left: $spacing1
-                padding-bottom: $spacing0
-                padding-top: $spacing0
-                padding-right: $spacing1
-                right: 0
-            li a
-                padding-bottom: half($spacing0)
-                padding-top: half($spacing0)
-                display: block
-                &.is-checked
-                    display: flex
-                    justify-content: space-between
-                    align-items: center
-                    gap: $spacing2
-                    text-decoration: none !important
-                    @include icon(caret, after)
-                        transform: rotate(-14deg) skewX(-30deg)
 
     @include media-breakpoint-down(desktop)
         &.is-opened
