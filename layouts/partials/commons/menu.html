@@ -24,6 +24,9 @@
     {{ if eq $context.RelPermalink .target }}
       {{ $linkClass = "active" }}
     {{ end }}
+    {{ if eq $kind "social" }}
+      {{- $itemClass = printf .title | lower -}}
+    {{ end }}
     {{- if gt (len .children) 0 -}}
       {{- $itemClass = printf "%shas-children" $itemClass -}}
     {{- end -}}
