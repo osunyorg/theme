@@ -14,7 +14,7 @@
         line-height: inherit
         margin-left: px2rem(8)
     @include media-breakpoint-down(md)
-        &:not(.pagefind-fixed)
+        &.pagefind-menu
             border-bottom: 1px solid #adb5bd
             padding: $spacing1 0
             width: 100%
@@ -166,4 +166,6 @@
 .pagefind-footer
     padding: 0
     margin-bottom: calc(#{$spacing3} + #{half($spacing3)})
+    @include media-breakpoint-down(md)
+        margin-bottom: $spacing3
 
