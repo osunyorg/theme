@@ -1,10 +1,17 @@
+// const pagefind = await import("/pagefind/pagefind.js");
+// await pagefind.options({
+//     baseUrl: "/",
+//     // ... more search options
+// });
+
+// console.log(pagefind)
+
 class Search {
     constructor(button, pageFind) {
         this.button = button;
         this.element = document.querySelector('.search__modal');
         this.closeButton = this.element.querySelector('.search__close');
         this.searchInstance = pageFind;
-
 
         if (!this.element) {
             return;
@@ -82,17 +89,20 @@ class Search {
 }
 
 // Selectors
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener('DOMContentLoaded', () => {
     const pageFindSearch = document.querySelector("#search");
-    
+
+    if (typeof PagefindUI == "undefined") return;
+
     if (pageFindSearch) {
-        let pageFind = new PagefindUI({ element: pageFindSearch, showSubResults: true });
+        let pageFind = new PagefindUI({
+            element: pageFindSearch,
+            showSubResults: true
+        });
         (function () {
             const searchButton = document.querySelector(".pagefind-ui__toggle");
             new Search(searchButton, pageFind);
         })();
-    } 
-    else {
-        return;
     }
+
 });
