@@ -48,14 +48,14 @@
     @include media-breakpoint-up(md)
         padding-right: $spacing3
         padding-left: $spacing3
-        padding-top: $spacing3
+        padding-top: calc(#{half($spacing3)} - #{half($spacing0)} + #{px2rem(2)})
     &[aria-hidden=true]
         display: none
     .pagefind-ui
         &::before
             content: ""
             background: $color-background
-            height: calc(#{$spacing3} + #{$spacing1} + #{$spacing2} + #{$spacing1})
+            height: calc(#{$spacing3} + #{$spacing1} + #{$spacing1})
             left: 0
             position: fixed
             top: 0
@@ -100,7 +100,7 @@
             text-align: right
             z-index: 11
             position: fixed
-            top: $spacing4
+            top: calc(#{half($spacing4)} + (#{$spacing1} / 2))
         &__search-clear,
         &__suppressed
             display: none
