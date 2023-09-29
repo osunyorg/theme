@@ -1,11 +1,3 @@
-// const pagefind = await import("/pagefind/pagefind.js");
-// await pagefind.options({
-//     baseUrl: "/",
-//     // ... more search options
-// });
-
-// console.log(pagefind)
-
 class Search {
     constructor(button, pageFind) {
         this.state = {
