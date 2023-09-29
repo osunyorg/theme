@@ -1,10 +1,10 @@
 {{ $logo_index := .logo_index }}
 
 <div class="map" data-marker-icon="{{ $.Site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}">
-  {{- range .partners }}
+  {{- range .organizations }}
     {{ if .slug }}
       {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
-        {{ template "partner" (dict
+        {{ template "organization" (dict
             "title" .Title
             "url" .Permalink
             "logo" (index .Params $logo_index)

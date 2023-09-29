@@ -1,6 +1,6 @@
-const partnersMaps = document.querySelectorAll('.block-partners--map');
+const organizationsMaps = document.querySelectorAll('.block-partners--map, .block-organizations--map');
 
-class BlockPartners {
+class BlockOrganizations {
     constructor (dom) {
         this.dom = dom;
 
@@ -10,36 +10,36 @@ class BlockPartners {
         this.markers = [];
         this.setMap = false;
         this.content = this.dom.querySelector('.map');
-        this.partnersList = this.content.querySelectorAll('.organization');
+        this.organizationsList = this.content.querySelectorAll('.organization');
         let map = L.map(this.content, {
             scrollWheelZoom: false
         });
 
-        this.classPartner = 'organization';
+        this.classOrganization = 'organization';
         this.classHidden = 'hidden';
 
         this.themeMarker = L.icon({
             iconUrl: this.content.getAttribute('data-marker-icon') || '/assets/images/map-marker.svg',
             iconSize: [17, 26],
         });
-        this.setPartners(map);
+        this.setOrganizations(map);
 
         if (this.setMap) {
             this.listen(map);
             this.getMapBounds(map);
-        } else { 
+        } else {
             this.dom.classList.add(this.classHidden);
             this.dom.setAttribute("aria-hidden", "true")
             return;
         }
     }
-    setPartners (map) {
-        this.partnersList.forEach((partner) => {
-            let latitude = parseFloat(partner.getAttribute('data-latitude')),
-                longitude = parseFloat(partner.getAttribute('data-longitude')),
+    setOrganizations (map) {
+        this.organizationsList.forEach((organization) => {
+            let latitude = parseFloat(organization.getAttribute('data-latitude')),
+                longitude = parseFloat(organization.getAttribute('data-longitude')),
                 mapLocation = [latitude, longitude];
             if (!!latitude && !!longitude) {
-                this.newMarker(map, mapLocation, partner);
+                this.newMarker(map, mapLocation, organization);
                 this.setMap = true;
             }
         });
@@ -51,12 +51,12 @@ class BlockPartners {
         }).addTo(map);
     }
 
-    newMarker(map, mapLocation, partner) {
+    newMarker(map, mapLocation, organization) {
         let marker = new L.marker(mapLocation, {
             draggable: false,
             icon: this.themeMarker
         });
-        marker.bindPopup('<article class="' + this.classPartner + '">' + partner.innerHTML + '</article>').openPopup();
+        marker.bindPopup('<article class="' + this.classOrganization + '">' + organization.innerHTML + '</article>').openPopup();
         map.addLayer(marker);
         this.markers.push(marker);
     }
@@ -68,6 +68,6 @@ class BlockPartners {
 
 }
 
-partnersMaps.forEach((dom) => {
-    new BlockPartners(dom);
+organizationsMaps.forEach((dom) => {
+    new BlockOrganizations(dom);
 });

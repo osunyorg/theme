@@ -1,0 +1,72 @@
+{{- $template := .block.template -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+{{- $charLimit := 30 -}}
+{{- $isColumn := false -}}
+
+{{- with .block.data -}}
+  {{- $with_link := .with_link -}}
+  {{- $with_photo := .with_photo -}}
+  <div class="block block-people{{ if $title }} block-with-title{{ end }}">
+    <div class="container">
+      <div class="block-content">
+        {{ if (or $title .description) -}}
+          <div class="top">
+            {{- if $title -}}
+              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
+            {{ end -}}
+            {{- if .description }}
+              <div class="description">
+                {{ partial "PrepareHTML"  .description }}
+              </div>
+            {{ end -}}
+          </div>
+        {{- end }}
+        <div class="persons">
+          {{- range .persons -}}
+            {{ $person := site.GetPage (printf "/persons/%s" .slug) }}
+
+            <article class="person" itemscope itemtype="https://schema.org/Person">
+              <div class="description">
+                <h3 class="name" itemprop="name">
+                  {{ if $with_link }}
+                  <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
+                    {{ end }}
+                    {{- partial "PrepareHTML" $person.Title -}}
+                    {{ if $with_link }}
+                  </a>
+                  {{ end }}
+                </h3>
+                <p itemprop="jobTitle"
+                    {{- if $person.Params.summary -}}
+                      {{ $summaryLength := len $person.Params.summary}}
+                      {{- if ge $summaryLength $charLimit -}} data-column="true" {{- end -}}
+                    {{- end -}}>
+                  {{- if (partial "GetTextFromHTML" .role) }}
+                    {{ partial "PrepareHTML" .role }}
+                  {{- else if partial "GetTextFromHTML" $person.Params.summary }}
+                    {{- partial "PrepareHTML" $person.Params.summary -}}
+                  {{ else if (partial "GetTextFromHTML" $person.Content) }}
+                    {{- partial "GetTruncateContent" ( dict "text" $person.Content ) -}}
+                  {{ end -}}
+                </p>
+              </div>
+              {{- if $with_photo }}
+                <div class="avatar" itemprop="image">
+                  {{- if $person.Params.image }}
+                    {{ partial "commons/image.html"
+                      (dict
+                        "image"    $person.Params.image
+                        "sizes"    site.Params.image_sizes.blocks.people
+                      )}}
+                  {{ end -}}
+                </div>
+              {{ end -}}
+            </article>
+
+          {{- end -}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{- end -}}

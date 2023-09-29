@@ -1,0 +1,25 @@
+{{ $logo_index := .logo_index }}
+{{ $with_link := .with_link }}
+
+<div class="grid organizations">
+  {{- range .organizations }}
+    {{ if .slug }}
+      {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
+        {{ template "organization" (dict
+            "title" .Title
+            "url" .Permalink
+            "logo" (index .Params $logo_index)
+            "with_link" $with_link
+          )}}
+      {{ end }}
+    {{ else }}
+      {{ template "organization" (dict
+          "title" .name
+          "url" .url
+          "external" true
+          "logo" .logo
+          "with_link" $with_link
+        )}}
+    {{ end }}
+  {{ end -}}
+</div>
