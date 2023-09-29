@@ -8,6 +8,9 @@
 
 class Search {
     constructor(button, pageFind) {
+        this.state = {
+            isOpened: false
+        };
         this.button = button;
         this.element = document.querySelector('.search__modal');
         this.closeButton = this.element.querySelector('.search__close');
@@ -16,9 +19,8 @@ class Search {
         if (!this.element) {
             return;
         }
-        this.state = {
-            isOpened: false
-        };
+
+        this.input = this.element.querySelector('input');
 
         this.listen();
     }
@@ -28,16 +30,14 @@ class Search {
             this.button.classList.add('in-page-with-toc');
         }
         this.button.addEventListener('click', () => {
-            this.toggle(true);      
+            this.toggle(true);
             this.removedItems = this.element.querySelector('.pagefind-ui__suppressed', '.pagefind-ui__search-clear');
             if (this.removedItems) {
                 this.removedItems.remove();
             }
         });
         this.closeButton.addEventListener('click', () => {
-            this.input = this.element.querySelector('input');
-            this.input.value = "";
-            this.searchInstance.triggerSearch(" ");
+            this.clearSearch();
             this.toggle(false);
         });
 
@@ -51,6 +51,17 @@ class Search {
         });
     }
 
+    clearSearch() {
+        const button = this.element.querySelector('.pagefind-ui__button');
+        this.input.value = "";
+        this.searchInstance.triggerSearch(false);
+        this.element.querySelector('.pagefind-ui__message').innerText = "";
+        this.element.querySelector('.pagefind-ui__results').innerHTML = "";
+        
+        if (button) {
+            button.parentElement.removeChild(button);
+        }
+    }
     innerFocus(event) {
         const focusables = 'a, button, input, textarea, select, details, [tabindex], [contenteditable="true"]';
         const elements = this.element.querySelectorAll(focusables);
