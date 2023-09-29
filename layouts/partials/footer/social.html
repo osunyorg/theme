@@ -13,6 +13,16 @@
 
 {{ if $site_social_links }}
   <ul class="footer-social site-links">
+    {{ with $site_social_links.email}}
+    <li class="email">
+      <a href="mailto:{{ . }}" rel="noreferrer" title="Email" target="_blank">Email</a>
+    </li>
+    {{ end}}
+    {{ with $site_social_links.github}}
+    <li class="github">
+      <a href="{{ . }}" rel="noreferrer" title="Github" target="_blank">Github</a>
+    </li>
+    {{ end}}
     {{ with $site_social_links.mastodon}}
     <li class="mastodon">
       <a href="{{ . }}" rel="noreferrer" title="Mastodon" target="_blank">Mastodon</a>
