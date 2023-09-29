@@ -29,7 +29,7 @@
         justify-content: center
         margin-left: $spacing0
         width: px2rem(15)
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         right: $spacing1
         top: half($spacing0)
 #search
@@ -45,7 +45,7 @@
     top: 0
     width: 100vw
     z-index: 80
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(desktop)
         padding-right: $spacing3
         padding-left: $spacing3
         padding-top: calc(#{half($spacing3)} - #{half($spacing0)} + #{px2rem(2)})
@@ -61,23 +61,19 @@
             top: 0
             width: 100%
             z-index: 5
-            @include media-breakpoint-down(md)
+            @include media-breakpoint-down(desktop)
                 height: calc(#{$spacing3} + #{half($spacing0)} + #{$spacing4})
         &__form
             @include icon(search, after)
             &::after
-                align-items: center
-                display: flex
                 padding-right: px2rem(2)
-                position: absolute
+                position: fixed
                 pointer-events: none
-                right: 0
-                top: half($spacing0)
                 transform: translate(0,20%)
-                z-index: 7
-                @include media-breakpoint-down(md)
+                z-index: 9
+                @include media-breakpoint-down(desktop)
                     right: $spacing1
-                    top: $spacing4
+                    top: calc(#{$spacing4} + #{half($spacing0)})
         &__search-input
             border-left: 0
             border-right: 0
@@ -87,7 +83,7 @@
             padding-right: half($spacing1) !important
             position: fixed
             z-index: 6
-            @include media-breakpoint-down(md)
+            @include media-breakpoint-down(desktop)
                 margin-bottom: $spacing1
         &__button[type="button"]
             @include button-reset
@@ -115,11 +111,11 @@
                 > *
                     aspect-ratio: 3/2
                     object-fit: cover
-                @include media-breakpoint-down(md)
+                @include media-breakpoint-down(desktop)
                     display: none
             + li
                 margin-top: half($spacing3)
-            @include media-breakpoint-up(md)
+            @include media-breakpoint-up(desktop)
                 @include grid
                 &-inner
                     grid-column: 4/13
@@ -129,16 +125,19 @@
         &__result-title a
             @include h4
             @include stretched-link
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             &__form
                 position: relative
                 width: col(8)
+                &::after
+                    left: calc(#{col(8)} - #{$spacing2} + #{$spacing0})
+                    top: calc(#{$spacing2} - #{$spacing0})
             &__search-input,
             &__message
                 width: calc(#{col(8,12)} - #{$spacing3} - #{$spacing1})
             &__results-area
                 padding-top: calc(#{$spacing4} - #{$spacing1})
-        @include media-breakpoint-down(md)
+        @include media-breakpoint-down(desktop)
             &__search-input,
             &__message
                 width: calc(100% - #{$spacing2})
@@ -157,7 +156,7 @@
     &::after
         position: absolute
         right: $spacing0
-    @include media-breakpoint-down(md)
+    @include media-breakpoint-down(desktop)
         left: 0
         width: 100vw
         &.in-page-with-toc
