@@ -53,11 +53,18 @@ class Search {
 
     clearSearch() {
         const button = this.element.querySelector('.pagefind-ui__button');
+        const message =  this.element.querySelector('.pagefind-ui__message');
+        const results = this.element.querySelector('.pagefind-ui__results')
+            
         this.input.value = "";
         this.searchInstance.triggerSearch(false);
-        this.element.querySelector('.pagefind-ui__message').innerText = "";
-        this.element.querySelector('.pagefind-ui__results').innerHTML = "";
-        
+
+        if (message) {
+            message.innerText = "";
+        }
+        if (results) {
+            results.innerHTML = "";
+        }
         if (button) {
             button.parentElement.removeChild(button);
         }

@@ -80,9 +80,10 @@
 <meta name="twitter:site" content="@{{ site.Data.journal.twitter }}" />
 {{ end -}}
 
-{{/*  Rajouter la condition si pagefind actif  */}}
-{{ with $pagefindImage }}
-  <meta property="pagefind:image" content="" data-pagefind-meta='image:{{ . }}'>
+{{ if site.Params.search.active }}
+  {{ with $pagefindImage }}
+    <meta property="pagefind:image" content="" data-pagefind-meta='image:{{ . }}'>
+  {{ end }}
 {{ end }}
 
 {{/*
