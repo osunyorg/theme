@@ -2,8 +2,8 @@
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 
-{{- $class := "block block-partners" -}}
-{{- $layout_class := "block-partners--grid" -}}
+{{- $class := "block block-organizations" -}}
+{{- $layout_class := "block-organizations--grid" -}}
 {{ $logo_index := "logo" }}
 {{ $longitude := "" }}
 {{ $latitude := "" }}
@@ -17,10 +17,10 @@
   {{- $with_link := .with_link -}}
 
   {{- if $layout -}}
-    {{- $layout_class = printf "block-partners--%s" $layout -}}
+    {{- $layout_class = printf "block-organizations--%s" $layout -}}
   {{- end -}}
 
-  <div class="block block-partners{{ if $title }} block-with-title{{ end }} {{ $layout_class }}">
+  <div class="block block-organizations{{ if $title }} block-with-title{{ end }} {{ $layout_class }}">
     <div class="container">
       <div class="block-content">
         {{ if or $title .description -}}
@@ -36,8 +36,8 @@
           </div>
         {{- end }}
 
-        {{- partial (printf "blocks/templates/partners/%s.html" $layout) (dict 
-            "partners" .partners
+        {{- partial (printf "blocks/templates/organizations/%s.html" $layout) (dict
+            "organizations" .organizations
             "logo_index" $logo_index
             "with_link" $with_link
           ) }}
@@ -47,7 +47,7 @@
 {{- end -}}
 
 
-{{- define "partner" -}}
+{{- define "organization" -}}
 <article class="organization" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
   {{ $title := "" }}
   {{ if .title }}
@@ -68,7 +68,7 @@
         (dict
           "image"    .logo
           "alt"      $title
-          "sizes"    site.Params.image_sizes.blocks.partners
+          "sizes"    site.Params.image_sizes.blocks.organizations
         ) -}}
     {{- end -}}
   </div>

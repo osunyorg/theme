@@ -2,7 +2,7 @@
 
   {{- $is_organigram_present := false -}}
   {{ range .Params.contents }}
-    {{- if eq .template "organization_chart" -}}
+    {{- if eq .template "people" -}}
       {{- $is_organigram_present = true -}}
     {{ end }}
   {{ end }}
@@ -23,7 +23,7 @@
         {{ $summary_block = true }}
       {{ end }}
     {{ end }}
-    
+
     {{ partial "persons/summary.html" (dict
         "context" .
         "with_container" (not $summary_block)
