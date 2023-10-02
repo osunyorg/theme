@@ -2,7 +2,7 @@
 
   {{- $is_organigram_present := false -}}
   {{ range .Params.contents }}
-    {{- if or (eq .template "organization_chart") (eq .template "people") -}}
+    {{- if eq .template "people" -}}
       {{- $is_organigram_present = true -}}
     {{ end }}
   {{ end }}

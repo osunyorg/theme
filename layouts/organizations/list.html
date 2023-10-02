@@ -1,7 +1,7 @@
 {{ define "main" }}
   {{- $is_organizations_block_present := false -}}
   {{ range .Params.contents }}
-    {{- if or (eq .template "partners") (eq .template "organizations") -}}
+    {{- if eq .template "organizations" -}}
       {{- $is_organizations_block_present = true -}}
     {{ end }}
   {{ end }}

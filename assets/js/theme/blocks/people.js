@@ -1,4 +1,4 @@
-const blocksPeople = document.querySelectorAll('.block-organization_chart, .block-people');
+const blocksPeople = document.querySelectorAll('.block-people');
 
 class BlockPeople {
     constructor (dom) {

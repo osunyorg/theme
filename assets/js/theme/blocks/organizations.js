@@ -1,4 +1,4 @@
-const organizationsMaps = document.querySelectorAll('.block-partners--map, .block-organizations--map');
+const organizationsMaps = document.querySelectorAll('.block-organizations--map');
 
 class BlockOrganizations {
     constructor (dom) {
