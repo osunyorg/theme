@@ -1,12 +1,9 @@
 <ul>
-  {{ range .pages }}
-    {{- $page := partial "GetPageByUrl" .page -}}
-    {{ with $page }}
-      <li>
-        <a href="{{- .Permalink -}}">
-          {{- partial "PrepareHTML" .Title -}}
-        </a>
-      </li>
-    {{- end -}}
+  {{ range .elements }}
+    <li>
+      <a href="{{- .Permalink -}}">
+        {{- partial "PrepareHTML" .title -}}
+      </a>
+    </li>
   {{ end }}
 </ul>

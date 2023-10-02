@@ -3,36 +3,33 @@
 {{ $image_class := "" }}
 
 <div class="grid">
-  {{ range .pages }}
-    {{- $page := partial "GetPageByUrl" .page -}}
-    {{ with $page }}
-      {{ if .Params.image }}
-        {{ $image_class = printf "image-%s" (partial "GetImageDirection" .Params.image) }}
-      {{ else }}
-        {{ $image_class = "" }}
+  {{ range .elements }}
+    {{ if .Params.image }}
+      {{ $image_class = printf "image-%s" (partial "GetImageDirection" .Params.image) }}
+    {{ else }}
+      {{ $image_class = "" }}
+    {{ end }}
+    <article class="{{ $image_class }}">
+      <h3>
+        <a href="{{- .Permalink -}}">
+          {{- partial "PrepareHTML" .title -}}
+        </a>
+      </h3>
+
+      {{ if and $show_descriptions .summary }}
+        {{ if site.Params.pages.index.truncate_description }}
+          <p>{{ partial "GetTruncateContent" ( dict 
+            "text" .summary
+            "length" site.Params.pages.index.truncate_description
+            ) }}</p>
+        {{ else }}
+          <p>{{ partial "PrepareText" .summary }}</p>
+        {{ end }}
       {{ end }}
-      <article class="{{ $image_class }}">
-        <h3>
-          <a href="{{- .Permalink -}}">
-            {{- partial "PrepareHTML" .Title -}}
-          </a>
-        </h3>
 
-        {{ if and $show_descriptions .Params.summary }}
-          {{ if site.Params.pages.index.truncate_description }}
-            <p>{{ partial "GetTruncateContent" ( dict 
-              "text" .Params.summary
-              "length" site.Params.pages.index.truncate_description
-              ) }}</p>
-          {{ else }}
-            <p>{{ partial "PrepareText" .Params.summary }}</p>
-          {{ end }}
-        {{ end }}
-
-        {{ if $show_images }}
-          {{- partial "pages/page-media.html" . -}}
-        {{ end }}
-      </article>
-    {{- end -}}
+      {{ if $show_images }}
+        {{- partial "pages/page-media.html" . -}}
+      {{ end }}
+    </article>
   {{ end }}
 </div>

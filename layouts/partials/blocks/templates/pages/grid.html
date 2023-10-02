@@ -2,7 +2,7 @@
 {{ $show_images := .show_images }}
 
 <div class="grid">
-  {{ range .pages }}
+  {{ range .elements }}
     {{- $page := false -}}
     {{/*  Check if . is a map or page url, necessary when pages/grid is called outside block context */}}
     {{ if reflect.IsMap . }}
@@ -11,27 +11,25 @@
       {{- $page =  partial "GetPageByUrl" . -}}
     {{ end }}
 
-    {{ with $page }}
-      <article>
-        <h3>
-          <a href="{{- .Permalink -}}">
-            {{- partial "PrepareHTML" .Title -}}
-          </a>
-        </h3>
-        {{ if and $show_descriptions .Params.summary }}
-          {{ if site.Params.pages.index.truncate_description }}
-            <p>{{ partial "GetTruncateContent" ( dict 
-              "text" .Params.summary
-              "length" site.Params.pages.index.truncate_description
-              ) }}</p>
-          {{ else }}
-            <p>{{ partial "PrepareText" .Params.summary }}</p>
-          {{ end }}
+    <article>
+      <h3>
+        <a href="{{- .Permalink -}}">
+          {{- partial "PrepareHTML" .title -}}
+        </a>
+      </h3>
+      {{ if and $show_descriptions .summary }}
+        {{ if site.Params.pages.index.truncate_description }}
+          <p>{{ partial "GetTruncateContent" ( dict 
+            "text" .summary
+            "length" site.Params.pages.index.truncate_description
+            ) }}</p>
+        {{ else }}
+          <p>{{ partial "PrepareText" .summary }}</p>
         {{ end }}
-        {{ if $show_images }}
-          {{- partial "pages/page-media.html" . -}}
-        {{ end }}
-      </article>
-    {{- end -}}
+      {{ end }}
+      {{ if $show_images }}
+        {{- partial "pages/page-media.html" . -}}
+      {{ end }}
+    </article>
   {{ end }}
 </div>
