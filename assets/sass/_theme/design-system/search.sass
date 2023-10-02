@@ -3,12 +3,14 @@
 .search__close
     @include button-reset
     @include meta
-    box-shadow: none !important
+    &:focus
+        box-shadow: none
 .pagefind-ui__toggle
     @include icon-block(search, after)
     cursor: pointer
     padding: half($spacing0) $spacing0
     text-align: left
+    box-shadow: none
     &::after
         font-size: $body-size-desktop
         line-height: inherit
@@ -120,8 +122,8 @@
                 &-inner
                     grid-column: 4/13
         &__result-excerpt mark
-                background-color: $color-accent !important
-                color: $color-background !important
+                background-color: $color-accent
+                color: $color-background
         &__result-title a
             @include h4
             @include stretched-link
