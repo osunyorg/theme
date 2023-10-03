@@ -267,7 +267,7 @@
     appearance: none
     background: transparent
     border: none
-    border-radius: none
+    border-radius: 0
     cursor: pointer
     user-select: none
     &:active,
@@ -388,6 +388,28 @@
     &:hover
         figcaption .credit-content
             display: block
+
+@mixin dropdown-i18n
+    position: relative
+    .dropdown-menu
+        margin-top: $header-nav-padding-y
+        padding-left: $spacing1
+        padding-bottom: $spacing0
+        padding-top: $spacing0
+        padding-right: $spacing1
+        right: 0
+    li a
+        padding-bottom: half($spacing0)
+        padding-top: half($spacing0)
+        display: block
+        &.is-checked
+            display: flex
+            justify-content: space-between
+            align-items: center
+            gap: $spacing2
+            text-decoration: none !important
+            @include icon(caret, after)
+                transform: rotate(-14deg) skewX(-30deg)
 
 // https://gist.github.com/jonathantneal/d0460e5c2d5d7f9bc5e6
 @function str-replace($string, $search, $replace: "")

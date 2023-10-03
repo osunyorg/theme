@@ -7,6 +7,16 @@
   </div>
 </div>
 {{ partial "footer/i18n.html" . }}
+{{ if and (site.Params.search.active) (eq site.Params.search.position "footer")}}
+<div class="container footer-search">
+    {{ partial "header/search.html"
+      (dict
+          "position" "footer"
+          "context" .
+      )
+    }}
+  </div>
+  {{ end }}
 <div class="container">
   <div class="footer-social">
     {{ partial "footer/social.html" }}

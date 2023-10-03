@@ -31,6 +31,51 @@ footer#document-footer
         &-credit
             display: block
             margin-top: $spacing0
+        &-search
+            padding-top: $spacing0 !important
+        &-i18n
+            @include dropdown-i18n
+            button
+                @include button-reset
+                @include icon(caret-bottom, after)
+                @include meta
+                align-items: center
+                cursor: pointer
+                display: flex
+                justify-content: start
+                padding-left: 0
+                text-align: left
+                &:focus,
+                &:focus-visible
+                    box-shadow: none
+                &[aria-expanded="true"]
+                    background: $color-background
+                    justify-content: space-between
+                    width: 100%
+                    + .dropdown-menu
+                        animation-duration: unset
+                    &::after
+                        transform: rotate(-180deg)
+                &::before
+                    margin-right: $spacing0
+                &::after
+                    margin-left: $spacing0
+            button[aria-expanded="true"],
+            .dropdown-menu
+                outline: px2rem(10) solid $color-background
+                min-width: $spacing4
+            .dropdown-menu
+                @include meta
+                background: $color-background
+                @include media-breakpoint-up(desktop)
+                    left: 0
+                    margin-top: px2rem(17)
+                    max-height: calc(100vh - var(--header-height))
+                    overflow: auto
+                    padding: 0
+                    position: absolute
+                    width: fit-content
+
         @if $footer-icons-enabled
             &-social 
                 .nav-social + .site-links
