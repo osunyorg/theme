@@ -1,4 +1,7 @@
-{{ if not site.Params.search.active }}
+{{ if site.Params.search.active }}
+<meta http-equiv="Content-Security-Policy"
+      content="script-src 'unsafe-eval' 'unsafe-inline'" />
+{{ else }}
   {{ with site.Data.website.external_domains -}}
   <meta http-equiv="Content-Security-Policy"
         content="
