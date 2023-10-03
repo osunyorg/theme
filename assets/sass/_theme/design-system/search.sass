@@ -11,6 +11,14 @@
     padding: half($spacing0) $spacing0
     text-align: left
     box-shadow: none
+    span,
+    &::after
+        display: inline
+    &.without-text
+        span
+            display: none
+        &::after
+            margin-left: 0
     &::after
         font-size: $body-size-desktop
         line-height: inherit
