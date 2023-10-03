@@ -1,0 +1,181 @@
+.pagefind-ui__toggle, 
+.pagefind-ui__button, 
+.search__close
+    @include button-reset
+    @include meta
+    &:focus
+        box-shadow: none
+.pagefind-ui__toggle
+    @include icon-block(search, after)
+    cursor: pointer
+    padding: half($spacing0) $spacing0
+    text-align: left
+    box-shadow: none
+    span,
+    &::after
+        display: inline
+    &::after
+        font-size: $body-size-desktop
+        line-height: inherit
+        margin-left: px2rem(8)
+    @include media-breakpoint-down(desktop)
+        &.pagefind-menu
+            border-bottom: 1px solid #adb5bd
+            padding: $spacing1 0
+            width: 100%
+    @include media-breakpoint-up(desktop)
+        &.without-text
+            span
+                display: none
+            &::after
+                margin-left: 0
+.search__close
+    @include icon-block(close, after)
+    position: fixed
+    right: $spacing3
+    padding: 0
+    z-index: 9
+    &::after
+        display: inline-flex
+        justify-content: center
+        margin-left: $spacing0
+        width: px2rem(15)
+    @include media-breakpoint-down(desktop)
+        right: $spacing1
+        top: half($spacing0)
+#search
+    background: $color-background
+    height: 100vh
+    left: 0
+    padding-bottom: $spacing3
+    padding-left: $spacing1
+    padding-right: $spacing1
+    padding-top: $spacing4
+    position: fixed
+    overflow: auto
+    top: 0
+    width: 100vw
+    z-index: 80
+    @include media-breakpoint-up(desktop)
+        padding-right: $spacing3
+        padding-left: $spacing3
+        padding-top: calc(#{half($spacing3)} - #{half($spacing0)} + #{px2rem(2)})
+    &[aria-hidden=true]
+        display: none
+    .pagefind-ui
+        &::before
+            content: ""
+            background: $color-background
+            height: calc(#{$spacing3} + #{$spacing1} + #{$spacing1})
+            left: 0
+            position: fixed
+            top: 0
+            width: 100%
+            z-index: 5
+            @include media-breakpoint-down(desktop)
+                height: calc(#{$spacing3} + #{half($spacing0)} + #{$spacing4})
+        &__form
+            @include icon(search, after)
+            &::after
+                padding-right: px2rem(2)
+                position: fixed
+                pointer-events: none
+                transform: translate(0,20%)
+                z-index: 9
+                @include media-breakpoint-down(desktop)
+                    right: $spacing1
+                    top: calc(#{$spacing4} + #{half($spacing0)})
+        &__search-input
+            border-left: 0
+            border-right: 0
+            border-radius: 0
+            border-top: 0
+            padding-left: 0
+            padding-right: half($spacing1) !important
+            position: fixed
+            z-index: 6
+            @include media-breakpoint-down(desktop)
+                margin-bottom: $spacing1
+        &__button[type="button"]
+            @include button-reset
+            @include link($color-text)
+            margin-top: $spacing2
+            padding: 0
+        &__message
+            @include meta
+            color: $color-text-alt
+            text-align: right
+            z-index: 11
+            position: fixed
+            top: calc(#{half($spacing4)} + #{half($spacing1)})
+        &__search-clear,
+        &__suppressed
+            display: none
+            pointer-events: none
+        &__drawer
+            position: relative
+        &__result
+            list-style: none
+            position: relative
+            &-thumb
+                grid-column: 1/4
+                > *
+                    aspect-ratio: 3/2
+                    object-fit: cover
+                @include media-breakpoint-down(desktop)
+                    display: none
+            + li
+                margin-top: half($spacing3)
+            @include media-breakpoint-up(desktop)
+                @include grid
+                &-inner
+                    grid-column: 4/13
+        &__result-excerpt mark
+                background-color: $color-accent
+                color: $color-background
+        &__result-title a
+            @include h4
+            @include stretched-link
+        @include media-breakpoint-up(desktop)
+            &__form
+                position: relative
+                width: col(8)
+                &::after
+                    left: calc(#{col(8)} - #{$spacing2} + #{$spacing0})
+                    top: calc(#{$spacing2} - #{$spacing0})
+            &__search-input,
+            &__message
+                width: calc(#{col(8,12)} - #{$spacing3} - #{$spacing1})
+            &__results-area
+                padding-top: calc(#{$spacing4} - #{$spacing1})
+        @include media-breakpoint-down(desktop)
+            &__search-input,
+            &__message
+                width: calc(100% - #{$spacing2})
+            &__message
+                top: calc(#{$spacing4} + #{$spacing2})
+            &__results-area
+                padding-top: calc(#{$spacing3} + #{half($spacing0)})
+
+.pagefind-fixed
+    background: $color-background-alt
+    bottom: 0
+    left: $spacing3
+    min-width: calc(#{$spacing3} * 3)
+    position: fixed
+    z-index: 10
+    &::after
+        position: absolute
+        right: $spacing0
+    @include media-breakpoint-down(desktop)
+        left: 0
+        width: 100vw
+        &.in-page-with-toc
+            background: $color-background
+            border-top: 1px solid #eee
+            bottom: px2rem(44)
+footer#document-footer .footer-search
+    .pagefind-footer
+        padding: 0
+    #search
+        margin-top: 0

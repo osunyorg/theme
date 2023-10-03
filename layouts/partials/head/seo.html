@@ -32,6 +32,7 @@
 {{- end -}}
 {{- $ogImage := $seoImage -}}
 {{- $twitterImage := $seoImage -}}
+{{- $pagefindImage := $seoImage -}}
 {{- with .Params.image -}}
   {{- $id := . -}}
   {{ if isset . "id" -}}
@@ -45,6 +46,10 @@
   {{- $twitterImage = partial "GetImageUrl" (dict
           "media" $image
           "size" "1200"
+        ) -}}
+  {{- $pagefindImage = partial "GetImageUrl" (dict
+          "media" $image
+          "size" "244"
         ) -}}
 {{- end -}}
 {{- $seoUrl := .Permalink -}}
@@ -74,6 +79,12 @@
 {{ else if site.Data.journal.twitter }}
 <meta name="twitter:site" content="@{{ site.Data.journal.twitter }}" />
 {{ end -}}
+
+{{ if site.Params.search.active }}
+  {{ with $pagefindImage }}
+    <meta property="pagefind:image" content="" data-pagefind-meta="image:{{ . }}">
+  {{ end }}
+{{ end }}
 
 {{/*
 Limiter le tracking par le CDN

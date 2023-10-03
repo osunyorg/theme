@@ -65,7 +65,15 @@
     </li>
     {{- end -}}
   {{ end -}}
-
+  
+  {{ if and (eq $kind "primary") (site.Params.search.active) (eq site.Params.search.position "menu")}}
+    {{ partial "header/search.html"
+      (dict
+          "position" "menu"
+          "context" .
+      ) 
+    }}
+  {{ end }}
   {{ if and (eq $kind "primary") (site.Params.menu.i18n.display) }}
     {{ partial "header/i18n.html" . }}
   {{ end }}

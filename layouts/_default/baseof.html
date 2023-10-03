@@ -15,6 +15,14 @@
     {{- partial "header/accessibility.html" -}}
     {{- partial "header/header.html" . -}}
     <main{{ if .Params.contents }} class="page-with-blocks"{{ end }} id="main" tabindex="-1">
+      {{ if and (site.Params.search.active) (eq site.Params.search.position "fixed")}}
+        {{ partial "header/search.html"
+          (dict
+              "position" "fixed"
+              "context" .
+          ) 
+        }}
+      {{ end }}
       {{- block "main" . }}{{- end }}
       {{- partial "hooks/before-main-end" . -}}
     </main>
