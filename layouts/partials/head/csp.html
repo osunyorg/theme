@@ -3,6 +3,6 @@
       content="
         default-src 'self' {{ delimit . " " }}
         {{ if not hugo.IsProduction }}'unsafe-inline'{{ end }}
-        {{ if site.Params.search.active }}'wasm-unsafe-eval'{{ end }};
+        {{ if site.Params.search.active }}'wasm-unsafe-eval' 'unsafe-inline'{{ end }};
       " />
 {{- end -}}
