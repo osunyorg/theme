@@ -1,12 +1,13 @@
-{{- with site.Data.website.external_domains -}}
-<meta http-equiv="Content-Security-Policy"
-      content="default-src 'self' 
-        {{ delimit . " " }}
-        {{ if not hugo.IsProduction }}
-          'unsafe-inline'
-        {{ end }}
-        {{ if site.Params.search.active }}
-          'wasm-unsafe-eval' 'unsafe-eval'
-        {{ end }};
-      " />
+{{ if not site.Params.search.active }}
+  {{- with site.Data.website.external_domains -}}
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self' 
+          {{ delimit . " " }}
+          {{ if not hugo.IsProduction }}
+            'unsafe-inline'
+          {{ end }}
+          {{ if site.Params.search.active }}
+            'wasm-unsafe-eval'
+          {{ end }};" />
+  {{- end -}}
 {{- end -}}
