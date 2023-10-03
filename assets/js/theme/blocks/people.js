@@ -1,9 +1,9 @@
-const organizationsCharts = document.querySelectorAll('.block-organization_chart');
+const blocksPeople = document.querySelectorAll('.block-people');
 
-class OrganizationChart {
+class BlockPeople {
     constructor (dom) {
         this.dom = dom;
-        
+
         this.init();
         this.listen();
     }
@@ -21,6 +21,6 @@ class OrganizationChart {
     }
 }
 
-organizationsCharts.forEach((dom) => {
-    new OrganizationChart(dom);
+blocksPeople.forEach((dom) => {
+    new BlockPeople(dom);
 });

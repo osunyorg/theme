@@ -1,8 +1,8 @@
 {{ define "main" }}
-  {{- $is_partners_block_present := false -}}
+  {{- $is_organizations_block_present := false -}}
   {{ range .Params.contents }}
-    {{- if eq .template "partners" -}}
-      {{- $is_partners_block_present = true -}}
+    {{- if eq .template "organizations" -}}
+      {{- $is_organizations_block_present = true -}}
     {{ end }}
   {{ end }}
 
@@ -17,7 +17,7 @@
     {{ partial "contents/list.html" . }}
 
     <div class="container">
-      {{- if not $is_partners_block_present -}}
+      {{- if not $is_organizations_block_present -}}
         {{ partial "organizations/organizations.html" . }}
         {{ partial "commons/pagination.html" . }}
       {{ end }}

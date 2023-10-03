@@ -2,10 +2,10 @@
 {{ $with_link := .with_link }}
 
 <div class="grid organizations">
-  {{- range .partners }}
+  {{- range .organizations }}
     {{ if .slug }}
       {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
-        {{ template "partner" (dict 
+        {{ template "organization" (dict
             "title" .Title
             "url" .Permalink
             "logo" (index .Params $logo_index)
@@ -13,7 +13,7 @@
           )}}
       {{ end }}
     {{ else }}
-      {{ template "partner" (dict 
+      {{ template "organization" (dict
           "title" .name
           "url" .url
           "external" true
