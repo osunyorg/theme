@@ -3,6 +3,7 @@
 {{- $title := .block.title -}}
 {{- $class := "block block-pages" -}}
 {{- $layout_class := "block-pages--grid" -}}
+
 {{- with .block.data -}}
   {{- $layout := .layout -}}
 
@@ -30,6 +31,7 @@
   {{- $page_class := "" -}}
 
   {{ $page := partial "GetPageByUrl" .page }}
+  
   {{- with $page }}
     {{- $show_main_page = true -}}
     {{- $page_link = $page.Permalink }}

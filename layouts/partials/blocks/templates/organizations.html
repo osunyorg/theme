@@ -37,7 +37,7 @@
         {{- end }}
 
         {{- partial (printf "blocks/templates/organizations/%s.html" $layout) (dict
-            "organizations" .organizations
+            "elements" .elements
             "logo_index" $logo_index
             "with_link" $with_link
           ) }}
@@ -48,29 +48,35 @@
 
 
 {{- define "organization" -}}
-<article class="organization" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
-  {{ $title := "" }}
-  {{ if .title }}
-    {{ $title = partial "PrepareHTML" .title -}}
-    <h3>
-      {{- if and .url .with_link }}
-        <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
-      {{ end -}}
-        {{- $title -}}
-      {{- if .url }}
-        </a>
-      {{ end -}}
-    </h3>
-  {{ end -}}
-  <div class="media">
-    {{- if .logo -}}
-      {{- partial "commons/image.html"
-        (dict
-          "image"    .logo
-          "alt"      $title
-          "sizes"    site.Params.image_sizes.blocks.organizations
-        ) -}}
-    {{- end -}}
-  </div>
-</article>
+  <article class="organization" {{ with .longitude }}data-longitude="{{ . }}"{{ end }} {{ with .latitude }}data-latitude="{{ . }}"{{ end }}>
+    {{ $title := "" }}
+    {{ if .title }}
+      {{ $title = partial "PrepareHTML" .title -}}
+      <h3>
+        {{- if and .url .with_link }}
+          <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
+        {{ end -}}
+          {{- $title -}}
+        {{- if .url }}
+          </a>
+        {{ end -}}
+      </h3>
+    {{ end -}}
+    {{ if and .url .with_link (eq .title "") }}
+      <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }}>
+    {{ end }}
+    <div class="media">
+      {{- if .logo -}}
+        {{- partial "commons/image.html"
+          (dict
+            "image"    .logo
+            "alt"      $title
+            "sizes"    site.Params.image_sizes.blocks.organizations
+          ) -}}
+      {{- end -}}
+    </div>
+    {{ if and .url .with_link (eq .title "") }}
+      </a>
+    {{ end }}
+  </article>
 {{- end  -}}

@@ -1,20 +1,21 @@
-{{ $logo_index := .logo_index }}
+{{ $logo_index := "light_background" }}
 {{ $with_link := .with_link }}
+{{ if site.Params.organizations.dark_logo_background }}
+  {{ $logo_index = "dark_background" }}
+{{ end }}
 
 <div class="grid organizations">
-  {{- range .organizations }}
+  {{- range .elements }}
     {{ if .slug }}
-      {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
-        {{ template "organization" (dict
-            "title" .Title
-            "url" .Permalink
-            "logo" (index .Params $logo_index)
-            "with_link" $with_link
-          )}}
-      {{ end }}
+      {{ template "organization" (dict
+          "title" .title
+          "url" .url
+          "logo" (index .logo $logo_index)
+          "with_link" $with_link
+        )}}
     {{ else }}
       {{ template "organization" (dict
-          "title" .name
+          "title" .title
           "url" .url
           "external" true
           "logo" .logo

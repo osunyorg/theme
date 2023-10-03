@@ -1,9 +1,9 @@
 {{ $show_descriptions := .show_descriptions }}
 {{ $show_images := .show_images }}
-{{ $pages := .elements}}
+{{ $elements := .elements}}
 
 <div class="grid">
-  {{ range $pages }}
+  {{ range $elements }}
     {{- $page := false -}}
     {{/*  Check if . is a map or page url, necessary when pages/grid is called outside block context */}}
     {{ if reflect.IsMap . }}
@@ -11,20 +11,21 @@
     {{ else }}
       {{- $page =  . -}}
     {{ end }}
+
     <article>
       <h3>
         <a href="{{- .url -}}">
           {{- partial "PrepareHTML" .title -}}
         </a>
       </h3>
-      {{ if and $show_descriptions $page.summary }}
+      {{ if and $show_descriptions .summary }}
         {{ if site.Params.pages.index.truncate_description }}
           <p>{{ partial "GetTruncateContent" ( dict 
             "text" .summary
             "length" site.Params.pages.index.truncate_description
             ) }}</p>
         {{ else }}
-          <p>{{ partial "PrepareText" $page.summary }}</p>
+          <p>{{ partial "PrepareText" .summary }}</p>
         {{ end }}
       {{ end }}
       {{ if $show_images }}
