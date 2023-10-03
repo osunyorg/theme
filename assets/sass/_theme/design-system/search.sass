@@ -6,26 +6,27 @@
     &:focus
         box-shadow: none
 .pagefind-ui__toggle
-    @include icon-block(search, after)
     color: $header-color
     cursor: pointer
     padding: half($spacing0) $spacing0
     text-align: left
     box-shadow: none
+    &:not(.toggle-text)
+        @include icon-block(search, after)
+        &::after
+            font-size: $body-size-desktop
+            line-height: inherit
+            margin-left: px2rem(8)
     span,
     &::after
         display: inline
-    &::after
-        font-size: $body-size-desktop
-        line-height: inherit
-        margin-left: px2rem(8)
     @include media-breakpoint-down(desktop)
         &.pagefind-menu
             border-bottom: 1px solid #adb5bd
             padding: $spacing1 0
             width: 100%
     @include media-breakpoint-up(desktop)
-        &.without-text
+        &.toggle-icon
             span
                 display: none
             &::after
