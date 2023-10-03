@@ -14,11 +14,6 @@
     span,
     &::after
         display: inline
-    &.without-text
-        span
-            display: none
-        &::after
-            margin-left: 0
     &::after
         font-size: $body-size-desktop
         line-height: inherit
@@ -28,6 +23,12 @@
             border-bottom: 1px solid #adb5bd
             padding: $spacing1 0
             width: 100%
+    @include media-breakpoint-up(desktop)
+        &.without-text
+            span
+                display: none
+            &::after
+                margin-left: 0
 .search__close
     @include icon-block(close, after)
     position: fixed
@@ -173,6 +174,8 @@
             background: $color-background
             border-top: 1px solid #eee
             bottom: px2rem(44)
-
-.pagefind-footer
-    padding: 0
+footer#document-footer .footer-search
+    .pagefind-footer
+        padding: 0
+    #search
+        margin-top: 0
