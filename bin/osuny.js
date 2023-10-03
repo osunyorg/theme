@@ -25,17 +25,13 @@ if (command === "watch") {
 
 if (command === "dev") {
     shell.exec("hugo");
-    shell.exec("cd ./themes/osuny-hugo-theme-aaa");
-    shell.exec("npx pagefind --site ../../public --output-subdir ../static/pagefind");
-    shell.exec("cd ../..");
+    shell.exec("npx pagefind --site public --output-subdir ../static/pagefind");
     shell.exec("hugo server");
 }
 
 if (command === "build") {
     shell.exec("hugo");
-    shell.exec("cd ./themes/osuny-hugo-theme-aaa");
-    shell.exec("npm_config_yes=true npx pagefind --site ../../public");
-    shell.exec("cd ../..");
+    shell.exec("npm_config_yes=true npx pagefind --site public");
 }
 
 if (command === "update") {
