@@ -85,10 +85,11 @@
         &__form
             @include icon(search-inline, after)
             &::after
+                color: transparentize($color-text-alt, .4)
                 padding-right: px2rem(2)
                 position: fixed
                 pointer-events: none
-                transform: translate(0,20%)
+                transform: translate(-2px,20%)
                 z-index: 9
                 @include media-breakpoint-down(desktop)
                     right: $spacing1
@@ -104,6 +105,10 @@
             z-index: 6
             @include media-breakpoint-down(desktop)
                 margin-bottom: $spacing1
+            &:focus,
+            &:focus-visible
+                border-bottom: 2px solid $color-text
+                outline: none
         &__button[type="button"]
             @include button-reset
             @include link($color-text)
