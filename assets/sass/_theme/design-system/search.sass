@@ -27,16 +27,12 @@
     span,
     &::after
         display: inline
-        transform: translateX(100%)
     @include media-breakpoint-down(desktop)
         &.pagefind-menu
             padding: $spacing1 0
             width: 100%
     @include media-breakpoint-up(desktop)
-        &.toggle-icon
-            span
-                display: none
-            &::after
+        &.toggle-icon::after
                 margin-left: 0
 .search__close
     @include icon-block(close, after)
@@ -174,7 +170,7 @@
             &__results-area
                 padding-top: calc(#{$spacing3} + #{half($spacing0)})
 
-.menu .nav-level-1 > li .pagefind-ui__toggle
+.menu .nav-level-1 > li .pagefind-ui__toggle:not(.toggle-icon)
     span, &::after
         display: inline
     &::after
@@ -220,6 +216,8 @@ footer#document-footer .footer-search
         padding: 0
         &.toggle-icon
             transform: translateX(-35%)
+        &::after
+            margin-top: px2rem(3)
     #search
         margin-top: 0
         a
@@ -227,5 +225,12 @@ footer#document-footer .footer-search
 
 .nav-search
     display: flex
-    .pagefind-menu::after
+    .pagefind-menu:not(.toggle-icon)::after
         margin-top: 10px
+
+@include media-breakpoint-down(desktop)
+    .menu .nav-level-1 > li .pagefind-ui__toggle span
+        display: inline
+@include media-breakpoint-up(desktop)
+    .menu .nav-level-1 > li .pagefind-ui__toggle.toggle-icon span
+        display: none
