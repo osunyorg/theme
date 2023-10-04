@@ -12,12 +12,11 @@
         {{ end -}}
 
         <ol class="programs">
-          {{- range .programs -}}
+          {{- range .elements -}}
             <li>
-              {{ $program := site.GetPage (printf "/programs%s" .path) }}
-              {{- $title := partial "PrepareHTML" $program.Title -}}
-              <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-                {{- $title -}}
+              {{- $title := partial "PrepareHTML" .title -}}
+              <a href="{{ .url }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .title)) }}">
+                {{- .title -}}
               </a>
             </li>
           {{ end }}
