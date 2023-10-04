@@ -23,40 +23,39 @@
           </div>
         {{- end }}
         <div class="persons">
-          {{- range .persons -}}
-            {{ $person := site.GetPage (printf "/persons/%s" .slug) }}
+          {{- range .elements -}}
 
             <article class="person" itemscope itemtype="https://schema.org/Person">
               <div class="description">
                 <h3 class="name" itemprop="name">
                   {{ if $with_link }}
-                  <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
+                  <a href="{{ .url }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" .title) }}">
                     {{ end }}
-                    {{- partial "PrepareHTML" $person.Title -}}
+                    {{- partial "PrepareHTML" .title -}}
                     {{ if $with_link }}
                   </a>
                   {{ end }}
                 </h3>
                 <p itemprop="jobTitle"
-                    {{- if $person.Params.summary -}}
-                      {{ $summaryLength := len $person.Params.summary}}
+                    {{- if .summary -}}
+                      {{ $summaryLength := len .summary}}
                       {{- if ge $summaryLength $charLimit -}} data-column="true" {{- end -}}
                     {{- end -}}>
                   {{- if (partial "GetTextFromHTML" .role) }}
                     {{ partial "PrepareHTML" .role }}
-                  {{- else if partial "GetTextFromHTML" $person.Params.summary }}
-                    {{- partial "PrepareHTML" $person.Params.summary -}}
-                  {{ else if (partial "GetTextFromHTML" $person.Content) }}
-                    {{- partial "GetTruncateContent" ( dict "text" $person.Content ) -}}
+                  {{- else if partial "GetTextFromHTML" .summary }}
+                    {{- partial "PrepareHTML" .summary -}}
+                  {{ else if (partial "GetTextFromHTML" .Content) }}
+                    {{- partial "GetTruncateContent" ( dict "text" .Content ) -}}
                   {{ end -}}
                 </p>
               </div>
               {{- if $with_photo }}
                 <div class="avatar" itemprop="image">
-                  {{- if $person.Params.image }}
+                  {{- if .picture }}
                     {{ partial "commons/image.html"
                       (dict
-                        "image"    $person.Params.image
+                        "image"    .picture
                         "sizes"    site.Params.image_sizes.blocks.people
                       )}}
                   {{ end -}}
