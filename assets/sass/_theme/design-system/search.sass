@@ -12,12 +12,17 @@
     text-align: left
     box-shadow: none
     &:not(.toggle-text)
-        @include icon-block(search, after)
+        @include icon(search-inline, after)
         &::after
             line-height: inherit
+            margin-left: half($spacing0)
+            margin-top: half($spacing0)
+    &.toggle-icon::after
+        font-size: $h3-size
     span,
     &::after
         display: inline
+        transform: translateX(100%)
     @include media-breakpoint-down(desktop)
         &.pagefind-menu
             border-bottom: 1px solid #adb5bd
@@ -28,7 +33,6 @@
             span
                 display: none
             &::after
-                font-size: 3rem
                 margin-left: 0
 .search__close
     @include icon-block(close, after)
@@ -79,7 +83,7 @@
             @include media-breakpoint-down(desktop)
                 height: calc(#{$spacing3} + #{half($spacing0)} + #{$spacing4})
         &__form
-            @include icon(search, after)
+            @include icon(search-inline, after)
             &::after
                 padding-right: px2rem(2)
                 position: fixed
@@ -174,12 +178,11 @@
     @include media-breakpoint-up(desktop)
         &:not(.toggle-icon)
             min-width: calc(#{$spacing3} * 3)
-        &.toggle-both
-            padding-right: 0
         &.toggle-icon:not(:hover)
             padding-left: 0
-        &.toggle-icon
             padding-right: 0
+            justify-content: center
+        &.toggle-icon
             min-height: px2rem(37)
             width: px2rem(50)
             &:hover,
