@@ -113,13 +113,15 @@ footer#document-footer
                         @include icon(social-rss, after)
                     &::after
                         font-size: $footer-icons-size
-                        @include media-breakpoint-up(md)
+                        @include media-breakpoint-up(desktop)
+                            margin-right: half(-$spacing0)
                             padding-left: $spacing0
                     @include media-breakpoint-down(desktop)
                         width: fit-content
                         flex-direction: row-reverse
                         &::after
                             margin-right: $spacing0
+                            transform: translateX(-25%)
         @if $footer-text-hidden
             &-social.site-links li
                 font-size: 0

@@ -5,31 +5,33 @@
     @include meta
     &:focus
         box-shadow: none
+.pagefind-ui__toggle:not(.pagefind-menu), 
+.pagefind-ui__button, 
+.search__close
+    @include meta
 .pagefind-ui__toggle
-    @include icon-block(search, after)
     color: $header-color
     cursor: pointer
-    padding: half($spacing0) $spacing0
     text-align: left
     box-shadow: none
+    &:not(.toggle-text)
+        @include icon(search-inline, after)
+        &::after
+            line-height: inherit
+            margin-left: half($spacing0)
+    &:not(.pagefind-menu)    
+        padding: half($spacing0) $spacing0
+    &.toggle-icon::after
+        font-size: $h3-size
     span,
     &::after
         display: inline
-    &::after
-        font-size: $body-size-desktop
-        line-height: inherit
-        margin-left: px2rem(8)
     @include media-breakpoint-down(desktop)
         &.pagefind-menu
-            border-bottom: 1px solid #adb5bd
             padding: $spacing1 0
             width: 100%
     @include media-breakpoint-up(desktop)
-        &.without-text
-            span
-                display: none
-            &::after
-                font-size: $h3-size-desktop
+        &.toggle-icon::after
                 margin-left: 0
 .search__close
     @include icon-block(close, after)
@@ -47,6 +49,7 @@
         top: half($spacing0)
 #search
     background: $color-background
+    color: $color-text
     height: 100vh
     left: 0
     padding-bottom: $spacing3
@@ -64,6 +67,8 @@
         padding-top: calc(#{half($spacing3)} - #{half($spacing0)} + #{px2rem(2)})
     &[aria-hidden=true]
         display: none
+    a
+        color: $color-text
     .pagefind-ui
         &::before
             content: ""
@@ -77,12 +82,13 @@
             @include media-breakpoint-down(desktop)
                 height: calc(#{$spacing3} + #{half($spacing0)} + #{$spacing4})
         &__form
-            @include icon(search, after)
+            @include icon(search-inline, after)
             &::after
+                color: transparentize($color-text-alt, .4)
                 padding-right: px2rem(2)
                 position: fixed
                 pointer-events: none
-                transform: translate(0,20%)
+                transform: translate(-6px,20%)
                 z-index: 9
                 @include media-breakpoint-down(desktop)
                     right: $spacing1
@@ -98,6 +104,10 @@
             z-index: 6
             @include media-breakpoint-down(desktop)
                 margin-bottom: $spacing1
+            &:focus,
+            &:focus-visible
+                border-bottom: 2px solid $color-text
+                outline: none
         &__button[type="button"]
             @include button-reset
             @include link($color-text)
@@ -159,16 +169,38 @@
             &__results-area
                 padding-top: calc(#{$spacing3} + #{half($spacing0)})
 
+.menu .nav-level-1 > li .pagefind-ui__toggle:not(.toggle-icon)
+    span, &::after
+        display: inline
+    &::after
+        margin-left: 0
+        margin-top: px2rem(2)
+
 .pagefind-fixed
+    align-items: center
     background: $color-background-alt
     bottom: 0
+    color: $color-text
+    display: flex
+    justify-content: space-between
     left: $spacing3
-    min-width: calc(#{$spacing3} * 3)
     position: fixed
     z-index: 10
-    &::after
-        position: absolute
-        right: $spacing0
+    @include media-breakpoint-up(desktop)
+        &:not(.toggle-icon)
+            min-width: calc(#{$spacing3} * 3)
+        &.toggle-icon:not(:hover)
+            padding-left: 0
+            padding-right: 0
+            justify-content: center
+        &.toggle-icon
+            min-height: px2rem(37)
+            width: px2rem(50)
+            &:hover,
+            &:focus
+                width: calc(#{$spacing3} * 3)
+                span
+                    display: inline
     @include media-breakpoint-down(desktop)
         left: 0
         width: 100vw
@@ -176,8 +208,27 @@
             background: $color-background
             border-top: 1px solid #eee
             bottom: px2rem(44)
+            
 footer#document-footer .footer-search
     .pagefind-footer
+        color: $footer-color
         padding: 0
+        &.toggle-icon
+            transform: translateX(-35%)
+        &::after
+            margin-top: px2rem(3)
     #search
         margin-top: 0
+        a
+            color: $color-text
+
+.nav-search
+    display: flex
+    .pagefind-menu:not(.toggle-icon)::after
+        margin-top: 10px
+
+.menu .nav-level-1 > li .pagefind-ui__toggle span
+    display: inline
+@include media-breakpoint-up(desktop)
+    .menu .nav-level-1 > li .pagefind-ui__toggle.toggle-icon span
+        display: none
