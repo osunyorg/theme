@@ -19,43 +19,56 @@ console.log(`
 
 const command = process.argv[2];
 
+let pagefindExclude = ".pages__section, .block-pages, "
+pagefindExclude    += ".posts__section, .block-posts, .post-sidebar, "
+pagefindExclude    += ".organizations__section, .block-partners, .block-organizations, "
+pagefindExclude    += ".persons__section, .block-organization_chart, .block-people, "
+pagefindExclude    += ".programs__section, .block-programs, "
+pagefindExclude    += ".events__section, .block-agenda, "
+pagefindExclude    += ".diplomas__taxonomy, .block-diplomas"
+
+function execute(string) {
+    console.log("OSUNY runs " + string);
+    shell.exec(string);
+}
+
 if (command === "watch") {
-    shell.exec("hugo server");
+    execute("hugo server");
 }
 
 if (command === "dev") {
-    shell.exec("hugo");
-    shell.exec("npx pagefind --site public --output-subdir ../static/pagefind");
-    shell.exec("hugo server");
+    execute("hugo");
+    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --exclude-selectors '" + pagefindExclude + "'");
+    execute("hugo server");
 }
 
 if (command === "build") {
-    shell.exec("hugo");
-    shell.exec("npm_config_yes=true npx pagefind --site public");
+    execute("hugo");
+    execute("npm_config_yes=true npx pagefind --site 'public' --exclude-selectors '" + pagefindExclude + "'");
 }
 
 if (command === "update") {
-    shell.exec("git pull --recurse-submodules --depth 1");
-    shell.exec("git submodule update --remote");
+    execute("git pull --recurse-submodules --depth 1");
+    execute("git submodule update --remote");
 }
 
 if (command === "setup-example") {
-    shell.exec("git submodule add https://github.com/noesya/osuny-example");
+    execute("git submodule add https://github.com/noesya/osuny-example");
 }
 
 if (command === "server-example") {
-    shell.exec("hugo server --config osuny-example/config/example/config.yaml");
+    execute("hugo server --config osuny-example/config/example/config.yaml");
 }
 
 if (command === "example") {
-    shell.exec("yarn setup-example > /dev/null || yarn update");
-    shell.exec("yarn server-example");
+    execute("yarn setup-example > /dev/null || yarn update");
+    execute("yarn server-example");
 }
 
 if (command === "update-theme") {
-    shell.exec("cd themes/osuny-hugo-theme-aaa");
-    shell.exec("git checkout main");
-    shell.exec("git pull");
-    shell.exec("cd ../..");
-    shell.exec("yarn upgrade");
+    execute("cd themes/osuny-hugo-theme-aaa");
+    execute("git checkout main");
+    execute("git pull");
+    execute("cd ../..");
+    execute("yarn upgrade");
 }
