@@ -5,10 +5,13 @@
     @include meta
     &:focus
         box-shadow: none
+.pagefind-ui__toggle:not(.pagefind-menu), 
+.pagefind-ui__button, 
+.search__close
+    @include meta
 .pagefind-ui__toggle
     color: $header-color
     cursor: pointer
-    padding: half($spacing0) $spacing0
     text-align: left
     box-shadow: none
     &:not(.toggle-text)
@@ -17,6 +20,8 @@
             line-height: inherit
             margin-left: half($spacing0)
             margin-top: half($spacing0)
+    &:not(.pagefind-menu)    
+        padding: half($spacing0) $spacing0
     &.toggle-icon::after
         font-size: $h3-size
     span,
@@ -25,7 +30,6 @@
         transform: translateX(100%)
     @include media-breakpoint-down(desktop)
         &.pagefind-menu
-            border-bottom: 1px solid #adb5bd
             padding: $spacing1 0
             width: 100%
     @include media-breakpoint-up(desktop)
@@ -170,6 +174,13 @@
             &__results-area
                 padding-top: calc(#{$spacing3} + #{half($spacing0)})
 
+.menu .nav-level-1 > li .pagefind-ui__toggle
+    span, &::after
+        display: inline
+    &::after
+        margin-left: 0
+        margin-top: px2rem(2)
+
 .pagefind-fixed
     align-items: center
     background: $color-background-alt
@@ -213,3 +224,8 @@ footer#document-footer .footer-search
         margin-top: 0
         a
             color: $color-text
+
+.nav-search
+    display: flex
+    .pagefind-menu::after
+        margin-top: 10px
