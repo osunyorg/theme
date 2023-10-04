@@ -14,9 +14,7 @@
     &:not(.toggle-text)
         @include icon-block(search, after)
         &::after
-            font-size: $body-size-desktop
             line-height: inherit
-            margin-left: px2rem(8)
     span,
     &::after
         display: inline
@@ -30,7 +28,7 @@
             span
                 display: none
             &::after
-                font-size: $h3-size-desktop
+                font-size: 3rem
                 margin-left: 0
 .search__close
     @include icon-block(close, after)
@@ -172,26 +170,21 @@
     justify-content: space-between
     left: $spacing3
     position: fixed
-    transition: all .3s ease
     z-index: 10
     @include media-breakpoint-up(desktop)
         &:not(.toggle-icon)
             min-width: calc(#{$spacing3} * 3)
-            &::after
-                position: absolute
-                right: $spacing0
-                line-height: 100%
+        &.toggle-both
+            padding-right: 0
+        &.toggle-icon:not(:hover)
+            padding-left: 0
         &.toggle-icon
+            padding-right: 0
             min-height: px2rem(37)
             width: px2rem(50)
             &:hover,
             &:focus
                 width: calc(#{$spacing3} * 3)
-                transition: width .3s ease
-                &::after
-                    font-size: $body-size-desktop
-                    transition: font-size .3s ease
-                    // transition-delay: .4s
                 span
                     display: inline
     @include media-breakpoint-down(desktop)
@@ -206,6 +199,8 @@ footer#document-footer .footer-search
     .pagefind-footer
         color: $footer-color
         padding: 0
+        &.toggle-icon
+            transform: translateX(-35%)
     #search
         margin-top: 0
         a
