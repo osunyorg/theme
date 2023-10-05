@@ -1,0 +1,11 @@
+{{ $item := (dict
+    (dict "title" .Title)
+    (dict "image" .Params.image)
+    (dict "summary" .Params.summary)
+    (dict "date" .Date)
+    (dict "url" .Permalink)
+    (dict "categories" .Params.Categories)
+    (dict "authors" (slice .Params.authors))
+)}}
+
+{{ return $item }}
