@@ -19,13 +19,15 @@ console.log(`
 
 const command = process.argv[2];
 
-let pagefindExclude = ".pages__section, .block-pages, "
-pagefindExclude    += ".posts__section, .block-posts, .post-sidebar, "
-pagefindExclude    += ".organizations__section, .block-partners, .block-organizations, "
-pagefindExclude    += ".persons__section, .block-organization_chart, .block-people, .block-persons, "
-pagefindExclude    += ".programs__section, .block-programs, "
-pagefindExclude    += ".events__section, .block-agenda, "
-pagefindExclude    += ".diplomas__taxonomy, .block-diplomas"
+let pagefindExclude = `
+    .pages__section, .block-pages,
+    .posts__section, .block-posts, .post-sidebar,
+    .organizations__section, .block-partners, .block-organizations,
+    .persons__section, .block-organization_chart, .block-people, .block-persons,
+    .programs__section, .block-programs,
+    .events__section, .block-agenda,
+    .diplomas__taxonomy, .block-diplomas`;
+
 
 function execute(string) {
     console.log("OSUNY runs " + string);

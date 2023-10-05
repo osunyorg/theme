@@ -4,9 +4,11 @@
   "enableSourceMap" true
   "includePaths" (slice "node_modules")
 ) -}}
+<!-- PostCSS -->
+{{- $postCSSOpts := (dict "config" "themes/osuny-hugo-theme-aaa") -}}
 
 {{- $styles := resources.Get "sass/main.sass" | toCSS $cssOpts -}}
 {{ if hugo.IsProduction }}
-  {{- $styles = resources.Get "sass/main.sass" | toCSS $cssOpts | postCSS | minify | fingerprint -}}
+  {{- $styles = resources.Get "sass/main.sass" | toCSS $cssOpts | postCSS $postCSSOpts | minify | fingerprint -}}
 {{ end }}
 <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
