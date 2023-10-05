@@ -8,5 +8,5 @@ import './design-system/search';
 import './design-system/toc';
 import './blocks/keyFigures';
 import './blocks/organizations';
-import './blocks/people';
+import './blocks/persons';
 import './blocks/timeline';
