@@ -10,17 +10,16 @@
 
 {{ with $post }}
 
-  {{ .title }}
-  {{ if .Params.image }}
-    {{- $direction = partial "GetImageDirection" .Params.image -}}
+  {{ if .image }}
+    {{- $direction = partial "GetImageDirection" .image -}}
   {{ end }}
 
   <article class='post {{ if $alternate }}{{ $direction }} {{if not (modBool $index 2)}}left{{ else}}right{{end}}{{end}}' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="post-content">
-      {{- $title := partial "PrepareHTML" .Title -}}
+      {{- $title := partial "PrepareHTML" .title -}}
 
       {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+        <a href="{{ .url }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
 
       {{ if site.Params.posts.index.show_categories }}
@@ -28,14 +27,14 @@
       {{ end }}
 
       {{ if site.Params.posts.index.show_description }}
-        {{- if (partial "GetTextFromHTML" .Params.summary) -}}
+        {{- if (partial "GetTextFromHTML" .summary) -}}
           {{ if site.Params.posts.index.truncate_description }}
             <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
-              "text" .Params.summary
+              "text" .summary
               "length" site.Params.posts.index.truncate_description
               ) }}</p>
           {{ else }}
-            <p itemprop="articleBody">{{ partial "PrepareText" .Params.summary }}</p>
+            <p itemprop="articleBody">{{ partial "PrepareText" .summary }}</p>
           {{ end }}
         {{- end -}}
       {{- end -}}
@@ -47,13 +46,12 @@
         {{ end }}
       </div>  */}}
 
-
     </div>
     <div class="media">
-      {{- if .Params.image -}}
+      {{- if .image -}}
         {{- partial "commons/image.html"
               (dict
-                "image"    .Params.image
+                "image"    .image
                 "sizes"    site.Params.image_sizes.sections.posts.item
               ) -}}
       {{- else if site.Params.posts.default_image -}}

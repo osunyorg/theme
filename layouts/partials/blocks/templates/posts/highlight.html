@@ -1,9 +1,8 @@
-{{ if .posts }}
+{{ if .elements }}
   <div class="highlight">
-    {{ $highlight := index .posts 0 }}
-    {{ $highlight = site.GetPage (printf "/posts/%s" $highlight)}}
-    {{ $list := .posts }}
-
+    {{ $highlight := index .elements 0 }}
+    {{ $list := .elements }}
+    
     {{ with $highlight }}
       <div class="highlight-post">
         {{ partial "posts/post" (dict 
@@ -17,34 +16,32 @@
       {{ $first := true }}
       <div class="list">
         {{ range after 1 . }}
-          {{ with site.GetPage (printf "/posts/%s" .) }}
-            <article class="post">
-              {{- $title := partial "PrepareHTML" .Title -}}
-              <h3 itemprop="headline"><a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h3>
-              {{ if site.Params.posts.index.show_categories }}
-                {{- partial "posts/categories" . -}}
-              {{ end }}
-              {{ if site.Params.posts.index.show_description }}
-                {{- if (partial "GetTextFromHTML" .Params.summary) -}}
-                  {{ if site.Params.posts.index.truncate_description }}
-                    <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
-                      "text" .Params.summary
-                      "length" site.Params.posts.index.truncate_description
-                      ) }}</p>
-                  {{ else }}
-                    <p itemprop="articleBody">{{ partial "PrepareText" .Params.summary }}</p>
-                  {{ end }}
-                {{- end -}}
-              {{- end -}}
-
-              <div class="post-meta">
-                <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
-                {{ if site.Params.posts.index.show_author }}
-                  {{- partial "posts/author" . -}}
+          <article class="post">
+            {{- $title := partial "PrepareHTML" .title -}}
+            <h3 itemprop="headline"><a href="{{ .url }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a></h3>
+            {{ if site.Params.posts.index.show_categories }}
+              {{- partial "posts/categories" . -}}
+            {{ end }}
+            {{ if site.Params.posts.index.show_description }}
+              {{- if (partial "GetTextFromHTML" .summary) -}}
+                {{ if site.Params.posts.index.truncate_description }}
+                  <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
+                    "text" .summary
+                    "length" site.Params.posts.index.truncate_description
+                    ) }}</p>
+                {{ else }}
+                  <p itemprop="articleBody">{{ partial "PrepareText" .summary }}</p>
                 {{ end }}
-              </div>
-            </article>
-          {{ end }}
+              {{- end -}}
+            {{- end -}}
+
+            {{/*  <div class="post-meta">
+              <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
+              {{ if site.Params.posts.index.show_author }}
+                {{- partial "posts/author" . -}}
+              {{ end }}
+            </div>  */}}
+          </article>
         {{ end }}
       </div>
     {{ end }}
