@@ -1,6 +1,6 @@
 <ul>
   {{ range .pages }}
-    {{- $page := partial "GetPageByUrl" .page -}}
+    {{ $page := site.GetPage .file }}
     {{ with $page }}
       <li>
         <a href="{{- .Permalink -}}">

@@ -3,13 +3,15 @@
 
 <div class="grid">
   {{ range .pages }}
-    {{- $page := false -}}
+    {{- $file := false -}}
     {{/*  Check if . is a map or page url, necessary when pages/grid is called outside block context */}}
     {{ if reflect.IsMap . }}
-      {{- $page = partial "GetPageByUrl" .page -}}
+      {{ $file = .file }}
     {{ else }}
-      {{- $page =  partial "GetPageByUrl" . -}}
+      {{ $file = . }}
     {{ end }}
+
+    {{ $page := site.GetPage $file }}
 
     {{ with $page }}
       <article>
