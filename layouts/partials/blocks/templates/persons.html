@@ -7,7 +7,7 @@
 {{- with .block.data -}}
   {{- $with_link := .with_link -}}
   {{- $with_photo := .with_photo -}}
-  <div class="block block-people{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-persons{{ if $title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         {{ if (or $title .description) -}}
@@ -57,7 +57,7 @@
                     {{ partial "commons/image.html"
                       (dict
                         "image"    $person.Params.image
-                        "sizes"    site.Params.image_sizes.blocks.people
+                        "sizes"    site.Params.image_sizes.blocks.persons
                       )}}
                   {{ end -}}
                 </div>

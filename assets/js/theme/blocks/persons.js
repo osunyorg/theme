@@ -1,6 +1,6 @@
-const blocksPeople = document.querySelectorAll('.block-people');
+const blocksPersons = document.querySelectorAll('.block-persons');
 
-class BlockPeople {
+class BlockPersons {
     constructor (dom) {
         this.dom = dom;
 
@@ -21,6 +21,6 @@ class BlockPeople {
     }
 }
 
-blocksPeople.forEach((dom) => {
-    new BlockPeople(dom);
+blocksPersons.forEach((dom) => {
+    new BlockPersons(dom);
 });
