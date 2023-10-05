@@ -1,13 +1,28 @@
 {{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
-{{- $charLimit := 30 -}}
-{{- $isColumn := false -}}
+{{- $charLimit := 80 -}}
+{{- $isLarge := false -}}
 
 {{- with .block.data -}}
   {{- $with_link := .with_link -}}
   {{- $with_photo := .with_photo -}}
-  <div class="block block-people{{ if $title }} block-with-title{{ end }}">
+
+  {{ range .persons }}
+    {{- $person := site.GetPage (printf "/persons/%s" .slug) -}}
+    {{- $summary := $person.Params.summary -}}
+    {{- $content := $person.Content -}}
+    {{- $role := .role -}}
+    
+    {{ with (or $role $summary $content)}}
+      {{- $contentLength := len . -}}
+      {{ if ge $contentLength $charLimit }}
+        {{- $isLarge = true -}}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  <div class="block block-people{{ if $title }} block-with-title{{ end }}{{ if $isLarge }} large-block{{ end }}">
     <div class="container">
       <div class="block-content">
         {{ if (or $title .description) -}}
@@ -22,6 +37,7 @@
             {{ end -}}
           </div>
         {{- end }}
+
         <div class="persons">
           {{- range .persons -}}
             {{ $person := site.GetPage (printf "/persons/%s" .slug) }}
@@ -37,11 +53,7 @@
                   </a>
                   {{ end }}
                 </h3>
-                <p itemprop="jobTitle"
-                    {{- if $person.Params.summary -}}
-                      {{ $summaryLength := len $person.Params.summary}}
-                      {{- if ge $summaryLength $charLimit -}} data-column="true" {{- end -}}
-                    {{- end -}}>
+                <p itemprop="jobTitle">
                   {{- if (partial "GetTextFromHTML" .role) }}
                     {{ partial "PrepareHTML" .role }}
                   {{- else if partial "GetTextFromHTML" $person.Params.summary }}

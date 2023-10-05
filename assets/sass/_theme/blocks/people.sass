@@ -1,22 +1,9 @@
 .block-people
     @include in-page-with-sidebar
+        // &.large-block .persons
         .persons
             @include grid(1, sm)
-            &:not(.is-column)
-                @include grid(2, desktop)
-            &.is-column
-                row-gap: $spacing0
-                @include grid(2, xl)
-                @include media-breakpoint-between(desktop, xl)
-                    .person
-                        justify-content: space-between
-                        gap: $spacing1
-                    .avatar
-                        margin-right: 0
-                        order: 1
-                        width: col(3)
-                    .description
-                        margin-top: 0
+            @include grid(2, desktop)
         article
             flex-direction: row
             .avatar
