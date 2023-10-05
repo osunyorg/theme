@@ -4,7 +4,7 @@
 
 <div class="grid">
   {{ range .pages }}
-    {{- $page := partial "GetPageByUrl" .page -}}
+    {{ $page := site.GetPage .file }}
     {{ with $page }}
       {{ if .Params.image }}
         {{ $image_class = printf "image-%s" (partial "GetImageDirection" .Params.image) }}
