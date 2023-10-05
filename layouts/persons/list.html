@@ -1,9 +1,9 @@
 {{ define "main" }}
 
-  {{- $is_organigram_present := false -}}
+  {{- $is_block_persons_present := false -}}
   {{ range .Params.contents }}
-    {{- if eq .template "people" -}}
-      {{- $is_organigram_present = true -}}
+    {{- if eq .template "persons" -}}
+      {{- $is_block_persons_present = true -}}
     {{ end }}
   {{ end }}
 
@@ -12,10 +12,9 @@
   <div class="document-content">
     {{ partial "toc/container.html"
         (dict
-            "toc" "toc/default.html"
-            "context" .
-        )
-    }}
+          "toc" "toc/default.html"
+          "context" .
+        ) }}
 
     {{ $summary_block := false }}
     {{ if .Params.contents }}
@@ -33,7 +32,7 @@
     {{ partial "contents/list.html" . }}
 
     <div class="container">
-      {{- if not $is_organigram_present -}}
+      {{- if not $is_block_persons_present -}}
         {{ partial "persons/taxonomies.html" . }}
         {{ $persons := .Pages.ByParam "last_name" }}
         {{ $persons = (.Paginate $persons).Pages }}
