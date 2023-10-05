@@ -28,8 +28,10 @@
   {{ $class = printf "{{$class}} %s" $layout_class }}
 
   {{- $page_class := "" -}}
-
-  {{ $page := partial "GetPageByUrl" .page }}
+  {{ $page := "" }}
+  {{ with .page }}
+    {{ $page = site.GetPage .file }}
+  {{ end }}
 
   {{- with $page }}
     {{- $show_main_page = true -}}
