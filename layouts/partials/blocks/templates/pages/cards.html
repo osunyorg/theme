@@ -3,7 +3,7 @@
 
 <div class="cards">
   {{ range .pages }}
-    {{- $page := partial "GetPageByUrl" .page -}}
+    {{ $page := site.GetPage .file }}
     {{ with $page }}
       <article class="card">
         <h3>

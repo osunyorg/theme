@@ -20,22 +20,7 @@
     {{ if .Params.contents }}
       {{ partial "contents/list.html" . }}
     {{ else }}
-
-      {{ $page_class := "" }}
-      {{ if .Params.bodyclass }}
-        {{- $page_class = printf "block-page-%s" .Params.bodyclass }}
-      {{ end }}
-      <div class="block block-pages block-pages--grid {{ $page_class }}">
-        <div class="container">
-          <div class="block-content">
-            {{- partial "blocks/templates/pages/grid.html" (dict 
-                "pages" .Params.children
-                "show_images" true
-                "show_descriptions" true
-                ) }}
-          </div>
-        </div>
-      </div>
+      {{ partial "pages/children.html" . }}
     {{ end }}
   </div>
 

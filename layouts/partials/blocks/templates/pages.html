@@ -28,8 +28,11 @@
   {{ $class = printf "{{$class}} %s" $layout_class }}
 
   {{- $page_class := "" -}}
+  {{ $page := "" }}
+  {{ with .page }}
+    {{ $page = site.GetPage .file }}
+  {{ end }}
 
-  {{ $page := partial "GetPageByUrl" .page }}
   {{- with $page }}
     {{- $show_main_page = true -}}
     {{- $page_link = $page.Permalink }}

@@ -1,16 +1,16 @@
-{{ if . }}
-  <div class="page__children">
-    <div class="container">
-      <div class="pages">
-        {{ range . }}
-          <div>
-            {{ $page := partial "GetPageByUrl" . }}
-            {{ with $page }}
-              {{ partial "pages/page.html" . }}
-            {{ end }}
-          </div>
-        {{ end }}
-      </div>
+{{ $page_class := "" }}
+{{ if .Params.bodyclass }}
+  {{- $page_class = printf "block-page-%s" .Params.bodyclass }}
+{{ end }}
+
+<div class="block block-pages block-pages--grid {{ $page_class }}">
+  <div class="container">
+    <div class="block-content">
+      {{- partial "blocks/templates/pages/grid.html" (dict 
+          "pages" .Params.children
+          "show_images" true
+          "show_descriptions" true
+          ) }}
     </div>
   </div>
-{{ end }}
+</div>

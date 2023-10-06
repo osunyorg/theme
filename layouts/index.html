@@ -19,17 +19,7 @@
     {{- if .Params.contents }}
       {{- partial "contents/list.html" . -}}
     {{ else }}
-      <div class="block block-pages block-pages--grid">
-        <div class="container">
-          <div class="block-content">
-            {{- partial "blocks/templates/pages/grid.html" (dict 
-                "pages" .Params.children
-                "show_images" true
-                "show_descriptions" true
-                ) }}
-          </div>
-        </div>
-      </div>
+      {{ partial "pages/children.html" . }}
     {{ end }}
   </div>
 {{ end }}
