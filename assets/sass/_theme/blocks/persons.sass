@@ -1,18 +1,32 @@
 .block-persons
     @include in-page-with-sidebar
-        // &.large-block .persons
+        &.large-block .persons
+            @include grid(1, md)
+            @include media-breakpoint-up(md)
+                .person
+                    .avatar
+                        width: col(2, 8)
+                        margin-right: calc(#{col(1, 8)} + #{$spacing0})
         .persons
-            @include grid(1, sm)
-            @include grid(2, desktop)
+            @include grid(1)
+            @include grid(2, xl)
+        .person
+            flex-direction: row
         article
             flex-direction: row
             .avatar
                 margin-right: $spacing1
-                @include media-breakpoint-up(md)
-                    width: calc(#{col(1, 4)} + #{$grid-gutter})
+                width: calc(#{col(1, 4)} + #{$grid-gutter})
             .description
                 margin-top: $spacing1
-
     @include in-page-without-sidebar
         .top .description
             max-width: col(8)
+
+    @include media-breakpoint-down(xl)
+        .person .avatar
+            width: col(1)
+
+    @include media-breakpoint-down(md)
+        .persons
+            grid-gap: $spacing1
