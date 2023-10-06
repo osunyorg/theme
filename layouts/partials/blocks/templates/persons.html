@@ -22,7 +22,7 @@
     {{ end }}
   {{ end }}
 
-  <div class="block block-persons{{ if $title }} block-with-title{{ end }}{{ if $isLarge }} large-block{{ end }}">
+  <div class="block block-persons{{ if $title }} block-with-title{{ end }}{{ if $isLarge }} large-block{{ end }} {{- if eq $with_photo false }} without-photo {{- end }}">
     <div class="container">
       <div class="block-content">
         {{ if (or $title .description) -}}
