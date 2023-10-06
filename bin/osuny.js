@@ -1,6 +1,7 @@
 #! /usr/bin/env node
 
 const shell = require("shelljs");
+shell.set('-e'); // exit upon first error
 
 console.log(`
   .=*#%%#*=        -*#%%#*=.      =+-      ++.     .+ .+#%%#+.     :++      -+-
@@ -31,7 +32,7 @@ let pagefindExclude = `
 
 function execute(string) {
     console.log("OSUNY runs " + string);
-    shell.exec(string, fatal: true);
+    shell.exec(string);
 }
 
 if (command === "watch") {
