@@ -31,7 +31,7 @@
     {{- partial "footer/plausible.html" . -}}
     {{- partial "footer/js.html" . -}}
     {{- partial "footer/script.html" . -}}
-    {{- if or (not hugo.IsProduction) site.Params.force_debug -}}
+    {{- if not hugo.IsProduction -}}
       {{- partial "footer/debug.html" . -}}
     {{- end -}}
   </body>
