@@ -31,26 +31,21 @@
       {{ if eq $provider.name "vimeo" }}
         {{ $parts := split $url "/" }}
         {{ $identifier = (index (last 1 $parts) 0) }}
-        {{ $url = replace $url "https://vimeo.com/" "//player.vimeo.com/video/"}}
       {{ else if eq $provider.name "youtube" }}
         {{ if eq $provider_url "youtu.be" }}
           {{ $parts := split $url "/" }}
           {{ $identifier = (index (last 1 $parts) 0) }}
-          {{ $url = replace $url "https://www.youtube.com/watch?v=" "https://www.youtube.com/embed/"}}
         {{ else if eq $provider_url "youtube.com" }}
           {{ $parts := split $url "v=" }}
           {{ $identifier = (index (last 1 $parts) 0) }}
-          {{ $url = replace $url "https://www.youtube.com/watch?v=" "https://www.youtube.com/embed/"}}
         {{ end }}
       {{ else if eq $provider.name "dailymotion" }}
         {{ if eq $provider_url "dai.ly" }}
           {{ $parts := split $url "dai.ly/" }}
           {{ $identifier = (index (last 1 $parts) 0) }}
-          {{ $url = replace $url "https://www.dailymotion.com/video/" "http://www.dailymotion.com/embed/video/"}}
         {{ else if eq $provider_url "dailymotion.com" }}
           {{ $parts := split $url "video/" }}
           {{ $identifier = (index (last 1 $parts) 0) }}
-          {{ $url = replace $url "https://www.dailymotion.com/video/" "http://www.dailymotion.com/embed/video/"}}
         {{ end }}
       {{ else if eq $provider.name "peertube" }}
         {{ $parts := split $url "w/" }}
