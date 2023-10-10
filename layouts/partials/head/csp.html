@@ -2,7 +2,7 @@
 <meta http-equiv="Content-Security-Policy"
       content="
         default-src 'self' {{ delimit . " " }}
-        {{ if not hugo.IsProduction }}'unsafe-inline'{{ end }}
+        {{ if or (not hugo.IsProduction) site.Params.debug }}'unsafe-inline'{{ end }}
         {{ if site.Params.search.active }}'wasm-unsafe-eval'{{ end }};
       " />
 {{- end -}}
