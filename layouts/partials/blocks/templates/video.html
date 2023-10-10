@@ -14,10 +14,26 @@
 
           {{ if .url }}
             <div class="video">
-              {{ partial "blocks/templates/video/GetIframe" ( dict
-                  "url" .url
+              <div class="video-player">
+                <button class="video-player__play" title ="{{- i18n "blocks.video.play" -}}" aria-label="{{- i18n "blocks.video.play" -}}"></button>
+                <img src="https://img.youtube.com/vi/XEEUOiTgJL0/hqdefault.jpg" alt="">
+              </div>
+              {{ $url := .url}}
+              {{ if strings.Contains $url "vimeo" }}
+                {{ $url = replace $url "https://vimeo.com/" "//player.vimeo.com/video/"}}
+              {{ end }}
+              {{ if strings.Contains $url "youtube" }}
+                {{ $url = replace $url "https://www.youtube.com/watch?v=" "https://www.youtube.com/embed/"}}
+              {{ end }}
+              {{ if strings.Contains $url "dailymotion" }}
+                {{ $url = replace $url "https://www.dailymotion.com/video/" "http://www.dailymotion.com/embed/video/"}}
+              {{ end }}
+              <div class="video-container" data-url="{{ $url }}">
+                {{ partial "blocks/templates/video/GetIframe" ( dict
+                  "url" ""
                   "title" .video_title
                 )}}
+              </div>
             </div>
           {{ end }}
 

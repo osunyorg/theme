@@ -4,6 +4,47 @@
         @supports not (aspect-ratio: 1)
             iframe
                 min-height: 400px
+        position: relative
+        &-player
+            align-items: center
+            height: 100%
+            display: flex
+            justify-content: center
+            left: 0
+            position: absolute
+            top: 0
+            width: 100%
+            img,
+            &::after
+                position: absolute
+                top: 0
+                left: 0
+                width: 100%
+                height: 100%
+            img
+                z-index: 1
+            &::after
+                content: ''
+                background-color: transparentize(black, .5)
+                backdrop-filter: blur(4px)
+                z-index: 2
+            button
+                @include button-reset
+                @include icon-block(play, before)
+                border: 1px solid white
+                border-radius: 100%
+                color: white
+                z-index: 3
+                padding: half($spacing0)
+                transition: background-color .3s ease
+                &::before
+                    font-size: px2rem(100)
+                    transition: color .3s ease
+                    vertical-align: middle
+                &:hover
+                    background-color: white
+                    &::before
+                        color: black
         iframe
             background: black
         + p

@@ -10,3 +10,4 @@ import './blocks/keyFigures';
 import './blocks/organizations';
 import './blocks/persons';
 import './blocks/timeline';
+import './blocks/videos.js';
