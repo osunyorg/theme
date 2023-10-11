@@ -12,15 +12,22 @@
           {{ end -}}
 
           {{ if .url }}
-          <div class="video">
-            {{ $partial := printf "blocks/templates/video/%s" .video.platform }}
-            {{ partial $partial . }}
-          </div>
-          {{ end }}
+            {{ $title := "video" }}
+            {{ with .video_title }}
+              {{ $title = .}}
+            {{ end }}
 
-          {{ if .video_title }}
-            <p>{{- partial "PrepareHTML" .video_title -}}</p>
-          {{ end }}
+            <div class="video">
+              {{ $partial := printf "blocks/templates/video/%s" .video.platform }}
+              {{ partial $partial ( dict 
+                "context" .
+                "title" $title
+                )}}
+            </div>
+            {{ end }}
+            {{ if .video_title }}
+              <p>{{- partial "PrepareHTML" .video_title -}}</p>
+            {{ end }}
 
           {{ partial "commons/transcription" ( dict
             "transcription" .transcription

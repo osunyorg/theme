@@ -1,14 +1,11 @@
-{{ $title := "video" }}
-{{ with .video_title }}
-  {{ $title = .}}
-{{ end }}
+{{ $title := .title }}
 
-{{ if .video.poster }}
+{{ if .context.video.poster }}
   <div class="lazy-video-player">
     <button class="lazy-video-player__play" title ="{{- i18n "blocks.video.play" -}}" aria-label="{{- i18n "blocks.video.play" -}}"></button>
-    <img src="{{ .video.poster }}" alt="{{ .video_title }}" loading="lazy">
+    <img src="{{ .context.video.poster }}" alt="{{ .context.video_title }}" loading="lazy">
   </div>
 {{ end }}
 <div class="video-container">
-  <iframe data-unloaded-src="{{ .video.embed_with_defaults }}" title="{{ $title }}" allowfullscreen allow="autoplay"></iframe>
+  <iframe data-unloaded-src="{{ .context.video.embed_with_defaults }}" title="{{ $title }}" allowfullscreen allow="autoplay"></iframe>
 </div>
