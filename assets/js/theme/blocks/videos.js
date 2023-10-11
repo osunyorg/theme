@@ -1,17 +1,10 @@
-// function stopThis(){
-//     var iframe = container.getElementsByTagName("iframe")[0];
-//     var url = iframe.getAttribute('src');
-//     iframe.setAttribute('src', '');
-//     iframe.setAttribute('src', url);
-// }
-
 const videos = document.querySelectorAll('.block-video');
 
 class videoPlayer {
     constructor (dom) {
         this.dom = dom;
         
-        this.player = this.dom.querySelector('.video-player');
+        this.player = this.dom.querySelector('.lazy-video-player');
         if (this.player) {
             this.playBtn = this.player.querySelector('button');
         }
