@@ -24,10 +24,11 @@
                 "title" $title
                 )}}
             </div>
-            {{ end }}
-            {{ if .video_title }}
-              <p>{{- partial "PrepareHTML" .video_title -}}</p>
-            {{ end }}
+          {{ end }}
+
+          {{ if .video_title }}
+            <p>{{- partial "PrepareHTML" .video_title -}}</p>
+          {{ end }}
 
           {{ partial "commons/transcription" ( dict
             "transcription" .transcription
