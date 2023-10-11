@@ -2,6 +2,8 @@
   <ul aria-label="{{ i18n "commons.accessibility.shortcut_navigation"}}">
     <li><a href="#main">{{ i18n "commons.accessibility.main_content" }}</a></li>
     <li><a href="#navigation">{{ i18n "commons.accessibility.menu" }}</a></li>
-    <li><a href="#search-button">{{ i18n "commons.accessibility.search" }}</a></li>
+    {{ if site.Params.search.active }}
+      <li><a href="#search-button">{{ i18n "commons.accessibility.search" }}</a></li>
+    {{ end }}
   </ul>
 </nav>
