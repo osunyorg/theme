@@ -21,17 +21,7 @@
                   <img src="https://osuny-1b4da.kxcdn.com/g1qn3b0yvdg2t0wosq059xocpyq1?format=webp&width=1800&height=0&&fit=inside&quality=50" alt="" />
                 </picture>
               </div>
-              {{ $url := .url}}
-              {{ if strings.Contains $url "vimeo" }}
-                {{ $url = replace $url "https://vimeo.com/" "//player.vimeo.com/video/"}}
-              {{ end }}
-              {{ if strings.Contains $url "youtube" }}
-                {{ $url = replace $url "https://www.youtube.com/watch?v=" "https://www.youtube.com/embed/"}}
-              {{ end }}
-              {{ if strings.Contains $url "dailymotion" }}
-                {{ $url = replace $url "https://www.dailymotion.com/video/" "http://www.dailymotion.com/embed/video/"}}
-              {{ end }}
-              <div class="video-container" data-url="{{ $url }}">
+              <div class="video-container" data-url="{{ .url }}">
                 {{ partial "blocks/templates/video/GetIframe" ( dict
                   "url" ""
                   "title" .video_title
