@@ -5,12 +5,12 @@ class videoPlayer {
         this.dom = dom;
         
         this.player = this.dom.querySelector('.lazy-video-player');
-        if (this.player) {
-            this.playBtn = this.player.querySelector('button');
-        }
-        else {
+
+        if (!this.player) {
             return;
         }
+        
+        this.playBtn = this.player.querySelector('button');
         this.videoIframe = this.dom.querySelector('.video-container iframe');
         this.videoSrc = this.videoIframe.getAttribute('data-unloaded-src');
         
