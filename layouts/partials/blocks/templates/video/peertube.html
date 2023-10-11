@@ -1,1 +1,6 @@
-{{ partial "PrepareHTML" .video.iframe }}
+<div class="lazy-video-player">
+  <button class="lazy-video-player__play" title ="{{- i18n "blocks.video.play" -}}" aria-label="{{- i18n "blocks.video.play" -}}"></button>
+</div>
+<div class="video-container">
+  <iframe data-unloaded-src="{{ .video.embed_with_defaults }}" title="{{ .video_title }}" allow="autoplay; fullscreen"></iframe>
+</div>
