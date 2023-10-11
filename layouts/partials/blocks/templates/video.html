@@ -1,6 +1,5 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
 {{- $title := .block.title -}}
+
 {{- with .block.data -}}
   <div class="block block-video{{ if $title }} block-with-title{{ end }}">
     <div class="container">
@@ -13,21 +12,10 @@
           {{ end -}}
 
           {{ if .url }}
-            <div class="video">
-              <div class="video-player">
-                <button class="video-player__play" title ="{{- i18n "blocks.video.play" -}}" aria-label="{{- i18n "blocks.video.play" -}}"></button>
-                <picture>
-                  <source srcset="https://osuny-1b4da.kxcdn.com/g1qn3b0yvdg2t0wosq059xocpyq1?format=webp&width=1800&height=0&&fit=inside&quality=50" type="image/jpg" />
-                  <img src="https://osuny-1b4da.kxcdn.com/g1qn3b0yvdg2t0wosq059xocpyq1?format=webp&width=1800&height=0&&fit=inside&quality=50" alt="" />
-                </picture>
-              </div>
-              <div class="video-container" data-url="{{ .url }}">
-                {{ partial "blocks/templates/video/GetIframe" ( dict
-                  "url" ""
-                  "title" .video_title
-                )}}
-              </div>
-            </div>
+          <div class="video">
+            {{ $partial := printf "blocks/templates/video/%s" .video.platform }}
+            {{ partial $partial . }}
+          </div>
           {{ end }}
 
           {{ if .video_title }}
@@ -36,7 +24,7 @@
 
           {{ partial "commons/transcription" ( dict
             "transcription" .transcription
-            "position" $position
+            "position" .block.position
           ) }}
         </div>
       </div>
