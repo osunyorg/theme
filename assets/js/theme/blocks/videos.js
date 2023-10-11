@@ -12,10 +12,16 @@ class videoPlayer {
         this.dom = dom;
         
         this.player = this.dom.querySelector('.video-player');
-        this.playBtn = this.player.querySelector('.video-player__play');
-        this.videoContainer = this.dom.querySelector('.video-container');
-        this.videoIframe = this.videoContainer.querySelector('iframe');
-        this.videoUrl = this.videoContainer.getAttribute('data-url');
+        if (this.player) {
+            this.playBtn = this.player.querySelector('button');
+        }
+        else {
+            return;
+        }
+        this.videoIframe = this.dom.querySelector('.video-container iframe');
+        this.videoSrc = this.videoIframe.getAttribute('data-unloaded-src');
+
+        console.log(this.dom)
         
         this.listen();
     }
@@ -26,7 +32,7 @@ class videoPlayer {
     }
     playVideo() {
         this.player.style.display = 'none';
-        this.videoIframe.src = this.videoUrl;
+        this.videoIframe.src = this.videoSrc;
     }
 }
 

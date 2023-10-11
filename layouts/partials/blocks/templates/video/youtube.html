@@ -1,1 +1,9 @@
-{{ partial "PrepareHTML" .video.iframe }}
+{{ if .video.poster }}
+  <div class="video-player">
+    <button class="video-player__play" title ="{{- i18n "blocks.video.play" -}}" aria-label="{{- i18n "blocks.video.play" -}}"></button>
+    <img src="{{ .video.poster }}" alt="{{ .video_title }}">
+  </div>
+{{ end }}
+<div class="video-container">
+  <iframe data-unloaded-src="{{ .video.embed }}" title="{{ .video_title }}"></iframe>
+</div>
