@@ -13,8 +13,6 @@ class videoPlayer {
         }
         this.videoIframe = this.dom.querySelector('.video-container iframe');
         this.videoSrc = this.videoIframe.getAttribute('data-unloaded-src');
-
-        console.log(this.dom)
         
         this.listen();
     }
