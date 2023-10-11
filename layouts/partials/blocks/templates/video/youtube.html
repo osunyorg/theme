@@ -1,3 +1,8 @@
+{{ $title := "video" }}
+{{ with .video_title }}
+  {{ $title = .}}
+{{ end }}
+
 {{ if .video.poster }}
   <div class="lazy-video-player">
     <button class="lazy-video-player__play" title ="{{- i18n "blocks.video.play" -}}" aria-label="{{- i18n "blocks.video.play" -}}"></button>
@@ -5,5 +10,5 @@
   </div>
 {{ end }}
 <div class="video-container">
-  <iframe data-unloaded-src="{{ .video.embed_with_defaults }}" title="{{ .video_title }}" allowfullscreen allow="autoplay"></iframe>
+  <iframe data-unloaded-src="{{ .video.embed_with_defaults }}" title="{{ $title }}" allowfullscreen allow="autoplay"></iframe>
 </div>
