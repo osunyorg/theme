@@ -1,4 +1,5 @@
 {{- $title := .block.title -}}
+{{- $position := .block.position -}}
 
 {{- with .block.data -}}
   <div class="block block-video{{ if $title }} block-with-title{{ end }}">
@@ -32,7 +33,7 @@
 
           {{ partial "commons/transcription" ( dict
             "transcription" .transcription
-            "position" .block.position
+            "position" $position
           ) }}
         </div>
       </div>
