@@ -1,11 +1,9 @@
-{{ $title := .title }}
-
-{{ if .context.video.poster }}
-  <div class="lazy-video-player">
-    <button class="lazy-video-player__play" title ="{{- i18n "blocks.video.play" -}}" aria-label="{{- i18n "blocks.video.play" -}}"></button>
-    <img src="{{ .context.video.poster }}" alt="{{ .context.video_title }}" loading="lazy">
-  </div>
-{{ end }}
+<div class="lazy-video-player">
+  <button class="lazy-video-player__play" title ="{{- i18n "blocks.video.play" -}}" aria-label="{{- i18n "blocks.video.play" -}}"></button>
+  {{ if .video.poster }}
+    <img src="{{ .video.poster }}" alt="{{ .video.title }}" loading="lazy">
+  {{ end }}
+</div>
 <div class="video-container">
-  <iframe data-unloaded-src="{{ .context.video.embed_with_defaults }}" title="{{ $title }}" allowfullscreen allow="autoplay"></iframe>
+  <iframe data-unloaded-src="{{ .video.embed_with_defaults }}" title="{{ video.title }}" allowfullscreen allow="autoplay"></iframe>
 </div>

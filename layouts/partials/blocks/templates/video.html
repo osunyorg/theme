@@ -20,10 +20,7 @@
 
             <div class="video">
               {{ $partial := printf "blocks/templates/video/%s" .video.platform }}
-              {{ partial $partial ( dict 
-                "context" .
-                "title" $title
-                )}}
+              {{ partial $partial . }}
             </div>
           {{ end }}
 
