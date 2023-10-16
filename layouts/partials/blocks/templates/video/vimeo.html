@@ -1,9 +1,1 @@
-<div class="lazy-video-player">
-  <button class="lazy-video-player__play" title ="{{- i18n "blocks.video.play" -}}" aria-label="{{- i18n "blocks.video.play" -}}"></button>
-  {{ if .video.poster }}
-    <img src="{{ .video.poster }}" alt="{{ .video.title }}" loading="lazy">
-  {{ end }}
-</div>
-<div class="video-container">
-  <iframe data-unloaded-src="{{ .video.embed_with_defaults }}" title="{{ .video.title }}" allow="autoplay; fullscreen"></iframe>
-</div>
+<iframe data-unloaded-src="{{ .embed_with_defaults }}" title="{{ .title }}" allow="autoplay; fullscreen"></iframe>
