@@ -19,8 +19,11 @@
             {{ end }}
 
             <div class="video">
-              {{ $partial := printf "blocks/templates/video/%s" .video.platform }}
-              {{ partial $partial . }}
+              {{ if eq .video.platform "default" }}
+                {{ partial "PrepareHTML" .video.iframe }}
+              {{ else }}
+                {{ partial "blocks/templates/video/lazy-container" .video }}
+              {{ end }}
             </div>
           {{ end }}
 
