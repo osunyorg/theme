@@ -21,14 +21,16 @@ console.log(`
 const command = process.argv[2];
 
 let pagefindExclude = `
-    .pages__section, .block-pages,
-    .posts__section, .block-posts, .post-sidebar,
-    .organizations__section, .block-partners, .block-organizations,
-    .persons__section, .block-organization_chart, .block-persons, .block-persons, .authors__term,
-    .programs__section, .block-programs,
+    .authors__term,
+    .categories__term,
+    .diplomas__taxonomy, .block-diplomas,
     .events__section, .block-agenda,
-    .diplomas__taxonomy, .block-diplomas`;
-
+    .organizations__section, .block-organizations,
+    .pages__section, .block-pages,
+    .persons__section, .block-persons, 
+    .posts__section, .block-posts, .post-sidebar, 
+    .programs__section, .block-programs
+    `;
 
 function execute(string) {
     console.log("OSUNY runs " + string);
