@@ -24,7 +24,7 @@ let pagefindExclude = `
     .pages__section, .block-pages,
     .posts__section, .block-posts, .post-sidebar,
     .organizations__section, .block-partners, .block-organizations,
-    .persons__section, .block-organization_chart, .block-persons, .block-persons,
+    .persons__section, .block-organization_chart, .block-persons, .block-persons, .authors__term,
     .programs__section, .block-programs,
     .events__section, .block-agenda,
     .diplomas__taxonomy, .block-diplomas`;
