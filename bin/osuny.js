@@ -21,6 +21,7 @@ console.log(`
 const command = process.argv[2];
 
 let pagefindExclude = `
+    .administrators__term,
     .authors__term,
     .categories__term,
     .diplomas__taxonomy, .block-diplomas,
@@ -29,7 +30,9 @@ let pagefindExclude = `
     .pages__section, .block-pages,
     .persons__section, .block-persons, 
     .posts__section, .block-posts, .post-sidebar, 
-    .programs__section, .block-programs
+    .programs__section, .block-programs,
+    .researchers__term,
+    .teachers__term
     `;
 
 function execute(string) {
