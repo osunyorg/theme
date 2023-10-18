@@ -1,6 +1,6 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
 {{- $title := .block.title -}}
+{{- $position := .block.position -}}
+
 {{- with .block.data -}}
   <div class="block block-video{{ if $title }} block-with-title{{ end }}">
     <div class="container">
@@ -13,11 +13,17 @@
           {{ end -}}
 
           {{ if .url }}
+            {{ $title := "video" }}
+            {{ with .video_title }}
+              {{ $title = .}}
+            {{ end }}
+
             <div class="video">
-              {{ partial "blocks/templates/video/GetIframe" ( dict
-                  "url" .url
-                  "title" .video_title
-                )}}
+              {{ if eq .video.platform "default" }}
+                {{ partial "PrepareHTML" .video.iframe }}
+              {{ else }}
+                {{ partial "blocks/templates/video/lazy-container" .video }}
+              {{ end }}
             </div>
           {{ end }}
 
