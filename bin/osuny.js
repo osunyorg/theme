@@ -67,8 +67,8 @@ if (command === "server-example") {
 }
 
 if (command === "example") {
-    execute("yarn setup-example > /dev/null || yarn update");
-    execute("yarn server-example");
+    execute("yarn setup-example > /dev/null || yarn upgrade");
+    execute("yarn osuny server-example");
 }
 
 if (command === "update-theme") {
