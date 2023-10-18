@@ -21,14 +21,19 @@ console.log(`
 const command = process.argv[2];
 
 let pagefindExclude = `
-    .pages__section, .block-pages,
-    .posts__section, .block-posts, .post-sidebar,
-    .organizations__section, .block-partners, .block-organizations,
-    .persons__section, .block-organization_chart, .block-persons, .block-persons,
-    .programs__section, .block-programs,
+    .administrators__term,
+    .authors__term,
+    .categories__term,
+    .diplomas__taxonomy, .block-diplomas,
     .events__section, .block-agenda,
-    .diplomas__taxonomy, .block-diplomas`;
-
+    .organizations__section, .block-organizations,
+    .pages__section, .block-pages,
+    .persons__section, .block-persons, 
+    .posts__section, .block-posts, .post-sidebar, 
+    .programs__section, .block-programs,
+    .researchers__term,
+    .teachers__term
+    `;
 
 function execute(string) {
     console.log("OSUNY runs " + string);
@@ -65,8 +70,8 @@ if (command === "server-example") {
 }
 
 if (command === "example") {
-    execute("yarn setup-example > /dev/null || yarn update");
-    execute("yarn server-example");
+    execute("yarn setup-example > /dev/null || yarn upgrade");
+    execute("yarn osuny server-example");
 }
 
 if (command === "update-theme") {
