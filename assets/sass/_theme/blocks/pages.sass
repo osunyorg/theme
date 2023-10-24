@@ -57,14 +57,14 @@
             .grid
                 @include grid(2, desktop)
                 @include in-page-with-sidebar
-                    grid-column-gap: half($grid-gutter) !important
+                    grid-column-gap: half($grid-gutter-desktop) !important
                 @include in-page-without-sidebar
                     @include grid(3, desktop)
 
     &--cards
         background-color: $block-pages-card-background
-        padding-bottom: $grid-gutter
-        padding-top: $grid-gutter
+        padding-bottom: $grid-gutter-desktop
+        padding-top: $grid-gutter-desktop
         *:not(.heading) + &
             margin-top: 0
         .blocks &:last-of-type
@@ -72,7 +72,7 @@
         .cards
             @include grid(2, desktop)
             @include in-page-with-sidebar
-                grid-gap: half($grid-gutter) !important
+                grid-gap: half($grid-gutter-desktop) !important
             @include in-page-without-sidebar
                 @include grid(3, desktop)
         // TODO: move this //
@@ -152,7 +152,7 @@
                 ul
                     @include grid(2, desktop)
                     grid-row-gap: $spacing0 !important
-                    grid-column-gap: half($grid-gutter) !important
+                    grid-column-gap: half($grid-gutter-desktop) !important
                     li
                         margin-top: 0
 

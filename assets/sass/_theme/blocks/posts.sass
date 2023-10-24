@@ -26,7 +26,7 @@
                 margin-top: $spacing3
         @include in-page-with-sidebar
             .grid
-                @include grid(2, desktop, $grid-gutter, half($grid-gutter))
+                @include grid(2, desktop, $grid-gutter, half($grid-gutter-desktop))
         @include in-page-without-sidebar
             .grid
                 @include grid($block-posts-grid-columns)
@@ -72,15 +72,15 @@
                 + article
                     margin-top: $spacing1
                 .media
-                    width: calc(#{col(2, 8)} + #{half($grid-gutter)})
+                    width: calc(#{col(2, 8)} + #{half($grid-gutter-desktop)})
                 .post-content
                     width: col(6, 8)
-                    margin-left: half($grid-gutter)
+                    margin-left: half($grid-gutter-desktop)
 
         @include in-page-without-sidebar
             article
                 border-bottom: 1px solid $color-border
-                gap: $grid-gutter
+                gap: $grid-gutter-desktop
                 padding-bottom: $spacing3
                 position: relative
                 .media
@@ -136,11 +136,11 @@
                 .post
                     flex-direction: row
                     .media
-                        width: calc(#{col(3, 8)} + #{half($grid-gutter)})
+                        width: calc(#{col(3, 8)} + #{half($grid-gutter-desktop)})
                         margin-bottom: 0
                     .post-content
                         width: col(5, 8)
-                        margin-left: half($grid-gutter)
+                        margin-left: half($grid-gutter-desktop)
             .list
                 article
                     @include grid(8, desktop, 0, 0)

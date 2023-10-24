@@ -49,7 +49,7 @@
                     &:last-child
                         margin-bottom: 0
         .call_to_action--with-image
-            padding-top: half($grid-gutter-sm)
+            padding-top: half($grid-gutter)
             display: flex
             flex-direction: column
             > *
@@ -67,7 +67,7 @@
             > div
                 // TODO : simplifier l'application d'une couleur de fond sur le CTA avec sidebar et sans sidebar
                 background-color: var(--cta-background-color)
-                padding: $grid-gutter col(1, 8)
+                padding: $grid-gutter-desktop col(1, 8)
                 width: 100%
                 position: relative
                 &::after
@@ -78,7 +78,7 @@
                     top: 0
                     bottom: 0
                     left: 100%
-                    width: Max(#{$grid-gutter}, calc(50vw - #{half($grid-max-width)} + #{$grid-gutter}))
+                    width: Max(#{$grid-gutter-desktop}, calc(50vw - #{half($grid-max-width)} + #{$grid-gutter-desktop}))
             &--with-image
                 picture
                     order: 1
@@ -87,18 +87,18 @@
                     position: relative
                     z-index: 2
                     img
-                        margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
+                        margin-bottom: calc(-#{$grid-gutter-desktop} + -#{$spacing1})
                 > div
-                    padding-top: calc(#{$grid-gutter} + #{$spacing3})
+                    padding-top: calc(#{$grid-gutter-desktop} + #{$spacing3})
 
     @include in-page-without-sidebar
         background-color: var(--cta-background-color)
         padding-top: 0
         padding-bottom: 0
         .block-content
-            padding: $spacing4 $grid-gutter
-            margin-left: -$grid-gutter
-            margin-right: -$grid-gutter
+            padding: $spacing4 $grid-gutter-desktop
+            margin-left: -$grid-gutter-desktop
+            margin-right: -$grid-gutter-desktop
         .call_to_action--with-image
             @include grid
             > div

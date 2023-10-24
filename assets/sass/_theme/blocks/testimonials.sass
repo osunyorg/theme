@@ -28,12 +28,12 @@
             display: block
     .avatar
         flex-shrink: 0
-        width: calc(#{col(1, 8)} + #{$grid-gutter} / 2)
+        width: calc(#{col(1, 8)} + #{$grid-gutter-desktop} / 2)
         min-width: px2rem(80)
         margin-right: $spacing0
         margin-bottom: 0
         @include media-breakpoint-up(desktop)
-            margin-right: calc(#{$grid-gutter} / 2)
+            margin-right: calc(#{$grid-gutter-desktop} / 2)
 
     .splide
         display: flex
@@ -100,7 +100,7 @@
         figure
             padding-right: offset(3)
             // TODO: explain this, add min height equal with 2 cols width to avoid overflow on square picture
-            min-height: calc(#{col-outside-container(2)} + #{half($grid-gutter)})
+            min-height: calc(#{col-outside-container(2)} + #{half($grid-gutter-desktop)})
             &.with-picture
                 padding-right: offset(1)
                 padding-left: offset(3)
@@ -112,7 +112,7 @@
                         position: absolute
                         left: col(1)
                         top: 0
-                        margin-left: $grid-gutter
+                        margin-left: $grid-gutter-desktop
                         width: col(2)
 
         // TODO : en discuter en créa

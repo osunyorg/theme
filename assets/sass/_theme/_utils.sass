@@ -104,14 +104,14 @@
     margin-left: auto
     margin-right: auto
     max-width: $grid-max-width
-    padding-left: half($grid-gutter-sm)
-    padding-right: half($grid-gutter-sm)
+    padding-left: half($grid-gutter)
+    padding-right: half($grid-gutter)
     width: 100%
     @include media-breakpoint-up(desktop)
-        padding-left: $grid-gutter
-        padding-right: $grid-gutter
+        padding-left: $grid-gutter-desktop
+        padding-right: $grid-gutter-desktop
 
-@mixin grid($cols: 12, $breakpoint: false, $gap-y: $grid-gutter, $gap-x: $grid-gutter)
+@mixin grid($cols: 12, $breakpoint: false, $gap-y: $grid-gutter-desktop, $gap-x: $grid-gutter-desktop)
     word-break: break-word
     @if $breakpoint
         @include media-breakpoint-up($breakpoint)
@@ -123,35 +123,35 @@
         grid-gap: $gap-y $gap-x
         grid-template-columns: repeat($cols, 1fr)
     @include media-breakpoint-down(desktop)
-        grid-gap: $grid-gutter-sm
+        grid-gap: $grid-gutter
 
 // This must be used for content inside columns
 @function col($quantity, $base: 12)
     $quantity-on-base: $quantity / $base * 12
-    $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} - #{$grid-gutter} )
+    $width: calc( (100% + #{$grid-gutter-desktop}) / 12 * #{$quantity-on-base} - #{$grid-gutter-desktop} )
     @return #{$width}
 
 // This must be used for offset, outside columns
 @function offset($quantity, $base: 12)
     $quantity-on-base: $quantity / $base * 12
-    $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} )
+    $width: calc( (100% + #{$grid-gutter-desktop}) / 12 * #{$quantity-on-base} )
     @return #{$width}
 
 // This must be used for offset, inside columns
 @function col-offset($quantity, $base: 12)
     $quantity-on-base: $quantity / $base * 12
-    $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} + #{$grid-gutter})
+    $width: calc( (100% + #{$grid-gutter-desktop}) / 12 * #{$quantity-on-base} + #{$grid-gutter-desktop})
     @return #{$width}
 
 @function col-outside-container($quantity, $base: 12)
     $responsive-grid-width: Min(100vw, (#{$grid-max-width}))
-    @return calc((#{$responsive-grid-width} + #{$grid-gutter} * 2) / #{$base} * #{$quantity} - #{$grid-gutter} * 2)
+    @return calc((#{$responsive-grid-width} + #{$grid-gutter-desktop} * 2) / #{$base} * #{$quantity} - #{$grid-gutter-desktop} * 2)
 
 @mixin container-margin-left
-    margin-left: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+    margin-left: Max(#{$grid-gutter-desktop}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter-desktop}))
 
 @mixin container-margin-right
-    margin-right: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+    margin-right: Max(#{$grid-gutter-desktop}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter-desktop}))
 
 @mixin stretched-link($pseudo-element: after)
     &::#{$pseudo-element}
@@ -335,7 +335,7 @@
         .block-title
             width: col(4)
             &:not(.hidden) + .description
-                margin-left: $grid-gutter
+                margin-left: $grid-gutter-desktop
         .description
             margin-top: 0
             width: col(8)

@@ -33,12 +33,12 @@
         .gallery
             align-items: end
             @include in-page-with-sidebar
-                @include grid(3, desktop, half($grid-gutter), half($grid-gutter))
+                @include grid(3, desktop, half($grid-gutter-desktop), half($grid-gutter-desktop))
             @include in-page-without-sidebar
                 @include grid(4, desktop)
             @include media-breakpoint-down(desktop)
                 @include grid(2)
-                grid-gap: half($grid-gutter-sm) !important
+                grid-gap: half($grid-gutter) !important
             figure
                 &:after
                     content: ' ' // This is used to allow align baseline without figcaption
@@ -49,16 +49,16 @@
         z-index: 0
         @include in-page-without-sidebar
             background: $block-gallery-carousel-background
-            padding-bottom: $grid-gutter
-            padding-top: $grid-gutter
+            padding-bottom: $grid-gutter-desktop
+            padding-top: $grid-gutter-desktop
         .block-gallery + &,
         .block-pages--cards + &
             margin-top: 0
         .container
             .top
-                padding-right: half($grid-gutter-sm)
+                padding-right: half($grid-gutter)
                 @include media-breakpoint-up(desktop)
-                    padding-right: half($grid-gutter)
+                    padding-right: half($grid-gutter-desktop)
         .splide
             display: flex
             flex-direction: column
@@ -68,7 +68,7 @@
                         opacity: 0.1
             &__track
                 overflow: visible
-                margin-right: half(-$grid-gutter-sm)
+                margin-right: half(-$grid-gutter)
                 @include in-page-with-sidebar
                     .splide__slide
                         transition: opacity  .3s ease
@@ -78,13 +78,13 @@
                         &.is-active
                             opacity: 1
                 @include media-breakpoint-up(desktop)
-                    margin-right: half(-$grid-gutter)
+                    margin-right: half(-$grid-gutter-desktop)
             &__slide
                 flex-shrink: initial
                 &:last-child
                     padding-right: 20%
             figure
-                margin-right: half($grid-gutter)
+                margin-right: half($grid-gutter-desktop)
                 @include media-breakpoint-down(desktop)
                     display: flex
                     flex-direction: column
@@ -95,7 +95,7 @@
                         max-height: 70vh
                         width: auto
                         height: auto
-                        max-width: calc(100vw - #{$grid-gutter-sm} * 2)
+                        max-width: calc(100vw - #{$grid-gutter} * 2)
                         @include media-breakpoint-up(desktop)
                             height: 70vh
                             width: auto
@@ -123,10 +123,10 @@
         @include in-page-without-sidebar
             .splide
                 figure
-                    margin-left: $grid-gutter
-                    margin-right: half(-$grid-gutter)
+                    margin-left: $grid-gutter-desktop
+                    margin-right: half(-$grid-gutter-desktop)
                 &__slide
                     &:first-child
-                        margin-left: $grid-gutter
+                        margin-left: $grid-gutter-desktop
                 &__track
-                    margin-left: -$grid-gutter
+                    margin-left: -$grid-gutter-desktop

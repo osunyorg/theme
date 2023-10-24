@@ -11,7 +11,7 @@
                 border-radius: 50%
                 content: ""
                 height: 9px
-                left: half(-$grid-gutter)
+                left: half(-$grid-gutter-desktop)
                 margin-top: 0.5em
                 position: absolute
                 width: 9px
@@ -20,7 +20,7 @@
                 background: $color-text
                 bottom: -0.5em
                 content: ""
-                left: half(-$grid-gutter)
+                left: half(-$grid-gutter-desktop)
                 position: absolute
                 top: 0.5em
                 width: 1px
@@ -35,7 +35,7 @@
 
         @include media-breakpoint-down(desktop)
             .timeline-event
-                padding-left: half($grid-gutter-sm)
+                padding-left: half($grid-gutter)
                 &::after, &::before
                     left: 0
 
@@ -46,7 +46,7 @@
                 display: flex
                 &::before, &::after
                     left: col(3)
-                    margin-left: half($grid-gutter)
+                    margin-left: half($grid-gutter-desktop)
                 &::before
                     transform: translateX(-4px)
                 .title
@@ -55,7 +55,7 @@
                     + p
                         margin-top: 0
                 p
-                    padding-left: $grid-gutter
+                    padding-left: $grid-gutter-desktop
                     width: col(7)
                     &:first-child
                         margin-left: col(3)
@@ -65,8 +65,8 @@
         background: $block-timeline-horizontal-background
         color: $block-timeline-horizontal-color
         overflow: hidden
-        padding-bottom: $grid-gutter
-        padding-top: $grid-gutter
+        padding-bottom: $grid-gutter-desktop
+        padding-top: $grid-gutter-desktop
         &::before
             display: none
         .timeline
@@ -77,7 +77,7 @@
             
         .timeline-arrows
             display: flex
-            padding-left: half($grid-gutter)
+            padding-left: half($grid-gutter-desktop)
             > button
                 @include button-reset
                 background: none
@@ -93,8 +93,8 @@
                     cursor: default
                     opacity: 0.3
         .timeline-events
-            margin-left: half(-$grid-gutter)
-            margin-right: half(-$grid-gutter)
+            margin-left: half(-$grid-gutter-desktop)
+            margin-right: half(-$grid-gutter-desktop)
             // TODO : fixer le px gap en desktop entre chaque event
             ol
                 display: flex
@@ -106,7 +106,7 @@
                 width: 100%
         .timeline-event
             flex: none
-            padding: 0 half($grid-gutter)
+            padding: 0 half($grid-gutter-desktop)
             scroll-snap-align: start
             transition: 0.3s opacity
             width: 50%
@@ -124,7 +124,7 @@
                 margin-bottom: $spacing1
                 opacity: 1
                 overflow: visible
-                width: calc(100% + #{half($grid-gutter)})
+                width: calc(100% + #{half($grid-gutter-desktop)})
                 &::before
                     background: $block-timeline-horizontal-color
                     border-radius: 50%
@@ -147,7 +147,7 @@
                     margin-top: $spacing2
             .timeline-event
                 .line
-                    width: calc(100% + #{$grid-gutter})
+                    width: calc(100% + #{$grid-gutter-desktop})
 
         @include media-breakpoint-down(desktop)
             .timeline-events
