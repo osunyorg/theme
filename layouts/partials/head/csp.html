@@ -1,4 +1,4 @@
-{{- with (or site.Data.website.external_domains site.ContentSecurityPolicy.allowed_domains) -}}
+{{- with (or site.Data.content_security_policy.allowed_domains site.Data.website.external_domains) -}}
 <meta http-equiv="Content-Security-Policy"
       content="
         default-src 'self' {{ delimit . " " }}
