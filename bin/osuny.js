@@ -23,7 +23,7 @@ const command = process.argv[2];
 let pagefindExclude = `
     .administrators__term,
     .authors__term,
-    .categories__term,
+    .categories__taxonomy, .categories__term,
     .diplomas__taxonomy, .block-diplomas,
     .events__section, .block-agenda,
     .organizations__section, .block-organizations,
