@@ -21,19 +21,23 @@
                 aspect-ratio: 1
                 object-fit: cover
                 margin-bottom: half($spacing0)
-    &--grid .events
-        @include grid(2, md)
-        .event
-            @include media-breakpoint-down(desktop)
-                + .event 
-                    margin-top: $spacing1
-                &-dates
-                    text-align: right
-            &-content 
-                h2
-                    @extend .h3
-            &-description
-                margin-top: $spacing0
+    &--grid 
+        .events
+            @include grid(2, md)
+            .event
+                @include media-breakpoint-down(desktop)
+                    + .event 
+                        margin-top: $spacing1
+                    &-dates
+                        text-align: right
+                &-content 
+                    h2
+                        @extend .h3
+                &-description
+                    margin-top: $spacing0
+        @include in-page-without-sidebar
+            .events
+                @include grid(3, desktop)
     &--large
         .event
             flex-direction: row
@@ -68,13 +72,6 @@
                     aspect-ratio: 1
                 .media:empty
                     display: none
-
-.block-agenda--large 
-    @include in-page-with-sidebar
-        .events .event .media:empty
-            display: none
-
-.block-agenda--grid 
-    @include in-page-without-sidebar
-        .events
-            @include grid(3, desktop)
+        @include in-page-with-sidebar
+            .events .event .media:empty
+                display: none
