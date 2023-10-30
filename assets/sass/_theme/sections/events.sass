@@ -79,7 +79,7 @@
 
 // Also presents in block agenda
 .block-agenda--list,
-.events__page
+.events__section
     .events
         .event
             border-bottom: 1px solid $color-border
@@ -107,6 +107,10 @@
             @include media-breakpoint-up(md)
                 .media
                     grid-column: 10 / 13
+                &-dates
+                    grid-column: 1 / 4
+                &-content
+                    grid-column: 4 / 10
             @include media-breakpoint-down(md)
                 .media
                     order: 0
@@ -138,4 +142,9 @@
                     margin-top: half($spacing0)
                 &-time
                     display: inline
-        
+
+.events__section.full-width .events .event .media
+    @include media-breakpoint-up(xxl)
+        grid-column: 11 / 13
+
+    
