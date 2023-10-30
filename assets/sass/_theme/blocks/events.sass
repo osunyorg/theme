@@ -20,7 +20,7 @@
             img
                 aspect-ratio: 1
                 object-fit: cover
-                margin-bottom: half($spacing0)
+                width: 100%
     &--grid 
         .events
             @include grid(2, md)
@@ -35,6 +35,8 @@
                         @extend .h3
                 &-description
                     margin-top: $spacing0
+                .media
+                    margin-bottom: $spacing0
         @include in-page-without-sidebar
             .events
                 @include grid(3, desktop)
@@ -42,6 +44,8 @@
         .event
             flex-direction: row
             grid-gap: $grid-gutter
+            + .event 
+                margin-top: $spacing1
             &-content
                 flex: 1
                 h2, h3
