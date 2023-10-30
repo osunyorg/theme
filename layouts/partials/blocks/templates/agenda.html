@@ -27,18 +27,14 @@
             {{ end -}}
           </div>
         {{ end -}}
-        {{ $rangeLength := len .events }}
-        {{ if eq $rangeLength 1 }}
-          {{ $isUnique = true }}
-        {{ end }}
-        <div class="events{{ if eq $rangeLength 1 }} unique{{ end}} ">
+        
+        <div class="events">
           {{ range .events }}
             {{ $event := site.GetPage .file }}
             {{ with $event }}
                 {{ partial "events/event" (dict 
                   "event" .
                    "layout" $layout
-                   "isUnique" $isUnique
                 ) }}
             {{ end }}
           {{ end }}

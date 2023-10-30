@@ -1,12 +1,43 @@
 .block-agenda
+    &--grid,
+    &--large
+        .event
+            display: flex
+            flex-direction: column
+            position: relative
+            &-content
+                a 
+                    @include stretched-link
+            &-dates 
+                @extend .meta
+                margin-top: $spacing0
+                @include media-breakpoint-down(md)
+                    font-size: $h4-size
+                    line-height: $h4-line-height
+                    font-weight: $h4-weight
+        .media
+            order: -1
+            img
+                aspect-ratio: 1
+                object-fit: cover
+                margin-bottom: half($spacing0)
     &--grid .events
-        &:not(.unique)
-            @include grid(2, md)
-        &.unique .event
+        @include grid(2, md)
+        .event
+            @include media-breakpoint-down(desktop)
+                + .event 
+                    margin-top: $spacing1
+                &-dates
+                    text-align: right
+            &-content 
+                h2
+                    @extend .h3
+            &-description
+                margin-top: $spacing0
+    &--large
+        .event
             flex-direction: row
             grid-gap: $grid-gutter
-            .media
-                width: col(4, 8)
             &-content
                 flex: 1
                 .more
@@ -15,6 +46,8 @@
                     &::after
                         margin-left: half($spacing0)
             @include media-breakpoint-up(desktop)
+                .media
+                    width: col(4, 8)
                 &-dates
                     font-size: $h3-size-desktop
                     line-height: $h3-line-height
@@ -25,45 +58,21 @@
                     line-height: $h2-line-height
                     font-weight: $h2-weight
             @include media-breakpoint-down(desktop)
-                grid-gap: $grid-gutter-sm
+                flex-direction: column
+                grid-gap: 0
+                .media
+                    margin-left: calc(-#{$grid-gutter-sm} /2)
+                    margin-right: calc(-#{$grid-gutter-sm} /2)
+                    aspect-ratio: 1
                 .media:empty
                     display: none
-        .event
-            display: flex
-            flex-direction: column
-            position: relative
-            @include media-breakpoint-down(desktop)
-                + .event 
-                    margin-top: $spacing1
-            .media
-                order: -1
-                img
-                    aspect-ratio: 1
-                    object-fit: cover
-                    margin-bottom: half($spacing0)
-            &-dates 
-                @extend .meta
-                margin-top: $spacing0
-                @include media-breakpoint-down(md)
-                    font-size: $h4-size
-                    line-height: $h4-line-height
-                    font-weight: $h4-weight
-                    text-align: right
-            &-content 
-                a 
-                    @include stretched-link
-                h2
-                    @extend .h3
-            &-description
-                margin-top: $spacing0
+
+.block-agenda--large 
+    @include in-page-with-sidebar
+        .events .event .media:empty
+            display: none
 
 .block-agenda--grid 
-    @include in-page-with-sidebar
-        .events.unique .event .media:empty
-            display: none
     @include in-page-without-sidebar
-        .events:not(.unique)
+        .events
             @include grid(3, desktop)
-            .unique
-        .events.unique .event-content
-            position: relative

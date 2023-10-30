@@ -1,7 +1,6 @@
 {{ $event := .event }}
 {{ $layout := "list" }}
 {{ $layout = .layout }}
-{{ $isUnique := .isUnique }}
 {{- $direction := "" -}}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
@@ -25,8 +24,8 @@
       <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}" itemprop="name">{{ $title }}</a>
     {{ $heading_tag.close }}
 
-    {{ if eq $isUnique true }}
-      <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}} {{- if .Params.dates.from.hour -}}{{ .Params.dates.from.hour }}{{- end -}}">
+    {{ if eq $layout "large" }}
+      <div class="event-dates meta" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}} {{- if .Params.dates.from.hour -}}{{ .Params.dates.from.hour }}{{- end -}}">
         {{ .Params.dates.computed.short }}
         <div class="event-time">
           {{ if .Params.dates.from.hour }}
@@ -57,7 +56,7 @@
   {{ end }}
   </div>
 
-  {{ if eq $isUnique false }}
+  {{ if ne $layout "large" }}
     <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}} {{- if .Params.dates.from.hour -}}{{ .Params.dates.from.hour }}{{- end -}}">
       {{ .Params.dates.computed.short }}
       <div class="event-time">
