@@ -1,9 +1,17 @@
 {{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
+{{- $class := "block block-agenda" -}}
+{{- $layout_class := "block-agenda--list" -}}
+{{- with .block.data -}}
+  {{- $layout := .layout -}}
+  {{- $with_link := .with_link -}}
 
-{{- with .block.data }}
-  <div class="block block-agenda{{ if $title }} block-with-title{{ end }}">
+  {{- if $layout -}}
+    {{- $layout_class = printf "block-agenda--%s" $layout -}}
+  {{- end -}}
+
+  <div class="block block-agenda{{ if $title }} block-with-title{{ end }} {{ $layout_class }}">
     <div class="container">
       <div class="block-content">
         {{ if or $title .description }}
@@ -18,14 +26,16 @@
             {{ end -}}
           </div>
         {{ end -}}
-
         <div class="events">
           {{ range .events }}
             {{ $event := site.GetPage .file }}
             {{ with $event }}
-              {{ partial "events/event" (dict "event" . ) }}
-            {{ end -}}
-          {{ end -}}
+                {{ partial "events/event" (dict 
+                  "event" .
+                   "layout" $layout
+                ) }}
+            {{ end }}
+          {{ end }}
         </div>
       </div>
     </div>

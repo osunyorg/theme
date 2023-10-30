@@ -1,4 +1,6 @@
 {{ $event := .event }}
+{{ $layout := "list" }}
+{{ $layout = .layout }}
 {{- $direction := "" -}}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
@@ -22,7 +24,7 @@
       <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}" itemprop="name">{{ $title }}</a>
     {{ $heading_tag.close }}
 
-    {{ if site.Params.events.index.show_description }}
+    {{ if and (site.Params.events.index.show_description) (eq $layout "list") }}
       {{- if (partial "GetTextFromHTML" .Params.summary) -}}
         <p itemprop="description">
           {{ if site.Params.events.index.truncate_description }}
@@ -49,6 +51,23 @@
       {{ end }}
     </div>
   </div>
+
+  {{ if and (site.Params.events.index.show_description) (eq $layout "grid") }}
+      {{- if (partial "GetTextFromHTML" .Params.summary) -}}
+        <div class="event-description">
+          <p itemprop="description">
+            {{ if site.Params.events.index.truncate_description }}
+              {{ partial "GetTruncateContent" ( dict 
+                "text" .Params.summary
+                "length" site.Params.events.index.truncate_description
+                ) }}
+            {{ else }}
+              {{ partial "PrepareText" .Params.summary }}
+            {{ end }}
+          </p>
+        </div>
+      {{- end -}}
+    {{- end -}}
 
   <div class="media">
     {{- if .Params.image -}}

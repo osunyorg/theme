@@ -1,0 +1,33 @@
+.block-agenda
+    &--grid .events
+        @include grid(2, md)
+        .event
+            display: flex
+            flex-direction: column
+            position: relative
+            .media
+                aspect-ratio: 1
+                order: -1
+                margin-bottom: $spacing1
+                picture, 
+                img
+                    display: block
+                    height: 100%
+                    width: 100%
+                img
+                    object-fit: cover
+            &-dates 
+                @extend .meta
+                margin-top: $spacing0
+            &-content 
+                a 
+                    @include stretched-link
+                h2
+                    @extend .h3
+            &-description
+                margin-top: $spacing0
+
+.block-agenda--grid 
+    @include in-page-without-sidebar
+        .events
+            @include grid(3, desktop)

@@ -78,62 +78,64 @@
             padding-left: 0
 
 // Also presents in block agenda
-.events
-    .event
-        border-bottom: 1px solid $color-border
-        display: flex
-        flex-direction: column
-        margin-bottom: $spacing1
-        padding-bottom: $spacing1
-        position: relative
-        h2, h3
-            @include h3
-            margin-bottom: $spacing0
-            a
-                @include stretched-link
-                text-decoration: none
-        &-dates
-            @include meta
-            order: 1
-        &-content
-            order: 2
-        &-time
-            span + span
-                @include icon(arrow-right, before)
-        .media
-            order: 0
-        @include media-breakpoint-up(md)
-            .media
-                grid-column: 10 / 13
-        @include media-breakpoint-down(md)
-            .media
-                order: 0
-            &-content
-                order: 1
+.block-agenda--list,
+.events__page
+    .events
+        .event
+            border-bottom: 1px solid $color-border
+            display: flex
+            flex-direction: column
+            margin-bottom: $spacing1
+            padding-bottom: $spacing1
+            position: relative
+            h2, h3
+                @include h3
+                margin-bottom: $spacing0
+                a
+                    @include stretched-link
+                    text-decoration: none
             &-dates
-                order: 3
-        @include media-breakpoint-up(desktop)
-            @include grid
-            .media
+                @include meta
+                order: 1
+            &-content
                 order: 2
-        @include in-page-without-sidebar
-            &-dates
-                order: 0
-                grid-column: 1 / 4
-            &-content
-                order: 1
-                grid-column: 4 / 10
-            .media
-                grid-column: 11 / 13
-        @include in-page-with-sidebar
-            grid-gap: 0 $grid-gutter
-            &-dates
-                order: 0
-                grid-column: 1 / 10
-            &-content
-                order: 1
-                grid-column: 1 / 10
-                margin-top: half($spacing0)
             &-time
-                display: inline
-    
+                span + span
+                    @include icon(arrow-right, before)
+            .media
+                order: 0
+            @include media-breakpoint-up(md)
+                .media
+                    grid-column: 10 / 13
+            @include media-breakpoint-down(md)
+                .media
+                    order: 0
+                &-content
+                    order: 1
+                &-dates
+                    order: 3
+            @include media-breakpoint-up(desktop)
+                @include grid
+                .media
+                    order: 2
+            @include in-page-without-sidebar
+                &-dates
+                    order: 0
+                    grid-column: 1 / 4
+                &-content
+                    order: 1
+                    grid-column: 4 / 10
+                .media
+                    grid-column: 11 / 13
+            @include in-page-with-sidebar
+                grid-gap: 0 $grid-gutter
+                &-dates
+                    order: 0
+                    grid-column: 1 / 10
+                &-content
+                    order: 1
+                    grid-column: 1 / 10
+                    margin-top: half($spacing0)
+                &-time
+                    display: inline
+        
