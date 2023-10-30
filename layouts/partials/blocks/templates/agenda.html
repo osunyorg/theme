@@ -1,6 +1,7 @@
 {{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
+{{- $isUnique := false -}}
 {{- $class := "block block-agenda" -}}
 {{- $layout_class := "block-agenda--list" -}}
 {{- with .block.data -}}
@@ -26,13 +27,18 @@
             {{ end -}}
           </div>
         {{ end -}}
-        <div class="events">
+        {{ $rangeLength := len .events }}
+        {{ if eq $rangeLength 1 }}
+          {{ $isUnique = true }}
+        {{ end }}
+        <div class="events{{ if eq $rangeLength 1 }} unique{{ end}} ">
           {{ range .events }}
             {{ $event := site.GetPage .file }}
             {{ with $event }}
                 {{ partial "events/event" (dict 
                   "event" .
                    "layout" $layout
+                   "isUnique" $isUnique
                 ) }}
             {{ end }}
           {{ end }}

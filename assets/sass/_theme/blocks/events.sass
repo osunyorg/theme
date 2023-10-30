@@ -1,10 +1,40 @@
 .block-agenda
     &--grid .events
-        @include grid(2, md)
+        &:not(.unique)
+            @include grid(2, md)
+        &.unique .event
+            flex-direction: row
+            grid-gap: $grid-gutter
+            .media
+                width: col(4, 8)
+            &-content
+                flex: 1
+                .more
+                    @include icon("arrow-right", after)
+                    margin-top: $spacing1
+                    &::after
+                        margin-left: half($spacing0)
+            @include media-breakpoint-up(desktop)
+                &-dates
+                    font-size: $h3-size-desktop
+                    line-height: $h3-line-height
+                    font-weight: $h3-weight
+                    margin-bottom: $spacing2
+                &-content h2
+                    font-size: $h2-size-desktop
+                    line-height: $h2-line-height
+                    font-weight: $h2-weight
+            @include media-breakpoint-down(desktop)
+                grid-gap: $grid-gutter-sm
+                .media:empty
+                    display: none
         .event
             display: flex
             flex-direction: column
             position: relative
+            @include media-breakpoint-down(desktop)
+                + .event 
+                    margin-top: $spacing1
             .media
                 order: -1
                 img
@@ -28,6 +58,12 @@
                 margin-top: $spacing0
 
 .block-agenda--grid 
+    @include in-page-with-sidebar
+        .events.unique .event .media:empty
+            display: none
     @include in-page-without-sidebar
-        .events
+        .events:not(.unique)
             @include grid(3, desktop)
+            .unique
+        .events.unique .event-content
+            position: relative

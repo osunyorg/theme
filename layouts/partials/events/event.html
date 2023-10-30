@@ -1,6 +1,7 @@
 {{ $event := .event }}
 {{ $layout := "list" }}
 {{ $layout = .layout }}
+{{ $isUnique := .isUnique }}
 {{- $direction := "" -}}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
@@ -24,35 +25,52 @@
       <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}" itemprop="name">{{ $title }}</a>
     {{ $heading_tag.close }}
 
-    {{ if and (site.Params.events.index.show_description) (eq $layout "list") }}
-      {{- if (partial "GetTextFromHTML" .Params.summary) -}}
-        <p itemprop="description">
-          {{ if site.Params.events.index.truncate_description }}
-            {{ partial "GetTruncateContent" ( dict 
-              "text" .Params.summary
-              "length" site.Params.events.index.truncate_description
-              ) }}
-          {{ else }}
-            {{ partial "PrepareText" .Params.summary }}
+    {{ if eq $isUnique true }}
+      <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}} {{- if .Params.dates.from.hour -}}{{ .Params.dates.from.hour }}{{- end -}}">
+        {{ .Params.dates.computed.short }}
+        <div class="event-time">
+          {{ if .Params.dates.from.hour }}
+            <span>{{ .Params.dates.from.hour }}</span>
           {{ end }}
-        </p>
+          {{ if .Params.dates.to.hour }}
+            <span> {{ .Params.dates.to.hour }}</span>
+          {{ end }}
+        </div>
+      </div>
+
+      {{ if site.Params.events.index.show_description }}
+        {{- if (partial "GetTextFromHTML" .Params.summary) -}}
+          <p itemprop="description">
+            {{ if site.Params.events.index.truncate_description }}
+              {{ partial "GetTruncateContent" ( dict 
+                "text" .Params.summary
+                "length" site.Params.events.index.truncate_description
+                ) }}
+            {{ else }}
+              {{ partial "PrepareText" .Params.summary }}
+            {{ end }}
+          </p>
+        {{- end -}}
       {{- end -}}
-    {{- end -}}
+  
+      <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+  {{ end }}
   </div>
 
-  <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}} {{- if .Params.dates.from.hour -}}{{ .Params.dates.from.hour }}{{- end -}}">
-    {{ .Params.dates.computed.short }}
-    <div class="event-time">
-      {{ if .Params.dates.from.hour }}
-        <span>{{ .Params.dates.from.hour }}</span>
-      {{ end }}
-      {{ if .Params.dates.to.hour }}
-        <span> {{ .Params.dates.to.hour }}</span>
-      {{ end }}
+  {{ if eq $isUnique false }}
+    <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}} {{- if .Params.dates.from.hour -}}{{ .Params.dates.from.hour }}{{- end -}}">
+      {{ .Params.dates.computed.short }}
+      <div class="event-time">
+        {{ if .Params.dates.from.hour }}
+          <span>{{ .Params.dates.from.hour }}</span>
+        {{ end }}
+        {{ if .Params.dates.to.hour }}
+          <span> {{ .Params.dates.to.hour }}</span>
+        {{ end }}
+      </div>
     </div>
-  </div>
 
-  {{ if and (site.Params.events.index.show_description) (eq $layout "grid") }}
+    {{ if and (site.Params.events.index.show_description) (eq $layout "grid") }}
       {{- if (partial "GetTextFromHTML" .Params.summary) -}}
         <div class="event-description">
           <p itemprop="description">
@@ -68,6 +86,7 @@
         </div>
       {{- end -}}
     {{- end -}}
+  {{ end }}
 
   <div class="media">
     {{- if .Params.image -}}
