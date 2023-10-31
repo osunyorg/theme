@@ -28,13 +28,13 @@
           </div>
         {{ end -}}
         
-        <div class="events">
+        <div class="events events--{{- $layout -}}">
           {{ range .events }}
             {{ $event := site.GetPage .file }}
             {{ with $event }}
                 {{ partial "events/event" (dict 
                   "event" .
-                   "layout" $layout
+                  "layout" $layout
                 ) }}
             {{ end }}
           {{ end }}
