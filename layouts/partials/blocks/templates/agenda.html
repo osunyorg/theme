@@ -1,8 +1,8 @@
 {{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
-{{- $layout := .layout | default "list" -}}
 {{- with .block.data -}}
+  {{- $layout := .layout | default "list" -}}
   <div class="block block-agenda{{ if $title }} block-with-title{{ end }} block-agenda--{{- $layout }}">
     <div class="container">
       <div class="block-content">
