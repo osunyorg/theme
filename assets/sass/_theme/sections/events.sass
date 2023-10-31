@@ -1,4 +1,6 @@
 .events__page
+    .lead
+        @include h3
     @include media-breakpoint-down(desktop)
         .document-content
             display: flex
@@ -27,8 +29,6 @@
         // Safe spacing if post is empty
         .document-content
             min-height: 350px
-    .lead
-        @include h3
 
 .events__section
     .archive-link
@@ -37,6 +37,11 @@
         display: block
         text-align: right
         text-decoration: none
+    @include media-breakpoint-down(desktop)
+        .events
+            margin-bottom: $spacing2
+        .archive-link
+            text-align: left
 
 .event-infos
     margin-bottom: 0
@@ -77,63 +82,192 @@
         li:first-child a
             padding-left: 0
 
-// Also presents in block agenda
+.event
+    a
+        text-decoration: none
+    hgroup .event-title
+        margin-bottom: 0
+    &-subtitle
+        @include h3
+        color: $color-text-alt
+    &-categories
+        @include meta
+        margin-top: $spacing0
+        span + span
+            &::before
+                content: ', '
+    &-time
+        span + span
+            @include icon(arrow-right, before)
+    .media
+        &:empty
+            display: none
+        img
+            display: block
+
 .events
-    .event
-        border-bottom: 1px solid $color-border
-        display: flex
-        flex-direction: column
-        margin-bottom: $spacing1
-        padding-bottom: $spacing1
-        position: relative
-        h2, h3
-            @include h3
-            margin-bottom: $spacing0
-            a
-                @include stretched-link
-                text-decoration: none
-        &-dates
-            @include meta
-            order: 1
-        &-content
-            order: 2
-        &-time
-            span + span
-                @include icon(arrow-right, before)
-        .media
-            order: 0
-        @include media-breakpoint-up(md)
-            .media
-                grid-column: 10 / 13
-        @include media-breakpoint-down(md)
-            .media
-                order: 0
-            &-content
-                order: 1
+    &--list
+        .event
+            border-bottom: 1px solid $color-border
+            display: flex
+            flex-direction: column
+            margin-bottom: $spacing1
+            padding-bottom: $spacing1
+            position: relative
+            h2, h3
+                @include h3
+                a
+                    @include stretched-link
+                    text-decoration: none
             &-dates
-                order: 3
-        @include media-breakpoint-up(desktop)
-            @include grid
-            .media
-                order: 2
-        @include in-page-without-sidebar
-            &-dates
-                order: 0
-                grid-column: 1 / 4
-            &-content
-                order: 1
-                grid-column: 4 / 10
-            .media
-                grid-column: 11 / 13
-        @include in-page-with-sidebar
-            grid-gap: 0 $grid-gutter
-            &-dates
-                order: 0
-                grid-column: 1 / 10
-            &-content
-                order: 1
-                grid-column: 1 / 10
+                @include h4
                 margin-top: half($spacing0)
-            &-time
-                display: inline
-    
+                margin-bottom: half($spacing1)
+            &-content
+                order: 2
+            @include media-breakpoint-down(desktop)
+                @include media-breakpoint-up(md)
+                    flex-direction: row
+                    gap: $spacing1
+                    .media
+                        width: col(4)
+                    &-content
+                        order: 1
+                        width: col(8)
+            @include media-breakpoint-down(md)
+                .media
+                    max-width: 33%
+                    margin-bottom: $spacing0
+                &-content
+                    order: 1
+            @include media-breakpoint-up(md)
+                .media
+                    grid-column: 10 / 13
+            @include media-breakpoint-up(desktop)
+                @include grid
+                .media
+                    order: 2
+            @include in-page-without-sidebar
+                &-dates
+                    margin-top: 0
+                    order: 0
+                    grid-column: 1 / 5
+                    > span
+                        @include h3
+                        margin-bottom: $spacing1
+                &-time
+                    margin-top: $spacing0
+                    @include meta
+                &-content
+                    @include grid(10, desktop, 0)
+                    order: 1
+                    grid-column: 1 / 11
+                    > .event-title, > hgroup, .event-description, .event-categories
+                        grid-column: 5 / 11
+                    > .event-dates
+                        grid-column: 0 / 5
+                        grid-row: 1 / 4
+                .media
+                    grid-column: 11 / 13
+            @include in-page-with-sidebar
+                @include grid(8)
+                &-content
+                    order: 1
+                    grid-column: 6 span
+                    margin-top: half($spacing0)
+                &-time
+                    display: inline
+                    &::before
+                        content: ' — '
+                .media
+                    grid-column: 2 span
+
+    &--grid
+        @include grid(2, md, $spacing2)
+        .event
+            display: flex
+            flex-direction: column
+            position: relative
+            &-content
+                a
+                    @include stretched-link
+            &-dates
+                @extend .meta
+                margin-top: $spacing0
+            &-content
+                h2, h3, hgroup
+                    @include h3
+            &-description
+                margin-top: $spacing0
+            .media
+                margin-bottom: $spacing0
+                order: -1
+                img
+                    aspect-ratio: 1
+                    object-fit: cover
+                    width: 100%
+        @include media-breakpoint-down(md)
+            .event
+                + .event
+                    margin-top: $spacing2
+        @include in-page-without-sidebar
+            @include grid(3, desktop)
+
+    &--large
+        .event
+            display: flex
+            flex-direction: row
+            position: relative
+            grid-gap: $grid-gutter
+            + .event 
+                margin-top: $grid-gutter
+            &-content
+                position: relative
+                a 
+                    @include stretched-link
+            &-dates 
+                @include meta
+                margin-top: $spacing0
+                @include media-breakpoint-down(md)
+                    @include h4
+            &-content
+                flex: 1
+                h2, h3
+                    @include h3
+                .more
+                    @include icon("arrow-right", after)
+                    margin-top: $spacing1
+                    &::after
+                        margin-left: half($spacing0)
+            .media
+                order: -1
+                img
+                    aspect-ratio: 1
+                    object-fit: cover
+                    width: 100%
+            @include media-breakpoint-up(desktop)
+                .media
+                    width: col(4, 8)
+                &-dates
+                    @include h3
+                    margin-bottom: $spacing2
+                h2, h3, hgroup
+                    @include h2
+            @include media-breakpoint-down(desktop)
+                flex-direction: column
+                grid-gap: 0
+                .media
+                    margin-left: calc(-#{$grid-gutter-sm} /2)
+                    margin-right: calc(-#{$grid-gutter-sm} /2)
+                    aspect-ratio: 1
+                    img 
+                        margin-bottom: $spacing0
+            @include in-page-without-sidebar
+                align-items: center
+                &-dates
+                    @include h3
+                &-time
+                    @include meta
+                &:not(.event--with-image)
+                    width: col(5)
+                    margin-left: offset(4)

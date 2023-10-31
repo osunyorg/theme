@@ -1,65 +1,83 @@
 {{ $event := .event }}
-{{- $direction := "" -}}
+{{ $layout := .layout | default "list" }}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
-    "open" ((printf "<%s itemprop='headline'>" $heading) | safeHTML)
+    "open" ((printf "<%s itemprop='headline' class='event-title'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
 {{ $index := .index }}
 {{ $alternate := .alternate }}
 
 {{ with $event }}
-
-{{ if .Params.image }}
-  {{- $direction = partial "GetImageDirection" .Params.image -}}
-{{ end }}
-
-<article class="event" itemscope itemtype="https://schema.org/Event">
-  <div class="event-content">
-    {{- $title := partial "PrepareHTML" .Title -}}
-
-    {{ $heading_tag.open }}
-      <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}" itemprop="name">{{ $title }}</a>
-    {{ $heading_tag.close }}
-
-    {{ if site.Params.events.index.show_description }}
-      {{- if (partial "GetTextFromHTML" .Params.summary) -}}
-        <p itemprop="description">
-          {{ if site.Params.events.index.truncate_description }}
-            {{ partial "GetTruncateContent" ( dict 
-              "text" .Params.summary
-              "length" site.Params.events.index.truncate_description
-              ) }}
-          {{ else }}
-            {{ partial "PrepareText" .Params.summary }}
-          {{ end }}
-        </p>
-      {{- end -}}
-    {{- end -}}
-  </div>
-
-  <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}} {{- if .Params.dates.from.hour -}}{{ .Params.dates.from.hour }}{{- end -}}">
-    {{ .Params.dates.computed.short }}
-    <div class="event-time">
-      {{ if .Params.dates.from.hour }}
-        <span>{{ .Params.dates.from.hour }}</span>
+  <article class="event {{ if .Params.image }}event--with-image{{ end -}}" itemscope itemtype="https://schema.org/Event">
+    <div class="event-content">
+      {{- $title := partial "PrepareHTML" .Title -}}
+      {{ if .Params.subtitle }}
+        <hgroup>
       {{ end }}
-      {{ if .Params.dates.to.hour }}
-        <span> {{ .Params.dates.to.hour }}</span>
+      {{ $heading_tag.open }}
+        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}" itemprop="name">{{ $title }}</a>
+      {{ $heading_tag.close }}
+      {{ if .Params.subtitle }}
+          <p class="event-subtitle">{{ .Params.subtitle }}</p>
+        </hgroup>
+      {{ end }}
+
+      {{ if (or .Params.dates.computed.short .Params.dates.from.hour .Params.dates.to.hour) }}
+        <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}} {{- if .Params.dates.from.hour -}}{{ .Params.dates.from.hour }}{{- end -}}">
+          <span>{{ .Params.dates.computed.short }}</span>
+          {{- if (or .Params.dates.from.hour .Params.dates.to.hour)}}
+            <div class="event-time">
+              {{- if .Params.dates.from.hour }}
+                <span>{{ .Params.dates.from.hour }}</span>
+              {{ end -}}
+              {{- if .Params.dates.to.hour }}
+                <span> {{ .Params.dates.to.hour }}</span>
+              {{ end -}}
+            </div>
+          {{ end -}}
+        </div>
+      {{ end }}
+
+      {{ if and (site.Params.events.index.show_description) }}
+        {{- if (partial "GetTextFromHTML" .Params.summary) -}}
+          <div class="event-description">
+            <p itemprop="description">
+              {{ if site.Params.events.index.truncate_description }}
+                {{ partial "GetTruncateContent" ( dict 
+                  "text" .Params.summary
+                  "length" site.Params.events.index.truncate_description
+                  ) }}
+              {{ else }}
+                {{ partial "PrepareText" .Params.summary }}
+              {{ end }}
+            </p>
+          </div>
+        {{- end -}}
+  
+        {{ if .Params.categories }}
+          <p class="event-categories">
+            {{- range $index, $category := .GetTerms "categories" -}}
+              <span>{{- $category.Title -}}</span>
+            {{- end -}}
+          </p>
+        {{ end }}
+      {{- end -}}
+
+      {{ if eq $layout "large" }}
+        <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
       {{ end }}
     </div>
-  </div>
-
-  <div class="media">
-    {{- if .Params.image -}}
-      {{- partial "commons/image.html"
-            (dict
-              "image"    .Params.image
-              "sizes"    site.Params.image_sizes.sections.events.item
-            ) -}}
-    {{- else if site.Params.events.default_image -}}
-      {{- partial "commons/image-default.html" -}}
-    {{- end -}}
-  </div>
-</article>
+    <div class="media">
+      {{- if .Params.image -}}
+        {{- partial "commons/image.html"
+              (dict
+                "image"    .Params.image
+                "sizes"    site.Params.image_sizes.sections.events.item
+              ) -}}
+      {{- else if site.Params.events.default_image -}}
+        {{- partial "commons/image-default.html" -}}
+      {{- end -}}
+    </div>
+  </article>
 {{ end }}

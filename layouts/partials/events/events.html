@@ -1,8 +1,13 @@
-<div class="events events--{{- site.Params.events.index.layout -}}">
+{{ $layout := site.Params.events.index.layout }}
+
+<div class="events events--{{-  $layout -}}">
   {{ if not .Pages }}
     <p>{{ i18n "events.none" }}</p>
   {{ end }}
   {{ range .Paginator.Pages }}
-    {{ partial "events/event.html" (dict "event" . )}}
+    {{ partial "events/event.html" (dict
+      "event" .
+      "layout" $layout
+      )}}
   {{ end }}
 </div>
