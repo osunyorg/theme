@@ -85,8 +85,6 @@
 .event
     a
         text-decoration: none
-    hgroup .event-title
-        margin-bottom: 0
     &-subtitle
         @include h3
         color: $color-text-alt
@@ -144,9 +142,16 @@
                 .media
                     grid-column: 10 / 13
             @include media-breakpoint-up(desktop)
-                @include grid
+                flex-direction: row
+                gap: $grid-gutter
+                align-items: start
+                &-content
+                    width: col(10)
+                    > hgroup, > .event-title
+                        margin-bottom: $spacing0
                 .media
                     order: 2
+                    width: col(2)
             @include in-page-without-sidebar
                 &-dates
                     margin-top: 0
