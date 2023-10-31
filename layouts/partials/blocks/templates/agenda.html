@@ -1,18 +1,11 @@
 {{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
-{{- $isUnique := false -}}
-{{- $class := "block block-agenda" -}}
-{{- $layout_class := "block-agenda--list" -}}
+{{- $layout := .layout | default "list" -}}
 {{- with .block.data -}}
-  {{- $layout := .layout -}}
   {{- $with_link := .with_link -}}
 
-  {{- if $layout -}}
-    {{- $layout_class = printf "block-agenda--%s" $layout -}}
-  {{- end -}}
-
-  <div class="block block-agenda{{ if $title }} block-with-title{{ end }} {{ $layout_class }}">
+  <div class="block block-agenda{{ if $title }} block-with-title{{ end }} block-agenda--{{- $layout }}">
     <div class="container">
       <div class="block-content">
         {{ if or $title .description }}
@@ -32,7 +25,7 @@
           {{ range .events }}
             {{ $event := site.GetPage .file }}
             {{ with $event }}
-                {{ partial "events/event" (dict 
+                {{ partial "events/event" (dict
                   "event" .
                   "layout" $layout
                 ) }}
