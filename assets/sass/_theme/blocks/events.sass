@@ -1,5 +1,14 @@
 .block-agenda
     &--grid,
+    &--large,
+    &--list
+        .event-subtitle
+            @include h3
+            color: $color-text-alt
+        .event-categories
+            @include meta
+
+    &--grid,
     &--large
         .event
             display: flex
@@ -12,9 +21,7 @@
                 @extend .meta
                 margin-top: $spacing0
                 @include media-breakpoint-down(md)
-                    font-size: $h4-size
-                    line-height: $h4-line-height
-                    font-weight: $h4-weight
+                    @include h4
         .media
             order: -1
             img
@@ -59,14 +66,11 @@
                 .media
                     width: col(4, 8)
                 &-dates
-                    font-size: $h3-size-desktop
-                    line-height: $h3-line-height
-                    font-weight: $h3-weight
+                    @include h3
                     margin-bottom: $spacing2
-                &-content h2
-                    font-size: $h2-size-desktop
-                    line-height: $h2-line-height
-                    font-weight: $h2-weight
+                &-content h2,
+                &-subtitle
+                    @include h2
             @include media-breakpoint-down(desktop)
                 flex-direction: column
                 grid-gap: 0
