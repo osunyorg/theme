@@ -4,7 +4,7 @@
     {{ with .computed }}
       <li class="event-date">
         <span>{{ i18n "events.date" }}</span>
-        {{ .long }}
+        {{ partial "PrepareHTML" .two_lines.long }}
       </li>
     {{ end }}
     {{ if .from.hour }}
