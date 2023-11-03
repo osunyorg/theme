@@ -23,9 +23,9 @@
         </hgroup>
       {{ end }}
 
-      {{ if (or .Params.dates.computed.short .Params.dates.from.hour .Params.dates.to.hour) }}
+      {{ if (or .Params.dates.computed.two_lines.short .Params.dates.from.hour .Params.dates.to.hour) }}
         <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}} {{- if .Params.dates.from.hour -}}{{ .Params.dates.from.hour }}{{- end -}}">
-          <span>{{ .Params.dates.computed.short }}</span>
+          <span>{{ partial "PrepareHTML" .Params.dates.computed.two_lines.short }}</span>
           {{- if (or .Params.dates.from.hour .Params.dates.to.hour)}}
             <div class="event-time">
               {{- if .Params.dates.from.hour }}
