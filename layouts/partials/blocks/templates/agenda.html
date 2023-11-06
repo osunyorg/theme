@@ -2,6 +2,11 @@
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
 {{- with .block.data -}}
+
+  {{- $show_summary := .show_summary -}}
+  {{- $show_category := .show_category -}}
+  {{- $show_status := .show_status -}}
+
   {{- $layout := .layout | default "list" -}}
   <div class="block block-agenda{{ if $title }} block-with-title{{ end }} block-agenda--{{- $layout }}">
     <div class="container">
@@ -26,6 +31,9 @@
                 {{ partial "events/event" (dict
                   "event" .
                   "layout" $layout
+                  "show_summary" $show_summary
+                  "show_category" $show_category
+                  "show_status" $show_status
                 ) }}
             {{ end }}
           {{ end }}
