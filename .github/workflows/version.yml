@@ -34,3 +34,9 @@ jobs:
         with:
           url: ${{ secrets.OSUNY_API_AUTOUPDATE_THEME_URL }}
           data: "{\"secret_key\":\"${{ secrets.OSUNY_API_AUTOUPDATE_THEME_KEY }}\"}"
+
+      - name: Autoupdate Osuny staging theme
+        uses: dkershner6/post-api-call-action@v1
+        with:
+          url: ${{ secrets.OSUNY_STAGING_API_AUTOUPDATE_THEME_URL }}
+          data: "{\"secret_key\":\"${{ secrets.OSUNY_API_AUTOUPDATE_THEME_KEY }}\"}"
