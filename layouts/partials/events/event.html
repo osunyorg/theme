@@ -41,6 +41,9 @@
           {{ end -}}
         </div>
       {{ end }}
+      {{ if and (.Params.categories) ($show_status) }}
+        <p class="event-status">{{ .Params.dates.status }}</p>
+      {{ end }}
 
       {{ if and (site.Params.events.index.show_description) ($show_summary) }}
         {{- if (partial "GetTextFromHTML" .Params.summary) -}}
