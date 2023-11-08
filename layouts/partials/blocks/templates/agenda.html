@@ -1,21 +1,18 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
+{{- $block := .block }}
 {{- with .block.data -}}
-
   {{- $show_summary := .show_summary -}}
   {{- $show_category := .show_category -}}
   {{- $show_status := .show_status -}}
 
   {{- $layout := .layout | default "list" -}}
-  <div class="block block-agenda{{ if $title }} block-with-title{{ end }} block-agenda--{{- $layout }}">
+  <div class="block block-agenda{{ if $block.title }} block-with-title{{ end }} block-agenda--{{- $layout }}">
     <div class="container">
       <div class="block-content">
-
         {{ partial "blocks/top.html" (dict
-            "title" $title
-            "description" .description
-          )}}
+          "title" $block.title
+          "heading_level" $block.heading_level
+          "description" .description
+        )}}
         
         <div class="events events--{{- $layout -}}">
           {{ range .events }}

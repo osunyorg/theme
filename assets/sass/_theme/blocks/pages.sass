@@ -1,6 +1,5 @@
 .block-pages
     .top
-        @include top-flex
         a
             text-decoration: none
     .grid, .cards
@@ -49,6 +48,8 @@
                 @include h2
 
     &--grid
+        .top
+            @include top-flex
         .grid
             a
                 @include icon(arrow, after, true)
@@ -69,6 +70,8 @@
             margin-top: 0
         .blocks &:last-of-type
             margin-bottom: 0
+        .top
+            @include top-flex
         .cards
             @include grid(2, desktop)
             @include in-page-with-sidebar
@@ -147,8 +150,6 @@
             .block-content
                 .top
                     margin-bottom: $spacing1
-                .description
-                    margin-bottom: $spacing1
                 ul
                     @include grid(2, desktop)
                     grid-row-gap: $spacing0 !important
@@ -162,17 +163,22 @@
                     @include stretched-link(before)
             .block-content
                 @include grid
-                // grid-column-gap: $spacing1
-                // grid-row-gap: $spacing1
                 .top
-                    display: block
+                    // display: block
+                    align-items: initial
                     grid-column: 1 / 8
                     margin-bottom: 0
+                    display: grid
+                    grid-template-rows: subgrid
+                    grid-row: span 2
                     .block-title
                         width: auto
-                .top:not(.hidden) + .description
-                    grid-column: 1 / 8
-                    grid-row: 2 / 3
+                    .description
+                        @include body-text
+                        margin-top: 0
+                // .top:not(.hidden) + .description
+                //     grid-column: 1 / 8
+                //     grid-row: 2 / 3
                 // Default behavior (without page description)
                 ul
                     @include grid(4, desktop)
@@ -180,14 +186,16 @@
                     li
                         margin-top: 0
                 // If page description
-                .description + ul
+                .top + ul
                     grid-column: 9 / 13
-                    grid-row: 2 / 3
+                    grid-row: 2
                     display: block
                     li + li
                         margin-top: $spacing0
 
     &--alternate
+        .top
+            @include top-flex
         .grid
             article .media img
                 aspect-ratio: unset

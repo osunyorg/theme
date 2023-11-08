@@ -1,22 +1,13 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
+{{- $block := .block -}}
 {{- with .block.data -}}
-  <div class="block block-files{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-files{{ if $block.title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
-        {{- if or $title .description }}
-          <div class="top">
-            {{- if $title -}}
-              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-            {{ end -}}
-            {{- if .description }}
-              <div class="description">
-                {{ partial "PrepareHTML"  .description }}
-              </div>
-            {{ end -}}
-          </div>
-        {{ end -}}
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.heading_level
+          "description" .description
+        )}}
         
         <ul class="files">
           {{- range .files }}

@@ -1,7 +1,13 @@
+{{ $heading_level := .heading_level | default 2 }}
+{{ $heading_tag := (dict 
+  "open" ((printf "<h%d class='block-title'>" $heading_level) | safeHTML)
+  "close" ((printf "</h%d>" $heading_level) | safeHTML)
+  ) }}
+
 {{ if or .title .description }}
   <div class="top">
     {{ if .title }}
-      <p class="block-title">
+      {{ $heading_tag.open }}
         {{- if .link -}}
           <a href="{{ .link }}">
         {{- end -}}
@@ -9,12 +15,12 @@
         {{- if .link -}}
           </a>
         {{- end -}}
+      {{ $heading_tag.close }}
+    {{ end }}
+    {{ if .description }}
+      <p class="description">
+        {{ partial "PrepareHTML" .description }}
       </p>
     {{ end }}
-    {{- if .description }}
-      <div class="description">
-        {{ partial "PrepareHTML" .description }}
-      </div>
-    {{ end -}}
   </div>
-{{ end -}}
+{{ end }}

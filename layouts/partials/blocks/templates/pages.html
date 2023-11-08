@@ -1,5 +1,4 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
+{{- $block := .block -}}
 {{- $title := .block.title -}}
 {{- $class := "block block-pages" -}}
 {{- $layout_class := "block-pages--grid" -}}
@@ -12,14 +11,6 @@
   {{- $show_images := .show_images -}}
   {{- $main_description := "" -}}
   {{- $page_link := false -}}
-
-  {{/* LEGACY */}}
-  {{- with .show_description -}}
-    {{- $show_descriptions = . -}}
-  {{- end -}}
-  {{- with .show_image -}}
-    {{- $show_images = . -}}
-  {{- end -}}
 
   {{- if $layout -}}
     {{- $layout_class = printf "block-pages--%s" $layout -}}
@@ -55,7 +46,14 @@
   <div class="block block-pages{{ if $title }} block-with-title{{ end }} {{ $layout_class }} {{ $page_class }}">
     <div class="container">
       <div class="block-content">
-        {{- if $title -}}
+        {{ partial "blocks/top.html" (dict
+          "title" $title
+          "link" $page_link
+          "heading_level" $block.heading_level
+          "description" $main_description
+        )}}
+
+        {{/*  {{- if $title -}}
           <div class="top">
             {{ partial "blocks/title_with_link.html" (dict 
               "title" $title
@@ -67,13 +65,13 @@
               {{ end }}
             {{ end }}
           </div>
-        {{ end -}}
+        {{ end -}}  */}}
 
-        {{ if and $show_main_description (eq $layout "list")}}
+        {{/*  {{ if and $show_main_description (eq $layout "list")}}
           {{- with $page }}
             <p class="description">{{- $main_description -}}</p>
           {{ end }}
-        {{ end }}
+        {{ end }}  */}}
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
           "pages" .pages

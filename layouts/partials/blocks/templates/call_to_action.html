@@ -1,22 +1,16 @@
-{{- $position := .block.position -}}
-{{- $template := .block.template -}}
-{{- $title := .block.title -}}
+{{- $block := .block -}}
 {{- with .block.data -}}
   {{- $buttons := and .button.text .button_secondary.text -}}
-  <div class="block block-call_to_action{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-call_to_action{{ if $block.title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image">
           <div>
-            {{ if $title }}
-              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-            {{ end }}
-
-            {{- if (partial "GetTextFromHTML" .text) }}
-            <div class="description">
-              {{ partial "PrepareHTML" .text }}
-            </div>
-            {{ end -}}
+            {{ partial "blocks/top.html" (dict
+              "title" $block.title
+              "heading_level" $block.heading_level
+              "description" .text
+            )}}
 
             {{- if .buttons }}
             <div class="actions" {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>

@@ -1,6 +1,4 @@
-{{- $position := .block.position -}}
-{{- $template := .block.template -}}
-{{- $title := .block.title -}}
+{{- $block := .block -}}
 {{- $layout := .block.data.layout | default "no_background" -}}
 {{- $class := "block block-chapter" -}}
 {{- $image_class := "" -}}
@@ -13,16 +11,16 @@
   {{- $layout_class := printf "block-chapter--%s" $layout -}}
   {{- $class = printf "%s %s" $class $layout_class -}}
 
-  <div class="{{ $class }}{{ if $title }} block-with-title{{ end }}">
+  <div class="{{ $class }}{{ if $block.title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         <div class="chapter">
           <div class="text">
-            {{ if $title }}
-              <div class="top">
-                <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-              </div>
-            {{ end }}
+            {{ partial "blocks/top.html" (dict
+              "title" $block.title
+              "heading_level" $block.heading_level
+            )}}
+
             {{ if (partial "GetTextFromHTML" .text) -}}
             <div class="rich-text">
               {{ partial "PrepareHTML" .text }}
