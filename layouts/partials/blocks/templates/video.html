@@ -1,16 +1,13 @@
-{{- $title := .block.title -}}
-{{- $position := .block.position -}}
-
+{{- $block := .block -}}
 {{- with .block.data -}}
-  <div class="block block-video{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-video{{ if $block.title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         <div>
-          {{- if $title -}}
-            <div class="top">
-              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-            </div>
-          {{ end -}}
+          {{ partial "blocks/top.html" (dict
+            "title" $block.title
+            "heading_level" $block.heading_level
+          )}}
 
           {{ if .url }}
             {{ $title := "video" }}
@@ -33,7 +30,7 @@
 
           {{ partial "commons/transcription" ( dict
             "transcription" .transcription
-            "position" $position
+            "position" $block.position
           ) }}
         </div>
       </div>

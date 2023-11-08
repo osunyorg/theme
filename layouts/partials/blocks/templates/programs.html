@@ -1,15 +1,12 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
+{{- $block := .block -}}
 {{- with .block.data -}}
-  <div class="block block-programs{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-programs{{ if $block.title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
-        {{- if $title -}}
-          <div class="top">
-            <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-          </div>
-        {{ end -}}
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.heading_level
+        )}}
 
         <ol class="programs">
           {{- range .programs -}}

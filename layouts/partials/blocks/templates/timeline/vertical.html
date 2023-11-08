@@ -1,22 +1,14 @@
-<div class="block-content">
-  {{- if .title -}}
-    <div class="top">
-      <p class="block-title">{{ partial "PrepareHTML" .title }}</p>
-    </div>
-  {{ end -}}
-
-  {{ with .block.data -}}
-    <div class="timeline-events">
-      {{ range .events -}}
-        <article class="timeline-event">
-          {{ if .title }}
-            <h3 class="title">{{ partial "PrepareHTML" .title }}</h3>
-          {{ end }}
-          {{ if .text }}
-            <p>{{ partial "PrepareText" .text }}</p>
-          {{ end }}
-        </article>
-      {{ end -}}
-    </div>
-  {{ end -}}
-</div>
+{{ with .block.data -}}
+  <div class="timeline-events">
+    {{ range .events -}}
+      <article class="timeline-event">
+        {{ if .title }}
+          <h3 class="title">{{ partial "PrepareHTML" .title }}</h3>
+        {{ end }}
+        {{ if .text }}
+          <p>{{ partial "PrepareText" .text }}</p>
+        {{ end }}
+      </article>
+    {{ end -}}
+  </div>
+{{ end -}}

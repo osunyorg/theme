@@ -1,15 +1,17 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
+{{- $block := .block -}}
 {{- $layout := .block.data.layout | default "vertical" -}}
-<div class="block block-timeline{{ if $title }} block-with-title{{ end }} block-timeline--{{ $layout }}">
+<div class="block block-timeline{{ if $block.title }} block-with-title{{ end }} block-timeline--{{ $layout }}">
   <div class="container">
-    {{ $template := printf "blocks/templates/timeline/%s.html" $layout }}
-    {{ partial $template (dict 
-        "title" $title
-        "block" .block
-        "template" $template
-      ) }}
+    <div class="block-content">
+      {{ partial "blocks/top.html" (dict
+        "title" $block.title
+        "heading_level" $block.heading_level
+      )}}
+      {{ $template := printf "blocks/templates/timeline/%s.html" $layout }}
+      {{ partial $template (dict 
+          "block" $block
+        ) }}
+    </div>
   </div>
 </div>
 

@@ -53,26 +53,6 @@
           "description" $main_description
         )}}
 
-        {{/*  {{- if $title -}}
-          <div class="top">
-            {{ partial "blocks/title_with_link.html" (dict 
-              "title" $title
-              "link" $page_link
-              ) }}
-            {{ if and $show_main_description (ne $layout "list")}}
-              {{- with $page }}
-                <p class="description">{{- $main_description -}}</p>
-              {{ end }}
-            {{ end }}
-          </div>
-        {{ end -}}  */}}
-
-        {{/*  {{ if and $show_main_description (eq $layout "list")}}
-          {{- with $page }}
-            <p class="description">{{- $main_description -}}</p>
-          {{ end }}
-        {{ end }}  */}}
-
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
           "pages" .pages
           "show_images" $show_images

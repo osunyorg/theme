@@ -5,7 +5,7 @@
   ) }}
 
 {{ if or .title .description }}
-  <div class="top">
+  <div class="top {{ if .hidden }}hidden{{ end }}">
     {{ if .title }}
       {{ $heading_tag.open }}
         {{- if .link -}}
