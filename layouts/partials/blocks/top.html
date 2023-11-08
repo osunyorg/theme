@@ -1,0 +1,20 @@
+{{ if or .title .description }}
+  <div class="top">
+    {{ if .title }}
+      <p class="block-title">
+        {{- if .link -}}
+          <a href="{{ .link }}">
+        {{- end -}}
+        {{ partial "PrepareHTML" .title }}
+        {{- if .link -}}
+          </a>
+        {{- end -}}
+      </p>
+    {{ end }}
+    {{- if .description }}
+      <div class="description">
+        {{ partial "PrepareHTML" .description }}
+      </div>
+    {{ end -}}
+  </div>
+{{ end -}}
