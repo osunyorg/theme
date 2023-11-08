@@ -27,7 +27,9 @@
           )}}
         {{- end }}
 
-        {{- partial (printf "blocks/templates/posts/%s.html" $layout) . -}}
+        {{/*  TODO: handle heading level in articles  */}}
+
+        {{- partial (printf "blocks/templates/posts/%s.html" $layout) $block -}}
       </div>
     </div>
   </div>
