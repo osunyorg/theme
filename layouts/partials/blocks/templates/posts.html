@@ -27,9 +27,13 @@
           )}}
         {{- end }}
 
+        {{- $heading_level := $block.heading_level -}}
+        {{- if $block.title -}}
+          {{- $heading_level = add $block.heading_level 1 -}}
+        {{- end -}}
         {{ partial (printf "blocks/templates/posts/%s.html" $layout) (dict
           "posts" .posts
-          "heading_level" (add $block.heading_level 1)
+          "heading_level" $heading_level
         )}}
       </div>
     </div>

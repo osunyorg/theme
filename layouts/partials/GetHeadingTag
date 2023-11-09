@@ -10,6 +10,6 @@
 {{ $tag := printf "h%d" $level }}
 
 {{ return (dict 
-    "open" ((printf "<%s {{ $attributes }}>" $tag) | safeHTML)
-    "close" ((printf "</%s>" $tag) | safeHTML)
-  )}}
+  "open" ((printf "<%s %s>" $tag $attributes) | safeHTML)
+  "close" ((printf "</%s>" $tag) | safeHTML)
+)}}
