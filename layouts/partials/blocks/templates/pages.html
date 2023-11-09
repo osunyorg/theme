@@ -55,6 +55,7 @@
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
           "pages" .pages
+          "heading_level" (add $block.heading_level 1)
           "show_images" $show_images
           "show_descriptions" $show_descriptions
           ) }}
