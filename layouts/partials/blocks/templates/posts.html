@@ -22,18 +22,14 @@
 
           {{ partial "blocks/top.html" (dict
             "title" $block.title
-            "heading_level" $block.heading_level
+            "heading_level" $block.ranks.self
             "link" $link
           )}}
         {{- end }}
 
-        {{- $heading_level := $block.heading_level -}}
-        {{- if $block.title -}}
-          {{- $heading_level = add $block.heading_level 1 -}}
-        {{- end -}}
         {{ partial (printf "blocks/templates/posts/%s.html" $layout) (dict
           "posts" .posts
-          "heading_level" $heading_level
+          "heading_level" $block.ranks.children
         )}}
       </div>
     </div>

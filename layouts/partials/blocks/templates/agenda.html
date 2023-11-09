@@ -10,10 +10,11 @@
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
           "title" $block.title
-          "heading_level" $block.heading_level
+          "heading_level" $block.ranks.self
           "description" .description
         )}}
-        
+
+        {{ $heading := printf "h%d" $block.ranks.children }}
         <div class="events events--{{- $layout -}}">
           {{ range .events }}
             {{ $event := site.GetPage .file }}
@@ -24,6 +25,7 @@
                   "show_summary" $show_summary
                   "show_category" $show_category
                   "show_status" $show_status
+                  "heading" $block.ranks.children
                 ) }}
             {{ end }}
           {{ end }}

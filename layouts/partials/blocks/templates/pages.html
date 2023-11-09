@@ -49,18 +49,13 @@
         {{ partial "blocks/top.html" (dict
           "title" $title
           "link" $page_link
-          "heading_level" $block.heading_level
+          "heading_level" $block.ranks.self
           "description" $main_description
         )}}
 
-        {{- $heading_level := $block.heading_level -}}
-        {{- if $block.title -}}
-          {{- $heading_level = add $block.heading_level 1 -}}
-        {{- end -}}
-
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
           "pages" .pages
-          "heading_level" $heading_level
+          "heading_level" $block.ranks.children
           "show_images" $show_images
           "show_descriptions" $show_descriptions
           ) }}

@@ -11,7 +11,7 @@
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
           "title" $block.title
-          "heading_level" $block.heading_level
+          "heading_level" $block.ranks.self
           "description" .description
         )}}
 
@@ -21,12 +21,8 @@
 
             <article class="person" itemscope itemtype="https://schema.org/Person">
               <div class="description">
-                {{- $heading_level := $block.heading_level -}}
-                {{- if $block.title -}}
-                  {{- $heading_level = add $block.heading_level 1 -}}
-                {{- end -}}
                 {{- $heading_tag := partial "GetHeadingTag" (dict 
-                  "level" $heading_level
+                  "level" $block.ranks.children
                   "attributes" "class='name' itemprop='name'"
                   ) -}}
 
