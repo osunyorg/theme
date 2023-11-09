@@ -187,17 +187,17 @@
         order: -1
         overflow: hidden
         img
+            display: block
             object-fit: cover
             @if $article-media-aspect-ratio
                 aspect-ratio: $article-media-aspect-ratio
-    h2, h3
+    h2, h3, [itemprop=headline]
         @include h3
         a
             display: block
             @include stretched-link
             text-decoration: none
-    p
-        + time
+    p + time
             margin-top: $spacing0
     time
         @include meta

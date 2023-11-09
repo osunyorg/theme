@@ -27,9 +27,10 @@
           )}}
         {{- end }}
 
-        {{/*  TODO: handle heading level in articles  */}}
-
-        {{- partial (printf "blocks/templates/posts/%s.html" $layout) $block -}}
+        {{ partial (printf "blocks/templates/posts/%s.html" $layout) (dict
+          "posts" .posts
+          "heading_level" (add $block.heading_level 1)
+        )}}
       </div>
     </div>
   </div>
