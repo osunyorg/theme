@@ -37,13 +37,12 @@
   </div>
 {{- end -}}
 
-
 {{- define "organization" -}}
   <article class="organization" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
     {{ $title := "" }}
     {{ if .title }}
       {{ $title = partial "PrepareHTML" .title -}}
-      <h3>
+      <p class="organization-title">
         {{- if and .url .with_link }}
           <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
         {{ end -}}
@@ -51,7 +50,7 @@
         {{- if .url }}
           </a>
         {{ end -}}
-      </h3>
+        </p>
     {{ end -}}
     <div class="media">
       {{- if .logo -}}
