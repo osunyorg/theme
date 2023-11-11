@@ -2,21 +2,7 @@
     @include in-page-with-sidebar
         .persons
             @include grid(1, sm)
-            &:not(.is-column)
-                @include grid(2, desktop)
-            &.is-column
-                row-gap: $spacing0
-                @include grid(2, xl)
-                @include media-breakpoint-between(desktop, xl)
-                    .person
-                        justify-content: space-between
-                        gap: $spacing1
-                    .avatar
-                        margin-right: 0
-                        order: 1
-                        width: col(3)
-                    .description
-                        margin-top: 0
+            @include grid(2, xl)
         article
             flex-direction: row
             .avatar
@@ -25,7 +11,20 @@
                     width: calc(#{col(1, 4)} + #{$grid-gutter})
             .description
                 margin-top: $spacing1
-
+        // &.block-with-long-text
+        .persons
+            row-gap: $spacing0
+            @include grid(2, xl)
+            @include media-breakpoint-between(desktop, xl)
+                .person
+                    justify-content: space-between
+                    gap: $spacing1
+                .avatar
+                    margin-right: 0
+                    order: 1
+                    width: col(3)
+                .description
+                    margin-top: 0
     @include in-page-without-sidebar
         .top .description
             max-width: col(8)
