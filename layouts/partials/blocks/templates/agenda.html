@@ -14,7 +14,6 @@
           "description" .description
         )}}
 
-        {{ $heading := printf "h%d" $block.ranks.children }}
         <div class="events events--{{- $layout -}}">
           {{ range .events }}
             {{ $event := site.GetPage .file }}
@@ -25,7 +24,7 @@
                   "show_summary" $show_summary
                   "show_category" $show_category
                   "show_status" $show_status
-                  "heading" $block.ranks.children
+                  "heading" (printf "h%d" $block.ranks.children)
                 ) }}
             {{ end }}
           {{ end }}
