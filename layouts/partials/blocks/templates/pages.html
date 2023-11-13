@@ -1,9 +1,8 @@
 {{- $block := .block -}}
 {{- $title := .block.title -}}
-{{- $class := "block block-pages" -}}
-{{- $layout_class := "block-pages--grid" -}}
+{{- $layout := .block.data.layout | default "grid" -}}
+
 {{- with .block.data -}}
-  {{- $layout := .layout -}}
 
   {{- $show_main_page := false -}}
   {{- $show_main_description := .show_main_description -}}
@@ -11,12 +10,6 @@
   {{- $show_images := .show_images -}}
   {{- $main_description := "" -}}
   {{- $page_link := false -}}
-
-  {{- if $layout -}}
-    {{- $layout_class = printf "block-pages--%s" $layout -}}
-  {{- end -}}
-
-  {{ $class = printf "{{$class}} %s" $layout_class }}
 
   {{- $page_class := "" -}}
   {{ $page := "" }}
@@ -43,7 +36,7 @@
     {{ end }}
   {{ end -}}
 
-  <div class="block block-pages{{ if $title }} block-with-title{{ end }} {{ $layout_class }} {{ $page_class }}">
+  <div class="block block-pages{{ if $title }} block-with-title{{ end }} block-pages--{{ $layout }} {{ $page_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict

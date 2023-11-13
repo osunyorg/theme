@@ -1,14 +1,11 @@
 {{- $block := .block -}}
 {{- $term := false -}}
-{{- $layout := "grid" -}}
+{{- $layout := .block.data.layout | default "grid" -}}
 {{- with .block.data }}
-  {{ if .layout }}
-    {{- $layout = .layout -}}
-  {{ end }}
   {{ if .category }}
     {{- $term = site.GetPage (printf "/categories%s" .category) -}}
   {{ end }}
-  <div itemscope itemtype="http://schema.org/Blog" class="block block-posts--{{- $layout }} block-posts{{ if $block.title }} block-with-title{{ end }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}">
+  <div itemscope itemtype="http://schema.org/Blog" class="block block-posts block-posts--{{ $layout }}{{ if $block.title }} block-with-title{{ end }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}">
     <div class="container">
       <div class="block-content">
         {{ if $block.title -}}

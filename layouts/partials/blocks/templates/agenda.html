@@ -5,7 +5,7 @@
   {{- $show_status := .show_status -}}
 
   {{- $layout := .layout | default "list" -}}
-  <div class="block block-agenda{{ if $block.title }} block-with-title{{ end }} block-agenda--{{- $layout }}">
+  <div class="block block-agenda{{ if $block.title }} block-with-title{{ end }} block-agenda--{{ $layout }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
