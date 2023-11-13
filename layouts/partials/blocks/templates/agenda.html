@@ -1,12 +1,12 @@
 {{- $block := .block }}
-{{- $class := partial "GetBlockClass" .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
 {{- with .block.data -}}
   {{- $show_summary := .show_summary -}}
   {{- $show_category := .show_category -}}
   {{- $show_status := .show_status -}}
-
   {{- $layout := .layout | default "list" -}}
-  <div class="{{ $class }}">
+
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
