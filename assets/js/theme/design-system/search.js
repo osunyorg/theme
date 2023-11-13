@@ -35,8 +35,10 @@ class Search {
 
         window.addEventListener('keydown', (event) => {
             if (event.keyCode === 27 || event.key === 'Escape') {
-                this.toggle(false);
-                this.button.focus();
+                if (this.state.isOpened) {
+                    this.toggle(false);
+                    this.button.focus();
+                }
             } else if (event.key === "Tab" && this.state.isOpened) {
                 this.innerFocus(event);
             }
