@@ -1,29 +1,19 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
+{{- $block := .block }}
 {{- with .block.data -}}
-
   {{- $show_summary := .show_summary -}}
   {{- $show_category := .show_category -}}
   {{- $show_status := .show_status -}}
 
   {{- $layout := .layout | default "list" -}}
-  <div class="block block-agenda{{ if $title }} block-with-title{{ end }} block-agenda--{{- $layout }}">
+  <div class="block block-agenda{{ if $block.title }} block-with-title{{ end }} block-agenda--{{- $layout }}">
     <div class="container">
       <div class="block-content">
-        {{ if or $title .description }}
-          <div class="top">
-            {{ if $title }}
-              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-            {{ end }}
-            {{- if .description }}
-              <div class="description">
-                {{ partial "PrepareHTML" .description }}
-              </div>
-            {{ end -}}
-          </div>
-        {{ end -}}
-        
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+          "description" .description
+        )}}
+
         <div class="events events--{{- $layout -}}">
           {{ range .events }}
             {{ $event := site.GetPage .file }}
@@ -34,6 +24,7 @@
                   "show_summary" $show_summary
                   "show_category" $show_category
                   "show_status" $show_status
+                  "heading" (printf "h%d" $block.ranks.children)
                 ) }}
             {{ end }}
           {{ end }}

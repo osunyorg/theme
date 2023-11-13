@@ -1,16 +1,13 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
+{{- $block := .block -}}
 {{- with .block.data -}}
-  <div class="block block-sound{{ if $title }} block-with-title{{ end }}">
+  <div class="block block-sound{{ if $block.title }} block-with-title{{ end }}">
     <div class="container">
       <div class="block-content">
         <div>
-          {{- if $title -}}
-            <div class="top">
-              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-            </div>
-          {{ end -}}
+          {{ partial "blocks/top.html" (dict
+            "title" $block.title
+            "heading_level" $block.ranks.self
+          )}}
 
           {{ if .file }}
             {{ $file := partial "GetMedia" .file.id }}
@@ -25,7 +22,6 @@
 
           {{ partial "commons/transcription" ( dict
             "transcription" .transcription
-            "position" $position
           ) }}
         </div>
       </div>

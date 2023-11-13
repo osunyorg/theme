@@ -1,6 +1,4 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
+{{- $block := .block -}}
 {{- $is_carousel := false -}}
 
 {{- with .block.data -}}
@@ -9,12 +7,14 @@
       {{- $is_carousel = true -}}
     {{ end }}
   {{ end }}
-  <div class="block block-testimonials{{ if $title }} block-with-title{{ end }}{{ if $is_carousel}} with-carousel{{ end }}">
+  <div class="block block-testimonials{{ if $block.title }} block-with-title{{ end }}{{ if $is_carousel}} with-carousel{{ end }}">
     <div class="container">
       <div class="block-content">
-        {{- if $title -}}
-          <p class="block-title hidden">{{ partial "PrepareHTML" $title }}</p>
-        {{ end -}}
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+          "hidden" true
+        )}}
 
         <div class="testimonials">
           {{- if $is_carousel }}

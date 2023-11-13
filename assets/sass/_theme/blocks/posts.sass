@@ -9,7 +9,7 @@
         @include grid(1)
         @include grid($block-posts-grid-columns, desktop)
     article
-        h3
+        [itemprop=headline]
             a
                 @include stretched-link
                 text-decoration: none
@@ -51,7 +51,7 @@
                     display: flex
                     flex-direction: column
                     padding-top: $spacing0
-                    h3
+                    [itemprop=headline]
                         margin-bottom: 0
                     .post-categories
                         margin-bottom: 0
@@ -97,7 +97,7 @@
 
     &--highlight
         .highlight-post
-            h3
+            [itemprop=headline]
                 margin-bottom: $spacing0
             .media
                 margin-bottom: $spacing0
@@ -124,11 +124,11 @@
 
         @include media-breakpoint-up(desktop)
             .highlight
-                h3
+                [itemprop=headline]
                     @include h2
             .list
                 article
-                    h3
+                    [itemprop=headline]
                         @include h4
 
         @include in-page-with-sidebar
@@ -144,7 +144,7 @@
             .list
                 article
                     @include grid(8, desktop, 0, 0)
-                    h3
+                    [itemprop=headline]
                         grid-column: 1 / 7
                     .post-categories
                         grid-column: 1 / 7

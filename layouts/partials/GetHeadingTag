@@ -1,0 +1,15 @@
+{{ $level := . }}
+{{ $attributes := "" }}
+{{ if isset . "level" }}
+    {{ $level = .level | default 2 }}
+{{ end }}
+{{ if isset . "attributes" }}
+  {{ $attributes = .attributes }}
+{{ end }}
+
+{{ $tag := printf "h%d" $level }}
+
+{{ return (dict 
+  "open" ((printf "<%s %s>" $tag $attributes) | safeHTML)
+  "close" ((printf "</%s>" $tag) | safeHTML)
+)}}

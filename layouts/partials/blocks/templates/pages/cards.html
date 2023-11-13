@@ -1,16 +1,18 @@
 {{ $show_descriptions := .show_descriptions }}
 {{ $show_images := .show_images }}
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading_tag := partial "GetHeadingTag" $heading_level }}
 
 <div class="cards">
   {{ range .pages }}
     {{ $page := site.GetPage .file }}
     {{ with $page }}
       <article class="card">
-        <h3>
+        {{ $heading_tag.open }}
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}
           </a>
-        </h3>
+        {{ $heading_tag.close }}
 
         {{ if and $show_descriptions .Params.summary }}
           {{ if site.Params.pages.index.truncate_description }}
