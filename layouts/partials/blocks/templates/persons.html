@@ -1,4 +1,5 @@
 {{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
 {{- $charLimit := 30 -}}
 {{- $isColumn := false -}}
 
@@ -6,7 +7,7 @@
   {{- $with_link := .with_link -}}
   {{- $with_photo := .with_photo -}}
 
-  <div class="block block-persons{{ partial "GetBlockClass" $block }}">
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict

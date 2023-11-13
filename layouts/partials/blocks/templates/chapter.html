@@ -1,14 +1,14 @@
 {{- $block := .block -}}
-{{- $class := partial "GetBlockClass" .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
 {{- $image_class := "" -}}
 
 {{- with .block.data -}}
   {{ if .image }}
-    {{- $class = printf "%s block-chapter--with-image" $class -}}
+    {{- $block_class = printf "%s block-chapter--with-image" $block_class -}}
     {{- $image_class = printf "image-%s" (partial "GetImageDirection" .image) -}}
   {{ end }}
 
-  <div class="{{ $class }}">
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         <div class="chapter">
