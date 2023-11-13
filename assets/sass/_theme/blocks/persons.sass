@@ -1,34 +1,30 @@
+@mixin person-avatar-end
+    justify-content: space-between
+    gap: $spacing1
+    .avatar
+        margin-right: 0
+        order: 1
+        width: col(3)
+    .description
+        margin-top: 0
+
 .block-persons
     @include in-page-with-sidebar
         &:not(.block-with-long-text)
             .persons
                 @include grid(2, xl)
                 .person
-                    justify-content: space-between
-                    gap: $spacing1
-                .avatar
-                    margin-right: 0
-                    order: 1
-                    width: col(3)
-                .description
-                    margin-top: 0
+                    @include person-avatar-end
         .persons
             @include grid(1, sm)
             row-gap: $spacing0
             @include media-breakpoint-between(desktop, xl)
                 .person
-                    justify-content: space-between
-                    gap: $spacing1
-                .avatar
-                    margin-right: 0
-                    order: 1
-                    width: col(3)
-                .description
-                    margin-top: 0
+                    @include person-avatar-end
         article
             flex-direction: row
+            gap: col(1, 8)
             .avatar
-                margin-right: $spacing1
                 @include media-breakpoint-up(md)
                     width: calc(#{col(1, 4)} + #{$grid-gutter})
             .description
