@@ -7,7 +7,7 @@
       {{- $is_carousel = true -}}
     {{ end }}
   {{ end }}
-  <div class="block block-testimonials{{ if $block.title }} block-with-title{{ end }}{{ if $is_carousel}} with-carousel{{ end }}">
+  <div class="{{ partial "GetBlockClass" $block }}{{ if $is_carousel}} with-carousel{{ end }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict

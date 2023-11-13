@@ -1,6 +1,6 @@
 {{- $block := .block -}}
 
-{{- $class := "block block-organizations" -}}
+{{- $class := partial "GetBlockClass" .block -}}
 {{ $logo_index := "logo" }}
 {{ $longitude := "" }}
 {{ $latitude := "" }}
@@ -14,7 +14,7 @@
 
   {{- $with_link := .with_link -}}
 
-  <div class="block block-organizations{{ if $block.title }} block-with-title{{ end }} block-organizations--{{ $layout }}">
+  <div class="{{ $class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict

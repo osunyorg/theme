@@ -1,6 +1,6 @@
 {{- $block := .block -}}
 {{- $layout := .block.data.layout | default "vertical" -}}
-<div class="block block-timeline{{ if $block.title }} block-with-title{{ end }} block-timeline--{{ $layout }}">
+<div class="block block-timeline{{ partial "GetBlockClass" $block }} block-timeline--{{ $layout }}">
   <div class="container">
     <div class="block-content">
       {{ partial "blocks/top.html" (dict

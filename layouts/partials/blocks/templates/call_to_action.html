@@ -1,7 +1,9 @@
 {{- $block := .block -}}
+{{- $class := partial "GetBlockClass" .block -}}
+
 {{- with .block.data -}}
   {{- $buttons := and .button.text .button_secondary.text -}}
-  <div class="block block-call_to_action{{ if $block.title }} block-with-title{{ end }}">
+  <div class="{{ $class }}">
     <div class="container">
       <div class="block-content">
         <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image">
