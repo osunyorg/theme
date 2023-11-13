@@ -6,7 +6,7 @@
   {{- $with_link := .with_link -}}
   {{- $with_photo := .with_photo -}}
 
-  <div class="block block-persons{{ if $block.title }} block-with-title{{ end }}">
+  <div class="block block-persons{{ partial "GetBlockClass" $block }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict

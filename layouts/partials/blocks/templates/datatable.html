@@ -1,6 +1,8 @@
 {{- $block := .block -}}
+{{- $class := partial "GetBlockClass" .block -}}
+
 {{- with .block.data -}}
-  <div class="block block-datatable{{ if $block.title }} block-with-title{{ end }}">
+  <div class="{{ $class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict

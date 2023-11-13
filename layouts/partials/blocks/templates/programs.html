@@ -1,6 +1,6 @@
 {{- $block := .block -}}
 {{- with .block.data -}}
-  <div class="block block-programs{{ if $block.title }} block-with-title{{ end }}">
+  <div class="block block-programs{{ partial "GetBlockClass" $block }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict

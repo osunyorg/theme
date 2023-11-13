@@ -1,6 +1,5 @@
 {{- $block := .block -}}
-{{- $layout := .block.data.layout | default "no_background" -}}
-{{- $class := "block block-chapter" -}}
+{{- $class := partial "GetBlockClass" .block -}}
 {{- $image_class := "" -}}
 
 {{- with .block.data -}}
@@ -8,10 +7,8 @@
     {{- $class = printf "%s block-chapter--with-image" $class -}}
     {{- $image_class = printf "image-%s" (partial "GetImageDirection" .image) -}}
   {{ end }}
-  {{- $layout_class := printf "block-chapter--%s" $layout -}}
-  {{- $class = printf "%s %s" $class $layout_class -}}
 
-  <div class="{{ $class }}{{ if $block.title }} block-with-title{{ end }}">
+  <div class="{{ $class }}">
     <div class="container">
       <div class="block-content">
         <div class="chapter">
