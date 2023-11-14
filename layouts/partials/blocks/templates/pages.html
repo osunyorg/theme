@@ -27,17 +27,19 @@
     {{ if .Params.bodyclass }}
       {{- $page_class = printf "block-page-%s" .Params.bodyclass }}
     {{ end }}
-    {{ if site.Params.pages.index.truncate_description }}
-      {{- $main_description = partial "GetTruncateContent" ( dict 
-          "text" .Params.summary
-          "length" site.Params.pages.index.truncate_description
-          ) -}}
-    {{ else }}
-      {{- $main_description = partial "PrepareText" .Params.summary -}}
+    {{ if $show_main_description }}
+      {{ if site.Params.pages.index.truncate_description }}
+        {{- $main_description = partial "GetTruncateContent" ( dict 
+            "text" .Params.summary
+            "length" site.Params.pages.index.truncate_description
+            ) -}}
+      {{ else }}
+        {{- $main_description = partial "PrepareText" .Params.summary -}}
+      {{ end }}
     {{ end }}
   {{ end -}}
 
-  <div class="{{ $block_class }}{{ $page_class }}">
+  <div class="{{ $block_class }} {{ $page_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
