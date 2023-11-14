@@ -8,7 +8,7 @@
   {{- if .image -}}
     {{- $image_class = printf "image-%s" (partial "GetImageDirection" .image ) -}}
   {{- end -}}
-  <div class="{{ $block_class }}{{ $image_class }}">
+  <div class="{{ $block_class }} {{ $image_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
