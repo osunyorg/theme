@@ -102,7 +102,12 @@
             display: none
         img
             display: block
-
+    @include media-breakpoint-down(desktop)
+        &-time
+            display: inline-flex
+            &::before
+                content: '|'
+                margin-right: half($spacing0)
 .events
     &--list
         .event
