@@ -48,6 +48,7 @@ if (command === "dev") {
     execute("hugo");
     execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --exclude-selectors '" + pagefindExclude + "'");
     execute("hugo server");
+    
 }
 
 if (command === "build") {

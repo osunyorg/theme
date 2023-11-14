@@ -101,7 +101,7 @@
                 flex-flow: row nowrap
                 list-style: none
                 padding-left: 0
-                margin-top: $spacing1
+                margin-top: $spacing0
                 transition: margin 0.4s ease-in-out
                 width: 100%
         .timeline-event
@@ -117,7 +117,6 @@
                 @include signature
             .description
                 @include small
-
             .line
                 background: $block-timeline-horizontal-color
                 height: 1px
@@ -142,9 +141,6 @@
                     background: transparent
 
         @include media-breakpoint-up(desktop)
-            .timeline-events
-                ol
-                    margin-top: $spacing2
             .timeline-event
                 .line
                     width: calc(100% + #{$grid-gutter})
@@ -161,11 +157,6 @@
                 width: 75%
                 .line
                     margin-bottom: calc(#{$spacing2} + var(--min-title-height))
-
-
-        @include in-page-with-sidebar
-            .timeline
-                padding-left: offset(4)
 
         @include in-page-without-sidebar
             @include media-breakpoint-up(xxl)

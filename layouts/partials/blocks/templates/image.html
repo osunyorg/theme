@@ -1,21 +1,20 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
+{{- $block := .block -}}
 {{- $image_class := "" -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+
 {{- with .block.data -}}
   {{- $text := .text -}}
   {{- $buttons := and .button.text .button_secondary.text -}}
   {{- if .image -}}
     {{- $image_class = printf "image-%s" (partial "GetImageDirection" .image ) -}}
   {{- end -}}
-  <div class="block block-image{{ if $title }} block-with-title{{ end }} {{ $image_class -}}">
+  <div class="{{ $block_class }}{{ $image_class }}">
     <div class="container">
       <div class="block-content">
-        {{- if $title -}}
-          <div class="top">
-            <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-          </div>
-        {{ end -}}
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+        )}}
 
         {{- with .image -}}
           <figure class="{{ $image_class }}">

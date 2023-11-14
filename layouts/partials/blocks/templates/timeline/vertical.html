@@ -1,22 +1,22 @@
-<div class="block-content">
-  {{- if .title -}}
-    <div class="top">
-      <p class="block-title">{{ partial "PrepareHTML" .title }}</p>
-    </div>
-  {{ end -}}
 
-  {{ with .block.data -}}
-    <div class="timeline-events">
-      {{ range .events -}}
-        <article class="timeline-event">
-          {{ if .title }}
-            <h3 class="title">{{ partial "PrepareHTML" .title }}</h3>
-          {{ end }}
-          {{ if .text }}
-            <p>{{ partial "PrepareText" .text }}</p>
-          {{ end }}
-        </article>
-      {{ end -}}
-    </div>
-  {{ end -}}
-</div>
+{{- $heading_tag := partial "GetHeadingTag" (dict 
+  "level" .block.ranks.children
+  "attributes" "class='title'"
+  ) -}}
+
+{{ with .block.data -}}
+  <div class="timeline-events">
+    {{ range .events -}}
+      <article class="timeline-event">
+        {{ if .title }}
+          {{ $heading_tag.open -}}
+            {{ partial "PrepareText" .title }}
+          {{ $heading_tag.close -}}
+        {{ end }}
+        {{ if .text }}
+          <p>{{ partial "PrepareText" .text }}</p>
+        {{ end }}
+      </article>
+    {{ end -}}
+  </div>
+{{ end -}}

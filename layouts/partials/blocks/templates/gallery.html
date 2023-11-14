@@ -1,34 +1,22 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
-{{- $layout_class := "block-gallery--grid" -}}
+{{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+
 {{- with .block.data -}}
-  {{- $layout := .layout -}}
-  {{- if $layout -}}
-    {{- $layout_class = printf "block-gallery--%s" .layout -}}
-  {{- end -}}
-  <div class="block block-gallery{{ if $title }} block-with-title{{ end }} {{ $layout_class }}">
+  {{- $layout := .layout | default "grid" }}
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{- if or $title .description }}
-          <div class="top">
-            {{- if $title -}}
-              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-            {{ end -}}
-            {{- if .description }}
-              <div class="description">
-                {{ partial "PrepareHTML"  .description }}
-              </div>
-            {{ end -}}
-          </div>
-        {{ end -}}
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+          "description" .description
+        )}}
 
-        {{- if eq .layout "carousel" -}}
+        {{- if eq $layout "carousel" -}}
           {{ partial "blocks/templates/gallery/carousel" . }}
         {{- else -}}
           {{ partial "blocks/templates/gallery/grid" . }}
         {{- end -}}
-
       </div>
     </div>
   </div>
