@@ -2,7 +2,10 @@
 {{ $show_images := .show_images }}
 {{ $image_class := "" }}
 {{ $heading_level := .heading_level | default 3 }}
-{{ $heading_tag := partial "GetHeadingTag" $heading_level }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+        "level" $heading_level
+        "attributes" "class='page-title'"
+)}}
 
 <div class="grid">
   {{ range .pages }}
