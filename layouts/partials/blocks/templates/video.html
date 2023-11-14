@@ -1,6 +1,8 @@
 {{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+
 {{- with .block.data -}}
-  <div class="block block-video{{ partial "GetBlockClass" $block }}">
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         <div>

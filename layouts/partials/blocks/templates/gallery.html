@@ -1,8 +1,9 @@
 {{- $block := .block -}}
-{{- $class := partial "GetBlockClass" .block -}}
-{{- $layout := .block.data.layout | default "grid" }}
+{{- $block_class := partial "GetBlockClass" .block -}}
+
 {{- with .block.data -}}
-  <div class="{{ $class }}">
+  {{- $layout := .layout | default "grid" }}
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
@@ -16,7 +17,6 @@
         {{- else -}}
           {{ partial "blocks/templates/gallery/grid" . }}
         {{- end -}}
-
       </div>
     </div>
   </div>

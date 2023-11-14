@@ -1,11 +1,13 @@
 {{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+
 {{- $term := false -}}
 {{- $layout := .block.data.layout | default "grid" -}}
 {{- with .block.data }}
   {{ if .category }}
     {{- $term = site.GetPage (printf "/categories%s" .category) -}}
   {{ end }}
-  <div itemscope itemtype="http://schema.org/Blog" class="block block-posts block-posts--{{ $layout }}{{ partial "GetBlockClass" $block }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}">
+  <div itemscope itemtype="http://schema.org/Blog" class="{{ $block_class }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}">
     <div class="container">
       <div class="block-content">
         {{ if $block.title -}}
