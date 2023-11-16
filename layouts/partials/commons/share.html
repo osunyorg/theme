@@ -14,4 +14,25 @@
       <span>Twitter</span>
     </a>
   </li>
+  {{ if site.Params.posts.share_links.whatsapp }}
+  <li>
+    <a href="https://api.whatsapp.com/send?text={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-whatsapp" title="{{ i18n "posts.share_aria" (dict "Title" "Whatsapp") }}">
+      <span>Whatsapp</span>
+    </a>
+  </li>
+  {{ end }}
+  {{ if site.Params.posts.share_links.telegram }}
+  <li>
+    <a href="https://t.me/share/url?url={{ .Permalink | absURL }}&text={{ .Title }}" target="_blank" rel="noopener" class="icon icon-telegram" title="{{ i18n "posts.share_aria" (dict "Title" "Telegram") }}">
+      <span>Telegram</span>
+    </a>
+  </li>
+  {{ end }}
+  {{ if site.Params.posts.share_links.email }}
+  <li>
+    <a href="mailto:?subject={{ .Title }}&body={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-email" title="{{ i18n "posts.share_aria" (dict "Title" "E-mail") }}">
+      <span>E-mail</span>
+    </a>
+  </li>
+  {{ end }}
 </ul>
