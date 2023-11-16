@@ -1,40 +1,26 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
-
-{{- $class := "block block-organizations" -}}
-{{- $layout_class := "block-organizations--grid" -}}
+{{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
 {{ $logo_index := "logo" }}
 {{ $longitude := "" }}
 {{ $latitude := "" }}
+{{- $layout := .block.data.layout | default "grid" }}
 
 {{ if site.Params.organizations.dark_logo_background }}
   {{ $logo_index = "logo_on_dark_background" }}
 {{ end }}
 
 {{- with .block.data -}}
-  {{- $layout := .layout -}}
+
   {{- $with_link := .with_link -}}
 
-  {{- if $layout -}}
-    {{- $layout_class = printf "block-organizations--%s" $layout -}}
-  {{- end -}}
-
-  <div class="block block-organizations{{ if $title }} block-with-title{{ end }} {{ $layout_class }}">
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ if or $title .description -}}
-          <div class="top">
-            {{- if $title -}}
-              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-            {{ end -}}
-            {{- if .description }}
-              <div class="description">
-                {{ partial "PrepareHTML" .description }}
-              </div>
-            {{ end -}}
-          </div>
-        {{- end }}
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+          "description" .description
+        )}}
 
         {{- partial (printf "blocks/templates/organizations/%s.html" $layout) (dict
             "organizations" .organizations
@@ -46,31 +32,30 @@
   </div>
 {{- end -}}
 
-
 {{- define "organization" -}}
-<article class="organization" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
-  {{ $title := "" }}
-  {{ if .title }}
-    {{ $title = partial "PrepareHTML" .title -}}
-    <h3>
-      {{- if and .url .with_link }}
-        <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
-      {{ end -}}
-        {{- $title -}}
-      {{- if .url }}
-        </a>
-      {{ end -}}
-    </h3>
-  {{ end -}}
-  <div class="media">
-    {{- if .logo -}}
-      {{- partial "commons/image.html"
-        (dict
-          "image"    .logo
-          "alt"      $title
-          "sizes"    site.Params.image_sizes.blocks.organizations
-        ) -}}
-    {{- end -}}
-  </div>
-</article>
+  <article class="organization" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
+    {{ $title := "" }}
+    {{ if .title }}
+      {{ $title = partial "PrepareHTML" .title -}}
+      <p class="organization-title">
+        {{- if and .url .with_link }}
+          <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
+        {{ end -}}
+          {{- $title -}}
+        {{- if .url }}
+          </a>
+        {{ end -}}
+        </p>
+    {{ end -}}
+    <div class="media">
+      {{- if .logo -}}
+        {{- partial "commons/image.html"
+          (dict
+            "image"    .logo
+            "alt"      $title
+            "sizes"    site.Params.image_sizes.blocks.organizations
+          ) -}}
+      {{- end -}}
+    </div>
+  </article>
 {{- end  -}}

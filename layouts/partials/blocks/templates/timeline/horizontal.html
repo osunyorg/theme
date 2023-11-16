@@ -1,14 +1,19 @@
-<div class="timeline">
-  {{- if .title -}}
-    <p class="block-title">{{ partial "PrepareHTML" .title }}</p>
-  {{ end -}}
 
+{{- $heading_tag := partial "GetHeadingTag" (dict 
+  "level" .block.ranks.children
+  "attributes" "class='title'"
+  ) -}}
+
+<div class="timeline">
   {{ with .block.data }}
     <div class="timeline-events">
       <ol>
         {{ range .events }}
           <li class="timeline-event">
-            <p class="title">{{- partial "PrepareHTML" .title -}}</p>
+
+            {{ $heading_tag.open -}}
+              {{ partial "PrepareText" .title }}
+            {{ $heading_tag.close -}}
             <div class="line"></div>
             <div class="description text">{{- partial "PrepareHTML" .text | markdownify -}}</div>
           </li>

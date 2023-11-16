@@ -40,6 +40,7 @@ footer#document-footer
                 @include icon(caret-bottom, after)
                 @include meta
                 align-items: center
+                color: inherit
                 cursor: pointer
                 display: flex
                 justify-content: start
@@ -51,6 +52,7 @@ footer#document-footer
                 &[aria-expanded="true"]
                     background: $dropdown-i18n-background-color
                     justify-content: space-between
+                    color: $dropdown-i18n-color
                     width: 100%
                     + .dropdown-menu
                         animation-duration: unset
@@ -67,14 +69,17 @@ footer#document-footer
             .dropdown-menu
                 @include meta
                 background: $dropdown-i18n-background-color
+                a
+                    color: $dropdown-i18n-color
                 @include media-breakpoint-up(desktop)
                     left: 0
                     margin-top: px2rem(17)
                     max-height: calc(100vh - var(--header-height))
-                    overflow: auto
                     padding: 0
                     position: absolute
                     width: fit-content
+                    a:focus-visible
+                        outline-offset: -1px
 
         @if $footer-icons-enabled
             &-social 
@@ -138,6 +143,7 @@ footer#document-footer
             justify-content: space-between
             padding-bottom: $spacing3
             + .container
+                align-items: flex-end
                 padding-top: $spacing3
                 padding-bottom: 0
         .footer

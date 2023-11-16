@@ -1,18 +1,19 @@
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
+{{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+
 {{- with .block.data -}}
-  <div class="block block-license{{ if $title }} block-with-title{{ end }}">
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{- if  $title -}}
-          <div class="top">
-            <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-          </div>
-        {{ end -}}
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+        )}}
+
         {{ with .creative_commons }}
           <div class="license">
             {{ $file := (printf "/assets/images/blocks/license/%s.svg" .identifier ) }}
-            <a href="{{ .url }}" title="{{ .label }}" target="_blank" rel="noopener">
+            <a rel="license" href="{{ .url }}" title="{{ .label }}" target="_blank" rel="noopener">
               <img src="{{ $file }}" alt="{{ .label }}">
             </a>
           </div>
