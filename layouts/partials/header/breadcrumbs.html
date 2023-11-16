@@ -1,18 +1,20 @@
-<nav class="breadcrumb-nav" aria-label="{{ i18n "commons.breadcrumb" }}">
-  {{- $path := strings.TrimSuffix "/" .RelPermalink -}}
-  {{- $length := len (split $path "/") }}
-  <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
-    {{ range $index, $item := .Params.breadcrumbs }}
-      <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item{{- if not $item.path }} active{{ end }}"{{- if not $item.path }} aria-current="page"{{ end }}>
-        {{- if $item.path -}}
-          <a itemprop="item" href="{{ $item.path }}">
-        {{- end -}}
-          <span itemprop="name">{{- partial "PrepareHTML" $item.title -}}</span>
-        {{- if $item.path -}}
-          </a>
-        {{- end -}}
-        <meta itemprop="position" content="{{- add $index 1 -}}">
-      </li>
-    {{ end }}
-  </ol>
-</nav>
+{{ if .Params.breadcrumbs }}
+  <nav class="breadcrumb-nav" aria-label="{{ i18n "commons.breadcrumb" }}">
+    {{- $path := strings.TrimSuffix "/" .RelPermalink -}}
+    {{- $length := len (split $path "/") }}
+    <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+      {{ range $index, $item := .Params.breadcrumbs }}
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item{{- if not $item.path }} active{{ end }}"{{- if not $item.path }} aria-current="page"{{ end }}>
+          {{- if $item.path -}}
+            <a itemprop="item" href="{{ $item.path }}">
+          {{- end -}}
+            <span itemprop="name">{{- partial "PrepareHTML" $item.title -}}</span>
+          {{- if $item.path -}}
+            </a>
+          {{- end -}}
+          <meta itemprop="position" content="{{- add $index 1 -}}">
+        </li>
+      {{ end }}
+    </ol>
+  </nav>
+{{ end }}
