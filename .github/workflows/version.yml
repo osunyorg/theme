@@ -13,13 +13,14 @@ jobs:
         run: |
           echo "Tag name from GITHUB_REF_NAME: $GITHUB_REF_NAME"
           echo "Tag name from github.ref_name: ${{  github.ref_name }}"
+          echo "Tag name from github.event.release.tag_name: ${{  github.event.release.tag_name }}"
 
       - name: Overwrite file
         uses: "DamianReeves/write-file-action@master"
         with:
           path: ./static/osuny-theme-version
           write-mode: overwrite
-          contents: ${{  github.ref_name }}
+          contents: ${{  github.event.release.tag_name }}
 
       - name: Commit & Push
         uses: Andro999b/push@v1.3

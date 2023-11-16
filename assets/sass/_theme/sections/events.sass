@@ -232,7 +232,6 @@
             + .event 
                 margin-top: $grid-gutter
             &-content
-                position: relative
                 a 
                     @include stretched-link
             &-dates 
@@ -259,7 +258,9 @@
                 &-dates
                     @include h3
                     margin-bottom: $spacing2
-                .event-title, hgroup
+                .event-title,
+                .event-subtitle, 
+                hgroup
                     @include h2
             @include media-breakpoint-down(desktop)
                 flex-direction: column
@@ -274,8 +275,6 @@
                 align-items: center
                 &-dates
                     @include h3
-                &-time
-                    @include meta
                 &:not(.event--with-image)
                     width: col(5)
                     margin-left: offset(4)
