@@ -12,7 +12,6 @@
     @include in-page-with-sidebar
         &:not(.block-with-long-text)
             .persons
-                @include grid(2, xl)
                 .person
                     @include person-avatar-end
         .persons
@@ -31,19 +30,26 @@
                 margin-top: $spacing1
         &.block-with-long-text
             .person
+                gap: $grid-gutter
+                .description
+                    flex: 1
+                    margin-top: 0
                 .avatar
                     width: col(2, 8)
+                @include media-breakpoint-up(xl)
+                    flex-direction: row-reverse
     @include in-page-without-sidebar
         .top .description
             max-width: col(8)
         &.block-with-long-text
-            .persons
-                @include grid(2, md)
-                .person
-                    flex-direction: row
-                    gap: $grid-gutter
-                    .avatar
+            .person
+                flex-direction: row
+                gap: $grid-gutter
+                .description
+                    flex: 1
+                    text-align: left
+                .avatar
+                    @include media-breakpoint-up(sm)
+                        width: col(3, 12)
+                    @include media-breakpoint-up(xl)
                         width: col(2, 6)
-                    .description
-                        flex: 1
-                        text-align: left
