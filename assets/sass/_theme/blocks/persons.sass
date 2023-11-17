@@ -29,11 +29,21 @@
                     width: calc(#{col(1, 4)} + #{$grid-gutter})
             .description
                 margin-top: $spacing1
+        &.block-with-long-text
+            .person
+                .avatar
+                    width: col(2, 8)
     @include in-page-without-sidebar
         .top .description
             max-width: col(8)
         &.block-with-long-text
             .persons
                 @include grid(2, md)
-                @include grid(3, xl)
-                @include grid(4, xxl)
+                .person
+                    flex-direction: row
+                    gap: $grid-gutter
+                    .avatar
+                        width: col(2, 6)
+                    .description
+                        flex: 1
+                        text-align: left
