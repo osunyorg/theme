@@ -13,7 +13,6 @@ class Search {
         }
 
         this.input = this.element.querySelector('input');
-
         this.listen();
     }
 
@@ -41,6 +40,12 @@ class Search {
                 }
             } else if (event.key === "Tab" && this.state.isOpened) {
                 this.innerFocus(event);
+                
+                this.buttonMore = this.element.querySelector('.pagefind-ui__results + button');
+
+                if (this.buttonMore) {
+                    this.buttonMoreFocus();
+                }
             }
         });
     }
@@ -82,6 +87,17 @@ class Search {
             firstFocusable.focus();
             event.preventDefault();
         }
+    }
+
+    buttonMoreFocus() {
+        this.links = this.element.querySelectorAll('a');
+        this.lastLink = this.links[this.links.length - 1];
+        
+        this.buttonMore.addEventListener('keypress', () => {
+            if ((event.keyCode === 13 || event.key === 'Enter')) {
+                this.lastLink.focus();
+            }
+        });
     }
 
     toggle(open = !this.state.isOpened) {
