@@ -9,7 +9,6 @@
 {{- $summary := partial "PrepareText" .context.Params.summary -}}
 {{- $subtitle_is_summary := false -}}
 
-
 {{ if not $subtitle }}
   {{ if and (eq site.Params.summary.position "hero") $summary }}
    {{ $subtitle = $summary }}

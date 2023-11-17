@@ -1,15 +1,14 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
+{{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+
 {{- with .block.data -}}
-  <div class="block block-definitions{{ if $title }} block-with-title{{ end }}">
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{- if  $title -}}
-          <div class="top">
-            <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-          </div>
-        {{ end -}}
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+        )}}
         <div class="definitions">
           {{- range .elements }}
             <details itemscope itemtype="https://schema.org/DefinedTerm">

@@ -1,6 +1,11 @@
 {{ $show_descriptions := .show_descriptions }}
 {{ $show_images := .show_images }}
 {{ $image_class := "" }}
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+        "level" $heading_level
+        "attributes" "class='page-title'"
+)}}
 
 <div class="grid">
   {{ range .pages }}
@@ -12,11 +17,11 @@
         {{ $image_class = "" }}
       {{ end }}
       <article class="{{ $image_class }}">
-        <h3>
+        {{ $heading_tag.open }}
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}
           </a>
-        </h3>
+        {{ $heading_tag.close }}
 
         {{ if and $show_descriptions .Params.summary }}
           {{ if site.Params.pages.index.truncate_description }}

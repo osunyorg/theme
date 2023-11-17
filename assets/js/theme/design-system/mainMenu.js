@@ -29,6 +29,13 @@ class MainMenu {
     listen () {
         window.addEventListener('resize', this.resize.bind(this));
 
+        window.addEventListener('click', (event) => {
+            const insideHeader = event.target.closest('#document-header');
+            if (event.target === document.body || !insideHeader) {
+                this.closeEverything();
+            }
+        });
+
         this.mainButton.addEventListener('click', () => {
             this.toggleMainMenu();
         });
@@ -42,12 +49,6 @@ class MainMenu {
 
         ['scroll', 'touchmove'].forEach(event => {
             window.addEventListener(event, this.onScroll.bind(this));
-        });
-
-        window.addEventListener('click', (event) => {
-            if (event.target === document.body) {
-                this.closeEverything();
-            }
         });
 
         window.addEventListener('keydown', (event) => {

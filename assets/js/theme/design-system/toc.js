@@ -104,7 +104,7 @@ class TableOfContents {
     return top
   }
   activateLink(id) {
-    const currentLink = this.element.querySelector(`[href*=${ id }]`);
+    const currentLink = this.element.querySelector(`[href*="${ id }"]`);
 
     this.links.forEach((link, index) => {
       if (link == currentLink) {

@@ -1,13 +1,17 @@
+{{- $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero"  -}}
 {{- $title := or .Params.header_text .Title -}}
 {{ $subtitle := "" }}
 {{- $summary := partial "PrepareText" .Params.summary -}}
 {{ if and (eq site.Params.summary.position "hero") $summary }}
   {{ $subtitle = $summary }}
 {{ end }}
-<header class="hero hero-program">
+
+<header class="hero hero-program {{ if $breadcrumb_is_after_hero -}} hero--no-margin {{- end }}">
   <div class="container">
-    {{- if .Params.breadcrumb | default true -}}
-      {{ partial "header/breadcrumbs.html" . }}
+    {{- if eq site.Params.breadcrumb.position "hero-start" -}}
+      {{- if .Params.breadcrumb | default true -}}
+        {{ partial "header/breadcrumbs.html" . }}
+      {{- end -}}
     {{- end -}}
     <div class="content">
       {{- if $subtitle -}}
@@ -44,4 +48,18 @@
       </div>
     </div>
   </div>
+
+  {{- if eq site.Params.breadcrumb.position "hero-end" -}}
+    {{- if .Params.breadcrumb | default true -}}
+      {{ partial "header/breadcrumbs.html" . }}
+    {{- end -}}
+  {{- end -}}
 </header>
+
+{{- if $breadcrumb_is_after_hero -}}
+  {{- if .Params.breadcrumb | default true -}}
+    <div class="container breadcrumb-container">
+      {{ partial "header/breadcrumbs.html" . }}
+    </div>
+  {{- end -}}
+{{- end -}}

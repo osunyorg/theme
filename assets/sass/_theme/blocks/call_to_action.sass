@@ -1,6 +1,12 @@
 .block-call_to_action
     --cta-background-color: #{$block-call-to-action-background}
     margin-bottom: 0
+    .top
+        margin-bottom: 0
+        .block-title
+            margin-bottom: $spacing0
+            + .description
+                margin-top: 0
     .call_to_action
         color: $block-call-to-action-color
         .description
@@ -37,6 +43,8 @@
                     margin-bottom: 0
         * + .actions
             margin-top: calc(#{$spacing2} - #{$spacing1})
+        img
+            display: block
 
     @include media-breakpoint-down(desktop)
         background-color: var(--cta-background-color)
@@ -110,13 +118,17 @@
             > div
                 @include grid
                 row-gap: 0px
-                .block-title, .description
+                .top
                     grid-column: 1/9
+                    display: grid
+                    grid-template-rows: subgrid
+                    grid-row: span 2
                 .actions
                     align-items: flex-start
                     display: flex
                     flex-direction: column
                     grid-column: 10/13
+                    grid-row: 2
                     margin-top: 0
                     a
                         margin-right: 0
@@ -126,11 +138,10 @@
                         margin-top: $spacing1
             @include media-breakpoint-down(lg)
                 > div
-                    .block-title, .description
+                    .top
                         grid-column: 1/8
                     .actions
                         grid-column: 9/13
     @include in-page-with-or-without-sidebar
         .block-title
             @include h5
-            margin-bottom: $spacing0

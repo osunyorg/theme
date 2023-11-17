@@ -1,23 +1,15 @@
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
-{{- $class := "block block-contact" -}}
+{{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+
 {{- with .block.data -}}
-  <div class="{{ $class }}{{ if $title }} block-with-title{{ end }}">
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ if or $title .description }}
-          <div class="top">
-            {{ if $title }}
-              <p class="block-title">{{ partial "PrepareHTML" $title }}</p>
-            {{ end }}
-            {{- if .description }}
-              <div class="description">
-                {{ partial "PrepareHTML" .description }}
-              </div>
-            {{ end -}}
-          </div>
-        {{ end -}}
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+          "description" .description
+        )}}
 
         <div class="informations">
           <address itemscope itemtype="https://schema.org/Organization">

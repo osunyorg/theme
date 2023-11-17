@@ -102,7 +102,12 @@
             display: none
         img
             display: block
-
+    @include media-breakpoint-down(desktop)
+        &-time
+            display: inline-flex
+            &::before
+                content: '|'
+                margin-right: half($spacing0)
 .events
     &--list
         .event
@@ -112,7 +117,7 @@
             margin-bottom: $spacing1
             padding-bottom: $spacing1
             position: relative
-            h2, h3
+            .event-title
                 @include h3
                 a
                     @include stretched-link
@@ -200,7 +205,7 @@
                 @extend .meta
                 margin-top: $spacing0
             &-content
-                h2, h3, hgroup
+                .event-title, hgroup
                     @include h3
             &-description
                 margin-top: $spacing0
@@ -227,7 +232,6 @@
             + .event 
                 margin-top: $grid-gutter
             &-content
-                position: relative
                 a 
                     @include stretched-link
             &-dates 
@@ -235,7 +239,7 @@
                 margin-top: $spacing0
             &-content
                 flex: 1
-                h2, h3
+                .event-title
                     @include h3
                 .more
                     @include icon("arrow-right", after)
@@ -254,7 +258,9 @@
                 &-dates
                     @include h3
                     margin-bottom: $spacing2
-                h2, h3, hgroup
+                .event-title,
+                .event-subtitle, 
+                hgroup
                     @include h2
             @include media-breakpoint-down(desktop)
                 flex-direction: column
@@ -269,8 +275,6 @@
                 align-items: center
                 &-dates
                     @include h3
-                &-time
-                    @include meta
                 &:not(.event--with-image)
                     width: col(5)
                     margin-left: offset(4)
