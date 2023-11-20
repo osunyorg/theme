@@ -1,31 +1,55 @@
+@mixin person-avatar-end
+    justify-content: space-between
+    gap: $spacing1
+    .avatar
+        margin-right: 0
+        order: 1
+        width: col(3)
+    .description
+        margin-top: 0
+
 .block-persons
     @include in-page-with-sidebar
+        &:not(.block-with-long-text)
+            .persons
+                .person
+                    @include person-avatar-end
         .persons
             @include grid(1, sm)
-            &:not(.is-column)
-                @include grid(2, desktop)
-            &.is-column
-                row-gap: $spacing0
-                @include grid(2, xl)
-                @include media-breakpoint-between(desktop, xl)
-                    .person
-                        justify-content: space-between
-                        gap: $spacing1
-                    .avatar
-                        margin-right: 0
-                        order: 1
-                        width: col(3)
-                    .description
-                        margin-top: 0
+            row-gap: $spacing0
+            @include media-breakpoint-between(desktop, xl)
+                .person
+                    @include person-avatar-end
         article
             flex-direction: row
+            gap: col(1, 8)
             .avatar
-                margin-right: $spacing1
                 @include media-breakpoint-up(md)
                     width: calc(#{col(1, 4)} + #{$grid-gutter})
             .description
                 margin-top: $spacing1
-
+        &.block-with-long-text
+            .person
+                gap: $grid-gutter
+                .description
+                    flex: 1
+                    margin-top: 0
+                .avatar
+                    width: col(2, 8)
+                @include media-breakpoint-up(xl)
+                    flex-direction: row-reverse
     @include in-page-without-sidebar
         .top .description
             max-width: col(8)
+        &.block-with-long-text
+            .person
+                flex-direction: row
+                gap: $grid-gutter
+                .description
+                    flex: 1
+                    text-align: left
+                .avatar
+                    @include media-breakpoint-up(sm)
+                        width: col(3, 12)
+                    @include media-breakpoint-up(xl)
+                        width: col(2, 6)
