@@ -1,0 +1,46 @@
+{{ $show_descriptions := .show_descriptions }}
+{{ $show_images := .show_images }}
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+        "level" $heading_level
+        "attributes" "class='page-title'"
+)}}
+<div class="large">
+  {{ range .pages }}
+    {{ $page := site.GetPage .file }}
+    {{ with $page }}
+      <article class="page">
+        <div class="page-content">
+          {{ $heading_tag.open }}
+            <a href="{{- .Permalink -}}">
+              {{- partial "PrepareHTML" .Title -}}
+            </a>
+          {{ $heading_tag.close }}
+  
+          {{ if and $show_descriptions .Params.summary }}
+            {{ if site.Params.pages.index.truncate_description }}
+              <p>{{ partial "GetTruncateContent" ( dict 
+                "text" .Params.summary
+                "length" site.Params.pages.index.truncate_description
+                ) }}</p>
+            {{ else }}
+              <p>{{ partial "PrepareText" .Params.summary }}</p>
+            {{ end }}
+          {{ end }}
+          <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+        </div>
+
+        {{ if $show_images }}
+          {{- if .Params.image -}}
+            <div class="media">
+              {{- partial "commons/image.html" (dict
+                  "image"    .Params.image
+                  "sizes"    site.Params.image_sizes.blocks.pages.large
+                ) -}}
+            </div>
+          {{- end -}}
+        {{ end }}
+      </article>
+    {{- end -}}
+  {{ end }}
+</div>
