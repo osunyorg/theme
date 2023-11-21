@@ -1,0 +1,29 @@
+{{ $about := .Title }}
+<div class="container backlinks">
+  {{ with .Params.backlinks.current_website }}
+    {{ with .pages }}
+      <div class="backlinks--pages">
+        Pages mentionnant {{ $about }}<br>
+        {{ range . }}
+          {{ .file }}<br>
+        {{ end }}
+      </div>
+    {{ end }}
+    {{ with .pages }}
+    <div class="backlinks--posts">
+      Actualités mentionnant {{ $about }}<br>
+      {{ range . }}
+      {{ .file }}<br>
+      {{ end }}
+    </div>
+    {{ end }}
+    {{ with .events }}
+      <div class="backlinks--events">
+        Événements mentionnant {{ $about }}<br>
+        {{ range . }}
+          {{ .file }}<br>
+        {{ end }}
+      </div>
+    {{ end }}
+  {{ end }}
+</div>
