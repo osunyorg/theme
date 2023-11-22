@@ -1,5 +1,5 @@
 {{ $about := .Title }}
-<div class="blocks blocks--backlinks">
+<div class="backlinks">
   {{ with .Params.backlinks.current_website }}
     {{ if .pages }}
       {{ partial "blocks/templates/pages.html" (dict
@@ -40,13 +40,21 @@
         )
       ) }}
     {{ end }}
-    {{ with .events }}
-      <div class="backlinks--events">
-        Événements mentionnant {{ $about }}<br>
-        {{ range . }}
-          {{ .file }}<br>
-        {{ end }}
-      </div>
+    {{ if .events }}
+      {{ partial "blocks/templates/agenda.html" (dict
+        "block" (dict 
+          "title" (printf "Événements mentionnant %s" $about)
+          "template" "agenda"
+          "ranks" (dict 
+            "self" 2
+            "children" 3
+          )
+          "data" (dict
+            "layout" "grid"
+            "events" .events
+          )
+        )
+      ) }}
     {{ end }}
   {{ end }}
 </div>

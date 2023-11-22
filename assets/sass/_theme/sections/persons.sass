@@ -203,12 +203,12 @@ ol.persons--list
             @include small
     .blocks
         margin-top: $spacing3
-    .person-programs,
-    .person-objects,
-    .person-publications
-        margin-top: $spacing4
-        ul
-            @include list-reset
+    .person-objects
+        > * + *
+            margin-top: $spacing3
+    .person-posts
+        article.post:last-child
+            margin-bottom: 0
     @include media-breakpoint-down(lg)
         .roles
             margin-top: $spacing2
