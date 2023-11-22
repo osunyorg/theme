@@ -1,21 +1,44 @@
 {{ $about := .Title }}
-<div class="container backlinks">
+<div class="blocks blocks--backlinks">
   {{ with .Params.backlinks.current_website }}
-    {{ with .pages }}
-      <div class="backlinks--pages">
-        Pages mentionnant {{ $about }}<br>
-        {{ range . }}
-          {{ .file }}<br>
-        {{ end }}
-      </div>
+    {{ if .pages }}
+      {{ partial "blocks/templates/pages.html" (dict
+        "block" (dict 
+          "title" (printf "Pages mentionnant %s" $about)
+          "template" "pages"
+          "ranks" (dict 
+            "self" 2
+            "children" 3
+          )
+          "data" (dict 
+            "layout" "grid"
+            "show_main_description" false
+            "show_descriptions" true
+            "show_images" true
+            "pages" .pages
+          )
+        )
+      ) }}
     {{ end }}
-    {{ with .pages }}
-    <div class="backlinks--posts">
-      Actualités mentionnant {{ $about }}<br>
-      {{ range . }}
-      {{ .file }}<br>
+    {{ if .posts }}
+      {{ $posts := slice }}
+      {{ range .posts }}
+        {{ $posts = $posts | append .path }}
       {{ end }}
-    </div>
+      {{ partial "blocks/templates/posts.html" (dict
+        "block" (dict 
+          "title" (printf "Actualités mentionnant %s" $about)
+          "template" "posts"
+          "ranks" (dict 
+            "self" 2
+            "children" 3
+          )
+          "data" (dict
+            "layout" "grid"
+            "posts" $posts
+          )
+        )
+      ) }}
     {{ end }}
     {{ with .events }}
       <div class="backlinks--events">
