@@ -26,5 +26,9 @@
       {{ partial "organizations/logo.html" . }}
     </div>
     {{ partial "contents/list.html" . }}
+
+    {{ if site.Params.organizations.single.backlinks }}
+      {{ partial "contents/backlinks.html" . }}
+    {{ end }}
   </div>
 {{ end }}
