@@ -6,7 +6,7 @@
         &-media
             box-shadow: none
             img
-                padding: $spacing0 space(10)
+                padding: $spacing0 space(10) space(10)
         &-description
             background-color: transparent
         &-title,
@@ -20,13 +20,13 @@
         width: space(10)
         height: space(10)
         border-radius: 0
-        opacity: 1
         svg
             display: none
     .gclose
         @include icon-block(close)
         top: 0
         right: 0
+        opacity: 1
     .gnext
         @include icon(arrow-right)
         right: 0
@@ -34,10 +34,33 @@
         @include icon(arrow-left)
         left: 0
     .gdesc-inner
-        @include meta
-        padding: 0 $spacing0 $spacing0
+        padding: 0 $spacing0 space(2)
         text-align: center
-
+        .gslide-desc
+            @include meta
+            color: white
+    .glightbox-mobile & 
+        .gslide-description
+            padding: 0
+            text-align-last: left
+    @include media-breakpoint-down(desktop)
+        .gdesc-inner
+            padding-right: space(20)
+        .gnext
+            top: auto
+            bottom: 0
+        .gprev
+            top: auto
+            right: space(10)
+            left: auto
+            bottom: 0
+    @include media-breakpoint-up(desktop)
+        .gdesc-inner
+            padding-bottom: $spacing0
+        .gslide
+            &-media
+                img
+                    padding: $spacing0 space(10)
 a.glightbox
     display: block
 
