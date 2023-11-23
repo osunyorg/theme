@@ -1,27 +1,43 @@
 .glightbox-clean
+    .goverlay
+        background-color: $lightbox-overlay-color
+        backdrop-filter: $lightbox-backdrop
     .gslide
         &-media
             box-shadow: none
+            img
+                padding: $spacing0 space(10)
         &-description
             background-color: transparent
         &-title,
         &-desc
             color: white
     .gnext,
-    .gprev
+    .gprev,
+    .gclose
         color: white
+        background: $lightbox-overlay-color
+        width: space(10)
+        height: space(10)
+        border-radius: 0
+        opacity: 1
         svg
             display: none
+    .gclose
+        @include icon-block(close)
+        top: 0
+        right: 0
     .gnext
         @include icon(arrow-right)
+        right: 0
     .gprev
         @include icon(arrow-left)
+        left: 0
     .gdesc-inner
-        padding-left: 0
-        padding-right: 0
+        @include meta
+        padding: 0 $spacing0 $spacing0
+        text-align: center
+
 a.glightbox
     display: block
 
-// @media (min-width: 769px)
-//     .goverlay
-//         background-color: rgba($modal-backdrop-bg, $modal-backdrop-opacity)
