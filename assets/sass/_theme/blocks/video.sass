@@ -70,9 +70,11 @@
         background: $block-video-background
         margin-top: 0
         .block-content
+            @include grid(12, false, 0)
             padding-top: $spacing3
             padding-bottom: $spacing2
-            @include grid(12, false, 0)
+            .top
+                grid-column: 1 / -1
             .video
                 grid-column: 8 span
             > p
