@@ -60,6 +60,8 @@
             &:hover,
             &:focus
                 text-decoration-color: $header-dropdown-color
+        .dropdown-menu-title
+            @include h2
 
     .nav-level-1
         display: flex
@@ -103,15 +105,28 @@
                 margin-top: $spacing0
         .has-children:not(.header-i18n) // avoid 
             @if $header-dropdown-full
-                .dropdown-menu:not(.dropdown-languages)
-                    inset: 100% 0 auto 0
-                    padding-left: 0
-                    padding-right: 0
-                    padding-bottom: $spacing2
-                .nav-level-2
-                    @include container
-                    @include grid(4, desktop)
-            @else 
+                .dropdown-menu
+                    &:not(.dropdown-languages)
+                        inset: 100% 0 auto 0
+                        padding-left: 0
+                        padding-right: 0
+                        padding-bottom: $spacing2
+                    &:not(.is-titled)
+                        .nav-level-2
+                            @include container
+                            @include grid(4, desktop)
+                    &.is-titled
+                        .container
+                            align-items: baseline
+                            display: flex
+                            gap: $grid-gutter
+                        .dropdown-menu-title
+                            width: col(5)
+                        .nav-level-2
+                            width: col(7)
+                            li
+                                margin-bottom: $spacing0
+            @else
                 position: relative
                 .dropdown-menu
                     margin-top: $header-nav-padding-y
@@ -121,6 +136,13 @@
                     padding-right: $spacing1
                     right: 0
                     text-align: right
+                    &.is-titled
+                        .dropdown-menu-title
+                            @include h3
+                            margin-bottom: $spacing0
+                        .container
+                            padding-left: 0
+                            padding-right: 0
                 .nav-level-2
                     > li 
                         > a
@@ -172,6 +194,10 @@
                     display: block
         .dropdown-menu
             padding-left: 0
+        .is-titled
+            .container
+                padding-left: 0
+                padding-right: 0
         .nav-level-2
             > .has-children + li
                 margin-top: $spacing1

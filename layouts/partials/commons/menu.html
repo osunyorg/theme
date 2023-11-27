@@ -1,4 +1,4 @@
-{{- $kind := .kind -}}
+{{ $kind := .kind }}
 {{ $items := .items }}
 {{ $context := .context }}
 {{ if $kind }}
@@ -7,7 +7,8 @@
 {{ end }}
 {{- $level := .level -}}
 {{- $stop := .stop -}}
-{{- $dropdown := .dropdown }}
+{{- $dropdown := .dropdown -}}
+{{- $dropdown_titled := (and site.Params.menu.dropdown.linkToLevel1 (eq $level 1)) -}}
 {{- $ulClass := "" -}}
 {{- if .class -}}
   {{- $ulClass = printf "%s " .class -}}
@@ -16,22 +17,27 @@
 <ul class="{{ $ulClass }}{{ if $level }}nav-level-{{ $level }}{{ end }}">
   {{ range $items -}}
     {{- $slug := urlize .title -}}
-    {{- $itemClass := "" -}}
-    {{- $linkClass := "" -}}
+    {{- $item_class := "" -}}
+    {{- $link_class := "" -}}
     {{- $attr := "" -}}
     {{- $attr_title := "" -}}
-    {{- $hasDropdown := false -}}
+    {{- $has_dropdown := false -}}
     {{ if eq $context.RelPermalink .target }}
-      {{ $linkClass = "active" }}
+      {{ $link_class = "active" }}
     {{ end }}
     {{ if eq $kind "social" }}
-      {{- $itemClass = printf .title | lower -}}
+      {{- $item_class = printf .title | lower -}}
     {{ end }}
     {{- if gt (len .children) 0 -}}
-      {{- $itemClass = printf "%shas-children" $itemClass -}}
+      {{- $item_class = printf "%shas-children" $item_class -}}
+      {{ range .children -}}
+        {{- if eq $context.RelPermalink .target }}
+          {{ $link_class = printf "$link_class %s" "has-children-active" }}
+        {{ end }}
+      {{ end -}}
     {{- end -}}
     {{- if and (gt (len .children) 0) $dropdown (eq $level 1) -}}
-      {{- $hasDropdown = true -}}
+      {{- $has_dropdown = true -}}
       {{- $attr = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" $slug -}}
     {{- end -}}
     {{- if and (hasPrefix .target "http") (eq .kind "url") -}}
@@ -39,16 +45,20 @@
       {{- $attr_title = printf "title=\"%s - %s\"" .title $extern_link -}}
     {{- end -}}
     {{- if or (ne $stop 1) (and (eq $stop 1) (ne .kind "blank")) -}}
-    <li{{ if ne $itemClass ""}} class="{{ $itemClass }}"{{ end }}>
+    <li{{ if ne $item_class ""}} class="{{ $item_class }}"{{ end }}>
       {{- if ne .kind "blank" -}}
-        <a href="{{ .target }}"{{ if ne $linkClass ""}} class="{{ $linkClass }}"{{ end }} {{ safeHTMLAttr $attr }} {{ safeHTMLAttr $attr_title }}>{{ .title }}</a>
+        <a href="{{ .target }}"{{ if ne $link_class ""}} class="{{ $link_class }}"{{ end }} {{ safeHTMLAttr $attr }} {{ safeHTMLAttr $attr_title }}>{{ .title }}</a>
       {{- else -}}
-        <span class="{{ if ne $linkClass ""}} {{ $linkClass }}{{ end }}{{ if gt .level 1 }} disabled{{ end }}" {{ safeHTMLAttr $attr }}>{{ .title }}</span>
+        <span class="{{ if ne $link_class ""}} {{ $link_class }}{{ end }}{{ if gt .level 1 }} disabled{{ end }}" {{ safeHTMLAttr $attr }}>{{ .title }}</span>
       {{- end -}}
       {{- if ne $stop $level -}}
-        {{- if $hasDropdown }}
-          <div class="dropdown-menu" aria-labelledby="dropdown-{{ $slug }}">
-        {{- end -}}
+        {{- if $has_dropdown }}
+          <div class="dropdown-menu {{ if $dropdown_titled }}is-titled{{ end }}" aria-labelledby="dropdown-{{ $slug }}">
+            {{- if $dropdown_titled }}
+              <div class="container">
+                <a href="{{ .target }}" class="dropdown-menu-title">{{ .title }}</a>
+            {{ end -}}
+          {{- end -}}
         {{- if gt (len .children) 0 -}}
           {{- $nextLevel := add $level 1 -}}
           {{- partial "commons/menu.html"
@@ -58,8 +68,11 @@
                   "context" $context
                 ) -}}
         {{- end -}}
-        {{- if $hasDropdown -}}
-          </div>
+        {{- if $has_dropdown -}}
+              </div>
+          {{- if $dropdown_titled }}
+            </div>
+          {{- end -}}
         {{- end -}}
       {{- end -}}
     </li>
