@@ -8,7 +8,7 @@
 {{- $level := .level -}}
 {{- $stop := .stop -}}
 {{- $dropdown := .dropdown -}}
-{{- $dropdown_titled := (and site.Params.menu.dropdown.titled (eq $level 1)) -}}
+{{- $dropdown_titled := (and site.Params.menu.dropdown.linkToLevel1 (eq $level 1)) -}}
 {{- $ulClass := "" -}}
 {{- if .class -}}
   {{- $ulClass = printf "%s " .class -}}
