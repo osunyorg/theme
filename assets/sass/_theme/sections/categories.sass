@@ -1,10 +1,15 @@
 ul.categories
-    @include list-section
-    li
-        a:first-child
-            & + p 
-                text-align: right
-                white-space: nowrap
+    &:not(.categories--grid)
+        @include list-section
+        li
+            a:first-child
+                & + p 
+                    text-align: right
+                    white-space: nowrap
+    &--grid
+        @include list-reset
+        @include grid(1)
+        @include grid(4, md)
 
 .categories__term
     main
