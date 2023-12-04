@@ -1,10 +1,18 @@
 ul.categories
-    @include list-section
-    li
-        a:first-child
-            & + p 
-                text-align: right
-                white-space: nowrap
+    &:not(.categories--grid)
+        @include list-section
+        li
+            a:first-child
+                & + p 
+                    text-align: right
+                    white-space: nowrap
+    &--grid
+        @include list-reset
+        display: flex
+        flex-direction: column
+        gap-y: $spacing1
+        @include grid(3, md)
+        @include grid(4, xxl)
 
 .categories__term
     main

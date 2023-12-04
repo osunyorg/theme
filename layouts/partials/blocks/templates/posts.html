@@ -26,10 +26,22 @@
           )}}
         {{- end }}
 
-        {{ partial (printf "blocks/templates/posts/%s.html" $layout) (dict
-          "posts" .posts
-          "heading_level" $block.ranks.children
-        )}}
+        {{ if eq .mode "categories" }}
+          <ul class="categories categories--grid">
+            {{ range site.Taxonomies.categories }}
+              <li data-title="{{ .Page.Title }}">
+                {{ partial "categories/category.html" .Page }}
+                <p>{{ i18n "blocks.categories.items.count" (dict "Count" (len .)) }}</p>
+              </li>
+            {{ end }}
+          </ul>
+        {{ else if .posts }}
+          {{ partial (printf "blocks/templates/posts/%s.html" $layout) (dict
+            "posts" .posts
+            "heading_level" $block.ranks.children
+          )}}
+        {{ end }}
+
       </div>
     </div>
   </div>
