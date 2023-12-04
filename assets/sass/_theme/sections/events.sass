@@ -33,6 +33,10 @@
         // Safe spacing if post is empty
         .document-content
             min-height: 350px
+            &::after
+                content: ''
+                display: block
+                height: 1px
 
 .events__section
     .archive-link
@@ -56,30 +60,28 @@
         font-size: $table-body-size-desktop
     .event-date
         text-transform: capitalize
+    ul
+        @include list-reset
     > li
-        @include meta
         padding-top: $spacing0
         padding-bottom: $spacing0
         padding: 1rem 0
         font-family: $body-font-family
-        &:not(:first-child)
-            align-items: center
         > span
             @include meta
             color: $color-text-alt
             padding-left: 0
             display: block
             white-space: nowrap
-            vertical-align: top
-        > ul
-            text-align: right
-            flex: 1
         time + time
             @include icon(arrow)
             &::before
                 padding-right: 0.3rem
     a
         @include link($color-accent)
+    .events-categories
+        display: flex
+        gap: space(2)
     .share
         a
             color: inherit

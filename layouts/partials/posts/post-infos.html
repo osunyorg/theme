@@ -1,13 +1,7 @@
 <ul class="post-infos">
-  {{ if .Params.Categories }}
+  {{ if .Params.categories }}
     <li>
-      <span>
-        {{- if gt (len .Params.Categories) 1 -}}
-          {{ i18n "posts.categories" }}
-        {{- else -}}
-          {{ i18n "posts.category" }}
-        {{- end -}}
-      </span>
+      <span>{{ i18n "posts.categories" ( len .Params.categories ) }}</span>
       {{ partial "posts/categories.html" . }}
     </li>
   {{ end }}

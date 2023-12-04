@@ -5,7 +5,7 @@
 {{- $layout := .block.data.layout | default "grid" -}}
 {{- with .block.data }}
   {{ if .category }}
-    {{- $term = site.GetPage (printf "/categories%s" .category) -}}
+    {{- $term = site.GetPage (printf "/posts_categories%s" .category) -}}
   {{ end }}
   <div itemscope itemtype="http://schema.org/Blog" class="{{ $block_class }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}">
     <div class="container">
@@ -28,9 +28,9 @@
 
         {{ if eq .mode "categories" }}
           <ul class="categories categories--grid">
-            {{ range site.Taxonomies.categories }}
+            {{ range site.Taxonomies.posts_categories }}
               <li data-title="{{ .Page.Title }}">
-                {{ partial "categories/category.html" .Page }}
+                <a href="{{ .Permalink }}" class="title" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">{{ partial "PrepareHTML" .Title }}</a>
                 <p>{{ i18n "blocks.categories.items.count" (dict "Count" (len .)) }}</p>
               </li>
             {{ end }}
