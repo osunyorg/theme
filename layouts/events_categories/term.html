@@ -1,1 +1,24 @@
-{{ partial "categories/term.html" . }}
+{{ define "main" }}
+  {{ partial "categories/hero-term.html" . }}
+
+  <div class="document-content">
+    {{ partial "toc/container.html"
+        (dict
+            "toc" "toc/default.html"
+            "context" .
+        )
+    }}
+
+    {{ partial "categories/summary.html" (dict
+      "context" .
+      "block_wrapped" true
+      ) }}
+
+    {{ partial "contents/list.html" . }}
+
+    <div class="container">
+      {{ partial "events/events.html" . }}
+      {{ partial "commons/pagination.html" . }}
+    </div>
+  </div>
+{{ end }}
