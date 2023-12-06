@@ -32,7 +32,7 @@
       {{- $item_class = printf "%shas-children" $item_class -}}
       {{ range .children -}}
         {{- if eq $context.RelPermalink .target }}
-          {{ $link_class = printf "$link_class %s" "has-children-active" }}
+          {{ $link_class = printf "%s %s" $link_class "has-children-active" }}
         {{ end }}
       {{ end -}}
     {{- end -}}
