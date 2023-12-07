@@ -6,7 +6,7 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image">
+        <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image {{ if $block.title }}call_to_action--with-title{{ end }}">
           <div>
             {{ partial "blocks/top.html" (dict
               "title" $block.title
@@ -15,22 +15,22 @@
             )}}
 
             {{- if .buttons }}
-            <div class="actions" {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
-              {{- range .buttons -}}
-                {{ if .title }}
-                  {{- $title := partial "PrepareHTML" .title -}}
-                  <a href="{{ .url }}"
-                    {{ if .target_blank }}
-                      title="{{ i18n "commons.link.blank_aria" (dict "Title" $title) }}"
-                      target="_blank"
-                    {{ else }}
-                      title="{{ $title }}"
-                    {{ end }}
-                    >{{- $title -}}
-                  </a>
-                {{ end -}}
-              {{- end -}}
-            </div>
+              <div class="actions" {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
+                {{- range .buttons -}}
+                  {{ if .title }}
+                    {{- $title := partial "PrepareHTML" .title -}}
+                    <a href="{{ .url }}"
+                      {{ if .target_blank }}
+                        title="{{ i18n "commons.link.blank_aria" (dict "Title" $title) }}"
+                        target="_blank"
+                      {{ else }}
+                        title="{{ $title }}"
+                      {{ end }}
+                      >{{- $title -}}
+                    </a>
+                  {{ end -}}
+                {{- end -}}
+              </div>
             {{- end -}}
           </div>
 
