@@ -4,31 +4,27 @@
     <div class="block-content">
       <nav class="posts-navigation" aria-label="{{ i18n "commons.pagination.between.posts" }}">
         <ul>
-          {{- if .PrevInSection -}}
-            {{with .Site.RegularPages.Prev . }}
-              <li class="previous">
-                {{ $title := partial "PrepareHTML" .Title -}}
-                <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.previous_aria" (dict "Title" $title)) }}">
-                  <span>
-                    {{- i18n "posts.previous" -}}
-                  </span>
-                  {{- $title -}}
-                </a>
-              </li>
-            {{end}}
+          {{- with .PrevInSection -}}
+            <li class="previous">
+              {{ $title := partial "PrepareHTML" .Title -}}
+              <a href="{{ .RelPermalink }}" title="{{ safeHTML (i18n "posts.previous_aria" (dict "Title" $title)) }}">
+                <span>
+                  {{- i18n "posts.previous" -}}
+                </span>
+                {{- $title -}}
+              </a>
+            </li>
           {{- end -}}
-          {{- if .NextInSection -}}
-            {{with .Site.RegularPages.Next . }}
-              <li class="next">
-                {{ $title := partial "PrepareHTML" .Title -}}
-                <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.next_aria" (dict "Title" $title)) }}">
-                  <span>
-                    {{- i18n "posts.next" -}}
-                  </span>
-                  {{- $title -}}
-                </a>
-              </li>
-            {{end}}
+          {{- with .NextInSection -}}
+            <li class="next">
+              {{ $title := partial "PrepareHTML" .Title -}}
+              <a href="{{ .RelPermalink }}" title="{{ safeHTML (i18n "posts.next_aria" (dict "Title" $title)) }}">
+                <span>
+                  {{- i18n "posts.next" -}}
+                </span>
+                {{- $title -}}
+              </a>
+            </li>
           {{- end -}}
         </ul>
       </nav>
