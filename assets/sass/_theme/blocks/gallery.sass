@@ -6,7 +6,6 @@
         img,
         picture
             display: block
-            margin-bottom: $spacing0
         > a
             transition: filter .3s ease
             &:hover
@@ -31,7 +30,7 @@
 
     &--grid
         .gallery
-            align-items: end
+            align-items: baseline
             @include in-page-with-sidebar
                 @include grid(3, desktop, half($grid-gutter), half($grid-gutter))
             @include in-page-without-sidebar
@@ -39,9 +38,14 @@
             @include media-breakpoint-down(desktop)
                 @include grid(2)
                 grid-gap: half($grid-gutter-sm) !important
-            figure
-                &:after
-                    content: ' ' // This is used to allow align baseline without figcaption
+            &--with-text
+                figure
+                    display: grid
+                    grid-template-columns: subgrid
+                    gap: space(3)
+                    figcaption
+                        &::after
+                            content: ' '
 
     &--carousel
         overflow: hidden
