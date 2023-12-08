@@ -1,55 +1,40 @@
 @mixin person-avatar-end
-    justify-content: space-between
+    display: flex
+    flex-direction: row
     gap: $spacing1
     .avatar
         margin-right: 0
-        order: 1
-        width: col(3)
+        width: col(4)
     .description
-        margin-top: 0
+        margin-top: $spacing1
+        text-align: left
 
 .block-persons
+    article
+        .description
+            margin-top: $spacing1
     @include in-page-with-sidebar
-        &:not(.block-with-long-text)
-            .persons
-                .person
-                    @include person-avatar-end
         .persons
-            @include grid(1, sm)
+            @include grid(1, desktop)
             row-gap: $spacing0
-            @include media-breakpoint-between(desktop, xl)
-                .person
-                    @include person-avatar-end
+            @include media-breakpoint-up(xxl)
+                @include grid(2)
+                article
+                    .avatar
+                        width: col(1.5, 4)
+                    .description
+                        margin-top: $spacing0
         article
             flex-direction: row
-            gap: col(1, 8)
-            .avatar
-                @include media-breakpoint-up(md)
-                    width: calc(#{col(1, 4)} + #{$grid-gutter})
-            .description
-                margin-top: $spacing1
-        &.block-with-long-text
-            .person
-                gap: $grid-gutter
-                .description
-                    flex: 1
-                    margin-top: 0
+            gap: $spacing1
+            @include media-breakpoint-up(md)
                 .avatar
                     width: col(2, 8)
-                @include media-breakpoint-up(xl)
-                    flex-direction: row-reverse
     @include in-page-without-sidebar
         .top .description
             max-width: col(8)
         &.block-with-long-text
-            .person
-                flex-direction: row
-                gap: $grid-gutter
-                .description
-                    flex: 1
-                    text-align: left
-                .avatar
-                    @include media-breakpoint-up(sm)
-                        width: col(3, 12)
-                    @include media-breakpoint-up(xl)
-                        width: col(2, 6)
+            .persons
+                @include grid(2)
+                article
+                    @include person-avatar-end
