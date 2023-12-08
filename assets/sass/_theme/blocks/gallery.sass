@@ -6,7 +6,6 @@
         img,
         picture
             display: block
-            margin-bottom: $spacing0
         > a
             transition: filter .3s ease
             &:hover
@@ -18,6 +17,7 @@
         figcaption
             @include small
             position: relative
+            margin-top: $spacing0
             p
                 margin-bottom: 0
         .credit
@@ -39,9 +39,12 @@
             @include media-breakpoint-down(desktop)
                 @include grid(2)
                 grid-gap: half($grid-gutter-sm) !important
-            figure
-                &:after
-                    content: ' ' // This is used to allow align baseline without figcaption
+            &--with-text
+                figure
+                    picture
+                        margin-bottom: $spacing0
+                    &:after
+                        content: ' ' // This is used to allow align baseline without figcaption
 
     &--carousel
         overflow: hidden
