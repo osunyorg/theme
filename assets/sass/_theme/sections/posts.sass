@@ -23,7 +23,6 @@
 
 .posts__section,
 .authors__term,
-.categories__term,
 .posts_categories__term,
 .persons__page
     .posts--list
@@ -78,6 +77,8 @@
                 margin-top: $spacing0
 
 .posts__page
+    .lead
+        @include h3
     @include media-breakpoint-down(desktop)
         .post-sidebar
             padding: 0 half($grid-gutter-sm)
@@ -101,8 +102,6 @@
         // Safe spacing if post is empty
         .document-content
             min-height: 350px
-    .lead
-        @include h3
 
 .post-categories
     @include list-reset
@@ -158,7 +157,6 @@
     .link
         @extend .link-more
 
-.authors__term,
-.categories__term
+.authors__term
     .blocks + .container
         margin-top: $spacing3
