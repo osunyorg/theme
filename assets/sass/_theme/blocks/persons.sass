@@ -13,7 +13,7 @@
         &:not(.block-with-long-text)
             .persons
                 .person
-                    @include person-avatar-end
+                    // @include person-avatar-end
         .persons
             @include grid(1, sm)
             row-gap: $spacing0
@@ -22,10 +22,10 @@
                     @include person-avatar-end
         article
             flex-direction: row
-            gap: col(1, 8)
+            gap: $grid-gutter
             .avatar
                 @include media-breakpoint-up(md)
-                    width: calc(#{col(1, 4)} + #{$grid-gutter})
+                    width: col(2, 8)
             .description
                 margin-top: $spacing1
         &.block-with-long-text
