@@ -31,7 +31,7 @@
 
     &--grid
         .gallery
-            align-items: end
+            align-items: baseline
             @include in-page-with-sidebar
                 @include grid(3, desktop, half($grid-gutter), half($grid-gutter))
             @include in-page-without-sidebar
@@ -41,10 +41,9 @@
                 grid-gap: half($grid-gutter-sm) !important
             &--with-text
                 figure
-                    picture
-                        margin-bottom: $spacing0
-                    &:after
-                        content: ' ' // This is used to allow align baseline without figcaption
+                    figcaption
+                        &::after
+                            content: ' '
 
     &--carousel
         overflow: hidden
