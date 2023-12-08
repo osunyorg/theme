@@ -13,7 +13,7 @@
     {{ if .file }}
       {{- $image := partial "GetMedia" .file -}}
       {{- if $image -}}
-        <figure{{ if $is_carousel }} class="splide__slide"{{ end }}>
+        <figure {{ if $is_carousel }} class="splide__slide"{{ end }}>
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             <a  class="glightbox"
                 role="button"

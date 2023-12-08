@@ -13,6 +13,8 @@ params:
     header: "/assets/images/logo.svg"
     footer: "/assets/images/logo.svg"
   menu:
+    dropdown:
+      linkToLevel1: false
     i18n:
       display: true
   breadcrumb:
@@ -38,12 +40,16 @@ params:
   organizations:
     dark_logo_background: false
     map_marker_icon: '/assets/images/map-marker.svg'
+    single:
+      backlinks: false
   pages:
     index:
       truncate_description: 200 # Set to 0 to disable truncate
   persons:
     index:
       layout: grid # grid | list
+    single:
+      backlinks: false
   posts:
     default_image: false
     date_format: ":date_long"
@@ -93,6 +99,11 @@ params:
         mobile:   80
         tablet:   100
         desktop:  255
+      pages:
+        large:
+          mobile:   400
+          tablet:   800
+          desktop:  1080
       partners: # LEGACY
         mobile:   164
         tablet:   216

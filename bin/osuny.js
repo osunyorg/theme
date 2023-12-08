@@ -24,6 +24,8 @@ let pagefindExclude = `
     .administrators__term,
     .authors__term,
     .categories__taxonomy, .categories__term,
+    .posts_categories__taxonomy, .posts_categories__term,
+    .events_categories__taxonomy, .events_categories__term,
     .diplomas__taxonomy, .block-diplomas,
     .events__section, .block-agenda,
     .organizations__section, .block-organizations,

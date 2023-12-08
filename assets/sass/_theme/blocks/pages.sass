@@ -218,3 +218,46 @@
                 margin-right: auto
                 article
                     width: col(4, 10)
+    &--large
+        .top
+            @include top-flex
+        .page
+            + .page
+                margin-top: $spacing3
+            .more
+                @include icon(arrow, after, true)
+                @include hover-translate-icon(after)
+            &-content:hover .more:after
+                transform: translateX(#{px2rem(10)})
+            .media
+                img
+                    aspect-ratio: 1
+        @include media-breakpoint-up(desktop)
+            .page
+                flex-direction: row
+                gap: $grid-gutter
+
+        @include in-page-with-sidebar
+            .page
+                &-title
+                    @include h2
+                    margin-bottom: space(4)
+                &-content
+                    flex: 1
+                    position: relative
+                .media 
+                    flex: 1
+        @include in-page-without-sidebar
+            .top
+                .description
+                    @include body-text
+            .page
+                align-items: center
+                &-title
+                    @include lead
+                    margin-bottom: space(4)
+                &-content
+                    width: col(5)
+                    position: relative
+                .media 
+                    width: col(6)

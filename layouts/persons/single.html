@@ -85,5 +85,9 @@
         {{ partial "persons/papers.html" (dict "papers" $papers "slug" $slug) }}
       {{ end }}
     </div>
+
+    {{ if site.Params.persons.single.backlinks }}
+      {{ partial "contents/backlinks.html" . }}
+    {{ end }}
   </div>
 {{ end }}

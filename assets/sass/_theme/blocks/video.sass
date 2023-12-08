@@ -67,8 +67,20 @@
             margin-right: half(-$grid-gutter-sm)
 
     @include in-page-without-sidebar
-        .transcription
-            width: col(7)
-            margin-left: auto
+        background: $block-video-background
+        margin-top: 0
+        .block-content
+            @include grid(12, false, 0)
+            padding-top: $block-space-y
+            padding-bottom: $spacing2
+            .top
+                grid-column: 1 / -1
+            .video
+                grid-column: 8 span
+            > p
+                margin-top: 0
+                grid-column: 4 span
+            .transcription
+                grid-column: 8 span
         .lazy-video-player::after
             backdrop-filter: blur(5px)

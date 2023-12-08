@@ -1,0 +1,61 @@
+{{ $about := .Title }}
+<div class="backlinks">
+  {{ with .Params.backlinks.current_website }}
+    {{ if .pages }}
+      {{ partial "blocks/templates/pages.html" (dict
+        "block" (dict 
+          "title" (printf "Pages mentionnant %s" $about)
+          "template" "pages"
+          "ranks" (dict 
+            "self" 2
+            "children" 3
+          )
+          "data" (dict 
+            "layout" "grid"
+            "show_main_description" false
+            "show_descriptions" true
+            "show_images" true
+            "pages" .pages
+          )
+        )
+      ) }}
+    {{ end }}
+    {{ if .posts }}
+      {{ $posts := slice }}
+      {{ range .posts }}
+        {{ $posts = $posts | append .path }}
+      {{ end }}
+      {{ partial "blocks/templates/posts.html" (dict
+        "block" (dict 
+          "title" (printf "Actualités mentionnant %s" $about)
+          "template" "posts"
+          "ranks" (dict 
+            "self" 2
+            "children" 3
+          )
+          "data" (dict
+            "layout" "grid"
+            "posts" $posts
+          )
+        )
+      ) }}
+    {{ end }}
+    {{ if .events }}
+      {{ partial "blocks/templates/agenda.html" (dict
+        "block" (dict 
+          "title" (printf "Événements mentionnant %s" $about)
+          "template" "agenda"
+          "ranks" (dict 
+            "self" 2
+            "children" 3
+          )
+          "data" (dict
+            "layout" "grid"
+            "events" .events
+            "show_summary" true
+          )
+        )
+      ) }}
+    {{ end }}
+  {{ end }}
+</div>

@@ -3,12 +3,10 @@
   <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
   <meta itemprop="url" content="{{ .Permalink }}">
 
-  {{ partial "toc/container.html"
-    (dict
-          "toc" "programs/toc.html"
-          "context" .
-      )
-    }}
+  {{ partial "toc/container.html" (dict
+    "toc" "programs/toc.html"
+    "context" .
+  ) }}
 
   {{- if .Params.image -}}
     {{- $id := .Params.image -}}
@@ -26,9 +24,9 @@
   {{- end -}}
 
   {{ partial "programs/summary.html" (dict
-      "with_container" true
-      "context" .
-    ) }}
+    "with_container" true
+    "context" .
+  ) }}
 
   {{- partial "programs/presentation.html" . -}}
   {{- partial "programs/children.html" .Pages -}}
@@ -36,7 +34,7 @@
   {{- partial "programs/results.html" . -}}
   {{- partial "programs/admission.html" . -}}
 
-  {{- $category := site.GetPage (printf "/categories/%s" .Params.related_category ) -}}
+  {{- $category := site.GetPage (printf "/posts_categories/%s" .Params.related_category ) -}}
   {{- partial "programs/related.html" $category -}}
 
   {{- partial "hooks/before-program-end.html" . -}}
