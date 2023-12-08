@@ -90,14 +90,17 @@ class Search {
     }
 
     buttonMoreFocus() {
-        this.links = this.element.querySelectorAll('a');
-        this.lastLink = this.links[this.links.length - 1];
-        
-        this.buttonMore.addEventListener('keypress', () => {
-            if ((event.keyCode === 13 || event.key === 'Enter')) {
-                this.lastLink.focus();
-            }
-        });
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+              mutation.addedNodes.forEach(addedNode => {
+                if (addedNode instanceof HTMLAnchorElement) {
+                  addedNode.focus();
+                }
+              });
+            });
+        });   
+        const observerConfig = { childList: true, subtree: true };
+        observer.observe(this.element, observerConfig);
     }
 
     toggle(open = !this.state.isOpened) {
