@@ -33,11 +33,11 @@
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             </a>
           {{ end }}
+          {{ if .text }}
             <figcaption>
-              {{ if .text }}
-                {{- partial "PrepareHTML" .text -}}
-              {{ end }}
+              {{- partial "PrepareHTML" .text -}}
             </figcaption>
+          {{ end }}
         </figure>
       {{- end -}}
     {{ end }}

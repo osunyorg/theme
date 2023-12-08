@@ -17,8 +17,6 @@
         figcaption
             @include small
             position: relative
-            &:not(:empty)
-                margin-top: $spacing0
             p
                 margin-bottom: 0
         .credit
@@ -42,6 +40,9 @@
                 grid-gap: half($grid-gutter-sm) !important
             &--with-text
                 figure
+                    display: grid
+                    grid-template-columns: subgrid
+                    gap: space(3)
                     figcaption
                         &::after
                             content: ' '
