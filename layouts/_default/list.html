@@ -3,10 +3,8 @@
   {{ partial "hooks/after-page-hero.html" . }}
 
   <div class="document-content">
-    {{- $category := site.GetPage (printf "/categories%s" .Params.category) -}}
     {{ partial "toc/container.html"
         (dict
-            "category" $category
             "toc" "pages/toc.html"
             "context" .
         )

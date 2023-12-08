@@ -23,7 +23,7 @@
 
 .posts__section,
 .authors__term,
-.categories__term,
+.posts_categories__term,
 .persons__page
     .posts--list
         article
@@ -77,15 +77,12 @@
                 margin-top: $spacing0
 
 .posts__page
+    .lead
+        @include h3
     @include media-breakpoint-down(desktop)
-        .document-content
-            display: flex
-            flex-direction: column
-            aside
-                order: 2
-                padding: 0 half($grid-gutter-sm)
-            .block-pagination
-                order: 3
+        .post-sidebar
+            padding: 0 half($grid-gutter-sm)
+            margin-bottom: $spacing3
     @include media-breakpoint-up(desktop)
         .post-sidebar
             @include container-margin-left
@@ -105,8 +102,6 @@
         // Safe spacing if post is empty
         .document-content
             min-height: 350px
-    .lead
-        @include h3
 
 .post-categories
     @include list-reset
@@ -114,7 +109,7 @@
     li
         display: inline-block
         vertical-align: middle
-        margin-left: 10px
+        margin-left: space(2)
         &:last-child
             &::after
                 content: none
@@ -133,10 +128,8 @@
         padding-top: $spacing0
         padding-bottom: $spacing0
         border-color: $color-border
-        padding: 1rem 0
         &:not(:first-child)
             align-items: center
-
             border-top: 1px solid $color-border
         > span
             @include meta
@@ -148,7 +141,6 @@
             text-align: right
             flex: 1
     a
-        // @include meta
         @include link($color-accent)
     .share
         justify-content: flex-end
@@ -165,7 +157,6 @@
     .link
         @extend .link-more
 
-.authors__term,
-.categories__term
+.authors__term
     .blocks + .container
         margin-top: $spacing3

@@ -19,7 +19,11 @@
 
     {{ partial "posts/after-contents.html" . }}
 
-    {{ partial "posts/prevnext.html" . }}
+    {{ partial "commons/siblings-navigation.html" (dict
+      "context" .
+      "previous_label" (i18n "posts.previous")
+      "next_label" (i18n "posts.next")
+    ) }}
 
     {{ partial "hooks/before-document-content-end.html" . }}
   </div>

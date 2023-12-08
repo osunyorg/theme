@@ -18,7 +18,9 @@
 
     {{ partial "commons/siblings-navigation.html" (dict
       "context" .
-      ) }}
+      "previous_label" (i18n "events.previous")
+      "next_label" (i18n "events.next")
+    ) }}
 
     {{ partial "hooks/before-document-content-end.html" . }}
   </div>
