@@ -13,7 +13,6 @@ class Search {
         }
 
         this.input = this.element.querySelector('input');
-
         this.listen();
     }
 
@@ -41,6 +40,12 @@ class Search {
                 }
             } else if (event.key === "Tab" && this.state.isOpened) {
                 this.innerFocus(event);
+                
+                this.buttonMore = this.element.querySelector('.pagefind-ui__results + button');
+
+                if (this.buttonMore) {
+                    this.buttonMoreFocus();
+                }
             }
         });
     }
@@ -82,6 +87,20 @@ class Search {
             firstFocusable.focus();
             event.preventDefault();
         }
+    }
+
+    buttonMoreFocus() {
+        const observer = new MutationObserver(mutations => {
+            mutations.forEach(mutation => {
+              mutation.addedNodes.forEach(addedNode => {
+                if (addedNode instanceof HTMLAnchorElement) {
+                  addedNode.focus();
+                }
+              });
+            });
+        });   
+        const observerConfig = { childList: true, subtree: true };
+        observer.observe(this.element, observerConfig);
     }
 
     toggle(open = !this.state.isOpened) {
