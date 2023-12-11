@@ -32,6 +32,38 @@
                 @include grid($block-posts-grid-columns)
                 .media picture img
                     width: 100%
+    &--large
+        .post
+            .more
+                @include icon(arrow-right, after, true)
+            p[itemprop="articleBody"]
+                margin-top: $spacing1
+        @include media-breakpoint-down(desktop)
+            .post + .post
+                margin-top: $spacing2
+        @include media-breakpoint-up(desktop)
+            .large
+                .post
+                    flex-direction: row
+                    gap: half($grid-gutter)
+                    + .post
+                        margin-top: $spacing2
+        @include in-page-with-sidebar
+            .large
+                .post
+                    .media,
+                    .post-content
+                        width: calc(#{col(4, 8)} + #{half($grid-gutter)})
+        @include in-page-without-sidebar
+            .large
+                .post
+                    gap: $grid-gutter
+                    .media
+                        width: col(6)
+                    .post-content
+                        width: col(5)
+                p[itemprop="articleBody"]
+                    margin-top: calc(#{$spacing1} + #{$spacing0})
     &--list
         article
             border-bottom: 1px solid $color-border
