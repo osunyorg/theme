@@ -2,7 +2,7 @@
 {{ $layout := .layout | default "list" }}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
-    "open" ((printf "<%s itemprop='headline' class='event-title'>" $heading) | safeHTML)
+    "open" ((printf "<%s itemprop='name' class='event-title'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
 {{ $index := .index }}
@@ -19,7 +19,7 @@
         <hgroup>
       {{ end }}
       {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}" itemprop="name">{{ $title }}</a>
+        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
       {{ if .Params.subtitle }}
           <p class="event-subtitle">{{ .Params.subtitle }}</p>
@@ -27,9 +27,9 @@
       {{ end }}
 
       {{ if (or .Params.dates.computed.two_lines.short .Params.dates.from.hour .Params.dates.to.hour) }}
-        <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}} {{- if .Params.dates.from.hour -}}{{ .Params.dates.from.hour }}{{- end -}}">
+        <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}}{{- if .Params.dates.from.hour -}}T{{ .Params.dates.from.hour }}{{- end -}}">
           <span>{{ partial "PrepareHTML" .Params.dates.computed.two_lines.short }}</span>
-          {{- if (or .Params.dates.from.hour .Params.dates.to.hour)}}
+          {{- if (or .Params.dates.from.hour .Params.dates.to.hour) }}
             <div class="event-time">
               {{- if .Params.dates.from.hour }}
                 <span>{{ .Params.dates.from.hour }}</span>
@@ -41,8 +41,16 @@
           {{ end -}}
         </div>
       {{ end }}
-      {{ if and (.Params.categories) ($show_status) }}
-        <p class="event-status">{{ .Params.dates.status }}</p>
+      {{ if and .Params.events_categories $show_status }}
+        <p class="event-status">
+          {{ if eq .Params.dates.status "current"}}
+            {{- i18n "blocks.events.current" -}}
+          {{ else if .Params.dates.status "future" }}
+            {{- i18n "blocks.events.future" -}}
+          {{ else if .Params.dates.status "archive" }}
+              {{- i18n "blocks.events.archive" -}}
+          {{ end }}
+        </p>
       {{ end }}
 
       {{ if and (site.Params.events.index.show_description) ($show_summary) }}
@@ -60,10 +68,10 @@
             </p>
           </div>
         {{- end -}}
-  
-        {{ if and (.Params.categories) ($show_category) }}
+        
+        {{ if and .Params.events_categories $show_category }}
           <p class="event-categories">
-            {{- range $index, $category := .GetTerms "categories" -}}
+            {{- range $index, $category := .GetTerms "events_categories" -}}
               <span>{{- $category.Title -}}</span>
             {{- end -}}
           </p>

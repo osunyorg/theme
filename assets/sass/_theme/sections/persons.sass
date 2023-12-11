@@ -39,11 +39,11 @@
 .person
     @include article
     word-break: break-word
+    gap: $spacing1
     .avatar
         align-self: start
         flex-shrink: 0
         order: -1
-        margin-bottom: $spacing1
         min-width: $spacing3
     .name
         @include h4
@@ -76,13 +76,15 @@
         .avatar
             width: 100%
 
+
 section.persons,
 div.persons
     @include grid(1)
     @include grid(2, md)
-    @include grid(3, lg)
-    @include grid(5, xl)
+    @include grid(4, lg)
     @include grid(6, xxl)
+
+
 
 ol.persons--list
     @include list-reset
@@ -195,12 +197,12 @@ ol.persons--list
             @include small
     .blocks
         margin-top: $spacing3
-    .person-programs,
-    .person-objects,
-    .person-publications
-        margin-top: $spacing4
-        ul
-            @include list-reset
+    .person-objects
+        > * + *
+            margin-top: $spacing3
+    .person-posts
+        article.post:last-child
+            margin-bottom: 0
     @include media-breakpoint-down(lg)
         .roles
             margin-top: $spacing2

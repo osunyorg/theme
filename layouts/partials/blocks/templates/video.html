@@ -5,35 +5,33 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        <div>
-          {{ partial "blocks/top.html" (dict
-            "title" $block.title
-            "heading_level" $block.ranks.self
-          )}}
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+        )}}
 
-          {{ if .url }}
-            {{ $title := "video" }}
-            {{ with .video_title }}
-              {{ $title = .}}
+        {{ if .url }}
+          {{ $title := "video" }}
+          {{ with .video_title }}
+            {{ $title = .}}
+          {{ end }}
+
+          <div class="video">
+            {{ if eq .video.platform "default" }}
+              {{ partial "PrepareHTML" .video.iframe }}
+            {{ else }}
+              {{ partial "blocks/templates/video/lazy-container" .video }}
             {{ end }}
+          </div>
+        {{ end }}
 
-            <div class="video">
-              {{ if eq .video.platform "default" }}
-                {{ partial "PrepareHTML" .video.iframe }}
-              {{ else }}
-                {{ partial "blocks/templates/video/lazy-container" .video }}
-              {{ end }}
-            </div>
-          {{ end }}
+        {{ if .video_title }}
+          <p>{{- partial "PrepareHTML" .video_title -}}</p>
+        {{ end }}
 
-          {{ if .video_title }}
-            <p>{{- partial "PrepareHTML" .video_title -}}</p>
-          {{ end }}
-
-          {{ partial "commons/transcription" ( dict
-            "transcription" .transcription
-          ) }}
-        </div>
+        {{ partial "commons/transcription" ( dict
+          "transcription" .transcription
+        ) }}
       </div>
     </div>
   </div>

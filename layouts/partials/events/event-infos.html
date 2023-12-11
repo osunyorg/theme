@@ -1,10 +1,10 @@
 {{ $unique_day := eq .Params.dates.from.day .Params.dates.to.day }}
 <ul class="event-infos">
   {{ with .Params.dates }}
-    {{ with .computed }}
-      <li class="event-date">
+    {{ if .computed }}
+      <li class="event-date" itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
         <span>{{ i18n "events.date" }}</span>
-        {{ partial "PrepareHTML" .two_lines.long }}
+        {{ partial "PrepareHTML" .computed.two_lines.long }}
       </li>
     {{ end }}
     {{ if .from.hour }}
@@ -18,6 +18,12 @@
         {{ end }}
       </li>
     {{ end }}
+  {{ end }}
+  {{ if .Params.events_categories }}
+    <li>
+      <span>{{ i18n "events.category" (dict "Count" ( len .Params.events_categories )) }}</span>
+      {{ partial "events/categories.html" . }}
+    </li>
   {{ end }}
   <li>
     <span>{{ i18n "posts.share" }}</span>

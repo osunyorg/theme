@@ -1,7 +1,11 @@
-@function px2rem($size)
+@function pxToRem($size)
     $remSize: $size / 16
     @return #{$remSize}rem
 
+@function px2rem($size)
+    @return pxToRem($size)
+
+$space-unit: 4 !default
 @function space($spaces: 1)
     @return #{$spaces * $space-unit / 16}rem
 
@@ -146,11 +150,14 @@
     $responsive-grid-width: Min(100vw, (#{$grid-max-width}))
     @return calc((#{$responsive-grid-width} + #{$grid-gutter} * 2) / #{$base} * #{$quantity} - #{$grid-gutter} * 2)
 
+@function container-margin-x
+    @return Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+
 @mixin container-margin-left
-    margin-left: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+    margin-left: container-margin-x()
 
 @mixin container-margin-right
-    margin-right: Max(#{$grid-gutter}, calc(50vw - #{$grid-max-width} / 2 + #{$grid-gutter}))
+    margin-right: container-margin-x()
 
 @mixin stretched-link($pseudo-element: after)
     &::#{$pseudo-element}

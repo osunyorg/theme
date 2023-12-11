@@ -1,13 +1,25 @@
-<div class="gallery" role="group">
+{{- $has_text := false -}}
+{{- range .images }}
+  {{- if .text }}
+    {{- $has_text = true -}}
+  {{ end -}}
+{{ end -}}
+<div class="gallery{{- if $has_text }} gallery--with-text {{ end -}}" role="group">
   {{ range .images }}
     {{ if .id }}
       {{- $image := partial "GetMedia" .id -}}
       {{- if $image -}}
         <figure>
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+            {{ $lightbox_text := false }}
+            {{ if and .text .credit }}
+              {{ $lightbox_text = delimit (slice .text .credit) " / " }}
+            {{ else }}
+              {{ $lightbox_text = or .text .credit }}
+            {{ end }}
             <a  class="glightbox"
                 role="button"
-                data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
+                data-glightbox="type: image;{{ if $lightbox_text }}description: {{ partial "PrepareHTML" $lightbox_text }}{{ end }}"
                 href="{{ partial "GetLightboxUrl" (dict "id" .id) }}"
                 title="{{- i18n "commons.lightbox.link.title" -}}"
                 aria-label="{{- i18n "commons.lightbox.link.title" -}}">

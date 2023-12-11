@@ -46,7 +46,7 @@
           "title" $title
           "link" $page_link
           "heading_level" $block.ranks.self
-          "description" $main_description
+          "description" (printf "<p>%s</p>" $main_description)
         )}}
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 

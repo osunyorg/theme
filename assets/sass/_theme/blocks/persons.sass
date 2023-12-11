@@ -1,31 +1,40 @@
+@mixin person-avatar-end
+    display: flex
+    flex-direction: row
+    gap: $spacing1
+    .avatar
+        margin-right: 0
+        width: col(4)
+    .description
+        margin-top: $spacing1
+        text-align: left
+
 .block-persons
+    article
+        .description
+            margin-top: $spacing1
     @include in-page-with-sidebar
         .persons
-            @include grid(1, sm)
-            &:not(.is-column)
-                @include grid(2, desktop)
-            &.is-column
-                row-gap: $spacing0
-                @include grid(2, xl)
-                @include media-breakpoint-between(desktop, xl)
-                    .person
-                        justify-content: space-between
-                        gap: $spacing1
+            @include grid(1, desktop)
+            row-gap: $spacing0
+            @include media-breakpoint-up(xxl)
+                @include grid(2)
+                article
                     .avatar
-                        margin-right: 0
-                        order: 1
-                        width: col(3)
+                        width: col(1.5, 4)
                     .description
-                        margin-top: 0
+                        margin-top: $spacing0
         article
             flex-direction: row
-            .avatar
-                margin-right: $spacing1
-                @include media-breakpoint-up(md)
-                    width: calc(#{col(1, 4)} + #{$grid-gutter})
-            .description
-                margin-top: $spacing1
-
+            gap: $spacing1
+            @include media-breakpoint-up(md)
+                .avatar
+                    width: col(2, 8)
     @include in-page-without-sidebar
         .top .description
             max-width: col(8)
+        &.block-with-long-text
+            .persons
+                @include grid(2)
+                article
+                    @include person-avatar-end

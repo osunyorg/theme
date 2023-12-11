@@ -1,10 +1,11 @@
+{{- $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero"  -}}
 {{ $subtitle := "" }}
 {{- $summary := partial "PrepareText" .Params.summary -}}
 {{ if and (eq site.Params.summary.position "hero") $summary }}
   {{ $subtitle = $summary }}
 {{ end }}
 
-<header class="hero">
+<header class="hero {{ if $breadcrumb_is_after_hero -}} hero--no-margin {{- end }}">
   <div class="container">
     {{- if eq site.Params.breadcrumb.position "hero-start" -}}
       {{ partial "header/breadcrumbs.html" . }}
@@ -36,8 +37,8 @@
   </div>
 </header>
 
-{{- if eq site.Params.breadcrumb.position "after-hero" -}}
-  <div class="container">
+{{- if $breadcrumb_is_after_hero -}}
+  <div class="container breadcrumb-container">
     {{ partial "header/breadcrumbs.html" . }}
   </div>
 {{- end -}}
