@@ -2,7 +2,7 @@
 {{ $layout := .layout | default "list" }}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
-    "open" ((printf "<%s class='event-title'>" $heading) | safeHTML)
+    "open" ((printf "<%s itemprop='name' class='event-title'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
 {{ $index := .index }}
@@ -19,7 +19,7 @@
         <hgroup>
       {{ end }}
       {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}" itemprop="name">{{ $title }}</a>
+        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
       {{ if .Params.subtitle }}
           <p class="event-subtitle">{{ .Params.subtitle }}</p>
