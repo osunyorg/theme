@@ -86,9 +86,13 @@
         @include in-page-with-sidebar
             .large
                 .post
-                    .media,
-                    .post-content
-                        width: calc(#{col(4, 8)} + #{half($grid-gutter)})
+                    @include media-breakpoint-down(xl)
+                        flex-direction: column
+                        gap: unset
+                    @include media-breakpoint-up(xl)
+                        .media,
+                        .post-content
+                            width: calc(#{col(4, 8)} + #{half($grid-gutter)})
         @include in-page-without-sidebar
             .large
                 .post
