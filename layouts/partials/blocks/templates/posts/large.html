@@ -22,17 +22,17 @@
           {{ $heading_tag.open }}
             <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
           {{ $heading_tag.close }}
+          
+          <div class="post-meta">
+            {{ if site.Params.posts.index.show_author }}
+              {{- partial "posts/author" . -}}
+            {{ end }}
+            <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
+          </div>
 
           {{ if site.Params.posts.index.show_categories }}
             {{- partial "posts/categories" . -}}
           {{ end }}
-          
-          <div class="post-meta">
-            <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
-            {{ if site.Params.posts.index.show_author }}
-              {{- partial "posts/author" . -}}
-            {{ end }}
-          </div>
 
           {{ if site.Params.posts.index.show_description }}
             {{- if (partial "GetTextFromHTML" .Params.summary) -}}

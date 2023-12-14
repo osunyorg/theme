@@ -38,6 +38,23 @@
                 @include icon(arrow-right, after, true)
             p[itemprop="articleBody"]
                 margin-top: $spacing1
+            .post-meta 
+                display: flex
+                flex-wrap: wrap
+                gap: half($spacing0)
+            .post-author
+                &::after
+                    content: '—'
+                p
+                    display: inline
+                    &::before
+                        display: none
+            .post-categories
+                margin-top: half($spacing0)
+                li
+                    display: inline-flex
+                    &:not(:last-child)::after
+                        content: ', '
         @include media-breakpoint-down(desktop)
             .post + .post
                 margin-top: $spacing2
@@ -48,12 +65,16 @@
                     gap: half($grid-gutter)
                     + .post
                         margin-top: $spacing2
+                            
         @include in-page-with-sidebar
             .large
                 .post
-                    .media,
-                    .post-content
-                        width: calc(#{col(4, 8)} + #{half($grid-gutter)})
+                    @include media-breakpoint-down(xl)
+                        flex-direction: column
+                    @include media-breakpoint-up(xl)
+                        .media,
+                        .post-content
+                            width: calc(#{col(4, 8)} + #{half($grid-gutter)})
         @include in-page-without-sidebar
             .large
                 .post
