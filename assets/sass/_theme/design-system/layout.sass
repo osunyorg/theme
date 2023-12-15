@@ -126,7 +126,8 @@ details
                 top: 0
 
 .posts__page,
-.events__page
+.events__page,
+.papers__page
     .section-sidebar
         @include media-breakpoint-down(desktop)
             padding: 0 half($grid-gutter-sm)
@@ -139,7 +140,7 @@ details
             height: 100%
             position: absolute
             width: col-outside-container(4)
-            > div
+            &:not(.paper-sidebar)> div
                 @include sticky($spacing1)
             .toc-container
                 border-top: 1px solid $color-border
