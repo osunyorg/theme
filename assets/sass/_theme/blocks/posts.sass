@@ -36,22 +36,22 @@
         .post
             .more
                 @include icon(arrow-right, after, true)
-            p[itemprop="articleBody"]
-                margin-top: $spacing1
             .post-author 
                 p::before
                     display: none
-        @include media-breakpoint-down(desktop)
-            .post + .post
-                margin-top: $spacing2
-            .post-meta
-                .post-author 
-                    display: inline-flex
-                    &::after
-                        content: '—'
-                        margin: 0 half($spacing0)
-                .post-categories
-                    display: flex
+            @include media-breakpoint-down(desktop)
+                + .post
+                    margin-top: $spacing2
+                &-meta
+                    .post-author 
+                        display: inline-flex
+                        &::after
+                            content: '—'
+                            margin: 0 half($spacing0)
+                    .post-categories
+                        display: flex
+                p[itemprop="articleBody"]
+                    margin-top: 0
         @include media-breakpoint-up(desktop)
             .large
                 .post
@@ -59,6 +59,8 @@
                     gap: half($grid-gutter)
                     + .post
                         margin-top: $spacing2
+                    p[itemprop="articleBody"]
+                        margin-top: $spacing1
                     &-title
                         @include h2
                     .post-meta
@@ -91,6 +93,8 @@
                     @include media-breakpoint-down(xl)
                         flex-direction: column
                         gap: unset
+                        p[itemprop="articleBody"]
+                            margin-top: $spacing0
                     @include media-breakpoint-up(xl)
                         .media,
                         .post-content
