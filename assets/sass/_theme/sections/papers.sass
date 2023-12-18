@@ -51,7 +51,6 @@
         .document-content
             aside
                 order: 2
-                padding: 0 half($grid-gutter-sm)
                 margin-bottom: $spacing3
     @include media-breakpoint-up(desktop)
         .hero
@@ -59,23 +58,13 @@
                 > h1, > hgroup
                     width: auto
         .paper-sidebar
-            @include container-margin-left
-            margin-top: 0
-            top: 0
-            left: 0
-            height: 100%
-            position: absolute
-            width: col-outside-container(4)
             > div
                 height: 100%
                 position: relative
             aside
-                border-bottom: 1px solid $color-border
                 padding-bottom: $spacing1
             .toc-container
                 height: unset
-                margin-left: 0
-                padding-top: $spacing1
                 @include sticky(-1px)
             .media
                 width: col(2, 4)
@@ -150,3 +139,6 @@
         p
             @include meta
             margin-top: $spacing0
+
+.paper-sidebar
+    @include sidebar
