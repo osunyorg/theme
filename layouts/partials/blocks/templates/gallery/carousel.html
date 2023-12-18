@@ -34,10 +34,10 @@
           {{ if or .text .credit }}
             <figcaption>
               {{ if .text }}
-                <div>{{ partial "PrepareHTML" .text }}</div>
+                <p>{{ partial "PrepareText" .text }}</p>
               {{ end }}
               {{ if .credit }}
-                <div class="credit">{{ partial "PrepareHTML" .credit }}</div>
+                <div class="credit">{{ partial "PrepareText" .credit }}</div>
               {{ end }}
             </figcaption>
           {{ end }}

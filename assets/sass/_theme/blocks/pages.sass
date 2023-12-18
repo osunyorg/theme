@@ -222,13 +222,16 @@
         .top
             @include top-flex
         .page
+            position: relative
             + .page
                 margin-top: $spacing3
             .more
                 @include icon(arrow, after, true)
                 @include hover-translate-icon(after)
-            &-content:hover .more:after
+            &:hover .more:after
                 transform: translateX(#{px2rem(10)})
+            &-title a    
+                @include stretched-link
             .media
                 img
                     aspect-ratio: 1
@@ -244,7 +247,6 @@
                     margin-bottom: space(4)
                 &-content
                     flex: 1
-                    position: relative
                 .media 
                     flex: 1
         @include in-page-without-sidebar
@@ -258,6 +260,5 @@
                     margin-bottom: space(4)
                 &-content
                     width: col(5)
-                    position: relative
                 .media 
                     width: col(6)
