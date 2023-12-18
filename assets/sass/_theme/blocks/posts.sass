@@ -33,6 +33,10 @@
                 .media picture img
                     width: 100%
     &--large
+        @include media-breakpoint-up(sm)
+            article
+                .post-meta
+                    display: inline
         .post
             .more
                 @include icon(arrow-right, after, true)
@@ -61,8 +65,6 @@
                         margin-top: $spacing2
                     &-title
                         @include h2
-                    .post-meta
-                        display: inline
                     .post-meta 
                         > *
                             display: inline
