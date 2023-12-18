@@ -1,12 +1,66 @@
+{{- $direction := "" -}}
 {{ $heading_level := .heading_level | default 3 }}
-{{ $heading := printf "h%d" $heading_level }}
-<div class="grid">
-  {{ range $post := .posts -}}
-    {{ with site.GetPage (printf "/posts/%s" $post) }}
-      {{ partial "posts/post.html" (dict 
-        "post" .
-        "heading" $heading
-        ) }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+        "level" $heading_level
+        "attributes" "class='post-title'"
+)}}
+{{ $index := .index}}
+
+
+<div class="large">
+  {{ range .posts }}
+    {{ with site.GetPage (printf "/posts/%s" .) }}
+
+      {{ if .Params.image }}
+        {{- $direction = partial "GetImageDirection" .Params.image -}}
+      {{ end }}
+
+      <article class='post' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-content">
+          {{- $title := partial "PrepareHTML" .Title -}}
+
+          {{ $heading_tag.open }}
+            <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+          {{ $heading_tag.close }}
+          
+          <div class="post-meta">
+            {{ if site.Params.posts.index.show_author }}
+              {{- partial "posts/author" . -}}
+            {{ end }}
+            <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
+            {{ if site.Params.posts.index.show_categories }}
+              {{- partial "posts/categories" . -}}
+            {{ end }}
+          </div>
+
+
+          {{ if site.Params.posts.index.show_description }}
+            {{- if (partial "GetTextFromHTML" .Params.summary) -}}
+              {{ if site.Params.posts.index.truncate_description }}
+                <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
+                  "text" .Params.summary
+                  "length" site.Params.posts.index.truncate_description
+                  ) }}</p>
+              {{ else }}
+                <p itemprop="articleBody">{{ partial "PrepareText" .Params.summary }}</p>
+              {{ end }}
+            {{- end -}}
+          {{- end -}}
+          <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+        </div>
+
+        <div class="media">
+          {{- if .Params.image -}}
+            {{- partial "commons/image.html"
+                  (dict
+                    "image"    .Params.image
+                    "sizes"    site.Params.image_sizes.sections.posts.item
+                  ) -}}
+          {{- else if site.Params.posts.default_image -}}
+            {{- partial "commons/image-default.html" -}}
+          {{- end -}}
+        </div>
+      </article>
     {{ end }}
   {{ end }}
 </div>

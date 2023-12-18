@@ -32,6 +32,85 @@
                 @include grid($block-posts-grid-columns)
                 .media picture img
                     width: 100%
+    &--large
+        @include media-breakpoint-up(sm)
+            article
+                .post-meta
+                    display: inline
+        .post
+            .more
+                @include icon(arrow-right, after, true)
+            .post-author 
+                p::before
+                    display: none
+            @include media-breakpoint-down(desktop)
+                + .post
+                    margin-top: $spacing2
+                &-meta
+                    .post-author 
+                        display: inline-flex
+                        &::after
+                            content: '—'
+                            margin: 0 half($spacing0)
+                    .post-categories
+                        display: flex
+                p[itemprop="articleBody"]
+                    margin-top: 0
+        @include media-breakpoint-up(desktop)
+            .large
+                .post
+                    flex-direction: row
+                    gap: half($grid-gutter)
+                    + .post
+                        margin-top: $spacing2
+                    p[itemprop="articleBody"]
+                        margin-top: $spacing1
+                    &-title
+                        @include h2
+                    .post-meta 
+                        > *
+                            display: inline
+                            &:not(:first-child)::before
+                                content: '—'
+                                margin-right: half($spacing0)
+                        > time
+                            display: inline-block
+                            margin-top: -2px
+                    .post-author
+                        p
+                            display: inline
+                        li
+                            margin-right: $spacing0
+                    .post-categories
+                        li
+                            display: inline-flex
+                            margin-right: $spacing0
+                            padding-bottom: 3px
+                            &:not(:last-child)::after
+                                content: ','
+                            
+        @include in-page-with-sidebar
+            .large
+                .post
+                    @include media-breakpoint-down(xl)
+                        flex-direction: column
+                        gap: unset
+                        p[itemprop="articleBody"]
+                            margin-top: $spacing0
+                    @include media-breakpoint-up(xl)
+                        .media,
+                        .post-content
+                            width: calc(#{col(4, 8)} + #{half($grid-gutter)})
+        @include in-page-without-sidebar
+            .large
+                .post
+                    gap: $grid-gutter
+                    .media
+                        width: col(6)
+                    .post-content
+                        width: col(5)
+                p[itemprop="articleBody"]
+                    margin-top: calc(#{$spacing1} + #{$spacing0})
     &--list
         article
             border-bottom: 1px solid $color-border
