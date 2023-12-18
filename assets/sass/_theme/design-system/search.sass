@@ -66,7 +66,7 @@
     @include media-breakpoint-up(desktop)
         padding-right: $spacing3
         padding-left: $spacing3
-        padding-top: calc(#{half($spacing3)} - #{half($spacing0)} + #{px2rem(2)})
+        padding-top: space(7)
     &[aria-hidden=true]
         display: none
     a
@@ -75,14 +75,14 @@
         &::before
             content: ""
             background: $color-background
-            height: calc(#{$spacing3} + #{$spacing1} + #{$spacing1})
+            height: space(27)
             left: 0
             position: fixed
             top: 0
             width: 100%
             z-index: 5
             @include media-breakpoint-down(desktop)
-                height: calc(#{$spacing3} + #{half($spacing0)} + #{$spacing4})
+                height: space(50)
         &__form
             @include icon(search-inline, after)
             &::after
@@ -94,14 +94,14 @@
                 z-index: 9
                 @include media-breakpoint-down(desktop)
                     right: $spacing1
-                    top: calc(#{$spacing4} + #{half($spacing0)})
+                    top: space(33)
         &__search-input
             border-left: 0
             border-right: 0
             border-radius: 0
             border-top: 0
             padding-left: 0
-            padding-right: half($spacing1) !important
+            padding-right: $spacing1 !important
             position: fixed
             z-index: 6
             @include media-breakpoint-down(desktop)
@@ -121,7 +121,7 @@
             text-align: right
             z-index: 11
             position: fixed
-            top: calc(#{half($spacing4)} + #{half($spacing1)})
+            top: space(20)
         &__search-clear,
         &__suppressed
             display: none
@@ -155,21 +155,21 @@
                 position: relative
                 width: col(8)
                 &::after
-                    left: calc(#{col(8)} - #{$spacing2} + #{$spacing0})
-                    top: calc(#{$spacing2} - #{$spacing0})
+                    left: calc(#{col(8)} - #{space(8)})
+                    top: space(9)
             &__search-input,
             &__message
-                width: calc(#{col(8,12)} - #{$spacing3} - #{$spacing1})
+                width: calc(#{col(8,12)} - #{space(21.5)})
             &__results-area
-                padding-top: calc(#{$spacing4} - #{$spacing1})
+                padding-top: space(26)
         @include media-breakpoint-down(desktop)
             &__search-input,
             &__message
                 width: calc(100% - #{$spacing2})
             &__message
-                top: calc(#{$spacing4} + #{$spacing2})
+                top: space(44)
             &__results-area
-                padding-top: calc(#{$spacing3} + #{half($spacing0)})
+                padding-top: space(17)
 
 .menu .nav-level-1 > li .pagefind-ui__toggle:not(.toggle-icon)::after
     margin-left: 0
