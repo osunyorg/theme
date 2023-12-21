@@ -21,7 +21,7 @@ class Carousel {
 
     init () {
         this.splide = new Splide(this.element).mount();
-        const toggleButton = this.splide.root.querySelector('.splide__autoplay'),
+        const toggleButton = this.splide.root.querySelector('.splide__toggle'),
             stepButtons = this.splide.root.querySelectorAll('.splide__pagination button'),
             elements = this.splide.root.querySelectorAll('.splide__pagination, .splide__slide'),
             autoplay = this.splide.Components.Autoplay;

@@ -40,29 +40,18 @@
                 &::before
                     background-color: $link-color
 
-    &__autoplay
-        bottom: 0
-        position: absolute
-        right: 0
+    &__toggle
+        .splide__toggle__pause
+            @include icon-block(pause)
+            display: none
+        .splide__toggle__play
+            @include icon-block(play)
+            display: inline-block
         &.is-active
-            .splide__play
+            .splide__toggle__play
                 display: none
-            .splide__pause
+            .splide__toggle__pause
                 display: inline-block
-
-    &__pause,
-    &__play
-        height: 48px
-        padding: 0
-        width: 48px
-
-    &__play
-        @include icon-block(play)
-
-    &__pause
-        @include icon-block(pause)
-        display: none
-
 
     &[data-slides-length="1"]
         .splide
