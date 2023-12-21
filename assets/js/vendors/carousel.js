@@ -46,6 +46,7 @@ class Carousel {
 
             this.splide.on('autoplay:pause', () => {
                 toggleButton.classList.remove('is-active');
+                var activeStepButton = this.splide.root.querySelector('.splide__pagination .is-active i');
             });
 
             elements.forEach(element => {
@@ -56,6 +57,13 @@ class Carousel {
 
             this.splide.on('drag', () => {
                 autoplay.pause();
+            });
+            
+            stepButtons.forEach((stepButton) => {
+                const progressBar = stepButton.querySelector('i');
+                stepButton.addEventListener('click', () => {
+                    progressBar.style.removeProperty("width");
+                })
             });
         }
     }
