@@ -30,8 +30,8 @@ let pagefindExclude = `
     .events__section, .block-agenda,
     .organizations__section, .block-organizations,
     .pages__section, .block-pages,
-    .persons__section, .block-persons, 
-    .posts__section, .block-posts, .post-sidebar, 
+    .persons__section, .block-persons,
+    .posts__section, .block-posts, .post-sidebar,
     .programs__section, .block-programs,
     .researchers__term,
     .teachers__term
@@ -50,12 +50,17 @@ if (command === "dev") {
     execute("hugo");
     execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --exclude-selectors '" + pagefindExclude + "'");
     execute("hugo server");
-    
 }
 
 if (command === "build") {
     execute("yarn upgrade");
     execute("hugo");
+    execute("npm_config_yes=true npx pagefind --site 'public' --exclude-selectors '" + pagefindExclude + "'");
+}
+
+if (command === "percy-build") {
+    execute("yarn upgrade");
+    execute("hugo --baseURL=/");
     execute("npm_config_yes=true npx pagefind --site 'public' --exclude-selectors '" + pagefindExclude + "'");
 }
 
