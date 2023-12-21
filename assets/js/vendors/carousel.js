@@ -39,7 +39,6 @@ class Carousel {
             });
 
             this.splide.on('autoplay:playing', (rate) => {
-                // toggleButton.classList.add('is-active');
 
                 var activeStepButton = this.splide.root.querySelector('.splide__pagination .is-active i');
                 activeStepButton.style.width = rate * 100 + '%';
