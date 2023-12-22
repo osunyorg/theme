@@ -83,14 +83,19 @@
       {{ end }}
     </div>
     <div class="media">
+      {{ $event_image := "" }}
       {{- if .Params.image -}}
+        {{ $event_image = .Params.image }}
+        {{- else if site.Params.events.default_image -}}
+        {{ $event_image = site.Data.website.default_image }}
+      {{ end }}
+      
+      {{- if or .Params.image site.Params.events.default_image -}}
         {{- partial "commons/image.html"
               (dict
-                "image"    .Params.image
+                "image"    $event_image
                 "sizes"    site.Params.image_sizes.sections.events.item
               ) -}}
-      {{- else if site.Params.events.default_image -}}
-        {{- partial "commons/image-default.html" -}}
       {{- end -}}
     </div>
   </article>
