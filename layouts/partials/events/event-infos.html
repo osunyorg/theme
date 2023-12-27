@@ -21,7 +21,7 @@
   {{ end }}
   {{ if .Params.events_categories }}
     <li>
-      <span>{{ i18n "events.category" (dict "Count" ( len .Params.events_categories )) }}</span>
+      <span>{{ i18n "events.category" ( len .Params.events_categories ) }}</span>
       {{ partial "events/categories.html" . }}
     </li>
   {{ end }}
@@ -32,13 +32,21 @@
 
   {{ with .Params.dates.add_to_calendar }}
     {{ $links := . }}
-    <li class="events-calendar">
+    <li class="events-actions">
       <span>{{ i18n "events.add_to_calendar.title" }}</span>
       {{- $types := slice "ical" "google" "office" "outlook" "yahoo" -}}
-      {{- range $types -}}
-        {{ $label := i18n (printf "events.add_to_calendar.%s" .) }}
-        {{ with index $links . }} 
-          <a href="{{ . }}" class="chip">{{ $label }}</a>
+      {{- range $type := $types -}}
+        {{ $label := i18n (printf "events.add_to_calendar.%s" $type) }}
+        {{ with index $links $type }} 
+          <a class="chip"
+            {{ if eq $type "ical" -}}
+              {{ printf `href="%s"` . | safeHTMLAttr }} download
+            {{ else }}
+              href="{{ . }}"
+              target="_blank"
+            {{ end }} >
+            {{- $label -}}
+          </a>
         {{- end }}
       {{- end }}
   </li>

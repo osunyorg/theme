@@ -6,12 +6,13 @@
     .lead
         @include h3
         // Safe spacing if post is empty
-    .document-content
-        min-height: 350px
-        &::after
-            content: ''
-            display: block
-            height: 1px
+    @include media-breakpoint-up(desktop)
+        .document-content
+            min-height: 600px
+            &::after
+                content: ''
+                display: block
+                height: 1px
 
 .events__section
     .archive-link
@@ -27,10 +28,8 @@
             text-align: left
 
 .event-infos
-    margin-bottom: 0
-    @include meta
     @include list-reset
-    font-size: $table-body-size
+    padding-bottom: $spacing3
     @include media-breakpoint-up(desktop)
         font-size: $table-body-size-desktop
     .event-date
@@ -39,9 +38,8 @@
         @include list-reset
     > li
         padding-top: $spacing0
-        padding-bottom: $spacing0
-        padding: 1rem 0
-        font-family: $body-font-family
+        &:not(:last-child)
+            padding-bottom: $spacing0
         > span
             @include meta
             color: $color-text-alt
@@ -52,11 +50,20 @@
             @include icon(arrow)
             &::before
                 padding-right: 0.3rem
-    a
-        @include link($color-accent)
     .events-categories
         display: flex
         gap: space(2)
+        a
+            @include link($color-accent)
+    .events-actions
+        align-items: start
+        display: flex
+        flex-direction: column
+        gap: space(1)
+        padding-bottom: 0
+        a
+            &::after
+                display: none
     .share
         a
             color: inherit
