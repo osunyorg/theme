@@ -26,7 +26,22 @@
     </li>
   {{ end }}
   <li>
-    <span>{{ i18n "posts.share" }}</span>
+    <span>{{ i18n "events.share" }}</span>
     {{ partial "commons/share.html" . }}
   </li>
+
+  {{ with .Params.dates.add_to_calendar }}
+    {{ $links := . }}
+    <li class="events-calendar">
+      <span>{{ i18n "events.add_to_calendar.title" }}</span>
+      {{- $types := slice "ical" "google" "office" "outlook" "yahoo" -}}
+      {{- range $types -}}
+        {{ $label := i18n (printf "events.add_to_calendar.%s" .) }}
+        {{ with index $links . }} 
+          <a href="{{ . }}" class="chip">{{ $label }}</a>
+        {{- end }}
+      {{- end }}
+  </li>
+  {{- end }}
+
 </ul>

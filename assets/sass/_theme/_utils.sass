@@ -443,25 +443,24 @@ $space-unit: 4 !default
     src: $src
 
 @mixin sidebar
+    @include media-breakpoint-down(desktop)
+        padding: 0 half($grid-gutter-sm)
+        margin-bottom: $spacing3
     @include in-page-with-sidebar
-        @include media-breakpoint-down(desktop)
-            padding: 0 half($grid-gutter-sm)
-            margin-bottom: $spacing3
-        @include media-breakpoint-up(desktop)
-            @include container-margin-left
-            margin-top: 0
-            top: 0
-            left: 0
-            height: 100%
-            position: absolute
-            width: col-outside-container(4)
-            &:not(.paper-sidebar)> div
-                @include sticky($spacing1)
-            .toc-container
-                border-top: 1px solid $color-border
-                padding-top: $spacing1
-                position: static
-                margin-left: 0
+        @include container-margin-left
+        margin-top: 0
+        top: 0
+        left: 0
+        height: 100%
+        position: absolute
+        width: col-outside-container(4)
+        &:not(.paper-sidebar)> div
+            @include sticky($spacing1)
+        .toc-container
+            border-top: 1px solid $color-border
+            padding-top: $spacing1
+            position: static
+            margin-left: 0
 
 // Old browsers support
 
