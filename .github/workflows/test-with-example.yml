@@ -2,7 +2,7 @@ name: Test with example
 
 on:
   pull_request:
-    types: [review_requested]
+    types: [opened, reopened]
 
 jobs:
   build:
@@ -14,3 +14,5 @@ jobs:
           repository_name: osuny-example
           new_branch_name: ${GITHUB_REF##*/}
           access_token: ${{ secrets.ACCESS_TOKEN}}
+
+# Il faudrait switcher le submodule sur la même branche 
