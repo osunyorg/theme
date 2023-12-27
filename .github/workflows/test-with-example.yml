@@ -1,0 +1,16 @@
+name: Test with example
+
+on:
+  pull_request:
+    types: [review_requested]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
+        with:
+          repository_owner: noesya
+          repository_name: osuny-example
+          new_branch_name: ${GITHUB_REF##*/}
+          access_token: ${{ secrets.ACCESS_TOKEN}}
