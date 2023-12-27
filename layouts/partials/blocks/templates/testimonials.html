@@ -20,16 +20,7 @@
         <div class="testimonials">
           {{- if $is_carousel }}
           <div class="splide" 
-              data-splide='{
-                  "arrows":false,
-                  "autoplay":true,
-                  "pauseOnHover":false,
-                  "pauseOnFocus":true,
-                  "type":"loop",
-                  "autoHeight":true,
-                  "interval":8000
-                }'
-              >
+              data-splide="{{ site.Params.blocks.testimonials.splide | encoding.Jsonify }}">
             <div class="splide__slider">
               <div class="splide__track">
                 <div class="splide__list">
