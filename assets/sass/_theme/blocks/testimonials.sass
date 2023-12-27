@@ -36,31 +36,29 @@
             margin-right: calc(#{$grid-gutter} / 2)
 
     .splide
-        display: flex
-        flex-direction: column-reverse
-        &__autoplay
-            bottom: auto
+        .splide__slider
+            display: flex
+            flex-direction: column-reverse
+        &__toggle
+            border: 1px solid $block-testimonials-pagination-background
+            border-radius: 50%
+            cursor: pointer
+            font-size: 0
+            height: 42px
+            padding: 0
+            position: absolute
+            right: 0
             top: 0
-            button
-                @include button-reset
-                font-size: px2rem(14)
-                line-height: 1
-                &::after
-                    border: 1px solid  $block-testimonials-pagination-background // TODO : variable
-                    border-radius: 50%
-                    content: ""
-                    height: 42px
-                    left: 50%
-                    position: absolute
-                    top: 50%
-                    transform: translate(-50%, -50%)
-                    width: 42px
+            width: 42px
+            font-size: 0
+            line-height: 1
+            span
+                color: $color-accent
                 &::before
-                    color: $color-accent
-            &:not(.is-active)
-                + .splide__pagination
-                    .is-active i
-                        width: 100% !important
+                    font-size: 42px
+        .splide__pagination
+            .is-active i
+                width: 100%
 
             .splide__play
                 &::before
