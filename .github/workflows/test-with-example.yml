@@ -22,14 +22,14 @@ jobs:
           git config user.email osuny@noesya.coop
           echo "== Creating new branch =="
           git checkout -b theme--${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
-          echo "== Navigating to theme =="
-          cd themes/osuny-hugo-theme-aaa
-          echo "== Fetching origin =="
-          git fetch origin
-          echo "== Checking out to branch ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} =="
-          git checkout ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
-          echo "== Navigating back to root =="
-          cd ../..
+      - name: Checkout submodule
+        uses: actions/checkout@v2
+        with:
+          repository: noesya/osuny-hugo-theme-aaa
+          token: ${{ secrets.OSUNY_EXAMPLE_TOKEN }}
+          path: themes/osuny-hugo-theme-aaa
+          ref: ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+      - run: |
           echo "== Pushing branch =="
           git add .
           git commit -m "Updated theme to ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} branch."
