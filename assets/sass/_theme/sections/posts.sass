@@ -21,9 +21,6 @@
         @include meta
         color: $color-text-alt
 
-.post-sidebar
-    @include sidebar
-
 .posts__section,
 .authors__term,
 .posts_categories__term,
@@ -85,6 +82,9 @@
         // Safe spacing if post is empty
     .document-content
         min-height: 350px
+    &:not(.full-width)
+        .post-sidebar
+            @include sidebar
 
 .post-categories
     @include list-reset
