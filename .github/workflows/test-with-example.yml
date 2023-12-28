@@ -29,7 +29,7 @@ jobs:
           repository: noesya/osuny-hugo-theme-aaa
           token: ${{ secrets.OSUNY_EXAMPLE_TOKEN }}
           path: themes/osuny-hugo-theme-aaa
-          ref: '${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}'
+          ref: ${{ github.head_ref || github.ref_name }}
       - name: Pushing new branch on Example
         run: |
           echo "== Pushing branch =="
