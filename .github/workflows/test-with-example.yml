@@ -8,11 +8,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: GuillaumeFalourd/create-other-repo-branch-action@v1.5
+      - name: Set new submodule in new branch on Osuny Example
+        uses: actions/checkout@v4
         with:
-          repository_owner: noesya
-          repository_name: osuny-example
-          new_branch_name: ${GITHUB_REF##*/}
-          access_token: ${{ secrets.ACCESS_TOKEN}}
-
-# Il faudrait switcher le submodule sur la même branche 
+          repository: noesya/osuny-example
+          submodules: 'recursive'
+          token: ${{ secrets.OSUNY_EXAMPLE_TOKEN }}
+      - run: |
+          git config user.name osuny-bot
+          git config user.email osuny@noesya.coop
+          git checkout -b theme--${GITHUB_HEAD_REF}
+          cd themes/osuny-hugo-theme-aaa
+          git checkout ${GITHUB_HEAD_REF}
+          cd ../..
+          git add .
+          git commit -m "Updated theme to ${GITHUB_HEAD_REF} branch."
+          git push
