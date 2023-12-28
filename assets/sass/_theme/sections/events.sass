@@ -6,6 +6,9 @@
     .lead
         @include h3
         // Safe spacing if post is empty
+    &:not(.full-width)
+        .event-sidebar
+            @include sidebar
     @include media-breakpoint-up(desktop)
         .document-content
             min-height: 600px
@@ -266,7 +269,3 @@
                 &:not(.event--with-image)
                     width: col(5)
                     margin-left: offset(4)
-
-
-.event-sidebar
-    @include sidebar
