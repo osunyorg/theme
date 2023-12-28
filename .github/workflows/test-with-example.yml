@@ -1,6 +1,9 @@
 name: Test with example
 
 on:
+  push:
+    branches:
+      - percy-workflow-example
   pull_request:
     types: [opened, reopened]
 
@@ -17,10 +20,17 @@ jobs:
       - run: |
           git config user.name osuny-bot
           git config user.email osuny@noesya.coop
-          git checkout -b theme--${GITHUB_HEAD_REF}
+          echo "== Creating new branch =="
+          git checkout -b theme--${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          echo "== Navigating to theme =="
           cd themes/osuny-hugo-theme-aaa
-          git checkout ${GITHUB_HEAD_REF}
+          echo "== Fetching origin =="
+          git fetch origin
+          echo "== Checking out to branch ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} =="
+          git checkout ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
+          echo "== Navigating back to root =="
           cd ../..
+          echo "== Pushing branch =="
           git add .
-          git commit -m "Updated theme to ${GITHUB_HEAD_REF} branch."
-          git push
+          git commit -m "Updated theme to ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} branch."
+          git push -f origin theme--${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
