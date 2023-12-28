@@ -17,19 +17,21 @@ jobs:
           repository: noesya/osuny-example
           submodules: 'recursive'
           token: ${{ secrets.OSUNY_EXAMPLE_TOKEN }}
-      - run: |
+      - name: Create new branch on Example
+        run: |
           git config user.name osuny-bot
           git config user.email osuny@noesya.coop
           echo "== Creating new branch =="
           git checkout -b theme--${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
       - name: Checkout submodule
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: noesya/osuny-hugo-theme-aaa
           token: ${{ secrets.OSUNY_EXAMPLE_TOKEN }}
           path: themes/osuny-hugo-theme-aaa
-          ref: ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
-      - run: |
+          ref: '${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}'
+      - name: Pushing new branch on Example
+        run: |
           echo "== Pushing branch =="
           git add .
           git commit -m "Updated theme to ${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}} branch."
