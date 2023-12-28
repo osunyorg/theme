@@ -116,18 +116,17 @@
                         flex-direction: column
                         span
                             order: 3
-    .document-content
-        &.sidebar-on-start
-            .section-sidebar
-                @include sidebar(start)
-            @include media-breakpoint-up(desktop)
+    @include in-page-with-sidebar
+        .document-content
+            &.sidebar-on-start
+                .section-sidebar
+                    @include sidebar(start)
                 .container
                     .content
                         padding-left: offset(4)
-        &.sidebar-on-end
-            .section-sidebar
-                @include sidebar(end)
-            @include media-breakpoint-up(desktop)
+            &.sidebar-on-end
+                .section-sidebar
+                    @include sidebar(end)
                 .container
                     .content
                         padding-right: offset(4)

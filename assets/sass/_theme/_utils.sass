@@ -11,7 +11,8 @@ $space-unit: 4 !default
 
 @mixin in-page-with-sidebar
     @include media-breakpoint-up(desktop)
-        body:not(.full-width) &
+        body:not(.full-width) &,
+        &:is(body):not(.full-width)
             @content
 
 @mixin in-page-without-sidebar
@@ -443,28 +444,24 @@ $space-unit: 4 !default
     src: $src
 
 @mixin sidebar($side: start)
-    @include media-breakpoint-down(desktop)
-        padding: 0 half($grid-gutter-sm)
-        margin-bottom: $spacing3
-    @include media-breakpoint-up(desktop)
-        @if $side == start
-            @include container-margin-left
-            left: 0
-        @else
-            @include container-margin-right
-            right: 0
-        margin-top: 0
-        top: 0
-        height: 100%
-        position: absolute
-        width: col-outside-container(4)
-        & > div
-            @include sticky($spacing1)
-        .toc-container
-            border-top: 1px solid $color-border
-            padding-top: $spacing1
-            position: static
-            margin-left: 0
+    @if $side == start
+        @include container-margin-left
+        left: 0
+    @else
+        @include container-margin-right
+        right: 0
+    margin-top: 0
+    top: 0
+    height: 100%
+    position: absolute
+    width: col-outside-container(4)
+    & > div
+        @include sticky($spacing1)
+    .toc-container
+        border-top: 1px solid $color-border
+        padding-top: $spacing1
+        position: static
+        margin-left: 0
 
 // Old browsers support
 
