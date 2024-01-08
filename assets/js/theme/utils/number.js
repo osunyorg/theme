@@ -1,3 +1,5 @@
+"use strict";
+
 Number.prototype.decimals = function () {
     if (Math.floor(this.valueOf()) === this.valueOf()) {
         return 0;
