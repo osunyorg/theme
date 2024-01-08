@@ -8,26 +8,26 @@
   {{- $show_status := .show_status -}}
   {{- $layout := .layout | default "list" -}}
   {{ if .category }}
-    {{- $term = site.GetPage (printf "/posts_categories%s" .category) -}}
+    {{- $term = site.GetPage (printf "/events_categories%s" .category) -}}
   {{ end }}
 
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
 
-        {{ $events_page_links := false }}
+        {{ $link := false }}
         {{- if $term }}
-          {{ $events_page_links = $term.Permalink }}
+          {{ $link = $term.Permalink }}
         {{- else -}}
-          {{ $events_page := site.GetPage "/posts" }}
-          {{ $events_page_links = $events_page.Permalink }}
+          {{ $events_page := site.GetPage "/events" }}
+          {{ $link = $events_page.Permalink }}
         {{- end -}}
 
         {{ partial "blocks/top.html" (dict
           "title" $block.title
           "heading_level" $block.ranks.self
           "description" .description
-          "link" $events_page_links
+          "link" $link
         )}}
 
         {{ if .events }}
