@@ -45,9 +45,9 @@
         <p class="event-status">
           {{ if eq .Params.dates.status "current"}}
             {{- i18n "blocks.events.current" -}}
-          {{ else if .Params.dates.status "future" }}
+          {{ else if eq .Params.dates.status "future" }}
             {{- i18n "blocks.events.future" -}}
-          {{ else if .Params.dates.status "archive" }}
+          {{ else if eq .Params.dates.status "archive" }}
               {{- i18n "blocks.events.archive" -}}
           {{ end }}
         </p>
