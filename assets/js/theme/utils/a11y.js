@@ -1,19 +1,15 @@
-const actionKeys = [
-  'Enter',
-  'Space'
-];
+"use strict";
 
-const a11yClick = function(element, action) {
-  element.addEventListener('click', action);
-  element.addEventListener('keydown', (event) => {
-    actionKeys.forEach(key => {
-      if (key === event.code) {
-        action(event);
-      }
-    })
-  });
-}
-
-export {
-  a11yClick
+window.osuny.a11y = {
+  actionKeys: ['Enter', 'Space'],
+  click: function a11yClick (element, action) {
+    element.addEventListener('click', action);
+    element.addEventListener('keydown', function (event) {
+      actionKeys.forEach(function (key) {
+        if (key === event.code) {
+          action(event);
+        }
+      });
+    });
+  }
 }

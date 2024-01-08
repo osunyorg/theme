@@ -1,6 +1,3 @@
-import { breakpoints } from '../utils/breakpoints';
-import { a11yClick } from '../utils/a11y';
-
 const CLASSES = {
     mainMenuOpened: 'is-opened',
     isAnimating: 'is-animating',
@@ -41,7 +38,7 @@ class MainMenu {
         });
 
         this.dropdownsButtons.forEach((button) => {
-            a11yClick(button, (event) => {
+            window.osuny.a11y.click(button, (event) => {
                 event.preventDefault();
                 this.toggleDropdown(button);
             });

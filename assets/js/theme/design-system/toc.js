@@ -1,5 +1,3 @@
-import { isMobile } from '../utils/breakpoints';
-
 const CLASSES = {
   offcanvasOpened: 'has-offcanvas-opened',
   linkActive: 'active',
