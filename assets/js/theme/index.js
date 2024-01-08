@@ -1,5 +1,3 @@
-window.osuny = {};
-
 import './body.js';
 import './design-system/clickToCopy';
 import './design-system/dropdowns';
