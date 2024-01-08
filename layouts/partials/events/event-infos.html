@@ -30,9 +30,7 @@
     {{ partial "commons/share.html" . }}
   </li>
 
-  {{ $eventTime := time.AsTime .Params.dates.from.day}}
-
-  {{ if gt $eventTime time.Now }}
+  {{ if .Params.dates.archive }}
     {{ with .Params.dates.add_to_calendar }}
       {{ $links := . }}
       <li class="events-actions">
