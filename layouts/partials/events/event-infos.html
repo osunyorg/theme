@@ -30,26 +30,28 @@
     {{ partial "commons/share.html" . }}
   </li>
 
-  {{ with .Params.dates.add_to_calendar }}
-    {{ $links := . }}
-    <li class="events-actions">
-      <span>{{ i18n "events.add_to_calendar.title" }}</span>
-      {{- $types := slice "ical" "google" "office" "outlook" "yahoo" -}}
-      {{- range $type := $types -}}
-        {{ $label := i18n (printf "events.add_to_calendar.%s" $type) }}
-        {{ with index $links $type }} 
-          <a class="chip"
-            {{ if eq $type "ical" -}}
-              {{ printf `href="%s"` . | safeHTMLAttr }} download
-            {{ else }}
-              href="{{ . }}"
-              target="_blank"
-            {{ end }} >
-            {{- $label -}}
-          </a>
+  {{ if not .Params.dates.archive }}
+    {{ with .Params.dates.add_to_calendar }}
+      {{ $links := . }}
+      <li class="events-actions">
+        <span>{{ i18n "events.add_to_calendar.title" }}</span>
+        {{- $types := slice "ical" "google" "office" "outlook" "yahoo" -}}
+        {{- range $type := $types -}}
+          {{ $label := i18n (printf "events.add_to_calendar.%s" $type) }}
+          {{ with index $links $type }} 
+            <a class="chip"
+              {{ if eq $type "ical" -}}
+                {{ printf `href="%s"` . | safeHTMLAttr }} download
+              {{ else }}
+                href="{{ . }}"
+                target="_blank"
+              {{ end }} >
+              {{- $label -}}
+            </a>
+          {{- end }}
         {{- end }}
-      {{- end }}
-  </li>
+    </li>
+    {{- end }}
   {{- end }}
 
 </ul>
