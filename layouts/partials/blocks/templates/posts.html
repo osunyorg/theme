@@ -11,18 +11,18 @@
     <div class="container">
       <div class="block-content">
         {{ if $block.title -}}
-          {{ $link := false }}
+          {{ $posts_page_link := false }}
           {{- if $term }}
-            {{ $link = $term.Permalink }}
+            {{ $posts_page_link = $term.Permalink }}
           {{- else if .all -}}
             {{ $posts_page := site.GetPage "/posts" }}
-            {{ $link = $posts_page.Permalink }}
+            {{ $posts_page_link = $posts_page.Permalink }}
           {{- end -}}
 
           {{ partial "blocks/top.html" (dict
             "title" $block.title
             "heading_level" $block.ranks.self
-            "link" $link
+            "link" $posts_page_link
           )}}
         {{- end }}
 
