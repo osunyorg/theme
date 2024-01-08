@@ -30,7 +30,7 @@
     {{ partial "commons/share.html" . }}
   </li>
 
-  {{ if .Params.dates.archive }}
+  {{ if not .Params.dates.archive }}
     {{ with .Params.dates.add_to_calendar }}
       {{ $links := . }}
       <li class="events-actions">
