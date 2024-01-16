@@ -1,19 +1,27 @@
 {{- $block := .block }}
 {{- $block_class := partial "GetBlockClass" .block -}}
-
 {{- with .block.data -}}
   {{- $show_summary := .show_summary -}}
   {{- $show_category := .show_category -}}
   {{- $show_status := .show_status -}}
   {{- $layout := .layout | default "list" -}}
-
+  
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
+        {{ $events_page := site.GetPage "/events" }}
+        {{ $link := $events_page.Permalink }}
+
+        {{ if .category }}
+          {{ $term := site.GetPage (printf "/posts_categories%s" .category) }}
+          {{ $link = $term.Permalink }}
+        {{ end }}
+        
         {{ partial "blocks/top.html" (dict
           "title" $block.title
           "heading_level" $block.ranks.self
           "description" .description
+          "link" $link
         )}}
 
         {{ if .events }}
