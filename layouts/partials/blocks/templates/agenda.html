@@ -13,7 +13,7 @@
         {{ $link := $events_page.Permalink }}
 
         {{ if .category }}
-          {{ $term := site.GetPage (printf "/posts_categories%s" .category) }}
+          {{ $term := site.GetPage (printf "/events_categories%s" .category) }}
           {{ $link = $term.Permalink }}
         {{ end }}
         
