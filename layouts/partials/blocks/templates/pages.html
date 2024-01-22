@@ -42,12 +42,16 @@
   <div class="{{ $block_class }} {{ $page_class }}">
     <div class="container">
       <div class="block-content">
+        {{ if $main_description }}
+          {{ $main_description = printf "<p>%s</p>" $main_description }}
+        {{ end }}
+
         {{ partial "blocks/top.html" (dict
           "title" $title
           "link" $page_link
           "heading_level" $block.ranks.self
-          "description" (printf "<p>%s</p>" $main_description)
-        )}}
+          "description" $main_description
+        ) }}
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
           "pages" .pages

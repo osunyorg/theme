@@ -2,7 +2,7 @@
     .top
         a
             text-decoration: none
-    .grid, .cards
+    .grid, .cards, .list
         article
             position: relative
             display: flex
@@ -128,34 +128,57 @@
     &--list
         ul
             @include list-reset
+            &.title-only
+                li
+                    line-height: 1
             li
                 display: block
-                line-height: 1
                 + li
                     margin-top: $spacing0
-                a
+                > a
                     @include icon(arrow, before, true)
                         padding-right: $spacing0
                     @include hover-translate-icon(before, 5)
                     @include link
                     text-decoration-color: rgba(0,0,0,0)
-
+                article
+                    .page-title
+                        @include h3
+                        a
+                            @include icon(arrow, after, true)
+                            @include hover-translate-icon(after)
+                            text-decoration-color: transparent
         @include media-breakpoint-down(desktop)
             .top
                 margin-bottom: $spacing0
             ul
                 margin-top: $spacing1
-
+        @include media-breakpoint-up(desktop)
+            ul:not(.title-only)
+                li + li
+                    margin-top: $grid-gutter
+                article
+                    gap: $grid-gutter
+                    flex-direction: row
+                    .media
+                        flex-shrink: 0
+                        margin-bottom: 0
         @include in-page-with-sidebar
             .block-content
                 .top
                     margin-bottom: $spacing1
-                ul
+                ul.title-only
                     @include grid(2, desktop)
                     grid-row-gap: $spacing0 !important
                     grid-column-gap: half($grid-gutter) !important
                     li
                         margin-top: 0
+                article
+                    gap: half($grid-gutter)
+                    .media
+                        width: calc(#{col(2, 8)} + #{half($grid-gutter)})
+                    .page-content
+                        width: col(6, 8)
 
         @include in-page-without-sidebar
             .block-title
@@ -176,7 +199,7 @@
                         @include body-text
                         margin-top: 0
                 // Default behavior (without page description)
-                ul
+                ul.title-only
                     @include grid(4, desktop)
                     grid-column: 1 / 13
                     li
@@ -188,6 +211,11 @@
                     display: block
                     li + li
                         margin-top: $spacing0
+                article
+                    .media
+                        width: col(2, 6)
+                    .page-content
+                        width: col(4, 6)
 
     &--alternate
         .top

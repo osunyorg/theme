@@ -1,5 +1,9 @@
 {{ $length := .length | default 150 }}
-
 {{ $text := replace .text "<" " <" }}
-{{ $text = chomp (truncate $length "…" (safeHTML (plainify $text))) }}
-{{ return $text }}
+
+{{ if gt .length 0 }}
+  {{ $text = chomp (truncate $length "…" (safeHTML (plainify $text))) }}
+  {{ return $text }}
+{{ else }}
+  {{ return .text }}
+{{ end }}
