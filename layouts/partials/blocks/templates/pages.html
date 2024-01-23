@@ -4,8 +4,6 @@
 {{- $layout := .block.data.layout | default "grid" -}}
 
 {{- with .block.data -}}
-
-  {{- $show_main_page := false -}}
   {{- $show_main_description := .show_main_description -}}
   {{- $show_descriptions := .show_descriptions -}}
   {{- $show_images := .show_images -}}
@@ -19,7 +17,6 @@
   {{ end }}
 
   {{- with $page }}
-    {{- $show_main_page = true -}}
     {{- $page_link = $page.Permalink }}
     {{ if eq $title "" }}
       {{ $title = .Title }}
@@ -39,13 +36,18 @@
     {{ end }}
   {{ end -}}
 
+  {{ if $main_description }}
+    {{/*  SHOULD BE FIXED WITH ORTHOTYPO  */}}
+    {{ $main_description = printf "<p>%s</p>" $main_description }}
+    {{ $block_class = printf "%s %s" $block_class "with-description" }}
+  {{ end }}
+  {{ if $show_images }}
+    {{ $block_class = printf "%s %s" $block_class "with-images" }}
+  {{ end }}
+
   <div class="{{ $block_class }} {{ $page_class }}">
     <div class="container">
       <div class="block-content">
-        {{ if $main_description }}
-          {{ $main_description = printf "<p>%s</p>" $main_description }}
-        {{ end }}
-
         {{ partial "blocks/top.html" (dict
           "title" $title
           "link" $page_link

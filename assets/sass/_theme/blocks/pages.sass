@@ -167,12 +167,16 @@
             .block-content
                 .top
                     margin-bottom: $spacing1
+                    .description
+                        margin-bottom: $spacing2
                 ul.title-only
                     @include grid(2, desktop)
                     grid-row-gap: $spacing0 !important
                     grid-column-gap: half($grid-gutter) !important
                     li
                         margin-top: 0
+                        a
+                            @include meta
                 article
                     gap: half($grid-gutter)
                     .media
@@ -184,38 +188,56 @@
             .block-title
                 a
                     @include stretched-link(before)
-            .block-content
-                @include grid
-                .top
-                    align-items: initial
-                    grid-column: 1 / 8
-                    margin-bottom: 0
-                    display: grid
-                    grid-template-rows: subgrid
-                    grid-row: span 2
-                    .block-title
-                        width: auto
-                    .description
-                        @include body-text
-                        margin-top: 0
-                // Default behavior (without page description)
+            .top
+                .description
+                    p
+                        @include h2
+            article
+                .media
+                    width: col(4)
+                .page-content
+                    width: col(8)
+            &:not(.with-description)
                 ul.title-only
-                    @include grid(4, desktop)
+                    @include grid(4, desktop, space(2))
                     grid-column: 1 / 13
                     li
                         margin-top: 0
-                // If page description
-                .top + ul
-                    grid-column: 9 / 13
-                    grid-row: 2
-                    display: block
+                ul:not(.title-only)
+                    @include grid(2, desktop)
                     li + li
-                        margin-top: $spacing0
-                article
-                    .media
-                        width: col(2, 6)
-                    .page-content
-                        width: col(4, 6)
+                        margin-top: 0
+            &.with-description
+                .block-content
+                    @include grid(12, desktop, $spacing2)
+                    row-gap: half($grid-gutter)
+                    .top
+                        align-items: initial
+                        grid-column: 1 / 8
+                        margin-bottom: 0
+                        display: grid
+                        grid-template-rows: subgrid
+                        grid-row: span 2
+                        .block-title
+                            width: auto
+                        .description
+                            @include body-text
+                            margin-top: 0
+                    // If page description
+                    .top + ul
+                        grid-column: 9 / 13
+                        grid-row: 2
+                        display: block
+                        li + li
+                            margin-top: $spacing0
+                            article
+                                margin-top: $spacing3
+                &.with-images
+                    .top
+                        grid-column: 1 / 7
+                    .top + ul
+                        grid-column: 7 / 13
+
 
     &--alternate
         .top
