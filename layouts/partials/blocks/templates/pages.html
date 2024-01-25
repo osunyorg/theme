@@ -25,14 +25,10 @@
       {{- $page_class = printf "block-page-%s" .Params.bodyclass }}
     {{ end }}
     {{ if $show_main_description }}
-      {{ if site.Params.pages.index.truncate_description }}
-        {{- $main_description = partial "GetTruncateContent" ( dict 
-            "text" .Params.summary
-            "length" site.Params.pages.index.truncate_description
-            ) -}}
-      {{ else }}
-        {{- $main_description = partial "PrepareText" .Params.summary -}}
-      {{ end }}
+      {{- $main_description = partial "GetTruncateContent" ( dict 
+          "text" .Params.summary
+          "length" site.Params.pages.index.truncate_description
+          ) -}}
     {{ end }}
   {{ end -}}
 

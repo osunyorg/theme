@@ -57,14 +57,10 @@
         {{- if (partial "GetTextFromHTML" .Params.summary) -}}
           <div class="event-description">
             <p itemprop="description">
-              {{ if site.Params.events.index.truncate_description }}
-                {{ partial "GetTruncateContent" ( dict 
-                  "text" .Params.summary
-                  "length" site.Params.events.index.truncate_description
-                  ) }}
-              {{ else }}
-                {{ partial "PrepareText" .Params.summary }}
-              {{ end }}
+              {{ partial "GetTruncateContent" ( dict 
+                "text" .Params.summary
+                "length" site.Params.events.index.truncate_description
+                ) }}
             </p>
           </div>
         {{- end -}}

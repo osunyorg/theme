@@ -6,4 +6,4 @@
   {{ $text = chomp (truncate $length "…" (safeHTML (plainify $text))) }}
 {{ end }}
 
-{{ return $text }}
+{{ return (partial "PrepareText" $text) }}

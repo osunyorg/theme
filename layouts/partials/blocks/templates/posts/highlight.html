@@ -34,14 +34,10 @@
             {{ end }}
             {{ if site.Params.posts.index.show_description }}
               {{- if (partial "GetTextFromHTML" .Params.summary) -}}
-                {{ if site.Params.posts.index.truncate_description }}
-                  <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
-                    "text" .Params.summary
-                    "length" site.Params.posts.index.truncate_description
-                    ) }}</p>
-                {{ else }}
-                  <p itemprop="articleBody">{{ partial "PrepareText" .Params.summary }}</p>
-                {{ end }}
+                <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
+                  "text" .Params.summary
+                  "length" site.Params.posts.index.truncate_description
+                  ) }}</p>
               {{- end -}}
             {{- end -}}
 
