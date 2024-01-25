@@ -24,14 +24,10 @@
         {{ $heading_tag.close }}
 
         {{ if and $show_descriptions .Params.summary }}
-          {{ if site.Params.pages.index.truncate_description }}
-            <p>{{ partial "GetTruncateContent" ( dict 
-              "text" .Params.summary
-              "length" site.Params.pages.index.truncate_description
-              ) }}</p>
-          {{ else }}
-            <p>{{ partial "PrepareText" .Params.summary }}</p>
-          {{ end }}
+          <p>{{ partial "GetTruncateContent" ( dict 
+            "text" .Params.summary
+            "length" site.Params.pages.index.truncate_description
+            ) }}</p>
         {{ end }}
 
         {{ if $show_images }}
