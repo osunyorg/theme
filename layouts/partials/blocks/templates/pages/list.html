@@ -28,7 +28,17 @@
             </div>
 
             {{ if $show_images }}
-              {{- partial "pages/page-media.html" . -}}
+              <div class="media">
+                {{- if .Params.image -}}
+                  {{- partial "commons/image.html"
+                        (dict
+                          "image"    .Params.image
+                          "sizes"    site.Params.image_sizes.blocks.pages.list
+                        ) -}}
+                {{- else -}}
+                  {{- partial "commons/image-default.html" -}}
+                {{- end -}}
+              </div>
             {{ end }}
           </article>
         {{ else }}
