@@ -24,10 +24,11 @@
   {{- end -}}
 {{- end -}}
 {{- $seoImage := "" -}}
-{{- $defaultImage := site.Data.website.default_image -}}
-{{- if $defaultImage -}}
-  
+{{- if os.FileExists "static/assets/images/share.png" -}}
   {{- $seoImage = printf "%s/assets/images/share.png" site.BaseURL -}}
+{{- end -}}
+{{- if os.FileExists "static/assets/images/share.jpg" -}}
+  {{- $seoImage = printf "%s/assets/images/share.jpg" site.BaseURL -}}
 {{- end -}}
 {{- $ogImage := $seoImage -}}
 {{- $twitterImage := $seoImage -}}
@@ -90,4 +91,3 @@ Limiter le tracking par le CDN
 https://framagit.org/chatons/CHATONS/-/issues/200#note_1987024
 */}}
 <meta name="referrer" content="no-referrer">
-  

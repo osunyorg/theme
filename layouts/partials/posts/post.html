@@ -49,19 +49,14 @@
 
   </div>
   <div class="media">
-    {{ $post_image := "" }}
     {{- if .Params.image -}}
-      {{ $post_image = .Params.image }}
-      {{- else if site.Params.posts.default_image -}}
-      {{ $post_image = site.Data.website.default_image }}
-    {{ end }}
-    
-    {{- if or .Params.image site.Params.posts.default_image -}}
       {{- partial "commons/image.html"
-            (dict
-              "image"    $post_image
-              "sizes"    site.Params.image_sizes.sections.posts.item
-            ) -}}
+          (dict
+            "image"    .Params.image
+            "sizes"    site.Params.image_sizes.sections.posts.item
+          ) -}}
+    {{- else if site.Data.website.default_image -}}
+      {{- partial "commons/image-default.html" -}}
     {{- end -}}
   </div>
 </article>

@@ -45,10 +45,10 @@
         <p class="event-status">
           {{ if eq .Params.dates.status "current"}}
             {{- i18n "blocks.events.current" -}}
-          {{ else if .Params.dates.status "future" }}
+          {{ else if eq .Params.dates.status "future" }}
             {{- i18n "blocks.events.future" -}}
-          {{ else if .Params.dates.status "archive" }}
-              {{- i18n "blocks.events.archive" -}}
+          {{ else if eq .Params.dates.status "archive" }}
+            {{- i18n "blocks.events.archive" -}}
           {{ end }}
         </p>
       {{ end }}
@@ -83,20 +83,15 @@
       {{ end }}
     </div>
     <div class="media">
-      {{ $event_image := "" }}
       {{- if .Params.image -}}
-        {{ $event_image = .Params.image }}
-        {{- else if site.Params.events.default_image -}}
-        {{ $event_image = site.Data.website.default_image }}
-      {{ end }}
-      
-      {{- if or .Params.image site.Params.events.default_image -}}
         {{- partial "commons/image.html"
-              (dict
-                "image"    $event_image
-                "sizes"    site.Params.image_sizes.sections.events.item
-              ) -}}
-      {{- end -}}
+            (dict
+              "image"    .Params.image
+              "sizes"    site.Params.image_sizes.sections.events.item
+            ) -}}
+        {{- else if site.Data.website.default_image -}}
+          {{- partial "commons/image-default.html" -}}
+        {{- end -}}
     </div>
   </article>
 {{ end }}

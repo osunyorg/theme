@@ -1,18 +1,4 @@
-{{- if os.FileExists "static/assets/images/default.png" -}}
-  {{ $file := "/assets/images/default.png" }}
-  {{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file "static" true) }}
-  {{- $lazy := default true .lazy -}}
-  <img alt="" src="{{ $file }}" width="{{ index $fileDimensions 1 }}" height="{{ index $fileDimensions 0 }}"
-    {{- if .class }} class="{{ .class }}"{{- end -}}
-    {{- if $lazy }} loading="lazy"{{- end -}}
-    >
-{{ else if os.FileExists "static/assets/images/default.jpg" }}
-  {{ $file := "/assets/images/default.jpg" }}
-  {{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file "static" true) }}
-  {{- $lazy := default true .lazy -}}
-  <img alt="" src="{{ $file }}" width="{{ index $fileDimensions 1 }}" height="{{ index $fileDimensions 0 }}"
-    {{- if .class }} class="{{ .class }}"{{- end -}}
-    {{- if $lazy }} loading="lazy"{{- end -}}
-    >
-{{- end -}}
-
+{{- partial "commons/image.html"
+  (dict
+    "image"    site.Data.website.default_image
+  ) -}}
