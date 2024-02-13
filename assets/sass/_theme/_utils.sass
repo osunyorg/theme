@@ -399,11 +399,12 @@ $space-unit: 4 !default
     position: relative
     .dropdown-menu
         margin-top: $header-nav-padding-y
-        padding-left: $spacing1
-        padding-bottom: $spacing0
-        padding-top: $spacing0
-        padding-right: $spacing1
         right: 0
+        @include media-breakpoint-up(desktop)
+            padding-left: $spacing1
+            padding-bottom: $spacing0
+            padding-top: $spacing0
+            padding-right: $spacing1
     li a
         padding-bottom: half($spacing0)
         padding-top: half($spacing0)
