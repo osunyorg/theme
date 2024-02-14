@@ -1,4 +1,16 @@
-{{- partial "commons/image.html"
-  (dict
-    "image"    site.Data.website.default_image
-  ) -}}
+{{ if and site.Params.events.default_image site.Data.website.default_image }}
+  
+  {{ $type := .type}}
+  {{ $image := site.Data.website.default_image }}
+
+  {{ with index site.Params.image_sizes.sections $type }}
+    {{ $sizes := .items }}
+
+    {{- partial "commons/image.html"
+      (dict
+        "image"    $image
+        "sizes"    $sizes
+      ) -}}
+  {{ end }}
+
+{{ end }}

@@ -53,10 +53,10 @@
       {{- partial "commons/image.html"
           (dict
             "image"    .Params.image
-            "sizes"    site.Params.image_sizes.sections.posts.item
+            "sizes"    site.Params.image_sizes.sections.events.item
           ) -}}
-    {{- else if site.Data.website.default_image -}}
-      {{- partial "commons/image-default.html" -}}
+    {{- else -}}
+      {{- partial "commons/image-default.html" (dict "type" "posts") -}}
     {{- end -}}
   </div>
 </article>
