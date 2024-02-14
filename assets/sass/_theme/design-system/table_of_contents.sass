@@ -7,7 +7,7 @@
     bottom: 0
     margin-top: 0
     z-index: $zindex-toc
-    width: calc(#{col-outside-container(4)} + var(--grid-gutter) * 2)
+    width: calc(#{columns(4)} + var(--grid-gutter) * 2)
     transform: translateX(100%)
     transition: var(--toc-transition-duration) transform ease-in-out
     @include media-breakpoint-down(desktop)
@@ -92,7 +92,7 @@
         background: $toc-background-color
         left: 0
         width: 100%
-        padding: 0 half(var(--grid-gutter))
+        padding: 0 var(--grid-gutter)
         z-index: $zindex-toc-cta
     button
         @include button-icon(toc)

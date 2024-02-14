@@ -30,23 +30,19 @@
 
     &--grid
         .gallery
-            align-items: baseline
             @include in-page-with-sidebar
-                @include flexbox-grid(3, half(var(--grid-gutter)))
+                @include flexbox-grid(2)
             @include in-page-without-sidebar
                 @include flexbox-grid(4)
             @include media-breakpoint-down(desktop)
-                @include flexbox-grid(2, half(var(--grid-gutter)))
+                @include flexbox-grid(2)
             &--with-text
                 @include in-page-without-sidebar
-                    @include flexbox-grid(4, half(var(--grid-gutter)), var(--grid-gutter))
+                    @include flexbox-grid(4)
                 figure
                     display: flex
                     flex-direction: column
                     gap: space(3)
-                    figcaption
-                        &::after
-                            content: ' '
     &--carousel
         overflow: hidden
         position: relative
@@ -58,11 +54,6 @@
         .block-gallery + &,
         .block-pages--cards + &
             margin-top: 0
-        .container
-            .top
-                padding-right: half(var(--grid-gutter))
-                @include media-breakpoint-up(desktop)
-                    padding-right: half(var(--grid-gutter))
         .splide
             display: flex
             flex-direction: column
