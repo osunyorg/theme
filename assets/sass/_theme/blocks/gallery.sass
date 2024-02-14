@@ -32,14 +32,14 @@
         .gallery
             align-items: baseline
             @include in-page-with-sidebar
-                @include flexbox-grid(3, half($grid-gutter))
+                @include flexbox-grid(3, half(var(--grid-gutter)))
             @include in-page-without-sidebar
                 @include flexbox-grid(4)
             @include media-breakpoint-down(desktop)
-                @include flexbox-grid(2, half($grid-gutter-sm))
+                @include flexbox-grid(2, half(var(--grid-gutter)))
             &--with-text
                 @include in-page-without-sidebar
-                    @include flexbox-grid(4, half($grid-gutter), $grid-gutter)
+                    @include flexbox-grid(4, half(var(--grid-gutter)), var(--grid-gutter))
                 figure
                     display: flex
                     flex-direction: column
@@ -53,16 +53,16 @@
         z-index: 0
         @include in-page-without-sidebar
             background: $block-gallery-carousel-background
-            padding-bottom: $grid-gutter
-            padding-top: $grid-gutter
+            padding-bottom: var(--grid-gutter)
+            padding-top: var(--grid-gutter)
         .block-gallery + &,
         .block-pages--cards + &
             margin-top: 0
         .container
             .top
-                padding-right: half($grid-gutter-sm)
+                padding-right: half(var(--grid-gutter))
                 @include media-breakpoint-up(desktop)
-                    padding-right: half($grid-gutter)
+                    padding-right: half(var(--grid-gutter))
         .splide
             display: flex
             flex-direction: column
@@ -72,7 +72,7 @@
                         opacity: 0.1
             &__track
                 overflow: visible
-                margin-right: half(-$grid-gutter-sm)
+                margin-right: half(-var(--grid-gutter))
                 @include in-page-with-sidebar
                     .splide__slide
                         transition: opacity  .3s ease
@@ -82,13 +82,13 @@
                         &.is-active
                             opacity: 1
                 @include media-breakpoint-up(desktop)
-                    margin-right: half(-$grid-gutter)
+                    margin-right: half(-var(--grid-gutter))
             &__slide
                 flex-shrink: initial
                 &:last-child
                     padding-right: 20%
             figure
-                margin-right: half($grid-gutter)
+                margin-right: half(var(--grid-gutter))
                 @include media-breakpoint-down(desktop)
                     display: flex
                     flex-direction: column
@@ -99,7 +99,7 @@
                         max-height: $block-gallery-carousel-max-height
                         width: auto
                         height: auto
-                        max-width: calc(100vw - #{$grid-gutter-sm} * 2)
+                        max-width: calc(100vw - #{var(--grid-gutter)} * 2)
                         @include media-breakpoint-up(desktop)
                             height: $block-gallery-carousel-max-height
                             width: auto
@@ -110,7 +110,7 @@
                         margin-top: space(2)
 
             &__arrows
-                margin-left: px2rem(-18)
+                margin-left: pxToRem(-18)
                 order: 2
                 @media (min-height: 800px)
                     padding-top: space(10)
@@ -131,10 +131,10 @@
         @include in-page-without-sidebar
             .splide
                 figure
-                    margin-left: $grid-gutter
-                    margin-right: half(-$grid-gutter)
+                    margin-left: var(--grid-gutter)
+                    margin-right: half(-var(--grid-gutter))
                 &__slide
                     &:first-child
-                        margin-left: $grid-gutter
+                        margin-left: var(--grid-gutter)
                 &__track
-                    margin-left: -$grid-gutter
+                    margin-left: -var(--grid-gutter)

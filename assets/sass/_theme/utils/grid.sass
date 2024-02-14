@@ -1,0 +1,58 @@
+@mixin container
+    margin-left: auto
+    margin-right: auto
+    max-width: $grid-max-width
+    padding-left: var(--grid-gutter)
+    padding-right: var(--grid-gutter)
+    width: 100%
+
+// This must be used for content inside columns
+@function columns($quantity)
+    $width: calc( (var(--column-width) * #{$quantity}) + var(--grid-gutter) * ( #{$quantity} - 1 )) // V2: Plus lisible ?
+    @return #{$width}
+
+@mixin grid($cols: 12, $breakpoint: false, $gap-y: var(--grid-gutter), $gap-x: var(--grid-gutter))
+    word-break: break-word
+    @if $breakpoint
+        @include media-breakpoint-up($breakpoint)
+            display: grid
+            grid-gap: $gap-y $gap-x
+            grid-template-columns: repeat($cols, 1fr)
+    @else
+        display: grid
+        grid-gap: $gap-y $gap-x
+        grid-template-columns: repeat($cols, 1fr)
+    @include media-breakpoint-down(desktop)
+        grid-gap: var(--grid-gutter)
+
+@mixin flexbox-grid($cols: 12, $gap-y: var(--grid-gutter), $gap-x: $gap-y)
+    display: flex
+    flex-wrap: wrap
+    gap: $gap-y $gap-x
+    > *
+        flex: 0 0 calc(#{100 / $cols}% - #{$gap-x} * #{($cols - 1) / $cols} )
+
+// This must be used for offset, outside columns
+@function offset($quantity, $base: 12)
+    $quantity-on-base: $quantity / $base * 12
+    $width: calc( (100% + var(--grid-gutter)) / 12 * #{$quantity-on-base} )
+    @return #{$width}
+
+// This must be used for offset, inside columns
+@function col-offset($quantity, $base: 12)
+    $quantity-on-base: $quantity / $base * 12
+    $width: calc( (100% + var(--grid-gutter)) / 12 * #{$quantity-on-base} + var(--grid-gutter))
+    @return #{$width}
+
+@function col-outside-container($quantity, $base: 12)
+    $responsive-grid-width: Min(100vw, (#{$grid-max-width}))
+    @return calc((#{$responsive-grid-width} + var(--grid-gutter) * 2) / #{$base} * #{$quantity} - var(--grid-gutter) * 2)
+
+@function container-margin-x
+    @return Max(var(--grid-gutter), calc(50vw - #{$grid-max-width} / 2 + var(--grid-gutter)))
+
+@mixin container-margin-left
+    margin-left: container-margin-x()
+
+@mixin container-margin-right
+    margin-right: container-margin-x()

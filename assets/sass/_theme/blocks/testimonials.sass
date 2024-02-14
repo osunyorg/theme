@@ -8,7 +8,7 @@
             font-style: $block-testimonials-style
             color: $block-testimonials-color
             @include media-breakpoint-up(desktop)
-                font-size: px2rem(30) // TODO : on peut peut-être la sortir avec du RFS ?
+                font-size: pxToRem(30) // TODO : on peut peut-être la sortir avec du RFS ?
             @include media-breakpoint-up(xl)
                 font-size: $block-testimonials-xl-font-size
                 line-height: $block-testimonials-xl-line-height
@@ -28,12 +28,12 @@
             display: block
     .avatar
         flex-shrink: 0
-        width: calc(#{columns(1)} + #{$grid-gutter} / 2)
-        min-width: px2rem(80)
+        width: calc(#{columns(1)} + var(--grid-gutter) / 2)
+        min-width: pxToRem(80)
         margin-right: $spacing0
         margin-bottom: 0
         @include media-breakpoint-up(desktop)
-            margin-right: calc(#{$grid-gutter} / 2)
+            margin-right: calc(var(--grid-gutter) / 2)
 
     .splide
         .splide__slider
@@ -98,7 +98,7 @@
         figure
             padding-right: offset(3)
             // TODO: explain this, add min height equal with 2 cols width to avoid overflow on square picture
-            min-height: calc(#{col-outside-container(2)} + #{half($grid-gutter)})
+            min-height: calc(#{col-outside-container(2)} + #{half(var(--grid-gutter))})
             &.with-picture
                 padding-right: offset(1)
                 padding-left: offset(3)
@@ -110,7 +110,7 @@
                         position: absolute
                         left: columns(1)
                         top: 0
-                        margin-left: $grid-gutter
+                        margin-left: var(--grid-gutter)
                         width: columns(2)
 
         // TODO : en discuter en créa

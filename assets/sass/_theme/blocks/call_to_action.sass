@@ -62,7 +62,7 @@
                     &:last-child
                         margin-bottom: 0
         .call_to_action--with-image
-            padding-top: half($grid-gutter-sm)
+            padding-top: half(var(--grid-gutter))
             display: flex
             flex-direction: column
             > *
@@ -80,7 +80,7 @@
             > div
                 // TODO : simplifier l'application d'une couleur de fond sur le CTA avec sidebar et sans sidebar
                 background-color: var(--cta-background-color)
-                padding: $grid-gutter columns(1)
+                padding: var(--grid-gutter) columns(1)
                 width: 100%
                 position: relative
                 &::after
@@ -91,7 +91,7 @@
                     top: 0
                     bottom: 0
                     left: 100%
-                    width: Max(#{$grid-gutter}, calc(50vw - #{half($grid-max-width)} + #{$grid-gutter}))
+                    width: Max(var(--grid-gutter), calc(50vw - #{half($grid-max-width)} + var(--grid-gutter)))
             &--with-image
                 picture
                     order: 1
@@ -100,18 +100,18 @@
                     position: relative
                     z-index: 2
                     img
-                        margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
+                        margin-bottom: calc(-var(--grid-gutter) + -#{$spacing1})
                 > div
-                    padding-top: calc(#{$grid-gutter} + #{$spacing3})
+                    padding-top: calc(var(--grid-gutter) + #{$spacing3})
 
     @include in-page-without-sidebar
         background-color: var(--cta-background-color)
         padding-top: 0
         padding-bottom: 0
         .block-content
-            padding: $spacing4 $grid-gutter
-            margin-left: -$grid-gutter
-            margin-right: -$grid-gutter
+            padding: $spacing4 var(--grid-gutter)
+            margin-left: -var(--grid-gutter)
+            margin-right: -var(--grid-gutter)
         .call_to_action--with-image
             @include grid
             > div

@@ -1,0 +1,10 @@
+$space-unit: 4 !default
+@function space($spaces: 1)
+    @return #{$spaces * $space-unit / 16}rem
+
+@function pxToRem($size)
+    $remSize: $size / 16
+    @return #{$remSize}rem
+
+@function half($size)
+    @return calc(#{$size} / 2)

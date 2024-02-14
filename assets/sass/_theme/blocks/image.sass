@@ -15,13 +15,13 @@
                 @include meta
     picture
         display: block
-        margin-left: half(-$grid-gutter-sm)
-        margin-right: half(-$grid-gutter-sm)
+        margin-left: half(-var(--grid-gutter))
+        margin-right: half(-var(--grid-gutter))
 
     @include in-page-with-sidebar
         picture
             margin-left: 0
-            margin-right: -$grid-gutter
+            margin-right: -var(--grid-gutter)
         img
             max-height: $block-image-max-height-with-sidebar
             width: auto
@@ -44,21 +44,21 @@
                 align-items: flex-end
                 > a 
                     width: columns(7)
-                    margin-left: half($grid-gutter)
+                    margin-left: half(var(--grid-gutter))
                     display: block
                     order: 2
                 picture
                     margin-left: 0
-                    margin-right: -$grid-gutter
+                    margin-right: -var(--grid-gutter)
                 figcaption
-                    width: calc(#{columns(5)} + #{$grid-gutter} / 2)
+                    width: calc(#{columns(5)} + var(--grid-gutter) / 2)
                     order: 1
                     display: block
                     text-align: right
         &.image-landscape
             picture
-                margin-left: -$grid-gutter
-                margin-right: -$grid-gutter
+                margin-left: -var(--grid-gutter)
+                margin-right: -var(--grid-gutter)
                 @media screen and (min-width: $grid-max-width)
                     margin-left: 0
                     margin-right: 0

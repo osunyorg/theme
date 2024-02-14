@@ -13,11 +13,11 @@
                 border: 1px solid $color-border
                 display: flex
                 flex-shrink: 0
-                height: px2rem(60)
+                height: pxToRem(60)
                 justify-content: center
                 margin-right: $spacing0
                 transition: background 0.3s ease, border 0.3s ease
-                width: px2rem(60)
+                width: pxToRem(60)
             &:hover
                 &::before
                     background-color: $color-text
@@ -41,8 +41,8 @@
 
     @include in-page-with-sidebar
         .files
-            @include grid(2, desktop, half($grid-gutter))
+            @include grid(2, desktop, half(var(--grid-gutter)))
 
     @include in-page-without-sidebar
         .files
-            @include grid(3, desktop, half($grid-gutter))
+            @include grid(3, desktop, half(var(--grid-gutter)))

@@ -139,7 +139,7 @@
                     grid-column: 10 / 13
             @include media-breakpoint-up(desktop)
                 flex-direction: row
-                gap: $grid-gutter
+                gap: var(--grid-gutter)
                 align-items: start
                 &-content
                     width: columns(10)
@@ -219,9 +219,9 @@
             display: flex
             flex-direction: row
             position: relative
-            grid-gap: $grid-gutter
+            grid-gap: var(--grid-gutter)
             + .event 
-                margin-top: $grid-gutter
+                margin-top: var(--grid-gutter)
             &-content
                 a 
                     @include stretched-link
@@ -257,8 +257,8 @@
                 flex-direction: column
                 grid-gap: 0
                 .media
-                    margin-left: calc(-#{$grid-gutter-sm} /2)
-                    margin-right: calc(-#{$grid-gutter-sm} /2)
+                    margin-left: calc(-#{var(--grid-gutter)} /2)
+                    margin-right: calc(-#{var(--grid-gutter)} /2)
                     aspect-ratio: 1
                     img 
                         margin-bottom: $spacing0
