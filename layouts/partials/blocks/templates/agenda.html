@@ -1,36 +1,49 @@
 {{- $block := .block }}
 {{- $block_class := partial "GetBlockClass" .block -}}
-
 {{- with .block.data -}}
   {{- $show_summary := .show_summary -}}
   {{- $show_category := .show_category -}}
   {{- $show_status := .show_status -}}
   {{- $layout := .layout | default "list" -}}
-
+  
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
+        {{ $events_page := site.GetPage "/events" }}
+        {{ $link := $events_page.Permalink }}
+
+        {{ if .category }}
+          {{ $term := site.GetPage (printf "/events_categories%s" .category) }}
+          {{ $link = $term.Permalink }}
+        {{ end }}
+        
         {{ partial "blocks/top.html" (dict
           "title" $block.title
           "heading_level" $block.ranks.self
           "description" .description
+          "link" $link
         )}}
 
-        <div class="events events--{{- $layout -}}">
-          {{ range .events }}
-            {{ $event := site.GetPage .file }}
-            {{ with $event }}
-                {{ partial "events/event" (dict
-                  "event" .
-                  "layout" $layout
-                  "show_summary" $show_summary
-                  "show_category" $show_category
-                  "show_status" $show_status
-                  "heading" (printf "h%d" $block.ranks.children)
-                ) }}
+        {{ if .events }}
+          <div class="events events--{{- $layout -}}">
+            {{ range .events }}
+              {{ $event := site.GetPage .file }}
+              {{ with $event }}
+                  {{ partial "events/event" (dict
+                    "event" .
+                    "layout" $layout
+                    "show_summary" $show_summary
+                    "show_category" $show_category
+                    "show_status" $show_status
+                    "heading" (printf "h%d" $block.ranks.children)
+                  ) }}
+              {{ end }}
             {{ end }}
-          {{ end }}
-        </div>
+          </div>
+        {{ else if .no_event_message }}
+          <p>{{ partial "PrepareHTML" .no_event_message }}</p>
+        {{ end }}
+
       </div>
     </div>
   </div>

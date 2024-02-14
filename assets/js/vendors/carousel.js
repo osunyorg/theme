@@ -21,10 +21,8 @@ class Carousel {
 
     init () {
         this.splide = new Splide(this.element).mount();
-        const toggleButton = this.splide.root.querySelector('.splide__autoplay'),
-            stepButtons = this.splide.root.querySelectorAll('.splide__pagination button'),
-            elements = this.splide.root.querySelectorAll('.splide__pagination, .splide__slide'),
-            autoplay = this.splide.Components.Autoplay;
+        const toggleButton = this.splide.root.querySelector('.splide__toggle'),
+            stepButtons = this.splide.root.querySelectorAll('.splide__pagination button');
 
         this.listen();
 
@@ -33,27 +31,16 @@ class Carousel {
                 stepButton.innerHTML = '<i></i>';
             });
 
-            this.splide.on('autoplay:play', () => {
-                toggleButton.classList.add('is-active');
-            });
-
             this.splide.on('autoplay:playing', (rate) => {
-                var activeStepButton = this.splide.root.querySelector('.splide__pagination .is-active i');
+                const activeStepButton = this.splide.root.querySelector('.splide__pagination .is-active i');
                 activeStepButton.style.width = rate * 100 + '%';
             });
 
-            this.splide.on('autoplay:pause', () => {
-                toggleButton.classList.remove('is-active');
-            });
-
-            elements.forEach(element => {
-                element.addEventListener('click', () => {
-                    autoplay.pause();
+            stepButtons.forEach((stepButton) => {
+                const progressBar = stepButton.querySelector('i');
+                stepButton.addEventListener('click', () => {
+                    progressBar.style.removeProperty("width");
                 })
-            });
-
-            this.splide.on('drag', () => {
-                autoplay.pause();
             });
         }
     }

@@ -9,8 +9,8 @@
   )}}
 {{ end }}
 
-{{ with site.Data.website.social }}
-  {{ $site_social_links := index . }}
+{{ with (or site.Params.social site.Data.website.social) }}
+  {{ $site_social_links := . }}
   {{ if $site_social_links }}
     <ul class="footer-social site-links">
       {{ with $site_social_links.email}}
@@ -35,7 +35,7 @@
       {{ end}}
       {{ with $site_social_links.github}}
       <li class="github">
-        <a href="{{ . }}" rel="noreferrer" title="Github" target="_blank">Github</a>
+        <a href="{{ . }}" rel="noreferrer" title="Github" target="_blank">GitHub</a>
       </li>
       {{ end}}
       {{ with $site_social_links.linkedin}}

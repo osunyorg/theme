@@ -145,6 +145,36 @@
     }
   }
 
+  .img-debug {
+    font-size: 1.1rem; 
+    line-height: 1.2;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-family: sans-serif;
+    white-space: nowrap;
+    opacity: 0.9;
+  }
+
+  .img-debug small {
+    font-size: 0.9rem; 
+    font-family: sans-serif;
+    display: none;
+  }
+
+  .img-debug:hover small {
+    display: block;
+  }
+
+  .img-debug.is-bad {
+    background: tomato;
+    color: black;
+  }
+
 </style>
 
 <script>
@@ -156,6 +186,9 @@
     }
     if (e.ctrlKey && e.key === 'w') {
       document.body.classList.toggle('full-width');
+    }
+    if (e.ctrlKey && e.key === 'i') {
+      showImageDimension();
     }
   });
 
@@ -174,23 +207,61 @@
     })
   })
 
-  function responsiveImageDebugOutput(img) {
-    if (!img) {
-      throw new TypeError("Expected an image node. Got none.");
-    }
-    const listener = function () {
-      const pixelRatio = window.devicePixelRatio > 1 ? 2 : 1;
-      const dimensionWidth = img.naturalWidth * pixelRatio;
-      const dimensionHeight = img.naturalHeight * pixelRatio;
-      console.log(`
-        -------------------------
-        Rendered size: ${img.width}x${img.height}
-        Intrinsic size: ${dimensionWidth}x${dimensionHeight}
-        Device Pixel Ratio: ${window.devicePixelRatio}
-        -------------------------
-      `);
-    };
-    if (img.complete) listener();
-    //img.addEventListener('load', listener);
+  function showImageDimension() {
+    document.querySelectorAll('img').forEach(img => {
+      const listener = function () {
+        // Return if svg
+        if (img.src.split('.')[1] === 'svg') return;
+
+        const threshold = 0.2, // 20% of tolerance
+          parent = img.parentElement,
+          pixelRatio = window.devicePixelRatio,
+          dimensions = {
+            width: img.naturalWidth * pixelRatio,
+            height: img.naturalHeight * pixelRatio
+          },
+          target = {
+            width: img.width * window.devicePixelRatio,
+            height: img.height * window.devicePixelRatio
+          },
+          essential = 
+`<b>Loaded</b> : ${dimensions.width}x${dimensions.height}\n
+<b>Needed</b> : ${target.width}x${target.height}`,
+          result =`
+  Rendered size: ${img.width}x${img.height}
+  Intrinsic size: ${dimensions.width}x${dimensions.height}
+  Device Pixel ratio: ${window.devicePixelRatio}`,
+          p = parent.querySelector('.img-debug') || document.createElement('p'),
+          small = document.createElement('small');
+        
+        small.innerText = result;
+        p.innerHTML = essential
+        p.append(small);
+        p.classList.add('img-debug');
+        const ratio = getImageRatio(dimensions, target)
+        if (ratio > threshold) {
+          p.classList.add('is-bad');
+        } else {
+          p.classList.remove('is-bad');
+        }
+
+        const debug = img.querySelector('.img-debug');
+        if (debug) parent.removeChild();
+
+        parent.append(p);
+        parent.style.position = 'relative';
+      };
+
+      if (img.complete) listener();
+      img.addEventListener('load', listener);
+      window.addEventListener('resize', listener);
+    });
+  }
+
+  function getImageRatio(source, target) {
+    const widthRatio = Math.abs((source.width - target.width) / Math.max(source.width, target.width)),
+      heightRatio = Math.abs((source.height - target.height) / Math.max(source.height, target.height));
+
+    return (widthRatio + heightRatio) / 2;
   }
 </script>

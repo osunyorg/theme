@@ -4,8 +4,6 @@
 {{- $layout := .block.data.layout | default "grid" -}}
 
 {{- with .block.data -}}
-
-  {{- $show_main_page := false -}}
   {{- $show_main_description := .show_main_description -}}
   {{- $show_descriptions := .show_descriptions -}}
   {{- $show_images := .show_images -}}
@@ -19,7 +17,6 @@
   {{ end }}
 
   {{- with $page }}
-    {{- $show_main_page = true -}}
     {{- $page_link = $page.Permalink }}
     {{ if eq $title "" }}
       {{ $title = .Title }}
@@ -28,16 +25,21 @@
       {{- $page_class = printf "block-page-%s" .Params.bodyclass }}
     {{ end }}
     {{ if $show_main_description }}
-      {{ if site.Params.pages.index.truncate_description }}
-        {{- $main_description = partial "GetTruncateContent" ( dict 
-            "text" .Params.summary
-            "length" site.Params.pages.index.truncate_description
-            ) -}}
-      {{ else }}
-        {{- $main_description = partial "PrepareText" .Params.summary -}}
-      {{ end }}
+      {{- $main_description = partial "GetTruncateContent" ( dict 
+          "text" .Params.summary
+          "length" site.Params.pages.index.truncate_description
+          ) -}}
     {{ end }}
   {{ end -}}
+
+  {{ if $main_description }}
+    {{/*  SHOULD BE FIXED WITH ORTHOTYPO  */}}
+    {{ $main_description = printf "<p>%s</p>" $main_description }}
+    {{ $block_class = printf "%s %s" $block_class "with-description" }}
+  {{ end }}
+  {{ if $show_images }}
+    {{ $block_class = printf "%s %s" $block_class "with-images" }}
+  {{ end }}
 
   <div class="{{ $block_class }} {{ $page_class }}">
     <div class="container">
@@ -46,8 +48,8 @@
           "title" $title
           "link" $page_link
           "heading_level" $block.ranks.self
-          "description" (printf "<p>%s</p>" $main_description)
-        )}}
+          "description" $main_description
+        ) }}
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
           "pages" .pages
