@@ -31,19 +31,18 @@
             a
                 @include link($block-chapter-layout-accent-color)
 
-    &--alt_background, &--accent_background
+    &--alt_background, 
+    &--accent_background
         margin-bottom: 0
-        + .block-chapter--alt_background, + .block-chapter--accent_background
+        + .block-chapter--alt_background, 
+        + .block-chapter--accent_background
             margin-top: 0
 
     @include media-breakpoint-down(desktop)
-        &--alt_background, &--accent_background
+        &--alt_background,
+        &--accent_background
             padding-top: var(--grid-gutter)
             padding-bottom: var(--grid-gutter)
-
-        &--with-image
-            &.block-chapter--alt_background, &.block-chapter--accent_background
-                padding-top: half(var(--grid-gutter))
 
     @include in-page-with-sidebar
         figure
@@ -51,7 +50,8 @@
             &.image-portrait,
             &.image-square
                 max-width: columns(4)
-        &--alt_background, &--accent_background
+        &--alt_background,
+        &--accent_background
             background: none
             padding-bottom: 0
             padding-top: 0
@@ -61,15 +61,16 @@
                 margin-bottom: 0
                 figcaption
                     padding-left: var(--grid-gutter)
-
         &--alt_background
             .chapter
                 background: $block-chapter-layout-alt-background
         &--accent_background
             .chapter
                 background: $block-chapter-layout-accent-background
+
     @include in-page-without-sidebar
-        &--alt_background, &--accent_background
+        &--alt_background, 
+        &--accent_background
             padding-top: var(--grid-gutter)
             padding-bottom: var(--grid-gutter)
             margin-bottom: 0
