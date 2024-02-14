@@ -91,18 +91,19 @@
                     top: 0
                     bottom: 0
                     left: 100%
-                    width: Max(var(--grid-gutter), calc(50vw - #{half($grid-max-width)} + var(--grid-gutter)))
+                    // Calcul de la largeur nécessaire pour remplir l'espace droit entre le container et le bord droit de la fenêtre
+                    width: Max(var(--grid-gutter), calc((100vw - var(--grid-width)) / 2 + var(--grid-gutter)))
             &--with-image
                 picture
                     order: 1
                     padding-left: columns(1)
-                    padding-right: offset(4, 8)
+                    padding-right: offset(4)
                     position: relative
                     z-index: 2
                     img
                         margin-bottom: calc(var(--grid-gutter-negative) + -#{$spacing1})
                 > div
-                    padding-top: calc(var(--grid-gutter) + #{$spacing3})
+                    padding-top: calc(var(--grid-gutter) * 2 + #{$spacing1})
 
     @include in-page-without-sidebar
         background-color: var(--cta-background-color)
