@@ -4,7 +4,7 @@
     {{- $has_text = true -}}
   {{ end -}}
 {{ end -}}
-<div class="gallery{{- if $has_text }} gallery--with-text {{ end -}}" role="group">
+<div class="gallery{{- if $has_text }} gallery--with-text {{ end -}}">
   {{ range .images }}
     {{ if .id }}
       {{- $image := partial "GetMedia" .id -}}
