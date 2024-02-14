@@ -57,8 +57,6 @@
         @include media-breakpoint-up(desktop)
             .grid
                 @include grid(2, desktop)
-                @include in-page-with-sidebar
-                    grid-column-gap: half($grid-gutter) !important
                 @include in-page-without-sidebar
                     @include grid(3, desktop)
 
@@ -74,8 +72,6 @@
             @include top-flex
         .cards
             @include grid(2, desktop)
-            @include in-page-with-sidebar
-                grid-gap: half($grid-gutter) !important
             @include in-page-without-sidebar
                 @include grid(3, desktop)
         // TODO: move this //
@@ -167,20 +163,15 @@
             .block-content
                 .top
                     margin-bottom: $spacing1
-                    // .description
-                    //     margin-bottom: $spacing2
                 ul.title-only
                     @include grid(2, desktop)
-                    grid-row-gap: $spacing0 !important
-                    grid-column-gap: half($grid-gutter) !important
                     li
                         margin-top: 0
                         a
                             @include meta
                 article
-                    gap: half($grid-gutter)
                     .media
-                        width: calc(#{col(2, 8)} + #{half($grid-gutter)})
+                        width: calc(#{col(2, 8)} 
                     .page-content
                         width: col(6, 8)
 
@@ -199,7 +190,7 @@
                     width: col(8)
             &:not(.with-description)
                 ul.title-only
-                    @include grid(4, desktop, space(2))
+                    @include grid(4, desktop)
                     grid-column: 1 / 13
                     li
                         margin-top: 0
@@ -209,8 +200,7 @@
                         margin-top: 0
             &.with-description
                 .block-content
-                    @include grid(12, desktop, $spacing2)
-                    row-gap: half($grid-gutter)
+                    @include grid(12, desktop)
                     .top
                         align-items: initial
                         grid-column: 1 / 8
