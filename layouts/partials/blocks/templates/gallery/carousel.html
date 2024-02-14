@@ -14,6 +14,12 @@
       {{- $image := partial "GetMedia" .file -}}
       {{- if $image -}}
         <figure {{ if $is_carousel }} class="splide__slide"{{ end }}>
+          {{ partial "commons/image.html"
+            (dict
+              "image"    .id
+              "alt"      .alt
+              "sizes"    site.Params.image_sizes.blocks.gallery.carousel
+            )}}
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             <a  class="glightbox"
                 role="button"
@@ -21,14 +27,6 @@
                 href="{{ partial "GetLightboxUrl" (dict "id" .id) }}"
                 title="{{- i18n "commons.lightbox.link.title" -}}"
                 aria-label="{{- i18n "commons.lightbox.link.title" -}}">
-          {{ end }}
-              {{ partial "commons/image.html"
-                (dict
-                  "image"    .id
-                  "alt"      .alt
-                  "sizes"    site.Params.image_sizes.blocks.gallery.carousel
-                )}}
-          {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             </a>
           {{ end }}
           {{ if or .text .credit }}
