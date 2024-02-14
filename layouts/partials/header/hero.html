@@ -39,6 +39,12 @@
       {{- end -}}
       {{- if .image }}
         <figure>
+          {{ partial "commons/image.html"
+            (dict
+              "image"    .image
+              "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
+              "lazy"     false
+            ) }}
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             <a  class="glightbox"
                 role="button"
@@ -46,14 +52,6 @@
                 href="{{ partial "GetLightboxUrl" .image }}"
                 title="{{- i18n "commons.lightbox.link.title" -}}"
                 aria-label="{{- i18n "commons.lightbox.link.title" -}}">
-          {{ end }}
-            {{ partial "commons/image.html"
-              (dict
-                "image"    .image
-                "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
-                "lazy"     false
-              ) }}
-          {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             </a>
           {{ end }}
             {{ if partial "GetTextFromHTML" .image.credit }}
