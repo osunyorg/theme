@@ -48,7 +48,7 @@
           {{ else if eq .Params.dates.status "future" }}
             {{- i18n "blocks.events.future" -}}
           {{ else if eq .Params.dates.status "archive" }}
-              {{- i18n "blocks.events.archive" -}}
+            {{- i18n "blocks.events.archive" -}}
           {{ end }}
         </p>
       {{ end }}
@@ -81,12 +81,12 @@
     <div class="media">
       {{- if .Params.image -}}
         {{- partial "commons/image.html"
-              (dict
-                "image"    .Params.image
-                "sizes"    site.Params.image_sizes.sections.events.item
-              ) -}}
-      {{- else if site.Params.events.default_image -}}
-        {{- partial "commons/image-default.html" -}}
+            (dict
+              "image"    .Params.image
+              "sizes"    site.Params.image_sizes.sections.events.item
+            ) -}}
+      {{- else -}}
+        {{- partial "commons/image-default.html" "events" -}}
       {{- end -}}
     </div>
   </article>
