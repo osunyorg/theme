@@ -136,10 +136,10 @@ $space-unit: 4 !default
         flex: 0 0 calc(#{100 / $cols}% - #{$gap-x} * #{($cols - 1) / $cols} )
 
 // This must be used for content inside columns
-@function col($quantity, $base: 12)
-    $quantity-on-base: $quantity / $base * 12
-    $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} - #{$grid-gutter} )
+@function columns($quantity)
+    $width: calc( (#{$column-width} * #{$quantity}) + #{$grid-gutter} * ( #{$quantity} - 1 )) // V2: Plus lisible ?
     @return #{$width}
+
 
 // This must be used for offset, outside columns
 @function offset($quantity, $base: 12)
@@ -346,12 +346,12 @@ $space-unit: 4 !default
         align-items: baseline
         display: flex
         .block-title
-            width: col(4)
+            width: columns(4)
             &:not(.hidden) + .description
                 margin-left: $grid-gutter
         .description
             margin-top: 0
-            width: col(8)
+            width: columns(8)
 
 @mixin collapsed-figcaption
     figcaption

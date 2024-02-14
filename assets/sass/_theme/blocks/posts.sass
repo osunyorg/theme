@@ -100,15 +100,15 @@
                     @include media-breakpoint-up(xl)
                         .media,
                         .post-content
-                            width: calc(#{col(4, 8)} + #{half($grid-gutter)})
+                            width: calc(#{columns(4)} + #{half($grid-gutter)})
         @include in-page-without-sidebar
             .large
                 .post
                     gap: $grid-gutter
                     .media
-                        width: col(6)
+                        width: columns(6)
                     .post-content
-                        width: col(5)
+                        width: columns(5)
                 p[itemprop="articleBody"]
                     margin-top: calc(#{$spacing1} + #{$spacing0})
     &--list
@@ -151,9 +151,9 @@
                 + article
                     margin-top: $spacing1
                 .media
-                    width: calc(#{col(2, 8)} + #{half($grid-gutter)})
+                    width: calc(#{columns(2)} + #{half($grid-gutter)})
                 .post-content
-                    width: col(6, 8)
+                    width: columns(6)
                     margin-left: half($grid-gutter)
 
         @include in-page-without-sidebar
@@ -163,9 +163,9 @@
                 padding-bottom: $spacing3
                 position: relative
                 .media
-                    width: col(3)
+                    width: columns(3)
                 .post-content
-                    width: col(6)
+                    width: columns(6)
                 + article
                     margin-top: $spacing3
                 .post-meta
@@ -215,10 +215,10 @@
                 .post
                     flex-direction: row
                     .media
-                        width: calc(#{col(3, 8)} + #{half($grid-gutter)})
+                        width: calc(#{columns(3)} + #{half($grid-gutter)})
                         margin-bottom: 0
                     .post-content
-                        width: col(5, 8)
+                        width: columns(5)
                         margin-left: half($grid-gutter)
             .list
                 article
@@ -277,14 +277,14 @@
 
         @include in-page-with-sidebar
             .post
-                width: col(4,8)
+                width: columns(4)
 
         @include in-page-without-sidebar
-            width: col(10)
+            width: columns(10)
             margin-left: auto
             margin-right: auto
             .post
-                width: col(4, 10)
+                width: columns(4)
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts

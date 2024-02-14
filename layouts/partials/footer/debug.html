@@ -190,6 +190,9 @@
     if (e.ctrlKey && e.key === 'i') {
       showImageDimension();
     }
+    if (e.ctrlKey && e.key === 'p') {
+      openInProd();
+    }
   });
 
   window.addEventListener('pointermove', e => {
@@ -264,4 +267,9 @@
 
     return (widthRatio + heightRatio) / 2;
   }
+
+  function openInProd() {
+    console.log('{{ .Site.BaseURL }}')
+  }
+
 </script>

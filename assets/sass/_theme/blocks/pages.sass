@@ -180,9 +180,9 @@
                 article
                     gap: half($grid-gutter)
                     .media
-                        width: calc(#{col(2, 8)} + #{half($grid-gutter)})
+                        width: calc(#{columns(2)} + #{half($grid-gutter)})
                     .page-content
-                        width: col(6, 8)
+                        width: columns(6)
 
         @include in-page-without-sidebar
             .block-title
@@ -194,9 +194,9 @@
                         @include h2
             article
                 .media
-                    width: col(4)
+                    width: columns(4)
                 .page-content
-                    width: col(8)
+                    width: columns(8)
             &:not(.with-description)
                 ul.title-only
                     @include grid(4, desktop, space(2))
@@ -247,7 +247,7 @@
                 aspect-ratio: unset
         @include media-breakpoint-up(desktop)
             article
-                width: col(4, 8)
+                width: columns(4)
                 &:not(:first-child)
                     margin-top: -5%
                 &:nth-child(even)
@@ -263,11 +263,11 @@
                 .description
                     @include body-text
             .grid
-                width: col(10)
+                width: columns(10)
                 margin-left: auto
                 margin-right: auto
                 article
-                    width: col(4, 10)
+                    width: columns(4)
     &--large
         .top
             @include top-flex
@@ -309,6 +309,6 @@
                     @include lead
                     margin-bottom: space(4)
                 &-content
-                    width: col(5)
+                    width: columns(5)
                 .media 
-                    width: col(6)
+                    width: columns(6)
