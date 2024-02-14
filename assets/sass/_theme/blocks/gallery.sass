@@ -72,7 +72,7 @@
                         opacity: 0.1
             &__track
                 overflow: visible
-                margin-right: half(-var(--grid-gutter))
+                margin-right: half(var(--grid-gutter-negative))
                 @include in-page-with-sidebar
                     .splide__slide
                         transition: opacity  .3s ease
@@ -82,7 +82,7 @@
                         &.is-active
                             opacity: 1
                 @include media-breakpoint-up(desktop)
-                    margin-right: half(-var(--grid-gutter))
+                    margin-right: half(var(--grid-gutter-negative))
             &__slide
                 flex-shrink: initial
                 &:last-child
@@ -132,9 +132,9 @@
             .splide
                 figure
                     margin-left: var(--grid-gutter)
-                    margin-right: half(-var(--grid-gutter))
+                    margin-right: half(var(--grid-gutter-negative))
                 &__slide
                     &:first-child
                         margin-left: var(--grid-gutter)
                 &__track
-                    margin-left: -var(--grid-gutter)
+                    margin-left: var(--grid-gutter-negative)
