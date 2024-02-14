@@ -116,14 +116,17 @@ $space-unit: 4 !default
 
 @mixin grid($cols: 12, $breakpoint: false, $gap-y: $grid-gutter, $gap-x: $grid-gutter)
     word-break: break-word
-    display: grid
-    row-gap: $gap-y
-    column-gap: $gap-x
     @if $breakpoint
+        // Pas de grid sous le breakpoint
         @include media-breakpoint-up($breakpoint)
+            display: grid
+            row-gap: $gap-y
+            column-gap: $gap-x
             grid-template-columns: repeat($cols, 1fr)
     @else
-        grid-template-columns: repeat($cols, 1fr)
+        display: grid
+        row-gap: $gap-y
+        column-gap: $gap-x
 
 // This must be used for content inside columns
 @function col($quantity, $base: 12)
