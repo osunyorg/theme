@@ -1,9 +1,9 @@
-{{ if and site.Params.events.default_image site.Data.website.default_image }}
-  
-  {{ $type := .type}}
-  {{ $image := site.Data.website.default_image }}
+{{ $section_type := .}}
+{{ $use_default := (index site.Params $section_type).default_image}}
+{{ $image := site.Data.website.default_image }}
 
-  {{ with index site.Params.image_sizes.sections $type }}
+{{ if and $use_default $image }}
+  {{ with index site.Params.image_sizes.sections $section_type }}
     {{ $sizes := .items }}
 
     {{- partial "commons/image.html"
@@ -12,5 +12,4 @@
         "sizes"    $sizes
       ) -}}
   {{ end }}
-
 {{ end }}
