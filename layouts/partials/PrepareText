@@ -1,6 +1,6 @@
-{{ $text := . }}
-{{ $text = replace $text "\r\n" "\n" }}
-{{ $text = replace $text "\r" "\n" }}
-{{ $text = replace $text "\n" "<br/>" }}
-{{ $text = $text | safeHTML }}
-{{ return $text}}
+{{ 
+return
+  safeHTML ( 
+    . 
+  ) 
+}}
