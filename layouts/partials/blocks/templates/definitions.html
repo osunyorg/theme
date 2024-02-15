@@ -12,8 +12,8 @@
         <div class="definitions">
           {{- range .elements }}
             <details itemscope itemtype="https://schema.org/DefinedTerm">
-              <summary itemprop="name">{{ partial "PrepareText" .title }}</summary>
-              <p itemprop="description">{{ partial "PrepareText" .description }}</p>
+              <summary itemprop="name">{{ .title | safeHTML }}</summary>
+              <p itemprop="description">{{ .description | safeHTML }}</p>
             </details>
           {{ end -}}
         </div>
