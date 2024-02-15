@@ -34,7 +34,7 @@
         //     text-decoration-color: transparent
         &[aria-expanded]
             @include icon(caret, after)
-                margin-left: px2rem(5)
+                margin-left: pxToRem(5)
                 transition: transform 0.15s
             &[aria-expanded="true"]
                 &::after
@@ -120,11 +120,11 @@
                         .container
                             align-items: baseline
                             display: flex
-                            gap: $grid-gutter
+                            gap: var(--grid-gutter)
                         .dropdown-menu-title
-                            width: col(5)
+                            width: columns(5)
                         .nav-level-2
-                            width: col(7)
+                            width: columns(7)
                             li
                                 margin-bottom: $spacing0
             @else
@@ -216,7 +216,7 @@
     a
         text-decoration: none
         padding: $spacing0
-        font-size: px2rem(24)
+        font-size: pxToRem(24)
         &:hover
             opacity: 0.7
         &::after

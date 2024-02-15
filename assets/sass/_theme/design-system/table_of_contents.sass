@@ -7,11 +7,11 @@
     bottom: 0
     margin-top: 0
     z-index: $zindex-toc
-    width: calc(#{col-outside-container(4)} + #{$grid-gutter} * 2)
+    width: calc(#{columns(4)} + var(--grid-gutter) * 2)
     transform: translateX(100%)
     transition: var(--toc-transition-duration) transform ease-in-out
     @include media-breakpoint-down(desktop)
-        width: calc(100% - #{$grid-gutter})
+        width: calc(100% - var(--grid-gutter))
     &.is-opened
         transform: translateX(0)
     &[aria-hidden="true"]
@@ -26,8 +26,8 @@
         padding: $spacing0 $spacing1
         @include media-breakpoint-up(desktop)
             font-size: $toc-title-font-size-desktop
-            padding: $header-nav-padding-y $grid-gutter calc(#{$header-nav-padding-y} + 1px)
-            padding: calc((var(--header-height)) / 2 - #{$body-size}) $grid-gutter
+            padding: $header-nav-padding-y var(--grid-gutter) calc(#{$header-nav-padding-y} + 1px)
+            padding: calc((var(--header-height)) / 2 - #{$body-size}) var(--grid-gutter)
             padding-top: 0
             padding-bottom: 0
             line-height: calc(var(--header-height) - 1px)
@@ -41,7 +41,7 @@
             flex: 1
             padding: $spacing1
             @include media-breakpoint-up(desktop)
-                padding: $spacing1 $grid-gutter
+                padding: $spacing1 var(--grid-gutter)
             > li:first-child
                 margin-top: 0
     button
@@ -62,7 +62,7 @@
             padding-top: 0
             padding-bottom: 0
             line-height: var(--header-height)
-            right: $grid-gutter
+            right: var(--grid-gutter)
             &::after
                 margin-left: $spacing0
 
@@ -92,7 +92,7 @@
         background: $toc-background-color
         left: 0
         width: 100%
-        padding: 0 half($grid-gutter-sm)
+        padding: 0 var(--grid-gutter)
         z-index: $zindex-toc-cta
     button
         @include button-icon(toc)
@@ -123,14 +123,14 @@
 
     // Only desktop and in page with sidebar
     @include in-page-with-sidebar
-        @include container-margin-left
+        margin-left: grid-external-space()
         pointer-events: none
         top: 0
         left: 0
         margin-top: 0
         height: 100%
         position: absolute
-        width: col-outside-container(4)
+        width: columns(4)
         .toc-content
             overflow-y: auto
             max-height: calc(100vh - var(--header-height))

@@ -124,10 +124,10 @@
                     flex-direction: row
                     gap: $spacing1
                     .media
-                        width: col(4)
+                        width: columns(4)
                     &-content
                         order: 1
-                        width: col(8)
+                        width: columns(8)
             @include media-breakpoint-down(md)
                 .media
                     max-width: 33%
@@ -139,15 +139,15 @@
                     grid-column: 10 / 13
             @include media-breakpoint-up(desktop)
                 flex-direction: row
-                gap: $grid-gutter
+                gap: var(--grid-gutter)
                 align-items: start
                 &-content
-                    width: col(10)
+                    width: columns(10)
                     > hgroup, > .event-title
                         margin-bottom: $spacing0
                 .media
                     order: 2
-                    width: col(2)
+                    width: columns(2)
             @include in-page-without-sidebar
                 &-dates
                     margin-top: 0
@@ -219,9 +219,9 @@
             display: flex
             flex-direction: row
             position: relative
-            grid-gap: $grid-gutter
+            grid-gap: var(--grid-gutter)
             + .event 
-                margin-top: $grid-gutter
+                margin-top: var(--grid-gutter)
             &-content
                 a 
                     @include stretched-link
@@ -245,7 +245,7 @@
                     width: 100%
             @include media-breakpoint-up(desktop)
                 .media
-                    width: col(4, 8)
+                    width: columns(4)
                 &-dates
                     @include h3
                     margin-bottom: $spacing2
@@ -257,8 +257,8 @@
                 flex-direction: column
                 grid-gap: 0
                 .media
-                    margin-left: calc(-#{$grid-gutter-sm} /2)
-                    margin-right: calc(-#{$grid-gutter-sm} /2)
+                    margin-left: var(--grid-gutter-negative)
+                    margin-right: var(--grid-gutter-negative)
                     aspect-ratio: 1
                     img 
                         margin-bottom: $spacing0
@@ -267,5 +267,5 @@
                 &-dates
                     @include h3
                 &:not(.event--with-image)
-                    width: col(5)
+                    width: columns(5)
                     margin-left: offset(4)

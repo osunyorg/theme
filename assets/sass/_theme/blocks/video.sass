@@ -42,10 +42,10 @@
                 width: $spacing4
                 z-index: 3
                 &::before
-                    font-size: px2rem(100)
+                    font-size: pxToRem(100)
                     transition: color .3s ease
                     vertical-align: middle
-                    padding-left: px2rem(5)
+                    padding-left: pxToRem(5)
                 &:hover
                     background-color: white
                     &::before
@@ -54,8 +54,8 @@
                     height: $spacing3
                     width: $spacing3
                     &::before
-                        font-size: px2rem(40)
-                        padding-left: px2rem(3)
+                        font-size: pxToRem(40)
+                        padding-left: pxToRem(3)
         iframe
             background: black
         + p
@@ -63,8 +63,8 @@
 
     @include media-breakpoint-down(desktop)
         .video
-            margin-left: half(-$grid-gutter-sm)
-            margin-right: half(-$grid-gutter-sm)
+            margin-left: var(--grid-gutter-negative)
+            margin-right: var(--grid-gutter-negative)
 
     @include in-page-without-sidebar
         background: $block-video-background

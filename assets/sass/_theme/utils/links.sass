@@ -1,0 +1,27 @@
+@mixin link($color: $link-color, $unhover_decorated: true)
+    color: $color
+    text-decoration-line: underline
+    text-decoration-thickness: $link-underline-thickness
+    text-underline-offset: $link-underline-offset
+    transition: $link-transition
+    @if $unhover_decorated
+        text-decoration-color: rgba($color, $link-unhover-decoration-color-alpha)
+    @else 
+        text-decoration-color: transparent
+    &:hover
+        text-decoration-color: rgba($color, 1)
+        text-decoration-thickness: $link-underline-thickness
+
+@mixin link-hovered-underline-only
+    &:not(:hover)
+        text-decoration: transparent
+
+@mixin stretched-link($pseudo-element: after)
+    &::#{$pseudo-element}
+        bottom: 0
+        content: ''
+        left: 0
+        position: absolute
+        right: 0
+        top: 0
+        z-index: $zindex-stretched-link

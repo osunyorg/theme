@@ -58,14 +58,14 @@
             .grid
                 @include grid(2, desktop)
                 @include in-page-with-sidebar
-                    grid-column-gap: half($grid-gutter) !important
+                    grid-column-gap: half(var(--grid-gutter)) !important
                 @include in-page-without-sidebar
                     @include grid(3, desktop)
 
     &--cards
         background-color: $block-pages-card-background
-        padding-bottom: $grid-gutter
-        padding-top: $grid-gutter
+        padding-bottom: var(--grid-gutter)
+        padding-top: var(--grid-gutter)
         *:not(.heading) + &
             margin-top: 0
         .blocks &:last-of-type
@@ -75,7 +75,7 @@
         .cards
             @include grid(2, desktop)
             @include in-page-with-sidebar
-                grid-gap: half($grid-gutter) !important
+                grid-gap: half(var(--grid-gutter)) !important
             @include in-page-without-sidebar
                 @include grid(3, desktop)
         // TODO: move this //
@@ -156,9 +156,9 @@
         @include media-breakpoint-up(desktop)
             ul:not(.title-only)
                 li + li
-                    margin-top: $grid-gutter
+                    margin-top: var(--grid-gutter)
                 article
-                    gap: $grid-gutter
+                    gap: var(--grid-gutter)
                     flex-direction: row
                     .media
                         flex-shrink: 0
@@ -172,17 +172,17 @@
                 ul.title-only
                     @include grid(2, desktop)
                     grid-row-gap: $spacing0 !important
-                    grid-column-gap: half($grid-gutter) !important
+                    grid-column-gap: half(var(--grid-gutter)) !important
                     li
                         margin-top: 0
                         a
                             @include meta
                 article
-                    gap: half($grid-gutter)
+                    gap: half(var(--grid-gutter))
                     .media
-                        width: calc(#{col(2, 8)} + #{half($grid-gutter)})
+                        width: calc(#{columns(2)} + #{half(var(--grid-gutter))})
                     .page-content
-                        width: col(6, 8)
+                        width: columns(6)
 
         @include in-page-without-sidebar
             .block-title
@@ -194,9 +194,9 @@
                         @include h2
             article
                 .media
-                    width: col(4)
+                    width: columns(2)
                 .page-content
-                    width: col(8)
+                    width: columns(4)
             &:not(.with-description)
                 ul.title-only
                     @include grid(4, desktop, space(2))
@@ -210,7 +210,7 @@
             &.with-description
                 .block-content
                     @include grid(12, desktop, $spacing2)
-                    row-gap: half($grid-gutter)
+                    row-gap: half(var(--grid-gutter))
                     .top
                         align-items: initial
                         grid-column: 1 / 8
@@ -247,7 +247,7 @@
                 aspect-ratio: unset
         @include media-breakpoint-up(desktop)
             article
-                width: col(4, 8)
+                width: columns(4)
                 &:not(:first-child)
                     margin-top: -5%
                 &:nth-child(even)
@@ -263,11 +263,11 @@
                 .description
                     @include body-text
             .grid
-                width: col(10)
+                width: columns(10)
                 margin-left: auto
                 margin-right: auto
                 article
-                    width: col(4, 10)
+                    width: columns(4)
     &--large
         .top
             @include top-flex
@@ -279,7 +279,7 @@
                 @include icon(arrow, after, true)
                 @include hover-translate-icon(after)
             &:hover .more:after
-                transform: translateX(#{px2rem(10)})
+                transform: translateX(#{pxToRem(10)})
             &-title a    
                 @include stretched-link
             .media
@@ -288,7 +288,7 @@
         @include media-breakpoint-up(desktop)
             .page
                 flex-direction: row
-                gap: $grid-gutter
+                gap: var(--grid-gutter)
 
         @include in-page-with-sidebar
             .page
@@ -309,6 +309,6 @@
                     @include lead
                     margin-bottom: space(4)
                 &-content
-                    width: col(5)
+                    width: columns(5)
                 .media 
-                    width: col(6)
+                    width: columns(6)

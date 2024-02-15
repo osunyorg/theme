@@ -1,0 +1,65 @@
+@mixin in-page-with-sidebar
+    @include media-breakpoint-up(desktop)
+        body:not(.full-width) &
+            @content
+
+@mixin in-page-without-sidebar
+    @include media-breakpoint-up(desktop)
+        main > .blocks &,
+        body.full-width &,
+            @content
+
+// Use this mixin to override with-aside or without-aside rules
+@mixin in-page-with-or-without-sidebar
+    @include media-breakpoint-up(desktop)
+        body:not(.full-width) &,
+        main > .blocks &,
+        body.full-width &,
+            @content
+
+// Aliases
+@mixin full-page
+    @include in-page-without-sidebar
+        @content
+
+@mixin not-full-page
+    @include in-page-with-sidebar
+        @content
+
+// Section Program
+@mixin in-page-program
+    .programs__section &
+        @content
+
+@mixin sticky($offset-y: 0)
+    position: sticky
+    top: $offset-y
+    @if $header-sticky-enabled
+        transition: top $header-sticky-transition
+        html:not(.is-scrolling-down) &
+            top: calc(var(--header-height) + #{$offset-y})
+
+
+@mixin sidebar($side: start)
+    @include media-breakpoint-down(desktop)
+        padding: 0 half(var(--grid-gutter))
+        margin-bottom: $spacing3
+    @include media-breakpoint-up(desktop)
+        @if $side == start
+            margin-left: grid-external-space()
+            left: 0
+        @else
+            margin-right: grid-external-space()
+            right: 0
+        margin-top: 0
+        top: 0
+        height: 100%
+        position: absolute
+        width: columns(4)
+        & > div
+            @include sticky($spacing1)
+        .toc-container
+            border-top: 1px solid $color-border
+            padding-top: $spacing1
+            position: static
+            margin-left: 0

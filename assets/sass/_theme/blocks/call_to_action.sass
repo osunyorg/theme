@@ -62,7 +62,7 @@
                     &:last-child
                         margin-bottom: 0
         .call_to_action--with-image
-            padding-top: half($grid-gutter-sm)
+            padding-top: var(--grid-gutter)
             display: flex
             flex-direction: column
             > *
@@ -80,7 +80,7 @@
             > div
                 // TODO : simplifier l'application d'une couleur de fond sur le CTA avec sidebar et sans sidebar
                 background-color: var(--cta-background-color)
-                padding: $grid-gutter col(1, 8)
+                padding: var(--grid-gutter) columns(1)
                 width: 100%
                 position: relative
                 &::after
@@ -91,27 +91,28 @@
                     top: 0
                     bottom: 0
                     left: 100%
-                    width: Max(#{$grid-gutter}, calc(50vw - #{half($grid-max-width)} + #{$grid-gutter}))
+                    // Calcul de la largeur nécessaire pour remplir l'espace droit entre le container et le bord droit de la fenêtre
+                    width: grid-external-space()
             &--with-image
                 picture
                     order: 1
-                    padding-left: col(1, 8)
-                    padding-right: offset(4, 8)
+                    padding-left: columns(1)
+                    padding-right: offset(4)
                     position: relative
                     z-index: 2
                     img
-                        margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
+                        margin-bottom: calc(var(--grid-gutter-negative) + -#{$spacing1})
                 > div
-                    padding-top: calc(#{$grid-gutter} + #{$spacing3})
+                    padding-top: calc(var(--grid-gutter) * 2 + #{$spacing1})
 
     @include in-page-without-sidebar
         background-color: var(--cta-background-color)
         padding-top: 0
         padding-bottom: 0
         .block-content
-            padding: $spacing4 $grid-gutter
-            margin-left: -$grid-gutter
-            margin-right: -$grid-gutter
+            padding: $spacing4 var(--grid-gutter)
+            margin-left: var(--grid-gutter-negative)
+            margin-right: var(--grid-gutter-negative)
         .call_to_action--with-image
             @include grid
             > div

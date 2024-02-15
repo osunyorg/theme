@@ -24,7 +24,7 @@
     &.toggle-icon::after
         font-size: $h3-size
         @include media-breakpoint-up(desktop)
-            margin-top: px2rem(5)
+            margin-top: pxToRem(5)
     span,
     &::after
         display: inline
@@ -45,7 +45,7 @@
         display: inline-flex
         justify-content: center
         margin-left: $spacing0
-        width: px2rem(15)
+        width: pxToRem(15)
     @include media-breakpoint-down(desktop)
         right: $spacing1
         top: half($spacing0)
@@ -87,7 +87,7 @@
             @include icon(search-inline, after)
             &::after
                 color: transparentize($color-text-alt, .4)
-                padding-right: px2rem(2)
+                padding-right: pxToRem(2)
                 position: fixed
                 pointer-events: none
                 transform: translate(-6px,20%)
@@ -153,13 +153,13 @@
         @include media-breakpoint-up(desktop)
             &__form
                 position: relative
-                width: col(8)
+                width: columns(8)
                 &::after
-                    left: calc(#{col(8)} - #{space(8)})
+                    left: calc(#{columns(8)} - #{space(8)})
                     top: space(9)
             &__search-input,
             &__message
-                width: calc(#{col(8,12)} - #{space(21.5)})
+                width: calc(#{columns(8)} - #{space(21.5)})
             &__results-area
                 padding-top: space(26)
         @include media-breakpoint-down(desktop)
@@ -173,7 +173,7 @@
 
 .menu .nav-level-1 > li .pagefind-ui__toggle:not(.toggle-icon)::after
     margin-left: 0
-    margin-top: px2rem(2)
+    margin-top: pxToRem(2)
 
 .pagefind-fixed
     align-items: center
@@ -193,8 +193,8 @@
             padding-right: 0
             justify-content: center
         &.toggle-icon
-            min-height: px2rem(37)
-            width: px2rem(50)
+            min-height: pxToRem(37)
+            width: pxToRem(50)
             &:hover,
             &:focus
                 width: calc(#{$spacing3} * 3)
@@ -206,7 +206,7 @@
         &.in-page-with-toc
             background: $color-background
             border-top: 1px solid #eee
-            bottom: px2rem(44)
+            bottom: pxToRem(44)
             
 footer#document-footer .footer-search
     .pagefind-footer
@@ -215,7 +215,7 @@ footer#document-footer .footer-search
         &.toggle-icon
             transform: translateX(-35%)
         &::after
-            margin-top: px2rem(3)
+            margin-top: pxToRem(3)
     #search
         margin-top: 0
         a

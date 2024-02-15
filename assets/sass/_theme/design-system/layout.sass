@@ -10,8 +10,6 @@
     --spacing3: #{$spacing3}
     --spacing4: #{$spacing4}
     --spacing5: #{$spacing5}
-    --grid-gutter: #{$grid-gutter}
-    --grid-gutter-sm: #{$grid-gutter-sm}
     --grid-max-width: #{$grid-max-width}
     --header-height: #{$header-height}
     --header-menu-max-height: calc(100vh - var(--header-height) - #{$spacing4})
@@ -78,8 +76,8 @@ details
         position: relative
         cursor: pointer
         @include icon(caret, after)
-            margin-left: px2rem(10)
-            line-height: px2rem(22)
+            margin-left: pxToRem(10)
+            line-height: pxToRem(22)
             transition: transform 0.25s
         &::marker
             content: none
@@ -114,7 +112,7 @@ details
         overflow-y: auto
         @include media-breakpoint-up(desktop)
             padding: $spacing3
-            width: col(8)
+            width: columns(8)
         .modal-header
             margin-bottom: $spacing0
             button
