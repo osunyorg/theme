@@ -74,26 +74,24 @@
         &::before
             content: ""
             background: $color-background
-            height: space(27)
+            height: space(34)
             left: 0
             position: fixed
             top: 0
             width: 100%
             z-index: 5
             @include media-breakpoint-down(desktop)
-                height: space(50)
+                height: space(52)
         &__form
             @include icon(search-inline, after)
             &::after
                 color: transparentize($color-text-alt, .4)
-                padding-right: pxToRem(2)
                 position: fixed
                 pointer-events: none
-                transform: translate(-6px,20%)
                 z-index: 9
                 @include media-breakpoint-down(desktop)
                     right: $spacing-3
-                    top: space(33)
+                    top: space(36)
         &__search-input
             border-left: 0
             border-right: 0
@@ -103,8 +101,6 @@
             padding-right: $spacing-3 !important
             position: fixed
             z-index: 6
-            @include media-breakpoint-down(desktop)
-                margin-bottom: $spacing-3
             &:focus,
             &:focus-visible
                 border-bottom: 2px solid $color-text
@@ -120,13 +116,15 @@
             text-align: right
             z-index: 11
             position: fixed
-            top: space(20)
+            top: space(27)
         &__search-clear,
         &__suppressed
             display: none
             pointer-events: none
         &__drawer
             position: relative
+            @include media-breakpoint-down(desktop)
+                padding-top: $spacing-2
         &__result
             list-style: none
             position: relative
@@ -154,19 +152,21 @@
                 position: relative
                 width: columns(8)
                 &::after
-                    left: calc(#{columns(8)} - #{space(8)})
-                    top: space(9)
+                    left: calc(#{columns(8)} + #{var(--grid-gutter)})
+                    top: space(15)
+                    transform: translateX(-100%)
             &__search-input,
             &__message
-                width: calc(#{columns(8)} - #{space(21.5)})
+                width: columns(8)
             &__results-area
-                padding-top: space(26)
+                padding-top: $spacing-6
         @include media-breakpoint-down(desktop)
             &__search-input,
             &__message
-                width: calc(100% - #{$spacing-4})
+                left: var(--grid-gutter)
+                right: var(--grid-gutter)
             &__message
-                top: space(44)
+                top: space(46)
             &__results-area
                 padding-top: space(17)
 
@@ -181,12 +181,12 @@
     color: $color-text
     display: flex
     justify-content: space-between
-    left: $spacing-5
+    left: var(--grid-gutter)
     position: fixed
     z-index: 10
     @include media-breakpoint-up(desktop)
         &:not(.toggle-icon)
-            min-width: calc(#{$spacing-5} * 3)
+            min-width: columns(2)
         &.toggle-icon:not(:hover)
             padding-left: 0
             padding-right: 0
@@ -194,9 +194,11 @@
         &.toggle-icon
             min-height: pxToRem(37)
             width: pxToRem(50)
+            span
+                display: none
             &:hover,
             &:focus
-                width: calc(#{$spacing-5} * 3)
+                min-width: columns(2)
                 span
                     display: inline
     @include media-breakpoint-down(desktop)
