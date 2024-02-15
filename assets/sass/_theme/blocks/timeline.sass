@@ -5,7 +5,7 @@
         .timeline-event
             position: relative
             &:not(:last-child)
-                padding-bottom: $spacing2
+                padding-bottom: $spacing-4
             &::before
                 background: $color-text
                 border-radius: 50%
@@ -31,7 +31,7 @@
             .title
                 @include h4
                 + p
-                    margin-top: $spacing0
+                    margin-top: $spacing-2
 
         @include media-breakpoint-down(desktop)
             .timeline-event
@@ -101,7 +101,7 @@
                 flex-flow: row nowrap
                 list-style: none
                 padding-left: 0
-                margin-top: $spacing0
+                margin-top: $spacing-2
                 transition: margin 0.4s ease-in-out
                 width: 100%
         .timeline-event
@@ -113,14 +113,14 @@
             .title
                 display: block
                 min-height: var(--min-title-height)
-                padding-bottom: $spacing1
+                padding-bottom: $spacing-3
                 @include signature
             .description
                 @include small
             .line
                 background: $block-timeline-horizontal-color
                 height: 1px
-                margin-bottom: $spacing1
+                margin-bottom: $spacing-3
                 opacity: 1
                 overflow: visible
                 width: calc(100% + #{half(var(--grid-gutter))})
@@ -151,12 +151,12 @@
             .timeline-arrows
                 left: 0
                 position: absolute
-                top: calc(#{$spacing2/2} + var(--min-title-height))
+                top: calc(#{$spacing-4/2} + var(--min-title-height))
             .timeline-event
                 padding-right: 0
                 width: 75%
                 .line
-                    margin-bottom: calc(#{$spacing2} + var(--min-title-height))
+                    margin-bottom: calc(#{$spacing-4} + var(--min-title-height))
 
         @include in-page-without-sidebar
             @include media-breakpoint-up(xxl)

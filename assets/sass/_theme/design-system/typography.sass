@@ -177,7 +177,7 @@ small, .small
 @mixin rich-text
     word-break: break-word
     h1, h2, h3, h4, h5, h6, p, ul
-        margin-top: $spacing1
+        margin-top: $spacing-3
         &:first-child, meta + &
             margin-top: 0
 
@@ -215,7 +215,7 @@ p
     margin-top: 0
     margin-bottom: 0
     + p
-        margin-top: $spacing0
+        margin-top: $spacing-2
 
 p:empty
     display: none
@@ -261,7 +261,7 @@ a,
     @include btn
     border: $btn-border
     @include media-breakpoint-up(desktop)
-        padding: $spacing0
+        padding: $spacing-2
     &[target="_blank"]:not(.icon)
         display: flex
         justify-content: space-between
@@ -311,7 +311,7 @@ sup
     cursor: pointer
     text-decoration: none
     @include icon(copy-inline, after)
-        margin-left: $spacing0
+        margin-left: $spacing-2
         vertical-align: text-top
     &.is-copied
         @include icon(check-inline, after)

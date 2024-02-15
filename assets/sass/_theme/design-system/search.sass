@@ -18,9 +18,9 @@
         @include icon(search-inline, after)
         &::after
             line-height: inherit
-            margin-left: half($spacing0)
+            margin-left: $spacing-1
     &:not(.pagefind-menu)    
-        padding: half($spacing0) $spacing0
+        padding: $spacing-1 $spacing-2
     &.toggle-icon::after
         font-size: $h3-size
         @include media-breakpoint-up(desktop)
@@ -30,7 +30,7 @@
         display: inline
     @include media-breakpoint-down(desktop)
         &.pagefind-menu
-            padding: $spacing1 0
+            padding: $spacing-3 0
             width: 100%
     @include media-breakpoint-up(desktop)
         &.toggle-icon::after
@@ -38,34 +38,34 @@
 .search__close
     @include icon-block(close, after)
     position: fixed
-    right: $spacing3
+    right: $spacing-5
     padding: 0
     z-index: 9
     &::after
         display: inline-flex
         justify-content: center
-        margin-left: $spacing0
+        margin-left: $spacing-2
         width: pxToRem(15)
     @include media-breakpoint-down(desktop)
-        right: $spacing1
-        top: half($spacing0)
+        right: $spacing-3
+        top: $spacing-1
 #search
     background: $color-background
     color: $color-text
     height: 100vh
     left: 0
-    padding-bottom: $spacing3
-    padding-left: $spacing1
-    padding-right: $spacing1
-    padding-top: $spacing4
+    padding-bottom: $spacing-5
+    padding-left: $spacing-3
+    padding-right: $spacing-3
+    padding-top: $spacing-6
     position: fixed
     overflow: auto
     top: 0
     width: 100vw
     z-index: 80
     @include media-breakpoint-up(desktop)
-        padding-right: $spacing3
-        padding-left: $spacing3
+        padding-right: $spacing-5
+        padding-left: $spacing-5
         padding-top: space(7)
     &[aria-hidden=true]
         display: none
@@ -93,7 +93,7 @@
                 transform: translate(-6px,20%)
                 z-index: 9
                 @include media-breakpoint-down(desktop)
-                    right: $spacing1
+                    right: $spacing-3
                     top: space(33)
         &__search-input
             border-left: 0
@@ -101,11 +101,11 @@
             border-radius: 0
             border-top: 0
             padding-left: 0
-            padding-right: $spacing1 !important
+            padding-right: $spacing-3 !important
             position: fixed
             z-index: 6
             @include media-breakpoint-down(desktop)
-                margin-bottom: $spacing1
+                margin-bottom: $spacing-3
             &:focus,
             &:focus-visible
                 border-bottom: 2px solid $color-text
@@ -113,7 +113,7 @@
         &__button[type="button"]
             @include button-reset
             @include link($color-text)
-            margin-top: $spacing2
+            margin-top: $spacing-4
             padding: 0
         &__message
             @include meta
@@ -139,7 +139,7 @@
                 @include media-breakpoint-down(desktop)
                     display: none
             + li
-                margin-top: half($spacing3)
+                margin-top: half($spacing-5)
             @include media-breakpoint-up(desktop)
                 @include grid
                 &-inner
@@ -165,7 +165,7 @@
         @include media-breakpoint-down(desktop)
             &__search-input,
             &__message
-                width: calc(100% - #{$spacing2})
+                width: calc(100% - #{$spacing-4})
             &__message
                 top: space(44)
             &__results-area
@@ -182,12 +182,12 @@
     color: $color-text
     display: flex
     justify-content: space-between
-    left: $spacing3
+    left: $spacing-5
     position: fixed
     z-index: 10
     @include media-breakpoint-up(desktop)
         &:not(.toggle-icon)
-            min-width: calc(#{$spacing3} * 3)
+            min-width: calc(#{$spacing-5} * 3)
         &.toggle-icon:not(:hover)
             padding-left: 0
             padding-right: 0
@@ -197,7 +197,7 @@
             width: pxToRem(50)
             &:hover,
             &:focus
-                width: calc(#{$spacing3} * 3)
+                width: calc(#{$spacing-5} * 3)
                 span
                     display: inline
     @include media-breakpoint-down(desktop)

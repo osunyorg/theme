@@ -6,12 +6,12 @@
         vertical-align: middle
     .post-categories
         @include meta
-        margin-top: $spacing0
-        margin-bottom: $spacing0
+        margin-top: $spacing-2
+        margin-bottom: $spacing-2
         position: relative
         display: flex
         flex-wrap: wrap
-        gap: 0 $spacing0
+        gap: 0 $spacing-2
         z-index: 2
         a
             @include link($color-accent)
@@ -29,20 +29,20 @@
         article
             border-bottom: 1px solid $color-border
             display: flex
-            margin-bottom: $spacing1
-            padding-bottom: $spacing1
+            margin-bottom: $spacing-3
+            padding-bottom: $spacing-3
             flex-direction: row
             [itemprop=headline] + p
-                margin-top: $spacing0
+                margin-top: $spacing-2
             @include media-breakpoint-up(desktop)
                 @include grid
-                margin-bottom: $spacing3
-                padding-bottom: $spacing3
+                margin-bottom: $spacing-5
+                padding-bottom: $spacing-5
             .post-content
                 grid-column: 4/13
                 @include media-breakpoint-down(desktop)
                     flex: 1
-                    margin-left: $spacing0
+                    margin-left: $spacing-2
                 p:not(.title)
                     @include media-breakpoint-down(desktop)
                         display: none
@@ -74,7 +74,7 @@
         .post
             @include post-time-author-flex
             .post-meta
-                margin-top: $spacing0
+                margin-top: $spacing-2
 
 .posts__page
     .lead
@@ -107,10 +107,10 @@
     > li
         @include meta
         display: flex
-        gap: $spacing1
+        gap: $spacing-3
         justify-content: space-between
-        padding-top: $spacing0
-        padding-bottom: $spacing0
+        padding-top: $spacing-2
+        padding-bottom: $spacing-2
         border-color: $color-border
         &:not(:first-child)
             align-items: center
@@ -136,10 +136,10 @@
         a
             color: inherit
         li:last-child
-            margin-right: -$spacing0
+            margin-right: -$spacing-2
 
 .related
-    margin-top: $spacing1
+    margin-top: $spacing-3
     .posts
         @include grid(2, desktop)
         margin-bottom: 0
@@ -148,4 +148,4 @@
 
 .authors__term
     .blocks + .container
-        margin-top: $spacing3
+        margin-top: $spacing-5

@@ -10,7 +10,7 @@
             .media
                 @include handle-svg-fit
                 order: -1
-                margin-bottom: $spacing1
+                margin-bottom: $spacing-3
                 &:empty
                     display: none
                 img
@@ -24,11 +24,11 @@
                 @include stretched-link(before)
                 text-decoration: none
             + p
-                margin-top: $spacing0
+                margin-top: $spacing-2
 
     @include media-breakpoint-up(desktop)
         .top
-            margin-bottom: $spacing2
+            margin-bottom: $spacing-4
 
     @include media-breakpoint-down(desktop)
         .top
@@ -37,7 +37,7 @@
         .description
             @include h2
         article
-            margin-top: $spacing1
+            margin-top: $spacing-3
 
     @include in-page-without-sidebar
         .top
@@ -84,7 +84,7 @@
             margin-top: 0
         // ----------------- //
         .card
-            padding: $spacing1
+            padding: $spacing-3
             background-color: $block-pages-card-page-background
             transition: background 0.3s, color 0.3s
             display: flex
@@ -96,9 +96,9 @@
                 color: $block-pages-card-page-color
             .media
                 margin-bottom: 0
-                margin-left: -$spacing1
-                margin-right: -$spacing1
-                margin-top: -$spacing1
+                margin-left: -$spacing-3
+                margin-right: -$spacing-3
+                margin-top: -$spacing-3
                 img
                     min-width: 100%
             .more
@@ -108,7 +108,7 @@
                 @include text-underline
                 position: relative
                 margin-top: auto
-                padding-top: $spacing1
+                padding-top: $spacing-3
                 display: flex
                 justify-content: space-between
                 align-items: center
@@ -134,10 +134,10 @@
             li
                 display: block
                 + li
-                    margin-top: $spacing0
+                    margin-top: $spacing-2
                 > a
                     @include icon(arrow, before, true)
-                        padding-right: $spacing0
+                        padding-right: $spacing-2
                     @include hover-translate-icon(before, 5)
                     @include link
                     text-decoration-color: rgba(0,0,0,0)
@@ -150,9 +150,9 @@
                             text-decoration-color: transparent
         @include media-breakpoint-down(desktop)
             .top
-                margin-bottom: $spacing0
+                margin-bottom: $spacing-2
             ul
-                margin-top: $spacing1
+                margin-top: $spacing-3
         @include media-breakpoint-up(desktop)
             ul:not(.title-only)
                 li + li
@@ -166,12 +166,12 @@
         @include in-page-with-sidebar
             .block-content
                 .top
-                    margin-bottom: $spacing1
+                    margin-bottom: $spacing-3
                     // .description
-                    //     margin-bottom: $spacing2
+                    //     margin-bottom: $spacing-4
                 ul.title-only
                     @include grid(2, desktop)
-                    grid-row-gap: $spacing0 !important
+                    grid-row-gap: $spacing-2 !important
                     grid-column-gap: half(var(--grid-gutter)) !important
                     li
                         margin-top: 0
@@ -209,7 +209,7 @@
                         margin-top: 0
             &.with-description
                 .block-content
-                    @include grid(12, desktop, $spacing2)
+                    @include grid(12, desktop, $spacing-4)
                     row-gap: half(var(--grid-gutter))
                     .top
                         align-items: initial
@@ -229,9 +229,9 @@
                         grid-row: 2
                         display: block
                         li + li
-                            margin-top: $spacing0
+                            margin-top: $spacing-2
                             article
-                                margin-top: $spacing3
+                                margin-top: $spacing-5
                 &.with-images
                     .top
                         grid-column: 1 / 7
@@ -274,7 +274,7 @@
         .page
             position: relative
             + .page
-                margin-top: $spacing3
+                margin-top: $spacing-5
             .more
                 @include icon(arrow, after, true)
                 @include hover-translate-icon(after)

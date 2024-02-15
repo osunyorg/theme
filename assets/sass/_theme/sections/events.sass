@@ -26,7 +26,7 @@
         text-decoration: none
     @include media-breakpoint-down(desktop)
         .events
-            margin-bottom: $spacing2
+            margin-bottom: $spacing-4
         .archive-link
             text-align: left
 
@@ -34,15 +34,15 @@
     @include list-reset
     @include media-breakpoint-up(desktop)
         font-size: $table-body-size-desktop
-        padding-bottom: $spacing3
+        padding-bottom: $spacing-5
     .event-date
         text-transform: capitalize
     ul
         @include list-reset
     > li
-        padding-top: $spacing0
+        padding-top: $spacing-2
         &:not(:last-child)
-            padding-bottom: $spacing0
+            padding-bottom: $spacing-2
         > span
             @include meta
             color: $color-text-alt
@@ -81,7 +81,7 @@
         color: $color-text-alt
     &-categories
         @include meta
-        margin-top: $spacing0
+        margin-top: $spacing-2
         span + span
             &::before
                 content: ', '
@@ -98,15 +98,15 @@
             display: inline-flex
             &::before
                 content: '|'
-                margin-right: half($spacing0)
+                margin-right: $spacing-1
 .events
     &--list
         .event
             border-bottom: 1px solid $color-border
             display: flex
             flex-direction: column
-            margin-bottom: $spacing1
-            padding-bottom: $spacing1
+            margin-bottom: $spacing-3
+            padding-bottom: $spacing-3
             position: relative
             .event-title
                 @include h3
@@ -115,14 +115,14 @@
                     text-decoration: none
             &-dates
                 @include h4
-                margin-top: half($spacing0)
-                margin-bottom: half($spacing1)
+                margin-top: $spacing-1
+                margin-bottom: half($spacing-3)
             &-content
                 order: 2
             @include media-breakpoint-down(desktop)
                 @include media-breakpoint-up(md)
                     flex-direction: row
-                    gap: $spacing1
+                    gap: $spacing-3
                     .media
                         width: columns(4)
                     &-content
@@ -131,7 +131,7 @@
             @include media-breakpoint-down(md)
                 .media
                     max-width: 33%
-                    margin-bottom: $spacing0
+                    margin-bottom: $spacing-2
                 &-content
                     order: 1
             @include media-breakpoint-up(md)
@@ -144,7 +144,7 @@
                 &-content
                     width: columns(10)
                     > hgroup, > .event-title
-                        margin-bottom: $spacing0
+                        margin-bottom: $spacing-2
                 .media
                     order: 2
                     width: columns(2)
@@ -155,9 +155,9 @@
                     grid-column: 1 / 5
                     > span
                         @include h3
-                        margin-bottom: $spacing1
+                        margin-bottom: $spacing-3
                 &-time
-                    margin-top: $spacing0
+                    margin-top: $spacing-2
                     @include meta
                 &-content
                     @include grid(10, desktop, 0)
@@ -175,7 +175,7 @@
                 &-content
                     order: 1
                     grid-column: 6 span
-                    margin-top: half($spacing0)
+                    margin-top: $spacing-1
                 &-time
                     display: inline
                     &::before
@@ -184,7 +184,7 @@
                     grid-column: 2 span
 
     &--grid
-        @include grid(2, md, $spacing2)
+        @include grid(2, md, $spacing-4)
         .event
             display: flex
             flex-direction: column
@@ -194,14 +194,14 @@
                     @include stretched-link
             &-dates
                 @include meta
-                margin-top: $spacing0
+                margin-top: $spacing-2
             &-content
                 .event-title, hgroup
                     @include h3
             &-description
-                margin-top: $spacing0
+                margin-top: $spacing-2
             .media
-                margin-bottom: $spacing0
+                margin-bottom: $spacing-2
                 order: -1
                 img
                     aspect-ratio: 1
@@ -210,7 +210,7 @@
         @include media-breakpoint-down(md)
             .event
                 + .event
-                    margin-top: $spacing2
+                    margin-top: $spacing-4
         @include in-page-without-sidebar
             @include grid(3, desktop)
 
@@ -227,16 +227,16 @@
                     @include stretched-link
             &-dates 
                 @include meta
-                margin-top: $spacing0
+                margin-top: $spacing-2
             &-content
                 flex: 1
                 .event-title
                     @include h3
                 .more
                     @include icon("arrow-right", after)
-                    margin-top: $spacing1
+                    margin-top: $spacing-3
                     &::after
-                        margin-left: half($spacing0)
+                        margin-left: $spacing-1
             .media
                 order: -1
                 img
@@ -248,7 +248,7 @@
                     width: columns(4)
                 &-dates
                     @include h3
-                    margin-bottom: $spacing2
+                    margin-bottom: $spacing-4
                 .event-title,
                 .event-subtitle, 
                 hgroup
@@ -261,7 +261,7 @@
                     margin-right: calc(-#{var(--grid-gutter)} /2)
                     aspect-ratio: 1
                     img 
-                        margin-bottom: $spacing0
+                        margin-bottom: $spacing-2
             @include in-page-without-sidebar
                 align-items: center
                 &-dates

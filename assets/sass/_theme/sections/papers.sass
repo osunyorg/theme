@@ -12,14 +12,14 @@
             @include media-breakpoint-down(desktop)
                 flex-wrap: wrap
                 justify-content: space-between
-                margin-top: $spacing1
+                margin-top: $spacing-3
     h3
         a:hover
             color: $color-accent
     .paper-kind
         @include meta
         text-transform: uppercase
-        margin-right: $spacing1
+        margin-right: $spacing-3
     .paper-volume
         @include meta
         text-transform: lowercase
@@ -31,26 +31,26 @@
 
 .papers
     @include list-reset
-    margin-block-start: half($spacing3)
+    margin-block-start: half($spacing-5)
     li
         + li
-            margin-top: $spacing2
+            margin-top: $spacing-4
             @include media-breakpoint-up(desktop)
-                margin-top: $spacing3
+                margin-top: $spacing-5
         article
             @include media-breakpoint-up(desktop)
                 @include grid
             + article
-                margin-top: $spacing2
+                margin-top: $spacing-4
                 @include media-breakpoint-up(desktop)
-                    margin-top: $spacing3
+                    margin-top: $spacing-5
 
 .papers__page
     @include media-breakpoint-down(desktop)
         .document-content
             aside
                 order: 2
-                margin-bottom: $spacing3
+                margin-bottom: $spacing-5
     @include media-breakpoint-up(desktop)
         .hero
             .content
@@ -61,7 +61,7 @@
                 height: 100%
                 position: relative
             aside
-                padding-bottom: $spacing1
+                padding-bottom: $spacing-3
             .toc-container
                 height: unset
                 @include sticky(-1px)
@@ -70,33 +70,33 @@
     .document-content
         min-height: 100vh
         .content
-            margin-bottom: $spacing4
+            margin-bottom: $spacing-6
             section + section
-                margin-top: $spacing2
+                margin-top: $spacing-4
                 @include media-breakpoint-up(desktop)
-                    margin-top: $spacing4
+                    margin-top: $spacing-6
             .squared-button
                 margin-bottom: 0
-                margin-top: $spacing0
+                margin-top: $spacing-2
                 width: auto
             h2
-                margin-bottom: $spacing0
+                margin-bottom: $spacing-2
             .paper-essentials
                 h2
                     @include meta
-                    margin-top: $spacing2
+                    margin-top: $spacing-4
                     &:first-of-type
                         margin-top: 0
             .paper-body
                 h2
-                    margin-bottom: $spacing2
+                    margin-bottom: $spacing-4
             .paper-authors
                 h2
                     @include meta
                 .authors
                     @include grid(2, desktop)
                     article
-                        margin-top: $spacing1
+                        margin-top: $spacing-3
                         .name
                             a
                                 @include h4
@@ -107,9 +107,9 @@
                 margin: 0
                 dt
                     @include meta
-                    margin-bottom: $spacing0
+                    margin-bottom: $spacing-2
                     &:not(:first-of-type)
-                        margin-top: $spacing2
+                        margin-top: $spacing-4
                 dd:first-of-type
                     a
                         display: flex
@@ -144,16 +144,16 @@
 
 .citations
     &:not(:first-child)
-        margin-top: $spacing3
+        margin-top: $spacing-5
     > div
-        margin-top: $spacing1
+        margin-top: $spacing-3
         @include grid(1)
-        @include grid(2, md, $spacing1)
+        @include grid(2, md, $spacing-3)
         @include media-breakpoint-down(md)
-            row-gap: $spacing1
+            row-gap: $spacing-3
     .citation
         a
             display: block
         p
             @include meta
-            margin-top: $spacing0
+            margin-top: $spacing-2
