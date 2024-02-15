@@ -1,7 +1,7 @@
 <section class="paper-essentials" id="abstract">
   {{ with .Params.Abstract }}
     <h2>{{ i18n "papers.abstract" }}</h2>
-    <p itemprop="abstract">{{ partial "PrepareText" . }}</p>
+    <p itemprop="abstract">{{  . | safeHTML }}</p>
   {{ end }}
   {{ if .Params.Pdf }}
     <h2>{{ i18n "papers.download" }}</h2>
