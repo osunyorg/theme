@@ -1,18 +1,24 @@
 .paper
+    display: flex
+    gap: var(--grid-gutter)
     a
         text-decoration-color: transparent
         transition: color 0.3s ease
-    > div
-        &:first-of-type
-            grid-column: 1 / 7
-        &.paper-actions
-            grid-column: 8 / 12
-            align-items: start
-            display: flex
-            @include media-breakpoint-down(desktop)
-                flex-wrap: wrap
-                justify-content: space-between
-                margin-top: $spacing-3
+    > div:first-of-type
+        width: columns(7)
+    .paper-actions
+        width: columns(5)
+        display: flex
+        align-items: start
+        gap: var(--grid-gutter)
+        button[data-open-modal]
+            width: columns(2)
+        figure
+            width: columns(3)
+        @include media-breakpoint-down(desktop)
+            flex-wrap: wrap
+            justify-content: space-between
+            margin-top: $spacing-3
     h3
         a:hover
             color: $color-accent
@@ -29,17 +35,18 @@
         span
             text-transform: uppercase
 
+.top + .papers
+    margin-top: $spacing-3
+
 .papers
     @include list-reset
-    margin-block-start: half($spacing-5)
+    margin-top: $spacing-5
     li
         + li
             margin-top: $spacing-4
             @include media-breakpoint-up(desktop)
                 margin-top: $spacing-5
         article
-            @include media-breakpoint-up(desktop)
-                @include grid
             + article
                 margin-top: $spacing-4
                 @include media-breakpoint-up(desktop)
