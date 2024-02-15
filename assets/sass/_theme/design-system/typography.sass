@@ -95,36 +95,29 @@ h2, .h2
 
 @mixin lead($handle-sidebar: true)
     font-family: $lead-font-family
-    font-size: $lead-size
+    font-size: var(--lead-size)
     font-weight: $lead-weight
-    line-height: $lead-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $lead-size-desktop
+    line-height: var(--lead-line-height)
     @if $handle-sidebar
         @include in-page-with-sidebar
             font-family: $lead-sidebar-font-family
-            font-size: $lead-sidebar-size-desktop
+            font-size: var(--lead-sidebar-size)
             font-weight: $lead-sidebar-weight
-            line-height: $lead-sidebar-line-height
+            line-height: var(--lead-sidebar-line-height)
 
 .lead
     @include lead
 
 @mixin lead-hero
     font-family: $lead-hero-font-family
-    font-size: $lead-hero-size
+    font-size: var(--lead-hero-size)
     font-weight: $lead-hero-weight
-    line-height: $lead-hero-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $lead-hero-size-desktop
-
+    line-height: var(--lead-hero-line-height)
 
 @mixin body-text
     font-family: $body-font-family
-    font-size: $body-size
-    line-height: $body-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $body-size-desktop
+    font-size: var(--body-size)
+    line-height: var(--body-line-height)
 
 .p,
 .li
@@ -132,33 +125,27 @@ h2, .h2
 
 @mixin meta
     font-family: $meta-font-family
-    font-size: $meta-size
+    font-size: var(--meta-size)
     font-weight: $meta-weight
-    line-height: $meta-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $meta-size-desktop
+    line-height: var(--meta-line-height)
 
 .meta
     @include meta
 
 @mixin signature
     font-family: $signature-font-family
-    font-size: $signature-size
+    font-size: var(--signature-size)
     font-weight: $signature-weight
-    line-height: $signature-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $signature-size-desktop
+    line-height: var(--signature-line-height)
 
 .signature
     @include signature
 
 @mixin small
     font-family: $small-font-family
-    font-size: $small-size
+    font-size: var(--small-size)
     font-weight: $small-weight
-    line-height: $small-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $small-size-desktop
+    line-height: $var(--small-line-height)
 
 small, .small
     @include small
@@ -186,12 +173,10 @@ small, .small
 @mixin blockquote
     margin: 0
     font-family: $quote-font-family
-    font-size: $quote-size
+    font-size: var(--quote-size)
     font-weight: $quote-weight
     font-style: $quote-style
-    line-height: $quote-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $quote-size-desktop-long
+    line-height: $var(--quote-line-height)
     cite
         font-size: pxToRem(18)
         font-style: normal
