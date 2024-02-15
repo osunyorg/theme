@@ -26,7 +26,7 @@
                 margin-top: $spacing-5
         @include in-page-with-sidebar
             .grid
-                @include grid(2, desktop, var(--grid-gutter), half(var(--grid-gutter)))
+                @include grid(2, desktop, var(--grid-gutter), var(--grid-gutter))
         @include in-page-without-sidebar
             .grid
                 @include grid($block-posts-grid-columns)
@@ -60,7 +60,7 @@
             .large
                 .post
                     flex-direction: row
-                    gap: half(var(--grid-gutter))
+                    gap: var(--grid-gutter)
                     + .post
                         margin-top: $spacing-4
                     p[itemprop="articleBody"]
@@ -100,7 +100,7 @@
                     @include media-breakpoint-up(xl)
                         .media,
                         .post-content
-                            width: calc(#{columns(4)} + #{half(var(--grid-gutter))})
+                            width: columns(4)
         @include in-page-without-sidebar
             .large
                 .post
@@ -123,9 +123,9 @@
         @include media-breakpoint-down(desktop)
             article
                 position: relative
-                padding-bottom: half($spacing-5)
+                padding-bottom: $spacing-3
                 + article
-                    margin-top: half($spacing-5)
+                    margin-top: $spacing-3
                 .post-content
                     display: flex
                     flex-direction: column
@@ -151,10 +151,10 @@
                 + article
                     margin-top: $spacing-3
                 .media
-                    width: calc(#{columns(2)} + #{half(var(--grid-gutter))})
+                    width: columns(2)
                 .post-content
                     width: columns(6)
-                    margin-left: half(var(--grid-gutter))
+                    margin-left: var(--grid-gutter)
 
         @include in-page-without-sidebar
             article
@@ -182,13 +182,13 @@
                 margin-bottom: $spacing-2
                 background: none
         .list
-            margin-top: half($spacing-5)
+            margin-top: $spacing-3
             border-top: 1px solid $color-border
             article
                 border-bottom: 1px solid $color-border
                 position: relative
-                padding-bottom: half($spacing-5)
-                margin-top: half($spacing-5)
+                padding-bottom: $spacing-3
+                margin-top: $spacing-3
         article
             > * + * 
                 margin-top: $spacing-2
@@ -215,11 +215,11 @@
                 .post
                     flex-direction: row
                     .media
-                        width: calc(#{columns(3)} + #{half(var(--grid-gutter))})
+                        width: columns(3)
                         margin-bottom: 0
                     .post-content
                         width: columns(5)
-                        margin-left: half(var(--grid-gutter))
+                        margin-left: var(--grid-gutter)
             .list
                 article
                     @include grid(8, desktop, 0, 0)
