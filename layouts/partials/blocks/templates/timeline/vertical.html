@@ -8,13 +8,13 @@
   <div class="timeline-events">
     {{ range .events -}}
       <article class="timeline-event">
-        {{ if .title }}
+        {{ with .title }}
           {{ $heading_tag.open -}}
-            {{ partial "PrepareText" .title }}
+            {{ . | safeHTML }}
           {{ $heading_tag.close -}}
         {{ end }}
-        {{ if .text }}
-          <p>{{ partial "PrepareText" .text }}</p>
+        {{ with .text }}
+          <p>{{ . | safeHTML }}</p>
         {{ end }}
       </article>
     {{ end -}}

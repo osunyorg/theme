@@ -6,7 +6,7 @@
   {{- $direction = partial "GetImageDirection" .image -}}
 {{ end }}
 
-{{- $summary := partial "PrepareText" .context.Params.summary -}}
+{{- $summary := .context.Params.summary | safeHTML -}}
 {{- $subtitle_is_summary := false -}}
 
 {{ if not $subtitle }}

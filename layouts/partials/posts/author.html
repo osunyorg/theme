@@ -2,7 +2,7 @@
   {{- $person := site.GetPage (printf "/persons/%s" .Slug) -}}
   {{ with $person }}
     <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
-      <p itemprop="name">{{ partial "PrepareText" .Title }}</p>
+      <p itemprop="name">{{ .Title | safeHTML }}</p>
     </div>
   {{ end }}
 {{ end }}

@@ -1,7 +1,7 @@
 {{- $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero" -}}
 {{- $title := or .Params.header_text .Title -}}
 {{ $subtitle := "" }}
-{{- $summary := partial "PrepareText" .Params.summary -}}
+{{- $summary := .Params.summary | safeHTML -}}
 {{ if and (eq site.Params.summary.position "hero") $summary }}
   {{ $subtitle = $summary }}
 {{ end }}

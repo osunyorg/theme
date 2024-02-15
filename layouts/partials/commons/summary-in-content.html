@@ -1,4 +1,4 @@
-{{ $summary := .summary | default (partial "PrepareText" .context.Params.summary) }}
+{{ $summary := .summary | default (.context.Params.summary | safeHTML) }}
 {{- if and (eq site.Params.summary.position "content") $summary -}}
   {{- if .block_wrapped -}}
   <div class="block block-summary">
