@@ -12,7 +12,7 @@
           <li class="timeline-event">
 
             {{ $heading_tag.open -}}
-              {{ partial "PrepareText" .title }}
+              {{ .title | safeHTML }}
             {{ $heading_tag.close -}}
             <div class="line"></div>
             <div class="description text">{{- partial "PrepareHTML" .text | markdownify -}}</div>

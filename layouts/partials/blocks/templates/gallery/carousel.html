@@ -33,11 +33,11 @@
           {{ end }}
           {{ if or .text .credit }}
             <figcaption>
-              {{ if .text }}
-                <p>{{ partial "PrepareText" .text }}</p>
+              {{ with .text }}
+                <p>{{ . | safeHTML }}</p>
               {{ end }}
-              {{ if .credit }}
-                <div class="credit">{{ partial "PrepareText" .credit }}</div>
+              {{ with .credit }}
+                <div class="credit">{{ . | safeHTML }}</div>
               {{ end }}
             </figcaption>
           {{ end }}
