@@ -34,11 +34,6 @@
     $width: calc( #{columns($quantity)} + var(--grid-gutter) )
     @return #{$width}
 
-@function container-margin-x
-    @return Max(var(--grid-gutter), calc(50vw - #{$grid-max-width} / 2 + var(--grid-gutter)))
-
-@mixin container-margin-left
-    margin-left: container-margin-x()
-
-@mixin container-margin-right
-    margin-right: container-margin-x()
+// Cette fonction calcule l'espace disponible entre la grille et le bord de l'écran
+@function grid-external-space
+    @return Max(var(--grid-gutter), calc((100vw - var(--grid-width)) / 2 + var(--grid-gutter)))
