@@ -4,12 +4,12 @@
         height: auto
         max-width: 100%
     figcaption
-        margin-top: $spacing0
+        margin-top: $spacing-2
         p
             margin-bottom: 0
             margin-top: 0
             + .credit
-                margin-top: $spacing0
+                margin-top: $spacing-2
         .credit
             p
                 @include meta
@@ -30,7 +30,6 @@
         figure
             img
                 max-height: $block-image-max-height-without-sidebar
-                // max-height: calc(100vh - var(--header-height))
                 width: auto
                 max-width: 100%
         &.image-portrait, &.image-square
@@ -42,16 +41,15 @@
             figure
                 display: flex
                 align-items: flex-end
-                > a 
+                > a
                     width: columns(7)
-                    margin-left: half(var(--grid-gutter))
+                    margin-left: var(--grid-gutter)
                     display: block
                     order: 2
                 picture
                     margin-left: 0
-                    margin-right: var(--grid-gutter-negative)
                 figcaption
-                    width: calc(#{columns(5)} + var(--grid-gutter) / 2)
+                    width: columns(5)
                     order: 1
                     display: block
                     text-align: right

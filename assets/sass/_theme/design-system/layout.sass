@@ -4,15 +4,15 @@
     box-sizing: border-box
 
 \:root
-    --spacing0: #{$spacing0}
-    --spacing1: #{$spacing1}
-    --spacing2: #{$spacing2}
-    --spacing3: #{$spacing3}
-    --spacing4: #{$spacing4}
-    --spacing5: #{$spacing5}
+    --spacing0: #{$spacing-2}
+    --spacing1: #{$spacing-3}
+    --spacing2: #{$spacing-4}
+    --spacing3: #{$spacing-5}
+    --spacing4: #{$spacing-6}
+    --spacing5: #{$spacing-7}
     --grid-max-width: #{$grid-max-width}
     --header-height: #{$header-height}
-    --header-menu-max-height: calc(100vh - var(--header-height) - #{$spacing4})
+    --header-menu-max-height: calc(100vh - var(--header-height) - #{$spacing-6})
     @include media-breakpoint-up(desktop)
         --header-height: #{$header-height-desktop}
 
@@ -30,7 +30,7 @@ body
 
 main
     &:not(.page-with-blocks)
-        padding-bottom: $spacing3
+        padding-bottom: $spacing-5
 
 iframe
     border: none
@@ -41,7 +41,7 @@ iframe
 .container
     @include container
     .hero + &
-        margin-top: $spacing3
+        margin-top: $spacing-5
 
 .hidden
     display: none
@@ -57,7 +57,7 @@ ol
 
 .document-content
     .container > .lead
-        margin-bottom: $spacing3
+        margin-bottom: $spacing-5
 
 .document-content
     position: relative
@@ -71,8 +71,8 @@ details
             transform: translateY(5px)
     summary
         @include meta
-        padding-bottom: $spacing0
-        padding-top: $spacing0
+        padding-bottom: $spacing-2
+        padding-top: $spacing-2
         position: relative
         cursor: pointer
         @include icon(caret, after)
@@ -106,15 +106,15 @@ details
     .modal-content
         position: relative
         background-color: $color-background-alt
-        padding: $spacing2
+        padding: $spacing-4
         width: auto
         max-height: 100vh
         overflow-y: auto
         @include media-breakpoint-up(desktop)
-            padding: $spacing3
+            padding: $spacing-5
             width: columns(8)
         .modal-header
-            margin-bottom: $spacing0
+            margin-bottom: $spacing-2
             button
                 @include button-reset
                 @include icon-block(close, before)

@@ -42,8 +42,8 @@
 
 @mixin sidebar($side: start)
     @include media-breakpoint-down(desktop)
-        padding: 0 half(var(--grid-gutter))
-        margin-bottom: $spacing3
+        padding: 0 var(--grid-gutter)
+        margin-bottom: $spacing-5
     @include media-breakpoint-up(desktop)
         @if $side == start
             margin-left: grid-external-space()
@@ -57,9 +57,9 @@
         position: absolute
         width: columns(4)
         & > div
-            @include sticky($spacing1)
+            @include sticky($spacing-3)
         .toc-container
             border-top: 1px solid $color-border
-            padding-top: $spacing1
+            padding-top: $spacing-3
             position: static
             margin-left: 0

@@ -23,7 +23,7 @@
     .toc-title
         border-bottom: 1px solid $color-border
         font-size: $toc-title-font-size
-        padding: $spacing0 $spacing1
+        padding: $spacing-2 $spacing-3
         @include media-breakpoint-up(desktop)
             font-size: $toc-title-font-size-desktop
             padding: $header-nav-padding-y var(--grid-gutter) calc(#{$header-nav-padding-y} + 1px)
@@ -39,9 +39,9 @@
         max-height: 100%
         > ol
             flex: 1
-            padding: $spacing1
+            padding: $spacing-3
             @include media-breakpoint-up(desktop)
-                padding: $spacing1 var(--grid-gutter)
+                padding: $spacing-3 var(--grid-gutter)
             > li:first-child
                 margin-top: 0
     button
@@ -52,7 +52,7 @@
         border-top: 1px solid $color-border
         display: flex
         justify-content: space-between
-        padding: 0 $spacing1
+        padding: 0 $spacing-3
         line-height: $body-line-height
         @include media-breakpoint-up(desktop)
             border-top: 0
@@ -64,7 +64,7 @@
             line-height: var(--header-height)
             right: var(--grid-gutter)
             &::after
-                margin-left: $spacing0
+                margin-left: $spacing-2
 
 .toc-cta
     display: flex
@@ -75,7 +75,7 @@
         @include container
         background: $color-background
         justify-content: end
-        margin-bottom: $spacing3
+        margin-bottom: $spacing-5
         position: sticky
         text-align: right
         top: calc(var(--header-height) * -1)
@@ -134,11 +134,11 @@
         .toc-content
             overflow-y: auto
             max-height: calc(100vh - var(--header-height))
-            padding-bottom: $spacing2
+            padding-bottom: $spacing-4
             pointer-events: auto
-            @include sticky($spacing1)
+            @include sticky($spacing-3)
             html.is-scrolling-down &
-                max-height: calc(100vh - #{$spacing1})
+                max-height: calc(100vh - #{$spacing-3})
         .toc-title
             color: $color-text-alt
         button

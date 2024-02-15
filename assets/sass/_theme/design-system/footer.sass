@@ -1,8 +1,8 @@
 footer#document-footer
     background: $footer-background-color
     color: $footer-color
-    padding-bottom: $spacing3
-    padding-top: $spacing3
+    padding-bottom: $spacing-5
+    padding-top: $spacing-5
     position: relative
     @include media-breakpoint-down(desktop)
         z-index: $zindex-footer
@@ -19,7 +19,7 @@ footer#document-footer
         @include list-reset
         li
             + li
-                margin-top: $spacing0
+                margin-top: $spacing-2
             a
                 @include link($footer-color)
                 text-decoration-color: transparent
@@ -30,9 +30,9 @@ footer#document-footer
             @include meta
         &-credit
             display: block
-            margin-top: $spacing0
+            margin-top: $spacing-2
         &-search
-            padding-top: $spacing0 !important
+            padding-top: $spacing-2 !important
         &-i18n
             @include dropdown-i18n
             button
@@ -59,13 +59,13 @@ footer#document-footer
                     &::after
                         transform: rotate(-180deg)
                 &::before
-                    margin-right: $spacing0
+                    margin-right: $spacing-2
                 &::after
-                    margin-left: $spacing0
+                    margin-left: $spacing-2
             button[aria-expanded="true"],
             .dropdown-menu
                 outline: pxToRem(10) solid $dropdown-i18n-background-color
-                min-width: $spacing4
+                min-width: $spacing-6
             .dropdown-menu
                 @include meta
                 background: $dropdown-i18n-background-color
@@ -84,7 +84,7 @@ footer#document-footer
         @if $footer-icons-enabled
             &-social 
                 .nav-social + .site-links
-                    margin-top: $spacing1
+                    margin-top: $spacing-3
                 &.site-links li
                     align-items: center
                     display: flex
@@ -119,13 +119,13 @@ footer#document-footer
                     &::after
                         font-size: $footer-icons-size
                         @include media-breakpoint-up(desktop)
-                            margin-right: half(-$spacing0)
-                            padding-left: $spacing0
+                            margin-right: -0.2em
+                            padding-left: $spacing-2
                     @include media-breakpoint-down(desktop)
                         width: fit-content
                         flex-direction: row-reverse
                         &::after
-                            margin-right: $spacing0
+                            margin-right: $spacing-2
                             transform: translateX(-25%)
         @if $footer-text-hidden
             &-social.site-links li
@@ -135,16 +135,16 @@ footer#document-footer
         .container
             + .container,
             > * + *
-                margin-top: $spacing3
+                margin-top: $spacing-5
 
     @include media-breakpoint-up(desktop)
         .container
             display: flex
             justify-content: space-between
-            padding-bottom: $spacing3
+            padding-bottom: $spacing-5
             + .container
                 align-items: flex-end
-                padding-top: $spacing3
+                padding-top: $spacing-5
                 padding-bottom: 0
         .footer
             &-site, &-social

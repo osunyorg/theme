@@ -5,7 +5,6 @@
     padding-right: var(--grid-gutter)
     width: var(--grid-width)
 
-// This must be used for content inside columns
 @function columns($quantity)
     $width: calc( (var(--column-width) * #{$quantity}) + var(--grid-gutter) * ( #{$quantity} - 1 ))
     @return #{$width}
@@ -29,7 +28,7 @@
     > *
         flex: 0 0 calc(#{100 / $cols}% - #{$gap-x} * #{($cols - 1) / $cols} )
 
-// This must be used for offset, outside columns
+// Cette fonction retourne un nombre de colonne + une gouttière
 @function offset($quantity)
     $width: calc( #{columns($quantity)} + var(--grid-gutter) )
     @return #{$width}

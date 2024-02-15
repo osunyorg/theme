@@ -1,32 +1,32 @@
 @mixin person-avatar-end
     display: flex
     flex-direction: row
-    gap: $spacing1
+    gap: $spacing-3
     .avatar
         margin-right: 0
         width: columns(4)
     .description
-        margin-top: $spacing1
+        margin-top: $spacing-3
         text-align: left
 
 .block-persons
     article
         .description
-            margin-top: $spacing1
+            margin-top: $spacing-3
     @include in-page-with-sidebar
         .persons
             @include grid(1, desktop)
-            row-gap: $spacing0
+            row-gap: $spacing-2
             @include media-breakpoint-up(xxl)
                 @include grid(2)
                 article
                     .avatar
                         width: columns(1.5)
                     .description
-                        margin-top: $spacing0
+                        margin-top: $spacing-2
         article
             flex-direction: row
-            gap: $spacing1
+            gap: $spacing-3
             @include media-breakpoint-up(md)
                 .avatar
                     width: columns(2)

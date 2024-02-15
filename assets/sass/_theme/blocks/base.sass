@@ -6,15 +6,15 @@
     .top
         .block-title
             + .description
-                margin-top: $spacing1
+                margin-top: $spacing-3
         .block-title.hidden + .description
                 margin-top: 0
 
 .heading
     &:not(:first-child)
-        margin-top: $spacing3
+        margin-top: $spacing-5
         @include in-page-without-sidebar
-            margin-top: $spacing4
+            margin-top: $spacing-6
     @include in-page-without-sidebar
         h2
             width: columns(8)
@@ -32,16 +32,10 @@ $backgrounded_blocks: ".block-call_to_action, .block-chapter--accent_background,
 
 // Heading + chapter
 .heading + .block-chapter
-    margin-top: $spacing1
+    margin-top: $spacing-3
 
 // Following chapters
 .block-chapter
     &--alt_background, &--accent_background
         & + &
             margin-top: 0
-
-// Heading + block_cta + full-width
-// .heading + .block-call_to_action
-//     margin-top: $spacing3
-//     padding-top: 0
-    

@@ -5,13 +5,13 @@
         .timeline-event
             position: relative
             &:not(:last-child)
-                padding-bottom: $spacing2
+                padding-bottom: $spacing-4
             &::before
                 background: $color-text
                 border-radius: 50%
                 content: ""
                 height: 9px
-                left: half(var(--grid-gutter-negative))
+                left: -$spacing-3
                 margin-top: 0.5em
                 position: absolute
                 width: 9px
@@ -20,7 +20,7 @@
                 background: $color-text
                 bottom: -0.5em
                 content: ""
-                left: half(var(--grid-gutter-negative))
+                left: -$spacing-3
                 position: absolute
                 top: 0.5em
                 width: 1px
@@ -31,11 +31,11 @@
             .title
                 @include h4
                 + p
-                    margin-top: $spacing0
+                    margin-top: $spacing-2
 
         @include media-breakpoint-down(desktop)
             .timeline-event
-                padding-left: half(var(--grid-gutter))
+                padding-left: $spacing-3
                 &::after, &::before
                     left: 0
 
@@ -46,7 +46,7 @@
                 display: flex
                 &::before, &::after
                     left: columns(3)
-                    margin-left: half(var(--grid-gutter))
+                    margin-left: calc(var(--grid-gutter) / 2)
                 &::before
                     transform: translateX(-4px)
                 .title
@@ -77,7 +77,7 @@
             
         .timeline-arrows
             display: flex
-            padding-left: half(var(--grid-gutter))
+            padding-left: calc(var(--grid-gutter) / 2)
             > button
                 @include button-reset
                 background: none
@@ -93,47 +93,46 @@
                     cursor: default
                     opacity: 0.3
         .timeline-events
-            margin-left: half(var(--grid-gutter-negative))
-            margin-right: half(var(--grid-gutter-negative))
-            // TODO : fixer le px gap en desktop entre chaque event
+            margin-left: calc(var(--grid-gutter-negative) / 2)
+            margin-right: calc(var(--grid-gutter-negative) / 2)
             ol
                 display: flex
                 flex-flow: row nowrap
                 list-style: none
                 padding-left: 0
-                margin-top: $spacing0
+                margin-top: $spacing-2
                 transition: margin 0.4s ease-in-out
                 width: 100%
         .timeline-event
             flex: none
-            padding: 0 half(var(--grid-gutter))
+            padding: 0 calc(var(--grid-gutter) / 2)
             scroll-snap-align: start
             transition: 0.3s opacity
             width: 50%
             .title
                 display: block
                 min-height: var(--min-title-height)
-                padding-bottom: $spacing1
+                padding-bottom: $spacing-3
                 @include signature
             .description
                 @include small
             .line
                 background: $block-timeline-horizontal-color
                 height: 1px
-                margin-bottom: $spacing1
+                margin-bottom: $spacing-3
                 opacity: 1
                 overflow: visible
-                width: calc(100% + #{half(var(--grid-gutter))})
+                width: calc(100% + var(--grid-gutter) / 2)
                 &::before
                     background: $block-timeline-horizontal-color
                     border-radius: 50%
                     content: ""
                     display: block
                     height: 9px
+                    margin-left: -4px
                     position: relative
                     top: -4px
                     width: 9px
-
             &.is-passed
                 opacity: 0.15
             &:last-child
@@ -151,12 +150,12 @@
             .timeline-arrows
                 left: 0
                 position: absolute
-                top: calc(#{$spacing2/2} + var(--min-title-height))
+                top: calc(#{$spacing-4/2} + var(--min-title-height))
             .timeline-event
                 padding-right: 0
                 width: 75%
                 .line
-                    margin-bottom: calc(#{$spacing2} + var(--min-title-height))
+                    margin-bottom: calc(#{$spacing-4} + var(--min-title-height))
 
         @include in-page-without-sidebar
             @include media-breakpoint-up(xxl)

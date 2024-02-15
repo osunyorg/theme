@@ -15,7 +15,7 @@
                 flex-shrink: 0
                 height: pxToRem(60)
                 justify-content: center
-                margin-right: $spacing0
+                margin-right: $spacing-2
                 transition: background 0.3s ease, border 0.3s ease
                 width: pxToRem(60)
             &:hover
@@ -32,17 +32,17 @@
                 content: none !important // Remove default icon _blank
     figcaption
         @include meta
-        margin-top: half($spacing0)
+        margin-top: $spacing-1
 
     @include media-breakpoint-down(desktop)
         .files
             li + li
-                margin-top: $spacing1
+                margin-top: $spacing-3
 
     @include in-page-with-sidebar
         .files
-            @include grid(2, desktop, half(var(--grid-gutter)))
+            @include grid(2, desktop, $spacing-3)
 
     @include in-page-without-sidebar
         .files
-            @include grid(3, desktop, half(var(--grid-gutter)))
+            @include grid(3, desktop, $spacing-3)
