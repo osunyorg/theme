@@ -1,0 +1,34 @@
+{{ $location := . }}
+
+{{ with $location }}
+  <article class="location" itemscope itemtype="https://schema.org/EducationalOrganization">
+    <div class="location-content">
+      {{- $title := partial "PrepareHTML" .Title -}}
+      <h2 class="location-title">
+        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+      </h2>
+  
+      {{- if (partial "GetTextFromHTML" .Params.summary) -}}
+        <div class="location-description">
+          <p itemprop="description">
+            {{ partial "GetTruncateContent" ( dict 
+              "text" .Params.summary
+              "length" site.Params.locations.index.truncate_description
+              ) }}
+          </p>
+        </div>
+      {{- end -}}
+    </div>
+    <div class="media">
+      {{- if .Params.image -}}
+        {{- partial "commons/image.html"
+            (dict
+              "image"    .Params.image
+              "sizes"    site.Params.image_sizes.sections.locations.item
+            ) -}}
+      {{- else -}}
+        {{- partial "commons/image-default.html" "locations" -}}
+      {{- end -}}
+    </div>
+  </article>
+{{ end }}
