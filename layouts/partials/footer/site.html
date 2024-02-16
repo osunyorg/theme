@@ -1,6 +1,6 @@
 {{- with site.Data.school -}}
   <address itemscope itemtype="https://schema.org/CollegeOrUniversity">
-    <meta itemprop="image" content="/assets/images/logo.svg">
+    <meta itemprop="logo" content="/assets/images/logo.svg">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
     {{ if or (.address) (.country) -}}
       <p itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
@@ -19,8 +19,8 @@
   </address>
 {{- end -}}
 {{- with site.Data.laboratory -}}
-  <address itemscope itemtype="">
-    <meta itemprop="image" content="/assets/images/logo.svg">
+  <address itemscope itemtype="https://schema.org/ResearchOrganization">
+    <meta itemprop="logo" content="/assets/images/logo.svg">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
     {{ if or (.address) (.country) }}
     <p itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
