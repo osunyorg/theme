@@ -1,13 +1,12 @@
 {{- with site.Data.school -}}
-  <address itemscope itemtype="https://schema.org/CollegeOrUniversity">
+  <div itemscope itemtype="https://schema.org/CollegeOrUniversity">
     <meta itemprop="logo" content="/assets/images/logo.svg">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
     {{ if or (.address) (.country) -}}
-      <p itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+      <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
         {{ if .address }}<span itemprop="streetAddress">{{ trim .address "\n" }}</span><br>{{ end }}
-        {{ if .zipcode }}<span itemprop="postalCode">{{ trim .zipcode "\n" }}</span> {{ end }}{{ if .city }}<span itemprop="addressLocality">{{ trim .city "\n" }}</span>{{ end }}
-        {{ if .country }}<span itemprop="addressCountry">{{ trim .country "\n" }}</span>{{ end }}
-      </p>
+        {{ if .zipcode }}<span itemprop="postalCode">{{ trim .zipcode "\n" }}</span> {{ end }}{{ if .city }}<span itemprop="addressLocality">{{ trim .city "\n" }}</span> {{ end }}{{ if .country }}<span itemprop="addressCountry">{{ trim .country "\n" }}</span>{{ end }}
+      </address>
     {{ end }}
     {{- if .phone -}}
       <p>
@@ -16,19 +15,18 @@
         <a itemprop="telephone" href="tel:{{ $phone_href }}">{{ $phone }}</a>
       </p>
     {{- end }}
-  </address>
+  </div>
 {{- end -}}
 {{- with site.Data.laboratory -}}
-  <address itemscope itemtype="https://schema.org/ResearchOrganization">
-    <meta itemprop="logo" content="/assets/images/logo.svg">
+  <div itemscope itemtype="https://schema.org/ResearchOrganization">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
     {{ if or (.address) (.country) }}
-    <p itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+    <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
       {{ if .address_name }}<span itemprop="name">{{ .address_name }}</span><br>{{ end }}
       {{ if .address }}<span itemprop="streetAddress">{{ .address }}</span><br>{{ end }}
       {{ if .address_additional }}<span itemprop="description">{{ .address_additional }}</span><br>{{ end }}
       {{ if .zipcode }}<span itemprop="postalCode">{{ .zipcode }}</span> {{ end }}{{ if .city }}<span itemprop="addressLocality">{{ .city }}</span> {{ end }}{{ if .country }}<span itemprop="addressCountry">{{ .country }}</span>{{ end }}
-    </p>
+    </address>
     {{ end }}
     {{- if .phone -}}
       <p>
@@ -37,7 +35,7 @@
         <a itemprop="telephone" href="tel:{{ $phone_href }}">{{ $phone }}</a>
       </p>
     {{- end }}
-  </address>
+  </div>
 {{- end -}}
 {{- with site.Data.journal -}}
   <div itemscope itemtype="https://schema.org/Periodical">
