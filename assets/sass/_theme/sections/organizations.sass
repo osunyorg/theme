@@ -1,6 +1,6 @@
 .organization
     display: flex
-    flex-direction: column-reverse
+    flex-direction: column
     position: relative
     &-title
         @include meta
@@ -9,9 +9,12 @@
             text-decoration: none
             display: block
     .media
+        @include handle-svg-fit
         background: $color-background-alt
+        margin-bottom: $spacing0
+        order: -1
+        overflow: hidden
         padding: $spacing1
-        margin-bottom: half($spacing0)
         picture
             aspect-ratio: 1
             display: block
