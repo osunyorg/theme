@@ -19,9 +19,15 @@
           {{ end }}
           <ul class="{{ $list_class }}">
             {{- range .figures }}
-              <li>
+              <li {{- if .image }} class="with-image"{{ end }}>
                 <dl>
-                  <dt><strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}</dt>
+                  <dt>
+                    {{ partial "commons/image.html"
+                          (dict
+                            "image"    .image
+                          )}}
+                    <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
+                  </dt>
                   <dd>{{ partial "PrepareHTML" .description }}</dd>
                 </dl>
               </li>
