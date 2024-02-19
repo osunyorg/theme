@@ -1,6 +1,8 @@
+{{ $logo := site.Params.logo.footer }}
+
 {{- with site.Data.school -}}
   <div itemscope itemtype="https://schema.org/CollegeOrUniversity">
-    <meta itemprop="logo" content="/assets/images/logo.svg">
+    <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
     {{ if or (.address) (.country) -}}
       <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
@@ -19,6 +21,7 @@
 {{- end -}}
 {{- with site.Data.laboratory -}}
   <div itemscope itemtype="https://schema.org/ResearchOrganization">
+    <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
     {{ if or (.address) (.country) }}
     <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
