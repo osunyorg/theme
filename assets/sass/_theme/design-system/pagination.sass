@@ -17,14 +17,14 @@
             text-decoration: none
             transition: background-color .15s ease-in-out
         &.active
-            color: $color-accent
+            color: var(--color-accent)
         &.disabled
             pointer-events: none
             a::before
                 opacity: .3
         &:not(.disabled)
             a:hover
-                background-color: $color-background-alt
+                background-color: var(--color-background-alt)
         &:first-child
             a
                 @include icon-block(arrow-first, before)
@@ -47,7 +47,7 @@
                 padding-right: 0
 
 .posts-navigation, .siblings-navigation
-    border-top: 1px solid $color-border
+    border-top: 1px solid var(--color-border)
     ul
         @include list-reset
         display: flex
@@ -60,7 +60,7 @@
             display: block
             text-decoration: none
             &:hover
-                color: $color-accent
+                color: var(--color-accent)
             span
                 @include meta
                 text-decoration: none
@@ -86,7 +86,7 @@
             flex-direction: column-reverse
             .previous,
             .next
-                border-bottom: 1px solid $color-border
+                border-bottom: 1px solid var(--color-border)
                 display: flex
                 align-items: center
                 span

@@ -2,7 +2,7 @@
     .hero
         h1 span
             display: block
-            color: $color-text-alt
+            color: var(--color-text-alt)
     .lead
         @include h3
         // Safe spacing if post is empty
@@ -45,7 +45,7 @@
             padding-bottom: $spacing-2
         > span
             @include meta
-            color: $color-text-alt
+            color: var(--color-text-alt)
             padding-left: 0
             display: block
             white-space: nowrap
@@ -57,7 +57,7 @@
         display: flex
         gap: $spacing-1
         a
-            @include link($color-accent)
+            @include link(var(--color-accent))
     .events-actions
         align-items: start
         display: flex
@@ -78,7 +78,7 @@
         text-decoration: none
     &-subtitle
         @include h3
-        color: $color-text-alt
+        color: var(--color-text-alt)
     &-categories
         @include meta
         margin-top: $spacing-2
@@ -102,7 +102,7 @@
 .events
     &--list
         .event
-            border-bottom: 1px solid $color-border
+            border-bottom: 1px solid var(--color-border)
             display: flex
             flex-direction: column
             margin-bottom: $spacing-3

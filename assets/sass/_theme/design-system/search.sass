@@ -50,8 +50,8 @@
         right: $spacing-3
         top: $spacing-1
 #search
-    background: $color-background
-    color: $color-text
+    background: var(--color-background)
+    color: var(--color-text)
     height: 100vh
     left: 0
     padding-bottom: $spacing-5
@@ -68,11 +68,11 @@
     &[aria-hidden=true]
         display: none
     a
-        color: $color-text
+        color: var(--color-text)
     .pagefind-ui
         &::before
             content: ""
-            background: $color-background
+            background: var(--color-background)
             height: space(34)
             left: 0
             position: fixed
@@ -84,7 +84,7 @@
         &__form
             @include icon(search-inline, after)
             &::after
-                color: transparentize($color-text-alt, .4)
+                color: rgba(var(--color-text-alt), .6)
                 position: fixed
                 pointer-events: none
                 z-index: 9
@@ -103,16 +103,16 @@
             z-index: 6
             &:focus,
             &:focus-visible
-                border-bottom: 2px solid $color-text
+                border-bottom: 2px solid var(--color-text)
                 outline: none
         &__button[type="button"]
             @include button-reset
-            @include link($color-text)
+            @include link(var(--color-text))
             margin-top: $spacing-4
             padding: 0
         &__message
             @include meta
-            color: $color-text-alt
+            color: var(--color-text-alt)
             text-align: right
             z-index: 11
             position: fixed
@@ -142,8 +142,8 @@
                 &-inner
                     grid-column: 4/13
         &__result-excerpt mark
-                background-color: $color-accent
-                color: $color-background
+                background-color: var(--color-accent)
+                color: var(--color-background)
         &__result-title a
             @include h4
             @include stretched-link
@@ -176,9 +176,9 @@
 
 .pagefind-fixed
     align-items: center
-    background: $color-background-alt
+    background: var(--color-background-alt)
     bottom: 0
-    color: $color-text
+    color: var(--color-text)
     display: flex
     justify-content: space-between
     left: var(--grid-gutter)
@@ -205,7 +205,7 @@
         left: 0
         width: 100vw
         &.in-page-with-toc
-            background: $color-background
+            background: var(--color-background)
             border-top: 1px solid #eee
             bottom: pxToRem(44)
             
@@ -220,7 +220,7 @@ footer#document-footer .footer-search
     #search
         margin-top: 0
         a
-            color: $color-text
+            color: var(--color-text)
 
 .nav-search
     display: flex
