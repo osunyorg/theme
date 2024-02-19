@@ -16,11 +16,6 @@
               "alt"      .alt
               "sizes"    site.Params.image_sizes.blocks.gallery.grid
             )}}
-          {{ if .text }}
-            <figcaption>
-              <p>{{- partial "PrepareText" .text -}}</p>
-            </figcaption>
-          {{ end }}
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             {{ $lightbox_text := false }}
             {{ if and .text .credit }}
@@ -35,6 +30,11 @@
                 title="{{- i18n "commons.lightbox.link.title" -}}"
                 aria-label="{{- i18n "commons.lightbox.link.title" -}}">
             </a>
+          {{ end }}
+          {{ with .text }}
+            <figcaption>
+              <p>{{- . | safeHTML -}}</p>
+            </figcaption>
           {{ end }}
         </figure>
       {{- end -}}

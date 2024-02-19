@@ -4,7 +4,13 @@
   <div>
     {{ range .Params.citations }}
       <div class="citation">
-        <a data-click-to-copy="{{- partial "PrepareText" .content -}}" role="button" title="{{ i18n "commons.click_to_copy.button_title" }}" aria-label="{{ i18n "commons.click_to_copy.aria_label" (dict "description" .label )}}" tabindex="0">{{ .label }}</a>
+        <a  data-click-to-copy="{{- .content | safeHTML -}}" 
+            role="button" 
+            title="{{ i18n "commons.click_to_copy.button_title" }}" 
+            aria-label="{{ i18n "commons.click_to_copy.aria_label" (dict "description" .label )}}" 
+            tabindex="0">
+          {{ .label }}
+        </a>
         <p>{{ partial "PrepareHTML" .content }}</p>
       </div>
     {{ end }}

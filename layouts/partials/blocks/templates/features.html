@@ -22,9 +22,9 @@
                   "attributes" "class='name' itemprop='name'"
                   ) -}}
                   {{ $heading_tag.open -}}
-                    {{ partial "PrepareText" .title }}
+                    {{ .title | safeHTML }}
                   {{ $heading_tag.close -}}
-                  <p>{{ partial "PrepareText" .description }}</p>
+                  <p>{{ .description | safeHTML }}</p>
                 </div>
                 {{- if .image -}}
                   <figure>

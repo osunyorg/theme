@@ -1,4 +1,4 @@
-{{ $summary := (partial "PrepareText" .Params.summary) }}
+{{ $summary := .Params.summary | safeHTML }}
 {{- if and (eq site.Params.summary.position "content") $summary -}}
 <section>
   <h2 class="lead">{{ $summary }}</h2>

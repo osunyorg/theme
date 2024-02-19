@@ -3,7 +3,7 @@
     {{- $title := partial "PrepareHTML" .Title }}
     <p class="name"><a href="{{ .Permalink }}">{{- $title -}}</a></p>
     {{- if partial "GetTextFromHTML" .Params.summary }}
-      <p>{{- partial "PrepareText" .Params.summary -}}</p>
+      <p>{{- .Params.summary | safeHTML -}}</p>
     {{ else if (partial "GetTextFromHTML" .Content) }}
       <p>{{- partial "GetTruncateContent" ( dict "text" .Content ) -}}</p>
     {{ end -}}
