@@ -128,6 +128,13 @@ $space-unit: 4 !default
     @include media-breakpoint-down(desktop)
         grid-gap: $grid-gutter-sm
 
+@mixin flexbox-grid($cols: 12, $gap-y: $grid-gutter, $gap-x: $gap-y)
+    display: flex
+    flex-wrap: wrap
+    gap: $gap-y $gap-x
+    > *
+        flex: 0 0 calc(#{100 / $cols}% - #{$gap-x} * #{($cols - 1) / $cols} )
+
 // This must be used for content inside columns
 @function col($quantity, $base: 12)
     $quantity-on-base: $quantity / $base * 12

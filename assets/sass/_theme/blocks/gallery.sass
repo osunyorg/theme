@@ -32,18 +32,17 @@
         .gallery
             align-items: baseline
             @include in-page-with-sidebar
-                @include grid(3, desktop, half($grid-gutter), half($grid-gutter))
+                @include flexbox-grid(3, half($grid-gutter))
             @include in-page-without-sidebar
-                @include grid(4, desktop)
+                @include flexbox-grid(4)
             @include media-breakpoint-down(desktop)
-                @include grid(2)
-                grid-gap: half($grid-gutter-sm) !important
+                @include flexbox-grid(2, half($grid-gutter-sm))
             &--with-text
                 @include in-page-without-sidebar
-                    @include grid(4, desktop, $spacing0)
+                    @include flexbox-grid(4, half($grid-gutter), $grid-gutter)
                 figure
-                    display: grid
-                    grid-template-columns: subgrid
+                    display: flex
+                    flex-direction: column
                     gap: space(3)
                     figcaption
                         &::after
