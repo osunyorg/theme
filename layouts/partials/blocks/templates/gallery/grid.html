@@ -33,9 +33,9 @@
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             </a>
           {{ end }}
-          {{ if .text }}
+          {{ with .text }}
             <figcaption>
-              <p>{{- partial "PrepareText" .text -}}</p>
+              <p>{{- . | safeHTML -}}</p>
             </figcaption>
           {{ end }}
         </figure>

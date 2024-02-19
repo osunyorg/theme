@@ -17,6 +17,7 @@
     &:not(.toggle-text)
         @include icon(search-inline, after)
         &::after
+            line-height: inherit
             margin-left: half($spacing0)
     &:not(.pagefind-menu)    
         padding: half($spacing0) $spacing0
@@ -34,7 +35,7 @@
             width: 100%
     @include media-breakpoint-up(desktop)
         &.toggle-icon::after
-            margin-left: 0
+                margin-left: 0
 .search__close
     @include icon-block(close, after)
     position: fixed
@@ -174,6 +175,7 @@
 
 .menu .nav-level-1 > li .pagefind-ui__toggle:not(.toggle-icon)::after
     margin-left: 0
+    margin-top: px2rem(2)
 
 .pagefind-fixed
     align-items: center
@@ -223,6 +225,8 @@ footer#document-footer .footer-search
 
 .nav-search
     display: flex
+    .pagefind-menu:not(.toggle-icon)::after
+        margin-top: 10px
 
 .menu .nav-level-1 > li .pagefind-ui__toggle span
     display: inline

@@ -14,7 +14,7 @@
           {{ if .file }}
             {{ $file := partial "GetMedia" .file.id }}
             {{ if $file }}
-              <audio src="{{ $file.direct_url }}" controls title="{{ partial "PrepareText" .title }}"></audio>
+              <audio src="{{ $file.direct_url }}" controls title="{{ .title | safeHTML }}"></audio>
             {{ end }}
           {{ end }}
 

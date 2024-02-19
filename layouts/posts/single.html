@@ -4,9 +4,9 @@
   <div class="document-content" itemscope itemtype="https://schema.org/NewsArticle">
     <meta itemprop="headline" content="{{ partial "PrepareHTML" .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
-    {{ if .Date }}<meta itemprop="datePublished" content="{{ .Date.Format "2006-01-02T15:04" }}">{{ end }}
-    {{ if .Params.summary }}<meta itemprop="abstract" content="{{ partial "PrepareText" .Params.summary }}">{{ end }}
-    {{ if .Summary }}<meta itemprop="description" content="{{ partial "PrepareText" .Summary }}">{{ end }}
+    {{ with .Date }}<meta itemprop="datePublished" content="{{ .Format "2006-01-02T15:04" }}">{{ end }}
+    {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
+    {{ with .Summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
 
     {{ partial "posts/sidebar.html" . }}
 
