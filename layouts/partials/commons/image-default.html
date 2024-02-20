@@ -1,8 +1,8 @@
-{{ $section_type := .}}
-{{ $use_default := (index site.Params $section_type).default_image}}
+{{ $section_type := . }}
+{{ $use_default := (index site.Params $section_type).default_image }}
 
 {{ if site.Data.website.default }}
-  {{ $image := site.Data.website.default.image}}
+  {{ $image := site.Data.website.default.image }}
   {{ if $image }}
     {{ if and $use_default $image }}
       {{ with index site.Params.image_sizes.sections $section_type }}
