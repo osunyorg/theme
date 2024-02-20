@@ -1,19 +1,15 @@
 {{ $section_type := .}}
 {{ $use_default := (index site.Params $section_type).default_image}}
+{{ $image := index site.Data.website.default "image" }}
 
-{{ if site.Data.website.default }}
-  {{ $image := site.Data.website.default.image}}
-  {{ if $image }}
-    {{ if and $use_default $image }}
-      {{ with index site.Params.image_sizes.sections $section_type }}
-        {{ $sizes := . }}
-    
-        {{- partial "commons/image.html"
-            (dict
-              "image"    $image
-              "sizes"    $sizes
-            ) -}}
-      {{ end }}
-    {{ end }}
+{{ if and $use_default $image }}
+  {{ with index site.Params.image_sizes.sections $section_type }}
+    {{ $sizes := . }}
+
+    {{- partial "commons/image.html"
+        (dict
+          "image"    $image
+          "sizes"    $sizes
+        ) -}}
   {{ end }}
 {{ end }}
