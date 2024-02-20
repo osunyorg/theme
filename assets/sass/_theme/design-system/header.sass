@@ -29,8 +29,9 @@ header#document-header
             span
                 color: $header-sticky-color
         @if $header-sticky-invert-logo
-            .logo img
-                filter: invert(1)
+            .logo
+                img, .logo-text
+                    filter: invert(1)
     html.is-scrolling-down:not(.has-menu-opened) &
         @include media-breakpoint-down(desktop)
             transform: translateY(-100%)
@@ -39,6 +40,7 @@ header#document-header
                 transform: translateY(-100%)
     .logo
         color: $header-color
+        text-decoration: none
         img
             display: block
             height: $header-logo-height
@@ -47,6 +49,15 @@ header#document-header
                 transition: filter $header-sticky-transition
             @include media-breakpoint-up(desktop)
                 height: $header-logo-height-desktop
+        .logo-darkmode
+            display: none
+        @media (prefers-color-scheme: dark)
+            > img:first-child
+                display: none
+            .logo-darkmode
+                display: block
+        .logo-text
+            @include h2
     @include media-breakpoint-down(desktop)
         html.has-menu-opened &
             nav

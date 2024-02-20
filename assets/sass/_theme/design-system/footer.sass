@@ -9,12 +9,15 @@ footer#document-footer
     a
         @include link($footer-color)
     .logo
+        text-decoration: none
         img
             height: $footer-logo-height
             max-width: 100%
             width: auto
             @include media-breakpoint-up(desktop)
                 height: $footer-logo-height-desktop
+        .logo-text
+            @include h2
     ul
         @include list-reset
         li
