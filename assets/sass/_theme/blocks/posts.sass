@@ -286,6 +286,49 @@
             .post
                 width: col(4, 10)
 
+    &--scrollable
+        .container
+            padding-right: 0
+        .scrollable
+            display: flex
+            gap: $grid-gutter
+            overflow-x: auto
+            padding-bottom: $spacing1
+            scroll-snap-type: x mandatory
+            .post
+                display: inline-flex
+                scroll-snap-align: start
+                &:last-of-type
+                    margin-right: $grid-gutter
+        @include media-breakpoint-down(desktop)
+            .top
+                margin-right: half($grid-gutter-sm)
+            .scrollable
+                gap: half($grid-gutter-sm)
+                .post
+                    min-width: col-grid-offset(10)
+                    &:last-of-type
+                        margin-right: half($grid-gutter-sm)
+        @media (min-width: 1800px)
+            .scrollable
+                margin-right: calc(-1 * max(#{$grid-gutter}, calc(50vw - #{half($grid-max-width)})))
+        @include in-page-with-sidebar
+            &.block
+                .block-content
+                    padding-left: calc((100% / 12 * (4 / 12 * 12) ))
+            .post
+                min-width: col-grid-offset(3,8)
+        @include in-page-without-sidebar
+            .block-content
+                display: flex
+                gap: $grid-gutter
+                .top
+                    width: col-grid-offset(3)
+                .scrollable
+                    flex: 1
+                .post
+                    min-width: col-grid-offset(4,9)
+
 // Move this part to blocks/categories when categories block is ready
 .block-posts
     .categories--grid

@@ -1,0 +1,11 @@
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading := printf "h%d" $heading_level }}
+<div class="scrollable">
+  {{ range $post := .posts -}}
+    {{ with site.GetPage (printf "/posts/%s" $post) }}
+      {{ partial "posts/post.html" (dict 
+        "post" . 
+        "heading" $heading) }}
+    {{ end }}
+  {{ end }}
+</div>

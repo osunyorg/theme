@@ -141,6 +141,11 @@ $space-unit: 4 !default
     $width: calc( (100% + #{$grid-gutter}) / 12 * #{$quantity-on-base} - #{$grid-gutter} )
     @return #{$width}
 
+@function col-grid-offset($quantity, $base: 12)
+    $quantity-on-base: $quantity / $base * 12
+    $width: calc(100% / 12 * #{$quantity-on-base} - #{$grid-gutter} )
+    @return #{$width}
+
 // This must be used for offset, outside columns
 @function offset($quantity, $base: 12)
     $quantity-on-base: $quantity / $base * 12
