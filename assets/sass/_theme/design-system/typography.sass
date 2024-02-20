@@ -180,6 +180,8 @@ small, .small
         margin-top: $spacing1
         &:first-child, meta + &
             margin-top: 0
+
+%multiple-lists
     ul, ol
         ul, ol
             padding-left: $spacing0
@@ -188,6 +190,11 @@ small, .small
 
 .rich-text
     @include rich-text
+    @extend %multiple-lists
+
+.content
+    section 
+        @extend %multiple-lists
 
 @mixin inherit-text
     font-family: inherit
