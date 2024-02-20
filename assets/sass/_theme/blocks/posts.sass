@@ -285,6 +285,45 @@
             margin-right: auto
             .post
                 width: columns(4)
+    &--scrollable
+        .container
+            padding-right: 0
+        .scrollable
+            display: flex
+            gap: var(--grid-gutter)
+            overflow-x: auto
+            padding-bottom: $spacing-3
+            scroll-snap-type: x mandatory
+            .post
+                display: inline-flex
+                scroll-snap-align: start
+                &:last-of-type
+                    margin-right: var(--grid-gutter)
+        @include media-breakpoint-down(desktop)
+            .top
+                margin-right: half(var(--grid-gutter))
+            .scrollable
+                gap: half(var(--grid-gutter))
+                .post
+                    min-width: columns(10)
+                    &:last-of-type
+                        margin-right: half(var(--grid-gutter))
+        @include in-page-with-sidebar
+            &.block
+                .block-content
+                    padding-left: calc((100% / 12 * (4 / 12 * 12) ))
+            .post
+                min-width: columns(3)
+        @include in-page-without-sidebar
+            .block-content
+                display: flex
+                gap: var(--grid-gutter)
+                .top
+                    width: columns(3)
+                .scrollable
+                    flex: 1
+                .post
+                    min-width: columns(4)
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts
