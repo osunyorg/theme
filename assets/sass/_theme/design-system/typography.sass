@@ -181,7 +181,7 @@ small, .small
         &:first-child, meta + &
             margin-top: 0
 
-@mixin multiple-lists
+%multiple-lists
     ul, ol
         ul, ol
             padding-left: $spacing0
@@ -190,11 +190,11 @@ small, .small
 
 .rich-text
     @include rich-text
-    @include multiple-lists
+    @extend %multiple-lists
 
 .content
     section 
-        @include multiple-lists
+        @extend %multiple-lists
 
 @mixin inherit-text
     font-family: inherit
