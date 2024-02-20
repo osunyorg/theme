@@ -39,25 +39,14 @@ header#document-header
             &:not(:hover)
                 transform: translateY(-100%)
     .logo
+        @extend %logo
         color: $header-color
-        text-decoration: none
         img
-            display: block
             height: $header-logo-height
-            width: auto
             @if $header-sticky-invert-logo
                 transition: filter $header-sticky-transition
             @include media-breakpoint-up(desktop)
                 height: $header-logo-height-desktop
-        .logo-darkmode
-            display: none
-        @media (prefers-color-scheme: dark)
-            > img:first-child
-                display: none
-            .logo-darkmode
-                display: block
-        .logo-text
-            @include h2
     @include media-breakpoint-down(desktop)
         html.has-menu-opened &
             nav
