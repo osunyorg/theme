@@ -12,6 +12,7 @@
     @include media-breakpoint-up(desktop)
         .document-content
             min-height: 600px
+            // Add after element to avoid "min-height" to ignore the last block's margin-bottom
             &::after
                 content: ''
                 display: block
@@ -147,7 +148,6 @@
                         margin-bottom: $spacing-2
                 .media
                     order: 2
-                    width: columns(2)
             @include in-page-without-sidebar
                 &-dates
                     margin-top: 0
@@ -169,7 +169,7 @@
                         grid-column: 0 / 5
                         grid-row: 1 / 4
                 .media
-                    grid-column: 11 / 13
+                    width: col(2)
             @include in-page-with-sidebar
                 @include grid(8)
                 &-content

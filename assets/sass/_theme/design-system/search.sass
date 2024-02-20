@@ -22,9 +22,10 @@
     &:not(.pagefind-menu)    
         padding: $spacing-1 $spacing-2
     &.toggle-icon::after
-        font-size: $h3-size
-        @include media-breakpoint-up(desktop)
-            margin-top: pxToRem(5)
+        font-size: $h2-size
+    &.toggle-both
+        .menu & span
+            padding-right: 0
     span,
     &::after
         display: inline
@@ -93,6 +94,7 @@
                     right: $spacing-3
                     top: space(35)
         &__search-input
+            background-color: $color-background
             border-left: 0
             border-right: 0
             border-radius: 0

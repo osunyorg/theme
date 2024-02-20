@@ -1,5 +1,6 @@
 .organization
-    @include article
+    display: flex
+    flex-direction: column
     position: relative
     &-title
         @include meta
@@ -8,9 +9,12 @@
             text-decoration: none
             display: block
     .media
-        background: var(--color-background-alt)
+        @include handle-svg-fit
+        background: $color-background-alt
+        margin-bottom: $spacing-2
+        order: -1
+        overflow: hidden
         padding: $spacing-3
-        margin-bottom: $spacing-1
         picture
             aspect-ratio: 1
             display: block
