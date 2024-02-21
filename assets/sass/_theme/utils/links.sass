@@ -5,11 +5,11 @@
     text-underline-offset: $link-underline-offset
     transition: $link-transition
     @if $unhover_decorated
-        text-decoration-color: rgba($color, $link-unhover-decoration-color-alpha)
+        text-decoration-color: alphaColor($color, $link-unhover-decoration-color-alpha)
     @else 
         text-decoration-color: transparent
     &:hover
-        text-decoration-color: rgba($color, 1)
+        text-decoration-color: alphaColor($color, 1)
         text-decoration-thickness: $link-underline-thickness
 
 @mixin link-hovered-underline-only
