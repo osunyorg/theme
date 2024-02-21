@@ -82,6 +82,11 @@
         // Safe spacing if post is empty
     .document-content
         min-height: 350px
+        // Add after element to avoid "min-height" to ignore the last block's margin-bottom
+        &::after
+            content: ''
+            display: block
+            height: 1px
     &:not(.full-width)
         .post-sidebar
             @include sidebar
