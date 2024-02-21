@@ -7,7 +7,8 @@ footer#document-footer
     @include media-breakpoint-down(desktop)
         z-index: $zindex-footer
     a
-        @include link($footer-color)
+        color: $footer-color
+        @extend %underline-on-hover
     .logo
         @extend %logo
         img
@@ -21,8 +22,8 @@ footer#document-footer
             + li
                 margin-top: $spacing-2
             a
-                @include link($footer-color)
-                text-decoration-color: transparent
+                // @include link($footer-color)
+                @extend %underline-on-hover
     .footer
         &-site
             @include small
