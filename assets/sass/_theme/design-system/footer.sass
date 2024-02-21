@@ -26,6 +26,8 @@ footer#document-footer
     .footer
         &-site
             @include small
+            * + *
+                margin-top: $spacing0
         &-social, &-legals, &-credit
             @include meta
         &-credit
@@ -51,9 +53,10 @@ footer#document-footer
                     box-shadow: none
                 &[aria-expanded="true"]
                     background: $dropdown-i18n-background-color
-                    justify-content: space-between
                     color: $dropdown-i18n-color
                     width: 100%
+                    @include media-breakpoint-up(desktop)
+                        justify-content: space-between
                     + .dropdown-menu
                         animation-duration: unset
                     &::after
@@ -62,24 +65,36 @@ footer#document-footer
                     margin-right: $spacing0
                 &::after
                     margin-left: $spacing0
-            button[aria-expanded="true"],
-            .dropdown-menu
-                outline: px2rem(10) solid $dropdown-i18n-background-color
-                min-width: $spacing4
+            button[aria-expanded="true"]
+                min-width: px2rem(150)
+                outline: $spacing0 solid $dropdown-i18n-background-color
             .dropdown-menu
                 @include meta
                 background: $dropdown-i18n-background-color
+                margin-left: -$spacing0
+                margin-right: -$spacing0
+                margin-top: $spacing0
                 a
                     color: $dropdown-i18n-color
+                    padding: $spacing0
+                ul
+                    li + li
+                        margin-top: 0
                 @include media-breakpoint-up(desktop)
                     left: 0
-                    margin-top: px2rem(17)
                     max-height: calc(100vh - var(--header-height))
                     padding: 0
                     position: absolute
                     width: fit-content
+                    min-width: calc(#{px2rem(150)} + #{$spacing0} * 2)
+                    a
+                        padding-top: 0
                     a:focus-visible
                         outline-offset: -1px
+                @include media-breakpoint-down(desktop)
+                    position: relative
+                    li
+                        border-top: 1px solid $color-border
 
         @if $footer-icons-enabled
             &-social 
