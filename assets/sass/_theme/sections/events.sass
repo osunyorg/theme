@@ -2,7 +2,7 @@
     .hero
         h1 span
             display: block
-            color: $color-text-alt
+            color: var(--color-text-alt)
     .lead
         @include h3
         // Safe spacing if post is empty
@@ -12,6 +12,7 @@
     @include media-breakpoint-up(desktop)
         .document-content
             min-height: 600px
+            // Add after element to avoid "min-height" to ignore the last block's margin-bottom
             &::after
                 content: ''
                 display: block
@@ -45,7 +46,7 @@
             padding-bottom: $spacing-2
         > span
             @include meta
-            color: $color-text-alt
+            color: var(--color-text-alt)
             padding-left: 0
             display: block
             white-space: nowrap
@@ -57,7 +58,7 @@
         display: flex
         gap: $spacing-1
         a
-            @include link($color-accent)
+            @include link(var(--color-accent))
     .events-actions
         align-items: start
         display: flex
@@ -78,7 +79,7 @@
         text-decoration: none
     &-subtitle
         @include h3
-        color: $color-text-alt
+        color: var(--color-text-alt)
     &-categories
         @include meta
         margin-top: $spacing-2
@@ -102,7 +103,7 @@
 .events
     &--list
         .event
-            border-bottom: 1px solid $color-border
+            border-bottom: 1px solid var(--color-border)
             display: flex
             flex-direction: column
             margin-bottom: $spacing-3
@@ -147,7 +148,6 @@
                         margin-bottom: $spacing-2
                 .media
                     order: 2
-                    width: columns(2)
             @include in-page-without-sidebar
                 &-dates
                     margin-top: 0
@@ -169,7 +169,7 @@
                         grid-column: 0 / 5
                         grid-row: 1 / 4
                 .media
-                    grid-column: 11 / 13
+                    width: col(2)
             @include in-page-with-sidebar
                 @include grid(8)
                 &-content

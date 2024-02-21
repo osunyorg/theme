@@ -1,5 +1,6 @@
 .organization
-    @include article
+    display: flex
+    flex-direction: column
     position: relative
     &-title
         @include meta
@@ -8,9 +9,12 @@
             text-decoration: none
             display: block
     .media
-        background: $color-background-alt
+        @include handle-svg-fit
+        background: $organization-background-color
+        margin-bottom: $spacing-2
+        order: -1
+        overflow: hidden
         padding: $spacing-3
-        margin-bottom: $spacing-1
         picture
             aspect-ratio: 1
             display: block
@@ -53,14 +57,14 @@
         @include media-breakpoint-up(desktop)
             font-size: $lead-sidebar-size-desktop
     .document-content
-        .logo
+        .logo-organization
             figcaption
                 text-align: right
                 @include meta
                 margin-bottom: $spacing-2
             picture
                 aspect-ratio: 1/1
-                background: $color-background-alt
+                background: var(--color-background-alt)
                 display: block
                 padding: $spacing-4
                 margin-bottom: $spacing-1
@@ -77,7 +81,7 @@
             @include grid(2, md)
     @include media-breakpoint-down(md)
         .document-content
-            .logo
+            .logo-organization
                 margin-top: $spacing-5
                 display: flex
                 justify-content: space-between
@@ -89,5 +93,5 @@
                 gap: var(--grid-gutter)
             [itemprop="articleBody"]
                 width: columns(8)
-            .logo
+            .logo-organization
                 width: columns(3)

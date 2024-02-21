@@ -42,13 +42,13 @@
             margin-top: $spacing-2
     time
         @include meta
-        color: $color-text-alt
+        color: var(--color-text-alt)
         display: block
 
 @mixin list-section
     @include list-reset
     > li
-        border-bottom: 1px solid $color-border
+        border-bottom: 1px solid var(--color-border)
         padding-bottom: $spacing-3
         padding-top: $spacing-3
         position: relative
@@ -72,7 +72,7 @@
         a
             text-decoration: none
             &:hover
-                color: $color-accent
+                color: var(--color-accent)
 
         @include media-breakpoint-down(desktop)
             a:nth-child(2)
@@ -85,7 +85,7 @@
             justify-content: space-between
 
 @mixin text-underline
-    text-decoration-color: $color-border
+    text-decoration-color: var(--color-border)
     text-decoration-line: underline
     text-decoration-thickness: 1px
     text-underline-offset: 3px
@@ -107,7 +107,7 @@
 @mixin collapsed-figcaption
     figcaption
         @include meta
-        color: $color-text-alt
+        color: var(--color-text-alt)
         position: absolute
         display: block
         left: 0
@@ -141,7 +141,7 @@
                 padding-right: 0
         @include media-breakpoint-down(desktop)
             position: relative
-            background: $color-background
+            background: var(--color-background)
             &::before
                 background: transparent
             .credit-content
@@ -156,11 +156,12 @@
     position: relative
     .dropdown-menu
         margin-top: $header-nav-padding-y
-        padding-left: $spacing-3
-        padding-bottom: $spacing-2
-        padding-top: $spacing-2
-        padding-right: $spacing-3
         right: 0
+        @include media-breakpoint-up(desktop)
+            padding-left: $spacing-3
+            padding-bottom: $spacing-2
+            padding-top: $spacing-2
+            padding-right: $spacing-3
     li a
         padding-bottom: $spacing-1
         padding-top: $spacing-1

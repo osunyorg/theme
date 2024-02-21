@@ -1,0 +1,22 @@
+{{ $logo := . }}
+{{ $file := false}}
+{{ $file_darkmode := false }}
+{{ if eq (printf "%T" $logo) "string" }}
+  {{ $file = $logo }}
+{{ else }}
+  {{ $file = $logo.default }}
+  {{ $file_darkmode = $logo.darkmode }}
+{{ end }}
+
+<a class="logo" href="{{ site.Home.Permalink }}">
+  {{ if $file }}
+    {{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file "static" true) }}
+    <img src="{{ $file }}" alt="{{ site.Title }}" height="{{ index $fileDimensions 1 }}" width="{{ index $fileDimensions 0 }}">
+    {{ if $file_darkmode }}
+      {{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file_darkmode "static" true) }}
+      <img class="logo-darkmode" src="{{ $file_darkmode }}" alt="{{ site.Title }}" height="{{ index $fileDimensions 1 }}" width="{{ index $fileDimensions 0 }}">
+    {{ end }}
+  {{ else }}
+    <span class="logo-text">{{ site.Title }}</span>
+  {{ end }}
+</a>

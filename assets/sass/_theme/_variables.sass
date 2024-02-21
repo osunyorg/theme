@@ -1,31 +1,26 @@
 \:root
   // -------------- //
-  //      GRID      //
+  //     COLORS     //
   // ---------------//
+  --color-accent: #{$color-accent}
+  --color-text: #{$color-text}
+  --color-text-alt: #{$color-text-alt}
+  --color-selection: #{$color-selection}
+  --color-selection-background: #{$color-selection-background}
+  --color-border: #{$color-border}
+  --color-background-alt: #{$color-background-alt}
+  --color-background: #{$color-background}
 
-  // Largeur maximum de la grille définie dans _configuration.sass
-  --grid-max-width: #{$grid-max-width}
-
-  // Largeur de la grille
-  // Elle inclut les gouttières extérieures
-  // Si la largeur de l'écran est inférieure à 1980px, on prend la largeur totale.
-  // La grille n'est jamais plus grande que 1980px
-  --grid-width: Min(var(--grid-max-width), 100vw)
-
-  // Largeur d'une colonne
-  // On soustrait à la largeur de la grille les 13 gouttières (les 2 extérieures et les 11 intérieures), puis on divise par 12
-  --column-width: calc( (var(--grid-width) - var(--grid-gutter) * 13) / 12)
-
-  // Taille de la gouttière
-  // Les largeurs des gouttières en fonction des breakpoints sont définies dans _configuration.sass
-  --grid-gutter: #{$grid-gutter}
-  --grid-gutter-negative: #{-$grid-gutter}
-  @include media-breakpoint-up(lg)
-    --grid-gutter: #{$grid-gutter-lg}
-    --grid-gutter-negative: #{-$grid-gutter-lg}
-  @include media-breakpoint-up(xxl)
-    --grid-gutter: #{$grid-gutter-xxl}
-    --grid-gutter-negative: #{-$grid-gutter-xxl}
+  @if $has-dark-mode
+    @media (prefers-color-scheme: dark)
+      --color-accent: #{$color-dark-accent}
+      --color-text: #{$color-dark-text}
+      --color-text-alt: #{$color-dark-text-alt}
+      --color-border: #{$color-dark-border}
+      --color-background-alt: #{$color-dark-background-alt}
+      --color-background: #{$color-dark-background}
+      --color-selection: #{$color-dark-selection}
+      --color-selection-background: #{$color-dark-selection-background}
 
   // -------------- //
   //   TYPOGRAPHY   //
@@ -114,3 +109,31 @@
 
     --quote-size: #{$quote-size-desktop}
     --quote-line-height: #{$quote-line-height-desktop}
+
+  // -------------- //
+  //      GRID      //
+  // ---------------//
+
+  // Largeur maximum de la grille définie dans _configuration.sass
+  --grid-max-width: #{$grid-max-width}
+
+  // Largeur de la grille
+  // Elle inclut les gouttières extérieures
+  // Si la largeur de l'écran est inférieure à 1980px, on prend la largeur totale.
+  // La grille n'est jamais plus grande que 1980px
+  --grid-width: Min(var(--grid-max-width), 100vw)
+
+  // Largeur d'une colonne
+  // On soustrait à la largeur de la grille les 13 gouttières (les 2 extérieures et les 11 intérieures), puis on divise par 12
+  --column-width: calc( (var(--grid-width) - var(--grid-gutter) * 13) / 12)
+
+  // Taille de la gouttière
+  // Les largeurs des gouttières en fonction des breakpoints sont définies dans _configuration.sass
+  --grid-gutter: #{$grid-gutter}
+  --grid-gutter-negative: #{-$grid-gutter}
+  @include media-breakpoint-up(lg)
+    --grid-gutter: #{$grid-gutter-lg}
+    --grid-gutter-negative: #{-$grid-gutter-lg}
+  @include media-breakpoint-up(xxl)
+    --grid-gutter: #{$grid-gutter-xxl}
+    --grid-gutter-negative: #{-$grid-gutter-xxl}

@@ -14,12 +14,12 @@
         gap: 0 $spacing-2
         z-index: 2
         a
-            @include link($color-accent)
+            @include link(var(--color-accent))
         li
             margin: 0
     .post-author
         @include meta
-        color: $color-text-alt
+        color: var(--color-text-alt)
 
 .posts__section,
 .authors__term,
@@ -27,7 +27,7 @@
 .persons__page
     .posts--list
         article
-            border-bottom: 1px solid $color-border
+            border-bottom: 1px solid var(--color-border)
             display: flex
             margin-bottom: $spacing-3
             padding-bottom: $spacing-3
@@ -82,6 +82,11 @@
         // Safe spacing if post is empty
     .document-content
         min-height: 350px
+        // Add after element to avoid "min-height" to ignore the last block's margin-bottom
+        &::after
+            content: ''
+            display: block
+            height: 1px
     &:not(.full-width)
         .post-sidebar
             @include sidebar
@@ -111,13 +116,13 @@
         justify-content: space-between
         padding-top: $spacing-2
         padding-bottom: $spacing-2
-        border-color: $color-border
+        border-color: var(--color-border)
         &:not(:first-child)
             align-items: center
-            border-top: 1px solid $color-border
+            border-top: 1px solid var(--color-border)
         > span
             @include meta
-            color: $color-text-alt
+            color: var(--color-text-alt)
             padding-left: 0
             white-space: nowrap
             vertical-align: top
@@ -127,7 +132,7 @@
         &.social-share
             align-items: center
     a
-        @include link($color-accent)
+        @include link(var(--color-accent))
         text-align: right
     .share
         display: block

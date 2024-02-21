@@ -157,8 +157,20 @@ small, .small
         &:first-child, meta + &
             margin-top: 0
 
+%multiple-lists
+    ul, ol
+        ul, ol
+            padding-left: $spacing-2
+            @include media-breakpoint-up(desktop)
+                padding-left: $spacing-3
+
 .rich-text
     @include rich-text
+    @extend %multiple-lists
+
+.content
+    section 
+        @extend %multiple-lists
 
 @mixin inherit-text
     font-family: inherit
@@ -272,9 +284,8 @@ abbr, abbr[title]
     text-decoration-style: dotted
 
 ::selection
-    background: rgba($color-text, .7)
-    color: $color-background
-    text-shadow: none
+    background: var(--color-selection-background)
+    color: var(--color-selection)
 
 sub,
 sup

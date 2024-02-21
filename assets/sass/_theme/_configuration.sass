@@ -2,13 +2,26 @@
 $color-accent: #0038FF !default
 $color-text: #000000 !default
 $color-text-alt: #454545 !default
-$color-border: rgba(0, 0, 0, 0.30) !default
-$color-background-alt: #F2F2F2 !default
 $color-background: #FFFFFF !default
+$color-background-alt: #F2F2F2 !default
+$color-border: rgba(0, 0, 0, 0.30) !default
+$color-selection: $color-background !default
+$color-selection-background: rgba($color-text, .7) !default
 
-$body-color: $color-text !default
-$body-background-color: $color-background !default
-$link-color: $color-text !default
+// Scheme Dark colors (enable dark mode in your hugo configuration file)
+$has-dark-mode: true
+$color-dark-accent: rgb(120, 208, 255) !default
+$color-dark-text: #ffffff !default
+$color-dark-text-alt: #cbcbcb !default
+$color-dark-background: #000000 !default
+$color-dark-background-alt: #181919 !default
+$color-dark-border: rgba(255, 255, 255, 0.3) !default
+$color-dark-selection: $color-dark-background !default
+$color-dark-selection-background: rgba($color-dark-text, .7) !default
+
+$body-color: var(--color-text) !default
+$body-background-color: var(--color-background) !default
+$link-color: var(--color-text) !default
 
 // Grid System 
 $grid-gutter: pxToRem(24) !default
@@ -175,19 +188,19 @@ $btn-padding-y-desktop: pxToRem(15) !default
 $btn-padding-x: $spacing-3 !default
 $btn-padding-y: $spacing-2 !default
 $btn-border-radius: pxToRem(4) !default
-$btn-border: 1px solid $color-text !default
-$btn-hover-background: $color-background-alt !default
+$btn-border: 1px solid var(--color-text) !default
+$btn-hover-background: var(--color-background-alt) !default
 
 // Chip
-$chip-background: $color-background !default
-$chip-background-hover: $color-background-alt !default
-$chip-border: 1px solid $color-border !default
+$chip-background: var(--color-background) !default
+$chip-background-hover: var(--color-background-alt) !default
+$chip-border: 1px solid var(--color-border) !default
 $chip-border-radius: $btn-border-radius !default
-$chip-color: $color-text !default
+$chip-color: var(--color-text) !default
 
 // Form
-$form-btn-color: $color-background !default
-$form-btn-background-color: $color-accent !default
+$form-btn-color: var(--color-background) !default
+$form-btn-background-color: var(--color-accent) !default
 $form-input-border-radius: 4px !default
 
 // Z-index
@@ -202,16 +215,16 @@ $zindex-aside: 48 !default
 $zindex-footer: 50 !default
 
 // Header
-$header-color: $color-text !default
-$header-hover-color: $color-accent !default // TODO : Réflechir à plus élégant / générique
-$header-background: $color-background-alt !default
+$header-color: var(--color-text) !default
+$header-hover-color: var(--color-accent) !default // TODO : Réflechir à plus élégant / générique
+$header-background: var(--color-background-alt) !default
 $header-transition: 0.3s !default
 $header-dropdown-full: false !default
 $header-dropdown-background: $header-background !default
 $header-dropdown-color: $header-color !default
 $header-dropdown-transition: $header-transition !default
 $header-sticky-enabled: true !default
-$header-sticky-background: $color-background !default
+$header-sticky-background: var(--color-background) !default
 $header-sticky-dropdown-background: $header-sticky-background !default
 $header-sticky-color: $header-color !default
 $header-sticky-transition: $header-transition !default
@@ -228,27 +241,28 @@ $header-border-bottom-width: 1px !default
 $body-overlay-color: rgba(0, 0, 0, 0.3) !default
 
 // Footer
-$footer-color: $color-text !default
-$footer-background-color: $color-background-alt !default
+$footer-color: var(--color-text) !default
+$footer-background-color: var(--color-background-alt) !default
 $footer-logo-height: $header-logo-height !default
 $footer-logo-height-desktop: $footer-logo-height !default
 $footer-icons-enabled: true !default
 $footer-icons-size: pxToRem(32) !default
 $footer-text-hidden: false !default
-$dropdown-i18n-background-color: $color-background !default
-$dropdown-i18n-color: $color-text !default
+$dropdown-i18n-background-color: var(--color-background) !default
+$dropdown-i18n-color: var(--color-text) !default
 
 // Hero
 $hero-height: 300px !default
 $hero-height-desktop: 500px !default
-$hero-color: $color-text !default
-$hero-background-color: $color-background-alt !default
+$hero-color: var(--color-text) !default
+$hero-background-color: var(--color-background-alt) !default
+$hero-credit-color: var(--color-text-alt) !default
 
 // Breadcrumb
 $breadcrumb-color: $hero-color !default
 $breadcrumb-color-active: $hero-color !default
 $breadcrumb-icon: "caret-right" !default
-$breadcrumb-icon-color: $color-text-alt !default
+$breadcrumb-icon-color: var(--color-text-alt) !default
 
 // Icons
 $icons: ()
@@ -314,9 +328,9 @@ $lightbox-overlay-color: rgba(0, 0, 0, 0.90) !default
 $lightbox-backdrop: blur(16px) !default
 
 // Table of content
-$toc-color: $color-text !default
-$toc-active-color: $color-accent !default // TODO : checker ce que ça fait
-$toc-background-color: $color-background-alt !default
+$toc-color: var(--color-text) !default
+$toc-active-color: var(--color-accent) !default // TODO : checker ce que ça fait
+$toc-background-color: var(--color-background-alt) !default
 $toc-font-family: $body-font-family !default
 $toc-font-size: $body-size !default
 $toc-font-size-desktop: $body-size-desktop !default
@@ -338,52 +352,52 @@ $table-body-size-desktop: $body-size-desktop !default
 $block-space-y: $spacing-5 !default
 
 // Block call to action
-$block-call-to-action-background: $color-accent !default
-$block-call-to-action-color: $color-background !default
-$block-call-to-action-button-background: $color-background !default
-$block-call-to-action-button-color: $color-text !default
-$block-call-to-action-button-hover-background: $color-text-alt !default
-$block-call-to-action-button-hover-color: $color-background !default
+$block-call-to-action-background: var(--color-accent) !default
+$block-call-to-action-color: var(--color-background) !default
+$block-call-to-action-button-background: var(--color-background) !default
+$block-call-to-action-button-color: var(--color-text) !default
+$block-call-to-action-button-hover-background: var(--color-text-alt) !default
+$block-call-to-action-button-hover-color: var(--color-background) !default
 
 // Block chapter
-$block-chapter-layout-accent-background: $color-accent !default
-$block-chapter-layout-accent-color: $color-background !default
-$block-chapter-layout-alt-background: $color-background-alt !default
-$block-chapter-layout-alt-color: $color-text !default
+$block-chapter-layout-accent-background: var(--color-accent) !default
+$block-chapter-layout-accent-color: var(--color-background) !default
+$block-chapter-layout-alt-background: var(--color-background-alt) !default
+$block-chapter-layout-alt-color: var(--color-text) !default
 
 // Block definitions
-$block-definition-border-color: $color-border !default
-$block-definition-border-color-hovered: $color-accent !default
-$block-definition-color-hovered: $color-accent !default
+$block-definition-border-color: var(--color-border) !default
+$block-definition-border-color-hovered: var(--color-accent) !default
+$block-definition-color-hovered: var(--color-accent) !default
 $block-definition-font-size: $body-size !default
 $block-definition-font-size-desktop: $body-size-desktop !default
 
 // Block pages
-$block-pages-card-background: $color-background-alt !default
-$block-pages-card-page-background: $color-background !default
-$block-pages-card-page-color: $color-text !default
-$block-pages-card-page-background-hover: $color-accent !default
-$block-pages-card-page-color-hover: $color-background !default
+$block-pages-card-background: var(--color-background-alt) !default
+$block-pages-card-page-background: var(--color-background) !default
+$block-pages-card-page-color: var(--color-text) !default
+$block-pages-card-page-background-hover: var(--color-accent) !default
+$block-pages-card-page-color-hover: var(--color-background) !default
 
 // Block posts
 $block-posts-grid-columns: 3 !default
 
 // Block timeline
-$block-timeline-horizontal-background: $color-background-alt !default
-$block-timeline-horizontal-color: $color-text !default
+$block-timeline-horizontal-background: var(--color-background-alt) !default
+$block-timeline-horizontal-color: var(--color-text) !default
 
 // Block testimonials
 $block-testimonials-xl-font-size: $quote-size-desktop-short !default
 $block-testimonials-xl-line-height: $quote-line-height !default
 $block-testimonials-xl-font-size-long-text: $quote-size-desktop-long !default
 $block-testimonials-xl-line-height-long-text: $quote-line-height !default
-$block-testimonials-color: $color-accent !default
+$block-testimonials-color: var(--color-accent) !default
 $block-testimonials-font-family: $quote-font-family !default
 $block-testimonials-font-size: $quote-size !default
 $block-testimonials-line-height: $quote-line-height !default
 $block-testimonials-style: $quote-style !default
-$block-testimonials-pagination-background: $color-border !default
-$block-testimonials-pagination-progress-background: $color-accent !default
+$block-testimonials-pagination-background: var(--color-border) !default
+$block-testimonials-pagination-progress-background: var(--color-accent) !default
 
 // Block key_figures
 
@@ -408,7 +422,7 @@ $block-key_figures-font-size-xxl: $block-key_figures-font-size-xl !default
 $block-key_figures-number-font-size-xxl: pxToRem(80) !default
 
 // Block gallery
-$block-gallery-carousel-background: $color-background-alt !default
+$block-gallery-carousel-background: var(--color-background-alt) !default
 $block-gallery-carousel-max-height: 70vh !default
 
 // Block image
@@ -416,17 +430,20 @@ $block-image-max-height-with-sidebar: calc(100vh - var(--header-height)) !defaul
 $block-image-max-height-without-sidebar: none !default
 
 // Block video
-$block-video-background: $color-background-alt !default
+$block-video-background: var(--color-background-alt) !default
 
 // Sections
 $article-media-aspect-ratio: 2 !default
 
-$post-time-color: $color-text-alt !default
+$post-time-color: var(--color-text-alt) !default
 // Si layout posts grid (ne concerne pas les blocks posts)
 $posts-grid-columns: $block-posts-grid-columns !default
 
 // Person
-$persons-avatar-background-color: $color-background-alt !default
+$persons-avatar-background-color: var(--color-background-alt) !default
+
+// Organization
+$organization-background-color: $color-background-alt !default // Use sass variable color-background To avoid dark logo on darkmode background-alt color
 
 // Program
 $program-essential-font-size: $meta-size !default
