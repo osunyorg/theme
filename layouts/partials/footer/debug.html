@@ -220,16 +220,17 @@
           parent = img.parentElement,
           pixelRatio = window.devicePixelRatio,
           dimensions = {
-            width: img.naturalWidth * pixelRatio,
-            height: img.naturalHeight * pixelRatio
+            width: Math.round(img.naturalWidth * pixelRatio),
+            height: Math.round(img.naturalHeight * pixelRatio)
           },
           target = {
-            width: img.width * window.devicePixelRatio,
-            height: img.height * window.devicePixelRatio
+            width: Math.round(img.width * window.devicePixelRatio),
+            height: Math.round(img.height * window.devicePixelRatio)
           },
           essential = 
-`<b>Loaded</b> : ${dimensions.width}x${dimensions.height}\n
-<b>Needed</b> : ${target.width}x${target.height}`,
+`<b>Loaded</b> : ${dimensions.width}x${dimensions.height}<br>
+<b>Needed</b> : ${target.width}x${target.height}<br>
+<b>Ideal config</b> : ${target.width / pixelRatio}x${target.height / pixelRatio}`
           result =`
   Rendered size: ${img.width}x${img.height}
   Intrinsic size: ${dimensions.width}x${dimensions.height}
@@ -241,7 +242,7 @@
         p.innerHTML = essential
         p.append(small);
         p.classList.add('img-debug');
-        const ratio = getImageRatio(dimensions, target)
+        const ratio = getImageWidthRatio(dimensions, target);
         if (ratio > threshold) {
           p.classList.add('is-bad');
         } else {
@@ -259,6 +260,10 @@
       img.addEventListener('load', listener);
       window.addEventListener('resize', listener);
     });
+  }
+
+  function getImageWidthRatio(source, target) {
+    return Math.abs((source.width - target.width) / Math.max(source.width, target.width));
   }
 
   function getImageRatio(source, target) {
