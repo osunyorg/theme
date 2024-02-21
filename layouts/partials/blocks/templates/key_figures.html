@@ -22,6 +22,9 @@
               <li>
                 <dl>
                   <dt>
+                    {{ with .image }}
+                      {{ partial "commons/image.html" (dict "image" .) }}
+                    {{ end }}
                     <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
                   </dt>
                   <dd>{{ partial "PrepareHTML" .description }}</dd>
