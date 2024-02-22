@@ -8,7 +8,6 @@ class BlockWithGrab {
         this.items = this.list.querySelectorAll('.grab-item');
         this.previous = this.block.querySelector('.previous');
         this.next = this.block.querySelector('.next');
-        this.links = this.list.querySelectorAll('a');
 
         this.index = 0;
 
@@ -62,44 +61,36 @@ class BlockWithGrab {
     }
 
     handlePointers () {
-        let startX,
+        let endEvents = ['pointerup'],
+            startX,
             endX,
             threshold = 30,
-            isPointerDown = false,
-            hasMoved = false;
+            isPointerDown = false;
 
         this.content.style.touchAction = 'pan-y';
 
-        const handlePointerMove = (event) => {
-            // console.log('pointermove')
-            this.isManipulated = isPointerDown;
-            endX = event.clientX;
-            hasMoved = true;
-    
-            if (isPointerDown && hasMoved) {
-                event.preventDefault();
-                this.links.forEach((link) => {
-                    link.style.pointerEvents = "none";
-                });
-            }
-        };
-        this.content.addEventListener('pointerdown', (event) => {
-            // console.log('pointerdown')
+        this.block.addEventListener('pointerdown', (event) => {
+            this.content.classList.add('is-grabbing');
+
+            this.items.forEach((item) => {
+                item.style.pointerEvents = "none";
+            });
+
             startX = event.clientX;
             isPointerDown = true;
-            hasMoved = false;
-    
-            window.addEventListener('pointermove', handlePointerMove);
-            window.addEventListener('pointerup', handlePointerUp);
         });
-    
-        const handlePointerUp = (event) => {
-            // console.log('pointerup')
-            window.removeEventListener('pointermove', handlePointerMove);
-            window.removeEventListener('pointerup', handlePointerUp);
-        
-            this.onManipulationEnd(startX, endX, threshold);
-        };
+
+        this.block.addEventListener('pointermove', (event) => {
+            this.isManipulated = isPointerDown;
+            endX = event.clientX;
+        });
+
+        endEvents.forEach(event => {
+            this.block.addEventListener(event, (event) => {
+                isPointerDown = false;
+                this.onManipulationEnd(startX, endX, threshold);
+            });
+        });
     }
 
     onManipulationEnd (start, end, threshold) {
@@ -110,8 +101,8 @@ class BlockWithGrab {
         }
 
         this.content.classList.remove('is-grabbing');
-        this.links.forEach((link) => {
-            link.style.pointerEvents = "all";
+        this.items.forEach((item) => {
+            item.style.pointerEvents = "all";
         });
 
         setTimeout(() => {
