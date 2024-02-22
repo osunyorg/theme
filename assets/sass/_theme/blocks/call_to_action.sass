@@ -27,13 +27,12 @@
                     flex-direction: column
             a
                 @include meta
+                @extend %underline-on-hover
                 color: $block-call-to-action-color
                 margin-right: $spacing-3
                 margin-top: $spacing-3
-                text-decoration-color: rgba($block-call-to-action-color, .3)
                 display: inline-block
-                &:hover
-                    text-decoration-color: $block-call-to-action-color
+                text-decoration-color: alphaColor($block-call-to-action-color, 0.3)
                 &:first-child
                     @include btn
                     background: $block-call-to-action-button-background
