@@ -1,65 +1,9 @@
-{{- $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero"  -}}
 {{- $title := or .Params.header_text .Title -}}
-{{ $subtitle := "" }}
-{{- $summary := .Params.summary | safeHTML -}}
-{{ if and (eq site.Params.summary.position "hero") $summary }}
-  {{ $subtitle = $summary }}
-{{ end }}
-
-<header class="hero hero-program {{ if $breadcrumb_is_after_hero -}} hero--no-margin {{- end }}">
-  <div class="container">
-    {{- if eq site.Params.breadcrumb.position "hero-start" -}}
-      {{- if .Params.breadcrumb | default true -}}
-        {{ partial "header/breadcrumbs.html" . }}
-      {{- end -}}
-    {{- end -}}
-    <div class="content">
-      {{- if $subtitle -}}
-        <hgroup>
-          <h1>{{ partial "PrepareHTML" $title }}</h1>
-          <p class="lead">{{ partial "PrepareHTML" $subtitle }}</p>
-        </hgroup>
-      {{- else -}}
-        <h1>{{ partial "PrepareHTML" $title }}</h1>
-      {{- end -}}
-    </div>
-  </div>
-
-  <div class="essential-container" id="#{{ urlize (i18n "programs.toc.essential") }}">
-    <div class="container">
-      {{- partial "programs/essential" . -}}
-      <div class="buttons">
-        <div class="dropdown-share dropup">
-          <button type="button" id="shareProgram" data-bs-toggle="dropdown" aria-expanded="false">{{ i18n "commons.share" }}</button>
-          <div class="dropdown-menu">
-            {{ partial "commons/share.html" . }}
-          </div>
-        </div>
-        {{ with .Params.downloadable_summary }}
-          {{- $file := partial "GetMedia" . -}}
-          {{- if $file -}}
-            {{- $url := $file.url -}}
-            {{- if site.Params.keycdn -}}
-              {{- $url = $file.direct_url -}}
-            {{- end -}}
-            <a href="{{ $url }}" download target="_blank">{{ i18n "commons.download.singular_name" }}</a>
-          {{- end -}}
-        {{ end }}
-      </div>
-    </div>
-  </div>
-
-  {{- if eq site.Params.breadcrumb.position "hero-end" -}}
-    {{- if .Params.breadcrumb | default true -}}
-      {{ partial "header/breadcrumbs.html" . }}
-    {{- end -}}
-  {{- end -}}
-</header>
-
-{{- if $breadcrumb_is_after_hero -}}
-  {{- if .Params.breadcrumb | default true -}}
-    <div class="container breadcrumb-container">
-      {{ partial "header/breadcrumbs.html" . }}
-    </div>
-  {{- end -}}
-{{- end -}}
+{{ partial "header/hero.html"
+      (dict
+        "title" $title
+        "image" .Params.image
+        "sizes" site.Params.image_sizes.sections.home.hero
+        "context" .
+        "hero_complement" "programs/essential.html"
+      )}}
