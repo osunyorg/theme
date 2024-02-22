@@ -101,7 +101,6 @@
                 @include arrow-right-hover
                 @include icon-block(arrow-right, after)
                 @include link($block-pages-card-page-color)
-                @include text-underline
                 position: relative
                 margin-top: auto
                 padding-top: $spacing-3
@@ -124,9 +123,6 @@
     &--list
         ul
             @include list-reset
-            &.title-only
-                li
-                    line-height: 1
             li
                 display: block
                 + li
@@ -135,15 +131,14 @@
                     @include icon(arrow, before, true)
                         padding-right: $spacing-2
                     @include hover-translate-icon(before, 5)
-                    @include link
-                    text-decoration-color: rgba(0,0,0,0)
+                    @extend %underline-on-hover
                 article
                     .page-title
                         @include h3
                         a
                             @include icon(arrow, after, true)
                             @include hover-translate-icon(after)
-                            text-decoration-color: transparent
+                            @extend %underline-on-hover
         @include media-breakpoint-down(desktop)
             .top
                 margin-bottom: $spacing-2
@@ -273,7 +268,7 @@
                 @include hover-translate-icon(after)
             &:hover .more:after
                 transform: translateX(#{pxToRem(10)})
-            &-title a    
+            &-title a
                 @include stretched-link
             .media
                 img
@@ -303,5 +298,5 @@
                     margin-bottom: space(4)
                 &-content
                     width: columns(5)
-                .media 
+                .media
                     width: columns(6)

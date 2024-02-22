@@ -89,9 +89,7 @@ h6, .h6
 h1, .h1,
 h2, .h2
     a
-        text-decoration-color: transparent
-        &:hover
-            text-decoration-color: inherit
+        @extend %underline-on-hover
 
 @mixin lead($handle-sidebar: true)
     font-family: $lead-font-family
@@ -150,13 +148,6 @@ h2, .h2
 small, .small
     @include small
 
-@mixin rich-text
-    word-break: break-word
-    h1, h2, h3, h4, h5, h6, p, ul
-        margin-top: $spacing-3
-        &:first-child, meta + &
-            margin-top: 0
-
 %multiple-lists
     ul, ol
         ul, ol
@@ -165,8 +156,12 @@ small, .small
                 padding-left: $spacing-3
 
 .rich-text
-    @include rich-text
+    word-break: break-word
     @extend %multiple-lists
+    h1, h2, h3, h4, h5, h6, p, ul
+        margin-top: $spacing-3
+        &:first-child, meta + &
+            margin-top: 0
 
 .content
     section 
@@ -180,7 +175,7 @@ small, .small
     line-height: inherit
 
 [itemprop="articleBody"]
-    @include rich-text
+    @extend .rich-text
 
 @mixin blockquote
     margin: 0
@@ -202,9 +197,8 @@ p
     margin-bottom: 0
     + p
         margin-top: $spacing-2
-
-p:empty
-    display: none
+    &:empty
+        display: none
 
 p + ul,
 p + ol
@@ -275,6 +269,14 @@ a,
         font-size: pxToRem(10)
         margin-right: pxToRem(5)
 
+%underline-on-hover
+    text-decoration-color: alphaColor(currentColor, 0)
+    text-decoration-thickness: $link-underline-thickness
+    text-underline-offset: $link-underline-offset
+    transition: $link-transition
+    &:hover
+        text-decoration-color: currentColor
+
 dd
     margin-bottom: 0.5rem
     margin-left: 0
@@ -284,9 +286,8 @@ abbr, abbr[title]
     text-decoration-style: dotted
 
 ::selection
-    background: rgba(var(--color-text), .7)
-    color: var(--color-background)
-    text-shadow: none
+    background: var(--color-selection-background)
+    color: var(--color-selection)
 
 sub,
 sup

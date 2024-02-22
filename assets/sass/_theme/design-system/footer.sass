@@ -7,28 +7,28 @@ footer#document-footer
     @include media-breakpoint-down(desktop)
         z-index: $zindex-footer
     a
-        @include link($footer-color)
+        color: $footer-color
+        @extend %underline-on-hover
     .logo
-        text-decoration: none
+        @extend %logo
         img
             height: $footer-logo-height
             max-width: 100%
-            width: auto
             @include media-breakpoint-up(desktop)
                 height: $footer-logo-height-desktop
-        .logo-text
-            @include h2
     ul
         @include list-reset
         li
             + li
                 margin-top: $spacing-2
             a
-                @include link($footer-color)
-                text-decoration-color: transparent
+                // @include link($footer-color)
+                @extend %underline-on-hover
     .footer
         &-site
             @include small
+            * + *
+                margin-top: $spacing-2
         &-social, &-legals, &-credit
             @include meta
         &-credit

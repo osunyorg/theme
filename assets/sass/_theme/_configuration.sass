@@ -2,18 +2,22 @@
 $color-accent: #0038FF !default
 $color-text: #000000 !default
 $color-text-alt: #454545 !default
-$color-border: rgba(0, 0, 0, 0.30) !default
-$color-background-alt: #F2F2F2 !default
 $color-background: #FFFFFF !default
+$color-background-alt: #F2F2F2 !default
+$color-border: rgba(0, 0, 0, 0.30) !default
+$color-selection: $color-background !default
+$color-selection-background: rgba($color-text, .7) !default
 
 // Scheme Dark colors (enable dark mode in your hugo configuration file)
 $has-dark-mode: true
 $color-dark-accent: rgb(120, 208, 255) !default
 $color-dark-text: #ffffff !default
 $color-dark-text-alt: #cbcbcb !default
-$color-dark-border: rgba(255, 255, 255, 0.3) !default
-$color-dark-background-alt: #202020 !default
 $color-dark-background: #000000 !default
+$color-dark-background-alt: #181919 !default
+$color-dark-border: rgba(255, 255, 255, 0.3) !default
+$color-dark-selection: $color-dark-background !default
+$color-dark-selection-background: rgba($color-dark-text, .7) !default
 
 $body-color: var(--color-text) !default
 $body-background-color: var(--color-background) !default
@@ -36,12 +40,12 @@ $spacing-6: space(32)  // 128px
 $spacing-7: space(64)  // 256px
 
 // Deprecated variables
-// $spacing0: space(3) !default
-// $spacing1: space(6) !default
-// $spacing2: space(12) !default
-// $spacing3: space(16) !default
-// $spacing4: space(32) !default
-// $spacing5: space(64) !default
+// $spacing0: space(3) --> $spacing-2
+// $spacing1: space(6) --> $spacing-3
+// $spacing2: space(12) --> $spacing-4
+// $spacing3: space(16) --> $spacing-5
+// $spacing4: space(32) --> $spacing-6
+// $spacing5: space(64) --> $spacing-7
 
 // TYPOGRAPHY
 
@@ -437,6 +441,9 @@ $posts-grid-columns: $block-posts-grid-columns !default
 
 // Person
 $persons-avatar-background-color: var(--color-background-alt) !default
+
+// Organization
+$organization-background-color: $color-background-alt !default // Use sass variable color-background To avoid dark logo on darkmode background-alt color
 
 // Program
 $program-essential-font-size: $meta-size !default
