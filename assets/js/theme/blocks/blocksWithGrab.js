@@ -71,7 +71,7 @@ class BlockWithGrab {
         this.content.style.touchAction = 'pan-y';
 
         const handlePointerMove = (event) => {
-            console.log('pointermove')
+            // console.log('pointermove')
             this.isManipulated = isPointerDown;
             endX = event.clientX;
             hasMoved = true;
@@ -84,7 +84,7 @@ class BlockWithGrab {
             }
         };
         this.content.addEventListener('pointerdown', (event) => {
-            console.log('pointerdown')
+            // console.log('pointerdown')
             startX = event.clientX;
             isPointerDown = true;
             hasMoved = false;
@@ -94,7 +94,7 @@ class BlockWithGrab {
         });
     
         const handlePointerUp = (event) => {
-            console.log('pointerup')
+            // console.log('pointerup')
             window.removeEventListener('pointermove', handlePointerMove);
             window.removeEventListener('pointerup', handlePointerUp);
         
