@@ -8,6 +8,7 @@ class BlockWithGrab {
         this.items = this.list.querySelectorAll('.grab-item');
         this.previous = this.block.querySelector('.previous');
         this.next = this.block.querySelector('.next');
+        this.links = this.list.querySelectorAll('a');
 
         this.index = 0;
 
@@ -70,16 +71,20 @@ class BlockWithGrab {
         this.content.style.touchAction = 'pan-y';
 
         const handlePointerMove = (event) => {
-            this.isGrabbing = true;
+            console.log('pointermove')
             this.isManipulated = isPointerDown;
             endX = event.clientX;
             hasMoved = true;
     
             if (isPointerDown && hasMoved) {
                 event.preventDefault();
+                this.links.forEach((link) => {
+                    link.style.pointerEvents = "none";
+                });
             }
         };
         this.content.addEventListener('pointerdown', (event) => {
+            console.log('pointerdown')
             startX = event.clientX;
             isPointerDown = true;
             hasMoved = false;
@@ -89,55 +94,12 @@ class BlockWithGrab {
         });
     
         const handlePointerUp = (event) => {
+            console.log('pointerup')
             window.removeEventListener('pointermove', handlePointerMove);
             window.removeEventListener('pointerup', handlePointerUp);
-            
-            if (!hasMoved && !this.isGrabbing) {
-                const pointedElement = document.elementFromPoint(event.clientX, event.clientY);
-                if (pointedElement && Math.abs(startX - event.clientX) > threshold) {
-                    pointedElement.click();
-                }
-            }
         
             this.onManipulationEnd(startX, endX, threshold);
-            this.isGrabbing = false;
         };
-        
-    
-
-        // this.content.addEventListener('pointerdown', (event) => {
-        //     this.content.classList.add('is-grabbing');
-        //     startX = event.clientX;
-        //     isPointerDown = true;
-        //     hasMoved = false;
-        // });
-
-        // this.content.addEventListener('pointermove', (event) => {
-        //     this.isManipulated = isPointerDown;
-        //     endX = event.clientX;
-        //     hasMoved = true;
-
-        //     if (isPointerDown) {
-        //         event.preventDefault();
-        //     }
-        // });
-
-
-        // endEvents.forEach(event => {
-        //     this.content.addEventListener(event, (event) => {
-        //         this.isGrabbing = true;
-        //         this.isManipulated = isPointerDown;
-
-        //         if (!hasMoved) {
-        //             const cursorElement = document.elementFromPoint(event.clientX, event.clientY);
-    
-        //             if (cursorElement) {
-        //                 cursorElement.click();
-        //             }
-        //         }
-        //         this.onManipulationEnd(startX, endX, threshold);
-        //     });
-        // });
     }
 
     onManipulationEnd (start, end, threshold) {
@@ -148,8 +110,10 @@ class BlockWithGrab {
         }
 
         this.content.classList.remove('is-grabbing');
+        this.links.forEach((link) => {
+            link.style.pointerEvents = "all";
+        });
 
-        // Add delay to avoid conflict with item clicked
         setTimeout(() => {
             this.isManipulated = false;
         }, 100);
