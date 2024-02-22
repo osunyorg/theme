@@ -4,13 +4,12 @@
   "attributes" "class='title'"
   ) -}}
 
-<div class="timeline">
+<div class="timeline grab-container">
   {{ with .block.data }}
-    <div class="timeline-events">
+    <div class="timeline-events grab-content">
       <ol>
         {{ range .events }}
-          <li class="timeline-event">
-
+          <li class="timeline-event grab-item">
             {{ $heading_tag.open -}}
               {{ .title | safeHTML }}
             {{ $heading_tag.close -}}

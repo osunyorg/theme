@@ -61,20 +61,14 @@
                         margin-left: columns(3)
 
     &--horizontal
+        @include block-with-grab
         --min-title-height: 0px
         background: $block-timeline-horizontal-background
         color: $block-timeline-horizontal-color
-        overflow: hidden
         padding-bottom: var(--grid-gutter)
         padding-top: var(--grid-gutter)
         &::before
             display: none
-        .timeline
-            &:hover
-                cursor: grab
-            &.is-grabbing
-                cursor: grabbing
-            
         .timeline-arrows
             display: flex
             padding-left: calc(var(--grid-gutter) / 2)
@@ -92,22 +86,8 @@
                 &:disabled
                     cursor: default
                     opacity: 0.3
-        .timeline-events
-            margin-left: calc(var(--grid-gutter-negative) / 2)
-            margin-right: calc(var(--grid-gutter-negative) / 2)
-            ol
-                display: flex
-                flex-flow: row nowrap
-                list-style: none
-                padding-left: 0
-                margin-top: $spacing-2
-                transition: margin 0.4s ease-in-out
-                width: 100%
         .timeline-event
-            flex: none
-            padding: 0 calc(var(--grid-gutter) / 2)
-            scroll-snap-align: start
-            transition: 0.3s opacity
+            margin: 0 calc(var(--grid-gutter) / 2)
             width: 50%
             .title
                 display: block
@@ -133,8 +113,6 @@
                     position: relative
                     top: -4px
                     width: 9px
-            &.is-passed
-                opacity: 0.15
             &:last-child
                 .line
                     background: transparent
