@@ -28,6 +28,7 @@ class DraggableBlock {
         }
 
         this.handlePointers();
+        this.handleScroll();
     }
 
     resize () {
@@ -95,6 +96,20 @@ class DraggableBlock {
         });
     }
 
+    handleScroll() {
+        this.content.addEventListener('wheel', (event) => {
+            const delta = event.deltaX;
+
+            if (delta !== 0) {
+                if (delta > 0) {
+                    this.goTo(this.index+1);
+                } else {
+                    this.goTo(this.index-1);
+                }
+            }
+        });
+    }
+
     onManipulationEnd (start, end, threshold) {
         if (start > end + threshold) {
             this.goTo(this.index+1);
@@ -136,5 +151,5 @@ class DraggableBlock {
 }
 
 draggableBlocks.forEach((block) => {
-    new draggableBlock(block);
+    new DraggableBlock(block);
 });
