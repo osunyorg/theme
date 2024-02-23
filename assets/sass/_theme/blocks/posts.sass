@@ -305,6 +305,11 @@
         @include media-breakpoint-down(desktop)
             .scrollable
                 gap: half(var(--grid-gutter))
+                .draggable-content
+                    display: flex
+                    flex-direction: column
+                    .actions-arrows
+                        order: -1
                 .post
                     width: columns(10)
                 .grab-item:last-of-type
