@@ -72,10 +72,6 @@ class BlockWithGrab {
         this.block.addEventListener('pointerdown', (event) => {
             this.content.classList.add('is-grabbing');
 
-            this.items.forEach((item) => {
-                item.style.pointerEvents = "none";
-            });
-
             startX = event.clientX;
             isPointerDown = true;
         });
@@ -83,6 +79,12 @@ class BlockWithGrab {
         this.block.addEventListener('pointermove', (event) => {
             this.isManipulated = isPointerDown;
             endX = event.clientX;
+
+            if (this.isManipulated) {
+                this.items.forEach((item) => {
+                    item.style.pointerEvents = "none";
+                });
+            }
         });
 
         endEvents.forEach(event => {
