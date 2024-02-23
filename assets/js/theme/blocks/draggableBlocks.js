@@ -9,7 +9,6 @@ class DraggableBlock {
         this.previous = this.block.querySelector('.previous');
         this.next = this.block.querySelector('.next');
         this.isPointerDown = false;
-        this.clicOnBtn = false;
 
         this.index = 0;
 
@@ -56,12 +55,10 @@ class DraggableBlock {
 
     handleArrows () {
         this.previous.addEventListener('click', () => {
-            this.clicOnBtn = true;
             this.goTo(this.index-1);
         });
     
         this.next.addEventListener('click', () => {
-            this.clicOnBtn = true;
             this.goTo(this.index+1);
         });
     }
@@ -75,7 +72,6 @@ class DraggableBlock {
 
         this.block.addEventListener('pointerdown', (event) => {
             if (event.target !== this.next && event.target !== this.previous) {
-                this.clicOnBtn = false;
                 this.isPointerDown = true;
                 this.content.classList.add('is-grabbing');
                 startX = event.clientX;
@@ -124,7 +120,6 @@ class DraggableBlock {
         } else if (start < end - threshold) {
             this.goTo(this.index-1);
         }
-        this.clicOnBtn = false;
         
         this.content.classList.remove('is-grabbing');
         this.items.forEach((item) => {
