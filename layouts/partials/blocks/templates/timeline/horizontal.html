@@ -4,12 +4,12 @@
   "attributes" "class='title'"
   ) -}}
 
-<div class="timeline grab-container">
+<div class="timeline draggable-container">
   {{ with .block.data }}
-    <div class="timeline-events grab-content">
+    <div class="timeline-events draggable-content">
       <ol>
         {{ range .events }}
-          <li class="timeline-event grab-item">
+          <li class="timeline-event draggable-item">
             {{ $heading_tag.open -}}
               {{ .title | safeHTML }}
             {{ $heading_tag.close -}}
@@ -19,7 +19,7 @@
         {{ end }}
       </ol>
       {{ if  (gt (len .events) 0) }}
-        <div class="timeline-arrows">
+        <div class="actions-arrows">
           <button class="previous" disabled title="{{ i18n "blocks.timeline.previous"}}"></button>
           <button class="next" title="{{ i18n "blocks.timeline.next"}}"></button>
         </div>

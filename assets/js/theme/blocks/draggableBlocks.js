@@ -3,11 +3,12 @@ const draggableBlocks = document.querySelectorAll('.block-timeline--horizontal, 
 class DraggableBlock {
     constructor (block) {
         this.block = block;
-        this.content = this.block.querySelector('.grab-container');
+        this.content = this.block.querySelector('.draggable-container');
         this.list = this.block.querySelector('ol, ul');
-        this.items = this.list.querySelectorAll('.grab-item');
+        this.items = this.list.querySelectorAll('.draggable-item');
         this.previous = this.block.querySelector('.previous');
         this.next = this.block.querySelector('.next');
+        this.clicOnBtn = false;
 
         this.index = 0;
 
@@ -54,9 +55,11 @@ class DraggableBlock {
 
     handleArrows () {
         this.previous.addEventListener('click', () => {
+            this.clicOnBtn = true;
             this.goTo(this.index-1);
         });
         this.next.addEventListener('click', () => {
+            this.clicOnBtn = true;
             this.goTo(this.index+1);
         });
     }
@@ -71,23 +74,26 @@ class DraggableBlock {
         this.content.style.touchAction = 'pan-y';
 
         this.block.addEventListener('pointerdown', (event) => {
-            this.content.classList.add('is-grabbing');
-
+            if (!this.clicOnBtn) {
+                this.content.classList.add('is-grabbing');
+                isPointerDown = true;
+            }
             startX = event.clientX;
-            isPointerDown = true;
         });
 
         this.block.addEventListener('pointermove', (event) => {
-            this.isManipulated = isPointerDown;
-            endX = event.clientX;
-
-            if (this.isManipulated) {
-                this.items.forEach((item) => {
-                    item.style.pointerEvents = "none";
-                });
+            if (!this.clicOnBtn) {
+                this.isManipulated = isPointerDown;
+                endX = event.clientX;
+    
+                if (this.isManipulated) {
+                    this.items.forEach((item) => {
+                        item.style.pointerEvents = "none";
+                    });
+                }
             }
         });
-
+    
         endEvents.forEach(event => {
             this.block.addEventListener(event, (event) => {
                 isPointerDown = false;
@@ -95,7 +101,7 @@ class DraggableBlock {
             });
         });
     }
-
+    
     handleScroll() {
         this.content.addEventListener('wheel', (event) => {
             const deltaX = event.deltaX;
