@@ -1,3 +1,6 @@
+{{- $layout := "grid" -}}
+{{- $layout := "whatever" -}}
+
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
 
@@ -9,18 +12,38 @@
           "title" $block.title
           "heading_level" $block.ranks.self
         )}}
-
-        <ol class="programs">
+        {{- if eq $layout "grid" -}}
+        <div class="programs-grid">
           {{- range .programs -}}
-            <li>
-              {{ $program := site.GetPage (printf "/programs%s" .path) }}
-              {{- $title := partial "PrepareHTML" $program.Title -}}
-              <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-                {{- $title -}}
-              </a>
-            </li>
+          {{ $program := site.GetPage (printf "/programs%s" .path) }}
+          {{- $title := partial "PrepareHTML" $program.Title -}}
+          {{- $summary := partial "PrepareHTML" $program.Params.summary -}}
+          <article>
+            <p class="title">{{- $title -}}</p> 
+            <div >
+              <p>
+                {{$summary}}
+              </p>
+                <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+                  {{ safeHTML (i18n "commons.more") }}
+                </a>
+            </div>
+          </article>
           {{ end }}
-        </ol>
+        </div>
+        {{- else -}}
+          <ol class="programs">
+            {{- range .programs -}}
+              <li>
+                {{ $program := site.GetPage (printf "/programs%s" .path) }}
+                {{- $title := partial "PrepareHTML" $program.Title -}}
+                <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+                  {{- $title -}}
+                </a>
+              </li>
+            {{ end }}
+            </ol>
+          {{- end -}}
       </div>
     </div>
   </div>
