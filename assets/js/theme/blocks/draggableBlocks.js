@@ -60,17 +60,9 @@ class DraggableBlock {
             this.goTo(this.index-1);
         });
     
-        this.previous.addEventListener('pointerup', () => {
-            this.isPointerDown = false;
-        });
-    
         this.next.addEventListener('click', () => {
             this.clicOnBtn = true;
             this.goTo(this.index+1);
-        });
-    
-        this.next.addEventListener('pointerup', () => {
-            this.isPointerDown = false;
         });
     }
 
@@ -101,10 +93,9 @@ class DraggableBlock {
         });
 
         this.block.addEventListener('pointerup', (event) => {
+            endX = event.clientX;
             if (this.isPointerDown) {
                 this.isPointerDown = false;
-                this.content.classList.remove('is-grabbing');
-                const endX = event.clientX;
                 this.onManipulationEnd(startX, endX, threshold);
             }
         });
@@ -133,7 +124,8 @@ class DraggableBlock {
         } else if (start < end - threshold) {
             this.goTo(this.index-1);
         }
-        this.clicOnBtn = true;
+        this.clicOnBtn = false;
+        
         this.content.classList.remove('is-grabbing');
         this.items.forEach((item) => {
             item.style.pointerEvents = "all";
