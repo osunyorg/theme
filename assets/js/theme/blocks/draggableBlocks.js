@@ -98,13 +98,16 @@ class DraggableBlock {
 
     handleScroll() {
         this.content.addEventListener('wheel', (event) => {
-            const delta = event.deltaX;
+            const deltaX = event.deltaX;
+            const deltaY = event.deltaY;
 
-            if (delta !== 0) {
-                if (delta > 0) {
-                    this.goTo(this.index+1);
-                } else {
-                    this.goTo(this.index-1);
+            if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                if (deltaX !== 0) {
+                    if (deltaX > 0) {
+                        this.goTo(this.index + 1);
+                    } else {
+                        this.goTo(this.index - 1);
+                    }
                 }
             }
         });
