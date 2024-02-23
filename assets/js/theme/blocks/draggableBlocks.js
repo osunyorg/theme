@@ -77,20 +77,18 @@ class DraggableBlock {
             if (!this.clicOnBtn) {
                 this.content.classList.add('is-grabbing');
                 isPointerDown = true;
+                console.log(isPointerDown)
             }
             startX = event.clientX;
         });
 
         this.block.addEventListener('pointermove', (event) => {
-            if (!this.clicOnBtn) {
-                this.isManipulated = isPointerDown;
-                endX = event.clientX;
-    
-                if (this.isManipulated) {
-                    this.items.forEach((item) => {
-                        item.style.pointerEvents = "none";
-                    });
-                }
+            this.isManipulated = isPointerDown;
+            endX = event.clientX;
+            if (this.isManipulated) {
+                this.items.forEach((item) => {
+                    item.style.pointerEvents = "none";
+                });
             }
         });
     
