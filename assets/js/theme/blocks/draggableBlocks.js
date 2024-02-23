@@ -1,6 +1,6 @@
-const blocks = document.querySelectorAll('.block-timeline--horizontal, .block-posts--scrollable');
+const draggableBlocks = document.querySelectorAll('.block-timeline--horizontal, .block-posts--scrollable');
 
-class BlockWithGrab {
+class DraggableBlock {
     constructor (block) {
         this.block = block;
         this.content = this.block.querySelector('.grab-container');
@@ -135,6 +135,6 @@ class BlockWithGrab {
     }
 }
 
-blocks.forEach((block) => {
-    new BlockWithGrab(block);
+draggableBlocks.forEach((block) => {
+    new draggableBlock(block);
 });
