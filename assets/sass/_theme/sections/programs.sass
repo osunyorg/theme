@@ -34,64 +34,21 @@ ol.programs
         margin-bottom: $spacing-5
         li
             line-height: 1
-    .dropdown-share
-        position: relative
-        > button
-            @include button-icon(social)
-            &:after
-                margin-right: $icon-social-margin-right
-            color: $hero-color
-            border-color: var(--color-border)
-            font-size: $program-share-font-size
-            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
-            &:hover,
-            &:active,
-            &:focus
-                background: var(--color-background)
-                color: var(--color-text)
-            // a11y
-            &:active,
-            &:focus
-                box-shadow: inset 0 0 0 0.25rem rgba(white, .5)
-            @include media-breakpoint-up(desktop)
-                font-size: $program-share-font-size-desktop
-        .dropdown-menu
-            background: $hero-color
-            border-radius: pxToRem(4)
-            bottom: 0
-            padding: 0
-            position: absolute
-            top: 0
-            width: 100%
-            .share
-                display: flex
-                align-items: center
-                height: 100%
-                li
-                    margin: 0
-                    flex: 1 1
-                    text-align: center
-            a
-                display: block
-                color: $hero-background-color
     .buttons
         @include meta
         button, > a
-            display: flex
-            align-items: center
-            justify-content: space-between
             width: 100%
-            border-radius: pxToRem(4)
+            &:after
+                margin-right: $icon-social-margin-right
+        .dropdown-share
+            --btn-background: #{$hero-background-color}
+            --btn-hover-background: #{$color-background}
+            button
+                @extend .button
+                @include button-icon(social)
         a[download]
+            @extend .button-alt
             @include button-icon(download)
-            text-decoration: none
-            color: $hero-background-color
-            background: $hero-color
-            border-color: $hero-color
-            font-size: $program-share-font-size
-            @include media-breakpoint-up(desktop)
-                font-size: $program-share-font-size-desktop
-
         @include media-breakpoint-down(desktop)
             margin-top: $spacing-3
 

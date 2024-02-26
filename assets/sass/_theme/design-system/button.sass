@@ -10,11 +10,27 @@
     border: var(--btn-border)
     border-radius: var(--btn-border-radius)
     padding: var(--btn-padding)
-    display: inline-block
+    display: flex
+    align-items: center
+    justify-content: space-between
     transition: background .3s ease, color .3s ease
     &:hover, &:focus, &:focus-visible
         color: var(--btn-hover-color)
         background: var(--btn-hover-background)
+
+.button-accent
+    @extend .button
+    --btn-color: #{$color-background}
+    --btn-background: #{$color-accent}
+    --btn-hover-color: #{$color-background}
+    --btn-hover-background: #{alphaColor($color-accent, 0.85)}
+
+.button-alt
+    @extend .button
+    --btn-color: #{$color-background}
+    --btn-background: #{$color-text-alt}
+    --btn-hover-color: #{$color-background}
+    --btn-hover-background: #{$color-text}
 
 .squared-button
     @include meta
@@ -56,3 +72,36 @@ a.squared-button
         justify-content: space-between
         align-items: center
         @include icon-block(link-blank-block, after)
+
+@mixin button-icon($icon: false)
+    line-height: $body-line-height
+    padding: $spacing-1 $spacing-3
+    white-space: nowrap
+    line-height: 1
+    @if $icon
+        @include icon-block($icon, after)
+
+.dropdown-share
+    position: relative
+    .dropdown-menu
+        background: var(--btn-hover-background)
+        border: var(--btn-border)
+        border-radius: var(--btn-border-radius)
+        bottom: 0
+        padding: 0
+        position: absolute
+        top: 0
+        width: 100%
+        .share
+            display: flex
+            align-items: center
+            height: 100%
+            li
+                margin: 0
+                flex: 1 1
+                text-align: center
+        a
+            display: block
+            color: var(--btn-color)
+            &:hover
+                color: var(--color-accent)
