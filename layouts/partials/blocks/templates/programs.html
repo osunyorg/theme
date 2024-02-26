@@ -1,6 +1,3 @@
-{{- $layout := "grid" -}}
-{{- $layout := "whatever" -}}
-
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
 
@@ -12,25 +9,25 @@
           "title" $block.title
           "heading_level" $block.ranks.self
         )}}
-        {{- if eq $layout "grid" -}}
-        <div class="programs-grid">
-          {{- range .programs -}}
-          {{ $program := site.GetPage (printf "/programs%s" .path) }}
-          {{- $title := partial "PrepareHTML" $program.Title -}}
-          {{- $summary := partial "PrepareHTML" $program.Params.summary -}}
-          <article>
-            <p class="title">{{- $title -}}</p> 
-            <div >
-              <p>
-                {{$summary}}
-              </p>
-                <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-                  {{ safeHTML (i18n "commons.more") }}
-                </a>
-            </div>
-          </article>
-          {{ end }}
-        </div>
+        {{- if eq $block.layout "grid" -}}
+          <div class="programs-grid">
+            {{- range .programs -}}
+            {{ $program := site.GetPage (printf "/programs%s" .path) }}
+            {{- $title := partial "PrepareHTML" $program.Title -}}
+            {{- $summary := partial "PrepareHTML" $program.Params.summary -}}
+            <article>
+              <p class="title">{{- $title -}}</p> 
+              <div>
+                <p>
+                  {{ $summary }}
+                </p>
+                  <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+                    {{ safeHTML (i18n "commons.more") }}
+                  </a>
+              </div>
+            </article>
+            {{ end }}
+          </div>
         {{- else -}}
           <ol class="programs">
             {{- range .programs -}}
@@ -42,8 +39,8 @@
                 </a>
               </li>
             {{ end }}
-            </ol>
-          {{- end -}}
+          </ol>
+        {{- end -}}
       </div>
     </div>
   </div>

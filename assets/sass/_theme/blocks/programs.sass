@@ -11,9 +11,14 @@
                 padding-right: $spacing2
                 &:hover
                     color: $color-accent
+                @include in-page-without-sidebar
+                    @include h2
 
     .programs-grid
         @include grid(2, xl)
+        @include in-page-without-sidebar
+            @include grid(2, desktop)
+            @include grid(3, xl)
         article
             display: flex
             flex-direction: column
@@ -35,21 +40,8 @@
                     &:focus
                         background: $block-call-to-action-button-hover-background
                         color: $block-call-to-action-button-hover-color
-
-    @include in-page-without-sidebar
-        .programs
-            li
-                a
-                    @include h2
-        @include media-breakpoint-up(desktop)
-            .programs-grid 
-                @include grid(2, desktop)
-                @include grid(3, xl)
+                    @include in-page-without-sidebar
+                        margin-top: $spacing1
                 p
-                    margin-top: $spacing3           
-
-@include media-breakpoint-up(desktop)
-    .programs-grid 
-        article > div 
-            a 
-                margin-top: $spacing1
+                    @include in-page-without-sidebar
+                        margin-top: $spacing3           
