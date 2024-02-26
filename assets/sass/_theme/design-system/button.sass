@@ -1,3 +1,21 @@
+.button, .btn
+    @include button-reset
+    font-family: var(--btn-font-family)
+    font-size: var(--btn-font-size)
+    font-weight: var(--btn-font-weight)
+    text-transform: var(--btn-text-transform)
+    text-decoration: none
+    color: var(--btn-color)
+    background: var(--btn-background)
+    border: var(--btn-border)
+    border-radius: var(--btn-border-radius)
+    padding: var(--btn-padding)
+    display: inline-block
+    transition: background .3s ease, color .3s ease
+    &:hover, &:focus, &:focus-visible
+        color: var(--btn-hover-color)
+        background: var(--btn-hover-background)
+
 .squared-button
     @include meta
     @include button-reset
@@ -22,7 +40,19 @@
             border-color: transparent
             color: var(--color-background)
     text-decoration: none
+
 button.squared-button
     @include icon-block(eye, before)
+
 a.squared-button
     @include icon-block(download, before)
+
+.link-btn
+    @extend .button
+    @include media-breakpoint-up(desktop)
+        padding: $spacing-2
+    &[target="_blank"]:not(.icon)
+        display: flex
+        justify-content: space-between
+        align-items: center
+        @include icon-block(link-blank-block, after)

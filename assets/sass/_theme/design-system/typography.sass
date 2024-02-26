@@ -224,34 +224,6 @@ a,
     &.glightbox
         text-decoration: none
 
-.btn
-    @include button-reset
-    font-family: var(--btn-font-family)
-    font-size: var(--btn-font-size)
-    font-weight: var(--btn-font-weight)
-    text-transform: var(--btn-text-transform)
-    text-decoration: none
-    color: var(--btn-color)
-    background: var(--btn-background)
-    border: var(--btn-border)
-    border-radius: var(--btn-border-radius)
-    padding: var(--btn-padding)
-    display: inline-block
-    transition: background .3s ease, color .3s ease
-    &:hover, &:focus, &:focus-visible
-        color: var(--btn-hover-color)
-        background: var(--btn-hover-background)
-
-.link-btn
-    @extend .btn
-    @include media-breakpoint-up(desktop)
-        padding: $spacing-2
-    &[target="_blank"]:not(.icon)
-        display: flex
-        justify-content: space-between
-        align-items: center
-        @include icon-block(link-blank-block, after)
-
 .chip
     @include meta
     background: $chip-background
