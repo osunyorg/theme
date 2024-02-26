@@ -16,9 +16,8 @@
     .content
         align-items: start
         padding-top: $spacing-5
-        > h1, > hgroup
+        .hero-text
             margin-top: $spacing-5
-            
         h1 + p
             margin-top: $spacing-3
         .lead
@@ -49,7 +48,7 @@
         &--with-image
             padding-bottom: 0
             .content
-                > h1, > hgroup
+                .hero-text
                     margin-bottom: $spacing-4
         &--image-landscape
             .content
@@ -65,14 +64,13 @@
                 margin-bottom: calc(#{-$spacing-7} + #{$spacing-4})
 
     @include media-breakpoint-up(desktop)
-        .content
-            > h1, > hgroup
-                width: columns(9)
+        .hero-text
+            width: columns(9)
         &--with-image
             .content
                 display: flex
                 justify-content: space-between
-                > h1, > hgroup
+                .hero-text
                     width: columns(7)
                 figure
                     width: columns(5)
@@ -84,7 +82,7 @@
                 .breadcrumb
                     padding-right: 10%
             .content
-                > h1, > hgroup
+                .hero-text
                     width: columns(8)
                 figure
                     width: columns(3)
