@@ -17,7 +17,7 @@
         .description
             a
                 color: inherit
-                text-decoration-color:  $block-call-to-action-color
+                text-decoration-color: $block-call-to-action-color
             p
                 @include h2
         .actions
@@ -34,15 +34,12 @@
                 display: inline-block
                 text-decoration-color: alphaColor($block-call-to-action-color, 0.3)
                 &:first-child
-                    @include btn
-                    background: $block-call-to-action-button-background
-                    color: $block-call-to-action-button-color
-                    transition: background .3s ease, color .3s ease
-                    &:hover,
-                    &:focus-visible,
-                    &:focus
-                        background: $block-call-to-action-button-hover-background
-                        color: $block-call-to-action-button-hover-color
+                    --btn-background: #{$block-call-to-action-button-background}
+                    --btn-color: #{$block-call-to-action-button-color}
+                    --btn-hover-background: #{$block-call-to-action-button-hover-background}
+                    --btn-hover-color: #{$block-call-to-action-button-hover-color}
+                    --btn-border: none
+                    @extend .btn
                 &:last-child
                     margin-bottom: 0
         * + .actions
