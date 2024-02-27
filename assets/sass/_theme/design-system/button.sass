@@ -5,12 +5,13 @@
     font-weight: var(--btn-font-weight)
     text-transform: var(--btn-text-transform)
     text-decoration: none
+    line-height: $body-line-height
     color: var(--btn-color)
     background: var(--btn-background)
     border: var(--btn-border)
     border-radius: var(--btn-border-radius)
     padding: var(--btn-padding)
-    display: flex
+    display: inline-flex
     align-items: center
     justify-content: space-between
     transition: background .3s ease, color .3s ease
@@ -73,13 +74,17 @@ a.squared-button
         align-items: center
         @include icon-block(link-blank-block, after)
 
-@mixin button-icon($icon: false)
+@mixin link-icon($icon: false)
+    @include button-reset
     line-height: $body-line-height
-    padding: $spacing-1 $spacing-3
     white-space: nowrap
-    line-height: 1
     @if $icon
         @include icon-block($icon, after)
+
+@mixin button-icon($icon: false)
+    white-space: nowrap
+    @if $icon
+        @include icon($icon, after)
 
 .dropdown-share
     position: relative

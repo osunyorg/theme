@@ -28,7 +28,7 @@ ul.diplomas
                 align-items: baseline
                 span
                     margin-left: $spacing-3
-                
+
         .content
             @include grid(2, desktop)
             padding-bottom: $spacing-3
@@ -107,12 +107,13 @@ ul.diplomas
                 background-color: var(--color-accent)
                 color: white
 
-    button[aria-expanded="true"] 
+    button[aria-expanded="true"]
         @include icon('caret-top', 'after')
         + .dropdown-menu
             display: block
 
 .essential-container
+    margin-top: $spacing-5
     .container
         @include media-breakpoint-down(sm)
             .buttons > *
@@ -126,24 +127,21 @@ ul.diplomas
                     min-width: 150px
                     width: columns(7)
         @include media-breakpoint-up(md)
-            @include grid(2, md)
-            align-items: flex-end
+            display: flex
+            justify-content: space-between
             .buttons
-                align-items: end
                 display: flex
                 flex-direction: column
                 gap: $spacing-3
-                justify-content: flex-end
                 > *
-                    min-width: 200px
+                    min-width: pxToRem(200)
                     width: columns(2)
-            
     .essential
         color: $header-color
         flex-wrap: wrap
         font-size: $program-essential-font-size
         margin-bottom: 0
-        margin-top: $spacing-5
+        margin-top: 0
         @include meta
         @include media-breakpoint-up(desktop)
             @include grid(6, false, 0)
