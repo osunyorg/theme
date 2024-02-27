@@ -16,6 +16,17 @@
               {{- $title := partial "PrepareHTML" $program.Title -}}
               {{- $summary := partial "PrepareHTML" $program.Params.summary -}}
               <article>
+                <div class="media">
+                  {{- if $program.Params.image -}}
+                    {{- partial "commons/image.html"
+                        (dict
+                          "image"    $program.Params.image
+                          "sizes"    site.Params.image_sizes.sections.posts.item
+                        ) -}}
+                  {{- else -}}
+                    {{- partial "commons/image-default.html" "posts" -}}
+                  {{- end -}}
+                </div>
                 <p class="title">{{- $title -}}</p> 
                 <div>
                   <p>
