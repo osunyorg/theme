@@ -20,28 +20,13 @@
             @include grid(2, desktop)
             @include grid(3, xl)
         article
-            display: flex
-            flex-direction: column
-            justify-content: space-between
-            height: 100%
+            margin-bottom: $spacing3
+            @include media-breakpoint-up(desktop)
+                margin-bottom: 0;
             .title 
-                 @include h3
-            div 
-                a
-                    @include meta
-                    @include btn
-                    text-decoration-color: rgba($block-call-to-action-color, .3)
-                    display: inline-block
-                    background: $block-call-to-action-button-background
-                    color: $block-call-to-action-button-color
-                    transition: background .3s ease, color .3s ease
-                    &:hover,
-                    &:focus-visible,
-                    &:focus
-                        background: $block-call-to-action-button-hover-background
-                        color: $block-call-to-action-button-hover-color
-                    @include in-page-without-sidebar
-                        margin-top: $spacing1
-                p
-                    @include in-page-without-sidebar
-                        margin-top: $spacing3           
+                @include h3
+            a
+                text-decoration: none               
+                .more
+                    @include icon(arrow-right, after, true)
+                    padding-top: $spacing0
