@@ -68,7 +68,7 @@ class DraggableBlock {
             endX,
             threshold = 30;
 
-        this.content.style.touchAction = 'pan-y';
+        this.block.style.touchAction = 'pan-y';
 
         this.block.addEventListener('pointerdown', (event) => {
             if (event.target !== this.next && event.target !== this.previous) {

@@ -1,38 +1,3 @@
-.persons__page
-    .top
-        h2
-            a
-                @include icon(arrow-right, after, true)
-                    display: inline-flex
-                    margin-left: $spacing-1
-                    transition: transform .3s ease
-                &:hover::after
-                    transform: translateX($spacing-2)
-    // TODO : voir comment gérer les marges comme pour les blocs (pb footer)
-    section
-        padding-bottom: var(--grid-gutter)
-    ol.programs
-        li
-            justify-content: flex-start
-            @include media-breakpoint-up(desktop)
-                @include grid(2)
-            @include icon(arrow-right, after, true)
-                color: inherit
-                position: absolute
-                right: 0
-                top: 1.5em
-            a
-                color: inherit
-                @include stretched-link(before)
-                @include media-breakpoint-down(desktop)
-                    margin-right: $spacing-3
-            p
-                margin-top: unset
-                &:nth-child(2)
-                    @include small
-            &:hover
-                color: var(--color-accent)
-
 .person
     @include article
     word-break: break-word
@@ -162,10 +127,12 @@ ol.persons--list
 
 .persons__page
     .hero
+        figure
+            @extend .avatar
         @include media-breakpoint-down(desktop)
             padding-bottom: 0
             margin-bottom: $spacing-6
-            .avatar
+            figure
                 width: columns(6)
                 margin-top: $spacing-3
                 margin-left: auto
@@ -173,7 +140,7 @@ ol.persons--list
                 margin-top: calc(#{$spacing-3} - 100px)
         @include media-breakpoint-down(sm)
             margin-bottom: $spacing-6
-            .avatar
+            figure
                 transform: translateY(18vw)
                 margin-top: calc(#{$spacing-3} - 18vw)
         @include media-breakpoint-up(desktop)
@@ -185,7 +152,7 @@ ol.persons--list
                 h1
                     margin-bottom: 0
                     width: columns(8)
-                .avatar
+                figure
                     margin-bottom: 0
                     width: columns(3)
     .roles
@@ -197,9 +164,39 @@ ol.persons--list
         margin-top: $spacing-5
         > * + *
             margin-top: $spacing-5
+        .top h2 a
+            @include icon(arrow-right, after, true)
+                display: inline-flex
+                margin-left: $spacing-1
+                transition: transform .3s ease
+            &:hover::after
+                transform: translateX($spacing-2)
     .person-posts
         article.post:last-child
             margin-bottom: 0
+    section
+        padding-bottom: $spacing-5
+    ol.programs
+        li
+            justify-content: flex-start
+            @include media-breakpoint-up(desktop)
+                @include grid(2)
+            @include icon(arrow-right, after, true)
+                color: inherit
+                position: absolute
+                right: 0
+                top: 1.5em
+            a
+                color: inherit
+                @include stretched-link(before)
+                @include media-breakpoint-down(desktop)
+                    margin-right: $spacing-3
+            p
+                margin-top: unset
+                &:nth-child(2)
+                    @include small
+            &:hover
+                color: var(--color-accent)
     @include media-breakpoint-down(lg)
         .roles
             margin-top: $spacing-4

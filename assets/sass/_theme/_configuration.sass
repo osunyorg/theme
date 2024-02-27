@@ -180,16 +180,24 @@ $link-underline-thickness: 1px !default
 $link-transition: text-decoration-color .3s ease !default
 $link-unhover-decoration-color-alpha: 0.3 !default
 
-// Buttons
-$btn-font-size-desktop: pxToRem(18) !default // TODO
-$btn-font-size: pxToRem(14) !default
-$btn-padding-x-desktop: $spacing-3 !default
-$btn-padding-y-desktop: pxToRem(15) !default
-$btn-padding-x: $spacing-3 !default
-$btn-padding-y: $spacing-2 !default
+// Button
+$btn-font-family: $heading-font-family !default
+$btn-font-size: $meta-size !default
+$btn-font-size-desktop: $meta-size-desktop !default
+$btn-font-weight: normal !default
+$btn-text-transform: none !default
+$btn-color: var(--color-text) !default
+$btn-hover-color: var(--color-text) !default
+$btn-background: transparent !default
+$btn-hover-background: var(--color-background) !default
+$btn-border: pxToRem(1) solid var(--color-border) !default
+$btn-border-desktop: $btn-border !default
 $btn-border-radius: pxToRem(4) !default
-$btn-border: 1px solid var(--color-text) !default
-$btn-hover-background: var(--color-background-alt) !default
+$btn-border-radius-desktop: $btn-border-radius !default
+$btn-padding: pxToRem(12) pxToRem(10) !default
+$btn-padding-desktop: pxToRem(18) pxToRem(16) !default
+$btn-min-width: pxToRem(100) !default
+$btn-min-width-desktop: pxToRem(190) !default
 
 // Chip
 $chip-background: var(--color-background) !default
@@ -286,6 +294,7 @@ $icons: map-merge($icons, ("close": "\e90e"))
 $icons: map-merge($icons, ("copy": "\ff03"))
 $icons: map-merge($icons, ("copy-inline": "\ff04"))
 $icons: map-merge($icons, ("download": "\e900"))
+$icons: map-merge($icons, ("download-inline": "\e92f"))
 $icons: map-merge($icons, ("eye": "\e901"))
 $icons: map-merge($icons, ("facebook": "\e90b"))
 $icons: map-merge($icons, ("globe": "\ff10"))
@@ -299,6 +308,7 @@ $icons: map-merge($icons, ("play": "\e910"))
 $icons: map-merge($icons, ("search": "\e916"))
 $icons: map-merge($icons, ("search-inline": "\ee13"))
 $icons: map-merge($icons, ("social": "\e915"))
+$icons: map-merge($icons, ("social-inline": "\e92e"))
 $icons: map-merge($icons, ("social-facebook": "\ee01"))
 $icons: map-merge($icons, ("social-instagram": "\ee02"))
 $icons: map-merge($icons, ("social-linkedin": "\ee03"))
@@ -448,8 +458,6 @@ $organization-background-color: $color-background-alt !default // Use sass varia
 // Program
 $program-essential-font-size: $meta-size !default
 $program-essential-font-size-desktop: $meta-size-desktop !default
-$program-share-font-size: $meta-size !default
-$program-share-font-size-desktop: $meta-size-desktop !default
 $program-zindex-toc: $zindex-toc !default
 
 // MISC
