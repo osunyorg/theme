@@ -11,9 +11,9 @@
     border: var(--btn-border)
     border-radius: var(--btn-border-radius)
     padding: var(--btn-padding)
-    display: inline-flex
-    align-items: center
-    justify-content: space-between
+    min-width: var(--btn-min-width)
+    text-align: center
+    display: inline-block
     transition: background .3s ease, color .3s ease
     &:hover, &:focus, &:focus-visible
         color: var(--btn-hover-color)
@@ -64,6 +64,7 @@ button.squared-button
 a.squared-button
     @include icon-block(download, before)
 
+// TODO: check usage in journal
 .link-btn
     @extend .button
     @include media-breakpoint-up(desktop)
@@ -78,11 +79,16 @@ a.squared-button
     @include button-reset
     line-height: $body-line-height
     white-space: nowrap
+    min-width: fit-content
     @if $icon
         @include icon-block($icon, after)
 
 @mixin button-icon($icon: false)
     white-space: nowrap
+    display: inline-flex
+    align-items: center
+    justify-content: space-between
+    gap: $spacing-1
     @if $icon
         @include icon($icon, after)
 

@@ -114,28 +114,40 @@ ul.diplomas
 
 .essential-container
     margin-top: $spacing-5
-    .container
+    .buttons
+        @include meta
+        display: flex
+        flex-wrap: wrap
+        .dropdown-share
+            --btn-background: #{$hero-background-color}
+            --btn-hover-background: #{$color-background}
+            button
+                @extend .button
+                @include button-icon(social-inline)
+        a[download]
+            @extend .button-alt
+            @include button-icon(download-inline)
         @include media-breakpoint-down(sm)
-            .buttons > *
-                width: columns(8)
+            button, > a
+                width: 100%
         @include media-breakpoint-down(md)
-            .buttons
-                display: flex
-                gap: $spacing-3
-                flex-wrap: wrap
-                > *
-                    min-width: 150px
-                    width: columns(7)
+            --btn-min-width: #{pxToRem(140)}
+            gap: $spacing-3
+            flex-direction: row
+            button, > a
+                width: columns(6)
+        @include media-breakpoint-up(md)
+            flex-direction: column
+            gap: $spacing-3
+            --btn-min-width: #{columns(2)}
+            button, > a
+                width: pxToRem(200)
+        @include media-breakpoint-down(desktop)
+            margin-top: $spacing-3
+    .container
         @include media-breakpoint-up(md)
             display: flex
             justify-content: space-between
-            .buttons
-                display: flex
-                flex-direction: column
-                gap: $spacing-3
-                > *
-                    min-width: pxToRem(200)
-                    width: columns(2)
     .essential
         color: $header-color
         flex-wrap: wrap
