@@ -9,7 +9,7 @@
           "title" $block.title
           "heading_level" $block.ranks.self
         )}}
-        {{- if eq $block.layout "grid" -}}
+        {{- if eq $block.data.layout "grid" -}}
           <div class="programs-grid">
             {{- range .programs -}}
             {{ $program := site.GetPage (printf "/programs%s" .path) }}
