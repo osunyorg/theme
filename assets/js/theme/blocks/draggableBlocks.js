@@ -71,7 +71,6 @@ class DraggableBlock {
         this.block.style.touchAction = 'pan-y';
 
         this.block.addEventListener('pointerdown', (event) => {
-<<<<<<< HEAD:assets/js/theme/blocks/draggableBlocks.js
             if (event.target !== this.next && event.target !== this.previous) {
                 this.isPointerDown = true;
                 this.content.classList.add('is-grabbing');
@@ -80,15 +79,6 @@ class DraggableBlock {
         });
 
         this.block.addEventListener('pointermove', (event) => {
-=======
-            this.content.classList.add('is-grabbing');
-            startX = event.clientX;
-            isPointerDown = true;
-        });
-
-        this.block.addEventListener('pointermove', (event) => {
-            this.isManipulated = isPointerDown;
->>>>>>> 6.0:assets/js/theme/blocks/timeline.js
             endX = event.clientX;
             if (this.isPointerDown) {
                 event.preventDefault();
