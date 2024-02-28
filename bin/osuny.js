@@ -29,10 +29,10 @@ let pagefindExclude = `
     .diplomas__taxonomy, .block-diplomas,
     .events__section, .block-agenda,
     .organizations__section, .block-organizations,
-    .pages__section, .block-pages,
+    .block-pages,
     .persons__section, .block-persons,
     .posts__section, .block-posts, .post-sidebar,
-    .programs__section, .block-programs,
+    .block-programs,
     .researchers__term,
     .teachers__term
     `;
