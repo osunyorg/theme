@@ -37,13 +37,13 @@
     @include meta
     @include button-reset
     align-items: center
+    color: var(--color-text)
     cursor: pointer
     display: flex
     padding: 0
-    &:first-child
-        margin-bottom: $spacing-2
+    text-decoration: none
     &::before 
-        background-color: white
+        background-color: var(--color-background)
         border: 1px solid var(--color-border)
         margin-right: $spacing-2
         padding: $spacing-1
@@ -56,13 +56,7 @@
             background-color: var(--color-text)
             border-color: transparent
             color: var(--color-background)
-    text-decoration: none
 
-button.squared-button
-    @include icon-block(eye, before)
-
-a.squared-button
-    @include icon-block(download, before)
 
 // TODO: check usage in journal
 .link-btn
