@@ -177,6 +177,8 @@
 
 </style>
 
+{{ $productionUrl := index site.Params.debug "productionUrl" }}
+
 <script>
   window.addEventListener('keydown', e => {
     if (e.ctrlKey && e.key === 'g') {
@@ -275,7 +277,7 @@
 
   function openInProd() {
     // To use this debug method, add params.productionUrl key to your hugo config.yaml
-    const productionUrl = "{{ site.Params.debug.productionUrl }}";
+    const productionUrl = "{{ $productionUrl }}";
     if (productionUrl) {
       window.open(`${productionUrl}${window.location.pathname}`);
     }
