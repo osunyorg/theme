@@ -1,3 +1,37 @@
+<div class="d-help">
+  <a href="#help">
+    <img src="/osuny/icon.png" alt="Aide Osuny" class="d-help__icon" />
+  </a>
+  <div class="d-help__content" id="help">
+    <table>
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Raccourci</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Afficher la grille</td>
+          <td>Ctrl + g</td>
+        </tr>
+        <tr>
+          <td>Passer d’une page pleine largeur à une page avec barre latérale, et inversement</td>
+          <td>Ctrl + w</td>
+        </tr>
+        <tr>
+          <td>Contrôler les dimensions des images chargées</td>
+          <td>Ctrl + i</td>
+        </tr>
+        <tr>
+          <td>Ouvre la page en production, si dans config.yaml debug.productionUrl est spécifié</td>
+          <td>Ctrl + p</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <div class="d-grid">
   <div>1</div>
   <div>2</div>
@@ -24,6 +58,26 @@
 
 <div class="d-cross"></div>
 <style>
+  .d-help__content {
+    display: none;
+    background: #EEEEEE;
+    border-radius: 24px;
+    position: fixed;
+    width: 600px;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px 20px 60px;
+  }
+  .d-help__content:target {
+    display: block;
+  }
+  .d-help__icon {
+    bottom: 10px;
+    left: 10px;
+    position: fixed;
+    width: 40px;
+    z-index: 1000;
+  }
   .d-grid {
     bottom: 0;
     display: none;
