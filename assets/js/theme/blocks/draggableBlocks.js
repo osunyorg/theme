@@ -67,11 +67,16 @@ class DraggableBlock {
         let startX,
             endX,
             threshold = 30;
-
+            // j'ai initialisé isPointerDown au début du code : this.isPointerDown
+            // j'ai enlevé endEvents = ['pointerup'] parce qu'il était seul ?
         this.block.style.touchAction = 'pan-y';
 
+        // on passe de this.content à this.block sur chaque événement pour grab sur tout le bloc
         this.block.addEventListener('pointerdown', (event) => {
+            // On vérifie que l'on ne soit pas en train de cliquer sur les boutons (car on cible tout le bloc pour le grab)
             if (event.target !== this.next && event.target !== this.previous) {
+                // on utilise partout this.isPointerDown car la navigation avec les arrow buguait
+                // parfois ça naviguait de 2 items
                 this.isPointerDown = true;
                 this.content.classList.add('is-grabbing');
                 startX = event.clientX;
@@ -80,16 +85,20 @@ class DraggableBlock {
 
         this.block.addEventListener('pointermove', (event) => {
             endX = event.clientX;
+            // On vérifie que l'événement pointerdown a été activé
             if (this.isPointerDown) {
                 event.preventDefault();
                 this.items.forEach((item) => {
+                    // on enlève le pointerevents pour que les liens ne soient pas cliquable au drag
                     item.style.pointerEvents = "none";
                 });
             }
         });
 
+        // anciennement géré avec endEvents = ['pointerup'] (j'enlève le forEach)
         this.block.addEventListener('pointerup', (event) => {
             endX = event.clientX;
+            // on vérifie encore isPointerDown pour éviter le pb des arrows
             if (this.isPointerDown) {
                 this.isPointerDown = false;
                 this.onManipulationEnd(startX, endX, threshold);
@@ -98,10 +107,11 @@ class DraggableBlock {
     }
     
     handleScroll() {
+        // On écoute le scroll sur le contenu du bloc
         this.content.addEventListener('wheel', (event) => {
             const deltaX = event.deltaX;
             const deltaY = event.deltaY;
-
+            // navigation entre les items (comme onManipulationEnd)
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
                 if (deltaX !== 0) {
                     if (deltaX > 0) {
@@ -123,6 +133,7 @@ class DraggableBlock {
         
         this.content.classList.remove('is-grabbing');
         this.items.forEach((item) => {
+            // On rend le pointervents pour pouvoir cliquer sur le lien si on drag pas
             item.style.pointerEvents = "all";
         });
 
