@@ -11,10 +11,15 @@
                 margin-top: 0
 
 .heading
+    margin-bottom: $heading-margin-bottom
     &:not(:first-child)
-        margin-top: $spacing-5
+        margin-top: $heading-margin-top
+        @include in-page-with-sidebar
+            margin-top: $heading-margin-top-with-sidebar
+            margin-bottom: $heading-margin-bottom-with-sidebar
         @include in-page-without-sidebar
-            margin-top: $spacing-6
+            margin-top: $heading-margin-top-desktop
+            margin-bottom: $heading-margin-bottom-desktop
     @include in-page-without-sidebar
         h2
             width: columns(8)
