@@ -127,22 +127,19 @@ ol.persons--list
 
 .persons__page
     .hero
+        .hero-text
+            margin-bottom: $spacing-3
         figure
             @extend .avatar
-        @include media-breakpoint-down(desktop)
-            padding-bottom: 0
+        .container
             margin-bottom: $spacing-6
+        @include media-breakpoint-down(desktop)
             figure
                 width: columns(6)
-                margin-top: $spacing-3
                 margin-left: auto
-                transform: translateY(100px)
-                margin-top: calc(#{$spacing-3} - 100px)
         @include media-breakpoint-down(sm)
-            margin-bottom: $spacing-6
             figure
-                transform: translateY(18vw)
-                margin-top: calc(#{$spacing-3} - 18vw)
+                margin-bottom: calc(#{columns(3)} * -1)
         @include media-breakpoint-up(desktop)
             .content
                 align-items: center
