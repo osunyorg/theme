@@ -18,7 +18,7 @@
                 margin-top: $spacing-2
             .media
                 margin-top: 0
-        @include post-time-author-flex
+        @include author-and-time-side-to-side
 
     &--grid
         @include media-breakpoint-down(desktop)
@@ -36,7 +36,8 @@
         .post
             .more
                 @include icon(arrow-right, after, true)
-            .post-author 
+            // Masquer le point entre l'auteur et la date
+            .post-author
                 p::before
                     display: none
             .post-meta
@@ -44,6 +45,7 @@
                 line-height: 0
             .post-categories *
                 display: inline
+            // Désactiver le ratio forcé de la configuration $article-media-aspect-ratio
             .media
                 &, img
                     aspect-ratio: auto
