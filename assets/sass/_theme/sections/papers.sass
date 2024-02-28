@@ -8,11 +8,12 @@
     .paper-actions
         display: flex
         align-items: start
-        gap: $spacing-1
+        gap: var(--grid-gutter)
         @include media-breakpoint-down(desktop)
             flex-wrap: wrap
-            justify-content: space-between
+            // justify-content: space
             margin-top: $spacing-2
+            gap: $spacing-2
     h3
         a:hover
             color: var(--color-accent)
@@ -28,7 +29,7 @@
             text-transform: none
         span
             text-transform: uppercase
-    @include media-breakpoint-up(md)
+    @include media-breakpoint-up(lg)
         flex-direction: row
         > div:first-of-type
             width: columns(7)
