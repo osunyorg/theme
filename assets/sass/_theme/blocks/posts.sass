@@ -36,14 +36,20 @@
         .post
             .more
                 @include icon(arrow-right, after, true)
-            .post-author 
+
+            // Masquer le point entre l'auteur et la date (mixin author-and-time-side-to-side)
+            .post-author
                 p::before
                     display: none
+
+            // Permet d'aligner correctement les différents line-height des différents composants du post meta
             .post-meta
                 display: block
-                line-height: 0
+                line-height: 0 // Hack pour que les enfants de post-meta soient correctement 
             .post-categories *
                 display: inline
+
+            // Désactiver le ratio forcé de la configuration $article-media-aspect-ratio
             .media
                 &, img
                     aspect-ratio: auto
