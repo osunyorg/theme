@@ -12,7 +12,7 @@ class MainMenu {
     constructor (selector) {
         this.element = document.querySelector(selector);
         this.menu = this.element.querySelector('.menu');
-        this.mainButton = this.element.querySelector('button');
+        this.mainButton = this.element.querySelector('button.header-button');
         this.dropdownsButtons = this.element.querySelectorAll('.has-children [role="button"]');
 
         this.state = {
@@ -62,7 +62,7 @@ class MainMenu {
         const isMobile = window.innerWidth <= breakpoints.md;
         document.documentElement.style.setProperty('--header-height', this.element.offsetHeight + 'px');
         document.documentElement.style.setProperty('--header-menu-max-height', (window.innerHeight - this.element.offsetHeight) + 'px');
-        
+
         // is state changed ?
         if (this.state.isMobile === isMobile) {
             return null;
@@ -71,7 +71,6 @@ class MainMenu {
         this.state.isMobile = isMobile;
 
         this.closeEverything();
-        
     }
 
     toggleMainMenu (open = !this.state.isOpened) {
@@ -150,7 +149,7 @@ class MainMenu {
         if (y > this.state.previousScrollY + threshold && !isNearTop) {
             document.documentElement.classList.add(CLASSES.scrollingDown);
             hasChanged = true;
-        } else if (y < this.state.previousScrollY - threshold){
+        } else if (y < this.state.previousScrollY - threshold) {
             document.documentElement.classList.remove(CLASSES.scrollingDown);
             hasChanged = true;
         }

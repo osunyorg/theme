@@ -54,7 +54,7 @@ if (command === "dev") {
 
 if (command === "build") {
     execute("yarn upgrade");
-    execute("hugo");
+    execute("hugo --minify");
     execute("npm_config_yes=true npx pagefind --site 'public' --exclude-selectors '" + pagefindExclude + "'");
 }
 

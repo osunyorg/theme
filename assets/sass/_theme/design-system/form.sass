@@ -18,10 +18,8 @@ form
         border-radius: $form-input-border-radius
         padding: $spacing-1 
     input[type="submit"], button
-        @include button-reset
-        @include btn
-        @include meta
-        background: $form-btn-background-color
-        color: $form-btn-color
+        --btn-background: $form-btn-background-color
+        --btn-color: $form-btn-color
+        @extend .button
     label + input
         margin-bottom: $spacing-5
