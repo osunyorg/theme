@@ -18,12 +18,8 @@ footer#document-footer
                 height: $footer-logo-height-desktop
     ul
         @include list-reset
-        li
-            + li
+        li + li
                 margin-top: $spacing-2
-            a
-                // @include link($footer-color)
-                @extend %underline-on-hover
     .footer
         &-site
             @include small
@@ -34,6 +30,8 @@ footer#document-footer
         &-credit
             display: block
             margin-top: $spacing-2
+            a
+                text-decoration-color: alphaColor(currentColor, 0.3)
         &-search
             padding-top: $spacing-2 !important
         &-i18n
