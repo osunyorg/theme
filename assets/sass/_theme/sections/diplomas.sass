@@ -93,7 +93,6 @@ ul.diplomas
         a
             color: black
         a
-            
             display: block
             font-size: $body-size
             padding: $spacing-3
@@ -149,14 +148,15 @@ ul.diplomas
             display: flex
             justify-content: space-between
     .essential
+        @include meta
         color: $header-color
         flex-wrap: wrap
         font-size: $program-essential-font-size
         margin-bottom: 0
         margin-top: 0
-        @include meta
         @include media-breakpoint-up(desktop)
             @include grid(6, false, 0)
+            width: columns(6)
             font-size: $program-essential-font-size-desktop
         dt,
         dd
