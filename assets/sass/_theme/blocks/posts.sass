@@ -44,6 +44,9 @@
                 line-height: 0
             .post-categories *
                 display: inline
+            .media
+                &, img
+                    aspect-ratio: auto
         @include media-breakpoint-down(desktop)
             .post
                 + .post
@@ -64,10 +67,10 @@
                     gap: var(--grid-gutter)
                     + .post
                         margin-top: $spacing-4
+                    .post-title
+                        @include h2
                     p[itemprop="articleBody"]
                         margin-top: $spacing-3
-                    &-title
-                        @include h2
                     .post-meta 
                         > *
                             display: inline
@@ -103,6 +106,8 @@
                         width: columns(6)
                     .post-content
                         width: columns(5)
+                    .post-title
+                        @include lead
                 p[itemprop="articleBody"]
                     margin-top: calc(#{$spacing-3} + #{$spacing-2})
     &--list
