@@ -275,7 +275,7 @@
 
   function openInProd() {
     // To use this debug method, add params.productionUrl key to your hugo config.yaml
-    const productionUrl = "{{ site.Params.debug.productionUrl }}";
+    const productionUrl = '{{ index site.Params.debug "productionUrl" }}';
     if (productionUrl) {
       window.open(`${productionUrl}${window.location.pathname}`);
     }
