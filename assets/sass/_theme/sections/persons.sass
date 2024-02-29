@@ -16,7 +16,6 @@
             margin-top: $spacing-1
     .description
         @include small
-
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing-3
@@ -38,15 +37,12 @@
         .avatar
             width: 100%
 
-
 section.persons,
 div.persons
     @include grid(1)
     @include grid(2, md)
     @include grid(4, lg)
     @include grid(6, xxl)
-
-
 
 ol.persons--list
     @include list-reset
@@ -134,12 +130,16 @@ ol.persons--list
                 @extend .avatar
             @include media-breakpoint-down(desktop)
                 .container
-                    margin-bottom: $spacing-6
+                    margin-bottom: calc(#{columns(2)} + #{$spacing-5})
+                figure
+                    width: columns(4)
+                    margin-left: auto
+                    margin-bottom: calc(#{columns(2)} * -1)
+            @include media-breakpoint-down(md)
+                .container
+                    margin-bottom: calc(#{columns(3)} + #{$spacing-5})
                 figure
                     width: columns(6)
-                    margin-left: auto
-            @include media-breakpoint-down(sm)
-                figure
                     margin-bottom: calc(#{columns(3)} * -1)
             @include media-breakpoint-up(desktop)
                 .content
