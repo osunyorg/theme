@@ -15,16 +15,21 @@
                     @include h2
 
     .programs-grid
+        align-items: start
         @include grid(2, xl)
         @include in-page-without-sidebar
             @include grid(2, desktop)
             @include grid(3, xl)
         article
+            display: flex
+            flex-direction: column-reverse
             margin-bottom: $spacing3
-            @include media-breakpoint-up(desktop)
+
+            @include media-breakpoint-up(xl)
                 margin-bottom: 0
-            .title 
-                @include h3
+            @include in-page-without-sidebar 
+                margin-bottom: 0
+            h3
                 margin-bottom: $spacing0
                 @include media-breakpoint-up(desktop)
                     margin-bottom: 0
@@ -33,3 +38,5 @@
                 .more
                     @include icon(arrow-right, after, true)
                     margin-top: $spacing0
+            .media
+                margin-bottom: $spacing0

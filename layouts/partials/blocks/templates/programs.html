@@ -1,5 +1,10 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
+{{ $heading := .heading | default "h3" }}
+{{ $heading_tag := (dict 
+    "open" ((printf "<%s itemprop='headline'>" $heading) | safeHTML)
+    "close" ((printf "</%s>" $heading) | safeHTML)
+    ) }}
 
 {{- with .block.data -}}
   <div class="{{ $block_class }}">
@@ -16,6 +21,17 @@
               {{- $title := partial "PrepareHTML" $program.Title -}}
               {{- $summary := partial "PrepareHTML" $program.Params.summary -}}
               <article>
+                <div class="program-content">
+                  {{ $heading_tag.open }}{{- $title -}}{{ $heading_tag.close }}
+                  <div>
+                    <p>
+                      {{ $summary }}
+                    </p>
+                    <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+                      <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+                    </a>
+                  </div>
+                </div>
                 <div class="media">
                   {{- if $program.Params.image -}}
                     {{- partial "commons/image.html"
@@ -26,15 +42,6 @@
                   {{- else -}}
                     {{- partial "commons/image-default.html" "posts" -}}
                   {{- end -}}
-                </div>
-                <p class="title">{{- $title -}}</p> 
-                <div>
-                  <p>
-                    {{ $summary }}
-                  </p>
-                    <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-                      <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
-                    </a>
                 </div>
               </article>
             {{ end }}
