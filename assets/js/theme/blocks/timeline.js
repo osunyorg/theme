@@ -68,21 +68,21 @@ class BlockTimeline {
             threshold = 30,
             isPointerDown = false;
 
-        this.content.style.touchAction = 'pan-y';
+        this.block.style.touchAction = 'pan-y';
 
-        this.content.addEventListener('pointerdown', (event) => {
+        this.block.addEventListener('pointerdown', (event) => {
             this.content.classList.add('is-grabbing');
             startX = event.clientX;
             isPointerDown = true;
         });
 
-        this.content.addEventListener('pointermove', (event) => {
+        this.block.addEventListener('pointermove', (event) => {
             this.isManipulated = isPointerDown;
             endX = event.clientX;
         });
 
         endEvents.forEach(event => {
-            this.content.addEventListener(event, (event) => {
+            this.block.addEventListener(event, (event) => {
                 isPointerDown = false;
                 this.onManipulationEnd(startX, endX, threshold);
             });

@@ -1,0 +1,14 @@
+
+@mixin aspect-ratio($ratio, $selector: 'iframe', $background: false)
+    @if $background
+        aspect-ratio: #{$ratio}
+        background: $background
+    #{$selector}
+        aspect-ratio: #{$ratio}
+        display: block
+        width: 100%
+
+@mixin handle-svg-fit
+    picture.is-svg
+        img
+            object-fit: contain

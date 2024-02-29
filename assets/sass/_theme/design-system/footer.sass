@@ -1,40 +1,39 @@
 footer#document-footer
     background: $footer-background-color
     color: $footer-color
-    padding-bottom: $spacing3
-    padding-top: $spacing3
+    padding-bottom: $spacing-5
+    padding-top: $spacing-5
     position: relative
     @include media-breakpoint-down(desktop)
         z-index: $zindex-footer
     a
-        @include link($footer-color)
+        color: $footer-color
+        @extend %underline-on-hover
     .logo
+        @extend %logo
         img
             height: $footer-logo-height
             max-width: 100%
-            width: auto
             @include media-breakpoint-up(desktop)
                 height: $footer-logo-height-desktop
     ul
         @include list-reset
-        li
-            + li
-                margin-top: $spacing0
-            a
-                @include link($footer-color)
-                text-decoration-color: transparent
+        li + li
+                margin-top: $spacing-2
     .footer
         &-site
             @include small
             * + *
-                margin-top: $spacing0
+                margin-top: $spacing-2
         &-social, &-legals, &-credit
             @include meta
         &-credit
             display: block
-            margin-top: $spacing0
+            margin-top: $spacing-2
+            a
+                text-decoration-color: alphaColor(currentColor, 0.3)
         &-search
-            padding-top: $spacing0 !important
+            padding-top: $spacing-2 !important
         &-i18n
             @include dropdown-i18n
             button
@@ -62,21 +61,21 @@ footer#document-footer
                     &::after
                         transform: rotate(-180deg)
                 &::before
-                    margin-right: $spacing0
+                    margin-right: $spacing-2
                 &::after
-                    margin-left: $spacing0
+                    margin-left: $spacing-2
             button[aria-expanded="true"]
-                min-width: px2rem(150)
-                outline: $spacing0 solid $dropdown-i18n-background-color
+                min-width: $spacing-6
+                outline: $spacing-2 solid $dropdown-i18n-background-color
             .dropdown-menu
                 @include meta
                 background: $dropdown-i18n-background-color
-                margin-left: -$spacing0
-                margin-right: -$spacing0
-                margin-top: $spacing0
+                margin-left: -$spacing-2
+                margin-right: -$spacing-2
+                margin-top: $spacing-2
                 a
                     color: $dropdown-i18n-color
-                    padding: $spacing0
+                    padding: $spacing-2
                 ul
                     li + li
                         margin-top: 0
@@ -86,7 +85,7 @@ footer#document-footer
                     padding: 0
                     position: absolute
                     width: fit-content
-                    min-width: calc(#{px2rem(150)} + #{$spacing0} * 2)
+                    min-width: calc(#{pxToRem(150)} + #{$spacing-2} * 2)
                     a
                         padding-top: 0
                     a:focus-visible
@@ -99,7 +98,7 @@ footer#document-footer
         @if $footer-icons-enabled
             &-social 
                 .nav-social + .site-links
-                    margin-top: $spacing1
+                    margin-top: $spacing-3
                 &.site-links li
                     align-items: center
                     display: flex
@@ -134,13 +133,13 @@ footer#document-footer
                     &::after
                         font-size: $footer-icons-size
                         @include media-breakpoint-up(desktop)
-                            margin-right: half(-$spacing0)
-                            padding-left: $spacing0
+                            margin-right: -0.2em
+                            padding-left: $spacing-2
                     @include media-breakpoint-down(desktop)
                         width: fit-content
                         flex-direction: row-reverse
                         &::after
-                            margin-right: $spacing0
+                            margin-right: $spacing-2
                             transform: translateX(-25%)
         @if $footer-text-hidden
             &-social.site-links li
@@ -150,16 +149,16 @@ footer#document-footer
         .container
             + .container,
             > * + *
-                margin-top: $spacing3
+                margin-top: $spacing-5
 
     @include media-breakpoint-up(desktop)
         .container
             display: flex
             justify-content: space-between
-            padding-bottom: $spacing3
+            padding-bottom: $spacing-5
             + .container
                 align-items: flex-end
-                padding-top: $spacing3
+                padding-top: $spacing-5
                 padding-bottom: 0
         .footer
             &-site, &-social

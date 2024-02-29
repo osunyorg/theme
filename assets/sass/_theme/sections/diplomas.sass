@@ -1,65 +1,65 @@
 ul.diplomas
     @include list-reset
     > li
-        margin-bottom: $spacing0
+        margin-bottom: $spacing-2
         @include media-breakpoint-up(desktop)
-            margin-bottom: $spacing3
+            margin-bottom: $spacing-5
         > a
             @include h2
             display: block
             text-decoration: none
-            padding-bottom: $spacing1
-            padding-top: $spacing1
-            border-bottom: 1px solid $color-border
+            padding-bottom: $spacing-3
+            padding-top: $spacing-3
+            border-bottom: 1px solid var(--color-border)
             @include icon(arrow-right, after)
                 align-self: center
                 margin-left: auto
             &:hover
-                color: $color-accent
+                color: var(--color-accent)
             @include media-breakpoint-down(desktop)
                 position: relative
-                padding-right: $spacing1
+                padding-right: $spacing-3
                 &::after
                     position: absolute
-                    bottom: $spacing1
+                    bottom: $spacing-3
                     right: 0
             @include media-breakpoint-up(desktop)
                 display: flex
                 align-items: baseline
                 span
-                    margin-left: $spacing1
-                
+                    margin-left: $spacing-3
+
         .content
             @include grid(2, desktop)
-            padding-bottom: $spacing1
-            padding-top: $spacing1
+            padding-bottom: $spacing-3
+            padding-top: $spacing-3
 
         .programs
             @include media-breakpoint-down(desktop)
-                margin-top: $spacing1
+                margin-top: $spacing-3
             li
                 display: block
                 border-bottom: 0
                 padding: 0
                 + li, > ol
-                    margin-top: $spacing0
+                    margin-top: $spacing-2
                     @include media-breakpoint-up(sm) 
-                        margin-top: $spacing1
+                        margin-top: $spacing-3
                 a:hover
-                    color: $color-accent
+                    color: var(--color-accent)
                 ol li a   
                     @include inherit-text
                     @include icon(list-hyphen, before)
                         margin-left: 1px
-                        margin-right: half($spacing0)
+                        margin-right: $spacing-1
                         margin-top: 6px
                         @include media-breakpoint-up(sm)
-                            margin-right: $spacing0
+                            margin-right: $spacing-2
                         @include media-breakpoint-up(md)
                             margin-top: 8px
                     display: flex
                     ol
-                        margin-left: $spacing1
+                        margin-left: $spacing-3
             > li a 
                 @include h3
                         
@@ -68,7 +68,7 @@ ul.diplomas
                 @include media-breakpoint-up(desktop)
                     display: flex
                     > p
-                        width: col(6)
+                        width: columns(6)
             .title
                 @include h4
 
@@ -81,83 +81,93 @@ ul.diplomas
         @include icon(caret, after)
             margin-left: 5px
     .dropdown-menu
-        @include inset(calc(100% + #{$spacing0}), 0, auto, auto)
-        background-color: $color-background-alt
+        @include inset(calc(100% + #{$spacing-2}), 0, auto, auto)
+        background-color: var(--color-background-alt)
         display: none
         position: absolute
         z-index: 2
         @include media-breakpoint-down(desktop)
-            right: half(-$grid-gutter-sm)
-            left: half(-$grid-gutter-sm)
+            right: var(--grid-gutter-negative)
+            left: var(--grid-gutter-negative)
         &,
         a
             color: black
         a
-            
             display: block
             font-size: $body-size
-            padding: $spacing1
+            padding: $spacing-3
             text-decoration: none
             white-space: normal
             @include media-breakpoint-down(desktop)
-                padding: $spacing0 $spacing1
+                padding: $spacing-2 $spacing-3
             &:not(:first-child)
-                border-top: 1px solid $color-border
+                border-top: 1px solid var(--color-border)
             &:hover
-                background-color: $color-accent
+                background-color: var(--color-accent)
                 color: white
 
-    button[aria-expanded="true"] 
+    button[aria-expanded="true"]
         @include icon('caret-top', 'after')
         + .dropdown-menu
             display: block
 
 .essential-container
-    .container
+    margin-top: $spacing-5
+    .buttons
+        @include meta
+        display: flex
+        flex-wrap: wrap
+        .dropdown-share
+            --btn-background: #{$hero-background-color}
+            --btn-hover-background: #{$color-background}
+            button
+                @extend .button
+                @include button-icon(social-inline)
+        a[download]
+            @extend .button-alt
+            @include button-icon(download-inline)
         @include media-breakpoint-down(sm)
-            .buttons > *
-                width: col(8)
+            button, > a
+                width: 100%
         @include media-breakpoint-down(md)
-            .buttons
-                display: flex
-                gap: $spacing1
-                flex-wrap: wrap
-                > *
-                    min-width: 150px
-                    width: col(7)
+            --btn-min-width: #{pxToRem(140)}
+            gap: $spacing-3
+            flex-direction: row
+            button, > a
+                width: columns(6)
         @include media-breakpoint-up(md)
-            @include grid(2, md)
-            align-items: flex-end
-            .buttons
-                align-items: end
-                display: flex
-                flex-direction: column
-                gap: $spacing1
-                justify-content: flex-end
-                > *
-                    min-width: 200px
-                    width: col(2, 6)
-            
+            flex-direction: column
+            gap: $spacing-3
+            --btn-min-width: #{columns(2)}
+            button, > a
+                width: pxToRem(200)
+        @include media-breakpoint-down(desktop)
+            margin-top: $spacing-3
+    .container
+        @include media-breakpoint-up(md)
+            display: flex
+            justify-content: space-between
     .essential
+        @include meta
         color: $header-color
         flex-wrap: wrap
         font-size: $program-essential-font-size
         margin-bottom: 0
-        margin-top: $spacing3
-        @include meta
+        margin-top: 0
         @include media-breakpoint-up(desktop)
             @include grid(6, false, 0)
+            width: columns(6)
             font-size: $program-essential-font-size-desktop
         dt,
         dd
             margin: 0
-            padding-bottom: $spacing0
-            padding-top: $spacing0
+            padding-bottom: $spacing-2
+            padding-top: $spacing-2
             &:last-of-type
                 padding-bottom: 0
         dt
             grid-column: 1/3
-            color: $color-text-alt
+            color: var(--color-text-alt)
             @include media-breakpoint-down(desktop)
                 padding-bottom: 0
         dd
@@ -177,11 +187,11 @@ ul.diplomas
                 @include stretched-link(before)
                 position: initial
                 @include media-breakpoint-down(desktop)
-                    margin-right: $spacing0
+                    margin-right: $spacing-2
                     &::after
                         align-self: center
                         bottom: unset
                         position: relative
-                        margin-left: half($spacing0)
+                        margin-left: $spacing-1
                     + p
-                        margin-top: $spacing0
+                        margin-top: $spacing-2

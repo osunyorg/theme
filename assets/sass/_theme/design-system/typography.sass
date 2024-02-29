@@ -25,60 +25,51 @@ h1, h2, h3, h4, h5, h6
 
 @mixin h1
     font-family: $h1-font-family
-    font-size: $h1-size
+    font-size: var(--h1-size)
     font-weight: $h1-weight
-    line-height: $h1-line-height
+    line-height: var(--h1-line-height)
     text-transform: $h1-text-transform
-    @include media-breakpoint-up(desktop)
-        font-size: $h1-size-desktop
 
 h1, .h1
     @include h1
 
 @mixin h2
     font-family: $h2-font-family
-    font-size: $h2-size
+    font-size: var(--h2-size)
     font-weight: $h2-weight
-    line-height: $h2-line-height
+    line-height: var(--h2-line-height)
     text-transform: $h2-text-transform
-    @include media-breakpoint-up(desktop)
-        font-size: $h2-size-desktop
 
 h2, .h2
     @include h2
 
 @mixin h3
     font-family: $h3-font-family
-    font-size: $h3-size
+    font-size: var(--h3-size)
     font-weight: $h3-weight
-    line-height: $h3-line-height
+    line-height: var(--h3-line-height)
     text-transform: $h3-text-transform
-    @include media-breakpoint-up(desktop)
-        font-size: $h3-size-desktop
 
 h3, .h3
     @include h3
 
 @mixin h4
     font-family: $h4-font-family
-    font-size: $h4-size
+    font-size: var(--h4-size)
     font-weight: $h4-weight
-    line-height: $h4-line-height
+    line-height: var(--h4-line-height)
     text-transform: $h4-text-transform
-    @include media-breakpoint-up(desktop)
-        font-size: $h4-size-desktop
 
 h4, .h4
     @include h4
 
 @mixin h5
     font-family: $h5-font-family
-    font-size: $h5-size
+    font-size: var(--h5-size)
     font-weight: $h5-weight
-    line-height: $h5-line-height
+    line-height: var(--h5-line-height)
     text-transform: $h5-text-transform
-    @include media-breakpoint-up(desktop)
-        font-size: $h5-size-desktop
+    // Todo : check that
     a
         text-decoration: none
 
@@ -87,12 +78,10 @@ h5, .h5
 
 @mixin h6
     font-family: $h6-font-family
-    font-size: $h6-size
+    font-size: var(--h6-size)
     font-weight: $h6-weight
-    line-height: $h6-line-height
+    line-height: var(--h6-line-height)
     text-transform: $h6-text-transform
-    @include media-breakpoint-up(desktop)
-        font-size: $h6-size-desktop
 
 h6, .h6
     @include h6
@@ -100,42 +89,33 @@ h6, .h6
 h1, .h1,
 h2, .h2
     a
-        text-decoration-color: transparent
-        &:hover
-            text-decoration-color: inherit
+        @extend %underline-on-hover
 
 @mixin lead($handle-sidebar: true)
     font-family: $lead-font-family
-    font-size: $lead-size
+    font-size: var(--lead-size)
     font-weight: $lead-weight
-    line-height: $lead-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $lead-size-desktop
+    line-height: var(--lead-line-height)
     @if $handle-sidebar
         @include in-page-with-sidebar
             font-family: $lead-sidebar-font-family
-            font-size: $lead-sidebar-size-desktop
+            font-size: var(--lead-sidebar-size)
             font-weight: $lead-sidebar-weight
-            line-height: $lead-sidebar-line-height
+            line-height: var(--lead-sidebar-line-height)
 
 .lead
     @include lead
 
 @mixin lead-hero
     font-family: $lead-hero-font-family
-    font-size: $lead-hero-size
+    font-size: var(--lead-hero-size)
     font-weight: $lead-hero-weight
-    line-height: $lead-hero-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $lead-hero-size-desktop
-
+    line-height: var(--lead-hero-line-height)
 
 @mixin body-text
     font-family: $body-font-family
-    font-size: $body-size
-    line-height: $body-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $body-size-desktop
+    font-size: var(--body-size)
+    line-height: var(--body-line-height)
 
 .p,
 .li
@@ -143,54 +123,45 @@ h2, .h2
 
 @mixin meta
     font-family: $meta-font-family
-    font-size: $meta-size
+    font-size: var(--meta-size)
     font-weight: $meta-weight
-    line-height: $meta-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $meta-size-desktop
+    line-height: var(--meta-line-height)
 
 .meta
     @include meta
 
 @mixin signature
     font-family: $signature-font-family
-    font-size: $signature-size
+    font-size: var(--signature-size)
     font-weight: $signature-weight
-    line-height: $signature-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $signature-size-desktop
+    line-height: var(--signature-line-height)
 
 .signature
     @include signature
 
 @mixin small
     font-family: $small-font-family
-    font-size: $small-size
+    font-size: var(--small-size)
     font-weight: $small-weight
-    line-height: $small-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $small-size-desktop
+    line-height: var(--small-line-height)
 
 small, .small
     @include small
 
-@mixin rich-text
-    word-break: break-word
-    h1, h2, h3, h4, h5, h6, p, ul
-        margin-top: $spacing1
-        &:first-child, meta + &
-            margin-top: 0
-
 %multiple-lists
     ul, ol
         ul, ol
-            padding-left: $spacing0
+            padding-left: $spacing-2
             @include media-breakpoint-up(desktop)
-                padding-left: $spacing1
+                padding-left: $spacing-3
 
 .rich-text
-    @include rich-text
+    word-break: break-word
     @extend %multiple-lists
+    h1, h2, h3, h4, h5, h6, p, ul
+        margin-top: $spacing-3
+        &:first-child, meta + &
+            margin-top: 0
 
 .content
     section 
@@ -204,19 +175,17 @@ small, .small
     line-height: inherit
 
 [itemprop="articleBody"]
-    @include rich-text
+    @extend .rich-text
 
 @mixin blockquote
     margin: 0
     font-family: $quote-font-family
-    font-size: $quote-size
+    font-size: var(--quote-size)
     font-weight: $quote-weight
     font-style: $quote-style
-    line-height: $quote-line-height
-    @include media-breakpoint-up(desktop)
-        font-size: $quote-size-desktop-long
+    line-height: var(--quote-line-height)
     cite
-        font-size: px2rem(18)
+        font-size: pxToRem(18)
         font-style: normal
 
 blockquote, .blockquote
@@ -227,10 +196,9 @@ p
     margin-top: 0
     margin-bottom: 0
     + p
-        margin-top: $spacing0
-
-p:empty
-    display: none
+        margin-top: $spacing-2
+    &:empty
+        display: none
 
 p + ul,
 p + ol
@@ -256,32 +224,6 @@ a,
     &.glightbox
         text-decoration: none
 
-@mixin btn
-    font-size: $btn-font-size
-    padding: $btn-padding-y $btn-padding-x
-    text-decoration: none
-    display: inline-block
-    border-radius: $btn-border-radius
-    @include media-breakpoint-up(desktop)
-        font-size: $btn-font-size-desktop
-        padding: $btn-padding-y-desktop $btn-padding-x-desktop
-
-.btn
-    @include btn
-
-.link-btn
-    @include btn
-    border: $btn-border
-    @include media-breakpoint-up(desktop)
-        padding: $spacing0
-    &[target="_blank"]:not(.icon)
-        display: flex
-        justify-content: space-between
-        align-items: center
-        @include icon-block(link-blank-block, after)
-    &:hover
-        background: $btn-hover-background
-
 .chip
     @include meta
     background: $chip-background
@@ -298,8 +240,16 @@ a,
     @include link
     @include icon(arrow, before)
     &::before
-        font-size: px2rem(10)
-        margin-right: px2rem(5)
+        font-size: pxToRem(10)
+        margin-right: pxToRem(5)
+
+%underline-on-hover
+    text-decoration-color: transparent
+    text-decoration-thickness: $link-underline-thickness
+    text-underline-offset: $link-underline-offset
+    transition: $link-transition
+    &:hover
+        text-decoration-color: currentColor
 
 dd
     margin-bottom: 0.5rem
@@ -310,20 +260,19 @@ abbr, abbr[title]
     text-decoration-style: dotted
 
 ::selection
-    background: rgba($color-text, .7)
-    color: $color-background
-    text-shadow: none
+    background: var(--color-selection-background)
+    color: var(--color-selection)
 
 sub,
 sup
     font-size: 60%
-    margin-left: px2rem(2)
+    margin-left: pxToRem(2)
 
 [data-click-to-copy]
     cursor: pointer
     text-decoration: none
     @include icon(copy-inline, after)
-        margin-left: $spacing0
+        margin-left: $spacing-2
         vertical-align: text-top
     &.is-copied
         @include icon(check-inline, after)
@@ -354,5 +303,5 @@ sup
     .btn-#{$name}
         @include icon($name)
         &::before
-            margin-inline-end: px2rem(5)
+            margin-inline-end: pxToRem(5)
 
