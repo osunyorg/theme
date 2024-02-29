@@ -81,7 +81,9 @@
   {{ end }}
 
   {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-end") }}
-    {{ partial "header/breadcrumbs.html" .context }}
+    <div class="container breadcrumb-container">
+      {{ partial "header/breadcrumbs.html" .context }}
+    </div>
   {{ end }}
 </header>
 

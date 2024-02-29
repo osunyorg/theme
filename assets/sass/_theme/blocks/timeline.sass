@@ -65,8 +65,8 @@
         background: $block-timeline-horizontal-background
         color: $block-timeline-horizontal-color
         overflow: hidden
-        padding-bottom: var(--grid-gutter)
-        padding-top: var(--grid-gutter)
+        padding-bottom: var(--block-space-y)
+        padding-top: var(--block-space-y)
         &::before
             display: none
         .timeline
@@ -150,12 +150,12 @@
             .timeline-arrows
                 left: 0
                 position: absolute
-                top: calc(#{$spacing-4/2} + var(--min-title-height))
+                top: calc(#{$spacing-2} + var(--min-title-height))
             .timeline-event
                 padding-right: 0
                 width: 75%
                 .line
-                    margin-bottom: calc(#{$spacing-4} + var(--min-title-height))
+                    margin-bottom: $spacing-5
 
         @include in-page-without-sidebar
             @include media-breakpoint-up(xxl)

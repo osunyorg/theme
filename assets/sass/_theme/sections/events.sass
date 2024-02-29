@@ -143,12 +143,13 @@
                 gap: var(--grid-gutter)
                 align-items: start
                 &-content
-                    width: columns(10)
                     > hgroup, > .event-title
                         margin-bottom: $spacing-2
                 .media
                     order: 2
             @include in-page-without-sidebar
+                &-content
+                    width: columns(10)
                 &-dates
                     margin-top: 0
                     order: 0
@@ -169,7 +170,7 @@
                         grid-column: 0 / 5
                         grid-row: 1 / 4
                 .media
-                    width: col(2)
+                    width: columns(2)
             @include in-page-with-sidebar
                 @include grid(8)
                 &-content

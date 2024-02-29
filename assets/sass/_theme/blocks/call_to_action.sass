@@ -17,7 +17,7 @@
         .description
             a
                 color: inherit
-                text-decoration-color:  $block-call-to-action-color
+                text-decoration-color: $block-call-to-action-color
             p
                 @include h2
         .actions
@@ -34,15 +34,13 @@
                 display: inline-block
                 text-decoration-color: alphaColor($block-call-to-action-color, 0.3)
                 &:first-child
-                    @include btn
-                    background: $block-call-to-action-button-background
-                    color: $block-call-to-action-button-color
-                    transition: background .3s ease, color .3s ease
-                    &:hover,
-                    &:focus-visible,
-                    &:focus
-                        background: $block-call-to-action-button-hover-background
-                        color: $block-call-to-action-button-hover-color
+                    --btn-background: #{$block-call-to-action-button-background}
+                    --btn-color: #{$block-call-to-action-button-color}
+                    --btn-hover-background: #{$block-call-to-action-button-hover-background}
+                    --btn-hover-color: #{$block-call-to-action-button-hover-color}
+                    --btn-border: none
+                    --btn-min-width: #{columns(2)}
+                    @extend .button
                 &:last-child
                     margin-bottom: 0
         * + .actions
@@ -55,7 +53,7 @@
         padding-top: 0
         padding-bottom: 0
         .call_to_action
-            padding: $spacing-5 0
+            padding: var(--block-space-y) 0
             .actions
                 a
                     &:last-child
@@ -79,7 +77,7 @@
             > div
                 // TODO : simplifier l'application d'une couleur de fond sur le CTA avec sidebar et sans sidebar
                 background-color: var(--cta-background-color)
-                padding: var(--grid-gutter) columns(1)
+                padding: columns(1)
                 width: 100%
                 position: relative
                 &::after

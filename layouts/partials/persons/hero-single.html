@@ -1,8 +1,13 @@
 {{- $title := or .Params.header_text .Title -}}
+{{- $image := "" -}}
+{{ if .Params.image }}
+  {{ $image = (dict "id" .Params.image) }}
+{{ end }}
+
 {{- partial "header/hero.html"
       (dict
         "title" $title
-        "image" (dict "id" .Params.image)
+        "image" $image
         "context" .
         "sizes" site.Params.image_sizes.sections.persons.hero_single
       ) -}}

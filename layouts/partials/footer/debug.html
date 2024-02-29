@@ -1,3 +1,37 @@
+<div class="d-help">
+  <a href="#help">
+    <img src="/osuny/icon.png" alt="Aide Osuny" class="d-help__icon" />
+  </a>
+  <div class="d-help__content" id="help">
+    <table>
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Raccourci</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Afficher la grille</td>
+          <td>Ctrl + g</td>
+        </tr>
+        <tr>
+          <td>Passer d’une page pleine largeur à une page avec barre latérale, et inversement</td>
+          <td>Ctrl + w</td>
+        </tr>
+        <tr>
+          <td>Contrôler les dimensions des images chargées</td>
+          <td>Ctrl + i</td>
+        </tr>
+        <tr>
+          <td>Ouvre la page en production, si dans config.yaml debug.productionUrl est spécifié</td>
+          <td>Ctrl + p</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
 <div class="d-grid">
   <div>1</div>
   <div>2</div>
@@ -14,16 +48,37 @@
 </div>
 
 <div class="d-spacing">
-  <div><span>0 (12px) </span></div>
-  <div><span>1 (24px) </span></div>
-  <div><span>2 (48px) </span></div>
-  <div><span>3 (64px) </span></div>
-  <div><span>4 (128px) </span></div>
-  <div><span>5 (256px) </span></div>
+  <div><span>1 (8px) </span></div>
+  <div><span>2 (12px) </span></div>
+  <div><span>3 (24px) </span></div>
+  <div><span>4 (48px) </span></div>
+  <div><span>5 (64px) </span></div>
+  <div><span>6 (128px) </span></div>
+  <div><span>7 (256px) </span></div>
 </div>
 
 <div class="d-cross"></div>
 <style>
+  .d-help__content {
+    display: none;
+    background: #EEEEEE;
+    border-radius: 24px;
+    position: fixed;
+    width: 600px;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px 20px 60px;
+  }
+  .d-help__content:target {
+    display: block;
+  }
+  .d-help__icon {
+    bottom: 10px;
+    left: 10px;
+    position: fixed;
+    width: 40px;
+    z-index: 1000;
+  }
   .d-grid {
     bottom: 0;
     display: none;
@@ -49,10 +104,6 @@
   }
   .d-grid > div {
     background: fuchsia;
-    /*
-    border-left: 1px solid yellow;
-    border-right: 1px solid yellow; 
-    */
     text-align: center;
   }
   .d-spacing {
@@ -64,7 +115,7 @@
     pointer-events: none;
     width: 100%;
     mix-blend-mode: difference;
-    opacity: 0.3;
+    opacity: 0.5;
     font-family: sans-serif;
     font-size: 12px;
   }
@@ -76,6 +127,7 @@
   }
   .d-spacing > div span {
     position: absolute;
+    color: var(--color-text);
   }
   .d-spacing > div {
     width: 100%;
@@ -86,25 +138,28 @@
   }
   .d-spacing > div:nth-child(1){
     border-top: 1px solid white;
-    height: var(--spacing0);
+    height: var(--spacing-1);
   }
   .d-spacing > div:nth-child(1) span{
     margin-top: -10px;
   }
   .d-spacing > div:nth-child(2){
-    height: var(--spacing1);
+    height: var(--spacing-2);
   }
   .d-spacing > div:nth-child(3){
-    height: var(--spacing2);
+    height: var(--spacing-3);
   }
   .d-spacing > div:nth-child(4){
-    height: var(--spacing3);
+    height: var(--spacing-4);
   }
   .d-spacing > div:nth-child(5){
-    height: var(--spacing4);
+    height: var(--spacing-5);
   }
   .d-spacing > div:nth-child(6){
-    height: var(--spacing5);
+    height: var(--spacing-6);
+  }
+  .d-spacing > div:nth-child(7){
+    height: var(--spacing-7);
   }
   .d-cross {
     position: fixed;

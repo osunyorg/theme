@@ -224,32 +224,6 @@ a,
     &.glightbox
         text-decoration: none
 
-@mixin btn
-    font-size: $btn-font-size
-    padding: $btn-padding-y $btn-padding-x
-    text-decoration: none
-    display: inline-block
-    border-radius: $btn-border-radius
-    @include media-breakpoint-up(desktop)
-        font-size: $btn-font-size-desktop
-        padding: $btn-padding-y-desktop $btn-padding-x-desktop
-
-.btn
-    @include btn
-
-.link-btn
-    @include btn
-    border: $btn-border
-    @include media-breakpoint-up(desktop)
-        padding: $spacing-2
-    &[target="_blank"]:not(.icon)
-        display: flex
-        justify-content: space-between
-        align-items: center
-        @include icon-block(link-blank-block, after)
-    &:hover
-        background: $btn-hover-background
-
 .chip
     @include meta
     background: $chip-background
@@ -270,7 +244,7 @@ a,
         margin-right: pxToRem(5)
 
 %underline-on-hover
-    text-decoration-color: alphaColor(currentColor, 0)
+    text-decoration-color: transparent
     text-decoration-thickness: $link-underline-thickness
     text-underline-offset: $link-underline-offset
     transition: $link-transition
