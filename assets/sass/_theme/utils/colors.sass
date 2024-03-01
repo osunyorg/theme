@@ -1,8 +1,8 @@
 // Les couleurs étant stockées dans des variables CSS, nous utilisons color-mix pour appliquer de l'alpha sur des couleurs en hexa
 @function alphaColor($color, $alpha)
     $percent: $alpha
-    @if ($percent <= 1 && $percent > 0)
-        $percent: $alpha * 100
+    @if ($percent <= 1 and $percent > 0)
+        $percent: $alpha * 100%
     @if ($percent == 0) // Permet d'éviter le bug de compilation en production qui renvoie "0" au lieu de "0%"
         @return transparent
     @else
