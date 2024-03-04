@@ -1,7 +1,13 @@
 {{- $title := or .Params.header_text .Title -}}
+
+{{/*  LEGACY : à retirer une fois que le format de donnée des images des personnes sera homogène aux autres images  */}}
 {{- $image := "" -}}
-{{ if .Params.image }}
-  {{ $image = (dict "id" .Params.image) }}
+{{ with .Params.image }}
+  {{ if eq (printf "%T" .) "string" }}
+    {{ $image = dict "id" . }}
+  {{ else }}
+    {{ $image = . }}
+  {{ end }}
 {{ end }}
 
 {{- partial "header/hero.html"
