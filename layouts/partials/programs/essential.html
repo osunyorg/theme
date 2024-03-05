@@ -1,6 +1,8 @@
 <div class="essential-container" id="#{{ urlize (i18n "programs.toc.essential") }}">
+  {{- if and (eq site.Params.summary.position "hero") .Params.website_url -}}
+    {{- partial "programs/website.html" . -}}
+  {{- end -}}
   <div class="container">
-
     {{ $parent := .Params.parent }}
     {{- with .Params.diplomas -}}
       {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
