@@ -8,10 +8,14 @@
                 display: flex
                 justify-content: space-between
                 transition: color 0.55s
-                padding-right: $spacing2
+                padding-right: $spacing-4
                 &:hover
-                    color: $color-accent
-                @include in-page-without-sidebar
+                    color: var(--color-accent)
+
+    @include in-page-without-sidebar
+        .programs
+            li
+                a
                     @include h2
 
     .programs-grid
@@ -23,20 +27,20 @@
         article
             display: flex
             flex-direction: column-reverse
-            margin-bottom: $spacing3
+            margin-bottom: $spacing-5
 
             @include media-breakpoint-up(xl)
                 margin-bottom: 0
             @include in-page-without-sidebar 
                 margin-bottom: 0
             h3
-                margin-bottom: $spacing0
+                margin-bottom: $spacing-2
                 @include media-breakpoint-up(desktop)
                     margin-bottom: 0
             a
                 text-decoration: none               
                 .more
                     @include icon(arrow-right, after, true)
-                    margin-top: $spacing0
+                    margin-top: $spacing-2
             .media
-                margin-bottom: $spacing0
+                margin-bottom: $spacing-2

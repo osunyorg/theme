@@ -10,11 +10,11 @@
             display: block
     .media
         @include handle-svg-fit
-        background: $color-background-alt
-        margin-bottom: $spacing0
+        background: $organization-background-color
+        margin-bottom: $spacing-2
         order: -1
         overflow: hidden
-        padding: $spacing1
+        padding: $spacing-3
         picture
             aspect-ratio: 1
             display: block
@@ -42,32 +42,32 @@
         @include grid(3, lg)
         @include grid(3, xl)
     @include media-breakpoint-down(desktop)
-        grid-column-gap: $spacing1 !important
+        grid-column-gap: $spacing-3 !important
 
 .organizations__section
     .organizations
-        margin-top: $spacing2
+        margin-top: $spacing-4
 
 .organizations__page
     .lead
         font-family: $lead-sidebar-font-family
         font-weight: $lead-sidebar-weight
         line-height: $lead-sidebar-line-height
-        margin-bottom: $spacing1
+        margin-bottom: $spacing-3
         @include media-breakpoint-up(desktop)
             font-size: $lead-sidebar-size-desktop
     .document-content
-        .logo
+        .organization-logo
             figcaption
                 text-align: right
                 @include meta
-                margin-bottom: $spacing0
+                margin-bottom: $spacing-2
             picture
                 aspect-ratio: 1/1
-                background: $color-background-alt
+                background: var(--color-background-alt)
                 display: block
-                padding: $spacing2
-                margin-bottom: half($spacing0)
+                padding: $spacing-4
+                margin-bottom: $spacing-1
                 width: auto
             img
                 display: block
@@ -76,13 +76,13 @@
                 object-position: center
                 width: 100%
         .blocks
-            margin-top: $spacing3
+            margin-top: $spacing-5
         .contacts-details
             @include grid(2, md)
     @include media-breakpoint-down(md)
         .document-content
-            .logo
-                margin-top: $spacing3
+            .organization-logo
+                margin-top: $spacing-5
                 display: flex
                 justify-content: space-between
     @include media-breakpoint-up(md)
@@ -90,8 +90,8 @@
             > .container
                 display: flex
                 justify-content: space-between
-                gap: $grid-gutter
+                gap: var(--grid-gutter)
             [itemprop="articleBody"]
-                width: col(8)
-            .logo
-                width: col(3)
+                width: columns(8)
+            .organization-logo
+                width: columns(3)

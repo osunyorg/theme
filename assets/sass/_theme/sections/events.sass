@@ -2,7 +2,7 @@
     .hero
         h1 span
             display: block
-            color: $color-text-alt
+            color: var(--color-text-alt)
     .lead
         @include h3
         // Safe spacing if post is empty
@@ -27,7 +27,7 @@
         text-decoration: none
     @include media-breakpoint-down(desktop)
         .events
-            margin-bottom: $spacing2
+            margin-bottom: $spacing-4
         .archive-link
             text-align: left
 
@@ -35,18 +35,18 @@
     @include list-reset
     @include media-breakpoint-up(desktop)
         font-size: $table-body-size-desktop
-        padding-bottom: $spacing3
+        padding-bottom: $spacing-5
     .event-date
         text-transform: capitalize
     ul
         @include list-reset
     > li
-        padding-top: $spacing0
+        padding-top: $spacing-2
         &:not(:last-child)
-            padding-bottom: $spacing0
+            padding-bottom: $spacing-2
         > span
             @include meta
-            color: $color-text-alt
+            color: var(--color-text-alt)
             padding-left: 0
             display: block
             white-space: nowrap
@@ -56,9 +56,9 @@
                 padding-right: 0.3rem
     .events-categories
         display: flex
-        gap: space(2)
+        gap: $spacing-1
         a
-            @include link($color-accent)
+            @include link(var(--color-accent))
     .events-actions
         align-items: start
         display: flex
@@ -79,10 +79,10 @@
         text-decoration: none
     &-subtitle
         @include h3
-        color: $color-text-alt
+        color: var(--color-text-alt)
     &-categories
         @include meta
-        margin-top: $spacing0
+        margin-top: $spacing-2
         span + span
             &::before
                 content: ', '
@@ -99,15 +99,15 @@
             display: inline-flex
             &::before
                 content: '|'
-                margin-right: half($spacing0)
+                margin-right: $spacing-1
 .events
     &--list
         .event
-            border-bottom: 1px solid $color-border
+            border-bottom: 1px solid var(--color-border)
             display: flex
             flex-direction: column
-            margin-bottom: $spacing1
-            padding-bottom: $spacing1
+            margin-bottom: $spacing-3
+            padding-bottom: $spacing-3
             position: relative
             .event-title
                 @include h3
@@ -116,23 +116,23 @@
                     text-decoration: none
             &-dates
                 @include h4
-                margin-top: half($spacing0)
-                margin-bottom: half($spacing1)
+                margin-top: $spacing-1
+                margin-bottom: $spacing-2
             &-content
                 order: 2
             @include media-breakpoint-down(desktop)
                 @include media-breakpoint-up(md)
                     flex-direction: row
-                    gap: $spacing1
+                    gap: $spacing-3
                     .media
-                        width: col(4)
+                        width: columns(4)
                     &-content
                         order: 1
-                        width: col(8)
+                        width: columns(8)
             @include media-breakpoint-down(md)
                 .media
                     max-width: 33%
-                    margin-bottom: $spacing0
+                    margin-bottom: $spacing-2
                 &-content
                     order: 1
             @include media-breakpoint-up(md)
@@ -140,24 +140,25 @@
                     grid-column: 10 / 13
             @include media-breakpoint-up(desktop)
                 flex-direction: row
-                gap: $grid-gutter
+                gap: var(--grid-gutter)
                 align-items: start
                 &-content
-                    width: col(10)
                     > hgroup, > .event-title
-                        margin-bottom: $spacing0
+                        margin-bottom: $spacing-2
                 .media
                     order: 2
             @include in-page-without-sidebar
+                &-content
+                    width: columns(10)
                 &-dates
                     margin-top: 0
                     order: 0
                     grid-column: 1 / 5
                     > span
                         @include h3
-                        margin-bottom: $spacing1
+                        margin-bottom: $spacing-3
                 &-time
-                    margin-top: $spacing0
+                    margin-top: $spacing-2
                     @include meta
                 &-content
                     @include grid(10, desktop, 0)
@@ -169,13 +170,13 @@
                         grid-column: 0 / 5
                         grid-row: 1 / 4
                 .media
-                    width: col(2)
+                    width: columns(2)
             @include in-page-with-sidebar
                 @include grid(8)
                 &-content
                     order: 1
                     grid-column: 6 span
-                    margin-top: half($spacing0)
+                    margin-top: $spacing-1
                 &-time
                     display: inline
                     &::before
@@ -184,7 +185,7 @@
                     grid-column: 2 span
 
     &--grid
-        @include grid(2, md, $spacing2)
+        @include grid(2, md, $spacing-4)
         .event
             display: flex
             flex-direction: column
@@ -194,14 +195,14 @@
                     @include stretched-link
             &-dates
                 @include meta
-                margin-top: $spacing0
+                margin-top: $spacing-2
             &-content
                 .event-title, hgroup
                     @include h3
             &-description
-                margin-top: $spacing0
+                margin-top: $spacing-2
             .media
-                margin-bottom: $spacing0
+                margin-bottom: $spacing-2
                 order: -1
                 img
                     aspect-ratio: 1
@@ -210,7 +211,7 @@
         @include media-breakpoint-down(md)
             .event
                 + .event
-                    margin-top: $spacing2
+                    margin-top: $spacing-4
         @include in-page-without-sidebar
             @include grid(3, desktop)
 
@@ -219,24 +220,24 @@
             display: flex
             flex-direction: row
             position: relative
-            grid-gap: $grid-gutter
+            grid-gap: var(--grid-gutter)
             + .event 
-                margin-top: $grid-gutter
+                margin-top: var(--grid-gutter)
             &-content
                 a 
                     @include stretched-link
             &-dates 
                 @include meta
-                margin-top: $spacing0
+                margin-top: $spacing-2
             &-content
                 flex: 1
                 .event-title
                     @include h3
                 .more
                     @include icon("arrow-right", after)
-                    margin-top: $spacing1
+                    margin-top: $spacing-3
                     &::after
-                        margin-left: half($spacing0)
+                        margin-left: $spacing-1
             .media
                 order: -1
                 img
@@ -245,10 +246,10 @@
                     width: 100%
             @include media-breakpoint-up(desktop)
                 .media
-                    width: col(4, 8)
+                    width: columns(4)
                 &-dates
                     @include h3
-                    margin-bottom: $spacing2
+                    margin-bottom: $spacing-4
                 .event-title,
                 .event-subtitle, 
                 hgroup
@@ -257,15 +258,21 @@
                 flex-direction: column
                 grid-gap: 0
                 .media
-                    margin-left: calc(-#{$grid-gutter-sm} /2)
-                    margin-right: calc(-#{$grid-gutter-sm} /2)
+                    margin-left: var(--grid-gutter-negative)
+                    margin-right: var(--grid-gutter-negative)
                     aspect-ratio: 1
                     img 
-                        margin-bottom: $spacing0
+                        margin-bottom: $spacing-2
             @include in-page-without-sidebar
                 align-items: center
                 &-dates
                     @include h3
+                .event-title,
+                .event-subtitle, 
+                hgroup
+                    @include lead
+                .media
+                    width: columns(6)
                 &:not(.event--with-image)
-                    width: col(5)
+                    width: columns(5)
                     margin-left: offset(4)

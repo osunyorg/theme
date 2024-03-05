@@ -5,24 +5,26 @@
     align-items: center
     display: flex
     flex-wrap: wrap
-    margin-top: $spacing3
+    margin-top: $spacing-5
     main.page-with-blocks &
-        padding-bottom: $spacing3
+        padding-bottom: $spacing-5
     li
         a
             color: inherit
-            padding: calc(#{$spacing0}/2) $spacing0
+            display: block
+            line-height: $spacing-4
+            padding: 0 $spacing-2
             text-decoration: none
             transition: background-color .15s ease-in-out
         &.active
-            color: $color-accent
+            color: var(--color-accent)
         &.disabled
             pointer-events: none
             a::before
                 opacity: .3
         &:not(.disabled)
             a:hover
-                background-color: $color-background-alt
+                background-color: var(--color-background-alt)
         &:first-child
             a
                 @include icon-block(arrow-first, before)
@@ -45,7 +47,7 @@
                 padding-right: 0
 
 .posts-navigation, .siblings-navigation
-    border-top: 1px solid $color-border
+    border-top: 1px solid var(--color-border)
     ul
         @include list-reset
         display: flex
@@ -58,33 +60,33 @@
             display: block
             text-decoration: none
             &:hover
-                color: $color-accent
+                color: var(--color-accent)
             span
                 @include meta
                 text-decoration: none
                 display: block
-                margin-bottom: $spacing0
+                margin-bottom: $spacing-2
         .previous
             span
                 @include icon(arrow-left, before)
-                    margin-right: px2rem(5)
+                    margin-right: pxToRem(5)
         .next
             text-align: right
             span
                 @include icon(arrow-right, after)
-                    margin-left: px2rem(5)
+                    margin-left: pxToRem(5)
 
     @include media-breakpoint-up(desktop)
         ul
-            padding-top: $spacing1
-            gap: $spacing1
+            padding-top: $spacing-3
+            gap: $spacing-3
 
     @include media-breakpoint-down(desktop)
         ul
             flex-direction: column-reverse
             .previous,
             .next
-                border-bottom: 1px solid $color-border
+                border-bottom: 1px solid var(--color-border)
                 display: flex
                 align-items: center
                 span
@@ -94,11 +96,11 @@
                         content: none
                 a
                     display: block
-                    padding: $spacing1 0
+                    padding: $spacing-3 0
             .previous
                 @include icon(arrow-left, before)
-                    margin-right: $spacing0
+                    margin-right: $spacing-2
             .next
                 justify-content: end
                 @include icon(arrow-right, after)
-                    margin-left: $spacing0
+                    margin-left: $spacing-2

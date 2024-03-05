@@ -1,51 +1,59 @@
-{{- $direction := "" -}}
-{{- $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero"  -}}
-{{- $subtitle := .subtitle -}}
-{{- $description := .description -}}
+
+{{ $direction := "" }}
+{{ $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero" }}
+{{ $display_breadcrumb := .breadcrumb | default true }}
+{{ $subtitle := .subtitle }}
+{{ $description := .description }}
 {{ if .image }}
-  {{- $direction = partial "GetImageDirection" .image -}}
+  {{ $direction = partial "GetImageDirection" .image }}
 {{ end }}
 
-{{- $summary := .context.Params.summary | safeHTML -}}
-{{- $subtitle_is_summary := false -}}
+{{ $summary := .context.Params.summary | safeHTML }}
+{{ $subtitle_is_summary := false }}
 
 {{ if not $subtitle }}
   {{ if and (eq site.Params.summary.position "hero") $summary }}
-   {{ $subtitle = $summary }}
-   {{ $subtitle_is_summary = true }}
+    {{ $subtitle = $summary }}
+    {{ $subtitle_is_summary = true }}
   {{ end }}
 {{ end }}
 
-<header class="hero {{ if .image -}}hero--with-image hero--image-{{- $direction -}}{{- end }} {{ if $breadcrumb_is_after_hero -}} hero--no-margin {{- end }}">
+<header class="hero {{ if .image }}hero--with-image hero--image-{{- $direction }}{{ end }} {{ if $breadcrumb_is_after_hero }} hero--no-margin {{ end }}">
   <div class="container">
-    {{- if eq site.Params.breadcrumb.position "hero-start" -}}
-      {{- if .breadcrumb | default true -}}
-        {{ partial "header/breadcrumbs.html" .context }}
-      {{- end -}}
-    {{- end -}}
+    {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-start") }}
+      {{ partial "header/breadcrumbs.html" .context }}
+    {{ end }}
     <div class="content">
-      {{- if or $subtitle $description -}}
-        <hgroup>
+      <div class="hero-text">
+        {{ if or $subtitle $description }}
+          <hgroup>
+            <h1>{{ partial "PrepareHTML" .title }}</h1>
+            {{ if $subtitle }}
+              <p {{ if $subtitle_is_summary }} class="lead" {{ end }}>{{ partial "PrepareHTML" $subtitle }}</p>
+            {{ end }}
+            {{ if $description }}
+              <p>{{ partial "PrepareHTML" .description }}</p>
+            {{ end }}
+          </hgroup>
+        {{ else }}
           <h1>{{ partial "PrepareHTML" .title }}</h1>
-          {{- if $subtitle -}}
-            <p {{ if $subtitle_is_summary -}} class="lead" {{- end -}}>{{ partial "PrepareHTML" $subtitle }}</p>
-          {{- end -}}
-          {{- if $description -}}
-            <p>{{ partial "PrepareHTML" .description }}</p>
-          {{- end -}}
-        </hgroup>
-      {{- else -}}
-        <h1>{{ partial "PrepareHTML" .title }}</h1>
-      {{- end -}}
-      {{- if .image }}
+        {{ end }}
+        {{ with .context.Params.header_cta }}
+          {{ if and .display .target .label }}
+            <a href="{{ .target }}" class="btn">{{ .label }}</a>
+          {{ end }}
+        {{ end }}
+      </div>
+
+      {{ if .image }}
         <figure>
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             <a  class="glightbox"
                 role="button"
                 data-glightbox="type: image;{{ if .image.credit }}description: {{ partial "PrepareHTML" .image.credit }}{{ end }}"
                 href="{{ partial "GetLightboxUrl" .image }}"
-                title="{{- i18n "commons.lightbox.link.title" -}}"
-                aria-label="{{- i18n "commons.lightbox.link.title" -}}">
+                title="{{ i18n "commons.lightbox.link.title" }}"
+                aria-label="{{ i18n "commons.lightbox.link.title" }}">
           {{ end }}
             {{ partial "commons/image.html"
               (dict
@@ -59,25 +67,28 @@
             {{ if partial "GetTextFromHTML" .image.credit }}
               <figcaption tabindex="0">
                 <div class="credit-content">
-                  {{- partial "PrepareHTML" .image.credit -}}
+                  {{ partial "PrepareHTML" .image.credit }}
                 </div>
               </figcaption>
             {{ end }}
         </figure>
-      {{ end -}}
+      {{ end }}
     </div>
-    {{- if eq site.Params.breadcrumb.position "hero-end" -}}
-      {{- if .breadcrumb | default true -}}
-        {{ partial "header/breadcrumbs.html" .context }}
-      {{- end -}}
-    {{- end -}}
   </div>
-</header>
 
-{{- if $breadcrumb_is_after_hero -}}
-  {{- if .breadcrumb | default true -}}
+  {{ if .hero_complement }}
+    {{ partial .hero_complement .context }}
+  {{ end }}
+
+  {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-end") }}
     <div class="container breadcrumb-container">
       {{ partial "header/breadcrumbs.html" .context }}
     </div>
-  {{- end -}}
-{{- end -}}
+  {{ end }}
+</header>
+
+{{ if and $display_breadcrumb $breadcrumb_is_after_hero }}
+  <div class="container breadcrumb-container">
+    {{ partial "header/breadcrumbs.html" .context }}
+  </div>
+{{ end }}
