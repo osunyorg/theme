@@ -10,6 +10,8 @@ const lightbox = gLightbox({
     closeEffect: 'fade',
     onOpen: () => {
         lightboxBtn = document.activeElement;
+        const lightboxContainer = document.querySelector('#glightbox-body');
+        lightboxContainer.setAttribute('aria-modal', 'true');
 
         if(siteLang == "fr") {
             const nextButton = document.querySelector('.gnext');
