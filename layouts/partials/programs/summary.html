@@ -1,1 +1,10 @@
+{{- if .context.Params.website_url -}}
+  <div class="program-heading">
+{{- end -}}
 {{- partial "commons/summary-in-content.html" . -}}
+{{- if .context.Params.website_url -}}
+    <div class="container">
+      <a href="{{- .Params.website_url -}}" target="_blank" class="btn">{{ i18n "programs.website" }}</a>
+    </div>
+  </div>
+{{- end -}}

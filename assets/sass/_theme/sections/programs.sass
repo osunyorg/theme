@@ -39,6 +39,10 @@ ol.programs
         @include media-breakpoint-up(desktop)
             .lead
                 padding-bottom: $spacing-4
+            .program-heading
+                margin-bottom: $spacing-6
+                .lead
+                    margin-bottom: 0
         .content
             padding-bottom: $spacing-4
             section:not(.block) > * + *
@@ -89,7 +93,15 @@ ol.programs
             section:first-of-type
                 .content
                     border-top: none
-
+    .program-website
+        a
+            @include icon(link-blank, after)
+                font-size: $body-size
+                margin-left: $spacing-1
+                vertical-align: baseline
+                @include media-breakpoint-up(desktop)
+                    font-size: $body-size-desktop
+                
     .program-table
         tr
             font-size: unset
