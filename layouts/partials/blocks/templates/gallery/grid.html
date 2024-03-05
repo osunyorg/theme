@@ -19,7 +19,7 @@
             {{ end }}
             <a  class="glightbox"
                 role="button"
-                data-glightbox="type: image; {{ if $lightbox_text }}description: {{ partial "PrepareText" $lightbox_text }}{{ end }}"
+                data-glightbox="type: image; {{ with $lightbox_text }}description: {{ . | safeHTML }}{{ end }}"
                 href="{{ partial "GetLightboxUrl" (dict "id" .id) }}"
                 title="{{- i18n "commons.lightbox.link.title" -}}"
                 aria-label="{{- i18n "commons.lightbox.link.title" -}}">

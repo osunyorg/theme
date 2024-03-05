@@ -1,0 +1,48 @@
+
+@mixin hover-translate-icon($pseudo: after, $distance: 10)
+    &::#{$pseudo}
+        display: inline-block
+        transition: transform 0.55s $arrow-ease-transition
+        transform: translateX(0)
+    &:hover
+        &::#{$pseudo}
+            transform: translateX(#{pxToRem($distance)})
+
+@mixin icon($icon-name: '', $pseudo-element: before, $non-breaking: false)
+    &::#{$pseudo-element}
+        content: map-get($icons, $icon-name)
+        display: inline-block
+        font-family: 'Icon'
+        font-style: normal
+        font-variant: normal
+        font-weight: normal
+        line-height: 1
+        speak: never
+        text-transform: none
+        vertical-align: middle
+        @if $non-breaking
+            content: " #{map-get($icons, $icon-name)}"
+            display: inline
+        @content // TODO : important de documenter ça
+
+@mixin icon-block($icon-name: '', $pseudo-element: before, $non-breaking: false)
+    @include icon($icon-name, $pseudo-element, $non-breaking)
+        font-size: pxToRem(44)
+        display: inline
+        @content
+
+@mixin arrow-right-hover
+    position: relative
+    display: flex
+    justify-content: space-between
+    align-items: center
+    @include icon(arrow, after)
+        opacity: 0
+        transform: translateX(-20px)
+        transition: 0.55s $arrow-ease-transition
+        position: absolute
+        right: 0
+    &:hover
+        &:after
+            opacity: 1
+            transform: translateX(0)

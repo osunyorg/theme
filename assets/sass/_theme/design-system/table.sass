@@ -7,24 +7,21 @@ table
     empty-cells: hide
     caption
         @include meta
-        padding: $spacing0 0
+        padding: $spacing-2 0
         text-align: left
     th,
     td
-        padding-top: $spacing0
-        padding-bottom: $spacing0
-        padding-right: $spacing0
-        @include in-page-with-sidebar
-            padding-top: calc(#{$spacing0} / 2)
-            padding-bottom: calc(#{$spacing0} / 2)
+        padding-top: $spacing-2
+        padding-bottom: $spacing-2
+        padding-right: $spacing-2
+        @include media-breakpoint-down(desktop)
+            min-width: 15ch
 
     thead
         @include h4
         font-size: $table-head-font-size
         @include media-breakpoint-up(desktop)
             font-size: $table-head-font-size-desktop
-        th
-            text-align: left
 
     tbody
         font-size: $table-body-size
@@ -32,18 +29,13 @@ table
             font-size: $table-body-size-desktop
         td,
         th
-            border-top: 1px solid $color-border
+            border-top: 1px solid var(--color-border)
             &:empty
                 border-top: none
 
 .table-responsive
     overflow-x: auto
-    margin-left: half(-$grid-gutter-sm)
-    margin-right: half(-$grid-gutter-sm)
-    padding-left: half($grid-gutter-sm)
-    padding-right: half($grid-gutter-sm)
-    @include media-breakpoint-up(desktop)
-        margin-left: half(-$grid-gutter)
-        margin-right: half(-$grid-gutter)
-        padding-left: half($grid-gutter)
-        padding-right: half($grid-gutter)
+    margin-left: var(--grid-gutter-negative)
+    margin-right: var(--grid-gutter-negative)
+    padding-left: var(--grid-gutter)
+    padding-right: var(--grid-gutter)
