@@ -26,21 +26,27 @@
             @include grid(3, xl)
         article
             display: flex
-            flex-direction: column-reverse
+            flex-direction: column
             margin-bottom: $spacing-5
-
             @include media-breakpoint-up(xl)
                 margin-bottom: 0
             @include in-page-without-sidebar 
                 margin-bottom: 0
-            h3
-                margin-bottom: $spacing-2
-                @include media-breakpoint-up(desktop)
-                    margin-bottom: 0
-            a
-                text-decoration: none               
-                .more
-                    @include icon(arrow-right, after, true)
-                    margin-top: $spacing-2
+
+            .program-content
+                order: 2
+                &-title
+                    margin-bottom: $spacing-2
+                    @include media-breakpoint-up(desktop)
+                        margin-bottom: 0
+
+                &-details 
+                    a
+                        text-decoration: none               
+                        .more
+                            @include icon(arrow-right, after, true)
+                            margin-top: $spacing-2
+
             .media
+                order: 1
                 margin-bottom: $spacing-2

@@ -2,7 +2,7 @@
 {{- $block_class := partial "GetBlockClass" .block -}}
 {{ $heading := .heading | default "h3" }}
 {{ $heading_tag := (dict 
-    "open" ((printf "<%s itemprop='headline'>" $heading) | safeHTML)
+    "open" ((printf "<%s class='program-content-title' itemprop='name'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
 
@@ -20,11 +20,11 @@
               {{ $program := site.GetPage (printf "/programs%s" .path) }}
               {{- $title := partial "PrepareHTML" $program.Title -}}
               {{- $summary := partial "PrepareHTML" $program.Params.summary -}}
-              <article>
+              <article itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
                 <div class="program-content">
-                  {{ $heading_tag.open }}{{- $title -}}{{ $heading_tag.close }}
-                  <div>
-                    <p>
+                    {{ $heading_tag.open }}{{- $title -}}{{ $heading_tag.close }}
+                  <div class="program-content-details">
+                    <p itemprop="abstract">
                       {{ $summary }}
                     </p>
                     <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
@@ -32,17 +32,15 @@
                     </a>
                   </div>
                 </div>
+                {{- if $program.Params.image -}}
                 <div class="media">
-                  {{- if $program.Params.image -}}
-                    {{- partial "commons/image.html"
-                        (dict
-                          "image"    $program.Params.image
-                          "sizes"    site.Params.image_sizes.sections.posts.item
-                        ) -}}
-                  {{- else -}}
-                    {{- partial "commons/image-default.html" "posts" -}}
-                  {{- end -}}
+                  {{- partial "commons/image.html"
+                      (dict
+                        "image"    $program.Params.image
+                        "sizes"    site.Params.image_sizes.blocks.programs
+                      ) -}}
                 </div>
+                {{- end -}}
               </article>
             {{ end }}
           </div>
