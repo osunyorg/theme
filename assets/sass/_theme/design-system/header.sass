@@ -1,6 +1,6 @@
 header#document-header
     background: $header-background
-    border-bottom: $header-border-bottom-width solid $color-border
+    border-bottom: $header-border-bottom-width solid var(--color-border)
     color: $header-color
     position: fixed
     left: 0
@@ -29,8 +29,9 @@ header#document-header
             span
                 color: $header-sticky-color
         @if $header-sticky-invert-logo
-            .logo img
-                filter: invert(1)
+            .logo
+                img, .logo-text
+                    filter: invert(1)
     html.is-scrolling-down:not(.has-menu-opened) &
         @include media-breakpoint-down(desktop)
             transform: translateY(-100%)
@@ -38,11 +39,10 @@ header#document-header
             &:not(:hover)
                 transform: translateY(-100%)
     .logo
+        @extend %logo
         color: $header-color
         img
-            display: block
             height: $header-logo-height
-            width: auto
             @if $header-sticky-invert-logo
                 transition: filter $header-sticky-transition
             @include media-breakpoint-up(desktop)
@@ -98,7 +98,7 @@ header#document-header
             display: flex
             flex-wrap: wrap
             justify-content: space-between
-        button[type="button"]:not(.pagefind-ui__button)
+        .header-button
             @include button-reset
             display: none
             border: 0
@@ -119,7 +119,7 @@ header#document-header
                 align-items: center
             span:first-of-type
                 @include meta
-                font-size: 14px
+                font-size: pxToRem(14)
             span:last-of-type
                 background: none
                 @include icon-block(burger, before)

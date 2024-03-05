@@ -18,9 +18,9 @@
         @include icon(search-inline, after)
         &::after
             line-height: inherit
-            margin-left: half($spacing0)
+            margin-left: $spacing-1
     &:not(.pagefind-menu)    
-        padding: half($spacing0) $spacing0
+        padding: $spacing-1 $spacing-2
     &.toggle-icon::after
         font-size: $h2-size
     &.toggle-both
@@ -31,7 +31,7 @@
         display: inline
     @include media-breakpoint-down(desktop)
         &.pagefind-menu
-            padding: $spacing1 0
+            padding: $spacing-3 0
             width: 100%
     @include media-breakpoint-up(desktop)
         &.toggle-icon::after
@@ -39,63 +39,60 @@
 .search__close
     @include icon-block(close, after)
     position: fixed
-    right: $spacing3
+    right: $spacing-5
     padding: 0
     z-index: 9
     &::after
         display: inline-flex
         justify-content: center
-        margin-left: $spacing0
-        width: px2rem(15)
+        margin-left: $spacing-2
+        width: pxToRem(15)
     @include media-breakpoint-down(desktop)
-        right: $spacing1
-        top: half($spacing0)
+        right: $spacing-3
+        top: $spacing-1
 #search
-    background: $color-background
-    color: $color-text
+    background: var(--color-background)
+    color: var(--color-text)
     height: 100vh
     left: 0
-    padding-bottom: $spacing3
-    padding-left: $spacing1
-    padding-right: $spacing1
-    padding-top: $spacing4
+    padding-bottom: $spacing-5
+    padding-left: var(--grid-gutter)
+    padding-right: var(--grid-gutter)
+    padding-top: $spacing-6
     position: fixed
     overflow: auto
     top: 0
     width: 100vw
     z-index: 80
     @include media-breakpoint-up(desktop)
-        padding-right: $spacing3
-        padding-left: $spacing3
-        padding-top: space(7)
+        padding-top: $spacing-4
     &[aria-hidden=true]
         display: none
     a
-        color: $color-text
+        color: var(--color-text)
     .pagefind-ui
         &::before
             content: ""
-            background: $color-background
-            height: space(27)
+            background: var(--color-background)
+            height: space(34)
             left: 0
             position: fixed
             top: 0
             width: 100%
             z-index: 5
             @include media-breakpoint-down(desktop)
-                height: space(50)
+                height: space(52)
         &__form
             @include icon(search-inline, after)
             &::after
-                color: transparentize($color-text-alt, .4)
-                padding-right: px2rem(2)
+                color: alphaColor(var(--color-text-alt), 0.6)
                 position: fixed
                 pointer-events: none
-                transform: translate(-6px,20%)
                 z-index: 9
+                font-size: $h2-size
                 @include media-breakpoint-down(desktop)
-                    right: $spacing1
-                    top: space(33)
+                    right: $spacing-3
+                    top: space(35)
         &__search-input
             background-color: $color-background
             border-left: 0
@@ -103,33 +100,33 @@
             border-radius: 0
             border-top: 0
             padding-left: 0
-            padding-right: $spacing1 !important
+            padding-right: $spacing-3 !important
             position: fixed
             z-index: 6
-            @include media-breakpoint-down(desktop)
-                margin-bottom: $spacing1
             &:focus,
             &:focus-visible
-                border-bottom: 2px solid $color-text
+                border-bottom: 2px solid var(--color-text)
                 outline: none
         &__button[type="button"]
             @include button-reset
-            @include link($color-text)
-            margin-top: $spacing2
+            @include link(var(--color-text))
+            margin-top: $spacing-4
             padding: 0
         &__message
             @include meta
-            color: $color-text-alt
+            color: var(--color-text-alt)
             text-align: right
             z-index: 11
             position: fixed
-            top: space(20)
+            top: space(27)
         &__search-clear,
         &__suppressed
             display: none
             pointer-events: none
         &__drawer
             position: relative
+            @include media-breakpoint-down(desktop)
+                padding-top: $spacing-2
         &__result
             list-style: none
             position: relative
@@ -141,74 +138,78 @@
                 @include media-breakpoint-down(desktop)
                     display: none
             + li
-                margin-top: half($spacing3)
+                margin-top: $spacing-4
             @include media-breakpoint-up(desktop)
                 @include grid
                 &-inner
                     grid-column: 4/13
         &__result-excerpt mark
-                background-color: $color-accent
-                color: $color-background
+                background-color: var(--color-accent)
+                color: var(--color-background)
         &__result-title a
             @include h4
             @include stretched-link
         @include media-breakpoint-up(desktop)
             &__form
                 position: relative
-                width: col(8)
+                width: columns(8)
                 &::after
-                    left: calc(#{col(8)} - #{space(8)})
-                    top: space(9)
+                    left: calc(#{columns(8)} + #{var(--grid-gutter)})
+                    top: space(16)
+                    transform: translateX(-100%)
             &__search-input,
             &__message
-                width: calc(#{col(8,12)} - #{space(21.5)})
+                width: columns(8)
             &__results-area
-                padding-top: space(26)
+                padding-top: $spacing-6
         @include media-breakpoint-down(desktop)
             &__search-input,
             &__message
-                width: calc(100% - #{$spacing2})
+                left: var(--grid-gutter)
+                right: var(--grid-gutter)
             &__message
-                top: space(44)
+                top: space(46)
             &__results-area
                 padding-top: space(17)
 
 .menu .nav-level-1 > li .pagefind-ui__toggle:not(.toggle-icon)::after
     margin-left: 0
-    margin-top: px2rem(2)
+    margin-top: pxToRem(2)
 
 .pagefind-fixed
     align-items: center
-    background: $color-background-alt
+    background: var(--color-background-alt)
     bottom: 0
-    color: $color-text
+    color: var(--color-text)
     display: flex
     justify-content: space-between
-    left: $spacing3
+    left: var(--grid-gutter)
     position: fixed
     z-index: 10
     @include media-breakpoint-up(desktop)
         &:not(.toggle-icon)
-            min-width: calc(#{$spacing3} * 3)
+            min-width: columns(2)
         &.toggle-icon:not(:hover)
             padding-left: 0
             padding-right: 0
             justify-content: center
         &.toggle-icon
-            min-height: px2rem(37)
-            width: px2rem(50)
+            min-height: pxToRem(37)
+            width: pxToRem(50)
+            span
+                display: none
             &:hover,
             &:focus
-                width: calc(#{$spacing3} * 3)
+                min-width: columns(2)
                 span
                     display: inline
     @include media-breakpoint-down(desktop)
         left: 0
         width: 100vw
         &.in-page-with-toc
-            background: $color-background
+            background: var(--color-background)
             border-top: 1px solid #eee
-            bottom: px2rem(44)
+            bottom: pxToRem(44)
             
 footer#document-footer .footer-search
     .pagefind-footer
@@ -217,11 +218,11 @@ footer#document-footer .footer-search
         &.toggle-icon
             transform: translateX(-35%)
         &::after
-            margin-top: px2rem(3)
+            margin-top: pxToRem(3)
     #search
         margin-top: 0
         a
-            color: $color-text
+            color: var(--color-text)
 
 .nav-search
     display: flex

@@ -36,43 +36,42 @@
                 border: 1px solid white
                 border-radius: 100%
                 color: white
-                height: $spacing4
-                padding: half($spacing0)
+                height: $spacing-6
+                padding: $spacing-1
                 transition: background-color .3s ease
-                width: $spacing4
+                width: $spacing-6
                 z-index: 3
                 &::before
-                    font-size: px2rem(100)
+                    font-size: pxToRem(100)
                     transition: color .3s ease
                     vertical-align: middle
-                    padding-left: px2rem(5)
+                    padding-left: pxToRem(5)
                 &:hover
                     background-color: white
                     &::before
                         color: black
                 @include media-breakpoint-down(desktop)
-                    height: $spacing3
-                    width: $spacing3
+                    height: $spacing-5
+                    width: $spacing-5
                     &::before
-                        font-size: px2rem(40)
-                        padding-left: px2rem(3)
+                        font-size: pxToRem(40)
+                        padding-left: pxToRem(3)
         iframe
             background: black
         + p
-            margin-top: $spacing0
+            margin-top: $spacing-2
 
     @include media-breakpoint-down(desktop)
         .video
-            margin-left: half(-$grid-gutter-sm)
-            margin-right: half(-$grid-gutter-sm)
+            margin-left: var(--grid-gutter-negative)
+            margin-right: var(--grid-gutter-negative)
 
     @include in-page-without-sidebar
         background: $block-video-background
-        margin-top: 0
         .block-content
             @include grid(12, false, 0)
             padding-top: $block-space-y
-            padding-bottom: $spacing2
+            padding-bottom: $spacing-4
             .top
                 grid-column: 1 / -1
             .video
