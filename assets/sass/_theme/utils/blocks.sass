@@ -1,0 +1,42 @@
+@mixin draggable-block
+    overflow: hidden
+    .draggable-container
+        &:hover
+            cursor: grab
+        &.is-grabbing
+            cursor: grabbing
+    .draggable-content
+        margin-left: calc(var(--grid-gutter-negative) / 2)
+        margin-right: calc(var(--grid-gutter-negative) / 2)
+        > ul,
+        > ol
+            display: flex
+            flex-flow: row nowrap
+            list-style: none
+            padding-left: 0
+            transition: margin 0.4s ease-in-out
+            width: 100%
+    .draggable-item
+        flex: none
+        scroll-snap-align: start
+        transition: 0.3s opacity
+        &.is-passed
+            opacity: 0.15
+            pointer-events: none
+    .actions-arrows
+        display: flex
+        padding-left: calc(var(--grid-gutter) / 2)
+        > button
+            @include button-reset
+            background: none
+            border: none
+            color: $block-timeline-horizontal-color
+            cursor: pointer
+            &:first-child
+                @include icon-block(arrow-previous, before)
+                margin-left: $icon-arrow-previous-margin-left
+            &:last-child
+                @include icon-block(arrow-next, before)
+            &:disabled
+                cursor: default
+                opacity: 0.3
