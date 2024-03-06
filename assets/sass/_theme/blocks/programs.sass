@@ -1,52 +1,54 @@
 .block-programs
-    .programs
-        li
-            display: block
-            a
-                @include h3
-                @include arrow-right-hover
-                display: flex
-                justify-content: space-between
-                transition: color 0.55s
-                padding-right: $spacing-4
-                &:hover
-                    color: var(--color-accent)
 
-    @include in-page-without-sidebar
+    &--list
         .programs
             li
+                display: block
                 a
-                    @include h2
-
-    .programs-grid
-        align-items: start
-        @include grid(2, xl)
+                    @include h3
+                    @include arrow-right-hover
+                    display: flex
+                    justify-content: space-between
+                    transition: color 0.55s
+                    padding-right: $spacing-4
+                    &:hover
+                        color: var(--color-accent)
         @include in-page-without-sidebar
-            @include grid(2, desktop)
-            @include grid(3, xl)
-        article
-            display: flex
-            flex-direction: column
-            margin-bottom: $spacing-5
-            @include media-breakpoint-up(xl)
-                margin-bottom: 0
-            @include in-page-without-sidebar 
-                margin-bottom: 0
+            .programs li a
+                @include h2
 
-            .program-content
-                order: 2
-                &-title
-                    margin-bottom: $spacing-2
-                    @include media-breakpoint-up(desktop)
-                        margin-bottom: 0
+    &--grid
+        .programs-grid
+            align-items: start
+            @include grid(1, false, $spacing-5)
+            @include grid(2, xl)
+            article
+                display: flex
+                flex-direction: column
+                .program-content
+                    order: 2
+                    position: relative
+                    &:hover
+                        .more:after
+                            transform: translateX($spacing-1)
+                [itemprop='name']
+                    margin-bottom: $spacing-1
+                a
+                    @include stretched-link
+                    text-decoration: none
+                .more
+                    @include icon(arrow, after, true)
+                    @include hover-translate-icon
+                .media
+                    order: 1
+                    margin-bottom: $spacing-3
+                    img
+                        aspect-ratio: $block-programs-aspect-ratio
+                        display: block
+                        object-fit: cover
+                
+                
+            @include in-page-without-sidebar
+                @include grid(2)
+                @include grid(3, xl)
 
-                &-details 
-                    a
-                        text-decoration: none               
-                        .more
-                            @include icon(arrow-right, after, true)
-                            margin-top: $spacing-2
-
-            .media
-                order: 1
-                margin-bottom: $spacing-2
