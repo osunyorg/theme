@@ -1,24 +1,10 @@
 .paper
     display: flex
     gap: var(--grid-gutter)
+    flex-direction: column
     a
         transition: color 0.3s ease
         @extend %underline-on-hover
-    > div:first-of-type
-        width: columns(7)
-    .paper-actions
-        width: columns(5)
-        display: flex
-        align-items: start
-        gap: var(--grid-gutter)
-        button[data-open-modal]
-            width: columns(2)
-        figure
-            width: columns(3)
-        @include media-breakpoint-down(desktop)
-            flex-wrap: wrap
-            justify-content: space-between
-            margin-top: $spacing-3
     h3
         a:hover
             color: var(--color-accent)
@@ -52,6 +38,18 @@
                 @include media-breakpoint-up(desktop)
                     margin-top: $spacing-5
 
+.papers__section
+    .paper-actions
+        @include media-breakpoint-up(lg)
+            flex-direction: row
+            > div:first-of-type
+                width: columns(7)
+            .paper-actions
+                width: columns(5)
+                button[data-open-modal]
+                    width: columns(2)
+                figure
+                    width: columns(3)
 .papers__page
     @include media-breakpoint-down(desktop)
         .document-content
@@ -148,6 +146,19 @@
                         h2
                             padding-left: 0
                             padding-right: offset(4)
+
+// Actions
+.paper-actions
+    display: flex
+    align-items: start
+    gap: var(--grid-gutter)
+    @include media-breakpoint-down(desktop)
+        flex-wrap: wrap
+        gap: $spacing-3
+    button.squared-button
+        @include icon-block(eye, before)
+    a.squared-button
+        @include icon-block(download, before)
 
 .citations
     &:not(:first-child)

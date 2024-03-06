@@ -16,7 +16,6 @@
             margin-top: $spacing-1
     .description
         @include small
-
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing-3
@@ -38,15 +37,12 @@
         .avatar
             width: 100%
 
-
 section.persons,
 div.persons
     @include grid(1)
     @include grid(2, md)
     @include grid(4, lg)
     @include grid(6, xxl)
-
-
 
 ol.persons--list
     @include list-reset
@@ -127,34 +123,36 @@ ol.persons--list
 
 .persons__page
     .hero
-        figure
-            @extend .avatar
-        @include media-breakpoint-down(desktop)
-            padding-bottom: 0
-            margin-bottom: $spacing-6
+        &--with-image
+            .hero-text
+                margin-bottom: $spacing-3
             figure
-                width: columns(6)
-                margin-top: $spacing-3
-                margin-left: auto
-                transform: translateY(100px)
-                margin-top: calc(#{$spacing-3} - 100px)
-        @include media-breakpoint-down(sm)
-            margin-bottom: $spacing-6
-            figure
-                transform: translateY(18vw)
-                margin-top: calc(#{$spacing-3} - 18vw)
-        @include media-breakpoint-up(desktop)
-            .content
-                align-items: center
-                display: flex
-                justify-content: space-between
-                margin-top: 0
-                h1
-                    margin-bottom: 0
-                    width: columns(8)
+                @extend .avatar
+            @include media-breakpoint-down(desktop)
+                .container
+                    margin-bottom: calc(#{columns(2)} + #{$spacing-5})
                 figure
-                    margin-bottom: 0
-                    width: columns(3)
+                    width: columns(4)
+                    margin-left: auto
+                    margin-bottom: calc(#{columns(2)} * -1)
+            @include media-breakpoint-down(md)
+                .container
+                    margin-bottom: calc(#{columns(3)} + #{$spacing-5})
+                figure
+                    width: columns(6)
+                    margin-bottom: calc(#{columns(3)} * -1)
+            @include media-breakpoint-up(desktop)
+                .content
+                    align-items: center
+                    display: flex
+                    justify-content: space-between
+                    margin-top: 0
+                    h1
+                        margin-bottom: 0
+                        width: columns(8)
+                    figure
+                        margin-bottom: 0
+                        width: columns(3)
     .roles
         a
             @include small

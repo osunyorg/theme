@@ -1,5 +1,7 @@
 params:
-  debug: false
+  debug:
+    active: false
+    productionUrl: ""
   keycdn: https://osuny-1b4da.kxcdn.com
   cookie_banner:
     enable: false
@@ -10,12 +12,15 @@ params:
     title:
       separator: "|"
   logo:
-    header:
-      default: "/assets/images/logo.svg"
-      darkmode: "/assets/images/logo-white.svg"
-    footer:
-      default: "/assets/images/logo.svg"
-      darkmode: "/assets/images/logo-white.svg"
+    header: "/assets/images/logo.svg"
+    footer: "/assets/images/logo.svg"
+    # Handle logo in darkmode with this configuration
+    # header:
+    #   default: "/assets/images/logo.svg"
+    #   darkmode: "/assets/images/logo-white.svg"
+    # footer:
+    #   default: "/assets/images/logo.svg"
+    #   darkmode: "/assets/images/logo-white.svg"
   menu:
     dropdown:
       linkToLevel1: false
@@ -163,6 +168,10 @@ params:
           mobile:   170
           tablet:   350
           desktop:  415
+      programs:
+        mobile:   400
+        tablet:   800
+        desktop:  600 
     sections:
       categories:
         hero:

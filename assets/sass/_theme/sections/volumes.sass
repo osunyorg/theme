@@ -37,18 +37,16 @@
                         &:not(:first-of-type)
                             margin-top: $spacing-4
     .paper
-        display: block
-        @include media-breakpoint-down(desktop)
+        gap: $spacing-3
+        .paper-actions
+            > *
+                width: auto
+        @include media-breakpoint-down(xxl)
             > div:first-of-type
                 .paper-volume
                     display: inline-flex
                     margin-left: $spacing-2
-        @include media-breakpoint-up(desktop)
+        @include media-breakpoint-up(xxl)
             > div:first-of-type
                 .paper-volume
                     padding-left: $spacing-3
-            .paper-actions
-                gap: var(--grid-gutter)
-                margin-top: $spacing-2
-                a, button
-                    width: unset

@@ -1,6 +1,7 @@
 .block
-    margin-top: $block-space-y
-    margin-bottom: $block-space-y
+    --block-space-y: #{$block-space-y}
+    margin-top: var(--block-space-y)
+    margin-bottom: var(--block-space-y)
     .block-title
         @include h5
     .top
@@ -9,12 +10,23 @@
                 margin-top: $spacing-3
         .block-title.hidden + .description
                 margin-top: 0
+    @include in-page-without-sidebar
+        --block-space-y: #{$block-space-y-desktop}
+    @include in-page-with-sidebar
+        --block-space-y: #{$block-space-y-with-sidebar}
 
 .heading
+    --heading-margin-top: #{$heading-margin-top}
+    --heading-margin-bottom: #{$heading-margin-bottom}
+    margin-bottom: var(--heading-margin-bottom)
     &:not(:first-child)
-        margin-top: $spacing-5
+        margin-top: var(--heading-margin-top)
+        @include in-page-with-sidebar
+            --heading-margin-top: #{ $heading-margin-top-with-sidebar}
+            --heading-margin-bottom: #{$heading-margin-bottom-with-sidebar}
         @include in-page-without-sidebar
-            margin-top: $spacing-6
+            --heading-margin-top: #{ $heading-margin-top-desktop}
+            --heading-margin-bottom: #{$heading-margin-bottom-desktop}
     @include in-page-without-sidebar
         h2
             width: columns(8)

@@ -18,7 +18,7 @@
                 margin-top: $spacing-2
             .media
                 margin-top: 0
-        @include post-time-author-flex
+        @include author-and-time-side-to-side
 
     &--grid
         @include media-breakpoint-down(desktop)
@@ -36,14 +36,22 @@
         .post
             .more
                 @include icon(arrow-right, after, true)
-            .post-author 
+
+            // Masquer le point entre l'auteur et la date (mixin author-and-time-side-to-side)
+            .post-author
                 p::before
                     display: none
+
+            // Permet d'aligner correctement les différents line-height des différents composants du post meta
             .post-meta
                 display: block
-                line-height: 0
+                line-height: 0 // Hack pour que les enfants de post-meta soient correctement 
             .post-categories *
                 display: inline
+            // Désactiver le ratio forcé de la configuration $article-media-aspect-ratio
+            .media
+                &, img
+                    aspect-ratio: auto
         @include media-breakpoint-down(desktop)
             .post
                 + .post
@@ -64,10 +72,10 @@
                     gap: var(--grid-gutter)
                     + .post
                         margin-top: $spacing-4
+                    .post-title
+                        @include h2
                     p[itemprop="articleBody"]
                         margin-top: $spacing-3
-                    &-title
-                        @include h2
                     .post-meta 
                         > *
                             display: inline
@@ -103,6 +111,8 @@
                         width: columns(6)
                     .post-content
                         width: columns(5)
+                    .post-title
+                        @include lead
                 p[itemprop="articleBody"]
                     margin-top: calc(#{$spacing-3} + #{$spacing-2})
     &--list
