@@ -1,8 +1,8 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading := printf "h%d" $heading_level }}
 
-<div class="scrollable draggable-container">
-  <div class="scrollable-posts draggable-content">
+<div class="carousel draggable-container">
+  <div class="carousel-posts draggable-content">
     <ul class="posts">
       {{ range $post := .posts -}}
         {{ with site.GetPage (printf "/posts/%s" $post) }}
