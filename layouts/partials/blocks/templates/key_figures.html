@@ -23,7 +23,11 @@
                 <dl>
                   <dt>
                     {{ with .image }}
-                      {{ partial "commons/image.html" (dict "image" .) }}
+                      {{ partial "commons/image.html"
+                        (dict
+                          "image"    .
+                          "sizes"    site.Params.image_sizes.blocks.key_figures
+                        )}}
                     {{ end }}
                     <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
                   </dt>
