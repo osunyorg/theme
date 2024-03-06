@@ -8,5 +8,5 @@ import './design-system/search';
 import './design-system/toc';
 import './blocks/keyFigures';
 import './blocks/organizations';
-import './blocks/timeline';
+import './blocks/draggableBlocks.js';
 import './blocks/videos.js';
