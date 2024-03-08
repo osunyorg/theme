@@ -7,7 +7,15 @@
 )}}
 <ul class="list {{ if and (not $show_descriptions) (not $show_images) }} title-only {{ end }}">
   {{ range .pages }}
-    {{ $page := site.GetPage .file }}
+    {{- $file := false -}}
+    {{/*  Check if . is a map or page url, necessary when pages/grid is called outside block context */}}
+    {{ if reflect.IsMap . }}
+      {{ $file = .file }}
+    {{ else }}
+      {{ $file = . }}
+    {{ end }}
+
+    {{ $page := site.GetPage $file }}
     {{ with $page }}
       <li>
         {{ if or $show_descriptions $show_images }}
