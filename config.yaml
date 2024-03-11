@@ -3,14 +3,12 @@ params:
     active: false
     productionUrl: ""
   keycdn: https://osuny-1b4da.kxcdn.com
-  cookie_banner:
-    enable: false
-    blank: true
-    page: https://gdpr.eu/cookies/
   plausible: false
   seo:
     title:
       separator: "|"
+
+  # DESIGN SYSTEM
   logo:
     header: "/assets/images/logo.svg"
     footer: "/assets/images/logo.svg"
@@ -37,6 +35,8 @@ params:
   home:
     toc:
       disabled: true
+
+  # SECTIONS
   events:
     default_image: false
     date_format: ":date_long"
@@ -60,8 +60,6 @@ params:
     default_image: false
     sidebar:
       direction: start
-  volumes:
-    default_image: false
   persons:
     index:
       layout: grid # grid | list
@@ -83,9 +81,28 @@ params:
       email: false
       telegram: false
       whatsapp: false
+  projects:
+    default_image: false
+    date_format: ":date_long"
+    index:
+      show_categories: true
+      show_description: true
+      truncate_description: 200 # Set to 0 to disable truncate
+      layout: list # grid | list
+    share_links:
+      facebook: true
+      twitter: true
+      linkedin: true
+      email: false
+      telegram: false
+      whatsapp: false
   programs:
     related_posts:
       quantity: 4
+  volumes:
+    default_image: false
+
+  # BLOCKS
   blocks:
     gallery:
       splide:
@@ -267,11 +284,19 @@ params:
           mobile:   350
           tablet:   450
           desktop:  600
-      publications:
+      projects:
         hero:
           mobile:   400
           tablet:   800
           desktop:  750
+        hero_single:
+          mobile:   400
+          tablet:   800
+          desktop:  750
+        item:
+          mobile:   350
+          tablet:   450
+          desktop:  600
       programs:
         hero:
           mobile:   400
@@ -281,6 +306,11 @@ params:
           mobile:   351x168
           tablet:   456x219
           desktop:  856x410
+      publications:
+        hero:
+          mobile:   400
+          tablet:   800
+          desktop:  750
       volumes:
         hero:
           mobile:   400

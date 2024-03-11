@@ -1,0 +1,21 @@
+.project
+    @include article(auto)
+
+.projects__section
+    .projects
+        @include grid(2, md)
+
+.projects__page
+    .document-content
+        min-height: 350px
+        // Add after element to avoid "min-height" to ignore the last block's margin-bottom
+        &::after
+            content: ''
+            display: block
+            height: 1px
+    &:not(.full-width)
+        .project-sidebar
+            @include sidebar
+
+.project-infos
+    @include section__page-infos
