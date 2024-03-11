@@ -17,6 +17,9 @@
     padding-bottom: $spacing-2
     padding-top: $spacing-2
     position: relative
+    @include icon-block(arrow-right, before)
+        position: absolute
+        right: 0px
     a
         text-decoration: none
     .publication-title
@@ -24,15 +27,17 @@
             @include stretched-link(after)
             &:hover
                 color: var(--color-accent)
-            @include icon-block(arrow-right, before)
-                position: absolute
-                right: 0px
     .publication-meta
         @include small
         color: var(--color-text-alt)
         margin-top: $spacing-1
         a
             color: var(--color-text-alt)
+    @include media-breakpoint-down(desktop)
+        .publication-meta
+            padding-right: $spacing-4
+        &::before
+            bottom: 0
 
 .publications
     margin-top: $spacing-5
