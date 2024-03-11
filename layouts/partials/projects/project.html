@@ -1,0 +1,50 @@
+{{ $project := .project }}
+{{ $heading := .heading | default "h2" }}
+{{ $heading_tag := (dict 
+    "open" ((printf "<%s itemprop='name'>" $heading) | safeHTML)
+    "close" ((printf "</%s>" $heading) | safeHTML)
+    ) }}
+
+{{ with $project }}
+
+<article class="project" itemscope itemtype="https://schema.org/Project">
+
+  <div class="project-content">
+    {{- $title := partial "PrepareHTML" .Title -}}
+
+    {{ $heading_tag.open }}
+      <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+    {{ $heading_tag.close }}
+
+    {{ if site.Params.projects.index.show_description }}
+      {{- if partial "GetTextFromHTML" .Params.summary -}}
+        <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
+          "text" .Params.summary
+          "length" site.Params.projects.index.truncate_description
+          ) }}</p>
+      {{- end -}}
+    {{- end -}}
+
+    {{ if site.Params.projects.index.show_categories }}
+      {{- partial "projects/categories" . -}}
+    {{ end }}
+    
+    <div class="project-meta">
+      <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.projects.date_format }}</time>
+    </div>
+  </div>
+
+  <div class="media">
+    {{- if .Params.image -}}
+      {{- partial "commons/image.html"
+          (dict
+            "image"    .Params.image
+            "sizes"    site.Params.image_sizes.sections.projects.item
+          ) -}}
+    {{- else -}}
+      {{- partial "commons/image-default.html" "projects" -}}
+    {{- end -}}
+  </div>
+
+</article>
+{{ end }}

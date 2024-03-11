@@ -1,0 +1,8 @@
+<div class="projects projects--{{- site.Params.projects.index.layout -}}">
+  {{ if not .Pages }}
+    <p>{{ i18n "projects.no_project" }}</p>
+  {{ end }}
+  {{ range .Paginator.Pages }}
+    {{ partial "projects/project.html" (dict "project" . )}}
+  {{ end }}
+</div>

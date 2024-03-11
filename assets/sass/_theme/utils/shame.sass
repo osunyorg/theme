@@ -17,8 +17,8 @@
     .post-author p::before
         content: ' • '
 
-// TODO: transformer en class %article
-@mixin article
+// Utilisé pour .post, .project, .page, .person, .program, .volume
+@mixin article($aspect-ratio: $article-media-aspect-ratio)
     position: relative
     display: flex
     flex-direction: column
@@ -32,14 +32,28 @@
             object-fit: cover
             @if $article-media-aspect-ratio
                 aspect-ratio: $article-media-aspect-ratio
-    h2, h3, [itemprop=headline]
+    h2, h3, [itemprop=headline],  [itemprop=name]
         @include h3
         a
-            display: block
             @include stretched-link
+            display: block
             text-decoration: none
     p + time
             margin-top: $spacing-2
+    .post-categories, .project-categories
+        @include list-reset
+        @include meta
+        margin-top: $spacing-2
+        margin-bottom: $spacing-2
+        position: relative
+        display: flex
+        flex-wrap: wrap
+        gap: 0 $spacing-2
+        z-index: 2
+        a
+            @include link(var(--color-accent))
+        li
+            margin: 0
     time
         @include meta
         color: var(--color-text-alt)
