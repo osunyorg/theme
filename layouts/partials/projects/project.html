@@ -7,7 +7,7 @@
 
 {{ with $project }}
 
-<article class="project" itemscope itemtype="https://schema.org/CreativeWork"">
+<article class="project" itemscope itemtype="https://schema.org/CreativeWork">
 
   <div class="project-content">
     {{- $title := partial "PrepareHTML" .Title -}}
@@ -16,14 +16,12 @@
       <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
     {{ $heading_tag.close }}
 
-    {{ if site.Params.projects.index.show_description }}
-      {{- if partial "GetTextFromHTML" .Params.summary -}}
-        <p itemprop="abstract">{{ partial "GetTruncateContent" ( dict 
-          "text" .Params.summary
-          "length" site.Params.projects.index.truncate_description
-          ) }}</p>
-      {{- end -}}
-    {{- end -}}
+    {{ if and site.Params.projects.index.show_description (partial "GetTextFromHTML" .Params.summary) }}
+      <p itemprop="abstract">{{ partial "GetTruncateContent" ( dict 
+        "text" .Params.summary
+        "length" site.Params.projects.index.truncate_description
+        ) }}</p>
+    {{ end }}
 
     {{ if site.Params.projects.index.show_categories }}
       {{- partial "projects/categories" . -}}
