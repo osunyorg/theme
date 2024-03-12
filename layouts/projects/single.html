@@ -7,8 +7,6 @@
     {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
     {{ with .Summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
 
-    {{/*  {{ partial "projects/sidebar.html" . }}  */}}
-
     {{ partial "projects/summary.html" (dict
         "context" .
         "block_wrapped" true
