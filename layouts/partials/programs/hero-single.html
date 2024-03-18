@@ -1,7 +1,17 @@
 {{- $title := or .Params.header_text .Title -}}
+{{- $button := false -}}
+{{- if and (eq site.Params.summary.position "hero") .Params.website_url -}}
+  {{ $button = (dict 
+    "display" true
+    "target" .Params.website_url
+    "label" (i18n "programs.website")
+  ) }}
+{{- end -}}
+
 {{ partial "header/hero.html"
       (dict
         "title" $title
         "context" .
+        "button" $button
         "hero_complement" "programs/essential.html"
       )}}

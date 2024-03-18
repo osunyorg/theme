@@ -11,6 +11,8 @@
 {{ $summary := .context.Params.summary | safeHTML }}
 {{ $subtitle_is_summary := false }}
 
+{{ $button := .button | default .context.Params.header_cta }}
+
 {{ if not $subtitle }}
   {{ if and (eq site.Params.summary.position "hero") $summary }}
     {{ $subtitle = $summary }}
@@ -38,7 +40,8 @@
         {{ else }}
           <h1>{{ partial "PrepareHTML" .title }}</h1>
         {{ end }}
-        {{ with .context.Params.header_cta }}
+
+        {{ with $button }}
           {{ if and .display .target .label }}
             <a href="{{ .target }}" class="btn">{{ .label }}</a>
           {{ end }}

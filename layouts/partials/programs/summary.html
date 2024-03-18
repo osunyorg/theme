@@ -1,12 +1,11 @@
-{{- $has_website := .context.Params.website_url -}}
-
-{{- if eq site.Params.summary.position "content" -}}
-  {{- if and $has_website -}}
-    <div class="program-heading">
-  {{- end -}}
-  {{- partial "commons/summary-in-content.html" . -}}
-  {{- if $has_website -}}
-      {{- partial "programs/website.html" . -}}
-    </div>
-  {{- end -}}
-{{- end -}}
+{{ $summary := .summary | default (.context.Params.summary | safeHTML) }}
+{{ if and (eq site.Params.summary.position "content") $summary }}
+  <div class="container program-summary">
+    <p class="lead" role="heading" aria-level="2">
+      {{ $summary }}
+    </p>
+    {{ if .context.Params.website_url }}
+      <a href="{{- .context.Params.website_url -}}" target="_blank" class="btn">{{ i18n "programs.website" }}</a>
+    {{ end }}
+  </div>
+{{ end }}

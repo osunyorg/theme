@@ -25,10 +25,9 @@ ol.programs
         .document-content
             .lead
                 font-family: $lead-font-family
+                font-size: var(--lead-size)
                 font-weight: $lead-weight
-                line-height: $lead-line-height
-                @include media-breakpoint-up(desktop)
-                    font-size: $lead-size-desktop
+                line-height: var(--lead-line-height)
 
     ol.programs
         margin-bottom: $spacing-5
@@ -36,13 +35,11 @@ ol.programs
             line-height: 1
 
     .document-content
-        @include media-breakpoint-up(desktop)
+        .program-summary
+            margin-bottom: $spacing-6
             .lead
-                padding-bottom: $spacing-4
-            .program-heading
-                margin-bottom: $spacing-6
-                .lead
-                    margin-bottom: 0
+                margin-bottom: $spacing-3
+            
         .content
             padding-bottom: $spacing-4
             section:not(.block) > * + *
@@ -93,15 +90,7 @@ ol.programs
             section:first-of-type
                 .content
                     border-top: none
-    .program-website
-        a
-            @include icon(link-blank, after)
-                font-size: $body-size
-                margin-left: $spacing-1
-                vertical-align: baseline
-                @include media-breakpoint-up(desktop)
-                    font-size: $body-size-desktop
-                
+
     .program-table
         tr
             font-size: unset
