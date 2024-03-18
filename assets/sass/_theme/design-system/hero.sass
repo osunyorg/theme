@@ -15,7 +15,6 @@
         outline-color: $hero-color
     .content
         align-items: start
-        padding-top: $spacing-5
         .hero-text
             margin-top: $spacing-5
         h1 + p
@@ -47,6 +46,8 @@
             > a
                 @include stretched-link
     @include media-breakpoint-down(desktop)
+        .content
+            padding-top: 0
         &--with-image
             padding-bottom: 0
             .content
@@ -66,6 +67,8 @@
                 margin-bottom: calc(#{-$spacing-7} + #{$spacing-4})
 
     @include media-breakpoint-up(desktop)
+        .content
+            padding-top: $spacing-5
         .hero-text
             width: columns(9)
         &--with-image
