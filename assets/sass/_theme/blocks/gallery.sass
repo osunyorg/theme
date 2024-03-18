@@ -2,15 +2,13 @@
     figure
         display: block
         margin-bottom: 0
+        position: relative
         > a,
         img,
         picture
             display: block
         > a
-            transition: filter .3s ease
-            &:hover
-                // if low opacity means not selected, selected needs to be darker
-                filter: brightness(95%)
+            @include stretched-link
         img
             height: auto
             width: 100%

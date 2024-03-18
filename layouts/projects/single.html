@@ -1,14 +1,12 @@
 {{ define "main" }}
-  {{ partial "events/hero-single.html" . }}
+  {{ partial "projects/hero-single.html" . }}
 
-  <div class="document-content" itemscope itemtype="https://schema.org/Event">
+  <div class="document-content" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
 
-    {{ partial "events/sidebar.html" . }}
-
-    {{ partial "events/summary.html" (dict
+    {{ partial "projects/summary.html" (dict
         "context" .
         "block_wrapped" true
       ) }}
@@ -17,8 +15,8 @@
 
     {{ partial "commons/siblings-navigation.html" (dict
       "context" .
-      "previous_label" (i18n "events.previous")
-      "next_label" (i18n "events.next")
+      "previous_label" (i18n "projects.previous")
+      "next_label" (i18n "projects.next")
     ) }}
 
     {{ partial "hooks/before-document-content-end.html" . }}

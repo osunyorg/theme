@@ -1,0 +1,12 @@
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading := printf "h%d" $heading_level }}
+<div class="list">
+  {{ range $project := .projects -}}
+    {{ with site.GetPage .file }}
+      {{ partial "projects/project.html" (dict 
+        "project" .
+        "heading" $heading
+        ) }}
+    {{ end }}
+  {{ end }}
+</div>

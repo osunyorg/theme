@@ -61,54 +61,17 @@
                         margin-left: columns(3)
 
     &--horizontal
+        @include draggable-block
         --min-title-height: 0px
         background: $block-timeline-horizontal-background
         color: $block-timeline-horizontal-color
-        overflow: hidden
         padding-bottom: var(--block-space-y)
         padding-top: var(--block-space-y)
         &::before
             display: none
-        .timeline
-            &:hover
-                cursor: grab
-            &.is-grabbing
-                cursor: grabbing
-            
-        .timeline-arrows
-            display: flex
-            padding-left: calc(var(--grid-gutter) / 2)
-            > button
-                @include button-reset
-                background: none
-                border: none
-                color: $block-timeline-horizontal-color
-                cursor: pointer
-                &:first-child
-                    @include icon-block(arrow-previous, before)
-                    margin-left: $icon-arrow-previous-margin-left
-                &:last-child
-                    @include icon-block(arrow-next, before)
-                &:disabled
-                    cursor: default
-                    opacity: 0.3
-        .timeline-events
-            margin-left: calc(var(--grid-gutter-negative) / 2)
-            margin-right: calc(var(--grid-gutter-negative) / 2)
-            ol
-                display: flex
-                flex-flow: row nowrap
-                list-style: none
-                padding-left: 0
-                margin-top: $spacing-2
-                transition: margin 0.4s ease-in-out
-                width: 100%
         .timeline-event
-            flex: none
             padding: 0 calc(var(--grid-gutter) / 2)
-            scroll-snap-align: start
-            transition: 0.3s opacity
-            width: 50%
+            width: columns(4)
             .title
                 display: block
                 min-height: var(--min-title-height)
@@ -133,8 +96,6 @@
                     position: relative
                     top: -4px
                     width: 9px
-            &.is-passed
-                opacity: 0.15
             &:last-child
                 .line
                     background: transparent
@@ -147,11 +108,12 @@
         @include media-breakpoint-down(desktop)
             .timeline-events
                 position: relative
-            .timeline-arrows
+            .actions-arrows
                 left: 0
                 position: absolute
                 top: calc(#{$spacing-2} + var(--min-title-height))
             .timeline-event
+                margin-right: 0
                 padding-right: 0
                 width: 75%
                 .line

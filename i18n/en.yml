@@ -4,7 +4,9 @@ blocks:
   categories:
     title: Catégories
     items:
-      count: "{{ .Count }} articles"
+      count: 
+        one: "1 article"
+        other: "{{ .Count }} articles"
   chapter:
     title: Chapter
   contact:
@@ -52,6 +54,7 @@ blocks:
     play: Play video
 categories:
   no_post: No post in this category
+  no_project: No project in this category
   see_more:
     one: See the post
     other: See the {{ .Count }} posts
@@ -141,12 +144,6 @@ commons:
     bytes: bytes
   extensions:
     PDF: Adobe Portable Document Format
-cookie_banner:
-  accept: Accept
-  more: Read more
-  refuse: Refuse
-  text: This site uses cookies to improve the browsing experience and provide additional functionality.
-  title: Cookie banner
 diplomas:
   type: Type de diplôme
 events:
@@ -226,7 +223,7 @@ posts:
   next: Next article
   next_aria: Next article “{{ .Title }}”
   previous: Previous article
-  previous_aria: revious article “{{ .Title }}”
+  previous_aria: Previous article “{{ .Title }}”
   reading_time: Reading time
   see_all: See all posts
   see_all_in_program: See all program's news
@@ -234,6 +231,24 @@ posts:
   share: Please, share
   share_aria: Share on “{{ .Title }}” - extern link
   title: News
+projects:
+  author: Author
+  category:
+    one: Category
+    other: Categories
+  informations: Informations
+  next: Next project
+  next_aria: Next project “{{ .Title }}”
+  previous: Previous project
+  previous_aria: Previous project “{{ .Title }}”
+  reading_time: Reading time
+  see_all: See all posts
+  see_all_in_program: See all program's projects
+  see_all_in_category: See all projects in “{{ .Title }}”
+  share: Please, share
+  share_aria: Share on “{{ .Title }}” - extern link
+  title: Projects
+  year: Year
 programs:
   accessibility: Accessibility
   administrative_information: Administrative information

@@ -39,7 +39,6 @@
         html:not(.is-scrolling-down) &
             top: calc(var(--header-height) + #{$offset-y})
 
-
 @mixin sidebar($side: start)
     @include media-breakpoint-down(desktop)
         padding: 0 var(--grid-gutter)
@@ -63,3 +62,55 @@
             padding-top: $spacing-3
             position: static
             margin-left: 0
+
+// Utilisé dans .post-infos, et project-infos
+@mixin section__page-infos
+    @include meta
+    @include list-reset
+    font-size: $table-body-size
+    margin-bottom: 0
+    @include media-breakpoint-up(desktop)
+        font-size: $table-body-size-desktop
+    > li
+        @include meta
+        display: flex
+        gap: $spacing-3
+        justify-content: space-between
+        padding-top: $spacing-2
+        padding-bottom: $spacing-2
+        border-color: var(--color-border)
+        &:not(:first-child)
+            align-items: center
+            border-top: 1px solid var(--color-border)
+        > span
+            @include meta
+            color: var(--color-text-alt)
+            padding-left: 0
+            white-space: nowrap
+            vertical-align: top
+        > ul
+            text-align: right
+            flex: 1
+        &.social-share
+            align-items: center
+    a
+        @include link(var(--color-accent))
+        text-align: right
+    .terms
+        @include list-reset
+        margin: 0
+        li
+            display: inline-block
+            vertical-align: middle
+            margin-left: $spacing-1
+            &:last-child
+                &::after
+                    content: none
+    .share
+        display: block
+        li
+            display: inline-block
+        a
+            color: inherit
+        li:last-child
+            margin-right: -$spacing-2
