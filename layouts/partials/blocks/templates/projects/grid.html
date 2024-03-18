@@ -1,6 +1,6 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading := printf "h%d" $heading_level }}
-<div class="projects grid">
+<div class="grid">
   {{ range $project := .projects -}}
     {{ with site.GetPage .file }}
       {{ partial "projects/project.html" (dict 
