@@ -26,10 +26,12 @@
     {{ if site.Params.projects.index.show_categories }}
       {{- partial "projects/categories" . -}}
     {{ end }}
-    
-    <div class="project-meta">
-      <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.projects.date_format }}</time>
-    </div>
+
+    {{ if and site.Params.projects.index.show_year .Params.year }}
+      <div class="project-meta">
+        <time itemprop="datePublished" datetime="{{ .Params.year }}">{{ .Params.year }}</time>
+      </div>
+    {{ end }}
   </div>
 
   <div class="media">
