@@ -1,0 +1,12 @@
+{{ $categories := .GetTerms "projects_categories" }}
+{{- if $categories -}}
+<ul class="project-categories">
+  {{- range $categories -}}
+    <li>
+      <a href="{{ .Permalink }}">
+        {{- safeHTML .Title -}}
+      </a>
+    </li>
+  {{- end }}
+</ul>
+{{- end -}}

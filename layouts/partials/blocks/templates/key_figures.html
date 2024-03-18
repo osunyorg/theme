@@ -21,7 +21,16 @@
             {{- range .figures }}
               <li>
                 <dl>
-                  <dt><strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}</dt>
+                  <dt>
+                    {{ with .image }}
+                      {{ partial "commons/image.html"
+                        (dict
+                          "image"    .
+                          "sizes"    site.Params.image_sizes.blocks.key_figures
+                        )}}
+                    {{ end }}
+                    <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
+                  </dt>
                   <dd>{{ partial "PrepareHTML" .description }}</dd>
                 </dl>
               </li>
