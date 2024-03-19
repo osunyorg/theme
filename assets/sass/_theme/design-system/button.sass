@@ -57,18 +57,6 @@
             border-color: transparent
             color: var(--color-background)
 
-
-// TODO: check usage in journal
-.link-btn
-    @extend .button
-    @include media-breakpoint-up(desktop)
-        padding: $spacing-2
-    &[target="_blank"]:not(.icon)
-        display: flex
-        justify-content: space-between
-        align-items: center
-        @include icon-block(link-blank-block, after)
-
 @mixin link-icon($icon: false)
     @include button-reset
     line-height: $body-line-height
@@ -85,6 +73,9 @@
     gap: $spacing-1
     @if $icon
         @include icon($icon, after)
+
+a.btn[target="_blank"]
+    @include button-icon(link-blank-raw)
 
 .dropdown-share
     position: relative

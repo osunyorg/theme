@@ -5,10 +5,12 @@
       {{ partial "projects/categories.html" . }}
     </li>
   {{ end }}
-  <li>
-    <span>{{ i18n "projects.date" }}</span>
-    <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.projects.date_format }}</time>
-  </li>
+  {{ with .Params.year }}
+    <li>
+      <span>{{ i18n "projects.year" }}</span>
+      <time datetime="{{ . }}">{{ . }}</time>
+    </li>
+  {{ end }}
   <li class="social-share">
     <span>{{ i18n "projects.share" }}</span>
     {{ partial "commons/share.html" . }}
