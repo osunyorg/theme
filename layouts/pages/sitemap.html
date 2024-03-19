@@ -27,8 +27,12 @@
         <div class="block block-sitemap" id="{{ .Type }}">
           <div class="container">
             <div class="block-content">
+              {{ $isPageRoot := eq .RelPermalink "/pages/"}}
+              
               <h2>
-                <a href="{{ $permalink }}">{{ safeHTML .Title }}</a>
+                {{ if not $isPageRoot }}<a href="{{ $permalink }}">{{ end }}
+                  {{ safeHTML .Title }}
+                  {{ if not $isPageRoot }}</a>{{ end }}
               </h2>
               <ul>
                 {{ range where .Site.Pages "Section" .Type }}
