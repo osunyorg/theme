@@ -3,8 +3,11 @@
     {{- if .context.Params.contents -}}
       {{- partial "blocks/toc.html" .context.Params.contents -}}
     {{- end -}}
+    <li>
+      <a href="#pages">Pages</a>
+    </li>
     {{ range site.Sections }}
-      {{ if ne .Type "sitemap" }}
+      {{ if and (ne .Type "sitemap") (ne .Type "pages") }}
         <li>
           <a href="#{{ .Type }}">{{ safeHTML .Title }}</a>
         </li>
