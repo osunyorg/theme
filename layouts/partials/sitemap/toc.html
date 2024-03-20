@@ -4,7 +4,7 @@
       {{- partial "blocks/toc.html" .context.Params.contents -}}
     {{- end -}}
     <li>
-      <a href="#pages">Pages</a>
+      <a href="#pages">{{ i18n "sitemap.pages" }}</a>
     </li>
     {{ range site.Sections }}
       {{ if and (ne .Type "sitemap") (ne .Type "pages") }}
