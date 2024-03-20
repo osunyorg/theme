@@ -1,0 +1,22 @@
+{{- $block := .block -}}
+{{- $block_title := .block.title -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+{{- $layout := "grid" -}}
+
+{{- with .block.data -}}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" (dict
+          "title" $block_title
+          "heading_level" $block.ranks.self
+        ) }}
+
+        {{- partial (printf "blocks/templates/projects/%s.html" $layout) (dict 
+          "projects" .projects
+          "heading_level" $block.ranks.children
+        ) }}
+      </div>
+    </div>
+  </div>
+{{- end -}}

@@ -11,6 +11,8 @@
 {{ $summary := .context.Params.summary | safeHTML }}
 {{ $subtitle_is_summary := false }}
 
+{{ $button := .button | default .context.Params.header_cta }}
+
 {{ if not $subtitle }}
   {{ if and (eq site.Params.summary.position "hero") $summary }}
     {{ $subtitle = $summary }}
@@ -38,39 +40,42 @@
         {{ else }}
           <h1>{{ partial "PrepareHTML" .title }}</h1>
         {{ end }}
-        {{ with .context.Params.header_cta }}
+
+        {{ with $button }}
           {{ if and .display .target .label }}
             <a href="{{ .target }}" class="btn">{{ .label }}</a>
           {{ end }}
+        {{ end }}
+
+        {{ if .hero_text_complement }}
+          {{ partial .hero_text_complement .context }}
         {{ end }}
       </div>
 
       {{ if .image }}
         <figure>
+          {{ partial "commons/image.html"
+            (dict
+              "image"    .image
+              "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
+              "lazy"     false
+            ) }}
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             <a  class="glightbox"
                 role="button"
-                data-glightbox="type: image;{{ if .image.credit }}description: {{ partial "PrepareHTML" .image.credit }}{{ end }}"
+                data-glightbox="type: image;{{ with .image.credit }}description: {{ partial "PrepareHTML" . }}{{ end }}"
                 href="{{ partial "GetLightboxUrl" .image }}"
-                title="{{ i18n "commons.lightbox.link.title" }}"
-                aria-label="{{ i18n "commons.lightbox.link.title" }}">
-          {{ end }}
-            {{ partial "commons/image.html"
-              (dict
-                "image"    .image
-                "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
-                "lazy"     false
-              ) }}
-          {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+                title="{{- i18n "commons.lightbox.link.title" -}}"
+                aria-label="{{- i18n "commons.lightbox.link.title" -}}">
             </a>
           {{ end }}
-            {{ if partial "GetTextFromHTML" .image.credit }}
-              <figcaption tabindex="0">
-                <div class="credit-content">
-                  {{ partial "PrepareHTML" .image.credit }}
-                </div>
-              </figcaption>
-            {{ end }}
+          {{ with partial "GetTextFromHTML" .image.credit }}
+            <figcaption tabindex="0">
+              <div class="credit-content">
+                {{ partial "PrepareHTML" . }}
+              </div>
+            </figcaption>
+          {{ end }}
         </figure>
       {{ end }}
     </div>

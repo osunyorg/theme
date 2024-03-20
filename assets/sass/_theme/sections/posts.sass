@@ -4,19 +4,6 @@
         color: $post-time-color
         display: inline-block
         vertical-align: middle
-    .post-categories
-        @include meta
-        margin-top: $spacing-2
-        margin-bottom: $spacing-2
-        position: relative
-        display: flex
-        flex-wrap: wrap
-        gap: 0 $spacing-2
-        z-index: 2
-        a
-            @include link(var(--color-accent))
-        li
-            margin: 0
     .post-author
         @include meta
         color: var(--color-text-alt)
@@ -91,57 +78,8 @@
         .post-sidebar
             @include sidebar
 
-.post-categories
-    @include list-reset
-    margin: 0
-    li
-        display: inline-block
-        vertical-align: middle
-        margin-left: $spacing-1
-        &:last-child
-            &::after
-                content: none
-
 .post-infos
-    margin-bottom: 0
-    @include meta
-    @include list-reset
-    font-size: $table-body-size
-    @include media-breakpoint-up(desktop)
-        font-size: $table-body-size-desktop
-    > li
-        @include meta
-        display: flex
-        gap: $spacing-3
-        justify-content: space-between
-        padding-top: $spacing-2
-        padding-bottom: $spacing-2
-        border-color: var(--color-border)
-        &:not(:first-child)
-            align-items: center
-            border-top: 1px solid var(--color-border)
-        > span
-            @include meta
-            color: var(--color-text-alt)
-            padding-left: 0
-            white-space: nowrap
-            vertical-align: top
-        > ul
-            text-align: right
-            flex: 1
-        &.social-share
-            align-items: center
-    a
-        @include link(var(--color-accent))
-        text-align: right
-    .share
-        display: block
-        li
-            display: inline-block
-        a
-            color: inherit
-        li:last-child
-            margin-right: -$spacing-2
+    @include section__page-infos
 
 .related
     margin-top: $spacing-3
