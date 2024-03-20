@@ -28,23 +28,26 @@
         &:first-child
             a
                 @include icon-block(arrow-first, before)
-                padding-left: 0
-                padding-right: 0
         &:nth-child(2)
             a
                 @include icon-block(arrow-previous, before)
-                padding-left: 0
-                padding-right: 0
         &:nth-last-child(2)
             a
                 @include icon-block(arrow-next, before)
-                padding-left: 0
-                padding-right: 0
         &:last-child
             a
                 @include icon-block(arrow-last, before)
+        &:first-child,
+        &:nth-child(2),
+        &:nth-last-child(2),
+        &:last-child
+            a
                 padding-left: 0
                 padding-right: 0
+                margin-left: calc(#{$spacing-1} * -1)
+                margin-right: calc(#{$spacing-1} * -1)
+
+
 
 .posts-navigation, .siblings-navigation
     border-top: 1px solid var(--color-border)
