@@ -41,6 +41,19 @@
                     display: flex
                     flex-direction: column
                     gap: $spacing-2
+    &--large
+        figure
+            margin-bottom: $spacing-5
+            @include media-breakpoint-down(desktop)
+                picture
+                    margin-left: var(--grid-gutter-negative)
+                    margin-right: var(--grid-gutter-negative)
+            @include in-page-without-sidebar
+                &.image-portrait,
+                &.image-square
+                    picture
+                        width: columns(8)
+                        margin-left: offset(2)
     &--carousel
         overflow: hidden
         position: relative

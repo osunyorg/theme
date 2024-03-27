@@ -14,6 +14,8 @@
 
         {{- if eq $layout "carousel" -}}
           {{ partial "blocks/templates/gallery/carousel" . }}
+        {{- else if eq $layout "large" -}}
+          {{ partial "blocks/templates/gallery/large" . }}
         {{- else -}}
           {{ partial "blocks/templates/gallery/grid" . }}
         {{- end -}}
