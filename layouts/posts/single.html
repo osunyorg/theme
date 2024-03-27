@@ -6,7 +6,6 @@
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ with .Date }}<meta itemprop="datePublished" content="{{ .Format "2006-01-02T15:04" }}">{{ end }}
     {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
-    {{ with .Summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
 
     {{ partial "posts/sidebar.html" . }}
 

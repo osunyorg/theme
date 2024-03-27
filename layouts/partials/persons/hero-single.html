@@ -1,44 +1,19 @@
-{{- $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero"  -}}
-{{ $subtitle := "" }}
-{{- $summary := .Params.summary | safeHTML -}}
-{{ if and (eq site.Params.summary.position "hero") $summary }}
-  {{ $subtitle = $summary }}
+{{- $title := or .Params.header_text .Title -}}
+
+{{/*  LEGACY : à retirer une fois que le format de donnée des images des personnes sera homogène aux autres images  */}}
+{{- $image := "" -}}
+{{ with .Params.image }}
+  {{ if eq (printf "%T" .) "string" }}
+    {{ $image = dict "id" . }}
+  {{ else }}
+    {{ $image = . }}
+  {{ end }}
 {{ end }}
 
-<header class="hero {{ if $breadcrumb_is_after_hero -}} hero--no-margin {{- end }}">
-  <div class="container">
-    {{- if eq site.Params.breadcrumb.position "hero-start" -}}
-      {{ partial "header/breadcrumbs.html" . }}
-    {{- end -}}
-    <div class="content">
-      {{- if $subtitle -}}
-        <hgroup>
-          <h1>{{ partial "PrepareHTML" .Title }}</h1>
-          <p class="lead">{{ partial "PrepareHTML" $subtitle }}</p>
-        </hgroup>
-      {{- else -}}
-        <h1>{{ partial "PrepareHTML" .Title }}</h1>
-      {{- end -}}
-
-      {{ if .Params.image }}
-        <div class="avatar">
-          {{ partial "commons/image.html"
-              (dict
-                "image"    .Params.image
-                "class"    "img-fluid"
-                "sizes"    site.Params.image_sizes.sections.persons.hero_single
-              )}}
-        </div>
-      {{ end }}
-    </div>
-    {{- if eq site.Params.breadcrumb.position "hero-end" -}}
-      {{ partial "header/breadcrumbs.html" . }}
-    {{- end -}}
-  </div>
-</header>
-
-{{- if $breadcrumb_is_after_hero -}}
-  <div class="container breadcrumb-container">
-    {{ partial "header/breadcrumbs.html" . }}
-  </div>
-{{- end -}}
+{{- partial "header/hero.html"
+      (dict
+        "title" $title
+        "image" $image
+        "context" .
+        "sizes" site.Params.image_sizes.sections.persons.hero_single
+      ) -}}

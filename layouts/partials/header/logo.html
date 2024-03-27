@@ -1,3 +1,1 @@
-{{ $file := site.Params.logo.header }}
-{{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file "static" true) }}
-<a class="logo" href="{{ site.Home.Permalink }}"><img src="{{ $file }}" alt="{{ site.Title }}" height="{{ index $fileDimensions 1 }}" width="{{ index $fileDimensions 0 }}"></a>
+{{ partial "commons/logo.html" site.Params.logo.header }}

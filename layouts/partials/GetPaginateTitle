@@ -2,7 +2,7 @@
 {{ $seoTitleSeparator := .separator}}
 {{ $page := i18n "commons.pagination.title" }}
 
-{{if not .context.IsHome }}
+{{if and (not .context.IsHome) (eq .kind "page") }}
     {{ with .context.Paginator }}
         {{ if or .HasPrev .HasNext }}
             {{ $currentPageNumber := .PageNumber}}

@@ -2,27 +2,52 @@
 $color-accent: #0038FF !default
 $color-text: #000000 !default
 $color-text-alt: #454545 !default
-$color-border: rgba(0, 0, 0, 0.30) !default
-$color-background-alt: #F2F2F2 !default
 $color-background: #FFFFFF !default
+$color-background-alt: #F2F2F2 !default
+$color-border: rgba(0, 0, 0, 0.30) !default
+$color-selection: $color-background !default
+$color-selection-background: rgba($color-text, .7) !default
 
-$body-color: $color-text !default
-$body-background-color: $color-background !default
-$link-color: $color-text !default
+// Scheme Dark colors (enable dark mode in your hugo configuration file)
+$has-dark-mode: false !default
+$color-dark-accent: rgb(120, 208, 255) !default
+$color-dark-text: #ffffff !default
+$color-dark-text-alt: #cbcbcb !default
+$color-dark-background: #000000 !default
+$color-dark-background-alt: #181919 !default
+$color-dark-border: rgba(255, 255, 255, 0.3) !default
+$color-dark-selection: $color-dark-background !default
+$color-dark-selection-background: rgba($color-dark-text, .7) !default
 
-// Grid
-$grid-gutter: px2rem(64) !default
-$grid-max-width: px2rem(1980) !default
-$grid-gutter-sm: px2rem(44) !default
+$body-color: var(--color-text) !default
+$body-background-color: var(--color-background) !default
+$link-color: var(--color-text) !default
+
+// Grid System 
+$grid-gutter: pxToRem(24) !default
+$grid-gutter-lg: pxToRem(48) !default
+$grid-gutter-xxl: pxToRem(64) !default
+$grid-max-width: pxToRem(1980) !default
 
 // Spacing
-$space-unit: 4 !default
-$spacing0: space(3) !default
-$spacing1: space(6) !default
-$spacing2: space(12) !default
-$spacing3: space(16) !default
-$spacing4: space(32) !default
-$spacing5: space(64) !default
+$space-unit: 4
+$spacing-1: space(2)   // 8px
+$spacing-2: space(3)   // 12px
+$spacing-3: space(6)   // 24px
+$spacing-4: space(12)  // 48px
+$spacing-5: space(16)  // 64px
+$spacing-6: space(32)  // 128px
+$spacing-7: space(64)  // 256px
+
+// Deprecated variables
+// $spacing0: space(3) --> $spacing-2
+// $spacing1: space(6) --> $spacing-3
+// $spacing2: space(12) --> $spacing-4
+// $spacing3: space(16) --> $spacing-5
+// $spacing4: space(32) --> $spacing-6
+// $spacing5: space(64) --> $spacing-7
+
+$minimum-accessible-size: 44px
 
 // TYPOGRAPHY
 
@@ -35,103 +60,119 @@ $heading-font-weight: normal !default
 
 // h1
 $h1-font-family: $heading-font-family !default
-$h1-size-desktop: px2rem(60) !default
-$h1-size: px2rem(30) !default
+$h1-size-desktop: pxToRem(60) !default
+$h1-size: pxToRem(30) !default
 $h1-line-height: 120% !default
+$h1-line-height-desktop: $h1-line-height !default
 $h1-weight: bold !default
 $h1-text-transform: none !default
 
 // h2
 $h2-font-family: $heading-font-family !default
-$h2-size-desktop: px2rem(40) !default
-$h2-size: px2rem(24) !default
+$h2-size-desktop: pxToRem(40) !default
+$h2-size: pxToRem(24) !default
 $h2-line-height: 120% !default
+$h2-line-height-desktop: $h2-line-height !default
 $h2-weight: $heading-font-weight !default
 $h2-text-transform: none !default
 
 // h3
 $h3-font-family: $heading-font-family !default
-$h3-size-desktop: px2rem(28) !default
-$h3-size: px2rem(20) !default
+$h3-size-desktop: pxToRem(28) !default
+$h3-size: pxToRem(20) !default
 $h3-line-height: 130% !default
+$h3-line-height-desktop: $h3-line-height !default
 $h3-weight: bold !default
 $h3-text-transform: none !default
 
 // h4
 $h4-font-family: $heading-font-family !default
-$h4-size-desktop: px2rem(22) !default
-$h4-size: px2rem(16) !default
+$h4-size-desktop: pxToRem(22) !default
+$h4-size: pxToRem(16) !default
 $h4-line-height: 130% !default
+$h4-line-height-desktop: $h4-line-height !default
 $h4-weight: bold !default
 $h4-text-transform: none !default
 
 // h5 or Section
 $h5-font-family: $heading-font-family !default
-$h5-size-desktop: px2rem(24) !default
-$h5-size: px2rem(20) !default
+$h5-size-desktop: pxToRem(24) !default
+$h5-size: pxToRem(20) !default
 $h5-line-height: 130% !default
+$h5-line-height-desktop: $h5-line-height !default
 $h5-weight: $heading-font-weight !default
 $h5-text-transform: uppercase !default
 
 // h6 or Tab
 $h6-font-family: $heading-font-family !default
-$h6-size-desktop: px2rem(20) !default
-$h6-size: px2rem(14) !default
+$h6-size-desktop: pxToRem(20) !default
+$h6-size: pxToRem(14) !default
 $h6-line-height: 130% !default
+$h6-line-height-desktop: $h6-line-height !default
 $h6-weight: $heading-font-weight !default
 $h6-text-transform: uppercase !default
 
 // Lead
 $lead-font-family: $heading-font-family !default
-$lead-size-desktop: px2rem(60) !default
-$lead-size: px2rem(24) !default
+$lead-size-desktop: pxToRem(60) !default
+$lead-size: pxToRem(24) !default
 $lead-line-height: 120% !default
+$lead-line-height-desktop: $lead-line-height !default
 $lead-weight: $heading-font-weight !default
 
 $lead-sidebar-font-family: $lead-font-family !default
-$lead-sidebar-size-desktop: px2rem(32) !default
+$lead-sidebar-size-desktop: pxToRem(32) !default
+$lead-sidebar-size: $lead-size !default
 $lead-sidebar-line-height: $lead-line-height !default
+$lead-sidebar-line-height-desktop: $lead-sidebar-line-height !default
 $lead-sidebar-weight: $lead-weight !default
 
 $lead-hero-font-family: $lead-sidebar-font-family !default
 $lead-hero-size: $lead-size !default
 $lead-hero-size-desktop: $lead-sidebar-size-desktop !default
 $lead-hero-line-height: $lead-sidebar-line-height !default
+$lead-hero-line-height-desktop: $lead-hero-line-height !default
 $lead-hero-weight: $lead-sidebar-weight !default
 
 // Body
-$body-size-desktop: px2rem(22) !default
-$body-size: px2rem(18) !default
+$body-size-desktop: pxToRem(22) !default
+$body-size: pxToRem(18) !default
 $body-line-height: 160% !default
+$body-line-height-desktop: $body-line-height !default
 $body-weight: normal !default
 
 // Small
 $small-font-family: $body-font-family !default
-$small-size-desktop: px2rem(18) !default
-$small-size: px2rem(14) !default
+$small-size-desktop: pxToRem(18) !default
+$small-size: pxToRem(14) !default
 $small-line-height: 130% !default
+$small-line-height-desktop: $small-line-height !default
 $small-weight: normal !default
 
 // Signature
 $signature-font-family: $heading-font-family !default
-$signature-size-desktop: px2rem(22) !default
-$signature-size: px2rem(18) !default
+$signature-size-desktop: pxToRem(22) !default
+$signature-size: pxToRem(18) !default
 $signature-line-height: 130% !default
+$signature-line-height-desktop: $signature-line-height !default
 $signature-weight: $heading-font-weight !default
 
 // Meta
 $meta-font-family: $heading-font-family !default
-$meta-size-desktop: px2rem(16) !default
-$meta-size: px2rem(14) !default
+$meta-size-desktop: pxToRem(16) !default
+$meta-size: pxToRem(14) !default
 $meta-line-height: 150% !default
+$meta-line-height-desktop: $meta-line-height !default
 $meta-weight: $heading-font-weight !default
 
 // Quotes
 $quote-font-family: $body-font-family !default
-$quote-size-desktop-short: px2rem(60) !default
-$quote-size-desktop-long: px2rem(40) !default
-$quote-size: px2rem(24) !default
+$quote-size-desktop-short: pxToRem(60) !default
+$quote-size-desktop-long: pxToRem(40) !default
+$quote-size-desktop: pxToRem(40) !default
+$quote-size: pxToRem(24) !default
 $quote-line-height: 120% !default
+$quote-line-height-desktop: $quote-line-height !default
 $quote-weight: normal !default
 $quote-style: italic !default
 
@@ -141,27 +182,35 @@ $link-underline-thickness: 1px !default
 $link-transition: text-decoration-color .3s ease !default
 $link-unhover-decoration-color-alpha: 0.3 !default
 
-// Buttons
-$btn-font-size-desktop: px2rem(18) !default // TODO
-$btn-font-size: px2rem(14) !default
-$btn-padding-x-desktop: $spacing1 !default
-$btn-padding-y-desktop: px2rem(15) !default
-$btn-padding-x: $spacing1 !default
-$btn-padding-y: $spacing0 !default
-$btn-border-radius: px2rem(4) !default
-$btn-border: 1px solid $color-text !default
-$btn-hover-background: $color-background-alt !default
+// Button
+$btn-font-family: $heading-font-family !default
+$btn-font-size: $meta-size !default
+$btn-font-size-desktop: $meta-size-desktop !default
+$btn-font-weight: normal !default
+$btn-text-transform: none !default
+$btn-color: var(--color-text) !default
+$btn-hover-color: var(--color-text) !default
+$btn-background: transparent !default
+$btn-hover-background: var(--color-background) !default
+$btn-border: pxToRem(1) solid var(--color-border) !default
+$btn-border-desktop: $btn-border !default
+$btn-border-radius: pxToRem(4) !default
+$btn-border-radius-desktop: $btn-border-radius !default
+$btn-padding: pxToRem(12) pxToRem(10) !default
+$btn-padding-desktop: pxToRem(18) pxToRem(16) !default
+$btn-min-width: pxToRem(100) !default
+$btn-min-width-desktop: pxToRem(190) !default
 
 // Chip
-$chip-background: $color-background !default
-$chip-background-hover: $color-background-alt !default
-$chip-border: 1px solid $color-border !default
+$chip-background: var(--color-background) !default
+$chip-background-hover: var(--color-background-alt) !default
+$chip-border: 1px solid var(--color-border) !default
 $chip-border-radius: $btn-border-radius !default
-$chip-color: $color-text !default
+$chip-color: var(--color-text) !default
 
 // Form
-$form-btn-color: $color-background !default
-$form-btn-background-color: $color-accent !default
+$form-btn-color: var(--color-background) !default
+$form-btn-background-color: var(--color-accent) !default
 $form-input-border-radius: 4px !default
 
 // Z-index
@@ -176,21 +225,21 @@ $zindex-aside: 48 !default
 $zindex-footer: 50 !default
 
 // Header
-$header-color: $color-text !default
-$header-hover-color: $color-accent !default // TODO : Réflechir à plus élégant / générique
-$header-background: $color-background-alt !default
+$header-color: var(--color-text) !default
+$header-hover-color: var(--color-accent) !default // TODO : Réflechir à plus élégant / générique
+$header-background: var(--color-background-alt) !default
 $header-transition: 0.3s !default
 $header-dropdown-full: false !default
 $header-dropdown-background: $header-background !default
 $header-dropdown-color: $header-color !default
 $header-dropdown-transition: $header-transition !default
 $header-sticky-enabled: true !default
-$header-sticky-background: $color-background !default
+$header-sticky-background: var(--color-background) !default
 $header-sticky-dropdown-background: $header-sticky-background !default
 $header-sticky-color: $header-color !default
 $header-sticky-transition: $header-transition !default
-$header-nav-padding-y: px2rem(20) !default
-$header-nav-padding-y-desktop: px2rem(30) !default
+$header-nav-padding-y: pxToRem(20) !default
+$header-nav-padding-y-desktop: pxToRem(30) !default
 $header-logo-height: 32px !default
 $header-logo-height-desktop: $header-logo-height !default
 $header-height: 87px !default
@@ -202,63 +251,87 @@ $header-border-bottom-width: 1px !default
 $body-overlay-color: rgba(0, 0, 0, 0.3) !default
 
 // Footer
-$footer-color: $color-text !default
-$footer-background-color: $color-background-alt !default
+$footer-color: var(--color-text) !default
+$footer-background-color: var(--color-background-alt) !default
 $footer-logo-height: $header-logo-height !default
 $footer-logo-height-desktop: $footer-logo-height !default
 $footer-icons-enabled: true !default
-$footer-icons-size: px2rem(32) !default
+$footer-icons-size: pxToRem(32) !default
 $footer-text-hidden: false !default
-$dropdown-i18n-background-color: $color-background !default
-$dropdown-i18n-color: $color-text !default
+$dropdown-i18n-background-color: var(--color-background) !default
+$dropdown-i18n-color: var(--color-text) !default
 
 // Hero
 $hero-height: 300px !default
 $hero-height-desktop: 500px !default
-$hero-color: $color-text !default
-$hero-background-color: $color-background-alt !default
+$hero-color: var(--color-text) !default
+$hero-background-color: var(--color-background-alt) !default
+$hero-credit-color: var(--color-text-alt) !default
 
 // Breadcrumb
 $breadcrumb-color: $hero-color !default
 $breadcrumb-color-active: $hero-color !default
 $breadcrumb-icon: "caret-right" !default
-$breadcrumb-icon-color: $color-text-alt !default
+$breadcrumb-icon-color: var(--color-text-alt) !default
 
 // Icons
 $icons: ()
 $icons: map-merge($icons, ("arrow": "\ff01"))
+$icons: map-merge($icons, ("arrow-raw": "\e93a"))
 $icons: map-merge($icons, ("arrow-first": "\e906"))
 $icons: map-merge($icons, ("arrow-last": "\e907"))
 $icons: map-merge($icons, ("arrow-left": "\ff02"))
+$icons: map-merge($icons, ("arrow-left-raw": "\e938"))
 $icons: map-merge($icons, ("arrow-next": "\e909"))
 $icons: map-merge($icons, ("arrow-previous": "\e908"))
 $icons: map-merge($icons, ("arrow-right": "\ff00"))
+$icons: map-merge($icons, ("arrow-right-raw": "\e939"))
+$icons: map-merge($icons, ("arrow-alt": "\e931"))
+$icons: map-merge($icons, ("arrow-alt-raw": "\e936"))
 $icons: map-merge($icons, ("burger": "\e902"))
 $icons: map-merge($icons, ("burger-close": "\e905"))
 $icons: map-merge($icons, ("caret": "\e904"))
-$icons: map-merge($icons, ("caret-top": "\e914"))
-$icons: map-merge($icons, ("caret-right": "\e913"))
-$icons: map-merge($icons, ("caret-left": "\e912"))
+$icons: map-merge($icons, ("caret-raw": "\e940"))
 $icons: map-merge($icons, ("caret-bottom": "\e911"))
+$icons: map-merge($icons, ("caret-bottom-raw": "\e944"))
+$icons: map-merge($icons, ("caret-left": "\e912"))
+$icons: map-merge($icons, ("caret-left-raw": "\e942"))
+$icons: map-merge($icons, ("caret-top": "\e914"))
+$icons: map-merge($icons, ("caret-top-raw": "\e941"))
+$icons: map-merge($icons, ("caret-right": "\e913"))
+$icons: map-merge($icons, ("caret-right-raw": "\e943"))
 $icons: map-merge($icons, ("check": "\ff06"))
 $icons: map-merge($icons, ("check-inline": "\ff07"))
+$icons: map-merge($icons, ("check-inline-raw": "\e945"))
 $icons: map-merge($icons, ("close": "\e90e"))
 $icons: map-merge($icons, ("copy": "\ff03"))
+$icons: map-merge($icons, ("copy-raw": "\e946"))
 $icons: map-merge($icons, ("copy-inline": "\ff04"))
 $icons: map-merge($icons, ("download": "\e900"))
+$icons: map-merge($icons, ("download-inline": "\e92f"))
+$icons: map-merge($icons, ("download-raw": "\e937"))
 $icons: map-merge($icons, ("eye": "\e901"))
 $icons: map-merge($icons, ("facebook": "\e90b"))
+$icons: map-merge($icons, ("facebook-raw": "\e93e"))
 $icons: map-merge($icons, ("globe": "\ff10"))
+$icons: map-merge($icons, ("globe-raw": "\e934"))
 $icons: map-merge($icons, ("instagram": "\e90a"))
+$icons: map-merge($icons, ("instagram-raw": "\e93b"))
 $icons: map-merge($icons, ("link-blank": "\e903"))
 $icons: map-merge($icons, ("link-blank-block": "\ff05"))
+$icons: map-merge($icons, ("link-blank-raw": "\e932"))
 $icons: map-merge($icons, ("linkedin": "\e90c"))
+$icons: map-merge($icons, ("linkedin-raw": "\e93c"))
 $icons: map-merge($icons, ("list-hyphen": "\e917"))
+$icons: map-merge($icons, ("list-hyphen-raw": "\e93f"))
 $icons: map-merge($icons, ("pause": "\e90f"))
 $icons: map-merge($icons, ("play": "\e910"))
 $icons: map-merge($icons, ("search": "\e916"))
 $icons: map-merge($icons, ("search-inline": "\ee13"))
+$icons: map-merge($icons, ("search-raw": "\e933"))
 $icons: map-merge($icons, ("social": "\e915"))
+$icons: map-merge($icons, ("social-raw": "\e935"))
+$icons: map-merge($icons, ("social-inline": "\e92e"))
 $icons: map-merge($icons, ("social-facebook": "\ee01"))
 $icons: map-merge($icons, ("social-instagram": "\ee02"))
 $icons: map-merge($icons, ("social-linkedin": "\ee03"))
@@ -273,6 +346,7 @@ $icons: map-merge($icons, ("social-github": "\ee10"))
 $icons: map-merge($icons, ("social-email": "\ee11"))
 $icons: map-merge($icons, ("toc": "\e918"))
 $icons: map-merge($icons, ("twitter": "\e90d"))
+$icons: map-merge($icons, ("twitter-raw": "\e90d"))
 $icons: map-merge($icons, ("whatsapp": "\e919"))
 $icons: map-merge($icons, ("email": "\e920"))
 $icons: map-merge($icons, ("telegram": "\e921"))
@@ -288,9 +362,9 @@ $lightbox-overlay-color: rgba(0, 0, 0, 0.90) !default
 $lightbox-backdrop: blur(16px) !default
 
 // Table of content
-$toc-color: $color-text !default
-$toc-active-color: $color-accent !default // TODO : checker ce que ça fait
-$toc-background-color: $color-background-alt !default
+$toc-color: var(--color-text) !default
+$toc-active-color: var(--color-accent) !default // TODO : checker ce que ça fait
+$toc-background-color: var(--color-background-alt) !default
 $toc-font-family: $body-font-family !default
 $toc-font-size: $body-size !default
 $toc-font-size-desktop: $body-size-desktop !default
@@ -307,57 +381,78 @@ $table-head-font-size-desktop: $h4-size-desktop !default
 $table-body-size: $body-size !default
 $table-body-size-desktop: $body-size-desktop !default
 
+// HEADING
+
+// Under desktop breakpoint
+$heading-margin-top: $spacing-4 !default
+$heading-margin-bottom: 0 !default
+// Upper desktop breakpoint without sidebar 
+$heading-margin-top-desktop: $spacing-6 !default
+$heading-margin-bottom-desktop: $heading-margin-bottom !default
+// Upper desktop breakpoint with sidebar 
+$heading-margin-top-with-sidebar: $spacing-5 !default
+$heading-margin-bottom-with-sidebar: $heading-margin-bottom !default
+
 // BLOCKS
 // Base
-$block-space-y: $spacing3 !default
+
+// Under desktop breakpoint
+$block-space-y: $spacing-4 !default
+// Upper desktop breakpoint without sidebar 
+$block-space-y-desktop: $spacing-5 !default
+// Upper desktop breakpoint with sidebar 
+$block-space-y-with-sidebar: $spacing-5 !default
 
 // Block call to action
-$block-call-to-action-background: $color-accent !default
-$block-call-to-action-color: $color-background !default
-$block-call-to-action-button-background: $color-background !default
-$block-call-to-action-button-color: $color-text !default
-$block-call-to-action-button-hover-background: $color-text-alt !default
-$block-call-to-action-button-hover-color: $color-background !default
+$block-call-to-action-background: var(--color-accent) !default
+$block-call-to-action-color: var(--color-background) !default
+$block-call-to-action-button-background: var(--color-background) !default
+$block-call-to-action-button-color: var(--color-text) !default
+$block-call-to-action-button-hover-background: var(--color-text-alt) !default
+$block-call-to-action-button-hover-color: var(--color-background) !default
 
 // Block chapter
-$block-chapter-layout-accent-background: $color-accent !default
-$block-chapter-layout-accent-color: $color-background !default
-$block-chapter-layout-alt-background: $color-background-alt !default
-$block-chapter-layout-alt-color: $color-text !default
+$block-chapter-layout-accent-background: var(--color-accent) !default
+$block-chapter-layout-accent-color: var(--color-background) !default
+$block-chapter-layout-alt-background: var(--color-background-alt) !default
+$block-chapter-layout-alt-color: var(--color-text) !default
 
 // Block definitions
-$block-definition-border-color: $color-border !default
-$block-definition-border-color-hovered: $color-accent !default
-$block-definition-color-hovered: $color-accent !default
+$block-definition-border-color: var(--color-border) !default
+$block-definition-border-color-hovered: var(--color-accent) !default
+$block-definition-color-hovered: var(--color-accent) !default
 $block-definition-font-size: $body-size !default
 $block-definition-font-size-desktop: $body-size-desktop !default
 
 // Block pages
-$block-pages-card-background: $color-background-alt !default
-$block-pages-card-page-background: $color-background !default
-$block-pages-card-page-color: $color-text !default
-$block-pages-card-page-background-hover: $color-accent !default
-$block-pages-card-page-color-hover: $color-background !default
+$block-pages-card-background: var(--color-background-alt) !default
+$block-pages-card-page-background: var(--color-background) !default
+$block-pages-card-page-color: var(--color-text) !default
+$block-pages-card-page-background-hover: var(--color-accent) !default
+$block-pages-card-page-color-hover: var(--color-background) !default
 
 // Block posts
 $block-posts-grid-columns: 3 !default
 
+// Block programs
+$block-programs-aspect-ratio: 16/9 !default
+
 // Block timeline
-$block-timeline-horizontal-background: $color-background-alt !default
-$block-timeline-horizontal-color: $color-text !default
+$block-timeline-horizontal-background: var(--color-background-alt) !default
+$block-timeline-horizontal-color: var(--color-text) !default
 
 // Block testimonials
 $block-testimonials-xl-font-size: $quote-size-desktop-short !default
 $block-testimonials-xl-line-height: $quote-line-height !default
 $block-testimonials-xl-font-size-long-text: $quote-size-desktop-long !default
 $block-testimonials-xl-line-height-long-text: $quote-line-height !default
-$block-testimonials-color: $color-accent !default
+$block-testimonials-color: var(--color-accent) !default
 $block-testimonials-font-family: $quote-font-family !default
 $block-testimonials-font-size: $quote-size !default
 $block-testimonials-line-height: $quote-line-height !default
 $block-testimonials-style: $quote-style !default
-$block-testimonials-pagination-background: $color-border !default
-$block-testimonials-pagination-progress-background: $color-accent !default
+$block-testimonials-pagination-background: var(--color-border) !default
+$block-testimonials-pagination-progress-background: var(--color-accent) !default
 
 // Block key_figures
 
@@ -365,24 +460,25 @@ $block-testimonials-pagination-progress-background: $color-accent !default
 $block-key_figures-number-font-family: $heading-font-family !default
 $block-key_figures-unit-font-weight: normal !default
 $block-key_figures-number-font-weight: bold !default
+$block-key_figures-image-max-width: $spacing-6 !default
 
-$block-key_figures-font-size: px2rem(16) !default
-$block-key_figures-number-font-size: px2rem(32) !default
+$block-key_figures-font-size: pxToRem(16) !default
+$block-key_figures-number-font-size: pxToRem(32) !default
 
-$block-key_figures-font-size-desktop: px2rem(18) !default
-$block-key_figures-number-font-size-desktop: px2rem(40) !default
+$block-key_figures-font-size-desktop: pxToRem(18) !default
+$block-key_figures-number-font-size-desktop: pxToRem(40) !default
 
-$block-key_figures-font-size-lg: px2rem(20) !default
-$block-key_figures-number-font-size-lg: px2rem(50) !default
+$block-key_figures-font-size-lg: pxToRem(20) !default
+$block-key_figures-number-font-size-lg: pxToRem(50) !default
 
 $block-key_figures-font-size-xl: $block-key_figures-font-size-lg !default
-$block-key_figures-number-font-size-xl: px2rem(60) !default
+$block-key_figures-number-font-size-xl: pxToRem(60) !default
 
 $block-key_figures-font-size-xxl: $block-key_figures-font-size-xl !default
-$block-key_figures-number-font-size-xxl: px2rem(80) !default
+$block-key_figures-number-font-size-xxl: pxToRem(80) !default
 
 // Block gallery
-$block-gallery-carousel-background: $color-background-alt !default
+$block-gallery-carousel-background: var(--color-background-alt) !default
 $block-gallery-carousel-max-height: 70vh !default
 
 // Block image
@@ -390,26 +486,30 @@ $block-image-max-height-with-sidebar: calc(100vh - var(--header-height)) !defaul
 $block-image-max-height-without-sidebar: none !default
 
 // Block video
-$block-video-background: $color-background-alt !default
+$block-video-background: var(--color-background-alt) !default
 
 // Sections
-$article-media-background: color-contrast($color-background, 3%) !default
 $article-media-aspect-ratio: 2 !default
 
-$post-media-background: $article-media-background !default
-$post-categories-color: color-contrast($color-text, 20%) !default
-$post-time-color: $color-text-alt !default
+$post-time-color: var(--color-text-alt) !default
 // Si layout posts grid (ne concerne pas les blocks posts)
 $posts-grid-columns: $block-posts-grid-columns !default
 
 // Person
-$persons-avatar-background-color: $color-background-alt !default
+$persons-avatar-background-color: var(--color-background-alt) !default
+
+// Organization
+$organization-background-color: $color-background-alt !default // Use sass variable color-background To avoid dark logo on darkmode background-alt color
+
+// Project
+$project-infos-border-color: $color-border !default
+$project-infos-color-text: $color-text !default
+$project-infos-color-text-alt: $color-text-alt !default
+$project-infos-color-accent: $color-accent !default
 
 // Program
 $program-essential-font-size: $meta-size !default
 $program-essential-font-size-desktop: $meta-size-desktop !default
-$program-share-font-size: $meta-size !default
-$program-share-font-size-desktop: $meta-size-desktop !default
 $program-zindex-toc: $zindex-toc !default
 
 // MISC
@@ -422,5 +522,5 @@ $arrow-ease-transition-2: cubic-bezier(0, 0.65, 0.4, 1) !default
 $icon-burger-margin-right: -12px
 $icon-close-margin-right: -12px
 $icon-toc-margin-right: -14px
-$icon-arrow-previous-margin-left: -22px // cf. testimonial
+$icon-arrow-previous-margin-left: -18px // cf. testimonial
 $icon-social-margin-right: -14px

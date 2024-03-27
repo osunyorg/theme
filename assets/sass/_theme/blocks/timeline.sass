@@ -5,22 +5,22 @@
         .timeline-event
             position: relative
             &:not(:last-child)
-                padding-bottom: $spacing2
+                padding-bottom: $spacing-4
             &::before
-                background: $color-text
+                background: var(--color-text)
                 border-radius: 50%
                 content: ""
                 height: 9px
-                left: half(-$grid-gutter)
+                left: -$spacing-3
                 margin-top: 0.5em
                 position: absolute
                 width: 9px
                 margin-left: -4px
             &::after
-                background: $color-text
+                background: var(--color-text)
                 bottom: -0.5em
                 content: ""
-                left: half(-$grid-gutter)
+                left: -$spacing-3
                 position: absolute
                 top: 0.5em
                 width: 1px
@@ -31,11 +31,11 @@
             .title
                 @include h4
                 + p
-                    margin-top: $spacing0
+                    margin-top: $spacing-2
 
         @include media-breakpoint-down(desktop)
             .timeline-event
-                padding-left: half($grid-gutter-sm)
+                padding-left: $spacing-3
                 &::after, &::before
                     left: 0
 
@@ -45,97 +45,57 @@
             .timeline-event
                 display: flex
                 &::before, &::after
-                    left: col(3)
-                    margin-left: half($grid-gutter)
+                    left: columns(3)
+                    margin-left: calc(var(--grid-gutter) / 2)
                 &::before
                     transform: translateX(-4px)
                 .title
-                    width: col(3)
+                    width: columns(3)
                     text-align: right
                     + p
                         margin-top: 0
                 p
-                    padding-left: $grid-gutter
-                    width: col(7)
+                    padding-left: var(--grid-gutter)
+                    width: columns(7)
                     &:first-child
-                        margin-left: col(3)
+                        margin-left: columns(3)
 
     &--horizontal
+        @include draggable-block
         --min-title-height: 0px
         background: $block-timeline-horizontal-background
         color: $block-timeline-horizontal-color
-        overflow: hidden
-        padding-bottom: $grid-gutter
-        padding-top: $grid-gutter
+        padding-bottom: var(--block-space-y)
+        padding-top: var(--block-space-y)
         &::before
             display: none
-        .timeline
-            &:hover
-                cursor: grab
-            &.is-grabbing
-                cursor: grabbing
-            
-        .timeline-arrows
-            display: flex
-            padding-left: half($grid-gutter)
-            > button
-                @include button-reset
-                background: none
-                border: none
-                color: $block-timeline-horizontal-color
-                cursor: pointer
-                &:first-child
-                    @include icon-block(arrow-previous, before)
-                    margin-left: $icon-arrow-previous-margin-left
-                &:last-child
-                    @include icon-block(arrow-next, before)
-                &:disabled
-                    cursor: default
-                    opacity: 0.3
-        .timeline-events
-            margin-left: half(-$grid-gutter)
-            margin-right: half(-$grid-gutter)
-            // TODO : fixer le px gap en desktop entre chaque event
-            ol
-                display: flex
-                flex-flow: row nowrap
-                list-style: none
-                padding-left: 0
-                margin-top: $spacing0
-                transition: margin 0.4s ease-in-out
-                width: 100%
         .timeline-event
-            flex: none
-            padding: 0 half($grid-gutter)
-            scroll-snap-align: start
-            transition: 0.3s opacity
-            width: 50%
+            padding: 0 calc(var(--grid-gutter) / 2)
+            width: columns(4)
             .title
                 display: block
                 min-height: var(--min-title-height)
-                padding-bottom: $spacing1
+                padding-bottom: $spacing-3
                 @include signature
             .description
                 @include small
             .line
                 background: $block-timeline-horizontal-color
                 height: 1px
-                margin-bottom: $spacing1
+                margin-bottom: $spacing-3
                 opacity: 1
                 overflow: visible
-                width: calc(100% + #{half($grid-gutter)})
+                width: calc(100% + var(--grid-gutter) / 2)
                 &::before
                     background: $block-timeline-horizontal-color
                     border-radius: 50%
                     content: ""
                     display: block
                     height: 9px
+                    margin-left: -4px
                     position: relative
                     top: -4px
                     width: 9px
-
-            &.is-passed
-                opacity: 0.15
             &:last-child
                 .line
                     background: transparent
@@ -143,20 +103,21 @@
         @include media-breakpoint-up(desktop)
             .timeline-event
                 .line
-                    width: calc(100% + #{$grid-gutter})
+                    width: calc(100% + var(--grid-gutter))
 
         @include media-breakpoint-down(desktop)
             .timeline-events
                 position: relative
-            .timeline-arrows
+            .actions-arrows
                 left: 0
                 position: absolute
-                top: calc(#{$spacing2/2} + var(--min-title-height))
+                top: calc(#{$spacing-2} + var(--min-title-height))
             .timeline-event
+                margin-right: 0
                 padding-right: 0
                 width: 75%
                 .line
-                    margin-bottom: calc(#{$spacing2} + var(--min-title-height))
+                    margin-bottom: $spacing-5
 
         @include in-page-without-sidebar
             @include media-breakpoint-up(xxl)

@@ -1,0 +1,16 @@
+%logo
+    color: inherit
+    text-decoration: none
+    img
+        display: block
+        width: auto
+    .logo-darkmode
+        display: none
+    .logo-text
+        @include h2
+    &.with-darkmode
+        @media (prefers-color-scheme: dark)
+            > img:first-child
+                display: none
+            .logo-darkmode
+                display: block

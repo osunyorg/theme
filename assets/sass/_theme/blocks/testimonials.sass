@@ -8,7 +8,7 @@
             font-style: $block-testimonials-style
             color: $block-testimonials-color
             @include media-breakpoint-up(desktop)
-                font-size: px2rem(30) // TODO : on peut peut-être la sortir avec du RFS ?
+                font-size: pxToRem(30) // TODO : on peut peut-être la sortir avec du RFS ?
             @include media-breakpoint-up(xl)
                 font-size: $block-testimonials-xl-font-size
                 line-height: $block-testimonials-xl-line-height
@@ -23,17 +23,15 @@
     figcaption
         align-items: center
         display: flex
-        margin-top: $spacing1
+        margin-top: $spacing-3
         span
             display: block
     .avatar
         flex-shrink: 0
-        width: calc(#{col(1, 8)} + #{$grid-gutter} / 2)
-        min-width: px2rem(80)
-        margin-right: $spacing0
+        width: columns(1)
+        min-width: pxToRem(80)
+        margin-right: $spacing-2
         margin-bottom: 0
-        @include media-breakpoint-up(desktop)
-            margin-right: calc(#{$grid-gutter} / 2)
 
     .splide
         .splide__slider
@@ -53,9 +51,9 @@
             font-size: 0
             line-height: 1
             span
-                color: $color-accent
+                color: var(--color-accent)
                 &::before
-                    font-size: 42px
+                    font-size: pxToRem(42)
         .splide__pagination
             .is-active i
                 width: 100%
@@ -97,27 +95,17 @@
             margin-right: offset(1)
         figure
             padding-right: offset(3)
-            // TODO: explain this, add min height equal with 2 cols width to avoid overflow on square picture
-            min-height: calc(#{col-outside-container(2)} + #{half($grid-gutter)})
+            min-height: columns(2)
             &.with-picture
                 padding-right: offset(1)
                 padding-left: offset(3)
                 position: relative
                 figcaption
                     display: block
-                    margin-top: $spacing0
+                    margin-top: $spacing-2
                     .avatar
                         position: absolute
-                        left: col(1)
+                        left: columns(1)
                         top: 0
-                        margin-left: $grid-gutter
-                        width: col(2)
-
-        // TODO : en discuter en créa
-        // figure
-        //     display: flex
-        //     figcaption
-        //         order: -1
-        //         display: block
-        //         .avatar
-        //             margin-bottom: $spacing1
+                        margin-left: var(--grid-gutter)
+                        width: columns(2)

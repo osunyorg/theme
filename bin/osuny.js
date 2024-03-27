@@ -20,22 +20,27 @@ console.log(`
 
 const command = process.argv[2];
 
-let pagefindExclude = `
-    .administrators__term,
-    .authors__term,
-    .categories__taxonomy, .categories__term,
-    .posts_categories__taxonomy, .posts_categories__term,
-    .events_categories__taxonomy, .events_categories__term,
-    .diplomas__taxonomy, .block-diplomas,
-    .events__section, .block-agenda,
-    .organizations__section, .block-organizations,
-    .pages__section, .block-pages,
-    .persons__section, .block-persons,
-    .posts__section, .block-posts, .post-sidebar,
-    .programs__section, .block-programs,
-    .researchers__term,
-    .teachers__term
-    `;
+let pagefindExclude = '';
+// Categories: No list of categories
+pagefindExclude += '.categories__taxonomy, .categories__term, ';
+pagefindExclude += '.posts_categories__taxonomy, .posts_categories__term, ';
+pagefindExclude += '.events_categories__taxonomy, .events_categories__term, ';
+// Diplomas: No list of diplomas or block diplomas
+pagefindExclude += '.diplomas__taxonomy, .block-diplomas, ';
+// Agenda events: No list of events or block events
+pagefindExclude += '.events__section, .block-agenda, ';
+// Organizations: No list of organizations or block organizations
+pagefindExclude += '.organizations__section, .block-organizations, ';
+// Pages: No block pages (there's no difference between list and page)
+pagefindExclude += '.block-pages, ';
+// Persons: no list or block
+pagefindExclude += '.persons__section, .block-persons, ';
+// No list of people's facets
+pagefindExclude += '.administrators__term, .authors__term, .researchers__term, .teachers__term,';
+// Posts: no list, block posts, or post sidebar
+pagefindExclude += '.posts__section, .block-posts, .post-sidebar, ';
+// Programs: no block
+pagefindExclude += '.block-programs';
 
 function execute(string) {
     console.log("OSUNY runs " + string);
@@ -54,7 +59,7 @@ if (command === "dev") {
 
 if (command === "build") {
     execute("yarn upgrade");
-    execute("hugo");
+    execute("hugo --minify");
     execute("npm_config_yes=true npx pagefind --site 'public' --exclude-selectors '" + pagefindExclude + "'");
 }
 

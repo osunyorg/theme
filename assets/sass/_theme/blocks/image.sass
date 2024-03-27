@@ -4,24 +4,24 @@
         height: auto
         max-width: 100%
     figcaption
-        margin-top: $spacing0
+        margin-top: $spacing-2
         p
             margin-bottom: 0
             margin-top: 0
             + .credit
-                margin-top: $spacing0
+                margin-top: $spacing-2
         .credit
             p
                 @include meta
     picture
         display: block
-        margin-left: half(-$grid-gutter-sm)
-        margin-right: half(-$grid-gutter-sm)
+        margin-left: var(--grid-gutter-negative)
+        margin-right: var(--grid-gutter-negative)
 
     @include in-page-with-sidebar
         picture
             margin-left: 0
-            margin-right: -$grid-gutter
+            margin-right: var(--grid-gutter-negative)
         img
             max-height: $block-image-max-height-with-sidebar
             width: auto
@@ -30,7 +30,6 @@
         figure
             img
                 max-height: $block-image-max-height-without-sidebar
-                // max-height: calc(100vh - var(--header-height))
                 width: auto
                 max-width: 100%
         &.image-portrait, &.image-square
@@ -38,27 +37,26 @@
                 position: relative
                 .top
                     position: absolute
-                    width: col(5)
+                    width: columns(5)
             figure
                 display: flex
                 align-items: flex-end
-                > a 
-                    width: col(7)
-                    margin-left: half($grid-gutter)
+                > a
+                    width: columns(7)
+                    margin-left: var(--grid-gutter)
                     display: block
                     order: 2
                 picture
                     margin-left: 0
-                    margin-right: -$grid-gutter
                 figcaption
-                    width: calc(#{col(5)} + #{$grid-gutter} / 2)
+                    width: columns(5)
                     order: 1
                     display: block
                     text-align: right
         &.image-landscape
             picture
-                margin-left: -$grid-gutter
-                margin-right: -$grid-gutter
+                margin-left: var(--grid-gutter-negative)
+                margin-right: var(--grid-gutter-negative)
                 @media screen and (min-width: $grid-max-width)
                     margin-left: 0
                     margin-right: 0
@@ -67,7 +65,7 @@
                 justify-content: space-between
                 align-items: baseline
                 p
-                    max-width: col(8)
+                    max-width: columns(8)
                 *
                     flex: 1 1
                 .credit

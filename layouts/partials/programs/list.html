@@ -12,8 +12,12 @@
   {{ partial "contents/list.html" . }}
   <div class="container">
     {{ partial "diplomas/diplomas-select.html" . }}
+    {{/* Toutes les formations... */}}
     {{ $programs := where .Site.Pages "Section" "programs" }}
+    {{/* mais pas l'accueil des formations... */}}
     {{ $programs = where $programs "Permalink" "!=" .FirstSection.Permalink }}
+    {{/* et pas non plus les pages enfants (parcours) */}}
+    {{ $programs = where $programs "Params.parent" "eq" nil }}
     {{ partial "programs/programs-list.html" $programs }}
   </div>
 </div>

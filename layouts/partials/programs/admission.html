@@ -18,6 +18,27 @@
           </section>
         {{- end -}}
 
+        {{- if partial "GetTextFromHTML" .Params.pricing_initial -}}
+          <section id="{{ urlize (i18n "programs.pricing_initial") }}">
+            <h3>{{ i18n "programs.pricing_initial" }}</h3>
+            {{- partial "PrepareHTML" .Params.pricing_initial -}}
+          </section>
+        {{- end -}}
+
+        {{- if partial "GetTextFromHTML" .Params.pricing_continuing -}}
+          <section id="{{ urlize (i18n "programs.pricing_continuing") }}">
+            <h3>{{ i18n "programs.pricing_continuing" }}</h3>
+            {{- partial "PrepareHTML" .Params.pricing_continuing -}}
+          </section>
+        {{- end -}}
+
+        {{- if partial "GetTextFromHTML" .Params.pricing_apprenticeship -}}
+          <section id="{{ urlize (i18n "programs.pricing_apprenticeship") }}">
+            <h3>{{ i18n "programs.pricing_apprenticeship" }}</h3>
+            {{- partial "PrepareHTML" .Params.pricing_apprenticeship -}}
+          </section>
+        {{- end -}}
+
         {{- if partial "GetTextFromHTML" .Params.registration -}}
           <section id="{{ urlize (i18n "programs.registration") }}">
             <h3>{{ i18n "programs.registration" }}</h3>
