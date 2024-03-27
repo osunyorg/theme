@@ -1,0 +1,19 @@
+{{ define "main" }}
+  {{ partial "locations/hero-single.html" . }}
+
+  <div class="document-content" itemscope itemtype="https://schema.org/EducationalOrganization">
+    <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+    <meta itemprop="url" content="{{ .Permalink }}">
+    {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
+    {{ with .Summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
+
+    {{ partial "locations/summary.html" (dict
+        "context" .
+        "block_wrapped" true
+      ) }}
+
+    {{ partial "contents/list.html" . }}
+
+    {{ partial "hooks/before-document-content-end.html" . }}
+  </div>
+{{ end }}

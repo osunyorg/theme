@@ -1,0 +1,22 @@
+.locations__taxonomy
+    .locations
+        .location
+            @include media-breakpoint-up(desktop)
+                .media
+                    width: col(4)
+                &-content
+                    width: col(6)
+
+.location
+    display: flex
+    gap: $grid-gutter
+    .media
+        order: -1
+    &-title
+        @include icon(arrow-right, after)
+    @include media-breakpoint-down(desktop)
+        flex-direction: column
+        .media
+            // TODO : REMOVE HALF
+            margin-left: half(-$grid-gutter)
+            margin-right: half(-$grid-gutter)

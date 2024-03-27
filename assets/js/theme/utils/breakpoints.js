@@ -8,7 +8,7 @@ const breakpoints = {
 };
 
 const isMobile = function() {
-    return window.innerWidth <= breakpoints.md 
+    return window.innerWidth <= breakpoints.lg 
 }
 
 export {
