@@ -14,6 +14,8 @@
 {{ $accessibility := partial "GetTextFromHTML" .context.Params.accessibility }}
 {{ $other := partial "GetTextFromHTML" .context.Params.other }}
 
+{{ $certification := .context.Params.certifications.qualiopi.certified  }}
+
 {{ $roles := .context.Params.roles }}
 {{ $contacts := partial "GetTextFromHTML" .context.Params.contacts }}
 
@@ -101,6 +103,11 @@
       </ol>
       {{ end -}}
     </li>
+    {{- if $certification -}}
+      <li>
+        <a href="#{{ urlize (i18n "programs.toc.certification") }}">{{ i18n "programs.toc.certification" }}</a>
+      </li>
+    {{- end -}}
     {{- if gt (len $related_posts) 0 -}}
       <li>
         <a href="#{{ urlize (i18n "programs.toc.related") }}">{{ i18n "programs.toc.related" }}</a>
