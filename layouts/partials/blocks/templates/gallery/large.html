@@ -1,10 +1,4 @@
-{{- $has_text := false -}}
-{{- range .images }}
-  {{- if .text }}
-    {{- $has_text = true -}}
-  {{ end -}}
-{{ end -}}
-<div class="gallery{{- if $has_text }} gallery--with-text {{ end -}}">
+<div class="gallery">
   {{ range .images }}
     {{ if .id }}
       {{- $image := partial "GetMedia" .id -}}
@@ -24,6 +18,7 @@
             {{ else if or .text .credit }}
               {{ $lightbox_text = or .text .credit }}
             {{ end }}
+            
             <a  class="glightbox"
                 role="button"
                 data-glightbox="type: image; {{ with $lightbox_text }}description: {{ . | safeHTML }}{{ end }}"
