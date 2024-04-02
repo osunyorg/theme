@@ -55,17 +55,22 @@
                         width: columns(8)
                         margin-left: offset(2)
         @include in-page-without-sidebar
-            figcaption
-                display: flex
-                justify-content: space-between
-                align-items: baseline
-                p
-                    max-width: columns(8)
-                *
-                    flex: 1 1
-                .credit
-                    margin-top: 0
-                    text-align: right
+            figure
+                &.image-portrait,
+                &.image-square
+                    figcaption
+                        margin-left: offset(2)
+                figcaption
+                    display: flex
+                    justify-content: space-between
+                    align-items: baseline
+                    p
+                        max-width: columns(8)
+                    *
+                        flex: 1 1
+                    .credit
+                        margin-top: 0
+                        text-align: right
 
     &--carousel
         overflow: hidden
