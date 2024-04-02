@@ -1,22 +1,25 @@
-.locations__taxonomy
-    .locations
+.locations--list
+    .location + .location
+        margin-top: $spacing-4
+    @include media-breakpoint-up(desktop)
         .location
-            @include media-breakpoint-up(desktop)
-                .media
-                    width: col(4)
-                &-content
-                    width: col(6)
+            .media
+                width: columns(4)
+            &-content
+                width: columns(6)
 
 .location
     display: flex
-    gap: $grid-gutter
+    gap: var(--grid-gutter)
     .media
         order: -1
     &-title
         @include icon(arrow-right, after)
+    &-description
+        margin-top: $spacing-3
     @include media-breakpoint-down(desktop)
         flex-direction: column
         .media
             // TODO : REMOVE HALF
-            margin-left: half(-$grid-gutter)
-            margin-right: half(-$grid-gutter)
+            margin-left: var(--grid-gutter-negative)
+            margin-right: var(--grid-gutter-negative)
