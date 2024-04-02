@@ -159,3 +159,15 @@
   @include media-breakpoint-up(xxl)
     --grid-gutter: #{$grid-gutter-xxl}
     --grid-gutter-negative: #{-$grid-gutter-xxl}
+
+  // -------------- //
+  //     MARGIN     //
+  // ---------------//
+  --heading-margin-top: #{$heading-margin-top}
+  --heading-margin-bottom: #{$heading-margin-bottom}
+  @include in-page-with-sidebar
+    --heading-margin-top: #{ $heading-margin-top-with-sidebar}
+    --heading-margin-bottom: #{$heading-margin-bottom-with-sidebar}
+  @include in-page-without-sidebar
+    --heading-margin-top: #{ $heading-margin-top-desktop}
+    --heading-margin-bottom: #{$heading-margin-bottom-desktop}

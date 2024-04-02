@@ -16,20 +16,15 @@
         --block-space-y: #{$block-space-y-with-sidebar}
 
 .heading
-    --heading-margin-top: #{$heading-margin-top}
-    --heading-margin-bottom: #{$heading-margin-bottom}
     margin-bottom: var(--heading-margin-bottom)
     &:not(:first-child)
         margin-top: var(--heading-margin-top)
-        @include in-page-with-sidebar
-            --heading-margin-top: #{ $heading-margin-top-with-sidebar}
-            --heading-margin-bottom: #{$heading-margin-bottom-with-sidebar}
-        @include in-page-without-sidebar
-            --heading-margin-top: #{ $heading-margin-top-desktop}
-            --heading-margin-bottom: #{$heading-margin-bottom-desktop}
     @include in-page-without-sidebar
         h2
             width: columns(8)
+
+.heading + .block
+    margin-top: var(--heading-margin-bottom)
 
 // Specific
 $backgrounded_blocks: ".block-call_to_action, .block-chapter--accent_background, .block-chapter--alt_background, .block-timeline--horizontal, .block-pages--cards"
@@ -41,10 +36,6 @@ $backgrounded_blocks: ".block-call_to_action, .block-chapter--accent_background,
     .block:last-child
         &:is(#{$backgrounded_blocks})
             margin-bottom: 0
-
-// Heading + chapter
-.heading + .block-chapter
-    margin-top: $spacing-3
 
 // Following chapters
 .block-chapter
