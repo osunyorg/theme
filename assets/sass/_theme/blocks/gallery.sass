@@ -14,7 +14,10 @@
             width: 100%
         figcaption
             @include small
+            margin-top: $spacing-2
             position: relative
+            > * + *
+                margin-top: $spacing-1
             p
                 margin-bottom: 0
         .credit
@@ -37,10 +40,7 @@
             &--with-text
                 @include in-page-without-sidebar
                     @include flexbox-grid(4)
-                figure
-                    display: flex
-                    flex-direction: column
-                    gap: $spacing-2
+
     &--large
         figure
             margin-bottom: $spacing-5
@@ -54,6 +54,19 @@
                     picture
                         width: columns(8)
                         margin-left: offset(2)
+        @include in-page-without-sidebar
+            figcaption
+                display: flex
+                justify-content: space-between
+                align-items: baseline
+                p
+                    max-width: columns(8)
+                *
+                    flex: 1 1
+                .credit
+                    margin-top: 0
+                    text-align: right
+
     &--carousel
         overflow: hidden
         position: relative
@@ -104,10 +117,6 @@
                             height: $block-gallery-carousel-max-height
                             width: auto
                             max-width: none
-                figcaption
-                    margin-top: $spacing-2
-                    > * + *
-                        margin-top: $spacing-1
 
             &__arrows
                 margin-left: pxToRem(-18)

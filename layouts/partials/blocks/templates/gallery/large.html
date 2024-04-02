@@ -27,9 +27,14 @@
                 aria-label="{{- i18n "commons.lightbox.link.title" -}}">
             </a>
           {{ end }}
-          {{ with .text }}
+          {{ if or .text .credit }}
             <figcaption>
-              <p>{{- . | safeHTML -}}</p>
+              {{ with .text }}
+                <p>{{ . | safeHTML }}</p>
+              {{ end }}
+              {{ with .credit }}
+                <div class="credit">{{ . | safeHTML }}</div>
+              {{ end }}
             </figcaption>
           {{ end }}
         </figure>
