@@ -1,5 +1,8 @@
-<div class="locations locations--list">
+<div class="locations locations--{{- site.Params.locations.index.layout -}}">
   {{ range .Paginator.Pages }}
-    {{ partial "locations/location.html" . }}
+    {{ partial "locations/location.html" (dict 
+        "location" .
+        "heading" "h2"
+      ) }}
   {{ end }}
 </div>

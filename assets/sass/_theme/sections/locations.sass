@@ -1,25 +1,45 @@
-.locations--list
-    .location + .location
-        margin-top: $spacing-4
-    @include media-breakpoint-up(desktop)
-        .location
-            .media
-                width: columns(4)
-            &-content
-                width: columns(6)
+.locations
+    &--list
+        .location + .location
+            margin-top: $spacing-4
+        @include media-breakpoint-up(desktop)
+            .location
+                flex-direction: row
+                .media
+                    width: columns(4)
+                &-content
+                    width: columns(6)
+    &--grid
+        .location-title
+            @include h3
+        @include in-page-with-sidebar
+            @include grid(2)
+        @include in-page-without-sidebar
+            @include grid(4)
 
 .location
     display: flex
-    gap: var(--grid-gutter)
+    gap: $spacing-3 var(--grid-gutter)
+    flex-direction: column
+    position: relative
+    a
+        @include stretched-link
+        text-decoration: none
     .media
         order: -1
+        aspect-ratio: 1.3
+        background: var(--color-background-alt)
+        img
+            display: block
+            width: 100%
+            height: 100%
+            object-fit: cover
     &-title
-        @include icon(arrow-right, after)
+        @include icon(arrow, after, true)
+        @include hover-translate-icon(after)
     &-description
         margin-top: $spacing-3
     @include media-breakpoint-down(desktop)
-        flex-direction: column
         .media
-            // TODO : REMOVE HALF
             margin-left: var(--grid-gutter-negative)
             margin-right: var(--grid-gutter-negative)
