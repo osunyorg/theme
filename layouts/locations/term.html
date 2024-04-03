@@ -4,8 +4,7 @@
   <div class="document-content" itemscope itemtype="https://schema.org/EducationalOrganization">
     <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
-    {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
-    {{ with .Summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
+    {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
 
     {{ partial "locations/summary.html" (dict
         "context" .
@@ -14,6 +13,24 @@
 
     {{ partial "contents/list.html" . }}
 
-    {{ partial "hooks/before-document-content-end.html" . }}
+    <div class="container">
+      <ol class="programs">
+        {{- range .Pages -}}
+          <li>
+            {{- $title := partial "PrepareHTML" .Title -}}
+            <a href="{{ .Permalink }}" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+              {{- $title -}}
+            </a>
+            {{ if .Params.summary }}
+              <p class="description">
+                {{- partial "PrepareHTML" .Params.summary -}}
+              </p>
+            {{ end }}
+          </li>
+        {{- end -}}
+      </ol>
+
+      {{ partial "commons/pagination.html" . }}
+    </div>
   </div>
 {{ end }}
