@@ -14,22 +14,19 @@
     {{ partial "contents/list.html" . }}
 
     <div class="container">
-      <ol class="programs">
-        {{- range .Pages -}}
-          <li>
-            {{- $title := partial "PrepareHTML" .Title -}}
-            <a href="{{ .Permalink }}" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-              {{- $title -}}
-            </a>
-            {{ if .Params.summary }}
-              <p class="description">
-                {{- partial "PrepareHTML" .Params.summary -}}
-              </p>
-            {{ end }}
-          </li>
-        {{- end -}}
-      </ol>
 
+      {{ with .Params.diplomas }}
+
+        {{/*  Get diplomas collection from diploma's paths  */}}
+        {{ $diplomas := slice }}
+        {{ range . }}
+          {{ with site.GetPage (printf "/diplomas/%s" .path) }}
+            {{ $diplomas = $diplomas | append . }}
+          {{ end }}
+        {{ end }}
+
+        {{ partial "diplomas/diplomas.html" ( dict "diplomas" $diplomas ) }}
+      {{ end }}
       {{ partial "commons/pagination.html" . }}
     </div>
   </div>
