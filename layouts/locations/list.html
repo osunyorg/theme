@@ -1,9 +1,8 @@
 {{ define "main" }}
-  {{ partial "diplomas/hero-list.html" . }}
+  {{ partial "locations/hero-list.html" . }}
 
   <div class="document-content">
-
-    {{ partial "diplomas/summary.html" (dict
+    {{ partial "locations/summary.html" (dict
         "with_container" true
         "context" .
       ) }}
@@ -11,7 +10,8 @@
     {{ partial "contents/list.html" . }}
 
     <div class="container">
-      {{ partial "diplomas/diplomas.html" ( dict "diplomas" .Paginator.Pages ) }}
+      {{ partial "locations/locations.html" . }}
+      {{ partial "commons/pagination.html" . }}
     </div>
   </div>
 

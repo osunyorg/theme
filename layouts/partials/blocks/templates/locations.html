@@ -1,0 +1,30 @@
+{{ $block := .block }}
+{{ $block_class := partial "GetBlockClass" .block }}
+{{ $layout := .block.data.layout | default "grid" }}
+
+{{- with .block.data -}}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "description" .description
+          "heading_level" $block.ranks.self
+        )}}
+
+        <div class="locations locations--{{- $layout }}">
+          {{ $location_heading := printf "h%d" ( $block.ranks.children | default 2 ) }}
+          {{ range .locations }}
+            {{ $location := site.GetPage ( printf "/locations/%s" .slug ) }}
+            {{ with $location }}
+              {{ partial "locations/location.html" (dict 
+                "location" .
+                "heading" $location_heading
+              ) }}
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+{{- end -}}

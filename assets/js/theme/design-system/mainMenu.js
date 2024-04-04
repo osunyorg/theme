@@ -1,4 +1,4 @@
-import { breakpoints } from '../utils/breakpoints';
+import { breakpoints, isMobile } from '../utils/breakpoints';
 import { a11yClick } from '../utils/a11y';
 
 const CLASSES = {
@@ -59,16 +59,15 @@ class MainMenu {
     }
 
     resize () {
-        const isMobile = window.innerWidth <= breakpoints.md;
         document.documentElement.style.setProperty('--header-height', this.element.offsetHeight + 'px');
         document.documentElement.style.setProperty('--header-menu-max-height', (window.innerHeight - this.element.offsetHeight) + 'px');
 
         // is state changed ?
-        if (this.state.isMobile === isMobile) {
+        if (this.state.isMobile === isMobile()) {
             return null;
         }
 
-        this.state.isMobile = isMobile;
+        this.state.isMobile = isMobile();
 
         this.closeEverything();
     }
