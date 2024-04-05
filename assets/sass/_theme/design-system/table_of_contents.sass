@@ -6,12 +6,12 @@
     right: 0
     bottom: 0
     margin-top: 0
-    z-index: $zindex-toc
-    width: calc(#{col-outside-container(4)} + #{$grid-gutter} * 2)
+    z-index: $zindex-toc-offcanvas
+    width: calc(#{columns(4)} + var(--grid-gutter) * 2)
     transform: translateX(100%)
     transition: var(--toc-transition-duration) transform ease-in-out
     @include media-breakpoint-down(desktop)
-        width: calc(100% - #{$grid-gutter})
+        width: calc(100% - var(--grid-gutter))
     &.is-opened
         transform: translateX(0)
     &[aria-hidden="true"]
@@ -21,13 +21,13 @@
         flex-direction: column
         height: 100%
     .toc-title
-        border-bottom: 1px solid $color-border
+        border-bottom: 1px solid var(--color-border)
         font-size: $toc-title-font-size
-        padding: $spacing0 $spacing1
+        padding: $spacing-2 $spacing-3
         @include media-breakpoint-up(desktop)
             font-size: $toc-title-font-size-desktop
-            padding: $header-nav-padding-y $grid-gutter calc(#{$header-nav-padding-y} + 1px)
-            padding: calc((var(--header-height)) / 2 - #{$body-size}) $grid-gutter
+            padding: $header-nav-padding-y var(--grid-gutter) calc(#{$header-nav-padding-y} + 1px)
+            padding: calc((var(--header-height)) / 2 - #{$body-size}) var(--grid-gutter)
             padding-top: 0
             padding-bottom: 0
             line-height: calc(var(--header-height) - 1px)
@@ -39,9 +39,9 @@
         max-height: 100%
         > ol
             flex: 1
-            padding: $spacing1
+            padding: $spacing-3
             @include media-breakpoint-up(desktop)
-                padding: $spacing1 $grid-gutter
+                padding: $spacing-3 var(--grid-gutter)
             > li:first-child
                 margin-top: 0
     button
@@ -49,10 +49,10 @@
         @include icon-block(close, after)
             margin-right: -14px
         align-items: center
-        border-top: 1px solid $color-border
+        border-top: 1px solid var(--color-border)
         display: flex
         justify-content: space-between
-        padding: 0 $spacing1
+        padding: 0 $spacing-3
         line-height: $body-line-height
         @include media-breakpoint-up(desktop)
             border-top: 0
@@ -62,9 +62,9 @@
             padding-top: 0
             padding-bottom: 0
             line-height: var(--header-height)
-            right: $grid-gutter
+            right: var(--grid-gutter)
             &::after
-                margin-left: $spacing0
+                margin-left: $spacing-2
 
 .toc-cta
     display: flex
@@ -73,9 +73,9 @@
         display: none
     @include media-breakpoint-up(desktop)
         @include container
-        background: $color-background
+        background: var(--color-background)
         justify-content: end
-        margin-bottom: $spacing3
+        margin-bottom: $spacing-5
         position: sticky
         text-align: right
         top: calc(var(--header-height) * -1)
@@ -86,16 +86,16 @@
         body.offcanvas-toc &
             display: flex
     @include media-breakpoint-down(desktop)
-        border-top: 1px solid $color-border
+        border-top: 1px solid var(--color-border)
         position: fixed
         bottom: 0
         background: $toc-background-color
         left: 0
         width: 100%
-        padding: 0 half($grid-gutter-sm)
+        padding: 0 var(--grid-gutter)
         z-index: $zindex-toc-cta
     button
-        @include button-icon(toc)
+        @include link-icon(toc)
         border: 0
         line-height: inherit
         cursor: pointer
@@ -123,24 +123,25 @@
 
     // Only desktop and in page with sidebar
     @include in-page-with-sidebar
-        @include container-margin-left
+        margin-left: grid-external-space()
         pointer-events: none
         top: 0
         left: 0
         margin-top: 0
         height: 100%
         position: absolute
-        width: col-outside-container(4)
+        width: columns(4)
+        z-index: $zindex-toc
         .toc-content
             overflow-y: auto
             max-height: calc(100vh - var(--header-height))
-            padding-bottom: $spacing2
+            padding-bottom: $spacing-4
             pointer-events: auto
-            @include sticky($spacing1)
+            @include sticky($spacing-3)
             html.is-scrolling-down &
-                max-height: calc(100vh - #{$spacing1})
+                max-height: calc(100vh - #{$spacing-3})
         .toc-title
-            color: $color-text-alt
+            color: var(--color-text-alt)
         button
             display: none
 
@@ -184,9 +185,7 @@
             a
                 color: $toc-color
                 display: block
-                text-decoration-color: transparent
-                &:hover
-                    text-decoration-color: $toc-color
+                @extend %underline-on-hover
         .active
             color: $toc-active-color
             pointer-events: none

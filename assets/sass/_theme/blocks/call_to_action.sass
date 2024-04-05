@@ -4,7 +4,7 @@
     .top
         margin-bottom: 0
         .block-title
-            margin-bottom: $spacing0
+            margin-bottom: $spacing-2
             + .description
                 margin-top: 0
         .description
@@ -17,7 +17,7 @@
         .description
             a
                 color: inherit
-                text-decoration-color:  $block-call-to-action-color
+                text-decoration-color: $block-call-to-action-color
             p
                 @include h2
         .actions
@@ -27,27 +27,24 @@
                     flex-direction: column
             a
                 @include meta
+                @extend %underline-on-hover
                 color: $block-call-to-action-color
-                margin-right: $spacing1
-                margin-top: $spacing1
-                text-decoration-color: rgba($block-call-to-action-color, .3)
+                margin-right: $spacing-3
+                margin-top: $spacing-3
                 display: inline-block
-                &:hover
-                    text-decoration-color: $block-call-to-action-color
+                text-decoration-color: alphaColor($block-call-to-action-color, 0.3)
                 &:first-child
-                    @include btn
-                    background: $block-call-to-action-button-background
-                    color: $block-call-to-action-button-color
-                    transition: background .3s ease, color .3s ease
-                    &:hover,
-                    &:focus-visible,
-                    &:focus
-                        background: $block-call-to-action-button-hover-background
-                        color: $block-call-to-action-button-hover-color
+                    --btn-background: #{$block-call-to-action-button-background}
+                    --btn-color: #{$block-call-to-action-button-color}
+                    --btn-hover-background: #{$block-call-to-action-button-hover-background}
+                    --btn-hover-color: #{$block-call-to-action-button-hover-color}
+                    --btn-border: none
+                    --btn-min-width: #{columns(2)}
+                    @extend .button
                 &:last-child
                     margin-bottom: 0
         * + .actions
-            margin-top: calc(#{$spacing2} - #{$spacing1})
+            margin-top: $spacing-3
         img
             display: block
 
@@ -56,13 +53,13 @@
         padding-top: 0
         padding-bottom: 0
         .call_to_action
-            padding: $spacing3 0
+            padding: var(--block-space-y) 0
             .actions
                 a
                     &:last-child
                         margin-bottom: 0
         .call_to_action--with-image
-            padding-top: half($grid-gutter-sm)
+            padding-top: var(--grid-gutter)
             display: flex
             flex-direction: column
             > *
@@ -80,7 +77,7 @@
             > div
                 // TODO : simplifier l'application d'une couleur de fond sur le CTA avec sidebar et sans sidebar
                 background-color: var(--cta-background-color)
-                padding: $grid-gutter col(1, 8)
+                padding: columns(1)
                 width: 100%
                 position: relative
                 &::after
@@ -91,27 +88,28 @@
                     top: 0
                     bottom: 0
                     left: 100%
-                    width: Max(#{$grid-gutter}, calc(50vw - #{half($grid-max-width)} + #{$grid-gutter}))
+                    // Calcul de la largeur nécessaire pour remplir l'espace droit entre le container et le bord droit de la fenêtre
+                    width: grid-external-space()
             &--with-image
                 picture
                     order: 1
-                    padding-left: col(1, 8)
-                    padding-right: offset(4, 8)
+                    padding-left: columns(1)
+                    padding-right: offset(4)
                     position: relative
                     z-index: 2
                     img
-                        margin-bottom: calc(-#{$grid-gutter} + -#{$spacing1})
+                        margin-bottom: calc(var(--grid-gutter-negative) + -#{$spacing-3})
                 > div
-                    padding-top: calc(#{$grid-gutter} + #{$spacing3})
+                    padding-top: calc(var(--grid-gutter) * 2 + #{$spacing-3})
 
     @include in-page-without-sidebar
         background-color: var(--cta-background-color)
         padding-top: 0
         padding-bottom: 0
         .block-content
-            padding: $spacing4 $grid-gutter
-            margin-left: -$grid-gutter
-            margin-right: -$grid-gutter
+            padding: $spacing-6 var(--grid-gutter)
+            margin-left: var(--grid-gutter-negative)
+            margin-right: var(--grid-gutter-negative)
         .call_to_action--with-image
             @include grid
             > div
@@ -139,7 +137,7 @@
                         &:first-child
                             margin-top: 0
                     a + a
-                        margin-top: $spacing1
+                        margin-top: $spacing-3
             &.call_to_action--with-title
                 .actions
                     grid-row: 2

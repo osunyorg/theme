@@ -1,0 +1,190 @@
+@mixin visually-hidden
+    clip: rect(0,0,0,0) !important
+    border: 0 !important
+    height: 1px !important
+    margin: -1px !important
+    overflow: hidden !important
+    padding: 0 !important
+    position: absolute !important
+    white-space: nowrap !important
+    width: 1px !important
+
+@mixin author-and-time-side-to-side
+    .post-meta
+        display: flex
+        flex-wrap: wrap
+    .post-author p::before
+        content: ' • '
+
+// Utilisé pour .post, .project, .page, .person, .program, .volume
+@mixin article($aspect-ratio: $article-media-aspect-ratio)
+    position: relative
+    display: flex
+    flex-direction: column
+    .media
+        @include handle-svg-fit
+        margin-bottom: $spacing-3
+        order: -1
+        overflow: hidden
+        img
+            display: block
+            object-fit: cover
+            @if $aspect-ratio
+                aspect-ratio: $aspect-ratio
+    p + time
+            margin-top: $spacing-2
+    .post-categories, .project-categories
+        @include list-reset
+        @include meta
+        margin-top: $spacing-2
+        margin-bottom: $spacing-2
+        position: relative
+        display: flex
+        flex-wrap: wrap
+        gap: 0 $spacing-2
+        z-index: 2
+        a
+            @include link(var(--color-accent))
+        li
+            margin: 0
+    time
+        @include meta
+        color: var(--color-text-alt)
+        display: block
+
+@mixin article-title
+    @include h3
+    a
+        @include stretched-link
+        display: block
+        text-decoration: none
+
+@mixin list-section
+    @include list-reset
+    > li
+        border-bottom: 1px solid var(--color-border)
+        padding-bottom: $spacing-3
+        padding-top: $spacing-3
+        position: relative
+        > .title
+            @include h2
+            transition: color 0.55s
+            @include media-breakpoint-down(desktop)
+                @include icon(arrow-right, after, true)
+                    bottom: $spacing-2
+                    position: absolute
+                    right: 0
+            @include media-breakpoint-up(desktop)
+                @include arrow-right-hover
+                display: block
+                &::after
+                    transform: translateX(0)
+                    position: relative
+                &:hover
+                    &::after
+                        transform: translateX($spacing-2)
+        a
+            text-decoration: none
+            &:hover
+                color: var(--color-accent)
+
+        @include media-breakpoint-down(desktop)
+            a:nth-child(2)
+                margin-top: calc(#{$spacing-2} / 2)
+            a, p
+                display: block
+        @include media-breakpoint-up(desktop)
+            align-items: baseline
+            display: flex
+            justify-content: space-between
+
+@mixin text-underline
+    text-decoration-color: var(--color-border)
+    text-decoration-line: underline
+    text-decoration-thickness: 1px
+    text-underline-offset: 3px
+    text-decoration-line: underline
+
+
+@mixin top-flex
+    @include in-page-without-sidebar
+        align-items: baseline
+        display: flex
+        .block-title
+            width: columns(4)
+            &:not(.hidden) + .description
+                margin-left: var(--grid-gutter)
+        .description
+            margin-top: 0
+            width: columns(8)
+
+@mixin collapsed-figcaption
+    figcaption
+        @include meta
+        color: var(--color-text-alt)
+        position: absolute
+        display: block
+        left: 0
+        right: 0
+        text-align: right
+        z-index: 10
+        &::before
+            @include meta
+            content: '©'
+            position: absolute
+            right: 0
+            top: 0
+            background: $hero-background-color
+            text-align: center
+            padding: $spacing-1
+            display: block
+        .credit-content
+            @include meta
+            background: $hero-background-color
+            display: none
+            padding: $spacing-1
+            padding-right: $spacing-3
+        a
+            color: inherit
+            text-decoration-color: inherit
+        &:focus
+            .credit-content
+                display: block
+        @include media-breakpoint-up(desktop)
+            &:before
+                padding-right: 0
+        @include media-breakpoint-down(desktop)
+            position: relative
+            background: var(--color-background)
+            &::before
+                background: transparent
+            .credit-content
+                display: block
+                background: transparent
+                position: relative
+    &:hover
+        figcaption .credit-content
+            display: block
+
+@mixin dropdown-i18n
+    position: relative
+    .dropdown-menu
+        margin-top: $header-nav-padding-y
+        right: 0
+        @include media-breakpoint-up(desktop)
+            padding-left: $spacing-3
+            padding-bottom: $spacing-2
+            padding-top: $spacing-2
+            padding-right: $spacing-3
+    li a
+        padding-bottom: $spacing-1
+        padding-top: $spacing-1
+        display: block
+        &.is-checked
+            display: flex
+            justify-content: space-between
+            align-items: center
+            gap: $spacing-4
+            text-decoration: none !important
+            @include icon(caret, after)
+                transform: rotate(-14deg) skewX(-30deg)

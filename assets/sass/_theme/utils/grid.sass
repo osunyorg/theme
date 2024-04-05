@@ -1,0 +1,39 @@
+@mixin container
+    margin-left: auto
+    margin-right: auto
+    padding-left: var(--grid-gutter)
+    padding-right: var(--grid-gutter)
+    width: var(--grid-width)
+    max-width: 100%
+
+@function columns($quantity)
+    $width: calc( (var(--column-width) * #{$quantity}) + var(--grid-gutter) * ( #{$quantity} - 1 ))
+    @return #{$width}
+
+@mixin grid($cols: 12, $breakpoint: false, $gap-y: var(--grid-gutter), $gap-x: var(--grid-gutter))
+    word-break: break-word
+    @if $breakpoint
+        @include media-breakpoint-up($breakpoint)
+            display: grid
+            grid-gap: $gap-y $gap-x
+            grid-template-columns: repeat($cols, 1fr)
+    @else
+        display: grid
+        grid-gap: $gap-y $gap-x
+        grid-template-columns: repeat($cols, 1fr)
+
+@mixin flexbox-grid($cols: 12, $gap-y: var(--grid-gutter), $gap-x: $gap-y)
+    display: flex
+    flex-wrap: wrap
+    gap: $gap-y $gap-x
+    > *
+        flex: 0 0 calc(#{100 / $cols}% - #{$gap-x} * #{($cols - 1) / $cols} )
+
+// Cette fonction retourne un nombre de colonne + une gouttière
+@function offset($quantity)
+    $width: calc( #{columns($quantity)} + var(--grid-gutter) )
+    @return #{$width}
+
+// Cette fonction calcule l'espace disponible entre la grille et le bord de l'écran
+@function grid-external-space
+    @return Max(var(--grid-gutter), calc((100vw - var(--grid-width)) / 2 + var(--grid-gutter)))

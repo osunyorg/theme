@@ -1,63 +1,24 @@
-.persons__page
-    .top
-        h2
-            a
-                @include icon(arrow-right, after, true)
-                    display: inline-flex
-                    margin-left: half($spacing0)
-                    transition: transform .3s ease
-                &:hover::after
-                    transform: translateX($spacing0)
-    // TODO : voir comment gérer les marges comme pour les blocs (pb footer)
-    section
-        padding-bottom:  $grid-gutter
-    ol.programs
-        li
-            justify-content: flex-start
-            @include media-breakpoint-up(desktop)
-                @include grid(2)
-            @include icon(arrow-right, after, true)
-                color: inherit
-                position: absolute
-                right: 0
-                top: $spacing1
-                transform: translateY(half($spacing0))
-                @include media-breakpoint-up(desktop)
-                    transform: translateY(half($spacing1))
-            a
-                color: inherit
-                @include stretched-link(before)
-                @include media-breakpoint-down(desktop)
-                    margin-right: $spacing1
-            p
-                margin-top: unset
-                &:nth-child(2)
-                    @include small
-            &:hover
-                color: $color-accent
-
 .person
     @include article
     word-break: break-word
-    gap: $spacing1
+    gap: $spacing-3
     .avatar
         align-self: start
         flex-shrink: 0
         order: -1
-        min-width: $spacing3
+        min-width: $spacing-5
     .name
         @include h4
         a
             @include stretched-link
             text-decoration: none
         + p
-            margin-top: half($spacing0)
+            margin-top: $spacing-1
     .description
         @include small
-
     @include media-breakpoint-down(lg)
         flex-direction: row
-        gap: $spacing1
+        gap: $spacing-3
         .avatar
             align-self: start
             flex-shrink: 0
@@ -76,7 +37,6 @@
         .avatar
             width: 100%
 
-
 section.persons,
 div.persons
     @include grid(1)
@@ -84,20 +44,18 @@ div.persons
     @include grid(4, lg)
     @include grid(6, xxl)
 
-
-
 ol.persons--list
     @include list-reset
     > li
-        border-bottom: 1px solid $color-border
-        padding-bottom: $spacing1
-        padding-top: $spacing1
+        border-bottom: 1px solid var(--color-border)
+        padding-bottom: $spacing-3
+        padding-top: $spacing-3
         position: relative
         transition: color 0.5s
         @include icon(arrow, after)
             margin-left: auto
         &:hover
-            color: $color-accent
+            color: var(--color-accent)
             justify-self: end
         a
             @include stretched-link
@@ -110,21 +68,21 @@ ol.persons--list
             align-items: baseline
             display: flex
             [itemprop="name"]
-                width: col(5)
+                width: columns(5)
             [itemprop="jobTitle"]
-                width: col(6)
-                margin-left: $grid-gutter
+                width: columns(6)
+                margin-left: var(--grid-gutter)
         @include media-breakpoint-down(desktop)
             &::after
                 position: absolute
                 right: 0
-                top: calc(#{$spacing1} + 10px)
+                top: calc(#{$spacing-3} + 10px)
 
 .avatar
     // @include aspect-ratio(50, 'img')
     background-color: $persons-avatar-background-color
     border-radius: 50%
-    // margin-bottom: $spacing2
+    // margin-bottom: $spacing-4
     overflow: hidden
     position: relative
     // width: 100%
@@ -145,81 +103,114 @@ ol.persons--list
     @include list-reset
     li
         @include media-breakpoint-down(desktop)
-            margin-bottom: $spacing1
+            margin-bottom: $spacing-3
             a
                 display: block
         @include media-breakpoint-up(desktop)
             display: inline-block
-            margin-right: $spacing2
+            margin-right: $spacing-4
     a
-        @include link
-        @include link-hovered-underline-only
+        @extend %underline-on-hover
         @include meta
         @include icon(arrow, after)
-            margin-left: $spacing1
+            margin-left: $spacing-3
 
 .persons__section
     * + .persons
-        margin-top: $spacing2
+        margin-top: $spacing-4
     .persons:last-child
-        padding-bottom: $spacing3
+        padding-bottom: $spacing-5
 
 .persons__page
     .hero
-        @include media-breakpoint-down(desktop)
-            padding-bottom: 0
-            margin-bottom: $spacing4
-            .avatar
-                width: col(6)
-                margin-top: $spacing1
-                margin-left: auto
-                transform: translateY(100px)
-                margin-top: calc(#{$spacing1} - 100px)
-        @include media-breakpoint-down(sm)
-            margin-bottom: $spacing4
-            .avatar
-                transform: translateY(18vw)
-                margin-top: calc(#{$spacing1} - 18vw)
-        @include media-breakpoint-up(desktop)
-            .content
-                align-items: center
-                display: flex
-                justify-content: space-between
-                margin-top: 0
-                h1
-                    margin-bottom: 0
-                    width: col(8)
-                .avatar
-                    margin-bottom: 0
-                    width: col(3)
+        &--with-image
+            .hero-text
+                margin-bottom: $spacing-3
+            figure picture
+                @extend .avatar
+            @include media-breakpoint-down(desktop)
+                .container
+                    margin-bottom: calc(#{columns(2)} + #{$spacing-5})
+                figure
+                    width: columns(4)
+                    margin-left: auto
+                    margin-bottom: calc(#{columns(2)} * -1)
+            @include media-breakpoint-down(md)
+                .container
+                    margin-bottom: calc(#{columns(3)} + #{$spacing-5})
+                figure
+                    width: columns(6)
+                    margin-bottom: calc(#{columns(3)} * -1)
+            @include media-breakpoint-up(desktop)
+                .content
+                    align-items: center
+                    display: flex
+                    justify-content: space-between
+                    margin-top: 0
+                    h1
+                        margin-bottom: 0
+                        width: columns(8)
+                    figure
+                        margin-bottom: 0
+                        width: columns(3)
     .roles
         a
             @include small
     .blocks
-        margin-top: $spacing3
+        margin-top: $spacing-5
     .person-objects
-        margin-top: $spacing3
+        margin-top: $spacing-5
         > * + *
-            margin-top: $spacing3
+            margin-top: $spacing-5
+        .top h2 a
+            @include icon(arrow-right, after, true)
+                display: inline-flex
+                margin-left: $spacing-1
+                transition: transform .3s ease
+            &:hover::after
+                transform: translateX($spacing-2)
     .person-posts
         article.post:last-child
             margin-bottom: 0
+    section
+        padding-bottom: $spacing-5
+    ol.programs
+        li
+            justify-content: flex-start
+            @include media-breakpoint-up(desktop)
+                @include grid(2)
+            @include icon(arrow-right, after, true)
+                color: inherit
+                position: absolute
+                right: 0
+                top: 1.5em
+            a
+                color: inherit
+                @include stretched-link(before)
+                @include media-breakpoint-down(desktop)
+                    margin-right: $spacing-3
+            p
+                margin-top: unset
+                &:nth-child(2)
+                    @include small
+            &:hover
+                color: var(--color-accent)
     @include media-breakpoint-down(lg)
         .roles
-            margin-top: $spacing2
+            margin-top: $spacing-4
     @include media-breakpoint-up(lg)
         .informations
             @include grid
-            margin-bottom: $spacing2
+            margin-bottom: $spacing-4
             > div:first-of-type
                 grid-column: 1 / 9
             .roles
                 grid-column: 9 / 13
                 text-align: right
             .lead + div
-                margin-top: $spacing2
+                margin-top: $spacing-4
     .contacts-details ul
         @include grid(2, md, 0)
         li
             margin-top: 0
-            margin-bottom: $spacing1
+            margin-bottom: $spacing-3

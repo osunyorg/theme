@@ -1,5 +1,7 @@
 .program
     @include article
+    h2, h3, .program-title
+        @include article-title
 
 div.programs,
 section.programs
@@ -13,7 +15,7 @@ ol.programs
             margin-top: unset
             white-space: nowrap
             @include media-breakpoint-up(desktop)
-                margin-left: $spacing1
+                margin-left: $spacing-3
 
 .programs__section
     .hero-program
@@ -21,86 +23,27 @@ ol.programs
         justify-content: end
         .container
             position: relative
+            
     &:not(.full-width)
         .document-content
             .lead
                 font-family: $lead-font-family
+                font-size: var(--lead-size)
                 font-weight: $lead-weight
-                line-height: $lead-line-height
-                @include media-breakpoint-up(desktop)
-                    font-size: $lead-size-desktop
+                line-height: var(--lead-line-height)
 
     ol.programs
-        margin-bottom: $spacing3
+        margin-bottom: $spacing-5
         li
             line-height: 1
-    .dropdown-share
-        position: relative
-        > button
-            @include button-icon(social)
-            &:after
-                margin-right: $icon-social-margin-right
-            color: $hero-color
-            border-color: $color-border
-            font-size: $program-share-font-size
-            transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
-            &:hover,
-            &:active,
-            &:focus
-                background: $color-background
-                color: $color-text
-            // a11y
-            &:active,
-            &:focus
-                box-shadow: inset 0 0 0 0.25rem rgba(white, .5)
-            @include media-breakpoint-up(desktop)
-                font-size: $program-share-font-size-desktop
-        .dropdown-menu
-            background: $hero-color
-            border-radius: px2rem(4)
-            bottom: 0
-            padding: 0
-            position: absolute
-            top: 0
-            width: 100%
-            .share
-                display: flex
-                align-items: center
-                height: 100%
-                li
-                    margin: 0
-                    flex: 1 1
-                    text-align: center
-            a
-                display: block
-                color: $hero-background-color
-    .buttons
-        @include meta
-        button, > a
-            display: flex
-            align-items: center
-            justify-content: space-between
-            width: 100%
-            border-radius: px2rem(4)
-        a[download]
-            @include button-icon(download)
-            text-decoration: none
-            color: $hero-background-color
-            background: $hero-color
-            border-color: $hero-color
-            font-size: $program-share-font-size
-            @include media-breakpoint-up(desktop)
-                font-size: $program-share-font-size-desktop
-
-        @include media-breakpoint-down(desktop)
-            margin-top: $spacing1
 
     .document-content
-        @include media-breakpoint-up(desktop)
+        .program-summary
+            margin-bottom: $spacing-5
             .lead
-                padding-bottom: $spacing2
+                margin-bottom: $spacing-3
         .content
-            padding-bottom: $spacing2
+            padding-bottom: $spacing-4
             section:not(.block) > * + *
                 margin-top: 1em
             .blocks
@@ -108,10 +51,9 @@ ol.programs
                     margin-top: 0
                     @include h3
                 @include media-breakpoint-down(desktop)
-                    padding-top: $spacing3
-                    margin-left: half(-$grid-gutter-sm)
-                    margin-right: half(-$grid-gutter-sm)
-
+                    padding-top: $spacing-5
+                    margin-left: var(--grid-gutter-negative)
+                    margin-right: var(--grid-gutter-negative)
                 @include media-breakpoint-up(desktop)
                     .container
                         padding-left: 0
@@ -125,15 +67,17 @@ ol.programs
         .document-content
             .content
                 > h2
-                    margin-bottom: $spacing2
+                    margin-bottom: $spacing-4
             section:not(:first-child):not(.block)
-                margin-top: $spacing3
+                margin-top: $spacing-5
     @include media-breakpoint-up(desktop)
         .document-content
+            .program-summary
+                margin-bottom: $spacing-6
             .content
                 @include grid(12, desktop)
                 position: relative
-                padding-bottom: $spacing4
+                padding-bottom: $spacing-6
                 > *
                     grid-column: 5/13
                 > h2
@@ -146,7 +90,7 @@ ol.programs
                     grid-column: 1/5
                     margin-bottom: 0
                 section:not(:first-child):not(.block)
-                    margin-top: $spacing4
+                    margin-top: $spacing-6
             section:first-of-type
                 .content
                     border-top: none
@@ -156,12 +100,12 @@ ol.programs
             font-size: unset
             line-height: 160%
             &:first-child 
-                border-top: 1px solid $color-border
+                border-top: 1px solid var(--color-border)
             &:last-child
-                border-bottom: 1px solid $color-border
+                border-bottom: 1px solid var(--color-border)
         th
             @include small
-            color: $color-text-alt
+            color: var(--color-text-alt)
             vertical-align: middle
         td
             text-align: right
@@ -175,11 +119,11 @@ ol.programs
     .list-persons
         @include list-reset
         > li
-            border-bottom: 1px solid $color-border
+            border-bottom: 1px solid var(--color-border)
             justify-content: flex-start
             position: relative
-            padding-bottom: $spacing0
-            padding-top: $spacing0
+            padding-bottom: $spacing-2
+            padding-top: $spacing-2
             @include media-breakpoint-up(sm)
                 @include grid(2)
             a
@@ -189,7 +133,7 @@ ol.programs
                 text-decoration: none
                 @include stretched-link(before)
                 @include media-breakpoint-down(desktop)
-                    margin-right: $spacing1
+                    margin-right: $spacing-3
                 @include icon(arrow-right, after, true)
                     color: inherit
                     position: absolute
@@ -201,13 +145,13 @@ ol.programs
                 margin-top: unset
                 @include small
                 @include media-breakpoint-up(desktop)
-                    margin-right: $spacing1
+                    margin-right: $spacing-3
                 @include media-breakpoint-down(sm)
                     display: block
             &:hover
-                color: $color-accent
+                color: var(--color-accent)
             &:first-child
-                border-top: 1px solid $color-border
+                border-top: 1px solid var(--color-border)
             a
             p
                 @include small
@@ -218,4 +162,4 @@ ol.programs
             @include icon(arrow, after, true)
             @include hover-translate-icon
             @include media-breakpoint-down(desktop)
-                margin-bottom: $spacing1
+                margin-bottom: $spacing-3

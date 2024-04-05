@@ -1,0 +1,176 @@
+\:root
+  // -------------- //
+  //     COLORS     //
+  // ---------------//
+  --color-accent: #{$color-accent}
+  --color-text: #{$color-text}
+  --color-text-alt: #{$color-text-alt}
+  --color-selection: #{$color-selection}
+  --color-selection-background: #{$color-selection-background}
+  --color-border: #{$color-border}
+  --color-background-alt: #{$color-background-alt}
+  --color-background: #{$color-background}
+
+  @if $has-dark-mode
+    @media (prefers-color-scheme: dark)
+      --color-accent: #{$color-dark-accent}
+      --color-text: #{$color-dark-text}
+      --color-text-alt: #{$color-dark-text-alt}
+      --color-border: #{$color-dark-border}
+      --color-background-alt: #{$color-dark-background-alt}
+      --color-background: #{$color-dark-background}
+      --color-selection: #{$color-dark-selection}
+      --color-selection-background: #{$color-dark-selection-background}
+
+  // -------------- //
+  //   TYPOGRAPHY   //
+  // ---------------//
+  --h1-size: #{$h1-size}
+  --h1-line-height: #{$h1-line-height}
+
+  --h2-size: #{$h2-size}
+  --h2-line-height: #{$h2-line-height}
+
+  --h3-size: #{$h3-size}
+  --h3-line-height: #{$h3-line-height}
+
+  --h4-size: #{$h4-size}
+  --h4-line-height: #{$h4-line-height}
+
+  --h5-size: #{$h5-size}
+  --h5-line-height: #{$h5-line-height}
+
+  --h6-size: #{$h6-size}
+  --h6-line-height: #{$h6-line-height}
+
+  --lead-size: #{$lead-size}
+  --lead-line-height: #{$lead-line-height}
+
+  --lead-sidebar-size: #{$lead-sidebar-size}
+  --lead-sidebar-line-height: #{$lead-sidebar-line-height}
+  
+  --lead-hero-size: #{$lead-hero-size}
+  --lead-hero-line-height: #{$lead-hero-line-height}
+
+  --body-size: #{$body-size}
+  --body-line-height: #{$body-line-height}
+
+  --small-size: #{$small-size}
+  --small-line-height: #{$small-line-height}
+
+  --signature-size: #{$signature-size}
+  --signature-line-height: #{$signature-line-height}
+
+  --meta-size: #{$meta-size}
+  --meta-line-height: #{$meta-line-height}
+
+  --quote-size: #{$quote-size}
+  --quote-line-height: #{$quote-line-height}
+
+  @include media-breakpoint-up(desktop)
+    --h1-size: #{$h1-size-desktop}
+    --h1-line-height: #{$h1-line-height-desktop}
+
+    --h2-size: #{$h2-size-desktop}
+    --h2-line-height: #{$h2-line-height-desktop}
+
+    --h3-size: #{$h3-size-desktop}
+    --h3-line-height: #{$h3-line-height-desktop}
+
+    --h4-size: #{$h4-size-desktop}
+    --h4-line-height: #{$h4-line-height-desktop}
+
+    --h5-size: #{$h5-size-desktop}
+    --h5-line-height: #{$h5-line-height-desktop}
+
+    --h6-size: #{$h6-size-desktop}
+    --h6-line-height: #{$h6-line-height-desktop}
+
+    --lead-size: #{$lead-size-desktop}
+    --lead-line-height: #{$lead-line-height-desktop}
+
+    --lead-sidebar-size: #{$lead-sidebar-size-desktop}
+    --lead-sidebar-line-height: #{$lead-sidebar-line-height-desktop}
+    
+    --lead-hero-size: #{$lead-hero-size-desktop}
+    --lead-hero-line-height: #{$lead-hero-line-height-desktop}
+
+    --body-size: #{$body-size-desktop}
+    --body-line-height: #{$body-line-height-desktop}
+
+    --small-size: #{$small-size-desktop}
+    --small-line-height: #{$small-line-height-desktop}
+
+    --signature-size: #{$signature-size-desktop}
+    --signature-line-height: #{$signature-line-height-desktop}
+
+    --meta-size: #{$meta-size-desktop}
+    --meta-line-height: #{$meta-line-height-desktop}
+
+    --quote-size: #{$quote-size-desktop}
+    --quote-line-height: #{$quote-line-height-desktop}
+
+  // -------------- //
+  //    BUTTONS     //
+  // ---------------//
+  --btn-font-family: #{$btn-font-family}
+  --btn-font-size: #{$btn-font-size}
+  --btn-font-weight: #{$btn-font-weight}
+  --btn-text-transform: #{$btn-text-transform}
+  --btn-color: #{$btn-color}
+  --btn-hover-color: #{$btn-hover-color}
+  --btn-background: #{$btn-background}
+  --btn-hover-background: #{$btn-hover-background}
+  --btn-border: #{$btn-border}
+  --btn-border-radius: #{$btn-border-radius}
+  --btn-padding: #{$btn-padding}
+  --btn-min-width: #{$btn-min-width}
+  @include media-breakpoint-up(desktop)
+    --btn-font-size: #{$btn-font-size-desktop}
+    --btn-padding: #{$btn-padding-desktop}
+    --btn-border: #{$btn-border-desktop}
+    --btn-border-radius: #{$btn-border-radius-desktop}
+    --btn-min-width: #{$btn-min-width-desktop}
+  
+  // -------------- //
+  //      GRID      //
+  // ---------------//
+
+  // Largeur maximum de la grille définie dans _configuration.sass
+  --grid-max-width: #{$grid-max-width}
+
+  // Largeur de la grille
+  // Elle inclut les gouttières extérieures
+  // Si la largeur de l'écran est inférieure à 1980px, on prend la largeur totale.
+  // La grille n'est jamais plus grande que 1980px
+  --grid-width: Min(var(--grid-max-width), 100vw)
+
+  // Largeur d'une colonne
+  // On soustrait à la largeur de la grille les 13 gouttières (les 2 extérieures et les 11 intérieures), puis on divise par 12
+  --column-width: calc( (var(--grid-width) - var(--grid-gutter) * 13) / 12)
+
+  // Taille de la gouttière
+  // Les largeurs des gouttières en fonction des breakpoints sont définies dans _configuration.sass
+  --grid-gutter: #{$grid-gutter}
+  --grid-gutter-negative: #{-$grid-gutter}
+  @include media-breakpoint-up(lg)
+    --grid-gutter: #{$grid-gutter-lg}
+    --grid-gutter-negative: #{-$grid-gutter-lg}
+  @include media-breakpoint-up(xxl)
+    --grid-gutter: #{$grid-gutter-xxl}
+    --grid-gutter-negative: #{-$grid-gutter-xxl}
+
+  // -------------- //
+  //     HEADING    //
+  // ---------------//
+
+  --heading-margin-top: #{$heading-margin-top}
+  --heading-margin-bottom: #{$heading-margin-bottom}
+  // In page without sidebar
+  @include media-breakpoint-up(desktop)
+    body:not(.full-width)
+      --heading-margin-top: #{ $heading-margin-top-with-sidebar}
+      --heading-margin-bottom: #{$heading-margin-bottom-with-sidebar}
+    main > .blocks, body.full-width
+      --heading-margin-top: #{ $heading-margin-top-desktop}
+      --heading-margin-bottom: #{$heading-margin-bottom-desktop}

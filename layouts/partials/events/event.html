@@ -41,7 +41,7 @@
           {{ end -}}
         </div>
       {{ end }}
-      {{ if and .Params.events_categories $show_status }}
+      {{ if and .Params.dates.status $show_status }}
         <p class="event-status">
           {{ if eq .Params.dates.status "current"}}
             {{- i18n "blocks.events.current" -}}
@@ -62,21 +62,21 @@
                 "length" site.Params.events.index.truncate_description
                 ) }}
             </p>
+
+            {{ if eq $layout "large" }}
+              <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+            {{ end }}
           </div>
         {{- end -}}
-        
-        {{ if and .Params.events_categories $show_category }}
-          <p class="event-categories">
-            {{- range $index, $category := .GetTerms "events_categories" -}}
-              <span>{{- $category.Title -}}</span>
-            {{- end -}}
-          </p>
-        {{ end }}
-      {{- end -}}
-
-      {{ if eq $layout "large" }}
-        <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
       {{ end }}
+
+      {{ if and .Params.events_categories $show_category }}
+        <p class="event-categories">
+          {{- range $index, $category := .GetTerms "events_categories" -}}
+            <span>{{- $category.Title -}}</span>
+          {{- end -}}
+        </p>
+      {{- end -}}
     </div>
     <div class="media">
       {{- if .Params.image -}}

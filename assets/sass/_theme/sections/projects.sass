@@ -1,0 +1,46 @@
+.project
+    @include article(auto)
+    .project-title
+        @include article-title
+
+.projects__section,
+.projects_categories__term
+    .projects
+        @include grid(2, md)
+
+.projects__page
+    .hero
+        .content
+            align-items: stretch
+        .hero-text
+            display: flex
+            flex-direction: column
+            gap: $spacing-3
+        .project-infos
+            --color-border: #{$project-infos-border-color}
+            --color-text: #{$project-infos-color-text}
+            --color-text-alt: #{$project-infos-color-text-alt}
+            --color-accent: #{$project-infos-color-accent}
+    @include media-breakpoint-up(sm)
+        .hero
+            .project-infos
+                width: columns(8)
+    @include media-breakpoint-up(md)
+        .hero
+            .project-infos
+                width: columns(6)
+    @include media-breakpoint-up(desktop)
+        .hero
+            .content
+                align-items: stretch
+            .hero-text
+                justify-content: space-between
+                gap: $spacing-5
+                width: columns(6)
+            .project-infos
+                width: columns(4)
+            figure
+                width: columns(6)
+
+.project-infos
+    @include section__page-infos

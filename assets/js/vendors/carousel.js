@@ -1,17 +1,21 @@
 import Splide from '@splidejs/splide';
 
-Splide.defaults = {
-    i18n: {
-        first: 'Aller au premier slide',
-        last: 'Aller au dernier slide',
-        next: 'Slide suivant',
-        pageX: 'Aller à la page %s',
-        pause: 'Mettre en pause le carousel',
-        play: 'Démarrer le carousel',
-        prev: 'Slide précedent',
-        slideX: 'Aller au slide %s'
-    }
-};
+let siteLang = document.querySelector('html').getAttribute('lang');
+
+if (siteLang == "fr") {
+    Splide.defaults = {
+        i18n: {
+            first: 'Aller au premier slide',
+            last: 'Aller au dernier slide',
+            next: 'Slide suivant',
+            pageX: 'Aller à la page %s',
+            pause: 'Mettre en pause le carousel',
+            play: 'Démarrer le carousel',
+            prev: 'Slide précedent',
+            slideX: 'Aller au slide %s'
+        }
+    };
+}
 
 class Carousel {
     constructor (element) {

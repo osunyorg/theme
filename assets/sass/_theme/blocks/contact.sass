@@ -3,7 +3,7 @@
         @include top-flex
         margin-bottom: 0
         + .informations
-            margin-top: $spacing2
+            margin-top: $spacing-4
 
     .informations
         p,
@@ -14,21 +14,20 @@
         [itemprop="name"]
             @include h4
         a
-            &:not(:hover)
-                text-decoration-color: transparent
+            @extend %underline-on-hover
         + ul
-            margin-top: $spacing2
+            margin-top: $spacing-4
     ul
         @include list-reset
         li
             display: flex
             flex-wrap: wrap
-            padding-bottom: $spacing0
+            padding-bottom: $spacing-2
             &:first-of-type
                 padding-top: 0
             + li
-                padding-top: $spacing0
-                border-top: 1px solid $color-border
+                padding-top: $spacing-2
+                border-top: 1px solid var(--color-border)
             @include media-breakpoint-down(desktop)
                 justify-content: end
                 flex-wrap: wrap
@@ -47,18 +46,18 @@
     time + time
         @include icon(arrow-right, before)
             display: inline-block
-            padding: 0 px2rem(7) 0 px2rem(3)
+            padding: 0 pxToRem(7) 0 pxToRem(3)
 
     @include in-page-without-sidebar
         .top
-            margin-bottom: $spacing2
+            margin-bottom: $spacing-4
         .informations
             display: flex
             margin-top: 0
             address
-                width: col(4)
+                width: columns(4)
                 margin-top: 0
             ul
                 margin-top: 0
-                width: col(8)
-                margin-left: $grid-gutter
+                width: columns(8)
+                margin-left: var(--grid-gutter)

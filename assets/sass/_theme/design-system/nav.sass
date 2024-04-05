@@ -11,7 +11,7 @@
         -webkit-flex-basis: 100vw
         display: none
         flex-basis: 100vw
-        margin-top: $spacing1
+        margin-top: $spacing-3
         max-height: var(--header-menu-max-height)
         overflow: auto
     a,
@@ -34,7 +34,7 @@
         //     text-decoration-color: transparent
         &[aria-expanded]
             @include icon(caret, after)
-                margin-left: px2rem(5)
+                margin-left: pxToRem(5)
                 transition: transform 0.15s
             &[aria-expanded="true"]
                 &::after
@@ -49,27 +49,25 @@
         display: none
         background: $header-dropdown-background
         @include media-breakpoint-down(desktop)
-            padding-bottom: $spacing1
+            padding-bottom: $spacing-3
         @include media-breakpoint-up(desktop)
-            padding: $spacing1
+            padding: $spacing-3
             position: absolute
             max-height: calc(100vh - var(--header-height))
             overflow: auto
         a
             color: $header-dropdown-color
-            &:hover,
-            &:focus
-                text-decoration-color: $header-dropdown-color
+            @extend %underline-on-hover
         .dropdown-menu-title
             @include h2
 
     .nav-level-1
         display: flex
         > li
-            > a, span
+            > a, > span
                 @include meta
                 display: block
-                padding: half($spacing0) $spacing0
+                padding: $spacing-1 $spacing-2
             &:last-child 
                 a, span
                     padding-right: 0
@@ -88,7 +86,7 @@
 
     .nav-level-3
         display: block
-        padding-top: half($spacing0)
+        padding-top: $spacing-1
         a,
         span
             @include meta
@@ -102,7 +100,7 @@
             align-items: center
         .nav-level-3
             li
-                margin-top: $spacing0
+                margin-top: $spacing-2
         .has-children:not(.header-i18n) // avoid 
             @if $header-dropdown-full
                 .dropdown-menu
@@ -111,7 +109,7 @@
                         // inset: 100% 0 auto 0
                         padding-left: 0
                         padding-right: 0
-                        padding-bottom: $spacing2
+                        padding-bottom: $spacing-4
                     &:not(.is-titled)
                         .nav-level-2
                             @include container
@@ -120,38 +118,38 @@
                         .container
                             align-items: baseline
                             display: flex
-                            gap: $grid-gutter
+                            gap: var(--grid-gutter)
                         .dropdown-menu-title
-                            width: col(5)
+                            width: columns(5)
                         .nav-level-2
-                            width: col(7)
+                            width: columns(7)
                             li
-                                margin-bottom: $spacing0
+                                margin-bottom: $spacing-2
             @else
                 position: relative
                 .dropdown-menu
                     margin-top: $header-nav-padding-y
                     min-width: 400px
-                    padding-left: $spacing1
-                    padding-top: $spacing0
-                    padding-right: $spacing1
+                    padding-left: $spacing-3
+                    padding-top: $spacing-2
+                    padding-right: $spacing-3
                     right: 0
                     text-align: right
                     &.is-titled
                         .dropdown-menu-title
                             @include h3
-                            margin-bottom: $spacing0
+                            margin-bottom: $spacing-2
                         .container
                             padding-left: 0
                             padding-right: 0
                 .nav-level-2
                     > li 
                         > a
-                            padding-bottom: half($spacing0)
-                            padding-top: half($spacing0)
+                            padding-bottom: $spacing-1
+                            padding-top: $spacing-1
                             display: block
                         + li.has-children
-                            margin-top: $spacing1
+                            margin-top: $spacing-3
 
         .header-i18n
             @include dropdown-i18n
@@ -170,14 +168,14 @@
             display: block
             li 
                 a, span
-                    padding: half($spacing0) 0
+                    padding: $spacing-1 0
                     display: block
             > li:not(:last-child) 
                 border-bottom: 1px solid #adb5bd
             > li
                 > a, > span
-                    padding-bottom: $spacing1
-                    padding-top: $spacing1
+                    padding-bottom: $spacing-3
+                    padding-top: $spacing-3
             li.has-children
                 [role="button"]
                     align-items: center
@@ -201,7 +199,7 @@
                 padding-right: 0
         .nav-level-2
             > .has-children + li
-                margin-top: $spacing1
+                margin-top: $spacing-3
         .nav-level-3
             padding-top: 0
 
@@ -215,8 +213,8 @@
         margin-right: 1rem
     a
         text-decoration: none
-        padding: $spacing0
-        font-size: px2rem(24)
+        padding: $spacing-2
+        font-size: pxToRem(24)
         &:hover
             opacity: 0.7
         &::after

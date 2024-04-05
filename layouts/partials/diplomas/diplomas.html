@@ -1,5 +1,7 @@
+{{ $diplomas := .diplomas }}
+
 <ul class="diplomas">
-  {{ range .Paginator.Pages }}
+  {{ range $diplomas }}
     <li>
       <a href="{{ .Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">
         {{- partial "PrepareHTML" .Title -}}
@@ -21,6 +23,7 @@
         </ol>
       </div>
     </li>
+
   {{ end }}
 </ul>
 

@@ -27,11 +27,10 @@
       {{- partial "hooks/before-main-end" . -}}
     </main>
     {{- partial "footer/footer.html" . -}}
-    {{- partial "footer/cookie-banner.html" . -}}
     {{- partial "footer/plausible.html" . -}}
     {{- partial "footer/js.html" . -}}
     {{- partial "footer/script.html" . -}}
-    {{- if or (not hugo.IsProduction) site.Params.debug -}}
+    {{- if or (not hugo.IsProduction) site.Params.debug.active -}}
       {{- partial "footer/debug.html" . -}}
     {{- end -}}
   </body>
