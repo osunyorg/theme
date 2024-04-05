@@ -2,7 +2,7 @@
 {{- $direction := "" -}}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
-    "open" ((printf "<%s itemprop='headline'>" $heading) | safeHTML)
+    "open" ((printf "<%s class='post-title' itemprop='headline'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
 {{ $index := .index}}

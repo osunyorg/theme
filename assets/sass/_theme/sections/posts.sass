@@ -1,5 +1,11 @@
 .post
     @include article
+    .post-title
+        @include h3
+        a
+            @include stretched-link
+            display: block
+            text-decoration: none
     time
         color: $post-time-color
         display: inline-block
@@ -19,7 +25,7 @@
             margin-bottom: $spacing-3
             padding-bottom: $spacing-3
             flex-direction: row
-            [itemprop=headline] + p
+            .post-title + p
                 margin-top: $spacing-2
             @include media-breakpoint-up(desktop)
                 @include grid
@@ -51,7 +57,7 @@
                     time
                         font-size: $h5-size
                 .post-content
-                    [itemprop=headline],
+                    .post-title,
                     > p
                         max-width: columns(6)
     .posts--grid
