@@ -224,6 +224,12 @@
             + .event 
                 margin-top: var(--grid-gutter)
             &-content
+                display: flex
+                flex-direction: column
+                .event-description
+                    order: 2
+                .event-description + .event-categories
+                    margin-bottom: $spacing-2
                 a 
                     @include stretched-link
             &-dates 
@@ -247,7 +253,7 @@
             @include media-breakpoint-up(desktop)
                 .media
                     width: columns(4)
-                &-dates
+                .event-dates
                     @include h3
                     margin-bottom: $spacing-4
                 .event-title,
@@ -261,7 +267,7 @@
                     margin-right: var(--grid-gutter-negative)
             @include in-page-without-sidebar
                 align-items: center
-                &-dates
+                .event-dates
                     @include h3
                 .event-title,
                 .event-subtitle, 
