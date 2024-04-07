@@ -1,5 +1,4 @@
 .note
-    position: relative
     margin-left: pxToRem($space-unit)
     &__call
         background: $color-background-alt
@@ -31,21 +30,21 @@
             border-bottom-right-radius: 0
         .note__content
             display: block
-        @include media-breakpoint-up(desktop)
-            &__content
-                border-radius: 4px
-                top: pxToRem(25)
-            &--left
-                .note__content
-                    left: 0
-                    border-top-left-radius: 0
-            &--right
-                .note__content
-                    right: 0
-                    border-top-right-radius: 0
-        @include media-breakpoint-down(desktop)
-            position: inherit
+    @include media-breakpoint-up(desktop)
+        position: relative
+        &__content
+            border-radius: 4px
+            top: pxToRem(25)
+        &--left
             .note__content
                 left: 0
+                border-top-left-radius: 0
+        &--right
+            .note__content
                 right: 0
-                margin-top: pxToRem(-$space-unit)
+                border-top-right-radius: 0
+    @include media-breakpoint-down(desktop)
+        .note__content
+            left: 0
+            right: 0
+            margin-top: pxToRem(-$space-unit)
