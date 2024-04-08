@@ -28,9 +28,9 @@
 {{- $ogImage := "" -}}
 {{- $twitterImage := "" -}}
 {{- $pagefindImage := "" -}}
-{{- if  site.Data.website.default.shared_image }}
+{{- if index site.Data.website.default "shared_image" -}}
   {{- $sharedImage = partial "GetMedia" (index site.Data.website.default.shared_image "id") -}}
-{{ end -}}
+{{- end -}}
 {{ with .Params.image }}
   {{- $sharedImage = partial "GetMedia" .id -}}
 {{ end }}
