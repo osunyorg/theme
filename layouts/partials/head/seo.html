@@ -24,11 +24,13 @@
   {{- end -}}
 {{- end -}}
 
+{{- $sharedImage := "" -}}
 {{- $ogImage := "" -}}
 {{- $twitterImage := "" -}}
 {{- $pagefindImage := "" -}}
-
-{{- $sharedImage := partial "GetMedia" site.Data.website.default.shared_image.id -}}
+{{- if  site.Data.website.default.shared_image }}
+  {{- $sharedImage = partial "GetMedia" (index site.Data.website.default.shared_image "id") -}}
+{{ end -}}
 {{ with .Params.image }}
   {{- $sharedImage = partial "GetMedia" .id -}}
 {{ end }}
