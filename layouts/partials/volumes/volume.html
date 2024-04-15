@@ -1,7 +1,7 @@
 <article class="volume" itemscope itemtype="https://schema.org/Book https://schema.org/PublicationVolume">
   <hgroup>
     <p class="suptitle" itemprop="volumeNumber">{{ i18n "volumes.volume_number" (dict "Number" .Params.Number) }}</p>
-    <h2><a href="{{ .Permalink }}" title="{{ i18n "commons.more_aria" (dict "Title" .Title) }}" itemprop="name">{{ partial "PrepareHTML" .Title }}</a></h2>
+    <h2 class="volume-title"><a href="{{ .Permalink }}" title="{{ i18n "commons.more_aria" (dict "Title" .Title) }}" itemprop="name">{{ partial "PrepareHTML" .Title }}</a></h2>
   </hgroup>
   <div class="media">
     {{- if .Params.image -}}

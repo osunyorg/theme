@@ -21,12 +21,32 @@
 
     {{ partial "contents/list.html" . }}
 
+    <div class="block block-sitemap" id="pages">
+      <div class="container">
+        <div class="block-content">
+          <h2>{{ i18n "sitemap.pages" }}</h2>
+          <ul>
+            {{ range (where .Site.Pages "Type" "pages") }}
+              {{ if eq .Parent.Path "/pages" }}
+                <li>
+                  <a href="{{ .Permalink }}">{{ safeHTML .Title }}</a>
+                  {{ if .Pages }}
+                    {{ partial "pages/sitemap_recursive_pages" .}}
+                  {{ end }}
+                </li>
+              {{ end }}
+            {{ end }}
+          </ul>
+        </div>
+      </div>
+    </div>
+
     {{ range .Site.Sections }}
-      {{ if ne .Type "sitemap" }}
+      {{ if and (ne .Type "sitemap") (ne .Type "pages") }}
         {{ $permalink := .Permalink }}
         <div class="block block-sitemap" id="{{ .Type }}">
           <div class="container">
-            <div class="block-content">
+            <div class="block-content">              
               <h2>
                 <a href="{{ $permalink }}">{{ safeHTML .Title }}</a>
               </h2>
@@ -42,5 +62,6 @@
         </div>
       {{ end }}
     {{ end }}
+
   </div>
 {{ end }}

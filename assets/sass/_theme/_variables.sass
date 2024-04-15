@@ -159,3 +159,18 @@
   @include media-breakpoint-up(xxl)
     --grid-gutter: #{$grid-gutter-xxl}
     --grid-gutter-negative: #{-$grid-gutter-xxl}
+
+  // -------------- //
+  //     HEADING    //
+  // ---------------//
+
+  --heading-margin-top: #{$heading-margin-top}
+  --heading-margin-bottom: #{$heading-margin-bottom}
+  // In page without sidebar
+  @include media-breakpoint-up(desktop)
+    body:not(.full-width)
+      --heading-margin-top: #{ $heading-margin-top-with-sidebar}
+      --heading-margin-bottom: #{$heading-margin-bottom-with-sidebar}
+    main > .blocks, body.full-width
+      --heading-margin-top: #{ $heading-margin-top-desktop}
+      --heading-margin-bottom: #{$heading-margin-bottom-desktop}

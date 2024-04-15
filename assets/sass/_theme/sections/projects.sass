@@ -1,5 +1,7 @@
 .project
     @include article(auto)
+    .project-title
+        @include article-title
 
 .projects__section,
 .projects_categories__term
@@ -14,6 +16,11 @@
             display: flex
             flex-direction: column
             gap: $spacing-3
+        .project-infos
+            --color-border: #{$project-infos-border-color}
+            --color-text: #{$project-infos-color-text}
+            --color-text-alt: #{$project-infos-color-text-alt}
+            --color-accent: #{$project-infos-color-accent}
     @include media-breakpoint-up(sm)
         .hero
             .project-infos

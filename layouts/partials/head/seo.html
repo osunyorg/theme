@@ -23,32 +23,29 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
-{{- $seoImage := "" -}}
-{{- if os.FileExists "static/assets/images/share.png" -}}
-  {{- $seoImage = printf "%s/assets/images/share.png" site.BaseURL -}}
+
+{{- $sharedImage := "" -}}
+{{- $ogImage := "" -}}
+{{- $twitterImage := "" -}}
+{{- $pagefindImage := "" -}}
+{{- if index site.Data.website.default "shared_image" -}}
+  {{- $sharedImage = partial "GetMedia" (index site.Data.website.default.shared_image "id") -}}
 {{- end -}}
-{{- if os.FileExists "static/assets/images/share.jpg" -}}
-  {{- $seoImage = printf "%s/assets/images/share.jpg" site.BaseURL -}}
-{{- end -}}
-{{- $ogImage := $seoImage -}}
-{{- $twitterImage := $seoImage -}}
-{{- $pagefindImage := $seoImage -}}
-{{- with .Params.image -}}
-  {{- $id := . -}}
-  {{ if isset . "id" -}}
-    {{- $id = .id -}}
-  {{- end -}}
-  {{- $image := partial "GetMedia" $id -}}
+{{ with .Params.image }}
+  {{- $sharedImage = partial "GetMedia" .id -}}
+{{ end }}
+
+{{- with $sharedImage -}}
   {{- $ogImage = partial "GetImageUrl" (dict
-          "media" $image
+          "media" .
           "size" "1200"
         ) -}}
   {{- $twitterImage = partial "GetImageUrl" (dict
-          "media" $image
+          "media" .
           "size" "1200"
         ) -}}
   {{- $pagefindImage = partial "GetImageUrl" (dict
-          "media" $image
+          "media" .
           "size" "244"
         ) -}}
 {{- end -}}

@@ -11,7 +11,7 @@
     {{ partial "contents/list.html" . }}
 
     <div class="container">
-      {{ partial "diplomas/diplomas.html" . }}
+      {{ partial "diplomas/diplomas.html" ( dict "diplomas" .Paginator.Pages ) }}
     </div>
   </div>
 
