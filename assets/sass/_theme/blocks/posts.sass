@@ -46,8 +46,18 @@
             .post-meta
                 display: block
                 line-height: 0 // Hack pour que les enfants de post-meta soient correctement 
-            .post-categories *
-                display: inline
+                > *
+                    margin-right: $spacing-3
+                .post-author
+                    display: inline
+                    p
+                        display: inline
+            .post-categories 
+                display: inline-block
+                *
+                    display: inline-block
+                li
+                    margin-right: $spacing-2
             // Désactiver le ratio forcé de la configuration $article-media-aspect-ratio
             .media
                 &, img
@@ -56,13 +66,6 @@
             .post
                 + .post
                     margin-top: $spacing-4
-                &-meta
-                    .post-author
-                        display: inline
-                        p
-                            display: inline
-                        &::after
-                            content:  ' — '
                 p[itemprop="articleBody"]
                     margin-top: 0
         @include media-breakpoint-up(desktop)
@@ -76,20 +79,10 @@
                         @include h2
                     p[itemprop="articleBody"]
                         margin-top: $spacing-3
-                    .post-meta 
-                        > *
-                            display: inline
-                            &:not(:last-child)::after
-                                content: ' — '
-                    .post-author
-                        p
-                            display: inline
                     .post-categories
                         li
                             a
                                 display: inline
-                            &:not(:last-child) a::after
-                                content: ','
 
         @include in-page-with-sidebar
             .large
