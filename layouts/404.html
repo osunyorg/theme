@@ -1,8 +1,13 @@
 {{ define "main" }}
-  {{ $error_message := i18n "page_not_found" }}
+  {{ $title := i18n "errors.error_404.title" }}
   {{ partial "header/hero.html"
         (dict
-          "title" $error_message
+          "title" $title
           "context" .
         )}}
+  <div class="container">
+    <p>
+      {{ safeHTML (i18n "errors.error_404.text") }}
+    </p>
+  </div>
 {{ end }}
