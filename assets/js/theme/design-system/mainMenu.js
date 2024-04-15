@@ -1,4 +1,4 @@
-import { breakpoints, isMobile } from '../utils/breakpoints';
+import { isMobile } from '../utils/breakpoints';
 import { a11yClick } from '../utils/a11y';
 
 const CLASSES = {
@@ -60,7 +60,7 @@ class MainMenu {
 
     resize () {
         document.documentElement.style.setProperty('--header-height', this.element.offsetHeight + 'px');
-        document.documentElement.style.setProperty('--header-menu-max-height', (window.innerHeight - this.element.offsetHeight) + 'px');
+        document.documentElement.style.setProperty('--header-menu-max-height', window.innerHeight - this.element.offsetHeight + 'px');
 
         // is state changed ?
         if (this.state.isMobile === isMobile()) {
@@ -79,7 +79,7 @@ class MainMenu {
         this.mainButton.setAttribute('aria-expanded', this.state.isOpened);
         this.menu.classList[classAction](CLASSES.mainMenuOpened);
 
-        // Close dropdown to avoid keeping overlay when mobile and menu closed 
+        // Close dropdown to avoid keeping overlay when mobile and menu closed
         if (this.state.isMobile && !this.state.isOpened) {
             this.state.hasDropdownOpened = false;
         }

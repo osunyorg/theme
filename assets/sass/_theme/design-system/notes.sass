@@ -1,18 +1,21 @@
 .note
     margin-left: pxToRem($space-unit)
+    display: inline-block
     &__call
+        @include meta
         background: $color-background-alt
         border-radius: 4px
         cursor: pointer
         display: inline
-        line-height: 100%
+        line-height: inherit
         min-width: $minimum-accessible-size
-        min-height: $minimum-accessible-size
+        line-height: inherit
+        display: block
         padding-left: $spacing-2
         padding-right: $spacing-2
         padding-bottom: 0
         text-align: center
-        @include meta
+        user-select: none
     &__content
         background: $color-text
         color: $color-background

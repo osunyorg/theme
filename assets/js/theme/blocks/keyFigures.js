@@ -4,10 +4,11 @@ import '../utils/number';
 
 // Compatibilities
 window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-                              window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 
 const OPTIONS = {
-    DURATION: 2000 // in ms
+    // in ms
+    DURATION: 2000
 };
 
 class KeyFigures {
@@ -85,7 +86,7 @@ class KeyFigures {
         return value.toFixed(decimalsLength);
     }
 
-    formatValue (value, separator = " ") {
+    formatValue (value, separator = ' ') {
         return value.toLocaleString('en').replace(',', separator);
     }
 

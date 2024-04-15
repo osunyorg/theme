@@ -1,3 +1,4 @@
+/* global L */
 const organizationsMaps = document.querySelectorAll('.block-organizations--map');
 
 class BlockOrganizations {
@@ -6,7 +7,8 @@ class BlockOrganizations {
 
         this.init();
     }
-    init() {
+
+    init () {
         this.markers = [];
         this.setMap = false;
         this.content = this.dom.querySelector('.map');
@@ -20,7 +22,7 @@ class BlockOrganizations {
 
         this.themeMarker = L.icon({
             iconUrl: this.content.getAttribute('data-marker-icon') || '/assets/images/map-marker.svg',
-            iconSize: [17, 26],
+            iconSize: [17, 26]
         });
         this.setOrganizations(map);
 
@@ -29,21 +31,22 @@ class BlockOrganizations {
             this.getMapBounds(map);
         } else {
             this.dom.classList.add(this.classHidden);
-            this.dom.setAttribute("aria-hidden", "true")
-            return;
+            this.dom.setAttribute('aria-hidden', 'true');
         }
     }
+
     setOrganizations (map) {
         this.organizationsList.forEach((organization) => {
             let latitude = parseFloat(organization.getAttribute('data-latitude')),
                 longitude = parseFloat(organization.getAttribute('data-longitude')),
                 mapLocation = [latitude, longitude];
-            if (!!latitude && !!longitude) {
+            if (Boolean(latitude) && Boolean(longitude)) {
                 this.newMarker(map, mapLocation, organization);
                 this.setMap = true;
             }
         });
     }
+
     listen (map) {
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -51,7 +54,7 @@ class BlockOrganizations {
         }).addTo(map);
     }
 
-    newMarker(map, mapLocation, organization) {
+    newMarker (map, mapLocation, organization) {
         let marker = new L.marker(mapLocation, {
             draggable: false,
             icon: this.themeMarker
@@ -61,11 +64,10 @@ class BlockOrganizations {
         this.markers.push(marker);
     }
 
-    getMapBounds(map) {
+    getMapBounds (map) {
         this.group = L.featureGroup(this.markers).addTo(map);
         map.fitBounds(this.group.getBounds());
     }
-
 }
 
 organizationsMaps.forEach((dom) => {
