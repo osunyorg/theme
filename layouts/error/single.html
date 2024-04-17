@@ -1,0 +1,13 @@
+{{ define "main" }}
+  {{ $title := i18n "errors.error_404.title" }}
+  {{ partial "header/hero.html"
+        (dict
+          "title" $title
+          "context" .
+        )}}
+  <div class="container">
+    <p>
+      {{ safeHTML (i18n "errors.error_404.text") }}
+    </p>
+  </div>
+{{ end }}
