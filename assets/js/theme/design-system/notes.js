@@ -44,7 +44,7 @@ class Note {
         });
     }
 
-    a11yDesactivation () {
+    a11yDisabling () {
         this.closeWithKeyboard = (event) => {
             if (event.keyCode === 27 || event.key === 'Escape' || event.key === 'Tab' || event.keyCode === 9) {
                 this.deactivateAllNotes();
@@ -62,7 +62,7 @@ class Note {
         document.addEventListener('click', this.closeWithClick);
     }
 
-    removeA11yDesactivation() {
+    removeA11yDisabling () {
         window.removeEventListener('keydown', this.closeWithKeyboard);
         document.removeEventListener('click', this.closeWithClick);
     }
