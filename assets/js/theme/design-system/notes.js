@@ -28,14 +28,14 @@ class Note {
         this.note.classList.add('note--active');
         this.content.removeAttribute('aria-hidden');
         this.definePosition();
-        this.a11yDesactivation();
+        this.a11yDisabling();
     }
 
     deactivate () {
         this.active = false;
         this.content.setAttribute('aria-hidden', 'true');
         this.note.classList.remove('note--active');
-        this.removeA11yDesactivation();
+        this.removeA11yDisabling();
     }
 
     deactivateAllNotes () {
