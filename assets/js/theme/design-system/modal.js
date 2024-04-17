@@ -44,6 +44,7 @@ class Modal {
         });
 
         window.addEventListener('click', (event) => {
+            console.log(this.element)
             if (event.target === this.element) {
                 this.toggle(false);
             }
