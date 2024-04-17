@@ -5,6 +5,13 @@ class Note {
         this.call = this.note.querySelector('.note__call');
         this.content = this.note.querySelector('.note__content');
         this.call.addEventListener('click', this.toggle.bind(this));
+        
+        this.note.addEventListener('keydown', (event) => {
+            if (event.keyCode === 13 || event.key === 'Enter' || event.keyCode === 32 || event.key === 'Space') {
+                event.preventDefault();
+                this.toggle();
+            }
+        });
     }
 
     toggle () {
