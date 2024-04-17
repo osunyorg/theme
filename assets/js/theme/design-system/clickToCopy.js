@@ -32,5 +32,5 @@ class ClickToCopy {
     const clickToCopy = document.querySelectorAll("[data-click-to-copy]");
     clickToCopy.forEach(button => {
         new ClickToCopy(button);
-    })
-})();
+    });
+}());
