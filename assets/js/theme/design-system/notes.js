@@ -3,6 +3,7 @@ class Note {
         this.note = note;
         this.active = false;
         this.call = this.note.querySelector('.note__call');
+        this.content = this.note.querySelector('.note__content');
         this.call.addEventListener('click', this.toggle.bind(this));
     }
 
@@ -18,18 +19,45 @@ class Note {
         this.deactivateAllNotes();
         this.active = true;
         this.note.classList.add('note--active');
+        this.content.removeAttribute('aria-hidden');
         this.definePosition();
+        this.a11yDesactivation();
     }
 
     deactivate () {
         this.active = false;
+        this.content.setAttribute('aria-hidden', 'true');
         this.note.classList.remove('note--active');
+        this.removeA11yDesactivation();
     }
 
     deactivateAllNotes () {
         window.notes.forEach(note => {
             note.deactivate();
         });
+    }
+
+    a11yDesactivation () {
+        this.closeWithKeyboard = (event) => {
+            if (event.keyCode === 27 || event.key === 'Escape' || event.key === 'Tab' || event.keyCode === 9) {
+                this.deactivateAllNotes();
+                this.call.focus();
+            }
+        };
+
+        this.closeWithClick = (event) => {
+            if (!event.target.closest('.note--active')) {
+                this.deactivateAllNotes();
+            }
+        };
+
+        window.addEventListener('keydown', this.closeWithKeyboard);
+        document.addEventListener('click', this.closeWithClick);
+    }
+
+    removeA11yDesactivation() {
+        window.removeEventListener('keydown', this.closeWithKeyboard);
+        document.removeEventListener('click', this.closeWithClick);
     }
 
     definePosition () {
