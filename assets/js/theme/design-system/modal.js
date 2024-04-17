@@ -1,3 +1,4 @@
+import { focusTrap } from '../utils/focus-trap';
 
 const CLASSES = {
     modalOpened: 'has-modal-opened'
@@ -37,7 +38,7 @@ class Modal {
             if (event.keyCode === 27 || event.key === 'Escape') {
                 this.toggle(false);
             } else if (event.key === "Tab" && this.state.isOpened) {
-                this.innerFocus(event);
+                focusTrap(event, this.element, this.state.isOpened);
                 event.preventDefault();
             }
         });
@@ -47,27 +48,6 @@ class Modal {
                 this.toggle(false);
             }
         });
-    }
-
-    innerFocus(event) {
-        const focusables = 'a, button, input, textarea, select, details, [tabindex], [contenteditable="true"]';
-        const elements = this.element.querySelectorAll(focusables);
-
-        const focusableInDialog = Array.from(elements).filter(element => element.tabIndex >= 0);
-        const firstFocusable = focusableInDialog[0];
-        const lastFocusable = focusableInDialog.at(-1);
-
-        if (!this.state.isOpened) {
-            return;
-        }
-
-        if (!this.element.contains(event.target) && event.shiftKey) {
-            lastFocusable.focus();
-        }
-        else if (!this.element.contains(event.target)) {
-            firstFocusable.focus();
-        }
-        firstFocusable.focus();
     }
 
     toggle(open = !this.state.isOpened) {

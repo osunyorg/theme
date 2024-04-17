@@ -1,3 +1,5 @@
+import { focusTrap } from '../utils/focus-trap';
+
 class Search {
     constructor(button, pageFind) {
         this.state = {
@@ -39,7 +41,7 @@ class Search {
                     this.button.focus();
                 }
             } else if (event.key === "Tab" && this.state.isOpened) {
-                this.innerFocus(event);
+                focusTrap(event, this.element, this.state.isOpened);
                 
                 this.buttonMore = this.element.querySelector('.pagefind-ui__results + button');
 
@@ -68,35 +70,15 @@ class Search {
             button.parentElement.removeChild(button);
         }
     }
-    innerFocus(event) {
-        const focusables = 'a, button, input, textarea, select, details, [tabindex], [contenteditable="true"]';
-        const elements = this.element.querySelectorAll(focusables);
-        
-        const focusableInDialog = Array.from(elements).filter(element => element.tabIndex >= 0);
-        const firstFocusable = focusableInDialog[0];
-        const lastFocusable = focusableInDialog.at(-1);
-
-        if (!this.state.isOpened) {
-            return;
-        }
-        if (!this.element.contains(event.target) && event.shiftKey) {
-            lastFocusable.focus();
-            event.preventDefault();
-        }
-        else if (!this.element.contains(event.target)) {            
-            firstFocusable.focus();
-            event.preventDefault();
-        }
-    }
 
     buttonMoreFocus() {
         const observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
-              mutation.addedNodes.forEach(addedNode => {
+            mutation.addedNodes.forEach(addedNode => {
                 if (addedNode instanceof HTMLAnchorElement) {
-                  addedNode.focus();
+                    addedNode.focus();
                 }
-              });
+                });
             });
         });   
         const observerConfig = { childList: true, subtree: true };
