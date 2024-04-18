@@ -4,6 +4,14 @@
 {{- $term := false -}}
 {{- $layout := .block.data.layout | default "grid" -}}
 {{- with .block.data }}
+  {{- $options := dict 
+    "hide_image" .hide_image
+    "hide_summary" .hide_summary
+    "hide_category" .hide_category
+    "hide_author" .hide_author
+    "hide_date" .hide_date
+  -}}
+
   {{ if .category }}
     {{- $term = site.GetPage (printf "/posts_categories%s" .category) -}}
   {{ end }}
@@ -39,6 +47,7 @@
           {{ partial (printf "blocks/templates/posts/%s.html" $layout) (dict
             "posts" .posts
             "heading_level" $block.ranks.children
+            "options" $options
           )}}
         {{ end }}
 

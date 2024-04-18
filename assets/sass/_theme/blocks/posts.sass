@@ -46,8 +46,20 @@
             .post-meta
                 display: block
                 line-height: 0 // Hack pour que les enfants de post-meta soient correctement 
-            .post-categories *
+                > *
+                    margin-right: $spacing-3
+                time
+                    vertical-align: baseline
+                .post-author
+                    display: inline
+                    p
+                        display: inline
+            .post-categories 
                 display: inline
+                *
+                    display: inline-block
+                li
+                    margin-right: $spacing-2
             // Désactiver le ratio forcé de la configuration $article-media-aspect-ratio
             .media
                 &, img
@@ -56,13 +68,6 @@
             .post
                 + .post
                     margin-top: $spacing-4
-                &-meta
-                    .post-author
-                        display: inline
-                        p
-                            display: inline
-                        &::after
-                            content:  ' — '
                 p[itemprop="articleBody"]
                     margin-top: 0
         @include media-breakpoint-up(desktop)
@@ -76,20 +81,10 @@
                         @include h2
                     p[itemprop="articleBody"]
                         margin-top: $spacing-3
-                    .post-meta 
-                        > *
-                            display: inline
-                            &:not(:last-child)::after
-                                content: ' — '
-                    .post-author
-                        p
-                            display: inline
                     .post-categories
                         li
                             a
                                 display: inline
-                            &:not(:last-child) a::after
-                                content: ','
 
         @include in-page-with-sidebar
             .large
@@ -152,13 +147,13 @@
         @include in-page-with-sidebar
             article
                 padding-bottom: $spacing-3
+                gap: var(--grid-gutter) // gap plutôt que marge pour l'affichage avec ou sans image
                 + article
                     margin-top: $spacing-3
                 .media
                     width: columns(2)
                 .post-content
                     width: columns(6)
-                    margin-left: var(--grid-gutter)
 
         @include in-page-without-sidebar
             article
@@ -218,12 +213,12 @@
             .highlight-post
                 .post
                     flex-direction: row
+                    gap: var(--grid-gutter) // pour le cas où on masque l'image
                     .media
                         width: columns(3)
                         margin-bottom: 0
                     .post-content
                         width: columns(5)
-                        margin-left: var(--grid-gutter)
             .list
                 article
                     @include grid(8, desktop, 0, 0)
@@ -258,17 +253,29 @@
             aspect-ratio: unset
         
         @include media-breakpoint-up(desktop)
-            .post
-                &.right
+            &:not(.without-images) 
+                .post
+                    &.right
+                        margin-left: auto
+                    &.portrait
+                        + .portrait
+                            margin-top: -30%
+                        + .square,
+                        + .landscape
+                            margin-top: -15%
+                        + .post:not(.portrait, .square, .landscape)
+                            margin-top: -5%
+            &.without-images
+                .right
                     margin-left: auto
-                &.portrait
+                .portrait
                     + .portrait
-                        margin-top: -30%
+                        margin-top: 0
                     + .square,
                     + .landscape
-                        margin-top: -15%
-                    + .post:not(.portrait, .square, .landscape)
                         margin-top: -5%
+                    + .post:not(.portrait, .square, .landscape)
+                        margin-top: -3%
 
         @include media-breakpoint-down(desktop)
             .post 
