@@ -4,7 +4,7 @@ const CLASSES = {
 };
 
 class Modal {
-    constructor(button) {
+    constructor (button) {
         this.button = button;
         this.id = this.button.getAttribute('data-open-modal');
         this.element = document.getElementById(this.id);
@@ -21,7 +21,7 @@ class Modal {
         this.listen();
     }
 
-    listen() {
+    listen () {
         this.button.addEventListener('click', () => {
             this.toggle(true);
         });
@@ -29,14 +29,14 @@ class Modal {
         this.closeButtons.forEach(button => {
             button.addEventListener('click', () => {
                 this.toggle(false);
-                this.button.focus()
+                this.button.focus();
             });
         });
 
         window.addEventListener('keydown', (event) => {
             if (event.keyCode === 27 || event.key === 'Escape') {
                 this.toggle(false);
-            } else if (event.key === "Tab" && this.state.isOpened) {
+            } else if (event.key === 'Tab' && this.state.isOpened) {
                 this.innerFocus(event);
                 event.preventDefault();
             }
@@ -49,13 +49,12 @@ class Modal {
         });
     }
 
-    innerFocus(event) {
-        const focusables = 'a, button, input, textarea, select, details, [tabindex], [contenteditable="true"]';
-        const elements = this.element.querySelectorAll(focusables);
-
-        const focusableInDialog = Array.from(elements).filter(element => element.tabIndex >= 0);
-        const firstFocusable = focusableInDialog[0];
-        const lastFocusable = focusableInDialog.at(-1);
+    innerFocus (event) {
+        const focusables = 'a, button, input, textarea, select, details, [tabindex], [contenteditable="true"]',
+            elements = this.element.querySelectorAll(focusables),
+            focusableInDialog = Array.from(elements).filter(element => element.tabIndex >= 0),
+            firstFocusable = focusableInDialog[0],
+            lastFocusable = focusableInDialog.at(-1);
 
         if (!this.state.isOpened) {
             return;
@@ -63,27 +62,25 @@ class Modal {
 
         if (!this.element.contains(event.target) && event.shiftKey) {
             lastFocusable.focus();
-        }
-        else if (!this.element.contains(event.target)) {
+        } else if (!this.element.contains(event.target)) {
             firstFocusable.focus();
         }
         firstFocusable.focus();
     }
 
-    toggle(open = !this.state.isOpened) {
+    toggle (open = !this.state.isOpened) {
         this.state.isOpened = open;
         const classAction = this.state.isOpened ? 'add' : 'remove';
 
         this.element.setAttribute('aria-hidden', !this.state.isOpened);
         document.documentElement.classList[classAction](CLASSES.modalOpened);
     }
-
 }
 
 // Selectors
 (function () {
-    const modalButtons = document.querySelectorAll("[data-open-modal]");
+    const modalButtons = document.querySelectorAll('[data-open-modal]');
     modalButtons.forEach(button => {
         new Modal(button);
-    })
-})();
+    });
+}());

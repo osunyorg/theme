@@ -47,7 +47,7 @@ class DraggableBlock {
         this.update();
     }
 
-    onClickItem(i) {
+    onClickItem (i) {
         if (!this.isManipulated) {
             this.goTo(i);
         }
@@ -57,7 +57,7 @@ class DraggableBlock {
         this.previous.addEventListener('click', () => {
             this.goTo(this.index-1);
         });
-    
+
         this.next.addEventListener('click', () => {
             this.goTo(this.index+1);
         });
@@ -80,7 +80,7 @@ class DraggableBlock {
                 this.isPointerDown = true;
                 this.content.classList.add('is-grabbing');
                 startX = event.clientX;
-            }    
+            }
         });
 
         this.block.addEventListener('pointermove', (event) => {
@@ -90,7 +90,7 @@ class DraggableBlock {
                 event.preventDefault();
                 this.items.forEach((item) => {
                     // on enlève le pointerevents pour que les liens ne soient pas cliquable au drag
-                    item.style.pointerEvents = "none";
+                    item.style.pointerEvents = 'none';
                 });
             }
         });
@@ -105,12 +105,12 @@ class DraggableBlock {
             }
         });
     }
-    
-    handleScroll() {
+
+    handleScroll () {
         // On écoute le scroll sur le contenu du bloc
         this.content.addEventListener('wheel', (event) => {
-            const deltaX = event.deltaX;
-            const deltaY = event.deltaY;
+            const deltaX = event.deltaX,
+                deltaY = event.deltaY;
             // navigation entre les items (comme onManipulationEnd)
             if (Math.abs(deltaX) > Math.abs(deltaY)) {
                 if (deltaX !== 0) {
@@ -130,11 +130,11 @@ class DraggableBlock {
         } else if (start < end - threshold) {
             this.goTo(this.index-1);
         }
-        
+
         this.content.classList.remove('is-grabbing');
         this.items.forEach((item) => {
             // On rend le pointervents pour pouvoir cliquer sur le lien si on drag pas
-            item.style.pointerEvents = "all";
+            item.style.pointerEvents = 'all';
         });
 
         setTimeout(() => {
