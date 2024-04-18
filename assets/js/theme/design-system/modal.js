@@ -5,7 +5,7 @@ const CLASSES = {
 };
 
 class Modal {
-    constructor(button) {
+    constructor (button) {
         this.button = button;
         this.id = this.button.getAttribute('data-open-modal');
         this.element = document.getElementById(this.id);
@@ -22,7 +22,7 @@ class Modal {
         this.listen();
     }
 
-    listen() {
+    listen () {
         this.button.addEventListener('click', () => {
             this.toggle(true);
         });
@@ -30,7 +30,7 @@ class Modal {
         this.closeButtons.forEach(button => {
             button.addEventListener('click', () => {
                 this.toggle(false);
-                this.button.focus()
+                this.button.focus();
             });
         });
 
@@ -58,13 +58,12 @@ class Modal {
         this.element.setAttribute('aria-hidden', !this.state.isOpened);
         document.documentElement.classList[classAction](CLASSES.modalOpened);
     }
-
 }
 
 // Selectors
 (function () {
-    const modalButtons = document.querySelectorAll("[data-open-modal]");
+    const modalButtons = document.querySelectorAll('[data-open-modal]');
     modalButtons.forEach(button => {
         new Modal(button);
-    })
-})();
+    });
+}());
