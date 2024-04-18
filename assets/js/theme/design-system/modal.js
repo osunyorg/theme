@@ -1,3 +1,4 @@
+import { focusTrap } from '../utils/focus-trap';
 
 const CLASSES = {
     modalOpened: 'has-modal-opened'
@@ -36,39 +37,21 @@ class Modal {
         window.addEventListener('keydown', (event) => {
             if (event.keyCode === 27 || event.key === 'Escape') {
                 this.toggle(false);
-            } else if (event.key === 'Tab' && this.state.isOpened) {
-                this.innerFocus(event);
+            } else if (event.key === "Tab" && this.state.isOpened) {
+                focusTrap(event, this.element, this.state.isOpened);
                 event.preventDefault();
             }
         });
 
         window.addEventListener('click', (event) => {
+            console.log(this.element)
             if (event.target === this.element) {
                 this.toggle(false);
             }
         });
     }
 
-    innerFocus (event) {
-        const focusables = 'a, button, input, textarea, select, details, [tabindex], [contenteditable="true"]',
-            elements = this.element.querySelectorAll(focusables),
-            focusableInDialog = Array.from(elements).filter(element => element.tabIndex >= 0),
-            firstFocusable = focusableInDialog[0],
-            lastFocusable = focusableInDialog.at(-1);
-
-        if (!this.state.isOpened) {
-            return;
-        }
-
-        if (!this.element.contains(event.target) && event.shiftKey) {
-            lastFocusable.focus();
-        } else if (!this.element.contains(event.target)) {
-            firstFocusable.focus();
-        }
-        firstFocusable.focus();
-    }
-
-    toggle (open = !this.state.isOpened) {
+    toggle(open = !this.state.isOpened) {
         this.state.isOpened = open;
         const classAction = this.state.isOpened ? 'add' : 'remove';
 
