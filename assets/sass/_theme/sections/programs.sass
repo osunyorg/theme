@@ -155,7 +155,8 @@ ol.programs
             a
             p
                 @include small
-    .related-posts
+    .related-posts,
+    .related-events
         .category-link
             display: block
             text-decoration: none
@@ -163,3 +164,22 @@ ol.programs
             @include hover-translate-icon
             @include media-breakpoint-down(desktop)
                 margin-bottom: $spacing-3
+    .block-events--list
+        @extend .events--list
+        // TODO : REFACTO
+        @include media-breakpoint-up(desktop)
+            .event
+                @include grid(8)
+                &-content
+                    order: 1
+                    grid-column: 6 span
+                    margin-top: $spacing-1
+                &-time
+                    display: inline
+                    &::before
+                        content: ' — '
+                .media
+                    grid-column: 2 span
+    .block-events--grid
+        .grid
+            @extend .events--grid

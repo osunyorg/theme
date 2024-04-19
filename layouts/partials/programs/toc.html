@@ -19,8 +19,10 @@
 {{ $roles := .context.Params.roles }}
 {{ $contacts := partial "GetTextFromHTML" .context.Params.contacts }}
 
-{{ $category := site.GetPage (printf "/posts_categories/%s" .context.Params.related_category ) }}
-{{ $related_posts := $category.Pages }}
+{{ $posts_category := site.GetPage (printf "/posts_categories/%s" .context.Params.related_category ) }}
+{{ $related_posts := $posts_category.Pages }}
+{{ $events_category := site.GetPage (printf "/events_categories/%s" .context.Params.related_category ) }}
+{{ $related_events := $events_category.Pages }}
 
 {{/* nav-link required for toggle active class */}}
 <nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc" }}">
@@ -110,7 +112,12 @@
     {{- end -}}
     {{- if gt (len $related_posts) 0 -}}
       <li>
-        <a href="#{{ urlize (i18n "programs.toc.related") }}">{{ i18n "programs.toc.related" }}</a>
+        <a href="#{{ urlize (i18n "programs.toc.related_posts") }}">{{ i18n "programs.toc.related_posts" }}</a>
+      </li>
+    {{- end -}}
+    {{- if gt (len $related_events) 0 -}}
+      <li>
+        <a href="#{{ urlize (i18n "programs.toc.related_events") }}">{{ i18n "programs.toc.related_events" }}</a>
       </li>
     {{- end -}}
   </ol>

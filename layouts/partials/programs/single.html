@@ -35,8 +35,17 @@
   {{- partial "programs/admission.html" . -}}
   {{- partial "programs/certification.html" . -}}
 
-  {{- $category := site.GetPage (printf "/posts_categories/%s" .Params.related_category ) -}}
-  {{- partial "programs/related.html" $category -}}
+  {{- $posts_category := site.GetPage (printf "/posts_categories/%s" .Params.related_category ) -}}
+  {{ partial "programs/related.html" (dict
+    "context" $posts_category
+    "type" "posts"
+  ) }}
+
+  {{- $events_category := site.GetPage (printf "/events_categories/%s" .Params.related_category ) -}}
+  {{ partial "programs/related.html" (dict
+    "context" $events_category
+    "type" "events"
+  ) }}
 
   {{- partial "hooks/before-program-end.html" . -}}
 </div>

@@ -1,18 +1,24 @@
-{{ if .Pages }}
-<section class="related-posts" id="{{ urlize (i18n "programs.toc.related") }}">
+{{ $type := .type }}
+
+{{ if .context.Pages }}
+<section class="related-{{ $type }}" id="{{ urlize (i18n (printf "programs.toc.related_%s" $type)) }}">
   <div class="container">
     <div class="content">
-      <h2 id="page-posts">{{ i18n "posts.title" }}</h2>
+      <h2 id="page-{{ $type }}">{{ i18n (printf "%s.title" $type) }}</h2>
       <a href="{{ .Permalink }}" class="category-link">
         {{ $category_name := safeHTML .Title | truncate 30 }}
-        {{ i18n "posts.see_all_in_program" (dict "Title" $category_name) }}
+        {{ i18n (printf "%s.see_all_in_program" $type) (dict "Title" $category_name) }}
       </a>
 
-      {{/*  Related posts  */}}
-      {{ $posts := first site.Params.programs.related_posts.quantity .Pages }}
-      {{ if gt (len $posts) 0 }}
+      {{/*  Related posts and events  */}}
+      {{$quantity := (index site.Params.programs (printf "related_%s" $type) | default 0).quantity}}
+      {{ $elements := first $quantity .context.Pages }}
+      {{ if gt (len $elements) 0 }}
         <div class="blocks">
-          {{ partial "posts/block-posts-layout.html" (dict "posts" $posts ) }}
+          {{ partial "posts/block-posts-layout.html" (dict
+            "elements" $elements
+            "type" $type
+          ) }}
         </div>
       {{ end }}
     </div>
