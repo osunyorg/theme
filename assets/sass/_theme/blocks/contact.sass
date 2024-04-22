@@ -15,8 +15,16 @@
             @include h4
         a
             @extend %underline-on-hover
-        + ul
+        .contact-types
+            margin-top: $spacing-3
+            @include media-breakpoint-down(desktop)
+                > div + div
+                    margin-top: $spacing-3
+        + span
+            display: block
             margin-top: $spacing-4
+            + ul
+                margin-top: $spacing-1
     ul
         @include list-reset
         li
@@ -36,13 +44,7 @@
                     &:nth-child(n+2)
                         text-align: right
             @include media-breakpoint-up(desktop)
-                justify-content: space-between
-                span
-                    width: 25%
-                    &:first-child
-                        width: 50%
-                span + span
-                    text-align: right
+                gap: var(--grid-gutter)
     time + time
         @include icon(arrow-right, before)
             display: inline-block
@@ -52,12 +54,21 @@
         .top
             margin-bottom: $spacing-4
         .informations
-            display: flex
-            margin-top: 0
-            address
+            .contact-types
+                @include grid(3)
+        ul
+            span
                 width: columns(4)
-                margin-top: 0
-            ul
-                margin-top: 0
-                width: columns(8)
-                margin-left: var(--grid-gutter)
+
+    @include in-page-with-sidebar
+        .contact-types
+            @include grid(2)
+            row-gap: $spacing-3
+        ul
+            span
+                width: columns(2)
+                &:first-child
+                    width: columns(3)
+                &:last-child
+                    text-align: right
+                    margin-left: columns(1)

@@ -19,45 +19,59 @@
             {{ with .information }}
               {{ partial "PrepareHTML" . }}
             {{ end }}
-            {{ with .address }}
-              {{ if or .address .city .zipcode .country }}
-                <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                  {{ if .address }}
-                  <span itemprop="streetAddress">
-                    {{ partial "PrepareHTML" .address }},
-                  </span>
+            <div class="contact-types">
+              {{ with .address }}
+                {{ if or .address .city .zipcode .country }}
+                  <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                    <p class="meta">{{- i18n "commons.contact.address" -}}</p>
+                    {{ if .address }}
+                    <span itemprop="streetAddress">
+                      {{ partial "PrepareHTML" .address }},
+                    </span>
+                    {{ end }}
+                    <br>
+                    {{ if .city }}
+                    <span itemprop="addressLocality">
+                      {{ partial "PrepareHTML" .city }}
+                    </span>
+                    {{ end }}
+                    {{ if .zipcode }}
+                    <span itemprop="postalCode">
+                      {{ partial "PrepareHTML" .zipcode }}
+                    </span>
+                    {{ end }}
+                    {{ if .country }}
+                    <span itemprop="addressCountry">
+                      {{ partial "PrepareHTML" .country }}
+                    </span>
+                    {{ end }}
+                  </div>
+                {{ end }}
+              {{ end }}
+              {{ if or .url .emails }}
+                <div>
+                  <p class="meta">{{- i18n "commons.contact.web" -}}</p>
+                  {{ with .url }}
+                    <p><a href="{{ . }}" target="_blank" rel="noreferrer">{{ . }}</a></p>
                   {{ end }}
-                  <br>
-                  {{ if .city }}
-                  <span itemprop="addressLocality">
-                    {{ partial "PrepareHTML" .city }}
-                  </span>
-                  {{ end }}
-                  {{ if .zipcode }}
-                  <span itemprop="postalCode">
-                    {{ partial "PrepareHTML" .zipcode }}
-                  </span>
-                  {{ end }}
-                  {{ if .country }}
-                  <span itemprop="addressCountry">
-                    {{ partial "PrepareHTML" .country }}
-                  </span>
+                  {{ range .emails }}
+                    <p><a itemprop="email" href="mailto:{{ . }}">{{ . }}</a></p>
                   {{ end }}
                 </div>
               {{ end }}
-            {{ end }}
-            {{ with .url }}
-              <p><a href="{{ . }}" target="_blank" rel="noreferrer">{{ . }}</a></p>
-            {{ end }}
-            {{ range .phone_numbers }}
-              <p><a itemprop="telephone" href="tel:{{ . }}">{{ . }}</a></p>
-            {{ end }}
-            {{ range .emails }}
-              <p><a itemprop="email" href="mailto:{{ . }}">{{ . }}</a></p>
-            {{ end }}
+              {{ with .phone_numbers}}
+                <div>
+                  <p class="meta">{{- i18n "commons.contact.phone" -}}</p>
+                  {{ range . }}
+                    <p><a itemprop="telephone" href="tel:{{ . }}">{{ . }}</a></p>
+                  {{ end }}
+                </div>
+              {{ end }}
+            </div>
           </address>
   
           {{ if .timetable}}
+            <span class="meta">{{- i18n "commons.contact.schedule" -}}</span>
             <ul>
                 {{ range .timetable }}
                   {{ if or
