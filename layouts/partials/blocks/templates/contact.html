@@ -25,25 +25,25 @@
                   <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
                     <p class="meta">{{- i18n "commons.contact.address" -}}</p>
                     {{ if .address }}
-                    <span itemprop="streetAddress">
-                      {{ partial "PrepareHTML" .address }},
-                    </span>
+                      <span itemprop="streetAddress">
+                        {{ partial "PrepareHTML" .address }},
+                      </span>
+                      <br>
                     {{ end }}
-                    <br>
                     {{ if .city }}
-                    <span itemprop="addressLocality">
-                      {{ partial "PrepareHTML" .city }}
-                    </span>
+                      <span itemprop="addressLocality">
+                        {{ partial "PrepareHTML" .city }}
+                      </span>
                     {{ end }}
                     {{ if .zipcode }}
-                    <span itemprop="postalCode">
-                      {{ partial "PrepareHTML" .zipcode }}
-                    </span>
+                      <span itemprop="postalCode">
+                        {{ partial "PrepareHTML" .zipcode }}
+                      </span>
                     {{ end }}
                     {{ if .country }}
-                    <span itemprop="addressCountry">
-                      {{ partial "PrepareHTML" .country }}
-                    </span>
+                      <span itemprop="addressCountry">
+                        {{ partial "PrepareHTML" .country }}
+                      </span>
                     {{ end }}
                   </div>
                 {{ end }}
@@ -51,11 +51,11 @@
               {{ if or .url .emails }}
                 <div>
                   <p class="meta">{{- i18n "commons.contact.web" -}}</p>
-                  {{ with .url }}
-                    <p><a href="{{ . }}" target="_blank" rel="noreferrer">{{ . }}</a></p>
-                  {{ end }}
                   {{ range .emails }}
                     <p><a itemprop="email" href="mailto:{{ . }}">{{ . }}</a></p>
+                  {{ end }}
+                  {{ with .url }}
+                    <p><a href="{{ . }}" target="_blank" rel="noreferrer">{{ . }}</a></p>
                   {{ end }}
                 </div>
               {{ end }}
