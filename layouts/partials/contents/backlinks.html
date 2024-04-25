@@ -57,5 +57,20 @@
         )
       ) }}
     {{ end }}
+    {{ if .projects }}
+      {{ partial "blocks/templates/projects.html" (dict
+        "block" (dict 
+          "title" (printf "Projets mentionnant %s" $about)
+          "template" "projects"
+          "ranks" (dict
+            "self" 2
+            "children" 3
+          )
+          "data" (dict
+            "projects" .projects
+          )
+        )
+      ) }}
+    {{ end }}
   {{ end }}
 </div>
