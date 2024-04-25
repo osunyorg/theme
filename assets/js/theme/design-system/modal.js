@@ -1,7 +1,8 @@
 import { focusTrap } from '../utils/focus-trap';
 
 const CLASSES = {
-    modalOpened: 'has-modal-opened'
+    modalOpened: 'has-modal-opened',
+    modalIsOpened: 'is-opened'
 };
 
 class Modal {
@@ -44,7 +45,6 @@ class Modal {
         });
 
         window.addEventListener('click', (event) => {
-            console.log(this.element)
             if (event.target === this.element) {
                 this.toggle(false);
             }
@@ -54,9 +54,14 @@ class Modal {
     toggle(open = !this.state.isOpened) {
         this.state.isOpened = open;
         const classAction = this.state.isOpened ? 'add' : 'remove';
+        let transitionDuration = window.getComputedStyle(this.element).transitionDuration;
+        transitionDuration = parseFloat(transitionDuration.replace('s', ''));
 
         this.element.setAttribute('aria-hidden', !this.state.isOpened);
         document.documentElement.classList[classAction](CLASSES.modalOpened);
+        setTimeout(() => {
+            this.element.classList[classAction](CLASSES.modalIsOpened);
+        }, transitionDuration * 1000);
     }
 }
 
