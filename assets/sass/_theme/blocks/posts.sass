@@ -98,6 +98,11 @@
                         .media,
                         .post-content
                             width: columns(4)
+                @include media-breakpoint-up(xl)
+                    &.without-images
+                        .post
+                            .post-content
+                                width: columns(8)
         @include in-page-without-sidebar
             .large
                 .post
@@ -108,8 +113,15 @@
                         width: columns(5)
                     .post-title
                         @include lead
-                p[itemprop="articleBody"]
-                    margin-top: calc(#{$spacing-3} + #{$spacing-2})
+                &.without-images
+                    .post
+                        @include media-breakpoint-up(xl)
+                            margin-left: offset(4)
+                            .post-content
+                                width: columns(6)
+                        @include media-breakpoint-down(xl)
+                            .post-content
+                                width: columns(8)
     &--list
         article
             border-bottom: 1px solid var(--color-border)

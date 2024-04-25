@@ -6,8 +6,9 @@
 )}}
 {{ $index := .index}}
 {{ $options := .options }}
+{{ $hide_image := .options.hide_image }}
 
-<div class="large">
+<div class="large {{- if $hide_image }} without-images{{ end }}">
   {{ range .posts }}
     {{ with site.GetPage (printf "/posts/%s" .) }}
 
