@@ -1,6 +1,9 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading := printf "h%d" $heading_level }}
-<div class="alternate">
+{{ $options := .options }}
+{{ $hide_image := .options.hide_image }}
+
+<div class="alternate {{- if $hide_image }} without-images{{ end }}">
   {{ range $i, $post := .posts -}}
     {{ with site.GetPage (printf "/posts/%s" $post) }}
       {{ partial "posts/post.html" (dict 
@@ -8,6 +11,7 @@
         "heading" $heading
         "index" $i
         "alternate" true
+        "options" $options
         ) }}
     {{ end }}
   {{ end }}
