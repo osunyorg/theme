@@ -3,6 +3,10 @@
     <p>{{ i18n "categories.no_post" }}</p>
   {{ end }}
   {{ range .Paginator.Pages }}
-    {{ partial "posts/post.html" (dict "post" . )}}
+    {{  partial "posts/post.html" 
+        (dict 
+          "post" .
+          "options" site.Params.posts.index.options 
+        )}}
   {{ end }}
 </div>
