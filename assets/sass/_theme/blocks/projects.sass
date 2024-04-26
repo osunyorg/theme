@@ -26,3 +26,87 @@
                 @include h2
     .grid
         @include grid(2, md)
+        @include media-breakpoint-down(desktop)
+            .project + .project
+                margin-top: $spacing-4
+
+    .alternate
+        @include media-breakpoint-up(desktop)
+            article
+                width: columns(4)
+                &:not(:first-child)
+                    margin-top: -5%
+                &:nth-child(even)
+                    margin-left: auto
+                &.image-portrait
+                    + .image-portrait
+                        margin-top: -30%
+                    + .image-square,
+                    + .image-landscape
+                        margin-top: -15%
+        @include in-page-without-sidebar
+            .top
+                .description
+                    @include body-text
+            .grid
+                width: columns(10)
+                margin-left: auto
+                margin-right: auto
+                article
+                    width: columns(4)
+        @include media-breakpoint-down(desktop)
+            .project + .project
+                margin-top: $spacing-4
+
+    .large
+        .project
+            .project-meta
+                line-height: $body-size
+                margin-bottom: $spacing-2
+                margin-top: $spacing-2
+                time::after
+                    content: ' —'
+                    margin-right: $spacing-1
+            time,
+            ul.project-categories
+                align-self: baseline
+                display: inline
+            .project-categories
+                li 
+                    display: inline
+            .media img
+                width: 100%
+            + .project
+                margin-top: $spacing-4
+            .more
+                @include icon(arrow-right, after)
+                    margin-left: $spacing-1
+                    transition: transform 0.55s $arrow-ease-transition
+            &:hover 
+                .more::after
+                    transform: translateX(5px)
+        @include media-breakpoint-up(desktop)
+            .project
+                align-items: flex-end
+                flex-direction: row
+                gap: var(--grid-gutter)
+                .media
+                    margin-bottom: 0
+        @include in-page-with-sidebar
+            .project
+                &-title
+                    @include h2
+                    margin-bottom: space(4)
+                &-content
+                    flex: 1
+                .media 
+                    flex: 1
+        @include in-page-without-sidebar
+            .project
+                &-title
+                    @include lead
+                    margin-bottom: space(4)
+                &-content
+                    width: columns(5)
+                .media
+                    width: columns(7)

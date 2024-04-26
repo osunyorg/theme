@@ -2,6 +2,12 @@
     @include article(auto)
     .project-title
         @include article-title
+    @include media-breakpoint-up(desktop)
+        .project-content
+            display: flex
+            gap: $spacing-2
+            .project-description
+                flex: 1
 
 .projects__section,
 .projects_categories__term
