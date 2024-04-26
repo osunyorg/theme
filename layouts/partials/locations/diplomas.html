@@ -6,6 +6,11 @@
         {{- partial "PrepareHTML" .Title -}}
       </a>
       <div class="content">
+        {{with .Params.summary }}
+          <div class="description">
+            {{- . | safeHTML -}}
+          </div>
+        {{end}}
         <ol class="programs">
           {{- range .Params.programs -}}
             {{- template "partials/locations/template-program.html" . -}}
