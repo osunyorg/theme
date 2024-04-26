@@ -1,3 +1,28 @@
 .block-projects
+    .list
+        .project-title
+            @include hover-translate-icon
+            display: flex
+            align-items: center
+            text-decoration: none
+            padding-bottom: $spacing-3
+            padding-top: $spacing-3
+            gap: $spacing-3
+            border-bottom: 1px solid var(--color-border)
+            @include icon(arrow-right, after)
+                margin-left: auto
+                display: inline
+                opacity: 0
+                margin-right: $spacing-1
+            a
+                flex: 1
+            &:hover
+                &,
+                a
+                    color: $color-accent
+                &::after
+                    opacity: 1
+            @include in-page-without-sidebar
+                @include h2
     .grid
         @include grid(2, md)
