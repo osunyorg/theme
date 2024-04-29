@@ -31,7 +31,7 @@ class CampusMap {
                 icon: this.themeMarker
             });
 
-            var popup1 = new L.Popup({'autoClose':false, 'closeButton':false});
+            var popup1 = new L.Popup({'autoClose':false, 'closeButton':false, 'maxWidth': 1000});
             popup1.setLatLng(mapLocation);
             popup1.setContent(this.campus);
             popup1.openOn(map);

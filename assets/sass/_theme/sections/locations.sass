@@ -30,14 +30,14 @@
         @include stretched-link
         text-decoration: none
     .media
-        order: -1
         aspect-ratio: 1.3
         background: var(--color-background-alt)
+        order: 1
         img
             display: block
-            width: 100%
             height: 100%
             object-fit: cover
+            width: 100%
     &-title
         @include icon(arrow, after, true)
         @include hover-translate-icon(after)
@@ -50,7 +50,7 @@
 
 .campus-map
     .map
-        height: 600px
+        height: 500px
         z-index: 1
         > .campus,
         .leaflet-popup-tip-container
@@ -59,44 +59,41 @@
             filter: grayscale(1)
         .leaflet-popup
             &::after
-                display: block
-                height: 20px
                 background-color: var(--color-accent)
                 content: ''
+                display: block
+                height: 20px
                 mask: url("/assets/images/map-popup.svg") no-repeat 50% 0%
             &-content
-                color: var(--color-background)
                 background-color: var(--color-accent)
+                color: var(--color-background)
+                height: 100%
                 margin: 0
                 width: 100%
-                height: 100%
                 .campus
+                    align-items: center
                     display: grid
                     grid-template: "a b"
-                    align-items: center
                     .campus-content
-                        padding: 10px
                         order: 2 
-                        span
-                            display: block
+                        padding: pxToRem(20)
+                        span,
                         .campus-title
+                            display: block
                             margin: 0 // Cancel leaflet default style
                             width: max-content
                     .media
+                        aspect-ratio: 1
+                        display: block
+                        height: 100%
                         margin-bottom: 0
                         order: 1
-                        aspect-ratio: 1
-                        height: 100%
-                        picture
-                            display: block
+                        img
                             height: 100%
-                            img
-                                height: 100%
-                                object-fit: cover
-                                object-position: right
+                            object-fit: cover
+                            object-position: right
                 &-wrapper
                     border-radius: 0
                     padding: 0
                     box-shadow: none
                     overflow: hidden
-                    width: fit-content
