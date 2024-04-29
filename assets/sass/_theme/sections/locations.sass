@@ -17,6 +17,10 @@
         @include in-page-without-sidebar
             @include grid(4)
 
+.locations__term
+    main
+        padding-bottom: 0px
+
 .location
     display: flex
     gap: $spacing-3 var(--grid-gutter)
@@ -43,3 +47,54 @@
         .media
             margin-left: var(--grid-gutter-negative)
             margin-right: var(--grid-gutter-negative)
+
+.campus-map
+    .map
+        height: 600px
+        z-index: 1
+        > .campus,
+        .leaflet-popup-tip-container
+            display: none
+        .leaflet-popup
+            &::after
+                display: block
+                height: 20px
+                background-color: var(--color-background-alt)
+                content: ''
+                mask: url("/assets/images/map-popup.svg") no-repeat 50% 0%
+            &-content
+                color: var(--color-text)
+                background-color: var(--color-background-alt)
+                margin: 0
+                width: 100%
+                height: 100%
+                .campus
+                    display: grid
+                    grid-template: "a b"
+                    align-items: center
+                    .campus-content
+                        padding: 10px
+                        order: 2 
+                        span
+                            display: block
+                        .campus-title
+                            margin: 0 // Cancel leaflet default style
+                            width: max-content
+                    .media
+                        margin-bottom: 0
+                        order: 1
+                        aspect-ratio: 1
+                        height: 100%
+                        picture
+                            display: block
+                            height: 100%
+                            img
+                                height: 100%
+                                object-fit: cover
+                                object-position: right
+                &-wrapper
+                    border-radius: 0
+                    padding: 0
+                    box-shadow: none
+                    overflow: hidden
+                    width: fit-content
