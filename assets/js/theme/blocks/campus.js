@@ -11,7 +11,6 @@ class CampusMap {
         this.setMap = false;
         this.content = this.dom.querySelector('.map');
         this.campus = this.content.querySelector('.campus');
-        console.log(this.campus)
         let map = L.map(this.content, {
             scrollWheelZoom: false
         });

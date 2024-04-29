@@ -30,42 +30,44 @@
       {{ partial "commons/pagination.html" . }}
     </div>
   </div>
-  <div class="campus-map">
-    <div class="map" data-marker-icon="{{ "/assets/images/map-marker.svg" }}">
-      <article class="campus" {{ if .Params.contact_details.geolocation.longitude }}data-longitude="{{ .Params.contact_details.geolocation.longitude }}"{{ end }} {{ if .Params.contact_details.geolocation.latitude }}data-latitude="{{ .Params.contact_details.geolocation.latitude }}"{{ end }}>
-        {{ $title := "" }}
-        {{ if .Params.title }}
-        <div class="campus-content">
-          {{ $title = partial "PrepareHTML" .Params.title -}}
-          <p class="campus-title">
-            {{- if and .Params.url .Params.with_link }}
-              <a href="{{ .Params.url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
-            {{ end -}}
-              {{- $title -}}
-            {{- if .Params.url }}
-              </a>
-            {{ end -}}
-            </p>
-            {{with .Params.contact_details}}
-              <span>{{.address.value}}</span>
-              <span>
-                {{.zipcode.value}}
-                {{.city.value}}
-              </span>
-            {{end}}
+  {{if (and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude )}}
+    <div class="campus-map">
+      <div class="map" data-marker-icon="{{ "/assets/images/map-marker.svg" }}">
+        <article class="campus" data-longitude="{{ .Params.contact_details.geolocation.longitude }}"data-latitude="{{ .Params.contact_details.geolocation.latitude }}">
+          {{ $title := "" }}
+          {{ if .Params.title }}
+          <div class="campus-content">
+            {{ $title = partial "PrepareHTML" .Params.title -}}
+            <p class="campus-title">
+              {{- if and .Params.url .Params.with_link }}
+                <a href="{{ .Params.url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
+              {{ end -}}
+                {{- $title -}}
+              {{- if .Params.url }}
+                </a>
+              {{ end -}}
+              </p>
+              {{with .Params.contact_details}}
+                <span>{{.address.value}}</span>
+                <span>
+                  {{.zipcode.value}}
+                  {{.city.value}}
+                </span>
+              {{end}}
+            </div>
+          {{ end -}}
+          <div class="media">
+            {{- if .Params.image -}}
+              {{- partial "commons/image.html"
+                (dict
+                  "image"    .Params.image
+                  "alt"      $title
+                  "sizes"    site.Params.image_sizes.blocks.organizations
+                ) -}}
+            {{- end -}}
           </div>
-        {{ end -}}
-        <div class="media">
-          {{- if .Params.image -}}
-            {{- partial "commons/image.html"
-              (dict
-                "image"    .Params.image
-                "alt"      $title
-                "sizes"    site.Params.image_sizes.blocks.organizations
-              ) -}}
-          {{- end -}}
-        </div>
-      </article>
+        </article>
+      </div>
     </div>
-  </div>
+  {{end}}
 {{ end }}
