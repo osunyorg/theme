@@ -56,16 +56,16 @@
               {{end}}
             </div>
           {{ end -}}
-          <div class="media">
-            {{- if .Params.image -}}
+          {{- if .Params.image -}}
+            <div class="media">
               {{- partial "commons/image.html"
                 (dict
                   "image"    .Params.image
                   "alt"      $title
                   "sizes"    site.Params.image_sizes.blocks.organizations
                 ) -}}
+              </div>
             {{- end -}}
-          </div>
         </article>
       </div>
     </div>
