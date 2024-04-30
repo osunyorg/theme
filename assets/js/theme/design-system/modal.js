@@ -11,14 +11,13 @@ class Modal {
         this.id = this.button.getAttribute('data-open-modal');
         this.element = document.getElementById(this.id);
         this.closeButtons = this.element.querySelectorAll('.close');
+        this.state = {
+            opened: false
+        }
 
         if (!this.element) {
             return;
         }
-
-        this.state = {
-            isOpened: false
-        };
 
         this.listen();
     }
@@ -51,17 +50,25 @@ class Modal {
         });
     }
 
-    toggle(open = !this.state.isOpened) {
-        this.state.isOpened = open;
-        const classAction = this.state.isOpened ? 'add' : 'remove';
-        let transitionDuration = window.getComputedStyle(this.element).transitionDuration;
-        transitionDuration = parseFloat(transitionDuration.replace('s', ''));
+    toggle(open) {
+        this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
+        const classAction = this.state.opened ? 'add' : 'remove',
+            transitionDuration = this.state.opened ? 0 : this.getTransitionDuration();
 
-        this.element.setAttribute('aria-hidden', !this.state.isOpened);
-        document.documentElement.classList[classAction](CLASSES.modalOpened);
         setTimeout(() => {
+            this.element.setAttribute('aria-hidden', !this.state.opened);
             this.element.classList[classAction](CLASSES.modalIsOpened);
         }, transitionDuration * 1000);
+
+        setTimeout(() => {
+            document.documentElement.classList[classAction](CLASSES.modalOpened);
+        }, 50);
+    }
+
+    getTransitionDuration () {
+        let transitionDuration = window.getComputedStyle(this.element).transitionDuration;
+        transitionDuration = parseFloat(transitionDuration.replace('s', ''));
+        return transitionDuration;
     }
 }
 
