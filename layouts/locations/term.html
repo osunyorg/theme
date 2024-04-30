@@ -17,7 +17,7 @@
 
       {{ with .Params.diplomas }}
 
-        {{ /*  Get diplomas collection from diploma's paths  */ }}
+        {{/*  Get diplomas collection from diploma's paths  */}}
         {{ $diplomas := slice }}
         {{ range . }}
           {{ with site.GetPage (printf "/diplomas/%s" .path) }}
@@ -31,43 +31,6 @@
     </div>
   </div>
   {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}
-    <div class="campus-map">
-      <div class="map" data-marker-icon="{{ "/assets/images/map-marker.svg" }}">
-        <article class="campus" data-longitude="{{ .Params.contact_details.geolocation.longitude }}"data-latitude="{{ .Params.contact_details.geolocation.latitude }}">
-          {{ $title := "" }}
-          {{ if .Params.title }}
-          <div class="campus-content">
-            {{ $title = partial "PrepareHTML" .Params.title -}}
-            <p class="campus-title">
-              {{- if and .Params.url .Params.with_link }}
-                <a href="{{ .Params.url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
-              {{ end -}}
-                {{- $title -}}
-              {{- if .Params.url }}
-                </a>
-              {{ end -}}
-              </p>
-              {{ with .Params.contact_details }}
-                <span>{{ .address.value }}</span>
-                <span>
-                  {{ .zipcode.value }}
-                  {{ .city.value }}
-                </span>
-              {{ end }}
-            </div>
-          {{ end -}}
-          {{- if .Params.image -}}
-            <div class="media">
-              {{- partial "commons/image.html"
-                (dict
-                  "image"    .Params.image
-                  "alt"      $title
-                  "sizes"    site.Params.image_sizes.blocks.organizations
-                ) -}}
-              </div>
-            {{- end -}}
-        </article>
-      </div>
-    </div>
+    {{ partial "locations/map.html" . }}
   {{ end }}
 {{ end }}
