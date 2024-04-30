@@ -17,7 +17,7 @@
 
       {{ with .Params.diplomas }}
 
-        {{/*  Get diplomas collection from diploma's paths  */}}
+        {{ /*  Get diplomas collection from diploma's paths  */ }}
         {{ $diplomas := slice }}
         {{ range . }}
           {{ with site.GetPage (printf "/diplomas/%s" .path) }}
@@ -30,7 +30,7 @@
       {{ partial "commons/pagination.html" . }}
     </div>
   </div>
-  {{if (and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude )}}
+  {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}
     <div class="campus-map">
       <div class="map" data-marker-icon="{{ "/assets/images/map-marker.svg" }}">
         <article class="campus" data-longitude="{{ .Params.contact_details.geolocation.longitude }}"data-latitude="{{ .Params.contact_details.geolocation.latitude }}">
@@ -47,13 +47,13 @@
                 </a>
               {{ end -}}
               </p>
-              {{with .Params.contact_details}}
-                <span>{{.address.value}}</span>
+              {{ with .Params.contact_details }}
+                <span>{{ .address.value }}</span>
                 <span>
-                  {{.zipcode.value}}
-                  {{.city.value}}
+                  {{ .zipcode.value }}
+                  {{ .city.value }}
                 </span>
-              {{end}}
+              {{ end }}
             </div>
           {{ end -}}
           {{- if .Params.image -}}
@@ -69,5 +69,5 @@
         </article>
       </div>
     </div>
-  {{end}}
+  {{ end }}
 {{ end }}
