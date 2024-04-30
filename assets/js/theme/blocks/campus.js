@@ -31,22 +31,15 @@ class CampusMap {
                 icon: this.themeMarker
             });
 
-            var popup1 = new L.Popup({'autoClose':false, 'closeButton':false, 'maxWidth': 1000});
-            popup1.setLatLng(mapLocation);
-            popup1.setContent(this.campus);
-            popup1.openOn(map);
-            marker.addTo(map).bindPopup(popup1);
+            const popup = new L.Popup({'autoClose':false, 'closeButton':false, 'maxWidth': 1000});
+            popup.setLatLng(mapLocation);
+            popup.setContent(this.campus);
+            popup.openOn(map);
+            marker.addTo(map).bindPopup(popup);
             this.markers.push(marker);
             this.setMap = true;
-        }
-
-        if (this.setMap) {
             this.listen(map);
             this.getMapBounds(map);
-        } 
-        else {
-            this.campus.classList.add(this.classHidden);
-            this.dom.setAttribute('aria-hidden', 'true');
         }
     }
 
