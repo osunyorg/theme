@@ -35,10 +35,15 @@
             @include media-breakpoint-down(desktop)
                 .project + .project
                     margin-top: $spacing-4
+        @include in-page-with-sidebar
+            article
+                width: columns(5)
         @include in-page-without-sidebar
             .top
                 .description
                     @include body-text
+            article
+                width: columns(7)
 
     .large
         .project

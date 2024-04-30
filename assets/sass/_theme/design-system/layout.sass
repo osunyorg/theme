@@ -128,10 +128,9 @@ details
 .alternate
     article
         @include media-breakpoint-up(desktop)
-            width: columns(4)
             &:not(:first-child)
                 margin-top: -5%
-            &:nth-child(even)
+            &:nth-child(odd)
                 margin-left: auto
             &.portrait
                 + .portrait
@@ -143,7 +142,6 @@ details
                     margin-top: -5%
             &.square + .square
                 margin-top: -10%
-    @include in-page-with-sidebar
     @include in-page-without-sidebar
         width: columns(10)
         margin-left: auto
