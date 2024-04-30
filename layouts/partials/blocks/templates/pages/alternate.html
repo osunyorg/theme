@@ -7,12 +7,12 @@
         "attributes" "class='page-title'"
 )}}
 
-<div class="grid">
+<div class="alternate">
   {{ range .pages }}
     {{ $page := site.GetPage .file }}
     {{ with $page }}
       {{ if .Params.image }}
-        {{ $image_class = printf "image-%s" (partial "GetImageDirection" .Params.image) }}
+        {{ $image_class = printf (partial "GetImageDirection" .Params.image) }}
       {{ else }}
         {{ $image_class = "" }}
       {{ end }}

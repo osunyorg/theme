@@ -229,32 +229,23 @@
     &--alternate
         .top
             @include top-flex
-        .grid
-            article .media img
-                aspect-ratio: unset
-        @include media-breakpoint-up(desktop)
-            article
-                width: columns(4)
-                &:not(:first-child)
-                    margin-top: -5%
-                &:nth-child(even)
-                    margin-left: auto
-                &.image-portrait
-                    + .image-portrait
-                        margin-top: -30%
-                    + .image-square,
-                    + .image-landscape
-                        margin-top: -15%
+        .alternate
+            article 
+                position: relative
+                display: flex
+                flex-direction: column
+                a
+                    @include stretched-link
+                .media 
+                    margin-bottom: $spacing-2
+                    order: -1
+                    img
+                        aspect-ratio: unset
         @include in-page-without-sidebar
             .top
                 .description
                     @include body-text
-            .grid
-                width: columns(10)
-                margin-left: auto
-                margin-right: auto
-                article
-                    width: columns(4)
+
     &--large
         .top
             @include top-flex

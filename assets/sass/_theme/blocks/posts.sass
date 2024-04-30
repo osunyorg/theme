@@ -263,20 +263,7 @@
     &--alternate .alternate
         .post .media img
             aspect-ratio: unset
-        
         @include media-breakpoint-up(desktop)
-            &:not(.without-images) 
-                .post
-                    &.right
-                        margin-left: auto
-                    &.portrait
-                        + .portrait
-                            margin-top: -30%
-                        + .square,
-                        + .landscape
-                            margin-top: -15%
-                        + .post:not(.portrait, .square, .landscape)
-                            margin-top: -5%
             &.without-images
                 .right
                     margin-left: auto
@@ -288,7 +275,6 @@
                         margin-top: -5%
                     + .post:not(.portrait, .square, .landscape)
                         margin-top: -3%
-
         @include media-breakpoint-down(desktop)
             .post 
                 .post-meta
@@ -298,16 +284,6 @@
                 + .post
                     margin-top: $spacing-5
 
-        @include in-page-with-sidebar
-            .post
-                width: columns(4)
-
-        @include in-page-without-sidebar
-            width: columns(10)
-            margin-left: auto
-            margin-right: auto
-            .post
-                width: columns(4)
     &--carousel
         @include draggable-block
         .container
