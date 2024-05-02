@@ -21,7 +21,7 @@
 
 ## URL de test sur example.osuny.org
 
-
+[branch]--example.osuny.netlify.app
 
 ## URL de test du site (optionnel)
 
