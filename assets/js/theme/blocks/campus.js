@@ -1,15 +1,16 @@
 const campusMap = document.querySelector('.campus-map');
-
+const dom = document.querySelector('main');
 class CampusMap {
-    constructor (dom) {
+    constructor (dom, campusMap) {
         this.dom = dom;
+        this.map = campusMap;
         this.init();
     }
 
     init () {
         this.markers = [];
         this.setMap = false;
-        this.content = this.dom.querySelector('.map');
+        this.content = this.map.querySelector('.map');
         this.campus = this.content.querySelector('.campus');
         let map = L.map(this.content, {
             scrollWheelZoom: false
@@ -40,6 +41,7 @@ class CampusMap {
             this.setMap = true;
             this.listen(map);
             this.getMapBounds(map);
+            this.dom.classList.add("page-with-map");
         }
     }
 
@@ -57,5 +59,5 @@ class CampusMap {
 }
 
 if (campusMap) {
-    new CampusMap(campusMap);
+    new CampusMap(dom, campusMap);
 }
