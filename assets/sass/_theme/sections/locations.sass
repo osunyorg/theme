@@ -60,12 +60,15 @@
         .leaflet-tile-pane
             filter: grayscale(1)
         .leaflet-popup
-            &::after
-                background-color: var(--color-accent)
+            &::after //crée un triangle en css (https://outils-css.aliasdmc.fr/generateur-de-triangles-css.php)
+                border-left: 10px solid transparent
+                border-right: 10px solid transparent
+                border-top: 15px solid var(--color-accent)
                 content: ''
                 display: block
-                height: 20px
-                mask: url("/assets/images/map-popup.svg") no-repeat 50% 0%
+                height: 0
+                margin: 0 auto
+                width: 0
             &-content
                 background-color: var(--color-accent)
                 color: var(--color-background)
