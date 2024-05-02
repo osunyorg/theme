@@ -71,14 +71,14 @@
                 color: var(--color-background)
                 height: 100%
                 margin: 0
-                width: 100%
+                min-width: min-content
+                width: auto !important // corrige la width appliquée en js par leaflet
                 .campus
                     align-items: center
-                    display: grid
-                    grid-template: "a b"
+                    display: flex
                     .campus-content
                         order: 2 
-                        padding: $spacing-3
+                        padding: 0 $spacing-3
                         span,
                         .campus-title
                             display: block
@@ -87,10 +87,11 @@
                     .media
                         aspect-ratio: 1
                         display: block
-                        height: 100%
+                        width: $spacing-6
                         margin-bottom: 0
                         order: 1
                         img
+                            display: block
                             height: 100%
                             object-fit: cover
                 &-wrapper
