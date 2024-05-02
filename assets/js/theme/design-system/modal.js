@@ -59,9 +59,7 @@ class Modal {
         
         setTimeout(() => {
             document.documentElement.classList.remove(CLASSES.isAnimating);
-        }, 0);
-
-        setTimeout(() => {
+            
             this.element.setAttribute('aria-hidden', !this.state.opened);
             this.element.classList[classAction](CLASSES.modalIsOpened);
         }, 0.2);
