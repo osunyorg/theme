@@ -126,23 +126,24 @@ details
                 top: 0
 
 .alternate
-    article
-        @include media-breakpoint-up(desktop)
-            &:not(:first-child)
-                margin-top: -5%
-            &:nth-child(odd)
-                margin-left: auto
-            &.portrait
-                + .portrait
-                    margin-top: -30%
-                + .square,
-                + .landscape
-                    margin-top: -15%
-                + article:not(.portrait, .square, .landscape)
+    .block:not(.block-projects) &
+        article
+            @include media-breakpoint-up(desktop)
+                &:not(:first-child)
                     margin-top: -5%
-            &.square + .square
-                margin-top: -10%
-    @include in-page-without-sidebar
-        width: columns(10)
-        margin-left: auto
-        margin-right: auto
+                &:nth-child(odd)
+                    margin-left: auto
+                &.portrait
+                    + .portrait
+                        margin-top: -30%
+                    + .square,
+                    + .landscape
+                        margin-top: -15%
+                    + article:not(.portrait, .square, .landscape)
+                        margin-top: -5%
+                &.square + .square
+                    margin-top: -10%
+        @include in-page-without-sidebar
+            width: columns(10)
+            margin-left: auto
+            margin-right: auto
