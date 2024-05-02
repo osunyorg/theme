@@ -56,6 +56,6 @@ class CampusMap {
     }
 }
 
-if(campusMap){
+if (campusMap) {
     new CampusMap(campusMap);
 }
