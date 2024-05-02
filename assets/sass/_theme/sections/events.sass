@@ -90,6 +90,8 @@
     &-time
         span + span
             @include icon(arrow-right, before)
+                margin-left: space()
+                margin-right: space()
     .media
         &:empty
             display: none
@@ -101,6 +103,9 @@
             &::before
                 content: ' |'
                 margin-right: $spacing-1
+    @include media-breakpoint-up(desktop)
+        &-time
+            display: flex
 .events
     &--list
         .event
