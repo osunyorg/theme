@@ -19,7 +19,7 @@
   {{- $direction = partial "GetImageDirection" .Params.image -}}
 {{ end }}
 
-<article class='post {{ if $alternate }}{{ $direction }} {{if not (modBool $index 2)}}left{{ else}}right{{end}}{{end}}' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+<article class='post {{ if $alternate }} {{- if (not (isset .Params "image")) -}} without-image {{- end -}}{{ $direction }} {{if not (modBool $index 2)}}left{{ else}}right{{end}}{{end}}' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
   <div class="post-content">
     {{- $title := partial "PrepareHTML" .Title -}}
 
