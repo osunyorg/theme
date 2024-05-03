@@ -17,10 +17,17 @@
             flex-direction: column
             gap: $spacing-3
         .project-infos
-            --color-border: #{$project-infos-border-color}
             --color-text: #{$project-infos-color-text}
             --color-text-alt: #{$project-infos-color-text-alt}
-            --color-accent: #{$project-infos-color-accent}
+            @include meta
+            display: flex
+            gap: $spacing-3
+            ul
+                @include list-reset
+                display: flex
+                gap: $spacing-3
+            
+
     @include media-breakpoint-up(sm)
         .hero
             .project-infos
@@ -40,13 +47,3 @@
                 width: columns(4)
             figure
                 width: columns(6)
-
-.project-infos
-    @include meta
-    display: flex
-    gap: $spacing-3
-    ul
-        @include list-reset
-        display: flex
-        gap: $spacing-3
-
