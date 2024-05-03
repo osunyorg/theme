@@ -92,7 +92,6 @@ details
                 transform: translateY(-5px)
 .modal
     align-items: center
-    display: flex
     justify-content: center
     height: 100vh
     left: 0
@@ -102,6 +101,11 @@ details
     width: 100%
     margin: 0
     z-index: $zindex-modal
+    opacity: 0
+    transition: opacity 0.3s
+    &.is-opened
+        opacity: 1
+        display: flex
     &[aria-hidden="true"]
         display: none
     .modal-content
