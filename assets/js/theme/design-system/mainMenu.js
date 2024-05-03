@@ -127,7 +127,7 @@ class MainMenu {
     }
 
     closeEverything () {
-        if (!this.state.isOpened && !this.menusOpened) {
+        if (!this.state.isOpened && !this.state.hasDropdownOpened) {
             return;
         }
 
