@@ -24,12 +24,15 @@
     {{- end -}}
     
     <div class="buttons">
-      <div class="dropdown-share dropup">
-        <button class="btn" type="button" id="shareProgram" data-bs-toggle="dropdown" aria-expanded="false">{{ i18n "commons.share" }}</button>
-        <div class="dropdown-menu">
-          {{ partial "commons/share.html" . }}
+      {{ if site.Params.programs.share_links.enabled | default site.Params.share_links.enabled }}
+        <div class="dropdown-share">
+          <button class="btn" type="button" id="shareProgram" data-bs-toggle="dropdown" aria-expanded="false">{{ i18n "commons.share" }}</button>
+          <div class="dropdown-menu">
+            {{ partial "commons/share.html" . }}
+          </div>
         </div>
-      </div>
+      {{ end }}
+
       {{ with .Params.downloadable_summary }}
         {{- $file := partial "GetMedia" . -}}
         {{- if $file -}}

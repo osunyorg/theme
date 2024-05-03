@@ -34,8 +34,7 @@
             .content
                 align-items: stretch
             .hero-text
-                justify-content: space-between
-                gap: $spacing-5
+                gap: $spacing-3
                 width: columns(6)
             .project-infos
                 width: columns(4)
@@ -43,4 +42,11 @@
                 width: columns(6)
 
 .project-infos
-    @include section__page-infos
+    @include meta
+    display: flex
+    gap: $spacing-3
+    ul
+        @include list-reset
+        display: flex
+        gap: $spacing-3
+
