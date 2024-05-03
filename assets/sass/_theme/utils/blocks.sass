@@ -41,3 +41,28 @@
             &:disabled
                 cursor: default
                 opacity: 0.3
+
+@mixin alternate
+    article
+        .media img
+            aspect-ratio: unset
+        @include media-breakpoint-up(desktop)
+            width: columns(4)
+            &:not(:first-child)
+                margin-top: -5%
+            &:nth-child(odd)
+                margin-left: auto
+            &.portrait
+                + .portrait
+                    margin-top: -30%
+                + .square,
+                + .landscape
+                    margin-top: -15%
+                + article:not(.portrait, .square, .landscape)
+                    margin-top: -5%
+            &.square + .square
+                margin-top: -10%
+    @include in-page-without-sidebar
+        width: columns(10)
+        margin-left: auto
+        margin-right: auto
