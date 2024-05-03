@@ -69,7 +69,7 @@
                 aria-label="{{- i18n "commons.lightbox.link.title" -}}">
             </a>
           {{ end }}
-          {{ with partial "GetTextFromHTML" .image.credit }}
+          {{ with .image.credit }}
             <figcaption tabindex="0">
               <div class="credit-content">
                 {{ partial "PrepareHTML" . }}
