@@ -2,7 +2,6 @@ import { focusTrap } from '../utils/focus-trap';
 
 const CLASSES = {
     modalOpened: 'has-modal-opened',
-    isAnimating: 'is-animating',
     modalIsOpened: 'is-opened'
 };
 
@@ -57,12 +56,8 @@ class Modal {
 
         document.documentElement.classList[classAction](CLASSES.modalOpened);
         
-        setTimeout(() => {
-            document.documentElement.classList.remove(CLASSES.isAnimating);
-            
-            this.element.setAttribute('aria-hidden', !this.state.opened);
-            this.element.classList[classAction](CLASSES.modalIsOpened);
-        }, 0.2);
+        this.element.setAttribute('aria-hidden', !this.state.opened);
+        this.element.classList[classAction](CLASSES.modalIsOpened);
         
     }
 }
