@@ -32,10 +32,10 @@
               <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
             {{ $heading_tag.close }}
 
-            {{ if and site.Params.posts.index.show_categories (eq $options.hide_cathegory false) }}
+            {{ if eq $options.hide_cathegory false }}
               {{- partial "posts/categories" . -}}
             {{ end }}
-            {{ if and site.Params.posts.index.show_description (eq $options.hide_summary false) }}
+            {{ if eq $options.hide_summary false }}
               {{- if (partial "GetTextFromHTML" .Params.summary) -}}
                 <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
                   "text" .Params.summary
@@ -48,7 +48,7 @@
                 {{- if eq $options.hide_date false -}}
                   <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
                 {{ end }}
-                {{ if and site.Params.posts.index.show_author (eq $options.hide_author false) }}
+                {{ if eq $options.hide_author false }}
                   {{- partial "posts/author" . -}}
                 {{ end }}
               </div>
