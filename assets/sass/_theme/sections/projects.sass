@@ -16,6 +16,9 @@
             display: flex
             flex-direction: column
             gap: $spacing-3
+            // Espace sécurité pour le bouton de partage en absolute
+            position: relative
+            padding-bottom: calc(#{$spacing-5} + #{$spacing-2}) 
         .project-infos
             --color-text: #{$project-infos-color-text}
             --color-text-alt: #{$project-infos-color-text-alt}
@@ -26,7 +29,11 @@
                 @include list-reset
                 display: flex
                 gap: $spacing-3
-            
+        // Espace sécurité pour le bouton de partage en absolute
+        .dropdown-share
+            position: absolute
+            bottom: 0
+            right: 0
 
     @include media-breakpoint-up(sm)
         .hero
