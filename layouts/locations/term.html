@@ -30,4 +30,7 @@
       {{ partial "commons/pagination.html" . }}
     </div>
   </div>
+  {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}
+    {{ partial "locations/map.html" . }}
+  {{ end }}
 {{ end }}
