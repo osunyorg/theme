@@ -1,20 +1,20 @@
 {{ $program := site.GetPage (printf "/programs%s" .slug) }}
 <li>
-    <div class="program-content">
-        <a href="{{ .path }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
-            {{- partial "PrepareHTML" .label -}}
-        </a>
-        <div class="description">
-            {{- $program.Params.summary }}
-        </div>
+  <div class="program-content">
+    <a href="{{ .path }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
+      {{- partial "PrepareHTML" .label -}}
+    </a>
+    <div class="description">
+      {{- $program.Params.summary }}
     </div>
-    <div class="media">
-        {{- if $program.Params.image -}}
-            {{- partial "commons/image.html"
-                (dict
-                    "image"    $program.Params.image
-                    "sizes"    site.Params.image_sizes.sections.programs.item
-                ) -}}
-        {{- end -}}
-    </div>
+  </div>
+  <div class="media">
+    {{- if $program.Params.image -}}
+      {{- partial "commons/image.html"
+        (dict
+            "image"    $program.Params.image
+            "sizes"    site.Params.image_sizes.sections.programs.item
+        ) -}}
+    {{- end -}}
+  </div>
 </li>
