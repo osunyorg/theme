@@ -31,7 +31,7 @@
             {{ if eq $options.hide_date false }}
               <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
             {{ end }}
-            {{ if eq $options.hide_cathegory false }}
+            {{ if eq $options.hide_category false }}
               {{- partial "posts/categories" . -}}
             {{ end }}
           </div>
