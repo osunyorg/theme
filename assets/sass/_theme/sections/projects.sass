@@ -16,8 +16,28 @@
 
 .projects__section,
 .projects_categories__term
-    .projects
+    .projects--grid
         @include grid(2, md)
+    .projects--list
+        @extend .block-projects--list
+        .project
+            margin-bottom: $spacing-3
+            padding-bottom: $spacing-3
+            border-bottom: 1px solid var(--color-border)
+            .project-title
+                border: none
+                padding-top: 0
+            @include media-breakpoint-up(desktop)
+                margin-bottom: $spacing-5
+                padding-bottom: $spacing-5
+                flex-direction: row
+                gap: var(--grid-gutter)
+                .project-content
+                    flex: 1
+                .media
+                    width: columns(3)
+                    margin-bottom: 0
+
 
 .projects__page
     .hero
