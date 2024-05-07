@@ -1,0 +1,17 @@
+{{ $diplomas := .diplomas }}
+<ul class="diplomas">
+  {{ range $diplomas }}
+    <li>
+      <a href="{{ .Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">
+        {{- partial "PrepareHTML" .Title -}}
+      </a>
+      <div class="content">
+        <ol class="programs">
+          {{- range .Params.programs -}}
+            {{- template "partials/locations/template-program.html" . -}}
+          {{- end -}}
+        </ol>
+      </div>
+    </li>
+  {{ end }}
+</ul>
