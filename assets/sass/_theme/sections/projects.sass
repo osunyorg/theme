@@ -18,26 +18,37 @@
 .projects_categories__term
     .projects--grid
         @include grid(2, md)
+        @include media-breakpoint-down(md)
+            .project + .project
+                margin-top: $spacing-4
     .projects--list
-        @extend .block-projects--list
         .project
+            border-bottom: 1px solid var(--color-border)
+            display: flex
             margin-bottom: $spacing-3
             padding-bottom: $spacing-3
-            border-bottom: 1px solid var(--color-border)
-            .project-title
-                border: none
-                padding-top: 0
+            &-title
+                margin-bottom: $spacing-1
             @include media-breakpoint-up(desktop)
-                margin-bottom: $spacing-5
-                padding-bottom: $spacing-5
-                flex-direction: row
+                flex-direction: row-reverse
                 gap: var(--grid-gutter)
                 .project-content
                     flex: 1
+                    .project-description
+                        max-width: columns(6)
+                    .project-title
+                        @include h2
+                        @include icon(arrow, after, true)
+                        @include hover-translate-icon(after)
+                        a
+                            display: inline
                 .media
-                    width: columns(3)
+                    width: columns(4)
                     margin-bottom: 0
-
+                &:hover
+                    .project-title
+                        &, a
+                            color: $color-accent
 
 .projects__page
     .hero
