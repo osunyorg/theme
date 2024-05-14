@@ -43,15 +43,18 @@
                     .project-title
                         @include h2
                         @include icon(arrow, after, true)
+                            color: transparent
                         @include hover-translate-icon(after)
                         a
                             display: inline
+                    .project-categories
+                        width: fit-content
                 .media
                     width: columns(4)
                     margin-bottom: 0
                 &:hover
                     .project-title
-                        &, a
+                        &::after, a
                             color: $color-accent
 
 .projects__page
