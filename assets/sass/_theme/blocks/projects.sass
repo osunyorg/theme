@@ -27,7 +27,7 @@
                 @include h2
     .grid
         @include grid(2, md)
-        @include media-breakpoint-down(desktop)
+        @include media-breakpoint-down(md)
             .project + .project
                 margin-top: $spacing-4
         .project-content
@@ -61,7 +61,6 @@
                 margin-top: $spacing-2
                 time::after
                     content: ' —'
-                    margin-right: $spacing-1
             time,
             ul.project-categories
                 align-self: baseline
@@ -85,6 +84,10 @@
                 gap: var(--grid-gutter)
                 .media
                     margin-bottom: 0
+        @include media-breakpoint-down(desktop)
+            .media
+                margin-left: var(--grid-gutter-negative)
+                margin-right: var(--grid-gutter-negative)
         @include in-page-with-sidebar
             .project
                 &-title
