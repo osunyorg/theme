@@ -9,7 +9,7 @@
           "context" $context
       )}}
     {{- else if (eq .kind "heading") -}}
-      {{ $headingId = .slug | default (urlize .title) }}
+      {{ $headingId := .slug | default (urlize .title) }}
       <div class="heading container" id="{{ $headingId }}">
         <h2>{{ partial "PrepareHTML" .title }}</h2>
       </div>
