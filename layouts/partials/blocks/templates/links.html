@@ -18,7 +18,7 @@
                 {{- $title := partial "PrepareHTML" .title -}}
                 {{- $url := .url -}}
                 <link itemprop="url" href="{{ .url }}">
-                <a itemprop="relatedLink" href="{{ .url }}" title="{{ $title }}"><span itemprop="name">{{- $title -}}</span></a>
+                <a itemprop="relatedLink" href="{{ .url }}" title="{{ $title }}" target="_blank"><span itemprop="name">{{- $title -}}</span></a>
                 <p>{{ .description | safeHTML }}</p>
               </div>
               {{- if .image -}}
