@@ -4,12 +4,13 @@
   {{- range .Params.contents -}}
     {{ if eq .kind "block" }}
       {{ $template := printf "blocks/templates/%s.html" .template }}
-      {{ partial $template (dict 
-          "block" . 
+      {{ partial $template (dict
+          "block" .
           "context" $context
       )}}
     {{- else if (eq .kind "heading") -}}
-      <div class="heading container" id="{{ urlize .title }}">
+      {{ $headingId = .slug | default (urlize .title) }}
+      <div class="heading container" id="{{ $headingId }}">
         <h2>{{ partial "PrepareHTML" .title }}</h2>
       </div>
     {{- end -}}
