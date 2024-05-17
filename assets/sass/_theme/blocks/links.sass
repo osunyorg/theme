@@ -4,23 +4,24 @@
         @include grid(2, md)
         align-items: flex-start
     li
-        @include icon(link-blank, after, true)
         background-color: $block-lien-card-background
+        color: $block-lien-card-color
         display: flex
         flex-direction: column-reverse
         justify-content: flex-end
-        min-height: pxToRem(130)
         position: relative
-        &::after
-            position: absolute
-            bottom: space(4)
-            right: space(4)
+        transition: background 0.3s ease
         .link-content
-            padding: space(4)
             line-height: 100%
+            min-height: pxToRem(130)
+            padding: space(4)
         a
             @include stretched-link(before)
             text-decoration: none
+            &::after
+                bottom: space(4)
+                position: absolute
+                right: space(4)
         p
             @include small
             margin-top: space(3)
@@ -31,6 +32,10 @@
                 display: block
                 aspect-ratio: 16/9
                 object-fit: cover
+        &:hover
+            background-color: $block-lien-card-hover-background
+            &, a
+                color: $block-lien-card-hover-color
     @include in-page-without-sidebar
         .top
             display: flex
