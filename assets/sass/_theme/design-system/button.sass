@@ -81,10 +81,9 @@ a.btn[target="_blank"]
     --btn-min-width: #{pxToRem(140)}
     position: relative
     button
+        @extend .btn
         @include button-icon(social-inline)
-    @include media-breakpoint-down(md)
-        button, > a
-            width: columns(6)
+        width: 100%
     .dropdown-menu
         background: var(--btn-hover-background)
         border: var(--btn-border)
