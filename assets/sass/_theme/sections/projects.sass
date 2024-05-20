@@ -28,10 +28,19 @@
             flex-direction: column
             gap: $spacing-3
         .project-infos
-            --color-border: #{$project-infos-border-color}
             --color-text: #{$project-infos-color-text}
             --color-text-alt: #{$project-infos-color-text-alt}
-            --color-accent: #{$project-infos-color-accent}
+            @include meta
+            display: flex
+            gap: $spacing-3
+            ul
+                @include list-reset
+                display: flex
+                gap: $spacing-3
+        .dropdown-share
+            .btn
+                margin-top: 0
+
     @include media-breakpoint-up(sm)
         .hero
             .project-infos
@@ -45,13 +54,17 @@
             .content
                 align-items: stretch
             .hero-text
-                justify-content: space-between
-                gap: $spacing-5
+                gap: $spacing-3
                 width: columns(6)
             .project-infos
                 width: columns(4)
             figure
                 width: columns(6)
-
-.project-infos
-    @include section__page-infos
+            .hero-text
+                // Safe space for dropdown share button wich is in a absolute position
+                position: relative
+                padding-bottom: calc(#{$spacing-5} + #{$spacing-2}) 
+            .dropdown-share
+                position: absolute
+                bottom: 0
+                right: 0

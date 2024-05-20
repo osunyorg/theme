@@ -25,10 +25,12 @@
       {{ partial "events/categories.html" . }}
     </li>
   {{ end }}
-  <li>
-    <span>{{ i18n "events.share" }}</span>
-    {{ partial "commons/share.html" . }}
-  </li>
+  {{ if site.Params.events.share_links.enabled | default site.Params.share_links.enabled }}
+    <li>
+      <span>{{ i18n "events.share" }}</span>
+      {{ partial "commons/share.html" . }}
+    </li>
+  {{ end }}
 
   {{ if not .Params.dates.archive }}
     {{ with .Params.dates.add_to_calendar }}

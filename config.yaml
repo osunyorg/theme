@@ -36,6 +36,17 @@ params:
     toc:
       disabled: true
 
+  # Enabled network for share action
+  # You can also specify this options for each sharable Section
+  share_links:
+    enabled: true
+    facebook: true
+    twitter: true
+    linkedin: true
+    email: false
+    telegram: false
+    whatsapp: false
+
   # SECTIONS
   events:
     default_image: false
@@ -46,6 +57,14 @@ params:
       show_description: true
       truncate_description: 200 # Set to 0 to disable truncate
       layout: list # grid | list
+    # share_links:
+    #   enabled: true
+    #   facebook: true
+    #   twitter: false
+    #   linkedin: false
+    #   email: true
+    #   telegram: true
+    #   whatsapp: true
   organizations:
     dark_logo_background: false
     map_marker_icon: '/assets/images/map-marker.svg'
@@ -87,13 +106,14 @@ params:
         hide_category: false
         hide_author: false
         hide_date: false
-    share_links:
-      facebook: true
-      twitter: true
-      linkedin: true
-      email: false
-      telegram: false
-      whatsapp: false
+    # share_links: # Optional
+    #   enabled: true
+    #   facebook: true
+    #   twitter: true
+    #   linkedin: true
+    #   email: false
+    #   telegram: false
+    #   whatsapp: false
   projects:
     default_image: false
     date_format: "2006"
@@ -103,18 +123,27 @@ params:
       show_year: false
       truncate_description: 200 # Set to 0 to disable truncate
       layout: list # grid | list
-    share_links:
-      facebook: true
-      twitter: true
-      linkedin: true
-      email: false
-      telegram: false
-      whatsapp: false
+    # share_links: # Optional
+    #   enabled: true
+    #   facebook: true
+    #   twitter: true
+    #   linkedin: true
+    #   email: true
+    #   telegram: true
+    #   whatsapp: true
   programs:
     related_posts:
       quantity: 4
     related_events:
       quantity: 4
+    # share_links: # Optional
+    #   enabled: true
+    #   facebook: true
+    #   twitter: true
+    #   linkedin: true
+    #   email: false
+    #   telegram: false
+    #   whatsapp: false
   volumes:
     default_image: false
 
