@@ -1,7 +1,8 @@
 import { focusTrap } from '../utils/focus-trap';
 
 const CLASSES = {
-    modalOpened: 'has-modal-opened'
+    modalOpened: 'has-modal-opened',
+    modalIsOpened: 'is-opened'
 };
 
 class Modal {
@@ -10,14 +11,13 @@ class Modal {
         this.id = this.button.getAttribute('data-open-modal');
         this.element = document.getElementById(this.id);
         this.closeButtons = this.element.querySelectorAll('.close');
+        this.state = {
+            opened: false
+        }
 
         if (!this.element) {
             return;
         }
-
-        this.state = {
-            isOpened: false
-        };
 
         this.listen();
     }
@@ -44,19 +44,21 @@ class Modal {
         });
 
         window.addEventListener('click', (event) => {
-            console.log(this.element)
             if (event.target === this.element) {
                 this.toggle(false);
             }
         });
     }
 
-    toggle(open = !this.state.isOpened) {
-        this.state.isOpened = open;
-        const classAction = this.state.isOpened ? 'add' : 'remove';
+    toggle(open) {
+        this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
+        const classAction = this.state.opened ? 'add' : 'remove';
 
-        this.element.setAttribute('aria-hidden', !this.state.isOpened);
         document.documentElement.classList[classAction](CLASSES.modalOpened);
+        
+        this.element.setAttribute('aria-hidden', !this.state.opened);
+        this.element.classList[classAction](CLASSES.modalIsOpened);
+        
     }
 }
 

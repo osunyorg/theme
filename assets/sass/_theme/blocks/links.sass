@@ -1,0 +1,53 @@
+.block-links
+    ul
+        @include list-reset
+        @include grid(2, md)
+        align-items: flex-start
+    li
+        background-color: $block-lien-card-background
+        color: $block-lien-card-color
+        display: flex
+        flex-direction: column-reverse
+        justify-content: flex-end
+        position: relative
+        transition: background 0.3s ease
+        .link-content
+            line-height: 100%
+            min-height: pxToRem(130)
+            padding: space(4)
+        a
+            @include stretched-link(before)
+            text-decoration: none
+            &::after
+                bottom: space(4)
+                position: absolute
+                right: space(4)
+        p
+            @include small
+            margin-top: space(3)
+        .media
+            aspect-ratio: 16/9
+            position: relative
+            img
+                display: block
+                aspect-ratio: 16/9
+                object-fit: cover
+        &:hover
+            background-color: $block-lien-card-hover-background
+            &, a
+                color: $block-lien-card-hover-color
+    @include in-page-without-sidebar
+        .top
+            display: flex
+            gap: var(--grid-gutter)
+            .block-title
+                width: columns(4)
+            .description
+                flex: 1
+                margin-top: 0
+        ul
+            @include grid(3, md)
+    @include media-breakpoint-down(desktop)
+        ul
+            li + li
+                margin-top: $spacing-3

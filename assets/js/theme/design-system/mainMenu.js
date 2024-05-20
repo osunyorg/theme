@@ -127,6 +127,10 @@ class MainMenu {
     }
 
     closeEverything () {
+        if (!this.state.isOpened && !this.state.hasDropdownOpened) {
+            return;
+        }
+
         this.state.isOpened = false;
         this.toggleDropdown(false);
         this.toggleMainMenu(false);

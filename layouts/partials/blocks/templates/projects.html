@@ -1,7 +1,7 @@
 {{- $block := .block -}}
 {{- $block_title := .block.title -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
-{{- $layout := "grid" -}}
+{{- $layout := .block.data.layout | default "grid" -}}
 
 {{- with .block.data -}}
   <div class="{{ $block_class }}">
