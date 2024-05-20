@@ -24,6 +24,7 @@
         .content
             align-items: stretch
         .hero-text
+            align-items: start
             display: flex
             flex-direction: column
             gap: $spacing-3
@@ -49,24 +50,17 @@
         .hero
             .project-infos
                 width: columns(6)
-    @include media-breakpoint-down(desktop)
-        .hero
-            .hero-text
-                align-items: start
-            .dropdown-share
-                max-width: columns(6)
     @include media-breakpoint-up(desktop)
         .hero
             .content
                 align-items: stretch
-            .hero-text
-                gap: $spacing-3
-                width: columns(6)
             .project-infos
                 width: columns(4)
             figure
                 width: columns(6)
             .hero-text
+                gap: $spacing-3
+                width: columns(6)
                 // Safe space for dropdown share button wich is in a absolute position
                 position: relative
                 padding-bottom: calc(#{$spacing-5} + #{$spacing-2}) 
