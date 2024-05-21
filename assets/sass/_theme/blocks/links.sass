@@ -4,8 +4,8 @@
         @include grid(2, md)
         align-items: flex-start
     li
-        background-color: $block-lien-card-background
-        color: $block-lien-card-color
+        background-color: var(--block-links-card-background)
+        color: var(--block-links-card-color)
         display: flex
         flex-direction: column-reverse
         justify-content: flex-end
@@ -33,9 +33,9 @@
                 aspect-ratio: 16/9
                 object-fit: cover
         &:hover
-            background-color: $block-lien-card-hover-background
+            background-color: var(--block-links-card-hover-background)
             &, a
-                color: $block-lien-card-hover-color
+                color: var(--block-links-card-hover-color)
     @include in-page-without-sidebar
         .top
             display: flex
@@ -47,7 +47,7 @@
                 margin-top: 0
         ul
             @include grid(3, md)
-    @include media-breakpoint-down(desktop)
+    @include media-breakpoint-down(md)
         ul
             li + li
                 margin-top: $spacing-3
