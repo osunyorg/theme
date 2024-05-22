@@ -20,19 +20,28 @@
     @include icon-block(arrow-right, before)
         position: absolute
         right: 0px
+        top: 50%
+        transform: translateY(-50%)
     a
         text-decoration: none
-    .publication-title
-        a
-            @include stretched-link(after)
-            &:hover
-                color: var(--color-accent)
-    .publication-meta
-        @include small
-        color: var(--color-text-alt)
-        margin-top: $spacing-1
-        a
+    .publication-content
+        display: flex
+        flex-direction: column
+        .publication-authors
+            order: -1
+            margin-bottom: space()
+        .publication-title
+            a
+                @include stretched-link(after)
+        .publication-meta
+            @include small
             color: var(--color-text-alt)
+            margin-top: $spacing-1
+            a
+                color: var(--color-text-alt)
+    &:hover
+        a, &::before
+            color: var(--color-accent)
     @include media-breakpoint-down(desktop)
         .publication-meta
             padding-right: $spacing-4
