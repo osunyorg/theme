@@ -20,8 +20,9 @@
     @include icon-block(arrow-right, before)
         position: absolute
         right: 0px
-        top: 50%
-        transform: translateY(-50%)
+        @include media-breakpoint-up(desktop)
+            top: 50%
+            transform: translateY(-50%)
     a
         text-decoration: none
     .publication-content
