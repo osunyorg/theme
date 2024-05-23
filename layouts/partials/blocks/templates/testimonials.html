@@ -19,60 +19,57 @@
 
         <div class="testimonials">
           {{- if $is_carousel }}
-          <div class="splide" 
-              data-splide="{{ site.Params.blocks.testimonials.splide | encoding.Jsonify }}">
-            <div class="splide__slider">
-              <div class="splide__track">
-                <div class="splide__list">
-          {{ end -}}
-
-          {{ range .testimonials }}
-            {{ $is_long := gt (len .text) 150 }}
-            <figure  class="{{ if $is_carousel }}splide__slide{{ end }} {{ if .photo }}with-picture{{ end }}">
-              <blockquote {{- if $is_long }} class="is-long" {{- end }}>
-                <p>{{- partial "PrepareHTML" .text -}}</p>
-              </blockquote>
-              {{ if or .photo .author .job -}}
-              <figcaption>
-                {{ if .photo -}}
-                  <div class="avatar">
-                    {{- partial "commons/image.html"
-                          (dict
-                            "image"    .photo
-                            "alt"      .author
-                            "sizes"    site.Params.image_sizes.blocks.testimonials
-                          ) -}}
-                  </div>
-                {{- end }}
-                {{ if or .author .job -}}
-                  <p>
-                    {{- if .author -}}
+          <div class="carrousel">
+            <div class="carrousel__slider">
+              <div class="carrousel__container">
+                {{ end -}}
+                
+                {{ range .testimonials }}
+                {{ $is_long := gt (len .text) 150 }}
+                <figure  class="{{ if $is_carousel }}carrousel__slide{{ end }} {{ if .photo }}with-picture{{ end }}">
+                  <blockquote {{- if $is_long }} class="is-long" {{- end }}>
+                    <p>{{- partial "PrepareHTML" .text -}}</p>
+                  </blockquote>
+                  {{ if or .photo .author .job -}}
+                  <figcaption>
+                    {{ if .photo -}}
+                    <div class="avatar">
+                      {{- partial "commons/image.html"
+                      (dict
+                      "image"    .photo
+                      "alt"      .author
+                      "sizes"    site.Params.image_sizes.blocks.testimonials
+                      ) -}}
+                    </div>
+                    {{- end }}
+                    {{ if or .author .job -}}
+                    <p>
+                      {{- if .author -}}
                       <span class="signature">{{ partial "PrepareHTML" .author }}</span>
-                    {{- end }}
-                    {{- if .job -}}
+                      {{- end }}
+                      {{- if .job -}}
                       <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
+                      {{- end }}
+                    </p>
                     {{- end }}
-                  </p>
-                {{- end }}
-              </figcaption>
-              {{ end }}
-            </figure>
-          {{ end }}
-
-          {{- if $is_carousel }}
-                </div>
+                  </figcaption>
+                  {{ end }}
+                </figure>
+                {{ end }}
+                
+                {{- if $is_carousel }}
               </div>
             </div>
-
-            <button class="splide__toggle">
-              <span class="splide__toggle__play"></span>
-              <span class="splide__toggle__pause"></span>
-            </button>
+            <div class="carrousel__controller">
+              <ul class="carrousel__pagination"></ul>
+              <button class="splide__toggle">
+                <span class="splide__toggle__play"></span>
+                <span class="splide__toggle__pause"></span>
+              </button>
+            </div>              
           </div>
           {{ end -}}
-
         </div>
-
       </div>
     </div>
   </div>

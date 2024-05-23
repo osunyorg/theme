@@ -33,66 +33,66 @@
         margin-right: $spacing-2
         margin-bottom: 0
 
-    .splide
-        .splide__slider
-            display: flex
-            flex-direction: column-reverse
-        &__toggle
-            border: 1px solid $block-testimonials-pagination-background
-            border-radius: 50%
-            cursor: pointer
-            font-size: 0
-            height: 42px
-            padding: 0
-            position: absolute
-            right: 0
-            top: 0
-            width: 42px
-            font-size: 0
-            line-height: 1
-            span
-                color: var(--color-accent)
-                &::before
-                    font-size: pxToRem(42)
-        .splide__pagination
-            .is-active i
-                width: 100%
+    // .splide
+    //     .splide__slider
+    //         display: flex
+    //         flex-direction: column-reverse
+    //     &__toggle
+    //         border: 1px solid $block-testimonials-pagination-background
+    //         border-radius: 50%
+    //         cursor: pointer
+    //         font-size: 0
+    //         height: 42px
+    //         padding: 0
+    //         position: absolute
+    //         right: 0
+    //         top: 0
+    //         width: 42px
+    //         font-size: 0
+    //         line-height: 1
+    //         span
+    //             color: var(--color-accent)
+    //             &::before
+    //                 font-size: pxToRem(42)
+    //     .splide__pagination
+    //         .is-active i
+    //             width: 100%
 
-            .splide__play
-                &::before
-                    margin-left: 2px
-        &__pagination
-            justify-content: unset
-            margin-right: 55px
-            li
-                flex: 1
-                margin-right: 10px
-            button
-                @include button-reset
-                position: relative
-                width: 100%
-                &::before,
-                i
-                    height: 1px
-                    left: 0
-                    top: 50%
-                    position: absolute
-                &::before
-                    background-color: $block-testimonials-pagination-background
-                    border-radius: 0
-                    width: 100%
-                i
-                    background-color: $block-testimonials-pagination-progress-background
-                    width: 0
+    //         .splide__play
+    //             &::before
+    //                 margin-left: 2px
+    //     &__pagination
+    //         justify-content: unset
+    //         margin-right: 55px
+    //         li
+    //             flex: 1
+    //             margin-right: 10px
+    //         button
+    //             @include button-reset
+    //             position: relative
+    //             width: 100%
+    //             &::before,
+    //             i
+    //                 height: 1px
+    //                 left: 0
+    //                 top: 50%
+    //                 position: absolute
+    //             &::before
+    //                 background-color: $block-testimonials-pagination-background
+    //                 border-radius: 0
+    //                 width: 100%
+    //             i
+    //                 background-color: $block-testimonials-pagination-progress-background
+    //                 width: 0
 
     @include in-page-without-sidebar
-        .top
-            padding-left: offset(3)
-        .splide__pagination
-            padding-left: offset(3)
-            padding-right: offset(1)
-        .splide__autoplay
-            margin-right: offset(1)
+        // .top
+        //     padding-left: offset(3)
+        // .splide__pagination
+        //     padding-left: offset(3)
+        //     padding-right: offset(1)
+        // .splide__autoplay
+        //     margin-right: offset(1)
         figure
             padding-right: offset(3)
             min-height: columns(2)
@@ -109,3 +109,18 @@
                         top: 0
                         margin-left: var(--grid-gutter)
                         width: columns(2)
+    .carrousel
+        &__slider
+            overflow: hidden
+        &__container
+            position: relative
+            transition-duration: 1s
+            display: flex
+            flex-direction: row
+            left: 0px
+            top: 0
+            width: fit-content
+            figure
+                width: columns(12)
+                @include in-page-with-sidebar
+                    width: columns(8)

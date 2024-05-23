@@ -28,7 +28,7 @@
 {{ end }}
 
 {{ if $isSplideNeed }}
-  {{ $splide_js := resources.Get "js/vendors/carousel.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
+  {{ $splide_js := resources.Get "js/vendors/carouseles5.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
   <script src="{{ $splide_js.RelPermalink }}" integrity="{{ $splide_js.Data.Integrity }}"></script>
 {{ end }}
 
