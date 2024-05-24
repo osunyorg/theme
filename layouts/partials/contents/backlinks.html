@@ -1,10 +1,42 @@
 {{ $about := .Title }}
 <div class="backlinks">
   {{ with .Params.backlinks.current_website }}
+    {{ if .events }}
+      {{ partial "blocks/templates/agenda.html" (dict
+        "block" (dict 
+          "title" (printf "%s %s" (i18n "events.backlinks.projects") $about)
+          "template" "agenda"
+          "ranks" (dict 
+            "self" 2
+            "children" 3
+          )
+          "data" (dict
+            "layout" "grid"
+            "events" .events
+            "show_summary" true
+          )
+        )
+      ) }}
+    {{ end }}
+    {{ if .projects }}
+      {{ partial "blocks/templates/projects.html" (dict
+        "block" (dict 
+          "title" (printf "%s %s" (i18n "persons.backlinks.projects") $about)
+          "template" "projects"
+          "ranks" (dict
+            "self" 2
+            "children" 3
+          )
+          "data" (dict
+            "projects" .projects
+          )
+        )
+      ) }}
+    {{ end }}
     {{ if .pages }}
       {{ partial "blocks/templates/pages.html" (dict
         "block" (dict 
-          "title" (printf "Pages mentionnant %s" $about)
+          "title" (printf "%s %s" (i18n "pages.backlinks.projects") $about)
           "template" "pages"
           "ranks" (dict 
             "self" 2
@@ -27,7 +59,7 @@
       {{ end }}
       {{ partial "blocks/templates/posts.html" (dict
         "block" (dict 
-          "title" (printf "Actualités mentionnant %s" $about)
+          "title" (printf "%s %s" (i18n "posts.backlinks.projects") $about)
           "template" "posts"
           "ranks" (dict 
             "self" 2
@@ -36,38 +68,6 @@
           "data" (dict
             "layout" "grid"
             "posts" $posts
-          )
-        )
-      ) }}
-    {{ end }}
-    {{ if .events }}
-      {{ partial "blocks/templates/agenda.html" (dict
-        "block" (dict 
-          "title" (printf "Événements mentionnant %s" $about)
-          "template" "agenda"
-          "ranks" (dict 
-            "self" 2
-            "children" 3
-          )
-          "data" (dict
-            "layout" "grid"
-            "events" .events
-            "show_summary" true
-          )
-        )
-      ) }}
-    {{ end }}
-    {{ if .projects }}
-      {{ partial "blocks/templates/projects.html" (dict
-        "block" (dict 
-          "title" (printf "Projets mentionnant %s" $about)
-          "template" "projects"
-          "ranks" (dict
-            "self" 2
-            "children" 3
-          )
-          "data" (dict
-            "projects" .projects
           )
         )
       ) }}
