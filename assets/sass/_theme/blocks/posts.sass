@@ -51,15 +51,8 @@
                 time
                     vertical-align: baseline
                 .post-author
-                    display: inline
-                    p
+                    &, p
                         display: inline
-            .post-categories 
-                display: inline
-                *
-                    display: inline-block
-                li
-                    margin-right: $spacing-2
             // Désactiver le ratio forcé de la configuration $article-media-aspect-ratio
             .media
                 &, img
@@ -70,6 +63,11 @@
                     margin-top: $spacing-4
                 p[itemprop="articleBody"]
                     margin-top: 0
+                .post-author 
+                    margin-right: 0
+                    + time
+                        &::before
+                            content: ' • '
         @include media-breakpoint-up(desktop)
             .large
                 .post
@@ -81,8 +79,13 @@
                         @include h2
                     p[itemprop="articleBody"]
                         margin-top: $spacing-3
-                    .post-categories
+                    &-categories
+                    &-categories 
+                        display: inline
+                        *
+                            display: inline-block
                         li
+                            margin-right: $spacing-2
                             a
                                 display: inline
 
