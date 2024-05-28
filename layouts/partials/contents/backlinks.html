@@ -18,21 +18,6 @@
         )
       ) }}
     {{ end }}
-    {{ if .projects }}
-      {{ partial "blocks/templates/projects.html" (dict
-        "block" (dict 
-          "title" (printf "%s %s" (i18n "persons.backlinks.projects") $about)
-          "template" "projects"
-          "ranks" (dict
-            "self" 2
-            "children" 3
-          )
-          "data" (dict
-            "projects" .projects
-          )
-        )
-      ) }}
-    {{ end }}
     {{ if .pages }}
       {{ partial "blocks/templates/pages.html" (dict
         "block" (dict 
@@ -48,6 +33,21 @@
             "show_descriptions" true
             "show_images" true
             "pages" .pages
+          )
+        )
+      ) }}
+    {{ end }}
+    {{ if .projects }}
+      {{ partial "blocks/templates/projects.html" (dict
+        "block" (dict 
+          "title" (printf "%s %s" (i18n "persons.backlinks.projects") $about)
+          "template" "projects"
+          "ranks" (dict
+            "self" 2
+            "children" 3
+          )
+          "data" (dict
+            "projects" .projects
           )
         )
       ) }}
