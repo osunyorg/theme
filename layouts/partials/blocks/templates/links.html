@@ -19,7 +19,7 @@
                 {{- $url := .url -}}
                 {{- $isExternal := .external | default true -}}
                 <link itemprop="url" href="{{ .url }}">
-                <a itemprop="relatedLink" href="{{ .url }}" title="{{ $title }}" {{ if $isExternal -}} target="_blank" {{- end }}><span itemprop="name">{{- $title -}}</span></a>
+                <a itemprop="relatedLink" href="{{ .url }}" title="{{ $title }}" {{ if $isExternal -}} target="_blank" rel="noopener" {{- end }}><span itemprop="name">{{- $title -}}</span></a>
                 <p>{{ .description | safeHTML }}</p>
               </div>
               {{- if .image -}}
