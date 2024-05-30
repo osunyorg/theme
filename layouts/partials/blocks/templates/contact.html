@@ -50,7 +50,14 @@
               {{ end }}
               {{ if or .url .emails }}
                 <div>
-                  <p class="meta">{{- i18n "commons.contact.web" -}}</p>
+                  <p class="meta">
+                    {{ if .url }}
+                      {{- i18n "commons.contact.web" -}}
+                    {{ else }}
+                      {{- i18n "commons.contact.email" -}}
+                    {{ end }}
+                  </p>
+                  
                   {{ range .emails }}
                     <p><a itemprop="email" href="mailto:{{ . }}">{{ . }}</a></p>
                   {{ end }}
