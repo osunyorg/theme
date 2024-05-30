@@ -2,7 +2,9 @@
 // O - pause button
 // O - touch
 // O - pagination - goto + progress
-// O - ajout elements fin en fonction du nombre 
+// X - ajout elements fin en fonction du nombre 
+// 0 - resize pété
+// 0 - bug au drag
 
 Carrousel = function Carrousel(element, options) {
     this.elem = element; // check type dom element
@@ -21,7 +23,13 @@ Carrousel = function Carrousel(element, options) {
         this.initTrack(trackElem);
         if(options.pagination) {
             document.addEventListener("keydown", function(e) {
-                this.move(parseInt(e.key)-this.track.n);
+                //this.move(parseInt(e.key)-this.track.n);
+                if(e.key == 'ArrowLeft'){
+                    this.move(-1);
+                }
+                else if(e.key == 'ArrowRight'){
+                    this.move(1);
+                }
             }.bind(this))
         }
         if(options.autoplay) {
@@ -34,15 +42,11 @@ Carrousel = function Carrousel(element, options) {
         return;
     }
 }
+
 Carrousel.prototype.onResize = function onResize() {
     this.ready = false;
-    for(var i = 0; i < this.elements.length; i++) {
-        var e = this.elements[i].element;
-        var style = getComputedStyle(e);
-        this.elements[i].width = e.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
-    }
+    this.computeDim();
     this.ready = true;
-    this.move(0);
 }
 
 Carrousel.prototype.initTrack = function initTrack(trackElem) {
@@ -50,7 +54,8 @@ Carrousel.prototype.initTrack = function initTrack(trackElem) {
         elem: trackElem,
         pos : 0,
         n : 0,
-        delta: 0
+        delta: 0,
+        len: 0
     };
 
     // Je récupere la durée de transition specifiée dans le css
@@ -64,19 +69,32 @@ Carrousel.prototype.initTrack = function initTrack(trackElem) {
     var childrenAsArray = Array.from(this.track.elem.children);
     for(var i = 0; i < childrenAsArray.length; i++) {
         var e = childrenAsArray[i];
-        var style = getComputedStyle(e);
+        if(this.loop) {
+            this.track.elem.appendChild(e.cloneNode(true)); // ajout d'une copie a la fin
+        }
         var el = {};
-        el.width = e.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
         el.element = e;
         el.id = i;
         this.elements.push(el);
-        // this.track.elem.appendChild(e.cloneNode(true)); // ajout d'une copie a la fin
+    }
+
+    this.computeDim();
+    
+    if(this.track.len < this.elem.offsetWidth){  // dans le cas ou le contenu est plus petit que la fenetre ...
+        for(var i = 0; i < childrenAsArray.length; i++) {
+            var e = childrenAsArray[i];
+            this.track.elem.appendChild(e.cloneNode(true)); // ajout d'une copie a la fin
+        }
+        this.computeDim();
+    }
+
+    if(this.loop) {
+        //todo compute width according to window 
+        this.track.pos -= this.track.len; // initialisation de la position du track
+        this.updatePos();
     }
     
-    //todo compute width according to window 
-    // this.track.pos -= this.track.elem.offsetWidth; // initialisation de la position du track
-    // this.updatePos();
-    
+
     this.track.elem.addEventListener('transitionend', function() {
         this.ready = false;
         if(this.offset > 0) {
@@ -99,6 +117,7 @@ Carrousel.prototype.initTrack = function initTrack(trackElem) {
     this.elem.addEventListener("mouseenter",function(e) {
         this.hovered = true;
     }.bind(this));
+    
     this.elem.addEventListener("mouseleave",function(e) {
         this.hovered = false;
     }.bind(this));
@@ -109,10 +128,21 @@ Carrousel.prototype.initTrack = function initTrack(trackElem) {
     return this;
 }
 
+Carrousel.prototype.computeDim = function computeDim(){
+    // compute width
+    this.track.len = 0;
+    for(var i = 0; i < this.elements.length; i++) {
+        var e = this.elements[i].element;
+        var style = getComputedStyle(e);
+        this.elements[i].width = e.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+        this.track.len += this.elements[i].width;
+    }
+}
+
 Carrousel.prototype.initAutoPlay = function initAutoPlay(params) {
     this.autoplay = {
         interval: 10000,
-        pauseOnHover: true,
+        pauseOnHover: false,
         pauseOnFocus: false
     };
 
@@ -122,6 +152,10 @@ Carrousel.prototype.initAutoPlay = function initAutoPlay(params) {
         if(params.interval > this.transitionDuration) { 
             this.autoplay.interval = parseInt(params.interval);
         }
+    }
+
+    if(params.pauseOnHover){
+        this.autoplay.pauseOnHover = params.pauseOnHover;
     }
 
     this.autoplay.counter = setInterval(function() { // auto move
@@ -168,18 +202,20 @@ Carrousel.prototype.initDrag = function initDrag() {
 
 Carrousel.prototype.onDrag = function onDrag(e) {
     this.drag.active = true;
-    this.track.pos += e.offsetX - this.drag.posx;
-    this.updatePos();
-
-    this.drag.delta = this.track.pos-this.drag.startpos;
-    this.drag.target = 0;
-    if(Math.sign(this.drag.delta) > 0) {            
-        if(Math.abs(this.drag.delta) - this.elements[this.elementAt(-1)].width/2 > 0) {
-            this.drag.target -= 1;                
-        }
-    }else{
-        if(Math.abs(this.drag.delta) - this.elements[this.elementAt(0)].width/2 > 0) {
-            this.drag.target += 1;
+    if(this.track.pos < 0){
+        this.track.pos += e.offsetX - this.drag.posx;
+        this.updatePos();
+    
+        this.drag.delta = this.track.pos-this.drag.startpos;
+        this.drag.target = 0;
+        if(Math.sign(this.drag.delta) > 0) {            
+            if(Math.abs(this.drag.delta) - this.elements[this.elementAt(-1)].width/2 > 0) {
+                this.drag.target -= 1;                
+            }
+        }else{
+            if(Math.abs(this.drag.delta) - this.elements[this.elementAt(0)].width/2 > 0) {
+                this.drag.target += 1;
+            }
         }
     }
 }
@@ -192,7 +228,8 @@ Carrousel.prototype.slide = function slide() {
 }
 
 Carrousel.prototype.elementAt = function elementAt(i) {
-    var trackLen = this.track.elem.children.length;
+    // var trackLen = this.track.elem.children.length;
+    var trackLen = this.elements.length;
     return ((this.track.n + i) % trackLen + trackLen) % trackLen;
 }
 
@@ -218,21 +255,22 @@ Carrousel.prototype.move = function(offset) {
 
 window.addEventListener("load", function() {
     var classCarrousel = "carrousel__slider";
-
-    var params = {
-        arrows: false,
-        pagination: true,
-        loop: true,
-        rewind: false,
-        autoplay: true,
-        pauseOnHover: false,
-        pauseOnFocus: true,
-        interval: 2000,
-        classContainer: "carrousel__container"
-    };
+    // var params = {
+    //     arrows: false,
+    //     pagination: true,
+    //     loop: true,
+    //     rewind: false,
+    //     autoplay: true,
+    //     pauseOnHover: false,
+    //     pauseOnFocus: true,
+    //     interval: 2000,
+    //     classContainer: "carrousel__container"
+    // };
     var params = {
         classContainer: "carrousel__container",
-        pagination: true
+        pagination: true,
+        autoplay: false,
+        interval: 2000
     }
     var carrousels = document.getElementsByClassName(classCarrousel);
     for (var i = 0; i < carrousels.length; i+=1) {
