@@ -19,7 +19,6 @@
             {{ $siteLang := . }}
             {{ $url = printf "/%s/" .Lang }}
             {{ range $pageWithTranslations }}
-              {{ .Lang }}
               {{ if eq .Lang $siteLang.Lang }}
                 {{ $url = .Permalink }}
               {{ end }}
