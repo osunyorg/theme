@@ -117,7 +117,7 @@ class KeyFigures {
 }
 
 window.addEventListener('load', () => {
-    const keyFigures = document.querySelectorAll('.block-key_figures.with-animation');
+    const keyFigures = document.querySelectorAll('.block-key_figures.is-animated');
     keyFigures.forEach((dom) => {
         new KeyFigures(dom);
     });

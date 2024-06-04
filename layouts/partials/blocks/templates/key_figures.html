@@ -1,10 +1,10 @@
 {{- $block := .block -}}
-{{- $isAnimated := site.Params.blocks.key_figures.animation -}}
+{{- $isAnimated := site.Params.blocks.key_figures.animated -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
 
 {{- with .block.data -}}
   {{- $figures := .figures }}
-  <div class="{{ $block_class }} {{- if $isAnimated }} with-animation {{ end }}">
+  <div class="{{ $block_class }} {{- if $isAnimated }} is-animated {{ end }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
