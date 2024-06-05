@@ -1,0 +1,76 @@
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading := printf "h%d" $heading_level }}
+{{ $heading_tag := (dict 
+  "open" ((printf "<%s class='paper-title' itemprop='headline'>" $heading) | safeHTML)
+  "close" ((printf "</%s>" $heading) | safeHTML)
+  ) }}
+
+{{- $block := .block -}}
+{{- $template := .block.template -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+
+{{- with .block.data -}}
+  <div class="block block-papers {{- if $title }} block-with-title {{- end -}}">
+    <div class="container">
+      <div class="block-content">
+        {{ if $block.title -}}
+          {{ $link := false }}
+          {{- if .all -}}
+            {{ $papers_page := site.GetPage "/papers" }}
+            {{ $link = $papers_page.Permalink }}
+          {{- end -}}
+
+          {{ partial "blocks/top.html" (dict
+            "title" $block.title
+            "heading_level" $block.ranks.self
+            "link" $link
+          )}}
+        {{- end }}
+
+        <div class="papers">
+          {{ range $paper := .papers -}}
+            {{ with site.GetPage (printf "/papers/%s" $paper) }}
+              <article class="paper" itemscope itemtype="https://schema.org/ScholarlyArticle">
+                <div class="paper-content">
+                  {{ $heading_tag.open }}
+                    <a href="{{ .Permalink }}" itemprop="url">
+                      <span itemprop="name">{{ partial "PrepareHTML" .Title }}</span>
+                    </a>
+                  {{ $heading_tag.close }}
+                  <div class="paper-meta">
+                    {{ with .Params.paper_kind }}
+                      <span class="paper-kind">{{ . }}</span>
+                    {{ end }}
+                    <p class="paper-volume">
+                      {{ range .Params.Volumes }}
+                        {{ $volume := site.GetPage (printf "/volumes/%s" .) }}
+                        {{ if $volume }}
+                          {{ i18n "commons.in" }} “<a href="{{ $volume.Permalink }}">{{ $volume.Title }}</a>”
+                        {{ end }}
+                      {{ end }}
+                    </p>
+                  </div>
+                </div>
+                <div class="paper-authors">
+                  {{- range $index, $authors := .Params.Researchers -}}
+                    {{- $author := site.GetPage (printf "/persons/%s" .) -}}
+                    {{ if $author }}
+                      {{- if ne $index 0 -}},{{ end }}
+                      <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                        <a href="{{ $author.Permalink }}" itemprop="url">
+                          <span itemprop="name">{{ trim $author.Title "\n" }}</span>
+                        </a>
+                      </span>
+                    {{- end -}}
+                  {{- end -}}
+                  {{ .Params.authors_list }}
+                </div>
+              </article>
+            {{ end }}
+          {{ end}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{- end -}}
