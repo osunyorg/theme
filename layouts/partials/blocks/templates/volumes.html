@@ -15,11 +15,8 @@
     <div class="container">
       <div class="block-content">
         {{ if $block.title -}}
-          {{ $link := false }}
-          {{- if .all -}}
-            {{ $volumes_page := site.GetPage "/volumes" }}
-            {{ $link = $volumes_page.Permalink }}
-          {{- end -}}
+          {{ $volumes_page := site.GetPage "/volumes" }}
+          {{ $link := $volumes_page.Permalink }}
 
           {{ partial "blocks/top.html" (dict
             "title" $block.title
