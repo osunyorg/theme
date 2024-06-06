@@ -15,9 +15,10 @@ class KeyFigures {
     constructor (dom) {
         this.dom = dom;
         this.time = 0;
+        this.isAnimated = this.dom.classList.contains('is-animated') ? true : false;
         this.init();
     }
-
+    
     init () {
         let target = 0;
         this.figures = this.dom.querySelectorAll('strong');
@@ -31,7 +32,7 @@ class KeyFigures {
         });
 
         // Show format value if reduced motion
-        if (!isReducedMotionPrefered()) {
+        if (this.isAnimated && !isReducedMotionPrefered()) {
             this.intersectionObserver = new IntersectionObserver(this.observe.bind(this));
             this.intersectionObserver.POLL_INTERVAL = 100;
             this.intersectionObserver.observe(this.dom);
@@ -117,7 +118,7 @@ class KeyFigures {
 }
 
 window.addEventListener('load', () => {
-    const keyFigures = document.querySelectorAll('.block-key_figures.is-animated');
+    const keyFigures = document.querySelectorAll('.block-key_figures');
     keyFigures.forEach((dom) => {
         new KeyFigures(dom);
     });
