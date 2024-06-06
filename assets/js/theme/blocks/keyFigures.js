@@ -25,7 +25,7 @@ class KeyFigures {
         this.targets = [];
         this.values = [];
         this.figures.forEach((figure) => {
-            target = parseFloat(figure.innerHTML.replace(/\s/g, ''), 10);
+            target = parseFloat(figure.innerHTML, 10);
             this.values.push(0);
             this.targets.push(target);
             figure.innerText = this.formatValue(target);
