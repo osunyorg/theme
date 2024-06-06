@@ -1,18 +1,23 @@
-<ul class="project-infos">
-  {{ if .Params.projects_categories }}
-    <li class="terms">
-      <span>{{ i18n "projects.category" ( len .Params.projects_categories ) }}</span>
-      {{ partial "projects/categories.html" . }}
-    </li>
-  {{ end }}
-  {{ with .Params.year }}
-    <li>
-      <span>{{ i18n "projects.year" }}</span>
-      <time datetime="{{ . }}">{{ . }}</time>
-    </li>
-  {{ end }}
-  <li class="social-share">
-    <span>{{ i18n "projects.share" }}</span>
-    {{ partial "commons/share.html" . }}
-  </li>
-</ul>
+{{ if or .Params.projects_categories .Params.year }}
+  <div class="project-infos">
+    {{ with .Params.year }}
+      <div class="year">
+        <time datetime="{{ . }}">{{ . }}</time>
+      </div>
+    {{ end }}
+    {{ if .Params.projects_categories }}
+      <div class="terms">
+        {{ partial "projects/categories.html" . }}
+      </div>
+    {{ end }}
+  </div>
+{{ end }}
+
+{{ if site.Params.projects.share_links.enabled | default site.Params.share_links.enabled }}
+  <div class="dropdown-share">
+    <button type="button" aria-expanded="false">{{ i18n "commons.share" }}</button>
+    <div class="dropdown-menu">
+      {{ partial "commons/share.html" . }}
+    </div>
+  </div>
+{{ end }}

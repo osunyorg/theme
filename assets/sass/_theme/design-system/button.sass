@@ -78,7 +78,12 @@ a.btn[target="_blank"]
     @include button-icon(link-blank-raw)
 
 .dropdown-share
+    --btn-min-width: #{pxToRem(140)}
     position: relative
+    button
+        @extend .btn
+        @include button-icon(social-inline)
+        width: 100%
     .dropdown-menu
         background: var(--btn-hover-background)
         border: var(--btn-border)

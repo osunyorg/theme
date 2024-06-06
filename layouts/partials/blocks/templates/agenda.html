@@ -10,7 +10,7 @@
     <div class="container">
       <div class="block-content">
         {{ $events_page := site.GetPage "/events" }}
-        {{ $link := $events_page.Permalink }}
+        {{ $link := .title_link }}
 
         {{ if .category }}
           {{ $term := site.GetPage (printf "/events_categories%s" .category) }}
