@@ -94,10 +94,14 @@
                     width: columns(4)
             &.reduced
                 grid-column: 2/4
-            span
-                width: columns(2)
-                &:first-child
-                    width: columns(4)
+                span
+                    width: columns(2)
+                    &:last-child
+                        text-align: right
+                    &:first-child
+                        width: columns(4)
+                        + span
+                            text-align: left
 
     @include in-page-with-sidebar
         .contacts
