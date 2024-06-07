@@ -32,18 +32,20 @@
         li
             display: flex
             flex-wrap: wrap
-            padding-bottom: $spacing-2
             + li:not(.meta)
+                padding-bottom: $spacing-2
+            + li:not(.meta, .meta + li)
                 padding-top: $spacing-2
             + li:not(:last-child)
                 border-bottom: 1px solid var(--color-border)
             @include media-breakpoint-down(desktop)
-                justify-content: end
-                flex-wrap: wrap
-                span
-                    min-width: 50%
-                    &:nth-child(n+2)
-                        text-align: right
+                &:not(.meta)
+                    justify-content: end
+                    flex-wrap: wrap
+                    span
+                        min-width: 50%
+                        &:nth-child(n+2)
+                            text-align: right
             @include media-breakpoint-up(desktop)
                 gap: var(--grid-gutter)
     time + time
@@ -79,7 +81,12 @@
                 @include icon(social-tiktok, before)
             &.github
                 @include icon(social-github, before)
-
+    @include media-breakpoint-down(desktop)
+        .socials-list
+            @include grid(2)
+            row-gap: space()
+        .meta
+            margin-bottom: space()
     @include in-page-without-sidebar
         .top
             margin-bottom: $spacing-4
