@@ -15,7 +15,7 @@ class KeyFigures {
     constructor (dom) {
         this.dom = dom;
         this.time = 0;
-        this.isAnimated = this.dom.classList.contains('is-animated') ? true : false;
+        this.isAnimated = this.dom.classList.contains('is-animated');
         this.init();
     }
     
