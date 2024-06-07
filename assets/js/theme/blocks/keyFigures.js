@@ -15,9 +15,10 @@ class KeyFigures {
     constructor (dom) {
         this.dom = dom;
         this.time = 0;
+        this.isAnimated = this.dom.classList.contains('is-animated');
         this.init();
     }
-
+    
     init () {
         let target = 0;
         this.figures = this.dom.querySelectorAll('strong');
@@ -31,7 +32,7 @@ class KeyFigures {
         });
 
         // Show format value if reduced motion
-        if (!isReducedMotionPrefered()) {
+        if (this.isAnimated && !isReducedMotionPrefered()) {
             this.intersectionObserver = new IntersectionObserver(this.observe.bind(this));
             this.intersectionObserver.POLL_INTERVAL = 100;
             this.intersectionObserver.observe(this.dom);
@@ -87,7 +88,7 @@ class KeyFigures {
     }
 
     formatValue (value, separator = ' ') {
-        return value.toLocaleString('en').replace(',', separator);
+        return value.toLocaleString('en').replace(/,/g, separator);
     }
 
     onEnded() {
