@@ -1,13 +1,21 @@
 .block-papers
     .papers
         .paper
-            @include grid(12, md)
+            display: block
             border-bottom: 1px solid var(--color-border)
             margin-bottom: $spacing-3
             padding-bottom: $spacing-3
-            &-content
-                grid-column: 1/8
-            &-meta *
-                display: inline
-            &-authors
-                grid-column: 8/12
+            &-volumes
+                a
+                    @include link
+            &-meta
+                margin-top: $spacing-1
+                > * 
+                    display: inline
+        @include in-page-without-sidebar
+            .paper
+                @include grid(12, md)
+                &-title
+                    grid-column: 1/8
+                &-meta
+                    grid-column: 9/13
