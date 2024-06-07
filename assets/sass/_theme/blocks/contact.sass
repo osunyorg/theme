@@ -33,11 +33,10 @@
             display: flex
             flex-wrap: wrap
             padding-bottom: $spacing-2
-            &:first-of-type
-                padding-top: 0
-            + li
+            + li:not(.meta)
                 padding-top: $spacing-2
-                border-top: 1px solid var(--color-border)
+            + li:not(:last-child)
+                border-bottom: 1px solid var(--color-border)
             @include media-breakpoint-down(desktop)
                 justify-content: end
                 flex-wrap: wrap
