@@ -36,9 +36,11 @@ class MainMenu {
             }
         });
 
-        this.mainButton.addEventListener('click', () => {
-            this.toggleMainMenu();
-        });
+        if (this.mainButton) {
+            this.mainButton.addEventListener('click', () => {
+                this.toggleMainMenu();
+            });
+        }
 
         this.dropdownsButtons.forEach((button) => {
             a11yClick(button, (event) => {
