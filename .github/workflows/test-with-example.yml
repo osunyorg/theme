@@ -11,7 +11,7 @@ jobs:
       - name: Set new submodule in new branch on Osuny Example
         uses: actions/checkout@v4
         with:
-          repository: noesya/osuny-example
+          repository: osunyorg/example
           submodules: 'recursive'
           token: ${{ secrets.OSUNY_EXAMPLE_TOKEN }}
       - name: Create new branch on Example
@@ -23,9 +23,9 @@ jobs:
       - name: Checkout submodule
         uses: actions/checkout@v4
         with:
-          repository: noesya/osuny-hugo-theme-aaa
+          repository: osunyorg/theme
           token: ${{ secrets.OSUNY_EXAMPLE_TOKEN }}
-          path: themes/osuny-hugo-theme-aaa
+          path: themes/osuny
           ref: ${{ github.head_ref || github.ref_name }}
       - name: Pushing new branch on Example
         run: |
