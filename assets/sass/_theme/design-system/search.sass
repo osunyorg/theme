@@ -16,14 +16,12 @@
     text-align: left
     box-shadow: none
     &:not(.toggle-text)
-        @include icon(search-inline, after)
+        @include icon(search-line, after)
         &::after
             line-height: inherit
             margin-left: $spacing-1
     &:not(.pagefind-menu)    
         padding: $spacing-1 $spacing-2
-    &.toggle-icon::after
-        font-size: $h2-size
     &.toggle-both
         .menu & span
             padding-right: 0
@@ -38,7 +36,7 @@
         &.toggle-icon::after
                 margin-left: 0
 .search__close
-    @include icon-block(close, after)
+    @include icon-block(close-line, after)
     position: fixed
     right: $spacing-5
     padding: 0
@@ -84,7 +82,7 @@
             @include media-breakpoint-down(desktop)
                 height: space(52)
         &__form
-            @include icon(search-inline, after)
+            @include icon(search-line, after)
             &::after
                 color: alphaColor(var(--color-text-alt), 0.6)
                 position: fixed
