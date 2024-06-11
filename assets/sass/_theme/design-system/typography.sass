@@ -214,7 +214,7 @@ a,
     @include link
     overflow-wrap: break-word
     &[target="_blank"]:not(.icon)
-        @include icon(link-blank, after, true)
+        @include icon(external-link-line, after, true)
             vertical-align: baseline
     &[href^="mailto"]
         &::after
@@ -236,7 +236,7 @@ a,
 
 .link-more
     @include link
-    @include icon(arrow, before)
+    @include icon(arrow-right-line, before)
     &::before
         font-size: pxToRem(10)
         margin-right: pxToRem(5)
@@ -269,11 +269,11 @@ sup
 [data-click-to-copy]
     cursor: pointer
     text-decoration: none
-    @include icon(copy-inline, after)
+    @include icon(file-copy-line, after)
         margin-left: $spacing-2
         vertical-align: text-top
     &.is-copied
-        @include icon(check-inline, after)
+        @include icon(check-line, after)
 
 *:focus-visible
     outline-color: inherit
@@ -291,7 +291,8 @@ sup
     font-family: 'Icon'
     font-style: normal
     font-weight: 400
-    src: url('/assets/fonts/fonticons/IconFont.woff2') format("woff2"), url('/assets/fonts/fonticons/IconFont.woff') format("woff"), url('/assets/fonts/fonticons/IconFont.ttf') format("truetype")
+    src: url('/assets/fonts/remixicon/remixicon.eot')
+    src: url('/assets/fonts/remixicon/remixicon.eot#iefix') format('embedded-opentype'), url("/assets/fonts/remixicon/remixicon.woff2") format("woff2"), url("/assets/fonts/remixicon/remixicon.woff") format("woff"), url('/assets/fonts/remixicon/remixicon.ttf') format('truetype'), url('/assets/fonts/remixicon/remixicon.svg#remixicon') format('svg')
 
 @each $name, $glyph in $icons
     .icon-#{$name}
