@@ -22,8 +22,10 @@
       {{ $isSplideNeed = true }}
     {{ end }}
   {{ end }}
+{{ end }}
+
 <!-- check if map needed  -->
-{{ else if .Params.contact_details.geolocation }} 
+{{ if .Params.contact_details.geolocation }} 
   {{ $isLeafletNeeded = true }}
 {{ end }}
 

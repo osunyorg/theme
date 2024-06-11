@@ -1,7 +1,7 @@
 {{ $logo_index := .logo_index }}
 {{ $with_link := .with_link }}
 
-<div class="map" data-marker-icon="{{ $.Site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}">
+<div class="map" data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}">
   {{- range .organizations }}
     {{ if .slug }}
       {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
