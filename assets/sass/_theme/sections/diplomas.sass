@@ -117,10 +117,6 @@ ul.diplomas
         @include meta
         display: flex
         flex-wrap: wrap
-        .dropdown-share
-            button
-                @extend .button
-                @include button-icon(social-inline)
         a[download]
             @extend .button-alt
             @include button-icon(download-inline)
@@ -128,17 +124,20 @@ ul.diplomas
             button, > a
                 width: 100%
         @include media-breakpoint-down(md)
-            --btn-min-width: #{pxToRem(140)}
             gap: $spacing-3
             flex-direction: row
-            button, > a
+            button,
+            > a
                 width: columns(6)
+            button
+                min-width: auto
         @include media-breakpoint-up(md)
             flex-direction: column
             gap: $spacing-3
-            --btn-min-width: #{columns(2)}
             button, > a
-                width: pxToRem(200)
+                max-width: columns(3)
+        @include media-breakpoint-up(xl)
+            --btn-min-width: #{columns(2)}
         @include media-breakpoint-down(desktop)
             margin-top: $spacing-3
     .container

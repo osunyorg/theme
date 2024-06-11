@@ -1,0 +1,41 @@
+{{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+
+{{- with .block.data -}}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" (dict
+          "title" $block.title
+          "heading_level" $block.ranks.self
+          "description" .description
+        )}}
+        
+        <ul class="links">
+          {{- range .links }}
+            <li itemscope itemtype="https://schema.org/WebPage">
+              <div class="link-content">
+                {{- $title := partial "PrepareHTML" .title -}}
+                {{- $url := .url -}}
+                {{- $isExternal := .external | default true -}}
+                <link itemprop="url" href="{{ .url }}">
+                <a itemprop="relatedLink" href="{{ .url }}" title="{{ $title }}" {{ if $isExternal -}} target="_blank" rel="noopener" {{- end }}><span itemprop="name">{{- $title -}}</span></a>
+                <p>{{ .description | safeHTML }}</p>
+              </div>
+              {{- if .image -}}
+                <div class="media">
+                  {{- partial "commons/image.html"
+                    (dict
+                      "image"    .image
+                      "alt"      .alt
+                      "sizes"    site.Params.image_sizes.blocks.links
+                  ) -}}
+                </div>
+              {{- end -}}
+            </li>
+          {{ end -}}
+        </ul>
+      </div>
+    </div>
+  </div>
+{{- end -}}

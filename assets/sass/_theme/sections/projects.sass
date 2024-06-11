@@ -1,37 +1,85 @@
 .project
     @include article(auto)
     .project-content
+        display: flex
+        gap: $spacing-3
+        .project-description
+            flex: 1
         p
             line-height: $small-line-height
         .project-title
             @include article-title
     .media img
         width: 100%
-    @include media-breakpoint-up(desktop)
-        .project-content
-            display: flex
-            gap: $spacing-2
-            .project-description
-                flex: 1
 
 .projects__section,
 .projects_categories__term
-    .projects
+    .projects--grid
         @include grid(2, md)
+        @include media-breakpoint-down(md)
+            .project + .project
+                margin-top: $spacing-4
+            .project
+                .media
+                    margin-left: var(--grid-gutter-negative)
+                    margin-right: var(--grid-gutter-negative)
+    .projects--list
+        .project
+            margin-bottom: $spacing-3
+            &-title
+                margin-bottom: $spacing-1
+            @include media-breakpoint-up(desktop)
+                border-bottom: 1px solid var(--color-border)
+                margin-bottom: $spacing-3
+                padding-bottom: $spacing-3
+                flex-direction: row-reverse
+                gap: var(--grid-gutter)
+                .project-content
+                    flex: 1
+                    flex-direction: column
+                    justify-content: space-between
+                    .project-description
+                        max-width: columns(6)
+                    .project-title
+                        @include h2
+                        @include icon(arrow, after, true)
+                            color: transparent
+                        @include hover-translate-icon(after)
+                        a
+                            display: inline
+                    .project-categories
+                        width: fit-content
+                .media
+                    width: columns(4)
+                    margin-bottom: 0
+                &:hover
+                    .project-title
+                        &::after, a
+                            color: var(--color-accent)
 
 .projects__page
     .hero
         .content
             align-items: stretch
         .hero-text
+            align-items: start
             display: flex
             flex-direction: column
             gap: $spacing-3
         .project-infos
-            --color-border: #{$project-infos-border-color}
             --color-text: #{$project-infos-color-text}
             --color-text-alt: #{$project-infos-color-text-alt}
-            --color-accent: #{$project-infos-color-accent}
+            @include meta
+            display: flex
+            gap: $spacing-3
+            ul
+                @include list-reset
+                display: flex
+                gap: $spacing-3
+        .dropdown-share
+            button
+                margin-top: 0
+                width: columns(6)
     @include media-breakpoint-up(sm)
         .hero
             .project-infos
@@ -40,18 +88,24 @@
         .hero
             .project-infos
                 width: columns(6)
+            .dropdown-share
+                button
+                    width: columns(2)
     @include media-breakpoint-up(desktop)
         .hero
             .content
                 align-items: stretch
-            .hero-text
-                justify-content: space-between
-                gap: $spacing-5
-                width: columns(6)
             .project-infos
                 width: columns(4)
             figure
                 width: columns(6)
-
-.project-infos
-    @include section__page-infos
+            .hero-text
+                gap: $spacing-3
+                width: columns(6)
+                // Safe space for dropdown share button wich is in a absolute position
+                position: relative
+                padding-bottom: calc(#{$spacing-5} + #{$spacing-2}) 
+            .dropdown-share
+                position: absolute
+                bottom: 0
+                right: 0

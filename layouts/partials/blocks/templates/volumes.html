@@ -1,0 +1,41 @@
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading := printf "h%d" $heading_level }}
+{{ $heading_tag := (dict 
+  "open" ((printf "<%s class='volume-title' itemprop='headline'>" $heading) | safeHTML)
+  "close" ((printf "</%s>" $heading) | safeHTML)
+  ) }}
+
+{{- $block := .block -}}
+{{- $template := .block.template -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+
+{{- with .block.data -}}
+  <div class="block block-volumes {{- if $title }} block-with-title {{- end -}}">
+    <div class="container">
+      <div class="block-content">
+        {{ if $block.title -}}
+          {{ $volumes_page := site.GetPage "/volumes" }}
+          {{ $link := $volumes_page.Permalink }}
+
+          {{ partial "blocks/top.html" (dict
+            "title" $block.title
+            "heading_level" $block.ranks.self
+            "link" $link
+          )}}
+        {{- end }}
+
+        <div class="volumes">
+          {{ range $volume := .volumes -}}
+            {{ with site.GetPage (printf "/volumes/%s" $volume) }}
+              {{ partial "volumes/volume.html" (dict 
+                  "volume" .
+                  "heading" $heading) 
+              }}
+            {{ end }}
+          {{ end}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{- end -}}

@@ -50,7 +50,14 @@
               {{ end }}
               {{ if or .url .emails }}
                 <div>
-                  <p class="meta">{{- i18n "commons.contact.web" -}}</p>
+                  <p class="meta">
+                    {{ if .url }}
+                      {{- i18n "commons.contact.web" -}}
+                    {{ else }}
+                      {{- i18n "commons.contact.email" -}}
+                    {{ end }}
+                  </p>
+                  
                   {{ range .emails }}
                     <p><a itemprop="email" href="mailto:{{ . }}">{{ . }}</a></p>
                   {{ end }}
@@ -67,52 +74,66 @@
                   {{ end }}
                 </div>
               {{ end }}
+              {{ with .socials }}
+                <div>
+                  <p class="meta">{{- i18n "commons.contact.socials" -}}</p>
+                  <ul class="socials-list">
+                    {{ partial "commons/socials" . }}
+                  </ul>
+                </div>
+              {{ end }}
+              {{ if .timetable}}
+                {{ $time_size := "full-size" }}
+                {{ if and (or .emails .url) .phone_numbers .socials }}
+                  {{ $time_size = "reduced" }}
+                {{ end}}
+                <ul class="schedule-table {{ $time_size -}}">
+                  <li class="meta">{{- i18n "commons.contact.schedule" -}}</li>
+                  {{ range .timetable }}
+                    {{ if or
+                      .time_slot_morning.from
+                      .time_slot_morning.to
+                      .time_slot_afternoon.from
+                      .time_slot_afternoon.to
+                    }}
+                      <li>
+                        <span>{{ .title }}</span>
+                        {{ if or
+                          .time_slot_morning.from
+                          .time_slot_morning.to
+                        }}
+                        <span>
+                          {{- if .time_slot_morning.from }}
+                            <time datetime="{{ .time_slot_morning.from }}">{{ .time_slot_morning.from }}</time>
+                          {{ end -}}
+                          {{- if .time_slot_morning.to }}
+                            <time datetime="{{ .time_slot_morning.to }}">{{ .time_slot_morning.to }}</time>
+                          {{ end -}}
+                        </span>
+                        {{ end }}
+                        {{ if or
+                          .time_slot_afternoon.from
+                          .time_slot_afternoon.to
+                        }}
+                        <span>
+                          {{- if .time_slot_afternoon.from }}
+                            <time datetime="{{ .time_slot_afternoon.from }}">{{ .time_slot_afternoon.from }}</time>
+                          {{ end -}}
+                          {{- if .time_slot_afternoon.to }}
+                            <time datetime="{{ .time_slot_afternoon.to }}">{{ .time_slot_afternoon.to }}</time>
+                          {{ end -}}
+                        </span>
+                        {{ end -}}
+                      </li>
+                    {{ end }}
+                  {{ end }}
+                </ul>
+              {{ end }}
             </div>
+            
           </address>
   
-          {{ if .timetable}}
-            <span class="meta">{{- i18n "commons.contact.schedule" -}}</span>
-            <ul>
-                {{ range .timetable }}
-                  {{ if or
-                    .time_slot_morning.from
-                    .time_slot_morning.to
-                    .time_slot_afternoon.from
-                    .time_slot_afternoon.to
-                  }}
-                    <li>
-                      <span>{{ .title }}</span>
-                      {{ if or
-                        .time_slot_morning.from
-                        .time_slot_morning.to
-                      }}
-                      <span>
-                        {{- if .time_slot_morning.from }}
-                          <time datetime="{{ .time_slot_morning.from }}">{{ .time_slot_morning.from }}</time>
-                        {{ end -}}
-                        {{- if .time_slot_morning.to }}
-                          <time datetime="{{ .time_slot_morning.to }}">{{ .time_slot_morning.to }}</time>
-                        {{ end -}}
-                      </span>
-                      {{ end }}
-                      {{ if or
-                        .time_slot_afternoon.from
-                        .time_slot_afternoon.to
-                      }}
-                      <span>
-                        {{- if .time_slot_afternoon.from }}
-                          <time datetime="{{ .time_slot_afternoon.from }}">{{ .time_slot_afternoon.from }}</time>
-                        {{ end -}}
-                        {{- if .time_slot_afternoon.to }}
-                          <time datetime="{{ .time_slot_afternoon.to }}">{{ .time_slot_afternoon.to }}</time>
-                        {{ end -}}
-                      </span>
-                      {{ end -}}
-                    </li>
-                  {{ end }}
-                {{ end }}
-            </ul>
-          {{ end }}
+          
         </div>
       </div>
 

@@ -14,24 +14,29 @@
     min-width: var(--btn-min-width)
     text-align: center
     display: inline-block
-    transition: background .3s ease, color .3s ease
+    transition: background .3s ease, border .3s ease, color .3s ease
     &:hover, &:focus, &:focus-visible
         color: var(--btn-hover-color)
         background: var(--btn-hover-background)
+        border: var(--btn-hover-border)
 
 .button-accent
     @extend .button
     --btn-color: #{$color-background}
     --btn-background: #{$color-accent}
+    --btn-border: pxToRem(1) solid var(--btn-background)
     --btn-hover-color: #{$color-background}
     --btn-hover-background: #{alphaColor($color-accent, 0.85)}
+    --btn-hover-border: pxToRem(1) solid var(--btn-hover-background)
 
 .button-alt
     @extend .button
     --btn-color: #{$color-background}
     --btn-background: #{$color-text-alt}
+    --btn-border: pxToRem(1) solid var(--btn-background)
     --btn-hover-color: #{$color-background}
     --btn-hover-background: #{$color-text}
+    --btn-hover-border: pxToRem(1) solid var(--btn-hover-background)
 
 .squared-button
     @include meta
@@ -78,7 +83,12 @@ a.btn[target="_blank"]
     @include button-icon(link-blank-raw)
 
 .dropdown-share
+    --btn-min-width: #{pxToRem(140)}
     position: relative
+    button
+        @extend .btn
+        @include button-icon(social-inline)
+        width: 100%
     .dropdown-menu
         background: var(--btn-hover-background)
         border: var(--btn-border)
