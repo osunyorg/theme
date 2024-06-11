@@ -29,48 +29,12 @@
         <div class="papers">
           {{ range $paper := .papers -}}
             {{ with site.GetPage (printf "/papers/%s" $paper) }}
-            <article class="paper" itemscope itemtype="https://schema.org/ScholarlyArticle" {{- if .Params.Volumes }} itemProp="hasPart" {{- end -}}>
-              <div class="paper-title">
-                <h3>
-                  <a href="{{ .Permalink }}" itemprop="url">
-                    <span itemprop="name">{{ partial "PrepareHTML" .Title }}</span>
-                  </a>
-                </h3>
-              </div>
-              <div class="paper-meta">
-                {{- range $index, $authors := .Params.Researchers -}}
-                  {{- $author := site.GetPage (printf "/persons/%s" .) -}}
-                  {{ if $author }}
-                    {{- if ne $index 0 -}},{{ end }}
-                    <span itemprop="author" itemscope itemtype="https://schema.org/Person">
-                      <a href="{{ $author.Permalink }}" itemprop="url">
-                        <span itemprop="name">{{ trim $author.Title "\n" }}</span>
-                      </a>
-                    </span>
-                  {{- end -}}
-                {{- end -}}
-                {{- .Params.authors_list -}}
-                {{ if or .Params.paper_kind .Params.Volumes }}
-                  •
-                {{ end }}
-                {{- with .Params.paper_kind -}}
-                  <span>{{ . }}</span>
-                {{- end -}}
-                {{- if and .Params.paper_kind .Params.Volumes -}}
-                  ,
-                {{ end }}
-                {{ with .Params.Volumes}}
-                  <p class="paper-volumes">
-                    {{ range . }}
-                      {{ $volume := site.GetPage (printf "/volumes/%s" .) }}
-                      {{ if $volume }}
-                        <a href="{{ $volume.Permalink }}">{{ $volume.Title }}</a>
-                      {{ end }}
-                    {{ end }}
-                  </p>
-                {{ end }}
-              </div>
-            </article>
+              {{ partial "papers/paper.html" (dict 
+                  "paper" .
+                  "actions" false
+                  "with_in" false
+                  "heading" $heading
+              )}}
             {{ end }}
           {{ end}}
         </div>

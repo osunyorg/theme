@@ -16,10 +16,16 @@
                 margin-top: $spacing-1
                 > * 
                     display: inline
+                    font-size: $body-size
+            &-kind
+                text-transform: none
+                font-size: inherit
         @include in-page-without-sidebar
-            .paper
-                @include grid(12, md)
-                &-title
-                    grid-column: 1/8
-                &-meta
-                    grid-column: 9/13
+            .paper 
+                width: 100%
+                > div
+                    @include grid(12, md)
+                    .paper-title
+                        grid-column: 1/8
+                    .paper-meta
+                        grid-column: 9/13
