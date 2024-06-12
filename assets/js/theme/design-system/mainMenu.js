@@ -13,6 +13,9 @@ class MainMenu {
         this.element = document.querySelector(selector);
         this.menu = this.element.querySelector('.menu');
         this.mainButton = this.element.querySelector('button.header-button');
+        if (!this.mainButton) {
+            return;
+        }
         this.dropdownsButtons = this.element.querySelectorAll('.has-children [role="button"]');
 
         this.state = {
