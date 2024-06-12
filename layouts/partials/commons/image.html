@@ -33,7 +33,7 @@
       {{ $image_class = "is-svg" }}
     {{ end }}
 
-    <picture {{ if or $is_png $is_svg }}class="{{ $image_class }}"{{ end }}>
+    <picture {{ with $image_class }}class="{{ . }}"{{ end }}>
 
       {{- if strings.HasSuffix $image.name "svg" -}}
 
