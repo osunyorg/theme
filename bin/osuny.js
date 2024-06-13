@@ -19,6 +19,7 @@ console.log(`
  `);
 
 const command = process.argv[2];
+const base_url = process.argv[3] || "/";
 
 let pagefindExclude = '';
 // Categories: No list of categories
@@ -59,13 +60,13 @@ if (command === "dev") {
 
 if (command === "build") {
     execute("yarn upgrade");
-    execute("hugo --minify");
+    execute("hugo --minify --base_url=" + base_url);
     execute("npm_config_yes=true npx pagefind --site 'public' --exclude-selectors '" + pagefindExclude + "'");
 }
 
 if (command === "percy-build") {
     execute("yarn upgrade");
-    execute("hugo --baseURL=/");
+    execute("hugo --baseURL=" + base_url);
     execute("npm_config_yes=true npx pagefind --site 'public' --exclude-selectors '" + pagefindExclude + "'");
 }
 
