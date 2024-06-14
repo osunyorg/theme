@@ -5,13 +5,17 @@
     .block-title
         @include h5
     .top
-        .block-title
-            + .description
-                margin-top: $spacing-3
+        position: relative
+        margin-bottom: calc(#{$spacing-3} + #{$spacing-2})
+        .block-title + .description
+            margin-top: $spacing-3
         .block-title.hidden + .description
-                margin-top: 0
+            margin-top: 0
     @include in-page-without-sidebar
         --block-space-y: #{$block-space-y-desktop}
+        .top
+            .description
+                max-width: columns(8)
     @include in-page-with-sidebar
         --block-space-y: #{$block-space-y-with-sidebar}
 
