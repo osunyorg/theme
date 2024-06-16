@@ -1,8 +1,37 @@
 @media print
     #document-header,
     #document-footer,
-    .breadcrumb-nav
-        display: none
+    .breadcrumb-nav,
+    .toc-cta,
+    .more
+        display: none !important
+    @page
+        margin: 2cm 1.5cm 2cm 2cm
     *
         color: black !important
-        background: white
+        background: none !important
+    a
+        &:after
+            content: attr(href)
+            display: block
+            @include meta
+    .hero
+        min-height: 0
+        padding-top: 0
+        .content
+            .hero-text
+                margin-top: 0
+    .block
+        &-timeline
+            &--horizontal
+                .draggable-content 
+                    > ol
+                        display: block !important
+                        .timeline-event
+                            margin-bottom: $spacing-4
+                            .title
+                                min-height: 0
+                                padding-bottom: $spacing-2
+                    .actions-arrows,
+                    .line
+                        display: none
