@@ -13,9 +13,9 @@
 
 {{ $button := .button | default .context.Params.header_cta }}
 
-{{ $title_attribute := "" }}
+{{ $title_attribute := "" | safeHTMLAttr }}
 {{ if site.Params.search.active }}
-  {{ $title_attribute = "data-pagefind-weight=\"10\"" }}
+  {{ $title_attribute = "data-pagefind-weight='10'" | safeHTMLAttr }}
 {{ end }}
 
 {{ if not $subtitle }}
