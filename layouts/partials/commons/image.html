@@ -35,7 +35,7 @@
 
     <picture {{ with $image_class -}} class="{{ . }}" {{- end }}>
 
-      {{- if strings.HasSuffix $image.name "svg" -}}
+      {{- if $is_svg -}}
 
         <img src="{{ partial "GetImageUrl" (dict "url" $url) }}"
             alt="{{ chomp (plainify $alt) }}"
