@@ -1,4 +1,8 @@
-{{ $file := partial "GetMedia" .id }}
+{{ $file := false }}
+{{ if .id }}
+  {{ $file = partial "GetMedia" .id }}
+{{ end }}
+
 {{ $title := .title }}
 {{ $with_caption := .with_caption }}
 
