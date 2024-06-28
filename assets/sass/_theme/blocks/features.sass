@@ -17,7 +17,14 @@
                 @include meta
                 margin-top: $spacing-2
                 text-align: right
-
+            picture.is-png
+                display: block
+                padding-top: $spacing-3
+                img
+                    margin: initial
+                    max-width: $block-features-icon-max-width
+                @include media-breakpoint-down(desktop)
+                    margin-bottom: $spacing-2
     @include in-page-with-sidebar
         li
             flex-direction: row
@@ -25,6 +32,9 @@
                 width: columns(2)
                 flex-shrink: 0
                 margin-right: var(--grid-gutter)
+                picture.is-png
+                    img
+                        margin: auto
 
     @include in-page-without-sidebar
         .top
