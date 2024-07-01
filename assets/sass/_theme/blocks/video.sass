@@ -33,6 +33,13 @@
             button
                 @include button-reset
                 @include icon-block(play-fill, before)
+                    font-size: pxToRem(50)
+                    transition: color .3s ease
+                    vertical-align: middle
+                    padding-left: pxToRem(3)
+                    @include media-breakpoint-down(desktop)
+                        font-size: pxToRem(20)
+                        padding-left: pxToRem(4)
                 border: 1px solid white
                 border-radius: 100%
                 color: white
@@ -41,11 +48,6 @@
                 transition: background-color .3s ease
                 width: $spacing-6
                 z-index: 3
-                &::before
-                    font-size: pxToRem(100)
-                    transition: color .3s ease
-                    vertical-align: middle
-                    padding-left: pxToRem(5)
                 &:hover
                     background-color: white
                     &::before
@@ -53,9 +55,6 @@
                 @include media-breakpoint-down(desktop)
                     height: $spacing-5
                     width: $spacing-5
-                    &::before
-                        font-size: pxToRem(40)
-                        padding-left: pxToRem(3)
         iframe
             background: black
         + p
