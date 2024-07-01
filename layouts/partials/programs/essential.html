@@ -33,16 +33,11 @@
         </div>
       {{ end }}
 
-      {{ with .Params.downloadable_summary }}
-        {{- $file := partial "GetMedia" . -}}
-        {{- if $file -}}
-          {{- $url := $file.url -}}
-          {{- if site.Params.keycdn -}}
-            {{- $url = $file.direct_url -}}
-          {{- end -}}
-          <a href="{{ $url }}" download target="_blank">{{ i18n "commons.download.singular_name" }}</a>
-        {{- end -}}
-      {{ end }}
+      {{ partial "commons/download-link" (dict 
+        "id" .Params.downloadable_summary
+        "title" (i18n "commons.download.singular_name")
+        "use_filename_for_a11y_title" true
+      ) }}
     </div>
   </div>
 </div>
