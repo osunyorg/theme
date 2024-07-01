@@ -99,7 +99,8 @@
                     min-width: 100%
             .more
                 @include arrow-right-hover
-                @include icon-block(arrow-right-line, after)
+                @include icon(arrow-right-line, after)
+                    font-size: pxToRem(40)
                 @include link($block-pages-card-page-color)
                 position: relative
                 margin-top: auto
@@ -110,7 +111,7 @@
             &:hover
                 .more:after
                     opacity: 1
-                    transform: translateX(0)
+                    transform: translateX(pxToRem(7))
             a,
             .more
                 transition: text-decoration-color .3s ease, color .3s ease
