@@ -1,5 +1,5 @@
 {{ $isLeafletNeeded := false }}
-{{ $isSplideNeed := false }}
+{{ $isCarrouselNeed := false }}
 
 {{ if .Params.contents }}
   {{ range .Params.contents }}
@@ -14,12 +14,12 @@
     {{ if eq .template "gallery"}}
       {{ with .data }}
         {{ if eq .layout "carousel" }}
-          {{ $isSplideNeed = true }}
+          {{ $isCarrouselNeed = true }}
         {{ end }}
       {{ end }}
     {{ end }}
     {{ if eq .template "testimonials"}}
-      {{ $isSplideNeed = true }}
+      {{ $isCarrouselNeed = true }}
     {{ end }}
   {{ end }}
 {{ end }}
@@ -29,9 +29,9 @@
   {{ $isLeafletNeeded = true }}
 {{ end }}
 
-{{ if $isSplideNeed }}
-  {{ $splide_js := resources.Get "js/vendors/carouseles5.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
-  <script src="{{ $splide_js.RelPermalink }}" integrity="{{ $splide_js.Data.Integrity }}"></script>
+{{ if $isCarrouselNeed }}
+  {{ $carrousel_js := resources.Get "js/vendors/carouseles5.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
+  <script src="{{ $carrousel_js.RelPermalink }}" integrity="{{ $carrousel_js.Data.Integrity }}"></script>
 {{ end }}
 
 {{ if $isLeafletNeeded }}

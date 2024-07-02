@@ -2,11 +2,11 @@
     blockquote
         @include blockquote
         p
+            color: $block-testimonials-color
             font-family: $block-testimonials-font-family
             font-size: $block-testimonials-font-size
-            line-height: $block-testimonials-line-height
             font-style: $block-testimonials-style
-            color: $block-testimonials-color
+            line-height: $block-testimonials-line-height
             @include media-breakpoint-up(desktop)
                 font-size: pxToRem(30) // TODO : on peut peut-être la sortir avec du RFS ?
             @include media-breakpoint-up(xl)
@@ -28,99 +28,36 @@
             display: block
     .avatar
         flex-shrink: 0
-        width: columns(1)
-        min-width: pxToRem(80)
-        margin-right: $spacing-2
         margin-bottom: 0
-
-    // .splide
-    //     .splide__slider
-    //         display: flex
-    //         flex-direction: column-reverse
-    //     &__toggle
-    //         border: 1px solid $block-testimonials-pagination-background
-    //         border-radius: 50%
-    //         cursor: pointer
-    //         font-size: 0
-    //         height: 42px
-    //         padding: 0
-    //         position: absolute
-    //         right: 0
-    //         top: 0
-    //         width: 42px
-    //         font-size: 0
-    //         line-height: 1
-    //         span
-    //             color: var(--color-accent)
-    //             &::before
-    //                 font-size: pxToRem(42)
-    //     .splide__pagination
-    //         .is-active i
-    //             width: 100%
-
-    //         .splide__play
-    //             &::before
-    //                 margin-left: 2px
-    //     &__pagination
-    //         justify-content: unset
-    //         margin-right: 55px
-    //         li
-    //             flex: 1
-    //             margin-right: 10px
-    //         button
-    //             @include button-reset
-    //             position: relative
-    //             width: 100%
-    //             &::before,
-    //             i
-    //                 height: 1px
-    //                 left: 0
-    //                 top: 50%
-    //                 position: absolute
-    //             &::before
-    //                 background-color: $block-testimonials-pagination-background
-    //                 border-radius: 0
-    //                 width: 100%
-    //             i
-    //                 background-color: $block-testimonials-pagination-progress-background
-    //                 width: 0
+        margin-right: $spacing-2
+        min-width: pxToRem(80)
+        width: columns(1)
 
     @include in-page-without-sidebar
-        // .top
-        //     padding-left: offset(3)
-        // .splide__pagination
-        //     padding-left: offset(3)
-        //     padding-right: offset(1)
-        // .splide__autoplay
-        //     margin-right: offset(1)
         figure
-            padding-right: offset(3)
             min-height: columns(2)
+            padding-right: offset(3)
             &.with-picture
-                padding-right: offset(1)
                 padding-left: offset(3)
+                padding-right: offset(1)
                 position: relative
                 figcaption
                     display: block
                     margin-top: $spacing-2
                     .avatar
-                        position: absolute
                         left: columns(1)
-                        top: 0
                         margin-left: var(--grid-gutter)
+                        position: absolute
+                        top: 0
                         width: columns(2)
     .carrousel
-        &__slider
-            overflow: hidden
-        &__container
-            position: relative
-            transition-duration: 1s
-            display: flex
-            flex-direction: row
-            left: 0px
-            top: 0
-            width: fit-content
-            figure
-                width: columns(12)
-                @include in-page-with-sidebar
-                    width: columns(8)
+        &__toggle
+            border: 1px solid $block-testimonials-pagination-background
+        &__pagination
+            button
+                &::before,
+                i
+                &::before
+                    background-color: $block-testimonials-pagination-background
+                i
+                    background-color: $block-testimonials-pagination-progress-background

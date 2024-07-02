@@ -19,7 +19,7 @@
 
         <div class="testimonials">
           {{- if $is_carousel }}
-          <div class="carrousel">
+          <div class="carrousel" data-carrousel="{{ site.Params.blocks.testimonials.carrousel | encoding.Jsonify }}">
             <div class="carrousel__slider">
               <div class="carrousel__container">
                 {{ end -}}
@@ -60,13 +60,6 @@
                 {{- if $is_carousel }}
               </div>
             </div>
-            <div class="carrousel__controller">
-              <ul class="carrousel__pagination"></ul>
-              <button class="splide__toggle">
-                <span class="splide__toggle__play"></span>
-                <span class="splide__toggle__pause"></span>
-              </button>
-            </div>              
           </div>
           {{ end -}}
         </div>

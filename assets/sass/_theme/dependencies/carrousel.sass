@@ -1,0 +1,113 @@
+.carrousel
+    display: flex
+    flex-direction: column-reverse
+    position: relative
+    &__slider
+        overflow: hidden
+    &__container
+        display: flex
+        flex-direction: row
+        left: 0px
+        position: relative
+        top: 0
+        transition-duration: 0.5s
+        width: fit-content
+        figure
+            width: columns(12)
+            @include in-page-with-sidebar
+                width: columns(8)
+    button
+        -moz-appearance: none
+        -webkit-appearance: none
+        appearance: none
+        background: 0 0
+        background: transparent
+        border: 0
+    &__arrow
+        color: $color-text
+        position: absolute
+        top: 50%
+        svg
+            display: none
+        &--prev
+            @include icon(arrow-left)
+            right: 100%
+        &--next
+            @include icon(arrow-right)
+            left: 100%
+    &__pagination
+        display: flex
+        list-style: none
+        margin: 0 50px 0 0
+        padding: 0
+        li
+            display: block
+            flex: 1
+            list-style: none
+            margin: 0
+            margin-right: 10px
+            padding: 0
+        button
+            display: block
+            height: 48px
+            padding: 0
+            position: relative
+            width: 100%
+            cursor: pointer
+            &::before
+                -moz-transition: background .3s ease
+                -o-transition: background .3s ease
+                background-color: alphaColor($link-color, 0.3)
+                border-radius: 0
+                content: ""
+                display: block
+                height: 1px
+                left: 0
+                margin: auto
+                position: absolute
+                top: 50%
+                transition: background 0.3s ease
+                width: 100%
+            &::before,
+            i
+                height: 1px
+                left: 0
+                position: absolute
+                top: 50%
+                
+            i
+                background-color: alphaColor($link-color, 0.3)
+                width: 0%
+
+            &:hover
+                &::before
+                    background-color: alphaColor($link-color, 0.6)
+            &.is-active
+                &::before
+                    background-color: $link-color
+    &__toggle
+        border-radius: 50%
+        border: 0
+        cursor: pointer
+        font-size: 0
+        font-size: 0
+        height: 42px
+        line-height: 1
+        padding: 0
+        position: absolute
+        right: 0
+        top: 0
+        width: 42px
+        span
+            color: var(--color-accent)
+            &::before
+                font-size: pxToRem(42)
+        &__pause
+            @include icon-block(pause)
+        &__play
+            @include icon-block(play)
+
+    &[data-slides-length="1"]
+        .carrousel
+            &__autoplay, &__pagination, &__arrow
+                display: none
