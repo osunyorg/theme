@@ -4,7 +4,7 @@
 // X - resize pété
 // X - ajout elements fin en fonction du nombre 
 // 0 - touch
-// 0 - pagination progress
+// X - pagination progress
 // 0 - bloquer en loop quand pas fini de charger en queue
 // 0 - gerer la version pour gallery
 // 0 - petit bug au drag sur les autres carrousels
@@ -26,7 +26,12 @@ if (siteLang == "fr") {
 var carrouselClasses = {
     classSlider: "carrousel__slider", // slider (servant de fenetre d'affichage)
     classContainer: "carrousel__container", // container englobant directement les elements du slider
-    classController: "carrousel__controller"// si pagination ajout de la class auto
+    classController: "carrousel__controller",// si pagination ajout de la class auto
+    classPagination: "carrousel__pagination", 
+    classPaginationButton:  "carrousel__pagination__page",
+    classToggleButton: "carrousel__toggle",
+    classToggleButtonPause: "carrousel__toggle__pause",
+    classToggleButtonPlay: "carrousel__toggle__play"
 }
 Carrousel = function Carrousel(element, options) {
     this.carrousel = element;
@@ -150,7 +155,6 @@ Carrousel.prototype.initTrack = function initTrack(trackElem) {
         this.hovered = false;
     }.bind(this));
 
-
     // add detection focus ( touch )
     var resizeAction = this.onResize.bind(this);
     window.addEventListener('resize', resizeAction);
@@ -173,12 +177,12 @@ Carrousel.prototype.initPagination = function initPagination() {
     var controller = document.createElement("div");
     controller.classList.add(carrouselClasses.classController);
         var pagination = document.createElement("ul");
-        pagination.classList.add("carrousel__pagination");
+        pagination.classList.add(carrouselClasses.classPagination);
         for(var i = 0; i<this.elements.length; i++){
             var li = document.createElement("li");
             li.setAttribute("role", "presentation");
             var button = document.createElement("button");
-            button.classList.add("carrousel__pagination__page");
+            button.classList.add(carrouselClasses.classPaginationButton);
             button.setAttribute("role", "tab");
             button.setAttribute("type", "button");
             button.setAttribute("aria-label", i18n.slideX.replace("%s", i));
@@ -195,23 +199,41 @@ Carrousel.prototype.initPagination = function initPagination() {
         }
         controller.append(pagination);
         if(Object.keys(this.autoplay).length != 0){
-            console.log("efef")
             var toggleButton = document.createElement("button");
-            toggleButton.classList.add("carrousel__toggle");
+            toggleButton.classList.add(carrouselClasses.classToggleButton);
             var span = document.createElement("span");
-            span.classList.add("carrousel__toggle__pause");
+            span.classList.add(carrouselClasses.classToggleButtonPause);
             toggleButton.append(span);
             toggleButton.addEventListener("click", function(e){
                 this.paused = !this.paused;
                 if(this.paused){
-                    e.target.classList.replace("carrousel__toggle__pause", "carrousel__toggle__play");
+                    e.target.classList.replace(carrouselClasses.classToggleButtonPause, carrouselClasses.classToggleButtonPlay);
                 }else{
-                    e.target.classList.replace("carrousel__toggle__play", "carrousel__toggle__pause");
+                    e.target.classList.replace(carrouselClasses.classToggleButtonPlay, carrouselClasses.classToggleButtonPause);
                 }
             }.bind(this));
             controller.append(toggleButton);
         }       
         this.carrousel.append(controller);
+}
+
+Carrousel.prototype.runAutoPlay = function runAutoPlay(){
+    var now = Date.now();
+    var elapsed = now - this.autoplay.started;
+
+    if(elapsed > this.autoplay.interval){
+        if (!this.drag.active && !(this.hovered && this.autoplay.pauseOnHover) && !this.paused) {
+            this.autoplay.started = now;
+            this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: 0%");
+            this.move(1);
+        }
+    }else{
+        if (!this.drag.active && !(this.hovered && this.autoplay.pauseOnHover) && !this.paused) {
+            var p = elapsed/this.autoplay.interval*100.0
+            this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: "+p+"%");
+        }
+    }
+    requestAnimationFrame(this.runAutoPlay.bind(this))
 }
 
 Carrousel.prototype.initAutoPlay = function initAutoPlay(params) { // TODO changer pour requestaimation frame et gerer animmation
@@ -227,16 +249,13 @@ Carrousel.prototype.initAutoPlay = function initAutoPlay(params) { // TODO chang
             this.autoplay.interval = parseInt(params.interval);
         }
     }
-
+    
     if (params.pauseOnHover) {
         this.autoplay.pauseOnHover = params.pauseOnHover;
     }
-    this.autoplay.counter = 0;
-    this.autoplay.counter = setInterval(function () { // auto move
-        if (!this.drag.active && !(this.hovered && this.autoplay.pauseOnHover) && !this.paused) {
-            this.move(1);
-        }
-    }.bind(this), this.autoplay.interval);
+
+    this.autoplay.started = Date.now();
+    window.requestAnimationFrame(this.runAutoPlay.bind(this));
 }
 
 Carrousel.prototype.initDrag = function initDrag() {
@@ -331,16 +350,8 @@ Carrousel.prototype.goTo = function goTo(n){
     this.move(n - this.track.n);
 };
 
-
 window.addEventListener("load", function () {
     var classCarrousel = "carrousel";
-    var params = {
-        pagination: false,
-        autoplay: false, // autoplay du slider ( default false)
-        interval: 2000, // interval de 'autoplay en ms (default 2000)
-        pauseOnHover: true // pause l'autoplay on hover ( ou focus pour mobile) (default false)
-    }
-
     var carrousels = document.getElementsByClassName(classCarrousel);
     for (var i = 0; i < carrousels.length; i += 1) {
         carrousels[i].setAttribute("id", "carrouselX".replace("X",i));
