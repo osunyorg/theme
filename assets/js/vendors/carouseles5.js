@@ -193,6 +193,7 @@ Carrousel.prototype.initPagination = function initPagination() {
             button.append(elemI);
             button.addEventListener("click", function(e){ 
                 this.goTo(e.target.getAttribute("tabindex"));
+
             }.bind(this));
             li.append(button);
             pagination.append(li);        
@@ -215,6 +216,7 @@ Carrousel.prototype.initPagination = function initPagination() {
             controller.append(toggleButton);
         }       
         this.carrousel.append(controller);
+        this.pagination = true;
 }
 
 Carrousel.prototype.runAutoPlay = function runAutoPlay(){
@@ -224,13 +226,17 @@ Carrousel.prototype.runAutoPlay = function runAutoPlay(){
     if(elapsed > this.autoplay.interval){
         if (!this.drag.active && !(this.hovered && this.autoplay.pauseOnHover) && !this.paused) {
             this.autoplay.started = now;
-            this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: 0%");
+            if(this.pagination){
+                this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: 0%");
+            }
             this.move(1);
         }
     }else{
         if (!this.drag.active && !(this.hovered && this.autoplay.pauseOnHover) && !this.paused) {
             var p = elapsed/this.autoplay.interval*100.0
-            this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: "+p+"%");
+            if(this.pagination){
+                this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: "+p+"%");
+            }
         }
     }
     requestAnimationFrame(this.runAutoPlay.bind(this))
@@ -332,7 +338,13 @@ Carrousel.prototype.updatePos = function updatePos() {
 }
 
 Carrousel.prototype.move = function (offset) {  // move de n elements
-    if (this.ready) {
+    if(this.ready) {
+        if(this.pagination){
+            this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: 0%");
+        }
+        if(this.autoplay.started){
+            this.autoplay.started = Date.now();
+        }
         var elemswidth = 0;
         //calcul du delta à translater à partir de la somme des tailles 
         for (var i = 0; i < Math.abs(offset); i += 1) {
