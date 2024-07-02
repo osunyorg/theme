@@ -3,7 +3,7 @@
 // O - touch
 // O - pagination - goto + progress
 // X - ajout elements fin en fonction du nombre 
-// 0 - resize pété
+// X - resize pété
 // 0 - bug au drag
 
 Carrousel = function Carrousel(element, options) {
@@ -46,6 +46,8 @@ Carrousel = function Carrousel(element, options) {
 Carrousel.prototype.onResize = function onResize() {
     this.ready = false;
     this.computeDim();
+    this.track.pos = -this.track.len
+    this.updatePos();
     this.ready = true;
 }
 
@@ -238,7 +240,7 @@ Carrousel.prototype.updatePos = function updatePos() {
     this.track.elem.style.setProperty('left', this.track.pos + "px");
 }
 
-Carrousel.prototype.move = function(offset) { 
+Carrousel.prototype.move = function(offset) {  // move de n elements
     if(this.ready) {
         var elemswidth = 0;
         //calcul du delta à translater à partir de la somme des tailles 
