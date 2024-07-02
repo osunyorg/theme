@@ -13,25 +13,25 @@
         transition: background 0.3s ease
         .link-content
             line-height: 100%
+            padding: space(4) space(4) space(8)
             min-height: pxToRem(130)
-            padding: space(4)
         a
             @include stretched-link(before)
             text-decoration: none
             &::after
-                bottom: space(4)
+                bottom: space(3)
                 position: absolute
-                right: space(4)
+                right: space(3)
         p
             @include small
             margin-top: space(3)
         .media
-            aspect-ratio: 16/9
-            position: relative
             img
                 display: block
-                aspect-ratio: 16/9
                 object-fit: cover
+                width: 100%
+                height: 100%
+                aspect-ratio: 16/9
         &:hover
             background-color: $block-links-card-hover-background
             &, a

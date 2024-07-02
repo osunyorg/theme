@@ -88,9 +88,6 @@ if (command === "example") {
 }
 
 if (command === "update-theme") {
-    execute("cd themes/osuny-hugo-theme-aaa");
-    execute("git checkout main");
-    execute("git pull");
-    execute("cd ../..");
+    execute("git submodule update --remote");
     execute("yarn upgrade");
 }

@@ -51,15 +51,8 @@
                 time
                     vertical-align: baseline
                 .post-author
-                    display: inline
-                    p
+                    &, p
                         display: inline
-            .post-categories 
-                display: inline
-                *
-                    display: inline-block
-                li
-                    margin-right: $spacing-2
             // Désactiver le ratio forcé de la configuration $article-media-aspect-ratio
             .media
                 &, img
@@ -70,6 +63,12 @@
                     margin-top: $spacing-4
                 p[itemprop="articleBody"]
                     margin-top: 0
+                .post-author 
+                    margin-right: 0
+                    + time
+                        display: inline
+                        &::before
+                            content: ' • '
         @include media-breakpoint-up(desktop)
             .large
                 .post
@@ -81,8 +80,12 @@
                         @include h2
                     p[itemprop="articleBody"]
                         margin-top: $spacing-3
-                    .post-categories
+                    &-categories
+                        display: inline
+                        *
+                            display: inline-block
                         li
+                            margin-right: $spacing-2
                             a
                                 display: inline
 
@@ -339,6 +342,10 @@
 // Move this part to blocks/categories when categories block is ready
 .block-posts
     .categories--grid
+        @include list-reset
+        display: flex
+        flex-direction: column
+        row-gap: $spacing-3
         li
             background: var(--color-background-alt)
             padding: $spacing-3
@@ -350,3 +357,8 @@
                 @include stretched-link
             p
                 display: block
+        @include in-page-with-sidebar
+            @include grid(2)
+        @include in-page-without-sidebar
+            @include grid(3, md)
+            @include grid(4, xxl)
