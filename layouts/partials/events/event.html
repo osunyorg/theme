@@ -7,9 +7,9 @@
     ) }}
 {{ $index := .index }}
 {{ $alternate := .alternate }}
-{{ $show_summary := .show_summary }}
-{{ $show_category := .show_category }}
-{{ $show_status := .show_status }}
+{{ $option_summary := .option_summary }}
+{{ $option_categories := .option_categories }}
+{{ $option_status := .option_status }}
 
 {{ with $event }}
   <article class="event {{ if .Params.image }}event--with-image{{ end -}}" itemscope itemtype="https://schema.org/Event">
@@ -47,7 +47,7 @@
           {{ end -}}
         </div>
       {{ end }}
-      {{ if and .Params.dates.status $show_status }}
+      {{ if and .Params.dates.status $option_status }}
         <p class="event-status">
           {{ if eq .Params.dates.status "current"}}
             {{- i18n "blocks.events.current" -}}
@@ -59,7 +59,7 @@
         </p>
       {{ end }}
 
-      {{ if and (site.Params.events.index.show_description) ($show_summary) }}
+      {{ if and (site.Params.events.index.option_description) ($option_summary) }}
         {{- if (partial "GetTextFromHTML" .Params.summary) -}}
           <div class="event-description">
             <p itemprop="description">
@@ -76,7 +76,7 @@
         {{- end -}}
       {{ end }}
 
-      {{ if and .Params.events_categories $show_category }}
+      {{ if and .Params.events_categories $option_categories }}
         <p class="event-categories">
           {{- range $index, $category := .GetTerms "events_categories" -}}
             <span>{{- $category.Title -}}</span>
