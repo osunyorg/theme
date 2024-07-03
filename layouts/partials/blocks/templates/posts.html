@@ -10,13 +10,7 @@
 {{ end }}
 
 {{- with .block.data }}
-  {{- $options := dict 
-    "hide_image" .hide_image
-    "hide_summary" .hide_summary
-    "hide_category" .hide_category
-    "hide_author" .hide_author
-    "hide_date" .hide_date
-  -}}
+  {{ $options := .options }}
 
   {{ if .category }}
     {{- $term = site.GetPage (printf "/posts_categories%s" .category) -}}

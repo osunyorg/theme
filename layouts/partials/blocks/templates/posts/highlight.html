@@ -32,10 +32,10 @@
               <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
             {{ $heading_tag.close }}
 
-            {{ if eq $options.hide_category false }}
+            {{ if eq $options.categories false }}
               {{- partial "posts/categories" . -}}
             {{ end }}
-            {{ if eq $options.hide_summary false }}
+            {{ if eq $options.summary false }}
               {{- if (partial "GetTextFromHTML" .Params.summary) -}}
                 <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
                   "text" .Params.summary
@@ -43,12 +43,12 @@
                   ) }}</p>
               {{- end -}}
             {{- end -}}
-            {{- if or (eq $options.hide_author false) (eq $options.hide_date false) -}}
+            {{- if or (eq $options.author false) (eq $options.date false) -}}
               <div class="post-meta">
-                {{- if eq $options.hide_date false -}}
+                {{- if eq $options.date false -}}
                   <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
                 {{ end }}
-                {{ if eq $options.hide_author false }}
+                {{ if eq $options.author false }}
                   {{- partial "posts/author" . -}}
                 {{ end }}
               </div>
