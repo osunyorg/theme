@@ -11,7 +11,7 @@
 
 {{- with .block.data -}}
 
-  {{- $with_link := .with_link -}}
+  {{- $option_link := .option_link -}}
 
   <div class="{{ $block_class }}">
     <div class="container">
@@ -25,7 +25,7 @@
         {{- partial (printf "blocks/templates/organizations/%s.html" $layout) (dict
             "organizations" .organizations
             "logo_index" $logo_index
-            "with_link" $with_link
+            "option_link" $option_link
           ) }}
       </div>
     </div>
@@ -38,7 +38,7 @@
     {{ if .title }}
       {{ $title = partial "PrepareHTML" .title -}}
       <p class="organization-title">
-        {{- if and .url .with_link }}
+        {{- if and .url .option_link }}
           <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
         {{ end -}}
           {{- $title -}}

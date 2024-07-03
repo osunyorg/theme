@@ -1,5 +1,5 @@
 {{ $logo_index := .logo_index }}
-{{ $with_link := .with_link }}
+{{ $option_link := .option_link }}
 
 <div class="grid organizations">
   {{- range .organizations }}
@@ -9,7 +9,7 @@
             "title" .Title
             "url" .Permalink
             "logo" (index .Params $logo_index)
-            "with_link" $with_link
+            "option_link" $option_link
           )}}
       {{ end }}
     {{ else }}
@@ -18,7 +18,7 @@
           "url" .url
           "external" true
           "logo" .logo
-          "with_link" $with_link
+          "option_link" $option_link
         )}}
     {{ end }}
   {{ end -}}

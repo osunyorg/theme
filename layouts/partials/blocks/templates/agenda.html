@@ -1,9 +1,9 @@
 {{- $block := .block }}
 {{- $block_class := partial "GetBlockClass" .block -}}
 {{- with .block.data -}}
-  {{- $show_summary := .show_summary -}}
-  {{- $show_category := .show_category -}}
-  {{- $show_status := .show_status -}}
+  {{- $option_summary := .option_summary -}}
+  {{- $option_categories := .option_categories -}}
+  {{- $option_status := .option_status -}}
   {{- $layout := .layout | default "list" -}}
   
   <div class="{{ $block_class }}">
@@ -32,9 +32,9 @@
                   {{ partial "events/event" (dict
                     "event" .
                     "layout" $layout
-                    "show_summary" $show_summary
-                    "show_category" $show_category
-                    "show_status" $show_status
+                    "option_summary" $option_summary
+                    "option_categories" $option_categories
+                    "option_status" $option_status
                     "heading" (printf "h%d" $block.ranks.children)
                   ) }}
               {{ end }}
