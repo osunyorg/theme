@@ -26,7 +26,7 @@ if (siteLang == "fr") {
 var carrouselClasses = {
     classSlider: "carrousel__slider", // slider (servant de fenetre d'affichage)
     classContainer: "carrousel__container", // container englobant directement les elements du slider
-    classController: "carrousel__controller",// si pagination ajout de la class auto
+    classController: "carrousel__controller", 
     classPagination: "carrousel__pagination", 
     classPaginationButton:  "carrousel__pagination__page",
     classToggleButton: "carrousel__toggle",
@@ -55,17 +55,17 @@ Carrousel = function Carrousel(element, options) {
         if (options.autoplay) {
             this.initAutoPlay(options);
         }
+        document.addEventListener("keydown", function (e) {
+            //this.move(parseInt(e.key)-this.track.n);
+            if (e.key == 'ArrowLeft') {
+                this.move(-1);
+            }
+            else if (e.key == 'ArrowRight') {
+                this.move(1);
+            }
+        }.bind(this))
         if (options.pagination) {
             this.initPagination()
-            // document.addEventListener("keydown", function (e) {
-            //     //this.move(parseInt(e.key)-this.track.n);
-            //     if (e.key == 'ArrowLeft') {
-            //         this.move(-1);
-            //     }
-            //     else if (e.key == 'ArrowRight') {
-            //         this.move(1);
-            //     }
-            // }.bind(this))
         }
         this.initDrag();
     }
@@ -327,7 +327,6 @@ Carrousel.prototype.slide = function slide() {
 }
 
 Carrousel.prototype.elementAt = function elementAt(i) {
-    // var trackLen = this.track.elem.children.length;
     var trackLen = this.elements.length;
     return ((this.track.n + i) % trackLen + trackLen) % trackLen;
 }
@@ -339,6 +338,7 @@ Carrousel.prototype.updatePos = function updatePos() {
 
 Carrousel.prototype.move = function (offset) {  // move de n elements
     if(this.ready) {
+        this.computeDim();
         if(this.pagination){
             this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: 0%");
         }
@@ -346,11 +346,13 @@ Carrousel.prototype.move = function (offset) {  // move de n elements
             this.autoplay.started = Date.now();
         }
         var elemswidth = 0;
+
         //calcul du delta à translater à partir de la somme des tailles 
+        var s = Math.sign(offset);
         for (var i = 0; i < Math.abs(offset); i += 1) {
-            var s = Math.sign(offset);
-            elemswidth -= Math.sign(offset) * this.elements[this.elementAt(offset - (s > 0) - s * i)].width;
-        }
+            elemswidth -= s * this.elements[this.elementAt(offset - (s > 0) - s * i)].width;
+        } 
+
         this.offset += offset;
         this.track.delta += elemswidth - (this.drag.delta);
         this.track.n = this.elementAt(offset);
@@ -366,7 +368,8 @@ window.addEventListener("load", function () {
     var classCarrousel = "carrousel";
     var carrousels = document.getElementsByClassName(classCarrousel);
     for (var i = 0; i < carrousels.length; i += 1) {
+        console.log(JSON.parse(carrousels[i].getAttribute("data-carrousel")))
         carrousels[i].setAttribute("id", "carrouselX".replace("X",i));
         new Carrousel(carrousels[i], JSON.parse(carrousels[i].getAttribute("data-carrousel")));
     }
-})
+});

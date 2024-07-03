@@ -84,34 +84,36 @@
         .block-gallery + &,
         .block-pages--cards + &
             margin-top: 0
-        .splide
+
+        .carrousel
             display: flex
             flex-direction: column
-            @include in-page-with-sidebar
-                &.is-moving
-                    .splide__slide.is-active
-                        opacity: 0.1
-            &__track
+            // @include in-page-with-sidebar
+            //     &.is-moving
+            //         .splide__slide.is-active
+            //             opacity: 0.1
+            // margin-right: var(--grid-gutter-negative)
+            &__container
                 overflow: visible
-                margin-right: var(--grid-gutter-negative)
                 @include in-page-with-sidebar
-                    .splide__slide
+                    figure
                         transition: opacity  .3s ease
-                        opacity: 0.1
+                        opacity: 1
                         &.is-next
                             opacity: 0.6
                         &.is-active
                             opacity: 1
-            &__slide
+            figure
+                width: fit-content
                 flex-shrink: initial
+                margin-right: $spacing-3
+                @include in-page-with-sidebar
+                    width: fit-content
                 &:last-child
                     padding-right: 20%
-            figure
-                margin-right: $spacing-3
                 @include media-breakpoint-down(desktop)
                     display: flex
                     flex-direction: column
-                    justify-content: end
                 picture
                     img
                         // FIXME Arnaud: I would like images at constant height, can't manage to get it right.
@@ -144,12 +146,9 @@
                     @include icon(arrow-right, before)
 
         @include in-page-without-sidebar
-            .splide
+            .carrousel
                 figure
                     margin-left: var(--grid-gutter)
                     margin-right: -$spacing-3
-                &__slide
-                    &:first-child
-                        margin-left: var(--grid-gutter)
-                &__track
-                    margin-left: var(--grid-gutter-negative)
+                // &__container
+                //     margin-left: var(--grid-gutter-negative)

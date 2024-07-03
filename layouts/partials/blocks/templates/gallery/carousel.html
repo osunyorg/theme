@@ -4,16 +4,16 @@
 {{ end }}
 
 {{- if $is_carousel }}
-<div class="splide" data-splide="{{ site.Params.blocks.gallery.splide | encoding.Jsonify }}">
-  <div class="splide__track">
-    <div class="splide__list">
+<div class="carrousel" data-carrousel="{{ site.Params.blocks.gallery.carrousel | encoding.Jsonify }}">
+  <div class="carrousel__slider">
+    <div class="carrousel__container">
 {{ end -}}
 
   {{ range .images }}
     {{ if .file }}
       {{- $image := partial "GetMedia" .file -}}
       {{- if $image -}}
-        <figure {{ if $is_carousel }} class="splide__slide"{{ end }}>
+        <figure {{ if $is_carousel }} class="carrousel__slide"{{ end }}>
           {{ partial "commons/image.html"
             (dict
               "image"    .id
