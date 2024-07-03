@@ -4,10 +4,10 @@
 {{- $layout := .block.data.layout | default "grid" -}}
 
 {{- with .block.data -}}
-  {{- $show_main_description := .show_main_description -}}
-  {{- $show_descriptions := .show_descriptions -}}
-  {{- $show_images := .show_images -}}
-  {{- $main_description := "" -}}
+  {{- $option_main_summary := .option_main_summary -}}
+  {{- $option_summaries := .option_summaries -}}
+  {{- $option_images := .option_images -}}
+  {{- $main_summary := "" -}}
   {{- $page_link := false -}}
 
   {{- $page_class := "" -}}
@@ -24,20 +24,20 @@
     {{ if .Params.bodyclass }}
       {{- $page_class = printf "block-%s" .Params.bodyclass }}
     {{ end }}
-    {{ if $show_main_description }}
-      {{- $main_description = partial "GetTruncateContent" ( dict 
+    {{ if $option_main_summary }}
+      {{- $main_summary = partial "GetTruncateContent" ( dict 
           "text" .Params.summary
           "length" site.Params.pages.index.truncate_description
           ) -}}
     {{ end }}
   {{ end -}}
 
-  {{ if $main_description }}
+  {{ if $main_summary }}
     {{/*  SHOULD BE FIXED WITH ORTHOTYPO  */}}
-    {{ $main_description = printf "<p>%s</p>" $main_description }}
+    {{ $main_summary = printf "<p>%s</p>" $main_summary }}
     {{ $block_class = printf "%s %s" $block_class "with-description" }}
   {{ end }}
-  {{ if $show_images }}
+  {{ if $option_images }}
     {{ $block_class = printf "%s %s" $block_class "with-images" }}
   {{ end }}
 
@@ -48,14 +48,14 @@
           "title" $title
           "link" $page_link
           "heading_level" $block.ranks.self
-          "description" $main_description
+          "description" $main_summary
         ) }}
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
           "pages" .pages
           "heading_level" $block.ranks.children
-          "show_images" $show_images
-          "show_descriptions" $show_descriptions
+          "option_images" $option_images
+          "option_summaries" $option_summaries
           ) }}
       </div>
     </div>
