@@ -8,8 +8,10 @@
     {{ partial "events/event.html" (dict
       "event" .
       "layout" $layout
-      "option_summary" true
-      "option_categories" true
+      "options" (dict
+        "summary" true
+        "categories" true
+      )
       )}}
   {{ end }}
 </div>
