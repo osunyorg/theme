@@ -3,12 +3,11 @@
 // X - pagination - goto 
 // X - resize pété
 // X - ajout elements fin en fonction du nombre 
-// 0 - touch
 // X - pagination progress
-// 0 - bloquer en loop quand pas fini de charger en queue
-// 0 - gerer la version pour gallery
+// X - gerer la version pour gallery
+// 0 - touch
 // 0 - petit bug au drag sur les autres carrousels
-
+// 0 - probleme click glightbox
 var siteLang = document.querySelector('html').getAttribute('lang');
 if (siteLang == "fr") {
     var i18n = {
@@ -49,14 +48,15 @@ Carrousel = function Carrousel(element, options) {
     this.track = {};
     this.pagination = false;
     var trackElem = this.slider.getElementsByClassName(carrouselClasses.classContainer).item(0);
-    
+
     if (trackElem) {
         this.initTrack(trackElem);
+        this.track.elem.children.item(0).classList.add("is-active");
+        this.track.elem.children.item(1).classList.add("is-next");
         if (options.autoplay) {
             this.initAutoPlay(options);
         }
         document.addEventListener("keydown", function (e) {
-            //this.move(parseInt(e.key)-this.track.n);
             if (e.key == 'ArrowLeft') {
                 this.move(-1);
             }
@@ -130,6 +130,9 @@ Carrousel.prototype.initTrack = function initTrack(trackElem) {
 
     this.track.elem.addEventListener('transitionend', function () {
         this.ready = false;
+        var nCurrent = this.track.elem.children.length - (this.elements.length);
+        this.track.elem.children.item(nCurrent).classList.remove("is-active");
+        this.track.elem.children.item(nCurrent+1).classList.remove("is-next");
         if (this.offset > 0) {
             for (var i = 0; i < this.offset; i++) {
                 this.track.pos += this.elements[this.elementAt(-i - 1)].width;
@@ -143,6 +146,9 @@ Carrousel.prototype.initTrack = function initTrack(trackElem) {
                 this.track.elem.prepend(this.track.elem.removeChild(this.track.elem.children.item(this.track.elem.children.length - 1)));
             }
         }
+        nCurrent = this.track.elem.children.length - (this.elements.length);
+        this.track.elem.children.item(nCurrent).classList.add("is-active");
+        this.track.elem.children.item(nCurrent+1).classList.add("is-next");
         this.offset = 0;
         this.ready = true;
     }.bind(this));
@@ -193,7 +199,6 @@ Carrousel.prototype.initPagination = function initPagination() {
             button.append(elemI);
             button.addEventListener("click", function(e){ 
                 this.goTo(e.target.getAttribute("tabindex"));
-
             }.bind(this));
             li.append(button);
             pagination.append(li);        
@@ -338,7 +343,6 @@ Carrousel.prototype.updatePos = function updatePos() {
 
 Carrousel.prototype.move = function (offset) {  // move de n elements
     if(this.ready) {
-        this.computeDim();
         if(this.pagination){
             this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: 0%");
         }

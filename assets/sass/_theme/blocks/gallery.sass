@@ -88,17 +88,18 @@
         .carrousel
             display: flex
             flex-direction: column
-            // @include in-page-with-sidebar
-            //     &.is-moving
-            //         .splide__slide.is-active
-            //             opacity: 0.1
-            // margin-right: var(--grid-gutter-negative)
-            &__container
+            @include in-page-with-sidebar
+                &.is-moving
+                    .carrousel__slide.is-active
+                        opacity: 0.1
+            margin-right: var(--grid-gutter-negative)
+
+            &__slider
                 overflow: visible
                 @include in-page-with-sidebar
                     figure
                         transition: opacity  .3s ease
-                        opacity: 1
+                        opacity: 0.1
                         &.is-next
                             opacity: 0.6
                         &.is-active
@@ -150,5 +151,3 @@
                 figure
                     margin-left: var(--grid-gutter)
                     margin-right: -$spacing-3
-                // &__container
-                //     margin-left: var(--grid-gutter-negative)
