@@ -4,9 +4,7 @@
 {{- $layout := .block.data.layout | default "grid" -}}
 
 {{- with .block.data -}}
-  {{- $option_main_summary := .option_main_summary -}}
-  {{- $option_summaries := .option_summaries -}}
-  {{- $option_images := .option_images -}}
+  {{- $options := .options -}}
   {{- $main_summary := "" -}}
   {{- $page_link := false -}}
 
@@ -24,7 +22,7 @@
     {{ if .Params.bodyclass }}
       {{- $page_class = printf "block-%s" .Params.bodyclass }}
     {{ end }}
-    {{ if $option_main_summary }}
+    {{ if $options.main_summary }}
       {{- $main_summary = partial "GetTruncateContent" ( dict 
           "text" .Params.summary
           "length" site.Params.pages.index.truncate_description
@@ -37,7 +35,7 @@
     {{ $main_summary = printf "<p>%s</p>" $main_summary }}
     {{ $block_class = printf "%s %s" $block_class "with-description" }}
   {{ end }}
-  {{ if $option_images }}
+  {{ if $options.images }}
     {{ $block_class = printf "%s %s" $block_class "with-images" }}
   {{ end }}
 
@@ -54,8 +52,7 @@
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
           "pages" .pages
           "heading_level" $block.ranks.children
-          "option_images" $option_images
-          "option_summaries" $option_summaries
+          "options" $options
           ) }}
       </div>
     </div>
