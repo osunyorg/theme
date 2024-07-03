@@ -1,5 +1,5 @@
-{{ $show_descriptions := .show_descriptions }}
-{{ $show_images := .show_images }}
+{{ $option_descriptions := .option_descriptions }}
+{{ $option_images := .option_images }}
 {{ $image_class := "" }}
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
@@ -23,14 +23,14 @@
           </a>
         {{ $heading_tag.close }}
 
-        {{ if and $show_descriptions .Params.summary }}
+        {{ if and $option_descriptions .Params.summary }}
           <p>{{ partial "GetTruncateContent" ( dict 
             "text" .Params.summary
             "length" site.Params.pages.index.truncate_description
             ) }}</p>
         {{ end }}
 
-        {{ if $show_images }}
+        {{ if $option_images }}
           {{- partial "pages/page-media.html" . -}}
         {{ end }}
       </article>
