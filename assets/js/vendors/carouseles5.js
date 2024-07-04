@@ -38,7 +38,6 @@ Carrousel = function Carrousel(element, options) {
     this.offset = 0;
     this.transitionDuration = 0;
     this.loop = true;
-    this.paused = false;
     this.hovered = false;
     this.arrows = false;
     this.autoplay = {};
@@ -51,11 +50,10 @@ Carrousel = function Carrousel(element, options) {
 
     if (trackElem) {
         this.initTrack(trackElem);
-        this.track.elem.children.item(0).classList.add("is-active");
-        this.track.elem.children.item(1).classList.add("is-next");
         if (options.autoplay) {
             this.initAutoPlay(options);
         }
+        ///// TEST /////
         document.addEventListener("keydown", function (e) {
             if (e.key == 'ArrowLeft') {
                 this.move(-1);
@@ -64,6 +62,8 @@ Carrousel = function Carrousel(element, options) {
                 this.move(1);
             }
         }.bind(this))
+        ///// 
+
         if (options.pagination) {
             this.initPagination()
         }
@@ -75,12 +75,27 @@ Carrousel = function Carrousel(element, options) {
     }
 }
 
+Carrousel.prototype.updateSlideClass = function updateSlideClass(currentSlide) {
+    this.track.elem.children.item(currentSlide).classList.add("is-active");
+    this.track.elem.children.item(currentSlide+1).classList.add("is-next");
+}
+
 Carrousel.prototype.onResize = function onResize() {
     this.ready = false;
     this.computeDim();
     this.track.pos = -this.track.len
     this.updatePos();
     this.ready = true;
+}
+Carrousel.prototype.initTransitionDuration = function initTransitionDuration() {
+    // Je récupere la durée de transition specifiée dans le css
+    var d = getComputedStyle(this.track.elem).transitionDuration;
+    if (d.split("ms").length > 1) {
+        this.transitionDuration = parseInt(d.split("ms")[0]);
+    } else if (d.split("s").length > 1) {
+        this.transitionDuration = parseInt(parseFloat(d.split("s")[0]) * 1000);
+    }
+
 }
 
 Carrousel.prototype.initTrack = function initTrack(trackElem) {
@@ -92,13 +107,7 @@ Carrousel.prototype.initTrack = function initTrack(trackElem) {
         len: 0
     };
 
-    // Je récupere la durée de transition specifiée dans le css
-    var d = getComputedStyle(this.track.elem).transitionDuration;
-    if (d.split("ms").length > 1) {
-        this.transitionDuration = parseInt(d.split("ms")[0]);
-    } else if (d.split("s").length > 1) {
-        this.transitionDuration = parseInt(parseFloat(d.split("s")[0]) * 1000);
-    }
+    this.initTransitionDuration();
 
     var childrenAsArray = Array.from(this.track.elem.children);
     for (var i = 0; i < childrenAsArray.length; i++) {
@@ -123,49 +132,47 @@ Carrousel.prototype.initTrack = function initTrack(trackElem) {
     }
 
     if (this.loop) {
-        //todo compute width according to window 
         this.track.pos -= this.track.len; // initialisation de la position du track
         this.updatePos();
     }
 
-    this.track.elem.addEventListener('transitionend', function () {
-        this.ready = false;
-        var nCurrent = this.track.elem.children.length - (this.elements.length);
-        this.track.elem.children.item(nCurrent).classList.remove("is-active");
-        this.track.elem.children.item(nCurrent+1).classList.remove("is-next");
-        if (this.offset > 0) {
-            for (var i = 0; i < this.offset; i++) {
-                this.track.pos += this.elements[this.elementAt(-i - 1)].width;
-                this.updatePos();
-                this.track.elem.append(this.track.elem.removeChild(this.track.elem.children.item(0)));
-            }
-        } else if (this.offset < 0) {
-            for (var i = 0; i < Math.abs(this.offset); i++) {
-                this.track.pos -= this.elements[this.elementAt(i)].width;
-                this.updatePos();
-                this.track.elem.prepend(this.track.elem.removeChild(this.track.elem.children.item(this.track.elem.children.length - 1)));
-            }
-        }
-        nCurrent = this.track.elem.children.length - (this.elements.length);
-        this.track.elem.children.item(nCurrent).classList.add("is-active");
-        this.track.elem.children.item(nCurrent+1).classList.add("is-next");
-        this.offset = 0;
-        this.ready = true;
-    }.bind(this));
+    var onTransitioned = this.onTransitioned.bind(this);
+    this.track.elem.addEventListener('transitionend', onTransitioned);
 
-    this.slider.addEventListener("mouseenter", function (e) {
-        this.hovered = true;
-    }.bind(this));
-
-    this.slider.addEventListener("mouseleave", function (e) {
-        this.hovered = false;
-    }.bind(this));
+    this.slider.addEventListener("mouseenter", function (e) {this.hovered = true;}.bind(this));
+    this.slider.addEventListener("mouseleave", function (e) {this.hovered = false;}.bind(this));
 
     // add detection focus ( touch )
     var resizeAction = this.onResize.bind(this);
     window.addEventListener('resize', resizeAction);
+    this.updateSlideClass(0);
     this.ready = true;
     return this;
+}
+
+Carrousel.prototype.onTransitioned = function onTransitioned() {
+    this.ready = false;
+    var nCurrent = this.track.elem.children.length - (this.elements.length);
+    this.track.elem.children.item(nCurrent).classList.remove("is-active");
+    this.track.elem.children.item(nCurrent+1).classList.remove("is-next");
+    if (this.offset > 0) {
+        for (var i = 0; i < this.offset; i++) {
+            this.track.pos += this.elements[this.elementAt(-i - 1)].width;
+            this.updatePos();
+            this.track.elem.append(this.track.elem.removeChild(this.track.elem.children.item(0)));
+        }
+    } else if (this.offset < 0) {
+        for (var i = 0; i < Math.abs(this.offset); i++) {
+            this.track.pos -= this.elements[this.elementAt(i)].width;
+            this.updatePos();
+            this.track.elem.prepend(this.track.elem.removeChild(this.track.elem.children.item(this.track.elem.children.length - 1)));
+        }
+    }
+    nCurrent = this.track.elem.children.length - (this.elements.length);
+    this.track.elem.children.item(nCurrent).classList.add("is-active");
+    this.track.elem.children.item(nCurrent+1).classList.add("is-next");
+    this.offset = 0;
+    this.ready = true;
 }
 
 Carrousel.prototype.computeDim = function computeDim() {
@@ -211,8 +218,8 @@ Carrousel.prototype.initPagination = function initPagination() {
             span.classList.add(carrouselClasses.classToggleButtonPause);
             toggleButton.append(span);
             toggleButton.addEventListener("click", function(e){
-                this.paused = !this.paused;
-                if(this.paused){
+                this.autoplay.paused = !this.autoplay.paused;
+                if(this.autoplay.paused){
                     e.target.classList.replace(carrouselClasses.classToggleButtonPause, carrouselClasses.classToggleButtonPlay);
                 }else{
                     e.target.classList.replace(carrouselClasses.classToggleButtonPlay, carrouselClasses.classToggleButtonPause);
@@ -229,7 +236,7 @@ Carrousel.prototype.runAutoPlay = function runAutoPlay(){
     var elapsed = now - this.autoplay.started;
 
     if(elapsed > this.autoplay.interval){
-        if (!this.drag.active && !(this.hovered && this.autoplay.pauseOnHover) && !this.paused) {
+        if (!this.drag.active && !(this.hovered && this.autoplay.pauseOnHover) && !this.autoplay.paused) {
             this.autoplay.started = now;
             if(this.pagination){
                 this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: 0%");
@@ -237,7 +244,7 @@ Carrousel.prototype.runAutoPlay = function runAutoPlay(){
             this.move(1);
         }
     }else{
-        if (!this.drag.active && !(this.hovered && this.autoplay.pauseOnHover) && !this.paused) {
+        if (!this.drag.active && !(this.hovered && this.autoplay.pauseOnHover) && !this.autoplay.paused) {
             var p = elapsed/this.autoplay.interval*100.0
             if(this.pagination){
                 this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: "+p+"%");
@@ -250,7 +257,8 @@ Carrousel.prototype.runAutoPlay = function runAutoPlay(){
 Carrousel.prototype.initAutoPlay = function initAutoPlay(params) { // TODO changer pour requestaimation frame et gerer animmation
     this.autoplay = {
         interval: 2000,
-        pauseOnHover: false
+        pauseOnHover: false,
+        paused: false
     };
 
     if (params.interval) {
@@ -277,16 +285,16 @@ Carrousel.prototype.initDrag = function initDrag() {
         delta: 0,
         active: false
     };
-    var dd = this.onDrag.bind(this);
+    var dragAction = this.onDrag.bind(this);
     this.track.elem.addEventListener('mousedown', function (e) {
         e.preventDefault();
         this.drag.posx = e.offsetX;
         this.drag.startpos = this.track.pos;
-        this.track.elem.addEventListener('mousemove', dd);
+        this.track.elem.addEventListener('mousemove', dragAction);
     }.bind(this));
 
     window.addEventListener('mouseup', function (e) {
-        this.track.elem.removeEventListener('mousemove', dd);
+        this.track.elem.removeEventListener('mousemove', dragAction);
         this.move(this.drag.target);
         this.drag.posx = null;
         this.drag.startpos = null;
@@ -295,7 +303,7 @@ Carrousel.prototype.initDrag = function initDrag() {
     }.bind(this));
 
     window.addEventListener('mouseleave', function (e) {
-        this.track.elem.removeEventListener('mousemove', dd);
+        this.track.elem.removeEventListener('mousemove', dragAction);
         this.move(this.drag.target);
         this.drag.posx = null;
         this.drag.startpos = null;
@@ -313,7 +321,7 @@ Carrousel.prototype.onDrag = function onDrag(e) {
         this.drag.delta = this.track.pos - this.drag.startpos;
         this.drag.target = 0;
         if (Math.sign(this.drag.delta) > 0) {
-            if (Math.abs(this.drag.delta) - this.elements[this.elementAt(-1)].width / 2 > 0) {
+            if (Math.abs(this.drag.delta) - this.elements[this.elementAt(-1)].width / 4 > 0) {
                 this.drag.target -= 1;
             }
         } else {
@@ -341,7 +349,7 @@ Carrousel.prototype.updatePos = function updatePos() {
     this.track.elem.style.setProperty('left', this.track.pos + "px");
 }
 
-Carrousel.prototype.move = function (offset) {  // move de n elements
+Carrousel.prototype.move = function (offset) {  // move de offset elements
     if(this.ready) {
         if(this.pagination){
             this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: 0%");
@@ -350,7 +358,6 @@ Carrousel.prototype.move = function (offset) {  // move de n elements
             this.autoplay.started = Date.now();
         }
         var elemswidth = 0;
-
         //calcul du delta à translater à partir de la somme des tailles 
         var s = Math.sign(offset);
         for (var i = 0; i < Math.abs(offset); i += 1) {
