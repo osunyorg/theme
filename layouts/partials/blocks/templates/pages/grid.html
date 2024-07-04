@@ -24,13 +24,13 @@
           </a>
         {{ $heading_tag.close }}
 
-        {{ if and $options.descriptions .Params.summary }}
+        {{ if and $options.summary .Params.summary }}
           <p>{{ partial "GetTruncateContent" ( dict 
               "text" .Params.summary
               "length" site.Params.pages.index.truncate_description
             ) }}</p>
         {{ end }}
-        {{ if $options.images }}
+        {{ if $options.image }}
           {{- partial "pages/page-media.html" . -}}
         {{ end }}
       </article>

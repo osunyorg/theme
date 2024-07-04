@@ -4,7 +4,7 @@
         "level" $heading_level
         "attributes" "class='page-title'"
 )}}
-<ul class="list {{ if and (not $options.descriptions) (not $options.images) }} title-only {{ end }}">
+<ul class="list {{ if and (not $options.summary) (not $options.image) }} title-only {{ end }}">
   {{ range .pages }}
     {{- $file := false -}}
     {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
@@ -17,7 +17,7 @@
     {{ $page := site.GetPage $file }}
     {{ with $page }}
       <li>
-        {{ if or $options.descriptions $options.images }}
+        {{ if or $options.summary $options.image }}
           <article>
             <div class="page-content">
               {{ $heading_tag.open }}
@@ -26,7 +26,7 @@
                 </a>
               {{ $heading_tag.close }}
   
-              {{ if and $options.descriptions .Params.summary }}
+              {{ if and $options.summary .Params.summary }}
                 <p>{{ partial "GetTruncateContent" ( dict 
                   "text" .Params.summary
                   "length" site.Params.pages.index.truncate_description
@@ -34,7 +34,7 @@
               {{ end }}
             </div>
 
-            {{ if $options.images }}
+            {{ if $options.image }}
               <div class="media">
                 {{- if .Params.image -}}
                   {{- partial "commons/image.html"
