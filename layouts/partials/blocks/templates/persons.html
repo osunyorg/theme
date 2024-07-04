@@ -6,6 +6,7 @@
 {{- $isLarge := false -}}
 
 {{- with .block.data -}}
+  {{ $options := .options }}
   {{- $with_link := .with_link -}}
   {{- $with_photo := .with_photo -}}
 
@@ -44,11 +45,11 @@
                   ) -}}
 
                 {{ $heading_tag.open }}
-                  {{ if $with_link }}
+                  {{ if $options.link }}
                     <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
                       {{ end }}
                       {{- partial "PrepareHTML" $person.Title -}}
-                      {{ if $with_link }}
+                      {{ if $options.link }}
                     </a>
                   {{ end }}
                 {{ $heading_tag.close }}
@@ -62,7 +63,7 @@
                   {{ end -}}
                 </p>
               </div>
-              {{- if $with_photo }}
+              {{- if $options.image }}
                 <div class="avatar" itemprop="image">
                   {{- if $person.Params.image }}
                     {{ partial "commons/image.html"
