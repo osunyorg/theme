@@ -1,5 +1,5 @@
 {{ $post := .post }}
-{{- $direction := "" -}}
+{{ $direction := "" }}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
     "open" ((printf "<%s class='post-title' itemprop='headline'>" $heading) | safeHTML)
@@ -10,12 +10,15 @@
 {{ $alternate := .alternate }}
 
 {{ with $post }}
-
-  {{ if .Params.image }}
-    {{- $direction = partial "GetImageDirection" .Params.image -}}
+  {{ $post_class := "post" }}
+  {{ if and .Params.image $options.image }}
+    {{ $direction = partial "GetImageDirection" .Params.image }}
+    {{ $post_class = printf "%s %s" $post_class $direction }}
+  {{ else }}
+    {{ $post_class = printf "%s %s" $post_class "without-image" }}
   {{ end }}
 
-  <article class='post {{ if $alternate }} {{- if (not (isset .Params "image")) -}} without-image {{- end -}}{{ $direction }} {{if not (modBool $index 2)}}left{{ else}}right{{end}}{{end}}' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+  <article class="{{ $post_class }}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="post-content">
       {{- $title := partial "PrepareHTML" .Title -}}
 
