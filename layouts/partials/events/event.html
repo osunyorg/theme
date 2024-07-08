@@ -57,7 +57,7 @@
         </p>
       {{ end }}
 
-      {{ if and (site.Params.events.index.show_description) ($options.summary) }}
+      {{ if $options.summary }}
         {{- if (partial "GetTextFromHTML" .Params.summary) -}}
           <div class="event-description">
             <p itemprop="description">
