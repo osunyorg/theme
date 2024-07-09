@@ -34,7 +34,10 @@
         {{ end }}
           
         {{ if site.Params.projects.index.show_categories }}
-          {{- partial "projects/categories" . -}}
+          {{ partial "commons/categories" ( dict
+            "context" .
+            "kind" "project"
+          )}}
         {{ end }}
       </div>
       {{ if and site.Params.projects.index.show_year .Params.year }}

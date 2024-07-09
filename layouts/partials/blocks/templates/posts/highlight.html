@@ -33,7 +33,10 @@
             {{ $heading_tag.close }}
 
             {{ if eq $options.hide_category false }}
-              {{- partial "posts/categories" . -}}
+              {{ partial "commons/categories" ( dict
+                "context" .
+                "kind" "post"
+              )}}
             {{ end }}
             {{ if eq $options.hide_summary false }}
               {{- if (partial "GetTextFromHTML" .Params.summary) -}}
