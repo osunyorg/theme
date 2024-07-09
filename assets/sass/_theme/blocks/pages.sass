@@ -104,9 +104,6 @@
                 position: relative
                 margin-top: auto
                 padding-top: $spacing-3
-                display: flex
-                justify-content: space-between
-                align-items: center
             &:hover
                 .more:after
                     opacity: 1
@@ -237,6 +234,13 @@
                 flex-direction: column
                 a
                     @include stretched-link
+                .more
+                    @include icon(arrow, after, true)
+                    &::after
+                        opacity: 1
+                        transition: padding-left 0.3s
+                &:hover .more::after
+                    padding-left: pxToRem(10)
                 .media 
                     margin-bottom: $spacing-2
                     order: -1
