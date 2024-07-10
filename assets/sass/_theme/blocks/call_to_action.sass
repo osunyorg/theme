@@ -1,6 +1,4 @@
 .block-call_to_action
-    --cta-background-color: #{$block-call-to-action-background}
-    margin-bottom: 0
     .top
         margin-bottom: 0
         .block-title
@@ -17,7 +15,7 @@
         .description
             a
                 color: inherit
-                text-decoration-color: $block-call-to-action-color
+                text-decoration-color: $color-text
             p
                 @include h2
         .actions
@@ -48,11 +46,31 @@
             margin-top: $spacing-3
         img
             display: block
+    &--accent_background
+        --cta-background-color: #{$block-call-to-action-accent-background}
+        margin-bottom: 0
+        .call_to_action
+            color: $block-call-to-action-accent-color
+            .description
+                a
+                    text-decoration-color: $block-call-to-action-accent-color
+            .actions
+                a
+                    color: $block-call-to-action-accent-color
+                    text-decoration-color: alphaColor($block-call-to-action-accent-color, 0.3)
+                    &:first-child
+                        --btn-background: #{$block-call-to-action-accent-button-background}
+                        --btn-border: #{$block-call-to-action-accent-button-border}
+                        --btn-color: #{$block-call-to-action-accent-button-color}
+                        --btn-hover-background: #{$block-call-to-action-accent-button-hover-background}
+                        --btn-hover-border: #{$block-call-to-action-accent-button-hover-border}
+                        --btn-hover-color: #{$block-call-to-action-accent-button-hover-color}
 
     @include media-breakpoint-down(desktop)
-        background-color: var(--cta-background-color)
-        padding-top: 0
-        padding-bottom: 0
+        &--accent_background
+            background-color: var(--cta-background-color)
+            // padding-top: 0
+            // padding-bottom: 0
         .call_to_action
             padding: var(--block-space-y) 0
             .actions
@@ -72,36 +90,46 @@
     @include in-page-with-sidebar
         .call_to_action
             display: flex
-            flex-direction: column
             > *
                 order: 2
-            > div
-                // TODO : simplifier l'application d'une couleur de fond sur le CTA avec sidebar et sans sidebar
-                background-color: var(--cta-background-color)
-                padding: columns(1)
-                width: 100%
-                position: relative
-                &::after
-                    background-color: var(--cta-background-color)
-                    content: ''
-                    display: block
-                    position: absolute
-                    top: 0
-                    bottom: 0
-                    left: 100%
-                    // Calcul de la largeur nécessaire pour remplir l'espace droit entre le container et le bord droit de la fenêtre
-                    width: grid-external-space()
-            &--with-image
-                picture
-                    order: 1
-                    padding-left: columns(1)
-                    padding-right: offset(4)
-                    position: relative
-                    z-index: 2
-                    img
-                        margin-bottom: calc(var(--grid-gutter-negative) + -#{$spacing-3})
+        &--no_background
+            .call_to_action
+                &--with-image
+                    > div
+                        flex: 1
+                    picture
+                        margin-left: var(--grid-gutter)
+                        width: columns(3)
+        &--accent_background
+            .call_to_action
+                flex-direction: column
                 > div
-                    padding-top: calc(var(--grid-gutter) * 2 + #{$spacing-3})
+                    // TODO : simplifier l'application d'une couleur de fond sur le CTA avec sidebar et sans sidebar
+                    background-color: var(--cta-background-color)
+                    padding: columns(1)
+                    width: 100%
+                    position: relative
+                    &::after
+                        background-color: var(--cta-background-color)
+                        content: ''
+                        display: block
+                        position: absolute
+                        top: 0
+                        bottom: 0
+                        left: 100%
+                        // Calcul de la largeur nécessaire pour remplir l'espace droit entre le container et le bord droit de la fenêtre
+                        width: grid-external-space()
+                &--with-image
+                    picture
+                        order: 1
+                        padding-left: columns(1)
+                        padding-right: offset(4)
+                        position: relative
+                        z-index: 2
+                        img
+                            margin-bottom: calc(var(--grid-gutter-negative) + -#{$spacing-3})
+                    > div
+                        padding-top: calc(var(--grid-gutter) * 2 + #{$spacing-3})
 
     @include in-page-without-sidebar
         background-color: var(--cta-background-color)
