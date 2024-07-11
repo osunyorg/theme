@@ -44,7 +44,7 @@ footer#document-footer
             @include dropdown-i18n
             button
                 @include button-reset
-                @include icon(caret-bottom, after)
+                @include icon(arrow-down-s-line, after)
                 @include meta
                 align-items: center
                 color: inherit
@@ -110,43 +110,51 @@ footer#document-footer
                     display: flex
                     justify-content: flex-end
                     position: relative
-                    a
-                        @include stretched-link
+                    &::after
+                        margin-left: $spacing-2
+                    a::after
+                        display: none
                     &.facebook
-                        @include icon(social-facebook, after)
+                        @include icon(facebook-fill, after)
                     &.instagram
-                        @include icon(social-instagram, after)
+                        @include icon(instagram-fill, after)
                     &.linkedin
-                        @include icon(social-linkedin, after)
+                        @include icon(linkedin-fill, after)
                     &.mastodon
-                        @include icon(social-mastodon, after)
+                        @include icon(mastodon-fill, after)
                     &.youtube
-                        @include icon(social-youtube, after)
+                        @include icon(youtube-fill, after)
                     &.x
-                        @include icon(social-x, after)
+                        @include icon(twitter-x-line, after)
                     &.peertube
-                        @include icon(social-peertube, after)
+                        @include icon(movie-fill, after)
                     &.vimeo
-                        @include icon(social-vimeo, after)
+                        @include icon(vimeo-fill, after)
                     &.tiktok
-                        @include icon(social-tiktok, after)
+                        @include icon(tiktok-fill, after)
                     &.github
-                        @include icon(social-github, after)
+                        @include icon(github-fill, after)
                     &.email
                         @include icon(social-email, after)
                     &.rss
-                        @include icon(social-rss, after)
+                        @include icon(rss-fill, after)
                     &::after
                         font-size: $footer-icons-size
-                        @include media-breakpoint-up(desktop)
+                        margin-right: $spacing-2
+                        transform: translateX(-25%)
+                    + li
+                        margin-top: $spacing-3
+                    @include media-breakpoint-up(desktop)
+                        &::after
+                            font-size: $footer-icons-size-desktop
+                            margin-right: $spacing-2
                             margin-right: -0.2em
                             padding-left: $spacing-2
+                        + li
+                            margin-top: space(4)
                     @include media-breakpoint-down(desktop)
                         width: fit-content
                         flex-direction: row-reverse
-                        &::after
-                            margin-right: $spacing-2
-                            transform: translateX(-25%)
         @if $footer-text-hidden
             &-social.site-links li
                 font-size: 0
