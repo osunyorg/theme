@@ -21,6 +21,13 @@
       </a>
     </li>
   {{ end }}
+  {{ if $share_options.mastodon }}
+    <li>
+      <a href="https://mastodonshare.com/?text={{ .Title }}&url={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-mastodon-fill" title="{{ i18n "posts.share_aria" (dict "Title" "Mastodon") }}">
+        <span>Mastodon</span>
+      </a>
+    </li>
+  {{ end }}
   {{ if $share_options.twitter }}
     <li>
       <a href="https://twitter.com/intent/tweet?text={{ .Title }} {{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-twitter-x-line" title="{{ i18n "posts.share_aria" (dict "Title" "Twitter") }}">
@@ -44,7 +51,7 @@
   {{ end }}
   {{ if $share_options.email }}
     <li>
-      <a href="mailto:?subject={{ .Title }}&body={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-at-line" title="{{ i18n "posts.share_aria" (dict "Title" "E-mail") }}">
+      <a href="mailto:?subject={{ .Title }}&body={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-mail-fill" title="{{ i18n "posts.share_aria" (dict "Title" "E-mail") }}">
         <span>E-mail</span>
       </a>
     </li>
