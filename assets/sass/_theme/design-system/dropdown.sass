@@ -1,0 +1,32 @@
+@mixin dropdown
+    position: relative
+    button
+        @include button-reset
+        @include icon(arrow-down-s-line, after)
+            margin-left: 5px
+    .dropdown-menu
+        @include inset(calc(100% + #{$spacing-2}), 0, auto, auto)
+        background-color: var(--color-background-alt)
+        display: none
+        position: absolute
+        z-index: 2
+        li
+            display: block
+            &:not(:first-child)
+                border-top: 1px solid var(--color-border)
+        a
+            display: block
+            font-size: $body-size
+            padding: $spacing-3
+            text-decoration: none
+            white-space: normal
+            @include media-breakpoint-down(desktop)
+                padding: $spacing-2 $spacing-3
+            &:hover
+                background-color: var(--color-accent)
+                color: var(--color-background)
+    // When dropdown expanded
+    button[aria-expanded="true"]
+        @include icon(arrow-up-s-line, after)
+        + .dropdown-menu
+            display: block

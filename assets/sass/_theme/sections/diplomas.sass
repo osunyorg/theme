@@ -74,42 +74,15 @@ ul.diplomas
 
 .diplomas-select
     text-align: right
-    position: relative
     @include meta
-    button
-        @include button-reset
-        @include icon(arrow-down-s-line, after)
-            margin-left: 5px
+    @include dropdown
     .dropdown-menu
-        @include inset(calc(100% + #{$spacing-2}), 0, auto, auto)
-        background-color: var(--color-background-alt)
-        display: none
-        position: absolute
-        z-index: 2
         @include media-breakpoint-down(desktop)
             right: var(--grid-gutter-negative)
             left: var(--grid-gutter-negative)
         &,
         a
             color: black
-        a
-            display: block
-            font-size: $body-size
-            padding: $spacing-3
-            text-decoration: none
-            white-space: normal
-            @include media-breakpoint-down(desktop)
-                padding: $spacing-2 $spacing-3
-            &:not(:first-child)
-                border-top: 1px solid var(--color-border)
-            &:hover
-                background-color: var(--color-accent)
-                color: white
-
-    button[aria-expanded="true"]
-        @include icon(arrow-up-s-line, after)
-        + .dropdown-menu
-            display: block
 
 .essential-container
     margin-top: $spacing-5

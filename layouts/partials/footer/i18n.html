@@ -11,31 +11,29 @@
         aria-label="{{ i18n "commons.accessibility.menu_lang" }}">
         {{- site.Language.LanguageName -}}
       </button>
-      <div class="dropdown-menu dropdown-languages" id="footer-i18n-list">
-        <ul>
-          {{ range site.Languages }}
-            {{ $siteLang := . }}
-            {{ $url = printf "/%s/" .Lang }}
-            {{ range $pageWithTranslations }}
-              {{ if eq .Lang $siteLang.Lang }}
-                {{ $url = .Permalink }}
-              {{ end }}
+      <ul class="dropdown-menu dropdown-languages" id="footer-i18n-list">
+        {{ range site.Languages }}
+          {{ $siteLang := . }}
+          {{ $url = printf "/%s/" .Lang }}
+          {{ range $pageWithTranslations }}
+            {{ if eq .Lang $siteLang.Lang }}
+              {{ $url = .Permalink }}
             {{ end }}
-            <li>
-              <a 
-                href="{{ $url }}" 
-                lang="{{ $siteLang }}" 
-                hreflang="{{ $siteLang }}"
-                {{ if eq $siteLang site.Language }}
-                  class="is-checked"
-                {{ end }}
-              >
-                {{- $siteLang.LanguageName -}}
-              </a>
-            </li>
           {{ end }}
-        </ul>
-      </div>
+          <li>
+            <a 
+              href="{{ $url }}" 
+              lang="{{ $siteLang }}" 
+              hreflang="{{ $siteLang }}"
+              {{ if eq $siteLang site.Language }}
+                class="is-checked"
+              {{ end }}
+            >
+              {{- $siteLang.LanguageName -}}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
     </div>
   </div>
 {{ end }}
