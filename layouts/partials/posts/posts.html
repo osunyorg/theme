@@ -1,4 +1,6 @@
-<div class="posts posts--{{- site.Params.posts.index.layout -}}">
+{{ $list_class := printf "posts posts--%s" site.Params.posts.index.layout }}
+{{ $list_class = printf "%s %s" $list_class (cond site.Params.posts.index.options.image "with-images" "without-images") }}
+<div class="{{ $list_class }}">
   {{ if not .Pages }}
     <p>{{ i18n "categories.no_post" }}</p>
   {{ end }}

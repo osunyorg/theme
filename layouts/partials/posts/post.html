@@ -1,25 +1,24 @@
 {{ $post := .post }}
-{{- $direction := "" -}}
+{{ $direction := "" }}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
     "open" ((printf "<%s class='post-title' itemprop='headline'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
-{{ $index := .index}}
+{{ $index := .index }}
+{{ $options := .options }}
 {{ $alternate := .alternate }}
-{{- $show_image := (eq .options.hide_image false) -}}
-{{- $show_summary := (eq .options.hide_summary false) -}}
-{{- $show_category := (eq .options.hide_category false) -}}
-{{- $show_author := (eq .options.hide_author false) -}}
-{{- $show_date := (eq .options.hide_date false) -}}
 
 {{ with $post }}
-
-  {{ if .Params.image }}
-    {{- $direction = partial "GetImageDirection" .Params.image -}}
+  {{ $post_class := "post" }}
+  {{ if and .Params.image $options.image }}
+    {{ $direction = partial "GetImageDirection" .Params.image }}
+    {{ $post_class = printf "%s %s" $post_class $direction }}
+  {{ else }}
+    {{ $post_class = printf "%s %s" $post_class "without-image" }}
   {{ end }}
 
-  <article class='post {{ if $alternate }} {{- if (not (isset .Params "image")) -}} without-image {{- end -}}{{ $direction }} {{if not (modBool $index 2)}}left{{ else}}right{{end}}{{end}}' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+  <article class="{{ $post_class }}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="post-content">
       {{- $title := partial "PrepareHTML" .Title -}}
 
@@ -27,11 +26,11 @@
         <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
 
-      {{ if $show_category }}
+      {{ if $options.categories }}
         {{- partial "posts/categories" . -}}
       {{ end }}
 
-      {{ if $show_summary }}
+      {{ if $options.summary }}
         {{- if (partial "GetTextFromHTML" .Params.summary) -}}
           <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
             "text" .Params.summary
@@ -40,18 +39,18 @@
         {{- end -}}
       {{- end -}}
       
-      {{ if or $show_author $show_date }}
+      {{ if or $options.author $options.date }}
         <div class="post-meta">
-          {{ if $show_date }}
+          {{ if $options.date }}
             <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
           {{ end }}
-          {{ if $show_author }}
+          {{ if $options.author }}
             {{- partial "posts/author" . -}}
           {{ end }}
         </div>
       {{ end }}
     </div>
-    {{ if $show_image }}
+    {{ if $options.image }}
       <div class="media">
         {{- if and .Params.image -}}
           {{- partial "commons/image.html"

@@ -1,9 +1,7 @@
 {{- $block := .block }}
 {{- $block_class := partial "GetBlockClass" .block -}}
 {{- with .block.data -}}
-  {{- $show_summary := .show_summary -}}
-  {{- $show_category := .show_category -}}
-  {{- $show_status := .show_status -}}
+  {{- $options := .options -}}
   {{- $layout := .layout | default "list" -}}
   
   <div class="{{ $block_class }}">
@@ -12,7 +10,7 @@
         {{ $events_page := site.GetPage "/events" }}
         {{ $link := .title_link }}
 
-        {{ if .category }}
+        {{ if and .category $options.categories }}
           {{ $term := site.GetPage (printf "/events_categories%s" .category) }}
           {{ $link = $term.Permalink }}
         {{ end }}
@@ -32,9 +30,7 @@
                   {{ partial "events/event" (dict
                     "event" .
                     "layout" $layout
-                    "show_summary" $show_summary
-                    "show_category" $show_category
-                    "show_status" $show_status
+                    "options" $options
                     "heading" (printf "h%d" $block.ranks.children)
                   ) }}
               {{ end }}
