@@ -29,6 +29,10 @@
             ) }}</p>
         {{ end }}
 
+        {{ if site.Params.blocks.pages.alternate.more }}
+          <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+        {{ end }}
+
         {{ if $options.image }}
           {{- partial "pages/page-media.html" . -}}
         {{ end }}
