@@ -42,10 +42,22 @@
                     @extend .button
                 &:last-child
                     margin-bottom: 0
+        figure
+            figcaption
+                @include meta
         * + .actions
             margin-top: $spacing-3
         img
             display: block
+    &--no_background
+        .call_to_action--with-image
+            figure
+                img
+                    width: 100%
+                figcaption
+                    display: flex
+                    justify-content: flex-end
+                    margin-top: $spacing-2
     &--accent_background
         --cta-background-color: #{$block-call-to-action-accent-background}
         margin-bottom: 0
@@ -54,23 +66,31 @@
             .description
                 a
                     text-decoration-color: $block-call-to-action-accent-color
-            .actions
+            .actions,
+            figure
                 a
                     color: $block-call-to-action-accent-color
                     text-decoration-color: alphaColor($block-call-to-action-accent-color, 0.3)
-                    &:first-child
-                        --btn-background: #{$block-call-to-action-accent-button-background}
-                        --btn-border: #{$block-call-to-action-accent-button-border}
-                        --btn-color: #{$block-call-to-action-accent-button-color}
-                        --btn-hover-background: #{$block-call-to-action-accent-button-hover-background}
-                        --btn-hover-border: #{$block-call-to-action-accent-button-hover-border}
-                        --btn-hover-color: #{$block-call-to-action-accent-button-hover-color}
+            .actions
+                a:first-child
+                    --btn-background: #{$block-call-to-action-accent-button-background}
+                    --btn-border: #{$block-call-to-action-accent-button-border}
+                    --btn-color: #{$block-call-to-action-accent-button-color}
+                    --btn-hover-background: #{$block-call-to-action-accent-button-hover-background}
+                    --btn-hover-border: #{$block-call-to-action-accent-button-hover-border}
+                    --btn-hover-color: #{$block-call-to-action-accent-button-hover-color}
+                    
 
     @include media-breakpoint-down(desktop)
         &--accent_background
             background-color: var(--cta-background-color)
             .call_to_action
                 padding: var(--block-space-y) 0
+                figure
+                    figcaption
+                        margin-top: $spacing-2
+                        display: flex
+                        justify-content: flex-end
         .call_to_action
             .actions
                 a
@@ -82,7 +102,7 @@
             flex-direction: column
             > *
                 order: 2
-            picture
+            figure
                 margin-bottom: offset(1)
                 order: 1
 
@@ -96,7 +116,7 @@
                 &--with-image
                     > div
                         flex: 1
-                    picture
+                    figure
                         margin-left: var(--grid-gutter)
                         width: columns(3)
         &--accent_background
@@ -119,14 +139,20 @@
                         // Calcul de la largeur nécessaire pour remplir l'espace droit entre le container et le bord droit de la fenêtre
                         width: grid-external-space()
                 &--with-image
-                    picture
+                    figure
+                        align-items: flex-end
+                        display: flex
+                        justify-content: space-between
+                        margin-bottom: calc(var(--grid-gutter-negative) + -#{$spacing-3})
                         order: 1
                         padding-left: columns(1)
-                        padding-right: offset(4)
                         position: relative
                         z-index: 2
-                        img
-                            margin-bottom: calc(var(--grid-gutter-negative) + -#{$spacing-3})
+                        picture
+                            width: columns(3)
+                        figcaption
+                            flex: 1
+                            margin-left: $spacing-3
                     > div
                         padding-top: calc(var(--grid-gutter) * 2 + #{$spacing-3})
 
@@ -142,8 +168,12 @@
             @include grid
             > div
                 grid-column: 1/7
-            > picture
+            > figure
                 grid-column: 8/13
+                figcaption
+                    display: flex
+                    justify-content: flex-end
+                    margin-top: $spacing-2
         .call_to_action--without-image
             display: block
             > div
