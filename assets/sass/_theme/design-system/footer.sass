@@ -16,7 +16,7 @@ footer#document-footer
             max-width: 100%
             @include media-breakpoint-up(desktop)
                 height: $footer-logo-height-desktop
-    ul
+    ul:not(.dropdown-menu)
         @include list-reset
         li + li
                 margin-top: $spacing-2
@@ -41,7 +41,14 @@ footer#document-footer
         &-search
             padding-top: $spacing-2 !important
         &-i18n
+            --dropdown-background: var(--color-background)
             @include dropdown
+            @include media-breakpoint-up(desktop)
+                --dropdown-border-color: transparent
+            // text-align: left
+            // .dropdown-menu
+            //     a
+            //         padding: $spacing-1
             // @include dropdown-i18n
             // button
             //     @include button-reset

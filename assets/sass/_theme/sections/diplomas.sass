@@ -77,12 +77,11 @@ ul.diplomas
     @include meta
     @include dropdown
     .dropdown-menu
-        @include media-breakpoint-down(desktop)
-            right: var(--grid-gutter-negative)
-            left: var(--grid-gutter-negative)
-        &,
-        a
-            color: black
+        @include media-breakpoint-up(desktop)
+            left: auto
+            right: 0
+            a
+                padding: $spacing-3
 
 .essential-container
     margin-top: $spacing-5
