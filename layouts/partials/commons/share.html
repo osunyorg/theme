@@ -9,42 +9,49 @@
 <ul class="share">
   {{ if $share_options.facebook }}
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-facebook" title="{{ i18n "posts.share_aria" (dict "Title" "Facebook") }}">
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-facebook-fill" title="{{ i18n "posts.share_aria" (dict "Title" "Facebook") }}">
         <span>Facebook</span>
       </a>
     </li>
   {{ end }}
   {{ if $share_options.linkedin }}
     <li>
-      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-linkedin" title="{{ i18n "posts.share_aria" (dict "Title" "Linkedin") }}">
+      <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-linkedin-fill" title="{{ i18n "posts.share_aria" (dict "Title" "Linkedin") }}">
         <span>Linkedin</span>
+      </a>
+    </li>
+  {{ end }}
+  {{ if $share_options.mastodon }}
+    <li>
+      <a href="https://mastodonshare.com/?text={{ .Title }}&url={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-mastodon-fill" title="{{ i18n "posts.share_aria" (dict "Title" "Mastodon") }}">
+        <span>Mastodon</span>
       </a>
     </li>
   {{ end }}
   {{ if $share_options.twitter }}
     <li>
-      <a href="https://twitter.com/intent/tweet?text={{ .Title }} {{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-twitter" title="{{ i18n "posts.share_aria" (dict "Title" "Twitter") }}">
+      <a href="https://twitter.com/intent/tweet?text={{ .Title }} {{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-twitter-x-line" title="{{ i18n "posts.share_aria" (dict "Title" "Twitter") }}">
         <span>Twitter</span>
       </a>
     </li>
   {{ end }}
   {{ if $share_options.whatsapp }}
     <li>
-      <a href="https://api.whatsapp.com/send?text={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-whatsapp" title="{{ i18n "posts.share_aria" (dict "Title" "Whatsapp") }}">
+      <a href="https://api.whatsapp.com/send?text={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-whatsapp-fill" title="{{ i18n "posts.share_aria" (dict "Title" "Whatsapp") }}">
         <span>Whatsapp</span>
       </a>
     </li>
   {{ end }}
   {{ if $share_options.telegram }}
     <li>
-      <a href="https://t.me/share/url?url={{ .Permalink | absURL }}&text={{ .Title }}" target="_blank" rel="noopener" class="icon icon-telegram" title="{{ i18n "posts.share_aria" (dict "Title" "Telegram") }}">
+      <a href="https://t.me/share/url?url={{ .Permalink | absURL }}&text={{ .Title }}" target="_blank" rel="noopener" class="icon icon-telegram-fill" title="{{ i18n "posts.share_aria" (dict "Title" "Telegram") }}">
         <span>Telegram</span>
       </a>
     </li>
   {{ end }}
   {{ if $share_options.email }}
     <li>
-      <a href="mailto:?subject={{ .Title }}&body={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-email" title="{{ i18n "posts.share_aria" (dict "Title" "E-mail") }}">
+      <a href="mailto:?subject={{ .Title }}&body={{ .Permalink | absURL }}" target="_blank" rel="noopener" class="icon icon-mail-fill" title="{{ i18n "posts.share_aria" (dict "Title" "E-mail") }}">
         <span>E-mail</span>
       </a>
     </li>
