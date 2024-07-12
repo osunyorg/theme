@@ -19,7 +19,6 @@
         line-height: 1
         speak: never
         text-transform: none
-        vertical-align: middle
         @if $non-breaking
             content: " #{map-get($icons, $icon-name)}"
             display: inline
@@ -27,8 +26,12 @@
 
 @mixin icon-block($icon-name: '', $pseudo-element: before, $non-breaking: false)
     @include icon($icon-name, $pseudo-element, $non-breaking)
-        font-size: pxToRem(44)
-        display: inline
+        // font-size: pxToRem(44)
+        display: inline-block
+        width: pxToRem(44)
+        height: pxToRem(44)
+        line-height: pxToRem(44)
+        vertical-align: middle
         @content
 
 @mixin arrow-right-hover
@@ -36,7 +39,7 @@
     display: flex
     justify-content: space-between
     align-items: center
-    @include icon(arrow, after)
+    @include icon(arrow-right-line, after)
         opacity: 0
         transform: translateX(-20px)
         transition: 0.55s $arrow-ease-transition
