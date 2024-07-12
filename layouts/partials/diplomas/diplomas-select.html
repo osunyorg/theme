@@ -1,9 +1,9 @@
 {{ if .Site.Taxonomies.diplomas }}
 <div class="diplomas-select">
-  <button type="button" id="diplomasButton" aria-expanded="false">
+  <button type="button" id="diplomasButton" aria-expanded="false" aria-controls="diplomas-select">
     {{- i18n "diplomas.type" -}}
   </button>
-  <div class="dropdown-menu" aria-labelledby="diplomasButton">
+  <div class="dropdown-menu" aria-labelledby="diplomasButton" id="diplomas-select">
     {{ range $name, $taxonomy := .Site.Taxonomies.diplomas }}
       {{- with site.GetPage (printf "/diplomas/%s" $name) }}
         <a href="{{ .Permalink }}">
