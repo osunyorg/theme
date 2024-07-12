@@ -8,6 +8,7 @@
     ) }}
 
 {{ $alternate := .alternate | default false }}
+{{ $options := .options | default site.Params.projects.index.options }}
 
 {{ with $project }}
 
@@ -25,7 +26,7 @@
           <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
         {{ $heading_tag.close }}
         
-        {{ if and site.Params.projects.index.show_description (partial "GetTextFromHTML" .Params.summary) }}
+        {{ if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
           <p itemprop="abstract">{{ partial "GetTruncateContent" ( dict 
             "text" .Params.summary
             "length" site.Params.projects.index.truncate_description
@@ -33,11 +34,11 @@
           </p>
         {{ end }}
           
-        {{ if site.Params.projects.index.show_categories }}
+        {{ if $options.categories }}
           {{- partial "projects/categories" . -}}
         {{ end }}
       </div>
-      {{ if and site.Params.projects.index.show_year .Params.year }}
+      {{ if and $options.year .Params.year }}
         <div class="project-meta">
           <time itemprop="datePublished" datetime="{{ .Params.year }}">{{ .Params.year }}</time>
         </div>

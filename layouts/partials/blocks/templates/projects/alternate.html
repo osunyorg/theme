@@ -1,5 +1,6 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading := printf "h%d" $heading_level }}
+{{ $options := .options | default site.Params.projects.index.options }}
 
 <div class="alternate">
   {{ range $i, $project := .projects -}}
@@ -9,6 +10,7 @@
         "heading" $heading
         "alternate" true
         "index" $i
+        "options" $options
         ) }}
     {{ end }}
   {{ end }}

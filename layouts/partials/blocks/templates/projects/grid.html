@@ -1,11 +1,14 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading := printf "h%d" $heading_level }}
+{{ $options := .options | default site.Params.projects.index.options }}
+
 <div class="grid">
   {{ range $project := .projects -}}
     {{ with site.GetPage .file }}
       {{ partial "projects/project.html" (dict 
         "project" .
         "heading" $heading
+        "options" $options
         ) }}
     {{ end }}
   {{ end }}

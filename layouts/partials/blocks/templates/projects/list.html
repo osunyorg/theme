@@ -1,6 +1,9 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading := printf "h%d" $heading_level }}
 
+{{/*  NOT USED YET  */}}
+{{ $options := .options | default site.Params.projects.index.options }}
+
 <div class="list">
   {{ range $project := .projects -}}
     {{ with site.GetPage .file }}
