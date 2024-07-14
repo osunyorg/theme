@@ -1,3 +1,19 @@
+@mixin link-icon($icon: false)
+    @include button-reset
+    line-height: $body-line-height
+    white-space: nowrap
+    @if $icon
+        @include icon-block($icon, after)
+
+@mixin button-icon($icon: false)
+    white-space: nowrap
+    display: inline-flex
+    align-items: center
+    justify-content: space-between
+    gap: $spacing-1
+    @if $icon
+        @include icon($icon, after)
+
 .button, .btn
     @include button-reset
     font-family: var(--btn-font-family)
@@ -62,24 +78,16 @@
             border-color: transparent
             color: var(--color-background)
 
-@mixin link-icon($icon: false)
-    @include button-reset
-    line-height: $body-line-height
-    white-space: nowrap
-    @if $icon
-        @include icon-block($icon, after)
-
-@mixin button-icon($icon: false)
-    white-space: nowrap
-    display: inline-flex
-    align-items: center
-    justify-content: space-between
-    gap: $spacing-1
-    @if $icon
-        @include icon($icon, after)
-
 a.btn[target="_blank"]
     @include button-icon(links-line-raw)
+
+a.is-checked
+    display: flex
+    justify-content: space-between
+    align-items: center
+    gap: $spacing-4
+    text-decoration: none !important
+    @include icon(check-line, after)
 
 .dropdown-share
     --btn-min-width: #{pxToRem(140)}

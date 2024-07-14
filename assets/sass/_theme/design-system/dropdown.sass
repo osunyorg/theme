@@ -6,8 +6,9 @@
     --dropdown-hover-background: var(--color-accent)
 
 @mixin dropdown
+    @include meta
     position: relative
-    button
+    button, span[role="button"]
         @include button-reset
         padding: $spacing-2
         margin: -$spacing-2
@@ -29,8 +30,8 @@
             &:not(:first-child)
                 border-top: 1px solid var(--dropdown-border-color)
         a
+            display: flex
             color: var(--dropdown-color)
-            display: block
             font-size: $body-size
             line-height: $body-line-height
             padding: $spacing-2
@@ -39,13 +40,6 @@
             &:hover
                 background-color: var(--dropdown-hover-background)
                 color: var(--dropdown-hover-color)
-            &.is-checked
-                display: flex
-                justify-content: space-between
-                align-items: center
-                gap: $spacing-4
-                text-decoration: none !important
-                @include icon(check-line, after)
     // When dropdown expanded
     button[aria-expanded="true"]
         @include icon(arrow-up-s-line, after)
