@@ -33,6 +33,26 @@
         vertical-align: middle
         @content
 
+@mixin icon-frame($icon-name: '', $pseudo-element: before, $non-breaking: false, $hoverable: false)
+    @include icon($icon-name, $pseudo-element, $non-breaking)
+        border: 1px solid var(--color-border)
+        display: inline-block
+        flex-shrink: 0
+        height: pxToRem(64)
+        line-height: pxToRem(64)
+        margin-right: $spacing-2
+        text-align: center
+        transition: background 0.3s ease, border 0.3s ease
+        vertical-align: middle
+        width: pxToRem(64)
+        @content
+    @if $hoverable
+        &:hover
+            &::#{$pseudo-element}
+                background-color: var(--color-text)
+                border-color: transparent
+                color: var(--color-background)
+
 @mixin arrow-right-hover
     position: relative
     display: flex
