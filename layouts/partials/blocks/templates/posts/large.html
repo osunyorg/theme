@@ -8,7 +8,7 @@
 {{ $options := .options }}
 {{ $image := $options.image }}
 
-<div class="large {{- if $image }} without-images{{ end }}">
+<div class="large {{- if not $image }} without-images{{ end }}">
   {{ range .posts }}
     {{ with site.GetPage (printf "/posts/%s" .) }}
 
