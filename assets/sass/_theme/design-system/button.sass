@@ -38,35 +38,6 @@
     --btn-hover-background: #{$color-text}
     --btn-hover-border: pxToRem(1) solid var(--btn-hover-background)
 
-.squared-button
-    @include meta
-    @include button-reset
-    align-items: center
-    color: var(--color-text)
-    cursor: pointer
-    display: flex
-    padding: 0
-    text-decoration: none
-    &::before 
-        align-items: center
-        background-color: var(--color-background)
-        border: 1px solid var(--color-border)
-        display: flex
-        height: pxToRem(64)
-        justify-content: center
-        margin-right: $spacing-2
-        transition: background 0.3s ease, border 0.3s ease
-        width: pxToRem(64)
-        @include media-breakpoint-up(desktop)
-            font-size: pxToRem(20)
-            margin-right: $spacing-3
-    &:hover
-        text-decoration: none
-        &::before
-            background-color: var(--color-text)
-            border-color: transparent
-            color: var(--color-background)
-
 @mixin link-icon($icon: false)
     @include button-reset
     line-height: $body-line-height
