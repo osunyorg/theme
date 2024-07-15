@@ -13,13 +13,13 @@
   <article class="event {{ if .Params.image }}event--with-image{{ end -}}" itemscope itemtype="https://schema.org/Event">
     <div class="event-content">
       {{- $title := partial "PrepareHTML" .Title -}}
-      {{ if .Params.subtitle }}
+      {{ if and $options.subtitle .Params.subtitle }}
         <hgroup>
       {{ end }}
       {{ $heading_tag.open }}
         <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
-      {{ if .Params.subtitle }}
+      {{ if and $options.subtitle .Params.subtitle }}
           <p class="event-subtitle">{{ .Params.subtitle }}</p>
         </hgroup>
       {{ end }}
@@ -83,7 +83,7 @@
       {{- end -}}
     </div>
     <div class="media">
-      {{- if .Params.image -}}
+      {{- if and $options.image .Params.image -}}
         {{- partial "commons/image.html"
             (dict
               "image"    .Params.image
