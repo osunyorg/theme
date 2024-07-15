@@ -20,18 +20,13 @@
               {{ $url = .Permalink }}
             {{ end }}
           {{ end }}
-          <li>
-            <a 
-              href="{{ $url }}" 
-              lang="{{ $siteLang }}" 
-              hreflang="{{ $siteLang }}"
-              {{ if eq $siteLang site.Language }}
-                class="is-checked"
-              {{ end }}
-            >
-              {{- $siteLang.LanguageName -}}
-            </a>
-          </li>
+          {{ if not (eq $siteLang site.Language) }}
+            <li>
+              <a href="{{ $url }}" lang="{{ $siteLang }}" hreflang="{{ $siteLang }}">
+                {{- $siteLang.LanguageName -}}
+              </a>
+            </li>
+          {{ end }}
         {{ end }}
       </ul>
     </div>
