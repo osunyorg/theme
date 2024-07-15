@@ -7,7 +7,11 @@
 {{ else if eq site.Params.persons.index.layout "grid" }}
   <div class="persons">
     {{ range .persons }}
-      {{ partial "persons/person" . }}
+      {{ partial "persons/person" (dict
+        "person" .
+        "options" site.Params.persons.index.options
+        "heading_level" "3"
+      ) }}
     {{ end }}
   </div>
 {{ end }}

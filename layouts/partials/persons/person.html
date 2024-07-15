@@ -1,21 +1,43 @@
-<article class="person">
+{{ $options := .options | default site.Params.persons.index.options }}
+{{ $heading := .heading_level }}
+{{ $heading_tag := (dict 
+  "open" ((printf "<h%s class='person-name' itemprop='name'>" $heading) | safeHTML)
+  "close" ((printf "</h%s>" $heading) | safeHTML)
+) }}
+{{ $person := .person }}
+
+<article class="person" itemscope itemtype="https://schema.org/Person">
   <div class="description">
-    {{- $title := partial "PrepareHTML" .Title }}
-    <p class="name"><a href="{{ .Permalink }}">{{- $title -}}</a></p>
-    {{- if partial "GetTextFromHTML" .Params.summary }}
-      <p>{{- .Params.summary | safeHTML -}}</p>
-    {{ else if (partial "GetTextFromHTML" .Content) }}
-      <p>{{- partial "GetTruncateContent" ( dict "text" .Content ) -}}</p>
-    {{ end -}}
+    {{ $heading_tag.open }}
+      {{ if $options.link }}
+        <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
+      {{ end }}
+        {{- partial "PrepareHTML" $person.Title -}}
+      {{ if $options.link }}
+        </a>
+      {{ end }}
+    {{ $heading_tag.close }}
+    {{ if $options.summary }}
+      <p itemprop="jobTitle">
+        {{- if (partial "GetTextFromHTML" .role) }}
+          {{ partial "PrepareHTML" .role }}
+        {{- else if partial "GetTextFromHTML" $person.Params.summary }}
+          {{- partial "PrepareHTML" $person.Params.summary -}}
+        {{ else if (partial "GetTextFromHTML" $person.Content) }}
+          {{- partial "GetTruncateContent" ( dict "text" $person.Content ) -}}
+        {{ end -}}
+      </p>
+    {{ end }}
   </div>
-  <div class="avatar">
-    {{- if and .Params.image }}
-      {{ partial "commons/image.html"
-            (dict
-              "alt"      .Title
-              "image"    .Params.image
-              "sizes"    site.Params.image_sizes.sections.persons.item
-            )}}
-    {{ end -}}
-  </div>
+  {{- if $options.image }}
+    <div class="avatar" itemprop="image">
+      {{- if $person.Params.image }}
+        {{ partial "commons/image.html"
+          (dict
+            "image"    $person.Params.image
+            "sizes"    site.Params.image_sizes.blocks.persons
+          ) }}
+      {{ end -}}
+    </div>
+  {{ end -}}
 </article>

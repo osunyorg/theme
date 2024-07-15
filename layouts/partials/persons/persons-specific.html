@@ -3,7 +3,11 @@
     {{ $person := site.GetPage (printf "/persons/%s" .Slug) }}
     {{ if $person }}
       <div>
-        {{ partial "persons/person.html" $person }}
+        {{ partial "persons/person.html" (dict
+          "person" $person
+          "options" site.Params.persons.index.options
+          "heading_level" "3"
+        )}}
       </div>
     {{ end }}
   {{ end }}
