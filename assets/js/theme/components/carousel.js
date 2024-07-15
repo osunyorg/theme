@@ -1,3 +1,8 @@
+import './carousel/instance';
+import './carousel/manager';
+
+
+
 // TODO: 
 // 0 - touch
 // 0 - petit bug au drag sur les autres carrousels

@@ -12,3 +12,4 @@ import './blocks/organizations';
 import './blocks/draggableBlocks.js';
 import './blocks/videos.js';
 import './blocks/campus.js';
+import './components/carousel.js';
