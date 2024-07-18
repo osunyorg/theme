@@ -34,8 +34,12 @@
           </p>
         {{ end }}
           
+
         {{ if $options.categories }}
-          {{- partial "projects/categories" . -}}
+          {{ partial "commons/categories" ( dict
+            "context" .
+            "kind" "project"
+          )}}
         {{ end }}
       </div>
       {{ if and $options.year .Params.year }}

@@ -5,7 +5,7 @@
 {{ with .paper }}
   <div class="paper-actions" role="group">
     {{- if $with_modal }}
-      <button class="squared-button" type="button" data-open-modal="{{ $modalId }}">{{ i18n "volumes.abstract" }}</button>
+      <button type="button" data-open-modal="{{ $modalId }}">{{ i18n "volumes.abstract" }}</button>
     {{ end -}}
     {{- if .Params.pdf -}}
       {{- $file := partial "GetMedia" .Params.pdf -}}
@@ -19,7 +19,7 @@
       {{- end -}}
       {{ if $file }}
         <figure>
-          <a href="{{ $url }}" download="{{ partial "PrepareHTML" $file.name }}" target="_blank" title="{{ i18n "commons.link.blank_aria" (dict "Title" $title_with_size) }}" class="squared-button">
+          <a href="{{ $url }}" download="{{ partial "PrepareHTML" $file.name }}" target="_blank" title="{{ i18n "commons.link.blank_aria" (dict "Title" $title_with_size) }}">
             <figcaption>
               <abbr title="{{ i18n (printf "commons.extensions.%s" $extension) }}">{{ $extension }}</abbr>
               - {{ $size.weight }} <abbr title="{{ $size.full_unit }}">{{ $size.unit }}</abbr>
