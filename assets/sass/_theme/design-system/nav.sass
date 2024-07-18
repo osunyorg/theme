@@ -14,10 +14,6 @@
         margin-top: $spacing-3
         max-height: var(--header-menu-max-height)
         overflow: auto
-    a,
-    a:focus,
-    a:active
-        @include link($header-color, false)
     span
         color: $header-color
     ul
@@ -55,9 +51,10 @@
             position: absolute
             max-height: calc(100vh - var(--header-height))
             overflow: auto
-        a
-            color: $header-dropdown-color
-            @extend %underline-on-hover
+        a,
+        a:focus,
+        a:active
+            @include link($header-color, false)
         .dropdown-menu-title
             @include h2
 
@@ -68,6 +65,7 @@
                 @include meta
                 display: block
                 padding: $spacing-1 $spacing-2
+                text-decoration: none
             &:last-child 
                 a, span
                     padding-right: 0
