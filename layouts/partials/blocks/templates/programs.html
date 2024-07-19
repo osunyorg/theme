@@ -1,12 +1,14 @@
-{{- $block := .block -}}
-{{- $block_class := partial "GetBlockClass" .block -}}
+{{ $block := .block }}
+{{ $block_class := partial "GetBlockClass" .block }}
 {{ $heading := .heading | default "h3" }}
 {{ $heading_tag := (dict 
     "open" ((printf "<%s itemprop='name'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
 
-{{- with .block.data -}}
+{{ with .block.data }}
+  {{ $options := .options }}
+  
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
@@ -15,57 +17,58 @@
           "heading_level" $block.ranks.self
         )}}
 
-        {{- if eq $block.data.layout "grid" -}}
+        {{ if eq $block.data.layout "grid" }}
 
           <div class="programs-grid">
-            {{- range .programs -}}
+            {{ range .programs }}
               {{ $program := site.GetPage (printf "/programs%s" .path) }}
               {{ $title := $program.Title | safeHTML }}
               <article itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
                 <div class="program-content">
                   {{ $heading_tag.open }}
                     <a href="{{ $program.Permalink }}" itemtype="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-                      {{- $title -}}
+                      {{ $title }}
                     </a>
                   {{ $heading_tag.close }}
-
-                  {{ with  $program.Params.summary | safeHTML}}
-                    <p itemprop="abstract">{{ . }}</p>
+                  {{ if $options.summary }}
+                    {{ with  $program.Params.summary | safeHTML}}
+                      <p itemprop="abstract">{{ . }}</p>
+                    {{ end }}
                   {{ end }}
 
-                  <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+                  <p class="more meta" aria-hidden="true">{{ i18n "commons.more" }}</p>
                 </div>
 
-                {{- if $program.Params.image -}}
+                {{ if and $program.Params.image $options.image }}
                   <div class="media">
-                    {{- partial "commons/image.html"
+                    {{ partial "commons/image.html"
                         (dict
                           "image"    $program.Params.image
                           "sizes"    site.Params.image_sizes.blocks.programs
-                        ) -}}
+                        ) }}
                   </div>
-                {{- end -}}
+                {{ end }}
 
               </article>
             {{ end }}
           </div>
 
-        {{- else -}}
+        {{ else }}
 
           <ol class="programs">
-            {{- range .programs -}}
+            {{ range .programs }}
               <li>
                 {{ $program := site.GetPage (printf "/programs%s" .path) }}
-                {{- $title := partial "PrepareHTML" $program.Title -}}
+                {{ $title := partial "PrepareHTML" $program.Title }}
                 <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-                  {{- $title -}}
+                  {{ $title }}
                 </a>
               </li>
             {{ end }}
           </ol>
 
-        {{- end -}}
+        {{ end }}
       </div>
     </div>
   </div>
-{{- end -}}
+{{ end }}
