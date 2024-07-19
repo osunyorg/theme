@@ -58,8 +58,6 @@ footer#document-footer
                     display: flex
                     justify-content: flex-end
                     position: relative
-                    &::after
-                        margin-left: $spacing-2
                     a::after
                         display: none
                     &.facebook
@@ -88,21 +86,19 @@ footer#document-footer
                         @include icon(rss-fill, after)
                     &::after
                         font-size: $footer-icons-size
-                        margin-right: $spacing-2
-                        transform: translateX(-25%)
                     + li
                         margin-top: $spacing-3
                     @include media-breakpoint-up(desktop)
                         &::after
                             font-size: $footer-icons-size-desktop
-                            margin-right: $spacing-2
-                            margin-right: -0.2em
-                            padding-left: $spacing-2
+                            margin-left: $spacing-2
                         + li
                             margin-top: space(4)
                     @include media-breakpoint-down(desktop)
                         width: fit-content
                         flex-direction: row-reverse
+                        &::after
+                            margin-right: $spacing-2
         @if $footer-text-hidden
             &-social.site-links li
                 font-size: 0
