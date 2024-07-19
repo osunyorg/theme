@@ -10,8 +10,7 @@
 {{ end }}
 
 {{- with .block.data -}}
-
-  {{- $with_link := .options.link -}}
+  {{ $options := .options }}
 
   <div class="{{ $block_class }}">
     <div class="container">
@@ -25,7 +24,7 @@
         {{- partial (printf "blocks/templates/organizations/%s.html" $layout) (dict
             "organizations" .organizations
             "logo_index" $logo_index
-            "with_link" $with_link
+            "options" $options
           ) }}
       </div>
     </div>
@@ -33,12 +32,13 @@
 {{- end -}}
 
 {{- define "organization" -}}
+  {{ $options := .options }}
   <article class="organization" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
     {{ $title := "" }}
     {{ if .title }}
       {{ $title = partial "PrepareHTML" .title -}}
       <p class="organization-title">
-        {{- if and .url .with_link }}
+        {{- if and .url $options.link }}
           <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
         {{ end -}}
           {{- $title -}}
@@ -47,15 +47,17 @@
         {{ end -}}
         </p>
     {{ end -}}
-    <div class="media">
-      {{- if .logo -}}
-        {{- partial "commons/image.html"
-          (dict
-            "image"    .logo
-            "alt"      $title
-            "sizes"    site.Params.image_sizes.blocks.organizations
-          ) -}}
-      {{- end -}}
-    </div>
+    {{ if $options.logo }}
+      <div class="media">
+        {{- if .logo -}}
+          {{- partial "commons/image.html"
+            (dict
+              "image"    .logo
+              "alt"      $title
+              "sizes"    site.Params.image_sizes.blocks.organizations
+            ) -}}
+        {{- end -}}
+      </div>
+    {{- end -}}
   </article>
 {{- end  -}}
