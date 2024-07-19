@@ -10,10 +10,10 @@
         svg
             display: none
         &--prev
-            @include icon(arrow-left)
+            @include icon(arrow-left-line)
             right: 100%
         &--next
-            @include icon(arrow-right)
+            @include icon(arrow-right-line)
             left: 100%
     &__pagination
         display: flex
@@ -42,10 +42,10 @@
                     background-color: $link-color
     &__toggle
         &__pause
-            @include icon-block(pause)
+            @include icon-block(pause-line)
         &__play
-            @include icon-block(play)
-
+            @include icon-block(play-fill)
+                padding-left: pxToRem(2)
     &[data-slides-length="1"]
         .splide
             &__autoplay, &__pagination, &__arrow

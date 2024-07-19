@@ -20,7 +20,7 @@
 
 .events__section
     .archive-link
-        @include icon(arrow, after, true)
+        @include icon(arrow-right-line, after, true)
         @include hover-translate-icon(after)
         display: block
         text-align: right
@@ -51,7 +51,7 @@
             display: block
             white-space: nowrap
         time + time
-            @include icon(arrow)
+            @include icon(arrow-right-line)
             &::before
                 padding-right: 0.3rem
     .events-categories
@@ -89,7 +89,7 @@
                 content: ', '
     &-time
         span + span
-            @include icon(arrow-right, before)
+            @include icon(arrow-right-line, before)
                 margin-left: space()
                 margin-right: space()
     .media
@@ -228,7 +228,7 @@
             position: relative
             gap: var(--grid-gutter)
             + .event 
-                margin-top: var(--grid-gutter)
+                margin-top: $spacing-5
             &-content
                 display: flex
                 flex-direction: column
@@ -239,14 +239,16 @@
                 a 
                     @include stretched-link
             &-dates 
-                @include meta
+                @include h4
                 margin-top: $spacing-2
             &-content
                 flex: 1
-                .event-title
-                    @include h3
+                .event-title,
+                .event-subtitle, 
+                hgroup
+                    @include h2
                 .more
-                    @include icon("arrow-right", after)
+                    @include icon(arrow-right, after)
                     margin-top: $spacing-3
                     &::after
                         margin-left: $spacing-1
@@ -257,15 +259,12 @@
                     object-fit: cover
                     width: 100%
             @include media-breakpoint-up(desktop)
+                + .event 
+                    margin-top: var(--grid-gutter)
                 .media
                     width: columns(4)
                 .event-dates
-                    @include h3
                     margin-bottom: $spacing-4
-                .event-title,
-                .event-subtitle, 
-                hgroup
-                    @include h2
             @include media-breakpoint-down(desktop)
                 flex-direction: column
                 .media

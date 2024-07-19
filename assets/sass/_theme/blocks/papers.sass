@@ -5,27 +5,14 @@
             @include hover-translate-icon(after)
     .papers
         .paper
-            display: block
             border-bottom: 1px solid var(--color-border)
             margin-bottom: $spacing-3
             padding-bottom: $spacing-3
-            &-volumes
-                a
-                    @include link
-            &-meta
-                margin-top: $spacing-1
-                > * 
-                    display: inline
-                    font-size: $body-size
-            &-kind
-                text-transform: none
-                font-size: inherit
-        @include in-page-without-sidebar
-            .paper 
-                width: 100%
+            @include in-page-without-sidebar
                 > div
-                    @include grid(12, md)
-                    .paper-title
-                        grid-column: 1/8
-                    .paper-meta
-                        grid-column: 9/13
+                    display: flex
+                    gap: var(--grid-gutter)
+                .paper-title
+                    flex: 1
+                .paper-meta
+                    width: columns(4)

@@ -7,13 +7,13 @@
     {{ with site.Languages }}
       <span
         role="button"
-        aria-haspopup="menu"
+        aria-controls="header-i18n-list"
         aria-expanded="false"
         aria-label="{{ i18n "commons.accessibility.menu_lang" }}"
         tabindex="0">
         {{- site.Language -}}
       </span>
-      <div class="dropdown-menu dropdown-languages">
+      <div class="dropdown-menu dropdown-languages" id="header-i18n-list">
         <ul>
           {{ range site.Languages }}
             {{ $siteLang := . }}
@@ -23,18 +23,18 @@
                 {{ $url = .Permalink }}
               {{ end }}
             {{ end }}
-            <li>
-              <a 
-                href="{{ $url }}" 
-                lang="{{ $siteLang }}" 
-                hreflang="{{ $siteLang }}"
-                {{ if eq $siteLang site.Language }}
-                  class="is-checked"
-                {{ end }}
-                >
-                {{- $siteLang.LanguageName -}}
-              </a>
-            </li>
+            {{ if not (eq $siteLang site.Language) }}
+              <li>
+                <a 
+                  href="{{ $url }}" 
+                  lang="{{ $siteLang }}" 
+                  hreflang="{{ $siteLang }}"
+                  >
+                  {{- $siteLang.LanguageName -}}
+                </a>
+              </li>
+            {{ end }}
+
           {{ end }}
         </ul>
       </div>

@@ -8,12 +8,13 @@
         {{ partial "blocks/top.html" (dict
           "title" $block.title
           "heading_level" $block.ranks.self
+          "description" .description
         )}}
 
         {{ if .url }}
           {{ $title := "video" }}
           {{ with .video_title }}
-            {{ $title = .}}
+            {{ $title = . }}
           {{ end }}
 
           <div class="video">

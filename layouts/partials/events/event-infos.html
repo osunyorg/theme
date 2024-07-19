@@ -22,7 +22,10 @@
   {{ if .Params.events_categories }}
     <li>
       <span>{{ i18n "events.category" ( len .Params.events_categories ) }}</span>
-      {{ partial "events/categories.html" . }}
+      {{ partial "commons/categories" ( dict
+        "context" .
+        "kind" "event"
+      )}}
     </li>
   {{ end }}
   {{ if site.Params.events.share_links.enabled | default site.Params.share_links.enabled }}

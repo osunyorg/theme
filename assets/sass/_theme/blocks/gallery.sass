@@ -65,7 +65,7 @@
                     display: flex
                     justify-content: space-between
                     align-items: baseline
-                    p
+                    > p
                         max-width: columns(8)
                     *
                         flex: 1 1
@@ -130,10 +130,13 @@
                 @media (min-height: 800px)
                     padding-top: space(10)
             &__arrow
+                &:disabled
+                    cursor: default
+                    opacity: 0.3
                 &--prev,
                 &--next
                     @include button-reset
-                    @include icon(arrow-left, before)
+                    @include icon(arrow-left-line, before)
                     height: $spacing-4
                     padding: 0
                     position: static
@@ -141,7 +144,7 @@
                     svg
                         display: none
                 &--next
-                    @include icon(arrow-right, before)
+                    @include icon(arrow-right-line, before)
 
         @include in-page-without-sidebar
             .splide

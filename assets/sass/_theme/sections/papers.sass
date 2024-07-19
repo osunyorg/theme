@@ -1,25 +1,31 @@
 .paper
     display: flex
     gap: var(--grid-gutter)
-    flex-direction: column
     a
         transition: color 0.3s ease
         @extend %underline-on-hover
-    h3
+    .paper-title
+        margin-bottom: $spacing-2
         a:hover
             color: var(--color-accent)
-    .paper-kind
+    > div:first-child
+        flex: 1
+    .paper-meta
         @include meta
-        text-transform: uppercase
-        margin-right: $spacing-3
-    .paper-volume
-        @include meta
-        text-transform: lowercase
-        a
-            @include link(var(--color-text))
-            text-transform: none
-        span
-            text-transform: uppercase
+        color: var(--color-text-alt)
+        width: columns(5)
+        p
+            display: block
+        .paper-volume
+            @include meta
+            a
+                @include link(var(--color-text-alt))
+                text-transform: none
+        .paper-kind + a
+            font-style: italic
+            &::before
+                content: '— '
+                display: inline-block
 
 .top + .papers
     margin-top: $spacing-3
@@ -77,10 +83,6 @@
                 margin-top: $spacing-4
                 @include media-breakpoint-up(desktop)
                     margin-top: $spacing-6
-            .squared-button
-                margin-bottom: 0
-                margin-top: $spacing-2
-                width: auto
             h2
                 margin-bottom: $spacing-2
             .paper-essentials
@@ -152,10 +154,19 @@
     @include media-breakpoint-down(desktop)
         flex-wrap: wrap
         gap: $spacing-3
-    button.squared-button
-        @include icon-block(eye, before)
-    a.squared-button
-        @include icon-block(download, before)
+    button, a
+        @include meta
+        @include button-reset
+        align-items: center
+        color: var(--color-text)
+        cursor: pointer
+        display: flex
+        padding: 0
+        text-decoration: none
+    button
+        @include icon-frame(eye-line, $hoverable: true)
+    a
+        @include icon-frame(download-2-line, $hoverable: true)
 
 .citations
     &:not(:first-child)

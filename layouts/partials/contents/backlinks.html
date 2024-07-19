@@ -13,7 +13,7 @@
           "data" (dict
             "layout" "grid"
             "events" .events
-            "show_summary" true
+            "options" site.Params.events.index.options
           )
         )
       ) }}
@@ -29,9 +29,11 @@
           )
           "data" (dict 
             "layout" "grid"
-            "show_main_description" false
-            "show_descriptions" true
-            "show_images" true
+            "options" ( dict
+              "main_summary" false
+              "summaries" true
+              "image" true
+            )
             "pages" .pages
           )
         )
@@ -68,6 +70,7 @@
           "data" (dict
             "layout" "grid"
             "posts" $posts
+            "options" site.Params.posts.index.options
           )
         )
       ) }}

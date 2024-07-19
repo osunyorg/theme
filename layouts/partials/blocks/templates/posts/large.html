@@ -6,13 +6,13 @@
 )}}
 {{ $index := .index}}
 {{ $options := .options }}
-{{ $hide_image := .options.hide_image }}
+{{ $image := $options.image }}
 
-<div class="large {{- if $hide_image }} without-images{{ end }}">
+<div class="large {{- if not $image }} without-images{{ end }}">
   {{ range .posts }}
     {{ with site.GetPage (printf "/posts/%s" .) }}
 
-      {{ if and .Params.image (eq $options.hide_image false) }}
+      {{ if and .Params.image $options.image }}
         {{- $direction = partial "GetImageDirection" .Params.image -}}
       {{ end }}
 
@@ -25,19 +25,22 @@
           {{ $heading_tag.close }}
           
           <div class="post-meta">
-            {{ if eq $options.hide_author false }}
+            {{ if $options.author }}
               {{- partial "posts/author" . -}}
             {{ end }}
-            {{ if eq $options.hide_date false }}
+            {{ if $options.date }}
               <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
             {{ end }}
-            {{ if eq $options.hide_category false }}
-              {{- partial "posts/categories" . -}}
+            {{ if eq $options.categories false }}
+              {{ partial "commons/categories" ( dict
+                "context" .
+                "kind" "post"
+              )}}
             {{ end }}
           </div>
 
 
-          {{ if eq $options.hide_summary false }}
+          {{ if $options.summary }}
             {{- if (partial "GetTextFromHTML" .Params.summary) -}}
               <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
                 "text" .Params.summary
@@ -47,7 +50,7 @@
           {{- end -}}
           <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
         </div>
-        {{ if eq $options.hide_image false }}
+        {{ if $options.image }}
           <div class="media">
             {{- if .Params.image -}}
               {{- partial "commons/image.html"

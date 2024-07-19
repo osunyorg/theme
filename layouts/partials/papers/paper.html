@@ -1,6 +1,5 @@
 {{ $inside_volume := .inside_volume | default false }}
 {{ $actions := .actions | default true }}
-{{ $with_in := .with_in | default false }}
 {{ $modalId := print "modalID_" .index }}
 
 {{ with .paper }}
@@ -12,10 +11,7 @@
         </a>
       </h3>
       <div class="paper-meta">
-        <p>
-          {{ with .Params.paper_kind }}
-            <span class="paper-kind">{{ . }}</span>
-          {{ end }}
+        <p class="paper-authors">
           {{- range $index, $authors := .Params.Researchers -}}
             {{- $author := site.GetPage (printf "/persons/%s" .) -}}
             {{ if $author }}
@@ -31,10 +27,13 @@
         </p>
         {{ if not $inside_volume }}
           <p class="paper-volume">
+            {{ with .Params.paper_kind }}
+              <span class="paper-kind">{{ . }}</span>
+            {{ end }}
             {{ range .Params.Volumes }}
               {{ $volume := site.GetPage (printf "/volumes/%s" .) }}
               {{ if $volume }}
-                {{ if $with_in }}{{ i18n "commons.in" }} “{{ end }}<a href="{{ $volume.Permalink }}">{{ $volume.Title }}</a>{{ if $with_in }}”{{ end }}
+                <a href="{{ $volume.Permalink }}">{{ $volume.Title }}</a>
               {{ end }}
             {{ end }}
           </p>
