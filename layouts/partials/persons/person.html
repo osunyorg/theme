@@ -12,32 +12,32 @@
       {{ if $options.link }}
         <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
       {{ end }}
-        {{- partial "PrepareHTML" $person.Title -}}
+        {{ partial "PrepareHTML" $person.Title }}
       {{ if $options.link }}
         </a>
       {{ end }}
     {{ $heading_tag.close }}
     {{ if $options.summary }}
       <p itemprop="jobTitle">
-        {{- if (partial "GetTextFromHTML" .role) }}
+        {{ if (partial "GetTextFromHTML" .role) }}
           {{ partial "PrepareHTML" .role }}
-        {{- else if partial "GetTextFromHTML" $person.Params.summary }}
-          {{- partial "PrepareHTML" $person.Params.summary -}}
+        {{ else if partial "GetTextFromHTML" $person.Params.summary }}
+          {{ partial "PrepareHTML" $person.Params.summary }}
         {{ else if (partial "GetTextFromHTML" $person.Content) }}
-          {{- partial "GetTruncateContent" ( dict "text" $person.Content ) -}}
-        {{ end -}}
+          {{ partial "GetTruncateContent" ( dict "text" $person.Content ) }}
+        {{ end }}
       </p>
     {{ end }}
   </div>
-  {{- if $options.image }}
+  {{ if $options.image }}
     <div class="avatar" itemprop="image">
-      {{- if $person.Params.image }}
+      {{ if $person.Params.image }}
         {{ partial "commons/image.html"
           (dict
             "image"    $person.Params.image
             "sizes"    site.Params.image_sizes.blocks.persons
           ) }}
-      {{ end -}}
+      {{ end }}
     </div>
-  {{ end -}}
+  {{ end }}
 </article>
