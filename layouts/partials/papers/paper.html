@@ -1,15 +1,20 @@
 {{ $inside_volume := .inside_volume | default false }}
 {{ $actions := .actions | default true }}
+{{ $heading := .heading | default "h3" }}
 {{ $modalId := print "modalID_" .index }}
+{{ $heading_tag := (dict 
+  "open" ((printf "<%s class='paper-title' itemprop='headline'>" $heading) | safeHTML)
+  "close" ((printf "</%s>" $heading) | safeHTML)
+) }}
 
 {{ with .paper }}
   <article class="paper" itemscope itemtype="https://schema.org/ScholarlyArticle" {{- if $inside_volume }} itemProp="hasPart" {{- end -}}>
     <div>
-      <h3 class="paper-title">
+      {{ $heading_tag.open }}
         <a href="{{ .Permalink }}" itemprop="url">
           <span itemprop="name">{{ partial "PrepareHTML" .Title }}</span>
         </a>
-      </h3>
+        {{ $heading_tag.close }}
       <div class="paper-meta">
         <p class="paper-authors">
           {{- range $index, $authors := .Params.Researchers -}}
