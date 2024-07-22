@@ -1,4 +1,5 @@
 // import './carousel/instance';
+import './carousel/slider';
 import './carousel/manager';
 
 // TODO: 
@@ -21,93 +22,28 @@ Carrousel = function Carrousel(element, options) {
     }
 
     this.carrousel = element.root; // move elsewhere
-    this.slider = element.slider;
-
-    this.track = {
-        domElement: element.slidesContainer,
-        n: 0,
-        delta: 0,
-        position: 0,
-        elements: [],
-        updateElements: function() {
-            this.elements = [];
-            var elems = this.domElement.querySelectorAll(".carrousel__slide:not(.clone)");
-            for(var i = 0; i<elems.length; i += 1){
-                this.elements.push({
-                    dom: elems[i],
-                    size: this.computeElementWidth(elems[i])
-                });
-            }
-        },
-        element: function(index){ 
-            var elements = this.elements;
-            return elements[index];
-        },
-        length: function() { // nombre de slides du caroussel ( sans compter les clones)
-            return this.elements.length;
-        },
-        size: function() {
-            var size = 0;
-            for (var i = 0; i < this.elements.length; i++) {
-                size += this.elements[i].size;
-            }
-            return size;
-        },
-        translate: function (delta, transition = 0) {
-            // on enregistre également la distance à parcourir
-            // si le delta n'était pas à 0 on le soustrait à la distance à parcourir
-            this.delta = delta - this.delta; 
-            this.position += this.delta;
-            this.delta = 0;
-            this.domElement.style.setProperty('transition', 'left ' + String(transition) + 'ms');
-            this.domElement.style.setProperty('left', this.position + "px");
-        },
-        putFirstAtEnd: function() {
-            var traveller = this.domElement.children.item(0);
-            var travellerId = parseInt(traveller.getAttribute("id").slice(-1));
-            console.log(traveller)
-            var width = this.element(travellerId).size;
-            console.log("traveller width "+width)
-            this.translate(width);
-            this.domElement.append(this.domElement.removeChild(traveller));
-        },
-        putLastAtbegining : function() {
-            var traveller = this.domElement.children.item(this.domElement.children.length - 1)
-            var travellerId = parseInt(traveller.getAttribute("id").slice(-1));
-            var width = -this.element(travellerId).size;
-            console.log("traveller width "+ width)
-            this.translate(width);
-            this.domElement.prepend(this.domElement.removeChild(traveller));
-        },
-        getPosition: function () {
-            return this.position;
-        },
-        computeElementWidth: function (dom) {
-            var style = getComputedStyle(dom);
-            var width = dom.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
-            return width
-        },
-        setCurrent: function(current){
-            this.n = current;
-        }
-    }
-
+    this.container = element.container;
+    
     this.state = {
         isHovered: false,
         isReady: false
     };
-
+    this.resizeTimeout;
+    
     this.offset = 0;
-
-    // On récupere la durée de transition
-    // this.initTransitionDuration();
-    console.log("transition initialized with value: " + this.options.transitionDuration);
+    
     // On initialise le contenu et la position du track
-    this.initTrackContent();
+    
+    this.slider = new Slider(this.container);
     console.log("track content initialized");
 
     this.initListeners();
     console.log("listeners initialized");
+
+    // if (options.pagination) {
+    //     this.initPagination();
+    // }
+    // this.initDrag();
 
     // if (options.autoplay) {
     //     this.initAutoPlay(options);
@@ -123,82 +59,48 @@ Carrousel = function Carrousel(element, options) {
     }.bind(this))
     ///// 
 
-    // if (options.pagination) {
-    //     this.initPagination();
-    // }
-    // this.initDrag();
-
     this.state.isReady = true;
 }
 
 Carrousel.prototype.initListeners = function initListeners() {
     var onTransitioned = this.onTransitioned.bind(this);
-    this.track.domElement.addEventListener('transitionend', function(e) {
-        if(e.propertyName == "left"){
+    this.slider.domElement.addEventListener('transitionend', function (e) {
+        if (e.propertyName == "left") {
             onTransitioned();
         }
-        }
+    }
     );
 
-    this.slider.addEventListener("mouseenter", function (e) { this.state.isHovered = true; }.bind(this));
-    this.slider.addEventListener("mouseleave", function (e) { this.state.isHovered = false; }.bind(this));
-
-    // add detection focus ( touch )
-    var resizeAction = this.onResize.bind(this);
-    window.addEventListener('resize', resizeAction);
     // this.addActiveSlideClass(0);
-}
-
-Carrousel.prototype.initTrackContent = function initTrackContent() {
-    // Ajoute une copei des elements à la fin, conserve les references des elements dans 
-    var childrenAsArray = Array.from(this.track.domElement.children);
-    var domElement;
-    for (var i = 0; i < childrenAsArray.length; i++) {
-        domElement = childrenAsArray[i];
-        domElement.setAttribute("id", "slide__"+i);
-        if (this.options.loop) {
-            var clone = domElement.cloneNode(true);
-            clone.classList.add("clone");
-            clone.setAttribute("id", "slide__clone__"+i);
-            this.track.domElement.appendChild(clone); // ajout d'une copie a la fin
-        }
-    }
-    this.track.updateElements();
-    if (this.options.loop) {
-        this.track.translate(-this.track.size());
-    }
 }
 
 Carrousel.prototype.onTransitioned = function onTransitioned() {
     this.state.isReady = false;
-    var nCurrent = this.track.domElement.children.length - this.track.length();
-    // this.cleanUpSlideClass(nCurrent);
-    // dans le cas ou il y a loop
+    this.slider.updateDom();
     if (this.offset > 0) { // on avance vers la droite
         for (var i = 0; i < this.offset; i++) {
             // on enlève l'element tout à gauche pour le rajouter à droite
-            this.track.putFirstAtEnd();
+            this.slider.putFirstAtEnd();
         }
     } else if (this.offset < 0) { // onn va 
         for (var i = 0; i < Math.abs(this.offset); i++) {
-            this.track.putLastAtbegining();
+            this.slider.putLastAtbegining();
         }
     }
-    nCurrent = this.track.domElement.children.length - this.track.length();
-    // this.addActiveSlideClass(nCurrent);
     this.offset = 0;
     this.state.isReady = true;
 }
+
+
+
 
 Carrousel.prototype.initPagination = function initPagination() {
     var controller = document.createElement("div");
     controller.classList.add(carrouselClasses.classController);
     var pagination = document.createElement("ul");
     pagination.classList.add(carrouselClasses.classPagination);
-    var button;
-    var elemI;
 
-    for (var i = 0; i < this.track.length(); i++) {
+    for (var i = 0; i < this.slider.length(); i++) {
         pagination.append(this.makePaginationButton(i));
     }
     controller.append(pagination);
@@ -283,7 +185,7 @@ Carrousel.prototype.runAutoPlay = function runAutoPlay() {
         if (!this.options.drag.active && !(this.state.isHovered && this.options.autoplay.pauseOnHover) && !this.options.autoplay.paused) {
             this.options.autoplay.started = now;
             if (this.options.pagination) {
-                this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: 0%");
+                this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.n).querySelector("i").setAttribute("style", "width: 0%");
             }
             this.move(1);
         }
@@ -291,7 +193,7 @@ Carrousel.prototype.runAutoPlay = function runAutoPlay() {
         if (!this.options.drag.active && !(this.state.isHovered && this.options.autoplay.pauseOnHover) && !this.options.autoplay.paused) {
             var p = elapsed / this.options.autoplay.interval * 100.0
             if (this.options.pagination) {
-                this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: " + p + "%");
+                this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.n).querySelector("i").setAttribute("style", "width: " + p + "%");
             }
         }
     }
@@ -307,15 +209,15 @@ Carrousel.prototype.initDrag = function initDrag() { // TODO gerer ce probleme d
         active: false
     };
     var dragAction = this.onDrag.bind(this);
-    this.track.domElement.addEventListener('mousedown', function (e) {
+    this.slider.domElement.addEventListener('mousedown', function (e) {
         // e.preventDefault();
         this.options.drag.posx = e.offsetX;
-        this.options.drag.startpos = this.track.pos;
-        this.track.domElement.addEventListener('mousemove', dragAction);
+        this.options.drag.startpos = this.slider.pos;
+        this.slider.domElement.addEventListener('mousemove', dragAction);
     }.bind(this));
 
     window.addEventListener('mouseup', function (e) {
-        this.track.domElement.removeEventListener('mousemove', dragAction);
+        this.slider.domElement.removeEventListener('mousemove', dragAction);
         this.move(this.options.drag.target);
         this.options.drag.posx = null;
         this.options.drag.startpos = null;
@@ -324,7 +226,7 @@ Carrousel.prototype.initDrag = function initDrag() { // TODO gerer ce probleme d
     }.bind(this));
 
     window.addEventListener('mouseleave', function (e) {
-        this.track.domElement.removeEventListener('mousemove', dragAction);
+        this.slider.domElement.removeEventListener('mousemove', dragAction);
         this.move(this.options.drag.target);
         this.options.drag.posx = null;
         this.options.drag.startpos = null;
@@ -336,18 +238,18 @@ Carrousel.prototype.initDrag = function initDrag() { // TODO gerer ce probleme d
 Carrousel.prototype.onDrag = function onDrag(e) {
     // this.preventDefault;
     this.options.drag.active = true;
-    if (this.track.getPosition() < 0) {
-        // this.track.pos += e.offsetX - this.options.drag.posx;
-        this.track.translate(e.offsetX - this.options.drag.posx);
+    if (this.slider.getPosition() < 0) {
+        // this.slider.pos += e.offsetX - this.options.drag.posx;
+        this.slider.translate(e.offsetX - this.options.drag.posx);
 
-        this.track.delta = this.track.getPosition() - this.options.drag.startpos;
+        this.slider.delta = this.slider.getPosition() - this.options.drag.startpos;
         this.options.drag.target = 0;
         if (Math.sign(this.options.drag.delta) > 0) {
-            if (Math.abs(this.options.drag.delta) - this.track.element(this.numElementAt(-1)).size / 4 > 0) {
+            if (Math.abs(this.options.drag.delta) - this.slider.elementAt(-1).size / 4 > 0) {
                 this.options.drag.target -= 1;
             }
         } else {
-            if (Math.abs(this.options.drag.delta) - this.track.element(this.numElementAt(-1)).size / 4 > 0) {
+            if (Math.abs(this.options.drag.delta) - this.slider.elementAt(-1).size / 4 > 0) {
                 this.options.drag.target += 1;
             }
         }
@@ -355,61 +257,62 @@ Carrousel.prototype.onDrag = function onDrag(e) {
 }
 
 Carrousel.prototype.move = function (offset) {  // décaler la track de offset = +n ou -n slides
-    if (this.state.isReady) {
+    if (true) {
         // if (this.options.pagination) {
-        //     this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.track.n).querySelector("i").setAttribute("style", "width: 0%");
+        //     this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.n).querySelector("i").setAttribute("style", "width: 0%");
         // }
         // if (this.options.autoplay.started) {
         //     this.options.autoplay.started = Date.now();
         // }
+
         var delta = 0; // distance à parcourir
         var sign = Math.sign(offset); // direction positive ou negative 
-        
+
         //calcul du delta à translater à partir de la somme des tailles 
-        var slideNumber;
         // on parcours le nombre de slide à déplacer
-        for (var i = 0; i < Math.abs(offset); i += 1) { 
-            // on recupere l'instance de chaque slide
-            slideNumber = this.numElementAt(offset - (sign > 0) - sign * i);
+        for (var i = 0; i < Math.abs(offset); i += 1) {
             // on ajoute ( ou soustrait en fonction du signe), la taille de chacun des slide
-            delta -= sign * this.track.element(slideNumber).size; 
+            delta -= sign * this.slider.elementAt(offset - (sign > 0) - sign * i).size;
         }
 
         // On active l'animation
-        this.track.translate(delta, this.options.transitionDuration);
+        this.slider.translate(delta, this.options.transitionDuration);
 
         // pour l'instant on a pas bougé, on ajoute le decalage au décalage eventuel ( ou 0)
         this.offset += offset;
 
         // On met à jour le slide current 
-        this.track.setCurrent(this.numElementAt(offset));
-    
+        this.slider.updateCurrent(offset);
     }
 }
 
 Carrousel.prototype.goTo = function goTo(n) {
-    this.move(n - this.track.n);
+    this.move(n - this.slider.n);
 };
 
-Carrousel.prototype.numElementAt = function numElementAt(offset) {
-    var trackLen = this.track.length();
-    return ((this.track.n + offset) % trackLen + trackLen) % trackLen;
-}
-
 Carrousel.prototype.cleanUpSlideClass = function cleanUpSlideClass(currentSlide) {
-    this.track.domElement.children.item(currentSlide).classList.remove("is-active");
-    this.track.domElement.children.item(currentSlide + 1).classList.remove("is-next");
+    this.slider.domElement.children.item(currentSlide).classList.remove("is-active");
+    this.slider.domElement.children.item(currentSlide + 1).classList.remove("is-next");
 }
 
 Carrousel.prototype.addActiveSlideClass = function addActiveSlideClass(currentSlide) {
-    this.track.domElement.children.item(currentSlide).classList.add("is-active");
-    this.track.domElement.children.item(currentSlide + 1).classList.add("is-next");
+    this.slider.domElement.children.item(currentSlide).classList.add("is-active");
+    this.slider.domElement.children.item(currentSlide + 1).classList.add("is-next");
 }
 
+// Actions Callbacks
 Carrousel.prototype.onResize = function onResize() {
     // Recalcule la dimension totale du contenu du slider et met à jour sa position x
-    this.state.isReady = false;
-    this.track.updateElements();
-    this.goTo(0);
-    this.state.isReady = true;
+    clearTimeout(this.resizeTimeout);
+    this.resizeTimeout = setTimeout(function () {
+        this.slider.init(this.container);
+    }.bind(this), 300);
+}
+
+Carrousel.prototype.onMouseEnter = function onMouseEnter() {
+    this.state.isHovered = true;
+}
+
+Carrousel.prototype.onMouseLeave = function onMouseLeave() {
+    this.state.isHovered = false;
 }
