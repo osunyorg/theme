@@ -1,10 +1,11 @@
 {{ $inside_volume := .inside_volume | default false }}
 {{ $actions := .actions | default true }}
-{{ $heading := .heading | default "h3" }}
 {{ $modalId := print "modalID_" .index }}
-{{ $heading_tag := (dict 
-  "open" ((printf "<%s class='paper-title' itemprop='headline'>" $heading) | safeHTML)
-  "close" ((printf "</%s>" $heading) | safeHTML)
+
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading_tag := (dict
+  "open" ((printf "<h%s class='paper-title' itemprop='headline'>" $heading_level) | safeHTML)
+  "close" ((printf "</h%s>" $heading_level) | safeHTML)
 ) }}
 
 {{ with .paper }}
@@ -14,7 +15,7 @@
         <a href="{{ .Permalink }}" itemprop="url">
           <span itemprop="name">{{ partial "PrepareHTML" .Title }}</span>
         </a>
-        {{ $heading_tag.close }}
+      {{ $heading_tag.close }}
       <div class="paper-meta">
         <p class="paper-authors">
           {{- range $index, $authors := .Params.Researchers -}}
