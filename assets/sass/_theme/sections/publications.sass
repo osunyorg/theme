@@ -35,7 +35,7 @@
             a
                 @include stretched-link(after)
         .publication-meta
-            @include small
+            @include meta
             color: var(--color-text-alt)
             margin-top: $spacing-1
             a
@@ -47,7 +47,7 @@
         .publication-meta
             padding-right: $spacing-4
         &::before
-            bottom: 0
+            content: none
 
 .publications
     margin-top: $spacing-5
@@ -57,24 +57,43 @@
 
 .publications__section
     .publication
-        padding-bottom: $spacing-4
-        padding-top: $spacing-4
-        position: relative
-        p
-            padding-right: $spacing-4
-        @include media-breakpoint-down(desktop)
-            padding-right: $spacing-4
-            a + p
-                margin-top: $spacing-3
-            a::before
-                margin-top: pxToRem(-6)
-        .publication-title
-            @include h4
-        .publication-authors
+        @include media-breakpoint-up(desktop)
+            display: flex
+            flex-direction: row-reverse
             &::before
-                content: " • "
-        .publication-date
-            display: none
+                position: relative
+                transform: none
+            .publication-content
+                flex-direction: row
+                flex-wrap: wrap
+                align-items: baseline
+                .publication-title
+                    order: -1
+                    width: columns(8)
+                .publication-authors
+                    @include meta
+                    margin-bottom: 0
+                    width: columns(4)
+
+            
+//         padding-bottom: $spacing-4
+//         padding-top: $spacing-4
+//         position: relative
+//         p
+//             padding-right: $spacing-4
+//         @include media-breakpoint-down(desktop)
+//             padding-right: $spacing-4
+//             a + p
+//                 margin-top: $spacing-3
+//             a::before
+//                 margin-top: pxToRem(-6)
+//         .publication-title
+//             @include h4
+//         .publication-authors
+//             &::before
+//                 content: " • "
+//         .publication-date
+//             display: none
 
 .publications__page
     .hero
