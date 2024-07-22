@@ -29,11 +29,6 @@
   {{ $isLeafletNeeded = true }}
 {{ end }}
 
-{{ if $isCarouselNeeded }}
-  {{ $carousel_js := resources.Get "js/theme/components/carousel.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
-  <script src="{{ $carousel_js.RelPermalink }}" integrity="{{ $carousel_js.Data.Integrity }}"></script>
-{{ end }}
-
 {{ if $isLeafletNeeded }}
   <!-- CSS -->
   {{- $cssOpts := (dict
