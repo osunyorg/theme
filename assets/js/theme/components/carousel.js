@@ -1,5 +1,6 @@
 // import './carousel/instance';
 import './carousel/slider';
+import './carousel/pagination';
 import './carousel/manager';
 
 // TODO: 
@@ -41,7 +42,7 @@ Carrousel = function Carrousel(element, options) {
     console.log("listeners initialized");
 
     if (options.pagination) {
-        this.pagination = new Pagination(options.pagination.classes, this.slider.elements.length, options.i18n, false);
+        this.pagination = new Pagination(options.pagination.classes, this.slider.elements.length, options.i18n, true);
         this.carrousel.append(this.pagination.domElement)
     }
     // this.initDrag();
@@ -59,9 +60,7 @@ Carrousel.prototype.initListeners = function initListeners() {
         if (e.propertyName == "left") {
             onTransitioned();
         }
-    }
-    );
-
+    });
     // this.addActiveSlideClass(0);
 }
 
@@ -80,74 +79,6 @@ Carrousel.prototype.onTransitioned = function onTransitioned() {
     }
     this.offset = 0;
     this.state.isReady = true;
-}
-
-Pagination = function Pagination(classes, carrousel_size, i18n, toggleButton = false) {
-    var containerDom, paginationDom;
-    // Creating pagination div container
-    containerDom = document.createElement("div");
-    containerDom.classList.add(classes.container);
-
-    // paginationButton: "carrousel__pagination__page",
-    //     toggleButton: "carrousel__toggle",
-    //         toggleButtonPause: "carrousel__toggle__pause",
-    //             toggleButtonPlay: "carrousel__toggle__play"
-
-    // Creating container ul for pagination control buttons
-    var paginationDom = document.createElement("ul");
-    paginationDom.classList.add(classes.pagination);
-
-    this.tabButtons = [];
-    for (var i = 0; i < carrousel_size; i += 1) {
-        this.tabButtons.push(new PaginationButton(i, classes.paginationButton, i18n))
-        paginationDom.append(this.tabButtons[i].domElement);
-    }
-
-    containerDom.append(paginationDom);
-
-    if (toggleButton) {
-        containerDom.append(this.makeToggleButton());
-    }
-    this.domElement = containerDom;
-}
-Carrousel.prototype.makeToggleButton = function makeToggleButton(classes) {
-    var toggleButton = document.createElement("button");
-    toggleButton.classList.add(classes.classToggleButton);
-    var span = document.createElement("span");
-    span.classList.add(classes.classToggleButtonPause);
-    toggleButton.append(span);
-    toggleButton.addEventListener("click", function (e) {
-        this.options.autoplay.paused = !this.options.autoplay.paused;
-        if (this.options.autoplay.paused) {
-            e.target.classList.replace(classes.classToggleButtonPause, classes.classToggleButtonPlay);
-        } else {
-            e.target.classList.replace(classes.classToggleButtonPlay, classes.classToggleButtonPause);
-        }
-    }.bind(this));
-    return toggleButton;
-}
-
-PaginationButton = function PaginationButton(nSlide, classe, i18n) {
-    this.domElement;
-    this.index = nSlide;
-    this.progress = 0;
-    this.domElement = document.createElement("li");
-    this.domElement.setAttribute("role", "presentation");
-
-    var button = document.createElement("button");
-    button.classList.add(classe);
-    button.setAttribute("role", "tab");
-    button.setAttribute("type", "button");
-    button.setAttribute("aria-label", i18n.slideX.replace("%s", this.index));
-    button.setAttribute("aria-controls", "slideX".replace("X", this.index));
-    button.setAttribute("tabindex", this.index);
-
-    var elemI = document.createElement("i");
-    elemI.setAttribute("width", String(this.progress*100) + "%");
-
-    button.append(elemI);
-
-    this.domElement.append(button);
 }
 
 Carrousel.prototype.initAutoPlay = function initAutoPlay(params) { // TODO changer pour requestaimation frame et gerer animmation
@@ -172,7 +103,6 @@ Carrousel.prototype.initAutoPlay = function initAutoPlay(params) { // TODO chang
     this.options.autoplay.started = Date.now();
     window.requestAnimationFrame(this.runAutoPlay.bind(this));
 }
-
 
 Carrousel.prototype.runAutoPlay = function runAutoPlay() {
     var now = Date.now();

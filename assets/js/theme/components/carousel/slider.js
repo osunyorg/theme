@@ -128,6 +128,6 @@ Slider.prototype.numElementAt = function (offset) {
 };
 
 Slider.prototype.updateDom = function () {
-    console.log("current: " + this.current)
-    console.log("position: " + this.position)
+    // console.log("current: " + this.current)
+    // console.log("position: " + this.position)
 };

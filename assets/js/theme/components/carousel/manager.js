@@ -47,10 +47,14 @@ window.osuny.carousel.manager = {
 
                 if (instance.pagination) {
                     for (var n = 0; n < instance.pagination.tabButtons.length; n += 1) {
-                        console.log(instance.pagination.tabButtons[n])
                         instance.pagination.tabButtons[n].domElement.addEventListener("click", function (e) {
                             this.goTo(e.target.getAttribute("tabindex"));
                         }.bind(instance));
+                    }
+                    if (instance.pagination.toggleButton){
+                        instance.pagination.toggleButton.domElement.addEventListener("click", function (e) {
+                            console.log(this)
+                        });
                     }
                 }
 

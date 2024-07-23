@@ -13,12 +13,9 @@
         transition-duration: 0.5s
         width: fit-content
         justify-content: flex-start
-        
+
     button
-        -moz-appearance: none
-        -webkit-appearance: none
         appearance: none
-        background: 0 0
         background: transparent
         border: 0
     &__arrow
@@ -28,10 +25,10 @@
         svg
             display: none
         &--prev
-            @include icon(arrow-left)
+            @include icon(arrow-left-line)
             right: 100%
         &--next
-            @include icon(arrow-right)
+            @include icon(arrow-right-line)
             left: 100%
     &__pagination
         display: flex
@@ -72,7 +69,6 @@
                 left: 0
                 position: absolute
                 top: 50%
-                
             i
                 background-color: alphaColor($link-color, 0.3)
                 width: 0%
@@ -88,22 +84,26 @@
         border: 0
         cursor: pointer
         font-size: 0
-        font-size: 0
-        height: 42px
+        height: pxToRem(42)
         line-height: 1
         padding: 0
         position: absolute
         right: 0
         top: 0
-        width: 42px
+        width: pxToRem(42)
         span
             color: var(--color-accent)
             &::before
-                font-size: pxToRem(42)
+                font-size: pxToRem(22)
+                height: pxToRem(42)
+                width: pxToRem(42)
+                margin-left: -0.5px
+                margin-top: -1.5px
         &__pause
-            @include icon-block(pause)
+            @include icon-block(pause-line)
+
         &__play
-            @include icon-block(play)
+            @include icon-block(play-fill)
 
     &[data-slides-length="1"]
         .carrousel

@@ -2,11 +2,11 @@
     blockquote
         @include blockquote
         p
-            color: $block-testimonials-color
             font-family: $block-testimonials-font-family
             font-size: $block-testimonials-font-size
-            font-style: $block-testimonials-style
             line-height: $block-testimonials-line-height
+            font-style: $block-testimonials-style
+            color: $block-testimonials-color
             @include media-breakpoint-up(desktop)
                 font-size: pxToRem(30) // TODO : on peut peut-être la sortir avec du RFS ?
             @include media-breakpoint-up(xl)
@@ -53,29 +53,8 @@
     .carrousel
         &__toggle
             border: 1px solid $block-testimonials-pagination-background
-            border-radius: 50%
-            cursor: pointer
-            font-size: 0
-            height: pxToRem(42)
-            padding: 0
-            position: absolute
-            right: 0
-            top: 0
-            width: pxToRem(42)
-            font-size: 0
-            line-height: 1
-            span
-                color: var(--color-accent)
-                &::before
-                    font-size: pxToRem(22)
-                    height: pxToRem(42)
-                    width: pxToRem(42)
-                    margin-left: -0.5px
-                    margin-top: -1.5px
         &__pagination
             button
-                &::before,
-                i
                 &::before
                     background-color: $block-testimonials-pagination-background
                 i
