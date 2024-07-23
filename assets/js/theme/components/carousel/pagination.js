@@ -1,51 +1,54 @@
+if (!window.osuny) {
+    window.osuny = {};
+}
 
-Pagination = function Pagination(classes, carrousel_size, i18n, toggleButton = false) {
+if (!window.osuny.carousel) {
+    window.osuny.carousel = {};
+}
+
+window.osuny.carousel.Pagination = function Pagination(classes, carrousel_size, i18n, toggleButton = false) {
     var containerDom, paginationDom;
-    // Creating pagination div container
-    containerDom = document.createElement("div");
-    containerDom.classList.add(classes.controller);
+    this.domClasses = classes.pagination;
 
-    console.log(classes.pagination)
-    // Creating container ul for pagination control buttons
-    var paginationDom = document.createElement("ul");
-    paginationDom.classList.add(classes.pagination);
+    containerDom = document.createElement("div");
+    containerDom.classList.add(this.domClasses.controller);
+
+    paginationDom = document.createElement("ul");
+    paginationDom.classList.add(this.domClasses.pagination);
 
     this.tabButtons = [];
     for (var i = 0; i < carrousel_size; i += 1) {
-        this.tabButtons.push(new PaginationButton(i, classes.paginationButton, i18n))
+        this.tabButtons.push(new window.osuny.carousel.PaginationButton(i, this.domClasses.paginationButton, i18n))
         paginationDom.append(this.tabButtons[i].domElement);
     }
 
     containerDom.append(paginationDom);
 
     if (toggleButton) {
-        this.toggleButton = new ToggleButton(classes);
+        this.toggleButton = new window.osuny.carousel.ToggleButton(this.domClasses);
         containerDom.append(this.toggleButton.domElement);
-        console.log(this.toggleButton.domElement)
     }
     this.domElement = containerDom;
 }
 
-ToggleButton = function ToggleButton(classes, initialState = 1) {
+window.osuny.carousel.ToggleButton = function ToggleButton(classes, initialState = 1) {
     this.class = [classes.toggleButtonPlay, classes.toggleButtonPause];
     this.state = initialState;
     this.domElement = document.createElement("button");
     this.domElement.classList.add(classes.toggleButton);
     var span = document.createElement("span");
     this.domElement.append(span);
-    this.toggleElem = span;
     this.toggleElem.classList.add(this.class[this.state]);
 }
 
-ToggleButton.prototype.toggle = function(){
+window.osuny.carousel.ToggleButton.prototype.toggle = function(target){
     var newState = Math.abs(this.state - 1);
-    this.toggleElem.classList.replace(this.class[this.state], this.class[newState]);
+    target.classList.replace(this.class[this.state], this.class[newState]);
     this.state = newState;
 }
 
-PaginationButton = function PaginationButton(nSlide, classe, i18n) {
-    this.domElement;
-    this.index = nSlide;
+window.osuny.carousel.PaginationButton = function PaginationButton(index, classe, i18n) {
+    this.index = index;
     this.progress = 0;
     this.domElement = document.createElement("li");
     this.domElement.setAttribute("role", "presentation");
@@ -60,7 +63,6 @@ PaginationButton = function PaginationButton(nSlide, classe, i18n) {
 
     var elemI = document.createElement("i");
     elemI.setAttribute("width", String(this.progress * 100) + "%");
-
     button.append(elemI);
 
     this.domElement.append(button);

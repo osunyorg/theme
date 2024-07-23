@@ -1,4 +1,11 @@
-Slider = function Slider(container) {
+if (!window.osuny) {
+    window.osuny = {};
+}
+
+if (!window.osuny.carousel) {
+    window.osuny.carousel = {};
+}
+window.osuny.carousel.Slider = function Slider(container) {
     this.domElement = container;
     // this.domElement.addEventListener('transitionend', function (e) {
     //     if (e.propertyName == "left") {
@@ -8,7 +15,7 @@ Slider = function Slider(container) {
     this.init();
 }
 
-Slider.prototype.init = function(){
+window.osuny.carousel.Slider.prototype.init = function(){
     this.current = 0;
     this.position = 0;
     this.elements = [];
@@ -39,7 +46,7 @@ Slider.prototype.init = function(){
     // var onTransitioned = this.onTransitioned.bind(this);
 }
 
-Slider.prototype.updateElements = function () {
+window.osuny.carousel.Slider.prototype.updateElements = function () {
     this.elements = [];
     var elems = this.domElement.querySelectorAll(":scope > :not(.clone)");
     for (var i = 0; i < elems.length; i += 1) {
@@ -50,7 +57,7 @@ Slider.prototype.updateElements = function () {
     }
 };
 
-Slider.prototype.translate = function (delta, transition = 0) {
+window.osuny.carousel.Slider.prototype.translate = function (delta, transition = 0) {
     // on enregistre également la distance à parcourir
     // si le delta n'était pas à 0 on le soustrait à la distance à parcourir
     this.delta = delta - this.delta;
@@ -60,7 +67,7 @@ Slider.prototype.translate = function (delta, transition = 0) {
     this.domElement.style.setProperty('left', this.position + "px");
 }
 
-Slider.prototype.putFirstAtEnd = function () {
+window.osuny.carousel.Slider.prototype.putFirstAtEnd = function () {
     var traveller = this.domElement.children.item(0);
     var travellerId = parseInt(traveller.getAttribute("id").slice(-1));
     var width = this.element(travellerId).size;
@@ -68,7 +75,7 @@ Slider.prototype.putFirstAtEnd = function () {
     this.domElement.append(this.domElement.removeChild(traveller));
 };
 
-Slider.prototype.putLastAtbegining = function () {
+window.osuny.carousel.Slider.prototype.putLastAtbegining = function () {
     var traveller = this.domElement.children.item(this.domElement.children.length - 1)
     var travellerId = parseInt(traveller.getAttribute("id").slice(-1));
     var width = -this.element(travellerId).size;
@@ -77,25 +84,25 @@ Slider.prototype.putLastAtbegining = function () {
 };
 
 // ACCESSORS
-Slider.prototype.currentSlide = function() {
+window.osuny.carousel.Slider.prototype.currentSlide = function() {
     return this.current;
 }
 
-Slider.prototype.getPosition = function () {
+window.osuny.carousel.Slider.prototype.getPosition = function () {
     return this.position;
 };
 
-Slider.prototype.element = function (index) { //element {dom, size} (hors clone à l'index index)
+window.osuny.carousel.Slider.prototype.element = function (index) { //element {dom, size} (hors clone à l'index index)
     var elements = this.elements;
     return elements[index];
 };
 
-Slider.prototype.elementAt = function (offset) {
+window.osuny.carousel.Slider.prototype.elementAt = function (offset) {
     var index = this.numElementAt(offset);
     return this.elements[index];
 };
 
-Slider.prototype.size = function () {
+window.osuny.carousel.Slider.prototype.size = function () {
     var size = 0;
     for (var i = 0; i < this.elements.length; i++) {
         size += this.elements[i].size;
@@ -103,12 +110,12 @@ Slider.prototype.size = function () {
     return size;
 };
 
-Slider.prototype.computeElementWidth = function (dom) {
+window.osuny.carousel.Slider.prototype.computeElementWidth = function (dom) {
     var style = getComputedStyle(dom);
     var width = dom.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
     return width
 };
-Slider.prototype.computeElementsWidth = function (domElems) {
+window.osuny.carousel.Slider.prototype.computeElementsWidth = function (domElems) {
     var width = 0;
     for (var i = 0; i < domElems.length; i += 1) {
         width += this.computeElementWidth(domElems[i])
@@ -116,18 +123,17 @@ Slider.prototype.computeElementsWidth = function (domElems) {
     return width;
 };
 
-Slider.prototype.updateCurrent = function (offset) {
+window.osuny.carousel.Slider.prototype.updateCurrent = function (offset) {
     // Applique un décalage 
     this.current = this.numElementAt(offset);
 };
 
-Slider.prototype.numElementAt = function (offset) {
+window.osuny.carousel.Slider.prototype.numElementAt = function (offset) {
     // returns the index of the slide located at the distance "offset" from current slide
     var trackLen = this.elements.length;
     return ((this.current + offset) % trackLen + trackLen) % trackLen;
 };
 
-Slider.prototype.updateDom = function () {
-    // console.log("current: " + this.current)
-    // console.log("position: " + this.position)
+window.osuny.carousel.Slider.prototype.updateDom = function () {
+
 };
