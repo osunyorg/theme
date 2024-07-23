@@ -43,23 +43,12 @@ Carrousel = function Carrousel(element, options) {
     if (options.pagination) {
         this.pagination = new Pagination(options.pagination.classes, this.slider.elements.length, options.i18n, false);
         this.carrousel.append(this.pagination.domElement)
-        // this.initPagination(options.pagination);
     }
     // this.initDrag();
 
     // if (options.autoplay) {
     //     this.initAutoPlay(options);
     // }
-    ///// TEST TO REMOVE /////
-    document.addEventListener("keydown", function (e) {
-        if (e.key == 'ArrowLeft') {
-            this.move(-1);
-        }
-        else if (e.key == 'ArrowRight') {
-            this.move(1);
-        }
-    }.bind(this))
-    ///// 
 
     this.state.isReady = true;
 }
