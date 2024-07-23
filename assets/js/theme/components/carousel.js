@@ -23,26 +23,28 @@ Carrousel = function Carrousel(element, options) {
 
     this.carrousel = element.root; // move elsewhere
     this.container = element.container;
-    
+
     this.state = {
         isHovered: false,
         isReady: false
     };
     this.resizeTimeout;
-    
+
     this.offset = 0;
-    
+
     // On initialise le contenu et la position du track
-    
+
     this.slider = new Slider(this.container);
     console.log("track content initialized");
 
     this.initListeners();
     console.log("listeners initialized");
 
-    // if (options.pagination) {
-    //     this.initPagination();
-    // }
+    if (options.pagination) {
+        this.pagination = new Pagination(options.pagination.classes, this.slider.elements.length, options.i18n, false);
+        this.carrousel.append(this.pagination.domElement)
+        // this.initPagination(options.pagination);
+    }
     // this.initDrag();
 
     // if (options.autoplay) {
@@ -91,66 +93,72 @@ Carrousel.prototype.onTransitioned = function onTransitioned() {
     this.state.isReady = true;
 }
 
+Pagination = function Pagination(classes, carrousel_size, i18n, toggleButton = false) {
+    var containerDom, paginationDom;
+    // Creating pagination div container
+    containerDom = document.createElement("div");
+    containerDom.classList.add(classes.container);
 
+    // paginationButton: "carrousel__pagination__page",
+    //     toggleButton: "carrousel__toggle",
+    //         toggleButtonPause: "carrousel__toggle__pause",
+    //             toggleButtonPlay: "carrousel__toggle__play"
 
+    // Creating container ul for pagination control buttons
+    var paginationDom = document.createElement("ul");
+    paginationDom.classList.add(classes.pagination);
 
-Carrousel.prototype.initPagination = function initPagination() {
-    var controller = document.createElement("div");
-    controller.classList.add(carrouselClasses.classController);
-    var pagination = document.createElement("ul");
-    pagination.classList.add(carrouselClasses.classPagination);
-
-    for (var i = 0; i < this.slider.length(); i++) {
-        pagination.append(this.makePaginationButton(i));
+    this.tabButtons = [];
+    for (var i = 0; i < carrousel_size; i += 1) {
+        this.tabButtons.push(new PaginationButton(i, classes.paginationButton, i18n))
+        paginationDom.append(this.tabButtons[i].domElement);
     }
-    controller.append(pagination);
 
-    if (this.options.autoplay) {
-        controller.append(this.makeToggleButton());
+    containerDom.append(paginationDom);
+
+    if (toggleButton) {
+        containerDom.append(this.makeToggleButton());
     }
-    this.carrousel.append(controller);
-    this.options.pagination = true;
+    this.domElement = containerDom;
 }
-
-Carrousel.prototype.makeToggleButton = function makeToggleButton() {
+Carrousel.prototype.makeToggleButton = function makeToggleButton(classes) {
     var toggleButton = document.createElement("button");
-    toggleButton.classList.add(carrouselClasses.classToggleButton);
+    toggleButton.classList.add(classes.classToggleButton);
     var span = document.createElement("span");
-    span.classList.add(carrouselClasses.classToggleButtonPause);
+    span.classList.add(classes.classToggleButtonPause);
     toggleButton.append(span);
     toggleButton.addEventListener("click", function (e) {
         this.options.autoplay.paused = !this.options.autoplay.paused;
         if (this.options.autoplay.paused) {
-            e.target.classList.replace(carrouselClasses.classToggleButtonPause, carrouselClasses.classToggleButtonPlay);
+            e.target.classList.replace(classes.classToggleButtonPause, classes.classToggleButtonPlay);
         } else {
-            e.target.classList.replace(carrouselClasses.classToggleButtonPlay, carrouselClasses.classToggleButtonPause);
+            e.target.classList.replace(classes.classToggleButtonPlay, classes.classToggleButtonPause);
         }
     }.bind(this));
     return toggleButton;
 }
 
-Carrousel.prototype.makePaginationButton = function makePaginationButton(nSlide) {
-    var li = document.createElement("li");
-    li.setAttribute("role", "presentation");
+PaginationButton = function PaginationButton(nSlide, classe, i18n) {
+    this.domElement;
+    this.index = nSlide;
+    this.progress = 0;
+    this.domElement = document.createElement("li");
+    this.domElement.setAttribute("role", "presentation");
 
     var button = document.createElement("button");
-    button.classList.add(carrouselClasses.classPaginationButton);
+    button.classList.add(classe);
     button.setAttribute("role", "tab");
     button.setAttribute("type", "button");
-    button.setAttribute("aria-label", i18n.slideX.replace("%s", nSlide));
-    button.setAttribute("aria-controls", this.carrousel.getAttribute("id") + "-" + "slideX".replace("X", nSlide));
-    button.setAttribute("tabindex", nSlide);
+    button.setAttribute("aria-label", i18n.slideX.replace("%s", this.index));
+    button.setAttribute("aria-controls", "slideX".replace("X", this.index));
+    button.setAttribute("tabindex", this.index);
 
     var elemI = document.createElement("i");
-    elemI.setAttribute("width", "0%");
+    elemI.setAttribute("width", String(this.progress*100) + "%");
 
     button.append(elemI);
-    button.addEventListener("click", function (e) {
-        this.goTo(e.target.getAttribute("tabindex"));
-    }.bind(this));
-    li.append(button);
 
-    return li;
+    this.domElement.append(button);
 }
 
 Carrousel.prototype.initAutoPlay = function initAutoPlay(params) { // TODO changer pour requestaimation frame et gerer animmation
