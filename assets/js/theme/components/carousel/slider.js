@@ -36,7 +36,7 @@ Slider.prototype.init = function(){
     this.updateElements();
     this.translate(-this.size(), 500);
 
-    var onTransitioned = this.onTransitioned.bind(this);
+    // var onTransitioned = this.onTransitioned.bind(this);
 
 }
 
