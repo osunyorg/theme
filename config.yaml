@@ -40,11 +40,12 @@ params:
   # You can also specify this options for each sharable Section
   share_links:
     enabled: true
+    email: true
     facebook: true
-    twitter: true
     linkedin: true
-    email: false
+    mastodon: false
     telegram: false
+    twitter: false
     whatsapp: false
 
   # SECTIONS
@@ -52,19 +53,24 @@ params:
     default_image: false
     date_format: ":date_long"
     index:
-      show_categories: false
-      show_author: false
-      show_description: true
       truncate_description: 200 # Set to 0 to disable truncate
       layout: list # grid | list
-    # share_links:
+      options:
+        # dates: false # not released
+        categories: false
+        # image: false # not released
+        status: false
+        # subtitle: true # not released
+        summary: true
+    # share_links: # Optional
     #   enabled: true
+    #   email: false
     #   facebook: true
-    #   twitter: false
-    #   linkedin: false
-    #   email: true
-    #   telegram: true
-    #   whatsapp: true
+    #   linkedin: true
+    #   mastodon: false
+    #   telegram: false
+    #   twitter: true
+    #   whatsapp: false
   organizations:
     dark_logo_background: false
     map_marker_icon: '/assets/images/map-marker.svg'
@@ -98,36 +104,39 @@ params:
       truncate_description: 200 # Set to 0 to disable truncate
       layout: list # grid | list
       options:
-        hide_image: false
-        hide_summary: false
-        hide_category: false
-        hide_author: true
-        hide_date: false
+        image: true
+        summary: true
+        categories: true
+        author: false
+        date: true
     # share_links: # Optional
     #   enabled: true
-    #   facebook: true
-    #   twitter: true
-    #   linkedin: true
     #   email: false
+    #   facebook: true
+    #   linkedin: true
+    #   mastodon: false
     #   telegram: false
+    #   twitter: true
     #   whatsapp: false
   projects:
     default_image: false
     date_format: "2006"
     index:
-      show_categories: true
-      show_description: true
-      show_year: false
       truncate_description: 200 # Set to 0 to disable truncate
       layout: grid # grid | list
+      options:
+        categories: true
+        summary: true
+        year: false
     # share_links: # Optional
     #   enabled: true
+    #   email: false
     #   facebook: true
-    #   twitter: true
     #   linkedin: true
-    #   email: true
-    #   telegram: true
-    #   whatsapp: true
+    #   mastodon: false
+    #   telegram: false
+    #   twitter: true
+    #   whatsapp: false
   programs:
     related_posts:
       quantity: 4
@@ -135,11 +144,12 @@ params:
       quantity: 4
     # share_links: # Optional
     #   enabled: true
-    #   facebook: true
-    #   twitter: true
-    #   linkedin: true
     #   email: false
+    #   facebook: true
+    #   linkedin: true
+    #   mastodon: false
     #   telegram: false
+    #   twitter: true
     #   whatsapp: false
   volumes:
     default_image: false
@@ -156,6 +166,9 @@ params:
         transition_duration: 1000
     key_figures:
       animated: true
+    pages:
+      alternate:
+        more: true
     testimonials:
       carrousel:
         pagination: true

@@ -11,7 +11,7 @@ ul.diplomas
             padding-bottom: $spacing-3
             padding-top: $spacing-3
             border-bottom: 1px solid var(--color-border)
-            @include icon(arrow-right, after)
+            @include icon(arrow-right-line, after)
                 align-self: center
                 margin-left: auto
             &:hover
@@ -49,7 +49,7 @@ ul.diplomas
                     color: var(--color-accent)
                 ol li a   
                     @include inherit-text
-                    @include icon(list-hyphen, before)
+                    @include icon(corner-down-right-line, before)
                         margin-left: 1px
                         margin-right: $spacing-1
                         margin-top: 6px
@@ -74,42 +74,16 @@ ul.diplomas
 
 .diplomas-select
     text-align: right
-    position: relative
-    @include meta
-    button
-        @include button-reset
-        @include icon(caret, after)
-            margin-left: 5px
+    @include dropdown
     .dropdown-menu
-        @include inset(calc(100% + #{$spacing-2}), 0, auto, auto)
-        background-color: var(--color-background-alt)
-        display: none
-        position: absolute
-        z-index: 2
-        @include media-breakpoint-down(desktop)
-            right: var(--grid-gutter-negative)
-            left: var(--grid-gutter-negative)
-        &,
         a
-            color: black
-        a
-            display: block
             font-size: $body-size
-            padding: $spacing-3
-            text-decoration: none
-            white-space: normal
-            @include media-breakpoint-down(desktop)
-                padding: $spacing-2 $spacing-3
-            &:not(:first-child)
-                border-top: 1px solid var(--color-border)
-            &:hover
-                background-color: var(--color-accent)
-                color: white
-
-    button[aria-expanded="true"]
-        @include icon('caret-top', 'after')
-        + .dropdown-menu
-            display: block
+            line-height: $body-line-height
+        @include media-breakpoint-up(desktop)
+            left: auto
+            right: 0
+            a
+                padding: $spacing-3
 
 .essential-container
     margin-top: $spacing-5
@@ -119,7 +93,9 @@ ul.diplomas
         flex-wrap: wrap
         a[download]
             @extend .button-alt
-            @include button-icon(download-inline)
+            @include button-icon(download-2-line)
+            &::after
+                font-size: 1.2em
         @include media-breakpoint-down(sm)
             button, > a
                 width: 100%
@@ -223,7 +199,7 @@ ul.diplomas
                             @include media-breakpoint-up(xl)
                                 width: columns(8)        
                             > a
-                                @include icon(arrow-right, after)
+                                @include icon(arrow-right-line, after)
                                     align-self: end
                                     margin-left: $spacing-1
                             .description

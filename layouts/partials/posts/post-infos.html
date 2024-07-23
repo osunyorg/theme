@@ -2,7 +2,10 @@
   {{ if .Params.posts_categories }}
     <li class="terms">
       <span>{{ i18n "posts.category" ( len .Params.posts_categories ) }}</span>
-      {{ partial "posts/categories.html" . }}
+      {{ partial "commons/categories" ( dict
+        "context" .
+        "kind" "post"
+      )}}
     </li>
   {{ end }}
   <li>

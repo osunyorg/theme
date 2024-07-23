@@ -4,25 +4,10 @@
     .files
         @include list-reset
         li
-            @include icon-block(download, before)
+            @include icon-frame(download-2-line, $hoverable: true)
             align-items: start
             display: flex
             position: relative
-            &::before
-                align-items: center
-                border: 1px solid var(--color-border)
-                display: flex
-                flex-shrink: 0
-                height: pxToRem(60)
-                justify-content: center
-                margin-right: $spacing-2
-                transition: background 0.3s ease, border 0.3s ease
-                width: pxToRem(60)
-            &:hover
-                &::before
-                    background-color: var(--color-text)
-                    border-color: transparent
-                    color: var(--color-background)
         a
             @include stretched-link(before)
             @include small

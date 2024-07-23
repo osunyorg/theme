@@ -42,7 +42,7 @@
     @include in-page-without-sidebar
         .top
             a
-                @include icon(arrow, after, true)
+                @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon
             .description
                 @include h2
@@ -52,7 +52,7 @@
             @include top-flex
         .grid
             a
-                @include icon(arrow, after, true)
+                @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon(after)
         @include media-breakpoint-up(desktop)
             .grid
@@ -99,18 +99,16 @@
                     min-width: 100%
             .more
                 @include arrow-right-hover
-                @include icon-block(arrow-right, after)
+                @include icon(arrow-right-line, after)
+                    font-size: pxToRem(40)
                 @include link($block-pages-card-page-color)
                 position: relative
                 margin-top: auto
                 padding-top: $spacing-3
-                display: flex
-                justify-content: space-between
-                align-items: center
             &:hover
                 .more:after
                     opacity: 1
-                    transform: translateX(0)
+                    transform: translateX(pxToRem(7))
             a,
             .more
                 transition: text-decoration-color .3s ease, color .3s ease
@@ -128,7 +126,7 @@
                 + li
                     margin-top: $spacing-2
                 > a
-                    @include icon(arrow, before, true)
+                    @include icon(arrow-right-line, before, true)
                         padding-right: $spacing-2
                     @include hover-translate-icon(before, 5)
                     @extend %underline-on-hover
@@ -136,7 +134,7 @@
                     .page-title
                         @include h3
                         a
-                            @include icon(arrow, after, true)
+                            @include icon(arrow-right-line, after, true)
                             @include hover-translate-icon(after)
                             @extend %underline-on-hover
         @include media-breakpoint-down(desktop)
@@ -237,11 +235,22 @@
                 flex-direction: column
                 a
                     @include stretched-link
+                    text-decoration: none
+                .more
+                    @include icon(arrow, after, true)
+                    &::after
+                        opacity: 1
+                        transition: padding-left 0.3s
+                &:hover .more::after
+                    padding-left: pxToRem(10)
                 .media 
                     margin-bottom: $spacing-2
                     order: -1
                     img
                         aspect-ratio: unset
+        @include media-breakpoint-down(desktop)
+            article + article
+                margin-top: $spacing-4
         @include in-page-without-sidebar
             .top
                 .description
@@ -255,7 +264,7 @@
             + .page
                 margin-top: $spacing-5
             .more
-                @include icon(arrow, after, true)
+                @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon(after)
             &:hover .more:after
                 transform: translateX(#{pxToRem(10)})
