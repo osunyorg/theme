@@ -185,7 +185,7 @@ Carrousel.prototype.runAutoPlay = function runAutoPlay() {
         if (!this.options.drag.active && !(this.state.isHovered && this.options.autoplay.pauseOnHover) && !this.options.autoplay.paused) {
             this.options.autoplay.started = now;
             if (this.options.pagination) {
-                this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.n).querySelector("i").setAttribute("style", "width: 0%");
+                this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.currentSlide()).querySelector("i").setAttribute("style", "width: 0%");
             }
             this.move(1);
         }
@@ -193,7 +193,7 @@ Carrousel.prototype.runAutoPlay = function runAutoPlay() {
         if (!this.options.drag.active && !(this.state.isHovered && this.options.autoplay.pauseOnHover) && !this.options.autoplay.paused) {
             var p = elapsed / this.options.autoplay.interval * 100.0
             if (this.options.pagination) {
-                this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.n).querySelector("i").setAttribute("style", "width: " + p + "%");
+                this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.currentSlide()).querySelector("i").setAttribute("style", "width: " + p + "%");
             }
         }
     }
@@ -259,7 +259,7 @@ Carrousel.prototype.onDrag = function onDrag(e) {
 Carrousel.prototype.move = function (offset) {  // décaler la track de offset = +n ou -n slides
     if (true) {
         // if (this.options.pagination) {
-        //     this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.n).querySelector("i").setAttribute("style", "width: 0%");
+        //     this.carrousel.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.currentSlide()).querySelector("i").setAttribute("style", "width: 0%");
         // }
         // if (this.options.autoplay.started) {
         //     this.options.autoplay.started = Date.now();
@@ -287,7 +287,7 @@ Carrousel.prototype.move = function (offset) {  // décaler la track de offset =
 }
 
 Carrousel.prototype.goTo = function goTo(n) {
-    this.move(n - this.slider.n);
+    this.move(n - this.slider.currentSlide());
 };
 
 Carrousel.prototype.cleanUpSlideClass = function cleanUpSlideClass(currentSlide) {
