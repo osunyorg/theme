@@ -17,16 +17,16 @@ window.osuny.carousel.Slider = function Slider(instance) {
 
 window.osuny.carousel.Slider.prototype = {
     initialize: function () {
-
+        var container = this.instance.container;
         //cleaning clones ( if any)
-        var clones = this.instance.container.querySelectorAll(":scope > .clone");
+        var clones = container.querySelectorAll(":scope > .clone");
         for (var i = 0; i < clones.length; i += 1) {
-            this.instance.container.removeChild(clones[i]);
+            container.removeChild(clones[i]);
         }
 
         // Adding new clones
         var domElement;
-        var childrenAsArray = Array.from(this.instance.container.children);
+        var childrenAsArray = Array.from(container.children);
         for (var i = 0; i < childrenAsArray.length; i++) {
             domElement = childrenAsArray[i];
             domElement.setAttribute("id", "slide__" + i);
@@ -34,25 +34,25 @@ window.osuny.carousel.Slider.prototype = {
             var clone = domElement.cloneNode(true);
             clone.classList.add("clone");
             clone.setAttribute("id", "slide__clone__" + i);
-            this.instance.container.appendChild(clone); // ajout d'une copie a la fin
+            container.appendChild(clone); // ajout d'une copie a la fin
         }
 
-        this.updateElements();
+        this.updateSlidesWidths();
         this.translate(-this.size(), 500);
 
         var slideTranslationFinished = this.slideTranslationFinished.bind(this);
 
-        this.instance.container.addEventListener('transitionend', function (e) {
+        container.addEventListener('transitionend', function (e) {
             if (e.propertyName == "left") {
                 slideTranslationFinished();
             }
         });
     },
     nextSlide: function () {
-        this.showSlide(this.index + 1);
+        this.showSlide(this.index - 1);
     },
     previousSlide: function () {
-        this.showSlide(this.index - 1)
+        this.showSlide(this.index + 1)
     },
     showSlide: function (index) {
         var offset = index - this.index;
@@ -67,9 +67,8 @@ window.osuny.carousel.Slider.prototype = {
         // On active l'animation
         this.translate(delta, this.instance.options.transition_duration);
 
-        // pour l'instant on a pas bougé, on ajoute le decalage au décalage eventuel ( ou 0)
         this.offset += offset;
-
+        
         // On met à jour le slide current 
         this.index = this.indexOfSlideAt(offset);
     },
@@ -118,7 +117,7 @@ window.osuny.carousel.Slider.prototype = {
         var trackLen = this.slides.length;
         return ((this.index + offset) % trackLen + trackLen) % trackLen;
     },
-    updateElements: function () {
+    updateSlidesWidths: function () {
         this.slides = [];
         var elems = this.instance.container.querySelectorAll(":scope > :not(.clone)");
         for (var i = 0; i < elems.length; i += 1) {
