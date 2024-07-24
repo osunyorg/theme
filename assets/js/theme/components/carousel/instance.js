@@ -1,3 +1,4 @@
+'use strict'
 if (!window.osuny) {
     window.osuny = {};
 }
@@ -38,14 +39,14 @@ window.osuny.carousel.Instance = function Instance(domElement, domClasses) {
     this.state.isReady = true;
 }
 window.osuny.carousel.Instance.prototype.init = function(){
-    var options = JSON.parse(this.domElements.root.getAttribute(this.domClasses.carrousel.data_tag));
+    var options = JSON.parse(this.domElements.root.getAttribute(this.domClasses.carousel.data_tag));
     // console.log(options)
     if(options.transition_duration){
         this.options.transitionDuration = options.transition_duration;
     }
 
     // Initialisation du slider
-    this.domElements.container = this.domElements.root.getElementsByClassName(this.domClasses.carrousel.container).item(0);
+    this.domElements.container = this.domElements.root.getElementsByClassName(this.domClasses.carousel.container).item(0);
     this.slider = new window.osuny.carousel.Slider( this.domElements.container);
     this.initListeners();
     
@@ -89,6 +90,40 @@ window.osuny.carousel.Instance.prototype.onTransitioned = function () {
     this.state.offset = 0;
     this.state.isReady = true;
 }
+
+window.osuny.carousel.Instance.prototype.move = function (offset) {  // décaler la track de offset = +n ou -n slides
+    if (true) {
+        // if (this.options.pagination) {
+        //     this.domElements.root.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.currentSlide()).querySelector("i").setAttribute("style", "width: 0%");
+        // }
+        // if (this.options.autoplay.started) {
+        //     this.options.autoplay.started = Date.now();
+        // }
+
+        var delta = 0; // distance à parcourir
+        var sign = Math.sign(offset); // direction positive ou negative 
+
+        //calcul du delta à translater à partir de la somme des tailles 
+        // on parcours le nombre de slide à déplacer
+        for (var i = 0; i < Math.abs(offset); i += 1) {
+            // on ajoute ( ou soustrait en fonction du signe), la taille de chacun des slide
+            delta -= sign * this.slider.elementAt(offset - (sign > 0) - sign * i).size;
+        }
+
+        // On active l'animation
+        this.slider.translate(delta, this.options.transitionDuration);
+
+        // pour l'instant on a pas bougé, on ajoute le decalage au décalage eventuel ( ou 0)
+        this.state.offset += offset;
+
+        // On met à jour le slide current 
+        this.slider.updateCurrent(offset);
+    }
+}
+
+window.osuny.carousel.Instance.prototype.goTo = function (n) {
+    this.move(n - this.slider.currentSlide());
+};
 
 window.osuny.carousel.Instance.prototype.initAutoPlay = function (params) { // TODO changer pour requestaimation frame et gerer animmation
     this.options.autoplay = {
@@ -191,40 +226,6 @@ window.osuny.carousel.Instance.prototype.onDrag = function (e) {
         }
     }
 }
-
-window.osuny.carousel.Instance.prototype.move = function (offset) {  // décaler la track de offset = +n ou -n slides
-    if (true) {
-        // if (this.options.pagination) {
-        //     this.domElements.root.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.currentSlide()).querySelector("i").setAttribute("style", "width: 0%");
-        // }
-        // if (this.options.autoplay.started) {
-        //     this.options.autoplay.started = Date.now();
-        // }
-
-        var delta = 0; // distance à parcourir
-        var sign = Math.sign(offset); // direction positive ou negative 
-
-        //calcul du delta à translater à partir de la somme des tailles 
-        // on parcours le nombre de slide à déplacer
-        for (var i = 0; i < Math.abs(offset); i += 1) {
-            // on ajoute ( ou soustrait en fonction du signe), la taille de chacun des slide
-            delta -= sign * this.slider.elementAt(offset - (sign > 0) - sign * i).size;
-        }
-
-        // On active l'animation
-        this.slider.translate(delta, this.options.transitionDuration);
-
-        // pour l'instant on a pas bougé, on ajoute le decalage au décalage eventuel ( ou 0)
-        this.state.offset += offset;
-
-        // On met à jour le slide current 
-        this.slider.updateCurrent(offset);
-    }
-}
-
-window.osuny.carousel.Instance.prototype.goTo = function (n) {
-    this.move(n - this.slider.currentSlide());
-};
 
 window.osuny.carousel.Instance.prototype.cleanUpSlideClass = function (currentSlide) {
     this.slider.domElement.children.item(currentSlide).classList.remove("is-active");

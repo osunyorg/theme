@@ -8,7 +8,7 @@ if (!window.osuny.carousel) {
 
 window.osuny.carousel.manager = {
     domClasses: {
-        carrousel: {
+        carousel: {
             root: "carrousel",
             data_tag: "data-carrousel",
             slider: "carrousel__slider", 
@@ -25,9 +25,9 @@ window.osuny.carousel.manager = {
     },
     instances: [],
     createInstances: function () {
-        var carousels = document.getElementsByClassName(this.domClasses.carrousel.root);
+        var carousels = document.getElementsByClassName(this.domClasses.carousel.root);
         for (var i = 0; i < carousels.length; i += 1) {
-            carousels[i].setAttribute("id", "carrouselX".replace("X", i));
+            carousels[i].setAttribute("id", "carouselX".replace("X", i));
             var instance = new window.osuny.carousel.Instance(carousels[i], this.domClasses);       
             this.instances.push(instance);
         }

@@ -15,7 +15,7 @@ window.osuny.carousel.Slider = function Slider(container) {
     this.init();
 }
 
-window.osuny.carousel.Slider.prototype.init = function(){
+window.osuny.carousel.Slider.prototype.init = function () {
     this.current = 0;
     this.position = 0;
     this.elements = [];
@@ -84,7 +84,7 @@ window.osuny.carousel.Slider.prototype.putLastAtbegining = function () {
 };
 
 // ACCESSORS
-window.osuny.carousel.Slider.prototype.currentSlide = function() {
+window.osuny.carousel.Slider.prototype.currentSlide = function () {
     return this.current;
 }
 
@@ -115,6 +115,7 @@ window.osuny.carousel.Slider.prototype.computeElementWidth = function (dom) {
     var width = dom.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
     return width
 };
+
 window.osuny.carousel.Slider.prototype.computeElementsWidth = function (domElems) {
     var width = 0;
     for (var i = 0; i < domElems.length; i += 1) {
@@ -124,7 +125,6 @@ window.osuny.carousel.Slider.prototype.computeElementsWidth = function (domElems
 };
 
 window.osuny.carousel.Slider.prototype.updateCurrent = function (offset) {
-    // Applique un décalage 
     this.current = this.numElementAt(offset);
 };
 
@@ -135,5 +135,20 @@ window.osuny.carousel.Slider.prototype.numElementAt = function (offset) {
 };
 
 window.osuny.carousel.Slider.prototype.updateDom = function () {
+    /// WIP 
+    var currentPosition = 0;
+    var slideNumber = parseInt(this.domElement.children.item(0).getAttribute("id").slice(-1));
 
+    var offset = 
+    for (var i = 0; i < this.domElement.children.length; i += 1) {
+        var slideNumber = parseInt(this.domElement.children.item(i).getAttribute("id").slice(-1));
+        if(slideNumber != this.current){
+            currentPosition += 1;
+        }else{
+            break;
+        }
+    }
+    var thereticalPostion = this.elements.length + 1;
+    console.log(thereticalPostion, currentPosition)
+    var offset = currentPosition - thereticalPostion;
 };
