@@ -1,5 +1,5 @@
-import './carousel/slider';
-import './carousel/pagination';
+import './carousel/autoplayer';
 import './carousel/instance';
 import './carousel/manager';
-import './carousel/autoplayer';
+import './carousel/pagination';
+import './carousel/slider';
