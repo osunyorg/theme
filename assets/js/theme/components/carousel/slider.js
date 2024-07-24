@@ -17,32 +17,9 @@ window.osuny.carousel.Slider = function Slider(instance) {
 
 window.osuny.carousel.Slider.prototype = {
     initialize: function () {
-        var container = this.instance.container;
-        //cleaning clones ( if any)
-        var clones = container.querySelectorAll(":scope > .clone");
-        for (var i = 0; i < clones.length; i += 1) {
-            container.removeChild(clones[i]);
-        }
-
-        // Adding new clones
-        var domElement;
-        var childrenAsArray = Array.from(container.children);
-        for (var i = 0; i < childrenAsArray.length; i++) {
-            domElement = childrenAsArray[i];
-            domElement.setAttribute("id", "slide__" + i);
-
-            var clone = domElement.cloneNode(true);
-            clone.classList.add("clone");
-            clone.setAttribute("id", "slide__clone__" + i);
-            container.appendChild(clone); // ajout d'une copie a la fin
-        }
-
-        this.updateSlidesWidths();
-        this.translate(-this.size(), 500);
-
+        this.reset();
         var slideTranslationFinished = this.slideTranslationFinished.bind(this);
-
-        container.addEventListener('transitionend', function (e) {
+        this.instance.container.addEventListener('transitionend', function (e) {
             if (e.propertyName == "left") {
                 slideTranslationFinished();
             }
@@ -68,9 +45,41 @@ window.osuny.carousel.Slider.prototype = {
         this.translate(delta, this.instance.options.transition_duration);
 
         this.offset += offset;
-        
+
         // On met à jour le slide current 
         this.index = this.indexOfSlideAt(offset);
+    },
+    reset: function(){
+        this.index = 0;
+        this.offset = 0;
+        this.slides = [];
+        this.deltaPosition = 0;
+        this.position = 0;
+        this.loadSlidesFromDom();
+    },
+    loadSlidesFromDom: function () {
+        var container = this.instance.container;
+        //cleaning clones ( if any)
+        var clones = container.querySelectorAll(":scope > .clone");
+        for (var i = 0; i < clones.length; i += 1) {
+            container.removeChild(clones[i]);
+        }
+
+        // Adding new clones
+        var domElement;
+        var childrenAsArray = Array.from(container.children);
+        for (var i = 0; i < childrenAsArray.length; i++) {
+            domElement = childrenAsArray[i];
+            domElement.setAttribute("id", "slide__" + i);
+
+            var clone = domElement.cloneNode(true);
+            clone.classList.add("clone");
+            clone.setAttribute("id", "slide__clone__" + i);
+            container.appendChild(clone); // ajout d'une copie a la fin
+        }
+
+        this.updateSlidesWidths();
+        this.translate(-this.size(), 500);
     },
     translate: function (delta, transition = 0) {
         this.deltaPosition = delta - this.deltaPosition;
