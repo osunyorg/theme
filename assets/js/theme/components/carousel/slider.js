@@ -49,10 +49,10 @@ window.osuny.carousel.Slider.prototype = {
         });
     },
     nextSlide: function () {
-        this.showSlide(this.index - 1);
+        this.showSlide(this.index + 1);
     },
     previousSlide: function () {
-        this.showSlide(this.index + 1)
+        this.showSlide(this.index - 1)
     },
     showSlide: function (index) {
         var offset = index - this.index;

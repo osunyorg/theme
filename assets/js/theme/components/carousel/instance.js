@@ -66,10 +66,10 @@ window.osuny.carousel.Instance.prototype =  {
             ///// TEST TO REMOVE /////
         document.addEventListener("keydown", function (e) {
             if (e.key == 'ArrowLeft') {
-                this.slider.nextSlide();
+                this.slider.previousSlide();
             }
             else if (e.key == 'ArrowRight') {
-                this.slider.previousSlide();
+                this.slider.nextSlide();
             }
         }.bind(this));
         /////////////////////////
