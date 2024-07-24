@@ -33,16 +33,14 @@ window.osuny.carousel.manager = {
         // TODO Define instance with focus
     },
     resizeInstances: function () {
-        for (var i = 0; i < this.instances.length; i += 1) {
-            var instance = this.instances[i];
+        this.instances.forEach(function (instance) {
             instance.adaptToWindowResize();
-        }
+        });
     },
     removeAllFocus: function () {
-        for (var i = 0; i < this.instances.length; i += 1) {
-            var instance = this.instances[i];
+        this.instances.forEach(function (instance) {
             instance.blur();
-        }
+        });
     },
     setFocus: function (instance) {
         instance.focus();
@@ -58,4 +56,3 @@ window.osuny.carousel.manager = {
 window.addEventListener("load", function () {
     window.osuny.carousel.manager.initialize();
 });
-
