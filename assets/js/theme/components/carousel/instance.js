@@ -14,6 +14,7 @@ window.osuny.carousel.Instance = function (root) {
     this.pagination = null;
     this.slider = null;
     this.autoplayer = null;
+    this.windowResizeTimeout;
     // Chargée depuis le data-attribute "data-carousel"
     this.options = {};
     this.state = {
@@ -63,6 +64,16 @@ window.osuny.carousel.Instance.prototype =  {
     initializeListeners: function () {
         this.container.addEventListener("mouseenter", this.onMouseEnter.bind(this));
         this.container.addEventListener("mouseleave", this.onMouseLeave.bind(this));
+            ///// TEST TO REMOVE /////
+        document.addEventListener("keydown", function (e) {
+            if (e.key == 'ArrowLeft') {
+                this.slider.previousSlide();
+            }
+            else if (e.key == 'ArrowRight') {
+                this.slider.nextSlide();
+            }
+        }.bind(this));
+        /////////////////////////
     },
     onMouseEnter: function () {
         this.state.hover = true;
@@ -76,7 +87,10 @@ window.osuny.carousel.Instance.prototype =  {
         this.autoplayer = new window.osuny.carousel.Autoplayer(this);
     },
     adaptToWindowResize: function () {
-        console.log('adaptToWindowResize not implemented');
+        clearTimeout(this.windowResizeTimeout);
+        this.windowResizeTimeout = setTimeout(function () {
+            this.slider.reset();
+        }.bind(this), 200);
     },
     next: function () {
         this.slider.nextSlide();
@@ -101,6 +115,7 @@ window.osuny.carousel.Instance.prototype =  {
 //     this.slider = new window.osuny.carousel.Slider( this.domElements.container);
 //     this.initListeners();
     
+
 //     // Initialisation de la pagination
 //     if (options.pagination) {
 //         this.pagination = new window.osuny.carousel.Pagination(this.domClasses, this.slider.elements.length, this.i18n, true);
@@ -109,11 +124,7 @@ window.osuny.carousel.Instance.prototype =  {
 
 //     // this.initDrag();
 
-//     // if (options.autoplay) {
-//     //     this.initAutoPlay(options);
-//     // }
 
-// }
 
 // window.osuny.carousel.Instance.prototype.initListeners = function () {
 //     var onTransitioned = this.onTransitioned.bind(this);
@@ -122,21 +133,6 @@ window.osuny.carousel.Instance.prototype =  {
 //             onTransitioned();
 //         }
 //     });
-
-//     ///// TEST TO REMOVE /////
-//     document.addEventListener("keydown", function (e) {
-//         if (e.key == 'ArrowLeft') {
-//             for (var i = 0; i < this.instances.length; i += 1) {
-//                 this.instances[i].move(-1);
-//             }
-//         }
-//         else if (e.key == 'ArrowRight') {
-//             for (var i = 0; i < this.instances.length; i += 1) {
-//                 this.instances[i].move(1);
-//             }
-//         }
-//     }.bind(this));
-//     /////////////////////////
 
 //     for (var i = 0; i < this.instances.length; i += 1) {
 //         var instance = this.instances[i];
@@ -159,102 +155,6 @@ window.osuny.carousel.Instance.prototype =  {
 //     // this.addActiveSlideClass(0);
 // }
 
-// window.osuny.carousel.Instance.prototype.onTransitioned = function () {
-//     this.state.isReady = false;
-//     this.slider.updateDom();
-//     if (this.state.offset > 0) { // on avance vers la droite
-//         for (var i = 0; i < this.state.offset; i++) {
-//             // on enlève l'element tout à gauche pour le rajouter à droite
-//             this.slider.putFirstAtEnd();
-//         }
-//     } else if (this.state.offset < 0) { // onn va 
-//         for (var i = 0; i < Math.abs(this.state.offset); i++) {
-//             this.slider.putLastAtbegining();
-//         }
-//     }
-//     this.state.offset = 0;
-//     this.state.isReady = true;
-// }
-
-// window.osuny.carousel.Instance.prototype.move = function (offset) {  // décaler la track de offset = +n ou -n slides
-//     if (true) {
-//         // if (this.options.pagination) {
-//         //     this.domElements.root.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.currentSlide()).querySelector("i").setAttribute("style", "width: 0%");
-//         // }
-//         // if (this.options.autoplay.started) {
-//         //     this.options.autoplay.started = Date.now();
-//         // }
-
-//         var delta = 0; // distance à parcourir
-//         var sign = Math.sign(offset); // direction positive ou negative 
-
-//         //calcul du delta à translater à partir de la somme des tailles 
-//         // on parcours le nombre de slide à déplacer
-//         for (var i = 0; i < Math.abs(offset); i += 1) {
-//             // on ajoute ( ou soustrait en fonction du signe), la taille de chacun des slide
-//             delta -= sign * this.slider.elementAt(offset - (sign > 0) - sign * i).size;
-//         }
-
-//         // On active l'animation
-//         this.slider.translate(delta, this.options.transition_duration);
-
-//         // pour l'instant on a pas bougé, on ajoute le decalage au décalage eventuel ( ou 0)
-//         this.state.offset += offset;
-
-//         // On met à jour le slide current 
-//         this.slider.updateCurrent(offset);
-//     }
-// }
-
-// window.osuny.carousel.Instance.prototype.goTo = function (n) {
-//     this.move(n - this.slider.currentSlide());
-// };
-
-// window.osuny.carousel.Instance.prototype.initAutoPlay = function (params) { // TODO changer pour requestaimation frame et gerer animmation
-//     this.options.autoplay = {
-//         interval: 2000,
-//         pauseOnHover: false,
-//         paused: false
-//     };
-
-//     if (params.interval) {
-//         params.interval = parseInt(params.interval);
-//         // on vérifie que l'interval est superieur à la durée de la transition
-//         if (parseInt(params.interval) > this.options.transition_duration) {
-//             this.options.autoplay.interval = parseInt(params.interval);
-//         }
-//     }
-
-//     if (params.pauseOnHover) {
-//         this.options.autoplay.pauseOnHover = params.pauseOnHover;
-//     }
-
-//     this.options.autoplay.started = Date.now();
-//     window.requestAnimationFrame(this.runAutoPlay.bind(this));
-// }
-
-// window.osuny.carousel.Instance.prototype.runAutoPlay = function () {
-//     var now = Date.now();
-//     var elapsed = now - this.options.autoplay.started;
-
-//     if (elapsed > this.options.autoplay.interval) {
-//         if (!this.options.drag.active && !(this.state.isHovered && this.options.autoplay.pauseOnHover) && !this.options.autoplay.paused) {
-//             this.options.autoplay.started = now;
-//             if (this.options.pagination) {
-//                 this.domElements.root.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.currentSlide()).querySelector("i").setAttribute("style", "width: 0%");
-//             }
-//             this.move(1);
-//         }
-//     } else {
-//         if (!this.options.drag.active && !(this.state.isHovered && this.options.autoplay.pauseOnHover) && !this.options.autoplay.paused) {
-//             var p = elapsed / this.options.autoplay.interval * 100.0
-//             if (this.options.pagination) {
-//                 this.domElements.root.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.currentSlide()).querySelector("i").setAttribute("style", "width: " + p + "%");
-//             }
-//         }
-//     }
-//     requestAnimationFrame(this.runAutoPlay.bind(this))
-// }
 
 // window.osuny.carousel.Instance.prototype.initDrag = function () { // TODO gerer ce probleme de lightbox qui s'ouvre pendant le drag 
 //     this.options.drag = {
@@ -322,22 +222,6 @@ window.osuny.carousel.Instance.prototype =  {
 //     this.slider.domElement.children.item(currentSlide + 1).classList.add("is-next");
 // }
 
-// // Actions Callbacks
-// window.osuny.carousel.Instance.prototype.onResize = function () {
-//     // Recalcule la dimension totale du contenu du slider et met à jour sa position x
-//     clearTimeout(this.resizeTimeout);
-//     this.resizeTimeout = setTimeout(function () {
-//         this.slider.init();
-//     }.bind(this), 300);
-// }
-
-// window.osuny.carousel.Instance.prototype.onMouseEnter = function () {
-//     this.state.isHovered = true;
-// }
-
-// window.osuny.carousel.Instance.prototype.onMouseLeave = function () {
-//     this.state.isHovered = false;
-// }
 
 // window.osuny.carousel.Instance.prototype.onTogglePlay = function (target) {
 //     this.pagination.toggleButton.toggle(target);
