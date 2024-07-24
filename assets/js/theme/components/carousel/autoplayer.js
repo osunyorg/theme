@@ -5,13 +5,20 @@ if (!window.osuny.carousel) {
     window.osuny.carousel = {};
 }
 window.osuny.carousel.Autoplayer = function (instance) {
+    // Instance du carousel qui utilise l'autoplayer
     this.instance = instance;
+    // Etat de l'autoplay
     this.running = false;
+    // Etat de pause (quand on rollover par exemple)
     this.paused = false;
-    this.interval = 2000;
+    // Intervalle en millisecondes entre 2 déclenhements
+    this.interval = 3000;
+    // Progression de 0 à 1, vers le prochain déclenchement
     this.progression = 0;
+    // Date de la dernière boucle
     this.lastLoopAt = null;
-    this.elapsed = 0;
+    // Temps écoulé depuis le dernier déclenchement
+    this.elapsedSinceLastTrigger = 0;
     this.initialize();
     return {
         start: this.start.bind(this),
@@ -23,11 +30,14 @@ window.osuny.carousel.Autoplayer = function (instance) {
 }
 window.osuny.carousel.Autoplayer.prototype = {
     initialize: function () {
-        if (this.instance.options.interval) {
-            this.interval = this.instance.options.interval;
-        }
+        this.getOptions();
         if (this.instance.options.autoplay) {
             this.start();
+        }
+    },
+    getOptions: function () {
+        if (this.instance.options.interval) {
+            this.interval = this.instance.options.interval;
         }
     },
     start: function () {
@@ -41,10 +51,10 @@ window.osuny.carousel.Autoplayer.prototype = {
     loop: function () {
         var now = Date.now();
         if (!this.paused) {
-            this.elapsed += now - this.lastLoopAt;
-            this.progression = this.elapsed / this.interval;
+            this.elapsedSinceLastTrigger += now - this.lastLoopAt;
+            this.progression = this.elapsedSinceLastTrigger / this.interval;
         }
-        if (this.elapsed > this.interval) {
+        if (this.elapsedSinceLastTrigger > this.interval) {
             this.trigger();
         }
         // Mémoire du last loop pour la sortie de pause
@@ -61,7 +71,7 @@ window.osuny.carousel.Autoplayer.prototype = {
     },
     resetLoopValues: function () {
         this.progress = 0;
-        this.elapsed = 0;
+        this.elapsedSinceLastTrigger = 0;
         this.lastLoopAt = Date.now();
     },
     trigger: function () {
