@@ -78,7 +78,7 @@ window.osuny.carousel.Slider.prototype = {
             container.appendChild(clone); // ajout d'une copie a la fin
         }
 
-        this.updateSlidesWidths();
+        this.updateSlidesFromDom();
         this.translate(-this.size(), 500);
     },
     translate: function (delta, transition = 0) {
@@ -126,7 +126,7 @@ window.osuny.carousel.Slider.prototype = {
         var trackLen = this.slides.length;
         return ((this.index + offset) % trackLen + trackLen) % trackLen;
     },
-    updateSlidesWidths: function () {
+    updateSlidesFromDom: function () {
         this.slides = [];
         var elems = this.instance.container.querySelectorAll(":scope > :not(.clone)");
         for (var i = 0; i < elems.length; i += 1) {
