@@ -119,11 +119,13 @@ window.osuny.carousel.Slider.prototype = {
         var index = this.indexOfSlideAt(offset);
         return this.slides[index];
     },
-
+    length: function(){
+        return this.slides.length;
+    },
     indexOfSlideAt: function (offset) {
         // returns the index of the slide located at the distance "offset" from current slide
-        var trackLen = this.slides.length;
-        return ((this.index + offset) % trackLen + trackLen) % trackLen;
+        var sliderLen = this.slides.length;
+        return ((this.index + offset) % sliderLen + sliderLen) % sliderLen;
     },
     updateSlidesFromDom: function () {
         this.slides = [];

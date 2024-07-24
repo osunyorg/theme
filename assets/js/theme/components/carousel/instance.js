@@ -26,21 +26,6 @@ window.osuny.carousel.Instance = function (root) {
     this.initialize();
 }
 window.osuny.carousel.Instance.prototype =  {
-    // 3 possibilités pour récupérer les textes localisés
-    // - en data-attributes du carousel, mais ça fait de la redondance si plusieurs carousels dans la même page
-    // - en script inline, mais pb de sécurité et pas très élégant
-    // - en js externe, mais une requête de plus pour pas grand chose
-    // Solution adoptée : data-attributes
-    i18n: { // TODO trouver comment récuperer depuis yml
-        first: 'Aller au premier slide',
-        last: 'Aller au dernier slide',
-        next: 'Slide suivant',
-        pageX: 'Aller à la page %s',
-        pause: 'Mettre en pause le carousel',
-        play: 'Démarrer le carousel',
-        prev: 'Slide précedent',
-        slideX: 'Aller au slide %s',
-    },
     classes: {
         carousel: "carousel__container",
     },
