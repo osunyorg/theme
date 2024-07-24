@@ -49,7 +49,7 @@ window.osuny.carousel.Slider.prototype = {
         // On met à jour le slide current 
         this.index = this.indexOfSlideAt(offset);
     },
-    reset: function(){
+    reset: function () {
         this.index = 0;
         this.offset = 0;
         this.slides = [];
@@ -89,12 +89,11 @@ window.osuny.carousel.Slider.prototype = {
         this.instance.container.style.setProperty('left', this.position + "px");
     },
     slideTranslationFinished: function () {
-        if (this.offset > 0) {
-            for (var i = 0; i < this.offset; i++) {
+        for (var i = 0; i < Math.abs(this.offset); i++) {
+            if (this.offset > 0) {
                 this.putFirstASlideAtEnd();
             }
-        } else if (this.offset < 0) {
-            for (var i = 0; i < Math.abs(this.offset); i++) {
+            else if (this.offset < 0) {
                 this.putLastSlideAtbegining();
             }
         }
