@@ -4,13 +4,7 @@ if (!window.osuny) {
 if (!window.osuny.carousel) {
     window.osuny.carousel = {};
 }
-window.osuny.carousel.Autoplayer = function Autoplayer(instance) {
-    // TODO pour faire vraiment robuste, il faudrait exposer uniquement
-    // start()
-    // stop()
-    // pause()
-    // unpause()
-    // progression
+window.osuny.carousel.Autoplayer = function (instance) {
     this.instance = instance;
     this.running = false;
     this.paused = false;
@@ -19,6 +13,13 @@ window.osuny.carousel.Autoplayer = function Autoplayer(instance) {
     this.lastLoopAt = null;
     this.elapsed = 0;
     this.initialize();
+    return {
+        start: this.start.bind(this),
+        stop: this.stop.bind(this),
+        pause: this.pause.bind(this),
+        unpause: this.unpause.bind(this),
+        getProgression: this.getProgression.bind(this),
+    }
 }
 window.osuny.carousel.Autoplayer.prototype = {
     initialize: function () {
@@ -41,7 +42,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         var now = Date.now();
         if (!this.paused) {
             this.elapsed += now - this.lastLoopAt;
-            this.progress = this.elapsed / this.interval;
+            this.progression = this.elapsed / this.interval;
         }
         if (this.elapsed > this.interval) {
             this.trigger();
@@ -54,11 +55,9 @@ window.osuny.carousel.Autoplayer.prototype = {
     },
     pause: function () {
         this.paused = true;
-        console.log("paused")
     },
     unpause: function () {
         this.paused = false;
-        console.log("unpaused")
     },
     resetLoopValues: function () {
         this.progress = 0;
@@ -68,5 +67,8 @@ window.osuny.carousel.Autoplayer.prototype = {
     trigger: function () {
         this.resetLoopValues();
         this.instance.next();
+    },
+    getProgression: function () {
+        return this.progression;
     }
 }
