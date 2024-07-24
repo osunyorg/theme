@@ -4,17 +4,14 @@ if (!window.osuny) {
 if (!window.osuny.carousel) {
     window.osuny.carousel = {};
 }
-// L'instance de carousel est composée de :
-// - un slider qui contient les images
-// - une pagination, avec des flèches
-// Il est charge des événements et de l'autoplay, comme un chef d'orchestre
 window.osuny.carousel.Instance = function (root) {
     this.root = root;
     this.container = null;
+    this.windowResizeTimeout;
+    // Les instances des composants
     this.pagination = null;
     this.slider = null;
     this.autoplayer = null;
-    this.windowResizeTimeout;
     // Les options sont chargées depuis le data-attribute "data-carousel"
     this.options = {};
     this.state = {
