@@ -1,19 +1,18 @@
 if (!window.osuny) {
     window.osuny = {};
 }
-
 if (!window.osuny.carousel) {
     window.osuny.carousel = {};
 }
 
 window.osuny.carousel.Pagination = function (instance) {
     this.instance = instance;
+    this.slider = this.instance.slider;
     this.container = null;
     this.tabButtons = [];
     this.toggleButton = null;
-    this.carouselLength = this.instance.slider.length();
+    this.carouselLength = this.slider.length();
     this.initialize();
-
 }
 
 window.osuny.carousel.Pagination.prototype = {
