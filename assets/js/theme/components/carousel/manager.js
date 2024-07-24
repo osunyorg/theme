@@ -48,7 +48,8 @@ window.osuny.carousel.manager = {
     invoke: function () {
         "use strict";
         return {
-            initialize: this.initialize.bind(this)
+            initialize: this.initialize.bind(this),
+            instances: this.instances,
         };
     }
 }.invoke();
