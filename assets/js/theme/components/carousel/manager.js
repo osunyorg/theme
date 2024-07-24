@@ -9,18 +9,18 @@ if (!window.osuny.carousel) {
 window.osuny.carousel.manager = {
     domClasses: {
         carousel: {
-            root: "carrousel",
-            data_tag: "data-carrousel",
-            slider: "carrousel__slider", 
-            container: "carrousel__container", 
+            root: "carousel",
+            data_tag: "data-carousel",
+            slider: "carousel__slider", 
+            container: "carousel__container", 
         },
         pagination: {
-            controller: "carrousel__controller",
-            pagination: "carrousel__pagination",
-            paginationButton: "carrousel__pagination__page",
-            toggleButton: "carrousel__toggle",
-            toggleButtonPause: "carrousel__toggle__pause",
-            toggleButtonPlay: "carrousel__toggle__play"
+            controller: "carousel__controller",
+            pagination: "carousel__pagination",
+            paginationButton: "carousel__pagination__page",
+            toggleButton: "carousel__toggle",
+            toggleButtonPause: "carousel__toggle__pause",
+            toggleButtonPlay: "carousel__toggle__play"
         }
     },
     instances: [],

@@ -19,14 +19,14 @@
 
         <div class="testimonials">
           {{- if $is_carousel }}
-          <div class="carrousel" data-carrousel="{{ site.Params.blocks.testimonials.carrousel | encoding.Jsonify }}">
-            <div class="carrousel__slider">
-              <div class="carrousel__container">
+          <div class="carousel" data-carousel="{{ site.Params.blocks.testimonials.carousel | encoding.Jsonify }}">
+            <div class="carousel__slider">
+              <div class="carousel__container">
                 {{ end -}}
                 
                 {{ range .testimonials }}
                 {{ $is_long := gt (len .text) 150 }}
-                <figure  class="{{ if $is_carousel }}carrousel__slide{{ end }} {{ if .photo }}with-picture{{ end }}">
+                <figure  class="{{ if $is_carousel }}carousel__slide{{ end }} {{ if .photo }}with-picture{{ end }}">
                   <blockquote {{- if $is_long }} class="is-long" {{- end }}>
                     <p>{{- partial "PrepareHTML" .text -}}</p>
                   </blockquote>
