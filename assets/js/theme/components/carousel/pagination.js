@@ -68,7 +68,6 @@ window.osuny.carousel.Pagination.prototype = {
         for (var i = 0; i < this.carouselLength; i += 1) {
             this.tabButtons.push(new window.osuny.carousel.PaginationButton(i, this))
             pagination.append(this.tabButtons[i].container);
-            console.log(pagination)
         }
         this.container.append(pagination);
     }
@@ -136,10 +135,36 @@ window.osuny.carousel.ToggleButton.prototype = {
         var span = document.createElement("span");
         span.classList.add(this.state_classes[this.state]);
         this.container.append(span);
+        this.initializeListener();
     },
-    toggle: function (target) {
-        var newState = Math.abs(this.state - 1);
-        target.classList.replace(this.class[this.state], this.class[newState]);
-        this.state = newState;
+    findIconElement: function () {
+        return this.container.querySelectorAll('span').item(0);
+    },
+    toggleUI: function () {
+        var iconElement = this.findIconElement();
+        iconElement.classList.replace(this.state_classes[this.state], this.state_classes[Math.abs(this.state - 1)]);
+    },
+    initializeListener: function () {
+        var callBack = this.toggle.bind(this);
+        this.container.addEventListener("click", function (e) {
+            callBack(e);
+        });
+    },
+    toggle: function (e) {
+        if (this.state == 1) {
+            this.pause();
+        } else {
+            this.unpause();
+        }
+    },
+    unpause: function () {
+        this.toggleUI();
+        this.state = 1;
+        this.instance.autoplayer.unpause();
+    },
+    pause: function () {
+        this.toggleUI();
+        this.state = 0;
+        this.instance.autoplayer.pause();
     }
 }

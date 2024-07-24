@@ -20,8 +20,7 @@ window.osuny.carousel.Instance = function (root) {
     this.state = {
         index: 0,
         initialized: false,
-        focus: false,
-        hover: false,
+        focus: false
     };
     this.initialize();
 }
@@ -34,7 +33,9 @@ window.osuny.carousel.Instance.prototype =  {
         this.loadOptions();
         this.initializeComponents();
         this.initializeListeners();
-        this.initializeAutoplayer();
+        if(this.options.autoplay){
+            this.initializeAutoplayer();
+        }
         this.state.initialized = true;
     },
     findContainer: function () {
@@ -58,12 +59,14 @@ window.osuny.carousel.Instance.prototype =  {
         /////////////////////////
     },
     onMouseEnter: function () {
-        this.state.hover = true;
-        this.autoplayer.pause();
+        if(this.options.autoplay){
+            this.pauseAutoplay();
+        }
     },
     onMouseLeave: function () {
-        this.state.hover = false;
-        this.autoplayer.unpause();
+        if(this.options.autoplay){
+            this.unpauseAutoplay();
+        }
     },
     initializeAutoplayer: function () {
         this.autoplayer = new window.osuny.carousel.Autoplayer(this);
@@ -82,5 +85,19 @@ window.osuny.carousel.Instance.prototype =  {
     },
     blur: function () {
         this.state.focus = false;
+    },
+    pauseAutoplay: function(){
+        if(this.options.pagination){
+            this.pagination.toggleButton.pause();
+        }else{
+            this.autoplayer.pause();
+        }
+    },
+    unpauseAutoplay: function(){
+        if(this.options.pagination){
+            this.pagination.toggleButton.unpause();
+        }else{
+            this.autoplayer.unpause();
+        }
     }
 }
