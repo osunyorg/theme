@@ -236,20 +236,17 @@
                         width: columns(5)
             .list
                 article
-                    @include grid(8, desktop, 0, 0)
-                    .post-title
-                        grid-column: 1 / 7
-                    .post-categories
-                        grid-column: 1 / 7
+                    flex-direction: row
+                    gap: var(--grid-gutter)
+                    .post-content
+                        width: columns(6)
                     .post-meta
-                        grid-row: 1
-                        grid-column: 7 / 9
-                        text-align: right
-                        order: 2
-                        display: block
+                        flex-direction: column
                         margin-top: 0
+                        text-align: right
+                        width: columns(2)
                         .post-author p::before
-                            content: ''
+                            content: none
                     p[itemprop="articleBody"]
                         grid-column: 1 / 7
                         order: 3
