@@ -63,6 +63,16 @@ window.osuny.carousel.Instance.prototype =  {
     initializeListeners: function () {
         this.container.addEventListener("mouseenter", this.onMouseEnter.bind(this));
         this.container.addEventListener("mouseleave", this.onMouseLeave.bind(this));
+            ///// TEST TO REMOVE /////
+        document.addEventListener("keydown", function (e) {
+            if (e.key == 'ArrowLeft') {
+                this.slider.nextSlide();
+            }
+            else if (e.key == 'ArrowRight') {
+                this.slider.previousSlide();
+            }
+        }.bind(this));
+        /////////////////////////
     },
     onMouseEnter: function () {
         this.state.hover = true;
@@ -118,21 +128,6 @@ window.osuny.carousel.Instance.prototype =  {
 //         }
 //     });
 
-//     ///// TEST TO REMOVE /////
-//     document.addEventListener("keydown", function (e) {
-//         if (e.key == 'ArrowLeft') {
-//             for (var i = 0; i < this.instances.length; i += 1) {
-//                 this.instances[i].move(-1);
-//             }
-//         }
-//         else if (e.key == 'ArrowRight') {
-//             for (var i = 0; i < this.instances.length; i += 1) {
-//                 this.instances[i].move(1);
-//             }
-//         }
-//     }.bind(this));
-//     /////////////////////////
-
 //     for (var i = 0; i < this.instances.length; i += 1) {
 //         var instance = this.instances[i];
 //         instance.domElements.container.addEventListener("mouseenter", function (e) { instance.onMouseEnter(); });
@@ -154,56 +149,7 @@ window.osuny.carousel.Instance.prototype =  {
 //     // this.addActiveSlideClass(0);
 // }
 
-// window.osuny.carousel.Instance.prototype.onTransitioned = function () {
-//     this.state.isReady = false;
-//     this.slider.updateDom();
-//     if (this.state.offset > 0) { // on avance vers la droite
-//         for (var i = 0; i < this.state.offset; i++) {
-//             // on enlève l'element tout à gauche pour le rajouter à droite
-//             this.slider.putFirstAtEnd();
-//         }
-//     } else if (this.state.offset < 0) { // onn va 
-//         for (var i = 0; i < Math.abs(this.state.offset); i++) {
-//             this.slider.putLastAtbegining();
-//         }
-//     }
-//     this.state.offset = 0;
-//     this.state.isReady = true;
-// }
 
-// window.osuny.carousel.Instance.prototype.move = function (offset) {  // décaler la track de offset = +n ou -n slides
-//     if (true) {
-//         // if (this.options.pagination) {
-//         //     this.domElements.root.getElementsByClassName(carrouselClasses.classPaginationButton).item(this.slider.currentSlide()).querySelector("i").setAttribute("style", "width: 0%");
-//         // }
-//         // if (this.options.autoplay.started) {
-//         //     this.options.autoplay.started = Date.now();
-//         // }
-
-//         var delta = 0; // distance à parcourir
-//         var sign = Math.sign(offset); // direction positive ou negative 
-
-//         //calcul du delta à translater à partir de la somme des tailles 
-//         // on parcours le nombre de slide à déplacer
-//         for (var i = 0; i < Math.abs(offset); i += 1) {
-//             // on ajoute ( ou soustrait en fonction du signe), la taille de chacun des slide
-//             delta -= sign * this.slider.elementAt(offset - (sign > 0) - sign * i).size;
-//         }
-
-//         // On active l'animation
-//         this.slider.translate(delta, this.options.transition_duration);
-
-//         // pour l'instant on a pas bougé, on ajoute le decalage au décalage eventuel ( ou 0)
-//         this.state.offset += offset;
-
-//         // On met à jour le slide current 
-//         this.slider.updateCurrent(offset);
-//     }
-// }
-
-// window.osuny.carousel.Instance.prototype.goTo = function (n) {
-//     this.move(n - this.slider.currentSlide());
-// };
 
 // window.osuny.carousel.Instance.prototype.initAutoPlay = function (params) { // TODO changer pour requestaimation frame et gerer animmation
 //     this.options.autoplay = {
