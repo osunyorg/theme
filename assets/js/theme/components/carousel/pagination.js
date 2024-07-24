@@ -20,7 +20,7 @@ window.osuny.carousel.Pagination.prototype = {
         controller: "carousel__controller",
         pagination: "carousel__pagination"
     },
-    // 3 possibilités pour récupérer les textes localisés
+    // Possibilités pour récupérer les textes localisés
     // 1. en data-attributes du carousel, mais ça fait de la redondance si plusieurs carousels dans la même page
     // 2. en script inline, mais pb de sécurité et pas très élégant
     // 3. en js externe, mais une requête de plus pour pas grand chose
