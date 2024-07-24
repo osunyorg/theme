@@ -8,19 +8,19 @@ if (!window.osuny.carousel) {
 // - un slider qui contient les images
 // - une pagination, avec des flèches
 // Il est charge des événements et de l'autoplay, comme un chef d'orchestre
-window.osuny.carousel.Instance = function Instance (root) {
+window.osuny.carousel.Instance = function (root) {
     this.root = root;
     this.container = null;
     this.pagination = null;
     this.slider = null;
     this.autoplayer = null;
     // Chargée depuis le data-attribute "data-carousel"
-    this.options = {},
+    this.options = {};
     this.state = {
         initialized: false,
         hover: false,
         index: 0
-    },
+    };
     this.initialize();
 }
 window.osuny.carousel.Instance.prototype =  {
@@ -80,9 +80,14 @@ window.osuny.carousel.Instance.prototype =  {
     },
     next: function () {
         this.slider.nextSlide();
+    },
+    focus: function () {
+
+    },
+    blur: function () {
+
     }
 }
-
 // // TODO 
 // window.osuny.carousel.Instance.prototype.init = function(){
 //     var options = JSON.parse(this.domElements.root.getAttribute(this.domClasses.carousel.data_tag));
