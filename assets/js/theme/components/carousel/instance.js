@@ -15,7 +15,7 @@ window.osuny.carousel.Instance = function (root) {
     this.slider = null;
     this.autoplayer = null;
     this.windowResizeTimeout;
-    // Chargée depuis le data-attribute "data-carousel"
+    // Les options sont chargées depuis le data-attribute "data-carousel"
     this.options = {};
     this.state = {
         initialized: false,
