@@ -135,20 +135,20 @@ window.osuny.carousel.Slider.prototype.numElementAt = function (offset) {
 };
 
 window.osuny.carousel.Slider.prototype.updateDom = function () {
-    /// WIP 
-    var currentPosition = 0;
-    var slideNumber = parseInt(this.domElement.children.item(0).getAttribute("id").slice(-1));
+    /// WIP
+    // var currentPosition = 0;
+    // var slideNumber = parseInt(this.domElement.children.item(0).getAttribute("id").slice(-1));
 
-    var offset = 
-    for (var i = 0; i < this.domElement.children.length; i += 1) {
-        var slideNumber = parseInt(this.domElement.children.item(i).getAttribute("id").slice(-1));
-        if(slideNumber != this.current){
-            currentPosition += 1;
-        }else{
-            break;
-        }
-    }
-    var thereticalPostion = this.elements.length + 1;
-    console.log(thereticalPostion, currentPosition)
-    var offset = currentPosition - thereticalPostion;
+    // var offset = 
+    // for (var i = 0; i < this.domElement.children.length; i += 1) {
+    //     var slideNumber = parseInt(this.domElement.children.item(i).getAttribute("id").slice(-1));
+    //     if(slideNumber != this.current){
+    //         currentPosition += 1;
+    //     }else{
+    //         break;
+    //     }
+    // }
+    // var thereticalPostion = this.elements.length + 1;
+    // console.log(thereticalPostion, currentPosition)
+    // var offset = currentPosition - thereticalPostion;
 };
