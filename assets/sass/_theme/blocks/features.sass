@@ -11,9 +11,12 @@
         figure
             order: -1
             margin-bottom: $spacing-3
-            picture:not(.is-png)
+            picture
                 img
+                    margin: auto
                     display: block
+            picture:not(.is-png, .is-svg)
+                img
                     object-fit: cover
                     width: 100%
                     aspect-ratio: 16/9
@@ -25,7 +28,6 @@
                 display: block
                 padding-top: $spacing-3
                 img
-                    display: block
                     margin: initial
                     max-width: $block-features-icon-max-width
                 @include media-breakpoint-down(desktop)
