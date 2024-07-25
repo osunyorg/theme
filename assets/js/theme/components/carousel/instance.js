@@ -56,10 +56,14 @@ window.osuny.carousel.Instance.prototype =  {
         /////////////////////////
     },
     onMouseEnter: function () {
-        this.autoplayer.pause();
+        if(this.options.autoplay){
+            this.autoplayer.pause();
+        }
     },
     onMouseLeave: function () {
-        this.autoplayer.unpause();
+        if(this.options.autoplay){
+            this.autoplayer.unpause();
+        }
     },
     initializeAutoplayer: function () {
         this.autoplayer = new window.osuny.carousel.Autoplayer(this);
@@ -67,7 +71,7 @@ window.osuny.carousel.Instance.prototype =  {
     adaptToWindowResize: function () {
         clearTimeout(this.windowResizeTimeout);
         this.windowResizeTimeout = setTimeout(function () {
-            this.slider.reset();
+            this.slider.initialize();
         }.bind(this), 200);
     },
     next: function () {
