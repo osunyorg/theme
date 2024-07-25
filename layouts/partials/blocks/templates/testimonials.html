@@ -3,67 +3,71 @@
 {{- $is_carousel := false -}}
 
 {{- with .block.data -}}
-  {{ if .testimonials }}
-    {{ if gt (len .testimonials) 1 }}
-      {{- $is_carousel = true -}}
-    {{ end }}
-  {{ end }}
-  <div class="{{ $block_class }}{{ if $is_carousel }} with-carousel{{ end }}">
-    <div class="container">
-      <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "hidden" true
-        )}}
+{{ if .testimonials }}
+{{ if gt (len .testimonials) 1 }}
+{{- $is_carousel = true -}}
+{{ end }}
+{{ end }}
+<div class="{{ $block_class }}{{ if $is_carousel }} with-carousel{{ end }}">
+  <div class="container">
+    <div class="block-content">
+      {{ partial "blocks/top.html" (dict
+      "title" $block.title
+      "heading_level" $block.ranks.self
+      "hidden" true
+      )}}
 
-        <div class="testimonials">
-          {{- if $is_carousel }}
-          <div class="carousel js-carousel" data-carousel="{{ site.Params.blocks.testimonials.carousel | encoding.Jsonify }}">
-            <div class="carousel__slider">
-              <div class="carousel__container">
-                {{ end -}}
-                
-                {{ range .testimonials }}
-                {{ $is_long := gt (len .text) 150 }}
-                <figure  class="{{ if $is_carousel }}carousel__slide{{ end }} {{ if .photo }}with-picture{{ end }}">
-                  <blockquote {{- if $is_long }} class="is-long" {{- end }}>
-                    <p>{{- partial "PrepareHTML" .text -}}</p>
-                  </blockquote>
-                  {{ if or .photo .author .job -}}
-                  <figcaption>
-                    {{ if .photo -}}
-                    <div class="avatar">
-                      {{- partial "commons/image.html"
-                      (dict
-                      "image"    .photo
-                      "alt"      .author
-                      "sizes"    site.Params.image_sizes.blocks.testimonials
-                      ) -}}
-                    </div>
+      <div class="testimonials">
+        {{- if $is_carousel }}
+        <div class="carousel js-carousel"
+          data-carousel="{{ site.Params.blocks.testimonials.carousel | encoding.Jsonify }}">
+          <div class="carousel__slider">
+            <div class="carousel__container">
+              {{ end -}}
+
+              {{ range .testimonials }}
+              {{ $is_long := gt (len .text) 150 }}
+              <figure class="{{ if $is_carousel }}carousel__slide{{ end }} {{ if .photo }}with-picture{{ end }}">
+                <blockquote {{- if $is_long }} class="is-long" {{- end }}>
+                  <p>{{- partial "PrepareHTML" .text -}}</p>
+                </blockquote>
+                {{ if or .photo .author .job -}}
+                <figcaption>
+                  {{ if .photo -}}
+                  <div class="avatar">
+                    {{- partial "commons/image.html"
+                    (dict
+                    "image" .photo
+                    "alt" .author
+                    "sizes" site.Params.image_sizes.blocks.testimonials
+                    ) -}}
+                  </div>
+                  {{- end }}
+                  {{ if or .author .job -}}
+                  <p>
+                    {{- if .author -}}
+                    <span class="signature">{{ partial "PrepareHTML" .author }}</span>
                     {{- end }}
-                    {{ if or .author .job -}}
-                    <p>
-                      {{- if .author -}}
-                      <span class="signature">{{ partial "PrepareHTML" .author }}</span>
-                      {{- end }}
-                      {{- if .job -}}
-                      <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
-                      {{- end }}
-                    </p>
+                    {{- if .job -}}
+                    <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
                     {{- end }}
-                  </figcaption>
-                  {{ end }}
-                </figure>
+                  </p>
+                  {{- end }}
+                </figcaption>
                 {{ end }}
-                
-                {{- if $is_carousel }}
-              </div>
+              </figure>
+              {{ end }}
+              {{- if $is_carousel }}
             </div>
           </div>
-          {{ end -}}
+          <div class="carousel__pagination">
+            <ul class="carousel__pagination__tabcontainer" role="tablist"></ul>
+            <button class="carousel__toggle"><span></span></button>
+          </div>
         </div>
+        {{ end -}}
       </div>
     </div>
   </div>
+</div>
 {{- end -}}

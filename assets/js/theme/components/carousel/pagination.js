@@ -17,58 +17,28 @@ window.osuny.carousel.Pagination = function (instance) {
 
 window.osuny.carousel.Pagination.prototype = {
     classes: {
-        controller: "carousel__controller",
-        pagination: "carousel__pagination"
+        container: "carousel__pagination",
+        pagination: "carousel__pagination__tabcontainer"
     },
-    // Possibilités pour récupérer les textes localisés
-    // 1. en data-attributes du carousel, mais ça fait de la redondance si plusieurs carousels dans la même page
-    // 2. en script inline, mais pb de sécurité et pas très élégant
-    // 3. en js externe, mais une requête de plus pour pas grand chose
-    // 4 intégrer les éléments directement dans le DOM
-    // Solution adoptée : 4
-    i18n: { // TODO trouver comment récuperer depuis yml
-        first: 'Aller au premier slide',
-        last: 'Aller au dernier slide',
-        next: 'Slide suivant',
-        pageX: 'Aller à la page %s',
-        pause: 'Mettre en pause le carousel',
-        play: 'Démarrer le carousel',
-        prev: 'Slide précedent',
-        slideX: 'Aller au slide %s',
-    },
+
     initialize: function () {
-        if (this.instance.options.pagination || this.instance.options.arrows) {
-            this.container = document.createElement("div");
-            this.container.classList.add(this.classes.controller);
-            if (this.instance.options.pagination) {
-                this.initializeTabPagination();
-            }
+        this.container = this.instance.root.getElementsByClassName(this.classes.container).item(0);
+        if (this.instance.options.pagination) {
+            this.initializeTabPagination();
+        }
 
-            if (this.instance.options.arrows) {
-                console.log("TODO implemente arrows")
-            }
-
-            if (this.instance.options.autoplay) {
-                this.toggleButton = new window.osuny.carousel.ToggleButton(this.instance);
-                this.container.append(this.toggleButton.container);
-            }
-
-            this.instance.root.append(this.container);
+        if (this.instance.options.autoplay) {
+            this.toggleButton = new window.osuny.carousel.ToggleButton(this);
         }
     },
 
     initializeTabPagination() {
-        var pagination;
-        pagination = document.createElement("ul");
-        pagination.classList.add(this.classes.pagination);
-
+        var pagination = this.container.getElementsByClassName(this.classes.pagination).item(0);
         this.tabButtons = [];
-
         for (var i = 0; i < this.carouselLength; i += 1) {
             this.tabButtons.push(new window.osuny.carousel.PaginationButton(i, this))
             pagination.append(this.tabButtons[i].container);
         }
-        this.container.append(pagination);
     },
 
     setSlideProgression: function(progression){
@@ -81,7 +51,7 @@ window.osuny.carousel.PaginationButton = function PaginationButton(index, pagina
     this.progress = 0;
     this.container = null;
     this.progressBar = null;
-    this.instance = paginationInstance;
+    this.pagination = paginationInstance;
     this.initialize();
 }
 
@@ -97,7 +67,6 @@ window.osuny.carousel.PaginationButton.prototype = {
         button.classList.add(this.classes.paginationButton);
         button.setAttribute("role", "tab");
         button.setAttribute("type", "button");
-        button.setAttribute("aria-label", this.instance.i18n.slideX.replace("%s", this.index));
         button.setAttribute("aria-controls", "slideX".replace("X", this.index));
         button.setAttribute("tabindex", this.index);
 
@@ -107,8 +76,6 @@ window.osuny.carousel.PaginationButton.prototype = {
         this.container.append(button);
 
         this.setProgress(1);
-
-        // this container click event
     },
     setProgress: function (progress) {
         this.progress = progress;
@@ -116,14 +83,14 @@ window.osuny.carousel.PaginationButton.prototype = {
     }
 }
 
-window.osuny.carousel.ToggleButton = function (instance) {
+window.osuny.carousel.ToggleButton = function (pagination) {
     this.class = [];
     this.state = 1;
-    this.instance = instance;
+    this.pagination = pagination;
+    this.instance = this.pagination.instance;
     this.container = null;
     this.initialize();
 }
-
 window.osuny.carousel.ToggleButton.prototype = {
     classes: {
         button: "carousel__toggle",
@@ -132,19 +99,12 @@ window.osuny.carousel.ToggleButton.prototype = {
     },
     initialize: function () {
         this.state_classes = [this.classes.play, this.classes.pause];
-        this.container = document.createElement("button");
-        this.container.classList.add(this.classes.button);
-        var span = document.createElement("span");
-        span.classList.add(this.state_classes[this.state]);
-        this.container.append(span);
+        this.container = this.pagination.container.getElementsByClassName(this.classes.button).item(0);
+        this.container.classList.add(this.state_classes[this.state]);
         this.initializeListener();
     },
-    findIconElement: function () {
-        return this.container.querySelectorAll('span').item(0);
-    },
     toggleUI: function () {
-        var iconElement = this.findIconElement();
-        iconElement.classList.replace(this.state_classes[this.state], this.state_classes[Math.abs(this.state - 1)]);
+        this.container.classList.replace(this.state_classes[this.state], this.state_classes[Math.abs(this.state - 1)]);
     },
     initializeListener: function () {
         var callBack = this.toggle.bind(this);
@@ -153,20 +113,12 @@ window.osuny.carousel.ToggleButton.prototype = {
         });
     },
     toggle: function (e) {
+        this.toggleUI();
         if (this.state == 1) {
-            this.pause();
+            this.instance.autoplayer.stop();
         } else {
-            this.unpause();
+            this.instance.autoplayer.start();
         }
-    },
-    unpause: function () {
-        this.toggleUI();
-        this.state = 1;
-        this.instance.autoplayer.start();
-    },
-    pause: function () {
-        this.toggleUI();
-        this.state = 0;
-        this.instance.autoplayer.stop();
+        this.state = Math.abs(this.state-1);
     }
 }
