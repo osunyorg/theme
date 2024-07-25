@@ -53,6 +53,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         if (!this.paused) {
             this.elapsedSinceLastTrigger += now - this.lastLoopAt;
             this.progression = this.elapsedSinceLastTrigger / this.interval;
+            this.updateView();
         }
         if (this.elapsedSinceLastTrigger > this.interval) {
             this.trigger();
@@ -80,5 +81,8 @@ window.osuny.carousel.Autoplayer.prototype = {
     },
     getProgression: function () {
         return this.progression;
+    },
+    updateView: function(){
+        this.instance.pagination.setSlideProgression(this.progression)
     }
 }

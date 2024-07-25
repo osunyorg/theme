@@ -69,6 +69,10 @@ window.osuny.carousel.Pagination.prototype = {
             pagination.append(this.tabButtons[i].container);
         }
         this.container.append(pagination);
+    },
+
+    setSlideProgression: function(progression){
+        this.tabButtons[this.slider.index].setProgress(progression);
     }
 }
 
@@ -102,14 +106,13 @@ window.osuny.carousel.PaginationButton.prototype = {
 
         this.container.append(button);
 
-        this.setProgress(0);
+        this.setProgress(1);
 
         // this container click event
-
     },
     setProgress: function (progress) {
         this.progress = progress;
-        this.progressBar.setAttribute("width", String(this.progress * 100) + "%");
+        this.progressBar.style.setProperty("width", String(this.progress * 100) + "%");
     }
 }
 
