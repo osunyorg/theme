@@ -56,14 +56,10 @@ window.osuny.carousel.Instance.prototype =  {
         /////////////////////////
     },
     onMouseEnter: function () {
-        if(this.options.autoplay){
-            this.pauseAutoplay();
-        }
+        this.autoplayer.pause();
     },
     onMouseLeave: function () {
-        if(this.options.autoplay){
-            this.unpauseAutoplay();
-        }
+        this.autoplayer.unpause();
     },
     initializeAutoplayer: function () {
         this.autoplayer = new window.osuny.carousel.Autoplayer(this);
@@ -82,19 +78,5 @@ window.osuny.carousel.Instance.prototype =  {
     },
     blur: function () {
         this.state.focus = false;
-    },
-    pauseAutoplay: function(){
-        if(this.options.pagination){
-            this.pagination.toggleButton.pause();
-        }else{
-            this.autoplayer.pause();
-        }
-    },
-    unpauseAutoplay: function(){
-        if(this.options.pagination){
-            this.pagination.toggleButton.unpause();
-        }else{
-            this.autoplayer.unpause();
-        }
     }
 }

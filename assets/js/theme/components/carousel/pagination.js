@@ -159,11 +159,11 @@ window.osuny.carousel.ToggleButton.prototype = {
     unpause: function () {
         this.toggleUI();
         this.state = 1;
-        this.instance.autoplayer.unpause();
+        this.instance.autoplayer.start();
     },
     pause: function () {
         this.toggleUI();
         this.state = 0;
-        this.instance.autoplayer.pause();
+        this.instance.autoplayer.stop();
     }
 }
