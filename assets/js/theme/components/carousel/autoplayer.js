@@ -24,7 +24,8 @@ window.osuny.carousel.Autoplayer = function (instance) {
         start: this.start.bind(this),
         stop: this.stop.bind(this),
         pause: this.pause.bind(this),
-        unpause: this.unpause.bind(this)
+        unpause: this.unpause.bind(this),
+        onSlideChanged: this.onSlideChanged.bind(this)
     }
 }
 window.osuny.carousel.Autoplayer.prototype = {
@@ -45,7 +46,6 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.running = false;
     },
     loop: function () {
-        this.updateView();
         var now = Date.now();
         if (!this.paused) {
             this.elapsedSinceLastTrigger += now - this.lastLoopAt;
@@ -58,6 +58,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.lastLoopAt = now;
         if (this.running) {
             window.requestAnimationFrame(this.loop.bind(this));
+            this.updateView();
         }
     },
     pause: function () {
@@ -77,6 +78,10 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.instance.next();
     },
     updateView: function () {
-        this.instance.pagination.setSlideProgression(this.progression)
+        this.instance.pagination.setSlideProgression(this.progression);
+    },
+    onSlideChanged: function () {
+        this.resetLoopValues();
+        this.instance.pagination.resetSlidesProgression();
     }
 }

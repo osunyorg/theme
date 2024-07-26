@@ -22,7 +22,7 @@ window.osuny.carousel.Slider.prototype = {
         this.deltaPosition = 0;
         this.position = 0;
         this.loadSlidesFromDom();
-        this.translate();
+        this.showSlide(this.index);
     },
     nextSlide: function () {
         this.showSlide(this.indexOfSlideAt(1));
@@ -40,11 +40,14 @@ window.osuny.carousel.Slider.prototype = {
             delta -= sign * this.slideAt(offset - (sign > 0) - sign * i).size;
         }
         // On active l'animation
-        this.deltaPosition -= (this.deltaPosition - delta) ;
+        this.deltaPosition -= (this.deltaPosition - delta);
         this.translate(true);
 
         // On met à jour le slide current 
         this.index = this.indexOfSlideAt(offset);
+
+        //On met à jour l'état de l'instance
+        this.instance.onSlideChanged();
     },
     loadSlidesFromDom: function () {
         var slidesContainers = this.container.children;
@@ -60,7 +63,7 @@ window.osuny.carousel.Slider.prototype = {
         this.position += this.deltaPosition;
         var timeTransition = 0;
         this.deltaPosition = 0;
-        if(transition === true){
+        if (transition === true) {
             timeTransition = this.transition_duration;
         }
         this.instance.container.style.setProperty('transition', 'left ' + String(timeTransition) + 'ms');
@@ -70,7 +73,7 @@ window.osuny.carousel.Slider.prototype = {
         var index = this.indexOfSlideAt(offset);
         return this.slides[index];
     },
-    length: function(){
+    length: function () {
         return this.slides.length;
     },
     indexOfSlideAt: function (offset) {
@@ -80,17 +83,17 @@ window.osuny.carousel.Slider.prototype = {
     }
 }
 
-window.osuny.carousel.Slide = function(container){
+window.osuny.carousel.Slide = function (container) {
     this.size;
     this.container = container;
     this.initialize();
 }
 
 window.osuny.carousel.Slide.prototype = {
-    initialize: function(){
+    initialize: function () {
         this.computeSize();
     },
-    computeSize: function(){
+    computeSize: function () {
         var style = getComputedStyle(this.container);
         this.size = this.container.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
     }

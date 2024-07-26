@@ -43,6 +43,11 @@ window.osuny.carousel.Pagination.prototype = {
 
     setSlideProgression: function (progression) {
         this.tabButtons[this.slider.index].setProgress(progression);
+    },
+    resetSlidesProgression: function () {
+        this.tabButtons.forEach(function (tabButton) {
+            tabButton.setProgress(0);
+        });
     }
 }
 
@@ -76,6 +81,16 @@ window.osuny.carousel.PaginationButton.prototype = {
         this.container.append(button);
 
         this.setProgress(0);
+        this.initializeListener();
+    },
+    initializeListener: function () {
+        var callBack = this.onClick.bind(this);
+        this.container.addEventListener("click", function (e) {
+            callBack(e);
+        });
+    },
+    onClick: function (e) {
+        this.pagination.slider.showSlide(this.index);
     },
     setProgress: function (progress) {
         this.progress = progress;

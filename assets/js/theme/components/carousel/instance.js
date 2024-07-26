@@ -121,5 +121,13 @@ window.osuny.carousel.Instance.prototype = {
         if (this.options.pagination) {
             this.pagination.toggleButton.toggleStop();
         }
+    },
+    onSlideChanged: function () {
+        if (this.slider) {
+            this.state.index = this.slider.index;
+        }
+        if (this.autoplayer) {
+            this.autoplayer.onSlideChanged();
+        }
     }
 }
