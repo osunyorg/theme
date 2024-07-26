@@ -11,6 +11,7 @@
 
 {{ with $post }}
   {{ $post_class := "post" }}
+  {{ $reading_time := .Params.contents_reading_time }}
   {{ if and .Params.image $options.image }}
     {{ $direction = partial "GetImageDirection" .Params.image }}
     {{ $post_class = printf "%s %s" $post_class $direction }}
@@ -50,10 +51,10 @@
           {{ if $options.author }}
             {{- partial "posts/author" . -}}
           {{ end }}
-          {{ if $options.reading_time }}
-            <p class="post-reading-time">
-              {{- partial "GetTextFromHTML" .Params.contents_reading_time.text -}}
-            </p>
+          {{ if and $reading_time $options.reading_time }}
+            <span class="post-reading-time">
+              {{ i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" $reading_time.text }}
+            </span>
           {{ end }}
         </div>
       {{ end }}

@@ -11,6 +11,7 @@
 <div class="large {{- if not $image }} without-images{{ end }}">
   {{ range .posts }}
     {{ with site.GetPage (printf "/posts/%s" .) }}
+    {{ $reading_time := .Params.contents_reading_time }}
 
       {{ if and .Params.image $options.image }}
         {{- $direction = partial "GetImageDirection" .Params.image -}}
@@ -37,10 +38,10 @@
                 "kind" "post"
               )}}
             {{ end }}
-            {{ if $options.reading_time }}
-              <p class="post-reading-time">
-                {{- partial "GetTextFromHTML" .Params.contents_reading_time.text -}}
-              </p>
+            {{ if and $reading_time $options.reading_time }}
+              <span class="post-reading-time">
+                {{ i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" .Params.contents_reading_time.text }}
+              </span>
             {{ end }}
           </div>
 
