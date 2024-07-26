@@ -33,20 +33,27 @@
 
 {{- define "organization" -}}
   {{ $options := .options }}
-  <article class="organization" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
+  <article class="organization {{- if $options.summary }} with-summary {{- end }}" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
     {{ $title := "" }}
-    {{ if .title }}
-      {{ $title = partial "PrepareHTML" .title -}}
-      <p class="organization-title">
-        {{- if and .url $options.link }}
-          <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
-        {{ end -}}
-          {{- $title -}}
-        {{- if .url }}
-          </a>
-        {{ end -}}
-        </p>
-    {{ end -}}
+    <div class="organization-content">
+      {{ if .title }}
+        {{ $title = partial "PrepareHTML" .title -}}
+        <p class="organization-title">
+          {{- if and .url $options.link }}
+            <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
+          {{ end -}}
+            {{- $title -}}
+          {{- if .url }}
+            </a>
+          {{ end -}}
+          </p>
+      {{ end -}}
+      {{ if $options.summary }}
+          <p class="organization-summary">
+            {{ partial "PrepareHTML" .summary }}
+          </p>
+      {{ end }}
+    </div>
     {{ if $options.logo }}
       <div class="media">
         {{- if .logo -}}
