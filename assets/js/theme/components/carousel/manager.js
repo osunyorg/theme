@@ -10,10 +10,12 @@ window.osuny.carousel.manager = {
     class: "js-carousel",
     domObjects: [],
     instances: [],
+    focusedInstance: null,
     initialize: function () {
         if (!this.initialized) {
             this.createInstances();
             this.initializeListeners();
+            this.computeInstancesDisplay();
             this.initialized = true;
         }
     },
@@ -32,7 +34,12 @@ window.osuny.carousel.manager = {
         window.addEventListener('scroll', function () {
             this.computeInstancesDisplay();
         }.bind(this));
-        // TODO Define instance with focus
+        document.addEventListener("keydown", function (e) {
+            if (this.focusedInstance) {
+                if (e.key == 'ArrowLeft') { this.focusedInstance.slider.previousSlide() }
+                else if (e.key == 'ArrowRight') { this.focusedInstance.slider.nextSlide() }
+            }
+        }.bind(this));
     },
     resizeInstances: function () {
         this.instances.forEach(function (instance) {
@@ -40,18 +47,40 @@ window.osuny.carousel.manager = {
         });
     },
     computeInstancesDisplay: function () {
-        // this.removeAllFocus();
-        this.instances.forEach(function (instance, i) {
-            instance.setVisibility();
-        });
-    },
-    removeAllFocus: function () {
+        var focusedInstanceCandidates = [];
         this.instances.forEach(function (instance) {
-            instance.blur();
+            instance.setVisibility();
+            if (instance.state.visible) {
+                focusedInstanceCandidates.push(instance);
+            }
         });
+        this.setFocus(focusedInstanceCandidates);
     },
-    setFocus: function (instance) {
-        instance.focus();
+    setFocus: function (focusCandidates) {
+        this.cleanFocusInstance()
+        var windowCenterPositionY = (window.innerHeight || document.documentElement.clientHeight) / 2;
+        var smallerDistance = window.innerHeight;
+        var bestCandidate = null;
+        focusCandidates.forEach(function (instance) {
+            var distanceToCenter = Math.abs(instance.getCenterPositionY() - windowCenterPositionY);
+            if (distanceToCenter < smallerDistance) {
+                smallerDistance = distanceToCenter;
+                bestCandidate = instance;
+            }
+        });
+        if (bestCandidate) {
+            this.addFocusInstance(bestCandidate);
+        }
+    },
+    cleanFocusInstance: function () {
+        if (this.focusedInstance) {
+            this.focusedInstance.unfocus();
+            this.focusedInstance = null;
+        }
+    },
+    addFocusInstance: function (focusCandidate) {
+        this.focusedInstance = focusCandidate;
+        this.focusedInstance.focus();
     },
     invoke: function () {
         "use strict";

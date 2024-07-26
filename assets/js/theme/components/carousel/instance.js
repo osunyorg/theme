@@ -49,12 +49,6 @@ window.osuny.carousel.Instance.prototype = {
     initializeListeners: function () {
         this.container.addEventListener("mouseenter", this.onMouseEnter.bind(this));
         this.container.addEventListener("mouseleave", this.onMouseLeave.bind(this));
-        ///// TEST TO REMOVE /////
-        document.addEventListener("keydown", function (e) {
-            if (e.key == 'ArrowLeft') { this.slider.previousSlide() }
-            else if (e.key == 'ArrowRight') { this.slider.nextSlide() }
-        }.bind(this));
-        /////////////////////////
     },
     onMouseEnter: function () {
         if (this.options.autoplay) {
@@ -81,13 +75,12 @@ window.osuny.carousel.Instance.prototype = {
     focus: function () {
         this.state.focus = true;
     },
-    blur: function () {
+    unfocus: function () {
         this.state.focus = false;
     },
     setVisibility: function () {
         var isVisible = this.isInViewport();
         if (this.state.visible != isVisible) {
-            // Changement d'état
             this.state.visible = isVisible;
             if (this.state.visible) {
                 this.visibilityStart();
@@ -102,6 +95,10 @@ window.osuny.carousel.Instance.prototype = {
             boundingRect.bottom >= 0 &&
             boundingRect.top <= (window.innerHeight || document.documentElement.clientHeight)
         );
+    },
+    getCenterPositionY: function () {
+        var boundingRect = this.root.getBoundingClientRect();
+        return boundingRect.top + boundingRect.height / 2;
     },
     visibilityStart: function () {
         if (this.options.autoplay) {
