@@ -17,11 +17,12 @@ window.osuny.carousel.Instance = function (root) {
     this.state = {
         index: 0,
         initialized: false,
-        focus: false
+        focus: false,
+        visible: false
     };
     this.initialize();
 }
-window.osuny.carousel.Instance.prototype =  {
+window.osuny.carousel.Instance.prototype = {
     classes: {
         carousel: "carousel__container",
     },
@@ -30,7 +31,7 @@ window.osuny.carousel.Instance.prototype =  {
         this.loadOptions();
         this.initializeComponents();
         this.initializeListeners();
-        if(this.options.autoplay){
+        if (this.options.autoplay) {
             this.initializeAutoplayer();
         }
         this.state.initialized = true;
@@ -38,7 +39,7 @@ window.osuny.carousel.Instance.prototype =  {
     findContainer: function () {
         this.container = this.root.getElementsByClassName(this.classes.carousel).item(0);
     },
-    loadOptions: function () {
+    loadOptions: function () {
         this.options = JSON.parse(this.root.dataset.carousel);
     },
     initializeComponents: function () {
@@ -56,12 +57,12 @@ window.osuny.carousel.Instance.prototype =  {
         /////////////////////////
     },
     onMouseEnter: function () {
-        if(this.options.autoplay){
+        if (this.options.autoplay) {
             this.autoplayer.pause();
         }
     },
     onMouseLeave: function () {
-        if(this.options.autoplay){
+        if (this.options.autoplay) {
             this.autoplayer.unpause();
         }
     },
@@ -82,5 +83,46 @@ window.osuny.carousel.Instance.prototype =  {
     },
     blur: function () {
         this.state.focus = false;
+    },
+    setVisibility: function () {
+        var isVisible = this.isInViewport();
+        if (this.state.visible != isVisible) {
+            // Changement d'état
+            this.state.visible = isVisible;
+            if (this.state.visible) {
+                this.visibilityStart();
+            } else {
+                this.visibilityStop();
+            }
+        }
+    },
+    isInViewport: function () {
+        var boundingRect = this.root.getBoundingClientRect();
+        return (
+            boundingRect.bottom >= 0 &&
+            boundingRect.top <= (window.innerHeight || document.documentElement.clientHeight)
+        );
+    },
+    visibilityStart: function () {
+        if (this.options.autoplay) {
+            this.startAutoplayer();
+        }
+    },
+    visibilityStop: function () {
+        if (this.options.autoplay) {
+            this.stopAutoPlayer();
+        }
+    },
+    startAutoplayer: function () {
+        this.autoplayer.start();
+        if (this.options.pagination) {
+            this.pagination.toggleButton.toggleStart();
+        }
+    },
+    stopAutoPlayer: function () {
+        this.autoplayer.stop();
+        if (this.options.pagination) {
+            this.pagination.toggleButton.toggleStop();
+        }
     }
 }

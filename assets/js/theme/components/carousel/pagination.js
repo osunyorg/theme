@@ -41,7 +41,7 @@ window.osuny.carousel.Pagination.prototype = {
         }
     },
 
-    setSlideProgression: function(progression){
+    setSlideProgression: function (progression) {
         this.tabButtons[this.slider.index].setProgress(progression);
     }
 }
@@ -75,7 +75,7 @@ window.osuny.carousel.PaginationButton.prototype = {
 
         this.container.append(button);
 
-        this.setProgress(1);
+        this.setProgress(0);
     },
     setProgress: function (progress) {
         this.progress = progress;
@@ -85,7 +85,7 @@ window.osuny.carousel.PaginationButton.prototype = {
 
 window.osuny.carousel.ToggleButton = function (pagination) {
     this.class = [];
-    this.state = 1;
+    this.state = 0;
     this.pagination = pagination;
     this.instance = this.pagination.instance;
     this.container = null;
@@ -104,21 +104,32 @@ window.osuny.carousel.ToggleButton.prototype = {
         this.initializeListener();
     },
     toggleUI: function () {
-        this.container.classList.replace(this.state_classes[this.state], this.state_classes[Math.abs(this.state - 1)]);
+        var newState = Math.abs(this.state - 1);
+        this.container.classList.replace(this.state_classes[this.state], this.state_classes[newState]);
+        this.state = newState;
+    },
+    toggleStart: function () {
+        if (this.state == 0) {
+            this.toggleUI();
+        }
+    },
+    toggleStop: function () {
+        if (this.state == 1) {
+            this.toggleUI();
+        }
     },
     initializeListener: function () {
-        var callBack = this.toggle.bind(this);
+        var callBack = this.onClick.bind(this);
         this.container.addEventListener("click", function (e) {
             callBack(e);
         });
     },
-    toggle: function (e) {
+    onClick: function (e) {
         this.toggleUI();
-        if (this.state == 1) {
+        if (this.state == 0) {
             this.instance.autoplayer.stop();
         } else {
             this.instance.autoplayer.start();
         }
-        this.state = Math.abs(this.state-1);
     }
 }

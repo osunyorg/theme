@@ -29,12 +29,20 @@ window.osuny.carousel.manager = {
         window.addEventListener('resize', function () {
             this.resizeInstances();
         }.bind(this));
-
+        window.addEventListener('scroll', function () {
+            this.computeInstancesDisplay();
+        }.bind(this));
         // TODO Define instance with focus
     },
     resizeInstances: function () {
         this.instances.forEach(function (instance) {
             instance.adaptToWindowResize();
+        });
+    },
+    computeInstancesDisplay: function () {
+        // this.removeAllFocus();
+        this.instances.forEach(function (instance, i) {
+            instance.setVisibility();
         });
     },
     removeAllFocus: function () {

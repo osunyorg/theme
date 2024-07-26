@@ -31,9 +31,6 @@ window.osuny.carousel.Autoplayer = function (instance) {
 window.osuny.carousel.Autoplayer.prototype = {
     initialize: function () {
         this.getOptions();
-        if (this.instance.options.autoplay) {
-            this.start();
-        }
     },
     getOptions: function () {
         if (this.instance.options.interval) {
@@ -82,7 +79,7 @@ window.osuny.carousel.Autoplayer.prototype = {
     getProgression: function () {
         return this.progression;
     },
-    updateView: function(){
+    updateView: function () {
         this.instance.pagination.setSlideProgression(this.progression)
     }
 }
