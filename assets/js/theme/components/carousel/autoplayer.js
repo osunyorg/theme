@@ -24,8 +24,7 @@ window.osuny.carousel.Autoplayer = function (instance) {
         start: this.start.bind(this),
         stop: this.stop.bind(this),
         pause: this.pause.bind(this),
-        unpause: this.unpause.bind(this),
-        getProgression: this.getProgression.bind(this),
+        unpause: this.unpause.bind(this)
     }
 }
 window.osuny.carousel.Autoplayer.prototype = {
@@ -46,11 +45,11 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.running = false;
     },
     loop: function () {
+        this.updateView();
         var now = Date.now();
         if (!this.paused) {
             this.elapsedSinceLastTrigger += now - this.lastLoopAt;
             this.progression = this.elapsedSinceLastTrigger / this.interval;
-            this.updateView();
         }
         if (this.elapsedSinceLastTrigger > this.interval) {
             this.trigger();
@@ -68,16 +67,14 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.paused = false;
     },
     resetLoopValues: function () {
-        this.progress = 0;
+        this.progression = 0;
+        this.updateView();
         this.elapsedSinceLastTrigger = 0;
         this.lastLoopAt = Date.now();
     },
     trigger: function () {
         this.resetLoopValues();
         this.instance.next();
-    },
-    getProgression: function () {
-        return this.progression;
     },
     updateView: function () {
         this.instance.pagination.setSlideProgression(this.progression)
