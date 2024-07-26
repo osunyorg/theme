@@ -42,13 +42,18 @@
         {{- end -}}
       {{- end -}}
       
-      {{ if or $options.author $options.date }}
+      {{ if or $options.author $options.date $options.reading_time }}
         <div class="post-meta">
           {{ if $options.date }}
             <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
           {{ end }}
           {{ if $options.author }}
             {{- partial "posts/author" . -}}
+          {{ end }}
+          {{ if $options.reading_time }}
+            <p class="post-reading-time">
+              {{- partial "GetTextFromHTML" .Params.contents_reading_time.text -}}
+            </p>
           {{ end }}
         </div>
       {{ end }}

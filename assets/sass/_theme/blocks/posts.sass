@@ -38,14 +38,15 @@
                 @include icon(arrow-right-line, after, true)
 
             // Masquer le point entre l'auteur et la date (mixin author-and-time-side-to-side)
-            .post-author
-                p::before
+            .post-author p,
+            .post-reading-time
+                &::before
                     display: none
 
             // Permet d'aligner correctement les différents line-height des différents composants du post meta
             .post-meta
-                display: block
-                line-height: 0 // Hack pour que les enfants de post-meta soient correctement 
+                align-items: center
+                display: inline-flex
                 > *
                     margin-right: $spacing-3
                 time

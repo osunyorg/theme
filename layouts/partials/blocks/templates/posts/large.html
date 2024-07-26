@@ -37,8 +37,12 @@
                 "kind" "post"
               )}}
             {{ end }}
+            {{ if $options.reading_time }}
+              <p class="post-reading-time">
+                {{- partial "GetTextFromHTML" .Params.contents_reading_time.text -}}
+              </p>
+            {{ end }}
           </div>
-
 
           {{ if $options.summary }}
             {{- if (partial "GetTextFromHTML" .Params.summary) -}}
@@ -50,6 +54,7 @@
           {{- end -}}
           <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
         </div>
+
         {{ if $options.image }}
           <div class="media">
             {{- if .Params.image -}}
