@@ -1,7 +1,7 @@
 {{ $options := site.Params.organizations.index.options }}
 
 <article class="organization">
-  <div>
+  <div class="organization-content">
     {{ $title := partial "PrepareHTML" .Title }}
     <h2 class="organization-title">
       {{ if $options.link }}
@@ -12,6 +12,11 @@
         </a>
       {{ end }}
     </h2>
+    {{ if and $options.summary .Params.summary }}
+      <p class="organization-summary">
+        {{ partial "PrepareHTML" .Params.summary }}
+      </p>
+    {{ end }}
   </div>
   {{ if $options.logo }}
     <div class="media">
