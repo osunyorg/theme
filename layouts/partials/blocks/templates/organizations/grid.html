@@ -1,7 +1,7 @@
 {{ $logo_index := .logo_index }}
 {{ $options := .options }}
 
-<div class="grid organizations">
+<div class="grid organizations {{- if $options.summary }} with-summaries {{- end }}">
   {{- range .organizations }}
     {{ if .slug }}
       {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}

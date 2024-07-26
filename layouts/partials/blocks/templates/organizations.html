@@ -48,10 +48,10 @@
           {{ end -}}
           </p>
       {{ end -}}
-      {{ if $options.summary }}
-          <p class="organization-summary">
-            {{ partial "PrepareHTML" .summary }}
-          </p>
+      {{ if and $options.summary .summary }}
+        <p class="organization-summary">
+          {{ partial "PrepareHTML" .summary }}
+        </p>
       {{ end }}
     </div>
     {{ if $options.logo }}
