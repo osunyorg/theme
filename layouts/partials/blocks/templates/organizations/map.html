@@ -5,18 +5,15 @@
   {{- range .organizations }}
     {{ if .slug }}
       {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
-        {{ $organization_data := dict
+        {{ template "organization" dict
           "title" .Title
           "url" .Permalink
           "logo" (index .Params $logo_index)
           "latitude" .Params.contact_details.geolocation.latitude
           "longitude" .Params.contact_details.geolocation.longitude
+          "summary" .Params.summary
           "options" $options
         }}
-        {{ if .Params.summary }}
-          {{ $organization_data = merge $organization_data (dict "summary" .Params.summary) }}
-        {{ end }}
-        {{ template "organization" $organization_data }}
       {{ end }}
     {{ end }}
   {{ end -}}
