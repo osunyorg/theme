@@ -52,7 +52,7 @@ window.osuny.carousel.Slider.prototype = {
         for (var i = 0; i < slidesContainers.length; i += 1) {
             sliderContainer = slidesContainers.item(i);
             sliderContainer.setAttribute("id", "slide__" + i);
-            this.slides.push(new window.osuny.carousel.Slide(slidesContainers.item(i), i));
+            this.slides.push(new window.osuny.carousel.Slide(this, slidesContainers.item(i), i));
         }
         this.translate(true);
     },
@@ -80,26 +80,15 @@ window.osuny.carousel.Slider.prototype = {
     },
     updateSlidesClasses: function () {
         this.slides.forEach(slide => {
-            slide.cleanStateClasses();
-            if (this.index == slide.index) {
-                slide.setCurrent();
-            }
-            if (this.index - 1 == slide.index) {
-                slide.setPrevious();
-            }
-            if (this.index > slide.index) {
-                slide.setBefore();
-            }
-            if (this.index + 1 == slide.index) {
-                slide.setNext();
-            }
+            slide.setClasses();
         });
     }
 }
 
-window.osuny.carousel.Slide = function (container, i) {
+window.osuny.carousel.Slide = function (slider, container, i) {
     this.size;
     this.container = container;
+    this.slider = slider;
     this.initialize();
     this.index = i;
 }
@@ -111,6 +100,21 @@ window.osuny.carousel.Slide.prototype = {
     computeSize: function () {
         var style = getComputedStyle(this.container);
         this.size = this.container.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+    },
+    setClasses() {
+        this.cleanStateClasses();
+        if (this.slider.index == this.index) {
+            this.setCurrent();
+        }
+        if (this.slider.index - 1 == this.index) {
+            this.setPrevious();
+        }
+        if (this.slider.index > this.index) {
+            this.setBefore();
+        }
+        if (this.slider.index + 1 == this.index) {
+            this.setNext();
+        }
     },
     setCurrent: function () {
         this.container.classList.add('is-current');
