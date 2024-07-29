@@ -34,7 +34,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         if (this.instance.options.interval) {
             this.interval = this.instance.options.interval;
         }
-        if(this.instance.pagination){
+        if (this.instance.pagination) {
             this.pagination = this.instance.pagination;
         }
     },
@@ -47,7 +47,7 @@ window.osuny.carousel.Autoplayer.prototype = {
     },
     stop: function () {
         this.running = false;
-        if(this.pagination){
+        if (this.pagination) {
             this.pagination.toggleButton.toggleStop();
         }
     },
@@ -83,13 +83,13 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.instance.next();
     },
     updateViewProgression: function () {
-        if(this.pagination){
+        if (this.pagination) {
             this.pagination.setSlideProgression(this.progression);
         }
     },
-    updateViewState: function(){
-        if(this.pagination){
-            this.pagination.toggleButton.toggleUI(); 
+    updateViewState: function () {
+        if (this.pagination) {
+            this.pagination.toggleButton.toggleState();
         }
     },
     onSlideChanged: function () {

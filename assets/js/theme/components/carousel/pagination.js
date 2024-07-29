@@ -113,19 +113,19 @@ window.osuny.carousel.ToggleButton.prototype = {
         this.container.classList.add(this.state_classes[this.state]);
         this.container.addEventListener("click", this.onClick.bind(this));
     },
-    toggleUI: function () {
+    toggleState: function () {
         var newState = Math.abs(this.state - 1);
         this.container.classList.replace(this.state_classes[this.state], this.state_classes[newState]);
         this.state = newState;
     },
     toggleStart: function () {
         if (this.state == 0) {
-            this.toggleUI();
+            this.toggleState();
         }
     },
     toggleStop: function () {
         if (this.state == 1) {
-            this.toggleUI();
+            this.toggleState();
         }
     },
     onClick: function (e) {
