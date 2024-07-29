@@ -1,8 +1,8 @@
 {{ $options := .options | default site.Params.persons.index.options }}
-{{ $heading := .heading_level }}
+{{ $heading := .heading_level | default 2 }}
 {{ $heading_tag := (dict 
-  "open" ((printf "<h%s class='person-name' itemprop='name'>" $heading) | safeHTML)
-  "close" ((printf "</h%s>" $heading) | safeHTML)
+  "open" ((printf "<h%d class='person-name' itemprop='name'>" $heading) | safeHTML)
+  "close" ((printf "</h%d>" $heading) | safeHTML)
 ) }}
 {{ $person := .person }}
 
