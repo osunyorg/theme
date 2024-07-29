@@ -1,9 +1,0 @@
-<div class="persons">
-  {{ $persons := .Pages.ByParam "last_name" }}
-  {{ range (.Paginate $persons).Pages }}
-    <div>
-      {{ partial "persons/person.html" . }}
-    </div>
-  {{ end }}
-</div>
-{{ partial "commons/pagination.html" . }}

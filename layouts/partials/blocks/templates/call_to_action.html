@@ -41,7 +41,7 @@
                   "alt"      .image.alt
                   "sizes"    site.Params.image_sizes.blocks.call_to_action
               )}}
-              {{ if partial "GetTextFromHTML" .credit }}
+              {{ if .credit }}
                 <figcaption>{{ safeHTML .credit }}</figcaption>
               {{ end }}
             </figure>

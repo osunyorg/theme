@@ -40,7 +40,7 @@
                 )}}
               {{ end }}
   
-              {{ if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
+              {{ if and $options.summary .Params.summary }}
                   <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
                     "text" .Params.summary
                     "length" site.Params.posts.index.truncate_description
@@ -49,7 +49,7 @@
 
               {{ if and .Params.contents_reading_time $options.reading_time }}
                 <span class="post-reading-time">
-                  {{ i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" .Params.contents_reading_time.text }}
+                  {{ i18n "posts.reading_time" }} : {{ .Params.contents_reading_time.text }}
                 </span>
               {{ end }}
             </div>

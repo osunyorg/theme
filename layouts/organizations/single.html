@@ -10,14 +10,12 @@
 
     <div class="container">
       <div itemprop="articleBody" class="rich-text">
-        {{ partial "pages/summary.html" (dict
+        {{ partial "organizations/summary.html" (dict
           "context" .
         ) }}
 
-        {{ if (partial "GetTextFromHTML" .Content) }}
-          {{ safeHTML .Content }}
-        {{ end }}
-        
+        {{ safeHTML .Content }}
+
         {{ partial "organizations/contact-details.html" . }}
 
       </div>

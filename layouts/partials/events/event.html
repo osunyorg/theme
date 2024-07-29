@@ -58,7 +58,7 @@
       {{ end }}
 
       {{ if $options.summary }}
-        {{- if (partial "GetTextFromHTML" .Params.summary) -}}
+        {{- if .Params.summary -}}
           <div class="event-description">
             <p itemprop="description">
               {{ partial "GetTruncateContent" ( dict 

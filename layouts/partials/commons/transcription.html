@@ -1,11 +1,8 @@
-{{ if (partial "GetTextFromHTML" .transcription) }}
+{{ if .transcription }}
 <div class="transcription">
   <details>
     <summary>{{ i18n "commons.accessibility.transcription" }}</summary>
-    <p>
-      {{- $transcription := safeHTML .transcription -}}
-      {{ safeHTML (replace $transcription "\n" "<br/>") }}
-    </p>
+    <p>{{ safeHTML .transcription }}</p>
   </details>
 </div>
 {{ end }}

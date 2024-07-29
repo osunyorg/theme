@@ -1,7 +1,7 @@
 <ul class="categories">
   {{ range .Paginator.Pages }}
     <li>
-      {{ partial "categories/category.html" . }}
+      <a href="{{ .Permalink }}" class="title" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">{{ safeHTML .Title }}</a>
     </li>
   {{ end }}
 </ul>

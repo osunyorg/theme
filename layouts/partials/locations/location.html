@@ -15,7 +15,7 @@
         <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
 
-      {{- if and (partial "GetTextFromHTML" .Params.summary) $options.summary -}}
+      {{- if and .Params.summary $options.summary -}}
         <div class="location-description">
           <p itemprop="description">
             {{ partial "GetTruncateContent" ( dict 
