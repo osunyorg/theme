@@ -7,44 +7,44 @@
         {{- if partial "GetTextFromHTML" .Params.prerequisites -}}
           <section id="{{ urlize (i18n "programs.prerequisites") }}">
             <h3>{{ i18n "programs.prerequisites" }}</h3>
-            {{- partial "PrepareHTML" .Params.prerequisites -}}
+            {{- safeHTML .Params.prerequisites -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pricing -}}
           <section id="{{ urlize (i18n "programs.pricing") }}">
             <h3>{{ i18n "programs.pricing" }}</h3>
-            {{- partial "PrepareHTML" .Params.pricing -}}
+            {{- safeHTML .Params.pricing -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pricing_initial -}}
           <section id="{{ urlize (i18n "programs.pricing_initial") }}">
             <h3>{{ i18n "programs.pricing_initial" }}</h3>
-            {{- partial "PrepareHTML" .Params.pricing_initial -}}
+            {{- safeHTML .Params.pricing_initial -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pricing_continuing -}}
           <section id="{{ urlize (i18n "programs.pricing_continuing") }}">
             <h3>{{ i18n "programs.pricing_continuing" }}</h3>
-            {{- partial "PrepareHTML" .Params.pricing_continuing -}}
+            {{- safeHTML .Params.pricing_continuing -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pricing_apprenticeship -}}
           <section id="{{ urlize (i18n "programs.pricing_apprenticeship") }}">
             <h3>{{ i18n "programs.pricing_apprenticeship" }}</h3>
-            {{- partial "PrepareHTML" .Params.pricing_apprenticeship -}}
+            {{- safeHTML .Params.pricing_apprenticeship -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.registration -}}
           <section id="{{ urlize (i18n "programs.registration") }}">
             <h3>{{ i18n "programs.registration" }}</h3>
-            {{- partial "PrepareHTML" .Params.registration -}}
+            {{- safeHTML .Params.registration -}}
             {{- if partial "GetTextFromHTML" .Params.registration_url -}}
-              <p><a href="{{- partial "PrepareHTML" .Params.registration_url -}}" class="registration">{{ i18n "programs.apply" }}</a></p>
+              <p><a href="{{- safeHTML .Params.registration_url -}}" class="registration">{{ i18n "programs.apply" }}</a></p>
             {{- end -}}
           </section>
         {{- end -}}
@@ -52,14 +52,14 @@
         {{- if partial "GetTextFromHTML" .Params.accessibility -}}
           <section id="{{ urlize (i18n "programs.accessibility") }}">
             <h3>{{ i18n "programs.accessibility" }}</h3>
-            {{- partial "PrepareHTML" .Params.accessibility -}}
+            {{- safeHTML .Params.accessibility -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.other -}}
           <section id="{{ urlize (i18n "programs._other") }}">
             <h3>{{ i18n "programs._other" }}</h3>
-            {{- partial "PrepareHTML" .Params.other -}}
+            {{- safeHTML .Params.other -}}
           </section>
         {{- end -}}
 
@@ -76,7 +76,7 @@
                       <p>
                         <b>{{ $title }}</b>
                         <br>
-                        <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
+                        <a href="{{ .Permalink }}">{{ safeHTML .Title }}</a>
                         {{ if .Params.phone }}
                           <br>
                           {{ safeHTML .Params.phone }}
@@ -98,7 +98,7 @@
           <section id="{{ urlize (i18n "programs.contacts") }}">
             <h3>{{ i18n "programs.contacts" }}</h3>
             {{- if or (partial "GetTextFromHTML" .Params.contacts) -}}
-              {{- partial "PrepareHTML" .Params.contacts -}}
+              {{- safeHTML .Params.contacts -}}
             {{- end -}}
           </section>
         {{- end -}}

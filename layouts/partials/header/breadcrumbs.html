@@ -8,7 +8,7 @@
           {{- if $item.path -}}
             <a itemprop="item" href="{{ $item.path }}">
           {{- end -}}
-            <span itemprop="name">{{- partial "PrepareHTML" $item.title -}}</span>
+            <span itemprop="name">{{- safeHTML $item.title -}}</span>
           {{- if $item.path -}}
             </a>
           {{- end -}}

@@ -7,21 +7,21 @@
         {{- if partial "GetTextFromHTML" .Params.content -}}
           <section id="{{ urlize (i18n "programs.content") }}">
             <h3>{{ i18n "programs.content" }}</h3>
-            {{- partial "PrepareHTML" .Params.content -}}
+            {{- safeHTML .Params.content -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pedagogy -}}
           <section id="{{ urlize (i18n "programs.pedagogy") }}">
             <h3>{{ i18n "programs.pedagogy" }}</h3>
-            {{- partial "PrepareHTML" .Params.pedagogy -}}
+            {{- safeHTML .Params.pedagogy -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.evaluation -}}
           <section id="{{ urlize (i18n "programs.evaluation") }}">
             <h3>{{ i18n "programs.evaluation" }}</h3>
-            {{- partial "PrepareHTML" .Params.evaluation -}}
+            {{- safeHTML .Params.evaluation -}}
           </section>
         {{- end -}}
 

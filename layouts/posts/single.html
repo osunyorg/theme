@@ -2,7 +2,7 @@
   {{ partial "posts/hero-single.html" . }}
 
   <div class="document-content" itemscope itemtype="https://schema.org/NewsArticle">
-    <meta itemprop="headline" content="{{ partial "PrepareHTML" .Title }}">
+    <meta itemprop="headline" content="{{ safeHTML .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ with .Date }}<meta itemprop="datePublished" content="{{ .Format "2006-01-02T15:04" }}">{{ end }}
     {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}

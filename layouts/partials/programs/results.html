@@ -7,14 +7,14 @@
         {{- if partial "GetTextFromHTML" .Params.opportunities -}}
           <section id="{{ urlize (i18n "programs.opportunities") }}">
             <h3>{{ i18n "programs.opportunities" }}</h3>
-            {{- partial "PrepareHTML" .Params.opportunities -}}
+            {{- safeHTML .Params.opportunities -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.results -}}
           <section id="{{ urlize (i18n "programs.results") }}">
             <h3>{{ i18n "programs.results" }}</h3>
-            {{- partial "PrepareHTML" .Params.results -}}
+            {{- safeHTML .Params.results -}}
           </section>
         {{- end -}}
       </div>

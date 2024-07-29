@@ -8,9 +8,9 @@
       {{- with site.GetPage (printf "/diplomas/%s" $name) }}
         <li>
           <a href="{{ .Permalink }}">
-            {{- partial "PrepareHTML" .Title -}}
+            {{- safeHTML .Title -}}
             {{ if .Params.short_name }}
-              ({{ partial "PrepareHTML" .Params.short_name }})
+              ({{ safeHTML .Params.short_name }})
             {{ end }}
           </a>
         </li>

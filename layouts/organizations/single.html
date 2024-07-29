@@ -15,9 +15,7 @@
         ) }}
 
         {{ if (partial "GetTextFromHTML" .Content) }}
-          {{ partial "PrepareHTML" (
-              partial "H2AddId" .Content
-            ) }}
+          {{ safeHTML .Content }}
         {{ end }}
         
         {{ partial "organizations/contact-details.html" . }}

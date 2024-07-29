@@ -21,7 +21,7 @@
             {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
               <a  class="glightbox"
                   role="button"
-                  data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
+                  data-glightbox="type: image;{{ if .credit }}description: {{ safeHTML .credit }}{{ end }}"
                   href="{{- partial "GetLightboxUrl" . -}}"
                   title="{{- i18n "commons.lightbox.link.title" -}}"
                   aria-label="{{- i18n "commons.lightbox.link.title" -}}">
@@ -37,10 +37,10 @@
             {{ end }}
             <figcaption>
               {{- if $text }}
-                {{ partial "PrepareHTML" $text }}
+                {{ safeHTML $text }}
               {{ end -}}
-              {{- if partial "PrepareHTML" .credit }}
-                <div class="credit">{{ partial "PrepareHTML" .credit }}</div>
+              {{- if safeHTML .credit }}
+                <div class="credit">{{ safeHTML .credit }}</div>
               {{ end -}}
             </figcaption>
           </figure>

@@ -27,7 +27,7 @@
     
     {{ if isset .Params "type" }}
       <dt>{{ i18n "volumes.nature" }}</dt>
-      <dd>{{ partial "PrepareHTML" .Params.Type }}</dd>
+      <dd>{{ safeHTML .Params.Type }}</dd>
     {{ end }}
 
     {{ if isset .Params "keywords" }}

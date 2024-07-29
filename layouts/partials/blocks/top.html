@@ -17,7 +17,7 @@
         {{- if .link -}}
           <a href="{{ .link }}">
         {{- end -}}
-        {{ partial "PrepareHTML" .title }}
+        {{ safeHTML .title }}
         {{- if .link -}}
           </a>
         {{- end -}}
@@ -25,7 +25,7 @@
     {{ end }}
     {{ if .description }}
       <div class="description">
-        {{- partial "PrepareHTML" .description -}}
+        {{- safeHTML .description -}}
       </div>
     {{ end }}
   </div>

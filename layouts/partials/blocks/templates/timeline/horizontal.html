@@ -14,7 +14,7 @@
               {{ .title | safeHTML }}
             {{ $heading_tag.close -}}
             <div class="line"></div>
-            <div class="description text">{{- partial "PrepareHTML" .text | markdownify -}}</div>
+            <div class="description text">{{- safeHTML .text | markdownify -}}</div>
           </li>
         {{ end }}
       </ol>

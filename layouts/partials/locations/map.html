@@ -4,7 +4,7 @@
       {{ $title := "" }}
       {{ if .Params.title }}
         <div class="campus-content">
-          {{ $title = partial "PrepareHTML" .Params.title -}}
+          {{ $title = safeHTML .Params.title -}}
           <p class="campus-title">
             {{- if and .Params.url .Params.with_link }}
               <a href="{{ .Params.url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">

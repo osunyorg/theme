@@ -24,7 +24,7 @@
   {{ if site.Params.keycdn }}
     {{ $url = $file.direct_url }}
   {{ end }}
-  <a href="{{ $url }}" download="{{ partial "PrepareHTML" $file.name }}" target="_blank" title="{{ i18n "commons.link.download" (dict "Title" $title_with_size) }}">
+  <a href="{{ $url }}" download="{{ safeHTML $file.name }}" target="_blank" title="{{ i18n "commons.link.download" (dict "Title" $title_with_size) }}">
     {{ $title }}
   </a>
   {{ if .with_caption }}

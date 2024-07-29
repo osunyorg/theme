@@ -19,7 +19,7 @@
           {{ end }}
 
           {{ if .title }}
-            <p>{{- partial "PrepareHTML" .title -}}</p>
+            <p>{{- safeHTML .title -}}</p>
           {{ end }}
 
           {{ partial "commons/transcription" ( dict

@@ -28,7 +28,7 @@
         {{ with site.GetPage (printf "/posts/%s" .) }}
           <article class="post">
             <div class="post-content">
-              {{- $title := partial "PrepareHTML" .Title -}}
+              {{- $title := safeHTML .Title -}}
               {{ $heading_tag.open }}
                 <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
               {{ $heading_tag.close }}

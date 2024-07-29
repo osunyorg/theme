@@ -61,7 +61,7 @@
               <li>
                 {{ $program := site.GetPage (printf "/programs%s" .path) }}
                 <div class="program-content">
-                  {{ $title := partial "PrepareHTML" $program.Title }}
+                  {{ $title := safeHTML $program.Title }}
                   <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
                     {{- $title -}}
                   </a>
@@ -70,7 +70,7 @@
                   {{ if and $options.diploma $diploma }}
                     {{- $diploma = site.GetPage (printf "/diplomas/%s" $diploma) -}}
                     {{- with $diploma -}}
-                      <span class="program-diploma">{{ partial "PrepareHTML" .Params.short_name }}</span>
+                      <span class="program-diploma">{{ safeHTML .Params.short_name }}</span>
                     {{- end -}}
                   {{ end }}
 

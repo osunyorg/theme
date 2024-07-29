@@ -2,7 +2,7 @@
 {{ partial "papers/hero.html" . }}
 
 <div class="document-content sidebar-on-{{ site.Params.papers.sidebar.direction }}" itemscope itemtype="https://schema.org/ScholarlyArticle">
-  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+  <meta itemprop="name" content="{{ safeHTML .Title }}">
   {{ partial "papers/sidebar.html" . }}
 
   <div class="container">

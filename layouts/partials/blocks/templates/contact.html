@@ -17,7 +17,7 @@
               <p itemprop="name">{{ .name }}</p>
             {{ end }}
             {{ with .information }}
-              {{ partial "PrepareHTML" . }}
+              {{ safeHTML . }}
             {{ end }}
             <div class="contacts">
               {{ with .address }}
@@ -26,23 +26,23 @@
                     <p class="meta">{{- i18n "commons.contact.address" -}}</p>
                     {{ if .address }}
                       <span itemprop="streetAddress">
-                        {{ partial "PrepareHTML" .address }},
+                        {{ safeHTML .address }},
                       </span>
                       <br>
                     {{ end }}
                     {{ if .city }}
                       <span itemprop="addressLocality">
-                        {{ partial "PrepareHTML" .city }}
+                        {{ safeHTML .city }}
                       </span>
                     {{ end }}
                     {{ if .zipcode }}
                       <span itemprop="postalCode">
-                        {{ partial "PrepareHTML" .zipcode }}
+                        {{ safeHTML .zipcode }}
                       </span>
                     {{ end }}
                     {{ if .country }}
                       <span itemprop="addressCountry">
-                        {{ partial "PrepareHTML" .country }}
+                        {{ safeHTML .country }}
                       </span>
                     {{ end }}
                   </div>

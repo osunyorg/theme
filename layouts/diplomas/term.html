@@ -12,14 +12,14 @@
       <ol class="programs">
         {{- range .Pages -}}
           <li>
-            {{- $title := partial "PrepareHTML" .Title -}}
+            {{- $title := safeHTML .Title -}}
             {{/*  TODO: check title class relevance */}}
             <a href="{{ .Permalink }}" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
               {{- $title -}}
             </a>
             {{ if .Params.summary }}
               <p class="description">
-                {{- partial "PrepareHTML" .Params.summary -}}
+                {{- safeHTML .Params.summary -}}
               </p>
             {{ end }}
           </li>

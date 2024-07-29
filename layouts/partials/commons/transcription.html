@@ -3,7 +3,7 @@
   <details>
     <summary>{{ i18n "commons.accessibility.transcription" }}</summary>
     <p>
-      {{- $transcription := partial "PrepareHTML" .transcription -}}
+      {{- $transcription := safeHTML .transcription -}}
       {{ safeHTML (replace $transcription "\n" "<br/>") }}
     </p>
   </details>

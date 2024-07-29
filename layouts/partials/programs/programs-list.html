@@ -2,7 +2,7 @@
 <ol class="programs">
   {{- range . -}}
     <li>
-      {{- $title := partial "PrepareHTML" .Title -}}
+      {{- $title := safeHTML .Title -}}
       <a href="{{ .Permalink }}" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
         {{- $title -}}
       </a>
@@ -10,7 +10,7 @@
         {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
         {{- with $diploma -}}
           &ensp;
-          <a href="{{ .Permalink }}" title="{{ partial "PrepareHTML" .Title }}">{{ partial "PrepareHTML" .Params.short_name }}</a>
+          <a href="{{ .Permalink }}" title="{{ safeHTML .Title }}">{{ safeHTML .Params.short_name }}</a>
         {{- end -}}
       {{- end -}}
     </li>

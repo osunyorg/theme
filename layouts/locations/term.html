@@ -2,7 +2,7 @@
   {{ partial "locations/hero-single.html" . }}
 
   <div class="document-content" itemscope itemtype="https://schema.org/EducationalOrganization">
-    <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+    <meta itemprop="name" content="{{ safeHTML .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
 

@@ -34,16 +34,16 @@
       <div class="hero-text">
         {{ if or $subtitle $description }}
           <hgroup>
-            <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .title }}</h1>
+            <h1 {{ $title_attribute }}>{{ safeHTML .title }}</h1>
             {{ if $subtitle }}
-              <p {{ if $subtitle_is_summary }} class="lead" {{ end }}>{{ partial "PrepareHTML" $subtitle }}</p>
+              <p {{ if $subtitle_is_summary }} class="lead" {{ end }}>{{ safeHTML $subtitle }}</p>
             {{ end }}
             {{ if $description }}
-              <p>{{ partial "PrepareHTML" .description }}</p>
+              <p>{{ safeHTML .description }}</p>
             {{ end }}
           </hgroup>
         {{ else }}
-          <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .title }}</h1>
+          <h1 {{ $title_attribute }}>{{ safeHTML .title }}</h1>
         {{ end }}
 
         {{ with $button }}
@@ -68,7 +68,7 @@
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
             <a  class="glightbox"
                 role="button"
-                data-glightbox="type: image;{{ with .image.credit }}description: {{ partial "PrepareHTML" . }}{{ end }}"
+                data-glightbox="type: image;{{ with .image.credit }}description: {{ safeHTML . }}{{ end }}"
                 href="{{ partial "GetLightboxUrl" .image }}"
                 title="{{- i18n "commons.lightbox.link.title" -}}"
                 aria-label="{{- i18n "commons.lightbox.link.title" -}}">
@@ -77,7 +77,7 @@
           {{ with .image.credit }}
             <figcaption tabindex="0">
               <div class="credit-content">
-                {{ partial "PrepareHTML" . }}
+                {{ safeHTML . }}
               </div>
             </figcaption>
           {{ end }}

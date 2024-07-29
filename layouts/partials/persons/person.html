@@ -12,7 +12,7 @@
       {{ if $options.link }}
         <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
       {{ end }}
-        {{ partial "PrepareHTML" $person.Title }}
+        {{ safeHTML $person.Title }}
       {{ if $options.link }}
         </a>
       {{ end }}
@@ -20,9 +20,9 @@
     {{ if $options.summary }}
       <p itemprop="jobTitle">
         {{ if (partial "GetTextFromHTML" .role) }}
-          {{ partial "PrepareHTML" .role }}
+          {{ safeHTML .role }}
         {{ else if partial "GetTextFromHTML" $person.Params.summary }}
-          {{ partial "PrepareHTML" $person.Params.summary }}
+          {{ safeHTML $person.Params.summary }}
         {{ else if partial "GetTextFromHTML" $person.Content }}
           {{ partial "GetTruncateContent" ( dict "text" $person.Content ) }}
         {{ end }}

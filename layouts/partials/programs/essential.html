@@ -6,18 +6,18 @@
       {{- with $diploma -}}
         <dl class="essential">
           <dt>{{ i18n "programs.diploma" }}</dt>
-          <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></dd>
+          <dd><a href="{{ .Permalink }}">{{ safeHTML .Title }}</a></dd>
           {{- if .Params.level -}}
             <dt>{{ i18n "programs.level" }}</dt>
-            <dd>{{ partial "PrepareHTML" .Params.level }}</dd>
+            <dd>{{ safeHTML .Params.level }}</dd>
           {{- end -}}
           {{- with $parent -}}
             <dt>{{ i18n "programs.mention" }}</dt>
-            <dd><a href="{{ .url }}">{{ partial "PrepareHTML" .title }}</a></dd>
+            <dd><a href="{{ .url }}">{{ safeHTML .title }}</a></dd>
           {{- end -}}
           {{- if .Params.duration -}}
             <dt>{{ i18n "programs.duration" }}</dt>
-            <dd>{{ partial "PrepareHTML" .Params.duration }}</dd>
+            <dd>{{ safeHTML .Params.duration }}</dd>
           {{- end -}}
         </dl>
       {{- end -}}

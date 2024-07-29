@@ -12,7 +12,7 @@
 {{ with $event }}
   <article class="event {{ if .Params.image }}event--with-image{{ end -}}" itemscope itemtype="https://schema.org/Event">
     <div class="event-content">
-      {{- $title := partial "PrepareHTML" .Title -}}
+      {{- $title := safeHTML .Title -}}
       {{ if and $options.subtitle .Params.subtitle }}
         <hgroup>
       {{ end }}
@@ -31,7 +31,7 @@
             {{ if ne $layout "list" }}
               {{ $date_format = .Params.dates.computed.short }}
             {{ end }}
-            {{ partial "PrepareHTML" $date_format }}
+            {{ safeHTML $date_format }}
           </span>
           {{- if (or .Params.dates.from.hour .Params.dates.to.hour) }}
             <div class="event-time">

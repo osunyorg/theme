@@ -20,7 +20,7 @@
           <ul>
             {{ with $previous_content }}
               <li class="previous">
-                {{ $title := partial "PrepareHTML" .Title -}}
+                {{ $title := safeHTML .Title -}}
                 <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.previous_aria" (dict "Title" $title)) }}">
                   <span>
                     {{- $previous_label -}}
@@ -31,7 +31,7 @@
             {{ end }}
             {{ with $next_content }}
               <li class="next">
-                {{ $title := partial "PrepareHTML" .Title -}}
+                {{ $title := safeHTML .Title -}}
                 <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.next_aria" (dict "Title" $title)) }}">
                   <span>
                     {{- $next_label -}}

@@ -18,7 +18,7 @@
               <div class="actions" {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
                 {{- range .buttons -}}
                   {{ if .title }}
-                    {{- $title := partial "PrepareHTML" .title -}}
+                    {{- $title := safeHTML .title -}}
                     <a href="{{ .url }}"
                       {{ if .target_blank }}
                         title="{{ i18n "commons.link.blank_aria" (dict "Title" $title) }}"
@@ -42,7 +42,7 @@
                   "sizes"    site.Params.image_sizes.blocks.call_to_action
               )}}
               {{ if partial "GetTextFromHTML" .credit }}
-                <figcaption>{{ partial "PrepareHTML" .credit }}</figcaption>
+                <figcaption>{{ safeHTML .credit }}</figcaption>
               {{ end }}
             </figure>
           {{ end }}

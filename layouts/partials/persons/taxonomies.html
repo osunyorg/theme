@@ -6,7 +6,7 @@
       {{- with $.Site.GetPage "taxonomyTerm" . }}
         {{- if .Pages }}
           <li>
-            <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
+            <a href="{{ .Permalink }}">{{ safeHTML .Title }}</a>
           </li>
         {{ end -}}
       {{ end -}}
