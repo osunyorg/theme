@@ -19,7 +19,7 @@ window.osuny.carousel.Slider.prototype = {
         this.position = 0;
         this.loadSlidesFromDom();
         this.showSlide(this.index);
-        this.container.addEventListener('transitionend', this.onTransitionEnd.bind(this));
+        this.updateSlidesClasses();
     },
     nextSlide: function () {
         this.showSlide(this.indexOfSlideAt(1));
@@ -41,6 +41,8 @@ window.osuny.carousel.Slider.prototype = {
         this.translate(true);
         // On met à jour le slide current 
         this.index = this.indexOfSlideAt(offset);
+        // this.slides[this.index].setCurrent();
+        this.updateSlidesClasses();
         //On previent l'instance
         this.instance.onSlideChanged();
     },
@@ -64,11 +66,6 @@ window.osuny.carousel.Slider.prototype = {
         this.instance.container.style.setProperty('transition', 'left ' + String(timeTransition) + 'ms');
         this.instance.container.style.setProperty('left', this.position + "px");
     },
-    onTransitionEnd: function (event) {
-        if (event.propertyName == "left") { // a translation ended
-            this.updateSliderState();
-        }
-    },
     slideAt: function (offset) {
         var index = this.indexOfSlideAt(offset);
         return this.slides[index];
@@ -81,9 +78,6 @@ window.osuny.carousel.Slider.prototype = {
         var sliderLen = this.slides.length;
         return ((this.index + offset) % sliderLen + sliderLen) % sliderLen;
     },
-    updateSliderState: function () {
-        this.updateSlidesClasses();
-    },
     updateSlidesClasses: function () {
         this.slides.forEach(slide => {
             slide.cleanStateClasses();
@@ -92,6 +86,9 @@ window.osuny.carousel.Slider.prototype = {
             }
             if (this.index - 1 == slide.index) {
                 slide.setPrevious();
+            }
+            if (this.index > slide.index) {
+                slide.setBefore();
             }
             if (this.index + 1 == slide.index) {
                 slide.setNext();
@@ -121,6 +118,9 @@ window.osuny.carousel.Slide.prototype = {
     setPrevious: function () {
         this.container.classList.add('is-previous');
     },
+    setBefore: function () {
+        this.container.classList.add('is-before');
+    },
     setNext: function () {
         this.container.classList.add('is-next');
     },
@@ -128,5 +128,6 @@ window.osuny.carousel.Slide.prototype = {
         this.container.classList.remove('is-current');
         this.container.classList.remove('is-next');
         this.container.classList.remove('is-previous');
+        this.container.classList.remove('is-before');
     }
 }

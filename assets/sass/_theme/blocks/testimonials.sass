@@ -59,8 +59,9 @@
                     background-color: $block-testimonials-pagination-background
                 i
                     background-color: $block-testimonials-pagination-progress-background
-        &__container
-            figure
-                width: columns(12)
-                @include in-page-with-sidebar
-                    width: columns(8)
+        &__slide
+            width: columns(12)
+            @include in-page-with-sidebar
+                width: columns(8)
+            &:not(.is-current)
+                opacity: 0

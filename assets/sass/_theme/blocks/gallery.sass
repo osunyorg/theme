@@ -88,29 +88,14 @@
         .carousel
             flex-direction: column
             @include in-page-with-sidebar
-                &.is-moving
                     .carousel__slide.is-active
                         opacity: 1
             margin-right: var(--grid-gutter-negative)
 
             &__slider
                 overflow: visible
-                @include in-page-with-sidebar
-                    figure
-                        transition: opacity  .3s ease
-                        opacity: 1
-                        &.is-next
-                            opacity: 1
-                        &.is-active
-                            opacity: 1
-            figure
-                display: block
+            &__slide
                 margin-right: $spacing-3
-                &:last-child
-                    padding-right: 20%
-                @include media-breakpoint-down(desktop)
-                    display: flex
-                    flex-direction: column
                 picture
                     img
                         // FIXME Arnaud: I would like images at constant height, can't manage to get it right.
@@ -122,31 +107,39 @@
                             height: $block-gallery-carousel-max-height
                             width: auto
                             max-width: none
+                @include media-breakpoint-down(desktop)
+                    display: flex
+                    flex-direction: column
+                @include in-page-with-sidebar
+                    transition: opacity  .3s ease
+                    opacity: 1
+                    &.is-before
+                        opacity: 0.2
 
-            &__arrows
-                margin-left: pxToRem(-18)
-                order: 2
-                @media (min-height: 800px)
-                    padding-top: space(10)
-            &__arrow
-                &:disabled
-                    cursor: default
-                    opacity: 0.3
-                &--prev,
-                &--next
-                    @include button-reset
-                    @include icon(arrow-left-line, before)
-                    height: $spacing-4
-                    padding: 0
-                    position: static
-                    width: $spacing-4
-                    svg
-                        display: none
-                &--next
-                    @include icon(arrow-right-line, before)
+            // &__arrows
+            //     margin-left: pxToRem(-18)
+            //     order: 2
+            //     @media (min-height: 800px)
+            //         padding-top: space(10)
+            // &__arrow
+            //     &:disabled
+            //         cursor: default
+            //         opacity: 0.3
+            //     &--prev,
+            //     &--next
+            //         @include button-reset
+            //         @include icon(arrow-left-line, before)
+            //         height: $spacing-4
+            //         padding: 0
+            //         position: static
+            //         width: $spacing-4
+            //         svg
+            //             display: none
+            //     &--next
+            //         @include icon(arrow-right-line, before)
 
         @include in-page-without-sidebar
             .carousel
-                figure
+                &__slide
                     margin-left: var(--grid-gutter)
                     margin-right: -$spacing-3
