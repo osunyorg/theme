@@ -31,12 +31,12 @@ window.osuny.carousel.Pagination.prototype = {
 
     initializeTabPagination() {
         var pagination = this.container.getElementsByClassName(this.classes.pagination).item(0);
-        if(this.instance.options.autoplay){
+        if (this.instance.options.autoplay) {
             pagination.classList.add('has_toggle');
         }
         this.tabButtonModel = pagination.querySelector('li').cloneNode(true);
         pagination.removeChild(pagination.querySelector('li'));
-        
+
         this.tabButtons = [];
         for (var i = 0; i < this.carouselLength; i += 1) {
             this.tabButtons.push(new window.osuny.carousel.PaginationButton(i, this))
@@ -53,7 +53,7 @@ window.osuny.carousel.Pagination.prototype = {
             tabButton.setProgress(0);
         });
     },
-    onSlideChanged: function(){
+    onSlideChanged: function () {
         this.resetSlidesProgression()
         this.setSlideProgression(1);
     }
@@ -79,17 +79,11 @@ window.osuny.carousel.PaginationButton.prototype = {
         this.progressBar = button.querySelector("i");
 
         this.setProgress(0);
-        this.initializeListener();
-    },
-    initializeListener: function () {
-        var callBack = this.onClick.bind(this);
-        this.container.addEventListener("click", function (e) {
-            callBack(e);
-        });
+        this.container.addEventListener("click", this.onClick.bind(this));
     },
     onClick: function (e) {
         this.pagination.slider.showSlide(this.index);
-        if(this.instance.options.autoplay){
+        if (this.instance.options.autoplay) {
             this.instance.autoplayer.stop();
             this.pagination.toggleButton.toggleStop();
         }
@@ -120,7 +114,7 @@ window.osuny.carousel.ToggleButton.prototype = {
         this.container = this.pagination.container.getElementsByClassName(this.classes.button).item(0);
         this.container.classList.add('is-visible');
         this.container.classList.add(this.state_classes[this.state]);
-        this.initializeListener();
+        this.container.addEventListener("click", this.onClick.bind(this));
     },
     toggleUI: function () {
         var newState = Math.abs(this.state - 1);
@@ -136,12 +130,6 @@ window.osuny.carousel.ToggleButton.prototype = {
         if (this.state == 1) {
             this.toggleUI();
         }
-    },
-    initializeListener: function () {
-        var callBack = this.onClick.bind(this);
-        this.container.addEventListener("click", function (e) {
-            callBack(e);
-        });
     },
     onClick: function (e) {
         this.toggleUI();
