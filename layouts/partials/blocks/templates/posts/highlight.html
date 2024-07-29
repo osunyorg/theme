@@ -46,6 +46,12 @@
                     "length" site.Params.posts.index.truncate_description
                   )}}</p>
               {{- end -}}
+
+              {{ if and .Params.contents_reading_time $options.reading_time }}
+                <span class="post-reading-time">
+                  {{ i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" .Params.contents_reading_time.text }}
+                </span>
+              {{ end }}
             </div>
 
             {{- if or $options.author $options.date -}}
