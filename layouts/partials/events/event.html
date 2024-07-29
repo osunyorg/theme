@@ -74,12 +74,11 @@
         {{- end -}}
       {{ end }}
 
-      {{ if and .Params.events_categories $options.categories }}
-        <p class="event-categories">
-          {{- range $index, $category := .GetTerms "events_categories" -}}
-            <span>{{- $category.Title -}}</span>
-          {{- end -}}
-        </p>
+      {{ if $options.categories }}
+        {{ partial "commons/categories" ( dict
+          "context" .
+          "kind" "event"
+        )}}
       {{- end -}}
     </div>
     <div class="media">
