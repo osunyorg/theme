@@ -22,10 +22,9 @@ window.osuny.carousel.Pagination.prototype = {
         this.container = this.instance.root.getElementsByClassName(this.classes.container).item(0);
         if (this.instance.options.pagination) {
             this.initializeTabPagination();
-        }
-
-        if (this.instance.options.autoplay) {
-            this.toggleButton = new window.osuny.carousel.ToggleButton(this);
+            if (this.instance.options.autoplay) {
+                this.toggleButton = new window.osuny.carousel.ToggleButton(this);
+            }
         }
     },
 
@@ -83,10 +82,7 @@ window.osuny.carousel.PaginationButton.prototype = {
     },
     onClick: function (e) {
         this.pagination.slider.showSlide(this.index);
-        if (this.instance.options.autoplay) {
-            this.instance.autoplayer.stop();
-            this.pagination.toggleButton.toggleStop();
-        }
+        this.instance.stopAutoplayer();
         this.setProgress(1)
     },
     setProgress: function (progress) {
@@ -132,11 +128,10 @@ window.osuny.carousel.ToggleButton.prototype = {
         }
     },
     onClick: function (e) {
-        this.toggleUI();
-        if (this.state == 0) {
-            this.instance.autoplayer.stop();
+        if (this.state == 1) {
+            this.instance.stopAutoplayer();
         } else {
-            this.instance.autoplayer.start();
+            this.instance.startAutoplayer();
         }
     }
 }

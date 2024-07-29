@@ -41,7 +41,7 @@ window.osuny.carousel.Instance.prototype = {
     },
     initializeComponents: function () {
         this.slider = new window.osuny.carousel.Slider(this);
-        if(this.options.pagination){
+        if (this.options.pagination) {
             this.pagination = new window.osuny.carousel.Pagination(this);
         }
     },
@@ -100,25 +100,32 @@ window.osuny.carousel.Instance.prototype = {
         return boundingRect.top + boundingRect.height / 2;
     },
     visibilityStart: function () {
-        if (this.options.autoplay) {
-            this.startAutoplayer();
-        }
+        this.startAutoplayer();
     },
     visibilityStop: function () {
-        if (this.options.autoplay) {
-            this.stopAutoPlayer();
-        }
+        this.stopAutoplayer();
     },
     startAutoplayer: function () {
-        this.autoplayer.start();
-        if (this.options.pagination) {
-            this.pagination.toggleButton.toggleStart();
+        if (this.autoplayer) {
+            this.toggleAutoplayerState(1);
         }
     },
-    stopAutoPlayer: function () {
-        this.autoplayer.stop();
-        if (this.options.pagination) {
-            this.pagination.toggleButton.toggleStop();
+    stopAutoplayer: function () {
+        if (this.autoplayer) {
+            this.toggleAutoplayerState(0);
+        }
+    },
+    toggleAutoplayerState(state) {
+        if (state == 1) {
+            this.autoplayer.start();
+            if (this.options.pagination) {
+                this.pagination.toggleButton.toggleStart();
+            }
+        } else {
+            this.autoplayer.stop();
+            if (this.options.pagination) {
+                this.pagination.toggleButton.toggleStop();
+            }
         }
     },
     onSlideChanged: function () {
@@ -128,7 +135,7 @@ window.osuny.carousel.Instance.prototype = {
         if (this.autoplayer) {
             this.autoplayer.onSlideChanged();
         }
-        if(this.pagination){
+        if (this.pagination) {
             this.pagination.onSlideChanged();
         }
     }
