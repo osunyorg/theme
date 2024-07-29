@@ -1,9 +1,5 @@
-if (!window.osuny) {
-    window.osuny = {};
-}
-if (!window.osuny.carousel) {
-    window.osuny.carousel = {};
-}
+window.osuny = window.osuny || {};
+window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Pagination = function (instance) {
     this.instance = instance;

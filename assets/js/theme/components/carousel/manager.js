@@ -1,9 +1,6 @@
-if (!window.osuny) {
-    window.osuny = {};
-}
-if (!window.osuny.carousel) {
-    window.osuny.carousel = {};
-}
+window.osuny = window.osuny || {};
+window.osuny.carousel = window.osuny.carousel || {};
+
 window.osuny.carousel.manager = {
     initialized: false,
     // @alex @olivia js-carousel ou osuny-carousel ?

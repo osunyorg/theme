@@ -1,9 +1,6 @@
-if (!window.osuny) {
-    window.osuny = {};
-}
-if (!window.osuny.carousel) {
-    window.osuny.carousel = {};
-}
+window.osuny = window.osuny || {};
+window.osuny.carousel = window.osuny.carousel || {};
+
 window.osuny.carousel.Instance = function (root) {
     this.root = root;
     this.container = null;

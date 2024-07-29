@@ -1,10 +1,6 @@
-if (!window.osuny) {
-    window.osuny = {};
-}
+window.osuny = window.osuny || {};
+window.osuny.carousel = window.osuny.carousel || {};
 
-if (!window.osuny.carousel) {
-    window.osuny.carousel = {};
-}
 window.osuny.carousel.Slider = function Slider(instance) {
     this.instance = instance;
     this.container = this.instance.container;

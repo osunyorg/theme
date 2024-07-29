@@ -1,9 +1,6 @@
-if (!window.osuny) {
-    window.osuny = {};
-}
-if (!window.osuny.carousel) {
-    window.osuny.carousel = {};
-}
+window.osuny = window.osuny || {};
+window.osuny.carousel = window.osuny.carousel || {};
+
 window.osuny.carousel.Autoplayer = function (instance) {
     // Instance du carousel qui utilise l'autoplayer
     this.instance = instance;
