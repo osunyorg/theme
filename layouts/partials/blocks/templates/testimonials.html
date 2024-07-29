@@ -22,7 +22,7 @@
         <div class="carousel js-carousel"
           data-carousel="{{ site.Params.blocks.testimonials.carousel | encoding.Jsonify }}">
           <div class="carousel__slider">
-            <div class="carousel__container">
+            <div class="carousel__container" aria-atomic="true">
               {{ end -}}
 
               {{ range .testimonials }}
@@ -63,12 +63,12 @@
           <div class="carousel__pagination">
             <ul class="carousel__pagination__tabcontainer" role="tablist">
               <li role="presentation">
-                <button class="carousel__pagination__page" type="button" role="tab">
+                <button class="carousel__pagination__page" type="button" role="tab" aria-label='{{ safeHTML (i18n "commons.carousel.slideX") }}'>
                   <i></i>
                 </button>
               </li>
             </ul>
-            <button class="toggle"><span class="play"></span><span class="pause"></span></button>
+            <button class="toggle"><span class="play" aria-label='{{ safeHTML (i18n "commons.carousel.play") }}'></span><span class="pause" aria-label='{{ safeHTML (i18n "commons.carousel.pause") }}'></span></button>
           </div>
         </div>
         {{ end -}}
