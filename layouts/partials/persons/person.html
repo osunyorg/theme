@@ -23,7 +23,7 @@
           {{ partial "PrepareHTML" .role }}
         {{ else if partial "GetTextFromHTML" $person.Params.summary }}
           {{ partial "PrepareHTML" $person.Params.summary }}
-        {{ else if (partial "GetTextFromHTML" $person.Content) }}
+        {{ else if partial "GetTextFromHTML" $person.Content }}
           {{ partial "GetTruncateContent" ( dict "text" $person.Content ) }}
         {{ end }}
       </p>
