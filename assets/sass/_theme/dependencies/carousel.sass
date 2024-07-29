@@ -30,11 +30,16 @@
             @include icon(arrow-right-line)
             left: 100%
     &__pagination
+        display: none
+        &.is-visible
+            display: block            
         &__tabcontainer
             display: flex
             list-style: none
-            margin: 0 50px 0 0
+            margin: 0
             padding: 0
+            &.has_toggle
+                margin: 0 50px 0 0
             li
                 display: block
                 flex: 1
@@ -71,7 +76,7 @@
                     top: 50%
                 i
                     background-color: alphaColor($link-color, 0.3)
-                    width: 0%
+                    width: 100%
 
                 &:hover
                     &::before
@@ -79,37 +84,42 @@
                 &.is-active
                     &::before
                         background-color: $link-color
-    &__toggle
-        border-radius: 50%
-        border: 0
-        cursor: pointer
-        font-size: 0
-        height: pxToRem(42)
-        line-height: 1
-        padding: 0
-        position: absolute
-        right: 0
-        top: 0
-        width: pxToRem(42)
-        span
-            color: var(--color-accent)
-            &::before
-                font-size: pxToRem(22)
-                height: pxToRem(42)
-                width: pxToRem(42)
-                margin-left: -0.5px
-                margin-top: -1.5px
-        &__pause
-            span 
-                @include icon-block(pause-line)
-
-        &__play
+        .toggle
+            border-radius: 50%
+            border: 0
+            cursor: pointer
+            display: none
+            font-size: 0
+            height: pxToRem(42)
+            line-height: 1
+            padding: 0
+            position: absolute
+            right: 0
+            top: 0
+            width: pxToRem(42)
+            &.is-visible
+                display: block        
             span
-                @include icon-block(play-fill)
-
-    &[data-slides-length="1"]
-        .carousel
-            &__autoplay, 
-            &__pagination__container, 
-            &__arrow
-                display: none
+                color: var(--color-accent)
+                &::before
+                    font-size: pxToRem(22)
+                    height: pxToRem(42)
+                    width: pxToRem(42)
+                    margin-left: -0.5px
+                    margin-top: -1.5px
+                &.play
+                    @include icon-block(pause-line)
+                &.pause
+                    @include icon-block(play-fill)
+            &__pause
+                span
+                    &.play
+                        display: block
+                    &.pause
+                        display: none
+            &__play
+                span
+                    &.play
+                        display: none
+                    &.pause
+                        display: block

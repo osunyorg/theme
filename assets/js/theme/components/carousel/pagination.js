@@ -11,6 +11,7 @@ window.osuny.carousel.Pagination = function (instance) {
     this.container = null;
     this.tabButtons = [];
     this.toggleButton = null;
+    this.tabButtonModel = null;
     this.carouselLength = this.slider.length();
     this.initialize();
 }
@@ -34,11 +35,18 @@ window.osuny.carousel.Pagination.prototype = {
 
     initializeTabPagination() {
         var pagination = this.container.getElementsByClassName(this.classes.pagination).item(0);
+        if(this.instance.options.autoplay){
+            pagination.classList.add('has_toggle');
+        }
+        this.tabButtonModel = pagination.querySelector('li').cloneNode(true);
+        pagination.removeChild(pagination.querySelector('li'));
+        
         this.tabButtons = [];
         for (var i = 0; i < this.carouselLength; i += 1) {
             this.tabButtons.push(new window.osuny.carousel.PaginationButton(i, this))
             pagination.append(this.tabButtons[i].container);
         }
+        this.container.classList.add('is-visible');
     },
 
     setSlideProgression: function (progression) {
@@ -48,37 +56,31 @@ window.osuny.carousel.Pagination.prototype = {
         this.tabButtons.forEach(function (tabButton) {
             tabButton.setProgress(0);
         });
+    },
+    onSlideChanged: function(){
+        this.resetSlidesProgression()
+        this.setSlideProgression(1);
     }
 }
 
-window.osuny.carousel.PaginationButton = function PaginationButton(index, paginationInstance) {
+window.osuny.carousel.PaginationButton = function PaginationButton(index, pagination) {
     this.index = index;
     this.progress = 0;
     this.container = null;
     this.progressBar = null;
-    this.pagination = paginationInstance;
+    this.pagination = pagination;
+    this.instance = this.pagination.instance
     this.initialize();
 }
 
 window.osuny.carousel.PaginationButton.prototype = {
-    classes: {
-        paginationButton: "carousel__pagination__page"
-    },
     initialize: function () {
-        this.container = document.createElement("li");
-        this.container.setAttribute("role", "presentation");
-
-        var button = document.createElement("button");
-        button.classList.add(this.classes.paginationButton);
-        button.setAttribute("role", "tab");
-        button.setAttribute("type", "button");
+        this.container = this.pagination.tabButtonModel.cloneNode(true);
+        var button = this.container.querySelector('button');
         button.setAttribute("aria-controls", "slideX".replace("X", this.index));
         button.setAttribute("tabindex", this.index);
 
-        this.progressBar = document.createElement("i");
-        button.append(this.progressBar);
-
-        this.container.append(button);
+        this.progressBar = button.querySelector("i");
 
         this.setProgress(0);
         this.initializeListener();
@@ -91,6 +93,11 @@ window.osuny.carousel.PaginationButton.prototype = {
     },
     onClick: function (e) {
         this.pagination.slider.showSlide(this.index);
+        if(this.instance.options.autoplay){
+            this.instance.autoplayer.stop();
+            this.pagination.toggleButton.toggleStop();
+        }
+        this.setProgress(1)
     },
     setProgress: function (progress) {
         this.progress = progress;
@@ -108,13 +115,14 @@ window.osuny.carousel.ToggleButton = function (pagination) {
 }
 window.osuny.carousel.ToggleButton.prototype = {
     classes: {
-        button: "carousel__toggle",
-        pause: "carousel__toggle__pause",
-        play: "carousel__toggle__play"
+        button: "toggle",
+        pause: "toggle__pause",
+        play: "toggle__play"
     },
     initialize: function () {
         this.state_classes = [this.classes.play, this.classes.pause];
         this.container = this.pagination.container.getElementsByClassName(this.classes.button).item(0);
+        this.container.classList.add('is-visible');
         this.container.classList.add(this.state_classes[this.state]);
         this.initializeListener();
     },

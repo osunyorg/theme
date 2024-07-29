@@ -131,5 +131,8 @@ window.osuny.carousel.Instance.prototype = {
         if (this.autoplayer) {
             this.autoplayer.onSlideChanged();
         }
+        if(this.pagination){
+            this.pagination.onSlideChanged();
+        }
     }
 }
