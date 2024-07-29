@@ -1,33 +1,25 @@
 {{ $logo_index := .logo_index }}
 {{ $options := .options }}
-
 <div class="grid organizations {{- if $options.summary }} with-summaries {{- end }}">
   {{- range .organizations }}
     {{ if .slug }}
-      {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
-        {{ $organization_data := dict
-          "title" .Title
-          "url" .Permalink
-          "logo" (index .Params $logo_index)
-          "options" $options
-        }}
-        {{ if .Params.summary }}
-          {{ $organization_data = merge $organization_data (dict "summary" .Params.summary) }}
-        {{ end }}
-        {{ template "organization" $organization_data }}
+      {{ with site.GetPage (printf "/organizations/%s" .slug ) }}
+        {{ template "organization"  dict
+            "title" .Title
+            "url" .Permalink
+            "logo" (index .Params $logo_index)
+            "options" $options
+            "summary" .Params.summary
+          }}
       {{ end }}
     {{ else }}
-      {{ $organization_data := dict
+      {{ template "organization" dict
         "title" .name
         "url" .url
         "external" true
         "logo" .logo
         "options" $options
       }}
-      {{ if .Params.summary }}
-        {{ $organization_data = merge $organization_data (dict "summary" .Params.summary) }}
-      {{ end }}
-      {{ template "organization" $organization_data }}
     {{ end }}
   {{ end -}}
 </div>
