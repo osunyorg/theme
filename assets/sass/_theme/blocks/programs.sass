@@ -6,11 +6,6 @@
             li
                 align-items: start
                 gap: var(--grid-gutter)
-                .media
-                    width: columns(2)
-                    flex-shrink: 0
-                .program-content
-                    max-width: columns(9)
                 .program-diploma
                     @include meta
                     display: block
@@ -24,6 +19,16 @@
                     padding-right: $spacing-4
                     &:hover
                         color: var(--color-accent)
+                @include media-breakpoint-down(desktop)
+                    display: flex
+                    flex-direction: column-reverse
+                    gap: $spacing-2
+                @include media-breakpoint-up(desktop)
+                    .program-content
+                        max-width: columns(9)
+                    .media
+                        flex-shrink: 0
+                        width: columns(2)
                 // Handle floating right arrow when program contain only title
                 .program-content:last-child
                     flex: 1
