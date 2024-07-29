@@ -19,6 +19,7 @@ window.osuny.carousel.Slider.prototype = {
         this.position = 0;
         this.loadSlidesFromDom();
         this.showSlide(this.index);
+        this.container.addEventListener('transitionend', this.onTransitionEnd.bind(this));
     },
     nextSlide: function () {
         this.showSlide(this.indexOfSlideAt(1));
@@ -38,11 +39,9 @@ window.osuny.carousel.Slider.prototype = {
         // On active l'animation
         this.deltaPosition -= (this.deltaPosition - delta);
         this.translate(true);
-
         // On met à jour le slide current 
         this.index = this.indexOfSlideAt(offset);
-
-        //On met à jour l'état de l'instance
+        //On previent l'instance
         this.instance.onSlideChanged();
     },
     loadSlidesFromDom: function () {
@@ -51,7 +50,7 @@ window.osuny.carousel.Slider.prototype = {
         for (var i = 0; i < slidesContainers.length; i += 1) {
             sliderContainer = slidesContainers.item(i);
             sliderContainer.setAttribute("id", "slide__" + i);
-            this.slides.push(new window.osuny.carousel.Slide(slidesContainers.item(i)));
+            this.slides.push(new window.osuny.carousel.Slide(slidesContainers.item(i), i));
         }
         this.translate(true);
     },
@@ -65,6 +64,11 @@ window.osuny.carousel.Slider.prototype = {
         this.instance.container.style.setProperty('transition', 'left ' + String(timeTransition) + 'ms');
         this.instance.container.style.setProperty('left', this.position + "px");
     },
+    onTransitionEnd: function (event) {
+        if (event.propertyName == "left") { // a translation ended
+            this.updateSliderState();
+        }
+    },
     slideAt: function (offset) {
         var index = this.indexOfSlideAt(offset);
         return this.slides[index];
@@ -76,13 +80,31 @@ window.osuny.carousel.Slider.prototype = {
         // returns the index of the slide located at the distance "offset" from current slide
         var sliderLen = this.slides.length;
         return ((this.index + offset) % sliderLen + sliderLen) % sliderLen;
+    },
+    updateSliderState: function () {
+        this.updateSlidesClasses();
+    },
+    updateSlidesClasses: function () {
+        this.slides.forEach(slide => {
+            slide.cleanStateClasses();
+            if (this.index == slide.index) {
+                slide.setCurrent();
+            }
+            if (this.index - 1 == slide.index) {
+                slide.setPrevious();
+            }
+            if (this.index + 1 == slide.index) {
+                slide.setNext();
+            }
+        });
     }
 }
 
-window.osuny.carousel.Slide = function (container) {
+window.osuny.carousel.Slide = function (container, i) {
     this.size;
     this.container = container;
     this.initialize();
+    this.index = i;
 }
 
 window.osuny.carousel.Slide.prototype = {
@@ -92,5 +114,19 @@ window.osuny.carousel.Slide.prototype = {
     computeSize: function () {
         var style = getComputedStyle(this.container);
         this.size = this.container.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+    },
+    setCurrent: function () {
+        this.container.classList.add('is-current');
+    },
+    setPrevious: function () {
+        this.container.classList.add('is-previous');
+    },
+    setNext: function () {
+        this.container.classList.add('is-next');
+    },
+    cleanStateClasses: function () {
+        this.container.classList.remove('is-current');
+        this.container.classList.remove('is-next');
+        this.container.classList.remove('is-previous');
     }
 }
