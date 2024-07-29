@@ -30,8 +30,9 @@
                       {{ $title }}
                     </a>
                   {{ $heading_tag.close }}
+
                   {{ if $options.summary }}
-                    {{ with  $program.Params.summary | safeHTML}}
+                    {{ with $program.Params.summary | safeHTML}}
                       <p itemprop="abstract">{{ . }}</p>
                     {{ end }}
                   {{ end }}
@@ -59,10 +60,36 @@
             {{ range .programs }}
               <li>
                 {{ $program := site.GetPage (printf "/programs%s" .path) }}
-                {{ $title := partial "PrepareHTML" $program.Title }}
-                <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-                  {{ $title }}
-                </a>
+                <div class="program-content">
+                  {{ $title := partial "PrepareHTML" $program.Title }}
+                  <a href="{{ $program.Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+                    {{- $title -}}
+                  </a>
+
+                  {{ $diploma := $program.Params.diplomas }}
+                  {{ if and $options.diploma $diploma }}
+                    {{- $diploma = site.GetPage (printf "/diplomas/%s" $diploma) -}}
+                    {{- with $diploma -}}
+                      <span class="program-diploma">{{ partial "PrepareHTML" .Params.short_name }}</span>
+                    {{- end -}}
+                  {{ end }}
+
+                  {{ if $options.summary }}
+                    {{ with $program.Params.summary | safeHTML}}
+                      <p itemprop="abstract">{{ . }}</p>
+                    {{ end }}
+                  {{ end }}
+                </div>
+
+                {{ if and $program.Params.image $options.image }}
+                  <div class="media">
+                    {{ partial "commons/image.html"
+                        (dict
+                          "image"    $program.Params.image
+                          "sizes"    site.Params.image_sizes.blocks.programs
+                        ) }}
+                  </div>
+                {{ end }}
               </li>
             {{ end }}
           </ol>

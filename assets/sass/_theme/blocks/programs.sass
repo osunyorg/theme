@@ -4,16 +4,38 @@
     &--list
         .programs
             li
-                display: block
+                align-items: start
+                gap: var(--grid-gutter)
+                .media
+                    width: columns(2)
+                    flex-shrink: 0
+                .program-content
+                    max-width: columns(9)
+                .program-diploma
+                    @include meta
+                    display: block
+                    margin-bottom: $spacing-1
                 a
                     @include h3
-                    @include arrow-right-hover
-                    display: flex
-                    justify-content: space-between
+                    @include hover-translate-icon($fade: true)
+                    @include icon(arrow-right-line, after, true)
+                        display: inline
                     transition: color 0.55s
                     padding-right: $spacing-4
                     &:hover
                         color: var(--color-accent)
+                // Handle floating right arrow when program contain only title
+                .program-content:last-child
+                    flex: 1
+                    a:last-child
+                        align-items: baseline
+                        display: flex
+                        justify-content: space-between
+                        padding-right: 0
+                        &::after
+                            position: relative
+                            display: block
+
         @include in-page-without-sidebar
             .programs li a
                 @include h2
