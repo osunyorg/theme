@@ -14,7 +14,6 @@ window.osuny.carousel.Instance = function (root) {
     this.state = {
         index: 0,
         initialized: false,
-        focus: false,
         visible: false
     };
     this.initialize();
@@ -71,12 +70,6 @@ window.osuny.carousel.Instance.prototype = {
     next: function () {
         this.slider.nextSlide();
     },
-    focus: function () {
-        this.state.focus = true;
-    },
-    unfocus: function () {
-        this.state.focus = false;
-    },
     setVisibility: function () {
         var isVisible = this.isInViewport();
         if (this.state.visible != isVisible) {
@@ -100,32 +93,13 @@ window.osuny.carousel.Instance.prototype = {
         return boundingRect.top + boundingRect.height / 2;
     },
     visibilityStart: function () {
-        this.startAutoplayer();
+        if(this.autoplayer){
+            this.autoplayer.start();
+        }
     },
     visibilityStop: function () {
-        this.stopAutoplayer();
-    },
-    startAutoplayer: function () {
-        if (this.autoplayer) {
-            this.toggleAutoplayerState(1);
-        }
-    },
-    stopAutoplayer: function () {
-        if (this.autoplayer) {
-            this.toggleAutoplayerState(0);
-        }
-    },
-    toggleAutoplayerState(state) {
-        if (state == 1) {
-            this.autoplayer.start();
-            if (this.options.pagination) {
-                this.pagination.toggleButton.toggleStart();
-            }
-        } else {
+        if(this.autoplayer){
             this.autoplayer.stop();
-            if (this.options.pagination) {
-                this.pagination.toggleButton.toggleStop();
-            }
         }
     },
     onSlideChanged: function () {

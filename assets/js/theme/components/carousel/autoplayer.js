@@ -42,9 +42,14 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.running = true;
         this.resetLoopValues();
         this.loop();
+        this.updateViewState();
+
     },
     stop: function () {
         this.running = false;
+        if(this.pagination){
+            this.pagination.toggleButton.toggleStop();
+        }
     },
     loop: function () {
         var now = Date.now();
@@ -59,7 +64,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.lastLoopAt = now;
         if (this.running) {
             window.requestAnimationFrame(this.loop.bind(this));
-            this.updateView();
+            this.updateViewProgression();
         }
     },
     pause: function () {
@@ -70,7 +75,6 @@ window.osuny.carousel.Autoplayer.prototype = {
     },
     resetLoopValues: function () {
         this.progression = 0;
-        this.updateView();
         this.elapsedSinceLastTrigger = 0;
         this.lastLoopAt = Date.now();
     },
@@ -78,15 +82,17 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.resetLoopValues();
         this.instance.next();
     },
-    updateView: function () {
+    updateViewProgression: function () {
         if(this.pagination){
             this.pagination.setSlideProgression(this.progression);
         }
     },
+    updateViewState: function(){
+        if(this.pagination){
+            this.pagination.toggleButton.toggleUI(); 
+        }
+    },
     onSlideChanged: function () {
         this.resetLoopValues();
-        if(this.pagination){
-            this.pagination.resetSlidesProgression();
-        }
     }
 }

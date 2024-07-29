@@ -62,13 +62,11 @@ window.osuny.carousel.manager = {
     },
     cleanFocusInstance: function () {
         if (this.focusedInstance) {
-            this.focusedInstance.unfocus();
             this.focusedInstance = null;
         }
     },
     addFocusInstance: function (focusCandidate) {
         this.focusedInstance = focusCandidate;
-        this.focusedInstance.focus();
     },
     invoke: function () {
         "use strict";
