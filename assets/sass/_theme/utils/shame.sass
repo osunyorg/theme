@@ -11,13 +11,12 @@
 
 @mixin author-and-time-side-to-side
     .post-meta
-        display: inline
-        .post-author
-            display: inline-flex
+        *
+            display: inline
         > * + .post-author p,
         > * + .post-reading-time
             &::before
-                content: ' • '
+                content: '• '
 
 // Utilisé pour .post, .project, .page, .person, .program, .volume
 @mixin article($aspect-ratio: $article-media-aspect-ratio)
