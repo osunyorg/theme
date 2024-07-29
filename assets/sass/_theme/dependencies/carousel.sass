@@ -19,22 +19,47 @@
         appearance: none
         background: transparent
         border: 0
-    &__arrow
-        color: $color-text
-        position: absolute
-        top: 50%
-        svg
-            display: none
-        &--prev
-            @include icon(arrow-left-line)
-            right: 100%
-        &--next
-            @include icon(arrow-right-line)
-            left: 100%
+
+    &__arrows
+        order: 2
+        display: flex
+        flex-direction: row
+        align-items: center
+        margin-left: - $spacing-3 
+        @include media-breakpoint-up(desktop)
+            padding-top: $spacing-3
+        .counter
+            width: fit-content
+            @include meta
+        button
+            color: var(--color-text)
+            svg
+                display: none
+            &--prev
+                @include icon(arrow-left-line)
+                right: 100%
+            &--next
+                @include icon(arrow-right-line)
+                left: 100%
+
+            &:disabled
+                cursor: default
+                opacity: 0.3
+            &.arrow-prev,
+            &.arrow-next
+                @include button-reset
+                @include icon(arrow-left-line, before)
+                padding: $spacing-3
+                position: static
+                svg
+                    display: none
+            &.arrow-next
+                @include icon(arrow-right-line, before)
+
     &__pagination
         display: none
         &.is-visible
-            display: block            
+            display: block
         &__tabcontainer
             display: flex
             list-style: none
@@ -100,7 +125,7 @@
             top: 0
             width: pxToRem(42)
             &.is-visible
-                display: block        
+                display: block
             span
                 color: var(--color-accent)
                 &::before
