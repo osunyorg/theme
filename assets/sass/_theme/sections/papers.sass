@@ -77,10 +77,6 @@
                 margin-top: $spacing-4
                 @include media-breakpoint-up(desktop)
                     margin-top: $spacing-6
-            .squared-button
-                margin-bottom: 0
-                margin-top: $spacing-2
-                width: auto
             h2
                 margin-bottom: $spacing-2
             .paper-essentials
@@ -152,10 +148,19 @@
     @include media-breakpoint-down(desktop)
         flex-wrap: wrap
         gap: $spacing-3
-    button.squared-button
-        @include icon-block(eye-line, before)
-    a.squared-button
-        @include icon-block(download-2-line, before)
+    button, a
+        @include meta
+        @include button-reset
+        align-items: center
+        color: var(--color-text)
+        cursor: pointer
+        display: flex
+        padding: 0
+        text-decoration: none
+    button
+        @include icon-frame(eye-line, $hoverable: true)
+    a
+        @include icon-frame(download-2-line, $hoverable: true)
 
 .citations
     &:not(:first-child)
