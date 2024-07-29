@@ -7,6 +7,7 @@ if (!window.osuny.carousel) {
 window.osuny.carousel.Autoplayer = function (instance) {
     // Instance du carousel qui utilise l'autoplayer
     this.instance = instance;
+    this.pagination = null;
     // Etat de l'autoplay
     this.running = false;
     // Etat de pause (quand on rollover par exemple)
@@ -35,6 +36,9 @@ window.osuny.carousel.Autoplayer.prototype = {
     getOptions: function () {
         if (this.instance.options.interval) {
             this.interval = this.instance.options.interval;
+        }
+        if(this.instance.pagination){
+            this.pagination = this.instance.pagination;
         }
     },
     start: function () {
@@ -78,10 +82,14 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.instance.next();
     },
     updateView: function () {
-        this.instance.pagination.setSlideProgression(this.progression);
+        if(this.pagination){
+            this.pagination.setSlideProgression(this.progression);
+        }
     },
     onSlideChanged: function () {
         this.resetLoopValues();
-        this.instance.pagination.resetSlidesProgression();
+        if(this.pagination){
+            this.pagination.resetSlidesProgression();
+        }
     }
 }

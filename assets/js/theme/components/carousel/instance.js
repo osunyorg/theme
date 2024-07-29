@@ -44,7 +44,9 @@ window.osuny.carousel.Instance.prototype = {
     },
     initializeComponents: function () {
         this.slider = new window.osuny.carousel.Slider(this);
-        this.pagination = new window.osuny.carousel.Pagination(this);
+        if(this.options.pagination){
+            this.pagination = new window.osuny.carousel.Pagination(this);
+        }
     },
     initializeListeners: function () {
         this.container.addEventListener("mouseenter", this.onMouseEnter.bind(this));
