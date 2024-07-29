@@ -43,6 +43,9 @@ window.osuny.carousel.Instance.prototype = {
         if (this.options.pagination) {
             this.pagination = new window.osuny.carousel.Pagination(this);
         }
+        if (this.options.arrows) {
+            this.arrows = new window.osuny.carousel.ArrowsController(this);
+        }
     },
     initializeListeners: function () {
         this.container.addEventListener("mouseenter", this.onMouseEnter.bind(this));
@@ -111,6 +114,9 @@ window.osuny.carousel.Instance.prototype = {
         }
         if (this.pagination) {
             this.pagination.onSlideChanged();
+        }
+        if (this.arrows) {
+            this.arrows.onSlideChanged();
         }
     }
 }

@@ -2,5 +2,6 @@
 import './carousel/autoplayer';
 import './carousel/instance';
 import './carousel/manager';
-import './carousel/pagination';
+import './carousel/paginationController';
+import './carousel/arrowsController';
 import './carousel/slider';
