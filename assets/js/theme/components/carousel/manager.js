@@ -25,18 +25,9 @@ window.osuny.carousel.manager = {
         }
     },
     initializeListeners: function () {
-        window.addEventListener('resize', function () {
-            this.resizeInstances();
-        }.bind(this));
-        window.addEventListener('scroll', function () {
-            this.computeInstancesDisplay();
-        }.bind(this));
-        document.addEventListener("keydown", function (e) {
-            if (this.focusedInstance) {
-                if (e.key == 'ArrowLeft') { this.focusedInstance.slider.previousSlide() }
-                else if (e.key == 'ArrowRight') { this.focusedInstance.slider.nextSlide() }
-            }
-        }.bind(this));
+        window.addEventListener('resize', this.resizeInstances.bind(this));
+        window.addEventListener('scroll', this.computeInstancesDisplay.bind(this));
+        document.addEventListener("keydown", this.keyPress.bind(this));
     },
     resizeInstances: function () {
         this.instances.forEach(function (instance) {
@@ -85,6 +76,12 @@ window.osuny.carousel.manager = {
             initialize: this.initialize.bind(this),
             instances: this.instances,
         };
+    },
+    keyPress: function (e) {
+        if (this.focusedInstance) {
+            if (e.key == 'ArrowLeft') { this.focusedInstance.slider.previousSlide() }
+            else if (e.key == 'ArrowRight') { this.focusedInstance.slider.nextSlide() }
+        }
     }
 }.invoke();
 
