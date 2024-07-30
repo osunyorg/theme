@@ -90,7 +90,7 @@
             &__slider
                 overflow: visible
             &__slide
-                margin-right: calc(var(--column-width) / 2)
+                margin-right: calc(var(--grid-gutter) / 2)
                 picture
                     img
                         // FIXME Arnaud: I would like images at constant height, can't manage to get it right.
@@ -107,3 +107,5 @@
                 @include in-page-with-sidebar
                     &.is-before
                         opacity: 0.2
+                @include in-page-without-sidebar
+                    margin-right: var(--grid-gutter)
