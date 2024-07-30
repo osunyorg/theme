@@ -83,7 +83,7 @@ window.osuny.carousel.Instance.prototype = {
     },
     onMouseUp: function (e) {
         this.cancelLightBoxEvent(e);
-        this.slider.drag.end(e.offsetX);
+        this.slider.drag.end();
     },
     onMouseMove: function (e) {
         this.cancelLightBoxEvent(e);

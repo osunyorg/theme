@@ -32,27 +32,23 @@ window.osuny.carousel.Slider.prototype = {
         this.showSlide(this.indexOfSlideAt(-1));
     },
     showSlide: function (index) {
-        var offset = index - this.index;
-        var delta = 0;
-        var sign = Math.sign(offset); // direction positive ou negative 
-        // on parcours le nombre de slide à déplacer
-        for (var i = 0; i < Math.abs(offset); i += 1) {
-            // on ajoute ( ou soustrait en fonction du signe), la taille de chacun des slide
-            delta -= sign * this.slideAt(offset - (sign > 0) - sign * i).size;
-        }
-        // On active l'animation
-        this.deltaPosition -= (this.deltaPosition - delta);
-        console.log(this.deltaPosition)
+        this.index = this.indexOfSlideAt(index - this.index);
+        console.log("showing slide:", this.index)
+        this.deltaPosition -= this.position - this.positionOfSlide(this.index).left;
         this.translate(true);
-        // On met à jour le slide current 
-        this.index = this.indexOfSlideAt(offset);
-        // this.slides[this.index].setCurrent();
         this.updateSlidesClasses();
         //On previent l'instance
         this.instance.onSlideChanged();
     },
-    showTargetSlide: function(){
-        var index = this.findSlideIndexByPosition();
+    recomputePosition: function () {
+        var threshold = 100;
+        var currentslidePosition = this.positionOfSlide(this.index).left;
+        var index = this.index;
+        if (this.position < (currentslidePosition - threshold)) {
+            index = this.indexOfSlideAt(1);
+        } else if (this.position > (currentslidePosition + threshold)) {
+            index = this.indexOfSlideAt(-1);
+        }
         this.showSlide(index);
     },
     loadSlidesFromDom: function () {
@@ -65,18 +61,29 @@ window.osuny.carousel.Slider.prototype = {
         }
         this.translate(true);
     },
-    translate: function (transition = false) {
-        var position = this.position + this.deltaPosition;
-        if (position <= 0) {
-            this.position = position;
-            var transition_duration = 0;
-            this.deltaPosition = 0;
-            if (transition === true) {
-                transition_duration = this.transition_duration;
-            }
-            this.instance.container.style.setProperty('transition', 'left ' + String(transition_duration) + 'ms');
-            this.instance.container.style.setProperty('left', this.position + "px");
+    positionOfSlide: function (index) {
+        var position = {
+            left: 0,
+            right: 0,
+            center: 0
+        };
+        for (var i = 0; i < index; i += 1) {
+            position.left -= this.slides[i].size;
         }
+        position.right = position.left - this.slides[index].size;
+        position.center = (position.right + position.left) / 2;
+        return position
+    },
+    translate: function (transition = false) {
+        this.position += this.deltaPosition;
+        var transition_duration = 0;
+        this.deltaPosition = 0;
+        if (transition === true) {
+            transition_duration = this.transition_duration;
+        }
+        this.instance.container.style.setProperty('transition', 'left ' + String(transition_duration) + 'ms');
+        this.instance.container.style.setProperty('left', this.position + "px");
+
     },
     size: function () {
         var size = 0;
@@ -114,7 +121,6 @@ window.osuny.carousel.Slider.prototype = {
             if (this.position < slidesPosition.inf && this.position > slidesPosition.sup) {
                 slideIndex = i;
                 this.deltaPosition = slidesPosition.inf - this.position;
-                console.log(slideIndex)
                 break;
             }
         }
@@ -192,7 +198,6 @@ window.osuny.carousel.Drag.prototype = {
     end: function () {
         this.active = false;
         this.initialPosition = 0;
-        this.slider.showTargetSlide();
-        console.log("dragEnd");
+        this.slider.recomputePosition();
     }
 }
