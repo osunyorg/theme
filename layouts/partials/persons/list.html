@@ -14,10 +14,7 @@
 {{ else if eq site.Params.persons.index.layout "grid" }}
   <div class="persons">
     {{ range .persons }}
-      {{ partial "persons/person" (dict
-        "person" .
-        "options" $options
-      ) }}
+      {{ partial "persons/person" (dict "person" .) }}
     {{ end }}
   </div>
 {{ end }}
