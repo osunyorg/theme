@@ -1,6 +1,8 @@
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
+//console.log(window.osuny.carousel.has_lightbox)
+
 window.osuny.carousel.Instance = function (root) {
     this.root = root;
     this.container = null;
@@ -50,16 +52,52 @@ window.osuny.carousel.Instance.prototype = {
     initializeListeners: function () {
         this.container.addEventListener("mouseenter", this.onMouseEnter.bind(this));
         this.container.addEventListener("mouseleave", this.onMouseLeave.bind(this));
+        if (this.options.drag) { 
+            this.container.addEventListener("mousedown", this.onMouseDown.bind(this));
+            this.container.addEventListener("touchstart", this.onMouseDown.bind(this));
+            this.container.addEventListener("mouseup", this.onMouseUp.bind(this));      // HELP
+            this.container.addEventListener("touchend", this.onMouseUp.bind(this));
+            this.container.addEventListener("mousemove", this.onMouseMove.bind(this));
+            this.container.addEventListener("touchmove", this.onMouseMove.bind(this));
+            this.container.addEventListener("click", this.onClick.bind(this));
+        }
     },
-    onMouseEnter: function () {
+    onMouseEnter: function (e) {
+        this.cancelLightBoxEvent(e);
         if (this.options.autoplay) {
             this.autoplayer.pause();
         }
     },
-    onMouseLeave: function () {
+    onMouseLeave: function (e) {
+        this.cancelLightBoxEvent(e);
         if (this.options.autoplay) {
             this.autoplayer.unpause();
         }
+        if (this.slider.drag) {
+            this.slider.drag.end();
+        }
+    },
+    onMouseDown: function (e) {
+        this.cancelLightBoxEvent(e);
+        this.slider.drag.start(e.offsetX);
+    },
+    onMouseUp: function (e) {
+        this.cancelLightBoxEvent(e);
+        this.slider.drag.end(e.offsetX);
+    },
+    onMouseMove: function (e) {
+        this.cancelLightBoxEvent(e);
+        if (this.slider.drag.active) {
+            this.slider.drag.drag(e.offsetX);
+        }
+    },
+    onClick: function (e) {
+        this.cancelLightBoxEvent(e);
+    },
+    cancelLightBoxEvent: function (e) { // MMARCHE PASSS
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
     },
     initializeAutoplayer: function () {
         this.autoplayer = new window.osuny.carousel.Autoplayer(this);
@@ -96,12 +134,12 @@ window.osuny.carousel.Instance.prototype = {
         return boundingRect.top + boundingRect.height / 2;
     },
     visibilityStart: function () {
-        if(this.autoplayer){
+        if (this.autoplayer) {
             this.autoplayer.start();
         }
     },
     visibilityStop: function () {
-        if(this.autoplayer){
+        if (this.autoplayer) {
             this.autoplayer.stop();
         }
     },
