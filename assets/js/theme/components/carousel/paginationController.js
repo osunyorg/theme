@@ -71,8 +71,8 @@ window.osuny.carousel.PaginationButton.prototype = {
     initialize: function () {
         this.container = this.pagination.tabButtonModel.cloneNode(true);
         var button = this.container.querySelector('button');
-        button.setAttribute("aria-controls", "slideX".replace("X", this.index));
-        button.setAttribute("tabindex", this.index);
+        button.setAttribute("aria-controls", "slide__X".replace("X", this.index));
+        // button.setAttribute("tabindex", this.index);
 
         this.progressBar = button.querySelector("i");
 
