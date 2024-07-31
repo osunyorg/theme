@@ -22,9 +22,7 @@ window.osuny.carousel.Pagination.prototype = {
         this.container = this.instance.root.getElementsByClassName(this.classes.container).item(0);
         if (this.instance.options.pagination) {
             this.initializeTabPagination();
-            if(this.instance.options.autoplay){
-                this.toggleButton = new window.osuny.carousel.ToggleButton(this);
-            }
+            this.toggleButton = window.osuny.utils.instanciateIf(this, window.osuny.carousel.ToggleButton, this.instance.options.autoplay);
         }
     },
 
@@ -56,12 +54,12 @@ window.osuny.carousel.Pagination.prototype = {
         this.resetSlidesProgression()
         this.setSlideProgression(1);
     },
-    onAutoplayStarted: function(){
+    onAutoplayStarted: function () {
         this.toggleButton.toggleStart();
     },
-    onAutoplayStopped: function(){
+    onAutoplayStopped: function () {
         this.toggleButton.toggleStop();
-    },    
+    }
 }
 
 window.osuny.carousel.PaginationButton = function PaginationButton(index, pagination) {

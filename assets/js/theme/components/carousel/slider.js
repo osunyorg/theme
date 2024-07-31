@@ -19,9 +19,7 @@ window.osuny.carousel.Slider.prototype = {
         this.deltaPosition = 0;
         this.position = 0;
         this.loadSlidesFromDom();
-        if(this.instance.options.drag){
-            this.drag = new window.osuny.carousel.Drag(this);
-        }
+        this.drag = window.osuny.utils.instanciateIf(this, window.osuny.carousel.Drag, this.instance.options.drag);
         this.showSlide(this.index);
         this.updateSlidesClasses();
     },
