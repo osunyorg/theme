@@ -1,5 +1,5 @@
 <div class="publications">
   {{ range .Paginator.Pages }}
-    {{ partial "publications/publication.html" . }}
+    {{ partial "publications/publication.html" (dict "publication" . ) }}
   {{ end }}
 </div>

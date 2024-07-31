@@ -170,9 +170,17 @@ ol.persons--list
                 transition: transform .3s ease
             &:hover::after
                 transform: translateX($spacing-2)
+    .person-publications
+        .publications
+            margin-top: $spacing-2
     .person-posts
+        .posts
+            margin-top: $spacing-3
         article.post:last-child
             margin-bottom: 0
+        @include media-breakpoint-up(desktop)
+            .posts
+                margin-top: $spacing-4
     section
         padding-bottom: $spacing-5
     ol.programs
