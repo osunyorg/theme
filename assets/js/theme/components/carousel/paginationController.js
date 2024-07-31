@@ -60,7 +60,6 @@ window.osuny.carousel.Pagination.prototype = {
 
 window.osuny.carousel.PaginationButton = function PaginationButton(index, pagination) {
     this.index = index;
-    this.progress = 0;
     this.container = null;
     this.progressBar = null;
     this.pagination = pagination;
@@ -73,7 +72,6 @@ window.osuny.carousel.PaginationButton.prototype = {
         this.container = this.pagination.tabButtonModel.cloneNode(true);
         var button = this.container.querySelector('button');
         button.setAttribute("aria-controls", "slide__X".replace("X", this.index));
-        // button.setAttribute("tabindex", this.index);
 
         this.progressBar = button.querySelector("i");
 
@@ -86,14 +84,13 @@ window.osuny.carousel.PaginationButton.prototype = {
         this.setProgress(1)
     },
     setProgress: function (progress) {
-        this.progress = progress;
-        this.progressBar.style.setProperty("width", String(this.progress * 100) + "%");
+        this.progressBar.style.setProperty("width", String(progress * 100) + "%");
     }
 }
 
 window.osuny.carousel.ToggleButton = function (pagination) {
     this.class = [];
-    this.state = 0;
+    this.isPlay = false;
     this.pagination = pagination;
     this.instance = this.pagination.instance;
     this.container = null;
@@ -109,29 +106,28 @@ window.osuny.carousel.ToggleButton.prototype = {
         this.state_classes = [this.classes.play, this.classes.pause];
         this.container = this.pagination.container.getElementsByClassName(this.classes.button).item(0);
         this.container.classList.add('is-visible');
-        this.container.classList.add(this.state_classes[this.state]);
+        this.container.classList.add(this.state_classes[+ this.isPlay]);
         this.container.addEventListener("click", this.onClick.bind(this));
     },
     toggleState: function () {
-        var newState = Math.abs(this.state - 1);
-        this.container.classList.replace(this.state_classes[this.state], this.state_classes[newState]);
-        this.state = newState;
+        this.container.classList.replace(this.state_classes[+this.isPlay], this.state_classes[+ !this.isPlay]);
+        this.isPlay = !this.isPlay;
     },
     toggleStart: function () {
-        if (this.state == 0) {
+        if (!this.isPlay) {
             this.toggleState();
         }
     },
     toggleStop: function () {
-        if (this.state == 1) {
+        if (this.isPlay) {
             this.toggleState();
         }
     },
     onClick: function (e) {
-        if (this.state == 0) {
-            this.instance.startAutoplay();
-        } else {
+        if (this.isPlay) {
             this.instance.stopAutoplay();
+        } else {
+            this.instance.startAutoplay();
         }
     }
 }
