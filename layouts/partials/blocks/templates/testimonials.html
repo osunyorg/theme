@@ -3,11 +3,12 @@
 {{- $is_carousel := false -}}
 
 {{- with .block.data -}}
-{{ if .testimonials }}
-{{ if gt (len .testimonials) 1 }}
-{{- $is_carousel = true -}}
-{{ end }}
-{{ end }}
+  {{ if .testimonials }}
+    {{ if gt (len .testimonials) 1 }}
+      {{- $is_carousel = true -}}
+    {{ end -}}
+  {{ end }}
+  
 <div class="{{ $block_class }}{{ if $is_carousel }} with-carousel{{ end }}">
   <div class="container">
     <div class="block-content">
@@ -19,59 +20,19 @@
 
       <div class="testimonials">
         {{- if $is_carousel }}
-        <div class="carousel js-carousel"
-          data-carousel="{{ site.Params.blocks.testimonials.carousel | encoding.Jsonify }}">
-          <div class="carousel__slider">
-            <div class="carousel__container" aria-atomic="true">
-              {{ end -}}
-
-              {{ range .testimonials }}
-              {{ $is_long := gt (len .text) 150 }}
-              <figure class="{{ if $is_carousel }}carousel__slide{{ end }} {{ if .photo }}with-picture{{ end }}">
-                <blockquote {{- if $is_long }} class="is-long" {{- end }}>
-                  <p>{{- partial "PrepareHTML" .text -}}</p>
-                </blockquote>
-                {{ if or .photo .author .job -}}
-                <figcaption>
-                  {{ if .photo -}}
-                  <div class="avatar">
-                    {{- partial "commons/image.html"
-                    (dict
-                    "image" .photo
-                    "alt" .author
-                    "sizes" site.Params.image_sizes.blocks.testimonials
-                    ) -}}
-                  </div>
-                  {{- end }}
-                  {{ if or .author .job -}}
-                  <p>
-                    {{- if .author -}}
-                    <span class="signature">{{ partial "PrepareHTML" .author }}</span>
-                    {{- end }}
-                    {{- if .job -}}
-                    <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
-                    {{- end }}
-                  </p>
-                  {{- end }}
-                </figcaption>
-                {{ end }}
-              </figure>
-              {{ end }}
-              {{- if $is_carousel }}
-            </div>
-          </div>
-          <div class="carousel__pagination">
-            <ul class="carousel__pagination__tabcontainer">
-              <li>
-                <button class="carousel__pagination__page" type="button" aria-label='{{ safeHTML (i18n "commons.carousel.slideX") }}'>
-                  <i></i>
-                </button>
-              </li>
-            </ul>
-            <button class="toggle"><span class="play" aria-label='{{ safeHTML (i18n "commons.carousel.play") }}'></span><span class="pause" aria-label='{{ safeHTML (i18n "commons.carousel.pause") }}'></span></button>
-          </div>
-        </div>
-        {{ end -}}
+          {{ partial "blocks/templates/carousel.html" (dict 
+            "content" .testimonials
+            "options" site.Params.blocks.testimonials.carousel
+            "partial" "blocks/templates/testimonials/single.html"
+          )}}
+        {{ else }}
+          {{ range .testimonials}}
+            {{ partial "blocks/templates/testimonials/single.html" (dict
+            "is_carousel" false
+            "params" .
+            )}}
+          {{ end }}
+        {{ end }}
       </div>
     </div>
   </div>

@@ -53,7 +53,6 @@ window.osuny.carousel.Slider.prototype = {
         var sliderContainer;
         for (var i = 0; i < slidesContainers.length; i += 1) {
             sliderContainer = slidesContainers.item(i);
-            sliderContainer.setAttribute("id", "slide__" + i);
             this.slides.push(new window.osuny.carousel.Slide(this, slidesContainers.item(i), i));
         }
         this.translate(true);

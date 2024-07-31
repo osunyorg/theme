@@ -31,13 +31,10 @@ window.osuny.carousel.Pagination.prototype = {
         if (this.instance.options.autoplay) {
             pagination.classList.add('has_toggle');
         }
-        this.tabButtonModel = pagination.querySelector('li').cloneNode(true);
-        pagination.removeChild(pagination.querySelector('li'));
 
         this.tabButtons = [];
         for (var i = 0; i < this.carouselLength; i += 1) {
             this.tabButtons.push(new window.osuny.carousel.PaginationButton(i, this))
-            pagination.append(this.tabButtons[i].container);
         }
         this.container.classList.add('is-visible');
     },
@@ -45,14 +42,17 @@ window.osuny.carousel.Pagination.prototype = {
     setSlideProgression: function (progression) {
         this.tabButtons[this.slider.index].setProgress(progression);
     },
-    resetSlidesProgression: function () {
+    resetSlidesState: function () {
         this.tabButtons.forEach(function (tabButton) {
             tabButton.setProgress(0);
+            tabButton.setSelected(false);
         });
     },
     onSlideChanged: function () {
-        this.resetSlidesProgression()
+        this.resetSlidesState();
         this.setSlideProgression(1);
+        this.tabButtons[this.slider.index].container.focus();
+        this.tabButtons[this.slider.index].setSelected(true);
     },
     onAutoplayStarted: function () {
         this.toggleButton.toggleStart();
@@ -67,17 +67,20 @@ window.osuny.carousel.PaginationButton = function PaginationButton(index, pagina
     this.container = null;
     this.progressBar = null;
     this.pagination = pagination;
+    this.button = null;
     this.instance = this.pagination.instance;
     this.initialize();
 }
 
 window.osuny.carousel.PaginationButton.prototype = {
     initialize: function () {
-        this.container = this.pagination.tabButtonModel.cloneNode(true);
-        var button = this.container.querySelector('button');
-        button.setAttribute("aria-controls", "slide__X".replace("X", this.index));
+        this.container = this.pagination.container.querySelectorAll("li").item(this.index);
+        this.button = this.container.querySelector('button');
 
-        this.progressBar = button.querySelector("i");
+        var ariaLabel = this.button.getAttribute("aria-label");
+        this.button.setAttribute("aria-label", ariaLabel.replace("%s", this.index));
+        
+        this.progressBar = this.button.querySelector("i");
 
         this.setProgress(0);
         this.container.addEventListener("click", this.onClick.bind(this));
@@ -85,10 +88,13 @@ window.osuny.carousel.PaginationButton.prototype = {
     onClick: function (e) {
         this.instance.showSlide(this.index);
         this.instance.stopAutoplay();
-        this.setProgress(1)
+        this.setProgress(1);
     },
     setProgress: function (progress) {
         this.progressBar.style.setProperty("width", String(progress * 100) + "%");
+    },
+    setSelected: function(state){
+        this.button.setAttribute("aria-selected", String(state));
     }
 }
 

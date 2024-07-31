@@ -1,0 +1,41 @@
+{{ $partial := .partial }}
+<div class="carousel js-carousel" aria-roledescription="carousel" data-carousel="{{ .options | encoding.Jsonify }}">
+  <div class="carousel__slider">
+    <div class="carousel__container" aria-live="off" aria-atomic="false">
+      {{ range $slideindex, $content := .content }}
+        {{ with $content }}
+          {{ partial $partial (dict
+            "is_carousel" true
+            "index" $slideindex
+            "params" .
+            ) }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+  {{ if .options.pagination }}
+    <div class="carousel__pagination">
+      <ul class="carousel__pagination__tabcontainer" role="tablist">
+        {{ range $slideindex, $content := .content }}
+          <li>
+            <button id="carousel-tab-{{$slideindex}}" role="tab" aria-controls="carousel-item-{{$slideindex}}" aria-selected="false" class="carousel__pagination__page" type="button" aria-label='{{ safeHTML (i18n "commons.carousel.slideX") }}'>
+              <i></i>
+            </button>
+          </li>
+        {{ end }}
+      </ul>
+      <button class="toggle">
+        <span class="play" aria-label='{{ safeHTML (i18n "commons.carousel.play") }}'></span>
+        <span class="pause" aria-label='{{ safeHTML (i18n "commons.carousel.pause") }}'></span>
+      </button>
+    </div>
+  {{ end }}
+
+  {{ if .options.arrows }}
+    <div class="carousel__arrows">
+      <button class="arrow-prev" type="button" aria-label="{{ (i18n " commons.carousel.prev") }}"></button>
+      <p class="counter">X/Y</p>
+      <button class="arrow-next" type="button" aria-label="{{ (i18n " commons.carousel.next") }}"></button>
+    </div>
+  {{ end }}
+</div>
