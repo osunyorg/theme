@@ -61,9 +61,7 @@ window.osuny.carousel.manager = {
         }
     },
     cleanFocusInstance: function () {
-        if (this.focusedInstance) {
-            this.focusedInstance = null;
-        }
+        this.focusedInstance = null;
     },
     addFocusInstance: function (focusCandidate) {
         this.focusedInstance = focusCandidate;

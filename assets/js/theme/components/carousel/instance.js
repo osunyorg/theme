@@ -42,15 +42,9 @@ window.osuny.carousel.Instance.prototype = {
     initializeComponents: function () {
         this.ui = new window.osuny.carousel.UIController(this);
         this.slider = new window.osuny.carousel.Slider(this);
-        if (this.options.pagination) {
-            this.pagination = new window.osuny.carousel.Pagination(this);
-        }
-        if (this.options.arrows) {
-            this.arrows = new window.osuny.carousel.ArrowsController(this);
-        }
-        if (this.options.autoplay) {
-            this.autoplayer = new window.osuny.carousel.Autoplayer(this);
-        }
+        this.pagination = this.options.pagination ? new window.osuny.carousel.Pagination(this) : null;
+        this.arrows = this.options.arrows ? new window.osuny.carousel.ArrowsController(this) : null;
+        this.autoplayer = this.options.autoplay ? new window.osuny.carousel.Autoplayer(this) : null;
     },
 
     // Autoplayer events

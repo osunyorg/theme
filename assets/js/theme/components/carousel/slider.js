@@ -19,9 +19,7 @@ window.osuny.carousel.Slider.prototype = {
         this.deltaPosition = 0;
         this.position = 0;
         this.loadSlidesFromDom();
-        if (this.instance.options.drag) {
-            this.drag = new window.osuny.carousel.Drag(this);
-        }
+        this.drag = this.instance.options.drag ? new window.osuny.carousel.Drag(this) : null;
         this.showSlide(this.index);
         this.updateSlidesClasses();
     },
@@ -33,7 +31,6 @@ window.osuny.carousel.Slider.prototype = {
     },
     showSlide: function (index) {
         this.index = this.indexOfSlideAt(index - this.index);
-        console.log("showing slide:", this.index)
         this.deltaPosition -= this.position - this.positionOfSlide(this.index).left;
         this.translate(true);
         this.updateSlidesClasses();
@@ -76,11 +73,8 @@ window.osuny.carousel.Slider.prototype = {
     },
     translate: function (transition = false) {
         this.position += this.deltaPosition;
-        var transition_duration = 0;
+        var transition_duration = transition === true ? this.transition_duration : 0;
         this.deltaPosition = 0;
-        if (transition === true) {
-            transition_duration = this.transition_duration;
-        }
         this.instance.container.style.setProperty('transition', 'left ' + String(transition_duration) + 'ms');
         this.instance.container.style.setProperty('left', this.position + "px");
 
@@ -188,7 +182,6 @@ window.osuny.carousel.Drag.prototype = {
     start: function (position) {
         this.active = true;
         this.initialPosition = position;
-        console.log("dragStart");
     },
     drag: function (position) {
         var distance = this.initialPosition - position;
