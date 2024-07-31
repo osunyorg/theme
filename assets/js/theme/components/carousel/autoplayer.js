@@ -20,6 +20,7 @@ window.osuny.carousel.Autoplayer = function (instance) {
     return {
         start: this.start.bind(this),
         stop: this.stop.bind(this),
+        toggleState: this.toggleState.bind(this),
         pause: this.pause.bind(this),
         unpause: this.unpause.bind(this),
         onSlideChanged: this.onSlideChanged.bind(this),
@@ -45,6 +46,13 @@ window.osuny.carousel.Autoplayer.prototype = {
     stop: function () {
         this.running = false;
         this.instance.onAutoplayStopped();
+    },
+    toggleState: function(){
+        if(this.running){
+            this.stop();
+        }else{
+            this.start();
+        }
     },
     loop: function () {
         var now = Date.now();

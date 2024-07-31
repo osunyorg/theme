@@ -64,6 +64,11 @@ window.osuny.carousel.Instance.prototype = {
             this.autoplayer.start();
         }
     },
+    toggleAutoplay: function(){
+        if(this.autoplayer){
+            this.autoplayer.toggleState();
+        }
+    },
     pauseAutoplay: function () {
         if (this.autoplayer) {
             this.autoplayer.pause();
@@ -76,12 +81,12 @@ window.osuny.carousel.Instance.prototype = {
     },
     onAutoplayStarted: function () {
         if (this.pagination) {
-            this.pagination.toggleButton.toggleState();
+            this.pagination.onAutoplayStarted();
         }
     },
     onAutoplayStopped: function () {
         if (this.pagination) {
-            this.pagination.toggleButton.toggleStop();
+            this.pagination.onAutoplayStopped();
         }
     },
     onAutoplayProgressionChanged: function () {

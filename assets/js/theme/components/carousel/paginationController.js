@@ -55,7 +55,13 @@ window.osuny.carousel.Pagination.prototype = {
     onSlideChanged: function () {
         this.resetSlidesProgression()
         this.setSlideProgression(1);
-    }
+    },
+    onAutoplayStarted: function(){
+        this.toggleButton.toggleStart();
+    },
+    onAutoplayStopped: function(){
+        this.toggleButton.toggleStop();
+    },    
 }
 
 window.osuny.carousel.PaginationButton = function PaginationButton(index, pagination) {
@@ -123,11 +129,7 @@ window.osuny.carousel.ToggleButton.prototype = {
             this.toggleState();
         }
     },
-    onClick: function (e) {
-        if (this.isPlay) {
-            this.instance.stopAutoplay();
-        } else {
-            this.instance.startAutoplay();
-        }
+    onClick: function () {
+        this.instance.toggleAutoplay();
     }
 }
