@@ -1,7 +1,7 @@
 {{ $partial := .partial }}
 <div class="carousel js-carousel" aria-roledescription="carousel" data-carousel="{{ .options | encoding.Jsonify }}">
   <div class="carousel__slider">
-    <div class="carousel__container" aria-live="off" aria-atomic="false">
+    <div id="carousel-items" class="carousel__container" aria-live="off" aria-atomic="false">
       {{ $slideRole := "group" }}
       {{ if .options.pagination }}
         {{ $slideRole = "tabpanel" }}
@@ -38,9 +38,9 @@
 
   {{ if .options.arrows }}
     <div class="carousel__arrows">
-      <button class="arrow-prev" type="button" aria-label="{{ (i18n " commons.carousel.prev") }}"></button>
+      <button class="arrow-prev" aria-controls="carousel-items" type="button" aria-label='{{ safeHTML (i18n "commons.carousel.prev") }}'> </button>
       <p class="counter">X/Y</p>
-      <button class="arrow-next" type="button" aria-label="{{ (i18n " commons.carousel.next") }}"></button>
+      <button class="arrow-next" aria-controls="carousel-items" type="button" aria-label='{{  safeHTML (i18n "commons.carousel.next") }}'></button>
     </div>
   {{ end }}
 </div>
