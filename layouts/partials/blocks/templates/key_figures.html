@@ -21,8 +21,8 @@
           <ul class="{{ $list_class }}">
             {{- range .figures }}
               <li>
-                <dl>
-                  <dt>
+                <p>
+                  <span>
                     {{ with .image }}
                       {{ partial "commons/image.html"
                         (dict
@@ -31,9 +31,9 @@
                         )}}
                     {{ end }}
                     <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
-                  </dt>
-                  <dd>{{ partial "PrepareHTML" .description }}</dd>
-                </dl>
+                  </span>
+                  <span>{{ partial "PrepareHTML" .description }}</span>
+                </p>
               </li>
             {{ end -}}
           </ul>
