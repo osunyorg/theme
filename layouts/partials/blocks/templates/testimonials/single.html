@@ -1,4 +1,4 @@
-<figure {{- if .is_carousel }} id="carousel-item-{{.index}}" {{ end }} class="{{ if .is_carousel }}carousel__slide{{ end }} {{ if .params.photo }}with-picture{{ end }}">
+<figure {{- if .is_carousel }} id="carousel-item-{{.index}}" role="{{.role}}" aria-roledescription="slide" class="carousel__slide" aria-label="item-{{.index}}" {{ end }} class="{{ if .is_carousel }}carousel__slide{{ end }} {{ if .params.photo }}with-picture{{ end }}">
   {{ with .params }}
     {{ $is_long := gt (len .text) 150 }}
     <blockquote {{- if $is_long }} class="is-long" {{- end }}>

@@ -2,12 +2,17 @@
 <div class="carousel js-carousel" aria-roledescription="carousel" data-carousel="{{ .options | encoding.Jsonify }}">
   <div class="carousel__slider">
     <div class="carousel__container" aria-live="off" aria-atomic="false">
+      {{ $slideRole := "group" }}
+      {{ if .options.pagination }}
+        {{ $slideRole = "tabpanel" }}
+      {{ end }}
       {{ range $slideindex, $content := .content }}
         {{ with $content }}
           {{ partial $partial (dict
             "is_carousel" true
             "index" $slideindex
             "params" .
+            "role" $slideRole
             ) }}
         {{ end }}
       {{ end }}
