@@ -62,7 +62,21 @@ window.osuny.carousel.Instance.prototype = {
             this.autoplayer.start();
         }
     },
-
+    onAutoplayStarted: function () {
+        if (this.pagination) {
+            this.pagination.toggleButton.toggleState();
+        }
+    },
+    onAutoplayStopped: function () {
+        if (this.pagination) {
+            this.pagination.toggleButton.toggleStop();
+        }
+    },
+    onAutoplayProgressionChanged: function () {
+        if (this.pagination) {
+            this.pagination.setSlideProgression(this.autoplayer.progression());
+        }
+    },
     // Events Listeners and Callback
     initializeListeners: function () {
         this.container.addEventListener("mouseenter", this.onMouseEnter.bind(this));

@@ -4,7 +4,6 @@ window.osuny.carousel = window.osuny.carousel || {};
 window.osuny.carousel.Autoplayer = function (instance) {
     // Instance du carousel qui utilise l'autoplayer
     this.instance = instance;
-    this.pagination = null;
     // Etat de l'autoplay
     this.running = false;
     // Etat de pause (quand on rollover par exemple)
@@ -23,7 +22,8 @@ window.osuny.carousel.Autoplayer = function (instance) {
         stop: this.stop.bind(this),
         pause: this.pause.bind(this),
         unpause: this.unpause.bind(this),
-        onSlideChanged: this.onSlideChanged.bind(this)
+        onSlideChanged: this.onSlideChanged.bind(this),
+        progression: this.getProgression.bind(this)
     }
 }
 window.osuny.carousel.Autoplayer.prototype = {
@@ -34,22 +34,17 @@ window.osuny.carousel.Autoplayer.prototype = {
         if (this.instance.options.interval) {
             this.interval = this.instance.options.interval;
         }
-        if (this.instance.pagination) {
-            this.pagination = this.instance.pagination;
-        }
     },
     start: function () {
         this.running = true;
         this.resetLoopValues();
         this.loop();
-        this.updateViewState();
+        this.instance.onAutoplayStarted();
 
     },
     stop: function () {
         this.running = false;
-        if (this.pagination) {
-            this.pagination.toggleButton.toggleStop();
-        }
+        this.instance.onAutoplayStopped();
     },
     loop: function () {
         var now = Date.now();
@@ -64,7 +59,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.lastLoopAt = now;
         if (this.running) {
             window.requestAnimationFrame(this.loop.bind(this));
-            this.updateViewProgression();
+            this.instance.onAutoplayProgressionChanged();
         }
     },
     pause: function () {
@@ -82,17 +77,10 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.resetLoopValues();
         this.instance.next();
     },
-    updateViewProgression: function () {
-        if (this.pagination) {
-            this.pagination.setSlideProgression(this.progression);
-        }
-    },
-    updateViewState: function () {
-        if (this.pagination) {
-            this.pagination.toggleButton.toggleState();
-        }
-    },
     onSlideChanged: function () {
         this.resetLoopValues();
+    },
+    getProgression: function () {
+        return this.progression;
     }
 }
