@@ -1,0 +1,52 @@
+.splide
+    button
+        appearance: none
+        background: transparent
+        border: 0
+    &__arrow
+        color: var(--color-text)
+        position: absolute
+        top: 50%
+        svg
+            display: none
+        &--prev
+            @include icon(arrow-left-line)
+            right: 100%
+        &--next
+            @include icon(arrow-right-line)
+            left: 100%
+    &__pagination
+        display: flex
+        list-style: none
+        margin: 0
+        padding: 0
+        button
+            display: block
+            height: 48px
+            padding: 0
+            width: 48px
+            &::before
+                background-color: alphaColor($link-color, 0.3)
+                border-radius: 50%
+                content: ""
+                display: block
+                height: 10px
+                margin: auto
+                transition: background 0.3s ease
+                width: 10px
+            &:hover
+                &::before
+                    background-color: alphaColor($link-color, 0.6)
+            &.is-active
+                &::before
+                    background-color: $link-color
+    &__toggle
+        &__pause
+            @include icon-block(pause-line)
+        &__play
+            @include icon-block(play-fill)
+                padding-left: pxToRem(2)
+    &[data-slides-length="1"]
+        .splide
+            &__autoplay, &__pagination, &__arrow
+                display: none

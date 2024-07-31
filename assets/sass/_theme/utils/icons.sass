@@ -1,12 +1,16 @@
 
-@mixin hover-translate-icon($pseudo: after, $distance: 10)
+@mixin hover-translate-icon($pseudo: after, $distance: 10, $fade: false)
     &::#{$pseudo}
         display: inline-block
-        transition: transform 0.55s $arrow-ease-transition
+        transition: 0.55s $arrow-ease-transition
         transform: translateX(0)
+        @if $fade
+            opacity: 0
     &:hover
         &::#{$pseudo}
             transform: translateX(#{pxToRem($distance)})
+            @if $fade
+                opacity: 1
 
 @mixin icon($icon-name: '', $pseudo-element: before, $non-breaking: false)
     &::#{$pseudo-element}

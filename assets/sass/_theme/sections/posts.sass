@@ -8,9 +8,8 @@
             text-decoration: none
     time
         color: $post-time-color
-        display: inline-block
-        vertical-align: middle
-    .post-author
+    .post-meta,
+    .post-reading-time
         @include meta
         color: var(--color-text-alt)
 
@@ -33,11 +32,13 @@
                 padding-bottom: $spacing-5
             .post-content
                 grid-column: 4/13
+                .post-meta
+                    > *
+                        display: block
                 @include media-breakpoint-down(desktop)
                     flex: 1
                     margin-left: $spacing-2
-                p:not(.title)
-                    @include media-breakpoint-down(desktop)
+                    p[itemprop="articleBody"]
                         display: none
             .media
                 background: none
@@ -50,11 +51,13 @@
                     aspect-ratio: auto
             @include media-breakpoint-up(desktop)
                 .post-meta
+                    max-width: columns(3)
                     position: absolute
                     right: 0
                     text-align: right
                     top: 0
-                    time
+                    time,
+                    .post-reading-time
                         font-size: $h5-size
                 .post-content
                     .post-title,

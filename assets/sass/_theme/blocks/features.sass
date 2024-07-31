@@ -10,9 +10,16 @@
             margin-bottom: $spacing-2
         figure
             order: -1
-            img
-                display: block
-                margin: auto
+            margin-bottom: $spacing-3
+            picture
+                img
+                    margin: auto
+                    display: block
+            picture:not(.is-png, .is-svg)
+                img
+                    object-fit: cover
+                    width: 100%
+                    aspect-ratio: 16/9
             figcaption
                 @include meta
                 margin-top: $spacing-2
@@ -46,6 +53,4 @@
             display: flex
             + li
                 margin-top: 0
-            .name
-                margin-top: $spacing-3
 

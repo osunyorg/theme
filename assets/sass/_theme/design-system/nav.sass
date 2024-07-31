@@ -27,6 +27,7 @@
         display: block
         &[aria-expanded]
             @include icon(arrow-down-s-line, after)
+                display: inline-block
                 margin-left: pxToRem(5)
                 transition: transform 0.15s
             &[aria-expanded="true"]
@@ -51,7 +52,7 @@
         a,
         a:focus,
         a:active
-            @include link($header-color, false)
+            @include link($header-dropdown-color, false)
         .dropdown-menu-title
             @include h2
 
