@@ -34,6 +34,9 @@ window.osuny.carousel.Instance.prototype = {
     findContainer: function () {
         this.container = this.root.getElementsByClassName(this.classes.carousel).item(0);
     },
+    setCarouselState: function(state){
+        this.container.setAttribute("aria-live", state);
+    },
     loadOptions: function () {
         this.options = JSON.parse(this.root.dataset.carousel);
     },
@@ -75,11 +78,13 @@ window.osuny.carousel.Instance.prototype = {
         if (this.pagination) {
             this.pagination.onAutoplayStarted();
         }
+        this.setCarouselState("off");
     },
     onAutoplayStopped: function () {
         if (this.pagination) {
             this.pagination.onAutoplayStopped();
         }
+        this.setCarouselState("polite");
     },
     onAutoplayProgressionChanged: function () {
         if (this.pagination) {
