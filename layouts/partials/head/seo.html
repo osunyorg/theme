@@ -8,8 +8,6 @@
 {{- $seoDescription := "" -}}
 {{- if .Params.meta_description -}}
   {{- $seoDescription = partial "PrepareHTML" .Params.meta_description -}}
-{{- else if .Params.description -}}
-  {{- $seoDescription = partial "PrepareHTML" .Params.description -}} {{/*  LEGACY  */}}
 {{- else if .Params.summary -}}
   {{- $seoDescription = .Params.summary | safeHTML -}}
 {{- else if .Content -}}

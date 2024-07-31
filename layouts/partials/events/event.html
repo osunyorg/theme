@@ -13,18 +13,18 @@
   <article class="event {{ if .Params.image }}event--with-image{{ end -}}" itemscope itemtype="https://schema.org/Event">
     <div class="event-content">
       {{- $title := partial "PrepareHTML" .Title -}}
-      {{ if .Params.subtitle }}
+      {{ if and $options.subtitle .Params.subtitle }}
         <hgroup>
       {{ end }}
       {{ $heading_tag.open }}
         <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
-      {{ if .Params.subtitle }}
+      {{ if and $options.subtitle .Params.subtitle }}
           <p class="event-subtitle">{{ .Params.subtitle }}</p>
         </hgroup>
       {{ end }}
 
-      {{ if (or .Params.dates.computed.short .Params.dates.computed.two_lines.short .Params.dates.from.hour .Params.dates.to.hour) }}
+      {{ if and $options.dates (or .Params.dates.computed.short .Params.dates.computed.two_lines.short .Params.dates.from.hour .Params.dates.to.hour) }}
         <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}}{{- if .Params.dates.from.hour -}}T{{ .Params.dates.from.hour }}{{- end -}}">
           <span>
             {{ $date_format := .Params.dates.computed.two_lines.short }}
@@ -74,16 +74,15 @@
         {{- end -}}
       {{ end }}
 
-      {{ if and .Params.events_categories $options.categories }}
-        <p class="event-categories">
-          {{- range $index, $category := .GetTerms "events_categories" -}}
-            <span>{{- $category.Title -}}</span>
-          {{- end -}}
-        </p>
+      {{ if $options.categories }}
+        {{ partial "commons/categories" ( dict
+          "context" .
+          "kind" "event"
+        )}}
       {{- end -}}
     </div>
     <div class="media">
-      {{- if .Params.image -}}
+      {{- if and $options.image .Params.image -}}
         {{- partial "commons/image.html"
             (dict
               "image"    .Params.image

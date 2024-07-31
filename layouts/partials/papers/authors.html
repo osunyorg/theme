@@ -12,7 +12,7 @@
             {{ if .Params.image }}
               <meta itemprop="image" content="{{ .Params.image }}">
             {{ end }}
-            {{ partial "persons/person.html" . }}
+            {{ partial "persons/person.html" (dict "person" .) }}
           </div>
         {{ end }}
 
