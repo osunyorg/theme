@@ -31,13 +31,13 @@ window.osuny.carousel.manager = {
     },
     resizeInstances: function () {
         this.instances.forEach(function (instance) {
-            instance.adaptToWindowResize();
+            instance.ui.adaptToWindowResize();
         });
     },
     computeInstancesDisplay: function () {
         var focusedInstanceCandidates = [];
         this.instances.forEach(function (instance) {
-            instance.setVisibility();
+            instance.ui.setVisibility();
             if (instance.state.visible) {
                 focusedInstanceCandidates.push(instance);
             }
@@ -50,7 +50,7 @@ window.osuny.carousel.manager = {
         var smallerDistance = window.innerHeight;
         var bestCandidate = null;
         focusCandidates.forEach(function (instance) {
-            var distanceToCenter = Math.abs(instance.getCenterPositionY() - windowCenterPositionY);
+            var distanceToCenter = Math.abs(instance.ui.getCenterPositionY() - windowCenterPositionY);
             if (distanceToCenter < smallerDistance) {
                 smallerDistance = distanceToCenter;
                 bestCandidate = instance;
@@ -77,8 +77,8 @@ window.osuny.carousel.manager = {
     },
     keyPress: function (e) {
         if (this.focusedInstance) {
-            if (e.key == 'ArrowLeft') { this.focusedInstance.slider.previousSlide() }
-            else if (e.key == 'ArrowRight') { this.focusedInstance.slider.nextSlide() }
+            if (e.key == 'ArrowLeft') { this.focusedInstance.previous() }
+            else if (e.key == 'ArrowRight') { this.focusedInstance.next() }
         }
     }
 }.invoke();

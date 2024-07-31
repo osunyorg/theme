@@ -64,6 +64,7 @@ window.osuny.carousel.PaginationButton = function PaginationButton(index, pagina
     this.container = null;
     this.progressBar = null;
     this.pagination = pagination;
+    this.instance = this.pagination.instance;
     this.initialize();
 }
 
@@ -80,11 +81,8 @@ window.osuny.carousel.PaginationButton.prototype = {
         this.container.addEventListener("click", this.onClick.bind(this));
     },
     onClick: function (e) {
-        this.pagination.slider.showSlide(this.index);
-        var autoplayer = this.pagination.instance.autoplayer;
-        if (autoplayer) {
-            autoplayer.stop();
-        }
+        this.instance.showSlide(this.index);
+        this.instance.stopAutoplay();
         this.setProgress(1)
     },
     setProgress: function (progress) {
@@ -97,6 +95,7 @@ window.osuny.carousel.ToggleButton = function (pagination) {
     this.class = [];
     this.state = 0;
     this.pagination = pagination;
+    this.instance = this.pagination.instance;
     this.container = null;
     this.initialize();
 }
@@ -129,11 +128,10 @@ window.osuny.carousel.ToggleButton.prototype = {
         }
     },
     onClick: function (e) {
-        var autoplayer = this.pagination.instance.autoplayer;
         if (this.state == 0) {
-            autoplayer.start();
+            this.instance.startAutoplay();
         } else {
-            autoplayer.stop();
+            this.instance.stopAutoplay();
         }
     }
 }

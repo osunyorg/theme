@@ -6,11 +6,13 @@ window.osuny.carousel = window.osuny.carousel || {};
 window.osuny.carousel.Instance = function (root) {
     this.root = root;
     this.container = null;
-    this.windowResizeTimeout;
+
     // Les instances des composants
-    this.pagination = null;
+    this.ui = null;
     this.slider = null;
+    this.pagination = null;
     this.autoplayer = null;
+
     // Les options sont chargées depuis le data-attribute "data-carousel"
     this.options = {};
     this.state = {
@@ -29,9 +31,6 @@ window.osuny.carousel.Instance.prototype = {
         this.loadOptions();
         this.initializeComponents();
         this.initializeListeners();
-        if (this.options.autoplay) {
-            this.initializeAutoplayer();
-        }
         this.state.initialized = true;
     },
     findContainer: function () {
@@ -41,6 +40,7 @@ window.osuny.carousel.Instance.prototype = {
         this.options = JSON.parse(this.root.dataset.carousel);
     },
     initializeComponents: function () {
+        this.ui = new window.osuny.carousel.UIController(this);
         this.slider = new window.osuny.carousel.Slider(this);
         if (this.options.pagination) {
             this.pagination = new window.osuny.carousel.Pagination(this);
@@ -48,11 +48,26 @@ window.osuny.carousel.Instance.prototype = {
         if (this.options.arrows) {
             this.arrows = new window.osuny.carousel.ArrowsController(this);
         }
+        if (this.options.autoplay) {
+            this.autoplayer = new window.osuny.carousel.Autoplayer(this);
+        }
     },
+    stopAutoplay: function () {
+        if (this.autoplayer) {
+            this.autoplayer.stop();
+        }
+    },
+    startAutoplay: function () {
+        if (this.autoplayer) {
+            this.autoplayer.start();
+        }
+    },
+
+    // Events Listeners and Callback
     initializeListeners: function () {
         this.container.addEventListener("mouseenter", this.onMouseEnter.bind(this));
         this.container.addEventListener("mouseleave", this.onMouseLeave.bind(this));
-        if (this.options.drag) { 
+        if (this.options.drag) {
             this.container.addEventListener("mousedown", this.onMouseDown.bind(this));
             this.container.addEventListener("touchstart", this.onMouseDown.bind(this));
             this.container.addEventListener("mouseup", this.onMouseUp.bind(this));      // HELP
@@ -99,49 +114,28 @@ window.osuny.carousel.Instance.prototype = {
         e.stopPropagation();
         e.stopImmediatePropagation();
     },
-    initializeAutoplayer: function () {
-        this.autoplayer = new window.osuny.carousel.Autoplayer(this);
-    },
-    adaptToWindowResize: function () {
-        clearTimeout(this.windowResizeTimeout);
-        this.windowResizeTimeout = setTimeout(function () {
-            this.slider.initialize();
-        }.bind(this), 200);
-    },
-    next: function () {
-        this.slider.nextSlide();
-    },
-    setVisibility: function () {
-        var isVisible = this.isInViewport();
-        if (this.state.visible != isVisible) {
-            this.state.visible = isVisible;
-            if (this.state.visible) {
-                this.visibilityStart();
-            } else {
-                this.visibilityStop();
-            }
-        }
-    },
-    isInViewport: function () {
-        var boundingRect = this.root.getBoundingClientRect();
-        return (
-            boundingRect.bottom >= 0 &&
-            boundingRect.top <= (window.innerHeight || document.documentElement.clientHeight)
-        );
-    },
-    getCenterPositionY: function () {
-        var boundingRect = this.root.getBoundingClientRect();
-        return boundingRect.top + boundingRect.height / 2;
-    },
-    visibilityStart: function () {
+    entersViewport: function () {
         if (this.autoplayer) {
             this.autoplayer.start();
         }
     },
-    visibilityStop: function () {
+    leavesViewport: function () {
         if (this.autoplayer) {
             this.autoplayer.stop();
         }
+    },
+    onResize: function () {
+        this.slider.initialize();
+    },
+    // Slider control
+    next: function () {
+        this.slider.nextSlide();
+    },
+    previous: function () {
+        this.slider.previousSlide();
+    },
+    showSlide: function (index) {
+        this.slider.showSlide(index);
     },
     onSlideChanged: function () {
         if (this.slider) {
@@ -158,3 +152,41 @@ window.osuny.carousel.Instance.prototype = {
         }
     }
 }
+
+window.osuny.carousel.UIController = function (instance) {
+    this.instance = instance;
+    this.root = this.instance.root;
+    this.windowResizeTimeout;
+}
+window.osuny.carousel.UIController.prototype = {
+    //Visibility computation
+    setVisibility: function () {
+        var isVisible = this.isInViewport();
+        if (this.instance.state.visible != isVisible) {
+            this.instance.state.visible = isVisible;
+            if (this.instance.state.visible) {
+                this.instance.entersViewport();
+            } else {
+                this.instance.leavesViewport();
+            }
+        }
+    },
+    isInViewport: function () {
+        var boundingRect = this.root.getBoundingClientRect();
+        return (
+            boundingRect.bottom >= 0 &&
+            boundingRect.top <= (window.innerHeight || document.documentElement.clientHeight)
+        );
+    },
+    getCenterPositionY: function () {
+        var boundingRect = this.root.getBoundingClientRect();
+        return boundingRect.top + boundingRect.height / 2;
+    },
+    adaptToWindowResize: function () {
+        clearTimeout(this.windowResizeTimeout);
+        this.windowResizeTimeout = setTimeout(function () {
+            this.instance.onResize();
+        }.bind(this), 200);
+    },
+}
+
