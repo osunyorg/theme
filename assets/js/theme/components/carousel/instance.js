@@ -30,7 +30,7 @@ window.osuny.carousel.Instance.prototype = {
         this.findContainer();
         this.loadOptions();
         this.initializeComponents();
-        this.initializeListeners();
+        this.ui.initializeListeners();
         this.state.initialized = true;
     },
     findContainer: function () {
@@ -52,6 +52,8 @@ window.osuny.carousel.Instance.prototype = {
             this.autoplayer = new window.osuny.carousel.Autoplayer(this);
         }
     },
+
+    // Autoplayer events
     stopAutoplay: function () {
         if (this.autoplayer) {
             this.autoplayer.stop();
@@ -60,6 +62,16 @@ window.osuny.carousel.Instance.prototype = {
     startAutoplay: function () {
         if (this.autoplayer) {
             this.autoplayer.start();
+        }
+    },
+    pauseAutoplay: function () {
+        if (this.autoplayer) {
+            this.autoplayer.pause();
+        }
+    },
+    unpauseAutoplay: function () {
+        if (this.autoplayer) {
+            this.autoplayer.unpause();
         }
     },
     onAutoplayStarted: function () {
@@ -77,71 +89,12 @@ window.osuny.carousel.Instance.prototype = {
             this.pagination.setSlideProgression(this.autoplayer.progression());
         }
     },
-    // Events Listeners and Callback
-    initializeListeners: function () {
-        this.container.addEventListener("mouseenter", this.onMouseEnter.bind(this));
-        this.container.addEventListener("mouseleave", this.onMouseLeave.bind(this));
-        if (this.options.drag) {
-            this.container.addEventListener("mousedown", this.onMouseDown.bind(this));
-            this.container.addEventListener("touchstart", this.onMouseDown.bind(this));
-            this.container.addEventListener("mouseup", this.onMouseUp.bind(this));      // HELP
-            this.container.addEventListener("touchend", this.onMouseUp.bind(this));
-            this.container.addEventListener("mousemove", this.onMouseMove.bind(this));
-            this.container.addEventListener("touchmove", this.onMouseMove.bind(this));
-            this.container.addEventListener("click", this.onClick.bind(this));
-        }
-    },
-    onMouseEnter: function (e) {
-        this.cancelLightBoxEvent(e);
-        if (this.options.autoplay) {
-            this.autoplayer.pause();
-        }
-    },
-    onMouseLeave: function (e) {
-        this.cancelLightBoxEvent(e);
-        if (this.options.autoplay) {
-            this.autoplayer.unpause();
-        }
-        if (this.slider.drag) {
-            this.slider.drag.end();
-        }
-    },
-    onMouseDown: function (e) {
-        this.cancelLightBoxEvent(e);
-        this.slider.drag.start(e.offsetX);
-    },
-    onMouseUp: function (e) {
-        this.cancelLightBoxEvent(e);
-        this.slider.drag.end();
-    },
-    onMouseMove: function (e) {
-        this.cancelLightBoxEvent(e);
-        if (this.slider.drag.active) {
-            this.slider.drag.drag(e.offsetX);
-        }
-    },
-    onClick: function (e) {
-        this.cancelLightBoxEvent(e);
-    },
-    cancelLightBoxEvent: function (e) { // MMARCHE PASSS
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-    },
-    entersViewport: function () {
-        if (this.autoplayer) {
-            this.autoplayer.start();
-        }
-    },
-    leavesViewport: function () {
-        if (this.autoplayer) {
-            this.autoplayer.stop();
-        }
-    },
-    onResize: function () {
+
+    // Slider control
+
+    resetSlider: function () {
         this.slider.initialize();
     },
-    // Slider control
     next: function () {
         this.slider.nextSlide();
     },
@@ -164,12 +117,30 @@ window.osuny.carousel.Instance.prototype = {
         if (this.arrows) {
             this.arrows.onSlideChanged();
         }
+    },
+
+    // Drag control
+    endDrag: function () {
+        if (this.slider.drag) {
+            this.slider.drag.end();
+        }
+    },
+    startDrag: function (position) {
+        if (this.slider.drag) {
+            this.slider.drag.start(position);
+        }
+    },
+    drag: function (position) {
+        if (this.slider.drag.active) {
+            this.slider.drag.drag(position);
+        }
     }
 }
 
 window.osuny.carousel.UIController = function (instance) {
     this.instance = instance;
     this.root = this.instance.root;
+    this.sliderContainer = this.instance.container;
     this.windowResizeTimeout;
 }
 window.osuny.carousel.UIController.prototype = {
@@ -179,9 +150,9 @@ window.osuny.carousel.UIController.prototype = {
         if (this.instance.state.visible != isVisible) {
             this.instance.state.visible = isVisible;
             if (this.instance.state.visible) {
-                this.instance.entersViewport();
+                this.instance.startAutoplay();
             } else {
-                this.instance.leavesViewport();
+                this.instance.stopAutoplay();
             }
         }
     },
@@ -199,8 +170,49 @@ window.osuny.carousel.UIController.prototype = {
     adaptToWindowResize: function () {
         clearTimeout(this.windowResizeTimeout);
         this.windowResizeTimeout = setTimeout(function () {
-            this.instance.onResize();
+            this.instance.resetSlider();
         }.bind(this), 200);
     },
+
+    // Events Listeners and Callback
+    initializeListeners: function () {
+        this.sliderContainer.addEventListener("mouseenter", this.onMouseEnter.bind(this));
+        this.sliderContainer.addEventListener("mouseleave", this.onMouseLeave.bind(this));
+        if (this.instance.options.drag) {
+            this.sliderContainer.addEventListener("mousedown", this.onMouseDown.bind(this));
+            this.sliderContainer.addEventListener("touchstart", this.onMouseDown.bind(this));
+            this.sliderContainer.addEventListener("mouseup", this.onMouseUp.bind(this));      // HELP
+            this.sliderContainer.addEventListener("touchend", this.onMouseUp.bind(this));
+            this.sliderContainer.addEventListener("mousemove", this.onMouseMove.bind(this));
+            this.sliderContainer.addEventListener("touchmove", this.onMouseMove.bind(this));
+        }
+    },
+    onMouseEnter: function (e) {
+        this.cancelLightBoxEvent(e);
+        this.instance.pauseAutoplay();
+
+    },
+    onMouseLeave: function (e) {
+        this.cancelLightBoxEvent(e);
+        this.instance.unpauseAutoplay();
+        this.instance.endDrag();
+    },
+    onMouseDown: function (e) {
+        this.cancelLightBoxEvent(e);
+        this.instance.startDrag(e.offsetX);
+    },
+    onMouseUp: function (e) {
+        this.cancelLightBoxEvent(e);
+        this.instance.endDrag();
+    },
+    onMouseMove: function (e) {
+        this.cancelLightBoxEvent(e);
+        this.instance.drag(e.offsetX);
+    },
+    cancelLightBoxEvent: function (e) { // MMARCHE PASSS
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+    }
 }
 
