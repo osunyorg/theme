@@ -10,7 +10,7 @@
     <hgroup>
       <p class="suptitle" itemprop="volumeNumber">{{ i18n "volumes.volume_number" (dict "Number" .Params.Number) }}</p>
       {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" title="{{ i18n "commons.more_aria" (dict "Title" .Title) }}" itemprop="name">{{ partial "PrepareHTML" .Title }}</a>
+        <a href="{{ .Permalink }}" title="{{ i18n "commons.more_aria" (dict "Title" .Title) }}" itemprop="name">{{ safeHTML .Title }}</a>
       {{ $heading_tag.close }}
     </hgroup>
     <div class="media">

@@ -11,11 +11,11 @@
 {{- end -}}
 <article class="{{ $class }}">
   <div>
-    {{- partial "PrepareHTML" (printf "<%s class='title'>" $heading) -}}
+    {{- safeHTML (printf "<%s class='title'>" $heading) -}}
       <a href="{{ .Permalink }}">
-        {{- partial "PrepareHTML" .Title -}}
+        {{- safeHTML .Title -}}
       </a>
-    {{- partial "PrepareHTML" (printf "</%s>" $heading) -}}
+    {{- safeHTML (printf "</%s>" $heading) -}}
     {{- with .Params.summary }}
       <p>{{ . | safeHTML }}</p>
     {{ end -}}

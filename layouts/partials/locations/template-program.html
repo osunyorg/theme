@@ -2,7 +2,7 @@
 <li>
   <div class="program-content">
     <a href="{{ .path }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
-      {{- partial "PrepareHTML" .label -}}
+      {{- safeHTML .label -}}
     </a>
     <div class="description">
       {{- $program.Params.summary }}

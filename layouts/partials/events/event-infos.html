@@ -4,7 +4,7 @@
     {{ if .computed }}
       <li class="event-date" itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
         <span>{{ i18n "events.date" }}</span>
-        {{ partial "PrepareHTML" .computed.two_lines.long }}
+        {{ safeHTML .computed.two_lines.long }}
       </li>
     {{ end }}
     {{ if .from.hour }}

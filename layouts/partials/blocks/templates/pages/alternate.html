@@ -18,7 +18,7 @@
       <article class="{{ $image_class }} {{- if (not (isset .Params "image")) -}} without-image {{- end -}}">
         {{ $heading_tag.open }}
           <a href="{{- .Permalink -}}">
-            {{- partial "PrepareHTML" .Title -}}
+            {{- safeHTML .Title -}}
           </a>
         {{ $heading_tag.close }}
 

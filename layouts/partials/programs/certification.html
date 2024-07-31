@@ -7,7 +7,7 @@
         <section id="{{ urlize (i18n "programs.certifications.qualiopi") }}">
           <img src="/assets/images/certifications/qualiopi.svg" alt="{{ i18n "programs.certifications.qualiopi" }}" class="logo-qualiopi">
           {{- if partial "GetTextFromHTML" .Params.certifications.qualiopi.text -}}
-            {{- partial "PrepareHTML" .Params.certifications.qualiopi.text -}}
+            {{- safeHTML .Params.certifications.qualiopi.text -}}
           {{- end -}}
         </section>
       </div>

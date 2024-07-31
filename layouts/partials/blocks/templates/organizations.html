@@ -37,7 +37,7 @@
     {{ $title := "" }}
     <div class="organization-content">
       {{ if .title }}
-        {{ $title = partial "PrepareHTML" .title -}}
+        {{ $title = safeHTML .title -}}
         <p class="organization-title">
           {{- if and .url $options.link }}
             <a href="{{ .url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
@@ -50,7 +50,7 @@
       {{ end -}}
       {{ if and $options.summary .summary }}
         <p class="organization-summary">
-          {{ partial "PrepareHTML" .summary }}
+          {{ safeHTML .summary }}
         </p>
       {{ end }}
     </div>

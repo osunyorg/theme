@@ -4,10 +4,10 @@
   {{ range $diplomas }}
     <li>
       <a href="{{ .Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">
-        {{- partial "PrepareHTML" .Title -}}
+        {{- safeHTML .Title -}}
         {{ with .Params.short_name }}
           <span class="meta">
-            {{ partial "PrepareHTML" . }}
+            {{ safeHTML . }}
           </span>
         {{ end }}
       </a>
@@ -30,13 +30,13 @@
 {{- define "programsList" -}}
   <li>
     <a href="{{ .path }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
-      {{- partial "PrepareHTML" .label -}}
+      {{- safeHTML .label -}}
     </a>
     <ol>
       {{- range .children -}}
       <li>
         <a href="{{ .path }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
-          {{- partial "PrepareHTML" .label -}}
+          {{- safeHTML .label -}}
         </a>
         {{ if .children }}
           {{- template "programsList" . -}}

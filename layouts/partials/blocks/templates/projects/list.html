@@ -12,7 +12,7 @@
         "close" ((printf "</%s>" $heading) | safeHTML)
         ) }}
     <article class="project" itemscope itemtype="https://schema.org/CreativeWork">
-      {{- $title := partial "PrepareHTML" .Title -}}
+      {{- $title := safeHTML .Title -}}
     
       {{ $heading_tag.open }}
         <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>

@@ -48,23 +48,23 @@
               <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
                 {{ with .address }}
                   <span itemprop="streetAddress">
-                    {{ partial "PrepareHTML" .label }},
+                    {{ safeHTML .label }},
                   </span>
                   <br>
                 {{ end }}
                 {{ with .city }}
                   <span itemprop="addressLocality">
-                    {{ partial "PrepareHTML" .label }}
+                    {{ safeHTML .label }}
                   </span>
                 {{ end }}
                 {{ with .zipcode }}
                   <span itemprop="postalCode">
-                    {{ partial "PrepareHTML" .label }}
+                    {{ safeHTML .label }}
                   </span>
                 {{ end }}
                 {{ with .country }}
                   <span itemprop="postalCode">
-                    {{ partial "PrepareHTML" .label }}
+                    {{ safeHTML .label }}
                   </span>
                 {{ end }}
               </address>

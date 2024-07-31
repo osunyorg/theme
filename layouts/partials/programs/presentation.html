@@ -9,14 +9,14 @@
           {{- if partial "GetTextFromHTML" .Params.presentation -}}
             <section id="{{ urlize (i18n "programs.presentation") }}">
               <h3>{{ i18n "programs.presentation" }}</h3>
-              <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
+              <p>{{- safeHTML .Params.presentation -}}</p>
             </section>
           {{- end -}}
 
           {{- if partial "GetTextFromHTML" .Params.objectives -}}
             <section id="{{ urlize (i18n "programs.objectives") }}">
               <h3>{{ i18n "programs.objectives" }}</h3>
-              {{- partial "PrepareHTML" .Params.objectives -}}
+              {{- safeHTML .Params.objectives -}}
             </section>
           {{- end -}}
 
@@ -30,7 +30,7 @@
                   {{- with $diploma.Params.ects -}}
                     <tr>
                       <th scope="row">{{ i18n "programs.ects_credits" }}</th>
-                      <td>{{ partial "PrepareHTML" . }}</td>
+                      <td>{{ safeHTML . }}</td>
                     </tr>
                   {{- end -}}
                 {{- end -}}
@@ -49,7 +49,7 @@
                 {{- if partial "GetTextFromHTML" .Params.capacity -}}
                 <tr>
                   <th>{{ i18n "programs.capacity" }}</th>
-                  <td>{{ partial "PrepareHTML" .Params.capacity }}</td>
+                  <td>{{ safeHTML .Params.capacity }}</td>
                 </tr>
                 {{- end -}}
               </tbody>

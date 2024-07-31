@@ -1,4 +1,4 @@
-{{- $title := partial "PrepareHTML" .Title -}}
+{{- $title := safeHTML .Title -}}
 <article class="program">
   <div>
     <h2>
@@ -7,7 +7,7 @@
       </a>
     </h2>
     {{ if (partial "GetTextFromHTML" .Params.presentation) }}
-      <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
+      <p>{{- safeHTML .Params.presentation -}}</p>
     {{ end }}
   </div>
 </article>

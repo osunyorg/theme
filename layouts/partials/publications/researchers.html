@@ -12,7 +12,7 @@
             {{ end }}
             <article class="person">
               <div class="description">
-                {{- $title := partial "PrepareHTML" .Title }}
+                {{- $title := safeHTML .Title }}
                 <p class="name"><a href="{{ .Permalink }}">{{- $title -}}</a></p>
               </div>
               <div class="avatar">

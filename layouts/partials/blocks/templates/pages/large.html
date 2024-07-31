@@ -12,7 +12,7 @@
         <div class="page-content">
           {{ $heading_tag.open }}
             <a href="{{- .Permalink -}}">
-              {{- partial "PrepareHTML" .Title -}}
+              {{- safeHTML .Title -}}
             </a>
           {{ $heading_tag.close }}
   

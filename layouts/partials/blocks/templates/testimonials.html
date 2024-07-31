@@ -30,7 +30,7 @@
             {{ $is_long := gt (len .text) 150 }}
             <figure  class="{{ if $is_carousel }}splide__slide{{ end }} {{ if .photo }}with-picture{{ end }}">
               <blockquote {{- if $is_long }} class="is-long" {{- end }}>
-                <p>{{- partial "PrepareHTML" .text -}}</p>
+                <p>{{- safeHTML .text -}}</p>
               </blockquote>
               {{ if or .photo .author .job -}}
               <figcaption>
@@ -47,10 +47,10 @@
                 {{ if or .author .job -}}
                   <p>
                     {{- if .author -}}
-                      <span class="signature">{{ partial "PrepareHTML" .author }}</span>
+                      <span class="signature">{{ safeHTML .author }}</span>
                     {{- end }}
                     {{- if .job -}}
-                      <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
+                      <span class="meta">{{- safeHTML .job -}}</span>
                     {{- end }}
                   </p>
                 {{- end }}

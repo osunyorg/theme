@@ -2,22 +2,22 @@
 {{ partial "publications/hero-single.html" . }}
 
 <div class="document-content" itemscope itemtype="https://schema.org/ScholarlyArticle">
-  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+  <meta itemprop="name" content="{{ safeHTML .Title }}">
   
   <div class="container">
     <div class="document-sidebar">
       {{ partial "publications/researchers.html" . }}
       <div class="paper-ref">
-        <p>{{ partial "PrepareHTML" .Params.ref }}</p>
+        <p>{{ safeHTML .Params.ref }}</p>
       </div>
     </div>
     <div class="content">
       <div class="rich-text">
         {{ with .Params.abstract }}
-          <p>{{ partial "PrepareHTML" . }}</p>
+          <p>{{ safeHTML . }}</p>
         {{ end }}
         {{ with .Params.citation_full }}
-          <p>{{ partial "PrepareHTML" . }}</p>
+          <p>{{ safeHTML . }}</p>
         {{ end }}
         {{ partial "publications/citations.html" . }}
         {{ partial "publications/downloads.html" . }}

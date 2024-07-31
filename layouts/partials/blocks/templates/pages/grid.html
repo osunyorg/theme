@@ -20,7 +20,7 @@
       <article>
         {{ $heading_tag.open }}
           <a href="{{- .Permalink -}}">
-            {{- partial "PrepareHTML" .Title -}}
+            {{- safeHTML .Title -}}
           </a>
         {{ $heading_tag.close }}
 

@@ -2,7 +2,7 @@
   {{ partial "volumes/hero.html" . }}
 
   <div class="document-content" itemscope itemtype="https://schema.org/PublicationVolume">
-    <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+    <meta itemprop="name" content="{{ safeHTML .Title }}">
     {{- if .Params.image -}}
       {{- $image := partial "GetMedia" .Params.image.id -}}
       {{- if $image -}}

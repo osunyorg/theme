@@ -2,7 +2,7 @@
 
 <article class="organization">
   <div class="organization-content">
-    {{ $title := partial "PrepareHTML" .Title }}
+    {{ $title := safeHTML .Title }}
     <h2 class="organization-title">
       {{ if $options.link }}
         <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
@@ -14,7 +14,7 @@
     </h2>
     {{ if and $options.summary .Params.summary }}
       <p class="organization-summary">
-        {{ partial "PrepareHTML" .Params.summary }}
+        {{ safeHTML .Params.summary }}
       </p>
     {{ end }}
   </div>

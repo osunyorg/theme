@@ -6,10 +6,10 @@
       {{- with $person -}}
       <li>
         <a href="{{ .Permalink }}">
-          {{- partial "PrepareHTML" .Title -}}
+          {{- safeHTML .Title -}}
         </a>
         <p>
-          {{- partial "PrepareHTML" (index $descriptions $slug) -}}
+          {{- safeHTML (index $descriptions $slug) -}}
         </p>
       </li>
     {{- end -}}
