@@ -22,7 +22,9 @@ window.osuny.carousel.Pagination.prototype = {
         this.container = this.instance.root.getElementsByClassName(this.classes.container).item(0);
         if (this.instance.options.pagination) {
             this.initializeTabPagination();
-            this.toggleButton = this.instance.options.autoplay ? new window.osuny.carousel.ToggleButton(this) : null;
+            if(this.instance.options.autoplay){
+                this.toggleButton = new window.osuny.carousel.ToggleButton(this);
+            }
         }
     },
 
