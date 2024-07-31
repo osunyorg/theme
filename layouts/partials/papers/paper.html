@@ -1,42 +1,53 @@
 {{ $inside_volume := .inside_volume | default false }}
+{{ $actions := .actions | default true }}
 {{ $modalId := print "modalID_" .index }}
+
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading_tag := (dict
+  "open" ((printf "<h%s class='paper-title' itemprop='headline'>" $heading_level) | safeHTML)
+  "close" ((printf "</h%s>" $heading_level) | safeHTML)
+) }}
 
 {{ with .paper }}
   <article class="paper" itemscope itemtype="https://schema.org/ScholarlyArticle" {{- if $inside_volume }} itemProp="hasPart" {{- end -}}>
     <div>
-      <h3>
+      {{ $heading_tag.open }}
         <a href="{{ .Permalink }}" itemprop="url">
           <span itemprop="name">{{ partial "PrepareHTML" .Title }}</span>
         </a>
-      </h3>
-      <p>
-        {{ with .Params.paper_kind }}
-          <span class="paper-kind">{{ . }}</span>
-        {{ end }}
-        {{- range $index, $authors := .Params.Researchers -}}
-          {{- $author := site.GetPage (printf "/persons/%s" .) -}}
-          {{ if $author }}
-            {{- if ne $index 0 -}},{{ end }}
-            <span itemprop="author" itemscope itemtype="https://schema.org/Person">
-              <a href="{{ $author.Permalink }}" itemprop="url">
-                <span itemprop="name">{{ trim $author.Title "\n" }}</span>
-              </a>
-            </span>
+      {{ $heading_tag.close }}
+      <div class="paper-meta">
+        <p class="paper-authors">
+          {{- range $index, $authors := .Params.Researchers -}}
+            {{- $author := site.GetPage (printf "/persons/%s" .) -}}
+            {{ if $author }}
+              {{- if ne $index 0 -}},{{ end }}
+              <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                <a href="{{ $author.Permalink }}" itemprop="url">
+                  <span itemprop="name">{{ trim $author.Title "\n" }}</span>
+                </a>
+              </span>
+            {{- end -}}
           {{- end -}}
-        {{- end -}}
-        {{ .Params.authors_list }}
-      </p>
-      {{ if not $inside_volume }}
-        <p class="paper-volume">
-          {{ range .Params.Volumes }}
-            {{ $volume := site.GetPage (printf "/volumes/%s" .) }}
-            {{ if $volume }}
-              {{ i18n "commons.in" }} “<a href="{{ $volume.Permalink }}">{{ $volume.Title }}</a>”
-            {{ end }}
-          {{ end }}
+          {{ .Params.authors_list }}
         </p>
-      {{ end }}
+        {{ if not $inside_volume }}
+          <p class="paper-volume">
+            {{ with .Params.paper_kind }}
+              <span class="paper-kind">{{ . }}</span>
+            {{ end }}
+            {{ range .Params.Volumes }}
+              {{ $volume := site.GetPage (printf "/volumes/%s" .) }}
+              {{ if $volume }}
+                <a href="{{ $volume.Permalink }}">{{ $volume.Title }}</a>
+              {{ end }}
+            {{ end }}
+          </p>
+        {{ end }}
+      </div>
     </div>
-    {{ partial "papers/actions.html" (dict "paper" . ) }}
+    {{ if eq $actions true }}
+      {{ partial "papers/actions.html" (dict "paper" . ) }}
+    {{ end }}
   </article>
 {{ end }}

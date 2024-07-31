@@ -1,0 +1,36 @@
+{{- $block := .block -}}
+{{- $template := .block.template -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+
+{{- with .block.data -}}
+  <div class="block block-papers {{- if $title }} block-with-title {{- end -}}">
+    <div class="container">
+      <div class="block-content">
+        {{ if $block.title -}}
+          {{ $papers_page := site.GetPage "/papers" }}
+          {{ $link := $papers_page.Permalink }}
+
+          {{ partial "blocks/top.html" (dict
+            "title" $block.title
+            "heading_level" $block.ranks.self
+            "link" $link
+            "description" .description
+          )}}
+        {{- end }}
+
+        <div class="papers">
+          {{ range $paper := .papers -}}
+            {{ with site.GetPage (printf "/papers/%s" $paper) }}
+              {{ partial "papers/paper.html" (dict 
+                  "paper" .
+                  "actions" false
+                  "heading_level" $block.ranks.children
+              )}}
+            {{ end }}
+          {{ end}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{- end -}}
