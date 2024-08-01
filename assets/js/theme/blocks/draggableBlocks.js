@@ -1,4 +1,4 @@
-const draggableBlocks = document.querySelectorAll('.block-timeline--horizontal, .block-posts--carousel');
+const draggableBlocks = document.querySelectorAll('.block-posts--carousel');
 
 class DraggableBlock {
     constructor (block) {

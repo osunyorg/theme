@@ -10,6 +10,7 @@ import './design-system/toc';
 import './blocks/keyFigures';
 import './blocks/organizations';
 import './blocks/draggableBlocks.js';
+import './blocks/timeline.js';
 import './blocks/videos.js';
 import './blocks/campus.js';
 import './utils/utils.js';
