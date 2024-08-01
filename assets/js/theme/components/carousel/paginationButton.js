@@ -6,11 +6,6 @@ window.osuny.carousel.PaginationButton = function PaginationButton(element, inde
     this.index = index;
     this.pagination = pagination;
     this._initialize();
-    return {
-        setProgression: this.setProgression.bind(this),
-        select: this.select.bind(this),
-        unselect: this.unselect.bind(this)
-    }
 }
 
 window.osuny.carousel.PaginationButton.prototype = {

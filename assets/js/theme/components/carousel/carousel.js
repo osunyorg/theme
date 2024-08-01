@@ -83,8 +83,8 @@ window.osuny.carousel.Carousel.prototype = {
         this.autoplayerElement = this.element.getElementsByClassName(this.classes.autoplayerElement).item(0);
         this.autoplayer = new window.osuny.carousel.Autoplayer(this.autoplayerElement);
         this.autoplayer.setInterval(this.config.autoplayInterval);
-        this.autoplayerElement.addEventListener("trigger", this._onAutoplayerTrigger.bind(this));
-        this.autoplayerElement.addEventListener("progression", this._onAutoplayerProgression.bind(this));
+        this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerTrigger, this._onAutoplayerTrigger.bind(this));
+        this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerProgression, this._onAutoplayerProgression.bind(this));
         this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerPause, this._onAutoplayerPause.bind(this));
         this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerPlay, this._onAutoplayerPlay.bind(this));
         if (this.config.autoplay) {

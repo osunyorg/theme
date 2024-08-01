@@ -4,19 +4,8 @@ window.osuny.carousel = window.osuny.carousel || {};
 window.osuny.carousel.Autoplayer = function (element) {
     this.element = element;
     this._initialize();
-    return {
-        setInterval: this.setInterval.bind(this),
-        enable: this.enable.bind(this),
-        disable: this.disable.bind(this),
-        pause: this.pause.bind(this),
-        unpause: this.unpause.bind(this)
-    }
 }
 window.osuny.carousel.Autoplayer.prototype = {
-    events: {
-        trigger: 'trigger',
-        progression: 'progression'
-    },
     setInterval: function (interval) {
         this.interval = interval;
     },
@@ -78,21 +67,21 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.lastLoopAt = Date.now();
     },
     _dispatchTrigger: function () {
-        var event = new Event(this.events.trigger);
+        var event = new Event(window.osuny.carousel.events.autoplayerTrigger);
         this.element.dispatchEvent(event);
     },
     _dispatchProgression(){
-        var event = new Event(this.events.progression);
+        var event = new Event(window.osuny.carousel.events.autoplayerProgression);
         event.progression = this.progression;
         this.element.dispatchEvent(event);
     },
     _updateToggle: function () {
+        this.classList.remove(window.osuny.carousel.classes.autoplayerPlaying);
+        this.classList.remove(window.osuny.carousel.classes.autoplayerPaused);
         if (this.paused) {
-            this.classList.remove(window.osuny.carousel.classes.autoplayerPlaying);
             this.classList.add(window.osuny.carousel.classes.autoplayerPaused);
         } else {
             this.classList.add(window.osuny.carousel.classes.autoplayerPlaying);
-            this.classList.remove(window.osuny.carousel.classes.autoplayerPaused);
         }
     },
     _onClick: function () {

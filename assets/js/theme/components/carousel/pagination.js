@@ -4,11 +4,6 @@ window.osuny.carousel = window.osuny.carousel || {};
 window.osuny.carousel.Pagination = function (element) {
     this.element = element;
     this._initialize();
-    return {
-        selectButton: this.selectButton.bind(this),
-        setProgression: this.setProgression.bind(this),
-        unselectAllButtons: this.unselectAllButtons.bind(this)
-    }
 }
 
 window.osuny.carousel.Pagination.prototype = {
