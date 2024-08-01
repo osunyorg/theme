@@ -24,7 +24,7 @@ window.osuny.carousel.PaginationButton.prototype = {
         this.setProgress(0);
         this.container.addEventListener("click", this.onClick.bind(this));
     },
-    onClick: function (e) {
+    onClick: function () {
         this.instance.showSlide(this.index);
         this.instance.stopAutoplay();
         this.setProgress(1);

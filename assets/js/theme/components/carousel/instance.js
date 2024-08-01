@@ -10,11 +10,15 @@ window.osuny.carousel.Instance = function (root) {
     this.slider = null;
     this.pagination = null;
     this.autoplayer = null;
-
+    this.toggleButton = null;
+    
     // Les options sont chargées depuis le data-attribute "data-carousel"
     this.options = {};
+    this.slides = {
+        current: 0,
+        total: 0
+    }
     this.state = {
-        index: 0,
         initialized: false,
         visible: false
     };
@@ -43,7 +47,10 @@ window.osuny.carousel.Instance.prototype = {
     initializeComponents: function () {
         this.ui = new window.osuny.carousel.UIController(this);
         this.slider = new window.osuny.carousel.Slider(this);
+        this.slides.current = this.slider.index;
+        this.slides.total = this.slider.length();
         this.pagination = window.osuny.utils.instanciateIf(this, window.osuny.carousel.Pagination, this.options.pagination);
+        this.toggleButton = window.osuny.utils.instanciateIf(this, window.osuny.carousel.ToggleButton, this.options.autoplay);
         this.arrows = window.osuny.utils.instanciateIf(this, window.osuny.carousel.ArrowsController, this.options.arrows);
         this.autoplayer = window.osuny.utils.instanciateIf(this, window.osuny.carousel.Autoplayer, this.options.autoplay);
     },
@@ -76,13 +83,13 @@ window.osuny.carousel.Instance.prototype = {
     },
     onAutoplayStarted: function () {
         if (this.pagination) {
-            this.pagination.onAutoplayStarted();
+            this.toggleButton.toggleStart();
         }
         this.setCarouselState("off");
     },
     onAutoplayStopped: function () {
         if (this.pagination) {
-            this.pagination.onAutoplayStopped();
+            this.toggleButton.toggleStop();
         }
         this.setCarouselState("polite");
     },
@@ -108,7 +115,7 @@ window.osuny.carousel.Instance.prototype = {
     },
     onSlideChanged: function () {
         if (this.slider) {
-            this.state.index = this.slider.index;
+            this.slides.current = this.slider.index;
         }
         if (this.autoplayer) {
             this.autoplayer.onSlideChanged();

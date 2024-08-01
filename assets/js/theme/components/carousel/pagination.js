@@ -3,12 +3,9 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Pagination = function (instance) {
     this.instance = instance;
-    this.slider = this.instance.slider;
     this.container = null;
     this.tabButtons = [];
-    this.toggleButton = null;
-    this.tabButtonModel = null;
-    this.carouselLength = this.slider.length();
+
     this.initialize();
 }
 
@@ -22,25 +19,18 @@ window.osuny.carousel.Pagination.prototype = {
         this.container = this.instance.root.getElementsByClassName(this.classes.container).item(0);
         if (this.instance.options.pagination) {
             this.initializeTabPagination();
-            this.toggleButton = window.osuny.utils.instanciateIf(this, window.osuny.carousel.ToggleButton, this.instance.options.autoplay);
         }
     },
-
     initializeTabPagination() {
-        var pagination = this.container.getElementsByClassName(this.classes.pagination).item(0);
-        if (this.instance.options.autoplay) {
-            pagination.classList.add('has_toggle');
-        }
-
         this.tabButtons = [];
-        for (var i = 0; i < this.carouselLength; i += 1) {
+        for (var i = 0; i < this.instance.slides.total; i += 1) {
             this.tabButtons.push(new window.osuny.carousel.PaginationButton(i, this))
         }
         this.container.classList.add('is-visible');
     },
 
     setSlideProgression: function (progression) {
-        this.tabButtons[this.slider.index].setProgress(progression);
+        this.tabButtons[this.instance.slides.current].setProgress(progression);
     },
     resetSlidesState: function () {
         this.tabButtons.forEach(function (tabButton) {
@@ -51,13 +41,7 @@ window.osuny.carousel.Pagination.prototype = {
     onSlideChanged: function () {
         this.resetSlidesState();
         this.setSlideProgression(1);
-        this.tabButtons[this.slider.index].container.focus();
-        this.tabButtons[this.slider.index].setSelected(true);
-    },
-    onAutoplayStarted: function () {
-        this.toggleButton.toggleStart();
-    },
-    onAutoplayStopped: function () {
-        this.toggleButton.toggleStop();
+        this.tabButtons[this.instance.slides.current].container.focus();
+        this.tabButtons[this.instance.slides.current].setSelected(true);
     }
 }
