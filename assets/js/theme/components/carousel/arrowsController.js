@@ -40,7 +40,7 @@ window.osuny.carousel.ArrowsController.prototype = {
         this.updateCounter();
     },
     updateCounter: function () {
-        this.counter.innerHTML = "X/Y".replace("X", String(this.slider.index)).replace("Y", String(this.slider.length() - 1));
+        this.counter.innerHTML = String(this.slider.index + 1) + '/' + String(this.slider.length());
     },
     updateArrowsState: function () {
         this.arrows.prev.disabled = (this.slider.index == 0);
