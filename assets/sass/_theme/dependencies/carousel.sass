@@ -3,7 +3,9 @@
     flex-direction: column-reverse
     position: relative
     &__slider
-        overflow: hidden
+        overflow: visible
+        .block-testimonials &
+            overflow: hidden
     &__container
         display: flex
         flex-direction: row
@@ -13,7 +15,8 @@
         width: fit-content
         justify-content: flex-start
     &__slide
-        &:not(.is-current)
+        .testimonials &:not(.is-current),
+        .block-timeline &.is-before
             opacity: 0.3
     button
         appearance: none
