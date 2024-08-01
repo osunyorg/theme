@@ -1,6 +1,7 @@
 // https://developers.osuny.org/docs/theme/components/carousel/
 import './carousel/autoplayer';
-import './carousel/instance';
+import './carousel/carousel';
+import './carousel/config';
 import './carousel/uiController';
 import './carousel/manager';
 import './carousel/paginationButton';

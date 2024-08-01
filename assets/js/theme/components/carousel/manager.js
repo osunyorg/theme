@@ -3,81 +3,80 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.manager = {
     initialized: false,
-    // @alex @olivia js-carousel ou osuny-carousel ?
     class: "js-carousel",
-    domObjects: [],
-    instances: [],
-    focusedInstance: null,
+    elements: [],
+    carousels: [],
+    focusedCarousel: null,
+    carouselsInViewport: [],
+    windowCenterY: null,
     initialize: function () {
         if (!this.initialized) {
-            this.createInstances();
-            this.initializeListeners();
-            this.computeInstancesDisplay();
+            this._createCarousels();
+            this._initializeListeners();
+            this._adaptToViewport();
             this.initialized = true;
         }
     },
-    createInstances: function () {
-        this.domObjects = document.getElementsByClassName(this.class);
-        for (var i = 0; i < this.domObjects.length; i += 1) {
-            var domObject = this.domObjects[i],
-                instance = new window.osuny.carousel.Instance(domObject);
-            this.instances.push(instance);
+    _createCarousels: function () {
+        this.elements = document.getElementsByClassName(this.class);
+        for (var i = 0; i < this.elements.length; i += 1) {
+            var element = this.elements[i],
+                carousel = new window.osuny.carousel.Carousel(element);
+            this.carousels.push(carousel);
         }
     },
-    initializeListeners: function () {
-        window.addEventListener('resize', this.resizeInstances.bind(this));
-        window.addEventListener('scroll', this.computeInstancesDisplay.bind(this));
-        document.addEventListener("keydown", this.keyPress.bind(this));
+    _initializeListeners: function () {
+        window.addEventListener("resize", this._resize.bind(this));
+        window.addEventListener("scroll", this._adaptToViewport.bind(this));
+        window.addEventListener("keydown", this._keyPress.bind(this));
     },
-    resizeInstances: function () {
-        this.instances.forEach(function (instance) {
-            instance.ui.adaptToWindowResize();
+    _resize: function () {
+        this.windowCenterY = (window.innerHeight || document.documentElement.clientHeight) / 2;
+        this.carousels.forEach(function (carousel) {
+            carousel.resize();
         });
     },
-    computeInstancesDisplay: function () {
-        var focusedInstanceCandidates = [];
-        this.instances.forEach(function (instance) {
-            instance.ui.setVisibility();
-            if (instance.state.visible) {
-                focusedInstanceCandidates.push(instance);
+    _adaptToViewport: function () {
+        this.carouselsInViewport = [];
+        for (var i = 0; i < this.carousels.length; i += 1) {
+            var carousel = this.carousels[i],
+                // TODO
+                inViewPort = true;
+            if (inViewPort) {
+               carousel.unpause();
+               this.carouselsInViewport.push(carousel);
+            } else {
+                carousel.pause();
             }
-        });
-        this.setFocus(focusedInstanceCandidates);
+        };
+        this.focusedCarousel = this._findBestCarouselFocusCandidate();
     },
-    setFocus: function (focusCandidates) {
-        this.cleanFocusInstance()
-        var windowCenterPositionY = (window.innerHeight || document.documentElement.clientHeight) / 2;
-        var smallerDistance = window.innerHeight;
-        var bestCandidate = null;
-        focusCandidates.forEach(function (instance) {
-            var distanceToCenter = Math.abs(instance.ui.getCenterPositionY() - windowCenterPositionY);
-            if (distanceToCenter < smallerDistance) {
-                smallerDistance = distanceToCenter;
-                bestCandidate = instance;
-            }
+    _findBestCarouselFocusCandidate: function () {
+        // On démarre avec la plus grande distance possible
+        var distance = window.innerHeight,
+            bestCandidate = null;
+        this.carouselsInViewport.forEach(function (carousel) {
+            // TODO récupérer les infos sans ui
+            // var currentDistanceToCenter = Math.abs(carousel.ui.getCenterPositionY() - this.windowCenterY);
+            // if (currentDistanceToCenter < distance) {
+            //     distance = currentDistanceToCenter;
+            //     bestCandidate = carousel;
+            // }
         });
-        if (bestCandidate) {
-            this.addFocusInstance(bestCandidate);
+        return bestCandidate;
+    },
+    _keyPress: function (e) {
+        if (this.focusedCarousel) {
+            if (e.key == 'ArrowLeft') { this.focusedCarousel.previous() }
+            else if (e.key == 'ArrowRight') { this.focusedCarousel.next() }
         }
-    },
-    cleanFocusInstance: function () {
-        this.focusedInstance = null;
-    },
-    addFocusInstance: function (focusCandidate) {
-        this.focusedInstance = focusCandidate;
     },
     invoke: function () {
         "use strict";
         return {
             initialize: this.initialize.bind(this),
-            instances: this.instances,
+            carousels: this.carousels,
         };
-    },
-    keyPress: function (e) {
-        if (this.focusedInstance) {
-            if (e.key == 'ArrowLeft') { this.focusedInstance.previous() }
-            else if (e.key == 'ArrowRight') { this.focusedInstance.next() }
-        }
     }
 }.invoke();
 

@@ -1,10 +1,8 @@
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
-window.osuny.carousel.Slider = function Slider(carousel) {
-    this.carousel = carousel;
-    this.container = this.carousel.container;
-    this.transition_duration = this.carousel.options.transition_duration;
+window.osuny.carousel.Slider = function Slider(element) {
+    this.element = element;
     this.index = 0;
     this.slides = [];
     this.deltaPosition = 0;
@@ -18,8 +16,8 @@ window.osuny.carousel.Slider.prototype = {
         this.slides = [];
         this.deltaPosition = 0;
         this.position = 0;
-        this.loadSlidesFromDom();
-        this.drag = window.osuny.utils.instanciateIf(this, window.osuny.carousel.Drag, this.carousel.options.drag);
+        this._loadSlidesFromDom();
+        // this.drag = window.osuny.utils.instanciateIf(this, window.osuny.carousel.Drag, this.carousel.options.drag);
         this.showSlide(this.index);
         this.updateSlidesClasses();
     },
@@ -35,7 +33,7 @@ window.osuny.carousel.Slider.prototype = {
         this.translate(true);
         this.updateSlidesClasses();
         //On previent l'carousel
-        this.carousel.onSlideChanged();
+        // this.carousel.onSlideChanged();
     },
     recomputePosition: function () {
         var threshold = 100;
@@ -48,8 +46,8 @@ window.osuny.carousel.Slider.prototype = {
         }
         this.showSlide(index);
     },
-    loadSlidesFromDom: function () {
-        var slidesContainers = this.container.children;
+    _loadSlidesFromDom: function () {
+        var slidesContainers = this.element.children;
         for (var i = 0; i < slidesContainers.length; i += 1) {
             this.slides.push(new window.osuny.carousel.Slide(this, slidesContainers.item(i), i));
         }
@@ -70,11 +68,11 @@ window.osuny.carousel.Slider.prototype = {
     },
     translate: function (transition = false) {
         this.position += this.deltaPosition;
-        var transition_duration = transition === true ? this.transition_duration : 0;
+        var transitionDuration = transition === true ? this.transitionDuration : 0;
         this.deltaPosition = 0;
         // Pourquoi ne pas mettre la transition purement en CSS, et le retirer complètement du JS ?
-        this.carousel.container.style.setProperty('transition', 'left ' + String(transition_duration) + 'ms');
-        this.carousel.container.style.setProperty('left', this.position + "px");
+        this.element.style.setProperty('transition', 'left ' + String(transitionDuration) + 'ms');
+        this.element.style.setProperty('left', this.position + "px");
 
     },
     width: function () {

@@ -1,15 +1,15 @@
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
-window.osuny.carousel.Autoplayer = function (instance, interval = 3000) {
-    // Instance du carousel qui utilise l'autoplayer
-    this.instance = instance;
+window.osuny.carousel.Autoplayer = function (element) {
+    // Element du DOM du carousel qui utilise l'autoplayer
+    this.element = element;
     // Etat de l'autoplay
-    this.running = false;
+    this.enabled = false;
     // Etat de pause (quand on rollover par exemple)
     this.paused = false;
     // Intervalle en millisecondes entre 2 déclenhements
-    this.interval = interval;
+    this.interval = 3000;
     // Progression de 0 à 1, vers le prochain déclenchement
     this.progression = 0;
     // Date de la dernière boucle
@@ -17,26 +17,29 @@ window.osuny.carousel.Autoplayer = function (instance, interval = 3000) {
     // Temps écoulé depuis le dernier déclenchement
     this.elapsedSinceLastTrigger = 0;
     
-    this.events = {};
-    this._initializeEmitter();
-
     return {
-        start: this.start.bind(this),
-        stop: this.stop.bind(this),
+        setInterval: this.setInterval.bind(this),
+        enable: this.enable.bind(this),
+        disable: this.disable.bind(this),
         pause: this.pause.bind(this),
-        unpause: this.unpause.bind(this),
-        reset: this.reset.bind(this)
+        unpause: this.unpause.bind(this)
     }
 }
 window.osuny.carousel.Autoplayer.prototype = {
-    start: function () {
-        this.running = true;
+    events: {
+        trigger: 'trigger',
+        progression: 'progression'
+    },
+    setInterval: function (interval) {
+        this.interval = interval;
+    },
+    enable: function () {
+        this.enabled = true;
         this._resetLoopValues();
         this._loop();
-
     },
-    stop: function () {
-        this.running = false;
+    disable: function () {
+        this.enabled = false;
     },
     pause: function () {
         this.paused = true;
@@ -44,41 +47,35 @@ window.osuny.carousel.Autoplayer.prototype = {
     unpause: function () {
         this.paused = false;
     },
-    reset: function () {
-        this._resetLoopValues();
-    },
-    _initializeEmitter:function(){
-        this.events.progression = new Event("progression");
-        this._setProgression(0);
-    },
     _loop: function () {
         var now = Date.now();
         if (!this.paused) {
             this.elapsedSinceLastTrigger += now - this.lastLoopAt;
-            this._setProgression(this.elapsedSinceLastTrigger / this.interval)
+            this.progression = this.elapsedSinceLastTrigger / this.interval;
+            this._dispatchProgression();
         }
         if (this.elapsedSinceLastTrigger > this.interval) {
-            this._trigger();
+            this._dispatchTrigger();
+            this._resetLoopValues();
         }
         // Mémoire du last loop pour la sortie de pause
         this.lastLoopAt = now;
-        if (this.running) {
+        if (this.enabled) {
             window.requestAnimationFrame(this._loop.bind(this));
-            // this.instance.onAutoplayProgressionChanged();
         }
     },
     _resetLoopValues: function () {
-        this._setProgression(0);
+        this.progression = 0;
         this.elapsedSinceLastTrigger = 0;
         this.lastLoopAt = Date.now();
     },
-    _trigger: function () {
-        this._resetLoopValues();
-        this.instance.next();
+    _dispatchTrigger: function () {
+        var event = new Event(this.events.trigger);
+        this.element.dispatchEvent(event);
     },
-    _setProgression(progression){
-        this.progression = progression;
-        this.events.progression.progression = this.progression;
-        // this.instance.root.dispatchEvent(this.events.progression); // no hcoice, autoplayer n'a pas de dom
+    _dispatchProgression(){
+        var event = new Event(this.events.progression);
+        event.progression = this.progression;
+        this.element.dispatchEvent(event);
     }
 }

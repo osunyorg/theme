@@ -1,38 +1,31 @@
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
-window.osuny.carousel.PaginationButton = function PaginationButton(index, pagination) {
+window.osuny.carousel.PaginationButton = function PaginationButton(element, index) {
+    this.element = element;
     this.index = index;
-    this.container = null;
-    this.progressBar = null;
-    this.pagination = pagination;
-    this.button = null;
-    this.instance = this.pagination.instance;
-    this.initialize();
+    this.progressBar;
+    this._initialize();
 }
 
 window.osuny.carousel.PaginationButton.prototype = {
-    initialize: function () {
-        this.container = this.pagination.container.querySelectorAll("li").item(this.index);
-        this.button = this.container.querySelector('button');
-
-        var ariaLabel = this.button.getAttribute("aria-label");
-        this.button.setAttribute("aria-label", ariaLabel.replace("%s", this.index));
-        
-        this.progressBar = this.button.querySelector("i");
-
-        this.setProgress(0);
-        this.container.addEventListener("click", this.onClick.bind(this));
+    _initialize: function () {
+        var ariaLabel = this.element.getAttribute("aria-label"),
+            ariaNewLabel = ariaLabel.replace("%s", this.index);
+        this.element.setAttribute("aria-label", ariaNewLabel);
+        this.progressBar = this.element.querySelector("i");
+        this.setProgression(0);
+        this.element.addEventListener("click", this.onClick.bind(this));
     },
     onClick: function () {
-        this.instance.showSlide(this.index);
-        this.instance.stopAutoplay();
-        this.setProgress(1);
+        var event = new Event("paginationButtonClicked");
+        event.index = this.index;
+        this.element.dispatchEvent(event);
     },
-    setProgress: function (progress) {
-        this.progressBar.style.setProperty("width", String(progress * 100) + "%");
+    setProgression: function (progression) {
+        this.progressBar.style.setProperty("width", String(progression * 100) + "%");
     },
     setSelected: function(state){
-        this.button.setAttribute("aria-selected", String(state));
+        this.element.setAttribute("aria-selected", String(state));
     }
 }
