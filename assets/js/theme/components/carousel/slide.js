@@ -2,52 +2,58 @@ window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Slide = function (slider, container, i) {
-    this.size;
-    this.container = container;
     this.slider = slider;
-    this.initialize();
+    this.container = container;
     this.index = i;
+    this.classList = this.container.classList;
+    this.computedStyle = null;
+    this.width = 0;
+    this.initialize();
 }
 
 window.osuny.carousel.Slide.prototype = {
+    htmlClasses: {
+        before: 'is-before',
+        previous: 'is-previous',
+        current: 'is-current',
+        next: 'is-next',
+        after: 'is-after'
+    },
     initialize: function () {
+        // TODO gérer le resize de la page !
         this.computeSize();
     },
     computeSize: function () {
-        var style = getComputedStyle(this.container);
-        this.size = this.container.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+        this.computedStyle = getComputedStyle(this.container);
+        this.width = this.container.offsetWidth + parseFloat(this.computedStyle.marginLeft) + parseFloat(this.computedStyle.marginRight);
     },
     setClasses() {
-        this.cleanStateClasses();
-        if (this.slider.index == this.index) {
-            this.setCurrent();
+        this.toggleClass(this.htmlClasses.before, this.isBefore());
+        this.toggleClass(this.htmlClasses.previous, this.isPrevious());
+        this.toggleClass(this.htmlClasses.current, this.isCurrent());
+        this.toggleClass(this.htmlClasses.next, this.isNext());
+        this.toggleClass(this.htmlClasses.after, this.isAfter());
+    },
+    isBefore: function () {
+        return this.index < this.slider.index;
+    },
+    isPrevious: function () {
+        return this.index == this.slider.index - 1;
+    },
+    isCurrent: function () {
+        return this.index == this.slider.index;
+    },
+    isNext: function () {
+        return this.index == this.slider.index + 1;
+    },
+    isAfter: function  () {
+        return this.index > this.slider.index;
+    },
+    toggleClass: function (className, active) {
+        if (active) {
+            this.classList.add(className);
+        } else {
+            this.classList.remove(className);
         }
-        if (this.slider.index - 1 == this.index) {
-            this.setPrevious();
-        }
-        if (this.slider.index > this.index) {
-            this.setBefore();
-        }
-        if (this.slider.index + 1 == this.index) {
-            this.setNext();
-        }
-    },
-    setCurrent: function () {
-        this.container.classList.add('is-current');
-    },
-    setPrevious: function () {
-        this.container.classList.add('is-previous');
-    },
-    setBefore: function () {
-        this.container.classList.add('is-before');
-    },
-    setNext: function () {
-        this.container.classList.add('is-next');
-    },
-    cleanStateClasses: function () {
-        this.container.classList.remove('is-current');
-        this.container.classList.remove('is-next');
-        this.container.classList.remove('is-previous');
-        this.container.classList.remove('is-before');
     }
 }

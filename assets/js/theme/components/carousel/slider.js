@@ -64,9 +64,9 @@ window.osuny.carousel.Slider.prototype = {
             center: 0
         };
         for (var i = 0; i < index; i += 1) {
-            position.left -= this.slides[i].size;
+            position.left -= this.slides[i].width;
         }
-        position.right = position.left - this.slides[index].size;
+        position.right = position.left - this.slides[index].width;
         position.center = (position.right + position.left) / 2;
         return position
     },
@@ -74,16 +74,17 @@ window.osuny.carousel.Slider.prototype = {
         this.position += this.deltaPosition;
         var transition_duration = transition === true ? this.transition_duration : 0;
         this.deltaPosition = 0;
+        // Pourquoi ne pas mettre la transition purement en CSS, et le retirer complètement du JS ?
         this.instance.container.style.setProperty('transition', 'left ' + String(transition_duration) + 'ms');
         this.instance.container.style.setProperty('left', this.position + "px");
 
     },
-    size: function () {
-        var size = 0;
+    width: function () {
+        var width = 0;
         this.slides.forEach(slide => {
-            size += slide.size;
+            width += slide.width;
         });
-        return size;
+        return width;
     },
     slideAt: function (offset) {
         var index = this.indexOfSlideAt(offset);
@@ -110,7 +111,7 @@ window.osuny.carousel.Slider.prototype = {
         var slideIndex = 0;
         for (var i = 0; i < this.slides.length; i += 1) {
             slidesPosition.inf = slidesPosition.sup;
-            slidesPosition.sup = slidesPosition.inf - this.slides[i].size;
+            slidesPosition.sup = slidesPosition.inf - this.slides[i].width;
             if (this.position < slidesPosition.inf && this.position > slidesPosition.sup) {
                 slideIndex = i;
                 this.deltaPosition = slidesPosition.inf - this.position;
