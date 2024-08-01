@@ -11,12 +11,11 @@ window.osuny.carousel.Pagination.prototype = {
     classes: {
         container: "carousel__pagination__tabcontainer"
     },
-
     initialize: function () {
         this.container = this.instance.root.getElementsByClassName(this.classes.container).item(0);
         this.tabButtons = [];
         for (var i = 0; i < this.instance.slides.total; i += 1) {
-            this.tabButtons.push(new window.osuny.carousel.PaginationButton(i, this))
+            this.tabButtons.push(new window.osuny.carousel.PaginationButton(i, this));
         }
     },
     setSlideProgression: function (progression) {
