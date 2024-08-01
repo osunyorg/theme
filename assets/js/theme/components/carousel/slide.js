@@ -8,48 +8,45 @@ window.osuny.carousel.Slide = function (slider, container, i) {
     this.classList = this.container.classList;
     this.computedStyle = null;
     this.width = 0;
-    this.initialize();
+    // TODO gérer le resize de la page !
+    this._computeSize();
 }
 
 window.osuny.carousel.Slide.prototype = {
     htmlClasses: {
-        isBefore: 'is-before',
-        isPrevious: 'is-previous',
-        isCurrent: 'is-current',
-        isNext: 'is-next',
-        isAfter: 'is-after'
+        _isBefore: 'is-before',
+        _isPrevious: 'is-previous',
+        _isCurrent: 'is-current',
+        _isNext: 'is-next',
+        _isAfter: 'is-after'
     },
-    initialize: function () {
-        // TODO gérer le resize de la page !
-        this.computeSize();
-    },
-    computeSize: function () {
+    _computeSize: function () {
         this.computedStyle = getComputedStyle(this.container);
         this.width = this.container.offsetWidth + parseFloat(this.computedStyle.marginLeft) + parseFloat(this.computedStyle.marginRight);
     },
     setClasses() {
-        this.setState('isBefore');
-        this.setState('isPrevious');
-        this.setState('isCurrent');
-        this.setState('isNext');
-        this.setState('isAfter');
+        this._setState('_isBefore');
+        this._setState('_isPrevious');
+        this._setState('_isCurrent');
+        this._setState('_isNext');
+        this._setState('_isAfter');
     },
-    isBefore: function () {
+    _isBefore: function () {
         return this.index < this.slider.index;
     },
-    isPrevious: function () {
+    _isPrevious: function () {
         return this.index == this.slider.index - 1;
     },
-    isCurrent: function () {
+    _isCurrent: function () {
         return this.index == this.slider.index;
     },
-    isNext: function () {
+    _isNext: function () {
         return this.index == this.slider.index + 1;
     },
-    isAfter: function  () {
+    _isAfter: function  () {
         return this.index > this.slider.index;
     },
-    setState: function (state) {
+    _setState: function (state) {
         var className = this.htmlClasses[state],
             // Appel de la fonction this.isBefore()
             active = this[state]();

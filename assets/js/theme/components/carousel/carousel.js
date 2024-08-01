@@ -61,7 +61,9 @@ window.osuny.carousel.Carousel.prototype = {
     _initializeComponents: function () {
         var paginationElement = this.element.getElementsByClassName(window.osuny.carousel.classes.pagination).item(0);
         this.pagination = new window.osuny.carousel.Pagination(paginationElement);
-        paginationElement.addEventListener("paginationButtonClicked", this._onPaginationButtonClicked.bind(this));
+        if (paginationElement) {
+            paginationElement.addEventListener("paginationButtonClicked", this._onPaginationButtonClicked.bind(this));
+        }
 
         // this.arrows = window.osuny.utils.instanciateIf(this, window.osuny.carousel.ArrowsController, this.options.arrows);
     },
@@ -75,12 +77,14 @@ window.osuny.carousel.Carousel.prototype = {
         this.autoplayerElement = this.element.getElementsByClassName(window.osuny.carousel.classes.toggle).item(0);
         this.autoplayer = new window.osuny.carousel.Autoplayer(this.autoplayerElement);
         this.autoplayer.setInterval(this.config.autoplayInterval);
-        this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerTrigger, this._onAutoplayerTrigger.bind(this));
-        this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerProgression, this._onAutoplayerProgression.bind(this));
-        this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerPause, this._onAutoplayerPause.bind(this));
-        this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerPlay, this._onAutoplayerPlay.bind(this));
-        if (this.config.autoplay) {
-            this.autoplayer.enable();
+        if (this.autoplayerElement) {
+            this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerTrigger, this._onAutoplayerTrigger.bind(this));
+            this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerProgression, this._onAutoplayerProgression.bind(this));
+            this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerPause, this._onAutoplayerPause.bind(this));
+            this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerPlay, this._onAutoplayerPlay.bind(this));
+            if (this.config.autoplay) {
+                this.autoplayer.enable();
+            }
         }
     },
     _onAutoplayerTrigger: function () {

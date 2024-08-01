@@ -15,11 +15,6 @@ window.osuny.carousel.PaginationButton = function PaginationButton(element, inde
 }
 
 window.osuny.carousel.PaginationButton.prototype = {
-    _onClick: function () {
-        var event = new Event("paginationButtonClicked");
-        event.index = this.index;
-        this.pagination.dispatchEvent(event);
-    },
     setProgression: function (progression) {
         this.progression = progression;
         var percent = String(this.progression * 100) + "%";
@@ -32,5 +27,10 @@ window.osuny.carousel.PaginationButton.prototype = {
     unselect: function () {
         this.setProgression(0);
         this.element.setAttribute("aria-selected", "false");
+    },
+    _onClick: function () {
+        var event = new Event("paginationButtonClicked");
+        event.index = this.index;
+        this.pagination.dispatchEvent(event);
     }
 }

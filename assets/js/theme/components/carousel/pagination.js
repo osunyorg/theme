@@ -3,14 +3,7 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Pagination = function (element) {
     this.element = element;
-    this._initialize();
-}
-
-window.osuny.carousel.Pagination.prototype = {
-    classes: {
-        button: "carousel__pagination__page"
-    },
-    _initialize: function () {
+    if (this.element) {
         this.buttonElements = [];
         this.buttons = [];
         this.buttonElements = this.element.getElementsByClassName(this.classes.button);
@@ -20,6 +13,12 @@ window.osuny.carousel.Pagination.prototype = {
             this.buttons.push(button);
         }
         this.currentButton = this.buttons[0];
+    }
+}
+
+window.osuny.carousel.Pagination.prototype = {
+    classes: {
+        button: "carousel__pagination__page"
     },
     selectButton: function (index) {
         this.currentButton = this.buttons[index];
@@ -34,11 +33,5 @@ window.osuny.carousel.Pagination.prototype = {
         this.buttons.forEach(function (button) {
             button.unselect();
         });
-    },
-    // onSlideChanged: function () {
-    //     // this.resetSlidesState();
-    //     // this.setSlideProgression(1);
-    //     // this.tabButtons[this.instance.slides.current].container.focus();
-    //     // this.tabButtons[this.instance.slides.current].setSelected(true);
-    // }
+    }
 }

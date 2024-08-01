@@ -3,17 +3,10 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Autoplayer = function (element) {
     this.element = element;
-    // Etat de l'autoplay
-    this.enabled = false;
-    // Etat de pause (quand on rollover par exemple)
-    this.paused = false;
-    // Intervalle en millisecondes entre 2 déclenhements
-    this.interval = 3000;
-    this._resetLoopValues();
-    // Bouton
-    this.classList = this.element.classList;
-    this.classList.add(window.osuny.carousel.classes.autoplayerPaused);
-    this.element.addEventListener("click", this._onClick.bind(this));
+    this.initialized = false;
+    if (this.element) {
+        this._initialize();
+    }
 }
 window.osuny.carousel.Autoplayer.prototype = {
     setInterval: function (interval) {
@@ -37,10 +30,22 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.paused = false;
         this._updateToggle();
     },
+    _initialize: function () {
+        this.initialized = true;
+        // Etat de l'autoplay
+        this.enabled = false;
+        // Etat de pause (quand on rollover par exemple)
+        this.paused = false;
+        // Intervalle en millisecondes entre 2 déclenhements
+        this.interval = 3000;
+        this._resetLoopValues();
+        // Bouton
+        this.classList = this.element.classList;
+        this.classList.add(window.osuny.carousel.classes.autoplayerPaused);
+        this.element.addEventListener("click", this._onClick.bind(this));
+    },
     _loop: function () {
-        if (!this.enabled) {
-            return;
-        }
+        if (!this.enabled) { return }
         var now = Date.now();
         if (!this.paused) {
             this.elapsedSinceLastTrigger += now - this.lastLoopAt;
@@ -73,6 +78,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.element.dispatchEvent(event);
     },
     _updateToggle: function () {
+        if (!this.initialized) { return }
         this.classList.remove(window.osuny.carousel.classes.autoplayerPlaying);
         this.classList.remove(window.osuny.carousel.classes.autoplayerPaused);
         if (this.paused) {
