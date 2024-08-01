@@ -2,21 +2,8 @@ window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Autoplayer = function (element) {
-    // Element du DOM du carousel qui utilise l'autoplayer
     this.element = element;
-    // Etat de l'autoplay
-    this.enabled = false;
-    // Etat de pause (quand on rollover par exemple)
-    this.paused = false;
-    // Intervalle en millisecondes entre 2 déclenhements
-    this.interval = 3000;
-    // Progression de 0 à 1, vers le prochain déclenchement
-    this.progression = 0;
-    // Date de la dernière boucle
-    this.lastLoopAt = null;
-    // Temps écoulé depuis le dernier déclenchement
-    this.elapsedSinceLastTrigger = 0;
-    
+    this._initialize();
     return {
         setInterval: this.setInterval.bind(this),
         enable: this.enable.bind(this),
@@ -35,17 +22,34 @@ window.osuny.carousel.Autoplayer.prototype = {
     },
     enable: function () {
         this.enabled = true;
-        this._resetLoopValues();
         this._loop();
+        this._updateToggle();
     },
     disable: function () {
         this.enabled = false;
+        this.paused = true;
+        this._updateToggle();
     },
     pause: function () {
         this.paused = true;
+        this._updateToggle();
     },
     unpause: function () {
         this.paused = false;
+        this._updateToggle();
+    },
+    _initialize: function () {
+        // Etat de l'autoplay
+        this.enabled = false;
+        // Etat de pause (quand on rollover par exemple)
+        this.paused = false;
+        // Intervalle en millisecondes entre 2 déclenhements
+        this.interval = 3000;
+        this._resetLoopValues();
+        // Bouton
+        this.classList = this.element.classList;
+        this.classList.add(window.osuny.carousel.classes.autoplayerPaused);
+        this.element.addEventListener("click", this._onClick.bind(this));
     },
     _loop: function () {
         if (!this.enabled) {
@@ -66,8 +70,11 @@ window.osuny.carousel.Autoplayer.prototype = {
         window.requestAnimationFrame(this._loop.bind(this));
     },
     _resetLoopValues: function () {
+        // Progression de 0 à 1, vers le prochain déclenchement
         this.progression = 0;
+        // Temps écoulé depuis le dernier déclenchement
         this.elapsedSinceLastTrigger = 0;
+        // Date de la dernière boucle
         this.lastLoopAt = Date.now();
     },
     _dispatchTrigger: function () {
@@ -77,6 +84,20 @@ window.osuny.carousel.Autoplayer.prototype = {
     _dispatchProgression(){
         var event = new Event(this.events.progression);
         event.progression = this.progression;
+        this.element.dispatchEvent(event);
+    },
+    _updateToggle: function () {
+        if (this.paused) {
+            this.classList.remove(window.osuny.carousel.classes.autoplayerPlaying);
+            this.classList.add(window.osuny.carousel.classes.autoplayerPaused);
+        } else {
+            this.classList.add(window.osuny.carousel.classes.autoplayerPlaying);
+            this.classList.remove(window.osuny.carousel.classes.autoplayerPaused);
+        }
+    },
+    _onClick: function () {
+        var eventKind = this.paused ? window.osuny.carousel.events.autoplayerPlay : window.osuny.carousel.events.autoplayerPause,
+            event = new Event(eventKind);
         this.element.dispatchEvent(event);
     }
 }

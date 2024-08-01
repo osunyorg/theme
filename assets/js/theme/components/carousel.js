@@ -1,13 +1,13 @@
 // https://developers.osuny.org/docs/theme/components/carousel/
 import './carousel/autoplayer';
 import './carousel/carousel';
+import './carousel/classes';
 import './carousel/config';
-import './carousel/uiController';
+import './carousel/drag';
+import './carousel/events';
 import './carousel/manager';
 import './carousel/paginationButton';
-import './carousel/toggleButton';
 import './carousel/pagination';
 import './carousel/arrowsController';
 import './carousel/slide';
-import './carousel/drag';
 import './carousel/slider';

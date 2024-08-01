@@ -7,7 +7,7 @@ window.osuny.carousel.Pagination = function (element) {
     return {
         selectButton: this.selectButton.bind(this),
         setProgression: this.setProgression.bind(this),
-        resetSlidesState: this.resetSlidesState.bind(this)
+        unselectAllButtons: this.unselectAllButtons.bind(this)
     }
 }
 
@@ -35,7 +35,7 @@ window.osuny.carousel.Pagination.prototype = {
             this.currentButton.setProgression(progression);
         }
     },
-    resetSlidesState: function () {
+    unselectAllButtons: function () {
         this.buttons.forEach(function (button) {
             button.unselect();
         });

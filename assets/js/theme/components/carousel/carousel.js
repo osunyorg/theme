@@ -8,7 +8,7 @@ window.osuny.carousel.Carousel = function (element) {
 window.osuny.carousel.Carousel.prototype = {
     classes: {
         carousel: "carousel__container",
-        toggle: "toggle",
+        autoplayerElement: "toggle",
         pagination: "carousel__pagination__tabcontainer"
     },
     next: function () {
@@ -27,9 +27,10 @@ window.osuny.carousel.Carousel.prototype = {
         this.showSlide(this.slides.current);
     },
     showSlide: function (index) {
-        this.pagination.resetSlidesState();
+        this.pagination.unselectAllButtons();
         this.pagination.selectButton(index);
         this.slider.showSlide(index);
+        this.slides.current = index;
     },
     pause: function () {
         this.autoplayer.pause();
@@ -66,15 +67,9 @@ window.osuny.carousel.Carousel.prototype = {
         this.config.loadOptions(this.element.dataset.carousel);
     },
     _initializeComponents: function () {
-        // this.ui = new window.osuny.carousel.UIController(this);
-        var toggleButtonElement = this.element.getElementsByClassName(this.classes.toggle).item(0);
-        this.toggleButton = new window.osuny.carousel.ToggleButton(toggleButtonElement);
-
         var paginationElement = this.element.getElementsByClassName(this.classes.pagination).item(0);
         this.pagination = new window.osuny.carousel.Pagination(paginationElement);
-        // this.pagination.selectButton(this.slides.current);
         paginationElement.addEventListener("paginationButtonClicked", this._onPaginationButtonClicked.bind(this));
-        // TODO catch "paginationButtonClicked"
 
         // this.arrows = window.osuny.utils.instanciateIf(this, window.osuny.carousel.ArrowsController, this.options.arrows);
     },
@@ -85,15 +80,15 @@ window.osuny.carousel.Carousel.prototype = {
         this.slides.total = this.slider.length();
     },
     _initializeAutoplayer(){
-        this.autoplayer = new window.osuny.carousel.Autoplayer(this.element);
+        this.autoplayerElement = this.element.getElementsByClassName(this.classes.autoplayerElement).item(0);
+        this.autoplayer = new window.osuny.carousel.Autoplayer(this.autoplayerElement);
         this.autoplayer.setInterval(this.config.autoplayInterval);
-        // L'autoplayer n'a pas d'élément du DOM, on écoute donc l'élément du carousel
-        // Quand le toggleButton sera fusionné dedans, on utilisera le button comme emitter d'events.
-        this.element.addEventListener("trigger", this._onAutoplayerTrigger.bind(this));
-        this.element.addEventListener("progression", this._onAutoplayerProgression.bind(this));
+        this.autoplayerElement.addEventListener("trigger", this._onAutoplayerTrigger.bind(this));
+        this.autoplayerElement.addEventListener("progression", this._onAutoplayerProgression.bind(this));
+        this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerPause, this._onAutoplayerPause.bind(this));
+        this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerPlay, this._onAutoplayerPlay.bind(this));
         if (this.config.autoplay) {
             this.autoplayer.enable();
-            this.toggleButton.play();
         }
     },
     _onAutoplayerTrigger: function () {
@@ -102,9 +97,15 @@ window.osuny.carousel.Carousel.prototype = {
     _onAutoplayerProgression: function (event) {
         this.pagination.setProgression(event.progression);
     },
+    _onAutoplayerPause: function () {
+        this.autoplayer.pause();
+    },
+    _onAutoplayerPlay: function () {
+        this.autoplayer.unpause();
+        this.autoplayer.enable();
+    },
     _onPaginationButtonClicked: function (event) {
         this.autoplayer.disable();
-        this.pagination.selectButton(event.index);
         this.showSlide(event.index);
     },
     // // Autoplayer events
