@@ -3,26 +3,32 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Pagination = function (element) {
     this.element = element;
-    this.buttonElements = [];
-    this.buttons = [];
-    this.currentButton;
-    this.initialize();
+    this._initialize();
+    return {
+        selectButton: this.selectButton.bind(this),
+        setProgression: this.setProgression.bind(this),
+        resetSlidesState: this.resetSlidesState.bind(this)
+    }
 }
 
 window.osuny.carousel.Pagination.prototype = {
     classes: {
         button: "carousel__pagination__page"
     },
-    initialize: function () {
+    _initialize: function () {
+        this.buttonElements = [];
+        this.buttons = [];
         this.buttonElements = this.element.getElementsByClassName(this.classes.button);
         for (var index = 0; index < this.buttonElements.length; index += 1) {
             var buttonElement = this.buttonElements[index],
-                button = new window.osuny.carousel.PaginationButton(buttonElement, index);
+                button = new window.osuny.carousel.PaginationButton(buttonElement, index, this.element);
             this.buttons.push(button);
         }
+        this.currentButton = this.buttons[0];
     },
-    highlightButton: function (index) {
+    selectButton: function (index) {
         this.currentButton = this.buttons[index];
+        this.currentButton.select();
     },
     setProgression: function (progression) {
         if (this.currentButton) {
@@ -31,8 +37,7 @@ window.osuny.carousel.Pagination.prototype = {
     },
     resetSlidesState: function () {
         this.buttons.forEach(function (button) {
-            button.setProgression(0);
-            button.setSelected(false);
+            button.unselect();
         });
     },
     // onSlideChanged: function () {

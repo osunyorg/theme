@@ -3,27 +3,6 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Carousel = function (element) {
     this.element = element;
-    this.sliderContainer = null;
-
-    // Les instances des composants
-    this.ui = null;
-    this.slider = null;
-    this.pagination = null;
-    this.autoplayer = null;
-    this.toggleButton = null;
-    
-    this.config;
-
-    this.slides = {
-        current: 0,
-        total: 0
-    }
-
-    this.state = {
-        initialized: false,
-        visible: false
-    };
-
     this._initialize();
 }
 window.osuny.carousel.Carousel.prototype = {
@@ -49,7 +28,7 @@ window.osuny.carousel.Carousel.prototype = {
     },
     showSlide: function (index) {
         this.pagination.resetSlidesState();
-        this.pagination.highlightButton(index);
+        this.pagination.selectButton(index);
         this.slider.showSlide(index);
     },
     pause: function () {
@@ -65,11 +44,20 @@ window.osuny.carousel.Carousel.prototype = {
         this.sliderContainer.setAttribute("aria-live", state);
     },
     _initialize: function () {
+        this.slides = {
+            current: 0,
+            total: 0
+        }
+    
+        this.state = {
+            initialized: false,
+            visible: false
+        };
+
         this._initializeConfig();
         this._initializeComponents();
         this._initializeSlider();
         this._initializeAutoplayer();
-        // this.ui.initializeListeners();
         this.state.initialized = true;
     },
     _initializeConfig: function () {
@@ -84,7 +72,7 @@ window.osuny.carousel.Carousel.prototype = {
 
         var paginationElement = this.element.getElementsByClassName(this.classes.pagination).item(0);
         this.pagination = new window.osuny.carousel.Pagination(paginationElement);
-        this.pagination.highlightButton(this.slides.current);
+        // this.pagination.selectButton(this.slides.current);
         paginationElement.addEventListener("paginationButtonClicked", this._onPaginationButtonClicked.bind(this));
         // TODO catch "paginationButtonClicked"
 
@@ -115,7 +103,9 @@ window.osuny.carousel.Carousel.prototype = {
         this.pagination.setProgression(event.progression);
     },
     _onPaginationButtonClicked: function (event) {
-        console.log(event);
+        this.autoplayer.disable();
+        this.pagination.selectButton(event.index);
+        this.showSlide(event.index);
     },
     // // Autoplayer events
     // stopAutoplay: function () {
@@ -148,39 +138,39 @@ window.osuny.carousel.Carousel.prototype = {
     //     }
     // },
     // Slider control
-    resetSlider: function () {
-        this.slider.initialize();
-    },
-    onSlideChanged: function () {
-        if (this.slider) {
-            this.slides.current = this.slider.index;
-        }
-        if (this.autoplayer) {
-            this.autoplayer.disable();
-            this.toggleButton.pause();
-        }
-        if (this.pagination) {
-            this.pagination.onSlideChanged();
-        }
-        if (this.arrows) {
-            this.arrows.onSlideChanged();
-        }
-    },
+    // resetSlider: function () {
+    //     this.slider.initialize();
+    // },
+    // onSlideChanged: function () {
+    //     if (this.slider) {
+    //         this.slides.current = this.slider.index;
+    //     }
+    //     if (this.autoplayer) {
+    //         this.autoplayer.disable();
+    //         this.toggleButton.pause();
+    //     }
+    //     if (this.pagination) {
+    //         this.pagination.onSlideChanged();
+    //     }
+    //     if (this.arrows) {
+    //         this.arrows.onSlideChanged();
+    //     }
+    // },
 
-    // Drag control
-    endDrag: function () {
-        if (this.slider.drag) {
-            this.slider.drag.end();
-        }
-    },
-    startDrag: function (position) {
-        if (this.slider.drag) {
-            this.slider.drag.start(position);
-        }
-    },
-    drag: function (position) {
-        if (this.slider.drag.active) {
-            this.slider.drag.drag(position);
-        }
-    }
+    // // Drag control
+    // endDrag: function () {
+    //     if (this.slider.drag) {
+    //         this.slider.drag.end();
+    //     }
+    // },
+    // startDrag: function (position) {
+    //     if (this.slider.drag) {
+    //         this.slider.drag.start(position);
+    //     }
+    // },
+    // drag: function (position) {
+    //     if (this.slider.drag.active) {
+    //         this.slider.drag.drag(position);
+    //     }
+    // }
 }

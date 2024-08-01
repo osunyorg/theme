@@ -1,31 +1,44 @@
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
-window.osuny.carousel.PaginationButton = function PaginationButton(element, index) {
+window.osuny.carousel.PaginationButton = function PaginationButton(element, index, pagination) {
     this.element = element;
     this.index = index;
-    this.progressBar;
+    this.pagination = pagination;
     this._initialize();
+    return {
+        setProgression: this.setProgression.bind(this),
+        select: this.select.bind(this),
+        unselect: this.unselect.bind(this)
+    }
 }
 
 window.osuny.carousel.PaginationButton.prototype = {
     _initialize: function () {
+        this.progression = 0;
         var ariaLabel = this.element.getAttribute("aria-label"),
             ariaNewLabel = ariaLabel.replace("%s", this.index);
         this.element.setAttribute("aria-label", ariaNewLabel);
         this.progressBar = this.element.querySelector("i");
         this.setProgression(0);
-        this.element.addEventListener("click", this.onClick.bind(this));
+        this.element.addEventListener("click", this._onClick.bind(this));
     },
-    onClick: function () {
+    _onClick: function () {
         var event = new Event("paginationButtonClicked");
         event.index = this.index;
-        this.element.dispatchEvent(event);
+        this.pagination.dispatchEvent(event);
     },
     setProgression: function (progression) {
-        this.progressBar.style.setProperty("width", String(progression * 100) + "%");
+        this.progression = progression;
+        var percent = String(this.progression * 100) + "%";
+        this.progressBar.style.setProperty("width", percent);
     },
-    setSelected: function(state){
-        this.element.setAttribute("aria-selected", String(state));
+    select: function () {
+        this.setProgression(1);
+        this.element.setAttribute("aria-selected", "true");
+    },
+    unselect: function () {
+        this.setProgression(0);
+        this.element.setAttribute("aria-selected", "false");
     }
 }

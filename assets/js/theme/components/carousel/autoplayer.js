@@ -48,6 +48,9 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.paused = false;
     },
     _loop: function () {
+        if (!this.enabled) {
+            return;
+        }
         var now = Date.now();
         if (!this.paused) {
             this.elapsedSinceLastTrigger += now - this.lastLoopAt;
@@ -60,9 +63,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         }
         // Mémoire du last loop pour la sortie de pause
         this.lastLoopAt = now;
-        if (this.enabled) {
-            window.requestAnimationFrame(this._loop.bind(this));
-        }
+        window.requestAnimationFrame(this._loop.bind(this));
     },
     _resetLoopValues: function () {
         this.progression = 0;
