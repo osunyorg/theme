@@ -19,7 +19,6 @@ window.osuny.carousel.ToggleButton.prototype = {
         var paginationContainer = this.instance.root.getElementsByClassName(this.classes.container).item(0);
         this.state_classes = [this.classes.play, this.classes.pause];
         this.container = paginationContainer.getElementsByClassName(this.classes.button).item(0);
-        this.container.classList.add('is-visible');
         this.container.classList.add(this.state_classes[+ this.isPlay]);
         this.container.addEventListener("click", this.onClick.bind(this));
     },
