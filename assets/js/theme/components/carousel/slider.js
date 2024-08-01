@@ -8,19 +8,12 @@ window.osuny.carousel.Slider = function Slider(element) {
     this.deltaPosition = 0;
     this.position = 0;
     this.drag = null;
-    this.initialize();
+    this._loadSlidesFromDom();
+    // this.drag = window.osuny.utils.instanciateIf(this, window.osuny.carousel.Drag, this.carousel.options.drag);
+    this.showSlide(this.index);
+    this.updateSlidesClasses();
 }
 window.osuny.carousel.Slider.prototype = {
-    initialize: function () {
-        this.index = 0;
-        this.slides = [];
-        this.deltaPosition = 0;
-        this.position = 0;
-        this._loadSlidesFromDom();
-        // this.drag = window.osuny.utils.instanciateIf(this, window.osuny.carousel.Drag, this.carousel.options.drag);
-        this.showSlide(this.index);
-        this.updateSlidesClasses();
-    },
     nextSlide: function () {
         this.showSlide(this.indexOfSlideAt(1));
     },
@@ -45,13 +38,6 @@ window.osuny.carousel.Slider.prototype = {
             index = this.indexOfSlideAt(-1);
         }
         this.showSlide(index);
-    },
-    _loadSlidesFromDom: function () {
-        var slidesContainers = this.element.children;
-        for (var i = 0; i < slidesContainers.length; i += 1) {
-            this.slides.push(new window.osuny.carousel.Slide(this, slidesContainers.item(i), i));
-        }
-        this.translate(true);
     },
     positionOfSlide: function (index) {
         var position = {
@@ -115,5 +101,12 @@ window.osuny.carousel.Slider.prototype = {
             }
         }
         return slideIndex;
+    },
+    _loadSlidesFromDom: function () {
+        var slidesContainers = this.element.children;
+        for (var i = 0; i < slidesContainers.length; i += 1) {
+            this.slides.push(new window.osuny.carousel.Slide(this, slidesContainers.item(i), i));
+        }
+        this.translate(true);
     }
 }
