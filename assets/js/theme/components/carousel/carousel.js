@@ -7,15 +7,14 @@ window.osuny.carousel.Carousel = function (element) {
         current: 0,
         total: 0
     }
-
     this.state = {
         initialized: false,
         visible: false
     };
-
     this._initializeConfig();
-    this._initializeComponents();
     this._initializeSlider();
+    this._initializePagination();
+    this._initializeArrows();
     this._initializeAutoplayer();
     this.state.initialized = true;
 }
@@ -58,13 +57,14 @@ window.osuny.carousel.Carousel.prototype = {
         // Les options sont chargées depuis le data-attribute "data-carousel"
         this.config.loadOptions(this.element.dataset.carousel);
     },
-    _initializeComponents: function () {
+    _initializePagination: function () {
         var paginationElement = this.element.getElementsByClassName(window.osuny.carousel.classes.pagination).item(0);
         this.pagination = new window.osuny.carousel.Pagination(paginationElement);
         if (paginationElement) {
             paginationElement.addEventListener("paginationButtonClicked", this._onPaginationButtonClicked.bind(this));
         }
-
+    },
+    _initializeArrows: function  () {
         // this.arrows = window.osuny.utils.instanciateIf(this, window.osuny.carousel.ArrowsController, this.options.arrows);
     },
     _initializeSlider: function () {
