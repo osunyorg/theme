@@ -13,11 +13,11 @@ window.osuny.carousel.Slide = function (slider, container, i) {
 
 window.osuny.carousel.Slide.prototype = {
     htmlClasses: {
-        before: 'is-before',
-        previous: 'is-previous',
-        current: 'is-current',
-        next: 'is-next',
-        after: 'is-after'
+        isBefore: 'is-before',
+        isPrevious: 'is-previous',
+        isCurrent: 'is-current',
+        isNext: 'is-next',
+        isAfter: 'is-after'
     },
     initialize: function () {
         // TODO gérer le resize de la page !
@@ -28,11 +28,11 @@ window.osuny.carousel.Slide.prototype = {
         this.width = this.container.offsetWidth + parseFloat(this.computedStyle.marginLeft) + parseFloat(this.computedStyle.marginRight);
     },
     setClasses() {
-        this.toggleClass(this.htmlClasses.before, this.isBefore());
-        this.toggleClass(this.htmlClasses.previous, this.isPrevious());
-        this.toggleClass(this.htmlClasses.current, this.isCurrent());
-        this.toggleClass(this.htmlClasses.next, this.isNext());
-        this.toggleClass(this.htmlClasses.after, this.isAfter());
+        this.setState('isBefore');
+        this.setState('isPrevious');
+        this.setState('isCurrent');
+        this.setState('isNext');
+        this.setState('isAfter');
     },
     isBefore: function () {
         return this.index < this.slider.index;
@@ -49,7 +49,10 @@ window.osuny.carousel.Slide.prototype = {
     isAfter: function  () {
         return this.index > this.slider.index;
     },
-    toggleClass: function (className, active) {
+    setState: function (state) {
+        var className = this.htmlClasses[state],
+            // Appel de la fonction this.isBefore()
+            active = this[state]();
         if (active) {
             this.classList.add(className);
         } else {
