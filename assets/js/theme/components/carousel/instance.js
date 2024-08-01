@@ -10,7 +10,7 @@ window.osuny.carousel.Instance = function (root) {
     this.slider = null;
     this.pagination = null;
     this.autoplayer = null;
-    this.toggleButton = null;
+    this.autoplayerControl = null;
     
     // Les options sont chargées depuis le data-attribute "data-carousel"
     this.options = {};
@@ -50,26 +50,42 @@ window.osuny.carousel.Instance.prototype = {
         this.slides.current = this.slider.index;
         this.slides.total = this.slider.length();
         this.pagination = window.osuny.utils.instanciateIf(this, window.osuny.carousel.Pagination, this.options.pagination);
-        this.toggleButton = window.osuny.utils.instanciateIf(this, window.osuny.carousel.ToggleButton, this.options.autoplay);
         this.arrows = window.osuny.utils.instanciateIf(this, window.osuny.carousel.ArrowsController, this.options.arrows);
-        this.autoplayer = window.osuny.utils.instanciateIf(this, window.osuny.carousel.Autoplayer, this.options.autoplay);
+        if(this.options.autoplay){
+            this.initializeAutoplay();
+        }
+    },
+
+    initializeAutoplay(){
+        var interval = 3000;
+        if(this.options.interval){
+            interval = parseInt(this.options.interval);
+        };
+        this.autoplayer = new window.osuny.carousel.Autoplayer(this, interval);
+
+        // this.root.addEventListener("progression", function(e){
+        //     this.onAutoplayProgressionChanged(e);
+        // }.bind(this));
+
+        
+        this.autoplayerControl = new window.osuny.carousel.ToggleButton(this);
+        this.autoplayerControl.getElement().addEventListener("start", this.startAutoplay.bind(this));
+        this.autoplayerControl.getElement().addEventListener("stop", this.stopAutoplay.bind(this));
+        this.startAutoplay();
     },
 
     // Autoplayer events
     stopAutoplay: function () {
         if (this.autoplayer) {
             this.autoplayer.stop();
+            this.autoplayerControl.toggleStart();
+            this.setCarouselState("polite");
         }
     },
     startAutoplay: function () {
-        if (this.autoplayer) {
-            this.autoplayer.start();
-        }
-    },
-    toggleAutoplay: function () {
-        if (this.autoplayer) {
-            this.autoplayer.toggleState();
-        }
+        this.autoplayer.start();
+        this.autoplayerControl.toggleStop();
+        this.setCarouselState("off");
     },
     pauseAutoplay: function () {
         if (this.autoplayer) {
@@ -81,26 +97,13 @@ window.osuny.carousel.Instance.prototype = {
             this.autoplayer.unpause();
         }
     },
-    onAutoplayStarted: function () {
-        if (this.pagination) {
-            this.toggleButton.toggleStart();
-        }
-        this.setCarouselState("off");
-    },
-    onAutoplayStopped: function () {
-        if (this.pagination) {
-            this.toggleButton.toggleStop();
-        }
-        this.setCarouselState("polite");
-    },
-    onAutoplayProgressionChanged: function () {
-        if (this.pagination) {
-            this.pagination.setSlideProgression(this.autoplayer.progression());
-        }
-    },
-
+    // onAutoplayProgressionChanged: function (e) { 
+    //     // console.log(e)
+    //     if (this.pagination) {
+    //         this.pagination.setSlideProgression(e.progression);
+    //     }
+    // },
     // Slider control
-
     resetSlider: function () {
         this.slider.initialize();
     },
@@ -118,7 +121,7 @@ window.osuny.carousel.Instance.prototype = {
             this.slides.current = this.slider.index;
         }
         if (this.autoplayer) {
-            this.autoplayer.onSlideChanged();
+            this.autoplayer.reset();
         }
         if (this.pagination) {
             this.pagination.onSlideChanged();
