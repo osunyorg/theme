@@ -5,19 +5,16 @@ window.osuny.carousel.PaginationButton = function PaginationButton(element, inde
     this.element = element;
     this.index = index;
     this.pagination = pagination;
-    this._initialize();
+    this.progression = 0;
+    var ariaLabel = this.element.getAttribute("aria-label"),
+        ariaNewLabel = ariaLabel.replace("%s", this.index);
+    this.element.setAttribute("aria-label", ariaNewLabel);
+    this.progressBar = this.element.querySelector("i");
+    this.setProgression(0);
+    this.element.addEventListener("click", this._onClick.bind(this));
 }
 
 window.osuny.carousel.PaginationButton.prototype = {
-    _initialize: function () {
-        this.progression = 0;
-        var ariaLabel = this.element.getAttribute("aria-label"),
-            ariaNewLabel = ariaLabel.replace("%s", this.index);
-        this.element.setAttribute("aria-label", ariaNewLabel);
-        this.progressBar = this.element.querySelector("i");
-        this.setProgression(0);
-        this.element.addEventListener("click", this._onClick.bind(this));
-    },
     _onClick: function () {
         var event = new Event("paginationButtonClicked");
         event.index = this.index;

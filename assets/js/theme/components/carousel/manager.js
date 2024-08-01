@@ -3,7 +3,6 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.manager = {
     initialized: false,
-    class: "js-carousel",
     elements: [],
     carousels: [],
     focusedCarousel: null,
@@ -13,12 +12,12 @@ window.osuny.carousel.manager = {
         if (!this.initialized) {
             this._createCarousels();
             this._initializeListeners();
-            this._adaptToViewport();
+            this._findCarouselsInViewport();
             this.initialized = true;
         }
     },
     _createCarousels: function () {
-        this.elements = document.getElementsByClassName(this.class);
+        this.elements = document.getElementsByClassName(window.osuny.carousel.classes.carousel);
         for (var i = 0; i < this.elements.length; i += 1) {
             var element = this.elements[i],
                 carousel = new window.osuny.carousel.Carousel(element);
@@ -27,8 +26,8 @@ window.osuny.carousel.manager = {
     },
     _initializeListeners: function () {
         window.addEventListener("resize", this._resize.bind(this));
-        window.addEventListener("scroll", this._adaptToViewport.bind(this));
-        window.addEventListener("keydown", this._keyPress.bind(this));
+        window.addEventListener("scroll", this._findCarouselsInViewport.bind(this));
+        window.addEventListener("keydown", this._onKeyPress.bind(this));
     },
     _resize: function () {
         this.windowCenterY = (window.innerHeight || document.documentElement.clientHeight) / 2;
@@ -36,7 +35,7 @@ window.osuny.carousel.manager = {
             carousel.resize();
         });
     },
-    _adaptToViewport: function () {
+    _findCarouselsInViewport: function () {
         this.carouselsInViewport = [];
         for (var i = 0; i < this.carousels.length; i += 1) {
             var carousel = this.carousels[i],
@@ -65,7 +64,7 @@ window.osuny.carousel.manager = {
         });
         return bestCandidate;
     },
-    _keyPress: function (e) {
+    _onKeyPress: function (e) {
         if (this.focusedCarousel) {
             if (e.key == 'ArrowLeft') { this.focusedCarousel.previous() }
             else if (e.key == 'ArrowRight') { this.focusedCarousel.next() }

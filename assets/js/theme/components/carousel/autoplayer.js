@@ -3,7 +3,17 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Autoplayer = function (element) {
     this.element = element;
-    this._initialize();
+    // Etat de l'autoplay
+    this.enabled = false;
+    // Etat de pause (quand on rollover par exemple)
+    this.paused = false;
+    // Intervalle en millisecondes entre 2 déclenhements
+    this.interval = 3000;
+    this._resetLoopValues();
+    // Bouton
+    this.classList = this.element.classList;
+    this.classList.add(window.osuny.carousel.classes.autoplayerPaused);
+    this.element.addEventListener("click", this._onClick.bind(this));
 }
 window.osuny.carousel.Autoplayer.prototype = {
     setInterval: function (interval) {
@@ -26,19 +36,6 @@ window.osuny.carousel.Autoplayer.prototype = {
     unpause: function () {
         this.paused = false;
         this._updateToggle();
-    },
-    _initialize: function () {
-        // Etat de l'autoplay
-        this.enabled = false;
-        // Etat de pause (quand on rollover par exemple)
-        this.paused = false;
-        // Intervalle en millisecondes entre 2 déclenhements
-        this.interval = 3000;
-        this._resetLoopValues();
-        // Bouton
-        this.classList = this.element.classList;
-        this.classList.add(window.osuny.carousel.classes.autoplayerPaused);
-        this.element.addEventListener("click", this._onClick.bind(this));
     },
     _loop: function () {
         if (!this.enabled) {

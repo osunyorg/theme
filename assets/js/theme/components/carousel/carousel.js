@@ -3,14 +3,23 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Carousel = function (element) {
     this.element = element;
-    this._initialize();
+    this.slides = {
+        current: 0,
+        total: 0
+    }
+
+    this.state = {
+        initialized: false,
+        visible: false
+    };
+
+    this._initializeConfig();
+    this._initializeComponents();
+    this._initializeSlider();
+    this._initializeAutoplayer();
+    this.state.initialized = true;
 }
 window.osuny.carousel.Carousel.prototype = {
-    classes: {
-        carousel: "carousel__container",
-        autoplayerElement: "toggle",
-        pagination: "carousel__pagination__tabcontainer"
-    },
     next: function () {
         this.slides.current += 1;
         if (this.slides.current >= this.slides.total) {
@@ -44,43 +53,26 @@ window.osuny.carousel.Carousel.prototype = {
     setCarouselState: function(state){
         this.sliderContainer.setAttribute("aria-live", state);
     },
-    _initialize: function () {
-        this.slides = {
-            current: 0,
-            total: 0
-        }
-    
-        this.state = {
-            initialized: false,
-            visible: false
-        };
-
-        this._initializeConfig();
-        this._initializeComponents();
-        this._initializeSlider();
-        this._initializeAutoplayer();
-        this.state.initialized = true;
-    },
     _initializeConfig: function () {
         this.config = new window.osuny.carousel.Config(this);
         // Les options sont chargées depuis le data-attribute "data-carousel"
         this.config.loadOptions(this.element.dataset.carousel);
     },
     _initializeComponents: function () {
-        var paginationElement = this.element.getElementsByClassName(this.classes.pagination).item(0);
+        var paginationElement = this.element.getElementsByClassName(window.osuny.carousel.classes.pagination).item(0);
         this.pagination = new window.osuny.carousel.Pagination(paginationElement);
         paginationElement.addEventListener("paginationButtonClicked", this._onPaginationButtonClicked.bind(this));
 
         // this.arrows = window.osuny.utils.instanciateIf(this, window.osuny.carousel.ArrowsController, this.options.arrows);
     },
     _initializeSlider: function () {
-        var sliderContainer = this.element.getElementsByClassName(this.classes.carousel).item(0);
+        var sliderContainer = this.element.getElementsByClassName(window.osuny.carousel.classes.container).item(0);
         this.slider = new window.osuny.carousel.Slider(sliderContainer);
         this.slider.transitionDuration = this.config.transitionDuration
         this.slides.total = this.slider.length();
     },
     _initializeAutoplayer(){
-        this.autoplayerElement = this.element.getElementsByClassName(this.classes.autoplayerElement).item(0);
+        this.autoplayerElement = this.element.getElementsByClassName(window.osuny.carousel.classes.toggle).item(0);
         this.autoplayer = new window.osuny.carousel.Autoplayer(this.autoplayerElement);
         this.autoplayer.setInterval(this.config.autoplayInterval);
         this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerTrigger, this._onAutoplayerTrigger.bind(this));
