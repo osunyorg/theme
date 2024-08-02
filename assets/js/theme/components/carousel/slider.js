@@ -9,13 +9,15 @@ window.osuny.carousel.Slider = function Slider(element) {
     this.deltaPosition = 0;
     this.position = 0;
     this.drag = null;
-    this._loadSlidesFromDom();
+    var slidesContainers = this.element.children;
+    for (var i = 0; i < slidesContainers.length; i += 1) {
+        this.slides.push(new window.osuny.carousel.Slide(this, slidesContainers.item(i), i));
+    }
     this.showSlide(this.index);
-    this._updateSlidesClasses();
 }
 window.osuny.carousel.Slider.prototype = {
     showSlide: function (index) {
-        this.index = this._indexOfSlideAt(index - this.index);
+        this.index = index;
         this.deltaPosition -= this.position - this._positionOfSlide(this.index).left;
         this._translate();
         this._updateSlidesClasses();
@@ -28,13 +30,6 @@ window.osuny.carousel.Slider.prototype = {
     },
     length: function () {
         return this.slides.length;
-    },
-    _loadSlidesFromDom: function () {
-        var slidesContainers = this.element.children;
-        for (var i = 0; i < slidesContainers.length; i += 1) {
-            this.slides.push(new window.osuny.carousel.Slide(this, slidesContainers.item(i), i));
-        }
-        this._translate();
     },
     _positionOfSlide: function (index) {
         var position = {
@@ -55,12 +50,6 @@ window.osuny.carousel.Slider.prototype = {
         this.element.style.setProperty('transition', 'left ' + String(this.transitionDuration) + 'ms');
         this.element.style.setProperty('left', this.position + "px");
 
-    },
-    // TODO Clara clarifier ça, offset c'est un index ? une distance en pixels ? si c'est un décalage, par rapport à quoi 
-    _indexOfSlideAt: function (offset) {
-        // returns the index of the slide located at the distance "offset" from current slide
-        // La ligne ci-dessous est affreuse
-        return ((this.index + offset) % this.slides.length + this.slides.length) % this.slides.length;
     },
     _updateSlidesClasses: function () {
         this.slides.forEach(function(slide) {
