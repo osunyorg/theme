@@ -122,7 +122,7 @@ window.osuny.carousel.Carousel.prototype = {
     _initializeAutoplayer(){
         this.autoplayerElement = window.osuny.utils.findElementByClassName(
             this.element,
-            window.osuny.carousel.classes.toggle
+            window.osuny.carousel.classes.autoplayerToggle
         );
         this.autoplayer = new window.osuny.carousel.Autoplayer(this.autoplayerElement);
         this.autoplayer.setInterval(this.config.autoplayInterval);

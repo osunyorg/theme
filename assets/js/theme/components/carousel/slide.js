@@ -12,13 +12,6 @@ window.osuny.carousel.Slide = function (slider, container, index) {
 }
 
 window.osuny.carousel.Slide.prototype = {
-    htmlClasses: {
-        _isBefore: 'is-before',
-        _isPrevious: 'is-previous',
-        _isCurrent: 'is-current',
-        _isNext: 'is-next',
-        _isAfter: 'is-after'
-    },
     computeWidth: function () {
         this.computedStyle = getComputedStyle(this.container);
         this.width =  this.container.offsetWidth + 
@@ -26,11 +19,11 @@ window.osuny.carousel.Slide.prototype = {
                         parseFloat(this.computedStyle.marginRight);
     },
     setClasses() {
-        this._setState('_isBefore');
-        this._setState('_isPrevious');
-        this._setState('_isCurrent');
-        this._setState('_isNext');
-        this._setState('_isAfter');
+        this._setState(this._isBefore(), window.osuny.carousel.classes.slideIsBefore);
+        this._setState(this._isPrevious(), window.osuny.carousel.classes.slideIsPrevious);
+        this._setState(this._isCurrent(), window.osuny.carousel.classes.slideIsCurrent);
+        this._setState(this._isNext(), window.osuny.carousel.classes.slideIsNext);
+        this._setState(this._isAfter(), window.osuny.carousel.classes.slideIsAfter);
     },
     _isBefore: function () {
         return this.index < this.slider.index;
@@ -47,10 +40,7 @@ window.osuny.carousel.Slide.prototype = {
     _isAfter: function  () {
         return this.index > this.slider.index;
     },
-    _setState: function (state) {
-        var className = this.htmlClasses[state],
-            // Appel de la fonction this.isBefore()
-            active = this[state]();
+    _setState: function (active, className) {
         if (active) {
             this.classList.add(className);
         } else {
