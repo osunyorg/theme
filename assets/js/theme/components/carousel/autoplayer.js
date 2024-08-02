@@ -89,9 +89,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         this._dispatchEvent("autoplayerTrigger");
     },
     _dispatchProgression(){
-        var event = new Event(window.osuny.carousel.events.autoplayerProgression);
-        event.progression = this.progression;
-        this.element.dispatchEvent(event);
+        this._dispatchEvent("autoplayerProgression", this.progression);
     },
     _updateToggle: function () {
         if (!this.element) { return }
