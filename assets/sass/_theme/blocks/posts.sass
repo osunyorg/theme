@@ -278,44 +278,37 @@
                     margin-top: $spacing-5
 
     &--carousel
-        @include draggable-block
-        .container
-            padding-right: 0
         .carousel
             padding-bottom: $spacing-3
-            &:hover
-                cursor: grab
-            &.is-grabbing
-                cursor: grabbing
-            li
-                list-style: none
-            .posts
-                display: flex
-                gap: unset
-                .post
-                    margin: 0 calc(var(--grid-gutter) / 2)
-            .actions-arrows
+            &__container
+                margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
+                margin-right: calc(var(--grid-gutter-negative)/2)
+                li
+                    list-style: none
+                .posts
+                    display: flex
+                    gap: unset
+                    .post
+                        margin: 0 calc(var(--grid-gutter) / 2)
+
+                @include media-breakpoint-down(desktop)
+                    gap: half(var(--grid-gutter))
+                    .post
+                        width: columns(10)
+
+                @include in-page-with-sidebar
+                    .post
+                        width: columns(3)
+                        .post-title
+                            @include h4
+            &__slide
+                padding: 0 calc(var(--grid-gutter) / 2)
+                &.is-before
+                    opacity: 0.3
+            &__arrows
                 justify-content: space-between
-        @include media-breakpoint-down(desktop)
-            .carousel
-                gap: half(var(--grid-gutter))
-                .post
-                    width: columns(10)
-                .grab-item:last-of-type
-                    margin-right: half(var(--grid-gutter))
-                .actions-arrows
-                    margin-right: var(--grid-gutter)
-        @include media-breakpoint-up(desktop)
-            .next
-                margin-right: pxToRem(-27) // Marge négative pour aligner correctement le picto à la colonne
-        @include in-page-with-sidebar
-            .post
-                width: columns(3)
-                .post-title
-                    @include h4
-            .carousel
-                .actions-arrows
-                    width: offset(6)
+                .counter
+                    display: none
         @include in-page-without-sidebar
             .block-content
                 display: flex
@@ -326,9 +319,6 @@
                     width: columns(9)
                 .post
                     width: columns(4)
-            .carousel
-                .actions-arrows
-                    width: offset(8)
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts
