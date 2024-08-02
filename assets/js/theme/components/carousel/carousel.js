@@ -12,6 +12,7 @@ window.osuny.carousel.Carousel = function (element) {
         visible: false
     };
     this.windowResizeTimeout;
+    this._findElement = window.osuny.utils.carousel.findElement.bind(this),
 
     this._initializeConfig();
     this._initializeSlider();
@@ -77,10 +78,7 @@ window.osuny.carousel.Carousel.prototype = {
         this.config.loadOptions(this.element.dataset.carousel);
     },
     _initializePagination: function () {
-        var paginationElement = window.osuny.utils.findElementByClassName(
-            this.element, 
-            window.osuny.carousel.classes.pagination
-        );
+        var paginationElement = this._findElement("pagination");
         this.pagination = new window.osuny.carousel.Pagination(paginationElement);
         if (paginationElement) {
             paginationElement.addEventListener(
@@ -90,10 +88,7 @@ window.osuny.carousel.Carousel.prototype = {
         }
     },
     _initializeArrows: function  () {
-        var arrowsElement = window.osuny.utils.findElementByClassName(
-            this.element,
-            window.osuny.carousel.classes.arrows
-        );
+        var arrowsElement = this._findElement("arrows");
         this.arrows = new window.osuny.carousel.Arrows(arrowsElement);
         if (arrowsElement) {
             arrowsElement.addEventListener(
@@ -107,10 +102,7 @@ window.osuny.carousel.Carousel.prototype = {
         }
     },
     _initializeSlider: function () {
-        var sliderElement = window.osuny.utils.findElementByClassName(
-            this.element,
-            window.osuny.carousel.classes.slider
-        );
+        var sliderElement = this._findElement("slider");
         this.slider = new window.osuny.carousel.Slider(sliderElement);
         this.slider.transitionDuration = this.config.transitionDuration
         this.slides.total = this.slider.length();
@@ -120,10 +112,7 @@ window.osuny.carousel.Carousel.prototype = {
         );
     },
     _initializeAutoplayer(){
-        this.autoplayerElement = window.osuny.utils.findElementByClassName(
-            this.element,
-            window.osuny.carousel.classes.autoplayerToggle
-        );
+        this.autoplayerElement = this._findElement("autoplayerToggle");
         this.autoplayer = new window.osuny.carousel.Autoplayer(this.autoplayerElement);
         this.autoplayer.setInterval(this.config.autoplayInterval);
         if (this.autoplayerElement) {
