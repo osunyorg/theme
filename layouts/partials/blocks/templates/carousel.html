@@ -1,7 +1,8 @@
 {{ $partial := .partial }}
-{{ $heading_tag := .heading_tag | default 3 }}
+{{ $heading_tag := .heading_tag | default 2 }}
+{{ $block_options := .block_options | default "" }}
 
-<div class="carousel carousel--{{ .content }} js-carousel" aria-roledescription="carousel" data-carousel="{{ .options | encoding.Jsonify }}">
+<div class="carousel js-carousel" aria-roledescription="carousel" data-carousel="{{ .options | encoding.Jsonify }}">
   <div class="carousel__slider">
     <div id="carousel-items" class="carousel__container" aria-live="off" aria-atomic="false">
       {{ $slideRole := "group" }}
@@ -16,6 +17,7 @@
             "params" .
             "role" $slideRole
             "heading_tag" $heading_tag
+            "options" $block_options
             ) }}
         {{ end }}
       {{ end }}

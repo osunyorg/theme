@@ -12,23 +12,36 @@ Timeline.prototype.init = function() {
 };
 
 Timeline.prototype.updateTitleHeight = function () {
-    var maxTitleHeight = 0;
+    var maxTitleHeight = this.getMaxTitleHeight();
 
-    // On vient regarder dans tous les .timeline-event pour vérifier quel est le titre le plus long
-    var events = this.timeline.getElementsByClassName((this.eventClass));
-    for (var i = 0; i < events.length; i++) {
-        var eventTitle = events[i].querySelector('.title');
-        if (eventTitle) {
-            var titleHeight = eventTitle.offsetHeight;
-            if (titleHeight > maxTitleHeight) {
-                maxTitleHeight = titleHeight;
-            }
-        }
-    }
     // On met à jour la variable css qui ajoute une min-height au .title
     // L'objectif est d'aligner les lignes de la timeline entre elles
-    this.timeline.style.cssText += '; --min-title-height: ' + maxTitleHeight + 'px;';
+    this.updateCssVariable('--min-title-height', maxTitleHeight + 'px');
+};
+
+Timeline.prototype.getMaxTitleHeight = function () {
+    var maxTitleHeight = 0;
+    var events = this.timeline.getElementsByClassName(this.eventClass);
+
+    // On vient regarder dans tous les .timeline-event pour vérifier quel est le titre le plus long
+    Array.prototype.forEach.call(events, function(event) {
+        var titleHeight = this.getTitleHeight(event);
+        if (titleHeight > maxTitleHeight) {
+            maxTitleHeight = titleHeight;
+        }
+    }, this);
+
+    return maxTitleHeight;
 }
+
+Timeline.prototype.getTitleHeight = function (event) {
+    var eventTitle = event.querySelector('.title');
+    return eventTitle ? eventTitle.offsetHeight : 0;
+};
+
+Timeline.prototype.updateCssVariable = function (variable, value) {
+    this.timeline.style.setProperty(variable, value);
+};
 
 Timeline.prototype.handleResize = function() {
     this.updateTitleHeight();
