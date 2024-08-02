@@ -59,9 +59,6 @@ window.osuny.carousel.Carousel.prototype = {
             this.slider.recompute();
         }.bind(this), 200);
     },
-    setCarouselState: function(state){
-        this.sliderContainer.setAttribute("aria-live", state);
-    },
     isInViewPort: function(){
         var boundingRect = this.element.getBoundingClientRect(),
             screenHeight = window.innerHeight || document.documentElement.clientHeight,
@@ -115,6 +112,7 @@ window.osuny.carousel.Carousel.prototype = {
         this.autoplayerElement = this._findElement("autoplayerToggle");
         this.autoplayer = new window.osuny.carousel.Autoplayer(this.autoplayerElement);
         this.autoplayer.setInterval(this.config.autoplayinterval);
+        this.autoplayer.ariaLiveElement = this._findElement("container");
         if (this.autoplayerElement) {
             this.autoplayerElement.addEventListener(
                 window.osuny.carousel.events.autoplayerTrigger,
