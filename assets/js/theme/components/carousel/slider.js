@@ -3,30 +3,22 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Slider = function Slider(element) {
     this.element = element;
+    this.transitionDuration = 0;
     this.index = 0;
     this.slides = [];
     this.deltaPosition = 0;
     this.position = 0;
     this.drag = null;
     this._loadSlidesFromDom();
-    // this.drag = window.osuny.utils.instanciateIf(this, window.osuny.carousel.Drag, this.carousel.options.drag);
     this.showSlide(this.index);
-    this.updateSlidesClasses();
+    this._updateSlidesClasses();
 }
 window.osuny.carousel.Slider.prototype = {
-    nextSlide: function () {
-        this.showSlide(this.indexOfSlideAt(1));
-    },
-    previousSlide: function () {
-        this.showSlide(this.indexOfSlideAt(-1));
-    },
     showSlide: function (index) {
-        this.index = this.indexOfSlideAt(index - this.index);
-        this.deltaPosition -= this.position - this.positionOfSlide(this.index).left;
-        this.translate(true);
-        this.updateSlidesClasses();
-        //On previent l'carousel
-        // this.carousel.onSlideChanged();
+        this.index = this._indexOfSlideAt(index - this.index);
+        this.deltaPosition -= this.position - this._positionOfSlide(this.index).left;
+        this._translate();
+        this._updateSlidesClasses();
     },
     recompute: function(){
         this.slides.forEach(function(slide) {
@@ -34,18 +26,17 @@ window.osuny.carousel.Slider.prototype = {
         });
         this.showSlide(this.index);
     },
-    recomputePosition: function () {
-        var threshold = 100;
-        var currentslidePosition = this.positionOfSlide(this.index).left;
-        var index = this.index;
-        if (this.position < (currentslidePosition - threshold)) {
-            index = this.indexOfSlideAt(1);
-        } else if (this.position > (currentslidePosition + threshold)) {
-            index = this.indexOfSlideAt(-1);
-        }
-        this.showSlide(index);
+    length: function () {
+        return this.slides.length;
     },
-    positionOfSlide: function (index) {
+    _loadSlidesFromDom: function () {
+        var slidesContainers = this.element.children;
+        for (var i = 0; i < slidesContainers.length; i += 1) {
+            this.slides.push(new window.osuny.carousel.Slide(this, slidesContainers.item(i), i));
+        }
+        this._translate();
+    },
+    _positionOfSlide: function (index) {
         var position = {
             left: 0,
             right: 0,
@@ -58,61 +49,22 @@ window.osuny.carousel.Slider.prototype = {
         position.center = (position.right + position.left) / 2;
         return position
     },
-    translate: function (transition = false) {
+    _translate: function () {
         this.position += this.deltaPosition;
-        var transitionDuration = transition === true ? this.transitionDuration : 0;
         this.deltaPosition = 0;
-        // Pourquoi ne pas mettre la transition purement en CSS, et le retirer complètement du JS ?
-        this.element.style.setProperty('transition', 'left ' + String(transitionDuration) + 'ms');
+        this.element.style.setProperty('transition', 'left ' + String(this.transitionDuration) + 'ms');
         this.element.style.setProperty('left', this.position + "px");
 
     },
-    width: function () {
-        var width = 0;
-        this.slides.forEach(slide => {
-            width += slide.width;
-        });
-        return width;
-    },
-    slideAt: function (offset) {
-        var index = this.indexOfSlideAt(offset);
-        return this.slides[index];
-    },
-    length: function () {
-        return this.slides.length;
-    },
-    indexOfSlideAt: function (offset) {
+    // TODO Clara clarifier ça, offset c'est un index ? une distance en pixels ? si c'est un décalage, par rapport à quoi 
+    _indexOfSlideAt: function (offset) {
         // returns the index of the slide located at the distance "offset" from current slide
-        var sliderLen = this.slides.length;
-        return ((this.index + offset) % sliderLen + sliderLen) % sliderLen;
+        // La ligne ci-dessous est affreuse
+        return ((this.index + offset) % this.slides.length + this.slides.length) % this.slides.length;
     },
-    updateSlidesClasses: function () {
+    _updateSlidesClasses: function () {
         this.slides.forEach(function(slide) {
             slide.setClasses();
         });
-    },
-    findSlideIndexByPosition: function () {
-        var slidesPosition = {
-            inf: 0,
-            sup: 0
-        }
-        var slideIndex = 0;
-        for (var i = 0; i < this.slides.length; i += 1) {
-            slidesPosition.inf = slidesPosition.sup;
-            slidesPosition.sup = slidesPosition.inf - this.slides[i].width;
-            if (this.position < slidesPosition.inf && this.position > slidesPosition.sup) {
-                slideIndex = i;
-                this.deltaPosition = slidesPosition.inf - this.position;
-                break;
-            }
-        }
-        return slideIndex;
-    },
-    _loadSlidesFromDom: function () {
-        var slidesContainers = this.element.children;
-        for (var i = 0; i < slidesContainers.length; i += 1) {
-            this.slides.push(new window.osuny.carousel.Slide(this, slidesContainers.item(i), i));
-        }
-        this.translate(true);
     }
 }
