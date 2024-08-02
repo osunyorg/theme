@@ -51,7 +51,7 @@ window.osuny.carousel.Carousel.prototype = {
     resize: function () {
         clearTimeout(this.windowResizeTimeout);
         this.windowResizeTimeout = setTimeout(function () {
-            this.slider.computeSlidesWidth();
+            this.slider.reCompute();
         }.bind(this), 200);
     },
     setCarouselState: function(state){
