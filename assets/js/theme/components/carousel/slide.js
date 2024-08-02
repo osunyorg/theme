@@ -21,7 +21,7 @@ window.osuny.carousel.Slide.prototype = {
     },
     computeWidth: function () {
         this.computedStyle = getComputedStyle(this.container);
-        this.width =  this.container.offsetWidth + parseFloat(this.computedStyle.marginLeft) + parseFloat(this.computedStyle.marginRight);
+        this.width =  Math.round(parseFloat(this.computedStyle.width) + parseFloat(this.computedStyle.marginLeft) + parseFloat(this.computedStyle.marginRight));
     },
     setClasses() {
         this._setState('_isBefore');
