@@ -5,25 +5,17 @@ window.osuny.carousel.Config = function (instance) {
     this.instance = instance;
 
     // Valeurs par défaut et documentation des propriétés
-    this.options = {};
-
     // L'autoplay est-il activé ou pas ?
     this.autoplay = false;
 
-    // FIXME @Clara ça fait quoi ?
+    // Pagination sous forme de tabulation 
     this.pagination = true;
 
-    // FIXME @Clara utile ?
-    this.drag = false;
-
-    // FIXME @Clara ça fait quoi ?
+     // Controle du defilement avec les fleches
     this.arrows = false;
 
-    // Temps par slide
-    this.autoplayInterval = 3000;
-
-    // FIXME obsolète si scroll smooth, peut-être juste smooth:boolean?
-    this.transitionDuration = 500;
+    // Durée d'affichage d'un slide en cas d'autoplay
+    this.autoplayinterval = 3000;
 }
 
 window.osuny.carousel.Config.prototype = {
@@ -31,16 +23,14 @@ window.osuny.carousel.Config.prototype = {
         "autoplay",
         "arrows",
         "pagination",
-        "transitionDuration",
-        "drag"
+        "autoplayinterval"
     ],
     loadOptions: function (data) {
-        this.options = JSON.parse(data);
-        this.autoplay = false;
+        var options = JSON.parse(data);
         for (var i = 0; i <= this.valuesInOptions.length; i += 1) {
             var value = this.valuesInOptions[i];
-            if (this.options[value] !== undefined) {
-                this[value] = this.options[value];
+            if (options[value] !== undefined) {
+                this[value] = options[value];
             }
         };
     }

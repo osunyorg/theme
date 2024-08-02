@@ -5,7 +5,6 @@ window.osuny.carousel.Slider = function Slider(element) {
     this.element = element;
     this._findElement = window.osuny.carousel.utils.findElement.bind(this),
     this.container = this._findElement("container");
-    this.transitionDuration = 0;
     this.index = 0;
     this.slides = [];
     this.deltaPosition = 0;
@@ -20,7 +19,7 @@ window.osuny.carousel.Slider = function Slider(element) {
 window.osuny.carousel.Slider.prototype = {
     showSlide: function (index) {
         this.index = index;
-        var behavior = (this.transitionDuration > 0) ? "smooth" : "instant";
+        var behavior =  "smooth";
         this.element.scrollTo({
             top: 0,
             left: this._slidePosition(index),
