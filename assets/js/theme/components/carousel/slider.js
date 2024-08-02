@@ -3,7 +3,7 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Slider = function Slider(element) {
     this.element = element;
-    this._findElement = window.osuny.utils.carousel.findElement.bind(this),
+    this._findElement = window.osuny.carousel.utils.findElement.bind(this),
     this.container = this._findElement("container");
     this.transitionDuration = 0;
     this.index = 0;

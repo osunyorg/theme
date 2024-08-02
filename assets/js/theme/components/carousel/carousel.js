@@ -12,7 +12,7 @@ window.osuny.carousel.Carousel = function (element) {
         visible: false
     };
     this.windowResizeTimeout;
-    this._findElement = window.osuny.utils.carousel.findElement.bind(this),
+    this._findElement = window.osuny.carousel.utils.findElement.bind(this);
     this._initializeConfig();
     this._initializeSlider();
     this._initializePagination();

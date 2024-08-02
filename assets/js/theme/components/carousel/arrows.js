@@ -3,11 +3,21 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Arrows = function (element) {
     this.element = element;
-    if (this.element) {
-        this._initialize();
-    }
+    if (!this.element) { return };
+    this._findElement = window.osuny.carousel.utils.findElement.bind(this);
+    this._dispatchEvent = window.osuny.carousel.utils.dispatchEvent.bind(this);
+    this.counter = this._findElement('arrowsCounter');
+    this.next = this._findElement('arrowsNext');
+    this.previous = this._findElement('arrowsPrevious');
+    this.next.addEventListener(
+        "click",
+        this._onNext.bind(this)
+    );
+    this.previous.addEventListener(
+        "click",
+        this._onPrevious.bind(this)
+    );
 }
-
 window.osuny.carousel.Arrows.prototype = {
     update: function (index, total) {
         if (this.element) {
@@ -15,21 +25,6 @@ window.osuny.carousel.Arrows.prototype = {
             this.next.disabled = index + 1 == total;
             this.previous.disabled = index == 0;
         }
-    },
-    _initialize: function  () {
-        this._findElement = window.osuny.utils.carousel.findElement.bind(this);
-        this._dispatchEvent = window.osuny.utils.carousel.dispatchEvent.bind(this);
-        this.counter = this._findElement('arrowsCounter');
-        this.next = this._findElement('arrowsNext');
-        this.previous = this._findElement('arrowsPrevious');
-        this.next.addEventListener(
-            "click",
-            this._onNext.bind(this)
-        );
-        this.previous.addEventListener(
-            "click",
-            this._onPrevious.bind(this)
-        );
     },
     _onNext: function () {
         this._dispatchEvent('arrowsNext');
