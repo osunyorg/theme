@@ -53,7 +53,7 @@ window.osuny.carousel.Carousel.prototype = {
     resize: function () {
         clearTimeout(this.windowResizeTimeout);
         this.windowResizeTimeout = setTimeout(function () {
-            this.slider.computeSlidesWidth();
+            this.slider.reCompute();
         }.bind(this), 200);
     },
     setCarouselState: function(state){
@@ -104,6 +104,18 @@ window.osuny.carousel.Carousel.prototype = {
         this.autoplayer.disable();
         this.showSlide(event.index);
     },
+    inViewPort: function(){
+        var boundingRect = this.element.getBoundingClientRect();
+        return (
+            boundingRect.bottom >= 0 &&
+            boundingRect.top <= (window.innerHeight || document.documentElement.clientHeight)
+        );
+    },
+    getCenterPositionY: function () {
+        var boundingRect = this.element.getBoundingClientRect();
+        return boundingRect.top + boundingRect.height / 2;
+    }
+
     
     // // Autoplayer events
     // stopAutoplay: function () {
