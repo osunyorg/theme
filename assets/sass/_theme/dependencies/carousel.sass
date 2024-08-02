@@ -19,7 +19,8 @@
             margin-right: calc(var(--grid-gutter-negative)/2)
     &__slide
         .testimonials &:not(.is-current),
-        .block-timeline &.is-before
+        .block-timeline &.is-before,
+        .block-posts &.is-before
             opacity: 0.3
         .block-posts &
             padding: 0 calc(var(--grid-gutter) / 2)
@@ -34,6 +35,9 @@
         flex-direction: row
         align-items: center
         margin-left: - $spacing-3 
+        .block-posts &
+            width: 100%
+            justify-content: space-between
         @include media-breakpoint-up(desktop)
             padding-top: $spacing-3
         .counter
@@ -41,6 +45,9 @@
             text-align: center
             width: fit-content
             @include meta
+            .block-timeline &,
+            .block-posts &
+                display: none
             &:empty
                 display: block
         button
