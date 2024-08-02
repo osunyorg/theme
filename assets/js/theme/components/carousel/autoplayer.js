@@ -88,8 +88,11 @@ window.osuny.carousel.Autoplayer.prototype = {
         }
     },
     _onClick: function () {
-        var eventKind = this.paused ? window.osuny.carousel.events.autoplayerPlay : window.osuny.carousel.events.autoplayerPause,
-            event = new Event(eventKind);
-        this.element.dispatchEvent(event);
+        if (this.paused) {
+            this.unpause();
+            this.enable();
+        } else {
+            this.pause();
+        }
     }
 }
