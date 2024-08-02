@@ -9,7 +9,7 @@ window.osuny.carousel.Slide = function (slider, container, i) {
     this.computedStyle = null;
     this.width = 0;
     // TODO gérer le resize de la page !
-    this._computeSize();
+    this.computeWidth();
 }
 
 window.osuny.carousel.Slide.prototype = {
@@ -20,7 +20,7 @@ window.osuny.carousel.Slide.prototype = {
         _isNext: 'is-next',
         _isAfter: 'is-after'
     },
-    _computeSize: function () {
+    computeWidth: function () {
         this.computedStyle = getComputedStyle(this.container);
         this.width = this.container.offsetWidth + parseFloat(this.computedStyle.marginLeft) + parseFloat(this.computedStyle.marginRight);
     },

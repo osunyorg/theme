@@ -11,6 +11,8 @@ window.osuny.carousel.Carousel = function (element) {
         initialized: false,
         visible: false
     };
+    this.windowResizeTimeout;
+
     this._initializeConfig();
     this._initializeSlider();
     this._initializePagination();
@@ -47,7 +49,10 @@ window.osuny.carousel.Carousel.prototype = {
         this.autoplayer.unpause();
     },
     resize: function () {
-        // TODO
+        clearTimeout(this.windowResizeTimeout);
+        this.windowResizeTimeout = setTimeout(function () {
+            this.slider.computeSlidesWidth();
+        }.bind(this), 200);
     },
     setCarouselState: function(state){
         this.sliderContainer.setAttribute("aria-live", state);
@@ -104,6 +109,9 @@ window.osuny.carousel.Carousel.prototype = {
         this.autoplayer.disable();
         this.showSlide(event.index);
     },
+
+
+    
     // // Autoplayer events
     // stopAutoplay: function () {
     //     if (this.autoplayer) {
