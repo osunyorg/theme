@@ -42,9 +42,8 @@ window.osuny.carousel.manager = {
     _findCarouselsInViewport: function () {
         this.carouselsInViewport = [];
         for (var i = 0; i < this.carousels.length; i += 1) {
-            var carousel = this.carousels[i],
-                inViewPort = carousel.inViewPort();
-            if (inViewPort) {
+            var carousel = this.carousels[i];
+            if (carousel.isInViewPort()) {
                 carousel.unpause();
                 this.carouselsInViewport.push(carousel);
             } else {
@@ -57,15 +56,15 @@ window.osuny.carousel.manager = {
         // On démarre avec la plus grande distance possible
         var distance = window.innerHeight,
             bestCandidate = null;
-        this.carouselsInViewport.forEach(function (carousel) {
-            console.log("widowY", this.windowCenterY)
+
+        for (var i = 0; i < this.carousels.length; i += 1) {
+            var carousel = this.carousels[i];
             var currentDistanceToCenter = Math.abs(carousel.getCenterPositionY() - this.windowCenterY);
-            console.log(currentDistanceToCenter)
             if (currentDistanceToCenter < distance) {
                 distance = currentDistanceToCenter;
                 bestCandidate = carousel;
             }
-        });
+        };
         return bestCandidate;
     },
     _onKeyPress: function (e) {
