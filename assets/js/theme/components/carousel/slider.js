@@ -18,8 +18,9 @@ window.osuny.carousel.Slider = function Slider(element) {
 window.osuny.carousel.Slider.prototype = {
     showSlide: function (index) {
         this.index = index;
-        this.deltaPosition -= this.position - this._positionOfSlide(this.index).left;
-        this._translate();
+        this.position = this._positionOfSlide(index);
+        this.element.style.setProperty('transition', 'left ' + String(this.transitionDuration) + 'ms');
+        this.element.style.setProperty('left', this.position + "px");
         this._updateSlidesClasses();
     },
     recompute: function(){
@@ -32,24 +33,11 @@ window.osuny.carousel.Slider.prototype = {
         return this.slides.length;
     },
     _positionOfSlide: function (index) {
-        var position = {
-            left: 0,
-            right: 0,
-            center: 0
-        };
+        var position = 0;
         for (var i = 0; i < index; i += 1) {
-            position.left -= this.slides[i].width;
+            position -= this.slides[i].width;
         }
-        position.right = position.left - this.slides[index].width;
-        position.center = (position.right + position.left) / 2;
-        return position
-    },
-    _translate: function () {
-        this.position += this.deltaPosition;
-        this.deltaPosition = 0;
-        this.element.style.setProperty('transition', 'left ' + String(this.transitionDuration) + 'ms');
-        this.element.style.setProperty('left', this.position + "px");
-
+        return position;
     },
     _updateSlidesClasses: function () {
         this.slides.forEach(function(slide) {
