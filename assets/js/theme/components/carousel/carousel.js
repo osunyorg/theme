@@ -12,6 +12,7 @@ window.osuny.carousel.Carousel = function (element) {
         visible: false
     };
     this.windowResizeTimeout;
+    this.lastScrollXTimeout;
     this._findElement = window.osuny.carousel.utils.findElement.bind(this);
     this._initializeConfig();
     this._initializeSlider();
@@ -106,8 +107,8 @@ window.osuny.carousel.Carousel.prototype = {
         this.slider.transitionDuration = this.config.transitionDuration
         this.slides.total = this.slider.length();
         sliderElement.addEventListener(
-            "scrollend",
-            this._onSliderScrollend.bind(this)
+            "scroll",
+            this._onSliderScroll.bind(this)
         );
     },
     _initializeAutoplayer(){
@@ -133,10 +134,6 @@ window.osuny.carousel.Carousel.prototype = {
             "mouseenter",
             this.autoplayer.softPause.bind(this.autoplayer)
         );
-        this.element.addEventListener(
-            "mouseleave",
-            this.autoplayer.softUnpause.bind(this.autoplayer)
-        );
     },
     _onAutoplayerProgression: function (event) {
         this.pagination.setProgression(event.value);
@@ -144,6 +141,12 @@ window.osuny.carousel.Carousel.prototype = {
     _onPaginationButtonClicked: function (event) {
         this.autoplayer.disable();
         this.showSlide(event.index);
+    },
+    _onSliderScroll: function () {
+        clearTimeout(this.lastScrollXTimeout);
+        this.lastScrollXTimeout = setTimeout(function () {
+            this._onSliderScrollend();
+        }.bind(this), 100);
     },
     _onSliderScrollend: function () {
         var index = this.slider.currentSlideIndex();
