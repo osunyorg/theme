@@ -52,20 +52,21 @@ window.osuny.carousel.manager = {
             }
         };
         this.focusedCarousel = this._findBestCarouselFocusCandidate();
+        console.log(this.focusedCarousel)
     },
     _findBestCarouselFocusCandidate: function () {
         // On démarre avec la plus grande distance possible
         var distance = window.innerHeight,
             bestCandidate = null;
-        this.carouselsInViewport.forEach(function (carousel) {
-            console.log("widowY", this.windowCenterY)
+
+        for (var i = 0; i < this.carousels.length; i += 1) {
+            var carousel = this.carousels[i];
             var currentDistanceToCenter = Math.abs(carousel.getCenterPositionY() - this.windowCenterY);
-            console.log(currentDistanceToCenter)
             if (currentDistanceToCenter < distance) {
                 distance = currentDistanceToCenter;
                 bestCandidate = carousel;
             }
-        });
+        };
         return bestCandidate;
     },
     _onKeyPress: function (e) {
