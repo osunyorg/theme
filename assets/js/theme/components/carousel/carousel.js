@@ -120,5 +120,8 @@ window.osuny.carousel.Carousel.prototype = {
         this.autoplayer.disable();
         this.showSlide(event.index);
     },
-    // TODO quand le slider a été déplacé à la main, en natif, il faut mettre à jour arrows et pagination
+    // TODO quand le slider a été déplacé à la main, en natif, il faut :
+    // - mettre à jour arrows
+    // - mettre à jour pagination
+    // - stopper l'autoplayer
 }
