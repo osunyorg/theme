@@ -3,12 +3,11 @@
     flex-direction: column-reverse
     position: relative
     &__slider
-        overflow: hidden
+        overflow: scroll
+        scroll-snap-type: x mandatory
         scrollbar-width: none
         &::-webkit-scrollbar
             display: none
-        .block-testimonials &
-            overflow: hidden
     &__container
         // Si l'image est verticale, ça fonctionne tant qu'elle fait plus de 20vw
         padding-right: 80vw
@@ -22,7 +21,7 @@
         justify-content: flex-start
 
     &__slide
-        .testimonials &:not(.is-current),
+        scroll-snap-align: start
         .block-timeline &.is-before
             opacity: 0.3
 

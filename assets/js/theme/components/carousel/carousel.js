@@ -9,7 +9,8 @@ window.osuny.carousel.Carousel = function (element) {
     }
     this.state = {
         initialized: false,
-        visible: false
+        visible: false,
+        hasMouseOver: false
     };
     this.windowResizeTimeout;
     this.lastScrollXTimeout;
@@ -128,12 +129,29 @@ window.osuny.carousel.Carousel.prototype = {
             }
         }
     },
+    _pointerStart: function() {
+        this.autoplayer.softPause();
+        this.state.hasMouseOver = true;
+    },
+    _pointerEnd: function() {
+        this.autoplayer.softUnpause();
+        this.state.hasMouseOver = false;
+    },
     _initializeMouseEvents: function(){
         this.element.addEventListener(
-            "mouseenter",
-            this.autoplayer.softPause.bind(this.autoplayer)
+            "mouseenter", this._pointerStart.bind(this)
+        );
+        this.element.addEventListener(
+            "touchstart", this._pointerStart.bind(this)
+        );
+        this.element.addEventListener(
+            "mouseleave", this._pointerEnd.bind(this)
+        );
+        this.element.addEventListener(
+            "touchend", this._pointerEnd.bind(this)
         );
     },
+    
     _onAutoplayerProgression: function (event) {
         this.pagination.setProgression(event.value);
     },
@@ -142,8 +160,12 @@ window.osuny.carousel.Carousel.prototype = {
         this.showSlide(event.index);
     },
     _onSliderScroll: function () {
+        this.autoplayer.softPause();
         clearTimeout(this.lastScrollXTimeout);
         this.lastScrollXTimeout = setTimeout(function () {
+            if(!this.state.hasMouseOver){
+                this.autoplayer.softUnpause();
+            }
             this._onSliderScrollend();
         }.bind(this), 100);
     },

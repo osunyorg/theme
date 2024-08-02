@@ -4,8 +4,10 @@ window.osuny.carousel = window.osuny.carousel || {};
 window.osuny.carousel.Autoplayer = function (element) {
     this.element = element;
     if (!this.element) { return };
-    this.playElement = this.element.getElementsByClassName(window.osuny.carousel.classes.autoplayerToggleIconPlay).item(0);
-    this.pauseElement = this.element.getElementsByClassName(window.osuny.carousel.classes.autoplayerToggleIconPause).item(0);
+    this.icons = {
+        play: this.element.getElementsByClassName(window.osuny.carousel.classes.autoplayerToggleIconPlay).item(0),
+        pause: this.element.getElementsByClassName(window.osuny.carousel.classes.autoplayerToggleIconPause).item(0)
+    }
     // Etat de l'autoplay
     this.enabled = false;
     // Etat de pause (quand on rollover par exemple)
@@ -70,6 +72,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         if (this.elapsedSinceLastTrigger > this.interval) {
             this._dispatchTrigger();
             this._resetLoopValues();
+            this._dispatchProgression();
         }
         // Mémoire du last loop pour la sortie de pause
         this.lastLoopAt = now;
@@ -98,8 +101,8 @@ window.osuny.carousel.Autoplayer.prototype = {
         } else {
             this.classList.add(window.osuny.carousel.classes.autoplayerPlaying);
         }
-        this.playElement.setAttribute('aria-hidden', !this.paused);
-        this.pauseElement.setAttribute('aria-hidden', this.paused);
+        this.icons.play.setAttribute('aria-hidden', !this.paused);
+        this.icons.pause.setAttribute('aria-hidden', this.paused);
     },
     _onClick: function () {
         if (this.paused) {
