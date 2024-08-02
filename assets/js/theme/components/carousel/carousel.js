@@ -60,6 +60,17 @@ window.osuny.carousel.Carousel.prototype = {
     setCarouselState: function(state){
         this.sliderContainer.setAttribute("aria-live", state);
     },
+    isInViewPort: function(){
+        var boundingRect = this.element.getBoundingClientRect(),
+            screenHeight = window.innerHeight || document.documentElement.clientHeight,
+            aboveTheBottom = boundingRect.bottom >= 0,
+            belowTheTop = boundingRect.top <= screenHeight;
+        return aboveTheBottom && belowTheTop;
+    },
+    getCenterPositionY: function () {
+        var boundingRect = this.element.getBoundingClientRect();
+        return boundingRect.top + boundingRect.height / 2;
+    },
     _initializeConfig: function () {
         this.config = new window.osuny.carousel.Config(this);
         // Les options sont chargées depuis le data-attribute "data-carousel"

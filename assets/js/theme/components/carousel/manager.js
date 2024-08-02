@@ -42,9 +42,8 @@ window.osuny.carousel.manager = {
     _findCarouselsInViewport: function () {
         this.carouselsInViewport = [];
         for (var i = 0; i < this.carousels.length; i += 1) {
-            var carousel = this.carousels[i],
-                inViewPort = carousel.inViewPort();
-            if (inViewPort) {
+            var carousel = this.carousels[i];
+            if (carousel.isInViewPort()) {
                 carousel.unpause();
                 this.carouselsInViewport.push(carousel);
             } else {
