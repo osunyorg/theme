@@ -9,6 +9,8 @@ window.osuny.carousel.classes = {
     autoplayerPaused: "toggle__paused",
     autoplayerPlaying: "toggle__playing",
     autoplayerToggle: "toggle",
+    autoplayerToggleIconPause: "pause",
+    autoplayerToggleIconPlay: "play",
     carousel: "js-carousel",
     container: "carousel__container",
     pagination: "carousel__pagination__tabcontainer",
