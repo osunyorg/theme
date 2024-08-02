@@ -3,9 +3,24 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Autoplayer = function (element) {
     this.element = element;
-    if (this.element) {
-        this._initialize();
-    }
+    if (!this.element) { return };
+    // Etat de l'autoplay
+    this.enabled = false;
+    // Etat de pause (quand on rollover par exemple)
+    this.paused = false;
+    // Pause au rollover
+    this.softPaused = false;
+    // Intervalle en millisecondes entre 2 déclenhements
+    this.interval = 3000;
+    this._resetLoopValues();
+    // Bouton toggle
+    this.classList = this.element.classList;
+    this.classList.add(window.osuny.carousel.classes.autoplayerPaused);
+    this.element.addEventListener(
+        "click",
+        this._onClick.bind(this)
+    );
+    this._dispatchEvent = window.osuny.carousel.utils.dispatchEvent.bind(this);
 }
 window.osuny.carousel.Autoplayer.prototype = {
     setInterval: function (interval) {
@@ -42,25 +57,6 @@ window.osuny.carousel.Autoplayer.prototype = {
     softUnpause: function () {
         this.softPaused = false;
     },
-    _initialize: function () {
-        // Etat de l'autoplay
-        this.enabled = false;
-        // Etat de pause (quand on rollover par exemple)
-        this.paused = false;
-        // Pause au rollover
-        this.softPaused = false;
-        // Intervalle en millisecondes entre 2 déclenhements
-        this.interval = 3000;
-        this._resetLoopValues();
-        // Bouton toggle
-        this.classList = this.element.classList;
-        this.classList.add(window.osuny.carousel.classes.autoplayerPaused);
-        this.element.addEventListener(
-            "click",
-            this._onClick.bind(this)
-        );
-        this._dispatchEvent = window.osuny.utils.carousel.dispatchEvent.bind(this);
-    },
     _loop: function () {
         if (!this.enabled) { return }
         var now = Date.now();
@@ -89,9 +85,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         this._dispatchEvent("autoplayerTrigger");
     },
     _dispatchProgression(){
-        var event = new Event(window.osuny.carousel.events.autoplayerProgression);
-        event.progression = this.progression;
-        this.element.dispatchEvent(event);
+        this._dispatchEvent("autoplayerProgression", this.progression);
     },
     _updateToggle: function () {
         if (!this.element) { return }
