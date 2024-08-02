@@ -17,18 +17,9 @@ window.osuny.carousel.Arrows.prototype = {
         }
     },
     _initialize: function  () {
-        this.counter = window.osuny.utils.findElementByClassName(
-            this.element,
-            window.osuny.carousel.classes.arrowsCounter
-        );
-        this.next = window.osuny.utils.findElementByClassName(
-            this.element,
-            window.osuny.carousel.classes.arrowsNext
-        );
-        this.previous = window.osuny.utils.findElementByClassName(
-            this.element,
-            window.osuny.carousel.classes.arrowsPrevious
-        );
+        this.counter = this._findElement('arrowsCounter');
+        this.next = this._findElement('arrowsNext');
+        this.previous = this._findElement('arrowsPrevious');
         this.next.addEventListener(
             "click",
             this._onNext.bind(this)
@@ -39,13 +30,18 @@ window.osuny.carousel.Arrows.prototype = {
         );
     },
     _onNext: function () {
-        this.element.dispatchEvent(
-            new Event(window.osuny.carousel.events.arrowsNext)
-        );
+        this._dispatchEvent('arrowsNext');
     },
     _onPrevious: function () {
-        this.element.dispatchEvent(
-            new Event(window.osuny.carousel.events.arrowsPrevious)
-        );
+        this._dispatchEvent('arrowsPrevious');
+    },
+    _findElement: function(classKey) {
+        var className = window.osuny.carousel.classes[classKey];
+        return this.element.getElementsByClassName(className).item(0);
+    },
+    _dispatchEvent: function (eventKey) {
+        var eventName = window.osuny.carousel.events[eventKey];
+        var event = new Event(eventName);
+        this.element.dispatchEvent(event);
     }
 }
