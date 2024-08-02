@@ -11,6 +11,7 @@ window.osuny.carousel.manager = {
     initialize: function () {
         if (!this.initialized) {
             this._createCarousels();
+            this._computeWindowCenterY();
             this._initializeListeners();
             this._findCarouselsInViewport();
             this.initialized = true;
@@ -30,17 +31,19 @@ window.osuny.carousel.manager = {
         window.addEventListener("keydown", this._onKeyPress.bind(this));
     },
     _resize: function () {
-        this.windowCenterY = (window.innerHeight || document.documentElement.clientHeight) / 2;
+        this._computeWindowCenterY();
         this.carousels.forEach(function (carousel) {
             carousel.resize();
         });
+    },
+    _computeWindowCenterY: function(){
+        this.windowCenterY = (window.innerHeight || document.documentElement.clientHeight) / 2;
     },
     _findCarouselsInViewport: function () {
         this.carouselsInViewport = [];
         for (var i = 0; i < this.carousels.length; i += 1) {
             var carousel = this.carousels[i],
-                // TODO
-                inViewPort = true;
+                inViewPort = carousel.inViewPort();
             if (inViewPort) {
                 carousel.unpause();
                 this.carouselsInViewport.push(carousel);
@@ -55,12 +58,13 @@ window.osuny.carousel.manager = {
         var distance = window.innerHeight,
             bestCandidate = null;
         this.carouselsInViewport.forEach(function (carousel) {
-            // TODO récupérer les infos sans ui
-            // var currentDistanceToCenter = Math.abs(carousel.ui.getCenterPositionY() - this.windowCenterY);
-            // if (currentDistanceToCenter < distance) {
-            //     distance = currentDistanceToCenter;
-            //     bestCandidate = carousel;
-            // }
+            console.log("widowY", this.windowCenterY)
+            var currentDistanceToCenter = Math.abs(carousel.getCenterPositionY() - this.windowCenterY);
+            console.log(currentDistanceToCenter)
+            if (currentDistanceToCenter < distance) {
+                distance = currentDistanceToCenter;
+                bestCandidate = carousel;
+            }
         });
         return bestCandidate;
     },

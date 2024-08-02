@@ -25,11 +25,11 @@
   {{ else }}
     {{ $post_class = printf "%s %s" $post_class "without-image" }}
   {{ end }}
-  {{ if $is_carousel }}
-    {{ $post_class = printf "%s %s" $post_class "carousel__slide" }}
-  {{ end }}
 
-  <article class="{{ $post_class }}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting" {{- if $is_carousel }} id="carousel-item-{{$index}}" role="{{$role}}" aria-roledescription="slide" class="carousel__slide" aria-label="item-{{$index}}" {{ end }}>
+  {{ if $is_carousel }}
+    <li class="carousel__slide" id="carousel-item-{{$index}}" role="{{$role}}" aria-roledescription="slide" aria-label="item-{{$index}}">
+  {{ end }}
+  <article class="{{ $post_class }}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="post-content">
       {{- $title := partial "PrepareHTML" .Title -}}
 
@@ -83,4 +83,7 @@
       </div>
     {{- end -}}
   </article>
+  {{ if $is_carousel }}
+    </li>
+  {{ end }}
 {{ end }}

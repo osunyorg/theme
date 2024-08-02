@@ -14,10 +14,15 @@
         top: 0
         width: fit-content
         justify-content: flex-start
+        .block-posts &
+            margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
+            margin-right: calc(var(--grid-gutter-negative)/2)
     &__slide
         .testimonials &:not(.is-current),
         .block-timeline &.is-before
             opacity: 0.3
+        .block-posts &
+            padding: 0 calc(var(--grid-gutter) / 2)
     button
         appearance: none
         background: transparent
@@ -32,8 +37,12 @@
         @include media-breakpoint-up(desktop)
             padding-top: $spacing-3
         .counter
+            min-width: $spacing-3
+            text-align: center
             width: fit-content
             @include meta
+            &:empty
+                display: block
         button
             color: var(--color-text)
             svg
@@ -129,12 +138,13 @@
                     font-size: pxToRem(22)
                     height: pxToRem(42)
                     width: pxToRem(42)
-                    margin-left: -0.5px
                     margin-top: -1.5px
                 &.play
                     @include icon-block(play-fill)
+                    margin-left: -0.5px
                 &.pause
                     @include icon-block(pause-line)
+                    margin-left: -1.5px
             &__paused
                 span
                     &.play

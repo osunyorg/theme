@@ -3,9 +3,8 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Pagination = function (element) {
     this.element = element;
+    this.buttons = [];
     if (this.element) {
-        this.buttonElements = [];
-        this.buttons = [];
         this.buttonElements = this.element.getElementsByClassName(window.osuny.carousel.classes.paginationPage);
         for (var index = 0; index < this.buttonElements.length; index += 1) {
             var buttonElement = this.buttonElements[index],
@@ -18,8 +17,10 @@ window.osuny.carousel.Pagination = function (element) {
 
 window.osuny.carousel.Pagination.prototype = {
     selectButton: function (index) {
-        this.currentButton = this.buttons[index];
-        this.currentButton.select();
+        if (this.element) {
+            this.currentButton = this.buttons[index];
+            this.currentButton.select();
+        }
     },
     setProgression: function (progression) {
         if (this.currentButton) {
