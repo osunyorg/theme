@@ -6,7 +6,7 @@ window.osuny.carousel.Pagination = function (element) {
     if (this.element) {
         this.buttonElements = [];
         this.buttons = [];
-        this.buttonElements = this.element.getElementsByClassName(this.classes.button);
+        this.buttonElements = this.element.getElementsByClassName(window.osuny.carousel.classes.paginationPage);
         for (var index = 0; index < this.buttonElements.length; index += 1) {
             var buttonElement = this.buttonElements[index],
                 button = new window.osuny.carousel.PaginationButton(buttonElement, index, this.element);
@@ -17,9 +17,6 @@ window.osuny.carousel.Pagination = function (element) {
 }
 
 window.osuny.carousel.Pagination.prototype = {
-    classes: {
-        button: "carousel__pagination__page"
-    },
     selectButton: function (index) {
         this.currentButton = this.buttons[index];
         this.currentButton.select();

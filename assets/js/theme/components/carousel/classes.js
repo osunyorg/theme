@@ -5,6 +5,7 @@ window.osuny.carousel.classes = {
     container: "carousel__container",
     toggle: "toggle",
     pagination: "carousel__pagination__tabcontainer",
+    paginationPage: "carousel__pagination__page",
     autoplayerPaused: "toggle__paused",
     autoplayerPlaying: "toggle__playing"
 }
