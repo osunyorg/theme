@@ -4,17 +4,20 @@
     position: relative
     &__slider
         overflow: hidden
+        scrollbar-width: none
+        &::-webkit-scrollbar
+            display: none
         .block-testimonials &
             overflow: hidden
     &__container
         padding-right: 50vw
         display: flex
+        justify-content: flex-start
         flex-direction: row
         left: 0px
         position: relative
         top: 0
         width: fit-content
-        justify-content: flex-start
         .block-posts &
             margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
             margin-right: calc(var(--grid-gutter-negative)/2)
