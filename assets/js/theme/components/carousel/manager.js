@@ -39,9 +39,8 @@ window.osuny.carousel.manager = {
         this.carouselsInViewport = [];
         for (var i = 0; i < this.carousels.length; i += 1) {
             var carousel = this.carousels[i],
-                // TODO
-                inViewPort = true;
-            if (inViewPort) {
+                inViewPort = carousel.inViewPort();
+                if (inViewPort) {
                 carousel.unpause();
                 this.carouselsInViewport.push(carousel);
             } else {

@@ -109,7 +109,13 @@ window.osuny.carousel.Carousel.prototype = {
         this.autoplayer.disable();
         this.showSlide(event.index);
     },
-
+    inViewPort: function(){
+        var boundingRect = this.element.getBoundingClientRect();
+        return (
+            boundingRect.bottom >= 0 &&
+            boundingRect.top <= (window.innerHeight || document.documentElement.clientHeight)
+        );
+    }
 
     
     // // Autoplayer events
