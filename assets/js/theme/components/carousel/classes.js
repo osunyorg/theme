@@ -7,5 +7,9 @@ window.osuny.carousel.classes = {
     pagination: "carousel__pagination__tabcontainer",
     paginationPage: "carousel__pagination__page",
     autoplayerPaused: "toggle__paused",
-    autoplayerPlaying: "toggle__playing"
+    autoplayerPlaying: "toggle__playing",
+    arrows: "carousel__arrows",
+    arrowsCounter: "counter",
+    arrowsNext: "arrow-next",
+    arrowsPrevious: "arrow-prev",
 }

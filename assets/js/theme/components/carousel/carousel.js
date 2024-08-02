@@ -18,6 +18,7 @@ window.osuny.carousel.Carousel = function (element) {
     this._initializePagination();
     this._initializeArrows();
     this._initializeAutoplayer();
+    this.showSlide(0);
     this.state.initialized = true;
 }
 window.osuny.carousel.Carousel.prototype = {
@@ -41,6 +42,7 @@ window.osuny.carousel.Carousel.prototype = {
         this.pagination.selectButton(index);
         this.slider.showSlide(index);
         this.slides.current = index;
+        this.arrows.update(this.slides.current, this.slides.total);
     },
     pause: function () {
         this.autoplayer.pause();
@@ -66,11 +68,16 @@ window.osuny.carousel.Carousel.prototype = {
         var paginationElement = this.element.getElementsByClassName(window.osuny.carousel.classes.pagination).item(0);
         this.pagination = new window.osuny.carousel.Pagination(paginationElement);
         if (paginationElement) {
-            paginationElement.addEventListener("paginationButtonClicked", this._onPaginationButtonClicked.bind(this));
+            paginationElement.addEventListener(window.osuny.carousel.events.paginationButtonClicked, this._onPaginationButtonClicked.bind(this));
         }
     },
     _initializeArrows: function  () {
-        // this.arrows = window.osuny.utils.instanciateIf(this, window.osuny.carousel.ArrowsController, this.options.arrows);
+        var arrowsElement = this.element.getElementsByClassName(window.osuny.carousel.classes.arrows).item(0);
+        this.arrows = new window.osuny.carousel.Arrows(arrowsElement);
+        if (arrowsElement) {
+            arrowsElement.addEventListener(window.osuny.carousel.events.arrowsNext, this.next.bind(this));
+            arrowsElement.addEventListener(window.osuny.carousel.events.arrowsPrevious, this.previous.bind(this));
+        }
     },
     _initializeSlider: function () {
         var sliderContainer = this.element.getElementsByClassName(window.osuny.carousel.classes.container).item(0);
@@ -98,9 +105,11 @@ window.osuny.carousel.Carousel.prototype = {
     _onAutoplayerProgression: function (event) {
         this.pagination.setProgression(event.progression);
     },
+    // TODO S'il n'y a rien à faire à l'extérieur de l'autoplayer, il faudra arrêter d'écouter ça et le laisser ce débrouiller seul
     _onAutoplayerPause: function () {
         this.autoplayer.pause();
     },
+    // TODO Idem
     _onAutoplayerPlay: function () {
         this.autoplayer.unpause();
         this.autoplayer.enable();

@@ -29,7 +29,7 @@ window.osuny.carousel.PaginationButton.prototype = {
         this.element.setAttribute("aria-selected", "false");
     },
     _onClick: function () {
-        var event = new Event("paginationButtonClicked");
+        var event = new Event(window.osuny.carousel.events.paginationButtonClicked);
         event.index = this.index;
         this.pagination.dispatchEvent(event);
     }
