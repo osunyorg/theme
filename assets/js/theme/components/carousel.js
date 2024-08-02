@@ -10,3 +10,4 @@ import './carousel/paginationButton';
 import './carousel/pagination';
 import './carousel/slide';
 import './carousel/slider';
+import './carousel/utils';

@@ -17,6 +17,8 @@ window.osuny.carousel.Arrows.prototype = {
         }
     },
     _initialize: function  () {
+        this._findElement = window.osuny.utils.carousel.findElement.bind(this);
+        this._dispatchEvent = window.osuny.utils.carousel.dispatchEvent.bind(this);
         this.counter = this._findElement('arrowsCounter');
         this.next = this._findElement('arrowsNext');
         this.previous = this._findElement('arrowsPrevious');
@@ -34,14 +36,5 @@ window.osuny.carousel.Arrows.prototype = {
     },
     _onPrevious: function () {
         this._dispatchEvent('arrowsPrevious');
-    },
-    _findElement: function(classKey) {
-        var className = window.osuny.carousel.classes[classKey];
-        return this.element.getElementsByClassName(className).item(0);
-    },
-    _dispatchEvent: function (eventKey) {
-        var eventName = window.osuny.carousel.events[eventKey];
-        var event = new Event(eventName);
-        this.element.dispatchEvent(event);
     }
 }
