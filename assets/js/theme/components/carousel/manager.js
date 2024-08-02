@@ -51,7 +51,6 @@ window.osuny.carousel.manager = {
             }
         };
         this.focusedCarousel = this._findBestCarouselFocusCandidate();
-        console.log(this.focusedCarousel)
     },
     _findBestCarouselFocusCandidate: function () {
         // On démarre avec la plus grande distance possible
