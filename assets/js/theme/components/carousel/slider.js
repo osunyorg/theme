@@ -58,14 +58,10 @@ window.osuny.carousel.Slider.prototype = {
         position.center = (position.right + position.left) / 2;
         return position
     },
-    translate: function (transition = false) {
-        this.position += this.deltaPosition;
-        var transitionDuration = transition === true ? this.transitionDuration : 0;
-        this.deltaPosition = 0;
+    translate: function () {
         // Pourquoi ne pas mettre la transition purement en CSS, et le retirer complètement du JS ?
-        this.element.style.setProperty('transition', 'left ' + String(transitionDuration) + 'ms');
-        this.element.style.setProperty('left', this.position + "px");
-
+        // this.element.style.setProperty('transition', 'scrollX ' + String(transitionDuration) + 'ms');
+        this.element.scrollTo(this.position, 0);
     },
     width: function () {
         var width = 0;
