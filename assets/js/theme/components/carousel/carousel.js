@@ -59,6 +59,17 @@ window.osuny.carousel.Carousel.prototype = {
     setCarouselState: function(state){
         this.sliderContainer.setAttribute("aria-live", state);
     },
+    isInViewPort: function(){
+        var boundingRect = this.element.getBoundingClientRect(),
+            screenHeight = window.innerHeight || document.documentElement.clientHeight,
+            aboveTheBottom = boundingRect.bottom >= 0,
+            belowTheTop = boundingRect.top <= screenHeight;
+        return aboveTheBottom && belowTheTop;
+    },
+    getCenterPositionY: function () {
+        var boundingRect = this.element.getBoundingClientRect();
+        return boundingRect.top + boundingRect.height / 2;
+    },
     _initializeConfig: function () {
         this.config = new window.osuny.carousel.Config(this);
         // Les options sont chargées depuis le data-attribute "data-carousel"
@@ -103,84 +114,5 @@ window.osuny.carousel.Carousel.prototype = {
     _onPaginationButtonClicked: function (event) {
         this.autoplayer.disable();
         this.showSlide(event.index);
-    },
-    inViewPort: function(){
-        var boundingRect = this.element.getBoundingClientRect();
-        return (
-            boundingRect.bottom >= 0 &&
-            boundingRect.top <= (window.innerHeight || document.documentElement.clientHeight)
-        );
-    },
-    getCenterPositionY: function () {
-        var boundingRect = this.element.getBoundingClientRect();
-        return boundingRect.top + boundingRect.height / 2;
     }
-
-    
-    // // Autoplayer events
-    // stopAutoplay: function () {
-    //     if (this.autoplayer) {
-    //         this.autoplayer.stop();
-    //         this.autoplayerControl.toggleStart();
-    //         this.setCarouselState("polite");
-    //     }
-    // },
-    // startAutoplay: function () {
-    //     this.autoplayer.start();
-    //     this.toggleButton.play();
-    //     // this.autoplayerControl.toggleStop();
-    //     this.setCarouselState("off");
-    // },
-    // pauseAutoplay: function () {
-    //     if (this.autoplayer) {
-    //         this.autoplayer.pause();
-    //     }
-    // },
-    // unpauseAutoplay: function () {
-    //     if (this.autoplayer) {
-    //         this.autoplayer.unpause();
-    //     }
-    // },
-    // onAutoplayProgressionChanged: function (e) { 
-    //     // console.log(e)
-    //     if (this.pagination) {
-    //         this.pagination.setSlideProgression(e.progression);
-    //     }
-    // },
-    // Slider control
-    // resetSlider: function () {
-    //     this.slider.initialize();
-    // },
-    // onSlideChanged: function () {
-    //     if (this.slider) {
-    //         this.slides.current = this.slider.index;
-    //     }
-    //     if (this.autoplayer) {
-    //         this.autoplayer.disable();
-    //         this.toggleButton.pause();
-    //     }
-    //     if (this.pagination) {
-    //         this.pagination.onSlideChanged();
-    //     }
-    //     if (this.arrows) {
-    //         this.arrows.onSlideChanged();
-    //     }
-    // },
-
-    // // Drag control
-    // endDrag: function () {
-    //     if (this.slider.drag) {
-    //         this.slider.drag.end();
-    //     }
-    // },
-    // startDrag: function (position) {
-    //     if (this.slider.drag) {
-    //         this.slider.drag.start(position);
-    //     }
-    // },
-    // drag: function (position) {
-    //     if (this.slider.drag.active) {
-    //         this.slider.drag.drag(position);
-    //     }
-    // }
 }
