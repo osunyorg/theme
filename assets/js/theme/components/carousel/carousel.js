@@ -77,42 +77,78 @@ window.osuny.carousel.Carousel.prototype = {
         this.config.loadOptions(this.element.dataset.carousel);
     },
     _initializePagination: function () {
-        var paginationElement = this.element.getElementsByClassName(window.osuny.carousel.classes.pagination).item(0);
+        var paginationElement = window.osuny.utils.findElementByClassName(
+            this.element, 
+            window.osuny.carousel.classes.pagination
+        );
         this.pagination = new window.osuny.carousel.Pagination(paginationElement);
         if (paginationElement) {
-            paginationElement.addEventListener(window.osuny.carousel.events.paginationButtonClicked, this._onPaginationButtonClicked.bind(this));
+            paginationElement.addEventListener(
+                window.osuny.carousel.events.paginationButtonClicked,
+                this._onPaginationButtonClicked.bind(this)
+            );
         }
     },
     _initializeArrows: function  () {
-        var arrowsElement = this.element.getElementsByClassName(window.osuny.carousel.classes.arrows).item(0);
+        var arrowsElement = window.osuny.utils.findElementByClassName(
+            this.element,
+            window.osuny.carousel.classes.arrows
+        );
         this.arrows = new window.osuny.carousel.Arrows(arrowsElement);
         if (arrowsElement) {
-            arrowsElement.addEventListener(window.osuny.carousel.events.arrowsNext, this.next.bind(this));
-            arrowsElement.addEventListener(window.osuny.carousel.events.arrowsPrevious, this.previous.bind(this));
+            arrowsElement.addEventListener(
+                window.osuny.carousel.events.arrowsNext,
+                this.next.bind(this)
+            );
+            arrowsElement.addEventListener(
+                window.osuny.carousel.events.arrowsPrevious,
+                this.previous.bind(this)
+            );
         }
     },
     _initializeSlider: function () {
-        var sliderElement = this.element.getElementsByClassName(window.osuny.carousel.classes.slider).item(0);
+        var sliderElement = window.osuny.utils.findElementByClassName(
+            this.element,
+            window.osuny.carousel.classes.slider
+        );
         this.slider = new window.osuny.carousel.Slider(sliderElement);
         this.slider.transitionDuration = this.config.transitionDuration
         this.slides.total = this.slider.length();
-        sliderElement.addEventListener("scrollend", this._onSliderScrollend.bind(this));
+        sliderElement.addEventListener(
+            "scrollend",
+            this._onSliderScrollend.bind(this)
+        );
     },
     _initializeAutoplayer(){
-        this.autoplayerElement = this.element.getElementsByClassName(window.osuny.carousel.classes.toggle).item(0);
+        this.autoplayerElement = window.osuny.utils.findElementByClassName(
+            this.element,
+            window.osuny.carousel.classes.toggle
+        );
         this.autoplayer = new window.osuny.carousel.Autoplayer(this.autoplayerElement);
         this.autoplayer.setInterval(this.config.autoplayInterval);
         if (this.autoplayerElement) {
-            this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerTrigger, this.next.bind(this));
-            this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerProgression, this._onAutoplayerProgression.bind(this));
+            this.autoplayerElement.addEventListener(
+                window.osuny.carousel.events.autoplayerTrigger,
+                this.next.bind(this)
+            );
+            this.autoplayerElement.addEventListener(
+                window.osuny.carousel.events.autoplayerProgression,
+                this._onAutoplayerProgression.bind(this)
+            );
             if (this.config.autoplay) {
                 this.autoplayer.enable();
             }
         }
     },
     _initializeMouseEvents: function(){
-        this.element.addEventListener("mouseenter", this.autoplayer.softPause.bind(this.autoplayer));
-        this.element.addEventListener("mouseleave", this.autoplayer.softUnpause.bind(this.autoplayer));
+        this.element.addEventListener(
+            "mouseenter",
+            this.autoplayer.softPause.bind(this.autoplayer)
+        );
+        this.element.addEventListener(
+            "mouseleave",
+            this.autoplayer.softUnpause.bind(this.autoplayer)
+        );
     },
     _onAutoplayerProgression: function (event) {
         this.pagination.setProgression(event.progression);

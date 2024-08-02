@@ -1,5 +1,6 @@
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
+
 window.osuny.carousel.classes = {
     arrows: "carousel__arrows",
     arrowsCounter: "counter",

@@ -26,9 +26,18 @@ window.osuny.carousel.manager = {
         }
     },
     _initializeListeners: function () {
-        window.addEventListener("resize", this._resize.bind(this));
-        window.addEventListener("scroll", this._findCarouselsInViewport.bind(this));
-        window.addEventListener("keydown", this._onKeyPress.bind(this));
+        window.addEventListener(
+            "resize",
+            this._resize.bind(this)
+        );
+        window.addEventListener(
+            "scroll",
+            this._findCarouselsInViewport.bind(this)
+        );
+        window.addEventListener(
+            "keydown",
+            this._onKeyPress.bind(this)
+        );
     },
     _resize: function () {
         this._computeWindowCenterY();
@@ -56,7 +65,6 @@ window.osuny.carousel.manager = {
         // On démarre avec la plus grande distance possible
         var distance = window.innerHeight,
             bestCandidate = null;
-
         for (var i = 0; i < this.carousels.length; i += 1) {
             var carousel = this.carousels[i];
             var currentDistanceToCenter = Math.abs(carousel.getCenterPositionY() - this.windowCenterY);

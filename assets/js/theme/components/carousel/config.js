@@ -9,12 +9,20 @@ window.osuny.carousel.Config = function (instance) {
 
     // L'autoplay est-il activé ou pas ?
     this.autoplay = false;
+
+    // FIXME @Clara ça fait quoi ?
     this.pagination = true;
+
+    // FIXME @Clara utile ?
     this.drag = false;
+
+    // FIXME @Clara ça fait quoi ?
     this.arrows = false;
 
     // Temps par slide
     this.autoplayInterval = 3000;
+
+    // FIXME obsolète si scroll smooth, peut-être juste smooth:boolean?
     this.transitionDuration = 500;
 }
 

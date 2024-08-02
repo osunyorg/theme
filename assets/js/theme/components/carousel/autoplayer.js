@@ -57,7 +57,10 @@ window.osuny.carousel.Autoplayer.prototype = {
         // Bouton
         this.classList = this.element.classList;
         this.classList.add(window.osuny.carousel.classes.autoplayerPaused);
-        this.element.addEventListener("click", this._onClick.bind(this));
+        this.element.addEventListener(
+            "click",
+            this._onClick.bind(this)
+        );
     },
     _loop: function () {
         if (!this.enabled) { return }

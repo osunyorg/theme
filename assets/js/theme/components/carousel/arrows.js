@@ -17,18 +17,35 @@ window.osuny.carousel.Arrows.prototype = {
         }
     },
     _initialize: function  () {
-        this.counter = this.element.getElementsByClassName(window.osuny.carousel.classes.arrowsCounter).item(0);
-        this.next = this.element.getElementsByClassName(window.osuny.carousel.classes.arrowsNext).item(0);
-        this.previous = this.element.getElementsByClassName(window.osuny.carousel.classes.arrowsPrevious).item(0);
-        this.next.addEventListener('click', this._onNext.bind(this));
-        this.previous.addEventListener('click', this._onPrevious.bind(this));
+        this.counter = window.osuny.utils.findElementByClassName(
+            this.element,
+            window.osuny.carousel.classes.arrowsCounter
+        );
+        this.next = window.osuny.utils.findElementByClassName(
+            this.element,
+            window.osuny.carousel.classes.arrowsNext
+        );
+        this.previous = window.osuny.utils.findElementByClassName(
+            this.element,
+            window.osuny.carousel.classes.arrowsPrevious
+        );
+        this.next.addEventListener(
+            "click",
+            this._onNext.bind(this)
+        );
+        this.previous.addEventListener(
+            "click",
+            this._onPrevious.bind(this)
+        );
     },
     _onNext: function () {
-        var event = new Event(window.osuny.carousel.events.arrowsNext);
-        this.element.dispatchEvent(event);
+        this.element.dispatchEvent(
+            new Event(window.osuny.carousel.events.arrowsNext)
+        );
     },
     _onPrevious: function () {
-        var event = new Event(window.osuny.carousel.events.arrowsPrevious);
-        this.element.dispatchEvent(event);
+        this.element.dispatchEvent(
+            new Event(window.osuny.carousel.events.arrowsPrevious)
+        );
     }
 }

@@ -3,7 +3,10 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Slider = function Slider(element) {
     this.element = element;
-    this.container = this.element.getElementsByClassName(window.osuny.carousel.classes.container).item(0);
+    this.container = window.osuny.utils.findElementByClassName(
+        this.element,
+        window.osuny.carousel.classes.container
+    );
     this.transitionDuration = 0;
     this.index = 0;
     this.slides = [];
@@ -40,10 +43,12 @@ window.osuny.carousel.Slider.prototype = {
     },
     currentSlideIndex: function () {
         var currentWidth = 0;
+        // Le seuil permet d'éviter des erreurs d'arrondis qui causent un retour en slide 1, par étapes
+        var threshold = 20;
         for (var index = 0; index < this.slides.length; index += 1) {
             var slide = this.slides[index];
             currentWidth += slide.width;
-            if (currentWidth > this.element.scrollLeft) {
+            if (currentWidth > this.element.scrollLeft + threshold) {
                 return index;
             }
         }
