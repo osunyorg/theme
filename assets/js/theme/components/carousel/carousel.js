@@ -63,9 +63,9 @@ window.osuny.carousel.Carousel.prototype = {
     isInViewPort: function(){
         var boundingRect = this.element.getBoundingClientRect(),
             screenHeight = window.innerHeight || document.documentElement.clientHeight,
-            aboveTheBottom = boundingRect.bottom >= 0,
-            belowTheTop = boundingRect.top <= screenHeight;
-        return aboveTheBottom && belowTheTop;
+            elementBottomInViewport = boundingRect.bottom >= 0,
+            elementTopInViewport = boundingRect.top <= screenHeight;
+        return elementBottomInViewport || elementTopInViewport;
     },
     getCenterPositionY: function () {
         var boundingRect = this.element.getBoundingClientRect();

@@ -30,6 +30,7 @@ window.osuny.carousel.Autoplayer.prototype = {
     },
     unpause: function () {
         this.paused = false;
+        this.softPaused = false;
         this._updateToggle();
     },
     // Les méthodes soft se produisent quand on passe sur le carousel avec la souris.
@@ -37,10 +38,10 @@ window.osuny.carousel.Autoplayer.prototype = {
     // Elles ne changent pas réellement l'état de l'autoplayer, 
     // mais elles l'arrêtent temporairement.
     softPause: function () {
-        this.paused = true;
+        this.softPaused = true;
     },
     softUnpause: function () {
-        this.paused = false;
+        this.softPaused = false;
     },
     _initialize: function () {
         this.initialized = true;
@@ -48,6 +49,8 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.enabled = false;
         // Etat de pause (quand on rollover par exemple)
         this.paused = false;
+        // Pause au rollover
+        this.softPaused = false;
         // Intervalle en millisecondes entre 2 déclenhements
         this.interval = 3000;
         this._resetLoopValues();
@@ -59,7 +62,7 @@ window.osuny.carousel.Autoplayer.prototype = {
     _loop: function () {
         if (!this.enabled) { return }
         var now = Date.now();
-        if (!this.paused) {
+        if (!this.paused && !this.softPaused) {
             this.elapsedSinceLastTrigger += now - this.lastLoopAt;
             this.progression = this.elapsedSinceLastTrigger / this.interval;
             this._dispatchProgression();
