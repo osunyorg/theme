@@ -1,4 +1,5 @@
 // https://developers.osuny.org/docs/theme/components/carousel/
+import './carousel/arrows';
 import './carousel/autoplayer';
 import './carousel/carousel';
 import './carousel/classes';
@@ -8,6 +9,5 @@ import './carousel/events';
 import './carousel/manager';
 import './carousel/paginationButton';
 import './carousel/pagination';
-import './carousel/arrowsController';
 import './carousel/slide';
 import './carousel/slider';

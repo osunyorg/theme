@@ -32,8 +32,12 @@
         @include media-breakpoint-up(desktop)
             padding-top: $spacing-3
         .counter
+            min-width: $spacing-3
+            text-align: center
             width: fit-content
             @include meta
+            &:empty
+                display: block
         button
             color: var(--color-text)
             svg
@@ -129,12 +133,13 @@
                     font-size: pxToRem(22)
                     height: pxToRem(42)
                     width: pxToRem(42)
-                    margin-left: -0.5px
                     margin-top: -1.5px
                 &.play
                     @include icon-block(play-fill)
+                    margin-left: -0.5px
                 &.pause
                     @include icon-block(pause-line)
+                    margin-left: -1.5px
             &__paused
                 span
                     &.play
