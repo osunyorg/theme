@@ -115,6 +115,10 @@ window.osuny.carousel.Carousel.prototype = {
             boundingRect.bottom >= 0 &&
             boundingRect.top <= (window.innerHeight || document.documentElement.clientHeight)
         );
+    },
+    getCenterPositionY: function () {
+        var boundingRect = this.element.getBoundingClientRect();
+        return boundingRect.top + boundingRect.height / 2;
     }
 
     
