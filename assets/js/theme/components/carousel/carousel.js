@@ -63,9 +63,9 @@ window.osuny.carousel.Carousel.prototype = {
     isInViewPort: function(){
         var boundingRect = this.element.getBoundingClientRect(),
             screenHeight = window.innerHeight || document.documentElement.clientHeight,
-            aboveTheBottom = boundingRect.bottom >= 0,
-            belowTheTop = boundingRect.top <= screenHeight;
-        return aboveTheBottom && belowTheTop;
+            elementBottomInViewport = boundingRect.bottom >= 0,
+            elementTopInViewport = boundingRect.top <= screenHeight;
+        return elementBottomInViewport || elementTopInViewport;
     },
     getCenterPositionY: function () {
         var boundingRect = this.element.getBoundingClientRect();
@@ -92,10 +92,11 @@ window.osuny.carousel.Carousel.prototype = {
         }
     },
     _initializeSlider: function () {
-        var sliderContainer = this.element.getElementsByClassName(window.osuny.carousel.classes.container).item(0);
-        this.slider = new window.osuny.carousel.Slider(sliderContainer);
+        var sliderElement = this.element.getElementsByClassName(window.osuny.carousel.classes.slider).item(0);
+        this.slider = new window.osuny.carousel.Slider(sliderElement);
         this.slider.transitionDuration = this.config.transitionDuration
         this.slides.total = this.slider.length();
+        sliderElement.addEventListener("scrollend", this._onSliderScrollend.bind(this));
     },
     _initializeAutoplayer(){
         this.autoplayerElement = this.element.getElementsByClassName(window.osuny.carousel.classes.toggle).item(0);
@@ -110,8 +111,8 @@ window.osuny.carousel.Carousel.prototype = {
         }
     },
     _initializeMouseEvents: function(){
-        this.element.addEventListener("mouseenter", this.pause.bind(this));
-        this.element.addEventListener("mouseleave", this.unpause.bind(this));
+        this.element.addEventListener("mouseenter", this.autoplayer.softPause.bind(this.autoplayer));
+        this.element.addEventListener("mouseleave", this.autoplayer.softUnpause.bind(this.autoplayer));
     },
     _onAutoplayerProgression: function (event) {
         this.pagination.setProgression(event.progression);
@@ -120,83 +121,10 @@ window.osuny.carousel.Carousel.prototype = {
         this.autoplayer.disable();
         this.showSlide(event.index);
     },
-    inViewPort: function(){
-        var boundingRect = this.element.getBoundingClientRect();
-        return (
-            boundingRect.bottom >= 0 &&
-            boundingRect.top <= (window.innerHeight || document.documentElement.clientHeight)
-        );
-    },
-    getCenterPositionY: function () {
-        var boundingRect = this.element.getBoundingClientRect();
-        return boundingRect.top + boundingRect.height / 2;
+    _onSliderScrollend: function () {
+        var index = this.slider.currentSlideIndex();
+        if (this.slides.current != index) {
+            this.showSlide(index);
+        }
     }
-
-    
-    // // Autoplayer events
-    // stopAutoplay: function () {
-    //     if (this.autoplayer) {
-    //         this.autoplayer.stop();
-    //         this.autoplayerControl.toggleStart();
-    //         this.setCarouselState("polite");
-    //     }
-    // },
-    // startAutoplay: function () {
-    //     this.autoplayer.start();
-    //     this.toggleButton.play();
-    //     // this.autoplayerControl.toggleStop();
-    //     this.setCarouselState("off");
-    // },
-    // pauseAutoplay: function () {
-    //     if (this.autoplayer) {
-    //         this.autoplayer.pause();
-    //     }
-    // },
-    // unpauseAutoplay: function () {
-    //     if (this.autoplayer) {
-    //         this.autoplayer.unpause();
-    //     }
-    // },
-    // onAutoplayProgressionChanged: function (e) { 
-    //     // console.log(e)
-    //     if (this.pagination) {s
-    //         this.pagination.setSlideProgression(e.progression);
-    //     }
-    // },
-    // Slider control
-    // resetSlider: function () {
-    //     this.slider.initialize();
-    // },
-    // onSlideChanged: function () {
-    //     if (this.slider) {
-    //         this.slides.current = this.slider.index;
-    //     }
-    //     if (this.autoplayer) {
-    //         this.autoplayer.disable();
-    //         this.toggleButton.pause();
-    //     }
-    //     if (this.pagination) {
-    //         this.pagination.onSlideChanged();
-    //     }
-    //     if (this.arrows) {
-    //         this.arrows.onSlideChanged();
-    //     }
-    // },
-
-    // // Drag control
-    // endDrag: function () {
-    //     if (this.slider.drag) {
-    //         this.slider.drag.end();
-    //     }
-    // },
-    // startDrag: function (position) {
-    //     if (this.slider.drag) {
-    //         this.slider.drag.start(position);
-    //     }
-    // },
-    // drag: function (position) {
-    //     if (this.slider.drag.active) {
-    //         this.slider.drag.drag(position);
-    //     }
-    // }
 }

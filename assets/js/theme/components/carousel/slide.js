@@ -1,14 +1,13 @@
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
-window.osuny.carousel.Slide = function (slider, container, i) {
+window.osuny.carousel.Slide = function (slider, container, index) {
     this.slider = slider;
     this.container = container;
-    this.index = i;
+    this.index = index;
     this.classList = this.container.classList;
     this.computedStyle = null;
     this.width = 0;
-    // TODO gérer le resize de la page !
     this.computeWidth();
 }
 
@@ -22,7 +21,7 @@ window.osuny.carousel.Slide.prototype = {
     },
     computeWidth: function () {
         this.computedStyle = getComputedStyle(this.container);
-        this.width = this.container.offsetWidth + parseFloat(this.computedStyle.marginLeft) + parseFloat(this.computedStyle.marginRight);
+        this.width =  this.container.offsetWidth + parseFloat(this.computedStyle.marginLeft) + parseFloat(this.computedStyle.marginRight);
     },
     setClasses() {
         this._setState('_isBefore');

@@ -4,7 +4,6 @@ import './carousel/autoplayer';
 import './carousel/carousel';
 import './carousel/classes';
 import './carousel/config';
-import './carousel/drag';
 import './carousel/events';
 import './carousel/manager';
 import './carousel/paginationButton';
