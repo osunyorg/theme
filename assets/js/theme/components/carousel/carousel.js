@@ -18,6 +18,7 @@ window.osuny.carousel.Carousel = function (element) {
     this._initializePagination();
     this._initializeArrows();
     this._initializeAutoplayer();
+    this._initializeMouseEvents();
     this.showSlide(0);
     this.state.initialized = true;
 }
@@ -97,6 +98,10 @@ window.osuny.carousel.Carousel.prototype = {
             }
         }
     },
+    _initializeMouseEvents: function(){
+        this.element.addEventListener("mouseenter", this.pause.bind(this));
+        this.element.addEventListener("mouseleave", this.unpause.bind(this));
+    },
     _onAutoplayerProgression: function (event) {
         this.pagination.setProgression(event.progression);
     },
@@ -143,7 +148,7 @@ window.osuny.carousel.Carousel.prototype = {
     // },
     // onAutoplayProgressionChanged: function (e) { 
     //     // console.log(e)
-    //     if (this.pagination) {
+    //     if (this.pagination) {s
     //         this.pagination.setSlideProgression(e.progression);
     //     }
     // },
