@@ -28,14 +28,11 @@ window.osuny.carousel.Slider.prototype = {
         //On previent l'carousel
         // this.carousel.onSlideChanged();
     },
-    reCompute: function(){
-        this._computeSlidesWidth();
-        this.showSlide(this.index);
-    },
-    _computeSlidesWidth: function(){ // recalcule des tailles quand resize
+    recompute: function(){
         this.slides.forEach(function(slide) {
             slide.computeWidth();
         });
+        this.showSlide(this.index);
     },
     recomputePosition: function () {
         var threshold = 100;

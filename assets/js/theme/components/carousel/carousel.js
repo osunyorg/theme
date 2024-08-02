@@ -23,25 +23,25 @@ window.osuny.carousel.Carousel = function (element) {
 }
 window.osuny.carousel.Carousel.prototype = {
     next: function () {
-        this.slides.current += 1;
-        if (this.slides.current >= this.slides.total) {
-            this.slides.current = 0;
+        var index = this.slides.current + 1;
+        if (index >= this.slides.total) {
+            index = 0;
         }
-        this.showSlide(this.slides.current);
+        this.showSlide(index);
     },
     previous: function () {
-        this.slides.current -= 1;
-        if (this.slides.current < 0) {
+        var index = this.slides.current - 1;
+        if (index < 0) {
             // -1 parce que 0-indexed 
-            this.slides.current = this.slides.total - 1;
+            index = this.slides.total - 1;
         }
-        this.showSlide(this.slides.current);
+        this.showSlide(index);
     },
     showSlide: function (index) {
+        this.slides.current = index;
         this.pagination.unselectAllButtons();
         this.pagination.selectButton(index);
         this.slider.showSlide(index);
-        this.slides.current = index;
         this.arrows.update(this.slides.current, this.slides.total);
     },
     pause: function () {
@@ -53,7 +53,7 @@ window.osuny.carousel.Carousel.prototype = {
     resize: function () {
         clearTimeout(this.windowResizeTimeout);
         this.windowResizeTimeout = setTimeout(function () {
-            this.slider.reCompute();
+            this.slider.recompute();
         }.bind(this), 200);
     },
     setCarouselState: function(state){
