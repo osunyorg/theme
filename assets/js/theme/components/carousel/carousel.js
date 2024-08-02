@@ -110,8 +110,8 @@ window.osuny.carousel.Carousel.prototype = {
         }
     },
     _initializeMouseEvents: function(){
-        this.element.addEventListener("mouseenter", this.pause.bind(this));
-        this.element.addEventListener("mouseleave", this.unpause.bind(this));
+        this.element.addEventListener("mouseenter", this.autoplayer.softPause.bind(this.autoplayer));
+        this.element.addEventListener("mouseleave", this.autoplayer.softUnpause.bind(this.autoplayer));
     },
     _onAutoplayerProgression: function (event) {
         this.pagination.setProgression(event.progression);
@@ -120,17 +120,6 @@ window.osuny.carousel.Carousel.prototype = {
         this.autoplayer.disable();
         this.showSlide(event.index);
     },
-    inViewPort: function(){
-        var boundingRect = this.element.getBoundingClientRect();
-        return (
-            boundingRect.bottom >= 0 &&
-            boundingRect.top <= (window.innerHeight || document.documentElement.clientHeight)
-        );
-    },
-    getCenterPositionY: function () {
-        var boundingRect = this.element.getBoundingClientRect();
-        return boundingRect.top + boundingRect.height / 2;
-    }
 
     
     // // Autoplayer events

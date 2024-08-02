@@ -12,6 +12,7 @@ window.osuny.carousel.Autoplayer.prototype = {
     setInterval: function (interval) {
         this.interval = interval;
     },
+    // enable() et disable() activent la boucle 
     enable: function () {
         this.enabled = true;
         this._loop();
@@ -22,6 +23,7 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.paused = true;
         this._updateToggle();
     },
+    // pause() et unpause() interrompent temporairement la boucle, en gardant la position
     pause: function () {
         this.paused = true;
         this._updateToggle();
@@ -29,6 +31,16 @@ window.osuny.carousel.Autoplayer.prototype = {
     unpause: function () {
         this.paused = false;
         this._updateToggle();
+    },
+    // Les méthodes soft se produisent quand on passe sur le carousel avec la souris.
+    // L'idée est de permettre aux personnes de lire une citation.
+    // Elles ne changent pas réellement l'état de l'autoplayer, 
+    // mais elles l'arrêtent temporairement.
+    softPause: function () {
+        this.paused = true;
+    },
+    softUnpause: function () {
+        this.paused = false;
     },
     _initialize: function () {
         this.initialized = true;
