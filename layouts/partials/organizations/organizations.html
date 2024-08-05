@@ -1,7 +1,7 @@
-<div class="organizations">
+{{ $options := site.Params.organizations.index.options }}
+
+<div class="organizations {{- if $options.summary }} with-summaries {{- end }}">
   {{ range $index, $list := .Paginator.Pages }}
-    <div>
       {{ partial "organizations/organization.html" . }}
-    </div>
   {{ end }}
 </div>

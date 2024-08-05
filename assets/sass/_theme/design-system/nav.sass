@@ -14,12 +14,6 @@
         margin-top: $spacing-3
         max-height: var(--header-menu-max-height)
         overflow: auto
-    a,
-    a:focus,
-    a:active
-        @include link($header-color, false)
-    span
-        color: $header-color
     ul
         list-style: none
         margin: 0
@@ -27,13 +21,13 @@
     a,
     span
         @include meta
+        color: $header-color
         cursor: pointer
         transition: text-decoration 0.15s
         display: block
-        // &:not(:hover)
-        //     text-decoration-color: transparent
         &[aria-expanded]
             @include icon(arrow-down-s-line, after)
+                display: inline-block
                 margin-left: pxToRem(5)
                 transition: transform 0.15s
             &[aria-expanded="true"]
@@ -55,9 +49,10 @@
             position: absolute
             max-height: calc(100vh - var(--header-height))
             overflow: auto
-        a
-            color: $header-dropdown-color
-            @extend %underline-on-hover
+        a,
+        a:focus,
+        a:active
+            @include link($header-dropdown-color, false)
         .dropdown-menu-title
             @include h2
 
@@ -68,6 +63,7 @@
                 @include meta
                 display: block
                 padding: $spacing-1 $spacing-2
+                text-decoration: none
             &:last-child 
                 a, span
                     padding-right: 0
@@ -92,8 +88,17 @@
             @include meta
 
     .header-i18n
+        position: relative
         [role="button"]
             text-transform: uppercase
+        .dropdown-menu
+            @include media-breakpoint-up(desktop)
+                right: 0
+                margin-top: $header-nav-padding-y
+                padding: $spacing-2 $spacing-3
+            li a
+                padding: $spacing-1 0
+                display: flex
 
     @include media-breakpoint-up(desktop)
         .nav-level-1
@@ -101,15 +106,13 @@
         .nav-level-3
             li
                 margin-top: $spacing-2
-        .has-children:not(.header-i18n) // avoid 
+        .has-children:not(.header-i18n)
             @if $header-dropdown-full
                 .dropdown-menu
-                    &:not(.dropdown-languages)
-                        @include inset(100%, 0, auto, 0)
-                        // inset: 100% 0 auto 0
-                        padding-left: 0
-                        padding-right: 0
-                        padding-bottom: $spacing-4
+                    @include inset(100%, 0, auto, 0)
+                    padding-left: 0
+                    padding-right: 0
+                    padding-bottom: $spacing-4
                     &:not(.is-titled)
                         .nav-level-2
                             @include container
@@ -152,14 +155,18 @@
                             margin-top: $spacing-3
 
         .header-i18n
-            @include dropdown-i18n
-            [role="button"],
+            [role="button"]
                 @include icon(global-line, after)
                 &[aria-expanded][aria-expanded="true"]
                     &::after
                         transform: none
 
     @include media-breakpoint-down(desktop)
+        display: none
+        flex-basis: 100vw
+        margin-top: $spacing-3
+        max-height: var(--header-menu-max-height)
+        overflow: auto
         &.is-opened
             display: block
         a, span
@@ -186,13 +193,6 @@
                         display: block
                     &::after
                         line-height: 1
-                .dropdown-menu
-                    display: none
-                    padding-top: 0
-                [aria-expanded=true] + .dropdown-menu
-                    display: block
-        .dropdown-menu
-            padding-left: 0
         .is-titled
             .container
                 padding-left: 0
@@ -202,7 +202,6 @@
                 margin-top: $spacing-3
         .nav-level-3
             padding-top: 0
-
 
 .share
     display: flex
@@ -220,7 +219,6 @@
     span
         display: none
         vertical-align: middle
-
 
 [aria-expanded="false"] + .dropdown-menu
     display: none

@@ -76,15 +76,22 @@
             padding-left: 0
 
 .event
-    a
-        text-decoration: none
+    &-title
+        a
+            @include stretched-link
+            text-decoration: none
     &-subtitle
         @include h3
         color: var(--color-text-alt)
     &-categories
         @include meta
+        @include list-reset
         margin-top: $spacing-2
-        span + span
+        display: flex
+        flex-wrap: wrap
+        position: relative
+        z-index: 2
+        li + li
             &::before
                 content: ', '
     &-time
@@ -106,6 +113,7 @@
     @include media-breakpoint-up(desktop)
         &-time
             display: flex
+
 .events
     &--list
         .event
@@ -115,11 +123,8 @@
             margin-bottom: $spacing-3
             padding-bottom: $spacing-3
             position: relative
-            .event-title
+            &-title
                 @include h3
-                a
-                    @include stretched-link
-                    text-decoration: none
             &-dates
                 @include h4
                 margin-top: $spacing-1
@@ -196,9 +201,6 @@
             display: flex
             flex-direction: column
             position: relative
-            &-content
-                a
-                    @include stretched-link
             &-dates
                 @include meta
                 margin-top: $spacing-2
@@ -236,8 +238,6 @@
                     order: 2
                 .event-description + .event-categories
                     margin-bottom: $spacing-2
-                a 
-                    @include stretched-link
             &-dates 
                 @include h4
                 margin-top: $spacing-2

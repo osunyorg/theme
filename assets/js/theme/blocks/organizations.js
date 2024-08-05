@@ -17,7 +17,6 @@ class BlockOrganizations {
             scrollWheelZoom: false
         });
 
-        this.classOrganization = 'organization';
         this.classHidden = 'hidden';
 
         this.themeMarker = L.icon({
@@ -59,6 +58,7 @@ class BlockOrganizations {
             draggable: false,
             icon: this.themeMarker
         });
+        this.classOrganization = organization.classList;
         marker.bindPopup('<article class="' + this.classOrganization + '">' + organization.innerHTML + '</article>').openPopup();
         map.addLayer(marker);
         this.markers.push(marker);

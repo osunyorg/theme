@@ -57,11 +57,11 @@ params:
       truncate_description: 200 # Set to 0 to disable truncate
       layout: list # grid | list
       options:
-        # dates: false # not released
+        dates: true
         categories: false
-        # image: false # not released
+        image: false
         status: false
-        # subtitle: true # not released
+        subtitle: false
         summary: true
     # share_links: # Optional
     #   enabled: true
@@ -75,6 +75,11 @@ params:
   organizations:
     dark_logo_background: false
     map_marker_icon: '/assets/images/map-marker.svg'
+    index:
+      options:
+        link: true
+        logo: true
+        summary: false
     single:
       backlinks: false
   pages:
@@ -93,9 +98,16 @@ params:
     index:
       truncate_description: 200
       layout: list # grid | list
+      options:
+        summary: true
+        image: true
   persons:
     index:
       layout: grid # grid | list
+      options:
+        summary: true
+        image: true
+        link: true
     single:
       backlinks: false
   posts:
@@ -110,6 +122,7 @@ params:
         categories: true
         author: false
         date: true
+        reading_time: false
     # share_links: # Optional
     #   enabled: true
     #   email: false
