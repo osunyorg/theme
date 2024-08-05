@@ -1,6 +1,5 @@
 {{ $location := .location }}
 {{ $heading := .heading | default "h2" }}
-{{ $layout := .layout }}  
 {{ $heading_tag := (dict 
     "open" ((printf "<%s itemprop='headline' class='location-title'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
