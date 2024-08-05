@@ -1,18 +1,19 @@
 {{ $logo_index := .logo_index }}
-{{ $with_link := .with_link }}
+{{ $options := .options }}
 
-<div class="map" data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}">
+<div class="organizations map" data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}">
   {{- range .organizations }}
     {{ if .slug }}
       {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
-        {{ template "organization" (dict
-            "title" .Title
-            "url" .Permalink
-            "logo" (index .Params $logo_index)
-            "latitude" .Params.contact_details.geolocation.latitude
-            "longitude" .Params.contact_details.geolocation.longitude
-            "with_link" $with_link
-          )}}
+        {{ template "organization" dict
+          "title" .Title
+          "url" .Permalink
+          "logo" (index .Params $logo_index)
+          "latitude" .Params.contact_details.geolocation.latitude
+          "longitude" .Params.contact_details.geolocation.longitude
+          "summary" .Params.summary
+          "options" $options
+        }}
       {{ end }}
     {{ end }}
   {{ end -}}

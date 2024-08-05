@@ -27,32 +27,39 @@
       {{ range after 1 . }}
         {{ with site.GetPage (printf "/posts/%s" .) }}
           <article class="post">
-            {{- $title := partial "PrepareHTML" .Title -}}
-            {{ $heading_tag.open }}
-              <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-            {{ $heading_tag.close }}
-
-            {{ if eq $options.categories false }}
-              {{ partial "commons/categories" ( dict
-                "context" .
-                "kind" "post"
-              )}}
-
-            {{ end }}
-            {{ if eq $options.summary false }}
-              {{- if (partial "GetTextFromHTML" .Params.summary) -}}
-                <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
-                  "text" .Params.summary
-                  "length" site.Params.posts.index.truncate_description
-                  ) }}</p>
+            <div class="post-content">
+              {{- $title := partial "PrepareHTML" .Title -}}
+              {{ $heading_tag.open }}
+                <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+              {{ $heading_tag.close }}
+  
+              {{ if $options.categories }}
+                {{ partial "commons/categories" ( dict
+                  "context" .
+                  "kind" "post"
+                )}}
+              {{ end }}
+  
+              {{ if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
+                  <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
+                    "text" .Params.summary
+                    "length" site.Params.posts.index.truncate_description
+                  )}}</p>
               {{- end -}}
-            {{- end -}}
-            {{- if or (eq $options.author false) (eq $options.date false) -}}
+
+              {{ if and .Params.contents_reading_time $options.reading_time }}
+                <span class="post-reading-time">
+                  {{ i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" .Params.contents_reading_time.text }}
+                </span>
+              {{ end }}
+            </div>
+
+            {{- if or $options.author $options.date -}}
               <div class="post-meta">
-                {{- if eq $options.date false -}}
+                {{- if $options.date -}}
                   <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
                 {{ end }}
-                {{ if eq $options.author false }}
+                {{ if $options.author }}
                   {{- partial "posts/author" . -}}
                 {{ end }}
               </div>
