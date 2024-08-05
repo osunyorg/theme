@@ -21,7 +21,10 @@
             @include grid(4)
         .more
             padding-top: $spacing-3
-
+        @include media-breakpoint-down(desktop)
+            .location + .location
+                margin-top: $spacing-4
+                
 .location
     display: flex
     gap: $spacing-3 var(--grid-gutter)
