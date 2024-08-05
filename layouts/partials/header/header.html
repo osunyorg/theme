@@ -1,6 +1,16 @@
 {{ $primary := partial "GetMenu" "primary" }}
 
 <header id="document-header">
+  {{ if site.Params.top_menu }}
+  <nav class="top-menu">{{ partial "commons/menu.html"
+    (dict
+      "kind" "top-menu"
+      "dropdown" false
+      "level" 1
+      "context" .
+    ) }}
+  </nav>
+  {{ end }}
   <nav aria-label="{{ i18n "commons.menu.main" }}">
     <div class="container">
       {{ partial "header/logo.html" }}
