@@ -11,7 +11,9 @@
     <div class="location-content">
       {{- $title := partial "PrepareHTML" .Title -}}
       {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+          {{ $title }}
+        </a>
       {{ $heading_tag.close }}
 
       {{- if (partial "GetTextFromHTML" .Params.summary) -}}
@@ -24,11 +26,10 @@
           </p>
         </div>
         {{- if eq $layout "grid" -}}
-          <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "blocks.locations.button_location") }}" class="btn"> {{ safeHTML (i18n "blocks.locations.button_location") }} </a>
+        <p class="more meta" aria-hidden="true">{{- i18n "blocks.locations.button_location" -}}</p>
         {{- end -}}
       {{- end -}}
     </div>
-
     <div class="media">
       {{- if .Params.image -}}
         {{- partial "commons/image.html"
