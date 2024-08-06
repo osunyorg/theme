@@ -12,16 +12,27 @@
       ) }}
 
     {{ partial "contents/list.html" . }}
-
+    {{ $location_programs := .Params.programs}}
     <div class="container">
-
-      {{ with .Params.diplomas }}
-
+      {{ with .Params.diplomas }} 
         {{/*  Get diplomas collection from diploma's paths  */}}
         {{ $diplomas := slice }}
         {{ range . }}
+          {{ $path := .path }}
+          {{ $programs := slice }}
+          
+          {{/* looking for corresponding diploma in program to add it to the dict */}}
+          {{  range $location_programs }}
+            {{ $program := site.GetPage (printf "/programs%s" .) }}
+            {{ if (eq $path $program.Params.diplomas)}}
+              {{ $programs = $programs | append $program.Params }}
+            {{ end }}
+          {{ end }}
           {{ with site.GetPage (printf "/diplomas/%s" .path) }}
-            {{ $diplomas = $diplomas | append . }}
+            {{ $diplomas = $diplomas | append (dict 
+              "Title" .Title
+              "Permalink" .Permalink
+              "programs" $programs) }}
           {{ end }}
         {{ end }}
 
