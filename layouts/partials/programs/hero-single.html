@@ -1,6 +1,6 @@
 {{- $title := or .Params.header_text .Title -}}
 {{- $button := false -}}
-{{- if and (eq site.Params.summary.position "hero") .Params.website_url -}}
+{{- if (and (and (eq site.Params.summary.position "hero") (eq site.Params.programs.index.options.website_button_position "hero")) .Params.website_url) -}}
   {{ $button = (dict 
     "display" true
     "target" .Params.website_url

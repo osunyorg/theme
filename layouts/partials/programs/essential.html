@@ -42,7 +42,13 @@
           </div>
         </div>
       {{ end }}
-
+      {{ if (eq site.Params.programs.index.options.website_button_position "essential")}}
+        {{ $target := .Params.website_url }}
+        {{ $label := (i18n "programs.website") }}
+        {{ if and $target $label }}
+          <a href="{{ $target }}" class="btn">{{ $label }}</a>
+        {{ end }}
+      {{ end }}
       {{ partial "commons/download-link" (dict 
         "id" .Params.downloadable_summary
         "title" (i18n "commons.download.singular_name")
