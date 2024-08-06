@@ -2,9 +2,13 @@
   <div class="container">
     {{ $parent := .Params.parent }}
     {{ $locations := .Params.locations}}
+    {{ $diploma_shortname := ""}}
     {{- with .Params.diplomas -}}
       {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
       {{- with $diploma -}}
+        {{ with .Params.short_name }}
+          {{ $diploma_shortname = .}}
+        {{ end }}
         <dl class="essential">
           <dt>{{ i18n "programs.diploma" }}</dt>
           <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></dd>
@@ -55,5 +59,10 @@
         "use_filename_for_a11y_title" true
       ) }}
     </div>
+    {{ if site.Params.programs.index.options.hero_diploma_logo }}
+      <div class="diploma-logo">
+        <img src="/assets/images/certifications/diplomas/{{$diploma_shortname}}.svg" alt="logo {{$diploma_shortname}} " class="diploma-logo">
+      </div>
+    {{end}}
   </div>
 </div>
