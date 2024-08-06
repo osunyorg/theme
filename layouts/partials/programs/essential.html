@@ -1,6 +1,7 @@
 <div class="essential-container" id="#{{ urlize (i18n "programs.toc.essential") }}">
   <div class="container">
     {{ $parent := .Params.parent }}
+    {{ $locations := .Params.locations}}
     {{- with .Params.diplomas -}}
       {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
       {{- with $diploma -}}
@@ -19,6 +20,15 @@
             <dt>{{ i18n "programs.duration" }}</dt>
             <dd>{{ partial "PrepareHTML" .Params.duration }}</dd>
           {{- end -}}
+          {{- with $locations -}}
+            <dt>{{ i18n "custom.location" }}</dt>
+            <dd>
+              {{range .}}
+              {{- $locationpage := site.GetPage (printf "/locations/%s" .slug) -}}
+                <a href="{{ .path }}">{{$locationpage.Params.title}}</a> 
+              {{end}}
+            </dd>
+          {{- end -}}
         </dl>
       {{- end -}}
     {{- end -}}
@@ -32,7 +42,13 @@
           </div>
         </div>
       {{ end }}
-
+      {{ if (eq site.Params.programs.index.options.website_button_position "essential")}}
+        {{ $target := .Params.website_url }}
+        {{ $label := (i18n "programs.website") }}
+        {{ if and $target $label }}
+          <a href="{{ $target }}" class="btn">{{ $label }}</a>
+        {{ end }}
+      {{ end }}
       {{ partial "commons/download-link" (dict 
         "id" .Params.downloadable_summary
         "title" (i18n "commons.download.singular_name")
