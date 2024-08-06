@@ -1,6 +1,7 @@
 <div class="essential-container" id="#{{ urlize (i18n "programs.toc.essential") }}">
   <div class="container">
     {{ $parent := .Params.parent }}
+    {{ $locations := .Params.locations}}
     {{- with .Params.diplomas -}}
       {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
       {{- with $diploma -}}
@@ -18,6 +19,15 @@
           {{- if .Params.duration -}}
             <dt>{{ i18n "programs.duration" }}</dt>
             <dd>{{ partial "PrepareHTML" .Params.duration }}</dd>
+          {{- end -}}
+          {{- with $locations -}}
+            <dt>{{ i18n "custom.location" }}</dt>
+            <dd>
+              {{range .}}
+              {{- $locationpage := site.GetPage (printf "/locations/%s" .slug) -}}
+                <a href="{{ .path }}">{{$locationpage.Params.title}}</a> 
+              {{end}}
+            </dd>
           {{- end -}}
         </dl>
       {{- end -}}
