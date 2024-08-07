@@ -5,21 +5,31 @@
 
         <div>
           {{- partial "programs/image.html" .Params.image -}}
-
+          {{ if eq site.Params.programs.index.options.blocks_position "after-image"}} 
+        </div>
+        {{- partial "contents/list.html" . }}
+        <div>
+          {{ end }}
           {{- if partial "GetTextFromHTML" .Params.presentation -}}
             <section id="{{ urlize (i18n "programs.presentation") }}">
               <h3>{{ i18n "programs.presentation" }}</h3>
               <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
             </section>
           {{- end -}}
-
+          {{ if eq site.Params.programs.index.options.blocks_position "after-presentation"}} 
+        </div>
+          {{- partial "contents/list.html" . }}
+        <div>
+          {{ end }}
           {{- if partial "GetTextFromHTML" .Params.objectives -}}
             <section id="{{ urlize (i18n "programs.objectives") }}">
               <h3>{{ i18n "programs.objectives" }}</h3>
               {{- partial "PrepareHTML" .Params.objectives -}}
             </section>
           {{- end -}}
-
+          {{ if eq site.Params.programs.index.options.blocks_position "after-objectives"}} 
+            {{- partial "contents/list.html" . }}
+          {{ end }}
           <section id="{{ urlize (i18n "programs.administrative_information") }}">
             <h3>{{ i18n "programs.administrative_information" }}</h3>
             <table class="program-table">
@@ -55,9 +65,12 @@
               </tbody>
             </table>
           </section>
-
+          {{ if eq site.Params.programs.index.options.blocks_position "after-information"}} 
         </div>
-        {{- partial "contents/list.html" . }}
+          {{- partial "contents/list.html" . }}
+        <div>
+          {{ end }}
+        </div>
       </div>
     </div>
 </section>
