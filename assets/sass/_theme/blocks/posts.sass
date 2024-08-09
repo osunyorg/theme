@@ -282,29 +282,26 @@
             padding-bottom: $spacing-3
             &__slider
                 margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
-            &__container
-                li
-                    list-style: none
-                .posts
-                    display: flex
-                    gap: unset
-                    .post
-                        margin: 0 calc(var(--grid-gutter) / 2)
-
-                @include media-breakpoint-down(desktop)
-                    gap: half(var(--grid-gutter))
-                    .post
-                        width: columns(10)
-
+            &__slide
+                list-style: none
+                .post
+                    margin: 0 calc(var(--grid-gutter) / 2)
+                &.is-before
+                    opacity: 0.3
                 @include in-page-with-sidebar
                     .post
                         width: columns(3)
                         .post-title
                             @include h4
-            &__slide
-                padding: 0 calc(var(--grid-gutter) / 2)
-                &.is-before
-                    opacity: 0.3
+            @include media-breakpoint-down(desktop)
+                &__slider
+                    margin-left: var(--grid-gutter-negative)
+                    width: var(--grid-width)
+                &__slide
+                    .post
+                        margin-left: var(--grid-gutter)
+                        margin-right: 0
+                        width: columns(10)
             &__arrows
                 justify-content: space-between
                 .counter
