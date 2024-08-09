@@ -108,6 +108,9 @@
                     width: calc(100% + var(--grid-gutter))
 
         @include media-breakpoint-down(desktop)
+            .carousel__slider
+                margin-left: calc(var(--grid-gutter-negative))
+                width: calc(var(--grid-width) + var(--grid-gutter) * 2)
             .timeline-events
                 position: relative
             .actions-arrows
@@ -117,9 +120,14 @@
             .timeline-event
                 margin-right: 0
                 padding-right: 0
-                width: columns(10)
+                padding-left: var(--grid-gutter)
+                width: columns(12)
                 .line
                     margin-bottom: $spacing-5
+                    width: calc(100% + var(--grid-gutter))
+                    &::before
+                        width: 8px
+                        height: 8px
 
         @include in-page-without-sidebar
             @include media-breakpoint-up(xxl)
