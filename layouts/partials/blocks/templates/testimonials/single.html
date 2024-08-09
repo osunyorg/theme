@@ -1,0 +1,31 @@
+<figure {{- if .is_carousel }} id="carousel-item-{{.index}}" role="{{.role}}" aria-roledescription="slide" class="carousel__slide" aria-label="{{.index}} / {{ .total }}" {{ end }} class="{{ if .is_carousel }}carousel__slide{{ end }} {{ if .params.photo }}with-picture{{ end }}">
+  {{ with .params }}
+    {{ $is_long := gt (len .text) 150 }}
+    <blockquote {{- if $is_long }} class="is-long" {{- end }}>
+      <p>{{- partial "PrepareHTML" .text -}}</p>
+    </blockquote>
+    {{ if or .photo .author .job -}}
+      <figcaption>
+        {{ if .photo -}}
+          <div class="avatar">
+            {{- partial "commons/image.html"
+            (dict
+            "image" .photo
+            "sizes" site.Params.image_sizes.blocks.testimonials
+            ) -}}
+          </div>
+        {{- end }}
+        {{ if or .author .job -}}
+          <p>
+            {{- if .author -}}
+              <span class="signature">{{ partial "PrepareHTML" .author }}</span>
+            {{- end }}
+            {{- if .job -}}
+              <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
+            {{- end }}
+          </p>
+        {{- end }}
+      </figcaption>
+    {{ end }}
+  {{ end }}
+</figure>
