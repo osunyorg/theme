@@ -27,6 +27,7 @@ class Note {
         this.active = true;
         this.note.classList.add('note--active');
         this.content.removeAttribute('aria-hidden');
+        this.call.setAttribute('aria-expanded', 'true');
         this.definePosition();
         this.a11yDisabling();
     }
@@ -35,6 +36,7 @@ class Note {
         this.active = false;
         this.content.setAttribute('aria-hidden', 'true');
         this.note.classList.remove('note--active');
+        this.call.setAttribute('aria-expanded', 'false');
         this.removeA11yDisabling();
     }
 
