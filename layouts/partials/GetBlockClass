@@ -10,6 +10,8 @@
   {{- $class = printf "%s block-%s--%s" $class .template .data.layout -}}
 {{- end -}}
 
-{{- $class = printf "%s %s" $class .html_class -}}
+{{- if .html_class -}}
+  {{- $class = printf "%s %s" $class .html_class -}}
+{{ end }}
 
 {{- return $class -}}
