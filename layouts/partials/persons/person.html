@@ -5,6 +5,7 @@
   "close" ((printf "</h%d>" $heading) | safeHTML)
 ) }}
 {{ $person := .person }}
+{{ $has_content := or (gt (len $person.Content) 1) false }}
 
 <article class="person" itemscope itemtype="https://schema.org/Person">
   <div class="description">
@@ -17,13 +18,13 @@
         </a>
       {{ end }}
     {{ $heading_tag.close }}
-    {{ if $options.summary }}
+    {{ if and $options.summary (or $person.Params.summary $has_content) }}
       <p itemprop="jobTitle">
         {{ if (partial "GetTextFromHTML" .role) }}
           {{ partial "PrepareHTML" .role }}
         {{ else if partial "GetTextFromHTML" $person.Params.summary }}
           {{ partial "PrepareHTML" $person.Params.summary }}
-        {{ else if partial "GetTextFromHTML" $person.Content }}
+        {{ else if and $has_content (partial "GetTextFromHTML" $person.Content) }}
           {{ partial "GetTruncateContent" ( dict "text" $person.Content ) }}
         {{ end }}
       </p>
