@@ -22,7 +22,9 @@
 
                 <link itemprop="url" href="{{ .url }}">
                 <a itemprop="relatedLink" href="{{ .url }}" title="{{ $link_title }}" {{ if $isExternal -}} target="_blank" rel="noopener" {{- end }}><span itemprop="name">{{- $title -}}</span></a>
-                <p>{{ .description | safeHTML }}</p>
+                {{ with .description }}
+                  <p>{{ . | safeHTML }}</p>
+                {{ end }}
               </div>
               {{- if .image -}}
                 <div class="media">
