@@ -31,6 +31,7 @@ window.osuny.carousel.Carousel.prototype = {
             index = 0;
         }
         this.showSlide(index);
+        this.arrows.next.focus();
     },
     previous: function () {
         var index = this.slides.current - 1;
@@ -39,6 +40,7 @@ window.osuny.carousel.Carousel.prototype = {
             index = this.slides.total - 1;
         }
         this.showSlide(index);
+        this.arrows.previous.focus();
     },
     showSlide: function (index) {
         this.slides.current = index;
