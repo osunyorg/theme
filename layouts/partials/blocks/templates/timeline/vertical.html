@@ -1,20 +1,20 @@
 
 {{- $heading_tag := partial "GetHeadingTag" (dict 
   "level" .block.ranks.children
-  "attributes" "class='title'"
+  "attributes" "class='title' itemprop='name'"
   ) -}}
 
 {{ with .block.data -}}
-  <div class="timeline-events">
+  <div class="timeline-events" >
     {{ range .events -}}
-      <article class="timeline-event">
+      <article class="timeline-event" itemscope itemtype="https://schema.org/Article">
         {{ with .title }}
           {{ $heading_tag.open -}}
             {{ . | safeHTML }}
           {{ $heading_tag.close -}}
         {{ end }}
         {{ with .text }}
-          <p>{{ . | safeHTML }}</p>
+          <p itemprop="text">{{ . | safeHTML }}</p>
         {{ end }}
       </article>
     {{ end -}}
