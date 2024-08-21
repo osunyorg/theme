@@ -2,10 +2,8 @@
 <div class="transcription">
   <details>
     <summary>{{ i18n "commons.accessibility.transcription" }}</summary>
-    <p>
       {{- $transcription := partial "PrepareHTML" .transcription -}}
-      {{ safeHTML (replace $transcription "\n" "<br/>") }}
-    </p>
+      {{ safeHTML $transcription }}
   </details>
 </div>
 {{ end }}
