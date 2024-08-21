@@ -36,7 +36,7 @@
           <hgroup>
             <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .title }}</h1>
             {{ if $subtitle }}
-              <p {{ if $subtitle_is_summary }} class="lead" {{ end }}>{{ partial "PrepareHTML" $subtitle }}</p>
+              {{ partial "PrepareHTML" $subtitle }}
             {{ end }}
             {{ if $description }}
               <p>{{ partial "PrepareHTML" .description }}</p>

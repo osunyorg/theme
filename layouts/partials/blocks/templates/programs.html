@@ -74,9 +74,9 @@
                     {{- end -}}
                   {{ end }}
 
-                  {{ if $options.summary }}
-                    {{ with $program.Params.summary | safeHTML}}
-                      <p itemprop="abstract">{{ . }}</p>
+                  {{ if $options.summary }}là ?
+                    {{ with $program.Params.summary }}
+                      <div itemprop="abstract">{{ partial "PrepareHTML" . }}</div>
                     {{ end }}
                   {{ end }}
                 </div>
