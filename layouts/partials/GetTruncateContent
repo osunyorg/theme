@@ -3,7 +3,7 @@
 
 {{ if gt $length 0 }}
   {{ $text = replace $text "<" " <" }}
-  {{ $text = chomp (truncate $length "…" (safeHTML (plainify $text))) }}
+  {{ $text = chomp (truncate $length "…" (safeHTML ($text))) }}
 {{ end }}
 
 {{ return safeHTML ($text) }}

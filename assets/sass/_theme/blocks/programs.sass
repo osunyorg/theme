@@ -10,9 +10,10 @@
                     @include meta
                     display: block
                     margin-bottom: $spacing-1
-                a
+                a.title
                     @include h3
                     @include hover-translate-icon($fade: true)
+                    @include stretched-link(before)
                     @include icon(arrow-right-line, after, true)
                         display: inline
                     transition: color 0.55s
@@ -49,7 +50,7 @@
                             transform: translateX($spacing-1)
                 [itemprop='name']
                     margin-bottom: $spacing-1
-                a
+                a.title
                     @include stretched-link
                     text-decoration: none
                 .more

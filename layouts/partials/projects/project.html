@@ -26,12 +26,12 @@
           <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
         {{ $heading_tag.close }}
         
-        {{ if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
-          <p itemprop="abstract">{{ partial "GetTruncateContent" ( dict 
+        {{ if and $options.summary .Params.summary }}
+          <div itemprop="abstract">{{ partial "GetTruncateContent" ( dict 
             "text" .Params.summary
             "length" site.Params.projects.index.truncate_description
             ) }}
-          </p>
+          </div>
         {{ end }}
           
 
