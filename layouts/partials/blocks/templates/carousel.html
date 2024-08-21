@@ -48,9 +48,10 @@
 
   {{ if .options.arrows }}
     <div class="carousel__arrows">
-      <button class="arrow-prev" aria-controls="carousel-items" type="button" aria-label='{{ safeHTML (i18n "commons.carousel.prev") }}'> </button>
+      <button class="arrow-prev" aria-controls="carousel-items" type="button" aria-label='{{ safeHTML (i18n "commons.carousel.prev") }}'><span class="sr-only">{{ safeHTML (i18n "commons.carousel.prev") }}</span></button>
+
       <p class="counter"></p>
-      <button class="arrow-next" aria-controls="carousel-items" type="button" aria-label='{{  safeHTML (i18n "commons.carousel.next") }}'></button>
+      <button class="arrow-next" aria-controls="carousel-items" type="button" aria-label='{{  safeHTML (i18n "commons.carousel.next") }}'><span class="sr-only">{{ safeHTML (i18n "commons.carousel.next") }}</span></button>
     </div>
   {{ end }}
 </div>
