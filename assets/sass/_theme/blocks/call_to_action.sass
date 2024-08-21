@@ -45,6 +45,9 @@
         figure
             figcaption
                 @include meta
+                > p
+                    margin-left: auto
+                    width: fit-content
         * + .actions
             margin-top: $spacing-3
         img
@@ -55,8 +58,6 @@
                 img
                     width: 100%
                 figcaption
-                    display: flex
-                    justify-content: flex-end
                     margin-top: $spacing-2
     &--accent_background
         --cta-background-color: #{$block-call-to-action-accent-background}
@@ -79,7 +80,6 @@
                     --btn-hover-background: #{$block-call-to-action-accent-button-hover-background}
                     --btn-hover-border: #{$block-call-to-action-accent-button-hover-border}
                     --btn-hover-color: #{$block-call-to-action-accent-button-hover-color}
-                    
 
     @include media-breakpoint-down(desktop)
         &--accent_background
@@ -89,8 +89,6 @@
                 figure
                     figcaption
                         margin-top: $spacing-2
-                        display: flex
-                        justify-content: flex-end
         .call_to_action
             .actions
                 a
@@ -153,6 +151,8 @@
                         figcaption
                             flex: 1
                             margin-left: $spacing-3
+                            > p
+                                margin-left: unset
                     > div
                         padding-top: calc(var(--grid-gutter) * 2 + #{$spacing-3})
 
@@ -171,8 +171,6 @@
             > figure
                 grid-column: 8/13
                 figcaption
-                    display: flex
-                    justify-content: flex-end
                     margin-top: $spacing-2
         .call_to_action--without-image
             display: block
