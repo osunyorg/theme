@@ -1,24 +1,30 @@
-{{- $title := or .Params.header_text .Title -}}
-{{- $button := false -}}
-{{- $program_logo := false -}}
-{{- if (and (and (eq site.Params.summary.position "hero") (eq site.Params.programs.single.website_link.position "hero")) .Params.website_url) -}}
-  {{ $button = (dict 
-    "display" true
-    "target" .Params.website_url
-    "label" (i18n "programs.website")
-  ) }}
-{{- end -}}
+{{ $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero" }}
+{{ $display_breadcrumb := .Params.breadcrumb | default true }}
 
-{{- if site.Params.programs.single.options.logo -}}
-  {{- $program_logo = true -}}
-{{- end -}}
+<header class="hero {{ if $breadcrumb_is_after_hero }} hero--no-margin {{ end }}">
 
-{{ partial "header/hero.html"
-      (dict
-        "title" $title
-        "context" .
-        "button" $button
-        "logo" $program_logo
-        "image" .Params.image
-        "hero_complement" "programs/essential.html"
-      )}}
+  <div class="container">
+    {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-start") }}
+      {{ partial "header/breadcrumbs.html" }}
+    {{ end }}
+    <div class="content">
+      {{ partial "programs/hero-single-text.html" . }}
+      {{ partial "programs/hero-single-logos.html" . }}
+    </div>
+  </div>
+
+  {{ partial "programs/hero-single-essential.html" . }}
+
+
+  {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-end") }}
+    <div class="container breadcrumb-container">
+      {{ partial "header/breadcrumbs.html" }}
+    </div>
+  {{ end }}
+</header>
+
+{{ if and $display_breadcrumb $breadcrumb_is_after_hero }}
+  <div class="container breadcrumb-container">
+    {{ partial "header/breadcrumbs.html" }}
+  </div>
+{{ end }}

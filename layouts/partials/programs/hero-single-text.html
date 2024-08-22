@@ -1,0 +1,32 @@
+{{ $subtitle_is_summary := false }}
+{{ $title_attribute := "" | safeHTMLAttr }}
+
+{{ if site.Params.search.active }}
+    {{ $title_attribute = "data-pagefind-weight='10'" | safeHTMLAttr }}
+{{ end }}
+
+{{ $summary := .Params.summary | safeHTML }}
+{{ $subtitle := .Params.subtitle }}
+{{ $description := .Params.description }}
+
+{{ if not $subtitle }}
+    {{ if and (eq site.Params.summary.position "hero") $summary }}
+        {{ $subtitle = $summary }}
+        {{ $subtitle_is_summary = true }}
+    {{ end }}
+{{ end }}
+<div class="hero-text">
+    {{ if or $subtitle $description }}
+    <hgroup>
+        <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .Params.title }}</h1>
+        {{ if $subtitle }}
+            <p {{ if $subtitle_is_summary }} class="lead" {{ end }}>{{ partial "PrepareHTML" $subtitle }}</p>
+        {{ end }}
+        {{ if $description }}
+        <p>{{ partial "PrepareHTML" .Params.description }}</p>
+        {{ end }}
+    </hgroup>
+    {{ else }}
+    <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .Params.title }}</h1>
+    {{ end }}
+</div>
