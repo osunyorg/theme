@@ -1,7 +1,7 @@
 {{- $title := or .Params.header_text .Title -}}
 {{- $button := false -}}
 {{- $program_logo := false -}}
-{{- if (and (and (eq site.Params.summary.position "hero") (eq site.Params.programs.index.options.website_button_position "hero")) .Params.website_url) -}}
+{{- if (and (and (eq site.Params.summary.position "hero") (eq site.Params.programs.single.website_link.position "hero")) .Params.website_url) -}}
   {{ $button = (dict 
     "display" true
     "target" .Params.website_url
@@ -9,7 +9,7 @@
   ) }}
 {{- end -}}
 
-{{- if site.Params.programs.index.options.hero_program_logo -}}
+{{- if site.Params.programs.single.options.logo -}}
   {{- $program_logo = true -}}
 {{- end -}}
 

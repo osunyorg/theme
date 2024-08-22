@@ -46,7 +46,7 @@
           </div>
         </div>
       {{ end }}
-      {{ if (eq site.Params.programs.index.options.website_button_position "essential")}}
+      {{ if (eq site.Params.programs.single.website_link.position "essential")}}
         {{ $target := .Params.website_url }}
         {{ $label := (i18n "programs.website") }}
         {{ if and $target $label }}
@@ -59,7 +59,7 @@
         "use_filename_for_a11y_title" true
       ) }}
     </div>
-    {{ if site.Params.programs.index.options.hero_diploma_logo }}
+    {{ if site.Params.programs.single.options.diploma_certification }}
       <div class="diploma-logo">
         <img src="/assets/images/certifications/diplomas/{{$diploma_shortname}}.svg" alt="logo {{$diploma_shortname}} " class="diploma-logo">
       </div>
