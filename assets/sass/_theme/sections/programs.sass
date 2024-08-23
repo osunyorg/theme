@@ -18,12 +18,44 @@ ol.programs
                 margin-left: $spacing-3
 
 .programs__section
-    .hero-program
-        flex-direction: column
-        justify-content: end
+    .hero
         .container
-            position: relative
-            
+            .content
+                display: flex
+                flex-direction: column
+                justify-content: space-between
+                .hero-text
+                    width: columns(12)
+                .hero-logos
+                    align-items: center
+                    display: flex
+                    gap: var(--grid-gutter)
+                    justify-content: space-between
+                    margin-top: $spacing-3
+                    width: columns(12)
+                    .logo
+                        width: columns(6)
+                    .diploma-certification
+                        width: columns(4)
+                    img
+                        display: block
+                @include media-breakpoint-up(desktop)
+                    flex-direction: row
+                    gap: var(--grid-gutter)
+                    .hero-text
+                        width: columns(9)
+                    .hero-logos       
+                        align-items: end
+                        align-self: end
+                        flex-direction: column
+                        margin-top: $spacing-5
+                        width: columns(3)
+                        .logo
+                            width: columns(2)
+                        .diploma-certification
+                            width: calc(var(--grid-gutter) + var(--column-width))
+        .essential-container
+            margin-top: $spacing-3
     &:not(.full-width)
         .document-content
             .lead

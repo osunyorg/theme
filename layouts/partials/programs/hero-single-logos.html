@@ -1,27 +1,27 @@
 {{ if (or site.Params.programs.single.options.logo site.Params.programs.single.options.diploma_certification)}}
-{{ $diploma_shortname := ""}}
-{{- with .Params.diplomas -}}
-    {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
-        {{- with $diploma -}}
-        {{ with .Params.short_name }}
-            {{ $diploma_shortname = .}}
+    {{ $diploma_shortname := ""}}
+    {{- with .Params.diplomas -}}
+        {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
+            {{- with $diploma -}}
+            {{ with .Params.short_name }}
+                {{ $diploma_shortname = .}}
+            {{ end }}
         {{ end }}
     {{ end }}
-{{ end }}
-<div class="hero-logos">
-    {{- if site.Params.programs.single.options.logo -}}
-        <div class="logo">
-            {{ partial "commons/image.html"
-            (dict
-            "image" .Params.logo
-            "lazy" false
-            ) }}
-        </div>
-        {{ if site.Params.programs.single.options.diploma_certification }}
-        <div class="diploma-logo">
-            <img src="/assets/images/certifications/diplomas/{{$diploma_shortname}}.svg" alt="logo {{$diploma_shortname}} " class="diploma-logo">
-        </div>
-    {{end}}
-    {{ end }}
-</div>
+    <div class="hero-logos">
+        {{- if site.Params.programs.single.options.logo -}}
+            <div class="logo">
+                {{ partial "commons/image.html"
+                (dict
+                "image" .Params.logo
+                "lazy" false
+                ) }}
+            </div>
+            {{ if site.Params.programs.single.options.diploma_certification }}
+                <picture class="diploma-certification">
+                    <img src="/assets/images/certifications/diplomas/{{$diploma_shortname}}.svg" alt="logo {{$diploma_shortname}} ">
+                </picture>
+            {{end}}
+        {{ end }}
+    </div>
 {{ end }}
