@@ -1,0 +1,163 @@
+.carousel
+    display: flex
+    flex-direction: column
+    position: relative
+    &__slider
+        overflow: scroll
+        scroll-snap-type: x mandatory
+        scrollbar-width: none
+        &::-webkit-scrollbar
+            display: none
+    &__container
+        // Si l'image est verticale, ça fonctionne tant qu'elle fait plus de 20vw
+        padding-right: 80vw
+        display: flex
+        justify-content: flex-start
+        flex-direction: row
+        left: 0px
+        position: relative
+        top: 0
+        width: fit-content
+        justify-content: flex-start
+
+    &__slide
+        scroll-snap-align: start
+        .block-timeline &.is-before
+            opacity: 0.3
+
+    button
+        appearance: none
+        background: transparent
+        border: 0
+
+    &__arrows
+        display: flex
+        flex-direction: row
+        align-items: center
+        margin-left: - $spacing-3 
+        margin-right: - $spacing-3 
+        @include media-breakpoint-up(desktop)
+            padding-top: $spacing-3
+        .counter
+            min-width: $spacing-3
+            text-align: center
+            width: fit-content
+            @include meta
+            .block-timeline &
+                display: none
+            &:empty
+                display: block
+        button
+            color: var(--color-text)
+            svg
+                display: none
+            &--prev
+                @include icon(arrow-left-line)
+                right: 100%
+            &--next
+                @include icon(arrow-right-line)
+                left: 100%
+
+            &:disabled
+                cursor: default
+                opacity: 0.3
+            &.arrow-prev,
+            &.arrow-next
+                @include button-reset
+                @include icon(arrow-left-line, before)
+                padding: $spacing-3
+                position: static
+                svg
+                    display: none
+            &.arrow-next
+                @include icon(arrow-right-line, before)
+
+    &__pagination
+        &__tabcontainer
+            display: flex
+            list-style: none
+            margin: 0
+            padding: 0
+            &.has_toggle
+                margin: 0 50px 0 0
+            li
+                display: block
+                flex: 1
+                list-style: none
+                margin: 0
+                margin-right: 10px
+                padding: 0
+            button
+                display: block
+                height: 48px
+                padding: 0
+                position: relative
+                width: 100%
+                cursor: pointer
+                &::before
+                    -moz-transition: background .3s ease
+                    -o-transition: background .3s ease
+                    background-color: alphaColor($link-color, 0.3)
+                    border-radius: 0
+                    content: ""
+                    display: block
+                    height: 1px
+                    left: 0
+                    margin: auto
+                    position: absolute
+                    top: 50%
+                    transition: background 0.3s ease
+                    width: 100%
+                &::before,
+                i
+                    height: 1px
+                    left: 0
+                    position: absolute
+                    top: 50%
+                i
+                    background-color: alphaColor($link-color, 0.3)
+                    width: 100%
+
+                &:hover
+                    &::before
+                        background-color: alphaColor($link-color, 0.6)
+                &.is-active
+                    &::before
+                        background-color: $link-color
+        .toggle
+            border-radius: 50%
+            border: 0
+            cursor: pointer
+            font-size: 0
+            height: pxToRem(42)
+            line-height: 1
+            padding: 0
+            position: absolute
+            right: 0
+            top: 0
+            width: pxToRem(42)
+            span
+                color: var(--color-accent)
+                &::before
+                    font-size: pxToRem(22)
+                    height: pxToRem(42)
+                    width: pxToRem(42)
+                    margin-top: -1.5px
+                &.play
+                    @include icon-block(play-fill)
+                    margin-left: -0.5px
+                &.pause
+                    @include icon-block(pause-line)
+                    margin-left: -1.5px
+            &__paused
+                span
+                    &.play
+                        display: block
+                    &.pause
+                        display: none
+            &__playing
+                span
+                    &.play
+                        display: none
+                    &.pause
+                        display: block

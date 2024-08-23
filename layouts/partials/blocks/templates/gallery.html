@@ -1,6 +1,6 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
-
+{{- $is_carousel := false -}}
 {{- with .block.data -}}
   {{- $layout := .layout | default "grid" }}
   <div class="{{ $block_class }}">
@@ -13,7 +13,24 @@
         )}}
 
         {{- if eq $layout "carousel" -}}
-          {{ partial "blocks/templates/gallery/carousel" . }}
+          {{ if gt (len .images) 1 }}
+            {{- $is_carousel = true -}}
+          {{ end }}
+        
+          {{- if $is_carousel }}
+            {{ partial "blocks/templates/carousel.html" (dict 
+            "content" .images
+            "options" site.Params.blocks.gallery.carousel
+            "partial" "blocks/templates/gallery/carousel-image.html"
+            )}}
+          {{ else }}
+            {{ range .images }}
+              {{ partial "blocks/templates/gallery/carousel-image.html" (dict 
+                "is_carousel" false
+                "params" .
+              )}}    
+            {{ end }}
+          {{ end -}}
         {{- else if eq $layout "large" -}}
           {{ partial "blocks/templates/gallery/large" . }}
         {{- else -}}

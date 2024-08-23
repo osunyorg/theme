@@ -1,26 +1,16 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading := printf "h%d" $heading_level }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+  "level" .block.ranks.children
+  "attributes" "class='title'"
+)}}
 {{ $options := .options }}
+{{ $template := printf "posts/post.html" }}
 
-<div class="carousel draggable-container">
-  <div class="carousel-posts draggable-content">
-    <ul class="posts">
-      {{ range $post := .posts -}}
-        {{ with site.GetPage (printf "/posts/%s" $post) }}
-        <li class="draggable-item">
-          {{ partial "posts/post.html" (dict 
-            "post" . 
-            "options" $options
-            "heading" $heading) }}
-        </li>
-        {{ end }}
-      {{ end }}
-    </ul>
-    {{ if  (gt (len .posts) 0) }}
-      <div class="actions-arrows">
-        <button class="previous" disabled title="{{ i18n "blocks.timeline.previous"}}"></button>
-        <button class="next" title="{{ i18n "blocks.timeline.next"}}"></button>
-      </div>
-    {{ end }}
-  </div>
-</div>
+{{ partial "blocks/templates/carousel.html" (dict 
+  "content" .posts
+  "options" site.Params.blocks.posts.carousel
+  "partial" $template
+  "heading_tag" $heading_tag
+  "block_options" $options
+)}}

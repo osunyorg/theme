@@ -58,9 +58,9 @@ params:
       options:
         dates: true
         categories: false
-        image: false
+        image: true
         status: false
-        subtitle: false
+        subtitle: true
         summary: true
     # share_links: # Optional
     #   enabled: true
@@ -181,25 +181,30 @@ params:
   # BLOCKS
   blocks:
     gallery:
-      splide:
+      carousel:
         arrows: true
         pagination: false
-        autoWidth: true
         autoplay: false
     key_figures:
       animated: true
     pages:
       alternate:
         more: true
+    posts:
+      carousel:
+        arrows: true
+        pagination: false
+        autoplay: false
     testimonials:
-      splide:
-        arrows: false
+      carousel:
+        pagination: true
         autoplay: true
-        pauseOnHover: false
-        pauseOnFocus: true
-        type: loop
-        autoHeight: true
-        interval: 8000
+        autoplayinterval: 3000
+    timeline:
+      carousel:
+        arrows: true
+        pagination: false
+        autoplay: false
   image_sizes:
     design_system:
       lightbox:
