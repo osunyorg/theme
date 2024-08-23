@@ -12,33 +12,8 @@
       ) }}
 
     {{ partial "contents/list.html" . }}
-    {{ $location_programs := .Params.programs}}
     <div class="container">
-      {{ with .Params.diplomas }} 
-        {{/*  Get diplomas collection from diploma's paths  */}}
-        {{ $diplomas := slice }}
-        {{ range . }}
-          {{ $path := .path }}
-          {{ $programs := slice }}
-          
-          {{/* looking for corresponding diploma in program to add it to the dict */}}
-          {{  range $location_programs }}
-            {{ $program := site.GetPage (printf "/programs%s" .) }}
-            {{ if (eq $path $program.Params.diplomas)}}
-              {{ $programs = $programs | append $program.Params }}
-            {{ end }}
-          {{ end }}
-          {{ with site.GetPage (printf "/diplomas/%s" .path) }}
-            {{ $diplomas = $diplomas | append (dict 
-              "Title" .Title
-              "Permalink" .Permalink
-              "programs" $programs) }}
-          {{ end }}
-        {{ end }}
-
-        {{ partial "locations/diplomas.html" ( dict "diplomas" $diplomas ) }}
-      {{ end }}
-      {{ partial "commons/pagination.html" . }}
+      {{ partial "partials/locations/diplomas.html" .Params}}
     </div>
   </div>
   {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}

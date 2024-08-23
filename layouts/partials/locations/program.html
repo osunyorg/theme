@@ -1,10 +1,10 @@
 <li>
   <div class="program-content">
-    <a href="{{ .slug }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .title)) }}">
-      {{- partial "PrepareHTML" .title -}}
+    <a href="{{ .hugo.permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .title)) }}">
+      {{- partial "PrepareHTML" .Title -}}
     </a>
     <div class="description">
-      {{- .summary }}
+      {{- .summary | safeHTML}}
     </div>
   </div>
   <div class="media">
