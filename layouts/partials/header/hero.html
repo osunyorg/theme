@@ -12,7 +12,6 @@
 {{ $subtitle_is_summary := false }}
 
 {{ $button := .button | default .context.Params.header_cta }}
-{{ $logo := .logo }}
 {{ $title_attribute := "" | safeHTMLAttr }}
 {{ if site.Params.search.active }}
   {{ $title_attribute = "data-pagefind-weight='10'" | safeHTMLAttr }}
@@ -50,16 +49,6 @@
           {{ if and .display .target .label }}
             <a href="{{ .target }}" class="btn">{{ .label }}</a>
           {{ end }}
-        {{ end }}
-
-        {{ if $logo }}
-          <div class="logo">
-            {{ partial "commons/image.html"
-            (dict
-              "image"    .context.Params.logo
-              "lazy"     false
-            ) }}
-          </div>
         {{ end }}
 
         {{ if .hero_text_complement }}
