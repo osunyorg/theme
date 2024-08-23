@@ -1,59 +1,32 @@
-<div class="essential-container" id="#{{ urlize (i18n "programs.toc.essential") }}">
-  <div class="container">
-    {{ $parent := .Params.parent }}
-    {{ $locations := .Params.locations}}
-    {{- with .Params.diplomas -}}
-      {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
-      {{- with $diploma -}}
-        <dl class="essential">
-          <dt>{{ i18n "programs.diploma" }}</dt>
-          <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></dd>
-          {{- if .Params.level -}}
-            <dt>{{ i18n "programs.level" }}</dt>
-            <dd>{{ partial "PrepareHTML" .Params.level }}</dd>
-          {{- end -}}
-          {{- with $parent -}}
-            <dt>{{ i18n "programs.mention" }}</dt>
-            <dd><a href="{{ .url }}">{{ partial "PrepareHTML" .title }}</a></dd>
-          {{- end -}}
-          {{- if .Params.duration -}}
-            <dt>{{ i18n "programs.duration" }}</dt>
-            <dd>{{ partial "PrepareHTML" .Params.duration }}</dd>
-          {{- end -}}
-          {{- with $locations -}}
-            <dt>{{ i18n "custom.location" }}</dt>
-            <dd>
-              {{range .}}
-              {{- $locationpage := site.GetPage (printf "/locations/%s" .slug) -}}
-                <a href="{{ .path }}">{{$locationpage.Params.title}}</a> 
-              {{end}}
-            </dd>
-          {{- end -}}
-        </dl>
+{{ $parent := .Params.parent }}
+{{ $locations := .Params.locations}}
+{{- with .Params.diplomas -}}
+  {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
+  {{- with $diploma -}}
+    <dl class="hero-essential">
+      <dt>{{ i18n "programs.diploma" }}</dt>
+      <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></dd>
+      {{- if .Params.level -}}
+        <dt>{{ i18n "programs.level" }}</dt>
+        <dd>{{ partial "PrepareHTML" .Params.level }}</dd>
       {{- end -}}
-    {{- end -}}
-    
-    <div class="buttons">
-      {{ if site.Params.programs.share_links.enabled | default site.Params.share_links.enabled }}
-        <div class="dropdown-share">
-          <button type="button" aria-expanded="false">{{ i18n "commons.share" }}</button>
-          <div class="dropdown-menu">
-            {{ partial "commons/share.html" . }}
-          </div>
-        </div>
-      {{ end }}
-      {{ if site.Params.programs.single.options.website_link }}
-        {{ $target := .Params.website_url }}
-        {{ $label := (i18n "programs.website") }}
-        {{ if and $target $label }}
-          <a href="{{ $target }}" class="btn">{{ $label }}</a>
-        {{ end }}
-      {{ end }}
-      {{ partial "commons/download-link" (dict 
-        "id" .Params.downloadable_summary
-        "title" (i18n "commons.download.singular_name")
-        "use_filename_for_a11y_title" true
-      ) }}
-    </div>
-  </div>
-</div>
+      {{- with $parent -}}
+        <dt>{{ i18n "programs.mention" }}</dt>
+        <dd><a href="{{ .url }}">{{ partial "PrepareHTML" .title }}</a></dd>
+      {{- end -}}
+      {{- if .Params.duration -}}
+        <dt>{{ i18n "programs.duration" }}</dt>
+        <dd>{{ partial "PrepareHTML" .Params.duration }}</dd>
+      {{- end -}}
+      {{- with $locations -}}
+        <dt>{{ i18n "programs.location" }}</dt>
+        <dd>
+          {{range .}}
+          {{- $locationpage := site.GetPage (printf "/locations/%s" .slug) -}}
+            <a href="{{ .path }}">{{$locationpage.Params.title}}</a> 
+          {{end}}
+        </dd>
+      {{- end -}}
+    </dl>
+  {{- end -}}
+{{- end -}}

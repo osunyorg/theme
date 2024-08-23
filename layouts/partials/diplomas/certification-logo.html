@@ -1,0 +1,9 @@
+{{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
+{{- with $diploma -}}
+    {{ $diploma_id := .Params.short_name }}
+    {{ if fileExists (printf "themes/osuny/static/assets/images/certifications/diplomas/%s.svg" $diploma_id)}}
+        <picture class="diploma-certification">
+            <img src="/assets/images/certifications/diplomas/{{$diploma_id}}.svg" alt="logo {{$diploma_id}} ">
+        </picture>
+    {{end}}
+{{ end }}

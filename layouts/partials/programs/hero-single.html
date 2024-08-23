@@ -13,8 +13,12 @@
     </div>
   </div>
 
-  {{ partial "programs/hero-single-essential.html" . }}
-
+  <div class="essential-container" id="#{{ urlize (i18n "programs.toc.essential") }}">
+    <div class="container"> 
+      {{ partial "programs/hero-single-essential.html" . }}
+      {{ partial "programs/hero-single-actions.html" . }}
+    </div>
+  </div>
 
   {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-end") }}
     <div class="container breadcrumb-container">
