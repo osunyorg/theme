@@ -39,7 +39,7 @@ ol.programs
                         width: columns(4)
                     img
                         display: block
-                @include media-breakpoint-up(desktop)
+                @include media-breakpoint-up(md)
                     flex-direction: row
                     gap: var(--grid-gutter)
                     .hero-text
@@ -52,6 +52,12 @@ ol.programs
                         width: columns(3)
                         .logo
                             width: columns(2)
+                        .diploma-certification
+                            width: columns(2)
+                        picture
+                            max-width: 100%
+                @include media-breakpoint-up(desktop)            
+                    .hero-logos       
                         .diploma-certification
                             width: calc(var(--grid-gutter) + var(--column-width))
         .essential-container
@@ -72,11 +78,11 @@ ol.programs
                     dt:not(:first-of-type)
                         padding-top: $spacing-2
                     dt
-                        grid-column: 1/3
                         color: var(--color-text-alt)
+                        grid-column: 1/3
                     dd
-                        padding-bottom: $spacing-2
                         grid-column: 3/7
+                        padding-bottom: $spacing-2
                         a
                             @include link($hero-color)
                             padding-bottom: 0
@@ -89,11 +95,33 @@ ol.programs
                         dd
                             &:not(:first-of-type)
                                 padding-top: $spacing-2
+
                 .hero-actions
                     margin-top: $spacing-3
+                    display: flex
+                    flex-wrap: wrap
+                    justify-content: space-between
+                    gap: $spacing-3
+                    > *
+                        width: 100%
+                    @include media-breakpoint-down(md)
+                        > :nth-child(2):not(:last-child)
+                            width: columns(6)
+                        > :last-child:nth-child(3)
+                            width: columns(6)
+                    @include meta
+                    a[download]
+                        @extend .button-alt
+                        @include button-icon(download-2-line)
+                        &::after
+                            font-size: 1.2em
                     @include media-breakpoint-up(md)
+                        flex-direction: column
+                        justify-content: flex-start
                         margin-top: 0
                         width: columns(3)
+                        > *
+                            width: 100%
                 @include media-breakpoint-up(md)
                     display: flex
                     justify-content: space-between

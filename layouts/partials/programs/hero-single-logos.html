@@ -1,6 +1,6 @@
 {{ if (or site.Params.programs.single.options.logo site.Params.programs.single.options.diploma_certification)}}
     <div class="hero-logos">
-        {{- if site.Params.programs.single.options.logo -}}
+        {{- if (and site.Params.programs.single.options.logo .Params.logo) -}}
             <div class="logo">
                 {{ partial "commons/image.html"
                 (dict
@@ -8,9 +8,9 @@
                 "lazy" false
                 ) }}
             </div>
-            {{ if site.Params.programs.single.options.diploma_certification }}
-                {{ partial "diplomas/certification-logo.html" .Params.diplomas}}
-            {{end}}
-        {{ end }}
+            {{ end }}
+        {{ if site.Params.programs.single.options.diploma_certification }}
+            {{ partial "diplomas/certification-logo.html" .Params.diplomas}}
+        {{end}}
     </div>
 {{ end }}
