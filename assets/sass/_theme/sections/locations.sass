@@ -5,52 +5,84 @@
         @include media-breakpoint-up(desktop)
             .location
                 flex-direction: row
-                .media
+                a
+                    margin-top: 0
+                .location-content
+                    display: flex
+                    flex-direction: column
+                    justify-content: space-between
+                .location-description
+                    display: flex
+                    flex-direction: column
+                    gap: $spacing-1
+                    height: 100%
+                    justify-content: space-between
                     width: columns(4)
-                &-content
-                    width: columns(6)
+                @include in-page-with-sidebar
+                    .location-description
+                        width: columns(6)
+                    .media
+                        width: columns(2)
+                @include in-page-without-sidebar
+                    gap: var(--grid-gutter)
+                    justify-content: space-between
+                    .media
+                        width: columns(4)
+                    .location-content
+                        flex-direction: row
+                        justify-content: space-between
+                        width: columns(8)
+                        .location-title
+                            width: columns(4)
+                        .location-description
+                            width: columns(4)
+
     &--grid
         .location-title
             @include h3
-        @include media-breakpoint-down(desktop)
-            .location + .location
-                margin-top: $spacing-4
         @include in-page-with-sidebar
             @include grid(2)
         @include in-page-without-sidebar
-            @include grid(4)
-        .more
-            padding-top: $spacing-3
-        @include media-breakpoint-down(desktop)
-            .location + .location
-                margin-top: $spacing-4
-                
+            @include grid(3)
+        @include media-breakpoint-up(desktop)
+            .location
+                margin-top: 0
+                .media
+                    width: 100%
+
 .location
     display: flex
-    gap: $spacing-3 var(--grid-gutter)
     flex-direction: column
+    gap: $spacing-3 var(--grid-gutter)
+    margin-top: $spacing-5
     position: relative
+    &:first-child
+        margin-top: 0
     a
-        @include stretched-link
+        @include meta
+        display: block
+        margin-top: $spacing-1
         text-decoration: none
+        @include stretched-link(before)
+        @include icon(arrow-right-line, after)
+            margin-left: $spacing-2
+        @include hover-translate-icon(after)
+
     .media
-        aspect-ratio: 1.3
+        aspect-ratio: 3/2
         background: var(--color-background-alt)
+        height: fit-content
         order: -1
+        width: columns(6)
+        picture
+            aspect-ratio: 3/2
+            display: block
         img
             display: block
             height: 100%
             object-fit: cover
-            width: 100%
-    &-title
-        @include icon(arrow-right-line, after, true)
-        @include hover-translate-icon(after)
     &-description
-        margin-top: $spacing-3
-    @include media-breakpoint-down(desktop)
-        .media
-            margin-left: var(--grid-gutter-negative)
-            margin-right: var(--grid-gutter-negative)
+        margin-top: $spacing-1
 
 .campus-map
     .map
@@ -84,7 +116,7 @@
                     align-items: center
                     display: flex
                     .campus-content
-                        order: 2 
+                        order: 2
                         padding: 0 $spacing-3
                         span,
                         .campus-title

@@ -12,23 +12,23 @@
     <div class="location-content">
       {{- $title := partial "PrepareHTML" .Title -}}
       {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
           {{ $title }}
-        </a>
       {{ $heading_tag.close }}
 
-      {{- if and (partial "GetTextFromHTML" .Params.summary) $options.summary -}}
-        <div class="location-description">
+      <div class="location-description">
+          {{- if and (partial "GetTextFromHTML" .Params.summary) $options.summary -}}
           <p itemprop="description">
             {{ partial "GetTruncateContent" ( dict 
               "text" .Params.summary
               "length" site.Params.locations.index.truncate_description
               ) }}
           </p>
+          {{- end -}}
+          <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+            {{- i18n "blocks.locations.button_location" -}}
+          </a>
         </div>
-        <p class="more meta" aria-hidden="true">{{- i18n "blocks.locations.button_location" -}}</p>
-      {{- end -}}
-    </div>
+      </div>
 
     {{ if $options.image }}
       <div class="media">
