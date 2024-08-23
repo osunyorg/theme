@@ -1,0 +1,61 @@
+{{ $partial := .partial }}
+{{ $heading_tag := .heading_tag | default 2 }}
+{{ $block_options := .block_options | default "" }}
+
+<div class="carousel js-carousel" aria-roledescription="carousel" data-carousel="{{ .options | encoding.Jsonify }}">
+  <div class="carousel__slider">
+    <div id="carousel-items" class="carousel__container" aria-live="off" aria-atomic="false">
+      {{ $slideRole := "group" }}
+      {{ if .options.pagination }}
+        {{ $slideRole = "tabpanel" }}
+      {{ end }}
+      {{ $totalSlides := len .content }}
+      {{ range $slideindex, $content := .content }}
+      {{ with $content }}
+        {{ partial $partial (dict
+          "is_carousel" true
+          "index" (add $slideindex 1)
+          "params" .
+          "role" $slideRole
+          "heading_tag" $heading_tag
+          "options" $block_options
+          "total" $totalSlides
+        ) }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+  <div class="carousel__pagination">
+      {{ if .options.pagination }}
+      <ul class="carousel__pagination__tabcontainer {{ if .options.autoplay }} has_toggle {{ end }}" role="tablist">
+        {{ range $slideindex, $content := .content }}
+          <li>
+            <button id="carousel-tab-{{$slideindex}}" role="tab" aria-controls="carousel-item-{{$slideindex}}" aria-selected="false" class="carousel__pagination__page" type="button" aria-label='{{ safeHTML (i18n "commons.carousel.slideX") }}'>
+              <i></i>
+            </button>
+          </li>
+        {{ end }}
+      </ul>
+      {{ end }}
+      
+      {{ if .options.autoplay }}
+      <button class="toggle">
+        <span class="play" aria-label='{{ safeHTML (i18n "commons.carousel.play") }}'></span>
+        <span class="pause" aria-label='{{ safeHTML (i18n "commons.carousel.pause") }}'></span>
+      </button>
+      {{ end }}
+    </div>
+
+  {{ if .options.arrows }}
+    <div class="carousel__arrows">
+      <button class="arrow-prev" aria-controls="carousel-items" type="button" aria-label="{{ safeHTML (i18n "commons.carousel.prev")}}">
+        <span class="sr-only">{{ safeHTML (i18n "commons.carousel.prev") }}</span>
+      </button>
+
+      <p class="counter"></p>
+      <button class="arrow-next" aria-controls="carousel-items" type="button" aria-label="{{ safeHTML (i18n "commons.carousel.next") }}">
+        <span class="sr-only">{{ safeHTML (i18n "commons.carousel.next") }}</span>
+      </button>
+    </div>
+  {{ end }}
+</div>

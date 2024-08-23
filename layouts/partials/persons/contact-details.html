@@ -6,35 +6,50 @@
           {{ with .website }}
             <li>
               <span>{{ i18n "commons.contact.website" }}</span>
-              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">
+                {{ chomp .label }}
+                <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+              </a>
             </li>
           {{ end }}
 
           {{ with .linkedin }}
             <li>
               <span>LinkedIn</span>
-              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">
+                {{ chomp .label }}
+                <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+              </a>
             </li>
           {{ end }}
 
           {{ with .mastodon }}
             <li>
               <span>Mastodon</span>
-              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">
+                {{ chomp .label }}
+                <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+              </a>
             </li>
           {{ end }}
 
           {{ with .twitter }}
             <li>
               <span>Twitter</span>
-              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">{{ chomp .label }}</a>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">
+                {{ chomp .label }}
+                <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+              </a>
             </li>
           {{ end }}
 
           {{ with .email }}
             <li>
               <span>{{ i18n "commons.contact.email" }}</span>
-              <a href="{{ chomp .value }}" itemprop="email">{{ chomp .label }}</a>
+              <a href="{{ chomp .value }}" itemprop="email">
+                {{ chomp .label }}
+                <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+              </a>
             </li>
           {{ end }}
 
