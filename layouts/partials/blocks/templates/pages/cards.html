@@ -16,10 +16,7 @@
         {{ $heading_tag.close }}
 
         {{ if and $options.summary .Params.summary }}
-          <p>{{ partial "GetTruncateContent" ( dict 
-            "text" .Params.summary
-            "length" site.Params.pages.index.truncate_description
-            ) }}</p>
+          {{ safeHTML .Params.summary }}
         {{ end }}
 
         <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>

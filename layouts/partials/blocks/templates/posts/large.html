@@ -41,13 +41,10 @@
             {{ end }}
           </div>
 
-          {{ if $options.summary }}
-            {{- if (partial "GetTextFromHTML" .Params.summary) -}}
-              <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
-                "text" .Params.summary
-                "length" site.Params.posts.index.truncate_description
-                ) }}</p>
-            {{- end -}}
+          {{ if and $options.summary .Params.summary }}
+            <div itemprop="articleBody">
+              {{ safeHTML .Params.summary }}
+            </div>
           {{- end -}}
 
           {{ if and .Params.contents_reading_time $options.reading_time }}
