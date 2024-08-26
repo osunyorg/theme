@@ -12,7 +12,7 @@
         </a>
       {{ end }}
     </h2>
-    {{ if and $options.summary .Params.summary }}
+    {{ if and $options.summary  (partial "GetTextFromHTML" .Params.summary) }}
       <div class="organization-summary">
         {{ safeHTML .Params.summary }}
       </div>

@@ -15,7 +15,7 @@
           </a>
         {{ $heading_tag.close }}
 
-        {{ if and $options.summary .Params.summary }}
+        {{ if and $options.summary  (partial "GetTextFromHTML" .Params.summary) }}
           {{ safeHTML .Params.summary }}
         {{ end }}
 

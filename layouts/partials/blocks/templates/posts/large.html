@@ -41,7 +41,7 @@
             {{ end }}
           </div>
 
-          {{ if and $options.summary .Params.summary }}
+          {{ if and $options.summary  (partial "GetTextFromHTML" .Params.summary) }}
             <div itemprop="articleBody">
               {{ safeHTML .Params.summary }}
             </div>

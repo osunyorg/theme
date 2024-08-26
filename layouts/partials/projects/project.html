@@ -26,7 +26,7 @@
           <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
         {{ $heading_tag.close }}
         
-        {{ if and $options.summary .Params.summary }}
+        {{ if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
           <div itemprop="abstract">
             {{ safeHTML .Params.summary }}
           </div>
