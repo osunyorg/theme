@@ -35,8 +35,8 @@
         {{ if or $subtitle $description }}
           <hgroup>
             <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .title }}</h1>
-            {{ if $subtitle }}
-              {{ partial "PrepareHTML" $subtitle }}
+            {{ with $subtitle }}
+              {{ safeHTML . }}
             {{ end }}
             {{ if $description }}
               <p>{{ partial "PrepareHTML" .description }}</p>

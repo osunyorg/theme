@@ -27,13 +27,10 @@
         {{ $heading_tag.close }}
         
         {{ if and $options.summary .Params.summary }}
-          <div itemprop="abstract">{{ partial "GetTruncateContent" ( dict 
-            "text" .Params.summary
-            "length" site.Params.projects.index.truncate_description
-            ) }}
+          <div itemprop="abstract">
+            {{ safeHTML .Params.summary }}
           </div>
         {{ end }}
-          
 
         {{ if $options.categories }}
           {{ partial "commons/categories" ( dict
