@@ -17,7 +17,7 @@
         )}}
 
         {{- with .image -}}
-          <figure class="{{ $image_class }}" {{- with or $text .alt .credit }} aria-label="{{ . | plainify }}" {{ end }}>
+          <figure role="figure" class="{{ $image_class }}" {{- with or $text .alt .credit }} aria-label="{{ . | plainify }}" {{ end }}>
             {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
               <a  class="glightbox"
                   role="button"

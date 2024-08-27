@@ -4,7 +4,7 @@
       {{- $image := partial "GetMedia" .id -}}
       {{- $image_class := printf "image-%s" (partial "GetImageDirection" .) -}}
       {{- if $image -}}
-        <figure class="{{ $image_class  }}" {{- with or .text .alt .credit }} aria-label="{{ . | plainify }}" {{ end }}>
+        <figure role="figure" class="{{ $image_class  }}" {{- with or .text .alt .credit }} aria-label="{{ . | plainify }}" {{ end }}>
           {{ partial "commons/image.html"
             (dict
               "image"    .file
