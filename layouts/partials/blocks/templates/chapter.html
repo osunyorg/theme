@@ -30,7 +30,7 @@
             {{ end -}}
           </div>
           {{ if .image }}
-            <figure class="{{- $image_class -}}">
+            <figure class="{{- $image_class -}}" {{- with or .alt .credit }} aria-label="{{ . | plainify }}" {{ end }}>
               {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
                 <a class="glightbox"
                   role="button"
@@ -44,6 +44,7 @@
                 {{ partial "commons/image.html"
                   (dict
                     "image"    .image
+                    "alt" .alt
                     "sizes"    site.Params.image_sizes.blocks.chapter
                   )}}
               {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
