@@ -1,60 +1,63 @@
-{{ with .email }}
+{{ $name := .name | default (htmlUnescape site.Title) }}
+{{ $context := .context | default . }}
+
+{{ with $context.email }}
   <li class="email">
-    <a href="mailto:{{ . }}" rel="noreferrer" title="Email" target="_blank">{{ i18n "commons.contact.email" }}</a>
+    <a href="mailto:{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.email" (dict "name" $name )) }}" target="_blank">{{ i18n "commons.contact.email" }}</a>
   </li>
 {{ end}}
-{{ with .rss }}
+{{ with $context.rss }}
   <li class="rss">
-    <a href="{{ . }}" rel="noreferrer" title="RSS" target="_blank">RSS</a>
+    <a href="{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.rss" (dict "name" $name )) }}" target="_blank">RSS</a>
   </li>
 {{ end}}
-{{ with .mastodon }}
+{{ with $context.mastodon }}
   <li class="mastodon">
-    <a href="{{ . }}" rel="noreferrer" title="Mastodon" target="_blank">Mastodon</a>
+    <a href="{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Mastodon" "name" $name )) }}" target="_blank">Mastodon</a>
   </li>
 {{ end}}
-{{ with .peertube }}
+{{ with $context.peertube }}
   <li class="peertube">
-    <a href="{{ . }}" rel="noreferrer" title="Peertube" target="_blank">Peertube</a>
+    <a href="{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Peertub" "name" $name )) }}" target="_blank">Peertube</a>
   </li>
 {{ end}}
-{{ with .github }}
+{{ with $context.github }}
   <li class="github">
-    <a href="{{ . }}" rel="noreferrer" title="Github" target="_blank">GitHub</a>
+    <a href="{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Github" "name" $name )) }}" target="_blank">GitHub</a>
   </li>
 {{ end}}
-{{ with .linkedin }}
+{{ with $context.linkedin }}
   <li class="linkedin">
-    <a href="{{ . }}" rel="noreferrer" title="LinkedIn" target="_blank">LinkedIn</a>
+    <a href="{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "LinkedIn" "name" $name )) }}" target="_blank">LinkedIn</a>
   </li>
 {{ end}}
-{{ with .youtube }}
+{{ with $context.youtube }}
   <li class="youtube">
-    <a href="{{ . }}" rel="noreferrer" title="YouTube" target="_blank">YouTube</a>
+    <a href="{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "YouTube" "name" $name )) }}" target="_blank">YouTube</a>
   </li>
 {{ end}}
-{{ with .vimeo }}
+{{ with $context.vimeo }}
   <li class="vimeo">
-    <a href="{{ . }}" rel="noreferrer" title="Vimeo" target="_blank">Vimeo</a>
+    <a href="{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Vimeo" "name" $name )) }}" target="_blank">Vimeo</a>
   </li>
 {{ end}}
-{{ with .instagram }}
+{{ with $context.instagram }}
   <li class="instagram">
-    <a href="{{ . }}" rel="noreferrer" title="Instagram" target="_blank">Instagram</a>
+    <a href="{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Instagram" "name" $name )) }}" target="_blank">Instagram</a>
   </li>
 {{ end}}
-{{ with .facebook }}
+{{ with $context.facebook }}
   <li class="facebook">
-    <a href="{{ . }}" rel="noreferrer" title="" target="_blank">Facebook</a>
+    <a href="{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Facebook" "name" $name )) }}" target="_blank">Facebook</a>
   </li>
 {{ end}}
-{{ with .tiktok }}
+{{ with $context.tiktok }}
   <li class="tiktok">
-    <a href="{{ . }}" rel="noreferrer" title="TikTok" target="_blank">TikTok</a>
+    <a href="{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "TikTok" "name" $name )) }}" target="_blank">TikTok</a>
   </li>
 {{ end}}
-{{ with .x }}
+{{ with $context.x }}
   <li class="x">
-    <a href="{{ . }}" rel="noreferrer" title="X, ex-Twitter" target="_blank">X (ex-Twitter)</a>
+    <a href="{{ . }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "X, ex-twitter" "name" $name )) }}" target="_blank">X (ex-Twitter)</a>
   </li>
 {{ end}}
