@@ -24,47 +24,45 @@ ol.programs
                 display: flex
                 flex-direction: column
                 justify-content: space-between
+                @include media-breakpoint-up(md)
+                    flex-direction: row
+                    gap: var(--grid-gutter)
                 .hero-text
-                    width: columns(12)
+                    @include media-breakpoint-up(desktop)
+                        width: columns(9)
                 .hero-logos
                     align-items: center
                     display: flex
                     gap: var(--grid-gutter)
                     justify-content: space-between
                     margin-top: $spacing-3
-                    width: columns(12)
-                    .logo
-                        width: columns(6)
-                    .diploma-certification
-                        width: columns(4)
-                    img
-                        display: block
-                @include media-breakpoint-up(md)
-                    flex-direction: row
-                    gap: var(--grid-gutter)
-                    .hero-text
-                        width: columns(9)
-                    .hero-logos       
+                    width: 100%
+                    @include media-breakpoint-up(md)
                         align-items: end
                         align-self: end
                         flex-direction: column
                         margin-top: $spacing-5
                         width: columns(3)
-                        .logo
+                    .logo
+                        width: columns(6)
+                        @include media-breakpoint-up(md)
                             width: columns(2)
-                        .diploma-certification
+                    .diploma-certification
+                        width: columns(4)
+                        @include media-breakpoint-up(md)
                             width: columns(2)
-                        picture
-                            max-width: 100%
-                @include media-breakpoint-up(desktop)            
-                    .hero-logos       
-                        .diploma-certification
-                            width: calc(var(--grid-gutter) + var(--column-width))
+                        @include media-breakpoint-up(desktop)
+                            width: offset(1)
+                    img
+                        display: block
         .essential-container
             margin-top: $spacing-3
             @include media-breakpoint-up(md)
                 margin-top: $spacing-5
             .container
+                @include media-breakpoint-up(md)
+                    display: flex
+                    justify-content: space-between
                 .hero-essential
                     @include meta
                     color: $header-color
@@ -72,51 +70,41 @@ ol.programs
                     font-size: $program-essential-font-size
                     margin-bottom: 0
                     margin-top: 0
-                    dt, 
-                    dd
-                        margin: 0            
-                    dt:not(:first-of-type)
-                        padding-top: $spacing-2
-                    dt
-                        color: var(--color-text-alt)
-                        grid-column: 1/3
-                    dd
-                        grid-column: 3/7
-                        padding-bottom: $spacing-2
-                        a
-                            @include link($hero-color)
-                            padding-bottom: 0
                     @include media-breakpoint-up(md)
                         @include grid(6, false, 0)
                         font-size: $program-essential-font-size-desktop
                         width: columns(6)
-                        dt
+                    dt, 
+                    dd
+                        margin: 0            
+                    dt
+                        color: var(--color-text-alt)
+                        grid-column: 1/3
+                        @include media-breakpoint-up(md)
                             padding-bottom: $spacing-2
-                        dd
+                        &:not(:first-of-type)
+                            padding-top: $spacing-2
+                    dd
+                        grid-column: 3/7
+                        padding-bottom: $spacing-2
+                        @include media-breakpoint-up(md)
                             &:not(:first-of-type)
                                 padding-top: $spacing-2
-
+                        a
+                            @include link($hero-color)
+                            padding-bottom: 0
                 .hero-actions
+                    @include meta
                     margin-top: $spacing-3
                     display: flex
                     flex-wrap: wrap
                     justify-content: space-between
                     gap: $spacing-3
-                    > *
-                        width: 100%
-                        min-width: initial
                     @include media-breakpoint-down(md)
                         > :nth-child(2):not(:last-child)
                             width: columns(6)
                         > :last-child:nth-child(3)
                             width: columns(6)
-                    @include meta
-                    a[download]
-                        @extend .button-alt
-                        @include button-icon(download-2-line)
-                        min-width: initial
-                        &::after
-                            font-size: 1.2em
                     @include media-breakpoint-up(md)
                         flex-direction: column
                         justify-content: flex-start
@@ -124,9 +112,15 @@ ol.programs
                         width: columns(3)
                         > *
                             width: 100%
-                @include media-breakpoint-up(md)
-                    display: flex
-                    justify-content: space-between
+                    > *
+                        width: 100%
+                        min-width: initial
+                    a[download]
+                        @extend .button-alt
+                        @include button-icon(download-2-line)
+                        min-width: initial
+                        &::after
+                            font-size: 1.2em
     &:not(.full-width)
         .document-content
             .lead
@@ -150,9 +144,6 @@ ol.programs
             section:not(.block) > * + *
                 margin-top: 1em
             .blocks
-                section > * + * // TODO : check that
-                    margin-top: 0
-                    @include h3
                 @include media-breakpoint-down(desktop)
                     padding-top: $spacing-5
                     margin-left: var(--grid-gutter-negative)
@@ -166,15 +157,16 @@ ol.programs
                             padding-left: 0
                     .block-content
                         padding-left: 0
-    @include media-breakpoint-down(desktop)
-        .document-content
+                section > * + * // TODO : check that
+                    @include h3
+                    margin-top: 0
+        @include media-breakpoint-down(desktop)
             .content
                 > h2
                     margin-bottom: $spacing-4
             section:not(:first-child):not(.block)
                 margin-top: $spacing-5
-    @include media-breakpoint-up(desktop)
-        .document-content
+        @include media-breakpoint-up(desktop)
             .program-summary
                 margin-bottom: $spacing-6
             .content
