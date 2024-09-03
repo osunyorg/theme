@@ -1,0 +1,16 @@
+{{- $has_text := false -}}
+{{- range .images }}
+  {{- if .text }}
+    {{- $has_text = true -}}
+  {{ end -}}
+{{ end -}}
+
+<div class="gallery{{- if $has_text }} gallery--with-text {{ end -}}">
+{{ range .images }}
+  {{ partial "blocks/templates/gallery/image.html" (dict
+    "image"    .
+    "sizes"    site.Params.image_sizes.blocks.gallery.grid
+    )
+  }}
+{{ end }}
+</div>

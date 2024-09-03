@@ -1,0 +1,60 @@
+{{- $image := partial "GetMedia" .image.id -}}
+{{- $image_class := printf "image-%s" (partial "GetImageDirection" .image) -}}
+{{ $is_carousel := .is_carousel }}
+{{ $role := .role }}
+{{ $index := .index }}
+{{ $sizes := .sizes }}
+
+{{- if $image -}}
+  {{ with .image}}
+    <figure
+      {{ if $is_carousel }} 
+        id="carousel-item-{{$index}}" 
+        role="{{$role}}" 
+        aria-roledescription="slide" 
+        class="carousel__slide" 
+        aria-label="item-{{$index}} {{- with or .text .alt .credit }} | {{ . | plainify }} {{- end }}" 
+      {{ else }}
+        role="figure"  
+        class="{{ $image_class  }}" 
+        {{- with or .text .alt .credit }} 
+          aria-label="{{ . | plainify }}" 
+        {{ end }}
+      {{ end }}
+    >
+
+    {{ partial "commons/image.html"
+      (dict
+      "image"  .id
+      "alt"    .alt
+      "sizes"  $sizes)
+    }}
+    
+    {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+      {{ $lightbox_text := false }}
+      {{ if and .text .credit }}
+        {{ $lightbox_text = delimit (slice .text .credit) " / " }}
+      {{ else }}
+        {{ $lightbox_text = or .text .credit }}
+      {{ end }}
+      
+      {{ partial "commons/lightbox/lightbox-launcher.html" (dict
+        "description" $lightbox_text
+        "image" .file
+        )
+      }}
+    {{ end }}
+
+    {{ if or .text .credit }}
+      <figcaption>
+        {{ with .text }}
+          <p>{{ . | safeHTML }}</p>
+        {{ end }}
+        {{ with .credit }}
+          <div class="credit">{{ . | safeHTML }}</div>
+        {{ end }}
+      </figcaption>
+    {{ end }}
+  </figure>
+  {{ end }}
+{{ end }}
