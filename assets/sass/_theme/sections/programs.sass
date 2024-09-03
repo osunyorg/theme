@@ -71,6 +71,9 @@ ol.programs
             @include media-breakpoint-up(md)
                 margin-top: $spacing-5
             .container
+                @include media-breakpoint-up(md)
+                    display: flex
+                    justify-content: space-between
                 .hero-essential
                     @include meta
                     color: $header-color
@@ -103,36 +106,33 @@ ol.programs
                                 padding-top: $spacing-2
 
                 .hero-actions
-                    margin-top: $spacing-3
+                    @include meta
                     display: flex
                     flex-wrap: wrap
-                    justify-content: space-between
                     gap: $spacing-3
+                    justify-content: space-between
+                    margin-top: $spacing-3
+                    @include media-breakpoint-up(md)
+                        flex-direction: column
+                        justify-content: flex-start
+                        margin-top: 0
+                        width: columns(3)
+
                     > *
-                        width: 100%
                         min-width: initial
-                    @include media-breakpoint-down(md)
-                        > :nth-child(2):not(:last-child)
-                            width: columns(6)
-                        > :last-child:nth-child(3)
-                            width: columns(6)
-                    @include meta
+                        width: 100%
+                    >  :not(.website)
+                        width: columns(6)
+                        @include media-breakpoint-up(md)
+                            width: 100%
+                                
                     a[download]
                         @extend .button-alt
                         @include button-icon(download-2-line)
                         min-width: initial
                         &::after
                             font-size: 1.2em
-                    @include media-breakpoint-up(md)
-                        flex-direction: column
-                        justify-content: flex-start
-                        margin-top: 0
-                        width: columns(3)
-                        > *
-                            width: 100%
-                @include media-breakpoint-up(md)
-                    display: flex
-                    justify-content: space-between
+
     &:not(.full-width)
         .document-content
             .lead

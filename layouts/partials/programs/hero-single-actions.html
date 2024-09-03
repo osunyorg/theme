@@ -3,7 +3,7 @@
     {{ $target := .Params.website_url }}
     {{ $label := (i18n "programs.website") }}
     {{ if and $target $label }}
-      <a href="{{ $target }}" class="btn">{{ $label }}</a>
+      <a href="{{ $target }}" class="btn website">{{ $label }}</a>
     {{ end }}
   {{ end }}
   {{ if site.Params.programs.share_links.enabled | default site.Params.share_links.enabled }}
