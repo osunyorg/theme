@@ -5,7 +5,7 @@
   {{ if .file }}
     {{- $image := partial "GetMedia" .file -}}
     {{- if $image -}}
-      <figure {{ if $is_carousel }} id="carousel-item-{{$index}}" role="{{$role}}" aria-roledescription="slide" class="carousel__slide" aria-label="item-{{$index}}" {{ end }}>
+      <figure role="figure" {{ if $is_carousel }} id="carousel-item-{{$index}}" role="{{$role}}" aria-roledescription="slide" class="carousel__slide" aria-label="item-{{$index}} {{- with or .text .alt .credit }} | {{ . | plainify }} {{- end }}" {{ end }}>
         {{ partial "commons/image.html"
           (dict
             "image"    .id
