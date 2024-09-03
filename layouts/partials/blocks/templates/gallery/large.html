@@ -19,14 +19,11 @@
               {{ $lightbox_text = or .text .credit }}
             {{ end }}
             
-            <a  class="glightbox"
-                role="button"
-                data-glightbox="type: image; {{ with $lightbox_text }}description: {{ . | safeHTML }}{{ end }}"
-                href="{{ partial "GetLightboxUrl" (dict "id" .id) }}"
-                title="{{- i18n "commons.lightbox.link.title" -}}"
-                aria-label="{{- i18n "commons.lightbox.link.title" -}}">
-                <span class="sr-only">{{- i18n "commons.lightbox.link.title" -}}</span>
-            </a>
+            {{ partial "commons/lightbox/lightbox-launcher.html" (dict
+              "description" $lightbox_text
+              "image" .id
+              )
+            }}
           {{ end }}
           {{ if or .text .credit }}
             <figcaption>

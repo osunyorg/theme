@@ -65,16 +65,15 @@
               "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
               "lazy"     false
             ) }}
+
           {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
-            <a  class="glightbox"
-                role="button"
-                data-glightbox="type: image;{{ with .image.credit }}description: {{ partial "PrepareHTML" . }}{{ end }}"
-                href="{{ partial "GetLightboxUrl" .image }}"
-                title="{{- i18n "commons.lightbox.link.title" -}}"
-                aria-label="{{- i18n "commons.lightbox.link.title" -}}">
-                <span class="sr-only">{{- i18n "commons.lightbox.link.title" -}}</span>
-            </a>
+            {{ partial "commons/lightbox/lightbox-launcher.html" (dict
+              "description" .image.credit
+              "image" .image
+              )
+            }}
           {{ end }}
+
           {{ with .image.credit }}
             <figcaption tabindex="0">
               <div class="credit-content">
