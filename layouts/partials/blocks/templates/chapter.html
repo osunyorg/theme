@@ -30,24 +30,17 @@
             {{ end -}}
           </div>
           {{ if .image }}
-            <figure role="figure" class="{{- $image_class -}}" {{- with or .alt .credit }} aria-label="{{ . | plainify }}" {{ end }}>
-              {{ partial "commons/image.html"
-                (dict
-                  "image"    .image
-                  "alt"      .alt
-                  "sizes"    site.Params.image_sizes.blocks.chapter
-                )}}
-              {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
-                {{ partial "commons/lightbox/lightbox-launcher.html" (dict
-                    "description" .credit
-                    "image" .image
-                  )
-                }}
-              {{ end }}
-              {{ if partial "GetTextFromHTML" .credit }}
-                <figcaption>{{ partial "PrepareHTML" .credit }}</figcaption>
-              {{ end }}
-            </figure>
+          <!-- TODO Peut etre aligner la stucture des données avec les autres cas d'images -->
+            {{ partial "commons/image-figure.html" (dict
+              "image"    (dict 
+                          "alt" .alt
+                          "id" .image.id
+                          "file" .image.file
+                          "credit" .credit
+                          )
+              "sizes"    site.Params.image_sizes.blocks.chapter
+              )
+            }}
           {{ end -}}
         </div>
       </div>

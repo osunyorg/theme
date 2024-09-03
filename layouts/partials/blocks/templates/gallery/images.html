@@ -5,11 +5,20 @@
   {{ end -}}
 {{ end -}}
 
+{{ $sizes := "" }}
+{{if eq .layout "grid"}}
+  {{ $sizes = site.Params.image_sizes.blocks.gallery.grid }}
+{{ else if eq .layout "large" }}
+  {{ $sizes = site.Params.image_sizes.blocks.gallery.large }}
+{{ else }}
+  {{ $sizes = site.Params.image_sizes.blocks.image }}
+{{ end }}
+
 <div class="gallery{{- if $has_text }} gallery--with-text {{ end -}}">
 {{ range .images }}
-  {{ partial "blocks/templates/gallery/image.html" (dict
+  {{ partial "commons/image-figure.html" (dict
     "image"    .
-    "sizes"    site.Params.image_sizes.blocks.gallery.grid
+    "sizes"    $sizes
     )
   }}
 {{ end }}

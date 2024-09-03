@@ -1,28 +1,34 @@
 {{- $image := partial "GetMedia" .image.id -}}
+
 {{- $image_class := printf "image-%s" (partial "GetImageDirection" .image) -}}
+
 {{ $is_carousel := .is_carousel }}
-{{ $role := .role }}
+{{ $is_lightbox := false }}
+
+{{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+  {{ $is_lightbox = true }}
+{{ end }}
+
+{{ $role := (or .role "figure")}}
+
 {{ $index := .index }}
 {{ $sizes := .sizes }}
 
 {{- if $image -}}
   {{ with .image}}
     <figure
-      {{ if $is_carousel }} 
+    role="{{$role}}" 
+    class="{{ $image_class }}{{ if $is_carousel }} carousel__slide {{ end }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
+    {{ if $is_carousel }} 
         id="carousel-item-{{$index}}" 
-        role="{{$role}}" 
         aria-roledescription="slide" 
-        class="carousel__slide" 
         aria-label="item-{{$index}} {{- with or .text .alt .credit }} | {{ . | plainify }} {{- end }}" 
       {{ else }}
-        role="figure"  
-        class="{{ $image_class  }}" 
         {{- with or .text .alt .credit }} 
           aria-label="{{ . | plainify }}" 
         {{ end }}
       {{ end }}
     >
-
     {{ partial "commons/image.html"
       (dict
       "image"  .id
@@ -30,7 +36,7 @@
       "sizes"  $sizes)
     }}
     
-    {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+    {{ if $is_lightbox}}
       {{ $lightbox_text := false }}
       {{ if and .text .credit }}
         {{ $lightbox_text = delimit (slice .text .credit) " / " }}
@@ -40,7 +46,7 @@
       
       {{ partial "commons/lightbox/lightbox-launcher.html" (dict
         "description" $lightbox_text
-        "image" .file
+        "image" .id
         )
       }}
     {{ end }}
