@@ -31,8 +31,12 @@
     &--list
         @include media-breakpoint-up(desktop)
             .location
+                border-bottom: 1px solid var(--color-border)
                 flex-direction: row
                 gap: calc(var(--grid-gutter) / 2) var(--grid-gutter)
+                padding-bottom: $spacing-3
+                + .location
+                    margin-top: $spacing-3
                 &-content
                     order: 2
                 .media
