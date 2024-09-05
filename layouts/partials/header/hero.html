@@ -58,31 +58,13 @@
       </div>
 
       {{ if .image }}
-        <figure>
-          {{ partial "commons/image.html"
-            (dict
-              "image"    .image
-              "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
-              "lazy"     false
-            ) }}
-          {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
-            <a  class="glightbox"
-                role="button"
-                data-glightbox="type: image;{{ with .image.credit }}description: {{ partial "PrepareHTML" . }}{{ end }}"
-                href="{{ partial "GetLightboxUrl" .image }}"
-                title="{{- i18n "commons.lightbox.link.title" -}}"
-                aria-label="{{- i18n "commons.lightbox.link.title" -}}">
-                <span class="sr-only">{{- i18n "commons.lightbox.link.title" -}}</span>
-            </a>
-          {{ end }}
-          {{ with .image.credit }}
-            <figcaption tabindex="0">
-              <div class="credit-content">
-                {{ partial "PrepareHTML" . }}
-              </div>
-            </figcaption>
-          {{ end }}
-        </figure>
+        <!-- TODO Peut etre aligner la stucture des données avec les autres cas d'images -->
+        {{ partial "commons/image-figure.html" (dict
+          "image"    .image
+          "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
+          "lazy"      false
+          )
+        }}
       {{ end }}
     </div>
   </div>
