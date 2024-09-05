@@ -55,20 +55,15 @@ ol.programs
                     .diploma-certification
                         width: columns(4)
                         @include media-breakpoint-up(md)
-                            width: columns(2)
+                            width: offset(1)
                             picture
                                 max-width: 100%
-                        @include media-breakpoint-up(desktop)              
-                                .diploma-certification
-                                    width: calc(var(--grid-gutter) + var(--column-width))
-
                         img
                             display: block
 
-
         .essential-container
             margin-top: $spacing-3
-@include media-breakpoint-up(md)
+            @include media-breakpoint-up(md)
                 display: flex
                 justify-content: space-between
                 margin-top: $spacing-5
@@ -103,33 +98,33 @@ ol.programs
                         &:not(:first-of-type)
                             padding-top: $spacing-2
 
-                .hero-actions
-                    @include meta
-                    display: flex
-                    flex-wrap: wrap
-                    gap: $spacing-3
-                    justify-content: space-between
-                    margin-top: $spacing-3
-                    @include media-breakpoint-up(md)
-                        flex-direction: column
-                        justify-content: flex-start
-                        margin-top: 0
-                        width: columns(3)
+            .hero-actions
+                @include meta
+                display: flex
+                flex-wrap: wrap
+                gap: $spacing-3
+                justify-content: space-between
+                margin-top: $spacing-3
+                @include media-breakpoint-up(md)
+                    flex-direction: column
+                    justify-content: flex-start
+                    margin-top: 0
+                    width: columns(3)
 
-                    > *
-                        min-width: initial
+                > *
+                    min-width: initial
+                    width: 100%
+                >  :not(.website)
+                    width: columns(6)
+                    @include media-breakpoint-up(md)
                         width: 100%
-                    >  :not(.website)
-                        width: columns(6)
-                        @include media-breakpoint-up(md)
-                            width: 100%
-                                
-                    a[download]
-                        @extend .button-alt
-                        @include button-icon(download-2-line)
-                        min-width: initial
-                        &::after
-                            font-size: 1.2em
+                            
+                a[download]
+                    @extend .button-alt
+                    @include button-icon(download-2-line)
+                    min-width: initial
+                    &::after
+                        font-size: 1.2em
 
     &:not(.full-width)
         .document-content
