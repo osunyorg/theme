@@ -1,0 +1,18 @@
+.block-papers
+    .top
+        .block-title a
+            @include icon(arrow, after, true)
+            @include hover-translate-icon(after)
+    .papers
+        .paper
+            border-bottom: 1px solid var(--color-border)
+            margin-bottom: $spacing-3
+            padding-bottom: $spacing-3
+            @include in-page-without-sidebar
+                > div
+                    display: flex
+                    gap: var(--grid-gutter)
+                .paper-title
+                    flex: 1
+                .paper-meta
+                    width: columns(4)
