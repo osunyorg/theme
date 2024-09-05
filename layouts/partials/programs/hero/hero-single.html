@@ -1,11 +1,9 @@
 {{ $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero" }}
-{{ $display_breadcrumb := .Params.breadcrumb | default true }}
-
 <header class="hero {{ if $breadcrumb_is_after_hero }} hero--no-margin {{ end }}">
 
   <div class="container">
-    {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-start") }}
-      {{ partial "header/breadcrumbs.html" }}
+    {{ if (eq site.Params.breadcrumb.position "hero-start") }}
+      {{ partial "header/breadcrumbs.html" . }}
     {{ end }}
     <div class="content">
       {{ partial "programs/hero/text.html" . }}
@@ -18,15 +16,15 @@
       {{ partial "programs/hero/actions.html" . }}
   </div>
 
-  {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-end") }}
+  {{ if (eq site.Params.breadcrumb.position "hero-end") }}
     <div class="container breadcrumb-container">
-      {{ partial "header/breadcrumbs.html" }}
+      {{ partial "header/breadcrumbs.html" . }}
     </div>
   {{ end }}
 </header>
 
-{{ if and $display_breadcrumb $breadcrumb_is_after_hero }}
+{{ if $breadcrumb_is_after_hero }}
   <div class="container breadcrumb-container">
-    {{ partial "header/breadcrumbs.html" }}
+    {{ partial "header/breadcrumbs.html" . }}
   </div>
 {{ end }}
