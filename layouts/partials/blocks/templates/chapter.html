@@ -32,15 +32,14 @@
           {{ if .image }}
           <!-- TODO Peut etre aligner la stucture des données avec les autres cas d'images -->
             {{ partial "commons/image-figure.html" (dict
-              "image"    (dict 
-                          "alt" .alt
-                          "id" .image.id
-                          "file" .image.file
-                          "credit" .credit
-                          )
-              "sizes"    site.Params.image_sizes.blocks.chapter
-              )
-            }}
+              "image" (dict 
+                        "alt" .alt
+                        "id" .image.id
+                        "file" .image.file
+                        "credit" .credit
+                      )
+              "sizes" site.Params.image_sizes.blocks.chapter
+            ) }}
           {{ end -}}
         </div>
       </div>
