@@ -32,15 +32,11 @@
         @include media-breakpoint-up(desktop)
             .location
                 border-bottom: 1px solid var(--color-border)
-                flex-direction: row
-                gap: calc(var(--grid-gutter) / 2) var(--grid-gutter)
+                flex-direction: row-reverse
+                gap: var(--grid-gutter)
                 padding-bottom: $spacing-3
                 + .location
                     margin-top: $spacing-3
-                &-content
-                    order: 2
-                .media
-                    order: 1
                 @include in-page-with-sidebar
                     &-content
                         width: 100%
@@ -49,12 +45,15 @@
 
                 @include in-page-without-sidebar
                     &-content
-                        @include grid(2)
+                        display: flex
                         flex: 1
+                        gap: var(--grid-gutter) var(--grid-gutter)
                     &-description
                         display: flex
                         flex-direction: column
                         gap: $spacing-1
+                    &-title
+                        min-width: columns(4)
                     .media
                         width: columns(4)
 
