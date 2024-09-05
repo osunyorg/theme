@@ -1,0 +1,23 @@
+<div class="hero-actions">
+  {{ if site.Params.programs.single.options.website_link }}
+    {{ $target := .Params.website_url }}
+    {{ $label := (i18n "programs.website") }}
+    {{ if and $target $label }}
+      <a href="{{ $target }}" class="btn website">{{ $label }}</a>
+    {{ end }}
+  {{ end }}
+  {{ if site.Params.programs.share_links.enabled | default site.Params.share_links.enabled }}
+    <div class="dropdown-share">
+      <button type="button" aria-expanded="false">{{ i18n "commons.share" }}</button>
+      <div class="dropdown-menu">
+        {{ partial "commons/share.html" . }}
+      </div>
+    </div>
+  {{ end }}
+  {{ partial "commons/download-link" (dict 
+    "id" .Params.downloadable_summary
+    "title" (i18n "commons.download.singular_name")
+    "use_filename_for_a11y_title" true
+    "class" "btn"
+  ) }}
+</div>
