@@ -116,11 +116,13 @@ class TableOfContents {
         this.links.forEach((link) => {
             if (link === currentLink) {
                 link.classList.add(CLASSES.linkActive);
+                link.setAttribute('aria-current', 'true');
                 this.updateCtaTitle(link);
                 this.state.id = id;
                 this.state.currentLink = link;
             } else {
-                link.classList.remove(CLASSES.linkActive)
+                link.classList.remove(CLASSES.linkActive);
+                link.removeAttribute('aria-current');
             }
         });
     }
