@@ -22,7 +22,12 @@
               
               {{ if and $options.summary  (partial "GetTextFromHTML" .Params.summary) }}
                 <div itemprop="abstract">
-                  {{ safeHTML .Params.summary }}
+                  {{ if and $options.summary .Params.summary }}
+                    {{ partial "GetElementSummary" ( dict 
+                      "summary" .Params.summary
+                      "kind" "projects"
+                    )}}
+                  {{ end }}
                 </div>
               {{ end }}
               <div class="project-meta">
