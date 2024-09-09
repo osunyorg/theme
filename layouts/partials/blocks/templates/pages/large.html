@@ -15,9 +15,11 @@
               {{- partial "PrepareHTML" .Title -}}
             </a>
           {{ $heading_tag.close }}
-  
-          {{ if and $options.summary  (partial "GetTextFromHTML" .Params.summary) }}
-            {{ safeHTML .Params.summary }}
+          {{ if and $options.summary .Params.summary }}
+            {{ partial "GetElementSummary" ( dict 
+              "summary" .Params.summary
+              "kind" "pages"
+            )}}
           {{ end }}
           <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
         </div>

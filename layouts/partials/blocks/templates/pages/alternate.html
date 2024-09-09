@@ -22,8 +22,11 @@
           </a>
         {{ $heading_tag.close }}
 
-        {{ if and $options.summary  (partial "GetTextFromHTML" .Params.summary) }}
-          {{ safeHTML .Params.summary }}
+        {{ if and $options.summary .Params.summary }}
+          {{ partial "GetElementSummary" ( dict 
+            "summary" .Params.summary
+            "kind" "pages"
+          )}}
         {{ end }}
 
         {{ if site.Params.blocks.pages.alternate.more }}
