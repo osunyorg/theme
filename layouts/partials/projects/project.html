@@ -28,7 +28,7 @@
         
         {{ if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
           <div itemprop="abstract">
-            {{ partial "GetElementSummary" ( dict 
+            {{ partial "GetRichSummary" ( dict 
               "summary" .Params.summary
               "kind" "projects"
             )}}

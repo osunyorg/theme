@@ -59,7 +59,7 @@
 
       {{ if and $options.summary  (partial "GetTextFromHTML" .Params.summary) }}
         <div class="event-description" itemprop="description">
-          {{ partial "GetElementSummary" ( dict 
+          {{ partial "GetRichSummary" ( dict 
             "summary" .Params.summary
             "kind" "events"
           )}}
