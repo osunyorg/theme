@@ -31,12 +31,14 @@
                     </a>
                   {{ $heading_tag.close }}
 
-                  {{ if $options.summary }}
-                    {{ with $program.Params.summary | safeHTML}}
-                      <p itemprop="abstract">{{ . }}</p>
-                    {{ end }}
+                  {{ if and $options.summary $program.Params.summary }}
+                    <div itemprop="abstract">
+                      {{ partial "GetElementSummary" ( dict 
+                        "summary" $program.Params.summary
+                        "kind" "programs"
+                      )}}
+                    </div>
                   {{ end }}
-
                   <p class="more meta" aria-hidden="true">{{ i18n "commons.more" }}</p>
                 </div>
 
@@ -49,13 +51,11 @@
                         ) }}
                   </div>
                 {{ end }}
-
               </article>
             {{ end }}
           </div>
 
         {{ else }}
-
           <ol class="programs">
             {{ range .programs }}
               <li>
@@ -74,10 +74,13 @@
                     {{- end -}}
                   {{ end }}
 
-                  {{ if $options.summary }}
-                    {{ with $program.Params.summary }}
-                      <div itemprop="abstract">{{ partial "PrepareHTML" . }}</div>
-                    {{ end }}
+                  {{ if and $options.summary $program.Params.summary }}
+                    <div itemprop="abstract">
+                      {{ partial "GetElementSummary" ( dict 
+                        "summary" $program.Params.summary
+                        "kind" "programs"
+                      )}}
+                    </div>
                   {{ end }}
                 </div>
 

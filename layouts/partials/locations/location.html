@@ -17,7 +17,10 @@
 
       {{- if and .Params.summary  $options.summary -}}
         <div class="location-description" itemprop="description">
-          {{ safeHTML .Params.summary }}
+          {{ partial "GetElementSummary" ( dict 
+            "summary" .Params.summary
+            "kind" "locations"
+          )}}
         </div>
       {{- end -}}
     </div>

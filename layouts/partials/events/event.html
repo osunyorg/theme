@@ -59,7 +59,10 @@
 
       {{ if and $options.summary  (partial "GetTextFromHTML" .Params.summary) }}
         <div class="event-description" itemprop="description">
-          {{ safeHTML .Params.summary }}
+          {{ partial "GetElementSummary" ( dict 
+            "summary" .Params.summary
+            "kind" "events"
+          )}}
           {{ if eq $layout "large" }}
             <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
           {{ end }}
