@@ -1,0 +1,22 @@
+<li>
+  <div class="program-content">
+    <a href="{{ .hugo.permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .title)) }}">
+      {{- partial "PrepareHTML" .Title -}}
+    </a>
+    <div class="description">
+      {{ partial "GetElementSummary" ( dict 
+        "summary" .summary
+        "kind" "programs"
+      )}}
+    </div>
+  </div>
+  <div class="media">
+    {{- if .image -}}
+      {{- partial "commons/image.html"
+        (dict
+            "image"    .image
+            "sizes"    site.Params.image_sizes.sections.programs.item
+        ) -}}
+    {{- end -}}
+  </div>
+</li>

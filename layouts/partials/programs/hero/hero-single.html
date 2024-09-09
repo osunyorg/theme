@@ -1,0 +1,30 @@
+{{ $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero" }}
+<header class="hero {{ if $breadcrumb_is_after_hero }} hero--no-margin {{ end }}">
+
+  <div class="container">
+    {{ if (eq site.Params.breadcrumb.position "hero-start") }}
+      {{ partial "header/breadcrumbs.html" . }}
+    {{ end }}
+    <div class="content">
+      {{ partial "programs/hero/text.html" . }}
+      {{ partial "programs/hero/logos.html" . }}
+    </div>
+  </div>
+
+<div class="container essential-container" id="#{{ urlize (i18n "programs.toc.essential") }}">
+      {{ partial "programs/hero/essential.html" . }}
+      {{ partial "programs/hero/actions.html" . }}
+  </div>
+
+  {{ if (eq site.Params.breadcrumb.position "hero-end") }}
+    <div class="container breadcrumb-container">
+      {{ partial "header/breadcrumbs.html" . }}
+    </div>
+  {{ end }}
+</header>
+
+{{ if $breadcrumb_is_after_hero }}
+  <div class="container breadcrumb-container">
+    {{ partial "header/breadcrumbs.html" . }}
+  </div>
+{{ end }}

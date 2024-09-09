@@ -5,7 +5,10 @@
       {{- partial "PrepareHTML" .label -}}
     </a>
     <div class="description">
-      {{ partial "PrepareHTML" $program.Params.summary }}
+      {{ partial "GetElementSummary" ( dict 
+        "summary" .summary
+        "kind" "locations"
+      )}}
     </div>
   </div>
   <div class="media">

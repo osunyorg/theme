@@ -28,12 +28,10 @@
         
         {{ if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
           <div itemprop="abstract">
-            {{ if and $options.summary .Params.summary }}
-              {{ partial "GetElementSummary" ( dict 
-                "summary" .Params.summary
-                "kind" "projects"
-              )}}
-            {{ end }}
+            {{ partial "GetElementSummary" ( dict 
+              "summary" .Params.summary
+              "kind" "projects"
+            )}}
           </div>
         {{ end }}
 

@@ -20,14 +20,12 @@
                 <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
               {{ $heading_tag.close }}
               
-              {{ if and $options.summary  (partial "GetTextFromHTML" .Params.summary) }}
+              {{ if and $options.summary  .Params.summary }}
                 <div itemprop="abstract">
-                  {{ if and $options.summary .Params.summary }}
-                    {{ partial "GetElementSummary" ( dict 
-                      "summary" .Params.summary
-                      "kind" "projects"
-                    )}}
-                  {{ end }}
+                  {{ partial "GetElementSummary" ( dict 
+                    "summary" .Params.summary
+                    "kind" "projects"
+                  )}}
                 </div>
               {{ end }}
               <div class="project-meta">

@@ -41,14 +41,12 @@
             {{ end }}
           </div>
 
-          {{ if and $options.summary  (partial "GetTextFromHTML" .Params.summary) }}
+          {{ if and $options.summary  .Params.summary }}
             <div itemprop="abstract">
-              {{ if and $options.summary .Params.summary }}
-                {{ partial "GetElementSummary" ( dict 
-                  "summary" .Params.summary
-                  "kind" "posts"
-                )}}
-              {{ end }}
+              {{ partial "GetElementSummary" ( dict 
+                "summary" .Params.summary
+                "kind" "posts"
+              )}}
             </div>
           {{- end -}}
 
