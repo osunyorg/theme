@@ -34,21 +34,20 @@
                 padding-bottom: $spacing-3
                 + .location
                     margin-top: $spacing-3
+                &-content
+                    flex: 1
                 @include in-page-with-sidebar
-                    &-content
-                        width: 100%
                     .media
-                        max-width: columns(2)
-
+                        width: columns(2)
                 @include in-page-without-sidebar
-                    &-content
-                        display: flex
-                        flex: 1
-                        gap: var(--grid-gutter) var(--grid-gutter)
+                    &-content,
                     &-description
                         display: flex
+                    &-content
+                        gap: var(--grid-gutter)
+                    &-description
                         flex-direction: column
-                        gap: $spacing-1
+                        justify-content: space-between
                     &-title
                         min-width: columns(4)
                     .media
