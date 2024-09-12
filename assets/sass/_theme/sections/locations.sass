@@ -5,8 +5,6 @@
         gap: calc(var(--grid-gutter) / 2)
         justify-content: flex-end
         position: relative
-        + .location
-            margin-top: $spacing-4
         a
             @include stretched-link(after)
             text-decoration: none
@@ -21,8 +19,11 @@
             img
                 aspect-ratio: 3/2
                 object-fit: cover
-        &-description
-            margin-top: $spacing-1
+        @include media-breakpoint-down(desktop)
+            &-description
+                margin-top: $spacing-1
+            + .location
+                margin-top: $spacing-4
 
     &--list
         @include media-breakpoint-up(desktop)
@@ -58,10 +59,6 @@
             @include grid(2)
         @include in-page-without-sidebar
             @include grid(3)
-        @include media-breakpoint-up(desktop)
-            .location
-                + .location
-                    margin-top: 0
         .location-title
             @include h3
 
