@@ -15,3 +15,4 @@ import './blocks/videos.js';
 import './blocks/campus.js';
 import './utils/utils.js';
 import './components/carousel.js';
+import './design-system/accordion.js';

@@ -12,8 +12,8 @@
         )}}
         <div class="definitions">
           {{- range .elements }}
-            <details itemscope itemtype="https://schema.org/DefinedTerm">
-              <summary itemprop="name">{{ .title | safeHTML }}</summary>
+            <details id="TODO" itemscope itemtype="https://schema.org/DefinedTerm">
+              <summary itemprop="name" aria-controls="#TODO" aria-expanded="false">{{ .title | safeHTML }}</summary>
               <p itemprop="description">{{ .description | safeHTML }}</p>
             </details>
           {{ end -}}
