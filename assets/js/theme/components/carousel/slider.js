@@ -32,6 +32,7 @@ window.osuny.carousel.Slider.prototype = {
             left: this._slidePosition(index),
             behavior: behavior
         });
+        // this.slides[index].container.focus(); // forcer le focus comme ca fonctionnne mais annule l'effet smooth du scroll
         this._updateSlidesClasses();
         this._updateSlidesVisibilities();
     },
@@ -78,6 +79,7 @@ window.osuny.carousel.Slider.prototype = {
         this.slides.forEach(function (slide, i) {
             slideVisible = this._slideIsVisible(i);
             slide.setAriaHidden(!slideVisible);
+            slide.setFocusBehavior(slideVisible);
         }.bind(this));
     },
     _slideIsVisible: function (index) {

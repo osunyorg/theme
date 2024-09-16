@@ -29,6 +29,16 @@ window.osuny.carousel.Slide.prototype = {
     setAriaHidden (hidden) {
         this.container.setAttribute('aria-hidden', String(hidden));
     },
+    setFocusBehavior (visible) {
+        if (visible) {
+            this.setTabIndex(0);
+        } else {
+            this.setTabIndex(-1);
+        }
+    },
+    setTabIndex (n) {
+        this.container.setAttribute('tabindex', String(n));
+    },
     _isBefore: function () {
         return this.index < this.slider.index;
     },
