@@ -3,7 +3,6 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Carousel = function (element) {
     this.element = element;
-    this.elementId = element.getAttribute('id');
     this.slides = {
         current: 0,
         total: 0
@@ -81,9 +80,6 @@ window.osuny.carousel.Carousel.prototype = {
         this.pagination = new window.osuny.carousel.Pagination(paginationElement);
         if (paginationElement) {
             paginationElement.addEventListener(window.osuny.carousel.events.paginationButtonClicked, this._onPaginationButtonClicked.bind(this));
-            paginationElement.querySelectorAll('button').forEach(function (child) {
-                child.setAttribute('aria-describedby', String(this.elementId));
-            }.bind(this));
         }
     },
     _initializeArrows: function () {
@@ -92,9 +88,6 @@ window.osuny.carousel.Carousel.prototype = {
         if (arrowsElement) {
             arrowsElement.addEventListener(window.osuny.carousel.events.arrowsNext, this.next.bind(this));
             arrowsElement.addEventListener(window.osuny.carousel.events.arrowsPrevious, this.previous.bind(this));
-            arrowsElement.querySelectorAll('button').forEach(function (child) {
-                child.setAttribute('aria-describedby', String(this.elementId));
-            }.bind(this));
         }
     },
     _initializeSlider: function () {
@@ -109,14 +102,8 @@ window.osuny.carousel.Carousel.prototype = {
         this.autoplayer.setInterval(this.config.autoplayinterval);
         this.autoplayer.ariaLiveElement = this._findElement('container');
         if (this.autoplayerElement) {
-            this.autoplayerElement.addEventListener(
-                window.osuny.carousel.events.autoplayerTrigger,
-                this.next.bind(this)
-            );
-            this.autoplayerElement.addEventListener(
-                window.osuny.carousel.events.autoplayerProgression,
-                this._onAutoplayerProgression.bind(this)
-            );
+            this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerTrigger, this.next.bind(this));
+            this.autoplayerElement.addEventListener(window.osuny.carousel.events.autoplayerProgression, this._onAutoplayerProgression.bind(this));
             if (this.config.autoplay) {
                 this.autoplayer.enable();
             }
@@ -159,4 +146,4 @@ window.osuny.carousel.Carousel.prototype = {
             this.showSlide(index);
         }
     }
-}
+};

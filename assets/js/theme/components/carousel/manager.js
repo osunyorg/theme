@@ -20,14 +20,23 @@ window.osuny.carousel.manager = {
     _createCarousels: function () {
         var element,
             carousel,
-            i;
+            i,
+            carouselId = '';
         this.elements = document.getElementsByClassName(window.osuny.carousel.classes.carousel);
         for (i = 0; i < this.elements.length; i += 1) {
             element = this.elements[i];
-            element.setAttribute('id', window.osuny.carousel.classes.carousel + '-' + i);
+            carouselId = window.osuny.carousel.classes.carousel + '-' + i;
+            element.setAttribute('id', carouselId);
             carousel = new window.osuny.carousel.Carousel(element);
+            this._setCarouselAriaDescribedBy(element);
             this.carousels.push(carousel);
         }
+    },
+    _setCarouselAriaDescribedBy (carousel) {
+        var id = carousel.getAttribute('id');
+        carousel.querySelectorAll('button').forEach(function (child) {
+            child.setAttribute('aria-describedby', String(id));
+        }.bind(this));
     },
     _initializeListeners: function () {
         window.addEventListener(
