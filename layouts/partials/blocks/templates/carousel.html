@@ -25,7 +25,8 @@
       <ul class="carousel__pagination__tabcontainer {{ if .options.autoplay }} has_toggle {{ end }}" role="tablist">
         {{ range $slideindex, $content := .content }}
           <li>
-            <button id="carousel-tab-{{$slideindex}}" role="tab" aria-controls="carousel-item-{{$slideindex}}" aria-selected="false" class="carousel__pagination__page" type="button">
+            <button id="carousel-tab-{{$slideindex}}" aria-controls="carousel-item-{{$slideindex}}" aria-selected="false" class="carousel__pagination__page" type="button">
+              <span class="sr-only">{{ safeHTML (replace (i18n "commons.carousel.slideX") "%s" $slideindex)}}</span>
               <i></i>
             </button>
           </li>
