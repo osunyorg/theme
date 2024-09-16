@@ -11,7 +11,8 @@ window.osuny.carousel.Carousel = function (element) {
     this.state = {
         initialized: false,
         visible: false,
-        hasMouseOver: false
+        hasMouseOver: false,
+        hasFocus: false
     };
     this.windowResizeTimeout = null;
     this.lastScrollXTimeout = null;
@@ -143,6 +144,9 @@ window.osuny.carousel.Carousel.prototype = {
     },
     _onSliderScrollend: function () {
         var index = this.slider.currentSlideIndex();
+        if (this.state.hasFocus) {
+            this.slider.focusOnSlide(index);
+        }
         if (this.slides.current !== index) {
             this.showSlide(index);
         }

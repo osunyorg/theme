@@ -77,12 +77,14 @@ window.osuny.carousel.manager = {
             currentDistanceToCenter;
         for (i = 0; i < this.carousels.length; i += 1) {
             carousel = this.carousels[i];
+            carousel.state.hasFocus = false;
             currentDistanceToCenter = Math.abs(carousel.getCenterPositionY() - this.windowCenterY);
             if (currentDistanceToCenter < distance) {
                 distance = currentDistanceToCenter;
                 bestCandidate = carousel;
             }
         }
+        bestCandidate.state.hasFocus = true;
         return bestCandidate;
     },
     _onKeyPress: function (e) {

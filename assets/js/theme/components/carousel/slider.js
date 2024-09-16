@@ -46,6 +46,9 @@ window.osuny.carousel.Slider.prototype = {
     length: function () {
         return this.slides.length;
     },
+    focusOnSlide: function (index) {
+        this.slides[index].container.focus();
+    },
     currentSlideIndex: function () {
         // Le seuil permet d'éviter des erreurs d'arrondis qui causent un retour en slide 1, par étapes
         var currentWidth = 0,
