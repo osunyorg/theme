@@ -96,10 +96,7 @@ window.osuny.carousel.Carousel.prototype = {
         var sliderElement = this._findElement('slider');
         this.slider = new window.osuny.carousel.Slider(sliderElement);
         this.slides.total = this.slider.length();
-        sliderElement.addEventListener(
-            'scroll',
-            this._onSliderScroll.bind(this)
-        );
+        sliderElement.addEventListener('scroll', this._onSliderScroll.bind(this));
     },
     _initializeAutoplayer () {
         this.autoplayerElement = this._findElement('autoplayerToggle');
