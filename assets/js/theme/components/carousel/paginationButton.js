@@ -29,5 +29,8 @@ window.osuny.carousel.PaginationButton.prototype = {
         var event = new Event(window.osuny.carousel.events.paginationButtonClicked);
         event.index = this.index;
         this.pagination.dispatchEvent(event);
+    },
+    setAriaCurrent (current) {
+        this.element.setAttribute('aria-current', String(current));
     }
-}
+};

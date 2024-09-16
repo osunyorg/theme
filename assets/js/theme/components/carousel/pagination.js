@@ -23,6 +23,7 @@ window.osuny.carousel.Pagination.prototype = {
         if (this.element) {
             this.currentButton = this.buttons[index];
             this.currentButton.select();
+            this.currentButton.setAriaCurrent(true);
         }
     },
     setProgression: function (progression) {
@@ -32,7 +33,8 @@ window.osuny.carousel.Pagination.prototype = {
     },
     unselectAllButtons: function () {
         this.buttons.forEach(function (button) {
+            button.setAriaCurrent(false);
             button.unselect();
         });
     }
-}
+};
