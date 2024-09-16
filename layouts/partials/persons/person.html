@@ -5,6 +5,7 @@
   "close" ((printf "</h%d>" $heading) | safeHTML)
 ) }}
 {{ $person := .person }}
+{{ $role := .role }}
 
 <article class="person" itemscope itemtype="https://schema.org/Person">
   <div class="description">
@@ -17,10 +18,10 @@
         </a>
       {{ end }}
     {{ $heading_tag.close }}
-    {{ if and $options.summary (or $person.Params.summary $person.Params.summary) }}
+    {{ if and $options.summary (or $role $person.Params.summary) }}
       <p itemprop="jobTitle">
-        {{ if (partial "GetTextFromHTML" .role) }}
-          {{ partial "PrepareHTML" .role }}
+        {{ if (partial "GetTextFromHTML" $role) }}
+          {{ partial "PrepareHTML" $role }}
         {{ else if partial "GetTextFromHTML" $person.Params.summary }}
           {{ partial "PrepareHTML" $person.Params.summary }}
         {{ end }}
