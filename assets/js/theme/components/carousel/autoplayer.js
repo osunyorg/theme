@@ -46,13 +46,11 @@ window.osuny.carousel.Autoplayer.prototype = {
     pause: function () {
         this.paused = true;
         this._updateToggle();
-        this._updateAriaLiveElement();
     },
     unpause: function () {
         this.paused = false;
         this.softPaused = false;
         this._updateToggle();
-        this._updateAriaLiveElement();
     },
     // Les méthodes soft se produisent quand on passe sur le carousel avec la souris.
     // L'idée est de permettre aux personnes de lire une citation.
@@ -106,11 +104,6 @@ window.osuny.carousel.Autoplayer.prototype = {
         }
         this.icons.play.setAttribute('aria-hidden', !this.paused);
         this.icons.pause.setAttribute('aria-hidden', this.paused);
-    },
-    _updateAriaLiveElement: function() {
-        if (!this.ariaLiveElement) { return }
-        var state = this.paused ? "off" : "polite";
-        this.ariaLiveElement.setAttribute("aria-live", state);
     },
     _onClick: function () {
         if (this.paused) {
