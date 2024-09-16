@@ -26,6 +26,9 @@ window.osuny.carousel.Slide.prototype = {
         this._setState(this._isNext(), window.osuny.carousel.classes.slideIsNext);
         this._setState(this._isAfter(), window.osuny.carousel.classes.slideIsAfter);
     },
+    setAriaHidden (hidden) {
+        this.container.setAttribute('aria-hidden', String(hidden));
+    },
     _isBefore: function () {
         return this.index < this.slider.index;
     },

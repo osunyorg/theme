@@ -7,18 +7,21 @@ window.osuny.carousel.Slider = function Slider (element) {
         slideContainer = null,
         i;
     this.element = element;
+    this.containerWidth = this.element.getBoundingClientRect().width;
     this._findElement = window.osuny.carousel.utils.findElement.bind(this);
     this.container = this._findElement('container');
     this.index = 0;
     this.slides = [];
     this.deltaPosition = 0;
-    this.drag = null;
     slidesContainers = this.container.children;
     for (i = 0; i < slidesContainers.length; i += 1) {
         slideContainer = slidesContainers.item(i);
         this.slides.push(new window.osuny.carousel.Slide(this, slideContainer, i));
     }
     this.showSlide(this.index);
+    this.element.addEventListener('scroll', function () {
+        this._updateSlidesVisibilities();
+    }.bind(this));
 };
 window.osuny.carousel.Slider.prototype = {
     showSlide: function (index) {
@@ -30,8 +33,10 @@ window.osuny.carousel.Slider.prototype = {
             behavior: behavior
         });
         this._updateSlidesClasses();
+        this._updateSlidesVisibilities();
     },
     recompute: function () {
+        this.containerWidth = this.element.getBoundingClientRect().width;
         this.slides.forEach(function (slide) {
             slide.computeWidth();
         });
@@ -67,5 +72,21 @@ window.osuny.carousel.Slider.prototype = {
         this.slides.forEach(function (slide) {
             slide.setClasses();
         });
+    },
+    _updateSlidesVisibilities: function () {
+        var slideVisible = false;
+        this.slides.forEach(function (slide, i) {
+            slideVisible = this._slideIsVisible(i);
+            slide.setAriaHidden(!slideVisible);
+        }.bind(this));
+    },
+    _slideIsVisible: function (index) {
+        var slidePos = {
+            min: null,
+            max: null
+        };
+        slidePos.min = this._slidePosition(index) - this.element.scrollLeft;
+        slidePos.max = slidePos.min + this.slides[index].width;
+        return slidePos.min >= -2 && slidePos.max <= this.containerWidth + 2;
     }
 };
