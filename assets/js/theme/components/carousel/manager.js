@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
@@ -39,18 +40,9 @@ window.osuny.carousel.manager = {
         }.bind(this));
     },
     _initializeListeners: function () {
-        window.addEventListener(
-            'resize',
-            this._resize.bind(this)
-        );
-        window.addEventListener(
-            'scroll',
-            this._findCarouselsInViewport.bind(this)
-        );
-        window.addEventListener(
-            'keydown',
-            this._onKeyPress.bind(this)
-        );
+        window.addEventListener('resize', this._resize.bind(this));
+        window.addEventListener('scroll', this._findCarouselsInViewport.bind(this));
+        window.addEventListener('keydown', this._onKeyPress.bind(this));
     },
     _resize: function () {
         this._computeWindowCenterY();

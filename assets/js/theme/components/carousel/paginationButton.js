@@ -1,7 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
-window.osuny.carousel.PaginationButton = function PaginationButton(element, index, pagination) {
+window.osuny.carousel.PaginationButton = function PaginationButton (element, index, pagination) {
     this.element = element;
     this.index = index;
     this.pagination = pagination;

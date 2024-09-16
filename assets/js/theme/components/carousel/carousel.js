@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
@@ -109,11 +110,11 @@ window.osuny.carousel.Carousel.prototype = {
             }
         }
     },
-    _pointerStart: function() {
+    _pointerStart: function () {
         this.autoplayer.softPause();
         this.state.hasMouseOver = true;
     },
-    _pointerEnd: function() {
+    _pointerEnd: function () {
         this.autoplayer.softUnpause();
         this.state.hasMouseOver = false;
     },
