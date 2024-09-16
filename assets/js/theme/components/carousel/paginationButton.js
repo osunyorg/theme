@@ -5,33 +5,25 @@ window.osuny.carousel.PaginationButton = function PaginationButton(element, inde
     this.element = element;
     this.index = index;
     this.pagination = pagination;
-    this.progressBar = this.element.querySelector("i");
-    this._setAria();
+    this.progressBar = this.element.querySelector('i');
     this.setProgression(0);
-    this.element.addEventListener(
-        "click",
-        this._onClick.bind(this)
-    );
-}
+    this.element.addEventListener('click', this._onClick.bind(this));
+};
 
 window.osuny.carousel.PaginationButton.prototype = {
     setProgression: function (progression) {
+        var percent;
         this.progression = progression;
-        var percent = String(this.progression * 100) + "%";
-        this.progressBar.style.setProperty("width", percent);
+        percent = String(this.progression * 100) + '%';
+        this.progressBar.style.setProperty('width', percent);
     },
     select: function () {
         this.setProgression(1);
-        this.element.setAttribute("aria-selected", "true");
+        this.element.setAttribute('aria-selected', 'true');
     },
     unselect: function () {
         this.setProgression(0);
-        this.element.setAttribute("aria-selected", "false");
-    },
-    _setAria: function () {
-        var ariaLabel = this.element.getAttribute("aria-label"),
-            ariaNewLabel = ariaLabel.replace("%s", this.index);
-        this.element.setAttribute("aria-label", ariaNewLabel);
+        this.element.setAttribute('aria-selected', 'false');
     },
     _onClick: function () {
         var event = new Event(window.osuny.carousel.events.paginationButtonClicked);

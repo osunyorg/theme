@@ -3,10 +3,11 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Carousel = function (element) {
     this.element = element;
+    this.elementId = element.getAttribute('id');
     this.slides = {
         current: 0,
         total: 0
-    }
+    };
     this.state = {
         initialized: false,
         visible: false,
@@ -23,7 +24,7 @@ window.osuny.carousel.Carousel = function (element) {
     this._initializeMouseEvents();
     this.showSlide(0);
     this.state.initialized = true;
-}
+};
 window.osuny.carousel.Carousel.prototype = {
     next: function () {
         var index = this.slides.current + 1;
@@ -31,7 +32,6 @@ window.osuny.carousel.Carousel.prototype = {
             index = 0;
         }
         this.showSlide(index);
-        this.arrows.next.focus();
     },
     previous: function () {
         var index = this.slides.current - 1;
@@ -40,7 +40,6 @@ window.osuny.carousel.Carousel.prototype = {
             index = this.slides.total - 1;
         }
         this.showSlide(index);
-        this.arrows.previous.focus();
     },
     showSlide: function (index) {
         this.slides.current = index;
@@ -82,14 +81,20 @@ window.osuny.carousel.Carousel.prototype = {
         this.pagination = new window.osuny.carousel.Pagination(paginationElement);
         if (paginationElement) {
             paginationElement.addEventListener(window.osuny.carousel.events.paginationButtonClicked, this._onPaginationButtonClicked.bind(this));
+            paginationElement.querySelectorAll('button').forEach(function (child) {
+                child.setAttribute('aria-describedby', String(this.elementId));
+            }.bind(this));
         }
     },
-    _initializeArrows: function  () {
+    _initializeArrows: function () {
         var arrowsElement = this._findElement('arrows');
         this.arrows = new window.osuny.carousel.Arrows(arrowsElement);
         if (arrowsElement) {
             arrowsElement.addEventListener(window.osuny.carousel.events.arrowsNext, this.next.bind(this));
             arrowsElement.addEventListener(window.osuny.carousel.events.arrowsPrevious, this.previous.bind(this));
+            arrowsElement.querySelectorAll('button').forEach(function (child) {
+                child.setAttribute('aria-describedby', String(this.elementId));
+            }.bind(this));
         }
     },
     _initializeSlider: function () {
