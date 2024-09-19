@@ -214,8 +214,10 @@ ol.persons--list
             > div:first-of-type
                 grid-column: 1 / 9
                 + .roles
-                    grid-column: 9 / 13
-                    text-align: right
+                    &,
+                    & + .roles
+                        grid-column: 9 / 13
+                        text-align: right
             .lead + div
                 margin-top: $spacing-4
     .contacts-details ul
