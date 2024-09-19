@@ -43,7 +43,7 @@
 
       <div class="informations">
         {{ if .Content }}
-          <div>
+          <div class="biography">
             {{ partial "persons/summary.html" (dict
               "context" .
             ) }}
@@ -54,16 +54,18 @@
             {{ end }}
           </div>
         {{ end }}
-        {{ range $programsForAdministrator }}
-        {{ $program := . }}
+        {{ if $programsForAdministrator }}
           <div class="roles">
-            {{ range .Params.roles }}
-              {{ $role := .title }}
-              {{ if in .persons $slug }}
-                <p>
-                  {{ safeHTML $role }}<br>
-                  <a href="{{ $program.Permalink }}" class="link">{{ safeHTML $program.Title }}</a>
-                </p>
+            {{ range $programsForAdministrator }}
+            {{ $program := . }}
+              {{ range .Params.roles }}
+                {{ $role := .title }}
+                {{ if in .persons $slug }}
+                  <p>
+                    {{ safeHTML $role }}<br>
+                    <a href="{{ $program.Permalink }}" class="link">{{ safeHTML $program.Title }}</a>
+                  </p>
+                {{ end }}
               {{ end }}
             {{ end }}
           </div>
