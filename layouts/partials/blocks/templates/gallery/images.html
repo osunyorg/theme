@@ -15,10 +15,11 @@
 {{ end }}
 
 <div class="gallery{{- if $has_text }} gallery--with-text {{ end -}}">
-{{ range .images }}
+{{ range $index, $image := .images }}
   {{ partial "commons/image-figure.html" (dict
     "image"    .
     "sizes"    $sizes
+    "index"    $index
     )
   }}
 {{ end }}

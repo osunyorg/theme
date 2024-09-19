@@ -1,2 +1,2 @@
-import './vendors/lightbox';
+// import './vendors/lightbox';
 import './theme/';

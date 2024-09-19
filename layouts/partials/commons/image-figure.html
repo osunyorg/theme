@@ -1,22 +1,25 @@
 {{ if .image.id }}
-
   {{ $index := .index }}
   {{ $sizes := .sizes }}
   {{ $lazy := default true .lazy }}
   {{ $role := (or .role "figure")}}
   {{ $is_carousel := .is_carousel }}
   {{ $is_lightbox := false }}
+  {{ $grouped_lightbox := false }}
   {{ $image := partial "GetMedia" .image.id }}
   {{ $image_class := printf "image-%s" (partial "GetImageDirection" .image) }}
 
   {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
     {{ $is_lightbox = true }}
+    {{ if $index }}
+      {{ $grouped_lightbox = true }}
+    {{ end }}
   {{ end }}
 
   {{ if $image }}
     {{ with .image}}
       <figure role="{{$role}}" 
-              class="{{ $image_class }}{{ if $is_carousel }} carousel__slide {{ end }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
+              class="{{ $image_class }}{{ if $is_carousel }} carousel__slide {{ end }}{{ if $is_lightbox }} lightbox-figure {{ if $grouped_lightbox }} lightbox-grouped lightbox-item-{{$index}} {{ else }} lightbox-single {{ end }}{{ end }}" 
             {{ if $is_carousel }} 
               id="carousel-item-{{$index}}" 
               aria-roledescription="slide" 
