@@ -42,16 +42,18 @@
       {{ end }}
 
       <div class="informations">
-        <div>
-          {{ partial "persons/summary.html" (dict
-            "context" .
-          ) }}
-          {{ if (partial "GetTextFromHTML" .Content) }}
-            <div class="rich-text">
-              {{ partial "PrepareHTML" .Content }}
-            </div>
-          {{ end }}
-        </div>
+        {{ if .Content }}
+          <div>
+            {{ partial "persons/summary.html" (dict
+              "context" .
+            ) }}
+            {{ if (partial "GetTextFromHTML" .Content) }}
+              <div class="rich-text">
+                {{ partial "PrepareHTML" .Content }}
+              </div>
+            {{ end }}
+          </div>
+        {{ end }}
         {{ range $programsForAdministrator }}
         {{ $program := . }}
           <div class="roles">
