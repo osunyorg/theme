@@ -1,8 +1,31 @@
 // temporaire en attendant les merge et la suppression de glightbox
-    
+
 a.glightbox
     @include stretched-link
 
 .lightbox
     &-figure
         position: relative
+    &-container
+        backdrop-filter: blur(5px)
+        background: rgba(0, 0, 0, 0.80)
+        bottom: 0
+        display: none
+        left: 0
+        position: fixed
+        right: 0
+        top: 0
+        z-index: 100
+    &-content
+        display: flex
+        height: 100vh
+        img
+            display: block
+            margin: auto
+            max-height: 100%
+            max-width: 100vw
+    &-controls
+        bottom: 0
+        position: absolute
+        right: 0
+        z-index: 101

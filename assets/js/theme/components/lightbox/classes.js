@@ -2,12 +2,15 @@ window.osuny = window.osuny || {};
 window.osuny.lightbox = window.osuny.lightbox || {};
 
 window.osuny.lightbox.classes = {
-    arrows: 'lightbox-arrows',
-    arrowsNext: 'arrow-next',
-    arrowsPrevious: 'arrow-prev',
-    lightbox: 'lightbox-figure',
-    container: 'lightbox-content',
-    groupedLightbox: 'lightbox-grouped',
-    singleLightbox: 'lightbox-single',
-    launcher: 'glightbox'
+    closeButton: 'close',
+    container: 'lightbox-container',
+    content: 'lightbox-content',
+    controls: 'lightbox-controls',
+    contentImage: 'lightbox-content-image',
+    creditButton: 'credit',
+    figure: 'lightbox-figure',
+    infoButton: 'info',
+    launcher: 'glightbox',
+    nextButton: 'next',
+    prevButton: 'prev'
 };
