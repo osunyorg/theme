@@ -24,6 +24,8 @@ window.osuny.lightbox.LightboxContainer.prototype = {
     show (lightbox) {
         this._removeImageContent();
         this._setImageContent(lightbox.url);
+        // maybe add description ou alt
+        this.content.focus();
     },
     _setImageContent (url) {
         var image = document.createElement('img');

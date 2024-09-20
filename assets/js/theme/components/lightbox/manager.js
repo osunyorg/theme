@@ -14,7 +14,7 @@ window.osuny.lightbox.manager = {
             this.bodyElement = document.querySelector('body');
             this.initialized = true;
         }
-        // Il y a au moins une lightbox das la page alors on crée le conteneur
+        // Il y a au moins une lightbox dans la page alors on crée le conteneur
         if (this.lightboxes.length > 0) {
             this._initializeContainer();
             this._initializeControlRack();
@@ -41,16 +41,16 @@ window.osuny.lightbox.manager = {
     },
     _initializeListeners () {
         var i = 0;
+        this.listeners.keyDown = this._onKeydown.bind(this);
+        this.listeners.close = this.close.bind(this);
+        this.listeners.next = this.next.bind(this);
+        this.listeners.previous = this.previous.bind(this);
         for (i = 0; i < this.lightboxes.length; i += 1) {
             this.lightboxes[i].launcher.addEventListener('click', function (event) {
                 event.preventDefault();
                 this._onLauncherClick(event);
             }.bind(this));
         }
-        this.listeners.keyDown = this._onKeydown.bind(this);
-        this.listeners.close = this.close.bind(this);
-        this.listeners.next = this.next.bind(this);
-        this.listeners.previous = this.previous.bind(this);
     },
     _onLauncherClick (event) {
         var index = event.target.getAttribute('value');
@@ -71,13 +71,7 @@ window.osuny.lightbox.manager = {
         this.container.show(this.currentLightbox);
         // update controlrack infos
     },
-    invoke: function () {
-        return {
-            initialize: this.initialize.bind(this),
-            lightboxes: this.lightboxes
-        };
-    },
-    _bindLightboxEvents () { 
+    _bindLightboxEvents () {
         this.controlRack.closeButton.addEventListener('click', this.listeners.close);
         this.controlRack.nextButton.addEventListener('click', this.listeners.next);
         this.controlRack.prevButton.addEventListener('click', this.listeners.previous);
@@ -114,6 +108,11 @@ window.osuny.lightbox.manager = {
         if (this.currentLightbox.previous) {
             this._setLightboxContent(this.currentLightbox.previous);
         }
+    },
+    invoke: function () {
+        return {
+            initialize: this.initialize.bind(this)
+        };
     }
 }.invoke();
 

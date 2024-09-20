@@ -1,5 +1,3 @@
-// temporaire en attendant les merge et la suppression de glightbox
-
 a.glightbox
     @include stretched-link
 
@@ -12,6 +10,7 @@ a.glightbox
         bottom: 0
         display: none
         left: 0
+        padding: $spacing-2
         position: fixed
         right: 0
         top: 0
@@ -22,10 +21,31 @@ a.glightbox
         img
             display: block
             margin: auto
-            max-height: 100%
-            max-width: 100vw
     &-controls
-        bottom: 0
+        bottom: $spacing-2
+        display: flex
         position: absolute
-        right: 0
+        right: $spacing-2
         z-index: 101
+        button
+            @include button-reset
+            @include meta
+            background-color: #FFFFFF
+            height: $spacing-4
+            margin: 0
+            padding: 0
+            width: $spacing-4
+            &:not(:last-child)
+                border-right: 1px solid #000000
+            &.next  
+                @include icon(arrow-right-s-line, before)
+            &.prev
+                @include icon(arrow-left-s-line, before)
+            &.credit
+                &::before
+                    content: '©'
+            &.info
+                &::before
+                    content: 'i'
+            &.close
+                @include icon(close-line, before)
