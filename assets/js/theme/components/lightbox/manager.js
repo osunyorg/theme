@@ -17,7 +17,6 @@ window.osuny.lightbox.manager = {
         // Il y a au moins une lightbox dans la page alors on crée le conteneur
         if (this.lightboxes.length > 0) {
             this._initializeContainer();
-            this._initializeControlRack();
             this._initializeListeners();
         }
     },
@@ -32,12 +31,12 @@ window.osuny.lightbox.manager = {
     },
     // one container handles all lightboxes contents
     _initializeContainer () {
-        var containerElement = document.getElementsByClassName(window.osuny.lightbox.classes.container).item(0);
+        var containerElement = document.getElementsByClassName(window.osuny.lightbox.classes.container).item(0),
+            controlRackElement = document.getElementsByClassName(window.osuny.lightbox.classes.controls).item(0),
+            popupDetailsElement = controlRackElement.getElementsByClassName(window.osuny.lightbox.classes.detailWindow).item(0);
         this.container = new window.osuny.lightbox.LightboxContainer(containerElement);
-    },
-    _initializeControlRack () {
-        var controlRackElement = document.getElementsByClassName(window.osuny.lightbox.classes.controls).item(0);
         this.controlRack = new window.osuny.lightbox.ControlRack(controlRackElement);
+        this.popupDetails = new window.osuny.lightbox.DetailWindow(popupDetailsElement);
     },
     _initializeListeners () {
         var i = 0;
@@ -45,6 +44,9 @@ window.osuny.lightbox.manager = {
         this.listeners.close = this.close.bind(this);
         this.listeners.next = this.next.bind(this);
         this.listeners.previous = this.previous.bind(this);
+        this.listeners.showDescription = this._showDescription.bind(this);
+        this.listeners.showCredit = this._showCredit.bind(this);
+        this.listeners.closePopup = this._closePopup.bind(this);
         for (i = 0; i < this.lightboxes.length; i += 1) {
             this.lightboxes[i].launcher.addEventListener('click', function (event) {
                 event.preventDefault();
@@ -67,25 +69,29 @@ window.osuny.lightbox.manager = {
         }
     },
     _setLightboxContent (index) {
+        this.popupDetails.close();
         this.currentLightbox = this.lightboxes[index];
         this.container.show(this.currentLightbox);
-        // update controlrack infos
+        this.controlRack.load(this.currentLightbox);
+        this.popupDetails.load(this.currentLightbox);
     },
     _bindLightboxEvents () {
+        document.addEventListener('keydown', this.listeners.keyDown);
         this.controlRack.closeButton.addEventListener('click', this.listeners.close);
         this.controlRack.nextButton.addEventListener('click', this.listeners.next);
         this.controlRack.prevButton.addEventListener('click', this.listeners.previous);
-        document.addEventListener('keydown', this.listeners.keyDown);
-        // todo infos
-        // todo credit
+        this.controlRack.infoButton.addEventListener('click', this.listeners.showDescription);
+        this.controlRack.creditButton.addEventListener('click', this.listeners.showCredit);
+        this.popupDetails.closeButton.addEventListener('click', this.listeners.closePopup);
     },
     _unbindLightboxEvents () {
+        document.removeEventListener('keydown', this.listeners.keyDown);
         this.controlRack.closeButton.removeEventListener('click', this.listeners.close);
         this.controlRack.nextButton.removeEventListener('click', this.listeners.next);
         this.controlRack.prevButton.removeEventListener('click', this.listeners.previous);
-        document.removeEventListener('keydown', this.listeners.keyDown);
-        // todo infos
-        // todo credit
+        this.controlRack.infoButton.removeEventListener('click', this.listeners.showDescription);
+        this.controlRack.creditButton.removeEventListener('click', this.listeners.showCredit);
+        this.popupDetails.closeButton.removeEventListener('click', this.listeners.closePopup);
     },
     open () {
         if (!this.container.opened) {
@@ -96,6 +102,8 @@ window.osuny.lightbox.manager = {
     },
     close () {
         this.container.close();
+        this.currentLightbox.launcher.focus();
+        this._closePopup();
         // handle events only when lightbox is opened
         this._unbindLightboxEvents();
     },
@@ -108,6 +116,29 @@ window.osuny.lightbox.manager = {
         if (this.currentLightbox.previous) {
             this._setLightboxContent(this.currentLightbox.previous);
         }
+    },
+    _showDescription () {
+        if (this.controlRack.infoOpened()) {
+            this._closePopup();
+        } else {
+            this.popupDetails.showDescription();
+            this.controlRack.showDescription();
+        }
+    },
+    _showCredit () {
+        if (this.controlRack.creditOpened()) {
+            this._closePopup();
+        } else {
+            this.popupDetails.showCredit();
+            this.controlRack.showCredit();
+        }
+    },
+    _closePopup (event = null) {
+        if (event) {
+            event.preventDefault();
+        }
+        this.popupDetails.close();
+        this.controlRack.closePopup();
     },
     invoke: function () {
         return {

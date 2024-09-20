@@ -12,7 +12,12 @@ window.osuny.lightbox.classes = {
     infoButton: 'info',
     launcher: 'glightbox',
     nextButton: 'next',
-    prevButton: 'prev'
+    prevButton: 'prev',
+    detailWindow: 'details-window',
+    detailWindowContent: 'details-window-content',
+    detailWindowTitleInformation: 'details-window-title-information',
+    detailWindowTitleCredit: 'details-window-title-credit',
+    detailWindowClose: 'details-window-close'
 };
 
 window.osuny.lightbox.dataAttribute = 'data-lightbox';

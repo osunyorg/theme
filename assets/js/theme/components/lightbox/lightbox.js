@@ -11,6 +11,7 @@ window.osuny.lightbox.Lightbox = function (element, index) {
     this.launcher = null;
     this.previous = null;
     this.next = null;
+    this.isGallery = false;
     this._initialize();
 };
 
@@ -25,6 +26,7 @@ window.osuny.lightbox.Lightbox.prototype = {
             this.description = options.description;
             this.credit = options.credit;
             if (options.gallery_values) {
+                this.isGallery = true;
                 this._initializeGroupOptions(options.gallery_values);
             }
         }
