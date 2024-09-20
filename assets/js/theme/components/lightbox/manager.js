@@ -69,6 +69,7 @@ window.osuny.lightbox.manager = {
     _setLightboxContent (index) {
         this.currentLightbox = this.lightboxes[index];
         this.container.show(this.currentLightbox);
+        // update controlrack infos
     },
     invoke: function () {
         return {
@@ -76,7 +77,7 @@ window.osuny.lightbox.manager = {
             lightboxes: this.lightboxes
         };
     },
-    _bindLightboxEvents () {
+    _bindLightboxEvents () { 
         this.controlRack.closeButton.addEventListener('click', this.listeners.close);
         this.controlRack.nextButton.addEventListener('click', this.listeners.next);
         this.controlRack.prevButton.addEventListener('click', this.listeners.previous);
@@ -95,18 +96,24 @@ window.osuny.lightbox.manager = {
     open () {
         if (!this.container.opened) {
             this.container.open();
+            // handle events only when lightbox is opened
             this._bindLightboxEvents();
         }
     },
     close () {
         this.container.close();
+        // handle events only when lightbox is opened
         this._unbindLightboxEvents();
     },
     next () {
-        // console.log("next image");
+        if (this.currentLightbox.next) {
+            this._setLightboxContent(this.currentLightbox.next);
+        }
     },
     previous () {
-        // console.log("previous image");
+        if (this.currentLightbox.previous) {
+            this._setLightboxContent(this.currentLightbox.previous);
+        }
     }
 }.invoke();
 

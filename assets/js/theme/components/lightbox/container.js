@@ -16,20 +16,21 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         this.opened = true;
     },
     close () {
-        this._flush();
+        this._removeImageContent();
         this.bodyElement.style.overflow = 'visible';
         this.element.style.display = 'none';
         this.opened = false;
     },
     show (lightbox) {
-        this._setImageContent(lightbox.imgData.url);
+        this._removeImageContent();
+        this._setImageContent(lightbox.url);
     },
     _setImageContent (url) {
         var image = document.createElement('img');
         image.setAttribute('src', url);
         this.content.append(image);
     },
-    _flush () {
+    _removeImageContent () {
         this.content.innerHTML = '';
     }
 };

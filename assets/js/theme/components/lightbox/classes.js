@@ -14,3 +14,5 @@ window.osuny.lightbox.classes = {
     nextButton: 'next',
     prevButton: 'prev'
 };
+
+window.osuny.lightbox.dataAttribute = 'data-lightbox';
