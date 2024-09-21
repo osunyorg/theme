@@ -56,8 +56,8 @@ window.osuny.lightbox.LightboxContainer.prototype = {
 
         // handling local event
         this.listeners.keyDown = this._onKeydown.bind(this);
-        this.listeners.description = this._showDescription.bind(this);
-        this.listeners.credit = this._showCredit.bind(this);
+        this.listeners.description = this._showPopup.bind(this, 'description');
+        this.listeners.credit = this._showPopup.bind(this, 'credit');
         this.listeners.closePopup = this._closePopup.bind(this);
 
         buttonEvents.forEach(function (eventname) {
@@ -99,26 +99,15 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         element.setAttribute('aria-hidden', String(!enabled));
         element.inert = !enabled;
     },
-    _showDescription () {
-        if (this.popupDetails.opened && this.popupDetails.current === 'description') {
+    _showPopup (popupContent) {
+        if (this.popupDetails.opened && this.popupDetails.current === popupContent) {
             this._closePopup();
         } else {
-            this.popupDetails.show('description');
-            this.controlRack.showDescription();
+            this.popupDetails.show(popupContent);
+            this.controlRack.show(popupContent);
         }
     },
-    _showCredit () {
-        if (this.popupDetails.opened && this.popupDetails.current === 'credit') {
-            this._closePopup();
-        } else {
-            this.popupDetails.show('credit');
-            this.controlRack.showCredit();
-        }
-    },
-    _closePopup (event = null) {
-        if (event) {
-            event.preventDefault();
-        }
+    _closePopup () {
         this.popupDetails.close();
         this.controlRack.reset();
     }

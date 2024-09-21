@@ -65,16 +65,16 @@ window.osuny.lightbox.ControlRack.prototype = {
             this._hideButton(this.buttons.description);
         }
     },
-    showDescription () {
-        this.buttons.description.classList.add('active');
-        this.buttons.credit.classList.remove('active');
-    },
-    showCredit () {
-        this.buttons.credit.classList.add('active');
+    show (popupContent = null) {
         this.buttons.description.classList.remove('active');
+        this.buttons.credit.classList.remove('active');
+        if (popupContent === 'description') {
+            this.buttons.description.classList.add('active');
+        } else if (popupContent === 'credit') {
+            this.buttons.credit.classList.add('active');
+        }
     },
     reset () {
-        this.buttons.description.classList.remove('active');
-        this.buttons.credit.classList.remove('active');
+        this.show(null);
     }
 };
