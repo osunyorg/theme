@@ -10,7 +10,7 @@ window.osuny.lightbox.classes = {
     creditButton: 'credit',
     figure: 'lightbox-figure',
     infoButton: 'info',
-    launcher: 'glightbox',
+    launcher: 'lightbox-launcher',
     nextButton: 'next',
     prevButton: 'prev',
     detailWindow: 'details-window',

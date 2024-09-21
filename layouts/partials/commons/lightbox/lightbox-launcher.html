@@ -13,7 +13,7 @@
 {{ if and $index $total }}
   {{ $options = merge $options (dict "gallery_values" (dict "index" $index "total" $total)) }}
 {{ end }}
-<a class="glightbox"
+<a class="lightbox-launcher"
 role="button"
 data-lightbox="{{ $options | encoding.Jsonify }}" 
 href="{{- partial "GetLightboxUrl" .image -}}"
