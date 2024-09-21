@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 window.osuny.lightbox = window.osuny.lightbox || {};
+
 window.osuny.lightbox.manager = {
     initialized: false,
     lightboxes: [],
@@ -37,35 +38,34 @@ window.osuny.lightbox.manager = {
     _initializeContainer () {
         var containerElement = document.getElementsByClassName(window.osuny.lightbox.classes.container).item(0);
         this.container = new window.osuny.lightbox.LightboxContainer(containerElement);
-        this.container.element.addEventListener(window.osuny.lightbox.events.close, this.onClose.bind(this));
-        this.container.element.addEventListener(window.osuny.lightbox.events.next, this.onNext.bind(this));
-        this.container.element.addEventListener(window.osuny.lightbox.events.previous, this.onPrevious.bind(this));
+        this.container.element.addEventListener(window.osuny.lightbox.events.close, this._onClose.bind(this));
+        this.container.element.addEventListener(window.osuny.lightbox.events.next, this._onNext.bind(this));
+        this.container.element.addEventListener(window.osuny.lightbox.events.previous, this._onPrevious.bind(this));
     },
     _onLauncherClick (event) {
         var index = event.target.getAttribute('value');
         this._setLightboxContent(index);
-        this.open();
+        this._open();
     },
     _setLightboxContent (index) {
         this.currentLightbox = this.lightboxes[index];
         this.container.show(this.currentLightbox);
     },
-    open () {
+    _open () {
         if (!this.container.opened) {
             this.container.open();
         }
     },
-    onClose () {
-        console.log('çlose')
+    _onClose () {
         this.container.close();
         this.currentLightbox.launcher.focus();
     },
-    onNext () {
+    _onNext () {
         if (this.currentLightbox.next) {
             this._setLightboxContent(this.currentLightbox.next);
         }
     },
-    onPrevious () {
+    _onPrevious () {
         if (this.currentLightbox.previous) {
             this._setLightboxContent(this.currentLightbox.previous);
         }

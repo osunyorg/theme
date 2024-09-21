@@ -4,28 +4,19 @@ window.osuny.lightbox = window.osuny.lightbox || {};
 
 window.osuny.lightbox.LightboxContainer = function (element) {
     this.element = element;
+    this.pageFocusableElements = ['main', 'header', 'footer'];
     this.bodyElement = document.querySelector('body');
-    this.mainElement = document.querySelector('main');
-    this.headerElement = document.querySelector('header');
-    this.footerElement = document.querySelector('footer');
     this.opened = false;
     this.controlRack = null;
     this.popupDetails = null;
     this.listeners = {};
     this.content = this.element.getElementsByClassName(window.osuny.lightbox.classes.content).item(0);
     this._initialize();
-    this._initializeListeners();
 };
 
 window.osuny.lightbox.LightboxContainer.prototype = {
-    _initialize () {
-        var controlRackElement = document.getElementsByClassName(window.osuny.lightbox.classes.controls).item(0),
-            popupDetailsElement = this.element.getElementsByClassName(window.osuny.lightbox.classes.detailWindow).item(0);
-        this.controlRack = new window.osuny.lightbox.ControlRack(controlRackElement);
-        this.popupDetails = new window.osuny.lightbox.Popup(popupDetailsElement);
-    },
     open () {
-        this._disablePageElement();
+        this._setPageElementsEnabled(false);
         this.bodyElement.style.overflow = 'hidden';
         this.element.style.display = 'block';
         document.addEventListener('keydown', this.listeners.keyDown);
@@ -33,7 +24,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
     },
     close () {
         this._removeImageContent();
-        this._enablePageElement();
+        this._setPageElementsEnabled(true);
         this.bodyElement.style.overflow = 'visible';
         this.element.style.display = 'none';
         this._closePopup();
@@ -44,40 +35,48 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         this.popupDetails.close();
         this._removeImageContent();
         this._setImageContent(lightbox);
-        // maybe add description ou alt
         this.content.focus();
         this.controlRack.load(lightbox);
         this.popupDetails.load(lightbox);
     },
-    _dispachEvent(eventname) {
-        var event = new Event(eventname);
-        this.element.dispatchEvent(event);
+    _initialize () {
+        var controlRackElement = document.getElementsByClassName(window.osuny.lightbox.classes.controls).item(0),
+            popupDetailsElement = this.element.getElementsByClassName(window.osuny.lightbox.classes.detailWindow).item(0);
+        this.controlRack = new window.osuny.lightbox.ControlRack(controlRackElement);
+        this.popupDetails = new window.osuny.lightbox.Popup(popupDetailsElement);
+        this._initializeListeners();
     },
     _initializeListeners () {
+        var buttonEvents = Object.keys(this.controlRack.buttons);
+        // Dispaching to manager
         this.listeners.close = this._dispachEvent.bind(this, window.osuny.lightbox.events.close);
         this.listeners.next = this._dispachEvent.bind(this, window.osuny.lightbox.events.next);
         this.listeners.previous = this._dispachEvent.bind(this, window.osuny.lightbox.events.previous);
-        //this.listeners.keyDown = this._onKeydown.bind(this);
-        this.listeners.showDescription = this._showDescription.bind(this);
-        this.listeners.showCredit = this._showCredit.bind(this);
+
+        // handling local event
+        this.listeners.keyDown = this._onKeydown.bind(this);
+        this.listeners.description = this._showDescription.bind(this);
+        this.listeners.credit = this._showCredit.bind(this);
         this.listeners.closePopup = this._closePopup.bind(this);
 
-        this.controlRack.element.addEventListener('close', this.listeners.close);
-        this.controlRack.element.addEventListener('next', this.listeners.next);
-        this.controlRack.element.addEventListener('previous', this.listeners.previous);
-        this.controlRack.element.addEventListener('showDescription', this.listeners.showDescription);
-        this.controlRack.element.addEventListener('showCredit', this.listeners.showCredit);
+        buttonEvents.forEach(function (eventname) {
+            this.controlRack.element.addEventListener(eventname, this.listeners[eventname]);
+        }.bind(this));
         this.popupDetails.element.addEventListener('closePopup', this.listeners.closePopup);
     },
-    // _onKeydown (event) {
-    //     if (event.key === 'Escape') {
-    //         this.listeners.close();
-    //     } else if (event.key === 'ArrowLeft') {
-    //         this.listeners.previous();
-    //     } else if (event.key === 'ArrowRight') {
-    //         this.listeners.next();
-    //     }
-    // },
+    _dispachEvent (eventname) {
+        var event = new Event(eventname);
+        this.element.dispatchEvent(event);
+    },
+    _onKeydown (event) {
+        if (event.key === 'Escape') {
+            this.listeners.close();
+        } else if (event.key === 'ArrowLeft') {
+            this.listeners.previous();
+        } else if (event.key === 'ArrowRight') {
+            this.listeners.next();
+        }
+    },
     _setImageContent (lightbox) {
         var image = document.createElement('img');
         image.setAttribute('src', lightbox.url);
@@ -89,35 +88,29 @@ window.osuny.lightbox.LightboxContainer.prototype = {
     _removeImageContent () {
         this.content.innerHTML = '';
     },
-    _disablePageElement () {
-        this.mainElement.inert = true;
-        this.mainElement.setAttribute('aria-hidden', 'true');
-        this.headerElement.inert = true;
-        this.headerElement.setAttribute('aria-hidden', 'true');
-        this.footerElement.inert = true;
-        this.footerElement.setAttribute('aria-hidden', 'true');
+    _setPageElementsEnabled (enabled) {
+        this.pageFocusableElements.forEach(function (elem) {
+            this._setPageElementEnabled(elem, enabled);
+        }.bind(this));
     },
-    _enablePageElement () {
-        this.mainElement.inert = false;
-        this.mainElement.setAttribute('aria-hidden', 'false');
-        this.headerElement.inert = false;
-        this.headerElement.setAttribute('aria-hidden', 'false');
-        this.footerElement.inert = false;
-        this.footerElement.setAttribute('aria-hidden', 'false');
+    _setPageElementEnabled (elem, enabled) {
+        var element = document.querySelector(elem);
+        element.setAttribute('aria-hidden', String(!enabled));
+        element.inert = !enabled;
     },
     _showDescription () {
-        if (this.controlRack.infoOpened()) {
+        if (this.popupDetails.opened && this.popupDetails.current === 'description') {
             this._closePopup();
         } else {
-            this.popupDetails.showDescription();
+            this.popupDetails.show('description');
             this.controlRack.showDescription();
         }
     },
     _showCredit () {
-        if (this.controlRack.creditOpened()) {
+        if (this.popupDetails.opened && this.popupDetails.current === 'credit') {
             this._closePopup();
         } else {
-            this.popupDetails.showCredit();
+            this.popupDetails.show('credit');
             this.controlRack.showCredit();
         }
     },
@@ -126,6 +119,6 @@ window.osuny.lightbox.LightboxContainer.prototype = {
             event.preventDefault();
         }
         this.popupDetails.close();
-        this.controlRack.closePopup();
+        this.controlRack.reset();
     }
 };
