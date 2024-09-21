@@ -2,7 +2,7 @@
 window.osuny = window.osuny || {};
 window.osuny.lightbox = window.osuny.lightbox || {};
 
-window.osuny.lightbox.DetailWindow = function (element) {
+window.osuny.lightbox.Popup = function (element) {
     this.element = element;
     this.content = this.element.getElementsByClassName(window.osuny.lightbox.classes.detailWindowContent).item(0);
     this.title = null;
@@ -15,7 +15,7 @@ window.osuny.lightbox.DetailWindow = function (element) {
     this.close();
 };
 
-window.osuny.lightbox.DetailWindow.prototype = {
+window.osuny.lightbox.Popup.prototype = {
     _show (content) {
         this._resetTitle();
         if (content === 'description') {

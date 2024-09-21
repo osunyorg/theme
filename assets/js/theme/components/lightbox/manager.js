@@ -36,7 +36,7 @@ window.osuny.lightbox.manager = {
             popupDetailsElement = controlRackElement.getElementsByClassName(window.osuny.lightbox.classes.detailWindow).item(0);
         this.container = new window.osuny.lightbox.LightboxContainer(containerElement);
         this.controlRack = new window.osuny.lightbox.ControlRack(controlRackElement);
-        this.popupDetails = new window.osuny.lightbox.DetailWindow(popupDetailsElement);
+        this.popupDetails = new window.osuny.lightbox.Popup(popupDetailsElement);
     },
     _initializeListeners () {
         var i = 0;
