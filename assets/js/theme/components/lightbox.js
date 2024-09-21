@@ -5,3 +5,4 @@ import './lightbox/events';
 import './lightbox/lightbox';
 import './lightbox/manager';
 import './lightbox/popupDetail';
+import './lightbox/utils';

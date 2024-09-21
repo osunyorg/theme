@@ -4,6 +4,7 @@ window.osuny.lightbox = window.osuny.lightbox || {};
 
 window.osuny.lightbox.Lightbox = function (element, index) {
     this.element = element;
+    this._findElement = window.osuny.lightbox.utils.findElement.bind(this);
     this.index = index;
     this.url = null;
     this.credit = null;
@@ -18,7 +19,7 @@ window.osuny.lightbox.Lightbox = function (element, index) {
 window.osuny.lightbox.Lightbox.prototype = {
     _initialize () {
         var options;
-        this.launcher = this.element.getElementsByClassName(window.osuny.lightbox.classes.launcher).item(0);
+        this.launcher = this._findElement('launcher');
         if (this.launcher) {
             this.launcher.setAttribute('value', this.index);
             this.url = this.launcher.href;

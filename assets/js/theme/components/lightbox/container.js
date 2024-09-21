@@ -10,7 +10,8 @@ window.osuny.lightbox.LightboxContainer = function (element) {
     this.controlRack = null;
     this.popupDetails = null;
     this.listeners = {};
-    this.content = this.element.getElementsByClassName(window.osuny.lightbox.classes.content).item(0);
+    this._findElement = window.osuny.lightbox.utils.findElement.bind(this);
+    this.content = this._findElement('content');
     this._initialize();
 };
 
@@ -41,7 +42,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
     },
     _initialize () {
         var controlRackElement = document.getElementsByClassName(window.osuny.lightbox.classes.controls).item(0),
-            popupDetailsElement = this.element.getElementsByClassName(window.osuny.lightbox.classes.detailWindow).item(0);
+            popupDetailsElement = this._findElement('detailWindow');
         this.controlRack = new window.osuny.lightbox.ControlRack(controlRackElement);
         this.popupDetails = new window.osuny.lightbox.Popup(popupDetailsElement);
         this._initializeListeners();

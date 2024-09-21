@@ -4,6 +4,7 @@ window.osuny.lightbox = window.osuny.lightbox || {};
 
 window.osuny.lightbox.Popup = function (element) {
     this.element = element;
+    this._findElement = window.osuny.lightbox.utils.findElement.bind(this);
     this.titles = {};
     this.title = null;
     this.currentContent = {};
@@ -12,10 +13,10 @@ window.osuny.lightbox.Popup = function (element) {
     this.current = null;
     this.opened = false;
 
-    this.content = this.element.getElementsByClassName(window.osuny.lightbox.classes.detailWindowContent).item(0);
-    this.titles.description = this.element.getElementsByClassName(window.osuny.lightbox.classes.detailWindowTitleInformation).item(0);
-    this.titles.credit = this.element.getElementsByClassName(window.osuny.lightbox.classes.detailWindowTitleCredit).item(0);
-    this.closeButton = this.element.getElementsByClassName(window.osuny.lightbox.classes.detailWindowClose).item(0);
+    this.content = this._findElement('detailWindowContent');
+    this.titles.description = this._findElement('detailWindowTitleInformation');
+    this.titles.credit = this._findElement('detailWindowTitleCredit');
+    this.closeButton = this._findElement('detailWindowClose');
     this.closeButton.addEventListener('click', function (e) {
         var event = new Event('closePopup');
         this.element.dispatchEvent(event);

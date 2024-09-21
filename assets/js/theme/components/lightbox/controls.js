@@ -4,12 +4,13 @@ window.osuny.lightbox = window.osuny.lightbox || {};
 
 window.osuny.lightbox.ControlRack = function (element) {
     this.element = element;
+    this._findElement = window.osuny.lightbox.utils.findElement.bind(this);
     this.buttons = {
-        close: this.element.getElementsByClassName(window.osuny.lightbox.classes.closeButton).item(0),
-        previous: this.element.getElementsByClassName(window.osuny.lightbox.classes.prevButton).item(0),
-        next: this.element.getElementsByClassName(window.osuny.lightbox.classes.nextButton).item(0),
-        description: this.element.getElementsByClassName(window.osuny.lightbox.classes.infoButton).item(0),
-        credit: this.element.getElementsByClassName(window.osuny.lightbox.classes.creditButton).item(0)
+        close: this._findElement('closeButton'),
+        previous: this._findElement('prevButton'),
+        next: this._findElement('nextButton'),
+        description: this._findElement('infoButton'),
+        credit: this._findElement('creditButton')
     };
     this._initializeEvents();
 };
