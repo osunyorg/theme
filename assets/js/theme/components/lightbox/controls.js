@@ -4,21 +4,45 @@ window.osuny.lightbox = window.osuny.lightbox || {};
 
 window.osuny.lightbox.ControlRack = function (element) {
     this.element = element;
-    this.closeButton = this.element.getElementsByClassName(window.osuny.lightbox.classes.closeButton).item(0);
-    this.prevButton = this.element.getElementsByClassName(window.osuny.lightbox.classes.prevButton).item(0);
-    this.nextButton = this.element.getElementsByClassName(window.osuny.lightbox.classes.nextButton).item(0);
-    this.infoButton = this.element.getElementsByClassName(window.osuny.lightbox.classes.infoButton).item(0);
-    this.creditButton = this.element.getElementsByClassName(window.osuny.lightbox.classes.creditButton).item(0);
+    this.buttons = {
+        close: this.element.getElementsByClassName(window.osuny.lightbox.classes.closeButton).item(0),
+        prev: this.element.getElementsByClassName(window.osuny.lightbox.classes.prevButton).item(0),
+        next: this.element.getElementsByClassName(window.osuny.lightbox.classes.nextButton).item(0),
+        info: this.element.getElementsByClassName(window.osuny.lightbox.classes.infoButton).item(0),
+        credit: this.element.getElementsByClassName(window.osuny.lightbox.classes.creditButton).item(0)
+    };
+    this._initializeEvents();
 };
 
 window.osuny.lightbox.ControlRack.prototype = {
+    _initializeEvents () {
+        var i = 0;
+        for(i=0; i< Object.keys(this.buttons).length; i++) {
+            var key = Object.keys(this.buttons)[i];
+            var action = this._dispachEvent.bind(this, key);
+            this.buttons[key].addEventListener('click', action);
+        }
+    },
+    // _onKeydown (event) {
+    //     if (event.key === 'Escape') {
+    //         this.listeners.close();
+    //     } else if (event.key === 'ArrowLeft') {
+    //         this.listeners.previous();
+    //     } else if (event.key === 'ArrowRight') {
+    //         this.listeners.next();
+    //     }
+    // },
     _showArrows () {
-        this._showButton(this.prevButton);
-        this._showButton(this.nextButton);
+        this._showButton(this.buttons.prev);
+        this._showButton(this.buttons.next);
     },
     _hideArrows () {
-        this._hideButton(this.prevButton);
-        this._hideButton(this.nextButton);
+        this._hideButton(this.buttons.prev);
+        this._hideButton(this.buttons.next);
+    },
+    _dispachEvent(eventname) {
+        var event = new Event(eventname);
+        this.element.dispatchEvent(event);
     },
     _showButton (button) {
         button.style.display = 'block';
@@ -32,37 +56,37 @@ window.osuny.lightbox.ControlRack.prototype = {
         } else {
             this._hideArrows();
         }
-        this.nextButton.disabled = lightbox.next === null;
-        this.prevButton.disabled = lightbox.previous === null;
+        this.buttons.next.disabled = lightbox.next === null;
+        this.buttons.prev.disabled = lightbox.previous === null;
 
         if (lightbox.credit) {
-            this._showButton(this.creditButton);
+            this._showButton(this.buttons.credit);
         } else {
-            this._hideButton(this.creditButton);
+            this._hideButton(this.buttons.credit);
         }
 
         if (lightbox.description) {
-            this._showButton(this.infoButton);
+            this._showButton(this.buttons.info);
         } else {
-            this._hideButton(this.infoButton);
+            this._hideButton(this.buttons.info);
         }
     },
     showDescription () {
-        this.infoButton.classList.add('active');
-        this.creditButton.classList.remove('active');
+        this.buttons.info.classList.add('active');
+        this.buttons.credit.classList.remove('active');
     },
     showCredit () {
-        this.creditButton.classList.add('active');
-        this.infoButton.classList.remove('active');
+        this.buttons.credit.classList.add('active');
+        this.buttons.info.classList.remove('active');
     },
     closePopup () {
-        this.infoButton.classList.remove('active');
-        this.creditButton.classList.remove('active');
+        this.buttons.info.classList.remove('active');
+        this.buttons.credit.classList.remove('active');
     },
     infoOpened () {
-        return this.infoButton.classList.contains('active')
+        return this.buttons.info.classList.contains('active');
     },
     creditOpened () {
-        return this.creditButton.classList.contains('active')
+        return this.buttons.credit.classList.contains('active');
     }
 };
