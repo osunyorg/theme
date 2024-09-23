@@ -18,16 +18,23 @@ window.osuny.components.events = {
             }
         }
     },
-    _getEventTarget () { //  who receives the event depending on lightbox state and carousels
-        if (this.components.lightbox) {
-            if (this.components.lightbox.container.opened) {
-                return this.components.lightbox;
-            }
+    //  who receives the event depending on lightbox state and carousels
+    _getEventTarget () {
+        if (this._isLightBoxOpened()) {
+            return this.components.lightbox;
         }
+        if (this._hasFocusedCarousel()) {
+            return this.components.carousel.focusedCarousel;
+        }
+    },
+    _isLightBoxOpened () {
+        if (this.components.lightbox) {
+            return this.components.lightbox.container.opened;
+        }
+    },
+    _hasFocusedCarousel () {
         if (this.components.carousel) {
-            if (this.components.carousel.focusedCarousel) {
-                return this.components.carousel.focusedCarousel;
-            }
+            return this.components.carousel.focusedCarousel;
         }
     },
     initialize: function () {
@@ -37,13 +44,10 @@ window.osuny.components.events = {
                 this.components[component] = e.value;
             }.bind(this), true);
         }.bind(this));
-        window.addEventListener(
-            "keydown",
-            this.handleKeyDownEvent.bind(this)
-        );
+        window.addEventListener('keydown', this.handleKeyDownEvent.bind(this));
     }
 };
 
-window.addEventListener("load", function () {
+window.addEventListener('load', function () {
     window.osuny.components.events.initialize();
 });

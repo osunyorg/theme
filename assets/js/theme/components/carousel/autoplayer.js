@@ -25,8 +25,10 @@ window.osuny.carousel.Autoplayer = function (element) {
         "click",
         this._onClick.bind(this)
     );
+    this.environment = window.osuny.carousel;
     this._dispatchEvent = window.osuny.components.utils.dispatchEvent.bind(this);
 }
+
 window.osuny.carousel.Autoplayer.prototype = {
     setInterval: function (interval) {
         this.interval = interval;
