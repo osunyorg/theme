@@ -24,6 +24,10 @@ window.osuny.carousel.manager = {
                 carousel = new window.osuny.carousel.Carousel(element);
             this.carousels.push(carousel);
         }
+        if (this.carousels.length > 0) {
+            this.awake = window.osuny.components.utils.dispatchAwakeEvent.bind(this);
+            this.awake('carousel');
+        }
     },
     _initializeListeners: function () {
         window.addEventListener(
@@ -33,10 +37,6 @@ window.osuny.carousel.manager = {
         window.addEventListener(
             "scroll",
             this._findCarouselsInViewport.bind(this)
-        );
-        window.addEventListener(
-            "keydown",
-            this._onKeyPress.bind(this)
         );
     },
     _resize: function () {
@@ -74,12 +74,6 @@ window.osuny.carousel.manager = {
             }
         };
         return bestCandidate;
-    },
-    _onKeyPress: function (e) {
-        if (this.focusedCarousel) {
-            if (e.key == 'ArrowLeft') { this.focusedCarousel.previous() }
-            else if (e.key == 'ArrowRight') { this.focusedCarousel.next() }
-        }
     },
     invoke: function () {
         "use strict";

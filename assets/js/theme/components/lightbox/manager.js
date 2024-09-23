@@ -16,6 +16,7 @@ window.osuny.lightbox.manager = {
         }
         // Il y a au moins une lightbox dans la page alors on crée le conteneur
         if (this.lightboxes.length > 0) {
+            this.awake = window.osuny.components.utils.dispatchAwakeEvent.bind(this);
             this._initializeContainer();
             for (i = 0; i < this.lightboxes.length; i += 1) {
                 this.lightboxes[i].launcher.addEventListener('click', function (event) {
@@ -23,6 +24,7 @@ window.osuny.lightbox.manager = {
                     this._onLauncherClick(event);
                 }.bind(this));
             }
+            this.awake('lightbox');
         }
     },
     _createLightboxes () {
@@ -38,9 +40,9 @@ window.osuny.lightbox.manager = {
     _initializeContainer () {
         var containerElement = document.getElementsByClassName(window.osuny.lightbox.classes.container).item(0);
         this.container = new window.osuny.lightbox.LightboxContainer(containerElement);
-        this._addContainerListener('close', this._onClose.bind(this));
-        this._addContainerListener('next', this._onNext.bind(this));
-        this._addContainerListener('previous', this._onPrevious.bind(this));
+        this._addContainerListener('close', this.close.bind(this));
+        this._addContainerListener('next', this.next.bind(this));
+        this._addContainerListener('previous', this.previous.bind(this));
     },
     _onLauncherClick (event) {
         var index = event.target.getAttribute('value');
@@ -56,16 +58,16 @@ window.osuny.lightbox.manager = {
             this.container.open();
         }
     },
-    _onClose () {
+    close () {
         this.container.close();
         this.currentLightbox.launcher.focus();
     },
-    _onNext () {
+    next () {
         if (this.currentLightbox.next) {
             this._setLightboxContent(this.currentLightbox.next);
         }
     },
-    _onPrevious () {
+    previous () {
         if (this.currentLightbox.previous) {
             this._setLightboxContent(this.currentLightbox.previous);
         }

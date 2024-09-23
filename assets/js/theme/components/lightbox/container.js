@@ -9,7 +9,7 @@ window.osuny.lightbox.LightboxContainer = function (element) {
     this.opened = false;
     this.controlRack = null;
     this.popupDetails = null;
-    this.listeners = {};
+    this.eventsCallback = {};
     this.environment = window.osuny.lightbox;
     this._findElement = window.osuny.components.utils.findElement.bind(this);
     this._dispatchEvent = window.osuny.components.utils.dispatchEvent.bind(this);
@@ -22,7 +22,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         this._setPageElementsEnabled(false);
         this.bodyElement.style.overflow = 'hidden';
         this.element.style.display = 'block';
-        document.addEventListener('keydown', this.listeners.keyDown);
+        document.addEventListener('keydown', this.eventsCallback.keyDown);
         this.opened = true;
     },
     close () {
@@ -31,7 +31,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         this.bodyElement.style.overflow = 'visible';
         this.element.style.display = 'none';
         this._closePopup();
-        document.removeEventListener('keydown', this.listeners.keyDown);
+        document.removeEventListener('keydown', this.eventsCallback.keyDown);
         this.opened = false;
     },
     show (lightbox) {
@@ -52,28 +52,24 @@ window.osuny.lightbox.LightboxContainer.prototype = {
     _initializeListeners () {
         var buttonEvents = Object.keys(this.controlRack.buttons);
         // Dispaching to manager
-        this.listeners.close = this._dispatchEvent.bind(this, 'close');
-        this.listeners.next = this._dispatchEvent.bind(this, 'next');
-        this.listeners.previous = this._dispatchEvent.bind(this, 'previous');
+        this.eventsCallback.close = this._dispatchEvent.bind(this, 'close');
+        this.eventsCallback.next = this._dispatchEvent.bind(this, 'next');
+        this.eventsCallback.previous = this._dispatchEvent.bind(this, 'previous');
 
         // handling local event
-        this.listeners.keyDown = this._onKeydown.bind(this);
-        this.listeners.description = this._showPopup.bind(this, 'description');
-        this.listeners.credit = this._showPopup.bind(this, 'credit');
-        this.listeners.closePopup = this._closePopup.bind(this);
+        this.eventsCallback.keyDown = this._onKeydown.bind(this);
+        this.eventsCallback.description = this._showPopup.bind(this, 'description');
+        this.eventsCallback.credit = this._showPopup.bind(this, 'credit');
+        this.eventsCallback.closePopup = this._closePopup.bind(this);
 
         buttonEvents.forEach(function (eventname) {
-            this.controlRack.element.addEventListener(eventname, this.listeners[eventname]);
+            this.controlRack.element.addEventListener(eventname, this.eventsCallback[eventname]);
         }.bind(this));
-        this.popupDetails.element.addEventListener('closePopup', this.listeners.closePopup);
+        this.popupDetails.element.addEventListener('closePopup', this.eventsCallback.closePopup);
     },
     _onKeydown (event) {
         if (event.key === 'Escape') {
-            this.listeners.close();
-        } else if (event.key === 'ArrowLeft') {
-            this.listeners.previous();
-        } else if (event.key === 'ArrowRight') {
-            this.listeners.next();
+            this.eventsCallback.close();
         }
     },
     _setImageContent (lightbox) {

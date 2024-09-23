@@ -12,5 +12,11 @@ window.osuny.components.utils = {
             event = new Event(eventName);
         event.value = value;
         this.element.dispatchEvent(event);
+    },
+    dispatchAwakeEvent: function(component) {
+        // prevenir le manager de composants qu'il y a au moins une instance de lightbox.
+        var awakeEvent = new Event(window.osuny[component].events.instanciated);
+        awakeEvent.value = this;
+        document.dispatchEvent(awakeEvent);
     }
 };
