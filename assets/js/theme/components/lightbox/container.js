@@ -41,7 +41,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         this.popupDetails.load(lightbox);
     },
     _initialize () {
-        var controlRackElement = document.getElementsByClassName(window.osuny.lightbox.classes.controls).item(0),
+        var controlRackElement = this._findElement('controls'),
             popupDetailsElement = this._findElement('detailWindow');
         this.controlRack = new window.osuny.lightbox.ControlRack(controlRackElement);
         this.popupDetails = new window.osuny.lightbox.Popup(popupDetailsElement);

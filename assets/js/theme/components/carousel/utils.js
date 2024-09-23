@@ -3,14 +3,11 @@ window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.utils = {
     // Méhodes ajoutées comme des traits (décorateur) aux objets qui en ont besoin
-    findElement: function(classKey) {
+    findElement: function (classKey) {
         var className = window.osuny.carousel.classes[classKey];
-        return this.element.getElementsByClassName(className).item(0);
+        return window.osuny.components.utils.findElement(this.element, className);
     },
     dispatchEvent: function (eventKey, value = null) {
-        var eventName = window.osuny.carousel.events[eventKey];
-        var event = new Event(eventName);
-        event.value = value;
-        this.element.dispatchEvent(event);
+        window.osuny.components.utils.dispatchEvent(eventKey, value);
     }
-}
+};
