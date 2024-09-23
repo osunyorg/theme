@@ -12,6 +12,7 @@ window.osuny.lightbox.LightboxContainer = function (element) {
     this.listeners = {};
     this.environment = window.osuny.lightbox;
     this._findElement = window.osuny.components.utils.findElement.bind(this);
+    this._dispatchEvent = window.osuny.components.utils.dispatchEvent.bind(this);
     this.content = this._findElement('content');
     this._initialize();
 };
@@ -51,9 +52,9 @@ window.osuny.lightbox.LightboxContainer.prototype = {
     _initializeListeners () {
         var buttonEvents = Object.keys(this.controlRack.buttons);
         // Dispaching to manager
-        this.listeners.close = this._dispachEvent.bind(this, window.osuny.lightbox.events.close);
-        this.listeners.next = this._dispachEvent.bind(this, window.osuny.lightbox.events.next);
-        this.listeners.previous = this._dispachEvent.bind(this, window.osuny.lightbox.events.previous);
+        this.listeners.close = this._dispatchEvent.bind(this, 'close');
+        this.listeners.next = this._dispatchEvent.bind(this, 'next');
+        this.listeners.previous = this._dispatchEvent.bind(this, 'previous');
 
         // handling local event
         this.listeners.keyDown = this._onKeydown.bind(this);
@@ -65,10 +66,6 @@ window.osuny.lightbox.LightboxContainer.prototype = {
             this.controlRack.element.addEventListener(eventname, this.listeners[eventname]);
         }.bind(this));
         this.popupDetails.element.addEventListener('closePopup', this.listeners.closePopup);
-    },
-    _dispachEvent (eventname) {
-        var event = new Event(eventname);
-        this.element.dispatchEvent(event);
     },
     _onKeydown (event) {
         if (event.key === 'Escape') {
