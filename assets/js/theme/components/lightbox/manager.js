@@ -38,9 +38,9 @@ window.osuny.lightbox.manager = {
     _initializeContainer () {
         var containerElement = document.getElementsByClassName(window.osuny.lightbox.classes.container).item(0);
         this.container = new window.osuny.lightbox.LightboxContainer(containerElement);
-        this.container.element.addEventListener(window.osuny.lightbox.events.close, this._onClose.bind(this));
-        this.container.element.addEventListener(window.osuny.lightbox.events.next, this._onNext.bind(this));
-        this.container.element.addEventListener(window.osuny.lightbox.events.previous, this._onPrevious.bind(this));
+        this._addContainerListener('close', this._onClose.bind(this));
+        this._addContainerListener('next', this._onNext.bind(this));
+        this._addContainerListener('previous', this._onPrevious.bind(this));
     },
     _onLauncherClick (event) {
         var index = event.target.getAttribute('value');
@@ -69,6 +69,9 @@ window.osuny.lightbox.manager = {
         if (this.currentLightbox.previous) {
             this._setLightboxContent(this.currentLightbox.previous);
         }
+    },
+    _addContainerListener (event, callback) {
+        this.container.element.addEventListener(window.osuny.lightbox.events[event], callback);
     },
     invoke: function () {
         return {
