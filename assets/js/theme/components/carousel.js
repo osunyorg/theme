@@ -1,7 +1,5 @@
 // https://developers.osuny.org/docs/theme/components/carousel/
-// First
-import './carousel/utils';
-// Then alphabetical
+// Alphabetical
 import './carousel/arrows';
 import './carousel/autoplayer';
 import './carousel/carousel';

@@ -10,7 +10,8 @@ window.osuny.lightbox.LightboxContainer = function (element) {
     this.controlRack = null;
     this.popupDetails = null;
     this.listeners = {};
-    this._findElement = window.osuny.lightbox.utils.findElement.bind(this);
+    this.environment = window.osuny.lightbox;
+    this._findElement = window.osuny.components.utils.findElement.bind(this);
     this.content = this._findElement('content');
     this._initialize();
 };

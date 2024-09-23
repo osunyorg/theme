@@ -14,7 +14,8 @@ window.osuny.carousel.Carousel = function (element) {
     };
     this.windowResizeTimeout;
     this.lastScrollXTimeout;
-    this._findElement = window.osuny.carousel.utils.findElement.bind(this);
+    this.environment = window.osuny.carousel;
+    this._findElement = window.osuny.components.utils.findElement.bind(this);
     this._initializeConfig();
     this._initializeSlider();
     this._initializePagination();

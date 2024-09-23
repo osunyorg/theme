@@ -4,7 +4,8 @@ window.osuny.lightbox = window.osuny.lightbox || {};
 
 window.osuny.lightbox.Lightbox = function (element, index) {
     this.element = element;
-    this._findElement = window.osuny.lightbox.utils.findElement.bind(this);
+    this.environment = window.osuny.lightbox;
+    this._findElement = window.osuny.components.utils.findElement.bind(this);
     this.index = index;
     this.url = null;
     this.credit = null;

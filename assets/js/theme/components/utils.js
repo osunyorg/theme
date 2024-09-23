@@ -3,8 +3,9 @@ window.osuny.components = window.osuny.components || {};
 
 window.osuny.components.utils = {
     // Méhodes ajoutées comme des traits (décorateur) aux objets qui en ont besoin
-    findElement: function (element, className) {
-        return element.getElementsByClassName(className).item(0);
+    findElement: function (className) {
+        var classNameInEnv = this.environment.classes[className];
+        return this.element.getElementsByClassName(classNameInEnv).item(0);
     },
     dispatchEvent: function (eventKey, value = null) {
         var eventName = window.osuny.carousel.events[eventKey],
