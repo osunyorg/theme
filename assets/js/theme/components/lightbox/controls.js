@@ -27,13 +27,14 @@ window.osuny.lightbox.ControlRack.prototype = {
             this.buttons[key].addEventListener('click', action);
         }
     },
-    _showArrows () {
-        this._showButton(this.buttons.previous);
-        this._showButton(this.buttons.next);
-    },
-    _hideArrows () {
-        this._hideButton(this.buttons.previous);
-        this._hideButton(this.buttons.next);
+    _displayArrows (display) {
+        if (display) {
+            this._showButton(this.buttons.previous);
+            this._showButton(this.buttons.next);
+        } else {
+            this._hideButton(this.buttons.previous);
+            this._hideButton(this.buttons.next);
+        }
     },
     _dispachEvent (eventname) {
         var event = new Event(eventname);
@@ -46,24 +47,18 @@ window.osuny.lightbox.ControlRack.prototype = {
         button.style.display = 'none';
     },
     load (lightbox) {
-        if (lightbox.isGallery) {
-            this._showArrows();
-        } else {
-            this._hideArrows();
-        }
+        this._displayArrows(lightbox.isGallery);
         this.buttons.next.disabled = lightbox.next === null;
         this.buttons.previous.disabled = lightbox.previous === null;
 
-        if (lightbox.credit) {
-            this._showButton(this.buttons.credit);
+        this._loadButton(lightbox, 'credit');
+        this._loadButton(lightbox, 'description');
+    },
+    _loadButton (lightbox, content) {
+        if (lightbox[content]) {
+            this._showButton(this.buttons[content]);
         } else {
-            this._hideButton(this.buttons.credit);
-        }
-
-        if (lightbox.description) {
-            this._showButton(this.buttons.description);
-        } else {
-            this._hideButton(this.buttons.description);
+            this._hideButton(this.buttons[content]);
         }
     },
     show (popupContent = null) {
