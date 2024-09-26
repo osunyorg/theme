@@ -84,7 +84,9 @@ window.osuny.carousel.manager = {
                 bestCandidate = carousel;
             }
         }
-        bestCandidate.state.hasFocus = true;
+        if (bestCandidate) {
+            bestCandidate.state.hasFocus = true;
+        }
         return bestCandidate;
     },
     _onKeyPress: function (e) {
