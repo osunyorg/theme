@@ -38,7 +38,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         this.popupDetails.close();
         this._removeImageContent();
         this._setImageContent(lightbox);
-        this.content.focus();
+        // this.content.focus();
         this.controlRack.load(lightbox);
         this.popupDetails.load(lightbox);
     },
@@ -75,10 +75,9 @@ window.osuny.lightbox.LightboxContainer.prototype = {
     _setImageContent (lightbox) {
         var image = document.createElement('img');
         image.setAttribute('src', lightbox.url);
-        if (lightbox.description) {
-            image.setAttribute('alt', lightbox.description);
-        }
+        image.setAttribute('alt', lightbox.description || lightbox.credit || '');
         this.content.append(image);
+        image.focus();
     },
     _removeImageContent () {
         this.content.innerHTML = '';
