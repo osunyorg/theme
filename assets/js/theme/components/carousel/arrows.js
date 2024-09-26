@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
@@ -13,22 +14,16 @@ window.osuny.carousel.Arrows = function (element) {
     this.counter = this._findElement('arrowsCounter');
     this.next = this._findElement('arrowsNext');
     this.previous = this._findElement('arrowsPrevious');
-    this.next.addEventListener(
-        "click",
-        this._onNext.bind(this)
-    );
-    this.previous.addEventListener(
-        "click",
-        this._onPrevious.bind(this)
-    );
+    this.next.addEventListener('click', this._onNext.bind(this));
+    this.previous.addEventListener('click', this._onPrevious.bind(this));
 };
 
 window.osuny.carousel.Arrows.prototype = {
     update: function (index, total) {
         if (this.element) {
-            this.counter.innerHTML = (index + 1) + '/' + total;
-            this.next.disabled = index + 1 == total;
-            this.previous.disabled = index == 0;
+            this.counter.innerHTML = index + 1 + '/' + total;
+            this.next.disabled = index + 1 === total;
+            this.previous.disabled = index === 0;
         }
     },
     _onNext: function () {
@@ -37,4 +32,4 @@ window.osuny.carousel.Arrows.prototype = {
     _onPrevious: function () {
         this._dispatchEvent('arrowsPrevious');
     }
-}
+};
