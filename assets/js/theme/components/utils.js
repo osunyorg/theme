@@ -8,7 +8,6 @@ window.osuny.components.utils = {
         return this.element.getElementsByClassName(className).item(0);
     },
     dispatchEvent: function (eventKey, value = null) {
-        console.log(value)
         var eventName = this.environment.events[eventKey],
             event = new Event(eventName);
         event.value = value;

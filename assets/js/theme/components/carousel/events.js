@@ -7,5 +7,6 @@ window.osuny.carousel.events = {
     arrowsNext: 'osuny.carousel.arrows.next',
     arrowsPrevious: 'osuny.carousel.arrows.previous',
     paginationButtonClicked: 'osuny.carousel.pagination.buttonClicked',
-    instanciated: 'osuny.carousel.instanciated'
+    instanciated: 'osuny.carousel.instanciated',
+    controlFocused: 'osuny.carousel.controlFocused'
 };

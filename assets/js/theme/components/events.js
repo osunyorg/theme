@@ -10,7 +10,6 @@ window.osuny.components.events = {
     handleKeyDownEvent: function (e) {
         var target = this._getEventTarget();
         if (target) {
-            e.preventDefault();
             if (e.key === 'ArrowLeft') {
                 target.previous();
             } else if (e.key === 'ArrowRight') {
