@@ -53,6 +53,7 @@ window.osuny.lightbox.Popup.prototype = {
         if (!this.opened) {
             this.open();
         }
+        this.element.focus();
     },
     _resetTitle () {
         if (this.title) {

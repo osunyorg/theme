@@ -4,7 +4,7 @@ window.osuny.lightbox = window.osuny.lightbox || {};
 
 window.osuny.lightbox.LightboxContainer = function (element) {
     this.element = element;
-    this.pageFocusableElements = ['main', 'header', 'footer'];
+    this.pageFocusableElements = ['main', 'nav', 'header', 'footer'];
     this.bodyElement = document.querySelector('body');
     this.opened = false;
     this.controlRack = null;
@@ -77,7 +77,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         image.setAttribute('src', lightbox.url);
         image.setAttribute('alt', lightbox.description || lightbox.credit || '');
         this.content.append(image);
-        image.focus();
+        this.content.focus();
     },
     _removeImageContent () {
         this.content.innerHTML = '';
