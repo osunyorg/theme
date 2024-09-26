@@ -1,5 +1,4 @@
 // https://developers.osuny.org/docs/theme/components/carousel/
-// Alphabetical
 import './carousel/arrows';
 import './carousel/autoplayer';
 import './carousel/carousel';
