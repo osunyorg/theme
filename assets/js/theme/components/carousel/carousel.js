@@ -111,9 +111,6 @@ window.osuny.carousel.Carousel.prototype = {
             }
         }
     },
-    _keyBoardFocusStart: function () {
-        this.autoplayer.pause();
-    },
     _pointerStart: function () {
         this.autoplayer.softPause();
         this.state.hasMouseOver = true;
@@ -127,7 +124,9 @@ window.osuny.carousel.Carousel.prototype = {
         this.element.addEventListener('touchstart', this._pointerStart.bind(this));
         this.element.addEventListener('mouseleave', this._pointerEnd.bind(this));
         this.element.addEventListener('touchend', this._pointerEnd.bind(this));
-        this.element.addEventListener('focusin', this._keyBoardFocusStart.bind(this));
+        this.element.addEventListener('focusin', function () {
+            this.autoplayer.pause();
+        }.bind(this));
     },
     _onAutoplayerProgression: function (event) {
         this.pagination.setProgression(event.value);
