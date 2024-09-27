@@ -1,23 +1,32 @@
 {{ $options := (dict ) }}
 {{ with .description }}
   {{ $options = merge $options (dict "description" ( . | plainify )) }}
+  {{ $options = merge $options (dict "descriptionhtml" (partial "PrepareHTML" . )) }}
 {{ end }}
 
 {{ with .credit }}
   {{ $options = merge $options (dict "credit" (. | plainify)) }}
+  {{ $options = merge $options (dict "credithtml" (partial "PrepareHTML" . )) }}
 {{ end }}
 
-{{$index := ( .index | plainify )}}
-{{$total := ( .total | plainify )}}
+{{$index := (partial "PrepareHTML" .index  )}}
+{{$total := (partial "PrepareHTML" .total )}}
 
 {{ if and $index $total }}
   {{ $options = merge $options (dict "gallery_values" (dict "index" $index "total" $total)) }}
 {{ end }}
+
 <a class="lightbox-launcher"
-role="button"
-data-lightbox="{{ $options | encoding.Jsonify }}" 
-href="{{- partial "GetLightboxUrl" .image -}}"
-title="{{- i18n "commons.lightbox.link.title" -}}"
-aria-label="{{- i18n "commons.lightbox.link.title" -}}">
+  role="button"
+  data-lightbox="{{ $options | encoding.Jsonify }}" 
+  href="{{- partial "GetLightboxUrl" .image -}}"
+  title="{{- i18n "commons.lightbox.link.title" -}}"
+  aria-label="{{- i18n "commons.lightbox.link.title" -}}">
     <span class="sr-only">{{- i18n "commons.lightbox.link.title" -}}</span>
+    {{ partial "commons/image.html" (dict
+      "image"  .image
+      "alt"    .alt
+      "sizes"  .sizes
+      "lazy"  .lazy
+    ) }}
 </a>

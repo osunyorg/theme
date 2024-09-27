@@ -25,8 +25,10 @@ window.osuny.lightbox.Lightbox.prototype = {
             this.launcher.setAttribute('value', this.index);
             this.url = this.launcher.href;
             options = JSON.parse(this.launcher.getAttribute(window.osuny.lightbox.dataAttribute));
-            this.description = options.description;
-            this.credit = options.credit;
+            this.descriptionPlain = options.description;
+            this.description = options.descriptionhtml;
+            this.creditPlain = options.credit;
+            this.credit = options.credithtml;
             if (options.gallery_values) {
                 this.isGallery = true;
                 this._initializeGroupOptions(options.gallery_values);

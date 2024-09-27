@@ -45,7 +45,7 @@ window.osuny.lightbox.manager = {
         this._addContainerListener('previous', this.previous.bind(this));
     },
     _onLauncherClick (event) {
-        var index = event.target.getAttribute('value');
+        var index = event.currentTarget.getAttribute('value');
         this._setLightboxContent(index);
         this._open();
     },

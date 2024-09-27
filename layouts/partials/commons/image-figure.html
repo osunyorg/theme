@@ -25,21 +25,24 @@
               {{ end }}
             {{ end }}
       >
+      {{ if $is_lightbox}}
+        {{ partial "commons/lightbox/lightbox-launcher.html" (dict
+          "description" .text
+          "image" .id
+          "alt"    .alt
+          "sizes"  $sizes
+          "lazy"  $lazy
+          "credit" .credit
+          "is_gallery" $is_gallery
+          "index" $index
+          "total" $total
+        ) }}
+      {{ else }}
         {{ partial "commons/image.html" (dict
           "image"  .id
           "alt"    .alt
           "sizes"  $sizes
           "lazy"  $lazy
-        ) }}
-      
-      {{ if $is_lightbox}}
-        {{ partial "commons/lightbox/lightbox-launcher.html" (dict
-          "description" .text
-          "image" .id
-          "credit" .credit
-          "is_gallery" $is_gallery
-          "index" $index
-          "total" $total
         ) }}
       {{ end }}
 

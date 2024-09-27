@@ -74,7 +74,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
     },
     _setImageContent (lightbox) {
         var image = document.createElement('img'),
-            imageDescription = lightbox.description || lightbox.credit || '';
+            imageDescription = lightbox.descriptionPlain || lightbox.creditPlain || '';
         image.setAttribute('src', lightbox.url);
         image.setAttribute('alt', imageDescription);
         this.content.setAttribute('aria-label', imageDescription);
