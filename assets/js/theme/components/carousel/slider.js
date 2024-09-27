@@ -28,12 +28,13 @@ window.osuny.carousel.Slider.prototype = {
     showSlide: function (index) {
         var behavior = 'smooth';
         this.index = index;
-        this.element.scrollTo({
-            top: 0,
-            left: this._slidePosition(index),
-            behavior: behavior
-        });
-        // this.slides[index].container.focus(); // forcer le focus comme ca fonctionnne mais annule l'effet smooth du scroll
+        setTimeout(function () {
+            this.element.scrollTo({
+                top: 0,
+                left: this._slidePosition(this.index),
+                behavior: behavior
+            });
+        }.bind(this),2);
         this._updateSlidesClasses();
         this._updateSlidesVisibilities();
     },
