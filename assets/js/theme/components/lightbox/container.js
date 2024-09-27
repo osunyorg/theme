@@ -73,9 +73,11 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         }
     },
     _setImageContent (lightbox) {
-        var image = document.createElement('img');
+        var image = document.createElement('img'),
+            imageDescription = lightbox.description || lightbox.credit || '';
         image.setAttribute('src', lightbox.url);
-        image.setAttribute('alt', lightbox.description || lightbox.credit || '');
+        image.setAttribute('alt', imageDescription);
+        this.content.setAttribute('aria-label', imageDescription);
         this.content.append(image);
         this.content.focus();
     },

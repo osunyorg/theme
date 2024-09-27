@@ -1,14 +1,14 @@
 {{ $options := (dict ) }}
 {{ with .description }}
-  {{ $options = merge $options (dict "description" (partial "PrepareHTML" .)) }}
+  {{ $options = merge $options (dict "description" ( . | plainify )) }}
 {{ end }}
 
 {{ with .credit }}
-  {{ $options = merge $options (dict "credit" (partial "PrepareHTML" .)) }}
+  {{ $options = merge $options (dict "credit" (. | plainify)) }}
 {{ end }}
 
-{{$index := (partial "PrepareHTML" .index)}}
-{{$total := (partial "PrepareHTML" .total)}}
+{{$index := ( .index | plainify )}}
+{{$total := ( .total | plainify )}}
 
 {{ if and $index $total }}
   {{ $options = merge $options (dict "gallery_values" (dict "index" $index "total" $total)) }}
