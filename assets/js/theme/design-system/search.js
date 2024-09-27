@@ -33,6 +33,14 @@ class Search {
             this.clearSearch();
             this.toggle(false);
         });
+        this.buttonMore = this.element.querySelector('.pagefind-ui__results + button');
+        if (this.state.isOpened) {
+            console.log('ok button')
+            this.buttonMore.addEventListener('click', () => {
+                console.log('click')
+                this.buttonMoreFocus();
+            });
+        }
 
         window.addEventListener('keydown', (event) => {
             if (event.keyCode === 27 || event.key === 'Escape') {
@@ -42,11 +50,6 @@ class Search {
                 }
             } else if (event.key === "Tab" && this.state.isOpened) {
                 focusTrap(event, this.element, this.state.isOpened);
-                
-                this.buttonMore = this.element.querySelector('.pagefind-ui__results + button');
-                if (this.buttonMore) {
-                    this.buttonMoreFocus();
-                }
             }
         });
     }
@@ -71,17 +74,22 @@ class Search {
     }
 
     buttonMoreFocus() {
-        const observer = new MutationObserver(mutations => {
-            mutations.forEach(mutation => {
-            mutation.addedNodes.forEach(addedNode => {
-                if (addedNode instanceof HTMLAnchorElement) {
-                    addedNode.focus();
-                }
-                });
-            });
-        });   
-        const observerConfig = { childList: true, subtree: true };
-        observer.observe(this.element, observerConfig);
+        // Trigger loading more results
+        // Assuming 'loadMoreResults' is a function that loads more results
+        this.loadMoreResults();
+    
+        // Delay execution to allow DOM updates
+        setTimeout(() => {
+            const newResults = this.element.querySelectorAll('.pagefind-ui__result'); // Adjust selector as needed
+            if (newResults.length > 0) {
+                // Set focus to the first new result
+                newResults[0].focus();
+    
+                // Announce new results (optional, since aria-live should handle it)
+                const liveRegion = document.getElementById('new-content-announcement');
+                liveRegion.innerText = `${newResults.length} more results loaded.`;
+            }
+        }, 100);
     }
 
     toggle(open = !this.state.isOpened) {
