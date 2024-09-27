@@ -44,7 +44,6 @@ class Search {
                 focusTrap(event, this.element, this.state.isOpened);
                 
                 this.buttonMore = this.element.querySelector('.pagefind-ui__results + button');
-
                 if (this.buttonMore) {
                     this.buttonMoreFocus();
                 }
@@ -94,9 +93,26 @@ class Search {
             this.input = this.element.querySelector('input');
             this.input.focus();
 
-            document.body.style.overflow = 'hidden';
+            this.inertElements = [];
+            const allElements = document.querySelectorAll('body *');
+    
+            allElements.forEach(el => {
+                if (el === this.element || this.element.contains(el) || el.contains(this.element)) {
+                    return;
+                }
+    
+                el.setAttribute('inert', '');
+                this.inertElements.push(el);
+            });
         } else {
             document.body.style.overflow = 'unset';
+
+            if (this.inertElements) {
+                this.inertElements.forEach(el => {
+                    el.removeAttribute('inert');
+                });
+                this.inertElements = null;
+            }
         }
     }
 }

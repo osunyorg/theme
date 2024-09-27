@@ -16,7 +16,7 @@
         > * + .post-author p,
         > * + .post-reading-time
             &::before
-                content: '• '
+                content: ' • '
 
 // Utilisé pour .post, .project, .page, .person, .program, .volume
 @mixin article($aspect-ratio: $article-media-aspect-ratio)
@@ -59,7 +59,7 @@
 @mixin article-title
     @include h3
     a
-        @include stretched-link
+        @include stretched-link(before)
         display: block
         text-decoration: none
 
@@ -142,7 +142,7 @@
             text-align: center
             padding: $spacing-1
             display: block
-        .credit-content
+        .credit
             @include meta
             background: $hero-background-color
             display: none
@@ -152,7 +152,7 @@
             color: inherit
             text-decoration-color: inherit
         &:focus
-            .credit-content
+            .credit
                 display: block
         @include media-breakpoint-up(desktop)
             &:before
@@ -162,10 +162,10 @@
             background: var(--color-background)
             &::before
                 background: transparent
-            .credit-content
+            .credit
                 display: block
                 background: transparent
                 position: relative
     &:hover
-        figcaption .credit-content
+        figcaption .credit
             display: block

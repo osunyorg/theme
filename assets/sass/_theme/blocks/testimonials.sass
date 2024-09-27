@@ -28,88 +28,42 @@
             display: block
     .avatar
         flex-shrink: 0
-        width: columns(1)
-        min-width: pxToRem(80)
-        margin-right: $spacing-2
         margin-bottom: 0
-
-    .splide
-        .splide__slider
-            display: flex
-            flex-direction: column-reverse
-        &__toggle
-            border: 1px solid $block-testimonials-pagination-background
-            border-radius: 50%
-            cursor: pointer
-            font-size: 0
-            height: pxToRem(42)
-            padding: 0
-            position: absolute
-            right: 0
-            top: 0
-            width: pxToRem(42)
-            font-size: 0
-            line-height: 1
-            span
-                color: var(--color-accent)
-                &::before
-                    font-size: pxToRem(22)
-                    height: pxToRem(42)
-                    width: pxToRem(42)
-                    margin-left: -0.5px
-                    margin-top: -1.5px
-        .splide__pagination
-            .is-active i
-                width: 100%
-
-            .splide__play
-                &::before
-                    margin-left: 2px
-        &__pagination
-            justify-content: unset
-            margin-right: 55px
-            li
-                flex: 1
-                margin-right: 10px
-            button
-                @include button-reset
-                position: relative
-                width: 100%
-                &::before,
-                i
-                    height: 1px
-                    left: 0
-                    top: 50%
-                    position: absolute
-                &::before
-                    background-color: $block-testimonials-pagination-background
-                    border-radius: 0
-                    width: 100%
-                i
-                    background-color: $block-testimonials-pagination-progress-background
-                    width: 0
+        margin-right: $spacing-2
+        min-width: pxToRem(80)
+        width: columns(1)
 
     @include in-page-without-sidebar
-        .top
-            padding-left: offset(3)
-        .splide__pagination
-            padding-left: offset(3)
-            padding-right: offset(1)
-        .splide__autoplay
-            margin-right: offset(1)
         figure
-            padding-right: offset(3)
             min-height: columns(2)
+            padding-right: offset(3)
             &.with-picture
-                padding-right: offset(1)
                 padding-left: offset(3)
+                padding-right: offset(1)
                 position: relative
                 figcaption
                     display: block
                     margin-top: $spacing-2
                     .avatar
-                        position: absolute
                         left: columns(1)
-                        top: 0
                         margin-left: var(--grid-gutter)
+                        position: absolute
+                        top: 0
                         width: columns(2)
+    .carousel
+        flex-direction: column-reverse
+        .toggle
+            border: 1px solid $block-testimonials-pagination-background
+        &__pagination
+            order: 1
+            button
+                &::before
+                    background-color: $block-testimonials-pagination-background
+                i
+                    background-color: $block-testimonials-pagination-progress-background
+        &__slide
+            width: columns(12)
+            opacity: 1
+            padding: 0 $spacing-1
+            @include in-page-with-sidebar
+                width: columns(8)
