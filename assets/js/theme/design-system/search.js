@@ -14,7 +14,6 @@ class Search {
             return;
         }
 
-        this.input = this.element.querySelector('input');
         this.listen();
     }
 
