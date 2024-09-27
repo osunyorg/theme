@@ -42,26 +42,30 @@
       {{ end }}
 
       <div class="informations">
-        <div>
-          {{ partial "persons/summary.html" (dict
-            "context" .
-          ) }}
-          {{ if (partial "GetTextFromHTML" .Content) }}
-            <div class="rich-text">
-              {{ partial "PrepareHTML" .Content }}
-            </div>
-          {{ end }}
-        </div>
-        {{ range $programsForAdministrator }}
-        {{ $program := . }}
+        {{ if .Content }}
+          <div class="biography">
+            {{ partial "persons/summary.html" (dict
+              "context" .
+            ) }}
+            {{ if (partial "GetTextFromHTML" .Content) }}
+              <div class="rich-text">
+                {{ partial "PrepareHTML" .Content }}
+              </div>
+            {{ end }}
+          </div>
+        {{ end }}
+        {{ if $programsForAdministrator }}
           <div class="roles">
-            {{ range .Params.roles }}
-              {{ $role := .title }}
-              {{ if in .persons $slug }}
-                <p>
-                  {{ safeHTML $role }}<br>
-                  <a href="{{ $program.Permalink }}" class="link">{{ safeHTML $program.Title }}</a>
-                </p>
+            {{ range $programsForAdministrator }}
+            {{ $program := . }}
+              {{ range .Params.roles }}
+                {{ $role := .title }}
+                {{ if in .persons $slug }}
+                  <p>
+                    {{ safeHTML $role }}<br>
+                    <a href="{{ $program.Permalink }}" class="link">{{ safeHTML $program.Title }}</a>
+                  </p>
+                {{ end }}
               {{ end }}
             {{ end }}
           </div>
