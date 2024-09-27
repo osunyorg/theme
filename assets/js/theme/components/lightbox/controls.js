@@ -62,12 +62,12 @@ window.osuny.lightbox.ControlRack.prototype = {
         }
     },
     show (popupContent = null) {
-        this.buttons.description.classList.remove('active');
-        this.buttons.credit.classList.remove('active');
+        this.buttons.description.setAttribute('aria-expanded', false);
+        this.buttons.credit.setAttribute('aria-expanded', false);
         if (popupContent === 'description') {
-            this.buttons.description.classList.add('active');
+            this.buttons.description.setAttribute('aria-expanded', true);
         } else if (popupContent === 'credit') {
-            this.buttons.credit.classList.add('active');
+            this.buttons.credit.setAttribute('aria-expanded', true);
         }
     },
     reset () {
