@@ -10,15 +10,15 @@
             display: none
     &__container
         // Si l'image est verticale, ça fonctionne tant qu'elle fait plus de 20vw
-        padding-right: 80vw
         display: flex
-        justify-content: flex-start
         flex-direction: row
+        justify-content: flex-start
+        justify-content: flex-start
         left: 0px
+        padding-right: 80vw
         position: relative
         top: 0
         width: fit-content
-        justify-content: flex-start
 
     &__slide
         scroll-snap-align: start
@@ -31,18 +31,18 @@
         border: 0
 
     &__arrows
+        align-items: center
         display: flex
         flex-direction: row
-        align-items: center
         margin-left: - $spacing-3 
         margin-right: - $spacing-3 
         @include media-breakpoint-up(desktop)
             padding-top: $spacing-3
         .counter
+            @include meta
             min-width: $spacing-3
             text-align: center
             width: fit-content
-            @include meta
             .block-timeline &
                 display: none
             &:empty
@@ -88,12 +88,12 @@
                 margin-right: 10px
                 padding: 0
             button
+                cursor: pointer
                 display: block
                 height: 48px
                 padding: 0
                 position: relative
                 width: 100%
-                cursor: pointer
                 &::before
                     -moz-transition: background .3s ease
                     -o-transition: background .3s ease
@@ -125,30 +125,39 @@
                     &::before
                         background-color: $link-color
         .toggle
-            border-radius: 50%
             border: 0
+            border-radius: 50%
             cursor: pointer
             font-size: 0
-            height: pxToRem(42)
+            height: pxToRem(44)
             line-height: 1
             padding: 0
             position: absolute
             right: 0
             top: 0
-            width: pxToRem(42)
+            width: pxToRem(44)
+            @include media-breakpoint-down(sm)
+                height: pxToRem(32)
+                width: pxToRem(32)
             span
                 color: var(--color-accent)
-                &::before
-                    font-size: pxToRem(22)
-                    height: pxToRem(42)
-                    width: pxToRem(42)
-                    margin-top: -1.5px
                 &.play
                     @include icon-block(play-fill)
-                    margin-left: -0.5px
                 &.pause
                     @include icon-block(pause-line)
-                    margin-left: -1.5px
+                &.play, &.pause
+                    &::before
+                        align-items: center
+                        display: flex 
+                        font-size: pxToRem(22)
+                        height: pxToRem(44)
+                        justify-content: center
+                        width: pxToRem(44)
+                        @include media-breakpoint-down(sm)
+                            font-size: pxToRem(16)
+                            height: pxToRem(32) 
+                            width: pxToRem(32) 
+                    
             &__paused
                 span
                     &.play
