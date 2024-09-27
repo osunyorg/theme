@@ -22,6 +22,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         this._setPageElementsEnabled(false);
         this.bodyElement.style.overflow = 'hidden';
         this.element.style.display = 'block';
+        this.element.addEventListener('click', this.eventsCallback.click);
         document.addEventListener('keydown', this.eventsCallback.keyDown);
         this.opened = true;
     },
@@ -31,6 +32,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         this.bodyElement.style.overflow = 'visible';
         this.element.style.display = 'none';
         this._closePopup();
+        this.element.removeEventListener('click', this.eventsCallback.click);
         document.removeEventListener('keydown', this.eventsCallback.keyDown);
         this.opened = false;
     },
@@ -58,6 +60,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
 
         // handling local event
         this.eventsCallback.keyDown = this._onKeydown.bind(this);
+        this.eventsCallback.click = this._onClick.bind(this);
         this.eventsCallback.description = this._showPopup.bind(this, 'description');
         this.eventsCallback.credit = this._showPopup.bind(this, 'credit');
         this.eventsCallback.closePopup = this._closePopup.bind(this);
@@ -70,6 +73,11 @@ window.osuny.lightbox.LightboxContainer.prototype = {
     _onKeydown (event) {
         if (event.key === 'Escape') {
             this.eventsCallback.close();
+        }
+    },
+    _onClick (event) {
+        if (event.target === this.content) {
+            this.close();
         }
     },
     _setImageContent (lightbox) {
