@@ -18,6 +18,12 @@
             &::before
                 content: ' • '
 
+
+// Fix de la suppression du padding dans les pages index ( progra, location ) des lors que le main prend la class page-with-blocks
+.programs__section main,
+.locations__taxonomy main
+    padding-bottom: var(--spacing-5)
+
 // Utilisé pour .post, .project, .page, .person, .program, .volume
 @mixin article($aspect-ratio: $article-media-aspect-ratio)
     position: relative
