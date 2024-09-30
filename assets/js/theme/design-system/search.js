@@ -52,6 +52,7 @@ class Search {
         });
     }
 
+
     clearSearch() {
         const button = this.element.querySelector('.pagefind-ui__button');
         const message =  this.element.querySelector('.pagefind-ui__message');
