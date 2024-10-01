@@ -56,6 +56,10 @@
         {{ end }}
       </div>
 
+      {{ if .hero_content_complement }}
+        {{ partial .hero_content_complement .context }}
+      {{ end }}
+
       {{ if .image }}
         <!-- TODO Peut etre aligner la stucture des données avec les autres cas d'images -->
         {{ partial "commons/image-figure.html" (dict
