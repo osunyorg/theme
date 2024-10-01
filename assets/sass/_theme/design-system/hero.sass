@@ -166,42 +166,6 @@
                 align-items: start
                 display: flex
                 justify-content: space-between
-        .buttons
-            @include meta
-            display: flex
-            flex-wrap: wrap
-            a.website
-                text-align: left
-                @include button-icon(links-line)
-            a[download]
-                @extend .button-alt
-                @include button-icon(download-2-line)
-                &::after
-                    font-size: 1.2em
-            @include media-breakpoint-down(sm)
-                button,
-                > a
-                    width: 100%
-            @include media-breakpoint-down(md)
-                gap: $spacing-3
-                flex-direction: row
-                button,
-                > a
-                    width: columns(6)
-                button
-                    min-width: auto
-            @include media-breakpoint-up(md)
-                flex-direction: column
-                gap: $spacing-3
-                button,
-                > a
-                    max-width: columns(3)
-            @include media-breakpoint-up(xl)
-                .dropdown-share,
-                &
-                    --btn-min-width: #{columns(3)}
-            @include media-breakpoint-down(desktop)
-                margin-top: $spacing-3
         .essential
             @include meta
             color: $header-color
@@ -231,4 +195,39 @@
                     padding-top: 0
                 a
                     @include link($hero-color)
-                    
+        .buttons
+            @include meta
+            display: flex
+            flex-wrap: wrap
+            justify-content: space-between
+            a.website
+                @include button-icon(links-line)
+                text-align: left
+            a[download]
+                @extend .button-alt
+                @include button-icon(download-2-line)
+                &::after
+                    font-size: 1.2em
+            @include media-breakpoint-down(md)
+                flex-direction: row
+                gap: $spacing-3
+                button,
+                > a
+                    width: columns(6)
+                button
+                    min-width: auto
+                .website
+                    width: 100%
+            @include media-breakpoint-up(md)
+                flex-direction: column
+                gap: $spacing-3
+                button,
+                > a
+                    max-width: columns(4)
+            @include media-breakpoint-up(xl)
+                .dropdown-share,
+                &
+                    --btn-min-width: #{columns(3)}
+            @include media-breakpoint-down(desktop)
+                margin-top: $spacing-3
+        
