@@ -22,11 +22,6 @@
       <p itemprop="jobTitle">
         {{ if (partial "GetTextFromHTML" $role) }}
           {{ partial "PrepareHTML" $role }}
-        {{ else if (partial "GetTextFromHTML" $person.Params.biography) }}
-          {{ partial "GetTruncateContent" ( dict 
-              "text" $person.Params.biography
-              "length" site.Params.persons.single.truncate_description
-          )}}
         {{ else if partial "GetTextFromHTML" $person.Params.summary }}
           {{ partial "PrepareHTML" $person.Params.summary }}
         {{ end }}
