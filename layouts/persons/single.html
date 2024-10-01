@@ -42,14 +42,14 @@
       {{ end }}
 
       <div class="informations">
-        {{ if .Content }}
+        {{ if .Params.biography }}
           <div class="biography">
             {{ partial "persons/summary.html" (dict
               "context" .
             ) }}
-            {{ if (partial "GetTextFromHTML" .Content) }}
+            {{ if (partial "GetTextFromHTML" .Params.biography) }}
               <div class="rich-text">
-                {{ partial "PrepareHTML" .Content }}
+                {{ partial "PrepareHTML" .Params.biography }}
               </div>
             {{ end }}
           </div>
