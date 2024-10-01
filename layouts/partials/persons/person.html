@@ -6,6 +6,7 @@
 ) }}
 {{ $person := .person }}
 {{ $role := .role }}
+{{ $biography_enabled := .biography_enabled | default false }}
 
 <article class="person" itemscope itemtype="https://schema.org/Person">
   <div class="description">
@@ -24,7 +25,7 @@
           {{ partial "PrepareHTML" $role }}
         {{ else if partial "GetTextFromHTML" $person.Params.summary }}
           {{ partial "PrepareHTML" $person.Params.summary }}
-        {{ else if (partial "GetTextFromHTML" $person.Params.biography) }}
+        {{ else if and $biography_enabled (partial "GetTextFromHTML" $person.Params.biography) }}
           {{ partial "GetTruncateContent" ( dict 
               "text" $person.Params.biography
               "length" site.Params.persons.single.truncate_description
