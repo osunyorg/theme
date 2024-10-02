@@ -45,10 +45,11 @@
                     width: 33.33333%
                 @include media-breakpoint-up(desktop)
                     grid-column: 1/4
+                    &:empty
+                        background: var(--color-background-alt)
+                        aspect-ratio: 3/2
                 &, img
                     aspect-ratio: auto
-                &:empty
-                    background: var(--color-background-alt)
             @include media-breakpoint-up(desktop)
                 .post-meta
                     max-width: columns(3)
