@@ -23,11 +23,11 @@
             display: flex
             margin-bottom: $spacing-3
             padding-bottom: $spacing-3
+            flex-direction: row
             .post-title + p
                 margin-top: $spacing-2
             @include media-breakpoint-up(desktop)
                 @include grid
-                flex-direction: row
                 margin-bottom: $spacing-5
                 padding-bottom: $spacing-5
             .post-content
@@ -35,6 +35,9 @@
                 .post-meta
                     > *
                         display: block
+                @include media-breakpoint-down(desktop)
+                    flex: 1
+                    margin-left: $spacing-2
             .media
                 background: none
                 margin: 0
@@ -44,6 +47,8 @@
                     grid-column: 1/4
                 &, img
                     aspect-ratio: auto
+                &:empty
+                    background: var(--color-background-alt)
             @include media-breakpoint-up(desktop)
                 .post-meta
                     max-width: columns(3)
