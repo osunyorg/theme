@@ -14,7 +14,6 @@
             @include icon(arrow-right-line, after)
                 margin-left: $spacing-2
             margin-top: $spacing-1
-
         .media
             width: 100%
             img
@@ -119,3 +118,20 @@
                     box-shadow: none
                     overflow: hidden
                     padding: 0
+
+.locations__taxonomy
+    .page-with-blocks
+        .locations
+            margin-bottom: $block-space-y
+    @include media-breakpoint-up(desktop)
+        &.full-width .page-with-blocks 
+            .locations
+                margin-bottom: $block-space-y-desktop
+    &.full-width
+        .blocks 
+            .block:last-child
+                &.block-organizations--map
+                    margin-bottom: calc(-1 * (var(--spacing-5) / 2))
+                    padding-bottom: 0
+                    @include media-breakpoint-up(desktop)
+                        margin-bottom: calc(-1 * var(--spacing-5))

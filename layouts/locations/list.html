@@ -7,12 +7,12 @@
         "context" .
       ) }}
 
-    {{ partial "contents/list.html" . }}
+      <div class="container">
+        {{ partial "locations/locations.html" . }}
+        {{ partial "commons/pagination.html" . }}
+      </div>
 
-    <div class="container">
-      {{ partial "locations/locations.html" . }}
-      {{ partial "commons/pagination.html" . }}
-    </div>
+      {{ partial "contents/list.html" . }}
   </div>
 
 {{ end }}
