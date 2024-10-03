@@ -1,6 +1,6 @@
 <section class="person-posts">
   <div class="top">
-    <h2 class="h5"><a href="{{ .author.Permalink }}">{{ i18n "persons.posts" }}</a></h2>
+    <h2 class="h5">{{ i18n "persons.posts" }}</h2>
   </div>
   <div class="posts posts--{{- site.Params.posts.index.layout -}}">
     {{ range first 3 .posts }}
@@ -9,5 +9,6 @@
         "options" site.Params.posts.index.options
       )}}
     {{ end }}
+    <a href="{{ .author.Permalink }}" class="more">{{ .author.Params.Title }}</a>
   </div>
 </section>
