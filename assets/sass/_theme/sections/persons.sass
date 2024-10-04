@@ -170,16 +170,24 @@ ol.persons--list
                 transition: transform .3s ease
             &:hover::after
                 transform: translateX($spacing-2)
+        .more
+            @include icon-block(arrow-right-line, after)
+            display: inline-block
+            margin-top: $spacing-3
+            &::after
+                margin-left: space()
+                transition: 0.55s $arrow-ease-transition
+            &:hover:after
+                transform: translateX($spacing-1)
     .person-publications
         .publications
             margin-top: $spacing-2
     .person-posts
         .posts
             margin-top: $spacing-3
-        article.post:last-child
-            margin-bottom: 0
-        @include media-breakpoint-up(desktop)
-            .posts
+            article.post:last-child
+                margin-bottom: 0
+            @include media-breakpoint-up(desktop)
                 margin-top: $spacing-4
     section
         padding-bottom: $spacing-5
