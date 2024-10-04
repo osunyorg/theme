@@ -1,26 +1,36 @@
 export function focusTrap(event, element, isOpened) {
-    const focusables = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
-    const elements = element.querySelectorAll(focusables);
-    const focusableInDialog = Array.from(elements).filter(el => !el.disabled && el.tabIndex >= 0);
-    const firstFocusable = focusableInDialog[0];
-    const lastFocusable = focusableInDialog[focusableInDialog.length - 1];
-
-    if (!isOpened) {
+    if (!isOpened || event.key !== 'Tab') {
         return;
     }
 
-    if (event.key === 'Tab') {
-        if (event.shiftKey) {
-            if (document.activeElement === firstFocusable || !element.contains(document.activeElement)) {
-                event.preventDefault();
-                lastFocusable.focus();
-            }
-        } 
-        else {
-            if (document.activeElement === lastFocusable || !element.contains(document.activeElement)) {
-                event.preventDefault();
-                firstFocusable.focus();
-            }
-        }
+    const focusableElements = getFocusableElements(element);
+    if (focusableElements.length === 0) {
+        return;
     }
+
+    const firstFocusable = focusableElements[0];
+    const lastFocusable = focusableElements[focusableElements.length - 1];
+    handleTabLoop(event, firstFocusable, lastFocusable, element);
+}
+
+function getFocusableElements(element) {
+    const focusables = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
+    const elements = element.querySelectorAll(focusables);
+    return Array.from(elements).filter(el => !el.disabled && el.tabIndex >= 0);
+}
+
+function handleTabLoop(event, firstFocusable, lastFocusable, element) {
+    const goingBackward = event.shiftKey;
+    const focusTarget = goingBackward ? lastFocusable : firstFocusable;
+    // get focus position (we want first or last) to create the focus loop
+    const focusOnLimit = isElementFocused(element, goingBackward ? firstFocusable : lastFocusable);
+
+    if (focusOnLimit) {
+        event.preventDefault();
+        focusTarget.focus();
+    }
+}
+
+function isElementFocused(element, focusableElement) {
+    return document.activeElement === focusableElement || !element.contains(document.activeElement);
 }
