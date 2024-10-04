@@ -13,15 +13,12 @@
 
   {{ if $image }}
     {{ with .image}}
-      <figure 
+      <figure role="figure"
               class="{{ $image_class }}{{ if $is_carousel }} carousel__slide {{ end }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
-            {{ if $is_carousel }} 
               id="carousel-item-{{$index}}"
-            {{ else }}
-              {{- with or .text .alt .credit }} 
+              {{ with or .text .alt .credit }} 
                 aria-label="{{ . | plainify }}" 
               {{ end }}
-            {{ end }}
       >
         {{ partial "commons/image.html" (dict
           "image"  .id
@@ -39,7 +36,7 @@
         {{ end }}
         
         {{ partial "commons/lightbox/lightbox-launcher.html" (dict
-          "description" $lightbox_text
+          "description" (plainify $lightbox_text)
           "image" .id
         ) }}
       {{ end }}
