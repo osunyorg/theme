@@ -1,10 +1,11 @@
-{{ $linkTitle := (printf "%s %s" (i18n "commons.lightbox.link.title") (cond .description (print " " .description) "")) }}
+{{ $has_description := gt (len .description) 0 }}
+{{ $link_title := (printf "%s %s" (i18n "commons.lightbox.link.title") (cond $has_description (print " " .description) "")) }}
 
 <a class="glightbox"
     aria-hidden="true"
     tabindex="-1"
     role="button"
-    data-glightbox="type: image;{{ if (and .description (gt (len .description) 0)) }}description: {{ .description | plainify }}{{ end }}"
+    data-glightbox="type: image;{{ if $has_description }} description: {{ .description | plainify }}{{ end }}"
     href="{{- partial "GetLightboxUrl" .image -}}">
-  <span class="sr-only">{{ $linkTitle }}</span>
+  <span class="sr-only">{{ $link_title }}</span>
 </a>
