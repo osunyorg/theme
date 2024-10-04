@@ -4,7 +4,7 @@
     aria-hidden="true"
     tabindex="-1"
     role="button"
-    data-glightbox="type: image;{{ if .description }}description: {{ partial "PrepareHTML" .description }}{{ end }}"
+    data-glightbox="type: image;{{ if (and .description (gt (len .description) 0)) }}description: {{ .description | plainify }}{{ end }}"
     href="{{- partial "GetLightboxUrl" .image -}}">
   <span class="sr-only">{{ $linkTitle }}</span>
 </a>
