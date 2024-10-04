@@ -27,9 +27,7 @@ Accordion.prototype.toggleAccordion = function(open) {
 
 (function () {
     var accordions = document.querySelectorAll('details');
-    console.log(accordions)
     Array.prototype.forEach.call(accordions, function(accordion) {
-        console.log(accordion)
         new Accordion(accordion);
     });
 }());
