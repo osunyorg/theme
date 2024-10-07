@@ -10,7 +10,7 @@
       {{ with $content }}
         {{ partial $partial (dict
           "is_carousel" true
-          "index" $slideindex
+          "index" (add $slideindex 1)
           "params" .
           "heading_tag" $heading_tag
           "options" $block_options

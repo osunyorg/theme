@@ -29,6 +29,15 @@ blocks:
     title: Image
   key_figures:
     title: Chiffres-clés
+  licenses:
+    labels:
+      cc-zero: Licence libre Zéro - Aucune limite de diffusion
+      by: Licence libre - Attribution à l’entité créatrice
+      by-sa: Licence libre - Attribution à l’entité créatrice - Partage dans les mêmes conditions
+      by-nd: Licence libre - Attribution à l’entité créatrice - Pas de modification
+      by-nc: Licence libre - Attribution à l’entité créatrice - Pas d’utilisation commerciale
+      by-nc-sa: Licence libre - Attribution à l’entité créatrice - Pas d’utilisation commerciale - Partage dans les mêmes conditions
+      by-nc-nd: Licence libre - Attribution à l’entité créatrice - Pas d’utilisation commerciale - Pas de modification
   locations:
     button_location: Découvrir le site     
   organizations:
@@ -70,6 +79,7 @@ commons:
     shortcut_navigation: Navigation d'accès rapide
     transcription: Transcription
   search:
+    label: Recherche
     title: Rechercher
     close: Fermer la recherche
   backtotop: Haut de page
@@ -91,12 +101,18 @@ commons:
   contact:
     address: Adresse
     email: Email
+    empty_name: de ce contact
     phone: Téléphone
     phone_professional: Téléphone professionnel
     website: Site web
     web: Web
     schedule: Horaires
-    socials: Réseaux sociaux
+    socials:
+      title: Réseaux sociaux
+      label: 
+        social_media: Consulter la page {{ .name }} sur {{ .media }}
+        email: Contacter {{ .name }} par email
+        rss: Consulter le flux RSS du site {{ .name }}
   credit: Un site éco-conçu produit avec <a href="https://www.osuny.org/" title="Osuny - lien externe" target="_blank" rel="noreferrer">Osuny</a>
   date: Date
   download:
@@ -104,18 +120,11 @@ commons:
     pdf: Télécharger le PDF
   "false": Non
   in: Dans
+  index: Accueil - {{ .Title }}
   language: Langue
   lightbox:
-    info: "Afficher les informations de l'image"
-    credit: "Afficher les credits de l'image"
-    prev: "Aller à l'iamge précédente"
-    next: "Aller à l'image suivante"
-    close: "Fermer la lightbox"
-    closedetailwindow: "Fermer"
-    infoTitle: "Information"
-    creditTitle: "Credit"    
     link:
-      title: Ouvrir l'image
+      title: Agrandir l'image
   link:
     blank: lien externe
     blank_aria: “{{ .Title }}” - lien externe
@@ -230,11 +239,16 @@ papers:
     references: Références
     content: Texte intégral
 persons:
-  posts: Actualités publiées récemment
+  posts:
+    recent: Actualités publiées récemment
+    all: Voir toutes les actualités publiées par {{ .author }}
+  papers: 
+    recent: Papiers publiés récemment
+    all: Voir tous les papiers publiés par {{ .author }}
+  publications:
+    recent: Publications récentes
+    all: Voir toutes les publications de {{ .author }}
   programs: Enseignements
-  papers: Papiers
-  publications: Publications récentes
-  papers: Papiers publiés récemment
   backlinks:
     events: Événements mentionnant
     pages: Pages mentionnant

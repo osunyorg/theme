@@ -16,8 +16,7 @@ window.osuny.carousel.Carousel = function (element) {
     };
     this.windowResizeTimeout = null;
     this.lastScrollXTimeout = null;
-    this.environment = window.osuny.carousel;
-    this._findElement = window.osuny.components.utils.findElement.bind(this);
+    this._findElement = window.osuny.carousel.utils.findElement.bind(this);
     this._initializeConfig();
     this._initializeSlider();
     this._initializePagination();
@@ -83,9 +82,6 @@ window.osuny.carousel.Carousel.prototype = {
         this.pagination = new window.osuny.carousel.Pagination(paginationElement);
         if (paginationElement) {
             paginationElement.addEventListener(window.osuny.carousel.events.paginationButtonClicked, this._onPaginationButtonClicked.bind(this));
-            paginationElement.addEventListener(window.osuny.carousel.events.controlFocused, function () {
-                this.autoplayer.pause();
-            }.bind(this));
         }
     },
     _initializeArrows: function () {
@@ -128,6 +124,9 @@ window.osuny.carousel.Carousel.prototype = {
         this.element.addEventListener('touchstart', this._pointerStart.bind(this));
         this.element.addEventListener('mouseleave', this._pointerEnd.bind(this));
         this.element.addEventListener('touchend', this._pointerEnd.bind(this));
+        this.element.addEventListener('focusin', function () {
+            this.autoplayer.pause();
+        }.bind(this));
     },
     _onAutoplayerProgression: function (event) {
         this.pagination.setProgression(event.value);

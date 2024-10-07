@@ -16,9 +16,11 @@
             <li itemscope itemtype="https://schema.org/WebPage">
               <div class="link-content">
                 {{ $title := partial "PrepareHTML" .title }}
+                {{ $has_alt_title := gt (len .alt_title) 0 }}
+                {{ $a11y_title := cond $has_alt_title .alt_title $title }}
                 {{ $url := .url }}
                 {{ $isExternal := .external | default true }}
-                {{ $link_title := cond $isExternal (safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title))) $title}}
+                {{ $link_title := cond $isExternal (safeHTML (i18n "commons.link.blank_aria" (dict "Title" $a11y_title))) $a11y_title}}
 
                 <link itemprop="url" href="{{ .url }}">
                 <a itemprop="relatedLink" href="{{ .url }}" title="{{ $link_title }}" {{ if $isExternal -}} target="_blank" rel="noopener" {{- end }}>

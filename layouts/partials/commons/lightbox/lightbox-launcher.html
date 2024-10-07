@@ -1,44 +1,11 @@
-{{ $options := (dict ) }}
-{{ $lightbox_text := false }}
-{{ if and .description .credit }}
-  {{ $lightbox_text = delimit (slice .description .credit) " / " }}
-{{ else }}
-  {{ $lightbox_text = or .description .credit }}
-{{ end }}
+{{ $has_description := gt (len .description) 0 }}
+{{ $link_title := (printf "%s %s" (i18n "commons.lightbox.link.title") (cond $has_description (print " " .description) "")) }}
 
-{{ $has_description := gt (len $lightbox_text) 0 }}
-{{ $link_title := (printf "%s %s" (i18n "commons.lightbox.link.title") (cond $has_description (print " " $lightbox_text) "")) }}
-
-{{ with .description }}
-  {{ $options = merge $options (dict "description" ( . | plainify )) }}
-  {{ $options = merge $options (dict "descriptionhtml" (partial "PrepareHTML" . )) }}
-{{ end }}
-
-{{ with .credit }}
-  {{ $options = merge $options (dict "credit" (. | plainify)) }}
-  {{ $options = merge $options (dict "credithtml" (partial "PrepareHTML" . )) }}
-{{ end }}
-
-{{$index := (partial "PrepareHTML" .index  )}}
-{{$total := (partial "PrepareHTML" .total )}}
-
-{{ if and $index $total }}
-  {{ $options = merge $options (dict "gallery_values" (dict "index" $index "total" $total)) }}
-{{ end }}
-
-<a class="lightbox-launcher"
-  role="button"
-  aria-hidden="true"
-  tabindex="-1"
-  data-lightbox="{{ $options | encoding.Jsonify }}" 
-  href="{{- partial "GetLightboxUrl" .image -}}"
-  title="{{- i18n "commons.lightbox.link.title" -}}"
-  aria-label="{{- i18n "commons.lightbox.link.title" -}}">
-    <span class="sr-only">{{ $link_title }}</span>
-    {{ partial "commons/image.html" (dict
-      "image"  .image
-      "alt"    .alt
-      "sizes"  .sizes
-      "lazy"  .lazy
-    ) }}
+<a class="glightbox"
+    aria-hidden="true"
+    tabindex="-1"
+    role="button"
+    data-glightbox="type: image;{{ if $has_description }} description: {{ .description | plainify }}{{ end }}"
+    href="{{- partial "GetLightboxUrl" .image -}}">
+  <span class="sr-only">{{ $link_title }}</span>
 </a>

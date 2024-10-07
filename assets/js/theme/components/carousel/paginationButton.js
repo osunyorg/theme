@@ -9,7 +9,6 @@ window.osuny.carousel.PaginationButton = function PaginationButton (element, ind
     this.progressBar = this.element.querySelector('i');
     this.setProgression(0);
     this.element.addEventListener('click', this._onClick.bind(this));
-    this.element.addEventListener('focusin', this._onFocus.bind(this));
 };
 
 window.osuny.carousel.PaginationButton.prototype = {
@@ -30,10 +29,6 @@ window.osuny.carousel.PaginationButton.prototype = {
     _onClick: function () {
         var event = new Event(window.osuny.carousel.events.paginationButtonClicked);
         event.index = this.index;
-        this.pagination.dispatchEvent(event);
-    },
-    _onFocus: function () {
-        var event = new Event(window.osuny.carousel.events.controlFocused);
         this.pagination.dispatchEvent(event);
     },
     setAriaCurrent (current) {

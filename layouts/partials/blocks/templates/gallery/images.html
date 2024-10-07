@@ -14,15 +14,11 @@
   {{ $sizes = site.Params.image_sizes.blocks.image }}
 {{ end }}
 
-{{ $totalimages := .images | len }}
 <div class="gallery{{- if $has_text }} gallery--with-text {{ end -}}">
-{{ range $index, $image := .images }}
+{{ range .images }}
   {{ partial "commons/image-figure.html" (dict
     "image"    .
     "sizes"    $sizes
-    "is_gallery" true
-    "index"    $index
-    "total"    $totalimages
     )
   }}
 {{ end }}

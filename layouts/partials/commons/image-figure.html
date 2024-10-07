@@ -1,48 +1,43 @@
 {{ if .image.id }}
+  {{ $index := .index }}
   {{ $sizes := .sizes }}
   {{ $lazy := default true .lazy }}
   {{ $is_carousel := .is_carousel }}
   {{ $is_lightbox := false }}
-  {{ $is_gallery := .is_gallery }}
-  {{ $index := .index }}
-  {{ $total := .total }}
-  {{ if or (not site.Params.image_sizes.design_system.lightbox.disabled) (and $is_gallery (not site.Params.image_sizes.design_system.gallerylightbox.disabled))}}
-    {{ $is_lightbox = true }}
-  {{ end }}
   {{ $image := partial "GetMedia" .image.id }}
   {{ $image_class := printf "image-%s" (partial "GetImageDirection" .image) }}
 
+  {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
+    {{ $is_lightbox = true }}
+  {{ end }}
 
   {{ if $image }}
     {{ with .image}}
-      <figure 
+      <figure role="figure"
               class="{{ $image_class }}{{ if $is_carousel }} carousel__slide {{ end }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
-            {{ if $is_carousel }} 
               id="carousel-item-{{$index}}"
-            {{ else }}
-              {{- with or .text .alt .credit }} 
+              {{ with or .text .alt .credit }} 
                 aria-label="{{ . | plainify }}" 
               {{ end }}
-            {{ end }}
       >
-      {{ if $is_lightbox}}
-        {{ partial "commons/lightbox/lightbox-launcher.html" (dict
-          "description" .text
-          "image" .id
-          "alt"    .alt
-          "sizes"  $sizes
-          "lazy"  $lazy
-          "credit" .credit
-          "is_gallery" $is_gallery
-          "index" $index
-          "total" $total
-        ) }}
-      {{ else }}
         {{ partial "commons/image.html" (dict
           "image"  .id
           "alt"    .alt
           "sizes"  $sizes
           "lazy"  $lazy
+        ) }}
+      
+      {{ if $is_lightbox}}
+        {{ $lightbox_text := false }}
+        {{ if and .text .credit }}
+          {{ $lightbox_text = delimit (slice .text .credit) " / " }}
+        {{ else }}
+          {{ $lightbox_text = or .text .credit }}
+        {{ end }}
+        
+        {{ partial "commons/lightbox/lightbox-launcher.html" (dict
+          "description" (plainify $lightbox_text)
+          "image" .id
         ) }}
       {{ end }}
 
