@@ -1,0 +1,32 @@
+{{ $parent := .Params.parent }}
+{{ $locations := .Params.locations}}
+{{- with .Params.diplomas -}}
+  {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
+  {{- with $diploma -}}
+    <dl class="hero-essential">
+      <dt>{{ i18n "programs.diploma" }}</dt>
+      <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></dd>
+      {{- if .Params.level -}}
+        <dt>{{ i18n "programs.level" }}</dt>
+        <dd>{{ partial "PrepareHTML" .Params.level }}</dd>
+      {{- end -}}
+      {{- with $parent -}}
+        <dt>{{ i18n "programs.mention" }}</dt>
+        <dd><a href="{{ .url }}">{{ partial "PrepareHTML" .title }}</a></dd>
+      {{- end -}}
+      {{- if .Params.duration -}}
+        <dt>{{ i18n "programs.duration" }}</dt>
+        <dd>{{ partial "PrepareHTML" .Params.duration }}</dd>
+      {{- end -}}
+      {{- with $locations -}}
+        <dt>{{ i18n "programs.location" }}</dt>
+        <dd>
+          {{range .}}
+          {{- $locationpage := site.GetPage (printf "/locations/%s" .slug) -}}
+            <a href="{{ .path }}">{{$locationpage.Params.title}}</a> 
+          {{end}}
+        </dd>
+      {{- end -}}
+    </dl>
+  {{- end -}}
+{{- end -}}

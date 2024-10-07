@@ -1,13 +1,12 @@
 {{ $context := . }}
 {{- if .Params.contents -}}
   <div class="blocks">
-  {{- range $index, $content := .Params.contents -}}
+  {{- range .Params.contents -}}
     {{ if eq .kind "block" }}
-      {{ $template := printf "blocks/templates/%s.html" $content.template }}
+      {{ $template := printf "blocks/templates/%s.html" .template }}
       {{ partial $template (dict
-          "block" $content
+          "block" .
           "context" $context
-          "index" $index
       )}}
     {{- else if (eq .kind "heading") -}}
       {{ $headingId := .slug | default (urlize .title) }}

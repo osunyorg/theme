@@ -170,24 +170,16 @@ ol.persons--list
                 transition: transform .3s ease
             &:hover::after
                 transform: translateX($spacing-2)
-        .more
-            @include icon-block(arrow-right-line, after)
-            display: inline-block
-            margin-top: $spacing-3
-            &::after
-                margin-left: space()
-                transition: 0.55s $arrow-ease-transition
-            &:hover:after
-                transform: translateX($spacing-1)
     .person-publications
         .publications
             margin-top: $spacing-2
     .person-posts
         .posts
             margin-top: $spacing-3
-            article.post:last-child
-                margin-bottom: 0
-            @include media-breakpoint-up(desktop)
+        article.post:last-child
+            margin-bottom: 0
+        @include media-breakpoint-up(desktop)
+            .posts
                 margin-top: $spacing-4
     section
         padding-bottom: $spacing-5
@@ -219,13 +211,11 @@ ol.persons--list
         .informations
             @include grid
             margin-bottom: $spacing-4
-            .roles
-                grid-column: 1 / -1
-            .biography
+            > div:first-of-type
                 grid-column: 1 / 9
-                + .roles
-                    grid-column: 9 / 13
-                    text-align: right
+            .roles
+                grid-column: 9 / 13
+                text-align: right
             .lead + div
                 margin-top: $spacing-4
     .contacts-details ul

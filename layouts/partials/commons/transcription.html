@@ -1,10 +1,7 @@
 {{ if (partial "GetTextFromHTML" .transcription) }}
-{{ $block_index := .block_index }}
-{{ $id := printf "block-%d-transcription" $block_index}}
-
 <div class="transcription">
-  <details id="{{$id}}">
-    <summary aria-controls="#{{ $id }}" aria-expanded="false">{{ i18n "commons.accessibility.transcription" }}</summary>
+  <details>
+    <summary>{{ i18n "commons.accessibility.transcription" }}</summary>
     <p>
       {{- $transcription := partial "PrepareHTML" .transcription -}}
       {{ safeHTML (replace $transcription "\n" "<br/>") }}

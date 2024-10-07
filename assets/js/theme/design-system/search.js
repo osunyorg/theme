@@ -14,6 +14,7 @@ class Search {
             return;
         }
 
+        this.input = this.element.querySelector('input');
         this.listen();
     }
 
@@ -39,15 +40,14 @@ class Search {
                     this.toggle(false);
                     this.button.focus();
                 }
-            } 
-            else if (event.key === "Tab" && this.state.isOpened) {
+            } else if (event.key === "Tab" && this.state.isOpened) {
                 focusTrap(event, this.element, this.state.isOpened);
-            }
-            this.buttonMore = this.element.querySelector('.pagefind-ui__results + button');
-            if (this.buttonMore && this.state.isOpened) {
-                this.buttonMore.addEventListener('click', () => {
+                
+                this.buttonMore = this.element.querySelector('.pagefind-ui__results + button');
+
+                if (this.buttonMore) {
                     this.buttonMoreFocus();
-                });
+                }
             }
         });
     }
@@ -80,7 +80,7 @@ class Search {
                 }
                 });
             });
-        });  
+        });   
         const observerConfig = { childList: true, subtree: true };
         observer.observe(this.element, observerConfig);
     }
@@ -94,26 +94,9 @@ class Search {
             this.input = this.element.querySelector('input');
             this.input.focus();
 
-            this.inertElements = [];
-            const allElements = document.querySelectorAll('body *');
-
-            allElements.forEach(el => {
-                if (el === this.element || this.element.contains(el) || el.contains(this.element)) {
-                    return;
-                }
-    
-                el.setAttribute('inert', '');
-                this.inertElements.push(el);
-            });
+            document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'unset';
-
-            if (this.inertElements) {
-                this.inertElements.forEach(el => {
-                    el.removeAttribute('inert');
-                });
-                this.inertElements = null;
-            }
         }
     }
 }

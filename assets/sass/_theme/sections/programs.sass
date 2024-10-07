@@ -19,41 +19,112 @@ ol.programs
 
 .programs__section
     .hero
-        .content
+        .container
+            .content
+                display: flex
+                flex-direction: column
+                justify-content: space-between
+                @include media-breakpoint-up(md)
+                    flex-direction: row
+                    gap: var(--grid-gutter)
+
+                .hero-text
+                    width: columns(12)
+                    @include media-breakpoint-up(md)
+                        width: columns(9)
+                        
+                .hero-logos
+                    align-items: center
+                    display: flex
+                    gap: var(--grid-gutter)
+                    justify-content: space-between
+                    margin-top: $spacing-3
+                    width: columns(12)
+                    @include media-breakpoint-up(md)
+                        align-items: end
+                        align-self: end
+                        flex-direction: column
+                        margin-top: $spacing-5
+                        width: columns(3)
+
+                    .logo
+                        width: columns(6)
+                        @include media-breakpoint-up(md)
+                            width: columns(2)
+
+                    .diploma-certification
+                        width: columns(4)
+                        @include media-breakpoint-up(md)
+                            width: offset(1)
+                            picture
+                                max-width: 100%
+                        img
+                            display: block
+
+        .essential-container
+            margin-top: $spacing-3
             @include media-breakpoint-up(md)
                 display: flex
-                flex-direction: row
                 justify-content: space-between
-                gap: var(--grid-gutter)
-                .hero-text
-                    width: columns(9)
-        .hero-logos
-            align-items: center
-            display: flex
-            gap: var(--grid-gutter)
-            justify-content: space-between
-            margin-top: $spacing-3
-            img
-                display: block
-            @include media-breakpoint-down(md)
-                width: 100%
-                img
-                    display: block
-                    max-height: pxToRem(150)
-                    max-width: 100%
-                .logo
-                    width: columns(6)
-                .diploma-certification
-                    img
-                        width: columns(4)
-            @include media-breakpoint-up(md)
-                align-items: end
-                flex-direction: column
                 margin-top: $spacing-5
-                width: columns(2)
-                .diploma-certification
-                    img
-                        width: offset(1)
+            .hero-essential
+                @include meta
+                color: $header-color
+                flex-wrap: wrap
+                font-size: $program-essential-font-size
+                margin-bottom: 0
+                margin-top: 0
+                dt, 
+                dd
+                    margin: 0            
+                dt:not(:first-of-type)
+                    padding-top: $spacing-2
+                dt
+                    color: var(--color-text-alt)
+                    grid-column: 1/3
+                dd
+                    grid-column: 3/7
+                    padding-bottom: $spacing-2
+                    a
+                        @include link($hero-color)
+                        padding-bottom: 0
+                @include media-breakpoint-up(md)
+                    @include grid(6, false, 0)
+                    font-size: $program-essential-font-size-desktop
+                    width: columns(6)
+                    dt
+                        padding-bottom: $spacing-2
+                    dd
+                        &:not(:first-of-type)
+                            padding-top: $spacing-2
+
+            .hero-actions
+                @include meta
+                display: flex
+                flex-wrap: wrap
+                gap: $spacing-3
+                justify-content: space-between
+                margin-top: $spacing-3
+                @include media-breakpoint-up(md)
+                    flex-direction: column
+                    justify-content: flex-start
+                    margin-top: 0
+                    width: columns(3)
+
+                > *
+                    min-width: initial
+                    width: 100%
+                >  :not(.website)
+                    width: columns(6)
+                    @include media-breakpoint-up(md)
+                        width: 100%
+                            
+                a[download]
+                    @extend .button-alt
+                    @include button-icon(download-2-line)
+                    min-width: initial
+                    &::after
+                        font-size: 1.2em
 
     &:not(.full-width)
         .document-content

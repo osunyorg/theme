@@ -1,14 +1,14 @@
-{{ $researcher := .researcher }}
+{{ $researchers := site.GetPage (printf "/researchers/%s" .slug) }}
 <section class="persons-papers">
   <div class="top">
-    <h2 class="h5">{{ i18n "persons.papers.recent" }}</h2>
+    <h2>{{ i18n "persons.papers" }}</h2>
+    <a href="{{ $researchers.Permalink }}" class="link">{{ i18n "persons.papers" }}</a>
   </div>
   <ul class="papers">
     {{ range first 3 .papers }}
-    <li>
-      {{ partial "papers/paper.html" (dict "paper" .) }}
-    </li>
+      <li>
+        {{ partial "papers/paper.html" (dict "paper" . ) }}
+      </li>
     {{ end }}
   </ul>
-  <a href="{{ $researcher.Permalink }}" class="more">{{ i18n "persons.papers.all" (dict "author" $researcher.Params.person) }}</a>
 </section>

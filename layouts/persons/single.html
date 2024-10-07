@@ -14,7 +14,7 @@
 
   {{ $posts := where $author.Pages "Section" "posts" }}
   {{ $publications := where $researcher.Pages "Section" "publications" }}
-  {{ $papers := where $researcher.Pages "Section" "papers" }}
+  {{ $papers := where $author.Pages "Section" "papers" }}
 
   {{ partial "persons/hero-single.html" . }}
 
@@ -42,30 +42,26 @@
       {{ end }}
 
       <div class="informations">
-        {{ if .Params.biography }}
-          <div class="biography">
-            {{ partial "persons/summary.html" (dict
-              "context" .
-            ) }}
-            {{ if (partial "GetTextFromHTML" .Params.biography) }}
-              <div class="rich-text">
-                {{ partial "PrepareHTML" .Params.biography }}
-              </div>
-            {{ end }}
-          </div>
-        {{ end }}
-        {{ if $programsForAdministrator }}
+        <div>
+          {{ partial "persons/summary.html" (dict
+            "context" .
+          ) }}
+          {{ if (partial "GetTextFromHTML" .Content) }}
+            <div class="rich-text">
+              {{ partial "PrepareHTML" .Content }}
+            </div>
+          {{ end }}
+        </div>
+        {{ range $programsForAdministrator }}
+        {{ $program := . }}
           <div class="roles">
-            {{ range $programsForAdministrator }}
-            {{ $program := . }}
-              {{ range .Params.roles }}
-                {{ $role := .title }}
-                {{ if in .persons $slug }}
-                  <p>
-                    {{ safeHTML $role }}<br>
-                    <a href="{{ $program.Permalink }}" class="link">{{ safeHTML $program.Title }}</a>
-                  </p>
-                {{ end }}
+            {{ range .Params.roles }}
+              {{ $role := .title }}
+              {{ if in .persons $slug }}
+                <p>
+                  {{ safeHTML $role }}<br>
+                  <a href="{{ $program.Permalink }}" class="link">{{ safeHTML $program.Title }}</a>
+                </p>
               {{ end }}
             {{ end }}
           </div>
@@ -92,7 +88,7 @@
       {{ end }}
 
       {{ if $papers }}
-        {{ partial "persons/papers.html" (dict "papers" $papers "researcher" $researcher) }}
+        {{ partial "persons/papers.html" (dict "papers" $papers "slug" $slug) }}
       {{ end }}
     </div>
 

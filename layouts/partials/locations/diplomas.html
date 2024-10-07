@@ -1,17 +1,21 @@
+{{/*  Get programs associated to location  */}}
+{{ $programs := .programs }}
 <ul class="diplomas">
 {{ range .diplomas }}
-  {{ $diploma := site.GetPage (printf "/diplomas/%s" .path) }}
-  {{ if $diploma }}
+  {{ $path := .path }}
+  {{ with site.GetPage (printf "/diplomas/%s" .path) }}
     <li>
-      <a href="{{ $diploma.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $diploma.Title) }}">
-        {{- partial "PrepareHTML" $diploma.Title -}}
+      <a href="{{ .Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">
+        {{- partial "PrepareHTML" .Title -}}
       </a>
-      {{ with .programs }}
+      {{ if $programs }}
         <div class="content">
           <ol class="programs">
-            {{- range . -}}
-              {{ $program := site.GetPage (printf "/programs%s" .slug) }}
-              {{- partial "partials/locations/program.html" $program.Params -}}
+            {{- range $programs -}}
+              {{ $program := site.GetPage (printf "/programs%s" .) }}
+              {{ if (eq $path $program.Params.diplomas)}}
+                {{- partial "partials/locations/program.html" $program.Params -}}
+              {{ end }}
             {{- end -}}
           </ol>
         </div>

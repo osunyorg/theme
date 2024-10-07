@@ -23,10 +23,6 @@ header#document-header
             a:active,
             span
                 color: inherit
-        @if $header-sticky-invert-logo
-            .logo
-                img, .logo-text
-                    filter: invert(1)
         @include media-breakpoint-up(desktop)
             .dropdown-menu
                 background: $header-sticky-dropdown-background
@@ -34,6 +30,10 @@ header#document-header
     &.is-sticky
         .pagefind-ui__toggle
             color: $header-sticky-color
+        @if $header-sticky-invert-logo
+            .logo
+                img, .logo-text
+                    filter: invert(1)
     html.is-scrolling-down:not(.has-menu-opened) &
         @include media-breakpoint-down(desktop)
             transform: translateY(-100%)
