@@ -3,7 +3,6 @@
 {{- $block_class := partial "GetBlockClass" .block -}}
 
 {{- with .block.data -}}
-  {{- $text := .text -}}
   {{- $buttons := and .button.text .button_secondary.text -}}
   {{- if .image -}}
     {{- $image_class = printf "image-%s" (partial "GetImageDirection" .image ) -}}
@@ -15,38 +14,18 @@
           "title" $block.title
           "heading_level" $block.ranks.self
         )}}
-
-        {{- with .image -}}
-          <figure class="{{ $image_class }}">
-            {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
-              <a  class="glightbox"
-                  role="button"
-                  data-glightbox="type: image;{{ if .credit }}description: {{ partial "PrepareHTML" .credit }}{{ end }}"
-                  href="{{- partial "GetLightboxUrl" . -}}"
-                  title="{{- i18n "commons.lightbox.link.title" -}}"
-                  aria-label="{{- i18n "commons.lightbox.link.title" -}}">
-                  <span class="sr-only">{{- i18n "commons.lightbox.link.title" -}}</span>
-            {{ end }}
-                {{ partial "commons/image.html"
-                  (dict
-                    "image"    .
-                    "alt"      .alt
-                    "sizes"    site.Params.image_sizes.blocks.image
-                  )}}
-            {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
-              </a>
-            {{ end }}
-            <figcaption>
-              {{- if $text }}
-                {{ partial "PrepareHTML" $text }}
-              {{ end -}}
-              {{- if partial "PrepareHTML" .credit }}
-                <div class="credit">{{ partial "PrepareHTML" .credit }}</div>
-              {{ end -}}
-            </figcaption>
-          </figure>
-        {{- end -}}
-
+        
+        <!-- TODO Peut etre aligner la stucture des données avec les autres cas d'images -->
+        {{ partial "commons/image-figure.html" (dict
+          "image" (dict 
+                    "alt" .image.alt
+                    "id" .image.id
+                    "file" .image.file
+                    "credit" .image.credit
+                    "text" .text
+                  )
+          "sizes" site.Params.image_sizes.blocks.image
+        ) }}
       </div>
     </div>
   </div>

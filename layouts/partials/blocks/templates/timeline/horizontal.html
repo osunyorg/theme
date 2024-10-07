@@ -3,7 +3,7 @@
 {{ $role := .role }}
 
 {{ with .params }}
-  <article class="timeline-event carousel__slide" id="carousel-item-{{$index}}" role="{{$role}}" aria-roledescription="slide" class="carousel__slide" aria-label="item-{{$index}}" itemscope itemtype="https://schema.org/Article">
+  <article class="timeline-event carousel__slide" id="carousel-item-{{$index}}" class="carousel__slide" itemscope itemtype="https://schema.org/Article">
     {{ $heading_tag.open -}}
       {{ .title | safeHTML }}
     {{ $heading_tag.close -}}

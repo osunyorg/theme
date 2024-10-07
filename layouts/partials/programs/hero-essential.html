@@ -1,6 +1,7 @@
 <div class="essential-container" id="#{{ urlize (i18n "programs.toc.essential") }}">
   <div class="container">
     {{ $parent := .Params.parent }}
+    {{ $locations := .Params.locations}}
     {{- with .Params.diplomas -}}
       {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
       {{- with $diploma -}}
@@ -19,11 +20,28 @@
             <dt>{{ i18n "programs.duration" }}</dt>
             <dd>{{ partial "PrepareHTML" .Params.duration }}</dd>
           {{- end -}}
+          {{- with $locations -}}
+            <dt>{{ i18n "programs.location" }}</dt>
+            <dd>
+              {{- range . -}}
+                {{- $locationpage := site.GetPage ( printf "/locations/%s" .slug ) -}}
+                <a href="{{ .path }}">{{ $locationpage.Params.title }}</a>
+              {{- end -}}
+            </dd>
+          {{- end -}}
         </dl>
       {{- end -}}
     {{- end -}}
     
     <div class="buttons">
+      {{ if site.Params.programs.single.options.website_link }}
+        {{ $target := .Params.website_url }}
+        {{ $label := (i18n "programs.website") }}
+        {{ if and $target $label }}
+          <a href="{{ $target }}" class="btn website">{{ $label }}</a>
+        {{ end }}
+      {{ end }}
+      
       {{ if site.Params.programs.share_links.enabled | default site.Params.share_links.enabled }}
         <div class="dropdown-share">
           <button type="button" aria-expanded="false">{{ i18n "commons.share" }}</button>

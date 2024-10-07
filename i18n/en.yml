@@ -29,6 +29,17 @@ blocks:
     title: Image
   key_figures:
     title: Key figures
+  licenses:
+    labels:
+      cc-zero: Creative Commons license Zero - No Rights Reserved
+      by: Creative Commons license - Attribution to the creator
+      by-sa: Creative Commons license - Attribution to the creator - Share alike
+      by-nd: Creative Commons license - Attribution to the creator - No derivative works
+      by-nc: Creative Commons license - Attribution to the creator - Non-commercial
+      by-nc-sa: Creative Commons license - Attribution to the creator - Non-commercial - Share alike
+      by-nc-nd: Creative Commons license - Attribution to the creator - Non-commercial - No derivative works
+  locations:
+    button_location: Discover the site     
   organizations:
     title: Organizations
   pages:
@@ -95,7 +106,7 @@ commons:
     web: Web
     schedule: Hours
     socials: Social Media
-  credit: A low impact website crafted with <a href="https://www.osuny.org/" title="Osuny - extern link" target="_blank" rel="noreferrer">Osuny</a>
+  credit: A low impact website crafted with <a href="https://www.osuny.org/" title="Osuny - external link" target="_blank" rel="noreferrer">Osuny</a>
   date: Date
   download:
     singular_name: Download
@@ -107,9 +118,9 @@ commons:
     link:
       title: Open image
   link:
-    blank: extern link
-    blank_aria: “{{ .Title }}” - extern link
-    download: “Download {{ .Title }}” - extern link
+    blank: external link
+    blank_aria: “{{ .Title }}” - external link
+    download: “Download {{ .Title }}” - external link
   menu:
     label: Toggle navigation
     legal: Legals menu
@@ -220,10 +231,16 @@ papers:
     references: References
     content: Content
 persons:
-  posts: News
-  programs: Programs
-  papers: Papers
-  publications: Latest publications
+  posts:
+    recent: Latest news
+    all: View all news posted by {{ .author }}
+  papers: 
+    recent: Latest papers
+    all: View all papers published by {{ .author }}
+  publications:
+    recent: Latest publications
+    all: View all publications by {{ .author }}
+  programs: Teachings
   backlinks:
     events: Events mentioning
     pages: Pages mentioning
@@ -293,6 +310,7 @@ programs:
   mention: Mention
   no_program: No program
   posts: News
+  location: Campus
   toc:
     admission: Admission
     certification: Certification

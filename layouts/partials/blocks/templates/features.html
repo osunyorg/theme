@@ -27,7 +27,7 @@
                   <p>{{ .description | safeHTML }}</p>
                 </div>
                 {{- if .image -}}
-                  <figure>
+                  <figure role="figure" {{- with or .alt .credit }} aria-label="{{ . | plainify }}" {{ end }}>
                     {{- partial "commons/image.html"
                       (dict
                         "image"    .image

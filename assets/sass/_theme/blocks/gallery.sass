@@ -7,8 +7,6 @@
         img,
         picture
             display: block
-        > a
-            @include stretched-link
         img
             height: auto
             width: 100%
@@ -91,13 +89,11 @@
                 margin-right: calc(var(--grid-gutter) / 2)
                 picture
                     img
-                        // FIXME Arnaud: I would like images at constant height, can't manage to get it right.
-                        max-height: $block-gallery-carousel-max-height
+                        height: $block-gallery-carousel-max-height
                         width: auto
-                        height: auto
-                        max-width: calc(100vw - #{var(--grid-gutter)} * 2)
+                        max-width: none
                         @include media-breakpoint-up(desktop)
-                            height: $block-gallery-carousel-max-height
+                            height: $block-gallery-carousel-max-height-desktop
                             width: auto
                             max-width: none
                 @include in-page-without-sidebar

@@ -1,25 +1,32 @@
 .paper
     display: flex
     gap: var(--grid-gutter)
-    flex-direction: column
     a
         transition: color 0.3s ease
         @extend %underline-on-hover
-    h3
+    .paper-title
+        margin-bottom: $spacing-2
         a:hover
             color: var(--color-accent)
-    .paper-kind
+    > div:first-child
+        flex: 1
+    .paper-meta
         @include meta
-        text-transform: uppercase
-        margin-right: $spacing-3
-    .paper-volume
-        @include meta
-        text-transform: lowercase
-        a
-            @include link(var(--color-text))
-            text-transform: none
-        span
-            text-transform: uppercase
+        color: var(--color-text-alt)
+        @include media-breakpoint-up(desktop)
+            width: columns(5)
+        p
+            display: block
+        .paper-volume
+            @include meta
+            a
+                @include link(var(--color-text-alt))
+                text-transform: none
+        .paper-kind + a
+            font-style: italic
+            &::before
+                content: '— '
+                display: inline-block
 
 .top + .papers
     margin-top: $spacing-3

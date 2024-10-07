@@ -1,4 +1,4 @@
-{{ $length := .length | default 150 }}
+{{ $length := cond (eq .length 0) 0 (default 150 .length) }}
 {{ $text := .text }}
 
 {{ if gt $length 0 }}
