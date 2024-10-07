@@ -15,28 +15,29 @@
         <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
 
-      {{- if and .Params.summary  $options.summary -}}
-        <div class="location-description" itemprop="description">
+      <div class="location-description" itemprop="description">
+        {{- if and .Params.summary  $options.summary -}}
           {{ partial "GetRichSummary" ( dict 
             "summary" .Params.summary
             "kind" "locations"
           )}}
+          <p class="more meta">
+            {{- i18n "blocks.locations.button_location" -}}
+          </p>
+        {{- end -}}
         </div>
-      {{- end -}}
-    </div>
+      </div>
 
     {{ if $options.image }}
-      <div class="media">
-        {{- if .Params.image -}}
+      {{- if .Params.image -}}
+        <div class="media">
           {{- partial "commons/image.html"
               (dict
                 "image"    .Params.image
                 "sizes"    site.Params.image_sizes.sections.locations.item
               ) -}}
-        {{- else -}}
-          {{- partial "commons/image-default.html" "locations" -}}
+          </div>
         {{- end -}}
-      </div>
     {{- end -}}
   </article>
 {{ end }}

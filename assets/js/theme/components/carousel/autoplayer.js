@@ -1,13 +1,16 @@
+/* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
 window.osuny.carousel.Autoplayer = function (element) {
     this.element = element;
-    if (!this.element) { return };
+    if (!this.element) {
+        return;
+    }
     this.icons = {
         play: this.element.getElementsByClassName(window.osuny.carousel.classes.autoplayerToggleIconPlay).item(0),
         pause: this.element.getElementsByClassName(window.osuny.carousel.classes.autoplayerToggleIconPause).item(0)
-    }
+    };
     this.ariaLiveElement = null;
     // Etat de l'autoplay
     this.enabled = false;
@@ -21,17 +24,14 @@ window.osuny.carousel.Autoplayer = function (element) {
     // Bouton toggle
     this.classList = this.element.classList;
     this.classList.add(window.osuny.carousel.classes.autoplayerPaused);
-    this.element.addEventListener(
-        "click",
-        this._onClick.bind(this)
-    );
+    this.element.addEventListener('click', this._onClick.bind(this));
     this._dispatchEvent = window.osuny.carousel.utils.dispatchEvent.bind(this);
-}
+};
 window.osuny.carousel.Autoplayer.prototype = {
     setInterval: function (interval) {
         this.interval = interval;
     },
-    // enable() et disable() activent la boucle 
+    // enable() et disable() activent la boucle
     enable: function () {
         this.enabled = true;
         this._loop();
@@ -46,17 +46,15 @@ window.osuny.carousel.Autoplayer.prototype = {
     pause: function () {
         this.paused = true;
         this._updateToggle();
-        this._updateAriaLiveElement();
     },
     unpause: function () {
         this.paused = false;
         this.softPaused = false;
         this._updateToggle();
-        this._updateAriaLiveElement();
     },
     // Les méthodes soft se produisent quand on passe sur le carousel avec la souris.
     // L'idée est de permettre aux personnes de lire une citation.
-    // Elles ne changent pas réellement l'état de l'autoplayer, 
+    // Elles ne changent pas réellement l'état de l'autoplayer,
     // mais elles l'arrêtent temporairement.
     softPause: function () {
         this.softPaused = true;
@@ -65,8 +63,10 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.softPaused = false;
     },
     _loop: function () {
-        if (!this.enabled) { return }
         var now = Date.now();
+        if (!this.enabled) {
+            return;
+        }
         if (!this.paused && !this.softPaused) {
             this.elapsedSinceLastTrigger += now - this.lastLoopAt;
             this.progression = this.elapsedSinceLastTrigger / this.interval;
@@ -90,13 +90,15 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.lastLoopAt = Date.now();
     },
     _dispatchTrigger: function () {
-        this._dispatchEvent("autoplayerTrigger");
+        this._dispatchEvent('autoplayerTrigger');
     },
-    _dispatchProgression(){
-        this._dispatchEvent("autoplayerProgression", this.progression);
+    _dispatchProgression () {
+        this._dispatchEvent('autoplayerProgression', this.progression);
     },
     _updateToggle: function () {
-        if (!this.element) { return }
+        if (!this.element) {
+            return;
+        }
         this.classList.remove(window.osuny.carousel.classes.autoplayerPlaying);
         this.classList.remove(window.osuny.carousel.classes.autoplayerPaused);
         if (this.paused) {
@@ -107,11 +109,6 @@ window.osuny.carousel.Autoplayer.prototype = {
         this.icons.play.setAttribute('aria-hidden', !this.paused);
         this.icons.pause.setAttribute('aria-hidden', this.paused);
     },
-    _updateAriaLiveElement: function() {
-        if (!this.ariaLiveElement) { return }
-        var state = this.paused ? "off" : "polite";
-        this.ariaLiveElement.setAttribute("aria-live", state);
-    },
     _onClick: function () {
         if (this.paused) {
             this.unpause();
@@ -120,4 +117,4 @@ window.osuny.carousel.Autoplayer.prototype = {
             this.pause();
         }
     }
-}
+};

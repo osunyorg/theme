@@ -1,9 +1,7 @@
 {{ if .image.id }}
-
   {{ $index := .index }}
   {{ $sizes := .sizes }}
   {{ $lazy := default true .lazy }}
-  {{ $role := (or .role "figure")}}
   {{ $is_carousel := .is_carousel }}
   {{ $is_lightbox := false }}
   {{ $image := partial "GetMedia" .image.id }}
@@ -15,12 +13,10 @@
 
   {{ if $image }}
     {{ with .image}}
-      <figure role="{{$role}}" 
+      <figure 
               class="{{ $image_class }}{{ if $is_carousel }} carousel__slide {{ end }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
             {{ if $is_carousel }} 
-              id="carousel-item-{{$index}}" 
-              aria-roledescription="slide" 
-              aria-label="item-{{$index}} {{- with or .text .alt .credit }} | {{ . | plainify }} {{- end }}" 
+              id="carousel-item-{{$index}}"
             {{ else }}
               {{- with or .text .alt .credit }} 
                 aria-label="{{ . | plainify }}" 

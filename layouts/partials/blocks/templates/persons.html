@@ -9,10 +9,9 @@
   {{ $options := .options }}
   {{ range .persons }}
     {{- $person := site.GetPage (printf "/persons/%s" .slug) -}}
+    {{- $role := .role -}}
     {{- $summary := $person.Params.summary -}}
     {{- $content := $person.Content -}}
-    {{- $role := .role -}}
-
     {{ with (or $role $summary $content)}}
       {{- $contentLength := len . -}}
       {{ if ge $contentLength $charLimit }}
@@ -37,6 +36,7 @@
               "heading_level" $block.ranks.children
               "options" $options
               "person" $person
+              "role" .role
             ) }}
           {{- end -}}
         </div>
