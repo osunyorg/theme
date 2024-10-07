@@ -23,10 +23,10 @@
       {{- $page_class = printf "block-%s" .Params.bodyclass }}
     {{ end }}
     {{ if $options.main_summary }}
-      {{- $main_summary = partial "GetTruncateContent" ( dict 
-          "text" .Params.summary
-          "length" site.Params.pages.index.truncate_description
-          ) -}}
+        {{ $main_summary = partial  "GetRichSummary" ( dict 
+          "summary" .Params.summary
+          "kind" "pages"
+        )}}
     {{ end }}
   {{ end -}}
 

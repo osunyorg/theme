@@ -46,9 +46,9 @@ ul.diplomas
                     margin-top: $spacing-2
                     @include media-breakpoint-up(sm) 
                         margin-top: $spacing-3
-                a:hover
+                > a:hover
                     color: var(--color-accent)
-                ol li a
+                ol li > a   
                     @include inherit-text
                     @include icon(corner-down-right-line, before)
                         margin-left: 1px
@@ -61,9 +61,9 @@ ul.diplomas
                     display: flex
                     ol
                         margin-left: $spacing-3
-            > li a 
+            > li > a 
                 @include h3
-                        
+
         .program
             div
                 @include media-breakpoint-up(desktop)
@@ -92,7 +92,7 @@ ul.diplomas
             @include grid(2, desktop)
             align-items: start
             position: relative
-            a
+            a.title
                 @include stretched-link(before)
                 position: initial
                 @include media-breakpoint-down(desktop)
@@ -102,7 +102,7 @@ ul.diplomas
                         bottom: unset
                         position: relative
                         margin-left: $spacing-1
-                    + p
+                    + div
                         margin-top: $spacing-2
 
 .locations__term

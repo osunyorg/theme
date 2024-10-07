@@ -15,18 +15,16 @@
         <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
 
-      <div class="location-description">
-          {{- if and (partial "GetTextFromHTML" .Params.summary) $options.summary -}}
-          <p itemprop="description">
-            {{ partial "GetTruncateContent" ( dict 
-              "text" .Params.summary
-              "length" site.Params.locations.index.truncate_description
-              ) }}
-          </p>
-          {{- end -}}
+      <div class="location-description" itemprop="description">
+        {{- if and .Params.summary  $options.summary -}}
+          {{ partial "GetRichSummary" ( dict 
+            "summary" .Params.summary
+            "kind" "locations"
+          )}}
           <p class="more meta">
             {{- i18n "blocks.locations.button_location" -}}
           </p>
+        {{- end -}}
         </div>
       </div>
 

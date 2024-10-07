@@ -39,13 +39,13 @@
                   "kind" "post"
                 )}}
               {{ end }}
-  
-              {{ if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
-                  <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
-                    "text" .Params.summary
-                    "length" site.Params.posts.index.truncate_description
-                  )}}</p>
-              {{- end -}}
+
+              {{ if and $options.summary .Params.summary }}
+                {{ partial "GetRichSummary" ( dict 
+                  "summary" .Params.summary
+                  "kind" "posts"
+                )}}
+              {{ end }}
 
               {{ if and .Params.contents_reading_time $options.reading_time }}
                 <span class="post-reading-time">

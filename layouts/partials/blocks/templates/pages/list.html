@@ -25,12 +25,11 @@
                   {{- partial "PrepareHTML" .Title -}}
                 </a>
               {{ $heading_tag.close }}
-  
               {{ if and $options.summary .Params.summary }}
-                <p>{{ partial "GetTruncateContent" ( dict 
-                  "text" .Params.summary
-                  "length" site.Params.pages.index.truncate_description
-                  ) }}</p>
+                {{ partial "GetRichSummary" ( dict 
+                  "summary" .Params.summary
+                  "kind" "pages"
+                )}}
               {{ end }}
             </div>
 

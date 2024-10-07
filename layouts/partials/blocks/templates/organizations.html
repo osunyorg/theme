@@ -52,9 +52,9 @@
           </p>
       {{ end -}}
       {{ if and $options.summary .summary }}
-        <p class="organization-summary">
-          {{ partial "PrepareHTML" .summary }}
-        </p>
+        <div class="organization-summary">
+          {{ safeHTML .summary }}
+        </div >
       {{ end }}
     </div>
     {{ if $options.logo }}
