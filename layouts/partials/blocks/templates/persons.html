@@ -7,15 +7,11 @@
 
 {{- with .block.data -}}
   {{ $options := .options }}
-  {{- $with_link := .with_link -}}
-  {{- $with_photo := .with_photo -}}
-
   {{ range .persons }}
     {{- $person := site.GetPage (printf "/persons/%s" .slug) -}}
+    {{- $role := .role -}}
     {{- $summary := $person.Params.summary -}}
     {{- $content := $person.Content -}}
-    {{- $role := .role -}}
-
     {{ with (or $role $summary $content)}}
       {{- $contentLength := len . -}}
       {{ if ge $contentLength $charLimit }}
@@ -24,7 +20,7 @@
     {{ end }}
   {{ end }}
 
-  <div class="block block-persons{{ if $title }} block-with-title{{ end }}{{ if $isLarge }} block-with-long-text{{ end }} {{- if eq $with_photo false }} without-photo {{- end }}">
+  <div class="block block-persons{{ if $title }} block-with-title{{ end }}{{ if $isLarge }} block-with-long-text{{ end }} {{- if not $options.image }} without-photo {{- end }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
@@ -36,45 +32,12 @@
         <div class="persons">
           {{- range .persons -}}
             {{ $person := site.GetPage (printf "/persons/%s" .slug) }}
-
-            <article class="person" itemscope itemtype="https://schema.org/Person">
-              <div class="description">
-                {{- $heading_tag := partial "GetHeadingTag" (dict 
-                  "level" $block.ranks.children
-                  "attributes" "class='name' itemprop='name'"
-                  ) -}}
-
-                {{ $heading_tag.open }}
-                  {{ if $options.link }}
-                    <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
-                      {{ end }}
-                      {{- partial "PrepareHTML" $person.Title -}}
-                      {{ if $options.link }}
-                    </a>
-                  {{ end }}
-                {{ $heading_tag.close }}
-                <p itemprop="jobTitle">
-                  {{- if (partial "GetTextFromHTML" .role) }}
-                    {{ partial "PrepareHTML" .role }}
-                  {{- else if partial "GetTextFromHTML" $person.Params.summary }}
-                    {{- partial "PrepareHTML" $person.Params.summary -}}
-                  {{ else if (partial "GetTextFromHTML" $person.Content) }}
-                    {{- partial "GetTruncateContent" ( dict "text" $person.Content ) -}}
-                  {{ end -}}
-                </p>
-              </div>
-              {{- if $options.image }}
-                <div class="avatar" itemprop="image">
-                  {{- if $person.Params.image }}
-                    {{ partial "commons/image.html"
-                      (dict
-                        "image"    $person.Params.image
-                        "sizes"    site.Params.image_sizes.blocks.persons
-                      ) }}
-                  {{ end -}}
-                </div>
-              {{ end -}}
-            </article>
+            {{ partial "persons/person.html" (dict
+              "heading_level" $block.ranks.children
+              "options" $options
+              "person" $person
+              "role" .role
+            ) }}
           {{- end -}}
         </div>
       </div>

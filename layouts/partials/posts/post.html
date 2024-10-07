@@ -1,4 +1,8 @@
 {{ $post := .post }}
+{{ if .params }}
+  {{ $post = site.GetPage (printf "/posts/%s" .params )}}
+{{ end }}
+
 {{ $direction := "" }}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
@@ -8,9 +12,13 @@
 {{ $index := .index }}
 {{ $options := .options }}
 {{ $alternate := .alternate }}
+{{ $is_carousel := .is_carousel }}
+{{ $index := .index }}
+{{ $role := .role }}
 
 {{ with $post }}
   {{ $post_class := "post" }}
+  {{ $reading_time := .Params.contents_reading_time }}
   {{ if and .Params.image $options.image }}
     {{ $direction = partial "GetImageDirection" .Params.image }}
     {{ $post_class = printf "%s %s" $post_class $direction }}
@@ -18,6 +26,9 @@
     {{ $post_class = printf "%s %s" $post_class "without-image" }}
   {{ end }}
 
+  {{ if $is_carousel }}
+    <li class="carousel__slide" id="carousel-item-{{$index}}">
+  {{ end }}
   <article class="{{ $post_class }}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="post-content">
       {{- $title := partial "PrepareHTML" .Title -}}
@@ -42,7 +53,7 @@
         {{- end -}}
       {{- end -}}
       
-      {{ if or $options.author $options.date }}
+      {{ if or $options.author $options.date $options.reading_time }}
         <div class="post-meta">
           {{ if $options.date }}
             <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
@@ -50,12 +61,17 @@
           {{ if $options.author }}
             {{- partial "posts/author" . -}}
           {{ end }}
+          {{ if and $reading_time $options.reading_time }}
+            <span class="post-reading-time">
+              {{- i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" $reading_time.text -}}
+            </span>
+          {{ end }}
         </div>
       {{ end }}
     </div>
     {{ if $options.image }}
       <div class="media">
-        {{- if and .Params.image -}}
+        {{- if .Params.image -}}
           {{- partial "commons/image.html"
               (dict
                 "image"    .Params.image
@@ -67,4 +83,7 @@
       </div>
     {{- end -}}
   </article>
+  {{ if $is_carousel }}
+    </li>
+  {{ end }}
 {{ end }}

@@ -3,10 +3,10 @@
         margin-bottom: 0
     ul
         @include list-reset
+        @include grid(2, md)
         @include in-page-with-sidebar
             @include grid(2)
         &.even-items
-            @include grid(2, desktop)
             @include grid(4, desktop)
         &.odd-items
             @include grid(3, desktop)
@@ -40,6 +40,8 @@
                 font-size: $block-key_figures-font-size-desktop
                 strong
                     font-size: $block-key_figures-number-font-size-desktop
+                img
+                    max-width: $block-key_figures-image-max-width-desktop
             @include media-breakpoint-up(lg)
                 font-size: $block-key_figures-font-size-lg
                 strong

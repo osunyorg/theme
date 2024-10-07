@@ -11,10 +11,12 @@
 
 @mixin author-and-time-side-to-side
     .post-meta
-        display: flex
-        flex-wrap: wrap
-    .post-author p::before
-        content: ' • '
+        *
+            display: inline
+        > * + .post-author p,
+        > * + .post-reading-time
+            &::before
+                content: ' • '
 
 // Utilisé pour .post, .project, .page, .person, .program, .volume
 @mixin article($aspect-ratio: $article-media-aspect-ratio)
@@ -57,7 +59,7 @@
 @mixin article-title
     @include h3
     a
-        @include stretched-link
+        @include stretched-link(before)
         display: block
         text-decoration: none
 
@@ -140,7 +142,7 @@
             text-align: center
             padding: $spacing-1
             display: block
-        .credit-content
+        .credit
             @include meta
             background: $hero-background-color
             display: none
@@ -150,7 +152,7 @@
             color: inherit
             text-decoration-color: inherit
         &:focus
-            .credit-content
+            .credit
                 display: block
         @include media-breakpoint-up(desktop)
             &:before
@@ -160,33 +162,10 @@
             background: var(--color-background)
             &::before
                 background: transparent
-            .credit-content
+            .credit
                 display: block
                 background: transparent
                 position: relative
     &:hover
-        figcaption .credit-content
+        figcaption .credit
             display: block
-
-@mixin dropdown-i18n
-    position: relative
-    .dropdown-menu
-        margin-top: $header-nav-padding-y
-        right: 0
-        @include media-breakpoint-up(desktop)
-            padding-left: $spacing-3
-            padding-bottom: $spacing-2
-            padding-top: $spacing-2
-            padding-right: $spacing-3
-    li a
-        padding-bottom: $spacing-1
-        padding-top: $spacing-1
-        display: block
-        &.is-checked
-            display: flex
-            justify-content: space-between
-            align-items: center
-            gap: $spacing-4
-            text-decoration: none !important
-            @include icon(arrow-down-s-line, after)
-                transform: rotate(-14deg) skewX(-30deg)

@@ -3,23 +3,27 @@
       <div class="content">
         <h2>{{ i18n "programs.toc.presentation" }}</h2>
 
+        {{ if or .Params.image .Params.presentation .Params.objectives }}
+          <div>
+            {{- partial "programs/image.html" .Params.image -}}
+
+            {{- if partial "GetTextFromHTML" .Params.presentation -}}
+              <section id="{{ urlize (i18n "programs.presentation") }}">
+                <h3>{{ i18n "programs.presentation" }}</h3>
+                <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
+              </section>
+            {{- end -}}
+
+            {{- if partial "GetTextFromHTML" .Params.objectives -}}
+              <section id="{{ urlize (i18n "programs.objectives") }}">
+                <h3>{{ i18n "programs.objectives" }}</h3>
+                {{- partial "PrepareHTML" .Params.objectives -}}
+              </section>
+            {{- end -}}
+          </div>
+        {{ end }}
+        {{- partial "contents/list.html" . }}
         <div>
-          {{- partial "programs/image.html" .Params.image -}}
-
-          {{- if partial "GetTextFromHTML" .Params.presentation -}}
-            <section id="{{ urlize (i18n "programs.presentation") }}">
-              <h3>{{ i18n "programs.presentation" }}</h3>
-              <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
-            </section>
-          {{- end -}}
-
-          {{- if partial "GetTextFromHTML" .Params.objectives -}}
-            <section id="{{ urlize (i18n "programs.objectives") }}">
-              <h3>{{ i18n "programs.objectives" }}</h3>
-              {{- partial "PrepareHTML" .Params.objectives -}}
-            </section>
-          {{- end -}}
-
           <section id="{{ urlize (i18n "programs.administrative_information") }}">
             <h3>{{ i18n "programs.administrative_information" }}</h3>
             <table class="program-table">
@@ -57,7 +61,6 @@
           </section>
 
         </div>
-        {{- partial "contents/list.html" . }}
       </div>
     </div>
 </section>

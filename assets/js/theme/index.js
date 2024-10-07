@@ -1,4 +1,5 @@
 import './body.js';
+import './design-system/accordion.js';
 import './design-system/clickToCopy';
 import './design-system/dropdowns';
 import './design-system/font';
@@ -10,5 +11,8 @@ import './design-system/toc';
 import './blocks/keyFigures';
 import './blocks/organizations';
 import './blocks/draggableBlocks.js';
+import './blocks/timeline.js';
 import './blocks/videos.js';
 import './blocks/campus.js';
+import './utils/utils.js';
+import './components/carousel.js';

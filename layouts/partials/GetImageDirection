@@ -1,9 +1,9 @@
-{{ $ratio := partial "GetImageRatio" . }}
 {{ $direction := "square" }}
+{{ $image := partial "GetMedia" .id }}
 
-{{ if gt $ratio 1 }}
+{{ if gt $image.ratio 1 }}
   {{ $direction = "landscape" }}
-{{ else if lt $ratio 1 }}
+{{ else if lt $image.ratio 1 }}
   {{ $direction = "portrait" }}
 {{ end }}
 

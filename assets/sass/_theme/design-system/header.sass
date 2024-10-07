@@ -16,22 +16,24 @@ header#document-header
     &.is-sticky, html.has-menu-opened &
         background: $header-sticky-background
         color: $header-sticky-color
-        .pagefind-ui__toggle
-            color: $header-sticky-color
-        .dropdown-menu
-            background: $header-sticky-dropdown-background
         .menu
             a,
             a:hover,
             a:focus,
-            a:active
-                color: inherit
+            a:active,
             span
-                color: $header-sticky-color
+                color: inherit
         @if $header-sticky-invert-logo
             .logo
                 img, .logo-text
                     filter: invert(1)
+        @include media-breakpoint-up(desktop)
+            .dropdown-menu
+                background: $header-sticky-dropdown-background
+                color: $header-sticky-dropdown-color
+    &.is-sticky
+        .pagefind-ui__toggle
+            color: $header-sticky-color
     html.is-scrolling-down:not(.has-menu-opened) &
         @include media-breakpoint-down(desktop)
             transform: translateY(-100%)

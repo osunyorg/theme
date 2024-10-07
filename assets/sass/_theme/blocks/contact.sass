@@ -31,7 +31,6 @@
         @include list-reset
         li
             display: flex
-            flex-wrap: wrap
             + li:not(.meta)
                 padding-bottom: $spacing-2
             + li:not(.meta, .meta + li)
@@ -60,7 +59,9 @@
             position: relative
             &::before
                 font-size: $footer-icons-size
-                margin-left: -0.3em
+                margin-right: $spacing-2
+                @include media-breakpoint-up(desktop)
+                    font-size: $footer-icons-size-desktop
             a
                 @include stretched-link
             &.facebook

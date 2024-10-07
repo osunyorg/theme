@@ -12,7 +12,6 @@
 {{ $subtitle_is_summary := false }}
 
 {{ $button := .button | default .context.Params.header_cta }}
-
 {{ $title_attribute := "" | safeHTMLAttr }}
 {{ if site.Params.search.active }}
   {{ $title_attribute = "data-pagefind-weight='10'" | safeHTMLAttr }}
@@ -48,7 +47,10 @@
 
         {{ with $button }}
           {{ if and .display .target .label }}
-            <a href="{{ .target }}" class="btn">{{ .label }}</a>
+            {{ $title := .label }}
+            {{ $is_external := .external | default false }}
+            {{ $link_title := cond $is_external (safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title))) $title }}
+            <a href="{{ .target }}" title ="{{ $link_title }}" class="btn" {{ if $is_external -}} target="_blank" rel="noopener" {{- end }}>{{ .label }}</a>
           {{ end }}
         {{ end }}
 
@@ -57,31 +59,18 @@
         {{ end }}
       </div>
 
+      {{ if .hero_content_complement }}
+        {{ partial .hero_content_complement .context }}
+      {{ end }}
+
       {{ if .image }}
-        <figure>
-          {{ partial "commons/image.html"
-            (dict
-              "image"    .image
-              "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
-              "lazy"     false
-            ) }}
-          {{ if not site.Params.image_sizes.design_system.lightbox.disabled }}
-            <a  class="glightbox"
-                role="button"
-                data-glightbox="type: image;{{ with .image.credit }}description: {{ partial "PrepareHTML" . }}{{ end }}"
-                href="{{ partial "GetLightboxUrl" .image }}"
-                title="{{- i18n "commons.lightbox.link.title" -}}"
-                aria-label="{{- i18n "commons.lightbox.link.title" -}}">
-            </a>
-          {{ end }}
-          {{ with .image.credit }}
-            <figcaption tabindex="0">
-              <div class="credit-content">
-                {{ partial "PrepareHTML" . }}
-              </div>
-            </figcaption>
-          {{ end }}
-        </figure>
+        <!-- TODO Peut etre aligner la stucture des données avec les autres cas d'images -->
+        {{ partial "commons/image-figure.html" (dict
+          "image"    .image
+          "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
+          "lazy"      false
+          )
+        }}
       {{ end }}
     </div>
   </div>

@@ -4,7 +4,10 @@
   <nav>
     {{ range .Params.links }}
       {{ if .url }}
-        <a href="{{ .url }}" target="_blank" rel="noopener">{{ .label }}</a>
+        <a href="{{ .url }}" target="_blank" rel="noopener">
+          {{ .label }}
+          <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+        </a>
       {{ end }}
     {{ end }}
   </nav>

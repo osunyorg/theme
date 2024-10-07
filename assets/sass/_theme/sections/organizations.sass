@@ -3,11 +3,13 @@
     flex-direction: column
     position: relative
     &-title
-        @include meta
         a
             @include stretched-link
             text-decoration: none
             display: block
+    .organizations:not(.with-summaries) &
+        .organization-title
+            @include meta
     .media
         @include handle-svg-fit
         background: $organization-background-color
@@ -30,19 +32,47 @@
                 content: ''
                 display: block
                 padding-bottom: 100%
+    .organizations.with-summaries &
+        align-items: flex-start
+        flex-direction: row
+        gap: var(--grid-gutter)
+        width: 100%
+        .organization-content
+            flex: 1
+            .organization-title
+                @include body-text
+            .organization-summary
+                @include small
+        .media
+            width: columns(6)
+        @include media-breakpoint-up(md)
+            .media
+                width: columns(3)
+        @include media-breakpoint-up(xl)
+            gap: calc(var(--grid-gutter) / 2)
+            width: columns(4)
+            .media
+                width: columns(2)
 
 .organizations
-    max-width: 100%
-    @include grid(2)
-    @include grid(3, md)
-    @include grid(4, lg)
-    @include grid(6, xl)
-    @include in-page-program
+    &:not(.block-organizations--map &)
+        max-width: 100%
+        @include grid(2)
         @include grid(3, md)
-        @include grid(3, lg)
-        @include grid(3, xl)
-    @include media-breakpoint-down(desktop)
-        grid-column-gap: $spacing-3 !important
+        @include grid(4, lg)
+        @include grid(6, xl)
+        &.with-summaries
+            @include grid(1)
+            @include grid(1, md)
+            @include in-page-without-sidebar
+                @include grid(2, lg)
+                @include grid(3, xl)
+        @include in-page-program
+            @include grid(3, md)
+            @include grid(3, lg)
+            @include grid(3, xl)
+        @include media-breakpoint-down(desktop)
+            grid-column-gap: $spacing-3 !important
 
 .organizations__section
     .organizations

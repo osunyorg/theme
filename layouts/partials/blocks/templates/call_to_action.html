@@ -34,11 +34,11 @@
             {{- end -}}
           </div>
           {{ if .image }}
-            <figure>
+            <figure role="figure" {{- with or .alt .credit }} aria-label="{{ . | plainify }}" {{ end }}>
               {{ partial "commons/image.html"
                 (dict
                   "image"    .image.file
-                  "alt"      .image.alt
+                  "alt"      .alt
                   "sizes"    site.Params.image_sizes.blocks.call_to_action
               )}}
               {{ if partial "GetTextFromHTML" .credit }}

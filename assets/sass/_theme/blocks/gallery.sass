@@ -7,8 +7,6 @@
         img,
         picture
             display: block
-        > a
-            @include stretched-link
         img
             height: auto
             width: 100%
@@ -81,78 +79,22 @@
             background: $block-gallery-carousel-background
             padding-bottom: var(--grid-gutter)
             padding-top: var(--grid-gutter)
+        .container
+            padding-right: var(--grid-gutter-negative) !important
         .block-gallery + &,
         .block-pages--cards + &
             margin-top: 0
-        .splide
-            display: flex
-            flex-direction: column
-            @include in-page-with-sidebar
-                &.is-moving
-                    .splide__slide.is-active
-                        opacity: 0.1
-            &__track
-                overflow: visible
-                margin-right: var(--grid-gutter-negative)
-                @include in-page-with-sidebar
-                    .splide__slide
-                        transition: opacity  .3s ease
-                        opacity: 0.1
-                        &.is-next
-                            opacity: 0.6
-                        &.is-active
-                            opacity: 1
+        .carousel
             &__slide
-                flex-shrink: initial
-                &:last-child
-                    padding-right: 20%
-            figure
-                margin-right: $spacing-3
-                @include media-breakpoint-down(desktop)
-                    display: flex
-                    flex-direction: column
-                    justify-content: end
+                margin-right: calc(var(--grid-gutter) / 2)
                 picture
                     img
-                        // FIXME Arnaud: I would like images at constant height, can't manage to get it right.
-                        max-height: $block-gallery-carousel-max-height
+                        height: $block-gallery-carousel-max-height
                         width: auto
-                        height: auto
-                        max-width: calc(100vw - #{var(--grid-gutter)} * 2)
+                        max-width: none
                         @include media-breakpoint-up(desktop)
-                            height: $block-gallery-carousel-max-height
+                            height: $block-gallery-carousel-max-height-desktop
                             width: auto
                             max-width: none
-
-            &__arrows
-                margin-left: pxToRem(-18)
-                order: 2
-                @media (min-height: 800px)
-                    padding-top: space(10)
-            &__arrow
-                &:disabled
-                    cursor: default
-                    opacity: 0.3
-                &--prev,
-                &--next
-                    @include button-reset
-                    @include icon(arrow-left-line, before)
-                    height: $spacing-4
-                    padding: 0
-                    position: static
-                    width: $spacing-4
-                    svg
-                        display: none
-                &--next
-                    @include icon(arrow-right-line, before)
-
-        @include in-page-without-sidebar
-            .splide
-                figure
-                    margin-left: var(--grid-gutter)
-                    margin-right: -$spacing-3
-                &__slide
-                    &:first-child
-                        margin-left: var(--grid-gutter)
-                &__track
-                    margin-left: var(--grid-gutter-negative)
+                @include in-page-without-sidebar
+                    margin-right: var(--grid-gutter)

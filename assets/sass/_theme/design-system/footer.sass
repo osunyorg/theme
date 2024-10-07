@@ -11,12 +11,13 @@ footer#document-footer
         @extend %underline-on-hover
     .logo
         @extend %logo
+        display: block
         img
             height: $footer-logo-height
             max-width: 100%
             @include media-breakpoint-up(desktop)
                 height: $footer-logo-height-desktop
-    ul
+    ul:not(.dropdown-menu)
         @include list-reset
         li + li
                 margin-top: $spacing-2
@@ -41,66 +42,16 @@ footer#document-footer
         &-search
             padding-top: $spacing-2 !important
         &-i18n
-            @include dropdown-i18n
-            button
-                @include button-reset
-                @include icon(arrow-down-s-line, after)
-                @include meta
-                align-items: center
-                color: inherit
-                cursor: pointer
-                display: flex
-                justify-content: start
-                padding-left: 0
-                text-align: left
-                &:focus,
-                &:focus-visible
-                    box-shadow: none
-                &[aria-expanded="true"]
-                    background: $dropdown-i18n-background-color
-                    color: $dropdown-i18n-color
-                    width: 100%
-                    @include media-breakpoint-up(desktop)
-                        justify-content: space-between
-                    + .dropdown-menu
-                        animation-duration: unset
-                    &::after
-                        transform: rotate(-180deg)
-                &::before
-                    margin-right: $spacing-2
-                &::after
-                    margin-left: $spacing-2
-            button[aria-expanded="true"]
-                min-width: $spacing-6
-                outline: $spacing-2 solid $dropdown-i18n-background-color
-            .dropdown-menu
-                @include meta
-                background: $dropdown-i18n-background-color
-                margin-left: -$spacing-2
-                margin-right: -$spacing-2
-                margin-top: $spacing-2
-                a
-                    color: $dropdown-i18n-color
-                    padding: $spacing-2
-                ul
-                    li + li
-                        margin-top: 0
-                @include media-breakpoint-up(desktop)
-                    left: 0
-                    max-height: calc(100vh - var(--header-height))
-                    padding: 0
-                    position: absolute
-                    width: fit-content
-                    min-width: calc(#{pxToRem(150)} + #{$spacing-2} * 2)
-                    a
-                        padding-top: 0
-                    a:focus-visible
-                        outline-offset: -1px
-                @include media-breakpoint-down(desktop)
-                    position: relative
-                    li
-                        border-top: 1px solid $color-border
-
+            --dropdown-background: #{$dropdown-i18n-background-color}
+            --dropdown-color: #{$dropdown-i18n-color}
+            // padding: 0 $spacing-2
+            // margin-left: -$spacing-2
+            @include dropdown
+            @include media-breakpoint-up(desktop)
+                --dropdown-border-color: transparent
+            button:focus-visible
+                border-radius: 3px
+            
         @if $footer-icons-enabled
             &-social 
                 .nav-social + .site-links
@@ -110,8 +61,6 @@ footer#document-footer
                     display: flex
                     justify-content: flex-end
                     position: relative
-                    &::after
-                        margin-left: $spacing-2
                     a::after
                         display: none
                     &.facebook
@@ -140,21 +89,19 @@ footer#document-footer
                         @include icon(rss-fill, after)
                     &::after
                         font-size: $footer-icons-size
-                        margin-right: $spacing-2
-                        transform: translateX(-25%)
                     + li
                         margin-top: $spacing-3
                     @include media-breakpoint-up(desktop)
                         &::after
                             font-size: $footer-icons-size-desktop
-                            margin-right: $spacing-2
-                            margin-right: -0.2em
-                            padding-left: $spacing-2
+                            margin-left: $spacing-2
                         + li
                             margin-top: space(4)
                     @include media-breakpoint-down(desktop)
                         width: fit-content
                         flex-direction: row-reverse
+                        &::after
+                            margin-right: $spacing-2
         @if $footer-text-hidden
             &-social.site-links li
                 font-size: 0

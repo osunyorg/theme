@@ -56,11 +56,11 @@ params:
       truncate_description: 200 # Set to 0 to disable truncate
       layout: list # grid | list
       options:
-        # dates: false # not released
+        dates: true
         categories: false
-        # image: false # not released
+        image: true
         status: false
-        # subtitle: true # not released
+        subtitle: true
         summary: true
     # share_links: # Optional
     #   enabled: true
@@ -74,6 +74,11 @@ params:
   organizations:
     dark_logo_background: false
     map_marker_icon: '/assets/images/map-marker.svg'
+    index:
+      options:
+        link: true
+        logo: true
+        summary: false
     single:
       backlinks: false
   pages:
@@ -92,9 +97,16 @@ params:
     index:
       truncate_description: 200
       layout: list # grid | list
+      options:
+        summary: true
+        image: true
   persons:
     index:
       layout: grid # grid | list
+      options:
+        summary: true
+        image: true
+        link: true
     single:
       backlinks: false
   posts:
@@ -109,6 +121,32 @@ params:
         categories: true
         author: false
         date: true
+        reading_time: false
+    # share_links: # Optional
+    #   enabled: true
+    #   email: false
+    #   facebook: true
+    #   linkedin: true
+    #   mastodon: false
+    #   telegram: false
+    #   twitter: true
+    #   whatsapp: false
+  programs:
+    related_posts:
+      quantity: 4
+    related_events:
+      quantity: 4
+    index:
+      options:
+        logo: false
+        diploma: true
+        diploma_certification: false
+    single:
+      options:
+        logo: true
+        diploma: true # option qui n'a pas de raison d'etre utilisée dans le single
+        diploma_certification: true
+        website_link: true
     # share_links: # Optional
     #   enabled: true
     #   email: false
@@ -137,45 +175,36 @@ params:
     #   telegram: false
     #   twitter: true
     #   whatsapp: false
-  programs:
-    related_posts:
-      quantity: 4
-    related_events:
-      quantity: 4
-    # share_links: # Optional
-    #   enabled: true
-    #   email: false
-    #   facebook: true
-    #   linkedin: true
-    #   mastodon: false
-    #   telegram: false
-    #   twitter: true
-    #   whatsapp: false
   volumes:
     default_image: false
 
   # BLOCKS
   blocks:
     gallery:
-      splide:
+      carousel:
         arrows: true
         pagination: false
-        autoWidth: true
         autoplay: false
     key_figures:
       animated: true
     pages:
       alternate:
         more: true
+    posts:
+      carousel:
+        arrows: true
+        pagination: false
+        autoplay: false
     testimonials:
-      splide:
-        arrows: false
+      carousel:
+        pagination: true
         autoplay: true
-        pauseOnHover: false
-        pauseOnFocus: true
-        type: loop
-        autoHeight: true
-        interval: 8000
+        autoplayinterval: 3000
+    timeline:
+      carousel:
+        arrows: true
+        pagination: false
+        autoplay: false
   image_sizes:
     design_system:
       lightbox:

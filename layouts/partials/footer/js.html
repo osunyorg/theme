@@ -1,5 +1,5 @@
 {{ $isLeafletNeeded := false }}
-{{ $isSplideNeed := false }}
+{{ $isCarouselNeeded := false }}
 
 {{ if .Params.contents }}
   {{ range .Params.contents }}
@@ -14,12 +14,12 @@
     {{ if eq .template "gallery"}}
       {{ with .data }}
         {{ if eq .layout "carousel" }}
-          {{ $isSplideNeed = true }}
+          {{ $isCarouselNeeded = true }}
         {{ end }}
       {{ end }}
     {{ end }}
     {{ if eq .template "testimonials"}}
-      {{ $isSplideNeed = true }}
+      {{ $isCarouselNeeded = true }}
     {{ end }}
   {{ end }}
 {{ end }}
@@ -27,11 +27,6 @@
 <!-- check if map needed  -->
 {{ if .Params.contact_details.geolocation }} 
   {{ $isLeafletNeeded = true }}
-{{ end }}
-
-{{ if $isSplideNeed }}
-  {{ $splide_js := resources.Get "js/vendors/carousel.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
-  <script src="{{ $splide_js.RelPermalink }}" integrity="{{ $splide_js.Data.Integrity }}"></script>
 {{ end }}
 
 {{ if $isLeafletNeeded }}

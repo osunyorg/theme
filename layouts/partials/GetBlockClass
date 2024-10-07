@@ -1,9 +1,17 @@
 {{- $class := "block" -}}
+
 {{- $class = printf "%s block-%s" $class .template -}}
+
 {{- if .title }}
   {{ $class = printf "%s block-titled" $class }}
 {{- end -}}
+
 {{- if .data.layout -}}
   {{- $class = printf "%s block-%s--%s" $class .template .data.layout -}}
 {{- end -}}
+
+{{- if .html_class -}}
+  {{- $class = printf "%s %s" $class .html_class -}}
+{{ end }}
+
 {{- return $class -}}

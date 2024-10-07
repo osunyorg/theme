@@ -1,12 +1,19 @@
+{{ $researcher := .researcher }}
+{{ $publications := .publications }}
+
 <section class="person-publications">
   <div class="top">
-    <h2 class="h5"><a href="{{ .researcher.Permalink }}">{{ i18n "persons.publications" }}</a></h2>
+    <h2 class="h5">{{ i18n "persons.publications.recent" }}</h2>
   </div>
-  <ul class="publications-list">
-    {{ range first 3 .publications }}
-      <li>
-        {{ partial "publications/publication.html" . }}
-      </li>
+  <div class="publications">
+    {{ range first 3 $publications }}
+      {{ partial "publications/publication.html" (dict 
+        "publication" .
+        "researcher" $researcher
+      )}}
     {{ end }}
-  </ul>
+    {{ if $researcher.Params }}
+      <a href="{{ $researcher.Permalink }}" class="more">{{ i18n "persons.publications.all" (dict "author" $researcher.Params.person) }}</a>
+    {{ end }}
+  </div>
 </section>

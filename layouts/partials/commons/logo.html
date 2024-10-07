@@ -8,7 +8,7 @@
   {{ $file_darkmode = $logo.darkmode }}
 {{ end }}
 
-<a class="logo {{- if $file_darkmode }} with-darkmode {{ end -}}" href="{{ site.Home.Permalink }}">
+<a class="logo {{- if $file_darkmode }} with-darkmode {{ end -}}" href="{{ site.Home.Permalink }}" title="{{ i18n "commons.index" (dict "Title" site.Title )}}">
   {{ if $file }}
     {{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file "static" true) }}
     <img src="{{ $file }}" alt="{{ site.Title }}" height="{{ index $fileDimensions 1 }}" width="{{ index $fileDimensions 0 }}">
