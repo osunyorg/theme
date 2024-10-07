@@ -1,8 +1,8 @@
-{{ $section_type := . }}
-{{ $use_default := (index site.Params $section_type).default_image }}
-{{ $image := index site.Data.website.default "image" }}
+{{- $section_type := . -}}
+{{- $use_default := (index site.Params $section_type).default_image -}}
+{{- $image := index site.Data.website.default "image" -}}
 
-{{ if and $use_default $image }}
+{{- if and $use_default $image -}}
   {{ with index site.Params.image_sizes.sections $section_type }}
     {{ $sizes := .item }}
 
@@ -12,4 +12,4 @@
           "sizes"    $sizes
         ) -}}
   {{ end }}
-{{ end }}
+{{- end -}}
