@@ -34,7 +34,7 @@ window.osuny.carousel.Slider.prototype = {
                 left: this._slidePosition(this.index),
                 behavior: behavior
             });
-        }.bind(this),2);
+        }.bind(this), 2);
         this._updateSlidesClasses();
         this._updateSlidesVisibilities();
     },
