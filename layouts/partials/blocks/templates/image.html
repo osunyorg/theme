@@ -6,7 +6,9 @@
   {{- $buttons := and .button.text .button_secondary.text -}}
   {{- if .image -}}
     {{- $image_class = printf "image-%s" (partial "GetImageDirection" .image ) -}}
+    {{ .image.ratio }}
   {{- end -}}
+  YOOOO
   <div class="{{ $block_class }} {{ $image_class }}">
     <div class="container">
       <div class="block-content">
