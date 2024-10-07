@@ -38,10 +38,15 @@ window.osuny.carousel.manager = {
         }
     },
     _setCarouselAriaDescribedBy (carousel) {
-        var id = carousel.getAttribute('id');
-        carousel.querySelectorAll('button').forEach(function (child) {
-            child.setAttribute('aria-describedby', String(id));
-        }.bind(this));
+        var parent = carousel.parentElement;
+        var blockTitle = parent ? parent.querySelector('.block-title') : null;    
+
+        if (blockTitle && blockTitle.getAttribute('id')) {
+            var id = blockTitle.getAttribute('id');
+            carousel.querySelectorAll('button').forEach(function (child) {
+                child.setAttribute('aria-describedby', String(id));
+            }.bind(this));
+        }
     },
     _initializeListeners: function () {
         window.addEventListener('resize', this._resize.bind(this));
