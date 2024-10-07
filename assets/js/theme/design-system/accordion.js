@@ -23,7 +23,7 @@ Accordion.prototype.toggleAccordion = function(open) {
     }
     this.state.isOpened = open;
     this.button.setAttribute('aria-expanded', this.state.isOpened);
-    };
+};
 
 (function () {
     var accordions = document.querySelectorAll('details');
