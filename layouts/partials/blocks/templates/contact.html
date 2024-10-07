@@ -74,11 +74,15 @@
                   {{ end }}
                 </div>
               {{ end }}
+              {{ $a11y_name := .name | default (i18n "commons.contact.empty_name") }}
               {{ with .socials }}
                 <div>
-                  <p class="meta">{{- i18n "commons.contact.socials" -}}</p>
+                  <p class="meta">{{- i18n "commons.contact.socials.title" -}}</p>
                   <ul class="socials-list">
-                    {{ partial "commons/socials" . }}
+                    {{ partial "commons/socials" (dict
+                      "context" .
+                      "name" $a11y_name
+                    ) }}
                   </ul>
                 </div>
               {{ end }}

@@ -1,4 +1,5 @@
 import './body.js';
+import './design-system/accordion.js';
 import './design-system/clickToCopy';
 import './design-system/dropdowns';
 import './design-system/font';
