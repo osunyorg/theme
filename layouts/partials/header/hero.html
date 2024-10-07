@@ -47,7 +47,10 @@
 
         {{ with $button }}
           {{ if and .display .target .label }}
-            <a href="{{ .target }}" class="btn">{{ .label }}</a>
+            {{ $title := .label }}
+            {{ $isExternal := .external | default false }}
+            {{ $link_title := cond $isExternal (safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title))) $title}}
+            <a href="{{ .target }}" title ="{{ $link_title }}" class="btn" {{ if $isExternal -}} target="_blank" rel="noopener" {{- end }}>{{ .label }}</a>
           {{ end }}
         {{ end }}
 
