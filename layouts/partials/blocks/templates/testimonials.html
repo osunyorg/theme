@@ -1,6 +1,7 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
 {{- $is_carousel := false -}}
+{{- $block_index := .index -}}
 
 {{- with .block.data -}}
   {{ if .testimonials }}
@@ -13,11 +14,11 @@
   <div class="container">
     <div class="block-content">
       {{ partial "blocks/top.html" (dict
-      "title" $block.title
-      "heading_level" $block.ranks.self
-      "hidden" true
+          "block_index" $block_index
+          "title" $block.title
+          "heading_level" $block.ranks.self
+          "hidden" true
       )}}
-
       <div class="testimonials">
         {{- if $is_carousel }}
           {{ partial "blocks/templates/carousel.html" (dict 
@@ -28,8 +29,8 @@
         {{ else }}
           {{ range .testimonials}}
             {{ partial "blocks/templates/testimonials/single.html" (dict
-            "is_carousel" false
-            "params" .
+                "is_carousel" false
+                "params" .
             )}}
           {{ end }}
         {{ end }}
