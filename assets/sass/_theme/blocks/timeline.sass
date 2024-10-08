@@ -61,7 +61,6 @@
                         margin-left: columns(3)
 
     &--horizontal
-        @include draggable-block
         --min-title-height: 0px
         background: $block-timeline-horizontal-background
         color: $block-timeline-horizontal-color
@@ -69,17 +68,22 @@
         padding-top: var(--block-space-y)
         &::before
             display: none
+        overflow: hidden
+        z-index: 0
+        .container
+            overflow: visible
+            .block-content
+                width: fit-content
         .carousel
+            width: columns(12)
             &__slider
                 margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
             &__slide
                 &.is-before
                     opacity: 0.3
-            .counter
-                display: none
         .timeline-event
             padding: 0 calc(var(--grid-gutter) / 2)
-            width: columns(4)
+            width: calc( 3 * var(--column-width) + 3 * var(--grid-gutter))
             .title
                 display: block
                 min-height: var(--min-title-height)
