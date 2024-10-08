@@ -1,7 +1,9 @@
+{{ $linkTitle := (i18n "commons.lightbox.link.title") }}
 {{ $options := (dict ) }}
 {{ with .description }}
   {{ $options = merge $options (dict "description" ( . | plainify )) }}
   {{ $options = merge $options (dict "descriptionhtml" (partial "PrepareHTML" . )) }}
+  {{ $linkTitle = (printf "%s %s" $linkTitle . ) }}
 {{ end }}
 
 {{ with .credit }}
@@ -24,7 +26,7 @@
   href="{{- partial "GetLightboxUrl" .image -}}"
   title="{{- i18n "commons.lightbox.link.title" -}}"
   aria-label="{{- i18n "commons.lightbox.link.title" -}}">
-    <span class="sr-only">{{- i18n "commons.lightbox.link.title" -}}</span>
+    <span class="sr-only">{{ $linkTitle }}</span>
     {{ partial "commons/image.html" (dict
       "image" .image
       "alt" .alt
