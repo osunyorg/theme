@@ -279,51 +279,64 @@
 
     &--carousel
         overflow: hidden
-        position: relative
         z-index: 0
         .container
-            padding-right: var(--grid-gutter-negative) !important
-        .top 
-            padding-right: var(--grid-gutter)
-        .carousel
-            padding-bottom: $spacing-3
-            &__slider
-                margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
-            &__slide
-                list-style: none
-                word-break: break-word
-                .post
-                    margin: 0 calc(var(--grid-gutter) / 2)
-                &.is-before
-                    opacity: 0.3
-                @include in-page-with-sidebar
+            overflow: visible
+            .block-content
+                width: fit-content
+                .carousel
+                    padding-bottom: $spacing-3
+                    width: columns(12)
+                    &__slider
+                        margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
+                    &__slide
+                        list-style: none
+                        word-break: break-word
+                        .post
+                            margin: 0 calc(var(--grid-gutter) / 2)
+                            .media
+                                img
+                                    aspect-ratio: 1.55
+                        &.is-before
+                            opacity: 0.3
+                    @include media-breakpoint-down(desktop)
+                        &__slider
+                            margin-left: var(--grid-gutter-negative)
+                            width: var(--grid-width)
+                        &__slide
+                            .post
+                                margin-left: var(--grid-gutter)
+                                margin-right: 0
+                                width: columns(10)
+                    &__arrows
+                        justify-content: space-between
+                        .counter
+                            display: none
+            @include in-page-with-sidebar
+                padding-left: offset(4)
+                .block-content
+                    padding-left: var(--grid-gutter) !important
+                    .carousel
+                        &__slide
+                            .post
+                                width: columns(3)
+                                .post-title
+                                    @include h4
+                        &__arrows
+                            width: columns(7)
                     .post
                         width: columns(3)
-                        .post-title
-                            @include h4
-            @include media-breakpoint-down(desktop)
-                &__slider
-                    margin-left: var(--grid-gutter-negative)
-                    width: var(--grid-width)
-                &__slide
+            @include in-page-without-sidebar
+                .block-content
+                    display: flex
+                    gap: var(--grid-gutter)
+                    .top
+                        width: columns(3)
+                    .carousel
+                        &__arrows
+                            width: columns(9)
                     .post
-                        margin-left: var(--grid-gutter)
-                        margin-right: 0
-                        width: columns(10)
-            &__arrows
-                justify-content: space-between
-                .counter
-                    display: none
-        @include in-page-without-sidebar
-            .block-content
-                display: flex
-                gap: var(--grid-gutter)
-                .top
-                    width: columns(3)
-                .carousel
-                    width: columns(9)
-                .post
-                    width: columns(4)
+                        width: columns(4)
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts

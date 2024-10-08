@@ -22,8 +22,6 @@
 
     &__slide
         scroll-snap-align: start
-        .block-timeline &.is-before
-            opacity: 0.3
 
     button
         appearance: none
@@ -34,8 +32,8 @@
         align-items: center
         display: flex
         flex-direction: row
-        margin-left: - $spacing-3 
-        margin-right: - $spacing-3 
+        margin-left: 0
+        margin-right: 0
         @include media-breakpoint-up(desktop)
             padding-top: $spacing-3
         .counter
@@ -43,8 +41,6 @@
             min-width: $spacing-3
             text-align: center
             width: fit-content
-            .block-timeline &
-                display: none
             &:empty
                 display: block
         button
@@ -65,12 +61,19 @@
             &.arrow-next
                 @include button-reset
                 @include icon(arrow-left-line, before)
+                margin-left: - $spacing-3
                 padding: $spacing-3
                 position: static
                 svg
                     display: none
             &.arrow-next
                 @include icon(arrow-right-line, before)
+                margin-right: calc(var(--column-width) - 2 * var(--spacing-3))
+            @include media-breakpoint-down(desktop)
+                margin-left: 0
+                margin-right: 0
+                &.arrow-next
+                    margin-right: var(--grid-gutter-negative)
 
     &__pagination
         &__tabcontainer
