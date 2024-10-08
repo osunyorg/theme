@@ -11,38 +11,43 @@ class CampusMap {
         this.markers = [];
         this.setMap = false;
         this.content = this.map.querySelector('.map');
-        this.campus = this.content.querySelector('.campus');
+        this.locations = this.content.querySelectorAll('.campus');
+        this.openPopup = JSON.parse(this.content.getAttribute('data-open-popup'));
         let map = L.map(this.content, {
             scrollWheelZoom: false
         });
-        this.geoloc = {
-            latitude: parseFloat(this.campus.getAttribute('data-latitude')),
-            longitude: parseFloat(this.campus.getAttribute('data-longitude'))
-        };
-        this.classHidden = 'hidden';
-
-        this.themeMarker = L.icon({
-            iconUrl: this.content.getAttribute('data-marker-icon') || '/assets/images/map-marker.svg',
-            iconSize: [17, 26]
-        });
-        
-        if (Boolean(this.geoloc.latitude) && Boolean(this.geoloc.longitude)) {
-            let mapLocation = [this.geoloc.latitude, this.geoloc.longitude];
-            let marker = new L.marker(mapLocation, {
-                icon: this.themeMarker
+        this.locations.forEach((location) => {
+            this.geoloc = {
+                latitude: parseFloat(location.getAttribute('data-latitude')),
+                longitude: parseFloat(location.getAttribute('data-longitude'))
+            };
+            this.classHidden = 'hidden';
+    
+            this.themeMarker = L.icon({
+                iconUrl: this.content.getAttribute('data-marker-icon') || '/assets/images/map-marker.svg',
+                iconSize: [17, 26]
             });
-
-            const popup = new L.Popup({'autoClose':false, 'closeButton':false, 'maxWidth': 1000});
-            popup.setLatLng(mapLocation);
-            popup.setContent(this.campus);
-            popup.openOn(map);
-            marker.addTo(map).bindPopup(popup);
-            this.markers.push(marker);
-            this.setMap = true;
-            this.listen(map);
-            this.getMapBounds(map);
-            this.dom.classList.add("page-with-map");
-        }
+            
+            if (Boolean(this.geoloc.latitude) && Boolean(this.geoloc.longitude)) {
+                let mapLocation = [this.geoloc.latitude, this.geoloc.longitude];
+                let marker = new L.marker(mapLocation, {
+                    icon: this.themeMarker
+                });
+    
+                const popup = new L.Popup({'autoClose':false, 'closeButton':false, 'maxWidth': 1000});
+                popup.setLatLng(mapLocation);
+                popup.setContent(location);
+                if (this.openPopup) {
+                    popup.openOn(map);
+                }
+                marker.addTo(map).bindPopup(popup);
+                this.markers.push(marker);
+                this.setMap = true;
+                this.listen(map);
+                this.getMapBounds(map);
+                this.dom.classList.add("page-with-map");
+            }
+        });
     }
 
     listen (map) {

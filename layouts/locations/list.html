@@ -12,6 +12,12 @@
     <div class="container">
       {{ partial "locations/locations.html" . }}
       {{ partial "commons/pagination.html" . }}
+      {{ if site.Params.locations.index.map }}
+        {{ $locations := .Pages }}
+        {{ partial "locations/map.html" (dict
+            "locations" $locations
+        )}}
+      {{ end }}
     </div>
   </div>
 
