@@ -6,7 +6,7 @@
   {{ $is_gallery := .is_gallery }}
   {{ $index := .index }}
   {{ $total := .total }}
-  {{ if or (not site.Params.image_sizes.design_system.lightbox.disabled) (and $is_gallery (not site.Params.image_sizes.design_system.gallerylightbox.disabled))}}
+  {{ if or (not site.Params.image_sizes.design_system.lightbox.disabled) (and $is_gallery (not site.Params.image_sizes.design_system.gallerylightbox.disabled)) }}
     {{ $is_lightbox = true }}
   {{ end }}
   {{ $image := partial "GetMedia" .image.id }}
@@ -14,7 +14,7 @@
 
 
   {{ if $image }}
-    {{ with .image}}
+    {{ with .image }}
       <figure 
               role="figure"
               class="{{ $image_class }}{{ if $is_carousel }} carousel__slide {{ end }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
@@ -25,7 +25,7 @@
               aria-label="{{ . | plainify }}" 
             {{ end }}
       >
-      {{ if $is_lightbox}}
+      {{ if $is_lightbox }}
         {{ partial "commons/lightbox/lightbox-launcher.html" (dict
           "description" .text
           "image" .id
