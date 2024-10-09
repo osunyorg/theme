@@ -38,20 +38,19 @@
             width: columns(8)
     @include in-page-without-sidebar
         .testimonials
-            width: columns(9)
+            width: columns(12)
         figure
             min-height: columns(2)
-            width: columns(9)
+            width: columns(8)
+            padding-left: offset(4)
+            width: columns(12)
             &.with-picture
-                width: columns(12)
-                padding-left: offset(3)
-                padding-right: offset(1)
                 position: relative
                 figcaption
                     display: block
                     margin-top: $spacing-2
                     .avatar
-                        left: columns(1)
+                        left: columns(2)
                         margin-left: var(--grid-gutter)
                         position: absolute
                         top: 0
@@ -61,12 +60,11 @@
         .toggle
             border: 1px solid $block-testimonials-pagination-background
         &__pagination
+            align-self: flex-end
             order: 1
+            width: columns(8)
             button
                 &::before
                     background-color: $block-testimonials-pagination-background
                 i
                     background-color: $block-testimonials-pagination-progress-background
-        .testimonial
-            opacity: 1
-            padding: 0 $spacing-1

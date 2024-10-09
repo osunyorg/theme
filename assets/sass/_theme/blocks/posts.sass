@@ -286,29 +286,22 @@
                 width: fit-content
                 .carousel
                     padding-bottom: $spacing-3
-                    width: columns(12)
-                    &__slider
-                        margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
+                    width: columns(24)
                     .post
                         word-break: break-word
-                        margin: 0 calc(var(--grid-gutter) / 2)
+                        margin-right: calc(var(--grid-gutter))
                         .media
                             img
                                 aspect-ratio: 1.55
-                        &.is-before
-                            opacity: 0.3
-                    @include media-breakpoint-down(desktop)
-                        &__slider
-                            margin-left: var(--grid-gutter-negative)
-                            width: var(--grid-width)
-                        .post
-                            margin-left: var(--grid-gutter)
-                            margin-right: 0
-                            width: columns(10)
                     &__arrows
                         justify-content: space-between
                         .counter
                             display: none
+                    @include media-breakpoint-down(desktop)
+                        &__arrows
+                            width: columns(12)
+                        .post
+                            width: columns(10)
             @include in-page-with-sidebar
                 padding-left: offset(4)
                 .block-content
@@ -320,8 +313,6 @@
                                 @include h4
                         &__arrows
                             width: columns(7)
-                    .post
-                        width: columns(3)
             @include in-page-without-sidebar
                 .block-content
                     display: flex
@@ -329,10 +320,10 @@
                     .top
                         width: columns(3)
                     .carousel
+                        .post
+                            width: columns(4)
                         &__arrows
                             width: columns(9)
-                    .post
-                        width: columns(4)
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts

@@ -75,7 +75,7 @@
             .block-content
                 width: fit-content
         .carousel
-            width: columns(12)
+            width: columns(24)
             &__slider
                 margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
         .timeline-event
@@ -85,7 +85,7 @@
                 display: block
                 min-height: var(--min-title-height)
                 padding-bottom: $spacing-3
-                @include signature
+                @include body-text
             .description
                 @include small
             .line
@@ -108,11 +108,12 @@
             &:last-child
                 .line
                     background: transparent
-            &.is-before
-                opacity: 0.3
 
         @include media-breakpoint-up(desktop)
             .timeline-event
+                &[aria-hidden=true]
+                    transition: opacity 0.2s
+                    opacity: 0
                 .line
                     width: calc(100% + var(--grid-gutter))
 
@@ -120,19 +121,12 @@
             .carousel__slider
                 margin-left: calc(var(--grid-gutter-negative))
                 width: calc(var(--grid-width) + var(--grid-gutter) * 2)
-            .timeline-events
-                position: relative
-            .actions-arrows
-                left: 0
-                position: absolute
-                top: calc(#{$spacing-2} + var(--min-title-height))
             .timeline-event
                 margin-right: 0
                 padding-right: 0
                 padding-left: var(--grid-gutter)
                 width: columns(12)
                 .line
-                    margin-bottom: $spacing-5
                     width: calc(100% + var(--grid-gutter))
                     &::before
                         width: 8px

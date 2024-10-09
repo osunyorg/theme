@@ -73,30 +73,33 @@
 
     &--carousel
         overflow: hidden
-        position: relative
         z-index: 0
         @include in-page-without-sidebar
             background: $block-gallery-carousel-background
             padding-bottom: var(--grid-gutter)
             padding-top: var(--grid-gutter)
         .container
+            overflow: visible
             padding-right: var(--grid-gutter-negative) !important
-        .top 
-            padding-right: var(--grid-gutter)
+            .block-content
+                width: fit-content
+                .top 
+                    padding-right: var(--grid-gutter)
+                .carousel
+                    width: columns(24)
+                    figure
+                        margin-right: calc(var(--grid-gutter) / 2)
+                        picture
+                            img
+                                height: $block-gallery-carousel-max-height
+                                width: auto
+                                max-width: none
+                                @include media-breakpoint-up(desktop)
+                                    height: $block-gallery-carousel-max-height-desktop
+                                    width: auto
+                                    max-width: none
+                        @include in-page-without-sidebar
+                            margin-right: var(--grid-gutter)
         .block-gallery + &,
         .block-pages--cards + &
             margin-top: 0
-        .carousel
-            figure
-                margin-right: calc(var(--grid-gutter) / 2)
-                picture
-                    img
-                        height: $block-gallery-carousel-max-height
-                        width: auto
-                        max-width: none
-                        @include media-breakpoint-up(desktop)
-                            height: $block-gallery-carousel-max-height-desktop
-                            width: auto
-                            max-width: none
-                @include in-page-without-sidebar
-                    margin-right: var(--grid-gutter)
