@@ -40,7 +40,6 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         this.popupDetails.close();
         this._removeImageContent();
         this._setImageContent(lightbox);
-        // this.content.focus();
         this.controlRack.load(lightbox);
         this.popupDetails.load(lightbox);
     },

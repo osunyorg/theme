@@ -26,18 +26,22 @@ window.osuny.carousel.Slide.prototype = {
         this._setState(this._isNext(), window.osuny.carousel.classes.slideIsNext);
         this._setState(this._isAfter(), window.osuny.carousel.classes.slideIsAfter);
     },
-    setAriaHidden (hidden) {
-        this.container.setAttribute('aria-hidden', String(hidden));
+    setInteractivityState (slideVisible) {
+        var focusableSubElements = ['a', 'button', 'iframe'];
+        this.setFocusable(this.container, slideVisible);
+        focusableSubElements.forEach(function (element) {
+            this.container.querySelectorAll(element).forEach(function (e) {
+                this.setFocusable(e, slideVisible);
+            }.bind(this));
+        }.bind(this));
     },
-    setFocusBehavior (visible) {
-        if (visible) {
-            this.setTabIndex(0);
+    setFocusable (element, slideVisible) {
+        element.setAttribute('aria-hidden', String(!slideVisible));
+        if (slideVisible) {
+            element.setAttribute('tabindex', String(0));
         } else {
-            this.setTabIndex(-1);
+            element.setAttribute('tabindex', String(-1));
         }
-    },
-    setTabIndex (n) {
-        this.container.setAttribute('tabindex', String(n));
     },
     _isBefore: function () {
         return this.index < this.slider.index;
