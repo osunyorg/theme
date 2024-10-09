@@ -24,8 +24,7 @@
   tabindex="-1"
   data-lightbox="{{ $options | encoding.Jsonify }}" 
   href="{{- partial "GetLightboxUrl" .image -}}"
-  title="{{- i18n "commons.lightbox.link.title" -}}"
-  aria-label="{{- i18n "commons.lightbox.link.title" -}}">
+  >
     <span class="sr-only">{{ $linkTitle }}</span>
     {{ partial "commons/image.html" (dict
       "image" .image
