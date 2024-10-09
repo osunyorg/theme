@@ -1,3 +1,5 @@
+{{ $person_name := .Title }}
+
 {{ with .Params.contact_details }}
   {{ if or .website .linkedin .twitter .email .phone }}
     <div class="contacts-details contacts-details--person">
@@ -6,7 +8,7 @@
           {{ with .website }}
             <li>
               <span>{{ i18n "commons.contact.website" }}</span>
-              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "name" $person_name )) }}">
                 {{ chomp .label }}
                 <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
               </a>
@@ -16,7 +18,7 @@
           {{ with .linkedin }}
             <li>
               <span>LinkedIn</span>
-              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "LinkedIn" "name" $person_name )) }}">
                 {{ chomp .label }}
                 <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
               </a>
@@ -26,7 +28,7 @@
           {{ with .mastodon }}
             <li>
               <span>Mastodon</span>
-              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Mastodon" "name" $person_name )) }}">
                 {{ chomp .label }}
                 <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
               </a>
@@ -35,8 +37,8 @@
 
           {{ with .twitter }}
             <li>
-              <span>Twitter</span>
-              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url">
+              <span>X (ex-Twitter)</span>
+              <a href="{{ chomp .value }}" target="_blank" rel="noopener" itemprop="url" {{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "X (ex-Twitter)" "name" $person_name )) }}>
                 {{ chomp .label }}
                 <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
               </a>
@@ -46,7 +48,7 @@
           {{ with .email }}
             <li>
               <span>{{ i18n "commons.contact.email" }}</span>
-              <a href="{{ chomp .value }}" itemprop="email">
+              <a href="{{ chomp .value }}" itemprop="email" title='{{ safeHTML (i18n "commons.contact.email_a11y" (dict "name" $person_name "email" .label )) }}'>
                 {{ chomp .label }}
                 <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
               </a>
@@ -56,14 +58,14 @@
           {{ with .phone }}
             <li>
               <span>{{ i18n "commons.contact.phone" }}</span>
-              <a href="{{ .value | safeURL }}" itemprop="telephone">{{ .label }}</a>
+              <a href="{{ .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone_a11y" (dict "name" $person_name "phone_number" .label )) }}'>{{ .label }}</a>
             </li>
           {{ end }}
 
           {{ with .phone_professional }}
             <li>
               <span>{{ i18n "commons.contact.phone_professional" }}</span>
-              <a href="{{ .value | safeURL }}" title="{{ .value }}" itemprop="telephone">{{ .label }}</a>
+              <a href="{{ .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone_a11y" (dict "name" $person_name "phone_number" .label )) }}'>{{ .label }}</a>
             </li>
           {{ end }}
         </ul>
