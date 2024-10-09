@@ -56,14 +56,14 @@
           {{ with .phone }}
             <li>
               <span>{{ i18n "commons.contact.phone" }}</span>
-              <a href="{{ .value }}" itemprop="telephone">{{ .label }}</a>
+              <a href="{{ .value | safeURL }}" itemprop="telephone">{{ .label }}</a>
             </li>
           {{ end }}
 
           {{ with .phone_professional }}
             <li>
               <span>{{ i18n "commons.contact.phone_professional" }}</span>
-              <a href="{{ .value }}" itemprop="telephone">{{ .label }}</a>
+              <a href="{{ .value | safeURL }}" title="{{ .value }}" itemprop="telephone">{{ .label }}</a>
             </li>
           {{ end }}
         </ul>
