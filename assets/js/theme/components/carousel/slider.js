@@ -49,16 +49,17 @@ window.osuny.carousel.Slider.prototype = {
     },
     focusOnNewVisibleSlide: function (index) {
         var visibleSlides = [];
-        this.slides.forEach( function (slide) {
+        this.slides.forEach(function (slide) {
             if (slide.visible) {
                 visibleSlides.push(slide);
             }
         });
-
-        if (index < this.index) { 
-            visibleSlides[0].container.focus();
-        } else if (index > this.index) { 
-            visibleSlides[visibleSlides.length - 1].container.focus();
+        if (visibleSlides.length > 0) {
+            if (index < this.index) {
+                visibleSlides[0].container.focus();
+            } else if (index > this.index) {
+                visibleSlides[visibleSlides.length - 1].container.focus();
+            }
         }
     },
     currentSlideIndex: function () {

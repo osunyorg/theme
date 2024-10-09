@@ -9,7 +9,6 @@ window.osuny.carousel.Arrows = function (element) {
     }
     this.environment = window.osuny.carousel;
     this._findElement = window.osuny.components.utils.findElement.bind(this);
-    
     this._dispatchEvent = window.osuny.components.utils.dispatchEvent.bind(this);
     this.counter = this._findElement('arrowsCounter');
     this.next = this._findElement('arrowsNext');

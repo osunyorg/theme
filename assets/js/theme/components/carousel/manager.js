@@ -41,8 +41,8 @@ window.osuny.carousel.manager = {
         var parent = carousel.parentElement,
             blockTitle = parent ? parent.querySelector('.block-title') : null,
             id = null;
-            if (blockTitle && blockTitle.getAttribute('id')) {
-                id = blockTitle.getAttribute('id');
+        if (blockTitle && blockTitle.getAttribute('id')) {
+            id = blockTitle.getAttribute('id');
             carousel.querySelectorAll('button').forEach(function (child) {
                 child.setAttribute('aria-describedby', String(id));
             }.bind(this));
