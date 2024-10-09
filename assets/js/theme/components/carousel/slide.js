@@ -9,6 +9,7 @@ window.osuny.carousel.Slide = function (slider, container, index) {
     this.classList = this.container.classList;
     this.computedStyle = null;
     this.width = 0;
+    this.visible = false;
     this.computeWidth();
 };
 
@@ -28,16 +29,17 @@ window.osuny.carousel.Slide.prototype = {
     },
     setInteractivityState (slideVisible) {
         var focusableSubElements = ['a', 'button', 'iframe'];
-        this.setFocusable(this.container, slideVisible);
+        this.visible = slideVisible;
+        this.setFocusable(this.container);
         focusableSubElements.forEach(function (element) {
             this.container.querySelectorAll(element).forEach(function (e) {
-                this.setFocusable(e, slideVisible);
+                this.setFocusable(e);
             }.bind(this));
         }.bind(this));
     },
-    setFocusable (element, slideVisible) {
-        element.setAttribute('aria-hidden', String(!slideVisible));
-        if (slideVisible) {
+    setFocusable (element) {
+        element.setAttribute('aria-hidden', String(!this.visible));
+        if (this.visible) {
             element.setAttribute('tabindex', String(0));
         } else {
             element.setAttribute('tabindex', String(-1));

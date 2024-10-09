@@ -149,7 +149,7 @@ window.osuny.carousel.Carousel.prototype = {
     _onSliderScrollend: function () {
         var index = this.slider.currentSlideIndex();
         if (this.state.hasFocus) {
-            this.slider.focusOnSlide(index);
+            this.slider.focusOnNewVisibleSlide(index);
         }
         if (this.slides.current !== index) {
             this.showSlide(index);

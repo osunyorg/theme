@@ -13,7 +13,6 @@ window.osuny.carousel.Slider = function Slider (element) {
     this.container = this._findElement('container');
     this.index = 0;
     this.slides = [];
-    this.deltaPosition = 0;
     slidesContainers = this.container.children;
     for (i = 0; i < slidesContainers.length; i += 1) {
         slideContainer = slidesContainers.item(i);
@@ -48,8 +47,19 @@ window.osuny.carousel.Slider.prototype = {
     length: function () {
         return this.slides.length;
     },
-    focusOnSlide: function (index) {
-        this.slides[index].container.focus();
+    focusOnNewVisibleSlide: function (index) {
+        var visibleSlides = [];
+        this.slides.forEach( function (slide) {
+            if (slide.visible) {
+                visibleSlides.push(slide);
+            }
+        });
+
+        if (index < this.index) { 
+            visibleSlides[0].container.focus();
+        } else if (index > this.index) { 
+            visibleSlides[visibleSlides.length - 1].container.focus();
+        }
     },
     currentSlideIndex: function () {
         // Le seuil permet d'éviter des erreurs d'arrondis qui causent un retour en slide 1, par étapes
