@@ -91,25 +91,28 @@
                 color: var(--color-background)
                 height: 100%
                 margin: 0
-                min-width: min-content
-                width: auto !important // corrige la width appliquée en js par leaflet
+                width: columns(12) !important // corrige la width appliquée en js par leaflet
+                @include media-breakpoint-up(desktop)
+                    width: columns(4) !important
                 .campus
-                    align-items: center
+                    align-items: stretch
                     display: flex
                     .campus-content
+                        @include meta
+                        flex: 1
                         order: 2
                         padding: $spacing-2 $spacing-3
-                        span,
                         .campus-title
-                            display: block
+                            @include h6
                             margin: 0 // Cancel leaflet default style
-                            width: max-content
+                        span:last-child
+                            display: block
                     .media
                         aspect-ratio: 1
-                        display: block
-                        margin-bottom: 0
-                        order: 1
-                        width: $spacing-6
+                        height: auto
+                        width: columns(5)
+                        @include media-breakpoint-up(desktop)
+                            width: calc(var(--grid-gutter) + var(--column-width))
                         img
                             display: block
                             height: 100%
