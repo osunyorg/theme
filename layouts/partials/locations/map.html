@@ -1,16 +1,16 @@
 {{ $locations := .locations }}
 {{ $popup_opened := .popup_opened | default false }}
 
-<div class="campus-map">
+<div class="locations-map">
   <div class="map" data-open-popup="{{ $popup_opened }}" data-marker-icon="{{ "/assets/images/map-marker.svg" }}">
     {{ range $locations }}
       {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}
-        <article class="campus" data-longitude="{{ .Params.contact_details.geolocation.longitude }}" data-latitude="{{ .Params.contact_details.geolocation.latitude }}">
+        <article class="location" data-longitude="{{ .Params.contact_details.geolocation.longitude }}" data-latitude="{{ .Params.contact_details.geolocation.latitude }}">
           {{ $title := "" }}
           {{ if .Params.title }}
-            <div class="campus-content">
+            <div class="location-content">
               {{ $title = partial "PrepareHTML" .Params.title -}}
-              <p class="campus-title">
+              <p class="location-title">
                 {{- if and .Params.url .Params.with_link }}
                   <a href="{{ .Params.url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
                 {{ end -}}

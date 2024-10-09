@@ -1,9 +1,9 @@
-const campusMap = document.querySelector('.campus-map');
+const locationsMap = document.querySelector('.locations-map');
 const dom = document.querySelector('main');
-class CampusMap {
-    constructor (dom, campusMap) {
+class LocationsMap {
+    constructor (dom, locationsMap) {
         this.dom = dom;
-        this.map = campusMap;
+        this.map = locationsMap;
         this.init();
     }
 
@@ -11,7 +11,7 @@ class CampusMap {
         this.markers = [];
         this.setMap = false;
         this.content = this.map.querySelector('.map');
-        this.locations = this.content.querySelectorAll('.campus');
+        this.locations = this.content.querySelectorAll('.location');
         this.openPopup = JSON.parse(this.content.getAttribute('data-open-popup'));
         let map = L.map(this.content, {
             scrollWheelZoom: false
@@ -63,6 +63,6 @@ class CampusMap {
     }
 }
 
-if (campusMap) {
-    new CampusMap(dom, campusMap);
+if (locationsMap) {
+    new LocationsMap(dom, locationsMap);
 }

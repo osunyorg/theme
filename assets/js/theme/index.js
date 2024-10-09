@@ -13,6 +13,6 @@ import './blocks/organizations';
 import './blocks/draggableBlocks.js';
 import './blocks/timeline.js';
 import './blocks/videos.js';
-import './blocks/campus.js';
+import './blocks/locations.js';
 import './utils/utils.js';
 import './components/carousel.js';
