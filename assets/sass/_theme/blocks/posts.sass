@@ -289,25 +289,22 @@
                     width: columns(12)
                     &__slider
                         margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
-                    &__slide
-                        list-style: none
+                    .post
                         word-break: break-word
-                        .post
-                            margin: 0 calc(var(--grid-gutter) / 2)
-                            .media
-                                img
-                                    aspect-ratio: 1.55
+                        margin: 0 calc(var(--grid-gutter) / 2)
+                        .media
+                            img
+                                aspect-ratio: 1.55
                         &.is-before
                             opacity: 0.3
                     @include media-breakpoint-down(desktop)
                         &__slider
                             margin-left: var(--grid-gutter-negative)
                             width: var(--grid-width)
-                        &__slide
-                            .post
-                                margin-left: var(--grid-gutter)
-                                margin-right: 0
-                                width: columns(10)
+                        .post
+                            margin-left: var(--grid-gutter)
+                            margin-right: 0
+                            width: columns(10)
                     &__arrows
                         justify-content: space-between
                         .counter
@@ -317,11 +314,10 @@
                 .block-content
                     padding-left: var(--grid-gutter) !important
                     .carousel
-                        &__slide
-                            .post
-                                width: columns(3)
-                                .post-title
-                                    @include h4
+                        .post
+                            width: columns(3)
+                            .post-title
+                                @include h4
                         &__arrows
                             width: columns(7)
                     .post

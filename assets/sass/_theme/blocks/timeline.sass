@@ -78,9 +78,6 @@
             width: columns(12)
             &__slider
                 margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
-            &__slide
-                &.is-before
-                    opacity: 0.3
         .timeline-event
             padding: 0 calc(var(--grid-gutter) / 2)
             width: calc( 3 * var(--column-width) + 3 * var(--grid-gutter))
@@ -111,6 +108,8 @@
             &:last-child
                 .line
                     background: transparent
+            &.is-before
+                opacity: 0.3
 
         @include media-breakpoint-up(desktop)
             .timeline-event

@@ -1,7 +1,6 @@
 {{ if .image.id }}
   {{ $sizes := .sizes }}
   {{ $lazy := default true .lazy }}
-  {{ $is_carousel := .is_carousel }}
   {{ $is_lightbox := false }}
   {{ $is_gallery := .is_gallery }}
   {{ $index := .index }}
@@ -12,18 +11,14 @@
   {{ $image := partial "GetMedia" .image.id }}
   {{ $image_class := printf "image-%s" (partial "GetImageDirection" .image) }}
 
-
   {{ if $image }}
     {{ with .image }}
       <figure 
               role="figure"
-              class="{{ $image_class }}{{ if $is_carousel }} carousel__slide {{ end }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
-            {{ if $is_carousel }} 
-              id="carousel-item-{{$index}}"
-            {{ end }}
-            {{- with or .text .alt .credit }} 
-              aria-label="{{ . | plainify }}" 
-            {{ end }}
+              class="{{ $image_class }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
+              {{- with or .text .alt .credit }} 
+                aria-label="{{ . | plainify }}" 
+              {{ end }}
       >
       {{ if $is_lightbox }}
         {{ partial "commons/lightbox/lightbox-launcher.html" (dict
