@@ -29,7 +29,8 @@ window.osuny.carousel.manager = {
             carouselId = window.osuny.carousel.classes.carousel + '-' + i;
             element.setAttribute('id', carouselId);
             carousel = new window.osuny.carousel.Carousel(element);
-            this._setCarouselAriaDescribedBy(element);
+            carousel.index = i;
+            this._setCarouselAriaDescribedBy(carousel);
             this.carousels.push(carousel);
         }
         if (this.carousels.length > 0) {
@@ -38,13 +39,12 @@ window.osuny.carousel.manager = {
         }
     },
     _setCarouselAriaDescribedBy (carousel) {
-        var parent = carousel.parentElement,
-            blockTitle = parent ? parent.querySelector('.block-title') : null,
-            id = null;
-        if (blockTitle && blockTitle.getAttribute('id')) {
-            id = blockTitle.getAttribute('id');
-            carousel.querySelectorAll('button').forEach(function (child) {
-                child.setAttribute('aria-describedby', String(id));
+        var parent = carousel.element.parentElement,
+            blockTitle = parent ? parent.querySelector('.block-title') : null;
+        if (blockTitle) {
+            blockTitle.setAttribute('id', 'carousel-'+carousel.index);
+            carousel.element.querySelectorAll('button').forEach(function (child) {
+                child.setAttribute('aria-describedby', String(blockTitle.getAttribute('id')));
             }.bind(this));
         }
     },

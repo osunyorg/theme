@@ -14,6 +14,7 @@ window.osuny.carousel.Carousel = function (element) {
         hasMouseOver: false,
         hasFocus: false
     };
+    this.index = null;
     this.windowResizeTimeout = null;
     this.lastScrollXTimeout = null;
     this.environment = window.osuny.carousel;

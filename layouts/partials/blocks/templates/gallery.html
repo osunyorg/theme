@@ -1,13 +1,11 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
-{{- $block_index := .index -}}
 {{- with .block.data -}}
   {{- $layout := .layout | default "grid" }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
-          "block_index" $block_index
           "title" $block.title
           "heading_level" $block.ranks.self
           "description" .description
