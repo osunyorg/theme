@@ -1,13 +1,42 @@
-{{- $title := partial "PrepareHTML" .Title -}}
-<article class="program">
-  <div>
-    <h2>
-      <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-        {{- $title -}}
+{{ $program := .program }}
+{{ $heading := .heading | default "h2" }}
+{{ $heading_tag := (dict 
+  "open" ((printf "<%s class='program-title' itemprop='name'>" $heading) | safeHTML)
+  "close" ((printf "</%s>" $heading) | safeHTML)
+  ) }}
+{{ $options := .options }}
+
+<li class="program">
+  <div class="program-content">
+    {{ $title := partial "PrepareHTML" $program.Title }}
+    {{ $heading_tag.open }}
+      <a href="{{ $program.Permalink }}" itemtype="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+        {{ $title }}
       </a>
-    </h2>
-    {{ if (partial "GetTextFromHTML" .Params.presentation) }}
-      <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
+    {{ $heading_tag.close }}
+
+    {{ $diploma := $program.Params.diplomas }}
+    {{ if and $options.diploma $diploma }}
+      {{- $diploma = site.GetPage (printf "/diplomas/%s" $diploma) -}}
+      {{- with $diploma -}}
+        <span class="program-diploma">{{ partial "PrepareHTML" .Params.short_name }}</span>
+      {{- end -}}
+    {{ end }}
+
+    {{ if $options.summary }}
+      {{ with $program.Params.summary | safeHTML}}
+        <p itemprop="abstract">{{ . }}</p>
+      {{ end }}
     {{ end }}
   </div>
-</article>
+
+  {{ if and $program.Params.image $options.image }}
+    <div class="media">
+      {{ partial "commons/image.html"
+          (dict
+            "image"    $program.Params.image
+            "sizes"    site.Params.image_sizes.blocks.programs
+          ) }}
+    </div>
+  {{ end }}
+</li>

@@ -2,9 +2,9 @@
 {{ $block_class := partial "GetBlockClass" .block }}
 {{ $heading := .heading | default "h3" }}
 {{ $heading_tag := (dict 
-    "open" ((printf "<%s class='program-title' itemprop='name'>" $heading) | safeHTML)
-    "close" ((printf "</%s>" $heading) | safeHTML)
-    ) }}
+  "open" ((printf "<%s class='program-title' itemprop='name'>" $heading) | safeHTML)
+  "close" ((printf "</%s>" $heading) | safeHTML)
+  ) }}
 
 {{ with .block.data }}
   {{ $options := .options }}
@@ -65,41 +65,12 @@
 
           <ol class="programs">
             {{ range .programs }}
-              <li class="program">
-                {{ $program := site.GetPage (printf "/programs%s" .path) }}
-                <div class="program-content">
-                  {{ $title := partial "PrepareHTML" $program.Title }}
-                  {{ $heading_tag.open }}
-                    <a href="{{ $program.Permalink }}" itemtype="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-                      {{ $title }}
-                    </a>
-                  {{ $heading_tag.close }}
-
-                  {{ $diploma := $program.Params.diplomas }}
-                  {{ if and $options.diploma $diploma }}
-                    {{- $diploma = site.GetPage (printf "/diplomas/%s" $diploma) -}}
-                    {{- with $diploma -}}
-                      <span class="program-diploma">{{ partial "PrepareHTML" .Params.short_name }}</span>
-                    {{- end -}}
-                  {{ end }}
-
-                  {{ if $options.summary }}
-                    {{ with $program.Params.summary | safeHTML}}
-                      <p itemprop="abstract">{{ . }}</p>
-                    {{ end }}
-                  {{ end }}
-                </div>
-
-                {{ if and $program.Params.image $options.image }}
-                  <div class="media">
-                    {{ partial "commons/image.html"
-                        (dict
-                          "image"    $program.Params.image
-                          "sizes"    site.Params.image_sizes.blocks.programs
-                        ) }}
-                  </div>
-                {{ end }}
-              </li>
+            {{ $program := site.GetPage (printf "/programs%s" .path) }}
+              {{ partial "programs/program.html" (dict 
+                  "program" $program
+                  "heading" $heading
+                  "options" $options
+                )}}
             {{ end }}
           </ol>
 

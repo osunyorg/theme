@@ -1,4 +1,4 @@
-<div class="document-content">
+<div class="document-content programs-index">
   {{ partial "toc/container.html"
     (dict
           "toc" "toc/default.html"
@@ -18,6 +18,14 @@
     {{ $programs = where $programs "Permalink" "!=" .FirstSection.Permalink }}
     {{/* et pas non plus les pages enfants (parcours) */}}
     {{ $programs = where $programs "Params.parent" "eq" nil }}
-    {{ partial "programs/programs-list.html" $programs }}
+    <ol class="programs">
+      {{- range $programs -}}
+        {{ partial "programs/program.html" (dict 
+            "program" .
+            "heading" "h2"
+            "options" site.Params.programs.index.options
+          )}}
+      {{- end -}}
+    </ol>
   </div>
 </div>
