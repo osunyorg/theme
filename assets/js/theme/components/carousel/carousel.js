@@ -2,7 +2,7 @@
 window.osuny = window.osuny || {};
 window.osuny.carousel = window.osuny.carousel || {};
 
-window.osuny.carousel.Carousel = function (element) {
+window.osuny.carousel.Carousel = function (element, index) {
     this.element = element;
     this.slides = {
         current: 0,
@@ -14,17 +14,13 @@ window.osuny.carousel.Carousel = function (element) {
         hasMouseOver: false,
         hasFocus: false
     };
-    this.index = null;
+    this.index = index;
     this.windowResizeTimeout = null;
     this.lastScrollXTimeout = null;
     this.environment = window.osuny.carousel;
     this._findElement = window.osuny.components.utils.findElement.bind(this);
-    this._initializeConfig();
-    this._initializeSlider();
-    this._initializePagination();
-    this._initializeArrows();
-    this._initializeAutoplayer();
-    this._initializeMouseEvents();
+    this.id = window.osuny.carousel.classes.carousel + '-' + this.index;
+    this._initialize();
     this.showSlide(0);
     this.state.initialized = true;
 };
@@ -74,10 +70,17 @@ window.osuny.carousel.Carousel.prototype = {
         var boundingRect = this.element.getBoundingClientRect();
         return boundingRect.top + boundingRect.height / 2;
     },
-    _initializeConfig: function () {
+    _initialize: function () {
         this.config = new window.osuny.carousel.Config(this);
         // Les options sont chargées depuis le data-attribute "data-carousel"
         this.config.loadOptions(this.element.dataset.carousel);
+        this.element.setAttribute('id', this.id);
+        this._findElement('container').setAttribute('id', this.id + '-items');
+        this._initializeSlider();
+        this._initializePagination();
+        this._initializeArrows();
+        this._initializeAutoplayer();
+        this._initializeMouseEvents();
     },
     _initializePagination: function () {
         var paginationElement = this._findElement('pagination');
@@ -86,6 +89,10 @@ window.osuny.carousel.Carousel.prototype = {
             paginationElement.addEventListener(window.osuny.carousel.events.paginationButtonClicked, this._onPaginationButtonClicked.bind(this));
             paginationElement.addEventListener(window.osuny.carousel.events.controlFocused, function () {
                 this.autoplayer.pause();
+            }.bind(this));
+            Array.from(this._findElement('container').children).forEach(function (e, i) {
+                e.setAttribute('id', this.id + '-item-' + i);
+                this.pagination.buttons[i].element.setAttribute('aria-controls', this.id + '-item-' + i);
             }.bind(this));
         }
     },

@@ -4,7 +4,7 @@
 
 <div class="carousel js-carousel" data-carousel="{{ .options | encoding.Jsonify }}">
   <div class="carousel__slider">
-    <div id="carousel-items" class="carousel__container">
+    <div class="carousel__container">
       {{ $totalSlides := len .content }}
       {{ range $slideindex, $content := .content }}
       {{ with $content }}
@@ -24,7 +24,7 @@
       <ul class="carousel__pagination__tabcontainer {{ if .options.autoplay }} has_toggle {{ end }}">
         {{ range $slideindex, $content := .content }}
           <li>
-            <button id="carousel-tab-{{$slideindex}}" aria-controls="carousel-item-{{$slideindex}}" aria-selected="false" class="carousel__pagination__page" type="button">
+            <button aria-selected="false" class="carousel__pagination__page" type="button">
               <span class="sr-only">{{ safeHTML (replace (i18n "commons.carousel.slideX") "%s" $slideindex)}}</span>
               <i></i>
             </button>
@@ -47,12 +47,12 @@
 
   {{ if .options.arrows }}
     <div class="carousel__arrows">
-      <button class="arrow-prev" aria-controls="carousel-items" type="button">
+      <button class="arrow-prev" type="button">
         <span class="sr-only">{{ safeHTML (i18n "commons.carousel.prev") }}</span>
       </button>
 
       <p class="counter"></p>
-      <button class="arrow-next" aria-controls="carousel-items" type="button">
+      <button class="arrow-next" type="button">
         <span class="sr-only">{{ safeHTML (i18n "commons.carousel.next") }}</span>
       </button>
     </div>
