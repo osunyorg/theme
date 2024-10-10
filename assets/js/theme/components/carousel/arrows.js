@@ -22,7 +22,9 @@ window.osuny.carousel.Arrows.prototype = {
         if (this.element) {
             this.counter.innerHTML = index + 1 + '/' + total;
             this.next.disabled = index + 1 === total;
+            this.next.querySelector('.sr-only').setAttribute('aria-hidden', this.next.disabled);
             this.previous.disabled = index === 0;
+            this.previous.querySelector('.sr-only').setAttribute('aria-hidden', this.previous.disabled);
         }
     },
     _onNext: function () {
