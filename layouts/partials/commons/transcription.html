@@ -7,8 +7,7 @@
     <summary aria-controls="#{{ $id }}" aria-expanded="false">{{ i18n "commons.accessibility.transcription" }}</summary>
     <p>
       {{- $transcription := partial "PrepareHTML" .transcription -}}
-      {{ safeHTML (replace $transcription "\n" "<br/>") }}
-    </p>
+      {{ safeHTML $transcription }}
   </details>
 </div>
 {{ end }}

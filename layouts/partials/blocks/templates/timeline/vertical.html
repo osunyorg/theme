@@ -14,7 +14,7 @@
           {{ $heading_tag.close -}}
         {{ end }}
         {{ with .text }}
-          <p itemprop="text">{{ . | safeHTML }}</p>
+          <p itemprop="text">{{- partial "PrepareHTML" . -}}</p>
         {{ end }}
       </article>
     {{ end -}}
