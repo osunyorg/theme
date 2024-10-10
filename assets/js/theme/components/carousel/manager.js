@@ -32,17 +32,25 @@ window.osuny.carousel.manager = {
             this._setCarouselAriaDescribedBy(element);
             this.carousels.push(carousel);
         }
+        if (this.carousels.length > 0) {
+            this.awake = window.osuny.components.utils.dispatchAwakeEvent.bind(this);
+            this.awake('carousel');
+        }
     },
     _setCarouselAriaDescribedBy (carousel) {
-        var id = carousel.getAttribute('id');
-        carousel.querySelectorAll('button').forEach(function (child) {
-            child.setAttribute('aria-describedby', String(id));
-        }.bind(this));
+        var parent = carousel.parentElement,
+            blockTitle = parent ? parent.querySelector('.block-title') : null,
+            id = null;
+        if (blockTitle && blockTitle.getAttribute('id')) {
+            id = blockTitle.getAttribute('id');
+            carousel.querySelectorAll('button').forEach(function (child) {
+                child.setAttribute('aria-describedby', String(id));
+            }.bind(this));
+        }
     },
     _initializeListeners: function () {
         window.addEventListener('resize', this._resize.bind(this));
         window.addEventListener('scroll', this._findCarouselsInViewport.bind(this));
-        window.addEventListener('keydown', this._onKeyPress.bind(this));
     },
     _resize: function () {
         this._computeWindowCenterY();
@@ -88,15 +96,6 @@ window.osuny.carousel.manager = {
             bestCandidate.state.hasFocus = true;
         }
         return bestCandidate;
-    },
-    _onKeyPress: function (e) {
-        if (this.focusedCarousel) {
-            if (e.key === 'ArrowLeft') {
-                this.focusedCarousel.previous();
-            } else if (e.key === 'ArrowRight') {
-                this.focusedCarousel.next();
-            }
-        }
     },
     invoke: function () {
         return {

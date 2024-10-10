@@ -9,12 +9,8 @@
     "open" ((printf "<%s class='post-title' itemprop='headline'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
-{{ $index := .index }}
+    
 {{ $options := .options }}
-{{ $alternate := .alternate }}
-{{ $is_carousel := .is_carousel }}
-{{ $index := .index }}
-{{ $role := .role }}
 
 {{ with $post }}
   {{ $post_class := "post" }}
@@ -25,10 +21,7 @@
   {{ else }}
     {{ $post_class = printf "%s %s" $post_class "without-image" }}
   {{ end }}
-
-  {{ if $is_carousel }}
-    <li class="carousel__slide" id="carousel-item-{{$index}}">
-  {{ end }}
+  
   <article class="{{ $post_class }}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="post-content">
       {{- $title := partial "PrepareHTML" .Title -}}
@@ -83,7 +76,4 @@
       </div>
     {{- end -}}
   </article>
-  {{ if $is_carousel }}
-    </li>
-  {{ end }}
 {{ end }}

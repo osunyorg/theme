@@ -9,8 +9,7 @@
       {{ range $slideindex, $content := .content }}
       {{ with $content }}
         {{ partial $partial (dict
-          "is_carousel" true
-          "index" (add $slideindex 1)
+          "index" $slideindex
           "params" .
           "heading_tag" $heading_tag
           "options" $block_options
@@ -21,7 +20,7 @@
     </div>
   </div>
   <div class="carousel__pagination">
-      {{ if .options.pagination }}
+    {{ if .options.pagination }}
       <ul class="carousel__pagination__tabcontainer {{ if .options.autoplay }} has_toggle {{ end }}">
         {{ range $slideindex, $content := .content }}
           <li>
@@ -32,9 +31,9 @@
           </li>
         {{ end }}
       </ul>
-      {{ end }}
+    {{ end }}
       
-      {{ if .options.autoplay }}
+    {{ if .options.autoplay }}
       <button class="toggle">
         <span class="play">
           <span class="sr-only">{{ safeHTML (i18n "commons.carousel.play") }}</span>
@@ -43,8 +42,8 @@
           <span class="sr-only">{{ safeHTML (i18n "commons.carousel.pause") }}</span>
         </span>
       </button>
-      {{ end }}
-    </div>
+    {{ end }}
+  </div>
 
   {{ if .options.arrows }}
     <div class="carousel__arrows">
