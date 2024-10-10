@@ -99,8 +99,11 @@ window.osuny.lightbox.LightboxContainer.prototype = {
     },
     _setPageElementEnabled (elem, enabled) {
         var element = document.querySelector(elem);
+        element.querySelectorAll('a, button, iframe').forEach(function (e) {
+            e.setAttribute('tabindex', enabled ? '0' : '-1');
+        });
+        element.setAttribute('tabindex', enabled ? '0' : '-1');
         element.setAttribute('aria-hidden', String(!enabled));
-        element.inert = !enabled;
     },
     _showPopup (popupContent) {
         if (this.popupDetails.opened && this.popupDetails.current === popupContent) {
