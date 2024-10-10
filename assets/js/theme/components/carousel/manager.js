@@ -30,7 +30,6 @@ window.osuny.carousel.manager = {
             element.setAttribute('id', carouselId);
             carousel = new window.osuny.carousel.Carousel(element);
             carousel.index = i;
-            console.log(carousel.index)
             this._setCarouselAriaDescribedBy(carousel);
             this.carousels.push(carousel);
         }
