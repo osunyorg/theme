@@ -48,7 +48,7 @@
           {{ with .email }}
             <li>
               <span>{{ i18n "commons.contact.email.label" }}</span>
-              <a href="{{ chomp .value }}" itemprop="email" title='{{ safeHTML (i18n "commons.contact.email.label_a11y" (dict "email" .label )) }}'>
+              <a href="{{ chomp .value }}" itemprop="email" title='{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}'>
                 {{ chomp .label }}
                 <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
               </a>
@@ -58,14 +58,14 @@
           {{ with .phone }}
             <li>
               <span>{{ i18n "commons.contact.phone.label" }}</span>
-              <a href="{{ .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.contact.phone.a11y_label" (dict "phone_number" .label )) }}'>{{ .label }}</a>
+              <a href="{{ .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label )) }}'>{{ .label }}</a>
             </li>
           {{ end }}
 
           {{ with .phone_professional }}
             <li>
               <span>{{ i18n "commons.contact.phone_professional.label" }}</span>
-              <a href="{{ .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone_professional.label_a11y" (dict "phone_number" .label )) }}'>{{ .label }}</a>
+              <a href="{{ .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone_professional.a11y_label" (dict "phone_number" .label )) }}'>{{ .label }}</a>
             </li>
           {{ end }}
         </ul>
