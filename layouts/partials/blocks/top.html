@@ -1,9 +1,5 @@
 {{ $heading_level := .heading_level | default 2 }}
 {{ $id_title := "" }}
-{{ if .block_index }}
-  {{ $block_index := .block_index }}
-  {{ $id_title = printf "id='block-%d'" $block_index }}
-{{ end }}
 
 {{/*  handle boolean issue  */}}
 {{ if eq $heading_level false }}

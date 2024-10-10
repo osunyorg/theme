@@ -1,6 +1,5 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
-{{- $block_index := .index -}}
 {{- $term := false -}}
 {{- $layout := .block.data.layout | default "grid" -}}
 
@@ -28,7 +27,6 @@
           {{- end -}}
 
           {{ partial "blocks/top.html" (dict
-            "block_index" $block_index
             "title" $block.title
             "heading_level" $block.ranks.self
             "link" $link
