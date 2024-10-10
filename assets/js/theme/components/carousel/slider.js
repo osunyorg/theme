@@ -12,6 +12,7 @@ window.osuny.carousel.Slider = function Slider (element) {
     this._findElement = window.osuny.components.utils.findElement.bind(this);
     this.container = this._findElement('container');
     this.index = 0;
+    this.direction = 0;
     this.slides = [];
     slidesContainers = this.container.children;
     for (i = 0; i < slidesContainers.length; i += 1) {
@@ -26,6 +27,7 @@ window.osuny.carousel.Slider = function Slider (element) {
 window.osuny.carousel.Slider.prototype = {
     showSlide: function (index) {
         var behavior = 'smooth';
+        this.computeDirection(index);
         this.index = index;
         setTimeout(function () {
             this.element.scrollTo({
@@ -44,10 +46,18 @@ window.osuny.carousel.Slider.prototype = {
         });
         this.showSlide(this.index);
     },
+    computeDirection (index) {
+        this.direction = 0;
+        if (this.index > index) {
+            this.direction = 1;
+        } else if (this.index < index) {
+            this.direction = -1;
+        }
+    },
     length: function () {
         return this.slides.length;
     },
-    focusOnNewVisibleSlide: function (index) {
+    focusOnNewVisibleSlide: function () {
         var visibleSlides = [];
         this.slides.forEach(function (slide) {
             if (slide.visible) {
@@ -55,9 +65,9 @@ window.osuny.carousel.Slider.prototype = {
             }
         });
         if (visibleSlides.length > 0) {
-            if (index < this.index) {
+            if (this.direction === 1) {
                 visibleSlides[0].container.focus();
-            } else if (index > this.index) {
+            } else if (this.direction === -1) {
                 visibleSlides[visibleSlides.length - 1].container.focus();
             }
         }
