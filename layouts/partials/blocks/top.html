@@ -1,4 +1,9 @@
 {{ $heading_level := .heading_level | default 2 }}
+{{ $id_title := "" }}
+{{ if .block_index }}
+  {{ $block_index := .block_index }}
+  {{ $id_title = printf "id='block-%d'" $block_index }}
+{{ end }}
 
 {{/*  handle boolean issue  */}}
 {{ if eq $heading_level false }}
@@ -6,9 +11,9 @@
 {{ end }}
 
 {{ $heading_tag := (dict 
-  "open" ((printf "<h%d class='block-title'>" $heading_level) | safeHTML)
+  "open" ((printf "<h%d %s class='block-title'>" $heading_level $id_title) | safeHTML)
   "close" ((printf "</h%d>" $heading_level) | safeHTML)
-  ) }}
+)}}
 
 {{ if or .title .description }}
   <div class="top {{ if .hidden }}hidden{{ end }}">

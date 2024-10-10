@@ -1,4 +1,4 @@
-<figure {{- if .is_carousel }} id="carousel-item-{{.index}}" class="carousel__slide" {{ end }} class="{{ if .is_carousel }}carousel__slide{{ end }} {{ if .params.photo }}with-picture{{ end }}">
+<figure class="testimonial {{ if .params.photo }}with-picture{{ end }}">
   {{ with .params }}
     {{ $is_long := gt (len .text) 150 }}
     <blockquote {{- if $is_long }} class="is-long" {{- end }}>

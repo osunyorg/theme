@@ -1,5 +1,6 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
+{{- $block_index := .index -}}
 
 {{- $layout := .block.data.layout | default "vertical" -}}
 <div class="{{ $block_class }}">
@@ -17,6 +18,7 @@
           ) -}}
         {{ with .block.data }}
           {{ partial "blocks/templates/carousel.html" (dict 
+            "block_index" $block_index
             "content" .events
             "options" site.Params.blocks.timeline.carousel
             "partial" $template
