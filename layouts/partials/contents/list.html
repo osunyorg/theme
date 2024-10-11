@@ -3,17 +3,20 @@
   <div class="blocks">
   {{- range $index, $content := .Params.contents -}}
     {{ if eq .kind "block" }}
-      {{ $template := printf "blocks/templates/%s.html" $content.template }}
-      {{ partial $template (dict
-          "block" $content
-          "context" $context
-          "index" $index
-      )}}
-    {{- else if (eq .kind "heading") -}}
-      {{ $headingId := .slug | default (urlize .title) }}
-      <div class="heading container" id="{{ $headingId }}">
-        <h2>{{ partial "PrepareHTML" .title }}</h2>
-      </div>
+      {{ if eq .template "title" }}
+        {{ $template := printf "blocks/templates/%s.html" $content.template }}
+        {{ partial $template (dict
+            "block" $content
+            "context" $context
+        )}}
+      {{ else }}
+        {{ $template := printf "blocks/templates/%s.html" $content.template }}
+        {{ partial $template (dict
+            "block" $content
+            "context" $context
+            "index" $index
+        )}}
+      {{ end }}
     {{- end -}}
   {{- end -}}
   </div>

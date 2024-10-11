@@ -1,0 +1,8 @@
+{{ $title := .block.title }}
+{{ $headingId := .Params.slug | default (urlize $title) }}
+
+{{ with .block.data }}
+  <div class="heading container" id="{{ $headingId }}">
+    <h2>{{ partial "PrepareHTML" $title }}</h2>
+  </div>
+{{ end }}
