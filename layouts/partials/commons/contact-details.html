@@ -1,9 +1,6 @@
 {{ $name := .Title }}
 
 {{ with .Params.contact_details }}
-
-  {{ $has_address := cond (or .address .city .zipcode .country) true false }}
-
   {{ if or .website .linkedin .twitter .email .phone .address .city .zipcode .country }}
     <div class="contacts-details contacts-details--person">
       {{ if or .website .linkedin .twitter .email .phone }}
@@ -57,19 +54,17 @@
               </a>
             </li>
           {{ end }}
-          {{ if or (eq $has_address false) .phone_professional }}
-            {{ with .phone }}
-              <li>
-                <span>{{ i18n "commons.contact.phone.label" }}</span>
-                <a href="{{ chomp .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label )) }}'>{{ .label }}</a>
-              </li>
-            {{ end }}
-            {{ with .phone_professional }}
-              <li>
-                <span>{{ i18n "commons.contact.phone_professional.label" }}</span>
-                <a href="{{ chomp .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone_professional.a11y_label" (dict "phone_number" .label )) }}'>{{ .label }}</a>
-              </li>
-            {{ end }}
+          {{ with .phone }}
+            <li>
+              <span>{{ i18n "commons.contact.phone.label" }}</span>
+              <a href="{{ chomp .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label )) }}'>{{ .label }}</a>
+            </li>
+          {{ end }}
+          {{ with .phone_professional }}
+            <li>
+              <span>{{ i18n "commons.contact.phone_professional.label" }}</span>
+              <a href="{{ chomp .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone_professional.a11y_label" (dict "phone_number" .label )) }}'>{{ .label }}</a>
+            </li>
           {{ end }}
         </ul>
       {{ end }}
@@ -102,14 +97,6 @@
                 {{ end }}
               </address>
             </li>
-          {{ end }}
-          {{ if $has_address }}
-            {{ with .phone }}
-              <li>
-                <span>{{ i18n "commons.contact.phone.label" }}</span>
-                <a href="{{ chomp .value | safeURL }}" itemprop="telephone" title="{{ safeHTML (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label )) }}">{{ .label }}</a>
-              </li>
-            {{ end }}
           {{ end }}
         </ul>
       {{ end }}
