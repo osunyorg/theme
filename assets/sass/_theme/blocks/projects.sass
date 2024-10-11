@@ -32,6 +32,28 @@
                 margin-top: $spacing-4
         .project-content
             align-items: baseline
+    // Move this part to blocks/categories when categories block is ready
+    .categories--grid
+        @include list-reset
+        display: flex
+        flex-direction: column
+        row-gap: $spacing-3
+        li
+            background: var(--color-background-alt)
+            padding: $spacing-3
+            position: relative
+            a
+                @include h3
+                font-weight: bold
+                text-decoration: none
+                @include stretched-link
+            p
+                display: block
+        @include in-page-with-sidebar
+            @include grid(2)
+        @include in-page-without-sidebar
+            @include grid(3, md)
+            @include grid(4, xxl)
     &--alternate
         .alternate
             @include media-breakpoint-down(desktop)
