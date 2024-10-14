@@ -17,7 +17,9 @@
             {{- if partial "GetTextFromHTML" .Params.objectives -}}
               <section id="{{ urlize (i18n "programs.objectives") }}">
                 <h3>{{ i18n "programs.objectives" }}</h3>
-                {{- partial "PrepareHTML" .Params.objectives -}}
+                <div class="rich-text">
+                  {{- partial "PrepareHTML" .Params.objectives -}}
+                </div>
               </section>
             {{- end -}}
           </div>

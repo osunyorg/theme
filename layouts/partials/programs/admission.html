@@ -7,35 +7,45 @@
         {{- if partial "GetTextFromHTML" .Params.prerequisites -}}
           <section id="{{ urlize (i18n "programs.prerequisites") }}">
             <h3>{{ i18n "programs.prerequisites" }}</h3>
-            {{- partial "PrepareHTML" .Params.prerequisites -}}
+            <div class="rich-text">
+              {{- partial "PrepareHTML" .Params.prerequisites -}}
+            </div>
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pricing -}}
           <section id="{{ urlize (i18n "programs.pricing") }}">
             <h3>{{ i18n "programs.pricing" }}</h3>
-            {{- partial "PrepareHTML" .Params.pricing -}}
+            <div class="rich-text">
+              {{- partial "PrepareHTML" .Params.pricing -}}
+            </div>
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pricing_initial -}}
           <section id="{{ urlize (i18n "programs.pricing_initial") }}">
             <h3>{{ i18n "programs.pricing_initial" }}</h3>
-            {{- partial "PrepareHTML" .Params.pricing_initial -}}
+            <div class="rich-text">
+              {{- partial "PrepareHTML" .Params.pricing_initial -}}
+            </div>
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pricing_continuing -}}
           <section id="{{ urlize (i18n "programs.pricing_continuing") }}">
             <h3>{{ i18n "programs.pricing_continuing" }}</h3>
-            {{- partial "PrepareHTML" .Params.pricing_continuing -}}
+            <div class="rich-text">
+              {{- partial "PrepareHTML" .Params.pricing_continuing -}}
+            </div>
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pricing_apprenticeship -}}
           <section id="{{ urlize (i18n "programs.pricing_apprenticeship") }}">
             <h3>{{ i18n "programs.pricing_apprenticeship" }}</h3>
-            {{- partial "PrepareHTML" .Params.pricing_apprenticeship -}}
+            <div class="rich-text">
+              {{- partial "PrepareHTML" .Params.pricing_apprenticeship -}}
+            </div>
           </section>
         {{- end -}}
 
@@ -52,14 +62,18 @@
         {{- if partial "GetTextFromHTML" .Params.accessibility -}}
           <section id="{{ urlize (i18n "programs.accessibility") }}">
             <h3>{{ i18n "programs.accessibility" }}</h3>
-            {{- partial "PrepareHTML" .Params.accessibility -}}
+            <div class="rich-text">
+              {{- partial "PrepareHTML" .Params.accessibility -}}
+            </div>
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.other -}}
           <section id="{{ urlize (i18n "programs._other") }}">
             <h3>{{ i18n "programs._other" }}</h3>
-            {{- partial "PrepareHTML" .Params.other -}}
+            <div class="rich-text">
+              {{- partial "PrepareHTML" .Params.other -}}
+            </div>
           </section>
         {{- end -}}
 
@@ -98,7 +112,9 @@
           <section id="{{ urlize (i18n "programs.contacts") }}">
             <h3>{{ i18n "programs.contacts" }}</h3>
             {{- if or (partial "GetTextFromHTML" .Params.contacts) -}}
-              {{- partial "PrepareHTML" .Params.contacts -}}
+              <div class="rich-text">
+                {{- partial "PrepareHTML" .Params.contacts -}}
+              </div>
             {{- end -}}
           </section>
         {{- end -}}
