@@ -65,6 +65,25 @@
         .location-title
             @include h3
 
+.locations__term
+    .document-content
+        > .diplomas
+            h2
+                a
+                    @include hover-translate-icon($fade: true)
+                    @include icon(arrow-right-line, after, true)
+                        display: inline
+                    text-decoration: none
+            .programs
+                margin-bottom: $spacing-6
+                .program
+                    .program-title
+                        @include h3
+                    .media
+                        img
+                            aspect-ratio: 1
+                    &:last-child
+                        border-bottom: none
 .locations-map
     .map
         height: 300px
