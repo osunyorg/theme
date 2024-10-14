@@ -24,9 +24,22 @@
     {{ end }}
 
     {{ if $options.summary }}
-      {{ with $program.Params.summary | safeHTML}}
+      {{ with $program.Params.summary | safeHTML }}
         <p itemprop="abstract">{{ . }}</p>
       {{ end }}
+    {{ end }}
+
+    {{ if $options.button }}
+      <p class="btn">{{ i18n "commons.more" }}</p>
+    {{ end }}
+
+    {{ if and $options.logo $program.Params.logo }}
+      {{ partial "commons/image.html"
+        (dict
+          "image" $program.Params.logo
+          "lazy" false
+          "html_class" "program-logo"
+        ) }}
     {{ end }}
   </div>
 
@@ -34,8 +47,8 @@
     <div class="media">
       {{ partial "commons/image.html"
           (dict
-            "image"    $program.Params.image
-            "sizes"    site.Params.image_sizes.blocks.programs
+            "image" $program.Params.image
+            "sizes" site.Params.image_sizes.blocks.programs
           ) }}
     </div>
   {{ end }}
