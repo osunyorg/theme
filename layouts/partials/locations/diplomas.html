@@ -11,7 +11,14 @@
           <ol class="programs">
             {{- range . -}}
               {{ $program := site.GetPage (printf "/programs%s" .slug) }}
-              {{- partial "partials/locations/program.html" $program.Params -}}
+              {{- partial "partials/programs/program.html" (dict
+                "program" $program
+                "options" (dict 
+                    "diploma" true
+                    "image" true
+                    "summary" true
+                  )
+                ) -}}
             {{- end -}}
           </ol>
         </div>
