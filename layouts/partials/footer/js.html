@@ -10,7 +10,6 @@
         {{ end }}
       {{ end }}
     {{ end }}
-
     {{ if eq .template "gallery"}}
       {{ with .data }}
         {{ if eq .layout "carousel" }}
@@ -23,6 +22,10 @@
     {{ end }}
   {{ end }}
 {{ end }}
+{{ if and (eq .Kind "taxonomy") (eq .Section "locations") }}
+  {{ $isLeafletNeeded = true }}
+{{ end }}
+
 
 <!-- check if map needed  -->
 {{ if .Params.contact_details.geolocation }} 

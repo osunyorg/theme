@@ -65,13 +65,13 @@
         .location-title
             @include h3
 
-.campus-map
+.locations-map
     .map
         height: 300px
         z-index: 1
         @include media-breakpoint-up(desktop)
             height: 500px
-        > .campus,
+        > .location,
         .leaflet-popup-tip-container
             display: none
         .leaflet-tile-pane
@@ -91,25 +91,32 @@
                 color: var(--color-background)
                 height: 100%
                 margin: 0
-                min-width: min-content
-                width: auto !important // corrige la width appliquée en js par leaflet
-                .campus
-                    align-items: center
+                width: columns(12) !important // overwrite leaflet js width
+                @include media-breakpoint-up(md)
+                    width: columns(5) !important
+                @include media-breakpoint-up(xl)
+                    width: columns(4) !important
+                .location
+                    align-items: stretch
                     display: flex
-                    .campus-content
+                    .location-content
+                        @include meta
+                        flex: 1
                         order: 2
-                        padding: 0 $spacing-3
-                        span,
-                        .campus-title
-                            display: block
+                        padding: $spacing-2 $spacing-3
+                        .location-title
+                            font-weight: bold
                             margin: 0 // Cancel leaflet default style
-                            width: max-content
+                        span:last-child
+                            display: block
                     .media
                         aspect-ratio: 1
-                        display: block
-                        margin-bottom: 0
-                        order: 1
-                        width: $spacing-6
+                        height: auto
+                        width: columns(5)
+                        @include media-breakpoint-up(md)
+                            width: columns(2)
+                        @include media-breakpoint-up(xl)
+                            width: calc(var(--grid-gutter) + var(--column-width))
                         img
                             display: block
                             height: 100%
@@ -119,3 +126,6 @@
                     box-shadow: none
                     overflow: hidden
                     padding: 0
+
+    .locations__taxonomy &
+        margin-top: $spacing-6

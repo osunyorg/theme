@@ -23,11 +23,11 @@
             display: flex
             margin-bottom: $spacing-3
             padding-bottom: $spacing-3
+            flex-direction: row
             .post-title + p
                 margin-top: $spacing-2
             @include media-breakpoint-up(desktop)
                 @include grid
-                flex-direction: row
                 margin-bottom: $spacing-5
                 padding-bottom: $spacing-5
             .post-content
@@ -36,13 +36,8 @@
                     > *
                         display: block
                 @include media-breakpoint-down(desktop)
-                    p:not(.title)
-                        display: none
-                @include media-breakpoint-up(desktop)
                     flex: 1
                     margin-left: $spacing-2
-                    p[itemprop="articleBody"]
-                        display: none
             .media
                 background: none
                 margin: 0
@@ -50,6 +45,9 @@
                     width: 33.33333%
                 @include media-breakpoint-up(desktop)
                     grid-column: 1/4
+                    &:empty
+                        background: var(--color-background-alt)
+                        aspect-ratio: 3/2
                 &, img
                     aspect-ratio: auto
             @include media-breakpoint-up(desktop)
