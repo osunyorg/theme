@@ -43,6 +43,27 @@
     {{ end }}
   </div>
 
+  {{ if and $options.contact $program.Params.roles }}
+    {{ $first_role := index $program.Params.roles 0 }}
+    {{ $person := index $first_role.persons 0 }}
+    {{ $person = "pascale-vergely" }}
+    {{ $person = site.GetPage (printf "/persons/%s" $person) }}
+    <div class="program-contact meta">
+      <p><b>{{ $first_role.title }}</b></p>
+      {{ with $person }}
+        <p>
+          {{ .Title }} — 
+          {{ with or .Params.contact_details.phone .Params.contact_details.phone_professional }}
+            <a href="{{ .value }}">{{ .label }}</a>
+          {{ end }}
+          {{ with .Params.contact_details.email }}
+            <a href="{{ .value }}">{{ .label }}</a>
+          {{ end }}
+        </p>
+      {{ end }}
+    </div>
+  {{ end }}
+
   {{ if and $program.Params.image $options.image }}
     <div class="media">
       {{ partial "commons/image.html"

@@ -1,8 +1,10 @@
 .program
     @include article
     display: flex
+    gap: var(--grid-gutter)
     h2, h3, .program-title
         @include article-title
+        margin-bottom: $spacing-1
     &-diploma
         @include meta
         display: block
@@ -19,7 +21,6 @@
         margin-top: $spacing-2
     .btn + .program-logo
         margin-left: $spacing-2
-
     .media img
         aspect-ratio: $block-programs-aspect-ratio
         display: block
@@ -61,11 +62,9 @@ ol.programs
             .program-content
                 flex: 1
                 flex-wrap: wrap
-                .program-title
-                    flex: 1
                 .program-title,
                 [itemprop="abstract"]
-                    min-width: columns(6)
+                    flex: 1
                 .program-diploma
                     width: var(--grid-gutter)
                     text-align: center
