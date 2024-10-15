@@ -46,7 +46,6 @@
   {{ if and $options.contact $program.Params.roles }}
     {{ $first_role := index $program.Params.roles 0 }}
     {{ $person := index $first_role.persons 0 }}
-    {{ $person = "pascale-vergely" }}
     {{ $person = site.GetPage (printf "/persons/%s" $person) }}
     <div class="program-contact meta">
       <span class="program-contact-title">{{ $first_role.title }}</span>
@@ -57,7 +56,6 @@
             <a href="{{ chomp .value }}">{{ .label }}</a>
           {{ end }}
           {{ with .Params.contact_details.email }}
-            <br>
             <a href="{{ chomp .value }}">{{ .label }}</a>
           {{ end }}
         </span>
