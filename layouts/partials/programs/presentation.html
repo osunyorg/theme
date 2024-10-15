@@ -8,18 +8,16 @@
           {{- partial "programs/image.html" .Params.image -}}
 
           {{- if partial "GetTextFromHTML" .Params.presentation -}}
-            <section id="{{ urlize (i18n "programs.presentation") }}">
+            <section class="rich-text" id="{{ urlize (i18n "programs.presentation") }}">
               <h3>{{ i18n "programs.presentation" }}</h3>
               <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
             </section>
           {{- end -}}
 
           {{- if partial "GetTextFromHTML" .Params.objectives -}}
-            <section id="{{ urlize (i18n "programs.objectives") }}">
+            <section class="rich-text" id="{{ urlize (i18n "programs.objectives") }}">
               <h3>{{ i18n "programs.objectives" }}</h3>
-              <div class="rich-text">
-                {{- partial "PrepareHTML" .Params.objectives -}}
-              </div>
+              {{- partial "PrepareHTML" .Params.objectives -}}
             </section>
           {{- end -}}
           
