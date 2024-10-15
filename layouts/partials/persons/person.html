@@ -18,7 +18,7 @@
         </a>
       {{ end }}
     {{ $heading_tag.close }}
-    {{ if and $options.summary (or $person.Params.biography $role $person.Params.summary) }}
+    {{ if and $options.summary (or $role $person.Params.summary) }}
       <p itemprop="jobTitle">
         {{ if (partial "GetTextFromHTML" $role) }}
           {{ partial "PrepareHTML" $role }}
