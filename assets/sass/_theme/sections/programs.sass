@@ -14,8 +14,8 @@
         img
             display: block
             max-height: pxToRem(60)
-            max-width: columns(4)
             width: auto
+            margin-bottom: $spacing-2
     &-logo, .btn
         align-self: center
         margin-top: $spacing-2
@@ -25,10 +25,21 @@
         aspect-ratio: $block-programs-aspect-ratio
         display: block
         object-fit: cover
+    &-contact
+        span
+            display: block
+        a
+            position: relative
+            z-index: 2
+        &-title
+            font-weight: bold
     @include media-breakpoint-up(desktop)
         &-content
             align-items: baseline
             display: flex
+        &-logo
+            img
+                max-width: columns(4)
 
 div.programs,
 section.programs

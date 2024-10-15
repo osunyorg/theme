@@ -49,18 +49,18 @@
     {{ $person = "pascale-vergely" }}
     {{ $person = site.GetPage (printf "/persons/%s" $person) }}
     <div class="program-contact meta">
-      <p><b>{{ $first_role.title }}</b></p>
+      <span class="program-contact-title">{{ $first_role.title }}</span>
       {{ with $person }}
-        <p>
+        <span>
           {{ .Title }} — 
           {{ with or .Params.contact_details.phone .Params.contact_details.phone_professional }}
-            <a href="{{ .value }}">{{ .label }}</a>
+            <a href="{{ chomp .value }}">{{ .label }}</a>
           {{ end }}
           {{ with .Params.contact_details.email }}
             <br>
-            <a href="{{ .value }}">{{ .label }}</a>
+            <a href="{{ chomp .value }}">{{ .label }}</a>
           {{ end }}
-        </p>
+        </span>
       {{ end }}
     </div>
   {{ end }}
