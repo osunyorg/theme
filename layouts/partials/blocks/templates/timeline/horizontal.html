@@ -1,9 +1,7 @@
 {{ $heading_tag := .heading_tag }}
-{{ $index := .index }}
-{{ $role := .role }}
 
 {{ with .params }}
-  <article class="timeline-event carousel__slide" id="carousel-item-{{$index}}" class="carousel__slide" itemscope itemtype="https://schema.org/Article">
+  <article class="timeline-event">
     {{ $heading_tag.open -}}
       {{ .title | safeHTML }}
     {{ $heading_tag.close -}}
