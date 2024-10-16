@@ -13,7 +13,7 @@
       {{ if eq $layout "horizontal" }}
         {{- $heading_tag := partial "GetHeadingTag" (dict 
           "level" .block.ranks.children
-          "attributes" "class='title' itemprop='name'"
+          "attributes" "class='title'"
           ) -}}
         {{ with .block.data }}
           {{ partial "blocks/templates/carousel.html" (dict 

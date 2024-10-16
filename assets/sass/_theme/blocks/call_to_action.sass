@@ -53,6 +53,11 @@
         img
             display: block
     &--no_background
+        .actions
+            a:first-child
+                &:focus,
+                &:focus-visible
+                    outline-color: var(--color-text)
         .call_to_action--with-image
             figure
                 img
@@ -82,7 +87,6 @@
                     --btn-hover-background: #{$block-call-to-action-accent-button-hover-background}
                     --btn-hover-border: #{$block-call-to-action-accent-button-hover-border}
                     --btn-hover-color: #{$block-call-to-action-accent-button-hover-color}
-                    
 
     @include media-breakpoint-down(desktop)
         &--accent_background

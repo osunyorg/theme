@@ -21,28 +21,32 @@ window.osuny.carousel.manager = {
     _createCarousels: function () {
         var element,
             carousel,
-            i,
-            carouselId = '';
+            i;
         this.elements = document.getElementsByClassName(window.osuny.carousel.classes.carousel);
         for (i = 0; i < this.elements.length; i += 1) {
             element = this.elements[i];
-            carouselId = window.osuny.carousel.classes.carousel + '-' + i;
-            element.setAttribute('id', carouselId);
-            carousel = new window.osuny.carousel.Carousel(element);
-            this._setCarouselAriaDescribedBy(element);
+            carousel = new window.osuny.carousel.Carousel(element, i);
+            this._setCarouselAriaDescribedBy(carousel);
             this.carousels.push(carousel);
+        }
+        if (this.carousels.length > 0) {
+            this.awake = window.osuny.components.utils.dispatchAwakeEvent.bind(this);
+            this.awake('carousel');
         }
     },
     _setCarouselAriaDescribedBy (carousel) {
-        var id = carousel.getAttribute('id');
-        carousel.querySelectorAll('button').forEach(function (child) {
-            child.setAttribute('aria-describedby', String(id));
-        }.bind(this));
+        var parent = carousel.element.parentElement,
+            blockTitle = parent ? parent.querySelector('.block-title') : null;
+        if (blockTitle) {
+            blockTitle.setAttribute('id', 'title-'+carousel.id);
+            carousel.element.querySelectorAll('button').forEach(function (child) {
+                child.setAttribute('aria-describedby', String(blockTitle.getAttribute('id')));
+            }.bind(this));
+        }
     },
     _initializeListeners: function () {
         window.addEventListener('resize', this._resize.bind(this));
         window.addEventListener('scroll', this._findCarouselsInViewport.bind(this));
-        window.addEventListener('keydown', this._onKeyPress.bind(this));
     },
     _resize: function () {
         this._computeWindowCenterY();
@@ -88,15 +92,6 @@ window.osuny.carousel.manager = {
             bestCandidate.state.hasFocus = true;
         }
         return bestCandidate;
-    },
-    _onKeyPress: function (e) {
-        if (this.focusedCarousel) {
-            if (e.key === 'ArrowLeft') {
-                this.focusedCarousel.previous();
-            } else if (e.key === 'ArrowRight') {
-                this.focusedCarousel.next();
-            }
-        }
     },
     invoke: function () {
         return {

@@ -61,7 +61,6 @@
                         margin-left: columns(3)
 
     &--horizontal
-        @include draggable-block
         --min-title-height: 0px
         background: $block-timeline-horizontal-background
         color: $block-timeline-horizontal-color
@@ -69,16 +68,24 @@
         padding-top: var(--block-space-y)
         &::before
             display: none
-        .carousel__slider
-            margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
+        overflow: hidden
+        z-index: 0
+        .container
+            overflow: visible
+            .block-content
+                width: fit-content
+        .carousel
+            width: columns(24)
+            &__slider
+                margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
         .timeline-event
             padding: 0 calc(var(--grid-gutter) / 2)
-            width: columns(4)
+            width: calc( 3 * var(--column-width) + 3 * var(--grid-gutter))
             .title
                 display: block
                 min-height: var(--min-title-height)
                 padding-bottom: $spacing-3
-                @include signature
+                @include body-text
             .description
                 @include small
             .line
@@ -104,6 +111,9 @@
 
         @include media-breakpoint-up(desktop)
             .timeline-event
+                &[aria-hidden=true]
+                    transition: opacity 0.2s
+                    opacity: 0
                 .line
                     width: calc(100% + var(--grid-gutter))
 
@@ -111,28 +121,16 @@
             .carousel__slider
                 margin-left: calc(var(--grid-gutter-negative))
                 width: calc(var(--grid-width) + var(--grid-gutter) * 2)
-            .timeline-events
-                position: relative
-            .actions-arrows
-                left: 0
-                position: absolute
-                top: calc(#{$spacing-2} + var(--min-title-height))
             .timeline-event
                 margin-right: 0
                 padding-right: 0
                 padding-left: var(--grid-gutter)
                 width: columns(12)
                 .line
-                    margin-bottom: $spacing-5
                     width: calc(100% + var(--grid-gutter))
                     &::before
                         width: 8px
                         height: 8px
-
-        @include in-page-without-sidebar
-            @include media-breakpoint-up(xxl)
-                .timeline-event
-                    width: 25%
 
         @include in-page-with-or-without-sidebar
             .block-title
