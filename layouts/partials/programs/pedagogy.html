@@ -5,21 +5,21 @@
       <h2>{{ i18n "programs.toc.pedagogy" }}</h2>
       <div>
         {{- if partial "GetTextFromHTML" .Params.content -}}
-          <section id="{{ urlize (i18n "programs.content") }}">
+          <section class="rich-text" id="{{ urlize (i18n "programs.content") }}">
             <h3>{{ i18n "programs.content" }}</h3>
             {{- partial "PrepareHTML" .Params.content -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.pedagogy -}}
-          <section id="{{ urlize (i18n "programs.pedagogy") }}">
+          <section class="rich-text" id="{{ urlize (i18n "programs.pedagogy") }}">
             <h3>{{ i18n "programs.pedagogy" }}</h3>
             {{- partial "PrepareHTML" .Params.pedagogy -}}
           </section>
         {{- end -}}
 
         {{- if partial "GetTextFromHTML" .Params.evaluation -}}
-          <section id="{{ urlize (i18n "programs.evaluation") }}">
+          <section class="rich-text" id="{{ urlize (i18n "programs.evaluation") }}">
             <h3>{{ i18n "programs.evaluation" }}</h3>
             {{- partial "PrepareHTML" .Params.evaluation -}}
           </section>
