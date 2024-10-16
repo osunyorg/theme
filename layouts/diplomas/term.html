@@ -1,28 +1,38 @@
+
 {{ define "main" }}
   {{ partial "diplomas/hero-single.html" . }}
 
   <div class="document-content">
 
-    {{ partial "posts/summary.html" (dict
+    {{ partial "diplomas/summary.html" (dict
         "context" .
         "block_wrapped" true
       ) }}
     {{ partial "contents/list.html" . }}
     <div class="container">
-      <ol class="programs">
+      {{ $programs_options := site.Params.diplomas.single.programs.options }}
+      <ol class="programs {{ if eq $programs_options false }}programs--default{{ end }}">
         {{- range .Pages -}}
-          <li>
-            {{- $title := partial "PrepareHTML" .Title -}}
-            {{/*  TODO: check title class relevance */}}
-            <a href="{{ .Permalink }}" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-              {{- $title -}}
-            </a>
-            {{ if .Params.summary }}
-              <p class="description">
-                {{- partial "PrepareHTML" .Params.summary -}}
-              </p>
-            {{ end }}
-          </li>
+          {{/*  TODO Cleanup figma and reduce number of program layout */}}
+          {{ if $programs_options }}
+            {{ partial "programs/program.html" (dict
+                "program" .
+                "options" $programs_options
+              )}}
+          {{ else }}
+            <li>
+              {{- $title := partial "PrepareHTML" .Title -}}
+              {{/*  TODO: check title class relevance */}}
+              <a href="{{ .Permalink }}" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+                {{- $title -}}
+              </a>
+              {{ if .Params.summary }}
+                <p class="description">
+                  {{- partial "PrepareHTML" .Params.summary -}}
+                </p>
+              {{ end }}
+            </li>
+          {{- end -}}
         {{- end -}}
       </ol>
     </div>
