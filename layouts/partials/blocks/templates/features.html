@@ -18,13 +18,13 @@
               <li>
                 <div>
                   {{- $heading_tag := partial "GetHeadingTag" (dict 
-                  "level" $block.ranks.children
-                  "attributes" "class='name' itemprop='name'"
+                      "level" $block.ranks.children
+                      "attributes" "class='name'"
                   ) -}}
                   {{ $heading_tag.open -}}
                     {{ .title | safeHTML }}
                   {{ $heading_tag.close -}}
-                  <p>{{ .description | safeHTML }}</p>
+                  <div>{{ partial "PrepareHTML" .description }}</div>
                 </div>
                 {{- if .image -}}
                   <figure role="figure" {{- with or .alt .credit }} aria-label="{{ . | plainify }}" {{ end }}>
