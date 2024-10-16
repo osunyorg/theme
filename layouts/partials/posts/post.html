@@ -32,10 +32,21 @@
   <article class="{{ $post_class }}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="post-content">
       {{- $title := partial "PrepareHTML" .Title -}}
-
+      {{/*  TODO : "and $options.subtitle"  */}}
+      {{ if .Params.subtitle }}
+        <hgroup>
+      {{ end }}
       {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+        <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
+      {{/*  TODO : "and $options.subtitle"  */}}
+      {{ if .Params.subtitle }}
+        <p class="post-subtitle h3">{{ .Params.subtitle }}</p>
+      {{ end }}
+      {{/*  TODO : "and $options.subtitle"  */}}
+      {{ if .Params.subtitle }}
+        </hgroup>
+      {{ end }}
 
       {{ if $options.categories }}
         {{ partial "commons/categories" ( dict

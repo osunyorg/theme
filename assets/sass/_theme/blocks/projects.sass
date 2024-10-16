@@ -27,13 +27,18 @@
                 @include h2
     .grid
         @include grid(2, md)
+        .project
+            &-content
+                align-items: baseline
+            &-subtitle
+                @include h3
         @include media-breakpoint-down(md)
             .project + .project
                 margin-top: $spacing-4
-        .project-content
-            align-items: baseline
     &--alternate
         .alternate
+            .project-subtitle
+                @include h3
             @include media-breakpoint-down(desktop)
                 .project + .project
                     margin-top: $spacing-4
@@ -90,7 +95,8 @@
                 margin-right: var(--grid-gutter-negative)
         @include in-page-with-sidebar
             .project
-                &-title
+                &-title,
+                &-subtitle
                     @include h2
                     margin-bottom: $spacing-1
                 &-content
@@ -99,7 +105,8 @@
                     flex: 1
         @include in-page-without-sidebar
             .project
-                &-title
+                &-title,
+                &-subtitle
                     @include lead
                     margin-bottom: space(4)
                 &-content
