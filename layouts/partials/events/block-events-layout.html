@@ -1,0 +1,16 @@
+{{ $layout := site.Params.events.index.layout | default "list" }}
+<div class="block-events block-events--{{- $layout -}}">
+  <div class="container">
+    <div class="block-content">
+      <div class="events events--{{ $layout }}">
+        {{ range .events }}
+          {{ partial "events/event.html" (dict
+            "event" .
+            "options" .Site.Params.events.index.options
+            "heading" "h3"
+            ) }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

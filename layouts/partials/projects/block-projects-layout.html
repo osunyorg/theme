@@ -1,0 +1,16 @@
+{{ $layout := site.Params.projects.index.layout | default "list" }}
+<div class="block-projects block-projects--{{- $layout -}}">
+  <div class="container">
+    <div class="block-content">
+      <div class="{{ $layout }}">
+        {{ range .projects }}
+          {{ partial "projects/project.html" (dict
+            "project" .
+            "options" .Site.Params.projects.index.options
+            "heading" "h3"
+            ) }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>
