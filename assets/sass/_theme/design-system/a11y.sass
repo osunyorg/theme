@@ -1,15 +1,19 @@
 .nav-accessibility
-    padding: $spacing-3
+    border-radius: $chip-border-radius
+    margin: $spacing-2
+    padding: $spacing-3 $spacing-2
     position: absolute
     transform: translateY(-300%)
     z-index: $zindex-nav-accessibility
     a
+        @include meta
         color: black
     ul
         @include list-reset
     li
         display: inline-block
-        margin-right: pxToRem(5)
+        margin-left: $spacing-3
+        margin-right: $spacing-3
     &:focus-within
         background: white
         transform: translateY(0)
