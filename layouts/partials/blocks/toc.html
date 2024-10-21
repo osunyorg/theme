@@ -1,8 +1,7 @@
 {{ range . -}}
-  {{- if eq .kind "heading" }}
-    {{ $headingId := .slug | default (urlize .title) }}
+  {{- if and (eq .template "title") .title }}
     <li>
-      <a href="#{{ $headingId }}">{{ partial "PrepareHTML" .title }}</a>
+      <a href="#{{ .slug }}">{{ partial "PrepareHTML" .title }}</a>
     </li>
   {{ end -}}
 {{- end -}}

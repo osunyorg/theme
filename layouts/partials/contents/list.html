@@ -11,13 +11,12 @@
     {{ if eq .kind "block" }}
       {{ $is_last_content := eq (add $index 1) (len $contents) }}
       {{ $is_title := eq .template "title" }}
+      {{ $is_layout_collapsed := eq .data.layout "collapsed" }}
       {{ $template := printf "blocks/templates/%s.html" .template }}
 
-      {{ if $is_title }}
-        {{ if $collapsed_started }}
-          {{ $collapsed_started = false }}
-          </div>
-        {{ end }}
+      {{ if and $is_title $collapsed_started }}
+        {{ $collapsed_started = false }}
+        </div>
       {{ end }}
 
       {{ partial $template (dict
@@ -26,11 +25,9 @@
           "index" $index
       )}}
 
-      {{ if $is_title }}
-        {{ if eq .data.layout "collapsed" }}
-          {{ $collapsed_started = true }}
-          <div class="collapse" id="collapse-{{- .slug -}}">
-        {{ end }}
+      {{ if and $is_title $is_layout_collapsed }}
+        {{ $collapsed_started = true }}
+        <div class="collapse" id="collapse-{{- .slug -}}">
       {{ end }}
 
       {{ if and $collapsed_started $is_last_content }}
