@@ -66,10 +66,9 @@
         color: $block-timeline-horizontal-color
         padding-bottom: var(--block-space-y)
         padding-top: var(--block-space-y)
+        overflow: hidden
         &::before
             display: none
-        overflow: hidden
-        z-index: 0
         .container
             overflow: visible
             .block-content
@@ -82,10 +81,10 @@
             padding: 0 calc(var(--grid-gutter) / 2)
             width: calc( 3 * var(--column-width) + 3 * var(--grid-gutter))
             .title
-                display: block
+                @include body-text
+                font-weight: normal
                 min-height: var(--min-title-height)
                 padding-bottom: $spacing-3
-                @include body-text
             .description
                 @include small
             .line
@@ -111,9 +110,6 @@
 
         @include media-breakpoint-up(desktop)
             .timeline-event
-                &[aria-hidden=true]
-                    transition: opacity 0.2s
-                    opacity: 0
                 .line
                     width: calc(100% + var(--grid-gutter))
 
@@ -129,8 +125,8 @@
                 .line
                     width: calc(100% + var(--grid-gutter))
                     &::before
-                        width: 8px
                         height: 8px
+                        width: 8px
 
         @include in-page-with-or-without-sidebar
             .block-title
