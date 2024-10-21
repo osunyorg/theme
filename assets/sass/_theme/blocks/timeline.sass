@@ -67,7 +67,6 @@
         padding-bottom: var(--block-space-y)
         padding-top: var(--block-space-y)
         overflow: hidden
-        z-index: 0
         &::before
             display: none
         .container
@@ -111,9 +110,6 @@
 
         @include media-breakpoint-up(desktop)
             .timeline-event
-                &[aria-hidden=true]
-                    transition: opacity 0.2s
-                    opacity: 0
                 .line
                     width: calc(100% + var(--grid-gutter))
 
