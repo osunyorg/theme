@@ -5,6 +5,10 @@ class LocationsMap {
         this.dom = dom;
         this.map = locationsMap;
         this.init();
+
+        this.markers.forEach(marker => {
+            this.setAccessibility(marker);
+        });
     }
 
     init () {
@@ -22,18 +26,22 @@ class LocationsMap {
                 longitude: parseFloat(location.getAttribute('data-longitude'))
             };
             this.classHidden = 'hidden';
-    
+
             this.themeMarker = L.icon({
                 iconUrl: this.content.getAttribute('data-marker-icon') || '/assets/images/map-marker.svg',
                 iconSize: [17, 26]
             });
-            
+
             if (Boolean(this.geoloc.latitude) && Boolean(this.geoloc.longitude)) {
                 let mapLocation = [this.geoloc.latitude, this.geoloc.longitude];
                 let marker = new L.marker(mapLocation, {
                     icon: this.themeMarker
                 });
-    
+
+                marker.id = `leaflet-item-${map._leaflet_id}_${(this.markers.length + 1)}`;
+                marker.title = location.querySelector('.location-title').innerText;
+                location.id = marker.id;
+
                 const popup = new L.Popup({'autoClose':false, 'closeButton':false, 'maxWidth': 1000});
                 popup.setLatLng(mapLocation);
                 popup.setContent(location);
@@ -47,6 +55,23 @@ class LocationsMap {
                 this.getMapBounds(map);
                 this.dom.classList.add("page-with-map");
             }
+        });
+    }
+
+    setAccessibility (marker) {
+        let icon = marker._icon;
+        if (icon) {
+            icon.setAttribute('aria-label', 'Afficher les informations de ' + marker.title);
+            icon.setAttribute('aria-controls', marker.id);
+            icon.setAttribute('aria-expanded', 'false');
+        }
+
+        marker.addEventListener('popupopen', () => {
+            icon.setAttribute('aria-expanded', 'true');
+        });
+
+        marker.addEventListener('popupclose', () => {
+            icon.setAttribute('aria-expanded', 'false');
         });
     }
 

@@ -25,7 +25,7 @@
       {{ end }}
 
       {{ if and $options.dates (or .Params.dates.computed.short .Params.dates.computed.two_lines.short .Params.dates.from.hour .Params.dates.to.hour) }}
-        <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}}{{- if .Params.dates.from.hour -}}T{{ .Params.dates.from.hour }}{{- end -}}">
+        <p class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}}{{- if .Params.dates.from.hour -}}T{{ .Params.dates.from.hour }}{{- end -}}">
           <span>
             {{ $date_format := .Params.dates.computed.two_lines.short }}
             {{ if ne $layout "list" }}
@@ -43,7 +43,7 @@
               {{ end -}}
             </div>
           {{ end -}}
-        </div>
+        </p>
       {{ end }}
       {{ if and .Params.dates.status $options.status }}
         <p class="event-status">
