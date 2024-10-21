@@ -9,19 +9,16 @@
           "title" $block.title
           "heading_level" $block.ranks.self
           "description" .description
-        )}}
-
+        ) }}
         {{- if and (eq $layout "carousel") (gt (len .images) 1) -}}
-            {{ partial "blocks/templates/carousel.html" (dict 
-            "content" .images
-            "options" site.Params.blocks.gallery.carousel
-            "partial" "blocks/templates/gallery/carousel-image.html"
-            )}}
-
+          {{ partial "blocks/templates/carousel.html" (dict 
+              "content" .images
+              "options" site.Params.blocks.gallery.carousel
+              "partial" "blocks/templates/gallery/carousel-image.html"
+          )}}
         {{ else }}
           {{ partial "blocks/templates/gallery/images.html" . }}
         {{- end -}}
-
       </div>
     </div>
   </div>

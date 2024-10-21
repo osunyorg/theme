@@ -24,13 +24,13 @@
     {{- if .crop -}}
       {{- $crop = true -}}
     {{- end -}}
-    {{ $image_class := "" }}
+    {{ $image_class := .html_class }}
     {{ $is_png := strings.HasSuffix $image.name "png" }}
     {{ $is_svg := strings.HasSuffix $image.name "svg" }}
     {{ if $is_png }}
-      {{ $image_class = "is-png" }}
+      {{ $image_class = printf "%s is-png" $image_class }}
     {{ else if $is_svg }}
-      {{ $image_class = "is-svg" }}
+      {{ $image_class = printf "%s is-svg" $image_class }}
     {{ end }}
 
     <picture {{ with $image_class -}} class="{{ . }}" {{- end }}>
