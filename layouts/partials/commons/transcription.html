@@ -1,14 +1,12 @@
 {{ if (partial "GetTextFromHTML" .transcription) }}
-{{ $block_index := .block_index }}
-{{ $id := printf "block-%d-transcription" $block_index}}
-
-<div class="transcription">
-  <details id="{{$id}}">
-    <summary aria-controls="#{{ $id }}" aria-expanded="false">{{ i18n "commons.accessibility.transcription" }}</summary>
-    <p>
+  {{ $block_index := .block_index }}
+  {{ $id := printf "block-%d-transcription" $block_index}}
+  {{ $title := .title | default ( i18n "commons.accessibility.transcription" ) }}
+  <div class="transcription">
+    <details id="{{$id}}">
+      <summary aria-controls="#{{ $id }}" aria-expanded="false">{{ $title }}</summary>
       {{- $transcription := partial "PrepareHTML" .transcription -}}
-      {{ safeHTML (replace $transcription "\n" "<br/>") }}
-    </p>
-  </details>
-</div>
+      {{ safeHTML $transcription }}
+    </details>
+  </div>
 {{ end }}
