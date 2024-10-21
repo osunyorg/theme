@@ -25,17 +25,19 @@
               <article class="program" itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
                 <div class="program-content">
                   {{ $heading_tag.open }}
-                    <a href="{{ $program.Permalink }}" itemtype="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+                    <a class="title" href="{{ $program.Permalink }}" itemtype="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
                       {{ $title }}
                     </a>
                   {{ $heading_tag.close }}
 
-                  {{ if $options.summary }}
-                    {{ with $program.Params.summary | safeHTML}}
-                      <p itemprop="abstract">{{ . }}</p>
-                    {{ end }}
+                  {{ if and $options.summary $program.Params.summary }}
+                    <div itemprop="abstract">
+                      {{ partial "GetRichSummary" ( dict 
+                        "summary" $program.Params.summary
+                        "kind" "programs"
+                      )}}
+                    </div>
                   {{ end }}
-
                   <p class="more meta" aria-hidden="true">{{ i18n "commons.more" }}</p>
 
                   {{ $diploma := $program.Params.diplomas }}
@@ -56,13 +58,11 @@
                         ) }}
                   </div>
                 {{ end }}
-
               </article>
             {{ end }}
           </div>
 
         {{ else }}
-
           <ol class="programs">
             {{ range .programs }}
             {{ $program := site.GetPage (printf "/programs%s" .path) }}

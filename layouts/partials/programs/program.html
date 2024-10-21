@@ -23,11 +23,14 @@
       {{- end -}}
     {{ end }}
 
-    {{ if $options.summary }}
-      {{ with $program.Params.summary | safeHTML }}
-        <p class="program-summary" itemprop="abstract">{{ . }}</p>
-      {{ end }}
-    {{ end }}
+    {{ if and $options.summary $program.Params.summary }}
+      <div itemprop="abstract">
+        {{ partial "GetRichSummary" ( dict 
+          "summary" $program.Params.summary
+          "kind" "programs"
+        )}}
+      </div>
+  {{ end }}
 
     {{ if $options.button }}
       <p class="btn">{{ i18n "commons.more" }}</p>
