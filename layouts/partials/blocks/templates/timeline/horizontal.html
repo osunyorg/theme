@@ -6,6 +6,6 @@
       {{ .title | safeHTML }}
     {{ $heading_tag.close -}}
     <div class="line"></div>
-    <p class="description text" itemprop="text">{{- partial "PrepareHTML" .text | markdownify -}}</p>
+    <div class="description text">{{- partial "PrepareHTML" .text -}}</div>
   </article>
 {{ end }}
