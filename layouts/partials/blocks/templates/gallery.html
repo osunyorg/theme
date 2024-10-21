@@ -16,7 +16,7 @@
               "options" site.Params.blocks.gallery.carousel
               "partial" "blocks/templates/gallery/carousel-image.html"
           )}}
-        {{ else }}
+        {{ else if .images }}
           {{ partial "blocks/templates/gallery/images.html" . }}
         {{- end -}}
       </div>
