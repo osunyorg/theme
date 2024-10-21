@@ -6,5 +6,7 @@ window.osuny.carousel.events = {
     autoplayerTrigger: 'osuny.carousel.autoplayer.trigger',
     arrowsNext: 'osuny.carousel.arrows.next',
     arrowsPrevious: 'osuny.carousel.arrows.previous',
-    paginationButtonClicked: 'osuny.carousel.pagination.buttonClicked'
+    paginationButtonClicked: 'osuny.carousel.pagination.buttonClicked',
+    instanciated: 'osuny.carousel.instanciated',
+    controlFocused: 'osuny.carousel.controlFocused'
 };

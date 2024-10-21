@@ -1,9 +1,10 @@
 {{ if . }}
-  <div class="programs">
+  <ol class="programs">
     {{ range sort . ".Params.position" -}}
-      <div>
-        {{- partial "programs/program.html" . -}}
-      </div>
+      {{- partial "programs/program.html" (dict
+          "program" .
+          "options" site.Params.programs.index.options
+        ) -}}
     {{- end }}
-  </div>
+  </ol>
 {{- end }}

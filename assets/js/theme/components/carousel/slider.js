@@ -7,12 +7,13 @@ window.osuny.carousel.Slider = function Slider (element) {
         slideContainer = null,
         i;
     this.element = element;
+    this.environment = window.osuny.carousel;
     this.containerWidth = this.element.getBoundingClientRect().width;
-    this._findElement = window.osuny.carousel.utils.findElement.bind(this);
+    this._findElement = window.osuny.components.utils.findElement.bind(this);
     this.container = this._findElement('container');
     this.index = 0;
+    this.direction = 0;
     this.slides = [];
-    this.deltaPosition = 0;
     slidesContainers = this.container.children;
     for (i = 0; i < slidesContainers.length; i += 1) {
         slideContainer = slidesContainers.item(i);
@@ -26,13 +27,15 @@ window.osuny.carousel.Slider = function Slider (element) {
 window.osuny.carousel.Slider.prototype = {
     showSlide: function (index) {
         var behavior = 'smooth';
+        this.computeDirection(index);
         this.index = index;
-        this.element.scrollTo({
-            top: 0,
-            left: this._slidePosition(index),
-            behavior: behavior
-        });
-        // this.slides[index].container.focus(); // forcer le focus comme ca fonctionnne mais annule l'effet smooth du scroll
+        setTimeout(function () {
+            this.element.scrollTo({
+                top: 0,
+                left: this._slidePosition(this.index),
+                behavior: behavior
+            });
+        }.bind(this), 2);
         this._updateSlidesClasses();
         this._updateSlidesVisibilities();
     },
@@ -43,11 +46,31 @@ window.osuny.carousel.Slider.prototype = {
         });
         this.showSlide(this.index);
     },
+    computeDirection (index) {
+        this.direction = 0;
+        if (this.index > index) {
+            this.direction = 1;
+        } else if (this.index < index) {
+            this.direction = -1;
+        }
+    },
     length: function () {
         return this.slides.length;
     },
-    focusOnSlide: function (index) {
-        this.slides[index].container.focus();
+    focusOnNewVisibleSlide: function () {
+        var visibleSlides = [];
+        this.slides.forEach(function (slide) {
+            if (slide.visible) {
+                visibleSlides.push(slide);
+            }
+        });
+        if (visibleSlides.length > 0) {
+            if (this.direction === 1) {
+                visibleSlides[0].container.focus();
+            } else if (this.direction === -1) {
+                visibleSlides[visibleSlides.length - 1].container.focus();
+            }
+        }
     },
     currentSlideIndex: function () {
         // Le seuil permet d'éviter des erreurs d'arrondis qui causent un retour en slide 1, par étapes
@@ -81,8 +104,7 @@ window.osuny.carousel.Slider.prototype = {
         var slideVisible = false;
         this.slides.forEach(function (slide, i) {
             slideVisible = this._slideIsVisible(i);
-            slide.setAriaHidden(!slideVisible);
-            slide.setFocusBehavior(slideVisible);
+            slide.setInteractivityState(slideVisible);
         }.bind(this));
     },
     _slideIsVisible: function (index) {
@@ -92,6 +114,6 @@ window.osuny.carousel.Slider.prototype = {
         };
         slidePos.min = this._slidePosition(index) - this.element.scrollLeft;
         slidePos.max = slidePos.min + this.slides[index].width;
-        return slidePos.min >= -2 && slidePos.max <= this.containerWidth + 2;
+        return slidePos.min >= -2 && slidePos.max <= Math.min(window.screen.width - this.element.getBoundingClientRect().left, this.containerWidth) + 2;
     }
 };

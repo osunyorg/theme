@@ -4,7 +4,10 @@
       {{- partial "PrepareHTML" .Title -}}
     </a>
     <div class="description">
-      {{- .summary | safeHTML}}
+      {{ partial "GetRichSummary" ( dict 
+        "summary" .summary
+        "kind" "programs"
+      )}}
     </div>
   </div>
   <div class="media">

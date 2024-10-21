@@ -20,7 +20,7 @@
         <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
       {{ if and $options.subtitle .Params.subtitle }}
-          <p class="event-subtitle">{{ .Params.subtitle }}</p>
+          <p class="event-subtitle">{{ partial "PrepareText" .Params.subtitle }}</p>
         </hgroup>
       {{ end }}
 
@@ -57,21 +57,16 @@
         </p>
       {{ end }}
 
-      {{ if $options.summary }}
-        {{- if (partial "GetTextFromHTML" .Params.summary) -}}
-          <div class="event-description">
-            <p itemprop="description">
-              {{ partial "GetTruncateContent" ( dict 
-                "text" .Params.summary
-                "length" site.Params.events.index.truncate_description
-                ) }}
-            </p>
-
-            {{ if eq $layout "large" }}
-              <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
-            {{ end }}
-          </div>
-        {{- end -}}
+      {{ if and $options.summary  .Params.summary }}
+        <div class="event-description" itemprop="description">
+          {{ partial "GetRichSummary" ( dict 
+            "summary" .Params.summary
+            "kind" "events"
+          )}}
+          {{ if eq $layout "large" }}
+            <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+          {{ end }}
+        </div>
       {{ end }}
 
       {{ if $options.categories }}

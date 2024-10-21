@@ -7,8 +7,9 @@ window.osuny.carousel.Arrows = function (element) {
     if (!this.element) {
         return;
     }
-    this._findElement = window.osuny.carousel.utils.findElement.bind(this);
-    this._dispatchEvent = window.osuny.carousel.utils.dispatchEvent.bind(this);
+    this.environment = window.osuny.carousel;
+    this._findElement = window.osuny.components.utils.findElement.bind(this);
+    this._dispatchEvent = window.osuny.components.utils.dispatchEvent.bind(this);
     this.counter = this._findElement('arrowsCounter');
     this.next = this._findElement('arrowsNext');
     this.previous = this._findElement('arrowsPrevious');
@@ -21,7 +22,9 @@ window.osuny.carousel.Arrows.prototype = {
         if (this.element) {
             this.counter.innerHTML = index + 1 + '/' + total;
             this.next.disabled = index + 1 === total;
+            this.next.querySelector('.sr-only').setAttribute('aria-hidden', this.next.disabled);
             this.previous.disabled = index === 0;
+            this.previous.querySelector('.sr-only').setAttribute('aria-hidden', this.previous.disabled);
         }
     },
     _onNext: function () {

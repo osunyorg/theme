@@ -1,13 +1,78 @@
-{{- $title := partial "PrepareHTML" .Title -}}
-<article class="program">
-  <div>
-    <h2>
-      <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-        {{- $title -}}
+{{ $program := .program }}
+{{ $heading := .heading | default "h2" }}
+{{ $heading_tag := (dict 
+  "open" ((printf "<%s class='program-title' itemprop='name'>" $heading) | safeHTML)
+  "close" ((printf "</%s>" $heading) | safeHTML)
+  ) }}
+{{ $options := .options }}
+
+<li class="program">
+  <div class="program-content">
+    {{ $title := partial "PrepareHTML" $program.Title }}
+    {{ $heading_tag.open }}
+      <a href="{{ $program.Permalink }}" itemtype="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+        {{ $title }}
       </a>
-    </h2>
-    {{ if (partial "GetTextFromHTML" .Params.presentation) }}
-      <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
+    {{ $heading_tag.close }}
+
+    {{ $diploma := $program.Params.diplomas }}
+    {{ if and $options.diploma $diploma }}
+      {{- $diploma = site.GetPage (printf "/diplomas/%s" $diploma) -}}
+      {{- with $diploma -}}
+        <span class="program-diploma">{{ partial "PrepareHTML" .Params.short_name }}</span>
+      {{- end -}}
+    {{ end }}
+
+    {{ if and $options.summary $program.Params.summary }}
+      <div itemprop="abstract">
+        {{ partial "GetRichSummary" ( dict 
+          "summary" $program.Params.summary
+          "kind" "programs"
+        )}}
+      </div>
+  {{ end }}
+
+    {{ if $options.button }}
+      <p class="btn">{{ i18n "commons.more" }}</p>
+    {{ end }}
+
+    {{ if and $options.logo $program.Params.logo }}
+      {{ partial "commons/image.html"
+        (dict
+          "image" $program.Params.logo
+          "lazy" false
+          "html_class" "program-logo"
+        ) }}
     {{ end }}
   </div>
-</article>
+
+  {{ if and $options.contact $program.Params.roles }}
+    {{ $first_role := index $program.Params.roles 0 }}
+    {{ $person := index $first_role.persons 0 }}
+    {{ $person = site.GetPage (printf "/persons/%s" $person) }}
+    <div class="program-contact meta">
+      <span class="program-contact-title">{{ $first_role.title }}</span>
+      {{ with $person }}
+        <span>
+          {{ .Title }} — 
+          {{ with or .Params.contact_details.phone .Params.contact_details.phone_professional }}
+            <a href="{{ chomp .value }}">{{ .label }}</a>
+          {{ end }}
+          {{ with .Params.contact_details.email }}
+            <a href="{{ chomp .value }}">{{ .label }}</a>
+          {{ end }}
+        </span>
+      {{ end }}
+    </div>
+  {{ end }}
+
+  {{ if and $program.Params.image $options.image }}
+    <div class="media">
+      {{ partial "commons/image.html"
+          (dict
+            "image" $program.Params.image
+            "sizes" site.Params.image_sizes.blocks.programs
+          ) }}
+    </div>
+  {{ end }}
+</li>
