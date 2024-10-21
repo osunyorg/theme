@@ -27,8 +27,10 @@
             &::after
                 content: ''
                 display: block
-                margin-top: $spacing-3
+                margin-top: $spacing-2
                 border-bottom: $block-title-border-bottom
+                @include media-breakpoint-up(md)
+                    margin-top: $spacing-3
             + .collapse
                 display: none
         // When collapse is opened
