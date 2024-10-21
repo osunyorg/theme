@@ -29,9 +29,18 @@
           <article class="post">
             <div class="post-content">
               {{- $title := partial "PrepareHTML" .Title -}}
+              {{ if and $options.subtitle .Params.subtitle }}
+                <hgroup>
+              {{ end }}
               {{ $heading_tag.open }}
-                <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+                <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
               {{ $heading_tag.close }}
+              {{ if and $options.subtitle .Params.subtitle }}
+                <p class="post-subtitle h3">{{ partial "PrepareHTML" .Params.subtitle }}</p>
+              {{ end }}
+              {{ if and $options.subtitle .Params.subtitle }}
+                </hgroup>
+              {{ end }}
   
               {{ if $options.categories }}
                 {{ partial "commons/categories" ( dict

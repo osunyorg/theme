@@ -75,7 +75,8 @@
                     gap: var(--grid-gutter)
                     + .post
                         margin-top: $spacing-4
-                    .post-title
+                    .post-title,
+                    .post-subtitle
                         @include h2
                     p[itemprop="articleBody"]
                         margin-top: $spacing-3
@@ -113,7 +114,8 @@
                         width: columns(6)
                     .post-content
                         width: columns(5)
-                    .post-title
+                    .post-title,
+                    .post-subtitle
                         @include lead
                 &.without-images
                     .post
@@ -189,8 +191,6 @@
 
     &--highlight
         .highlight-post
-            .post-title
-                margin-bottom: $spacing-2
             .media
                 margin-bottom: $spacing-2
                 background: none
@@ -209,20 +209,20 @@
                 margin-top: $spacing-2
             .media
                 margin-top: 0
-
         @include media-breakpoint-down(desktop)
             .list
                 border-top: 1px solid var(--color-border)
                 p[itemprop="articleBody"]
                     margin-top: 0
-
         @include media-breakpoint-up(desktop)
             .highlight
-                .post-title
+                .post-title,
+                .post-subtitle
                     @include h2
             .list
                 article
-                    .post-title
+                    .post-title,
+                    .post-subtitle
                         @include h4
 
         @include in-page-with-sidebar
