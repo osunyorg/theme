@@ -1,5 +1,4 @@
-<div class="document-content" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
-
+<div class="document-content {{ with .Params.diplomas }}diploma-{{.}}{{ end }}" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
   <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
   <meta itemprop="url" content="{{ .Permalink }}">
 
@@ -29,7 +28,6 @@
   ) }}
 
   {{- partial "programs/presentation.html" . -}}
-  {{- partial "programs/children.html" .Pages -}}
   {{- partial "programs/pedagogy.html" . -}}
   {{- partial "programs/results.html" . -}}
   {{- partial "programs/admission.html" . -}}

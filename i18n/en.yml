@@ -100,12 +100,18 @@ commons:
   contact:
     address: Address
     email: Email
+    empty_name: of this contact
     phone: Phone
     phone_professional: Professional phone
     website: Website
     web: Web
     schedule: Hours
-    socials: Social Media
+    socials:
+      title: Social Media
+      label: 
+        social_media: See the {{ .name }} page on {{ .media }}
+        email: Contact {{ .name }} by email
+        rss: Read the RSS feed for {{ .name }}
   credit: A low impact website crafted with <a href="https://www.osuny.org/" title="Osuny - external link" target="_blank" rel="noreferrer">Osuny</a>
   date: Date
   download:
@@ -115,8 +121,16 @@ commons:
   in: In
   language: Language
   lightbox:
+    info: "Display image information"
+    credit: "Display image credit"
+    prev: "Go to previous image"
+    next: "Go to next image"
+    close: "Close lightbox"
+    closedetailwindow: "Close"
+    infoTitle: "Information"
+    creditTitle: "Credit"
     link:
-      title: Open image
+      title: Enlarge image
   link:
     blank: external link
     blank_aria: “{{ .Title }}” - external link
@@ -287,6 +301,7 @@ programs:
   administrative_information: Administrative information
   certifications: 
     qualiopi: Qualiopi, processus certifié, République Française
+  children: Options
   contacts: Contacts
   evaluation: Evaluation
   objectives: Objectives
@@ -310,7 +325,9 @@ programs:
   mention: Mention
   no_program: No program
   posts: News
-  location: Campus
+  location:
+    one: Campus
+    other: Campus
   toc:
     admission: Admission
     certification: Certification

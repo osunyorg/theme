@@ -79,6 +79,7 @@ commons:
     shortcut_navigation: Navigation d'accès rapide
     transcription: Transcription
   search:
+    label: Recherche
     title: Rechercher
     close: Fermer la recherche
   backtotop: Haut de page
@@ -100,12 +101,18 @@ commons:
   contact:
     address: Adresse
     email: Email
+    empty_name: de ce contact
     phone: Téléphone
     phone_professional: Téléphone professionnel
     website: Site web
     web: Web
     schedule: Horaires
-    socials: Réseaux sociaux
+    socials:
+      title: Réseaux sociaux
+      label: 
+        social_media: Consulter la page {{ .name }} sur {{ .media }}
+        email: Contacter {{ .name }} par email
+        rss: Consulter le flux RSS du site {{ .name }}
   credit: Un site éco-conçu produit avec <a href="https://www.osuny.org/" title="Osuny - lien externe" target="_blank" rel="noreferrer">Osuny</a>
   date: Date
   download:
@@ -113,10 +120,19 @@ commons:
     pdf: Télécharger le PDF
   "false": Non
   in: Dans
+  index: Accueil - {{ .Title }}
   language: Langue
   lightbox:
+    info: "Afficher les informations de l'image"
+    credit: "Afficher les credits de l'image"
+    prev: "Aller à l'iamge précédente"
+    next: "Aller à l'image suivante"
+    close: "Fermer la lightbox"
+    closedetailwindow: "Fermer"
+    infoTitle: "Information"
+    creditTitle: "Credit"    
     link:
-      title: Ouvrir l'image
+      title: Agrandir l'image
   link:
     blank: lien externe
     blank_aria: “{{ .Title }}” - lien externe
@@ -287,6 +303,7 @@ programs:
   administrative_information: Informations administratives
   certifications: 
     qualiopi: Qualiopi, processus certifié, République Française
+  children: Parcours
   contacts: Contacts
   evaluation: Modalités d’évaluation
   objectives: Objectifs
@@ -314,7 +331,9 @@ programs:
   mention: Mention
   no_program: Aucune formation
   posts: Actualités
-  location: Campus
+  location:
+    one: Campus
+    other: Campus
   toc:
     admission: Admission
     certification: Certification

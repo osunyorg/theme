@@ -156,10 +156,12 @@ small, .small
 .rich-text
     word-break: break-word
     @extend %multiple-lists
-    h1, h2, h3, h4, h5, h6, p, ul
+    h1, h2, h3, h4, h5, h6, p, ul, ol
         margin-top: $spacing-3
         &:first-child, meta + &
             margin-top: 0
+    ul, ol
+        padding-left: var(--body-size)
 
 .content
     section 
@@ -220,7 +222,7 @@ a,
     &[href^="mailto"]
         &::after
             content: none
-    &.glightbox
+    &.lightbox-launcher
         text-decoration: none
 
 .chip
@@ -277,8 +279,9 @@ sup
         @include icon(check-line, after)
 
 *:focus-visible
+    border-radius: 3px
     outline-color: inherit
-    outline-offset: 5px
+    outline-offset: 8px
     outline-style: dashed
     outline-width: 1px
 

@@ -21,7 +21,7 @@
             <dd>{{ partial "PrepareHTML" .Params.duration }}</dd>
           {{- end -}}
           {{- with $locations -}}
-            <dt>{{ i18n "programs.location" }}</dt>
+            <dt>{{ i18n "programs.location" ( len . ) }}</dt>
             <dd>
               {{- range . -}}
                 {{- $locationpage := site.GetPage ( printf "/locations/%s" .slug ) -}}

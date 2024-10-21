@@ -13,10 +13,12 @@
     .top:not(.hidden) + ul
         margin-top: $spacing-4
         align-items: baseline
-    dl
+    li > p
         margin-bottom: 0
         margin-top: 0
-        dt
+        span
+            display: block
+        span:first-child
             white-space: nowrap
             font-family: $block-key_figures-number-font-family
             font-size: $block-key_figures-font-size
@@ -52,10 +54,8 @@
                 font-size: $block-key_figures-font-size-xxl
                 strong
                     font-size: $block-key_figures-number-font-size-xxl
-        dd
-            margin-bottom: 0
-            margin-left: 0
-            
+        span + span
+            margin-top: $spacing-2
     @include media-breakpoint-down(desktop)
         li + li
             margin-top: $spacing-3
