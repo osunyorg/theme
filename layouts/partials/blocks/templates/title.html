@@ -1,8 +1,20 @@
-{{ $title := .block.title }}
-{{ $headingId := .Params.slug | default (urlize $title) }}
+{{- $block_class := partial "GetBlockClass" .block -}}
 
-{{ with .block.data }}
-  <div class="heading container" id="{{ $headingId }}">
-    <h2>{{ partial "PrepareHTML" $title }}</h2>
-  </div>
+{{ with .block }}
+  {{ $title := .title }}
+  {{ $slug := .slug }}
+  {{ $is_collapsed := eq .data.layout "collapsed" }}
+
+  {{ with .data }}
+    <div id="{{- $slug -}}" class="heading container {{ $block_class }}"
+      {{ if $is_collapsed }}
+        aria-controls="collapse-{{- $slug -}}"
+        aria-expanded="false"
+        role="button"
+        tabindex="0"
+      {{ end }}
+      >
+      <h2>{{ partial "PrepareHTML" $title }}</h2>
+    </div>
+  {{ end }}
 {{ end }}

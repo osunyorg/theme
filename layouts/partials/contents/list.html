@@ -1,23 +1,42 @@
 {{ $context := . }}
-{{- if .Params.contents -}}
+{{ $contents := .Params.contents }}
+
+{{- if $contents -}}
+
+  {{ $collapsed_started := false }}
+  {{ $is_last_content := false }}
+
   <div class="blocks">
   {{- range $index, $content := .Params.contents -}}
     {{ if eq .kind "block" }}
-      {{ if eq .template "title" }}
-        {{ $template := printf "blocks/templates/%s.html" $content.template }}
-        {{ partial $template (dict
-            "block" $content
-            "context" $context
-        )}}
-      {{ else }}
-        {{ $template := printf "blocks/templates/%s.html" $content.template }}
-        {{ partial $template (dict
-            "block" $content
-            "context" $context
-            "index" $index
-        )}}
+      {{ $is_last_content := eq (add $index 1) (len $contents) }}
+      {{ $is_title := eq .template "title" }}
+      {{ $template := printf "blocks/templates/%s.html" .template }}
+
+      {{ if $is_title }}
+        {{ if $collapsed_started }}
+          {{ $collapsed_started = false }}
+          </div>
+        {{ end }}
       {{ end }}
-    {{- end -}}
+
+      {{ partial $template (dict
+          "block" $content
+          "context" $context
+          "index" $index
+      )}}
+
+      {{ if $is_title }}
+        {{ if eq .data.layout "collapsed" }}
+          {{ $collapsed_started = true }}
+          <div class="collapse" id="collapse-{{- .slug -}}">
+        {{ end }}
+      {{ end }}
+
+      {{ if and $collapsed_started $is_last_content }}
+        </div>
+      {{ end }}
+    {{ end }}
   {{- end -}}
   </div>
 {{- end -}}
