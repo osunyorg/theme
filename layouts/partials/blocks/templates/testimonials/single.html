@@ -2,7 +2,7 @@
   {{ with .params }}
     {{ $is_long := gt (len .text) 150 }}
     <blockquote {{- if $is_long }} class="is-long" {{- end }}>
-      <p>{{- partial "PrepareHTML" .text -}}</p>
+      {{- partial "PrepareHTML" .text -}}
     </blockquote>
     {{ if or .photo .author .job -}}
       <figcaption>
