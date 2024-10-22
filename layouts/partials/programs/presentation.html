@@ -10,7 +10,7 @@
           {{- if partial "GetTextFromHTML" .Params.presentation -}}
             <section class="rich-text" id="{{ urlize (i18n "programs.presentation") }}">
               <h3>{{ i18n "programs.presentation" }}</h3>
-              <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
+              {{- partial "PrepareHTML" .Params.presentation -}}
             </section>
           {{- end -}}
 
