@@ -24,7 +24,7 @@
     {{- if .crop -}}
       {{- $crop = true -}}
     {{- end -}}
-    {{ $image_class := .html_class }}
+    {{ $image_class := .html_class | default "" }}
     {{ $is_png := strings.HasSuffix $image.name "png" }}
     {{ $is_svg := strings.HasSuffix $image.name "svg" }}
     {{ if $is_png }}
