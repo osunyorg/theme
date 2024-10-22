@@ -132,8 +132,9 @@
         right: 0
         text-align: right
         z-index: 10
-        .credit > p::before
+        &::before
             @include meta
+            content: '©'
             position: absolute
             right: 0
             top: 0
@@ -148,7 +149,7 @@
             padding: $spacing-1
             padding-right: $spacing-3
             > p::before
-                display: none // remove default copyright
+                display: none // Remove default ©
         a
             color: inherit
             text-decoration-color: inherit
