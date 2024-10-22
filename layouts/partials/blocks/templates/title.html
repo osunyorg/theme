@@ -6,15 +6,16 @@
   {{ $is_collapsed := eq .data.layout "collapsed" }}
 
   {{ with .data }}
-    <div id="{{- $slug -}}" class="heading container {{ $block_class }}"
+    <div class="heading container {{ $block_class }}"
       {{ if $is_collapsed }}
         aria-controls="collapse-{{- $slug -}}"
         aria-expanded="false"
         role="button"
         tabindex="0"
+        aria-describedby="{{- $slug -}}"
       {{ end }}
       >
-      <h2>{{ partial "PrepareHTML" $title }}</h2>
+      <h2 aria-hidden="true" id="{{- $slug -}}">{{ partial "PrepareHTML" $title }}</h2>
     </div>
   {{ end }}
 {{ end }}

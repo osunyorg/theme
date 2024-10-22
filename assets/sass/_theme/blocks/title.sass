@@ -8,34 +8,35 @@
             margin-left: auto
     @include in-page-without-sidebar
         h2
-            width: columns(8)
-        &::after
-            width: columns(8)
-            margin-left: auto
+            max-width: columns(8)
     &--collapsed
+        align-items: end
+        cursor: pointer
+        display: flex
+        flex-wrap: wrap
+        justify-content: space-between
+        position: relative
         h2
-            align-items: end
-            cursor: pointer
-            display: flex
-            justify-content: space-between
-            position: relative
-            @include icon(arrow-down-s-line, before)
-                font-size: pxToRem(25)
-                order: 2
+            flex: 1
+        @include icon(arrow-down-s-line, before)
+            font-size: pxToRem(25)
+            order: 2
+            speak: none
         // When collapse is closed
         &[aria-expanded="false"]
             &::after
+                border-bottom: $block-title-border-bottom
                 content: ''
                 display: block
                 margin-top: $spacing-2
-                border-bottom: $block-title-border-bottom
+                order: 3
+                width: 100%
                 @include media-breakpoint-up(md)
                     margin-top: $spacing-3
             + .collapse
                 display: none
         // When collapse is opened
         &[aria-expanded="true"]
-            h2
-                @include icon(arrow-up-s-line, before)
+            @include icon(arrow-up-s-line, before)
     &[aria-expanded="false"] + .collapse + &
         margin-top: 0
