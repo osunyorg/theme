@@ -1,0 +1,42 @@
+.block-title
+    margin-bottom: var(--heading-margin-bottom)
+    &:not(:first-child)
+        margin-top: var(--heading-margin-top)
+    @include in-page-with-sidebar
+        &::after
+            width: columns(8)
+            margin-left: auto
+    @include in-page-without-sidebar
+        h2
+            max-width: columns(8)
+    &--collapsed
+        align-items: end
+        cursor: pointer
+        display: flex
+        flex-wrap: wrap
+        justify-content: space-between
+        position: relative
+        h2
+            flex: 1
+        @include icon(arrow-down-s-line, before)
+            font-size: pxToRem(25)
+            order: 2
+            speak: none
+        // When collapse is closed
+        &[aria-expanded="false"]
+            &::after
+                border-bottom: $block-title-border-bottom
+                content: ''
+                display: block
+                margin-top: $spacing-2
+                order: 3
+                width: 100%
+                @include media-breakpoint-up(md)
+                    margin-top: $spacing-3
+            + .collapse
+                display: none
+        // When collapse is opened
+        &[aria-expanded="true"]
+            @include icon(arrow-up-s-line, before)
+    &[aria-expanded="false"] + .collapse + &
+        margin-top: 0
