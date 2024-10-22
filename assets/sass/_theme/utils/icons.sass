@@ -14,7 +14,7 @@
 
 @mixin icon($icon-name: '', $pseudo-element: before, $non-breaking: false)
     &::#{$pseudo-element}
-        content: map-get($icons, $icon-name)
+        content: map-get($icons, $icon-name) #{/ ""} // Add ‘ / ""‘ to hide from screen reader
         font-family: 'Icon'
         font-style: normal
         font-variant: normal
