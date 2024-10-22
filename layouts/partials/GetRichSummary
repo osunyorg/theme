@@ -1,3 +1,13 @@
-{{ $length := default 150 (index site.Params .kind "index" "truncate_description") }}
-{{ $summary := .summary | safeHTML | truncate $length }}
-{{ $summary}}
+{{ $length := 150 }}
+{{ $option := index site.Params .kind "index" "truncate_description" }}
+
+{{ if eq (printf "%T" $option) "int" }}
+  {{ $length = $option }}
+{{ end }}
+
+{{ $summary := .summary | safeHTML }}
+{{ if gt $length 0 }}
+  {{ $summary = $summary | truncate $length }}
+{{ end }}
+
+{{ $summary }}
