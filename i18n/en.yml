@@ -99,10 +99,16 @@ commons:
   close: Close
   contact:
     address: Address
-    email: Email
+    email: 
+      label: Email
+      a11y_label: "Envoyer un mail à l'addresse {{ .email }}"
     empty_name: of this contact
-    phone: Phone
-    phone_professional: Professional phone
+    phone: 
+      label: Phone
+      a11y_label: Call the {{ .phone_number }}
+    phone_professional:
+      label: Professional phone
+      a11y_label: Call this professional phone {{ .phone_number }}
     website: Website
     web: Web
     schedule: Hours
@@ -112,6 +118,7 @@ commons:
         social_media: See the {{ .name }} page on {{ .media }}
         email: Contact {{ .name }} by email
         rss: Read the RSS feed for {{ .name }}
+        website: Visit the website of {{ .name }}
   credit: A low impact website crafted with <a href="https://www.osuny.org/" title="Osuny - external link" target="_blank" rel="noreferrer">Osuny</a>
   date: Date
   download:
