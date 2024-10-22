@@ -12,9 +12,7 @@
       ) }}
 
     {{ partial "contents/list.html" . }}
-    <div class="container">
-      {{ partial "partials/locations/diplomas.html" .Params}}
-    </div>
+    {{ partial "partials/locations/diplomas.html" . }}
   </div>
   {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}
     {{ partial "locations/map.html" (dict

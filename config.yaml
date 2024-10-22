@@ -49,6 +49,10 @@ params:
     whatsapp: false
 
   # SECTIONS
+  diplomas:
+    single:
+      programs:
+        options: false # You can set options for programs layout (see programs.index.options)
   events:
     default_image: false
     date_format: ":date_long"
@@ -101,6 +105,15 @@ params:
       options:
         summary: true
         image: true
+    single:
+      programs:
+        options:
+          button: false
+          contact: false
+          diploma: false
+          image: true
+          logo: false
+          summary: true
   persons:
     index:
       layout: grid # grid | list
@@ -139,9 +152,14 @@ params:
       quantity: 4
     index:
       options:
-        logo: false
+        button: false
+        contact: false
         diploma: true
         diploma_certification: false
+        image: false
+        logo: false
+        summary: false
+      truncate_description: 200 # Set to 0 to disable truncate
     single:
       options:
         logo: true
@@ -200,7 +218,7 @@ params:
       carousel:
         pagination: true
         autoplay: true
-        autoplayinterval: 3000
+        autoplayinterval: 5000
     timeline:
       carousel:
         arrows: true
@@ -214,6 +232,8 @@ params:
         mobile:   1920x2560
         tablet:   1920x2560
         desktop:  1920x2560
+      gallerylightbox:
+        disabled: false
       hero:
         mobile:   400
         tablet:   800

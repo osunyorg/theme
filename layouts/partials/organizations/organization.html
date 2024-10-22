@@ -12,10 +12,10 @@
         </a>
       {{ end }}
     </h2>
-    {{ if and $options.summary .Params.summary }}
-      <p class="organization-summary">
-        {{ partial "PrepareHTML" .Params.summary }}
-      </p>
+    {{ if and $options.summary  .Params.summary }}
+      <div class="organization-summary">
+        {{ safeHTML .Params.summary }}
+      </div>
     {{ end }}
   </div>
   {{ if $options.logo }}

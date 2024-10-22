@@ -1,0 +1,3 @@
+{{ $length := default 150 (index site.Params .kind "index" "truncate_description") }}
+{{ $summary := .summary | safeHTML | truncate $length }}
+{{ $summary}}

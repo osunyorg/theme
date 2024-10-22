@@ -1,8 +1,86 @@
-// temporaire en attendant les merge et la suppression de glightbox
-    
-a.glightbox
-    @include stretched-link
-
 .lightbox
     &-figure
         position: relative
+    &-container
+        backdrop-filter: $lightbox-backdrop
+        background: $lightbox-overlay-color
+        bottom: 0
+        display: none
+        left: 0
+        padding: $spacing-2
+        position: fixed
+        right: 0
+        top: 0
+        z-index: 100
+    &-content
+        display: flex
+        height: 100%
+        width: 100%
+        img
+            display: block
+            margin: auto
+            max-height: 100%
+    &-controls
+        bottom: $spacing-2
+        display: flex
+        position: absolute
+        right: $spacing-2
+        z-index: 101
+        .details-window
+            @include meta
+            background-color: $color-background
+            bottom: calc(var(--spacing-4) + var(--spacing-2) + 1px)
+            color: $color-text
+            padding: $spacing-2
+            position: fixed
+            right: $spacing-2
+            width: columns(6)
+            z-index: 102
+            &-title
+                &-information,
+                &-credit
+                    display: none
+                    margin-top: 0
+            > div
+                display: flex
+                justify-content: space-between
+                width: 100%
+            a
+                color: $color-text
+                text-decoration: underline
+            &-content
+                @include body-text
+                margin-top: $spacing-3
+            @include media-breakpoint-down(sm)
+                left: $spacing-2
+                width: initial
+        button
+            @include button-reset
+            @include meta
+            background-color: $color-background
+            color: $color-text
+            height: $spacing-4
+            margin: 0
+            padding: 0
+            width: $spacing-4
+            &:not(:last-child)
+                border-right: 1px solid $color-border
+            &.next
+                @include icon(arrow-right-s-line, before)
+            &.prev
+                @include icon(arrow-left-s-line, before)
+            &.credit
+                &::before
+                    content: '©'
+            &.info
+                &::before
+                    content: 'i'
+            &.close
+                @include icon(close-line, before)
+            &[aria-expanded='true']
+                background-color: $color-text
+                color: $color-background
+            &:disabled
+                background: $color-background-alt
+                &::before
+                    color: $color-border

@@ -46,9 +46,9 @@ ul.diplomas
                     margin-top: $spacing-2
                     @include media-breakpoint-up(sm) 
                         margin-top: $spacing-3
-                a:hover
+                > a:hover
                     color: var(--color-accent)
-                ol li a
+                ol li > a   
                     @include inherit-text
                     @include icon(corner-down-right-line, before)
                         margin-left: 1px
@@ -61,9 +61,9 @@ ul.diplomas
                     display: flex
                     ol
                         margin-left: $spacing-3
-            > li a 
+            > li > a 
                 @include h3
-                        
+
         .program
             div
                 @include media-breakpoint-up(desktop)
@@ -87,12 +87,14 @@ ul.diplomas
                 padding: $spacing-3
 
 .diplomas__term
-    ol.programs
+    .blocks + .container
+        margin-bottom: $spacing-6 // If blocks are present, add space before footer
+    ol.programs--default
         li
             @include grid(2, desktop)
             align-items: start
             position: relative
-            a
+            a.title
                 @include stretched-link(before)
                 position: initial
                 @include media-breakpoint-down(desktop)
@@ -102,54 +104,5 @@ ul.diplomas
                         bottom: unset
                         position: relative
                         margin-left: $spacing-1
-                    + p
+                    + div
                         margin-top: $spacing-2
-
-.locations__term
-    ul.diplomas
-        > li
-            > a
-                border-bottom: none
-                &::after
-                    align-self: end
-                    margin-left: $spacing-2
-                    position: static
-            .content
-                grid-template-columns: repeat(1, 1fr)
-                grid-gap: 0
-                ol.programs
-                    > li
-                        align-items: flex-start
-                        display: flex
-                        flex-direction: column-reverse
-                        @include media-breakpoint-up(md)
-                            flex-direction: row
-                            gap: var(--grid-gutter)
-                        &:not(:first-child)
-                            border-top: 1px solid var(--color-border)
-                            margin-top: $spacing-3
-                            padding-top: $spacing-3
-                        .program-content
-                            width: 100%
-                            @include media-breakpoint-up(xl)
-                                width: columns(8)        
-                            > a
-                                @include stretched-link(before)
-                                @include hover-translate-icon
-                                @include icon(arrow-right-line, after)
-                                    margin-left: $spacing-1
-                            .description
-                                padding-top: $spacing-2 
-                        .media
-                            padding-bottom: $spacing-2
-                            width: columns(6)
-                            @include media-breakpoint-up(md)
-                                padding-bottom: 0
-                                width: columns(4)
-                            @include media-breakpoint-up(xl)
-                                width: columns(2)
-                            img
-                                aspect-ratio: 1
-                                display: block
-                                height: 100%
-                                object-fit: cover
