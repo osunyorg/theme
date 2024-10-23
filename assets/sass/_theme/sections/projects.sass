@@ -7,7 +7,8 @@
             flex: 1
         p
             line-height: $small-line-height
-        .project-title
+        .project-title,
+        .project-subtitle
             @include article-title
         .project-subtitle
             color: var(--color-text-alt)
@@ -42,8 +43,10 @@
                     justify-content: space-between
                     .project-description
                         max-width: columns(6)
-                    .project-title
+                    .project-title,
+                    .project-subtitle
                         @include h2
+                    .project-title
                         @include icon(arrow-right-line, after, true)
                             color: transparent
                         @include hover-translate-icon(after)
