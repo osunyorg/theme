@@ -7,12 +7,12 @@
         {{ $duration = $duration | default $diploma.Params.duration }}
       {{ end }}
       <dl class="essential">
-        {{ if $diploma }}
+        {{ with $diploma }}
           <dt>{{ i18n "programs.diploma" }}</dt>
-          <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" $diploma.Title }}</a></dd>
-          {{- if $diploma.Params.level -}}
+          <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></dd>
+          {{- if .Params.level -}}
             <dt>{{ i18n "programs.level" }}</dt>
-            <dd>{{ partial "PrepareHTML" $diploma.Params.level }}</dd>
+            <dd>{{ partial "PrepareHTML" .Params.level }}</dd>
           {{- end -}}
         {{- end -}}
         {{- with .Params.parent -}}
