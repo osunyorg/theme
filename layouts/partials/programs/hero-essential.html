@@ -1,36 +1,40 @@
 <div class="essential-container" id="#{{ urlize (i18n "programs.toc.essential") }}">
   <div class="container">
+    {{ $program := . }}
     {{ $parent := .Params.parent }}
-    {{ $locations := .Params.locations}}
-    {{- with .Params.diplomas -}}
-      {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
-      {{- with $diploma -}}
-        <dl class="essential">
-          <dt>{{ i18n "programs.diploma" }}</dt>
-          <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></dd>
-          {{- if .Params.level -}}
-            <dt>{{ i18n "programs.level" }}</dt>
-            <dd>{{ partial "PrepareHTML" .Params.level }}</dd>
-          {{- end -}}
-          {{- with $parent -}}
-            <dt>{{ i18n "programs.mention" }}</dt>
-            <dd><a href="{{ .url }}">{{ partial "PrepareHTML" .title }}</a></dd>
-          {{- end -}}
-          {{- if .Params.duration -}}
-            <dt>{{ i18n "programs.duration" }}</dt>
-            <dd>{{ partial "PrepareHTML" .Params.duration }}</dd>
-          {{- end -}}
-          {{- with $locations -}}
-            <dt>{{ i18n "programs.location" ( len . ) }}</dt>
-            <dd>
-              {{- range . -}}
-                {{- $locationpage := site.GetPage ( printf "/locations/%s" .slug ) -}}
-                <a href="{{ .path }}">{{ $locationpage.Params.title }}</a>
-              {{- end -}}
-            </dd>
-          {{- end -}}
-        </dl>
-      {{- end -}}
+    {{ $locations := .Params.locations }}
+    {{ $duration := .Params.duration }}
+    {{ $diploma := site.GetPage (printf "/diplomas/%s" .Params.diplomas) }}
+    {{- if or $diploma $locations $parent $duration -}}
+      {{ if $diploma }}
+        {{ $duration = $duration | default $diploma.Params.duration }}
+      {{ end }}
+      <dl class="essential">
+        <dt>{{ i18n "programs.diploma" }}</dt>
+        <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></dd>
+        {{- if and $diploma $diploma.Params.level -}}
+          <dt>{{ i18n "programs.level" }}</dt>
+          <dd>{{ partial "PrepareHTML" $diploma.Params.level }}</dd>
+        {{- end -}}
+        {{- with $parent -}}
+          <dt>{{ i18n "programs.mention" }}</dt>
+          <dd><a href="{{ .url }}">{{ partial "PrepareHTML" .title }}</a></dd>
+        {{- end -}}
+        {{- with $duration -}}
+          <dt>{{ i18n "programs.duration" }}</dt>
+          <dd>{{ partial "PrepareHTML" . }}</dd>
+        {{- end -}}
+        {{- with $locations -}}
+          <dt>{{ i18n "programs.location" ( len . ) }}</dt>
+          <dd>
+            {{- range . -}}
+              {{- $locationpage := site.GetPage ( printf "/locations/%s" .slug ) -}}
+              <a href="{{ .path }}">{{ $locationpage.Params.title }}</a>
+            {{- end -}}
+          </dd>
+        {{- end -}}
+      </dl>
+
     {{- end -}}
     
     <div class="buttons">
