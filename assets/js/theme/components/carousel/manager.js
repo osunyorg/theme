@@ -38,7 +38,7 @@ window.osuny.carousel.manager = {
         var parent = carousel.element.parentElement,
             topElement = null;
         while (parent && !topElement) {
-            topElement = parent.querySelector('.top'); 
+            topElement = parent.querySelector('.top');
             parent = parent.parentElement;
         }
         var blockTitle = topElement ? topElement.querySelector('.block-title') : null;
