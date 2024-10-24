@@ -1,0 +1,27 @@
+{{ $sr_only := .sr_only | default false }}
+{{ with .context }}
+  {{ if or .Params.contact_details.address .Params.contact_details.city .Params.contact_details.zipcode .Params.contact_details.country }}
+    <address {{ if $sr_only -}} class="sr-only" {{- end }} itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+      {{ with .Params.contact_details.address }}
+        <span itemprop="streetAddress">
+          {{ partial "PrepareHTML" .label }},
+        </span>
+      {{ end }}
+      {{ with .Params.contact_details.city }}
+        <span itemprop="addressLocality">
+          {{ partial "PrepareHTML" .label }}
+        </span>
+      {{ end }}
+      {{ with .Params.contact_details.zipcode }}
+        <span itemprop="postalCode">
+          {{ partial "PrepareHTML" .label }}
+        </span>
+      {{ end }}
+      {{ with .Params.contact_details.country }}
+        <span itemprop="postalCode">
+          {{ partial "PrepareHTML" .label }}
+        </span>
+      {{ end }}
+    </address>
+  {{ end }}
+{{ end }}
