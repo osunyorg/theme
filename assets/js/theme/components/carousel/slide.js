@@ -38,11 +38,12 @@ window.osuny.carousel.Slide.prototype = {
         }.bind(this));
     },
     setFocusable (element) {
-        element.setAttribute('aria-hidden', String(!this.visible));
         if (this.visible) {
-            element.setAttribute('tabindex', String(0));
+            element.setAttribute('aria-hidden', 'false');
+            element.removeAttribute('tabindex');
         } else {
-            element.setAttribute('tabindex', String(-1));
+            element.setAttribute('aria-hidden', 'true');
+            element.setAttribute('tabindex', '-1');
         }
     },
     _isBefore: function () {
