@@ -35,14 +35,13 @@ window.osuny.carousel.manager = {
         }
     },
     _setCarouselAriaDescribedBy (carousel) {
-        var parent = carousel.element.parentElement;
-        var topElement = null;
+        var parent = carousel.element.parentElement,
+            topElement = null;
         while (parent && !topElement) {
             topElement = parent.querySelector('.top'); 
             parent = parent.parentElement;
         }
         var blockTitle = topElement ? topElement.querySelector('.block-title') : null;
-        console.log(topElement, blockTitle)
         if (blockTitle) {
             blockTitle.setAttribute('id', 'title-' + carousel.id);
             carousel.element.querySelectorAll('button').forEach(function (child) {
