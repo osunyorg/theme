@@ -1,5 +1,7 @@
 {{ $logo_index := .logo_index }}
 {{ $options := .options }}
+{{ $block_index := .block_index }}
+{{ $id := printf "block-%d-transcription" $block_index}}
 
 <div class="organizations map" data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}">
   {{- range .organizations }}
@@ -18,15 +20,64 @@
     {{ end }}
   {{ end -}}
 </div>
-{{ if (partial "GetTextFromHTML" .transcription) }}
-  {{ $block_index := .block_index }}
-  {{ $id := printf "block-%d-transcription" $block_index}}
-  {{ $title := .title | default ( i18n "commons.accessibility.transcription" ) }}
-  <div class="transcription">
-    <details id="{{$id}}">
-      <summary aria-controls="#{{ $id }}" aria-expanded="false">{{ $title }}</summary>
-      {{- $transcription := partial "PrepareHTML" .transcription -}}
-      {{ safeHTML $transcription }}
-    </details>
-  </div>
-{{ end }}
+<div class="transcription">
+  <details id="{{$id}}" class="map-transcription">
+    <summary aria-controls="#{{ $id }}" aria-expanded="false">{{ i18n "commons.accessibility.map_transcription" }}</summary>
+    <ul>
+      {{ range .organizations }}
+        {{ if .slug }}
+          {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
+            <li>
+              {{ $title := "" }}
+              {{ if .Params.title }}
+                {{ $title = partial "PrepareHTML" .Params.title -}}
+                <p class="title">
+                  {{- if and .Params.url $options.link }}
+                    <a href="{{ .Params.url }}" {{ if .Params.external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
+                  {{ end -}}
+                  {{- $title -}}
+                  {{- if and .Params.url $options.link }}
+                    {{ if .Params.external }}
+                      <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+                    {{ end }}
+                    </a>
+                  {{ end -}}
+                  </p>
+              {{ end -}}
+              {{/*  TODO : faire un partial pour les adresses  et enlever les BR des adresses */}}
+              {{ if or .Params.contact_details.address .Params.contact_details.city .Params.contact_details.zipcode .Params.contact_details.country }}
+                <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+                  {{ with .Params.contact_details.address }}
+                    <span itemprop="streetAddress">
+                      {{ partial "PrepareHTML" .label }},
+                    </span>
+                  {{ end }}
+                  {{ with .Params.contact_details.city }}
+                    <span itemprop="addressLocality">
+                      {{ partial "PrepareHTML" .label }}
+                    </span>
+                  {{ end }}
+                  {{ with .Params.contact_details.zipcode }}
+                    <span itemprop="postalCode">
+                      {{ partial "PrepareHTML" .label }}
+                    </span>
+                  {{ end }}
+                  {{ with .Params.contact_details.country }}
+                    <span itemprop="postalCode">
+                      {{ partial "PrepareHTML" .label }}
+                    </span>
+                  {{ end }}
+                </address>
+              {{ end }}
+              {{ if and $options.summary .Params.summary }}
+                <div class="summary">
+                  {{ safeHTML .Params.summary }}
+                </div >
+              {{ end }}
+            </li>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </ul>
+  </details>
+</div>
