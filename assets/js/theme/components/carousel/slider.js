@@ -65,11 +65,10 @@ window.osuny.carousel.Slider.prototype = {
             }
         });
         if (visibleSlides.length > 0) {
-            if (this.direction === 1) {
-                visibleSlides[0].container.focus();
-            } else if (this.direction === -1) {
-                visibleSlides[visibleSlides.length - 1].container.focus();
-            }
+            this.focusableIndex = (this.direction === 1) ? 0 : visibleSlides.length - 1;
+            this.container = visibleSlides[this.index].container;
+            this.container.setAttribute('tabindex', '0');
+            this.container.focus();
         }
     },
     currentSlideIndex: function () {

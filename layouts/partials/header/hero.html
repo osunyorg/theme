@@ -52,7 +52,7 @@
         {{ end }}
 
         {{ if .hero_text_complement }}
-          {{ partial .hero_text_complement .context }}
+          {{ partial .hero_text_complement (dict "context" .context) }}
         {{ end }}
       </div>
 
