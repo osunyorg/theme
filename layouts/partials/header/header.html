@@ -1,20 +1,45 @@
 {{ $primary := partial "GetMenu" "primary" }}
+{{ $upper_menu := partial "GetMenu" "upper-menu" }}
 
 <header id="document-header" role="banner">
   <nav aria-label="{{ i18n "commons.menu.main" }}">
-    <div class="container">
+    <div class="container {{ if $upper_menu.items -}} has-upper-menu {{- end }}">
       {{ partial "header/logo.html" }}
       {{ if $primary.items }}
         {{ partial "header/button.html" }}
         <div class="menu" id="navigation">
+          {{ if $upper_menu.items }}
+            {{ partial "header/logo.html" }}
+          {{ end }}
           {{ partial "commons/menu.html"
               (dict
                 "kind" "primary"
                 "dropdown" true
                 "level" 1
                 "context" .
-              ) }}
+          )}}
+          {{ if $upper_menu.items }}
+            {{ partial "commons/menu.html" (dict
+                "class" "upper-menu"
+                "context" .
+                "ignore_externals" true
+                "kind" "upper-menu"
+                "level" 1
+                "stop" 1
+            )}}
+          {{ end }}
         </div>
+      {{ else }}
+        {{ if $upper_menu.items }}
+          {{ partial "commons/menu.html" (dict
+              "class" "upper-menu"
+              "context" .
+              "ignore_externals" true
+              "kind" "upper-menu"
+              "level" 1
+              "stop" 1
+          )}}
+        {{ end }}
       {{ end }}
     </div>
   </nav>

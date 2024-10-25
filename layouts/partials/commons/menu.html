@@ -7,6 +7,7 @@
 {{ end }}
 {{- $level := .level -}}
 {{- $stop := .stop -}}
+{{- $ignore_externals := .ignore_externals | default false -}}
 {{- $dropdown := .dropdown -}}
 {{- $dropdown_titled := (and site.Params.menu.dropdown.linkToLevel1 (eq $level 1)) -}}
 {{- $ulClass := "" -}}
@@ -20,7 +21,7 @@
     {{- $item_class := "" -}}
     {{- $link_class := "" -}}
     {{- $attr := "" -}}
-    {{- $attr_title := "" -}}
+    {{- $attr_title := printf "title=\"%s\"" .title -}}
     {{- $has_dropdown := false -}}
     {{ if eq $context.RelPermalink .target }}
       {{ $link_class = "active" }}
@@ -41,7 +42,9 @@
       {{- $attr = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" $slug -}}
     {{- end -}}
     {{- if and (hasPrefix .target "http") (eq .kind "url") -}}
-      {{- $attr = " target=\"_blank\" rel=\"noreferrer\"" -}}
+      {{ if eq $ignore_externals false }}
+        {{- $attr = " target=\"_blank\" rel=\"noreferrer\"" -}}
+      {{ end }}
       {{- $attr_title = printf "title=\"%s - %s\"" .title $extern_link -}}
     {{- end -}}
     {{- if or (ne $stop 1) (and (eq $stop 1) (ne .kind "blank")) -}}
@@ -79,14 +82,12 @@
     {{- end -}}
   {{ end -}}
   
-  {{ if and (eq $kind "primary") (site.Params.search.active) (eq site.Params.search.position "menu")}}
+  {{ if and (site.Params.search.active) (or (eq $kind "primary") (eq $kind "upper-menu")) (eq site.Params.search.position $kind) }}
     <li class="nav-search">
-      {{ partial "header/search.html"
-        (dict
-            "position" "menu"
-            "context" .
-        ) 
-      }}
+      {{ partial "header/search.html" (dict
+          "position" $kind
+          "context" .
+      )}}
     </li>
   {{ end }}
   {{ if and (eq $kind "primary") (site.Params.menu.i18n.display) }}

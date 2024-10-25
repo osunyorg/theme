@@ -53,6 +53,9 @@ header#document-header
         html.has-menu-opened &
             nav
                 padding-bottom: 0
+        .has-upper-menu
+            .menu .logo
+                display: none
 
 // TODO : Est-ce au bon endroit ?
 body
@@ -90,21 +93,46 @@ body
 
 header#document-header
     nav
-        padding-top: $header-nav-padding-y
         padding-bottom: $header-nav-padding-y
+        padding-top: $header-nav-padding-y
+        &.upper-menu
+            padding-bottom: $header-upper-menu-padding-y
+            padding-top: $header-upper-menu-padding-y
         @include media-breakpoint-up(desktop)
-            padding-top: $header-nav-padding-y-desktop
             padding-bottom: $header-nav-padding-y-desktop
+            padding-top: $header-nav-padding-y-desktop
+            &.upper-menu
+                padding-bottom: $header-upper-menu-padding-y-desktop
+                padding-top: $header-upper-menu-padding-y-desktop
         > .container
             align-items: center
             display: flex
             flex-wrap: wrap
             justify-content: space-between
+            // Upper menu : in dropdown in mobile | before logo/menu in desktop
+            &.has-upper-menu
+                @include media-breakpoint-up(desktop)
+                    .menu
+                        width: 100%
+                        display: flex
+                        flex-wrap: wrap
+                        justify-content: space-between
+                    > .logo
+                        display: none
+                @include media-breakpoint-down(desktop)
+                    .menu.is-opened
+                        display: flex
+                        flex-direction: column
+                        margin-left: var(--grid-gutter-negative)
+                        margin-right: var(--grid-gutter-negative)
+                        .nav-level-1:first-of-type
+                            margin-left: var(--grid-gutter)
+                            margin-right: var(--grid-gutter)
         .header-button
             @include button-reset
-            display: none
             border: 0
             color: inherit
+            display: none
             padding: 0
             position: relative
             text-transform: uppercase
