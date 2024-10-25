@@ -53,6 +53,9 @@ header#document-header
         html.has-menu-opened &
             nav
                 padding-bottom: 0
+        .has-upper-menu
+            .menu .logo
+                display: none
 
 // TODO : Est-ce au bon endroit ?
 body
@@ -103,6 +106,25 @@ header#document-header
             display: flex
             flex-wrap: wrap
             justify-content: space-between
+            // Upper menu : in dropdown in mobile | before logo/menu in desktop
+            &.has-upper-menu
+                @include media-breakpoint-up(desktop)
+                    .menu
+                        width: 100%
+                        display: flex
+                        flex-wrap: wrap
+                        justify-content: space-between
+                    > .logo
+                        display: none
+                @include media-breakpoint-down(desktop)
+                    .menu.is-opened
+                        display: flex
+                        flex-direction: column
+                        margin-left: var(--grid-gutter-negative)
+                        margin-right: var(--grid-gutter-negative)
+                        .nav-level-1:first-of-type
+                            margin-left: var(--grid-gutter)
+                            margin-right: var(--grid-gutter)
         .header-button
             @include button-reset
             border: 0
