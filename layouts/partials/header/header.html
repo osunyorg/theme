@@ -1,7 +1,18 @@
 {{ $primary := partial "GetMenu" "primary" }}
+{{ $top_menu := partial "GetMenu" "top-menu" }}
 
 <header id="document-header" role="banner">
   <nav aria-label="{{ i18n "commons.menu.main" }}">
+    {{ if $top_menu }}
+      <div class="container">
+        {{ partial "commons/menu.html"
+          (dict
+            "kind"        "top-menu"
+            "level"       1
+            "class"       "top-menu"
+          )}}
+      </div>
+    {{ end }}
     <div class="container">
       {{ partial "header/logo.html" }}
       {{ if $primary.items }}

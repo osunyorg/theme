@@ -79,14 +79,12 @@
     {{- end -}}
   {{ end -}}
   
-  {{ if and (eq $kind "primary") (site.Params.search.active) (eq site.Params.search.position "menu")}}
+  {{ if and (site.Params.search.active) (or (eq $kind "primary") (eq $kind "top-menu")) (eq site.Params.search.position $kind) }}
     <li class="nav-search">
-      {{ partial "header/search.html"
-        (dict
-            "position" "menu"
-            "context" .
-        ) 
-      }}
+      {{ partial "header/search.html" (dict
+          "position" $kind
+          "context" .
+      )}}
     </li>
   {{ end }}
   {{ if and (eq $kind "primary") (site.Params.menu.i18n.display) }}
