@@ -9,18 +9,18 @@
           {{ partial "PrepareHTML" .label }},
         </span>
       {{ end }}
-      {{ with .Params.contact_details.city }}
-        <span itemprop="addressLocality">
-          {{ partial "PrepareHTML" .label }}
-        </span>
-      {{ end }}
       {{ with .Params.contact_details.zipcode }}
         <span itemprop="postalCode">
           {{ partial "PrepareHTML" .label }}
         </span>
       {{ end }}
+      {{ with .Params.contact_details.city }}
+        <span itemprop="addressLocality">
+          {{ partial "PrepareHTML" .label }}
+        </span>
+      {{ end }}
       {{ with .Params.contact_details.country }}
-        <span itemprop="postalCode">
+        <span itemprop="addressCountry">
           {{ partial "PrepareHTML" .label }}
         </span>
       {{ end }}
