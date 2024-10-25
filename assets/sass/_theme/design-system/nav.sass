@@ -205,13 +205,14 @@
 
 // Top menu
 .upper-navigation
-    margin-bottom: $spacing-3
     padding-bottom: $header-nav-padding-y
     position: relative
+    @include media-breakpoint-up(desktop)
+        margin-bottom: $spacing-3
     .top-menu
         @include list-reset
         @include meta
-        align-items: center
+        align-items: baseline
         display: flex
         justify-content: center
         gap: $spacing-4
