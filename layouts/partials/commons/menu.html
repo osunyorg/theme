@@ -7,6 +7,7 @@
 {{ end }}
 {{- $level := .level -}}
 {{- $stop := .stop -}}
+{{- $ignore_externals := .ignore_externals | default false -}}
 {{- $dropdown := .dropdown -}}
 {{- $dropdown_titled := (and site.Params.menu.dropdown.linkToLevel1 (eq $level 1)) -}}
 {{- $ulClass := "" -}}
@@ -41,7 +42,9 @@
       {{- $attr = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" $slug -}}
     {{- end -}}
     {{- if and (hasPrefix .target "http") (eq .kind "url") -}}
-      {{- $attr = " target=\"_blank\" rel=\"noreferrer\"" -}}
+      {{ if eq $ignore_externals false }}
+        {{- $attr = " target=\"_blank\" rel=\"noreferrer\"" -}}
+      {{ end }}
       {{- $attr_title = printf "title=\"%s - %s\"" .title $extern_link -}}
     {{- end -}}
     {{- if or (ne $stop 1) (and (eq $stop 1) (ne .kind "blank")) -}}
