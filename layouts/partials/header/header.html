@@ -1,14 +1,14 @@
 {{ $primary := partial "GetMenu" "primary" }}
-{{ $top_menu := partial "GetMenu" "upper-menu" }}
+{{ $upper_menu := partial "GetMenu" "upper-menu" }}
 
 <header id="document-header" role="banner">
   <nav aria-label="{{ i18n "commons.menu.main" }}">
-    <div class="container {{ if $top_menu.items -}} has-upper-menu {{- end }}">
+    <div class="container {{ if $upper_menu.items -}} has-upper-menu {{- end }}">
       {{ partial "header/logo.html" }}
       {{ if $primary.items }}
         {{ partial "header/button.html" }}
         <div class="menu" id="navigation">
-          {{ if $top_menu.items }}
+          {{ if $upper_menu.items }}
             {{ partial "header/logo.html" }}
           {{ end }}
           {{ partial "commons/menu.html"
@@ -18,9 +18,9 @@
                 "level" 1
                 "context" .
           )}}
-          {{ if $top_menu.items }}
+          {{ if $upper_menu.items }}
             {{ partial "commons/menu.html" (dict
-                "class" "upper-navigation"
+                "class" "upper-menu"
                 "context" .
                 "ignore_externals" true
                 "kind" "upper-menu"
@@ -30,9 +30,9 @@
           {{ end }}
         </div>
       {{ else }}
-        {{ if $top_menu.items }}
+        {{ if $upper_menu.items }}
           {{ partial "commons/menu.html" (dict
-              "class" "upper-navigation"
+              "class" "upper-menu"
               "context" .
               "ignore_externals" true
               "kind" "upper-menu"
