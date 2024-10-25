@@ -2,8 +2,8 @@
 {{ $top_menu := partial "GetMenu" "top-menu" }}
 
 <header id="document-header" role="banner">
-  <nav aria-label="{{ i18n "commons.menu.main" }}">
-    {{ if $top_menu }}
+  {{ if $top_menu }}
+    <nav class="upper-navigation" aria-label="{{ i18n "commons.menu.superior" }}">
       <div class="container">
         {{ partial "commons/menu.html"
           (dict
@@ -12,7 +12,9 @@
             "class"       "top-menu"
           )}}
       </div>
-    {{ end }}
+    </nav>
+  {{ end }}
+  <nav aria-label="{{ i18n "commons.menu.main" }}">
     <div class="container">
       {{ partial "header/logo.html" }}
       {{ if $primary.items }}

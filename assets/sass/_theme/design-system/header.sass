@@ -90,11 +90,14 @@ body
 
 header#document-header
     nav
-        padding-top: $header-nav-padding-y
         padding-bottom: $header-nav-padding-y
+        padding-top: $header-nav-padding-y
         @include media-breakpoint-up(desktop)
-            padding-top: $header-nav-padding-y-desktop
             padding-bottom: $header-nav-padding-y-desktop
+            padding-top: $header-nav-padding-y-desktop
+            &.upper-navigation
+                padding-bottom: $header-top-menu-padding-y
+                padding-top: $header-top-menu-padding-y
         > .container
             align-items: center
             display: flex
@@ -102,9 +105,9 @@ header#document-header
             justify-content: space-between
         .header-button
             @include button-reset
-            display: none
             border: 0
             color: inherit
+            display: none
             padding: 0
             position: relative
             text-transform: uppercase

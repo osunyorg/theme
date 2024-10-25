@@ -203,10 +203,23 @@
         .nav-level-3
             padding-top: 0
 
-.top-menu
-    width: 100%
-    margin-bottom: $spacing-4
+// Top menu
+.upper-navigation
+    margin-bottom: $spacing-3
+    padding-bottom: $header-nav-padding-y
     position: relative
+    .top-menu
+        @include list-reset
+        @include meta
+        align-items: center
+        display: flex
+        justify-content: center
+        gap: $spacing-4
+        width: 100%
+        li
+            line-height: 1
+        a
+            text-decoration: none
     &::after
         content: ''
         bottom: 0

@@ -20,7 +20,7 @@
     {{- $item_class := "" -}}
     {{- $link_class := "" -}}
     {{- $attr := "" -}}
-    {{- $attr_title := "" -}}
+    {{- $attr_title := printf "title=\"%s\"" .title -}}
     {{- $has_dropdown := false -}}
     {{ if eq $context.RelPermalink .target }}
       {{ $link_class = "active" }}
