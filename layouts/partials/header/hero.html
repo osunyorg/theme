@@ -11,6 +11,7 @@
 {{ $summary := .context.Params.summary | safeHTML }}
 {{ $subtitle_is_summary := false }}
 
+{{ $address := .context.Params.contact_details.postal_address | default false }}
 {{ $button := .button | default .context.Params.header_cta }}
 {{ $title_attribute := "" | safeHTMLAttr }}
 {{ if site.Params.search.active }}
@@ -52,7 +53,11 @@
         {{ end }}
 
         {{ if .hero_text_complement }}
-          {{ partial .hero_text_complement (dict "context" .context) }}
+          {{ if and (eq .hero_text_complement "commons/address") $address }}
+              {{ partial .hero_text_complement (dict "context" $address) }}
+          {{ else }}
+            {{ partial .hero_text_complement .context }}
+          {{ end }}
         {{ end }}
       </div>
 
