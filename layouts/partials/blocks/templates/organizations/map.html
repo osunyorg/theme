@@ -1,5 +1,7 @@
 {{ $logo_index := .logo_index }}
 {{ $options := .options }}
+{{ $block_index := .block_index }}
+{{ $id := printf "block-%d-transcription" $block_index}}
 
 <div class="organizations map" data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}">
   {{- range .organizations }}
@@ -17,4 +19,41 @@
       {{ end }}
     {{ end }}
   {{ end -}}
+</div>
+<div class="transcription">
+  <details id="{{$id}}" class="map-transcription">
+    <summary aria-controls="#{{ $id }}" aria-expanded="false">{{ i18n "commons.accessibility.map_transcription" }}</summary>
+    <ul>
+      {{ range .organizations }}
+        {{ if .slug }}
+          {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
+            <li>
+              {{ $title := "" }}
+              {{ if .Params.title }}
+                {{ $title = partial "PrepareHTML" .Params.title -}}
+                <p class="title">
+                  {{- if and .Params.url $options.link }}
+                    <a href="{{ .Params.url }}" {{ if .Params.external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
+                  {{ end -}}
+                  {{- $title -}}
+                  {{- if and .Params.url $options.link }}
+                    {{ if .Params.external }}
+                      <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+                    {{ end }}
+                    </a>
+                  {{ end -}}
+                  </p>
+              {{ end -}}
+              {{ partial "commons/address.html" (dict "context" . )}}
+              {{ if and $options.summary .Params.summary }}
+                <div class="summary">
+                  {{ safeHTML .Params.summary }}
+                </div >
+              {{ end }}
+            </li>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </ul>
+  </details>
 </div>

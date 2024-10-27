@@ -36,9 +36,14 @@ window.osuny.carousel.manager = {
     },
     _setCarouselAriaDescribedBy (carousel) {
         var parent = carousel.element.parentElement,
-            blockTitle = parent ? parent.querySelector('.block-title') : null;
+            topElement = null;
+        while (parent && !topElement) {
+            topElement = parent.querySelector('.top');
+            parent = parent.parentElement;
+        }
+        var blockTitle = topElement ? topElement.querySelector('.block-title') : null;
         if (blockTitle) {
-            blockTitle.setAttribute('id', 'title-'+carousel.id);
+            blockTitle.setAttribute('id', 'title-' + carousel.id);
             carousel.element.querySelectorAll('button').forEach(function (child) {
                 child.setAttribute('aria-describedby', String(blockTitle.getAttribute('id')));
             }.bind(this));

@@ -31,16 +31,23 @@ class Search {
 
         // Add element to alert screen reader of the search results
         this.accessibleMessageContainer = document.createElement('div');
-        this.accessibleMessage = document.createElement('p');
-        this.accessibleMessageContainer.appendChild(this.accessibleMessage);
+        this.element.append(this.accessibleMessageContainer);
         this.accessibleMessageContainer.setAttribute('aria-live', 'polite');
         this.accessibleMessageContainer.setAttribute('aria-atomic', 'true');
         this.accessibleMessageContainer.classList.add('sr-only', 'pagefind-ui__accessible-message');
-        this.element.append(this.accessibleMessageContainer);
+
+        input.addEventListener('input', () => {
+            this.accessibleMessageContainer.innerHTML = '';
+            if (input.value !== '') {
+                this.accessibleMessage = document.createElement('p');
+                this.accessibleMessageContainer.appendChild(this.accessibleMessage);
+            }
+        });
     }
 
     updateAccessibilityMessageRole () {
         const message = this.element.querySelector('.pagefind-ui__message');
+        message.setAttribute('aria-hidden', 'true');
         this.accessibleMessage.innerText = message.innerText;
     }
 
