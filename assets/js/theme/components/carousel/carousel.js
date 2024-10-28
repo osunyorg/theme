@@ -81,6 +81,7 @@ window.osuny.carousel.Carousel.prototype = {
         this._initializeArrows();
         this._initializeAutoplayer();
         this._initializeMouseEvents();
+        this._setAccessibleButtons();
     },
     _initializePagination: function () {
         var paginationElement = this._findElement('pagination');
@@ -123,6 +124,18 @@ window.osuny.carousel.Carousel.prototype = {
             }
         }
     },
+    _setAccessibleButtons () {
+        var parent = this.element.closest('.block-content'),
+            blockTitle = parent.querySelector('.block-title'),
+            titleId = 'title-' + this.id;
+
+        if (blockTitle) {
+            blockTitle.setAttribute('id', titleId);
+            this.element.querySelectorAll('button').forEach(function (child) {
+                child.setAttribute('aria-describedby', titleId);
+            }.bind(this));
+        }
+    },
     _pointerStart: function () {
         this.autoplayer.softPause();
         this.state.hasMouseOver = true;
@@ -159,7 +172,7 @@ window.osuny.carousel.Carousel.prototype = {
         if (this.slides.current !== index) {
             this.showSlide(index);
         }
-        if (this.state.hasFocus) {
+        if (this.state.hasFocus && this.autoplayer.paused) {
             this.slider.focusOnNewVisibleSlide();
         }
     }
