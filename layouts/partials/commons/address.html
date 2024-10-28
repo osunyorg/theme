@@ -1,27 +1,33 @@
 {{ $context := .context | default . }}
 {{ $sr_only := .sr_only | default false }}
 
-{{ with $context.data }}  
-  <address {{ if $sr_only -}} class="sr-only" {{- end }} itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-    {{ with .address }}
-      <span itemprop="streetAddress">
-        {{ partial "PrepareHTML" . }}
-      </span>
+{{ with $context }}
+  {{ with .html}}
+    {{ partial "PrepareHTML" . }}
+  {{ else }}
+    {{ with .data }}
+      <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        {{ with .address }}
+          <span itemprop="streetAddress">
+            {{ partial "PrepareHTML" . }}
+          </span>
+        {{ end }}
+        {{ with .zipcode }}
+          <span itemprop="postalCode">
+            {{ partial "PrepareHTML" . }}
+          </span>
+        {{ end }}
+        {{ with .city }}
+          <span itemprop="addressLocality">
+            {{ partial "PrepareHTML" . }}
+          </span>
+        {{ end }}
+        {{ with .country }}
+          <span itemprop="addressCountry">
+            {{ partial "PrepareHTML" . }}
+          </span>
+        {{ end }}
+      </address>
     {{ end }}
-    {{ with .zipcode }}
-      <span itemprop="postalCode">
-        {{ partial "PrepareHTML" . }}
-      </span>
-    {{ end }}
-    {{ with .city }}
-      <span itemprop="addressLocality">
-        {{ partial "PrepareHTML" . }}
-      </span>
-    {{ end }}
-    {{ with .country }}
-      <span itemprop="addressCountry">
-        {{ partial "PrepareHTML" . }}
-      </span>
-    {{ end }}
-  </address>
+  {{ end }}
 {{ end }}
