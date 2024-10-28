@@ -28,13 +28,11 @@ window.osuny.carousel.Slide.prototype = {
         this._setState(this._isAfter(), window.osuny.carousel.classes.slideIsAfter);
     },
     setInteractivityState (slideVisible) {
-        var focusableSubElements = ['a', 'button', 'iframe'];
+        var focusableSubElements = 'a, button, iframe';
         this.visible = slideVisible;
         this.setFocusable(this.container);
-        focusableSubElements.forEach(function (element) {
-            this.container.querySelectorAll(element).forEach(function (e) {
-                this.setFocusable(e);
-            }.bind(this));
+        this.container.querySelectorAll(focusableSubElements).forEach(function (e) {
+            this.setFocusable(e);
         }.bind(this));
     },
     setFocusable (element) {

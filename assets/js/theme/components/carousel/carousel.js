@@ -81,6 +81,7 @@ window.osuny.carousel.Carousel.prototype = {
         this._initializeArrows();
         this._initializeAutoplayer();
         this._initializeMouseEvents();
+        this._setAccessibleButtons();
     },
     _initializePagination: function () {
         var paginationElement = this._findElement('pagination');
@@ -121,6 +122,18 @@ window.osuny.carousel.Carousel.prototype = {
             if (this.config.autoplay) {
                 this.autoplayer.enable();
             }
+        }
+    },
+    _setAccessibleButtons () {
+        var parent = this.element.closest('.block-content'),
+            blockTitle = parent.querySelector('.block-title'),
+            titleId = 'title-' + this.id;
+
+        if (blockTitle) {
+            blockTitle.setAttribute('id', titleId);
+            this.element.querySelectorAll('button').forEach(function (child) {
+                child.setAttribute('aria-describedby', titleId);
+            }.bind(this));
         }
     },
     _pointerStart: function () {
