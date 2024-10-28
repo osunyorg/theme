@@ -14,7 +14,10 @@
       {{ $heading_tag.open }}
         <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
-
+      {{ partial "commons/address" (dict
+          "context" .
+          "sr_only" true
+      )}}
       <div class="location-description" itemprop="description">
         {{- if and .Params.summary  $options.summary -}}
           {{ partial "GetRichSummary" ( dict 

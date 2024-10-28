@@ -13,11 +13,11 @@
 
   {{ if $image }}
     {{ with .image }}
-      <figure 
-              role="figure"
+      <figure
               class="{{ $image_class }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
-              {{- with or .text .alt .credit }} 
-                aria-label="{{ . | plainify }}" 
+              {{- with or .text .alt .credit }}
+                role="figure"
+                aria-label="{{ . | plainify }}"
               {{ end }}
       >
       {{ if $is_lightbox }}

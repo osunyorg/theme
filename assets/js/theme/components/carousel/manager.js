@@ -26,22 +26,11 @@ window.osuny.carousel.manager = {
         for (i = 0; i < this.elements.length; i += 1) {
             element = this.elements[i];
             carousel = new window.osuny.carousel.Carousel(element, i);
-            this._setCarouselAriaDescribedBy(carousel);
             this.carousels.push(carousel);
         }
         if (this.carousels.length > 0) {
             this.awake = window.osuny.components.utils.dispatchAwakeEvent.bind(this);
             this.awake('carousel');
-        }
-    },
-    _setCarouselAriaDescribedBy (carousel) {
-        var parent = carousel.element.parentElement,
-            blockTitle = parent ? parent.querySelector('.block-title') : null;
-        if (blockTitle) {
-            blockTitle.setAttribute('id', 'title-'+carousel.id);
-            carousel.element.querySelectorAll('button').forEach(function (child) {
-                child.setAttribute('aria-describedby', String(blockTitle.getAttribute('id')));
-            }.bind(this));
         }
     },
     _initializeListeners: function () {

@@ -58,18 +58,19 @@ window.osuny.carousel.Slider.prototype = {
         return this.slides.length;
     },
     focusOnNewVisibleSlide: function () {
-        var visibleSlides = [];
+        var visibleSlides = [],
+            focusIndex = 0;
+
         this.slides.forEach(function (slide) {
             if (slide.visible) {
                 visibleSlides.push(slide);
             }
         });
+
         if (visibleSlides.length > 0) {
-            if (this.direction === 1) {
-                visibleSlides[0].container.focus();
-            } else if (this.direction === -1) {
-                visibleSlides[visibleSlides.length - 1].container.focus();
-            }
+            focusIndex = this.direction === 1 ? 0 : visibleSlides.length - 1;
+            visibleSlides[focusIndex].container.setAttribute('tabindex', '0');
+            visibleSlides[focusIndex].container.focus();
         }
     },
     currentSlideIndex: function () {
