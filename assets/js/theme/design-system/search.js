@@ -11,10 +11,7 @@ class Search {
         this.closeButton = this.element.querySelector('.search__close');
         this.searchInstance = new PagefindUI({
             element: container,
-            showSubResults: true,
-            processResult: () => {
-                setTimeout(this.updateAccessibilityMessageRole.bind(this), 1500);
-            }
+            showSubResults: true
         });
 
         if (!this.element) {
@@ -26,7 +23,9 @@ class Search {
     }
 
     setAccessibility () {
-        const input = document.querySelector('.pagefind-ui__search-input');
+        const input = document.querySelector('.pagefind-ui__search-input'),
+            // Delay before screen readers speak results message
+            speakDelay = 1500;
         input.setAttribute('title', input.getAttribute('placeholder'));
 
         // Add element to alert screen reader of the search results
@@ -42,11 +41,15 @@ class Search {
                 this.accessibleMessage = document.createElement('p');
                 this.accessibleMessageContainer.appendChild(this.accessibleMessage);
             }
+            setTimeout(this.updateAccessibilityMessageRole.bind(this), speakDelay);
         });
     }
 
     updateAccessibilityMessageRole () {
         const message = this.element.querySelector('.pagefind-ui__message');
+        if (!message) {
+            return;
+        }
         message.setAttribute('aria-hidden', 'true');
         this.accessibleMessage.innerText = message.innerText;
     }
