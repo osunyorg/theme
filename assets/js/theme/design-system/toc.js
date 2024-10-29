@@ -38,12 +38,6 @@ class TableOfContents {
     listen () {
         window.addEventListener('scroll', this.update.bind(this), false);
 
-        this.togglers.forEach(toggler => {
-            toggler.addEventListener('click', () => {
-                this.toggle();
-            });
-        });
-
         this.links.forEach(links => {
             links.addEventListener('click', () => {
                 this.toggle(false);
@@ -56,15 +50,27 @@ class TableOfContents {
             }
         });
 
+
+        this.togglers.forEach(toggler => {
+            toggler.addEventListener('click', () => {
+                this.toggle();
+            });
+        });
+
         window.addEventListener('keydown', (event) => {
             if (event.keyCode === 27 || event.key === 'Escape') {
                 this.toggle(false);
             }
         });
+
+        window.addEventListener('resize', this.onResize.bind(this));
     }
 
     toggle (open) {
+        if (!this.state.isOffcanvas) return;
+
         this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
+
         const classAction = this.state.opened ? 'add' : 'remove',
             transitionDuration = this.state.opened ? 0 : this.getTransitionDuration();
 
@@ -144,6 +150,10 @@ class TableOfContents {
                 top: progress
             });
         }
+    }
+
+    onResize () {
+        this.state.isOffcanvas = this.isOffcanvas();
     }
 }
 

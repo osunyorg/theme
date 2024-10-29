@@ -1,3 +1,5 @@
+import { focusTrap } from '../../utils/focus-trap';
+
 /* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 window.osuny.lightbox = window.osuny.lightbox || {};
@@ -49,6 +51,7 @@ window.osuny.lightbox.LightboxContainer.prototype = {
         this.controlRack = new window.osuny.lightbox.ControlRack(controlRackElement);
         this.popupDetails = new window.osuny.lightbox.Popup(popupDetailsElement);
         this._initializeListeners();
+        this._setFocusTrap();
     },
     _initializeListeners () {
         var buttonEvents = Object.keys(this.controlRack.buttons);
@@ -68,6 +71,14 @@ window.osuny.lightbox.LightboxContainer.prototype = {
             this.controlRack.element.addEventListener(eventname, this.eventsCallback[eventname]);
         }.bind(this));
         this.popupDetails.element.addEventListener('closePopup', this.eventsCallback.closePopup);
+    },
+    _setFocusTrap () {
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Tab' && this.opened) {
+                focusTrap(event, this.element, this.opened);
+                event.preventDefault();
+            }
+        });
     },
     _onKeydown (event) {
         if (event.key === 'Escape') {
