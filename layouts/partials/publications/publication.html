@@ -16,17 +16,25 @@
         <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
       {{ $heading_tag.close }}
 
-      {{ with .Params.authors_list }}
-        <div class="publication-authors">
-          <span itemprop="author">{{ partial "PrepareHTML" . }}</span>
+      {{ if or .Params.journal_title .Params.date .Params.authors_list }}
+        <div class="publication-meta">
+          {{- with .Params.journal_title -}}
+            <span>{{ partial "PrepareHTML" . }}</span>
+          {{- end -}}
+          {{- with .Params.date -}}
+            <span>{{ .Format "2006" }}</span>
+          {{- end -}}
+          {{- with .Params.authors_list -}}
+            <span itemprop="author">{{ partial "PrepareHTML" . }}</span>
+          {{- end -}}
         </div>
       {{ end }}
 
       {{ with .Params.ref }}
-        <div class="publication-meta" itemprop="isPartOf" itemscope itemtype="http://schema.org/PublicationIssue">
+        <div class="publication-ref" itemprop="isPartOf" itemscope itemtype="http://schema.org/PublicationIssue">
           <span itemprop="name">{{ partial "PrepareHTML" . }}</span>
         </div>
       {{ end }}
     </div>
-  </article>  
+  </article>
 {{ end }}
