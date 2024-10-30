@@ -7,7 +7,6 @@ class LocationsMap {
         this.map = locationsMap;
         this.init();
 
-
         this.markers.forEach(marker => {
             this.setAccessibility(marker);
         });
