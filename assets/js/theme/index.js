@@ -9,6 +9,7 @@ import './design-system/modal';
 import './design-system/notes';
 import './design-system/search';
 import './design-system/toc';
+import './design-system/Popup';
 import './blocks/keyFigures';
 import './blocks/organizations';
 import './blocks/draggableBlocks.js';
@@ -18,5 +19,6 @@ import './blocks/locations.js';
 import './utils/utils.js';
 import './components/events.js';
 import './components/utils.js';
-import './components/carousel.js';
-import './components/lightbox.js';
+// import './components/carousel.js';
+import './design-system/lightbox';
+

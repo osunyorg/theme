@@ -1,17 +1,18 @@
 .lightbox
+    backdrop-filter: $lightbox-backdrop
+    background: $lightbox-overlay-color
+    bottom: 0
+    display: none
+    left: 0
+    padding: $spacing-2
+    position: fixed
+    right: 0
+    top: 0
+    z-index: 100
+    &.is-opened
+        display: block
     &-figure
         position: relative
-    &-container
-        backdrop-filter: $lightbox-backdrop
-        background: $lightbox-overlay-color
-        bottom: 0
-        display: none
-        left: 0
-        padding: $spacing-2
-        position: fixed
-        right: 0
-        top: 0
-        z-index: 100
     &-content
         display: flex
         height: 100%
@@ -65,17 +66,17 @@
             width: $spacing-4
             &:not(:last-child)
                 border-right: 1px solid $color-border
-            &.next
+            &.lightbox-button-next
                 @include icon(arrow-right-s-line, before)
-            &.prev
+            &.lightbox-button-previous
                 @include icon(arrow-left-s-line, before)
-            &.credit
+            &.lightbox-button-credit
                 &::before
                     content: '©'
-            &.info
+            &.lightbox-button-information
                 &::before
                     content: 'i'
-            &.close
+            &.lightbox-button-close
                 @include icon(close-line, before)
             &[aria-expanded='true']
                 background-color: $color-text

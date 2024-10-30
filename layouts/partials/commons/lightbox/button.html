@@ -1,0 +1,23 @@
+{{ with . }}
+  {{ $title := i18n "commons.lightbox.link.title" }}
+  {{ $options := dict "imageSrc" ( partial "GetLightboxUrl" .id ) }}
+
+  {{ with .text }}
+    {{ $options = merge $options (dict "information" ( . | plainify )) }}
+    {{ $options = merge $options (dict "informationhtml" (partial "PrepareHTML" . )) }}
+    {{ $title = printf "%s %s" $title ( . | plainify ) }}
+  {{ end }}
+
+  {{ with .credit }}
+    {{ $options = merge $options (dict "credit" (. | plainify)) }}
+    {{ $options = merge $options (dict "credithtml" (partial "PrepareHTML" . )) }}
+  {{ end }}
+
+  {{ with .alt }}
+    {{ $options = merge $options (dict "alt" (. | plainify)) }}
+  {{ end }}
+
+  <button class="lightbox-button" data-lightbox="{{ $options | encoding.Jsonify }}">
+    <span class="sr-only">{{ $title | plainify }}</span>
+  </button>
+{{ end }}

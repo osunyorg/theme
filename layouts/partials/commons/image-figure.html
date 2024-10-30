@@ -1,16 +1,9 @@
 {{ if .image.id }}
   {{ $sizes := .sizes }}
   {{ $lazy := default true .lazy }}
-  {{ $is_lightbox := false }}
-  {{ $is_gallery := .is_gallery }}
-  {{ $index := .index }}
-  {{ $total := .total }}
-  {{ if or (not site.Params.image_sizes.design_system.lightbox.disabled) (and $is_gallery (not site.Params.image_sizes.design_system.gallerylightbox.disabled)) }}
-    {{ $is_lightbox = true }}
-  {{ end }}
   {{ $image := partial "GetMedia" .image.id }}
   {{ $image_class := printf "image-%s" (partial "GetImageDirection" .image) }}
-
+  {{ $is_lightbox := not site.Params.image_sizes.design_system.lightbox.disabled }}
   {{ if $image }}
     {{ with .image }}
       <figure
@@ -20,25 +13,15 @@
                 aria-label="{{ . | plainify }}"
               {{ end }}
       >
+      {{ partial "commons/image.html" (dict
+        "image" .id
+        "alt" .alt
+        "sizes" $sizes
+        "lazy" $lazy
+      ) }}
+
       {{ if $is_lightbox }}
-        {{ partial "commons/lightbox/lightbox-launcher.html" (dict
-          "description" .text
-          "image" .id
-          "alt" .alt
-          "sizes" $sizes
-          "lazy" $lazy
-          "credit" .credit
-          "is_gallery" $is_gallery
-          "index" $index
-          "total" $total
-        ) }}
-      {{ else }}
-        {{ partial "commons/image.html" (dict
-          "image" .id
-          "alt" .alt
-          "sizes" $sizes
-          "lazy" $lazy
-        ) }}
+        {{ partial "commons/lightbox/button.html" . }}
       {{ end }}
 
       {{ if or .text .credit }}
