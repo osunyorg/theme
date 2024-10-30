@@ -1,16 +1,10 @@
 const locationsMap = document.querySelector('.locations-map');
 const dom = document.querySelector('main');
-
 class LocationsMap {
     constructor (dom, locationsMap) {
         this.dom = dom;
         this.map = locationsMap;
         this.init();
-
-
-        this.markers.forEach(marker => {
-            this.setAccessibility(marker);
-        });
     }
 
     init () {
@@ -39,11 +33,7 @@ class LocationsMap {
                 let marker = new L.marker(mapLocation, {
                     icon: this.themeMarker
                 });
-
-                marker.id = `leaflet-item-${map._leaflet_id}_${(this.markers.length + 1)}`;
-                marker.title = location.querySelector('.location-title').innerText;
-                location.id = marker.id;
-
+    
                 const popup = new L.Popup({'autoClose':false, 'closeButton':false, 'maxWidth': 1000});
                 popup.setLatLng(mapLocation);
                 popup.setContent(location);
@@ -57,23 +47,6 @@ class LocationsMap {
                 this.getMapBounds(map);
                 this.dom.classList.add("page-with-map");
             }
-        });
-    }
-
-    setAccessibility (marker) {
-        let icon = marker._icon;
-        if (icon) {
-            icon.setAttribute('aria-label', 'Afficher les informations de ' + marker.title);
-            icon.setAttribute('aria-controls', marker.id);
-            icon.setAttribute('aria-expanded', 'false');
-        }
-
-        marker.addEventListener('popupopen', () => {
-            icon.setAttribute('aria-expanded', 'true');
-        });
-
-        marker.addEventListener('popupclose', () => {
-            icon.setAttribute('aria-expanded', 'false');
         });
     }
 
