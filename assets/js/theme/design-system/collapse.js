@@ -4,20 +4,46 @@ window.osuny = window.osuny || {};
 
 window.osuny.Collapse = function (element) {
     this.element = element;
-    this.button = document.querySelector('[aria-controls=' + this.element.id + ']');
+    this.buttons = document.querySelectorAll('[aria-controls=' + this.element.id + ']');
     this.state = {
-        isOpened: false
+        opened: false
     };
+    this.options = {
+        // This attribute determine if collapse should close others when opened
+        closeSiblings: this.element.getAttribute('data-collapse-close-siblings')
+    };
+    this.listen();
+};
 
-    a11yClick(this.button, function (event) {
-        event.preventDefault();
-        this.toggle();
+window.osuny.Collapse.prototype.listen = function () {
+    this.buttons.forEach(function (button) {
+        a11yClick(button, function (event) {
+            event.preventDefault();
+            this.toggle();
+        }.bind(this));
+    }.bind(this));
+
+    this.element.addEventListener('collapse-close', this.toggle.bind(this, true));
+};
+
+window.osuny.Collapse.prototype.toggle = function (forceClose) {
+    this.state.opened = forceClose ? false : !this.state.opened;
+
+    if (this.state.opened && this.options.closeSiblings) {
+        this.closeSiblings();
+    }
+
+    this.buttons.forEach(function (button) {
+        button.setAttribute('aria-expanded', this.state.opened);
     }.bind(this));
 };
 
-window.osuny.Collapse.prototype.toggle = function () {
-    this.state.isOpened = !this.state.isOpened;
-    this.button.setAttribute('aria-expanded', this.state.isOpened);
+window.osuny.Collapse.prototype.closeSiblings = function () {
+    var siblings = this.element.parentNode.querySelectorAll('button[aria-expanded="true"]');
+
+    siblings.forEach(function (button) {
+        button.click();
+    }.bind(this));
 };
 
 (function () {

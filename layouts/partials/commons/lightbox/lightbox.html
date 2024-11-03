@@ -1,23 +1,24 @@
 <div class="lightbox" id="lightbox">
   <div class="lightbox-media" id="lightbox-media"></div>
   <div class="lightbox-controls">
-    <div class="lightbox-detail">
-      <p class="lightbox-detail__title">{{ safeHTML (i18n "commons.lightbox.infoTitle") }}</p>
-      <div id="lightbox-information"></div>
-      <p class="lightbox-detail__close">{{ safeHTML (i18n "commons.lightbox.closedetailwindow") }}</p>
-    </div>
-    <button class="lightbox-button-information">
+
+    <button class="lightbox-button-information" aria-controls="lightbox-detail-information" aria-expanded="false">
       <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.info") }}</span>
     </button>
-
-    <div class="lightbox-detail">
-      <p class="lightbox-detail__title">{{ safeHTML (i18n "commons.lightbox.creditTitle") }}</p>
-      <div id="lightbox-credit"></div>
-      <p class="lightbox-detail__close">{{ safeHTML (i18n "commons.lightbox.closedetailwindow") }}</p>
+    <div id="lightbox-detail-information" class="lightbox-detail collapse" data-collapse-close-siblings="true">
+      <p class="lightbox-detail__title">{{ safeHTML (i18n "commons.lightbox.infoTitle") }}</p>
+      <div id="lightbox-information"></div>
+      <p class="lightbox-detail__close" role="button" aria-controls="lightbox-detail-information" aria-expanded="false">{{ safeHTML (i18n "commons.lightbox.closedetailwindow") }}</p>
     </div>
-    <button class="lightbox-button-credit">
+
+    <button class="lightbox-button-credit" aria-controls="lightbox-detail-credit" aria-expanded="false">
       <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.credit") }}</span>
     </button>
+    <div id="lightbox-detail-credit" class="lightbox-detail collapse" data-collapse-close-siblings="true">
+      <p class="lightbox-detail__title">{{ safeHTML (i18n "commons.lightbox.creditTitle") }}</p>
+      <div id="lightbox-credit"></div>
+      <p class="lightbox-detail__close" role="button" aria-controls="lightbox-detail-credit" aria-expanded="false">{{ safeHTML (i18n "commons.lightbox.closedetailwindow") }}</p>
+    </div>
 
     <button class="lightbox-button-previous">
       <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.prev") }}</span>

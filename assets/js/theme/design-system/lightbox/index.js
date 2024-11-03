@@ -16,7 +16,9 @@ window.osuny.Lightbox.prototype._setup = function () {
     this.contentElements = {
         media: this.element.querySelector('#lightbox-media'),
         information: this.element.querySelector('#lightbox-information'),
-        credit: this.element.querySelector('#lightbox-credit')
+        informationButton: this.element.querySelector('.lightbox-button-information'),
+        credit: this.element.querySelector('#lightbox-credit'),
+        creditButton: this.element.querySelector('.lightbox-button-credit')
     };
 };
 
@@ -46,7 +48,11 @@ window.osuny.Lightbox.prototype._update = function (data) {
     if (data.imageSrc) {
         this._createImage(data);
     }
-    this.contentElements.information.innerHTML = data.information;
+
+    this.contentElements.information.innerHTML = data.information || '';
+    this.contentElements.informationButton.disabled = !data.information;
+    this.contentElements.credit.innerHTML = data.credit || '';
+    this.contentElements.creditButton.disabled = !data.credit;
 };
 
 window.osuny.Lightbox.prototype._createImage = function (data) {

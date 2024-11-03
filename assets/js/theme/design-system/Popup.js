@@ -12,6 +12,7 @@ window.osuny.Popup = window.osuny.Popup || {};
 window.osuny.Popup = function (element) {
     this.element = element;
     this.closeElements = this.element.querySelectorAll('.popup-close');
+    this.collapses = this.element.querySelectorAll('.collapse');
     this.state = {
         opened: false,
         lastTriggerElement: null
@@ -40,7 +41,8 @@ window.osuny.Popup.prototype = {
     },
 
     toggle (open, triggerElement) {
-        var classAction;
+        var classAction,
+            closeEvent = new Event('collapse-close');
         this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
         classAction = this.state.opened ? 'add' : 'remove';
 
@@ -48,6 +50,13 @@ window.osuny.Popup.prototype = {
 
         this.element.setAttribute('aria-hidden', !this.state.opened);
         this.element.classList[classAction](CLASSES.popupIsOpened);
+
+        if (!this.state.opened) {
+            // Close details boxes
+            this.collapses.forEach(function (collapse) {
+                collapse.dispatchEvent(closeEvent);
+            });
+        }
 
         // If open action, save the element that's trigger it
         if (this.state.opened && triggerElement) {

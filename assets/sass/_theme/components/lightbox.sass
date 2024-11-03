@@ -11,9 +11,8 @@
     z-index: 100
     &.is-opened
         display: block
-    &-figure
+    &-media
         position: relative
-    &-content
         display: flex
         height: 100%
         width: 100%
@@ -27,34 +26,9 @@
         position: absolute
         right: $spacing-2
         z-index: 101
-        .details-window
-            @include meta
-            background-color: $color-background
-            bottom: calc(var(--spacing-4) + var(--spacing-2) + 1px)
-            color: $color-text
-            padding: $spacing-2
-            position: fixed
-            right: $spacing-2
-            width: columns(6)
-            z-index: 102
-            &-title
-                &-information,
-                &-credit
-                    display: none
-                    margin-top: 0
-            > div
-                display: flex
-                justify-content: space-between
-                width: 100%
-            a
-                color: $color-text
-                text-decoration: underline
-            &-content
-                @include body-text
-                margin-top: $spacing-3
-            @include media-breakpoint-down(sm)
-                left: $spacing-2
-                width: initial
+        @include media-breakpoint-down(sm)
+            left: $spacing-2
+            width: initial
         button
             @include button-reset
             @include meta
@@ -85,3 +59,38 @@
                 background: $color-background-alt
                 &::before
                     color: $color-border
+    &-detail
+        @include meta
+        background-color: $color-background
+        bottom: calc(var(--spacing-4) + var(--spacing-2) + 1px)
+        color: $color-text
+        display: none
+        padding: $spacing-2
+        position: fixed
+        right: $spacing-2
+        width: columns(6)
+        z-index: 102
+        > div
+            display: flex
+            justify-content: space-between
+            width: 100%
+        a
+            color: $color-text
+            text-decoration: underline
+        &-content
+            @include body-text
+            margin-top: $spacing-3
+        [aria-expanded="true"] + &
+            display: block
+.lightbox-figure
+    position: relative
+.lightbox-button
+    @include button-reset
+    cursor: pointer
+    position: absolute
+    bottom: 0
+    left: 0
+    top: 0
+    right: 0
+    // &[data-lightbox]
+    //     @include stretched-link
