@@ -1,3 +1,5 @@
+import { setButtonEnability } from '../utils/a11y';
+
 /* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 window.osuny.Lightbox = window.osuny.Lightbox || {};
@@ -74,10 +76,8 @@ window.osuny.Lightbox.prototype._setSiblings = function () {
 
     figureIndex = Array.prototype.indexOf.call(galleryElement.children, figure);
 
-    this.contentElements.previousButton.disabled = figureIndex === 0;
-    this.contentElements.previousButton.ariaHidden = this.contentElements.previousButton.disabled;
-    this.contentElements.nextButton.disabled = figureIndex === galleryElement.children.length - 1;
-    this.contentElements.nextButton.ariaHidden = this.contentElements.nextButton.disabled;
+    setButtonEnability(this.contentElements.previousButton, figureIndex > 0);
+    setButtonEnability(this.contentElements.nextButton, figureIndex < galleryElement.children.length - 1);
 
     this.state.previousData = this._getSiblingsData(figure.previousElementSibling);
     this.state.nextData = this._getSiblingsData(figure.nextElementSibling);
@@ -101,8 +101,9 @@ window.osuny.Lightbox.prototype._clear = function () {
     this.contentElements.media.innerHTML = '';
     this.contentElements.information.innerHTML = '';
     this.contentElements.credit.innerHTML = '';
-    this.contentElements.previousButton.disabled = true;
-    this.contentElements.nextButton.disabled = true;
+
+    setButtonEnability(this.contentElements.previousButton, false);
+    setButtonEnability(this.contentElements.nextButton, false);
 };
 
 window.osuny.Lightbox.prototype._update = function (data) {
@@ -116,9 +117,9 @@ window.osuny.Lightbox.prototype._update = function (data) {
     }
 
     this.contentElements.information.innerHTML = data.information || '';
-    this.contentElements.informationButton.disabled = !data.information;
+    setButtonEnability(this.contentElements.informationButton, Boolean(data.information));
     this.contentElements.credit.innerHTML = data.credit || '';
-    this.contentElements.creditButton.disabled = !data.credit;
+    setButtonEnability(this.contentElements.creditButton, Boolean(data.credit));
 };
 
 window.osuny.Lightbox.prototype._createImage = function (data) {

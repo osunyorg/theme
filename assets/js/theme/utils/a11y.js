@@ -14,6 +14,12 @@ const a11yClick = function(element, action) {
   });
 }
 
+const setButtonEnability = function(button, enable) {
+  button.disabled = !enable;
+  button.ariaHidden = !enable;
+}
+
 export {
-  a11yClick
+  a11yClick,
+  setButtonEnability
 }
