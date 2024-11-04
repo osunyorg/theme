@@ -89,8 +89,6 @@ window.osuny.Lightbox.prototype._getSiblingsData = function (element) {
     button = element.querySelector('.lightbox-button');
     if (button) {
         return this._getData(button);
-    } else {
-        return null;
     }
 };
 

@@ -19,6 +19,6 @@ import './blocks/locations.js';
 import './utils/utils.js';
 import './components/events.js';
 import './components/utils.js';
-// import './components/carousel.js';
-import './design-system/lightbox';
+import './components/carousel.js';
+import './design-system/lightbox.js';
 
