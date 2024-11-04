@@ -61,26 +61,26 @@
                 &::before
                     color: $color-border
     &-detail
-        @include meta
         background-color: $color-background
         bottom: calc(var(--spacing-4) + var(--spacing-2) + 1px)
-        color: $color-text
+        // color: $color-text
         display: none
         padding: $spacing-2
         position: fixed
         right: $spacing-2
         width: columns(6)
         z-index: 102
-        a
-            color: $color-text
-            text-decoration: underline
+        &__title, &__close
+            @include meta
+            color: var(--color-text-alt)
         &__close
             cursor: pointer
             position: absolute
             right: $spacing-2
             top: $spacing-2
         &-content
-            @include body-text
+            margin-top: $spacing-3
+        > div
             margin-top: $spacing-3
         [aria-expanded="true"] + &
             display: block

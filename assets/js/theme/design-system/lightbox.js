@@ -88,7 +88,6 @@ window.osuny.Lightbox.prototype._getSiblingsData = function (element) {
     if (!element) {
         return null;
     }
-
     button = element.querySelector('.lightbox-button');
     if (button) {
         return this._getData(button);
@@ -126,7 +125,9 @@ window.osuny.Lightbox.prototype._createImage = function (data) {
     var image = document.createElement('img');
     image.src = data.imageSrc;
     image.alt = data.alt || '';
+    image.tabIndex = 0;
     this.contentElements.media.append(image);
+    image.focus();
 };
 
 window.osuny.Lightbox.prototype.navigateTo = function (key) {

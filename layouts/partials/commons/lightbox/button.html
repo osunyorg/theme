@@ -3,14 +3,12 @@
   {{ $options := dict "imageSrc" ( partial "GetLightboxUrl" .id ) }}
 
   {{ with .text }}
-    {{ $options = merge $options (dict "information" ( . | plainify )) }}
-    {{ $options = merge $options (dict "informationhtml" (partial "PrepareHTML" . )) }}
+    {{ $options = merge $options (dict "information" (partial "PrepareHTML" . )) }}
     {{ $title = printf "%s %s" $title ( . | plainify ) }}
   {{ end }}
 
   {{ with .credit }}
-    {{ $options = merge $options (dict "credit" (. | plainify)) }}
-    {{ $options = merge $options (dict "credithtml" (partial "PrepareHTML" . )) }}
+    {{ $options = merge $options (dict "credit" (partial "PrepareHTML" . )) }}
   {{ end }}
 
   {{ with .alt }}
