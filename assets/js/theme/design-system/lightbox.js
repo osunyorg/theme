@@ -75,7 +75,9 @@ window.osuny.Lightbox.prototype._setSiblings = function () {
     figureIndex = Array.prototype.indexOf.call(galleryElement.children, figure);
 
     this.contentElements.previousButton.disabled = figureIndex === 0;
+    this.contentElements.previousButton.ariaHidden = this.contentElements.previousButton.disabled;
     this.contentElements.nextButton.disabled = figureIndex === galleryElement.children.length - 1;
+    this.contentElements.nextButton.ariaHidden = this.contentElements.nextButton.disabled;
 
     this.state.previousData = this._getSiblingsData(figure.previousElementSibling);
     this.state.nextData = this._getSiblingsData(figure.nextElementSibling);
