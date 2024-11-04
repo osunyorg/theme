@@ -2,20 +2,20 @@ import { a11yClick } from '../utils/a11y';
 
 window.osuny = window.osuny || {};
 
-window.osuny.Collapse = function (element) {
+window.osuny.Extendable = function (element) {
     this.element = element;
     this.buttons = document.querySelectorAll('[aria-controls=' + this.element.id + ']');
     this.state = {
         opened: false
     };
     this.options = {
-        // This attribute determine if collapse should close others when opened
-        closeSiblings: this.element.getAttribute('data-collapse-close-siblings')
+        // This attribute determine if extendable should close others when opened
+        closeSiblings: this.element.getAttribute('data-extendable-close-siblings')
     };
     this.listen();
 };
 
-window.osuny.Collapse.prototype.listen = function () {
+window.osuny.Extendable.prototype.listen = function () {
     this.buttons.forEach(function (button) {
         a11yClick(button, function (event) {
             event.preventDefault();
@@ -23,10 +23,10 @@ window.osuny.Collapse.prototype.listen = function () {
         }.bind(this));
     }.bind(this));
 
-    this.element.addEventListener('collapse-close', this.toggle.bind(this, true));
+    this.element.addEventListener('extendable-close', this.toggle.bind(this, true));
 };
 
-window.osuny.Collapse.prototype.toggle = function (forceClose) {
+window.osuny.Extendable.prototype.toggle = function (forceClose) {
     this.state.opened = forceClose ? false : !this.state.opened;
 
     if (this.state.opened && this.options.closeSiblings) {
@@ -38,7 +38,7 @@ window.osuny.Collapse.prototype.toggle = function (forceClose) {
     }.bind(this));
 };
 
-window.osuny.Collapse.prototype.closeSiblings = function () {
+window.osuny.Extendable.prototype.closeSiblings = function () {
     var siblings = this.element.parentNode.querySelectorAll('button[aria-expanded="true"]');
 
     siblings.forEach(function (button) {
@@ -47,8 +47,8 @@ window.osuny.Collapse.prototype.closeSiblings = function () {
 };
 
 (function () {
-    var collapses = document.querySelectorAll('.collapse');
-    Array.prototype.forEach.call(collapses, function (element) {
-        new window.osuny.Collapse(element);
+    var extendables = document.querySelectorAll('.extendable, .collapse');
+    Array.prototype.forEach.call(extendables, function (element) {
+        new window.osuny.Extendable(element);
     });
 }());

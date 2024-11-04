@@ -1,7 +1,7 @@
 import './body.js';
 import './design-system/accordion.js';
 import './design-system/clickToCopy';
-import './design-system/collapse';
+import './design-system/extendables';
 import './design-system/dropdowns';
 import './design-system/font';
 import './design-system/mainMenu';

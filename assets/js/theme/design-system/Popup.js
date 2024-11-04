@@ -12,7 +12,7 @@ window.osuny.Popup = window.osuny.Popup || {};
 window.osuny.Popup = function (element) {
     this.element = element;
     this.closeElements = this.element.querySelectorAll('.popup-close');
-    this.collapses = this.element.querySelectorAll('.collapse');
+    this.extendables = this.element.querySelectorAll('.extendable');
     this.state = {
         opened: false,
         lastTriggerElement: null
@@ -42,7 +42,7 @@ window.osuny.Popup.prototype = {
 
     toggle (open, triggerElement) {
         var classAction,
-            closeEvent = new Event('collapse-close');
+            closeEvent = new Event('extendable-close');
         this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
         classAction = this.state.opened ? 'add' : 'remove';
 
@@ -52,9 +52,9 @@ window.osuny.Popup.prototype = {
         this.element.classList[classAction](CLASSES.popupIsOpened);
 
         if (!this.state.opened) {
-            // Close collapses boxes
-            this.collapses.forEach(function (collapse) {
-                collapse.dispatchEvent(closeEvent);
+            // Close extendables boxes
+            this.extendables.forEach(function (extendable) {
+                extendable.dispatchEvent(closeEvent);
             });
         }
 
