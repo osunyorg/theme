@@ -38,8 +38,16 @@ window.osuny.Lightbox.prototype._listen = function () {
         button.addEventListener('click', this.open.bind(this, button));
     }.bind(this));
 
-    this.contentElements.previousButton.addEventListener('click', this.previous.bind(this));
-    this.contentElements.nextButton.addEventListener('click', this.next.bind(this));
+    this.contentElements.previousButton.addEventListener('click', this.navigateTo.bind(this, 'previousData'));
+    this.contentElements.nextButton.addEventListener('click', this.navigateTo.bind(this, 'nextData'));
+
+    window.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowLeft') {
+            this.navigateTo('previousData');
+        } else if (event.key === 'ArrowRight') {
+            this.navigateTo('nextData');
+        }
+    }.bind(this));
 };
 
 window.osuny.Lightbox.prototype.open = function (button) {
@@ -117,15 +125,9 @@ window.osuny.Lightbox.prototype._createImage = function (data) {
     this.contentElements.media.append(image);
 };
 
-window.osuny.Lightbox.prototype.previous = function () {
-    if (this.state.previousData) {
-        this._update(this.state.previousData);
-    }
-};
-
-window.osuny.Lightbox.prototype.next = function () {
-    if (this.state.nextData) {
-        this._update(this.state.nextData);
+window.osuny.Lightbox.prototype.navigateTo = function (key) {
+    if (this.state[key]) {
+        this._update(this.state[key]);
     }
 };
 
