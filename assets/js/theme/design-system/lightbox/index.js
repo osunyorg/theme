@@ -5,6 +5,13 @@ window.osuny.Lightbox = window.osuny.Lightbox || {};
 window.osuny.Lightbox = function () {
     var element = document.getElementById('lightbox');
     window.osuny.Popup.call(this, element);
+
+    this.state = {
+        currentData: {},
+        previousData: {},
+        nextData: {}
+    };
+
     this._setup();
     this._listen();
 };
@@ -18,7 +25,9 @@ window.osuny.Lightbox.prototype._setup = function () {
         information: this.element.querySelector('#lightbox-information'),
         informationButton: this.element.querySelector('.lightbox-button-information'),
         credit: this.element.querySelector('#lightbox-credit'),
-        creditButton: this.element.querySelector('.lightbox-button-credit')
+        creditButton: this.element.querySelector('.lightbox-button-credit'),
+        previousButton: this.element.querySelector('.lightbox-button-previous'),
+        nextButton: this.element.querySelector('.lightbox-button-next')
     };
 };
 
@@ -28,22 +37,68 @@ window.osuny.Lightbox.prototype._listen = function () {
     this.buttons.forEach(function (button) {
         button.addEventListener('click', this.open.bind(this, button));
     }.bind(this));
+
+    this.contentElements.previousButton.addEventListener('click', this.previous.bind(this));
+    this.contentElements.nextButton.addEventListener('click', this.next.bind(this));
 };
 
 window.osuny.Lightbox.prototype.open = function (button) {
-    var data = JSON.parse(button.getAttribute('data-lightbox'));
+    var data = this._getData(button);
     this._update(data);
     this.toggle(true, button);
+};
+
+window.osuny.Lightbox.prototype._getData = function (button) {
+    var data = JSON.parse(button.getAttribute('data-lightbox'));
+    data.buttonElement = button;
+    return data;
+};
+
+window.osuny.Lightbox.prototype._setSiblings = function () {
+    var figure = this.state.currentData.buttonElement.parentElement,
+        galleryElement = figure.closest('.gallery'),
+        figureIndex = 0;
+
+    if (!galleryElement || galleryElement.children.length === 1) {
+        return;
+    }
+
+    figureIndex = Array.prototype.indexOf.call(galleryElement.children, figure);
+
+    this.contentElements.previousButton.disabled = figureIndex === 0;
+    this.contentElements.nextButton.disabled = figureIndex === galleryElement.children.length - 1;
+
+    this.state.previousData = this._getSiblingsData(figure.previousElementSibling);
+    this.state.nextData = this._getSiblingsData(figure.nextElementSibling);
+};
+
+window.osuny.Lightbox.prototype._getSiblingsData = function (element) {
+    var button;
+    if (!element) {
+        return null;
+    }
+
+    button = element.querySelector('.lightbox-button');
+    if (button) {
+        return this._getData(button);
+    } else {
+        return null;
+    }
 };
 
 window.osuny.Lightbox.prototype._clear = function () {
     this.contentElements.media.innerHTML = '';
     this.contentElements.information.innerHTML = '';
     this.contentElements.credit.innerHTML = '';
+    this.contentElements.previousButton.disabled = true;
+    this.contentElements.nextButton.disabled = true;
 };
 
 window.osuny.Lightbox.prototype._update = function (data) {
     this._clear();
+    this.state.currentData = data;
+
+    this._setSiblings();
 
     if (data.imageSrc) {
         this._createImage(data);
@@ -60,6 +115,18 @@ window.osuny.Lightbox.prototype._createImage = function (data) {
     image.src = data.imageSrc;
     image.alt = data.alt;
     this.contentElements.media.append(image);
+};
+
+window.osuny.Lightbox.prototype.previous = function () {
+    if (this.state.previousData) {
+        this._update(this.state.previousData);
+    }
+};
+
+window.osuny.Lightbox.prototype.next = function () {
+    if (this.state.nextData) {
+        this._update(this.state.nextData);
+    }
 };
 
 window.osuny.lightbox = new window.osuny.Lightbox();

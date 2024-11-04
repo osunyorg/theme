@@ -4,6 +4,7 @@
   {{ $image := partial "GetMedia" .image.id }}
   {{ $image_class := printf "image-%s" (partial "GetImageDirection" .image) }}
   {{ $is_lightbox := not site.Params.image_sizes.design_system.lightbox.disabled }}
+
   {{ if $image }}
     {{ with .image }}
       <figure
