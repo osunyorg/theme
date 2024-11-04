@@ -68,6 +68,8 @@ window.osuny.Lightbox.prototype._setSiblings = function () {
         figureIndex = 0;
 
     if (!galleryElement || galleryElement.children.length === 1) {
+        this.contentElements.previousButton.style.display = 'none';
+        this.contentElements.nextButton.style.display = 'none';
         return;
     }
 
@@ -93,6 +95,8 @@ window.osuny.Lightbox.prototype._getSiblingsData = function (element) {
 };
 
 window.osuny.Lightbox.prototype._clear = function () {
+    this.contentElements.previousButton.style.display = 'block';
+    this.contentElements.nextButton.style.display = 'block';
     this.contentElements.media.innerHTML = '';
     this.contentElements.information.innerHTML = '';
     this.contentElements.credit.innerHTML = '';
