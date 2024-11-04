@@ -52,19 +52,33 @@ window.osuny.Popup.prototype = {
         this.element.classList[classAction](CLASSES.popupIsOpened);
 
         if (!this.state.opened) {
-            // Close details boxes
+            // Close collapses boxes
             this.collapses.forEach(function (collapse) {
                 collapse.dispatchEvent(closeEvent);
             });
         }
 
+        this.updateDocumentAccessibility();
+
         // If open action, save the element that's trigger it
         if (this.state.opened && triggerElement) {
             this.lastTriggerElement = triggerElement;
         }
+
         // If close action, focus the last element which open the popup
         if (!this.state.opened && this.lastTriggerElement) {
             this.lastTriggerElement.focus();
         }
+    },
+
+    updateDocumentAccessibility: function () {
+        var bodyChildren = document.body.children,
+            action = this.state.opened ? 'setAttribute' : 'removeAttribute';
+
+        Array.prototype.forEach.call(bodyChildren, function (element) {
+            if (this.element !== element) {
+                element[action]('inert', '');
+            }
+        }.bind(this));
     }
 };
