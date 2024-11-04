@@ -27,12 +27,12 @@
       {{- partial "hooks/before-main-end" . -}}
     </main>
     {{- partial "footer/footer.html" . -}}
+    {{- partial "commons/lightbox/lightbox.html" . -}}
     {{- partial "footer/plausible.html" . -}}
     {{- partial "footer/js.html" . -}}
     {{- partial "footer/script.html" . -}}
     {{- if or (not hugo.IsProduction) site.Params.debug.active -}}
       {{- partial "footer/debug.html" . -}}
     {{- end -}}
-    {{- partial "commons/lightbox/lightbox-container.html" . -}}
   </body>
 </html>

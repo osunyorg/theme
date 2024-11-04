@@ -82,13 +82,15 @@
     {{- end -}}
   {{ end -}}
   
-  {{ if and (site.Params.search.active) (or (eq $kind "primary") (eq $kind "upper-menu")) (eq site.Params.search.position $kind) }}
-    <li class="nav-search">
-      {{ partial "header/search.html" (dict
-          "position" $kind
-          "context" .
-      )}}
-    </li>
+  {{ if site.Params.search.active  }}
+    {{ if or (and (eq $kind "primary") (eq site.Params.search.position "menu")) (eq $kind site.Params.search.position "upper-menu") }}
+      <li class="nav-search">
+        {{ partial "header/search.html" (dict
+            "position" $kind
+            "context" .
+        )}}
+      </li>
+    {{ end }}
   {{ end }}
   {{ if and (eq $kind "primary") (site.Params.menu.i18n.display) }}
     {{ partial "header/i18n.html" .context }}
