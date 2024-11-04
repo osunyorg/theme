@@ -21,14 +21,11 @@ function getFocusableElements(element) {
 
 function handleTabLoop(event, firstFocusable, lastFocusable, element) {
     const goingBackward = event.shiftKey;
-    console.log(goingBackward)
     const focusTarget = goingBackward ? lastFocusable : firstFocusable;
-    console.log(focusTarget)
     // get focus position (we want first or last) to create the focus loop
     const focusOnLimit = isElementFocused(element, goingBackward ? firstFocusable : lastFocusable);
 
     if (focusOnLimit) {
-        console.log('focus limit')
         event.preventDefault();
         focusTarget.focus();
     }
