@@ -44,7 +44,7 @@
                   {{ end -}}
                   </p>
               {{ end -}}
-              {{ partial "commons/address.html" (dict "context" . )}}
+              {{ partial "commons/address.html" (dict "address" .Params.contact_details) }}
               {{ if and $options.summary .Params.summary }}
                 <div class="summary">
                   {{ safeHTML .Params.summary }}

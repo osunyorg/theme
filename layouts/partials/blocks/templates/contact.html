@@ -20,34 +20,10 @@
               {{ partial "PrepareHTML" . }}
             {{ end }}
             <div class="contacts">
-              {{ with .address }}
-                {{ if or .address .city .zipcode .country }}
-                  <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <p class="meta">{{- i18n "commons.contact.address" -}}</p>
-                    {{ if .address }}
-                      <span itemprop="streetAddress">
-                        {{ partial "PrepareHTML" .address }},
-                      </span>
-                      <br>
-                    {{ end }}
-                    {{ if .city }}
-                      <span itemprop="addressLocality">
-                        {{ partial "PrepareHTML" .city }}
-                      </span>
-                    {{ end }}
-                    {{ if .zipcode }}
-                      <span itemprop="postalCode">
-                        {{ partial "PrepareHTML" .zipcode }}
-                      </span>
-                    {{ end }}
-                    {{ if .country }}
-                      <span itemprop="addressCountry">
-                        {{ partial "PrepareHTML" .country }}
-                      </span>
-                    {{ end }}
-                  </div>
-                {{ end }}
-              {{ end }}
+              {{ partial "commons/address" (dict
+                  "address" .address
+                  "title" (i18n "commons.contact.address")
+                )}}
               {{ if or .url .emails }}
                 <div>
                   <p class="meta">
@@ -86,7 +62,7 @@
                   </ul>
                 </div>
               {{ end }}
-              {{ if .timetable}}
+              {{ if .timetable }}
                 {{ $time_size := "full-size" }}
                 {{ if and (or .emails .url) .phone_numbers .socials }}
                   {{ $time_size = "reduced" }}

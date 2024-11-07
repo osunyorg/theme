@@ -1,25 +1,30 @@
 {{ $context := .context | default . }}
 {{ $sr_only := .sr_only | default false }}
+{{ $title := .title }}
+{{ $address := .address | default $context.Params.contact_details }}
 
-{{ with $context }}
-  {{ if or .Params.contact_details.address .Params.contact_details.city .Params.contact_details.zipcode .Params.contact_details.country }}
+{{ with $address }}
+  {{ if or .address .city .zipcode .country }}
     <address {{ if $sr_only -}} class="sr-only" {{- end }} itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-      {{ with .Params.contact_details.address }}
+      {{ with $title }}
+        <p class="meta">{{ . }}</p>
+      {{ end }}
+      {{ with .address }}
         <span itemprop="streetAddress">
           {{ partial "PrepareHTML" .label }},
         </span>
       {{ end }}
-      {{ with .Params.contact_details.zipcode }}
+      {{ with .zipcode }}
         <span itemprop="postalCode">
           {{ partial "PrepareHTML" .label }}
         </span>
       {{ end }}
-      {{ with .Params.contact_details.city }}
+      {{ with .city }}
         <span itemprop="addressLocality">
           {{ partial "PrepareHTML" .label }}
         </span>
       {{ end }}
-      {{ with .Params.contact_details.country }}
+      {{ with .country }}
         <span itemprop="addressCountry">
           {{ partial "PrepareHTML" .label }}
         </span>
