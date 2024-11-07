@@ -30,14 +30,14 @@
                       </span>
                       <br>
                     {{ end }}
-                    {{ if .city }}
-                      <span itemprop="addressLocality">
-                        {{ partial "PrepareHTML" .city }}
-                      </span>
-                    {{ end }}
                     {{ if .zipcode }}
                       <span itemprop="postalCode">
                         {{ partial "PrepareHTML" .zipcode }}
+                      </span>
+                    {{ end }}
+                    {{ if .city }}
+                      <span itemprop="addressLocality">
+                        {{ partial "PrepareHTML" .city }}
                       </span>
                     {{ end }}
                     {{ if .country }}
