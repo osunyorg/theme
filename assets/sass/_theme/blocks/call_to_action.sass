@@ -16,11 +16,11 @@ $button-selector: "a:first-child"
             ul:last-child, ol:last-child
                 margin-bottom: 0
     .call_to_action
-        color: $block-call-to-action-color
+        color: #{$block-call-to-action-color}
         .description
             a
                 color: inherit
-                text-decoration-color: $block-call-to-action-color
+                text-decoration-color: #{$block-call-to-action-color}
             p
                 @include h2
         .actions
@@ -32,8 +32,8 @@ $button-selector: "a:first-child"
                 @if not $block-call-to-action-all-actions-as-buttons
                     @include meta
                     @extend %underline-on-hover
-                    text-decoration-color: alphaColor($block-call-to-action-color, 0.3)
-                    color: $block-call-to-action-color
+                    text-decoration-color: alphaColor(#{$block-call-to-action-color}, 0.3)
+                    color: #{$block-call-to-action-color}
                 margin-right: $spacing-3
                 margin-top: $spacing-3
                 display: inline-block
@@ -69,15 +69,14 @@ $button-selector: "a:first-child"
         --cta-background-color: #{$block-call-to-action-accent-background}
         margin-bottom: 0
         .call_to_action
-            color: $block-call-to-action-accent-color
+            color: #{$block-call-to-action-accent-color}
             .description
                 a
-                    text-decoration-color: $block-call-to-action-accent-color
-            .actions,
+                    text-decoration-color: #{$block-call-to-action-accent-color}
             figure
                 a
-                    color: $block-call-to-action-accent-color
-                    text-decoration-color: alphaColor($block-call-to-action-accent-color, 0.3)
+                    color: #{$block-call-to-action-accent-color}
+                    text-decoration-color: alphaColor(#{$block-call-to-action-accent-color}, 0.3)
             .actions
                 #{$button-selector}
                     --btn-background: #{$block-call-to-action-accent-button-background}
@@ -86,7 +85,10 @@ $button-selector: "a:first-child"
                     --btn-hover-background: #{$block-call-to-action-accent-button-hover-background}
                     --btn-hover-border: #{$block-call-to-action-accent-button-hover-border}
                     --btn-hover-color: #{$block-call-to-action-accent-button-hover-color}
-
+                @if not $block-call-to-action-all-actions-as-buttons
+                    a
+                        color: #{$block-call-to-action-accent-color}
+                        text-decoration-color: alphaColor(#{$block-call-to-action-accent-color}, 0.3)
     @include media-breakpoint-down(desktop)
         &--accent_background
             background-color: var(--cta-background-color)
