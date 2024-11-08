@@ -49,13 +49,78 @@ header#document-header
                 transition: filter $header-sticky-transition
             @include media-breakpoint-up(desktop)
                 height: $header-logo-height-desktop
+
+    // Top menu
+    .upper-menu
+        background: $header-upper-menu-background
+        border-bottom: $header-upper-menu-border-bottom-width solid var(--color-border)
+        transition: background $header-sticky-transition
+        z-index: $zindex-header
+        ul
+            @include list-reset
+            @include meta
+            display: flex
+            gap: $spacing-3
+            width: 100%
+            @include media-breakpoint-up(desktop)
+                align-items: baseline
+                justify-content: center
+                gap: $spacing-5
+            // horizontal scroll for mobile
+            @include media-breakpoint-down(desktop)
+                height: $header-upper-menu-mobile-height
+                overflow-x: auto
+                scrollbar-width: none
+                &::-webkit-scrollbar
+                    display: none
+        @include media-breakpoint-down(desktop)
+            background: transparent
+            border-top: $header-upper-menu-border-bottom-width solid var(--color-border)
+            color: $header-sticky-color
+            display: none
+            position: absolute
+            top: var(--header-height)
+            transition-delay: 0.3
+            .container
+                padding-left: 0
+                padding-right: 0
+                ul
+                    padding-left: var(--grid-gutter)
+                    padding-right: var(--grid-gutter)
+            html.has-menu-opened &
+                background: $header-upper-menu-sticky-background
+                display: block
+                + nav
+                    .menu
+                        padding-top: $header-upper-menu-mobile-height
+        .nav-level-1
+            a
+                text-decoration: none
+            > li:not(.nav-search)
+                line-height: 1
+                border: none
+                @include media-breakpoint-down(desktop)
+                    height: 100%
+                a,
+                span,
+                button
+                    display: block
+                    padding: 0
+                    white-space: nowrap
+                    @include media-breakpoint-up(desktop)
+                        padding: $header-upper-menu-padding-y 0
+                    @include media-breakpoint-down(desktop)
+                        line-height: $header-upper-menu-mobile-height
+                    &.active
+                        box-shadow: inset 0 -4px 0 0 var(--color-border)
     @include media-breakpoint-down(desktop)
         html.has-menu-opened &
             nav
                 padding-bottom: 0
-        .has-upper-menu
-            .menu .logo
-                display: none
+    &.is-sticky
+        .upper-menu
+            background: $header-upper-menu-sticky-background
+            color: $header-sticky-color
 
 // TODO : Est-ce au bon endroit ?
 body
@@ -92,42 +157,17 @@ body
             opacity: 0
 
 header#document-header
-    nav
+    nav:not(.upper-menu)
         padding-bottom: $header-nav-padding-y
         padding-top: $header-nav-padding-y
-        &.upper-menu
-            padding-bottom: $header-upper-menu-padding-y
-            padding-top: $header-upper-menu-padding-y
         @include media-breakpoint-up(desktop)
             padding-bottom: $header-nav-padding-y-desktop
             padding-top: $header-nav-padding-y-desktop
-            &.upper-menu
-                padding-bottom: $header-upper-menu-padding-y-desktop
-                padding-top: $header-upper-menu-padding-y-desktop
         > .container
             align-items: center
             display: flex
             flex-wrap: wrap
             justify-content: space-between
-            // Upper menu : in dropdown in mobile | before logo/menu in desktop
-            &.has-upper-menu
-                @include media-breakpoint-up(desktop)
-                    .menu
-                        width: 100%
-                        display: flex
-                        flex-wrap: wrap
-                        justify-content: space-between
-                    > .logo
-                        display: none
-                @include media-breakpoint-down(desktop)
-                    .menu.is-opened
-                        display: flex
-                        flex-direction: column
-                        margin-left: var(--grid-gutter-negative)
-                        margin-right: var(--grid-gutter-negative)
-                        .nav-level-1:first-of-type
-                            margin-left: var(--grid-gutter)
-                            margin-right: var(--grid-gutter)
         .header-button
             @include button-reset
             border: 0
