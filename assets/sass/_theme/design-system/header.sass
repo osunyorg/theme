@@ -52,8 +52,9 @@ header#document-header
 
     // Top menu
     .upper-menu
-        background: $header-background
+        background: $header-upper-menu-background
         border-bottom: $header-upper-menu-border-bottom-width solid var(--color-border)
+        transition: background $header-sticky-transition
         z-index: $zindex-header
         ul
             @include list-reset
@@ -74,13 +75,15 @@ header#document-header
                 &::-webkit-scrollbar
                     display: none
         @include media-breakpoint-down(desktop)
+            background: transparent
             border-top: $header-upper-menu-border-bottom-width solid var(--color-border)
+            color: $header-sticky-color
             display: none
-            padding-top: 0
             position: absolute
             top: var(--header-height)
-            width: 100%
+            transition-delay: 0.3
             html.has-menu-opened &
+                background: $header-upper-menu-sticky-background
                 display: block
                 + nav
                     .menu
@@ -105,14 +108,14 @@ header#document-header
                         line-height: $header-upper-menu-mobile-height
                     &.active
                         box-shadow: inset 0 -4px 0 0 var(--color-border)
-            @include media-breakpoint-down(desktop)
-                padding-left: var(--grid-gutter)
-                padding-right: var(--grid-gutter)
-
     @include media-breakpoint-down(desktop)
         html.has-menu-opened &
             nav
                 padding-bottom: 0
+    &.is-sticky
+        .upper-menu
+            background: $header-upper-menu-sticky-background
+            color: $header-sticky-color
 
 // TODO : Est-ce au bon endroit ?
 body
