@@ -52,54 +52,57 @@ header#document-header
 
     // Top menu
     .upper-menu
-        @include list-reset
-        @include meta
-        align-items: baseline
-        display: flex
-        justify-content: space-between
-        gap: $spacing-3
-        order: -1
-        position: relative
-        width: 100%
-        @include media-breakpoint-up(desktop)
-            justify-content: center
-            margin-top: -($header-nav-padding-y)
-            margin-bottom: $spacing-5
-            gap: $spacing-5
-            &::after
-                content: ''
-                border-bottom: $header-upper-menu-border-bottom-width solid var(--color-border)
-                bottom: -1px
-                left: var(--grid-gutter-negative)
-                position: absolute
-                right: var(--grid-gutter-negative)
+        border-bottom: $header-upper-menu-border-bottom-width solid var(--color-border)
+        ul
+            @include list-reset
+            @include meta
+            display: flex
+            justify-content: space-between
+            gap: $spacing-3
+            width: 100%
+            @include media-breakpoint-up(desktop)
+                align-items: baseline
+                justify-content: center
+                gap: $spacing-5
+            // horizontal scroll for mobile
+            @include media-breakpoint-down(desktop)
+                height: $header-upper-menu-mobile-height
+                overflow-x: auto
+                scrollbar-width: none
+                &::-webkit-scrollbar
+                    display: none
         @include media-breakpoint-down(desktop)
-            border-bottom: $header-upper-menu-border-bottom-width solid var(--color-border)
             border-top: $header-upper-menu-border-bottom-width solid var(--color-border)
-            overflow-x: auto
-            scrollbar-width: none
-            &::-webkit-scrollbar
-                display: none
-        &.nav-level-1
+            display: none
+            padding-top: 0
+            position: absolute
+            top: var(--header-height)
+            width: 100%
+            html.has-menu-opened &
+                display: block
+                + nav
+                    .menu
+                        padding-top: $header-upper-menu-mobile-height
+        .nav-level-1
             a
                 text-decoration: none
             li
                 line-height: 1
                 border: none
+                @include media-breakpoint-down(desktop)
+                    height: 100%
             a,
             span,
             button
+                display: block
                 padding: 0
                 white-space: nowrap
-                padding-bottom: $spacing-2
-                padding-top: $spacing-2
+                @include media-breakpoint-up(desktop)
+                    padding: $header-upper-menu-padding-y 0
+                @include media-breakpoint-down(desktop)
+                    line-height: $header-upper-menu-mobile-height
                 &.active
                     box-shadow: inset 0 -4px 0 0 var(--color-border)
-                @include media-breakpoint-up(desktop)
-                    padding-left: 0
-                    padding-right: 0
-                    padding-top: calc(#{$header-nav-padding-y} / 2)
-                    padding-bottom: $header-nav-padding-y
             @include media-breakpoint-down(desktop)
                 padding-left: var(--grid-gutter)
                 padding-right: var(--grid-gutter)
@@ -108,9 +111,6 @@ header#document-header
         html.has-menu-opened &
             nav
                 padding-bottom: 0
-        .has-upper-menu
-            .menu .logo
-                display: none
 
 // TODO : Est-ce au bon endroit ?
 body
@@ -147,42 +147,17 @@ body
             opacity: 0
 
 header#document-header
-    nav
+    nav:not(.upper-menu)
         padding-bottom: $header-nav-padding-y
         padding-top: $header-nav-padding-y
-        &.upper-menu
-            padding-bottom: $header-upper-menu-padding-y
-            padding-top: $header-upper-menu-padding-y
         @include media-breakpoint-up(desktop)
             padding-bottom: $header-nav-padding-y-desktop
             padding-top: $header-nav-padding-y-desktop
-            &.upper-menu
-                padding-bottom: $header-upper-menu-padding-y-desktop
-                padding-top: $header-upper-menu-padding-y-desktop
         > .container
             align-items: center
             display: flex
             flex-wrap: wrap
             justify-content: space-between
-            // Upper menu : in dropdown in mobile | before logo/menu in desktop
-            &.has-upper-menu
-                @include media-breakpoint-up(desktop)
-                    .menu
-                        width: 100%
-                        display: flex
-                        flex-wrap: wrap
-                        justify-content: space-between
-                    > .logo
-                        display: none
-                @include media-breakpoint-down(desktop)
-                    .menu.is-opened
-                        display: flex
-                        flex-direction: column
-                        margin-left: var(--grid-gutter-negative)
-                        margin-right: var(--grid-gutter-negative)
-                        .nav-level-1:first-of-type
-                            margin-left: var(--grid-gutter)
-                            margin-right: var(--grid-gutter)
         .header-button
             @include button-reset
             border: 0
