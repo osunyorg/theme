@@ -1,0 +1,28 @@
+.slider
+    &-list
+        display: flex
+        position: relative
+        transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1)
+    &-slide
+        flex-shrink: 0
+        transition: opacity 0.25s
+        &.is-previous
+            opacity: 0
+    &-arrows
+        display: flex
+        align-items: center
+        margin-left: -#{$spacing-3}
+        button
+            @include button-reset
+            color: var(--color-text)
+            padding: $spacing-3
+            position: static
+            &:disabled
+                opacity: 0.3
+                pointer-events: none
+        .slider-arrow-previous
+            @include icon(arrow-left-line, before)
+        .slider-arrow-next
+            @include icon(arrow-right-line, before)
+    &-progression
+        @include meta

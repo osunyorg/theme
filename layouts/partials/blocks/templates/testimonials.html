@@ -12,11 +12,11 @@
         )}}
         <div class="testimonials">
           {{- if and .testimonials (gt (len .testimonials) 1) }}
-            {{ partial "blocks/templates/carousel.html" (dict 
+            {{/*  {{ partial "blocks/templates/carousel.html" (dict 
               "content" .testimonials
               "options" site.Params.blocks.testimonials.carousel
               "partial" "blocks/templates/testimonials/single.html"
-            )}}
+            )}}  */}}
           {{ else }}
             {{ range .testimonials }}
               {{ partial "blocks/templates/testimonials/single.html" (dict

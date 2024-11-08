@@ -78,28 +78,16 @@
             background: $block-gallery-carousel-background
             padding-bottom: var(--grid-gutter)
             padding-top: var(--grid-gutter)
-        .container
-            overflow: visible
-            padding-right: var(--grid-gutter-negative) !important
-            .block-content
-                // width: fit-content
-                .top
-                    padding-right: var(--grid-gutter)
-                .carousel
-                    width: fit-content
-                    figure
-                        margin-right: calc(var(--grid-gutter) / 2)
-                        picture
-                            img
-                                height: $block-gallery-carousel-max-height
-                                width: auto
-                                max-width: none
-                                @include media-breakpoint-up(desktop)
-                                    height: $block-gallery-carousel-max-height-desktop
-                                    width: auto
-                                    max-width: none
-                        @include in-page-without-sidebar
-                            margin-right: var(--grid-gutter)
+        .slider
+            figure
+                margin-right: calc(var(--grid-gutter) / 2)
+                picture
+                    img
+                        height: $block-gallery-carousel-max-height
+                        width: auto
+                        max-width: none
+                        @include media-breakpoint-up(desktop)
+                            height: $block-gallery-carousel-max-height-desktop
         .block-gallery + &,
         .block-pages--cards + &
             margin-top: 0
