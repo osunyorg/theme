@@ -1,63 +1,60 @@
 /* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 
-window.osuny.Slider = function (element) {
-    this.element = element;
+window.osuny.Slider = function (list) {
+    this.list = list;
+    this.setState();
     this.setOptions();
     this.setup();
-    window.slider = this;
 };
 
-window.osuny.Slider.prototype.state = {
-    active: false,
-    index: 0,
-    isFirst: true,
-    isLast: false
-};
-
-window.osuny.Slider.prototype.options = {
-    // Add previous and next arrows
-    arrows: true,
-    // Enable autoplay
-    autoplay: false,
-    // Autoplay delay
-    interval: 2000,
-    // Add navigation dots
-    pagination: false,
-    // Add current progression and slides length
-    progression: false
+window.osuny.Slider.prototype.setState = function () {
+    this.state = {
+        active: false,
+        index: 0,
+        isFirst: true,
+        isLast: false
+    };
 };
 
 window.osuny.Slider.prototype.setOptions = function () {
-    var data = this.element.getAttribute('data-slider'),
-        key;
-    data = JSON.parse(data);
+    var data = this.list.getAttribute('data-slider'),
+        options = JSON.parse(data);
 
-    for (key in this.options) {
-        this.options[key] = data[key] || this.options[key];
-    }
+    this.options = {
+        // Add previous and next arrows
+        arrows: options.arrows || true,
+        // Enable autoplay
+        autoplay: options.autoplay || false,
+        // Autoplay delay
+        interval: options.interval || 2000,
+        // Add navigation dots
+        pagination: options.pagination || false,
+        // Add current progression and slides length
+        progression: options.progression || false
+    };
 };
 
 window.osuny.Slider.prototype.setup = function () {
-    this.element.classList.add('slider');
+    this.list.classList.add('slider-list');
+
+    this.container = document.createElement('div');
+    this.container.classList.add('slider');
 
     // Create track
     this.track = document.createElement('div');
     this.track.classList.add('slider-track');
 
-    // Create list
-    this.list = document.createElement('div');
-    this.list.classList.add('slider-list');
+    this.list.parentNode.append(this.container);
+    this.track.append(this.list);
+    this.container.append(this.track);
 
     // Append slides to list
-    Array.prototype.slice.call(this.element.children).forEach(function (slide) {
+    Array.prototype.slice.call(this.list.children).forEach(function (slide) {
         slide.classList.add('slider-slide');
-        this.list.append(slide);
     }.bind(this));
 
     this.slides = this.list.querySelectorAll('.slider-slide');
-    this.track.append(this.list);
-    this.element.append(this.track);
 
     if (this.options.arrows) {
         this.arrows = new window.osuny.SliderArrows(this);

@@ -9,7 +9,7 @@ window.osuny.SliderArrows = function (slider) {
     this.container.classList.add('slider-arrows');
     this.previous = this.create('previous');
     this.next = this.create('next');
-    this.slider.element.appendChild(this.container);
+    this.slider.container.appendChild(this.container);
 
     if (this.slider.options.progression) {
         this.addProgression();
