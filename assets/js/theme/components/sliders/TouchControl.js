@@ -6,10 +6,9 @@ window.osuny.TouchControl = function (slider) {
     this.slider = slider;
     this.container = slider.container;
 
-    this.container.style.touchAction = 'pan-y';
-
     this.options = {
-        threshold: 30
+        threshold: 30,
+        grabbedClass: 'is-grabbed'
     };
 
     this.state = {
@@ -22,6 +21,8 @@ window.osuny.TouchControl = function (slider) {
 };
 
 window.osuny.TouchControl.prototype.listen = function () {
+    this.container.style.touchAction = 'pan-y';
+
     this.container.addEventListener('pointerdown', this.onPointerDown.bind(this));
     this.container.addEventListener('pointerup', this.onPointerUp.bind(this));
     this.container.addEventListener('pointermove', this.onPointerMove.bind(this));
@@ -30,7 +31,7 @@ window.osuny.TouchControl.prototype.listen = function () {
 window.osuny.TouchControl.prototype.onPointerDown = function (event) {
     this.state.isPointerDown = true;
     this.state.start = event.clientX;
-    this.container.classList.add('is-grabbed');
+    this.container.classList.add(this.options.grabbedClass);
 };
 
 window.osuny.TouchControl.prototype.onPointerMove = function (event) {
@@ -51,5 +52,5 @@ window.osuny.TouchControl.prototype.onPointerUp = function (event) {
         this.slider.previous();
     }
 
-    this.container.classList.remove('is-grabbed');
+    this.container.classList.remove(this.options.grabbedClass);
 };
