@@ -280,45 +280,43 @@
     &--carousel
         overflow: hidden
         z-index: 0
-        .container
+        .post
+            word-break: break-word
+            margin-right: calc(var(--grid-gutter))
+            .media
+                img
+                    aspect-ratio: 1.55
+        @include media-breakpoint-down(desktop)
+            .slider-arrows
+                width: columns(12)
+            .post
+                width: columns(10)
+        @include in-page-with-sidebar
+            .post
+                width: columns(3)
+                .post-title,
+                .post-subtitle
+                    @include h4
+            .slider-arrows
+                justify-content: space-between
+                width: columns(7)
+            @include media-breakpoint-down(xl)
+                .post
+                    width: columns(4)
+                .slider-arrows
+                    width: columns(8)
+        @include in-page-without-sidebar
             .block-content
-                .post
-                    word-break: break-word
-                    margin-right: calc(var(--grid-gutter))
-                    .media
-                        img
-                            aspect-ratio: 1.55
-                @include media-breakpoint-down(desktop)
-                    .slider-arrows
-                        width: columns(12)
-                    .post
-                        width: columns(10)
-            @include in-page-with-sidebar
-                .post
+                display: flex
+                gap: var(--grid-gutter)
+                .top
+                    flex-shrink: 0
                     width: columns(3)
-                    .post-title,
-                    .post-subtitle
-                        @include h4
+                .post
+                    width: columns(4)
                 .slider-arrows
                     justify-content: space-between
-                    width: columns(7)
-                @include media-breakpoint-down(xl)
-                    .post
-                        width: columns(4)
-                    .slider-arrows
-                        width: columns(8)
-            @include in-page-without-sidebar
-                .block-content
-                    display: flex
-                    gap: var(--grid-gutter)
-                    .top
-                        flex-shrink: 0
-                        width: columns(3)
-                    .post
-                        width: columns(4)
-                    .slider-arrows
-                        justify-content: space-between
-                        width: columns(9)
+                    width: columns(9)
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts
