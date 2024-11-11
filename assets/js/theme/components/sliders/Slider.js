@@ -23,7 +23,7 @@ window.osuny.Slider.prototype.setOptions = function () {
 
     this.options = {
         // Add previous and next arrows
-        arrows: options.arrows || true,
+        arrows: options.arrows || false,
         // Enable autoplay
         autoplay: options.autoplay || false,
         // Autoplay delay
