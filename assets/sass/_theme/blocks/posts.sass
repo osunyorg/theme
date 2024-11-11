@@ -281,49 +281,44 @@
         overflow: hidden
         z-index: 0
         .container
-            overflow: visible
             .block-content
-                .carousel
-                    padding-bottom: $spacing-3
-                    width: fit-content
+                .post
+                    word-break: break-word
+                    margin-right: calc(var(--grid-gutter))
+                    .media
+                        img
+                            aspect-ratio: 1.55
+                @include media-breakpoint-down(desktop)
+                    .slider-arrows
+                        width: columns(12)
                     .post
-                        word-break: break-word
-                        margin-right: calc(var(--grid-gutter))
-                        .media
-                            img
-                                aspect-ratio: 1.55
-                    &__arrows
-                        justify-content: space-between
-                        .counter
-                            display: none
-                    @include media-breakpoint-down(desktop)
-                        &__arrows
-                            width: columns(12)
-                        .post
-                            width: columns(10)
+                        width: columns(10)
             @include in-page-with-sidebar
-                padding-left: offset(4)
-                .block-content
-                    padding-left: var(--grid-gutter) !important
-                    .carousel
-                        .post
-                            width: columns(3)
-                            .post-title,
-                            .post-subtitle
-                                @include h4
-                        &__arrows
-                            width: columns(7)
+                .post
+                    width: columns(3)
+                    .post-title,
+                    .post-subtitle
+                        @include h4
+                .slider-arrows
+                    justify-content: space-between
+                    width: columns(7)
+                @include media-breakpoint-down(xl)
+                    .post
+                        width: columns(4)
+                    .slider-arrows
+                        width: columns(8)
             @include in-page-without-sidebar
                 .block-content
                     display: flex
                     gap: var(--grid-gutter)
                     .top
+                        flex-shrink: 0
                         width: columns(3)
-                    .carousel
-                        .post
-                            width: columns(4)
-                        &__arrows
-                            width: columns(9)
+                    .post
+                        width: columns(4)
+                    .slider-arrows
+                        justify-content: space-between
+                        width: columns(9)
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts
