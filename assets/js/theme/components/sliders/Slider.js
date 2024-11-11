@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 
 window.osuny.Slider = function (list) {
@@ -102,16 +101,3 @@ window.osuny.Slider.prototype.update = function () {
 window.osuny.Slider.prototype.translate = function () {
     this.list.style.transform = 'translateX(' + -this.slides[this.state.index].offsetLeft + 'px)';
 };
-
-// window.osuny.Slider.prototype._listen = function () {
-//     this.elements.previousButton.addEventListener('click', this.goTo.bind(this, 'previous'));
-//     this.elements.nextButton.addEventListener('click', this.goTo.bind(this, 'next'));
-
-//     window.addEventListener('keydown', function (event) {
-//         if (this.state.active && event.key === 'ArrowLeft') {
-//             this.goTo('previous');
-//         } else if (this.state.active && event.key === 'ArrowRight') {
-//             this.goTo('next');
-//         }
-//     }.bind(this));
-// };

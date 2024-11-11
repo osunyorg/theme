@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 window.osuny.SlidersFactory = window.osuny.SlidersFactory || {};
 
