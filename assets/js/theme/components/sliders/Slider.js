@@ -5,6 +5,7 @@ window.osuny.Slider = function (list) {
     this.setState();
     this.setOptions();
     this.setup();
+    this.touchControl = new window.osuny.TouchControl(this);
 };
 
 window.osuny.Slider.prototype.setState = function () {

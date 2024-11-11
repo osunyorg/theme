@@ -165,6 +165,6 @@
 //     }
 // }
 
-// draggableBlocks.forEach((block) => {
-//     new DraggableBlock(block);
-// });
+// // draggableBlocks.forEach((block) => {
+// //     new DraggableBlock(block);
+// // });

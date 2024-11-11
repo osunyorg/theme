@@ -1,6 +1,5 @@
 import { setButtonEnability } from '../../utils/a11y';
 
-/* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
 
 window.osuny.SliderArrows = function (slider) {
