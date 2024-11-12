@@ -1,6 +1,6 @@
-{{ $context := .context | default . }}
+{{ $address := .address | default . }}
 
-{{ with $context }}
+{{ with $address }}
   {{ with .html }}
     {{ partial "PrepareHTML" . }}
   {{ else }}

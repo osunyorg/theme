@@ -27,7 +27,7 @@
               {{ with .postal_address }}
                 <div class="address">
                   <p class="meta">{{- i18n "commons.contact.address" -}}</p>
-                  {{ partial "commons/address.html" (dict "context" . )}}
+                  {{ partial "commons/address.html" . }}
                 </div>
               {{ end }}
               {{ if or .url .emails }}

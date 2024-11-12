@@ -5,7 +5,7 @@
     <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
     {{ with .contact_details.postal_address }}
-        {{ partial "commons/address.html" (dict "context" . )}}
+        {{ partial "commons/address.html" . }}
     {{ end }}
     {{- if .phone -}}
       <p>
@@ -21,7 +21,7 @@
     <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
     {{ with .contact_details.postal_address }}
-        {{ partial "commons/address.html" (dict "context" . )}}
+        {{ partial "commons/address.html" . }}
     {{ end }}
     {{- if .phone -}}
       <p>
