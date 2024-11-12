@@ -1,4 +1,5 @@
 .slider
+    --slider-pagination-interval: 2s
     &-list
         display: flex
         position: relative
@@ -26,3 +27,27 @@
             @include icon(arrow-right-line, before)
     &-progression
         @include meta
+    &-pagination
+        @include list-reset
+        display: flex
+        li
+            flex-grow: 1
+            background-color: var(--color-border)
+            position: relative
+            button
+                @include button-reset
+                height: 10px
+                width: 100%
+            &::after
+                content: ''
+                position: absolute
+                display: block
+                width: 0%
+                height: 100%
+                background-color: var(--color-accent)
+            &.is-current
+                &::after
+                    width: 100%
+                    transition: width var(--slider-pagination-interval) linear
+
+

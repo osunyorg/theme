@@ -63,6 +63,10 @@ window.osuny.Slider.prototype.setup = function () {
     if (this.options.pagination) {
         this.pagination = new window.osuny.SliderPagination(this);
     }
+
+    if (this.options.autoplay) {
+        this.autoplay();
+    }
 };
 
 window.osuny.Slider.prototype.next = function () {
@@ -101,8 +105,22 @@ window.osuny.Slider.prototype.update = function () {
     if (this.arrows) {
         this.arrows.update();
     }
+    if (this.pagination) {
+        this.pagination.update();
+    }
 };
 
 window.osuny.Slider.prototype.translate = function () {
     this.list.style.transform = 'translateX(' + -this.slides[this.state.index].offsetLeft + 'px)';
+};
+
+window.osuny.Slider.prototype.autoplay = function () {
+    this.container.style.setProperty('--slider-pagination-interval', this.options.interval + 'ms');
+    setInterval(function () {
+        if (this.isLast) {
+            this.goTo(0);
+        } else {
+            this.next();
+        }
+    }.bind(this), this.options.interval);
 };
