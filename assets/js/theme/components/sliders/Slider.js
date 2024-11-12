@@ -59,6 +59,10 @@ window.osuny.Slider.prototype.setup = function () {
     if (this.options.arrows) {
         this.arrows = new window.osuny.SliderArrows(this);
     }
+
+    if (this.options.pagination) {
+        this.pagination = new window.osuny.SliderPagination(this);
+    }
 };
 
 window.osuny.Slider.prototype.next = function () {
