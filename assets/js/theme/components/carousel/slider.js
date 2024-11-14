@@ -110,11 +110,17 @@ window.osuny.carousel.Slider.prototype = {
     },
     _slideIsVisible: function (index) {
         var slidePos = {
-            min: null,
-            max: null
-        };
+                min: null,
+                max: null
+            },
+            max = Math.min(window.innerWidth - this.element.getBoundingClientRect().left, this.containerWidth);
+
         slidePos.min = this._slidePosition(index) - this.element.scrollLeft;
         slidePos.max = slidePos.min + this.slides[index].width;
-        return slidePos.min >= -2 && slidePos.max <= Math.min(window.screen.width - this.element.getBoundingClientRect().left, this.containerWidth) + 2;
+
+        if (index == 2) {
+            console.log(slidePos, max, slidePos.min >= -2 && slidePos.max <= max + 2)
+        }
+        return slidePos.min >= -2 && slidePos.max <= max + 2;
     }
 };
