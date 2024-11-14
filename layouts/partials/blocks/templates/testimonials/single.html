@@ -1,4 +1,4 @@
-<figure class="testimonial {{ if .params.photo }}with-picture{{ end }}">
+<figure class="testimonial {{ if .params.photo }}with-picture{{ end }}" {{ with .params.author -}} role="figure" aria-label="{{ . }}" {{- end }}>
   {{ with .params }}
     {{ $is_long := gt (len .text) 150 }}
     <blockquote {{- if $is_long }} class="is-long" {{- end }}>
