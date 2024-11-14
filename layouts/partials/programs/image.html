@@ -1,5 +1,5 @@
 {{ if . }}
-  <figure {{ with partial "GetTextFromHTML" .credit }} role="figure" aria-label="{{ . }}"{{ end }} class="featured-image">
+  <figure {{ with .credit }} role="figure" aria-label="{{ . | plainify }}"{{ end }} class="featured-image">
     {{ partial "commons/image.html"
           (dict
             "image"    .
