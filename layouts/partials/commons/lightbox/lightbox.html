@@ -1,0 +1,33 @@
+<div class="lightbox" id="lightbox" role="dialog" aria-label="{{ i18n "commons.lightbox.title" }}" tabindex="0">
+  <div class="lightbox-media" id="lightbox-media"></div>
+  <div class="lightbox-controls">
+
+    <button class="lightbox-button-information" aria-controls="lightbox-detail-information" aria-expanded="false">
+      <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.controls.informations") }}</span>
+    </button>
+    <div id="lightbox-detail-information" class="lightbox-detail extendable" data-extendable-close-siblings="true">
+      <p class="lightbox-detail__title">{{ safeHTML (i18n "commons.lightbox.informations") }}</p>
+      <div id="lightbox-information"></div>
+      <p class="lightbox-detail__close" role="button" aria-controls="lightbox-detail-information" aria-expanded="false" tabindex="0">{{ safeHTML (i18n "commons.lightbox.close") }}</p>
+    </div>
+
+    <button class="lightbox-button-credit" aria-controls="lightbox-detail-credit" aria-expanded="false">
+      <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.controls.credits") }}</span>
+    </button>
+    <div id="lightbox-detail-credit" class="lightbox-detail extendable" data-extendable-close-siblings="true">
+      <p class="lightbox-detail__title">{{ safeHTML (i18n "commons.lightbox.credits") }}</p>
+      <div id="lightbox-credit"></div>
+      <p class="lightbox-detail__close" role="button" aria-controls="lightbox-detail-credit" aria-expanded="false" tabindex="0">{{ safeHTML (i18n "commons.lightbox.close") }}</p>
+    </div>
+
+    <button class="lightbox-button-previous">
+      <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.controls.previous") }}</span>
+    </button>
+    <button class="lightbox-button-next">
+      <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.controls.next") }}</span>
+    </button>
+    <button class="lightbox-button-close popup-close">
+      <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.controls.close") }}</span>
+    </button>
+  </div>
+</div>
