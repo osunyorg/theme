@@ -6,7 +6,7 @@
   {{ $bodyclass = printf "%s full-width" $bodyclass }}
 {{ end }}
 
-{{ if .Params.design.toc.offcanvas }}
+{{ if or .Params.design.toc.offcanvas site.Params.toc.force_offcanvas }}
   {{ $bodyclass = printf "%s offcanvas-toc" $bodyclass }}
 {{ end }}
 

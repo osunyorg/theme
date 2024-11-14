@@ -4,11 +4,11 @@ window.osuny.components = window.osuny.components || {};
 
 window.osuny.components.events = {
     components: {
-        lightbox: null,
         carousel: null
     },
     handleKeyDownEvent: function (e) {
         var target = this._targetDirector();
+
         if (target) {
             if (e.key === 'ArrowLeft') {
                 target.previous();
@@ -19,16 +19,8 @@ window.osuny.components.events = {
     },
     //  who receives the event depending on lightbox state and carousels
     _targetDirector () {
-        if (this._isLightBoxOpened()) {
-            return this.components.lightbox;
-        }
-        if (this._hasFocusedCarousel()) {
+        if (this._hasFocusedCarousel() && !window.osuny.lightbox.state.opened) {
             return this.components.carousel.focusedCarousel;
-        }
-    },
-    _isLightBoxOpened () {
-        if (this.components.lightbox) {
-            return this.components.lightbox.container.opened;
         }
     },
     _hasFocusedCarousel () {

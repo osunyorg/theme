@@ -1,3 +1,8 @@
+// BUTTONS STYLE
+$button-selector: "a:first-child"
+@if $block-call-to-action-all-actions-as-buttons
+    $button-selector: "a"
+
 .block-call_to_action
     .top
         margin-bottom: 0
@@ -11,11 +16,11 @@
             ul:last-child, ol:last-child
                 margin-bottom: 0
     .call_to_action
-        color: $block-call-to-action-color
+        color: #{$block-call-to-action-color}
         .description
             a
                 color: inherit
-                text-decoration-color: $block-call-to-action-color
+                text-decoration-color: #{$block-call-to-action-color}
             p
                 @include h2
         .actions
@@ -24,24 +29,25 @@
                     display: flex
                     flex-direction: column
             a
-                @include meta
-                @extend %underline-on-hover
-                color: $block-call-to-action-color
+                @if not $block-call-to-action-all-actions-as-buttons
+                    @include meta
+                    @extend %underline-on-hover
+                    text-decoration-color: alphaColor(#{$block-call-to-action-color}, 0.3)
+                    color: #{$block-call-to-action-color}
                 margin-right: $spacing-3
                 margin-top: $spacing-3
                 display: inline-block
-                text-decoration-color: alphaColor($block-call-to-action-color, 0.3)
-                &:first-child
-                    --btn-background: #{$block-call-to-action-button-background}
-                    --btn-border: #{$block-call-to-action-button-border}
-                    --btn-color: #{$block-call-to-action-button-color}
-                    --btn-hover-background: #{$block-call-to-action-button-hover-background}
-                    --btn-hover-border: #{$block-call-to-action-button-hover-border}
-                    --btn-hover-color: #{$block-call-to-action-button-hover-color}
-                    --btn-min-width: #{columns(2)}
-                    @extend .button
                 &:last-child
                     margin-bottom: 0
+            #{$button-selector}
+                --btn-background: #{$block-call-to-action-button-background}
+                --btn-border: #{$block-call-to-action-button-border}
+                --btn-color: #{$block-call-to-action-button-color}
+                --btn-hover-background: #{$block-call-to-action-button-hover-background}
+                --btn-hover-border: #{$block-call-to-action-button-hover-border}
+                --btn-hover-color: #{$block-call-to-action-button-hover-color}
+                --btn-min-width: #{columns(2)}
+                @extend .button
         figure
             figcaption
                 @include meta
@@ -68,24 +74,26 @@
         --cta-background-color: #{$block-call-to-action-accent-background}
         margin-bottom: 0
         .call_to_action
-            color: $block-call-to-action-accent-color
+            color: #{$block-call-to-action-accent-color}
             .description
                 a
-                    text-decoration-color: $block-call-to-action-accent-color
-            .actions,
+                    text-decoration-color: #{$block-call-to-action-accent-color}
             figure
                 a
-                    color: $block-call-to-action-accent-color
-                    text-decoration-color: alphaColor($block-call-to-action-accent-color, 0.3)
+                    color: #{$block-call-to-action-accent-color}
+                    text-decoration-color: alphaColor(#{$block-call-to-action-accent-color}, 0.3)
             .actions
-                a:first-child
+                #{$button-selector}
                     --btn-background: #{$block-call-to-action-accent-button-background}
                     --btn-border: #{$block-call-to-action-accent-button-border}
                     --btn-color: #{$block-call-to-action-accent-button-color}
                     --btn-hover-background: #{$block-call-to-action-accent-button-hover-background}
                     --btn-hover-border: #{$block-call-to-action-accent-button-hover-border}
                     --btn-hover-color: #{$block-call-to-action-accent-button-hover-color}
-
+                @if not $block-call-to-action-all-actions-as-buttons
+                    a
+                        color: #{$block-call-to-action-accent-color}
+                        text-decoration-color: alphaColor(#{$block-call-to-action-accent-color}, 0.3)
     @include media-breakpoint-down(desktop)
         &--accent_background
             background-color: var(--cta-background-color)

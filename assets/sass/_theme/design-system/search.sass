@@ -5,7 +5,7 @@
     @include meta
     &:focus
         box-shadow: none
-.pagefind-ui__toggle:not(.pagefind-menu), 
+.pagefind-ui__toggle:not(.pagefind-primary), 
 .pagefind-ui__button, 
 .search__close
     @include meta
@@ -20,7 +20,7 @@
         &::after
             line-height: inherit
             margin-left: $spacing-1
-    &:not(.pagefind-menu)    
+    &:not(.pagefind-primary)
         padding: $spacing-1 $spacing-2
     &.toggle-both
         .menu & span
@@ -29,12 +29,21 @@
     &::after
         display: inline
     @include media-breakpoint-down(desktop)
-        &.pagefind-menu
+        &.pagefind-primary
             padding: $spacing-3 0
             width: 100%
     @include media-breakpoint-up(desktop)
         &.toggle-icon::after
                 margin-left: 0
+    .upper-menu &
+        &.toggle-both,
+        &.toggle-text
+            white-space: nowrap
+            padding: 0
+        @include media-breakpoint-down(desktop)
+            &.toggle-both::after
+                margin-left: space()
+            
 .search__close
     @include icon-block(close-line, after)
     position: fixed
@@ -133,6 +142,9 @@
         &__result
             list-style: none
             position: relative
+            a,
+            span
+                white-space: pre-wrap
             &-thumb
                 grid-column: 1/4
                 > *
@@ -229,7 +241,7 @@ footer#document-footer .footer-search
 
 .nav-search
     display: flex
-    .pagefind-menu:not(.toggle-icon)::after
+    .pagefind-primary:not(.toggle-icon)::after
         margin-top: 10px
 
 .menu .nav-level-1 > li .pagefind-ui__toggle span

@@ -23,6 +23,10 @@
             order: 2
         // When collapse is closed
         &[aria-expanded="false"]
+            &:nth-last-child(2)
+                margin-bottom: var(--block-space-y)
+                &::after
+                    display: none
             &::after
                 border-bottom: $block-title-border-bottom
                 content: ''
@@ -37,5 +41,5 @@
         // When collapse is opened
         &[aria-expanded="true"]
             @include icon(arrow-up-s-line, before)
-    &[aria-expanded="false"] + .collapse + &
-        margin-top: 0
+        &[aria-expanded="false"] + .collapse + &
+            margin-top: 0

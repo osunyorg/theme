@@ -20,12 +20,8 @@
                   </a>
                 {{ end -}}
               </p>
-              {{ with .Params.contact_details }}
-                <span>{{ .address.value }}</span>
-                <span>
-                  {{ .zipcode.value }}
-                  {{ .city.value }}
-                </span>
+              {{ with .Params.contact_details.postal_address }}
+                {{ partial "commons/address" . }}
               {{ end }}
             </div>
           {{ end -}}
