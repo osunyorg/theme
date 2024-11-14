@@ -2,7 +2,7 @@
 import { focusTrap } from '../utils/focus-trap';
 
 const CLASSES = {
-    modalOpened: 'has-modal-opened'
+    modalOpened: 'has-search-opened'
 };
 
 class Search {
@@ -97,8 +97,10 @@ class Search {
             message = this.element.querySelector('.pagefind-ui__message'),
             results = this.element.querySelector('.pagefind-ui__results');
 
-        this.input.value = '';
-        this.searchInstance.triggerSearch(false);
+        if (this.input) {
+            this.input.value = '';
+            this.searchInstance.triggerSearch(false);
+        }
 
         if (message) {
             message.innerText = '';
