@@ -90,11 +90,21 @@
         li + li
             &::before
                 content: ', '
+    &-schedule
+        p + p
+            margin-top: 0
+    &-dates
+        > span:first-child
+            span + span
+                &::before
+                    content: ' — '
     &-time
-        span + span
-            @include icon(arrow-right-line, before)
-                margin-left: space()
-                margin-right: space()
+        span
+            white-space: nowrap
+            + span
+                @include icon(arrow-right-line, before)
+                    margin-left: space()
+                    margin-right: space()
     .media
         &:empty
             display: none
@@ -164,6 +174,8 @@
                     > span
                         @include h3
                         margin-bottom: $spacing-3
+                        span
+                            display: block
                 &-time
                     margin-top: $spacing-2
                     @include meta
@@ -186,8 +198,6 @@
                     margin-top: $spacing-1
                 &-time
                     display: inline
-                    &::before
-                        content: ' — '
                 .media
                     grid-column: 2 span
 
@@ -259,7 +269,7 @@
                     margin-top: var(--grid-gutter)
                 .media
                     width: columns(4)
-                .event-dates
+                .event-schedule
                     margin-bottom: $spacing-4
             @include media-breakpoint-down(desktop)
                 flex-direction: column
