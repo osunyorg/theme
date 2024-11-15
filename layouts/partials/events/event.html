@@ -41,21 +41,21 @@
             {{ partial "PrepareHTML" $formated_date }}
           </p>
           {{- if (or $dates.from.hour $dates.to.hour) }}
+            {{- $hour := "" -}}
             <p class="event-time">
-              {{ $hour := "" }}
-              {{- with $dates.from.hour }}
-                {{ $hour = . }}
-                {{ with site.Params.events.time_format }}
-                  {{ $hour = time.Format . (printf "2021-09-01T%s:00" $hour) }}
-                {{ end }}
-                <span>{{ $hour }}</span>
-              {{ end -}}
-              {{- with $dates.to.hour }}
-              {{ $hour = . }}
-              {{ with site.Params.events.time_format }}
-                  {{ $hour = time.Format . (printf "2021-09-01T%s:00" $hour) }}
-                {{ end }}
-                <span>{{ $hour }}</span>
+              {{ with $dates.from.hour }}
+                {{- $hour = . -}}
+                {{- with site.Params.events.time_format }}
+                  {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
+                {{ end -}}
+                <span>{{- $hour -}}</span>
+              {{- end -}}
+              {{- with $dates.to.hour -}}
+                {{- $hour = . -}}
+                {{- with site.Params.events.time_format -}}
+                  {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
+                {{- end -}}
+                <span>{{- $hour -}}</span>
               {{ end -}}
             </p>
           {{ end -}}

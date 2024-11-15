@@ -85,20 +85,21 @@
         margin-top: $spacing-2
         display: flex
         flex-wrap: wrap
+        column-gap: $spacing-1
         position: relative
         z-index: 2
-        li + li
-            &::before
+        li:not(:last-child)
+            a::after
                 content: ', '
     &-schedule
         p + p
             margin-top: 0
     &-dates
-        > span:first-child
-            span + span
-                &::before
-                    content: ' — '
+        span + span
+            &::before
+                content: ' — '
     &-time
+        @include meta
         span
             white-space: nowrap
             + span
@@ -110,12 +111,6 @@
             display: none
         img
             display: block
-    @include media-breakpoint-down(desktop)
-        &-time
-            display: inline-flex
-            &::before
-                content: ' |'
-                margin-right: $spacing-1
     @include media-breakpoint-up(desktop)
         &-time
             display: flex
@@ -131,10 +126,8 @@
             position: relative
             &-title
                 @include h3
-            &-dates
+            &-schedule
                 @include h4
-                margin-top: $spacing-1
-                margin-bottom: $spacing-2
             &-content
                 order: 2
             @include media-breakpoint-down(desktop)
@@ -165,28 +158,26 @@
                 .media
                     order: 2
             @include in-page-without-sidebar
-                &-content
-                    width: columns(10)
+                &-schedule
+                    margin-bottom: $spacing-3
                 &-dates
-                    margin-top: 0
-                    order: 0
-                    grid-column: 1 / 5
-                    > span
-                        @include h3
-                        margin-bottom: $spacing-3
-                        span
-                            display: block
+                    @include h3
+                    span
+                        display: block
+                        + span
+                            &::before
+                                display: none
                 &-time
                     margin-top: $spacing-2
-                    @include meta
                 &-content
                     @include grid(10, desktop, 0)
                     order: 1
                     grid-column: 1 / 11
+                    width: columns(10)
                     > .event-title, > hgroup, .event-description, .event-categories, .event-status
                         grid-column: 5 / 11
-                    > .event-dates
-                        grid-column: 0 / 5
+                    > .event-schedule
+                        grid-column: 1 / 5
                         grid-row: 1 / 4
                 .media
                     width: columns(2)
@@ -196,6 +187,9 @@
                     order: 1
                     grid-column: 6 span
                     margin-top: $spacing-1
+                &-schedule
+                    margin-top: $spacing-1
+                    margin-bottom: $spacing-2
                 &-time
                     display: inline
                 .media
@@ -207,7 +201,7 @@
             display: flex
             flex-direction: column
             position: relative
-            &-dates
+            &-schedule
                 @include meta
                 margin-top: $spacing-2
             &-content
