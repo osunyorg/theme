@@ -172,7 +172,8 @@ window.osuny.carousel.Carousel.prototype = {
         if (this.slides.current !== index) {
             this.showSlide(index);
         }
-        if (this.state.hasFocus && this.autoplayer.paused) {
+
+        if (this.state.hasFocus && (!this.config.autoplay || this.autoplayer.paused)) {
             this.slider.focusOnNewVisibleSlide();
         }
     }

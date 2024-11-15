@@ -116,11 +116,7 @@ window.osuny.carousel.Slider.prototype = {
             max = Math.min(window.innerWidth - this.element.getBoundingClientRect().left, this.containerWidth);
 
         slidePos.min = this._slidePosition(index) - this.element.scrollLeft;
-        slidePos.max = slidePos.min + this.slides[index].width;
-
-        if (index == 2) {
-            console.log(slidePos, max, slidePos.min >= -2 && slidePos.max <= max + 2)
-        }
+        slidePos.max = slidePos.min + this.slides[index].container.offsetWidth;
         return slidePos.min >= -2 && slidePos.max <= max + 2;
     }
 };
