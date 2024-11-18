@@ -93,18 +93,24 @@
             flex: 1
         &.social-share
             align-items: center
+        &.authors,
+        &.terms
+            margin: 0
+            li
+                display: inline-block
+                vertical-align: middle
+                margin-left: $spacing-1
+                &:last-child
+                    &::after
+                        content: none
+            @include media-breakpoint-up(desktop)
+                align-items: baseline
+                li
+                    display: block
+                    margin-top: space()
     a
         @include link(var(--color-accent))
         text-align: right
-    .terms
-        margin: 0
-        li
-            display: inline-block
-            vertical-align: middle
-            margin-left: $spacing-1
-            &:last-child
-                &::after
-                    content: none
     .share
         display: flex
         flex-wrap: wrap
