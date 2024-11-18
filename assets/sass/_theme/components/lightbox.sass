@@ -46,9 +46,13 @@
             &.lightbox-button-credit
                 &::before
                     content: '©' / ''
+                &:disabled
+                    display: none
             &.lightbox-button-information
                 &::before
                     content: 'i' / ''
+                &:disabled
+                    display: none
             &.lightbox-button-close
                 @include icon(close-line, before)
             &[aria-expanded='true']
