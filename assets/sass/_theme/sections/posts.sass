@@ -94,6 +94,53 @@
     &:not(.full-width)
         .post-sidebar
             @include sidebar
+    .block-signatures
+        .signatures
+            @include list-reset
+            border-top: 1px solid var(--color-border)
+            padding-top: var(--grid-gutter)
+            li
+                align-items: flex-start
+                display: flex
+                flex-direction: row-reverse
+                gap: var(--grid-gutter)
+                position: relative
+                .avatar
+                    min-width: pxToRem(80)
+                    width: columns(1)
+                    @include media-breakpoint-up(desktop)
+                        width: columns(2)
+                .author-content
+                    flex: 1
+                    a
+                        @include stretched-link
+                        @include h4
+                        text-decoration: none
+                    .more
+                        @include link(var(--color-accent))
+                    p
+                        @include meta
+                &:hover
+                    .more
+                        text-decoration-color: var(--color-accent)
+                + li
+                    margin-top: $spacing-3
+
+    &.full-width
+        @include media-breakpoint-up(desktop)
+            .post-sidebar
+                @include container
+                > div
+                    display: flex
+                    align-items: start
+                    margin-bottom: $spacing-5
+                .toc-cta
+                    padding-right: 0
+                aside
+                    width: columns(5)
+                    flex-shrink: 0
+            @include media-breakpoint-down(desktop)
+                margin-bottom: $spacing-5
 
 .post-infos
     @include section__page-infos

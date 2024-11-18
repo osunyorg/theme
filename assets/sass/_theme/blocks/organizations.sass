@@ -5,7 +5,6 @@
                 @include stretched-link(before)
                 @include icon(links-line, after, true)
                     position: relative
-
     .map
         height: 600px
         z-index: 1
@@ -40,7 +39,11 @@
                 z-index: 2
             &-close-button
                 z-index: 4
-
+    @include media-breakpoint-down(md)
+        details
+            ul
+                li + li
+                    margin-top: $spacing-3
     @include in-page-with-sidebar
         .grid
             @include grid(4, lg)

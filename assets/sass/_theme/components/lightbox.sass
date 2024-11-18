@@ -16,18 +16,20 @@
         display: flex
         height: 100%
         width: 100%
+        pointer-events: none
         img
             display: block
             margin: auto
             max-height: 100%
             outline-color: $lightbox-focus-outline-color
+            pointer-events: auto
     &-controls
         bottom: $spacing-2
         display: flex
         position: absolute
         right: $spacing-2
         z-index: 1
-        button
+        > button
             @include button-reset
             @include meta
             background-color: var(--color-background)
@@ -46,9 +48,13 @@
             &.lightbox-button-credit
                 &::before
                     content: '©' / ''
+                &:disabled
+                    display: none
             &.lightbox-button-information
                 &::before
                     content: 'i' / ''
+                &:disabled
+                    display: none
             &.lightbox-button-close
                 @include icon(close-line, before)
             &[aria-expanded='true']
@@ -73,6 +79,7 @@
             @include meta
             color: var(--color-text-alt)
         &__close
+            @include button-reset
             cursor: pointer
             position: absolute
             right: $spacing-2

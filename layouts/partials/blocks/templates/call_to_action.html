@@ -35,7 +35,7 @@
             {{- end -}}
           </div>
           {{ if .image }}
-            <figure role="figure" {{- with or .alt .credit }} aria-label="{{ . | plainify }}" {{ end }}>
+            <figure {{- with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
               {{ partial "commons/image.html"
                 (dict
                   "image"    .image.file

@@ -11,42 +11,24 @@
           "description" .description
         )}}
 
-        <div class="informations">
-          <address itemscope itemtype="https://schema.org/Organization">
-            {{ if .name }}
-              <p itemprop="name">{{ .name }}</p>
-            {{ end }}
-            {{ with .information }}
+        <div class="contact-content" itemscope itemtype="https://schema.org/Organization">
+          {{ with .information }}
+            <div class="informations">
+          {{ end }}
+          {{ if .name }}
+            <p itemprop="name">{{ .name }}</p>
+          {{ end }}
+          {{ with .information }}
               {{ partial "PrepareHTML" . }}
-            {{ end }}
-            <div class="contacts">
-              {{ with .address }}
-                {{ if or .address .city .zipcode .country }}
-                  <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <p class="meta">{{- i18n "commons.contact.address" -}}</p>
-                    {{ if .address }}
-                      <span itemprop="streetAddress">
-                        {{ partial "PrepareHTML" .address }},
-                      </span>
-                      <br>
-                    {{ end }}
-                    {{ if .zipcode }}
-                      <span itemprop="postalCode">
-                        {{ partial "PrepareHTML" .zipcode }}
-                      </span>
-                    {{ end }}
-                    {{ if .city }}
-                      <span itemprop="addressLocality">
-                        {{ partial "PrepareHTML" .city }}
-                      </span>
-                    {{ end }}
-                    {{ if .country }}
-                      <span itemprop="addressCountry">
-                        {{ partial "PrepareHTML" .country }}
-                      </span>
-                    {{ end }}
-                  </div>
-                {{ end }}
+            </div>
+          {{ end }}
+          <div class="contacts">
+            {{ with .contact_details }}
+              {{ with .postal_address }}
+                <div class="address">
+                  <p class="meta">{{- i18n "commons.contact.address" -}}</p>
+                  {{ partial "commons/address.html" . }}
+                </div>
               {{ end }}
               {{ if or .url .emails }}
                 <div>
@@ -54,28 +36,27 @@
                     {{ if .url }}
                       {{- i18n "commons.contact.web" -}}
                     {{ else }}
-                      {{- i18n "commons.contact.email" -}}
+                      {{- i18n "commons.contact.email.label" -}}
                     {{ end }}
                   </p>
-                  
                   {{ range .emails }}
-                    <p><a itemprop="email" href="mailto:{{ . }}">{{ . }}</a></p>
+                    <p><a itemprop="email" href="{{ .value }}" title="{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}">{{ .label }}</a></p>
                   {{ end }}
                   {{ with .url }}
-                    <p><a href="{{ . }}" target="_blank" rel="noreferrer">{{ . }}</a></p>
+                    <p><a href="{{ .value }}" target="_blank" rel="noreferrer">{{ .label }}</a></p>
                   {{ end }}
                 </div>
               {{ end }}
               {{ with .phone_numbers }}
                 <div>
-                  <p class="meta">{{- i18n "commons.contact.phone" -}}</p>
+                  <p class="meta">{{- i18n "commons.contact.phone.label" -}}</p>
                   {{ range . }}
-                    <p><a itemprop="telephone" href="tel:{{ . }}">{{ . }}</a></p>
+                    <p><a itemprop="telephone" href="{{ .value }}" title="{{ safeHTML (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label )) }}">{{ .label }}</a></p>
                   {{ end }}
                 </div>
               {{ end }}
               {{ $a11y_name := .name | default (i18n "commons.contact.empty_name") }}
-              {{ with .socials }}
+              {{ with .social_networks }}
                 <div>
                   <p class="meta">{{- i18n "commons.contact.socials.title" -}}</p>
                   <ul class="socials-list">
@@ -86,6 +67,7 @@
                   </ul>
                 </div>
               {{ end }}
+            {{ end }}
               {{ if .timetable}}
                 {{ $time_size := "full-size" }}
                 {{ if and (or .emails .url) .phone_numbers .socials }}
@@ -133,15 +115,9 @@
                   {{ end }}
                 </ul>
               {{ end }}
-            </div>
-            
-          </address>
-  
-          
+          </div>
         </div>
       </div>
-
-
     </div>
   </div>
 {{- end -}}

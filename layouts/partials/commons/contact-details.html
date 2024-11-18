@@ -68,37 +68,8 @@
           {{ end }}
         </ul>
       {{ end }}
-      {{ if or .address .city .zipcode .country .phone }}
-        <ul>
-          {{ if or .address .city .zipcode .country }}
-            <li>
-              <span>{{ i18n "commons.contact.address" }}</span>
-              <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                {{ with .address }}
-                  <span itemprop="streetAddress">
-                    {{ partial "PrepareHTML" .label }},
-                  </span>
-                  <br>
-                {{ end }}
-                {{ with .city }}
-                  <span itemprop="addressLocality">
-                    {{ partial "PrepareHTML" .label }}
-                  </span>
-                {{ end }}
-                {{ with .zipcode }}
-                  <span itemprop="postalCode">
-                    {{ partial "PrepareHTML" .label }}
-                  </span>
-                {{ end }}
-                {{ with .country }}
-                  <span itemprop="addressCountry">
-                    {{ partial "PrepareHTML" .label }}
-                  </span>
-                {{ end }}
-              </address>
-            </li>
-          {{ end }}
-        </ul>
+      {{ with .postal_address }}
+        {{ partial "commons/address.html" . }}
       {{ end }}
     </div>
   {{ end }}

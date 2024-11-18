@@ -35,6 +35,15 @@
     @include media-breakpoint-up(desktop)
         &.toggle-icon::after
                 margin-left: 0
+    .upper-menu &
+        &.toggle-both,
+        &.toggle-text
+            white-space: nowrap
+            padding: 0
+        @include media-breakpoint-down(desktop)
+            &.toggle-both::after
+                margin-left: space()
+            
 .search__close
     @include icon-block(close-line, after)
     position: fixed

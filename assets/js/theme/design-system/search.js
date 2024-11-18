@@ -1,6 +1,10 @@
 /* eslint-disable no-undef */
 import { focusTrap } from '../utils/focus-trap';
 
+const CLASSES = {
+    modalOpened: 'has-search-opened'
+};
+
 class Search {
     constructor (container) {
         this.state = {
@@ -93,8 +97,10 @@ class Search {
             message = this.element.querySelector('.pagefind-ui__message'),
             results = this.element.querySelector('.pagefind-ui__results');
 
-        this.input.value = '';
-        this.searchInstance.triggerSearch(false);
+        if (this.input) {
+            this.input.value = '';
+            this.searchInstance.triggerSearch(false);
+        }
 
         if (message) {
             message.innerText = '';
@@ -125,6 +131,9 @@ class Search {
         this.state.isOpened = open;
         this.element.setAttribute('aria-hidden', !this.state.isOpened);
         this.button.setAttribute('aria-expanded', this.state.isOpened);
+
+        const classAction = this.state.isOpened ? 'add' : 'remove';
+        document.documentElement.classList[classAction](CLASSES.modalOpened);
 
         if (open) {
             this.input = this.element.querySelector('input');

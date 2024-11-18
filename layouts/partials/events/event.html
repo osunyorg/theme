@@ -24,34 +24,21 @@
         </hgroup>
       {{ end }}
 
-      {{ if and $options.dates (or .Params.dates.computed.short .Params.dates.computed.two_lines.short .Params.dates.from.hour .Params.dates.to.hour) }}
-        <div class="event-dates" itemprop="startDate" content="{{- if .Params.dates.from.day -}}{{ .Params.dates.from.day }}{{- end -}}{{- if .Params.dates.from.hour -}}T{{ .Params.dates.from.hour }}{{- end -}}">
-          <span>
-            {{ $date_format := .Params.dates.computed.two_lines.short }}
-            {{ if ne $layout "list" }}
-              {{ $date_format = .Params.dates.computed.short }}
-            {{ end }}
-            {{ partial "PrepareHTML" $date_format }}
-          </span>
-          {{- if (or .Params.dates.from.hour .Params.dates.to.hour) }}
-            <div class="event-time">
-              {{- if .Params.dates.from.hour }}
-                <span>{{ .Params.dates.from.hour }}</span>
-              {{ end -}}
-              {{- if .Params.dates.to.hour }}
-                <span>{{ .Params.dates.to.hour }}</span>
-              {{ end -}}
-            </div>
-          {{ end -}}
-        </div>
+      {{ $dates := .Params.dates }}
+      {{ if $options.dates }}
+        {{ partial "events/event-schedule" (dict 
+            "dates" $dates
+            "layout" $layout 
+          )}}
       {{ end }}
-      {{ if and .Params.dates.status $options.status }}
+
+      {{ if and $dates.status $options.status }}
         <p class="event-status">
-          {{ if eq .Params.dates.status "current"}}
+          {{ if eq $dates.status "current"}}
             {{- i18n "blocks.events.current" -}}
-          {{ else if eq .Params.dates.status "future" }}
+          {{ else if eq $dates.status "future" }}
             {{- i18n "blocks.events.future" -}}
-          {{ else if eq .Params.dates.status "archive" }}
+          {{ else if eq $dates.status "archive" }}
             {{- i18n "blocks.events.archive" -}}
           {{ end }}
         </p>

@@ -1,7 +1,7 @@
 {{ $locations := .locations }}
 {{ $popup_opened := .popup_opened | default false }}
 
-<div class="locations-map" aria-hidden="true">
+<div class="locations-map">
   <div class="map" data-open-popup="{{ $popup_opened }}" data-marker-icon="{{ "/assets/images/map-marker.svg" }}">
     {{ range $locations }}
       {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}
@@ -20,12 +20,8 @@
                   </a>
                 {{ end -}}
               </p>
-              {{ with .Params.contact_details }}
-                <span>{{ .address.value }}</span>
-                <span>
-                  {{ .zipcode.value }}
-                  {{ .city.value }}
-                </span>
+              {{ with .Params.contact_details.postal_address }}
+                {{ partial "commons/address" . }}
               {{ end }}
             </div>
           {{ end -}}

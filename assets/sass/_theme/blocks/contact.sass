@@ -2,17 +2,25 @@
     .top
         @include top-flex
         margin-bottom: 0
-        + .informations
+        + .contact-content
             margin-top: $spacing-4
 
-    .informations
+    .contact-content
         p,
         p + p
             margin-top: 0
 
-    address
-        [itemprop="name"]
-            @include h4
+    .contact-content
+        .informations
+            [itemprop="name"]
+                @include h4
+            @include in-page-without-sidebar
+                display: flex
+                gap: var(--grid-gutter)
+                [itemprop="name"]
+                    width: columns(4)
+                p + p
+                    flex: 1
         a
             @extend %underline-on-hover
         .contacts
@@ -93,7 +101,7 @@
     @include in-page-without-sidebar
         .top
             margin-bottom: $spacing-4
-        .informations
+        .contact-content
             .contacts
                 @include grid(3)
         .schedule-table
@@ -113,6 +121,9 @@
                             text-align: left
 
     @include in-page-with-sidebar
+        .informations
+            p + p
+                margin-top: $spacing-2
         .contacts
             @include grid(2)
             row-gap: $spacing-3

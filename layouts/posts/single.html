@@ -18,6 +18,10 @@
 
     {{ partial "posts/after-contents.html" . }}
 
+    {{ if site.Params.posts.single.author_signature }}
+      {{ partial "posts/signature.html" . }}
+    {{ end }}
+
     {{ partial "commons/siblings-navigation.html" (dict
       "context" .
       "previous_label" (i18n "posts.previous")

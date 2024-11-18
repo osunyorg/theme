@@ -6,7 +6,9 @@ window.osuny.Extendable = function (element) {
     this.element = element;
     this.buttons = document.querySelectorAll('[aria-controls=' + this.element.id + ']');
     this.state = {
-        opened: false
+        opened: false,
+        // Button who opened the extendable
+        openedByButton: null
     };
     this.options = {
         // This attribute determine if extendable should close others when opened
@@ -20,10 +22,19 @@ window.osuny.Extendable.prototype.listen = function () {
         a11yClick(button, function (event) {
             event.preventDefault();
             this.toggle();
+            this.a11yFocus(button);
         }.bind(this));
     }.bind(this));
 
     this.element.addEventListener('extendable-close', this.toggle.bind(this, true));
+};
+
+window.osuny.Extendable.prototype.a11yFocus = function (button) {
+    if (this.state.opened) {
+        this.state.openedByButton = button;
+    } else if (this.state.openedByButton) {
+        this.state.openedByButton.focus();
+    }
 };
 
 window.osuny.Extendable.prototype.toggle = function (forceClose) {
@@ -34,15 +45,18 @@ window.osuny.Extendable.prototype.toggle = function (forceClose) {
     }
 
     this.buttons.forEach(function (button) {
-        button.setAttribute('aria-expanded', this.state.opened);
+        if (button.getAttribute('aria-expanded')) {
+            button.setAttribute('aria-expanded', this.state.opened);
+        }
     }.bind(this));
 };
 
 window.osuny.Extendable.prototype.closeSiblings = function () {
-    var siblings = this.element.parentNode.querySelectorAll('button[aria-expanded="true"]');
-
-    siblings.forEach(function (button) {
-        button.click();
+    var extendables = this.element.parentNode.querySelectorAll('.extendable');
+    extendables.forEach(function (extendable) {
+        if (this.element !== extendable) {
+            extendable.dispatchEvent(new Event('extendable-close'));
+        }
     }.bind(this));
 };
 
