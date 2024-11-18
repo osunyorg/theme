@@ -103,6 +103,7 @@ window.osuny.Lightbox.prototype._clear = function () {
 
     setButtonEnability(this.contentElements.previousButton, false);
     setButtonEnability(this.contentElements.nextButton, false);
+    this.closeExtendables();
 };
 
 window.osuny.Lightbox.prototype._update = function (data) {

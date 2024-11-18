@@ -40,9 +40,8 @@ window.osuny.Popup.prototype = {
         }.bind(this));
     },
 
-    toggle (open, triggerElement) {
-        var classAction,
-            closeEvent = new Event('extendable-close');
+    toggle: function (open, triggerElement) {
+        var classAction;
         this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
         classAction = this.state.opened ? 'add' : 'remove';
 
@@ -52,10 +51,7 @@ window.osuny.Popup.prototype = {
         this.element.classList[classAction](CLASSES.popupIsOpened);
 
         if (!this.state.opened) {
-            // Close extendables boxes
-            this.extendables.forEach(function (extendable) {
-                extendable.dispatchEvent(closeEvent);
-            });
+            this.closeExtendables();
         }
 
         this.updateDocumentAccessibility();
@@ -69,6 +65,14 @@ window.osuny.Popup.prototype = {
         if (!this.state.opened && this.lastTriggerElement) {
             this.lastTriggerElement.focus();
         }
+    },
+
+    closeExtendables: function () {
+        // Close extendables boxes
+        var closeEvent = new Event('extendable-close');
+        this.extendables.forEach(function (extendable) {
+            extendable.dispatchEvent(closeEvent);
+        });
     },
 
     updateDocumentAccessibility: function () {
