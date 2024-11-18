@@ -12,14 +12,17 @@
     <span>{{ i18n "posts.date" }}</span>
     <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
   </li>
-  {{ range .GetTerms "authors" }}
     <li>
+      {{/*  TODO gestion pluriel et style de la liste des auteurices */}}
       <span>{{ i18n "posts.author" }}</span>
-      <a href="{{ .Permalink }}" itemprop="url">
-        <span itemprop="name">{{ safeHTML .Params.person }}
-      </a>
+      <div class="post-infos-authors">
+        {{ range .GetTerms "authors" }}
+          <a href="{{ .Permalink }}" itemprop="url">
+            <span itemprop="name">{{ safeHTML .Params.person }}
+          </a>
+        {{ end }}
+      </div>
     </li>
-  {{ end }}
   {{ with .Params.contents_reading_time }}
     <li class="reading-time">
       <span>{{ i18n "posts.reading_time" }}</span>
