@@ -24,13 +24,13 @@ window.osuny.SliderAutoplayer.prototype.start = function () {
     this.slider.container.classList.remove('is-paused');
 
     this.timeoutId = setTimeout(function () {
-        this.slider.state.updatingByAutoplayer = true;
+        this.state.isActive = true;
         if (this.slider.state.isLast) {
             this.slider.goTo(0);
         } else {
             this.slider.next();
         }
-        this.slider.state.updatingByAutoplayer = false;
+        this.state.isActive = false;
     }.bind(this), this.interval);
 };
 
@@ -40,17 +40,10 @@ window.osuny.SliderAutoplayer.prototype.stop = function () {
 };
 
 window.osuny.SliderAutoplayer.prototype.update = function () {
-    if (this.slider.state.updatingByAutoplayer) {
+    if (this.state.isActive) {
         this.start();
     } else {
         this.stop();
     }
 };
 
-window.osuny.SliderAutoplayer.prototype.update = function () {
-    if (this.slider.state.updatingByAutoplayer) {
-        this.start();
-    } else {
-        this.stop();
-    }
-};

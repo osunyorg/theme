@@ -1,5 +1,7 @@
 .slider
     --slider-pagination-interval: 2s // This value is override by slider javascript
+    &:not(.is-ready)
+        display: none !important
     &-list
         display: flex
         position: relative
@@ -39,8 +41,10 @@
             button
                 @include button-reset
                 height: pxToRem(44)
-                margin-top: pxToRem(-22)
+                top: pxToRem(-23.5)
+                position: relative
                 width: 100%
+                outline-offset: 0
             &::before
                 content: ''
                 background-color: var(--color-border)

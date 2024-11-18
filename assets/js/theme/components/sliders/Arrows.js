@@ -41,5 +41,4 @@ window.osuny.SliderArrows.prototype.addProgression = function () {
     this.progression = document.createElement('div');
     this.progression.classList.add('slider-progression');
     this.next.before(this.progression);
-    this.update();
 };

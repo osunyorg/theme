@@ -15,7 +15,6 @@ window.osuny.SliderPagination.prototype.create = function () {
     for (i = 0; i < this.slider.slides.length; i += 1) {
         this.createButton(i);
     }
-    this.update();
 };
 
 window.osuny.SliderPagination.prototype.createButton = function (index) {

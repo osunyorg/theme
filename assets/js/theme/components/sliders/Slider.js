@@ -2,8 +2,8 @@ window.osuny = window.osuny || {};
 
 window.osuny.sliderComponents = {
     arrows: window.osuny.SliderArrows,
-    pagination: window.osuny.SliderPagination,
-    autoplay: window.osuny.SliderAutoplayer
+    autoplay: window.osuny.SliderAutoplayer,
+    pagination: window.osuny.SliderPagination
 };
 
 window.osuny.Slider = function (list) {
@@ -12,6 +12,10 @@ window.osuny.Slider = function (list) {
     this.setOptions();
     this.setup();
     this.touchControl = new window.osuny.TouchControl(this);
+
+    // update after everything is setup
+    this.container.classList.add('is-ready');
+    setTimeout(this.update.bind(this), 1);
 };
 
 window.osuny.Slider.prototype.setState = function () {
@@ -19,7 +23,6 @@ window.osuny.Slider.prototype.setState = function () {
         active: false,
         index: 0,
         isFirst: true,
-        updatingByAutoplayer: false,
         isLast: false
     };
 };
