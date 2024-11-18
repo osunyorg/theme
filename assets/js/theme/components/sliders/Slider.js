@@ -80,20 +80,18 @@ window.osuny.Slider.prototype.addComponents = function () {
 };
 
 window.osuny.Slider.prototype.next = function () {
-    this.moveIf(1, !this.state.isLast);
+    this.goTo(this.state.index + 1);
 };
 
 window.osuny.Slider.prototype.previous = function () {
-    this.moveIf(-1, !this.state.isFirst);
-};
-
-window.osuny.Slider.prototype.moveIf = function (numberOfSlides, condition) {
-    if (condition) {
-        this.goTo(this.state.index + numberOfSlides);
-    }
+    this.goTo(this.state.index - 1);
 };
 
 window.osuny.Slider.prototype.goTo = function (index) {
+    if (index <= 0 || index > this.slides.length - 1) {
+        return;
+    }
+
     this.state.index = index;
     this.state.isFirst = this.state.index === 0;
     this.state.isLast = this.state.index === this.slides.length - 1;
