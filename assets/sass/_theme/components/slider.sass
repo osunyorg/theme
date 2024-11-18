@@ -61,9 +61,24 @@
                 &::after
                     transition: width var(--slider-pagination-interval) linear
                     width: 100%
+    &-autoplayer
+        button
+            @include button-reset
+            @include icon-block(pause-line)
+            align-items: center
+            border: 1px solid var(--color-border)
+            border-radius: 50%
+            display: flex
+            height: $minimum-accessible-size
+            justify-content: center
+            width: $minimum-accessible-size
     &.is-paused
         .slider-pagination
             li.is-current
                 &::after
                     transition-duration: 0s
                     width: 100%
+        .slider-autoplayer
+            button
+                @include icon-block(play-fill)
+                
