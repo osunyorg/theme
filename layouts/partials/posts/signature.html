@@ -3,9 +3,7 @@
     <div class="block-content">
       <ul class="signatures" aria-label="{{ i18n "posts.authors.a11y_title" }}">
         {{ range .GetTerms "authors" }}
-          {{ $personId := .Params.hugo.slug }}
-          {{ $person := site.GetPage (printf "persons/%s" $personId)}}
-
+          {{ $person := site.GetPage (printf "persons/%s" .Params.person)}}
           <li>
             <div class="author-content">
               <a href="{{ .Permalink }}" itemprop="url">
@@ -17,7 +15,7 @@
             {{ if and $person $person.Params.image }}
               <div class="avatar">
                 {{ partial "commons/image.html" (dict
-                  "image" $person.Params.image
+                    "image" $person.Params.image
                 )}}
               </div>
             {{ end }}
