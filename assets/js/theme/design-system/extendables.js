@@ -62,7 +62,7 @@ window.osuny.Extendable.prototype.closeSiblings = function () {
 
 (function () {
     var extendables = document.querySelectorAll('.extendable, .collapse');
-    Array.prototype.forEach.call(extendables, function (element) {
+    extendables.forEach(function (element) {
         new window.osuny.Extendable(element);
     });
 }());

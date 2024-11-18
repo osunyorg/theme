@@ -21,19 +21,36 @@ window.osuny.SliderAutoplayer.prototype.start = function () {
     // Avoid multiple timeout
     clearTimeout(this.timeoutId);
 
+    this.slider.container.classList.remove('is-paused');
+
     this.timeoutId = setTimeout(function () {
+        this.slider.state.updatingByAutoplayer = true;
         if (this.slider.state.isLast) {
             this.slider.goTo(0);
         } else {
             this.slider.next();
         }
+        this.slider.state.updatingByAutoplayer = false;
     }.bind(this), this.interval);
 };
 
 window.osuny.SliderAutoplayer.prototype.stop = function () {
     clearTimeout(this.timeoutId);
+    this.slider.container.classList.add('is-paused');
 };
 
 window.osuny.SliderAutoplayer.prototype.update = function () {
-    this.start();
+    if (this.slider.state.updatingByAutoplayer) {
+        this.start();
+    } else {
+        this.stop();
+    }
+};
+
+window.osuny.SliderAutoplayer.prototype.update = function () {
+    if (this.slider.state.updatingByAutoplayer) {
+        this.start();
+    } else {
+        this.stop();
+    }
 };

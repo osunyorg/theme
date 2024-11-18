@@ -18,7 +18,7 @@ window.osuny.Timeline.prototype.getMaxTitleHeight = function () {
         events = this.timeline.querySelectorAll('.timeline-event');
 
     // On vient regarder dans tous les .timeline-event pour vérifier quel est le titre le plus long
-    Array.prototype.forEach.call(events, function (event) {
+    events.forEach(function (event) {
         var titleHeight = this.getTitleHeight(event);
         if (titleHeight > maxTitleHeight) {
             maxTitleHeight = titleHeight;
@@ -34,8 +34,8 @@ window.osuny.Timeline.prototype.getTitleHeight = function (event) {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    var timelines = document.getElementsByClassName('block-timeline--horizontal');
-    Array.prototype.forEach.call(timelines, function (timeline) {
+    var timelines = document.querySelectorAll('.block-timeline--horizontal');
+    timelines.forEach(function (timeline) {
         new window.osuny.Timeline(timeline);
     });
 });

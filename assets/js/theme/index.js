@@ -1,3 +1,4 @@
+import './polyfills';
 import './body.js';
 import './design-system/accordion.js';
 import './design-system/clickToCopy';
@@ -10,6 +11,7 @@ import './design-system/notes';
 import './design-system/search';
 import './design-system/toc';
 import './design-system/Popup';
+import './design-system/Lightbox';
 import './blocks/keyFigures';
 import './blocks/organizations';
 import './blocks/draggableBlocks.js';
@@ -17,6 +19,5 @@ import './blocks/timeline.js';
 import './blocks/videos.js';
 import './blocks/locations.js';
 import './utils/utils.js';
-import './design-system/lightbox.js';
 import './components/sliders';
 

@@ -32,9 +32,6 @@
         display: flex
         column-gap: $spacing-1
         margin-top: $spacing-3
-        &.is-paused
-            li.is-current
-                transition: 0
         li
             flex-grow: 1
             position: relative
@@ -60,7 +57,11 @@
                 top: pxToRem(-1)
             &.is-current
                 &::after
-                    width: 100%
                     transition: width var(--slider-pagination-interval) linear
-
-
+                    width: 100%
+    &.is-paused
+        .slider-pagination
+            li.is-current
+                &::after
+                    transition-duration: 0s
+                    width: 100%

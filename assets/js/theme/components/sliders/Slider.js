@@ -1,5 +1,11 @@
 window.osuny = window.osuny || {};
 
+window.osuny.sliderComponents = {
+    arrows: window.osuny.SliderArrows,
+    pagination: window.osuny.SliderPagination,
+    autoplay: window.osuny.SliderAutoplayer
+};
+
 window.osuny.Slider = function (list) {
     this.list = list;
     this.setState();
@@ -13,6 +19,7 @@ window.osuny.Slider.prototype.setState = function () {
         active: false,
         index: 0,
         isFirst: true,
+        updatingByAutoplayer: false,
         isLast: false
     };
 };
@@ -60,22 +67,13 @@ window.osuny.Slider.prototype.setup = function () {
 };
 
 window.osuny.Slider.prototype.addComponents = function () {
-    this.components = [];
+    this.components = {};
 
-    if (this.options.arrows) {
-        this.arrows = new window.osuny.SliderArrows(this);
-        this.components.push(this.arrows);
-    }
-
-    if (this.options.pagination) {
-        this.pagination = new window.osuny.SliderPagination(this);
-        this.components.push(this.pagination);
-    }
-
-    if (this.options.autoplay) {
-        this.autoplayer = new window.osuny.SliderAutoplayer(this);
-        this.components.push(this.autoplayer);
-    }
+    ['arrows', 'pagination', 'autoplay'].forEach(function (name) {
+        if (this.options[name]) {
+            this.components[name] = new window.osuny.sliderComponents[name](this);
+        }
+    }.bind(this));
 };
 
 window.osuny.Slider.prototype.next = function () {
@@ -100,6 +98,7 @@ window.osuny.Slider.prototype.goTo = function (index) {
 };
 
 window.osuny.Slider.prototype.update = function () {
+    var componentKey;
     this.slides.forEach(function (slide, index) {
         slide.classList.remove('is-current', 'is-visible', 'is-next', 'is-previous');
         if (index < this.state.index) {
@@ -111,9 +110,9 @@ window.osuny.Slider.prototype.update = function () {
         }
     }.bind(this));
 
-    this.components.forEach(function (component) {
-        component.update();
-    });
+    for (componentKey in this.components) {
+        this.components[componentKey].update();
+    }
 };
 
 window.osuny.Slider.prototype.translate = function () {
