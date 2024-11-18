@@ -1,5 +1,6 @@
 window.osuny = window.osuny || {};
 window.osuny.SlidersFactory = window.osuny.SlidersFactory || {};
+window.osuny.lightbox = window.osuny.lightbox || {};
 
 window.osuny.SlidersFactory = function () {
     this.sliders = [];
@@ -19,6 +20,9 @@ window.osuny.SlidersFactory.prototype.listen = function () {
     window.addEventListener('scroll', this.onScroll.bind(this));
 
     window.addEventListener('keydown', function (event) {
+        if (window.osuny.lightbox.isOpen()) {
+            return;
+        }
         if (this.activeSlider && event.key === 'ArrowLeft') {
             this.activeSlider.previous();
         } else if (this.activeSlider && event.key === 'ArrowRight') {

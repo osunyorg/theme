@@ -33,32 +33,30 @@
         @include list-reset
         display: flex
         column-gap: $spacing-1
-        margin-top: $spacing-3
         li
             flex-grow: 1
             position: relative
-            height: pxToRem(3)
             button
                 @include button-reset
-                height: pxToRem(44)
-                top: pxToRem(-23.5)
-                position: relative
-                width: 100%
+                display: block
+                height: $minimum-accessible-size
                 outline-offset: 0
-            &::before
+                width: 100%
+            &::before, &::after
                 content: ''
+                display: block
+                left: 0
+                right: 0
+                position: absolute
+                top: 50%
+            &::before
                 background-color: var(--color-border)
                 height: pxToRem(1)
-                top: 0
-                display: block
             &::after
                 background-color: var(--color-accent)
-                content: ''
-                position: absolute
-                display: block
                 width: 0%
                 height: pxToRem(3)
-                top: pxToRem(-1)
+                margin-top: pxToRem(-1)
             &.is-current
                 &::after
                     transition: width var(--slider-pagination-interval) linear

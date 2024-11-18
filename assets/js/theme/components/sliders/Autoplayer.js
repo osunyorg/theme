@@ -14,6 +14,12 @@ window.osuny.SliderAutoplayer = function (slider) {
 
 window.osuny.SliderAutoplayer.prototype.setup = function () {
     this.slider.container.style.setProperty('--slider-pagination-interval', this.interval + 'ms');
+    this.container = document.createElement('div');
+    this.container.classList.add('slider-autoplayer');
+    this.button = document.createElement('button');
+    this.button.innerHTML = '<span class="sr-only">jouer/arrêter</span>';
+    this.container.append(this.button);
+    this.slider.container.append(this.container);
     this.start();
 };
 

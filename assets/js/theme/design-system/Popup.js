@@ -84,5 +84,9 @@ window.osuny.Popup.prototype = {
                 element[action]('inert', '');
             }
         }.bind(this));
+    },
+
+    isOpen: function () {
+        return this.state.opened;
     }
 };
