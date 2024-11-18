@@ -18,17 +18,18 @@ window.osuny.SlidersFactory = function () {
 
 window.osuny.SlidersFactory.prototype.listen = function () {
     window.addEventListener('scroll', this.onScroll.bind(this));
+    window.addEventListener('keydown', this.onKeydown.bind(this));
+};
 
-    window.addEventListener('keydown', function (event) {
-        if (window.osuny.lightbox.isOpen()) {
-            return;
-        }
-        if (this.activeSlider && event.key === 'ArrowLeft') {
-            this.activeSlider.previous();
-        } else if (this.activeSlider && event.key === 'ArrowRight') {
-            this.activeSlider.next();
-        }
-    }.bind(this));
+window.osuny.SlidersFactory.prototype.onKeydown = function (event) {
+    if (window.osuny.lightbox.isOpen()) {
+        return;
+    }
+    if (this.activeSlider && event.key === 'ArrowLeft') {
+        this.activeSlider.previous();
+    } else if (this.activeSlider && event.key === 'ArrowRight') {
+        this.activeSlider.next();
+    }
 };
 
 window.osuny.SlidersFactory.prototype.onScroll = function () {
