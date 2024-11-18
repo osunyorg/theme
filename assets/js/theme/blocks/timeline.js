@@ -34,8 +34,5 @@ window.osuny.Timeline.prototype.getTitleHeight = function (event) {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    var timelines = document.querySelectorAll('.block-timeline--horizontal');
-    timelines.forEach(function (timeline) {
-        new window.osuny.Timeline(timeline);
-    });
+    window.osuny.utils.instanciateAll('.block-timeline--horizontal', window.osuny.Timeline);
 });

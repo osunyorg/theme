@@ -61,8 +61,5 @@ window.osuny.Extendable.prototype.closeSiblings = function () {
 };
 
 (function () {
-    var extendables = document.querySelectorAll('.extendable, .collapse');
-    extendables.forEach(function (element) {
-        new window.osuny.Extendable(element);
-    });
+    window.osuny.utils.instanciateAll('.extendable, .collapse', window.osuny.Extendable);
 }());
