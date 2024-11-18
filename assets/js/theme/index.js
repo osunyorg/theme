@@ -19,4 +19,3 @@ import './blocks/timeline.js';
 import './blocks/videos.js';
 import './blocks/locations.js';
 import './components/sliders';
-

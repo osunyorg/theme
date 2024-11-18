@@ -1,4 +1,6 @@
+import * as params from '@params';
 window.osuny = window.osuny || {};
+window.osuny.i18n = params.i18n;
 
 window.osuny.sliderComponents = {
     arrows: window.osuny.SliderArrows,

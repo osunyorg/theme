@@ -19,10 +19,12 @@ window.osuny.SliderPagination.prototype.create = function () {
 
 window.osuny.SliderPagination.prototype.createButton = function (index) {
     var item = document.createElement('li'),
-        button = document.createElement('button');
+        button = document.createElement('button'),
+        a11yText = window.osuny.i18n.slider.goto + (index + 1);
+
+    window.osuny.utils.insertSROnly(button, a11yText);
 
     item.appendChild(button);
-
     this.container.appendChild(item);
     this.buttons.push(button);
     this.items.push(item);

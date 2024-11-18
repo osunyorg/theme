@@ -20,6 +20,7 @@ window.osuny.SliderArrows = function (slider) {
 window.osuny.SliderArrows.prototype.create = function (direction) {
     var button = document.createElement('button');
     button.classList.add('slider-arrow', 'slider-arrow-' + direction);
+    window.osuny.utils.insertSROnly(button, window.osuny.i18n.slider[direction]);
     this.container.appendChild(button);
     return button;
 };
