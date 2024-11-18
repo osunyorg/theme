@@ -1,4 +1,5 @@
 import './polyfills';
+import './utils/utils.js';
 import './body.js';
 import './design-system/accordion.js';
 import './design-system/clickToCopy';
@@ -18,6 +19,5 @@ import './blocks/draggableBlocks.js';
 import './blocks/timeline.js';
 import './blocks/videos.js';
 import './blocks/locations.js';
-import './utils/utils.js';
 import './components/sliders';
 
