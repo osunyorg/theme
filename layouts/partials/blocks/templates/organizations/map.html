@@ -21,8 +21,8 @@
   {{ end -}}
 </div>
 <div class="transcription">
-  <details id="{{$id}}" class="map-transcription">
-    <summary aria-controls="#{{ $id }}" aria-expanded="false">{{ i18n "commons.accessibility.map_transcription" }}</summary>
+  <details id="{{- $id -}}" class="map-transcription">
+    <summary aria-controls="#{{- $id -}}" aria-expanded="false">{{ i18n "commons.accessibility.map_transcription" }}</summary>
     <ul>
       {{ range .organizations }}
         {{ if .slug }}
@@ -44,7 +44,9 @@
                   {{ end -}}
                   </p>
               {{ end -}}
-              {{ partial "commons/address.html" (dict "context" . )}}
+              {{ with .Params.contact_details.postal_address }}
+                {{ partial "commons/address.html" . }}
+              {{ end }}
               {{ if and $options.summary .Params.summary }}
                 <div class="summary">
                   {{ safeHTML .Params.summary }}

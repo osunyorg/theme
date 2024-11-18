@@ -4,12 +4,8 @@
   <div itemscope itemtype="https://schema.org/CollegeOrUniversity">
     <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
-    {{ if or (.address) (.country) -}}
-      <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-        {{ if .address }}<span itemprop="streetAddress">{{ trim .address "\n" }}</span>{{ end }}
-        {{ if .zipcode }}<span itemprop="postalCode">{{ trim .zipcode "\n" }}</span> {{ end }}{{ if .city }}<span itemprop="addressLocality">{{ trim .city "\n" }}</span>{{ end }}
-        {{ if .country }}<span itemprop="addressCountry">{{ trim .country "\n" }}</span>{{ end }}
-      </address>
+    {{ with .contact_details.postal_address }}
+        {{ partial "commons/address.html" . }}
     {{ end }}
     {{- if .phone -}}
       <p>
@@ -24,14 +20,8 @@
   <div itemscope itemtype="https://schema.org/ResearchOrganization">
     <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
-    {{ if or .address .country }}
-    <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-      {{ if .address_name }}<span itemprop="name">{{ .address_name }}</span>{{ end }}
-      {{ if .address }}<span itemprop="streetAddress">{{ .address }}</span>{{ end }}
-      {{ if .address_additional }}<span itemprop="description">{{ .address_additional }}</span>{{ end }}
-      {{ if .zipcode }}<span itemprop="postalCode">{{ .zipcode }}</span> {{ end }}{{ if .city }}<span itemprop="addressLocality">{{ .city }}</span>{{ end }}
-      {{ if .country }}<span itemprop="addressCountry">{{ .country }}</span>{{ end }}
-    </address>
+    {{ with .contact_details.postal_address }}
+        {{ partial "commons/address.html" . }}
     {{ end }}
     {{- if .phone -}}
       <p>

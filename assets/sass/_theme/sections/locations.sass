@@ -30,10 +30,11 @@
     &--list
         @include media-breakpoint-up(desktop)
             .location
-                border-bottom: 1px solid var(--color-border)
                 flex-direction: row-reverse
                 gap: var(--grid-gutter)
-                padding-bottom: $spacing-3
+                &:not(:last-child)
+                    border-bottom: 1px solid var(--color-border)
+                    padding-bottom: $spacing-3
                 + .location
                     margin-top: $spacing-3
                 &-content
@@ -71,10 +72,6 @@
             margin-top: $spacing-5
         hgroup + address
             margin-top: $spacing-3
-        address
-            span[itemprop="streetAddress"],
-            span[itemprop="addressCountry"]
-                display: block
     .document-content
         > .diplomas
             h2
@@ -93,6 +90,11 @@
                             aspect-ratio: 1
                     &:last-child
                         border-bottom: none
+
+.locations__taxonomy
+    .location
+        address
+            @extend .sr-only
 .locations-map
     .map
         height: 300px
