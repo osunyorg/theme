@@ -80,11 +80,15 @@ window.osuny.Slider.prototype.addComponents = function () {
 };
 
 window.osuny.Slider.prototype.next = function () {
-    this.goTo(this.state.index + 1);
+    this.move(1);
 };
 
 window.osuny.Slider.prototype.previous = function () {
-    this.goTo(this.state.index - 1);
+    this.move(-1);
+};
+
+window.osuny.Slider.prototype.move = function (numberOfSlides) {
+    this.goTo(this.state.index + numberOfSlides);
 };
 
 window.osuny.Slider.prototype.goTo = function (index) {
