@@ -11,6 +11,7 @@ window.osuny.Slider = function (list) {
     this.setState();
     this.setOptions();
     this.setup();
+    this.listen();
     this.touchControl = new window.osuny.TouchControl(this);
 
     // update after everything is setup
@@ -59,6 +60,10 @@ window.osuny.Slider.prototype.setup = function () {
     this.track.append(this.list);
     this.container.append(this.track);
 
+    this.controls = document.createElement('div');
+    this.controls.classList.add('slider-controls');
+    this.container.append(this.controls);
+
     // Append slides to list
     Array.prototype.slice.call(this.list.children).forEach(function (slide) {
         slide.classList.add('slider-slide');
@@ -79,20 +84,32 @@ window.osuny.Slider.prototype.addComponents = function () {
     }.bind(this));
 };
 
+window.osuny.Slider.prototype.listen = function () {
+    window.addEventListener('resize', this.update.bind(this));
+};
+
+window.osuny.Slider.prototype.loop = function () {
+    if (this.state.isLast) {
+        this.goTo(0);
+    } else {
+        this.next();
+    }
+};
+
 window.osuny.Slider.prototype.next = function () {
-    this.move(1);
+    this.offset(1);
 };
 
 window.osuny.Slider.prototype.previous = function () {
-    this.move(-1);
+    this.offset(-1);
 };
 
-window.osuny.Slider.prototype.move = function (numberOfSlides) {
+window.osuny.Slider.prototype.offset = function (numberOfSlides) {
     this.goTo(this.state.index + numberOfSlides);
 };
 
 window.osuny.Slider.prototype.goTo = function (index) {
-    if (index <= 0 || index > this.slides.length - 1) {
+    if (index < 0 || index > this.slides.length - 1) {
         return;
     }
 

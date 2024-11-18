@@ -6,7 +6,7 @@ window.osuny.SliderPagination = function (slider) {
     this.buttons = [];
     this.container = document.createElement('ul');
     this.container.classList.add('slider-pagination');
-    this.slider.container.appendChild(this.container);
+    this.slider.controls.appendChild(this.container);
     this.create();
 };
 

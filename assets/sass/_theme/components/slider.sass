@@ -29,10 +29,14 @@
             @include icon(arrow-right-line, before)
     &-progression
         @include meta
+    &-controls
+        display: flex
+        column-gap: $spacing-2
     &-pagination
         @include list-reset
         display: flex
         column-gap: $spacing-1
+        flex-grow: 1
         li
             flex-grow: 1
             position: relative
@@ -76,7 +80,7 @@
         .slider-pagination
             li.is-current
                 &::after
-                    transition-duration: 0s
+                    transition: none
                     width: 100%
         .slider-autoplayer
             button
