@@ -3,7 +3,7 @@
     <div class="block-content">
       <ul class="signatures" aria-label="{{ i18n "posts.authors.a11y_title" }}">
         {{ range .GetTerms "authors" }}
-          {{ $person := site.GetPage (printf "persons/%s" .Slug )}}
+          {{ $person := site.GetPage (printf "persons/%s" .Slug) }}
           <li>
             <div class="author-content">
               <a href="{{ .Permalink }}" itemprop="url">
