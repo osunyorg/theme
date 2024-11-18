@@ -6,7 +6,10 @@ window.osuny.SlidersFactory = function () {
     this.activeSlider = null;
 
     document.querySelectorAll('[data-slider]').forEach(function (element, index) {
-        this.sliders.push(new window.osuny.Slider(element, index));
+        // Check if carousel as more than one slide
+        if (element.children.length > 1) {
+            this.sliders.push(new window.osuny.Slider(element, index));
+        }
     }.bind(this));
 
     this.listen();

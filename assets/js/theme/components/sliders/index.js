@@ -1,3 +1,4 @@
+import './Autoplayer';
 import './Arrows';
 import './TouchControl';
 import './Pagination';

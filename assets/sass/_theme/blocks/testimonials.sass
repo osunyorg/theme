@@ -1,4 +1,6 @@
 .block-testimonials
+    .container
+        overflow: hidden
     blockquote
         @include blockquote
         p
@@ -55,6 +57,14 @@
                         position: absolute
                         top: 0
                         width: columns(2)
+    .slider
+        display: flex
+        flex-direction: column-reverse
+        &-pagination
+            margin-bottom: $spacing-3
+        &-slide
+            &.is-next
+                opacity: 0
     .carousel
         flex-direction: column-reverse
         .toggle
