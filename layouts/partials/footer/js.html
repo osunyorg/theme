@@ -1,5 +1,4 @@
 {{ $isLeafletNeeded := false }}
-{{ $isCarouselNeeded := false }}
 
 {{ if .Params.contents }}
   {{ range .Params.contents }}
@@ -9,16 +8,6 @@
           {{ $isLeafletNeeded = true }}
         {{ end }}
       {{ end }}
-    {{ end }}
-    {{ if eq .template "gallery"}}
-      {{ with .data }}
-        {{ if eq .layout "carousel" }}
-          {{ $isCarouselNeeded = true }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-    {{ if eq .template "testimonials"}}
-      {{ $isCarouselNeeded = true }}
     {{ end }}
   {{ end }}
 {{ end }}

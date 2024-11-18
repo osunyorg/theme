@@ -15,7 +15,6 @@ import './design-system/Popup';
 import './design-system/Lightbox';
 import './blocks/keyFigures';
 import './blocks/organizations';
-import './blocks/draggableBlocks.js';
 import './blocks/timeline.js';
 import './blocks/videos.js';
 import './blocks/locations.js';

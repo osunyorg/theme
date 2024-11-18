@@ -65,7 +65,7 @@ window.osuny.Lightbox.prototype._getData = function (button) {
 
 window.osuny.Lightbox.prototype._setSiblings = function () {
     var figure = this.state.currentData.buttonElement.parentElement,
-        galleryElement = figure.closest('.gallery, .carousel__container'),
+        galleryElement = figure.closest('.gallery'),
         figureIndex = 0;
 
     if (!galleryElement || galleryElement.children.length === 1) {
