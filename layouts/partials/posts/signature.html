@@ -1,0 +1,29 @@
+<div class="block block-signatures">
+  <div class="container">
+    <div class="block-content">
+      <ul class="signatures" aria-label="{{ i18n "posts.authors.a11y_title" }}">
+        {{ range .GetTerms "authors" }}
+          {{ $personId := .Params.hugo.slug }}
+          {{ $person := site.GetPage (printf "persons/%s" $personId)}}
+
+          <li>
+            <div class="author-content">
+              <a href="{{ .Permalink }}" itemprop="url">
+                <span itemprop="name">{{ safeHTML .Params.person }}
+              </a>
+              {{ safeHTML .Params.summary }}
+              <p class="more meta" aria-hidden="true">{{ i18n "posts.authors.more" }}</p>
+            </div>
+            {{ if and $person $person.Params.image }}
+              <div class="avatar">
+                {{ partial "commons/image.html" (dict
+                  "image" $person.Params.image
+                )}}
+              </div>
+            {{ end }}
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</div>
