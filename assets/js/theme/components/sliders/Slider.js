@@ -1,27 +1,27 @@
 import * as params from '@params';
-window.osuny = window.osuny || {};
-window.osuny.i18n = params.i18n;
+var osuny = window.osuny || {};
+osuny.i18n = params.i18n;
 
-window.osuny.sliderComponents = {
-    arrows: window.osuny.SliderArrows,
-    autoplay: window.osuny.SliderAutoplayer,
-    pagination: window.osuny.SliderPagination
+osuny.sliderComponents = {
+    arrows: osuny.SliderArrows,
+    autoplay: osuny.SliderAutoplayer,
+    pagination: osuny.SliderPagination
 };
 
-window.osuny.Slider = function (list) {
+osuny.Slider = function (list) {
     this.list = list;
     this.setState();
     this.setOptions();
     this.setup();
     this.listen();
-    this.touchControl = new window.osuny.TouchControl(this);
+    this.touchControl = new osuny.TouchControl(this);
 
     // update after everything is setup
     this.container.classList.add('is-ready');
     setTimeout(this.update.bind(this), 1);
 };
 
-window.osuny.Slider.prototype.setState = function () {
+osuny.Slider.prototype.setState = function () {
     this.state = {
         active: false,
         index: 0,
@@ -31,7 +31,7 @@ window.osuny.Slider.prototype.setState = function () {
     };
 };
 
-window.osuny.Slider.prototype.setOptions = function () {
+osuny.Slider.prototype.setOptions = function () {
     var data = this.list.getAttribute('data-slider'),
         options = JSON.parse(data);
 
@@ -49,7 +49,7 @@ window.osuny.Slider.prototype.setOptions = function () {
     };
 };
 
-window.osuny.Slider.prototype.setup = function () {
+osuny.Slider.prototype.setup = function () {
     this.list.classList.add('slider-list');
 
     this.container = document.createElement('div');
@@ -77,21 +77,21 @@ window.osuny.Slider.prototype.setup = function () {
     this.addComponents();
 };
 
-window.osuny.Slider.prototype.addComponents = function () {
+osuny.Slider.prototype.addComponents = function () {
     this.components = {};
 
     ['arrows', 'pagination', 'autoplay'].forEach(function (name) {
         if (this.options[name]) {
-            this.components[name] = new window.osuny.sliderComponents[name](this);
+            this.components[name] = new osuny.sliderComponents[name](this);
         }
     }.bind(this));
 };
 
-window.osuny.Slider.prototype.listen = function () {
-    window.addEventListener('resize', this.update.bind(this));
+osuny.Slider.prototype.listen = function () {
+    addEventListener('resize', this.update.bind(this));
 };
 
-window.osuny.Slider.prototype.loop = function () {
+osuny.Slider.prototype.loop = function () {
     if (this.state.isLast) {
         this.goTo(0);
     } else {
@@ -99,19 +99,19 @@ window.osuny.Slider.prototype.loop = function () {
     }
 };
 
-window.osuny.Slider.prototype.next = function () {
+osuny.Slider.prototype.next = function () {
     this.offset(1);
 };
 
-window.osuny.Slider.prototype.previous = function () {
+osuny.Slider.prototype.previous = function () {
     this.offset(-1);
 };
 
-window.osuny.Slider.prototype.offset = function (numberOfSlides) {
+osuny.Slider.prototype.offset = function (numberOfSlides) {
     this.goTo(this.state.index + numberOfSlides);
 };
 
-window.osuny.Slider.prototype.goTo = function (index) {
+osuny.Slider.prototype.goTo = function (index) {
     if (index < 0 || index > this.slides.length - 1) {
         return;
     }
@@ -124,7 +124,7 @@ window.osuny.Slider.prototype.goTo = function (index) {
     this.update();
 };
 
-window.osuny.Slider.prototype.update = function () {
+osuny.Slider.prototype.update = function () {
     var componentKey;
     this.slides.forEach(function (slide, index) {
         slide.classList.remove('is-current', 'is-visible', 'is-next', 'is-previous');
@@ -142,19 +142,19 @@ window.osuny.Slider.prototype.update = function () {
     }
 };
 
-window.osuny.Slider.prototype.translate = function () {
+osuny.Slider.prototype.translate = function () {
     if (!this.state.isGrabbed) {
         this.list.style.transform = 'translateX(' + -this.slides[this.state.index].offsetLeft + 'px)';
     }
 };
 
-window.osuny.Slider.prototype.move = function (gap) {
+osuny.Slider.prototype.move = function (gap) {
     var x = -this.slides[this.state.index].offsetLeft - gap;
     this.state.isGrabbed = true;
     this.list.style.transform = 'translateX(' + x + 'px)';
 };
 
-window.osuny.Slider.prototype.release = function () {
+osuny.Slider.prototype.release = function () {
     this.state.isGrabbed = false;
     this.translate();
 };

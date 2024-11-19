@@ -1,8 +1,8 @@
 import { setButtonEnability } from '../../utils/a11y';
 
-window.osuny = window.osuny || {};
+var osuny = window.osuny || {};
 
-window.osuny.SliderArrows = function (slider) {
+osuny.SliderArrows = function (slider) {
     this.slider = slider;
     this.container = document.createElement('div');
     this.container.classList.add('slider-arrows');
@@ -17,20 +17,20 @@ window.osuny.SliderArrows = function (slider) {
     this.listen();
 };
 
-window.osuny.SliderArrows.prototype.create = function (direction) {
+osuny.SliderArrows.prototype.create = function (direction) {
     var button = document.createElement('button');
     button.classList.add('slider-arrow', 'slider-arrow-' + direction);
-    window.osuny.utils.insertSROnly(button, window.osuny.i18n.slider[direction]);
+    osuny.utils.insertSROnly(button, osuny.i18n.slider[direction]);
     this.container.appendChild(button);
     return button;
 };
 
-window.osuny.SliderArrows.prototype.listen = function () {
+osuny.SliderArrows.prototype.listen = function () {
     this.previous.addEventListener('click', this.slider.previous.bind(this.slider));
     this.next.addEventListener('click', this.slider.next.bind(this.slider));
 };
 
-window.osuny.SliderArrows.prototype.update = function () {
+osuny.SliderArrows.prototype.update = function () {
     setButtonEnability(this.previous, !this.slider.state.isFirst);
     setButtonEnability(this.next, !this.slider.state.isLast);
     if (this.progression) {
@@ -38,7 +38,7 @@ window.osuny.SliderArrows.prototype.update = function () {
     }
 };
 
-window.osuny.SliderArrows.prototype.addProgression = function () {
+osuny.SliderArrows.prototype.addProgression = function () {
     this.progression = document.createElement('div');
     this.progression.classList.add('slider-progression');
     this.next.before(this.progression);

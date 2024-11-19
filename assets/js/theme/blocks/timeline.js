@@ -1,19 +1,19 @@
-window.osuny = window.osuny || {};
+var osuny = window.osuny || {};
 
-window.osuny.Timeline = function (timeline) {
+osuny.Timeline = function (timeline) {
     this.timeline = timeline;
     this.updateTitleHeight();
     window.addEventListener('resize', this.updateTitleHeight.bind(this));
 };
 
-window.osuny.Timeline.prototype.updateTitleHeight = function () {
+osuny.Timeline.prototype.updateTitleHeight = function () {
     var maxTitleHeight = this.getMaxTitleHeight();
     // On met à jour la variable css qui ajoute une min-height au .title
     // L'objectif est d'aligner les lignes de la timeline entre elles
     this.timeline.style.setProperty('--min-title-height', maxTitleHeight + 'px');
 };
 
-window.osuny.Timeline.prototype.getMaxTitleHeight = function () {
+osuny.Timeline.prototype.getMaxTitleHeight = function () {
     var maxTitleHeight = 0,
         events = this.timeline.querySelectorAll('.timeline-event');
 
@@ -28,11 +28,11 @@ window.osuny.Timeline.prototype.getMaxTitleHeight = function () {
     return maxTitleHeight;
 };
 
-window.osuny.Timeline.prototype.getTitleHeight = function (event) {
+osuny.Timeline.prototype.getTitleHeight = function (event) {
     var eventTitle = event.querySelector('.title');
     return eventTitle ? eventTitle.offsetHeight : 0;
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    window.osuny.utils.instanciateAll('.block-timeline--horizontal', window.osuny.Timeline);
+    osuny.utils.instanciateAll('.block-timeline--horizontal', osuny.Timeline);
 });
