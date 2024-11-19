@@ -21,7 +21,7 @@ window.osuny.TouchControl = function (slider) {
 };
 
 window.osuny.TouchControl.prototype.listen = function () {
-    this.container.style.touchAction = 'pan-y';
+    this.container.style.touchAction = 'pan-x';
 
     this.container.addEventListener('pointerdown', this.onPointerDown.bind(this));
     this.container.addEventListener('pointerup', this.onPointerUp.bind(this));
@@ -35,13 +35,20 @@ window.osuny.TouchControl.prototype.onPointerDown = function (event) {
 };
 
 window.osuny.TouchControl.prototype.onPointerMove = function (event) {
+    var gap = this.state.start - this.state.end;
     this.state.end = event.clientX;
+
+    if (this.state.isPointerDown) {
+        this.slider.move(gap);
+    }
 };
 
 window.osuny.TouchControl.prototype.onPointerUp = function (event) {
     if (!this.state.isPointerDown) {
         return;
     }
+
+    this.state.isPointerDown = false;
 
     event.preventDefault();
     this.state.end = event.clientX;
@@ -52,5 +59,6 @@ window.osuny.TouchControl.prototype.onPointerUp = function (event) {
         this.slider.previous();
     }
 
+    this.slider.release();
     this.container.classList.remove(this.options.grabbedClass);
 };

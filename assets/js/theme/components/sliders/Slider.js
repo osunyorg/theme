@@ -144,3 +144,12 @@ window.osuny.Slider.prototype.update = function () {
 window.osuny.Slider.prototype.translate = function () {
     this.list.style.transform = 'translateX(' + -this.slides[this.state.index].offsetLeft + 'px)';
 };
+
+window.osuny.Slider.prototype.move = function (gap) {
+    var x = -this.slides[this.state.index].offsetLeft - gap;
+    this.list.style.transform = 'translateX(' + x + 'px)';
+};
+
+window.osuny.Slider.prototype.release = function () {
+    this.translate();
+};
