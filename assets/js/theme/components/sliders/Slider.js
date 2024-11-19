@@ -26,7 +26,8 @@ window.osuny.Slider.prototype.setState = function () {
         active: false,
         index: 0,
         isFirst: true,
-        isLast: false
+        isLast: false,
+        isGrabbed: false
     };
 };
 
@@ -142,14 +143,18 @@ window.osuny.Slider.prototype.update = function () {
 };
 
 window.osuny.Slider.prototype.translate = function () {
-    this.list.style.transform = 'translateX(' + -this.slides[this.state.index].offsetLeft + 'px)';
+    if (!this.state.isGrabbed) {
+        this.list.style.transform = 'translateX(' + -this.slides[this.state.index].offsetLeft + 'px)';
+    }
 };
 
 window.osuny.Slider.prototype.move = function (gap) {
     var x = -this.slides[this.state.index].offsetLeft - gap;
+    this.state.isGrabbed = true;
     this.list.style.transform = 'translateX(' + x + 'px)';
 };
 
 window.osuny.Slider.prototype.release = function () {
+    this.state.isGrabbed = false;
     this.translate();
 };

@@ -1,6 +1,6 @@
-window.osuny = window.osuny || {};
+var osuny = window.osuny || {};
 
-window.osuny.SliderPagination = function (slider) {
+osuny.SliderPagination = function (slider) {
     this.slider = slider;
     this.items = [];
     this.buttons = [];
@@ -10,19 +10,19 @@ window.osuny.SliderPagination = function (slider) {
     this.create();
 };
 
-window.osuny.SliderPagination.prototype.create = function () {
+osuny.SliderPagination.prototype.create = function () {
     var i;
     for (i = 0; i < this.slider.slides.length; i += 1) {
         this.createButton(i);
     }
 };
 
-window.osuny.SliderPagination.prototype.createButton = function (index) {
+osuny.SliderPagination.prototype.createButton = function (index) {
     var item = document.createElement('li'),
         button = document.createElement('button'),
-        a11yText = window.osuny.i18n.slider.goto + (index + 1);
+        a11yText = osuny.i18n.slider.goto + (index + 1);
 
-    window.osuny.utils.insertSROnly(button, a11yText);
+    osuny.utils.insertSROnly(button, a11yText);
 
     item.appendChild(button);
     this.container.appendChild(item);
@@ -32,11 +32,11 @@ window.osuny.SliderPagination.prototype.createButton = function (index) {
     button.addEventListener('click', this.onClick.bind(this, index));
 };
 
-window.osuny.SliderPagination.prototype.onClick = function (index) {
+osuny.SliderPagination.prototype.onClick = function (index) {
     this.slider.goTo(index);
 };
 
-window.osuny.SliderPagination.prototype.update = function () {
+osuny.SliderPagination.prototype.update = function () {
     var action;
     this.items.forEach(function (item, index) {
         action = index === this.slider.state.index ? 'add' : 'remove';
