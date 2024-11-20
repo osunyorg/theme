@@ -106,7 +106,7 @@ osuny.Slider.prototype.addComponents = function () {
 };
 
 osuny.Slider.prototype.listen = function () {
-    addEventListener('resize', this.update.bind(this));
+    window.addEventListener('resize', this.update.bind(this));
 };
 
 osuny.Slider.prototype.loop = function () {
