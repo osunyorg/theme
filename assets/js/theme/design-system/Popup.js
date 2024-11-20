@@ -1,7 +1,7 @@
 import { focusTrap } from '../utils/focus-trap';
 
 var CLASSES = {
-    popupOpened: 'has-popup-opened',
+    popupOpened: 'has-modal-opened',
     popupIsOpened: 'is-opened'
 };
 
