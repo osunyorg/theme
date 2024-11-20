@@ -76,4 +76,3 @@ osuny.SliderAutoplayer.prototype.update = function () {
         this.pause();
     }
 };
-

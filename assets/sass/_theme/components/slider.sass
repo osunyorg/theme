@@ -1,5 +1,6 @@
 .slider
     --slider-pagination-interval: 2s // This value is override by slider javascript
+    --slider-transition-duration: 0.25s // This value is override by slider javascript
     &.is-grabbed
         .slider-list
             transition: none
@@ -8,7 +9,7 @@
     &-list
         display: flex
         position: relative
-        transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1)
+        transition: transform var(--slider-transition-duration) cubic-bezier(0.25, 1, 0.5, 1)
     &-slide
         flex-shrink: 0
         transition: opacity 0.25s
