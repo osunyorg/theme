@@ -18,7 +18,7 @@
 
     {{ partial "posts/after-contents.html" . }}
 
-    {{ if site.Params.posts.single.author_signature }}
+    {{ if and site.Params.posts.single.author_signature .Params.authors }}
       {{ partial "posts/signature.html" . }}
     {{ end }}
 
