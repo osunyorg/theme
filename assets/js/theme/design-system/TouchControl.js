@@ -107,8 +107,6 @@ osuny.TouchControl.prototype.drag = function () {
 };
 
 osuny.TouchControl.prototype.onEnd = function (event) {
-    var threshold = this.options.threshold.action;
-
     this.preventClicks(event);
 
     if (!this.state.isPointerDown) {
@@ -116,13 +114,20 @@ osuny.TouchControl.prototype.onEnd = function (event) {
     }
 
     this.state.isPointerDown = false;
-    this.state.end = osuny.utils.getEventClientCoord(event);
 
     if (this.state.direction === 'y' || !this.isGrabbing) {
         return this.clear();
     }
 
+    this.dispatch(event);
+
     this.clear();
+};
+
+osuny.TouchControl.prototype.dispatch = function (event) {
+    var threshold = this.options.threshold.action;
+
+    this.state.end = osuny.utils.getEventClientCoord(event);
 
     if (this.state.start.x > this.state.end.x + threshold) {
         this.parent.next();
@@ -134,6 +139,7 @@ osuny.TouchControl.prototype.onEnd = function (event) {
         this.parent.release();
     }
 };
+
 
 osuny.TouchControl.prototype.preventClicks = function (event) {
     if (this.state.shouldPreventClicks && event.type === 'click') {
