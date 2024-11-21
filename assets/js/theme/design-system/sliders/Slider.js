@@ -125,20 +125,20 @@ osuny.Slider.prototype.loop = function () {
     }
 };
 
-osuny.Slider.prototype.next = function (e) {
-    this.offset(1, e);
+osuny.Slider.prototype.next = function (event) {
+    this.offset(1, event);
 };
 
-osuny.Slider.prototype.previous = function (e) {
-    this.offset(-1, e);
+osuny.Slider.prototype.previous = function (event) {
+    this.offset(-1, event);
 };
 
-osuny.Slider.prototype.offset = function (numberOfSlides, e) {
-    this.state.updatedByUser = typeof e !== 'undefined';
-    this.goTo(this.state.index + numberOfSlides);
+osuny.Slider.prototype.offset = function (numberOfSlides, event) {
+    this.goTo(this.state.index + numberOfSlides, event);
 };
 
-osuny.Slider.prototype.goTo = function (index) {
+osuny.Slider.prototype.goTo = function (index, event) {
+    this.state.updatedByUser = typeof event !== 'undefined';
     if (index < 0 || index > this.slides.length - 1) {
         return;
     }

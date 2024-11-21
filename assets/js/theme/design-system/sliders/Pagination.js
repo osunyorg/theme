@@ -34,8 +34,8 @@ osuny.SliderPagination.prototype.createButton = function (index) {
     button.addEventListener('click', this.onClick.bind(this, index));
 };
 
-osuny.SliderPagination.prototype.onClick = function (index) {
-    this.slider.goTo(index);
+osuny.SliderPagination.prototype.onClick = function (index, event) {
+    this.slider.goTo(index, event);
 };
 
 osuny.SliderPagination.prototype.update = function () {
