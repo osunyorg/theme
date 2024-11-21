@@ -16,10 +16,10 @@ window.osuny.utils.insertSROnly = function (element, text) {
     return span;
 };
 
-window.osuny.utils.bindEvents = function (element, _events, callback) {
+window.osuny.utils.bindEvents = function (element, _events, callback, options) {
     var events = _events.split(' ');
     events.forEach(function (event) {
-        element.addEventListener(event, callback);
+        element.addEventListener(event, callback, options || false);
     });
 };
 
@@ -33,4 +33,9 @@ window.osuny.utils.getEventClientCoord = function (_event) {
         event = event.changedTouches[0];
     }
     return { x: event.clientX, y: event.clientY };
+};
+
+window.osuny.utils.getTime = function () {
+    var date = new Date();
+    return date.getTime();
 };

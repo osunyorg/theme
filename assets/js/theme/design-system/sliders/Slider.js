@@ -23,6 +23,12 @@ osuny.Slider = function (list) {
     setTimeout(this.update.bind(this), 1);
 };
 
+Object.defineProperty(osuny.Slider.prototype, 'currentSlide', {
+    get: function () {
+        return this.slides[this.state.index];
+    }
+});
+
 osuny.Slider.classes = {
     isReady: 'is-ready',
     isCurrent: 'is-current',
@@ -40,7 +46,8 @@ osuny.Slider.prototype.setState = function () {
         index: 0,
         isFirst: true,
         isLast: false,
-        isGrabbed: false
+        isGrabbed: false,
+        updatedByUser: false
     };
 };
 
@@ -106,7 +113,7 @@ osuny.Slider.prototype.addComponents = function () {
 };
 
 osuny.Slider.prototype.listen = function () {
-    window.addEventListener('resize', this.update.bind(this));
+    window.addEventListener('resize', this.translate.bind(this));
 };
 
 osuny.Slider.prototype.loop = function () {
@@ -117,15 +124,16 @@ osuny.Slider.prototype.loop = function () {
     }
 };
 
-osuny.Slider.prototype.next = function () {
-    this.offset(1);
+osuny.Slider.prototype.next = function (e) {
+    this.offset(1, e);
 };
 
-osuny.Slider.prototype.previous = function () {
-    this.offset(-1);
+osuny.Slider.prototype.previous = function (e) {
+    this.offset(-1, e);
 };
 
-osuny.Slider.prototype.offset = function (numberOfSlides) {
+osuny.Slider.prototype.offset = function (numberOfSlides, e) {
+    this.state.updatedByUser = typeof e !== 'undefined';
     this.goTo(this.state.index + numberOfSlides);
 };
 
@@ -151,19 +159,22 @@ osuny.Slider.prototype.update = function () {
     for (componentKey in this.components) {
         this.components[componentKey].update();
     }
+
+    if (this.state.updatedByUser) {
+        // this.focus();
+    }
 };
 
 osuny.Slider.prototype.updateSlide = function (slide, index) {
     var classes = osuny.Slider.classes,
-        current = index === this.state.index;
+        isCurrent = index === this.state.index;
 
     slide.classList.remove(classes.isCurrent, classes.isNext, classes.isPrevious);
 
-    setAriaVisibility(slide, current);
+    // setAriaVisibility(slide, isCurrent);
 
-    if (current) {
+    if (isCurrent) {
         slide.classList.add(classes.isCurrent);
-        this.focus(slide);
     } else if (index < this.state.index) {
         slide.classList.add(classes.isPrevious);
     } else {
@@ -171,25 +182,25 @@ osuny.Slider.prototype.updateSlide = function (slide, index) {
     }
 };
 
-osuny.Slider.prototype.focus = function (slide) {
+osuny.Slider.prototype.focus = function () {
     var canFocus = this.components.autoplay ? !this.components.autoplay.state.isActive : true;
     clearTimeout(this.focusTimeout);
 
     if (canFocus) {
         this.focusTimeout = setTimeout(function () {
-            slide.focus();
-        }, this.options.transition);
+            this.currentSlide.focus();
+        }.bind(this), this.options.transition);
     }
 };
 
 osuny.Slider.prototype.translate = function () {
     if (!this.state.isGrabbed) {
-        this.list.style.transform = 'translateX(' + -this.slides[this.state.index].offsetLeft + 'px)';
+        this.list.style.transform = 'translateX(' + -this.currentSlide.offsetLeft + 'px)';
     }
 };
 
 osuny.Slider.prototype.move = function (gap) {
-    var x = -this.slides[this.state.index].offsetLeft - gap;
+    var x = -this.currentSlide.offsetLeft - gap;
     this.state.isGrabbed = true;
     this.list.style.transform = 'translateX(' + x + 'px)';
 };

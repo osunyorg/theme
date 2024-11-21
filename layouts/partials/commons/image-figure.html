@@ -28,7 +28,7 @@
       {{ if or .text .credit }}
         <figcaption>
           {{ with .text }}
-            <p>{{ . | safeHTML }}</p>
+            {{ . | safeHTML }}
           {{ end }}
           {{ with .credit }}
             <div class="credit">{{ . | safeHTML }}</div>

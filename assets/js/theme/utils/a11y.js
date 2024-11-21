@@ -4,8 +4,7 @@ var actionKeys = [
     ],
     a11yClick,
     setButtonEnability,
-    setAriaVisibility,
-    setTabIndex;
+    setAriaVisibility;
 
 a11yClick = function (element, action) {
     element.addEventListener('click', action);
@@ -21,17 +20,18 @@ setButtonEnability = function (button, enable) {
     button.ariaHidden = !enable;
 };
 
-setTabIndex = function (element, enable) {
-    element.setAttribute('tabindex', enable ? '0' : '-1');
-};
 
-setAriaVisibility = function (element, enable) {
+setAriaVisibility = function (element, enable, isChild) {
     var focusableChildren = element.querySelectorAll('a, button');
-    element.setAttribute('aria-hidden', !enable);
-    setTabIndex(element, enable);
     focusableChildren.forEach(function (child) {
-        setTabIndex(child, enable);
+        setAriaVisibility(child, enable, true);
     });
+    if (isChild) {
+        element[enable ? 'removeAttribute' : 'setAttribute']('tabindex', '-1');
+    } else {
+        element.setAttribute('tabindex', enable ? '0' : '-1');
+    }
+    element.setAttribute('aria-hidden', String(!enable));
 };
 
 export {
