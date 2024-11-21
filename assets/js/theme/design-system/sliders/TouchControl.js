@@ -1,8 +1,9 @@
 var osuny = window.osuny || {};
 
-osuny.TouchControl = function (slider) {
+osuny.TouchControl = function (slider, callbacks) {
     this.slider = slider;
     this.container = slider.container;
+    this.callbacks = callbacks || {};
 
     this.options = {
         threshold: {
