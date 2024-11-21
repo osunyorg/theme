@@ -6,14 +6,34 @@ osuny.SlidersFactory = function () {
     this.sliders = [];
     this.activeSlider = null;
 
-    document.querySelectorAll('[data-slider]').forEach(function (element, index) {
-        // Check if carousel as more than one slide
-        if (element.children.length > 1) {
-            this.sliders.push(new osuny.Slider(element, index));
-        }
-    }.bind(this));
+    document.querySelectorAll('[data-slider]').forEach(this.create.bind(this));
 
     this.listen();
+};
+
+osuny.SlidersFactory.prototype.create = function (element, index) {
+    var title = this.getTitle(element, index);
+
+    // Check if carousel as more than one slide
+    if (element.children.length > 1) {
+        this.sliders.push(new osuny.Slider(element, title));
+    }
+};
+
+osuny.SlidersFactory.prototype.getTitle = function (element, index) {
+    var title = osuny.i18n.slider.default_title + ' ' + index,
+        block = element.closest('.block-titled'),
+        blockTitle;
+
+    if (block) {
+        blockTitle = block.querySelector('.block-title');
+    }
+
+    if (blockTitle) {
+        title = blockTitle.innerText;
+    }
+
+    return title;
 };
 
 osuny.SlidersFactory.prototype.listen = function () {

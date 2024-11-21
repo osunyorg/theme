@@ -10,8 +10,9 @@ osuny.sliderComponents = {
     pagination: osuny.SliderPagination
 };
 
-osuny.Slider = function (list) {
+osuny.Slider = function (list, title) {
     this.list = list;
+    this.title = title;
     this.setState();
     this.setOptions();
     this.setup();
@@ -63,7 +64,7 @@ osuny.Slider.prototype.setOptions = function () {
         // Enable autoplay
         autoplay: options.autoplay || false,
         // Autoplay delay
-        interval: options.interval || 2000,
+        interval: options.interval || 5000,
         // Add navigation dots
         pagination: options.pagination || false,
         // Add current progression and slides length
@@ -161,7 +162,7 @@ osuny.Slider.prototype.update = function () {
     }
 
     if (this.state.updatedByUser) {
-        // this.focus();
+        this.focus();
     }
 };
 
@@ -170,8 +171,9 @@ osuny.Slider.prototype.updateSlide = function (slide, index) {
         isCurrent = index === this.state.index;
 
     slide.classList.remove(classes.isCurrent, classes.isNext, classes.isPrevious);
+    slide.removeAttribute('tabindex');
 
-    // setAriaVisibility(slide, isCurrent);
+    setAriaVisibility(slide, isCurrent);
 
     if (isCurrent) {
         slide.classList.add(classes.isCurrent);
@@ -185,6 +187,8 @@ osuny.Slider.prototype.updateSlide = function (slide, index) {
 osuny.Slider.prototype.focus = function () {
     var canFocus = this.components.autoplay ? !this.components.autoplay.state.isActive : true;
     clearTimeout(this.focusTimeout);
+
+    this.currentSlide.setAttribute('tabindex', '0');
 
     if (canFocus) {
         this.focusTimeout = setTimeout(function () {

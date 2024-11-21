@@ -20,18 +20,17 @@ setButtonEnability = function (button, enable) {
     button.ariaHidden = !enable;
 };
 
-
 setAriaVisibility = function (element, enable, isChild) {
-    var focusableChildren = element.querySelectorAll('a, button');
+    var focusableChildren = element.querySelectorAll('a, button, [role="button"]'),
+        action = enable ? 'removeAttribute' : 'setAttribute';
     focusableChildren.forEach(function (child) {
         setAriaVisibility(child, enable, true);
     });
     if (isChild) {
-        element[enable ? 'removeAttribute' : 'setAttribute']('tabindex', '-1');
+        element[action]('tabindex', '-1');
     } else {
-        element.setAttribute('tabindex', enable ? '0' : '-1');
+        element[action]('aria-hidden', 'true');
     }
-    element.setAttribute('aria-hidden', String(!enable));
 };
 
 export {

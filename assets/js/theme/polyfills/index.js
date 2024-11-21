@@ -1,1 +1,2 @@
 import './NodeListForEach';
+import './ElementClosest';

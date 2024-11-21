@@ -6,6 +6,8 @@ osuny.SliderPagination = function (slider) {
     this.buttons = [];
     this.container = document.createElement('ul');
     this.container.classList.add('slider-pagination');
+    this.container.setAttribute('aria-label', osuny.i18n.slider.pagination_list);
+    this.container.setAttribute('aria-description', this.slider.title);
     this.slider.controls.appendChild(this.container);
     this.create();
 };
@@ -20,7 +22,7 @@ osuny.SliderPagination.prototype.create = function () {
 osuny.SliderPagination.prototype.createButton = function (index) {
     var item = document.createElement('li'),
         button = document.createElement('button'),
-        a11yText = osuny.i18n.slider.goto + (index + 1);
+        a11yText = osuny.i18n.slider.goto + ' ' + (index + 1);
 
     osuny.utils.insertSROnly(button, a11yText);
 
@@ -37,9 +39,12 @@ osuny.SliderPagination.prototype.onClick = function (index) {
 };
 
 osuny.SliderPagination.prototype.update = function () {
-    var action;
+    var action,
+        isCurrent;
     this.items.forEach(function (item, index) {
-        action = index === this.slider.state.index ? 'add' : 'remove';
+        isCurrent = index === this.slider.state.index;
+        action = isCurrent ? 'add' : 'remove';
         item.classList[action]('is-current');
+        this.buttons[index].setAttribute('aria-current', isCurrent);
     }.bind(this));
 };
