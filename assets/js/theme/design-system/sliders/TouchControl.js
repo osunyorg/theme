@@ -101,6 +101,8 @@ osuny.TouchControl.prototype.moveSlider = function () {
 };
 
 osuny.TouchControl.prototype.onEnd = function (event) {
+    var threshold = this.options.threshold.action;
+
     this.preventClicks(event);
 
     if (!this.state.isPointerDown) {
@@ -116,9 +118,9 @@ osuny.TouchControl.prototype.onEnd = function (event) {
 
     this.clear();
 
-    if (this.state.start.x > this.state.end.x + this.options.threshold.action) {
+    if (this.state.start.x > this.state.end.x + threshold) {
         this.slider.next();
-    } else if (this.state.start.x < this.state.end.x - this.options.threshold.action) {
+    } else if (this.state.start.x < this.state.end.x - threshold) {
         this.slider.previous();
     }
 
