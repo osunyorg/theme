@@ -2,9 +2,9 @@ var osuny = window.osuny || {};
 /*
 * Parameter parent can be a Slider or a Lightbox
 */
-osuny.TouchControl = function (parent) {
+osuny.TouchControl = function (parent, container) {
     this.parent = parent;
-    this.container = parent.container;
+    this.container = container;
 
     this.options = {
         threshold: {
@@ -109,8 +109,7 @@ osuny.TouchControl.prototype.drag = function () {
 osuny.TouchControl.prototype.onEnd = function (event) {
     var threshold = this.options.threshold.action;
 
-    console.log('end')
-    // this.preventClicks(event);
+    this.preventClicks(event);
 
     if (!this.state.isPointerDown) {
         return this.clear();

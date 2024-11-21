@@ -17,7 +17,7 @@ osuny.Slider = function (list, title) {
     this.setOptions();
     this.setup();
     this.listen();
-    this.touchControl = new osuny.TouchControl(this);
+    this.touchControl = new osuny.TouchControl(this, this.container);
 
     // update after everything is setup
     this.container.classList.add(osuny.Slider.classes.isReady);

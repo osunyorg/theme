@@ -9,8 +9,6 @@ window.osuny.Lightbox = function () {
     var element = document.getElementById('lightbox');
     window.osuny.Popup.call(this, element);
 
-    this.container = this.element;
-
     this.state.currentData = {};
     this.state.previousData = {};
     this.state.nextData = {};
@@ -32,7 +30,7 @@ window.osuny.Lightbox.prototype._setup = function () {
         previousButton: this.element.querySelector('.lightbox-button-previous'),
         nextButton: this.element.querySelector('.lightbox-button-next')
     };
-    this.touchControl = new window.osuny.TouchControl(this);
+    this.touchControl = new window.osuny.TouchControl(this, this.contentElements.media);
 };
 
 window.osuny.Lightbox.prototype._listen = function () {
