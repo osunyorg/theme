@@ -1,16 +1,17 @@
 var osuny = window.osuny || {};
-
-osuny.TouchControl = function (slider, callbacks) {
-    this.slider = slider;
-    this.container = slider.container;
-    this.callbacks = callbacks || {};
+/*
+* Parameter parent can be a Slider or a Lightbox
+*/
+osuny.TouchControl = function (parent) {
+    this.parent = parent;
+    this.container = parent.container;
 
     this.options = {
         threshold: {
             action: Math.max(30, window.innerWidth * 0.15),
             direction: 10,
             // The minimum duration interaction to be considered as grab in ms
-            duration: 10
+            duration: 50
         }
     };
 
@@ -56,6 +57,7 @@ osuny.TouchControl.prototype.listen = function () {
     osuny.utils.bindEvents(this.container, 'touchstart mousedown', this.onStart.bind(this), { passive: true });
     osuny.utils.bindEvents(this.container, 'touchmove mousemove', this.onMove.bind(this), { passive: true });
     osuny.utils.bindEvents(this.container, 'touchend mouseup touchcancel click', this.onEnd.bind(this), true);
+    osuny.utils.bindEvents(window, 'touchend mouseup touchcancel click', this.onEnd.bind(this), true);
     window.addEventListener('blur', this.onEnd.bind(this));
     window.addEventListener('resize', this.onResize.bind(this));
 };
@@ -68,23 +70,26 @@ osuny.TouchControl.prototype.onStart = function (event) {
 };
 
 osuny.TouchControl.prototype.onMove = function (event) {
-    var time;
+    var time = osuny.utils.getTime(),
+        isGrabbing = time > this.state.startedAt + this.options.threshold.duration;
 
     if (!this.state.isPointerDown) {
         this.isGrabbing = false;
         return;
     }
 
-    time = osuny.utils.getTime();
-    this.isGrabbing = time > this.state.startedAt + this.options.threshold.duration;
+    if (this.isGrabbing !== isGrabbing && isGrabbing) {
+        this.state.start = osuny.utils.getEventClientCoord(event);
+        this.isGrabbing = isGrabbing;
+    }
 
     if (this.isGrabbing) {
         this.state.end = osuny.utils.getEventClientCoord(event);
-        this.moveSlider(event);
+        this.drag();
     }
 };
 
-osuny.TouchControl.prototype.moveSlider = function () {
+osuny.TouchControl.prototype.drag = function () {
     var distance = {
         x: this.state.start.x - this.state.end.x,
         y: this.state.start.y - this.state.end.y
@@ -96,15 +101,16 @@ osuny.TouchControl.prototype.moveSlider = function () {
         this.state.direction = 'x';
     }
 
-    if (this.state.direction === 'x') {
-        this.slider.move(distance.x);
+    if (this.parent['drag']) {
+        this.parent.drag(this.state.direction, distance);
     }
 };
 
 osuny.TouchControl.prototype.onEnd = function (event) {
     var threshold = this.options.threshold.action;
 
-    this.preventClicks(event);
+    console.log('end')
+    // this.preventClicks(event);
 
     if (!this.state.isPointerDown) {
         return this.clear();
@@ -120,12 +126,14 @@ osuny.TouchControl.prototype.onEnd = function (event) {
     this.clear();
 
     if (this.state.start.x > this.state.end.x + threshold) {
-        this.slider.next();
+        this.parent.next();
     } else if (this.state.start.x < this.state.end.x - threshold) {
-        this.slider.previous();
+        this.parent.previous();
     }
 
-    this.slider.release();
+    if (this.parent['release']) {
+        this.parent.release();
+    }
 };
 
 osuny.TouchControl.prototype.preventClicks = function (event) {

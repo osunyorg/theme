@@ -1,3 +1,9 @@
+@keyframes lightbox-loading-animation
+    from
+        transform: rotate(0deg)
+    to
+        transform: rotate(360deg)
+
 .lightbox
     backdrop-filter: $lightbox-backdrop
     background: $lightbox-background-color
@@ -24,6 +30,17 @@
             max-height: 100%
             outline-color: $lightbox-focus-outline-color
             pointer-events: auto
+            position: relative
+            user-select: none
+        &:after
+            animation: lightbox-loading-animation infinite 1s
+            content: "• •" / ""
+            color: $lightbox-focus-outline-color
+            display: block
+            position: absolute
+            left: 50%
+            top: 50%
+            z-index: -1
     &-controls
         bottom: $spacing-2
         display: flex

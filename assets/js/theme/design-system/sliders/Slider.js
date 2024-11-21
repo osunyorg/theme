@@ -47,7 +47,6 @@ osuny.Slider.prototype.setState = function () {
         index: 0,
         isFirst: true,
         isLast: false,
-        isGrabbed: false,
         updatedByUser: false
     };
 };
@@ -153,9 +152,7 @@ osuny.Slider.prototype.goTo = function (index, event) {
 
 osuny.Slider.prototype.update = function () {
     var componentKey;
-    this.slides.forEach(function (slide, index) {
-        this.updateSlide(slide, index);
-    }.bind(this));
+    this.slides.forEach(this.updateSlide.bind(this));
 
     for (componentKey in this.components) {
         this.components[componentKey].update();
@@ -198,18 +195,19 @@ osuny.Slider.prototype.focus = function () {
 };
 
 osuny.Slider.prototype.translate = function () {
-    if (!this.state.isGrabbed) {
+    if (!this.touchControl.isGrabbing) {
         this.list.style.transform = 'translateX(' + -this.currentSlide.offsetLeft + 'px)';
     }
 };
 
-osuny.Slider.prototype.move = function (gap) {
-    var x = -this.currentSlide.offsetLeft - gap;
-    this.state.isGrabbed = true;
-    this.list.style.transform = 'translateX(' + x + 'px)';
+osuny.Slider.prototype.drag = function (direction, distance) {
+    var x = -this.currentSlide.offsetLeft - distance.x;
+
+    if (direction === 'x') {
+        this.list.style.transform = 'translateX(' + x + 'px)';
+    }
 };
 
 osuny.Slider.prototype.release = function () {
-    this.state.isGrabbed = false;
     this.translate();
 };

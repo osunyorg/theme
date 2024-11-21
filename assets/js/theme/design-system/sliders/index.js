@@ -1,6 +1,6 @@
 import './Autoplayer';
 import './Arrows';
-import './TouchControl';
+import '../TouchControl';
 import './Pagination';
 import './Slider';
 import './Factory';
