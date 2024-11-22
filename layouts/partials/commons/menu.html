@@ -82,7 +82,7 @@
     {{- end -}}
   {{ end -}}
   
-  {{ if and site.Params.search.active (eq site.Params.search.position $kind) }}
+  {{ if and site.Params.search.active (in site.Params.search.positions $kind) }}
     <li class="nav-search">
       {{ partial "header/search.html" (dict
           "position" $kind
