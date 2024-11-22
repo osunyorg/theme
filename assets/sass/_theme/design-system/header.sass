@@ -56,6 +56,8 @@ header#document-header
         border-bottom: $header-upper-menu-border-bottom-width solid var(--color-border)
         transition: background $header-sticky-transition
         z-index: $zindex-header
+        &, a
+            color: $header-upper-menu-color
         ul
             @include list-reset
             @include meta
@@ -76,7 +78,7 @@ header#document-header
         @include media-breakpoint-down(desktop)
             background: transparent
             border-top: $header-upper-menu-border-bottom-width solid var(--color-border)
-            color: $header-sticky-color
+            color: $header-upper-menu-sticky-color
             display: none
             position: absolute
             top: var(--header-height)
@@ -120,7 +122,8 @@ header#document-header
     &.is-sticky
         .upper-menu
             background: $header-upper-menu-sticky-background
-            color: $header-sticky-color
+            &, a
+                color: $header-upper-menu-sticky-color
 
 // TODO : Est-ce au bon endroit ?
 body
