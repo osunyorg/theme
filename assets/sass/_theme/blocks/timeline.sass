@@ -4,8 +4,6 @@
             position: relative
         .timeline-event
             position: relative
-            &:not(:last-child)
-                padding-bottom: $spacing-4
             &::before
                 background: var(--color-text)
                 border-radius: 50%
@@ -24,13 +22,14 @@
                 position: absolute
                 top: 0.5em
                 width: 1px
-            p:last-child
-                margin-bottom: 0
-            &:last-child::after
-                display: none
+            &:last-child
+                &::after
+                    display: none
+            &:not(:last-child)
+                padding-bottom: $spacing-4
             .title
                 @include h4
-                + p
+                + [itemprop="text"]
                     margin-top: $spacing-2
 
         @include media-breakpoint-down(desktop)
@@ -53,11 +52,13 @@
                 .title
                     width: columns(3)
                     text-align: right
-                    + p
+                    + [itemprop="text"]
                         margin-top: 0
-                p
+                [itemprop="text"]
                     padding-left: var(--grid-gutter)
                     width: columns(7)
+                    &:first-child
+                        margin-left: columns(3)
 
     &--horizontal
         --min-title-height: 0px
@@ -68,23 +69,17 @@
         overflow: hidden
         &::before
             display: none
-        .container
-            overflow: visible
-            .block-content
-                width: fit-content
-        .carousel
-            width: columns(24)
-            &__slider
-                margin-left: calc(var(--grid-gutter-negative) + calc(var(--grid-gutter) / 2))
+        ol
+            list-style: none
         .timeline-event
-            padding: 0 calc(var(--grid-gutter) / 2)
-            width: calc( 3 * var(--column-width) + 3 * var(--grid-gutter))
+            width: columns(3)
+            margin-right: var(--grid-gutter)
             .title
                 @include body-text
                 font-weight: normal
                 min-height: var(--min-title-height)
                 padding-bottom: $spacing-3
-            .description
+            [itemprop="text"]
                 @include small
             .line
                 background: $block-timeline-horizontal-color
@@ -113,19 +108,15 @@
                     width: calc(100% + var(--grid-gutter))
 
         @include media-breakpoint-down(desktop)
-            .carousel__slider
-                margin-left: calc(var(--grid-gutter-negative))
-                width: calc(var(--grid-width) + var(--grid-gutter) * 2)
             .timeline-event
-                margin-right: 0
-                padding-right: 0
-                padding-left: var(--grid-gutter)
-                width: columns(12)
+                width: columns(11)
                 .line
                     width: calc(100% + var(--grid-gutter))
                     &::before
                         height: 8px
                         width: 8px
+            .slider-slide.is-previous
+                opacity: 1
 
         @include in-page-with-or-without-sidebar
             .block-title

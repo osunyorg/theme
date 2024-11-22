@@ -1,3 +1,4 @@
+import './TouchControl';
 import { setButtonEnability } from '../utils/a11y';
 
 /* eslint-disable no-underscore-dangle */
@@ -29,6 +30,7 @@ window.osuny.Lightbox.prototype._setup = function () {
         previousButton: this.element.querySelector('.lightbox-button-previous'),
         nextButton: this.element.querySelector('.lightbox-button-next')
     };
+    this.touchControl = new window.osuny.TouchControl(this, this.contentElements.media);
 };
 
 window.osuny.Lightbox.prototype._listen = function () {
@@ -43,9 +45,9 @@ window.osuny.Lightbox.prototype._listen = function () {
 
     window.addEventListener('keydown', function (event) {
         if (this.state.opened && event.key === 'ArrowLeft') {
-            this.navigateTo('previousData');
+            this.previous();
         } else if (this.state.opened && event.key === 'ArrowRight') {
-            this.navigateTo('nextData');
+            this.next();
         }
     }.bind(this));
 };
@@ -65,7 +67,7 @@ window.osuny.Lightbox.prototype._getData = function (button) {
 
 window.osuny.Lightbox.prototype._setSiblings = function () {
     var figure = this.state.currentData.buttonElement.parentElement,
-        galleryElement = figure.closest('.gallery, .carousel__container'),
+        galleryElement = figure.closest('.gallery'),
         figureIndex = 0;
 
     if (!galleryElement || galleryElement.children.length === 1) {
@@ -124,11 +126,20 @@ window.osuny.Lightbox.prototype._update = function (data) {
 
 window.osuny.Lightbox.prototype._createImage = function (data) {
     var image = document.createElement('img');
+    image.draggable = false;
     image.src = data.imageSrc;
     image.alt = data.alt || '';
     image.tabIndex = 0;
     this.contentElements.media.append(image);
     image.focus();
+};
+
+window.osuny.Lightbox.prototype.previous = function () {
+    this.navigateTo('previousData');
+};
+
+window.osuny.Lightbox.prototype.next = function () {
+    this.navigateTo('nextData');
 };
 
 window.osuny.Lightbox.prototype.navigateTo = function (key) {

@@ -1,11 +1,20 @@
-{{ $heading_tag := .heading_tag }}
+{{- $heading_tag := partial "GetHeadingTag" (dict 
+  "level" .block.ranks.children
+  "attributes" "class='title' itemprop='name'"
+  ) -}}
 
-{{ with .params }}
-  <article class="timeline-event">
-    {{ $heading_tag.open -}}
-      {{ .title | safeHTML }}
-    {{ $heading_tag.close -}}
-    <div class="line"></div>
-    <div class="description text">{{- partial "PrepareHTML" .text -}}</div>
-  </article>
+{{ with .block.data }}
+  <ol data-slider="{{ site.Params.blocks.timeline.slider | encoding.Jsonify }}">
+    {{ range .events }}
+      <li class="timeline-event">
+        {{ $heading_tag.open -}}
+          {{ .title | safeHTML }}
+        {{ $heading_tag.close -}}
+        <div class="line"></div>
+        {{ with .text }}
+          <div itemprop="text">{{- partial "PrepareHTML" . -}}</div>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ol>
 {{ end }}

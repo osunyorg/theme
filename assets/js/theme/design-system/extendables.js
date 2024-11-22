@@ -1,8 +1,8 @@
 import { a11yClick } from '../utils/a11y';
 
-window.osuny = window.osuny || {};
+var osuny = window.osuny || {};
 
-window.osuny.Extendable = function (element) {
+osuny.Extendable = function (element) {
     this.element = element;
     this.buttons = document.querySelectorAll('[aria-controls=' + this.element.id + ']');
     this.state = {
@@ -17,7 +17,7 @@ window.osuny.Extendable = function (element) {
     this.listen();
 };
 
-window.osuny.Extendable.prototype.listen = function () {
+osuny.Extendable.prototype.listen = function () {
     this.buttons.forEach(function (button) {
         a11yClick(button, function (event) {
             event.preventDefault();
@@ -29,7 +29,7 @@ window.osuny.Extendable.prototype.listen = function () {
     this.element.addEventListener('extendable-close', this.toggle.bind(this, true));
 };
 
-window.osuny.Extendable.prototype.a11yFocus = function (button) {
+osuny.Extendable.prototype.a11yFocus = function (button) {
     if (this.state.opened) {
         this.state.openedByButton = button;
     } else if (this.state.openedByButton) {
@@ -37,7 +37,7 @@ window.osuny.Extendable.prototype.a11yFocus = function (button) {
     }
 };
 
-window.osuny.Extendable.prototype.toggle = function (forceClose) {
+osuny.Extendable.prototype.toggle = function (forceClose) {
     this.state.opened = forceClose ? false : !this.state.opened;
 
     if (this.state.opened && this.options.closeSiblings) {
@@ -51,7 +51,7 @@ window.osuny.Extendable.prototype.toggle = function (forceClose) {
     }.bind(this));
 };
 
-window.osuny.Extendable.prototype.closeSiblings = function () {
+osuny.Extendable.prototype.closeSiblings = function () {
     var extendables = this.element.parentNode.querySelectorAll('.extendable');
     extendables.forEach(function (extendable) {
         if (this.element !== extendable) {
@@ -61,8 +61,5 @@ window.osuny.Extendable.prototype.closeSiblings = function () {
 };
 
 (function () {
-    var extendables = document.querySelectorAll('.extendable, .collapse');
-    Array.prototype.forEach.call(extendables, function (element) {
-        new window.osuny.Extendable(element);
-    });
+    osuny.utils.instanciateAll('.extendable, .collapse', osuny.Extendable);
 }());

@@ -10,21 +10,13 @@
             "heading_level" $block.ranks.self
             "hidden" true
         )}}
-        <div class="testimonials">
-          {{- if and .testimonials (gt (len .testimonials) 1) }}
-            {{ partial "blocks/templates/carousel.html" (dict 
-              "content" .testimonials
-              "options" site.Params.blocks.testimonials.carousel
-              "partial" "blocks/templates/testimonials/single.html"
+        <div class="testimonials" data-slider="{{ site.Params.blocks.testimonials.slider | encoding.Jsonify }}">
+          {{ range .testimonials }}
+            {{ partial "blocks/templates/testimonials/single.html" (dict
+              "params" .
             )}}
-          {{ else }}
-            {{ range .testimonials }}
-              {{ partial "blocks/templates/testimonials/single.html" (dict
-                "params" .
-              )}}
-            {{ end }}
           {{ end }}
-        </div>
+      </div>
       </div>
     </div>
   </div>

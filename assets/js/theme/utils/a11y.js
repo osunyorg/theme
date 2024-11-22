@@ -1,25 +1,40 @@
-const actionKeys = [
-  'Enter',
-  'Space'
-];
+var actionKeys = [
+        'Enter',
+        'Space'
+    ],
+    a11yClick,
+    setButtonEnability,
+    setAriaVisibility;
 
-const a11yClick = function(element, action) {
-  element.addEventListener('click', action);
-  element.addEventListener('keydown', (event) => {
-    actionKeys.forEach(key => {
-      if (key === event.code) {
-        action(event);
-      }
-    })
-  });
-}
+a11yClick = function (element, action) {
+    element.addEventListener('click', action);
+    element.addEventListener('keydown', function (event) {
+        if (actionKeys.includes(event.code)) {
+            action(event);
+        }
+    });
+};
 
-const setButtonEnability = function(button, enable) {
-  button.disabled = !enable;
-  button.ariaHidden = !enable;
-}
+setButtonEnability = function (button, enable) {
+    button.disabled = !enable;
+    button.ariaHidden = !enable;
+};
+
+setAriaVisibility = function (element, enable, isChild) {
+    var focusableChildren = element.querySelectorAll('a, button, [role="button"]'),
+        action = enable ? 'removeAttribute' : 'setAttribute';
+    focusableChildren.forEach(function (child) {
+        setAriaVisibility(child, enable, true);
+    });
+    if (isChild) {
+        element[action]('tabindex', '-1');
+    } else {
+        element[action]('aria-hidden', 'true');
+    }
+};
 
 export {
-  a11yClick,
-  setButtonEnability
-}
+    a11yClick,
+    setButtonEnability,
+    setAriaVisibility
+};
