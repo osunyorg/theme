@@ -50,7 +50,7 @@
     {{- if or (ne $stop 1) (and (eq $stop 1) (ne .kind "blank")) -}}
     <li{{ if ne $item_class ""}} class="{{ $item_class }}"{{ end }}>
       {{- if ne .kind "blank" -}}
-        <a href="{{ .target }}"{{ if ne $link_class ""}} class="{{ $link_class }}"{{ end }} {{ safeHTMLAttr $attr }} {{ safeHTMLAttr $attr_title }}>{{ .title }}</a>
+        <a href="{{ .target }}"{{ if ne $link_class ""}} class="{{ $link_class }}"{{ end }} {{ safeHTMLAttr $attr }} {{ safeHTMLAttr $attr_title }}>{{ markdownify .title }}</a>
       {{- else -}}
         <span class="{{ if ne $link_class ""}} {{ $link_class }}{{ end }}{{ if gt .level 1 }} disabled{{ end }}" {{ safeHTMLAttr $attr }}>{{ .title }}</span>
       {{- end -}}
