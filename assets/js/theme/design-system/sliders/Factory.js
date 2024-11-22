@@ -10,6 +10,7 @@ osuny.SlidersFactory = function () {
 
     document.querySelectorAll('[data-slider]').forEach(this.create.bind(this));
 
+    this.activate();
     this.listen();
 };
 
@@ -20,7 +21,9 @@ osuny.SlidersFactory.prototype.create = function (element, index) {
     if (element.children.length > 1) {
         this.sliders.push(new osuny.Slider(element, title));
     }
+};
 
+osuny.SlidersFactory.prototype.activate = function () {
     this.sliders.forEach(function (slider, index) {
         if (!slider.options.disable) {
             slider.init();
