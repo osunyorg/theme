@@ -1,6 +1,5 @@
 import * as params from '@params';
 import { setAriaVisibility } from '../../utils/a11y';
-import { isMobile } from 'js/theme/utils/breakpoints';
 
 var osuny = window.osuny || {};
 osuny.i18n = params.i18n;
