@@ -10,7 +10,8 @@ class Search {
         this.state = {
             isOpened: false
         };
-        this.button = document.querySelector('.pagefind-ui__toggle');
+        this.buttons = document.querySelectorAll('.pagefind-ui__toggle');
+        this.toggleButton;
         this.element = document.querySelector('.search__modal');
         this.closeButton = this.element.querySelector('.search__close');
         this.searchInstance = new PagefindUI({
@@ -60,14 +61,19 @@ class Search {
 
     listen () {
         if (document.body.querySelector('.toc-cta')) {
-            this.button.classList.add('in-page-with-toc');
+            this.buttons.forEach(button => {
+                button.classList.add('in-page-with-toc');
+            });
         }
-        this.button.addEventListener('click', () => {
-            this.toggle(true);
-            this.removedItems = this.element.querySelector('.pagefind-ui__suppressed', '.pagefind-ui__search-clear');
-            if (this.removedItems) {
-                this.removedItems.remove();
-            }
+        this.buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                this.toggleButton = button;
+                this.toggle(true);
+                this.removedItems = this.element.querySelector('.pagefind-ui__suppressed', '.pagefind-ui__search-clear');
+                if (this.removedItems) {
+                    this.removedItems.remove();
+                }
+            });
         });
         this.closeButton.addEventListener('click', () => {
             this.clearSearch();
@@ -78,7 +84,7 @@ class Search {
             if (event.keyCode === 27 || event.key === 'Escape') {
                 if (this.state.isOpened) {
                     this.toggle(false);
-                    this.button.focus();
+                    this.toggleButton.focus();
                 }
             } else if (event.key === 'Tab' && this.state.isOpened) {
                 focusTrap(event, this.element, this.state.isOpened);
@@ -127,10 +133,10 @@ class Search {
         observer.observe(this.element, { childList: true, subtree: true });
     }
 
-    toggle(open = !this.state.isOpened) {
+    toggle(open = !this.state.isOpened, button) {
         this.state.isOpened = open;
         this.element.setAttribute('aria-hidden', !this.state.isOpened);
-        this.button.setAttribute('aria-expanded', this.state.isOpened);
+        this.toggleButton.setAttribute('aria-expanded', this.state.isOpened);
 
         const classAction = this.state.isOpened ? 'add' : 'remove';
         document.documentElement.classList[classAction](CLASSES.modalOpened);
