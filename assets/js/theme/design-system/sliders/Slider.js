@@ -1,5 +1,6 @@
 import * as params from '@params';
 import { setAriaVisibility } from '../../utils/a11y';
+import { isMobile } from 'js/theme/utils/breakpoints';
 
 var osuny = window.osuny || {};
 osuny.i18n = params.i18n;
@@ -15,13 +16,6 @@ osuny.Slider = function (list, title) {
     this.title = title;
     this.setState();
     this.setOptions();
-    this.setup();
-    this.listen();
-    this.touchControl = new osuny.TouchControl(this, this.container);
-
-    // update after everything is setup
-    this.container.classList.add(osuny.Slider.classes.isReady);
-    setTimeout(this.update.bind(this), 1);
 };
 
 Object.defineProperty(osuny.Slider.prototype, 'currentSlide', {
@@ -56,8 +50,8 @@ osuny.Slider.prototype.setOptions = function () {
         options = JSON.parse(data);
 
     this.options = {
-        // Autoplay delay
-        transition: options.transition || 250,
+        // Translate transition duration
+        transition: osuny.utils.isDefine(options.transition) ? options.transition : 250,
         // Add previous and next arrows
         arrows: options.arrows || false,
         // Enable autoplay
@@ -67,8 +61,20 @@ osuny.Slider.prototype.setOptions = function () {
         // Add navigation dots
         pagination: options.pagination || false,
         // Add current progression and slides length
-        progression: options.progression || false
+        progression: options.progression || false,
+        // Disabled options
+        disable: options.disable || false,
     };
+};
+
+osuny.Slider.prototype.init = function () {
+    this.setup();
+    this.listen();
+    this.touchControl = new osuny.TouchControl(this, this.container);
+
+    // update after everything is setup
+    this.container.classList.add(osuny.Slider.classes.isReady);
+    setTimeout(this.update.bind(this), 1);
 };
 
 osuny.Slider.prototype.setup = function () {
@@ -137,7 +143,7 @@ osuny.Slider.prototype.offset = function (numberOfSlides, event) {
 };
 
 osuny.Slider.prototype.goTo = function (index, event) {
-    this.state.updatedByUser = typeof event !== 'undefined';
+    this.state.updatedByUser = osuny.utils.isDefine(event);
     if (index < 0 || index > this.slides.length - 1) {
         return;
     }

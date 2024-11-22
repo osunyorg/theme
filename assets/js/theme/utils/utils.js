@@ -39,3 +39,7 @@ window.osuny.utils.getTime = function () {
     var date = new Date();
     return date.getTime();
 };
+
+window.osuny.utils.isDefine = function (variable) {
+    return typeof variable !== 'undefined';
+};

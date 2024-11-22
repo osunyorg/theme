@@ -1,3 +1,5 @@
+const { isMobile } = require("js/theme/utils/breakpoints");
+
 var osuny = window.osuny || {};
 osuny.SlidersFactory = osuny.SlidersFactory || {};
 osuny.lightbox = osuny.lightbox || {};
@@ -17,6 +19,22 @@ osuny.SlidersFactory.prototype.create = function (element, index) {
     // Check if carousel as more than one slide
     if (element.children.length > 1) {
         this.sliders.push(new osuny.Slider(element, title));
+    }
+
+    this.sliders.forEach(function (slider, index) {
+        if (!slider.options.disable) {
+            slider.init();
+        } else {
+            this.checkDisableCondition(slider, index);
+        }
+    }.bind(this));
+};
+
+osuny.SlidersFactory.prototype.checkDisableCondition = function (slider, index) {
+    if (slider.options.disable.mobile && !isMobile()) {
+        slider.init();
+    } else {
+        this.sliders.splice(index, 1);
     }
 };
 
