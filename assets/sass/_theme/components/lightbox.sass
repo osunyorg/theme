@@ -50,15 +50,15 @@
         > button
             @include button-reset
             @include meta
-            background-color: var(--color-background)
-            color: var(--color-text)
+            background-color: $lightbox-button-background-color
+            color: $lightbox-button-color
             height: $spacing-4
             outline-color: $lightbox-focus-outline-color
             margin: 0
             padding: 0
             width: $spacing-4
             &:not(:last-child)
-                border-right: 1px solid var(--color-border)
+                border-right: 1px solid $lightbox-button-border-color
             &.lightbox-button-next
                 @include icon(arrow-right-s-line, before)
             &.lightbox-button-previous
@@ -76,15 +76,16 @@
             &.lightbox-button-close
                 @include icon(close-line, before)
             &[aria-expanded='true']
-                background-color: var(--color-text)
-                color: var(--color-background)
+                background-color: $lightbox-button-color
+                color: $lightbox-button-background-color
             &:disabled
-                background: var(--color-background-alt)
+                background: $lightbox-button-disabled-background
                 &::before
-                    color: var(--color-border)
+                    color: $lightbox-button-disabled-color
     &-detail
-        background-color: var(--color-background)
+        background: $lightbox-detail-background
         bottom: calc(var(--spacing-4) + var(--spacing-2) + 1px)
+        color: $lightbox-detail-color
         display: none
         padding: $spacing-2
         position: fixed
@@ -95,7 +96,7 @@
             width: columns(6)
         &__title, &__close
             @include meta
-            color: var(--color-text-alt)
+            color: $lightbox-detail-meta-color
         &__close
             @include button-reset
             cursor: pointer
