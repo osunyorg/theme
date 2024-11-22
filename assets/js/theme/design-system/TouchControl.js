@@ -120,26 +120,25 @@ osuny.TouchControl.prototype.onEnd = function (event) {
     }
 
     this.dispatch(event);
-
-    this.clear();
 };
 
 osuny.TouchControl.prototype.dispatch = function (event) {
     var threshold = this.options.threshold.action;
 
     this.state.end = osuny.utils.getEventClientCoord(event);
-
+    
     if (this.state.start.x > this.state.end.x + threshold) {
         this.parent.next();
     } else if (this.state.start.x < this.state.end.x - threshold) {
         this.parent.previous();
     }
 
+    this.clear();
+
     if (this.parent['release']) {
         this.parent.release();
     }
 };
-
 
 osuny.TouchControl.prototype.preventClicks = function (event) {
     if (this.state.shouldPreventClicks && event.type === 'click') {

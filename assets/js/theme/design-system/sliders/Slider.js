@@ -201,7 +201,10 @@ osuny.Slider.prototype.focus = function () {
 
 osuny.Slider.prototype.translate = function () {
     if (!this.touchControl.isGrabbing) {
+        console.log('translate')
         this.list.style.transform = 'translateX(' + -this.currentSlide.offsetLeft + 'px)';
+    } else {
+        console.log('is grabbing')
     }
 };
 
