@@ -11,39 +11,18 @@
     @include meta
     color: var(--color-text)
 .pagefind-ui__toggle
+    align-items: baseline
+    box-shadow: none
     color: $header-color
     cursor: pointer
+    display: flex
+    gap: $spacing-1
+    padding: 0
     text-align: left
-    box-shadow: none
-    &:not(.toggle-text)
-        @include icon(search-line, after)
-        &::after
-            line-height: inherit
-            margin-left: $spacing-1
-    &:not(.pagefind-primary)
-        padding: $spacing-1 $spacing-2
-    &.toggle-both
-        .menu & span
-            padding-right: 0
-    span,
+    white-space: nowrap
+    line-height: 1
     &::after
-        display: inline
-    @include media-breakpoint-down(desktop)
-        &.pagefind-primary
-            padding: $spacing-3 0
-            width: 100%
-    @include media-breakpoint-up(desktop)
-        &.toggle-icon::after
-                margin-left: 0
-    .upper-menu &
-        &.toggle-both,
-        &.toggle-text
-            white-space: nowrap
-            padding: 0
-        @include media-breakpoint-down(desktop)
-            &.toggle-both::after
-                margin-left: space()
-            
+        line-height: inherit
 .search__close
     @include icon-block(close-line, after)
     position: fixed
@@ -187,10 +166,6 @@
             &__results-area
                 padding-top: space(17)
 
-.menu .nav-level-1 > li .pagefind-ui__toggle:not(.toggle-icon)::after
-    margin-left: 0
-    margin-top: pxToRem(2)
-
 .pagefind-fixed
     align-items: center
     background: var(--color-background-alt)
@@ -201,23 +176,6 @@
     left: var(--grid-gutter)
     position: fixed
     z-index: 10
-    @include media-breakpoint-up(desktop)
-        &:not(.toggle-icon)
-            min-width: columns(2)
-        &.toggle-icon:not(:hover)
-            padding-left: 0
-            padding-right: 0
-            justify-content: center
-        &.toggle-icon
-            min-height: pxToRem(37)
-            width: pxToRem(50)
-            span
-                display: none
-            &:hover,
-            &:focus
-                min-width: columns(2)
-                span
-                    display: inline
     @include media-breakpoint-down(desktop)
         left: 0
         width: 100vw
@@ -230,19 +188,10 @@ footer#document-footer .footer-search
     .pagefind-footer
         color: $footer-color
         padding: 0
-        &.toggle-icon
-            transform: translateX(-35%)
-        &::after
-            margin-top: pxToRem(3)
     #search
         margin-top: 0
         a
             color: var(--color-text)
-
-.nav-search
-    display: flex
-    .pagefind-primary:not(.toggle-icon)::after
-        margin-top: 10px
 
 .menu .nav-level-1 > li .pagefind-ui__toggle span
     display: inline
@@ -250,3 +199,91 @@ footer#document-footer .footer-search
     .nav-level-1
         > li .pagefind-ui__toggle.toggle-icon span
             display: none
+
+// Toggle button appareance
+// Can be with icon only, text only, or both
+.pagefind-ui__toggle
+    header#document-header &
+        $has-text: false
+        $has-icon: true
+        @if $search-menu-input-appearance-text == false
+            span
+                @extend .sr-only
+        @if $search-menu-input-appearance-icon == false
+            $has-icon: false
+        @if $search-menu-input-appearance-text == true
+            $has-text: true
+        @if $has-icon
+            @include icon(search-line, after)
+
+    footer#document-footer &
+        $has-text: false
+        $has-icon: true
+        @if $search-footer-input-appearance-text == false
+            span
+                @extend .sr-only
+        @if $search-footer-input-appearance-icon == false
+            $has-icon: false
+        @if $has-icon
+            @include icon(search-line, after)
+
+    main#main &
+        $has-text: false
+        $has-icon: true
+        @if $search-footer-input-appearance-text == false
+            span
+                @extend .sr-only
+        @if $search-footer-input-appearance-icon == false
+            $has-icon: false
+        @if $search-footer-input-appearance-text == true
+            $has-text: true
+        @if $has-icon
+            @include icon(search-line, after)
+        @include media-breakpoint-up(desktop)
+            min-height: pxToRem(37)
+            padding: $spacing-1 $spacing-2
+            @if $has-icon
+                width: pxToRem(50)
+            @if $has-text
+                width: columns(2)
+            &:hover,
+            &:focus
+                min-width: columns(2)
+                span
+                    display: inline
+            &.toggle-icon:not(:hover)
+                padding-left: 0
+                padding-right: 0
+                justify-content: center
+
+
+
+
+// &:not(.toggle-text)
+//     @include icon(search-line, after)
+//     &::after
+//         line-height: inherit
+//         margin-left: $spacing-1
+// &:not(.pagefind-primary)
+//     padding: $spacing-1 $spacing-2
+// &.toggle-both
+//     .menu & span
+//         padding-right: 0
+// span,
+// &::after
+//     display: inline
+// @include media-breakpoint-down(desktop)
+//     &.pagefind-primary
+//         padding: $spacing-3 0
+//         width: 100%
+// @include media-breakpoint-up(desktop)
+//     &.toggle-icon::after
+//             margin-left: 0
+// .upper-menu &
+//     &.toggle-both,
+//     &.toggle-text
+//         white-space: nowrap
+//         padding: 0
+//     @include media-breakpoint-down(desktop)
+//         &.toggle-both::after
+//             margin-left: space()
