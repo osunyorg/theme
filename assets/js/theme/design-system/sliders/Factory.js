@@ -1,4 +1,4 @@
-import { isMobile } from '../utils/breakpoints';
+import { isMobile } from '../../utils/breakpoints';
 
 var osuny = window.osuny || {};
 osuny.SlidersFactory = osuny.SlidersFactory || {};
