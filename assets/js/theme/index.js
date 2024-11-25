@@ -1,9 +1,9 @@
 import './polyfills';
-import './utils/utils.js';
+import './utils/utils';
 import './utils/realViewportHeight';
-import './body.js';
+import './body';
 
-import './design-system/accordion.js';
+import './design-system/accordion';
 import './design-system/clickToCopy';
 import './design-system/extendables';
 import './design-system/dropdowns';
@@ -19,6 +19,6 @@ import './design-system/sliders';
 
 import './blocks/keyFigures';
 import './blocks/organizations';
-import './blocks/timeline.js';
-import './blocks/videos.js';
-import './blocks/locations.js';
+import './blocks/timeline';
+import './blocks/videos';
+import './blocks/locations';
