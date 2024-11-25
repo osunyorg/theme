@@ -168,7 +168,7 @@ window.osuny.Lightbox.prototype.next = function () {
 
 window.osuny.Lightbox.prototype.navigateTo = function (key) {
     if (this.state[key]) {
-        this._update(this.state[key], focus);
+        this._update(this.state[key], true);
     }
 };
 
