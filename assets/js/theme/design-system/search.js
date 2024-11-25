@@ -1,4 +1,6 @@
 /* eslint-disable no-undef */
+import { a11yClick } from '../utils/a11y';
+import { isMobile } from '../utils/breakpoints';
 import { focusTrap } from '../utils/focus-trap';
 
 const CLASSES = {
@@ -13,6 +15,8 @@ class Search {
         this.button = document.querySelector('.pagefind-ui__toggle');
         this.element = document.querySelector('.search__modal');
         this.closeButton = this.element.querySelector('.search__close');
+        this.a11yButton = document.querySelector('[href="#search-button"]');
+
         this.searchInstance = new PagefindUI({
             element: container,
             showSubResults: true
@@ -90,6 +94,16 @@ class Search {
                 });
             }
         });
+
+        if (this.a11yButton) {
+            a11yClick(this.a11yButton, (event) => {
+                if (isMobile()) {
+                    event.preventDefault();
+                    this.toggle(true);
+                    console.log('ooook')
+                }
+            });
+        }
     }
 
     clearSearch () {
