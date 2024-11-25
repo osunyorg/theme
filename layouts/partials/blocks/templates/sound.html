@@ -1,6 +1,7 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
 {{- $block_index := .index -}}
+{{- $described_by_id := "" -}}
 
 {{- with .block.data -}}
   <div class="{{ $block_class }}">
@@ -20,11 +21,13 @@
           {{ end }}
 
           {{ if .title }}
-            <p>{{- partial "PrepareHTML" .title -}}</p>
+            {{ $described_by_id = printf "block-sound-title-%d" $block_index }}
+            <p aria-hidden="true" id="{{- $described_by_id -}}">{{- partial "PrepareHTML" .title -}}</p>
           {{ end }}
 
           {{ partial "commons/transcription" ( dict
             "block_index" $block_index
+            "described_by" $described_by_id
             "transcription" .transcription
           ) }}
         </div>
