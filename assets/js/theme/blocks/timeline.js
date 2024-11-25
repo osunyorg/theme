@@ -1,30 +1,24 @@
-function Timeline(timeline) {
+var osuny = window.osuny || {};
+
+osuny.Timeline = function (timeline) {
     this.timeline = timeline;
-    this.eventClass = 'timeline-event'
-    this.init();
-}
-
-Timeline.prototype.init = function() {
     this.updateTitleHeight();
-
-    // Resize
-    window.addEventListener('resize', this.handleResize.bind(this));
+    window.addEventListener('resize', this.updateTitleHeight.bind(this));
 };
 
-Timeline.prototype.updateTitleHeight = function () {
+osuny.Timeline.prototype.updateTitleHeight = function () {
     var maxTitleHeight = this.getMaxTitleHeight();
-
     // On met à jour la variable css qui ajoute une min-height au .title
     // L'objectif est d'aligner les lignes de la timeline entre elles
-    this.updateCssVariable('--min-title-height', maxTitleHeight + 'px');
+    this.timeline.style.setProperty('--min-title-height', maxTitleHeight + 'px');
 };
 
-Timeline.prototype.getMaxTitleHeight = function () {
-    var maxTitleHeight = 0;
-    var events = this.timeline.getElementsByClassName(this.eventClass);
+osuny.Timeline.prototype.getMaxTitleHeight = function () {
+    var maxTitleHeight = 0,
+        events = this.timeline.querySelectorAll('.timeline-event');
 
     // On vient regarder dans tous les .timeline-event pour vérifier quel est le titre le plus long
-    Array.prototype.forEach.call(events, function(event) {
+    events.forEach(function (event) {
         var titleHeight = this.getTitleHeight(event);
         if (titleHeight > maxTitleHeight) {
             maxTitleHeight = titleHeight;
@@ -32,24 +26,13 @@ Timeline.prototype.getMaxTitleHeight = function () {
     }, this);
 
     return maxTitleHeight;
-}
+};
 
-Timeline.prototype.getTitleHeight = function (event) {
+osuny.Timeline.prototype.getTitleHeight = function (event) {
     var eventTitle = event.querySelector('.title');
     return eventTitle ? eventTitle.offsetHeight : 0;
 };
 
-Timeline.prototype.updateCssVariable = function (variable, value) {
-    this.timeline.style.setProperty(variable, value);
-};
-
-Timeline.prototype.handleResize = function() {
-    this.updateTitleHeight();
-};
-
-document.addEventListener('DOMContentLoaded', function() {
-    var timelines = document.getElementsByClassName('block-timeline--horizontal');
-    for (var i = 0; i < timelines.length; i++) {
-        new Timeline(timelines[i]);
-    }
+document.addEventListener('DOMContentLoaded', function () {
+    osuny.utils.instanciateAll('.block-timeline--horizontal', osuny.Timeline);
 });

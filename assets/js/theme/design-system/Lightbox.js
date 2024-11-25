@@ -1,3 +1,4 @@
+import './TouchControl';
 import { setButtonEnability } from '../utils/a11y';
 
 /* eslint-disable no-underscore-dangle */
@@ -22,6 +23,7 @@ window.osuny.Lightbox.prototype._setup = function () {
     this.buttons = document.querySelectorAll('[data-lightbox]');
     this.contentElements = {
         media: this.element.querySelector('#lightbox-media'),
+        image: null,
         information: this.element.querySelector('#lightbox-information'),
         informationButton: this.element.querySelector('.lightbox-button-information'),
         credit: this.element.querySelector('#lightbox-credit'),
@@ -29,6 +31,7 @@ window.osuny.Lightbox.prototype._setup = function () {
         previousButton: this.element.querySelector('.lightbox-button-previous'),
         nextButton: this.element.querySelector('.lightbox-button-next')
     };
+    this.touchControl = new window.osuny.TouchControl(this, this.contentElements.media);
 };
 
 window.osuny.Lightbox.prototype._listen = function () {
@@ -43,9 +46,9 @@ window.osuny.Lightbox.prototype._listen = function () {
 
     window.addEventListener('keydown', function (event) {
         if (this.state.opened && event.key === 'ArrowLeft') {
-            this.navigateTo('previousData');
+            this.previous();
         } else if (this.state.opened && event.key === 'ArrowRight') {
-            this.navigateTo('nextData');
+            this.next();
         }
     }.bind(this));
 };
@@ -65,7 +68,7 @@ window.osuny.Lightbox.prototype._getData = function (button) {
 
 window.osuny.Lightbox.prototype._setSiblings = function () {
     var figure = this.state.currentData.buttonElement.parentElement,
-        galleryElement = figure.closest('.gallery, .carousel__container'),
+        galleryElement = figure.closest('.gallery'),
         figureIndex = 0;
 
     if (!galleryElement || galleryElement.children.length === 1) {
@@ -106,7 +109,7 @@ window.osuny.Lightbox.prototype._clear = function () {
     this.closeExtendables();
 };
 
-window.osuny.Lightbox.prototype._update = function (data) {
+window.osuny.Lightbox.prototype._update = function (data, focus) {
     this._clear();
     this.state.currentData = data;
 
@@ -114,26 +117,58 @@ window.osuny.Lightbox.prototype._update = function (data) {
 
     if (data.imageSrc) {
         this._createImage(data);
+    } else {
+        this.contentElements.image = null;
     }
 
     this.contentElements.information.innerHTML = data.information || '';
     setButtonEnability(this.contentElements.informationButton, Boolean(data.information));
     this.contentElements.credit.innerHTML = data.credit || '';
     setButtonEnability(this.contentElements.creditButton, Boolean(data.credit));
+
+    if (focus && data.imageSrc) {
+        this._focusImage();
+    }
 };
 
 window.osuny.Lightbox.prototype._createImage = function (data) {
-    var image = document.createElement('img');
-    image.src = data.imageSrc;
-    image.alt = data.alt || '';
-    image.tabIndex = 0;
-    this.contentElements.media.append(image);
-    image.focus();
+    this.contentElements.image = document.createElement('img');
+    this.contentElements.image.draggable = false;
+    this.contentElements.image.src = data.imageSrc;
+    this.contentElements.image.alt = data.alt || '';
+    this.contentElements.media.append(this.contentElements.image);
+    this._setAriaOnImage(data);
+};
+
+window.osuny.Lightbox.prototype._setAriaOnImage = function (data) {
+    var describedBy = [];
+    if (data.information) {
+        describedBy.push(this.contentElements.information.id);
+    }
+    if (data.credit) {
+        describedBy.push(this.contentElements.credit.id);
+    }
+    if (describedBy.length) {
+        this.contentElements.image.setAttribute('aria-describedby', describedBy.join(' '));
+    }
+};
+
+window.osuny.Lightbox.prototype._focusImage = function () {
+    this.contentElements.image.setAttribute('tabindex', '-1');
+    this.contentElements.image.focus();
+};
+
+window.osuny.Lightbox.prototype.previous = function () {
+    this.navigateTo('previousData');
+};
+
+window.osuny.Lightbox.prototype.next = function () {
+    this.navigateTo('nextData');
 };
 
 window.osuny.Lightbox.prototype.navigateTo = function (key) {
     if (this.state[key]) {
-        this._update(this.state[key]);
+        this._update(this.state[key], true);
     }
 };
 

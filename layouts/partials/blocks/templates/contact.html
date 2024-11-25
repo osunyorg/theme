@@ -40,10 +40,10 @@
                     {{ end }}
                   </p>
                   {{ range .emails }}
-                    <p><a itemprop="email" href="{{ .value }}" title="{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}">{{ .label }}</a></p>
+                    <p><a itemprop="email" href="{{ chomp .value | safeURL }}" title="{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}">{{ .label }}</a></p>
                   {{ end }}
                   {{ with .url }}
-                    <p><a href="{{ .value }}" target="_blank" rel="noreferrer">{{ .label }}</a></p>
+                    <p><a href="{{ chomp .value | safeURL }}" target="_blank" rel="noreferrer">{{ .label }}</a></p>
                   {{ end }}
                 </div>
               {{ end }}
@@ -51,7 +51,7 @@
                 <div>
                   <p class="meta">{{- i18n "commons.contact.phone.label" -}}</p>
                   {{ range . }}
-                    <p><a itemprop="telephone" href="{{ .value }}" title="{{ safeHTML (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label )) }}">{{ .label }}</a></p>
+                    <p><a itemprop="telephone" href="{{ chomp .value | safeURL }}" title="{{ safeHTML (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label )) }}">{{ .label }}</a></p>
                   {{ end }}
                 </div>
               {{ end }}
