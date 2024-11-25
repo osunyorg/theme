@@ -2,17 +2,19 @@
 {{ $items := .items }}
 {{ $context := .context }}
 {{ if $kind }}
-  {{ $menu := partial "GetMenu" $kind }}
-  {{ $items = $menu.items }}
+{{ $menu := partial "GetMenu" $kind }}
+{{ $items = $menu.items }}
 {{ end }}
 {{- $level := .level -}}
 {{- $stop := .stop -}}
 {{- $ignore_externals := .ignore_externals | default false -}}
 {{- $dropdown := .dropdown -}}
 {{- $dropdown_titled := (and site.Params.menu.dropdown.linkToLevel1 (eq $level 1)) -}}
+{{- $dropdown_lvl1_summary := (and site.Params.menu.dropdown.level1_summary (eq $level 1)) -}}
+{{- $dropdown_lvl2_summary := and site.Params.menu.dropdown.level2_summary -}}
 {{- $ulClass := "" -}}
 {{- if .class -}}
-  {{- $ulClass = printf "%s " .class -}}
+{{- $ulClass = printf "%s " .class -}}
 {{- end -}}
 {{ $extern_link := i18n "commons.link.blank" }}
 <ul class="{{ $ulClass }}{{ if $level }}nav-level-{{ $level }}{{ end }}">
@@ -56,20 +58,38 @@
       {{- end -}}
       {{- if ne $stop $level -}}
         {{- if $has_dropdown }}
-          <div class="dropdown-menu {{ if $dropdown_titled }}is-titled{{ end }}" aria-labelledby="dropdown-{{ $slug }}">
+          <div class="dropdown-menu {{- if $dropdown_titled }} is-titled {{- end -}} {{- if $dropdown_lvl2_summary }} children-titled {{- end }}" aria-labelledby="dropdown-{{ $slug }}">
             {{- if $dropdown_titled }}
               <div class="container">
-                <a href="{{ .target }}" class="dropdown-menu-title">{{ .title }}</a>
+                <div class="dropdown-menu-heading">
+                  <a href="{{ .target }}" class="dropdown-menu-title">{{ .title }}</a>
+                  {{ if $dropdown_lvl1_summary }}
+                    {{ $targetPage := strings.TrimPrefix "/" .target }}
+                    {{ $targetPage = strings.TrimSuffix "/" $targetPage }}
+                    {{ $indexPage := site.GetPage $targetPage }}
+                    <div class="dropdown-menu-lead">{{ safeHTML $indexPage.Params.summary }}</div>
+                  {{ end }}
+                </div>
             {{ end -}}
           {{- end -}}
         {{- if gt (len .children) 0 -}}
           {{- $nextLevel := add $level 1 -}}
-          {{- partial "commons/menu.html"
-                (dict
-                  "items" .children
-                  "level" $nextLevel
-                  "context" $context
-                ) -}}
+          {{- partial "commons/menu.html" (dict
+                "items" .children
+                "level" $nextLevel
+                "context" $context
+            ) -}}
+        {{- else if and $dropdown_lvl2_summary (eq $level 2) -}}
+            {{ $page := "" }}
+            {{ range (where site.Pages "RelPermalink" "eq" .target) }}
+              {{ $page = . }}
+            {{ end }}
+            {{ if $page }}
+              {{- if $page.Params.summary }}
+                {{ $length := site.Params.menu.dropdown.truncate_summary }}
+                {{ partial "PrepareHTML" $page.Params.summary | truncate $length }}
+              {{ end -}}
+            {{ end }}
         {{- end -}}
         {{- if $has_dropdown -}}
               </div>

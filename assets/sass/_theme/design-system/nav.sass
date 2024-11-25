@@ -49,13 +49,31 @@
             position: absolute
             max-height: calc(100vh - var(--header-height))
             overflow: auto
+        &-title
+            @include h2
+        &-lead
+            @include lead-hero
+            font-size: $lead-hero-size
+            line-height: $lead-hero-line-height
+        &.children-titled
+            li
+                position: relative
+                a
+                    @include h6
+                    @include stretched-link
+                    @include media-breakpoint-up(desktop)
+                        @include h5
+                    + p
+                        display: block
+                        @include media-breakpoint-up(desktop)
+                            margin-top: $spacing-2
+                @include media-breakpoint-down(desktop)
+                    + li
+                        margin-top: $spacing-2
         a,
         a:focus,
         a:active
             @include link($header-dropdown-color, false)
-        .dropdown-menu-title
-            @include h2
-
     .nav-level-1
         display: flex
         > li
