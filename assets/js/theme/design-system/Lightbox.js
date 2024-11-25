@@ -129,10 +129,25 @@ window.osuny.Lightbox.prototype._createImage = function (data) {
     image.draggable = false;
     image.src = data.imageSrc;
     image.alt = data.alt || '';
-    image.tabIndex = 0;
     this.contentElements.media.append(image);
-    image.focus();
+    this._setAriaOnImage(image, data);
+    // image.tabIndex = 0;
+    // image.focus();
 };
+
+window.osuny.Lightbox.prototype._setAriaOnImage = function (image, data) {
+    var describedBy = [];
+    if (data.information) {
+        describedBy.push(this.contentElements.information.id);
+    }
+    if (data.credit) {
+        describedBy.push(this.contentElements.credit.id);
+    }
+    if (describedBy.length) {
+        image.setAttribute('aria-describedBy', describedBy.join(' '));
+    }
+};
+
 
 window.osuny.Lightbox.prototype.previous = function () {
     this.navigateTo('previousData');
