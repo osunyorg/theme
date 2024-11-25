@@ -154,7 +154,7 @@ window.osuny.Lightbox.prototype._setAriaOnImage = function (data) {
 };
 
 window.osuny.Lightbox.prototype._focusImage = function () {
-    this.contentElements.image.setAttribute('tabindex', '0');
+    this.contentElements.image.setAttribute('tabindex', '-1');
     this.contentElements.image.focus();
 };
 
