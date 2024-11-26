@@ -11,9 +11,9 @@
             margin-top: 0
 
     .contact-content
+        [itemprop="name"]
+            @include h4
         .informations
-            [itemprop="name"]
-                @include h4
             @include in-page-without-sidebar
                 display: flex
                 gap: var(--grid-gutter)
@@ -25,6 +25,9 @@
             @extend %underline-on-hover
         .contacts
             margin-top: $spacing-3
+            h3, h4, h5, h6
+                @include meta
+
             @include media-breakpoint-down(desktop)
                 > div 
                     + div,

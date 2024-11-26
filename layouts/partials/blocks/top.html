@@ -5,10 +5,10 @@
   {{ $heading_level = 2 }}
 {{ end }}
 
-{{ $heading_tag := (dict 
-  "open" ((printf "<h%d class='block-title'>" $heading_level) | safeHTML)
-  "close" ((printf "</h%d>" $heading_level) | safeHTML)
-  ) }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+  "level" $heading_level 
+  "attributes" "class='block-title'"
+  )}}
 
 {{ if or .title .description }}
   <div class="top {{ if .hidden }}hidden{{ end }}">
