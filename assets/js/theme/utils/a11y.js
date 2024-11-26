@@ -4,7 +4,8 @@ var actionKeys = [
     ],
     a11yClick,
     setButtonEnability,
-    setAriaVisibility;
+    setAriaVisibility,
+    inertBodyChildren;
 
 a11yClick = function (element, action) {
     element.addEventListener('click', action);
@@ -33,8 +34,20 @@ setAriaVisibility = function (element, enable, isChild) {
     }
 };
 
+inertBodyChildren = function (element, inert) {
+    var bodyChildren = document.body.children,
+        action = inert ? 'setAttribute' : 'removeAttribute';
+
+    Array.prototype.forEach.call(bodyChildren, function (child) {
+        if (element !== child && !child.contains(element)) {
+            child[action]('inert', '');
+        }
+    }.bind(this));
+};
+
 export {
     a11yClick,
     setButtonEnability,
-    setAriaVisibility
+    setAriaVisibility,
+    inertBodyChildren
 };

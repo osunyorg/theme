@@ -1,6 +1,6 @@
 import { focusTrap } from '../utils/focus-trap';
 import { isMobile } from '../utils/breakpoints';
-import { a11yClick } from '../utils/a11y';
+import { a11yClick, inertBodyChildren } from '../utils/a11y';
 
 const CLASSES = {
     mainMenuOpened: 'is-opened',
@@ -115,6 +115,10 @@ class MainMenu {
 
         // Update global overlay
         this.updateOverlay();
+
+        if (this.state.isMobile) {
+            inertBodyChildren(this.element, open);
+        }
     }
 
     toggleDropdown (clickedButton) {
