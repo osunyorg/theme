@@ -1,4 +1,4 @@
-import { inertBodyChildren } from '../utils/a11y';
+import { ariaHideBodyChildren } from '../utils/a11y';
 import { focusTrap } from '../utils/focus-trap';
 
 var CLASSES = {
@@ -77,7 +77,7 @@ window.osuny.Popup.prototype = {
     },
 
     updateDocumentAccessibility: function () {
-        inertBodyChildren(this.element, this.state.opened);
+        ariaHideBodyChildren(this.element, this.state.opened);
     },
 
     isOpen: function () {
