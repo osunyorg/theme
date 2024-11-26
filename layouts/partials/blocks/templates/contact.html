@@ -15,11 +15,16 @@
         {{ if $block.title }}
           {{ $heading_rank = $block.ranks.self | add 1 }}
         {{ end }}
+
         {{ $heading_name := partial "GetHeadingTag" ( dict 
             "level" $heading_rank
             "attributes" "itemprop='name'"
           ) }}
-        {{ $heading_items := partial "GetHeadingTag" ( $heading_rank | add 1 ) }}
+        
+        {{ if .name }}
+          {{ $heading_rank = $heading_rank | add 1 }}
+        {{ end }}
+        {{ $heading_items := partial "GetHeadingTag" $heading_rank }}
 
         <div class="contact-content" itemscope itemtype="https://schema.org/Organization">
           {{ with .information }}

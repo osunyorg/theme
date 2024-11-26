@@ -27,7 +27,6 @@
             margin-top: $spacing-3
             h3, h4, h5, h6
                 @include meta
-
             @include media-breakpoint-down(desktop)
                 > div 
                     + div,
@@ -39,23 +38,21 @@
             + .schedule-table
                 margin-top: $spacing-1
     .schedule-table
-        @include list-reset
+        ul
+            @include list-reset
         li
             display: flex
-            + li:not(.meta)
-                padding-bottom: $spacing-2
-            + li:not(.meta, .meta + li)
-                padding-top: $spacing-2
-            + li:not(:last-child)
+            padding-bottom: $spacing-2
+            padding-top: $spacing-2
+            &:not(:last-child)
                 border-bottom: 1px solid var(--color-border)
             @include media-breakpoint-down(desktop)
-                &:not(.meta)
-                    justify-content: end
-                    flex-wrap: wrap
-                    span
-                        min-width: 50%
-                        &:nth-child(n+2)
-                            text-align: right
+                justify-content: end
+                flex-wrap: wrap
+                span
+                    min-width: 50%
+                    &:nth-child(n+2)
+                        text-align: right
             @include media-breakpoint-up(desktop)
                 gap: var(--grid-gutter)
     time + time
@@ -99,8 +96,6 @@
         .socials-list
             @include grid(2)
             row-gap: space()
-        .meta
-            margin-bottom: space()
     @include in-page-without-sidebar
         .top
             margin-bottom: $spacing-4
