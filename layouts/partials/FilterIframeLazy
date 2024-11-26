@@ -1,6 +1,5 @@
 {{ $is_loading_present := strings.Contains . "loading" }}
 {{ $text := . }}
-
 {{ if not $is_loading_present }}
 	{{ $chunks := split . "<iframe" }}
 	{{ $text = delimit $chunks "<iframe loading=\"lazy\"" }}
