@@ -1,3 +1,4 @@
+import { focusTrap } from '../utils/focus-trap';
 import { isMobile } from '../utils/breakpoints';
 import { a11yClick } from '../utils/a11y';
 
@@ -44,6 +45,12 @@ class MainMenu {
             });
         }
 
+        // window.addEventListener('focusin', (event) => {
+        //     if (!event.target.closest('#' + this.element.id)) {
+        //         this.toggleMainMenu(false);
+        //     }
+        // });
+
         // if (this.a11yButton) {
         //     a11yClick(this.a11yButton, (event) => {
         //         if (this.state.isMobile) {
@@ -67,6 +74,8 @@ class MainMenu {
         window.addEventListener('keydown', (event) => {
             if (event.keyCode === 27 || event.key === 'Escape') {
                 this.closeEverything();
+            } else if (event.key === 'Tab' && this.state.isOpened) {
+                focusTrap(event, this.element, true);
             }
         });
     }
