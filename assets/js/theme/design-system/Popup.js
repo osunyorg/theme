@@ -1,3 +1,4 @@
+import { inertBodyChildren } from '../utils/a11y';
 import { focusTrap } from '../utils/focus-trap';
 
 var CLASSES = {
@@ -76,14 +77,7 @@ window.osuny.Popup.prototype = {
     },
 
     updateDocumentAccessibility: function () {
-        var bodyChildren = document.body.children,
-            action = this.state.opened ? 'setAttribute' : 'removeAttribute';
-
-        Array.prototype.forEach.call(bodyChildren, function (element) {
-            if (this.element !== element) {
-                element[action]('inert', '');
-            }
-        }.bind(this));
+        inertBodyChildren(this.element, this.state.opened);
     },
 
     isOpen: function () {

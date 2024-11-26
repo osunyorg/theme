@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { a11yClick } from '../utils/a11y';
+import { a11yClick, inertBodyChildren } from '../utils/a11y';
 import { isMobile } from '../utils/breakpoints';
 import { focusTrap } from '../utils/focus-trap';
 
@@ -151,28 +151,10 @@ class Search {
         if (open) {
             this.input = this.element.querySelector('input');
             this.input.focus();
-
-            this.inertElements = [];
-            const allElements = document.querySelectorAll('body *');
-
-            allElements.forEach(el => {
-                if (el === this.element || this.element.contains(el) || el.contains(this.element)) {
-                    return;
-                }
-
-                el.setAttribute('inert', '');
-                this.inertElements.push(el);
-            });
         } else {
             document.body.style.overflow = 'unset';
-
-            if (this.inertElements) {
-                this.inertElements.forEach(el => {
-                    el.removeAttribute('inert');
-                });
-                this.inertElements = null;
-            }
         }
+        inertBodyChildren(this.element, open);
     }
 }
 
