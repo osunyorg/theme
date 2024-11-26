@@ -22,7 +22,7 @@
     {{ $post_class = printf "%s %s" $post_class "without-image" }}
   {{ end }}
   
-  <article class="{{ $post_class }}" itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+  <article class="{{ $post_class }}" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="post-content">
       {{- $title := partial "PrepareHTML" .Title -}}
       {{ if and $options.subtitle .Params.subtitle }}
