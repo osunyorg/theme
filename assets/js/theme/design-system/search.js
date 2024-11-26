@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { a11yClick, inertBodyChildren } from '../utils/a11y';
+import { a11yClick, ariaHideBodyChildren } from '../utils/a11y';
 import { isMobile } from '../utils/breakpoints';
 import { focusTrap } from '../utils/focus-trap';
 
@@ -154,7 +154,7 @@ class Search {
         } else {
             document.body.style.overflow = 'unset';
         }
-        inertBodyChildren(this.element, open);
+        ariaHideBodyChildren(this.element, open);
     }
 }
 
