@@ -14,6 +14,7 @@ class MainMenu {
         this.element = document.querySelector(selector);
         this.menu = this.element.querySelector('.menu');
         this.mainButton = this.element.querySelector('button.header-button');
+        this.upperMenu = this.element.querySelector('.upper-menu');
         // this.a11yButton = document.querySelector('[href="#navigation"]');
 
         this.dropdownsButtons = this.element.querySelectorAll('.has-children [role="button"]');
@@ -92,6 +93,18 @@ class MainMenu {
         this.state.isMobile = isMobile();
 
         this.closeEverything();
+
+        if (this.upperMenu) {
+            this.updateUpperMenuPosition();
+        }
+    }
+
+    updateUpperMenuPosition () {
+        if (this.state.isMobile) {
+            this.element.append(this.upperMenu);
+        } else {
+            this.element.prepend(this.upperMenu);
+        }
     }
 
     toggleMainMenu (open = !this.state.isOpened) {

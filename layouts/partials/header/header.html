@@ -1,7 +1,10 @@
 {{ $primary := partial "GetMenu" "primary" }}
 {{ $upper_menu := partial "GetMenu" "upper-menu" }}
 
-<header id="document-header" role="banner">
+<header id="document-header" role="banner"
+  {{ if $upper_menu.items }}
+    class="has-upper-menu"
+  {{ end }}>
   {{ if $upper_menu.items }}
     <nav class="upper-menu" aria-label="{{ i18n "commons.menu.upper" }}">
       <div class="container">
