@@ -36,11 +36,13 @@ setAriaVisibility = function (element, enable, isChild) {
 
 inertBodyChildren = function (element, inert) {
     var bodyChildren = document.body.children,
-        action = inert ? 'setAttribute' : 'removeAttribute';
+        action = inert ? 'setAttribute' : 'removeAttribute',
+        ignoredElements = ['SCRIPT', 'STYLE'];
 
     Array.prototype.forEach.call(bodyChildren, function (child) {
-        if (element !== child && !child.contains(element)) {
+        if (element !== child && !child.contains(element) && ignoredElements.indexOf(child.nodeName) === -1) {
             child[action]('inert', '');
+            child[action]('aria-hidden', 'true');
         }
     }.bind(this));
 };
