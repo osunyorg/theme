@@ -25,6 +25,7 @@ osuny.SliderPagination.prototype.createButton = function (index) {
         a11yText = osuny.i18n.slider.goto + ' ' + (index + 1);
 
     osuny.utils.insertSROnly(button, a11yText);
+    button.setAttribute('aria-description', this.slider.title);
 
     item.appendChild(button);
     this.container.appendChild(item);
