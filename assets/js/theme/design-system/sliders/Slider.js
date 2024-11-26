@@ -10,9 +10,9 @@ osuny.sliderComponents = {
     pagination: osuny.SliderPagination
 };
 
-osuny.Slider = function (list, title) {
+osuny.Slider = function (list, titleId) {
     this.list = list;
-    this.title = title;
+    this.titleId = titleId;
     this.setState();
     this.setOptions();
 };
