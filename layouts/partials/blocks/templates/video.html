@@ -30,7 +30,7 @@
 
         {{ if .video_title }}
           {{ $described_by_id = printf "block-video-title-%d" $block_index }}
-          <p aria-hidden="true">{{- partial "PrepareHTML" .video_title -}}</p>
+          <p aria-hidden="true" id="{{ $described_by_id }}">{{- partial "PrepareHTML" .video_title -}}</p>
         {{ end }}
 
         {{ partial "commons/transcription" ( dict
