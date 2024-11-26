@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
-import { a11yClick, ariaHideBodyChildren } from '../utils/a11y';
-import { isMobile } from '../utils/breakpoints';
+import { ariaHideBodyChildren } from '../utils/a11y';
 import { focusTrap } from '../utils/focus-trap';
 
 const CLASSES = {
@@ -153,6 +152,8 @@ class Search {
             this.input.focus();
         } else {
             document.body.style.overflow = 'unset';
+            this.button.focus();
+            this.accessibleMessageContainer.innerHTML = '';
         }
         ariaHideBodyChildren(this.element, open);
     }
