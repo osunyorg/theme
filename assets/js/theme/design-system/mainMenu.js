@@ -46,12 +46,6 @@ class MainMenu {
             });
         }
 
-        // window.addEventListener('focusin', (event) => {
-        //     if (!event.target.closest('#' + this.element.id)) {
-        //         this.toggleMainMenu(false);
-        //     }
-        // });
-
         // if (this.a11yButton) {
         //     a11yClick(this.a11yButton, (event) => {
         //         if (this.state.isMobile) {
