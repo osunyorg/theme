@@ -6,7 +6,7 @@
 {{ with .block.data }}
   <ol data-slider="{{ site.Params.blocks.timeline.slider | encoding.Jsonify }}">
     {{ range .events }}
-      <li class="timeline-event">
+      <li class="timeline-event" itemscope itemtype="https://schema.org/Article">
         {{ $heading_tag.open -}}
           {{ .title | safeHTML }}
         {{ $heading_tag.close -}}
