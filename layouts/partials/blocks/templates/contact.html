@@ -60,7 +60,6 @@
                       {{- i18n "commons.contact.email.label" -}}
                     {{ end }}
                   {{ $heading_items.close }}
-
                   {{ range .emails }}
                     <p><a itemprop="email" href="{{ chomp .value | safeURL }}" title="{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}">{{ .label }}</a></p>
                   {{ end }}
@@ -74,7 +73,6 @@
                   {{ $heading_items.open }}
                     {{- i18n "commons.contact.phone.label" -}}
                   {{ $heading_items.close }}
-
                   {{ range . }}
                     <p><a itemprop="telephone" href="{{ chomp .value | safeURL }}" title="{{ safeHTML (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label )) }}">{{ .label }}</a></p>
                   {{ end }}
@@ -86,7 +84,6 @@
                   {{ $heading_items.open }}
                     {{- i18n "commons.contact.socials.title" -}}
                   {{ $heading_items.close }}
-                  
                   <ul class="socials-list">
                     {{ partial "commons/socials" (dict
                       "context" .
@@ -96,7 +93,7 @@
                 </div>
               {{ end }}
             {{ end }}
-              {{ if .timetable}}
+              {{ if .timetable }}
                 {{ $time_size := "full-size" }}
                 {{ if and (or .emails .url) .phone_numbers .socials }}
                   {{ $time_size = "reduced" }}
