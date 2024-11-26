@@ -13,7 +13,7 @@ class MainMenu {
         this.element = document.querySelector(selector);
         this.menu = this.element.querySelector('.menu');
         this.mainButton = this.element.querySelector('button.header-button');
-        this.a11yButton = document.querySelector('[href="#navigation"]');
+        // this.a11yButton = document.querySelector('[href="#navigation"]');
 
         this.dropdownsButtons = this.element.querySelectorAll('.has-children [role="button"]');
 
@@ -44,14 +44,14 @@ class MainMenu {
             });
         }
 
-        if (this.a11yButton) {
-            a11yClick(this.a11yButton, (event) => {
-                if (this.state.isMobile) {
-                    event.preventDefault();
-                    this.mainButton.focus();
-                }
-            });
-        }
+        // if (this.a11yButton) {
+        //     a11yClick(this.a11yButton, (event) => {
+        //         if (this.state.isMobile) {
+        //             event.preventDefault();
+        //             this.mainButton.focus();
+        //         }
+        //     });
+        // }
 
         this.dropdownsButtons.forEach((button) => {
             a11yClick(button, (event) => {

@@ -15,7 +15,7 @@ class Search {
         this.button = document.querySelector('.pagefind-ui__toggle');
         this.element = document.querySelector('.search__modal');
         this.closeButton = this.element.querySelector('.search__close');
-        this.a11yButton = document.querySelector('[href="#search-button"]');
+        // this.a11yButton = document.querySelector('[href="#search-button"]');
 
         this.searchInstance = new PagefindUI({
             element: container,
@@ -95,15 +95,14 @@ class Search {
             }
         });
 
-        if (this.a11yButton) {
-            a11yClick(this.a11yButton, (event) => {
-                if (isMobile()) {
-                    event.preventDefault();
-                    this.toggle(true);
-                    console.log('ooook')
-                }
-            });
-        }
+        // if (this.a11yButton) {
+        //     a11yClick(this.a11yButton, (event) => {
+        //         if (isMobile()) {
+        //             event.preventDefault();
+        //             this.toggle(true);
+        //         }
+        //     });
+        // }
     }
 
     clearSearch () {
