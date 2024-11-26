@@ -135,7 +135,7 @@ window.osuny.Lightbox.prototype._createImage = function (data) {
     this.contentElements.image = document.createElement('img');
     this.contentElements.image.draggable = false;
     this.contentElements.image.src = data.imageSrc;
-    this.contentElements.image.alt = data.alt || '';
+    this.contentElements.image.alt = data.alt || window.osuny.i18n.lightbox.default_alt;
     this.contentElements.media.append(this.contentElements.image);
     this._setAriaOnImage(data);
 };
