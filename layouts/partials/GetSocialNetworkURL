@@ -1,0 +1,12 @@
+{{ $type := printf "%T" . }}
+{{ $url := "" }}
+
+{{ if eq $type "map[string]interface {}" }}
+  {{ with index . "value" }}
+    {{ $url = . | safeHTML }}
+  {{ end }}
+{{ else }}
+  {{ $url = . }}
+{{ end }}
+
+{{ return $url }}
