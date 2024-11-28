@@ -20,6 +20,7 @@ osuny.SliderArrows = function (slider) {
 osuny.SliderArrows.prototype.create = function (direction) {
     var button = document.createElement('button');
     button.classList.add('slider-arrow', 'slider-arrow-' + direction);
+    button.setAttribute('aria-describedby', this.slider.titleId);
     osuny.utils.insertSROnly(button, osuny.i18n.slider[direction]);
     this.container.appendChild(button);
     return button;
@@ -34,12 +35,16 @@ osuny.SliderArrows.prototype.update = function () {
     setButtonEnability(this.previous, !this.slider.state.isFirst);
     setButtonEnability(this.next, !this.slider.state.isLast);
     if (this.progression) {
-        this.progression.innerText = this.slider.state.index + 1 + '/' + this.slider.slides.length;
+        this.updateProgression();
     }
 };
 
+osuny.SliderArrows.prototype.updateProgression = function () {
+    this.progression.innerHTML = this.slider.state.index + 1 + '<span class="sr-only"> sur </span><span aria-hidden="true">/</span>' + this.slider.slides.length;
+};
+
 osuny.SliderArrows.prototype.addProgression = function () {
-    this.progression = document.createElement('div');
+    this.progression = document.createElement('p');
     this.progression.classList.add('slider-progression');
     this.next.before(this.progression);
 };

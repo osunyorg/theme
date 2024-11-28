@@ -6,8 +6,6 @@ osuny.SliderPagination = function (slider) {
     this.buttons = [];
     this.container = document.createElement('ul');
     this.container.classList.add('slider-pagination');
-    this.container.setAttribute('aria-label', osuny.i18n.slider.pagination_list);
-    this.container.setAttribute('aria-describedby', this.slider.titleId);
     this.slider.controls.appendChild(this.container);
     this.create();
 };
