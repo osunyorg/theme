@@ -1,5 +1,11 @@
-{{ with . }}
-  {{ $title := i18n "commons.lightbox.button" }}
+{{ $image := .image }}
+
+{{ with .context }}
+  {{ $title := i18n "commons.lightbox.button_without_alt" }}
+  {{ if .alt }}
+    {{ $title = i18n "commons.lightbox.button" }}
+  {{ end }}
+
   {{ $options := dict "imageSrc" ( partial "GetLightboxUrl" .id ) }}
 
   {{ with .text }}
@@ -13,9 +19,11 @@
 
   {{ with .alt }}
     {{ $options = merge $options (dict "alt" (. | plainify)) }}
+    {{ $title = printf "%s %s" $title ( . | plainify ) }}
   {{ end }}
 
   <button class="lightbox-button" data-lightbox="{{ $options | encoding.Jsonify }}">
     <span class="sr-only">{{ $title | plainify }}</span>
+    {{ $image }}
   </button>
 {{ end }}

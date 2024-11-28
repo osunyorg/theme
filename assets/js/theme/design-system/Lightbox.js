@@ -37,8 +37,9 @@ window.osuny.Lightbox.prototype._setup = function () {
 window.osuny.Lightbox.prototype._listen = function () {
     window.osuny.Popup.prototype._listen.call(this);
 
-    this.buttons.forEach(function (button) {
+    this.buttons.forEach(function (button, index) {
         button.addEventListener('click', this.open.bind(this, button));
+        this._setImageAltText(button, index);
     }.bind(this));
 
     this.contentElements.previousButton.addEventListener('click', this.navigateTo.bind(this, 'previousData'));
@@ -65,6 +66,16 @@ window.osuny.Lightbox.prototype._getData = function (button) {
     data.buttonElement = button;
     return data;
 };
+
+window.osuny.Lightbox.prototype._setImageAltText = function(button, index) {
+    var alt = this._getData(button).alt,
+        text = this._getData(button).information,
+        buttonText = button.querySelector('.sr-only');
+
+    if (!alt && !text) {
+        buttonText.innerHTML += ` ${index + 1}`;
+    }
+}
 
 window.osuny.Lightbox.prototype._setSiblings = function () {
     var figure = this.state.currentData.buttonElement.parentElement,

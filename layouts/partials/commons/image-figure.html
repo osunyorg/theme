@@ -14,15 +14,17 @@
                 aria-label="{{ . | plainify }}"
               {{ end }}
       >
-      {{ partial "commons/image.html" (dict
-        "image" .id
-        "alt" .alt
-        "sizes" $sizes
-        "lazy" $lazy
+      {{ $image_tag := partial "commons/image.html" (dict
+          "image" .id
+          "alt" .alt
+          "sizes" $sizes
+          "lazy" $lazy
       ) }}
 
       {{ if $is_lightbox }}
-        {{ partial "commons/lightbox/button.html" . }}
+        {{- partial "commons/lightbox/button.html" (dict "image" $image_tag "context" .) -}}
+      {{ else }}
+        {{ $image_tag }}
       {{ end }}
 
       {{ if or .text .credit }}
