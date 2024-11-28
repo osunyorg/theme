@@ -14,9 +14,14 @@
                 aria-label="{{ . | plainify }}"
               {{ end }}
       >
+      {{ $alt := .alt }}
+      {{ if and (not .alt) $is_lightbox }}
+        {{ $alt = i18n "commons.lightbox.alternative_alt" }}
+      {{ end }}
+
       {{ $image_tag := partial "commons/image.html" (dict
           "image" .id
-          "alt" .alt
+          "alt" $alt
           "sizes" $sizes
           "lazy" $lazy
       ) }}

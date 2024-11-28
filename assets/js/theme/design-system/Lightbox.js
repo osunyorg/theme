@@ -68,12 +68,13 @@ window.osuny.Lightbox.prototype._getData = function (button) {
 };
 
 window.osuny.Lightbox.prototype._setImageAltText = function(button, index) {
-    var alt = this._getData(button).alt,
-        text = this._getData(button).information,
-        buttonText = button.querySelector('.sr-only');
+    var lightboxAlt = this._getData(button).alt,
+        image = button.querySelector('img'),
+        imageAlt = image.getAttribute('alt');
 
-    if (!alt && !text) {
-        buttonText.innerHTML += ` ${index + 1}`;
+    if (!lightboxAlt) {
+        imageAlt += ` ${index + 1}`;
+        image.setAttribute('alt', imageAlt);
     }
 }
 
