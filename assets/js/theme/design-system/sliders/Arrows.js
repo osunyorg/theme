@@ -12,8 +12,6 @@ osuny.SliderArrows = function (slider) {
 
     if (this.slider.options.progression) {
         this.addProgression();
-        // mettre un p au lieu d'un div
-        //<p>2<span class="sr-only"> sur </span><span aria-hidden="true">/</span>4</p>
     }
 
     this.listen();
@@ -42,7 +40,7 @@ osuny.SliderArrows.prototype.update = function () {
 };
 
 osuny.SliderArrows.prototype.updateProgression = function () {
-    this.progression.innerText = this.slider.state.index + 1 + '<span class="sr-only"> sur </span><span aria-hidden="true">/</span>' + this.slider.slides.length;
+    this.progression.innerHTML = this.slider.state.index + 1 + '<span class="sr-only"> sur </span><span aria-hidden="true">/</span>' + this.slider.slides.length;
 };
 
 osuny.SliderArrows.prototype.addProgression = function () {
