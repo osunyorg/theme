@@ -10,6 +10,7 @@ import './design-system/dropdowns';
 import './design-system/font';
 import './design-system/mainMenu';
 import './design-system/modal';
+import './design-system/navAccessibility';
 import './design-system/notes';
 import './design-system/search';
 import './design-system/toc';
