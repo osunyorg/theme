@@ -48,8 +48,33 @@ class Search {
                 this.accessibleMessage = document.createElement('p');
                 this.accessibleMessageContainer.appendChild(this.accessibleMessage);
             }
-            setTimeout(this.updateAccessibilityMessageRole.bind(this), speakDelay);
+            clearTimeout(this.a11yTimeout);
+            this.a11yTimeout = setTimeout(this.updateAccessibility.bind(this), speakDelay);
         });
+    }
+
+    updateAccessibility () {
+        this.updateAccessibilityMessageRole();
+        this.updateAccessibilityTags();
+    }
+
+    updateAccessibilityTags () {
+        const results = this.element.querySelectorAll('.pagefind-ui__result');
+
+        results.forEach(this.updateAccessibilityResult);
+    }
+
+    updateAccessibilityResult (result) {
+        let image = result.querySelector('img'),
+            title = result.querySelector('.pagefind-ui__result-title');
+
+        if (image) {
+            image.setAttribute('alt', '');
+        }
+        if (title) {
+            title.setAttribute('role', 'heading');
+            title.setAttribute('aria-level', '2');
+        }
     }
 
     updateAccessibilityMessageRole () {
