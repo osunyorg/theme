@@ -37,8 +37,10 @@ window.osuny.Lightbox.prototype._setup = function () {
 window.osuny.Lightbox.prototype._listen = function () {
     window.osuny.Popup.prototype._listen.call(this);
 
-    this.buttons.forEach(function (button) {
+    this.buttons.forEach(function (button, index) {
         button.addEventListener('click', this.open.bind(this, button));
+        this._setImageAltText(button, index);
+        this._setFigcaptionId(button, index);
     }.bind(this));
 
     this.contentElements.previousButton.addEventListener('click', this.navigateTo.bind(this, 'previousData'));
@@ -64,6 +66,27 @@ window.osuny.Lightbox.prototype._getData = function (button) {
     var data = JSON.parse(button.getAttribute('data-lightbox'));
     data.buttonElement = button;
     return data;
+};
+
+window.osuny.Lightbox.prototype._setImageAltText = function (button, index) {
+    var lightboxAlt = this._getData(button).alt,
+        image = button.querySelector('img'),
+        imageAlt = image.getAttribute('alt');
+
+    if (!lightboxAlt) {
+        imageAlt += ` ${index + 1}`;
+        image.setAttribute('alt', imageAlt);
+    }
+};
+
+window.osuny.Lightbox.prototype._setFigcaptionId = function (button, index) {
+    var parent = button.parentElement,
+        figcaption = parent.querySelector('figcaption');
+
+    if (figcaption) {
+        figcaption.id = 'image-figcaption-' + index;
+        button.setAttribute('aria-describedby', figcaption.id);
+    }
 };
 
 window.osuny.Lightbox.prototype._setSiblings = function () {

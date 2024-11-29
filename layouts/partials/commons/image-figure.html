@@ -7,22 +7,31 @@
 
   {{ if $image }}
     {{ with .image }}
+      {{ $credit := partial "RemoveSrOnlyTag" .credit }}
+      {{ $credit = cond $credit (printf "© %s" $credit) "" }}
       <figure
-              class="{{ $image_class }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
-              {{- with or .text .alt .credit }}
+              class="{{ $image_class }}{{ if $is_lightbox }} lightbox-figure {{ end }}"
+              {{- with or .text .alt $credit }}
                 role="figure"
                 aria-label="{{ . | plainify }}"
               {{ end }}
       >
-      {{ partial "commons/image.html" (dict
-        "image" .id
-        "alt" .alt
-        "sizes" $sizes
-        "lazy" $lazy
+      {{ $alt := .alt }}
+      {{ if and (not .alt) $is_lightbox }}
+        {{ $alt = i18n "commons.lightbox.alternative_alt" }}
+      {{ end }}
+
+      {{ $image_tag := partial "commons/image.html" (dict
+          "image" .id
+          "alt" $alt
+          "sizes" $sizes
+          "lazy" $lazy
       ) }}
 
       {{ if $is_lightbox }}
-        {{ partial "commons/lightbox/button.html" . }}
+        {{- partial "commons/lightbox/button.html" (dict "image" $image_tag "context" .) }}
+      {{ else }}
+        {{ $image_tag }}
       {{ end }}
 
       {{ if or .text .credit }}
@@ -31,7 +40,10 @@
             {{ . | safeHTML }}
           {{ end }}
           {{ with .credit }}
-            <div class="credit">{{ . | safeHTML }}</div>
+            <div class="credit">
+              <p class="sr-only">{{ i18n "commons.accessibility.credits" }}</p>
+              {{ . | safeHTML }}
+            </div>
           {{ end }}
         </figcaption>
       {{ end }}

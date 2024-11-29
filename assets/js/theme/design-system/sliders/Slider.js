@@ -190,7 +190,7 @@ osuny.Slider.prototype.focus = function () {
     var canFocus = this.components.autoplay ? !this.components.autoplay.state.isActive : true;
     clearTimeout(this.focusTimeout);
 
-    this.currentSlide.setAttribute('tabindex', '0');
+    this.currentSlide.setAttribute('tabindex', '-1');
 
     if (canFocus) {
         this.focusTimeout = setTimeout(function () {
