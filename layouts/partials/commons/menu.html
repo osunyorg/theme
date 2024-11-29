@@ -53,6 +53,11 @@
     <li{{ if ne $item_class ""}} class="{{ $item_class }}"{{ end }}>
       {{- if ne .kind "blank" -}}
         <a href="{{ .target }}"{{ if ne $link_class ""}} class="{{ $link_class }}"{{ end }} {{ safeHTMLAttr $attr }} {{ safeHTMLAttr $attr_title }}>{{ .title }}</a>
+        {{ if and $dropdown_lvl2_summary (eq $level 2) .file }}
+          {{ with site.GetPage .file }}
+           {{ safeHTML .Params.summary }}
+          {{ end }}
+        {{ end }}
       {{- else -}}
         <span class="{{ if ne $link_class ""}} {{ $link_class }}{{ end }}{{ if gt .level 1 }} disabled{{ end }}" {{ safeHTMLAttr $attr }}>{{ .title }}</span>
       {{- end -}}
@@ -79,17 +84,6 @@
                 "level" $nextLevel
                 "context" $context
             ) -}}
-        {{- else if and $dropdown_lvl2_summary (eq $level 2) -}}
-            {{ $page := "" }}
-            {{ range (where site.Pages "RelPermalink" "eq" .target) }}
-              {{ $page = . }}
-            {{ end }}
-            {{ if $page }}
-              {{- if $page.Params.summary }}
-                {{ $length := site.Params.menu.dropdown.truncate_summary }}
-                {{ partial "PrepareHTML" $page.Params.summary | truncate $length }}
-              {{ end -}}
-            {{ end }}
         {{- end -}}
         {{- if $has_dropdown -}}
               </div>
