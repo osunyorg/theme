@@ -69,7 +69,6 @@ osuny.Map.prototype.addMarker = function (location, element) {
         }),
         popup = new L.Popup(location, this.options.popup);
 
-
     element.id = marker.id;
     popup.setContent(element);
 

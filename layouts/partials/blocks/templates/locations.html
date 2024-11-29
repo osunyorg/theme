@@ -14,19 +14,29 @@
           "heading_level" $block.ranks.self
         )}}
 
-        <div class="locations locations--{{- $layout }}">
-          {{ $location_heading := printf "h%d" ( $block.ranks.children | default 2 ) }}
-          {{ range .locations }}
-            {{ $location := site.GetPage ( printf "/locations/%s" .slug ) }}
-            {{ with $location }}
+        {{ $locations := slice }}
+        {{ $location := "" }}
+        {{ range .locations }}
+          {{ $location = site.GetPage ( printf "/locations/%s" .slug ) }}
+          {{ $locations = $locations | append $location }}
+        {{ end }}
+
+        {{ if eq $layout "map" }}
+          {{ partial "locations/map.html" (dict
+              "locations" $locations
+            )}}
+        {{ else }}
+          <div class="locations locations--{{- $layout }}">
+            {{ $location_heading := printf "h%d" ( $block.ranks.children | default 2 ) }}
+            {{ range $locations }}
               {{ partial "locations/location.html" (dict 
                 "location" .
                 "heading" $location_heading
                 "options" $options
               ) }}
             {{ end }}
-          {{ end }}
-        </div>
+          </div>
+        {{ end }}
       </div>
     </div>
   </div>

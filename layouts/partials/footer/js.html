@@ -2,7 +2,7 @@
 
 {{ if .Params.contents }}
   {{ range .Params.contents }}
-    {{ if eq .template "organizations" }}
+    {{ if or (eq .template "locations") (eq .template "organizations") }}
       {{ with .data }}
         {{ if eq .layout "map" }}
           {{ $isLeafletNeeded = true }}
