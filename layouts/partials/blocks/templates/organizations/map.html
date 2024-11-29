@@ -42,7 +42,7 @@
     </ul>
   </details>
 </div>
-<div class="organizations map" data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}">
+<div class="organizations map" data-map data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}">
   {{- range .organizations }}
     {{ if .slug }}
       {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
