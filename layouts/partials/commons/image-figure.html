@@ -1,16 +1,20 @@
+{{ $in_gallery := .gallery | default false }}
+
 {{ if .image.id }}
   {{ $sizes := .sizes }}
   {{ $lazy := default true .lazy }}
   {{ $image := partial "GetMedia" .image.id }}
   {{ $image_class := printf "image-%s" (partial "GetImageDirection" .image) }}
   {{ $is_lightbox := not site.Params.image_sizes.design_system.lightbox.disabled }}
+  {{ if and $is_lightbox $in_gallery }}
+    {{ $is_lightbox = not site.Params.image_sizes.design_system.lightbox.in_gallery.disabled }}
+  {{ end }}
 
   {{ if $image }}
     {{ with .image }}
       {{ $credit := partial "RemoveSrOnlyTag" .credit }}
       {{ $credit = cond $credit (printf "© %s" $credit) "" }}
-      <figure
-              class="{{ $image_class }}{{ if $is_lightbox }} lightbox-figure {{ end }}"
+      <figure class="{{ $image_class }}{{ if $is_lightbox }} lightbox-figure {{ end }}"
               {{- with or .text .alt $credit }}
                 role="figure"
                 aria-label="{{ . | plainify }}"
