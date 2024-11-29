@@ -79,9 +79,9 @@ osuny.Map.prototype.addMarker = function (location, element) {
     this.map.addLayer(marker);
     marker.bindPopup(popup);
 
-    this.setMarkerAccessibility(marker);
     this.popups.push(popup);
     this.markers.push(marker);
+    this.setMarkerAccessibility(marker);
 };
 
 osuny.Map.prototype.setMarkerAccessibility = function (marker) {
@@ -127,6 +127,13 @@ osuny.Map.prototype.setAccessibility = function () {
 
     this.map.attributionControl._container.innerHTML = '';
     this.map.attributionControl._container.append(p);
+
+    setTimeout(this.setPopupAccessibility.bind(this), 10);
+};
+
+osuny.Map.prototype.setPopupAccessibility = function () {
+    var button = this.element.querySelector('.leaflet-popup-close-button');
+    // TODO = traduire le bouton
 };
 
 osuny.Map.prototype.setZoomAria = function (buttonKey, id, i18nKey) {
