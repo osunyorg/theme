@@ -40,6 +40,7 @@ window.osuny.Lightbox.prototype._listen = function () {
     this.buttons.forEach(function (button, index) {
         button.addEventListener('click', this.open.bind(this, button));
         this._setImageAltText(button, index);
+        this._setFigcaptionId(button, index);
     }.bind(this));
 
     this.contentElements.previousButton.addEventListener('click', this.navigateTo.bind(this, 'previousData'));
@@ -67,7 +68,7 @@ window.osuny.Lightbox.prototype._getData = function (button) {
     return data;
 };
 
-window.osuny.Lightbox.prototype._setImageAltText = function(button, index) {
+window.osuny.Lightbox.prototype._setImageAltText = function (button, index) {
     var lightboxAlt = this._getData(button).alt,
         image = button.querySelector('img'),
         imageAlt = image.getAttribute('alt');
@@ -76,7 +77,17 @@ window.osuny.Lightbox.prototype._setImageAltText = function(button, index) {
         imageAlt += ` ${index + 1}`;
         image.setAttribute('alt', imageAlt);
     }
-}
+};
+
+window.osuny.Lightbox.prototype._setFigcaptionId = function (button, index) {
+    var parent = button.parentElement,
+        figcaption = parent.querySelector('figcaption');
+
+    if (figcaption) {
+        figcaption.id = 'image-figcaption-' + index;
+        button.setAttribute('aria-describedby', figcaption.id);
+    }
+};
 
 window.osuny.Lightbox.prototype._setSiblings = function () {
     var figure = this.state.currentData.buttonElement.parentElement,
