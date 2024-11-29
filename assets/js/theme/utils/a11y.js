@@ -5,7 +5,9 @@ var actionKeys = [
     a11yClick,
     setButtonEnability,
     setAriaVisibility,
-    ariaHideBodyChildren;
+    ariaHideBodyChildren,
+    parentQuerySelector,
+    setDescribedBy;
 
 a11yClick = function (element, action) {
     element.addEventListener('click', action);
@@ -46,9 +48,35 @@ ariaHideBodyChildren = function (element, inert) {
     }.bind(this));
 };
 
+parentQuerySelector = function (element, parentSelector, targetSelector) {
+    var parent = element.closest(parentSelector),
+        target;
+    if (!parent) {
+        return;
+    }
+    target = parent.querySelector(targetSelector);
+    return target;
+};
+
+setDescribedBy = function () {
+    var elementsToDescribe = document.querySelectorAll('[data-describedby]'),
+        title;
+    elementsToDescribe.forEach(function (element, index) {
+        title = parentQuerySelector(element, '.block', '.block-title');
+        if (title) {
+            title.id = title.id ? title.id : 'aria-title-' + index;
+            element.setAttribute('aria-describedby', title.id);
+            element.removeAttribute('data-describedby');
+        }
+    });
+};
+
+setDescribedBy();
+
 export {
     a11yClick,
     setButtonEnability,
     setAriaVisibility,
-    ariaHideBodyChildren
+    ariaHideBodyChildren,
+    parentQuerySelector
 };

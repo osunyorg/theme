@@ -1,5 +1,8 @@
+import * as params from '@params';
+
 window.osuny = window.osuny || {};
 window.osuny.utils = window.osuny.utils || {};
+window.osuny.i18n = params.i18n;
 
 window.osuny.utils.instanciateAll = function (selector, Klass) {
     var instances = document.querySelectorAll(selector);

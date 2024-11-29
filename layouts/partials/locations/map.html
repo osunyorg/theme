@@ -1,7 +1,11 @@
 {{ $locations := .locations }}
+{{ $title := .title }}
+{{ $aria_label := i18n "commons.maps.label" $title }}
 
 <div class="locations-map">
-  <div class="map" data-map data-marker-icon="{{ "/assets/images/map-marker.svg" }}">
+  <div class="map" data-map data-marker-icon="{{ "/assets/images/map-marker.svg" }}" 
+        role="region"
+        aria-label="{{ $aria_label }}">
     {{ range $locations }}
       {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}
         <article class="location" data-longitude="{{ .Params.contact_details.geolocation.longitude }}" data-latitude="{{ .Params.contact_details.geolocation.latitude }}">

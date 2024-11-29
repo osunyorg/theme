@@ -1,11 +1,14 @@
 {{ $logo_index := .logo_index }}
 {{ $options := .options }}
 {{ $block_index := .block_index }}
-{{ $id := printf "block-%d-transcription" $block_index}}
+
+{{ $id_transcription := printf "block-%d-transcription" $block_index }}
 
 <div class="transcription">
-  <details id="{{- $id -}}" class="map-transcription">
-    <summary aria-controls="{{- $id -}}" aria-expanded="false">{{ i18n "commons.accessibility.map_transcription" }}</summary>
+  <details id="{{- $id_transcription -}}" class="map-transcription">
+    <summary aria-controls="{{- $id_transcription -}}" aria-expanded="false" data-describedby=".block-title">
+      {{ i18n "commons.accessibility.map_transcription" }}
+    </summary>
     <ul>
       {{ range .organizations }}
         {{ if .slug }}
@@ -42,7 +45,18 @@
     </ul>
   </details>
 </div>
-<div class="organizations map" data-map data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}">
+
+{{ $title := printf "%s %d" (i18n "blocks.organizations.title") $block_index }}
+{{ if .title }}
+  {{ $title = .title }}
+{{ end }}
+
+{{ $aria_label := i18n "commons.maps.label" $title }}
+<div class="organizations map" 
+    data-map data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}"
+    role="region"
+    aria-label="{{ $aria_label }}"
+    >
   {{- range .organizations }}
     {{ if .slug }}
       {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}

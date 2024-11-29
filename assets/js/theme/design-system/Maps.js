@@ -1,8 +1,11 @@
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable new-cap */
-var osuny = window.osuny || {},
-    // Leaflet
-    L = window.L || {};
+
+import { parentQuerySelector } from '../utils/a11y';
+
+// Leaflet
+var L = window.L || {},
+    osuny = window.osuny || {};
 
 osuny.Map = function (element) {
     this.element = element;
@@ -18,6 +21,7 @@ osuny.Map.prototype.init = function () {
     this.setMap();
     this.setMarkers();
     this.fitToMapBounds();
+    this.setAccessibility();
 };
 
 osuny.Map.prototype.setMap = function () {
@@ -75,12 +79,12 @@ osuny.Map.prototype.addMarker = function (location, element) {
     this.map.addLayer(marker);
     marker.bindPopup(popup);
 
-    this.setAccessibility(marker);
+    this.setMarkerAccessibility(marker);
     this.popups.push(popup);
     this.markers.push(marker);
 };
 
-osuny.Map.prototype.setAccessibility = function (marker) {
+osuny.Map.prototype.setMarkerAccessibility = function (marker) {
     var icon = marker._icon;
 
     if (!icon) {
@@ -103,6 +107,32 @@ osuny.Map.prototype.setAccessibility = function (marker) {
 osuny.Map.prototype.fitToMapBounds = function () {
     var group = L.featureGroup(this.markers).addTo(this.map);
     this.map.fitBounds(group.getBounds());
+};
+
+osuny.Map.prototype.setAccessibility = function () {
+    var title = parentQuerySelector(this.element, '.block', '.block-title'),
+        p;
+
+    // Buttons
+    if (!title) {
+        return;
+    }
+    this.setZoomAria('_zoomInButton', title.id, 'zoom_in');
+    this.setZoomAria('_zoomOutButton', title.id, 'zoom_out');
+
+    // Attributions
+    p = document.createElement('p');
+    p.innerHTML = this.map.attributionControl._container.innerHTML;
+    p.querySelector('a[title]').setAttribute('title', osuny.i18n.maps.attribution_title);
+
+    this.map.attributionControl._container.innerHTML = '';
+    this.map.attributionControl._container.append(p);
+};
+
+osuny.Map.prototype.setZoomAria = function (buttonKey, id, i18nKey) {
+    var button = this.map.zoomControl[buttonKey];
+    button.setAttribute('aria-describedby', id);
+    button.setAttribute('aria-label', osuny.i18n.maps[i18nKey]);
 };
 
 // Selectors

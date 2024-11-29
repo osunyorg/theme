@@ -22,8 +22,14 @@
         {{ end }}
 
         {{ if eq $layout "map" }}
+          {{ $map_title := i18n "programs.location" $locations }}
+          {{ if $block.title }}
+            {{ $map_title = $block.title }}
+          {{ end }}
+
           {{ partial "locations/map.html" (dict
               "locations" $locations
+              "title" $map_title
             )}}
         {{ else }}
           <div class="locations locations--{{- $layout }}">

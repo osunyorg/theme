@@ -8,7 +8,7 @@ import './design-system/clickToCopy';
 import './design-system/extendables';
 import './design-system/dropdowns';
 import './design-system/font';
-import './design-system/Map';
+import './design-system/Maps';
 import './design-system/mainMenu';
 import './design-system/modal';
 import './design-system/navAccessibility';
