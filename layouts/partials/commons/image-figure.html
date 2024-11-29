@@ -7,9 +7,10 @@
 
   {{ if $image }}
     {{ with .image }}
+      {{ $credit := cond .credit (printf "© %s" .credit) "" }}
       <figure
-              class="{{ $image_class }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
-              {{- with or .text .alt .credit }}
+              class="{{ $image_class }}{{ if $is_lightbox }} lightbox-figure {{ end }}"
+              {{- with or .text .alt $credit }}
                 role="figure"
                 aria-label="{{ . | plainify }}"
               {{ end }}
