@@ -38,7 +38,10 @@
             {{ . | safeHTML }}
           {{ end }}
           {{ with .credit }}
-            <div class="credit">{{ . | safeHTML }}</div>
+            <div class="credit">
+              <p class="sr-only">{{ i18n "commons.accessibility.credits" }}</p>
+              {{ . | safeHTML }}
+            </div>
           {{ end }}
         </figcaption>
       {{ end }}
