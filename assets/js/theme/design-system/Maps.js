@@ -50,7 +50,7 @@ osuny.Map.prototype.setMarkers = function () {
 
 osuny.Map.prototype.setMarkerIcon = function () {
     var url = this.element.getAttribute('data-marker-icon') || '/assets/images/map-marker.svg';
-    this.markerIcon = L.icon({
+    L.Marker.prototype.options.icon = L.icon({
         iconUrl: url,
         iconSize: [17, 26]
     });
@@ -66,13 +66,14 @@ osuny.Map.prototype.createMarker = function (element, opened) {
 };
 
 osuny.Map.prototype.addMarker = function (location, element) {
-    var marker = new L.marker(location, {
-            icon: this.markerIcon,
-            title: element.getAttribute('data-title'),
+    var title = element.getAttribute('data-title'),
+        marker = new L.marker(location, {
+            title: title,
             alt: ''
         }),
         popup = new L.Popup(location, this.options.popup);
 
+    marker.id = 'leaflet-item-' + this.map._leaflet_id + this.markers.length;
     element.id = marker.id;
     popup.setContent(element);
 
@@ -81,7 +82,6 @@ osuny.Map.prototype.addMarker = function (location, element) {
 
     this.popups.push(popup);
     this.markers.push(marker);
-    this.setMarkerAccessibility(marker);
 };
 
 osuny.Map.prototype.setMarkerAccessibility = function (marker) {
@@ -91,7 +91,7 @@ osuny.Map.prototype.setMarkerAccessibility = function (marker) {
         return;
     }
 
-    icon.setAttribute('aria-label', 'Afficher les informations de ' + marker.title);
+    icon.setAttribute('aria-label', osuny.i18n.maps.marker_label + ' ' + marker.options.title);
     icon.setAttribute('aria-controls', marker.id);
     icon.setAttribute('aria-expanded', 'false');
 
@@ -111,14 +111,16 @@ osuny.Map.prototype.fitToMapBounds = function () {
 
 osuny.Map.prototype.setAccessibility = function () {
     var title = parentQuerySelector(this.element, '.block', '.block-title'),
-        p;
+        p,
+        id;
 
     // Buttons
-    if (!title) {
-        return;
+    if (title) {
+        id = title.id;
     }
-    this.setZoomAria('_zoomInButton', title.id, 'zoom_in');
-    this.setZoomAria('_zoomOutButton', title.id, 'zoom_out');
+
+    this.setZoomAria('_zoomInButton', id, 'zoom_in');
+    this.setZoomAria('_zoomOutButton', id, 'zoom_out');
 
     // Attributions
     p = document.createElement('p');
@@ -128,18 +130,24 @@ osuny.Map.prototype.setAccessibility = function () {
     this.map.attributionControl._container.innerHTML = '';
     this.map.attributionControl._container.append(p);
 
-    setTimeout(this.setPopupAccessibility.bind(this), 10);
+    this.markers.forEach(this.setMarkerAccessibility);
+
+    this.map.on('popupopen', this.setPopupAccessibility.bind(this))
 };
 
-osuny.Map.prototype.setPopupAccessibility = function () {
-    var button = this.element.querySelector('.leaflet-popup-close-button');
-    // TODO = traduire le bouton
+osuny.Map.prototype.setPopupAccessibility = function (event) {
+    var button = event.popup._closeButton,
+        content = event.popup._content;
+    button.setAttribute('aria-label', osuny.i18n.maps.popup_close + ' ' + content.getAttribute('data-title'));
 };
 
 osuny.Map.prototype.setZoomAria = function (buttonKey, id, i18nKey) {
     var button = this.map.zoomControl[buttonKey];
-    button.setAttribute('aria-describedby', id);
     button.setAttribute('aria-label', osuny.i18n.maps[i18nKey]);
+    button.setAttribute('title', osuny.i18n.maps[i18nKey]);
+    if (id) {
+        button.setAttribute('aria-describedby', id);
+    }
 };
 
 // Selectors

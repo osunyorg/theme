@@ -35,7 +35,7 @@
 
 {{- define "organization" -}}
   {{ $options := .options }}
-  <article class="organization" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
+  <article class="organization" data-title="{{ .title }}" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
     {{ $title := "" }}
     <div class="organization-content">
       {{ if .title }}

@@ -8,7 +8,7 @@
         aria-label="{{ $aria_label }}">
     {{ range $locations }}
       {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}
-        <article class="location" data-longitude="{{ .Params.contact_details.geolocation.longitude }}" data-latitude="{{ .Params.contact_details.geolocation.latitude }}">
+        <article class="location" data-title="{{ .Params.title }}" data-longitude="{{ .Params.contact_details.geolocation.longitude }}" data-latitude="{{ .Params.contact_details.geolocation.latitude }}">
           {{ $title := "" }}
           {{ if .Params.title }}
             <div class="location-content">
