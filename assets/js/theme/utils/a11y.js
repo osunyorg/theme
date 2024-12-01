@@ -1,11 +1,13 @@
-var actionKeys = [
+var osuny = window.osuny || {},
+    actionKeys = [
         'Enter',
         'Space'
     ],
     a11yClick,
     setButtonEnability,
     setAriaVisibility,
-    ariaHideBodyChildren;
+    ariaHideBodyChildren,
+    setDefaultAltToImages;
 
 a11yClick = function (element, action) {
     element.addEventListener('click', action);
@@ -46,9 +48,23 @@ ariaHideBodyChildren = function (element, inert) {
     }.bind(this));
 };
 
+setDefaultAltToImages = function (elements) {
+    var index = 0,
+        image;
+
+    elements.forEach(function (element) {
+        image = element.querySelector('img');
+        if (!image.alt) {
+            index += 1;
+            image.alt = osuny.i18n.lightbox.default_alt + ' ' + index;
+        }
+    });
+};
+
 export {
     a11yClick,
     setButtonEnability,
     setAriaVisibility,
-    ariaHideBodyChildren
+    ariaHideBodyChildren,
+    setDefaultAltToImages
 };
