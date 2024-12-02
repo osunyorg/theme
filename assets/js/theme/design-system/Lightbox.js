@@ -1,5 +1,5 @@
 import './TouchControl';
-import { setButtonEnability } from '../utils/a11y';
+import { setButtonEnability, setDefaultAltToImages } from '../utils/a11y';
 
 /* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
@@ -32,6 +32,7 @@ window.osuny.Lightbox.prototype._setup = function () {
         nextButton: this.element.querySelector('.lightbox-button-next')
     };
     this.touchControl = new window.osuny.TouchControl(this, this.contentElements.media);
+    setDefaultAltToImages(this.buttons);
 };
 
 window.osuny.Lightbox.prototype._listen = function () {
@@ -39,8 +40,7 @@ window.osuny.Lightbox.prototype._listen = function () {
 
     this.buttons.forEach(function (button, index) {
         button.addEventListener('click', this.open.bind(this, button));
-        this._setImageAltText(button, index);
-        this._setFigcaptionId(button, index);
+        this._setAriaDescribed(button, index);
     }.bind(this));
 
     this.contentElements.previousButton.addEventListener('click', this.navigateTo.bind(this, 'previousData'));
@@ -68,18 +68,7 @@ window.osuny.Lightbox.prototype._getData = function (button) {
     return data;
 };
 
-window.osuny.Lightbox.prototype._setImageAltText = function (button, index) {
-    var lightboxAlt = this._getData(button).alt,
-        image = button.querySelector('img'),
-        imageAlt = image.getAttribute('alt');
-
-    if (!lightboxAlt) {
-        imageAlt += ` ${index + 1}`;
-        image.setAttribute('alt', imageAlt);
-    }
-};
-
-window.osuny.Lightbox.prototype._setFigcaptionId = function (button, index) {
+window.osuny.Lightbox.prototype._setAriaDescribed = function (button, index) {
     var parent = button.parentElement,
         figcaption = parent.querySelector('figcaption');
 
@@ -158,7 +147,7 @@ window.osuny.Lightbox.prototype._createImage = function (data) {
     this.contentElements.image = document.createElement('img');
     this.contentElements.image.draggable = false;
     this.contentElements.image.src = data.imageSrc;
-    this.contentElements.image.alt = data.alt || window.osuny.i18n.lightbox.default_alt;
+    this.contentElements.image.alt = data.alt || data.buttonElement.querySelector('img').alt;
     this.contentElements.media.append(this.contentElements.image);
     this._setAriaOnImage(data);
 };

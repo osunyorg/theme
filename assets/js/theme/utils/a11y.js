@@ -1,4 +1,5 @@
-var actionKeys = [
+var osuny = window.osuny || {},
+    actionKeys = [
         'Enter',
         'Space'
     ],
@@ -6,6 +7,7 @@ var actionKeys = [
     setButtonEnability,
     setAriaVisibility,
     ariaHideBodyChildren,
+    setDefaultAltToImages,
     parentQuerySelector,
     setDescribedBy;
 
@@ -48,6 +50,19 @@ ariaHideBodyChildren = function (element, inert) {
     }.bind(this));
 };
 
+setDefaultAltToImages = function (elements) {
+    var index = 0,
+        image;
+
+    elements.forEach(function (element) {
+        image = element.querySelector('img');
+        if (!image.alt) {
+            index += 1;
+            image.alt = osuny.i18n.lightbox.default_alt + ' ' + index;
+        }
+    });
+};
+
 parentQuerySelector = function (element, parentSelector, targetSelector) {
     var parent = element.closest(parentSelector),
         target;
@@ -78,5 +93,6 @@ export {
     setButtonEnability,
     setAriaVisibility,
     ariaHideBodyChildren,
+    setDefaultAltToImages,
     parentQuerySelector
 };
