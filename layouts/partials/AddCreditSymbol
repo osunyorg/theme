@@ -1,0 +1,8 @@
+{{ $credit := .credit }}
+{{ $first_paragraph := "" }}
+{{ if .before }}
+  {{ $credit = replace $credit "<p>" "<p><span aria-hidden='true'>©</span>" 1 }}
+{{ else if .after }}
+  {{ $credit = replace $credit "</p>" "<span aria-hidden='true'>©</span></p>" 1 }}
+{{ end }}
+{{ return ($credit | safeHTML) }}

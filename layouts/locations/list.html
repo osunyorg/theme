@@ -17,6 +17,7 @@
       {{ $locations := .Pages }}
       {{ partial "locations/map.html" (dict
           "locations" $locations
+          "title" (i18n "programs.location" $locations)
       )}}
     {{ end }}
   </div>

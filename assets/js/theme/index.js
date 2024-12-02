@@ -1,24 +1,24 @@
-import './body.js';
-import './design-system/accordion.js';
+import './polyfills';
+import './utils/utils';
+import './utils/realViewportHeight';
+import './body';
+
+import './design-system/accordion';
 import './design-system/clickToCopy';
 import './design-system/extendables';
 import './design-system/dropdowns';
 import './design-system/font';
+import './design-system/Maps';
 import './design-system/mainMenu';
 import './design-system/modal';
+import './design-system/navAccessibility';
 import './design-system/notes';
 import './design-system/search';
 import './design-system/toc';
 import './design-system/Popup';
-import './blocks/keyFigures';
-import './blocks/organizations';
-import './blocks/draggableBlocks.js';
-import './blocks/timeline.js';
-import './blocks/videos.js';
-import './blocks/locations.js';
-import './utils/utils.js';
-import './components/events.js';
-import './components/utils.js';
-import './components/carousel.js';
-import './design-system/lightbox.js';
+import './design-system/Lightbox';
+import './design-system/sliders';
 
+import './blocks/keyFigures';
+import './blocks/timeline';
+import './blocks/videos';

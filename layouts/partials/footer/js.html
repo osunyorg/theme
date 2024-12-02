@@ -1,24 +1,13 @@
 {{ $isLeafletNeeded := false }}
-{{ $isCarouselNeeded := false }}
 
 {{ if .Params.contents }}
   {{ range .Params.contents }}
-    {{ if eq .template "organizations" }}
+    {{ if or (eq .template "locations") (eq .template "organizations") }}
       {{ with .data }}
         {{ if eq .layout "map" }}
           {{ $isLeafletNeeded = true }}
         {{ end }}
       {{ end }}
-    {{ end }}
-    {{ if eq .template "gallery"}}
-      {{ with .data }}
-        {{ if eq .layout "carousel" }}
-          {{ $isCarouselNeeded = true }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-    {{ if eq .template "testimonials"}}
-      {{ $isCarouselNeeded = true }}
     {{ end }}
   {{ end }}
 {{ end }}
@@ -49,5 +38,32 @@
   <script src="{{ $leaflet_js.RelPermalink }}" integrity="{{ $leaflet_js.Data.Integrity }}"></script>
 {{ end }}
 
-{{ $js := resources.Get "js/main.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
+{{ $build_options := (dict 
+  "minify" hugo.IsProduction 
+  "params" (dict
+    "i18n" (dict
+      "slider" (dict
+        "default_title" (i18n "commons.slider.default_title")
+        "goto" (i18n "commons.slider.goto")
+        "next" (i18n "commons.slider.next")
+        "pagination_list" (i18n "commons.slider.pagination_list")
+        "pause" (i18n "commons.slider.pause")
+        "play" (i18n "commons.slider.play")
+        "previous" (i18n "commons.slider.previous")
+      )
+      "lightbox" (dict
+        "default_alt" (i18n "commons.lightbox.default_alt")
+      )
+      "maps" (dict
+        "attribution_title" (i18n "commons.maps.attribution_title")
+        "marker_label" (i18n "commons.maps.marker_label")
+        "popup_close" (i18n "commons.maps.popup_close")
+        "zoom_in" (i18n "commons.maps.zoom_in")
+        "zoom_out" (i18n "commons.maps.zoom_out")
+      )
+    )
+  )
+)}}
+
+{{ $js := resources.Get "js/main.js" | js.Build $build_options | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

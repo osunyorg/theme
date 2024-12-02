@@ -1,0 +1,99 @@
+.slider
+    --slider-pagination-interval: 2s // This value is override by slider javascript
+    --slider-transition-duration: 0.25s // This value is override by slider javascript
+    --slider-transition-opacity-duration: 0.25s // This value is override by slider javascript
+    &.is-grabbing
+        .slider-list
+            transition: none
+            user-select: none
+    &:not(.is-ready)
+        display: none !important
+    &-list
+        display: flex
+        position: relative
+        transition: transform var(--slider-transition-duration) cubic-bezier(0.25, 1, 0.5, 1)
+    &-slide
+        flex-shrink: 0
+        transition: opacity var(--slider-transition-opacity-duration)
+        &.is-previous
+            opacity: 0
+    &-arrows
+        display: flex
+        align-items: center
+        button
+            @include button-reset
+            color: var(--color-text)
+            padding: $spacing-3
+            position: static
+            &:disabled
+                opacity: 0.3
+                pointer-events: none
+        .slider-arrow-previous
+            @include icon(arrow-left-line, before)
+            margin-left: -#{$spacing-3}
+        .slider-arrow-next
+            @include icon(arrow-right-line, before)
+    &-progression
+        @include meta
+    &-controls
+        display: flex
+        column-gap: $spacing-2
+        &:empty
+            display: none
+    &-pagination
+        @include list-reset
+        display: flex
+        column-gap: $spacing-1
+        flex-grow: 1
+        li
+            flex-grow: 1
+            position: relative
+            button
+                @include button-reset
+                display: block
+                height: $minimum-accessible-size
+                outline-offset: 0
+                width: 100%
+            &::before, &::after
+                content: ''
+                display: block
+                left: 0
+                right: 0
+                position: absolute
+                top: 50%
+            &::before
+                background-color: var(--color-border)
+                height: pxToRem(1)
+            &::after
+                background-color: var(--color-accent)
+                width: 0%
+                height: pxToRem(3)
+                margin-top: pxToRem(-1)
+            &.is-current
+                &::after
+                    transition: width var(--slider-pagination-interval) linear
+                    width: 100%
+    &-autoplayer
+        button
+            @include button-reset
+            @include icon-block(pause-line)
+            align-items: center
+            border: 1px solid var(--color-border)
+            border-radius: 50%
+            display: flex
+            height: $minimum-accessible-size
+            justify-content: center
+            width: $minimum-accessible-size
+    &.is-paused
+        .slider-pagination
+            li.is-current
+                &::after
+                    transition: none
+                    width: 100%
+        .slider-autoplayer
+            button
+                @include icon-block(play-fill)
+
+[data-slider]:not(.slider-list)
+    > * + *
+        margin-top: $spacing-4
