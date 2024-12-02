@@ -4,10 +4,11 @@ header#document-header
     color: $header-color
     position: fixed
     left: 0
-    transition: transform $header-sticky-transition, background $header-sticky-transition
     top: 0
     width: 100%
     z-index: $zindex-header
+    html:not(.has-search-opened) &
+        transition: transform $header-sticky-transition, background $header-sticky-transition
     @include media-breakpoint-down(desktop)
         border-bottom: 0
         width: 100%
