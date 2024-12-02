@@ -2,7 +2,7 @@
 
 {{ if .Params.contents }}
   {{ range .Params.contents }}
-    {{ if eq .template "organizations" }}
+    {{ if or (eq .template "locations") (eq .template "organizations") }}
       {{ with .data }}
         {{ if eq .layout "map" }}
           {{ $isLeafletNeeded = true }}
@@ -53,6 +53,13 @@
       )
       "lightbox" (dict
         "default_alt" (i18n "commons.lightbox.default_alt")
+      )
+      "maps" (dict
+        "attribution_title" (i18n "commons.maps.attribution_title")
+        "marker_label" (i18n "commons.maps.marker_label")
+        "popup_close" (i18n "commons.maps.popup_close")
+        "zoom_in" (i18n "commons.maps.zoom_in")
+        "zoom_out" (i18n "commons.maps.zoom_out")
       )
     )
   )
