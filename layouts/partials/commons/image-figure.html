@@ -5,15 +5,15 @@
   {{ $lazy := default true .lazy }}
   {{ $image := partial "GetMedia" .image.id }}
   {{ $image_class := printf "image-%s" (partial "GetImageDirection" .image) }}
-  {{ $is_lightbox := not site.Params.image_sizes.design_system.lightbox.disabled }}
-  {{ if and $is_lightbox $in_gallery }}
-    {{ $is_lightbox = not site.Params.image_sizes.design_system.lightbox.in_gallery.disabled }}
+  {{ $with_lightbox := not site.Params.image_sizes.design_system.lightbox.disabled }}
+  {{ if and $with_lightbox $in_gallery }}
+    {{ $with_lightbox = not site.Params.image_sizes.design_system.lightbox.in_gallery.disabled }}
   {{ end }}
 
   {{ if $image }}
     {{ with .image }}
       {{ $aria_label := partial "GetFigureAriaLabel" (dict "text" .text "credit" .credit )}}
-      <figure class="{{ $image_class }}{{ if $is_lightbox }} lightbox-figure {{ end }}"
+      <figure class="{{ $image_class }}{{ if $with_lightbox }} lightbox-figure {{ end }}"
               {{- with $aria_label }}
                 role="figure"
                 aria-label="{{- . -}}"
@@ -26,7 +26,7 @@
           "lazy" $lazy
       ) }}
 
-      {{ if $is_lightbox }}
+      {{ if $with_lightbox }}
         {{- partial "commons/lightbox/button.html" (dict "image" $image_tag "context" .) }}
       {{ else }}
         {{ $image_tag }}
