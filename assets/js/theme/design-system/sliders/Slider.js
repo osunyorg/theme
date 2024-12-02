@@ -1,8 +1,5 @@
-import * as params from '@params';
 import { setAriaVisibility } from '../../utils/a11y';
-
 var osuny = window.osuny || {};
-osuny.i18n = params.i18n;
 
 osuny.sliderComponents = {
     arrows: osuny.SliderArrows,
