@@ -12,14 +12,16 @@
 
   {{ if $image }}
     {{ with .image }}
-      {{ $credit := partial "RemoveSrOnlyTag" .credit }}
-      {{ $credit = cond $credit (printf "%s %s" (i18n "commons.accessibility.credits") $credit) "" }}
+      {{ $aria_label := partial "GetFigureAriaLabel" (dict "text" .text "credit" .credit )}}
+      {{/*  {{ $credit := partial "RemoveSrOnlyTag" .credit }}  */}}
+      {{/*  {{ $credit := cond .credit (printf "%s %s" (i18n "commons.accessibility.credits") .credit) "" }}
+      {{ $aria_label := slice .text $credit }}
+      {{ $aria_label = delimit $aria_label " " }}  */}}
       <figure class="{{ $image_class }}{{ if $is_lightbox }} lightbox-figure {{ end }}"
-              {{- with or .text $credit }}
+              {{- with $aria_label }}
                 role="figure"
-                aria-label="{{ . | plainify }}"
-              {{ end }}
-      >
+                aria-label="{{ . }}"
+              {{ end }} >
 
       {{ $image_tag := partial "commons/image.html" (dict
           "image" .id
