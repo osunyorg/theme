@@ -148,8 +148,9 @@
             display: none
             padding: $spacing-1
             padding-right: $spacing-3
-            > p::before
-                display: none // Remove default ©
+            > p
+                &::before, > span[aria-hidden]
+                    display: none // Remove default ©
         a
             color: inherit
             text-decoration-color: inherit
