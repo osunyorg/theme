@@ -90,7 +90,7 @@
       )}}
     </li>
   {{ end }}
-  {{ if and (eq $kind "primary") (site.Params.menu.i18n.display) }}
+  {{ if .i18n }}
     {{ partial "header/i18n.html" .context }}
   {{ end }}
 </ul>
