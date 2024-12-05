@@ -20,11 +20,15 @@
     {{- $slug := urlize .title -}}
     {{- $item_class := "" -}}
     {{- $link_class := "" -}}
+    {{ $currentWebsite := .Site.BaseURL }}
     {{- $attr := "" -}}
     {{- $attr_title := printf "title=\"%s\"" .title -}}
     {{- $has_dropdown := false -}}
     {{ if eq $context.RelPermalink .target }}
-      {{ $link_class = "active" }}
+        {{ $link_class = "active" }}
+    {{ end }}
+    {{ if and (eq $kind "upper-menu") (strings.Contains .target $currentWebsite) }}
+      {{ $link_class = printf "%s active-site" $link_class }}
     {{ end }}
     {{ if eq $kind "social" }}
       {{- $item_class = printf .title | lower -}}
