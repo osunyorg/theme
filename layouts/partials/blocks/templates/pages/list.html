@@ -9,7 +9,7 @@
     {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
     {{- $path := false -}}
     {{ if reflect.IsMap . }}
-      {{ $path = .file }}
+      {{ $path = .path }}
     {{ else }}
       {{ $path = . }}
     {{ end }}
