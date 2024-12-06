@@ -1,5 +1,5 @@
 <div class="d-help">
-  <a href="#help">
+  <a href="#" class="d-help__toggle">
     <img src="/osuny/icon.png" alt="Aide Osuny" class="d-help__icon" />
   </a>
   <div class="d-help__content" id="help">
@@ -11,6 +11,10 @@
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <td>Afficher l'outil de débogage</td>
+          <td>Ctrl + d</td>
+        </tr>
         <tr>
           <td>Afficher la grille</td>
           <td>Ctrl + g</td>
@@ -59,6 +63,13 @@
 
 <div class="d-cross"></div>
 <style>
+  .d-help {
+    bottom: 10px;
+    left: 10px;
+    position: fixed;
+    width: 40px;
+    z-index: 9999999999;
+  }
   .d-help__content {
     display: none;
     background: #EEEEEE;
@@ -69,7 +80,7 @@
     left: 10px;
     padding: 10px 20px 60px;
   }
-  .d-help__content:target {
+  .d-help--active .d-help__content {
     display: block;
   }
   .d-help__icon {
@@ -77,7 +88,7 @@
     left: 10px;
     position: fixed;
     width: 40px;
-    z-index: 1000;
+    z-index: 1;
   }
   .d-grid {
     bottom: 0;
@@ -247,6 +258,9 @@
     if (e.ctrlKey && e.key === 'p') {
       openInProd();
     }
+    if (e.ctrlKey && e.key === 'd') {
+      toggleDebug();
+    }
   });
 
   window.addEventListener('pointermove', e => {
@@ -263,6 +277,15 @@
       }
     })
   })
+
+  document.querySelector('.d-help__toggle').addEventListener('click', e => {
+    e.preventDefault()
+    toggleDebug()
+  });
+
+  function toggleDebug() {
+    document.querySelector('.d-help').classList.toggle('d-help--active')
+  }
 
   function showImageDimension() {
     document.querySelectorAll('img').forEach(img => {
