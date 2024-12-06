@@ -4,15 +4,13 @@
   <div itemscope itemtype="https://schema.org/CollegeOrUniversity">
     <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
-    {{ with .contact_details.postal_address }}
-        {{ partial "commons/address.html" . }}
-    {{ end }}
-    {{- if .phone -}}
-      <p>
-        {{- $phone := trim .phone "\n " -}}
-        {{- $phone_href := replace $phone " " "" -}}
-        <a itemprop="telephone" href="tel:{{ $phone_href }}">{{ $phone }}</a>
-      </p>
+    {{ with .contact_details }} 
+      {{ partial "commons/address.html" . }}
+      {{- with .phone_numbers.phone -}}
+        <p>
+          <a itemprop="telephone" href="{{.value}}">{{ .label }}</a>
+        </p>
+      {{- end }}
     {{- end }}
   </div>
 {{- end -}}
@@ -20,15 +18,13 @@
   <div itemscope itemtype="https://schema.org/ResearchOrganization">
     <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
-    {{ with .contact_details.postal_address }}
-        {{ partial "commons/address.html" . }}
-    {{ end }}
-    {{- if .phone -}}
-      <p>
-        {{- $phone := trim .phone "\n " -}}
-        {{- $phone_href := replace $phone " " "" -}}
-        <a itemprop="telephone" href="tel:{{ $phone_href }}">{{ $phone }}</a>
-      </p>
+    {{ with .contact_details }} 
+    {{ partial "commons/address.html" . }}
+      {{- with .phone_numbers.phone -}}
+          <p>
+            <a itemprop="telephone" href="{{.value}}">{{ .label }}</a>
+          </p>
+      {{- end }}
     {{- end }}
   </div>
 {{- end -}}

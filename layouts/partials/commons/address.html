@@ -1,9 +1,9 @@
 {{ $address := .address | default . }}
 
-{{ with $address }}
-  {{ with .html }}
+{{ with $address.postal_address }}
+  {{/*  {{ with .html }}
     {{ partial "PrepareHTML" . }}
-  {{ else }}
+  {{ else }}  */}}
     {{ with .data }}
       <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
         {{ with .address }}
@@ -21,12 +21,12 @@
             {{ partial "PrepareHTML" . }}
           </span>
         {{ end }}
-        {{ with .country }}
+        {{ with .city }}
           <span itemprop="addressCountry">
             {{ partial "PrepareHTML" . }}
           </span>
         {{ end }}
       </address>
     {{ end }}
-  {{ end }}
+  {{/*  {{ end }}  */}}
 {{ end }}

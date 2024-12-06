@@ -6,7 +6,9 @@
 
 <div class="list">
   {{ range $project := .projects -}}
-    {{ with site.GetPage .file }}
+  {{ .permalink }}
+
+  {{ with site.GetPage "/projects/2023-bonnes-notes" }}
     {{ $heading_tag := (dict 
         "open" ((printf "<%s class='project-title' itemprop='name'>" $heading) | safeHTML)
         "close" ((printf "</%s>" $heading) | safeHTML)

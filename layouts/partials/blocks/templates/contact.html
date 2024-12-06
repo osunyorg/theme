@@ -20,6 +20,7 @@
             "level" $heading_rank
             "attributes" "itemprop='name'"
           ) }}
+        {{ $a11y_name := .name | default (i18n "commons.contact.empty_name") }}
         
         {{ if .name }}
           {{ $heading_rank = $heading_rank | add 1 }}
@@ -45,7 +46,15 @@
           {{ end }}
           <div class="contacts">
             {{ with .contact_details }}
+              {{ $has_address := false}}
               {{ with .postal_address }}
+                {{ with .data }}
+                  {{ if or .address_name .address .address_additional .zipcode .city .country.name }}
+                    {{ $has_address = true}}
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+              {{ if $has_address }}
                 <div class="address">
                   {{ $heading_items.open }}
                     {{- i18n "commons.contact.address" -}}
@@ -53,7 +62,7 @@
                   {{ partial "commons/address.html" . }}
                 </div>
               {{ end }}
-              {{ if or .url .emails }}
+              {{ if or .websites.website .emails.list }}
                 <div>
                   {{ $heading_items.open }}
                     {{ if .url }}
@@ -62,15 +71,15 @@
                       {{- i18n "commons.contact.email.label" -}}
                     {{ end }}
                   {{ $heading_items.close }}
-                  {{ range .emails }}
+                  {{ range .emails.list }}
                     <p><a itemprop="email" href="{{ chomp .value | safeURL }}" title="{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}">{{ .label }}</a></p>
                   {{ end }}
-                  {{ with .url }}
+                  {{ with .websites.website }}
                     <p><a href="{{ chomp .value | safeURL }}" target="_blank" rel="noreferrer">{{ .label }}</a></p>
                   {{ end }}
                 </div>
               {{ end }}
-              {{ with .phone_numbers }}
+              {{ with .phone_numbers.list }}
                 <div>
                   {{ $heading_items.open }}
                     {{- i18n "commons.contact.phone.label" -}}
@@ -80,8 +89,7 @@
                   {{ end }}
                 </div>
               {{ end }}
-              {{ $a11y_name := .name | default (i18n "commons.contact.empty_name") }}
-              {{ with .social_networks }}
+              {{ if .social_networks }}
                 <div>
                   {{ $heading_items.open }}
                     {{- i18n "commons.contact.socials.title" -}}
@@ -97,7 +105,8 @@
             {{ end }}
               {{ if .timetable }}
                 {{ $time_size := "full-size" }}
-                {{ if and (or .emails .url) .phone_numbers .socials }}
+                {{ $contacts := .contact_details }}
+                {{ if and (or $contacts.emails.list $contacts.websites.website) $contacts.phone_numbers.list $contacts.social_networks }}
                   {{ $time_size = "reduced" }}
                 {{ end}}
                 <div class="schedule-table {{ $time_size -}}">
