@@ -1,32 +1,28 @@
-{{ $address := .address | default . }}
-
-{{ with $address.postal_address }}
-  {{ with .html }}
-    {{ partial "PrepareHTML" . }}
-  {{ else }}
-    {{ with .data }}
-      <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-        {{ with .address }}
-          <span itemprop="streetAddress">
-            {{ partial "PrepareHTML" . }}
-          </span>
-        {{ end }}
-        {{ with .zipcode }}
-          <span itemprop="postalCode">
-            {{ partial "PrepareHTML" . }}
-          </span>
-        {{ end }}
-        {{ with .city }}
-          <span itemprop="addressLocality">
-            {{ partial "PrepareHTML" . }}
-          </span>
-        {{ end }}
-        {{ with .country.name }}
-          <span itemprop="addressCountry">
-            {{ partial "PrepareHTML" . }}
-          </span>
-        {{ end }}
-      </address>
-    {{ end }}
+{{ with .html }}
+  {{ partial "PrepareHTML" . }}
+{{ else }}
+  {{ with .data }}
+    <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+      {{ with .address }}
+        <span itemprop="streetAddress">
+          {{ partial "PrepareHTML" . }}
+        </span>
+      {{ end }}
+      {{ with .zipcode }}
+        <span itemprop="postalCode">
+          {{ partial "PrepareHTML" . }}
+        </span>
+      {{ end }}
+      {{ with .city }}
+        <span itemprop="addressLocality">
+          {{ partial "PrepareHTML" . }}
+        </span>
+      {{ end }}
+      {{ with .country.name }}
+        <span itemprop="addressCountry">
+          {{ partial "PrepareHTML" . }}
+        </span>
+      {{ end }}
+    </address>
   {{ end }}
 {{ end }}

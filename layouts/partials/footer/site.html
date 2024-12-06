@@ -4,7 +4,7 @@
   <div itemscope itemtype="https://schema.org/CollegeOrUniversity">
     <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
-    {{ with .contact_details }} 
+    {{ with .contact_details.postal_address }} 
       {{ partial "commons/address.html" . }}
       {{- with .phone_numbers.phone -}}
         <p>
@@ -18,7 +18,7 @@
   <div itemscope itemtype="https://schema.org/ResearchOrganization">
     <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
-    {{ with .contact_details }} 
+    {{ with .contact_details.postal_address }} 
     {{ partial "commons/address.html" . }}
       {{- with .phone_numbers.phone -}}
           <p>
