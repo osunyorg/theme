@@ -60,12 +60,13 @@
   {{- range .organizations }}
     {{ if .slug }}
       {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
+        {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
         {{ template "organization" dict
           "title" .Title
           "url" .Permalink
           "logo" (index .Params $logo_index)
-          "latitude" .Params.contact_details.geolocation.latitude
-          "longitude" .Params.contact_details.geolocation.longitude
+          "latitude" $address_geolocation.latitude
+          "longitude" $address_geolocation.longitude
           "summary" .Params.summary
           "options" $options
         }}

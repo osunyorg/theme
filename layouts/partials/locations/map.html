@@ -7,8 +7,9 @@
         role="region"
         aria-label="{{ $aria_label }}">
     {{ range $locations }}
-      {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}
-        <article class="location" data-title="{{ .Params.title }}" data-longitude="{{ .Params.contact_details.geolocation.longitude }}" data-latitude="{{ .Params.contact_details.geolocation.latitude }}">
+      {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
+      {{ if and $address_geolocation.longitude $address_geolocation.latitude }}
+        <article class="location" data-title="{{ .Params.title }}" data-longitude="{{ $address_geolocation.longitude }}" data-latitude="{{ $address_geolocation.latitude }}">
           {{ $title := "" }}
           {{ if .Params.title }}
             <div class="location-content">
