@@ -1,7 +1,7 @@
 {{ $about := .Title }}
 <div class="backlinks">
   {{ with .Params.backlinks.current_website }}
-    {{ if .events }}
+    {{/*  {{ if .events }}
       {{ partial "blocks/templates/agenda.html" (dict
         "block" (dict 
           "title" (printf "%s %s" (i18n "persons.backlinks.events") $about)
@@ -53,12 +53,8 @@
           )
         )
       ) }}
-    {{ end }}
-    {{ if .posts }}
-      {{ $posts := slice }}
-      {{ range .posts }}
-        {{ $posts = $posts | append .path }}
-      {{ end }}
+    {{ end }}  */}}
+    {{ with .posts }}
       {{ partial "blocks/templates/posts.html" (dict
         "block" (dict 
           "title" (printf "%s %s" (i18n "persons.backlinks.posts") $about)
@@ -69,7 +65,7 @@
           )
           "data" (dict
             "layout" site.Params.posts.index.layout
-            "posts" $posts
+            "posts" .
             "options" site.Params.posts.index.options
           )
         )
