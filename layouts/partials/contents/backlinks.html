@@ -1,7 +1,7 @@
 {{ $about := .Title }}
 <div class="backlinks">
   {{ with .Params.backlinks.current_website }}
-    {{/*  {{ if .events }}
+    {{ with .events }}
       {{ partial "blocks/templates/agenda.html" (dict
         "block" (dict 
           "title" (printf "%s %s" (i18n "persons.backlinks.events") $about)
@@ -12,12 +12,12 @@
           )
           "data" (dict
             "layout" site.Params.events.index.layout
-            "events" .events
+            "events" .
             "options" site.Params.events.index.options
           )
         )
       ) }}
-    {{ end }}
+    {{ end }}{{/*  
     {{ if .pages }}
       {{ partial "blocks/templates/pages.html" (dict
         "block" (dict 
