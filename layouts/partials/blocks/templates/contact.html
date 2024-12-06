@@ -46,15 +46,7 @@
           {{ end }}
           <div class="contacts">
             {{ with .contact_details }}
-              {{ $has_address := false}}
-              {{ with .postal_address }}
-                {{ with .data }}
-                  {{ if or .address_name .address .address_additional .zipcode .city .country.name }}
-                    {{ $has_address = true}}
-                  {{ end }}
-                {{ end }}
-              {{ end }}
-              {{ if $has_address }}
+              {{ if .postal_address }}
                 <div class="address">
                   {{ $heading_items.open }}
                     {{- i18n "commons.contact.address" -}}
@@ -62,7 +54,7 @@
                   {{ partial "commons/address.html" . }}
                 </div>
               {{ end }}
-              {{ if or .websites.website .emails.list }}
+              {{ if or .websites .emails }}
                 <div>
                   {{ $heading_items.open }}
                     {{ if .url }}
@@ -71,8 +63,11 @@
                       {{- i18n "commons.contact.email.label" -}}
                     {{ end }}
                   {{ $heading_items.close }}
-                  {{ range .emails.list }}
-                    <p><a itemprop="email" href="{{ chomp .value | safeURL }}" title="{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}">{{ .label }}</a></p>
+                  {{ with .emails }}
+                    {{ $emails := cond .list .list .email }}
+                    {{ range $emails }}
+                      <p><a itemprop="email" href="{{ chomp .value | safeURL }}" title="{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}">{{ .label }}</a></p>
+                    {{ end }}
                   {{ end }}
                   {{ with .websites.website }}
                     <p><a href="{{ chomp .value | safeURL }}" target="_blank" rel="noreferrer">{{ .label }}</a></p>

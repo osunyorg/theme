@@ -1,4 +1,5 @@
 {{ $name := .name | default (htmlUnescape site.Title) }}
+{{ $with_labels := .with_labels | default false}}
 {{ $context := .context | default . }}
 
 {{ with $context.emails.email }}
@@ -6,60 +7,16 @@
     <a href="mailto:{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.email" (dict "name" $name )) }}" target="_blank">{{ i18n "commons.contact.email.label" }}</a>
   </li>
 {{ end}}
-{{ with $context.social_networks }}
-  {{ with .rss }}
-    <li class="rss">
-      <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.rss" (dict "name" $name )) }}" target="_blank">RSS</a>
-    </li>
-  {{ end}}
-  {{ with .mastodon }}
-    <li class="mastodon">
-      <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Mastodon" "name" $name )) }}" target="_blank">Mastodon</a>
-    </li>
-  {{ end}}
-  {{ with .peertube }}
-    <li class="peertube">
-      <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Peertub" "name" $name )) }}" target="_blank">Peertube</a>
-    </li>
-  {{ end}}
-  {{ with .github }}
-    <li class="github">
-      <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Github" "name" $name )) }}" target="_blank">GitHub</a>
-    </li>
-  {{ end}}
-  {{ with .linkedin }}
-    <li class="linkedin">
-      <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "LinkedIn" "name" $name )) }}" target="_blank">LinkedIn</a>
-    </li>
-  {{ end}}
-  {{ with .youtube }}
-    <li class="youtube">
-      <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "YouTube" "name" $name )) }}" target="_blank">YouTube</a>
-    </li>
-  {{ end}}
-  {{ with .vimeo }}
-    <li class="vimeo">
-      <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Vimeo" "name" $name )) }}" target="_blank">Vimeo</a>
-    </li>
-  {{ end}}
-  {{ with .instagram }}
-    <li class="instagram">
-      <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Instagram" "name" $name )) }}" target="_blank">Instagram</a>
-    </li>
-  {{ end}}
-  {{ with .facebook }}
-    <li class="facebook">
-      <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Facebook" "name" $name )) }}" target="_blank">Facebook</a>
-    </li>
-  {{ end}}
-  {{ with .tiktok }}
-    <li class="tiktok">
-      <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "TikTok" "name" $name )) }}" target="_blank">TikTok</a>
-    </li>
-  {{ end}}
-  {{ with .x }}
-    <li class="x">
-      <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "X, ex-twitter" "name" $name )) }}" target="_blank">X (ex-Twitter)</a>
-    </li>
-  {{ end}}
+{{ range $key, $value := $context.social_networks }}
+  <li class="{{ $key }}">
+    {{ $label := $key | title }}
+    {{ if $with_labels }}
+      <span>{{ $label }}</span>
+    {{ end }}
+    {{ $a11y_label := i18n "commons.contact.socials.label.social_media" (dict "media" $label "name" $name ) }}
+    {{ if eq $key "rss"}}
+      {{ $a11y_label = i18n "commons.contact.socials.label.rss" (dict "media" $label "name" $name ) }}
+    {{ end }}
+    <a href="{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML $a11y_label }}" target="_blank">{{ $label }}</a>
+  </li>
 {{ end }}
