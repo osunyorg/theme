@@ -6,7 +6,14 @@
 )}}
 <ul class="list {{ if and (not $options.summary) (not $options.image) }} title-only {{ end }}">
   {{ range .pages }}
-    {{ $page := site.GetPage .path }}
+    {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
+    {{- $path := false -}}
+    {{ if reflect.IsMap . }}
+      {{ $path = .file }}
+    {{ else }}
+      {{ $path = . }}
+    {{ end }}
+    {{ $page := site.GetPage $path }}
 
     {{ with $page }}
       <li>
