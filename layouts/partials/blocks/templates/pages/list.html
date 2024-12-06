@@ -6,15 +6,8 @@
 )}}
 <ul class="list {{ if and (not $options.summary) (not $options.image) }} title-only {{ end }}">
   {{ range .pages }}
-    {{- $file := false -}}
-    {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
-    {{ if reflect.IsMap . }}
-      {{ $file = .file }}
-    {{ else }}
-      {{ $file = . }}
-    {{ end }}
+    {{ $page := site.GetPage .path }}
 
-    {{ $page := site.GetPage $file }}
     {{ with $page }}
       <li>
         {{ if or $options.summary $options.image }}
@@ -36,11 +29,10 @@
             {{ if $options.image }}
               <div class="media">
                 {{- if .Params.image -}}
-                  {{- partial "commons/image.html"
-                        (dict
-                          "image"    .Params.image
-                          "sizes"    site.Params.image_sizes.blocks.pages.list
-                        ) -}}
+                  {{- partial "commons/image.html" (dict
+                      "image"    .Params.image
+                      "sizes"    site.Params.image_sizes.blocks.pages.list
+                    ) -}}
                 {{- else -}}
                   {{- partial "commons/image-default.html" "pages" -}}
                 {{- end -}}

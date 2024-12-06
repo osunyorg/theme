@@ -17,8 +17,8 @@
           )
         )
       ) }}
-    {{ end }}{{/*  
-    {{ if .pages }}
+    {{ end }}
+    {{ with .pages }}
       {{ partial "blocks/templates/pages.html" (dict
         "block" (dict 
           "title" (printf "%s %s" (i18n "persons.backlinks.pages") $about)
@@ -34,11 +34,11 @@
               "summaries" true
               "image" true
             )
-            "pages" .pages
+            "pages" .
           )
         )
       ) }}
-    {{ end }}  */}}
+    {{ end }}
     {{ with .projects }}
       {{ partial "blocks/templates/projects.html" (dict
         "block" (dict 
