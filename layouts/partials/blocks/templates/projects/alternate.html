@@ -4,7 +4,7 @@
 
 <div class="alternate">
   {{ range $i, $project := .projects -}}
-    {{ with site.GetPage .file }}
+    {{ with site.GetPage .path }}
       {{ partial "projects/project.html" (dict 
         "project" .
         "heading" $heading

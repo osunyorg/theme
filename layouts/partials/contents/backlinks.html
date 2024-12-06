@@ -38,8 +38,8 @@
           )
         )
       ) }}
-    {{ end }}
-    {{ if .projects }}
+    {{ end }}  */}}
+    {{ with .projects }}
       {{ partial "blocks/templates/projects.html" (dict
         "block" (dict 
           "title" (printf "%s %s" (i18n "persons.backlinks.projects") $about)
@@ -49,11 +49,11 @@
             "children" 3
           )
           "data" (dict
-            "projects" .projects
+            "projects" .
           )
         )
       ) }}
-    {{ end }}  */}}
+    {{ end }}
     {{ with .posts }}
       {{ partial "blocks/templates/posts.html" (dict
         "block" (dict 
