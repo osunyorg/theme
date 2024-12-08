@@ -8,7 +8,7 @@
 
 <div class="highlight">
   {{ $highlight := index .posts 0 }}
-  {{ $highlight = site.GetPage (printf "/posts/%s" $highlight)}}
+  {{ $highlight = site.GetPage $highlight.path}}
   {{ $list := .posts }}
 
   {{ with $highlight }}
@@ -25,7 +25,7 @@
     {{ $first := true }}
     <div class="list">
       {{ range after 1 . }}
-        {{ with site.GetPage (printf "/posts/%s" .) }}
+        {{ with site.GetPage .path }}
           <article class="post">
             <div class="post-content">
               {{- $title := partial "PrepareHTML" .Title -}}

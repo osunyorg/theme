@@ -25,7 +25,7 @@
         {{ if .events }}
           <div class="events events--{{- $layout -}}">
             {{ range .events }}
-              {{ $event := site.GetPage .file }}
+              {{ $event := site.GetPage .path }}
               {{ with $event }}
                   {{ partial "events/event" (dict
                     "event" .
@@ -39,7 +39,6 @@
         {{ else if .no_event_message }}
           <p>{{ partial "PrepareHTML" .no_event_message }}</p>
         {{ end }}
-
       </div>
     </div>
   </div>

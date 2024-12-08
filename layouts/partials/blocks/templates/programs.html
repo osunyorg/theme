@@ -65,7 +65,7 @@
         {{ else }}
           <ol class="programs">
             {{ range .programs }}
-            {{ $program := site.GetPage (printf "/programs%s" .path) }}
+            {{ $program := site.GetPage .path }}
               {{ partial "programs/program.html" (dict 
                   "program" $program
                   "heading" $heading

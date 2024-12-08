@@ -29,13 +29,13 @@
 
 {{- define "programsList" -}}
   <li>
-    <a href="{{ .path }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
+    <a href="{{ .permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
       {{- partial "PrepareHTML" .label -}}
     </a>
     <ol>
       {{- range .children -}}
       <li>
-        <a href="{{ .path }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
+        <a href="{{ .permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
           {{- partial "PrepareHTML" .label -}}
         </a>
         {{ if .children }}

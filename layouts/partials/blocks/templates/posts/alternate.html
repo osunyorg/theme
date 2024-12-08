@@ -4,7 +4,7 @@
 
 <div class="alternate {{- if not $options.image }} without-images{{ end }}">
   {{ range $i, $post := .posts -}}
-    {{ with site.GetPage (printf "/posts/%s" $post) }}
+    {{ with site.GetPage .path }}
       {{ partial "posts/post.html" (dict 
         "post" .
         "heading" $heading
