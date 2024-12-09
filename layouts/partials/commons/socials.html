@@ -1,10 +1,17 @@
 {{ $name := .name | default (htmlUnescape site.Title) }}
-{{ $with_labels := .with_labels | default false}}
+{{ $with_labels := .with_labels | default false }}
 {{ $context := .context | default . }}
+{{ $use_default_email_label := .use_default_email_label }}
 
 {{ with $context.emails.email }}
   <li class="email">
-    <a href="mailto:{{ chomp .value | safeURL }}" rel="noreferrer" title="{{ safeHTML (i18n "commons.contact.socials.label.email" (dict "name" $name )) }}" target="_blank">{{ i18n "commons.contact.email.label" }}</a>
+    {{ $email_label := i18n "commons.contact.email.label" }}
+    {{ if $with_labels }}
+      <span>{{ $email_label }}</span>
+    {{ end }}
+    <a href="{{ chomp .value | safeURL }}" itemprop="email" title='{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}'>
+      {{ cond $use_default_email_label $email_label .label }}
+    </a>
   </li>
 {{ end}}
 {{ range $key, $value := $context.social_networks }}

@@ -13,7 +13,10 @@
   {{ $site_social_links := . }}
   {{ if $site_social_links }}
     <ul class="footer-social site-links">
-      {{ partial "commons/socials" . }}
+      {{ partial "commons/socials" (dict
+          "use_default_email_label" true
+          "context" .
+        )}}
     </ul>
   {{ end }}
 {{ end }}
