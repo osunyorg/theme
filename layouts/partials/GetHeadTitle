@@ -1,7 +1,7 @@
 {{ $pageTitle := chomp (htmlUnescape .Title) }}
 {{ $siteTitle := htmlUnescape site.Title }}
 {{ $separator := htmlUnescape site.Params.seo.title.separator }}
-{{ $title := $pageTitle }}
+{{ $title := printf "%s %s %s" $pageTitle $separator $siteTitle }}
 
 {{/* PAGE OPTION */}}
 {{ $option := "both" }}
@@ -9,9 +9,7 @@
   {{ $option = site.Params.home.head.title }}
 {{ end }}
 
-{{ if and (eq $option "both") $pageTitle }}
-  {{ $title = printf "%s %s %s" $pageTitle $separator $siteTitle }}
-{{ else if eq $option "page" }}
+{{ if eq $option "page" }}
   {{ $title = $pageTitle }}
 {{ else if eq $option "site" }}
   {{ $title = $siteTitle }}
