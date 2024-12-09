@@ -7,10 +7,10 @@
 <div class="list">
   {{ range $project := .projects -}}
     {{ with site.GetPage .path }}
-    {{ $heading_tag := (dict 
-        "open" ((printf "<%s class='project-title' itemprop='name'>" $heading) | safeHTML)
-        "close" ((printf "</%s>" $heading) | safeHTML)
-        ) }}
+      {{ $heading_tag := partial "GetHeadingTag" (dict
+          "level" $heading_level
+          "attributes" "class='project-title' itemprop='name'"
+        )}}
       <article class="project" itemscope itemtype="https://schema.org/CreativeWork">
         {{- $title := partial "PrepareHTML" .Title -}}
 
