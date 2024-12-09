@@ -20,7 +20,7 @@
         {{ if eq $block.data.layout "grid" }}
           <div class="programs-grid">
             {{ range .programs }}
-              {{ $program := site.GetPage (printf "/programs%s" .path) }}
+              {{ $program := site.GetPage .path }}
               {{ $title := $program.Title | safeHTML }}
               <article class="program" itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
                 <div class="program-content">
@@ -51,11 +51,10 @@
 
                 {{ if and $program.Params.image $options.image }}
                   <div class="media">
-                    {{ partial "commons/image.html"
-                        (dict
-                          "image"    $program.Params.image
-                          "sizes"    site.Params.image_sizes.blocks.programs
-                        ) }}
+                    {{ partial "commons/image.html" (dict
+                        "image"    $program.Params.image
+                        "sizes"    site.Params.image_sizes.blocks.programs
+                      )}}
                   </div>
                 {{ end }}
               </article>
