@@ -7,18 +7,18 @@
 <div class="list">
   {{ range $project := .projects -}}
     {{ with site.GetPage .file }}
-    {{ $heading_tag := (dict 
-        "open" ((printf "<%s class='project-title' itemprop='name'>" $heading) | safeHTML)
-        "close" ((printf "</%s>" $heading) | safeHTML)
-        ) }}
-    <article class="project" itemscope itemtype="https://schema.org/CreativeWork">
-      {{- $title := partial "PrepareHTML" .Title -}}
-    
-      {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-      {{ $heading_tag.close }}
-    
-    </article>
+      {{ $heading_tag := (dict 
+          "open" ((printf "<%s class='project-title' itemprop='name'>" $heading) | safeHTML)
+          "close" ((printf "</%s>" $heading) | safeHTML)
+          ) }}
+      <article class="project" itemscope itemtype="https://schema.org/CreativeWork">
+        {{- $title := partial "PrepareHTML" .Title -}}
+      
+        {{ $heading_tag.open }}
+          <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+        {{ $heading_tag.close }}
+      
+      </article>
     {{ end }}
   {{ end }}
 </div>
