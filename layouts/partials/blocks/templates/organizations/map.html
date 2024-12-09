@@ -11,33 +11,19 @@
     </summary>
     <ul>
       {{ range .organizations }}
-        {{ if .slug }}
-          {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
+        {{ with site.GetPage ( printf "/organizations/%s" .slug ) }}
+          {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
+          {{ if $address_geolocation }}
             <li>
-              {{ $title := "" }}
-              {{ if .Params.title }}
-                {{ $title = partial "PrepareHTML" .Params.title -}}
-                <p class="title">
-                  {{- if and .Params.url $options.link }}
-                    <a href="{{ .Params.url }}" {{ if .Params.external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
-                  {{ end -}}
-                  {{- $title -}}
-                  {{- if and .Params.url $options.link }}
-                    {{ if .Params.external }}
-                      <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
-                    {{ end }}
-                    </a>
-                  {{ end -}}
-                  </p>
-              {{ end -}}
-              {{ with .Params.contact_details }}
-                {{ partial "commons/address.html" . }}
-              {{ end }}
-              {{ if and $options.summary .Params.summary }}
-                <div class="summary">
-                  {{ safeHTML .Params.summary }}
-                </div >
-              {{ end }}
+              {{ template "organization" (dict
+                "title" .Title
+                "summary" .Params.summary
+                "contact_details" .Params.contact_details
+                "options" (dict 
+                  "summary" $options.summary
+                  "link" $options.link
+                )
+              )}}
             </li>
           {{ end }}
         {{ end }}
@@ -59,17 +45,19 @@
     >
   {{- range .organizations }}
     {{ if .slug }}
-      {{ with (site.GetPage (printf "/organizations/%s" .slug )) }}
+      {{ with site.GetPage ( printf "/organizations/%s" .slug ) }}
         {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
-        {{ template "organization" dict
-          "title" .Title
-          "url" .Permalink
-          "logo" (index .Params $logo_index)
-          "latitude" $address_geolocation.latitude
-          "longitude" $address_geolocation.longitude
-          "summary" .Params.summary
-          "options" $options
-        }}
+        {{ if $address_geolocation }}
+          {{ template "organization" dict
+            "title" .Title
+            "url" .Permalink
+            "logo" (index .Params $logo_index)
+            "latitude" $address_geolocation.latitude
+            "longitude" $address_geolocation.longitude
+            "summary" .Params.summary
+            "options" $options
+          }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end -}}

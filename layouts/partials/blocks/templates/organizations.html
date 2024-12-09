@@ -58,6 +58,10 @@
           {{ safeHTML .summary }}
         </div>
       {{ end }}
+
+      {{ with .contact_details }}
+        {{ partial "commons/address.html" .postal_address }}
+      {{ end }}
     </div>
     {{ if $options.logo }}
       <div class="media">
