@@ -19,7 +19,7 @@
     <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
     {{ with .contact_details.postal_address }} 
-    {{ partial "commons/address.html" . }}
+      {{ partial "commons/address.html" . }}
       {{- with .phone_numbers.phone -}}
           <p>
             <a itemprop="telephone" href="{{.value}}">{{ .label }}</a>
