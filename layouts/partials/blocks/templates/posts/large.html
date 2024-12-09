@@ -10,7 +10,7 @@
 
 <div class="large {{- if not $image }} without-images{{ end }}">
   {{ range .posts }}
-    {{ with site.GetPage (printf "/posts/%s" .) }}
+    {{ with site.GetPage .path }}
 
       {{ if and .Params.image $options.image }}
         {{- $direction = partial "GetImageDirection" .Params.image -}}
