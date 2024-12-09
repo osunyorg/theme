@@ -1,76 +1,50 @@
 {{ $name := .Title }}
 
 {{ with .Params.contact_details }}
-  {{ if or .website .linkedin .twitter .email .phone .address .city .zipcode .country }}
-    <div class="contacts-details contacts-details--person">
-      {{ if or .website .linkedin .twitter .email .phone }}
+  <div class="contacts-details">
+    {{ if or .websites .socials_networks .emails .phone_numbers }}
+      <ul>
+        {{ with .websites.website }}
+          <li class="website">
+            <span>{{ i18n "commons.contact.website" }}</span>
+            <a href="{{ chomp .value | safeURL }}" target="_blank" rel="noopener" itemprop="url" title="{{ safeHTML (i18n "commons.contact.socials.label.website" (dict "name" $name )) }}">
+              {{ chomp .label }}
+              <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+            </a>
+          </li>
+        {{ end }}
+
+        {{ partial "commons/socials" (dict
+            "context" .
+            "name" $name
+            "with_labels" true
+          ) }}
+      </ul>
+
+      {{ if or .phone_numbers .phone_professional .postal_address }}
         <ul>
-          {{ with .website }}
-            <li>
-              <span>{{ i18n "commons.contact.website" }}</span>
-              <a href="{{ chomp .value | safeURL }}" target="_blank" rel="noopener" itemprop="url" title="{{ safeHTML (i18n "commons.contact.socials.label.website" (dict "name" $name )) }}">
-                {{ chomp .label }}
-                <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
-              </a>
+          {{ with .postal_address }}
+            <li class="address">
+              <span class="meta">{{ i18n "commons.contact.address" }}</span>
+              {{ partial "commons/address.html" . }}
             </li>
           {{ end }}
-
-          {{ with .linkedin }}
-            <li>
-              <span>LinkedIn</span>
-              <a href="{{ chomp .value | safeURL }}" target="_blank" rel="noopener" itemprop="url" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "LinkedIn" "name" $name )) }}">
-                {{ chomp .label }}
-                <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
-              </a>
-            </li>
-          {{ end }}
-
-          {{ with .mastodon }}
-            <li>
-              <span>Mastodon</span>
-              <a href="{{ chomp .value | safeURL }}" target="_blank" rel="noopener" itemprop="url" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "Mastodon" "name" $name )) }}">
-                {{ chomp .label }}
-                <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
-              </a>
-            </li>
-          {{ end }}
-
-          {{ with .twitter }}
-            <li>
-              <span>X (ex-Twitter)</span>
-              <a href="{{ chomp .value | safeURL }}" target="_blank" rel="noopener" itemprop="url" title="{{ safeHTML (i18n "commons.contact.socials.label.social_media" (dict "media" "X (ex-Twitter)" "name" $name )) }}">
-                {{ chomp .label }}
-                <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
-              </a>
-            </li>
-          {{ end }}
-
-          {{ with .email }}
-            <li>
-              <span>{{ i18n "commons.contact.email.label" }}</span>
-              <a href="{{ chomp .value | safeURL }}" itemprop="email" title='{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}'>
-                {{ chomp .label }}
-                <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
-              </a>
-            </li>
-          {{ end }}
-          {{ with .phone }}
-            <li>
-              <span>{{ i18n "commons.contact.phone.label" }}</span>
-              <a href="{{ chomp .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label )) }}'>{{ .label }}</a>
-            </li>
-          {{ end }}
-          {{ with .phone_professional }}
-            <li>
-              <span>{{ i18n "commons.contact.phone_professional.label" }}</span>
-              <a href="{{ chomp .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone_professional.a11y_label" (dict "phone_number" .label )) }}'>{{ .label }}</a>
-            </li>
+          {{ with .phone_numbers }}
+            {{ with or .phone_mobile .phone }}
+              <li class="phone">
+                <span>{{ i18n "commons.contact.phone.label" }}</span>
+                <a href="{{ chomp .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label )) }}'>{{ .label }}</a>
+              </li>
+            {{ end }}
+            {{ with .phone_professional }}
+              <li class="phone">
+                <span>{{ i18n "commons.contact.phone_professional.label" }}</span>
+                <a href="{{ chomp .value | safeURL }}" itemprop="telephone" title='{{ safeHTML (i18n "commons.contact.phone_professional.a11y_label" (dict "phone_number" .label )) }}'>{{ .label }}</a>
+              </li>
+            {{ end }}
           {{ end }}
         </ul>
       {{ end }}
-      {{ with .postal_address }}
-        {{ partial "commons/address.html" . }}
-      {{ end }}
-    </div>
-  {{ end }}
+    {{ end }}
+  </div>
 {{ end }}
