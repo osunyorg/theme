@@ -10,3 +10,20 @@ ul.categories
 .posts_categories__term, .events_categories__term
     main
         padding-bottom: $spacing-5
+
+.document-content
+    .project-categories
+        --block-space-y: #{$block-space-y}
+        margin-bottom: var(--block-space-y)
+
+// Taxonomies
+.taxonomies
+    @include grid(3, desktop)
+    @include media-breakpoint-down(desktop)
+        margin-top: $spacing-5
+        > li + li
+                margin-top: $spacing-3
+    &, ul
+        @include list-reset
+    .taxonomy-title
+        @include meta
