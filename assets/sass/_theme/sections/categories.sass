@@ -24,6 +24,9 @@ ul.categories
         > li + li
                 margin-top: $spacing-3
     &, ul
-        @include list-reset
+        // for organizations
+        [itemprop="articleBody"] &,
+        &
+            @include list-reset
     .taxonomy-title
         @include meta
