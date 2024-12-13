@@ -59,29 +59,36 @@
                 font-size: $header-titled-lvl1-summary-font-size-desktop
                 line-height: $header-titled-lvl1-summary-line-height-desktop
         &.children-titled
-            li
-                position: relative
-                a
-                    @include h6
-                    @include stretched-link(before)
-                    @include media-breakpoint-up(desktop)
-                        @include h5
-                    + p
-                        display: block
+            .nav-level-2
+                > li
+                    position: relative
+                    > a
+                        @include h6
+                        @include stretched-link(before)
                         @include media-breakpoint-up(desktop)
+                            @include h5
+                        + p
+                            display: block
+                            @include media-breakpoint-up(desktop)
+                                @include small
+                                margin-top: $spacing-2
+                    .nav-level-3
+                        padding-top: 0
+                    @include media-breakpoint-down(desktop)
+                        + li
                             margin-top: $spacing-2
-                        @include media-breakpoint-down(desktop)
-                            @include meta
-                @include media-breakpoint-down(desktop)
-                    + li
-                        margin-top: $spacing-2
+            .nav-level-3
+                a
+                    position: relative
+                    z-index: 2
         &.is-titled.children-titled
             .dropdown-menu-heading + .nav-level-2
                 margin-top: $spacing-2
-            li + li
-                margin-top: $spacing-1
-                @include media-breakpoint-up(desktop)
-                    margin-top: $spacing-3
+            .nav-level-2 
+                > li + li
+                    margin-top: $spacing-1
+                    @include media-breakpoint-up(desktop)
+                        margin-top: $spacing-3
         a,
         a:focus,
         a:active

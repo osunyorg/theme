@@ -68,9 +68,9 @@
               <div class="container">
                 <div class="dropdown-menu-heading">
                   <a href="{{ .target }}" class="dropdown-menu-title">{{ .title }}</a>
-                  {{ if $dropdown_lvl1_summary }}
-                    {{ $indexPage := site.GetPage .path }}
-                    <div class="dropdown-menu-lead">{{ safeHTML $indexPage.Params.summary }}</div>
+                  {{ if and $dropdown_lvl1_summary .path }}
+                    {{ $heading_page := site.GetPage .path }}
+                    <div class="dropdown-menu-lead">{{ safeHTML $heading_page.Params.summary }}</div>
                   {{ end }}
                 </div>
             {{ end -}}
