@@ -52,9 +52,12 @@
         &-title
             @include h2
         &-lead
-            @include lead-hero
-            font-size: $lead-hero-size
-            line-height: $lead-hero-line-height
+            font-family: $header-titled-lvl1-summary-font-family
+            font-size: $header-titled-lvl1-summary-font-size
+            line-height: $header-titled-lvl1-summary-line-height
+            @include media-breakpoint-up(desktop)
+                font-size: $header-titled-lvl1-summary-font-size-desktop
+                line-height: $header-titled-lvl1-summary-line-height-desktop
         &.children-titled
             li
                 position: relative
@@ -67,9 +70,18 @@
                         display: block
                         @include media-breakpoint-up(desktop)
                             margin-top: $spacing-2
+                        @include media-breakpoint-down(desktop)
+                            @include meta
                 @include media-breakpoint-down(desktop)
                     + li
                         margin-top: $spacing-2
+        &.is-titled.children-titled
+            .dropdown-menu-heading + .nav-level-2
+                margin-top: $spacing-2
+            li + li
+                margin-top: $spacing-1
+                @include media-breakpoint-up(desktop)
+                    margin-top: $spacing-3
         a,
         a:focus,
         a:active
@@ -97,8 +109,6 @@
             > a,
             > span
                 @include signature
-            > p
-                @include small
 
     .nav-level-3
         display: block
@@ -142,12 +152,10 @@
                             align-items: baseline
                             display: flex
                             gap: var(--grid-gutter)
-                        .dropdown-menu-title
+                        .dropdown-menu-heading
                             width: columns(5)
                         .nav-level-2
                             width: columns(7)
-                            li
-                                margin-bottom: $spacing-2
             @else
                 position: relative
                 .dropdown-menu
@@ -217,6 +225,9 @@
             .container
                 padding-left: 0
                 padding-right: 0
+                // .dropdown-menu-heading
+                //     p
+
         .nav-level-2
             > .has-children + li
                 margin-top: $spacing-3

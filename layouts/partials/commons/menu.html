@@ -69,9 +69,7 @@
                 <div class="dropdown-menu-heading">
                   <a href="{{ .target }}" class="dropdown-menu-title">{{ .title }}</a>
                   {{ if $dropdown_lvl1_summary }}
-                    {{ $targetPage := strings.TrimPrefix "/" .target }}
-                    {{ $targetPage = strings.TrimSuffix "/" $targetPage }}
-                    {{ $indexPage := site.GetPage $targetPage }}
+                    {{ $indexPage := site.GetPage .path }}
                     <div class="dropdown-menu-lead">{{ safeHTML $indexPage.Params.summary }}</div>
                   {{ end }}
                 </div>
