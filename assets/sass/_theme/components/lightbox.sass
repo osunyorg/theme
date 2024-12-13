@@ -91,6 +91,7 @@
         position: fixed
         right: $spacing-2
         margin-left: $spacing-2
+        min-width: pxToRem(220)
         z-index: 2
         @include media-breakpoint-up(md)
             width: columns(6)
@@ -113,9 +114,7 @@
 
 .lightbox-button
     @include button-reset
-    cursor: pointer
-    position: absolute
-    bottom: 0
-    left: 0
-    top: 0
-    right: 0
+    display: block
+    padding: 0
+    &:focus-visible
+        outline-color: var(--color-text)

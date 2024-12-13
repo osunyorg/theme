@@ -15,11 +15,12 @@ osuny.SlidersFactory = function () {
 };
 
 osuny.SlidersFactory.prototype.create = function (element, index) {
-    var title = this.getTitle(element, index);
+    var titleId;
 
     // Check if carousel as more than one slide
     if (element.children.length > 1) {
-        this.sliders.push(new osuny.Slider(element, title));
+        titleId = this.getTitleId(element, index);
+        this.sliders.push(new osuny.Slider(element, titleId));
     }
 };
 
@@ -41,8 +42,8 @@ osuny.SlidersFactory.prototype.checkDisableCondition = function (slider, index) 
     }
 };
 
-osuny.SlidersFactory.prototype.getTitle = function (element, index) {
-    var title = osuny.i18n.slider.default_title + ' ' + index,
+osuny.SlidersFactory.prototype.getTitleId = function (element, index) {
+    var titleElement,
         block = element.closest('.block-titled'),
         blockTitle;
 
@@ -51,10 +52,23 @@ osuny.SlidersFactory.prototype.getTitle = function (element, index) {
     }
 
     if (blockTitle) {
-        title = blockTitle.innerText;
+        titleElement = blockTitle;
+    } else {
+        titleElement = this.createDefaultTitle(element, index);
+        element.parentElement.prepend(titleElement);
     }
 
-    return title;
+    titleElement.id = 'slider-title-' + index;
+
+    return titleElement.id;
+};
+
+osuny.SlidersFactory.prototype.createDefaultTitle = function (element, index) {
+    var titleElement = document.createElement('p');
+    titleElement.innerText = osuny.i18n.slider.default_title + ' ' + index;
+    titleElement.classList.add('sr-only');
+
+    return titleElement;
 };
 
 osuny.SlidersFactory.prototype.listen = function () {

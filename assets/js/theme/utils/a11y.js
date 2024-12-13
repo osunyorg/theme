@@ -1,10 +1,15 @@
-var actionKeys = [
+var osuny = window.osuny || {},
+    actionKeys = [
         'Enter',
         'Space'
     ],
     a11yClick,
     setButtonEnability,
-    setAriaVisibility;
+    setAriaVisibility,
+    ariaHideBodyChildren,
+    setDefaultAltToImages,
+    parentQuerySelector,
+    setDescribedBy;
 
 a11yClick = function (element, action) {
     element.addEventListener('click', action);
@@ -33,8 +38,61 @@ setAriaVisibility = function (element, enable, isChild) {
     }
 };
 
+ariaHideBodyChildren = function (element, inert) {
+    var bodyChildren = document.body.children,
+        action = inert ? 'setAttribute' : 'removeAttribute',
+        ignoredElements = ['SCRIPT', 'STYLE'];
+
+    Array.prototype.forEach.call(bodyChildren, function (child) {
+        if (element !== child && !child.contains(element) && ignoredElements.indexOf(child.nodeName) === -1) {
+            child[action]('aria-hidden', 'true');
+        }
+    }.bind(this));
+};
+
+setDefaultAltToImages = function (elements) {
+    var index = 0,
+        image;
+
+    elements.forEach(function (element) {
+        image = element.querySelector('img');
+        if (!image.alt) {
+            index += 1;
+            image.alt = osuny.i18n.lightbox.default_alt + ' ' + index;
+        }
+    });
+};
+
+parentQuerySelector = function (element, parentSelector, targetSelector) {
+    var parent = element.closest(parentSelector),
+        target;
+    if (!parent) {
+        return;
+    }
+    target = parent.querySelector(targetSelector);
+    return target;
+};
+
+setDescribedBy = function () {
+    var elementsToDescribe = document.querySelectorAll('[data-describedby]'),
+        title;
+    elementsToDescribe.forEach(function (element, index) {
+        title = parentQuerySelector(element, '.block', '.block-title');
+        if (title) {
+            title.id = title.id ? title.id : 'aria-title-' + index;
+            element.setAttribute('aria-describedby', title.id);
+            element.removeAttribute('data-describedby');
+        }
+    });
+};
+
+setDescribedBy();
+
 export {
     a11yClick,
     setButtonEnability,
-    setAriaVisibility
+    setAriaVisibility,
+    ariaHideBodyChildren,
+    setDefaultAltToImages,
+    parentQuerySelector
 };

@@ -20,7 +20,6 @@ img
             @include small
 
 figcaption
-    &.credit > p, .credit > p
-        &::before
-            content: '©'
+    &.credit > p:not(.sr-only), .credit > p:not(.sr-only)
+        > span[aria-hidden]:first-child
             margin-right: $spacing-1

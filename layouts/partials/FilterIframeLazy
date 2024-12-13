@@ -1,5 +1,9 @@
-{{ $chunks := split . "<iframe" }}
-{{ $text := delimit $chunks "<iframe loading=\"lazy\"" }}
-{{ $chunks = split $text "</iframe>" }}
-{{ $text = delimit $chunks "</iframe>" }}
+{{ $is_loading_present := strings.Contains . "loading" }}
+{{ $text := . }}
+{{ if not $is_loading_present }}
+	{{ $chunks := split . "<iframe" }}
+	{{ $text = delimit $chunks "<iframe loading=\"lazy\"" }}
+	{{ $chunks = split $text "</iframe>" }}
+	{{ $text = delimit $chunks "</iframe>" }}
+{{ end }}
 {{ return $text }}

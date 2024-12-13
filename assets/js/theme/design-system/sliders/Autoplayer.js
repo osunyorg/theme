@@ -26,6 +26,7 @@ osuny.SliderAutoplayer.prototype.addToggler = function () {
     this.container.append(this.button);
     this.slider.controls.append(this.container);
 
+    this.button.setAttribute('aria-describedby', this.slider.titleId);
     this.a11ySpan = osuny.utils.insertSROnly(this.button, osuny.i18n.slider.pause);
 
     this.button.addEventListener('click', this.toggle.bind(this));

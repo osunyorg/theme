@@ -116,7 +116,7 @@
         display: flex
         .block-title
             width: columns(4)
-            &:not(.hidden) + .description
+            + .description
                 margin-left: var(--grid-gutter)
         .description
             margin-top: 0
@@ -134,7 +134,7 @@
         z-index: 10
         &::before
             @include meta
-            content: '©'
+            content: '©' / ''
             position: absolute
             right: 0
             top: 0
@@ -148,7 +148,7 @@
             display: none
             padding: $spacing-1
             padding-right: $spacing-3
-            > p::before
+            > p > span[aria-hidden]
                 display: none // Remove default ©
         a
             color: inherit

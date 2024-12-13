@@ -53,9 +53,9 @@
     <li{{ if ne $item_class ""}} class="{{ $item_class }}"{{ end }}>
       {{- if ne .kind "blank" -}}
         <a href="{{ .target }}"{{ if ne $link_class ""}} class="{{ $link_class }}"{{ end }} {{ safeHTMLAttr $attr }} {{ safeHTMLAttr $attr_title }}>{{ .title }}</a>
-        {{ if and $dropdown_lvl2_summary (eq $level 2) .file }}
-          {{ with site.GetPage .file }}
-           {{ safeHTML .Params.summary }}
+        {{ if and $dropdown_lvl2_summary (eq $level 2) .path }}
+          {{ with site.GetPage .path }}
+            {{ safeHTML .Params.summary | truncate site.Params.menu.dropdown.truncate_summary }}
           {{ end }}
         {{ end }}
       {{- else -}}
@@ -104,7 +104,7 @@
       )}}
     </li>
   {{ end }}
-  {{ if and (eq $kind "primary") (site.Params.menu.i18n.display) }}
+  {{ if .i18n }}
     {{ partial "header/i18n.html" .context }}
   {{ end }}
 </ul>

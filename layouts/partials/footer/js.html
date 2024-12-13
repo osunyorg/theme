@@ -2,7 +2,7 @@
 
 {{ if .Params.contents }}
   {{ range .Params.contents }}
-    {{ if eq .template "organizations" }}
+    {{ if or (eq .template "locations") (eq .template "organizations") }}
       {{ with .data }}
         {{ if eq .layout "map" }}
           {{ $isLeafletNeeded = true }}
@@ -17,7 +17,7 @@
 
 
 <!-- check if map needed  -->
-{{ if .Params.contact_details.geolocation }} 
+{{ if .Params.contact_details.postal_address.geolocation }} 
   {{ $isLeafletNeeded = true }}
 {{ end }}
 
@@ -43,12 +43,23 @@
   "params" (dict
     "i18n" (dict
       "slider" (dict
+        "default_title" (i18n "commons.slider.default_title")
         "goto" (i18n "commons.slider.goto")
         "next" (i18n "commons.slider.next")
         "pagination_list" (i18n "commons.slider.pagination_list")
         "pause" (i18n "commons.slider.pause")
         "play" (i18n "commons.slider.play")
         "previous" (i18n "commons.slider.previous")
+      )
+      "lightbox" (dict
+        "default_alt" (i18n "commons.lightbox.default_alt")
+      )
+      "maps" (dict
+        "attribution_title" (i18n "commons.maps.attribution_title")
+        "marker_label" (i18n "commons.maps.marker_label")
+        "popup_close" (i18n "commons.maps.popup_close")
+        "zoom_in" (i18n "commons.maps.zoom_in")
+        "zoom_out" (i18n "commons.maps.zoom_out")
       )
     )
   )

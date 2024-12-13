@@ -1,8 +1,5 @@
-import * as params from '@params';
 import { setAriaVisibility } from '../../utils/a11y';
-
 var osuny = window.osuny || {};
-osuny.i18n = params.i18n;
 
 osuny.sliderComponents = {
     arrows: osuny.SliderArrows,
@@ -10,9 +7,9 @@ osuny.sliderComponents = {
     pagination: osuny.SliderPagination
 };
 
-osuny.Slider = function (list, title) {
+osuny.Slider = function (list, titleId) {
     this.list = list;
-    this.title = title;
+    this.titleId = titleId;
     this.setState();
     this.setOptions();
 };
@@ -190,7 +187,7 @@ osuny.Slider.prototype.focus = function () {
     var canFocus = this.components.autoplay ? !this.components.autoplay.state.isActive : true;
     clearTimeout(this.focusTimeout);
 
-    this.currentSlide.setAttribute('tabindex', '0');
+    this.currentSlide.setAttribute('tabindex', '-1');
 
     if (canFocus) {
         this.focusTimeout = setTimeout(function () {

@@ -1,28 +1,35 @@
+{{ $in_gallery := .gallery | default false }}
+
 {{ if .image.id }}
   {{ $sizes := .sizes }}
   {{ $lazy := default true .lazy }}
   {{ $image := partial "GetMedia" .image.id }}
   {{ $image_class := printf "image-%s" (partial "GetImageDirection" .image) }}
-  {{ $is_lightbox := not site.Params.image_sizes.design_system.lightbox.disabled }}
+  {{ $with_lightbox := not site.Params.image_sizes.design_system.lightbox.disabled }}
+  {{ if and $with_lightbox $in_gallery }}
+    {{ $with_lightbox = not site.Params.image_sizes.design_system.lightbox.in_gallery.disabled }}
+  {{ end }}
 
   {{ if $image }}
     {{ with .image }}
-      <figure
-              class="{{ $image_class }}{{ if $is_lightbox }} lightbox-figure {{ end }}" 
-              {{- with or .text .alt .credit }}
+      {{ $aria_label := partial "GetFigureAriaLabel" (dict "text" .text "credit" .credit )}}
+      <figure class="{{ $image_class }}{{ if $with_lightbox }} lightbox-figure {{ end }}"
+              {{- with $aria_label }}
                 role="figure"
-                aria-label="{{ . | plainify }}"
-              {{ end }}
-      >
-      {{ partial "commons/image.html" (dict
-        "image" .id
-        "alt" .alt
-        "sizes" $sizes
-        "lazy" $lazy
+                aria-label="{{- . -}}"
+              {{ end }} >
+
+      {{ $image_tag := partial "commons/image.html" (dict
+          "image" .id
+          "alt" .alt
+          "sizes" $sizes
+          "lazy" $lazy
       ) }}
 
-      {{ if $is_lightbox }}
-        {{ partial "commons/lightbox/button.html" . }}
+      {{ if $with_lightbox }}
+        {{- partial "commons/lightbox/button.html" (dict "image" $image_tag "context" .) }}
+      {{ else }}
+        {{ $image_tag }}
       {{ end }}
 
       {{ if or .text .credit }}
@@ -31,7 +38,9 @@
             {{ . | safeHTML }}
           {{ end }}
           {{ with .credit }}
-            <div class="credit">{{ . | safeHTML }}</div>
+            <div class="credit">
+              {{ partial "AddCreditMention" (dict "credit" . "before" true) }}
+            </div>
           {{ end }}
         </figcaption>
       {{ end }}
