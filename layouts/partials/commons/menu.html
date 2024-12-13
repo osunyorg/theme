@@ -12,6 +12,7 @@
 {{- $dropdown_titled := (and site.Params.menu.dropdown.linkToLevel1 (eq $level 1)) -}}
 {{- $dropdown_lvl1_summary := (and site.Params.menu.dropdown.level1_summary (eq $level 1)) -}}
 {{- $dropdown_lvl2_summary := and site.Params.menu.dropdown.level2_summary -}}
+{{- $meta_descriptions_for_summaries := site.Params.menu.dropdown.meta_descriptions | default false -}}
 {{- $ulClass := "" -}}
 {{- if .class -}}
 {{- $ulClass = printf "%s " .class -}}
@@ -58,7 +59,11 @@
         <a href="{{ .target }}"{{ if ne $link_class ""}} class="{{ $link_class }}"{{ end }} {{ safeHTMLAttr $attr }} {{ safeHTMLAttr $attr_title }}>{{ .title }}</a>
         {{ if and $dropdown_lvl2_summary (eq $level 2) .path }}
           {{ with site.GetPage .path }}
-            {{ safeHTML .Params.summary | truncate site.Params.menu.dropdown.truncate_summary }}
+            {{ $length := site.Params.menu.dropdown.truncate_summary }}
+            {{ $truncate := eq (printf "%T" $length) "int"}}
+            {{ $summary := cond $meta_descriptions_for_summaries (printf "<p>%s</p>" .Params.meta_description) .Params.Summary}}
+            {{ $summary := cond $truncate ($summary | truncate $length) $summary }}
+            {{ safeHTML $summary }}
           {{ end }}
         {{ end }}
       {{- else -}}
@@ -72,8 +77,10 @@
                 <div class="dropdown-menu-heading">
                   <a href="{{ .target }}" class="dropdown-menu-title">{{ .title }}</a>
                   {{ if and $dropdown_lvl1_summary .path }}
-                    {{ $heading_page := site.GetPage .path }}
-                    <div class="dropdown-menu-lead">{{ safeHTML $heading_page.Params.summary }}</div>
+                    {{ with site.GetPage .path }}
+                      {{ $summary := cond $meta_descriptions_for_summaries (printf "<p>%s</p>" .Params.meta_description) .Params.Summary}}
+                      <div class="dropdown-menu-lead">{{ safeHTML $summary }}</div>
+                    {{ end }}
                   {{ end }}
                 </div>
             {{ end -}}
