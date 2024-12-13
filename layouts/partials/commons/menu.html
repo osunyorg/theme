@@ -44,6 +44,9 @@
       {{- $attr = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" $slug -}}
     {{- end -}}
     {{- if and (hasPrefix .target "http") (eq .kind "url") -}}
+      {{ if eq $kind "upper-menu"}}
+        {{- $link_class = "external-site" -}}
+      {{ end }}
       {{ if eq $ignore_externals false }}
         {{- $attr = " target=\"_blank\" rel=\"noreferrer\"" -}}
       {{ end }}
