@@ -1,0 +1,43 @@
+{{ $class := "dropdown-menu" }}
+{{ if $dropdown_titled }}
+  {{ $class = printf "%s is-titled" $class }}
+{{ end }}
+{{ if index $summary "" }}
+  
+{{ end }}
+
+<div class="dropdown-menu {{- if $dropdown_titled }} is-titled {{- end -}} 
+    {{- if $dropdown_lvl2_summary }} children-titled {{- end }}" 
+    aria-labelledby="dropdown-{{ $slug }}">
+  {{- if $dropdown_titled }}
+    <div class="container">
+      <div class="dropdown-menu-heading">
+        <a href="{{ .target }}" class="dropdown-menu-title">{{ .title }}</a>
+        {{ if .path }}
+          {{ with partial "GetMenuSummary" (dict 
+              "summary" $next_level_option.summary
+              "path" .path
+            )}}
+            <div class="dropdown-menu-lead">
+              {{ . }}
+            </div>
+          {{ end }}
+        {{ end }}
+      </div>
+    {{ end -}}
+{{- end -}}
+
+{{- if gt (len .children) 0 -}}
+  {{- partial "commons/menu.html" (dict
+        "items" .children
+        "level" $next_level
+        "context" $context
+    ) -}}
+{{- end -}}
+
+{{- if $has_dropdown -}}
+    </div>
+  {{- if $dropdown_titled }}
+    </div>
+  {{- end -}}
+{{- end -}}
