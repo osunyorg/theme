@@ -9,8 +9,7 @@
   {{ $class = printf "%s is-titled" $class }}
 {{ end }}
 
-<div class="{{ $class }}"
-    aria-labelledby="dropdown-{{ $slug }}">
+<div class="{{ $class }}" aria-labelledby="dropdown-{{ $slug }}">
   {{- with $level_options.title }}
     {{ if .active }}
       <div class="container">
@@ -27,12 +26,11 @@
             {{ end }}
           {{ end }}
         </div>
+
+        {{ .submenu }}
+      </div>
     {{ end -}}
-  {{ end -}}
-
+  {{ else -}}
     {{ .submenu }}
-
-    </div>
-  {{- if $level_options.title.active }}
-  </div>
-{{- end -}}
+  {{ end }}
+</div>
