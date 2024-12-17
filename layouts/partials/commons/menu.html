@@ -77,21 +77,21 @@
 
         {{- if and (ne $stop $level) (gt (len .children) 0) -}}
           {{- $next_level := add $level 1 -}}
-
+          {{- $submenu := partial "commons/menu.html" (dict
+              "items" .children
+              "level" $next_level
+              "options" $options
+              "context" $context
+            ) -}}
           {{- if $has_dropdown }}
             {{ partial "commons/menu-dropdown" (dict
                 "parent" .
                 "level" $next_level
                 "options" $options
-                "context" $context
+                "submenu" $submenu
               )}}
           {{- else -}}
-            {{- partial "commons/menu.html" (dict
-                "items" .children
-                "level" $next_level
-                "options" $options
-                "context" $context
-              ) -}}
+            {{- $submenu -}}
           {{- end -}}
         {{- end -}}
       </li>

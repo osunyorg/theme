@@ -1,4 +1,3 @@
-{{- $kind := .kind -}}
 {{- $parent := .parent -}}
 {{- $level := .level -}}
 {{- $options := .options -}}
@@ -33,14 +32,9 @@
     {{ end -}}
   {{ end -}}
 
-      {{- partial "commons/menu.html" (dict
-          "items" .parent.children
-          "level" $level
-          "options" $options
-          "context" .context
-        ) -}}
+    {{ .submenu }}
 
     </div>
-  {{- if $options.title.active }}
+  {{- if $level_options.title.active }}
   </div>
 {{- end -}}
