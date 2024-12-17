@@ -1,7 +1,11 @@
 {{ if .active }}
   <div class="top{{ if .screen_reader_only }} sr-only{{ end }}">
     {{ with .title }}
-      <h{{ .heading }} class="block-title">
+      {{ $heading_tag := partial "GetHeadingTag" (dict 
+        "level" .heading 
+        "attributes" "class='block-title'"
+      )}}
+      {{ $heading_tag.open }}
         {{- with .link -}}
           <a href="{{ . }}">
         {{- end -}}
@@ -9,7 +13,7 @@
         {{- with .link -}}
           </a>
         {{- end -}}
-      </h{{ .heading }}>
+      {{ $heading_tag.close }}
     {{ end }}
     {{ with .description }}
       <div class="description">
