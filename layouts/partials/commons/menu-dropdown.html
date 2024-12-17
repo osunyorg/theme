@@ -3,7 +3,8 @@
 {{- $options := .options -}}
 {{- $level_options := index $options (printf "level_%d" $level) -}}
 {{- $slug := anchorize .parent.title -}}
-{{ $class := "dropdown-menu" }}
+{{- $submenu := .submenu -}}
+{{- $class := "dropdown-menu" -}}
 
 {{ if $level_options.title.active }}
   {{ $class = printf "%s is-titled" $class }}
@@ -27,10 +28,10 @@
           {{ end }}
         </div>
 
-        {{ .submenu }}
+        {{ $submenu }}
       </div>
+    {{ else -}}
+        {{ $submenu }}
     {{ end -}}
-  {{ else -}}
-    {{ .submenu }}
   {{ end }}
 </div>
