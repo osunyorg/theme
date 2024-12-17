@@ -1,0 +1,46 @@
+{{- $kind := .kind -}}
+{{- $parent := .parent -}}
+{{- $level := .level -}}
+{{- $options := .options -}}
+{{- $level_options := index $options (printf "level_%d" $level) -}}
+{{- $slug := anchorize .parent.title -}}
+
+{{ $class := "dropdown-menu" }}
+{{ with $level_options }}
+  {{ if .title.active }}
+    {{ $class = printf "%s is-titled" $class }}
+  {{ end }}
+{{ end }}
+
+<div class="{{ $class }}"
+    aria-labelledby="dropdown-{{ $slug }}">
+  {{- with $level_options.title }}
+    {{ if .active }}
+      <div class="container">
+        <div class="dropdown-menu-heading">
+          <a href="{{ $parent.target }}" class="dropdown-menu-title">{{ $parent.title }}</a>
+          {{ if $parent.path }}
+            {{ with partial "GetMenuSummary" (dict 
+                "summary" .summary
+                "path" $parent.path
+              )}}
+              <div class="dropdown-menu-lead">
+                {{ . }}
+              </div>
+            {{ end }}
+          {{ end }}
+        </div>
+    {{ end -}}
+  {{ end -}}
+
+      {{- partial "commons/menu.html" (dict
+          "items" .parent.children
+          "level" $level
+          "options" $options
+          "context" .context
+        ) -}}
+
+    </div>
+  {{- if $options.title.active }}
+  </div>
+{{- end -}}
