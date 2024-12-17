@@ -79,12 +79,10 @@
           {{- $next_level := add $level 1 -}}
 
           {{- if $has_dropdown }}
-            {{- $next_level_option := index $options (printf "level_%d" $next_level) -}}
             {{ partial "commons/menu-dropdown" (dict
                 "parent" .
-                "level" (add $level 1)
-                "options" $next_level_option
-                "parent_options" $options
+                "level" $next_level
+                "options" $options
                 "context" $context
               )}}
           {{- else -}}

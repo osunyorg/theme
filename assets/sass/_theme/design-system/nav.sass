@@ -98,9 +98,6 @@
             > a,
             > span
                 @include signature
-            // &.has-children
-            //     + li
-            //         margin-top: $spacing-3
             &.with-summary
                 position: relative
                 > a
@@ -128,6 +125,8 @@
         a,
         span
             @include meta
+        p
+            @include small
 
     .header-i18n
         position: relative
@@ -261,9 +260,9 @@
         display: none
         vertical-align: middle
 
-[aria-expanded="false"] + .dropdown-menu
+[aria-expanded="false"] ~ .dropdown-menu
     display: none
-[aria-expanded="true"] + .dropdown-menu
+[aria-expanded="true"] ~ .dropdown-menu
     display: block
     animation-duration: 0.3s
     animation-fill-mode: both

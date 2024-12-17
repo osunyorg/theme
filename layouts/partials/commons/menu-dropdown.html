@@ -1,12 +1,12 @@
-{{- $parent := .parent -}}
-{{- $parent_options := .parent_options -}}
-{{- $level := .level -}}
 {{- $kind := .kind -}}
+{{- $parent := .parent -}}
+{{- $level := .level -}}
 {{- $options := .options -}}
+{{- $level_options := index $options (printf "level_%d" $level) -}}
 {{- $slug := anchorize .parent.title -}}
 
 {{ $class := "dropdown-menu" }}
-{{ with $options }}
+{{ with $level_options }}
   {{ if .title.active }}
     {{ $class = printf "%s is-titled" $class }}
   {{ end }}
@@ -14,7 +14,7 @@
 
 <div class="{{ $class }}"
     aria-labelledby="dropdown-{{ $slug }}">
-  {{- with $options.title }}
+  {{- with $level_options.title }}
     {{ if .active }}
       <div class="container">
         <div class="dropdown-menu-heading">
@@ -36,7 +36,7 @@
       {{- partial "commons/menu.html" (dict
           "items" .parent.children
           "level" $level
-          "options" $parent_options
+          "options" $options
           "context" .context
         ) -}}
 
