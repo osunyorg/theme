@@ -1,27 +1,28 @@
-{{/*  {{ $dropdown_lvl2_summary := false }}
-{{ $dropdown_titled := false }}
-{{ $level_options := .level_options }}
+{{- $parent := .parent -}}
+{{- $parent_options := .parent_options -}}
+{{- $level := .level -}}
+{{- $kind := .menu_kind -}}
+{{- $options := .options -}}
+{{- $slug := urlize .parent.title -}}
 
 {{ $class := "dropdown-menu" }}
-{{ if $dropdown_titled }}
+{{ if $options.title }}
   {{ $class = printf "%s is-titled" $class }}
 {{ end }}
-
-{{ if index $summary "" }}
-  
+{{ if $options.summary }}
+  {{ $class = printf "%s children-title" $class }}
 {{ end }}
-
-<div class="dropdown-menu {{- if $dropdown_titled }} is-titled {{- end -}} 
-    {{- if $dropdown_lvl2_summary }} children-titled {{- end }}" 
+{{ $kind }}
+<div class="{{ $class }}"
     aria-labelledby="dropdown-{{ $slug }}">
-  {{- if $dropdown_titled }}
+  {{- if $options.title }}
     <div class="container">
       <div class="dropdown-menu-heading">
-        <a href="{{ .target }}" class="dropdown-menu-title">{{ .title }}</a>
-        {{ if .path }}
+        <a href="{{ .parent.target }}" class="dropdown-menu-title">{{ .parent.title }}</a>
+        {{ if .parent.path }}
           {{ with partial "GetMenuSummary" (dict 
-              "summary" $level_options.summary
-              "path" .path
+              "summary" $parent_options.summary
+              "path" .parent.path
             )}}
             <div class="dropdown-menu-lead">
               {{ . }}
@@ -30,19 +31,14 @@
         {{ end }}
       </div>
     {{ end -}}
-{{- end -}}
 
-{{- if gt (len .children) 0 -}}
-  {{- partial "commons/menu.html" (dict
-        "items" .children
-        "level" $next_level
-        "context" $context
-    ) -}}
-{{- end -}}
+    {{- partial "commons/menu.html" (dict
+          "items" .parent.children
+          "level" $level
+          "context" .context
+      ) -}}
+    </div>
 
-{{- if $has_dropdown -}}
+  {{- if $options.title }}
     </div>
-  {{- if $dropdown_titled }}
-    </div>
-  {{- end -}}
-{{- end -}}  */}}
+{{- end -}}
