@@ -1,5 +1,5 @@
-{{ if or .title .description }}
-  <div class="top {{ if .sr_only }}sr-only{{ end }}">
+{{ if .active }}
+  <div class="top{{ if .screen_reader_only }} sr-only{{ end }}">
     {{ with .title }}
       <h{{ .heading }} class="block-title">
         {{- with .link -}}
