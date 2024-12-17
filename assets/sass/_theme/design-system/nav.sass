@@ -51,39 +51,19 @@
             overflow: auto
         &-title
             @include h2
+            + .dropdown-menu-lead
+                margin-top: $spacing-1
         &-lead
-            font-family: $header-titled-lvl1-summary-font-family
-            font-size: $header-titled-lvl1-summary-font-size
-            line-height: $header-titled-lvl1-summary-line-height
+            font-family: $header-dropdown-title-summary-font-family
+            font-size: $header-dropdown-title-summary-font-size
+            line-height: $header-dropdown-title-summary-line-height
             @include media-breakpoint-up(desktop)
-                font-size: $header-titled-lvl1-summary-font-size-desktop
-                line-height: $header-titled-lvl1-summary-line-height-desktop
-        &.children-titled
-            .nav-level-2
-                > li
-                    position: relative
-                    > a
-                        @include h6
-                        @include stretched-link(before)
-                        @include media-breakpoint-up(desktop)
-                            @include h5
-                        + p
-                            display: block
-                            @include media-breakpoint-up(desktop)
-                                @include small
-                                margin-top: $spacing-2
-                    .nav-level-3
-                        padding-top: 0
-                    @include media-breakpoint-down(desktop)
-                        + li
-                            margin-top: $spacing-2
-            .nav-level-3
-                a
-                    position: relative
-                    z-index: 2
-        &.is-titled.children-titled
-            .dropdown-menu-heading + .nav-level-2
-                margin-top: $spacing-2
+                font-size: $header-dropdown-title-summary-font-size-desktop
+                line-height: $header-dropdown-title-summary-line-height-desktop
+        &-heading
+            @include media-breakpoint-down(desktop)
+                + .nav-level-2
+                    margin-top: $spacing-3
         &.is-titled
             .nav-level-2 
                 > li + li
@@ -94,6 +74,7 @@
         a:focus,
         a:active
             @include link($header-dropdown-color, false)
+
     .nav-level-1
         display: flex
         > li
@@ -117,6 +98,29 @@
             > a,
             > span
                 @include signature
+            &.has-children
+                + li
+                    margin-top: $spacing-3
+            &.with-summary
+                position: relative
+                > a
+                    @include h6
+                    @include stretched-link(before)
+                    @include media-breakpoint-up(desktop)
+                        @include h5
+                    + p
+                        display: block
+                        @include media-breakpoint-up(desktop)
+                            @include small
+                            margin-top: $spacing-2
+                .nav-level-3
+                    padding-top: 0
+                    a
+                        position: relative
+                        z-index: 2
+                @include media-breakpoint-down(desktop)
+                    + li
+                        margin-top: $spacing-2
 
     .nav-level-3
         display: block

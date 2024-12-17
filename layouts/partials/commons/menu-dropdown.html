@@ -1,44 +1,46 @@
 {{- $parent := .parent -}}
 {{- $parent_options := .parent_options -}}
 {{- $level := .level -}}
-{{- $kind := .menu_kind -}}
+{{- $kind := .kind -}}
 {{- $options := .options -}}
 {{- $slug := urlize .parent.title -}}
 
 {{ $class := "dropdown-menu" }}
-{{ if $options.title }}
-  {{ $class = printf "%s is-titled" $class }}
+{{ with $options }}
+  {{ if .title.active }}
+    {{ $class = printf "%s is-titled" $class }}
+  {{ end }}
 {{ end }}
-{{ if $options.summary }}
-  {{ $class = printf "%s children-title" $class }}
-{{ end }}
-{{ $kind }}
+
 <div class="{{ $class }}"
     aria-labelledby="dropdown-{{ $slug }}">
-  {{- if $options.title }}
-    <div class="container">
-      <div class="dropdown-menu-heading">
-        <a href="{{ .parent.target }}" class="dropdown-menu-title">{{ .parent.title }}</a>
-        {{ if .parent.path }}
-          {{ with partial "GetMenuSummary" (dict 
-              "summary" $parent_options.summary
-              "path" .parent.path
-            )}}
-            <div class="dropdown-menu-lead">
-              {{ . }}
-            </div>
+  {{- with $options.title }}
+    {{ if .active }}
+      <div class="container">
+        <div class="dropdown-menu-heading">
+          <a href="{{ $parent.target }}" class="dropdown-menu-title">{{ $parent.title }}</a>
+          {{ if $parent.path }}
+            {{ with partial "GetMenuSummary" (dict 
+                "summary" .summary
+                "path" $parent.path
+              )}}
+              <div class="dropdown-menu-lead">
+                {{ . }}
+              </div>
+            {{ end }}
           {{ end }}
-        {{ end }}
-      </div>
+        </div>
     {{ end -}}
+  {{ end -}}
 
-    {{- partial "commons/menu.html" (dict
+      {{- partial "commons/menu.html" (dict
           "items" .parent.children
           "level" $level
+          "options" $parent_options
           "context" .context
-      ) -}}
-    </div>
+        ) -}}
 
-  {{- if $options.title }}
     </div>
+  {{- if $options.title.active }}
+  </div>
 {{- end -}}

@@ -9,7 +9,10 @@
 {{- $stop := .stop -}}
 {{- $ignore_externals := .ignore_externals | default false -}}
 
-{{- $options := index site.Params.menu $kind -}}
+{{ $options := .options }}
+{{ if $kind }}
+  {{- $options = index site.Params.menu $kind -}}
+{{ end }}
 {{- $level_options := index $options (printf "level_%d" $level) -}}
 {{- $dropdown := .dropdown -}}
 {{- $extern_link := i18n "commons.link.blank" -}}
@@ -36,10 +39,12 @@
         {{ end }}
       {{ end -}}
     {{- end -}}
+
     {{- if and (gt (len .children) 0) $dropdown (eq $level 1) -}}
       {{- $has_dropdown = true -}}
       {{- $attr = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" $slug -}}
     {{- end -}}
+
     {{- if and (hasPrefix .target "http") (eq .kind "url") -}}
       {{ if eq $kind "upper-menu"}}
         {{- $link_class = "external-site" -}}
@@ -49,18 +54,22 @@
       {{ end }}
       {{- $attr_title = printf "title=\"%s - %s\"" .title $extern_link -}}
     {{- end -}}
+
+    {{ if $level_options.summary.active }}
+      {{ $item_class = printf "%s with-summary" $item_class }}
+    {{ end }}
+
     {{- if or (ne $stop 1) (and (eq $stop 1) (ne .kind "blank")) -}}
-      <li{{ if ne $item_class ""}} class="{{ $item_class }}"{{ end }}>
+      <li{{ if ne $item_class "" }} class="{{ $item_class }}"{{ end }}>
 
         {{- if ne .kind "blank" -}}
-          <a href="{{ .target }}"{{ if ne $link_class ""}} class="{{ $link_class }}"{{ end }} {{ safeHTMLAttr $attr }} {{ safeHTMLAttr $attr_title }}>
+          <a href="{{ .target }}"{{ if ne $link_class "" }} class="{{ $link_class }}"{{ end }} {{ safeHTMLAttr $attr }} {{ safeHTMLAttr $attr_title }}>
             {{ .title }}
           </a>
-          {{ $level_options.summary }}
           {{ partial "GetMenuSummary" (dict 
               "summary" $level_options.summary
               "path" .path
-            )}}
+            ) }}
         {{- else -}}
           <span class="{{ if ne $link_class ""}} {{ $link_class }}{{ end }}{{ if gt .level 1 }} disabled{{ end }}" {{ safeHTMLAttr $attr }}>{{ .title }}</span>
         {{- end -}}
@@ -81,6 +90,7 @@
             {{- partial "commons/menu.html" (dict
                 "items" .children
                 "level" $next_level
+                "options" $options
                 "context" $context
               ) -}}
           {{- end -}}
