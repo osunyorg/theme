@@ -11,10 +11,7 @@
           "description" .description
         )}}
 
-        {{ $heading_rank := $block.ranks.self }}
-        {{ if $block.title }}
-          {{ $heading_rank = $block.ranks.self | add 1 }}
-        {{ end }}
+        {{ $heading_rank := $block.ranks.children }}
 
         {{ $heading_name := partial "GetHeadingTag" ( dict 
             "level" $heading_rank
