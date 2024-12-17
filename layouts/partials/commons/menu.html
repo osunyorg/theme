@@ -2,8 +2,8 @@
 {{ $items := .items }}
 {{ $context := .context }}
 {{ if $kind }}
-{{ $menu := partial "GetMenu" $kind }}
-{{ $items = $menu.items }}
+  {{ $menu := partial "GetMenu" $kind }}
+  {{ $items = $menu.items }}
 {{ end }}
 {{- $level := .level -}}
 {{- $stop := .stop -}}
@@ -16,7 +16,6 @@
 {{- $dropdown_titled := (and site.Params.menu.dropdown.linkToLevel1 (eq $level 1)) -}}
 {{- $dropdown_lvl1_summary := (and site.Params.menu.dropdown.level1_summary (eq $level 1)) -}}
 {{- $dropdown_lvl2_summary := and site.Params.menu.dropdown.level2_summary (eq $level 2) -}}
-{{- $meta_descriptions_for_summaries := site.Params.menu.dropdown.meta_descriptions | default false -}}
 
 {{ $extern_link := i18n "commons.link.blank" }}
 <ul class="{{ if $level }}nav-level-{{ $level }}{{ end }} {{ .class }}">
@@ -74,8 +73,8 @@
         {{- $next_level_option := index $options (printf "level_%d" $next_level) -}}
 
         {{- if $has_dropdown }}
-          <div class="dropdown-menu {{- if $dropdown_titled }} is-titled {{- end -}} {{- if $dropdown_lvl2_summary }} children-titled {{- end }}" aria-labelledby="dropdown-{{ $slug }}">
-            {{- if $dropdown_titled }}
+          <div class="dropdown-menu {{- if $next_level_option.title }} is-titled {{- end -}} {{- if $dropdown_lvl2_summary }} children-titled {{- end }}" aria-labelledby="dropdown-{{ $slug }}">
+            {{- if $next_level_option.title }}
               <div class="container">
                 <div class="dropdown-menu-heading">
                   <a href="{{ .target }}" class="dropdown-menu-title">{{ .title }}</a>
@@ -103,7 +102,7 @@
 
           {{- if $has_dropdown -}}
               </div>
-            {{- if $dropdown_titled }}
+            {{- if $next_level_option.title }}
               </div>
             {{- end -}}
           {{- end -}}

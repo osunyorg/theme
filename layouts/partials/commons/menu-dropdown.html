@@ -1,7 +1,12 @@
+{{/*  {{ $dropdown_lvl2_summary := false }}
+{{ $dropdown_titled := false }}
+{{ $level_options := .level_options }}
+
 {{ $class := "dropdown-menu" }}
 {{ if $dropdown_titled }}
   {{ $class = printf "%s is-titled" $class }}
 {{ end }}
+
 {{ if index $summary "" }}
   
 {{ end }}
@@ -15,7 +20,7 @@
         <a href="{{ .target }}" class="dropdown-menu-title">{{ .title }}</a>
         {{ if .path }}
           {{ with partial "GetMenuSummary" (dict 
-              "summary" $next_level_option.summary
+              "summary" $level_options.summary
               "path" .path
             )}}
             <div class="dropdown-menu-lead">
@@ -40,4 +45,4 @@
   {{- if $dropdown_titled }}
     </div>
   {{- end -}}
-{{- end -}}
+{{- end -}}  */}}
