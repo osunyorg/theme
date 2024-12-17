@@ -15,24 +15,26 @@
 {{ end }}
 {{- $level_options := index $options (printf "level_%d" $level) -}}
 {{- $dropdown := .dropdown -}}
-{{- $extern_link := i18n "commons.link.blank" -}}
 
 <ul class="{{ if $level }}nav-level-{{ $level }}{{ end }} {{ .class }}">
   {{ range $items -}}
-    {{- $slug := urlize .title -}}
+    {{- $slug := anchorize .title -}}
     {{- $item_class := "" -}}
     {{- $link_class := "" -}}
-    {{- $attr := "" -}}
-    {{- $attr_title := printf "title=\"%s\"" .title -}}
+    {{- $attributes := "" -}}
+    {{- $title_attribute := printf "title=\"%s\"" .title -}}
     {{- $has_dropdown := false -}}
+
     {{ if eq $context.RelPermalink .target }}
       {{ $link_class = "active" }}
     {{ end }}
+
     {{ if eq $kind "social" }}
       {{- $item_class = printf .title | lower -}}
     {{ end }}
+
     {{- if gt (len .children) 0 -}}
-      {{- $item_class = printf "%shas-children" $item_class -}}
+      {{- $item_class = printf "%s has-children" $item_class -}}
       {{ range .children -}}
         {{- if eq $context.RelPermalink .target }}
           {{ $link_class = printf "%s %s" $link_class "has-children-active" }}
@@ -42,17 +44,13 @@
 
     {{- if and (gt (len .children) 0) $dropdown (eq $level 1) -}}
       {{- $has_dropdown = true -}}
-      {{- $attr = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" $slug -}}
+      {{- $attributes = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" $slug -}}
     {{- end -}}
 
-    {{- if and (hasPrefix .target "http") (eq .kind "url") -}}
-      {{ if eq $kind "upper-menu"}}
-        {{- $link_class = "external-site" -}}
-      {{ end }}
-      {{ if eq $ignore_externals false }}
-        {{- $attr = " target=\"_blank\" rel=\"noreferrer\"" -}}
-      {{ end }}
-      {{- $attr_title = printf "title=\"%s - %s\"" .title $extern_link -}}
+    {{- if .new_tab -}}
+      {{- $extern_link := i18n "commons.link.blank" -}}
+      {{- $title_attribute = printf "title=\"%s - %s\"" .title $extern_link -}}
+      {{- $attributes = " target=\"_blank\" rel=\"noreferrer\"" -}}
     {{- end -}}
 
     {{ if $level_options.summary.active }}
@@ -60,10 +58,10 @@
     {{ end }}
 
     {{- if or (ne $stop 1) (and (eq $stop 1) (ne .kind "blank")) -}}
-      <li{{ if ne $item_class "" }} class="{{ $item_class }}"{{ end }}>
+      <li {{ with $item_class }}class="{{ . }}"{{ end }}>
 
         {{- if ne .kind "blank" -}}
-          <a href="{{ .target }}"{{ if ne $link_class "" }} class="{{ $link_class }}"{{ end }} {{ safeHTMLAttr $attr }} {{ safeHTMLAttr $attr_title }}>
+          <a href="{{ .target }}" {{ with $link_class }} class="{{ . }}" {{ end }} {{ safeHTMLAttr $attributes }} {{ safeHTMLAttr $title_attribute }}>
             {{ .title }}
           </a>
           {{ partial "GetMenuSummary" (dict 
@@ -71,7 +69,10 @@
               "path" .path
             ) }}
         {{- else -}}
-          <span class="{{ if ne $link_class ""}} {{ $link_class }}{{ end }}{{ if gt .level 1 }} disabled{{ end }}" {{ safeHTMLAttr $attr }}>{{ .title }}</span>
+          {{ if gt .level 1 }}
+            {{ $link_class = printf "%s disabled" $link_class }}
+          {{ end }}
+          <span {{ with $link_class }}class="{{ . }}"{{ end }} {{ safeHTMLAttr $attributes }}>{{ .title }}</span>
         {{- end -}}
 
         {{- if and (ne $stop $level) (gt (len .children) 0) -}}
