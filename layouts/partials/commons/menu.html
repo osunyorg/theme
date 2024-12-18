@@ -62,7 +62,7 @@
 
         {{- if ne .kind "blank" -}}
           <a href="{{ .target }}" {{ with $link_class }} class="{{ . }}" {{ end }} {{ safeHTMLAttr $attributes }} {{ safeHTMLAttr $title_attribute }}>
-            {{ .title }}
+            {{ .title | markdownify }}
           </a>
           {{ partial "GetMenuSummary" (dict 
               "summary" $level_options.summary
