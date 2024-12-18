@@ -1,6 +1,6 @@
-{{ $layout := site.Params.events.index.layout }}
+{{ $layout := site.Params.agenda.events.index.layout }}
 {{ $collection := where .Pages "Params.parent" "eq" nil }}
-{{ $is_archive := ne .File.Path "events/_index.html" }}
+{{ $is_archive := ne .File.Path "agenda_events/_index.html" }}
 {{ $order := "asc" }}
 
 {{ if $is_archive }}
@@ -9,12 +9,12 @@
   {{ $collection = where $collection "Params.dates.archive" false }}
 {{ end }}
 
-{{ if site.Params.events.index.highlight_expositions }}
+{{ if site.Params.agenda.events.index.highlight_exhibitions }}
   {{ $collection = where $collection "Params.event_kind" "ne" "exposition" }}
 {{ end }}
 
-{{ $groups := $collection.GroupByDate site.Params.events.index.group_by_date $order }}
-{{ $paginator := .Paginate $groups site.Params.events.index.per_page }}
+{{ $groups := $collection.GroupByDate site.Params.agenda.events.index.group_by_date $order }}
+{{ $paginator := .Paginate $groups site.Params.agenda.events.index.per_page }}
 
 {{ if not .Pages }}
   <p>{{ i18n "events.none" }}</p>
@@ -22,19 +22,19 @@
   <div class="events events--{{-  $layout -}}">
     {{ range $paginator.PageGroups }}
 
-      <h2 class="events-date-title">{{ .Key }}</h2>
+      <h2 class="events-date-title">{{ .Key | humanize }}</h2>
 
       {{ range .Pages }}
-        {{ partial "events/event.html" (dict
+        {{ partial "agenda/events/event.html" (dict
             "event" .
             "layout" $layout
-            "options" site.Params.events.index.options
+            "options" site.Params.agenda.events.index.options
           )}}
 
-        {{ partial "events/event-children.html" (dict 
+        {{ partial "agenda/events/event-children.html" (dict 
             "event" .
             "layout" $layout
-            "options" site.Params.events.index.options
+            "options" site.Params.agenda.events.index.options
           )}}
       {{ end }}
     {{ end }}

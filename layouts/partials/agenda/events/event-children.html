@@ -4,10 +4,10 @@
 {{ range .event.Params.children_for_the_day }}
   {{ $child := site.GetPage .path }}
   {{ with $child }}
-    {{ partial "events/event.html" (dict
+    {{ partial "agenda/events/event.html" (dict
         "event" .
         "layout" $layout
-        "options" site.Params.events.index.options
+        "options" site.Params.agenda.events.index.options
       )}}
   {{ end }}
 {{ end }}
