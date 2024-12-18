@@ -74,7 +74,9 @@
   {{ end }}
 {{ end }}
 
-{{ partial "papers/citation-tags" . }}
+{{ range .Params.metadata }}
+  <meta name="{{ .name }}" content="{{ .content }}">
+{{ end }}
 
 {{/*
 Limiter le tracking par le CDN
