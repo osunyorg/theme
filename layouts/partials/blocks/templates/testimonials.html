@@ -7,22 +7,50 @@
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
             "title" $block.title
-            "heading_level" $block.ranks.self
-            "hidden" true
+            "heading_level" $block.ranks.base
+            "sr_only" true
         )}}
-        <div class="testimonials">
-          {{- if and .testimonials (gt (len .testimonials) 1) }}
-            {{ partial "blocks/templates/carousel.html" (dict 
-              "content" .testimonials
-              "options" site.Params.blocks.testimonials.carousel
-              "partial" "blocks/templates/testimonials/single.html"
-            )}}
-          {{ else }}
-            {{ range .testimonials }}
-              {{ partial "blocks/templates/testimonials/single.html" (dict
-                "params" .
-              )}}
+        <div class="testimonials" data-slider="{{ site.Params.blocks.testimonials.slider | encoding.Jsonify }}">
+          {{ range .testimonials }}
+
+            {{ $aria_label := "" }}
+            {{ if and .author .job }}
+              {{ $aria_label = delimit (slice .author .job) ", " }}
+            {{ else }}
+              {{ with or .author .job }}
+                {{ $aria_label = . }}
+              {{ end }}
             {{ end }}
+
+            <figure class="testimonial {{ if.photo }}with-picture{{ end }}" 
+                    {{ with $aria_label -}} role="figure" aria-label="{{ . }}" {{- end }}>
+              {{ $is_long := gt (len .text) 150 }}
+              <blockquote {{- if $is_long }} class="is-long" {{- end }}>
+                {{- partial "PrepareHTML" .text -}}
+              </blockquote>
+              {{ if or .photo .author .job -}}
+                <figcaption>
+                  {{ if .photo -}}
+                    <div class="avatar">
+                      {{- partial "commons/image.html" (dict
+                          "image" .photo
+                          "sizes" site.Params.image_sizes.blocks.testimonials
+                        ) -}}
+                    </div>
+                  {{- end }}
+                  {{ if or .author .job -}}
+                    <p>
+                      {{- if .author -}}
+                        <span class="signature">{{ partial "PrepareHTML" .author }}</span>
+                      {{- end }}
+                      {{- if .job -}}
+                        <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
+                      {{- end }}
+                    </p>
+                  {{- end }}
+                </figcaption>
+              {{ end }}
+            </figure>
           {{ end }}
         </div>
       </div>

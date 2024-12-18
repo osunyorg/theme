@@ -1,7 +1,8 @@
+import { ariaHideBodyChildren } from '../utils/a11y';
 import { focusTrap } from '../utils/focus-trap';
 
 var CLASSES = {
-    popupOpened: 'has-popup-opened',
+    popupOpened: 'has-modal-opened',
     popupIsOpened: 'is-opened'
 };
 
@@ -76,13 +77,10 @@ window.osuny.Popup.prototype = {
     },
 
     updateDocumentAccessibility: function () {
-        var bodyChildren = document.body.children,
-            action = this.state.opened ? 'setAttribute' : 'removeAttribute';
+        ariaHideBodyChildren(this.element, this.state.opened);
+    },
 
-        Array.prototype.forEach.call(bodyChildren, function (element) {
-            if (this.element !== element) {
-                element[action]('inert', '');
-            }
-        }.bind(this));
+    isOpen: function () {
+        return this.state.opened;
     }
 };

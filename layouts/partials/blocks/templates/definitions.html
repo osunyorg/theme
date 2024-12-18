@@ -9,14 +9,14 @@
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
           "title" $block.title
-          "heading_level" $block.ranks.self
+          "heading_level" $block.ranks.base
           "description" .description
         )}}
         <div class="definitions">
           {{- range $index, $element := .elements }}
             {{ $id := printf "block-%d-element-%d" $block_index $index }}
-            <details id="{{$id}}" itemscope itemtype="https://schema.org/DefinedTerm">
-              <summary itemprop="name" aria-controls="#{{ $id }}" aria-expanded="false">{{ $element.title | safeHTML }}</summary>
+            <details id="{{ $id }}" itemscope itemtype="https://schema.org/DefinedTerm">
+              <summary itemprop="name" aria-controls="{{ $id }}" aria-expanded="false">{{ $element.title | safeHTML }}</summary>
               <div itemprop="description">{{ partial "PrepareHTML" $element.description }}</div>
             </details>
           {{ end -}}

@@ -13,12 +13,15 @@ details
             @include grid(3)
         li
             position: relative
-            .title
+            .title, .organization-title
                 @include h4
                 a
                     @include stretched-link(before)
                     @include icon(arrow-right-line, after, true)
                     @include hover-translate-icon
                     text-decoration: none
-            .summary
-                @include small
+                + *
+                    margin-top: $spacing-2
+            .summary, .organization-summary
+                + *
+                    margin-top: $spacing-2

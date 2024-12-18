@@ -1,0 +1,12 @@
+{{ $length := .length }}
+
+{{ if not (eq (printf "%T" $length) "int") }}
+  {{ $length = 0 }}
+{{ end }}
+
+{{ $text := .text | safeHTML }}
+{{ if gt $length 0 }}
+  {{ $text = $text | truncate $length }}
+{{ end }}
+
+{{ return $text }}

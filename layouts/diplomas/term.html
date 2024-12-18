@@ -20,14 +20,14 @@
                 "options" $programs_options
               )}}
           {{ else }}
-            <li>
+            <li itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
               {{- $title := partial "PrepareHTML" .Title -}}
               {{/*  TODO: check title class relevance */}}
-              <a href="{{ .Permalink }}" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+              <a href="{{ .Permalink }}" itemprop="url" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
                 {{- $title -}}
               </a>
               {{ if .Params.summary }}
-                <div class="description">
+                <div class="description" itemprop="abstract">
                   {{- partial "PrepareHTML" .Params.summary -}}
                 </div>
               {{ end }}

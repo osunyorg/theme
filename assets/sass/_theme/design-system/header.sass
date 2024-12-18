@@ -56,6 +56,8 @@ header#document-header
         border-bottom: $header-upper-menu-border-bottom-width solid var(--color-border)
         transition: background $header-sticky-transition
         z-index: $zindex-header
+        &, a
+            color: $header-upper-menu-color
         ul
             @include list-reset
             @include meta
@@ -76,7 +78,7 @@ header#document-header
         @include media-breakpoint-down(desktop)
             background: transparent
             border-top: $header-upper-menu-border-bottom-width solid var(--color-border)
-            color: $header-sticky-color
+            color: $header-upper-menu-sticky-color
             display: none
             position: absolute
             top: var(--header-height)
@@ -90,9 +92,6 @@ header#document-header
             html.has-menu-opened &
                 background: $header-upper-menu-sticky-background
                 display: block
-                + nav
-                    .menu
-                        padding-top: $header-upper-menu-mobile-height
         .nav-level-1
             a
                 text-decoration: none
@@ -114,13 +113,17 @@ header#document-header
                     &.active
                         box-shadow: inset 0 -4px 0 0 var(--color-border)
     @include media-breakpoint-down(desktop)
+        &.has-upper-menu
+            .menu
+                padding-top: $header-upper-menu-mobile-height
         html.has-menu-opened &
             nav
                 padding-bottom: 0
     &.is-sticky
         .upper-menu
             background: $header-upper-menu-sticky-background
-            color: $header-sticky-color
+            &, a
+                color: $header-upper-menu-sticky-color
 
 // TODO : Est-ce au bon endroit ?
 body
@@ -176,7 +179,6 @@ header#document-header
             display: none
             padding: 0
             position: relative
-            text-transform: uppercase
             line-height: 1
             &:focus
                 box-shadow: none
@@ -191,6 +193,7 @@ header#document-header
             span:first-of-type
                 @include meta
                 font-size: pxToRem(14)
+                text-transform: uppercase
             span:last-of-type
                 background: none
                 @include icon-block(menu-line, before)
