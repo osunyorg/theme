@@ -28,6 +28,8 @@ window.osuny.Lightbox.prototype._setup = function () {
         informationButton: this.element.querySelector('.lightbox-button-information'),
         credit: this.element.querySelector('#lightbox-credit'),
         creditButton: this.element.querySelector('.lightbox-button-credit'),
+        transcription: this.element.querySelector('#lightbox-transcription'),
+        transcriptionButton: this.element.querySelector('.lightbox-button-transcription'),
         previousButton: this.element.querySelector('.lightbox-button-previous'),
         nextButton: this.element.querySelector('.lightbox-button-next')
     };
@@ -60,6 +62,13 @@ window.osuny.Lightbox.prototype.open = function (button) {
     this._update(data);
     this.toggle(true, button);
     this.element.focus();
+};
+
+window.osuny.Lightbox.prototype.toggle = function (open, triggerElement) {
+    window.osuny.Popup.prototype.toggle.call(this, open, triggerElement);
+    if (!this.state.opened) {
+        this._clear();
+    }
 };
 
 window.osuny.Lightbox.prototype._getData = function (button) {
@@ -127,16 +136,35 @@ window.osuny.Lightbox.prototype._update = function (data, focus) {
 
     this._setSiblings();
 
+    this.contentElements.information.innerHTML = data.information || '';
+    setButtonEnability(this.contentElements.informationButton, Boolean(data.information));
+    this.contentElements.credit.innerHTML = data.credit || '';
+    setButtonEnability(this.contentElements.creditButton, Boolean(data.credit));
+    this.contentElements.transcription.innerHTML = data.transcription || '';
+    setButtonEnability(this.contentElements.transcriptionButton, Boolean(data.transcription));
+
+    if (data.mode === 'player') {
+        this._setPlayer(data);
+    } else {
+        this._setImage(data, focus);
+    }
+};
+
+window.osuny.Lightbox.prototype._setPlayer = function (data) {
+    var videoPlayer = window.osuny.videoPlayerFactory.get(data.videoId),
+        iframe;
+    if (videoPlayer) {
+        iframe = videoPlayer.cloneIframe();
+        this.contentElements.media.append(iframe);
+    }
+};
+
+window.osuny.Lightbox.prototype._setImage = function (data, focus) {
     if (data.imageSrc) {
         this._createImage(data);
     } else {
         this.contentElements.image = null;
     }
-
-    this.contentElements.information.innerHTML = data.information || '';
-    setButtonEnability(this.contentElements.informationButton, Boolean(data.information));
-    this.contentElements.credit.innerHTML = data.credit || '';
-    setButtonEnability(this.contentElements.creditButton, Boolean(data.credit));
 
     if (focus && data.imageSrc) {
         this._focusImage();
