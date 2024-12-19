@@ -24,6 +24,17 @@
       </button>
     </div>
 
+    <button class="lightbox-button-transcription" aria-controls="lightbox-detail-transcription" aria-expanded="false">
+      <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.controls.transcription") }}</span>
+    </button>
+    <div id="lightbox-detail-transcription" class="lightbox-detail extendable" data-extendable-close-siblings="true">
+      <p class="lightbox-detail__title">{{ safeHTML (i18n "commons.lightbox.transcription") }}</p>
+      <div id="lightbox-transcription"></div>
+      <button class="lightbox-detail__close" aria-controls="lightbox-detail-transcription" tabindex="0" aria-label="{{ safeHTML (i18n "commons.lightbox.close.a11y_transcription") }}">
+        {{ safeHTML (i18n "commons.lightbox.close.text") }}
+      </button>
+    </div>
+
     <button class="lightbox-button-previous">
       <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.controls.previous") }}</span>
     </button>
