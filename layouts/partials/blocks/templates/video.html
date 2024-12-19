@@ -40,16 +40,18 @@
           </div>
         {{ end }}
 
-        {{ if .video_title }}
-          {{ $described_by_id = printf "block-video-title-%d" $block_index }}
-          <p aria-hidden="true" id="{{ $described_by_id }}">{{- partial "PrepareHTML" .video_title -}}</p>
-        {{ end }}
+        {{ if ne .layout "button" }}
+          {{ if .video_title }}
+            {{ $described_by_id = printf "block-video-title-%d" $block_index }}
+            <p aria-hidden="true" id="{{ $described_by_id }}">{{- partial "PrepareHTML" .video_title -}}</p>
+          {{ end }}
 
-        {{ partial "commons/transcription" ( dict
-          "block_index" $block_index
-          "described_by" $described_by_id
-          "transcription" .transcription
-        ) }}
+          {{ partial "commons/transcription" ( dict
+            "block_index" $block_index
+            "described_by" $described_by_id
+            "transcription" .transcription
+          ) }}
+        {{ end }}
       </div>
     </div>
   </div>
