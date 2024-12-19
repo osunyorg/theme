@@ -19,6 +19,15 @@
               partial "H2AddId" .Content
             ) }}
         {{ end }}
+
+        <div class="organization-categories">
+          {{ partial "commons/taxonomies.html" (dict
+              "context" .
+              "kind" "organization"
+              "taxonomies" .Params.taxonomies
+              "free_categories" .Params.free_categories
+            ) }}
+        </div>
         
         {{ partial "commons/contact-details.html" . }}
 
