@@ -13,7 +13,6 @@ window.osuny.VideoPlayer = function (element) {
 
     this.button = this.cover.querySelector('button');
     this.iframe = this.element.querySelector('.video-container iframe');
-    this.iframeParent = this.iframe.parentElement;
     this.src = this.iframe.getAttribute('data-unloaded-src');
 
     this.listen();
