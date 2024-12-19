@@ -2,38 +2,9 @@
   <div class="lightbox-media" id="lightbox-media"></div>
   <div class="lightbox-controls">
 
-    <button class="lightbox-button-information" aria-controls="lightbox-detail-information" aria-expanded="false">
-      <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.controls.informations") }}</span>
-    </button>
-    <div id="lightbox-detail-information" class="lightbox-detail extendable" data-extendable-close-siblings="true">
-      <p class="lightbox-detail__title">{{ safeHTML (i18n "commons.lightbox.informations") }}</p>
-      <div id="lightbox-information"></div>
-      <button class="lightbox-detail__close" aria-controls="lightbox-detail-information" tabindex="0" aria-label="{{ safeHTML (i18n "commons.lightbox.close.a11y_informations") }}">
-        {{ safeHTML (i18n "commons.lightbox.close.text") }}
-      </button>
-    </div>
-
-    <button class="lightbox-button-credit" aria-controls="lightbox-detail-credit" aria-expanded="false">
-      <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.controls.credits") }}</span>
-    </button>
-    <div id="lightbox-detail-credit" class="lightbox-detail extendable" data-extendable-close-siblings="true">
-      <p class="lightbox-detail__title">{{ safeHTML (i18n "commons.lightbox.credits") }}</p>
-      <div id="lightbox-credit"></div>
-      <button class="lightbox-detail__close" aria-controls="lightbox-detail-credit" tabindex="0" aria-label="{{ safeHTML (i18n "commons.lightbox.close.a11y_credits") }}">
-        {{ safeHTML (i18n "commons.lightbox.close.text") }}
-      </button>
-    </div>
-
-    <button class="lightbox-button-transcription" aria-controls="lightbox-detail-transcription" aria-expanded="false">
-      <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.controls.transcription") }}</span>
-    </button>
-    <div id="lightbox-detail-transcription" class="lightbox-detail extendable" data-extendable-close-siblings="true">
-      <p class="lightbox-detail__title">{{ safeHTML (i18n "commons.lightbox.transcription") }}</p>
-      <div id="lightbox-transcription"></div>
-      <button class="lightbox-detail__close" aria-controls="lightbox-detail-transcription" tabindex="0" aria-label="{{ safeHTML (i18n "commons.lightbox.close.a11y_transcription") }}">
-        {{ safeHTML (i18n "commons.lightbox.close.text") }}
-      </button>
-    </div>
+    {{ template "lightbox-detail" "information" }}
+    {{ template "lightbox-detail" "credit" }}
+    {{ template "lightbox-detail" "transcription" }}
 
     <button class="lightbox-button-previous">
       <span class="sr-only">{{ safeHTML (i18n "commons.lightbox.controls.previous") }}</span>
@@ -46,3 +17,19 @@
     </button>
   </div>
 </div>
+
+{{- define "lightbox-detail" -}}
+  {{ $button_label := i18n (printf "commons.lightbox.controls.%s" . ) }}
+  {{ $title := i18n (printf "commons.lightbox.%s" . ) }}
+  {{ $close_label := i18n (printf "commons.lightbox.close.a11y_%s" . ) }}
+  <button class="lightbox-button-{{ . }}" aria-controls="lightbox-detail-{{ . }}" aria-expanded="false">
+    <span class="sr-only">{{ $button_label }}</span>
+  </button>
+  <div id="lightbox-detail-{{ . }}" class="lightbox-detail extendable" data-extendable-close-siblings="true">
+    <p class="lightbox-detail__title">{{ $title }}</p>
+    <div id="lightbox-{{ . }}"></div>
+    <button class="lightbox-detail__close" aria-controls="lightbox-detail-{{ . }}" tabindex="0" aria-label="{{ $close_label }}">
+      {{ safeHTML (i18n "commons.lightbox.close.text") }}
+    </button>
+  </div>
+{{- end -}}
