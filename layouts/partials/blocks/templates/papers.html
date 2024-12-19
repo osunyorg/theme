@@ -7,18 +7,7 @@
   <div class="block block-papers {{- if $title }} block-with-title {{- end -}}">
     <div class="container">
       <div class="block-content">
-        {{ if $block.title -}}
-          {{ $papers_page := site.GetPage "/papers" }}
-          {{ $link := $papers_page.Permalink }}
-
-          {{ partial "blocks/top.html" (dict
-            "title" $block.title
-            "heading_level" $block.ranks.base
-            "link" $link
-            "description" .description
-          )}}
-        {{- end }}
-
+        {{ partial "blocks/top.html" $block.top }}
         <div class="papers">
           {{ range $paper := .papers -}}
             {{ with site.GetPage (printf "/papers/%s" $paper) }}
