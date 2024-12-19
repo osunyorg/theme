@@ -14,16 +14,17 @@
         .description
             margin-top: $spacing-3
     @include in-page-with-sidebar
-        .persons
-            @include grid(1, desktop)
-            row-gap: $spacing-2
-            @include media-breakpoint-up(xxl)
-                @include grid(2)
-                article
-                    .avatar
-                        width: columns(1.5)
-                    .description
-                        margin-top: $spacing-2
+        &--grid
+            .persons
+                @include grid(1, desktop)
+                row-gap: $spacing-2
+                @include media-breakpoint-up(xxl)
+                    @include grid(2)
+                    article
+                        .avatar
+                            width: columns(1.5)
+                        .description
+                            margin-top: $spacing-2
         article
             flex-direction: row
             gap: $spacing-3
@@ -71,7 +72,10 @@
                         @include body-text
                         @include grid(2, md)
                         @include media-breakpoint-up(md)
-                            grid-row-gap: 0
+                            grid-row-gap: $spacing-3
+                        li,
+                        li + li
+                            margin-top: 0
                         + ul
                             margin-top: $spacing-3
             @include in-page-with-sidebar
