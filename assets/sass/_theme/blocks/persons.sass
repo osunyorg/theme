@@ -13,6 +13,14 @@
     article
         .description
             margin-top: $spacing-3
+    @include in-page-without-sidebar
+        .top .description
+            max-width: columns(8)
+        &.block-with-long-text
+            .persons
+                @include grid(2)
+                article
+                    @include person-avatar-end
     @include in-page-with-sidebar
         &--grid
             .persons
@@ -31,14 +39,6 @@
             @include media-breakpoint-up(md)
                 .avatar
                     width: columns(2)
-    @include in-page-without-sidebar
-        .top .description
-            max-width: columns(8)
-        &.block-with-long-text
-            .persons
-                @include grid(2)
-                article
-                    @include person-avatar-end
     &--large
         .person
             display: flex
@@ -59,32 +59,56 @@
                 ul
                     > li
                         display: flex
-                        gap: var(--grid-gutter)
-                        justify-content: space-between
+                        column-gap: var(--grid-gutter)
                         width: 100%
+                        a
+                            position: relative
+                            z-index: 2
                         a, address
                             @include small
                             flex: 1
-                            text-align: right
+                            @include media-breakpoint-down(md)
+                                text-align: right
                         &.address
                             margin-top: $spacing-3
+                        @include in-page-with-sidebar
+                            span
+                                width: columns(2)
+                    + ul
+                        margin-top: $spacing-3
                     @include in-page-without-sidebar
                         @include body-text
                         @include grid(2, md)
                         @include media-breakpoint-up(md)
                             grid-row-gap: $spacing-3
-                        li,
-                        li + li
-                            margin-top: 0
-                        + ul
-                            margin-top: $spacing-3
+                        li
+                            flex-direction: column
+                            a, address
+                                text-align: left
+                            &,
+                            li + li
+                                margin-top: 0
+            .more
+                position: relative
+                margin-top: space(8)
+                @include icon(arrow-right-line, after, true)
+                    margin-left: space()
+                    transition: 0.55s $arrow-ease-transition
+                @include media-breakpoint-down(md)
+                    text-align: center
+            &:hover
+                .more::after
+                    margin-left: space(2)
             @include in-page-with-sidebar
                 .avatar
                     width: columns(3)
             @include in-page-without-sidebar
+                align-items: center
                 .avatar
                     width: columns(4)
             @include in-page-with-or-without-sidebar
+                flex-direction: row
+                gap: var(--grid-gutter)
                 text-align: left
             @include media-breakpoint-down(md)
                 .description
@@ -94,7 +118,3 @@
                 .avatar
                     width: 100%
                     order: -1
-            @include media-breakpoint-up(md)
-                align-items: center
-                flex-direction: row
-                gap: var(--grid-gutter)
