@@ -15,10 +15,6 @@ window.osuny.VideoPlayer = function (element) {
     this.iframe = this.element.querySelector('.video-container iframe');
     this.src = this.iframe.getAttribute('data-unloaded-src');
 
-    this.listen();
-};
-
-window.osuny.VideoPlayer.prototype.listen = function () {
     this.button.addEventListener('click', this.play.bind(this));
 };
 
