@@ -13,15 +13,11 @@
       <div class="block-content">
         <div class="chapter">
           <div class="text">
-            {{ partial "blocks/top.html" (dict
-              "title" $block.title
-              "heading_level" $block.ranks.base
-            )}}
-
+            {{ partial "blocks/top.html" $block.top }}
             {{ if (partial "GetTextFromHTML" .text) -}}
-            <div class="rich-text">
-              {{ partial "PrepareHTML" .text }}
-            </div>
+              <div class="rich-text">
+                {{ partial "PrepareHTML" .text }}
+              </div>
             {{ end -}}
             {{ if (partial "GetTextFromHTML" .notes) }}
               <div class="notes">
