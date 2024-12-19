@@ -27,6 +27,9 @@
         {{ end }}
       </div>
     {{ end }}
+    {{ if $person.Params.contact_details}}
+      {{ partial "commons/contact-details.html" $person }}
+    {{ end }}
   </div>
   {{ if $options.image }}
     <div class="avatar" itemprop="image">
