@@ -6,6 +6,7 @@
 {{- $isLarge := false -}}
 
 {{- with .block.data -}}
+  {{ $layout := .layout | default "grid" }}
   {{ $options := .options }}
   {{ range .persons }}
     {{- $person := site.GetPage (printf "/persons/%s" .slug) -}}
@@ -20,7 +21,7 @@
     {{ end }}
   {{ end }}
 
-  <div class="block block-persons{{ if $title }} block-with-title{{ end }}{{ if $isLarge }} block-with-long-text{{ end }} {{- if not $options.image }} without-photo {{- end }}">
+  <div class="block block-persons{{ if $title }} block-with-title{{ end }}{{ if $isLarge }} block-with-long-text{{ end }} {{- if not $options.image }} without-photo {{- end }} block-persons--{{- $layout -}}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict

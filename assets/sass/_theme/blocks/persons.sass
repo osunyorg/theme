@@ -38,3 +38,59 @@
                 @include grid(2)
                 article
                     @include person-avatar-end
+    &--large
+        .person
+            display: flex
+            flex-direction: column
+            row-gap: 0
+            + .person
+                margin-top: $spacing-4
+                @include media-breakpoint-up(md)
+                    margin-top: $spacing-6
+            .description
+                flex: 1
+            .person-name
+                @include lead
+                + div
+                    margin-top: $spacing-2
+            .contacts-details
+                margin-top: $spacing-3
+                ul
+                    > li
+                        display: flex
+                        gap: var(--grid-gutter)
+                        justify-content: space-between
+                        width: 100%
+                        a, address
+                            @include small
+                            flex: 1
+                            text-align: right
+                        &.address
+                            margin-top: $spacing-3
+                    @include in-page-without-sidebar
+                        @include body-text
+                        @include grid(2, md)
+                        @include media-breakpoint-up(md)
+                            grid-row-gap: 0
+                        + ul
+                            margin-top: $spacing-3
+            @include in-page-with-sidebar
+                .avatar
+                    width: columns(3)
+            @include in-page-without-sidebar
+                .avatar
+                    width: columns(4)
+            @include in-page-with-or-without-sidebar
+                text-align: left
+            @include media-breakpoint-down(md)
+                .description
+                    .person-name,
+                    [itemprop="jobTitle"]
+                        text-align: center
+                .avatar
+                    width: 100%
+                    order: -1
+            @include media-breakpoint-up(md)
+                align-items: center
+                flex-direction: row
+                gap: var(--grid-gutter)
