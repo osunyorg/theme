@@ -10,6 +10,9 @@
 
 {{ $prerequisites := partial "GetTextFromHTML" .context.Params.prerequisites }}
 {{ $pricing := partial "GetTextFromHTML" .context.Params.pricing }}
+{{ $pricing_initial := partial "GetTextFromHTML" .context.Params.pricing_initial }}
+{{ $pricing_continuing := partial "GetTextFromHTML" .context.Params.pricing_continuing }}
+{{ $pricing_apprenticeship := partial "GetTextFromHTML" .context.Params.pricing_apprenticeship }}
 {{ $registration := partial "GetTextFromHTML" .context.Params.registration }}
 {{ $accessibility := partial "GetTextFromHTML" .context.Params.accessibility }}
 {{ $other := partial "GetTextFromHTML" .context.Params.other }}
@@ -30,7 +33,7 @@
     </li>
     <li>
       <a href="#{{ urlize (i18n "programs.toc.presentation") }}">{{ i18n "programs.toc.presentation" }}</a>
-       <ol>
+        <ol>
           {{- if $presentation -}}
             <li><a href="#{{ urlize (i18n "programs.presentation") }}">{{ i18n "programs.presentation" }}</a></li>
           {{- end -}}
@@ -84,6 +87,15 @@
         {{- end -}}
         {{- if $pricing -}}
           <li><a href="#{{ urlize (i18n "programs.pricing") }}">{{ i18n "programs.pricing" }}</a></li>
+        {{- end -}}
+        {{- if $pricing_initial -}}
+          <li><a href="#{{ urlize (i18n "programs.pricing_initial") }}">{{ i18n "programs.pricing_initial" }}</a></li>
+        {{- end -}}
+        {{- if $pricing_continuing -}}
+          <li><a href="#{{ urlize (i18n "programs.pricing_continuing") }}">{{ i18n "programs.pricing_continuing" }}</a></li>
+        {{- end -}}
+        {{- if $pricing_apprenticeship -}}
+          <li><a href="#{{ urlize (i18n "programs.pricing_apprenticeship") }}">{{ i18n "programs.pricing_apprenticeship" }}</a></li>
         {{- end -}}
         {{- if $registration -}}
           <li><a href="#{{ urlize (i18n "programs.registration") }}">{{ i18n "programs.registration" }}</a></li>

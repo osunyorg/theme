@@ -60,7 +60,7 @@
             .post
                 + .post
                     margin-top: $spacing-4
-                p[itemprop="articleBody"]
+                [itemprop="abstract"]
                     margin-top: 0
                 .post-author 
                     margin-right: 0
@@ -78,7 +78,7 @@
                     .post-title,
                     .post-subtitle
                         @include h2
-                    p[itemprop="articleBody"]
+                    [itemprop="abstract"]
                         margin-top: $spacing-3
                     &-categories
                         display: inline
@@ -95,7 +95,7 @@
                     @include media-breakpoint-down(xl)
                         flex-direction: column
                         gap: unset
-                        p[itemprop="articleBody"]
+                        [itemprop="abstract"]
                             margin-top: $spacing-2
                     @include media-breakpoint-up(xl)
                         .media,
@@ -149,7 +149,7 @@
                         margin-bottom: 0
                     .post-categories
                         margin-bottom: 0
-                    p[itemprop="articleBody"]
+                    [itemprop="abstract"]
                         margin-top: $spacing-1
                 .media
                     order: -1
@@ -212,7 +212,7 @@
         @include media-breakpoint-down(desktop)
             .list
                 border-top: 1px solid var(--color-border)
-                p[itemprop="articleBody"]
+                [itemprop="abstract"]
                     margin-top: 0
         @include media-breakpoint-up(desktop)
             .highlight
@@ -249,7 +249,7 @@
                             display: block
                         .post-author p::before
                             content: none
-                    p[itemprop="articleBody"]
+                    [itemprop="abstract"]
                         grid-column: 1 / 7
                         order: 3
 
@@ -269,7 +269,7 @@
                 .post
                     margin-top: 0 !important
         @include media-breakpoint-down(desktop)
-            .post 
+            .post
                 .post-meta
                     margin-top: $spacing-1
                 .media
@@ -280,50 +280,43 @@
     &--carousel
         overflow: hidden
         z-index: 0
-        .container
-            overflow: visible
+        .post
+            word-break: break-word
+            margin-right: calc(var(--grid-gutter))
+            .media
+                img
+                    aspect-ratio: 1.55
+        @include media-breakpoint-down(desktop)
+            .slider-arrows
+                width: columns(12)
+            .post
+                width: columns(10)
+        @include in-page-with-sidebar
+            .post
+                width: columns(3)
+                .post-title,
+                .post-subtitle
+                    @include h4
+            .slider-arrows
+                justify-content: space-between
+                width: columns(7)
+            @include media-breakpoint-down(xl)
+                .post
+                    width: columns(4)
+                .slider-arrows
+                    width: columns(8)
+        @include in-page-without-sidebar
             .block-content
-                .carousel
-                    padding-bottom: $spacing-3
-                    width: fit-content
-                    .post
-                        word-break: break-word
-                        margin-right: calc(var(--grid-gutter))
-                        .media
-                            img
-                                aspect-ratio: 1.55
-                    &__arrows
-                        justify-content: space-between
-                        .counter
-                            display: none
-                    @include media-breakpoint-down(desktop)
-                        &__arrows
-                            width: columns(12)
-                        .post
-                            width: columns(10)
-            @include in-page-with-sidebar
-                padding-left: offset(4)
-                .block-content
-                    padding-left: var(--grid-gutter) !important
-                    .carousel
-                        .post
-                            width: columns(3)
-                            .post-title,
-                            .post-subtitle
-                                @include h4
-                        &__arrows
-                            width: columns(7)
-            @include in-page-without-sidebar
-                .block-content
-                    display: flex
-                    gap: var(--grid-gutter)
-                    .top
-                        width: columns(3)
-                    .carousel
-                        .post
-                            width: columns(4)
-                        &__arrows
-                            width: columns(9)
+                display: flex
+                gap: var(--grid-gutter)
+                .top
+                    flex-shrink: 0
+                    width: columns(3)
+                .post
+                    width: columns(4)
+                .slider-arrows
+                    justify-content: space-between
+                    width: columns(9)
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts

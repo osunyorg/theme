@@ -14,18 +14,18 @@
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
           "title" $block.title
-          "heading_level" $block.ranks.self
+          "heading_level" $block.ranks.base
         )}}
 
         {{ if eq $block.data.layout "grid" }}
           <div class="programs-grid">
             {{ range .programs }}
-              {{ $program := site.GetPage (printf "/programs%s" .path) }}
+              {{ $program := site.GetPage .path }}
               {{ $title := $program.Title | safeHTML }}
               <article class="program" itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
                 <div class="program-content">
                   {{ $heading_tag.open }}
-                    <a class="title" href="{{ $program.Permalink }}" itemtype="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+                    <a class="title" href="{{ $program.Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
                       {{ $title }}
                     </a>
                   {{ $heading_tag.close }}
@@ -51,11 +51,10 @@
 
                 {{ if and $program.Params.image $options.image }}
                   <div class="media">
-                    {{ partial "commons/image.html"
-                        (dict
-                          "image"    $program.Params.image
-                          "sizes"    site.Params.image_sizes.blocks.programs
-                        ) }}
+                    {{ partial "commons/image.html" (dict
+                        "image"    $program.Params.image
+                        "sizes"    site.Params.image_sizes.blocks.programs
+                      )}}
                   </div>
                 {{ end }}
               </article>
@@ -65,7 +64,7 @@
         {{ else }}
           <ol class="programs">
             {{ range .programs }}
-            {{ $program := site.GetPage (printf "/programs%s" .path) }}
+            {{ $program := site.GetPage .path }}
               {{ partial "programs/program.html" (dict 
                   "program" $program
                   "heading" $heading

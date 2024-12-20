@@ -27,8 +27,8 @@
           <dt>{{ i18n "programs.location" ( len . ) }}</dt>
           <dd>
             {{- range . -}}
-              {{- $locationpage := site.GetPage ( printf "/locations/%s" .slug ) -}}
-              <a href="{{ .path }}">{{ $locationpage.Params.title }}</a>
+              {{- $location := site.GetPage .path -}}
+              <a href="{{ .permalink }}">{{ $location.Title }}</a>
             {{- end -}}
           </dd>
         {{- end -}}

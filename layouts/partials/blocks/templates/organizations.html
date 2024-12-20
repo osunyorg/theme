@@ -16,17 +16,18 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "description" .description
-        )}}
+            "title" $block.title
+            "heading_level" $block.ranks.base
+            "description" .description
+          )}}
 
         {{ partial (printf "blocks/templates/organizations/%s.html" $layout) (dict
             "block_index" $block_index
+            "title" $block.title
             "logo_index" $logo_index
             "organizations" .organizations
             "options" $options
-        )}}
+          )}}
       </div>
     </div>
   </div>
@@ -34,7 +35,7 @@
 
 {{- define "organization" -}}
   {{ $options := .options }}
-  <article class="organization" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
+  <article class="organization" data-title="{{ .title }}" {{ if .longitude }}data-longitude="{{ .longitude }}"{{ end }} {{ if .latitude }}data-latitude="{{ .latitude }}"{{ end }}>
     {{ $title := "" }}
     <div class="organization-content">
       {{ if .title }}
@@ -55,18 +56,21 @@
       {{ if and $options.summary .summary }}
         <div class="organization-summary">
           {{ safeHTML .summary }}
-        </div >
+        </div>
+      {{ end }}
+
+      {{ with .contact_details }}
+        {{ partial "commons/address.html" .postal_address }}
       {{ end }}
     </div>
     {{ if $options.logo }}
       <div class="media">
         {{- if .logo -}}
-          {{- partial "commons/image.html"
-            (dict
-              "image"    .logo
-              "alt"      $title
-              "sizes"    site.Params.image_sizes.blocks.organizations
-            ) -}}
+          {{- partial "commons/image.html" (dict
+                "image"    .logo
+                "alt"      $title
+                "sizes"    site.Params.image_sizes.blocks.organizations
+              ) -}}
         {{- end -}}
       </div>
     {{- end -}}

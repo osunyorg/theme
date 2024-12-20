@@ -15,8 +15,8 @@
     {{- partial "header/accessibility.html" -}}
     {{- partial "hooks/before-header" . -}}
     {{- partial "header/header.html" . -}}
-    <main{{ if .Params.contents }} class="page-with-blocks"{{ end }} id="main" tabindex="-1">
-      {{ if and (site.Params.search.active) (in site.Params.search.positions "fixed")}}
+    <main{{ if .Params.contents }} class="page-with-blocks"{{ end }} id="main">
+      {{ if and (site.Params.search.active) (eq site.Params.search.position "fixed")}}
         {{ partial "header/search.html"
           (dict
               "position" "fixed"

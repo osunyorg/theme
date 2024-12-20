@@ -21,13 +21,14 @@
             </section>
           {{- end -}}
           
-          {{ if .Pages }}
+          {{ with .Params.children }}
             <section id="programs">
               <h3>{{ i18n "programs.children" }}</h3>
               <ol class="programs programs--light">
-                {{- range .Pages -}}
+                {{- range . -}}
+                  {{ $child := site.GetPage .path }}
                   {{ partial "programs/program.html" (dict 
-                      "program" .
+                      "program" $child
                       "heading" "h4"
                       "options" site.Params.programs.single.children.options
                     )}}

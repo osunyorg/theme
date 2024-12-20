@@ -6,7 +6,7 @@
 )}}
 <div class="cards">
   {{ range .pages }}
-    {{ $page := site.GetPage .file }}
+    {{ $page := site.GetPage .path }}
     {{ with $page }}
       <article class="card">
         {{ $heading_tag.open }}

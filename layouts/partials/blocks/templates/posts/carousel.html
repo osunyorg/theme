@@ -1,16 +1,16 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading := printf "h%d" $heading_level }}
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-  "level" .block.ranks.children
-  "attributes" "class='title'"
-)}}
 {{ $options := .options }}
 {{ $template := printf "posts/post.html" }}
 
-{{ partial "blocks/templates/carousel.html" (dict 
-    "content" .posts
-    "options" site.Params.blocks.posts.carousel
-    "partial" $template
-    "heading_tag" $heading_tag
-    "block_options" $options
-)}}
+<div data-slider="{{ site.Params.blocks.posts.slider | encoding.Jsonify }}">
+  {{ range $post := .posts -}}
+    {{ with site.GetPage .path }}
+      {{ partial "posts/post.html" (dict 
+          "post" .
+          "heading" $heading
+          "options" $options
+        )}}
+    {{ end }}
+  {{ end }}
+</div>

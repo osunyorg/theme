@@ -49,12 +49,31 @@
             position: absolute
             max-height: calc(100vh - var(--header-height))
             overflow: auto
+        &-title
+            @include h2
+            + .dropdown-menu-summary
+                margin-top: $spacing-1
+        &-summary
+            font-family: $header-dropdown-title-summary-font-family
+            font-size: $header-dropdown-title-summary-font-size
+            line-height: $header-dropdown-title-summary-line-height
+            @include media-breakpoint-up(desktop)
+                font-size: $header-dropdown-title-summary-font-size-desktop
+                line-height: $header-dropdown-title-summary-line-height-desktop
+        &-heading
+            @include media-breakpoint-down(desktop)
+                + .nav-level-2
+                    margin-top: $spacing-3
+        &.is-titled
+            .nav-level-2 
+                > li + li
+                    margin-top: $spacing-1
+                    @include media-breakpoint-up(desktop)
+                        margin-top: $spacing-2
         a,
         a:focus,
         a:active
             @include link($header-dropdown-color, false)
-        .dropdown-menu-title
-            @include h2
 
     .nav-level-1
         display: flex
@@ -79,6 +98,23 @@
             > a,
             > span
                 @include signature
+            &.with-summary
+                position: relative
+                > a
+                    @include stretched-link(before)
+                    + p
+                        display: block
+                        @include media-breakpoint-up(desktop)
+                            @include small
+                            margin-top: $spacing-2
+                .nav-level-3
+                    padding-top: 0
+                    a
+                        position: relative
+                        z-index: 2
+                @include media-breakpoint-down(desktop)
+                    + li
+                        margin-top: $spacing-2
 
     .nav-level-3
         display: block
@@ -86,6 +122,8 @@
         a,
         span
             @include meta
+        p
+            @include small
 
     .header-i18n
         position: relative
@@ -122,12 +160,10 @@
                             align-items: baseline
                             display: flex
                             gap: var(--grid-gutter)
-                        .dropdown-menu-title
+                        .dropdown-menu-heading
                             width: columns(5)
                         .nav-level-2
                             width: columns(7)
-                            li
-                                margin-bottom: $spacing-2
             @else
                 position: relative
                 .dropdown-menu
@@ -197,6 +233,7 @@
             .container
                 padding-left: 0
                 padding-right: 0
+
         .nav-level-2
             > .has-children + li
                 margin-top: $spacing-3
@@ -220,9 +257,9 @@
         display: none
         vertical-align: middle
 
-[aria-expanded="false"] + .dropdown-menu
+[aria-expanded="false"] ~ .dropdown-menu
     display: none
-[aria-expanded="true"] + .dropdown-menu
+[aria-expanded="true"] ~ .dropdown-menu
     display: block
     animation-duration: 0.3s
     animation-fill-mode: both

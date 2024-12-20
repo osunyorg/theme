@@ -13,10 +13,9 @@
   </div>
   <div class="media">
     {{- if $program.Params.image -}}
-      {{- partial "commons/image.html"
-        (dict
-            "image"    $program.Params.image
-            "sizes"    site.Params.image_sizes.sections.programs.item
+      {{- partial "commons/image.html" (dict
+          "image" $program.Params.image
+          "sizes" site.Params.image_sizes.sections.programs.item
         ) -}}
     {{- end -}}
   </div>

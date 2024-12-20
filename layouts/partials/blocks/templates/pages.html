@@ -11,7 +11,7 @@
   {{- $page_class := "" -}}
   {{ $page := "" }}
   {{ with .page }}
-    {{ $page = site.GetPage .file }}
+    {{ $page = site.GetPage .path }}
   {{ end }}
 
   {{- with $page }}
@@ -31,8 +31,6 @@
   {{ end -}}
 
   {{ if $main_summary }}
-    {{/*  SHOULD BE FIXED WITH ORTHOTYPO  */}}
-    {{ $main_summary = printf "<p>%s</p>" $main_summary }}
     {{ $block_class = printf "%s %s" $block_class "with-description" }}
   {{ end }}
   {{ if $options.image }}
@@ -45,14 +43,14 @@
         {{ partial "blocks/top.html" (dict
           "title" $title
           "link" $page_link
-          "heading_level" $block.ranks.self
+          "heading_level" $block.ranks.base
           "description" $main_summary
         ) }}
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
-          "pages" .pages
-          "heading_level" $block.ranks.children
-          "options" $options
+            "pages" .pages
+            "heading_level" $block.ranks.children
+            "options" $options
           ) }}
       </div>
     </div>

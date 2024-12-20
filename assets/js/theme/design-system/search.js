@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import { ariaHideBodyChildren } from '../utils/a11y';
 import { focusTrap } from '../utils/focus-trap';
 
 const CLASSES = {
@@ -14,6 +15,8 @@ class Search {
         this.toggleButton;
         this.element = document.querySelector('.search__modal');
         this.closeButton = this.element.querySelector('.search__close');
+        // this.a11yButton = document.querySelector('[href="#search-button"]');
+
         this.searchInstance = new PagefindUI({
             element: container,
             showSubResults: true
@@ -46,8 +49,33 @@ class Search {
                 this.accessibleMessage = document.createElement('p');
                 this.accessibleMessageContainer.appendChild(this.accessibleMessage);
             }
-            setTimeout(this.updateAccessibilityMessageRole.bind(this), speakDelay);
+            clearTimeout(this.a11yTimeout);
+            this.a11yTimeout = setTimeout(this.updateAccessibility.bind(this), speakDelay);
         });
+    }
+
+    updateAccessibility () {
+        this.updateAccessibilityMessageRole();
+        this.updateAccessibilityTags();
+    }
+
+    updateAccessibilityTags () {
+        const results = this.element.querySelectorAll('.pagefind-ui__result');
+
+        results.forEach(this.updateAccessibilityResult);
+    }
+
+    updateAccessibilityResult (result) {
+        let image = result.querySelector('img'),
+            title = result.querySelector('.pagefind-ui__result-title');
+
+        if (image) {
+            image.setAttribute('alt', '');
+        }
+        if (title) {
+            title.setAttribute('role', 'heading');
+            title.setAttribute('aria-level', '2');
+        }
     }
 
     updateAccessibilityMessageRole () {
@@ -96,6 +124,15 @@ class Search {
                 });
             }
         });
+
+        // if (this.a11yButton) {
+        //     a11yClick(this.a11yButton, (event) => {
+        //         if (isMobile()) {
+        //             event.preventDefault();
+        //             this.toggle(true);
+        //         }
+        //     });
+        // }
     }
 
     clearSearch () {
@@ -144,28 +181,12 @@ class Search {
         if (open) {
             this.input = this.element.querySelector('input');
             this.input.focus();
-
-            this.inertElements = [];
-            const allElements = document.querySelectorAll('body *');
-
-            allElements.forEach(el => {
-                if (el === this.element || this.element.contains(el) || el.contains(this.element)) {
-                    return;
-                }
-
-                el.setAttribute('inert', '');
-                this.inertElements.push(el);
-            });
         } else {
             document.body.style.overflow = 'unset';
-
-            if (this.inertElements) {
-                this.inertElements.forEach(el => {
-                    el.removeAttribute('inert');
-                });
-                this.inertElements = null;
-            }
+            this.button.focus();
+            this.accessibleMessageContainer.innerHTML = '';
         }
+        ariaHideBodyChildren(this.element, open);
     }
 }
 
