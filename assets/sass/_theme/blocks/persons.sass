@@ -38,3 +38,69 @@
                 @include grid(2)
                 article
                     @include person-avatar-end
+    &--list
+        .persons-list
+            @include list-reset
+            > li
+                padding-bottom: $spacing-3
+                padding-top: $spacing-3
+                .person-name
+                    a
+                        @extend %underline-on-hover
+                .person-role
+                    @include small
+                    margin-top: 0
+                + li
+                    border-top: 1px solid var(--color-border)
+            .contacts-details
+                li > span
+                    padding-right: $spacing-2
+                a, address
+                    @include small
+                li
+                    align-items: baseline
+                    display: flex
+                    justify-content: space-between
+                    + li
+                        margin-top: $spacing-1
+                ul + ul
+                    margin-top: $spacing-1
+            @include media-breakpoint-down(desktop)
+                .contacts-details
+                    margin-top: $spacing-3
+                    span
+                        flex-shrink: 0
+                    a, address
+                        text-align: right
+            @include media-breakpoint-up(desktop)
+                .contacts-details
+                    margin-top: 0
+                    a, address
+                        width: columns(3)
+                    li > span
+                        width: offset(1)
+                > li
+                    align-items: baseline
+                    display: flex
+                    gap: var(--grid-gutter)
+                    > div:first-child
+                        align-items: baseline
+                        display: flex
+                        width: columns(8)
+                        gap: var(--grid-gutter)
+                        > *
+                            width: columns(4)
+            @include in-page-without-sidebar
+                .contacts-details
+                    width: columns(4)
+            @include in-page-with-sidebar
+                &.with-contacts
+                    > li
+                        > div:first-child
+                            display: block
+                            width: columns(4)
+                        .contacts-details
+                            width: columns(4)
+
+
+

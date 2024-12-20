@@ -1,0 +1,28 @@
+{{- $options := .options -}}
+
+<ul class="persons-list {{ if $options.contacts }}with-contacts{{ end }}">
+  {{- range .block.data.persons -}}
+    {{ $person := site.GetPage .path }}
+    <li itemscope itemtype="https://schema.org/Person">
+      <div>
+        <p class="person-name" itemprop="name">
+          {{ if $options.link }}
+            <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
+          {{ end }}
+            {{ partial "PrepareHTML" $person.Title }}
+          {{ if $options.link }}
+            </a>
+          {{ end }}
+        </p>
+  
+        {{ with .role }}
+          <p class="person-role">{{ partial "PrepareHTML" . }}</p>
+        {{ end }}
+      </div>
+
+      {{ if and $options.contacts $person.Params.contact_details }}
+        {{ partial "commons/contact-details.html" $person }}
+      {{ end }}
+    </li>
+  {{- end -}}
+</ul>
