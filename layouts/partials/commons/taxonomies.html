@@ -1,0 +1,40 @@
+{{ $kind := .kind }}
+
+{{ if or .taxonomies .free_categories }}
+  <ul class="taxonomies {{ $kind }}-taxonomies" aria-label="{{ i18n "categories.label" }}">
+    {{ range .taxonomies }}
+      {{ if .categories }}
+        <li>
+          <span class="taxonomy-title">{{ .name }}</span>
+          {{ with .categories }}
+            <ul class="taxonomy-children">
+              {{ range . }}
+                <li>
+                  <a href="{{ .permalink }}">
+                    {{ safeHTML .name }}
+                  </a>
+                </li>
+              {{ end }}
+            </ul>
+          {{ end }}
+        </li>
+      {{ end }}
+    {{ end }}
+    {{ with .free_categories }}
+      <li>
+        <span class="taxonomy-title">
+          {{ i18n "categories.label" }}
+        </span>
+        <ul>
+          {{ range . }}
+            <li>
+              <a href="{{ .permalink }}">
+                {{ safeHTML .name }}
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}

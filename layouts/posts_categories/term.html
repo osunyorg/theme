@@ -13,10 +13,14 @@
     ) }}
 
     {{ partial "contents/list.html" . }}
-
-    <div class="container">
-      {{ partial "posts/posts.html" . }}
-      {{ partial "commons/pagination.html" . }}
-    </div>
+    
+    {{ if .Params.is_taxonomy }}
+      {{ partial "pages/children.html" . }}
+    {{ else }}
+      <div class="container">
+        {{ partial "posts/posts.html" . }}
+        {{ partial "commons/pagination.html" . }}
+      </div>
+    {{ end }}
   </div>
 {{ end }}

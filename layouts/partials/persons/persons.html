@@ -1,0 +1,13 @@
+<div class="persons">
+  {{ if not .Pages }}
+    <p>{{ i18n "categories.no_post" }}</p>
+  {{ end }}
+  {{ range .Paginator.Pages }}
+  {{ $options := merge site.Params.posts.index.options (dict "link" true) }}
+    {{  partial "persons/person.html" 
+        (dict 
+          "person" .
+          "options" $options
+        )}}
+  {{ end }}
+</div>
