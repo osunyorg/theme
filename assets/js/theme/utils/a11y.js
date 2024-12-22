@@ -56,7 +56,7 @@ setDefaultAltToImages = function (elements) {
 
     elements.forEach(function (element) {
         image = element.querySelector('img');
-        if (!image.alt) {
+        if (image && !image.alt) {
             index += 1;
             image.alt = osuny.i18n.lightbox.default_alt + ' ' + index;
         }

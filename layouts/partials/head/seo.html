@@ -74,6 +74,10 @@
   {{ end }}
 {{ end }}
 
+{{ range .Params.metadata }}
+  <meta name="{{ .name }}" content="{{ .content }}">
+{{ end }}
+
 {{/*
 Limiter le tracking par le CDN
 https://framagit.org/chatons/CHATONS/-/issues/200#note_1987024
