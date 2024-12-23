@@ -8,6 +8,7 @@
 {{- with .block.data -}}
   {{ $layout := .layout | default "grid" }}
   {{ $options := .options }}
+  {{ $image_sizes := index site.Params.image_sizes.blocks.persons $layout }}
   {{ range .persons }}
     {{- $person := site.GetPage (printf "/persons/%s" .slug) -}}
     {{- $role := .role -}}
@@ -39,6 +40,7 @@
               "person" $person
               "role" .role
               "layout" $layout
+              "image_sizes" $image_sizes
             ) }}
           {{- end -}}
         </div>

@@ -7,6 +7,7 @@
 {{ $person := .person }}
 {{ $role := .role }}
 {{ $layout := .layout }}
+{{ $image_sizes := .image_sizes | default site.Params.image_sizes.sections.persons.item }}
 
 <article class="person" itemscope itemtype="https://schema.org/Person">
   <div class="description">
@@ -41,7 +42,7 @@
         {{ partial "commons/image.html"
           (dict
             "image"    $person.Params.image
-            "sizes"    site.Params.image_sizes.blocks.persons
+            "sizes"    $image_sizes
           ) }}
       {{ end }}
     </div>
