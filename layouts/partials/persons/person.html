@@ -21,7 +21,7 @@
       {{ end }}
     {{ $heading_tag.close }}
     {{ if and $options.summary (or $role $person.Params.summary) }}
-      <div itemprop="jobTitle">
+      <div class="person-role" itemprop="jobTitle">
         {{ if (partial "GetTextFromHTML" $role) }}
           <p>{{ partial "PrepareHTML" $role }}</p>
         {{ else if $person.Params.summary }}
@@ -29,7 +29,7 @@
         {{ end }}
       </div>
     {{ end }}
-    {{ if $person.Params.contact_details}}
+    {{ if and $options.contact $person.Params.contact_details}}
       {{ partial "commons/contact-details.html" $person }}
     {{ end }}
     {{ if eq $layout "large" }}

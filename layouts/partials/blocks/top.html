@@ -1,31 +1,23 @@
-{{ $heading_level := .heading_level | default 2 }}
-
-{{/*  handle boolean issue  */}}
-{{ if eq $heading_level false }}
-  {{ $heading_level = 2 }}
-{{ end }}
-
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-    "level" $heading_level 
-    "attributes" "class='block-title'"
-  )}}
-
-{{ if or .title .description }}
-  <div class="top {{ if .sr_only }}sr-only{{ end }}">
-    {{ if .title }}
+{{ if .active }}
+  <div class="top{{ if .screen_reader_only }} sr-only{{ end }}">
+    {{ with .title }}
+      {{ $heading_tag := partial "GetHeadingTag" (dict 
+        "level" .heading 
+        "attributes" "class='block-title'"
+      )}}
       {{ $heading_tag.open }}
-        {{- if .link -}}
-          <a href="{{ .link }}">
+        {{- with .link -}}
+          <a href="{{ . }}">
         {{- end -}}
-        {{ partial "PrepareHTML" .title }}
-        {{- if .link -}}
+        {{ partial "PrepareHTML" .value }}
+        {{- with .link -}}
           </a>
         {{- end -}}
       {{ $heading_tag.close }}
     {{ end }}
-    {{ if .description }}
+    {{ with .description }}
       <div class="description">
-        {{- partial "PrepareHTML" .description -}}
+        {{- partial "PrepareHTML" . -}}
       </div>
     {{ end }}
   </div>

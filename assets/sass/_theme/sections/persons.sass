@@ -1,4 +1,31 @@
 .person
+    .contacts-details
+        margin-top: $spacing-2
+        li > span
+            padding-right: $spacing-2
+            flex-shrink: 0
+        a, address
+            @include small
+            position: relative
+            text-align: right
+            z-index: 2
+        li
+            align-items: baseline
+            display: flex
+            justify-content: space-between
+            + li
+                margin-top: $spacing-1
+        ul + ul
+            margin-top: $spacing-1
+    @include media-breakpoint-down(md)
+        .contacts-details
+            margin-top: $spacing-3
+            span
+                flex-shrink: 0
+            a, address
+                text-align: right
+
+article.person
     @include article
     word-break: break-word
     gap: $spacing-3
@@ -16,6 +43,7 @@
             margin-top: $spacing-1
     .description
         @include small
+        flex-grow: 1
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing-3
@@ -24,16 +52,15 @@
             flex-shrink: 0
             margin-bottom: 0
             width: 100px
-
     @include media-breakpoint-down(md)
         justify-content: space-between
+        .description
+            flex: 1
         .avatar
             order: 1
             margin-right: 0
             width: 68px
-
     @include in-page-without-sidebar
-        text-align: center
         .avatar
             width: 100%
 

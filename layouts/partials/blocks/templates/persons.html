@@ -1,49 +1,57 @@
 {{- $block := .block -}}
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
-{{- $charLimit := 80 -}}
-{{- $isLarge := false -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+{{- $char_limit := 80 -}}
+{{- $is_large := false -}}
 
 {{- with .block.data -}}
   {{ $layout := .layout | default "grid" }}
   {{ $options := .options }}
   {{ $image_sizes := index site.Params.image_sizes.blocks.persons $layout }}
   {{ range .persons }}
-    {{- $person := site.GetPage (printf "/persons/%s" .slug) -}}
+    {{- $person := site.GetPage .path -}}
     {{- $role := .role -}}
     {{- $summary := $person.Params.summary -}}
     {{- $content := $person.Content -}}
     {{ with (or $role $summary $content)}}
-      {{- $contentLength := len . -}}
-      {{ if ge $contentLength $charLimit }}
-        {{- $isLarge = true -}}
+      {{- $content_length := len . -}}
+      {{ if ge $content_length $char_limit }}
+        {{- $is_large = true -}}
       {{ end }}
     {{ end }}
   {{ end }}
 
-  <div class="block block-persons{{ if $title }} block-with-title{{ end }}{{ if $isLarge }} block-with-long-text{{ end }} {{- if not $options.image }} without-photo {{- end }} block-persons--{{- $layout -}}">
+  {{ if $is_large }}
+    {{ $block_class = printf "%s block-with-long-text" $block_class }}
+  {{ end }}
+
+  {{ if not $options.image }}
+    {{ $block_class = printf "%s without-photo" $block_class }}
+  {{ end }}
+
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.base
-          "description" .description
-        )}}
+        {{ partial "blocks/top.html" $block.top }}
 
-        <div class="persons">
-          {{- range .persons -}}
-            {{ $person := site.GetPage (printf "/persons/%s" .slug) }}
-            {{ partial "persons/person.html" (dict
-              "heading_level" $block.ranks.children
+        {{ if eq .layout "list" }}
+          {{ partial "blocks/templates/persons/list.html" (dict
               "options" $options
-              "person" $person
-              "role" .role
-              "layout" $layout
-              "image_sizes" $image_sizes
-            ) }}
-          {{- end -}}
-        </div>
+              "block" $block
+            )}}
+        {{ else }}
+          <div class="persons">
+            {{- range .persons -}}
+              {{ $person := site.GetPage .path }}
+              {{ partial "persons/person.html" (dict
+                  "options" $options
+                  "person" $person
+                  "role" .role
+                  "layout" $layout
+                  "image_sizes" $image_sizes
+                )}}
+            {{- end -}}
+          </div>
+        {{ end }}
       </div>
     </div>
   </div>

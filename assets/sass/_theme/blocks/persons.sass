@@ -9,6 +9,17 @@
         margin-top: $spacing-3
         text-align: left
 
+@mixin person-contacts-details-in-list
+    .contacts-details
+        ul + ul, li + li
+            margin-top: $spacing-2
+        li
+            display: block
+            span
+                padding-right: 0
+            a, address
+                text-align: left
+
 .block-persons
     article
         .description
@@ -22,23 +33,31 @@
                 article
                     @include person-avatar-end
     @include in-page-with-sidebar
-        &--grid
-            .persons
-                @include grid(1, desktop)
-                row-gap: $spacing-2
-                @include media-breakpoint-up(xxl)
-                    @include grid(2)
-                    article
-                        .avatar
-                            width: columns(1.5)
-                        .description
-                            margin-top: $spacing-2
         article
             flex-direction: row
             gap: $spacing-3
             @include media-breakpoint-up(md)
                 .avatar
                     width: columns(2)
+    &--grid
+        @include in-page-with-sidebar
+            .persons
+                @include grid(1, desktop)
+                row-gap: $spacing-2
+                @include media-breakpoint-up(xxl)
+                    @include grid(2)
+            .person
+                .avatar
+                    width: columns(1.5)
+                .description
+                    margin-top: $spacing-2
+            @include media-breakpoint-up(xl)
+                @include person-contacts-details-in-list
+        @include in-page-without-sidebar
+            @include person-contacts-details-in-list
+            .person
+                text-align: center
+            
     &--large
         .person
             display: flex
@@ -54,40 +73,6 @@
                 @include lead
                 + div
                     margin-top: $spacing-2
-            .contacts-details
-                margin-top: $spacing-3
-                ul
-                    > li
-                        display: flex
-                        column-gap: var(--grid-gutter)
-                        width: 100%
-                        a
-                            position: relative
-                            z-index: 2
-                        a, address
-                            @include small
-                            flex: 1
-                            @include media-breakpoint-down(md)
-                                text-align: right
-                        &.address
-                            margin-top: $spacing-3
-                        @include in-page-with-sidebar
-                            span
-                                width: columns(2)
-                    + ul
-                        margin-top: $spacing-3
-                    @include in-page-without-sidebar
-                        @include body-text
-                        @include grid(2, md)
-                        @include media-breakpoint-up(md)
-                            grid-row-gap: $spacing-3
-                        li
-                            flex-direction: column
-                            a, address
-                                text-align: left
-                            &,
-                            li + li
-                                margin-top: 0
             .more
                 position: relative
                 margin-top: space(8)
@@ -102,19 +87,76 @@
             @include in-page-with-sidebar
                 .avatar
                     width: columns(3)
+                .contacts-details
+                    a, address
+                        width: columns(3)
+                        text-align: left
+                    li > span
+                        width: offset(1)
             @include in-page-without-sidebar
+                @include person-contacts-details-in-list
                 align-items: center
                 .avatar
                     width: columns(4)
+                .contacts-details
+                    ul
+                        @include grid(2, false, $spacing-2)
+                        li + li
+                            margin-top: 0
             @include in-page-with-or-without-sidebar
                 flex-direction: row
                 gap: var(--grid-gutter)
                 text-align: left
             @include media-breakpoint-down(md)
-                .description
-                    .person-name,
-                    [itemprop="jobTitle"]
-                        text-align: center
+                &-name,
+                &-role
+                    text-align: center
                 .avatar
                     width: 100%
                     order: -1
+
+    &--list
+        .persons-list
+            @include list-reset
+            > li
+                padding-bottom: $spacing-3
+                padding-top: $spacing-3
+                .person-name
+                    a
+                        @extend %underline-on-hover
+                .person-role
+                    @include small
+                    margin-top: 0
+                + li
+                    border-top: 1px solid var(--color-border)
+            @include media-breakpoint-up(desktop)
+                .contacts-details
+                    margin-top: 0
+                    a, address
+                        width: columns(3)
+                        text-align: left
+                    li > span
+                        width: offset(1)
+                > li
+                    align-items: baseline
+                    display: flex
+                    gap: var(--grid-gutter)
+                    > div:first-child
+                        align-items: baseline
+                        display: flex
+                        width: columns(8)
+                        gap: var(--grid-gutter)
+                        > *
+                            width: columns(4)
+            @include in-page-without-sidebar
+                .contacts-details
+                    width: columns(4)
+            @include in-page-with-sidebar
+                &.with-contacts
+                    > li
+                        > div:first-child
+                            display: block
+                            width: columns(4)
+                        .contacts-details
+                            width: columns(4)
+
