@@ -18,22 +18,7 @@
   <div itemscope itemtype="http://schema.org/Blog" class="{{ $block_class }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}">
     <div class="container">
       <div class="block-content">
-        {{ if $block.title -}}
-          {{ $link := false }}
-          {{- if $term }}
-            {{ $link = $term.Permalink }}
-          {{- else if .all -}}
-            {{ $posts_page := site.GetPage "/posts" }}
-            {{ $link = $posts_page.Permalink }}
-          {{- end -}}
-
-          {{ partial "blocks/top.html" (dict
-            "title" $block.title
-            "heading_level" $block.ranks.base
-            "link" $link
-          )}}
-        {{- end }}
-
+        {{ partial "blocks/top.html" $block.top }}
         {{ if eq .mode "categories" }}
           <ul class="categories categories--grid">
             {{ range site.Taxonomies.posts_categories }}
