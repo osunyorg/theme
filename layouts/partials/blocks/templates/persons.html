@@ -4,7 +4,9 @@
 {{- $is_large := false -}}
 
 {{- with .block.data -}}
+  {{ $layout := .layout | default "grid" }}
   {{ $options := .options }}
+  {{ $image_sizes := index site.Params.image_sizes.blocks.persons $layout }}
   {{ range .persons }}
     {{- $person := site.GetPage .path -}}
     {{- $role := .role -}}
@@ -41,10 +43,11 @@
             {{- range .persons -}}
               {{ $person := site.GetPage .path }}
               {{ partial "persons/person.html" (dict
-                  "heading_level" $block.ranks.children
                   "options" $options
                   "person" $person
                   "role" .role
+                  "layout" $layout
+                  "image_sizes" $image_sizes
                 )}}
             {{- end -}}
           </div>
