@@ -141,21 +141,7 @@ ol.persons--list
 
 /* TODO revoir ce nom */
 .taxonomies-persons
-    @include list-reset
-    li
-        @include media-breakpoint-down(desktop)
-            margin-bottom: $spacing-3
-            a
-                display: block
-        @include media-breakpoint-up(desktop)
-            display: inline-block
-            margin-right: $spacing-4
-    a
-        @extend %underline-on-hover
-        @include meta
-        @include icon(arrow-right-line, after)
-            display: inline-block
-            margin-left: $spacing-3
+    @extend .taxonomies
     
 .persons__section
     * + .persons
