@@ -64,7 +64,8 @@ article.person
         .avatar
             width: 100%
 
-section.persons,
+.persons__section .persons,
+.persons--grid,
 .block-persons--grid .persons
     @include grid(1)
     @include grid(2, md)
@@ -125,6 +126,17 @@ ol.persons--list
     img
         object-fit: cover
 
+.persons__section,
+.administrators__taxonomy,
+.authors__taxonomy,
+.researchers__taxonomy,
+.teachers__taxonomy,
+    .persons--grid
+        margin-bottom: $spacing-5
+        @include media-breakpoint-up(md)
+            .person-name,
+            .person-role
+                text-align: center
 /* TODO revoir ce nom */
 .taxonomies-persons
     @include list-reset
