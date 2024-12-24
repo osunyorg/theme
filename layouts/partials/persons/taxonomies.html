@@ -1,15 +1,27 @@
 {{ $taxonomies := slice "administrators" "authors" "researchers" "teachers" }}
 {{ $has := .Params.has }}
-<ul class="taxonomies taxonomies-persons">
-  {{- range $taxonomies -}}
-    {{- if index $has ( printf "%s" . ) -}}
-      {{- with $.Site.GetPage "taxonomyTerm" . }}
-        {{- if .Pages }}
-          <li>
-            <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
-          </li>
+{{ $is_taxonomy_present := false }}
+
+{{- range $taxonomies -}}
+  {{- if index $has . -}}
+    {{ $is_taxonomy_present = true }}
+  {{ end }}
+{{ end }}
+
+{{  if $is_taxonomy_present }}
+  <ul class="taxonomies taxonomies-persons">
+    {{- range $taxonomies -}}
+      {{- if index $has . -}}
+        {{- with $.Site.GetPage "taxonomyTerm" . }}
+          {{- if .Pages }}
+            <li>
+              <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
+            </li>
+          {{ end -}}
         {{ end -}}
       {{ end -}}
     {{ end -}}
-  {{ end -}}
-</ul>
+  </ul>
+{{ end -}}
+
+{{ partial "commons/taxonomies.html" . }}

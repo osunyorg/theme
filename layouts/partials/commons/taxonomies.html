@@ -1,0 +1,17 @@
+{{ $kind := .Type }}
+{{ $categories_kind := printf "%s_categories" $kind }}
+{{ $categories := index site.Taxonomies $categories_kind  }}
+
+{{- if $categories -}}
+  <ul class="{{ $kind }}-categories" aria-label="{{ i18n "categories.label" }}">
+    {{- range $categories -}}
+      {{ with .Page }}
+        <li>
+          <a href="{{ .Permalink }}">
+            {{- safeHTML .Title -}}
+          </a>
+        </li>
+      {{- end }}
+    {{- end }}
+  </ul>
+{{- end -}}
