@@ -1,0 +1,18 @@
+{{ define "main" }}
+
+  {{ partial "persons/hero.html" . }}
+
+  <div class="document-content">
+
+    {{ partial "persons/summary.html" (dict
+        "with_container" true
+        "context" .
+      ) }}
+  
+    {{ partial "contents/list.html" . }}
+  
+    <div class="container">
+      {{ partial "persons/list-specific.html" . }}
+    </div>
+  </div>
+{{ end }}
