@@ -163,18 +163,6 @@
             &__results-area
                 padding-top: space(17)
 
-footer#document-footer .footer-search
-    .pagefind-footer
-        color: $footer-color
-        padding: 0
-    #search
-        margin-top: 0
-        a
-            color: var(--color-text)
-
-.menu .nav-level-1 > li .search-button span
-    display: inline
-
 // Toggle button appareance
 // Can be with icon only, text only, or both
 .search-button
@@ -186,6 +174,8 @@ footer#document-footer .footer-search
             @include icon(search-line, after)
 
     &--footer
+        color: $footer-color
+        padding: 0
         @if not $search-button-footer-text
             span
                 @extend .sr-only
