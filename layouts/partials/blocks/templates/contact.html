@@ -5,23 +5,14 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "description" .description
-        )}}
+        {{ partial "blocks/top.html" $block.top }}
 
-        {{ $heading_rank := $block.ranks.self }}
-        {{ if $block.title }}
-          {{ $heading_rank = $block.ranks.self | add 1 }}
-        {{ end }}
-
+        {{ $heading_rank := $block.ranks.children | default 2 }}
         {{ $heading_name := partial "GetHeadingTag" ( dict 
             "level" $heading_rank
             "attributes" "itemprop='name'"
           ) }}
         {{ $a11y_name := .name | default (i18n "commons.contact.empty_name") }}
-        
         {{ if .name }}
           {{ $heading_rank = $heading_rank | add 1 }}
         {{ end }}

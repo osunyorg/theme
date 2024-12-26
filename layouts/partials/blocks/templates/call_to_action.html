@@ -8,12 +8,7 @@
       <div class="block-content">
         <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image {{ if $block.title }}call_to_action--with-title{{ end }}">
           <div>
-            {{ partial "blocks/top.html" (dict
-              "title" $block.title
-              "heading_level" $block.ranks.self
-              "description" .text
-            )}}
-
+            {{ partial "blocks/top.html" $block.top }}
             {{- if .buttons }}
               <div class="actions" {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
                 {{- range .buttons -}}

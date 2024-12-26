@@ -6,6 +6,8 @@
 ) }}
 {{ $person := .person }}
 {{ $role := .role }}
+{{ $layout := .layout }}
+{{ $image_sizes := .image_sizes | default site.Params.image_sizes.sections.persons.item }}
 
 <article class="person" itemscope itemtype="https://schema.org/Person">
   <div class="description">
@@ -19,13 +21,19 @@
       {{ end }}
     {{ $heading_tag.close }}
     {{ if and $options.summary (or $role $person.Params.summary) }}
-      <div itemprop="jobTitle">
+      <div class="person-role" itemprop="jobTitle">
         {{ if (partial "GetTextFromHTML" $role) }}
           <p>{{ partial "PrepareHTML" $role }}</p>
         {{ else if $person.Params.summary }}
           {{ partial "PrepareHTML" $person.Params.summary }}
         {{ end }}
       </div>
+    {{ end }}
+    {{ if and $options.contact $person.Params.contact_details}}
+      {{ partial "commons/contact-details.html" $person }}
+    {{ end }}
+    {{ if eq $layout "large" }}
+      <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
     {{ end }}
   </div>
   {{ if $options.image }}
@@ -34,7 +42,7 @@
         {{ partial "commons/image.html"
           (dict
             "image"    $person.Params.image
-            "sizes"    site.Params.image_sizes.blocks.persons
+            "sizes"    $image_sizes
           ) }}
       {{ end }}
     </div>

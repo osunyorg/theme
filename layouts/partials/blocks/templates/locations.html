@@ -8,11 +8,7 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "description" .description
-          "heading_level" $block.ranks.self
-        )}}
+        {{ partial "blocks/top.html" $block.top }}
 
         {{ $locations := slice }}
         {{ $location := "" }}

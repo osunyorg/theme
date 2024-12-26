@@ -9,12 +9,7 @@
   <div class="block block-publications {{- if $title }} block-with-title {{- end -}}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "description" .description
-        )}}
-
+        {{ partial "blocks/top.html" $block.top }}
         <div class="publications">
           {{ range $publication := .publications -}}
             {{ with site.GetPage (printf "/publications/%s" $publication) }}

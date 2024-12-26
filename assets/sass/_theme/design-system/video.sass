@@ -1,0 +1,11 @@
+.video
+    @include aspect-ratio(16/9, 'iframe')
+    @supports not (aspect-ratio: 1)
+        iframe,
+        img
+            min-height: 400px
+    position: relative
+    iframe
+        background: black
+    + p
+        margin-top: $spacing-2

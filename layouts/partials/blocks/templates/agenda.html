@@ -7,21 +7,7 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ $events_page := site.GetPage "/events" }}
-        {{ $link := .title_link }}
-
-        {{ if and .category $options.categories }}
-          {{ $term := site.GetPage (printf "/events_categories%s" .category) }}
-          {{ $link = $term.Permalink }}
-        {{ end }}
-        
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "description" .description
-          "link" $link
-        )}}
-
+        {{ partial "blocks/top.html" $block.top }}
         {{ if .events }}
           <div class="events events--{{- $layout -}}">
             {{ range .events }}

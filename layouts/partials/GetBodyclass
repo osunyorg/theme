@@ -2,7 +2,7 @@
 
 {{ $bodyclass = printf "%s__%s %s" .Type .Kind $bodyclass }}
 
-{{ if .Params.design.full_width }}
+{{ if or .Params.design.full_width site.Params.design.force_full_width }}
   {{ $bodyclass = printf "%s full-width" $bodyclass }}
 {{ end }}
 

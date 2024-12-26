@@ -7,12 +7,7 @@
   <div class="{{ $block_class }} {{- if $isAnimated }} is-animated {{ end }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "description" .description
-        )}}
-
+        {{ partial "blocks/top.html" $block.top }}
         {{ if $figures }}
           {{ $list_class := "odd-items" }}
           {{ if (modBool (len $figures) 2) }}

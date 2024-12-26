@@ -25,12 +25,34 @@ params:
     #   default: "/assets/images/logo.svg"
     #   darkmode: "/assets/images/logo-white.svg"
   menu:
-    dropdown:
-      linkToLevel1: false
+    primary:
+      level_1:
+        summary:
+          active: false
+          source: "Summary" # "Summary" | "meta_description"
+          truncate: 125
+      level_2:
+        summary:
+          active: false
+          source: "Summary" # "Summary" | "meta_description"
+          truncate: 125
+        title:
+          active: false
+          summary:
+            active: false
+            source: "Summary" # "Summary" | "meta_description"
+            truncate: 125
+      level_3:
+        summary:
+          active: false
+          source: "Summary" # "Summary" | "meta_description"
+          truncate: 125
     i18n:
       display: true
   breadcrumb:
     position: hero-start #  hero-start |  hero-end | after-hero | none
+  design:
+    force_full_width: false
   summary:
     position: hero # hero | content
   search:
@@ -100,6 +122,10 @@ params:
     index:
       truncate_description: 200 # Set to 0 to disable truncate
       layout: grid # grid | list
+      options:
+        image: true
+        main_summary: false
+        summary: true
   papers:
     default_image: false
     sidebar:
@@ -304,9 +330,18 @@ params:
         tablet:   216
         desktop:  196
       persons:
-        mobile:   80
-        tablet:   100
-        desktop:  255
+        grid:
+          mobile:   90
+          tablet:   360
+          desktop:  255
+        large:
+          mobile:   400
+          tablet:   360
+          desktop:  255
+        list:
+          mobile:   90
+          tablet:   360
+          desktop:  255
       testimonials:
         mobile:   80
         tablet:   160

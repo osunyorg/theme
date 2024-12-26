@@ -12,12 +12,7 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "description" .description
-        ) }}
-
+        {{ partial "blocks/top.html" $block.top }}
         <div class="gallery{{- if $has_text }} gallery--with-text {{ end -}}"
           {{ if eq .layout "carousel" }}
             data-slider="{{ site.Params.blocks.gallery.slider | encoding.Jsonify }}"

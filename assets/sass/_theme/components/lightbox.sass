@@ -24,7 +24,7 @@
         height: 100%
         width: 100%
         pointer-events: none
-        img
+        img, iframe
             display: block
             margin: auto
             max-height: 100%
@@ -32,6 +32,9 @@
             pointer-events: auto
             position: relative
             user-select: none
+        iframe
+            height: 100%
+            width: 90%
         &:after
             animation: lightbox-loading-animation infinite 1s
             content: "• •" / ""
@@ -66,13 +69,11 @@
             &.lightbox-button-credit
                 &::before
                     content: '©' / ''
-                &:disabled
-                    display: none
             &.lightbox-button-information
                 &::before
                     content: 'i' / ''
-                &:disabled
-                    display: none
+            &.lightbox-button-transcription
+                @include icon(text, before)
             &.lightbox-button-close
                 @include icon(close-line, before)
             &[aria-expanded='true']
@@ -80,6 +81,10 @@
                 color: $lightbox-button-background-color
             &:disabled
                 background: $lightbox-button-disabled-background
+                &.lightbox-button-transcription,
+                &.lightbox-button-information,
+                &.lightbox-button-credit
+                    display: none
                 &::before
                     color: $lightbox-button-disabled-color
     &-detail
@@ -92,6 +97,8 @@
         right: $spacing-2
         margin-left: $spacing-2
         min-width: pxToRem(220)
+        max-height: calc(95vh - #{$spacing-4})
+        overflow-y: auto
         z-index: 2
         @include media-breakpoint-up(md)
             width: columns(6)

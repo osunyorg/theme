@@ -78,9 +78,11 @@ details
         position: relative
         cursor: pointer
         @include icon(arrow-down-s-line, after)
-            margin-left: pxToRem(10)
             line-height: pxToRem(22)
             transition: transform 0.25s
+            // Add left margin if text is before arrow
+            &:not(:first-child)
+                margin-left: pxToRem(10)
         &::marker
             content: none
         &::-webkit-details-marker 
