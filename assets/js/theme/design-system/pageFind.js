@@ -41,7 +41,10 @@ window.osuny.Search.prototype.setPageFind = function () {
 
 window.osuny.Search.prototype.toggle = function (open, triggerElement) {
     window.osuny.Popup.prototype.toggle.call(this, open, triggerElement);
-    if (!this.state.opened) {
+    if (this.state.opened) {
+        this.input = this.element.querySelector('input');
+        this.input.focus();
+    } else {
         this.clear();
     }
 };
@@ -53,7 +56,6 @@ window.osuny.Search.prototype.clear = function () {
 
     if (this.input) {
         this.input.value = '';
-        this.searchInstance.triggerSearch(false);
     }
 
     if (message) {
@@ -91,6 +93,16 @@ window.osuny.Search.prototype.setAccessibility = function () {
         clearTimeout(this.a11yTimeout);
         this.a11yTimeout = setTimeout(this.updateAccessibility.bind(this), speakDelay);
     }.bind(this));
+};
+
+window.osuny.Search.prototype.onInputChange = function (input) {
+    this.accessibleMessageContainer.innerHTML = '';
+    if (input.value !== '') {
+        this.accessibleMessage = document.createElement('p');
+        this.accessibleMessageContainer.appendChild(this.accessibleMessage);
+    }
+    clearTimeout(this.a11yTimeout);
+    this.a11yTimeout = setTimeout(this.updateAccessibility.bind(this), speakDelay);
 };
 
 window.osuny.Search.prototype.updateAccessibility = function () {
