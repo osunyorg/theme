@@ -14,17 +14,7 @@
   <div class="block block-volumes {{- if $title }} block-with-title {{- end -}}">
     <div class="container">
       <div class="block-content">
-        {{ if $block.title -}}
-          {{ $volumes_page := site.GetPage "/volumes" }}
-          {{ $link := $volumes_page.Permalink }}
-
-          {{ partial "blocks/top.html" (dict
-            "title" $block.title
-            "heading_level" $block.ranks.base
-            "link" $link
-          )}}
-        {{- end }}
-
+        {{ partial "blocks/top.html" $block.top }}
         <div class="volumes">
           {{ range $volume := .volumes -}}
             {{ with site.GetPage (printf "/volumes/%s" $volume) }}

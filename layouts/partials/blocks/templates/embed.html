@@ -6,10 +6,7 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.base
-        )}}
+        {{ partial "blocks/top.html" $block.top }}
 
         {{- if .code }}
           {{ partial "PrepareHTML" .code }}

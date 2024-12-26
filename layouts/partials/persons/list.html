@@ -6,13 +6,13 @@
       <li itemscope itemtype="https://schema.org/Person">
         <p itemprop="name"><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></p>
         {{- if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
-          <p itemprop="jobTitle">{{- .Params.summary | safeHTML -}}</p>
+          <div itemprop="jobTitle">{{- .Params.summary | safeHTML -}}</div>
         {{ end -}}
       </li>
     {{ end }}
   </ol>
 {{ else if eq site.Params.persons.index.layout "grid" }}
-  <div class="persons">
+  <div class="persons persons--grid">
     {{ range .persons }}
       {{ partial "persons/person" (dict "person" .) }}
     {{ end }}

@@ -109,8 +109,12 @@ header#document-header
                 > *
                     @include media-breakpoint-up(desktop)
                         padding: $header-upper-menu-padding-y 0
-                a.active
-                    box-shadow: inset 0 -4px 0 0 var(--color-border)
+                // apply active style to active page (default) or active site
+                $upper-menu-active-selector: '.active'
+                @if $header-upper-menu-active-style-for-sites
+                    $upper-menu-active-selector: ':not([href*="https://"], [href*="http://"])'
+                a#{$upper-menu-active-selector}
+                    box-shadow: $header-upper-menu-active-box-shadow
     @include media-breakpoint-down(desktop)
         &.has-upper-menu
             .menu

@@ -1,4 +1,31 @@
 .person
+    .contacts-details
+        margin-top: $spacing-2
+        li > span
+            padding-right: $spacing-2
+            flex-shrink: 0
+        a, address
+            @include small
+            position: relative
+            text-align: right
+            z-index: 2
+        li
+            align-items: baseline
+            display: flex
+            justify-content: space-between
+            + li
+                margin-top: $spacing-1
+        ul + ul
+            margin-top: $spacing-1
+    @include media-breakpoint-down(md)
+        .contacts-details
+            margin-top: $spacing-3
+            span
+                flex-shrink: 0
+            a, address
+                text-align: right
+
+article.person
     @include article
     word-break: break-word
     gap: $spacing-3
@@ -16,6 +43,7 @@
             margin-top: $spacing-1
     .description
         @include small
+        flex-grow: 1
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing-3
@@ -24,25 +52,37 @@
             flex-shrink: 0
             margin-bottom: 0
             width: 100px
-
     @include media-breakpoint-down(md)
         justify-content: space-between
+        .description
+            flex: 1
         .avatar
             order: 1
             margin-right: 0
             width: 68px
-
     @include in-page-without-sidebar
-        text-align: center
         .avatar
             width: 100%
 
-section.persons,
-div.persons
+.persons--grid
     @include grid(1)
     @include grid(2, md)
     @include grid(4, lg)
     @include grid(6, xxl)
+
+.persons__section,
+.administrators__taxonomy,
+.authors__taxonomy,
+.researchers__taxonomy,
+.teachers__taxonomy,
+    .page-with-blocks
+        .persons
+            margin-bottom: $spacing-5
+    .persons--grid
+        @include media-breakpoint-up(md)
+            .person-name,
+            .person-role
+                text-align: center
 
 ol.persons--list
     @include list-reset
@@ -56,7 +96,6 @@ ol.persons--list
             margin-left: auto
         &:hover
             color: var(--color-accent)
-            justify-self: end
         a
             @include stretched-link
             text-decoration: none

@@ -9,27 +9,21 @@
         margin-top: $spacing-3
         text-align: left
 
+@mixin person-contacts-details-in-list
+    .contacts-details
+        ul + ul, li + li
+            margin-top: $spacing-2
+        li
+            display: block
+            span
+                padding-right: 0
+            a, address
+                text-align: left
+
 .block-persons
     article
         .description
             margin-top: $spacing-3
-    @include in-page-with-sidebar
-        .persons
-            @include grid(1, desktop)
-            row-gap: $spacing-2
-            @include media-breakpoint-up(xxl)
-                @include grid(2)
-                article
-                    .avatar
-                        width: columns(1.5)
-                    .description
-                        margin-top: $spacing-2
-        article
-            flex-direction: row
-            gap: $spacing-3
-            @include media-breakpoint-up(md)
-                .avatar
-                    width: columns(2)
     @include in-page-without-sidebar
         .top .description
             max-width: columns(8)
@@ -38,3 +32,138 @@
                 @include grid(2)
                 article
                     @include person-avatar-end
+    @include in-page-with-sidebar
+        article
+            flex-direction: row
+            gap: $spacing-3
+            @include media-breakpoint-up(md)
+                .avatar
+                    width: columns(2)
+    &--grid, &:not(.block-persons--list), &:not(.block-persons--large)
+        .persons
+            @include grid(1)
+            @include grid(2, md)
+            @include grid(4, lg)
+            @include grid(6, xxl)
+        @include in-page-with-sidebar
+            .persons
+                @include grid(1, desktop)
+                row-gap: $spacing-2
+                @include media-breakpoint-up(xxl)
+                    @include grid(2)
+            .person
+                .avatar
+                    width: columns(1.5)
+                .description
+                    margin-top: $spacing-2
+            @include media-breakpoint-up(xl)
+                @include person-contacts-details-in-list
+        @include in-page-without-sidebar
+            @include person-contacts-details-in-list
+            .person
+                text-align: center
+                .contacts-details
+                    a, address
+                        text-align: center
+    &--large
+        .person
+            display: flex
+            flex-direction: column
+            row-gap: 0
+            + .person
+                margin-top: $spacing-4
+                @include media-breakpoint-up(md)
+                    margin-top: $spacing-6
+            .description
+                flex: 1
+            .person-name
+                @include lead
+                + div
+                    margin-top: $spacing-2
+            .more
+                position: relative
+                margin-top: space(8)
+                @include icon(arrow-right-line, after, true)
+                    margin-left: space()
+                    transition: 0.55s $arrow-ease-transition
+                @include media-breakpoint-down(md)
+                    text-align: center
+            &:hover
+                .more::after
+                    margin-left: space(2)
+            @include in-page-with-sidebar
+                .avatar
+                    width: columns(3)
+                .contacts-details
+                    a, address
+                        width: columns(3)
+                        text-align: left
+                    li > span
+                        width: offset(1)
+            @include in-page-without-sidebar
+                @include person-contacts-details-in-list
+                align-items: center
+                .avatar
+                    width: columns(4)
+                .contacts-details
+                    ul
+                        @include grid(2, false, $spacing-2)
+                        li + li
+                            margin-top: 0
+            @include in-page-with-or-without-sidebar
+                flex-direction: row
+                gap: var(--grid-gutter)
+                text-align: left
+            @include media-breakpoint-down(md)
+                &-name,
+                &-role
+                    text-align: center
+                .avatar
+                    width: 100%
+                    order: -1
+
+    &--list
+        .persons-list
+            @include list-reset
+            > li
+                padding-bottom: $spacing-3
+                padding-top: $spacing-3
+                .person-name
+                    a
+                        @extend %underline-on-hover
+                .person-role
+                    @include small
+                    margin-top: 0
+                + li
+                    border-top: 1px solid var(--color-border)
+            @include media-breakpoint-up(desktop)
+                .contacts-details
+                    margin-top: 0
+                    a, address
+                        width: columns(3)
+                        text-align: left
+                    li > span
+                        width: offset(1)
+                > li
+                    align-items: baseline
+                    display: flex
+                    gap: var(--grid-gutter)
+                    > div:first-child
+                        align-items: baseline
+                        display: flex
+                        width: columns(8)
+                        gap: var(--grid-gutter)
+                        > *
+                            width: columns(4)
+            @include in-page-without-sidebar
+                .contacts-details
+                    width: columns(4)
+            @include in-page-with-sidebar
+                &.with-contacts
+                    > li
+                        > div:first-child
+                            display: block
+                            width: columns(4)
+                        .contacts-details
+                            width: columns(4)
+

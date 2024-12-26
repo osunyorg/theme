@@ -1,12 +1,10 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
-{{- $title := .block.title -}}
 {{- $layout := .block.data.layout | default "grid" -}}
 
 {{- with .block.data -}}
   {{- $options := .options -}}
   {{- $main_summary := "" -}}
-  {{- $page_link := false -}}
 
   {{- $page_class := "" -}}
   {{ $page := "" }}
@@ -15,10 +13,6 @@
   {{ end }}
 
   {{- with $page }}
-    {{- $page_link = $page.Permalink }}
-    {{ if eq $title "" }}
-      {{ $title = .Title }}
-    {{ end }}
     {{ if .Params.bodyclass }}
       {{- $page_class = printf "block-%s" .Params.bodyclass }}
     {{ end }}
@@ -40,12 +34,7 @@
   <div class="{{ $block_class }} {{ $page_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $title
-          "link" $page_link
-          "heading_level" $block.ranks.base
-          "description" $main_summary
-        ) }}
+        {{ partial "blocks/top.html" $block.top }}
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
             "pages" .pages
