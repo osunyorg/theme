@@ -1,0 +1,9 @@
+{{ $position := . }}
+{{ if in site.Params.search.positions $position}}
+  <button
+      class="search-button search-button--{{ $position }}" 
+      aria-expanded="false" 
+      aria-label='{{- i18n (printf "commons.search.title") -}}'>
+    <span>{{- i18n (printf "commons.search.title") -}}</span>
+  </button>
+{{ end }}

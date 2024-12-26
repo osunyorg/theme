@@ -18,6 +18,7 @@ import './design-system/toc';
 import './design-system/Popup';
 import './design-system/Lightbox';
 import './design-system/sliders';
+import './design-system/pageFind';
 
 import './blocks/keyFigures';
 import './blocks/timeline';

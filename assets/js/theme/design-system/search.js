@@ -61,7 +61,6 @@ class Search {
 
     updateAccessibilityTags () {
         const results = this.element.querySelectorAll('.pagefind-ui__result');
-
         results.forEach(this.updateAccessibilityResult);
     }
 
@@ -197,6 +196,6 @@ window.addEventListener('DOMContentLoaded', () => {
     if (typeof PagefindUI === 'undefined') return;
 
     if (pageFindContainer) {
-        new Search(pageFindContainer);
+        // new Search(pageFindContainer);
     }
 });

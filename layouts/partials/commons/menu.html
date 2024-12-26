@@ -100,10 +100,7 @@
   
   {{ if and site.Params.search.active (in site.Params.search.positions $kind) }}
     <li class="nav-search">
-      {{ partial "header/search.html" (dict
-          "position" $kind
-          "context" .
-      )}}
+      {{ partial "commons/search/button.html" $kind }}
     </li>
   {{ end }}
   {{ if .i18n }}

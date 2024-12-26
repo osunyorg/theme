@@ -1,16 +1,16 @@
-.pagefind-ui__toggle, 
+.search-button, 
 .pagefind-ui__button, 
 .search__close
     @include button-reset
     @include meta
     &:focus
         box-shadow: none
-.pagefind-ui__toggle:not(.pagefind-primary), 
+.search-button:not(.pagefind-primary), 
 .pagefind-ui__button, 
 .search__close
     @include meta
     color: var(--color-text)
-.pagefind-ui__toggle
+.search-button
     align-items: baseline
     box-shadow: none
     color: $header-color
@@ -193,16 +193,16 @@ footer#document-footer .footer-search
         a
             color: var(--color-text)
 
-.menu .nav-level-1 > li .pagefind-ui__toggle span
+.menu .nav-level-1 > li .search-button span
     display: inline
 @include media-breakpoint-up(desktop)
     .nav-level-1
-        > li .pagefind-ui__toggle.toggle-icon span
+        > li .search-button.toggle-icon span
             display: none
 
 // Toggle button appareance
 // Can be with icon only, text only, or both
-.pagefind-ui__toggle
+.search-button
     header#document-header &
         $has-text: false
         $has-icon: true
