@@ -110,8 +110,13 @@ header#document-header
                         padding: $header-upper-menu-padding-y 0
                     @include media-breakpoint-down(desktop)
                         line-height: $header-upper-menu-mobile-height
-                    &.active
-                        box-shadow: inset 0 -4px 0 0 var(--color-border)
+
+                    // apply active style to active page (default) or active site
+                    $upper-menu-active-selector: '.active'
+                    @if $header-upper-menu-active-style-for-sites
+                        $upper-menu-active-selector: ':not([href*="https://"], [href*="http://"])'
+                    &#{$upper-menu-active-selector}
+                        box-shadow: $header-upper-menu-active-box-shadow
     @include media-breakpoint-down(desktop)
         &.has-upper-menu
             .menu
