@@ -26,6 +26,7 @@
 #search
     background: var(--color-background)
     color: var(--color-text)
+    display: none
     height: 100vh
     left: 0
     padding-bottom: $spacing-5
@@ -39,11 +40,12 @@
     z-index: 80
     @include media-breakpoint-up(desktop)
         padding-top: $spacing-4
-    &[aria-hidden=true]
-        display: none
+    &.is-opened
+        display: block
     a
         color: var(--color-text)
     .pagefind-ui
+        // Used to hide results behind search input
         &::before
             content: ""
             background: var(--color-background)
@@ -193,7 +195,6 @@
                 @extend .sr-only
         @if $search-button-footer-icon
             @include icon(search-line, after)
-
     &--fixed
         background: var(--color-background-alt)
         bottom: 0
@@ -202,7 +203,7 @@
         min-height: $minimum-accessible-size
         padding: $spacing-1 $spacing-2
         position: fixed
-        z-index: 10
+        z-index: $zindex-search-button-fixed
         @if not $search-button-fixed-text
             span
                 @extend .sr-only

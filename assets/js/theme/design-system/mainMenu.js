@@ -76,8 +76,10 @@ class MainMenu {
     }
 
     resize () {
-        document.documentElement.style.setProperty('--header-height', this.element.offsetHeight + 'px');
-        document.documentElement.style.setProperty('--header-menu-max-height', window.innerHeight - this.element.offsetHeight + 'px');
+        if (!this.state.isOpened) {
+            document.documentElement.style.setProperty('--header-height', this.element.offsetHeight + 'px');
+            document.documentElement.style.setProperty('--header-menu-max-height', window.innerHeight - this.element.offsetHeight + 'px');
+        }
 
         // is state changed ?
         if (this.state.isMobile === isMobile()) {
