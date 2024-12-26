@@ -8,7 +8,7 @@
 </div>
 {{ partial "footer/i18n.html" . }}
 
-{{ if in site.Params.search.positions "footer" }}
+{{ if and site.Params.search.active (in site.Params.search.positions "footer") }}
   <div class="container footer-search">
     {{ partial "commons/search/button.html" "footer" }}
   </div>
