@@ -7,8 +7,6 @@ header#document-header
     top: 0
     width: 100%
     z-index: $zindex-header
-    html:not(.has-search-opened) &
-        transition: transform $header-sticky-transition, background $header-sticky-transition
     @include media-breakpoint-down(desktop)
         border-bottom: 0
         width: 100%
@@ -35,7 +33,7 @@ header#document-header
     &.is-sticky
         .search-button
             color: $header-sticky-color
-    html.is-scrolling-down:not(.has-menu-opened, .has-modal-opened, .has-search-opened) &
+    html.is-scrolling-down:not(.has-menu-opened, .has-modal-opened) &
         @include media-breakpoint-down(desktop)
             transform: translateY(-100%)
         @include media-breakpoint-up(desktop)
