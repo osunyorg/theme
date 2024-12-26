@@ -140,7 +140,7 @@
 
     @include media-breakpoint-up(desktop)
         .nav-level-1
-            align-items: center
+            align-items: baseline
         .nav-level-3
             li
                 margin-top: $spacing-2
@@ -209,18 +209,18 @@
             text-decoration: none
         .nav-level-1
             display: block
-            li 
-                a, span
+            li
+                > a, > span
                     padding: $spacing-1 0
                     display: block
             > li:not(:last-child) 
                 border-bottom: 1px solid $color-border
             > li
-                > a, > span
+                > a, > span, > button
                     padding-bottom: $spacing-3
                     padding-top: $spacing-3
             li.has-children
-                [role="button"]
+                [role="button"], button
                     align-items: center
                     display: flex
                     justify-content: space-between

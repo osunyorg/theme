@@ -16,19 +16,13 @@
     {{- partial "hooks/before-header" . -}}
     {{- partial "header/header.html" . -}}
     <main{{ if .Params.contents }} class="page-with-blocks"{{ end }} id="main">
-      {{ if and (site.Params.search.active) (eq site.Params.search.position "fixed")}}
-        {{ partial "header/search.html"
-          (dict
-              "position" "fixed"
-              "context" .
-          ) 
-        }}
-      {{ end }}
+      {{ partial "commons/search/button.html" "fixed" }}
       {{- block "main" . }}{{- end }}
       {{- partial "hooks/before-main-end" . -}}
     </main>
     {{- partial "footer/footer.html" . -}}
     {{- partial "commons/lightbox/lightbox.html" . -}}
+    {{- partial "commons/search/modal.html" . -}}
     {{- partial "footer/plausible.html" . -}}
     {{- partial "footer/js.html" . -}}
     {{- partial "footer/script.html" . -}}

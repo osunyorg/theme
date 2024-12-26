@@ -1,49 +1,13 @@
-.pagefind-ui__toggle, 
-.pagefind-ui__button, 
+.search-button,
+.pagefind-ui__button,
 .search__close
     @include button-reset
     @include meta
     &:focus
         box-shadow: none
-.pagefind-ui__toggle:not(.pagefind-primary), 
-.pagefind-ui__button, 
-.search__close
     @include meta
     color: var(--color-text)
-.pagefind-ui__toggle
-    color: $header-color
-    cursor: pointer
-    text-align: left
-    box-shadow: none
-    &:not(.toggle-text)
-        @include icon(search-line, after)
-        &::after
-            line-height: inherit
-            margin-left: $spacing-1
-    &:not(.pagefind-primary)
-        padding: $spacing-1 $spacing-2
-    &.toggle-both
-        .menu & span
-            padding-right: 0
-    span,
-    &::after
-        display: inline
-    @include media-breakpoint-down(desktop)
-        &.pagefind-primary
-            padding: $spacing-3 0
-            width: 100%
-    @include media-breakpoint-up(desktop)
-        &.toggle-icon::after
-                margin-left: 0
-    .upper-menu &
-        &.toggle-both,
-        &.toggle-text
-            white-space: nowrap
-            padding: 0
-        @include media-breakpoint-down(desktop)
-            &.toggle-both::after
-                margin-left: space()
-            
+
 .search__close
     @include icon-block(close-line, after)
     position: fixed
@@ -58,9 +22,11 @@
     @include media-breakpoint-down(desktop)
         right: $spacing-3
         top: $spacing-1
+
 #search
     background: var(--color-background)
     color: var(--color-text)
+    display: none
     height: 100vh
     left: 0
     padding-bottom: $spacing-5
@@ -74,11 +40,12 @@
     z-index: 80
     @include media-breakpoint-up(desktop)
         padding-top: $spacing-4
-    &[aria-hidden=true]
-        display: none
+    &.is-opened
+        display: block
     a
         color: var(--color-text)
     .pagefind-ui
+        // Used to hide results behind search input
         &::before
             content: ""
             background: var(--color-background)
@@ -187,66 +154,69 @@
             &__results-area
                 padding-top: space(17)
 
-.menu .nav-level-1 > li .pagefind-ui__toggle:not(.toggle-icon)::after
-    margin-left: 0
-    margin-top: pxToRem(2)
+// Toggle button appareance
 
-.pagefind-fixed
-    align-items: center
-    background: var(--color-background-alt)
-    bottom: 0
-    color: var(--color-text)
+.search-button
+    align-items: baseline
+    cursor: pointer
     display: flex
+    gap: $spacing-1
+    padding: 0
+    text-align: left
+    white-space: nowrap
+    line-height: 1
+
+// Can be with icon only, text only, or both
+.search-button
+    align-items: center
+    display: flex
+    gap: $spacing-1
     justify-content: space-between
-    left: var(--grid-gutter)
-    position: fixed
-    z-index: 10
-    @include media-breakpoint-up(desktop)
-        &:not(.toggle-icon)
-            min-width: columns(2)
-        &.toggle-icon:not(:hover)
-            padding-left: 0
-            padding-right: 0
-            justify-content: center
-        &.toggle-icon
-            min-height: pxToRem(37)
-            width: pxToRem(50)
+    text-align: left
+    white-space: nowrap
+    line-height: 1
+    &::after
+        line-height: inherit
+    &--primary, &--upper-menu
+        align-items: baseline
+        color: $header-color
+        @if not $search-button-header-text
             span
-                display: none
-            &:hover,
-            &:focus
-                min-width: columns(2)
-                span
-                    display: inline
-    @include media-breakpoint-down(desktop)
-        left: 0
-        width: 100vw
-        &.in-page-with-toc
-            background: var(--color-background)
-            border-top: 1px solid #eee
-            bottom: pxToRem(44)
-            
-footer#document-footer .footer-search
-    .pagefind-footer
+                @extend .sr-only
+        @if $search-button-header-icon
+            @include icon(search-line, after)
+    &--primary
+        width: 100%
+    &--footer
         color: $footer-color
         padding: 0
-        &.toggle-icon
-            transform: translateX(-35%)
-        &::after
-            margin-top: pxToRem(3)
-    #search
-        margin-top: 0
-        a
-            color: var(--color-text)
-
-.nav-search
-    display: flex
-    .pagefind-primary:not(.toggle-icon)::after
-        margin-top: 10px
-
-.menu .nav-level-1 > li .pagefind-ui__toggle span
-    display: inline
-@include media-breakpoint-up(desktop)
-    .nav-level-1
-        > li .pagefind-ui__toggle.toggle-icon span
-            display: none
+        @if not $search-button-footer-text
+            span
+                @extend .sr-only
+        @if $search-button-footer-icon
+            @include icon(search-line, after)
+    &--fixed
+        background: var(--color-background-alt)
+        bottom: 0
+        color: var(--color-text)
+        left: var(--grid-gutter)
+        min-height: $minimum-accessible-size
+        padding: $spacing-1 $spacing-2
+        position: fixed
+        z-index: $zindex-search-button-fixed
+        @if not $search-button-fixed-text
+            span
+                @extend .sr-only
+        @if $search-button-fixed-icon
+            @include icon(search-line, after)
+        @include media-breakpoint-down(desktop)
+            left: 0
+            width: 100vw
+            &.in-page-with-toc
+                background: var(--color-background)
+                border-top: 1px solid #eee
+                bottom: pxToRem(44)
+                padding: 0 var(--grid-gutter)
+        @include media-breakpoint-up(desktop)
+            @if $search-button-fixed-text
+                width: columns(2)

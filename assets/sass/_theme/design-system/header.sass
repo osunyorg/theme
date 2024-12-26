@@ -4,7 +4,6 @@ header#document-header
     color: $header-color
     position: fixed
     left: 0
-    transition: transform $header-sticky-transition, background $header-sticky-transition
     top: 0
     width: 100%
     z-index: $zindex-header
@@ -32,9 +31,9 @@ header#document-header
                 background: $header-sticky-dropdown-background
                 color: $header-sticky-dropdown-color
     &.is-sticky
-        .pagefind-ui__toggle
+        .search-button
             color: $header-sticky-color
-    html.is-scrolling-down:not(.has-menu-opened, .has-modal-opened, .has-search-opened) &
+    html.is-scrolling-down:not(.has-menu-opened, .has-modal-opened) &
         @include media-breakpoint-down(desktop)
             transform: translateY(-100%)
         @include media-breakpoint-up(desktop)
@@ -95,28 +94,27 @@ header#document-header
         .nav-level-1
             a
                 text-decoration: none
-            > li:not(.nav-search)
+            > li
                 line-height: 1
                 border: none
+                display: flex
+                align-items: center
                 @include media-breakpoint-down(desktop)
                     height: 100%
-                a,
-                span,
-                button
+                > a,
+                > span
                     display: block
-                    padding: 0
                     white-space: nowrap
+                    line-height: 1
+                > *
                     @include media-breakpoint-up(desktop)
                         padding: $header-upper-menu-padding-y 0
-                    @include media-breakpoint-down(desktop)
-                        line-height: $header-upper-menu-mobile-height
-
-                    // apply active style to active page (default) or active site
-                    $upper-menu-active-selector: '.active'
-                    @if $header-upper-menu-active-style-for-sites
-                        $upper-menu-active-selector: ':not([href*="https://"], [href*="http://"])'
-                    &#{$upper-menu-active-selector}
-                        box-shadow: $header-upper-menu-active-box-shadow
+                // apply active style to active page (default) or active site
+                $upper-menu-active-selector: '.active'
+                @if $header-upper-menu-active-style-for-sites
+                    $upper-menu-active-selector: ':not([href*="https://"], [href*="http://"])'
+                a#{$upper-menu-active-selector}
+                    box-shadow: $header-upper-menu-active-box-shadow
     @include media-breakpoint-down(desktop)
         &.has-upper-menu
             .menu
@@ -166,7 +164,7 @@ body
             opacity: 0
 
 header#document-header
-    nav:not(.upper-menu)
+    nav.primary-menu
         padding-bottom: $header-nav-padding-y
         padding-top: $header-nav-padding-y
         @include media-breakpoint-up(desktop)
