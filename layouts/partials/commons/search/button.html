@@ -1,5 +1,5 @@
 {{ $position := . }}
-{{ if in site.Params.search.positions $position}}
+{{ if and site.Params.search.active (in site.Params.search.positions $position) }}
   <button
       class="search-button search-button--{{ $position }}" 
       aria-expanded="false" 
