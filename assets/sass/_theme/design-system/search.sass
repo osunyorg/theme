@@ -1,13 +1,10 @@
-.search-button, 
-.pagefind-ui__button, 
+.search-button,
+.pagefind-ui__button,
 .search__close
     @include button-reset
     @include meta
     &:focus
         box-shadow: none
-.search-button:not(.pagefind-primary), 
-.pagefind-ui__button, 
-.search__close
     @include meta
     color: var(--color-text)
 .search-button
@@ -166,24 +163,6 @@
             &__results-area
                 padding-top: space(17)
 
-.pagefind-fixed
-    align-items: center
-    background: var(--color-background-alt)
-    bottom: 0
-    color: var(--color-text)
-    display: flex
-    justify-content: space-between
-    left: var(--grid-gutter)
-    position: fixed
-    z-index: 10
-    @include media-breakpoint-down(desktop)
-        left: 0
-        width: 100vw
-        &.in-page-with-toc
-            background: var(--color-background)
-            border-top: 1px solid #eee
-            bottom: pxToRem(44)
-            
 footer#document-footer .footer-search
     .pagefind-footer
         color: $footer-color
@@ -195,95 +174,49 @@ footer#document-footer .footer-search
 
 .menu .nav-level-1 > li .search-button span
     display: inline
-@include media-breakpoint-up(desktop)
-    .nav-level-1
-        > li .search-button.toggle-icon span
-            display: none
 
 // Toggle button appareance
 // Can be with icon only, text only, or both
 .search-button
-    header#document-header &
-        $has-text: false
-        $has-icon: true
-        @if $search-menu-input-appearance-text == false
+    &--primary, &--upper-menu
+        @if not $search-button-header-text
             span
                 @extend .sr-only
-        @if $search-menu-input-appearance-icon == false
-            $has-icon: false
-        @if $search-menu-input-appearance-text == true
-            $has-text: true
-        @if $has-icon
+        @if $search-button-header-icon
             @include icon(search-line, after)
 
-    footer#document-footer &
-        $has-text: false
-        $has-icon: true
-        @if $search-footer-input-appearance-text == false
+    &--footer
+        @if not $search-button-footer-text
             span
                 @extend .sr-only
-        @if $search-footer-input-appearance-icon == false
-            $has-icon: false
-        @if $has-icon
+        @if $search-button-footer-icon
             @include icon(search-line, after)
 
-    main#main &
-        $has-text: false
-        $has-icon: true
-        @if $search-footer-input-appearance-text == false
+    &--fixed
+        background: var(--color-background-alt)
+        bottom: 0
+        color: var(--color-text)
+        left: var(--grid-gutter)
+        min-height: $minimum-accessible-size
+        padding: $spacing-1 $spacing-2
+        position: fixed
+        z-index: 10
+        @if not $search-button-fixed-text
             span
                 @extend .sr-only
-        @if $search-footer-input-appearance-icon == false
-            $has-icon: false
-        @if $search-footer-input-appearance-text == true
-            $has-text: true
-        @if $has-icon
+        @if $search-button-fixed-icon
             @include icon(search-line, after)
+        @if $search-button-fixed-icon & $search-button-fixed-text
+            align-items: center
+            display: flex
+            justify-content: space-between
+        @include media-breakpoint-down(desktop)
+            left: 0
+            width: 100vw
+            &.in-page-with-toc
+                background: var(--color-background)
+                border-top: 1px solid #eee
+                bottom: pxToRem(44)
         @include media-breakpoint-up(desktop)
-            min-height: pxToRem(37)
-            padding: $spacing-1 $spacing-2
-            @if $has-icon
-                width: pxToRem(50)
-            @if $has-text
+            @if $search-button-fixed-text
                 width: columns(2)
-            &:hover,
-            &:focus
-                min-width: columns(2)
-                span
-                    display: inline
-            &.toggle-icon:not(:hover)
-                padding-left: 0
-                padding-right: 0
-                justify-content: center
-
-
-
-
-// &:not(.toggle-text)
-//     @include icon(search-line, after)
-//     &::after
-//         line-height: inherit
-//         margin-left: $spacing-1
-// &:not(.pagefind-primary)
-//     padding: $spacing-1 $spacing-2
-// &.toggle-both
-//     .menu & span
-//         padding-right: 0
-// span,
-// &::after
-//     display: inline
-// @include media-breakpoint-down(desktop)
-//     &.pagefind-primary
-//         padding: $spacing-3 0
-//         width: 100%
-// @include media-breakpoint-up(desktop)
-//     &.toggle-icon::after
-//             margin-left: 0
-// .upper-menu &
-//     &.toggle-both,
-//     &.toggle-text
-//         white-space: nowrap
-//         padding: 0
-//     @include media-breakpoint-down(desktop)
-//         &.toggle-both::after
-//             margin-left: space()
