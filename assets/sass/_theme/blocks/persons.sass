@@ -39,7 +39,12 @@
             @include media-breakpoint-up(md)
                 .avatar
                     width: columns(2)
-    &--grid
+    &--grid, &:not(.block-persons--list), &:not(.block-persons--large)
+        .persons
+            @include grid(1)
+            @include grid(2, md)
+            @include grid(4, lg)
+            @include grid(6, xxl)
         @include in-page-with-sidebar
             .persons
                 @include grid(1, desktop)
