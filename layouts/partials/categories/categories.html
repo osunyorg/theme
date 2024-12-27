@@ -1,7 +1,7 @@
 <ul class="categories">
   {{ range .Paginator.Pages }}
     <li>
-      {{ partial "categories/category.html" . }}
+      {{ partial "categories/category.html" (dict "category" . ) }}
     </li>
   {{ end }}
 </ul>

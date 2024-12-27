@@ -6,7 +6,7 @@
             a
                 display: block
 
-.taxonomies-section
+.taxonomies-section, .taxonomy-categories--list
     @extend .taxonomies
     margin-top: var(--block-space-y)
     margin-bottom: var(--block-space-y)
@@ -27,7 +27,14 @@
     .taxonomy-title
         @include meta
 
-// Taxonomies
+.taxonomy-categories--grid
+    @include list-reset
+    @include grid(1)
+    @include grid(2, sm)
+    @include grid(3, desktop)
+    + *
+        margin-top: var(--block-space-y)
+
 .document-content
     .persons-taxonomies, .organizations-taxonomies, .projects-taxonomies
         @include grid(3, desktop)

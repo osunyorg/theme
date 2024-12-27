@@ -16,8 +16,12 @@
     {{ partial "contents/list.html" . }}
 
     <div class="container">
-      {{ partial "persons/list.html" .Pages }}
-      {{ partial "commons/pagination.html" . }}
+      {{ if .Params.is_taxonomy }}
+        {{ partial "taxonomies/categories" . }}
+      {{ else }}
+        {{ partial "persons/list.html" .Pages }}
+        {{ partial "commons/pagination.html" . }}
+      {{ end }}
     </div>
   </div>
 {{ end }}
