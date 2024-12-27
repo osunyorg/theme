@@ -139,23 +139,25 @@ ol.persons--list
     img
         object-fit: cover
 
-.taxonomies-persons
-    @extend .taxonomies
-    @include media-breakpoint-up(desktop)
-        display: inline-block
-        margin-right: $spacing-4
-    a
-        @extend %underline-on-hover
-        @include meta
-        @include icon(arrow-right-line, after)
-            display: inline-block
-            margin-left: $spacing-3
-    
 .persons__section
     * + .persons
         margin-top: $spacing-4
     .persons:last-child
         padding-bottom: $spacing-5
+    .persons-categories, .taxonomies-persons
+        @extend .taxonomies
+        li
+            @include media-breakpoint-up(desktop)
+                display: inline-block
+                margin-right: $spacing-4
+            a
+                @extend %underline-on-hover
+                @include meta
+                @include icon(arrow-right-line, after)
+                    display: inline-block
+                    margin-left: $spacing-1
+    .persons-categories + .taxonomies-persons
+        margin-top: $spacing-3
 
 .persons__page
     .hero
