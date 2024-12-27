@@ -1,8 +1,9 @@
 {{ $options := site.Params.persons.index.options }}
+{{ $persons := . }}
 
 {{ if eq site.Params.persons.index.layout "list" }}
   <ol class="persons persons--list">
-    {{ range .persons }}
+    {{ range $persons }}
       <li itemscope itemtype="https://schema.org/Person">
         <p itemprop="name"><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></p>
         {{- if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
@@ -13,7 +14,7 @@
   </ol>
 {{ else if eq site.Params.persons.index.layout "grid" }}
   <div class="persons persons--grid">
-    {{ range .persons }}
+    {{ range $persons }}
       {{ partial "persons/person" (dict "person" .) }}
     {{ end }}
   </div>

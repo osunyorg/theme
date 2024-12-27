@@ -33,10 +33,9 @@
 
     <div class="container">
       {{- if not $is_block_persons_present -}}
-        {{ partial "persons/taxonomies.html" . }}
-        {{ $persons := .Pages.ByParam "last_name" }}
-        {{ $persons = (.Paginate $persons).Pages }}
-        {{ partial "persons/list.html" (dict "persons" $persons) }}
+        {{ partial "taxonomies/section-list.html" . }}
+        {{ partial "persons/persons-taxonomies.html" . }}
+        {{ partial "persons/list.html" .Pages }}
         {{ partial "commons/pagination.html" . }}
       {{- end -}}
     </div>

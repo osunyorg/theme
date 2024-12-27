@@ -69,7 +69,6 @@ params:
       disabled: true
   toc:
     force_offcanvas: false
-
   # Enabled network for share action
   # You can also specify this options for each sharable Section
   share_links:
@@ -94,6 +93,7 @@ params:
     index:
       truncate_description: 200 # Set to 0 to disable truncate
       layout: list # grid | list
+      taxonomies: false
       options:
         dates: true
         categories: false
@@ -114,6 +114,7 @@ params:
     dark_logo_background: false
     map_marker_icon: '/assets/images/map-marker.svg'
     index:
+      taxonomies: false
       options:
         link: true
         logo: true
@@ -156,18 +157,22 @@ params:
   persons:
     index:
       layout: grid # grid | list
+      taxonomies: false
       options:
         summary: true
         image: true
         link: true
     single:
       backlinks: false
+      taxonomies:
+        position: none # content | hero | sidebar | none
   posts:
     default_image: false
     date_format: ":date_long"
     index:
       truncate_description: 200 # Set to 0 to disable truncate
       layout: list # grid | list
+      taxonomies: false
       options:
         author: false
         categories: true
@@ -229,6 +234,7 @@ params:
   projects:
     default_image: false
     date_format: "2006"
+    taxonomies: false
     index:
       truncate_description: 200 # Set to 0 to disable truncate
       layout: grid # grid | list

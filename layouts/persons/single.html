@@ -72,8 +72,11 @@
         {{ end }}
       </div>
 
-      {{ partial "commons/contact-details.html" . }}
+      {{ if eq site.Params.persons.single.taxonomies.position "content" }}
+        {{ partial "taxonomies/single-list.html" . }}
+      {{ end }}
 
+      {{ partial "commons/contact-details.html" . }}
     </div>
 
     {{ partial "contents/list.html" . }}

@@ -1,11 +1,7 @@
 <ul class="post-infos">
   {{ if .Params.posts_categories }}
-    <li class="terms">
-      <span>{{ i18n "posts.category" ( len .Params.posts_categories ) }}</span>
-      {{ partial "commons/categories" ( dict
-        "context" .
-        "kind" "post"
-      )}}
+    <li>
+      {{ partial "taxonomies/single-list.html" . }}
     </li>
   {{ end }}
   <li>
