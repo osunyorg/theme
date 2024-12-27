@@ -35,9 +35,7 @@
       {{ partial "commons/taxonomies/section-list.html" . }}
       {{- if not $is_block_persons_present -}}
         {{ partial "persons/persons-taxonomies.html" . }}
-        {{ $persons := .Pages.ByParam "last_name" }}
-        {{ $persons = (.Paginate $persons).Pages }}
-        {{ partial "persons/list.html" (dict "persons" $persons) }}
+        {{ partial "persons/list.html" .Pages }}
         {{ partial "commons/pagination.html" . }}
       {{- end -}}
     </div>
