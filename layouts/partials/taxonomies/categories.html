@@ -1,0 +1,14 @@
+{{ $kind := .Type }}
+{{ $categories := .Params.children }}
+
+{{- if $categories -}}
+  <ul class="taxonomies-section {{ $kind }}-categories" aria-label="{{ i18n "categories.label" }}">
+    {{- range $categories -}}
+      {{ with site.GetPage .path }}
+        <li>
+          <a href="{{ .Permalink }}">{{- safeHTML .Title -}}</a>
+        </li>
+      {{- end }}
+    {{- end }}
+  </ul>
+{{- end -}}
