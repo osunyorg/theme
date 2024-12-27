@@ -21,17 +21,22 @@
                 display: inline-block
                 margin-left: $spacing-1
 
-// Taxonomies
-.persons-taxonomies, .organizations-taxonomies, .projects-taxonomies
-    @include grid(3, desktop)
-    @include media-breakpoint-down(desktop)
-        margin-top: $spacing-5
-        > li + li
-                margin-top: $spacing-3
-    &, ul
-        // for organizations
-        [itemprop="articleBody"] &,
-        &
-            @include list-reset
+.taxonomies-single
+    ul
+        @include list-reset
     .taxonomy-title
         @include meta
+
+// Taxonomies
+.document-content
+    .persons-taxonomies, .organizations-taxonomies, .projects-taxonomies
+        @include grid(3, desktop)
+        @include media-breakpoint-down(desktop)
+            margin-top: $spacing-5
+            > li + li
+                    margin-top: $spacing-3
+        &, ul
+            // for organizations
+            [itemprop="articleBody"] &,
+            &
+                @include list-reset
