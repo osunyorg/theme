@@ -21,12 +21,7 @@
         {{ end }}
 
         <div class="organization-categories">
-          {{ partial "taxonomies/single-list.html" (dict
-              "context" .
-              "kind" "organization"
-              "taxonomies" .Params.taxonomies
-              "free_categories" .Params.free_categories
-            ) }}
+          {{ partial "taxonomies/single-list.html" . }}
         </div>
         
         {{ partial "commons/contact-details.html" . }}

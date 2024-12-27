@@ -71,12 +71,8 @@
           </div>
         {{ end }}
       </div>
-        {{ partial "taxonomies/single-list.html" (dict
-            "context" .
-            "kind" "person"
-            "taxonomies" .Params.taxonomies
-            "free_categories" .Params.free_categories
-          ) }}
+
+      {{ partial "taxonomies/single-list.html" . }}
       {{ partial "commons/contact-details.html" . }}
 
     </div>

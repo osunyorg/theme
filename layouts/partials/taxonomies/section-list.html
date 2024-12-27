@@ -2,8 +2,9 @@
 {{ $kind := .Type }}
 {{ $categories_kind := printf "%s_categories" $kind }}
 {{ $categories := index site.Taxonomies $categories_kind  }}
+{{ $option := index site.Params $kind }}
 
-{{ if in site.Params.taxonomies.present_in $kind }}
+{{ if $option.index.taxonomies }}
   {{- if $categories -}}
     <ul class="taxonomies-section {{ $kind }}-categories" aria-label="{{ i18n "categories.label" }}">
       {{- range $categories -}}

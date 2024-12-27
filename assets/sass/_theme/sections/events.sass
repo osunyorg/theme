@@ -36,7 +36,7 @@
         text-transform: capitalize
     ul
         @include list-reset
-    > li
+    > li, .taxonomies-single > li
         padding-top: $spacing-2
         &:not(:last-child)
             padding-bottom: $spacing-2
@@ -50,12 +50,11 @@
             @include icon(arrow-right-line)
             &::before
                 padding-right: 0.3rem
-    .events-categories
-        display: flex
-        column-gap: $spacing-1
-        flex-wrap: wrap
-        a
-            @include link(var(--color-accent))
+    .taxonomies-single
+        .taxonomy-children
+            @extend .event-categories
+        span + .taxonomy-children
+            margin-top: 0
     .events-actions
         ul
             align-items: start
