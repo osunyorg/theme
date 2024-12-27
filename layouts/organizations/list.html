@@ -18,6 +18,7 @@
 
     <div class="container">
       {{- if not $is_organizations_block_present -}}
+        {{ partial "taxonomies/section-list.html" . }}
         {{ partial "organizations/organizations.html" . }}
         {{ partial "commons/pagination.html" . }}
       {{ end }}

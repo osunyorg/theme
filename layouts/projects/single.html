@@ -7,7 +7,7 @@
     {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
     
     <div class="project-categories container">
-      {{ partial "commons/taxonomies/single-list.html" (dict
+      {{ partial "taxonomies/single-list.html" (dict
           "context" .
           "kind" "project"
           "taxonomies" .Params.taxonomies

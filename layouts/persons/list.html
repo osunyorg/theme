@@ -32,8 +32,8 @@
     {{ partial "contents/list.html" . }}
 
     <div class="container">
-      {{ partial "commons/taxonomies/section-list.html" . }}
       {{- if not $is_block_persons_present -}}
+        {{ partial "taxonomies/section-list.html" . }}
         {{ partial "persons/persons-taxonomies.html" . }}
         {{ partial "persons/list.html" .Pages }}
         {{ partial "commons/pagination.html" . }}

@@ -5,7 +5,7 @@
 
 {{ if in site.Params.taxonomies.present_in $kind }}
   {{- if $categories -}}
-    <ul class="{{ $kind }}-categories" aria-label="{{ i18n "categories.label" }}">
+    <ul class="taxonomies-section {{ $kind }}-categories" aria-label="{{ i18n "categories.label" }}">
       {{- range $categories -}}
         {{ with .Page }}
           <li>
