@@ -15,18 +15,3 @@ ul.categories
     .project-categories
         --block-space-y: #{$block-space-y}
         margin-bottom: var(--block-space-y)
-
-// Taxonomies
-.taxonomies
-    @include grid(3, desktop)
-    @include media-breakpoint-down(desktop)
-        margin-top: $spacing-5
-        > li + li
-                margin-top: $spacing-3
-    &, ul
-        // for organizations
-        [itemprop="articleBody"] &,
-        &
-            @include list-reset
-    .taxonomy-title
-        @include meta

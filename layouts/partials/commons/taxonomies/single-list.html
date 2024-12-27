@@ -1,4 +1,5 @@
 {{ $kind := .kind }}
+{{ $class := .class | default "" }}
 
 {{ if or .taxonomies .free_categories }}
   <ul class="taxonomies {{ $kind }}-taxonomies" aria-label="{{ i18n "categories.label" }}">
