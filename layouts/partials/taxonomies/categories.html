@@ -1,12 +1,15 @@
 {{ $kind := .Type }}
 {{ $categories := .Params.children }}
-
+{{ $layout := site.Params.categories.index.layout }}
 {{- if $categories -}}
-  <ul class="taxonomies-section {{ $kind }}-categories" aria-label="{{ i18n "categories.label" }}">
+  <ul class="taxonomy-categories taxonomy-categories--{{ $layout }}" aria-label="{{ i18n "categories.label" }}">
     {{- range $categories -}}
       {{ with site.GetPage .path }}
         <li>
-          <a href="{{ .Permalink }}">{{- safeHTML .Title -}}</a>
+          {{ partial "categories/category.html" (dict 
+            "category" .
+            "layout" $layout
+          )}}
         </li>
       {{- end }}
     {{- end }}
