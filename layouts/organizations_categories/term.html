@@ -17,9 +17,10 @@
     <div class="container">
       {{ if .Params.is_taxonomy }}
         {{ partial "taxonomies/categories" . }}
+      {{ else }}
+        {{ partial "organizations/organizations.html" . }}
+        {{ partial "commons/pagination.html" . }}
       {{ end }}
-      {{ partial "organizations/organizations.html" . }}
-      {{ partial "commons/pagination.html" . }}
     </div>
   </div>
 {{ end }}
