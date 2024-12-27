@@ -1,5 +1,9 @@
 {{- $isTocPresent := .context.Params.design.toc.present -}}
 
+{{ if site.Params.toc.disabled }}
+  {{ $isTocPresent = false }}
+{{ end }}
+
 {{- if $isTocPresent -}}
   {{- partial "toc/cta" -}}
 
