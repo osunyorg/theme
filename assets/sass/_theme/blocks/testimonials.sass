@@ -1,4 +1,6 @@
 .block-testimonials
+    .container
+        overflow: hidden
     blockquote
         @include blockquote
         p
@@ -17,9 +19,9 @@
                 @include media-breakpoint-up(xl)
                     font-size: $block-testimonials-xl-font-size-long-text
                     line-height: $block-testimonials-xl-line-height-long-text
-
     figure
         margin-bottom: 0
+        width: columns(12)
     figcaption
         align-items: center
         display: flex
@@ -33,37 +35,40 @@
         min-width: pxToRem(80)
         width: columns(1)
 
+    @include in-page-with-sidebar
+        figure 
+            width: columns(8)
     @include in-page-without-sidebar
+        .testimonials
+            width: columns(12)
         figure
             min-height: columns(2)
-            padding-right: offset(3)
+            width: columns(8)
+            padding-left: offset(4)
+            width: columns(12)
             &.with-picture
-                padding-left: offset(3)
-                padding-right: offset(1)
                 position: relative
                 figcaption
                     display: block
                     margin-top: $spacing-2
                     .avatar
-                        left: columns(1)
+                        left: columns(2)
                         margin-left: var(--grid-gutter)
                         position: absolute
                         top: 0
                         width: columns(2)
-    .carousel
-        flex-direction: column-reverse
-        .toggle
-            border: 1px solid $block-testimonials-pagination-background
-        &__pagination
-            order: 1
-            button
+    .slider
+        display: flex
+        flex-direction: column
+        &-slide
+            &.is-next
+                opacity: 0
+        &-controls
+            order: -1
+            margin-bottom: $spacing-3
+        &-pagination
+            li
                 &::before
                     background-color: $block-testimonials-pagination-background
-                i
+                &::after
                     background-color: $block-testimonials-pagination-progress-background
-        &__slide
-            width: columns(12)
-            opacity: 1
-            padding: 0 $spacing-1
-            @include in-page-with-sidebar
-                width: columns(8)

@@ -1,13 +1,20 @@
-{{ $heading_tag := .heading_tag }}
-{{ $index := .index }}
-{{ $role := .role }}
+{{- $heading_tag := partial "GetHeadingTag" (dict 
+  "level" .block.ranks.children
+  "attributes" "class='title' itemprop='name'"
+  ) -}}
 
-{{ with .params }}
-  <article class="timeline-event carousel__slide" id="carousel-item-{{$index}}" class="carousel__slide" itemscope itemtype="https://schema.org/Article">
-    {{ $heading_tag.open -}}
-      {{ .title | safeHTML }}
-    {{ $heading_tag.close -}}
-    <div class="line"></div>
-    <p class="description text" itemprop="text">{{- partial "PrepareHTML" .text | markdownify -}}</p>
-  </article>
+{{ with .block.data }}
+  <ol data-slider="{{ site.Params.blocks.timeline.slider | encoding.Jsonify }}">
+    {{ range .events }}
+      <li class="timeline-event" itemscope itemtype="https://schema.org/Article">
+        {{ $heading_tag.open -}}
+          {{ .title | safeHTML }}
+        {{ $heading_tag.close -}}
+        <div class="line"></div>
+        {{ with .text }}
+          <div itemprop="text">{{- partial "PrepareHTML" . -}}</div>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ol>
 {{ end }}

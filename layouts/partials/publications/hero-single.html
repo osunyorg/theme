@@ -1,6 +1,19 @@
+{{ $subtitle := "" }}
+{{ if or .Params.journal_title .Params.date .Params.authors_list }}
+  {{- with .Params.journal_title -}}
+    {{ $subtitle = printf "<span>%s</span>" .}}
+  {{- end -}}
+  {{- with .Params.date -}}
+    {{ $subtitle = printf "%s<span>%s</span>" $subtitle ( .Format "2006" ) }}
+  {{- end -}}
+  {{- with .Params.authors_list -}}
+    {{ $subtitle = printf "%s<span>%s</span>" $subtitle . }}
+  {{- end -}}
+{{ end }}
+
 {{- partial "header/hero.html"
       (dict
         "title" .Title
-        "subtitle" .Params.authors_list
+        "subtitle" (partial "PrepareHTML" $subtitle)
         "context" .
       ) -}}

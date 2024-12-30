@@ -7,9 +7,11 @@
   <div class="container">
     <div class="document-sidebar">
       {{ partial "publications/researchers.html" . }}
-      <div class="paper-ref">
-        <p>{{ partial "PrepareHTML" .Params.ref }}</p>
-      </div>
+      {{ with .Params.ref }}
+        <div class="paper-ref">
+          <p>{{ partial "PrepareHTML" . }}</p>
+        </div>
+      {{ end }}
     </div>
     <div class="content">
       <div class="rich-text">

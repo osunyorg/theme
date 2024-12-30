@@ -6,6 +6,9 @@
             @include stretched-link
             display: block
             text-decoration: none
+    .post-subtitle
+        @include h3
+        color: var(--color-text-alt)
     time
         color: $post-time-color
     .post-meta,
@@ -24,7 +27,7 @@
             margin-bottom: $spacing-3
             padding-bottom: $spacing-3
             flex-direction: row
-            .post-title + p
+            .post-title + p:not(.post-subtitle)
                 margin-top: $spacing-2
             @include media-breakpoint-up(desktop)
                 @include grid
@@ -62,7 +65,7 @@
                         font-size: $h5-size
                 .post-content
                     .post-title,
-                    > p
+                    [itemprop="abstract"]
                         max-width: columns(6)
         &.without-images
             article
@@ -91,9 +94,117 @@
     &:not(.full-width)
         .post-sidebar
             @include sidebar
+    .block-signatures
+        .signatures
+            @include list-reset
+            border-top: 1px solid var(--color-border)
+            padding-top: var(--grid-gutter)
+            li
+                align-items: flex-start
+                display: flex
+                flex-direction: row-reverse
+                gap: var(--grid-gutter)
+                position: relative
+                .avatar
+                    min-width: pxToRem(80)
+                    width: columns(1)
+                    @include media-breakpoint-up(desktop)
+                        width: columns(2)
+                .author-content
+                    flex: 1
+                    a
+                        @include stretched-link
+                        @include h4
+                        text-decoration: none
+                    .more
+                        @include link(var(--color-accent))
+                    p
+                        @include meta
+                &:hover
+                    .more
+                        text-decoration-color: var(--color-accent)
+                + li
+                    margin-top: $spacing-3
+
+    &.full-width
+        @include media-breakpoint-up(desktop)
+            .post-sidebar
+                @include container
+                > div
+                    display: flex
+                    align-items: start
+                    margin-bottom: $spacing-5
+                .toc-cta
+                    padding-right: 0
+                aside
+                    width: columns(5)
+                    flex-shrink: 0
+            @include media-breakpoint-down(desktop)
+                margin-bottom: $spacing-5
 
 .post-infos
-    @include section__page-infos
+    @include meta
+    @include list-reset
+    font-size: $table-body-size
+    margin-bottom: 0
+    @include media-breakpoint-up(desktop)
+        font-size: $table-body-size-desktop
+    > li, 
+    .taxonomies-single > li
+        @include meta
+        display: flex
+        gap: $spacing-3
+        justify-content: space-between
+        padding-top: $spacing-2
+        padding-bottom: $spacing-2
+        border-color: var(--color-border)
+        &:not(:first-child)
+            border-top: 1px solid var(--color-border)
+        > span
+            @include meta
+            color: var(--color-text-alt)
+            padding-left: 0
+            white-space: nowrap
+            vertical-align: top
+        .share
+            text-align: right
+            flex: 1
+        &.authors,
+        &.terms
+            margin: 0
+            ul
+                text-align: right
+            li
+                display: inline-block
+                vertical-align: middle
+                margin-left: $spacing-1
+                &:last-child
+                    &::after
+                        content: none
+            @include media-breakpoint-up(desktop)
+                align-items: baseline
+                li
+                    display: block
+                    + li
+                        margin-top: space()
+
+    .taxonomies-single
+        flex: 1
+        li:last-child
+            padding-bottom: 0
+    a
+        @include link(var(--color-accent))
+        text-align: right
+    .share
+        display: flex
+        flex-wrap: wrap
+        justify-content: end
+        margin-right: -$spacing-2
+        li
+            display: inline-block
+        a
+            color: inherit
+            text-decoration: none
 
 .related
     margin-top: $spacing-3

@@ -67,6 +67,7 @@ categories:
   label: Categories
   no_post: No post in this category
   no_project: No project in this category
+  no_person: No people in this category
   see_more:
     one: See the post
     other: See the {{ .Count }} posts
@@ -78,31 +79,29 @@ commons:
     search: Go to search
     shortcut_navigation: Navigation Links
     transcription: Transcription
+    credits: "Rights reserved: "
   search:
     title: Search
     close: Close search
   backtotop: Back to top
   biography: Biography
   breadcrumb: Breadcrumb
-  carousel:
-    first: Go to first slide
-    last: Go to first slide
-    next: Slide suivant
-    pageX: Go to page %s
-    pause: Carousel playing. Pause the carousel
-    play: Carousel currently paused. Start the carousel
-    prev: Slide précedent
-    slideX: Go to slide %s
   click_to_copy:
     aria_label: Click to copy {{ .description }}
     button_title: Click to copy
   close: Close
   contact:
     address: Address
-    email: Email
+    email: 
+      label: Email
+      a11y_label: "Send an e-mail to {{ .email }}"
     empty_name: of this contact
-    phone: Phone
-    phone_professional: Professional phone
+    phone: 
+      label: Phone
+      a11y_label: Call the {{ .phone_number }}
+    phone_professional:
+      label: Professional phone
+      a11y_label: Call this professional phone {{ .phone_number }}
     website: Website
     web: Web
     schedule: Hours
@@ -112,28 +111,49 @@ commons:
         social_media: See the {{ .name }} page on {{ .media }}
         email: Contact {{ .name }} by email
         rss: Read the RSS feed for {{ .name }}
+        website: Visit the website of {{ .name }}
   credit: A low impact website crafted with <a href="https://www.osuny.org/" title="Osuny - external link" target="_blank" rel="noreferrer">Osuny</a>
   date: Date
   download:
     singular_name: Download
     pdf: Download PDF
   "false": "No"
+  extensions:
+    PDF: Adobe Portable Document Format
   in: In
   language: Language
   lightbox:
-    link:
-      title: Open image
+    button: View larger image
+    button_without_alt: View larger
+    close:
+      a11y_credit: Close credits
+      a11y_information: Close informations
+      a11y_transcription: Close transcription
+      text: Close
+    controls:
+      close: Close the viewer
+      credit: Image credits
+      information: Image information
+      next: Go to the next image
+      previous: Go to previous image
+      transcription: Transcription
+    credit: Credits
+    default_alt: Image
+    information: Information
+    title: Image viewer
+    transcription: Transcription
   link:
     blank: external link
     blank_aria: “{{ .Title }}” - external link
     download: “Download {{ .Title }}” - external link
   menu:
-    label: Toggle navigation
+    label: Menu
     legal: Legals menu
     main: Main menu
     secondary: Secondary menu
     social: Socials networks menu
     title: Menu
+    upper: Menu d'accès rapide
   more: Read more
   more_aria: Read more about “{{ .Title }}”
   pagination:
@@ -153,6 +173,14 @@ commons:
   read: Read
   read_online: Read online
   share: Share
+  slider:
+    default_title: Carousel
+    goto: Go to element
+    next: Go to the next element
+    pagination_list: Carousel's pagination
+    pause: Carousel is playing. Pause the carousel.
+    play: Carousel is currently paused. Start the carousel.
+    previous: Go to the previous element
   toc: Table of contents
   "yes": "Yes"
   units:
@@ -164,8 +192,6 @@ commons:
     megabytes: Megabytes
     kilobytes: Kilobytes
     bytes: bytes
-  extensions:
-    PDF: Adobe Portable Document Format
 diplomas:
   type: Type de diplôme
 errors:
@@ -256,6 +282,10 @@ persons:
     projects: Projects mentioning
 posts:
   author: Author
+  authors:
+    label: "Authors"
+    a11y_title: Authors of this article
+    more: More information
   category:
     one: Category
     other: Categories

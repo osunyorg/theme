@@ -8,7 +8,7 @@
 
 <div class="alternate">
   {{ range .pages }}
-    {{ $page := site.GetPage .file }}
+    {{ $page := site.GetPage .path }}
     {{ with $page }}
       {{ if .Params.image }}
         {{ $image_class = printf (partial "GetImageDirection" .Params.image) }}
@@ -23,10 +23,10 @@
         {{ $heading_tag.close }}
 
         {{ if and $options.summary .Params.summary }}
-          <p>{{ partial "GetTruncateContent" ( dict 
-            "text" .Params.summary
-            "length" site.Params.pages.index.truncate_description
-            ) }}</p>
+          {{ partial "GetRichSummary" ( dict 
+              "summary" .Params.summary
+              "kind" "pages"
+          )}}
         {{ end }}
 
         {{ if site.Params.blocks.pages.alternate.more }}

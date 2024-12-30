@@ -33,7 +33,8 @@
   {{- partial "programs/admission.html" . -}}
   {{- partial "programs/certification.html" . -}}
 
-  {{- partial "programs/related.html" . -}}
+  {{- $category := site.GetPage (printf "/posts_categories/%s" .Params.related_categories.posts ) -}}
+  {{- partial "programs/related.html" $category -}}
 
   {{- partial "hooks/before-program-end.html" . -}}
 </div>

@@ -5,7 +5,7 @@
         gap: calc(var(--grid-gutter) / 2)
         justify-content: flex-end
         position: relative
-        a
+        &-title a
             @include stretched-link(after)
             text-decoration: none
         .more
@@ -30,10 +30,11 @@
     &--list
         @include media-breakpoint-up(desktop)
             .location
-                border-bottom: 1px solid var(--color-border)
                 flex-direction: row-reverse
                 gap: var(--grid-gutter)
-                padding-bottom: $spacing-3
+                &:not(:last-child)
+                    border-bottom: 1px solid var(--color-border)
+                    padding-bottom: $spacing-3
                 + .location
                     margin-top: $spacing-3
                 &-content
@@ -66,6 +67,11 @@
             @include h3
 
 .locations__term
+    .hero
+        h1 + address
+            margin-top: $spacing-5
+        hgroup + address
+            margin-top: $spacing-3
     .document-content
         > .diplomas
             h2
@@ -84,6 +90,13 @@
                             aspect-ratio: 1
                     &:last-child
                         border-bottom: none
+
+.locations__taxonomy
+    .locations--list,
+    .locations--grid
+        .location
+            address
+                @extend .sr-only
 .locations-map
     .map
         height: 300px
@@ -93,6 +106,10 @@
         > .location,
         .leaflet-popup-tip-container
             display: none
+        a.leaflet-popup-close-button
+            color: var(--color-background)
+            &:hover
+                color: var(--color-background-alt)
         .leaflet-tile-pane
             filter: grayscale(1)
         .leaflet-popup

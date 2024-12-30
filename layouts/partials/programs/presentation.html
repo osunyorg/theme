@@ -3,14 +3,14 @@
     <div class="content">
       <h2>{{ i18n "programs.toc.presentation" }}</h2>
 
-      {{ if or .Params.image .Params.presentation .Params.objectives }}
+      {{ if or .Params.image .Params.presentation .Params.objectives .Pages }}
         <div>
           {{- partial "programs/image.html" .Params.image -}}
 
           {{- if partial "GetTextFromHTML" .Params.presentation -}}
             <section class="rich-text" id="{{ urlize (i18n "programs.presentation") }}">
               <h3>{{ i18n "programs.presentation" }}</h3>
-              <p>{{- partial "PrepareHTML" .Params.presentation -}}</p>
+              {{- partial "PrepareHTML" .Params.presentation -}}
             </section>
           {{- end -}}
 
@@ -21,15 +21,16 @@
             </section>
           {{- end -}}
           
-          {{ if .Pages }}
+          {{ with .Params.children }}
             <section id="programs">
               <h3>{{ i18n "programs.children" }}</h3>
               <ol class="programs programs--light">
-                {{- range .Pages -}}
+                {{- range . -}}
+                  {{ $child := site.GetPage .path }}
                   {{ partial "programs/program.html" (dict 
-                      "program" .
+                      "program" $child
                       "heading" "h4"
-                      "options" (dict "image" false)
+                      "options" site.Params.programs.single.children.options
                     )}}
                 {{- end -}}
               </ol>

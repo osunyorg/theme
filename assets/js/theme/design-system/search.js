@@ -1,156 +1,168 @@
-/* eslint-disable no-undef */
-import { focusTrap } from '../utils/focus-trap';
+/* eslint-disable no-undef, no-underscore-dangle */
+window.osuny = window.osuny || {};
+window.osuny.Search = window.osuny.Search || {};
 
-class Search {
-    constructor (container) {
-        this.state = {
-            isOpened: false
-        };
-        this.button = document.querySelector('.pagefind-ui__toggle');
-        this.element = document.querySelector('.search__modal');
-        this.closeButton = this.element.querySelector('.search__close');
-        this.searchInstance = new PagefindUI({
-            element: container,
-            showSubResults: true,
-            processResult: () => {
-                setTimeout(this.updateAccessibilityMessageRole.bind(this), 1500);
-            }
-        });
+window.osuny.Search = function (element) {
+    window.osuny.Popup.call(this, element);
 
-        if (!this.element) {
-            return;
+    this.buttons = document.querySelectorAll('.search-button');
+
+    this._setup();
+    this._listen();
+};
+
+window.osuny.Search.prototype = Object.create(window.osuny.Popup.prototype);
+
+window.osuny.Search.prototype._setup = function () {
+    this.setPageFind();
+    this.setAccessibility();
+};
+
+window.osuny.Search.prototype.setPageFind = function () {
+    this.pageFindUI = new PagefindUI({
+        element: this.element,
+        showSubResults: true
+    });
+
+    // Listen to user's input
+    this.input = document.querySelector('.pagefind-ui__search-input');
+};
+
+window.osuny.Search.prototype._listen = function () {
+    var inPageWithToc = document.body.querySelector('.toc-cta');
+    window.osuny.Popup.prototype._listen.call(this);
+
+    this.buttons.forEach(function (button) {
+        button.addEventListener('click', this.toggle.bind(this, true, button));
+        if (inPageWithToc) {
+            button.classList.add('in-page-with-toc');
         }
+    }.bind(this));
 
-        this.listen();
-        this.setAccessibility();
-    }
+    this.input.addEventListener('input', this.onInputChange.bind(this));
 
-    setAccessibility () {
-        const input = document.querySelector('.pagefind-ui__search-input');
-        input.setAttribute('title', input.getAttribute('placeholder'));
+    this.observeMutations();
+};
 
-        // Add element to alert screen reader of the search results
-        this.accessibleMessageContainer = document.createElement('div');
-        this.accessibleMessage = document.createElement('p');
-        this.accessibleMessageContainer.appendChild(this.accessibleMessage);
-        this.accessibleMessageContainer.setAttribute('aria-live', 'polite');
-        this.accessibleMessageContainer.setAttribute('aria-atomic', 'true');
-        this.accessibleMessageContainer.classList.add('sr-only', 'pagefind-ui__accessible-message');
-        this.element.append(this.accessibleMessageContainer);
-    }
+window.osuny.Search.prototype.observeMutations = function () {
+    var previousResults = [],
+        results = [],
+        firstResult;
 
-    updateAccessibilityMessageRole () {
-        const message = this.element.querySelector('.pagefind-ui__message');
-        this.accessibleMessage.innerText = message.innerText;
-    }
-
-    listen () {
-        if (document.body.querySelector('.toc-cta')) {
-            this.button.classList.add('in-page-with-toc');
+    this.observer = new MutationObserver(function () {
+        results = this.element.querySelectorAll('.pagefind-ui__result');
+        if (results.length > 0 && previousResults.length > 0 && results.length !== previousResults.length) {
+            firstResult = results[previousResults.length];
+            setTimeout(this.focusFirstNextResult.bind(firstResult), 100);
         }
-        this.button.addEventListener('click', () => {
-            this.toggle(true);
-            this.removedItems = this.element.querySelector('.pagefind-ui__suppressed', '.pagefind-ui__search-clear');
-            if (this.removedItems) {
-                this.removedItems.remove();
-            }
-        });
-        this.closeButton.addEventListener('click', () => {
-            this.clearSearch();
-            this.toggle(false);
-        });
+        previousResults = results;
+    }.bind(this));
 
-        window.addEventListener('keydown', (event) => {
-            if (event.keyCode === 27 || event.key === 'Escape') {
-                if (this.state.isOpened) {
-                    this.toggle(false);
-                    this.button.focus();
-                }
-            } else if (event.key === 'Tab' && this.state.isOpened) {
-                focusTrap(event, this.element, this.state.isOpened);
-            }
-            this.buttonMore = this.element.querySelector('.pagefind-ui__results + button');
-            if (this.buttonMore && this.state.isOpened) {
-                this.buttonMore.addEventListener('click', () => {
-                    this.buttonMoreFocus();
-                });
-            }
-        });
+    this.observer.observe(this.element, { childList: true, subtree: true });
+};
+
+window.osuny.Search.prototype.focusFirstNextResult = function () {
+    var anchor = this.querySelector('a');
+    if (anchor) {
+        anchor.focus();
     }
+};
 
-    clearSearch () {
-        const button = this.element.querySelector('.pagefind-ui__button'),
-            message = this.element.querySelector('.pagefind-ui__message'),
-            results = this.element.querySelector('.pagefind-ui__results');
+window.osuny.Search.prototype.onInputChange = function () {
+    // Delay before screen readers speak results message
+    var speakDelay = 1500;
 
+    // Clear aria live
+    this.accessibleMessageContainer.innerHTML = '';
+    clearTimeout(this.a11yTimeout);
+    this.a11yTimeout = setTimeout(this.updateAccessibility.bind(this), speakDelay);
+
+};
+
+window.osuny.Search.prototype.toggle = function (open, triggerElement) {
+    window.osuny.Popup.prototype.toggle.call(this, open, triggerElement);
+    if (this.state.opened) {
+        this.input.focus();
+    } else {
+        this.clear();
+    }
+};
+
+window.osuny.Search.prototype.clear = function () {
+    var button = this.element.querySelector('.pagefind-ui__button'),
+        message = this.element.querySelector('.pagefind-ui__message'),
+        results = this.element.querySelector('.pagefind-ui__results');
+
+    if (this.input) {
         this.input.value = '';
-        this.searchInstance.triggerSearch(false);
-
-        if (message) {
-            message.innerText = '';
-        }
-        if (results) {
-            results.innerHTML = '';
-        }
-        if (button) {
-            button.parentElement.removeChild(button);
-        }
     }
 
-    buttonMoreFocus () {
-        const observer = new MutationObserver(mutations => {
-            mutations.forEach(mutation => {
-                mutation.addedNodes.forEach(addedNode => {
-                    if (addedNode instanceof HTMLAnchorElement) {
-                        addedNode.focus();
-                    }
-                });
-            });
-        });
-
-        observer.observe(this.element, { childList: true, subtree: true });
+    if (button) {
+        button.parentElement.removeChild(button);
     }
 
-    toggle(open = !this.state.isOpened) {
-        this.state.isOpened = open;
-        this.element.setAttribute('aria-hidden', !this.state.isOpened);
-        this.button.setAttribute('aria-expanded', this.state.isOpened);
-
-        if (open) {
-            this.input = this.element.querySelector('input');
-            this.input.focus();
-
-            this.inertElements = [];
-            const allElements = document.querySelectorAll('body *');
-
-            allElements.forEach(el => {
-                if (el === this.element || this.element.contains(el) || el.contains(this.element)) {
-                    return;
-                }
-
-                el.setAttribute('inert', '');
-                this.inertElements.push(el);
-            });
-        } else {
-            document.body.style.overflow = 'unset';
-
-            if (this.inertElements) {
-                this.inertElements.forEach(el => {
-                    el.removeAttribute('inert');
-                });
-                this.inertElements = null;
-            }
-        }
+    if (message) {
+        message.innerText = '';
     }
-}
+
+    if (results) {
+        results.innerHTML = '';
+    }
+};
+
+window.osuny.Search.prototype.setAccessibility = function () {
+    this.input.setAttribute('title', this.input.getAttribute('placeholder'));
+
+    // Add element to alert screen reader of the search results
+    this.accessibleMessageContainer = document.createElement('div');
+    this.element.append(this.accessibleMessageContainer);
+    this.accessibleMessageContainer.setAttribute('aria-live', 'polite');
+    this.accessibleMessageContainer.setAttribute('aria-atomic', 'true');
+    this.accessibleMessageContainer.classList.add('sr-only', 'pagefind-ui__accessible-message');
+};
+
+window.osuny.Search.prototype.updateAccessibility = function () {
+    this.updateAccessibilityMessage();
+    this.updateAccessibilityTags();
+};
+
+window.osuny.Search.prototype.updateAccessibilityTags = function () {
+    var results = this.element.querySelectorAll('.pagefind-ui__result');
+    results.forEach(this.updateAccessibilityResult);
+};
+
+window.osuny.Search.prototype.updateAccessibilityResult = function (result) {
+    var image = result.querySelector('img'),
+        title = result.querySelector('.pagefind-ui__result-title');
+
+    if (image) {
+        image.setAttribute('alt', '');
+    }
+
+    if (title) {
+        title.setAttribute('role', 'heading');
+        title.setAttribute('aria-level', '2');
+    }
+};
+
+window.osuny.Search.prototype.updateAccessibilityMessage = function () {
+    var message = this.element.querySelector('.pagefind-ui__message');
+    if (!message) {
+        return;
+    }
+    message.setAttribute('aria-hidden', 'true');
+
+    if (this.input.value !== '') {
+        this.accessibleMessage = document.createElement('p');
+        this.accessibleMessage.innerText = message.innerText;
+        this.accessibleMessageContainer.appendChild(this.accessibleMessage);
+    }
+};
 
 // Selectors
-window.addEventListener('DOMContentLoaded', () => {
-    const pageFindContainer = document.querySelector('#search');
-
-    if (typeof PagefindUI === 'undefined') return;
-
-    if (pageFindContainer) {
-        new Search(pageFindContainer);
+window.addEventListener('DOMContentLoaded', function () {
+    var element = document.querySelector('#search');
+    if (typeof PagefindUI !== 'undefined' && element) {
+        window.osuny.search = new window.osuny.Search(element);
     }
 });

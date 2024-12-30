@@ -2,21 +2,31 @@
     .top
         @include top-flex
         margin-bottom: 0
-        + .informations
+        + .contact-content
             margin-top: $spacing-4
 
-    .informations
+    .contact-content
         p,
         p + p
             margin-top: 0
 
-    address
+    .contact-content
         [itemprop="name"]
             @include h4
+        .informations
+            @include in-page-without-sidebar
+                display: flex
+                gap: var(--grid-gutter)
+                [itemprop="name"]
+                    width: columns(4)
+                > div
+                    flex: 1
         a
             @extend %underline-on-hover
         .contacts
             margin-top: $spacing-3
+            h2, h3, h4, h5, h6
+                @include meta
             @include media-breakpoint-down(desktop)
                 > div 
                     + div,
@@ -28,23 +38,21 @@
             + .schedule-table
                 margin-top: $spacing-1
     .schedule-table
-        @include list-reset
+        ul
+            @include list-reset
         li
             display: flex
-            + li:not(.meta)
-                padding-bottom: $spacing-2
-            + li:not(.meta, .meta + li)
-                padding-top: $spacing-2
-            + li:not(:last-child)
+            padding-bottom: $spacing-2
+            padding-top: $spacing-2
+            &:not(:last-child)
                 border-bottom: 1px solid var(--color-border)
             @include media-breakpoint-down(desktop)
-                &:not(.meta)
-                    justify-content: end
-                    flex-wrap: wrap
-                    span
-                        min-width: 50%
-                        &:nth-child(n+2)
-                            text-align: right
+                justify-content: end
+                flex-wrap: wrap
+                span
+                    min-width: 50%
+                    &:nth-child(n+2)
+                        text-align: right
             @include media-breakpoint-up(desktop)
                 gap: var(--grid-gutter)
     time + time
@@ -88,12 +96,10 @@
         .socials-list
             @include grid(2)
             row-gap: space()
-        .meta
-            margin-bottom: space()
     @include in-page-without-sidebar
         .top
             margin-bottom: $spacing-4
-        .informations
+        .contact-content
             .contacts
                 @include grid(3)
         .schedule-table
@@ -113,6 +119,9 @@
                             text-align: left
 
     @include in-page-with-sidebar
+        .informations
+            p + p
+                margin-top: $spacing-2
         .contacts
             @include grid(2)
             row-gap: $spacing-3

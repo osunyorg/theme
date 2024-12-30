@@ -19,13 +19,10 @@
       </li>
     {{ end }}
   {{ end }}
+
   {{ if .Params.events_categories }}
     <li>
-      <span>{{ i18n "events.category" ( len .Params.events_categories ) }}</span>
-      {{ partial "commons/categories" ( dict
-        "context" .
-        "kind" "event"
-      )}}
+      {{ partial "taxonomies/single-list.html" . }}
     </li>
   {{ end }}
   {{ if site.Params.events.share_links.enabled | default site.Params.share_links.enabled }}
@@ -41,20 +38,24 @@
       <li class="events-actions">
         <span>{{ i18n "events.add_to_calendar.title" }}</span>
         {{- $types := slice "ical" "google" "office" "outlook" "yahoo" -}}
-        {{- range $type := $types -}}
-          {{ $label := i18n (printf "events.add_to_calendar.%s" $type) }}
-          {{ with index $links $type }} 
-            <a class="chip"
-              {{ if eq $type "ical" -}}
-                {{ printf `href="%s"` . | safeHTMLAttr }} download
-              {{ else }}
-                href="{{ . }}"
-                target="_blank"
-              {{ end }} >
-              {{- $label -}}
-            </a>
+        <ul>
+          {{- range $type := $types -}}
+            {{ $label := i18n (printf "events.add_to_calendar.%s" $type) }}
+            {{ with index $links $type }}
+              <li>
+                <a class="chip"
+                  {{ if eq $type "ical" -}}
+                    {{ printf `href="%s"` . | safeHTMLAttr }} download
+                  {{ else }}
+                    href="{{ . }}"
+                    target="_blank"
+                  {{ end }} >
+                  {{- $label -}}
+                </a>
+              </li>
+            {{- end }}
           {{- end }}
-        {{- end }}
+        </ul>
     </li>
     {{- end }}
   {{- end }}

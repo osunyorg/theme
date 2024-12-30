@@ -8,7 +8,7 @@
 
 <div class="highlight">
   {{ $highlight := index .posts 0 }}
-  {{ $highlight = site.GetPage (printf "/posts/%s" $highlight)}}
+  {{ $highlight = site.GetPage $highlight.path}}
   {{ $list := .posts }}
 
   {{ with $highlight }}
@@ -25,13 +25,22 @@
     {{ $first := true }}
     <div class="list">
       {{ range after 1 . }}
-        {{ with site.GetPage (printf "/posts/%s" .) }}
+        {{ with site.GetPage .path }}
           <article class="post">
             <div class="post-content">
               {{- $title := partial "PrepareHTML" .Title -}}
+              {{ if and $options.subtitle .Params.subtitle }}
+                <hgroup>
+              {{ end }}
               {{ $heading_tag.open }}
-                <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+                <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
               {{ $heading_tag.close }}
+              {{ if and $options.subtitle .Params.subtitle }}
+                <p class="post-subtitle">{{ partial "PrepareHTML" .Params.subtitle }}</p>
+              {{ end }}
+              {{ if and $options.subtitle .Params.subtitle }}
+                </hgroup>
+              {{ end }}
   
               {{ if $options.categories }}
                 {{ partial "commons/categories" ( dict
@@ -39,13 +48,13 @@
                   "kind" "post"
                 )}}
               {{ end }}
-  
-              {{ if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
-                  <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
-                    "text" .Params.summary
-                    "length" site.Params.posts.index.truncate_description
-                  )}}</p>
-              {{- end -}}
+
+              {{ if and $options.summary .Params.summary }}
+                {{ partial "GetRichSummary" ( dict 
+                  "summary" .Params.summary
+                  "kind" "posts"
+                )}}
+              {{ end }}
 
               {{ if and .Params.contents_reading_time $options.reading_time }}
                 <span class="post-reading-time">

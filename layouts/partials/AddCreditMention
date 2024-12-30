@@ -1,0 +1,13 @@
+{{ $credit := .credit }}
+{{ $first_paragraph := "" }}
+
+{{ $sr_only_text := printf "<span class='sr-only'>%s</span>" (i18n "commons.accessibility.credits") }}
+{{ $credit = replace $credit "<p>" (printf "<p>%s" $sr_only_text) 1 }}
+
+{{ if .before }}
+  {{ $credit = replace $credit "<p>" "<p><span aria-hidden='true'>©</span>" 1 }}
+{{ else if .after }}
+  {{ $credit = replace $credit "</p>" "<span aria-hidden='true'>©</span></p>" 1 }}
+{{ end }}
+
+{{ return ($credit | safeHTML) }}

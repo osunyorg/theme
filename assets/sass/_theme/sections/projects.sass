@@ -7,8 +7,11 @@
             flex: 1
         p
             line-height: $small-line-height
-        .project-title
+        .project-title,
+        .project-subtitle
             @include article-title
+        .project-subtitle
+            color: var(--color-text-alt)
     .media img
         width: 100%
 
@@ -40,8 +43,10 @@
                     justify-content: space-between
                     .project-description
                         max-width: columns(6)
-                    .project-title
+                    .project-title,
+                    .project-subtitle
                         @include h2
+                    .project-title
                         @include icon(arrow-right-line, after, true)
                             color: transparent
                         @include hover-translate-icon(after)
@@ -72,10 +77,13 @@
             @include meta
             display: flex
             gap: $spacing-3
-            ul
+            > ul
                 @include list-reset
                 display: flex
-                gap: $spacing-3
+                column-gap: $spacing-3
+                flex-wrap: wrap
+                li
+                    white-space: nowrap
         .dropdown-share
             button
                 margin-top: 0

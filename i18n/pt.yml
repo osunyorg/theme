@@ -56,6 +56,7 @@ categories:
   label: Categorias
   no_post: Nenhum artigo nesta categoria
   no_project: Nenhum projeto nesta categoria
+  no_person: Nenhuma pessoa nesta categoria
   see_more:
     one: Ver o artigo
     other: Ver os {{ .Count }} artigos
@@ -67,30 +68,29 @@ commons:
     search: Acessar a busca
     shortcut_navigation: Navegação de acesso rápido
     transcription: Transcrição
+    credits: "Direitos reservados: "
   search:
     title: Buscar
     close: Fechar a busca
   backtotop: Topo da página
   biography: Biografia
   breadcrumb: Caminho de navegação
-  carousel:
-    first: Ir para o primeiro slide
-    last: Ir para o último slide
-    next: Ir para o próximo item
-    pageX: Ir para a página %s
-    pause: Pausar o carrossel
-    play: Iniciar o carrossel
-    prev: Ir para o item anterior
-    slideX: Ir para o slide %s
   click_to_copy:
     aria_label: Clique para copiar {{ .description }}
     button_title: Clique para copiar
   close: Fechar
   contact:
     address: Endereço
-    email: Email
-    phone: Telefone
-    phone_professional: Telefone profissional
+    email: 
+      label: Email
+      a11y_label: "Enviar uma mensagem de correio eletrónico para {{ .email }}"
+    empty_name: de ce contact
+    phone: 
+      label: Telefone
+      a11y_label: Chamar {{ .phone_number }}
+    phone_professional: 
+      label: Telefone profissional
+      a11y_label: Ligar para o telefone comercial {{ .phone_number }}
     website: Site web
     web: Web
     schedule: Horários
@@ -100,17 +100,37 @@ commons:
         social_media: Ver a página {{ .name }} em {{ .media }}
         email: Contactar {{ .name }} por correio eletrónico
         rss: Consultar o feed RSS do sítio {{ .name }}
+        website: Visite o sítio Web de {{ .name }}
   credit: Um site eco-responsável produzido com <a href="https://www.osuny.org/" title="Osuny - link externo" target="_blank" rel="noreferrer">Osuny</a>
   date: Data
   download:
     singular_name: Baixar
     pdf: Baixar PDF
+  extentions:
+    PDF: Formato de Documento Portátil Adobe
   "false": Não
   in: Em
   language: Idioma
   lightbox:
-    link:
-      title: Abrir a imagem
+    button: Ver imagem ampliada
+    button_without_alt: Ver ampliada
+    close:
+      a11y_credit: Fechar créditos
+      a11y_information: Fechar informações
+      a11y_transcription: Fechar a transcrição
+      text: Fechar
+    controls:
+      close: Fechar a visualização
+      credit: Créditos da imagem
+      information: Informações da imagem
+      next: Ir para a próxima imagem
+      previous: Ir para a imagem anterior
+      transcription: Transcrição do vídeo
+    credit: Créditos
+    information: Informações
+    default_alt: Imagem
+    title: Visualizador de imagens
+    transcription: Transcrição
   link:
     blank: link externo
     blank_aria: “{{ .Title }}” - link externo
@@ -122,6 +142,7 @@ commons:
     secondary: Menu secundário
     social: Menu de redes sociais
     title: Menu
+    upper: Menu de acesso rápido
   more: Saiba mais
   more_aria: Saiba mais sobre “{{ .Title }}“
   pagination:
@@ -141,6 +162,14 @@ commons:
   read: Ler
   read_online: Ler online
   share: Compartilhar
+  slider:
+    default_title: Carrossel
+    goto: Ir para o slide
+    next: Ir para o próximo item
+    pagination_list: Paginação do carrossel
+    pause: Pausar o carrossel
+    play: Iniciar o carrossel
+    previous: Ir para o item anterior
   toc: Índice
   "true": Sim
   units:
@@ -152,8 +181,6 @@ commons:
     megabytes: Megabytes
     kilobytes: Kilobytes
     bytes: bytes
-  extentions:
-    PDF: Formato de Documento Portátil Adobe
 diplomas:
   type: Tipo de diploma
 errors:
@@ -239,6 +266,10 @@ persons:
     projects: Projetos mencionando
 posts:
   author: Autor/a
+  authors:
+    label: Autoras/es
+    a11y_title: Autores, autoras deste artigo
+    more: Mais informações
   category:
     one: Categoria
     other: Categorias

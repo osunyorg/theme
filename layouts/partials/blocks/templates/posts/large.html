@@ -10,19 +10,28 @@
 
 <div class="large {{- if not $image }} without-images{{ end }}">
   {{ range .posts }}
-    {{ with site.GetPage (printf "/posts/%s" .) }}
+    {{ with site.GetPage .path }}
 
       {{ if and .Params.image $options.image }}
         {{- $direction = partial "GetImageDirection" .Params.image -}}
       {{ end }}
 
-      <article class='post' itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
         <div class="post-content">
           {{- $title := partial "PrepareHTML" .Title -}}
 
+          {{ if and $options.subtitle .Params.subtitle }}
+            <hgroup>
+          {{ end }}
           {{ $heading_tag.open }}
-            <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+            <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
           {{ $heading_tag.close }}
+          {{ if and $options.subtitle .Params.subtitle }}
+            <p class="post-subtitle">{{ partial "PrepareHTML" .Params.subtitle }}</p>
+          {{ end }}
+          {{ if and $options.subtitle .Params.subtitle }}
+            </hgroup>
+          {{ end }}
           
           <div class="post-meta">
             {{ if $options.author }}
@@ -41,13 +50,13 @@
             {{ end }}
           </div>
 
-          {{ if $options.summary }}
-            {{- if (partial "GetTextFromHTML" .Params.summary) -}}
-              <p itemprop="articleBody">{{ partial "GetTruncateContent" ( dict 
-                "text" .Params.summary
-                "length" site.Params.posts.index.truncate_description
-                ) }}</p>
-            {{- end -}}
+          {{ if and $options.summary  .Params.summary }}
+            <div itemprop="abstract">
+              {{ partial "GetRichSummary" ( dict 
+                "summary" .Params.summary
+                "kind" "posts"
+              )}}
+            </div>
           {{- end -}}
 
           {{ if and .Params.contents_reading_time $options.reading_time }}

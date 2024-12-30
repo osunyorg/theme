@@ -6,15 +6,14 @@
 )}}
 <div class="grid">
   {{ range .pages }}
-    {{- $file := false -}}
-    {{/*  Check if . is a map or page url, necessary when pages/grid is called outside block context */}}
+    {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
+    {{- $path := false -}}
     {{ if reflect.IsMap . }}
-      {{ $file = .file }}
+      {{ $path = .path }}
     {{ else }}
-      {{ $file = . }}
+      {{ $path = . }}
     {{ end }}
-
-    {{ $page := site.GetPage $file }}
+    {{ $page := site.GetPage $path }}
 
     {{ with $page }}
       <article>
@@ -23,12 +22,11 @@
             {{- partial "PrepareHTML" .Title -}}
           </a>
         {{ $heading_tag.close }}
-
         {{ if and $options.summary .Params.summary }}
-          <p>{{ partial "GetTruncateContent" ( dict 
-              "text" .Params.summary
-              "length" site.Params.pages.index.truncate_description
-            ) }}</p>
+          {{ partial "GetRichSummary" ( dict 
+            "summary" .Params.summary
+            "kind" "pages"
+          )}}
         {{ end }}
         {{ if $options.image }}
           {{- partial "pages/page-media.html" . -}}

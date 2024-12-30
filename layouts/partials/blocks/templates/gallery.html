@@ -1,27 +1,31 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
 {{- with .block.data -}}
-  {{- $layout := .layout | default "grid" }}
+  {{- $sizes := index site.Params.image_sizes.blocks.gallery .layout -}}
+  {{- $has_text := false -}}
+  {{- range .images }}
+    {{- if .text }}
+      {{- $has_text = true -}}
+    {{ end -}}
+  {{ end -}}
+
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "description" .description
-        )}}
-
-        {{- if and (eq $layout "carousel") (gt (len .images) 1) -}}
-            {{ partial "blocks/templates/carousel.html" (dict 
-            "content" .images
-            "options" site.Params.blocks.gallery.carousel
-            "partial" "blocks/templates/gallery/carousel-image.html"
-            )}}
-
-        {{ else }}
-          {{ partial "blocks/templates/gallery/images.html" . }}
-        {{- end -}}
-
+        {{ partial "blocks/top.html" $block.top }}
+        <div class="gallery{{- if $has_text }} gallery--with-text {{ end -}}"
+          {{ if eq .layout "carousel" }}
+            data-slider="{{ site.Params.blocks.gallery.slider | encoding.Jsonify }}"
+          {{ end -}}
+          >
+          {{- range .images }}
+            {{ partial "commons/image-figure.html" (dict
+                "image"    .
+                "sizes"    $sizes
+                "gallery" true
+              )}}
+          {{ end -}}
+        </div>
       </div>
     </div>
   </div>

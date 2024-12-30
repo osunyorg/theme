@@ -1,6 +1,5 @@
 {{ define "main" }}
   {{ partial "categories/hero-term.html" . }}
-
   <div class="document-content">
     {{ partial "toc/container.html" (dict
       "toc" "toc/default.html"
@@ -11,12 +10,15 @@
       "context" .
       "block_wrapped" true
     ) }}
-
     {{ partial "contents/list.html" . }}
 
     <div class="container">
-      {{ partial "projects/projects.html" . }}
-      {{ partial "commons/pagination.html" . }}
+      {{ if .Params.is_taxonomy }}
+        {{ partial "taxonomies/categories" . }}
+      {{ else }}
+        {{ partial "projects/projects.html" . }}
+        {{ partial "commons/pagination.html" . }}
+      {{ end }}
     </div>
   </div>
 {{ end }}

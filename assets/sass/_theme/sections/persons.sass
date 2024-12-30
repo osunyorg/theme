@@ -1,4 +1,31 @@
 .person
+    .contacts-details
+        margin-top: $spacing-2
+        li > span
+            padding-right: $spacing-2
+            flex-shrink: 0
+        a, address
+            @include small
+            position: relative
+            text-align: right
+            z-index: 2
+        li
+            align-items: baseline
+            display: flex
+            justify-content: space-between
+            + li
+                margin-top: $spacing-1
+        ul + ul
+            margin-top: $spacing-1
+    @include media-breakpoint-down(md)
+        .contacts-details
+            margin-top: $spacing-3
+            span
+                flex-shrink: 0
+            a, address
+                text-align: right
+
+article.person
     @include article
     word-break: break-word
     gap: $spacing-3
@@ -16,6 +43,7 @@
             margin-top: $spacing-1
     .description
         @include small
+        flex-grow: 1
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing-3
@@ -24,25 +52,41 @@
             flex-shrink: 0
             margin-bottom: 0
             width: 100px
-
     @include media-breakpoint-down(md)
         justify-content: space-between
+        .description
+            flex: 1
         .avatar
             order: 1
             margin-right: 0
             width: 68px
-
     @include in-page-without-sidebar
-        text-align: center
         .avatar
             width: 100%
 
-section.persons,
-div.persons
+.persons--grid
     @include grid(1)
     @include grid(2, md)
     @include grid(4, lg)
     @include grid(6, xxl)
+
+.persons__section,
+.persons_categories__term,
+.administrators__taxonomy,
+.authors__taxonomy,
+.researchers__taxonomy,
+.teachers__taxonomy,
+    .page-with-blocks
+        .persons
+            margin-bottom: $spacing-5
+    .persons--grid
+        @include media-breakpoint-up(md)
+            .avatar
+                margin-left: auto
+                margin-right: auto
+            .person-name,
+            .person-role
+                text-align: center
 
 ol.persons--list
     @include list-reset
@@ -56,7 +100,6 @@ ol.persons--list
             margin-left: auto
         &:hover
             color: var(--color-accent)
-            justify-self: end
         a
             @include stretched-link
             text-decoration: none
@@ -98,29 +141,15 @@ ol.persons--list
     img
         object-fit: cover
 
-/* TODO revoir ce nom */
-.taxonomies-persons
-    @include list-reset
-    li
-        @include media-breakpoint-down(desktop)
-            margin-bottom: $spacing-3
-            a
-                display: block
-        @include media-breakpoint-up(desktop)
-            display: inline-block
-            margin-right: $spacing-4
-    a
-        @extend %underline-on-hover
-        @include meta
-        @include icon(arrow-right-line, after)
-            display: inline-block
-            margin-left: $spacing-3
-    
 .persons__section
     * + .persons
         margin-top: $spacing-4
     .persons:last-child
         padding-bottom: $spacing-5
+    .taxonomies-persons
+        @extend .taxonomies-section
+    .persons-categories + .taxonomies-persons
+        margin-top: $spacing-3
 
 .persons__page
     .hero
@@ -154,6 +183,20 @@ ol.persons--list
                     figure
                         margin-bottom: 0
                         width: columns(3)
+        .taxonomies-single
+            margin-top: $spacing-4
+            display: block
+            a
+                @include small
+            > li
+                display: flex
+                justify-content: space-between
+                align-items: baseline
+                ul
+                    text-align: right
+                    display: flex
+                    flex-wrap: wrap
+                    gap: $spacing-1
     .roles
         a
             @include small
@@ -216,6 +259,9 @@ ol.persons--list
         .roles
             margin-top: $spacing-4
     @include media-breakpoint-up(lg)
+        .hero
+            .taxonomies-single
+                width: columns(3)
         .informations
             @include grid
             margin-bottom: $spacing-4
@@ -229,7 +275,7 @@ ol.persons--list
             .lead + div
                 margin-top: $spacing-4
     .contacts-details ul
-        @include grid(2, md, 0)
+        @include grid(3, md, 0)
         li
             margin-top: 0
             margin-bottom: $spacing-3

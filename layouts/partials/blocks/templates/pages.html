@@ -1,38 +1,30 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
-{{- $title := .block.title -}}
 {{- $layout := .block.data.layout | default "grid" -}}
 
 {{- with .block.data -}}
   {{- $options := .options -}}
   {{- $main_summary := "" -}}
-  {{- $page_link := false -}}
 
   {{- $page_class := "" -}}
   {{ $page := "" }}
   {{ with .page }}
-    {{ $page = site.GetPage .file }}
+    {{ $page = site.GetPage .path }}
   {{ end }}
 
   {{- with $page }}
-    {{- $page_link = $page.Permalink }}
-    {{ if eq $title "" }}
-      {{ $title = .Title }}
-    {{ end }}
     {{ if .Params.bodyclass }}
       {{- $page_class = printf "block-%s" .Params.bodyclass }}
     {{ end }}
     {{ if $options.main_summary }}
-      {{- $main_summary = partial "GetTruncateContent" ( dict 
-          "text" .Params.summary
-          "length" site.Params.pages.index.truncate_description
-          ) -}}
+        {{ $main_summary = partial  "GetRichSummary" ( dict 
+          "summary" .Params.summary
+          "kind" "pages"
+        )}}
     {{ end }}
   {{ end -}}
 
   {{ if $main_summary }}
-    {{/*  SHOULD BE FIXED WITH ORTHOTYPO  */}}
-    {{ $main_summary = printf "<p>%s</p>" $main_summary }}
     {{ $block_class = printf "%s %s" $block_class "with-description" }}
   {{ end }}
   {{ if $options.image }}
@@ -42,17 +34,12 @@
   <div class="{{ $block_class }} {{ $page_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $title
-          "link" $page_link
-          "heading_level" $block.ranks.self
-          "description" $main_summary
-        ) }}
+        {{ partial "blocks/top.html" $block.top }}
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
-          "pages" .pages
-          "heading_level" $block.ranks.children
-          "options" $options
+            "pages" .pages
+            "heading_level" $block.ranks.children
+            "options" $options
           ) }}
       </div>
     </div>

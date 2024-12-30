@@ -22,7 +22,7 @@
   {{ $title_with_size := printf "%s (%s)" $a11y_title $extension_with_size }}
   {{ $url := $file.url }}
   {{ if site.Params.keycdn }}
-    {{ $url = $file.direct_url }}
+    {{ $url = $file.download_url }}
   {{ end }}
   <a href="{{ $url }}" download="{{ partial "PrepareHTML" $file.name }}" target="_blank" title="{{ i18n "commons.link.download" (dict "Title" $title_with_size) }}">
     {{ $title }}

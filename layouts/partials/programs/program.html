@@ -6,11 +6,11 @@
   ) }}
 {{ $options := .options }}
 
-<li class="program">
+<li class="program" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
   <div class="program-content">
     {{ $title := partial "PrepareHTML" $program.Title }}
     {{ $heading_tag.open }}
-      <a href="{{ $program.Permalink }}" itemtype="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+      <a href="{{ $program.Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
         {{ $title }}
       </a>
     {{ $heading_tag.close }}
@@ -23,11 +23,14 @@
       {{- end -}}
     {{ end }}
 
-    {{ if $options.summary }}
-      {{ with $program.Params.summary | safeHTML }}
-        <p class="program-summary" itemprop="abstract">{{ . }}</p>
-      {{ end }}
-    {{ end }}
+    {{ if and $options.summary $program.Params.summary }}
+      <div itemprop="abstract">
+        {{ partial "GetRichSummary" ( dict 
+          "summary" $program.Params.summary
+          "kind" "programs"
+        )}}
+      </div>
+  {{ end }}
 
     {{ if $options.button }}
       <p class="btn">{{ i18n "commons.more" }}</p>

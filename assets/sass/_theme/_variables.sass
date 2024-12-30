@@ -115,7 +115,9 @@
   // ---------------//
   --btn-font-family: #{$btn-font-family}
   --btn-font-size: #{$btn-font-size}
+  --btn-font-style: #{$btn-font-style}
   --btn-font-weight: #{$btn-font-weight}
+  --btn-line-height: #{$btn-line-height}
   --btn-text-transform: #{$btn-text-transform}
   --btn-color: #{$btn-color}
   --btn-hover-color: #{$btn-hover-color}
@@ -160,6 +162,16 @@
   @include media-breakpoint-up(xxl)
     --grid-gutter: #{$grid-gutter-xxl}
     --grid-gutter-negative: #{-$grid-gutter-xxl}
+
+  // -------------- //
+  //    SPAGINGS    //
+  // ---------------//
+
+  --block-space-y: #{$block-space-y}
+  @include in-page-without-sidebar
+    --block-space-y: #{$block-space-y-desktop}
+  @include in-page-with-sidebar
+    --block-space-y: #{$block-space-y-with-sidebar}
 
   // -------------- //
   //     HEADING    //

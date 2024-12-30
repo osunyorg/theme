@@ -32,13 +32,10 @@
     <div class="content">
       <div class="hero-text">
         {{ if or $subtitle $description }}
-          <hgroup>
+          <hgroup {{ if $subtitle_is_summary -}} class="has-lead" {{- end }}>
             <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .title }}</h1>
-            {{ if $subtitle }}
-              <p {{ if $subtitle_is_summary }} class="lead" {{ end }}>{{ partial "PrepareHTML" $subtitle }}</p>
-            {{ end }}
-            {{ if $description }}
-              <p>{{ partial "PrepareHTML" .description }}</p>
+            {{ with $subtitle }}
+              {{ safeHTML . }}
             {{ end }}
           </hgroup>
         {{ else }}
@@ -71,6 +68,10 @@
           "lazy"      false
           )
         }}
+      {{ end }}
+
+      {{ if .hero_after_image_complement }}
+        {{ partial .hero_after_image_complement .context }}
       {{ end }}
     </div>
   </div>

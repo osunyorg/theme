@@ -1,5 +1,5 @@
 {{ if . }}
-  <figure role="figure" class="featured-image">
+  <figure {{ with .credit }} role="figure" aria-label="{{ . | plainify }}"{{ end }} class="featured-image">
     {{ partial "commons/image.html"
           (dict
             "image"    .
@@ -7,8 +7,8 @@
             "itemprop" true
             "crop"     true
           )}}
-    {{ if partial "GetTextFromHTML" .credit }}
-      <figcaption>{{ partial "PrepareHTML" .credit }}</figcaption>
+    {{ with partial "GetTextFromHTML" .credit }}
+      <figcaption class="credit">{{ . }}</figcaption>
     {{ end }}
   </figure>
 {{ end }}

@@ -1,9 +1,9 @@
-<nav class="nav-accessibility">
-  <ul aria-label="{{ i18n "commons.accessibility.shortcut_navigation"}}">
+<nav aria-label="{{ i18n "commons.accessibility.shortcut_navigation"}}" class="nav-accessibility" id="nav-accessibility">
+  <ul>
     <li><a href="#main">{{ i18n "commons.accessibility.main_content" }}</a></li>
-    <li><a href="#navigation">{{ i18n "commons.accessibility.menu" }}</a></li>
+    <li class="nav-accessibility__menu"><a href="#navigation">{{ i18n "commons.accessibility.menu" }}</a></li>
     {{ if site.Params.search.active }}
-      <li><a href="#search-button">{{ i18n "commons.accessibility.search" }}</a></li>
+      <li class="nav-accessibility__search"><a href="#search-button">{{ i18n "commons.accessibility.search" }}</a></li>
     {{ end }}
   </ul>
 </nav>

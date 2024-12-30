@@ -12,30 +12,29 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-        )}}
+        {{ partial "blocks/top.html" $block.top }}
 
         {{ if eq $block.data.layout "grid" }}
           <div class="programs-grid">
             {{ range .programs }}
-              {{ $program := site.GetPage (printf "/programs%s" .path) }}
+              {{ $program := site.GetPage .path }}
               {{ $title := $program.Title | safeHTML }}
               <article class="program" itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
                 <div class="program-content">
                   {{ $heading_tag.open }}
-                    <a href="{{ $program.Permalink }}" itemtype="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+                    <a class="title" href="{{ $program.Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
                       {{ $title }}
                     </a>
                   {{ $heading_tag.close }}
 
-                  {{ if $options.summary }}
-                    {{ with $program.Params.summary | safeHTML}}
-                      <p itemprop="abstract">{{ . }}</p>
-                    {{ end }}
+                  {{ if and $options.summary $program.Params.summary }}
+                    <div itemprop="abstract">
+                      {{ partial "GetRichSummary" ( dict 
+                        "summary" $program.Params.summary
+                        "kind" "programs"
+                      )}}
+                    </div>
                   {{ end }}
-
                   <p class="more meta" aria-hidden="true">{{ i18n "commons.more" }}</p>
 
                   {{ $diploma := $program.Params.diplomas }}
@@ -49,23 +48,20 @@
 
                 {{ if and $program.Params.image $options.image }}
                   <div class="media">
-                    {{ partial "commons/image.html"
-                        (dict
-                          "image"    $program.Params.image
-                          "sizes"    site.Params.image_sizes.blocks.programs
-                        ) }}
+                    {{ partial "commons/image.html" (dict
+                        "image"    $program.Params.image
+                        "sizes"    site.Params.image_sizes.blocks.programs
+                      )}}
                   </div>
                 {{ end }}
-
               </article>
             {{ end }}
           </div>
 
         {{ else }}
-
           <ol class="programs">
             {{ range .programs }}
-            {{ $program := site.GetPage (printf "/programs%s" .path) }}
+            {{ $program := site.GetPage .path }}
               {{ partial "programs/program.html" (dict 
                   "program" $program
                   "heading" $heading

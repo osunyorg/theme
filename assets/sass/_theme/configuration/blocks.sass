@@ -20,13 +20,14 @@ $block-space-y-desktop: $spacing-5 !default
 $block-space-y-with-sidebar: $spacing-5 !default
 
 // Block call to action
-$block-call-to-action-color: $color-text !default
+$block-call-to-action-color: var(--color-text) !default
 $block-call-to-action-button-background: var(--color-text) !default
 $block-call-to-action-button-border: pxToRem(1) solid $block-call-to-action-button-background !default
 $block-call-to-action-button-color: var(--color-background) !default
 $block-call-to-action-button-hover-background: var(--color-text-alt) !default
 $block-call-to-action-button-hover-border: pxToRem(1) solid $block-call-to-action-button-hover-background !default
 $block-call-to-action-button-hover-color: var(--color-background) !default
+$block-call-to-action-all-actions-as-buttons: false !default
 
 $block-call-to-action-accent-background: var(--color-accent) !default
 $block-call-to-action-accent-color: var(--color-background) !default
@@ -62,6 +63,9 @@ $block-posts-grid-columns: 3 !default
 
 // Block programs
 $block-programs-aspect-ratio: 16/9 !default
+
+// Block title
+$block-title-border-bottom: 1px solid var(--color-border)
 
 // Block timeline
 $block-timeline-horizontal-background: var(--color-background-alt) !default
@@ -107,8 +111,9 @@ $block-key_figures-number-font-size-xxl: pxToRem(80) !default
 
 // Block gallery
 $block-gallery-carousel-background: var(--color-background-alt) !default
-$block-gallery-carousel-max-height: 40vh !default
-$block-gallery-carousel-max-height-desktop: 60vh !default
+$block-gallery-carousel-height: 350px !default
+$block-gallery-carousel-height-desktop: calc(60 * var(--rvh)) !default
+
 // Block image
 $block-image-max-height-with-sidebar: calc(100vh - var(--header-height)) !default
 $block-image-max-height-without-sidebar: none !default

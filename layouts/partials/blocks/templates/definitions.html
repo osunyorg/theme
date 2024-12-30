@@ -7,17 +7,14 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "description" .description
-        )}}
+        {{ partial "blocks/top.html" $block.top }}
+
         <div class="definitions">
           {{- range $index, $element := .elements }}
             {{ $id := printf "block-%d-element-%d" $block_index $index }}
-            <details id="{{$id}}" itemscope itemtype="https://schema.org/DefinedTerm">
-              <summary itemprop="name" aria-controls="#{{ $id }}" aria-expanded="false">{{ $element.title | safeHTML }}</summary>
-              <p itemprop="description">{{ $element.description | safeHTML }}</p>
+            <details id="{{ $id }}" itemscope itemtype="https://schema.org/DefinedTerm">
+              <summary itemprop="name" aria-controls="{{ $id }}" aria-expanded="false">{{ $element.title | safeHTML }}</summary>
+              <div itemprop="description">{{ partial "PrepareHTML" $element.description }}</div>
             </details>
           {{ end -}}
         </div>

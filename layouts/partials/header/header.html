@@ -1,7 +1,24 @@
 {{ $primary := partial "GetMenu" "primary" }}
+{{ $upper_menu := partial "GetMenu" "upper-menu" }}
 
-<header id="document-header" role="banner">
-  <nav aria-label="{{ i18n "commons.menu.main" }}">
+<header id="document-header" role="banner"
+  {{ if $upper_menu.items }}
+    class="has-upper-menu"
+  {{ end }}>
+  {{ if $upper_menu.items }}
+    <nav class="upper-menu" aria-label="{{ i18n "commons.menu.upper" }}">
+      <div class="container">
+        {{ partial "commons/menu.html" (dict
+            "context" .
+            "ignore_externals" true
+            "kind" "upper-menu"
+            "level" 1
+            "stop" 1
+          )}}
+      </div>
+    </nav>
+  {{ end }}
+  <nav class="primary-menu" aria-label="{{ i18n "commons.menu.main" }}">
     <div class="container">
       {{ partial "header/logo.html" }}
       {{ if $primary.items }}
@@ -12,8 +29,9 @@
                 "kind" "primary"
                 "dropdown" true
                 "level" 1
+                "i18n" site.Params.menu.i18n.display
                 "context" .
-              ) }}
+            )}}
         </div>
       {{ end }}
     </div>

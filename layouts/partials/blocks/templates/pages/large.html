@@ -6,7 +6,7 @@
 )}}
 <div class="large">
   {{ range .pages }}
-    {{ $page := site.GetPage .file }}
+    {{ $page := site.GetPage .path }}
     {{ with $page }}
       <article class="page">
         <div class="page-content">
@@ -15,12 +15,11 @@
               {{- partial "PrepareHTML" .Title -}}
             </a>
           {{ $heading_tag.close }}
-  
           {{ if and $options.summary .Params.summary }}
-            <p>{{ partial "GetTruncateContent" ( dict 
-              "text" .Params.summary
-              "length" site.Params.pages.index.truncate_description
-              ) }}</p>
+            {{ partial "GetRichSummary" ( dict 
+              "summary" .Params.summary
+              "kind" "pages"
+            )}}
           {{ end }}
           <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
         </div>

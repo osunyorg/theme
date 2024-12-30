@@ -1,11 +1,15 @@
 {{ $locations := .locations }}
-{{ $popup_opened := .popup_opened | default false }}
+{{ $title := .title }}
+{{ $aria_label := i18n "commons.maps.label" $title }}
 
 <div class="locations-map">
-  <div class="map" data-open-popup="{{ $popup_opened }}" data-marker-icon="{{ "/assets/images/map-marker.svg" }}">
+  <div class="map" data-map data-marker-icon="{{ "/assets/images/map-marker.svg" }}" 
+        role="region"
+        aria-label="{{ $aria_label }}">
     {{ range $locations }}
-      {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}
-        <article class="location" data-longitude="{{ .Params.contact_details.geolocation.longitude }}" data-latitude="{{ .Params.contact_details.geolocation.latitude }}">
+      {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
+      {{ if and $address_geolocation.longitude $address_geolocation.latitude }}
+        <article class="location" data-title="{{ .Params.title }}" data-longitude="{{ $address_geolocation.longitude }}" data-latitude="{{ $address_geolocation.latitude }}">
           {{ $title := "" }}
           {{ if .Params.title }}
             <div class="location-content">
@@ -20,12 +24,8 @@
                   </a>
                 {{ end -}}
               </p>
-              {{ with .Params.contact_details }}
-                <span>{{ .address.value }}</span>
-                <span>
-                  {{ .zipcode.value }}
-                  {{ .city.value }}
-                </span>
+              {{ with .Params.contact_details.postal_address }}
+                {{ partial "commons/address" . }}
               {{ end }}
             </div>
           {{ end -}}
