@@ -1,21 +1,76 @@
-{{ if .Pages }}
-<section class="related-posts" id="{{ urlize (i18n "programs.toc.related") }}">
-  <div class="container">
-    <div class="content">
-      <h2 id="page-posts">{{ i18n "posts.title" }}</h2>
-      <a href="{{ .Permalink }}" class="category-link">
-        {{ $category_name := safeHTML .Title | truncate 30 }}
-        {{ i18n "posts.see_all_in_program" (dict "Title" $category_name) }}
-      </a>
+{{ with .Params.related_categories }}
+  {{- $postCategory := site.GetPage (printf "/posts_categories/%s" .posts ) -}}
+  {{ with $postCategory }}
+    {{ if .Pages }}
+      <section class="related-posts" id="{{ urlize (i18n "programs.toc.related.posts") }}">
+        <div class="container">
+          <div class="content">
+            <h2 id="page-posts">{{ i18n "posts.title" }}</h2>
+            <a href="{{ .Permalink }}" class="category-link">
+              {{ $category_name := safeHTML .Title | truncate 30 }}
+              {{ i18n "posts.see_all_in_program" (dict "Title" $category_name) }}
+            </a>
 
-      {{/*  Related posts  */}}
-      {{ $posts := first site.Params.programs.related_posts.quantity .Pages }}
-      {{ if gt (len $posts) 0 }}
-        <div class="blocks">
-          {{ partial "posts/block-posts-layout.html" (dict "posts" $posts ) }}
+            {{/*  Related posts  */}}
+            {{ $posts := first site.Params.programs.related_posts.quantity .Pages }}
+            {{ if gt (len $posts) 0 }}
+              <div class="blocks">
+                {{ partial "posts/block-posts-layout.html" (dict "posts" $posts ) }}
+              </div>
+            {{ end }}
+          </div>
         </div>
-      {{ end }}
-    </div>
-  </div>
-</section>
+      </section>
+    {{ end }}
+  {{ end }}
+
+  {{- $eventCategory := site.GetPage (printf "/events_categories/%s" .events ) -}}
+  {{ with $eventCategory }}
+    {{ if .Pages }}
+      <section class="related-events" id="{{ urlize (i18n "programs.toc.related.events") }}">
+        <div class="container">
+          <div class="content">
+            <h2 id="page-events">{{ i18n "events.title" }}</h2>
+            <a href="{{ .Permalink }}" class="category-link">
+              {{ $category_name := safeHTML .Title | truncate 30 }}
+              {{ i18n "events.see_all_in_program" (dict "Title" $category_name) }}
+            </a>
+
+            {{/*  Related events  */}}
+            {{ $events := first site.Params.programs.related_events.quantity .Pages }}
+            {{ if gt (len $events) 0 }}
+              <div class="blocks">
+                {{ partial "events/block-events-layout.html" (dict "events" $events ) }}
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      </section>
+    {{ end }}
+  {{ end }}
+
+  {{- $projectCategory := site.GetPage (printf "/projects_categories/%s" .projects ) -}}
+  {{ with $projectCategory }}
+    {{ if .Pages }}
+      <section class="related-projects" id="{{ urlize (i18n "programs.toc.related.projects") }}">
+        <div class="container">
+          <div class="content">
+            <h2 id="page-projects">{{ i18n "projects.title" }}</h2>
+            <a href="{{ .Permalink }}" class="category-link">
+              {{ $category_name := safeHTML .Title | truncate 30 }}
+              {{ i18n "projects.see_all_in_program" (dict "Title" $category_name) }}
+            </a>
+
+            {{/*  Related projects  */}}
+            {{ $projects := first site.Params.programs.related_projects.quantity .Pages }}
+            {{ if gt (len $projects) 0 }}
+              <div class="blocks">
+                {{ partial "projects/block-projects-layout.html" (dict "projects" $projects ) }}
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      </section>
+    {{ end }}
+  {{ end }}
 {{ end }}
