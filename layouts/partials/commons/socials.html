@@ -20,7 +20,7 @@
 {{ end }}
 {{ range $key, $value := $context.social_networks }}
   <li class="{{ $key }}">
-    {{ $label := $key | title }}
+    {{ $label := i18n (printf "commons.contact.socials.social_networks.%s" $key) }}
     {{ if $with_labels }}
       <span>{{ $label }}</span>
     {{ end }}
