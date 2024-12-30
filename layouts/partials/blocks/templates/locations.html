@@ -13,7 +13,7 @@
         {{ $locations := slice }}
         {{ $location := "" }}
         {{ range .locations }}
-          {{ $location = site.GetPage ( printf "/locations/%s" .slug ) }}
+          {{ $location = site.GetPage .path }}
           {{ $locations = $locations | append $location }}
         {{ end }}
 

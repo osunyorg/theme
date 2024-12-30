@@ -11,7 +11,7 @@
     </summary>
     <ul>
       {{ range .organizations }}
-        {{ with site.GetPage ( printf "/organizations/%s" .slug ) }}
+        {{ with site.GetPage .path }}
           {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
           {{ if $address_geolocation }}
             <li>
@@ -45,7 +45,7 @@
     >
   {{- range .organizations }}
     {{ if .slug }}
-      {{ with site.GetPage ( printf "/organizations/%s" .slug ) }}
+      {{ with site.GetPage .path }}
         {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
         {{ if $address_geolocation }}
           {{ template "organization" dict
