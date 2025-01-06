@@ -35,7 +35,7 @@
       {{- if not $is_block_persons_present -}}
         {{ partial "taxonomies/section-list.html" . }}
         {{ partial "persons/persons-taxonomies.html" . }}
-        {{ partial "persons/list.html" .Pages }}
+        {{ partial "persons/list.html" .Paginator.Pages }}
         {{ partial "commons/pagination.html" . }}
       {{- end -}}
     </div>
