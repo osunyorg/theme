@@ -66,10 +66,11 @@
     </div>
     <div class="media">
       {{- if and $options.image .Params.image -}}
+        {{ $sizes := index site.Params.image_sizes.blocks.events $layout }}
         {{- partial "commons/image.html"
             (dict
               "image"    .Params.image
-              "sizes"    site.Params.image_sizes.sections.events.item
+              "sizes"    $sizes
             ) -}}
       {{- else -}}
         {{- partial "commons/image-default.html" "events" -}}

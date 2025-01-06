@@ -1,13 +1,12 @@
 {{ $project := .project }}
 {{ $heading := .heading | default "h2" }}
-{{- $direction := "" -}}
-{{ $index := .index}}
+{{ $direction := "" }}
+{{ $layout := .layout | default "grid" }}
 {{ $heading_tag := (dict 
     "open" ((printf "<%s class='project-title' itemprop='name'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
 
-{{ $alternate := .alternate | default false }}
 {{ $options := .options | default site.Params.projects.index.options }}
 
 {{ with $project }}
@@ -16,7 +15,7 @@
     {{- $direction = partial "GetImageDirection" .Params.image -}}
   {{ end }}
 
-  <article class="project {{ if $alternate }}{{ $direction }} {{if not (modBool $index 2)}}left{{ else}}right{{end}}{{end}}" itemscope itemtype="https://schema.org/CreativeWork">
+  <article class="project {{ $direction }}" itemscope itemtype="https://schema.org/CreativeWork">
 
     <div class="project-content">
       <div class="project-description">
@@ -59,10 +58,11 @@
 
     <div class="media">
       {{- if .Params.image -}}
+        {{ $sizes := index site.Params.image_sizes.blocks.projects $layout }}
         {{- partial "commons/image.html"
             (dict
               "image"    .Params.image
-              "sizes"    site.Params.image_sizes.sections.projects.item
+              "sizes"    $sizes
             ) -}}
       {{- else -}}
         {{- partial "commons/image-default.html" "projects" -}}
