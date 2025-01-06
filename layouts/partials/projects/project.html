@@ -1,8 +1,7 @@
 {{ $project := .project }}
 {{ $heading := .heading | default "h2" }}
-{{- $direction := "" -}}
+{{ $direction := "" }}
 {{ $layout := .layout | default "grid" }}
-{{ $index := .index}}
 {{ $heading_tag := (dict 
     "open" ((printf "<%s class='project-title' itemprop='name'>" $heading) | safeHTML)
     "close" ((printf "</%s>" $heading) | safeHTML)
@@ -16,7 +15,7 @@
     {{- $direction = partial "GetImageDirection" .Params.image -}}
   {{ end }}
 
-  <article class="project {{ if eq $layout "alternate" }}{{ $direction }} {{if not (modBool $index 2)}}left{{ else}}right{{end}}{{end}}" itemscope itemtype="https://schema.org/CreativeWork">
+  <article class="project {{ $direction }}" itemscope itemtype="https://schema.org/CreativeWork">
 
     <div class="project-content">
       <div class="project-description">
