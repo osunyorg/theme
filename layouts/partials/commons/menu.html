@@ -103,7 +103,11 @@
       {{ partial "commons/search/button.html" $kind }}
     </li>
   {{ end }}
-  {{ if .i18n }}
-    {{ partial "header/i18n.html" .context }}
+  {{ if (index site.Params.menu $kind).i18n }}
+    {{ if eq $kind "legal" }}
+      {{ partial "footer/i18n.html" . }}
+    {{ else }}
+      {{ partial "header/i18n.html" .context }}
+    {{ end }}
   {{ end }}
 </ul>
