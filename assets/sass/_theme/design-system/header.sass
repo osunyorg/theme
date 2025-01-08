@@ -113,8 +113,6 @@ header#document-header
                 background: $header-upper-menu-sticky-background
                 display: block
         .nav-level-1
-            a
-                text-decoration: none
             > li
                 line-height: 1
                 border: none
@@ -139,7 +137,12 @@ header#document-header
                     > span,
                     > button
                         padding: $header-upper-menu-padding-y 0
+                &:not(.header-i18n)
+                    a
+                        text-decoration: none
                 &.header-i18n
+                    span[role="button"]
+                        cursor: pointer
                     .dropdown-menu
                         background: $header-upper-menu-background
                         @include media-breakpoint-up(desktop)
