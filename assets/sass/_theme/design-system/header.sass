@@ -50,6 +50,26 @@ header#document-header
             @include media-breakpoint-up(desktop)
                 height: $header-logo-height-desktop
 
+    // i18n
+    .header-i18n
+        position: relative
+        [role="button"]
+            @include icon(global-line, after)
+                margin-left: pxToRem(5)
+            text-transform: uppercase
+            &[aria-expanded][aria-expanded="true"]
+                &::after
+                    transform: none
+        .dropdown-menu
+            @include media-breakpoint-up(desktop)
+                margin-top: $header-nav-padding-y
+                padding: $spacing-2 $spacing-3
+                position: absolute
+                right: 0
+            li a
+                padding: $spacing-1 0
+                display: flex
+
     // Top menu
     .upper-menu
         background: $header-upper-menu-background
@@ -102,20 +122,37 @@ header#document-header
                 align-items: center
                 @include media-breakpoint-down(desktop)
                     height: 100%
-                > a,
-                > span
-                    display: block
-                    white-space: nowrap
-                    line-height: 1
-                > *
-                    @include media-breakpoint-up(desktop)
-                        padding: $header-upper-menu-padding-y 0
+                &:not(.header-i18n)
+                    > a,
+                    > span
+                        display: block
+                        white-space: nowrap
+                        line-height: 1
                 // apply active style to active page (default) or active site
                 $upper-menu-active-selector: '.active'
                 @if $header-upper-menu-active-style-for-sites
                     $upper-menu-active-selector: ':not([href*="https://"], [href*="http://"])'
                 a#{$upper-menu-active-selector}
                     box-shadow: $header-upper-menu-active-box-shadow
+                @include media-breakpoint-up(desktop)
+                    > a,
+                    > span,
+                    > button
+                        padding: $header-upper-menu-padding-y 0
+                &.header-i18n
+                    .dropdown-menu
+                        background: $header-upper-menu-background
+                        @include media-breakpoint-up(desktop)
+                            left: -($spacing-3) // align dropdown text to language
+                            margin-top: 0
+                            right: unset
+                            top: calc(100% + #{$header-upper-menu-border-bottom-width})
+                        @include media-breakpoint-down(desktop)
+                            margin-left: $spacing-3
+                            margin-right: var(--grid-gutter-negative)
+                            li
+                                align-items: center
+                                display: flex
     @include media-breakpoint-down(desktop)
         &.has-upper-menu
             .menu
