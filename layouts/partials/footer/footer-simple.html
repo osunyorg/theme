@@ -6,13 +6,6 @@
     {{ partial "footer/site.html" }}
   </div>
 </div>
-{{ partial "footer/i18n.html" . }}
-
-{{ if and site.Params.search.active (in site.Params.search.positions "footer") }}
-  <div class="container footer-search">
-    {{ partial "commons/search/button.html" "footer" }}
-  </div>
-{{ end }}
 
 <div class="container">
   <div class="footer-social">
@@ -20,5 +13,11 @@
   </div>
   <div class="footer-legals">
     {{ partial "footer/legals.html" }}
+    {{ if and site.Params.search.active (in site.Params.search.positions "footer") }}
+      <div class="footer-search">
+        {{ partial "commons/search/button.html" "footer" }}
+      </div>
+    {{ end }}
+    {{ partial "footer/credit.html" }}
   </div>
 </div>

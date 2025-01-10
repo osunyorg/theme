@@ -1,0 +1,41 @@
+{{ $page := . }}
+{{ $pageWithTranslations := $page.Translations | append $page }}
+{{ $siteLang := "" }}
+{{ $url := "" }}
+{{ $position := .position }}
+
+{{ if gt (len site.Languages) 1 }}
+  <li class="{{ $position }}-i18n has-children">
+    {{ with site.Languages }}
+      {{ $language := cond (eq $position "legal") site.Language.LanguageName site.Language }}
+      <span
+        role="button"
+        aria-controls="{{ $position }}-i18n-list"
+        aria-expanded="false"
+        aria-label="{{ i18n "commons.accessibility.menu_lang" }}"
+        tabindex="0">
+          {{- $language -}}
+      </span>
+      <div class="dropdown-menu dropdown-languages" id="{{ $position }}-i18n-list">
+        <ul>
+          {{ range site.Languages }}
+            {{ $siteLang := . }}
+            {{ $url = printf "/%s/" .Lang }}
+            {{ range $pageWithTranslations }}
+              {{ if eq .Lang $siteLang.Lang }}
+                {{ $url = .Permalink }}
+              {{ end }}
+            {{ end }}
+            {{ if not (eq $siteLang site.Language) }}
+              <li>
+                <a href="{{ $url }}" lang="{{ $siteLang }}" hreflang="{{ $siteLang }}" >
+                  {{- $siteLang.LanguageName -}}
+                </a>
+              </li>
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+  </li>
+{{ end }}

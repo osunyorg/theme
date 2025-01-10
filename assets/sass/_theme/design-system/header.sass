@@ -51,7 +51,8 @@ header#document-header
                 height: $header-logo-height-desktop
 
     // i18n
-    .header-i18n
+    .primary-i18n,
+    .upper-menu-i18n
         position: relative
         [role="button"]
             @include icon(global-line, after)
@@ -120,7 +121,7 @@ header#document-header
                 align-items: center
                 @include media-breakpoint-down(desktop)
                     height: 100%
-                &:not(.header-i18n)
+                &:not(.upper-menu-i18n)
                     > a,
                     > span
                         display: block
@@ -137,10 +138,10 @@ header#document-header
                     > span,
                     > button
                         padding: $header-upper-menu-padding-y 0
-                &:not(.header-i18n)
+                &:not(.upper-menu-i18n)
                     a
                         text-decoration: none
-                &.header-i18n
+                &.upper-menu-i18n
                     span[role="button"]
                         cursor: pointer
                     .dropdown-menu

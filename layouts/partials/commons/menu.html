@@ -104,10 +104,9 @@
     </li>
   {{ end }}
   {{ if (index site.Params.menu $kind).i18n }}
-    {{ if eq $kind "legal" }}
-      {{ partial "footer/i18n.html" . }}
-    {{ else }}
-      {{ partial "header/i18n.html" .context }}
-    {{ end }}
+    {{ partial "commons/i18n.html" (dict
+        "context" .context
+        "position" $kind
+      )}}
   {{ end }}
 </ul>
