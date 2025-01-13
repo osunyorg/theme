@@ -1,13 +1,54 @@
 .page
     @include article
-    .title
-        @include h4
+    .page-title
         a
-            @extend .link-more
+            @include icon(arrow-right-line, after, true)
+            @include hover-translate-icon(after)
+            @include stretched-link(before)
+
+.block-pages,
+.pages
+    .grid, .cards, .list
+        @include grid(1)
+        article
+            position: relative
+            display: flex
+            flex-direction: column
+            .page-title
+                @include h3
+                a
+                    @include stretched-link(before)
+                    text-decoration: none
+                + p
+                    margin-top: $spacing-2
+            .media
+                @include handle-svg-fit
+                order: -1
+                margin-bottom: $spacing-3
+                &:empty
+                    display: none
+                img
+                    display: block
+                    aspect-ratio: 16/9
+                    object-fit: cover
+                    width: 100%
+            @include media-breakpoint-down(desktop)
+                margin-top: $spacing-3
+    .grid, .cards
+        @include grid(2, desktop)
+        @include in-page-without-sidebar
+            @include grid(3)
 
 .pages
-    @include grid(1)
-    @include grid(3, desktop)
+    .page
+        .page-title
+            @include h4
+
+.pages
+    &--grid
+        @extend .block-pages--grid
+    &--list
+        @extend .block-pages--list
 
 .page__children
     margin-top: $spacing-5

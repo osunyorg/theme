@@ -1,7 +1,16 @@
-<div class="pages">
-  {{ range .Paginator.Pages }}
-    <div>
-      {{ partial "pages/page.html" . }}
-    </div>
+{{ $layout := site.Params.pages.index.layout }}
+{{ $list_class := printf "pages pages--%s" $layout }}
+{{ $list_class = printf "%s %s" $list_class (cond site.Params.pages.index.options.image "with-images" "without-images") }}
+<div class="{{ $list_class }}">
+  {{ if not .Pages }}
+    <p>{{ i18n "categories.no_page" }}</p>
   {{ end }}
+  <div class="{{ $layout }}">
+    {{ range .Paginator.Pages }}
+      {{  partial "pages/page.html" (dict 
+          "page" .
+          "options" site.Params.pages.index.options
+        )}}
+    {{ end }}
+  </div>
 </div>
