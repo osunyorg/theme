@@ -22,10 +22,26 @@
                 margin-left: $spacing-1
 
 .taxonomies-single
-    ul
+    &, ul
         @include list-reset
     .taxonomy-title
         @include meta
+    .hero &
+        margin-top: $spacing-4
+        display: block
+        a
+            @include small
+        > li
+            display: flex
+            justify-content: space-between
+            align-items: baseline
+            ul
+                text-align: right
+                display: flex
+                flex-wrap: wrap
+                gap: $spacing-1
+        @include media-breakpoint-up(lg)
+            width: columns(3)
 
 .taxonomy-categories--grid
     @include list-reset
@@ -36,7 +52,7 @@
         margin-top: var(--block-space-y)
 
 .document-content
-    .persons-taxonomies, .organizations-taxonomies, .projects-taxonomies
+    .persons-taxonomies, .organizations-taxonomies, .projects-taxonomies, .pages-taxonomies
         @include grid(3, desktop)
         @include media-breakpoint-down(desktop)
             margin-top: $spacing-5
@@ -47,3 +63,13 @@
             [itemprop="articleBody"] &,
             &
                 @include list-reset
+
+// In pages with sidebar
+.taxonomies-container
+    .taxonomies-single
+        @include in-page-with-sidebar
+            @include grid(2, desktop)
+            padding-left: offset(4)
+            padding-right: var(--grid-gutter)
+    + .blocks
+        margin-top: var(--heading-margin-top)

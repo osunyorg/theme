@@ -9,7 +9,6 @@
 .block-pages,
 .pages
     .grid, .cards, .list
-        @include grid(1)
         article
             position: relative
             display: flex
@@ -34,6 +33,8 @@
                     width: 100%
             @include media-breakpoint-down(desktop)
                 margin-top: $spacing-3
+        @include media-breakpoint-down(desktop)
+            @include grid(1)
     .grid, .cards
         @include grid(2, desktop)
         @include in-page-without-sidebar
