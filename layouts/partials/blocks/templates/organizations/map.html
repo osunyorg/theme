@@ -11,7 +11,7 @@
     </summary>
     <ul>
       {{ range .organizations }}
-        {{ with site.GetPage .path }}
+        {{ with and .slug (site.GetPage .path) }}
           {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
           {{ if $address_geolocation }}
             <li>
@@ -44,8 +44,7 @@
     aria-label="{{ $aria_label }}"
     >
   {{- range .organizations }}
-    {{ if .slug }}
-      {{ with site.GetPage .path }}
+    {{ with and .slug (site.GetPage .path) }}
         {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
         {{ if $address_geolocation }}
           {{ template "organization" dict
@@ -59,6 +58,5 @@
           }}
         {{ end }}
       {{ end }}
-    {{ end }}
   {{ end -}}
 </div>
