@@ -7,7 +7,7 @@
 {{ if gt (len site.Languages) 1 }}
   <li class="{{ $position }}-i18n has-children">
     {{ with site.Languages }}
-      {{ $language := cond (eq $position "legal") site.Language.LanguageName site.Language }}
+      {{ $language := cond (eq $position "footer") site.Language.LanguageName site.Language }}
       <span
         role="button"
         aria-controls="{{ $position }}-i18n-list"

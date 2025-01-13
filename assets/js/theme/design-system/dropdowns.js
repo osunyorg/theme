@@ -29,7 +29,7 @@ class Dropdown {
 }
 
 // Selectors
-['.diplomas-select', '.dropdown-share', '.legal-i18n'].map(selector => {
+['.diplomas-select', '.dropdown-share', '.footer-i18n'].map(selector => {
     if (document.querySelector(selector)) {
         new Dropdown(selector);
     }
