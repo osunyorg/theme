@@ -28,10 +28,11 @@
         .top .description
             max-width: columns(8)
         &.block-with-long-text
-            .persons
-                @include grid(2)
-                article
-                    @include person-avatar-end
+            &:not(.block-persons--large)
+                .persons
+                    @include grid(2)
+                    article
+                        @include person-avatar-end
     @include in-page-with-sidebar
         article
             flex-direction: row
