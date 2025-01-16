@@ -123,9 +123,10 @@
             width: columns(8)
 
 @mixin collapsed-figcaption
+    // TODO: remove hero specifics variables
     figcaption
         @include meta
-        color: var(--color-text-alt)
+        color: $hero-credit-color
         position: absolute
         display: block
         left: 0
@@ -157,6 +158,7 @@
             .credit
                 display: block
         @include media-breakpoint-up(desktop)
+            color: $hero-credit-color-desktop
             &:before
                 padding-right: 0
         @include media-breakpoint-down(desktop)
