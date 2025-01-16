@@ -16,17 +16,7 @@
     {{ if .Params.bodyclass }}
       {{- $page_class = printf "block-%s" .Params.bodyclass }}
     {{ end }}
-    {{ if $options.main_summary }}
-        {{ $main_summary = partial  "GetRichSummary" ( dict 
-          "summary" .Params.summary
-          "kind" "pages"
-        )}}
-    {{ end }}
   {{ end -}}
-
-  {{ if $main_summary }}
-    {{ $block_class = printf "%s %s" $block_class "with-description" }}
-  {{ end }}
   {{ if $options.image }}
     {{ $block_class = printf "%s %s" $block_class "with-images" }}
   {{ end }}
@@ -34,7 +24,10 @@
   <div class="{{ $block_class }} {{ $page_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" $block.top }}
+        {{ partial "blocks/top.html" (dict
+            "context" $block.top
+            "with_description" $options.main_summary
+          ) }}
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
             "pages" .pages
