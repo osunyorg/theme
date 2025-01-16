@@ -4,7 +4,6 @@
 
 {{- with .block.data -}}
   {{- $options := .options -}}
-  {{- $main_summary := "" -}}
 
   {{- $page_class := "" -}}
   {{ $page := "" }}
@@ -17,7 +16,7 @@
       {{- $page_class = printf "block-%s" .Params.bodyclass }}
     {{ end }}
   {{ end -}}
-  {{ if $main_summary }}
+  {{ if $options.main_summary }}
     {{ $block_class = printf "%s %s" $block_class "with-description" }}
   {{ end }}
   {{ if $options.image }}
