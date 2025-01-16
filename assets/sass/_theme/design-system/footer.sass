@@ -21,6 +21,8 @@ footer#document-footer
         @include list-reset
         li + li
                 margin-top: $spacing-2
+        .footer-i18n
+            margin-top: $spacing-4
     .footer-i18n
         --dropdown-background: #{$dropdown-i18n-background-color}
         --dropdown-color: #{$dropdown-i18n-color}
@@ -93,13 +95,16 @@ footer#document-footer
         @include meta
     &-credit
         display: block
-        margin-top: $spacing-2
         a
             text-decoration-color: alphaColor(currentColor, 0.3)
     &-search
-        padding-top: $spacing-2 !important
+        padding-top: $spacing-2
     &-credit
         margin-top: $spacing-4
+    &-legals
+        .without-i18n + .footer-search
+            padding-top: 0
+            margin-top: $spacing-4
         
     @if $footer-icons-enabled
         &-social 
