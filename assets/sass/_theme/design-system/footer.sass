@@ -17,12 +17,15 @@ footer#document-footer
             max-width: 100%
             @include media-breakpoint-up(desktop)
                 height: $footer-logo-height-desktop
-    ul:not(.dropdown-menu)
+    ul
         @include list-reset
         li + li
                 margin-top: $spacing-2
         .footer-i18n
             margin-top: $spacing-4
+    .footer-social
+        .nav-social + .site-links
+            margin-top: $spacing-2
     .footer-i18n
         --dropdown-background: #{$dropdown-i18n-background-color}
         --dropdown-color: #{$dropdown-i18n-color}
@@ -105,11 +108,8 @@ footer#document-footer
         .without-i18n + .footer-search
             padding-top: 0
             margin-top: $spacing-4
-        
     @if $footer-icons-enabled
-        &-social 
-            .nav-social + .site-links
-                margin-top: $spacing-3
+        &-social
             &.site-links li
                 align-items: center
                 display: flex
