@@ -7,7 +7,7 @@
   {{ $class = printf "%s page-%s" $class .Params.bodyclass }}
 {{- end -}}
 
-{{ with $page}}
+{{ with $page }}
   {{- if .Scratch.Get "class" -}}
     {{ $custom_class = .Scratch.Get "class" }}
     {{ $class = printf "%s %s" $class $custom_class }}

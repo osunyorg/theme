@@ -100,9 +100,7 @@ params:
     date_format: false # You can add date format to override the date from static (two_lines) 
     time_format: false # You can add time format to override the time from static (from.hour & to.hour)
     index:
-      truncate_description: 200 # Set to 0 to disable truncate
       layout: list # grid | list
-      taxonomies: false
       options:
         dates: true
         categories: false
@@ -110,6 +108,8 @@ params:
         status: false
         subtitle: true
         summary: true
+      taxonomies: false
+      truncate_description: 200 # Set to 0 to disable truncate
     # share_links: # Optional
     #   enabled: true
     #   email: false
@@ -123,25 +123,24 @@ params:
     dark_logo_background: false
     map_marker_icon: '/assets/images/map-marker.svg'
     index:
-      taxonomies: false
       options:
         link: true
         logo: true
         summary: false
+      taxonomies: false
     single:
       backlinks: false
   pages:
     default_image: false
-    taxonomies: false
     index:
-      truncate_description: 200 # Set to 0 to disable truncate
       layout: grid # grid | list
       options:
         image: true
         main_summary: false
         summary: true
+      taxonomies: false
+      truncate_description: 200 # Set to 0 to disable truncate
     single:
-      backlinks: false
       taxonomies:
         position: none # content | hero | none
   papers:
@@ -174,11 +173,11 @@ params:
   persons:
     index:
       layout: grid # grid | list
-      taxonomies: false
       options:
         summary: true
         image: true
         link: true
+      taxonomies: false
     single:
       backlinks: false
       taxonomies:
@@ -187,9 +186,7 @@ params:
     default_image: false
     date_format: ":date_long"
     index:
-      truncate_description: 200 # Set to 0 to disable truncate
       layout: grid # grid | list
-      taxonomies: false
       options:
         author: false
         categories: true
@@ -198,6 +195,8 @@ params:
         reading_time: false
         summary: true
         subtitle: true
+      truncate_description: 200 # Set to 0 to disable truncate
+      taxonomies: false
     single:
       author_signature: false
 
@@ -251,15 +250,15 @@ params:
   projects:
     default_image: false
     date_format: "2006"
-    taxonomies: false
     index:
-      truncate_description: 200 # Set to 0 to disable truncate
       layout: grid # grid | list
       options:
         categories: true
         summary: true
         year: false
         subtitle: true
+      taxonomies: false
+      truncate_description: 200 # Set to 0 to disable truncate
     # share_links: # Optional
     #   enabled: true
     #   email: false
