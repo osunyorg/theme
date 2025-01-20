@@ -32,6 +32,8 @@ footer#document-footer
         display: inline-block
         min-width: calc(var(--column-width) + var(--grid-gutter))
         @include dropdown
+        li + li
+            margin-top: 0
         @include media-breakpoint-up(desktop)
             --dropdown-border-color: transparent
             .dropdown-languages
@@ -67,11 +69,8 @@ footer#document-footer
                     display: flex
                     justify-content: space-between
             .dropdown-languages
-                li
-                    + li
-                        margin-top: 0
-                    &:last-child
-                        border-bottom: 1px solid var(--color-border)
+                li:last-child
+                    border-bottom: 1px solid var(--color-border)
                 a
                     padding-left: var(--grid-gutter)
                     padding-right: var(--grid-gutter)
