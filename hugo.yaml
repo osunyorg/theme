@@ -1,4 +1,3 @@
-enableRobotsTXT: true
 removePathAccents: true
 ignoreLogs: ['warning-goldmark-raw-html']
 pagination:
@@ -47,8 +46,6 @@ params:
           active: false
           source: "Summary" # "Summary" | "meta_description"
           truncate: 125
-    i18n:
-      display: true
   breadcrumb:
     position: hero-start #  hero-start |  hero-end | after-hero | none
   design:
@@ -62,6 +59,11 @@ params:
       # - upper-menu
       # - fixed
       # - footer
+  i18n:
+    positions:
+      - primary
+      # - upper-menu
+      - footer
   home:
     head:
       title: both # both | page | site
@@ -146,6 +148,9 @@ params:
     default_image: false
     sidebar:
       direction: start
+  publications:
+    index:
+      group_by_year: false
   volumes:
     default_image: false
   locations:
@@ -358,7 +363,7 @@ params:
         large:
           mobile:   400
           tablet:   360
-          desktop:  255
+          desktop:  645
         list:
           mobile:   90
           tablet:   360
@@ -380,14 +385,14 @@ params:
         grid:
           mobile:   90
           tablet:   360
-          desktop:  255
+          desktop:  555
         large:
           mobile:   400
           tablet:   360
-          desktop:  255
+          desktop:  645
         list:
           mobile:   90
-          tablet:   360
+          tablet:   200
           desktop:  255
       testimonials:
         mobile:   80

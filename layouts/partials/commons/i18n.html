@@ -2,18 +2,21 @@
 {{ $pageWithTranslations := $page.Translations | append $page }}
 {{ $siteLang := "" }}
 {{ $url := "" }}
+{{ $position := .position }}
+
 {{ if gt (len site.Languages) 1 }}
-  <li class="header-i18n has-children">
+  <li class="{{ $position }}-i18n has-children">
     {{ with site.Languages }}
+      {{ $language := cond (eq $position "footer") site.Language.LanguageName site.Language }}
       <span
         role="button"
-        aria-controls="header-i18n-list"
+        aria-controls="{{ $position }}-i18n-list"
         aria-expanded="false"
         aria-label="{{ i18n "commons.accessibility.menu_lang" }}"
         tabindex="0">
-        {{- site.Language -}}
+          {{- $language -}}
       </span>
-      <div class="dropdown-menu dropdown-languages" id="header-i18n-list">
+      <div class="dropdown-menu dropdown-languages" id="{{ $position }}-i18n-list">
         <ul>
           {{ range site.Languages }}
             {{ $siteLang := . }}
@@ -25,16 +28,11 @@
             {{ end }}
             {{ if not (eq $siteLang site.Language) }}
               <li>
-                <a 
-                  href="{{ $url }}" 
-                  lang="{{ $siteLang }}" 
-                  hreflang="{{ $siteLang }}"
-                  >
+                <a href="{{ $url }}" lang="{{ $siteLang }}" hreflang="{{ $siteLang }}" >
                   {{- $siteLang.LanguageName -}}
                 </a>
               </li>
             {{ end }}
-
           {{ end }}
         </ul>
       </div>

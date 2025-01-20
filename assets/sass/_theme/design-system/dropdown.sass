@@ -8,6 +8,11 @@
         margin: -$spacing-2
         @include icon(arrow-down-s-line, after)
             margin-left: 5px
+        // When dropdown expanded
+        &[aria-expanded="true"]
+            @include icon(arrow-up-s-line, after)
+            + .dropdown-menu
+                display: block
     .dropdown-menu
         @include list-reset
         top: calc(100% + #{$spacing-2})
@@ -29,11 +34,7 @@
             padding: $spacing-2
             text-decoration: none
             white-space: normal
-            &:hover
-                background-color: var(--dropdown-hover-background)
-                color: var(--dropdown-hover-color)
-    // When dropdown expanded
-    button[aria-expanded="true"]
-        @include icon(arrow-up-s-line, after)
-        + .dropdown-menu
-            display: block
+            @include media-breakpoint-up(desktop)
+                &:hover
+                    background-color: var(--dropdown-hover-background)
+                    color: var(--dropdown-hover-color)
