@@ -3,10 +3,15 @@
 {{ $categories_kind := printf "%s_categories" $kind }}
 {{ $categories := index site.Taxonomies $categories_kind  }}
 {{ $option := index site.Params $kind }}
+{{ $extendable := false }}
 
-{{ if $option.index.taxonomies }}
+{{ with $option.index.taxonomies }}
+  {{ if ne (printf "%T" .) "bool" }}
+    {{ $extendable = index . "extendable" }}
+  {{ end }}
+
   {{- if $categories -}}
-    <ul class="taxonomies-section {{ $kind }}-categories" aria-label="{{ i18n "categories.label" }}">
+    <ul class="taxonomies-section {{ $kind }}-categories {{ if $extendable }}extendable{{ end }}" aria-label="{{ i18n "categories.label" }}">
       {{- range $categories -}}
         {{ with .Page }}
           <li>
