@@ -5,15 +5,16 @@
 {{ $taxonomies := where $categories "Params.is_taxonomy" "eq" true }}
 {{ $option := index site.Params $kind }}
 
-<div class="taxonomies-list">
-  {{ with $option.index.taxonomies }}
+{{ with $option.index.taxonomies }}
+  <div class="taxonomies-list">
+    <p>{{ i18n "taxonomies.list.title" }}</p>
     {{ if $taxonomies }}
       {{- range $taxonomies -}}
         <div class="dropdown">
           <button aria-controls="categories-{{ .Title | anchorize }}" aria-expanded="false">
             {{ .Title }}
           </button>
-          <div class="extendable categories-list" id="categories-{{ .Title | anchorize }}">
+          <div class="extendable taxonomy-categories" id="categories-{{ .Title | anchorize }}" data-extendable-auto-close="true">
             <ul>
               {{ range .Params.children }}
                 {{ $category := site.GetPage .path }}
@@ -40,5 +41,5 @@
         {{- end }}
       </ul>
     {{- end -}}
-  {{- end -}}
-</div>
+  </div>
+{{- end -}}
