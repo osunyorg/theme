@@ -1,12 +1,14 @@
 @mixin in-page-with-sidebar
     @include media-breakpoint-up(desktop)
-        body:not(.full-width) &
+        body:not(.full-width) &,
+        &:is(body):not(.full-width)
             @content
 
 @mixin in-page-without-sidebar
     @include media-breakpoint-up(desktop)
         main > .blocks &,
         body.full-width &,
+        &:is(body).full-width
             @content
 
 // Use this mixin to override with-aside or without-aside rules
@@ -15,6 +17,8 @@
         body:not(.full-width) &,
         main > .blocks &,
         body.full-width &,
+        &:is(body).full-width,
+        &:is(body):not(.full-width)
             @content
 
 // Aliases
@@ -43,6 +47,7 @@
     @include media-breakpoint-down(desktop)
         padding: 0 var(--grid-gutter)
         margin-bottom: $spacing-5
+    // @include media-breakpoint-up(desktop)
     @include in-page-with-sidebar
         @if $side == start
             margin-left: grid-external-space()
