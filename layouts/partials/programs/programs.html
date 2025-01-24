@@ -1,10 +1,12 @@
-{{ if . }}
+{{ if not .Paginator.Pages }}
+  <p>{{ i18n "programs.none" }}</p>
+{{ else }}
   <ol class="programs">
-    {{ range sort . ".Params.position" -}}
+    {{ range .Paginator.Pages }}
       {{- partial "programs/program.html" (dict
           "program" .
           "options" site.Params.programs.index.options
         ) -}}
-    {{- end }}
+    {{ end }}
   </ol>
-{{- end }}
+{{ end }}
