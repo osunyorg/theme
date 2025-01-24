@@ -1,4 +1,5 @@
 {{ if not .Paginator.Pages }}
   <p>{{ i18n "categories.no_person" }}</p>
+{{ else }}
+  {{ partial "persons/list.html" .Paginator.Pages }}
 {{ end }}
-{{ partial "persons/list.html" .Paginator.Pages }}
