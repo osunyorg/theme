@@ -1,7 +1,7 @@
 {{ $layout := site.Params.events.index.layout }}
 
 <div class="events events--{{-  $layout -}}">
-  {{ if not .Pages }}
+  {{ if not .Paginator.Pages }}
     <p>{{ i18n "events.none" }}</p>
   {{ end }}
   {{ range .Paginator.Pages }}

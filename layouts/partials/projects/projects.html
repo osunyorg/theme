@@ -1,5 +1,5 @@
 <div class="projects projects--{{- site.Params.projects.index.layout -}}">
-  {{ if not .Pages }}
+  {{ if not .Paginator.Pages }}
     <p>{{ i18n "categories.no_project" }}</p>
   {{ end }}
   {{ range .Paginator.Pages }}
