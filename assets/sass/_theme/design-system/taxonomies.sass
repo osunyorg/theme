@@ -53,24 +53,24 @@
         margin-top: var(--block-space-y)
 
 .document-content
-    .persons-taxonomies, .organizations-taxonomies, .projects-taxonomies, .pages-taxonomies, .programs-taxonomies
-        @include grid(3, desktop)
-        @include media-breakpoint-down(desktop)
-            margin-top: $spacing-5
-            > li + li
-                    margin-top: $spacing-3
-        &, ul
-            // for organizations
-            [itemprop="articleBody"] &,
-            &
+    .taxonomies-container
+        .taxonomies-single
+            @include grid(3, desktop, $spacing-3)
+            ul, &
                 @include list-reset
+            @include media-breakpoint-down(desktop)
+                margin-top: $spacing-5
+                > li + li
+                        margin-top: $spacing-3
+            &.organizations-taxonomies
+                @include grid(2, desktop)
 
-// In pages with sidebar
-.taxonomies-container
-    .taxonomies-single
-        @include in-page-with-sidebar
-            @include grid(2, desktop)
-            padding-left: offset(4)
-            padding-right: var(--grid-gutter)
-    + .blocks
-        margin-top: var(--heading-margin-top)
+.pages__section
+    .taxonomies-container
+        .taxonomies-single
+            @include in-page-with-sidebar
+                @include grid(2, desktop)
+                padding-left: offset(4)
+                padding-right: var(--grid-gutter)
+        + .blocks
+            margin-top: var(--heading-margin-top)
