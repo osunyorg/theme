@@ -1,5 +1,6 @@
 {{ if not .Paginator.Pages }}
-  <p>{{ i18n "categories.no_person" }}</p>
+  {{ $is_term := eq .Kind "term" }}
+  <p>{{ i18n (cond $is_term "categories.no_person" "persons.none") }}</p>
 {{ else }}
   {{ partial "persons/list.html" .Paginator.Pages }}
 {{ end }}

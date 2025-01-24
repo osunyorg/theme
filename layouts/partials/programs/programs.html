@@ -1,5 +1,6 @@
 {{ if not .Paginator.Pages }}
-  <p>{{ i18n "programs.none" }}</p>
+  {{ $is_term := eq .Kind "term" }}
+  <p>{{ i18n (cond $is_term "categories.no_program" "programs.none") }}</p>
 {{ else }}
   <ol class="programs">
     {{ range .Paginator.Pages }}

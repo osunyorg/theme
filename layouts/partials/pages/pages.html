@@ -3,14 +3,16 @@
 {{ $list_class = printf "%s %s" $list_class (cond site.Params.pages.index.options.image "with-images" "without-images") }}
 <div class="{{ $list_class }}">
   {{ if not .Paginator.Pages }}
-    <p>{{ i18n "categories.no_page" }}</p>
+    {{ $is_term := eq .Kind "term" }}
+    <p>{{ i18n (cond $is_term "categories.no_page" "pages.none") }}</p>
+  {{ else }}
+    <div class="{{ $layout }}">
+      {{ range .Paginator.Pages }}
+        {{  partial "pages/page.html" (dict 
+            "page" .
+            "options" site.Params.pages.index.options
+          )}}
+      {{ end }}
+    </div>
   {{ end }}
-  <div class="{{ $layout }}">
-    {{ range .Paginator.Pages }}
-      {{  partial "pages/page.html" (dict 
-          "page" .
-          "options" site.Params.pages.index.options
-        )}}
-    {{ end }}
-  </div>
 </div>

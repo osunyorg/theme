@@ -2,7 +2,8 @@
 {{ $list_class = printf "%s %s" $list_class (cond site.Params.posts.index.options.image "with-images" "without-images") }}
 <div class="{{ $list_class }}">
   {{ if not .Paginator.Pages }}
-    <p>{{ i18n "categories.no_post" }}</p>
+    {{ $is_term := eq .Kind "term" }}
+    <p>{{ i18n (cond $is_term "categories.no_post" "posts.none") }}</p>
   {{ end }}
   {{ range .Paginator.Pages }}
     {{  partial "posts/post.html" 
