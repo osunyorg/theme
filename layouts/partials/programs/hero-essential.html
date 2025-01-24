@@ -2,7 +2,7 @@
   <div class="container">
     {{ $duration := .Params.duration }}
     {{ $diploma := site.GetPage (printf "/diplomas/%s" .Params.diplomas) }}
-    {{- if or $diploma $duration .Params.parent .Params.locations -}}
+    {{- if or $diploma $duration .Params.parent .Params.locations .Params.taxonomies .Params.free_categories -}}
       {{ if $diploma }}
         {{ $duration = $duration | default $diploma.Params.duration }}
       {{ end }}
