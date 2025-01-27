@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>{{ .Permalink }}</title>
-    <link rel="canonical" href="{{ .Permalink }}"/>
-    <meta name="robots" content="noindex">
-    <meta charset="utf-8"/>
+  <title>{{ .Permalink }}</title>
+  <link rel="canonical" href="{{ .Permalink }}"/>
+  <meta name="robots" content="noindex">
+  <meta charset="utf-8"/>
+  {{ if not hugo.IsMultilingual }}
+    <meta http-equiv="refresh" content="0; url={{ .Permalink }}"/>
+  {{ else }}
     <noscript>
-        <meta http-equiv="refresh" content="0; url={{ .Permalink }}"/>
+      <meta http-equiv="refresh" content="0; url={{ .Permalink }}"/>
     </noscript>
     <script>
-
       // Thanks to nanmu42 : https://nanmu.me/en/posts/2020/hugo-i18n-automatic-language-redirection/
       ;(function () {
         // Only do i18n at root, 
         // otherwise, redirect immediately
         if (window.location.pathname !== '/') {
-          window.location.replace('{{ .Permalink }}')
-          return
+          // As we stopped hugo redirect (meta refresh) we must do it in js
+          window.location.replace('{{ .Permalink }}');
+          return;
         }
-
-        // If site has only one language, redirect immediately
-        {{ if eq (len site.Languages) 1 }}
-          window.location.replace('{{ .Permalink }}')
-        {{ end }}
 
         var getFirstBrowserLanguage = function () {
           var nav = window.navigator,
@@ -46,7 +44,8 @@
               return language
             }
           }
-          return 'en'
+
+          return 'en';
         }
 
         var preferLang = getFirstBrowserLanguage(),
@@ -63,9 +62,10 @@
         window.location.replace(url);
       })();
     </script>
+  {{ end }}
 </head>
 <body>
-<h1>Rerouting</h1>
-<p>You should be rerouted in a jiff, if not, <a href="{{ .Permalink }}">click here</a>.</p>
+  <h1>Redirection</h1>
+  <p>You should be redirected in a moment, if not click here: <a href="{{ .Permalink }}">{{ .Permalink }}</a>.</p>
 </body>
 </html>
