@@ -4,34 +4,36 @@
         "level" $heading_level
         "attributes" "class='page-title'"
 )}}
-<div class="grid">
-  {{ range .pages }}
-    {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
-    {{- $path := false -}}
-    {{ if reflect.IsMap . }}
-      {{ $path = .path }}
-    {{ else }}
-      {{ $path = . }}
-    {{ end }}
-    {{ $page := site.GetPage $path }}
+{{ with .pages }}
+  <div class="grid">
+    {{ range . }}
+      {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
+      {{- $path := false -}}
+      {{ if reflect.IsMap . }}
+        {{ $path = .path }}
+      {{ else }}
+        {{ $path = . }}
+      {{ end }}
+      {{ $page := site.GetPage $path }}
 
-    {{ with $page }}
-      <article>
-        {{ $heading_tag.open }}
-          <a href="{{- .Permalink -}}">
-            {{- partial "PrepareHTML" .Title -}}
-          </a>
-        {{ $heading_tag.close }}
-        {{ if and $options.summary .Params.summary }}
-          {{ partial "GetRichSummary" ( dict 
-            "summary" .Params.summary
-            "kind" "pages"
-          )}}
-        {{ end }}
-        {{ if $options.image }}
-          {{- partial "pages/page-media.html" . -}}
-        {{ end }}
-      </article>
-    {{- end -}}
-  {{ end }}
-</div>
+      {{ with $page }}
+        <article class="page">
+          {{ $heading_tag.open }}
+            <a href="{{- .Permalink -}}">
+              {{- partial "PrepareHTML" .Title -}}
+            </a>
+          {{ $heading_tag.close }}
+          {{ if and $options.summary .Params.summary }}
+            {{ partial "GetRichSummary" ( dict 
+              "summary" .Params.summary
+              "kind" "pages"
+            )}}
+          {{ end }}
+          {{ if $options.image }}
+            {{- partial "pages/page-media.html" . -}}
+          {{ end }}
+        </article>
+      {{- end -}}
+    {{ end }}
+  </div>
+{{ end }}

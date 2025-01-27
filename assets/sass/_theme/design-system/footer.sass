@@ -17,10 +17,63 @@ footer#document-footer
             max-width: 100%
             @include media-breakpoint-up(desktop)
                 height: $footer-logo-height-desktop
-    ul:not(.dropdown-menu)
+    ul
         @include list-reset
         li + li
                 margin-top: $spacing-2
+        .footer-i18n
+            margin-top: $spacing-4
+    .footer-social
+        .nav-social + .site-links
+            margin-top: $spacing-2
+    .footer-i18n
+        --dropdown-background: #{$dropdown-i18n-background-color}
+        --dropdown-color: #{$dropdown-i18n-color}
+        display: inline-block
+        min-width: calc(var(--column-width) + var(--grid-gutter))
+        @include dropdown
+        li + li
+            margin-top: 0
+        @include media-breakpoint-up(desktop)
+            --dropdown-border-color: transparent
+            .dropdown-languages
+                bottom: calc(100% + #{$spacing-1})
+                top: unset
+                right: 0
+                margin-left: -($spacing-2)
+                a
+                    padding-bottom: $spacing-1
+                    padding-top: $spacing-1
+        button,
+        span[role="button"]
+            padding-bottom: $spacing-1
+            &[aria-expanded="true"]
+                background: $dropdown-i18n-background-color
+                color: $dropdown-i18n-color
+            &:focus-visible
+                border-radius: 3px
+            @include media-breakpoint-up(desktop)
+                display: block
+                margin-right: 0
+        @include media-breakpoint-down(desktop)
+            width: 100%
+            button,
+            span[role="button"]
+                margin-left: var(--grid-gutter-negative)
+                margin-right: var(--grid-gutter-negative)
+                padding-left: var(--grid-gutter)
+                padding-right: var(--grid-gutter)
+                &[aria-expanded="true"]
+                    border-bottom: 1px solid var(--color-border)
+                    border-top: 1px solid var(--color-border)
+                    display: flex
+                    justify-content: space-between
+            .dropdown-languages
+                li:last-child
+                    border-bottom: 1px solid var(--color-border)
+                a
+                    padding-left: var(--grid-gutter)
+                    padding-right: var(--grid-gutter)
 
     @include media-breakpoint-down(desktop)
         .container
@@ -47,24 +100,18 @@ footer#document-footer
         @include meta
     &-credit
         display: block
-        margin-top: $spacing-2
         a
             text-decoration-color: alphaColor(currentColor, 0.3)
     &-search
-        padding-top: $spacing-2 !important
-    &-i18n
-        --dropdown-background: #{$dropdown-i18n-background-color}
-        --dropdown-color: #{$dropdown-i18n-color}
-        @include dropdown
-        @include media-breakpoint-up(desktop)
-            --dropdown-border-color: transparent
-        button:focus-visible
-            border-radius: 3px
-        
+        padding-top: $spacing-2
+    &-credit
+        margin-top: $spacing-4
+    &-legals
+        .without-i18n + .footer-search
+            padding-top: 0
+            margin-top: $spacing-4
     @if $footer-icons-enabled
-        &-social 
-            .nav-social + .site-links
-                margin-top: $spacing-3
+        &-social
             &.site-links li
                 align-items: center
                 display: flex

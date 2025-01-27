@@ -2,8 +2,8 @@
 {{ $options := .options }}
 <div class="grid organizations {{- if $options.summary }} with-summaries {{- end }}">
   {{- range .organizations }}
-    {{ if .slug }}
-      {{ with site.GetPage (printf "/organizations/%s" .slug ) }}
+    {{ if .path }}
+      {{ with site.GetPage .path }}
         {{ template "organization"  dict
             "title" .Title
             "url" .Permalink

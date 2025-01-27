@@ -2,29 +2,6 @@
     .top
         a
             text-decoration: none
-    .grid, .cards, .list
-        article
-            position: relative
-            display: flex
-            flex-direction: column
-            .media
-                @include handle-svg-fit
-                order: -1
-                margin-bottom: $spacing-3
-                &:empty
-                    display: none
-                img
-                    display: block
-                    aspect-ratio: 16/9
-                    object-fit: cover
-                    width: 100%
-        .page-title
-            @include h3
-            a
-                @include stretched-link(before)
-                text-decoration: none
-            + p
-                margin-top: $spacing-2
 
     @include media-breakpoint-up(desktop)
         .top
@@ -36,8 +13,6 @@
                 @include h5
         .description
             @include h2
-        article
-            margin-top: $spacing-3
 
     @include in-page-without-sidebar
         .top
@@ -54,11 +29,6 @@
             .page-title a
                 @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon(after)
-        @include media-breakpoint-up(desktop)
-            .grid
-                @include grid(2)
-                @include in-page-without-sidebar
-                    @include grid(3)
 
     &--cards
         background-color: $block-pages-card-background
@@ -119,11 +89,10 @@
                 .more
                     text-decoration-color: $block-pages-card-page-color-hover
     &--list
-        ul
+        .list
             @include list-reset
-            li
-                display: block
-                + li
+            .page
+                + .page
                     margin-top: $spacing-2
                 > a
                     @include icon(arrow-right-line, before, true)
@@ -140,11 +109,11 @@
         @include media-breakpoint-down(desktop)
             .top
                 margin-bottom: $spacing-2
-            ul
+            .list
                 margin-top: $spacing-3
         @include media-breakpoint-up(desktop)
-            ul:not(.title-only)
-                li + li
+            .list:not(.title-only)
+                .page + .page
                     margin-top: var(--grid-gutter)
                 article
                     gap: var(--grid-gutter)
@@ -156,19 +125,19 @@
             .block-content
                 .top
                     margin-bottom: $spacing-3
-                ul.title-only
-                    @include grid(2, desktop, 0)
-                    display: flex
-                    li
-                        margin-top: 0
-                        a
-                            @include meta
-                article
-                    gap: var(--grid-gutter)
-                    .media
-                        width: columns(2)
-                    .page-content
-                        width: columns(6)
+            .list.title-only
+                @include grid(2, desktop, $spacing-2)
+                display: flex
+                li
+                    margin-top: 0
+                    a
+                        @include meta
+            article
+                gap: var(--grid-gutter)
+                .media
+                    width: columns(2)
+                .page-content
+                    width: columns(6)
 
         @include in-page-without-sidebar
             .block-title
@@ -184,14 +153,14 @@
                 .page-content
                     width: columns(4)
             &:not(.with-description)
-                ul.title-only
+                .list.title-only
                     @include grid(4, desktop, $spacing-1)
                     grid-column: 1 / 13
-                    li
+                    .page
                         margin-top: 0
-                ul:not(.title-only)
+                .list:not(.title-only)
                     @include grid(2, desktop)
-                    li + li
+                    .page + .page
                         margin-top: 0
             &.with-description
                 .block-content
@@ -209,20 +178,19 @@
                             @include body-text
                             margin-top: 0
                     // If page description
-                    .top + ul
+                    .top + .list
                         grid-column: 9 / 13
                         grid-row: 2
                         display: block
-                        li + li
+                        .page + .page
                             margin-top: $spacing-2
                             article
                                 margin-top: $spacing-5
                 &.with-images
                     .top
                         grid-column: 1 / 7
-                    .top + ul
+                    .top + .list
                         grid-column: 7 / 13
-
 
     &--alternate
         .top
