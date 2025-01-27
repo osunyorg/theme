@@ -16,8 +16,10 @@
       {{- $page_class = printf "block-%s" .Params.bodyclass }}
     {{ end }}
   {{ end -}}
-  {{ if $block.top.description }}
-    {{ $block_class = printf "%s %s" $block_class "with-description" }}
+  {{ with $block.top }}
+    {{ if .description }}
+      {{ $block_class = printf "%s %s" $block_class "with-description" }}
+    {{ end }}
   {{ end }}
   {{ if $options.image }}
     {{ $block_class = printf "%s %s" $block_class "with-images" }}
