@@ -16,7 +16,7 @@
       {{- $page_class = printf "block-%s" .Params.bodyclass }}
     {{ end }}
   {{ end -}}
-  {{ if $options.main_summary }}
+  {{ if $block.top.description }}
     {{ $block_class = printf "%s %s" $block_class "with-description" }}
   {{ end }}
   {{ if $options.image }}
@@ -26,10 +26,7 @@
   <div class="{{ $block_class }} {{ $page_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-            "context" $block.top
-            "with_description" $options.main_summary
-          ) }}
+        {{ partial "blocks/top.html" $block.top }}
 
         {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
             "pages" .pages
