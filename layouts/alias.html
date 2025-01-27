@@ -49,15 +49,19 @@
           return 'en'
         }
 
-        var preferLang = getFirstBrowserLanguage();
+        var preferLang = getFirstBrowserLanguage(),
+            url = '{{ .Permalink }}'; // default url
+
         {{ with site.Languages }}
           {{ range site.Languages }}
             if (preferLang.indexOf('{{ . }}') > -1) {
-              window.location.replace('/{{ . }}/')
+              url = '/{{ . }}/';
             }
           {{ end }}
         {{ end }}
-      })()
+
+        window.location.replace(url);
+      })();
     </script>
 </head>
 <body>
