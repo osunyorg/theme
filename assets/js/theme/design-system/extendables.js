@@ -38,7 +38,7 @@ osuny.Extendable.prototype.listen = function () {
         }
     }.bind(this));
 
-    this.element.addEventListener('extendable-close', this.toggle.bind(this, false));
+    this.element.addEventListener('extendable-close', this.toggle.bind(this, false, true));
 };
 
 osuny.Extendable.prototype.handleAutoClose = function () {
@@ -55,7 +55,7 @@ osuny.Extendable.prototype.a11yFocus = function (button) {
     }
 };
 
-osuny.Extendable.prototype.toggle = function (opened) {
+osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
     this.state.opened = typeof opened !== 'undefined' ? opened : !this.state.opened;
 
     if (this.state.opened && this.options.closeSiblings) {
@@ -68,14 +68,21 @@ osuny.Extendable.prototype.toggle = function (opened) {
         }
     }.bind(this));
 
-    if (!this.state.opened && this.state.openedByButton) {
+    if (!this.state.opened && this.state.openedByButton && !fromOutside) {
         this.state.openedByButton.focus();
         this.state.openedByButton = null;
     }
 };
 
 osuny.Extendable.prototype.closeSiblings = function () {
-    var extendables = this.element.parentNode.querySelectorAll('.extendable');
+    var parent = this.element.parentNode,
+        extendables;
+
+    if (parent.classList.contains('dropdown')) {
+        parent = parent.parentNode;
+    }
+
+    extendables = parent.querySelectorAll('.extendable');
     extendables.forEach(function (extendable) {
         if (this.element !== extendable) {
             extendable.dispatchEvent(new Event('extendable-close'));

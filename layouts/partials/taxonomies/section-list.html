@@ -9,23 +9,26 @@
     {{ if $taxonomies }}
       <p>{{ i18n "taxonomies.list.title" }}</p>
       {{- range $taxonomies -}}
-        <div class="dropdown">
-          <button aria-controls="categories-{{ .Title | anchorize }}" aria-expanded="false">
-            {{ .Title }}
-          </button>
-          <div class="extendable taxonomy-categories" id="categories-{{ .Title | anchorize }}" data-extendable-auto-close="true">
-            <ul>
-              {{ range .Params.children }}
-                {{ $category := site.GetPage .path }}
-                {{ with $category }}
-                  <li>
-                    <a href="{{ .Permalink }}">{{ .Title }}</a>
-                  </li>
+        {{ if .Params.children }}
+          <div class="dropdown">
+            <button aria-controls="categories-{{ .Title | anchorize }}" aria-expanded="false">
+              {{ .Title }}
+            </button>
+            <div class="extendable taxonomy-categories" id="categories-{{ .Title | anchorize }}" data-extendable-close-siblings="true" data-extendable-auto-close="true">
+              <ul>
+                {{ range .Params.children }}
+                  {{ $category := site.GetPage .path }}
+                  {{ with $category }}
+                    <li>
+                      <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    </li>
+                  {{ end }}
                 {{ end }}
-              {{ end }}
-            </ul>
+              </ul>
+            </div>
           </div>
-        </div>
+        {{- end -}}
+
       {{- end -}}
     {{- else -}}
       <ul class="taxonomies-section {{ $kind }}-categories" aria-label="{{ i18n "categories.label" }}">
