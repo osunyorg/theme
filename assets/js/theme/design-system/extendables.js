@@ -32,13 +32,19 @@ osuny.Extendable.prototype.listen = function () {
         }.bind(this));
     }.bind(this));
 
-    this.element.addEventListener('extendable-close', this.toggle.bind(this, true));
+    window.addEventListener('keydown', function (event) {
+        if (event.keyCode === 27 || event.key === 'Escape') {
+            this.toggle(false);
+        }
+    }.bind(this));
+
+    this.element.addEventListener('extendable-close', this.toggle.bind(this, false));
 };
 
 osuny.Extendable.prototype.handleAutoClose = function () {
     window.addEventListener('click', function (event) {
         if (this.state.opened && event.target !== this.state.openedByButton) {
-            this.toggle(true);
+            this.toggle(false);
         }
     }.bind(this));
 };
@@ -46,13 +52,11 @@ osuny.Extendable.prototype.handleAutoClose = function () {
 osuny.Extendable.prototype.a11yFocus = function (button) {
     if (this.state.opened) {
         this.state.openedByButton = button;
-    } else if (this.state.openedByButton) {
-        this.state.openedByButton.focus();
     }
 };
 
-osuny.Extendable.prototype.toggle = function (forceClose) {
-    this.state.opened = forceClose ? false : !this.state.opened;
+osuny.Extendable.prototype.toggle = function (opened) {
+    this.state.opened = typeof opened !== 'undefined' ? opened : !this.state.opened;
 
     if (this.state.opened && this.options.closeSiblings) {
         this.closeSiblings();
@@ -63,6 +67,11 @@ osuny.Extendable.prototype.toggle = function (forceClose) {
             button.setAttribute('aria-expanded', this.state.opened);
         }
     }.bind(this));
+
+    if (!this.state.opened && this.state.openedByButton) {
+        this.state.openedByButton.focus();
+        this.state.openedByButton = null;
+    }
 };
 
 osuny.Extendable.prototype.closeSiblings = function () {
