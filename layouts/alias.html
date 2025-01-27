@@ -1,8 +1,3 @@
-{{ $isHome := false }}
-{{ if .Page }}
-  {{ $isHome = .Page.IsHome }}
-{{ end }}
-{{ $should_i18n_redirect := and hugo.IsMultilingual $isHome }}
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +5,7 @@
   <link rel="canonical" href="{{ .Permalink }}"/>
   <meta name="robots" content="noindex">
   <meta charset="utf-8"/>
-  {{ if not $should_i18n_redirect }}
+  {{ if not hugo.IsMultilingual }}
     <meta http-equiv="refresh" content="0; url={{ .Permalink }}"/>
   {{ else }}
     <noscript>
@@ -70,7 +65,7 @@
   {{ end }}
 </head>
 <body>
-  {{ if $should_i18n_redirect }}
+  {{ if hugo.IsMultilingual }}
     <h1>Redirection</h1>
     <p>You should be redirected in a moment, if not click here: <a href="{{ .Permalink }}">{{ .Permalink }}</a>.</p>
   {{ end }}
