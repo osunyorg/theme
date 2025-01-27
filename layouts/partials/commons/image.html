@@ -49,6 +49,7 @@
       {{- else -}}
 
         {{ with .sizes.desktop -}}
+          {{ $crop = strings.Contains . "x" }}
           <source media="(min-width: 1024px)"
                   type="image/webp"
                   srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop ) }},
@@ -59,6 +60,7 @@
         {{- end }}
 
         {{ with .sizes.tablet -}}
+          {{ $crop = strings.Contains . "x" }}
           <source media="(min-width: 768px)"
                   type="image/webp"
                   srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop) }},
@@ -69,6 +71,7 @@
         {{- end }}
 
         {{ with .sizes.mobile -}}
+          {{ $crop = strings.Contains . "x" }}
           <source type="image/webp"
                   srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop) }},
                           {{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x">
