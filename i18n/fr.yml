@@ -71,9 +71,20 @@ blocks:
     play: Lancer la vidéo
 categories:
   label: Catégories
-  no_post: Aucun article dans cette catégorie
-  no_project: Aucun projet dans cette catégorie
+  no_event: Aucun événement dans cette catégorie
+  no_organization: Aucune organisation dans cette catégorie
+  no_page: Aucune page dans cette catégorie
   no_person: Aucune personne dans cette catégorie
+  no_post: Aucun article dans cette catégorie
+  no_program: Aucune formation dans cette catégorie
+  no_project: Aucun projet dans cette catégorie
+  type:
+    events_categories: Catégories d'événements
+    pages_categories: Catégories des pages
+    persons_categories: Catégories des personnes
+    posts_categories: Catégories des actualités
+    programs_categories: Catégories des formations
+    projets_categories: Catégories des projets
   see_more:
     one: Voir l'article
     other: Voir les {{ .Count }} articles
@@ -275,9 +286,11 @@ formats:
   tar: Compressed archive
 organizations:
   logo: Logo
+  none: Aucune organisations
 pages:
   details: En détail
   informations: Informations
+  none: Aucune page
   posts: Actualités
 papers:
   abstract: Abstract
@@ -293,6 +306,12 @@ papers:
     references: Références
     content: Texte intégral
 persons:
+  backlinks:
+    events: Événements mentionnant
+    pages: Pages mentionnant
+    posts: Actualités mentionnant
+    projects: Projets mentionnant
+  none: Aucune personne
   posts:
     recent: Actualités publiées récemment
     all: Voir toutes les actualités publiées par {{ .author }}
@@ -303,11 +322,6 @@ persons:
     recent: Publications récentes
     all: Voir toutes les publications de {{ .author }}
   programs: Enseignements
-  backlinks:
-    events: Événements mentionnant
-    pages: Pages mentionnant
-    posts: Actualités mentionnant
-    projects: Projets mentionnant
 posts:
   author: Auteur·rice
   authors:
@@ -321,6 +335,7 @@ posts:
   informations: Informations
   next: Article suivant
   next_aria: Article suivant “{{ .Title }}”
+  none: Aucun article publié
   previous: Article précédent
   previous_aria: Article précédent “{{ .Title }}”
   reading_time: Temps de lecture
@@ -339,6 +354,7 @@ projects:
   informations: Informations
   next: Projet suivant
   next_aria: Projet suivant “{{ .Title }}”
+  none: Aucun projet
   previous: Projet précédent
   previous_aria: Projet précédent “{{ .Title }}”
   reading_time: Temps de lecture
@@ -380,6 +396,7 @@ programs:
   ects_credits: Crédits ECTS
   level: Niveau
   mention: Mention
+  none: Aucune formation
   no_program: Aucune formation
   posts: Actualités
   # TODO déplacer la clé location

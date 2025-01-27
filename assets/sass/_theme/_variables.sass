@@ -134,7 +134,7 @@
     --btn-border: #{$btn-border-desktop}
     --btn-border-radius: #{$btn-border-radius-desktop}
     --btn-min-width: #{$btn-min-width-desktop}
-  
+
   // -------------- //
   //      GRID      //
   // ---------------//
@@ -168,10 +168,11 @@
   // ---------------//
 
   --block-space-y: #{$block-space-y}
-  @include in-page-without-sidebar
-    --block-space-y: #{$block-space-y-desktop}
-  @include in-page-with-sidebar
-    --block-space-y: #{$block-space-y-with-sidebar}
+  @include media-breakpoint-up(desktop)
+    body:not(.full-width)
+      --block-space-y: #{$block-space-y-with-sidebar}
+    main > .blocks, body.full-width
+      --block-space-y: #{$block-space-y-desktop}
 
   // -------------- //
   //     HEADING    //

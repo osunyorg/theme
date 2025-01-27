@@ -1,7 +1,7 @@
 class Dropdown {
     constructor (selector) {
         this.element = document.querySelector(selector);
-        this.dropdownButton = this.element.querySelector('button');
+        this.dropdownButton = this.element.querySelector('button, [role="button"]');
 
         this.state = {
             isOpened: false

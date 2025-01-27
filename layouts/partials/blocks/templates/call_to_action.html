@@ -6,7 +6,7 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image {{ if $block.title }}call_to_action--with-title{{ end }} {{- if not .top.description }} call_to_action--without_text {{ end -}}">
+        <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image {{ if $block.title }}call_to_action--with-title{{ end }} {{- if not $block.top.description }} call_to_action--without-text {{ end -}}">
           <div>
             {{ partial "blocks/top.html" $block.top }}
             {{- if .buttons }}

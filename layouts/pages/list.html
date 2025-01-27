@@ -13,6 +13,12 @@
         "block_wrapped" true
       ) }}
 
+    {{ if eq site.Params.pages.single.taxonomies.position "content" }}
+      <div class="container taxonomies-container">
+        {{ partial "taxonomies/single-list.html" . }}
+      </div>
+    {{ end }}
+
     {{ if .Params.contents }}
       {{ partial "contents/list.html" . }}
     {{ else }}
