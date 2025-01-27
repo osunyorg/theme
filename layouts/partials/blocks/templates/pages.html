@@ -4,7 +4,6 @@
 
 {{- with .block.data -}}
   {{- $options := .options -}}
-  {{- $main_summary := "" -}}
 
   {{- $page_class := "" -}}
   {{ $page := "" }}
@@ -16,16 +15,11 @@
     {{ if .Params.bodyclass }}
       {{- $page_class = printf "block-%s" .Params.bodyclass }}
     {{ end }}
-    {{ if $options.main_summary }}
-      {{ $main_summary = partial  "GetRichSummary" ( dict 
-        "summary" .Params.summary
-        "kind" "pages"
-      )}}
-    {{ end }}
   {{ end -}}
-
-  {{ if $main_summary }}
-    {{ $block_class = printf "%s %s" $block_class "with-description" }}
+  {{ with $block.top }}
+    {{ if .description }}
+      {{ $block_class = printf "%s %s" $block_class "with-description" }}
+    {{ end }}
   {{ end }}
   {{ if $options.image }}
     {{ $block_class = printf "%s %s" $block_class "with-images" }}
