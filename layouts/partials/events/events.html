@@ -1,14 +1,15 @@
 {{ $layout := site.Params.events.index.layout }}
 
 <div class="events events--{{-  $layout -}}">
-  {{ if not .Pages }}
-    <p>{{ i18n "events.none" }}</p>
+  {{ if not .Paginator.Pages }}
+    {{ $is_term := eq .Kind "term" }}
+    <p>{{ i18n (cond $is_term "categories.no_event" "events.none") }}</p>
   {{ end }}
   {{ range .Paginator.Pages }}
     {{ partial "events/event.html" (dict
-      "event" .
-      "layout" $layout
-      "options" site.Params.events.index.options
+        "event" .
+        "layout" $layout
+        "options" site.Params.events.index.options
       )}}
   {{ end }}
 </div>
