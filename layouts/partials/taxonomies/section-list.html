@@ -1,7 +1,7 @@
 {{ $kind := .Type }}
 {{ $categories_kind := printf "%s_categories" $kind }}
 {{ $categories := where site.Pages "Section" $categories_kind }}
-{{ $taxonomies := where $categories "Params.is_taxonomy" "eq" true }}
+{{ $taxonomies := .Params.section_taxonomies }}
 {{ $option := index site.Params $kind }}
 
 {{ with $option.index.taxonomies }}
@@ -9,14 +9,14 @@
     {{ if $taxonomies }}
       <p>{{ i18n "taxonomies.list.title" }}</p>
       {{- range $taxonomies -}}
-        {{ if .Params.children }}
+        {{ if .categories }}
           <div class="dropdown">
-            <button aria-controls="categories-{{ .Title | anchorize }}" aria-expanded="false">
-              {{ .Title }}
+            <button aria-controls="categories-{{ .name | anchorize }}" aria-expanded="false">
+              {{ .name }}
             </button>
-            <div class="extendable taxonomy-categories" id="categories-{{ .Title | anchorize }}" data-extendable-close-siblings="true" data-extendable-auto-close="true">
+            <div class="extendable taxonomy-categories" id="categories-{{ .name | anchorize }}" data-extendable-close-siblings="true" data-extendable-auto-close="true">
               <ul>
-                {{ range .Params.children }}
+                {{ range .categories }}
                   {{ $category := site.GetPage .path }}
                   {{ with $category }}
                     <li>
@@ -28,22 +28,7 @@
             </div>
           </div>
         {{- end -}}
-
       {{- end -}}
-    {{- else -}}
-      <ul class="taxonomies-section {{ $kind }}-categories" aria-label="{{ i18n "categories.label" }}">
-        {{- range $categories -}}
-          {{ with .Page }}
-              {{ if not .Data.Terms }}
-                <li>
-                  <a href="{{ .Permalink }}">
-                    {{- safeHTML .Title -}}
-                  </a>
-                </li>
-              {{ end }}
-          {{- end }}
-        {{- end }}
-      </ul>
     {{- end -}}
   </div>
 {{- end -}}
