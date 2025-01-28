@@ -2,6 +2,7 @@
 {{ $options := .options }}
 {{ $block_index := .block_index }}
 {{ $id_transcription := printf "block-%d-transcription" $block_index }}
+{{ $heading_level := .heading_level | default 2 }}
 
 {{/*  In map layout, all organization should have .path to get coordinates  */}}
 {{ $organizations := where (default slice .organizations) "path" "ne" nil }}
@@ -18,15 +19,14 @@
             {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
             {{ if $address_geolocation }}
               <li>
-                {{ template "organization" (dict
-                  "title" .Title
-                  "summary" .Params.summary
-                  "contact_details" .Params.contact_details
-                  "options" (dict 
-                    "summary" $options.summary
-                    "link" $options.link
-                  )
-                )}}
+                {{ partial "organizations/list/item/organization.html" (dict
+                    "organization" .
+                    "options" (merge $options (dict
+                      "address" true
+                      "logo" false
+                    ))
+                    "heading_level" $heading_level
+                  ) }}
               </li>
             {{ end }}
           {{ end }}
@@ -50,15 +50,12 @@
       {{ with site.GetPage .path }}
           {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
           {{ if $address_geolocation }}
-            {{ template "organization" dict
-              "title" .Title
-              "url" .Permalink
-              "logo" (index .Params $logo_index)
-              "latitude" $address_geolocation.latitude
-              "longitude" $address_geolocation.longitude
-              "summary" .Params.summary
-              "options" $options
-            }}
+            {{ partial "organizations/list/item/organization.html" (dict
+                "organization" .
+                "options" $options
+                "with_geolocation" true
+                "heading_level" $heading_level
+              ) }}
           {{ end }}
         {{ end }}
     {{ end -}}

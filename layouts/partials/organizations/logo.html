@@ -4,11 +4,10 @@
     {{ $logo_index = "logo_on_dark_background" }}
   {{ end }}
   <figure class="organization-logo" {{ with .Title -}} role="figure" aria-label="{{ . }}" {{- end }}>
-    {{- partial "commons/image.html"
-        (dict
-          "image"    (index .Params $logo_index)
-          "alt"      .Title
-          "sizes"    site.Params.image_sizes.sections.organizations.logo
-        ) -}}
+    {{- partial "commons/image.html" (dict
+        "image"    (index .Params $logo_index)
+        "alt"      .Title
+        "sizes"    site.Params.image_sizes.sections.organizations.logo
+      ) -}}
   </figure>
 {{- end -}}
