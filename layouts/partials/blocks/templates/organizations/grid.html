@@ -13,13 +13,18 @@
           ) }}
       {{ end }}
     {{ else }}
-      {{ template "organization" dict
-        "title" .name
-        "url" .url
-        "external" true
-        "logo" .logo
-        "options" $options
-      }}
+      {{ partial "organizations/list/item/organization.html" (dict
+          "organization" (dict
+            "Title" .name
+            "Permalink" .url
+            "Params" (dict 
+              "logo" .logo
+              "external" true
+            )
+          )
+          "options" $options
+          "heading_level" $heading_level
+        ) }}
     {{ end }}
   {{ end -}}
 </div>
