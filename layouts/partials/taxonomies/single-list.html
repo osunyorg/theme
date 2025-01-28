@@ -1,7 +1,7 @@
 {{ $type := .Type }}
 {{ $taxonomies := .Params.taxonomies }}
 
-{{ if or $taxonomies }}
+{{ if $taxonomies }}
   <ul class="taxonomies-single {{ $type }}-taxonomies" aria-label="{{ i18n "categories.label" }}">
     {{ range $taxonomies }}
       {{ if .categories }}
