@@ -6,7 +6,11 @@
     <p>{{ i18n (cond $is_term "categories.no_organization" "organizations.none") }}</p>
   {{ end }}
   {{ range .Paginator.Pages }}
-    {{ partial "organizations/organization.html" . }}
+    {{ partial "organizations/list/item/organization.html" (dict
+        "organization" .
+        "options" $options
+        "heading_level" 2
+      ) }}
   {{ end }}
 </div>
 
