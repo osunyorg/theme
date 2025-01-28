@@ -1,0 +1,36 @@
+{{ $options := .options | default site.Params.organizations.index.options }}
+{{ $organization := .organization }}
+{{ $heading_level := .heading_level | default 2 }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+    "level" $heading_level
+    "attributes" "class='organization-title'"
+)}}
+
+{{ with $organization }}
+  <article class="organization">
+    <div class="organization-content">
+      {{ $title := partial "PrepareHTML" .Title }}
+
+      {{ $heading_tag.open }}
+        {{- if $options.link -}}
+          <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
+        {{- end -}}
+        {{ $title }}
+        {{- if $options.link -}}
+          </a>
+        {{- end -}}
+      {{ $heading_tag.close }}
+
+      {{ if and $options.summary  .Params.summary }}
+        <div class="organization-summary">
+          {{ safeHTML .Params.summary }}
+        </div>
+      {{ end }}
+    </div>
+    {{ if $options.logo }}
+      {{ if $options.logo }}
+        {{ partial "organizations/list/item/image.html" . }}
+      {{ end }}
+    {{ end }}
+  </article>
+{{ end }}

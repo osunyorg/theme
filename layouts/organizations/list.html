@@ -10,16 +10,16 @@
 
   <div class="document-content">
     {{ partial "pages/summary.html" (dict
-      "context" .
-      "with_container" true
-    ) }}
+        "context" .
+        "with_container" true
+      ) }}
 
     {{ partial "contents/list.html" . }}
 
     <div class="container">
       {{- if not $is_organizations_block_present -}}
         {{ partial "taxonomies/section-list.html" . }}
-        {{ partial "organizations/organizations.html" . }}
+        {{ partial "organizations/list/organizations.html" . }}
         {{ partial "commons/pagination.html" . }}
       {{ end }}
     </div>

@@ -1,16 +1,16 @@
 {{ $logo_index := .logo_index }}
 {{ $options := .options }}
+{{ $heading_level := .heading_level | default 2 }}
+
 <div class="grid organizations {{- if $options.summary }} with-summaries {{- end }}">
   {{- range .organizations }}
     {{ if .path }}
       {{ with site.GetPage .path }}
-        {{ template "organization"  dict
-            "title" .Title
-            "url" .Permalink
-            "logo" (index .Params $logo_index)
+        {{ partial "organizations/list/item/organization.html" (dict
+            "organization" .
             "options" $options
-            "summary" .Params.summary
-          }}
+            "heading_level" $heading_level
+          ) }}
       {{ end }}
     {{ else }}
       {{ template "organization" dict

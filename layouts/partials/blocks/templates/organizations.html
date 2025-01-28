@@ -19,6 +19,7 @@
 
         {{ partial (printf "blocks/templates/organizations/%s.html" $layout) (dict
             "block_index" $block_index
+            "heading_level" $block.ranks.children
             "title" $block.title
             "logo_index" $logo_index
             "organizations" .organizations
@@ -61,13 +62,14 @@
     </div>
     {{ if $options.logo }}
       <div class="media">
-        {{- if .logo -}}
+        {{/*  {{- if .logo -}}
           {{- partial "commons/image.html" (dict
                 "image"    .logo
                 "alt"      $title
                 "sizes"    site.Params.image_sizes.blocks.organizations
               ) -}}
-        {{- end -}}
+        {{- end -}}  */}}
+        {{ partial "organizations/list/item/image.html" . }}
       </div>
     {{- end -}}
   </article>
