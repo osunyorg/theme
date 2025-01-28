@@ -20,9 +20,11 @@
             ) }}
         {{ end }}
 
-        <div class="taxonomies-container">
-          {{ partial "taxonomies/single-list.html" . }}
-        </div>
+        {{ if .Params.taxonomies }}
+          <div class="taxonomies-container">
+            {{ partial "taxonomies/single-list.html" . }}
+          </div>
+        {{ end }}
 
         {{ partial "commons/contact-details.html" . }}
 

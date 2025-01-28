@@ -1,5 +1,7 @@
-<section>
-  <div class="container taxonomies-container">
-    {{ partial "taxonomies/single-list.html" . }}
-  </div>
-</section>
+{{ if .Params.taxonomies }}
+  <section>
+    <div class="container taxonomies-container">
+      {{ partial "taxonomies/single-list.html" . }}
+    </div>
+  </section>
+{{ end }}
