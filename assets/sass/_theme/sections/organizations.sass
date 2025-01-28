@@ -16,16 +16,21 @@
         margin-bottom: $spacing-2
         order: -1
         overflow: hidden
-        padding: $spacing-3
         picture
-            aspect-ratio: 1
             display: block
+            aspect-ratio: 1
+            width: 100%
         img
             display: block
             height: 100%
             object-fit: contain
             object-position: center
             width: 100%
+        &--image
+            img
+                object-fit: cover
+        &--logo
+            padding: $spacing-3
         &:empty
             position: relative
             &::after
