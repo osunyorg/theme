@@ -15,7 +15,7 @@
       {{ else }}
         {{ $image_class = "" }}
       {{ end }}
-      <article class="{{ $image_class }} {{- if (not (isset .Params "image")) -}} without-image {{- end -}}">
+      <article class="page {{ $image_class }} {{- if (not (isset .Params "image")) -}} without-image {{- end -}}">
         {{ $heading_tag.open }}
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}

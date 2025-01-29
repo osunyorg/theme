@@ -141,8 +141,6 @@
 
         @include in-page-without-sidebar
             .block-title
-                a
-                    @include stretched-link(before)
             .top
                 .description
                     p
@@ -202,13 +200,8 @@
                 display: flex
                 flex-direction: column
                 .page-title a
-                    @include stretched-link
+                    @include stretched-link(before)
                     text-decoration: none
-                .more
-                    @include icon(arrow, after, true)
-                    &::after
-                        opacity: 1
-                        transition: padding-left 0.3s
                 &:hover .more::after
                     padding-left: pxToRem(10)
                 .media 
@@ -231,13 +224,8 @@
             position: relative
             + .page
                 margin-top: $spacing-5
-            .more
-                @include icon(arrow-right-line, after, true)
-                @include hover-translate-icon(after)
             &:hover .more:after
                 transform: translateX(#{pxToRem(10)})
-            &-title a
-                @include stretched-link
             .media
                 img
                     aspect-ratio: 1
