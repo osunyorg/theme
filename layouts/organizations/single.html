@@ -9,13 +9,16 @@
         ) }}
 
     <div class="container">
-      <div itemprop="articleBody" class="rich-text">
-        {{ partial "pages/summary.html" (dict
+
+      <div itemprop="articleBody">
+        {{ partial "organizations/summary.html" (dict
           "context" .
         ) }}
 
         {{ if (partial "GetTextFromHTML" .Params.text) }}
-          {{ partial "PrepareHTML".Params.text }}
+          <div class="organization-presentation rich-text">
+            {{ partial "PrepareHTML" .Params.text }}
+          </div>
         {{ end }}
 
         {{ if .Params.taxonomies }}
@@ -25,8 +28,8 @@
         {{ end }}
 
         {{ partial "commons/contact-details.html" . }}
-
       </div>
+
       {{ partial "organizations/logo.html" . }}
     </div>
     {{ partial "contents/list.html" . }}
