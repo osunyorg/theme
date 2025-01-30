@@ -22,7 +22,7 @@
 {{ $roles := .context.Params.roles }}
 {{ $contacts := partial "GetTextFromHTML" .context.Params.contacts }}
 
-{{ $category := site.GetPage (printf "/posts_categories/%s" .context.Params.related_category ) }}
+{{- $category := site.GetPage (printf "/posts_categories/%s" .context.Params.related_categories.posts ) -}}
 {{ $related_posts := $category.Pages }}
 
 {{/* nav-link required for toggle active class */}}
