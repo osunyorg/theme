@@ -1,0 +1,12 @@
+{{- if and site.Params.organizations.prefer_image_over_logo .Params.image -}}
+  <div class="media media--image">
+    {{ partial "commons/image.html" (dict
+        "image"    .Params.image
+        "sizes"    site.Params.image_sizes.sections.organizations.item
+      )}}
+  </div>
+{{- else -}}
+  <div class="media media--logo">
+    {{- partial "organizations/logo.html" . -}}
+  </div>
+{{- end -}}

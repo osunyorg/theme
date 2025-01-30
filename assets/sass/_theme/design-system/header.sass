@@ -115,12 +115,11 @@ header#document-header
                 display: block
         .nav-level-1
             > li
-                line-height: 1
+                align-items: center
                 border: none
                 display: flex
-                align-items: center
-                @include media-breakpoint-down(desktop)
-                    height: 100%
+                line-height: 1
+                position: relative
                 &:not(.upper-menu-i18n)
                     > a,
                     > span
@@ -132,7 +131,16 @@ header#document-header
                 @if $header-upper-menu-active-style-for-sites
                     $upper-menu-active-selector: ':not([href*="https://"], [href*="http://"])'
                 a#{$upper-menu-active-selector}
-                    box-shadow: $header-upper-menu-active-box-shadow
+                    &::after
+                        background-color: $header-upper-menu-active-decoration-color
+                        bottom: 0
+                        content: ''
+                        height: $header-upper-menu-active-decoration-height
+                        left: 0
+                        position: absolute
+                        right: 0
+                @include media-breakpoint-down(desktop)
+                    height: 100%
                 @include media-breakpoint-up(desktop)
                     > a,
                     > span,

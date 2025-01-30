@@ -1,4 +1,4 @@
-<div class="essential-container" id="#{{ urlize (i18n "programs.toc.essential") }}">
+<div class="essential-container" id="#{{ anchorize (i18n "programs.toc.essential") }}">
   <div class="container">
     {{ $duration := .Params.duration }}
     {{ $diploma := site.GetPage (printf "/diplomas/%s" .Params.diplomas) }}
@@ -45,12 +45,7 @@
       {{ end }}
       
       {{ if site.Params.programs.share_links.enabled | default site.Params.share_links.enabled }}
-        <div class="dropdown-share">
-          <button type="button" aria-expanded="false">{{ i18n "commons.share" }}</button>
-          <div class="dropdown-menu">
-            {{ partial "commons/share.html" . }}
-          </div>
-        </div>
+        {{ partial "commons/share/dropdown.html" . }}
       {{ end }}
 
       {{ partial "commons/download-link" (dict 

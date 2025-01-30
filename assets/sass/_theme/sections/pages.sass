@@ -2,9 +2,14 @@
     @include article
     .page-title
         a
-            @include icon(arrow-right-line, after, true)
-            @include hover-translate-icon(after)
             @include stretched-link(before)
+            // exclusion for blocks with "more" link
+            .block:not(.block-pages--large, .block-pages--alternate) &
+                @include icon(arrow-right-line, after, true)
+                @include hover-translate-icon(after)
+    .more
+        @include icon(arrow-right-line, after, true)
+        @include hover-translate-icon(after)
 
 .block-pages,
 .pages

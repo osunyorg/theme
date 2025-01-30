@@ -1,4 +1,4 @@
-<section id="{{ urlize (i18n "programs.toc.presentation") }}">
+<section id="{{ anchorize (i18n "programs.toc.presentation") }}">
   <div class="container">
     <div class="content">
       <h2>{{ i18n "programs.toc.presentation" }}</h2>
@@ -8,14 +8,14 @@
           {{- partial "programs/image.html" .Params.image -}}
 
           {{- if partial "GetTextFromHTML" .Params.presentation -}}
-            <section class="rich-text" id="{{ urlize (i18n "programs.presentation") }}">
+            <section class="rich-text" id="{{ anchorize (i18n "programs.presentation") }}">
               <h3>{{ i18n "programs.presentation" }}</h3>
               {{- partial "PrepareHTML" .Params.presentation -}}
             </section>
           {{- end -}}
 
           {{- if partial "GetTextFromHTML" .Params.objectives -}}
-            <section class="rich-text" id="{{ urlize (i18n "programs.objectives") }}">
+            <section class="rich-text" id="{{ anchorize (i18n "programs.objectives") }}">
               <h3>{{ i18n "programs.objectives" }}</h3>
               {{- partial "PrepareHTML" .Params.objectives -}}
             </section>
@@ -40,7 +40,7 @@
       {{ end }}
       {{- partial "contents/list.html" . }}
       <div>
-        <section id="{{ urlize (i18n "programs.administrative_information") }}">
+        <section id="{{ anchorize (i18n "programs.administrative_information") }}">
           <h3>{{ i18n "programs.administrative_information" }}</h3>
           <table class="program-table">
             <caption>{{ i18n "programs.administrative_information" }}</caption>

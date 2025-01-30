@@ -6,7 +6,6 @@ import './body';
 import './design-system/accordion';
 import './design-system/clickToCopy';
 import './design-system/extendables';
-import './design-system/dropdowns';
 import './design-system/font';
 import './design-system/Maps';
 import './design-system/mainMenu';

@@ -9,10 +9,5 @@
 {{ end }}
 
 {{ if site.Params.projects.share_links.enabled | default site.Params.share_links.enabled }}
-  <div class="dropdown-share">
-    <button type="button" aria-expanded="false">{{ i18n "commons.share" }}</button>
-    <div class="dropdown-menu">
-      {{ partial "commons/share.html" . }}
-    </div>
-  </div>
+  {{ partial "commons/share/dropdown.html" . }}
 {{ end }}

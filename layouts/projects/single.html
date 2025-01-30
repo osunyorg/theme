@@ -6,9 +6,11 @@
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
     
-    <div class="container taxonomies-container">
-      {{ partial "taxonomies/single-list.html" . }}
-    </div>
+    {{ if .Params.taxonomies }}
+      <div class="container taxonomies-container">
+        {{ partial "taxonomies/single-list.html" . }}
+      </div>
+    {{ end }}
 
     {{ partial "projects/summary.html" (dict
         "context" .

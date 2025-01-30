@@ -1,10 +1,10 @@
 {{- if .Params.certifications.qualiopi.certified -}}
-<section id="{{ urlize (i18n "programs.toc.certification") }}">
+<section id="{{ anchorize (i18n "programs.toc.certification") }}">
   <div class="container">
     <div class="content">
       <h2>{{ i18n "programs.toc.certification" }}</h2>
       <div>
-        <section class="rich-text" id="{{ urlize (i18n "programs.certifications.qualiopi") }}">
+        <section class="rich-text" id="{{ anchorize (i18n "programs.certifications.qualiopi") }}">
           <img src="/assets/images/certifications/qualiopi.svg" alt="{{ i18n "programs.certifications.qualiopi" }}" class="logo-qualiopi">
           {{- if partial "GetTextFromHTML" .Params.certifications.qualiopi.text -}}
             {{- partial "PrepareHTML" .Params.certifications.qualiopi.text -}}
