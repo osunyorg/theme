@@ -14,10 +14,8 @@
           "context" .
         ) }}
 
-        {{ if (partial "GetTextFromHTML" .Content) }}
-          {{ partial "PrepareHTML" (
-              partial "H2AddId" .Content
-            ) }}
+        {{ if (partial "GetTextFromHTML" .Params.text) }}
+          {{ partial "PrepareHTML".Params.text }}
         {{ end }}
 
         {{ if .Params.taxonomies }}

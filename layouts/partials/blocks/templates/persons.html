@@ -11,7 +11,7 @@
     {{- $person := site.GetPage .path -}}
     {{- $role := .role -}}
     {{- $summary := $person.Params.summary -}}
-    {{ with (or $role $summary $content)}}
+    {{ with (or $role $summary) }}
       {{- $content_length := len . -}}
       {{ if ge $content_length $char_limit }}
         {{- $is_large = true -}}
