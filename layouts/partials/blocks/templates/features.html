@@ -12,16 +12,22 @@
           <ul>
             {{- range $features }}
               <li>
-                <div>
-                  {{- $heading_tag := partial "GetHeadingTag" (dict 
-                      "level" $block.ranks.children
-                      "attributes" "class='name'"
-                  ) -}}
-                  {{ $heading_tag.open -}}
-                    {{ .title | safeHTML }}
-                  {{ $heading_tag.close -}}
-                  <div>{{ partial "PrepareHTML" .description }}</div>
-                </div>
+                {{ if or .title .description }}
+                  <div>
+                    {{ with .title }}
+                      {{- $heading_tag := partial "GetHeadingTag" (dict 
+                          "level" $block.ranks.children
+                          "attributes" "class='name'"
+                      ) -}}
+                      {{ $heading_tag.open -}}
+                        {{ . | safeHTML }}
+                      {{ $heading_tag.close -}}
+                    {{ end }}
+                    {{ with .description }}
+                      <div>{{ partial "PrepareHTML" . }}</div>
+                    {{ end }}
+                  </div>
+                {{ end }}
                 {{- if .image -}}
                   <figure {{- with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
                     {{- partial "commons/image.html"
