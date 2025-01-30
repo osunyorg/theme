@@ -12,12 +12,18 @@ osuny.Extendable = function (element) {
     };
     this.options = {
         // This attribute determine if extendable should close others when opened
-        closeSiblings: this.element.getAttribute('data-extendable-close-siblings')
+        closeSiblings: this.element.getAttribute('data-extendable-close-siblings'),
+        autoClose: this.element.getAttribute('data-extendable-auto-close')
     };
+
     this.listen();
 };
 
 osuny.Extendable.prototype.listen = function () {
+    if (this.options.autoClose) {
+        this.handleAutoClose();
+    }
+
     this.buttons.forEach(function (button) {
         a11yClick(button, function (event) {
             event.preventDefault();
@@ -26,19 +32,31 @@ osuny.Extendable.prototype.listen = function () {
         }.bind(this));
     }.bind(this));
 
-    this.element.addEventListener('extendable-close', this.toggle.bind(this, true));
+    window.addEventListener('keydown', function (event) {
+        if (event.keyCode === 27 || event.key === 'Escape') {
+            this.toggle(false);
+        }
+    }.bind(this));
+
+    this.element.addEventListener('extendable-close', this.toggle.bind(this, false, true));
+};
+
+osuny.Extendable.prototype.handleAutoClose = function () {
+    window.addEventListener('click', function (event) {
+        if (this.state.opened && event.target !== this.state.openedByButton) {
+            this.toggle(false);
+        }
+    }.bind(this));
 };
 
 osuny.Extendable.prototype.a11yFocus = function (button) {
     if (this.state.opened) {
         this.state.openedByButton = button;
-    } else if (this.state.openedByButton) {
-        this.state.openedByButton.focus();
     }
 };
 
-osuny.Extendable.prototype.toggle = function (forceClose) {
-    this.state.opened = forceClose ? false : !this.state.opened;
+osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
+    this.state.opened = typeof opened !== 'undefined' ? opened : !this.state.opened;
 
     if (this.state.opened && this.options.closeSiblings) {
         this.closeSiblings();
@@ -49,10 +67,22 @@ osuny.Extendable.prototype.toggle = function (forceClose) {
             button.setAttribute('aria-expanded', this.state.opened);
         }
     }.bind(this));
+
+    if (!this.state.opened && this.state.openedByButton && !fromOutside) {
+        this.state.openedByButton.focus();
+        this.state.openedByButton = null;
+    }
 };
 
 osuny.Extendable.prototype.closeSiblings = function () {
-    var extendables = this.element.parentNode.querySelectorAll('.extendable');
+    var parent = this.element.parentNode,
+        extendables;
+
+    if (parent.classList.contains('dropdown')) {
+        parent = parent.parentNode;
+    }
+
+    extendables = parent.querySelectorAll('.extendable');
     extendables.forEach(function (extendable) {
         if (this.element !== extendable) {
             extendable.dispatchEvent(new Event('extendable-close'));

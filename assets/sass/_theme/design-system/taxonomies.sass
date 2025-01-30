@@ -21,6 +21,34 @@
                 display: inline-block
                 margin-left: $spacing-1
 
+.taxonomies-list
+    align-items: baseline
+    display: flex
+    margin-bottom: var(--grid-gutter)
+    margin-top: var(--grid-gutter)
+    flex-wrap: wrap
+    > p
+        @include meta
+    .dropdown
+        @include dropdown(".taxonomy-categories")
+    .taxonomy-categories
+        ul
+            @include list-reset
+    @include media-breakpoint-down(md)
+        flex-direction: column
+        .dropdown 
+            margin-top: $spacing-2
+            width: 100%
+            .taxonomy-categories
+                li
+                    a
+                        padding-left: var(--grid-gutter)
+    @include media-breakpoint-up(md)
+        gap: $spacing-3
+        .taxonomy-categories
+            min-width: max-content
+            margin-left: -$spacing-1
+
 .taxonomies-single
     &, ul
         @include list-reset

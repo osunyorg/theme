@@ -1,8 +1,7 @@
 {{ $type := .Type }}
 {{ $taxonomies := .Params.taxonomies }}
-{{ $free_categories := .Params.free_categories }}
 
-{{ if or $taxonomies $free_categories }}
+{{ if $taxonomies }}
   <ul class="taxonomies-single {{ $type }}-taxonomies" aria-label="{{ i18n "categories.label" }}">
     {{ range $taxonomies }}
       {{ if .categories }}
@@ -21,22 +20,6 @@
           {{ end }}
         </li>
       {{ end }}
-    {{ end }}
-    {{ with $free_categories }}
-      <li class="terms">
-        <span class="taxonomy-title">
-          {{ i18n "categories.label" }}
-        </span>
-        <ul class="taxonomy-children">
-          {{ range . }}
-            <li>
-              <a href="{{ .permalink }}">
-                {{ safeHTML .name }}
-              </a>
-            </li>
-          {{ end }}
-        </ul>
-      </li>
     {{ end }}
   </ul>
 {{ end }}
