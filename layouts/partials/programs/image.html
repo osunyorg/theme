@@ -1,14 +1,8 @@
 {{ if . }}
-  <figure {{ with .credit }} role="figure" aria-label="{{ . | plainify }}"{{ end }} class="featured-image">
-    {{ partial "commons/image.html"
-          (dict
-            "image"    .
-            "sizes"    site.Params.image_sizes.sections.programs.image
-            "itemprop" true
-            "crop"     true
-          )}}
-    {{ with partial "GetTextFromHTML" .credit }}
-      <figcaption class="credit">{{ . }}</figcaption>
-    {{ end }}
-  </figure>
+  {{ partial "commons/image-figure.html" (dict
+      "image" .
+      "sizes" site.Params.image_sizes.sections.programs.image
+      "itemprop" true
+      "image_class" "featured-image"
+    )}}
 {{ end }}
