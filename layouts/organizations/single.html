@@ -14,6 +14,12 @@
           "context" .
         ) }}
 
+        {{ if (partial "GetTextFromHTML" .Content) }}
+          {{ partial "PrepareHTML" (
+              partial "H2AddId" .Content
+            ) }}
+        {{ end }}
+
         {{ if .Params.taxonomies }}
           <div class="taxonomies-container">
             {{ partial "taxonomies/single-list.html" . }}
