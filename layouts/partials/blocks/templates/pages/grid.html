@@ -29,6 +29,13 @@
               "kind" "pages"
             )}}
           {{ end }}
+          {{/*  TODO: set right options when admin is ready  */}}
+          {{ if site.Params.pages.index.options.categories }}
+            {{ partial "commons/categories" ( dict
+              "context" .
+              "kind" "page"
+            )}}
+          {{ end }}
           {{ if $options.image }}
             {{- partial "pages/page-media.html" . -}}
           {{ end }}
