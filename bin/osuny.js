@@ -1,7 +1,9 @@
 #! /usr/bin/env node
 
 const shell = require("shelljs"),
-    dev = require("./dev");
+    dev = require("./dev"),
+    rewrite = require("./rewrite/rewrite");
+
 shell.set('-e'); // exit upon first error
 console.log(`
   .=*#%%#*=        -*#%%#*=.      =+-      ++.     .+ .+#%%#+.     :++      -+-
@@ -98,6 +100,10 @@ if (command === "example") {
 if (command === "update-theme") {
     execute("git submodule update --remote");
     execute("yarn upgrade");
+}
+
+if (command === "rewrite") {
+    rewrite();
 }
 
 console.log(dev);
