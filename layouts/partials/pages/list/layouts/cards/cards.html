@@ -1,9 +1,9 @@
 {{ $context := . }}
 
-<div class="alternate">
+<div class="cards">
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
-    {{ partial "pages/item/alternate.html" (dict
+    {{ partial "pages/list/card.html" (dict
         "page" $page
         "context" $context
       )}}

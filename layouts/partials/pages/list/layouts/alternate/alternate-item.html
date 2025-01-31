@@ -10,21 +10,21 @@
   {{ end }}
 
   <article class="page {{ $image_class }} {{- if (not (isset .Params "image")) -}} without-image {{- end -}}">
-    {{ partial "pages/item/components/title.html" (dict 
+    {{ partial "pages/list/components/title.html" (dict 
         "page" .
         "heading_level" $heading_level
       )}}
 
     {{ if $options.summary }}
-      {{ partial "pages/item/components/summary.html" . }}
+      {{ partial "pages/list/components/summary.html" . }}
     {{ end }}
 
     {{ if site.Params.blocks.pages.alternate.more }}
-      {{ partial "pages/item/components/more.html" . }}
+      {{ partial "pages/list/components/more.html" . }}
     {{ end }}
 
     {{ if $options.image }}
-      {{- partial "pages/item/components/media.html" (dict "image" .Params.image) -}}
+      {{- partial "pages/list/components/media.html" (dict "image" .Params.image) -}}
     {{ end }}
   </article>
 {{ end }}

@@ -4,20 +4,20 @@
 {{ with .page }}
   <article class="page">
     <div class="page-content">
-      {{ partial "pages/item/components/title.html" (dict 
+      {{ partial "pages/list/components/title.html" (dict 
           "page" .
           "heading_level" $heading_level
         )}}
 
       {{ if $options.summary }}
-        {{ partial "pages/item/components/summary.html" . }}
+        {{ partial "pages/list/components/summary.html" . }}
       {{ end }}
 
-      {{ partial "pages/item/components/more.html" . }}
+      {{ partial "pages/list/components/more.html" . }}
     </div>
 
     {{ if $options.image }}
-      {{- partial "pages/item/components/media.html" (dict
+      {{- partial "pages/list/components/media.html" (dict
           "image" .Params.image
           "sizes" site.Params.image_sizes.blocks.pages.large
         ) -}}
