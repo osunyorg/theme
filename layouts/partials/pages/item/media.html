@@ -1,0 +1,13 @@
+{{ $image := .image }}
+{{ $sizes := .sizes | default site.Params.image_sizes.sections.pages.item }}
+
+<div class="media">
+  {{- if $image -}}
+    {{- partial "commons/image.html" (dict
+        "image" $image
+        "sizes" $sizes
+      ) -}}
+  {{- else -}}
+    {{- partial "commons/image-default.html" "pages" -}}
+  {{- end -}}
+</div>

@@ -1,9 +1,6 @@
 {{ $options := .options }}
 {{ $heading_level := .heading_level | default 3 }}
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-        "level" $heading_level
-        "attributes" "class='page-title'"
-)}}
+
 {{ with .pages }}
   <div class="grid">
     {{ range . }}
@@ -18,19 +15,17 @@
 
       {{ with $page }}
         <article class="page">
-          {{ $heading_tag.open }}
-            <a href="{{- .Permalink -}}">
-              {{- partial "PrepareHTML" .Title -}}
-            </a>
-          {{ $heading_tag.close }}
-          {{ if and $options.summary .Params.summary }}
-            {{ partial "GetRichSummary" ( dict 
-              "summary" .Params.summary
-              "kind" "pages"
+          {{ partial "pages/item/title.html" (dict 
+              "page" .
+              "heading_level" $heading_level
             )}}
+
+          {{ if $options.summary }}
+            {{ partial "pages/item/summary.html" . }}
           {{ end }}
+
           {{ if $options.image }}
-            {{- partial "pages/page-media.html" . -}}
+            {{- partial "pages/item/media.html" (dict "image" .Params.image) -}}
           {{ end }}
         </article>
       {{- end -}}

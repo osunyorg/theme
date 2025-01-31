@@ -1,0 +1,13 @@
+{{ $page := .page }}
+{{ $heading_level := .heading_level }}
+
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+    "level" $heading_level
+    "attributes" "class='page-title'"
+  )}}
+
+{{ $heading_tag.open }}
+  <a href="{{- $page.Permalink -}}">
+    {{- partial "PrepareHTML" $page.Title -}}
+  </a>
+{{ $heading_tag.close }}

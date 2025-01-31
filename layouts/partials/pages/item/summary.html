@@ -1,0 +1,7 @@
+{{ $summary := . }}
+{{ with $summary }}
+  {{ partial "GetRichSummary" ( dict 
+      "summary" $summary
+      "kind" "pages"
+    )}}
+{{ end }}

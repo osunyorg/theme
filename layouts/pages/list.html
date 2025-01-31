@@ -1,14 +1,14 @@
 {{ define "main" }}
-  {{ partial "pages/hero.html" . }}
-  {{ partial "hooks/after-page-hero.html" . }}
+  {{ partial "pages/single/hero.html" . }}
+  {{ partial "pages/single/hook-after-page-hero.html" . }}
 
   <div class="document-content">
     {{ partial "toc/container.html" (dict
-        "toc" "pages/toc.html"
+        "toc" "pages/single/toc.html"
         "context" .
       ) }}
 
-    {{ partial "pages/summary.html" (dict
+    {{ partial "pages/single/summary.html" (dict
         "context" .
         "block_wrapped" true
       ) }}
@@ -22,7 +22,7 @@
     {{ if .Params.contents }}
       {{ partial "contents/list.html" . }}
     {{ else }}
-      {{ partial "pages/children.html" . }}
+      {{ partial "pages/list/children.html" . }}
     {{ end }}
   </div>
 

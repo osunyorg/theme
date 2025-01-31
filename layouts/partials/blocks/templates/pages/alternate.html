@@ -1,10 +1,6 @@
 {{ $options := .options }}
 {{ $image_class := "" }}
 {{ $heading_level := .heading_level | default 3 }}
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-        "level" $heading_level
-        "attributes" "class='page-title'"
-)}}
 
 <div class="alternate">
   {{ range .pages }}
@@ -16,25 +12,21 @@
         {{ $image_class = "" }}
       {{ end }}
       <article class="page {{ $image_class }} {{- if (not (isset .Params "image")) -}} without-image {{- end -}}">
-        {{ $heading_tag.open }}
-          <a href="{{- .Permalink -}}">
-            {{- partial "PrepareHTML" .Title -}}
-          </a>
-        {{ $heading_tag.close }}
-
-        {{ if and $options.summary .Params.summary }}
-          {{ partial "GetRichSummary" ( dict 
-              "summary" .Params.summary
-              "kind" "pages"
+        {{ partial "pages/item/title.html" (dict 
+            "page" .
+            "heading_level" $heading_level
           )}}
+
+        {{ if $options.summary }}
+          {{ partial "pages/item/summary.html" . }}
         {{ end }}
 
         {{ if site.Params.blocks.pages.alternate.more }}
-          <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+          {{ partial "pages/item/more.html" . }}
         {{ end }}
 
         {{ if $options.image }}
-          {{- partial "pages/page-media.html" . -}}
+          {{- partial "pages/item/media.html" (dict "image" .Params.image) -}}
         {{ end }}
       </article>
     {{- end -}}
