@@ -6,7 +6,7 @@
           <div itemprop="author" itemscope itemtype="https://schema.org/Person">
             <meta itemprop="name" content="{{ trim .Title "\n" }}">
             <meta itemprop="url" content="{{ .Permalink }}">
-            <meta itemprop="description" content="{{ trim .Content "\n" | safeHTML }}">
+            <meta itemprop="description" content="{{ trim .Params.summary "\n" | safeHTML }}">
             {{ if .Params.image }}
               <meta itemprop="image" content="{{ .Params.image }}">
             {{ end }}
