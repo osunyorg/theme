@@ -1,8 +1,5 @@
 {{ $kind := .kind }}
 {{ $categories_kind := printf "%ss_categories" $kind }}
-{{ if eq $kind "page" }}
-  {{ $categories_kind := "pages_categories" }}
-{{ end }}
 {{ $categories := .context.GetTerms $categories_kind }}
 
 {{- if $categories -}}
