@@ -4,8 +4,8 @@
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
     {{ partial "pages/item/large.html" (dict
-      "page" $page
-      "context" .
-    )}}
+        "page" $page
+        "context" $context
+      )}}
   {{ end }}
 </div>
