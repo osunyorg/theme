@@ -1,0 +1,19 @@
+{{ $options := .context.options }}
+{{ $heading_level := .context.heading_level | default 3 }}
+
+{{ with .page }}
+  <article class="page">
+    {{ partial "pages/item/components/title.html" (dict 
+        "page" .
+        "heading_level" $heading_level
+      )}}
+
+    {{ if $options.summary }}
+      {{ partial "pages/item/components/summary.html" . }}
+    {{ end }}
+
+    {{ if $options.image }}
+      {{- partial "pages/item/components/media.html" (dict "image" .Params.image) -}}
+    {{ end }}
+  </article>
+{{- end -}}

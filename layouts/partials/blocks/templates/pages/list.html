@@ -1,5 +1,5 @@
+{{ $context := . }}
 {{ $options := .options }}
-{{ $heading_level := .heading_level | default 3 }}
 
 <ul class="list {{ if and (not $options.summary) (not $options.image) }} title-only {{ end }}">
   {{ range .pages }}
@@ -10,36 +10,12 @@
     {{ else }}
       {{ $path = . }}
     {{ end }}
+
     {{ $page := site.GetPage $path }}
-
-    {{ with $page }}
-      <li class="page">
-        {{ if or $options.summary $options.image }}
-          <article>
-            <div class="page-content">
-              {{ partial "pages/item/title.html" (dict 
-                  "page" .
-                  "heading_level" $heading_level
-                )}}
-
-              {{ if $options.summary }}
-                {{ partial "pages/item/summary.html" . }}
-              {{ end }}
-            </div>
-
-            {{ if $options.image }}
-              {{- partial "pages/item/media.html" (dict
-                  "image" .Params.image
-                  "sizes" site.Params.image_sizes.blocks.pages.list
-                ) -}}
-            {{ end }}
-          </article>
-        {{ else }}
-          <a href="{{- .Permalink -}}">
-            {{- partial "PrepareHTML" .Title -}}
-          </a>
-        {{ end }}
-      </li>
-    {{- end -}}
+    {{ partial "pages/item/list.html" (dict
+        "page" $page
+        "context" .
+      )}}
   {{ end }}
 </ul>
+

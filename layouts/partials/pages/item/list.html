@@ -1,0 +1,33 @@
+{{ $options := .context.options }}
+{{ $heading_level := .context.heading_level | default 3 }}
+
+{{ with .page }}
+  <li class="page">
+    {{ if or $options.summary $options.image }}
+      <article>
+        <div class="page-content">
+          {{ partial "pages/item/components/title.html" (dict 
+              "page" .
+              "heading_level" $heading_level
+            )}}
+
+          {{ if $options.summary }}
+            {{ partial "pages/item/components/summary.html" . }}
+          {{ end }}
+        </div>
+
+        {{ if $options.image }}
+          {{- partial "pages/item/components/media.html" (dict
+              "image" .Params.image
+              "sizes" site.Params.image_sizes.blocks.pages.list
+            ) -}}
+        {{ end }}
+      </article>
+    {{ else }}
+      <a href="{{- .Permalink -}}">
+        {{- partial "PrepareHTML" .Title -}}
+      </a>
+    {{ end }}
+  </li>
+{{- end -}}
+

@@ -25,17 +25,18 @@
     {{ $block_class = printf "%s %s" $block_class "with-images" }}
   {{ end }}
 
-  <div class="{{ $block_class }} {{ $page_class }}">
-    <div class="container">
-      <div class="block-content">
-        {{ partial "blocks/top.html" $block.top }}
-
-        {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
-            "pages" .pages
-            "heading_level" $block.ranks.children
-            "options" $options
-          ) }}
+  {{ if .pages }}
+    <div class="{{ $block_class }} {{ $page_class }}">
+      <div class="container">
+        <div class="block-content">
+          {{ partial "blocks/top.html" $block.top }}
+          {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
+              "pages" .pages
+              "heading_level" $block.ranks.children
+              "options" $options
+            ) }}
+        </div>
       </div>
     </div>
-  </div>
+  {{- end -}}
 {{- end -}}

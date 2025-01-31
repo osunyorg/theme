@@ -1,26 +1,11 @@
-{{ $options := .options }}
-{{ $heading_level := .heading_level | default 3 }}
+{{ $context := . }}
 
 <div class="cards">
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
-    {{ with $page }}
-      <article class="card">
-        {{ partial "pages/item/title.html" (dict 
-            "page" .
-            "heading_level" $heading_level
-          )}}
-
-        {{ if $options.summary }}
-          {{ partial "pages/item/summary.html" . }}
-        {{ end }}
-
-        {{ partial "pages/item/more.html" . }}
-
-        {{ if $options.image }}
-          {{- partial "pages/item/media.html" (dict "image" .Params.image) -}}
-        {{ end }}
-      </article>
-    {{- end -}}
+    {{ partial "pages/item/card.html" (dict
+        "page" $page
+        "context" .
+      )}}
   {{ end }}
 </div>

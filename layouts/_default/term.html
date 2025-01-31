@@ -20,6 +20,12 @@
       {{ else }}
         {{ $section_type := strings.TrimSuffix "_categories" .Type }}
         {{ $list_partial := printf "%s/%s.html" $section_type $section_type }}
+
+        {{ if eq $section_type "pages" }} 
+          {{/*  This exception should only exist during tree-structure in progress  */}}
+          {{ $list_partial = printf "%s/list/%s.html" $section_type $section_type }}
+        {{ end }}
+
         {{ partial $list_partial . }}
         {{ partial "commons/pagination.html" . }}
       {{ end }}

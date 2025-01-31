@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ partial "pages/hero.html" . }}
+  {{ partial "pages/single/hero.html" . }}
   {{ partial "hooks/after-page-hero.html" . }}
 
   <div class="document-content">
@@ -10,7 +10,7 @@
         )
     }}
 
-    {{ partial "pages/summary.html" (dict
+    {{ partial "pages/single/summary.html" (dict
         "context" .
         "block_wrapped" true
       ) }}

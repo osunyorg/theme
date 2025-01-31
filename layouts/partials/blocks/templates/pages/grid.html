@@ -1,34 +1,20 @@
-{{ $options := .options }}
-{{ $heading_level := .heading_level | default 3 }}
+{{ $context := . }}
 
-{{ with .pages }}
-  <div class="grid">
-    {{ range . }}
-      {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
-      {{- $path := false -}}
-      {{ if reflect.IsMap . }}
-        {{ $path = .path }}
-      {{ else }}
-        {{ $path = . }}
-      {{ end }}
-      {{ $page := site.GetPage $path }}
-
-      {{ with $page }}
-        <article class="page">
-          {{ partial "pages/item/title.html" (dict 
-              "page" .
-              "heading_level" $heading_level
-            )}}
-
-          {{ if $options.summary }}
-            {{ partial "pages/item/summary.html" . }}
-          {{ end }}
-
-          {{ if $options.image }}
-            {{- partial "pages/item/media.html" (dict "image" .Params.image) -}}
-          {{ end }}
-        </article>
-      {{- end -}}
+<div class="grid">
+  {{ range .pages }}
+    {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
+    {{- $path := false -}}
+    {{ if reflect.IsMap . }}
+      {{ $path = .path }}
+    {{ else }}
+      {{ $path = . }}
     {{ end }}
-  </div>
-{{ end }}
+
+    {{ $page := site.GetPage $path }}
+    {{ partial "pages/item/grid.html" (dict
+      "page" $page
+      "context" $context
+    )}}
+  {{ end }}
+</div>
+
