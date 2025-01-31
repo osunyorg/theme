@@ -22,6 +22,14 @@
       {{- with and $options.summary  .Params.summary }}
         {{ . | safeHTML }}
       {{ end -}}
+
+      {{/*  TODO: set right options when admin is ready  */}}
+      {{ if site.Params.pages.index.options.categories }}
+        {{ partial "commons/categories" ( dict
+          "context" .
+          "kind" "page"
+        )}}
+      {{ end }}
     </div>
     {{ if $options.image }}
       <div class="media">
