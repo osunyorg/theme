@@ -1,12 +1,7 @@
 #!/bin/bash
 
-# Nom du fichier CSV$
+# Fichier CSV
 data="./data.csv"
-
-# Enlever le début du chemin dans le fichier
-path_part="themes/osuny/layouts/partials/"
-
-# sed -i "s|${path_part//\//\\\/}||g" "$data"
 
 # Ignorer la première ligne (les en-têtes) et gérer les lignes vides
 sed 1d "$data" | while IFS=',' read -r old new; do
@@ -15,6 +10,7 @@ sed 1d "$data" | while IFS=',' read -r old new; do
         continue  # Ignorer la ligne vide
     fi
 
+    # Enlever le début du chemin dans le fichier
     old_path=$(echo "$old" | sed 's|themes/osuny/layouts/partials/||g')
     new_path=$(echo "$new" | sed 's|themes/osuny/layouts/partials/||g')
 
