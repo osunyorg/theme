@@ -1,8 +1,8 @@
 <div class="section-sidebar project-sidebar">
   <div>
-    <aside>
-      {{- partial "projects/project-infos.html" . -}}
-    </aside>
+    {{ if not .Params.design.full_width }}
+      {{ partial "commons/sidebar-infos.html" . }}
+    {{ end }}
 
     {{ partial "toc/container.html"
       (dict
