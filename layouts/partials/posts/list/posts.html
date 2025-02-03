@@ -6,7 +6,7 @@
     <p>{{ i18n (cond $is_term "categories.no_post" "posts.none") }}</p>
   {{ end }}
   {{ range .Paginator.Pages }}
-    {{  partial "posts/post.html" 
+    {{  partial "posts/list/post.html" 
         (dict 
           "post" .
           "options" site.Params.posts.index.options

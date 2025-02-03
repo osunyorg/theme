@@ -60,7 +60,7 @@
             <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
           {{ end }}
           {{ if $options.author }}
-            {{- partial "posts/author" . -}}
+            {{- partial "posts/commons/author.html" . -}}
           {{ end }}
           {{ if and $reading_time $options.reading_time }}
             <span class="post-reading-time">

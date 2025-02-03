@@ -5,13 +5,13 @@
           "context" .
       )
     }}
-  {{ partial "programs/summary.html" (dict
+  {{ partial "programs/commons/summary.html" (dict
       "with_container" true
       "context" .
     ) }}
   {{ partial "contents/list.html" . }}
   <div class="container">
-    {{ partial "diplomas/diplomas-select.html" . }}
+    {{ partial "diplomas/list/diplomas-select.html" . }}
     {{/* Toutes les formations... */}}
     {{ $programs := where .Site.Pages "Section" "programs" }}
     {{/* mais pas l'accueil des formations... */}}
@@ -20,7 +20,7 @@
     {{ $programs = where $programs "Params.parent" "eq" nil }}
     <ol class="programs">
       {{- range $programs -}}
-        {{ partial "programs/program.html" (dict 
+        {{ partial "programs/list/program.html" (dict 
             "program" .
             "heading" "h2"
             "options" site.Params.programs.index.options

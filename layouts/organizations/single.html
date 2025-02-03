@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ partial "organizations/hero.html" . }}
+  {{ partial "organizations/list/hero/hero.html" . }}
 
   <div class="document-content" itemscope itemtype="https://schema.org/Organization">
 
@@ -11,7 +11,7 @@
     <div class="container">
 
       <div itemprop="articleBody">
-        {{ partial "organizations/summary.html" (dict
+        {{ partial "organizations/commons/summary.html" (dict
           "context" .
         ) }}
 
@@ -30,7 +30,7 @@
         {{ partial "commons/contact-details.html" . }}
       </div>
 
-      {{ partial "organizations/logo.html" . }}
+      {{ partial "organizations/commons/logo.html" . }}
     </div>
     {{ partial "contents/list.html" . }}
 

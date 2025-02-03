@@ -6,14 +6,14 @@
   {{- range .organizations }}
     {{ if .path }}
       {{ with site.GetPage .path }}
-        {{ partial "organizations/list/item/organization.html" (dict
+        {{ partial "organizations/list/organization.html" (dict
             "organization" .
             "options" $options
             "heading_level" $heading_level
           ) }}
       {{ end }}
     {{ else }}
-      {{ partial "organizations/list/item/organization.html" (dict
+      {{ partial "organizations/list/organization.html" (dict
           "organization" (dict
             "Title" .name
             "Permalink" .url

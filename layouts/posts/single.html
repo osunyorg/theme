@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ partial "posts/hero-single.html" . }}
+  {{ partial "posts/single/hero/hero.html" . }}
 
   <div class="document-content" itemscope itemtype="https://schema.org/NewsArticle">
     <meta itemprop="headline" content="{{ partial "PrepareHTML" .Title }}">
@@ -7,19 +7,19 @@
     {{ with .Date }}<meta itemprop="datePublished" content="{{ .Format "2006-01-02T15:04" }}">{{ end }}
     {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
 
-    {{ partial "posts/sidebar.html" . }}
+    {{ partial "posts/single/sidebar.html" . }}
 
-    {{ partial "posts/summary.html" (dict
+    {{ partial "posts/commons/summary.html" (dict
         "context" .
         "block_wrapped" true
       ) }}
 
     {{ partial "contents/list.html" . }}
 
-    {{ partial "posts/after-contents.html" . }}
+    {{ partial "posts/single/after-contents.html" . }}
 
     {{ if and site.Params.posts.single.author_signature .Params.authors }}
-      {{ partial "posts/signature.html" . }}
+      {{ partial "posts/single/signature.html" . }}
     {{ end }}
 
     {{ partial "commons/siblings-navigation.html" (dict

@@ -4,7 +4,7 @@
   </div>
   <div class="posts posts--{{- site.Params.posts.index.layout -}}">
     {{ range first 3 .posts }}
-      {{ partial "posts/post.html" (dict 
+      {{ partial "posts/list/post.html" (dict 
         "post" . 
         "options" site.Params.posts.index.options
       )}}

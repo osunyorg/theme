@@ -18,7 +18,7 @@
         <div class="volumes">
           {{ range $volume := .volumes -}}
             {{ with site.GetPage (printf "/volumes/%s" $volume) }}
-              {{ partial "volumes/volume.html" (dict 
+              {{ partial "volumes/list/volume.html" (dict 
                   "volume" .
                   "heading" $heading
               ) }}

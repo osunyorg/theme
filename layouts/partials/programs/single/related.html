@@ -12,7 +12,7 @@
       {{ $posts := first site.Params.programs.related_posts.quantity .Pages }}
       {{ if gt (len $posts) 0 }}
         <div class="blocks">
-          {{ partial "posts/block-posts-layout.html" (dict "posts" $posts ) }}
+          {{ partial "posts/list/layout-list.html" (dict "posts" $posts ) }}
         </div>
       {{ end }}
     </div>

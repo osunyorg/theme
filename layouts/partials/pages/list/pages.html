@@ -8,7 +8,7 @@
   {{ else }}
     <div class="{{ $layout }}">
       {{ range .Paginator.Pages }}
-        {{  partial "pages/page.html" (dict 
+        {{  partial "pages/list/page.html" (dict 
             "page" .
             "options" site.Params.pages.index.options
           )}}

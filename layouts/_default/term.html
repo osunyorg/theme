@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ partial "categories/hero-term.html" . }}
+  {{ partial "categories/single/hero/hero.html" . }}
 
   <div class="document-content">
     {{ partial "toc/container.html" (dict
@@ -7,7 +7,7 @@
       "context" .
     ) }}
 
-    {{ partial "categories/summary.html" (dict
+    {{ partial "categories/commons/summary.html" (dict
       "context" .
       "block_wrapped" true
     ) }}
@@ -19,7 +19,7 @@
         {{ partial "taxonomies/categories" . }}
       {{ else }}
         {{ $section_type := strings.TrimSuffix "_categories" .Type }}
-        {{ $list_partial := printf "%s/%s.html" $section_type $section_type }}
+        {{ $list_partial := printf "%s/list/%s.html" $section_type $section_type }}
         {{ partial $list_partial . }}
         {{ partial "commons/pagination.html" . }}
       {{ end }}

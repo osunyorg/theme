@@ -6,7 +6,7 @@
     <p>{{ i18n (cond $is_term "categories.no_event" "events.none") }}</p>
   {{ end }}
   {{ range .Paginator.Pages }}
-    {{ partial "events/event.html" (dict
+    {{ partial "events/list/event.html" (dict
         "event" .
         "layout" $layout
         "options" site.Params.events.index.options

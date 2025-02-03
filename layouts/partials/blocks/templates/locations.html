@@ -23,7 +23,7 @@
             {{ $map_title = $block.title }}
           {{ end }}
 
-          {{ partial "locations/map.html" (dict
+          {{ partial "locations/commons/map.html" (dict
               "locations" $locations
               "title" $map_title
             )}}
@@ -31,7 +31,7 @@
           <div class="locations locations--{{- $layout }}">
             {{ $location_heading := printf "h%d" ( $block.ranks.children | default 2 ) }}
             {{ range $locations }}
-              {{ partial "locations/location.html" (dict 
+              {{ partial "locations/list/location.html" (dict 
                 "location" .
                 "heading" $location_heading
                 "options" $options

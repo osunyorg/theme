@@ -2,5 +2,5 @@
   {{ $is_term := eq .Kind "term" }}
   <p>{{ i18n (cond $is_term "categories.no_person" "persons.none") }}</p>
 {{ else }}
-  {{ partial "persons/list.html" .Paginator.Pages }}
+  {{ partial "persons/list/list.html" .Paginator.Pages }}
 {{ end }}

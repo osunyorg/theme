@@ -13,7 +13,7 @@
         <div class="publications">
           {{ range $publication := .publications -}}
             {{ with site.GetPage (printf "/publications/%s" $publication) }}
-              {{ partial "publications/publication.html" (dict 
+              {{ partial "publications/list/publication.html" (dict 
                 "publication" . 
                 "heading_level" $heading_level
               )}}

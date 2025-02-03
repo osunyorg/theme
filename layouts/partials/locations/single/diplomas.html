@@ -12,7 +12,7 @@
       <ol class="programs">
         {{- range . -}}
           {{ $program := site.GetPage .path }}
-          {{- partial "partials/programs/program.html" (dict
+          {{- partial "partials/programs/list/program.html" (dict
             "program" $program
             "heading" "h3"
             "options" site.Params.locations.single.programs.options

@@ -6,7 +6,7 @@
 <div class="list">
   {{ range $post := .posts -}}
     {{ with site.GetPage .path }}
-      {{ partial "posts/post.html" (dict 
+      {{ partial "posts/list/post.html" (dict 
         "post" . 
         "options" $options
         "heading" $heading) }}

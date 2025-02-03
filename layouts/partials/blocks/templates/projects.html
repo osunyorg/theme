@@ -18,7 +18,7 @@
             {{ end }}
           </ul>
         {{ else if .projects }}
-          {{- partial (printf "blocks/templates/projects/%s.html" $layout) (dict 
+          {{- partial (printf "projects/list/layouts/%s.html" $layout) (dict 
             "projects" .projects
             "heading_level" $block.ranks.children
             "options" .options

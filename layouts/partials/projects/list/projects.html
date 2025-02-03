@@ -4,6 +4,6 @@
     <p>{{ i18n (cond $is_term "categories.no_project" "projects.none") }}</p>
   {{ end }}
   {{ range .Paginator.Pages }}
-    {{ partial "projects/project.html" (dict "project" . )}}
+    {{ partial "projects/list/project.html" (dict "project" . )}}
   {{ end }}
 </div>

@@ -5,13 +5,13 @@
       <section>
         <h2 class="publications-year">{{ .Key }}</h2>
         {{ range .Pages }}
-          {{ partial "publications/publication.html" (dict "publication" . ) }}
+          {{ partial "publications/list/publication.html" (dict "publication" . ) }}
         {{ end }}
       </section>
     {{ end }}
   {{ else }}
     {{ range .Paginator.Pages }}
-      {{ partial "publications/publication.html" (dict "publication" . ) }}
+      {{ partial "publications/list/publication.html" (dict "publication" . ) }}
     {{ end }}
   {{ end }}
 </div>

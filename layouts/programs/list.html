@@ -1,9 +1,9 @@
 {{ define "main" }}
   {{ if eq .File.Path "programs/_index.html" }}
-    {{ partial "programs/hero.html" . }}
-    {{ partial "programs/list.html" . }}
+    {{ partial "programs/list/hero/hero.html" . }}
+    {{ partial "programs/list/list.html" . }}
   {{ else }}
-    {{ partial "programs/hero-single.html" . }}
-    {{ partial "programs/single.html" . }}
+    {{ partial "programs/single/hero/hero.html" . }}
+    {{ partial "programs/single/single.html" . }}
   {{ end }}
 {{ end }}
