@@ -19,6 +19,9 @@
           {{- partial "PrepareHTML" .Title -}}
         </a>
       {{- partial "PrepareHTML" (printf "</%s>" $heading) -}}
+
+      {{- partial "pages/list/components/hook-after-title.html" . -}}
+
       {{- with and $options.summary  .Params.summary }}
         {{ . | safeHTML }}
       {{ end -}}

@@ -23,6 +23,9 @@
               {{- partial "PrepareHTML" .Title -}}
             </a>
           {{ $heading_tag.close }}
+
+          {{- partial "pages/list/components/hook-after-title.html" . -}}
+
           {{ if and $options.summary .Params.summary }}
             {{ partial "GetRichSummary" ( dict 
               "summary" .Params.summary
