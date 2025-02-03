@@ -25,4 +25,11 @@ sed 1d "$data" | while IFS=',' read -r old new; do
         mkdir -p "$(dirname "layouts/partials/$new_path")"
         mv "layouts/partials/$old_path" "layouts/partials/$new_path"
     fi
+
+    # S'il existe dans le thème custom, déplacer le fichier vers le nouveau chemin
+    # theme_name="custom-theme"
+    # if [ -f "themes/$theme_name/layouts/partials/$old_path" ]; then
+    #     mkdir -p "$(dirname "themes/$theme_name/layouts/partials/$new_path")"
+    #     mv "themes/$theme_name/layouts/partials/$old_path" "themes/$theme_name/layouts/partials/$new_path"
+    # fi
 done
