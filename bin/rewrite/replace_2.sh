@@ -15,9 +15,8 @@ sed 1d "$data" | while IFS=',' read -r old new; do
     new_path=$(echo "$new" | sed 's|themes/osuny/layouts/partials/||g')
 
     # Traitement des données (affichage par exemple)
-    echo "$old_path"
-    echo "$new_path"
+    echo "$old_path to $new_path"
 
     # Ne chercher que dans les dossiers "layouts"
-    find . -name "*.html" -type f -exec sed -i '' "s/${search//\//\\/}/${replace//\//\\/}/g" {} +
+    find . -name "*.html" -type f -exec sed -i '' "s/${old_path//\//\\/}/${new_path//\//\\/}/g" {} +
 done
