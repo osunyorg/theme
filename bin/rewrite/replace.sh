@@ -20,4 +20,9 @@ sed 1d "$data" | while IFS=',' read -r old new; do
     # TODO : Ne chercher que dans les dossiers "layouts"
     find . \( -path "*/layouts/*" -o -path "*/themes/*" \) -type f -name "*.html" -exec sed -i '' "s/${old_path//\//\\/}\"/${new_path//\//\\/}\"/g" {} +
 
+    # S'il existe dans les overrides, déplacer le fichier vers le nouveau chemin
+    if [ -f "layouts/partials/$old_path" ]; then
+        mkdir -p "$(dirname "layouts/partials/$new_path")"
+        mv "layouts/partials/$old_path" "layouts/partials/$new_path"
+    fi
 done
