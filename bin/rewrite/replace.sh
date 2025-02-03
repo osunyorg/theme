@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fichier CSV
-data="./data.csv"
+data="themes/osuny/bin/rewrite/data.csv"
 
 # Ignorer la première ligne (les en-têtes) et gérer les lignes vides
 sed 1d "$data" | while IFS=',' read -r old new; do
