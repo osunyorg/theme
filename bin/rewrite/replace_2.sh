@@ -17,6 +17,10 @@ sed 1d "$data" | while IFS=',' read -r old new; do
     # Traitement des données (affichage par exemple)
     echo "$old_path to $new_path"
 
-    # Ne chercher que dans les dossiers "layouts"
-    find . -name "*.html" -type f -exec sed -i '' "s/${old_path//\//\\/}/${new_path//\//\\/}/g" {} +
+    # TODO : Ne chercher que dans les dossiers "layouts"
+    # find . -type d -name "layouts" -exec find {} -type f -name "*.html" -exec sed -i '' "s/${old_path//\//\\/}/${new_path//\//\\/}/g" {} +
+    # find . -type d -name "layouts" -exec find {} -type f -name "*.html" -exec sed -i "s/${old_path//\//\\/}/${new_path//\//\\/}/g" {} +
+    # find . -type d -name "layouts" -exec find {} -type f -name "*.html" \; -exec sed -i '' "s/${old_path//\//\\/}/${new_path//\//\\/}/g" {} +
+    find . \( -path "*/layouts/*" -o -path "*/themes/*" \) -type f -name "*.html" -exec sed -i '' "s/${old_path//\//\\/}/${new_path//\//\\/}/g" {} +
+
 done
