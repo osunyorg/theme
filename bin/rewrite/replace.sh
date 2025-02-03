@@ -3,4 +3,4 @@
 search=$1
 replace=$2
 
-find ./**/*.html -type f -exec sed -i '' "s/${search//\//\\/}/${replace//\//\\/}/g" {} +
+find . -name "*.html" -type f -exec sed -i '' "s/${search//\//\\/}/${replace//\//\\/}/g" {} +
