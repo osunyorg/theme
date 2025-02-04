@@ -1,0 +1,15 @@
+{{ partial "diplomas/section/hero.html" . }}
+
+<div class="document-content">
+
+  {{ partial "diplomas/single/summary.html" (dict
+      "with_container" true
+      "context" .
+    ) }}
+
+  {{ partial "contents/list.html" . }}
+
+  <div class="container">
+    {{ partial "diplomas/partials/diplomas.html" ( dict "diplomas" .Paginator.Pages ) }}
+  </div>
+</div>
