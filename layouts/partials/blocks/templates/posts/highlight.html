@@ -13,7 +13,7 @@
 
   {{ with $highlight }}
     <div class="highlight-post">
-      {{ partial "posts/post" (dict 
+      {{ partial "posts/post.html" (dict 
         "post" .
         "heading" $heading
         "options" $options
@@ -69,7 +69,7 @@
                   <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
                 {{ end }}
                 {{ if $options.author }}
-                  {{- partial "posts/author" . -}}
+                  {{- partial "posts/author.html" . -}}
                 {{ end }}
               </div>
             {{ end }}
