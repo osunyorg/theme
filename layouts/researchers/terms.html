@@ -1,18 +1,3 @@
 {{ define "main" }}
-
-  {{ partial "persons/section/hero.html" . }}
-
-  <div class="document-content">
-
-    {{ partial "persons/single/summary.html" (dict
-        "with_container" true
-        "context" .
-      ) }}
-  
-    {{ partial "contents/list.html" . }}
-  
-    <div class="container">
-      {{ partial "persons/partials/list-by-role.html" . }}
-    </div>
-  </div>
+  {{ partial "researchers/section.html" . }}
 {{ end }}
