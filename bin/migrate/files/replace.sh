@@ -17,11 +17,16 @@ sed 1d "$files" | while IFS=',' read -r old new; do
     old_path=$(echo "$old" | sed 's|themes/osuny/layouts/partials/||g')
     new_path=$(echo "$new" | sed 's|themes/osuny/layouts/partials/||g')
 
+    old_path=$(echo "$old_path" | sed 's|themes/osuny/layouts/||g')
+    new_path=$(echo "$new_path" | sed 's|themes/osuny/layouts/||g')
+
     # Traitement des données (affichage par exemple)
     echo "$old_path to $new_path"
 
     # TODO : Ne chercher que dans les dossiers "layouts"
-    find . \( -path "*/layouts/*" -o -path "*/themes/*" \) -type f -name "*.html" -exec sed -i '' "s/${old_path//\//\\/}/${new_path//\//\\/}/g" {} +
+    theme_path="*/themes/$theme/*"
+
+    find . \( -path "*/layouts/*" -o -path "$theme_path" \) -type f -name "*.html" -exec sed -i '' "s/${old_path//\//\\/}/${new_path//\//\\/}/g" {} +
 
     # S'il existe dans les overrides, déplacer le fichier vers le nouveau chemin
     if [ -f "layouts/partials/$old_path" ]; then
