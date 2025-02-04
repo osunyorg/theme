@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Files to move
-files="themes/osuny/bin/migrate/files/file-to-move.csv"
+files="themes/osuny/bin/migrate/files/files-to-move.csv"
 
 # Theme to update
 theme=$1
