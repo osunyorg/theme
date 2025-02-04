@@ -10,6 +10,19 @@
     .more
         @include icon(arrow-right-line, after, true)
         @include hover-translate-icon(after)
+    &-categories
+        @include list-reset
+        display: flex
+        flex-wrap: wrap
+        gap: 0 $spacing-2
+        margin-top: space()
+        li
+            @include meta
+            z-index: 2
+            a
+                @include link(var(--color-accent))
+        + .more
+            margin-top: $spacing-2
 
 .block-pages,
 .pages
