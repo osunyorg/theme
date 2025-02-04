@@ -21,7 +21,7 @@ sed 1d "$files" | while IFS=',' read -r old new; do
     echo "$old_path to $new_path"
 
     # TODO : Ne chercher que dans les dossiers "layouts"
-    find . \( -path "*/layouts/*" -o -path "*/themes/*" \) -type f -name "*.html" -exec sed -i '' "s/\"${old_path//\//\\/}/\"${new_path//\//\\/}/g" {} +
+    find . \( -path "*/layouts/*" -o -path "*/themes/*" \) -type f -name "*.html" -exec sed -i '' "s/${old_path//\//\\/}/${new_path//\//\\/}/g" {} +
 
     # S'il existe dans les overrides, déplacer le fichier vers le nouveau chemin
     if [ -f "layouts/partials/$old_path" ]; then
