@@ -6,7 +6,7 @@
     {{- range $categories -}}
       {{ with site.GetPage .path }}
         <li>
-          {{ partial "categories/category.html" (dict 
+          {{ partial "categories/partials/category.html" (dict 
             "category" .
             "layout" $layout
           )}}

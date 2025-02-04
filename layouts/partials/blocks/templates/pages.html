@@ -30,7 +30,7 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
 
-        {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
+        {{- partial (printf "pages/partials/layouts/%s/%s.html" $layout $layout) (dict 
             "pages" .pages
             "heading_level" $block.ranks.children
             "options" $options

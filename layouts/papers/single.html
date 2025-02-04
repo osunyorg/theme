@@ -1,27 +1,3 @@
 {{ define "main" }}
-{{ partial "papers/hero.html" . }}
-
-<div class="document-content sidebar-on-{{ site.Params.papers.sidebar.direction }}" itemscope itemtype="https://schema.org/ScholarlyArticle">
-  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
-  {{ partial "papers/sidebar.html" . }}
-
-  <div class="container">
-    <div class="content">
-      {{ partial "papers/summary.html" . }}
-      {{ partial "papers/abstract.html" . }}
-      {{ partial "papers/authors.html" . }}
-      {{ partial "papers/references.html" . }}
-    </div>
-  </div>
-
-  {{ partial "contents/list.html" . }}
-
-  <div class="container">
-    <div class="content">
-      {{ partial "papers/citations.html" . }}
-    </div>
-  </div>
-</div>
-
-
+  {{ partial "papers/single.html" . }}
 {{ end }}

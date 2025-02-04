@@ -13,7 +13,7 @@
             {{ range .events }}
               {{ $event := site.GetPage .path }}
               {{ with $event }}
-                  {{ partial "events/event.html" (dict
+                  {{ partial "events/partials/event.html" (dict
                     "event" .
                     "layout" $layout
                     "options" $options

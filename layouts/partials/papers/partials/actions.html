@@ -1,0 +1,42 @@
+{{ $only_file := .only_file | default false }}
+{{ $with_modal := and (not $only_file) .paper.Params.abstract }}
+{{ $modalId := printf "modal-%s" .paper.Slug }}
+
+{{ with .paper }}
+  <div class="paper-actions" role="group">
+    {{- if $with_modal }}
+      <button type="button" data-open-modal="{{ $modalId }}">{{ i18n "volumes.abstract" }}</button>
+    {{ end -}}
+    {{- if .Params.pdf -}}
+      {{- $file := partial "GetMedia" .Params.pdf -}}
+      {{- $size := partial "GetHumanSize" $file.size -}}
+      {{- $extension := partial "GetExtensionFile" $file.name -}}
+      {{- $extension_with_size := (printf "%.2f %s - %s" $size.weight $size.unit $extension) -}}
+      {{- $title_with_size := printf "%s (%s)" $file.name $extension_with_size -}}
+      {{- $url := $file.url -}}
+      {{- if site.Params.keycdn -}}
+        {{- $url = $file.direct_url -}}
+      {{- end -}}
+      {{ if $file }}
+        <figure>
+          <a href="{{ $url }}" download="{{ partial "PrepareHTML" $file.name }}" target="_blank" title="{{ i18n "commons.link.blank_aria" (dict "Title" $title_with_size) }}">
+            <figcaption>
+              <abbr title="{{ i18n (printf "commons.extensions.%s" $extension) }}">{{ $extension }}</abbr>
+              - {{ $size.weight }} <abbr title="{{ $size.full_unit }}">{{ $size.unit }}</abbr>
+            </figcaption>
+          </a>
+        </figure>
+      {{ end }}
+    {{- end -}}
+  </div>
+
+  {{- if $with_modal }}
+    {{ partial "papers/partials/modal.html"
+      (dict
+        "modalId" $modalId
+        "title" .Title
+        "abstract" .Params.abstract
+      ) }}
+  {{ end -}}
+
+{{ end }}

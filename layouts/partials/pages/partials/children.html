@@ -1,0 +1,17 @@
+{{ $options := site.Params.pages.index.options }}
+{{ $page_class := "" }}
+{{ if .Params.bodyclass }}
+  {{- $page_class = printf "block-page-%s" .Params.bodyclass }}
+{{ end }}
+
+<div class="block block-pages block-pages--children block-pages--{{ site.Params.pages.index.layout }} {{ $page_class }}">
+  <div class="container">
+    <div class="block-content">
+      {{- partial (printf "pages/partials/layouts/%s/%s.html" site.Params.pages.index.layout site.Params.pages.index.layout) (dict 
+          "pages" .Params.children
+          "heading_level" 2
+          "options" $options
+        ) }}
+    </div>
+  </div>
+</div>
