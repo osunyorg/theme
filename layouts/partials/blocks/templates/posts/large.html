@@ -35,7 +35,7 @@
           
           <div class="post-meta">
             {{ if $options.author }}
-              {{- partial "posts/author" . -}}
+              {{- partial "posts/author.html" . -}}
             {{ end }}
 
             {{ if $options.date }}
@@ -43,7 +43,7 @@
             {{ end }}
 
             {{ if $options.categories }}
-              {{ partial "commons/categories" ( dict
+              {{ partial "commons/categories.html" ( dict
                 "context" .
                 "kind" "post"
               )}}
