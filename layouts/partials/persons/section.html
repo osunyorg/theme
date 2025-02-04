@@ -1,0 +1,41 @@
+{{- $is_block_persons_present := false -}}
+{{ range .Params.contents }}
+  {{- if eq .template "persons" -}}
+    {{- $is_block_persons_present = true -}}
+  {{ end }}
+{{ end }}
+
+{{ partial "persons/section/hero.html" . }}
+
+<div class="document-content">
+  {{ partial "toc/container.html"
+      (dict
+        "toc" "toc/default.html"
+        "context" .
+      ) }}
+
+  {{ $summary_block := false }}
+  {{ if .Params.contents }}
+    {{ if gt (len .Params.contents) 1 }}
+      {{ $summary_block = true }}
+    {{ end }}
+  {{ end }}
+
+  {{ partial "persons/single/summary.html" (dict
+      "context" .
+      "with_container" (not $summary_block)
+      "block_wrapped" $summary_block
+    ) }}
+
+  {{ partial "contents/list.html" . }}
+
+  <div class="container">
+    {{- if not $is_block_persons_present -}}
+      {{ partial "taxonomies/section-list.html" . }}
+      {{ partial "persons/section/persons-taxonomies.html" . }}
+      {{ partial "persons/partials/list.html" .Paginator.Pages }}
+      {{ partial "commons/pagination.html" . }}
+    {{- end -}}
+  </div>
+
+</div>

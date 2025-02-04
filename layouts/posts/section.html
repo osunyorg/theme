@@ -1,18 +1,3 @@
 {{ define "main" }}
-  {{ partial "posts/section/hero.html" . }}
-  <div class="document-content">
-    {{ partial "posts/single/summary.html" (dict
-        "with_container" true
-        "context" .
-      ) }}
-
-    {{ partial "contents/list.html" . }}
-
-    <div class="container">
-      {{ partial "taxonomies/section-list.html" . }}
-      {{ partial "posts/partials/posts.html" . }}
-      {{ partial "commons/pagination.html" . }}
-    </div>
-  </div>
-
+  {{ partial "posts/section.html" . }}
 {{ end }}
