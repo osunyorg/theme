@@ -1,29 +1,3 @@
 {{ define "main" }}
-  {{ partial "pages/single/hero.html" . }}
-  {{ partial "hooks/after-page-hero.html" . }}
-
-  <div class="document-content">
-    {{ partial "toc/container.html" (dict
-        "toc" "pages/single/toc.html"
-        "context" .
-      ) }}
-
-    {{ partial "pages/single/summary.html" (dict
-        "context" .
-        "block_wrapped" true
-      ) }}
-
-    {{ if and .Params.taxonomies (eq site.Params.pages.single.taxonomies.position "content") }}
-      <div class="container taxonomies-container">
-        {{ partial "taxonomies/single-list.html" . }}
-      </div>
-    {{ end }}
-
-    {{ if .Params.contents }}
-      {{ partial "contents/list.html" . }}
-    {{ else }}
-      {{ partial "pages/partials/children.html" . }}
-    {{ end }}
-  </div>
-
+  {{ partial "pages/single.html" . }}
 {{ end }}

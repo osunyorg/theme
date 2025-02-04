@@ -1,0 +1,16 @@
+{{ partial "papers/section/hero.html" . }}
+
+<div class="document-content">
+  <div class="container">
+    <ul class="papers">
+      {{ range .Paginator.Pages }}
+        <li>
+          {{ partial "papers/list/paper.html" (dict "paper" . ) }}
+        </li>
+      {{ end }}
+    </ul>
+    {{ partial "commons/pagination.html" . }}
+  </div>
+
+  {{ partial "contents/list.html" . }}
+</div>
