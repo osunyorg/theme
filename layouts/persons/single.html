@@ -16,7 +16,7 @@
   {{ $publications := where $researcher.Pages "Section" "publications" }}
   {{ $papers := where $researcher.Pages "Section" "papers" }}
 
-  {{ partial "persons/hero-single.html" . }}
+  {{ partial "persons/single/hero.html" . }}
 
   <div class="document-content">
     {{ partial "toc/container.html"
@@ -45,7 +45,7 @@
         <div class="informations">
           {{ if .Params.biography }}
             <div class="biography">
-              {{ partial "persons/summary.html" (dict
+              {{ partial "persons/single/summary.html" (dict
                 "context" .
               ) }}
               {{ if (partial "GetTextFromHTML" .Params.biography) }}
@@ -87,19 +87,19 @@
 
     <div class="container person-objects">
       {{ if $programsForTeacher }}
-        {{ partial "persons/programs.html" (dict "programs" $programsForTeacher "slug" $slug) }}
+        {{ partial "persons/single/programs.html" (dict "programs" $programsForTeacher "slug" $slug) }}
       {{ end }}
 
       {{ if $publications }}
-        {{ partial "persons/publications.html" (dict "publications" $publications "researcher" $researcher) }}
+        {{ partial "persons/single/publications.html" (dict "publications" $publications "researcher" $researcher) }}
       {{ end }}
 
       {{ if $posts }}
-        {{ partial "persons/posts.html" (dict "posts" $posts "author" $author) }}
+        {{ partial "persons/single/posts.html" (dict "posts" $posts "author" $author) }}
       {{ end }}
 
       {{ if $papers }}
-        {{ partial "persons/papers.html" (dict "papers" $papers "researcher" $researcher) }}
+        {{ partial "persons/single/papers.html" (dict "papers" $papers "researcher" $researcher) }}
       {{ end }}
     </div>
 

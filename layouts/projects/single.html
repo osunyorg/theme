@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ partial "projects/hero-single.html" . }}
+  {{ partial "projects/single/hero.html" . }}
 
   <div class="document-content" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
@@ -12,7 +12,7 @@
       </div>
     {{ end }}
 
-    {{ partial "projects/summary.html" (dict
+    {{ partial "projects/single/summary.html" (dict
         "context" .
         "block_wrapped" true
       ) }}

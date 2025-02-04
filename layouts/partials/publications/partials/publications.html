@@ -1,0 +1,17 @@
+<div class="publications">
+  {{ if site.Params.publications.index.group_by_year }}
+    {{ $publications := .Paginator.Pages.GroupByDate "2006" }}
+    {{ range $publications }}
+      <section>
+        <h2 class="publications-year">{{ .Key }}</h2>
+        {{ range .Pages }}
+          {{ partial "publications/partials/publication.html" (dict "publication" . ) }}
+        {{ end }}
+      </section>
+    {{ end }}
+  {{ else }}
+    {{ range .Paginator.Pages }}
+      {{ partial "publications/partials/publication.html" (dict "publication" . ) }}
+    {{ end }}
+  {{ end }}
+</div>

@@ -1,7 +1,7 @@
 {{ define "main" }}
-  {{ partial "events/hero-list.html" . }}
+  {{ partial "events/section/hero.html" . }}
   <div class="document-content">
-    {{ partial "events/summary.html" (dict
+    {{ partial "events/single/summary.html" (dict
         "with_container" true
         "context" .
       ) }}
@@ -10,8 +10,8 @@
   
     <div class="container">
       {{ partial "taxonomies/section-list.html" . }}
-      {{ partial "events/events.html" . }}
-      {{ partial "events/archive-link.html" . }}
+      {{ partial "events/partials/events.html" . }}
+      {{ partial "events/partials/archive-link.html" . }}
       {{ partial "commons/pagination.html" . }}
     </div>
   </div>

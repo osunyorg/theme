@@ -1,10 +1,10 @@
 
 {{ define "main" }}
-  {{ partial "diplomas/hero-single.html" . }}
+  {{ partial "diplomas/single/hero.html" . }}
 
   <div class="document-content">
 
-    {{ partial "diplomas/summary.html" (dict
+    {{ partial "diplomas/single/summary.html" (dict
         "context" .
         "block_wrapped" true
       ) }}
@@ -15,7 +15,7 @@
         {{- range .Pages -}}
           {{/*  TODO Cleanup figma and reduce number of program layout */}}
           {{ if $programs_options }}
-            {{ partial "programs/program.html" (dict
+            {{ partial "programs/partials/program.html" (dict
                 "program" .
                 "options" $programs_options
               )}}

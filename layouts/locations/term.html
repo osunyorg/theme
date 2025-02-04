@@ -1,22 +1,22 @@
 {{ define "main" }}
-  {{ partial "locations/hero-single.html" . }}
+  {{ partial "locations/single/hero.html" . }}
 
   <div class="document-content" itemscope itemtype="https://schema.org/EducationalOrganization">
     <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
 
-    {{ partial "locations/summary.html" (dict
+    {{ partial "locations/single/summary.html" (dict
         "context" .
         "block_wrapped" true
       ) }}
 
     {{ partial "contents/list.html" . }}
-    {{ partial "partials/locations/diplomas.html" . }}
+    {{ partial "partials/locations/single/diplomas.html" . }}
   </div>
   {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
   {{ if and $address_geolocation.longitude $address_geolocation.latitude }}
-    {{ partial "locations/map.html" (dict
+    {{ partial "locations/partials/map.html" (dict
       "locations" (slice .)
       "title" .Title
     )}}

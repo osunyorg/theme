@@ -1,7 +1,7 @@
 {{ define "main" }}
-  {{ partial "posts/hero-list.html" . }}
+  {{ partial "posts/section/hero.html" . }}
   <div class="document-content">
-    {{ partial "posts/summary.html" (dict
+    {{ partial "posts/single/summary.html" (dict
         "with_container" true
         "context" .
       ) }}
@@ -10,7 +10,7 @@
 
     <div class="container">
       {{ partial "taxonomies/section-list.html" . }}
-      {{ partial "posts/posts.html" . }}
+      {{ partial "posts/partials/posts.html" . }}
       {{ partial "commons/pagination.html" . }}
     </div>
   </div>

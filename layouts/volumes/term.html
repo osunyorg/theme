@@ -1,5 +1,5 @@
 {{ define "main" }}
-  {{ partial "volumes/hero.html" . }}
+  {{ partial "volumes/section/hero.html" . }}
 
   <div class="document-content" itemscope itemtype="https://schema.org/PublicationVolume">
     <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
@@ -13,11 +13,11 @@
 
     <div class="container">
 
-      {{ partial "volumes/document-aside.html" . }}
+      {{ partial "volumes/single/document-aside.html" . }}
 
       <div class="content">
-        {{ partial "volumes/text.html" . }}
-        {{ partial "volumes/papers.html" . }}
+        {{ partial "volumes/single/text.html" . }}
+        {{ partial "volumes/single/papers.html" . }}
       </div>
 
     </div>

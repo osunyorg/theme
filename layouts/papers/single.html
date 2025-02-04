@@ -1,16 +1,16 @@
 {{ define "main" }}
-{{ partial "papers/hero.html" . }}
+{{ partial "papers/section/hero.html" . }}
 
 <div class="document-content sidebar-on-{{ site.Params.papers.sidebar.direction }}" itemscope itemtype="https://schema.org/ScholarlyArticle">
   <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
-  {{ partial "papers/sidebar.html" . }}
+  {{ partial "papers/single/sidebar.html" . }}
 
   <div class="container">
     <div class="content">
-      {{ partial "papers/summary.html" . }}
-      {{ partial "papers/abstract.html" . }}
-      {{ partial "papers/authors.html" . }}
-      {{ partial "papers/references.html" . }}
+      {{ partial "papers/single/summary.html" . }}
+      {{ partial "papers/single/abstract.html" . }}
+      {{ partial "papers/single/authors.html" . }}
+      {{ partial "papers/single/references.html" . }}
     </div>
   </div>
 
@@ -18,7 +18,7 @@
 
   <div class="container">
     <div class="content">
-      {{ partial "papers/citations.html" . }}
+      {{ partial "papers/single/citations.html" . }}
     </div>
   </div>
 </div>

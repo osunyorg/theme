@@ -1,8 +1,8 @@
 {{ define "main" }}
-  {{ partial "locations/hero-list.html" . }}
+  {{ partial "locations/section/hero.html" . }}
 
   <div class="document-content">
-    {{ partial "locations/summary.html" (dict
+    {{ partial "locations/single/summary.html" (dict
         "with_container" true
         "context" .
       ) }}
@@ -10,12 +10,12 @@
     {{ partial "contents/list.html" . }}
 
     <div class="container">
-      {{ partial "locations/locations.html" . }}
+      {{ partial "locations/partials/locations.html" . }}
       {{ partial "commons/pagination.html" . }}
     </div>
     {{ if site.Params.locations.index.map }}
       {{ $locations := .Pages }}
-      {{ partial "locations/map.html" (dict
+      {{ partial "locations/partials/map.html" (dict
           "locations" $locations
           "title" (i18n "programs.location" $locations)
       )}}

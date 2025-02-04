@@ -1,0 +1,14 @@
+{{ $researcher := .researcher }}
+<section class="persons-papers">
+  <div class="top">
+    <h2 class="h5">{{ i18n "persons.papers.recent" }}</h2>
+  </div>
+  <ul class="papers">
+    {{ range first 3 .papers }}
+    <li>
+      {{ partial "papers/list/paper.html" (dict "paper" .) }}
+    </li>
+    {{ end }}
+  </ul>
+  <a href="{{ $researcher.Permalink }}" class="more">{{ i18n "persons.papers.all" (dict "author" $researcher.Params.person) }}</a>
+</section>

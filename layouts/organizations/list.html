@@ -6,10 +6,10 @@
     {{ end }}
   {{ end }}
 
-  {{ partial "organizations/hero.html" . }}
+  {{ partial "organizations/section/hero.html" . }}
 
   <div class="document-content">
-    {{ partial "organizations/summary.html" (dict
+    {{ partial "organizations/single/summary.html" (dict
         "context" .
         "with_container" true
       ) }}
@@ -19,7 +19,7 @@
     <div class="container">
       {{- if not $is_organizations_block_present -}}
         {{ partial "taxonomies/section-list.html" . }}
-        {{ partial "organizations/organizations.html" . }}
+        {{ partial "organizations/partials/organizations.html" . }}
         {{ partial "commons/pagination.html" . }}
       {{ end }}
     </div>
