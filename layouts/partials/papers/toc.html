@@ -1,4 +1,3 @@
-{{ $content := .context.Content }}
 {{ $references := .context.Params.References }}
 {{ $researchers := .context.Params.researchers }}
 {{ $abstract := .context.Params.Abstract }}
@@ -11,9 +10,6 @@
       {{- end -}}
       {{- if $researchers -}}
         <li><a href="#authors">{{ i18n "papers.toc.researchers" }}</a></li>
-      {{- end -}}
-      {{- if $content -}}
-        <li><a href="#full-text">{{ i18n "papers.toc.content" }}</a></li>
       {{- end -}}
       {{- if $references -}}
         <li><a href="#references">{{ i18n "papers.toc.references" }}</a></li>
