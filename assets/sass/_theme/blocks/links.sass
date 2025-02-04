@@ -28,21 +28,27 @@
             @include small
             margin-top: space(3)
         .media
-            picture:not(.is-png) 
-                img
-                    display: block
-                    object-fit: cover
-                    width: 100%
-                    height: 100%
-                    aspect-ratio: 16/9
-            picture.is-png 
-                img
-                    margin: space(4) space(4) 0
-                    max-width: $block-links-icon-max-width
+            picture
+                &:not(.is-svg, .is-png) 
+                    img
+                        display: block
+                        object-fit: cover
+                        width: 100%
+                        height: 100%
+                        aspect-ratio: 16/9
+                // display images as icons
+                &.is-png,
+                &.is-svg
+                    img
+                        margin: space(4) space(4) 0
+                        max-width: $block-links-icon-max-width
         &:hover
             background-color: $block-links-card-hover-background
             &, a
                 color: $block-links-card-hover-color
+            .is-png,
+            .is-svg
+                filter: $block-links-hover-filter
     @include in-page-without-sidebar
         .top
             display: flex
