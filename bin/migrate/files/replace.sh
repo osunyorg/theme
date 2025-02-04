@@ -1,10 +1,13 @@
 #!/bin/bash
 
-# Fichier CSV
-data="themes/osuny/bin/rewrite/data.csv"
+# Files to move
+files="themes/osuny/bin/migrate/files/file-to-move.csv"
+
+# Theme to update
+theme=$1
 
 # Ignorer la première ligne (les en-têtes) et gérer les lignes vides
-sed 1d "$data" | while IFS=',' read -r old new; do
+sed 1d "$files" | while IFS=',' read -r old new; do
     # Vérifier si la ligne est vide (après suppression des espaces)
     if [[ -z "$old" && -z "$new" ]]; then
         continue  # Ignorer la ligne vide
@@ -27,9 +30,11 @@ sed 1d "$data" | while IFS=',' read -r old new; do
     fi
 
     # S'il existe dans le thème custom, déplacer le fichier vers le nouveau chemin
-    # theme_name="custom-theme"
-    # if [ -f "themes/$theme_name/layouts/partials/$old_path" ]; then
-    #     mkdir -p "$(dirname "themes/$theme_name/layouts/partials/$new_path")"
-    #     mv "themes/$theme_name/layouts/partials/$old_path" "themes/$theme_name/layouts/partials/$new_path"
-    # fi
+    if [ "$theme" != "" ];then
+        echo "$theme"
+        if [ -f "themes/$theme/layouts/partials/$old_path" ]; then
+            mkdir -p "$(dirname "themes/$theme/layouts/partials/$new_path")"
+            mv "themes/$theme/layouts/partials/$old_path" "themes/$theme/layouts/partials/$new_path"
+        fi
+    fi
 done

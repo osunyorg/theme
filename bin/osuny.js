@@ -2,7 +2,7 @@
 
 const shell = require("shelljs"),
     dev = require("./dev"),
-    rewrite = require("./rewrite/rewrite");
+    migrate = require("./migrate/migrate");
 
 shell.set('-e'); // exit upon first error
 console.log(`
@@ -102,8 +102,6 @@ if (command === "update-theme") {
     execute("yarn upgrade");
 }
 
-if (command === "rewrite") {
-    rewrite();
+if (command === "migrate") {
+    migrate(process.argv);
 }
-
-console.log(dev);
