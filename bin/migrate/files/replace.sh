@@ -34,11 +34,20 @@ sed 1d "$files" | while IFS=',' read -r old new; do
         mv "layouts/partials/$old_path" "layouts/partials/$new_path"
     fi
 
+    if [ -f "layouts/$old_path" ]; then
+        mkdir -p "$(dirname "layouts/$new_path")"
+        mv "layouts/$old_path" "layouts/$new_path"
+    fi
+
     # S'il existe dans le thème custom, déplacer le fichier vers le nouveau chemin
     if [ "$theme" != "" ];then
         if [ -f "themes/$theme/layouts/partials/$old_path" ]; then
             mkdir -p "$(dirname "themes/$theme/layouts/partials/$new_path")"
             mv "themes/$theme/layouts/partials/$old_path" "themes/$theme/layouts/partials/$new_path"
+        fi
+        if [ -f "themes/$theme/layouts/$old_path" ]; then
+            mkdir -p "$(dirname "themes/$theme/layouts/$new_path")"
+            mv "themes/$theme/layouts/$old_path" "themes/$theme/layouts/$new_path"
         fi
     fi
 done
