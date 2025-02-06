@@ -46,16 +46,4 @@ sed 1d "$files" | while IFS=',' read -r old new; do
         mkdir -p "$(dirname "$replace_in/$new_path_for_mv")"
         mv "$replace_in/$old_path_for_mv" "$replace_in/$new_path_for_mv"
     fi
-
-    # S'il existe dans le thème custom, déplacer le fichier vers le nouveau chemin
-    # if [ "$theme" != "" ]; then
-    #     if [ -f "themes/$theme/layouts/partials/$old_path" ]; then
-    #         mkdir -p "$(dirname "themes/$theme/layouts/partials/$new_path")"
-    #         mv "themes/$theme/layouts/partials/$old_path" "themes/$theme/layouts/partials/$new_path"
-    #     fi
-    #     if [ -f "themes/$theme/layouts/$old_path" ]; then
-    #         mkdir -p "$(dirname "themes/$theme/layouts/$new_path")"
-    #         mv "themes/$theme/layouts/$old_path" "themes/$theme/layouts/$new_path"
-    #     fi
-    # fi
 done
