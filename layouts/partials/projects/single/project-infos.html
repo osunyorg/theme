@@ -18,9 +18,6 @@
   {{ partial "commons/reading-time.html" . }}
 
   {{ if site.Params.projects.share_links.enabled | default site.Params.share_links.enabled }}
-    <li class="social-share">
-      <span>{{ i18n "projects.share" }}</span>
-      {{ partial "commons/share/links.html" . }}
-    </li>
+    {{ partial "commons/share/sidebar-item.html" . }}
   {{ end }}
 </ul>
