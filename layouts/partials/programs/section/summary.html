@@ -1,0 +1,11 @@
+{{ $summary := .summary | default (.context.Params.summary | safeHTML) }}
+{{ if and (eq site.Params.summary.position "content") $summary }}
+  <div class="container summary">
+    <div class="lead" role="heading" aria-level="2">
+      {{ $summary }}
+    </div>
+    {{ if .context.Params.website_url }}
+      <a href="{{- .context.Params.website_url -}}" target="_blank" class="btn">{{ i18n "programs.website" }}</a>
+    {{ end }}
+  </div>
+{{ end }}
