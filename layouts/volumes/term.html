@@ -1,28 +1,3 @@
 {{ define "main" }}
-  {{ partial "volumes/hero.html" . }}
-
-  <div class="document-content" itemscope itemtype="https://schema.org/PublicationVolume">
-    <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
-    {{- if .Params.image -}}
-      {{- $image := partial "GetMedia" .Params.image.id -}}
-      {{- if $image -}}
-        {{- $url := $image.url -}}
-        <meta itemprop="image" content="{{ $url }}">
-      {{- end -}}
-    {{- end -}}
-
-    <div class="container">
-
-      {{ partial "volumes/document-aside.html" . }}
-
-      <div class="content">
-        {{ partial "volumes/text.html" . }}
-        {{ partial "volumes/papers.html" . }}
-      </div>
-
-    </div>
-
-    {{ partial "contents/list.html" . }}
-
-  </div>
+  {{ partial "volumes/single.html" . }}
 {{ end }}

@@ -1,0 +1,7 @@
+{{ define "main" }}
+  {{ if eq .File.Path "programs/_index.html" }}
+    {{ partial "programs/section.html" . }}
+  {{ else }}
+    {{ partial "programs/single.html" . }}
+  {{ end }}
+{{ end }}

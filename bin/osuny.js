@@ -1,7 +1,9 @@
 #! /usr/bin/env node
 
 const shell = require("shelljs"),
-    dev = require("./dev");
+    dev = require("./dev"),
+    migrate = require("./migrate/migrate");
+
 shell.set('-e'); // exit upon first error
 console.log(`
   .=*#%%#*=        -*#%%#*=.      =+-      ++.     .+ .+#%%#+.     :++      -+-
@@ -100,4 +102,6 @@ if (command === "update-theme") {
     execute("yarn upgrade");
 }
 
-console.log(dev);
+if (command === "migrate") {
+    migrate(process.argv);
+}

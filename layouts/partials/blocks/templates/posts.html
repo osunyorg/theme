@@ -29,7 +29,7 @@
             {{ end }}
           </ul>
         {{ else if .posts }}
-          {{ partial (printf "blocks/templates/posts/%s.html" $layout) (dict
+          {{ partial (printf "posts/partials/layouts/%s/%s.html" $layout $layout) (dict
             "posts" .posts
             "heading_level" $block.ranks.children
             "options" $options
