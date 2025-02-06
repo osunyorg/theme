@@ -1,10 +1,6 @@
 {{ if .Params.authors }}
-  {{ $authors_label := "projects.authors.label" }}
-  {{ if eq (len .Params.authors) 1 }}
-    {{ $authors_label = "projects.author" }}
-  {{ end }}
   <li class="authors">
-    <span>{{ i18n $authors_label }}</span>
+    <span>{{ i18n "commons.authors" (len .Params.authors) }}</span>
     <ul>
       {{- range .GetTerms "authors" -}}
         <li>

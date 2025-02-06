@@ -70,7 +70,13 @@
     margin-bottom: 0
     @include media-breakpoint-up(desktop)
         font-size: $table-body-size-desktop
-    > li, 
+    @include media-breakpoint-down(desktop)
+        margin-top: $spacing-3
+    > li:first-child
+        > ul:first-child, &
+            > li:first-child, &, &
+                padding-top: 0
+    > li,
     .taxonomies-single > li
         @include meta
         display: flex
