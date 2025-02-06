@@ -1,12 +1,3 @@
 {{ define "main" }}
-  {{- $title := or .Params.header_text .Title -}}
-  {{- partial "header/hero.html"
-        (dict
-          "title" $title
-          "context" .
-        ) -}}
-  <div class="document-content container">
-    {{ partial "programs/programs.html" . }}
-    {{ partial "commons/pagination.html" . }}
-  </div>
+  {{ partial "persons/single.html" . }}
 {{ end }}

@@ -1,0 +1,87 @@
+{{ $post := .post }}
+{{ if .params }}
+  {{ $post = site.GetPage (printf "/posts/%s" .params )}}
+{{ end }}
+
+{{ $direction := "" }}
+{{ $heading := .heading | default "h2" }}
+{{ $heading_tag := (dict 
+    "open" ((printf "<%s class='post-title' itemprop='headline'>" $heading) | safeHTML)
+    "close" ((printf "</%s>" $heading) | safeHTML)
+    ) }}
+    
+{{ $options := .options }}
+
+{{ with $post }}
+  {{ $post_class := "post" }}
+  {{ $reading_time := .Params.contents_reading_time }}
+  {{ if and .Params.image $options.image }}
+    {{ $direction = partial "GetImageDirection" .Params.image }}
+    {{ $post_class = printf "%s %s" $post_class $direction }}
+  {{ else }}
+    {{ $post_class = printf "%s %s" $post_class "without-image" }}
+  {{ end }}
+  
+  <article class="{{ $post_class }}" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="post-content">
+      {{- $title := partial "PrepareHTML" .Title -}}
+      {{ if and $options.subtitle .Params.subtitle }}
+        <hgroup>
+      {{ end }}
+      {{ $heading_tag.open }}
+        <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+      {{ $heading_tag.close }}
+      {{ if and $options.subtitle .Params.subtitle }}
+        <p class="post-subtitle">{{ .Params.subtitle }}</p>
+      {{ end }}
+      {{ if and $options.subtitle .Params.subtitle }}
+        </hgroup>
+      {{ end }}
+
+      {{ if $options.categories }}
+        {{ partial "commons/categories.html" ( dict
+          "context" .
+          "kind" "post"
+        )}}
+      {{ end }}
+
+      {{ if and $options.summary  .Params.summary }}
+        <div itemprop="abstract">
+          {{ partial "GetRichSummary" ( dict 
+            "summary" .Params.summary
+            "kind" "posts"
+          )}}
+        </div>
+      {{- end -}}
+      
+      {{ if or $options.author $options.date $options.reading_time }}
+        <div class="post-meta">
+          {{ if $options.date }}
+            <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
+          {{ end }}
+          {{ if $options.author }}
+            {{- partial "posts/partials/author.html" . -}}
+          {{ end }}
+          {{ if and $reading_time $options.reading_time }}
+            <span class="post-reading-time">
+              {{- i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" $reading_time.text -}}
+            </span>
+          {{ end }}
+        </div>
+      {{ end }}
+    </div>
+    {{ if $options.image }}
+      <div class="media">
+        {{- if .Params.image -}}
+          {{- partial "commons/image.html"
+              (dict
+                "image"    .Params.image
+                "sizes"    site.Params.image_sizes.sections.posts.item
+              ) -}}
+        {{- else -}}
+          {{- partial "commons/image-default.html" "posts" -}}
+        {{- end -}}
+      </div>
+    {{- end -}}
+  </article>
+{{ end }}

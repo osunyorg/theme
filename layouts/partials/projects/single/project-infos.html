@@ -1,0 +1,26 @@
+
+<ul class="project-infos">
+  {{ if .Params.projects_categories }}
+    <li>
+      {{ partial "taxonomies/single-list.html" . }}
+    </li>
+  {{ end }}
+
+  {{ with .Params.year }}
+    <li class="year">
+      <span>{{ i18n "projects.year" }}</span>
+      <time datetime="{{ . }}">{{ . }}</time>
+    </li>
+  {{ end }}
+
+  {{ partial "commons/authors.html" . }}
+
+  {{ partial "commons/reading-time.html" . }}
+
+  {{ if site.Params.projects.share_links.enabled | default site.Params.share_links.enabled }}
+    <li class="social-share">
+      <span>{{ i18n "projects.share" }}</span>
+      {{ partial "commons/share/links.html" . }}
+    </li>
+  {{ end }}
+</ul>

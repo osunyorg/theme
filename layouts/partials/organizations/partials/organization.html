@@ -1,0 +1,56 @@
+{{ $options := .options | default site.Params.organizations.index.options }}
+{{ $organization := .organization }}
+{{ $heading_level := .heading_level | default 2 }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+    "level" $heading_level
+    "attributes" "class='organization-title'"
+)}}
+{{ $with_geolocation := .with_geolocation | default false }}
+
+{{ with $organization }}
+  {{ $title := partial "PrepareHTML" .Title }}
+  <article class="organization"
+    {{ if $with_geolocation }}
+      {{ with .Params.contact_details.postal_address.geolocation }}
+        data-title="{{ $title }}" 
+        {{ with .longitude }}data-longitude="{{ . }}"{{ end }} 
+        {{ with .latitude }}data-latitude="{{ . }}"{{ end }}
+      {{ end }}
+    {{ end }}>
+
+    <div class="organization-content">
+
+      {{ $heading_tag.open }}
+        {{- if $options.link -}}
+          <a href="{{ .Permalink }}" 
+            {{ if .Params.external }}
+              target="_blank" rel="noopener noreferrer"
+              title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}"
+            {{ else }}
+              title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}"
+            {{ end }}
+            >
+        {{- end -}}
+        {{ $title }}
+        {{- if $options.link -}}
+          </a>
+        {{- end -}}
+      {{ $heading_tag.close }}
+
+      {{ if and $options.summary .Params.summary }}
+        <div class="organization-summary">
+          {{ safeHTML .Params.summary }}
+        </div>
+      {{ end }}
+
+      {{ if and $options.address .Params.contact_details }}
+        {{ partial "commons/address.html" .Params.contact_details.postal_address }}
+      {{ end }}
+    </div>
+    {{ if $options.logo }}
+      {{ if $options.logo }}
+        {{ partial "organizations/partials/organization/image.html" . }}
+      {{ end }}
+    {{ end }}
+  </article>
+{{ end }}

@@ -1,0 +1,18 @@
+{{ if .Params.authors }}
+  {{ $authors_label := "projects.authors.label" }}
+  {{ if eq (len .Params.authors) 1 }}
+    {{ $authors_label = "projects.author" }}
+  {{ end }}
+  <li class="authors">
+    <span>{{ i18n $authors_label }}</span>
+    <ul>
+      {{- range .GetTerms "authors" -}}
+        <li>
+          <a href="{{ .Permalink }}" itemprop="url">
+            <span itemprop="name">{{- safeHTML .Params.person -}}</span>
+          </a>
+        </li>
+      {{- end -}}
+    </ul>
+  </li>
+{{ end }}
