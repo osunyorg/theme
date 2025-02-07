@@ -1,0 +1,10 @@
+{{ $options := site.Params.projects.index.options }}
+{{ $layout := site.Params.projects.index.layout }}
+{{ $layout_partial := printf "projects/partials/layouts/%s/%s.html" $layout $layout }}
+{{ $projects := partial "GetPathSliceFromObjects" .Paginator.Pages }}
+
+{{ partial $layout_partial (dict
+    "projects" $projects
+    "heading_level" 2
+    "options" $options
+  ) }}

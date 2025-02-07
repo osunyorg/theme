@@ -6,8 +6,9 @@
     {{ with site.GetPage .path }}
       {{ partial "projects/partials/layouts/list/list-item.html" (dict
           "heading_level" $heading_level
-          "project" .
           "options" $options
+          "layout" "list"
+          "project" .
         ) }}
     {{ end }}
   {{ end }}

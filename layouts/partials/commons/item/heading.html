@@ -1,0 +1,26 @@
+{{ $item := .item }}
+{{ $level := .level }}
+{{ $type := $item.Type | default "page" }}
+{{ $item_type := $type | singularize }}
+{{ $subtitle := $item.Params.subtitle}}
+
+{{/*  TODO: checker itemprop  */}}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+    "level" $level
+    "attributes" (printf "class='%s-title'" $item_type)
+  )}}
+
+{{ if and .options.subtitle $subtitle }}
+  <hgroup>
+{{ end }}
+
+{{ $heading_tag.open }}
+  <a href="{{ $item.Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $item.Title)) }}">{{ $item.Title }}</a>
+{{ $heading_tag.close }}
+{{ if and .options.subtitle $subtitle }}
+  <p class="project-subtitle">{{ partial "PrepareHTML" $subtitle }}</p>
+{{ end }}
+
+{{ if and .options.subtitle $subtitle }}
+  </hgroup>
+{{ end }}
