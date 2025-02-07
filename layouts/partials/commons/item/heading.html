@@ -1,9 +1,9 @@
 {{ $item := .item }}
-{{ $heading_level := .heading_level }}
+{{ $level := .level }}
 {{ $type := $item.Kind | default "page" }}
 
 {{ $heading_tag := partial "GetHeadingTag" (dict 
-    "level" $heading_level
+    "level" $level
     "attributes" (printf "class='%s-title'" $type)
   )}}
 
