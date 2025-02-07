@@ -1,11 +1,11 @@
-ul.categories
-    &:not(.categories--grid)
-        @include list-section
-        li
-            a:first-child
-                & + p 
-                    text-align: right
-                    white-space: nowrap
+// ul.categories
+//     &:not(.categories--grid)
+//         @include list-section
+//         li
+//             a:first-child
+//                 & + p 
+//                     text-align: right
+//                     white-space: nowrap
 
 .posts_categories__term, .events_categories__term
     main
@@ -20,6 +20,10 @@ ul.categories
     .articles-count
         @include meta
 
-
-.categories--grid
-    @include layout-grid
+.categories
+    .media:empty
+        display: none // Is this generic ?
+    &--grid
+        @include layout-grid
+    &--list
+        @include layout-list

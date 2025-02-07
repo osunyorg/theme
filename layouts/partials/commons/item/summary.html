@@ -2,8 +2,10 @@
 {{ $type := .Type | default "pages" }}
 
 {{ with $summary }}
-  {{ partial "GetRichSummary" ( dict 
-      "summary" $summary
-      "kind" $type
-    )}}
+  <div class="rich-text">
+    {{ partial "GetRichSummary" ( dict 
+        "summary" $summary
+        "kind" $type
+      )}}
+  </div>
 {{ end }}
