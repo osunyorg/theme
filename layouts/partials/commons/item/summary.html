@@ -1,0 +1,9 @@
+{{ $summary := .Params.summary }}
+{{ $type := .Type | default "pages" }}
+
+{{ with $summary }}
+  {{ partial "GetRichSummary" ( dict 
+      "summary" $summary
+      "kind" $type
+    )}}
+{{ end }}

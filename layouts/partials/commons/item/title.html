@@ -1,0 +1,14 @@
+{{ $item := .item }}
+{{ $heading_level := .heading_level }}
+{{ $type := $item.Kind | default "page" }}
+
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+    "level" $heading_level
+    "attributes" (printf "class='%s-title'" $type)
+  )}}
+
+{{ $heading_tag.open }}
+  <a href="{{- $item.Permalink -}}" title="{{ i18n "commons.more_aria" (dict "Title" $item.Title) }}">
+    {{- partial "PrepareHTML" $item.Title -}}
+  </a>
+{{ $heading_tag.close }}

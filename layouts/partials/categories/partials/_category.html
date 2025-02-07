@@ -1,33 +1,14 @@
 {{ $options := .options | default site.Params.categories.index.options }}
-{{ $heading_level := .heading_level }}
-{{ $category := site.GetPage .category.path }}
-{{ $layout := .layout }}
+{{ $layout := .layout | default "list" }}
+{{ $category := .category }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+    "level" .heading_level
+    "attributes" "class='category-title'"
+  )}}
 
 {{ with $category }}
-  <article class="category-item">
-    <div class="category-content">
-      {{ partial "categories/partials/category/title.html" (dict
-          "item" .
-          "heading_level" $heading_level
-        ) }}
 
-      {{ partial "categories/partials/category/summary.html" . }}
-
-      {{ partial "categories/partials/category/articles-count.html" . }}
-    </div>
-
-    {{ if $options.more }}
-      {{ partial "commons/item/more.html" . }}
-    {{ end }}
-
-    {{ partial "categories/partials/category/media.html" (dict 
-        "image" .Params.image
-        "layout" $layout
-      ) }}
-  </article>
-{{ end }}
-
-  {{/*  {{ if eq $layout "list" }}
+  {{ if eq $layout "list" }}
     <a href="{{ .Permalink }}" class="title" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">
       {{ partial "PrepareHTML" .Title }}
     </a>
@@ -57,5 +38,5 @@
         </div>
       {{ end }}
     </article>
-  {{ end }}  */}}
-
+  {{ end }}
+{{ end }}

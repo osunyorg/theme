@@ -1,10 +1,9 @@
 <div class="media">
   {{- if .Params.image -}}
-    {{- partial "commons/image.html"
-          (dict
-            "image"    .Params.image
-            "sizes"    site.Params.image_sizes.sections.pages.item
-          ) -}}
+    {{- partial "commons/image.html" (dict
+        "image" .Params.image
+        "sizes" site.Params.image_sizes.sections.pages.item
+      ) -}}
   {{- else -}}
     {{- partial "commons/image-default.html" "pages" -}}
   {{- end -}}
