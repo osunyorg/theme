@@ -1,24 +1,33 @@
 .block-projects
+    .top
+        .block-title
+            a
+                @include hover-translate-icon
+                @include icon(arrow-right-line, after)
     &--list
         .project
             align-items: flex-start
             border-bottom: 1px solid var(--color-border)
             display: flex
-            gap: var(--grid-gutter)
             padding-bottom: $spacing-3
             padding-top: $spacing-3
             text-decoration: none
-        .project-content
             @include media-breakpoint-up(md)
-                order: -1
+                flex-direction: row
+                gap: var(--grid-gutter)
+                .project-content
+                    flex: 1
+                    order: -1
+            .media
+                margin-bottom: 0
+                @include in-page-with-sidebar
+                    width: columns(2)
+                @include in-page-without-sidebar
+                    width: columns(4)
         .project-title
             a
                 @include hover-translate-icon
                 @include icon(arrow-right-line, after)
-                    // margin-left: auto
-                    // display: inline
-                    // opacity: 0
-                    // margin-right: $spacing-1
             &:hover
                 &,
                 a
@@ -38,11 +47,6 @@
             .project-categories
                 display: inline-flex
                 row-gap: space(3)
-        .media
-            @include in-page-with-sidebar
-                width: columns(2)
-            @include in-page-without-sidebar
-                width: columns(4)
     .grid
         @include grid(2, md)
         .project
