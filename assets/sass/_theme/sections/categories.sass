@@ -16,9 +16,10 @@ ul.categories
         --block-space-y: #{$block-space-y}
         margin-bottom: var(--block-space-y)
 
-article.category
-    @include article
-    .category-title
-        @include article-title
-        + p
-            margin-top: $spacing-1
+.category-item
+    .articles-count
+        @include meta
+
+
+.categories--grid
+    @include layout-grid
