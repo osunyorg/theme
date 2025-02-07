@@ -1,0 +1,10 @@
+
+{{ $paths := slice }}
+
+{{ range . }}
+  {{ with .Params.meta.hugo.path }}
+    {{ $paths = $paths | append (dict "path" .) }}
+  {{ end }}
+{{ end }}
+
+{{ return $paths }}

@@ -1,7 +1,7 @@
-{{ $options := .options | default site.Params.categories.index.options }}
-{{ $layout := .layout | default site.Params.categories.index.layout }}
-{{ $categories := .Paginator.Pages }}
+{{ $options := site.Params.categories.index.options }}
+{{ $layout := site.Params.categories.index.layout }}
 {{ $layout_partial := printf "categories/partials/layouts/%s/%s.html" $layout $layout }}
+{{ $categories := partial "GetPathSliceFromObjects" .Paginator.Pages }}
 
 {{ partial $layout_partial (dict
     "categories" $categories
