@@ -9,6 +9,12 @@ outputs:
   home: ['html', 'rss', 'pagedjs']
   page: ['html', 'pagedjs']
   section: ['html', 'pagedjs']
+module:
+  mounts:
+    - source: "assets"
+      target: "assets"
+    - source: "node_modules/pagedjs/dist/paged.min.js"
+      target: "assets/js/pagedjs.min.js"
 removePathAccents: true
 ignoreLogs: ['warning-goldmark-raw-html']
 pagination:
