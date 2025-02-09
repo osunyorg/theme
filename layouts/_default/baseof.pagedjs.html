@@ -3,16 +3,34 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{ partial "head/css.html" }}
-    {{ partial "head/favicons.html" . }}
-    {{ partial "pagedjs/js.html" }}
-    {{ partial "pagedjs/css.html" }}
+    {{- $cssOpts := (dict
+      "targetPath" "assets/css/pagedjs.css"
+      "enableSourceMap" true
+    ) -}}
+    {{- $styles := resources.Get "sass/_theme/pagedjs.sass" | toCSS $cssOpts -}}
+    <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
+    <link rel="stylesheet" href="/assets/pagedjs/interface.css">
+    <script src="/assets/pagedjs/paged.polyfill.min.js"></script>
   </head>
-  <body class="{{ partial "GetBodyclass" . }}">
-    {{- partial "header/header.html" . -}}
-    <main{{ if .Params.contents }} class="page-with-blocks"{{ end }} id="main">
-      {{- block "main" . }}{{- end }}
-    </main>
-    {{- partial "footer/footer.html" . -}}
+  <body>
+    <section class="cover">
+      <h1>{{ site.Title }} </h1>
+    </section>
+   {{ range .Pages }}
+      <section>
+        <h1>{{ .Title }}</h1>
+        {{ range .Params.contents }}
+          <div class="block block-{{ .template }}">
+            {{ partial "blocks/top.html" .top }}
+            {{ $partialPath := printf "pagedjs/blocks/%s.html" .template }}
+            {{ if templates.Exists ( printf "partials/%s" $partialPath ) }}
+              {{ partial $partialPath . }}
+            {{ else }}
+              {{ .template }} not implemented for Paged.js yet
+            {{ end }}
+          </div>
+        {{ end }}
+      </section>
+    {{ end }}
   </body>
 </html>

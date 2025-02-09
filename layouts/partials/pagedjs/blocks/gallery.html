@@ -1,0 +1,19 @@
+{{ range .data.images }}
+  <div class="block-gallery__image">
+    {{ with .id }}
+      {{ $image := partial "GetMedia" . }}
+      <img src="{{ $image.direct_url }}" />
+    {{ end }}
+    {{ .image }}
+    <figcaption>
+      {{ with .text }}
+        {{ . | safeHTML }}
+      {{ end }}
+      {{ with .credit }}
+        <div class="credit">
+          {{ partial "AddCreditMention" (dict "credit" . "before" true) }}
+        </div>
+      {{ end }}
+    </figcaption>
+  </div>
+{{ end }}
