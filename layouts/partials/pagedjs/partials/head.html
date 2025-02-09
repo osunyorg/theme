@@ -1,8 +1,12 @@
-{{- $cssOpts := (dict
-  "targetPath" "assets/css/pagedjs.css"
-  "enableSourceMap" true
-) -}}
-{{- $styles := resources.Get "sass/_theme/pagedjs.sass" | toCSS $cssOpts -}}
+{{ $sass := "sass/_theme/pagedjs.sass" }}
+{{ if fileExists "assets/sass/pagedjs.sass" }}
+  {{ $sass = "sass/pagedjs.sass" }}
+{{ end }}
+{{ $cssOpts := (dict
+    "targetPath" "assets/css/pagedjs.css"
+    "enableSourceMap" true
+  )}}
+{{ $styles := resources.Get $sass | toCSS $cssOpts }}
 <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
 <link rel="stylesheet" href="/assets/pagedjs/interface.css">
 <script src="/assets/pagedjs/paged.polyfill.min.js"></script>
