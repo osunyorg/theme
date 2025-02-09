@@ -1,10 +1,10 @@
 .block-organizations
     .organization
-        a[target="_blank"]
-            @include stretched-link(before)
-            @include icon(link-blank, after, true)
-                position: relative
-
+        .organization-title
+            a[target="_blank"]
+                @include stretched-link(before)
+                @include icon(links-line, after, true)
+                    position: relative
     .map
         height: 600px
         z-index: 1
@@ -18,26 +18,44 @@
                 overflow: hidden
                 padding: 0
                 width: 192px
+                @include media-breakpoint-up(desktop)
+                    width: columns(2)
                 .media
                     margin-bottom: 0
+                .organization-content
+                    padding: $spacing-1 $spacing-2
+                    width: 100%
                 .organization-title
                     @include meta
-                    padding: $spacing-1 $spacing-2
                     margin: 0 // Cancel leaflet default style
                     a
-                        color: black
+                        color: var(--color-text)
+                .organization-summary
+                    margin-bottom: 0
+                    margin-top: $spacing-1
             &-content
                 margin: 0
                 width: 100%
                 z-index: 2
-            &-close-button
-                z-index: 4
-
+            a.leaflet-popup-close-button
+                color: var(--color-text)
+    &--map
+        .block-content
+            display: flex
+            flex-direction: column
+        .transcription
+            order: 2
+    @include media-breakpoint-down(md)
+        details
+            ul
+                li + li
+                    margin-top: $spacing-3
     @include in-page-with-sidebar
         .grid
-            @include grid(2, md)
-            @include grid(3, lg)
-            @include grid(4, xl)
+            @include grid(4, lg)
+            &.with-summaries
+                @include grid(1, lg)
+                @include grid(2, xl)
 
     @include in-page-without-sidebar
         .top .description

@@ -1,0 +1,35 @@
+{{ partial "publications/single/hero.html" . }}
+
+<div class="document-content" itemscope itemtype="https://schema.org/ScholarlyArticle">
+  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+  
+  <div class="container">
+    <div class="document-sidebar">
+      {{ partial "publications/single/researchers.html" . }}
+      {{ with .Params.ref }}
+        <div class="paper-ref">
+          <p>{{ partial "PrepareHTML" . }}</p>
+        </div>
+      {{ end }}
+    </div>
+    <div class="content">
+      <div class="rich-text">
+        {{ with .Params.abstract }}
+          <p>{{ partial "PrepareHTML" . }}</p>
+        {{ end }}
+        {{ with .Params.citation_full }}
+          <p>{{ partial "PrepareHTML" . }}</p>
+        {{ end }}
+        {{ partial "publications/single/citations.html" . }}
+        {{ partial "publications/single/downloads.html" . }}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  {{ partial "commons/siblings-navigation.html" (dict
+    "context" .
+    "previous_label" (i18n "publications.previous")
+    "next_label" (i18n "publications.next")
+  ) }}
+</div>

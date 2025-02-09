@@ -3,56 +3,54 @@
         margin-bottom: 0
     ul
         @include list-reset
+        @include grid(2, md)
         @include in-page-with-sidebar
             @include grid(2)
         &.even-items
-            @include grid(2, desktop)
             @include grid(4, desktop)
         &.odd-items
             @include grid(3, desktop)
-    .top:not(.hidden) + ul
+    .top + ul
         margin-top: $spacing-4
         align-items: baseline
-    dl
-        margin-bottom: 0
-        margin-top: 0
-        dt
-            white-space: nowrap
-            font-family: $block-key_figures-number-font-family
-            font-size: $block-key_figures-font-size
-            font-weight: $block-key_figures-unit-font-weight
-            line-height: 1
-            strong
-                display: inline-block
-                font-size: $block-key_figures-number-font-size
-                font-weight: $block-key_figures-number-font-weight
-                margin-inline-end: 0.1em
+    li > span
+        display: block
+        font-family: $block-key_figures-number-font-family
+        font-size: $block-key_figures-font-size
+        font-weight: $block-key_figures-unit-font-weight
+        line-height: 1
+        white-space: nowrap
+        strong
+            display: inline-block
+            font-size: $block-key_figures-number-font-size
+            font-weight: $block-key_figures-number-font-weight
+            margin-inline-end: 0.1em
+        img
+            margin-bottom: $spacing-2
+            max-width: $block-key_figures-image-max-width
+        picture.is-png 
             img
-                display: block
-                margin-bottom: $spacing-2
-                max-width: $block-key_figures-image-max-width
-            @include media-breakpoint-up(desktop)
-                font-size: $block-key_figures-font-size-desktop
-                strong
-                    font-size: $block-key_figures-number-font-size-desktop
-            @include media-breakpoint-up(lg)
-                font-size: $block-key_figures-font-size-lg
-                strong
-                    font-size: $block-key_figures-number-font-size-lg
-            @include media-breakpoint-up(xl)
-                font-size: $block-key_figures-font-size-xl
-                strong
-                    font-size: $block-key_figures-number-font-size-xl
-            @include media-breakpoint-up(xxl)
-                font-size: $block-key_figures-font-size-xxl
-                strong
-                    font-size: $block-key_figures-number-font-size-xxl
-        dd
-            margin-bottom: 0
-            margin-left: 0
-        dt + dd
+                max-width: $block-key_figures-icon-max-width
+        @include media-breakpoint-up(desktop)
+            font-size: $block-key_figures-font-size-desktop
+            strong
+                font-size: $block-key_figures-number-font-size-desktop
+            img
+                max-width: $block-key_figures-image-max-width-desktop
+        @include media-breakpoint-up(lg)
+            font-size: $block-key_figures-font-size-lg
+            strong
+                font-size: $block-key_figures-number-font-size-lg
+        @include media-breakpoint-up(xl)
+            font-size: $block-key_figures-font-size-xl
+            strong
+                font-size: $block-key_figures-number-font-size-xl
+        @include media-breakpoint-up(xxl)
+            font-size: $block-key_figures-font-size-xxl
+            strong
+                font-size: $block-key_figures-number-font-size-xxl
+        span + p
             margin-top: $spacing-2
-            
     @include media-breakpoint-down(desktop)
         li + li
             margin-top: $spacing-3

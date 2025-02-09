@@ -17,25 +17,29 @@
     padding-bottom: $spacing-2
     padding-top: $spacing-2
     position: relative
-    @include icon-block(arrow-right, before)
-        position: absolute
-        right: 0px
-        @include media-breakpoint-up(desktop)
-            top: 50%
-            transform: translateY(-50%)
+    @include media-breakpoint-up(desktop)
+        align-items: center
+        display: flex
+        gap: $spacing-3
+        justify-content: space-between
+        @include icon(arrow-right-line, after)
+            font-size: pxToRem(40)
     a
         text-decoration: none
     .publication-content
         display: flex
         flex-direction: column
-        .publication-authors
-            margin-bottom: space()
-            order: -1
         .publication-title
             a
                 @include stretched-link(after)
         .publication-meta
-            @include small
+            margin-bottom: space()
+            order: -1
+            * + *
+                &::before
+                    content: ', '
+        .publication-ref
+            @include meta
             color: var(--color-text-alt)
             margin-top: $spacing-1
             a
@@ -46,8 +50,6 @@
     @include media-breakpoint-down(desktop)
         .publication-meta
             padding-right: $spacing-4
-        &::before
-            bottom: 0
 
 .publications
     margin-top: $spacing-5
@@ -56,30 +58,37 @@
     @include list-reset
 
 .publications__section
+    .publications-year + .publication
+        margin-top: $spacing-3
+    section + section
+        margin-top: $spacing-5
     .publication
-        padding-bottom: $spacing-4
-        padding-top: $spacing-4
-        position: relative
-        p
-            padding-right: $spacing-4
-        @include media-breakpoint-down(desktop)
-            padding-right: $spacing-4
-            a + p
-                margin-top: $spacing-3
-            a::before
-                margin-top: pxToRem(-6)
-        .publication-title
-            @include h4
-        .publication-authors
-            &::before
-                content: " • "
-        .publication-date
-            display: none
+        @include media-breakpoint-up(desktop)
+            align-items: baseline
+            &::after
+                font-size: inherit
+            .publication-content
+                align-items: baseline
+                column-gap: var(--grid-gutter)
+                flex-direction: row
+                flex-wrap: wrap
+                .publication-title
+                    order: -1
+                .publication-title,
+                .publication-ref
+                    width: columns(8)
+                .publication-meta
+                    @include meta
+                    margin-bottom: 0
+                    flex: 1
 
 .publications__page
     .hero
         h1, hgroup
             width: 100%
+            span + span
+                &::before
+                    content: ', '
     .document-content > .container
         @include media-breakpoint-up(desktop)
             @include grid
@@ -88,6 +97,8 @@
             grid-column: 1 / 9
         .document-sidebar
             margin-bottom: $spacing-5
+            .paper-ref p
+                word-break: break-all
             @include media-breakpoint-up(desktop)
                 grid-column: 9 / 13
                 order: 2

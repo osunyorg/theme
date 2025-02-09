@@ -1,41 +1,23 @@
 {{- $block := .block }}
 {{- $block_class := partial "GetBlockClass" .block -}}
 {{- with .block.data -}}
-  {{- $show_summary := .show_summary -}}
-  {{- $show_category := .show_category -}}
-  {{- $show_status := .show_status -}}
+  {{- $options := .options -}}
   {{- $layout := .layout | default "list" -}}
   
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ $events_page := site.GetPage "/events" }}
-        {{ $link := .title_link }}
-
-        {{ if .category }}
-          {{ $term := site.GetPage (printf "/events_categories%s" .category) }}
-          {{ $link = $term.Permalink }}
-        {{ end }}
-        
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "description" .description
-          "link" $link
-        )}}
-
+        {{ partial "blocks/top.html" $block.top }}
         {{ if .events }}
           <div class="events events--{{- $layout -}}">
             {{ range .events }}
-              {{ $event := site.GetPage .file }}
+              {{ $event := site.GetPage .path }}
               {{ with $event }}
-                  {{ partial "events/event" (dict
+                  {{ partial "events/partials/event.html" (dict
                     "event" .
                     "layout" $layout
-                    "show_summary" $show_summary
-                    "show_category" $show_category
-                    "show_status" $show_status
-                    "heading" (printf "h%d" $block.ranks.children)
+                    "options" $options
+                    "heading_level" $block.ranks.children
                   ) }}
               {{ end }}
             {{ end }}
@@ -43,7 +25,6 @@
         {{ else if .no_event_message }}
           <p>{{ partial "PrepareHTML" .no_event_message }}</p>
         {{ end }}
-
       </div>
     </div>
   </div>

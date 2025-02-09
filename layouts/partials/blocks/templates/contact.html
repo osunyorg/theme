@@ -5,125 +5,145 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "description" .description
-        )}}
+        {{ partial "blocks/top.html" $block.top }}
 
-        <div class="informations">
-          <address itemscope itemtype="https://schema.org/Organization">
-            {{ if .name }}
-              <p itemprop="name">{{ .name }}</p>
-            {{ end }}
-            {{ with .information }}
-              {{ partial "PrepareHTML" . }}
-            {{ end }}
-            <div class="contacts">
-              {{ with .address }}
-                {{ if or .address .city .zipcode .country }}
-                  <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
-                    <p class="meta">{{- i18n "commons.contact.address" -}}</p>
-                    {{ if .address }}
-                      <span itemprop="streetAddress">
-                        {{ partial "PrepareHTML" .address }},
-                      </span>
-                      <br>
-                    {{ end }}
-                    {{ if .city }}
-                      <span itemprop="addressLocality">
-                        {{ partial "PrepareHTML" .city }}
-                      </span>
-                    {{ end }}
-                    {{ if .zipcode }}
-                      <span itemprop="postalCode">
-                        {{ partial "PrepareHTML" .zipcode }}
-                      </span>
-                    {{ end }}
-                    {{ if .country }}
-                      <span itemprop="addressCountry">
-                        {{ partial "PrepareHTML" .country }}
-                      </span>
-                    {{ end }}
-                  </div>
-                {{ end }}
+        {{ $heading_rank := $block.ranks.children | default 2 }}
+        {{ $heading_name := partial "GetHeadingTag" ( dict 
+            "level" $heading_rank
+            "attributes" "itemprop='name'"
+          ) }}
+        {{ $a11y_name := .name | default (i18n "commons.contact.empty_name") }}
+        {{ if .name }}
+          {{ $heading_rank = $heading_rank | add 1 }}
+        {{ end }}
+        {{ $heading_items := partial "GetHeadingTag" $heading_rank }}
+
+        <div class="contact-content" itemscope itemtype="https://schema.org/Organization">
+          {{ with .information }}
+            <div class="informations">
+          {{ end }}
+
+          {{ if .name }}
+            {{ $heading_name.open }}
+              {{ .name }}
+            {{ $heading_name.close }}
+          {{ end }}
+
+          {{ with .information }}
+              <div>
+                {{ partial "PrepareHTML" . }}
+              </div>
+            </div>
+          {{ end }}
+          <div class="contacts">
+            {{ with .contact_details }}
+              {{ with .postal_address }}
+                <div class="address">
+                  {{ $heading_items.open }}
+                    {{- i18n "commons.contact.address" -}}
+                  {{ $heading_items.close }}
+                  {{ partial "commons/address.html" . }}
+                </div>
               {{ end }}
-              {{ if or .url .emails }}
+              {{ if or .websites .emails }}
                 <div>
-                  <p class="meta">
-                    {{ if .url }}
+                  {{ $heading_items.open }}
+                    {{ if .websites }}
                       {{- i18n "commons.contact.web" -}}
                     {{ else }}
-                      {{- i18n "commons.contact.email" -}}
+                      {{- i18n "commons.contact.email.label" -}}
                     {{ end }}
-                  </p>
-                  
-                  {{ range .emails }}
-                    <p><a itemprop="email" href="mailto:{{ . }}">{{ . }}</a></p>
+                  {{ $heading_items.close }}
+                  {{ with .emails }}
+                    {{ $emails := cond .list .list .email }}
+                    {{ range $emails }}
+                      <p><a itemprop="email" href="{{ chomp .value | safeURL }}" title="{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}">{{ .label }}</a></p>
+                    {{ end }}
                   {{ end }}
-                  {{ with .url }}
-                    <p><a href="{{ . }}" target="_blank" rel="noreferrer">{{ . }}</a></p>
+                  {{ with .websites.website }}
+                    <p><a href="{{ chomp .value | safeURL }}" target="_blank" rel="noreferrer">{{ .label }}</a></p>
                   {{ end }}
                 </div>
               {{ end }}
-              {{ with .phone_numbers }}
+              {{ with .phone_numbers.list }}
                 <div>
-                  <p class="meta">{{- i18n "commons.contact.phone" -}}</p>
+                  {{ $heading_items.open }}
+                    {{- i18n "commons.contact.phone.label" -}}
+                  {{ $heading_items.close }}
                   {{ range . }}
-                    <p><a itemprop="telephone" href="tel:{{ . }}">{{ . }}</a></p>
+                    <p><a itemprop="telephone" href="{{ chomp .value | safeURL }}" title="{{ safeHTML (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label )) }}">{{ .label }}</a></p>
                   {{ end }}
                 </div>
               {{ end }}
-            </div>
-          </address>
-  
-          {{ if .timetable}}
-            <span class="meta">{{- i18n "commons.contact.schedule" -}}</span>
-            <ul>
-                {{ range .timetable }}
-                  {{ if or
-                    .time_slot_morning.from
-                    .time_slot_morning.to
-                    .time_slot_afternoon.from
-                    .time_slot_afternoon.to
-                  }}
-                    <li>
-                      <span>{{ .title }}</span>
+              {{ if .social_networks }}
+                <div>
+                  {{ $heading_items.open }}
+                    {{- i18n "commons.contact.socials.title" -}}
+                  {{ $heading_items.close }}
+                  <ul class="socials-list">
+                    {{ partial "commons/socials" (dict
+                      "context" .
+                      "name" $a11y_name
+                    ) }}
+                  </ul>
+                </div>
+              {{ end }}
+            {{ end }}
+              {{ if .timetable }}
+                {{ $time_size := "full-size" }}
+                {{ $contacts := .contact_details }}
+                {{ if and (or $contacts.emails.list $contacts.websites.website) $contacts.phone_numbers.list $contacts.social_networks }}
+                  {{ $time_size = "reduced" }}
+                {{ end}}
+                <div class="schedule-table {{ $time_size -}}">
+                  {{ $heading_items.open }}
+                    {{- i18n "commons.contact.schedule" -}}
+                  {{ $heading_items.close }}
+                  <ul>
+                    {{ range .timetable }}
                       {{ if or
                         .time_slot_morning.from
                         .time_slot_morning.to
-                      }}
-                      <span>
-                        {{- if .time_slot_morning.from }}
-                          <time datetime="{{ .time_slot_morning.from }}">{{ .time_slot_morning.from }}</time>
-                        {{ end -}}
-                        {{- if .time_slot_morning.to }}
-                          <time datetime="{{ .time_slot_morning.to }}">{{ .time_slot_morning.to }}</time>
-                        {{ end -}}
-                      </span>
-                      {{ end }}
-                      {{ if or
                         .time_slot_afternoon.from
                         .time_slot_afternoon.to
                       }}
-                      <span>
-                        {{- if .time_slot_afternoon.from }}
-                          <time datetime="{{ .time_slot_afternoon.from }}">{{ .time_slot_afternoon.from }}</time>
-                        {{ end -}}
-                        {{- if .time_slot_afternoon.to }}
-                          <time datetime="{{ .time_slot_afternoon.to }}">{{ .time_slot_afternoon.to }}</time>
-                        {{ end -}}
-                      </span>
-                      {{ end -}}
-                    </li>
-                  {{ end }}
-                {{ end }}
-            </ul>
-          {{ end }}
+                        <li>
+                          <span>{{ .title }}</span>
+                          {{ if or
+                            .time_slot_morning.from
+                            .time_slot_morning.to
+                          }}
+                          <span>
+                            {{- if .time_slot_morning.from }}
+                              <time datetime="{{ .time_slot_morning.from }}">{{ .time_slot_morning.from }}</time>
+                            {{ end -}}
+                            {{- if .time_slot_morning.to }}
+                              <time datetime="{{ .time_slot_morning.to }}">{{ .time_slot_morning.to }}</time>
+                            {{ end -}}
+                          </span>
+                          {{ end }}
+                          {{ if or
+                            .time_slot_afternoon.from
+                            .time_slot_afternoon.to
+                          }}
+                          <span>
+                            {{- if .time_slot_afternoon.from }}
+                              <time datetime="{{ .time_slot_afternoon.from }}">{{ .time_slot_afternoon.from }}</time>
+                            {{ end -}}
+                            {{- if .time_slot_afternoon.to }}
+                              <time datetime="{{ .time_slot_afternoon.to }}">{{ .time_slot_afternoon.to }}</time>
+                            {{ end -}}
+                          </span>
+                          {{ end -}}
+                        </li>
+                      {{ end }}
+                    {{ end }}
+                  </ul>
+                </div>
+              {{ end }}
+          </div>
         </div>
       </div>
-
-
     </div>
   </div>
 {{- end -}}

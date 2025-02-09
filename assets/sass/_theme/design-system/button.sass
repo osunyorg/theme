@@ -1,11 +1,28 @@
+@mixin link-icon($icon: false)
+    @include button-reset
+    line-height: $body-line-height
+    white-space: nowrap
+    @if $icon
+        @include icon-block($icon, after)
+
+@mixin button-icon($icon: false)
+    white-space: nowrap
+    display: inline-flex
+    align-items: center
+    justify-content: space-between
+    gap: $spacing-1
+    @if $icon
+        @include icon($icon, after)
+
 .button, .btn
     @include button-reset
     font-family: var(--btn-font-family)
     font-size: var(--btn-font-size)
+    font-style: var(--btn-font-style)
     font-weight: var(--btn-font-weight)
     text-transform: var(--btn-text-transform)
     text-decoration: none
-    line-height: $body-line-height
+    line-height: var(--btn-line-height)
     color: var(--btn-color)
     background: var(--btn-background)
     border: var(--btn-border)
@@ -38,35 +55,10 @@
     --btn-hover-background: #{$color-text}
     --btn-hover-border: pxToRem(1) solid var(--btn-hover-background)
 
-.squared-button
-    @include meta
-    @include button-reset
-    align-items: center
-    color: var(--color-text)
-    cursor: pointer
-    display: flex
-    padding: 0
-    text-decoration: none
-    &::before 
-        background-color: var(--color-background)
-        border: 1px solid var(--color-border)
-        margin-right: $spacing-2
-        padding: $spacing-1
-        transition: background 0.3s ease, border 0.3s ease
-        @include media-breakpoint-up(desktop)
-            margin-right: $spacing-3
-    &:hover
-        text-decoration: none
-        &::before
-            background-color: var(--color-text)
-            border-color: transparent
-            color: var(--color-background)
-
 @mixin link-icon($icon: false)
     @include button-reset
     line-height: $body-line-height
     white-space: nowrap
-    min-width: fit-content
     @if $icon
         @include icon-block($icon, after)
 
@@ -80,14 +72,14 @@
         @include icon($icon, after)
 
 a.btn[target="_blank"]
-    @include button-icon(link-blank-raw)
+    @include button-icon(links-line-raw)
 
 .dropdown-share
     --btn-min-width: #{pxToRem(140)}
     position: relative
     button
         @extend .btn
-        @include button-icon(social-inline)
+        @include button-icon(share-fill)
         width: 100%
     .dropdown-menu
         background: var(--btn-hover-background)

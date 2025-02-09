@@ -1,0 +1,20 @@
+<ul class="post-infos">
+  {{ if .Params.posts_categories }}
+    <li>
+      {{ partial "taxonomies/single-list.html" . }}
+    </li>
+  {{ end }}
+
+  <li>
+    <span>{{ i18n "posts.date" }}</span>
+    <time datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
+  </li>
+
+  {{ partial "authors/partials/authors.html" . }}
+
+  {{ partial "commons/reading-time.html" . }}
+
+  {{ if site.Params.posts.share_links.enabled | default site.Params.share_links.enabled }}
+    {{ partial "commons/share/list-item.html" . }}
+  {{ end }}
+</ul>

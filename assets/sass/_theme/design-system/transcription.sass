@@ -1,2 +1,27 @@
-.transcription
-    margin-top: $spacing-3
+details
+    @include in-page-with-or-without-sidebar
+        &:not([open])
+            > *:not(summary)
+                display: none
+
+.map-transcription
+    ul
+        @include list-reset
+        @include in-page-with-sidebar
+            @include grid(2)
+        @include in-page-without-sidebar
+            @include grid(3)
+        li
+            position: relative
+            .title, .organization-title
+                @include h4
+                a
+                    @include stretched-link(before)
+                    @include icon(arrow-right-line, after, true)
+                    @include hover-translate-icon
+                    text-decoration: none
+                + *
+                    margin-top: $spacing-2
+            .summary, .organization-summary
+                + *
+                    margin-top: $spacing-2

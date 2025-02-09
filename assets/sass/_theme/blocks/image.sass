@@ -1,8 +1,4 @@
 .block-image
-    img
-        display: block
-        height: auto
-        max-width: 100%
     figcaption
         margin-top: $spacing-2
         p
@@ -14,14 +10,17 @@
             p
                 @include meta
     picture
-        display: block
         margin-left: var(--grid-gutter-negative)
         margin-right: var(--grid-gutter-negative)
 
     @include in-page-with-sidebar
         picture
             margin-left: 0
-            margin-right: var(--grid-gutter-negative)
+        &.image-portrait
+            picture
+                margin-right: 0
+                img
+                    max-width: columns(6)
         img
             max-height: $block-image-max-height-with-sidebar
             width: auto
@@ -41,7 +40,8 @@
             figure
                 display: flex
                 align-items: flex-end
-                > a
+                justify-content: flex-end
+                > button
                     width: columns(7)
                     margin-left: var(--grid-gutter)
                     display: block
@@ -51,7 +51,6 @@
                 figcaption
                     width: columns(5)
                     order: 1
-                    display: block
                     text-align: right
         &.image-landscape
             picture
@@ -64,7 +63,7 @@
                 display: flex
                 justify-content: space-between
                 align-items: baseline
-                p
+                > p
                     max-width: columns(8)
                 *
                     flex: 1 1

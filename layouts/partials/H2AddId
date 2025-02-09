@@ -1,7 +1,0 @@
-{{ $chunks := split . "<h2" }}
-{{ $text := index $chunks 0 }}
-{{ $chunks = after 1 $chunks }}
-{{ range $index, $chunk := $chunks}}
-  {{ $text = printf "%s<h2 id=\"page-h2-%d\"%s" $text $index $chunk }}
-{{ end }}
-{{ return $text }}

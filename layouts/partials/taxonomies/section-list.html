@@ -1,0 +1,34 @@
+{{ $kind := .Type }}
+{{ $categories_kind := printf "%s_categories" $kind }}
+{{ $categories := where site.Pages "Section" $categories_kind }}
+{{ $taxonomies := .Params.section_taxonomies }}
+{{ $option := index site.Params $kind }}
+
+{{ with $option.index.taxonomies }}
+  <div class="taxonomies-list">
+    {{ if $taxonomies }}
+      <p>{{ i18n "taxonomies.list.title" }}</p>
+      {{- range $taxonomies -}}
+        {{ if .categories }}
+          <div class="dropdown">
+            <button aria-controls="categories-{{ .name | anchorize }}" aria-expanded="false">
+              {{ .name }}
+            </button>
+            <div class="extendable taxonomy-categories" id="categories-{{ .name | anchorize }}" data-extendable-close-siblings="true" data-extendable-auto-close="true">
+              <ul>
+                {{ range .categories }}
+                  {{ $category := site.GetPage .path }}
+                  {{ with $category }}
+                    <li>
+                      <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    </li>
+                  {{ end }}
+                {{ end }}
+              </ul>
+            </div>
+          </div>
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  </div>
+{{- end -}}

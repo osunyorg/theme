@@ -4,14 +4,13 @@
 {{- $term := false -}}
 {{- $layout := .block.data.layout | default "grid" -}}
 
+{{/*  Waiting for data fix https://github.com/osunyorg/admin/issues/2060  */}}
+{{ if eq .block.data.mode "categories" }}
+  {{ $block_class = replace $block_class (printf "block-posts--%s" $layout) " " }}
+{{ end }}
+
 {{- with .block.data }}
-  {{- $options := dict 
-    "hide_image" .hide_image
-    "hide_summary" .hide_summary
-    "hide_category" .hide_category
-    "hide_author" .hide_author
-    "hide_date" .hide_date
-  -}}
+  {{ $options := .options }}
 
   {{ if .category }}
     {{- $term = site.GetPage (printf "/posts_categories%s" .category) -}}
@@ -19,22 +18,7 @@
   <div itemscope itemtype="http://schema.org/Blog" class="{{ $block_class }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}">
     <div class="container">
       <div class="block-content">
-        {{ if $block.title -}}
-          {{ $link := false }}
-          {{- if $term }}
-            {{ $link = $term.Permalink }}
-          {{- else if .all -}}
-            {{ $posts_page := site.GetPage "/posts" }}
-            {{ $link = $posts_page.Permalink }}
-          {{- end -}}
-
-          {{ partial "blocks/top.html" (dict
-            "title" $block.title
-            "heading_level" $block.ranks.self
-            "link" $link
-          )}}
-        {{- end }}
-
+        {{ partial "blocks/top.html" $block.top }}
         {{ if eq .mode "categories" }}
           <ul class="categories categories--grid">
             {{ range site.Taxonomies.posts_categories }}
@@ -45,7 +29,7 @@
             {{ end }}
           </ul>
         {{ else if .posts }}
-          {{ partial (printf "blocks/templates/posts/%s.html" $layout) (dict
+          {{ partial (printf "posts/partials/layouts/%s/%s.html" $layout $layout) (dict
             "posts" .posts
             "heading_level" $block.ranks.children
             "options" $options

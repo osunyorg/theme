@@ -1,0 +1,102 @@
+.taxonomies
+    @include list-reset
+    li
+        @include media-breakpoint-down(desktop)
+            margin-bottom: $spacing-3
+            a
+                display: block
+
+.taxonomies-section, .taxonomy-categories--list
+    @extend .taxonomies
+    margin-top: var(--block-space-y)
+    margin-bottom: var(--block-space-y)
+    li
+        @include media-breakpoint-up(desktop)
+            display: inline-block
+            margin-right: $spacing-4
+        a
+            @extend %underline-on-hover
+            @include meta
+            @include icon(arrow-right-line, after)
+                display: inline-block
+                margin-left: $spacing-1
+
+.taxonomies-list
+    align-items: baseline
+    display: flex
+    margin-bottom: var(--grid-gutter)
+    margin-top: var(--grid-gutter)
+    flex-wrap: wrap
+    > p
+        @include meta
+    .dropdown
+        @include dropdown(".taxonomy-categories")
+    .taxonomy-categories
+        ul
+            @include list-reset
+    @include media-breakpoint-down(md)
+        flex-direction: column
+        .dropdown 
+            margin-top: $spacing-2
+            width: 100%
+            .taxonomy-categories
+                li
+                    a
+                        padding-left: var(--grid-gutter)
+    @include media-breakpoint-up(md)
+        gap: $spacing-3
+        .taxonomy-categories
+            min-width: max-content
+            margin-left: -$spacing-1
+
+.taxonomies-single
+    &, ul
+        @include list-reset
+    .taxonomy-title
+        @include meta
+    .hero &
+        margin-top: $spacing-4
+        display: block
+        a
+            @include small
+        > li
+            display: flex
+            justify-content: space-between
+            align-items: baseline
+            ul
+                text-align: right
+                display: flex
+                flex-wrap: wrap
+                gap: $spacing-1
+        @include media-breakpoint-up(lg)
+            width: columns(4)
+
+// For index pages
+.taxonomy-categories--grid
+    @include list-reset
+    @include grid(1, false, $spacing-4)
+    @include grid(2, sm, $spacing-4)
+    @include grid(3, desktop, $spacing-4)
+    + *
+        margin-top: var(--block-space-y)
+
+.document-content
+    .taxonomies-container
+        margin-bottom: $spacing-5
+        .taxonomies-single
+            @include grid(3, desktop, $spacing-3)
+            ul, &
+                @include list-reset
+            @include media-breakpoint-down(desktop)
+                margin-top: $spacing-5
+                > li + li
+                        margin-top: $spacing-3
+            &.organizations-taxonomies
+                @include grid(2, desktop)
+            &.pages-taxonomies,
+            &.projects-taxonomies
+                margin-bottom: var(--heading-margin-top)
+                @include in-page-with-sidebar
+                    @include grid(2, desktop)
+                    padding-left: offset(4)
+                    padding-right: var(--grid-gutter)

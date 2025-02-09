@@ -2,7 +2,9 @@
 $btn-font-family: $heading-font-family !default
 $btn-font-size: $meta-size !default
 $btn-font-size-desktop: $meta-size-desktop !default
+$btn-font-style: normal !default
 $btn-font-weight: normal !default
+$btn-line-height: $body-line-height !default
 $btn-text-transform: none !default
 $btn-color: var(--color-text) !default
 $btn-hover-color: var(--color-text) !default
@@ -41,9 +43,10 @@ $header-dropdown-color: $header-color !default
 $header-dropdown-transition: $header-transition !default
 $header-sticky-enabled: true !default
 $header-sticky-background: var(--color-background) !default
-$header-sticky-dropdown-background: $header-sticky-background !default
 $header-sticky-color: $header-color !default
 $header-sticky-transition: $header-transition !default
+$header-sticky-dropdown-background: $header-sticky-background !default
+$header-sticky-dropdown-color: $header-sticky-color !default
 $header-nav-padding-y: pxToRem(20) !default
 $header-nav-padding-y-desktop: pxToRem(30) !default
 $header-logo-height: 32px !default
@@ -52,6 +55,23 @@ $header-height: 87px !default
 $header-height-desktop: 96px !default
 $header-sticky-invert-logo: false !default
 $header-border-bottom-width: 1px !default
+$header-dropdown-title-summary-font-family: $lead-hero-font-family !default
+$header-dropdown-title-summary-font-size: $body-size !default
+$header-dropdown-title-summary-font-size-desktop: $lead-hero-size-desktop !default
+$header-dropdown-title-summary-line-height: 120% !default
+$header-dropdown-title-summary-line-height-desktop: $header-dropdown-title-summary-line-height !default
+// upper menu
+$header-upper-menu-background: $header-background !default
+$header-upper-menu-color: $header-color !default
+$header-upper-menu-sticky-background: $header-sticky-background !default
+$header-upper-menu-sticky-color: $header-sticky-color !default
+$header-upper-menu-border-bottom-width: $header-border-bottom-width !default
+$header-upper-menu-padding-y: $header-nav-padding-y !default
+$header-upper-menu-padding-y-desktop: $header-upper-menu-padding-y !default
+$header-upper-menu-mobile-height: pxToRem(50) !default
+$header-upper-menu-active-style-for-sites: false !default // set to 'true' to target non external website instead of active page
+$header-upper-menu-active-decoration-color: var(--color-border) !default
+$header-upper-menu-active-decoration-height: 4px !default
 
 // Navs
 $body-overlay-color: rgba(0, 0, 0, 0.3) !default
@@ -62,7 +82,8 @@ $footer-background-color: var(--color-background-alt) !default
 $footer-logo-height: $header-logo-height !default
 $footer-logo-height-desktop: $footer-logo-height !default
 $footer-icons-enabled: true !default
-$footer-icons-size: pxToRem(32) !default
+$footer-icons-size: pxToRem(20) !default
+$footer-icons-size-desktop: pxToRem(16) !default
 $footer-text-hidden: false !default
 $dropdown-i18n-background-color: var(--color-background) !default
 $dropdown-i18n-color: var(--color-text) !default
@@ -72,19 +93,30 @@ $hero-height: 300px !default
 $hero-height-desktop: 500px !default
 $hero-color: var(--color-text) !default
 $hero-background-color: var(--color-background-alt) !default
-$hero-credit-color: var(--color-text-alt) !default
+$hero-credit-color: $color-text-alt !default
+$hero-credit-color-desktop: $hero-credit-color !default
 
 // Breadcrumb
 $breadcrumb-color: $hero-color !default
 $breadcrumb-color-active: $hero-color !default
-$breadcrumb-icon: "caret-right" !default
+$breadcrumb-icon: "arrow-right-s-line" !default
 $breadcrumb-icon-color: var(--color-text-alt) !default
 
 // System
 
 // Lightbox
-$lightbox-overlay-color: rgba(0, 0, 0, 0.90) !default
-$lightbox-backdrop: blur(16px) !default
+$lightbox-backdrop: blur(5px) !default
+$lightbox-background-color: rgba(0, 0, 0, 0.80) !default
+$lightbox-focus-outline-color: white !default
+$lightbox-button-background-color: var(--color-background) !default
+$lightbox-button-color: var(--color-text) !default
+$lightbox-button-border-color: var(--color-border) !default
+$lightbox-button-disabled-background: var(--color-background-alt) !default
+$lightbox-button-disabled-color: var(--color-border) !default
+$lightbox-detail-background: var(--color-background) !default
+$lightbox-detail-color: var(--color-text) !default
+$lightbox-detail-meta-color: var(--color-text-alt) !default
+$lightbox-focus-outline-color: black !default
 
 // Table of content
 $toc-color: var(--color-text) !default
@@ -105,3 +137,11 @@ $table-head-font-size: $h4-size !default
 $table-head-font-size-desktop: $h4-size-desktop !default
 $table-body-size: $body-size !default
 $table-body-size-desktop: $body-size-desktop !default
+
+// Search
+$search-button-header-icon: true !default
+$search-button-header-text: false !default
+$search-button-footer-icon: true !default
+$search-button-footer-text: true !default
+$search-button-fixed-icon: true !default
+$search-button-fixed-text: true !default

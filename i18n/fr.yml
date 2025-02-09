@@ -29,6 +29,17 @@ blocks:
     title: Image
   key_figures:
     title: Chiffres-clés
+  licenses:
+    labels:
+      cc-zero: Licence libre Zéro - Aucune limite de diffusion
+      by: Licence libre - Attribution à l’entité créatrice
+      by-sa: Licence libre - Attribution à l’entité créatrice - Partage dans les mêmes conditions
+      by-nd: Licence libre - Attribution à l’entité créatrice - Pas de modification
+      by-nc: Licence libre - Attribution à l’entité créatrice - Pas d’utilisation commerciale
+      by-nc-sa: Licence libre - Attribution à l’entité créatrice - Pas d’utilisation commerciale - Partage dans les mêmes conditions
+      by-nc-nd: Licence libre - Attribution à l’entité créatrice - Pas d’utilisation commerciale - Pas de modification
+  locations:
+    button_location: Découvrir le site
   organizations:
     title: Organisations
   pages:
@@ -37,6 +48,12 @@ blocks:
     title: Personnes
   posts:
     title: Actualités
+  projects:
+    title: Catégories
+    items:
+      count: 
+        one: "1 projet"
+        other: "{{ .Count }} projets"
   programs:
     title: Formations
   publications:
@@ -53,8 +70,22 @@ blocks:
     title: Vidéo
     play: Lancer la vidéo
 categories:
+  label: Catégories
+  no_event: Aucun événement dans cette catégorie
+  no_organization: Aucune organisation dans cette catégorie
+  no_page: Aucune page dans cette catégorie
+  no_person: Aucune personne dans cette catégorie
   no_post: Aucun article dans cette catégorie
+  no_program: Aucune formation dans cette catégorie
   no_project: Aucun projet dans cette catégorie
+  type:
+    events_categories: Catégories d'événements
+    organizations_categories: Catégories des organisations
+    pages_categories: Catégories des pages
+    persons_categories: Catégories des personnes
+    posts_categories: Catégories des actualités
+    programs_categories: Catégories des formations
+    projects_categories: Catégories des projets
   see_more:
     one: Voir l'article
     other: Voir les {{ .Count }} articles
@@ -66,54 +97,108 @@ commons:
     search: Accéder à la recherche
     shortcut_navigation: Navigation d'accès rapide
     transcription: Transcription
+    map_transcription : Données textuelles
+    credits: "Droits réservés : "
+  authors:
+    one: Auteur•ice
+    other: Auteur·rices
   search:
+    label: Recherche
     title: Rechercher
     close: Fermer la recherche
   backtotop: Haut de page
   biography: Biographie
   breadcrumb: Fil d’ariane
-  carousel:
-    first: Aller au premier slide
-    last: Aller au dernier slide
-    next: Aller à l'élément suivant
-    pageX: Aller à la page %s
-    pause: Mettre en pause le carousel
-    play: Démarrer le carousel
-    prev: Aller à l'élément précédent
-    slideX: Aller au slide %s
   click_to_copy:
     aria_label: Cliquez pour copier {{ .description }}
     button_title: Cliquez pour copier
   close: Fermer
   contact:
     address: Adresse
-    email: Email
-    phone: Téléphone
-    phone_professional: Téléphone professionnel
+    email:
+      label: Email
+      a11y_label: "Envoyer un mail à l'addresse {{ .email }}"
+    empty_name: de ce contact
+    phone: 
+      label: Téléphone
+      a11y_label: Appeler le {{ .phone_number }}
+    phone_professional: 
+      label: Téléphone professionnel
+      a11y_label: Appeler le téléphone professionnel {{ .phone_number }}
     website: Site web
     web: Web
     schedule: Horaires
+    socials:
+      title: Réseaux sociaux
+      label: 
+        social_media: Consulter la page {{ .name }} sur {{ .media }}
+        email: Contacter {{ .name }} par email
+        rss: Consulter le flux RSS du site {{ .name }}
+        website: Consultez le website de {{ .name }}
+      social_networks:
+        email: Email
+        facebook: Facebook
+        github: Github
+        instagram: Instagram
+        linkedin: LinkedIn
+        mastodon: Mastodon
+        peertube: Peertube
+        rss: RSS
+        tiktok: Tiktok
+        twitter: X, ex-Twitter
+        vimeo: Vimeo
+        x: X, ex-Twitter
+        youtube: YouTube
   credit: Un site éco-conçu produit avec <a href="https://www.osuny.org/" title="Osuny - lien externe" target="_blank" rel="noreferrer">Osuny</a>
   date: Date
   download:
     singular_name: Télécharger
     pdf: Télécharger le PDF
+  extentions:
+    PDF: Adobe Portable Document Format
   "false": Non
   in: Dans
+  index: Accueil - {{ .Title }}
   language: Langue
   lightbox:
-    link:
-      title: Ouvrir l'image
+    button: Agrandir l'image
+    button_without_alt: Agrandir
+    close:
+      a11y_credit: Fermer les crédits
+      a11y_information: Fermer les informations
+      a11y_transcription: Fermer la transcription
+      text: Fermer
+    controls:
+      close: Fermer la visionneuse
+      credit: Crédits de l'image
+      information: Informations de l'image
+      next: Aller à l'image suivante
+      previous: Aller à l'image précédente
+      transcription: Transcription de la vidéo
+    credit: Crédits
+    default_alt: Image
+    information: Informations
+    title: Visionneuse
+    transcription: Transcription
   link:
     blank: lien externe
     blank_aria: “{{ .Title }}” - lien externe
+    download: Télécharger “{{ .Title }}” - lien externe
+  maps:
+    attribution_title: Leaflet une librairie javascript pour carte intéractive
+    label: Vue cartographique - {{ . }} - se déplacer avec les flèches du clavier.
+    marker_label: Afficher les informations de 
+    popup_close: Fermer les informations de 
+    zoom_in: Zoomer
+    zoom_out: Dézoomer
   menu:
-    label: Ouvrir / Fermer le menu
+    label: Menu
     legal: Menu pages légales
     main: Menu principal
     secondary: Menu secondaire
     social: Menu réseaux sociaux
     title: Menu
+    upper: Menu d'accès rapide
   more: En savoir plus
   more_aria: En savoir plus sur “{{ .Title }}“
   pagination:
@@ -133,6 +218,16 @@ commons:
   read: Lire
   read_online: Lire en ligne
   share: Partager
+  share_on: Partager sur
+  share_on_aria: Partager sur “{{ .Title }}” - lien externe
+  slider:
+    default_title: Carrousel
+    goto: Aller à l'élément
+    next: Aller à l'élément suivant
+    pagination_list: Pagination du carrousel
+    pause: Carrousel en cours de lecture. Mettre en pause le carrousel.
+    play: Carrousel actuellement en pause. Démarrer le carrousel.
+    previous: Aller à l'élément précédent
   toc: Table des matières
   "true": Oui
   units:
@@ -144,8 +239,6 @@ commons:
     megabytes: Mégaoctets
     kilobytes: Kilooctets
     bytes: octets
-  extentions:
-    PDF: Adobe Portable Document Format
 diplomas:
   type: Type de diplôme
 errors:
@@ -177,7 +270,6 @@ events:
   from:
     day: Date de début
     hour: Heure de début
-  share: Partager sur
   to:
     day: Jour de fin
     hour: Heure de fin
@@ -199,9 +291,11 @@ formats:
   tar: Compressed archive
 organizations:
   logo: Logo
+  none: Aucune organisations
 pages:
   details: En détail
   informations: Informations
+  none: Aucune page
   posts: Actualités
 papers:
   abstract: Abstract
@@ -217,18 +311,28 @@ papers:
     references: Références
     content: Texte intégral
 persons:
-  posts: Actualités publiées récemment
-  programs: Enseignements
-  papers: Papiers
-  publications: Publications récentes
-  papers: Papiers publiés récemment
   backlinks:
     events: Événements mentionnant
     pages: Pages mentionnant
     posts: Actualités mentionnant
     projects: Projets mentionnant
+  none: Aucune personne
+  posts:
+    recent: Actualités publiées récemment
+    all: Voir toutes les actualités publiées par {{ .author }}
+  papers: 
+    recent: Papiers publiés récemment
+    all: Voir tous les papiers publiés par {{ .author }}
+  publications:
+    recent: Publications récentes
+    all: Voir toutes les publications de {{ .author }}
+  programs: Enseignements
 posts:
   author: Auteur·rice
+  authors:
+    label: "Auteur·rice·s"
+    a11y_title: Auteurs, autrices de cet article
+    more: Plus d'information
   category:
     one: Catégorie
     other: Catégories
@@ -236,31 +340,30 @@ posts:
   informations: Informations
   next: Article suivant
   next_aria: Article suivant “{{ .Title }}”
+  none: Aucun article publié
   previous: Article précédent
   previous_aria: Article précédent “{{ .Title }}”
   reading_time: Temps de lecture
   see_all: Voir toutes les actualités
   see_all_in_program: Voir toutes les actualités de la formation
   see_all_in_category: Voir toutes les actualités “{{ .Title }}”
-  share: Partager sur
-  share_aria: Partager sur “{{ .Title }}” - lien externe
   title: Actualités
 projects:
   author: Auteur·rice
+  authors: "Auteur·rice·s"
   category:
     one: Catégorie
     other: Catégories
   informations: Informations
   next: Projet suivant
   next_aria: Projet suivant “{{ .Title }}”
+  none: Aucun projet
   previous: Projet précédent
   previous_aria: Projet précédent “{{ .Title }}”
   reading_time: Temps de lecture
   see_all: Voir toutes les projets
   see_all_in_program: Voir toutes les projets de la formation
   see_all_in_category: Voir toutes les projets “{{ .Title }}”
-  share: Partager sur
-  share_aria: Partager sur “{{ .Title }}” - lien externe
   title: Projets
   year: Année
 programs:
@@ -268,6 +371,7 @@ programs:
   administrative_information: Informations administratives
   certifications: 
     qualiopi: Qualiopi, processus certifié, République Française
+  children: Parcours
   contacts: Contacts
   evaluation: Modalités d’évaluation
   objectives: Objectifs
@@ -293,8 +397,13 @@ programs:
   ects_credits: Crédits ECTS
   level: Niveau
   mention: Mention
+  none: Aucune formation
   no_program: Aucune formation
   posts: Actualités
+  # TODO déplacer la clé location
+  location:
+    one: Campus
+    other: Campus
   toc:
     admission: Admission
     certification: Certification
@@ -316,6 +425,9 @@ publications:
     label: publications
 sitemap:
   pages: Arborescence
+taxonomies:
+  list:
+    title: Trier par
 volumes:
   abstract: Résumé
   paper:

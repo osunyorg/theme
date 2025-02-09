@@ -1,0 +1,5 @@
+  {{- if (partial "GetTextFromHTML" .Params.text) -}}
+  <div itemprop="description">
+    {{ partial "PrepareHTML" .Params.text }}
+  </div>
+  {{- end -}}

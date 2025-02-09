@@ -1,36 +1,3 @@
 {{ define "main" }}
-  {{ partial "locations/hero-single.html" . }}
-
-  <div class="document-content" itemscope itemtype="https://schema.org/EducationalOrganization">
-    <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
-    <meta itemprop="url" content="{{ .Permalink }}">
-    {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
-
-    {{ partial "locations/summary.html" (dict
-        "context" .
-        "block_wrapped" true
-      ) }}
-
-    {{ partial "contents/list.html" . }}
-
-    <div class="container">
-
-      {{ with .Params.diplomas }}
-
-        {{/*  Get diplomas collection from diploma's paths  */}}
-        {{ $diplomas := slice }}
-        {{ range . }}
-          {{ with site.GetPage (printf "/diplomas/%s" .path) }}
-            {{ $diplomas = $diplomas | append . }}
-          {{ end }}
-        {{ end }}
-
-        {{ partial "locations/diplomas.html" ( dict "diplomas" $diplomas ) }}
-      {{ end }}
-      {{ partial "commons/pagination.html" . }}
-    </div>
-  </div>
-  {{ if and .Params.contact_details.geolocation.longitude .Params.contact_details.geolocation.latitude }}
-    {{ partial "locations/map.html" . }}
-  {{ end }}
+  {{ partial "locations/single.html" . }}
 {{ end }}

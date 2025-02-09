@@ -24,10 +24,18 @@
     {{- if .crop -}}
       {{- $crop = true -}}
     {{- end -}}
+    {{ $image_class := .html_class | default "" }}
+    {{ $is_png := strings.HasSuffix $image.name "png" }}
     {{ $is_svg := strings.HasSuffix $image.name "svg" }}
-    <picture {{ if $is_svg }}class="is-svg"{{ end }}>
+    {{ if $is_png }}
+      {{ $image_class = printf "%s is-png" $image_class }}
+    {{ else if $is_svg }}
+      {{ $image_class = printf "%s is-svg" $image_class }}
+    {{ end }}
 
-      {{- if strings.HasSuffix $image.name "svg" -}}
+    <picture {{ with $image_class -}} class="{{ . }}" {{- end }}>
+
+      {{- if $is_svg -}}
 
         <img src="{{ partial "GetImageUrl" (dict "url" $url) }}"
             alt="{{ chomp (plainify $alt) }}"

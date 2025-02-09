@@ -1,73 +1,100 @@
 {{ $about := .Title }}
 <div class="backlinks">
   {{ with .Params.backlinks.current_website }}
-    {{ if .events }}
+    {{ with .events }}
       {{ partial "blocks/templates/agenda.html" (dict
         "block" (dict 
-          "title" (printf "%s %s" (i18n "persons.backlinks.events") $about)
+          "top" (dict
+            "active" true
+            "title" (dict
+              "value" (printf "%s %s" (i18n "persons.backlinks.events") $about)
+              "heading" 2
+            )
+          )
           "template" "agenda"
           "ranks" (dict 
+            "base" 2
             "self" 2
-            "children" 3
           )
           "data" (dict
-            "layout" "grid"
-            "events" .events
-            "show_summary" true
+            "layout" site.Params.events.index.layout
+            "events" .
+            "options" site.Params.events.index.options
           )
         )
       ) }}
     {{ end }}
-    {{ if .pages }}
+    {{ with .pages }}
       {{ partial "blocks/templates/pages.html" (dict
         "block" (dict 
-          "title" (printf "%s %s" (i18n "persons.backlinks.pages") $about)
+          "top" (dict
+            "active" true
+            "title" (dict
+              "value" (printf "%s %s" (i18n "persons.backlinks.pages") $about)
+              "heading" 2
+            )
+          )
           "template" "pages"
           "ranks" (dict 
+            "base" 2
             "self" 2
-            "children" 3
           )
           "data" (dict 
-            "layout" "grid"
-            "show_main_description" false
-            "show_descriptions" true
-            "show_images" true
-            "pages" .pages
+            "layout" site.Params.pages.index.layout
+            "options" ( dict
+              "main_summary" false
+              "summaries" true
+              "image" true
+            )
+            "pages" .
+            "layout" site.Params.pages.index.layout
+            "options" site.Params.pages.index.options
           )
         )
       ) }}
     {{ end }}
-    {{ if .projects }}
+    {{ with .projects }}
       {{ partial "blocks/templates/projects.html" (dict
         "block" (dict 
-          "title" (printf "%s %s" (i18n "persons.backlinks.projects") $about)
+          "top" (dict
+            "active" true
+            "title" (dict
+              "value" (printf "%s %s" (i18n "persons.backlinks.projects") $about)
+              "heading" 2
+            )
+          )
           "template" "projects"
           "ranks" (dict
+            "base" 2
             "self" 2
-            "children" 3
           )
           "data" (dict
-            "projects" .projects
+            "projects" .
+            "layout" site.Params.projects.index.layout
+            "options" site.Params.projects.index.options
           )
         )
       ) }}
     {{ end }}
-    {{ if .posts }}
-      {{ $posts := slice }}
-      {{ range .posts }}
-        {{ $posts = $posts | append .path }}
-      {{ end }}
+    {{ with .posts }}
       {{ partial "blocks/templates/posts.html" (dict
         "block" (dict 
-          "title" (printf "%s %s" (i18n "persons.backlinks.posts") $about)
+          "top" (dict
+            "active" true
+            "title" (dict
+              "value" (printf "%s %s" (i18n "persons.backlinks.posts") $about)
+              "heading" 2
+            )
+          )
           "template" "posts"
           "ranks" (dict 
+            "base" 2
             "self" 2
-            "children" 3
           )
           "data" (dict
-            "layout" "grid"
-            "posts" $posts
+            "layout" site.Params.posts.index.layout
+            "posts" .
+            "options" site.Params.posts.index.options
           )
         )
       ) }}

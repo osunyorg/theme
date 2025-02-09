@@ -12,12 +12,14 @@
         position: relative
         transition: background 0.3s ease
         .link-content
+            flex: 1
             line-height: 100%
             padding: space(4) space(4) space(8)
             min-height: pxToRem(130)
         a
             @include stretched-link(before)
             text-decoration: none
+            color: inherit
             &::after
                 bottom: space(3)
                 position: absolute
@@ -26,16 +28,28 @@
             @include small
             margin-top: space(3)
         .media
-            img
-                display: block
-                object-fit: cover
-                width: 100%
-                height: 100%
-                aspect-ratio: 16/9
+            picture
+                &:not(.is-svg, .is-png) 
+                    img
+                        display: block
+                        object-fit: cover
+                        width: 100%
+                        height: 100%
+                        aspect-ratio: 16/9
+                // display images as icons
+                &.is-png,
+                &.is-svg
+                    img
+                        margin: space(4) space(4) 0
+                        max-width: $block-links-icon-max-width
         &:hover
             background-color: $block-links-card-hover-background
             &, a
                 color: $block-links-card-hover-color
+            .is-png
+                filter: $block-links-png-hover-filter
+            .is-svg
+                filter: $block-links-svg-hover-filter
     @include in-page-without-sidebar
         .top
             display: flex

@@ -2,29 +2,6 @@
     .top
         a
             text-decoration: none
-    .grid, .cards, .list
-        article
-            position: relative
-            display: flex
-            flex-direction: column
-            .media
-                @include handle-svg-fit
-                order: -1
-                margin-bottom: $spacing-3
-                &:empty
-                    display: none
-                img
-                    display: block
-                    aspect-ratio: 16/9
-                    object-fit: cover
-                    width: 100%
-        .page-title
-            @include h3
-            a
-                @include stretched-link(before)
-                text-decoration: none
-            + p
-                margin-top: $spacing-2
 
     @include media-breakpoint-up(desktop)
         .top
@@ -36,13 +13,11 @@
                 @include h5
         .description
             @include h2
-        article
-            margin-top: $spacing-3
 
     @include in-page-without-sidebar
         .top
             a
-                @include icon(arrow, after, true)
+                @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon
             .description
                 @include h2
@@ -51,14 +26,9 @@
         .top
             @include top-flex
         .grid
-            a
-                @include icon(arrow, after, true)
+            .page-title a
+                @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon(after)
-        @include media-breakpoint-up(desktop)
-            .grid
-                @include grid(2)
-                @include in-page-without-sidebar
-                    @include grid(3)
 
     &--cards
         background-color: $block-pages-card-background
@@ -97,20 +67,17 @@
                 margin-top: -$spacing-3
                 img
                     min-width: 100%
+            .page-categories
+                a
+                    @include link(var(--color-accent))
             .more
                 @include arrow-right-hover
-                @include icon-block(arrow-right, after)
+                @include icon(arrow-right-line, after)
+                    font-size: pxToRem(40)
                 @include link($block-pages-card-page-color)
                 position: relative
                 margin-top: auto
                 padding-top: $spacing-3
-                display: flex
-                justify-content: space-between
-                align-items: center
-            &:hover
-                .more:after
-                    opacity: 1
-                    transform: translateX(0)
             a,
             .more
                 transition: text-decoration-color .3s ease, color .3s ease
@@ -118,17 +85,22 @@
                 background-color: $block-pages-card-page-background-hover
                 &, a, .more
                     color: $block-pages-card-page-color-hover
+                .page-categories
+                    a
+                        @include link($block-pages-card-page-color-hover)
                 .more
                     text-decoration-color: $block-pages-card-page-color-hover
+                    &:after
+                        opacity: 1
+                        transform: translateX(pxToRem(7))
     &--list
-        ul
+        .list
             @include list-reset
-            li
-                display: block
-                + li
+            .page
+                + .page
                     margin-top: $spacing-2
                 > a
-                    @include icon(arrow, before, true)
+                    @include icon(arrow-right-line, before, true)
                         padding-right: $spacing-2
                     @include hover-translate-icon(before, 5)
                     @extend %underline-on-hover
@@ -136,17 +108,17 @@
                     .page-title
                         @include h3
                         a
-                            @include icon(arrow, after, true)
+                            @include icon(arrow-right-line, after, true)
                             @include hover-translate-icon(after)
                             @extend %underline-on-hover
         @include media-breakpoint-down(desktop)
             .top
                 margin-bottom: $spacing-2
-            ul
+            .list
                 margin-top: $spacing-3
         @include media-breakpoint-up(desktop)
-            ul:not(.title-only)
-                li + li
+            .list:not(.title-only)
+                .page + .page
                     margin-top: var(--grid-gutter)
                 article
                     gap: var(--grid-gutter)
@@ -158,24 +130,22 @@
             .block-content
                 .top
                     margin-bottom: $spacing-3
-                ul.title-only
-                    @include grid(2, desktop, 0)
-                    display: flex
-                    li
-                        margin-top: 0
-                        a
-                            @include meta
-                article
-                    gap: var(--grid-gutter)
-                    .media
-                        width: columns(2)
-                    .page-content
-                        width: columns(6)
+            .list.title-only
+                @include grid(2, desktop, $spacing-2)
+                display: flex
+                li
+                    margin-top: 0
+                    a
+                        @include meta
+            article
+                gap: var(--grid-gutter)
+                .media
+                    width: columns(2)
+                .page-content
+                    width: columns(6)
 
         @include in-page-without-sidebar
             .block-title
-                a
-                    @include stretched-link(before)
             .top
                 .description
                     p
@@ -186,14 +156,14 @@
                 .page-content
                     width: columns(4)
             &:not(.with-description)
-                ul.title-only
+                .list.title-only
                     @include grid(4, desktop, $spacing-1)
                     grid-column: 1 / 13
-                    li
+                    .page
                         margin-top: 0
-                ul:not(.title-only)
+                .list:not(.title-only)
                     @include grid(2, desktop)
-                    li + li
+                    .page + .page
                         margin-top: 0
             &.with-description
                 .block-content
@@ -211,20 +181,19 @@
                             @include body-text
                             margin-top: 0
                     // If page description
-                    .top + ul
+                    .top + .list
                         grid-column: 9 / 13
                         grid-row: 2
                         display: block
-                        li + li
+                        .page + .page
                             margin-top: $spacing-2
                             article
                                 margin-top: $spacing-5
                 &.with-images
                     .top
                         grid-column: 1 / 7
-                    .top + ul
+                    .top + .list
                         grid-column: 7 / 13
-
 
     &--alternate
         .top
@@ -235,13 +204,18 @@
                 position: relative
                 display: flex
                 flex-direction: column
-                a
-                    @include stretched-link
+                .page-title a
+                    text-decoration: none
+                &:hover .more::after
+                    padding-left: pxToRem(10)
                 .media 
                     margin-bottom: $spacing-2
                     order: -1
                     img
                         aspect-ratio: unset
+        @include media-breakpoint-down(desktop)
+            article + article
+                margin-top: $spacing-4
         @include in-page-without-sidebar
             .top
                 .description
@@ -254,13 +228,8 @@
             position: relative
             + .page
                 margin-top: $spacing-5
-            .more
-                @include icon(arrow, after, true)
-                @include hover-translate-icon(after)
             &:hover .more:after
                 transform: translateX(#{pxToRem(10)})
-            &-title a
-                @include stretched-link
             .media
                 img
                     aspect-ratio: 1

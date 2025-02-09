@@ -1,61 +1,39 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
-{{- $title := .block.title -}}
 {{- $layout := .block.data.layout | default "grid" -}}
 
 {{- with .block.data -}}
-  {{- $show_main_description := .show_main_description -}}
-  {{- $show_descriptions := .show_descriptions -}}
-  {{- $show_images := .show_images -}}
-  {{- $main_description := "" -}}
-  {{- $page_link := false -}}
+  {{- $options := .options -}}
 
   {{- $page_class := "" -}}
   {{ $page := "" }}
   {{ with .page }}
-    {{ $page = site.GetPage .file }}
+    {{ $page = site.GetPage .path }}
   {{ end }}
 
   {{- with $page }}
-    {{- $page_link = $page.Permalink }}
-    {{ if eq $title "" }}
-      {{ $title = .Title }}
-    {{ end }}
     {{ if .Params.bodyclass }}
       {{- $page_class = printf "block-%s" .Params.bodyclass }}
     {{ end }}
-    {{ if $show_main_description }}
-      {{- $main_description = partial "GetTruncateContent" ( dict 
-          "text" .Params.summary
-          "length" site.Params.pages.index.truncate_description
-          ) -}}
-    {{ end }}
   {{ end -}}
-
-  {{ if $main_description }}
-    {{/*  SHOULD BE FIXED WITH ORTHOTYPO  */}}
-    {{ $main_description = printf "<p>%s</p>" $main_description }}
-    {{ $block_class = printf "%s %s" $block_class "with-description" }}
+  {{ with $block.top }}
+    {{ if .description }}
+      {{ $block_class = printf "%s %s" $block_class "with-description" }}
+    {{ end }}
   {{ end }}
-  {{ if $show_images }}
+  {{ if $options.image }}
     {{ $block_class = printf "%s %s" $block_class "with-images" }}
   {{ end }}
 
   <div class="{{ $block_class }} {{ $page_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $title
-          "link" $page_link
-          "heading_level" $block.ranks.self
-          "description" $main_description
-        ) }}
+        {{ partial "blocks/top.html" $block.top }}
 
-        {{- partial (printf "blocks/templates/pages/%s.html" $layout) (dict 
-          "pages" .pages
-          "heading_level" $block.ranks.children
-          "show_images" $show_images
-          "show_descriptions" $show_descriptions
+        {{- partial (printf "pages/partials/layouts/%s/%s.html" $layout $layout) (dict 
+            "pages" .pages
+            "heading_level" $block.ranks.children
+            "options" $options
           ) }}
       </div>
     </div>

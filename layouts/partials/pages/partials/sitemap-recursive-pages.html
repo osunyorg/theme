@@ -1,0 +1,10 @@
+<ul>
+  {{ range .Pages }}
+    <li>
+      <a href="{{ .Permalink }}">{{ safeHTML .Title }}</a>
+      {{ if .Pages }}
+        {{ partial "pages/partials/sitemap-recursive-pages.html" . }}
+      {{ end }}
+    </li>
+  {{ end }}
+</ul>

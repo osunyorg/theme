@@ -1,0 +1,58 @@
+<div class="essential-container" id="#{{ anchorize (i18n "programs.toc.essential") }}">
+  <div class="container">
+    {{ $duration := .Params.duration }}
+    {{ $diploma := site.GetPage (printf "/diplomas/%s" .Params.diplomas) }}
+    {{- if or $diploma $duration .Params.parent .Params.locations -}}
+      {{ if $diploma }}
+        {{ $duration = $duration | default $diploma.Params.duration }}
+      {{ end }}
+      <dl class="essential">
+        {{ with $diploma }}
+          <dt>{{ i18n "programs.diploma" }}</dt>
+          <dd><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></dd>
+          {{- if .Params.level -}}
+            <dt>{{ i18n "programs.level" }}</dt>
+            <dd>{{ partial "PrepareHTML" .Params.level }}</dd>
+          {{- end -}}
+        {{- end -}}
+        {{- with .Params.parent -}}
+          <dt>{{ i18n "programs.mention" }}</dt>
+          <dd><a href="{{ .url }}">{{ partial "PrepareHTML" .title }}</a></dd>
+        {{- end -}}
+        {{- with $duration -}}
+          <dt>{{ i18n "programs.duration" }}</dt>
+          <dd>{{ partial "PrepareHTML" . }}</dd>
+        {{- end -}}
+        {{- with .Params.locations -}}
+          <dt>{{ i18n "programs.location" ( len . ) }}</dt>
+          <dd>
+            {{- range . -}}
+              {{- $location := site.GetPage .path -}}
+              <a href="{{ .permalink }}">{{ $location.Title }}</a>
+            {{- end -}}
+          </dd>
+        {{- end -}}
+      </dl>
+    {{- end -}}
+    
+    <div class="buttons">
+      {{ if site.Params.programs.single.options.website_link }}
+        {{ $target := .Params.website_url }}
+        {{ $label := (i18n "programs.website") }}
+        {{ if and $target $label }}
+          <a href="{{ $target }}" class="btn website" target="_blank">{{ $label }}</a>
+        {{ end }}
+      {{ end }}
+      
+      {{ if site.Params.programs.share_links.enabled | default site.Params.share_links.enabled }}
+        {{ partial "commons/share/dropdown.html" . }}
+      {{ end }}
+
+      {{ partial "commons/download-link" (dict 
+        "id" .Params.downloadable_summary
+        "title" (i18n "commons.download.singular_name")
+        "use_filename_for_a11y_title" true
+      ) }}
+    </div>
+  </div>
+</div>

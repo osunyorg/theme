@@ -5,14 +5,9 @@
 <div class="{{ $block_class }}">
   <div class="container">
     <div class="block-content">
-      {{ partial "blocks/top.html" (dict
-        "title" $block.title
-        "heading_level" $block.ranks.self
-      )}}
+      {{ partial "blocks/top.html" $block.top }}
       {{ $template := printf "blocks/templates/timeline/%s.html" $layout }}
-      {{ partial $template (dict 
-          "block" $block
-        ) }}
+      {{ partial $template (dict "block" $block ) }}
     </div>
   </div>
 </div>

@@ -1,0 +1,40 @@
+@mixin dropdown($content: ".dropdown-menu")
+    @include meta
+    position: relative
+    button, span[role="button"]
+        @include button-reset
+        color: inherit
+        padding: $spacing-2
+        margin: -$spacing-2
+        @include icon(arrow-down-s-line, after)
+            margin-left: 5px
+        // When dropdown expanded
+        &[aria-expanded="true"]
+            @include icon(arrow-up-s-line, after)
+            + #{$content}
+                display: block
+    #{$content}
+        @include list-reset
+        top: calc(100% + #{$spacing-2})
+        left: 0
+        background-color: var(--dropdown-background)
+        display: none
+        position: absolute
+        z-index: $zindex-dropdown
+        @include media-breakpoint-down(desktop)
+            right: var(--grid-gutter-negative)
+            left: var(--grid-gutter-negative)
+        li
+            display: block
+            &:not(:first-child)
+                border-top: 1px solid var(--dropdown-border-color)
+        a
+            color: var(--dropdown-color)
+            display: flex
+            padding: $spacing-2
+            text-decoration: none
+            white-space: normal
+            @include media-breakpoint-up(desktop)
+                &:hover
+                    background-color: var(--dropdown-hover-background)
+                    color: var(--dropdown-hover-color)

@@ -7,15 +7,23 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block_title
-          "heading_level" $block.ranks.self
-        ) }}
-
-        {{- partial (printf "blocks/templates/projects/%s.html" $layout) (dict 
-          "projects" .projects
-          "heading_level" $block.ranks.children
-        ) }}
+        {{ partial "blocks/top.html" $block.top }}
+        {{ if eq .mode "categories" }}
+          <ul class="categories categories--grid">
+            {{ range site.Taxonomies.projects_categories }}
+              <li data-title="{{ .Page.Title }}">
+                <a href="{{ .Page.Permalink }}" class="title" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Page.Title) }}">{{ partial "PrepareHTML" .Page.Title }}</a>
+                <p>{{ i18n "blocks.projects.items.count" ( len . ) }}</p>
+              </li>
+            {{ end }}
+          </ul>
+        {{ else if .projects }}
+          {{- partial (printf "projects/partials/layouts/%s/%s.html" $layout $layout) (dict 
+            "projects" .projects
+            "heading_level" $block.ranks.children
+            "options" .options
+          ) }}
+        {{ end }}
       </div>
     </div>
   </div>

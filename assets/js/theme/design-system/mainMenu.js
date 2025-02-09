@@ -1,5 +1,6 @@
+import { focusTrap } from '../utils/focus-trap';
 import { isMobile } from '../utils/breakpoints';
-import { a11yClick } from '../utils/a11y';
+import { a11yClick, ariaHideBodyChildren } from '../utils/a11y';
 
 const CLASSES = {
     mainMenuOpened: 'is-opened',
@@ -13,6 +14,9 @@ class MainMenu {
         this.element = document.querySelector(selector);
         this.menu = this.element.querySelector('.menu');
         this.mainButton = this.element.querySelector('button.header-button');
+        this.upperMenu = this.element.querySelector('.upper-menu');
+        // this.a11yButton = document.querySelector('[href="#navigation"]');
+
         this.dropdownsButtons = this.element.querySelectorAll('.has-children [role="button"]');
 
         this.state = {
@@ -36,9 +40,20 @@ class MainMenu {
             }
         });
 
-        this.mainButton.addEventListener('click', () => {
-            this.toggleMainMenu();
-        });
+        if (this.mainButton) {
+            this.mainButton.addEventListener('click', () => {
+                this.toggleMainMenu();
+            });
+        }
+
+        // if (this.a11yButton) {
+        //     a11yClick(this.a11yButton, (event) => {
+        //         if (this.state.isMobile) {
+        //             event.preventDefault();
+        //             this.mainButton.focus();
+        //         }
+        //     });
+        // }
 
         this.dropdownsButtons.forEach((button) => {
             a11yClick(button, (event) => {
@@ -54,13 +69,17 @@ class MainMenu {
         window.addEventListener('keydown', (event) => {
             if (event.keyCode === 27 || event.key === 'Escape') {
                 this.closeEverything();
+            } else if (event.key === 'Tab' && this.state.isOpened) {
+                focusTrap(event, this.element, true);
             }
         });
     }
 
     resize () {
-        document.documentElement.style.setProperty('--header-height', this.element.offsetHeight + 'px');
-        document.documentElement.style.setProperty('--header-menu-max-height', window.innerHeight - this.element.offsetHeight + 'px');
+        if (!this.state.isOpened) {
+            document.documentElement.style.setProperty('--header-height', this.element.offsetHeight + 'px');
+            document.documentElement.style.setProperty('--header-menu-max-height', window.innerHeight - this.element.offsetHeight + 'px');
+        }
 
         // is state changed ?
         if (this.state.isMobile === isMobile()) {
@@ -70,6 +89,18 @@ class MainMenu {
         this.state.isMobile = isMobile();
 
         this.closeEverything();
+
+        if (this.upperMenu) {
+            this.updateUpperMenuPosition();
+        }
+    }
+
+    updateUpperMenuPosition () {
+        if (this.state.isMobile) {
+            this.element.append(this.upperMenu);
+        } else {
+            this.element.prepend(this.upperMenu);
+        }
     }
 
     toggleMainMenu (open = !this.state.isOpened) {
@@ -86,6 +117,10 @@ class MainMenu {
 
         // Update global overlay
         this.updateOverlay();
+
+        if (this.state.isMobile) {
+            ariaHideBodyChildren(this.element, open);
+        }
     }
 
     toggleDropdown (clickedButton) {

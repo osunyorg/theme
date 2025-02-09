@@ -1,18 +1,39 @@
 {{ $context := . }}
-{{- if .Params.contents -}}
+{{ $contents := .Params.contents }}
+
+{{- if $contents -}}
+
+  {{ $collapsed_started := false }}
+  {{ $is_last_content := false }}
+
   <div class="blocks">
-  {{- range .Params.contents -}}
+  {{- range $index, $content := .Params.contents -}}
     {{ if eq .kind "block" }}
+      {{ $is_last_content := eq (add $index 1) (len $contents) }}
+      {{ $is_title := eq .template "title" }}
+      {{ $is_layout_collapsed := eq .data.layout "collapsed" }}
       {{ $template := printf "blocks/templates/%s.html" .template }}
-      {{ partial $template (dict 
-          "block" . 
+
+      {{ if and $is_title $collapsed_started }}
+        {{ $collapsed_started = false }}
+        </div>
+      {{ end }}
+
+      {{ partial $template (dict
+          "block" $content
           "context" $context
+          "index" $index
       )}}
-    {{- else if (eq .kind "heading") -}}
-      <div class="heading container" id="{{ urlize .title }}">
-        <h2>{{ partial "PrepareHTML" .title }}</h2>
-      </div>
-    {{- end -}}
+
+      {{ if and $is_title $is_layout_collapsed }}
+        {{ $collapsed_started = true }}
+        <div class="collapse" id="collapse-{{- .slug -}}">
+      {{ end }}
+
+      {{ if and $collapsed_started $is_last_content }}
+        </div>
+      {{ end }}
+    {{ end }}
   {{- end -}}
   </div>
 {{- end -}}

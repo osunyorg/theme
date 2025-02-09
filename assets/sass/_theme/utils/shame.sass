@@ -11,10 +11,12 @@
 
 @mixin author-and-time-side-to-side
     .post-meta
-        display: flex
-        flex-wrap: wrap
-    .post-author p::before
-        content: ' • '
+        *
+            display: inline
+        > * + .post-author p,
+        > * + .post-reading-time
+            &::before
+                content: ' • '
 
 // Utilisé pour .post, .project, .page, .person, .program, .volume
 @mixin article($aspect-ratio: $article-media-aspect-ratio)
@@ -27,7 +29,6 @@
         order: -1
         overflow: hidden
         img
-            display: block
             object-fit: cover
             // max-width: max-content
             width: 100%
@@ -57,7 +58,7 @@
 @mixin article-title
     @include h3
     a
-        @include stretched-link
+        @include stretched-link(before)
         display: block
         text-decoration: none
 
@@ -72,7 +73,7 @@
             @include h2
             transition: color 0.55s
             @include media-breakpoint-down(desktop)
-                @include icon(arrow-right, after, true)
+                @include icon(arrow-right-line, after, true)
                     bottom: $spacing-2
                     position: absolute
                     right: 0
@@ -114,16 +115,17 @@
         display: flex
         .block-title
             width: columns(4)
-            &:not(.hidden) + .description
+            + .description
                 margin-left: var(--grid-gutter)
         .description
             margin-top: 0
             width: columns(8)
 
 @mixin collapsed-figcaption
+    // TODO: remove hero specifics variables
     figcaption
         @include meta
-        color: var(--color-text-alt)
+        color: $hero-credit-color
         position: absolute
         display: block
         left: 0
@@ -132,7 +134,7 @@
         z-index: 10
         &::before
             @include meta
-            content: '©'
+            content: '©' / ''
             position: absolute
             right: 0
             top: 0
@@ -140,19 +142,22 @@
             text-align: center
             padding: $spacing-1
             display: block
-        .credit-content
+        .credit
             @include meta
             background: $hero-background-color
             display: none
             padding: $spacing-1
             padding-right: $spacing-3
+            > p > span[aria-hidden]
+                display: none // Remove default ©
         a
             color: inherit
             text-decoration-color: inherit
         &:focus
-            .credit-content
+            .credit
                 display: block
         @include media-breakpoint-up(desktop)
+            color: $hero-credit-color-desktop
             &:before
                 padding-right: 0
         @include media-breakpoint-down(desktop)
@@ -160,33 +165,10 @@
             background: var(--color-background)
             &::before
                 background: transparent
-            .credit-content
+            .credit
                 display: block
                 background: transparent
                 position: relative
     &:hover
-        figcaption .credit-content
+        figcaption .credit
             display: block
-
-@mixin dropdown-i18n
-    position: relative
-    .dropdown-menu
-        margin-top: $header-nav-padding-y
-        right: 0
-        @include media-breakpoint-up(desktop)
-            padding-left: $spacing-3
-            padding-bottom: $spacing-2
-            padding-top: $spacing-2
-            padding-right: $spacing-3
-    li a
-        padding-bottom: $spacing-1
-        padding-top: $spacing-1
-        display: block
-        &.is-checked
-            display: flex
-            justify-content: space-between
-            align-items: center
-            gap: $spacing-4
-            text-decoration: none !important
-            @include icon(caret, after)
-                transform: rotate(-14deg) skewX(-30deg)

@@ -1,4 +1,6 @@
 .block-testimonials
+    .container
+        overflow: hidden
     blockquote
         @include blockquote
         p
@@ -17,9 +19,9 @@
                 @include media-breakpoint-up(xl)
                     font-size: $block-testimonials-xl-font-size-long-text
                     line-height: $block-testimonials-xl-line-height-long-text
-
     figure
         margin-bottom: 0
+        width: columns(12)
     figcaption
         align-items: center
         display: flex
@@ -28,84 +30,44 @@
             display: block
     .avatar
         flex-shrink: 0
-        width: columns(1)
-        min-width: pxToRem(80)
-        margin-right: $spacing-2
         margin-bottom: 0
+        margin-right: $spacing-2
+        min-width: pxToRem(80)
+        width: columns(1)
 
-    .splide
-        .splide__slider
-            display: flex
-            flex-direction: column-reverse
-        &__toggle
-            border: 1px solid $block-testimonials-pagination-background
-            border-radius: 50%
-            cursor: pointer
-            font-size: 0
-            height: 42px
-            padding: 0
-            position: absolute
-            right: 0
-            top: 0
-            width: 42px
-            font-size: 0
-            line-height: 1
-            span
-                color: var(--color-accent)
-                &::before
-                    font-size: pxToRem(42)
-        .splide__pagination
-            .is-active i
-                width: 100%
-
-            .splide__play
-                &::before
-                    margin-left: 2px
-        &__pagination
-            justify-content: unset
-            margin-right: 55px
-            li
-                flex: 1
-                margin-right: 10px
-            button
-                @include button-reset
-                position: relative
-                width: 100%
-                &::before,
-                i
-                    height: 1px
-                    left: 0
-                    top: 50%
-                    position: absolute
-                &::before
-                    background-color: $block-testimonials-pagination-background
-                    border-radius: 0
-                    width: 100%
-                i
-                    background-color: $block-testimonials-pagination-progress-background
-                    width: 0
-
+    @include in-page-with-sidebar
+        figure 
+            width: columns(8)
     @include in-page-without-sidebar
-        .top
-            padding-left: offset(3)
-        .splide__pagination
-            padding-left: offset(3)
-            padding-right: offset(1)
-        .splide__autoplay
-            margin-right: offset(1)
+        .testimonials
+            width: columns(12)
         figure
-            padding-right: offset(3)
             min-height: columns(2)
+            width: columns(8)
+            padding-left: offset(4)
+            width: columns(12)
             &.with-picture
-                padding-right: offset(1)
-                padding-left: offset(3)
                 position: relative
                 figcaption
-                    display: block
                     margin-top: $spacing-2
                     .avatar
-                        position: absolute
-                        left: columns(1)
-                        top: 0
+                        left: columns(2)
                         margin-left: var(--grid-gutter)
+                        position: absolute
+                        top: 0
                         width: columns(2)
+    .slider
+        display: flex
+        flex-direction: column
+        &-slide
+            &.is-next
+                opacity: 0
+        &-controls
+            order: -1
+            margin-bottom: $spacing-3
+        &-pagination
+            li
+                &::before
+                    background-color: $block-testimonials-pagination-background
+                &::after
+                    background-color: $block-testimonials-pagination-progress-background

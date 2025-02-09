@@ -1,0 +1,10 @@
+
+{{- with site.GetPage (printf "/diplomas/%s" .) -}}
+  {{ with .Params.certification }}
+    {{ if fileExists (printf "themes/osuny/static/assets/images/certifications/diplomas/%s.svg" .) }}
+      <picture class="diploma-certification">
+        <img src="/assets/images/certifications/diplomas/{{- . -}}.svg" alt="logo {{ . }}">
+      </picture>
+    {{ end }}
+  {{ end }}
+{{ end }}

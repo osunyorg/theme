@@ -1,0 +1,36 @@
+{{ $file := false }}
+{{ if .id }}
+  {{ $file = partial "GetMedia" .id }}
+{{ end }}
+
+{{ $title := .title }}
+{{ $with_caption := .with_caption }}
+
+{{ if $file }}
+  {{ if (not $title) }}
+    {{ $title = $file.name }}
+  {{ end }}
+
+  {{ $a11y_title := $title }}
+  {{ if .use_filename_for_a11y_title }}
+    {{ $a11y_title = $file.name }}
+  {{ end }}
+
+  {{ $size := partial "GetHumanSize" $file.size }}
+  {{ $extension := partial "GetExtensionFile" $file.name }}
+  {{ $extension_with_size := (printf "%.2f %s - %s" $size.weight $size.unit $extension) }}
+  {{ $title_with_size := printf "%s (%s)" $a11y_title $extension_with_size }}
+  {{ $url := $file.url }}
+  {{ if site.Params.keycdn }}
+    {{ $url = $file.download_url }}
+  {{ end }}
+  <a href="{{ $url }}" download="{{ partial "PrepareHTML" $file.name }}" target="_blank" title="{{ i18n "commons.link.download" (dict "Title" $title_with_size) }}">
+    {{ $title }}
+  </a>
+  {{ if .with_caption }}
+    <figcaption>
+      <abbr title="{{ i18n (printf "commons.extensions.%s" $extension) }}">{{ $extension }}</abbr>
+      - {{ $size.weight }} <abbr title="{{ $size.full_unit }}">{{ $size.unit }}</abbr>
+    </figcaption>
+  {{ end }}
+{{ end }}

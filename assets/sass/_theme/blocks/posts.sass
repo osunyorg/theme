@@ -2,7 +2,7 @@
     .top
         margin-bottom: $spacing-4
         a
-            @include icon(arrow-right, after, true)
+            @include icon(arrow-right-line, after, true)
             @include hover-translate-icon
             text-decoration: none
     .posts
@@ -35,17 +35,16 @@
     &--large
         .post
             .more
-                @include icon(arrow-right, after, true)
-
+                @include icon(arrow-right-line, after, true)
             // Masquer le point entre l'auteur et la date (mixin author-and-time-side-to-side)
-            .post-author
-                p::before
+            .post-author p,
+            .post-reading-time
+                &::before
                     display: none
 
             // Permet d'aligner correctement les différents line-height des différents composants du post meta
             .post-meta
                 display: block
-                line-height: 0 // Hack pour que les enfants de post-meta soient correctement 
                 > *
                     margin-right: $spacing-3
                 time
@@ -61,7 +60,7 @@
             .post
                 + .post
                     margin-top: $spacing-4
-                p[itemprop="articleBody"]
+                [itemprop="abstract"]
                     margin-top: 0
                 .post-author 
                     margin-right: 0
@@ -69,6 +68,9 @@
                         display: inline
                         &::before
                             content: ' • '
+                .post-categories
+                    li
+                        margin-right: space(2)
         @include media-breakpoint-up(desktop)
             .large
                 .post
@@ -76,9 +78,10 @@
                     gap: var(--grid-gutter)
                     + .post
                         margin-top: $spacing-4
-                    .post-title
+                    .post-title,
+                    .post-subtitle
                         @include h2
-                    p[itemprop="articleBody"]
+                    [itemprop="abstract"]
                         margin-top: $spacing-3
                     &-categories
                         display: inline
@@ -95,7 +98,7 @@
                     @include media-breakpoint-down(xl)
                         flex-direction: column
                         gap: unset
-                        p[itemprop="articleBody"]
+                        [itemprop="abstract"]
                             margin-top: $spacing-2
                     @include media-breakpoint-up(xl)
                         .media,
@@ -114,7 +117,8 @@
                         width: columns(6)
                     .post-content
                         width: columns(5)
-                    .post-title
+                    .post-title,
+                    .post-subtitle
                         @include lead
                 &.without-images
                     .post
@@ -148,7 +152,7 @@
                         margin-bottom: 0
                     .post-categories
                         margin-bottom: 0
-                    p[itemprop="articleBody"]
+                    [itemprop="abstract"]
                         margin-top: $spacing-1
                 .media
                     order: -1
@@ -190,11 +194,11 @@
 
     &--highlight
         .highlight-post
-            .post-title
-                margin-bottom: $spacing-2
             .media
                 margin-bottom: $spacing-2
                 background: none
+                img
+                    aspect-ratio: auto
         .list
             margin-top: $spacing-3
             border-top: 1px solid var(--color-border)
@@ -208,20 +212,20 @@
                 margin-top: $spacing-2
             .media
                 margin-top: 0
-
         @include media-breakpoint-down(desktop)
             .list
                 border-top: 1px solid var(--color-border)
-                p[itemprop="articleBody"]
+                [itemprop="abstract"]
                     margin-top: 0
-
         @include media-breakpoint-up(desktop)
             .highlight
-                .post-title
+                .post-title,
+                .post-subtitle
                     @include h2
             .list
                 article
-                    .post-title
+                    .post-title,
+                    .post-subtitle
                         @include h4
 
         @include in-page-with-sidebar
@@ -236,21 +240,19 @@
                         width: columns(5)
             .list
                 article
-                    @include grid(8, desktop, 0, 0)
-                    .post-title
-                        grid-column: 1 / 7
-                    .post-categories
-                        grid-column: 1 / 7
+                    flex-direction: row
+                    gap: var(--grid-gutter)
+                    .post-content
+                        width: columns(6)
                     .post-meta
-                        grid-row: 1
-                        grid-column: 7 / 9
-                        text-align: right
-                        order: 2
-                        display: block
                         margin-top: 0
+                        text-align: right
+                        width: columns(2)
+                        > *
+                            display: block
                         .post-author p::before
-                            content: ''
-                    p[itemprop="articleBody"]
+                            content: none
+                    [itemprop="abstract"]
                         grid-column: 1 / 7
                         order: 3
 
@@ -267,18 +269,10 @@
         @include alternate
         @include media-breakpoint-up(desktop)
             &.without-images
-                .right
-                    margin-left: auto
-                .portrait
-                    + .portrait
-                        margin-top: 0
-                    + .square,
-                    + .landscape
-                        margin-top: -5%
-                    + .post:not(.portrait, .square, .landscape)
-                        margin-top: -3%
+                .post
+                    margin-top: 0 !important
         @include media-breakpoint-down(desktop)
-            .post 
+            .post
                 .post-meta
                     margin-top: $spacing-1
                 .media
@@ -287,61 +281,53 @@
                     margin-top: $spacing-5
 
     &--carousel
-        @include draggable-block
-        .container
-            padding-right: 0
-        .carousel
-            padding-bottom: $spacing-3
-            &:hover
-                cursor: grab
-            &.is-grabbing
-                cursor: grabbing
-            li
-                list-style: none
-            .posts
-                display: flex
-                gap: unset
-                .post
-                    margin: 0 calc(var(--grid-gutter) / 2)
-            .actions-arrows
-                justify-content: space-between
+        overflow: hidden
+        z-index: 0
+        .post
+            word-break: break-word
+            margin-right: calc(var(--grid-gutter))
+            .media
+                img
+                    aspect-ratio: 1.55
         @include media-breakpoint-down(desktop)
-            .carousel
-                gap: half(var(--grid-gutter))
-                .post
-                    width: columns(10)
-                .grab-item:last-of-type
-                    margin-right: half(var(--grid-gutter))
-                .actions-arrows
-                    margin-right: var(--grid-gutter)
-        @include media-breakpoint-up(desktop)
-            .next
-                margin-right: pxToRem(-27) // Marge négative pour aligner correctement le picto à la colonne
+            .slider-arrows
+                width: columns(12)
+            .post
+                width: columns(10)
         @include in-page-with-sidebar
             .post
                 width: columns(3)
-                .post-title
+                .post-title,
+                .post-subtitle
                     @include h4
-            .carousel
-                .actions-arrows
-                    width: offset(6)
+            .slider-arrows
+                justify-content: space-between
+                width: columns(7)
+            @include media-breakpoint-down(xl)
+                .post
+                    width: columns(4)
+                .slider-arrows
+                    width: columns(8)
         @include in-page-without-sidebar
             .block-content
                 display: flex
                 gap: var(--grid-gutter)
                 .top
+                    flex-shrink: 0
                     width: columns(3)
-                .carousel
-                    width: columns(9)
                 .post
                     width: columns(4)
-            .carousel
-                .actions-arrows
-                    width: offset(8)
+                .slider-arrows
+                    justify-content: space-between
+                    width: columns(9)
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts
     .categories--grid
+        @include list-reset
+        display: flex
+        flex-direction: column
+        row-gap: $spacing-3
         li
             background: var(--color-background-alt)
             padding: $spacing-3
@@ -353,3 +339,8 @@
                 @include stretched-link
             p
                 display: block
+        @include in-page-with-sidebar
+            @include grid(2)
+        @include in-page-without-sidebar
+            @include grid(3, md)
+            @include grid(4, xxl)

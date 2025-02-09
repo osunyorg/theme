@@ -14,12 +14,6 @@
         margin-top: $spacing-3
         max-height: var(--header-menu-max-height)
         overflow: auto
-    a,
-    a:focus,
-    a:active
-        @include link($header-color, false)
-    span
-        color: $header-color
     ul
         list-style: none
         margin: 0
@@ -27,13 +21,13 @@
     a,
     span
         @include meta
+        color: $header-color
         cursor: pointer
         transition: text-decoration 0.15s
         display: block
-        // &:not(:hover)
-        //     text-decoration-color: transparent
         &[aria-expanded]
-            @include icon(caret, after)
+            @include icon(arrow-down-s-line, after)
+                display: inline-block
                 margin-left: pxToRem(5)
                 transition: transform 0.15s
             &[aria-expanded="true"]
@@ -47,19 +41,39 @@
 
     .dropdown-menu
         display: none
-        background: $header-dropdown-background
         @include media-breakpoint-down(desktop)
             padding-bottom: $spacing-3
         @include media-breakpoint-up(desktop)
+            background: $header-dropdown-background
             padding: $spacing-3
             position: absolute
             max-height: calc(100vh - var(--header-height))
             overflow: auto
-        a
-            color: $header-dropdown-color
-            @extend %underline-on-hover
-        .dropdown-menu-title
+        &-title
             @include h2
+            + .dropdown-menu-summary
+                margin-top: $spacing-1
+        &-summary
+            font-family: $header-dropdown-title-summary-font-family
+            font-size: $header-dropdown-title-summary-font-size
+            line-height: $header-dropdown-title-summary-line-height
+            @include media-breakpoint-up(desktop)
+                font-size: $header-dropdown-title-summary-font-size-desktop
+                line-height: $header-dropdown-title-summary-line-height-desktop
+        &-heading
+            @include media-breakpoint-down(desktop)
+                + .nav-level-2
+                    margin-top: $spacing-3
+        &.is-titled
+            .nav-level-2 
+                > li + li
+                    margin-top: $spacing-1
+                    @include media-breakpoint-up(desktop)
+                        margin-top: $spacing-2
+        a,
+        a:focus,
+        a:active
+            @include link($header-dropdown-color, false)
 
     .nav-level-1
         display: flex
@@ -68,6 +82,7 @@
                 @include meta
                 display: block
                 padding: $spacing-1 $spacing-2
+                text-decoration: none
             &:last-child 
                 a, span
                     padding-right: 0
@@ -83,6 +98,23 @@
             > a,
             > span
                 @include signature
+            &.with-summary
+                position: relative
+                > a
+                    @include stretched-link(before)
+                    + p
+                        display: block
+                        @include media-breakpoint-up(desktop)
+                            @include small
+                            margin-top: $spacing-2
+                .nav-level-3
+                    padding-top: 0
+                    a
+                        position: relative
+                        z-index: 2
+                @include media-breakpoint-down(desktop)
+                    + li
+                        margin-top: $spacing-2
 
     .nav-level-3
         display: block
@@ -90,26 +122,22 @@
         a,
         span
             @include meta
-
-    .header-i18n
-        [role="button"]
-            text-transform: uppercase
+        p
+            @include small
 
     @include media-breakpoint-up(desktop)
         .nav-level-1
-            align-items: center
+            align-items: baseline
         .nav-level-3
             li
                 margin-top: $spacing-2
-        .has-children:not(.header-i18n) // avoid 
+        .has-children:not(.upper-menu-i18n, .primary-i18n)
             @if $header-dropdown-full
                 .dropdown-menu
-                    &:not(.dropdown-languages)
-                        @include inset(100%, 0, auto, 0)
-                        // inset: 100% 0 auto 0
-                        padding-left: 0
-                        padding-right: 0
-                        padding-bottom: $spacing-4
+                    @include inset(100%, 0, auto, 0)
+                    padding-left: 0
+                    padding-right: 0
+                    padding-bottom: $spacing-4
                     &:not(.is-titled)
                         .nav-level-2
                             @include container
@@ -119,12 +147,10 @@
                             align-items: baseline
                             display: flex
                             gap: var(--grid-gutter)
-                        .dropdown-menu-title
+                        .dropdown-menu-heading
                             width: columns(5)
                         .nav-level-2
                             width: columns(7)
-                            li
-                                margin-bottom: $spacing-2
             @else
                 position: relative
                 .dropdown-menu
@@ -151,70 +177,58 @@
                         + li.has-children
                             margin-top: $spacing-3
 
-        .header-i18n
-            @include dropdown-i18n
-            [role="button"],
-                @include icon(globe, after)
-                &[aria-expanded][aria-expanded="true"]
-                    &::after
-                        transform: none
-
     @include media-breakpoint-down(desktop)
+        display: none
+        flex-basis: 100vw
+        margin-top: $spacing-3
+        max-height: var(--header-menu-max-height)
+        overflow: auto
         &.is-opened
             display: block
         a, span
             text-decoration: none
         .nav-level-1
             display: block
-            li 
-                a, span
+            li
+                > a, > span
                     padding: $spacing-1 0
                     display: block
             > li:not(:last-child) 
-                border-bottom: 1px solid #adb5bd
+                border-bottom: 1px solid $color-border
             > li
-                > a, > span
+                > a, > span, > button
                     padding-bottom: $spacing-3
                     padding-top: $spacing-3
             li.has-children
-                [role="button"]
+                [role="button"], button
                     align-items: center
                     display: flex
                     justify-content: space-between
                     text-decoration: none
-                    @include icon(caret-bottom, after)
+                    @include icon(arrow-down-s-line, after)
                         display: block
                     &::after
                         line-height: 1
-                .dropdown-menu
-                    display: none
-                    padding-top: 0
-                [aria-expanded=true] + .dropdown-menu
-                    display: block
-        .dropdown-menu
-            padding-left: 0
         .is-titled
             .container
                 padding-left: 0
                 padding-right: 0
+
         .nav-level-2
             > .has-children + li
                 margin-top: $spacing-3
         .nav-level-3
             padding-top: 0
 
-
 .share
     display: flex
     list-style: none
     margin: 0
     padding: 0
-    li:not(:last-child)
-        margin-right: 1rem
     a
         text-decoration: none
         padding: $spacing-2
-        font-size: pxToRem(24)
+        font-size: pxToRem(17)
         &:hover
             opacity: 0.7
         &::after
@@ -223,11 +237,7 @@
         display: none
         vertical-align: middle
 
-
-[aria-expanded="false"] + .dropdown-menu
+[aria-expanded="false"] ~ .dropdown-menu
     display: none
-[aria-expanded="true"] + .dropdown-menu
+[aria-expanded="true"] ~ .dropdown-menu
     display: block
-    animation-duration: 0.3s
-    animation-fill-mode: both
-    animation-name: showIn

@@ -1,0 +1,39 @@
+{{ partial "organizations/single/hero.html" . }}
+
+<div class="document-content" itemscope itemtype="https://schema.org/Organization">
+
+  {{ partial "toc/container.html" (dict
+        "toc" "toc/default.html"
+        "context" .
+      ) }}
+
+  <div class="container">
+
+    <div itemprop="articleBody">
+      {{ partial "organizations/single/summary.html" (dict
+        "context" .
+      ) }}
+
+      {{ if (partial "GetTextFromHTML" .Params.text) }}
+        <div class="organization-presentation rich-text">
+          {{ partial "PrepareHTML" .Params.text }}
+        </div>
+      {{ end }}
+
+      {{ if .Params.taxonomies }}
+        <div class="taxonomies-container">
+          {{ partial "taxonomies/single-list.html" . }}
+        </div>
+      {{ end }}
+
+      {{ partial "commons/contact-details.html" . }}
+    </div>
+
+    {{ partial "organizations/partials/logo.html" . }}
+  </div>
+  {{ partial "contents/list.html" . }}
+
+  {{ if site.Params.organizations.single.backlinks }}
+    {{ partial "contents/backlinks.html" . }}
+  {{ end }}
+</div>

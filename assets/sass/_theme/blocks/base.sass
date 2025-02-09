@@ -1,33 +1,25 @@
 .block
-    --block-space-y: #{$block-space-y}
     margin-top: var(--block-space-y)
     margin-bottom: var(--block-space-y)
     .block-title
         @include h5
     .top
-        .block-title
-            + .description
-                margin-top: $spacing-3
-        .block-title.hidden + .description
-                margin-top: 0
+        position: relative
+        margin-bottom: calc(#{$spacing-3} + #{$spacing-2})
+        .block-title + .description
+            margin-top: $spacing-3
+        .block-title.sr-only + .description
+            margin-top: 0
     @include in-page-without-sidebar
-        --block-space-y: #{$block-space-y-desktop}
-    @include in-page-with-sidebar
-        --block-space-y: #{$block-space-y-with-sidebar}
+        .top
+            .description
+                max-width: columns(8)
 
-.heading
-    margin-bottom: var(--heading-margin-bottom)
-    &:not(:first-child)
-        margin-top: var(--heading-margin-top)
-    @include in-page-without-sidebar
-        h2
-            width: columns(8)
-
-.heading + .block
+.heading + .block, .block-title + .block
     margin-top: var(--heading-margin-bottom)
 
 // Specific
-$backgrounded_blocks: ".block-call_to_action, .block-chapter--accent_background, .block-chapter--alt_background, .block-timeline--horizontal, .block-pages--cards"
+$backgrounded_blocks: ".block-call_to_action--accent_background, .block-chapter--accent_background, .block-chapter--alt_background, .block-timeline--horizontal, .block-pages--cards"
 .blocks
     .block:first-child
         margin-top: 0

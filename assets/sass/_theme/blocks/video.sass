@@ -1,85 +1,26 @@
 .block-video
-    .video
-        @include aspect-ratio(16/9, 'iframe')
-        @supports not (aspect-ratio: 1)
-            iframe,
-            img
-                min-height: 400px
-        position: relative
-        .lazy-video-player
-            align-items: center
-            height: 100%
-            display: flex
-            justify-content: center
-            left: 0
-            position: absolute
-            top: 0
-            width: 100%
-            img,
-            &::after
-                position: absolute
-                top: 0
-                left: 0
-                width: 100%
-                height: 100%
-            img
-                object-fit: cover
-                z-index: 1
-            &::after
-                content: ''
-                background-color: transparentize(black, .5)
-                backdrop-filter: blur(4px)
-                z-index: 2
-            button
-                @include button-reset
-                @include icon-block(play, before)
-                border: 1px solid white
-                border-radius: 100%
-                color: white
-                height: $spacing-6
-                padding: $spacing-1
-                transition: background-color .3s ease
-                width: $spacing-6
-                z-index: 3
-                &::before
-                    font-size: pxToRem(100)
-                    transition: color .3s ease
-                    vertical-align: middle
-                    padding-left: pxToRem(5)
-                &:hover
-                    background-color: white
-                    &::before
-                        color: black
-                @include media-breakpoint-down(desktop)
-                    height: $spacing-5
-                    width: $spacing-5
-                    &::before
-                        font-size: pxToRem(40)
-                        padding-left: pxToRem(3)
-        iframe
-            background: black
-        + p
-            margin-top: $spacing-2
-
-    @include media-breakpoint-down(desktop)
-        .video
-            margin-left: var(--grid-gutter-negative)
-            margin-right: var(--grid-gutter-negative)
-
-    @include in-page-without-sidebar
-        background: $block-video-background
-        .block-content
-            @include grid(12, false, 0)
-            padding-top: $block-space-y
-            padding-bottom: $spacing-4
-            .top
-                grid-column: 1 / -1
+    &--player
+        @include media-breakpoint-down(desktop)
             .video
-                grid-column: 8 span
-            > p
-                margin-top: 0
-                grid-column: 4 span
-            .transcription
-                grid-column: 8 span
-        .lazy-video-player::after
-            backdrop-filter: blur(5px)
+                margin-left: var(--grid-gutter-negative)
+                margin-right: var(--grid-gutter-negative)
+        @include in-page-without-sidebar
+            background: $block-video-background
+            .block-content
+                @include grid(12, false, 0)
+                padding-top: $block-space-y
+                padding-bottom: $spacing-4
+                .top
+                    grid-column: 1 / -1
+                .video
+                    grid-column: 8 span
+                > p
+                    margin-top: 0
+                    grid-column: 4 span
+                .transcription
+                    grid-column: 8 span
+            .lazy-video-player::after
+                backdrop-filter: blur(5px)
+    &--button
+        .video
+            display: none

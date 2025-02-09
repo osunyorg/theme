@@ -1,0 +1,24 @@
+{{- if or (partial "GetTextFromHTML" .Params.opportunities) (partial "GetTextFromHTML" .Params.results) -}}
+<section id="{{ anchorize ( i18n "programs.toc.results" ) }}">
+  <div class="container">
+    <div class="content">
+      <h2>{{ i18n "programs.toc.results" }}</h2>
+      <div>
+        {{- if partial "GetTextFromHTML" .Params.opportunities -}}
+          <section class="rich-text" id="{{ anchorize (i18n "programs.opportunities") }}">
+            <h3>{{ i18n "programs.opportunities" }}</h3>
+            {{- partial "PrepareHTML" .Params.opportunities -}}
+          </section>
+        {{- end -}}
+
+        {{- if partial "GetTextFromHTML" .Params.results -}}
+          <section class="rich-text" id="{{ anchorize (i18n "programs.results") }}">
+            <h3>{{ i18n "programs.results" }}</h3>
+            {{- partial "PrepareHTML" .Params.results -}}
+          </section>
+        {{- end -}}
+      </div>
+    </div>
+  </div>
+</section>
+{{- end -}}

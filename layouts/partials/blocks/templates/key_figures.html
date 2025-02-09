@@ -7,12 +7,7 @@
   <div class="{{ $block_class }} {{- if $isAnimated }} is-animated {{ end }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "description" .description
-        )}}
-
+        {{ partial "blocks/top.html" $block.top }}
         {{ if $figures }}
           {{ $list_class := "odd-items" }}
           {{ if (modBool (len $figures) 2) }}
@@ -20,21 +15,18 @@
           {{ end }}
           <ul class="{{ $list_class }}">
             {{- range .figures }}
-              
               <li>
-                <dl>
-                  <dt>
-                    {{ with .image }}
-                      {{ partial "commons/image.html"
-                        (dict
-                          "image"    .
-                          "sizes"    site.Params.image_sizes.blocks.key_figures
-                        )}}
-                    {{ end }}
-                    <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
-                  </dt>
-                  <dd>{{ partial "PrepareHTML" .description }}</dd>
-                </dl>
+                <span>
+                  {{ with .image }}
+                    {{ partial "commons/image.html"
+                      (dict
+                        "image"    .
+                        "sizes"    site.Params.image_sizes.blocks.key_figures
+                      )}}
+                  {{ end }}
+                  <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
+                </span>
+                {{ partial "PrepareHTML" .description }}
               </li>
             {{ end -}}
           </ul>

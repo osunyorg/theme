@@ -20,14 +20,23 @@ $block-space-y-desktop: $spacing-5 !default
 $block-space-y-with-sidebar: $spacing-5 !default
 
 // Block call to action
-$block-call-to-action-background: var(--color-accent) !default
-$block-call-to-action-color: var(--color-background) !default
-$block-call-to-action-button-background: var(--color-background) !default
+$block-call-to-action-color: var(--color-text) !default
+$block-call-to-action-button-background: var(--color-text) !default
 $block-call-to-action-button-border: pxToRem(1) solid $block-call-to-action-button-background !default
-$block-call-to-action-button-color: var(--color-text) !default
+$block-call-to-action-button-color: var(--color-background) !default
 $block-call-to-action-button-hover-background: var(--color-text-alt) !default
 $block-call-to-action-button-hover-border: pxToRem(1) solid $block-call-to-action-button-hover-background !default
 $block-call-to-action-button-hover-color: var(--color-background) !default
+$block-call-to-action-all-actions-as-buttons: false !default
+
+$block-call-to-action-accent-background: var(--color-accent) !default
+$block-call-to-action-accent-color: var(--color-background) !default
+$block-call-to-action-accent-button-background: var(--color-background) !default
+$block-call-to-action-accent-button-border: pxToRem(1) solid $block-call-to-action-accent-button-background !default
+$block-call-to-action-accent-button-color: var(--color-text) !default
+$block-call-to-action-accent-button-hover-background: var(--color-text-alt) !default
+$block-call-to-action-accent-button-hover-border: pxToRem(1) solid $block-call-to-action-accent-button-hover-background !default
+$block-call-to-action-accent-button-hover-color: var(--color-background) !default
 
 // Block chapter
 $block-chapter-layout-accent-background: var(--color-accent) !default
@@ -55,6 +64,9 @@ $block-posts-grid-columns: 3 !default
 // Block programs
 $block-programs-aspect-ratio: 16/9 !default
 
+// Block title
+$block-title-border-bottom: 1px solid var(--color-border)
+
 // Block timeline
 $block-timeline-horizontal-background: var(--color-background-alt) !default
 $block-timeline-horizontal-color: var(--color-text) !default
@@ -78,7 +90,9 @@ $block-testimonials-pagination-progress-background: var(--color-accent) !default
 $block-key_figures-number-font-family: $heading-font-family !default
 $block-key_figures-unit-font-weight: normal !default
 $block-key_figures-number-font-weight: bold !default
-$block-key_figures-image-max-width: $spacing-6 !default
+$block-key_figures-image-max-width-desktop: pxToRem(128) !default
+$block-key_figures-image-max-width: pxToRem(48) !default
+$block-key_figures-icon-max-width: pxToRem(60) !default
 
 $block-key_figures-font-size: pxToRem(16) !default
 $block-key_figures-number-font-size: pxToRem(32) !default
@@ -97,7 +111,8 @@ $block-key_figures-number-font-size-xxl: pxToRem(80) !default
 
 // Block gallery
 $block-gallery-carousel-background: var(--color-background-alt) !default
-$block-gallery-carousel-max-height: 70vh !default
+$block-gallery-carousel-height: 350px !default
+$block-gallery-carousel-height-desktop: calc(60 * var(--rvh)) !default
 
 // Block image
 $block-image-max-height-with-sidebar: calc(100vh - var(--header-height)) !default
@@ -111,3 +126,9 @@ $block-links-card-background: var(--color-background-alt) !default
 $block-links-card-color: var(--color-text) !default
 $block-links-card-hover-background: var(--color-accent) !default
 $block-links-card-hover-color: var(--color-background) !default
+$block-links-icon-max-width: pxToRem(40) !default
+$block-links-png-hover-filter: invert(1) !default
+$block-links-svg-hover-filter: $block-links-png-hover-filter !default
+
+// Bloc fonctionnalités
+$block-features-icon-max-width: pxToRem(80) !default

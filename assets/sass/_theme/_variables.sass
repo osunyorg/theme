@@ -115,7 +115,9 @@
   // ---------------//
   --btn-font-family: #{$btn-font-family}
   --btn-font-size: #{$btn-font-size}
+  --btn-font-style: #{$btn-font-style}
   --btn-font-weight: #{$btn-font-weight}
+  --btn-line-height: #{$btn-line-height}
   --btn-text-transform: #{$btn-text-transform}
   --btn-color: #{$btn-color}
   --btn-hover-color: #{$btn-hover-color}
@@ -132,7 +134,7 @@
     --btn-border: #{$btn-border-desktop}
     --btn-border-radius: #{$btn-border-radius-desktop}
     --btn-min-width: #{$btn-min-width-desktop}
-  
+
   // -------------- //
   //      GRID      //
   // ---------------//
@@ -162,6 +164,17 @@
     --grid-gutter-negative: #{-$grid-gutter-xxl}
 
   // -------------- //
+  //    SPAGINGS    //
+  // ---------------//
+
+  --block-space-y: #{$block-space-y}
+  @include media-breakpoint-up(desktop)
+    body:not(.full-width)
+      --block-space-y: #{$block-space-y-with-sidebar}
+    main > .blocks, body.full-width
+      --block-space-y: #{$block-space-y-desktop}
+
+  // -------------- //
   //     HEADING    //
   // ---------------//
 
@@ -175,3 +188,13 @@
     main > .blocks, body.full-width
       --heading-margin-top: #{ $heading-margin-top-desktop}
       --heading-margin-bottom: #{$heading-margin-bottom-desktop}
+
+  // -------------- //
+  //     DROPDOWN   //
+  // ---------------//
+  // Used in i18n footer and diplomas select
+  --dropdown-background: var(--color-background-alt)
+  --dropdown-border-color: var(--color-border)
+  --dropdown-color: var(--color-text)
+  --dropdown-hover-color: var(--color-background)
+  --dropdown-hover-background: var(--color-accent)

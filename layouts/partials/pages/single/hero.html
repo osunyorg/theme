@@ -1,0 +1,14 @@
+{{- $title := or .Params.header_text .Title -}}
+
+{{- $hero_text_complement := "" -}}
+{{ if eq site.Params.pages.single.taxonomies.position "hero" }}
+  {{ $hero_text_complement = "taxonomies/single-list.html" }}
+{{ end }}
+
+{{- partial "header/hero.html" (dict
+    "title" $title
+    "image" .Params.image
+    "sizes" site.Params.image_sizes.sections.pages.hero
+    "context" .
+    "hero_text_complement" $hero_text_complement
+  ) -}}

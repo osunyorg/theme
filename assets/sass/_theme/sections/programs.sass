@@ -1,7 +1,46 @@
 .program
     @include article
+    display: flex
+    gap: var(--grid-gutter)
     h2, h3, .program-title
         @include article-title
+    &-diploma
+        @include meta
+        display: block
+        margin-bottom: $spacing-1
+        margin-top: $spacing-1
+    &-summary
+        margin-top: $spacing-2
+    &-logo
+        img
+            max-height: pxToRem(60)
+            width: auto
+            margin-bottom: $spacing-2
+    &-logo, .btn
+        align-self: center
+        margin-top: $spacing-2
+    .btn + .program-logo
+        margin-left: $spacing-2
+    .media img
+        aspect-ratio: $block-programs-aspect-ratio
+        object-fit: cover
+    &-contact
+        span
+            display: block
+        a
+            position: relative
+            z-index: 2
+            + a
+                display: block
+        &-title
+            font-weight: bold
+    @include media-breakpoint-up(desktop)
+        &-content
+            align-items: baseline
+            display: flex
+        &-logo
+            img
+                max-width: columns(4)
 
 div.programs,
 section.programs
@@ -10,20 +49,134 @@ section.programs
 
 ol.programs
     @include list-section
-    li
-        a:nth-child(2)
-            margin-top: unset
-            white-space: nowrap
-            @include media-breakpoint-up(desktop)
-                margin-left: $spacing-3
+    .program
+        align-items: start
+        .program-title a
+            @include hover-translate-icon($fade: true)
+            @include icon(arrow-right-line, after, true)
+                display: inline
+            transition: color 0.55s
+            &:hover
+                color: var(--color-accent)
+        @include media-breakpoint-down(md)
+            .media
+                display: none
+        @include media-breakpoint-down(md)
+            flex-direction: column-reverse
+            gap: $spacing-2
+            .program-title a
+                align-items: baseline
+                display: flex
+                &::after
+                    opacity: 1
+        @include media-breakpoint-up(md)
+            flex-direction: row-reverse
+            .program-content
+                flex: 1
+                flex-wrap: wrap
+                .program-title
+                    flex: 1
+                .program-title,
+                [itemprop="abstract"]
+                    min-width: columns(6)
+                .program-diploma
+                    width: var(--grid-gutter)
+                    text-align: center
+            .media
+                flex-shrink: 0
+                margin-bottom: 0
+                width: columns(2)
+        @include in-page-with-sidebar
+            .program-diploma + [itemprop="abstract"]
+                padding-right: var(--grid-gutter)
+                width: 100%
+        @include in-page-without-sidebar
+            .program-title
+                @include h2
+            [itemprop="abstract"]
+                width: columns(9)
+            .program-diploma
+                margin-left: offset(1)
+    &--light
+        .program
+            &:first-child
+                border-top: 1px solid var(--color-border)
+            .program-title:last-child
+                @include h4
+
+.programs-grid
+    align-items: start
+    @include grid(1, false, $spacing-5)
+    @include grid(2, xl)
+    .program
+        flex-direction: column
+        gap: 0
+        .program-content
+            flex-direction: column
+            &:hover .more:after
+                transform: translateX($spacing-1)
+            .program-title
+                margin-bottom: $spacing-1
+                order: -1
+            .program-diploma
+                order: 0
+            [itemprop='abstract'],
+            .more
+                order: 2
+            .more
+                @include icon(arrow-right-line, after, true)
+                @include hover-translate-icon
+        .media
+            margin-bottom: $spacing-3
+    @include in-page-without-sidebar
+        @include grid(2)
+        @include grid(3, xl)
 
 .programs__section
-    .hero-program
-        flex-direction: column
-        justify-content: end
-        .container
-            position: relative
-            
+    .hero
+        .content
+            @include media-breakpoint-up(md)
+                display: flex
+                flex-direction: row
+                justify-content: space-between
+                gap: var(--grid-gutter)
+                .hero-text
+                    width: columns(9)
+        .hero-logos
+            align-items: center
+            display: flex
+            gap: var(--grid-gutter)
+            justify-content: space-between
+            margin-top: $spacing-3
+            @include media-breakpoint-down(md)
+                width: 100%
+                img
+                    max-height: pxToRem(150)
+                    max-width: 100%
+                .logo
+                    width: columns(6)
+                .diploma-certification
+                    img
+                        width: columns(4)
+            @include media-breakpoint-up(md)
+                align-items: end
+                flex-direction: column
+                margin-top: $spacing-5
+                width: columns(2)
+                .diploma-certification
+                    img
+                        width: offset(1)
+
+    .featured-image
+        margin-bottom: var(--block-spacing-y)
+        figcaption
+            margin-top: $spacing-2
+            text-align: right
+            &,
+            p
+                @include small
+
+    // Program's index
     &:not(.full-width)
         .document-content
             .lead
@@ -32,13 +185,8 @@ ol.programs
                 font-weight: $lead-weight
                 line-height: var(--lead-line-height)
 
-    ol.programs
-        margin-bottom: $spacing-5
-        li
-            line-height: 1
-
     .document-content
-        .program-summary
+        .summary
             margin-bottom: $spacing-5
             .lead
                 margin-bottom: $spacing-3
@@ -48,8 +196,8 @@ ol.programs
                 margin-top: 1em
             .blocks
                 section > * + * // TODO : check that
-                    margin-top: 0
                     @include h3
+                    margin-top: 0
                 @include media-breakpoint-down(desktop)
                     padding-top: $spacing-5
                     margin-left: var(--grid-gutter-negative)
@@ -68,11 +216,12 @@ ol.programs
             .content
                 > h2
                     margin-bottom: $spacing-4
+            .content > * + *, 
             section:not(:first-child):not(.block)
                 margin-top: $spacing-5
     @include media-breakpoint-up(desktop)
         .document-content
-            .program-summary
+            .summary
                 margin-bottom: $spacing-6
             .content
                 @include grid(12, desktop)
@@ -134,7 +283,7 @@ ol.programs
                 @include stretched-link(before)
                 @include media-breakpoint-down(desktop)
                     margin-right: $spacing-3
-                @include icon(arrow-right, after, true)
+                @include icon(arrow-right-line, after, true)
                     color: inherit
                     position: absolute
                     right: 0
@@ -152,14 +301,14 @@ ol.programs
                 color: var(--color-accent)
             &:first-child
                 border-top: 1px solid var(--color-border)
-            a
-            p
-                @include small
     .related-posts
         .category-link
             display: block
             text-decoration: none
-            @include icon(arrow, after, true)
+            @include icon(arrow-right-line, after, true)
             @include hover-translate-icon
             @include media-breakpoint-down(desktop)
                 margin-bottom: $spacing-3
+    .programs-index
+        .programs
+            margin-bottom: $spacing-5

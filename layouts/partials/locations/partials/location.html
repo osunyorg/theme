@@ -1,0 +1,44 @@
+{{ $location := .location }}
+{{ $heading := .heading | default "h2" }}
+{{ $heading_tag := (dict 
+    "open" ((printf "<%s itemprop='headline' class='location-title'>" $heading) | safeHTML)
+    "close" ((printf "</%s>" $heading) | safeHTML)
+    ) }}
+{{ $options := .options }}
+
+{{ with $location }}
+  <article class="location" itemscope itemtype="https://schema.org/EducationalOrganization">
+    <div class="location-content">
+      {{- $title := partial "PrepareHTML" .Title -}}
+      {{ $heading_tag.open }}
+        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+      {{ $heading_tag.close }}
+      {{ with .Params.contact_details }}
+        {{ partial "commons/address" .postal_address }}
+      {{ end }}
+      <div class="location-description" itemprop="description">
+        {{- if and .Params.summary  $options.summary -}}
+          {{ partial "GetRichSummary" ( dict 
+            "summary" .Params.summary
+            "kind" "locations"
+          )}}
+          <p class="more meta">
+            {{- i18n "blocks.locations.button_location" -}}
+          </p>
+        {{- end -}}
+        </div>
+      </div>
+
+    {{ if $options.image }}
+      {{- if .Params.image -}}
+        <div class="media">
+          {{- partial "commons/image.html"
+              (dict
+                "image"    .Params.image
+                "sizes"    site.Params.image_sizes.sections.locations.item
+              ) -}}
+          </div>
+        {{- end -}}
+    {{- end -}}
+  </article>
+{{ end }}

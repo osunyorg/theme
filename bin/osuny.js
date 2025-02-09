@@ -1,8 +1,10 @@
 #! /usr/bin/env node
 
-const shell = require("shelljs");
-shell.set('-e'); // exit upon first error
+const shell = require("shelljs"),
+    dev = require("./dev"),
+    migrate = require("./migrate/migrate");
 
+shell.set('-e'); // exit upon first error
 console.log(`
   .=*#%%#*=        -*#%%#*=.      =+-      ++.     .+ .+#%%#+.     :++      -+-
  :@@=:..:+@@.     #@#:..:+@@.     *@*      @@:     -@#@+:..-@@-    -@@      *@*
@@ -42,6 +44,7 @@ pagefindExclude += '.posts__section, .block-posts, .post-sidebar, ';
 // Programs: no block
 pagefindExclude += '.block-programs';
 
+
 function execute(string) {
     console.log("OSUNY runs " + string);
     shell.exec(string);
@@ -55,6 +58,13 @@ if (command === "dev") {
     execute("hugo");
     execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --exclude-selectors '" + pagefindExclude + "'");
     execute("hugo server");
+}
+
+if (command === "local") {
+    var IP = dev.network["en0"][0] || "0.0.0.0";
+    execute("hugo");
+    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --exclude-selectors '" + pagefindExclude + "'");
+    execute("hugo server --bind=" + IP + " --baseURL=http://" + IP + ":1313 -D");
 }
 
 if (command === "build") {
@@ -90,4 +100,8 @@ if (command === "example") {
 if (command === "update-theme") {
     execute("git submodule update --remote");
     execute("yarn upgrade");
+}
+
+if (command === "migrate") {
+    migrate(process.argv);
 }

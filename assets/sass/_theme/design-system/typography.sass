@@ -26,6 +26,7 @@ h1, h2, h3, h4, h5, h6
     font-size: var(--h1-size)
     font-weight: $h1-weight
     line-height: var(--h1-line-height)
+    font-style: $h1-style
     text-transform: $h1-text-transform
 
 h1, .h1
@@ -36,6 +37,7 @@ h1, .h1
     font-size: var(--h2-size)
     font-weight: $h2-weight
     line-height: var(--h2-line-height)
+    font-style: $h2-style
     text-transform: $h2-text-transform
 
 h2, .h2
@@ -46,6 +48,7 @@ h2, .h2
     font-size: var(--h3-size)
     font-weight: $h3-weight
     line-height: var(--h3-line-height)
+    font-style: $h3-style
     text-transform: $h3-text-transform
 
 h3, .h3
@@ -56,6 +59,7 @@ h3, .h3
     font-size: var(--h4-size)
     font-weight: $h4-weight
     line-height: var(--h4-line-height)
+    font-style: $h4-style
     text-transform: $h4-text-transform
 
 h4, .h4
@@ -66,6 +70,7 @@ h4, .h4
     font-size: var(--h5-size)
     font-weight: $h5-weight
     line-height: var(--h5-line-height)
+    font-style: $h5-style
     text-transform: $h5-text-transform
     // Todo : check that
     a
@@ -79,6 +84,7 @@ h5, .h5
     font-size: var(--h6-size)
     font-weight: $h6-weight
     line-height: var(--h6-line-height)
+    font-style: $h6-style
     text-transform: $h6-text-transform
 
 h6, .h6
@@ -114,6 +120,7 @@ h2, .h2
     font-family: $body-font-family
     font-size: var(--body-size)
     line-height: var(--body-line-height)
+    font-weight: inherit
 
 .p,
 .li
@@ -124,6 +131,7 @@ h2, .h2
     font-size: var(--meta-size)
     font-weight: $meta-weight
     line-height: var(--meta-line-height)
+    text-transform: $meta-text-transform
 
 .meta
     @include meta
@@ -156,10 +164,12 @@ small, .small
 .rich-text
     word-break: break-word
     @extend %multiple-lists
-    h1, h2, h3, h4, h5, h6, p, ul
+    h1, h2, h3, h4, h5, h6, p, ul, ol
         margin-top: $spacing-3
         &:first-child, meta + &
             margin-top: 0
+    ul, ol
+        padding-left: var(--body-size)
 
 .content
     section 
@@ -207,19 +217,23 @@ figcaption
         color: inherit
 
 address
-    font-style: normal
+    font-style: inherit
+    [itemprop="streetAddress"],
+    [itemprop="description"]
+        display: block
 
 a,
 .link
     @include link
     overflow-wrap: break-word
     &[target="_blank"]:not(.icon)
-        @include icon(link-blank, after, true)
+        @include icon(links-line, after, true)
             vertical-align: baseline
+            font-size: 0.8em
     &[href^="mailto"]
         &::after
             content: none
-    &.glightbox
+    &.lightbox-launcher
         text-decoration: none
 
 .chip
@@ -236,7 +250,7 @@ a,
 
 .link-more
     @include link
-    @include icon(arrow, before)
+    @include icon(arrow-right-line, before)
     &::before
         font-size: pxToRem(10)
         margin-right: pxToRem(5)
@@ -269,15 +283,16 @@ sup
 [data-click-to-copy]
     cursor: pointer
     text-decoration: none
-    @include icon(copy-inline, after)
+    @include icon(file-copy-line, after)
         margin-left: $spacing-2
         vertical-align: text-top
     &.is-copied
-        @include icon(check-inline, after)
+        @include icon(check-line, after)
 
 *:focus-visible
+    border-radius: 3px
     outline-color: inherit
-    outline-offset: 5px
+    outline-offset: 8px
     outline-style: dashed
     outline-width: 1px
 
@@ -291,7 +306,8 @@ sup
     font-family: 'Icon'
     font-style: normal
     font-weight: 400
-    src: url('/assets/fonts/fonticons/IconFont.woff2') format("woff2"), url('/assets/fonts/fonticons/IconFont.woff') format("woff"), url('/assets/fonts/fonticons/IconFont.ttf') format("truetype")
+    src: url('/assets/fonts/remixicon/remixicon.eot')
+    src: url('/assets/fonts/remixicon/remixicon.eot#iefix') format('embedded-opentype'), url("/assets/fonts/remixicon/remixicon.woff2") format("woff2"), url("/assets/fonts/remixicon/remixicon.woff") format("woff"), url('/assets/fonts/remixicon/remixicon.ttf') format('truetype'), url('/assets/fonts/remixicon/remixicon.svg#remixicon') format('svg')
 
 @each $name, $glyph in $icons
     .icon-#{$name}

@@ -6,14 +6,19 @@ ul.categories
                 & + p 
                     text-align: right
                     white-space: nowrap
-    &--grid
-        @include list-reset
-        display: flex
-        flex-direction: column
-        gap-y: $spacing-3
-        @include grid(3, md)
-        @include grid(4, xxl)
 
 .posts_categories__term, .events_categories__term
     main
         padding-bottom: $spacing-5
+
+.document-content
+    .project-categories
+        --block-space-y: #{$block-space-y}
+        margin-bottom: var(--block-space-y)
+
+article.category
+    @include article
+    .category-title
+        @include article-title
+        + p
+            margin-top: $spacing-1

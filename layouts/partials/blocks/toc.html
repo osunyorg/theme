@@ -1,7 +1,7 @@
 {{ range . -}}
-  {{- if eq .kind "heading" }}
+  {{- if and (eq .template "title") .title }}
     <li>
-      <a href="#{{ urlize .title }}">{{ partial "PrepareHTML" .title }}</a>
+      <a href="#{{ .slug }}">{{ partial "PrepareHTML" .title }}</a>
     </li>
   {{ end -}}
 {{- end -}}

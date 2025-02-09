@@ -3,27 +3,42 @@
 {{ $layout := .block.data.layout | default "grid" }}
 
 {{- with .block.data -}}
+  {{ $options := .options }}
+
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "description" .description
-          "heading_level" $block.ranks.self
-        )}}
+        {{ partial "blocks/top.html" $block.top }}
 
-        <div class="locations locations--{{- $layout }}">
-          {{ $location_heading := printf "h%d" ( $block.ranks.children | default 2 ) }}
-          {{ range .locations }}
-            {{ $location := site.GetPage ( printf "/locations/%s" .slug ) }}
-            {{ with $location }}
-              {{ partial "locations/location.html" (dict 
+        {{ $locations := slice }}
+        {{ $location := "" }}
+        {{ range .locations }}
+          {{ $location = site.GetPage .path }}
+          {{ $locations = $locations | append $location }}
+        {{ end }}
+
+        {{ if eq $layout "map" }}
+          {{ $map_title := i18n "programs.location" $locations }}
+          {{ if $block.title }}
+            {{ $map_title = $block.title }}
+          {{ end }}
+
+          {{ partial "locations/partials/map.html" (dict
+              "locations" $locations
+              "title" $map_title
+            )}}
+        {{ else }}
+          <div class="locations locations--{{- $layout }}">
+            {{ $location_heading := printf "h%d" ( $block.ranks.children | default 2 ) }}
+            {{ range $locations }}
+              {{ partial "locations/partials/location.html" (dict 
                 "location" .
                 "heading" $location_heading
+                "options" $options
               ) }}
             {{ end }}
-          {{ end }}
-        </div>
+          </div>
+        {{ end }}
       </div>
     </div>
   </div>

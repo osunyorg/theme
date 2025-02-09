@@ -4,6 +4,7 @@
     box-sizing: border-box
 
 \:root
+    --rvh: 1vh
     --spacing-1: #{$spacing-1}
     --spacing-2: #{$spacing-2}
     --spacing-3: #{$spacing-3}
@@ -51,7 +52,7 @@ ul,
 ol
     // https://since1979.dev/aligning-your-lists-with-your-text/
     padding-left: 0
-    list-style-position: inside
+    list-style-position: outside
     > li
         > p
             display: inline
@@ -68,7 +69,7 @@ ol
 
 details
     &:not([open]):hover
-       summary::after
+        summary::after
             transform: translateY(5px)
     summary
         @include meta
@@ -76,17 +77,19 @@ details
         padding-top: $spacing-2
         position: relative
         cursor: pointer
-        @include icon(caret, after)
-            margin-left: pxToRem(10)
+        @include icon(arrow-down-s-line, after)
             line-height: pxToRem(22)
             transition: transform 0.25s
+            // Add left margin if text is before arrow
+            &:not(:first-child)
+                margin-left: pxToRem(10)
         &::marker
             content: none
         &::-webkit-details-marker 
             display: none
     &[open]
         summary
-            @include icon(caret-top, after)
+            @include icon(arrow-up-s-line, after)
         &:hover
             summary::after
                 transform: translateY(-5px)
@@ -123,7 +126,7 @@ details
             margin-bottom: $spacing-2
             button
                 @include button-reset
-                @include icon-block(close, before)
+                @include icon-block(close-line, before)
                 position: absolute
                 padding: 0
                 right: 0

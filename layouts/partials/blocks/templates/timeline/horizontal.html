@@ -1,29 +1,20 @@
-
 {{- $heading_tag := partial "GetHeadingTag" (dict 
   "level" .block.ranks.children
-  "attributes" "class='title'"
+  "attributes" "class='title' itemprop='name'"
   ) -}}
 
-<div class="timeline draggable-container">
-  {{ with .block.data }}
-    <div class="timeline-events draggable-content">
-      <ol>
-        {{ range .events }}
-          <li class="timeline-event draggable-item">
-            {{ $heading_tag.open -}}
-              {{ .title | safeHTML }}
-            {{ $heading_tag.close -}}
-            <div class="line"></div>
-            <div class="description text">{{- partial "PrepareHTML" .text | markdownify -}}</div>
-          </li>
+{{ with .block.data }}
+  <ol data-slider="{{ site.Params.blocks.timeline.slider | encoding.Jsonify }}">
+    {{ range .events }}
+      <li class="timeline-event" itemscope itemtype="https://schema.org/Article">
+        {{ $heading_tag.open -}}
+          {{ .title | safeHTML }}
+        {{ $heading_tag.close -}}
+        <div class="line"></div>
+        {{ with .text }}
+          <div itemprop="text">{{- partial "PrepareHTML" . -}}</div>
         {{ end }}
-      </ol>
-      {{ if  (gt (len .events) 0) }}
-        <div class="actions-arrows">
-          <button class="previous" disabled title="{{ i18n "blocks.timeline.previous"}}"></button>
-          <button class="next" title="{{ i18n "blocks.timeline.next"}}"></button>
-        </div>
-      {{ end }}
-    </div>
-  {{ end }}
-</div>
+      </li>
+    {{ end }}
+  </ol>
+{{ end }}

@@ -1,14 +1,9 @@
 .block-gallery
     figure
-        display: block
         margin-bottom: 0
         position: relative
-        > a,
-        img,
-        picture
-            display: block
         > a
-            @include stretched-link
+            display: block
         img
             height: auto
             width: 100%
@@ -65,7 +60,7 @@
                     display: flex
                     justify-content: space-between
                     align-items: baseline
-                    p
+                    > p
                         max-width: columns(8)
                     *
                         flex: 1 1
@@ -75,81 +70,22 @@
 
     &--carousel
         overflow: hidden
-        position: relative
         z-index: 0
         @include in-page-without-sidebar
             background: $block-gallery-carousel-background
             padding-bottom: var(--grid-gutter)
             padding-top: var(--grid-gutter)
+        .slider
+            figure
+                flex-shrink: 1
+                margin-right: calc(var(--grid-gutter) / 2)
+                picture
+                    img
+                        height: $block-gallery-carousel-height
+                        max-width: none
+                        width: auto
+                        @include media-breakpoint-up(desktop)
+                            height: $block-gallery-carousel-height-desktop
         .block-gallery + &,
         .block-pages--cards + &
             margin-top: 0
-        .splide
-            display: flex
-            flex-direction: column
-            @include in-page-with-sidebar
-                &.is-moving
-                    .splide__slide.is-active
-                        opacity: 0.1
-            &__track
-                overflow: visible
-                margin-right: var(--grid-gutter-negative)
-                @include in-page-with-sidebar
-                    .splide__slide
-                        transition: opacity  .3s ease
-                        opacity: 0.1
-                        &.is-next
-                            opacity: 0.6
-                        &.is-active
-                            opacity: 1
-            &__slide
-                flex-shrink: initial
-                &:last-child
-                    padding-right: 20%
-            figure
-                margin-right: $spacing-3
-                @include media-breakpoint-down(desktop)
-                    display: flex
-                    flex-direction: column
-                    justify-content: end
-                picture
-                    img
-                        // FIXME Arnaud: I would like images at constant height, can't manage to get it right.
-                        max-height: $block-gallery-carousel-max-height
-                        width: auto
-                        height: auto
-                        max-width: calc(100vw - #{var(--grid-gutter)} * 2)
-                        @include media-breakpoint-up(desktop)
-                            height: $block-gallery-carousel-max-height
-                            width: auto
-                            max-width: none
-
-            &__arrows
-                margin-left: pxToRem(-18)
-                order: 2
-                @media (min-height: 800px)
-                    padding-top: space(10)
-            &__arrow
-                &--prev,
-                &--next
-                    @include button-reset
-                    @include icon(arrow-left, before)
-                    height: $spacing-4
-                    padding: 0
-                    position: static
-                    width: $spacing-4
-                    svg
-                        display: none
-                &--next
-                    @include icon(arrow-right, before)
-
-        @include in-page-without-sidebar
-            .splide
-                figure
-                    margin-left: var(--grid-gutter)
-                    margin-right: -$spacing-3
-                &__slide
-                    &:first-child
-                        margin-left: var(--grid-gutter)
-                &__track
-                    margin-left: var(--grid-gutter-negative)

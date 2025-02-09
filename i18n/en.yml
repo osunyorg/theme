@@ -29,6 +29,17 @@ blocks:
     title: Image
   key_figures:
     title: Key figures
+  licenses:
+    labels:
+      cc-zero: Creative Commons license Zero - No Rights Reserved
+      by: Creative Commons license - Attribution to the creator
+      by-sa: Creative Commons license - Attribution to the creator - Share alike
+      by-nd: Creative Commons license - Attribution to the creator - No derivative works
+      by-nc: Creative Commons license - Attribution to the creator - Non-commercial
+      by-nc-sa: Creative Commons license - Attribution to the creator - Non-commercial - Share alike
+      by-nc-nd: Creative Commons license - Attribution to the creator - Non-commercial - No derivative works
+  locations:
+    button_location: Discover the site     
   organizations:
     title: Organizations
   pages:
@@ -53,8 +64,22 @@ blocks:
     title: Video
     play: Play video
 categories:
-  no_post: No post in this category
-  no_project: No project in this category
+  label: Categories
+  no_event: No event in this category
+  no_organization: No organization in this category
+  no_page: No pages in this category
+  no_person: No people in this category
+  no_post: No posts in this category
+  no_program: No programs in this category
+  no_project: No projects in this category
+  type:
+    events_categories: Event categories
+    organizations_categories: Organizations categories
+    pages_categories: Page categories
+    persons_categories: Persons categories
+    posts_categories: News categories
+    programs_categories: Programs categories
+    projects_categories: Projects categories
   see_more:
     one: See the post
     other: See the {{ .Count }} posts
@@ -66,54 +91,98 @@ commons:
     search: Go to search
     shortcut_navigation: Navigation Links
     transcription: Transcription
+    credits: "Rights reserved: "
+  authors:
+    one: Author
+    other: Authors
   search:
     title: Search
     close: Close search
   backtotop: Back to top
   biography: Biography
   breadcrumb: Breadcrumb
-  carousel:
-    first: Go to first slide
-    last: Go to first slide
-    next: Slide suivant
-    pageX: Go to page %s
-    pause: Pause
-    play: Play
-    prev: Slide précedent
-    slideX: Go to slide %s
   click_to_copy:
     aria_label: Click to copy {{ .description }}
     button_title: Click to copy
   close: Close
   contact:
     address: Address
-    email: Email
-    phone: Phone
-    phone_professional: Professional phone
+    email: 
+      label: Email
+      a11y_label: "Send an e-mail to {{ .email }}"
+    empty_name: of this contact
+    phone: 
+      label: Phone
+      a11y_label: Call the {{ .phone_number }}
+    phone_professional:
+      label: Professional phone
+      a11y_label: Call this professional phone {{ .phone_number }}
     website: Website
     web: Web
     schedule: Hours
-  credit: A low impact website crafted with <a href="https://www.osuny.org/" title="Osuny - extern link" target="_blank" rel="noreferrer">Osuny</a>
+    socials:
+      title: Social Media
+      label: 
+        social_media: See the {{ .name }} page on {{ .media }}
+        email: Contact {{ .name }} by email
+        rss: Read the RSS feed for {{ .name }}
+        website: Visit the website of {{ .name }}
+      social_networks:
+        email: Email
+        facebook: Facebook
+        github: Github
+        instagram: Instagram
+        linkedin: LinkedIn
+        mastodon: Mastodon
+        peertube: Peertube
+        rss: RSS
+        tiktok: Tiktok
+        twitter: X, ex-Twitter
+        vimeo: Vimeo
+        x: X, ex-Twitter
+        youtube: YouTube
+  credit: A low impact website crafted with <a href="https://www.osuny.org/" title="Osuny - external link" target="_blank" rel="noreferrer">Osuny</a>
   date: Date
   download:
     singular_name: Download
     pdf: Download PDF
   "false": "No"
+  extensions:
+    PDF: Adobe Portable Document Format
   in: In
   language: Language
   lightbox:
-    link:
-      title: Open image
+    button: View larger image
+    button_without_alt: View larger
+    close:
+      a11y_credit: Close credits
+      a11y_information: Close informations
+      a11y_transcription: Close transcription
+      text: Close
+    controls:
+      close: Close the viewer
+      credit: Image credits
+      information: Image information
+      next: Go to the next image
+      previous: Go to previous image
+      transcription: Transcription
+    credit: Credits
+    default_alt: Image
+    information: Information
+    title: Image viewer
+    transcription: Transcription
   link:
-    blank: extern link
-    blank_aria: “{{ .Title }}” - extern link
+    blank: external link
+    blank_aria: “{{ .Title }}” - external link
+    download: “Download {{ .Title }}” - external link
   menu:
-    label: Toggle navigation
+    label: Menu
     legal: Legals menu
     main: Main menu
     secondary: Secondary menu
     social: Socials networks menu
     title: Menu
+    upper: Menu d'accès rapide
   more: Read more
   more_aria: Read more about “{{ .Title }}”
   pagination:
@@ -133,6 +202,16 @@ commons:
   read: Read
   read_online: Read online
   share: Share
+  share_on: Share on
+  share_on_aria: Share on “{{ .Title }}” - extern link
+  slider:
+    default_title: Carousel
+    goto: Go to element
+    next: Go to the next element
+    pagination_list: Carousel's pagination
+    pause: Carousel is playing. Pause the carousel.
+    play: Carousel is currently paused. Start the carousel.
+    previous: Go to the previous element
   toc: Table of contents
   "yes": "Yes"
   units:
@@ -144,8 +223,6 @@ commons:
     megabytes: Megabytes
     kilobytes: Kilobytes
     bytes: bytes
-  extensions:
-    PDF: Adobe Portable Document Format
 diplomas:
   type: Type de diplôme
 errors:
@@ -177,7 +254,6 @@ events:
   from:
     day: From day
     hour: From hour
-  share: Share on
   to:
     day: To day
     hour: To hour
@@ -199,6 +275,7 @@ formats:
   tar: Compressed archive
 organizations:
   logo: Logo
+  none: No organization
 pages:
   details: Details
   informations: Informations
@@ -217,10 +294,16 @@ papers:
     references: References
     content: Content
 persons:
-  posts: News
-  programs: Programs
-  papers: Papers
-  publications: Latest publications
+  posts:
+    recent: Latest news
+    all: View all news posted by {{ .author }}
+  papers: 
+    recent: Latest papers
+    all: View all papers published by {{ .author }}
+  publications:
+    recent: Latest publications
+    all: View all publications by {{ .author }}
+  programs: Teachings
   backlinks:
     events: Events mentioning
     pages: Pages mentioning
@@ -228,6 +311,10 @@ persons:
     projects: Projects mentioning
 posts:
   author: Author
+  authors:
+    label: "Authors"
+    a11y_title: Authors of this article
+    more: More information
   category:
     one: Category
     other: Categories
@@ -235,14 +322,13 @@ posts:
   informations: Informations
   next: Next article
   next_aria: Next article “{{ .Title }}”
+  none: No article
   previous: Previous article
   previous_aria: Previous article “{{ .Title }}”
   reading_time: Reading time
   see_all: See all posts
   see_all_in_program: See all program's news
   see_all_in_category: See all news in “{{ .Title }}”
-  share: Please, share
-  share_aria: Share on “{{ .Title }}” - extern link
   title: News
 projects:
   author: Author
@@ -252,14 +338,13 @@ projects:
   informations: Informations
   next: Next project
   next_aria: Next project “{{ .Title }}”
+  none: No project
   previous: Previous project
   previous_aria: Previous project “{{ .Title }}”
   reading_time: Reading time
   see_all: See all posts
   see_all_in_program: See all program's projects
   see_all_in_category: See all projects in “{{ .Title }}”
-  share: Please, share
-  share_aria: Share on “{{ .Title }}” - extern link
   title: Projects
   year: Year
 programs:
@@ -267,6 +352,7 @@ programs:
   administrative_information: Administrative information
   certifications: 
     qualiopi: Qualiopi, processus certifié, République Française
+  children: Options
   contacts: Contacts
   evaluation: Evaluation
   objectives: Objectives
@@ -288,8 +374,11 @@ programs:
   ects_credits: ECTS credits
   level: Level
   mention: Mention
-  no_program: No program
+  none: No program
   posts: News
+  location:
+    one: Campus
+    other: Campus
   toc:
     admission: Admission
     certification: Certification
@@ -311,6 +400,9 @@ publications:
     label: publications
 sitemap:
   pages: Arborescence
+taxonomies:
+  list:
+    title: Filter by
 volumes:
   abstract: Abstract
   paper:

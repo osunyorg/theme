@@ -1,0 +1,25 @@
+{{- $block := .block -}}
+{{- $template := .block.template -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+
+{{- with .block.data -}}
+  <div class="block block-papers {{- if $title }} block-with-title {{- end -}}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        <div class="papers">
+          {{ range $paper := .papers -}}
+            {{ with site.GetPage (printf "/papers/%s" $paper) }}
+              {{ partial "papers/partials/paper.html" (dict 
+                  "paper" .
+                  "actions" false
+                  "heading_level" $block.ranks.children
+              )}}
+            {{ end }}
+          {{ end}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{- end -}}

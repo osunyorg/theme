@@ -1,0 +1,40 @@
+{{ $publication := .publication }}
+{{ $researcher := .researcher }}
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading := printf "h%d" $heading_level }}
+{{ $heading_tag := (dict 
+  "open" ((printf "<%s class='publication-title' itemprop='headline'>" $heading) | safeHTML)
+  "close" ((printf "</%s>" $heading) | safeHTML)
+) }}
+
+{{ with $publication }}
+  <article class="publication" itemscope itemtype="http://schema.org/ScholarlyArticle">
+    <div class="publication-content">
+      {{- $title := partial "PrepareHTML" .Title -}}
+
+      {{ $heading_tag.open }}
+        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+      {{ $heading_tag.close }}
+
+      {{ if or .Params.journal_title .Params.date .Params.authors_list }}
+        <div class="publication-meta">
+          {{- with .Params.journal_title -}}
+            <span>{{ partial "PrepareHTML" . }}</span>
+          {{- end -}}
+          {{- with .Params.date -}}
+            <span>{{ .Format "2006" }}</span>
+          {{- end -}}
+          {{- with .Params.authors_list -}}
+            <span itemprop="author">{{ partial "PrepareHTML" . }}</span>
+          {{- end -}}
+        </div>
+      {{ end }}
+
+      {{ with .Params.ref }}
+        <div class="publication-ref" itemprop="isPartOf" itemscope itemtype="http://schema.org/PublicationIssue">
+          <span itemprop="name">{{ partial "PrepareHTML" . }}</span>
+        </div>
+      {{ end }}
+    </div>
+  </article>
+{{ end }}

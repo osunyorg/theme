@@ -1,4 +1,31 @@
 .person
+    .contacts-details
+        margin-top: $spacing-2
+        li > span
+            padding-right: $spacing-2
+            flex-shrink: 0
+        a, address
+            @include small
+            position: relative
+            text-align: right
+            z-index: 2
+        li
+            align-items: baseline
+            display: flex
+            justify-content: space-between
+            + li
+                margin-top: $spacing-1
+        ul + ul
+            margin-top: $spacing-1
+    @include media-breakpoint-down(md)
+        .contacts-details
+            margin-top: $spacing-3
+            span
+                flex-shrink: 0
+            a, address
+                text-align: right
+
+article.person
     @include article
     word-break: break-word
     gap: $spacing-3
@@ -7,7 +34,7 @@
         flex-shrink: 0
         order: -1
         min-width: $spacing-5
-    .name
+    .person-name
         @include h4
         a
             @include stretched-link
@@ -16,6 +43,7 @@
             margin-top: $spacing-1
     .description
         @include small
+        flex-grow: 1
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing-3
@@ -24,25 +52,41 @@
             flex-shrink: 0
             margin-bottom: 0
             width: 100px
-
     @include media-breakpoint-down(md)
         justify-content: space-between
+        .description
+            flex: 1
         .avatar
             order: 1
             margin-right: 0
             width: 68px
-
     @include in-page-without-sidebar
-        text-align: center
         .avatar
             width: 100%
 
-section.persons,
-div.persons
+.persons--grid
     @include grid(1)
     @include grid(2, md)
     @include grid(4, lg)
     @include grid(6, xxl)
+
+.persons__section,
+.persons_categories__term,
+.administrators__taxonomy,
+.authors__taxonomy,
+.researchers__taxonomy,
+.teachers__taxonomy,
+    .page-with-blocks
+        .persons
+            margin-bottom: $spacing-5
+    .persons--grid
+        @include media-breakpoint-up(md)
+            .avatar
+                margin-left: auto
+                margin-right: auto
+            .person-name,
+            .person-role
+                text-align: center
 
 ol.persons--list
     @include list-reset
@@ -52,11 +96,10 @@ ol.persons--list
         padding-top: $spacing-3
         position: relative
         transition: color 0.5s
-        @include icon(arrow, after)
+        @include icon(arrow-right-line, after)
             margin-left: auto
         &:hover
             color: var(--color-accent)
-            justify-self: end
         a
             @include stretched-link
             text-decoration: none
@@ -98,28 +141,15 @@ ol.persons--list
     img
         object-fit: cover
 
-/* TODO revoir ce nom */
-.taxonomies-persons
-    @include list-reset
-    li
-        @include media-breakpoint-down(desktop)
-            margin-bottom: $spacing-3
-            a
-                display: block
-        @include media-breakpoint-up(desktop)
-            display: inline-block
-            margin-right: $spacing-4
-    a
-        @extend %underline-on-hover
-        @include meta
-        @include icon(arrow, after)
-            margin-left: $spacing-3
-
 .persons__section
     * + .persons
         margin-top: $spacing-4
     .persons:last-child
         padding-bottom: $spacing-5
+    .taxonomies-persons
+        @extend .taxonomies-section
+    .persons-categories + .taxonomies-persons
+        margin-top: $spacing-3
 
 .persons__page
     .hero
@@ -163,15 +193,31 @@ ol.persons--list
         > * + *
             margin-top: $spacing-5
         .top h2 a
-            @include icon(arrow-right, after, true)
+            @include icon(arrow-right-line, after, true)
                 display: inline-flex
                 margin-left: $spacing-1
                 transition: transform .3s ease
             &:hover::after
                 transform: translateX($spacing-2)
+        .more
+            @include icon-block(arrow-right-line, after)
+            display: inline-block
+            margin-top: $spacing-3
+            &::after
+                margin-left: space()
+                transition: 0.55s $arrow-ease-transition
+            &:hover:after
+                transform: translateX($spacing-1)
+    .person-publications
+        .publications
+            margin-top: $spacing-2
     .person-posts
-        article.post:last-child
-            margin-bottom: 0
+        .posts
+            margin-top: $spacing-3
+            article.post:last-child
+                margin-bottom: 0
+            @include media-breakpoint-up(desktop)
+                margin-top: $spacing-4
     section
         padding-bottom: $spacing-5
     ol.programs
@@ -179,7 +225,7 @@ ol.persons--list
             justify-content: flex-start
             @include media-breakpoint-up(desktop)
                 @include grid(2)
-            @include icon(arrow-right, after, true)
+            @include icon(arrow-right-line, after, true)
                 color: inherit
                 position: absolute
                 right: 0
@@ -202,15 +248,17 @@ ol.persons--list
         .informations
             @include grid
             margin-bottom: $spacing-4
-            > div:first-of-type
-                grid-column: 1 / 9
             .roles
-                grid-column: 9 / 13
-                text-align: right
+                grid-column: 1 / -1
+            .biography
+                grid-column: 1 / 9
+                + .roles
+                    grid-column: 9 / 13
+                    text-align: right
             .lead + div
                 margin-top: $spacing-4
     .contacts-details ul
-        @include grid(2, md, 0)
+        @include grid(3, md, 0)
         li
             margin-top: 0
             margin-bottom: $spacing-3

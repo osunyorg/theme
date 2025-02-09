@@ -1,0 +1,19 @@
+{{ $credit := .credit }}
+{{ $text := .text }}
+{{ $aria_label := "" }}
+
+{{ with $credit }}
+  {{ $credit = printf "%s %s" (i18n "commons.accessibility.credits") . }}
+{{ end }}
+
+{{ if and $text $credit }}
+  {{ $aria_label = printf "%s %s" $text $credit }}
+{{ else if $text }}
+  {{ $aria_label = $text }}
+{{ else if $credit }}
+  {{ $aria_label = $credit }}
+{{ end }}
+
+{{ $aria_label = ( partial "RemoveSrOnlyTag" $aria_label ) | plainify }}
+
+{{ return $aria_label }}

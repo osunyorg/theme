@@ -1,0 +1,127 @@
+@keyframes lightbox-loading-animation
+    from
+        transform: rotate(0deg)
+    to
+        transform: rotate(360deg)
+
+.lightbox
+    backdrop-filter: $lightbox-backdrop
+    background: $lightbox-background-color
+    bottom: 0
+    display: none
+    left: 0
+    padding: $spacing-2
+    position: fixed
+    right: 0
+    top: 0
+    touch-action: manipulation
+    z-index: $zindex-lightbox
+    &.is-opened
+        display: block
+    &-media
+        position: relative
+        display: flex
+        height: 100%
+        width: 100%
+        pointer-events: none
+        img, iframe
+            display: block
+            margin: auto
+            max-height: 100%
+            outline-color: $lightbox-focus-outline-color
+            pointer-events: auto
+            position: relative
+            user-select: none
+        iframe
+            height: 100%
+            width: 90%
+        &:after
+            animation: lightbox-loading-animation infinite 1s
+            content: "• •" / ""
+            color: $lightbox-focus-outline-color
+            display: block
+            position: absolute
+            left: 50%
+            top: 50%
+            z-index: -1
+    &-controls
+        bottom: $spacing-2
+        display: flex
+        position: absolute
+        right: $spacing-2
+        z-index: 1
+        > button
+            @include button-reset
+            @include meta
+            background-color: $lightbox-button-background-color
+            color: $lightbox-button-color
+            height: $spacing-4
+            outline-color: $lightbox-focus-outline-color
+            margin: 0
+            padding: 0
+            width: $spacing-4
+            &:not(:last-child)
+                border-right: 1px solid $lightbox-button-border-color
+            &.lightbox-button-next
+                @include icon(arrow-right-s-line, before)
+            &.lightbox-button-previous
+                @include icon(arrow-left-s-line, before)
+            &.lightbox-button-credit
+                &::before
+                    content: '©' / ''
+            &.lightbox-button-information
+                &::before
+                    content: 'i' / ''
+            &.lightbox-button-transcription
+                @include icon(text, before)
+            &.lightbox-button-close
+                @include icon(close-line, before)
+            &[aria-expanded='true']
+                background-color: $lightbox-button-color
+                color: $lightbox-button-background-color
+            &:disabled
+                background: $lightbox-button-disabled-background
+                &.lightbox-button-transcription,
+                &.lightbox-button-information,
+                &.lightbox-button-credit
+                    display: none
+                &::before
+                    color: $lightbox-button-disabled-color
+    &-detail
+        background: $lightbox-detail-background
+        bottom: calc(var(--spacing-4) + var(--spacing-2) + 1px)
+        color: $lightbox-detail-color
+        display: none
+        padding: $spacing-2
+        position: fixed
+        right: $spacing-2
+        margin-left: $spacing-2
+        min-width: pxToRem(220)
+        max-height: calc(95vh - #{$spacing-4})
+        overflow-y: auto
+        z-index: 2
+        @include media-breakpoint-up(md)
+            width: columns(6)
+        &__title, &__close
+            @include meta
+            color: $lightbox-detail-meta-color
+        &__close
+            @include button-reset
+            cursor: pointer
+            position: absolute
+            right: $spacing-2
+            top: $spacing-2
+        > div
+            margin-top: $spacing-3
+        [aria-expanded="true"] + &
+            display: block
+
+.lightbox-figure
+    position: relative
+
+.lightbox-button
+    @include button-reset
+    display: block
+    padding: 0
+    &:focus-visible
+        outline-color: var(--color-text)

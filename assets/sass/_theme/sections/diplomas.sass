@@ -11,7 +11,8 @@ ul.diplomas
             padding-bottom: $spacing-3
             padding-top: $spacing-3
             border-bottom: 1px solid var(--color-border)
-            @include icon(arrow-right, after)
+            @include hover-translate-icon
+            @include icon(arrow-right-line, after)
                 align-self: center
                 margin-left: auto
             &:hover
@@ -45,11 +46,11 @@ ul.diplomas
                     margin-top: $spacing-2
                     @include media-breakpoint-up(sm) 
                         margin-top: $spacing-3
-                a:hover
+                > a:hover
                     color: var(--color-accent)
-                ol li a   
+                ol li > a   
                     @include inherit-text
-                    @include icon(list-hyphen, before)
+                    @include icon(corner-down-right-line, before)
                         margin-left: 1px
                         margin-right: $spacing-1
                         margin-top: 6px
@@ -60,9 +61,9 @@ ul.diplomas
                     display: flex
                     ol
                         margin-left: $spacing-3
-            > li a 
+            > li > a 
                 @include h3
-                        
+
         .program
             div
                 @include media-breakpoint-up(desktop)
@@ -73,114 +74,27 @@ ul.diplomas
                 @include h4
 
 .diplomas-select
+    @include dropdown
     text-align: right
-    position: relative
-    @include meta
-    button
-        @include button-reset
-        @include icon(caret, after)
-            margin-left: 5px
     .dropdown-menu
-        @include inset(calc(100% + #{$spacing-2}), 0, auto, auto)
-        background-color: var(--color-background-alt)
-        display: none
-        position: absolute
-        z-index: 2
-        @include media-breakpoint-down(desktop)
-            right: var(--grid-gutter-negative)
-            left: var(--grid-gutter-negative)
-        &,
         a
-            color: black
-        a
-            display: block
             font-size: $body-size
-            padding: $spacing-3
-            text-decoration: none
-            white-space: normal
-            @include media-breakpoint-down(desktop)
-                padding: $spacing-2 $spacing-3
-            &:not(:first-child)
-                border-top: 1px solid var(--color-border)
-            &:hover
-                background-color: var(--color-accent)
-                color: white
-
-    button[aria-expanded="true"]
-        @include icon('caret-top', 'after')
-        + .dropdown-menu
-            display: block
-
-.essential-container
-    margin-top: $spacing-5
-    .buttons
-        @include meta
-        display: flex
-        flex-wrap: wrap
-        a[download]
-            @extend .button-alt
-            @include button-icon(download-inline)
-        @include media-breakpoint-down(sm)
-            button, > a
-                width: 100%
-        @include media-breakpoint-down(md)
-            gap: $spacing-3
-            flex-direction: row
-            button,
-            > a
-                width: columns(6)
-            button
-                min-width: auto
-        @include media-breakpoint-up(md)
-            flex-direction: column
-            gap: $spacing-3
-            button, > a
-                max-width: columns(3)
-        @include media-breakpoint-up(xl)
-            --btn-min-width: #{columns(2)}
-        @include media-breakpoint-down(desktop)
-            margin-top: $spacing-3
-    .container
-        @include media-breakpoint-up(md)
-            display: flex
-            justify-content: space-between
-    .essential
-        @include meta
-        color: $header-color
-        flex-wrap: wrap
-        font-size: $program-essential-font-size
-        margin-bottom: 0
-        margin-top: 0
+            line-height: $body-line-height
         @include media-breakpoint-up(desktop)
-            @include grid(6, false, 0)
-            width: columns(6)
-            font-size: $program-essential-font-size-desktop
-        dt,
-        dd
-            margin: 0
-            padding-bottom: $spacing-2
-            padding-top: $spacing-2
-            &:last-of-type
-                padding-bottom: 0
-        dt
-            grid-column: 1/3
-            color: var(--color-text-alt)
-            @include media-breakpoint-down(desktop)
-                padding-bottom: 0
-        dd
-            grid-column: 3/7
-            @include media-breakpoint-down(desktop)
-                padding-top: 0
+            left: auto
+            right: 0
             a
-                @include link($hero-color)
+                padding: $spacing-3
 
 .diplomas__term
-    ol.programs
+    .blocks + .container
+        margin-bottom: $spacing-6 // If blocks are present, add space before footer
+    ol.programs--default
         li
             @include grid(2, desktop)
             align-items: start
             position: relative
-            a
+            a.title
                 @include stretched-link(before)
                 position: initial
                 @include media-breakpoint-down(desktop)
@@ -190,52 +104,5 @@ ul.diplomas
                         bottom: unset
                         position: relative
                         margin-left: $spacing-1
-                    + p
+                    + div
                         margin-top: $spacing-2
-
-.locations__term
-    ul.diplomas
-        > li
-            > a
-                border-bottom: none
-                &::after
-                    align-self: end
-                    margin-left: $spacing-2
-                    position: static
-            .content
-                grid-template-columns: repeat(1, 1fr)
-                grid-gap: 0
-                ol.programs
-                    > li
-                        align-items: flex-start
-                        display: flex
-                        flex-direction: column-reverse
-                        @include media-breakpoint-up(md)
-                            flex-direction: row
-                            gap: var(--grid-gutter)
-                        &:not(:first-child)
-                            border-top: 1px solid var(--color-border)
-                            padding-top: $spacing-3
-                        .program-content
-                            width: 100%
-                            @include media-breakpoint-up(xl)
-                                width: columns(8)        
-                            > a
-                                @include icon(arrow-right, after)
-                                    align-self: end
-                                    margin-left: $spacing-1
-                            .description
-                                padding-top: $spacing-2 
-                        .media
-                            padding-bottom: $spacing-2
-                            width: columns(6)
-                            @include media-breakpoint-up(md)
-                                padding-bottom: 0
-                                width: columns(4)
-                            @include media-breakpoint-up(xl)
-                                width: columns(2)
-                            img
-                                aspect-ratio: 1
-                                display: block
-                                height: 100%
-                                object-fit: cover

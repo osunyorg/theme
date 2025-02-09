@@ -1,0 +1,48 @@
+{{ $diplomas := .diplomas }}
+
+<ul class="diplomas">
+  {{ range $diplomas }}
+    <li>
+      <a href="{{ .Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">
+        {{- partial "PrepareHTML" .Title -}}
+        {{ with .Params.short_name }}
+          <span class="meta">
+            {{ partial "PrepareHTML" . }}
+          </span>
+        {{ end }}
+      </a>
+      <div class="content">
+        <div class="description">
+          {{- .Params.summary | safeHTML -}}
+        </div>
+
+        <ol class="programs">
+          {{- range .Params.programs -}}
+            {{- template "programsList" . -}}
+          {{- end -}}
+        </ol>
+      </div>
+    </li>
+
+  {{ end }}
+</ul>
+
+{{- define "programsList" -}}
+  <li>
+    <a href="{{ .permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
+      {{- partial "PrepareHTML" .label -}}
+    </a>
+    <ol>
+      {{- range .children -}}
+      <li>
+        <a href="{{ .permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
+          {{- partial "PrepareHTML" .label -}}
+        </a>
+        {{ if .children }}
+          {{- template "programsList" . -}}
+        {{ end }}
+      </li>
+      {{ end }}
+    </ol>
+  </li>
+{{- end -}}

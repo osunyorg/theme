@@ -1,0 +1,67 @@
+{{ $options := .options }}
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+        "level" $heading_level
+        "attributes" "class='page-title'"
+)}}
+<ul class="list {{ if and (not $options.summary) (not $options.image) }} title-only {{ end }}">
+  {{ range .pages }}
+    {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
+    {{- $path := false -}}
+    {{ if reflect.IsMap . }}
+      {{ $path = .path }}
+    {{ else }}
+      {{ $path = . }}
+    {{ end }}
+    {{ $page := site.GetPage $path }}
+
+    {{ with $page }}
+      <li class="page">
+        {{ if or $options.summary $options.image }}
+          <article>
+            <div class="page-content">
+              {{ $heading_tag.open }}
+                <a href="{{- .Permalink -}}">
+                  {{- partial "PrepareHTML" .Title -}}
+                </a>
+              {{ $heading_tag.close }}
+
+              {{- partial "pages/partials/page/hook-after-title.html" . -}}
+
+              {{ if and $options.summary .Params.summary }}
+                {{ partial "GetRichSummary" ( dict 
+                  "summary" .Params.summary
+                  "kind" "pages"
+                )}}
+              {{ end }}
+              {{/*  TODO: set right options when admin is ready  */}}
+              {{ if site.Params.pages.index.options.categories }}
+                {{ partial "commons/categories" ( dict
+                  "context" .
+                  "kind" "page"
+                )}}
+              {{ end }}
+            </div>
+
+            {{ if $options.image }}
+              <div class="media">
+                {{- if .Params.image -}}
+                  {{- partial "commons/image.html" (dict
+                      "image"    .Params.image
+                      "sizes"    site.Params.image_sizes.blocks.pages.list
+                    ) -}}
+                {{- else -}}
+                  {{- partial "commons/image-default.html" "pages" -}}
+                {{- end -}}
+              </div>
+            {{ end }}
+          </article>
+        {{ else }}
+          <a href="{{- .Permalink -}}">
+            {{- partial "PrepareHTML" .Title -}}
+          </a>
+        {{ end }}
+      </li>
+    {{- end -}}
+  {{ end }}
+</ul>

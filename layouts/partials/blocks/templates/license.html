@@ -5,16 +5,13 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-        )}}
-
+        {{ partial "blocks/top.html" $block.top }}
         {{ with .creative_commons }}
           <div class="license">
             {{ $file := (printf "/assets/images/blocks/license/%s.svg" .identifier ) }}
-            <a rel="license" href="{{ .url }}" title="{{ .label }}" target="_blank" rel="noopener">
-              <img src="{{ $file }}" alt="{{ .label }}">
+            {{ $label := i18n (printf "blocks.licenses.labels.%s" .identifier) }}
+            <a rel="license" href="{{ .url }}" title="{{ i18n "commons.link.blank_aria" (dict "Title" $label) }}" target="_blank" rel="noopener">
+              <img src="{{ $file }}" alt="{{ $label }}">
             </a>
           </div>
         {{ end }}

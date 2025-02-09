@@ -63,15 +63,21 @@
             position: static
             margin-left: 0
 
-// Utilisé dans .post-infos, et project-infos
-@mixin section__page-infos
+@mixin sidebar-infos
     @include meta
     @include list-reset
     font-size: $table-body-size
     margin-bottom: 0
     @include media-breakpoint-up(desktop)
         font-size: $table-body-size-desktop
-    > li
+    @include media-breakpoint-down(desktop)
+        margin-top: $spacing-3
+    > li:first-child
+        > ul:first-child, &
+            > li:first-child, &, &
+                padding-top: 0
+    > li,
+    .taxonomies-single > li
         @include meta
         display: flex
         gap: $spacing-3
@@ -80,7 +86,6 @@
         padding-bottom: $spacing-2
         border-color: var(--color-border)
         &:not(:first-child)
-            align-items: center
             border-top: 1px solid var(--color-border)
         > span
             @include meta
@@ -88,28 +93,42 @@
             padding-left: 0
             white-space: nowrap
             vertical-align: top
-        > ul
+        .share
             text-align: right
             flex: 1
-        &.social-share
-            align-items: center
+        &.authors,
+        &.terms
+            margin: 0
+            ul
+                text-align: right
+            li
+                display: inline-block
+                vertical-align: middle
+                margin-left: $spacing-1
+                &:last-child
+                    &::after
+                        content: none
+            @include media-breakpoint-up(desktop)
+                align-items: baseline
+                li
+                    display: block
+                    + li
+                        margin-top: space()
+
+    .taxonomies-single
+        flex: 1
+        li:last-child
+            padding-bottom: 0
     a
         @include link(var(--color-accent))
         text-align: right
-    .terms
-        margin: 0
-        li
-            display: inline-block
-            vertical-align: middle
-            margin-left: $spacing-1
-            &:last-child
-                &::after
-                    content: none
     .share
-        display: block
+        display: flex
+        flex-wrap: wrap
+        justify-content: end
+        margin-right: -$spacing-2
         li
             display: inline-block
         a
             color: inherit
-        li:last-child
-            margin-right: -$spacing-2
+            text-decoration: none

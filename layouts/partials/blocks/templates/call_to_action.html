@@ -6,14 +6,9 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image {{ if $block.title }}call_to_action--with-title{{ end }}">
+        <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image {{ if $block.title }}call_to_action--with-title{{ end }} {{- if not $block.top.description }} call_to_action--without-text {{ end -}}">
           <div>
-            {{ partial "blocks/top.html" (dict
-              "title" $block.title
-              "heading_level" $block.ranks.self
-              "description" .text
-            )}}
-
+            {{ partial "blocks/top.html" $block.top }}
             {{- if .buttons }}
               <div class="actions" {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
                 {{- range .buttons -}}
@@ -23,6 +18,7 @@
                       {{ if .target_blank }}
                         title="{{ i18n "commons.link.blank_aria" (dict "Title" $title) }}"
                         target="_blank"
+                        rel="noreferrer"
                       {{ else }}
                         title="{{ $title }}"
                       {{ end }}
@@ -33,14 +29,21 @@
               </div>
             {{- end -}}
           </div>
-
-          {{ partial "commons/image.html"
-            (dict
-              "image"    .image.file
-              "alt"      .image.alt
-              "sizes"    site.Params.image_sizes.blocks.call_to_action
-            )}}
-
+          {{ if .image }}
+            <figure {{- with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
+              {{ partial "commons/image.html"
+                (dict
+                  "image"    .image.file
+                  "alt"      .alt
+                  "sizes"    site.Params.image_sizes.blocks.call_to_action
+              )}}
+              {{ if partial "GetTextFromHTML" .credit }}
+                <figcaption class="credit">
+                  {{ partial "PrepareHTML" .credit }}
+                </figcaption>
+              {{ end }}
+            </figure>
+          {{ end }}
         </div>
       </div>
     </div>

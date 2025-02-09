@@ -1,0 +1,50 @@
+{{ $options := .options | default site.Params.persons.index.options }}
+{{ $heading := .heading_level | default 2 }}
+{{ $heading_tag := (dict 
+  "open" ((printf "<h%d class='person-name' itemprop='name'>" $heading) | safeHTML)
+  "close" ((printf "</h%d>" $heading) | safeHTML)
+) }}
+{{ $person := .person }}
+{{ $role := .role }}
+{{ $layout := .layout }}
+{{ $image_sizes := .image_sizes | default site.Params.image_sizes.sections.persons.item }}
+
+<article class="person" itemscope itemtype="https://schema.org/Person">
+  <div class="description">
+    {{ $heading_tag.open }}
+      {{ if $options.link }}
+        <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
+      {{ end }}
+        {{ partial "PrepareHTML" $person.Title }}
+      {{ if $options.link }}
+        </a>
+      {{ end }}
+    {{ $heading_tag.close }}
+    {{ if and $options.summary (or $role $person.Params.summary) }}
+      <div class="person-role" itemprop="jobTitle">
+        {{ if (partial "GetTextFromHTML" $role) }}
+          <p>{{ partial "PrepareHTML" $role }}</p>
+        {{ else if $person.Params.summary }}
+          {{ partial "PrepareHTML" $person.Params.summary }}
+        {{ end }}
+      </div>
+    {{ end }}
+    {{ if and $options.contact $person.Params.contact_details}}
+      {{ partial "commons/contact-details.html" $person }}
+    {{ end }}
+    {{ if eq $layout "large" }}
+      <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+    {{ end }}
+  </div>
+  {{ if $options.image }}
+    <div class="avatar" itemprop="image">
+      {{ if $person.Params.image }}
+        {{ partial "commons/image.html"
+          (dict
+            "image"    $person.Params.image
+            "sizes"    $image_sizes
+          ) }}
+      {{ end }}
+    </div>
+  {{ end }}
+</article>

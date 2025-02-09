@@ -1,78 +1,54 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
-{{- $is_carousel := false -}}
 
 {{- with .block.data -}}
-  {{ if .testimonials }}
-    {{ if gt (len .testimonials) 1 }}
-      {{- $is_carousel = true -}}
-    {{ end }}
-  {{ end }}
-  <div class="{{ $block_class }}{{ if $is_carousel }} with-carousel{{ end }}">
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" (dict
-          "title" $block.title
-          "heading_level" $block.ranks.self
-          "hidden" true
-        )}}
-
-        <div class="testimonials">
-          {{- if $is_carousel }}
-          <div class="splide" 
-              data-splide="{{ site.Params.blocks.testimonials.splide | encoding.Jsonify }}">
-            <div class="splide__slider">
-              <div class="splide__track">
-                <div class="splide__list">
-          {{ end -}}
-
+        {{ partial "blocks/top.html" $block.top }}
+        <div class="testimonials" data-slider="{{ site.Params.blocks.testimonials.slider | encoding.Jsonify }}">
           {{ range .testimonials }}
-            {{ $is_long := gt (len .text) 150 }}
-            <figure  class="{{ if $is_carousel }}splide__slide{{ end }} {{ if .photo }}with-picture{{ end }}">
+
+            {{ $aria_label := "" }}
+            {{ if and .author .job }}
+              {{ $aria_label = delimit (slice .author .job) ", " }}
+            {{ else }}
+              {{ with or .author .job }}
+                {{ $aria_label = . }}
+              {{ end }}
+            {{ end }}
+
+            <figure class="testimonial {{ if.photo }}with-picture{{ end }}" 
+                    {{ with $aria_label -}} role="figure" aria-label="{{ . }}" {{- end }}>
+              {{ $is_long := gt (len .text) 150 }}
               <blockquote {{- if $is_long }} class="is-long" {{- end }}>
-                <p>{{- partial "PrepareHTML" .text -}}</p>
+                {{- partial "PrepareHTML" .text -}}
               </blockquote>
               {{ if or .photo .author .job -}}
-              <figcaption>
-                {{ if .photo -}}
-                  <div class="avatar">
-                    {{- partial "commons/image.html"
-                          (dict
-                            "image"    .photo
-                            "alt"      .author
-                            "sizes"    site.Params.image_sizes.blocks.testimonials
-                          ) -}}
-                  </div>
-                {{- end }}
-                {{ if or .author .job -}}
-                  <p>
-                    {{- if .author -}}
-                      <span class="signature">{{ partial "PrepareHTML" .author }}</span>
-                    {{- end }}
-                    {{- if .job -}}
-                      <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
-                    {{- end }}
-                  </p>
-                {{- end }}
-              </figcaption>
+                <figcaption>
+                  {{ if .photo -}}
+                    <div class="avatar">
+                      {{- partial "commons/image.html" (dict
+                          "image" .photo
+                          "sizes" site.Params.image_sizes.blocks.testimonials
+                        ) -}}
+                    </div>
+                  {{- end }}
+                  {{ if or .author .job -}}
+                    <p>
+                      {{- if .author -}}
+                        <span class="signature">{{ partial "PrepareHTML" .author }}</span>
+                      {{- end }}
+                      {{- if .job -}}
+                        <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
+                      {{- end }}
+                    </p>
+                  {{- end }}
+                </figcaption>
               {{ end }}
             </figure>
           {{ end }}
-
-          {{- if $is_carousel }}
-                </div>
-              </div>
-            </div>
-
-            <button class="splide__toggle">
-              <span class="splide__toggle__play"></span>
-              <span class="splide__toggle__pause"></span>
-            </button>
-          </div>
-          {{ end -}}
-
         </div>
-
       </div>
     </div>
   </div>

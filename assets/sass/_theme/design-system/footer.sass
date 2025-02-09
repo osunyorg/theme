@@ -11,6 +11,7 @@ footer#document-footer
         @extend %underline-on-hover
     .logo
         @extend %logo
+        display: block
         img
             height: $footer-logo-height
             max-width: 100%
@@ -20,130 +21,59 @@ footer#document-footer
         @include list-reset
         li + li
                 margin-top: $spacing-2
-    .footer
-        &-site
-            @include small
-            * + *
-                margin-top: $spacing-2
-        &-social, &-legals, &-credit
-            @include meta
-        &-credit
-            display: block
+        .footer-i18n
+            margin-top: $spacing-4
+    .footer-social
+        .nav-social + .site-links
             margin-top: $spacing-2
-            a
-                text-decoration-color: alphaColor(currentColor, 0.3)
-        &-search
-            padding-top: $spacing-2 !important
-        &-i18n
-            @include dropdown-i18n
-            button
-                @include button-reset
-                @include icon(caret-bottom, after)
-                @include meta
-                align-items: center
-                color: inherit
-                cursor: pointer
-                display: flex
-                justify-content: start
-                padding-left: 0
-                text-align: left
-                &:focus,
-                &:focus-visible
-                    box-shadow: none
-                &[aria-expanded="true"]
-                    background: $dropdown-i18n-background-color
-                    color: $dropdown-i18n-color
-                    width: 100%
-                    @include media-breakpoint-up(desktop)
-                        justify-content: space-between
-                    + .dropdown-menu
-                        animation-duration: unset
-                    &::after
-                        transform: rotate(-180deg)
-                &::before
-                    margin-right: $spacing-2
-                &::after
-                    margin-left: $spacing-2
-            button[aria-expanded="true"]
-                min-width: $spacing-6
-                outline: $spacing-2 solid $dropdown-i18n-background-color
-            .dropdown-menu
-                @include meta
-                background: $dropdown-i18n-background-color
-                margin-left: -$spacing-2
-                margin-right: -$spacing-2
-                margin-top: $spacing-2
+    .footer-i18n
+        --dropdown-background: #{$dropdown-i18n-background-color}
+        --dropdown-color: #{$dropdown-i18n-color}
+        display: inline-block
+        min-width: calc(var(--column-width) + var(--grid-gutter))
+        @include dropdown
+        li + li
+            margin-top: 0
+        @include media-breakpoint-up(desktop)
+            --dropdown-border-color: transparent
+            .dropdown-languages
+                bottom: calc(100% + #{$spacing-1})
+                top: unset
+                right: 0
+                margin-left: -($spacing-2)
                 a
-                    color: $dropdown-i18n-color
-                    padding: $spacing-2
-                ul
-                    li + li
-                        margin-top: 0
-                @include media-breakpoint-up(desktop)
-                    left: 0
-                    max-height: calc(100vh - var(--header-height))
-                    padding: 0
-                    position: absolute
-                    width: fit-content
-                    min-width: calc(#{pxToRem(150)} + #{$spacing-2} * 2)
-                    a
-                        padding-top: 0
-                    a:focus-visible
-                        outline-offset: -1px
-                @include media-breakpoint-down(desktop)
-                    position: relative
-                    li
-                        border-top: 1px solid $color-border
-
-        @if $footer-icons-enabled
-            &-social 
-                .nav-social + .site-links
-                    margin-top: $spacing-3
-                &.site-links li
-                    align-items: center
+                    padding-bottom: $spacing-1
+                    padding-top: $spacing-1
+        button,
+        span[role="button"]
+            &[aria-expanded="true"]
+                background: $dropdown-i18n-background-color
+                color: $dropdown-i18n-color
+            &:focus-visible
+                border-radius: 3px
+            @include media-breakpoint-up(desktop)
+                display: block
+                margin-right: 0
+                padding-bottom: $spacing-1
+        @include media-breakpoint-down(desktop)
+            width: 100%
+            button,
+            span[role="button"]
+                margin-left: var(--grid-gutter-negative)
+                margin-right: var(--grid-gutter-negative)
+                padding-left: var(--grid-gutter)
+                padding-right: var(--grid-gutter)
+                &[aria-expanded="true"]
+                    border-bottom: 1px solid var(--color-border)
+                    border-top: 1px solid var(--color-border)
                     display: flex
-                    justify-content: flex-end
-                    position: relative
-                    a
-                        @include stretched-link
-                    &.facebook
-                        @include icon(social-facebook, after)
-                    &.instagram
-                        @include icon(social-instagram, after)
-                    &.linkedin
-                        @include icon(social-linkedin, after)
-                    &.mastodon
-                        @include icon(social-mastodon, after)
-                    &.youtube
-                        @include icon(social-youtube, after)
-                    &.x
-                        @include icon(social-x, after)
-                    &.peertube
-                        @include icon(social-peertube, after)
-                    &.vimeo
-                        @include icon(social-vimeo, after)
-                    &.tiktok
-                        @include icon(social-tiktok, after)
-                    &.github
-                        @include icon(social-github, after)
-                    &.email
-                        @include icon(social-email, after)
-                    &.rss
-                        @include icon(social-rss, after)
-                    &::after
-                        font-size: $footer-icons-size
-                        @include media-breakpoint-up(desktop)
-                            margin-right: -0.2em
-                            padding-left: $spacing-2
-                    @include media-breakpoint-down(desktop)
-                        width: fit-content
-                        flex-direction: row-reverse
-                        &::after
-                            margin-right: $spacing-2
-                            transform: translateX(-25%)
-        @if $footer-text-hidden
-            &-social.site-links li
-                font-size: 0
+                    justify-content: space-between
+            .dropdown-languages
+                li:last-child
+                    border-bottom: 1px solid var(--color-border)
+                a
+                    padding-left: var(--grid-gutter)
+                    padding-right: var(--grid-gutter)
 
     @include media-breakpoint-down(desktop)
         .container
@@ -160,8 +90,79 @@ footer#document-footer
                 align-items: flex-end
                 padding-top: $spacing-5
                 padding-bottom: 0
-        .footer
-            &-site, &-social
-                text-align: right
-            &-social
-                order: 2
+.footer
+    &-site
+        @include small
+        > * + *,
+        p + address
+            margin-top: $spacing-2
+    &-social, &-legals, &-credit
+        @include meta
+    &-credit
+        display: block
+        a
+            text-decoration-color: alphaColor(currentColor, 0.3)
+    &-search
+        padding-top: $spacing-2
+    &-credit
+        margin-top: $spacing-4
+    &-legals
+        .without-i18n + .footer-search
+            padding-top: 0
+            margin-top: $spacing-4
+    @if $footer-icons-enabled
+        &-social
+            &.site-links li
+                align-items: center
+                display: flex
+                justify-content: flex-end
+                position: relative
+                a::after
+                    display: none
+                &.facebook
+                    @include icon(facebook-fill, after)
+                &.instagram
+                    @include icon(instagram-fill, after)
+                &.linkedin
+                    @include icon(linkedin-fill, after)
+                &.mastodon
+                    @include icon(mastodon-fill, after)
+                &.youtube
+                    @include icon(youtube-fill, after)
+                &.x
+                    @include icon(twitter-x-line, after)
+                &.peertube
+                    @include icon(movie-fill, after)
+                &.vimeo
+                    @include icon(vimeo-fill, after)
+                &.tiktok
+                    @include icon(tiktok-fill, after)
+                &.github
+                    @include icon(github-fill, after)
+                &.email
+                    @include icon(at-line, after)
+                &.rss
+                    @include icon(rss-fill, after)
+                &::after
+                    font-size: $footer-icons-size
+                + li
+                    margin-top: $spacing-3
+                @include media-breakpoint-up(desktop)
+                    &::after
+                        font-size: $footer-icons-size-desktop
+                        margin-left: $spacing-2
+                    + li
+                        margin-top: space(4)
+                @include media-breakpoint-down(desktop)
+                    width: fit-content
+                    flex-direction: row-reverse
+                    &::after
+                        margin-right: $spacing-2
+    @if $footer-text-hidden
+        &-social.site-links li
+            font-size: 0
+    @include media-breakpoint-up(desktop)
+        &-site, &-social
+            text-align: right
+        &-social
+            order: 2

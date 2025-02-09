@@ -1,0 +1,46 @@
+{{ $locations := .locations }}
+{{ $title := .title }}
+{{ $aria_label := i18n "commons.maps.label" $title }}
+
+<div class="locations-map">
+  <div class="map" data-map data-marker-icon="{{ "/assets/images/map-marker.svg" }}" 
+        role="region"
+        aria-label="{{ $aria_label }}">
+    {{ range $locations }}
+      {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
+      {{ if and $address_geolocation.longitude $address_geolocation.latitude }}
+        <article class="location" data-title="{{ .Params.title }}" data-longitude="{{ $address_geolocation.longitude }}" data-latitude="{{ $address_geolocation.latitude }}">
+          {{ $title := "" }}
+          {{ if .Params.title }}
+            <div class="location-content">
+              {{ $title = partial "PrepareHTML" .Params.title -}}
+              <p class="location-title">
+                {{- if and .Params.url .Params.with_link }}
+                  <a href="{{ .Params.url }}" {{ if .external }} target="_blank" rel="noopener" {{ end }} title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}">
+                {{ end -}}
+                {{- $title -}}
+                {{- if and .Params.url .Params.with_link }}
+                    <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+                  </a>
+                {{ end -}}
+              </p>
+              {{ with .Params.contact_details.postal_address }}
+                {{ partial "commons/address" . }}
+              {{ end }}
+            </div>
+          {{ end -}}
+          {{- if .Params.image -}}
+            <div class="media">
+              {{- partial "commons/image.html"
+                (dict
+                  "image"  .Params.image
+                  "alt"    $title
+                  "sizes"  site.Params.image_sizes.sections.locations.map
+                ) -}}
+            </div>
+          {{- end -}}
+        </article>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>

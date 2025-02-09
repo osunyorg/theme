@@ -1,25 +1,14 @@
-{{- $title := chomp (htmlUnescape .Title) -}}
-{{- $seoTitle := htmlUnescape site.Title -}}
-{{- $seoTitleSeparator := htmlUnescape site.Params.seo.title.separator -}}
-{{- if .Title -}}
-  {{- $seoTitle = printf "%s %s %s" $title $seoTitleSeparator $seoTitle -}}
-{{- end -}}
-{{- $seoTitle = partial "GetPaginateTitle" ( dict "title" $seoTitle "separator" $seoTitleSeparator "context" .) -}}
+{{- $title := partial "GetHeadTitle" . -}}
+
 {{- $seoDescription := "" -}}
 {{- if .Params.meta_description -}}
   {{- $seoDescription = partial "PrepareHTML" .Params.meta_description -}}
-{{- else if .Params.description -}}
-  {{- $seoDescription = partial "PrepareHTML" .Params.description -}} {{/*  LEGACY  */}}
 {{- else if .Params.summary -}}
-  {{- $seoDescription = .Params.summary | safeHTML -}}
-{{- else if .Content -}}
-  {{- $seoDescription = partial "GetTruncateContent" ( dict "text" .Content ) -}}
-{{- else if .Params.legacy_text -}}
-  {{- $seoDescription = partial "GetTruncateContent" ( dict "text" .Params.legacy_text ) -}}
+  {{- $seoDescription = .Params.summary | plainify | truncate 150 -}}
 {{- else if .Params.contents -}}
   {{- range first 1 .Params.contents -}}
     {{- if .title -}}
-      {{- $seoDescription = partial "GetTruncateContent" ( dict "text" .title ) -}}
+      {{- $seoDescription = .title | safeHTML | truncate 150 -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
@@ -52,11 +41,11 @@
 {{- $seoUrl := .Permalink -}}
 
 <!-- HTML Meta Tags -->
-<title>{{ $seoTitle }}</title>
+<title>{{ $title }}</title>
 <meta name="description" content="{{ $seoDescription }}">
 
 <!-- Facebook Meta Tags -->
-<meta property="og:title" content="{{ $seoTitle }}">
+<meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $seoDescription }}">
 {{- with $ogImage }}
 <meta property="og:image" content="{{ . }}">
@@ -65,7 +54,7 @@
 <meta property="og:type" content="website">
 
 <!-- Twitter Meta Tags -->
-<meta name="twitter:title" content="{{ $seoTitle }}">
+<meta name="twitter:title" content="{{ $title }}">
 <meta name="twitter:description" content="{{ $seoDescription }}">
 {{- with $twitterImage }}
 <meta name="twitter:image" content="{{ . }}">
@@ -81,6 +70,10 @@
   {{ with $pagefindImage }}
     <meta property="pagefind:image" content="" data-pagefind-meta="image:{{ . }}">
   {{ end }}
+{{ end }}
+
+{{ range .Params.metadata }}
+  <meta name="{{ .name }}" content="{{ .content }}">
 {{ end }}
 
 {{/*
