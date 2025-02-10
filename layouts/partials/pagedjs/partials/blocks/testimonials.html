@@ -5,9 +5,10 @@
     </blockquote>
     {{ if or .photo .author .job -}}
       <figcaption>
-        {{ with .photo -}}
+        
+        {{ with .photo }}
           <div class="avatar">
-            {{ partial "pagedjs/partials/image.html" . }}
+            {{ partial "pagedjs/partials/image.html" .id }}
           </div>
         {{- end }}
         {{ if or .author .job -}}

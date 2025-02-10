@@ -1,6 +1,8 @@
 {{ range .data.images }}
   <div class="block-gallery__image">
-    {{ partial "pagedjs/partials/image.html" .id }}
+    {{ with .id }}
+      {{ partial "pagedjs/partials/image.html" . }}
+    {{ end }}
     <figcaption>
       {{ with .text }}
         {{ . | safeHTML }}
