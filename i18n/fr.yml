@@ -233,6 +233,9 @@ commons:
     bytes: octets
 diplomas:
   type: Type de diplôme
+  count:
+    one: "1 diplôme"
+    other: "{{ .Count }} diplômes"
 errors:
   error_404:
     title: Erreur 404
@@ -252,6 +255,9 @@ events:
   category:
     one: Catégorie
     other: Catégories
+  count:
+    one: "1 événement"
+    other: "{{ .Count }} événements"
   date: Date
   hour: Heure
   none: Aucun événement
@@ -282,6 +288,9 @@ formats:
   gz: Compressed archive
   tar: Compressed archive
 organizations:
+  count:
+    one: "1 organisation"
+    other: "{{ .Count }} organisations"
   logo: Logo
   none: Aucune organisations
 pages:
@@ -308,6 +317,9 @@ persons:
     pages: Pages mentionnant
     posts: Actualités mentionnant
     projects: Projets mentionnant
+  count:
+    one: "1 personne"
+    other: "{{ .Count }} personnes"
   none: Aucune personne
   posts:
     recent: Actualités publiées récemment
@@ -328,11 +340,10 @@ posts:
   category:
     one: Catégorie
     other: Catégories
+  count: 
+    one: "1 article"
+    other: "{{ .Count }} articles"
   date: Date
-  items:
-    count: 
-      one: "1 article"
-      other: "{{ .Count }} articles"
   informations: Informations
   next: Article suivant
   next_aria: Article suivant “{{ .Title }}”
@@ -350,10 +361,9 @@ projects:
   category:
     one: Catégorie
     other: Catégories
-  items:
-    count:
-      one: "1 projet"
-      other: "{{ .Count }} projets"
+  count:
+    one: "1 article"
+    other: "{{ .Count }} articles"
   informations: Informations
   next: Projet suivant
   next_aria: Projet suivant “{{ .Title }}”
@@ -373,6 +383,9 @@ programs:
     qualiopi: Qualiopi, processus certifié, République Française
   children: Parcours
   contacts: Contacts
+  count:
+    one: "1 formation"
+    other: "{{ .Count }} formations"
   evaluation: Modalités d’évaluation
   objectives: Objectifs
   opportunities: Débouchés
