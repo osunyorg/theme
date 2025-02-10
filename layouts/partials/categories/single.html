@@ -18,8 +18,8 @@
       {{ partial "taxonomies/categories" . }}
     {{ else }}
       {{ $section_type := strings.TrimSuffix "_categories" .Type }}
-      {{ $list_partial := printf "%s/section/%s.html" $section_type $section_type }}
-      {{ partial $list_partial . }}
+      {{/*  {{ $list_partial := printf "%s/section/%s.html" $section_type $section_type }}  */}}
+      {{/*  {{ partial $list_partial . }}  */}}
       {{ partial "commons/pagination.html" . }}
     {{ end }}
   </div>
