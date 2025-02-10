@@ -33,20 +33,10 @@
                     bottom: $spacing-2
                     position: absolute
                     right: 0
-            @include media-breakpoint-up(desktop)
-                @include arrow-right-hover
-                display: block
-                &::after
-                    transform: translateX(0)
-                    position: relative
-                &:hover
-                    &::after
-                        transform: translateX($spacing-2)
         a
             text-decoration: none
             &:hover
                 color: var(--color-accent)
-
         @include media-breakpoint-down(desktop)
             a:nth-child(2)
                 margin-top: calc(#{$spacing-2} / 2)

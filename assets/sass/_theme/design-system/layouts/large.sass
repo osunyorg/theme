@@ -2,14 +2,15 @@
     @include list-reset
     article
         @include article
-        [class$="-content"]
-            > * + *
-                margin-top: $spacing-2
+        @include layout-item
         [class$="-title"]
             @include h2
             a
                 @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon(after)
+    @include media-breakpoint-down(desktop)
+        > li + li
+            margin-top: $spacing-5
     @include media-breakpoint-up(desktop)
         article
             flex-direction: row

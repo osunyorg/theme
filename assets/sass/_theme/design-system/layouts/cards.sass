@@ -2,21 +2,18 @@
     @include list-reset
     article
         @include article
+        @include layout-item
         background: $layout-cards-item-background
         color: $layout-cards-item-color
         display: flex
         flex: auto
         flex-direction: column
-        min-height: 320px
         padding: $spacing-3
         position: relative
         transition: background 0.3s, color 0.3s
         @include arrow-right-hover(".more")
         [class$="-title"]
             @include h3
-            a
-                @include stretched-link
-                text-decoration: none
         .media
             margin-left: -$spacing-3
             margin-right: -$spacing-3
@@ -39,8 +36,12 @@
                 color: $layout-cards-item-color-hover
             .more
                 text-decoration-color: $layout-cards-item-color-hover
+    @include media-breakpoint-down(desktop)
+        > li + li
+            margin-top: $spacing-5
+    @include media-breakpoint-up(desktop)
+        min-height: 320px
     @include in-page-with-sidebar
         @include grid(2)
     @include in-page-without-sidebar
         @include grid(3)
-
