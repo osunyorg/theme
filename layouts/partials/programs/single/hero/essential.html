@@ -1,4 +1,4 @@
-<div class="essential-container" id="#{{ anchorize (i18n "programs.toc.essential") }}">
+<div class="essential-container" id="{{ anchorize (i18n "programs.toc.essential") }}">
   <div class="container">
     {{ $duration := .Params.duration }}
     {{ $diploma := site.GetPage (printf "/diplomas/%s" .Params.diplomas) }}
@@ -34,7 +34,7 @@
         {{- end -}}
       </dl>
     {{- end -}}
-    
+
     <div class="buttons">
       {{ if site.Params.programs.single.options.website_link }}
         {{ $target := .Params.website_url }}
@@ -43,12 +43,12 @@
           <a href="{{ $target }}" class="btn website" target="_blank">{{ $label }}</a>
         {{ end }}
       {{ end }}
-      
+
       {{ if site.Params.programs.share_links.enabled | default site.Params.share_links.enabled }}
         {{ partial "commons/share/dropdown.html" . }}
       {{ end }}
 
-      {{ partial "commons/download-link" (dict 
+      {{ partial "commons/download-link" (dict
         "id" .Params.downloadable_summary
         "title" (i18n "commons.download.singular_name")
         "use_filename_for_a11y_title" true
