@@ -14,15 +14,11 @@
   {{ partial "contents/list.html" . }}
 
   <div class="container">
-    {{ if .Params.is_taxonomy }}
-      {{ partial "taxonomies/categories" . }}
-    {{ else }}
-      {{ $section_type := strings.TrimSuffix "_categories" .Type }}
-      {{ $list_partial := printf "%s/partials/%s.html" $section_type $section_type }}
-      {{ if templates.Exists ( printf "partials/%s" $list_partial ) }}
-        {{ partial $list_partial . }}
-      {{ end }}
-      {{ partial "commons/pagination.html" . }}
+    {{ $section_type := strings.TrimSuffix "_categories" .Type }}
+    {{ $list_partial := printf "%s/partials/%s.html" $section_type $section_type }}
+    {{ if templates.Exists ( printf "partials/%s" $list_partial ) }}
+      {{ partial $list_partial . }}
     {{ end }}
+    {{ partial "commons/pagination.html" . }}
   </div>
 </div>
