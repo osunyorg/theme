@@ -14,11 +14,11 @@
       {{ partial "categories/partials/category/summary.html" . }}
 
       {{ partial "categories/partials/category/articles-count.html" . }}
-    </div>
 
-    {{ if $options.more }}
-      {{ partial "commons/item/more.html" . }}
-    {{ end }}
+      {{ if $options.more }}
+        {{ partial "commons/item/more.html" . }}
+      {{ end }}
+    </div>
 
     {{ partial "categories/partials/category/media.html" (dict 
         "image" .Params.image

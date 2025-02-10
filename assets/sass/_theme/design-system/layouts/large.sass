@@ -1,0 +1,31 @@
+@mixin layout-large
+    @include list-reset
+    article
+        @include article
+        [class$="-content"]
+            > * + *
+                margin-top: $spacing-2
+        [class$="-title"]
+            @include h2
+            a
+                @include icon(arrow-right-line, after, true)
+                @include hover-translate-icon(after)
+    @include media-breakpoint-up(desktop)
+        article
+            flex-direction: row
+            gap: var(--grid-gutter)
+    @include in-page-with-sidebar
+        article
+            [class$="-content"]
+                width: columns(4)
+            .media
+                width: columns(4)
+    @include in-page-without-sidebar
+        article
+            [class$="-title"]
+                @include lead
+            [class$="-content"]
+                width: columns(6)
+                padding-right: columns(1)
+            .media
+                width: columns(6)
