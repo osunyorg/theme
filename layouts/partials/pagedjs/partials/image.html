@@ -1,4 +1,6 @@
 {{ with . }}
   {{ $image := partial "GetMedia" . }}
-  <img src="{{ $image.direct_url }}" />
+  {{ with $image }}
+    <img src="{{ $image.direct_url }}" />
+  {{ end }}
 {{ end }}
