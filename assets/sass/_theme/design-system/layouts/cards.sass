@@ -1,0 +1,46 @@
+@mixin layout-cards
+    @include list-reset
+    article
+        @include article
+        background: $layout-cards-item-background
+        color: $layout-cards-item-color
+        display: flex
+        flex: auto
+        flex-direction: column
+        min-height: 320px
+        padding: $spacing-3
+        position: relative
+        transition: background 0.3s, color 0.3s
+        @include arrow-right-hover(".more")
+        [class$="-title"]
+            @include h3
+            a
+                @include stretched-link
+                text-decoration: none
+        .media
+            margin-left: -$spacing-3
+            margin-right: -$spacing-3
+            margin-top: -$spacing-3
+            img
+                min-width: 100%
+        .more
+            @include icon(arrow-right-line, after)
+                font-size: pxToRem(40)
+            @include link($layout-cards-item-color)
+            position: relative
+            margin-top: auto
+            padding-top: $spacing-3
+        a,
+        .more
+            transition: text-decoration-color .3s ease, color .3s ease
+        &:hover
+            background-color: $layout-cards-item-background-hover
+            &, a, .more
+                color: $layout-cards-item-color-hover
+            .more
+                text-decoration-color: $layout-cards-item-color-hover
+    @include in-page-with-sidebar
+        @include grid(2)
+    @include in-page-without-sidebar
+        @include grid(3)
+

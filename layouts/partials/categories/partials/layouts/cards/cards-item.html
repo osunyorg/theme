@@ -1,1 +1,4 @@
-{{ partial "categories/partials/category.html" . }}
+{{ $context := . }}
+{{ $params := merge $context (dict "options" (dict "more" true)) }}
+
+{{ partial "categories/partials/category.html" $params }}
