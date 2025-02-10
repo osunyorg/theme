@@ -1,0 +1,14 @@
+<section class="cover">
+  <h1>{{ site.Title }}</h1>
+</section>
+{{ range .Pages }}
+  <section>
+    <h1>{{ .Title }}</h1>
+    {{ partial "pagedjs/partials/summary.html" .Params.summary }}
+    {{ partial "pagedjs/partials/blocks.html" .Params.contents }}
+  </section>
+{{ end }}
+<section class="back">
+  <h1>{{ site.Title }} </h1>
+  <p>{{ site.BaseURL }} </p>
+</section>

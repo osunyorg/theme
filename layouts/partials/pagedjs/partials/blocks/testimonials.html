@@ -1,0 +1,28 @@
+{{ range .data.testimonials }}
+  <figure class="testimonial">
+    <blockquote>
+      {{- partial "PrepareHTML" .text -}}
+    </blockquote>
+    {{ if or .photo .author .job -}}
+      <figcaption>
+        
+        {{ with .photo }}
+          <div class="avatar">
+            {{ partial "pagedjs/partials/image.html" .id }}
+          </div>
+        {{- end }}
+        {{ if or .author .job -}}
+          <p>
+            {{- with .author -}}
+              <span class="signature">{{ partial "PrepareHTML" . }}</span>
+            {{- end }}
+            {{- with .job -}}
+              <span class="meta">{{- partial "PrepareHTML" . }}</span>
+            {{- end }}
+          </p>
+        {{- end }}
+      </figcaption>
+    {{ end }}
+  </figure>
+{{ end }}
+
