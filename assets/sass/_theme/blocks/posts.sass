@@ -325,13 +325,12 @@
 .block-posts
     .categories
         @include list-reset
-        display: flex
-        flex-direction: column
-        row-gap: $spacing-3
         li
             background: var(--color-background-alt)
             padding: $spacing-3
             position: relative
+            + li
+                margin-top: $spacing-3
             a
                 @include h3
                 font-weight: bold
