@@ -4,7 +4,7 @@
 {{ $layout := .layout }}
 
 {{ with $category }}
-  <article class="category-item">
+  <article class="category-item" data-title="{{ .Title }}">
     <div class="category-content">
       {{ partial "categories/partials/category/heading.html" (dict
           "item" .
@@ -13,7 +13,9 @@
 
       {{ partial "categories/partials/category/summary.html" . }}
 
-      {{ partial "categories/partials/category/articles-count.html" . }}
+      {{ if $options.count }}
+        {{ partial "categories/partials/category/articles-count.html" . }}
+      {{ end }}
 
       {{ if $options.more }}
         {{ partial "commons/item/more.html" . }}
