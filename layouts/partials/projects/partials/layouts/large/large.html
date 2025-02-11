@@ -2,14 +2,12 @@
 {{ $options := .options | default site.Params.projects.index.options }}
 
 <div class="large projects--large">
-  {{ range $project := .projects -}}
-    {{ with site.GetPage .path }}
-      {{ partial "projects/partials/layouts/large/large-item.html" (dict
-          "heading_level" $heading_level
-          "options" $options
-          "layout" "large"
-          "project" .
-        ) }}
-    {{ end }}
+  {{ range .projects -}}
+    {{ partial "projects/partials/layouts/large/large-item.html" (dict
+        "heading_level" $heading_level
+        "options" $options
+        "layout" "large"
+        "project" .
+      ) }}
   {{ end }}
 </div>
