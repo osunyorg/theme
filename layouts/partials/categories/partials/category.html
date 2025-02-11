@@ -4,14 +4,16 @@
 {{ $layout := .layout }}
 
 {{ with $category }}
-  <article class="category-item" data-title="{{ .Title }}">
+  <article class="category-item {{ .Params.bodyclass }}" data-title="{{ .Title }}">
     <div class="category-content">
       {{ partial "categories/partials/category/heading.html" (dict
           "item" .
           "level" $heading_level
         ) }}
 
-      {{ partial "categories/partials/category/summary.html" . }}
+      {{ if $options.summary }}
+        {{ partial "categories/partials/category/summary.html" . }}
+      {{ end }}
 
       {{ if $options.count }}
         {{ partial "categories/partials/category/articles-count.html" . }}
