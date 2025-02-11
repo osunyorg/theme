@@ -3,10 +3,6 @@ blocks:
     title: Appel à actions
   categories:
     title: Catégories
-    items:
-      count: 
-        one: "1 article"
-        other: "{{ .Count }} articles"
   chapter:
     title: Chapitre
   contact:
@@ -49,11 +45,7 @@ blocks:
   posts:
     title: Actualités
   projects:
-    title: Catégories
-    items:
-      count: 
-        one: "1 projet"
-        other: "{{ .Count }} projets"
+    title: Projets
   programs:
     title: Formations
   publications:
@@ -86,9 +78,6 @@ categories:
     posts_categories: Catégories des actualités
     programs_categories: Catégories des formations
     projects_categories: Catégories des projets
-  see_more:
-    one: Voir l'article
-    other: Voir les {{ .Count }} articles
 commons:
   accessibility:
     main_content: Accéder au contenu principal
@@ -241,6 +230,9 @@ commons:
     bytes: octets
 diplomas:
   type: Type de diplôme
+  count:
+    one: "1 diplôme"
+    other: "{{ .Count }} diplômes"
 errors:
   error_404:
     title: Erreur 404
@@ -257,9 +249,9 @@ events:
     office: Office 365
     outlook: Microsoft Outlook
     yahoo: Yahoo! Calendar
-  category:
-    one: Catégorie
-    other: Catégories
+  count:
+    one: "1 événement"
+    other: "{{ .Count }} événements"
   date: Date
   hour: Heure
   none: Aucun événement
@@ -290,9 +282,15 @@ formats:
   gz: Compressed archive
   tar: Compressed archive
 organizations:
+  count:
+    one: "1 organisation"
+    other: "{{ .Count }} organisations"
   logo: Logo
   none: Aucune organisations
 pages:
+  count:
+    one: "1 page"
+    other: "{{ .Count }} pages"
   details: En détail
   informations: Informations
   none: Aucune page
@@ -316,6 +314,9 @@ persons:
     pages: Pages mentionnant
     posts: Actualités mentionnant
     projects: Projets mentionnant
+  count:
+    one: "1 personne"
+    other: "{{ .Count }} personnes"
   none: Aucune personne
   posts:
     recent: Actualités publiées récemment
@@ -333,9 +334,9 @@ posts:
     label: "Auteur·rice·s"
     a11y_title: Auteurs, autrices de cet article
     more: Plus d'information
-  category:
-    one: Catégorie
-    other: Catégories
+  count: 
+    one: "1 article"
+    other: "{{ .Count }} articles"
   date: Date
   informations: Informations
   next: Article suivant
@@ -348,24 +349,6 @@ posts:
   see_all_in_program: Voir toutes les actualités de la formation
   see_all_in_category: Voir toutes les actualités “{{ .Title }}”
   title: Actualités
-projects:
-  author: Auteur·rice
-  authors: "Auteur·rice·s"
-  category:
-    one: Catégorie
-    other: Catégories
-  informations: Informations
-  next: Projet suivant
-  next_aria: Projet suivant “{{ .Title }}”
-  none: Aucun projet
-  previous: Projet précédent
-  previous_aria: Projet précédent “{{ .Title }}”
-  reading_time: Temps de lecture
-  see_all: Voir toutes les projets
-  see_all_in_program: Voir toutes les projets de la formation
-  see_all_in_category: Voir toutes les projets “{{ .Title }}”
-  title: Projets
-  year: Année
 programs:
   accessibility: Accessibilité
   administrative_information: Informations administratives
@@ -373,6 +356,9 @@ programs:
     qualiopi: Qualiopi, processus certifié, République Française
   children: Parcours
   contacts: Contacts
+  count:
+    one: "1 formation"
+    other: "{{ .Count }} formations"
   evaluation: Modalités d’évaluation
   objectives: Objectifs
   opportunities: Débouchés
@@ -398,9 +384,7 @@ programs:
   level: Niveau
   mention: Mention
   none: Aucune formation
-  no_program: Aucune formation
   posts: Actualités
-  # TODO déplacer la clé location
   location:
     one: Campus
     other: Campus
@@ -416,6 +400,24 @@ programs:
     apprenticeship: Apprentissage
     initial: Formation initiale
     continuing: Formation continue
+projects:
+  author: Auteur·rice
+  authors: "Auteur·rice·s"
+  count:
+    one: "1 projet"
+    other: "{{ .Count }} projets"
+  informations: Informations
+  next: Projet suivant
+  next_aria: Projet suivant “{{ .Title }}”
+  none: Aucun projet
+  previous: Projet précédent
+  previous_aria: Projet précédent “{{ .Title }}”
+  reading_time: Temps de lecture
+  see_all: Voir toutes les projets
+  see_all_in_program: Voir toutes les projets de la formation
+  see_all_in_category: Voir toutes les projets “{{ .Title }}”
+  title: Projets
+  year: Année
 publications:
   downloads: Téléchargements
   next: Publication suivante
@@ -427,7 +429,7 @@ sitemap:
   pages: Arborescence
 taxonomies:
   list:
-    title: Trier par
+    title: "Parcourir :"
 volumes:
   abstract: Résumé
   paper:

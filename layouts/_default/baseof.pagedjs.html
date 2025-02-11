@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode | default "fr" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ partial "head/seo.html" . }}
+    {{ partial "pagedjs/partials/head.html" }}
+  </head>
+  <body>
+    {{ if .Pages }}
+      {{ partial "pagedjs/section.html" . }}
+    {{ else }}
+      {{ partial "pagedjs/single.html" . }}
+    {{ end }}
+  </body>
+</html>

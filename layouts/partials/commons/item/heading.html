@@ -2,7 +2,8 @@
 {{ $level := .level }}
 {{ $type := $item.Type | default "page" }}
 {{ $item_type := $type | singularize }}
-{{ $subtitle := $item.Params.subtitle}}
+{{ $subtitle := $item.Params.subtitle }}
+{{ $options := .options }}
 
 {{/*  TODO: checker itemprop  */}}
 {{ $heading_tag := partial "GetHeadingTag" (dict 

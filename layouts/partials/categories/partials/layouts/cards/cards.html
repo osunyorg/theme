@@ -1,0 +1,16 @@
+{{ $categories := .categories }}
+{{ $heading_level := .heading_level }}
+{{ $options := .options }}
+
+<ul class="categories categories--cards">
+  {{ range $categories }}
+    <li>
+      {{ partial "categories/partials/layouts/cards/cards-item.html" (dict
+          "category" .
+          "heading_level" $heading_level
+          "options" $options
+          "layout" "cards"
+        ) }}
+    </li>
+  {{ end }}
+</ul>

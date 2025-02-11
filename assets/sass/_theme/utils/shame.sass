@@ -18,50 +18,6 @@
             &::before
                 content: ' • '
 
-// Utilisé pour .post, .project, .page, .person, .program, .volume
-@mixin article($aspect-ratio: $article-media-aspect-ratio)
-    position: relative
-    display: flex
-    flex-direction: column
-    .media
-        @include handle-svg-fit
-        margin-bottom: $spacing-3
-        order: -1
-        overflow: hidden
-        img
-            object-fit: cover
-            // max-width: max-content
-            width: 100%
-            @if $aspect-ratio
-                aspect-ratio: $aspect-ratio
-    p + time
-            margin-top: $spacing-2
-    .post-categories, .project-categories
-        @include list-reset
-        @include meta
-        margin-top: $spacing-2
-        margin-bottom: $spacing-2
-        position: relative
-        display: flex
-        flex-wrap: wrap
-        gap: 0 $spacing-2
-        z-index: 2
-        a
-            @include link(var(--color-accent))
-        li
-            margin: 0
-    time
-        @include meta
-        color: var(--color-text-alt)
-        display: block
-
-@mixin article-title
-    @include h3
-    a
-        @include stretched-link(before)
-        display: block
-        text-decoration: none
-
 @mixin list-section
     @include list-reset
     > li
@@ -77,20 +33,10 @@
                     bottom: $spacing-2
                     position: absolute
                     right: 0
-            @include media-breakpoint-up(desktop)
-                @include arrow-right-hover
-                display: block
-                &::after
-                    transform: translateX(0)
-                    position: relative
-                &:hover
-                    &::after
-                        transform: translateX($spacing-2)
         a
             text-decoration: none
             &:hover
                 color: var(--color-accent)
-
         @include media-breakpoint-down(desktop)
             a:nth-child(2)
                 margin-top: calc(#{$spacing-2} / 2)

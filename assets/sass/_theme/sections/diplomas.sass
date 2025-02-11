@@ -95,8 +95,14 @@ ul.diplomas
             align-items: start
             position: relative
             a.title
+                @include icon(arrow-right-line, after, true)
+                    opacity: 0
+                    transition: opacity 0.55s
                 @include stretched-link(before)
                 position: initial
+                &:hover
+                    &::after
+                        opacity: 1
                 @include media-breakpoint-down(desktop)
                     margin-right: $spacing-2
                     &::after

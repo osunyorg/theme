@@ -50,6 +50,7 @@
             margin-top: 0
         // ----------------- //
         .card
+            @include arrow-right-hover(".more")
             padding: $spacing-3
             background-color: $block-pages-card-page-background
             transition: background 0.3s, color 0.3s
@@ -71,9 +72,6 @@
                 a
                     @include link(var(--color-accent))
             .more
-                @include arrow-right-hover
-                @include icon(arrow-right-line, after)
-                    font-size: pxToRem(40)
                 @include link($block-pages-card-page-color)
                 position: relative
                 margin-top: auto
@@ -90,9 +88,6 @@
                         @include link($block-pages-card-page-color-hover)
                 .more
                     text-decoration-color: $block-pages-card-page-color-hover
-                    &:after
-                        opacity: 1
-                        transform: translateX(pxToRem(7))
     &--list
         .list
             @include list-reset
