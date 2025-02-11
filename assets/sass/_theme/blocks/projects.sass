@@ -4,58 +4,6 @@
             a
                 @include hover-translate-icon
                 @include icon(arrow-right-line, after)
-    &--list
-        .project
-            align-items: flex-start
-            border-bottom: 1px solid var(--color-border)
-            display: flex
-            padding-bottom: $spacing-3
-            padding-top: $spacing-3
-            text-decoration: none
-            @include media-breakpoint-up(md)
-                flex-direction: row
-                gap: var(--grid-gutter)
-                .project-content
-                    flex: 1
-            .media
-                margin-bottom: 0
-                @include in-page-with-sidebar
-                    width: columns(2)
-                @include in-page-without-sidebar
-                    width: columns(4)
-        .project-title
-            a
-                @include hover-translate-icon
-                @include icon(arrow-right-line, after)
-            &:hover
-                &,
-                a
-                    color: $color-accent
-                    &::after
-                        opacity: 1
-        .project-title,
-        .project-subtitle
-            @include h3
-            @include in-page-without-sidebar
-                @include h2
-        .project-meta
-            time
-                display: inline
-                + .project-categories
-                    margin-left: $spacing-2
-            .project-categories
-                display: inline-flex
-                row-gap: space(3)
-    .grid
-        @include grid(2, md)
-        .project
-            &-content
-                align-items: baseline
-            &-subtitle
-                @include h3
-        @include media-breakpoint-down(md)
-            .project + .project
-                margin-top: $spacing-4
     &--alternate
         .alternate
             .project-subtitle

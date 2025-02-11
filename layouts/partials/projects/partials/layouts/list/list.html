@@ -1,15 +1,17 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $options := .options | default site.Params.projects.index.options }}
 
-<div class="projects projects--list">
+<ul class="projects projects--list">
   {{ range $project := .projects -}}
     {{ with site.GetPage .path }}
-      {{ partial "projects/partials/layouts/list/list-item.html" (dict
-          "heading_level" $heading_level
-          "options" $options
-          "layout" "list"
-          "project" .
-        ) }}
+      <li>
+        {{ partial "projects/partials/layouts/list/list-item.html" (dict
+            "heading_level" $heading_level
+            "options" $options
+            "layout" "list"
+            "project" .
+          ) }}
+      </li>
     {{ end }}
   {{ end }}
-</div>
+</ul>

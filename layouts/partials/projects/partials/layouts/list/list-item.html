@@ -1,1 +1,44 @@
-{{ partial "projects/partials/project.html" . }}
+{{ $project := .project }}
+{{ $options := .options | default site.Params.projects.index.options }}
+{{ $heading_level := .heading_level }}
+{{ $layout := .layout }}
+
+<article class="project {{ .Params.bodyclass }}" itemscope itemtype="https://schema.org/CreativeWork">
+  <div class="project-content">
+    <div class="project-description">
+
+      {{ partial "projects/partials/project/heading.html" (dict
+          "item" $project
+          "level" $heading_level
+          "options" $options
+        ) }}
+
+      {{ if or $options.year $options.categories }}
+        <div class="project-meta">
+          {{ if and $project.Params.year $options.year }}
+            {{ partial "projects/partials/project/year.html" $project.Params.year }}
+          {{ end }}
+
+          {{ if $options.categories }}
+            {{ partial "projects/partials/project/categories.html" . }}
+          {{ end }}
+        </div>
+      {{ end }}
+
+      {{ if $options.summary }}
+        {{ partial "projects/partials/project/summary.html" . }}
+      {{ end }}
+
+      {{ if $options.more }}
+        {{ partial "commons/item/more.html" . }}
+      {{ end }}
+    </div>
+  </div>
+
+  {{ if $options.image }}
+    {{ partial "projects/partials/project/media.html" (dict 
+        "image" $project.Params.image 
+        "layout" $layout
+      ) }}
+  {{ end }}
+</article>

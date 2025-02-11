@@ -1,5 +1,4 @@
 {{ $project := .project }}
-{{ $title := partial "PrepareHTML" $project.Title }}
 {{ $options := .options | default site.Params.projects.index.options }}
 {{ $heading_level := .heading_level }}
 {{ $layout := .layout }}
@@ -16,10 +15,8 @@
 
       {{ if or $options.year $options.categories }}
         <div class="project-meta">
-          {{ if and $options.year }}
-            {{ with $project.Params.year }}
-              {{ partial "projects/partials/project/year.html" . }}
-            {{ end }}
+          {{ if and $project.Params.year $options.year }}
+            {{ partial "projects/partials/project/year.html" $project.Params.year }}
           {{ end }}
 
           {{ if $options.categories }}
@@ -28,10 +25,8 @@
         </div>
       {{ end }}
 
-      {{ if and $options.summary }}
-        {{ with $project.Params.summary }}
-          {{ partial "projects/partials/project/summary.html" (dict "summary" . ) }}
-        {{ end }} 
+      {{ if $options.summary }}
+        {{ partial "projects/partials/project/summary.html" . }}
       {{ end }}
 
       {{ if $options.more }}
@@ -42,8 +37,8 @@
 
   {{ if $options.image }}
     {{ partial "projects/partials/project/media.html" (dict 
-      "image" $project.Params.image 
-      "layout" $layout
+        "image" $project.Params.image 
+        "layout" $layout
       ) }}
   {{ end }}
 </article>

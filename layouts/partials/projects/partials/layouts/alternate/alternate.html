@@ -1,14 +1,15 @@
 {{ $heading_level := .heading_level | default 3 }}
+{{ $heading := printf "h%d" $heading_level }}
 {{ $options := .options | default site.Params.projects.index.options }}
 
 <div class="alternate">
   {{ range $i, $project := .projects -}}
     {{ with site.GetPage .path }}
-      {{ partial "projects/partials/layouts/alternate/alternate-item.html" (dict 
-          "heading_level" $heading_level
-          "layout" "alternate"
-          "options" $options
-          "project" .
+      {{ partial "projects/partials/project.html" (dict 
+        "project" .
+        "heading" $heading
+        "layout" "alternate"
+        "options" $options
         ) }}
     {{ end }}
   {{ end }}
