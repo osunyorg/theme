@@ -3,14 +3,14 @@
 {{- $layout := .block.data.layout | default "grid" -}}
 
 {{- with .block.data -}}
-  {{- $options := .options -}}
-
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
 
-        {{- partial (printf "categories/partials/layouts/%s/%s.html" $layout $layout) (dict 
+        {{ $partial_list := printf "categories/partials/layouts/%s/%s.html" $layout $layout }}
+
+        {{- partial $partial_list (dict 
             "categories" .categories
             "heading_level" $block.ranks.children
             "options" .options
