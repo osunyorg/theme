@@ -2,10 +2,9 @@
 {{ $heading_level := .heading_level }}
 {{ $category := site.GetPage .category.path }}
 {{ $layout := .layout }}
-{{ $class := .Params.bodyclass }}
 
 {{ with $category }}
-  <article class="category-item" data-title="{{ .Title }}">
+  <article class="category-item {{ .Params.bodyclass }}" data-title="{{ .Title }}">
     <div class="category-content">
       {{ partial "categories/partials/category/heading.html" (dict
           "item" .
