@@ -5,7 +5,7 @@
 {{- if $categories -}}
   <ul class="{{ $kind }}-categories" aria-label="{{ i18n "categories.label" }}">
     {{- range $categories -}}
-      <li>
+      <li class="{{ .Params.bodyclass }}">
         <a href="{{ .Permalink }}">
           {{- safeHTML .Title -}}
         </a>
