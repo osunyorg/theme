@@ -2,6 +2,7 @@
 {{ $heading_level := .heading_level }}
 {{ $category := site.GetPage .category.path }}
 {{ $layout := .layout }}
+{{ $class := .Params.bodyclass }}
 
 {{ with $category }}
   <article class="category-item" data-title="{{ .Title }}">
@@ -11,7 +12,9 @@
           "level" $heading_level
         ) }}
 
-      {{ partial "categories/partials/category/summary.html" . }}
+      {{ if $options.summary }}
+        {{ partial "categories/partials/category/summary.html" . }}
+      {{ end }}
 
       {{ if $options.count }}
         {{ partial "categories/partials/category/articles-count.html" . }}
