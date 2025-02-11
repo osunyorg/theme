@@ -22,9 +22,11 @@
       {{ end }}
     </div>
 
-    {{ partial "categories/partials/category/media.html" (dict 
-        "image" .Params.image
-        "layout" $layout
-      ) }}
+    {{ if $options.image }}
+      {{ partial "categories/partials/category/media.html" (dict 
+          "image" .Params.image
+          "layout" $layout
+        ) }}
+    {{ end }}
   </article>
 {{ end }}
