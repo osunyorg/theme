@@ -59,18 +59,21 @@
                 border-color: transparent
                 color: var(--color-background)
 
-@mixin arrow-right-hover
-    position: relative
-    display: flex
-    justify-content: space-between
-    align-items: center
-    @include icon(arrow-right-line, after)
-        opacity: 0
-        transform: translateX(-20px)
-        transition: 0.55s $arrow-ease-transition
-        position: absolute
-        right: 0
+@mixin arrow-right-hover($target: &, $size: pxToRem(40))
+    #{$target}
+        position: relative
+        display: flex
+        justify-content: space-between
+        align-items: center
+        @include icon(arrow-right-line, after)
+            font-size: $size
+            opacity: 0
+            position: absolute
+            right: 0
+            transform: translateX(-20px)
+            transition: 0.55s $arrow-ease-transition
     &:hover
-        &:after
-            opacity: 1
-            transform: translateX(0)
+        #{$target}
+            &:after
+                opacity: 1
+                transform: translateX(0)

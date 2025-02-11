@@ -1,42 +1,28 @@
 {{ $options := .options | default site.Params.categories.index.options }}
-{{ $layout := .layout | default "list" }}
-{{ $category := .category }}
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-    "level" .heading_level
-    "attributes" "class='category-title'"
-  )}}
+{{ $heading_level := .heading_level }}
+{{ $category := site.GetPage .category.path }}
+{{ $layout := .layout }}
 
 {{ with $category }}
+  <article class="category-item">
+    <div class="category-content">
+      {{ partial "categories/partials/category/heading.html" (dict
+          "item" .
+          "level" $heading_level
+        ) }}
 
-  {{ if eq $layout "list" }}
-    <a href="{{ .Permalink }}" class="title" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Title) }}">
-      {{ partial "PrepareHTML" .Title }}
-    </a>
-  {{ else if eq $layout "grid" }}
-    <article class="category">
-      {{ $heading_tag.open }}
-        <a href="{{- .Permalink -}}">
-          {{- partial "PrepareHTML" .Title -}}
-        </a>
-      {{ $heading_tag.close }}
+      {{ partial "categories/partials/category/summary.html" . }}
 
-      {{ if and $options.summary .Params.summary }}
-        {{ partial "GetRichSummary" ( dict 
-            "summary" .Params.summary
-            "kind" "category"
-          )}}
+      {{ partial "categories/partials/category/articles-count.html" . }}
+
+      {{ if $options.more }}
+        {{ partial "commons/item/more.html" . }}
       {{ end }}
+    </div>
 
-      {{ if $options.image }}
-        <div class="media">
-          {{ with .Params.image }}
-            {{ partial "commons/image.html" (dict
-                "image"    .
-                "sizes"    site.Params.image_sizes.sections.categories.item
-              ) }}
-          {{ end }}
-        </div>
-      {{ end }}
-    </article>
-  {{ end }}
+    {{ partial "categories/partials/category/media.html" (dict 
+        "image" .Params.image
+        "layout" $layout
+      ) }}
+  </article>
 {{ end }}

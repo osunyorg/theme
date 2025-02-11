@@ -3,10 +3,6 @@ blocks:
     title: Call to action
   categories:
     title: Catégories
-    items:
-      count: 
-        one: "1 article"
-        other: "{{ .Count }} articles"
   chapter:
     title: Chapter
   contact:
@@ -48,6 +44,8 @@ blocks:
     title: People
   posts:
     title: Posts
+  projects:
+    title: Projets
   programs:
     title: Programs
   publications:
@@ -80,9 +78,6 @@ categories:
     posts_categories: News categories
     programs_categories: Programs categories
     projects_categories: Projects categories
-  see_more:
-    one: See the post
-    other: See the {{ .Count }} posts
 commons:
   accessibility:
     main_content: Go to main content
@@ -91,11 +86,13 @@ commons:
     search: Go to search
     shortcut_navigation: Navigation Links
     transcription: Transcription
+    map_transcription : Transcription
     credits: "Rights reserved: "
   authors:
     one: Author
     other: Authors
   search:
+    label: Search
     title: Search
     close: Close search
   backtotop: Back to top
@@ -150,6 +147,7 @@ commons:
   extensions:
     PDF: Adobe Portable Document Format
   in: In
+  index: Home - {{ .Title }}
   language: Language
   lightbox:
     button: View larger image
@@ -175,6 +173,13 @@ commons:
     blank: external link
     blank_aria: “{{ .Title }}” - external link
     download: “Download {{ .Title }}” - external link
+  maps:
+    attribution_title:  Leaflet a javascript library for interactive maps
+    label: Map view - {{ . }} - move with keyboard arrows.
+    marker_label: Display map information 
+    popup_close: Close map information
+    zoom_in: Zoom in
+    zoom_out: Zoom out
   menu:
     label: Menu
     legal: Legals menu
@@ -224,7 +229,10 @@ commons:
     kilobytes: Kilobytes
     bytes: bytes
 diplomas:
-  type: Type de diplôme
+  type: Diploma kind
+  count:
+    one: "1 diploma"
+    other: "{{ .Count }} diplomas"
 errors:
   error_404:
     title: "404 error"
@@ -241,9 +249,9 @@ events:
     office: Office 365
     outlook: Microsoft Outlook
     yahoo: Yahoo! Calendar
-  category:
-    one: Category
-    other: Categories
+  count:
+    one: "1 event"
+    other: "{{ .Count }} events"
   date: Date
   hour: Time
   none: No event
@@ -274,9 +282,15 @@ formats:
   gz: Compressed archive
   tar: Compressed archive
 organizations:
+  count:
+    one: "1 organization"
+    other: "{{ .Count }} organizations"
   logo: Logo
   none: No organization
 pages:
+  count:
+    one: "1 page"
+    other: "{{ .Count }} pages"
   details: Details
   informations: Informations
   posts: News
@@ -294,6 +308,15 @@ papers:
     references: References
     content: Content
 persons:
+  backlinks:
+    events: Events mentioning
+    pages: Pages mentioning
+    posts: Posts mentioning
+    projects: Projects mentioning
+  count:
+    one: "1 person"
+    other: "{{ .Count }} persons"
+  none: No person
   posts:
     recent: Latest news
     all: View all news posted by {{ .author }}
@@ -304,20 +327,15 @@ persons:
     recent: Latest publications
     all: View all publications by {{ .author }}
   programs: Teachings
-  backlinks:
-    events: Events mentioning
-    pages: Pages mentioning
-    posts: Posts mentioning
-    projects: Projects mentioning
 posts:
   author: Author
   authors:
     label: "Authors"
     a11y_title: Authors of this article
     more: More information
-  category:
-    one: Category
-    other: Categories
+  count: 
+    one: "1 article"
+    other: "{{ .Count }} articles"
   date: Date
   informations: Informations
   next: Next article
@@ -330,23 +348,6 @@ posts:
   see_all_in_program: See all program's news
   see_all_in_category: See all news in “{{ .Title }}”
   title: News
-projects:
-  author: Author
-  category:
-    one: Category
-    other: Categories
-  informations: Informations
-  next: Next project
-  next_aria: Next project “{{ .Title }}”
-  none: No project
-  previous: Previous project
-  previous_aria: Previous project “{{ .Title }}”
-  reading_time: Reading time
-  see_all: See all posts
-  see_all_in_program: See all program's projects
-  see_all_in_category: See all projects in “{{ .Title }}”
-  title: Projects
-  year: Year
 programs:
   accessibility: Accessibility
   administrative_information: Administrative information
@@ -354,6 +355,9 @@ programs:
     qualiopi: Qualiopi, processus certifié, République Française
   children: Options
   contacts: Contacts
+  count:
+    one: "1 program"
+    other: "{{ .Count }} programs"
   evaluation: Evaluation
   objectives: Objectives
   opportunities: Opportunities
@@ -362,6 +366,10 @@ programs:
   prerequisites: Prerequisites
   presentation: Summary
   pricing: Pricing
+  pricing_initial: Costs of initial training
+  pricing_continuing: Costs of continuing training
+  pricing_apprenticeship: Apprenticeship costs
+  website: Visit the website
   registration: Registration
   roles: Management
   teachers: Teachers
@@ -391,6 +399,24 @@ programs:
     apprenticeship: Apprenticeship
     initial: Initial program
     continuing: Continuing program
+projects:
+  author: Author
+  authors: "Authors"
+  count:
+    one: "1 project"
+    other: "{{ .Count }} projects"
+  informations: Informations
+  next: Next project
+  next_aria: Next project “{{ .Title }}”
+  none: No project
+  previous: Previous project
+  previous_aria: Previous project “{{ .Title }}”
+  reading_time: Reading time
+  see_all: See all posts
+  see_all_in_program: See all program's projects
+  see_all_in_category: See all projects in “{{ .Title }}”
+  title: Projects
+  year: Year
 publications:
   downloads: Downloads
   next: Next publication

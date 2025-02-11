@@ -1,0 +1,39 @@
+@mixin layout-cards
+    @include list-reset
+    article
+        @include article
+        @include layout-item
+        background: $layout-cards-item-background
+        color: $layout-cards-item-color
+        padding: $spacing-3
+        position: relative
+        transition: background 0.3s, color 0.3s
+        @include arrow-right-hover(".more")
+        [class$="-title"]
+            @include h3
+        .media
+            margin-left: -$spacing-3
+            margin-right: -$spacing-3
+            margin-top: -$spacing-3
+            img
+                min-width: 100%
+        .more
+            @include link($layout-cards-item-color)
+            margin-top: $spacing-4
+        a, p
+            transition: text-decoration-color .3s ease, color .3s ease
+        &:hover
+            background-color: $layout-cards-item-background-hover
+            &, a, p
+                color: $layout-cards-item-color-hover
+            .more
+                text-decoration-color: $layout-cards-item-color-hover
+    @include media-breakpoint-down(desktop)
+        > li + li
+            margin-top: $spacing-5
+    @include media-breakpoint-up(desktop)
+        min-height: 320px
+    @include in-page-with-sidebar
+        @include grid(2)
+    @include in-page-without-sidebar
+        @include grid(3)

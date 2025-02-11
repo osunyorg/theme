@@ -1,0 +1,3 @@
+{{ $section_type := strings.TrimSuffix "_categories" .Type }}
+{{ $label := i18n ( printf "%s.count" $section_type ) ( len .Pages ) }}
+<p class="articles-count">{{ $label }}</p>

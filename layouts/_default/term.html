@@ -1,3 +1,7 @@
 {{ define "main" }}
-  {{ partial "categories/single.html" . }}
+  {{ if .Params.is_taxonomy }}
+    {{ partial "categories/section.html" . }}
+  {{ else }}
+    {{ partial "categories/single.html" . }}
+  {{ end }}
 {{ end }}

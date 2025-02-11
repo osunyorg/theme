@@ -1,0 +1,25 @@
+{{ $image := .image }}
+{{ $type := .type | default "page" }}
+{{ $layout := .layout | default "item" }}
+
+{{ $sizes := site.Params.image_sizes.sections.pages.item }}
+{{ with index site.Params.image_sizes.sections $type }}
+  {{ with index . $layout }}
+    {{ $sizes = . }}
+  {{ end }}
+{{ end }}
+
+{{ if .sizes }}
+  {{ $sizes = .sizes }}
+{{ end }}
+
+<div class="media">
+  {{- if $image -}}
+    {{- partial "commons/image.html" (dict
+        "image" $image
+        "sizes" $sizes
+      ) -}}
+  {{- else -}}
+    {{- partial "commons/image-default.html" $type -}}
+  {{- end -}}
+</div>

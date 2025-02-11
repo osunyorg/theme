@@ -24,7 +24,7 @@
             {{ range site.Taxonomies.posts_categories }}
               <li data-title="{{ .Page.Title }}">
                 <a href="{{ .Page.Permalink }}" class="title" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Page.Title) }}">{{ partial "PrepareHTML" .Page.Title }}</a>
-                <p>{{ i18n "blocks.categories.items.count" ( len . ) }}</p>
+                <p>{{ i18n "posts.items.count" ( len . ) }}</p>
               </li>
             {{ end }}
           </ul>

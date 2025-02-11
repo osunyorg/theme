@@ -19,11 +19,13 @@
         </div>
       {{ end }}
 
-      {{ partial $template (dict
-          "block" $content
-          "context" $context
-          "index" $index
-      )}}
+      {{ if templates.Exists ( printf "partials/%s" $template ) }}
+        {{ partial $template (dict
+            "block" $content
+            "context" $context
+            "index" $index
+          )}}
+      {{ end }}
 
       {{ if and $is_title $is_layout_collapsed }}
         {{ $collapsed_started = true }}

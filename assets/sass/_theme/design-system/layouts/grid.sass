@@ -1,0 +1,17 @@
+@mixin layout-grid($columns: 3)
+    @include list-reset
+    article
+        @include article
+        @include layout-item
+        [class$="-title"]
+            @include h2
+            a
+                @include hover-translate-icon(after)
+                @include icon(arrow-right-line, after, true)
+    @include media-breakpoint-down(desktop)
+        > li + li
+            margin-top: $spacing-5
+    @include in-page-with-sidebar
+        @include grid(2)
+    @include in-page-without-sidebar
+        @include grid($columns)

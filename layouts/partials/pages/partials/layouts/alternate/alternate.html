@@ -1,5 +1,4 @@
 {{ $options := .options }}
-{{ $image_class := "" }}
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
         "level" $heading_level
@@ -10,12 +9,11 @@
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
     {{ with $page }}
-      {{ if .Params.image }}
-        {{ $image_class = printf (partial "GetImageDirection" .Params.image) }}
-      {{ else }}
-        {{ $image_class = "" }}
+      {{ $image_class := "without-image" }}
+      {{ with .Params.image }}
+        {{ $image_class = partial "GetImageDirection" . }}
       {{ end }}
-      <article class="page {{ $image_class }} {{- if (not (isset .Params "image")) -}} without-image {{- end -}}">
+      <article class="page {{ $image_class }}">
         {{ $heading_tag.open }}
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}
@@ -44,7 +42,7 @@
         {{ end }}
 
         {{ if $options.image }}
-          {{- partial "pages/partials/organization/page-media.html" . -}}
+          {{- partial "pages/partials/page/page-media.html" . -}}
         {{ end }}
       </article>
     {{- end -}}

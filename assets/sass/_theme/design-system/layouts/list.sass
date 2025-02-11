@@ -1,0 +1,55 @@
+@mixin layout-list($columns: 3)
+    @include list-reset
+    li
+        padding-bottom: $spacing-3
+        padding-top: $spacing-3
+        &:not(:last-child)
+            border-bottom: 1px solid var(--color-border)
+    article
+        display: flex
+        @include layout-item
+        .media
+            order: -1
+    @include media-breakpoint-down(desktop)
+        article
+            flex-direction: column
+            gap: var(--grid-gutter)
+            .media
+                width: 33.33333%
+    @include in-page-with-sidebar
+        article
+            display: flex
+            gap: var(--grid-gutter)
+            [class$="-content"]
+                flex-shrink: 0
+                width: columns(6)
+            [class$="-title"]
+                @include h4
+            .media
+                flex-shrink: 0
+                width: columns(2)
+    @include in-page-without-sidebar
+        li
+            padding-bottom: $spacing-4
+            padding-top: $spacing-4
+        article
+            display: flex
+            gap: var(--grid-gutter)
+            justify-content: end
+            [class$="-content"]
+                flex-shrink: 0
+                width: columns(9)
+                padding-right: columns(3)
+                position: relative
+                [class$="-title"]
+                    @include h3
+                .articles-count
+                    position: absolute
+                    right: 0
+                    top: 0
+                    margin-top: $spacing-2
+            [class$="-title"]
+                @include h3
+            .media
+                flex-shrink: 0
+                width: columns(3)

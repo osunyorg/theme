@@ -1,0 +1,13 @@
+{{ $paths := slice }}
+
+{{ range . }}
+  {{ $page := . }}
+  {{ with .Page }}
+    {{ $page = . }}
+  {{ end }}
+  {{ with $page.Params.meta.hugo.path }}
+    {{ $paths = $paths | append (dict "path" .) }}
+  {{ end }}
+{{ end }}
+
+{{ return $paths }}
