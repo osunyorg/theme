@@ -10,3 +10,8 @@
     @include media-breakpoint-up(desktop)
         .more
             @include icon(arrow-right-line, after, true)
+                display: inline-block
+                transition: transform 0.25s
+        article:hover
+            .more::after
+                transform: translateX(pxToRem(5))

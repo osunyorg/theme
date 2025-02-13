@@ -29,17 +29,15 @@
             .media
                 width: columns(2)
     @include in-page-without-sidebar
-        > li
-            padding-bottom: $spacing-4
-            padding-top: $spacing-4
         article
             display: flex
             gap: var(--grid-gutter)
-            &:where(:not:only-child)
-                justify-content: end
+            // align title to the next article title if image options is active
+            &:has(.media:empty)
+                [class$="-content"]
+                    margin-left: offset(3)
             [class$="-content"]
                 flex: 1
-                position: relative
                 [class$="-title"]
                     @include h3
                 .articles-count
