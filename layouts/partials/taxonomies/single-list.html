@@ -1,3 +1,4 @@
+{{ $context := . }}
 {{ $type := .Type }}
 {{ $taxonomies := .Params.taxonomies }}
 
@@ -5,18 +6,17 @@
   <ul class="taxonomies-single {{ $type }}-taxonomies" aria-label="{{ i18n "categories.label" }}">
     {{ range $taxonomies }}
       {{ if .categories }}
-        <li class="terms">
+        <li class="terms {{ if .slug -}} taxonomy-{{- .slug }} {{- end }}">
           <span class="taxonomy-title">{{ .name }}</span>
           {{ with .categories }}
-            <ul class="taxonomy-children">
-              {{ range . }}
-                <li>
-                  <a href="{{ .permalink }}">
-                    {{ safeHTML .name }}
-                  </a>
-                </li>
-              {{ end }}
-            </ul>
+            {{ $categories := partial "GetObjectsFromPathSlice" . }}
+
+            {{ partial "commons/categories.html" (dict 
+                "kind" $context.Kind
+                "context" $context
+                "categories" $categories
+                "class" "taxonomy-children"
+              )}}
           {{ end }}
         </li>
       {{ end }}
