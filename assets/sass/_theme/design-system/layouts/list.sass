@@ -3,7 +3,7 @@
     > li
         padding-bottom: $spacing-3
         padding-top: $spacing-3
-        &:not(:last-child)
+        &:where(:not(:last-child))
             border-bottom: 1px solid var(--color-border)
     article
         display: flex
@@ -22,12 +22,11 @@
             gap: var(--grid-gutter)
             [class$="-content"]
                 flex-shrink: 0
-                width: columns(6)
+                flex: 1
             [class$="-title"],
             [class$="-subtitle"]
                 @include h4
             .media
-                flex-shrink: 0
                 width: columns(2)
     @include in-page-without-sidebar
         > li
@@ -36,11 +35,10 @@
         article
             display: flex
             gap: var(--grid-gutter)
-            justify-content: end
+            &:where(:not:only-child)
+                justify-content: end
             [class$="-content"]
-                flex-shrink: 0
-                width: columns(9)
-                padding-right: columns(3)
+                flex: 1
                 position: relative
                 [class$="-title"]
                     @include h3
