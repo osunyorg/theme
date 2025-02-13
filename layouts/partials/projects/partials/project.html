@@ -3,6 +3,7 @@
 {{ $layout := .layout }}
 {{ $project := site.GetPage .project.path }}
 {{ $group_meta := .group_meta }}
+{{ $with_more := .with_more }}
 
 {{ with $project }}
   <article class="project {{ .Params.bodyclass }}" itemscope itemtype="https://schema.org/CreativeWork">
@@ -40,7 +41,7 @@
           {{ end }}
         {{ end }}
 
-        {{ if $options.more }}
+        {{ if $with_more }}
           {{ partial "commons/item/more.html" . }}
         {{ end }}
       </div>
