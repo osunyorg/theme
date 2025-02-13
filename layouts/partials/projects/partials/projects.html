@@ -1,9 +1,12 @@
-<div class="projects projects--{{- site.Params.projects.index.layout -}}">
-  {{ if not .Paginator.Pages }}
-    {{ $is_term := eq .Kind "term" }}
-    <p>{{ i18n (cond $is_term "categories.no_project" "projects.none") }}</p>
-  {{ end }}
-  {{ range .Paginator.Pages }}
-    {{ partial "projects/partials/project.html" (dict "project" . )}}
-  {{ end }}
+{{ $options := site.Params.projects.index.options }}
+{{ $layout := site.Params.projects.index.layout }}
+{{ $layout_partial := printf "projects/partials/layouts/%s/%s.html" $layout $layout }}
+{{ $projects := partial "GetPathSliceFromObjects" .Paginator.Pages }}
+
+<div class="projects">
+  {{ partial $layout_partial (dict
+      "projects" $projects
+      "heading_level" 2
+      "options" $options
+    ) }}
 </div>

@@ -1,73 +1,65 @@
-{{ $project := .project }}
-{{ $heading := .heading | default "h2" }}
-{{ $direction := "" }}
-{{ $layout := .layout | default "grid" }}
-{{ $heading_tag := (dict 
-    "open" ((printf "<%s class='project-title' itemprop='name'>" $heading) | safeHTML)
-    "close" ((printf "</%s>" $heading) | safeHTML)
-    ) }}
-
-{{ $options := .options | default site.Params.projects.index.options }}
+{{ $options := .options }}
+{{ $heading_level := .heading_level }}
+{{ $layout := .layout }}
+{{ $project := site.GetPage .project.path }}
+{{ $group_meta := .group_meta }}
+{{ $with_more := .with_more }}
 
 {{ with $project }}
-
-  {{ if .Params.image }}
-    {{- $direction = partial "GetImageDirection" .Params.image -}}
-  {{ end }}
-
-  <article class="project {{ $direction }} {{ .Params.bodyclass }}" itemscope itemtype="https://schema.org/CreativeWork">
-
+  <article class="project {{ .Params.bodyclass }}" itemscope itemtype="https://schema.org/CreativeWork">
     <div class="project-content">
       <div class="project-description">
-        {{- $title := partial "PrepareHTML" .Title -}}
-        {{ if and $options.subtitle .Params.subtitle }}
-          <hgroup>
-        {{ end }}
-        {{ $heading_tag.open }}
-          <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-        {{ $heading_tag.close }}
-        {{ if and $options.subtitle .Params.subtitle }}
-          <p class="project-subtitle">{{ partial "PrepareHTML" .Params.subtitle }}</p>
-        {{ end }}
-        {{ if and $options.subtitle .Params.subtitle }}
-          </hgroup>
-        {{ end }}
-        
-        {{ if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
-          <div itemprop="abstract">
-            {{ partial "GetRichSummary" ( dict 
-              "summary" .Params.summary
-              "kind" "projects"
-            )}}
-          </div>
+
+        {{ partial "projects/partials/project/heading.html" (dict
+            "item" $project
+            "level" $heading_level
+            "options" $options
+          ) }}
+
+
+        {{ if $group_meta }}
+          {{ if or $options.year $options.categories }}
+            <div class="project-meta">
+              {{ if and $project.Params.year $options.year }}
+                {{ partial "projects/partials/project/year.html" $project.Params.year }}
+              {{ end }}
+
+              {{ if $options.categories }}
+                {{ partial "projects/partials/project/categories.html" . }}
+              {{ end }}
+            </div>
+          {{ end }}
         {{ end }}
 
-        {{ if $options.categories }}
-          {{ partial "commons/categories" ( dict
-            "context" .
-            "kind" "project"
-          )}}
+        {{ if $options.summary }}
+          {{ partial "projects/partials/project/summary.html" . }}
+        {{ end }}
+
+        {{ if not $group_meta }}
+          {{ if $options.categories }}
+            {{ partial "projects/partials/project/categories.html" . }}
+          {{ end }}
+        {{ end }}
+
+        {{ if $with_more }}
+          {{ partial "commons/item/more.html" . }}
         {{ end }}
       </div>
-      {{ if and $options.year .Params.year }}
-        <div class="project-meta">
-          <time itemprop="datePublished" datetime="{{ .Params.year }}">{{ .Params.year }}</time>
-        </div>
+
+      {{ if not $group_meta }}
+        {{ if and $project.Params.year $options.year }}
+          <div class="project-meta">
+            {{ partial "projects/partials/project/year.html" $project.Params.year }}
+          </div>
+        {{ end }}
       {{ end }}
     </div>
 
-    <div class="media">
-      {{- if .Params.image -}}
-        {{ $sizes := index site.Params.image_sizes.blocks.projects $layout }}
-        {{- partial "commons/image.html"
-            (dict
-              "image"    .Params.image
-              "sizes"    $sizes
-            ) -}}
-      {{- else -}}
-        {{- partial "commons/image-default.html" "projects" -}}
-      {{- end -}}
-    </div>
-
+    {{ if $options.image }}
+      {{ partial "projects/partials/project/media.html" (dict 
+          "image" $project.Params.image 
+          "layout" $layout
+        ) }}
+    {{ end }}
   </article>
 {{ end }}

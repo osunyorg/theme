@@ -1,70 +1,13 @@
 {{ $heading_level := .heading_level | default 3 }}
-{{ $heading := printf "h%d" $heading_level }}
 {{ $options := .options | default site.Params.projects.index.options }}
 
-<div class="large">
-  {{ range $project := .projects -}}
-    {{ with site.GetPage .path }}
-
-        {{ $heading_tag := (dict 
-            "open" ((printf "<%s class='project-title' itemprop='name'>" $heading) | safeHTML)
-            "close" ((printf "</%s>" $heading) | safeHTML)
-        ) }}
-
-        <article class="project" itemscope itemtype="https://schema.org/CreativeWork">
-          <div class="project-content">
-            <div class="project-description">
-              {{- $title := partial "PrepareHTML" .Title -}}
-              {{ if and $options.subtitle .Params.subtitle }}
-                <hgroup>
-              {{ end }}
-              {{ $heading_tag.open }}
-                <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-              {{ $heading_tag.close }}
-              {{ if and $options.subtitle .Params.subtitle }}
-                <p class="project-subtitle h3">{{ partial "PrepareHTML" .Params.subtitle }}</p>
-              {{ end }}
-              {{ if and $options.subtitle .Params.subtitle }}
-                </hgroup>
-              {{ end }}
-              
-              {{ if and $options.summary  .Params.summary }}
-                <div itemprop="abstract">
-                  {{ partial "GetRichSummary" ( dict 
-                    "summary" .Params.summary
-                    "kind" "projects"
-                  )}}
-                </div>
-              {{ end }}
-              <div class="project-meta">
-                {{ if and $options.year .Params.year }}
-                  <time itemprop="datePublished" datetime="{{ .Params.year }}">{{ .Params.year }}</time>
-                {{ end }}
-
-                {{ if $options.categories }}
-                  {{ partial "commons/categories" ( dict
-                    "context" .
-                    "kind" "project"
-                  )}}
-                {{ end }}
-              </div>
-              <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
-            </div>
-          </div>
-      
-          <div class="media">
-            {{- if .Params.image -}}
-              {{- partial "commons/image.html"
-                  (dict
-                    "image"    .Params.image
-                    "sizes"    site.Params.image_sizes.blocks.projects.large
-                  ) -}}
-            {{- else -}}
-              {{- partial "commons/image-default.html" "projects" -}}
-            {{- end -}}
-          </div>
-      
-      </article>
-    {{ end }}
+<div class="large projects--large">
+  {{ range .projects -}}
+    {{ partial "projects/partials/layouts/large/large-item.html" (dict
+        "heading_level" $heading_level
+        "options" $options
+        "layout" "large"
+        "project" .
+      ) }}
   {{ end }}
 </div>
