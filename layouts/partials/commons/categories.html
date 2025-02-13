@@ -1,5 +1,5 @@
 {{ $kind := .kind | singularize }}
-{{ $class := .class }}
+{{ $class := .class | default ( printf "%s-categories" $kind ) }}
 {{ $categories := .categories }}
 
 {{ if not $categories }}
@@ -8,7 +8,7 @@
 {{ end }}
 
 {{- if $categories -}}
-  <ul class="{{ $kind }}-categories {{ $class }}" aria-label="{{ i18n "categories.label" }}">
+  <ul class="{{ $class }}" aria-label="{{ i18n "categories.label" }}">
     {{- range $categories -}}
       <li class="{{ .Params.bodyclass }}">
         <a href="{{ .Permalink }}">
