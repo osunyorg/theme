@@ -1,49 +1,65 @@
-{{ $project := .project }}
-{{ $title := partial "PrepareHTML" $project.Title }}
-{{ $options := .options | default site.Params.projects.index.options }}
+{{ $options := .options }}
 {{ $heading_level := .heading_level }}
 {{ $layout := .layout }}
+{{ $project := site.GetPage .project.path }}
+{{ $group_meta := .group_meta }}
+{{ $with_more := .with_more }}
 
-<article class="project {{ .Params.bodyclass }}" itemscope itemtype="https://schema.org/CreativeWork">
-  <div class="project-content">
-    <div class="project-description">
+{{ with $project }}
+  <article class="project {{ .Params.bodyclass }}" itemscope itemtype="https://schema.org/CreativeWork">
+    <div class="project-content">
+      <div class="project-description">
 
-      {{ partial "projects/partials/project/heading.html" (dict
-          "item" $project
-          "level" $heading_level
-          "options" $options
-        ) }}
+        {{ partial "projects/partials/project/heading.html" (dict
+            "item" $project
+            "level" $heading_level
+            "options" $options
+          ) }}
 
-      {{ if or $options.year $options.categories }}
-        <div class="project-meta">
-          {{ if and $options.year }}
-            {{ with $project.Params.year }}
-              {{ partial "projects/partials/project/year.html" . }}
-            {{ end }}
+
+        {{ if $group_meta }}
+          {{ if or $options.year $options.categories }}
+            <div class="project-meta">
+              {{ if and $project.Params.year $options.year }}
+                {{ partial "projects/partials/project/year.html" $project.Params.year }}
+              {{ end }}
+
+              {{ if $options.categories }}
+                {{ partial "projects/partials/project/categories.html" . }}
+              {{ end }}
+            </div>
           {{ end }}
+        {{ end }}
 
+        {{ if $options.summary }}
+          {{ partial "projects/partials/project/summary.html" . }}
+        {{ end }}
+
+        {{ if not $group_meta }}
           {{ if $options.categories }}
             {{ partial "projects/partials/project/categories.html" . }}
           {{ end }}
-        </div>
-      {{ end }}
+        {{ end }}
 
-      {{ if and $options.summary }}
-        {{ with $project.Params.summary }}
-          {{ partial "projects/partials/project/summary.html" (dict "summary" . ) }}
-        {{ end }} 
-      {{ end }}
+        {{ if $with_more }}
+          {{ partial "commons/item/more.html" . }}
+        {{ end }}
+      </div>
 
-      {{ if $options.more }}
-        {{ partial "commons/item/more.html" . }}
+      {{ if not $group_meta }}
+        {{ if and $project.Params.year $options.year }}
+          <div class="project-meta">
+            {{ partial "projects/partials/project/year.html" $project.Params.year }}
+          </div>
+        {{ end }}
       {{ end }}
     </div>
-  </div>
 
-  {{ if $options.image }}
-    {{ partial "projects/partials/project/media.html" (dict 
-      "image" $project.Params.image 
-      "layout" $layout
-      ) }}
-  {{ end }}
-</article>
+    {{ if $options.image }}
+      {{ partial "projects/partials/project/media.html" (dict 
+          "image" $project.Params.image 
+          "layout" $layout
+        ) }}
+    {{ end }}
+  </article>
+{{ end }}

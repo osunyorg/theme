@@ -1,15 +1,15 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $options := .options | default site.Params.projects.index.options }}
 
-<div class="projects projects--list">
-  {{ range $project := .projects -}}
-    {{ with site.GetPage .path }}
+<ul class="list projects--list">
+  {{ range .projects -}}
+    <li>
       {{ partial "projects/partials/layouts/list/list-item.html" (dict
           "heading_level" $heading_level
           "options" $options
           "layout" "list"
           "project" .
         ) }}
-    {{ end }}
+    </li>
   {{ end }}
-</div>
+</ul>

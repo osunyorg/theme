@@ -1,1 +1,4 @@
-{{ partial "projects/partials/project.html" . }}
+{{ $layout_params := dict "group_meta" true }}
+{{ $context := merge . $layout_params }}
+
+{{ partial "projects/partials/project.html" $context }}
