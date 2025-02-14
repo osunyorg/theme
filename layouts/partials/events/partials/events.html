@@ -43,13 +43,13 @@
       <h2 class="events-date-title">{{ .Key }}</h2>
 
       {{ range .Pages }}
-        {{ partial "events/event.html" (dict
+        {{ partial "events/partials/event.html" (dict
             "event" .
             "layout" $layout
             "options" site.Params.events.index.options
           )}}
 
-        {{ partial "events/event-children.html" (dict 
+        {{ partial "events/partials/event-children.html" (dict 
             "event" .
             "layout" $layout
             "options" site.Params.events.index.options
