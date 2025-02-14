@@ -1,0 +1,20 @@
+{{ partial "exhibitions/section/hero.html" . }}
+<div class="document-content">
+  {{ partial "exhibitions/section/summary.html" (dict
+      "with_container" true
+      "context" .
+    ) }}
+
+  {{ partial "contents/list.html" . }}
+
+  <div class="container">
+    {{ partial "taxonomies/section-list.html" . }}
+    {{ if site.Params.exhibitions.index.highlight_expositions }}
+      {{ partial "exhibitions/exhibitions.html" . }}
+    {{ end }}
+
+    {{ partial "exhibitions/partials/exhibitions.html" . }}
+    {{ partial "exhibitions/partials/archive-link.html" . }}
+    {{ partial "commons/pagination.html" . }}
+  </div>
+</div>
