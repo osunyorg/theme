@@ -24,7 +24,9 @@
                         "sizes"    site.Params.image_sizes.blocks.key_figures
                       )}}
                   {{ end }}
-                  <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
+                  {{ if .number }}
+                    <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
+                  {{ end }}
                 </span>
                 {{ partial "PrepareHTML" .description }}
               </li>
