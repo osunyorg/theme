@@ -1,0 +1,7 @@
+{{ $sizes := partial "GetImageSize" ( dict "layout" $layout "type" "category" ) }}
+
+{{ partial "commons/item/media.html" (dict
+    "image" .image
+    "type" "category"
+    "sizes" $sizes
+  ) }}

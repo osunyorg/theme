@@ -1,0 +1,8 @@
+{{ $osuny := . }}
+{{ $layout := site.Params.categories.index.layout }}
+{{ if $osuny.block }}
+  {{ $layout = $osuny.block.layout }}
+{{ end }}
+{{ $osuny = merge $osuny (dict "layout" $layout) }}
+{{ $layout_partial := printf "categories/layout/%s.html" $layout }}
+{{ partial $layout_partial $osuny }}

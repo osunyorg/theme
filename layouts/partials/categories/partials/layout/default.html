@@ -1,0 +1,19 @@
+{{ $osuny := . }}
+
+{{ $categories := .categories }}
+{{ $heading_level := .heading_level }}
+{{ $options := .options }}
+{{ $item := printf "categories/partials/item/category-in-%s.html" .category }}
+
+<ul class="categories categories--{{ .layout }}">
+  {{ range $categories }}
+    <li>
+      {{ partial $item (dict
+          "category" $category
+          "heading_level" $heading_level
+          "options" $options
+          "layout" .layout
+        ) }}
+    </li>
+  {{ end }}
+</ul>

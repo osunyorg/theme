@@ -1,17 +1,6 @@
 {{ $image := .image }}
-{{ $type := .type | default "page" }}
-{{ $layout := .layout | default "item" }}
-
-{{ $sizes := site.Params.image_sizes.sections.pages.item }}
-{{ with index site.Params.image_sizes.sections $type }}
-  {{ with index . $layout }}
-    {{ $sizes = . }}
-  {{ end }}
-{{ end }}
-
-{{ if .sizes }}
-  {{ $sizes = .sizes }}
-{{ end }}
+{{ $sizes := .sizes }}
+{{ $image_default := .image_default }}
 
 <div class="media">
   {{- if $image -}}
@@ -20,6 +9,6 @@
         "sizes" $sizes
       ) -}}
   {{- else -}}
-    {{- partial "commons/image-default.html" $type -}}
+    {{- partial "commons/image-default.html" .image_default -}}
   {{- end -}}
 </div>

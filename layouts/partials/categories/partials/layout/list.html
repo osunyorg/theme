@@ -1,16 +1,1 @@
-{{ $categories := .categories }}
-{{ $heading_level := .heading_level }}
-{{ $options := .options }}
-
-<ul class="categories categories--list">
-  {{ range $categories }}
-    <li>
-      {{ partial "categories/partials/layouts/list/list-item.html" (dict
-          "category" .
-          "heading_level" $heading_level
-          "options" $options
-          "layout" "list"
-        ) }}
-    </li>
-  {{ end }}
-</ul>
+{{ partial 'categories/partials/layout/default.html' . }}

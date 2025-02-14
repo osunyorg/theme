@@ -1,16 +1,1 @@
-{{ $categories := .categories }}
-{{ $heading_level := .heading_level }}
-{{ $options := .options }}
-
-<ul class="categories categories--large">
-  {{ range $categories }}
-    <li>
-      {{ partial "categories/partials/layouts/large/large-item.html" (dict
-          "category" .
-          "heading_level" $heading_level
-          "options" $options
-          "layout" "large"
-        ) }}
-    </li>
-  {{ end }}
-</ul>
+{{ partial 'categories/partials/layout/default.html' . }}

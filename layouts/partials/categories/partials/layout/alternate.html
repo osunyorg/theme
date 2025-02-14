@@ -2,6 +2,11 @@
 {{ $heading_level := .heading_level }}
 {{ $options := .options }}
 
+{{ $categories := partial "GetPathSliceFromObjects" .Paginator.Pages }}
+{{ if eq .Kind "term" }}
+  {{ $categories = .Params.children }}
+{{ end }}
+
 <ul class="categories categories--alternate">
   {{ range $categories }}
     {{ $li_class := "without-image" }}
@@ -13,11 +18,10 @@
     {{ end }}
 
     <li class="{{ $li_class }}">
-      {{ partial "categories/partials/layouts/alternate/alternate-item.html" (dict
-          "category" .
+      {{ partial "categories/partials/item/category-in-alternate.html" (dict
+          "category" $category
           "heading_level" $heading_level
           "options" $options
-          "layout" "alternate"
         ) }}
     </li>
   {{ end }}

@@ -1,28 +1,51 @@
 {{ $options := .options | default site.Params.categories.index.options }}
 {{ $heading_level := .heading_level }}
-{{ $category := site.GetPage .category.path }}
+{{ $category := .category }}
 {{ $layout := .layout }}
 
 {{ with $category }}
   <article class="category-item">
     <div class="category-content">
-      {{ partial "categories/partials/category/heading.html" (dict
-          "item" .
+      {{ partial "categories/partials/fragments/heading.html" (dict
+          "category" .
           "level" $heading_level
         ) }}
 
-      {{ partial "categories/partials/category/summary.html" . }}
+      {{ if $options.summary }}
+        {{ partial "categories/partials/fragments/summary.html" . }}
+      {{ end }}
 
-      {{ partial "categories/partials/category/articles-count.html" . }}
+      {{ if $options.count }}
+        {{ partial "categories/partials/fragments/articles-count.html" . }}
+      {{ end }}
 
       {{ if $options.more }}
-        {{ partial "commons/item/more.html" . }}
+        {{ partial "categories/partials/fragments/more.html" . }}
       {{ end }}
     </div>
 
-    {{ partial "categories/partials/category/media.html" (dict 
+    {{ $image_default := partial "GetDefaultImage" ( dict "layout" $layout "type" "category" ) }}
+    {{ $sizes := partial "GetImageSize" ( dict "layout" $layout "type" "category" ) }}
+    {{ partial "categories/partials/fragments/media.html" (dict 
         "image" .Params.image
-        "layout" $layout
+        "sizes" $sizes
+        "image_default" $image_default
       ) }}
+  </article>
+{{ end }}
+
+{{ $context := . }}
+
+{{ with $category }}
+  {{ $context := merge $context (dict "category" .) }}
+
+  <article class="category-item">
+    <div class="category-content">
+      {{ partial "categories/partials/fragments/heading.html" $context }}
+      {{ partial "categories/partials/fragments/summary.html" $context }}
+      {{ partial "categories/partials/fragments/articles-count.html" $context }}
+      {{ partial "categories/partials/fragments/more.html" $context }}
+    </div>
+    {{ partial "categories/partials/fragments/media.html" $context }}
   </article>
 {{ end }}
