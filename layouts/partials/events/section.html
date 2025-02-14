@@ -9,6 +9,10 @@
 
   <div class="container">
     {{ partial "taxonomies/section-list.html" . }}
+    {{ if site.Params.events.index.highlight_expositions }}
+      {{ partial "exhibitions/exhibitions.html" . }}
+    {{ end }}
+
     {{ partial "events/partials/events.html" . }}
     {{ partial "events/partials/archive-link.html" . }}
     {{ partial "commons/pagination.html" . }}
