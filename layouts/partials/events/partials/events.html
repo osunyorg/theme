@@ -1,15 +1,42 @@
 {{ $layout := site.Params.events.index.layout }}
+{{ $collection := where .Pages "Params.parent" "eq" nil }}
+{{ $is_archive := ne .File.Path "events/_index.html" }}
+{{ $order := "asc" }}
 
-<div class="events events--{{-  $layout -}}">
-  {{ if not .Paginator.Pages }}
-    {{ $is_term := eq .Kind "term" }}
-    <p>{{ i18n (cond $is_term "categories.no_event" "events.none") }}</p>
-  {{ end }}
-  {{ range .Paginator.Pages }}
-    {{ partial "events/partials/event.html" (dict
-        "event" .
-        "layout" $layout
-        "options" site.Params.events.index.options
-      )}}
-  {{ end }}
-</div>
+{{ if $is_archive }}
+  {{ $order = "desc" }}
+{{ else }}
+  {{ $collection = where $collection "Params.dates.archive" false }}
+{{ end }}
+
+{{ if site.Params.events.index.highlight_expositions }}
+  {{ $collection = where $collection "Params.event_kind" "ne" "exposition" }}
+{{ end }}
+
+{{ $groups := $collection.GroupByDate site.Params.events.index.group_by_date $order }}
+{{ $paginator := .Paginate $groups site.Params.events.index.per_page }}
+
+{{ if not .Pages }}
+  <p>{{ i18n "events.none" }}</p>
+{{ else }}
+  <div class="events events--{{-  $layout -}}">
+    {{ range $paginator.PageGroups }}
+
+      <h2 class="events-date-title">{{ .Key }}</h2>
+
+      {{ range .Pages }}
+        {{ partial "events/partials/event.html" (dict
+            "event" .
+            "layout" $layout
+            "options" site.Params.events.index.options
+          )}}
+
+        {{ partial "events/partials/children.html" (dict 
+            "event" .
+            "layout" $layout
+            "options" site.Params.events.index.options
+          )}}
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}

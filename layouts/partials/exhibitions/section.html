@@ -1,6 +1,6 @@
-{{ partial "events/section/hero.html" . }}
+{{ partial "exhibitions/section/hero.html" . }}
 <div class="document-content">
-  {{ partial "events/section/summary.html" (dict
+  {{ partial "exhibitions/section/summary.html" (dict
       "with_container" true
       "context" .
     ) }}
@@ -9,12 +9,12 @@
 
   <div class="container">
     {{ partial "taxonomies/section-list.html" . }}
-    {{ if site.Params.events.index.highlight_expositions }}
+    {{ if site.Params.exhibitions.index.highlight_expositions }}
       {{ partial "exhibitions/exhibitions.html" . }}
     {{ end }}
 
-    {{ partial "events/partials/events.html" . }}
-    {{ partial "events/partials/archive-link.html" . }}
+    {{ partial "exhibitions/partials/exhibitions.html" . }}
+    {{ partial "exhibitions/partials/archive-link.html" . }}
     {{ partial "commons/pagination.html" . }}
   </div>
 </div>

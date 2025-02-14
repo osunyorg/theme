@@ -11,7 +11,18 @@
 {{ $options := .options }}
 
 {{ with $event }}
-  <article class="event {{ if .Params.image }}event--with-image{{ end -}}" itemscope itemtype="https://schema.org/Event">
+  {{ $class := "event" }}
+  {{ if .Params.image }}
+    {{ $class = printf "%s event--with-image" $class }}
+  {{ end -}}
+  {{ if .Params.children }}
+    {{ $class = printf "%s event--parent" $class }}
+  {{ end -}}
+  {{ if .Params.parent }}
+    {{ $class = printf "%s event--child" $class }}
+  {{ end -}}
+
+  <article class="{{ $class }}" itemscope itemtype="https://schema.org/Event">
     <div class="event-content">
       {{- $title := partial "PrepareHTML" .Title -}}
       {{ if and $options.subtitle .Params.subtitle }}

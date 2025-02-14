@@ -1,0 +1,63 @@
+{{ $unique_day := eq .Params.dates.from.day .Params.dates.to.day }}
+<ul class="event-infos">
+  {{ with .Params.dates }}
+    {{ if .computed }}
+      <li class="event-date" itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
+        <span>{{ i18n "events.date" }}</span>
+        {{ partial "PrepareHTML" .computed.two_lines.long }}
+      </li>
+    {{ end }}
+    {{ if .from.hour }}
+      <li>
+        <span>{{ i18n "events.hour" }}</span>
+        {{ with .from.hour }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+        {{ with .to.hour }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+      </li>
+    {{ end }}
+  {{ end }}
+
+  {{ if .Params.events_categories }}
+    <li>
+      {{ partial "taxonomies/single-list.html" . }}
+    </li>
+  {{ end }}
+  {{ if site.Params.events.share_links.enabled | default site.Params.share_links.enabled }}
+    <li>
+      <span>{{ i18n "commons.share_on" }}</span>
+      {{ partial "commons/share/links.html" . }}
+    </li>
+  {{ end }}
+
+  {{ if not .Params.dates.archive }}
+    {{ with .Params.dates.add_to_calendar }}
+      {{ $links := . }}
+      <li class="events-actions">
+        <span>{{ i18n "events.add_to_calendar.title" }}</span>
+        {{- $types := slice "ical" "google" "office" "outlook" "yahoo" -}}
+        <ul>
+          {{- range $type := $types -}}
+            {{ $label := i18n (printf "events.add_to_calendar.%s" $type) }}
+            {{ with index $links $type }}
+              <li>
+                <a class="chip"
+                  {{ if eq $type "ical" -}}
+                    {{ printf `href="%s"` . | safeHTMLAttr }} download
+                  {{ else }}
+                    href="{{ . }}"
+                    target="_blank"
+                  {{ end }} >
+                  {{- $label -}}
+                </a>
+              </li>
+            {{- end }}
+          {{- end }}
+        </ul>
+    </li>
+    {{- end }}
+  {{- end }}
+
+</ul>
