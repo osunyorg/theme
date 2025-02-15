@@ -20,15 +20,21 @@
         img
             width: 100%
     &-testimonials
-        blockquote
-            margin: 0
-            p
-                font-style: italic
-                font-size: 20pt
-                line-height: 120%
+        .block-testimonials__testimonial
+            margin-left: 30mm
+            blockquote
+                margin: 0 !important
+                p
+                    font-style: italic
+                    font-size: 20pt
+                    line-height: 120%
+                    margin: 0
         figcaption
+            margin-top: 5mm
             display: flex
             align-items: center
+            p
+                line-height: 120%
             .avatar
                 margin-right: 5mm
                 img
@@ -41,3 +47,20 @@
                 font-size: 10pt
     &-title
         margin-top: 10mm
+    &-video
+        .block-video
+            &__video
+                display: flex
+            &__poster
+                aspect-ratio: 16/9
+                object-fit: cover
+                width: 100%
+                margin-right: 15px
+            &__qr
+                margin-left: -10px
+                margin-right: -10px
+                margin-top: -10px
+                max-height: 30mm
+                max-width: 30mm
+                object-fit: contain
+                object-position: top
