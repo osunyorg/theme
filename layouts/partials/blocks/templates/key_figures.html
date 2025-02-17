@@ -15,7 +15,7 @@
           {{ end }}
           <ul class="{{ $list_class }}">
             {{- range .figures }}
-              <li>
+              <li {{- if .image }} class="with-image" {{- end -}}>
                 <span>
                   {{ with .image }}
                     {{ partial "commons/image.html"
