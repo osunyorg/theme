@@ -1,6 +1,15 @@
 {{ $title := i18n (printf "categories.type.%s" .Type) }}
+{{/*  Check if page is osuny taxonomy  */}}
+{{ if .Params.is_taxonomy }}
+  {{ with or .Params.header_text .Title  }}
+    {{- $title = . -}}
+  {{ end }}
+{{ end }}
+
 {{- partial "header/hero.html"
     (dict
       "title" $title
+      "image" .Params.image
+      "sizes" site.Params.image_sizes.sections.categories.hero_term
       "context" .
     ) -}}
