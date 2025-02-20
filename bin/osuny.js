@@ -56,7 +56,7 @@ if (command === "watch") {
 
 if (command === "dev") {
     execute("hugo");
-    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --exclude-selectors '" + pagefindExclude + "'");
+    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
     execute("hugo server");
 }
 
