@@ -1,0 +1,28 @@
+{{ $layout := .layout }}
+{{ $options := .options }}
+{{ $agenda := .agenda }}
+{{ $sub_event := .sub_event }}
+
+<div class="agenda">
+  <div class="events events--{{-  $layout -}}">
+    {{ range $agenda }}
+
+      <h2 class="events-date-title">{{ .Key }}</h2>
+
+      {{ range .Pages }}
+        {{ partial "events/partials/event.html" (dict
+            "event" .
+            "layout" $layout
+            "options" site.Params.events.index.options
+            "sub_event" $sub_event
+          )}}
+
+        {{ partial "events/partials/children.html" (dict
+            "children" .Params.children_for_the_day
+            "layout" $layout
+            "options" site.Params.events.index.options
+          )}}
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
