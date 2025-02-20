@@ -28,8 +28,6 @@
             &.hero--image-landscape
                 .hero-text
                     width: columns(12)
-                    .dropdown-share
-                        margin-top: 0
             .content
                 flex-wrap: wrap
             .hero-text
@@ -45,6 +43,11 @@
                 &.image-portrait,
                 &.image-square
                     width: columns(6)
+            .dropdown-share
+                margin-top: 0
+        &:not(.hero--with-image)
+            .hero-text
+                width: columns(12)
     .lead
         @include h3
         // Safe spacing if post is empty
