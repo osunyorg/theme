@@ -8,9 +8,6 @@
         aria-controls="{{- $id -}}" 
         aria-expanded="false" 
         {{ with .described_by -}}aria-describedby="{{ . }}"{{- end }}>
-        {{ with .complementary_info}}
-          <span>{{ . }}</span>
-        {{ end }}
         {{ $title }}
       </summary>
       {{- $transcription := partial "PrepareHTML" .transcription -}}
