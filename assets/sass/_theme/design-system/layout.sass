@@ -66,6 +66,12 @@ ol
     @include in-page-with-sidebar
         .heading h2, .block .block-content
             padding-left: offset(4)
+            @include media-breakpoint-up(xxl) // TODO: this is for testing, need to be removed
+                padding-left: offset(8)
+
+\:root // TODO: this is for testing, need to be removed
+    @include media-breakpoint-up(xxl)
+        --columns-count: 16
 
 details
     &:not([open]):hover

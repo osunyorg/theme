@@ -150,7 +150,8 @@
 
   // Largeur d'une colonne
   // On soustrait à la largeur de la grille les 13 gouttières (les 2 extérieures et les 11 intérieures), puis on divise par 12
-  --column-width: calc( (var(--grid-width) - var(--grid-gutter) * 13) / 12)
+  --columns-count: 12
+  --column-width: calc( (var(--grid-width) - var(--grid-gutter) * calc(var(--columns-count) + 1)) / var(--columns-count))
 
   // Taille de la gouttière
   // Les largeurs des gouttières en fonction des breakpoints sont définies dans _configuration.sass
