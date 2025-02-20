@@ -1,13 +1,20 @@
 {{- $title := or .Params.header_text .Title -}}
+{{ $sizes := "" }}
 
 {{ with .Params.subtitle }}
   {{- $title = printf "%s <span>%s</span>" $title . -}}
 {{ end }}
 
+{{ $image := .Params.image }}
+{{ with $image }}
+  {{ $image_format := partial "GetImageDirection" . }}
+  {{ $sizes = index site.Params.image_sizes.sections.events.hero_single $image_format }}
+{{ end }}
 {{- partial "header/hero.html"
   (dict
     "title" $title
-    "image" .Params.image
-    "sizes" site.Params.image_sizes.sections.events.hero_single
+    "image" $image
+    "sizes" $sizes
     "context" .
+    "hero_text_complement" "commons/share/dropdown.html"
   ) -}}
