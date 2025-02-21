@@ -1,7 +1,8 @@
 {{ $layout := .layout }}
 {{ $options := .options }}
+{{ $children := .children }}
 
-{{ range .event.Params.children_for_the_day }}
+{{ range $children }}
   {{ $child := site.GetPage .path }}
   {{ with $child }}
     {{ partial "events/partials/event.html" (dict

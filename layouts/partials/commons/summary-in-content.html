@@ -1,5 +1,11 @@
 {{ $summary := .summary | default (.context.Params.summary | safeHTML) }}
-{{- if and (eq site.Params.summary.position "content") $summary -}}
+{{ $summary_position := partial "GetSiteParamWithDefault" (dict 
+  "param" "summary.position"
+  "type" .context.Type
+  "kind" .context.Kind
+) }}
+
+{{- if and (eq $summary_position "content") $summary -}}
   {{- if .block_wrapped -}}
   <div class="block block-summary">
     <div class="container">

@@ -13,30 +13,18 @@
   {{ $collection = where $collection "Params.event_kind" "ne" "exposition" }}
 {{ end }}
 
-{{ $groups := $collection.GroupByDate site.Params.events.index.group_by_date $order }}
-{{ $paginator := .Paginate $groups site.Params.events.index.per_page }}
+{{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}
+
+{{ $paginator := .Paginate $agenda site.Params.events.index.per_page }}
 
 {{ if not .Pages }}
   <p>{{ i18n "events.none" }}</p>
 {{ else }}
   <div class="events events--{{-  $layout -}}">
-    {{ range $paginator.PageGroups }}
-
-      <h2 class="events-date-title">{{ .Key }}</h2>
-
-      {{ range .Pages }}
-        {{ partial "events/partials/event.html" (dict
-            "event" .
-            "layout" $layout
-            "options" site.Params.events.index.options
-          )}}
-
-        {{ partial "events/partials/children.html" (dict 
-            "event" .
-            "layout" $layout
-            "options" site.Params.events.index.options
-          )}}
-      {{ end }}
-    {{ end }}
+    {{ partial "events/partials/agenda.html" (dict
+      "layout" site.Params.events.index.layout
+      "options" site.Params.events.index.options
+      "agenda" $paginator.PageGroups
+    ) }}
   </div>
 {{ end }}

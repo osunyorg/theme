@@ -1,6 +1,7 @@
 {{ $event := .event }}
 {{ $layout := .layout | default "list" }}
 {{ $heading_level := .heading_level | default 3 }}
+{{ $sub_event := .sub_event }}
 
 {{ $heading_tag := (dict 
     "open" ((printf "<h%d itemprop='name' class='event-title'>" $heading_level) | safeHTML)
@@ -22,7 +23,9 @@
     {{ $class = printf "%s event--child" $class }}
   {{ end -}}
 
-  <article class="{{ $class }}" itemscope itemtype="https://schema.org/Event">
+  <article class="{{ $class }}" 
+      {{ with $sub_event}} itemprop="{{ . }}" {{ end }}
+      itemscope itemtype="https://schema.org/Event">
     <div class="event-content">
       {{- $title := partial "PrepareHTML" .Title -}}
       {{ if and $options.subtitle .Params.subtitle }}
