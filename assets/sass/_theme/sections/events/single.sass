@@ -46,16 +46,17 @@
                 &.image-portrait,
                 &.image-square
                     width: columns(6)
-                figcaption
-                    .credit,
-                    &::before
-                        background-color: transparent
-    .lead
         @include h3
     &:not(.full-width)
         .event-sidebar
             @include sidebar
     .event-access
+        div:first-child
+            border-top: 1px solid var(--color-border)
+            padding-top: $spacing-4
+        div:last-child
+            border-bottom: 1px solid var(--color-border)
+            padding-bottom: $spacing-4
         div + div
             margin-top: $spacing-4
         .event-practicals,
@@ -74,6 +75,48 @@
                     margin-top: $spacing-2
                 p
                     @include small
+            a
+                @extend .button-accent
+        .event-slots
+            ul
+                @include list-reset
+                + .btn
+                    --btn-background: var(--color-background-alt)
+                    --btn-border: none
+                    --btn-hover-border: none
+                    --btn-hover-background: var(--color-border)
+                    margin-top: $spacing-3
+            li
+                align-items: baseline
+                display: flex
+                gap: var(--grid-gutter)
+                .event-date
+                    width: columns(4)
+                .event-link,
+                time
+                    width: columns(2)
+                .event-link
+                    @include meta
+                    text-decoration: none
+                .event-link
+                    @include icon(arrow-right-line, after)
+                        margin-left: space(2)
+                    margin-left: auto
+                .event-location
+                    flex: 1
+                .event-type
+                    @include h4
+                    @include icon(arrow-right-line, after)
+                        margin-left: space(2)
+                + li
+                    margin-top: $spacing-1
+                &:not(:first-child)
+                    .event-link
+                        text-align: right
+                        span
+                            @extend .sr-only
+            .event-duration
+                margin-bottom: $spacing-3
 
     @include media-breakpoint-up(desktop)
         // Safe spacing if post is empty

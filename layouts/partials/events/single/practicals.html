@@ -4,10 +4,16 @@
 
   <h2>{{ i18n (printf "events.access.partical_informations") }}</h2>
   <div>
-    <meta itemprop="priceCurrency" content="DEVISE ICI">
-    <span class="event-price" itemprop="price" content="PRIX">tarif</span>
+    <p>8 euros</p>
     <p>Tarifs réduits pour les groupes du champ social</p>
     <p>Contacter berenice.sellier@gaite-lyrique.net</p>
   </div>
-  <a class="btn" itemprop="url" href="LIEN DE RÉSA">Réserver</a>
+  {{ with .Params.header_cta }}
+    {{ if and .display .target .label }}
+      {{ $title := .label }}
+      {{ $is_external := .external | default false }}
+      {{ $link_title := cond $is_external (safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title))) $title }}
+      <a href="{{ .target }}" title ="{{ $link_title }}" class="btn" {{ if $is_external -}} target="_blank" rel="noopener" {{- end }}>{{ .label }}</a>
+    {{ end }}
+  {{ end }}
 </div>
