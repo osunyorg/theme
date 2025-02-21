@@ -1,0 +1,14 @@
+{{ $exhibitions := where .Site.RegularPages "Section" "exhibitions" }}
+<div class="exhibitions">
+  <h2>Expositions</h2>
+  
+  <div class="events events--grid">
+    {{ range $exhibitions }}
+      {{ partial "events/partials/event.html" (dict
+          "event" .
+          "layout" "grid"
+          "options" site.Params.events.index.options
+        )}}
+    {{ end }}
+  </div>
+</div>

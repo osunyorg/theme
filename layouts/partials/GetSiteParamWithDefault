@@ -1,0 +1,14 @@
+{{ $param := index site.Params .type }}
+{{ $default_param := site.Params }}
+{{ $kind := cond (eq .kind "section") "section" "single" }}
+
+{{ with $kind }}
+  {{ $param = index $param . }}
+{{ end }}
+
+{{ range (split .param ".") }}
+  {{ $param = index $param . }}
+  {{ $default_param = index $default_param . }}
+{{ end }}
+
+{{ return ($param | default $default_param) }}

@@ -1,6 +1,8 @@
 {{ $event := .event }}
 {{ $layout := .layout | default "list" }}
 {{ $heading_level := .heading_level | default 3 }}
+{{ $is_sub_event := .is_sub_event }}
+{{ $with_more := .with_more }}
 
 {{ $heading_tag := (dict 
     "open" ((printf "<h%d itemprop='name' class='event-title'>" $heading_level) | safeHTML)
@@ -11,7 +13,20 @@
 {{ $options := .options }}
 
 {{ with $event }}
-  <article class="event {{ if .Params.image }}event--with-image{{ end -}}" itemscope itemtype="https://schema.org/Event">
+  {{ $class := "event" }}
+  {{ if .Params.image }}
+    {{ $class = printf "%s event--with-image" $class }}
+  {{ end -}}
+  {{ if .Params.children }}
+    {{ $class = printf "%s event--parent" $class }}
+  {{ end -}}
+  {{ if .Params.parent }}
+    {{ $class = printf "%s event--child" $class }}
+  {{ end -}}
+
+  <article class="{{ $class }}" 
+      {{ if $is_sub_event }} itemprop="subEvent" {{ end }}
+      itemscope itemtype="https://schema.org/Event">
     <div class="event-content">
       {{- $title := partial "PrepareHTML" .Title -}}
       {{ if and $options.subtitle .Params.subtitle }}
@@ -26,16 +41,19 @@
       {{ end }}
 
       {{ $dates := .Params.dates }}
-      {{ if $options.dates }}
+      {{ $hours := "20:00" }}
+      {{ if and $is_sub_event $hours }}
+        {{ partial "events/partials/event/hours.html" $hours }}
+      {{ else if $options.dates }}
         {{ partial "events/partials/event/schedule.html" (dict 
             "dates" $dates
-            "layout" $layout 
+            "layout" $layout
           )}}
       {{ end }}
 
       {{ if and $dates.status $options.status }}
         <p class="event-status">
-          {{ if eq $dates.status "current"}}
+          {{ if eq $dates.status "current" }}
             {{- i18n "blocks.events.current" -}}
           {{ else if eq $dates.status "future" }}
             {{- i18n "blocks.events.future" -}}
@@ -45,7 +63,7 @@
         </p>
       {{ end }}
 
-      {{ if and $options.summary  .Params.summary }}
+      {{ if and $options.summary .Params.summary }}
         <div class="event-description" itemprop="description">
           {{ partial "GetRichSummary" ( dict 
             "summary" .Params.summary
@@ -62,6 +80,10 @@
           "context" .
           "kind" "event"
         )}}
+      {{- end -}}
+
+      {{ if $with_more }}
+        {{ partial "commons/item/more.html" . }}
       {{- end -}}
     </div>
     <div class="media">
