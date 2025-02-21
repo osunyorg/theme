@@ -1,7 +1,7 @@
 {{ $event := .event }}
 {{ $layout := .layout | default "list" }}
 {{ $heading_level := .heading_level | default 3 }}
-{{ $sub_event := .sub_event }}
+{{ $is_sub_event := .is_sub_event }}
 
 {{ $heading_tag := (dict 
     "open" ((printf "<h%d itemprop='name' class='event-title'>" $heading_level) | safeHTML)
@@ -24,7 +24,7 @@
   {{ end -}}
 
   <article class="{{ $class }}" 
-      {{ with $sub_event}} itemprop="{{ . }}" {{ end }}
+      {{ if $is_sub_event }} itemprop="{{ . }}" {{ end }}
       itemscope itemtype="https://schema.org/Event">
     <div class="event-content">
       {{- $title := partial "PrepareHTML" .Title -}}
@@ -40,16 +40,19 @@
       {{ end }}
 
       {{ $dates := .Params.dates }}
-      {{ if $options.dates }}
+      {{ $hours := "20:00" }}
+      {{ if and $is_sub_event $hours }}
+        {{ partial "events/partials/event/hours.html" $hours }}
+      {{ else if $options.dates }}
         {{ partial "events/partials/event/schedule.html" (dict 
             "dates" $dates
-            "layout" $layout 
+            "layout" $layout
           )}}
       {{ end }}
 
       {{ if and $dates.status $options.status }}
         <p class="event-status">
-          {{ if eq $dates.status "current"}}
+          {{ if eq $dates.status "current" }}
             {{- i18n "blocks.events.current" -}}
           {{ else if eq $dates.status "future" }}
             {{- i18n "blocks.events.future" -}}
@@ -90,5 +93,23 @@
         {{- partial "commons/image-default.html" "events" -}}
       {{- end -}}
     </div>
+
+    {{ with .Params.children_for_the_day }}
+      <ul class="event-children">
+        {{ range . }}
+          {{ $child := site.GetPage .path }}
+          {{ with $child }}
+            <li>
+              {{ partial "events/partials/event.html" (dict
+                  "event" .
+                  "layout" $layout
+                  "options" site.Params.events.index.options
+                  "is_sub_event" true
+                )}}
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    {{ end }}
   </article>
 {{ end }}
