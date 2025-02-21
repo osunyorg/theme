@@ -1,0 +1,112 @@
+.events__page
+    .hero
+        .content
+            align-items: stretch
+            display: flex
+            @include media-breakpoint-down(desktop)
+                flex-direction: column
+        @include media-breakpoint-up(desktop)
+            figure
+                order: -1
+            &.hero--image-square,
+            &.hero--image-portrait
+                .hero-text
+                    flex-direction: column
+                    margin-top: 0
+                    width: columns(6)
+                    h1, hgroup
+                        flex: 1
+            &.hero--image-landscape
+                .hero-text
+                    width: columns(12)
+            &:not(.hero--with-image)
+                .hero-text
+                    align-items: flex-end
+                    width: columns(12)
+            .content
+                flex-wrap: wrap
+            .hero-text
+                display: flex
+                justify-content: space-between
+                h1, hgroup
+                    max-width: columns(8)
+                .hero-actions
+                    margin-left: auto
+                    margin-top: auto
+                    width: columns(3)
+                    @include media-breakpoint-up(xxl)
+                        width: columns(2)
+                    > *
+                        width: 100%
+                        &:first-child
+                            margin-top: 0
+            figure
+                &.image-landscape
+                    width: columns(12)
+                &.image-portrait,
+                &.image-square
+                    width: columns(6)
+                figcaption
+                    .credit,
+                    &::before
+                        background-color: transparent
+    .lead
+        @include h3
+    &:not(.full-width)
+        .event-sidebar
+            @include sidebar
+    @include media-breakpoint-up(desktop)
+        // Safe spacing if post is empty
+        .document-content
+            min-height: 600px
+            // Add after element to avoid "min-height" to ignore the last block's margin-bottom
+            &::after
+                content: ''
+                display: block
+                height: 1px
+
+.event-infos
+    @include list-reset
+    @include media-breakpoint-up(desktop)
+        font-size: $table-body-size-desktop
+        padding-bottom: $spacing-5
+    .event-date
+        text-transform: capitalize
+    ul
+        @include list-reset
+    > li, .taxonomies-single > li
+        padding-top: $spacing-2
+        &:not(:last-child)
+            padding-bottom: $spacing-2
+        > span
+            @include meta
+            color: var(--color-text-alt)
+            padding-left: 0
+            display: block
+            white-space: nowrap
+        time + time
+            @include icon(arrow-right-line)
+            &::before
+                padding-right: 0.3rem
+    .taxonomies-single
+        .taxonomy-children
+            @extend .event-categories
+        span + .taxonomy-children
+            margin-top: 0
+    .events-actions
+        ul
+            align-items: start
+            display: flex
+            flex-direction: column
+            gap: space(1)
+            padding-bottom: 0
+            margin-top: space(1)
+        a
+            display: block
+            &::after
+                display: none
+    .share
+        a
+            color: inherit
+        li:first-child a
+            padding-left: 0
