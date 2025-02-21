@@ -5,16 +5,16 @@
     <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
-  
+
     {{ partial "events/single/sidebar.html" . }}
-  
+
     {{ partial "events/single/summary.html" (dict
         "context" .
         "block_wrapped" true
       ) }}
-  
+
     {{ partial "contents/list.html" . }}
-  
+
     {{ if site.Params.events.single.navigation.active }}
       {{ partial "commons/siblings-navigation.html" (dict
         "context" .
