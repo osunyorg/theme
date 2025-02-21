@@ -7,7 +7,10 @@
   <div class="events events--{{-  $layout -}}">
     {{ range $agenda }}
 
-      <h2 class="events-date-title">{{ .Key }}</h2>
+      {{ if eq $layout "agenda" }}
+        <div class="events-date">
+          <h2 class="events-date-title">{{ .Key | strings.FirstUpper | safeHTML }}</h2>
+      {{ end }}
 
       {{ range .Pages }}
         {{ partial "events/partials/event.html" (dict
@@ -17,13 +20,22 @@
             "is_sub_event" $is_sub_event
           )}}
 
-        {{ partial "events/partials/children.html" (dict
-            "children" .Params.children_for_the_day
-            "layout" $layout
-            "options" site.Params.events.index.options
-            "is_sub_event" true
-          )}}
+        {{ range .Params.children_for_the_day }}
+          {{ with (site.GetPage .path) }}
+            {{ partial "events/partials/event.html" (dict
+                "event" .
+                "layout" $layout
+                "options" $options
+                "is_sub_event" true
+              )}}
+          {{ end }}
+        {{ end }}
       {{ end }}
+
+      {{ if eq $layout "agenda" }}
+        </div>
+      {{ end }}
+
     {{ end }}
   </div>
 </div>
