@@ -55,6 +55,26 @@
     &:not(.full-width)
         .event-sidebar
             @include sidebar
+    .event-access
+        div + div
+            margin-top: $spacing-4
+        .event-practicals,
+        .event-slots
+            h2
+                @include meta
+                color: var(--color-text-alt)
+                width: columns(4)
+        .event-practicals
+            align-items: flex-start
+            display: flex
+            gap: var(--grid-gutter)
+            > div
+                width: columns(6)
+                .event-price + p
+                    margin-top: $spacing-2
+                p
+                    @include small
+
     @include media-breakpoint-up(desktop)
         // Safe spacing if post is empty
         .document-content
