@@ -1,4 +1,5 @@
 {{- $title := or .Params.header_text .Title -}}
+{{ $share := site.Params.events.share_links.enabled | default site.Params.share_links.enabled }}
 {{ $sizes := "" }}
 
 {{ with .Params.subtitle }}
@@ -16,5 +17,5 @@
     "image" $image
     "sizes" $sizes
     "context" .
-    "hero_text_complement" "commons/share/dropdown.html"
+    "share" $share
   ) -}}

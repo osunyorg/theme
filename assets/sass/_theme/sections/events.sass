@@ -5,15 +5,9 @@
             display: flex
             @include media-breakpoint-down(desktop)
                 flex-direction: column
-        background-color: var(--color-background)
-        figure
-            order: -1
-        @include media-breakpoint-down(desktop)
-            &.hero--image-square
-                margin-bottom: 0
-            figure.image-square
-                margin-bottom: 0
         @include media-breakpoint-up(desktop)
+            figure
+                order: -1
             &.hero--image-square,
             &.hero--image-portrait
                 .hero-text
@@ -22,9 +16,6 @@
                     width: columns(6)
                     h1, hgroup
                         flex: 1
-                    .dropdown-share
-                        margin-top: auto
-                        margin-left: auto
             &.hero--image-landscape
                 .hero-text
                     width: columns(12)
@@ -39,16 +30,26 @@
                 justify-content: space-between
                 h1, hgroup
                     max-width: columns(8)
-                .dropdown-share
+                .hero-actions
+                    margin-left: auto
+                    margin-top: auto
                     width: columns(3)
+                    @include media-breakpoint-up(xxl)
+                        width: columns(2)
+                    > *
+                        width: 100%
+                        &:first-child
+                            margin-top: 0
             figure
                 &.image-landscape
                     width: columns(12)
                 &.image-portrait,
                 &.image-square
                     width: columns(6)
-            .dropdown-share
-                margin-top: 0
+                figcaption
+                    .credit,
+                    &::before
+                        background-color: transparent
     .lead
         @include h3
     &:not(.full-width)

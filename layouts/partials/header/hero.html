@@ -48,17 +48,24 @@
           <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .title }}</h1>
         {{ end }}
 
-        {{ with $button }}
-          {{ if and .display .target .label }}
-            {{ $title := .label }}
-            {{ $is_external := .external | default false }}
-            {{ $link_title := cond $is_external (safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title))) $title }}
-            <a href="{{ .target }}" title ="{{ $link_title }}" class="btn" {{ if $is_external -}} target="_blank" rel="noopener" {{- end }}>{{ .label }}</a>
-          {{ end }}
-        {{ end }}
-
         {{ if .hero_text_complement }}
           {{ partial .hero_text_complement .context }}
+        {{ end }}
+
+        {{ if or $button .share }}
+          <div class="hero-actions">
+            {{ with $button }}
+              {{ if and .display .target .label }}
+                {{ $title := .label }}
+                {{ $is_external := .external | default false }}
+                {{ $link_title := cond $is_external (safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title))) $title }}
+                <a href="{{ .target }}" title ="{{ $link_title }}" class="btn" {{ if $is_external -}} target="_blank" rel="noopener" {{- end }}>{{ .label }}</a>
+              {{ end }}
+            {{ end }}
+            {{ if .share }}
+              {{ partial "commons/share/dropdown.html" . }}
+            {{ end }}
+          </div>
         {{ end }}
       </div>
 
