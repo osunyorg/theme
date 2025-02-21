@@ -2,6 +2,7 @@
 {{ $layout := .layout | default "list" }}
 {{ $heading_level := .heading_level | default 3 }}
 {{ $is_sub_event := .is_sub_event }}
+{{ $with_more := .with_more }}
 
 {{ $heading_tag := (dict 
     "open" ((printf "<h%d itemprop='name' class='event-title'>" $heading_level) | safeHTML)
@@ -62,7 +63,7 @@
         </p>
       {{ end }}
 
-      {{ if and $options.summary  .Params.summary }}
+      {{ if and $options.summary .Params.summary }}
         <div class="event-description" itemprop="description">
           {{ partial "GetRichSummary" ( dict 
             "summary" .Params.summary
@@ -79,6 +80,10 @@
           "context" .
           "kind" "event"
         )}}
+      {{- end -}}
+
+      {{ if $with_more }}
+        {{ partial "commons/item/more.html" . }}
       {{- end -}}
     </div>
     <div class="media">

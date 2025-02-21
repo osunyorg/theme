@@ -169,17 +169,26 @@
                     margin-left: offset(4)
 
     &--agenda
+        .events-date
+            margin-top: $spacing-3
+            padding-top: $spacing-3
+            &:where(:not(:first-child))
+                border-top: 1px solid var(--color-border)
         .events-date-title
+            margin-bottom: var(--heading-margin-bottom)
+            &:not(:first-child)
+                margin-top: var(--heading-margin-top)
             span
                 @include meta
                 display: block
         .event
-            border-bottom: 1px solid var(--color-border)
             display: flex
             flex-direction: column
-            margin-bottom: $spacing-3
-            padding-bottom: $spacing-3
+            margin-top: $spacing-3
+            padding-top: $spacing-3
             position: relative
+            + .event
+                border-top: 1px solid var(--color-border)
             &-title
                 @include h3
             &-schedule
@@ -191,14 +200,17 @@
                 position: sticky
                 top: 0
                 max-width: columns(3)
-                margin-bottom: var(--heading-margin-bottom)
-                &:not(:first-child)
-                    margin-top: var(--heading-margin-top)
             .event
                 padding-left: offset(3)
                 flex-direction: row
                 gap: var(--grid-gutter)
                 &-content
-                    width: columns(4)
+                    width: columns(5)
                 .media
-                    width: columns(4)
+                    width: columns(3)
+                &--child
+                    padding-left: 0
+                    margin-left: offset(3)
+                    .media
+                        width: columns(2)
+                        margin-left: offset(1)
