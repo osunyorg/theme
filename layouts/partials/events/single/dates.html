@@ -17,5 +17,7 @@
     </li>
     {{ end }}
   </ul>
-  <button class="btn">{{ i18n (printf "events.more_dates") }}</button>
+  {{ if gt .Params.time_slots 1 }}
+    <button class="btn">{{ i18n (printf "events.more_dates") }}</button>
+  {{ end }}
 </div>

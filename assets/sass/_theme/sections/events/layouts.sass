@@ -214,7 +214,6 @@
                 background-color: $backdrop-color
                 + .event
                     margin-top: 0
-                    padding-top: 0
             .event
                 padding-left: offset(3)
                 flex-direction: row
@@ -225,11 +224,12 @@
                     width: columns(3)
                 &--child
                     padding-left: offset(1)
-                    margin-left: offset(3)
                     .event-hours
                         margin-top: $spacing-3
-                    .media
-                        width: columns(2)
-                    &:where(:not(.without-image))
+                    &:where(:not(.event--with-image))
                         .event-content
                             margin-left: offset(2)
+            .event--parent ~ .event--child
+                margin-left: offset(3)
+                .media
+                    width: columns(2)

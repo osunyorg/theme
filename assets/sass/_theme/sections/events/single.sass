@@ -118,16 +118,13 @@
                                 opacity: 1
             .event-duration
                 margin-bottom: $spacing-3
-
     @include media-breakpoint-up(desktop)
         // Safe spacing if post is empty
         .document-content
-            min-height: 600px
-            // Add after element to avoid "min-height" to ignore the last block's margin-bottom
-            &::after
-                content: ''
-                display: block
-                height: 1px
+            @include document-min-height(600px)
+        .event-programme
+            .event--child
+                padding-left: offset(4)
 
 .event-infos
     @include list-reset
@@ -174,3 +171,5 @@
             color: inherit
         li:first-child a
             padding-left: 0
+
+

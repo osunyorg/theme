@@ -132,3 +132,11 @@
         a
             color: inherit
             text-decoration: none
+
+@mixin document-min-height($min-height: 350px)
+    min-height: $min-height
+    // Add after element to avoid "min-height" to ignore the last block's margin-bottom
+    &::after
+        content: ''
+        display: block
+        height: 1px
