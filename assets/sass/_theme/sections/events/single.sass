@@ -51,9 +51,6 @@
         .event-sidebar
             @include sidebar
     .event-access
-        div:first-child
-            border-top: 1px solid var(--color-border)
-            padding-top: $spacing-4
         div:last-child
             border-bottom: 1px solid var(--color-border)
             padding-bottom: $spacing-4
@@ -77,6 +74,7 @@
                     @include small
             a
                 @extend .button-accent
+                margin-left: auto
         .event-slots
             ul
                 @include list-reset
@@ -92,9 +90,6 @@
                 gap: var(--grid-gutter)
                 .event-date
                     width: columns(4)
-                .event-link,
-                time
-                    width: columns(2)
                 .event-link
                     @include meta
                     text-decoration: none
@@ -108,13 +103,19 @@
                     @include h4
                     @include icon(arrow-right-line, after)
                         margin-left: space(2)
+                &[itemprop="subEvent"]
+                    time
+                        width: columns(2)
                 + li
                     margin-top: $spacing-1
                 &:not(:first-child)
                     .event-link
                         text-align: right
                         span
-                            @extend .sr-only
+                            opacity: 0
+                        &:hover
+                            span
+                                opacity: 1
             .event-duration
                 margin-bottom: $spacing-3
 
