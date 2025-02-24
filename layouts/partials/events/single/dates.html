@@ -2,7 +2,7 @@
   <h2>{{ i18n (printf "events.access.dates") }}</h2>
   <div class="event-summary">
     <span class="date" itemprop="startDate" content="2014-10-01T19:30">{{ .Params.dates.computed.short }}</span>
-    {{ if .Params.time_slots }}
+    {{ if gt .Params.time_slots 1 }}
       <span class="type">{{ i18n (printf "events.regular_event") }}</span>
     {{ end }}
     <a href="/" class="link" title="{{ i18n (printf "events.add_to_calendar.regular_event") }}"><span>{{ i18n (printf "events.add_to_calendar.title") }}</span></a>
@@ -17,5 +17,7 @@
     </li>
     {{ end }}
   </ul>
-  <button aria-controls="all-dates" aria-expanded="false" class="btn">{{ i18n (printf "events.more_dates") }}</button>
+  {{ if gt .Params.time_slots 1 }}
+    <button aria-controls="all-dates" aria-expanded="false" class="btn">{{ i18n (printf "events.more_dates") }}</button>
+  {{ end }}
 </div>

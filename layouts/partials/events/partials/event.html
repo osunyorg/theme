@@ -23,6 +23,7 @@
   {{ if .Params.parent }}
     {{ $class = printf "%s event--child" $class }}
   {{ end -}}
+  {{ $dates := .Params.dates }}
 
   <article class="{{ $class }}" 
       {{ if $is_sub_event }} itemprop="subEvent" {{ end }}
@@ -40,13 +41,13 @@
         </hgroup>
       {{ end }}
 
-      {{ $dates := .Params.dates }}
-      {{ $hours := "20:00" }}
-      {{ if and $is_sub_event $hours }}
-        {{ partial "events/partials/event/hours.html" $hours }}
+
+      {{ if .Params.time_slots }}
+        {{ $first_time_slot := index .Params.time_slots 0 }}
+        {{ partial "events/partials/event/hours.html" $first_time_slot }}
       {{ else if $options.dates }}
         {{ partial "events/partials/event/schedule.html" (dict 
-            "dates" $dates
+            "dates" .Params.dates
             "layout" $layout
           )}}
       {{ end }}
