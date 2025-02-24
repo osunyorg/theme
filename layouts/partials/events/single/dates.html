@@ -3,7 +3,7 @@
   <ul>
     <li class="event-duration">
       <span class="event-date" itemprop="startDate" content="2014-10-01T19:30">{{ .Params.dates.computed.short }}</span>
-      {{ if .Params.time_slots }}
+      {{ if gt .Params.time_slots 1 }}
         <span class="event-type">{{ i18n (printf "events.regular_event") }}</span>
       {{ end }}
       <a href="/" class="event-link" title="{{ i18n (printf "events.add_to_calendar.regular_event") }}"><span>{{ i18n (printf "events.add_to_calendar.title") }}</span></a>
