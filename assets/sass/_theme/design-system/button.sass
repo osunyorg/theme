@@ -37,7 +37,8 @@
         background: var(--btn-hover-background)
         border: var(--btn-hover-border)
 
-.button-accent
+.button--accent,
+.button-accent // Legacy
     @extend .button
     --btn-color: #{$color-background}
     --btn-background: #{$color-accent}
@@ -46,7 +47,8 @@
     --btn-hover-background: #{alphaColor($color-accent, 0.85)}
     --btn-hover-border: pxToRem(1) solid var(--btn-hover-background)
 
-.button-alt
+.button--alt,
+.button-alt // Legacy
     @extend .button
     --btn-color: #{$color-background}
     --btn-background: #{$color-text-alt}
@@ -55,9 +57,8 @@
     --btn-hover-background: #{$color-text}
     --btn-hover-border: pxToRem(1) solid var(--btn-hover-background)
 
-.button-small
+.button--small
     padding: var(--btn-padding-small)
-
 
 @mixin link-icon($icon: false)
     @include button-reset
