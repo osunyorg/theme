@@ -4,9 +4,10 @@
 
   <h2>{{ i18n (printf "events.access.partical_informations") }}</h2>
   <div>
-    <p>8 euros</p>
-    <p>Tarifs réduits pour les groupes du champ social</p>
-    <p>Contacter berenice.sellier@gaite-lyrique.net</p>
+    {{ safeHTML .Params.text }}
+    <div class="event-notes">
+      {{ safeHTML .Params.notes }}
+    </div>
   </div>
   {{ with .Params.header_cta }}
     {{ if and .display .target .label }}

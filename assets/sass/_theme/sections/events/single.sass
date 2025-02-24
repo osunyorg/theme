@@ -61,20 +61,28 @@
             h2
                 @include meta
                 color: var(--color-text-alt)
-                width: columns(4)
+                @include media-breakpoint-up(desktop)
+                    width: columns(4)
+                @include media-breakpoint-down(desktop)
+                    margin-bottom: $spacing-2
         .event-practicals
-            align-items: flex-start
-            display: flex
-            gap: var(--grid-gutter)
             > div
-                width: columns(6)
-                .event-price + p
+                p + div
                     margin-top: $spacing-2
-                p
+                .event-notes
                     @include small
+                @include media-breakpoint-up(desktop)
+                    width: columns(6)
             a
                 @extend .button-accent
                 margin-left: auto
+            @include media-breakpoint-up(desktop)
+                align-items: flex-start
+                display: flex
+                gap: var(--grid-gutter)
+            @include media-breakpoint-down(desktop)
+                .btn
+                    margin-top: $spacing-3
         .event-slots
             ul
                 @include list-reset
@@ -84,40 +92,69 @@
                     --btn-hover-border: none
                     --btn-hover-background: var(--color-border)
                     margin-top: $spacing-3
-            li
-                align-items: baseline
-                display: flex
-                gap: var(--grid-gutter)
-                .event-date
-                    width: columns(4)
-                .event-link
-                    @include meta
-                    text-decoration: none
-                .event-link
-                    @include icon(arrow-right-line, after)
-                        margin-left: space(2)
+        .event-summary,
+        .event-instance
+            align-items: baseline
+            display: flex
+            gap: var(--grid-gutter)
+            .date
+                width: columns(4)
+            .link
+                @include meta
+                text-decoration: none
+            .link
+                @include icon(arrow-right-line, after)
+                    margin-left: space(2)
+                @include media-breakpoint-up(desktop)
                     margin-left: auto
-                .event-location
-                    flex: 1
-                .event-type
-                    @include h4
-                    @include icon(arrow-right-line, after)
-                        margin-left: space(2)
-                &[itemprop="subEvent"]
-                    time
-                        width: columns(2)
-                + li
+            .type
+                @include h4
+                @include icon(arrow-right-line, after)
+                    margin-left: space(2)
+            + li
+                margin-top: $spacing-3
+                @include media-breakpoint-up(desktop)
                     margin-top: $spacing-1
-                &:not(:first-child)
-                    .event-link
-                        text-align: right
+            @include media-breakpoint-up(desktop)
+                .location
+                    flex: 1
+            @include media-breakpoint-down(desktop)
+                flex-wrap: wrap
+                row-gap: $spacing-1
+                .date,
+                time,
+                .link
+                    width: columns(6)
+                time
+                    text-align: right
+                .location
+                    @include meta
+                    width: columns(12)
+                .link
+                    border-radius: var(--btn-border-radius)
+                    background: $color-background-alt
+                    padding: space(2) space(3)
+                    width: auto
+        .event-instance
+            @include media-breakpoint-up(desktop)
+                time
+                    width: columns(2)
+                .link
+                    text-align: right
+                    span
+                        opacity: 0
+                    &:hover
                         span
-                            opacity: 0
-                        &:hover
-                            span
-                                opacity: 1
-            .event-duration
-                margin-bottom: $spacing-3
+                            opacity: 1
+        .event-summary + ul
+            margin-top: $spacing-3
+        // Hide li childs after 6th one (included)
+        ul.truncated-list
+            li:nth-child(n+7)
+                display: none
+        ul:not(.truncated-list)
+            + .btn
+                display: none
 
     @include media-breakpoint-up(desktop)
         // Safe spacing if post is empty
