@@ -2,7 +2,6 @@
   <div class="event-programme">
     {{ $events := partial "GetObjectsFromPathSlice" . }}
     {{ $agenda := $events.GroupByDate site.Params.events.index.group_by_date "asc" }}
-    
     {{ partial "events/partials/agenda.html" (dict
         "layout" site.Params.events.single.agenda.layout
         "options" site.Params.events.single.agenda.options
