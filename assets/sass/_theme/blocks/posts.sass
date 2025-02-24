@@ -183,17 +183,20 @@
                 .media
                     width: columns(3)
                 .post-content
+                    display: flex
+                    flex-direction: column
                     width: columns(6)
                 + article
                     margin-top: $spacing-5
                 .post-meta
-                    margin-top: 0.3em
-                    position: absolute
-                    right: 0
-                    text-align: right
-                    top: 0
-                    .post-reading-time,
+                    margin-top: auto
+                    padding-top: $spacing-3
                     time
+                        margin-top: 0.3em
+                        position: absolute
+                        right: 0
+                        top: 0
+                    .post-reading-time,
                         display: block
                         &::before
                             content: none
