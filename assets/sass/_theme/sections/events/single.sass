@@ -156,22 +156,34 @@
             + .btn
                 display: none
 
+    .event-parent
+        margin-top: $spacing-6
+        &__title
+            @include meta
+            margin-bottom: $spacing-3
+        .event
+            @include layout-item
+            hgroup, &-title
+                @include h3
+    @include media-breakpoint-down(desktop)
+        .event-parent
+            .event
+                &--with-image
+                    display: flex
+                    flex-direction: column
+                    .media
+                        order: -1
+                        margin-bottom: $spacing-3
     @include media-breakpoint-up(desktop)
         // Safe spacing if post is empty
         .document-content:last-child
             @include document-min-height(600px)
         .event-programme
+            margin-top: $spacing-6
             .event--child
                 padding-left: offset(4)
         .event-parent
-            margin-top: $spacing-5
-            &__title
-                @include meta
-                margin-bottom: $spacing-3
             .event
-                @include layout-item
-                hgroup, &-title
-                    @include h3
                 &--with-image
                     display: flex
                     gap: var(--grid-gutter)
