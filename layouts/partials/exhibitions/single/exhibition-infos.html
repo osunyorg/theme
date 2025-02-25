@@ -32,7 +32,7 @@
     </li>
   {{ end }}
 
-  {{ if and (not .Params.dates.archive) site.Params.events.single.calendar_links }}
+  {{ if not .Params.dates.archive }}
     {{ with .Params.dates.add_to_calendar }}
       {{ $links := . }}
       <li class="events-actions">
