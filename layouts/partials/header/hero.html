@@ -18,11 +18,7 @@
 {{ end }}
 
 {{ if not $subtitle }}
-  {{ $summary_position := partial "GetSiteParamWithDefault" (dict 
-    "param" "summary.position"
-    "type" .context.Type
-    "kind" .context.Kind
-  ) }}
+  {{ $summary_position := partial "GetSummaryPosition" .context }}
 
   {{ if and (eq $summary_position "hero") $summary }}
     {{ $subtitle = $summary }}

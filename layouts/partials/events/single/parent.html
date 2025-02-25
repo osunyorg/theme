@@ -1,0 +1,8 @@
+{{ $event := site.GetPage .path }}
+{{ with $event }}
+  {{ partial "events/partials/event.html" (dict
+      "event" .
+      "layout" "large"
+      "options" site.Params.events.index.options
+    )}}
+{{ end }}
