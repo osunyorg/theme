@@ -1,8 +1,11 @@
 {{ $event := site.GetPage .path }}
 {{ with $event }}
-  {{ partial "events/partials/event.html" (dict
-      "event" .
-      "layout" "large"
-      "options" site.Params.events.index.options
-    )}}
+  <div class="event-parent container">
+    {{ partial "events/partials/event.html" (dict
+        "event" .
+        "layout" "large"
+        "options" (merge site.Params.events.index.options (dict "image" false))
+        "is_sup_event" true
+      )}}
+  </div>
 {{ end }}

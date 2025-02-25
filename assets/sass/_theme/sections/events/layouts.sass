@@ -25,7 +25,7 @@
                         width: columns(8)
             @include media-breakpoint-down(md)
                 .media
-                    max-width: 33%
+                    max-width: 33.3%
                     margin-bottom: $spacing-2
                 &-content
                     order: 1
@@ -258,8 +258,11 @@
                         margin-top: $spacing-3
                     &:where(:not(.event--with-image))
                         .event-content
-                            margin-left: offset(2)
+                            margin-left: offset(3)
             .event--parent ~ .event--child
                 margin-left: offset(3)
                 .media
                     width: columns(2)
+                &:where(:not(.event--with-image))
+                    .event-content
+                        margin-left: offset(2)

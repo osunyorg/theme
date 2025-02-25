@@ -163,6 +163,17 @@
         .event-programme
             .event--child
                 padding-left: offset(4)
+        .event-parent
+            .event
+                &--with-image
+                    display: flex
+                    gap: var(--grid-gutter)
+                    flex-direction: row
+                    .media
+                        width: columns(8)
+                        flex-shrink: 0
+                &:where(:not(.event--with-image))
+                    padding-left: offset(4)
 
 .event-infos
     @include list-reset

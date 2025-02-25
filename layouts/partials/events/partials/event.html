@@ -2,6 +2,7 @@
 {{ $layout := .layout | default "list" }}
 {{ $heading_level := .heading_level | default 3 }}
 {{ $is_sub_event := .is_sub_event }}
+{{ $is_sup_event := .is_sup_event }}
 {{ $with_more := .with_more }}
 
 {{ $heading_tag := (dict 
@@ -14,7 +15,7 @@
 
 {{ with $event }}
   {{ $class := "event" }}
-  {{ if .Params.image }}
+  {{ if and .Params.image $options.image }}
     {{ $class = printf "%s event--with-image" $class }}
   {{ end -}}
   {{ if .Params.children }}
@@ -27,6 +28,7 @@
 
   <article class="{{ $class }}" 
       {{ if $is_sub_event }} itemprop="subEvent" {{ end }}
+      {{ if $is_sup_event }} itemprop="superEvent" {{ end }}
       itemscope itemtype="https://schema.org/Event">
     <div class="event-content">
       {{- $title := partial "PrepareHTML" .Title -}}
