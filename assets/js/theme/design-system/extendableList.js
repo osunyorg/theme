@@ -1,58 +1,47 @@
-window.osuny = window.osuny || {};
-window.osuny.ExtendableList = window.osuny.ExtendableList || {};
+var osuny = window.osuny || {};
+osuny.ExtendableList = osuny.ExtendableList || {};
 
-window.osuny.ExtendableList = function () {
-  this.hideClass = "truncated-list";
-  var element = document.querySelector('.extendable-list');
-  window.osuny.Extendable.call(this, element);
-  this._setup();
+osuny.ExtendableList = function (element) {
+    this.hiddenChildren = [];
+    this.hideClass = "truncated-list";
+    osuny.Extendable.call(this, element);
+
+    this.element.classList.add(this.hideClass);
+    this.getHiddenChildren();
 };
 
-window.osuny.ExtendableList.prototype = Object.create(window.osuny.Extendable.prototype);
+osuny.ExtendableList.prototype = Object.create(osuny.Extendable.prototype);
 
-window.osuny.ExtendableList.prototype._setup = function () {
-  this.element.classList.add(this.hideClass);
-  var children = this.element.querySelectorAll("li");
-  this.hiddenChildren = [];
-  
-  this.getAllHiddenChildren(children);
+osuny.ExtendableList.prototype.getHiddenChildren = function (children) {
+    var children = this.element.querySelectorAll("li");
 
-  if (this.hiddenChildren.length === 0) {
-    this.buttons.forEach(function (button) {
-      button.style.display = 'none';
-    });
-  }
-};
+    children.forEach(function (child) {
+        var style = window.getComputedStyle(child);
+        if (style.getPropertyValue('display') === 'none') {
+            this.hiddenChildren.push(child);
+        }
+    }.bind(this));
 
-window.osuny.ExtendableList.prototype.getAllHiddenChildren = function (children) {
-  children.forEach((child) => {
-    var style = window.getComputedStyle(child);
-
-    if (style.getPropertyValue('display') === 'none') {
-        this.hiddenChildren.push(child);
+    if (this.hiddenChildren.length === 0) {
+        this.buttons.forEach(function (button) {
+            button.style.display = 'none';
+        });
     }
-  });
 };
 
-osuny.Extendable.prototype.toggle = function (opened) {
-  this.state.opened = typeof opened !== 'undefined' ? opened : !this.state.opened;
-  this.element.classList.toggle(this.hideClass);
-  
-  this.buttons.forEach(function (button) {
-    if (button.getAttribute('aria-expanded')) {
-      button.setAttribute('aria-expanded', this.state.opened);
-    }
-  }.bind(this));
-
-  this.focusNewListItems();
+osuny.ExtendableList.prototype.toggle = function (opened) {
+    osuny.Extendable.prototype.toggle.call(this, opened, true);
+    this.element.classList.toggle(this.hideClass);
+    this.focusFirstItem();
 };
 
-osuny.Extendable.prototype.focusNewListItems = function (opened) {
-  var firstNewListItem = this.hiddenChildren[0];
+osuny.ExtendableList.prototype.focusFirstItem = function (opened) {
+    var firstElement = this.hiddenChildren[0];
+    firstElement.setAttribute('tabindex', '0');
+    firstElement.focus();
+    firstElement.removeAttribute('tabindex');
+};
 
-  firstNewListItem.setAttribute('tabindex', '0');
-  firstNewListItem.focus();
-  firstNewListItem.removeAttribute('tabindex');
-}
-
-window.osuny.ExtendableList = new window.osuny.ExtendableList();
+(function () {
+    osuny.utils.instanciateAll('.extendable-list', osuny.ExtendableList);
+}());
