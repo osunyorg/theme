@@ -159,7 +159,7 @@
                 .event-dates
                     @include h3
                 .event-title,
-                .event-subtitle, 
+                .event-subtitle,
                 hgroup
                     @include lead
                 .media
@@ -199,9 +199,26 @@
                 margin-top: $spacing-2
             &-hours
                 @include h3
-                position: absolute
-                left: 0
-                top: 0
+        @include media-breakpoint-down(desktop)
+            .event
+                &-content
+                    display: flex
+                    flex-direction: column
+                &-hours
+                    margin-bottom: $spacing-2
+                    order: -1
+                    @include h4
+                &--with-image
+                    .event-hours
+                        margin-top: $spacing-2
+                &--child
+                    flex-direction: row
+                    gap: var(--grid-gutter)
+                    .event-content
+                        flex: 1
+                    .media
+                        width: 33.3%
+                        order: 2
         @include media-breakpoint-up(desktop)
             .events-date-title
                 @include sticky
@@ -222,6 +239,10 @@
                     width: columns(5)
                 .media
                     width: columns(3)
+                &-hours
+                    position: absolute
+                    left: 0
+                    top: 0
                 &--child
                     padding-left: offset(1)
                     .event-hours
