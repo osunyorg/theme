@@ -1,23 +1,28 @@
+{{ $is_repeating := gt .Params.time_slots 1 }}
+{{ $multiple_dates_event := ne .Params.dates.from.day .Params.dates.to.day }}
+
 <div class="event-slots">
-  <h2>{{ i18n (printf "events.access.dates") }}</h2>
-  <div class="event-summary">
-    <span class="date" itemprop="startDate" content="2014-10-01T19:30">{{ .Params.dates.computed.short }}</span>
-    {{ if gt .Params.time_slots 1 }}
-      <span class="type">{{ i18n (printf "events.regular_event") }}</span>
-    {{ end }}
-    <a href="/" class="link" title="{{ i18n (printf "events.add_to_calendar.regular_event") }}"><span>{{ i18n (printf "events.add_to_calendar.title") }}</span></a>
-  </div>
+  <h2>{{ i18n "events.date" (cond (or $is_repeating $multiple_dates_event) 2 1) }}</h2>
+  {{ if or $is_repeating $multiple_dates_event }}
+    <div class="event-summary">
+      <span class="date" itemprop="startDate" content="2014-10-01T19:30">{{ .Params.dates.computed.short }}</span>
+      {{ if $is_repeating }}
+        <span class="type">{{ i18n (printf "events.regular_event") }}</span>
+      {{ end }}
+      <a href="/" class="link" title="{{ i18n (printf "events.add_to_calendar.regular_event") }}"><span>{{ i18n (printf "events.add_to_calendar.title") }}</span></a>
+    </div>
+  {{ end }}
   <ul id="all-dates" class="extendable-list">
     {{ range .Params.time_slots }}
-    <li class="event-instance" itemprop="subEvent">
-      <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ .start.date | time.Format site.Params.events.single.time_slots.date_format }}</span>
-      <time datetime="{{ .start.time }}">{{ .start.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
-      <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">Grande salle debout</span>
-      <a href="/" class="link" title="{{ i18n (printf "events.add_to_calendar.title") }}"><span>{{ i18n (printf "events.add_to_calendar.title") }}</span></a>
-    </li>
+      <li class="event-time-slot" itemprop="subEvent">
+        <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ .start.date | time.Format site.Params.events.single.time_slots.date_format }}</span>
+        <time datetime="{{ .start.time }}">{{ .start.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
+        <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">Grande salle debout</span>
+        <a href="/" class="link" title="{{ i18n (printf "events.add_to_calendar.title") }}"><span>{{ i18n (printf "events.add_to_calendar.title") }}</span></a>
+      </li>
     {{ end }}
   </ul>
-  {{ if gt .Params.time_slots 1 }}
+  {{ if $is_repeating }}
     <button aria-controls="all-dates" aria-expanded="false" class="btn">{{ i18n (printf "events.more_dates") }}</button>
   {{ end }}
 </div>

@@ -93,7 +93,7 @@
                     --btn-hover-background: var(--color-border)
                     margin-top: $spacing-3
         .event-summary,
-        .event-instance
+        .event-time-slot
             align-items: baseline
             display: flex
             gap: var(--grid-gutter)
@@ -135,17 +135,18 @@
                     background: $color-background-alt
                     padding: space(2) space(3)
                     width: auto
-        .event-instance
+        .event-time-slot
             @include media-breakpoint-up(desktop)
                 time
                     width: columns(2)
-                .link
-                    text-align: right
-                    span
-                        opacity: 0
-                    &:hover
+                &:where(:not(:only-child))
+                    .link
+                        text-align: right
                         span
-                            opacity: 1
+                            opacity: 0
+                        &:hover
+                            span
+                                opacity: 1
         .event-summary + ul
             margin-top: $spacing-3
         // Hide li childs after 6th one (included)
