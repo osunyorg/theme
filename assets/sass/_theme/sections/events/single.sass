@@ -164,7 +164,14 @@
             .event--child
                 padding-left: offset(4)
         .event-parent
+            margin-top: $spacing-5
+            &__title
+                @include meta
+                margin-bottom: $spacing-3
             .event
+                @include layout-item
+                hgroup, &-title
+                    @include h3
                 &--with-image
                     display: flex
                     gap: var(--grid-gutter)
