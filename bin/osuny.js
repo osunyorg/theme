@@ -50,33 +50,46 @@ function execute(string) {
     shell.exec(string);
 }
 
+function isSearchActive() {
+    // All Osuny sites have the error.html page. If it contains the string 'wasm-unsafe-eval', then search is active.
+    // We can't parse the YAML config file as we don't know about the current environment.
+    var str = shell.cat('public/error.html');
+    return str.indexOf('wasm-unsafe-eval') !== -1;
+}
+
+function runSearchIndexingForLocalDev() {
+    if (isSearchActive()) {
+        // Required to generate the public folder for indexing
+        execute("hugo");
+        execute("npm_config_yes=true npx pagefind --site 'public' --output-subdir '../static/pagefind' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
+    }
+}
+
+function runSearchIndexing() {
+    if (isSearchActive()) {
+        execute("npm_config_yes=true npx pagefind --site 'public' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
+    }
+}
+
 if (command === "watch") {
     execute("hugo server");
 }
 
 if (command === "dev") {
-    execute("hugo");
-    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
+    runSearchIndexingForLocalDev();
     execute("hugo server");
 }
 
 if (command === "local") {
     var IP = dev.network["en0"][0] || "0.0.0.0";
-    execute("hugo");
-    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
+    runSearchIndexingForLocalDev();
     execute("hugo server --bind=" + IP + " --baseURL=http://" + IP + ":1313 -D");
 }
 
 if (command === "build") {
     execute("yarn upgrade");
     execute("hugo --minify");
-    execute("npm_config_yes=true npx pagefind --site 'public' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
-}
-
-if (command === "percy-build") {
-    execute("yarn upgrade");
-    execute("hugo --baseURL=/");
-    execute("npm_config_yes=true npx pagefind --site 'public' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
+    runSearchIndexing();
 }
 
 if (command === "update") {
