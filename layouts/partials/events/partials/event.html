@@ -49,20 +49,12 @@
       {{ else if $options.dates }}
         {{ partial "events/partials/event/schedule.html" (dict 
             "dates" .Params.dates
-            "layout" $layout
+            "on_two_lines" (ne $layout "list")
           )}}
       {{ end }}
 
       {{ if and $dates.status $options.status }}
-        <p class="event-status">
-          {{ if eq $dates.status "current" }}
-            {{- i18n "blocks.events.current" -}}
-          {{ else if eq $dates.status "future" }}
-            {{- i18n "blocks.events.future" -}}
-          {{ else if eq $dates.status "archive" }}
-            {{- i18n "blocks.events.archive" -}}
-          {{ end }}
-        </p>
+        {{ partial "events/partials/event/status.html" $dates.status }}
       {{ end }}
 
       {{ if and $options.summary .Params.summary }}

@@ -1,0 +1,63 @@
+{{ $exhibition := .exhibition }}
+{{ $layout := .layout | default "list" }}
+{{ $heading_level := .heading_level }}
+{{ $with_more := .with_more }}
+{{ $options := .options }}
+
+{{ with $exhibition }}
+  {{ $class := "exhibition" }}
+  {{ if and .Params.image $options.image }}
+    {{ $class = printf "%s exhibition--with-image" $class }}
+  {{ end -}}
+  {{ $dates := .Params.dates }}
+
+  <article class="{{ $class }}" 
+      itemscope itemtype="https://schema.org/ExhibitionEvent">
+    <div class="exhibition-content">
+
+      {{ partial "exhibitions/partials/exhibition/heading.html" (dict
+          "item" .
+          "level" $heading_level
+          "itemprop" "name"
+        ) }}
+
+      {{ if $options.dates }}
+        {{ partial "exhibitions/partials/exhibition/schedule.html" (dict 
+            "dates" .Params.dates
+            "on_two_lines" (ne $layout "list")
+          )}}
+      {{ end }}
+
+      {{ if and $dates.status $options.status }}
+        {{ partial "exhibitions/partials/exhibition/status.html" (dict 
+          "status" $dates.status
+          "type" "exhibition"
+        )}}
+      {{ end }}
+
+      {{ if and $options.summary .Params.summary }}
+        <div class="exhibition-description" itemprop="description">
+          {{ partial "exhibitions/partials/exhibition/summary.html" . }}
+        </div>
+      {{ end }}
+
+      {{ if $options.categories }}
+        {{ partial "commons/categories" ( dict
+          "context" .
+          "kind" "exhibition"
+        )}}
+      {{- end -}}
+
+      {{ if $with_more }}
+        {{ partial "commons/item/more.html" . }}
+      {{- end -}}
+    </div>
+
+    {{ if $options.image }}
+      {{ partial "exhibitions/partials/exhibition/media.html" (dict 
+          "image" $exhibition.Params.image
+          "layout" $layout
+        ) }}
+    {{ end }}
+  </article>
+{{ end }}

@@ -153,6 +153,23 @@ params:
     #   twitter: true
     #   whatsapp: false
   exhibitions:
+    default_image: false
+    date_format: false # You can add date format to override the date from static (two_lines) 
+    time_format: false # You can add time format to override the time from static (from.hour & to.hour)
+    index:
+      group_by_date: "Monday 2 January <span>2006</span>"
+      highlight_expositions: true
+      layout: agenda # grid | list
+      options:
+        dates: false
+        categories: true
+        image: true
+        status: false
+        subtitle: true
+        summary: true
+      per_page: 10
+      taxonomies: true
+      truncate_description: 200 # Set to 0 to disable truncate
     single:
       sidebar: false
   organizations:
@@ -419,6 +436,27 @@ params:
           tablet:   555
           desktop:  1019
       events:
+        grid:
+          mobile:   90
+          tablet:   360
+          desktop:  555
+        large:
+          mobile:   400
+          tablet:   360
+          desktop:  645
+        list:
+          mobile:   90
+          tablet:   200
+          desktop:  255
+        agenda:
+          mobile:   400
+          tablet:   360
+          desktop:  645
+        parent:
+          mobile:   400
+          tablet:   360
+          desktop:  645
+      exhibitions:
         grid:
           mobile:   90
           tablet:   360

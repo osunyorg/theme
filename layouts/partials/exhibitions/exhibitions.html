@@ -1,13 +1,15 @@
 {{ $exhibitions := where .Site.RegularPages "Section" "exhibitions" }}
 <div class="exhibitions">
-  <h2>Expositions</h2>
+  {{/*  TODO : il n'y a pas de titre dans la maquette, mais est-ce clair sans titre pour cette partie ? */}}
   
-  <div class="events events--grid">
+  <h2>Expositions</h2>
+
+  <div class="exhibitions exhibitions--grid">
     {{ range $exhibitions }}
-      {{ partial "events/partials/event.html" (dict
-          "event" .
+      {{ partial "exhibitions/partials/exhibition.html" (dict
+          "exhibition" .
           "layout" "grid"
-          "options" site.Params.events.index.options
+          "options" site.Params.exhibitions.index.options
         )}}
     {{ end }}
   </div>
