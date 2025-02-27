@@ -11,11 +11,11 @@
     {{ partial "taxonomies/section-list.html" . }}
 
     {{ partial "exhibitions/partials/exhibitions.html" (dict 
-        "exhibitions" .Pages
+        "exhibitions" .RegularPages
         "layout" site.Params.exhibitions.index.layout
         "options" site.Params.exhibitions.index.options
       )}}
-    {{ partial "exhibitions/section/archive-link.html" . }}
+    {{ partial "commons/section/archive-link.html" . }}
     {{ partial "commons/pagination.html" . }}
   </div>
 </div>
