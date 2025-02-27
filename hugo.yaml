@@ -112,7 +112,16 @@ params:
     time_format: false # You can add time format to override the time from static (from.hour & to.hour)
     index:
       group_by_date: "Monday 2 January <span>2006</span>"
-      highlight_expositions: true
+      highlight_exhibitions:
+        active: true
+        layout: grid
+        options:
+          dates: true
+          categories: true
+          image: true
+          status: false
+          subtitle: true
+          summary: true
       layout: agenda # grid | list
       options:
         dates: false
@@ -158,8 +167,8 @@ params:
     time_format: false # You can add time format to override the time from static (from.hour & to.hour)
     index:
       group_by_date: "Monday 2 January <span>2006</span>"
-      highlight_expositions: true
-      layout: agenda # grid | list
+      highlight_exhibitions: true
+      layout: list # grid | list
       options:
         dates: false
         categories: true

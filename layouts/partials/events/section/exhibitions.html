@@ -1,0 +1,30 @@
+{{ $layout := site.Params.events.index.highlight_exhibitions.layout }}
+{{ $options := site.Params.events.index.highlight_exhibitions.options }}
+{{ $exhibitions := where .Site.RegularPages "Section" "exhibitions" }}
+{{ $current_exhibitions := where $exhibitions "Params.dates.status" "current" }}
+{{ $future_exhibitions := where $exhibitions "Params.dates.status" "future" }}
+
+<div class="exhibitions">
+  {{/*  TODO : il n'y a pas de titre dans la maquette, mais est-ce clair sans titre pour cette partie ? */}}
+
+  {{ with $current_exhibitions }}
+    <h2>En ce moment</h2>
+    {{ partial "exhibitions/partials/exhibitions.html" (dict
+        "exhibitions" .
+        "heading_level" 3
+        "layout" $layout
+        "options" $options
+      )}}
+  {{ end }}
+
+  {{ with $future_exhibitions }}
+    <h2>Bientôt</h2>
+    {{ partial "exhibitions/partials/exhibitions.html" (dict
+        "exhibitions" .
+        "heading_level" 3
+        "layout" $layout
+        "options" $options
+      )}}
+  {{ end }}
+  
+</div>

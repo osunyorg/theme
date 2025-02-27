@@ -1,0 +1,14 @@
+{{ $exhibitions := .exhibitions }}
+{{ $layout := .layout | default site.Params.exhibitions.index.layout }}
+{{ $options := .options | default site.Params.exhibitions.index.options }}
+{{ $heading_level := .heading_level | default 2 }}
+
+<div class="exhibitions exhibitions--{{- $layout }}">
+  {{ range $exhibitions }}
+    {{ partial "exhibitions/partials/exhibition.html" (dict
+        "exhibition" .
+        "layout" $layout
+        "options" $options
+      )}}
+  {{ end }}
+</div>

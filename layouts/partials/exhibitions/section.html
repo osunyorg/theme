@@ -9,12 +9,13 @@
 
   <div class="container">
     {{ partial "taxonomies/section-list.html" . }}
-    {{ if site.Params.exhibitions.index.highlight_expositions }}
-      {{ partial "exhibitions/exhibitions.html" . }}
-    {{ end }}
 
-    {{ partial "exhibitions/partials/exhibitions.html" . }}
-    {{ partial "exhibitions/partials/archive-link.html" . }}
+    {{ partial "exhibitions/partials/exhibitions.html" (dict 
+        "exhibitions" .Pages
+        "layout" site.Params.exhibitions.index.layout
+        "options" site.Params.exhibitions.index.options
+      )}}
+    {{ partial "exhibitions/section/archive-link.html" . }}
     {{ partial "commons/pagination.html" . }}
   </div>
 </div>
