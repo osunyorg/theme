@@ -1,0 +1,15 @@
+{{ $param := site.Params }}
+
+{{ range (split . ".") }}
+  {{ $param = index $param . }}
+{{ end }}
+
+{{ if not $param }}
+  {{ $param = site.Data.types }}
+
+  {{ range (split . ".") }}
+    {{ $param = index $param . }}
+  {{ end }}
+{{ end }}
+
+{{ return $param }}
