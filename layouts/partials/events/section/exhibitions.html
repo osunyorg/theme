@@ -1,5 +1,3 @@
-{{ $layout := site.Params.events.index.highlight_exhibitions.layout }}
-{{ $options := site.Params.events.index.highlight_exhibitions.options }}
 {{ $exhibitions := where .Site.RegularPages "Section" "exhibitions" }}
 {{ $current_exhibitions := where $exhibitions "Params.dates.status" "current" }}
 {{ $future_exhibitions := where $exhibitions "Params.dates.status" "future" }}
@@ -12,8 +10,8 @@
     {{ partial "exhibitions/partials/exhibitions.html" (dict
         "exhibitions" .
         "heading_level" 3
-        "layout" $layout
-        "options" $options
+        "layout" site.Params.events.index.highlight_exhibitions.current.layout
+        "options" site.Params.events.index.highlight_exhibitions.current.options
       )}}
   {{ end }}
 
@@ -22,8 +20,8 @@
     {{ partial "exhibitions/partials/exhibitions.html" (dict
         "exhibitions" .
         "heading_level" 3
-        "layout" $layout
-        "options" $options
+        "layout" site.Params.events.index.highlight_exhibitions.future.layout
+        "options" site.Params.events.index.highlight_exhibitions.future.options
       )}}
   {{ end }}
   
