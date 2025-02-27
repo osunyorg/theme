@@ -9,7 +9,8 @@
       {{ if $is_repeating }}
         <span class="type">{{ i18n (printf "events.regular_event") }}</span>
       {{ end }}
-      {{ partial "events/single/dropdown-calendar.html" (dict
+      <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">{{ .Params.place }}</span>
+      {{ partial "commons/dropdown-calendar.html" (dict
           "index" "primary"
           "calendar_links" .Params.dates.add_to_calendar
         )}}
@@ -20,8 +21,8 @@
       <li class="event-time-slot" itemprop="subEvent">
         <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ $time_slot.start.date | time.Format site.Params.events.single.time_slots.date_format }}</span>
         <time datetime="{{ .start.time }}">{{ $time_slot.start.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
-        <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">Grande salle debout</span>
-        {{ partial "events/single/dropdown-calendar.html" (dict
+        <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">{{ $time_slot.place }}</span>
+        {{ partial "commons/dropdown-calendar.html" (dict
             "index" $index
             "calendar_links" $time_slot.add_to_calendar
           )}}
