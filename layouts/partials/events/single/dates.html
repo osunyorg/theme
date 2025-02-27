@@ -9,16 +9,22 @@
       {{ if $is_repeating }}
         <span class="type">{{ i18n (printf "events.regular_event") }}</span>
       {{ end }}
-      <a href="/" class="link" title="{{ i18n (printf "events.add_to_calendar.regular_event") }}"><span>{{ i18n (printf "events.add_to_calendar.title") }}</span></a>
+      {{ partial "events/single/dropdown-calendar.html" (dict
+          "index" "primary"
+          "calendar_links" .Params.dates.add_to_calendar
+        )}}
     </div>
   {{ end }}
   <ul id="all-dates" class="extendable-list">
-    {{ range .Params.time_slots }}
+    {{ range $index, $time_slot := .Params.time_slots }}
       <li class="event-time-slot" itemprop="subEvent">
-        <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ .start.date | time.Format site.Params.events.single.time_slots.date_format }}</span>
-        <time datetime="{{ .start.time }}">{{ .start.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
+        <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ $time_slot.start.date | time.Format site.Params.events.single.time_slots.date_format }}</span>
+        <time datetime="{{ .start.time }}">{{ $time_slot.start.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
         <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">Grande salle debout</span>
-        <a href="/" class="link" title="{{ i18n (printf "events.add_to_calendar.title") }}"><span>{{ i18n (printf "events.add_to_calendar.title") }}</span></a>
+        {{ partial "events/single/dropdown-calendar.html" (dict
+            "index" $index
+            "calendar_links" $time_slot.add_to_calendar
+          )}}
       </li>
     {{ end }}
   </ul>

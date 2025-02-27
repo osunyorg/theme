@@ -99,12 +99,16 @@
             gap: var(--grid-gutter)
             .date
                 width: columns(4)
-            .link
+            .dropdown-calendar
                 @include meta
                 text-decoration: none
-            .link
-                @include icon(calendar-2-line, after)
-                    margin-left: space(2)
+                @include dropdown
+                button
+                    @include button-reset
+                    @include icon(calendar-2-line, after)
+                        margin-left: space(2)
+                .dropdown-menu a
+                    align-items: baseline
                 @include media-breakpoint-up(desktop)
                     margin-left: auto
             .type
@@ -123,31 +127,36 @@
                 row-gap: $spacing-1
                 .date,
                 time,
-                .link
+                .dropdown-calendar
                     width: columns(6)
                 time
                     text-align: right
                 .location
                     @include meta
                     width: columns(12)
-                .link
-                    border-radius: var(--btn-border-radius)
+                .dropdown-calendar
                     background: $color-background-alt
+                    border-radius: var(--btn-border-radius)
                     padding: space(2) space(3)
                     width: auto
+                    .dropdown-menu
+                        border-bottom: 1px solid var(--dropdown-border-color)
+                        top: calc(100% - var(--btn-border-radius))
+                        width: 100vw
         .event-time-slot
             @include media-breakpoint-up(desktop)
                 time
                     width: columns(2)
                 &:where(:not(:only-child))
-                    .link
-                        text-align: right
-                        span
-                            opacity: 0
-                            transition: opacity  0.2s ease
-                        &:hover
+                    .dropdown-calendar
+                        button
                             span
-                                opacity: 1
+                                opacity: 0
+                                transition: opacity  0.2s ease
+                            &:hover,
+                            &[aria-expanded="true"]
+                                span
+                                    opacity: 1
         .event-summary + ul
             margin-top: $spacing-3
         // Hide li childs after 6th one (included)
