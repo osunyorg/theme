@@ -1,0 +1,26 @@
+{{ $index := .index }}
+{{ $links := .calendar_links}}
+
+<div class="dropdown-calendar">
+  <button type="button" aria-expanded="false" aria-controls="event-dropdown-calendar-{{- $index -}}">
+    <span>{{ i18n "events.add_to_calendar.title" }}</span>
+  </button>
+  <div class="dropdown-menu extendable" id="event-dropdown-calendar-{{- $index -}}" data-extendable-close-siblings="true">
+    <ul>
+      {{ range $key, $value := $links }}
+        {{ $label := i18n (printf "events.add_to_calendar.%s" $key) }}
+        <li>
+          <a 
+            {{ if eq $key "ical" -}}
+              {{ printf `href="%s"` . | safeHTMLAttr }} download
+            {{ else }}
+              href="{{ . }}"
+              target="_blank"
+            {{ end }} >
+            {{- $label -}}
+          </a>
+        </li>
+      {{ end }}
+    </ul>
+  </div>
+</div>
