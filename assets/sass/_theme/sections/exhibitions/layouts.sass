@@ -18,6 +18,13 @@
             &-subtitle
                 @include h3
                 color: var(--color-text-alt)
+            .more
+                @include icon(arrow-right-line, after)
+                    display: inline-block
+                    margin-left: space()
+                    transition: transform 0.25s
+            &:hover .more::after
+                transform: translateX(pxToRem(5))
             @include media-breakpoint-up(desktop)
                 padding-left: offset(3)
                 .media
