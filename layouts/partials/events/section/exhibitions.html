@@ -2,27 +2,28 @@
 {{ $current_exhibitions := where $exhibitions "Params.dates.status" "current" }}
 {{ $future_exhibitions := where $exhibitions "Params.dates.status" "future" }}
 
-<div class="exhibitions">
-  {{/*  TODO : il n'y a pas de titre dans la maquette, mais est-ce clair sans titre pour cette partie ? */}}
+{{ if (or $current_exhibitions $future_exhibitions) }}
+  <div class="agenda-exhibitions">
+    <div class="container">
+      {{ with $current_exhibitions }}
+        <h2>{{ i18n "exhibitions.current" }}</h2>
+        {{ partial "exhibitions/partials/exhibitions.html" (dict
+            "exhibitions" .
+            "heading_level" 3
+            "layout" site.Params.events.index.highlight_exhibitions.current.layout
+            "options" site.Params.events.index.highlight_exhibitions.current.options
+          )}}
+      {{ end }}
 
-  {{ with $current_exhibitions }}
-    <h2>En ce moment</h2>
-    {{ partial "exhibitions/partials/exhibitions.html" (dict
-        "exhibitions" .
-        "heading_level" 3
-        "layout" site.Params.events.index.highlight_exhibitions.current.layout
-        "options" site.Params.events.index.highlight_exhibitions.current.options
-      )}}
-  {{ end }}
-
-  {{ with $future_exhibitions }}
-    <h2>Bientôt</h2>
-    {{ partial "exhibitions/partials/exhibitions.html" (dict
-        "exhibitions" .
-        "heading_level" 3
-        "layout" site.Params.events.index.highlight_exhibitions.future.layout
-        "options" site.Params.events.index.highlight_exhibitions.future.options
-      )}}
-  {{ end }}
-  
-</div>
+      {{ with $future_exhibitions }}
+        <h2>{{ i18n "exhibitions.future" }}</h2>
+        {{ partial "exhibitions/partials/exhibitions.html" (dict
+            "exhibitions" .
+            "heading_level" 3
+            "layout" site.Params.events.index.highlight_exhibitions.future.layout
+            "options" site.Params.events.index.highlight_exhibitions.future.options
+          )}}
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
