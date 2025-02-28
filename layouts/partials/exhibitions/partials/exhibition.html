@@ -17,6 +17,7 @@
 
       {{ partial "exhibitions/partials/exhibition/heading.html" (dict
           "item" .
+          "options" $options
           "level" $heading_level
           "itemprop" "name"
         )}}
@@ -44,7 +45,7 @@
       {{ if $options.categories }}
         {{ partial "commons/categories" ( dict
           "context" .
-          "kind" "exhibition"
+          "kind" "event"
         )}}
       {{- end -}}
 
