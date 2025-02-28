@@ -2,7 +2,7 @@
 {{ $multiple_dates_event := ne .Params.dates.from.day .Params.dates.to.day }}
 
 <div class="event-slots">
-  <h2>{{ i18n "commons.date.one" (cond (or $is_repeating $multiple_dates_event) 2 1) }}</h2>
+  <h2>{{ i18n "commons.date" (len .Params.time_slots) }}</h2>
   {{ if or $is_repeating $multiple_dates_event }}
     <div class="event-summary">
       <span class="date" itemprop="startDate" content="2014-10-01T19:30">{{ .Params.dates.computed.short }}</span>
