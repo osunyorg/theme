@@ -58,11 +58,12 @@
         & > div
             @include sticky($spacing-3)
         .toc-container
-            border-top: 1px solid var(--color-border)
-            padding-top: $spacing-3
             position: static
             margin-left: 0
-
+        &:has(aside)
+            .toc-container
+                border-top: 1px solid var(--color-border)
+                padding-top: $spacing-3
 @mixin sidebar-infos
     @include meta
     @include list-reset

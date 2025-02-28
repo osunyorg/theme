@@ -1,15 +1,15 @@
 {{ $unique_day := eq .Params.dates.from.day .Params.dates.to.day }}
-<ul class="event-infos">
+<ul class="exhibition-infos">
   {{ with .Params.dates }}
     {{ if .computed }}
-      <li class="event-date" itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
-        <span>{{ i18n "events.date" }}</span>
+      <li class="exhibition-date" itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
+        <span>{{ i18n "exhibitions.date" }}</span>
         {{ partial "PrepareHTML" .computed.two_lines.long }}
       </li>
     {{ end }}
     {{ if .from.hour }}
       <li>
-        <span>{{ i18n "events.hour" }}</span>
+        <span>{{ i18n "exhibitions.hour" }}</span>
         {{ with .from.hour }}
           <time datetime="{{ . }}">{{ . }}</time>
         {{ end }}
@@ -20,12 +20,12 @@
     {{ end }}
   {{ end }}
 
-  {{ if .Params.events_categories }}
+  {{ if .Params.exhibitions_categories }}
     <li>
       {{ partial "taxonomies/single-list.html" . }}
     </li>
   {{ end }}
-  {{ if site.Params.events.share_links.enabled | default site.Params.share_links.enabled }}
+  {{ if site.Params.exhibitions.share_links.enabled | default site.Params.share_links.enabled }}
     <li>
       <span>{{ i18n "commons.share_on" }}</span>
       {{ partial "commons/share/links.html" . }}
@@ -35,12 +35,12 @@
   {{ if not .Params.dates.archive }}
     {{ with .Params.dates.add_to_calendar }}
       {{ $links := . }}
-      <li class="events-actions">
-        <span>{{ i18n "events.add_to_calendar.title" }}</span>
+      <li class="exhibitions-actions">
+        <span>{{ i18n "commons.add_to_calendar.title" }}</span>
         {{- $types := slice "ical" "google" "office" "outlook" "yahoo" -}}
         <ul>
           {{- range $type := $types -}}
-            {{ $label := i18n (printf "events.add_to_calendar.%s" $type) }}
+            {{ $label := i18n (printf "commons.add_to_calendar.%s" $type) }}
             {{ with index $links $type }}
               <li>
                 <a class="chip"

@@ -1,9 +1,10 @@
 <div class="section-sidebar event-sidebar">
   <div>
-    <aside>
-      {{- partial "events/single/event-infos.html" . -}}
-    </aside>
-
+    {{ if site.Params.events.single.meta_in_sidebar }}
+      <aside>
+        {{- partial "events/single/event-infos.html" . -}}
+      </aside>
+    {{ end }}
     {{ partial "toc/container.html"
       (dict
           "toc" "toc/default.html"

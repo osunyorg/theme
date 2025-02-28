@@ -1,8 +1,27 @@
 {{- $title := or .Params.header_text .Title -}}
+{{ $share := site.Params.exhibitions.share_links.enabled | default site.Params.share_links.enabled }}
+{{ $sizes := "" }}
+
+{{ with .Params.subtitle }}
+  {{- $title = printf "%s <span>%s</span>" $title . -}}
+{{ end }}
+
+{{ $image := .Params.image }}
+{{ with $image }}
+  {{ $image_format := partial "GetImageDirection" . }}
+  {{ $sizes = index site.Params.image_sizes.sections.exhibitions.hero_single $image_format }}
+{{ end }}
 {{- partial "header/hero.html"
-      (dict
-        "title" $title
-        "image" .Params.image
-        "sizes" site.Params.image_sizes.sections.exhibitions.hero_single
-        "context" .
-      ) -}}
+(dict
+"title" $title
+"image" $image
+"sizes" $sizes
+"context" .
+"share" $share
+"button" false
+) -}}
+{{ with $image }}ok
+{{ $image_format := partial "GetImageDirection" . }}
+{{ $image_format }}
+{{ $sizes = index site.Params.image_sizes.sections.exhibitions.hero_single $image_format }}
+{{ end }}

@@ -7,9 +7,7 @@
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
   
-    {{ if site.Params.exhibitions.single.sidebar }}
-      {{ partial "exhibitions/single/sidebar.html" . }}
-    {{ end }}
+    {{ partial "exhibitions/single/sidebar.html" . }}
   
     {{ partial "exhibitions/single/summary.html" (dict
         "context" .

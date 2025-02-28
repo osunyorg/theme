@@ -49,7 +49,7 @@
                     width: columns(6)
         @include h3
     &:not(.full-width)
-        .event-sidebar
+        .section-sidebar
             @include sidebar
     .event-access
         > div:last-child
@@ -148,16 +148,15 @@
             @include media-breakpoint-up(desktop)
                 time
                     width: columns(2)
-                &:where(:not(:only-child))
-                    .dropdown-calendar
-                        button
+                .dropdown-calendar
+                    button
+                        span
+                            opacity: 0
+                            transition: opacity  0.2s ease
+                        &:hover,
+                        &[aria-expanded="true"]
                             span
-                                opacity: 0
-                                transition: opacity  0.2s ease
-                            &:hover,
-                            &[aria-expanded="true"]
-                                span
-                                    opacity: 1
+                                opacity: 1
         .event-summary + ul
             margin-top: $spacing-3
         // Hide li childs after 6th one (included)
@@ -186,6 +185,8 @@
                     .media
                         order: -1
                         margin-bottom: $spacing-3
+    .document-content
+        margin-top: $spacing-4
     @include media-breakpoint-up(desktop)
         // Safe spacing if post is empty
         .document-content:last-child
@@ -206,12 +207,13 @@
                 &:where(:not(.event--with-image))
                     padding-left: offset(4)
 
-.event-infos
+.event-infos,
+.exhibition-infos
     @include list-reset
     @include media-breakpoint-up(desktop)
         font-size: $table-body-size-desktop
-        padding-bottom: $spacing-5
-    .event-date
+        padding-bottom: $spacing-4
+    [class$="-date"]
         text-transform: capitalize
     ul
         @include list-reset
@@ -234,7 +236,7 @@
             @extend .event-categories
         span + .taxonomy-children
             margin-top: 0
-    .events-actions
+    [class$="-actions"]
         ul
             align-items: start
             display: flex

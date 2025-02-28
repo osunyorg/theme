@@ -3,13 +3,13 @@
   {{ with .Params.dates }}
     {{ if .computed }}
       <li class="event-date" itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
-        <span>{{ i18n "events.date" }}</span>
+        <span>{{ i18n "commons.date.one" }}</span>
         {{ partial "PrepareHTML" .computed.two_lines.long }}
       </li>
     {{ end }}
     {{ if .from.hour }}
       <li>
-        <span>{{ i18n "events.hour" }}</span>
+        <span>{{ i18n "commons.hour" }}</span>
         {{ with .from.hour }}
           <time datetime="{{ . }}">{{ . }}</time>
         {{ end }}
@@ -36,11 +36,11 @@
     {{ with .Params.dates.add_to_calendar }}
       {{ $links := . }}
       <li class="events-actions">
-        <span>{{ i18n "events.add_to_calendar.title" }}</span>
+        <span>{{ i18n "commons.add_to_calendar.title" }}</span>
         {{- $types := slice "ical" "google" "office" "outlook" "yahoo" -}}
         <ul>
           {{- range $type := $types -}}
-            {{ $label := i18n (printf "events.add_to_calendar.%s" $type) }}
+            {{ $label := i18n (printf "commons.add_to_calendar.%s" $type) }}
             {{ with index $links $type }}
               <li>
                 <a class="chip"
