@@ -1,4 +1,4 @@
-{{ $exhibitions := where .Site.RegularPages "Section" "exhibitions" }}
+{{ $exhibitions := . }}
 {{ $current_exhibitions := where $exhibitions "Params.dates.status" "current" }}
 {{ $future_exhibitions := where $exhibitions "Params.dates.status" "future" }}
 

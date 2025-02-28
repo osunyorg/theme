@@ -11,12 +11,15 @@
     &--alternate
         @include layout-alternate
     &--agenda
+        li + li
+            margin-top: var(--grid-gutter)
         .exhibition
             @include layout-item
+            &-subtitle
+                @include h3
+                color: var(--color-text-alt)
             @include media-breakpoint-up(desktop)
                 padding-left: offset(3)
-                display: flex
-                gap: var(--grid-gutter)
                 .media
                     order: -1
                     width: columns(5)
@@ -33,6 +36,8 @@
                     > * + .exhibition-schedule
                         margin-top: 0
                 &--with-image
+                    display: flex
+                    gap: var(--grid-gutter)
                     .exhibition-content
                         display: flex
                         flex-direction: column
@@ -40,15 +45,35 @@
                         margin-top: auto
                 &:where(:not(.exhibition--with-image))
                     .exhibition-content
-                        display: flex
-                        flex-wrap: wrap
-                        column-gap: var(--grid-gutter)
-                        > .exhibition-title, > hgroup
-                            flex-shrink: 1
-                            width: columns(5)
-                        .exhibition-description
-                            flex-shrink: 1
-                            width: columns(4)
-                            margin-top: 0
+                        width: columns(5)
+                        // width: columns(9)
+                        // display: flex
+                        // flex-wrap: wrap
+                        // column-gap: var(--grid-gutter)
+                        // > :nth-child(n+1)
+                        //     width: columns(5)
+                        // > :nth-child(n+2)
+                        //     width: columns(4)
+                        // > .exhibition-title, > hgroup
+                        //     width: columns(5)
+                        // .event-categories
+                        //     width: columns(5)
+                        // .exhibition-description
+                        //     width: columns(4)
                         .more
-                            padding-left: offset(5)
+                            position: absolute
+                            left: offset(8)
+                            top: 0
+                        // display: flex
+                        // flex-wrap: wrap
+                        // column-gap: var(--grid-gutter)
+
+                        // > .exhibition-title, > hgroup
+                        //     flex-shrink: 1
+                        //     width: columns(5)
+                        // .exhibition-description
+                        //     flex-shrink: 1
+                        //     width: columns(4)
+                        //     margin-top: 0
+                        // .more
+                        //     padding-left: offset(5)
