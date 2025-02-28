@@ -7,8 +7,12 @@
         h2
             @include h5
             margin-bottom: var(--heading-margin-bottom)
-            &:where(:not(first-child))
+            &:where(:not(:first-child))
                 margin-top: var(--heading-margin-top)
+            @include media-breakpoint-down(desktop)
+                margin-bottom: $spacing-3
+                &:where(:not(:first-child))
+                    margin-top: $spacing-5
     .archive-link
         @extend .button
         @extend .button--small

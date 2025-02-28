@@ -1,5 +1,6 @@
 {{ $layout := site.Params.events.index.layout }}
-{{ $collection := where .Pages "Params.parent" "eq" nil }}
+{{ $collection := where .Pages "Section" "eq" "events" }}
+{{ $collection = where .Pages "Params.parent" "eq" nil }}
 {{ $is_archive := ne .File.Path "events/_index.html" }}
 {{ $order := "asc" }}
 
@@ -7,10 +8,6 @@
   {{ $order = "desc" }}
 {{ else }}
   {{ $collection = where $collection "Params.dates.archive" false }}
-{{ end }}
-
-{{ if site.Params.events.index.highlight_exhibitions }}
-  {{ $collection = where $collection "Params.event_kind" "ne" "exposition" }}
 {{ end }}
 
 {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}

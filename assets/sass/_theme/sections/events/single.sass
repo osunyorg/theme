@@ -8,7 +8,11 @@
                 flex-direction: column
         .taxonomies-single
             a
+                @include meta
                 @include link(var(--color-accent))
+            .taxonomy-children
+                li
+                    line-height: 100%
         @include media-breakpoint-up(desktop)
             figure
                 order: -1
