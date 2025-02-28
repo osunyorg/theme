@@ -11,7 +11,8 @@
     {{ partial "taxonomies/section-list.html" . }}
   </div>
   {{ if site.Params.events.index.highlight_exhibitions.active }}
-    {{ partial "events/section/exhibitions.html" .Pages }}
+    {{ $exhibitions := where .Pages "Section" "exhibitions" }}
+    {{ partial "events/section/exhibitions.html" $exhibitions }}
   {{ end }}
   <div class="container">
     {{ partial "events/partials/events.html" . }}
