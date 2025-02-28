@@ -2,14 +2,17 @@
 {{ $layout := .layout | default site.Params.exhibitions.index.layout }}
 {{ $options := .options | default site.Params.exhibitions.index.options }}
 {{ $heading_level := .heading_level | default 2 }}
+{{ $with_more := eq $layout "agenda" }}
 
 <ol class="exhibitions exhibitions--{{- $layout }}">
   {{ range $exhibitions }}
     <li>
       {{ partial "exhibitions/partials/exhibition.html" (dict
           "exhibition" .
+          "heading_level" $heading_level
           "layout" $layout
           "options" $options
+          "with_more" $with_more
         )}}
     </li>
   {{ end }}

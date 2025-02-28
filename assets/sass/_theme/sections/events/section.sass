@@ -1,8 +1,14 @@
 .events__section
-    .exhibitions
+    .agenda-exhibitions
         margin-bottom: $spacing-6
+        background: var(--color-background-alt)
+        padding-top: var(--grid-gutter)
+        padding-bottom: var(--grid-gutter)
         h2
+            @include h5
             margin-bottom: var(--heading-margin-bottom)
+            &:where(:not(first-child))
+                margin-top: var(--heading-margin-top)
     .archive-link
         @extend .button
         @extend .button--small

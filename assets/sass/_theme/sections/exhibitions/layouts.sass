@@ -1,5 +1,5 @@
 .exhibitions
-    @extend .events
+    @include list-reset
     &--list
         @include layout-list
     &--grid
@@ -10,3 +10,45 @@
         @include layout-large
     &--alternate
         @include layout-alternate
+    &--agenda
+        .exhibition
+            @include layout-item
+            @include media-breakpoint-up(desktop)
+                padding-left: offset(3)
+                display: flex
+                gap: var(--grid-gutter)
+                .media
+                    order: -1
+                    width: columns(5)
+                    flex-shrink: 1
+                &-schedule
+                    position: absolute
+                    left: 0
+                    top: 0
+                    width: columns(3)
+                &-dates
+                    @include h3
+                &-content
+                    flex: 1
+                    > * + .exhibition-schedule
+                        margin-top: 0
+                &--with-image
+                    .exhibition-content
+                        display: flex
+                        flex-direction: column
+                    .more
+                        margin-top: auto
+                &:where(:not(.exhibition--with-image))
+                    .exhibition-content
+                        display: flex
+                        flex-wrap: wrap
+                        column-gap: var(--grid-gutter)
+                        > .exhibition-title, > hgroup
+                            flex-shrink: 1
+                            width: columns(5)
+                        .exhibition-description
+                            flex-shrink: 1
+                            width: columns(4)
+                            margin-top: 0
+                        .more
+                            padding-left: offset(5)
