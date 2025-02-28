@@ -3,12 +3,14 @@
 {{ $options := .options | default site.Params.exhibitions.index.options }}
 {{ $heading_level := .heading_level | default 2 }}
 
-<div class="exhibitions exhibitions--{{- $layout }}">
+<ol class="exhibitions exhibitions--{{- $layout }}">
   {{ range $exhibitions }}
-    {{ partial "exhibitions/partials/exhibition.html" (dict
-        "exhibition" .
-        "layout" $layout
-        "options" $options
-      )}}
+    <li>
+      {{ partial "exhibitions/partials/exhibition.html" (dict
+          "exhibition" .
+          "layout" $layout
+          "options" $options
+        )}}
+    </li>
   {{ end }}
-</div>
+</ol>
