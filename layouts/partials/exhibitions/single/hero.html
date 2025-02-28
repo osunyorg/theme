@@ -12,16 +12,11 @@
   {{ $sizes = index site.Params.image_sizes.sections.exhibitions.hero_single $image_format }}
 {{ end }}
 {{- partial "header/hero.html"
-(dict
-"title" $title
-"image" $image
-"sizes" $sizes
-"context" .
-"share" $share
-"button" false
-) -}}
-{{ with $image }}ok
-{{ $image_format := partial "GetImageDirection" . }}
-{{ $image_format }}
-{{ $sizes = index site.Params.image_sizes.sections.exhibitions.hero_single $image_format }}
-{{ end }}
+  (dict
+    "title" $title
+    "image" $image
+    "sizes" $sizes
+    "context" .
+    "share" $share
+    "button" false
+  ) -}}
