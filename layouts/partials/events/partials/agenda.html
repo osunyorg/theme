@@ -3,39 +3,37 @@
 {{ $agenda := .agenda }}
 {{ $is_sub_event := .is_sub_event }}
 
-<div class="agenda">
-  <div class="events events--{{-  $layout -}}">
-    {{ range $agenda }}
+<div class="events events--{{-  $layout -}}">
+  {{ range $agenda }}
 
-      {{ if eq $layout "agenda" }}
-        <div class="events-date">
-          <h2 class="events-date-title">{{ .Key | strings.FirstUpper | safeHTML }}</h2>
-      {{ end }}
+    {{ if eq $layout "agenda" }}
+      <div class="events-date">
+        <h2 class="events-date-title">{{ .Key | strings.FirstUpper | safeHTML }}</h2>
+    {{ end }}
 
-      {{ range .Pages }}
-        {{ partial "events/partials/event.html" (dict
-            "event" .
-            "layout" $layout
-            "options" site.Params.events.index.options
-            "is_sub_event" $is_sub_event
-          )}}
+    {{ range .Pages }}
+      {{ partial "events/partials/event.html" (dict
+          "event" .
+          "layout" $layout
+          "options" site.Params.events.index.options
+          "is_sub_event" $is_sub_event
+        )}}
 
-        {{ range .Params.children_for_the_day }}
-          {{ with (site.GetPage .path) }}
-            {{ partial "events/partials/event.html" (dict
-                "event" .
-                "layout" $layout
-                "options" $options
-                "is_sub_event" true
-              )}}
-          {{ end }}
+      {{ range .Params.children_for_the_day }}
+        {{ with (site.GetPage .path) }}
+          {{ partial "events/partials/event.html" (dict
+              "event" .
+              "layout" $layout
+              "options" $options
+              "is_sub_event" true
+            )}}
         {{ end }}
       {{ end }}
-
-      {{ if eq $layout "agenda" }}
-        </div>
-      {{ end }}
-
     {{ end }}
-  </div>
+
+    {{ if eq $layout "agenda" }}
+      </div>
+    {{ end }}
+
+  {{ end }}
 </div>

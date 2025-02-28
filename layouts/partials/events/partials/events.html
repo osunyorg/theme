@@ -17,11 +17,9 @@
 {{ if not .Pages }}
   <p>{{ i18n "events.none" }}</p>
 {{ else }}
-  <div class="events events--{{-  $layout -}}">
-    {{ partial "events/partials/agenda.html" (dict
-      "layout" site.Params.events.index.layout
-      "options" site.Params.events.index.options
-      "agenda" $paginator.PageGroups
-    ) }}
-  </div>
+  {{ partial "events/partials/agenda.html" (dict
+    "layout" site.Params.events.index.layout
+    "options" site.Params.events.index.options
+    "agenda" $paginator.PageGroups
+  ) }}
 {{ end }}
