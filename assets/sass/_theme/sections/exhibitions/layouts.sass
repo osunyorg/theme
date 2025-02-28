@@ -18,7 +18,19 @@
             &-subtitle
                 @include h3
                 color: var(--color-text-alt)
-            @include media-breakpoint-up(desktop)
+        @include media-breakpoint-down(desktop)
+            > li + li
+                margin-top: $spacing-3
+                border-top: 1px solid var(--color-border)
+                padding-top: $spacing-3
+            .exhibition
+                display: flex
+                flex-direction: column
+                .media
+                    order: -1
+                    margin-bottom: $spacing-3
+        @include media-breakpoint-up(desktop)
+            .exhibition
                 padding-left: offset(3)
                 .media
                     order: -1
