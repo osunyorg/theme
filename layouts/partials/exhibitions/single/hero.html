@@ -11,6 +11,12 @@
   {{ $image_format := partial "GetImageDirection" . }}
   {{ $sizes = index site.Params.image_sizes.sections.exhibitions.hero_single $image_format }}
 {{ end }}
+
+{{- $hero_text_complement := "" -}}
+{{ if .Params.events_categories }}
+  {{ $hero_text_complement = "taxonomies/single-list.html" }}
+{{ end }}
+
 {{- partial "header/hero.html"
   (dict
     "title" $title
@@ -19,4 +25,5 @@
     "context" .
     "share" $share
     "button" false
+    "hero_text_complement" $hero_text_complement
   ) -}}

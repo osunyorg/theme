@@ -6,6 +6,9 @@
             display: flex
             @include media-breakpoint-down(desktop)
                 flex-direction: column
+        .taxonomies-single
+            a
+                @include link(var(--color-accent))
         @include media-breakpoint-up(desktop)
             figure
                 order: -1
@@ -15,11 +18,12 @@
                     flex-direction: column
                     margin-top: 0
                     width: columns(6)
-                    h1, hgroup
-                        flex: 1
             &.hero--image-landscape
                 .hero-text
-                    width: columns(12)
+                    width: 100%
+                    &:has(.taxonomies-single)
+                        h1, hgroup
+                            margin-right: offset(4)
             &:not(.hero--with-image)
                 .hero-text
                     align-items: flex-end
@@ -28,6 +32,7 @@
                 flex-wrap: wrap
             .hero-text
                 display: flex
+                flex-wrap: wrap
                 justify-content: space-between
                 h1, hgroup
                     max-width: columns(8)
@@ -41,6 +46,15 @@
                         width: 100%
                         &:first-child
                             margin-top: 0
+                .taxonomies-single
+                    display: flex
+                    flex-wrap: wrap
+                    width: columns(4)
+                    gap: var(--grid-gutter)
+                    .terms
+                        &, ul
+                            display: block
+                            text-align: left
             figure
                 &.image-landscape
                     width: columns(12)
