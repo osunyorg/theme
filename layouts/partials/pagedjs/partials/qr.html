@@ -1,0 +1,30 @@
+{{- $text := .text }}
+{{- $level := or .level "medium" }}
+{{- $scale := or .scale 4 }}
+{{- $targetDir := or .targetDir "" }}
+{{- $alt := or .alt "" }}
+{{- $class := or .class "" }}
+{{- $id := or .id "" }}
+{{- $title := or .title "" }}
+{{- $loading := or .loading "" }}
+
+{{- /* Validate arguments. */}}
+{{- $errors := false}}
+{{- if not $text }}
+  {{- errorf "The %q shortcode requires a %q argument. See %s" .Name "text" .Position }}
+  {{- $errors = true }}
+{{- end }}
+
+{{- /* Render image. */}}
+{{- if not $errors }}
+  {{- $opts := dict "level" $level "scale" $scale "targetDir" $targetDir }}
+  {{- with images.QR $text $opts -}}
+    <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}"
+      {{- with $alt }} alt="{{ $alt }}" {{- end }}
+      {{- with $class }} class="{{ $class }}" {{- end }}
+      {{- with $id }} id="{{ $id }}" {{- end }}
+      {{- with $title }} title="{{ $title }}" {{- end -}}
+      {{- with $loading }} loading="{{ $loading }}" {{- end -}}
+    >
+  {{- end }}
+{{- end -}}
