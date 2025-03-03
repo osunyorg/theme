@@ -1,11 +1,16 @@
-{{ $kind := .kind }}
-{{ $categories_kind := printf "%ss_categories" $kind }}
-{{ $categories := .context.GetTerms $categories_kind }}
+{{ $kind := .kind | singularize }}
+{{ $class := .class | default ( printf "%s-categories" $kind ) }}
+{{ $categories := .categories }}
+
+{{ if not $categories }}
+  {{ $categories_kind := printf "%ss_categories" $kind }}
+  {{ $categories = .context.GetTerms $categories_kind }}
+{{ end }}
 
 {{- if $categories -}}
-  <ul class="{{ $kind }}-categories" aria-label="{{ i18n "categories.label" }}">
+  <ul class="{{ $class }}" aria-label="{{ i18n "categories.label" }}">
     {{- range $categories -}}
-      <li class="{{ .Params.bodyclass }}">
+      <li {{ with .Params.bodyclassclass }}class="{{ . }}"{{ end }}>
         <a href="{{ .Permalink }}">
           {{- safeHTML .Title -}}
         </a>
