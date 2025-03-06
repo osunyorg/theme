@@ -1,3 +1,5 @@
+{{ $events := partial "GetObjectsFromPathSlice" .Params.children }}
+
 <div class="section-sidebar event-sidebar">
   <div>
     {{ if site.Params.events.single.meta_in_sidebar }}
@@ -5,11 +7,12 @@
         {{- partial "events/single/event-infos.html" . -}}
       </aside>
     {{ end }}
-    {{ partial "toc/container.html"
-      (dict
-          "toc" "toc/default.html"
-          "context" .
-      )
-    }}
+    {{ partial "toc/container.html" (dict
+        "toc" "toc/default.html"
+        "context" .
+      )}}
+    {{ if $events }}
+      <a href="#programme" class="btn">{{ i18n "events.see_programme" }}</a>
+    {{ end }}
   </div>
 </div>
