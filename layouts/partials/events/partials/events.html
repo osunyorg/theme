@@ -1,17 +1,8 @@
+{{ $collection := where (where site.RegularPages "Section" "eq" "events") "Params.parent" "eq" nil }}
 {{ $layout := site.Params.events.index.layout }}
-{{ $collection := where .Pages "Section" "eq" "events" }}
-{{ $collection = where .Pages "Params.parent" "eq" nil }}
-{{ $is_archive := ne .File.Path "events/_index.html" }}
 {{ $order := "asc" }}
 
-{{ if $is_archive }}
-  {{ $order = "desc" }}
-{{ else }}
-  {{ $collection = where $collection "Params.dates.archive" false }}
-{{ end }}
-
 {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}
-
 {{ $paginator := .Paginate $agenda site.Params.events.index.per_page }}
 
 {{ if not .Pages }}
