@@ -19,13 +19,32 @@
         @include icon(archive-line, after, true)
         display: table
         margin: $spacing-5 auto 0
-// .events__section
-//     .events-calendar
-//         @include grid(2, md)
-//         .month-title
-//             @include h6
-//         table
-//             @include meta
-//             a
-//                 @extend .btn
-//                 @extend .button--small
+.events__section
+    .events-calendar
+        @include grid(2, md)
+        .calendar-month
+            .month-title
+                @include h6
+            tr,
+            td
+                padding: 0
+                text-align: center
+            thead
+                // @include grid(7)
+                @include meta
+                // th
+                //     display: block
+            tbody
+                @include meta
+                --btn-min-width: 0
+                tr
+                    // @include grid(7)
+                    // display: flex
+                    // gap: var(--grid-gutter)
+                    // justify-content: flex-end
+                    // width: 100%
+                    td
+                        border: none
+                a
+                    @extend .btn
+                    @extend .button--small

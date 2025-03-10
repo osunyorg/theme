@@ -5,6 +5,11 @@
       "context" .
     ) }}
 
+  {{ if site.Params.events.index.highlight_exhibitions.active }}
+    {{ $exhibitions := where .Site.RegularPages "Section" "exhibitions" }}
+    {{ partial "events/section/exhibitions.html" $exhibitions }}
+  {{ end }}
+
   {{ partial "events/section/calendar.html" . }}
   {{ partial "contents/list.html" . }}
 
