@@ -1,1 +1,35 @@
-calendar
+
+<div class="container events-calendar">
+  {{ range .Params.months }}
+    <table class="calendar-month">
+      <caption> <h2>{{ .name }}</h2></caption>
+      <thead>
+        <tr><td>Lun</td></tr>
+        <tr><td>Mar</td></tr>
+        <tr><td>Mer</td></tr>
+        <tr><td>Jeu</td></tr>
+        <tr><td>Ven</td></tr>
+        <tr><td>Sam</td></tr>
+        <tr><td>Dim</td></tr>
+      </thead>
+      <tbody>
+        <tr>
+        {{ range .days }}
+          {{ $date := .day | time.AsTime }}
+          {{ $formated_date := $date | time.Format "2" }}
+
+          <td>
+            {{ if gt .events 0 }}
+              <a href="#{{ .day }}">{{ $formated_date }}</a>
+            {{ else }}
+              <span>{{ $formated_date }}</span>
+            {{ end }}
+          </td>
+          {{ if eq .cwday 7 }}
+            </tr><tr>
+          {{ end }}
+        {{ end }}
+      </tbody>
+    </table>
+  {{ end }}
+</div>
