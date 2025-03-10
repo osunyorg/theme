@@ -10,7 +10,11 @@
   {{ $collection = where $collection "Params.dates.archive" false }}
 {{ end }}
 
+{{/*  {{ $collection = where $collection "Params.date" "2025-02-22" }}
+{{ $collection = where $collection "Params.dates.from.day" "2025-01-14" }}  */}}
+
 {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}
+
 
 {{ $paginator := .Paginate $agenda site.Params.events.index.per_page }}
 
