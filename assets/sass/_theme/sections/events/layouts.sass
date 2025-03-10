@@ -173,15 +173,14 @@
             &:where(:not(:first-child))
                 border-top: 1px solid var(--color-border)
         .events-date-title
+            @include h3
+            color: var(--color-text-alt)
             padding-top: $spacing-4
             transition: 0.3s
             &:not(:first-child)
                 margin-top: var(--heading-margin-top)
             + .event
                 margin-top: var(--heading-margin-bottom)
-            &.is-down
-                @include h3
-                max-width: columns(3)
         .event
             display: flex
             flex-direction: column
@@ -201,6 +200,16 @@
             &-hours
                 @include h3
         @include media-breakpoint-down(desktop)
+            .events-date-title
+                @include sticky
+                top: 0
+                width: 100%
+                backdrop-filter: $backdrop
+                background: white
+                background-color: $backdrop-color
+                padding-bottom: $spacing-2
+                padding-top: $spacing-2
+                z-index: 2
             .event
                 &-content
                     display: flex
@@ -234,23 +243,24 @@
                 padding-bottom: $spacing-5
             .events-date-title
                 @include sticky
+                bottom: $spacing-4
                 width: 100%
-                // backdrop-filter: $backdrop
-                // background: white
-                // background-color: $backdrop-color
-                // padding-bottom: $spacing-2
-                // padding-top: $spacing-2
                 padding-top: $spacing-5
+                // transition: 0.1s
+                // text-overflow: ellipsis
+                // white-space: nowrap
+                // overflow: hidden
                 z-index: 1
-                transition: 0.1s
                 &.is-down
                     max-width: columns(3)
+                    @include h3
+                    margin-bottom: var(--title-margin-bottom)
             .event
                 padding-left: offset(3)
                 flex-direction: row
                 gap: var(--grid-gutter)
                 &-content
-                    width: columns(5)
+                    width: columns(6)
                 .media
                     width: columns(3)
                 &-hours
