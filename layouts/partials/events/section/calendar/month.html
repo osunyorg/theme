@@ -1,0 +1,37 @@
+<table class="calendar-month">
+  <caption> <h2>{{ .name }}</h2></caption>
+  <thead>
+    <tr align="right">
+      <th>Lun</th>
+      <th>Mar</th>
+      <th>Mer</th>
+      <th>Jeu</th>
+      <th>Ven</th>
+      <th>Sam</th>
+      <th>Dim</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {{ range $index, $day := .days }}
+        {{ $date := $day.day | time.AsTime }}
+        {{ $formated_date := $date | time.Format "2" }}
+        {{ if eq $index 0 }}
+            {{ range (seq (sub $day.cwday 1)) }}
+              <td aria-hidden="true"></td>
+            {{ end }}
+        {{ end }}
+          <td>
+            {{ if gt $day.events 0 }}
+              <a href="#{{ $day.day }}">{{ $formated_date }}</a>
+            {{ else }}
+              <span>{{ $formated_date }}</span>
+            {{ end }}
+          </td>
+        {{ if and (gt $day.cwday 0) (eq (mod $day.cwday 7) 0) }}
+          </tr><tr>
+        {{ end }}
+      {{ end }}
+    </tr>
+  </tbody>
+</table>
