@@ -1,3 +1,5 @@
+{{ $is_index := eq .File.Path "events/_index.html" }}
+
 {{ partial "events/section/hero.html" . }}
 <div class="document-content">
   {{ partial "events/section/summary.html" (dict
@@ -10,7 +12,10 @@
     {{ partial "events/section/exhibitions.html" $exhibitions }}
   {{ end }}
 
-  {{ partial "events/section/calendar.html" . }}
+  {{ if not $is_index }}
+    {{ partial "events/section/calendar.html" . }}
+  {{ end }}
+
   {{ partial "contents/list.html" . }}
 
   <div class="container">
@@ -19,7 +24,8 @@
 
   <div class="container">
     {{ $events := .Pages }}
-    {{ if eq .File.Path "events/_index.html" }}
+
+    {{ if $is_index }}
       {{ $events = where site.RegularPages "Section" "eq" "events" }}
     {{ end }}
 
@@ -27,7 +33,11 @@
         "events" $events
         "context" . 
       )}}
+
     {{ partial "commons/pagination.html" . }}
-    {{/*  {{ partial "commons/section/archive-link.html" . }}  */}}
   </div>
+
+  {{ if $is_index }}
+    {{ partial "events/section/archives.html" . }}
+  {{ end }}
 </div>
