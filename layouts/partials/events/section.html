@@ -17,16 +17,13 @@
     {{ partial "taxonomies/section-list.html" . }}
   </div>
 
-  {{ if site.Params.events.index.highlight_exhibitions.active }}
-    {{ $exhibitions := where .Site.RegularPages "Section" "exhibitions" }}
-    {{ partial "events/section/exhibitions.html" $exhibitions }}
-  {{ end }}
   <div class="container">
     {{ $events := .Pages }}
     {{ if eq .File.Path "events/_index.html" }}
       {{ $events := where site.RegularPages "Section" "eq" "events" }}
     {{ end }}
 
+    {{ printf "%#v" $events }}
     {{ partial "events/partials/events.html" (dict
         "events" $events
         "context" . 
