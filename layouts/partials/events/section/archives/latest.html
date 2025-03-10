@@ -1,5 +1,15 @@
 {{ $events := where site.RegularPages "Section" "events" }}
+{{ $events = where $events "Params.parent" "eq" nil }}
+{{ $events = where $events "Params.dates.archive" true | first 3 }}
+{{ $agenda := $events.GroupByDate site.Params.events.index.group_by_date "asc" }}
 
-{{ range $events }}
-  
+{{ if $events }}
+  <div class="container events-archives-latest">
+    <h2>{{ i18n "events.archives.latest" }}</h2>
+    {{ partial "events/partials/agenda.html" (dict
+        "layout" site.Params.events.index.layout
+        "options" site.Params.events.index.options
+        "agenda" $agenda
+      ) }}
+  </div>
 {{ end }}

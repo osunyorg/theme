@@ -27,6 +27,7 @@
 
     {{ if $is_index }}
       {{ $events = where site.RegularPages "Section" "eq" "events" }}
+      {{ $events = where $events "Params.dates.archive" false }}
     {{ end }}
 
     {{ partial "events/partials/events.html" (dict

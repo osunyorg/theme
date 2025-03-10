@@ -1,6 +1,5 @@
 {{ $collection := where .events "Params.parent" "eq" nil }}
 {{ $layout := site.Params.events.index.layout }}
-{{ $order := "asc" }}
 
 {{/* {{ if $is_archive }}
   {{ $order = "desc" }}
@@ -12,9 +11,8 @@
 {{/*  {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}  */}}
 
 {{ $collection := where $collection "Params.dates" "ne" nil }}
-{{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}
+{{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date "asc" }}
 {{ $paginator := .context.Paginate $agenda site.Params.events.index.per_page }}
-
 
 {{ if not $paginator.PageGroups }}
   <p>{{ i18n "events.none" }}</p>
