@@ -1,14 +1,14 @@
 {{ $years := .Pages }}
 {{ with $years }}
-<div class="container events-archives">
-  <h3>{{ i18n "events.archives.by_year" }}</h3>
-  <ol>
-    {{ range . }}
-      <li>
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-        <p>{{ i18n "events.count" (len .Pages) }}</p>
-      </li>
-    {{ end }}
-  </ol>
-</div>
+  <div class="container events-archives-years">
+    <h3>{{ i18n "events.archives.by_year" }} </h3>
+    <ol>
+      {{ range . }}
+        <li>
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+          <p>{{ i18n "events.count" (len .Pages) }}</p>
+        </li>
+      {{ end }}
+    </ol>
+  </div>
 {{ end }}

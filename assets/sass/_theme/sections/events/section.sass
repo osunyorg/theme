@@ -13,65 +13,29 @@
                 margin-bottom: $spacing-3
                 &:where(:not(:first-child))
                     margin-top: $spacing-5
-    .archive-link
-        @extend .button
-        @extend .button--small
-        @include icon(archive-line, after, true)
-        display: table
-        margin: $spacing-5 auto 0
-
 .events__section
-    .events-calendar
-        @include grid(2, md, $spacing-6)
-        @include grid(3, desktop, $spacing-6)
-        .calendar-month
-            caption-side: top
-            max-width: 100%
-            @include media-breakpoint-down(md)
-                + .calendar-month
-                    margin-top: $spacing-4
-            caption
-                text-align: center
+    .events-archives-years
+        margin-top: $spacing-5
+        ol
+            @include list-reset
+            margin-top: $spacing-2
+            li
+                @include icon(arrow-right-line, after, true)
+                align-items: center
+                border-bottom: 1px solid var(--color-border)
+                display: flex
+                gap: var(--grid-gutter)
+                padding-bottom: $spacing-3
+                padding-top: $spacing-3
+                position: relative
+                text-decoration: none
+                justify-content: space-between
                 a
-                    @include h6
-                    color: var(--color-accent)
-                    font-weight: bold
+                    @include h2
+                    @include stretched-link
+                    @include media-breakpoint-up(desktop)
+                        width: columns(6)
                     text-decoration: none
-            th,
-            td
-                height: pxToRem(50)
-                padding: 0
-                text-align: center
-                vertical-align: middle
-                width: calc(100% / 7)
-                @include media-breakpoint-down(md)
-                    height: pxToRem(35)
-                    min-width: unset
-            thead
-                @include meta
-                th
-                    font-weight: normal
-            tbody
-                @include meta
-                --btn-min-width: 0
-                --btn-border-radius: 100%
-                --btn-border: none
-                --btn-color: var(--color-accent)
-                --btn-background: var(--color-background-alt)
-                --btn-hover-background: var(--color-accent)
-                --btn-hover-border: none
-                --btn-hover-color: var(--color-background)
-                tr
-                    td
-                        border: none
-                a
-                    @extend .btn
-                    align-items: center
-                    aspect-ratio: 1
-                    display: inline-flex
-                    height: pxToRem(36)
-                    justify-content: center
-                    line-height: 1
-                    padding: 0
-                    @include media-breakpoint-down(md)
-                        height: pxToRem(30)
+                @include media-breakpoint-up(desktop)
+                    p
+                        flex: 1

@@ -1,0 +1,55 @@
+.events-calendar
+    @include grid(2, md, $spacing-6)
+    @include grid(3, desktop, $spacing-6)
+
+    .calendar-month
+        caption-side: top
+        max-width: 100%
+        @include media-breakpoint-down(md)
+            + .calendar-month
+                margin-top: $spacing-4
+        caption
+            text-align: center
+            a
+                @include h6
+                color: var(--color-accent)
+                font-weight: bold
+                text-decoration: none
+        th,
+        td
+            height: pxToRem(50)
+            padding: 0
+            text-align: center
+            vertical-align: middle
+            width: calc(100% / 7)
+            @include media-breakpoint-down(md)
+                height: pxToRem(35)
+                min-width: unset
+        thead
+            @include meta
+            th
+                font-weight: normal
+        tbody
+            @include meta
+            --btn-min-width: 0
+            --btn-border-radius: 100%
+            --btn-border: none
+            --btn-color: var(--color-accent)
+            --btn-background: var(--color-background-alt)
+            --btn-hover-background: var(--color-accent)
+            --btn-hover-border: none
+            --btn-hover-color: var(--color-background)
+            tr
+                td
+                    border: none
+            a
+                @extend .btn
+                align-items: center
+                aspect-ratio: 1
+                display: inline-flex
+                height: pxToRem(36)
+                justify-content: center
+                line-height: 1
+                padding: 0
+                @include media-breakpoint-down(md)
+                    height: pxToRem(30)
