@@ -1,19 +1,19 @@
-{{ $collection := where .Pages "Params.parent" "eq" nil }}
+{{ $collection := where .events "Params.parent" "eq" nil }}
 {{ $layout := site.Params.events.index.layout }}
 {{ $order := "asc" }}
 
-{{/*  {{ if $is_archive }}
+{{/* {{ if $is_archive }}
   {{ $order = "desc" }}
 {{ else }}
   {{ $collection = where $collection "Params.dates.archive" false }}
-{{ end }}
-
-{{ $collection = where $collection "Params.date" "2025-02-22" }}
+{{ end }}  */}}
+{{/*  {{ $collection = where $collection "Params.date" "2025-02-22" }}
 {{ $collection = where $collection "Params.dates.from.day" "2025-01-14" }}  */}}
+{{/*  {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}  */}}
 
-{{ $collection = where $collection "Params.dates" "ne" nil }}
+{{ $collection := where $collection "Params.dates" "ne" nil }}
 {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}
-{{ $paginator := .Paginate $agenda site.Params.events.index.per_page }}
+{{ $paginator := .context.Paginate $agenda site.Params.events.index.per_page }}
 
 {{ if not .Pages }}
   <p>{{ i18n "events.none" }}</p>
@@ -23,4 +23,9 @@
     "options" site.Params.events.index.options
     "agenda" $paginator.PageGroups
   ) }}
+{{ end }}
+
+
+{{ range .Pages }}
+  <p>{{ .Title }}</p>
 {{ end }}

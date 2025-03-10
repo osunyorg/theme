@@ -15,7 +15,11 @@
     {{ partial "events/section/exhibitions.html" $exhibitions }}
   {{ end }}
   <div class="container">
-    {{ partial "events/partials/events.html" . }}
+    {{ $events := where .Pages "Section" "events" }}
+    {{ partial "events/partials/events.html" (dict
+        "events" $events
+        "context" . 
+      )}}
     {{ partial "commons/pagination.html" . }}
     {{ partial "commons/section/archive-link.html" . }}
   </div>
