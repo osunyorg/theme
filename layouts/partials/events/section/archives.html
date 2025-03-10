@@ -1,14 +1,2 @@
-{{ $years := .Pages }}
-{{ with $years }}
-<div class="container events-archives">
-  <h2>{{ i18n "events.archives.by_year" }} </h2>
-  <ol>
-    {{ range . }}
-      <li>
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-        <p>{{ i18n "events.count" (len .Pages) }}</p>
-      </li>
-    {{ end }}
-  </ol>
-</div>
-{{ end }}
+{{ partial "events/section/archives/latest.html" . }}
+{{ partial "events/section/archives/years.html" . }}
