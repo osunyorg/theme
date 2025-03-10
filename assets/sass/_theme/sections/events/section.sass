@@ -19,25 +19,56 @@
         @include icon(archive-line, after, true)
         display: table
         margin: $spacing-5 auto 0
+
 .events__section
     .events-calendar
-        @include grid(2, md)
+        @include grid(2, md, $spacing-6)
+        @include grid(3, desktop, $spacing-6)
+
         .calendar-month
-            .month-title
-                @include h6
-            tr,
+            caption-side: top
+            max-width: 100%
+            @include media-breakpoint-down(md)
+                + .calendar-month
+                    margin-top: $spacing-4
+            caption
+                text-align: center
+                h2
+                    @include h6
+                    color: var(--color-accent)
+                    font-weight: bold
+            th,
             td
+                height: pxToRem(50)
                 padding: 0
                 text-align: center
+                vertical-align: middle
+                width: calc(100% / 7)
+                @include media-breakpoint-down(md)
+                    height: pxToRem(35)
+                    min-width: unset
             thead
                 @include meta
+                th
+                    font-weight: normal
             tbody
                 @include meta
                 --btn-min-width: 0
+                --btn-border-radius: 100%
+                --btn-hover-background: var(--color-accent)
+                --btn-hover-border: 1px solid transparent
+                --btn-hover-color: var(--color-background)
                 tr
                     td
                         border: none
                 a
                     @extend .btn
-                    @extend .button--small
-                    display: inline
+                    align-items: center
+                    aspect-ratio: 1
+                    display: inline-flex
+                    height: pxToRem(36)
+                    justify-content: center
+                    line-height: 1
+                    padding: 0
+                    @include media-breakpoint-down(md)
+                        height: pxToRem(30)
