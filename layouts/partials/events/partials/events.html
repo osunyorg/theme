@@ -11,11 +11,12 @@
 {{ $collection = where $collection "Params.dates.from.day" "2025-01-14" }}  */}}
 {{/*  {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}  */}}
 
-{{ $collection := where $collection "Params.dates" "ne" nil }}
+{{/*  {{ $collection := where $collection "Params.dates" "ne" nil }}  */}}
 {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}
 {{ $paginator := .context.Paginate $agenda site.Params.events.index.per_page }}
 
-{{ if not .Pages }}
+
+{{ if not $paginator.PageGroups }}
   <p>{{ i18n "events.none" }}</p>
 {{ else }}
   {{ partial "events/partials/agenda.html" (dict
@@ -23,9 +24,4 @@
     "options" site.Params.events.index.options
     "agenda" $paginator.PageGroups
   ) }}
-{{ end }}
-
-
-{{ range .Pages }}
-  <p>{{ .Title }}</p>
 {{ end }}

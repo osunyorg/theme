@@ -20,10 +20,9 @@
   <div class="container">
     {{ $events := .Pages }}
     {{ if eq .File.Path "events/_index.html" }}
-      {{ $events := where site.RegularPages "Section" "eq" "events" }}
+      {{ $events = where site.RegularPages "Section" "eq" "events" }}
     {{ end }}
 
-    {{ printf "%#v" $events }}
     {{ partial "events/partials/events.html" (dict
         "events" $events
         "context" . 
