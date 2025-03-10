@@ -4,13 +4,9 @@
   </caption>
   <thead>
     <tr align="right">
-      <th>{{ i18n "events.calendar.week_days.monday" }}</th>
-      <th>{{ i18n "events.calendar.week_days.tuesday" }}</th>
-      <th>{{ i18n "events.calendar.week_days.wednesday" }}</th>
-      <th>{{ i18n "events.calendar.week_days.thursday" }}</th>
-      <th>{{ i18n "events.calendar.week_days.friday" }}</th>
-      <th>{{ i18n "events.calendar.week_days.saturday" }}</th>
-      <th>{{ i18n "events.calendar.week_days.sunday" }}</th>
+      {{ range (slice "monday" "tuesday" "wednesday" "thursday" "friday" "saturday" "sunday") }}
+        <th>{{ i18n (printf "events.calendar.week_days.%s" .) }}</th>
+      {{ end }}
     </tr>
   </thead>
   <tbody>
