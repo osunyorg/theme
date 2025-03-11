@@ -10,7 +10,7 @@
 {{ $collection = where $collection "Params.dates.from.day" "2025-01-14" }}  */}}
 {{/*  {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}  */}}
 
-{{ $collection := where $collection "Params.dates" "ne" nil }}
+{{/*  {{ $collection := where $collection "Params.dates" "ne" nil }}  */}}
 {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date "asc" }}
 {{ $paginator := .context.Paginate $agenda site.Params.events.index.per_page }}
 

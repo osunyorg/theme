@@ -7,7 +7,7 @@
       "context" .
     ) }}
 
-  {{ if site.Params.events.index.highlight_exhibitions.active }}
+  {{ if and $is_index site.Params.events.index.highlight_exhibitions.active }}
     {{ $exhibitions := where .Site.RegularPages "Section" "exhibitions" }}
     {{ partial "events/section/exhibitions.html" $exhibitions }}
   {{ end }}
@@ -28,6 +28,8 @@
     {{ if $is_index }}
       {{ $events = where site.RegularPages "Section" "eq" "events" }}
       {{ $events = where $events "Params.dates.archive" false }}
+    {{ else if .Params.is_year }}
+      {{ $events = .RegularPagesRecursive }}
     {{ end }}
 
     {{ partial "events/partials/events.html" (dict

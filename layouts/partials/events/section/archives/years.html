@@ -6,7 +6,8 @@
       {{ range . }}
         <li>
           <a href="{{ .Permalink }}" title="{{ i18n "events.archives.list.title" (dict "year" .Title)}}">{{ .Title }}</a>
-          <p>{{ i18n "events.count" (len .Pages) }}</p>
+          {{ $count := len (where .RegularPagesRecursive ".Params.is_month" nil) }}
+          <p>{{ i18n "events.count" $count  }}</p>
         </li>
       {{ end }}
     </ol>

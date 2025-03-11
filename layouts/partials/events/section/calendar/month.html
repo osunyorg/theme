@@ -14,6 +14,7 @@
       {{ range $index, $day := .days }}
         {{ $date := $day.day | time.AsTime }}
         {{ $formated_date := $date | time.Format "2" }}
+        {{ $anchor := $date | time.Format site.Params.events.index.group_by_date }}
         {{ if eq $index 0 }}
             {{ range (seq (sub $day.cwday 1)) }}
               <td aria-hidden="true"></td>
@@ -21,7 +22,7 @@
         {{ end }}
           <td>
             {{ if gt $day.events 0 }}
-              <a href="#{{ $day.day }}">{{ $formated_date }}</a>
+              <a href="#{{ anchorize $anchor }}">{{ $formated_date }}</a>
             {{ else }}
               <span>{{ $formated_date }}</span>
             {{ end }}
