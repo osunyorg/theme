@@ -24,17 +24,21 @@
 
   <div class="container" id="events-agenda">
     {{ $events := .Pages }}
+    {{ $per_page := site.Params.events.index.per_page }}
 
     {{ if $is_index }}
       {{ $events = where site.RegularPages "Section" "eq" "events" }}
       {{ $events = where $events "Params.dates.archive" false }}
     {{ else if .Params.is_year }}
       {{ $events = .RegularPagesRecursive }}
+    {{ else if .Params.is_month }}
+      {{ $per_page = 10000 }}
     {{ end }}
 
     {{ partial "events/partials/events.html" (dict
         "events" $events
-        "context" . 
+        "context" .
+        "per_page" $per_page
       )}}
 
     {{ partial "commons/pagination.html" . }}
