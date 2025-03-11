@@ -1,20 +1,22 @@
 {{ $permalink := .permalink }}
+{{ $label_type := .label_type | default "short" }}
+
 <table class="calendar-month">
   <caption>
     <h2>
       {{ if $permalink }}
-      <a href="{{ $permalink }}" title="{{ i18n "events.calendar.month.link" (dict "month" .name) }}>
-        {{ .name }}
-      </a>
+        <a href="{{ $permalink }}" title="{{ i18n "events.calendar.month.link" (dict "month" .name) }}">
+          {{ .name }}
+        </a>
       {{ else }}
         {{ .name }}
       {{ end }}
     </h2>
   </caption>
   <thead>
-    <tr align="right">
+    <tr>
       {{ range (slice "monday" "tuesday" "wednesday" "thursday" "friday" "saturday" "sunday") }}
-        <th>{{ i18n (printf "events.calendar.week_days.%s" .) }}</th>
+        <th>{{ i18n (printf "events.calendar.week_days.%s.%s" $label_type .) }}</th>
       {{ end }}
     </tr>
   </thead>
