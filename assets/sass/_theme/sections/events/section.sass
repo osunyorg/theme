@@ -13,6 +13,7 @@
                 margin-bottom: $spacing-3
                 &:where(:not(:first-child))
                     margin-top: $spacing-5
+
 .events__section
     .events-archives-years
         margin-top: $spacing-5
@@ -45,31 +46,34 @@
 
 .events__section-month
     .events-calendar
-        .calendar-month
-            max-width: columns(11)
         caption
             @extend .sr-only
+    @include media-breakpoint-up(desktop)
+        .events-calendar
+            .calendar-month
+                max-width: columns(11)
+                th, td
+                    text-align: left
 
 .events__section-year
-    .hero
-        .hero-text
-            align-items: baseline
-            display: flex
-            gap: var(--grid-gutter)
-            justify-content: space-between
-            width: auto
-        .hero-actions
-            .btn
-                @extend .button--small
-                @include icon(arrow-down-line, after)
-                --btn-background: #{$color-background-alt}
-                --btn-hover-background: #{$color-border}
-                border: none
+    .hero-text
+        align-items: baseline
+        display: flex
+        gap: var(--grid-gutter)
+        justify-content: space-between
+        width: auto
+    .hero-actions
+        .btn
+            @extend .button--small
+            @include icon(arrow-down-line, after)
+            --btn-background: #{$color-background-alt}
+            --btn-hover-background: #{$color-border}
+            border: none
+    .events-calendar
+        @include grid(2, md, $spacing-6)
+        @include grid(3, desktop, $spacing-6)
     @include media-breakpoint-down(up)
         align-items: center
     @include media-breakpoint-down(desktop)
         .hero-text
             flex-direction: column
-    .events-calendar
-        @include grid(2, md, $spacing-6)
-        @include grid(3, desktop, $spacing-6)
