@@ -45,10 +45,14 @@
 
 .events__section-month
     .events-calendar
-        .calendar-month
-            max-width: columns(11)
         caption
             @extend .sr-only
+    @include media-breakpoint-up(desktop)
+        .events-calendar
+            .calendar-month
+                max-width: columns(11)
+                th, td
+                    text-align: left
 
 .events__section-year
     .hero-text
@@ -56,11 +60,11 @@
         gap: var(--grid-gutter)
         justify-content: space-between
         width: auto
+    .events-calendar
+        @include grid(2, md, $spacing-6)
+        @include grid(3, desktop, $spacing-6)
     @include media-breakpoint-down(up)
         align-items: center
     @include media-breakpoint-down(desktop)
         .hero-text
             flex-direction: column
-    .events-calendar
-        @include grid(2, md, $spacing-6)
-        @include grid(3, desktop, $spacing-6)

@@ -1,0 +1,21 @@
+{{ partial "events/section/hero.html" . }}
+<div class="document-content">
+  {{ partial "events/section/summary.html" (dict
+      "with_container" true
+      "context" .
+    ) }}
+
+  {{ partial "events/section/calendar.html" . }}
+
+  {{ partial "contents/list.html" . }}
+
+  <div class="container" id="events-agenda">
+    {{ $events := .Pages }}
+
+    {{ partial "events/partials/events.html" (dict
+        "events" .Pages
+        "context" .
+        "per_page" 10000
+      )}}
+  </div>
+</div>
