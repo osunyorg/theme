@@ -43,6 +43,11 @@
                     p
                         flex: 1
 
+.events__section-month
+    .events-calendar
+        caption
+            @extend .sr-only
+
 .events__section-year
     .hero-text
         display: flex
@@ -54,3 +59,6 @@
     @include media-breakpoint-down(desktop)
         .hero-text
             flex-direction: column
+    .events-calendar
+        @include grid(2, md, $spacing-6)
+        @include grid(3, desktop, $spacing-6)
