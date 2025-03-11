@@ -1,11 +1,12 @@
 {{ $permalink := .permalink }}
+{{ $is_month := .is_month }}
 <table class="calendar-month">
   <caption>
     <h2>
       {{ if $permalink }}
-      <a href="{{ $permalink }}" title="{{ i18n "events.calendar.month.link" (dict "month" .name) }}>
-        {{ .name }}
-      </a>
+        <a href="{{ $permalink }}" title="{{ i18n "events.calendar.month.link" (dict "month" .name) }}">
+          {{ .name }}
+        </a>
       {{ else }}
         {{ .name }}
       {{ end }}
@@ -14,7 +15,7 @@
   <thead>
     <tr align="right">
       {{ range (slice "monday" "tuesday" "wednesday" "thursday" "friday" "saturday" "sunday") }}
-        <th>{{ i18n (printf "events.calendar.week_days.%s" .) }}</th>
+        <th>{{ i18n (printf "events.calendar.week_days.%s.%s" . (cond $is_month "long" "short")) }}</th>
       {{ end }}
     </tr>
   </thead>
@@ -36,7 +37,7 @@
         {{ end }}
           <td>
             {{ if gt $day.events 0 }}
-              <a href="{{ $anchor }}">{{ $formated_date }}</a>
+              <a href="{{ $anchor }}" title="{{ i18n "events.calendar.day.link" (dict "date" ($date | time.Format ":date_full")) }}">{{ $formated_date }}</a>
             {{ else }}
               <span>{{ $formated_date }}</span>
             {{ end }}

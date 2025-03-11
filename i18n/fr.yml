@@ -261,16 +261,32 @@ events:
     list:
       title: "Archives de l'année {{ .year }}"
   calendar:
+    day:
+      link: Consulter tous les événements du {{ .date }}
     month:
-      link: View all {{ .month }} events
+      link: Consulter tous les événements du mois de {{ .month }}
     week_days:
-      monday: Lun
-      tuesday: Mar
-      wednesday: Mer
-      thursday: Jeu
-      friday: Ven
-      saturday: Sam
-      sunday: Dim
+      monday: 
+        short: Lun
+        long: Lundi
+      tuesday: 
+        short: Mar
+        long: Mardi
+      wednesday: 
+        short: Mer
+        long: Mercredi
+      thursday: 
+        short: Jeu
+        long: Jeudi
+      friday: 
+        short: Ven
+        long: Vendredi
+      saturday:
+        short: Sam
+        long: Samedi
+      sunday: 
+        short: Dim
+        long: Dimanche
   count:
     one: "1 événement"
     other: "{{ .Count }} événements"
