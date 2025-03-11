@@ -1,7 +1,8 @@
 .events-calendar
     .calendar-month
         caption-side: top
-        max-width: 100%
+        display: inline-table
+        height: max-content
         @include media-breakpoint-down(md)
             + .calendar-month
                 margin-top: $spacing-4
@@ -16,7 +17,6 @@
         td
             height: pxToRem(50)
             padding: 0
-            text-align: center
             vertical-align: middle
             width: calc(100% / 7)
             @include media-breakpoint-down(md)
@@ -39,14 +39,16 @@
             tr
                 td
                     border: none
+                    aspect-ratio: 1
+            a, span
+                aspect-ratio: 1
+                height: space(9)
+                line-height: space(9)
+                padding: 0
+                display: block
+                text-align: center
+                @include media-breakpoint-down(md)
+                    height: pxToRem(7)
             a
                 @extend .btn
-                align-items: center
-                aspect-ratio: 1
-                display: inline-flex
-                height: pxToRem(36)
-                justify-content: center
-                line-height: 1
-                padding: 0
-                @include media-breakpoint-down(md)
-                    height: pxToRem(30)
+

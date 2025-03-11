@@ -1,5 +1,6 @@
 {{ $permalink := .permalink }}
-{{ $is_month := .is_month }}
+{{ $label_type := .label_type | default "short" }}
+
 <table class="calendar-month">
   <caption>
     <h2>
@@ -13,9 +14,9 @@
     </h2>
   </caption>
   <thead>
-    <tr align="right">
+    <tr>
       {{ range (slice "monday" "tuesday" "wednesday" "thursday" "friday" "saturday" "sunday") }}
-        <th>{{ i18n (printf "events.calendar.week_days.%s.%s" . (cond $is_month "long" "short")) }}</th>
+        <th>{{ i18n (printf "events.calendar.week_days.%s.%s" $label_type .) }}</th>
       {{ end }}
     </tr>
   </thead>
