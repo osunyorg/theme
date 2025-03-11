@@ -30,9 +30,13 @@ osuny.StickyTitle.prototype.listen = function () {
         this.container.style.setProperty('--title-height', titleDownHeight + 'px');
 
         if (hours) {
-            this.container.style.setProperty('--title-margin-bottom', (titleDownHeight)  + 'px');
+            this.container.style.setProperty('--title-margin-bottom', (titleDownHeight/2)  + 'px');
         }
     }.bind(this));
+};
+
+osuny.StickyTitle.prototype.setTitleHeight = function () {
+    
 };
 
 // Setup agenda page titles
