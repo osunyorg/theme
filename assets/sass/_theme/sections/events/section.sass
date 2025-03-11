@@ -51,11 +51,20 @@
             @extend .sr-only
 
 .events__section-year
-    .hero-text
-        display: flex
-        gap: var(--grid-gutter)
-        justify-content: space-between
-        width: auto
+    .hero
+        .hero-text
+            align-items: baseline
+            display: flex
+            gap: var(--grid-gutter)
+            justify-content: space-between
+            width: auto
+        .hero-actions
+            .btn
+                @extend .button--small
+                @include icon(arrow-down-line, after)
+                --btn-background: #{$color-background-alt}
+                --btn-hover-background: #{$color-border}
+                border: none
     @include media-breakpoint-down(up)
         align-items: center
     @include media-breakpoint-down(desktop)
