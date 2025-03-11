@@ -119,6 +119,12 @@
                     --btn-hover-border: none
                     --btn-hover-background: var(--color-border)
                     margin-top: $spacing-3
+            @include media-breakpoint-up(desktop)
+                &.parent-event
+                    display: flex
+                    gap: var(--grid-gutter)
+                    .event-summary
+                        flex: 1
         .event-summary,
         .event-time-slot
             align-items: baseline
