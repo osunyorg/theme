@@ -31,8 +31,11 @@ body
     //         transition-duration: 0s !important
 
 main
-    &:not(.page-with-blocks, .page-with-map)
+    &:not(.page-with-blocks, .page-with-map),
+    body[class*="__section"] &
         padding-bottom: $spacing-5
+    .blocks + *
+        margin-top: $spacing-5
 
 iframe
     border: none

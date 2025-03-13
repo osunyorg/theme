@@ -56,27 +56,27 @@ if (command === "watch") {
 
 if (command === "dev") {
     execute("hugo");
-    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --exclude-selectors '" + pagefindExclude + "'");
+    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
     execute("hugo server");
 }
 
 if (command === "local") {
     var IP = dev.network["en0"][0] || "0.0.0.0";
     execute("hugo");
-    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --exclude-selectors '" + pagefindExclude + "'");
+    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
     execute("hugo server --bind=" + IP + " --baseURL=http://" + IP + ":1313 -D");
 }
 
 if (command === "build") {
     execute("yarn upgrade");
     execute("hugo --minify");
-    execute("npm_config_yes=true npx pagefind --site 'public' --exclude-selectors '" + pagefindExclude + "'");
+    execute("npm_config_yes=true npx pagefind --site 'public' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
 }
 
 if (command === "percy-build") {
     execute("yarn upgrade");
     execute("hugo --baseURL=/");
-    execute("npm_config_yes=true npx pagefind --site 'public' --exclude-selectors '" + pagefindExclude + "'");
+    execute("npm_config_yes=true npx pagefind --site 'public' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
 }
 
 if (command === "update") {
