@@ -26,8 +26,18 @@
                 display: block
             + p
                 margin-top: $spacing-3
-        .btn
-            margin-top: $spacing-3
+        .hero-actions
+            .dropdown-share
+                button
+                    margin-top: 0
+            > * + * 
+                margin-top: $spacing-2
+            @include media-breakpoint-down(desktop)
+                margin-top: $spacing-3
+                a
+                    min-width: columns(6)
+                button
+                    width: columns(6)
         hgroup.has-lead > p
             @include lead-hero
         figure

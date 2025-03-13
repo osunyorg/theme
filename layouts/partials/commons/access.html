@@ -1,0 +1,10 @@
+{{ if or .Params.text .Params.notes .Params.header_cta.display .Params.time_slots }}
+  <div class="container event-access">
+    {{ if or .Params.text .Params.notes .Params.header_cta.display }}
+      {{ partial "commons/practicals.html" . }}
+    {{ end }}
+    {{ if or .Params.time_slots .Params.children }}
+      {{ partial "commons/dates.html" . }}
+    {{ end }}
+  </div>
+{{ end }}

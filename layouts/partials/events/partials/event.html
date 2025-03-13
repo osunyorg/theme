@@ -1,6 +1,9 @@
 {{ $event := .event }}
 {{ $layout := .layout | default "list" }}
 {{ $heading_level := .heading_level | default 3 }}
+{{ $is_sub_event := .is_sub_event }}
+{{ $is_sup_event := .is_sup_event }}
+{{ $with_more := .with_more }}
 
 {{ $heading_tag := (dict 
     "open" ((printf "<h%d itemprop='name' class='event-title'>" $heading_level) | safeHTML)
@@ -11,7 +14,22 @@
 {{ $options := .options }}
 
 {{ with $event }}
-  <article class="event {{ if .Params.image }}event--with-image{{ end -}}" itemscope itemtype="https://schema.org/Event">
+  {{ $class := "event" }}
+  {{ if and .Params.image $options.image }}
+    {{ $class = printf "%s event--with-image" $class }}
+  {{ end -}}
+  {{ if .Params.children }}
+    {{ $class = printf "%s event--parent" $class }}
+  {{ end -}}
+  {{ if .Params.parent }}
+    {{ $class = printf "%s event--child" $class }}
+  {{ end -}}
+  {{ $dates := .Params.dates }}
+
+  <article class="{{ $class }}" 
+      {{ if $is_sub_event }} itemprop="subEvent" {{ end }}
+      {{ if $is_sup_event }} itemprop="superEvent" {{ end }}
+      itemscope itemtype="https://schema.org/Event">
     <div class="event-content">
       {{- $title := partial "PrepareHTML" .Title -}}
       {{ if and $options.subtitle .Params.subtitle }}
@@ -25,27 +43,21 @@
         </hgroup>
       {{ end }}
 
-      {{ $dates := .Params.dates }}
-      {{ if $options.dates }}
+      {{ if .Params.time_slots }}
+        {{ $first_time_slot := index .Params.time_slots 0 }}
+        {{ partial "events/partials/event/hours.html" $first_time_slot }}
+      {{ else if $options.dates }}
         {{ partial "events/partials/event/schedule.html" (dict 
-            "dates" $dates
-            "layout" $layout 
+            "dates" .Params.dates
+            "on_two_lines" (ne $layout "list")
           )}}
       {{ end }}
 
       {{ if and $dates.status $options.status }}
-        <p class="event-status">
-          {{ if eq $dates.status "current"}}
-            {{- i18n "blocks.events.current" -}}
-          {{ else if eq $dates.status "future" }}
-            {{- i18n "blocks.events.future" -}}
-          {{ else if eq $dates.status "archive" }}
-            {{- i18n "blocks.events.archive" -}}
-          {{ end }}
-        </p>
+        {{ partial "events/partials/event/status.html" $dates.status }}
       {{ end }}
 
-      {{ if and $options.summary  .Params.summary }}
+      {{ if and $options.summary .Params.summary }}
         <div class="event-description" itemprop="description">
           {{ partial "GetRichSummary" ( dict 
             "summary" .Params.summary
@@ -62,6 +74,10 @@
           "context" .
           "kind" "event"
         )}}
+      {{- end -}}
+
+      {{ if $with_more }}
+        {{ partial "commons/item/more.html" . }}
       {{- end -}}
     </div>
     <div class="media">

@@ -1,38 +1,5 @@
-{{ $dates := .dates }}
-{{ $layout := .layout }}
-{{ if or $dates.computed.short $dates.computed.two_lines.short $dates.from.hour $dates.to.hour }}
-  <div class="event-schedule" itemprop="startDate" content="{{- if $dates.from.day -}}{{ $dates.from.day }}{{- end -}}{{- if $dates.from.hour -}}T{{ $dates.from.hour }}{{- end -}}">
-    <p class="event-dates">
-      {{ $formated_date := $dates.computed.two_lines.short }}
-      {{ if ne $layout "list" }}
-        {{ $formated_date = $dates.computed.short }}
-      {{ end }}
-      {{ with site.Params.events.date_format }}
-        {{ $formated_date = time.Format . $dates.from.day }}
-        {{ if ne $dates.from.day $dates.to.day }}
-          {{ $formated_date = printf "<span>%s</span><span>%s</span>" $formated_date ( time.Format . $dates.to.day ) }}
-        {{ end }}
-      {{ end }}
-      {{ partial "PrepareHTML" $formated_date }}
-    </p>
-    {{- if (or $dates.from.hour $dates.to.hour) }}
-      {{- $hour := "" -}}
-      <p class="event-time">
-        {{ with $dates.from.hour }}
-          {{- $hour = . -}}
-          {{- with site.Params.events.time_format }}
-            {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
-          {{ end -}}
-          <span>{{- $hour -}}</span>
-        {{- end -}}
-        {{- with $dates.to.hour -}}
-          {{- $hour = . -}}
-          {{- with site.Params.events.time_format -}}
-            {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
-          {{- end -}}
-          <span>{{- $hour -}}</span>
-        {{ end -}}
-      </p>
-    {{ end -}}
-  </div>
-{{ end }}
+{{ partial "commons/item/schedule.html" (dict
+    "dates" .dates
+    "layout" .layout
+    "type" "event"
+  ) }}

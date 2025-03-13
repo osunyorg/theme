@@ -1,0 +1,41 @@
+.event
+    &-title
+        a
+            @include stretched-link
+            text-decoration: none
+    &-subtitle
+        @include h3
+        color: var(--color-text-alt)
+    &-categories
+        @include meta
+        @include list-reset
+        margin-top: $spacing-2
+        display: flex
+        flex-wrap: wrap
+        column-gap: $spacing-1
+        position: relative
+        z-index: 2
+        li:not(:last-child)
+            a::after
+                content: ', '
+    &-schedule
+        p + p
+            margin-top: 0
+    &-dates
+        span + span
+            &::before
+                content: ' — '
+    &-time
+        @include meta
+        span
+            white-space: nowrap
+            + span
+                @include icon(arrow-right-line, before)
+                    margin-left: space()
+                    margin-right: space()
+    .media
+        &:empty
+            display: none
+    @include media-breakpoint-up(desktop)
+        &-time
+            display: flex

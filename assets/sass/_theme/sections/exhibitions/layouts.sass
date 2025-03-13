@@ -1,0 +1,78 @@
+.exhibitions
+    @include list-reset
+    &--list
+        @include layout-list
+    &--grid
+        @include layout-grid(2)
+        .exhibition
+            &-title
+                @include h3
+            &-subtitle
+                @include h3
+                color: var(--color-text-alt)
+    &--cards
+        @include layout-cards
+    &--large
+        @include layout-large
+    &--alternate
+        @include layout-alternate
+    &--agenda
+        > li + li
+            margin-top: var(--grid-gutter)
+        .exhibition
+            @include layout-item
+            &-subtitle
+                @include h3
+                color: var(--color-text-alt)
+            .more
+                @include icon(arrow-right-line, after)
+                    display: inline-block
+                    margin-left: space()
+                    transition: transform 0.25s
+            &:hover .more::after
+                transform: translateX(pxToRem(5))
+        @include media-breakpoint-down(desktop)
+            > li + li
+                margin-top: $spacing-3
+                border-top: 1px solid var(--color-border)
+                padding-top: $spacing-3
+            .exhibition
+                display: flex
+                flex-direction: column
+                .media
+                    order: -1
+                    margin-bottom: $spacing-3
+        @include media-breakpoint-up(desktop)
+            .exhibition
+                padding-left: offset(3)
+                .media
+                    order: -1
+                    width: columns(5)
+                    flex-shrink: 1
+                &-schedule
+                    position: absolute
+                    left: 0
+                    top: 0
+                    width: columns(3)
+                &-dates
+                    @include h3
+                &-content
+                    flex: 1
+                    > * + .exhibition-schedule
+                        margin-top: 0
+                &--with-image
+                    display: flex
+                    gap: var(--grid-gutter)
+                    .exhibition-content
+                        display: flex
+                        flex-direction: column
+                    .more
+                        padding-top: $spacing-4
+                        margin-top: auto
+                &:where(:not(.exhibition--with-image))
+                    .exhibition-content
+                        width: columns(5)
+                        .more
+                            position: absolute
+                            left: offset(8)
+                            top: 0

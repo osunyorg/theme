@@ -1,0 +1,299 @@
+.events__page,
+.exhibitions__page
+    .hero
+        padding-bottom: 0
+        .content
+            align-items: stretch
+            display: flex
+            @include media-breakpoint-down(desktop)
+                flex-direction: column
+        .taxonomies-single
+            a
+                @include meta
+                @include link(var(--color-accent))
+            .taxonomy-children
+                li
+                    line-height: 100%
+        @include media-breakpoint-up(desktop)
+            figure
+                order: -1
+            &.hero--image-square,
+            &.hero--image-portrait
+                .hero-text
+                    flex-direction: column
+                    margin-top: 0
+                    width: columns(6)
+            &.hero--image-landscape
+                .hero-text
+                    width: 100%
+                    &:has(.taxonomies-single)
+                        h1, hgroup
+                            margin-right: offset(4)
+                            width: columns(8)
+            &:not(.hero--with-image)
+                .hero-text
+                    align-items: flex-end
+                    width: columns(12)
+            .content
+                flex-wrap: wrap
+            .hero-text
+                display: flex
+                flex-wrap: wrap
+                justify-content: space-between
+                h1, hgroup
+                    max-width: columns(8)
+                .hero-actions
+                    margin-left: auto
+                    margin-top: auto
+                    width: columns(3)
+                    @include media-breakpoint-up(xxl)
+                        width: columns(2)
+                    > *
+                        width: 100%
+                        &:first-child
+                            margin-top: 0
+                .taxonomies-single
+                    display: flex
+                    flex-wrap: wrap
+                    width: columns(4)
+                    gap: var(--grid-gutter)
+                    .terms
+                        &, ul
+                            display: block
+                            text-align: left
+            figure
+                &.image-landscape
+                    width: columns(12)
+                &.image-portrait,
+                &.image-square
+                    width: columns(6)
+        @include h3
+    &:not(.full-width)
+        .section-sidebar
+            @include sidebar
+            .btn
+                @extend .button--small
+                --btn-background: #{$color-background-alt}
+                --btn-hover-background: #{$color-border}
+                border: none
+
+    .event-access
+        > div:first-child
+            border-top: 1px solid var(--color-border)
+            padding-top: $spacing-4
+        > div:last-child
+            border-bottom: 1px solid var(--color-border)
+            padding-bottom: $spacing-4
+        > div + div
+            margin-top: $spacing-4
+        .event-practicals,
+        .event-slots
+            h2
+                @include meta
+                color: var(--color-text-alt)
+                @include media-breakpoint-up(desktop)
+                    width: columns(4)
+                    flex-shrink: 1
+                @include media-breakpoint-down(desktop)
+                    margin-bottom: $spacing-2
+        .event-practicals
+            > div
+                p + div
+                    margin-top: $spacing-2
+                .event-notes
+                    @include small
+                @include media-breakpoint-up(desktop)
+                    width: columns(5)
+            a.btn
+                @extend .button-accent
+                margin-left: auto
+            @include media-breakpoint-up(desktop)
+                align-items: flex-start
+                display: flex
+                gap: var(--grid-gutter)
+            @include media-breakpoint-down(desktop)
+                .btn
+                    margin-top: $spacing-3
+        .event-slots
+            ul
+                @include list-reset
+                + .btn
+                    --btn-background: var(--color-background-alt)
+                    --btn-border: none
+                    --btn-hover-border: none
+                    --btn-hover-background: var(--color-border)
+                    margin-top: $spacing-3
+            @include media-breakpoint-up(desktop)
+                &.parent-event
+                    display: flex
+                    align-items: baseline
+                    gap: var(--grid-gutter)
+                    .event-summary
+                        flex: 1
+        .event-summary,
+        .event-time-slot
+            align-items: baseline
+            display: flex
+            gap: var(--grid-gutter)
+            .date
+                width: columns(4)
+            .dropdown-calendar
+                @include meta
+                text-decoration: none
+                @include dropdown
+                button
+                    @include button-reset
+                    @include icon(calendar-2-line, after)
+                        margin-left: space(2)
+                .dropdown-menu a
+                    align-items: baseline
+                @include media-breakpoint-up(desktop)
+                    margin-left: auto
+            .type
+                @include h4
+                @include icon(loop-right-line, after)
+                    margin-left: space(2)
+            + li
+                margin-top: $spacing-3
+                @include media-breakpoint-up(desktop)
+                    margin-top: $spacing-1
+            @include media-breakpoint-up(desktop)
+                .location
+                    flex: 1
+            @include media-breakpoint-down(desktop)
+                flex-wrap: wrap
+                row-gap: $spacing-1
+                .date,
+                time,
+                .dropdown-calendar
+                    width: columns(6)
+                time
+                    text-align: right
+                .location
+                    @include meta
+                    width: columns(12)
+                .dropdown-calendar
+                    background: $color-background-alt
+                    border-radius: var(--btn-border-radius)
+                    padding: space(2) space(3)
+                    width: auto
+                    .dropdown-menu
+                        border-bottom: 1px solid var(--dropdown-border-color)
+                        top: calc(100% - var(--btn-border-radius))
+                        width: 100vw
+        @include media-breakpoint-up(desktop)
+            .event-time-slot
+                time
+                    width: columns(2)
+            .event-summary + ul
+                .dropdown-calendar
+                    button
+                        span
+                            opacity: 0
+                            transition: opacity  0.2s ease
+                        &:hover,
+                        &[aria-expanded="true"]
+                            span
+                                opacity: 1
+        .event-summary + ul
+            margin-top: $spacing-3
+        // Hide li childs after 6th one (included)
+        ul.truncated-list
+            li:nth-child(n+7)
+                display: none
+        ul:not(.truncated-list)
+            + .btn
+                display: none
+
+    .event-parent
+        margin-top: $spacing-6
+        &__title
+            @include meta
+            margin-bottom: $spacing-3
+        .event
+            @include layout-item
+            hgroup, &-title
+                @include h3
+    @include media-breakpoint-down(desktop)
+        .event-parent
+            .event
+                &--with-image
+                    display: flex
+                    flex-direction: column
+                    .media
+                        order: -1
+                        margin-bottom: $spacing-3
+    .document-content
+        margin-top: $spacing-4
+    @include media-breakpoint-up(desktop)
+        // Safe spacing if post is empty
+        .document-content:last-child
+            @include document-min-height(600px)
+        .event-programme
+            margin-top: $spacing-6
+            .event--child
+                padding-left: offset(4)
+                .event-content
+                    width: columns(5)
+                .event-hours
+                    bottom: 0
+                    span
+                        @include sticky(var(--title-height))
+        .event-parent
+            .event
+                &--with-image
+                    display: flex
+                    gap: var(--grid-gutter)
+                    flex-direction: row
+                    .media
+                        width: columns(8)
+                        flex-shrink: 0
+                &:where(:not(.event--with-image))
+                    padding-left: offset(4)
+
+.event-infos,
+.exhibition-infos
+    @include list-reset
+    @include media-breakpoint-up(desktop)
+        font-size: $table-body-size-desktop
+        padding-bottom: $spacing-4
+    [class$="-date"]
+        text-transform: capitalize
+    ul
+        @include list-reset
+    > li, .taxonomies-single > li
+        padding-top: $spacing-2
+        &:not(:last-child)
+            padding-bottom: $spacing-2
+        > span
+            @include meta
+            color: var(--color-text-alt)
+            padding-left: 0
+            display: block
+            white-space: nowrap
+        time + time
+            @include icon(arrow-right-line)
+            &::before
+                padding-right: 0.3rem
+    .taxonomies-single
+        .taxonomy-children
+            @extend .event-categories
+        span + .taxonomy-children
+            margin-top: 0
+    [class$="-actions"]
+        ul
+            align-items: start
+            display: flex
+            flex-direction: column
+            gap: space(1)
+            padding-bottom: 0
+            margin-top: space(1)
+        a
+            display: block
+            &::after
+                display: none
+    .share
+        a
+            color: inherit
+        li:first-child a
+            padding-left: 0

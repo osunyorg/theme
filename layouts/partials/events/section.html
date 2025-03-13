@@ -5,12 +5,30 @@
       "context" .
     ) }}
 
+  {{ if site.Params.events.index.highlight_exhibitions.active }}
+    {{ $exhibitions := where .Site.RegularPages "Section" "exhibitions" }}
+    {{ partial "events/section/exhibitions.html" $exhibitions }}
+  {{ end }}
+
   {{ partial "contents/list.html" . }}
 
   <div class="container">
     {{ partial "taxonomies/section-list.html" . }}
-    {{ partial "events/partials/events.html" . }}
-    {{ partial "events/partials/archive-link.html" . }}
+  </div>
+
+  <div class="container" id="events-agenda">
+    {{ $per_page := site.Params.events.index.per_page }}
+    {{ $events := where site.RegularPages "Section" "eq" "events" }}
+    {{ $events = where $events "Params.dates.archive" false }}
+
+    {{ partial "events/partials/events.html" (dict
+        "events" $events
+        "context" .
+        "per_page" site.Params.events.index.per_page
+      )}}
+
     {{ partial "commons/pagination.html" . }}
   </div>
+
+  {{ partial "events/section/archives.html" . }}
 </div>

@@ -1,0 +1,6 @@
+{{ $type := .Type }}
+{{ if .IsSection }}
+  {{ range where .Pages "Kind" "section" }}
+    <a href="{{ .Permalink }}" class="archive-link">{{ i18n (printf "%s.archives" $type) }}</a>
+  {{ end }}
+{{ end }}

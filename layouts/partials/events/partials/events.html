@@ -1,15 +1,26 @@
+{{ $collection := where .events "Params.parent" "eq" nil }}
 {{ $layout := site.Params.events.index.layout }}
+{{ $per_page := .per_page | default site.Params.events.index.per_page }}
 
-<div class="events events--{{-  $layout -}}">
-  {{ if not .Paginator.Pages }}
-    {{ $is_term := eq .Kind "term" }}
-    <p>{{ i18n (cond $is_term "categories.no_event" "events.none") }}</p>
-  {{ end }}
-  {{ range .Paginator.Pages }}
-    {{ partial "events/partials/event.html" (dict
-        "event" .
-        "layout" $layout
-        "options" site.Params.events.index.options
-      )}}
-  {{ end }}
-</div>
+{{/* {{ if $is_archive }}
+  {{ $order = "desc" }}
+{{ else }}
+  {{ $collection = where $collection "Params.dates.archive" false }}
+{{ end }}  */}}
+{{/*  {{ $collection = where $collection "Params.date" "2025-02-22" }}
+{{ $collection = where $collection "Params.dates.from.day" "2025-01-14" }}  */}}
+{{/*  {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}  */}}
+
+{{/*  {{ $collection := where $collection "Params.dates" "ne" nil }}  */}}
+{{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date "asc" }}
+{{ $paginator := .context.Paginate $agenda $per_page }}
+
+{{ if not $paginator.PageGroups }}
+  <p>{{ i18n "events.none" }}</p>
+{{ else }}
+  {{ partial "events/partials/agenda.html" (dict
+    "layout" site.Params.events.index.layout
+    "options" site.Params.events.index.options
+    "agenda" $paginator.PageGroups
+  ) }}
+{{ end }}

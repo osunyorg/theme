@@ -1,8 +1,19 @@
 {{- $title := or .Params.header_text .Title -}}
+{{ $button := "" }}
+
+{{ if .Params.is_year }}
+  {{ $button = (dict
+      "display" "true"
+      "target" "#events-agenda"
+      "label" (i18n "events.year.anchor")
+    )}}
+{{ end }}
+
 {{- partial "header/hero.html"
       (dict
         "title" $title
         "image" .Params.image
         "sizes" site.Params.image_sizes.sections.events.hero
+        "button" $button
         "context" .
       ) -}}

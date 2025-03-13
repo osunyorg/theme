@@ -241,14 +241,34 @@ errors:
       We suggest you return to the <a href="/">home page of our site</a>.<br>
       Thank you for your understanding.
 events:
-  archives: Previous events archive
-  add_to_calendar:
-    title: Add to calendar
-    ical: Download .ICS file
-    google: Google Calendar
-    office: Office 365
-    outlook: Microsoft Outlook
-    yahoo: Yahoo! Calendar
+  archives:
+    by_year: Archives by year
+    latest: Archives
+    list:
+      title: "Archives for the year {{ .year }}"
+  calendar:
+    week_days:
+      monday: 
+        short: Mon
+        long: Monday
+      tuesday: 
+        short: Tue
+        long: Tuesday
+      wednesday: 
+        short: Wed
+        long: Wednesday
+      thursday: 
+        short: Jeu
+        long: Thursday
+      friday: 
+        short: Fri
+        long: Friday
+      saturday:
+        short: Sam
+        long: Saturday
+      sunday: 
+        short: Sun
+        long: Sunday
   count:
     one: "1 event"
     other: "{{ .Count }} events"
@@ -266,6 +286,9 @@ events:
     day: To day
     hour: To hour
   unique_day: Date
+exhibitions:
+  archives: Previous exhibitions archive
+  none: No exhibition.
 formats:
   pdf: Adobe Portable Document Format
   jpg: JPEG image
