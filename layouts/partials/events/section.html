@@ -12,9 +12,11 @@
 
   {{ partial "contents/list.html" . }}
 
-  <div class="container">
-    {{ partial "taxonomies/section-list.html" . }}
-  </div>
+  {{ if .Params.section_taxonomies }}
+    <div class="container">
+      {{ partial "taxonomies/section-list.html" . }}
+    </div>
+  {{ end }}
 
   <div class="container" id="events-agenda">
     {{ $per_page := site.Params.events.index.per_page }}
