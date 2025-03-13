@@ -16,7 +16,7 @@
 {{ $paginator := .context.Paginate $agenda $per_page }}
 
 {{ if not $paginator.PageGroups }}
-  <p>{{ i18n "events.none" }}</p>
+  <p class="none">{{ i18n "events.none" }}</p>
 {{ else }}
   {{ partial "events/partials/agenda.html" (dict
     "layout" site.Params.events.index.layout

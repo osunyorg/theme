@@ -15,6 +15,9 @@
                     margin-top: $spacing-5
 
 .events__section
+    .none
+        margin-bottom: $spacing-5
+        margin-top: $spacing-5
     .events-archives-years
         margin-top: $spacing-5
         ol
@@ -48,8 +51,6 @@
     .events-calendar
         caption
             @extend .sr-only
-        + .container > p
-            margin-top: $spacing-5
     @include media-breakpoint-up(desktop)
         .events-calendar
             .calendar-month
@@ -63,13 +64,14 @@
         display: flex
         gap: var(--grid-gutter)
         justify-content: space-between
-        width: auto
+        width: 100%
     .hero-actions
         .btn
             @extend .button--small
             @include icon(arrow-down-line, after)
             --btn-background: #{$color-background-alt}
             --btn-hover-background: #{$color-border}
+            --btn-hover-color: var(--btn-background)
             border: none
     .events-calendar
         @include grid(2, md, $spacing-6)
