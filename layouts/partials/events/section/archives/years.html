@@ -4,11 +4,13 @@
     <h2 class="sr-only">{{ i18n "events.archives.by_year" }}</h2>
     <ol>
       {{ range . }}
-        <li>
-          <a href="{{ .Permalink }}" title="{{ i18n "events.archives.list.title" (dict "year" .Title)}}">{{ .Title }}</a>
-          {{ $count := len (where .RegularPagesRecursive ".Params.is_month" nil) }}
-          <p>{{ i18n "events.count" $count  }}</p>
-        </li>
+        {{ if .Params.is_year }}
+          <li>
+            <a href="{{ .Permalink }}" title="{{ i18n "events.archives.list.title" (dict "year" .Title)}}">{{ .Title }}</a>
+            {{ $count := len (where .RegularPagesRecursive ".Params.is_month" nil) }}
+            <p>{{ i18n "events.count" $count  }}</p>
+          </li>
+        {{ end }}
       {{ end }}
     </ol>
   </div>
