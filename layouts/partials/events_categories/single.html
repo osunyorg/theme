@@ -16,11 +16,12 @@
   {{ end }}
   <div class="container">
     {{ $events := where .Pages "Section" "events" }}
+
     {{ partial "events/partials/events.html" (dict
         "events" $events
-        "context" . 
+        "context" .
+        "order" "desc"
       )}}
     {{ partial "commons/pagination.html" . }}
-    {{ partial "commons/section/archive-link.html" . }}
   </div>
 </div>
