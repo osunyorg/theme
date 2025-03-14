@@ -43,8 +43,10 @@
         </hgroup>
       {{ end }}
 
-      {{ with .Params.current_time_slot }}
-        {{ partial "events/partials/event/hours.html" . }}
+      {{ if eq $layout "agenda" }}
+        {{ with .Params.current_time_slot }}
+          {{ partial "events/partials/event/hours.html" . }}
+        {{ end }}
       {{ end }}
 
       {{ if $options.dates }}
