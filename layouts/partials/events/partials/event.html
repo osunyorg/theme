@@ -43,9 +43,13 @@
         </hgroup>
       {{ end }}
 
-      {{ if .Params.current_time_slot }}
-        {{ partial "events/partials/event/hours.html" .Params.current_time_slot }}
-      {{ else if $options.dates }}
+      {{ if eq $layout "agenda" }}
+        {{ with .Params.current_time_slot }}
+          {{ partial "events/partials/event/hours.html" . }}
+        {{ end }}
+      {{ end }}
+
+      {{ if $options.dates }}
         {{ partial "events/partials/event/schedule.html" (dict 
             "dates" .Params.dates
             "on_two_lines" (ne $layout "list")
