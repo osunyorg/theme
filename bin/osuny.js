@@ -2,8 +2,7 @@
 
 const shell = require("shelljs"),
     dev = require("./dev"),
-    migrate = require("./migrate/migrate"),
-    updateNodeVersion = require("./update-version/update-node-version");
+    migrate = require("./migrate/migrate");
 
 shell.set('-e'); // exit upon first error
 console.log(`
