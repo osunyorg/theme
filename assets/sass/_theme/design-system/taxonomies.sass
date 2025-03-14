@@ -85,8 +85,12 @@
 .document-content
     .taxonomies-container
         margin-bottom: $spacing-5
-        .taxonomies-single.with-label
-            @include grid(3, desktop, $spacing-3)
+        .taxonomies-single
+            &.with-label
+                @include grid(3, desktop, $spacing-3)
+            &.without-label
+                display: flex
+                gap: $spacing-2
             ul, &
                 @include list-reset
             @include media-breakpoint-down(desktop)
