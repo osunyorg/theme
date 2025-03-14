@@ -43,9 +43,8 @@
         </hgroup>
       {{ end }}
 
-      {{ if .Params.time_slots }}
-        {{ $first_time_slot := index .Params.time_slots 0 }}
-        {{ partial "events/partials/event/hours.html" $first_time_slot }}
+      {{ if .Params.current_time_slot }}
+        {{ partial "events/partials/event/hours.html" .Params.current_time_slot }}
       {{ else if $options.dates }}
         {{ partial "events/partials/event/schedule.html" (dict 
             "dates" .Params.dates
