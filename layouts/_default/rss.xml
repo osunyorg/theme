@@ -43,7 +43,11 @@
     <title>{{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }}, {{ end }}{{ .Site.Title }}{{ end }}</title>
     <link>{{ .Permalink }}</link>
     {{ with .Summary }}
-      <description>{{ . }}</description>
+      <description>
+        {{- printf "<![CDATA[" | safeHTML -}}
+        {{ . }}
+        {{- printf "]]>" | safeHTML -}}
+      </description>
     {{ end }}
     <generator>Hugo</generator>
     <language>{{ site.Language.LanguageCode }}</language>{{ with $authorEmail }}
