@@ -22,6 +22,10 @@
                     flex-direction: column
                     margin-top: 0
                     width: columns(6)
+                .taxonomies-single
+                    @include grid(2)
+                    .terms
+                        width: columns(2)
             &.hero--image-landscape
                 .hero-text
                     width: 100%
@@ -60,8 +64,8 @@
                 .taxonomies-single
                     display: flex
                     flex-wrap: wrap
-                    width: columns(4)
-                    gap: var(--grid-gutter)
+                    column-gap: var(--grid-gutter)
+                    row-gap: $spacing-3
                     .terms
                         &, ul
                             display: block
@@ -143,9 +147,9 @@
             .date
                 width: columns(4)
             .dropdown-calendar
+                @include dropdown
                 @include meta
                 text-decoration: none
-                @include dropdown
                 button
                     @include button-reset
                     @include icon(calendar-2-line, after)
@@ -184,7 +188,6 @@
                     width: auto
                     .dropdown-menu
                         border-bottom: 1px solid var(--dropdown-border-color)
-                        top: calc(100% - var(--btn-border-radius))
                         width: 100vw
         @include media-breakpoint-up(desktop)
             .event-time-slot

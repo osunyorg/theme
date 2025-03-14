@@ -13,6 +13,10 @@
                 margin-bottom: $spacing-3
                 &:where(:not(:first-child))
                     margin-top: $spacing-5
+    .container + .container
+        margin-top: $spacing-4
+        @include media-breakpoint-up(up)
+            margin-top: $spacing-5
 
 .events__section
     .events-archives-years
@@ -78,3 +82,19 @@
     @include media-breakpoint-down(desktop)
         .hero-text
             flex-direction: column
+    .year-navigation
+        display: flex
+        justify-content: space-between
+        gap: var(--grid-gutter)
+        a
+            text-decoration: none
+            &:hover
+                @include link(var(--color-text))
+        .previous-year
+            margin-right: auto
+            @include icon(arrow-left-line, before)
+                margin-right: space()
+        .next-year
+            margin-left: auto
+            @include icon(arrow-right-line, after)
+                margin-left: space()
