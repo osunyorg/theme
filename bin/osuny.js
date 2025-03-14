@@ -2,7 +2,8 @@
 
 const shell = require("shelljs"),
     dev = require("./dev"),
-    migrate = require("./migrate/migrate");
+    migrate = require("./migrate/migrate"),
+    updateNodeVersion = require("./update-version/update-node-version");
 
 shell.set('-e'); // exit upon first error
 console.log(`
@@ -68,6 +69,8 @@ if (command === "local") {
 }
 
 if (command === "build") {
+    execute("yarn upgrade osuny");
+    updateNodeVersion();
     execute("yarn upgrade");
     execute("hugo --minify");
     execute("npm_config_yes=true npx pagefind --site 'public' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
