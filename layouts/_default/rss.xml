@@ -83,7 +83,7 @@
             {{ with .credit }}
               <media:credit type="html">
                 {{- printf "<![CDATA[" | safeHTML -}}
-                  {{ . }}
+                  {{ . | safeHTML }}
                 {{- printf "]]>" | safeHTML -}}
               </media:credit>
             {{ end }}
