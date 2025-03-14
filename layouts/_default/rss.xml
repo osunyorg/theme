@@ -62,7 +62,7 @@
       {{ with .Params.image }}
         {{ $media := partial "GetMedia" .id }}
         {{ if $media }}
-          {{ $url := partial "GetImageUrl" (dict "media" $media "size" "900" "quality" 60 ) }}
+          {{ $url := partial "GetImageUrl" (dict "media" $media "size" 450 "scale" 2 ) }}
           <media:content url="{{ $url }}" medium="image" width="900">
             {{ with .alt }}
               <media:description type="plain">{{ . }}</media:description>
