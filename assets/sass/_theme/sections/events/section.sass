@@ -13,11 +13,10 @@
                 margin-bottom: $spacing-3
                 &:where(:not(:first-child))
                     margin-top: $spacing-5
-    .events-archives-latest
-        margin-top: $spacing-6
-    .events-programme, .events-archives-latest
-        .events:where(:not(.events--agenda))
-            margin-top: $spacing-6
+    .container + .container
+        margin-top: $spacing-4
+        @include media-breakpoint-up(up)
+            margin-top: $spacing-5
 
 .events__section
     .events-archives-years
@@ -61,10 +60,6 @@
                     text-align: left
 
 .events__section-year
-    .container + .container
-        margin-top: $spacing-4
-        @include media-breakpoint-up(up)
-            margin-top: $spacing-5
     .hero-text
         align-items: baseline
         display: flex
