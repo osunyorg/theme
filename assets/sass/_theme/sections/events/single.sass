@@ -143,9 +143,9 @@
             .date
                 width: columns(4)
             .dropdown-calendar
+                @include dropdown
                 @include meta
                 text-decoration: none
-                @include dropdown
                 button
                     @include button-reset
                     @include icon(calendar-2-line, after)
@@ -184,7 +184,6 @@
                     width: auto
                     .dropdown-menu
                         border-bottom: 1px solid var(--dropdown-border-color)
-                        top: calc(100% - var(--btn-border-radius))
                         width: 100vw
         @include media-breakpoint-up(desktop)
             .event-time-slot
