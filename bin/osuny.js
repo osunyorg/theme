@@ -70,8 +70,7 @@ if (command === "local") {
 
 if (command === "build") {
     execute("yarn upgrade osuny");
-    updateNodeVersion();
-    execute("yarn upgrade");
+    execute("yarn install");
     execute("hugo --minify");
     execute("npm_config_yes=true npx pagefind --site 'public' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
 }
