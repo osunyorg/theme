@@ -54,6 +54,10 @@
             "dates" .Params.dates
             "on_two_lines" (ne $layout "list")
           )}}
+      {{ else }}
+        {{ with .Params.dates }}
+          <time class="sr-only" itemprop="startDate" datetime="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">{{ .computed.short }}</time>
+        {{ end }}
       {{ end }}
 
       {{ if and $dates.status $options.status }}
