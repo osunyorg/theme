@@ -54,6 +54,11 @@
             "dates" .Params.dates
             "on_two_lines" (ne $layout "list")
           )}}
+      {{ else }}
+        {{ with .Params.dates }}
+          <meta itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
+          <meta itemprop="endDate" content="{{- if .to.day -}}{{ .to.day }}{{- end -}}{{- if .to.hour -}}T{{ .to.hour }}{{- end -}}">
+        {{ end }}
       {{ end }}
 
       {{ if and $dates.status $options.status }}
