@@ -6,37 +6,39 @@
   "default" "default.single.taxonomies.display"
 ) }}
 
-{{ if and $taxonomies $display_taxonomies }}
-  <ul class="taxonomies-single {{ $type }}-taxonomies with-label" aria-label="{{ i18n "categories.label" }}">
-    {{ range $taxonomies }}
-      {{ if .categories }}
-        <li class="terms">
-          <span class="taxonomy-title">{{ .name }}</span>
-          {{ with .categories }}
-            <ul class="taxonomy-children">
-              {{ range . }}
-                <li class="term">
-                  <a href="{{ .permalink }}">
-                    {{ safeHTML .name }}
-                  </a>
-                </li>
-              {{ end }}
-            </ul>
-          {{ end }}
-        </li>
+{{ with $taxonomies }}
+  {{ if $display_taxonomies }}
+    <ul class="taxonomies-single {{ $type }}-taxonomies with-label" aria-label="{{ i18n "categories.label" }}">
+      {{ range . }}
+        {{ if .categories }}
+          <li class="terms">
+            <span class="taxonomy-title">{{ .name }}</span>
+            {{ with .categories }}
+              <ul class="taxonomy-children">
+                {{ range . }}
+                  <li class="term">
+                    <a href="{{ .permalink }}">
+                      {{ safeHTML .name }}
+                    </a>
+                  </li>
+                {{ end }}
+              </ul>
+            {{ end }}
+          </li>
+        {{ end }}
       {{ end }}
-    {{ end }}
-  </ul>
-{{ else }}
-  <ul class="taxonomies-single {{ $type }}-taxonomies without-label" aria-label="{{ i18n "categories.label" }}">
-    {{ range $taxonomies }}
-      {{ range .categories }}
-        <li class="terms">
-          <a href="{{ .permalink }}">
-            {{ safeHTML .name }}
-          </a>
-        </li>
+    </ul>
+  {{ else }}
+    <ul class="taxonomies-single {{ $type }}-taxonomies without-label" aria-label="{{ i18n "categories.label" }}">
+      {{ range . }}
+        {{ range .categories }}
+          <li class="terms">
+            <a href="{{ .permalink }}">
+              {{ safeHTML .name }}
+            </a>
+          </li>
+        {{ end }}
       {{ end }}
-    {{ end }}
-  </ul>
+    </ul>
+  {{ end }}
 {{ end }}
