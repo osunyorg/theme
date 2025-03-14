@@ -56,7 +56,8 @@
           )}}
       {{ else }}
         {{ with .Params.dates }}
-          <time class="sr-only" itemprop="startDate" datetime="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">{{ .computed.short }}</time>
+          <meta itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
+          <meta itemprop="endDate" content="{{- if .to.day -}}{{ .to.day }}{{- end -}}{{- if .to.hour -}}T{{ .to.hour }}{{- end -}}">
         {{ end }}
       {{ end }}
 
