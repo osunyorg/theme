@@ -56,6 +56,10 @@
                     text-align: left
 
 .events__section-year
+    .container + .container
+        margin-top: $spacing-4
+        @include media-breakpoint-up(up)
+            margin-top: $spacing-5
     .hero-text
         align-items: baseline
         display: flex
@@ -78,3 +82,19 @@
     @include media-breakpoint-down(desktop)
         .hero-text
             flex-direction: column
+    .year-navigation
+        display: flex
+        justify-content: space-between
+        gap: var(--grid-gutter)
+        a
+            text-decoration: none
+            &:hover
+                @include link(var(--color-text))
+        .previous-year
+            margin-right: auto
+            @include icon(arrow-left-line, before)
+                margin-right: space()
+        .next-year
+            margin-left: auto
+            @include icon(arrow-right-line, after)
+                margin-left: space()
