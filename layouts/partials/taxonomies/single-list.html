@@ -1,8 +1,13 @@
 {{ $type := .Type }}
 {{ $taxonomies := .Params.taxonomies }}
+{{ $param := (printf "%s.single.taxonomies.display" $type) }}
+{{ $display_taxonomies := partial "GetSiteParamWithDefault" (dict 
+  "param" $param
+  "default" "default.single.taxonomies.display"
+) }}
 
-{{ if $taxonomies }}
-  <ul class="taxonomies-single {{ $type }}-taxonomies" aria-label="{{ i18n "categories.label" }}">
+{{ if and $taxonomies $display_taxonomies }}
+  <ul class="taxonomies-single {{ $type }}-taxonomies with-label" aria-label="{{ i18n "categories.label" }}">
     {{ range $taxonomies }}
       {{ if .categories }}
         <li class="terms">
@@ -10,7 +15,7 @@
           {{ with .categories }}
             <ul class="taxonomy-children">
               {{ range . }}
-                <li>
+                <li class="term">
                   <a href="{{ .permalink }}">
                     {{ safeHTML .name }}
                   </a>
@@ -18,6 +23,18 @@
               {{ end }}
             </ul>
           {{ end }}
+        </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+{{ else }}
+  <ul class="taxonomies-single {{ $type }}-taxonomies without-label" aria-label="{{ i18n "categories.label" }}">
+    {{ range $taxonomies }}
+      {{ range .categories }}
+        <li class="terms">
+          <a href="{{ .permalink }}">
+            {{ safeHTML .name }}
+          </a>
         </li>
       {{ end }}
     {{ end }}
