@@ -13,8 +13,15 @@ outputs:
   - html
   - rss
   - pagedjs
+services:
+  rss:
+    limit: 100
 removePathAccents: true
 ignoreLogs: ['warning-goldmark-raw-html']
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
 pagination:
   pagerSize: 36
 params:
