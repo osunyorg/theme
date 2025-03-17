@@ -3,11 +3,12 @@
 {{ $multiple_dates_event := ne .Params.dates.from.day .Params.dates.to.day }}
 {{ $is_parent := .Params.children }}
 {{ $has_primary_date := or $is_repeating $multiple_dates_event $is_parent }}
+
 <div class="event-slots {{- if $is_parent }} parent-event{{ end }}">
-  <h2>{{ i18n "commons.date" (cond $has_primary_date 2 1) }}</h2>
+  <h2 class="events-slots-title">{{ i18n "commons.date" (cond $has_primary_date 2 1) }}</h2>
   {{ if $has_primary_date }}
     <div class="event-summary">
-      <span class="date" itemprop="startDate" content="2014-10-01T19:30">{{ .Params.dates.computed.long }}</span>
+      <span class="date" itemprop="startDate" content="{{ .Params.dates.from.day }}">{{ .Params.dates.computed.long }}</span>
       {{ if $is_repeating }}
         <span class="type">{{ i18n (printf "events.regular_event") }}</span>
       {{ end }}
