@@ -151,7 +151,11 @@ ol.persons--list
     .persons-categories + .taxonomies-persons
         margin-top: $spacing-3
 
-.persons__page
+.persons__page,
+.administrators__term,
+.authors__term,
+.researchers__term,
+.teachers__term
     .hero
         &--with-image
             .hero-text
@@ -159,18 +163,21 @@ ol.persons--list
             figure picture
                 @extend .avatar
             @include media-breakpoint-down(desktop)
-                .container
+                margin-bottom: $spacing-4
+                > .container:where(:only-child)
                     margin-bottom: calc(#{columns(2)} + #{$spacing-5})
+                    figure
+                        margin-bottom: calc(#{columns(2)} * -1)
                 figure
                     width: columns(4)
                     margin-left: auto
-                    margin-bottom: calc(#{columns(2)} * -1)
             @include media-breakpoint-down(md)
-                .container
+                > .container:where(:only-child)
                     margin-bottom: calc(#{columns(3)} + #{$spacing-5})
+                    figure
+                        margin-bottom: calc(#{columns(3)} * -1)
                 figure
                     width: columns(6)
-                    margin-bottom: calc(#{columns(3)} * -1)
             @include media-breakpoint-up(desktop)
                 .content
                     align-items: center
