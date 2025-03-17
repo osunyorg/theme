@@ -100,6 +100,10 @@ params:
     whatsapp: false
 
   # SECTIONS
+  default:
+    single:
+      taxonomies:
+        display: true
   categories:
     index:
       layout: grid # alternate | cards | grid | large | list
@@ -115,16 +119,89 @@ params:
     date_format: false # You can add date format to override the date from static (two_lines) 
     time_format: false # You can add time format to override the time from static (from.hour & to.hour)
     index:
-      layout: list # grid | list
+      group_by_date: "Monday 2 January 2006"
+      highlight_exhibitions:
+        active: true
+        current:
+          layout: agenda
+          options:
+            dates: true
+            categories: true
+            image: true
+            status: false
+            subtitle: true
+            summary: true
+        future:
+          layout: agenda
+          options:
+            dates: true
+            categories: true
+            image: false
+            status: false
+            subtitle: true
+            summary: true
+      layout: agenda # grid | list
       options:
-        dates: true
-        categories: false
+        dates: false
+        categories: true
         image: true
         status: false
         subtitle: true
         summary: true
+      per_page: 10
       taxonomies: true
       truncate_description: 200 # Set to 0 to disable truncate
+    single:
+      taxonomies:
+        display: false
+      agenda:
+        layout: agenda
+        options:
+          dates: true
+          categories: false
+          image: true
+          status: false
+          subtitle: true
+          summary: true
+      calendar_links: false
+      navigation:
+        active: false
+      meta_in_sidebar: false
+      summary:
+        position: content # hero | content
+      time_slots:
+        date_format: ":date_long"
+        time_format: "15h04"
+    # share_links: # Optional
+    #   enabled: true
+    #   email: false
+    #   facebook: true
+    #   linkedin: true
+    #   mastodon: false
+    #   telegram: false
+    #   twitter: true
+    #   whatsapp: false
+  exhibitions:
+    default_image: false
+    date_format: false # You can add date format to override the date from static (two_lines) 
+    time_format: false # You can add time format to override the time from static (from.hour & to.hour)
+    index:
+      group_by_date: "Monday 2 January <span>2006</span>"
+      highlight_exhibitions: true
+      layout: grid # grid | list
+      options:
+        dates: false
+        categories: true
+        image: true
+        status: false
+        subtitle: true
+        summary: true
+      per_page: 10
+      taxonomies: true
+      truncate_description: 200 # Set to 0 to disable truncate
+    single:
+      calendar_links: false
+      meta_in_sidebar: false
     # share_links: # Optional
     #   enabled: true
     #   email: false
@@ -401,6 +478,27 @@ params:
         grid:
           mobile:   90
           tablet:   360
+          desktop:  690
+        large:
+          mobile:   400
+          tablet:   360
+          desktop:  1019
+        list:
+          mobile:   90
+          tablet:   200
+          desktop:  255
+        agenda:
+          mobile:   400
+          tablet:   360
+          desktop:  645
+        parent:
+          mobile:   400
+          tablet:   360
+          desktop:  645
+      exhibitions:
+        grid:
+          mobile:   90
+          tablet:   360
           desktop:  555
         large:
           mobile:   400
@@ -410,6 +508,14 @@ params:
           mobile:   90
           tablet:   200
           desktop:  255
+        agenda:
+          mobile:   400
+          tablet:   360
+          desktop:  645
+        parent:
+          mobile:   400
+          tablet:   360
+          desktop:  645
       testimonials:
         mobile:   80
         tablet:   160
@@ -473,9 +579,40 @@ params:
           tablet:   800
           desktop:  750
         hero_single:
+          landscape:
+            mobile:   400
+            tablet:   800
+            desktop:  1792
+          portrait:
+            mobile:   400
+            tablet:   555
+            desktop:  864
+          square:
+            mobile:   400
+            tablet:   555
+            desktop:  864
+        item:
+          mobile:   350
+          tablet:   450
+          desktop:  750
+      exhibitions:
+        hero:
           mobile:   400
           tablet:   800
           desktop:  750
+        hero_single:
+          landscape:
+            mobile:   400
+            tablet:   800
+            desktop:  1792
+          portrait:
+            mobile:   400
+            tablet:   555
+            desktop:  864
+          square:
+            mobile:   400
+            tablet:   555
+            desktop:  864
         item:
           mobile:   350
           tablet:   450

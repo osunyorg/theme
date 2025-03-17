@@ -1,129 +1,13 @@
-.events__page
-    .lead
-        @include h3
-        // Safe spacing if post is empty
-    &:not(.full-width)
-        .event-sidebar
-            @include sidebar
-    @include media-breakpoint-up(desktop)
-        .document-content
-            min-height: 600px
-            // Add after element to avoid "min-height" to ignore the last block's margin-bottom
-            &::after
-                content: ''
-                display: block
-                height: 1px
-
-.events__section
-    .archive-link
-        @include icon(arrow-right-line, after, true)
-        @include hover-translate-icon(after)
-        display: block
-        text-align: right
-        text-decoration: none
-    @include media-breakpoint-down(desktop)
-        .events
-            margin-bottom: $spacing-4
-        .archive-link
-            text-align: left
-
-.event-infos
-    @include list-reset
-    @include media-breakpoint-up(desktop)
-        font-size: $table-body-size-desktop
-        padding-bottom: $spacing-5
-    .event-date
-        text-transform: capitalize
-    ul
-        @include list-reset
-    > li, .taxonomies-single > li
-        padding-top: $spacing-2
-        &:not(:last-child)
-            padding-bottom: $spacing-2
-        > span
-            @include meta
-            color: var(--color-text-alt)
-            padding-left: 0
-            display: block
-            white-space: nowrap
-        time + time
-            @include icon(arrow-right-line)
-            &::before
-                padding-right: 0.3rem
-    .taxonomies-single
-        .taxonomy-children
-            @extend .event-categories
-        span + .taxonomy-children
-            margin-top: 0
-    .events-actions
-        ul
-            align-items: start
-            display: flex
-            flex-direction: column
-            gap: space(1)
-            padding-bottom: 0
-            margin-top: space(1)
-        a
-            display: block
-            &::after
-                display: none
-    .share
-        a
-            color: inherit
-        li:first-child a
-            padding-left: 0
-
-.event
-    &-title
-        a
-            @include stretched-link
-            text-decoration: none
-    &-subtitle
-        @include h3
-        color: var(--color-text-alt)
-    &-categories
-        @include meta
-        @include list-reset
-        margin-top: $spacing-2
-        display: flex
-        flex-wrap: wrap
-        column-gap: $spacing-1
-        position: relative
-        z-index: 2
-        li:not(:last-child)
-            a::after
-                content: ', '
-    &-schedule
-        p + p
-            margin-top: 0
-    &-dates
-        span + span
-            &::before
-                content: ' — '
-    &-time
-        @include meta
-        span
-            white-space: nowrap
-            + span
-                @include icon(arrow-right-line, before)
-                    margin-left: space()
-                    margin-right: space()
-    .media
-        &:empty
-            display: none
-    @include media-breakpoint-up(desktop)
-        &-time
-            display: flex
-
 .events
     &--list
         .event
-            border-bottom: 1px solid var(--color-border)
             display: flex
             flex-direction: column
             margin-bottom: $spacing-3
             padding-bottom: $spacing-3
             position: relative
+            &:where(:not(:last-child))
+                border-bottom: 1px solid var(--color-border)
             &-title
                 @include h3
             &-schedule
@@ -141,7 +25,7 @@
                         width: columns(8)
             @include media-breakpoint-down(md)
                 .media
-                    max-width: 33%
+                    max-width: 33.3%
                     margin-bottom: $spacing-2
                 &-content
                     order: 1
@@ -275,7 +159,7 @@
                 .event-dates
                     @include h3
                 .event-title,
-                .event-subtitle, 
+                .event-subtitle,
                 hgroup
                     @include lead
                 .media
@@ -283,3 +167,124 @@
                 &:not(.event--with-image)
                     width: columns(5)
                     margin-left: offset(4)
+
+    &--agenda
+        .events-date
+            padding-bottom: $spacing-4
+            &:where(:not(:first-child))
+                border-top: 1px solid var(--color-border)
+        .events-date-title
+            @include h3
+            color: var(--color-text-alt)
+            padding-top: $spacing-4
+            transition: 0.3s
+            &:not(:first-child)
+                margin-top: var(--heading-margin-top)
+            + .event
+                margin-top: var(--heading-margin-bottom)
+        .event
+            display: flex
+            flex-direction: column
+            margin-top: $spacing-3
+            padding-top: $spacing-3
+            position: relative
+            + .event
+                border-top: 1px solid var(--color-border)
+            &-title
+                @include h3
+            &-schedule
+                @include h4
+            &-content
+                order: 2
+            &-description
+                margin-top: $spacing-2
+            &-hours
+                @include h3
+        @include media-breakpoint-down(desktop)
+            .events-date
+                // Set spacing top less title padding-top to get exact same space before and after event-date
+                padding-top: calc(#{$spacing-4} - #{$spacing-2})
+            .events-date-title
+                @include sticky
+                background: var(--color-background)
+                margin-left: var(--grid-gutter-negative)
+                margin-right: var(--grid-gutter-negative)
+                padding: $spacing-2 var(--grid-gutter)
+                z-index: $zindex-agenda-sticky-date
+            .event
+                &-content
+                    display: flex
+                    flex-direction: column
+                &-hours
+                    margin-bottom: $spacing-2
+                    order: -1
+                    @include h4
+                &--with-image
+                    .event-hours
+                        margin-top: $spacing-2
+                    .media
+                        margin-bottom: $spacing-3
+                &--child
+                    flex-direction: row
+                    gap: var(--grid-gutter)
+                    .event-content
+                        flex: 1
+                    .media
+                        width: 33.3%
+                        order: 2
+                        margin-bottom: 0
+                    .event-hours
+                        margin-top: 0
+                &--parent
+                    .media
+                        margin-left: var(--grid-gutter-negative)
+                        margin-right: var(--grid-gutter-negative)
+        @include media-breakpoint-up(desktop)
+            .events-date
+                padding-bottom: $spacing-5
+            .events-date-title
+                @include sticky
+                bottom: $spacing-4
+                padding-top: 0
+                width: 100%
+                z-index: 1
+                span
+                    display: block
+                    padding-top: $spacing-5
+                &.is-down
+                    max-width: columns(3)
+                    @include h3
+                    margin-bottom: var(--title-margin-bottom)
+            .event
+                padding-left: offset(3)
+                flex-direction: row
+                gap: var(--grid-gutter)
+                &-content
+                    width: columns(6)
+                    flex: 1
+                .media
+                    width: columns(3)
+                &-hours
+                    position: absolute
+                    left: 0
+                    top: 0
+                    margin-top: $spacing-3
+                &--child
+                    padding-left: offset(1)
+                    .event-hours
+                        margin-top: $spacing-3
+                    &:where(:not(.event--with-image))
+                        .event-content
+                            margin-left: offset(3)
+                &:not(.event--child)
+                    .event-hours
+                        bottom: 0
+                        span
+                            @include sticky(var(--title-height))
+            .event--parent ~ .event--child
+                margin-left: offset(3)
+                .media
+                    width: columns(2)
+                &:where(:not(.event--with-image))
+                    .event-content
+                        margin-left: offset(2)

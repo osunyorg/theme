@@ -1,0 +1,63 @@
+{{ $unique_day := eq .Params.dates.from.day .Params.dates.to.day }}
+<ul class="exhibition-infos">
+  {{ with .Params.dates }}
+    {{ if .computed }}
+      <li class="exhibition-date" itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
+        <span>{{ i18n "exhibitions.date" }}</span>
+        {{ partial "PrepareHTML" .computed.two_lines.long }}
+      </li>
+    {{ end }}
+    {{ if .from.hour }}
+      <li>
+        <span>{{ i18n "exhibitions.hour" }}</span>
+        {{ with .from.hour }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+        {{ with .to.hour }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+      </li>
+    {{ end }}
+  {{ end }}
+
+  {{ if .Params.exhibitions_categories }}
+    <li>
+      {{ partial "taxonomies/single-list.html" . }}
+    </li>
+  {{ end }}
+  {{ if site.Params.exhibitions.share_links.enabled | default site.Params.share_links.enabled }}
+    <li>
+      <span>{{ i18n "commons.share_on" }}</span>
+      {{ partial "commons/share/links.html" . }}
+    </li>
+  {{ end }}
+
+  {{ if and (not .Params.dates.archive) site.Params.exhibitions.single.calendar_links }}
+    {{ with .Params.dates.add_to_calendar }}
+      {{ $links := . }}
+      <li class="exhibitions-actions">
+        <span>{{ i18n "commons.add_to_calendar.title" }}</span>
+        {{- $types := slice "ical" "google" "office" "outlook" "yahoo" -}}
+        <ul>
+          {{- range $type := $types -}}
+            {{ $label := i18n (printf "commons.add_to_calendar.%s" $type) }}
+            {{ with index $links $type }}
+              <li>
+                <a class="chip"
+                  {{ if eq $type "ical" -}}
+                    {{ printf `href="%s"` . | safeHTMLAttr }} download
+                  {{ else }}
+                    href="{{ . }}"
+                    target="_blank"
+                  {{ end }} >
+                  {{- $label -}}
+                </a>
+              </li>
+            {{- end }}
+          {{- end }}
+        </ul>
+    </li>
+    {{- end }}
+  {{- end }}
+
+</ul>
