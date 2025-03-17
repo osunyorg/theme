@@ -61,8 +61,6 @@
             position: relative
             > a
                 @include stretched-link
-        .container + .breadcrumb-container
-            margin-top: calc(#{$spacing-7} - #{$spacing-4})
     @include media-breakpoint-down(desktop)
         .content
             padding-top: 0
@@ -71,6 +69,8 @@
             .content
                 .hero-text
                     margin-bottom: $spacing-4
+            .container + .breadcrumb-container
+                margin-top: calc(#{$spacing-7} - #{$spacing-4})
         &--image-landscape
             .content
                 figure
@@ -114,6 +114,7 @@
                     width: columns(3)
     + .breadcrumb-container
         margin-top: 0
+        margin-bottom: var(--grid-gutter)
         @include media-breakpoint-down(desktop)
             margin-bottom: $spacing-5
 
