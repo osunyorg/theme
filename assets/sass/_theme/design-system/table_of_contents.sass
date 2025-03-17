@@ -21,16 +21,16 @@
         flex-direction: column
         height: 100%
     .toc-title
-        border-bottom: 1px solid var(--color-border)
+        border-bottom: $toc-border-width solid var(--color-border)
         font-size: $toc-title-font-size
         padding: $spacing-2 $spacing-3
         @include media-breakpoint-up(desktop)
             font-size: $toc-title-font-size-desktop
-            padding: $header-nav-padding-y var(--grid-gutter) calc(#{$header-nav-padding-y} + 1px)
+            padding: $header-nav-padding-y var(--grid-gutter) calc(#{$header-nav-padding-y} + $toc-border-width)
             padding: calc((var(--header-height)) / 2 - #{$body-size}) var(--grid-gutter)
             padding-top: 0
             padding-bottom: 0
-            line-height: calc(var(--header-height) - 1px)
+            line-height: calc(var(--header-height) - #{$toc-border-width})
     .toc
         flex: 1
         display: flex
@@ -50,7 +50,7 @@
             margin-right: -14px
             font-size: 1.5em
         align-items: center
-        border-top: 1px solid var(--color-border)
+        border-top: $toc-border-width solid var(--color-border)
         display: flex
         justify-content: space-between
         padding: 0 $spacing-3
@@ -87,7 +87,7 @@
         body.offcanvas-toc &
             display: flex
     @include media-breakpoint-down(desktop)
-        border-top: 1px solid var(--color-border)
+        border-top: $toc-border-width solid var(--color-border)
         position: fixed
         bottom: 0
         background: $toc-background-color
