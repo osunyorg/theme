@@ -206,11 +206,10 @@
                 padding-top: calc(#{$spacing-4} - #{$spacing-2})
             .events-date-title
                 @include sticky
-                top: 0
-                width: 100%
                 background: var(--color-background)
-                padding-bottom: $spacing-2
-                padding-top: $spacing-2
+                margin-left: var(--grid-gutter-negative)
+                margin-right: var(--grid-gutter-negative)
+                padding: $spacing-2 var(--grid-gutter)
                 z-index: $zindex-agenda-sticky-date
             .event
                 &-content
@@ -246,12 +245,8 @@
             .events-date-title
                 @include sticky
                 bottom: $spacing-4
-                width: 100%
                 padding-top: 0
-                // transition: 0.1s
-                // text-overflow: ellipsis
-                // white-space: nowrap
-                // overflow: hidden
+                width: 100%
                 z-index: 1
                 span
                     display: block
