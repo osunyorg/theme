@@ -201,6 +201,9 @@
             &-hours
                 @include h3
         @include media-breakpoint-down(desktop)
+            .events-date
+                // Set spacing top less title padding-top to get exact same space before and after event-date
+                padding-top: calc(#{$spacing-4} - #{$spacing-2})
             .events-date-title
                 @include sticky
                 top: 0
