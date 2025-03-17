@@ -8,12 +8,11 @@
                 background: var(--color-text)
                 border-radius: 50%
                 content: ""
-                height: 9px
+                height: $block-timeline-bullet-width
                 left: -$spacing-3
                 margin-top: 0.5em
                 position: absolute
-                width: 9px
-                margin-left: -4px
+                width: $block-timeline-bullet-width
             &::after
                 background: var(--color-text)
                 bottom: -0.5em
@@ -21,7 +20,11 @@
                 left: -$spacing-3
                 position: absolute
                 top: 0.5em
-                width: var(--border-width)
+                // margin-left: calc($block-timeline-border-width / 2)
+                margin-top: #{$block-timeline-bullet-width / 2}
+                margin-bottom: -#{$block-timeline-bullet-width / 2}
+                margin-left: calc((#{$block-timeline-bullet-width} - #{$block-timeline-border-width})  / 2 )
+                width: $block-timeline-border-width
             &:last-child
                 &::after
                     display: none
@@ -83,7 +86,7 @@
                 @include small
             .line
                 background: $block-timeline-horizontal-color
-                height: var(--border-width)
+                height: $block-timeline-border-width
                 margin-bottom: $spacing-3
                 opacity: 1
                 overflow: visible
@@ -93,11 +96,11 @@
                     border-radius: 50%
                     content: ""
                     display: block
-                    height: 9px
+                    height: $block-timeline-bullet-width
                     margin-left: -4px
                     position: relative
                     top: -4px
-                    width: 9px
+                    width: $block-timeline-bullet-width
             &:last-child
                 .line
                     background: transparent
