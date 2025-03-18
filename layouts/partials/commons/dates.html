@@ -1,8 +1,8 @@
-{{ $event := . }}
 {{ $is_repeating := gt .Params.time_slots 1 }}
 {{ $multiple_dates_event := ne .Params.dates.from.day .Params.dates.to.day }}
-{{ $is_parent := .Params.children }}
+{{ $is_parent := .Params.children}}
 {{ $has_primary_date := or $is_repeating $multiple_dates_event $is_parent }}
+
 <div class="event-slots {{- if $is_parent }} parent-event{{ end }}">
   <h2>{{ i18n "commons.date" (cond $has_primary_date 2 1) }}</h2>
   {{ if $has_primary_date }}
@@ -23,14 +23,13 @@
   {{ with .Params.time_slots }}
     <ul id="all-dates" class="extendable-list">
       {{ range $index, $time_slot := . }}
-        <li class="event-time-slot" itemprop="subEvent" itemscope itemtype="https://schema.org/Event">
-          <meta itemprop="name" content="{{ $event.Title }}">
-          <meta itemprop="url" content="{{ $event.Permalink }}">
+        <li class="event-time-slot" itemprop="subEvent">
           <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ $time_slot.start.date | time.Format site.Params.events.single.time_slots.date_format }}</span>
-          <time datetime="{{ .start.time }}">{{ $time_slot.start.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
-          {{ with $time_slot.place }}
-            <span class="location" itemprop="location">{{ . }}</span>
-          {{ end }}
+          <p class="hours">
+            <time datetime="{{ .start.time }}">{{ $time_slot.start.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
+            <time datetime="{{ .end.time }}">{{ $time_slot.end.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
+          </p>
+          <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">{{ $time_slot.place }}</span>
           {{ partial "commons/dropdown-calendar.html" (dict
               "index" $index
               "calendar_links" $time_slot.add_to_calendar

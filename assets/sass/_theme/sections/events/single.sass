@@ -146,6 +146,10 @@
             gap: var(--grid-gutter)
             .date
                 width: columns(4)
+            .hours
+                time + time
+                    @include icon(arrow-right-line)
+                        padding-right: space()
             .dropdown-calendar
                 @include dropdown
                 @include meta
@@ -173,10 +177,10 @@
                 flex-wrap: wrap
                 row-gap: $spacing-1
                 .date,
-                time,
+                .hours,
                 .dropdown-calendar
                     width: columns(6)
-                time
+                .hours
                     text-align: right
                 .location
                     @include meta
@@ -191,7 +195,7 @@
                         width: 100vw
         @include media-breakpoint-up(desktop)
             .event-time-slot
-                time
+                .hours
                     width: columns(2)
             .event-summary + ul
                 .dropdown-calendar
