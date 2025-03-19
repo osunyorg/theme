@@ -40,12 +40,15 @@
       xmlns:media="http://search.yahoo.com/mrss/"
       >
   <channel>
-    <title>{{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }}, {{ end }}{{ .Site.Title }}{{ end }}</title>
+    <title>
+      {{- printf "<![CDATA[" | safeHTML -}}
+        {{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }}, {{ end }}{{ .Site.Title }}{{ end }}</title>
+      {{- printf "]]>" | safeHTML -}}
     <link>{{ .Permalink }}</link>
     {{ with .Summary }}
       <description>
         {{- printf "<![CDATA[" | safeHTML -}}
-        {{ . }}
+          {{ . }}
         {{- printf "]]>" | safeHTML -}}
       </description>
     {{ end }}
@@ -60,7 +63,11 @@
     {{- end }}
     {{- range $pages }}
     <item>
-      <title>{{ .Title }}</title>
+      <title>
+        {{- printf "<![CDATA[" | safeHTML -}}
+          {{ .Title }}
+        {{- printf "]]>" | safeHTML -}}
+      </title>
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       {{- with $authorEmail }}<author>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</author>{{ end }}
@@ -78,7 +85,11 @@
           {{ $url := partial "GetImageUrl" (dict "media" $media "size" 450 "scale" 2 ) }}
           <media:content url="{{ $url }}" medium="image" width="900">
             {{ with .alt }}
-              <media:description type="plain">{{ . }}</media:description>
+              <media:description type="plain">
+                {{- printf "<![CDATA[" | safeHTML -}}
+                  {{ . }}
+                {{- printf "]]>" | safeHTML -}}
+              </media:description>
             {{ end }}
             {{ with .credit }}
               <media:credit type="html">
