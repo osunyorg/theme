@@ -40,18 +40,15 @@
       xmlns:media="http://search.yahoo.com/mrss/"
       >
   <channel>
-    <title>
-      {{- printf "<![CDATA[" | safeHTML -}}
-        {{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }}, {{ end }}{{ .Site.Title }}{{ end }}</title>
-      {{- printf "]]>" | safeHTML -}}
+    <title>{{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }}, {{ end }}{{ .Site.Title }}{{ end }}</title>
     <link>{{ .Permalink }}</link>
-    {{ with .Summary }}
-      <description>
-        {{- printf "<![CDATA[" | safeHTML -}}
-          {{ . }}
-        {{- printf "]]>" | safeHTML -}}
-      </description>
-    {{ end }}
+    {{- with .Summary }}
+    <description>
+      {{- printf "<![CDATA[" | safeHTML -}}
+        {{ . }}
+      {{- printf "]]>" | safeHTML -}}
+    </description>
+    {{ end -}}
     <generator>Hugo+Osuny</generator>
     <language>{{ site.Language.LanguageCode }}</language>{{ with $authorEmail }}
     <managingEditor>{{.}}{{ with $authorName }} ({{ . }}){{ end }}</managingEditor>{{ end }}{{ with $authorEmail }}
@@ -63,44 +60,50 @@
     {{- end }}
     {{- range $pages }}
     <item>
-      <title>
-        {{- printf "<![CDATA[" | safeHTML -}}
-          {{ .Title }}
-        {{- printf "]]>" | safeHTML -}}
-      </title>
+      <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       {{- with $authorEmail }}<author>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</author>{{ end }}
       <guid>{{ .Permalink }}</guid>
-      {{ with .Summary }}
-        <description>
-          {{- printf "<![CDATA[" | safeHTML -}}
-            {{ . | safeHTML }}
-          {{- printf "]]>" | safeHTML -}}
-        </description>
-      {{ end }}
-      {{ with .Params.image }}
-        {{ $media := partial "GetMedia" .id }}
-        {{ if $media }}
-          {{ $url := partial "GetImageUrl" (dict "media" $media "size" 450 "scale" 2 ) }}
+      {{- with .Summary }}
+      <description>
+        {{- printf "<![CDATA[" | safeHTML -}}
+          {{ . | safeHTML }}
+        {{- printf "]]>" | safeHTML -}}
+      </description>
+      {{ end -}}
+      {{- with .Params.image -}}
+        {{- $media := partial "GetMedia" .id -}}
+        {{- if $media -}}
+          {{- $url := partial "GetImageUrl" (dict "media" $media "size" 450 "scale" 2 ) -}}
           <media:content url="{{ $url }}" medium="image" width="900">
-            {{ with .alt }}
+            {{- with .alt -}}
               <media:description type="plain">
                 {{- printf "<![CDATA[" | safeHTML -}}
                   {{ . }}
                 {{- printf "]]>" | safeHTML -}}
               </media:description>
-            {{ end }}
-            {{ with .credit }}
+            {{- end -}}
+            {{- with .credit -}}
               <media:credit type="html">
                 {{- printf "<![CDATA[" | safeHTML -}}
                   {{ . | safeHTML }}
                 {{- printf "]]>" | safeHTML -}}
               </media:credit>
-            {{ end }}
+            {{- end -}}
           </media:content>
         {{- end -}}
-      {{ end }}
+      {{ end -}}
+      {{- range .Params.taxonomies -}}
+        {{ range .categories }}
+          {{- $category := site.GetPage .path -}}
+          <category>
+          {{- printf "<![CDATA[" | safeHTML -}}
+            {{ $category.Title }}
+          {{- printf "]]>" | safeHTML -}}
+          </category>
+        {{- end -}}
+      {{- end -}}
     </item>
     {{- end }}
   </channel>
