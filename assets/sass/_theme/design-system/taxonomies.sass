@@ -55,6 +55,10 @@
         @include list-reset
     .taxonomy-title
         @include meta
+    .hero &, &
+        &.without-label
+            display: flex
+            gap: $spacing-2
     .hero &
         margin-top: $spacing-4
         display: block
@@ -88,9 +92,6 @@
         .taxonomies-single
             &.with-label
                 @include grid(3, desktop, $spacing-3)
-            &.without-label
-                display: flex
-                gap: $spacing-2
             ul, &
                 @include list-reset
             @include media-breakpoint-down(desktop)

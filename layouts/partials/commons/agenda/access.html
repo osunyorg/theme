@@ -1,10 +1,10 @@
-{{ if or .Params.text .Params.notes .Params.header_cta.display .Params.time_slots }}
+{{ if or .Params.text .Params.notes .Params.header_cta.display .Params.time_slots .Params.children }}
   <div class="container event-access">
     {{ if or .Params.text .Params.notes .Params.header_cta.display }}
-      {{ partial "commons/practicals.html" . }}
+      {{ partial "commons/agenda/practicals.html" . }}
     {{ end }}
     {{ if or .Params.time_slots .Params.children }}
-      {{ partial "commons/dates.html" . }}
+      {{ partial "commons/agenda/dates.html" . }}
     {{ end }}
   </div>
 {{ end }}

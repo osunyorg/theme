@@ -4,17 +4,17 @@
 {{ $has_primary_date := or $is_repeating $multiple_dates_event $is_parent }}
 
 <div class="event-slots {{- if $is_parent }} parent-event{{ end }}">
-  <h2>{{ i18n "commons.date" (cond $has_primary_date 2 1) }}</h2>
+  <h2 class="events-slots-title">{{ i18n "commons.date" (cond $has_primary_date 2 1) }}</h2>
   {{ if $has_primary_date }}
     <div class="event-summary">
-      <span class="date" itemprop="startDate" content="2014-10-01T19:30">{{ .Params.dates.computed.long }}</span>
+      <span class="date" itemprop="startDate" content="{{ .Params.dates.from.day }}">{{ .Params.dates.computed.long }}</span>
       {{ if $is_repeating }}
         <span class="type">{{ i18n (printf "events.regular_event") }}</span>
       {{ end }}
       {{ with .Params.place }}
         <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">{{ . }}</span>
       {{ end }}
-      {{ partial "commons/dropdown-calendar.html" (dict
+      {{ partial "commons/agenda/dropdown-calendar.html" (dict
           "index" "primary"
           "calendar_links" .Params.dates.add_to_calendar
         )}}
@@ -33,8 +33,10 @@
               <time datetime="{{ .end.time }}">{{ $time_slot.end.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
             {{ end }}
           </p>
-          <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">{{ $time_slot.place }}</span>
-          {{ partial "commons/dropdown-calendar.html" (dict
+          {{ with $time_slot.place }}
+            <span class="location" itemprop="location">{{ . }}</span>
+          {{ end }}
+          {{ partial "commons/agenda/dropdown-calendar.html" (dict
               "index" $index
               "calendar_links" $time_slot.add_to_calendar
             )}}

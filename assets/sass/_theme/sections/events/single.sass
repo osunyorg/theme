@@ -23,9 +23,10 @@
                     margin-top: 0
                     width: columns(6)
                 .taxonomies-single
-                    @include grid(2)
-                    .terms
-                        width: columns(2)
+                    &.with-label
+                        @include grid(2)
+                        .terms
+                            width: columns(2)
             &.hero--image-landscape
                 .hero-text
                     width: 100%
@@ -62,14 +63,15 @@
                         &:first-child
                             margin-top: 0
                 .taxonomies-single
-                    display: flex
-                    flex-wrap: wrap
-                    column-gap: var(--grid-gutter)
-                    row-gap: $spacing-3
-                    .terms
-                        &, ul
-                            display: block
-                            text-align: left
+                    &.with-label
+                        display: flex
+                        flex-wrap: wrap
+                        column-gap: var(--grid-gutter)
+                        row-gap: $spacing-3
+                        .terms
+                            &, ul
+                                display: block
+                                text-align: left
             figure
                 &.image-landscape
                     width: columns(12)
@@ -80,19 +82,16 @@
     &:not(.full-width)
         .section-sidebar
             @include sidebar
-            .btn
-                @extend .button--small
-                --btn-background: #{$color-background-alt}
-                --btn-hover-background: #{$color-border}
-                border: none
-
+    .programme-btn
+        @extend .button--alt
+        @extend .button--small
     .event-access
         > div:first-child
             padding-top: $spacing-4
             @if $color-background == $hero-background-color
-                border-top: 1px solid var(--color-border)
+                border-top: var(--border-width) solid var(--color-border)
         > div:last-child
-            border-bottom: 1px solid var(--color-border)
+            border-bottom: var(--border-width) solid var(--color-border)
             padding-bottom: $spacing-4
         > div + div
             margin-top: $spacing-4
@@ -192,7 +191,7 @@
                     padding: space(2) space(3)
                     width: auto
                     .dropdown-menu
-                        border-bottom: 1px solid var(--dropdown-border-color)
+                        border-bottom: var(--border-width) solid var(--dropdown-border-color)
                         width: 100vw
         @include media-breakpoint-up(desktop)
             .event-time-slot
