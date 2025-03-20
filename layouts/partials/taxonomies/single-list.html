@@ -7,21 +7,15 @@
   "default" "default.single.taxonomies.display"
 ) }}
 
-
 {{ with $taxonomies }}
   {{ if $display_taxonomies }}
-    <ul class="taxonomies-single {{ $type }}-taxonomies" aria-label="{{ i18n "categories.label" }}">
+    <ul class="taxonomies-single {{ $type }}-taxonomies with-label" aria-label="{{ i18n "categories.label" }}">
       {{ range $taxonomies }}
-        {{ $taxonomy := . }}
-        {{ with .path }}
-          {{/*  Waiting for ".path" in static file https://github.com/osunyorg/admin/issues/2717  */}}
-          {{ $taxonomy = site.GetPage . }}
-        {{ end }}
-
+        {{ $taxonomy := site.GetPage .path }}
         {{ if .categories }}
           <li class="terms
-            {{ if .slug -}} taxonomy-{{- .slug }} {{- end }}
-            {{ with $taxonomy.Params.bodyclass -}} {{ . }} {{- end }}">
+            {{- if .slug }} taxonomy-{{- .slug }} {{ end -}}
+            {{- with $taxonomy.Params.bodyclass -}}{{ . }}{{- end }}">
             <span class="taxonomy-title">{{ .name }}</span>
             {{ with .categories }}
               {{ $categories := partial "GetObjectsFromPathSlice" . }}
