@@ -3,11 +3,12 @@
     article
         @include article
         @include layout-item
-        [class$="-title"]
+        > *:where([class$="-title"])
             @include h2
             a
-                @include hover-translate-icon(after)
                 @include icon(arrow-right-line, after, true)
+                    font-size: 0.8em
+                @include hover-translate-icon(after)
     @include media-breakpoint-down(desktop)
         > li + li
             margin-top: $spacing-5

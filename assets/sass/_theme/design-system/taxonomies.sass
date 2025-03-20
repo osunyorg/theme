@@ -27,6 +27,7 @@
     margin-bottom: var(--grid-gutter)
     margin-top: var(--grid-gutter)
     flex-wrap: wrap
+    // justify-content: end
     > p
         @include meta
     .dropdown
@@ -54,22 +55,27 @@
         @include list-reset
     .taxonomy-title
         @include meta
+    .hero &, &
+        &.without-label
+            display: flex
+            gap: $spacing-2
     .hero &
         margin-top: $spacing-4
         display: block
         a
             @include small
-        > li
-            display: flex
-            justify-content: space-between
-            align-items: baseline
-            ul
-                text-align: right
+        &.with-label
+            > li
                 display: flex
-                flex-wrap: wrap
-                gap: $spacing-1
-        @include media-breakpoint-up(lg)
-            width: columns(4)
+                justify-content: space-between
+                align-items: baseline
+                ul
+                    text-align: right
+                    display: flex
+                    flex-wrap: wrap
+                    gap: $spacing-1
+            @include media-breakpoint-up(lg)
+                width: columns(4)
 
 // For index pages
 .taxonomy-categories--grid
@@ -84,7 +90,8 @@
     .taxonomies-container
         margin-bottom: $spacing-5
         .taxonomies-single
-            @include grid(3, desktop, $spacing-3)
+            &.with-label
+                @include grid(3, desktop, $spacing-3)
             ul, &
                 @include list-reset
             @include media-breakpoint-down(desktop)

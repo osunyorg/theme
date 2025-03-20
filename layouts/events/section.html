@@ -1,3 +1,9 @@
 {{ define "main" }}
-  {{ partial "events/section.html" . }}
+  {{ if .Params.is_year }}
+    {{ partial "events/section-year.html" . }}
+  {{ else if .Params.is_month }}
+    {{ partial "events/section-month.html" . }}
+  {{ else }}
+    {{ partial "events/section.html" . }}
+  {{ end }}
 {{ end }}

@@ -35,13 +35,14 @@
         .project
             justify-content: space-between
             &-meta
+                align-items: baseline
                 display: flex
                 gap: $spacing-2
-                align-items: baseline
                 time
                     display: inline
             .media
                 flex-shrink: 0
+                margin-bottom: 0
             &-title a
                 @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon(after, $fade: true)
@@ -50,8 +51,8 @@
         @include media-breakpoint-down(md)
             .project
                 .media
-                    order: -1
                     margin-bottom: 0
+                    order: -1
                 &-meta
                     margin-top: $spacing-1
         @include media-breakpoint-up(md)
@@ -60,24 +61,25 @@
                 .media
                     order: 1
                 &-categories
-                    width: fit-content
                     display: block
+                    width: fit-content
                     li
                         display: inline
         @include media-breakpoint-between(sm, desktop)
             .project
                 .media
                     width: columns(4)
-        @include in-page-with-sidebar
-            .project
-                &-title,
-                &-subtitle
-                    @include h3
-        @include in-page-without-sidebar
-            .project
-                &-title,
-                &-subtitle
-                    @include h2
+        article
+            @include in-page-with-sidebar
+                .project
+                    &-title,
+                    &-subtitle
+                        @include h3
+            @include in-page-without-sidebar
+                &.project
+                    .project-title,
+                    .project-subtitle
+                        @include h2
     &--alternate
         .project-subtitle
             @include h3
@@ -123,6 +125,7 @@
                 margin-top: $spacing-4
             .more
                 @include icon(arrow-right-line, after)
+                    display: inline-block
                     margin-left: $spacing-1
                     transition: transform 0.55s $arrow-ease-transition
             &:hover 
@@ -182,10 +185,6 @@
                 flex-wrap: wrap
                 li
                     white-space: nowrap
-        .dropdown-share
-            button
-                margin-top: 0
-                width: columns(6)
     
     &:not(.full-width)
         .project-sidebar

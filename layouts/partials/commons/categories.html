@@ -10,7 +10,7 @@
 {{- if $categories -}}
   <ul class="{{ $class }}" aria-label="{{ i18n "categories.label" }}">
     {{- range $categories -}}
-      <li {{ with .Params.bodyclassclass }}class="{{ . }}"{{ end }}>
+      <li {{ with .Params.bodyclass }}class="{{ . }}"{{ end }}>
         <a href="{{ .Permalink }}">
           {{- safeHTML .Title -}}
         </a>

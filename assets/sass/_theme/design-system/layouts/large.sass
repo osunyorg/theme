@@ -7,11 +7,18 @@
         @include layout-item
         [class$="-title"]
             @include h2
-            a
-                @include icon(arrow-right-line, after, true)
-                @include hover-translate-icon(after)
-    @include media-breakpoint-up(desktop)
-        article
+        .more
+            @include icon(arrow-right-line, after, true)
+                display: inline-block
+                transition: transform 0.25s
+        &:hover
+            .more::after
+                transform: translateX(pxToRem(5))
+        @include media-breakpoint-down(desktop)
+            .media
+                margin-left: var(--grid-gutter-negative)
+                margin-right: var(--grid-gutter-negative)
+        @include media-breakpoint-up(desktop)
             flex-direction: row
             gap: var(--grid-gutter)
     @include in-page-with-sidebar

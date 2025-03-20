@@ -1,0 +1,14 @@
+<div class="container events-calendar">
+
+  {{ if .Params.is_year }}
+    {{ partial "events/section/calendar/year.html" . }}
+  {{ else if .Params.is_month }}
+    {{ partial "events/section/calendar/month.html" (dict
+        "name" .Title
+        "days" .Params.days
+        "permalink" .Permalink
+        "label_type" "long"
+      ) }}
+  {{ end }}
+
+</div>

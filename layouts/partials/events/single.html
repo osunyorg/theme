@@ -1,25 +1,39 @@
 {{ partial "events/single/hero.html" . }}
 
-<div class="document-content" itemscope itemtype="https://schema.org/Event">
-  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
-  <meta itemprop="url" content="{{ .Permalink }}">
-  {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
+<div itemscope itemtype="https://schema.org/Event">
+  {{ partial "commons/agenda/access.html" . }}
+  <div class="document-content">
+    <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+    <meta itemprop="url" content="{{ .Permalink }}">
+    {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
 
-  {{ partial "events/single/sidebar.html" . }}
+    {{ partial "events/single/sidebar.html" . }}
 
-  {{ partial "events/single/summary.html" (dict
-      "context" .
-      "block_wrapped" true
-    ) }}
+    {{ partial "events/single/summary.html" (dict
+        "context" .
+        "block_wrapped" true
+      ) }}
 
-  {{ partial "contents/list.html" . }}
+    {{ partial "contents/list.html" . }}
 
-  {{ partial "commons/siblings-navigation.html" (dict
-    "context" .
-    "previous_label" (i18n "events.previous")
-    "next_label" (i18n "events.next")
-    "reversed" (not .Params.dates.archive)
-  ) }}
+    {{ if site.Params.events.single.navigation.active }}
+      {{ partial "commons/siblings-navigation.html" (dict
+        "context" .
+        "previous_label" (i18n "events.previous")
+        "next_label" (i18n "events.next")
+        "reversed" (not .Params.dates.archive)
+      ) }}
+    {{ end }}
+  
+    {{ partial "hooks/before-document-content-end.html" . }}
+  </div>
 
-  {{ partial "hooks/before-document-content-end.html" . }}
+  {{ with .Params.children }}
+    {{ partial "events/single/programme.html" . }}
+  {{ end }}
+
+  {{ with .Params.parent }}
+    {{ partial "events/single/parent.html" . }}
+  {{ end }}
 </div>
+
