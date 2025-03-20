@@ -87,8 +87,9 @@
         @extend .button--small
     .event-access
         > div:first-child
-            border-top: var(--border-width) solid var(--color-border)
             padding-top: $spacing-4
+            @if $color-background == $hero-background-color
+                border-top: var(--border-width) solid var(--color-border)
         > div:last-child
             border-bottom: var(--border-width) solid var(--color-border)
             padding-bottom: $spacing-4
@@ -145,6 +146,10 @@
             gap: var(--grid-gutter)
             .date
                 width: columns(4)
+            .hours
+                time + time
+                    @include icon(arrow-right-line)
+                        padding-right: space()
             .dropdown-calendar
                 @include dropdown
                 @include meta
@@ -172,10 +177,10 @@
                 flex-wrap: wrap
                 row-gap: $spacing-1
                 .date,
-                time,
+                .hours,
                 .dropdown-calendar
                     width: columns(6)
-                time
+                .hours
                     text-align: right
                 .location
                     @include meta
@@ -190,7 +195,7 @@
                         width: 100vw
         @include media-breakpoint-up(desktop)
             .event-time-slot
-                time
+                .hours
                     width: columns(2)
             .event-summary + ul
                 .dropdown-calendar
