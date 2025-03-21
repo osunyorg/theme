@@ -1,0 +1,110 @@
+{{- $authorEmail := "" }}
+{{- with site.Params.author }}
+  {{- if reflect.IsMap . }}
+    {{- with .email }}
+      {{- $authorEmail = . }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- $authorName := "" }}
+{{- with site.Params.author }}
+  {{- if reflect.IsMap . }}
+    {{- with .name }}
+      {{- $authorName = . }}
+    {{- end }}
+  {{- else }}
+    {{- $authorName  = . }}
+  {{- end }}
+{{- end }}
+
+{{- $pctx := . }}
+{{- if .IsHome }}{{ $pctx = .Site }}{{ end }}
+{{- $pages := slice }}
+{{- if or $.IsHome $.IsSection }}
+{{- $pages = $pctx.RegularPages }}
+{{- else }}
+{{- $pages = $pctx.Pages }}
+{{- end }}
+{{- $limit := .Site.Config.Services.RSS.Limit }}
+{{- if ge $limit 1 }}
+{{- $pages = $pages | first $limit }}
+{{- end }}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN" "http://my.netscape.com/publish/formats/rss-0.91.dtd">
+<rss  version="2.0"
+      xmlns:atom="http://www.w3.org/2005/Atom"
+      xmlns:content="http://purl.org/rss/1.0/modules/content/"
+      xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:ev="http://purl.org/rss/1.0/modules/event/"
+      xmlns:media="http://search.yahoo.com/mrss/"
+      >
+  <channel>
+    <title>{{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }}, {{ end }}{{ .Site.Title }}{{ end }}</title>
+    <link>{{ .Permalink }}</link>
+    {{- with .Summary }}
+    <description>
+      {{- printf "<![CDATA[" | safeHTML -}}
+        {{ . }}
+      {{- printf "]]>" | safeHTML -}}
+    </description>
+    {{ end -}}
+    <generator>Hugo+Osuny</generator>
+    <language>{{ site.Language.LanguageCode }}</language>{{ with $authorEmail }}
+    <managingEditor>{{.}}{{ with $authorName }} ({{ . }}){{ end }}</managingEditor>{{ end }}{{ with $authorEmail }}
+    <webMaster>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</webMaster>{{ end }}{{ with .Site.Copyright }}
+    <copyright>{{ . }}</copyright>{{ end }}{{ if not .Date.IsZero }}
+    <lastBuildDate>{{ (index $pages.ByLastmod.Reverse 0).Lastmod.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
+    {{- with .OutputFormats.Get "RSS" }}
+    {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{- end }}
+    {{- range $pages }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      {{- with $authorEmail }}<author>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</author>{{ end }}
+      <guid>{{ .Permalink }}</guid>
+      {{- with .Summary }}
+      <description>
+        {{- printf "<![CDATA[" | safeHTML -}}
+          {{ . | safeHTML }}
+        {{- printf "]]>" | safeHTML -}}
+      </description>
+      {{ end -}}
+      {{- with .Params.image -}}
+        {{- $media := partial "GetMedia" .id -}}
+        {{- if $media -}}
+          {{- $url := partial "GetImageUrl" (dict "media" $media "size" 450 "scale" 2 ) -}}
+          <media:content url="{{ $url }}" medium="image" width="900">
+            {{- with .alt -}}
+              <media:description type="plain">
+                {{- printf "<![CDATA[" | safeHTML -}}
+                  {{ . }}
+                {{- printf "]]>" | safeHTML -}}
+              </media:description>
+            {{- end -}}
+            {{- with .credit -}}
+              <media:credit type="html">
+                {{- printf "<![CDATA[" | safeHTML -}}
+                  {{ . | safeHTML }}
+                {{- printf "]]>" | safeHTML -}}
+              </media:credit>
+            {{- end -}}
+          </media:content>
+        {{- end -}}
+      {{ end -}}
+      {{- range .Params.taxonomies -}}
+        {{ range .categories }}
+          {{- $category := site.GetPage .path -}}
+          <category>
+          {{- printf "<![CDATA[" | safeHTML -}}
+            {{ $category.Title }}
+          {{- printf "]]>" | safeHTML -}}
+          </category>
+        {{- end -}}
+      {{- end -}}
+    </item>
+    {{- end }}
+  </channel>
+</rss>
