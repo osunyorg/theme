@@ -26,14 +26,19 @@
                 font-size: $block-key_figures-number-font-size
                 font-weight: $block-key_figures-number-font-weight
                 margin-inline-end: 0.1em
+        img
+            max-width: $block-key_figures-image-max-width
         picture.is-png
             img
-                max-width: $block-key_figures-icon-max-width
+                max-width: $block-key_figures-png-max-width
         @include media-breakpoint-up(desktop)
             font-size: $block-key_figures-font-size-desktop
             img
                 margin-bottom: $spacing-2
                 max-width: $block-key_figures-image-max-width-desktop
+            picture.is-png
+                img
+                    max-width: $block-key_figures-png-max-width-desktop
             strong
                 font-size: $block-key_figures-number-font-size-desktop
         @include media-breakpoint-up(lg)
@@ -55,24 +60,6 @@
             &.with-image
                 display: flex
                 gap: var(--grid-gutter)
-                
-            // &.with-image
-            //     // ensure that the text accompanying the number is sent to the right of the image
-            //     padding-left: offset(3)
-            //     position: relative
-            //     span
-            //         align-items: baseline
-            //         display: flex
-            //         flex-wrap: wrap
-            //     picture
-            //         // without the negative margin, text goest under the image, not at its right
-            //         // margin-left: calc(-1 * #{offset(4)})
-            //         width: columns(3)
-            //         position: absolute
-            //         left: 0
-            //         top: 0
-            //         + strong
-            //             margin-left: var(--grid-gutter)
             + li
                 margin-top: $spacing-3
 
