@@ -6,8 +6,6 @@
     display: flex
     flex-wrap: wrap
     margin-top: $spacing-5
-    main.page-with-blocks &
-        padding-bottom: $spacing-5
     li
         a
             color: inherit
@@ -49,7 +47,7 @@
                 padding-right: 0
 
 .posts-navigation, .siblings-navigation
-    border-top: 1px solid var(--color-border)
+    border-top: var(--border-width) solid var(--color-border)
     ul
         @include list-reset
         display: flex
@@ -88,7 +86,7 @@
             flex-direction: column-reverse
             .previous,
             .next
-                border-bottom: 1px solid var(--color-border)
+                border-bottom: var(--border-width) solid var(--color-border)
                 display: flex
                 align-items: center
                 span

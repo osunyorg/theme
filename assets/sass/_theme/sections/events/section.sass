@@ -1,0 +1,100 @@
+.events__section, .events_categories__term
+    .agenda-exhibitions
+        margin-bottom: var(--grid-gutter)
+        background: var(--color-background-alt)
+        padding-top: var(--grid-gutter)
+        padding-bottom: var(--grid-gutter)
+        h2
+            @include h5
+            margin-bottom: var(--heading-margin-bottom)
+            &:where(:not(:first-child))
+                margin-top: var(--heading-margin-top)
+            @include media-breakpoint-down(desktop)
+                margin-bottom: $spacing-3
+                &:where(:not(:first-child))
+                    margin-top: $spacing-5
+    .container + .container
+        margin-top: $spacing-4
+        @include media-breakpoint-up(up)
+            margin-top: $spacing-5
+
+.events__section
+    .events-archives-years
+        margin-top: $spacing-5
+        ol
+            @include list-reset
+            margin-top: $spacing-2
+            li
+                @include icon(arrow-right-line, after, true)
+                align-items: center
+                border-bottom: var(--border-width) solid var(--color-border)
+                display: flex
+                gap: var(--grid-gutter)
+                padding-bottom: $spacing-3
+                padding-top: $spacing-3
+                position: relative
+                text-decoration: none
+                justify-content: space-between
+                a
+                    @include h2
+                    @include stretched-link
+                    @include media-breakpoint-up(desktop)
+                        width: columns(6)
+                    text-decoration: none
+                &:hover
+                    a, p, &::after
+                        color: var(--color-accent)
+                @include media-breakpoint-up(desktop)
+                    p
+                        flex: 1
+
+.events__section-month
+    .events-calendar
+        caption
+            @extend .sr-only
+    @include media-breakpoint-up(desktop)
+        .events-calendar
+            .calendar-month
+                max-width: columns(11)
+                th, td
+                    text-align: left
+
+.events__section-year
+    .hero-text
+        align-items: baseline
+        display: flex
+        gap: var(--grid-gutter)
+        justify-content: space-between
+        width: 100%
+    .hero-actions
+        .btn
+            @extend .button--small
+            @include icon(arrow-down-line, after)
+            --btn-background: #{$color-background-alt}
+            --btn-hover-background: #{$color-border}
+            --btn-hover-color: var(--btn-background)
+            border: none
+    .events-calendar
+        @include grid(2, md, $spacing-6)
+        @include grid(3, desktop, $spacing-6)
+    @include media-breakpoint-down(up)
+        align-items: center
+    @include media-breakpoint-down(desktop)
+        .hero-text
+            flex-direction: column
+    .year-navigation
+        display: flex
+        justify-content: space-between
+        gap: var(--grid-gutter)
+        a
+            text-decoration: none
+            &:hover
+                @include link(var(--color-text))
+        .previous-year
+            margin-right: auto
+            @include icon(arrow-left-line, before)
+                margin-right: space()
+        .next-year
+            margin-left: auto
+            @include icon(arrow-right-line, after)
+                margin-left: space()

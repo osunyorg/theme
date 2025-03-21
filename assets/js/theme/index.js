@@ -6,6 +6,7 @@ import './body';
 import './design-system/accordion';
 import './design-system/clickToCopy';
 import './design-system/extendables';
+import './design-system/extendableList';
 import './design-system/font';
 import './design-system/Maps';
 import './design-system/mainMenu';
@@ -17,6 +18,7 @@ import './design-system/Popup';
 import './design-system/Lightbox';
 import './design-system/sliders';
 import './design-system/search';
+import './design-system/StickyTitle';
 
 import './blocks/keyFigures';
 import './blocks/timeline';

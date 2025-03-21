@@ -1,0 +1,12 @@
+{{ $param := site.Params }}
+{{ $default := site.Params }}
+
+{{ range (split .param ".") }}
+  {{ $param = index $param . }}
+{{ end }}
+
+{{ range (split .default ".") }}
+  {{ $default = index $default . }}
+{{ end }}
+
+{{ return ($param | default $default) }}
