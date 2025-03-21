@@ -1,13 +1,29 @@
 {{- $title := or .Params.header_text .Title -}}
+{{ $share := site.Params.events.share_links.enabled | default site.Params.share_links.enabled }}
+{{ $sizes := "" }}
 
 {{ with .Params.subtitle }}
   {{- $title = printf "%s <span>%s</span>" $title . -}}
 {{ end }}
 
+{{ $image := .Params.image }}
+{{ with $image }}
+  {{ $image_format := partial "GetImageDirection" . }}
+  {{ $sizes = index site.Params.image_sizes.sections.events.hero_single $image_format }}
+{{ end }}
+
+{{- $hero_text_complement := "" -}}
+{{ if .Params.events_categories }}
+  {{ $hero_text_complement = "taxonomies/single-list.html" }}
+{{ end }}
+
 {{- partial "header/hero.html"
   (dict
     "title" $title
-    "image" .Params.image
-    "sizes" site.Params.image_sizes.sections.events.hero_single
+    "image" $image
+    "sizes" $sizes
     "context" .
+    "share" $share
+    "button" false
+    "hero_text_complement" $hero_text_complement
   ) -}}

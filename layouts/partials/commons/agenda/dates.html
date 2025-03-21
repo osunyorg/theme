@@ -1,0 +1,50 @@
+{{ $is_repeating := gt .Params.time_slots 1 }}
+{{ $multiple_dates_event := ne .Params.dates.from.day .Params.dates.to.day }}
+{{ $is_parent := .Params.children}}
+{{ $has_primary_date := or $is_repeating $multiple_dates_event $is_parent }}
+
+<div class="event-slots {{- if $is_parent }} parent-event{{ end }}">
+  <h2 class="events-slots-title">{{ i18n "commons.date" (cond $has_primary_date 2 1) }}</h2>
+  {{ if $has_primary_date }}
+    <div class="event-summary">
+      <span class="date" itemprop="startDate" content="{{ .Params.dates.from.day }}">{{ .Params.dates.computed.long }}</span>
+      {{ if $is_repeating }}
+        <span class="type">{{ i18n (printf "events.regular_event") }}</span>
+      {{ end }}
+      {{ with .Params.place }}
+        <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">{{ . }}</span>
+      {{ end }}
+      {{ partial "commons/agenda/dropdown-calendar.html" (dict
+          "index" "primary"
+          "calendar_links" .Params.dates.add_to_calendar
+        )}}
+    </div>
+  {{ end }}
+  {{ with .Params.time_slots }}
+    <ul id="all-dates" class="extendable-list">
+      {{ range $index, $time_slot := . }}
+        <li class="event-time-slot" itemprop="subEvent">
+          <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ $time_slot.start.date | time.Format site.Params.events.single.time_slots.date_format }}</span>
+          <p class="hours">
+            {{ if $time_slot.start.datetime }}
+              <time datetime="{{ .start.time }}">{{ $time_slot.start.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
+            {{ end }}
+            {{ if $time_slot.end.datetime }}
+              <time datetime="{{ .end.time }}">{{ $time_slot.end.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
+            {{ end }}
+          </p>
+          {{ with $time_slot.place }}
+            <span class="location" itemprop="location">{{ . }}</span>
+          {{ end }}
+          {{ partial "commons/agenda/dropdown-calendar.html" (dict
+              "index" $index
+              "calendar_links" $time_slot.add_to_calendar
+            )}}
+        </li>
+      {{ end }}
+    </ul>
+  {{ end }}
+  {{ if $is_repeating }}
+    <button aria-controls="all-dates" aria-expanded="false" class="btn">{{ i18n (printf "events.more_dates") }}</button>
+  {{ end }}
+</div>
