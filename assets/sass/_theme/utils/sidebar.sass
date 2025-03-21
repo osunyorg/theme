@@ -78,7 +78,7 @@
             > li:first-child, &, &
                 padding-top: 0
     > li,
-    .taxonomies-single > li
+    .taxonomies-single.with-label > li
         @include meta
         display: flex
         gap: $spacing-3
@@ -120,6 +120,12 @@
         flex: 1
         li:last-child
             padding-bottom: 0
+        &.without-label
+            display: block
+            li, a
+                display: inline
+            li + li
+                padding-left: $spacing-1 
     a
         @include link(var(--color-accent))
         text-align: right

@@ -1,3 +1,4 @@
+{{ $context := . }}
 {{ $type := .Type }}
 {{ $taxonomies := .Params.taxonomies }}
 {{ $param := (printf "%s.single.taxonomies.display" $type) }}
@@ -9,36 +10,34 @@
 {{ with $taxonomies }}
   {{ if $display_taxonomies }}
     <ul class="taxonomies-single {{ $type }}-taxonomies with-label" aria-label="{{ i18n "categories.label" }}">
-      {{ range . }}
+      {{ range $taxonomies }}
+        {{ $taxonomy := site.GetPage .path }}
         {{ if .categories }}
-          <li class="terms">
+          <li class="terms
+            {{- if .slug }} taxonomy-{{- .slug }} {{ end -}}
+            {{- with $taxonomy.Params.bodyclass -}}{{ . }}{{- end }}">
             <span class="taxonomy-title">{{ .name }}</span>
             {{ with .categories }}
-              <ul class="taxonomy-children">
-                {{ range . }}
-                  <li class="term">
-                    <a href="{{ .permalink }}">
-                      {{ safeHTML .name }}
-                    </a>
-                  </li>
-                {{ end }}
-              </ul>
+              {{ $categories := partial "GetObjectsFromPathSlice" . }}
+              {{ partial "commons/categories.html" (dict 
+                  "kind" $context.Kind
+                  "context" $context
+                  "categories" $categories
+                  "class" "taxonomy-children"
+                )}}
             {{ end }}
           </li>
         {{ end }}
       {{ end }}
     </ul>
   {{ else }}
-    <ul class="taxonomies-single {{ $type }}-taxonomies without-label" aria-label="{{ i18n "categories.label" }}">
-      {{ range . }}
-        {{ range .categories }}
-          <li class="terms">
-            <a href="{{ .permalink }}">
-              {{ safeHTML .name }}
-            </a>
-          </li>
-        {{ end }}
-      {{ end }}
-    </ul>
+    {{ $all_categories := partial "GetTermsFromTaxonomies" . }}
+    {{ $class := printf "taxonomies-single without-label %s-taxonomies" $type }}
+    {{ partial "commons/categories.html" (dict 
+        "kind" $context.Kind
+        "context" $context
+        "categories" $all_categories
+        "class" $class
+      )}}
   {{ end }}
 {{ end }}
