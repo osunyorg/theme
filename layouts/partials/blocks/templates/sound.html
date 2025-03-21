@@ -10,27 +10,17 @@
         {{ partial "blocks/top.html" $block.top }}
         <div>
           {{ if .file }}
-            {{ $size := "" }}
             {{ $file := partial "GetMedia" .file.id }}
             {{ if $file }}
-              {{ $size := partial "GetHumanSize" $file.size }}
-              {{ $extension := partial "GetExtensionFile" $file.name }}
-              {{ $extension_with_size := (printf "%.2f %s - %s" $size.weight $size.unit $extension) }}
               <figure>
                 <audio src="{{ $file.direct_url }}" controls title="{{ .title | safeHTML }}"></audio>
-                {{ if or .title $size }}
-                  <figcaption>
-                    {{ if .title }}
-                      {{ $described_by_id = printf "block-sound-title-%d" $block_index }}
-                      <p aria-hidden="true" id="{{- $described_by_id -}}">{{- partial "PrepareHTML" .title -}}</p>
-                    {{ end }}
-                    {{ if $size }}
-                    <p>
-                      <abbr title="{{ i18n (printf "commons.extensions.%s" $extension) }}">{{ $extension }}</abbr>
-                      - {{ $size.weight }} <abbr title="{{ $size.full_unit }}">{{ $size.unit }}</abbr></p>
-                    {{ end }}
-                  </figcaption>
-                {{ end }}
+                <figcaption>
+                  {{ if .title }}
+                    {{ $described_by_id = printf "block-sound-title-%d" $block_index }}
+                    <p aria-hidden="true" id="{{- $described_by_id -}}">{{- partial "PrepareHTML" .title -}}</p>
+                  {{ end }}
+                  <p>{{ partial "commons/extension-and-size.html" $file }}</p>
+                </figcaption>
               {{ end }}
             </figure>
           {{ end }}
