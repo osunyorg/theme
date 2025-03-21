@@ -17,12 +17,15 @@
         color: var(--color-text-alt)
 
 .posts__section,
-.authors__term,
 .posts_categories__term,
-.persons__page
+.persons__page,
+.administrators__term,
+.authors__term,
+.researchers__term,
+.teachers__term
     .posts--list
         article
-            border-bottom: 1px solid var(--color-border)
+            border-bottom: var(--border-width) solid var(--color-border)
             display: flex
             margin-bottom: $spacing-3
             padding-bottom: $spacing-3
@@ -85,19 +88,14 @@
         @include h3
         // Safe spacing if post is empty
     .document-content
-        min-height: 350px
-        // Add after element to avoid "min-height" to ignore the last block's margin-bottom
-        &::after
-            content: ''
-            display: block
-            height: 1px
+        @include document-min-height(600px)
     &:not(.full-width)
         .post-sidebar
             @include sidebar
     .block-signatures
         .signatures
             @include list-reset
-            border-top: 1px solid var(--color-border)
+            border-top: var(--border-width) solid var(--color-border)
             padding-top: var(--grid-gutter)
             li
                 align-items: flex-start

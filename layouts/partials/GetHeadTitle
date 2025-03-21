@@ -16,7 +16,7 @@
 {{ end }}
 
 {{/* PAGINATION */}}
-{{ if and (not .IsHome) (eq .Kind "section") }}
+{{/*  {{ if and (not .IsHome) (eq .Kind "section") }}
   {{ with .Paginator }}
     {{ if or .HasPrev .HasNext }}
       {{ $page_label := i18n "commons.pagination.title" }}
@@ -24,6 +24,6 @@
       {{ $title = printf "%s %s %s %d" $title $separator $page_label $currentPageNumber }}
     {{ end }}
   {{ end }}
-{{ end }}
+{{ end }}  */}}
 
 {{ return $title }}
