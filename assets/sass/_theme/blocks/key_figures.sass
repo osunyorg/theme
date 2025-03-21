@@ -13,18 +13,19 @@
     .top + ul
         margin-top: $spacing-4
         align-items: baseline
-    li > span
-        display: block
-        font-family: $block-key_figures-number-font-family
-        font-size: $block-key_figures-font-size
-        font-weight: $block-key_figures-unit-font-weight
-        line-height: 1
-        white-space: nowrap
-        strong
-            display: inline-block
-            font-size: $block-key_figures-number-font-size
-            font-weight: $block-key_figures-number-font-weight
-            margin-inline-end: 0.1em
+    li 
+        > div > span
+            display: block
+            font-family: $block-key_figures-number-font-family
+            font-size: $block-key_figures-font-size
+            font-weight: $block-key_figures-unit-font-weight
+            line-height: 1
+            white-space: nowrap
+            strong
+                display: inline-block
+                font-size: $block-key_figures-number-font-size
+                font-weight: $block-key_figures-number-font-weight
+                margin-inline-end: 0.1em
         picture.is-png
             img
                 max-width: $block-key_figures-icon-max-width
@@ -32,11 +33,9 @@
             font-size: $block-key_figures-font-size-desktop
             img
                 margin-bottom: $spacing-2
-                max-width: $block-key_figures-image-max-width
+                max-width: $block-key_figures-image-max-width-desktop
             strong
                 font-size: $block-key_figures-number-font-size-desktop
-            img
-                max-width: $block-key_figures-image-max-width-desktop
         @include media-breakpoint-up(lg)
             font-size: $block-key_figures-font-size-lg
             strong
@@ -51,21 +50,29 @@
                 font-size: $block-key_figures-number-font-size-xxl
         span + p
             margin-top: $spacing-2
-    @include media-breakpoint-down(desktop)
+    @include media-breakpoint-down(md)
         li
             &.with-image
-                // ensure that the text accompanying the number is sent to the right of the image
-                padding-left: offset(4)
-                span
-                    align-items: baseline
-                    display: flex
-                    flex-wrap: wrap
-                picture
-                    // without the negative margin, text goest under the image, not at its right
-                    margin-left: calc(-1 * #{offset(4)})
-                    width: columns(4)
-                    + strong
-                        margin-left: var(--grid-gutter)
+                display: flex
+                gap: var(--grid-gutter)
+                
+            // &.with-image
+            //     // ensure that the text accompanying the number is sent to the right of the image
+            //     padding-left: offset(3)
+            //     position: relative
+            //     span
+            //         align-items: baseline
+            //         display: flex
+            //         flex-wrap: wrap
+            //     picture
+            //         // without the negative margin, text goest under the image, not at its right
+            //         // margin-left: calc(-1 * #{offset(4)})
+            //         width: columns(3)
+            //         position: absolute
+            //         left: 0
+            //         top: 0
+            //         + strong
+            //             margin-left: var(--grid-gutter)
             + li
                 margin-top: $spacing-3
 

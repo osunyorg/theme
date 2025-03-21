@@ -16,19 +16,21 @@
           <ul class="{{ $list_class }}">
             {{- range .figures }}
               <li {{- if .image }} class="with-image" {{- end -}}>
-                <span>
-                  {{ with .image }}
-                    {{ partial "commons/image.html"
-                      (dict
-                        "image"    .
-                        "sizes"    site.Params.image_sizes.blocks.key_figures
-                      )}}
-                  {{ end }}
-                  {{ if .number }}
-                    <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
-                  {{ end }}
-                </span>
-                {{ partial "PrepareHTML" .description }}
+                {{ with .image }}
+                  {{ partial "commons/image.html"
+                    (dict
+                      "image"    .
+                      "sizes"    site.Params.image_sizes.blocks.key_figures
+                    )}}
+                {{ end }}
+                <div class="key-figure-text">
+                  <span>
+                    {{ if .number }}
+                      <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
+                    {{ end }}
+                  </span>
+                  {{ partial "PrepareHTML" .description }}
+                </div>
               </li>
             {{ end -}}
           </ul>
