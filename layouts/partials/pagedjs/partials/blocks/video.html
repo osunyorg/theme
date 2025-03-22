@@ -1,0 +1,14 @@
+{{ if .data.url }}
+  <div class="block-video__video">
+    {{ with .data.video.poster }}
+      <img src="{{ . }}" class="block-video__poster" />
+    {{ end }}
+    {{ partial "pagedjs/partials/qr.html" (dict "text" .data.url "class" "block-video__qr") }}
+  </div>
+  <p class="block-video__title">{{ .data.video_title }}</p>
+  {{ with .data.transcription }}
+    <div class="block-video__transcription">
+      {{ . }}
+    </div>
+  {{ end }}
+{{ end }}
