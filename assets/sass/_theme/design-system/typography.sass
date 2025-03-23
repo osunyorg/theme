@@ -231,8 +231,6 @@ a,
     &[href^="mailto"]
         &::after
             content: none
-    &.lightbox-launcher
-        text-decoration: none
 
 .chip
     @include meta
@@ -242,7 +240,7 @@ a,
     color: $chip-color
     text-decoration: none
     padding: space(1) space(4)
-    transition: background 0.3s
+    transition: background $background-duration
     &:hover
         background: $chip-background-hover
 
@@ -254,6 +252,7 @@ a,
         margin-right: pxToRem(5)
 
 %underline-on-hover
+    text-decoration-line: underline
     text-decoration-color: transparent
     text-decoration-thickness: $link-underline-thickness
     text-underline-offset: $link-underline-offset
@@ -296,7 +295,7 @@ sup
 
 @media (prefers-reduced-motion: no-preference)
     *:focus-visible
-        transition: outline-offset .3s ease
+        transition: outline-offset $color-duration ease
 
 // ICONS
 @font-face

@@ -95,7 +95,7 @@ ol.persons--list
         padding-bottom: $spacing-3
         padding-top: $spacing-3
         position: relative
-        transition: color 0.5s
+        transition: color $color-duration
         @include icon(arrow-right-line, after)
             margin-left: auto
         &:hover
@@ -203,7 +203,7 @@ ol.persons--list
             @include icon(arrow-right-line, after, true)
                 display: inline-flex
                 margin-left: $spacing-1
-                transition: transform .3s ease
+                transition: transform $arrow-duration $arrow-ease-transition
             &:hover::after
                 transform: translateX($spacing-2)
         .more
@@ -212,7 +212,7 @@ ol.persons--list
             margin-top: $spacing-3
             &::after
                 margin-left: space()
-                transition: 0.55s $arrow-ease-transition
+                transition: $arrow-duration $arrow-ease-transition
             &:hover:after
                 transform: translateX($spacing-1)
     .person-publications
