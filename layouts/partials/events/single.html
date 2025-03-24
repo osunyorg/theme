@@ -5,6 +5,10 @@
   <div class="document-content">
     <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
+    {{ partial "events/partials/event/meta-dates.html" (dict
+        "dates" .Params.dates 
+        "time_slot" .Params.current_time_slot
+      )}}
     {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
 
     {{ partial "events/single/sidebar.html" . }}
