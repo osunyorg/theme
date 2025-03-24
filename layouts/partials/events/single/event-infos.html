@@ -1,10 +1,10 @@
 {{ $unique_day := eq .Params.dates.from.day .Params.dates.to.day }}
 <ul class="event-infos">
-  {{ if .Params.dates }}
-    {{ if .Params.dates.computed }}
+  {{ with .Params.dates }}
+    {{ with .computed }}
       <li class="event-date">
         <span>{{ i18n "commons.date.one" }}</span>
-        {{ partial "PrepareHTML" .computed.two_lines.long }}
+        {{ partial "PrepareHTML" .two_lines.long }}
       </li>
     {{ end }}
   {{ end }}
