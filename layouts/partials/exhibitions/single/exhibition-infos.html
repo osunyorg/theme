@@ -2,20 +2,9 @@
 <ul class="exhibition-infos">
   {{ with .Params.dates }}
     {{ if .computed }}
-      <li class="exhibition-date" itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
+      <li class="exhibition-date">
         <span>{{ i18n "exhibitions.date" }}</span>
         {{ partial "PrepareHTML" .computed.two_lines.long }}
-      </li>
-    {{ end }}
-    {{ if .from.hour }}
-      <li>
-        <span>{{ i18n "exhibitions.hour" }}</span>
-        {{ with .from.hour }}
-          <time datetime="{{ . }}">{{ . }}</time>
-        {{ end }}
-        {{ with .to.hour }}
-          <time datetime="{{ . }}">{{ . }}</time>
-        {{ end }}
       </li>
     {{ end }}
   {{ end }}

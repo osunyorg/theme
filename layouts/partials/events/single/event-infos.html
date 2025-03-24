@@ -1,19 +1,21 @@
 {{ $unique_day := eq .Params.dates.from.day .Params.dates.to.day }}
 <ul class="event-infos">
   {{ with .Params.dates }}
-    {{ if .computed }}
-      <li class="event-date" itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
+    {{ with .computed }}
+      <li class="event-date">
         <span>{{ i18n "commons.date.one" }}</span>
-        {{ partial "PrepareHTML" .computed.two_lines.long }}
+        {{ partial "PrepareHTML" .two_lines.long }}
       </li>
     {{ end }}
-    {{ if .from.hour }}
+  {{ end }}
+  {{ with .Params.current_time_slot }}
+    {{ if .start.time }}
       <li>
         <span>{{ i18n "commons.hour" }}</span>
-        {{ with .from.hour }}
+        {{ with .start.time }}
           <time datetime="{{ . }}">{{ . }}</time>
         {{ end }}
-        {{ with .to.hour }}
+        {{ with .end.time }}
           <time datetime="{{ . }}">{{ . }}</time>
         {{ end }}
       </li>

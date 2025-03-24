@@ -1,0 +1,24 @@
+{{ $start_time := "" }}
+{{ $end_time := "" }}
+
+{{- with .dates.from.day -}}
+  {{ $start_time = . }}
+{{- end -}}
+{{- with .time_slot -}}
+  {{ $start_time = printf "%sT%s" $start_time .start.time }}
+{{- end -}}
+
+{{- with .dates.to.day -}}
+  {{ $end_time = . }}
+{{- end -}}
+{{- with .time_slot -}}
+  {{ $end_time = printf "%sT%s" $end_time .end.time }}
+{{- end -}}
+
+{{- with $start_time }}
+  <meta itemprop="startDate" content="{{ . }}">
+{{ end -}}
+
+{{- with $end_time }}
+  <meta itemprop="endDate" content="{{ . }}">
+{{ end -}}

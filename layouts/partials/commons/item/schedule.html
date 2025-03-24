@@ -1,11 +1,12 @@
 {{ $dates := .dates }}
+{{ $time_slot := .time_slot }}
 {{ $on_two_lines := .on_two_lines }}
 {{ $type := .type }}
 {{ $date_format := index site.Params $type "date_format" }}
 {{ $time_format := index site.Params $type "time_format" }}
 
-{{ if or $dates.computed.short $dates.computed.two_lines.short $dates.from.hour $dates.to.hour }}
-  <div class="{{ $type }}-schedule" itemprop="startDate" content="{{- if $dates.from.day -}}{{ $dates.from.day }}{{- end -}}{{- if $dates.from.hour -}}T{{ $dates.from.hour }}{{- end -}}">
+{{ if or $dates.computed.short $dates.computed.two_lines.short $time_slot }}
+  <div class="{{ $type }}-schedule">
     <p class="{{ $type }}-dates">
       {{ $formated_date := $dates.computed.short }}
       {{ if $on_two_lines }}
@@ -19,17 +20,17 @@
       {{ end }}
       {{ partial "PrepareHTML" $formated_date }}
     </p>
-    {{- if (or $dates.from.hour $dates.to.hour) }}
+    {{- if $time_slot }}
       {{- $hour := "" -}}
       <p class="{{ $type }}-time">
-        {{ with $dates.from.hour }}
+        {{ with $time_slot.start.time }}
           {{- $hour = . -}}
           {{- with $time_format }}
             {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
           {{ end -}}
           <span>{{- $hour -}}</span>
         {{- end -}}
-        {{- with $dates.to.hour -}}
+        {{- with $time_slot.end.time -}}
           {{- $hour = . -}}
           {{- with $time_format -}}
             {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
