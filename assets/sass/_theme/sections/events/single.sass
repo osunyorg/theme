@@ -251,12 +251,18 @@
                     bottom: 0
                     span
                         @include sticky(var(--title-height))
+                &:where(:not(.event--with-image))
+                    .event-content
+                        margin-left: 0
         .event-parent
             .event
                 &--with-image
                     display: flex
                     gap: var(--grid-gutter)
                     flex-direction: row
+                    .event-content
+                        flex: 1
+                        width: columns(4)
                     .media
                         width: columns(8)
                         flex-shrink: 0
