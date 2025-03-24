@@ -52,6 +52,7 @@
       {{ if $options.dates }}
         {{ partial "events/partials/event/schedule.html" (dict 
             "dates" .Params.dates
+            "time_slot" .Params.current_time_slot
             "on_two_lines" (ne $layout "list")
           )}}
       {{ else }}
