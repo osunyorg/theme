@@ -1,0 +1,17 @@
+{{ $param := .param }}
+{{ $default := .default }}
+
+{{ $layout := partial "GetSiteParamWithDefault" (dict 
+    "param" (printf "%s.layout" $param)
+    "default" (printf "%s.layout" $default)
+  ) }}
+
+{{ $options := partial "GetSiteParamWithDefault" (dict 
+  "param" (printf "%s.options" $param)
+  "default" (printf "%s.options" $default)
+) }}
+
+{{ return (dict
+  "layout" $layout 
+  "options" $options
+)}}
