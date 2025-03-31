@@ -8,7 +8,9 @@
   {{ partial "contents/list.html" . }}
 
   <div class="container">
-    {{ partial "taxonomies/section-list.html" . }}
+    {{ if partial "CanDisplayTaxonomies" . }}
+      {{ partial "taxonomies/section-list.html" . }}
+    {{ end }}
 
     {{ partial "exhibitions/partials/exhibitions.html" (dict 
         "exhibitions" .RegularPages

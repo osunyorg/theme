@@ -7,9 +7,12 @@
 
   {{ partial "contents/list.html" . }}
 
-  <div class="container">
-    {{ partial "taxonomies/section-list.html" . }}
-  </div>
+  {{ if partial "CanDisplayTaxonomies" . }}
+    <div class="container">
+      {{ partial "taxonomies/section-list.html" . }}
+    </div>
+  {{ end }}
+
   {{ if site.Params.events.index.highlight_exhibitions.active }}
     {{ $exhibitions := where .Pages "Section" "exhibitions" }}
     {{ partial "events/section/exhibitions.html" $exhibitions }}

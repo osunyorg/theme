@@ -30,7 +30,9 @@
 
   <div class="container">
     {{- if not $is_block_persons_present -}}
-      {{ partial "taxonomies/section-list.html" . }}
+      {{ if partial "CanDisplayTaxonomies" . }}
+        {{ partial "taxonomies/section-list.html" . }}
+      {{ end }}
       {{ partial "persons/section/persons-taxonomies.html" . }}
       {{ partial "persons/partials/list.html" .Paginator.Pages }}
       {{ partial "commons/pagination.html" . }}

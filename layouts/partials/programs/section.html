@@ -10,6 +10,13 @@
       "with_container" true
       "context" .
     ) }}
+
+  {{ if partial "CanDisplayTaxonomies" . }}
+    <div class="container">
+      {{ partial "taxonomies/section-list.html" . }}
+    </div>
+  {{ end }}
+
   {{ partial "contents/list.html" . }}
   <div class="container">
     {{ partial "diplomas/section/diplomas-select.html" . }}

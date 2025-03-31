@@ -1,0 +1,8 @@
+{{ $can_display := false }}
+{{ $param := (printf "%s.%s.taxonomies.display" .Type .Kind) }}
+{{ $display_taxonomies := partial "GetSiteParamWithDefault" (dict 
+  "param" $param
+  "default" "default.section.taxonomies.display"
+) }}
+
+{{ return (and .Params.section_taxonomies $display_taxonomies) }}

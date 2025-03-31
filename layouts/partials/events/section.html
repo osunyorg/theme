@@ -12,7 +12,7 @@
 
   {{ partial "contents/list.html" . }}
 
-  {{ if .Params.section_taxonomies }}
+  {{ if partial "CanDisplayTaxonomies" . }}
     <div class="container">
       {{ partial "taxonomies/section-list.html" . }}
     </div>
