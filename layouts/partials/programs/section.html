@@ -12,6 +12,7 @@
     ) }}
   {{ partial "contents/list.html" . }}
   <div class="container">
+    {{ partial "taxonomies/section-list.html" . }}
     {{ partial "diplomas/section/diplomas-select.html" . }}
     {{/* Toutes les formations... */}}
     {{ $programs := where .Site.Pages "Section" "programs" }}
