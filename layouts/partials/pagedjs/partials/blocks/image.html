@@ -1,0 +1,15 @@
+{{ with .data.image }}
+  {{ with .id }}
+    {{ partial "pagedjs/partials/image.html" . }}
+  {{ end }}
+  <figcaption>
+    {{ with .text }}
+      {{ . | safeHTML }}
+    {{ end }}
+    {{ with .credit }}
+      <div class="credit">
+        {{ partial "AddCreditMention" (dict "credit" . "before" true) }}
+      </div>
+    {{ end }}
+  </figcaption>
+{{ end }}
