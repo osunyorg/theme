@@ -28,6 +28,7 @@ h1, h2, h3, h4, h5, h6
     line-height: var(--h1-line-height)
     font-style: $h1-style
     text-transform: $h1-text-transform
+    letter-spacing: $h1-letter-spacing
 
 h1, .h1
     @include h1
@@ -39,6 +40,7 @@ h1, .h1
     line-height: var(--h2-line-height)
     font-style: $h2-style
     text-transform: $h2-text-transform
+    letter-spacing: $h2-letter-spacing
 
 h2, .h2
     @include h2
@@ -50,6 +52,7 @@ h2, .h2
     line-height: var(--h3-line-height)
     font-style: $h3-style
     text-transform: $h3-text-transform
+    letter-spacing: $h3-letter-spacing
 
 h3, .h3
     @include h3
@@ -61,6 +64,7 @@ h3, .h3
     line-height: var(--h4-line-height)
     font-style: $h4-style
     text-transform: $h4-text-transform
+    letter-spacing: $h4-letter-spacing
 
 h4, .h4
     @include h4
@@ -72,6 +76,7 @@ h4, .h4
     line-height: var(--h5-line-height)
     font-style: $h5-style
     text-transform: $h5-text-transform
+    letter-spacing: $h5-letter-spacing
     // Todo : check that
     a
         text-decoration: none
@@ -86,6 +91,7 @@ h5, .h5
     line-height: var(--h6-line-height)
     font-style: $h6-style
     text-transform: $h6-text-transform
+    letter-spacing: $h6-letter-spacing
 
 h6, .h6
     @include h6
@@ -100,12 +106,14 @@ h2, .h2
     font-size: var(--lead-size)
     font-weight: $lead-weight
     line-height: var(--lead-line-height)
+    letter-spacing: $lead-letter-spacing
     @if $handle-sidebar
         @include in-page-with-sidebar
             font-family: $lead-sidebar-font-family
             font-size: var(--lead-sidebar-size)
             font-weight: $lead-sidebar-weight
             line-height: var(--lead-sidebar-line-height)
+            letter-spacing: $lead-sidebar-letter-spacing
 
 .lead
     @include lead
@@ -115,12 +123,14 @@ h2, .h2
     font-size: var(--lead-hero-size)
     font-weight: $lead-hero-weight
     line-height: var(--lead-hero-line-height)
+    letter-spacing: $lead-hero-letter-spacing
 
 @mixin body-text
     font-family: $body-font-family
     font-size: var(--body-size)
     line-height: var(--body-line-height)
     font-weight: inherit
+    letter-spacing: $body-letter-spacing
 
 .p,
 .li
@@ -132,6 +142,7 @@ h2, .h2
     font-weight: $meta-weight
     line-height: var(--meta-line-height)
     text-transform: $meta-text-transform
+    letter-spacing: $meta-letter-spacing
 
 .meta
     @include meta
@@ -141,6 +152,7 @@ h2, .h2
     font-size: var(--signature-size)
     font-weight: $signature-weight
     line-height: var(--signature-line-height)
+    letter-spacing: $signature-letter-spacing
 
 .signature
     @include signature
@@ -150,6 +162,7 @@ h2, .h2
     font-size: var(--small-size)
     line-height: var(--small-line-height)
     font-weight: $small-weight
+    letter-spacing: $small-letter-spacing
 
 small, .small
     @include small
@@ -179,6 +192,7 @@ small, .small
     font-style: inherit
     font-size: inherit
     line-height: inherit
+    letter-spacing: inherit
 
 [itemprop="articleBody"]
     @extend .rich-text
@@ -190,6 +204,7 @@ small, .small
     font-weight: $quote-weight
     font-style: $quote-style
     line-height: var(--quote-line-height)
+    letter-spacing: $quote-letter-spacing
     cite
         font-size: pxToRem(18)
         font-style: normal
