@@ -20,7 +20,8 @@
     {{ $programs = where $programs "Permalink" "!=" .FirstSection.Permalink }}
     {{/* et pas non plus les pages enfants (parcours) */}}
     {{ $programs = where $programs "Params.parent" "eq" nil }}
-    <ol class="programs">
+    {{ $layout := site.Params.programs.index.layout | default "list" }}
+    <ol class="programs programs--{{ $layout }}">
       {{- range $programs -}}
         {{ partial "programs/partials/program.html" (dict 
             "program" .
