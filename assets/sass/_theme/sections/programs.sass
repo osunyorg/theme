@@ -47,7 +47,7 @@ section.programs
     @include grid(2, desktop)
     @include grid(3, xl)
 
-ol.programs
+ol.programs:where(:not(.programs--grid))
     @include list-section
     .program
         align-items: start
@@ -104,7 +104,8 @@ ol.programs
             .program-title:last-child
                 @include h4
 
-.programs-grid
+.programs-grid,
+.programs--grid
     align-items: start
     @include grid(1, false, $spacing-5)
     @include grid(2, xl)
