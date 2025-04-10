@@ -1,7 +1,7 @@
 {{ $is_repeating := gt .Params.time_slots 1 }}
 {{ $multiple_dates_event := ne .Params.dates.from.day .Params.dates.to.day }}
-{{ $is_parent := .Params.children}}
-{{ $has_primary_date := or $is_repeating $multiple_dates_event $is_parent }}
+{{ $is_parent := .Params.children }}
+{{ $has_primary_date := or $is_repeating $multiple_dates_event $is_parent .Params.dates }}
 
 <div class="event-slots {{- if $is_parent }} parent-event{{ end }}">
   <h2 class="events-slots-title">{{ i18n "commons.date" (cond $has_primary_date 2 1) }}</h2>
