@@ -133,12 +133,17 @@
                     --btn-hover-background: var(--color-border)
                     margin-top: $spacing-3
             @include media-breakpoint-up(desktop)
-                &.parent-event
+                &.parent-event, &.simple-event
                     display: flex
                     align-items: baseline
                     gap: var(--grid-gutter)
                     .event-summary
                         flex: 1
+            @include media-breakpoint-down(desktop)
+                .event-summary
+                    flex-direction: column
+                    .date
+                        width: 100%
         .event-summary,
         .event-time-slot
             align-items: baseline

@@ -57,10 +57,6 @@
         display: block
     .taxonomy-title
         @include meta
-    .hero &, &
-        &.without-label
-            display: flex
-            gap: $spacing-2
     .hero &
         margin-top: $spacing-4
         display: block
@@ -78,7 +74,18 @@
                     gap: $spacing-1
             @include media-breakpoint-up(lg)
                 width: columns(4)
-
+    @include media-breakpoint-down(desktop)
+        .hero &, &
+            &.without-label
+                li, a
+                    display: inline
+                li
+                    padding-right: $spacing-1
+    @include media-breakpoint-up(desktop)
+        .hero &, &
+            &.without-label
+                display: flex
+                gap: $spacing-2
 // For index pages
 .taxonomy-categories--grid
     @include list-reset
