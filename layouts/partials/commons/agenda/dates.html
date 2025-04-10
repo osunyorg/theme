@@ -4,7 +4,7 @@
 {{ $is_simple_event := and .Params.dates (not .Params.time_slots) }}
 {{ $has_primary_date := or $is_repeating $multiple_dates_event $is_parent $is_simple_event }}
 
-<div class="event-slots {{- if $is_parent }} parent-event{{ end }}">
+<div class="event-slots {{- if $is_parent }} parent-event {{ end }} {{ if $is_simple_event }} simple-event {{ end }}">
   <h2 class="events-slots-title">{{ i18n "commons.date" (cond $has_primary_date 2 1) }}</h2>
   {{ if $has_primary_date }}
     <div class="event-summary">
