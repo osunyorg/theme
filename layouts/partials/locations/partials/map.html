@@ -3,8 +3,8 @@
 {{ $aria_label := i18n "commons.maps.label" $title }}
 
 {{/*  Check if has campus with address  */}}
-{{ $location_with_address := where $locations ".Params.contact_details.postal_address.geolocation.longitude" "ne" nil }}
-{{ $has_address := gt (len $location_with_address) 1 }}
+{{ $locations_with_address := where $locations ".Params.contact_details.postal_address.geolocation.longitude" "ne" nil }}
+{{ $has_address := gt (len $locations_with_address) 1 }}
 
 {{ if $has_address }}
 <div class="locations-map">
