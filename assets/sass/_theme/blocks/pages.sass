@@ -16,6 +16,7 @@
 
     @include in-page-without-sidebar
         .top
+            @include top-flex
             a
                 @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon
@@ -23,8 +24,6 @@
                 @include h2
 
     &--grid
-        .top
-            @include top-flex
         .grid
             .page-title a
                 @include icon(arrow-right-line, after, true)
@@ -38,8 +37,6 @@
             margin-top: 0
         .blocks &:last-of-type
             margin-bottom: 0
-        .top
-            @include top-flex
         .cards
             @include grid(2, desktop)
             @include in-page-without-sidebar
@@ -140,7 +137,6 @@
                     width: columns(6)
 
         @include in-page-without-sidebar
-            .block-title
             .top
                 .description
                     p
@@ -191,8 +187,6 @@
                         grid-column: 7 / 13
 
     &--alternate
-        .top
-            @include top-flex
         .alternate
             @include alternate
             article 
@@ -217,8 +211,6 @@
                     @include body-text
 
     &--large
-        .top
-            @include top-flex
         .page
             position: relative
             + .page
