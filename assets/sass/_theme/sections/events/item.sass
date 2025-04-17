@@ -33,9 +33,14 @@
                 @include icon(arrow-right-line, before)
                     margin-left: space()
                     margin-right: space()
+    &-hours
+        time + time
+            @include icon(arrow-right-line, before)
+                margin-left: space()
+                margin-right: space()
     .media
         &:empty
             display: none
     @include media-breakpoint-up(desktop)
-        &-time
+        &-time, &-hours
             display: flex
