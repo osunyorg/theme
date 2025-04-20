@@ -71,10 +71,6 @@
         {{ partial .hero_content_complement .context }}
       {{ end }}
 
-      {{ if eq site.Params.persons.single.taxonomies.position "hero" }}
-        {{ $hero_text_complement = "taxonomies/single-list.html" }}
-      {{ end }}
-
       {{ if .image }}
         <!-- TODO Peut etre aligner la stucture des données avec les autres cas d'images -->
         {{ partial "commons/image-figure.html" (dict

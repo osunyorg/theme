@@ -1,6 +1,6 @@
 
 <ul class="project-infos">
-  {{ if .Params.projects_categories }}
+  {{ if ne site.Params.projects.taxonomies.position "hero" }}
     <li>
       {{ partial "taxonomies/single-list.html" . }}
     </li>
