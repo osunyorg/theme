@@ -50,6 +50,11 @@
           {{ partial .hero_text_complement .context }}
         {{ end }}
 
+        {{ $taxonomies_position := partial "GetTaxonomiesPosition" .context }}
+        {{ if and .context.Params.taxonomies (eq $taxonomies_position "hero") }}
+          {{ partial "taxonomies/single-list.html" .context }}
+        {{ end }}
+
         {{ if or $button .share }}
           <div class="hero-actions">
             {{ with $button }}
@@ -64,6 +69,10 @@
 
       {{ if .hero_content_complement }}
         {{ partial .hero_content_complement .context }}
+      {{ end }}
+
+      {{ if eq site.Params.persons.single.taxonomies.position "hero" }}
+        {{ $hero_text_complement = "taxonomies/single-list.html" }}
       {{ end }}
 
       {{ if .image }}
