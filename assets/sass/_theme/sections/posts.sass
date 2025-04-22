@@ -43,7 +43,11 @@
                         display: block
                 @include media-breakpoint-down(desktop)
                     flex: 1
-                    margin-left: $spacing-2
+            @include media-breakpoint-down(desktop)
+                // TODO: replace grid by flex
+                &:not(.without-image)
+                    .post-content
+                        margin-left: $spacing-2
             .media
                 background: none
                 margin: 0
