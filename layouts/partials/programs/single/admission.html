@@ -39,7 +39,7 @@
           </section>
         {{- end -}}
 
-        {{- if partial "GetTextFromHTML" .Params.registration -}}
+        {{- if or .Params.registration .Params.registration_url -}}
           <section class="rich-text program-admission-registration" id="{{ anchorize (i18n "programs.registration") }}">
             <h3>{{ i18n "programs.registration" }}</h3>
             {{- partial "PrepareHTML" .Params.registration -}}
