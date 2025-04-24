@@ -1,5 +1,5 @@
 <ul class="post-infos">
-  {{ if .Params.posts_categories }}
+  {{ if ne site.Params.posts.single.taxonomies.position "hero" }}
     <li>
       {{ partial "taxonomies/single-list.html" . }}
     </li>
