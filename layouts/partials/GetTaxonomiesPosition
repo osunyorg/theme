@@ -1,5 +1,5 @@
 {{ $kind := cond (or (eq .Kind "section") (eq .Kind "taxonomy")) "section" "single" }}
-{{ $param := (printf "%s.taxonomies.position" .Type )}}
+{{ $param := (printf "%s.%s.taxonomies.position" .Type $kind )}}
 
 {{ $position := partial "GetSiteParamWithDefault" (dict 
   "param" $param
