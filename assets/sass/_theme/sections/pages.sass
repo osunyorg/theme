@@ -52,8 +52,11 @@
                 margin-top: $spacing-3
     .grid, .cards
         @include grid(2, desktop)
-        @include in-page-without-sidebar
-            @include grid(3)
+    @include in-page-without-sidebar
+        .grid
+            @include grid($block-pages-grid-columns)
+        .cards
+            @include grid($block-pages-card-columns)
 
 .pages
     .page
