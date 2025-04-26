@@ -1,6 +1,7 @@
 /* eslint-disable no-undef, no-underscore-dangle */
 window.osuny = window.osuny || {};
 window.osuny.Search = window.osuny.Search || {};
+window.osuny.pagefindOptions = window.osuny.pagefindOptions || {};
 
 window.osuny.Search = function (element) {
     window.osuny.Popup.call(this, element);
@@ -19,10 +20,17 @@ window.osuny.Search.prototype._setup = function () {
 };
 
 window.osuny.Search.prototype.setPageFind = function () {
-    this.pageFindUI = new PagefindUI({
-        element: this.element,
-        showSubResults: true
-    });
+    var options = {
+            element: this.element,
+            showSubResults: true
+        },
+        attribut;
+
+    for (attribut in window.osuny.pagefindOptions) {
+        options[attribut] = window.osuny.pagefindOptions[attribut];
+    }
+
+    this.pageFindUI = new PagefindUI(options);
 
     // Listen to user's input
     this.input = document.querySelector('.pagefind-ui__search-input');
