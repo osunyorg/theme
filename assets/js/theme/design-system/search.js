@@ -16,6 +16,7 @@ window.osuny.Search.prototype = Object.create(window.osuny.Popup.prototype);
 window.osuny.Search.prototype._setup = function () {
     this.setPageFind();
     this.setAccessibility();
+    this.setSuggestions();
 };
 
 window.osuny.Search.prototype.setPageFind = function () {
@@ -157,6 +158,26 @@ window.osuny.Search.prototype.updateAccessibilityMessage = function () {
         this.accessibleMessage.innerText = message.innerText;
         this.accessibleMessageContainer.appendChild(this.accessibleMessage);
     }
+};
+
+window.osuny.Search.prototype.setSuggestions = function () {
+    var suggestionsList = this.element.querySelector('.search__suggestions'),
+        suggestions;
+
+    if (!suggestionsList) {
+        return;
+    }
+
+    this.input.after(suggestionsList);
+
+    suggestions = suggestionsList.querySelectorAll('li');
+    suggestions.forEach(this.bindSuggestion.bind(this));
+};
+
+window.osuny.Search.prototype.bindSuggestion = function (suggestion) {
+    suggestion.addEventListener('click', function () {
+        this.pageFindUI.triggerSearch(suggestion.innerText);
+    }.bind(this));
 };
 
 // Selectors
