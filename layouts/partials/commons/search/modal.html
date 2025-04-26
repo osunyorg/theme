@@ -6,7 +6,7 @@
             {{ i18n "commons.search.close" }}
         </button>
         <p role="heading" aria-level="1" class="sr-only">{{ i18n "commons.search.title" }}</p>
-        {{ with site.Params.search.suggestions }}
+        {{ with index site.Params.search.suggestions site.Language }}
             {{ . }}
             <ul class="search__suggestions">
                 {{ range . }}
