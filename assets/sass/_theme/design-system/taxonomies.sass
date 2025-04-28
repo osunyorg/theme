@@ -64,14 +64,15 @@
             @include small
         &.with-label
             > li
-                display: flex
-                justify-content: space-between
-                align-items: baseline
                 ul
-                    text-align: right
                     display: flex
                     flex-wrap: wrap
                     gap: $spacing-1
+                    text-align: right
+                @include media-breakpoint-up(xl)
+                    align-items: baseline
+                    display: flex
+                    justify-content: space-between
             @include media-breakpoint-up(lg)
                 width: columns(4)
     @include media-breakpoint-down(desktop)
@@ -88,6 +89,7 @@
                 flex-wrap: wrap
                 column-gap: $spacing-2
                 margin-bottom: $spacing-3
+
 // For index pages
 .taxonomy-categories--grid
     @include list-reset

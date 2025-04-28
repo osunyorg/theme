@@ -1,6 +1,7 @@
 
 <ul class="project-infos">
-  {{ if .Params.projects_categories }}
+  {{ $taxonomies_position := partial "GetTaxonomiesPosition" . }}
+  {{ if ne $taxonomies_position "hero" }}
     <li>
       {{ partial "taxonomies/single-list.html" . }}
     </li>
