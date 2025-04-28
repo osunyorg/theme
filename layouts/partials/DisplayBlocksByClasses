@@ -1,0 +1,16 @@
+<div class="blocks">
+{{ range $index, $content := . }}
+  {{ if in site.Params.hero.blocks .html_class }}
+    {{ if eq .template (or "chapter" "call_to_action") }}
+      {{ $template := printf "blocks/templates/%s.html" .template }}
+
+      {{ if templates.Exists ( printf "partials/%s" $template ) }}
+        {{ partial $template (dict
+            "block" $content
+            "index" $index
+          )}}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+</div>
