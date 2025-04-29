@@ -13,6 +13,21 @@
 
   {{ partial "contents/list.html" . }}
 
+  {{ if .Params.children}}
+    <div class="container category-children">
+      <ul>
+        {{ range .Params.children }}
+          <li>
+            {{ partial "categories/partials/category" (dict 
+                  "category" .
+                  "options" (dict "summary" false)
+                ) }}
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+  {{ end }}
+
   <div class="container">
     {{ $section_type := strings.TrimSuffix "_categories" .Type }}
     {{ $list_partial := printf "%s/partials/%s.html" $section_type $section_type }}

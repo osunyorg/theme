@@ -6,6 +6,14 @@ body:where([class*="_categories__term"])
     .project-categories
         --block-space-y: #{$block-space-y}
         margin-bottom: var(--block-space-y)
+    > .category-children
+        margin-bottom: var(--block-space-y)
+        ul
+            @include list-reset
+            display: flex
+            gap: var(--grid-gutter)
+        .posts_category-title
+            @include meta
 
 .category-item
     .articles-count
