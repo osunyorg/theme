@@ -1,0 +1,21 @@
+{{ $categories := . }}
+<div class="container children-categories-list">
+  <div class="dropdown">
+    <button aria-controls="categories-{{ i18n "categories.label" }}" aria-expanded="false">
+      {{ i18n "categories.label" }}
+    </button>
+    <div class="extendable children-categories" id="categories-{{ i18n "categories.label" }}" data-extendable-close-siblings="true" data-extendable-auto-close="true">
+      <ul>
+        {{ range $categories }}
+          {{ $category := site.GetPage .path }}
+          {{ with $category }}
+            <li>
+              <a href="{{ .Permalink }}">{{ .Title }}</a>
+            </li>
+          {{ end }}
+        {{ end }}
+        </ul>
+      </div>
+    </div>
+    </ul>
+  </div>

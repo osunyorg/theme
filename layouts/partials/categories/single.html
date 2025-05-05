@@ -13,19 +13,8 @@
 
   {{ partial "contents/list.html" . }}
 
-  {{ if .Params.children}}
-    <div class="container category-children">
-      <ul>
-        {{ range .Params.children }}
-          <li>
-            {{ partial "categories/partials/category" (dict 
-                  "category" .
-                  "options" (dict "summary" false)
-                ) }}
-          </li>
-        {{ end }}
-      </ul>
-    </div>
+  {{ with .Params.children }}
+    {{ partial "categories/single/categories.html" . }}
   {{ end }}
 
   <div class="container">

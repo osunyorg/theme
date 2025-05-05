@@ -20,6 +20,20 @@ body:where([class*="_categories__term"])
         @include meta
         color: var(--color-text-alt)
 
+.children-categories-list
+    margin-bottom: var(--grid-gutter)
+    margin-top: var(--grid-gutter)
+    .dropdown
+        @include dropdown(".children-categories")
+    .children-categories
+        ul
+            @include list-reset
+    @include media-breakpoint-up(md)
+        gap: $spacing-3
+        .children-categories
+            min-width: max-content
+            margin-left: -$spacing-1
+
 .categories
     .media:empty
         display: none // Is this generic ?
