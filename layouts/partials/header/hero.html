@@ -30,7 +30,9 @@
 {{ $breadcrumb_class := printf "has-breadcrumb-%s" site.Params.breadcrumb.position }}
 
 <header class="hero {{ if .image }}hero--with-image hero--image-{{- $direction }}{{ end }} {{ if $breadcrumb_is_after_hero }} hero--no-margin {{ end }} {{ $breadcrumb_class }} ">
+
   {{- partial "hooks/after-hero-start" . -}}
+
   <div class="container">
     {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-start") }}
       {{ partial "header/breadcrumbs.html" .context }}
