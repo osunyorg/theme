@@ -1,0 +1,19 @@
+.agenda-filters
+    > .container
+        display: flex
+        align-items: center
+        justify-content: end
+        position: relative
+        @include media-breakpoint-up(md)
+            gap: $spacing-3
+    .dates-filters
+        &__months
+            padding-top: var(--grid-gutter)
+            padding-bottom: var(--grid-gutter)
+            @include grid(3)
+    .dropdown-dates
+        @include dropdown('.dates-filters', $full: true)
+        position: static
+    .taxonomies-list
+        margin-top: 0
+        margin-bottom: 0

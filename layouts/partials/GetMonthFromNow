@@ -1,0 +1,13 @@
+{{ $offset := . }}
+
+{{ $now := time.Now }}
+
+{{ with $offset }}
+	{{ $now = $now.AddDate 0 . 0 }}
+{{ end }}
+
+{{ $now = $now | time.Format "2006/01"}}
+
+{{ $path := printf "events/%s" $now }}
+
+{{ return site.GetPage $path }}

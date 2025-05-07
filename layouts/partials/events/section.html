@@ -12,11 +12,7 @@
 
   {{ partial "contents/list.html" . }}
 
-  {{ if .Params.section_taxonomies }}
-    <div class="container">
-      {{ partial "taxonomies/section-list.html" . }}
-    </div>
-  {{ end }}
+  {{ partial "events/section/filters.html" . }}
 
   <div class="container events-programme" id="events-programme">
     {{ $per_page := site.Params.events.index.per_page }}
