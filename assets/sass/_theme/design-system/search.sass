@@ -155,7 +155,6 @@
                 padding-top: space(17)
 
 // Toggle button appareance
-
 .search-button
     align-items: baseline
     cursor: pointer
@@ -220,3 +219,15 @@
         @include media-breakpoint-up(desktop)
             @if $search-button-fixed-text
                 width: columns(2)
+
+// Suggestions
+.search
+    > .search__suggestions
+        // Hide suggestion before js append it in pagefind ui
+        display: none
+    &__suggestions
+        @include list-reset
+        padding-top: $spacing-5
+        li
+            @extend .button
+            @extend .button--small
