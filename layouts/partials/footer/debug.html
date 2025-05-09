@@ -49,6 +49,10 @@
   <div>10</div>
   <div>11</div>
   <div>12</div>
+  <div>13</div>
+  <div>14</div>
+  <div>15</div>
+  <div>16</div>
 </div>
 
 <div class="d-spacing">
@@ -94,7 +98,7 @@
     bottom: 0;
     display: none;
     grid-gap: var(--grid-gutter);
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--columns-count), 1fr);
     opacity: 0.2;
     mix-blend-mode: multiply;
     padding: 0 var(--grid-gutter);
@@ -243,11 +247,15 @@
 </style>
 
 <script>
+  var grid = document.querySelector('.d-grid'),
+      spacings = document.querySelector('.d-spacing'),
+      cross = document.querySelector('.d-cross');
+
   window.addEventListener('keydown', e => {
     if (e.ctrlKey && e.key === 'g') {
-      document.querySelector('.d-grid').classList.toggle('is-visible');
-      document.querySelector('.d-spacing').classList.toggle('is-visible');
-      document.querySelector('.d-cross').classList.toggle('is-visible');
+      grid.classList.toggle('is-visible');
+      spacings.classList.toggle('is-visible');
+      cross.classList.toggle('is-visible');
     }
     if (e.ctrlKey && e.key === 'w') {
       document.body.classList.toggle('full-width');
@@ -281,6 +289,24 @@
   document.querySelector('.d-help__toggle').addEventListener('click', e => {
     e.preventDefault()
     toggleDebug()
+  });
+
+  function setColumns () {
+    var i = 0,
+        column,
+        columnsCount = window.getComputedStyle(document.body).getPropertyValue('--columns-count');
+    columnsCount = parseInt(columnsCount);
+    grid.innerHTML = "";
+
+    for (i = 0; i < columnsCount; i += 1) {
+      column = document.createElement('div');
+      column.innerText = (i + 1);
+      grid.appendChild(column);
+    }
+  }
+
+  window.addEventListener('resize', function () {
+    setColumns();
   });
 
   function toggleDebug() {
