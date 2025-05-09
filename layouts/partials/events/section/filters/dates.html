@@ -1,0 +1,20 @@
+<div class="dropdown dropdown-dates">
+  <button aria-controls="dropdown-dates" aria-expanded="false">
+    Dates
+  </button>
+
+  <div class="extendable dates-filters" id="dropdown-dates" data-extendable-close-siblings="true" data-extendable-auto-close="true">
+    <div class="dates-filters__months">
+      {{ range $index, $seq := (seq 3) }}
+        {{ with ( partial "GetMonthFromNow" $index ) }}
+          {{ partial "events/section/calendar/month.html" (dict
+              "name" .Title
+              "days" .Params.days
+              "permalink" .Permalink
+              "label_type" "short"
+            ) }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</div>
