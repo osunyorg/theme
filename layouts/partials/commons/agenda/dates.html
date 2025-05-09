@@ -25,7 +25,8 @@
     <ul id="all-dates" class="extendable-list">
       {{ range $index, $time_slot := . }}
         <li class="event-time-slot" itemprop="subEvent">
-          <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ $time_slot.start.date | time.Format site.Params.events.single.time_slots.date_format }}</span>
+          {{ $event_date := $time_slot.start.date | time.Format site.Params.events.single.time_slots.date_format }}
+          <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ $event_date | strings.FirstUpper }}</span>
           <p class="hours">
             {{ if $time_slot.start.datetime }}
               <time datetime="{{ .start.time }}">{{ $time_slot.start.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
