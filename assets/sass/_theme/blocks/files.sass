@@ -6,6 +6,16 @@
             align-items: start
             display: flex
             position: relative
+            flex-wrap: wrap
+            &.with-image
+                figure
+                    flex: 1
+                picture
+                    margin-bottom: $spacing-2
+                    order: -1
+                    width: 100%
+                    img
+                        width: columns(2)
         a
             @include stretched-link(before)
             @include small
