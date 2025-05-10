@@ -105,7 +105,10 @@
                 + .event
                     margin-top: $spacing-4
         @include in-page-without-sidebar
-            @include grid(3, desktop)
+            &.events--even
+                @include grid(2, desktop)
+            &.events--odd
+                @include grid(3, desktop)
 
     &--large
         .event

@@ -1,8 +1,10 @@
+{{ $projects := .projects }}
 {{ $heading_level := .heading_level | default 3 }}
 {{ $options := .options | default site.Params.projects.index.options }}
+{{ $parityClass := cond (modBool ($projects | len) 2) "even" "odd" }}
 
-<div class="grid projects--grid">
-  {{ range .projects -}}
+<div class="grid projects--grid projects--{{ $parityClass }}">
+  {{ range $projects -}}
     {{ partial "projects/partials/layouts/grid/grid-item.html" (dict
         "heading_level" $heading_level
         "layout" "grid"

@@ -1,8 +1,9 @@
 {{ $categories := .categories }}
 {{ $heading_level := .heading_level }}
 {{ $options := .options }}
+{{ $parityClass := cond (modBool ($categories | len) 2) "even" "odd" }}
 
-<ul class="categories categories--grid">
+<ul class="categories categories--grid categories--{{ $parityClass }}">
   {{ range $categories }}
     <li>
       {{ partial "categories/partials/layouts/grid/grid-item.html" (dict
