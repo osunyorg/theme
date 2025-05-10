@@ -11,12 +11,6 @@
             {{ if ne .id "" }}
               {{ if partial "GetMedia" .id }}
                 <li {{- if .image }} class="with-image" {{- end }}>
-                  {{ with .image }}
-                    {{ partial "commons/image.html" (dict
-                        "image"    .
-                        "sizes"    site.Params.image_sizes.blocks.call_to_action
-                      )}}
-                  {{ end }}
                   <figure>
                     {{ partial "commons/download-link" (dict 
                       "id" .id
@@ -24,6 +18,12 @@
                       "with_caption" true
                     ) }}
                   </figure>
+                  {{ with .image }}
+                    {{ partial "commons/image.html" (dict
+                        "image"    .
+                        "sizes"    site.Params.image_sizes.blocks.call_to_action
+                      )}}
+                  {{ end }}
                 </li>
               {{ end -}}
             {{ end -}}
