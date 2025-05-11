@@ -1,3 +1,9 @@
 {{ if .Params.section_taxonomies }}
-  {{ partial "taxonomies/section-list.html" . }}
+  <div class="filter-taxonomies">
+    <button class="button offcanvas-button" aria-controls="filter-taxonomies-list" aria-expanded="false">Catégories</button>
+    <div id="filter-taxonomies-list" class="offcanvas">
+      <button class="close" aria-controls="filter-taxonomies-list" aria-expanded="false">close</button>
+      {{ partial "taxonomies/section-list.html" . }}
+    </div>
+  </div>
 {{ end }}

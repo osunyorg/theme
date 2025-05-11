@@ -1,0 +1,26 @@
+@mixin offcanvas
+    background: var(--color-background-alt)
+    position: fixed
+    top: 0
+    right: 0
+    bottom: 0
+    margin-top: 0
+    z-index: $zindex-offcanvas
+    width: calc(#{columns(4)} + var(--grid-gutter) * 2)
+    transform: translateX(100%)
+    transition: transform $toc-offcanvas-duration ease-in-out
+    &.is-opened
+        transform: translateX(0)
+    &[aria-hidden="true"]
+        display: none
+    .offcanvas-content
+        display: flex
+        flex-direction: column
+        height: 100%
+    button.close
+        @include button-reset
+        @include icon-block(close-line, after)
+            margin-right: -14px
+            font-size: 1.5em
+    @include media-breakpoint-down(desktop)
+        width: calc(100% - var(--grid-gutter))

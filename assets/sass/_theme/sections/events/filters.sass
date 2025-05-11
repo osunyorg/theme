@@ -8,12 +8,19 @@
             gap: $spacing-3
     .dates-filters
         &__months
-            padding-top: var(--grid-gutter)
-            padding-bottom: var(--grid-gutter)
-            @include grid(3)
+            @include grid(3, md)
     .dropdown-dates
         @include dropdown('.dates-filters', $full: true)
         position: static
-    .taxonomies-list
-        margin-top: 0
-        margin-bottom: 0
+    .filter-taxonomies
+        .offcanvas-button
+            display: none
+        .taxonomies-list
+            margin-top: 0
+            margin-bottom: 0
+        @include media-breakpoint-down(desktop)
+            .offcanvas-button
+                display: block
+            .offcanvas
+                @include offcanvas
+
