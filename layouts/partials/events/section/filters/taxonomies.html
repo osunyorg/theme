@@ -1,9 +1,18 @@
 {{ if .Params.section_taxonomies }}
   <div class="filter-taxonomies">
-    <button class="button offcanvas-button" aria-controls="filter-taxonomies-list" aria-expanded="false">Catégories</button>
+    <button class="offcanvas-button" aria-controls="filter-taxonomies-list" aria-expanded="false">
+      {{ i18n "agenda.filters.taxonomies"}}
+    </button>
     <div id="filter-taxonomies-list" class="offcanvas">
-      <button class="close" aria-controls="filter-taxonomies-list" aria-expanded="false">close</button>
-      {{ partial "taxonomies/section-list.html" . }}
+      <div class="offcanvas-title">
+        <span>{{ i18n "agenda.filters.taxonomies"}}</span>
+        <button class="close" aria-controls="filter-taxonomies-list" aria-expanded="false">
+          <span class="sr-only">{{ i18n "commons.close" }}</span>
+        </button>
+      </div>
+      <div class="offcanvas-content">
+        {{ partial "taxonomies/section-list.html" . }}
+      </div>
     </div>
   </div>
 {{ end }}

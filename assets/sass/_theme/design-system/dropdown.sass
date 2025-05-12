@@ -1,10 +1,11 @@
 @mixin dropdown($content-selector: ".dropdown-menu", $full: false)
-    @include meta
     > button, > span[role="button"]
         @include button-reset
+        @include meta
         color: inherit
         padding: $spacing-2
         margin: -$spacing-2
+        line-height: 1
         @include icon(arrow-down-s-line, after)
             margin-left: 5px
         // When dropdown expanded
@@ -35,13 +36,15 @@
             padding-bottom: var(--grid-gutter)
             ul
                 @include grid(1)
-                @include grid(4, md)
+                @include grid(2, md)
+                @include grid(3, xl)
+                @include grid(4, xxl)
                 li
                     > a
                         @include icon(arrow-right-line, after, true)
                         @include hover-translate-icon
                         text-decoration: none
-    @else 
+    @else
         position: relative
         #{$content-selector}
             @include list-reset

@@ -4,8 +4,31 @@
         align-items: center
         justify-content: end
         position: relative
-        @include media-breakpoint-up(md)
+        @include media-breakpoint-up(desktop)
             gap: $spacing-3
+        @include media-breakpoint-down(desktop)
+            .dropdown-dates,
+            .filter-taxonomies
+                flex: 50%
+            .dropdown-dates
+                > button
+                    width: 100%
+                    text-align: left
+            .filter-taxonomies
+                .offcanvas-button
+                    @include button-reset
+                    text-align: right
+                    color: inherit
+                    padding: $spacing-2
+                    margin: -$spacing-2
+                    margin-bottom: 0
+                    width: 100%
+                    line-height: 1
+                    margin-left: auto
+                    @include icon(arrow-down-s-line, after)
+                        margin-left: 5px
+                .offcanvas-content
+                    text-align: left
     .dates-filters
         &__months
             @include grid(3, md)
@@ -14,13 +37,33 @@
         position: static
     .filter-taxonomies
         .offcanvas-button
-            display: none
+            @include button-reset
+            @include meta
         .taxonomies-list
             margin-top: 0
             margin-bottom: 0
+        @include media-breakpoint-up(desktop)
+            .offcanvas-title,
+            .offcanvas-button,
+            .close
+                display: none
         @include media-breakpoint-down(desktop)
-            .offcanvas-button
-                display: block
             .offcanvas
                 @include offcanvas
+            .dropdown
+                &:first-child
+                    margin-top: 0
+                > button
+                    @include h4
+                .extendable
+                    position: relative
+                    inset: auto
+                    padding-left: 0
+                    padding-right: 0
+                    padding-top: $spacing-1
+                    ul
+                        grid-gap: $spacing-2
+                        li > a
+                            padding-left: 0
+
 
