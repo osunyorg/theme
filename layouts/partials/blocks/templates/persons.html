@@ -43,6 +43,7 @@
               {{ $person := site.GetPage .path }}
               {{ partial "persons/partials/person.html" (dict
                   "options" $options
+                  "heading_level" $block.ranks.children
                   "person" $person
                   "role" .role
                   "layout" $layout
