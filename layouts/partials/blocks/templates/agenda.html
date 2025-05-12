@@ -9,7 +9,8 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         {{ if .events }}
-          <div class="events events--{{- $layout -}}">
+          {{ $parityClass := cond (modBool (.events | len) 2) "even" "odd" }}
+          <div class="events events--{{- $layout -}} {{- if eq $layout "grid" }} grid--{{ $parityClass }} {{ end -}}">
             {{ range .events }}
               {{ $event := site.GetPage .path }}
               {{ with $event }}

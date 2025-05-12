@@ -5,7 +5,8 @@
         "attributes" "class='page-title'"
 )}}
 {{ with .pages }}
-  <div class="grid">
+  {{ $parityClass := cond (modBool (. | len) 2) "even" "odd" }}
+  <div class="grid grid--{{ $parityClass }}">
     {{ range . }}
       {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
       {{- $path := false -}}

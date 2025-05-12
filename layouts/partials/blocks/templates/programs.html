@@ -14,8 +14,9 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
 
-        {{ if eq $block.data.layout "grid" }}
-          <div class="programs-grid">
+        {{ if and (eq $block.data.layout "grid") .programs }}
+          {{ $parityClass := cond (modBool (.programs | len) 2) "even" "odd" }}
+          <div class="programs-grid grid--{{ $parityClass }}">
             {{ range .programs }}
               {{ $program := site.GetPage .path }}
               {{ $title := $program.Title | safeHTML }}

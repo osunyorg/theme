@@ -1,8 +1,9 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading := printf "h%d" $heading_level }}
 {{ $options := .options }}
+{{ $parityClass := cond (modBool (.posts | len) 2) "even" "odd" }}
 
-<div class="grid">
+<div class="grid grid--{{ $parityClass }}">
   {{ range $post := .posts -}}
     {{ with site.GetPage .path }}
       {{ partial "posts/partials/post.html" (dict 
