@@ -15,7 +15,11 @@
     {{ if .active }}
       <div class="container">
         <div class="dropdown-menu-heading">
-          <a href="{{ $parent.target }}" class="dropdown-menu-title">{{ $parent.title }}</a>
+          {{ if $parent.target }}
+            <a href="{{ $parent.target }}" class="dropdown-menu-title">{{ $parent.title }}</a>
+          {{ else }}
+            <p class="dropdown-menu-title">{{ $parent.title }}</p>
+          {{ end }}
           {{ if $parent.path }}
             {{ with partial "GetMenuSummary" (dict 
                 "summary" .summary
