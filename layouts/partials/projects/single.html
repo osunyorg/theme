@@ -8,7 +8,9 @@
   {{ partial "projects/single/sidebar.html" . }}
 
   {{ if .Params.design.full_width }}
-    {{ partial "taxonomies/single-list-container.html" . }}
+    <div class="container">
+      {{ partial "taxonomies/single-list-container.html" . }}
+    </div>
   {{ end }}
 
   {{ partial "projects/single/summary.html" (dict
