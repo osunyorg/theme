@@ -1,0 +1,25 @@
+{{- with .data -}}
+  <div class="block-persons">
+    {{- range .persons -}}
+      {{ $person := site.GetPage .path }}
+      <article class="person" >
+        <div class="texts">
+          <h2>{{ partial "PrepareHTML" $person.Title }}</h2>
+          {{ with $person.Params.summary }}
+          <div class="description">
+            {{ partial "PrepareHTML" $person.Params.summary }}
+          </div>
+          {{ end }}
+        </div>
+        <div class="avatar" itemprop="image">
+          {{ if $person.Params.image }}
+            {{ partial "commons/image.html"
+              (dict
+                "image"    $person.Params.image
+              ) }}
+          {{ end }}
+        </div>
+      </article>
+    {{- end -}}
+  </div>
+{{- end -}}
