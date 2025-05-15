@@ -1,0 +1,27 @@
+{{ partial "events/section/hero.html" . }}
+<div class="document-content">
+  {{ partial "events/section/summary.html" (dict
+      "with_container" true
+      "context" .
+    ) }}
+
+  {{ partial "contents/list.html" . }}
+
+  <div class="container">
+    {{ partial "taxonomies/section-list.html" . }}
+  </div>
+  {{ if site.Params.events.index.highlight_exhibitions.active }}
+    {{ $exhibitions := where .Pages "Section" "exhibitions" }}
+    {{ partial "events/section/exhibitions.html" $exhibitions }}
+  {{ end }}
+  <div class="container">
+    {{ $events := where .Pages "Section" "events" }}
+
+    {{ partial "events/partials/events.html" (dict
+        "events" $events
+        "context" .
+        "order" "desc"
+      )}}
+    {{ partial "commons/pagination.html" . }}
+  </div>
+</div>

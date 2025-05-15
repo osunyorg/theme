@@ -1,0 +1,12 @@
+<div class="event-practicals" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+  <h2>{{ i18n (printf "events.access.partical_informations") }}</h2>
+  <div>
+    {{ safeHTML .Params.text }}
+    <div class="event-notes">
+      {{ safeHTML .Params.notes }}
+    </div>
+  </div>
+  {{ with .Params.header_cta }}
+    {{ partial "header/cta.html" . }}
+  {{ end }}
+</div>

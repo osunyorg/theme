@@ -13,10 +13,6 @@ blocks:
     title: Définitions
   embed:
     title: Intégration HTML
-  events:
-    current: En cours
-    future: À venir
-    archive: Archive
   files:
     title: Fichiers
   gallery:
@@ -88,13 +84,17 @@ commons:
     transcription: Transcription
     map_transcription : Données textuelles
     credits: "Droits réservés : "
+  add_to_calendar:
+    title: Ajouter à mon agenda
+    ical: Télécharger un fichier .ICS
+    google: Google Calendar
+    office: Office 365
+    outlook: Microsoft Outlook
+    regular_event: Ajouter toute la période de l'événement à mon agenda
+    yahoo: Yahoo! Calendar
   authors:
-    one: Auteur•ice
+    one: Auteur·ice
     other: Auteur·rices
-  search:
-    label: Recherche
-    title: Rechercher
-    close: Fermer la recherche
   backtotop: Haut de page
   biography: Biographie
   breadcrumb: Fil d’ariane
@@ -139,13 +139,16 @@ commons:
         x: X, ex-Twitter
         youtube: YouTube
   credit: Un site éco-conçu produit avec <a href="https://www.osuny.org/" title="Osuny - lien externe" target="_blank" rel="noreferrer">Osuny</a>
-  date: Date
+  date:
+    one: Date
+    other: Dates
   download:
     singular_name: Télécharger
     pdf: Télécharger le PDF
   extentions:
     PDF: Adobe Portable Document Format
   "false": Non
+  hour: Heure
   in: Dans
   index: Accueil - {{ .Title }}
   language: Langue
@@ -206,6 +209,17 @@ commons:
   pdf_with_size: PDF ({{ .Size }})
   read: Lire
   read_online: Lire en ligne
+  schedule:
+    from:
+      day: Date de début
+      hour: Heure de début
+    to:
+      day: Jour de fin
+      hour: Heure de fin
+  search:
+    label: Recherche
+    title: Rechercher
+    close: Fermer la recherche
   share: Partager
   share_on: Partager sur
   share_on_aria: Partager sur “{{ .Title }}” - lien externe
@@ -241,31 +255,64 @@ errors:
       Nous vous proposons de retourner à la <a href="/">page d'accueil de notre site</a>.<br>
       Merci de votre compréhension. 
 events:
-  archives: Accéder aux archives des événements passés
-  add_to_calendar:
-    title: Ajouter à mon agenda
-    ical: Télécharger un fichier .ICS
-    google: Google Calendar
-    office: Office 365
-    outlook: Microsoft Outlook
-    yahoo: Yahoo! Calendar
+  archives:
+    by_year: Agenda par années
+    latest: Archives
+    list:
+      title: "Archives de l'année {{ .year }}"
+  calendar:
+    day:
+      link: Consulter tous les événements du {{ .date }}
+    month:
+      link: Consulter tous les événements du mois de {{ .month }}
+    week_days:
+      short:
+        monday: Lun.
+        tuesday: Mar.
+        wednesday: Mer.
+        thursday: Jeu.
+        friday: Ven.
+        saturday: Sam.
+        sunday: Dim.
+      long:
+        monday: Lundi
+        tuesday: Mardi
+        wednesday: Mercredi
+        thursday: Jeudi
+        friday: Vendredi
+        saturday: Samedi
+        sunday: Dimanche
   count:
     one: "1 événement"
     other: "{{ .Count }} événements"
-  date: Date
-  hour: Heure
+  access:
+    partical_informations: Informations pratiques
+  more_dates: Afficher toutes les dates
   none: Aucun événement
   next: Événement suivant
   next_aria: Événement suivant “{{ .Title }}”
+  part_of: Cet événement fait partie de
   previous: Événement précédent
   previous_aria: Événement précédent “{{ .Title }}”
-  from:
-    day: Date de début
-    hour: Heure de début
-  to:
-    day: Jour de fin
-    hour: Heure de fin
+  regular_event: Événement régulier
   unique_day: Date
+  see_programme: Accéder au programme
+  status:
+    current: En cours
+    future: À venir
+    archive: Archive
+  year:
+    anchor: Accéder aux événements
+
+exhibitions:
+  archives: Expositions passées
+  none: Aucune exposition.
+  current: En ce moment
+  future: Bientôt
+  status:
+    current: En cours
+    future: À venir
+    archive: Archive
 formats:
   pdf: Adobe Portable Document Format
   jpg: JPEG image
@@ -286,7 +333,7 @@ organizations:
     one: "1 organisation"
     other: "{{ .Count }} organisations"
   logo: Logo
-  none: Aucune organisations
+  none: Aucune organisation
 pages:
   count:
     one: "1 page"

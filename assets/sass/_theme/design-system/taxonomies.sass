@@ -27,6 +27,7 @@
     margin-bottom: var(--grid-gutter)
     margin-top: var(--grid-gutter)
     flex-wrap: wrap
+    // justify-content: end
     > p
         @include meta
     .dropdown
@@ -52,6 +53,8 @@
 .taxonomies-single
     &, ul
         @include list-reset
+    li a
+        display: block
     .taxonomy-title
         @include meta
     .hero &
@@ -59,17 +62,33 @@
         display: block
         a
             @include small
-        > li
-            display: flex
-            justify-content: space-between
-            align-items: baseline
-            ul
-                text-align: right
+        &.with-label
+            > li
+                ul
+                    display: flex
+                    flex-wrap: wrap
+                    gap: $spacing-1
+                    text-align: right
+                @include media-breakpoint-up(xl)
+                    align-items: baseline
+                    display: flex
+                    justify-content: space-between
+            @include media-breakpoint-up(lg)
+                width: columns(4)
+    @include media-breakpoint-down(desktop)
+        .hero &, &
+            &.without-label
+                li, a
+                    display: inline
+                li
+                    padding-right: $spacing-1
+    @include media-breakpoint-up(desktop)
+        .hero &, &
+            &.without-label
                 display: flex
                 flex-wrap: wrap
-                gap: $spacing-1
-        @include media-breakpoint-up(lg)
-            width: columns(4)
+                column-gap: $spacing-2
+                margin-bottom: $spacing-3
 
 // For index pages
 .taxonomy-categories--grid
@@ -84,7 +103,8 @@
     .taxonomies-container
         margin-bottom: $spacing-5
         .taxonomies-single
-            @include grid(3, desktop, $spacing-3)
+            &.with-label
+                @include grid(3, desktop, $spacing-3)
             ul, &
                 @include list-reset
             @include media-breakpoint-down(desktop)

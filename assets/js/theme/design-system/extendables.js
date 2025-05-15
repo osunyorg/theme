@@ -42,8 +42,10 @@ osuny.Extendable.prototype.listen = function () {
 };
 
 osuny.Extendable.prototype.handleAutoClose = function () {
+    var isInTarget = false;
     window.addEventListener('click', function (event) {
-        if (this.state.opened && event.target !== this.state.openedByButton) {
+        isInTarget = this.state.openedByButton ? this.state.openedByButton.contains(event.target) : false;
+        if (this.state.opened && event.target !== this.state.openedByButton && !isInTarget) {
             this.toggle(false);
         }
     }.bind(this));

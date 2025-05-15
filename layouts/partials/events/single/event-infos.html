@@ -1,19 +1,21 @@
 {{ $unique_day := eq .Params.dates.from.day .Params.dates.to.day }}
 <ul class="event-infos">
   {{ with .Params.dates }}
-    {{ if .computed }}
-      <li class="event-date" itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
-        <span>{{ i18n "events.date" }}</span>
-        {{ partial "PrepareHTML" .computed.two_lines.long }}
+    {{ with .computed }}
+      <li class="event-date">
+        <span>{{ i18n "commons.date.one" }}</span>
+        {{ partial "PrepareHTML" .two_lines.long }}
       </li>
     {{ end }}
-    {{ if .from.hour }}
+  {{ end }}
+  {{ with .Params.current_time_slot }}
+    {{ if .start.time }}
       <li>
-        <span>{{ i18n "events.hour" }}</span>
-        {{ with .from.hour }}
+        <span>{{ i18n "commons.hour" }}</span>
+        {{ with .start.time }}
           <time datetime="{{ . }}">{{ . }}</time>
         {{ end }}
-        {{ with .to.hour }}
+        {{ with .end.time }}
           <time datetime="{{ . }}">{{ . }}</time>
         {{ end }}
       </li>
@@ -32,15 +34,15 @@
     </li>
   {{ end }}
 
-  {{ if not .Params.dates.archive }}
+  {{ if and (not .Params.dates.archive) site.Params.events.single.calendar_links }}
     {{ with .Params.dates.add_to_calendar }}
       {{ $links := . }}
       <li class="events-actions">
-        <span>{{ i18n "events.add_to_calendar.title" }}</span>
+        <span>{{ i18n "commons.add_to_calendar.title" }}</span>
         {{- $types := slice "ical" "google" "office" "outlook" "yahoo" -}}
         <ul>
           {{- range $type := $types -}}
-            {{ $label := i18n (printf "events.add_to_calendar.%s" $type) }}
+            {{ $label := i18n (printf "commons.add_to_calendar.%s" $type) }}
             {{ with index $links $type }}
               <li>
                 <a class="chip"

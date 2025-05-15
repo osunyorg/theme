@@ -5,17 +5,15 @@
         background: var(--color-background-alt)
         border-radius: 4px
         cursor: pointer
-        display: inline
+        display: block
         line-height: inherit
         min-width: $minimum-accessible-size
-        line-height: inherit
-        display: block
+        padding-bottom: 0
         padding-left: $spacing-2
         padding-right: $spacing-2
-        padding-bottom: 0
         text-align: center
+        transition: color $color-duration, background-color $color-duration
         user-select: none
-        transition: color 0.25s, background-color 0.25s
         &:hover
             background: var(--color-text)
             color: var(--color-background)
@@ -36,9 +34,9 @@
     &--active
         .note__call
             background: var(--color-text)
-            color: var(--color-background)
             border-bottom-left-radius: 0
             border-bottom-right-radius: 0
+            color: var(--color-background)
         .note__content
             display: block
     @include media-breakpoint-up(desktop)
@@ -52,10 +50,10 @@
                 border-top-left-radius: 0
         &--right
             .note__content
-                right: 0
                 border-top-right-radius: 0
+                right: 0
     @include media-breakpoint-down(desktop)
         .note__content
             left: 0
-            right: 0
             margin-top: pxToRem(-$space-unit)
+            right: 0

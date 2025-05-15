@@ -1,8 +1,10 @@
-{{ range .GetTerms "authors" }}
+{{- range .GetTerms "authors" -}}
   {{- $person := site.GetPage (printf "/persons/%s" .Slug) -}}
-  {{ with $person }}
+  {{- with $person -}}
     <div class="post-author" itemscope itemtype="https://schema.org/Person" itemprop="author">
-      <p itemprop="name">{{ .Title | safeHTML }}</p>
+      {{- /* remove white space */ -}}
+      <p itemprop="name">{{- .Title | safeHTML -}}</p>
+      {{- /* remove white space */ -}}
     </div>
-  {{ end }}
-{{ end }}
+  {{- end -}}
+{{- end -}}

@@ -1,0 +1,10 @@
+{{ $all_categories := slice }}
+
+{{ range . }}
+  {{ with .categories }}
+    {{ $categories := partial "GetObjectsFromPathSlice" . }}
+    {{ $all_categories = union $all_categories $categories }}
+  {{ end }}
+{{ end }}
+
+{{ return $all_categories }}

@@ -3,7 +3,7 @@
     article
         @include article
         @include layout-item
-        [class$="-title"]
+        > *:where([class$="-title"])
             @include h2
             a
                 @include icon(arrow-right-line, after, true)

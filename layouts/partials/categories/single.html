@@ -13,6 +13,10 @@
 
   {{ partial "contents/list.html" . }}
 
+  {{ with .Params.children }}
+    {{ partial "categories/single/categories.html" . }}
+  {{ end }}
+
   <div class="container">
     {{ $section_type := strings.TrimSuffix "_categories" .Type }}
     {{ $list_partial := printf "%s/partials/%s.html" $section_type $section_type }}

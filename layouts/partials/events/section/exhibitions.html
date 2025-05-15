@@ -1,0 +1,29 @@
+{{ $exhibitions := . }}
+{{ $current_exhibitions := where $exhibitions "Params.dates.status" "current" }}
+{{ $future_exhibitions := where $exhibitions "Params.dates.status" "future" }}
+
+{{ if (or $current_exhibitions $future_exhibitions) }}
+  <div class="agenda-exhibitions">
+    <div class="container">
+      {{ with $current_exhibitions }}
+        <h2>{{ i18n "exhibitions.current" }}</h2>
+        {{ partial "exhibitions/partials/exhibitions.html" (dict
+            "exhibitions" .
+            "heading_level" 3
+            "layout" site.Params.events.index.highlight_exhibitions.current.layout
+            "options" site.Params.events.index.highlight_exhibitions.current.options
+          )}}
+      {{ end }}
+
+      {{ with $future_exhibitions }}
+        <h2>{{ i18n "exhibitions.future" }}</h2>
+        {{ partial "exhibitions/partials/exhibitions.html" (dict
+            "exhibitions" .
+            "heading_level" 3
+            "layout" site.Params.events.index.highlight_exhibitions.future.layout
+            "options" site.Params.events.index.highlight_exhibitions.future.options
+          )}}
+      {{ end }}
+    </div>
+  </div>
+{{ end }}

@@ -1,0 +1,7 @@
+{{ define "main" }}
+  {{ if .Params.is_taxonomy }}
+    {{ partial "categories/section.html" . }}
+  {{ else }}
+    {{ partial "events_categories/single.html" . }}
+  {{ end }}
+{{ end }}

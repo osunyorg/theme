@@ -1,4 +1,5 @@
 {{- $title := or .Params.header_text .Title -}}
+{{ $share := site.Params.projects.share_links.enabled | default site.Params.share_links.enabled }}
 
 {{ with .Params.subtitle }}
   {{- $title = printf "%s <span>%s</span>" $title . -}}
@@ -10,4 +11,5 @@
       "sizes" site.Params.image_sizes.sections.projects.hero_single
       "hero_text_complement" "projects/single/hero/infos.html"
       "context" .
+      "share" $share
 ) -}}

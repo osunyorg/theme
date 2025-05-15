@@ -61,10 +61,8 @@
                 .media
                     order: 1
                 &-categories
-                    display: block
+                    display: flex
                     width: fit-content
-                    li
-                        display: inline
         @include media-breakpoint-between(sm, desktop)
             .project
                 .media
@@ -127,7 +125,7 @@
                 @include icon(arrow-right-line, after)
                     display: inline-block
                     margin-left: $spacing-1
-                    transition: transform 0.55s $arrow-ease-transition
+                    transition: transform $arrow-duration $arrow-ease-transition
             &:hover 
                 .more::after
                     transform: translateX(5px)
@@ -185,10 +183,6 @@
                 flex-wrap: wrap
                 li
                     white-space: nowrap
-        .dropdown-share
-            button
-                margin-top: 0
-                width: columns(6)
     
     &:not(.full-width)
         .project-sidebar

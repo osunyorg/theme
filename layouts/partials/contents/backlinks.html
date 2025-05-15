@@ -1,7 +1,13 @@
 {{ $about := .Title }}
+{{ $params := "" }}
+
 <div class="backlinks">
   {{ with .Params.backlinks.current_website }}
     {{ with .events }}
+      {{ $params = partial "GetLayoutAndOptions" (dict 
+          "param" "persons.single.events"
+          "default" "events.index"
+        ) }}
       {{ partial "blocks/templates/agenda.html" (dict
         "block" (dict 
           "top" (dict
@@ -17,14 +23,18 @@
             "self" 2
           )
           "data" (dict
-            "layout" site.Params.events.index.layout
             "events" .
-            "options" site.Params.events.index.options
+            "layout" $params.layout
+            "options" $params.options
           )
         )
       ) }}
     {{ end }}
     {{ with .pages }}
+      {{ $params = partial "GetLayoutAndOptions" (dict 
+          "param" "persons.single.pages"
+          "default" "pages.index"
+        ) }}
       {{ partial "blocks/templates/pages.html" (dict
         "block" (dict 
           "top" (dict
@@ -40,20 +50,18 @@
             "self" 2
           )
           "data" (dict 
-            "layout" site.Params.pages.index.layout
-            "options" ( dict
-              "main_summary" false
-              "summaries" true
-              "image" true
-            )
             "pages" .
-            "layout" site.Params.pages.index.layout
-            "options" site.Params.pages.index.options
+            "layout" $params.layout
+            "options" $params.options
           )
         )
       ) }}
     {{ end }}
     {{ with .projects }}
+      {{ $params = partial "GetLayoutAndOptions" (dict 
+          "param" "persons.single.projects"
+          "default" "projects.index"
+        ) }}
       {{ partial "blocks/templates/projects.html" (dict
         "block" (dict 
           "top" (dict
@@ -70,13 +78,17 @@
           )
           "data" (dict
             "projects" .
-            "layout" site.Params.projects.index.layout
-            "options" site.Params.projects.index.options
+            "layout" $params.layout
+            "options" $params.options
           )
         )
       ) }}
     {{ end }}
     {{ with .posts }}
+      {{ $params = partial "GetLayoutAndOptions" (dict 
+          "param" "persons.single.posts"
+          "default" "posts.index"
+        ) }}
       {{ partial "blocks/templates/posts.html" (dict
         "block" (dict 
           "top" (dict
@@ -92,9 +104,9 @@
             "self" 2
           )
           "data" (dict
-            "layout" site.Params.posts.index.layout
             "posts" .
-            "options" site.Params.posts.index.options
+            "layout" $params.layout
+            "options" $params.options
           )
         )
       ) }}

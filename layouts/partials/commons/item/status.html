@@ -1,0 +1,6 @@
+{{ $status := .status }}
+{{ $type := .type }}
+
+<p class="{{- $type -}}-status">
+  {{ i18n (printf "%s.status.%s" $type $status) }}
+</p>

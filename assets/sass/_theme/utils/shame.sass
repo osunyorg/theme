@@ -21,13 +21,13 @@
 @mixin list-section
     @include list-reset
     > li
-        border-bottom: 1px solid var(--color-border)
+        border-bottom: var(--border-width) solid var(--color-border)
         padding-bottom: $spacing-3
         padding-top: $spacing-3
         position: relative
         > .title
             @include h2
-            transition: color 0.55s
+            transition: color $color-duration
             @include media-breakpoint-down(desktop)
                 @include icon(arrow-right-line, after, true)
                     bottom: $spacing-2
@@ -56,16 +56,15 @@
 
 
 @mixin top-flex
-    @include in-page-without-sidebar
-        align-items: baseline
-        display: flex
-        .block-title
-            width: columns(4)
-            + .description
-                margin-left: var(--grid-gutter)
-        .description
-            margin-top: 0
-            width: columns(8)
+    align-items: baseline
+    display: flex
+    .block-title
+        width: columns(4)
+        + .description
+            margin-left: var(--grid-gutter)
+    .description
+        margin-top: 0
+        width: columns(8)
 
 @mixin collapsed-figcaption
     // TODO: remove hero specifics variables

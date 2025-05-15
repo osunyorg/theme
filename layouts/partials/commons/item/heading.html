@@ -1,14 +1,20 @@
 {{ $item := .item }}
 {{ $level := .level }}
 {{ $type := $item.Type | default "page" }}
-{{ $item_type := $type | singularize }}
+{{ $type = $type | singularize }}
 {{ $subtitle := $item.Params.subtitle }}
 {{ $options := .options }}
+{{ $itemprop := .itemprop }}
 
-{{/*  TODO: checker itemprop  */}}
+{{ $title_attributes := printf "class='%s-title'" $type }}
+{{ with $itemprop }}
+  {{ $title_attributes = printf "%s %s" $title_attributes . }}
+{{ end }}
+{{ $link_title := safeHTML (i18n "commons.more_aria" (dict "Title" $item.Title)) }}
+
 {{ $heading_tag := partial "GetHeadingTag" (dict 
     "level" $level
-    "attributes" (printf "class='%s-title'" $item_type)
+    "attributes" $title_attributes
   )}}
 
 {{ if and $options.subtitle $subtitle }}
@@ -16,11 +22,13 @@
 {{ end }}
 
 {{ $heading_tag.open }}
-  <a href="{{ $item.Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $item.Title)) }}">{{ $item.Title }}</a>
+  <a href="{{ $item.Permalink }}" title="{{ $link_title }}" {{ if $itemprop }} itemprop="url" {{ end }} >
+    {{ $item.Title }}
+  </a>
 {{ $heading_tag.close }}
 
 {{ if and $options.subtitle $subtitle }}
-  <p class="project-subtitle">{{ partial "PrepareHTML" $subtitle }}</p>
+  <p class="{{- $type -}}-subtitle">{{ partial "PrepareHTML" $subtitle }}</p>
 {{ end }}
 
 {{ if and $options.subtitle $subtitle }}

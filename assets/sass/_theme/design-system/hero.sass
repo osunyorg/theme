@@ -26,8 +26,19 @@
                 display: block
             + p
                 margin-top: $spacing-3
-        .btn
+        .hero-actions
             margin-top: $spacing-3
+            .dropdown-share
+                button
+                    margin-top: 0
+            > * + * 
+                margin-top: $spacing-2
+            @include media-breakpoint-down(desktop)
+                margin-top: $spacing-3
+                a
+                    min-width: columns(6)
+                button
+                    width: columns(6)
         hgroup.has-lead > p
             @include lead-hero
         figure
@@ -64,12 +75,13 @@
                     margin-left: var(--grid-gutter-negative)
                     margin-right: var(--grid-gutter-negative)
         &--image-portrait, &--image-square
-            margin-bottom: $spacing-7
+            &:where(:not(.has-breadcrumb-hero-end))
+                margin-bottom: $spacing-7
+                figure
+                    margin-bottom: calc(#{-$spacing-7} + #{$spacing-4})
             .container
                 display: flex
                 flex-direction: column
-            figure
-                margin-bottom: calc(#{-$spacing-7} + #{$spacing-4})
         figure
             > button
                 width: 100%
@@ -87,7 +99,6 @@
                     width: columns(7)
                 figure
                     width: columns(5)
-
         &--image-portrait, &--image-square
             .breadcrumb-nav
                 -webkit-mask-image: linear-gradient(to right, black 0%, black 90%, transparent 100%)
@@ -99,10 +110,11 @@
                     width: columns(8)
                 figure
                     width: columns(3)
-    + .breadcrumb-container
-        margin-top: 0
-        @include media-breakpoint-down(desktop)
-            margin-bottom: $spacing-5
+        + .breadcrumb-container
+            margin-top: 0
+            margin-bottom: var(--grid-gutter)
+            @include media-breakpoint-down(desktop)
+                margin-bottom: $spacing-5
 
     // Essential container is used in programs and diplomas
     .essential-container

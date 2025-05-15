@@ -4,7 +4,7 @@
     position: relative
     &-title
         a
-            @include stretched-link
+            @include stretched-link(before)
             text-decoration: none
             display: block
     .organizations:not(.with-summaries) &
@@ -47,10 +47,13 @@
             .organization-summary
                 @include small
         .media
-            width: columns(6)
-        @include media-breakpoint-up(md)
-            .media
+            width: columns(4)
+            @include media-breakpoint-down(md)
+                padding: $spacing-1
+            @include media-breakpoint-up(md)
                 width: columns(3)
+            @include media-breakpoint-up(xl)
+                width: columns(6)
         @include media-breakpoint-up(xl)
             gap: calc(var(--grid-gutter) / 2)
             width: columns(4)

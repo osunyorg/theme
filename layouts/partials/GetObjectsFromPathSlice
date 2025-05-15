@@ -1,0 +1,9 @@
+{{ $objects := slice }}
+
+{{ range . }}
+  {{ with site.GetPage .path }}
+    {{ $objects = $objects | append . }}
+  {{ end }}
+{{ end }}
+
+{{ return $objects }}
