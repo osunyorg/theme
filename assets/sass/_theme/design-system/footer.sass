@@ -117,8 +117,10 @@ footer#document-footer
                 display: flex
                 justify-content: flex-end
                 position: relative
-                a::after
-                    display: none
+                a
+                    @include stretched-link(before)
+                    &::after
+                        display: none
                 &.facebook
                     @include icon(facebook-fill, after)
                 &.instagram
