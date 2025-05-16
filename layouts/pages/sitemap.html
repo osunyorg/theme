@@ -28,7 +28,7 @@
           <ul>
             {{ range (where .Site.Pages "Type" "pages") }}
               {{ if eq .Parent.Path "/pages" }}
-                {{ if not .Params.sitemap_ignore }}
+                {{ if not .Params.ignore.in_sitemap }}
                   <li>
                     <a href="{{ .Permalink }}">{{ safeHTML .Title }}</a>
                     {{ if .Pages }}
@@ -52,7 +52,6 @@
               <h2>
                 <a href="{{ $permalink }}">{{ safeHTML .Title }}</a>
               </h2>
-
               {{ $ignore_children := partial "GetSiteParamWithDefault" (dict
                   "param" (printf "%s.sitemap.ignore_children" .Type)
                   "default" "default.sitemap.ignore_children"
@@ -60,7 +59,7 @@
               {{ if not $ignore_children }}
                 <ul>
                   {{ range where .Site.Pages "Section" .Type }}
-                    {{ if not .Params.sitemap_ignore }}
+                    {{ if not .Params.ignore.in_sitemap }}
                       {{ if ne $permalink .Permalink }}
                         <li><a href="{{ .Permalink }}">{{ safeHTML .Title }}</a></li>
                       {{ end }}
@@ -68,7 +67,6 @@
                   {{ end }}
                 </ul>
               {{ end }}
-
             </div>
           </div>
         </div>

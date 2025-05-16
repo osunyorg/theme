@@ -1,6 +1,6 @@
 <ul>
   {{ range .Pages }}
-    {{ if not .Params.sitemap_ignore }}
+    {{ if not .Params.ignore.in_sitemap }}
       <li>
         <a href="{{ .Permalink }}">{{ safeHTML .Title }}</a>
         {{ if .Pages }}
