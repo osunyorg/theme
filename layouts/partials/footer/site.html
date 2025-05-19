@@ -4,8 +4,10 @@
   <div itemscope itemtype="https://schema.org/CollegeOrUniversity">
     <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
-    {{ with .contact_details.postal_address }} 
-      {{ partial "commons/address.html" . }}
+    {{ with .contact_details }}
+      {{ with .postal_address }}
+        {{ partial "commons/address.html" . }}
+      {{ end }}
       {{- with .phone_numbers.phone -}}
         <p>
           <a itemprop="telephone" href="{{.value}}">{{ .label }}</a>
@@ -18,8 +20,10 @@
   <div itemscope itemtype="https://schema.org/ResearchOrganization">
     <meta itemprop="logo" content="{{ $logo }}">
     <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
-    {{ with .contact_details.postal_address }} 
-      {{ partial "commons/address.html" . }}
+    {{ with .contact_details }} 
+      {{ with .postal_address }}
+        {{ partial "commons/address.html" . }}
+      {{ end}}
       {{- with .phone_numbers.phone -}}
           <p>
             <a itemprop="telephone" href="{{.value}}">{{ .label }}</a>
