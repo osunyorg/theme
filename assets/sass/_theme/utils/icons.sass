@@ -24,8 +24,11 @@
         speak: never
         text-transform: none
         @if $non-breaking
-            content: " #{map-get($icons, $icon-name)}"
             display: inline
+            @if $pseudo-element == "after"
+                content: " #{map-get($icons, $icon-name)}"
+            @if $pseudo-element == "before"
+                content: "#{map-get($icons, $icon-name)} "
         @content // TODO : important de documenter ça
 
 @mixin icon-block($icon-name: '', $pseudo-element: before, $non-breaking: false)

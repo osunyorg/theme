@@ -1,7 +1,7 @@
 <section class="cover{{ if .Params.image.id }} cover--with-image{{ end }}">
-  {{ with .Params.image }}
-    {{ $image := partial "GetMedia" .id }}
-    {{ with $image }} 
+  {{ with .Params.image.id }}
+    {{ $image := partial "GetMedia" . }}
+    {{ with $image }}
       <img src="{{ $image.direct_url }}" />
     {{ end }}
   {{ end }}
