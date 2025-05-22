@@ -35,6 +35,15 @@
     .taxonomy-categories
         ul
             @include list-reset
+    &--inline
+        .taxonomy-categories
+            ul
+                display: flex
+                flex-wrap: wrap
+                gap: var(--grid-gutter)
+                margin-left: 0
+                a
+                    @include meta
     @include media-breakpoint-down(md)
         flex-direction: column
         .dropdown 
