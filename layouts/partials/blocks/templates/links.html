@@ -8,7 +8,7 @@
         {{ partial "blocks/top.html" $block.top }}
         <ul class="links">
           {{- range .links }}
-            <li itemscope itemtype="https://schema.org/WebPage">
+            <li itemscope itemtype="https://schema.org/WebPage" {{- if .image -}} class="with-image" {{- end -}}>
               <div class="link-content">
                 {{ $title := partial "PrepareHTML" .title }}
                 {{ $a11y_title := .alt_title | default $title }}
