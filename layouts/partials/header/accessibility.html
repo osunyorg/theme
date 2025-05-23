@@ -2,14 +2,10 @@
   <ul>
     <li><a href="#main">{{ i18n "commons.accessibility.main_content" }}</a></li>
     {{ if and site.Params.search.active site.Params.search.positions }}
-      {{ range site.Params.search.positions }}
-        {{ if eq . "fixed" }}
-          <li><a href="#search-button-fixed">{{ i18n "commons.accessibility.search" }}</a></li>
-          {{ break }}
-        {{ else if eq . "footer" }}
-          <li><a href="#search-button-footer">{{ i18n "commons.accessibility.search" }}</a></li>
-          {{ break }}
-        {{ end }}
+      {{ if in site.Params.search.positions "fixed" }}
+        <li><a href="#search-button-fixed">{{ i18n "commons.accessibility.search" }}</a></li>
+      {{ else if site.Params.search.positions "footer" }}
+        <li><a href="#search-button-footer">{{ i18n "commons.accessibility.search" }}</a></li>
       {{ end }}
     {{ end }}
   </ul>
