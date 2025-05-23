@@ -1,10 +1,11 @@
+{{ $search_positions := site.Params.search.positions }}
 <nav aria-label="{{ i18n " commons.accessibility.shortcut_navigation" }}" class="nav-accessibility" id="nav-accessibility">
   <ul>
     <li><a href="#main">{{ i18n "commons.accessibility.main_content" }}</a></li>
-    {{ if and site.Params.search.active site.Params.search.positions }}
-      {{ if in site.Params.search.positions "fixed" }}
+    {{ if and site.Params.search.active (not (in $search_positions "primary")) (not (in $search_positions "upper-menu")) }}
+      {{ if in $search_positions "fixed" }}
         <li><a href="#search-button-fixed">{{ i18n "commons.accessibility.search" }}</a></li>
-      {{ else if site.Params.search.positions "footer" }}
+      {{ else if in $search_positions "footer" }}
         <li><a href="#search-button-footer">{{ i18n "commons.accessibility.search" }}</a></li>
       {{ end }}
     {{ end }}
