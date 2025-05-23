@@ -10,13 +10,12 @@
           {{- range .links }}
             <li itemscope itemtype="https://schema.org/WebPage">
               <div class="link-content">
-                {{ $title := partial "PrepareHTML" .title }}
                 {{ $url := .url }}
                 {{ $is_external := .external | default true }}
 
                 <link itemprop="url" href="{{ .url }}">
                 <a itemprop="relatedLink" href="{{ .url }}" {{ if $is_external -}} target="_blank" rel="noopener" {{- end }}>
-                  <span itemprop="name">{{- $title -}}</span>
+                  <span itemprop="name">{{- partial "PrepareHTML" .title -}}</span>
                   {{ if $is_external }}
                     <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
                   {{ end }}
