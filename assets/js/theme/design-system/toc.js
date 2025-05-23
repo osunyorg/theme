@@ -38,29 +38,31 @@ class TableOfContents {
     listen () {
         window.addEventListener('scroll', this.update.bind(this), false);
 
-        this.togglers.forEach(toggler => {
-            toggler.addEventListener('click', () => {
-                this.toggle();
+        if (this.state.isOffcanvas) { 
+            this.togglers.forEach(toggler => {
+                toggler.addEventListener('click', () => {
+                    this.toggle();
+                });
             });
-        });
 
-        this.links.forEach(links => {
-            links.addEventListener('click', () => {
-                this.toggle(false);
+            this.links.forEach(links => {
+                links.addEventListener('click', () => {
+                    this.toggle(false);
+                });
             });
-        });
 
-        window.addEventListener('click', (event) => {
-            if (event.target === document.body) {
-                this.toggle(false);
-            }
-        });
+            window.addEventListener('click', (event) => {
+                if (event.target === document.body) {
+                    this.toggle(false);
+                }
+            });
 
-        window.addEventListener('keydown', (event) => {
-            if (event.keyCode === 27 || event.key === 'Escape') {
-                this.toggle(false);
-            }
-        });
+            window.addEventListener('keydown', (event) => {
+                if (event.keyCode === 27 || event.key === 'Escape') {
+                    this.toggle(false);
+                }
+            });
+        }
     }
 
     toggle (open) {
