@@ -11,7 +11,9 @@
     {{- $length := len (split $path "/") }}
     <ol id="breadcrumb"
         itemscope itemtype="https://schema.org/BreadcrumbList" 
-        class="breadcrumb {{ if $is_extendable }}extendable{{ end }}">
+        class="breadcrumb {{ if $is_extendable }}extendable{{ end }}"
+        {{ if $is_extendable }} data-extendable-focus-first="true" {{ end }}
+        >
       {{ range $index, $item := .Params.breadcrumbs }}
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item{{- if not $item.path }} active{{ end }}"{{- if not $item.path }} aria-current="page"{{ end }}>
           {{- if $item.path -}}

@@ -28,6 +28,9 @@
         button
             display: none
     @include media-breakpoint-down(desktop)
+        li
+            a
+                text-decoration-color: var(--color-border)
         &--extendable
             ol
                 height: auto
@@ -44,6 +47,8 @@
                         display: inline
                         padding-left: 0
                         white-space: initial
+                        > a, > span
+                            display: inline-block
                 // When expanded
                 &[aria-expanded="true"]
                     display: none
