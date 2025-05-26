@@ -18,7 +18,7 @@
               <div class="extendable taxonomy-categories" id="categories-{{ .name | anchorize }}" data-extendable-close-siblings="true" data-extendable-auto-close="true">
           {{ else }}
             <div class="taxonomy-categories">
-              <span>{{ .name }}</span>
+              {{ if site.Params.default.index.taxonomies.show_name }}<span>{{ .name }}</span>{{ end }}
           {{ end }}
             <ul>
             {{ range .categories }}
