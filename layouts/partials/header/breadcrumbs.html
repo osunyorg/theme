@@ -1,8 +1,17 @@
+{{ $is_extendable := site.Params.breadcrumb.extendable }}
+
 {{ if .Params.breadcrumbs }}
-  <nav class="breadcrumb-nav" aria-label="{{ i18n "commons.breadcrumb" }}">
+  <nav class="breadcrumb-nav {{ if $is_extendable }} breadcrumb-nav--extendable{{ end }}" aria-label="{{ i18n "commons.breadcrumb.title" }}">
+
+    {{ if $is_extendable }}
+      <button class="link" aria-controls="breadcrumb" aria-expanded="false">{{ i18n "commons.breadcrumb.show" }}</button>
+    {{ end }}
+
     {{- $path := strings.TrimSuffix "/" .RelPermalink -}}
     {{- $length := len (split $path "/") }}
-    <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+    <ol id="breadcrumb"
+        itemscope itemtype="https://schema.org/BreadcrumbList" 
+        class="breadcrumb {{ if $is_extendable }}extendable{{ end }}">
       {{ range $index, $item := .Params.breadcrumbs }}
         <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item{{- if not $item.path }} active{{ end }}"{{- if not $item.path }} aria-current="page"{{ end }}>
           {{- if $item.path -}}
