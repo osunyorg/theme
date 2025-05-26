@@ -38,6 +38,8 @@ class TableOfContents {
     listen () {
         window.addEventListener('scroll', this.update.bind(this), false);
 
+        window.addEventListener('resize', this.resize.bind(this), false);
+
         this.togglers.forEach(toggler => {
             toggler.addEventListener('click', () => {
                 this.toggle();
@@ -64,7 +66,7 @@ class TableOfContents {
     }
 
     toggle (open) {
-        if (this.state.offcanvas) {
+        if (!this.state.isOffcanvas) {
             return;
         }
         this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
@@ -131,7 +133,9 @@ class TableOfContents {
     }
 
     updateCtaTitle (link) {
+        const defaultTitle = this.ctaTitle.getAttribute('data-default');
         if (isMobile()) {
+            this.ctaTitle.setAttribute('aria-label', link.innerText);
             this.ctaTitle.innerText = link.innerText;
         } else {
             this.ctaTitle.innerText = this.ctaTitle.getAttribute('data-default');
@@ -147,6 +151,10 @@ class TableOfContents {
                 top: progress
             });
         }
+    }
+
+    resize () {
+        this.state.isOffcanvas = this.isOffcanvas();
     }
 }
 
