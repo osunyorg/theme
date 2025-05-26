@@ -133,7 +133,6 @@ class TableOfContents {
     }
 
     updateCtaTitle (link) {
-        const defaultTitle = this.ctaTitle.getAttribute('data-default');
         if (isMobile()) {
             this.ctaTitle.setAttribute('aria-label', link.innerText);
             this.ctaTitle.innerText = link.innerText;
