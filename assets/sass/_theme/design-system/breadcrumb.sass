@@ -25,27 +25,31 @@
 
 .breadcrumb-nav
     &--extendable
-        ol
-            height: auto
         button
-            @include button-reset
-            @include link
-            @include meta
-            padding: 0
-            // When not expanded
-            + .extendable
-                display: none
-                li
-                    display: inline
-                    padding-left: 0
-                    white-space: initial
-            // When expanded
-            &[aria-expanded="true"]
-                display: none
+            display: none
+    @include media-breakpoint-down(desktop)
+        &--extendable
+            ol
+                height: auto
+            button
+                @include button-reset
+                @include link
+                @include meta
+                display: block
+                padding: 0
+                // When not expanded
                 + .extendable
-                    display: block
-    &:where:not(.breadcrumb-nav--extendable)
-        @include media-breakpoint-down(desktop)
+                    display: none
+                    li
+                        display: inline
+                        padding-left: 0
+                        white-space: initial
+                // When expanded
+                &[aria-expanded="true"]
+                    display: none
+                    + .extendable
+                        display: block
+        &:where:not(.breadcrumb-nav--extendable)
             margin-left: var(--grid-gutter-negative)
             margin-right: var(--grid-gutter-negative)
             > ol
