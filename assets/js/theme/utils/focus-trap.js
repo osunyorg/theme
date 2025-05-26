@@ -15,13 +15,6 @@ export function focusTrap(event, element, isOpened) {
     handleTabLoop(event, firstFocusable, lastFocusable, element);
 }
 
-// // Replace by getFocusableElements
-// function getFocusableElements(element) {
-//     const focusables = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
-//     const elements = element.querySelectorAll(focusables);
-//     return Array.from(elements).filter(el => !el.disabled && el.tabIndex >= 0);
-// }
-
 function handleTabLoop(event, firstFocusable, lastFocusable, element) {
     const goingBackward = event.shiftKey;
     const focusTarget = goingBackward ? lastFocusable : firstFocusable;
