@@ -1,4 +1,4 @@
-import { a11yClick } from '../utils/a11y';
+import { a11yClick, getFocusableElements } from '../utils/a11y';
 
 var osuny = window.osuny || {};
 
@@ -13,7 +13,8 @@ osuny.Extendable = function (element) {
     this.options = {
         // This attribute determine if extendable should close others when opened
         closeSiblings: this.element.getAttribute('data-extendable-close-siblings'),
-        autoClose: this.element.getAttribute('data-extendable-auto-close')
+        autoClose: this.element.getAttribute('data-extendable-auto-close'),
+        focusFirst: this.element.getAttribute('data-extendable-focus-first')
     };
 
     this.listen();
@@ -73,6 +74,17 @@ osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
     if (!this.state.opened && this.state.openedByButton && !fromOutside) {
         this.state.openedByButton.focus();
         this.state.openedByButton = null;
+    }
+
+    if (this.state.opened && this.options.focusFirst) {
+        this.focusFirstElement();
+    }
+};
+
+osuny.Extendable.prototype.focusFirstElement = function () {
+    var focusableElements = getFocusableElements(this.element);
+    if (focusableElements.length > 0) {
+        focusableElements[0].focus();
     }
 };
 

@@ -38,6 +38,8 @@ class TableOfContents {
     listen () {
         window.addEventListener('scroll', this.update.bind(this), false);
 
+        window.addEventListener('resize', this.resize.bind(this), false);
+
         this.togglers.forEach(toggler => {
             toggler.addEventListener('click', () => {
                 this.toggle();
@@ -64,6 +66,9 @@ class TableOfContents {
     }
 
     toggle (open) {
+        if (!this.state.isOffcanvas) {
+            return;
+        }
         this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
         const classAction = this.state.opened ? 'add' : 'remove',
             transitionDuration = this.state.opened ? 0 : this.getTransitionDuration();
@@ -129,6 +134,7 @@ class TableOfContents {
 
     updateCtaTitle (link) {
         if (isMobile()) {
+            this.ctaTitle.setAttribute('aria-label', link.innerText);
             this.ctaTitle.innerText = link.innerText;
         } else {
             this.ctaTitle.innerText = this.ctaTitle.getAttribute('data-default');
@@ -144,6 +150,10 @@ class TableOfContents {
                 top: progress
             });
         }
+    }
+
+    resize () {
+        this.state.isOffcanvas = this.isOffcanvas();
     }
 }
 

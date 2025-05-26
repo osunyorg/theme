@@ -1,4 +1,5 @@
 {{ $in_gallery := .gallery | default false }}
+{{ $focusable_figcaption := .focusable_figcaption }}
 
 {{ if .image.id }}
   {{ $sizes := .sizes }}
@@ -36,7 +37,7 @@
       {{ end }}
 
       {{ if or .text .credit }}
-        <figcaption>
+        <figcaption {{ if $focusable_figcaption }} tabindex="0" {{ end }}>
           {{ with .text }}
             <div>{{ . | safeHTML }}</div>
           {{ end }}
