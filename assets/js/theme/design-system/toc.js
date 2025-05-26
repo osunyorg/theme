@@ -38,12 +38,6 @@ class TableOfContents {
     listen () {
         window.addEventListener('scroll', this.update.bind(this), false);
 
-        if (this.state.isOffcanvas) { 
-            this.manageEventsWithOffcanvas();
-        }
-    }
-
-    manageEventsWithOffcanvas() {
         this.togglers.forEach(toggler => {
             toggler.addEventListener('click', () => {
                 this.toggle();
