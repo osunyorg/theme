@@ -40,7 +40,9 @@
           {{- if $objectives -}}
             <li><a href="#{{ anchorize (i18n "programs.objectives") }}">{{ i18n "programs.objectives" }}</a></li>
           {{- end -}}
-          <li><a href="#{{ anchorize (i18n "programs.administrative_information") }}">{{ i18n "programs.administrative_information" }}</a></li>
+          {{ if ( partial "HasAdministrativeInformation" .context ) }}
+            <li><a href="#{{ anchorize (i18n "programs.administrative_information") }}">{{ i18n "programs.administrative_information" }}</a></li>
+          {{- end -}}
           {{- if .context.Params.contents -}}
             {{- partial "blocks/toc" .context.Params.contents -}}
           {{- end -}}
