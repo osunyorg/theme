@@ -1,0 +1,7 @@
+{{ with .Params.parent }}
+  {{ with site.GetPage .path }}
+    <div class="event-parent">
+      <p class="event-parent__title">{{ i18n "events.part_of" }} : {{ .Title | safeHTML }}</p>
+    </div>
+  {{ end }}
+{{ end }}
