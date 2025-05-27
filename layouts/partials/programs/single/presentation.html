@@ -41,7 +41,7 @@
 
       {{- partial "contents/list.html" . }}
 
-      {{ if or .Params.information.administrative .Params.diplomas }}
+      {{ if ( partial "HasAdministrativeInformation" . ) }}
         <div>
           <section id="{{ anchorize (i18n "programs.administrative_information") }}">
             <h3>{{ i18n "programs.administrative_information" }}</h3>
