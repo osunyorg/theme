@@ -17,6 +17,7 @@ class TableOfContents {
         this.sections = document.querySelectorAll('.heading[id]');
         // TODO : handle sublinks update in toc 
         this.ctaTitle = document.querySelector('.toc-cta-title span');
+        this.openerButton = document.querySelector('.toc-cta button');
         this.togglers = document.querySelectorAll('.toc-cta button, .toc-container button');
         this.state = {
             opened: false,
@@ -134,7 +135,7 @@ class TableOfContents {
 
     updateCtaTitle (link) {
         if (isMobile()) {
-            this.ctaTitle.setAttribute('aria-label', link.innerText);
+            this.openerButton.setAttribute('aria-label', link.innerText +  osuny.i18n.toc.button_label);
             this.ctaTitle.innerText = link.innerText;
         } else {
             this.ctaTitle.innerText = this.ctaTitle.getAttribute('data-default');
