@@ -1,3 +1,5 @@
+{{ $paginator := .Paginator }}
+
 {{ partial "posts/section/hero.html" . }}
 <div class="document-content">
   {{ partial "posts/section/summary.html" (dict
@@ -5,10 +7,19 @@
       "context" .
     ) }}
 
-  {{ partial "contents/list.html" . }}
+    {{ if .Params.section_taxonomies }}
+      <div class="container">
+        {{ partial "taxonomies/section-list.html" . }}
+      </div>
+    {{ end }}
+
+    {{ if $paginator}}
+      {{ if eq $paginator.PageNumber 1 }}
+        {{ partial "contents/list.html" . }}
+      {{ end }}
+    {{ end }}
 
   <div class="container">
-    {{ partial "taxonomies/section-list.html" . }}
     {{ partial "posts/partials/posts.html" . }}
     {{ partial "commons/pagination.html" . }}
   </div>

@@ -1,4 +1,6 @@
 {{- $is_organizations_block_present := false -}}
+{{ $paginator := .Paginator }}
+
 {{ range .Params.contents }}
   {{- if eq .template "organizations" -}}
     {{- $is_organizations_block_present = true -}}
@@ -13,11 +15,20 @@
       "with_container" true
     ) }}
 
-  {{ partial "contents/list.html" . }}
+  {{ if .Params.section_taxonomies }}
+    <div class="container">
+      {{ partial "taxonomies/section-list.html" . }}
+    </div>
+  {{ end }}
+
+  {{ if $paginator}}
+    {{ if eq $paginator.PageNumber 1 }}
+      {{ partial "contents/list.html" . }}
+    {{ end }}
+  {{ end }}
 
   <div class="container">
     {{- if not $is_organizations_block_present -}}
-      {{ partial "taxonomies/section-list.html" . }}
       {{ partial "organizations/partials/organizations.html" . }}
       {{ partial "commons/pagination.html" . }}
     {{ end }}
