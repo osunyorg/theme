@@ -1,0 +1,10 @@
+{{- $paths := slice -}}
+{{- range .Site.Sections -}}
+  {{- $paths = $paths | append .Params.url -}}
+  {{- range $index, $page := (where .Site.Pages "Section" .Type) -}}
+    {{- if lt $index 2 -}}
+      {{- $paths = $paths | append $page.Params.url -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $paths | jsonify -}}
