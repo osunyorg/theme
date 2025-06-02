@@ -51,6 +51,10 @@
         </hgroup>
       {{ end }}
 
+      {{ if ne $layout "agenda" }}
+        {{ partial "events/partials/event/parent.html" . }}
+      {{ end }}
+
       {{ if eq $layout "agenda" }}
         {{ with .Params.current_time_slot }}
           {{ partial "events/partials/event/hours.html" . }}
