@@ -13,10 +13,8 @@
       </div>
     {{ end }}
 
-    {{ if $paginator}}
-      {{ if eq $paginator.PageNumber 1 }}
-        {{ partial "contents/list.html" . }}
-      {{ end }}
+    {{ if (partial "IsFirstPage" .) }}
+      {{ partial "contents/list.html" . }}
     {{ end }}
 
   <div class="container">

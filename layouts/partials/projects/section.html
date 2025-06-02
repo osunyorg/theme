@@ -13,11 +13,9 @@
       </div>
     {{ end }}
 
-  {{ if $paginator}}
-    {{ if eq $paginator.PageNumber 1 }}
+    {{ if (partial "IsFirstPage" .) }}
       {{ partial "contents/list.html" . }}
     {{ end }}
-  {{ end }}
   
   <div class="container">
     {{ partial "projects/partials/projects.html" . }}
