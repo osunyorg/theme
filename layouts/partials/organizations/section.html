@@ -1,5 +1,4 @@
 {{- $is_organizations_block_present := false -}}
-{{ $paginator := .Paginator }}
 
 {{ range .Params.contents }}
   {{- if eq .template "organizations" -}}
@@ -23,7 +22,6 @@
 
   {{ if (partial "IsFirstPage" .) }}
     {{ partial "contents/list.html" . }}
-  {{ end }}
 
   <div class="container">
     {{- if not $is_organizations_block_present -}}
