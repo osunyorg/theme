@@ -22,6 +22,8 @@
           "itemprop" "name"
         )}}
 
+      {{ partial "exhibitions/partials/exhibition/federated.html" . }}
+
       {{ if $options.dates }}
         {{ partial "exhibitions/partials/exhibition/schedule.html" (dict 
             "dates" .Params.dates
