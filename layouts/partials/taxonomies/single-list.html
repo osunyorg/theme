@@ -1,10 +1,10 @@
 {{ $context := . }}
 {{ $type := .Type }}
 {{ $taxonomies := .Params.taxonomies }}
-{{ $param := (printf "%s.single.taxonomies.display" $type) }}
+{{ $param := (printf "%s.single.taxonomies.show_name" $type) }}
 {{ $display_taxonomies := partial "GetSiteParamWithDefault" (dict 
   "param" $param
-  "default" "default.single.taxonomies.display"
+  "default" "default.single.taxonomies.show_name"
 ) }}
 
 {{ with $taxonomies }}
