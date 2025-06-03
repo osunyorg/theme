@@ -11,7 +11,9 @@
       "block_wrapped" true
     ) }}
 
-  {{ partial "contents/list.html" . }}
+  {{ if (partial "IsFirstPage" .) }}
+    {{ partial "contents/list.html" . }}
+  {{ end }}
 
   <div class="container">
     {{ partial "categories/section/categories.html" . }}

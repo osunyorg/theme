@@ -3,29 +3,37 @@
 {{ $categories := where site.Pages "Section" $categories_kind }}
 {{ $taxonomies := .Params.section_taxonomies }}
 {{ $option := index site.Params $kind }}
+{{ $layout := site.Params.default.index.taxonomies.layout }}
 
 {{ with $option.index.taxonomies }}
-  <div class="taxonomies-list">
+  <div class="taxonomies-list taxonomies-list--{{ $layout }}">
     {{ if $taxonomies }}
       {{- range $taxonomies -}}
         {{ if .categories }}
-          <div class="dropdown">
-            <button aria-controls="categories-{{ .name | anchorize }}" aria-expanded="false">
-              {{ .name }}
-            </button>
-            <div class="extendable taxonomy-categories" id="categories-{{ .name | anchorize }}" data-extendable-close-siblings="true" data-extendable-auto-close="true">
-              <ul>
-                {{ range .categories }}
-                  {{ $category := site.GetPage .path }}
-                  {{ with $category }}
-                    <li>
-                      <a href="{{ .Permalink }}">{{ .Title }}</a>
-                    </li>
-                  {{ end }}
-                {{ end }}
+          {{ if eq $layout "dropdown" }}
+            <div class="dropdown">
+              <button aria-controls="categories-{{ .name | anchorize }}" aria-expanded="false">
+                {{ .name }}
+              </button>
+              <div class="extendable taxonomy-categories" id="categories-{{ .name | anchorize }}" data-extendable-close-siblings="true" data-extendable-auto-close="true">
+          {{ else }}
+            <div class="taxonomy-categories">
+              {{ if site.Params.default.index.taxonomies.show_name }}<span>{{ .name }}</span>{{ end }}
+          {{ end }}
+            <ul>
+            {{ range .categories }}
+              {{ $category := site.GetPage .path }}
+              {{ with $category }}
+                <li>
+                  <a href="{{ .Permalink }}">{{ .Title }}</a>
+                </li>
+              {{ end }}
+            {{ end }}
               </ul>
             </div>
-          </div>
+          {{ if eq $layout "dropdown" }}
+            </div>
+          {{ end }}
         {{- end -}}
       {{- end -}}
     {{- end -}}
