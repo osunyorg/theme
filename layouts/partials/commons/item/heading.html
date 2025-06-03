@@ -22,7 +22,8 @@
 {{ end }}
 
 {{ $heading_tag.open }}
-  <a href="{{ $item.Permalink }}" title="{{ $link_title }}" {{ if $itemprop }} itemprop="url" {{ end }} >
+  {{ $permalink := partial "GetPermalink" $item }}
+  <a href="{{ $permalink }}" title="{{ $link_title }}" {{ if $itemprop }} itemprop="url" {{ end }} >
     {{ $item.Title }}
   </a>
 {{ $heading_tag.close }}
