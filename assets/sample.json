@@ -1,10 +1,12 @@
 {{- $paths := slice -}}
 {{- range .Site.Sections -}}
-  {{- $paths = $paths | append .Params.url -}}
-  {{- range $index, $page := (where .Site.Pages "Section" .Type) -}}
-    {{- if lt $index 2 -}}
-      {{- with $page.Params.url -}}
-        {{- $paths = $paths | append . -}}
+  {{- if and (ne .Type "sitemap") -}}
+    {{- $paths = $paths | append .Params.url -}}
+    {{- range $index, $page := (where .Site.Pages "Section" .Type) -}}
+      {{- if eq $index 1 -}}
+        {{- with $page.Params.url -}}
+          {{- $paths = $paths | append . -}}
+        {{- end -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
