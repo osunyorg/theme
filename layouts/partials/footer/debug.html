@@ -359,3 +359,10 @@
   }
 
 </script>
+
+{{ with resources.Get "sample.json" }}
+  {{ with resources.ExecuteAsTemplate "sample.json" $ . }}
+    {{/*  {{ call permalink to generate file }}  */}}
+    {{ $dumb := .Permalink }}
+  {{ end }}
+{{ end }}
