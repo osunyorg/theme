@@ -17,13 +17,17 @@
   {{ $class := "event" }}
   {{ if and .Params.image $options.image }}
     {{ $class = printf "%s event--with-image" $class }}
-  {{ end -}}
+  {{ end }}
   {{ if .Params.children }}
     {{ $class = printf "%s event--parent" $class }}
-  {{ end -}}
+  {{ end }}
   {{ if .Params.parent }}
     {{ $class = printf "%s event--child" $class }}
-  {{ end -}}
+  {{ end }}
+  {{ if .Params.federation.active }}
+    {{ $class = printf "%s is-federated" $class }}
+  {{ end }}
+
   {{ $dates := .Params.dates }}
 
   <article class="{{ $class }}" 
@@ -50,6 +54,8 @@
           <p class="event-subtitle">{{ partial "PrepareText" .Params.subtitle }}</p>
         </hgroup>
       {{ end }}
+
+      {{ partial "commons/item/federated.html" . }}
 
       {{ if ne $layout "agenda" }}
         {{ partial "events/partials/event/parent.html" . }}
