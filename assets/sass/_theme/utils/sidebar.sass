@@ -1,20 +1,20 @@
 @mixin in-page-with-sidebar
     @include media-breakpoint-up(desktop)
-        body:not(.full-width) &
+        body:not(.full-width) main &
             @content
 
 @mixin in-page-without-sidebar
     @include media-breakpoint-up(desktop)
         main > .blocks &,
-        body.full-width &,
+        body.full-width main &
             @content
 
 // Use this mixin to override with-aside or without-aside rules
 @mixin in-page-with-or-without-sidebar
     @include media-breakpoint-up(desktop)
-        body:not(.full-width) &,
+        body:not(.full-width) main &,
         main > .blocks &,
-        body.full-width &,
+        body.full-width main &,
             @content
 
 // Aliases
