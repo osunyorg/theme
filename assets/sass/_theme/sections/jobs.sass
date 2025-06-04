@@ -1,5 +1,11 @@
 .job
     @include article(auto)
+    .job-dates
+        time
+            display: inline
+            + time
+                &::before
+                    content: ' - '
 
 ul.jobs
     @include list-reset
