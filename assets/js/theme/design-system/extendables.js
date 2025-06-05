@@ -39,7 +39,7 @@ osuny.Extendable.prototype.listen = function () {
         }
     }.bind(this));
 
-    this.element.addEventListener('extendable-close', this.toggle.bind(this, false, true));
+    this.element.addEventListener(window.osuny.EVENTS.EXTENDABLE_CLOSE, this.toggle.bind(this, false, true));
 };
 
 osuny.Extendable.prototype.handleAutoClose = function () {
@@ -82,6 +82,10 @@ osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
     if (this.state.opened && this.options.focusFirst) {
         this.focusFirstElement();
     }
+
+    if (this.state.opened) {
+        window.dispatchEvent(new Event(window.osuny.EVENTS.EXTENDABLE_HAS_OPEN));
+    }
 };
 
 osuny.Extendable.prototype.focusFirstElement = function () {
@@ -102,7 +106,7 @@ osuny.Extendable.prototype.closeSiblings = function () {
     extendables = parent.querySelectorAll('.extendable');
     extendables.forEach(function (extendable) {
         if (this.element !== extendable) {
-            extendable.dispatchEvent(new Event('extendable-close'));
+            extendable.dispatchEvent(new Event(window.osuny.EVENTS.EXTENDABLE_CLOSE));
         }
     }.bind(this));
 };
