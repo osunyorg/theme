@@ -12,9 +12,10 @@ osuny.Extendable = function (element) {
     };
     this.options = {
         // This attribute determine if extendable should close others when opened
-        closeSiblings: this.element.getAttribute('data-extendable-close-siblings'),
-        autoClose: this.element.getAttribute('data-extendable-auto-close'),
-        focusFirst: this.element.getAttribute('data-extendable-focus-first')
+        closeSiblings: this.element.getAttribute('data-extendable-close-siblings') === 'true',
+        closeSiblingsParent: this.element.getAttribute('data-extendable-close-siblings-parent'),
+        autoClose: this.element.getAttribute('data-extendable-auto-close') === 'true',
+        focusFirst: this.element.getAttribute('data-extendable-focus-first') === 'true'
     };
 
     this.listen();
@@ -46,6 +47,9 @@ osuny.Extendable.prototype.handleAutoClose = function () {
     var isInTarget = false;
     window.addEventListener('click', function (event) {
         isInTarget = this.state.openedByButton ? this.state.openedByButton.contains(event.target) : false;
+        if (!isInTarget) {
+            isInTarget = this.element.contains(event.target);
+        }
         if (this.state.opened && event.target !== this.state.openedByButton && !isInTarget) {
             this.toggle(false);
         }
@@ -91,6 +95,11 @@ osuny.Extendable.prototype.focusFirstElement = function () {
 osuny.Extendable.prototype.closeSiblings = function () {
     var parent = this.element.parentNode,
         extendables;
+
+    if (this.options.closeSiblingsParent) {
+        parent = this.element.closest(this.options.closeSiblingsParent);
+        console.log(parent)
+    }
 
     if (parent.classList.contains('dropdown')) {
         parent = parent.parentNode;

@@ -32,23 +32,13 @@
             @include inset(100%, 0, auto, 0)
             padding-top: var(--grid-gutter)
             padding-bottom: var(--grid-gutter)
-            // To set a real full screen width
-            $empty-grid-space: calc((100vw - var(--grid-width)) / 2 * -1)
-            margin-left: $empty-grid-space
-            margin-right: $empty-grid-space
-            .slider
-                @include container
-                position: relative
-                .slider-arrows
-                    justify-content: space-between
-                    left: var(--grid-gutter)
-                    margin: auto
-                    position: absolute
-                    right: var(--grid-gutter)
-                    top: -$spacing-2
-                    .slider-arrow-previous
-                        margin-left: 0
+            @include media-breakpoint-up(desktop)
+                // To set a real full screen width
+                $empty-grid-space: calc((100vw - var(--grid-width)) / 2 * -1)
+                margin-left: $empty-grid-space
+                margin-right: $empty-grid-space
             ul
+                @include container
                 @include grid(1)
                 @include grid(2, md)
                 @include grid(3, xl)

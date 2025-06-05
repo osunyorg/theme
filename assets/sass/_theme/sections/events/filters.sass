@@ -31,7 +31,18 @@
                     text-align: left
     .dates-filters
         .slider
+            @include container
             overflow: hidden
+            position: relative
+            .slider-arrows
+                justify-content: space-between
+                left: var(--grid-gutter)
+                margin: auto
+                position: absolute
+                right: var(--grid-gutter)
+                top: -$spacing-2
+                .slider-arrow-previous
+                    margin-left: 0
         &__months
             display: flex
             gap: var(--grid-gutter)
