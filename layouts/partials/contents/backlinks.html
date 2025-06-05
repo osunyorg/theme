@@ -1,9 +1,11 @@
 {{ $about := .Title }}
 {{ $params := "" }}
+{{ $type := .Type }}
 
 <div class="backlinks">
   {{ with .Params.backlinks.current_website }}
     {{ with .events }}
+      {{ $title := i18n (printf "%s.backlinks.events" $type) }}
       {{ $params = partial "GetLayoutAndOptions" (dict 
           "param" "persons.single.events"
           "default" "events.index"
@@ -13,7 +15,7 @@
           "top" (dict
             "active" true
             "title" (dict
-              "value" (printf "%s %s" (i18n "persons.backlinks.events") $about)
+              "value" (printf "%s %s" $title $about)
               "heading" 2
             )
           )
@@ -31,6 +33,7 @@
       ) }}
     {{ end }}
     {{ with .pages }}
+      {{ $title := i18n (printf "%s.backlinks.pages" $type) }}
       {{ $params = partial "GetLayoutAndOptions" (dict 
           "param" "persons.single.pages"
           "default" "pages.index"
@@ -40,7 +43,7 @@
           "top" (dict
             "active" true
             "title" (dict
-              "value" (printf "%s %s" (i18n "persons.backlinks.pages") $about)
+              "value" (printf "%s %s" $title $about)
               "heading" 2
             )
           )
@@ -58,6 +61,7 @@
       ) }}
     {{ end }}
     {{ with .projects }}
+      {{ $title := i18n (printf "%s.backlinks.projects" $type) }}
       {{ $params = partial "GetLayoutAndOptions" (dict 
           "param" "persons.single.projects"
           "default" "projects.index"
@@ -67,7 +71,7 @@
           "top" (dict
             "active" true
             "title" (dict
-              "value" (printf "%s %s" (i18n "persons.backlinks.projects") $about)
+              "value" (printf "%s %s" $title $about)
               "heading" 2
             )
           )
@@ -85,6 +89,7 @@
       ) }}
     {{ end }}
     {{ with .posts }}
+      {{ $title := i18n (printf "%s.backlinks.posts" $type) }}
       {{ $params = partial "GetLayoutAndOptions" (dict 
           "param" "persons.single.posts"
           "default" "posts.index"
@@ -94,7 +99,7 @@
           "top" (dict
             "active" true
             "title" (dict
-              "value" (printf "%s %s" (i18n "persons.backlinks.posts") $about)
+              "value" (printf "%s %s" $title $about)
               "heading" 2
             )
           )

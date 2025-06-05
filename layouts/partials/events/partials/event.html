@@ -17,13 +17,17 @@
   {{ $class := "event" }}
   {{ if and .Params.image $options.image }}
     {{ $class = printf "%s event--with-image" $class }}
-  {{ end -}}
+  {{ end }}
   {{ if .Params.children }}
     {{ $class = printf "%s event--parent" $class }}
-  {{ end -}}
+  {{ end }}
   {{ if .Params.parent }}
     {{ $class = printf "%s event--child" $class }}
-  {{ end -}}
+  {{ end }}
+  {{ if .Params.federation.active }}
+    {{ $class = printf "%s is-federated" $class }}
+  {{ end }}
+
   {{ $dates := .Params.dates }}
 
   <article class="{{ $class }}" 
@@ -39,16 +43,17 @@
     {{ end }}
 
     <div class="event-content">
-      {{- $title := partial "PrepareHTML" .Title -}}
-      {{ if and $options.subtitle .Params.subtitle }}
-        <hgroup>
-      {{ end }}
-      {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-      {{ $heading_tag.close }}
-      {{ if and $options.subtitle .Params.subtitle }}
-          <p class="event-subtitle">{{ partial "PrepareText" .Params.subtitle }}</p>
-        </hgroup>
+      {{ partial "events/partials/event/heading.html" (dict
+          "item" .
+          "options" $options
+          "level" $heading_level
+          "itemprop" "name"
+        ) }}
+
+      {{ partial "events/partials/event/federated.html" . }}
+
+      {{ if ne $layout "agenda" }}
+        {{ partial "events/partials/event/parent.html" . }}
       {{ end }}
 
       {{ if eq $layout "agenda" }}

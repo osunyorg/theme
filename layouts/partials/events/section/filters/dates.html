@@ -5,7 +5,7 @@
 
   <div class="extendable dates-filters" id="dropdown-dates" data-extendable-close-siblings="true" data-extendable-auto-close="true">
     <div class="dates-filters__months">
-      {{ range $index, $seq := (seq 3) }}
+      {{ range $index, $seq := (seq site.Params.events.filters.number_of_months) }}
         {{ with ( partial "GetMonthFromNow" $index ) }}
           {{ partial "events/section/calendar/month.html" (dict
               "name" .Title

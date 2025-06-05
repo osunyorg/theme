@@ -69,6 +69,7 @@ params:
           source: "Summary" # "Summary" | "meta_description"
           truncate: 125
   breadcrumb:
+    extendable: false
     position: hero-start #  hero-start |  hero-end | after-hero | none
   design:
     force_full_width: false
@@ -108,10 +109,16 @@ params:
 
   # SECTIONS
   default:
+    index:
+      taxonomies:
+        layout: dropdown # dropdown | inline
+        show_name: true
     single:
       taxonomies:
-        display: true
         position: content
+        show_name: true
+    sitemap:
+      ignore_children: false
   categories:
     index:
       layout: grid # alternate | cards | grid | large | list
@@ -126,7 +133,13 @@ params:
     default_image: false
     date_format: false # You can add date format to override the date from static (two_lines) 
     time_format: false # You can add time format to override the time from static (from.hour & to.hour)
+    # sitemap:
+    #   ignore_children: true
+    filters:
+      number_of_months: 6
     index:
+      archives: true
+      years: true
       group_by_date: "Monday 2 January 2006"
       highlight_exhibitions:
         active: true
@@ -161,7 +174,8 @@ params:
       truncate_description: 200 # Set to 0 to disable truncate
     single:
       taxonomies:
-        display: false
+        position: hero
+        show_name: false
       agenda:
         layout: agenda
         options:

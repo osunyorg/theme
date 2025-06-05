@@ -10,9 +10,16 @@
     {{ partial "events/section/exhibitions.html" $exhibitions }}
   {{ end }}
 
-  {{ partial "contents/list.html" . }}
 
   {{ partial "events/section/filters.html" . }}
+
+  {{/*  {{ if .Params.section_taxonomies }}
+    <div class="container">
+      {{ partial "taxonomies/section-list.html" . }}
+    </div>
+  {{ end }}  */}}
+
+  {{ partial "contents/list.html" . }}
 
   <div class="container events-programme" id="events-programme">
     {{ $per_page := site.Params.events.index.per_page }}

@@ -1,2 +1,6 @@
-{{ partial "events/section/archives/latest.html" . }}
-{{ partial "events/section/archives/years.html" . }}
+{{ if site.Params.events.index.archives }}
+  {{ partial "events/section/archives/latest.html" . }}
+{{ end }}
+{{ if site.Params.events.index.years }}
+  {{ partial "events/section/archives/years.html" . }}
+{{ end }}

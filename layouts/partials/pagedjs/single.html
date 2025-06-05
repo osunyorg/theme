@@ -1,7 +1,15 @@
-<section class="cover">
+<section class="cover{{ if .Params.image.id }} cover--with-image{{ end }}">
+  {{ with .Params.image.id }}
+    {{ $image := partial "GetMedia" . }}
+    {{ with $image }}
+      <img src="{{ $image.direct_url }}" />
+    {{ end }}
+  {{ end }}
   <h1>{{ .Title }} </h1>
-  {{ partial "pagedjs/partials/summary.html" .Params.summary }}
   <p>{{ site.Title }} </p>
+</section>
+<section>
+  {{ partial "pagedjs/partials/summary.html" .Params.summary }}
 </section>
 <section>
   {{ partial "pagedjs/partials/blocks.html" .Params.contents }}

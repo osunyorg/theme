@@ -88,6 +88,14 @@ commons:
     transcription: Transcription
     map_transcription : Transcription
     credits: "Rights reserved: "
+  add_to_calendar:
+    title: Add to my calendar
+    ical: Download an .ICS file
+    google: Google Calendar
+    office: Office 365
+    outlook: Microsoft Outlook
+    regular_event: Add the entire event period to my calendar
+    yahoo: Yahoo! Calendar
   authors:
     one: Author
     other: Authors
@@ -217,7 +225,9 @@ commons:
     pause: Carousel is playing. Pause the carousel.
     play: Carousel is currently paused. Start the carousel.
     previous: Go to the previous element
-  toc: Table of contents
+  toc: 
+    title: Table of contents
+    button_label: ", current - Table of contents"
   "yes": "Yes"
   units:
     GB: GB
@@ -241,12 +251,18 @@ errors:
       We suggest you return to the <a href="/">home page of our site</a>.<br>
       Thank you for your understanding.
 events:
+  access:
+    partical_informations: Informations
   archives:
     by_year: Archives by year
     latest: Archives
     list:
       title: "Archives for the year {{ .year }}"
   calendar:
+    day:
+      link: Show all for {{ .date }}
+    month:
+      link: Show all for {{ .month }}
     week_days:
       monday: 
         short: Mon
@@ -272,8 +288,9 @@ events:
   count:
     one: "1 event"
     other: "{{ .Count }} events"
-  date: Date
-  hour: Time
+  item:
+    federated: "Event from <span>{{ . }}</span>"
+  more_dates: Show all dates
   none: No event
   next: Next event
   next_aria: Next event “{{ .Title }}”
@@ -285,10 +302,22 @@ events:
   to:
     day: To day
     hour: To hour
+  status:
+    current: Now
+    future: Soon
+    archive: Passed
   unique_day: Date
 exhibitions:
   archives: Previous exhibitions archive
   none: No exhibition.
+  current: Now
+  future: Coming soon
+  item:
+    federated: "Exhibition from <span>{{ . }}</span>"
+  status:
+    current: Now
+    future: Soon
+    archive: Passed
 formats:
   pdf: Adobe Portable Document Format
   jpg: JPEG image
@@ -305,6 +334,11 @@ formats:
   gz: Compressed archive
   tar: Compressed archive
 organizations:
+  backlinks:
+    events: Events mentioning
+    pages: Pages mentioning
+    posts: Posts mentioning
+    projects: Projects mentioning
   count:
     one: "1 organization"
     other: "{{ .Count }} organizations"

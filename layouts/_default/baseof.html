@@ -16,7 +16,12 @@
     {{- partial "header/accessibility.html" -}}
     {{- partial "hooks/before-header" . -}}
     {{- partial "header/header.html" . -}}
-    <main{{ if .Params.contents }} class="page-with-blocks"{{ end }} id="main" {{ if site.Params.search.active }}data-pagefind-body{{ end }}>
+    <main
+        id="main"
+        {{ if .Params.contents }} class="page-with-blocks"{{ end }} 
+        {{ if site.Params.search.active }}data-pagefind-body{{ end }}
+        {{ if .Params.search_ignore }}data-pagefind-ignore{{ end }}
+        >
       {{ partial "commons/search/button.html" "fixed" }}
       {{- block "main" . }}{{- end }}
       {{- partial "hooks/before-main-end" . -}}

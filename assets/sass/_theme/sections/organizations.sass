@@ -4,7 +4,7 @@
     position: relative
     &-title
         a
-            @include stretched-link
+            @include stretched-link(before)
             text-decoration: none
             display: block
     .organizations:not(.with-summaries) &
@@ -93,7 +93,7 @@
         @include media-breakpoint-up(desktop)
             font-size: $lead-sidebar-size-desktop
     .document-content
-        .organization-logo
+        [itemprop="articleBody"] + .organization-logo
             figcaption
                 text-align: right
                 @include meta
@@ -130,5 +130,5 @@
                 gap: var(--grid-gutter)
             [itemprop="articleBody"]
                 width: columns(8)
-            .organization-logo
-                width: columns(3)
+                + .organization-logo
+                    width: columns(3)
