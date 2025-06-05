@@ -8,7 +8,10 @@
   {{ $class := "job" }}
   {{ if and .Params.image $options.image }}
     {{ $class = printf "%s job--with-image" $class }}
-  {{ end -}}
+    {{ $image_direction := partial "GetImageDirection" .Params.image }}
+    {{ $class = printf "%s %s" $class $image_direction }}
+  {{ end }}
+
   {{ $dates := .Params.dates }}
 
   <article class="{{ $class }}" 
