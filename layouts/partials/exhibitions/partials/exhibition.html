@@ -10,6 +10,9 @@
     {{ $class = printf "%s exhibition--with-image" $class }}
   {{ end -}}
   {{ $dates := .Params.dates }}
+  {{ if .Params.federation.active }}
+    {{ $class = printf "%s is-federated" $class }}
+  {{ end }}
 
   <article class="{{ $class }}" 
       itemscope itemtype="https://schema.org/ExhibitionEvent">
