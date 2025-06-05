@@ -13,7 +13,6 @@ osuny.Extendable = function (element) {
     this.options = {
         // This attribute determine if extendable should close others when opened
         closeSiblings: this.element.getAttribute('data-extendable-close-siblings') === 'true',
-        closeSiblingsParent: this.element.getAttribute('data-extendable-close-siblings-parent'),
         autoClose: this.element.getAttribute('data-extendable-auto-close') === 'true',
         focusFirst: this.element.getAttribute('data-extendable-focus-first') === 'true'
     };
@@ -95,11 +94,6 @@ osuny.Extendable.prototype.focusFirstElement = function () {
 osuny.Extendable.prototype.closeSiblings = function () {
     var parent = this.element.parentNode,
         extendables;
-
-    if (this.options.closeSiblingsParent) {
-        parent = this.element.closest(this.options.closeSiblingsParent);
-        console.log(parent)
-    }
 
     if (parent.classList.contains('dropdown')) {
         parent = parent.parentNode;
