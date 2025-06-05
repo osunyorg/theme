@@ -30,8 +30,20 @@
                 .offcanvas-content
                     text-align: left
     .dates-filters
+        .slider
+            overflow: hidden
         &__months
-            @include grid(3, md)
+            display: flex
+            gap: var(--grid-gutter)
+            width: 100%
+            @include media-breakpoint-down(desktop)
+                .calendar-month
+                    + .calendar-month
+                        margin-top: 0
+            @include media-breakpoint-up(desktop)
+                .calendar-month
+                    width: columns(4)
+                
     .dropdown-dates
         @include dropdown('.dates-filters', $full: true)
         position: static
