@@ -1,4 +1,5 @@
 import { setAriaVisibility } from '../../utils/a11y';
+import { isMobile } from '../../utils/breakpoints';
 var osuny = window.osuny || {};
 
 osuny.sliderComponents = {
@@ -37,6 +38,7 @@ osuny.Slider.prototype.setState = function () {
         index: 0,
         isFirst: true,
         isLast: false,
+        slideBy: 1,
         updatedByUser: false
     };
 };
@@ -60,6 +62,8 @@ osuny.Slider.prototype.setOptions = function () {
         progression: options.progression || false,
         // Disabled options
         disable: options.disable || false,
+        // Per Page
+        perPage: options.perPage || 1
     };
 };
 
@@ -71,6 +75,7 @@ osuny.Slider.prototype.init = function () {
     // update after everything is setup
     this.container.classList.add(osuny.Slider.classes.isReady);
     setTimeout(this.update.bind(this), 1);
+    this.resize();
 };
 
 osuny.Slider.prototype.setup = function () {
@@ -115,7 +120,12 @@ osuny.Slider.prototype.addComponents = function () {
 };
 
 osuny.Slider.prototype.listen = function () {
-    window.addEventListener('resize', this.translate.bind(this));
+    window.addEventListener('resize', this.resize.bind(this));
+};
+
+osuny.Slider.prototype.resize = function () {
+    this.state.slideBy = isMobile() ? 1 : this.options.perPage;
+    this.translate();
 };
 
 osuny.Slider.prototype.loop = function () {
@@ -127,11 +137,11 @@ osuny.Slider.prototype.loop = function () {
 };
 
 osuny.Slider.prototype.next = function (event) {
-    this.offset(1, event);
+    this.offset(this.state.slideBy, event);
 };
 
 osuny.Slider.prototype.previous = function (event) {
-    this.offset(-1, event);
+    this.offset(-this.state.slideBy, event);
 };
 
 osuny.Slider.prototype.offset = function (numberOfSlides, event) {
@@ -146,7 +156,7 @@ osuny.Slider.prototype.goTo = function (index, event) {
 
     this.state.index = index;
     this.state.isFirst = this.state.index === 0;
-    this.state.isLast = this.state.index === this.slides.length - 1;
+    this.state.isLast = this.state.index === this.slides.length - this.state.slideBy;
 
     this.translate();
     this.update();

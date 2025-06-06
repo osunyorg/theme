@@ -10,11 +10,14 @@
     {{ partial "events/section/exhibitions.html" $exhibitions }}
   {{ end }}
 
-  {{ if .Params.section_taxonomies }}
+
+  {{ partial "events/section/filters.html" . }}
+
+  {{/*  {{ if .Params.section_taxonomies }}
     <div class="container">
       {{ partial "taxonomies/section-list.html" . }}
     </div>
-  {{ end }}
+  {{ end }}  */}}
 
   {{ partial "contents/list.html" . }}
 

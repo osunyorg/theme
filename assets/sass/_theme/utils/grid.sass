@@ -35,5 +35,9 @@
     @return #{$width}
 
 // Cette fonction calcule l'espace disponible entre la grille et le bord de l'écran
-@function grid-external-space
-    @return Max(var(--grid-gutter), calc((100vw - var(--grid-width)) / 2 + var(--grid-gutter)))
+@function grid-external-space($negative: false)
+    $space: Max(var(--grid-gutter), calc((100vw - var(--grid-width)) / 2 + var(--grid-gutter)))
+    @if $negative
+        @return calc(#{$space} * -1)
+    @else 
+        @return #{$space}
