@@ -177,12 +177,13 @@ osuny.Slider.prototype.update = function () {
 
 osuny.Slider.prototype.updateSlide = function (slide, index) {
     var classes = osuny.Slider.classes,
-        isCurrent = index === this.state.index;
+        isCurrent = index === this.state.index,
+        isVisible = index >= this.state.index && index < this.state.index + this.state.slideBy;
 
     slide.classList.remove(classes.isCurrent, classes.isNext, classes.isPrevious);
     slide.removeAttribute('tabindex');
 
-    setAriaVisibility(slide, isCurrent);
+    setAriaVisibility(slide, isVisible);
 
     if (isCurrent) {
         slide.classList.add(classes.isCurrent);
