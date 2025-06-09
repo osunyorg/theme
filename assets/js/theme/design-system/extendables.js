@@ -68,11 +68,7 @@ osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
         this.closeSiblings();
     }
 
-    this.buttons.forEach(function (button) {
-        if (button.getAttribute('aria-expanded')) {
-            button.setAttribute('aria-expanded', this.state.opened);
-        }
-    }.bind(this));
+    this.setButtonAriaExpanded();
 
     if (!this.state.opened && this.state.openedByButton && !fromOutside) {
         this.state.openedByButton.focus();
@@ -86,6 +82,14 @@ osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
     if (this.state.opened) {
         window.dispatchEvent(new Event(window.osuny.EVENTS.EXTENDABLE_HAS_OPEN));
     }
+};
+
+osuny.Extendable.prototype.setButtonAriaExpanded = function () {
+    this.buttons.forEach(function (button) {
+        if (button.getAttribute('aria-expanded')) {
+            button.setAttribute('aria-expanded', this.state.opened);
+        }
+    }.bind(this));
 };
 
 osuny.Extendable.prototype.focusFirstElement = function () {
