@@ -1,6 +1,4 @@
 {{ $type := .Type }}
-{{ $categories_type := printf "%s_categories" $type }}
-{{ $categories := where site.Pages "Section" $categories_type }}
 {{ $taxonomies := .Params.section_taxonomies }}
 {{ $param := (printf "%s.index.taxonomies" $type) }}
 {{ $options := partial "GetSiteParamWithDefault" (dict 
