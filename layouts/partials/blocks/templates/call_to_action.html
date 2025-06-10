@@ -30,19 +30,15 @@
             {{- end -}}
           </div>
           {{ if .image }}
-            <figure {{- with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
-              {{ partial "commons/image.html"
-                (dict
-                  "image"    .image.file
-                  "alt"      .alt
-                  "sizes"    site.Params.image_sizes.blocks.call_to_action
-              )}}
-              {{ if partial "GetTextFromHTML" .credit }}
-                <figcaption class="credit">
-                  {{ partial "PrepareHTML" .credit }}
-                </figcaption>
-              {{ end }}
-            </figure>
+            {{ partial "commons/image-figure.html" (dict
+                "image" (dict 
+                          "alt" .alt
+                          "id" .image.id
+                          "file" .image.file
+                          "credit" .credit
+                        )
+                "sizes" site.Params.image_sizes.blocks.chapter
+              ) }}
           {{ end }}
         </div>
       </div>
