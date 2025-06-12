@@ -47,56 +47,57 @@ section.programs
     @include grid(2, desktop)
     @include grid(3, xl)
 
-ol.programs:where(:not(.programs--grid))
-    @include list-section
-    .program
-        align-items: start
-        .program-title a
-            @include hover-translate-icon($fade: true)
-            @include icon(arrow-right-line, after, true)
-                display: inline
-            transition: color $color-duration
-            &:hover
-                color: var(--color-accent)
-        @include media-breakpoint-down(md)
-            .media
-                display: none
-        @include media-breakpoint-down(md)
-            flex-direction: column-reverse
-            gap: $spacing-2
+ol.programs
+    &:where(:not(.programs--grid))
+        @include list-section
+        .program
+            align-items: start
             .program-title a
-                align-items: baseline
-                display: flex
-                &::after
-                    opacity: 1
-        @include media-breakpoint-up(md)
-            flex-direction: row-reverse
-            .program-content
-                flex: 1
-                flex-wrap: wrap
-                .program-title
+                @include hover-translate-icon($fade: true)
+                @include icon(arrow-right-line, after, true)
+                    display: inline
+                transition: color $color-duration
+                &:hover
+                    color: var(--color-accent)
+            @include media-breakpoint-down(md)
+                .media
+                    display: none
+            @include media-breakpoint-down(md)
+                flex-direction: column-reverse
+                gap: $spacing-2
+                .program-title a
+                    align-items: baseline
+                    display: flex
+                    &::after
+                        opacity: 1
+            @include media-breakpoint-up(md)
+                flex-direction: row-reverse
+                .program-content
                     flex: 1
-                .program-title,
+                    flex-wrap: wrap
+                    .program-title
+                        flex: 1
+                    .program-title,
+                    [itemprop="abstract"]
+                        min-width: columns(6)
+                    .program-diploma
+                        width: var(--grid-gutter)
+                        text-align: center
+                .media
+                    flex-shrink: 0
+                    margin-bottom: 0
+                    width: columns(2)
+            @include in-page-with-sidebar
+                .program-diploma + [itemprop="abstract"]
+                    padding-right: var(--grid-gutter)
+                    width: 100%
+            @include in-page-without-sidebar
+                .program-title
+                    @include h2
                 [itemprop="abstract"]
-                    min-width: columns(6)
+                    width: columns(9)
                 .program-diploma
-                    width: var(--grid-gutter)
-                    text-align: center
-            .media
-                flex-shrink: 0
-                margin-bottom: 0
-                width: columns(2)
-        @include in-page-with-sidebar
-            .program-diploma + [itemprop="abstract"]
-                padding-right: var(--grid-gutter)
-                width: 100%
-        @include in-page-without-sidebar
-            .program-title
-                @include h2
-            [itemprop="abstract"]
-                width: columns(9)
-            .program-diploma
-                margin-left: offset(1)
+                    margin-left: offset(1)
     &--light
         .program
             &:first-child
