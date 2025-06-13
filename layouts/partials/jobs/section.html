@@ -9,9 +9,11 @@
     {{ partial "contents/list.html" . }}
   {{ end }}
 
-  <div class="container">
+  <div class="taxonomies-container">
     {{ partial "taxonomies/section-list.html" . }}
+  </div>
 
+  <div class="container">
     {{ partial "jobs/partials/jobs.html" (dict 
         "jobs" .RegularPages
         "layout" site.Params.jobs.index.layout
