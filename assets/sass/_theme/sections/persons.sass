@@ -7,23 +7,14 @@
         a, address
             @include small
             position: relative
-            text-align: right
             z-index: 2
-        li
-            align-items: baseline
-            display: flex
-            justify-content: space-between
-            + li
-                margin-top: $spacing-1
-        ul + ul
-            margin-top: $spacing-1
+        li + li
+                margin-top: $spacing-2
     @include media-breakpoint-down(md)
         .contacts-details
             margin-top: $spacing-3
             span
                 flex-shrink: 0
-            a, address
-                text-align: right
 
 article.person
     @include article
@@ -44,14 +35,17 @@ article.person
     .description
         @include small
         flex-grow: 1
+        margin-top: $spacing-3
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing-3
+        .description
+            margin-top: $spacing-2
         .avatar
             align-self: start
             flex-shrink: 0
             margin-bottom: 0
-            width: 100px
+            width: columns(3)
     @include media-breakpoint-down(md)
         justify-content: space-between
         .description
@@ -59,7 +53,6 @@ article.person
         .avatar
             order: 1
             margin-right: 0
-            width: 100px
     @include in-page-without-sidebar
         .avatar
             width: 100%
