@@ -4,7 +4,9 @@
   <nav class="breadcrumb-nav {{ if $is_extendable }} breadcrumb-nav--extendable{{ end }}" aria-label="{{ i18n "commons.breadcrumb.title" }}">
 
     {{ if $is_extendable }}
-      <button class="link" aria-controls="breadcrumb" aria-expanded="false">{{ i18n "commons.breadcrumb.show" }}</button>
+      <button class="link" aria-controls="breadcrumb" aria-expanded="false" type="button">
+        {{ i18n "commons.breadcrumb.show" }}
+      </button>
     {{ end }}
 
     {{- $path := strings.TrimSuffix "/" .RelPermalink -}}
