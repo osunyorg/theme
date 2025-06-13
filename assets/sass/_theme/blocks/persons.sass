@@ -42,10 +42,22 @@
                     width: columns(2)
     &--grid
         .persons
-            @include grid(1)
+            @include grid(1, false, $spacing-5)
             @include grid(2, md)
             @include grid(4, lg)
             @include grid(6, xxl)
+        @include media-breakpoint-down(desktop)
+            .person
+                flex-direction: column
+                gap: 0
+                padding-top: $spacing-2
+                .avatar
+                    order: -1
+                    position: absolute
+                    right: 0
+                    top: 0
+                    width: 20%
+                // @include person-contacts-details-in-list
         @include in-page-with-sidebar
             .persons
                 @include grid(1, desktop)
