@@ -12,7 +12,12 @@
   {{ partial "taxonomies/section-list-container.html" . }}
 
   <div class="container">
-    {{ partial "jobs/partials/jobs.html" . }}
+    {{ partial "jobs/partials/jobs.html" (dict 
+        "jobs" .RegularPages
+        "layout" site.Params.jobs.index.layout
+        "options" site.Params.jobs.index.options
+      )}}
+
     {{ partial "commons/pagination.html" . }}
   </div>
 </div>
