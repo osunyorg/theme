@@ -1,0 +1,56 @@
+{{ $job := .job }}
+{{ $layout := .layout | default "list" }}
+{{ $heading_level := .heading_level }}
+{{ $with_more := .with_more }}
+{{ $options := .options }}
+
+{{ with $job }}
+  {{ $class := "job" }}
+  {{ if and .Params.image $options.image }}
+    {{ $class = printf "%s job--with-image" $class }}
+    {{ $image_direction := partial "GetImageDirection" .Params.image }}
+    {{ $class = printf "%s %s" $class $image_direction }}
+  {{ end }}
+
+  {{ $dates := .Params.dates }}
+
+  <article class="{{ $class }}" 
+      itemscope itemtype="https://schema.org/JobPosting">
+    <div class="job-content">
+      {{ partial "jobs/partials/job/heading.html" (dict
+          "item" .
+          "options" $options
+          "level" $heading_level
+          "itemprop" "title"
+        )}}
+
+      {{ if and $options.summary .Params.summary }}
+        <div class="job-description" itemprop="abstract">
+          {{ partial "jobs/partials/job/summary.html" . }}
+        </div>
+      {{ end }}
+
+      {{ if $options.dates }}
+        {{ partial "jobs/partials/job/dates.html" . }}
+      {{ end }}
+
+      {{ if $options.categories }}
+        {{ partial "commons/categories.html" ( dict
+          "context" .
+          "kind" "job"
+        )}}
+      {{- end -}}
+
+      {{ if $with_more }}
+        {{ partial "commons/item/more.html" . }}
+      {{- end -}}
+    </div>
+
+    {{ if $options.image }}
+      {{ partial "jobs/partials/job/media.html" (dict 
+          "image" $job.Params.image
+          "layout" $layout
+        )}}
+    {{ end }}
+  </article>
+{{ end }}
