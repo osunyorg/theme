@@ -21,13 +21,6 @@
             "in_itemscope" true
           ) }}
 
-        {{ with .postal_address }}
-          <li class="address">
-            <span class="meta">{{ i18n "commons.contact.address" }}</span>
-            {{ partial "commons/address.html" . }}
-          </li>
-        {{ end }}
-
         {{ with .phone_numbers }}
           {{ with or .phone_mobile .phone }}
             <li class="phone">
@@ -42,6 +35,14 @@
             </li>
           {{ end }}
         {{ end }}
+
+        {{ with .postal_address }}
+          <li class="address">
+            <span class="meta">{{ i18n "commons.contact.address" }}</span>
+            {{ partial "commons/address.html" . }}
+          </li>
+        {{ end }}
+
       </ul>
     {{ end }}
   </div>
