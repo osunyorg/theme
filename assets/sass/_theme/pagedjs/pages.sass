@@ -1,14 +1,20 @@
 @page
     size: A4 portrait
     margin-bottom: 20mm
-    margin-left: 20mm
-    margin-right: 20mm
+    margin-left: 25mm
+    margin-right: 25mm
     margin-top: 20mm
 @page:left
+    @top-left
+        content: string(title)
+        font-size: 8px
     @bottom-left
         content: counter(page)
         font-size: 8px
 @page:right
+    @top-right
+        content: string(title)
+        font-size: 8px
     @bottom-right
         content: counter(page)
         font-size: 8px
@@ -17,22 +23,17 @@
         content: none
     @bottom-right
         content: none
+
 @page cover
+    @top-right
+        content: none
     @bottom-right
         content: none
 @page back
+    @bottom-right
+        content: none
     @bottom-left
         content: none
+
 section
     break-before: right
-.cover
-    page: cover
-    img
-        max-width: 100%
-    &--with-image
-        h1
-            margin-top: 10mm !important
-.back
-    page: back
-    break-before: left
-

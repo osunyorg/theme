@@ -1,0 +1,28 @@
+<div class="block-files">
+  <ul class="files">
+    {{- range .data.files }}
+      {{ if ne .id "" }}
+        {{ if partial "GetMedia" .id }}
+          <li {{- if .image }} class="with-image" {{- end }}>
+            <figure>
+              {{ partial "commons/download-link" (dict 
+                "id" .id
+                "title" .title
+                "with_caption" true
+              ) }}
+            </figure>
+            {{ with .image }}
+              {{ partial "commons/image.html" (dict
+                  "image"    .
+                  "sizes"    site.Params.image_sizes.blocks.call_to_action
+                )}}
+            {{ end }}
+            {{ with partial "GetMedia" .id }}
+              {{ partial "pagedjs/partials/qr.html" (dict "text" .download_url "class" "block-files__qr") }}
+            {{ end }}
+          </li>
+        {{ end -}}
+      {{ end -}}
+    {{ end -}}
+  </ul>
+</div>
