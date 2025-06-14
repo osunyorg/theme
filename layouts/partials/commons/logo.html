@@ -7,13 +7,21 @@
   {{ $file = $logo.default }}
   {{ $file_darkmode = $logo.darkmode }}
 {{ end }}
+{{ $static_src := site.Params.logo.static_src }}
 
 <a class="logo {{- if $file_darkmode }} with-darkmode {{ end -}}" href="{{ site.Home.Permalink }}" title="{{ i18n "commons.index" (dict "Title" site.Title )}}">
   {{ if $file }}
-    {{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file "static" true) }}
+    {{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file "static" $static_src) }}
+    {{ if not $static_src }}
+      {{ $file = (resources.Get (trim $file "/assets") | fingerprint).RelPermalink }}
+    {{ end }}
     <img src="{{ $file }}" alt="{{ site.Title }}" height="{{ index $fileDimensions 1 }}" width="{{ index $fileDimensions 0 }}">
+
     {{ if $file_darkmode }}
-      {{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file_darkmode "static" true) }}
+      {{ $fileDimensions := partial "GetImageDimensions" (dict "context" . "file" $file_darkmode "static" $static_src) }}
+      {{ if not $static_src }}
+        {{ $file_darkmode = (resources.Get (trim $file_darkmode "/assets") | fingerprint).RelPermalink }}
+      {{ end }}
       <img class="logo-darkmode" src="{{ $file_darkmode }}" alt="{{ site.Title }}" height="{{ index $fileDimensions 1 }}" width="{{ index $fileDimensions 0 }}">
     {{ end }}
   {{ else }}
