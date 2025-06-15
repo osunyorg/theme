@@ -1,10 +1,27 @@
 .block
-    margin-bottom: 10mm
+    margin-bottom: 5mm
     &-chapter
         line-height: 160%
         .notes
             *
                 font-size: 9pt
+    &-files
+        ul.files
+            list-style: none
+            padding: 0
+            li
+                display: flex
+                justify-content: space-between
+                border-bottom: 1px solid black     
+                figure
+                    margin: 0
+                a
+                    color: black
+                    text-decoration: none
+        &__qr
+            margin-right: -6px
+            max-height: 30mm
+            max-width: 30mm
     &-gallery
         .credit
             *
@@ -24,7 +41,7 @@
             width: 30mm
     &-testimonials
         .block-testimonials__testimonial
-            margin-left: 30mm
+            margin: $spacing-3 0 $spacing-5
             blockquote
                 margin: 0 !important
                 p
@@ -55,6 +72,8 @@
             display: flex
             flex-direction: row-reverse
             justify-content: start
+            margin-bottom: $spacing-2
+            break-inside: avoid
             .texts
                 *
                     margin-bottom: 0
