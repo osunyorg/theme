@@ -1,17 +1,18 @@
 <script>
   const anchorTags = document.getElementsByTagName('a');
   for (let i = anchorTags.length - 1; i >= 0; i--) {
-    const aTag = anchorTags[i];
-    const noteTag = document.createElement('note');
-    noteTag.textContent = aTag.getAttribute('href');
-    aTag.append(noteTag);
+    const a = anchorTags[i];
+    const note = document.createElement('span');
+    note.classList.add('note__link');
+    note.textContent = a.getAttribute('href');
+    a.insertAdjacentElement('afterend', note);
   }
-  const osunyNotes = document.getElementsByClassName('note');
-  for (let i = osunyNotes.length - 1; i >= 0; i--) {
-    const osunyNote = osunyNotes[i];
-    console.log(osunyNote)
-    const pagedNote = document.createElement('note');
-    pagedNote.textContent = osunyNote.getElementsByClassName('note__content')[0].textContent;
-    osunyNote.parentNode.replaceChild(pagedNote, osunyNote);
-  }
+  // const osunyNotes = document.getElementsByClassName('note');
+  // for (let i = osunyNotes.length - 1; i >= 0; i--) {
+  //   const osunyNote = osunyNotes[i];
+  //   const note = document.createElement('span');
+  //   note.classList.add('note__osuny');
+  //   note.textContent = osunyNote.getElementsByClassName('note__content')[0].textContent;
+  //   osunyNote.parentNode.replaceChild(note, osunyNote);
+  // }
 </script>
