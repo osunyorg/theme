@@ -3,7 +3,12 @@
 </section>
 {{ range .Pages }}
   <section>
-    <h1>{{ .Title }}</h1>
+    <hgroup>
+      <h1>{{ .Title }}</h1>
+      {{ with .Params.subtitle }}
+        <p class="subtitle">{{ . }} </p>
+      {{ end }}
+    </hgroup>
     {{ partial "pagedjs/partials/summary.html" .Params.summary }}
     {{ partial "pagedjs/partials/blocks.html" .Params.contents }}
   </section>

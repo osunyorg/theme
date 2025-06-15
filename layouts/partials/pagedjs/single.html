@@ -5,7 +5,12 @@
       <img class="cover__image" src="{{ $image.direct_url }}" />
     {{ end }}
   {{ end }}
-  <h1>{{ .Title }} </h1>
+  <hgroup>
+    <h1>{{ .Title }} </h1>
+    {{ with .Params.subtitle }}
+      <p class="subtitle">{{ . }} </p>
+    {{ end }}
+  </hgroup>
   {{ partial "pagedjs/partials/authors.html" .Params.authors }}
   {{ partial "pagedjs/partials/website.html" . }}
 </section>
