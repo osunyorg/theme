@@ -7,12 +7,12 @@
     note.textContent = a.getAttribute('href');
     a.insertAdjacentElement('afterend', note);
   }
-  // const osunyNotes = document.getElementsByClassName('note');
-  // for (let i = osunyNotes.length - 1; i >= 0; i--) {
-  //   const osunyNote = osunyNotes[i];
-  //   const note = document.createElement('span');
-  //   note.classList.add('note__osuny');
-  //   note.textContent = osunyNote.getElementsByClassName('note__content')[0].textContent;
-  //   osunyNote.parentNode.replaceChild(note, osunyNote);
-  // }
+  const osunyNotes = document.getElementsByClassName('note');
+  for (let i = osunyNotes.length - 1; i >= 0; i--) {
+    const osunyNote = osunyNotes[i];
+    const note = document.createElement('span');
+    note.classList.add('note__osuny');
+    note.textContent = osunyNote.getElementsByClassName('note__content')[0].textContent;
+    osunyNote.parentNode.replaceChild(note, osunyNote);
+  }
 </script>
