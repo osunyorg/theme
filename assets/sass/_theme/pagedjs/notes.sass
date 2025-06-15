@@ -1,0 +1,57 @@
+@page
+    counter-reset: footnote 0
+    @footnote
+        float: bottom
+
+note 
+    float: footnote
+    font-size: 8pt
+    line-height: 12pt
+
+.pagedjs_footnote_area
+    margin-top: 3mm
+    margin-bottom: 5mm
+
+[data-footnote-call]::after
+    vertical-align: super
+    font-size: 65%
+    line-height: normal
+// Chrome says it supports it, but does not
+@supports ( font-variant-position: super )
+    [data-footnote-call]::after
+        vertical-align: super
+        font-size: 65%
+        line-height: normal
+
+// .note
+//     &_call
+//         background: black
+//         color: white
+//     &__content
+//         position: absolute
+//         right: -2cm
+//         width: 3cm
+//         font-size: 8pt
+//         line-height: 10pt
+
+// @page:left
+//     .note
+//         &__content
+//             left: -3cm
+// @page:right
+//     .note
+//         &__content
+//             right: -3cm
+
+// @page:left
+//     @left-top 
+//         content: element(sidenote, all-once)
+//         padding: 5mm
+// @page:right
+//     @right-top 
+//         content: element(sidenote, all-once)
+//         padding: 5mm
+
+// .note__content
+//     position: note(sidenote)
+//     margin-bottom: 8pt

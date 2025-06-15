@@ -1,0 +1,17 @@
+<script>
+  const anchorTags = document.getElementsByTagName('a');
+  for (let i = anchorTags.length - 1; i >= 0; i--) {
+    const aTag = anchorTags[i];
+    const noteTag = document.createElement('note');
+    noteTag.textContent = aTag.getAttribute('href');
+    aTag.append(noteTag);
+  }
+  const osunyNotes = document.getElementsByClassName('note');
+  for (let i = osunyNotes.length - 1; i >= 0; i--) {
+    const osunyNote = osunyNotes[i];
+    console.log(osunyNote)
+    const pagedNote = document.createElement('note');
+    pagedNote.textContent = osunyNote.getElementsByClassName('note__content')[0].textContent;
+    osunyNote.parentNode.replaceChild(pagedNote, osunyNote);
+  }
+</script>
