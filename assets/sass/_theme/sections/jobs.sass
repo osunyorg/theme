@@ -1,17 +1,11 @@
 .job
-    // @include article(auto)
+    @include small-arrow-right-hover(".more")
     .job-dates
         time
             display: inline
             + time
                 &::before
                     content: ' - '
-    .more
-        @include icon(arrow-right-line, after, true)
-            display: inline-block
-            transition: transform 0.3s ease
-    &:hover .more:after
-        transform: translateX($spacing-1)
 
 ul.jobs
     @include list-reset
