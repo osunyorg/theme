@@ -1,11 +1,11 @@
 @mixin unpaginated
     @top-left
         content: none
-    @bottom-left
+    @bottom-left-corner
         content: none
     @top-right
         content: none
-    @bottom-right
+    @bottom-right-corner
         content: none
 
 @page
@@ -19,7 +19,7 @@
         content: string(title)
         font-size: 8pt
         text-transform: uppercase
-    @bottom-left
+    @bottom-left-corner
         content: counter(page)
         font-size: 8pt
 @page:right
@@ -29,7 +29,7 @@
         content: string(title)
         font-size: 8pt
         text-transform: uppercase
-    @bottom-right
+    @bottom-right-corner
         content: counter(page)
         font-size: 8pt
 
@@ -39,7 +39,15 @@
     margin-right: 25mm
     @include unpaginated
 @page back
+    margin-left: 25mm
+    margin-right: 45mm
     @include unpaginated
 
 section
     break-before: right
+
+.pagedjs
+    &_margin-bottom-left-corner,
+    &_margin-bottom-right-corner
+        .pagedjs_margin-content
+            text-align: center

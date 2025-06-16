@@ -12,7 +12,7 @@
     const osunyNote = osunyNotes[i];
     const note = document.createElement('span');
     note.classList.add('note__osuny');
-    note.textContent = osunyNote.getElementsByClassName('note__content')[0].textContent;
+    note.innerHTML = osunyNote.getElementsByClassName('note__content')[0].innerHTML;
     osunyNote.parentNode.replaceChild(note, osunyNote);
   }
 </script>
