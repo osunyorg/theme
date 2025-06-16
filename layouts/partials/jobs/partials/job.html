@@ -45,7 +45,7 @@
       {{- end -}}
     </div>
 
-    {{ if and $job.Params.image $options.image }}
+    {{ if $options.image }}
       {{ partial "jobs/partials/job/media.html" (dict 
           "image" $job.Params.image
           "layout" $layout
