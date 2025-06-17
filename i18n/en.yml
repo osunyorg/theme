@@ -240,6 +240,14 @@ commons:
     megabytes: Megabytes
     kilobytes: Kilobytes
     bytes: bytes
+agenda:
+  access:
+    partical_informations:  Practical information
+  filters:
+    dates:
+      aria_label: Display the calendar
+      title: Dates
+    taxonomies: Filter
 diplomas:
   type: Diploma kind
   count:
@@ -259,6 +267,10 @@ events:
     list:
       title: "Archives for the year {{ .year }}"
   calendar:
+    day:
+      link: Show all for {{ .date }}
+    month:
+      link: Show all for {{ .month }}
     week_days:
       monday: 
         short: Mon
@@ -284,8 +296,9 @@ events:
   count:
     one: "1 event"
     other: "{{ .Count }} events"
-  date: Date
-  hour: Time
+  item:
+    federated: "Event from <span>{{ . }}</span>"
+  more_dates: Show all dates
   none: No event
   next: Next event
   next_aria: Next event “{{ .Title }}”
@@ -297,10 +310,22 @@ events:
   to:
     day: To day
     hour: To hour
+  status:
+    current: Now
+    future: Soon
+    archive: Passed
   unique_day: Date
 exhibitions:
   archives: Previous exhibitions archive
   none: No exhibition.
+  current: Now
+  future: Coming soon
+  item:
+    federated: "Exhibition from <span>{{ . }}</span>"
+  status:
+    current: Now
+    future: Soon
+    archive: Passed
 formats:
   pdf: Adobe Portable Document Format
   jpg: JPEG image
@@ -316,6 +341,14 @@ formats:
   zip: Compressed archive
   gz: Compressed archive
   tar: Compressed archive
+jobs:
+  dates:
+    from: Date
+    to: Closing date
+  next: Next offer
+  next_aria: Next offer “{{ .Title }}”
+  previous: Previous offer
+  previous_aria: Previous offer “{{ .Title }}”
 organizations:
   backlinks:
     events: Events mentioning

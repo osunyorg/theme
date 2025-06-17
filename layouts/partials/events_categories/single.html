@@ -7,9 +7,8 @@
 
   {{ partial "contents/list.html" . }}
 
-  <div class="container">
-    {{ partial "taxonomies/section-list.html" . }}
-  </div>
+  {{ partial "taxonomies/section-list-container.html" . }}
+
   {{ if site.Params.events.index.highlight_exhibitions.active }}
     {{ $exhibitions := where .Pages "Section" "exhibitions" }}
     {{ partial "events/section/exhibitions.html" $exhibitions }}

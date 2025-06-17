@@ -248,6 +248,14 @@ commons:
     megabytes: Mégaoctets
     kilobytes: Kilooctets
     bytes: octets
+agenda:
+  access:
+    partical_informations: Informations pratiques
+  filters:
+    dates: 
+      aria_label: Afficher le calendrier des dates
+      title: Dates
+    taxonomies: Filtrer
 diplomas:
   type: Type de diplôme
   count:
@@ -291,8 +299,8 @@ events:
   count:
     one: "1 événement"
     other: "{{ .Count }} événements"
-  access:
-    partical_informations: Informations pratiques
+  item:
+    federated: "Événement du réseau <span>{{ . }}</span>"
   more_dates: Afficher toutes les dates
   none: Aucun événement
   next: Événement suivant
@@ -301,20 +309,21 @@ events:
   previous: Événement précédent
   previous_aria: Événement précédent “{{ .Title }}”
   regular_event: Événement régulier
-  unique_day: Date
   see_programme: Accéder au programme
   status:
     current: En cours
     future: À venir
     archive: Archive
+  unique_day: Date
   year:
     anchor: Accéder aux événements
-
 exhibitions:
   archives: Expositions passées
   none: Aucune exposition.
   current: En ce moment
   future: Bientôt
+  item:
+    federated: "Exposition du réseau <span>{{ . }}</span>"
   status:
     current: En cours
     future: À venir
@@ -334,6 +343,14 @@ formats:
   zip: Compressed archive
   gz: Compressed archive
   tar: Compressed archive
+jobs:
+  dates:
+    from: Date
+    to: Date de clôture
+  next: Offre suivante
+  next_aria: Offre suivante “{{ .Title }}”
+  previous: Offre précédente
+  previous_aria: Offre précédente “{{ .Title }}”
 organizations:
   backlinks:
     events: Événements mentionnant

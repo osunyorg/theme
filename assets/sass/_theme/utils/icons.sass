@@ -81,3 +81,13 @@
             &:after
                 opacity: 1
                 transform: translateX(0)
+
+@mixin small-arrow-right-hover($target: "&")
+    #{$target}
+        @include icon(arrow-right-line, after, true)
+            display: inline-block
+            transition: transform 0.3s ease
+    &:hover 
+        #{$target}
+            &:after
+                transform: translateX($spacing-1)

@@ -70,7 +70,7 @@ window.osuny.Popup.prototype = {
 
     closeExtendables: function () {
         // Close extendables boxes
-        var closeEvent = new Event('extendable-close');
+        var closeEvent = new Event(window.osuny.EVENTS.EXTENDABLE_CLOSE);
         this.extendables.forEach(function (extendable) {
             extendable.dispatchEvent(closeEvent);
         });

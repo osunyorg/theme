@@ -3,10 +3,12 @@ import './utils/utils';
 import './utils/realViewportHeight';
 import './body';
 
+import './design-system/events';
 import './design-system/accordion';
 import './design-system/clickToCopy';
 import './design-system/extendables';
 import './design-system/extendableList';
+import './design-system/offcanvas';
 import './design-system/font';
 import './design-system/Maps';
 import './design-system/mainMenu';
