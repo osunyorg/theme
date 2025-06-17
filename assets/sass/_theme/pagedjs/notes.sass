@@ -3,6 +3,7 @@
     counter-reset: footnote 0
     @footnote
         float: bottom
+        padding-top: 8mm
 
 @page:left
     @left-top 
@@ -21,9 +22,15 @@
     &__link
         float: footnote
 
-.pagedjs_footnote_area
-    margin-top: 3mm
-    margin-bottom: 5mm
+.pagedjs
+    &_footnote
+        &_content
+            &::before
+                border-top: 0.5pt solid black
+                content: ''
+                display: block
+                transform: translateY(-3mm)
+                width: 2cm
 
 [data-footnote-call]::after
     vertical-align: super
