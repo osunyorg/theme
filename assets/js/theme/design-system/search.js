@@ -23,10 +23,7 @@ window.osuny.Search.prototype.setPageFind = function () {
     var options = {
             element: this.element,
             showSubResults: true,
-            translations: {
-                placeholder: osuny.i18n.search.input_placeholder,
-                search_label: osuny.i18n.search.form_label,
-            },
+            translations: osuny.i18n.search
         },
         attribut;
 
