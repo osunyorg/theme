@@ -9,9 +9,8 @@
 {{- $loading := or .loading "" }}
 
 {{- /* Validate arguments. */}}
-{{- $errors := false}}
+{{- $errors := false }}
 {{- if not $text }}
-  {{- errorf "The %q shortcode requires a %q argument. See %s" .Name "text" .Position }}
   {{- $errors = true }}
 {{- end }}
 
