@@ -9,21 +9,7 @@
         margin-top: $spacing-3
         text-align: left
 
-@mixin person-contacts-details-in-list
-    .contacts-details
-        ul + ul, li + li
-            margin-top: $spacing-2
-        li
-            display: block
-            span
-                padding-right: 0
-            a, address
-                text-align: left
-
 .block-persons
-    article
-        .description
-            margin-top: $spacing-3
     @include in-page-without-sidebar
         .top .description
             max-width: columns(8)
@@ -46,6 +32,9 @@
             @include grid(2, md)
             @include grid(4, lg)
             @include grid(6, xxl)
+        @include media-breakpoint-down(desktop)
+            .contacts-details
+                margin-bottom: $spacing-3
         @include in-page-with-sidebar
             .persons
                 @include grid(1, desktop)
@@ -53,14 +42,13 @@
                 @include media-breakpoint-up(xxl)
                     @include grid(2)
             .person
+                gap: calc(var(--grid-gutter) / 2)
                 .avatar
-                    width: columns(1.5)
+                    // One column width + half gutter width
+                    width: calc(#{columns(1)} + var(--grid-gutter) / 2)
                 .description
-                    margin-top: $spacing-2
-            @include media-breakpoint-up(xl)
-                @include person-contacts-details-in-list
+                    margin-top: $spacing-3
         @include in-page-without-sidebar
-            @include person-contacts-details-in-list
             .person
                 text-align: center
                 .contacts-details
@@ -102,7 +90,6 @@
                     li > span
                         width: offset(1)
             @include in-page-without-sidebar
-                @include person-contacts-details-in-list
                 align-items: center
                 .avatar
                     width: columns(4)
@@ -141,8 +128,11 @@
                 .contacts-details
                     margin-top: 0
                     a, address
-                        width: columns(3)
+                        width: columns(4)
                         text-align: left
+                    li
+                        align-items: baseline
+                        display: flex
                     li > span
                         width: offset(1)
                 > li
@@ -157,14 +147,17 @@
                         > *
                             width: columns(4)
             @include in-page-without-sidebar
+                > li
+                    > div:first-child
+                        width: columns(7)
                 .contacts-details
-                    width: columns(4)
+                    width: columns(5)
             @include in-page-with-sidebar
                 &.with-contacts
                     > li
                         > div:first-child
                             display: block
-                            width: columns(4)
+                            width: columns(3)
                         .contacts-details
-                            width: columns(4)
+                            width: columns(5)
 

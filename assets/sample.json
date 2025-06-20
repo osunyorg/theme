@@ -1,0 +1,15 @@
+{{- $paths := slice -}}
+{{- range .Site.Sections -}}
+  {{- if and (ne .Type "sitemap") -}}
+    {{- $paths = $paths | append .Params.url -}}
+    {{- range $index, $page := (where .Site.Pages "Section" .Type) -}}
+      {{- if eq $index 1 -}}
+        {{- with $page.Params.url -}}
+          {{- $paths = $paths | append . -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $paths | jsonify -}}
+

@@ -5,7 +5,9 @@
       "context" .
     ) }}
 
-  {{ partial "contents/list.html" . }}
+  {{ if (partial "IsFirstPage" .) }}
+    {{ partial "contents/list.html" . }}
+  {{ end }}
 
   <div class="container">
     {{ partial "taxonomies/section-list.html" . }}

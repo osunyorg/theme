@@ -2,7 +2,7 @@
 
 {{ with .Params.contact_details }}
   <div class="contacts-details">
-    {{ if or .websites .social_networks .emails .phone_numbers }}
+    {{ if or .websites .social_networks .emails .phone_numbers .phone_professional .postal_address }}
       <ul>
         {{ with .websites.website }}
           <li class="website">
@@ -20,17 +20,7 @@
             "with_labels" true
             "in_itemscope" true
           ) }}
-      </ul>
-    {{ end }}
 
-    {{ if or .phone_numbers .phone_professional .postal_address }}
-      <ul>
-        {{ with .postal_address }}
-          <li class="address">
-            <span class="meta">{{ i18n "commons.contact.address" }}</span>
-            {{ partial "commons/address.html" . }}
-          </li>
-        {{ end }}
         {{ with .phone_numbers }}
           {{ with or .phone_mobile .phone }}
             <li class="phone">
@@ -45,6 +35,14 @@
             </li>
           {{ end }}
         {{ end }}
+
+        {{ with .postal_address }}
+          <li class="address">
+            <span class="meta">{{ i18n "commons.contact.address" }}</span>
+            {{ partial "commons/address.html" . }}
+          </li>
+        {{ end }}
+
       </ul>
     {{ end }}
   </div>
