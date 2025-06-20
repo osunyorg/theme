@@ -1,4 +1,5 @@
 {{- $is_organizations_block_present := false -}}
+
 {{ range .Params.contents }}
   {{- if eq .template "organizations" -}}
     {{- $is_organizations_block_present = true -}}
@@ -13,11 +14,18 @@
       "with_container" true
     ) }}
 
-  {{ partial "contents/list.html" . }}
+  {{ if .Params.section_taxonomies }}
+    <div class="container">
+      {{ partial "taxonomies/section-list.html" . }}
+    </div>
+  {{ end }}
+
+  {{ if (partial "IsFirstPage" .) }}
+    {{ partial "contents/list.html" . }}
+  {{ end }}
 
   <div class="container">
     {{- if not $is_organizations_block_present -}}
-      {{ partial "taxonomies/section-list.html" . }}
       {{ partial "organizations/partials/organizations.html" . }}
       {{ partial "commons/pagination.html" . }}
     {{ end }}

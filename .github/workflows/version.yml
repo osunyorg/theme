@@ -2,9 +2,12 @@ name: Write version to file
 on:
   release:
     types:
+      - prereleased
       - released
+permissions:
+  contents: write
 jobs:
-  build:
+  update_version_file:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -26,11 +29,16 @@ jobs:
       - name: Commit & Push
         uses: Andro999b/push@v1.3
         with:
-          github_token: ${{ secrets.OSUNY_BOT_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
           force: true
           message: 'Write version to file'
-
+  notify_autoupdate:
+    # This job runs only for full releases
+    if: ${{ github.event.release.prerelease == false }}
+    needs: update_version_file
+    runs-on: ubuntu-latest
+    steps:
       - name: Autoupdate Osuny theme
         uses: dkershner6/post-api-call-action@v1
         with:

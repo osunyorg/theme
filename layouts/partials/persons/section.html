@@ -1,4 +1,5 @@
 {{- $is_block_persons_present := false -}}
+
 {{ range .Params.contents }}
   {{- if eq .template "persons" -}}
     {{- $is_block_persons_present = true -}}
@@ -26,11 +27,18 @@
       "block_wrapped" $summary_block
     ) }}
 
-  {{ partial "contents/list.html" . }}
+  {{ if .Params.section_taxonomies }}
+    <div class="container">
+      {{ partial "taxonomies/section-list.html" . }}
+    </div>
+  {{ end }}
+
+  {{ if (partial "IsFirstPage" .) }}
+    {{ partial "contents/list.html" . }}
+  {{ end }}
 
   <div class="container">
     {{- if not $is_block_persons_present -}}
-      {{ partial "taxonomies/section-list.html" . }}
       {{ partial "persons/section/persons-taxonomies.html" . }}
       {{ partial "persons/partials/list.html" .Paginator.Pages }}
       {{ partial "commons/pagination.html" . }}

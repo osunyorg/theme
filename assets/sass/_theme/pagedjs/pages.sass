@@ -1,38 +1,53 @@
+@mixin unpaginated
+    @top-left
+        content: none
+    @bottom-left-corner
+        content: none
+    @top-right
+        content: none
+    @bottom-right-corner
+        content: none
+
 @page
     size: A4 portrait
     margin-bottom: 20mm
-    margin-left: 20mm
-    margin-right: 20mm
     margin-top: 20mm
 @page:left
-    @bottom-left
+    margin-left: 45mm
+    margin-right: 25mm
+    @top-left
+        content: string(title)
+        font-size: 8pt
+        text-transform: uppercase
+    @bottom-left-corner
         content: counter(page)
-        font-size: 8px
+        font-size: 8pt
 @page:right
-    @bottom-right
+    margin-left: 25mm
+    margin-right: 45mm
+    @top-right
+        content: string(title)
+        font-size: 8pt
+        text-transform: uppercase
+    @bottom-right-corner
         content: counter(page)
-        font-size: 8px
+        font-size: 8pt
+
 @page:blank
-    @bottom-left
-        content: none
-    @bottom-right
-        content: none
+    @include unpaginated
 @page cover
-    @bottom-right
-        content: none
+    margin-right: 25mm
+    @include unpaginated
 @page back
-    @bottom-left
-        content: none
+    margin-left: 25mm
+    margin-right: 45mm
+    @include unpaginated
+
 section
     break-before: right
-.cover
-    page: cover
-    img
-        max-width: 100%
-    &--with-image
-        h1
-            margin-top: 10mm !important
-.back
-    page: back
-    break-before: left
 
+.pagedjs
+    &_margin-bottom-left-corner,
+    &_margin-bottom-right-corner
+        .pagedjs_margin-content
+            text-align: center
