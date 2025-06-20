@@ -4,7 +4,8 @@ on:
     types:
       - prereleased
       - released
-permissions: {}
+permissions:
+  contents: write
 jobs:
   update_version_file:
     runs-on: ubuntu-latest
@@ -28,7 +29,7 @@ jobs:
       - name: Commit & Push
         uses: Andro999b/push@v1.3
         with:
-          github_token: ${{ secrets.OSUNY_BOT_GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
           force: true
           message: 'Write version to file'
