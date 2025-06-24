@@ -1,0 +1,8 @@
+{{ $publications := . }}
+{{ $filter := site.Params.publications.index.filters }}
+
+{{ with $filter.anr }}
+  {{ $publications = where $publications "Params.anr_project_references" "intersect" . }}
+{{ end }}
+
+{{ return $publications }}
