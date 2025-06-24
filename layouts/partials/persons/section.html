@@ -33,12 +33,11 @@
     {{ partial "contents/list.html" . }}
   {{ end }}
 
-  <div class="container">
-    {{- if not $is_block_persons_present -}}
+  {{- if not $is_block_persons_present -}}
+    <div class="container">
       {{ partial "persons/section/persons-taxonomies.html" . }}
       {{ partial "persons/partials/list.html" .Paginator.Pages }}
       {{ partial "commons/pagination.html" . }}
-    {{- end -}}
-  </div>
-
+    </div>
+  {{- end -}}
 </div>

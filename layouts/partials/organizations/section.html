@@ -22,13 +22,17 @@
   {{ partial "taxonomies/section-list-container.html" . }}
 
   {{ if (partial "IsFirstPage" .) }}
+    {{ partial "toc/container.html" (dict
+        "toc" "pages/single/toc.html"
+        "context" .
+      ) }}
     {{ partial "contents/list.html" . }}
   {{ end }}
 
-  <div class="container">
-    {{- if not $is_organizations_block_present -}}
+  {{- if not $is_organizations_block_present -}}
+    <div class="container">
       {{ partial "organizations/partials/organizations.html" . }}
       {{ partial "commons/pagination.html" . }}
-    {{ end }}
-  </div>
+    </div>
+  {{ end }}
 </div>
