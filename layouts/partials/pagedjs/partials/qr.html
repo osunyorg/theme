@@ -8,14 +8,8 @@
 {{- $title := or .title "" }}
 {{- $loading := or .loading "" }}
 
-{{- /* Validate arguments. */}}
-{{- $errors := false }}
-{{- if not $text }}
-  {{- $errors = true }}
-{{- end }}
-
 {{- /* Render image. */}}
-{{- if not $errors }}
+{{- if $text }}
   {{- $opts := dict "level" $level "scale" $scale "targetDir" $targetDir }}
   {{- with images.QR $text $opts -}}
     <img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}"
