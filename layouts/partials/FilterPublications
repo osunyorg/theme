@@ -1,5 +1,5 @@
 {{ $publications := . }}
-{{ $filter := site.Params.publications.index.filters }}
+{{ $filter := site.Params.publications.filters }}
 
 {{ with $filter.anr }}
   {{ $publications = where $publications "Params.anr_project_references" "intersect" . }}
