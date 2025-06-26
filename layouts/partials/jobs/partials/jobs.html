@@ -1,0 +1,17 @@
+{{ $jobs := .jobs }}
+{{ $layout := .layout | default site.Params.jobs.index.layout }}
+{{ $options := .options | default site.Params.jobs.index.options }}
+{{ $heading_level := .heading_level | default 2 }}
+
+<ul class="jobs jobs--{{- $layout }}">
+  {{ range $jobs }}
+    <li>
+      {{ partial "jobs/partials/job.html" (dict
+          "job" .
+          "heading_level" $heading_level
+          "layout" $layout
+          "options" $options
+        )}}
+    </li>
+  {{ end }}
+</ul>

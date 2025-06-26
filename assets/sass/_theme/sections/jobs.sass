@@ -1,0 +1,28 @@
+.job
+    // @include article(auto)
+    .job-dates
+        time
+            display: inline
+            + time
+                &::before
+                    content: ' - '
+
+ul.jobs
+    @include list-reset
+
+.jobs
+    &--alternate
+        @include layout-alternate
+    &--grid
+        @include layout-grid
+    &--large
+        @include layout-large
+    &--list
+        @include layout-list
+
+.jobs__page
+    &:not(.full-width)
+        .section-sidebar
+            @include sidebar
+            .job-infos
+                @include sidebar-infos
