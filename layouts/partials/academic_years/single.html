@@ -1,7 +1,7 @@
 {{ partial "academic_years/single/hero.html" . }}
 
 <div class="document-content">
-  {{ with .Params.people }}
+  {{ with .Params.persons }}
     <div class="container">
       {{ $persons := partial "GetObjectsFromPathSlice" . }}
       {{ partial "persons/partials/list.html" $persons }}
