@@ -4,11 +4,10 @@
   {{ partial "contents/list.html" . }}
 
   <div class="container">
-    {{ $publications := where .Site.Pages "Section" .Type }}
-    {{ $filtered_publications := partial "FilterPublications" $publications }}
-    {{ $paginator := .Paginate $filtered_publications }}
+    {{ $publications := partial "FilterPublications" .Pages }}
+    {{ $paginator := .Paginate $publications }}
 
-    {{ partial "publications/single/statistics.html" $paginator }}
+    {{ partial "publications/single/statistics.html" $publications }}
     {{ partial "publications/partials/publications.html" . }}
     {{ partial "commons/pagination.html" . }}
   </div>
