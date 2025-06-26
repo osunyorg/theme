@@ -1,0 +1,6 @@
+{{ $param := partial "GetSiteParamWithDefault" (dict
+    "param" (printf "%s.%s" .type .param)
+    "default" (printf "default.%s" .param)
+  ) }}
+
+{{ return $param }}
