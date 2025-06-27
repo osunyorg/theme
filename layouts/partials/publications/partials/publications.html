@@ -1,7 +1,7 @@
 <div class="publications">
   {{ if site.Params.publications.index.group_by_year }}
-    {{ $publications := .Paginator.Pages.GroupByDate "2006" }}
-    {{ range $publications }}
+    {{ $publications_by_years := .Paginator.Pages.GroupByDate "2006" }}
+    {{ range $publications_by_years }}
       <section>
         <h2 class="publications-year">{{ .Key }}</h2>
         {{ range .Pages }}
