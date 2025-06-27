@@ -4,6 +4,7 @@ osuny.Timeline = function (timeline) {
     this.timeline = timeline;
     this.updateTitleHeight();
     window.addEventListener('resize', this.updateTitleHeight.bind(this));
+    window.addEventListener(window.osuny.EVENTS.EXTENDABLE_HAS_OPEN, this.updateTitleHeight.bind(this));
 };
 
 osuny.Timeline.prototype.updateTitleHeight = function () {

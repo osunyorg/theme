@@ -1,0 +1,95 @@
+.agenda-filters
+    > .container
+        display: flex
+        align-items: center
+        justify-content: end
+        position: relative
+        @include media-breakpoint-up(desktop)
+            gap: $spacing-3
+        @include media-breakpoint-down(desktop)
+            .dropdown-dates,
+            .filter-taxonomies
+                flex: 50%
+            .dropdown-dates
+                > button
+                    width: 100%
+                    text-align: left
+            .filter-taxonomies
+                .offcanvas-button
+                    @include button-reset
+                    text-align: right
+                    color: inherit
+                    padding: $spacing-2
+                    margin: -$spacing-2
+                    margin-bottom: 0
+                    width: 100%
+                    line-height: 1
+                    margin-left: auto
+                    @include icon(arrow-down-s-line, after)
+                        margin-left: 5px
+                .offcanvas-content
+                    text-align: left
+    .dates-filters
+        .slider
+            @include container
+            overflow: hidden
+            position: relative
+            .slider-arrows
+                justify-content: space-between
+                left: var(--grid-gutter)
+                margin: auto
+                position: absolute
+                right: var(--grid-gutter)
+                top: -$spacing-2
+                pointer-events: none
+                .slider-arrow
+                    pointer-events: auto
+                .slider-arrow-previous
+                    margin-left: 0
+        &__months
+            display: flex
+            gap: var(--grid-gutter)
+            width: 100%
+            @include media-breakpoint-down(desktop)
+                .calendar-month
+                    + .calendar-month
+                        margin-top: 0
+            @include media-breakpoint-up(desktop)
+                .calendar-month
+                    width: columns(4)
+    .dropdown-dates
+        @include dropdown('.dates-filters', $full: true)
+        @include media-breakpoint-down(desktop)
+            position: static
+    .filter-taxonomies
+        .offcanvas-button
+            @include button-reset
+            @include meta
+        .taxonomies-list
+            margin-top: 0
+            margin-bottom: 0
+        @include media-breakpoint-up(desktop)
+            .offcanvas-title,
+            .offcanvas-button,
+            .close
+                display: none
+        @include media-breakpoint-down(desktop)
+            .offcanvas
+                @include offcanvas
+            .dropdown
+                &:first-child
+                    margin-top: 0
+                > button
+                    @include h4
+                .extendable
+                    position: relative
+                    inset: auto
+                    padding-left: 0
+                    padding-right: 0
+                    padding-top: $spacing-1
+                    ul
+                        grid-gap: $spacing-2
+                        li > a
+                            padding-left: 0
+
+

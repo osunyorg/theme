@@ -21,11 +21,19 @@
                 display: inline-block
                 margin-left: $spacing-1
 
+.section-taxonomies-container
+    @include container
+    position: relative
+    @include in-page-with-sidebar
+        z-index: $zindex-toc + 1
+        .taxonomies-list
+            padding-left: offset(4)
+
 .taxonomies-list
     > p
         @include meta
     .dropdown
-        @include dropdown(".taxonomy-categories")
+        @include dropdown(".taxonomy-categories", $section-taxonomies-full-width)
     .taxonomy-categories
         ul
             @include list-reset
@@ -47,10 +55,6 @@
         .dropdown 
             margin-top: $spacing-2
             width: 100%
-            .taxonomy-categories
-                li
-                    a
-                        padding-left: var(--grid-gutter)
     @include media-breakpoint-up(md)
         &--dropdown
             gap: $spacing-3

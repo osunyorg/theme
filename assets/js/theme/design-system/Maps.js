@@ -22,6 +22,15 @@ osuny.Map.prototype.init = function () {
     this.setMarkers();
     this.fitToMapBounds();
     this.setAccessibility();
+    window.addEventListener('resize', this.resize.bind(this));
+};
+
+osuny.Map.prototype.resize = function () {
+    if (this.popups.length === 1) {
+        this.map.closePopup(this.popups[0]);
+        this.map.openPopup(this.popups[0]);
+        this.fitToMapBounds();
+    }
 };
 
 osuny.Map.prototype.setMap = function () {

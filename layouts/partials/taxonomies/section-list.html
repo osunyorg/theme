@@ -1,16 +1,16 @@
-{{ $kind := .Type }}
-{{ $categories_kind := printf "%s_categories" $kind }}
-{{ $categories := where site.Pages "Section" $categories_kind }}
+{{ $type := .Type }}
 {{ $taxonomies := .Params.section_taxonomies }}
-{{ $option := index site.Params $kind }}
-{{ $layout := site.Params.default.index.taxonomies.layout }}
-
-{{ with $option.index.taxonomies }}
-  <div class="taxonomies-list taxonomies-list--{{ $layout }}">
+{{ $param := (printf "%s.index.taxonomies" $type) }}
+{{ $options := partial "GetSiteParamWithDefault" (dict 
+  "param" $param
+  "default" "default.index.taxonomies"
+) }}
+{{ if $options.display }}
+  <div class="taxonomies-list taxonomies-list--{{ $options.layout }}">
     {{ if $taxonomies }}
       {{- range $taxonomies -}}
         {{ if .categories }}
-          {{ if eq $layout "dropdown" }}
+          {{ if eq $options.layout "dropdown" }}
             <div class="dropdown">
               <button aria-controls="categories-{{ .name | anchorize }}" aria-expanded="false">
                 {{ .name }}
@@ -18,7 +18,7 @@
               <div class="extendable taxonomy-categories" id="categories-{{ .name | anchorize }}" data-extendable-close-siblings="true" data-extendable-auto-close="true">
           {{ else }}
             <div class="taxonomy-categories">
-              {{ if site.Params.default.index.taxonomies.show_name }}<span>{{ .name }}</span>{{ end }}
+              {{ if $options.show_name }}<span>{{ .name }}</span>{{ end }}
           {{ end }}
             <ul>
             {{ range .categories }}
@@ -31,7 +31,7 @@
             {{ end }}
               </ul>
             </div>
-          {{ if eq $layout "dropdown" }}
+          {{ if eq $options.layout "dropdown" }}
             </div>
           {{ end }}
         {{- end -}}

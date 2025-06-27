@@ -58,7 +58,6 @@
         .person
             display: flex
             flex-direction: column
-            row-gap: 0
             + .person
                 margin-top: $spacing-4
                 @include media-breakpoint-up(md)
@@ -75,11 +74,14 @@
                 @include icon(arrow-right-line, after, true)
                     margin-left: space()
                     transition: $arrow-duration $arrow-ease-transition
-                @include media-breakpoint-down(md)
-                    text-align: center
             &:hover
                 .more::after
                     margin-left: space(2)
+            @include media-breakpoint-down(md)
+                .more
+                    text-align: center
+                .contacts-details + .more
+                    text-align: left
             @include in-page-with-sidebar
                 .avatar
                     width: columns(3)
