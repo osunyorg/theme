@@ -213,6 +213,12 @@ blockquote, .blockquote
     @include blockquote
     font-style: italic
 
+q
+    &::before
+        content: #{$inline-quotation-tag-open}
+    &::after
+        content: #{$inline-quotation-tag-close}
+
 p
     margin-top: 0
     margin-bottom: 0
@@ -330,4 +336,3 @@ sup
         @include icon($name)
         &::before
             margin-inline-end: pxToRem(5)
-
