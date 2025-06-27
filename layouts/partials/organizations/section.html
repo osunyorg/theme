@@ -9,23 +9,17 @@
 {{ partial "organizations/section/hero.html" . }}
 
 <div class="document-content">
-  {{ partial "toc/container.html" (dict
-      "toc" "toc/default.html"
-      "context" .
-    ) }}
-
   {{ partial "organizations/section/summary.html" (dict
       "context" .
       "with_container" true
     ) }}
-
-  {{ partial "taxonomies/section-list-container.html" . }}
 
   {{ if (partial "IsFirstPage" .) }}
     {{ partial "toc/container.html" (dict
         "toc" "pages/single/toc.html"
         "context" .
       ) }}
+    {{ partial "taxonomies/section-list-container.html" . }}
     {{ partial "contents/list.html" . }}
   {{ end }}
 
