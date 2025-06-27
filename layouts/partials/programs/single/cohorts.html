@@ -1,0 +1,11 @@
+{{ if .Params.cohorts }}
+  <section id="{{ anchorize (i18n "programs.toc.cohorts") }}">
+    <div class="container">
+      <div class="content">
+        <h2>{{ i18n "programs.cohorts" }}</h2>
+        {{ $academic_years := partial "GetObjectsFromPathSlice" .Params.cohorts }}
+        {{ partial "academic_years/partials/academic_years.html" $academic_years }}
+      </div>
+    </div>
+  </section>
+{{ end }}

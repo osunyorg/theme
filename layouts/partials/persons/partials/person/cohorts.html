@@ -1,0 +1,13 @@
+{{ with . }}
+  <div class="person-cohorts">
+    {{ if gt (len .) 1 }}
+      <ul>
+        {{ range . }}
+          <li>{{ .title }}</li>
+        {{ end }}
+      </ul>
+    {{ else }}
+      <p>{{ (index . 0).title }}</p>
+    {{ end }}
+  </div>
+{{ end }}
