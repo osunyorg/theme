@@ -18,9 +18,14 @@
     {{- partial "header/header.html" . -}}
     <main
         id="main"
-        {{ if .Params.contents }} class="page-with-blocks"{{ end }} 
-        {{ if site.Params.search.active }}data-pagefind-body{{ end }}
-        {{ if .Params.ignore.in_search }}data-pagefind-ignore{{ end }}
+        {{ if .Params.contents }}
+          class="page-with-blocks"
+        {{ end }}
+        {{ if .Params.ignore.in_search }}
+          data-pagefind-ignore
+        {{ else if site.Params.search.active }}
+          data-pagefind-body
+        {{ end }}
         >
       {{ partial "commons/search/button.html" "fixed" }}
       {{- block "main" . }}{{- end }}
