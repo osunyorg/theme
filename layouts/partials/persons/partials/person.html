@@ -35,6 +35,9 @@
     {{ if eq $layout "large" }}
       <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
     {{ end }}
+    {{ if $options.cohorts }}
+      {{ partial "persons/partials/person/cohorts.html" $person.Params.cohorts }}
+    {{ end }}
   </div>
   {{ if $options.image }}
     <div class="avatar" itemprop="image">

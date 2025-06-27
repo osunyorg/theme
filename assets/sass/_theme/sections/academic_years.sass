@@ -1,0 +1,18 @@
+.academic_years
+    &__persons
+        padding-left: columns(6)
+        .persons
+            @include list-reset
+            @include layout-list
+            .person
+                display: flex
+                .avatar
+                    width: columns(2)
+                &-cohorts
+                    ul
+                        @include list-reset
+                        li 
+                            display: inline
+                            + li
+                                &::before
+                                    content: ' & '
