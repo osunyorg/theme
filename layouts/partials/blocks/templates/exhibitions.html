@@ -1,0 +1,33 @@
+{{- $block := .block }}
+{{- $block_class := partial "GetBlockClass" .block -}}
+{{- with .block.data -}}
+  {{- $options := .options -}}
+  {{- $layout := .layout | default "list" -}}
+  
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ if .exhibitions }}
+          <ul class="exhibitions exhibitions--{{- $layout -}}">
+            {{ range .exhibitions }}
+              {{ $exhibitions := site.GetPage .path }}
+              {{ with $exhibitions }}
+                <li>
+                    {{ partial "exhibitions/partials/exhibition.html" (dict
+                      "exhibition" .
+                      "layout" $layout
+                      "options" $options
+                      "heading_level" $block.ranks.children
+                    ) }}
+                </li>
+              {{ end }}
+            {{ end }}
+          </ul>
+        {{ else if .no_exhibitions_message }}
+          <p>{{ partial "PrepareHTML" .no_exhibitions_message }}</p>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end -}}
