@@ -1,4 +1,10 @@
 {{ $academic_years := . }}
-{{ range $academic_years }}
-  {{ partial "academic_years/partials/academic_year.html" . }}
+{{ with $academic_years }}
+  <ul class="academic_years-list">
+    {{ range . }}
+      <li>
+        {{ partial "academic_years/partials/academic_year.html" . }}
+      </li>
+    {{ end }}
+  </ul>
 {{ end }}

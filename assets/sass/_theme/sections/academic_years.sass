@@ -27,3 +27,13 @@
                     align-items: center
                     .avatar
                         width: columns(2)
+
+.academic_years-list
+    @include layout-list
+    li + li
+        border-top: var(--border-width) solid var(--color-border)
+    .academic_year
+        &-title
+            @include h2
+            text-decoration: none
+            @include arrow-right-hover()
