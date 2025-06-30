@@ -24,6 +24,14 @@
         >
       {{ partial "commons/search/button.html" "fixed" }}
       {{- block "main" . }}{{- end }}
+      {{ if in site.Params.breadcrumb.positions "before-footer" }}
+        <div class="container breadcrumb-container">
+          {{ partial "commons/breadcrumbs.html" (dict
+              "context" .
+              "position" "before-footer"
+              ) }}
+        </div>
+      {{ end }}
       {{- partial "hooks/before-main-end" . -}}
     </main>
     {{- partial "footer/footer.html" . -}}

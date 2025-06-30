@@ -1,6 +1,7 @@
 
 {{ $direction := "" }}
-{{ $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero" }}
+{{ $breadcrumb_class := slice }}
+{{ $breadcrumb_is_after_hero := in site.Params.breadcrumb.positions "after-hero" }}
 {{ $display_breadcrumb := .breadcrumb | default true }}
 {{ $subtitle := .subtitle }}
 {{ if .image }}
@@ -26,15 +27,20 @@
   {{ end }}
 {{ end }}
 
-{{ $breadcrumb_class := printf "has-breadcrumb-%s" site.Params.breadcrumb.position }}
+{{ range site.Params.breadcrumb.positions }}
+  {{ if not (in . "footer") }}
+    {{ $breadcrumb_class = $breadcrumb_class | append (printf "has-breadcrumb-%s" .) }}
+  {{ end }}
+{{ end }}
+{{ $breadcrumb_class = delimit $breadcrumb_class " " }}
 
-<header class="hero {{ if .image }}hero--with-image hero--image-{{- $direction }}{{ end }} {{ if $breadcrumb_is_after_hero }} hero--no-margin {{ end }} {{ $breadcrumb_class }} ">
+<header class="hero {{ if .image }}hero--with-image hero--image-{{- $direction }}{{ end }} {{ if $breadcrumb_is_after_hero }} hero--no-margin {{ end -}} {{- $breadcrumb_class -}} ">
 
   {{- partial "hooks/after-hero-start" . -}}
 
   <div class="container">
-    {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-start") }}
-      {{ partial "header/breadcrumbs.html" .context }}
+    {{ if and $display_breadcrumb (in site.Params.breadcrumb.positions "hero-start") }}
+      {{ partial "commons/breadcrumbs.html" (dict "context" .context) }}
     {{ end }}
     <div class="content">
       <div class="hero-text">
@@ -88,22 +94,22 @@
       {{ end }}
 
     </div>
-    {{ partial "hooks/before-hero-content-end.html" .context }}
+    {{ partial "hooks/before-hero-content-end.html" (dict "context" .context) }}
   </div>
 
   {{ if .hero_complement }}
     {{ partial .hero_complement .context }}
   {{ end }}
 
-  {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-end") }}
+  {{ if and $display_breadcrumb (in site.Params.breadcrumb.positions "hero-end") }}
     <div class="container breadcrumb-container">
-      {{ partial "header/breadcrumbs.html" .context }}
+      {{ partial "commons/breadcrumbs.html" (dict "context" .context) }}
     </div>
   {{ end }}
 </header>
 
 {{ if and $display_breadcrumb $breadcrumb_is_after_hero }}
   <div class="container breadcrumb-container">
-    {{ partial "header/breadcrumbs.html" .context }}
+    {{ partial "commons/breadcrumbs.html" (dict "context" .context) }}
   </div>
 {{ end }}
