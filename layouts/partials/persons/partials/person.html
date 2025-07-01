@@ -29,8 +29,11 @@
         {{ end }}
       </div>
     {{ end }}
-    {{ if and $options.contact $person.Params.contact_details}}
-      {{ partial "commons/contact-details.html" $person }}
+    {{ if and $options.contact $person.Params.contact_details }}
+      {{ partial "commons/contact-details.html" (dict
+          "subject" $person
+          "with_labels" site.Params.persons.contact_details.with_labels
+        ) }}
     {{ end }}
     {{ if eq $layout "large" }}
       <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
