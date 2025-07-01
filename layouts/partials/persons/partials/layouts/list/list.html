@@ -21,7 +21,10 @@
       </div>
 
       {{ if and $options.contact $person.Params.contact_details }}
-        {{ partial "commons/contact-details.html" $person }}
+        {{ partial "commons/contact-details.html" (dict
+            "subject" $person
+            "with_socials_labels" false
+          ) }}
       {{ end }}
     </li>
   {{- end -}}
