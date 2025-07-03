@@ -11,3 +11,5 @@ This project is tested with BrowserStack
 ## Plugins
 
 [Site alumni](https://github.com/osunyorg/osuny-plugin-alumni-site)
+
+[Masonry](https://github.com/osunyorg/osuny-masonry)
