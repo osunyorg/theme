@@ -1,3 +1,6 @@
+{{ $publications := partial "FilterPublications" .Pages }}
+{{ $paginator := .Paginate $publications }}
+
 <div class="publications">
   {{ if site.Params.publications.index.group_by_year }}
     {{ $publications_by_years := .Paginator.Pages.GroupByDate "2006" }}
