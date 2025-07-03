@@ -1,9 +1,11 @@
 {{ $attribute := "" }}
 
-{{ if .Params.ignore.in_search }}
-  {{ $attribute = "data-pagefind-ignore" }}
-{{ else if site.Params.search.active }}
-  {{ $attribute = "data-pagefind-body" }}
+{{ if site.Params.search.active }}
+  {{ if .Params.ignore.in_search }}
+    {{ $attribute = "data-pagefind-ignore" }}
+  {{ else }}
+    {{ $attribute = "data-pagefind-body" }}
+  {{ end }}
 {{ end }}
 
 {{ return $attribute }}
