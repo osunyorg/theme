@@ -1,12 +1,15 @@
-{{- if and site.Params.organizations.prefer_image_over_logo .Params.image -}}
-  <div class="media media--image">
-    {{ partial "commons/image.html" (dict
-        "image"    .Params.image
-        "sizes"    site.Params.image_sizes.sections.organizations.item
-      )}}
-  </div>
+{{ $prefer_images := site.Params.organizations.prefer_image_over_logo }}
+{{ $layout := .layout }}
+
+{{- if and $prefer_images .context.Params.image -}}
+  {{ partial "commons/item/media.html" (dict
+      "image" .context.Params.image
+      "class" "media--image"
+      "type" "organizations"
+      "layout" $layout
+    )}}
 {{- else -}}
   <div class="media media--logo">
-    {{- partial "organizations/partials/logo.html" . -}}
+    {{- partial "organizations/partials/logo.html" .context -}}
   </div>
 {{- end -}}

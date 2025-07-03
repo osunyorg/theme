@@ -1,10 +1,14 @@
 {{ $image := .image }}
 {{ $type := .type | default "page" }}
 {{ $layout := .layout | default "item" }}
-
 {{ $sizes := site.Params.image_sizes.sections.pages.item }}
+{{ $class := "media" }}
+{{ with .class }}
+  {{ $class = printf "%s %s" $class . }}
+{{ end }}
+
 {{ with index site.Params.image_sizes.sections $type }}
-  {{ with index . $layout }}
+{{ with index . $layout }}
     {{ $sizes = . }}
   {{ end }}
 {{ end }}
@@ -13,7 +17,7 @@
   {{ $sizes = .sizes }}
 {{ end }}
 
-<div class="media">
+<div class="{{ $class }}">
   {{- if $image -}}
     {{- partial "commons/image.html" (dict
         "image" $image

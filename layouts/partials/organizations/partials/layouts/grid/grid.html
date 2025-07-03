@@ -1,5 +1,6 @@
 {{ $logo_index := .logo_index }}
 {{ $options := .options }}
+{{ $layout := .layout }}
 {{ $heading_level := .heading_level | default 2 }}
 
 <div class="grid organizations {{- if $options.summary }} with-summaries {{- end }}">
@@ -9,6 +10,7 @@
         {{ partial "organizations/partials/organization.html" (dict
             "organization" .
             "options" $options
+            "layout" $layout
             "heading_level" $heading_level
           ) }}
       {{ end }}
@@ -23,6 +25,7 @@
             )
           )
           "options" $options
+          "layout" $layout
           "heading_level" $heading_level
         ) }}
     {{ end }}

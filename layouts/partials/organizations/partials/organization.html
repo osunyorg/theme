@@ -1,4 +1,5 @@
 {{ $options := .options | default site.Params.organizations.index.options }}
+{{ $layout := .layout }}
 {{ $organization := .organization }}
 {{ $heading_level := .heading_level | default 2 }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
@@ -19,7 +20,6 @@
     {{ end }}>
 
     <div class="organization-content">
-
       {{ $heading_tag.open }}
         {{- if $options.link -}}
           <a href="{{ .Permalink }}" 
@@ -48,9 +48,10 @@
       {{ end }}
     </div>
     {{ if $options.logo }}
-      {{ if $options.logo }}
-        {{ partial "organizations/partials/organization/image.html" . }}
-      {{ end }}
+      {{ partial "organizations/partials/organization/image.html" (dict
+          "context" .
+          "layout" $layout
+        )}}
     {{ end }}
   </article>
 {{ end }}
