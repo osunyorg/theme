@@ -1,0 +1,9 @@
+{{ $attribute := "" }}
+
+{{ if .Params.ignore.in_search }}
+  {{ $attribute = "data-pagefind-ignore" }}
+{{ else if site.Params.search.active }}
+  {{ $attribute = "data-pagefind-body" }}
+{{ end }}
+
+{{ return $attribute }}
