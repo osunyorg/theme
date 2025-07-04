@@ -1,5 +1,4 @@
 var osuny = window.osuny || {};
-osuny.ExtendableList = osuny.ExtendableList || {};
 
 osuny.ExtendableList = function (element) {
     osuny.Extendable.call(this, element);
@@ -33,12 +32,9 @@ osuny.ExtendableList.prototype.deactivate = function () {
     });
 }
 
-osuny.ExtendableList.prototype.toggle = function (opened, fromOutside) {
-    osuny.Extendable.prototype.toggle.call(this, opened, fromOutside);
-    if (this.state.opened) {
-        this.element.classList.remove(this.hideClass);
-        this.focusFirstItem();
-    }
+osuny.ExtendableList.prototype.open = function (opened, fromOutside) {
+    this.element.classList.remove(this.hideClass);
+    this.focusFirstItem();
 };
 
 osuny.ExtendableList.prototype.focusFirstItem = function (opened) {

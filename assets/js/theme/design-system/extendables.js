@@ -7,7 +7,7 @@ osuny.Extendable = function (element) {
     this.buttons = document.querySelectorAll('[aria-controls=' + this.element.id + ']');
     this.state = {
         opened: false,
-        // Button who opened the extendable
+        // Button which opened the extendable
         openedByButton: null
     };
     this.options = {
@@ -35,11 +35,11 @@ osuny.Extendable.prototype.listen = function () {
 
     window.addEventListener('keydown', function (event) {
         if (event.keyCode === 27 || event.key === 'Escape') {
-            this.toggle(false);
+            this.close();
         }
     }.bind(this));
 
-    this.element.addEventListener(window.osuny.EVENTS.EXTENDABLE_CLOSE, this.toggle.bind(this, false, true));
+    this.element.addEventListener(window.osuny.EVENTS.EXTENDABLE_CLOSE, this.closeQuietly.bind(this));
 };
 
 osuny.Extendable.prototype.handleAutoClose = function () {
@@ -50,7 +50,7 @@ osuny.Extendable.prototype.handleAutoClose = function () {
             isInTarget = this.element.contains(event.target);
         }
         if (this.state.opened && event.target !== this.state.openedByButton && !isInTarget) {
-            this.toggle(false);
+            this.close();
         }
     }.bind(this));
 };
@@ -61,27 +61,44 @@ osuny.Extendable.prototype.a11yFocus = function (button) {
     }
 };
 
-osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
-    this.state.opened = typeof opened !== 'undefined' ? opened : !this.state.opened;
+osuny.Extendable.prototype.toggle = function () {
+    if (this.state.opened) {
+        this.close();
+    } else {
+        this.open();
+    }
+};
 
-    if (this.state.opened && this.options.closeSiblings) {
+osuny.Extendable.prototype.open = function () {
+    this.state.opened = true;
+    if (this.options.closeSiblings) {
         this.closeSiblings();
     }
-
     this.setButtonAriaExpanded();
-
-    if (!this.state.opened && this.state.openedByButton && !fromOutside) {
-        this.state.openedByButton.focus();
-        this.state.openedByButton = null;
-    }
-
-    if (this.state.opened && this.options.focusFirst) {
+    if (this.options.focusFirst) {
         this.focusFirstElement();
     }
+    window.dispatchEvent(new Event(window.osuny.EVENTS.EXTENDABLE_DID_OPEN));
+    window.dispatchEvent(new Event('resize'));
+};
 
-    if (this.state.opened) {
-        window.dispatchEvent(new Event(window.osuny.EVENTS.EXTENDABLE_HAS_OPEN));
-        window.dispatchEvent(new Event('resize'));
+osuny.Extendable.prototype.close = function () {
+    this.state.opened = false;
+    this.setButtonAriaExpanded();
+    this.giveFocusBack();
+    window.dispatchEvent(new Event(window.osuny.EVENTS.EXTENDABLE_DID_CLOSE));
+};
+
+// This will close without giving back any focus, as it's triggered from a sibling
+osuny.Extendable.prototype.closeQuietly = function () {
+    this.state.openedByButton = null;
+    this.close();
+};
+
+osuny.Extendable.prototype.giveFocusBack = function () {
+    if (this.state.openedByButton) {
+        this.state.openedByButton.focus();
+        this.state.openedByButton = null;
     }
 };
 
