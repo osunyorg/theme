@@ -1,6 +1,7 @@
 window.osuny = window.osuny || {};
 window.osuny.EVENTS = {
-    EXTENDABLE_HAS_OPEN: 'osuny-extendable-has-opened',
     EXTENDABLE_CLOSE: 'osuny-extendable-close',
+    EXTENDABLE_DID_OPEN: 'osuny-extendable-did-open',
+    EXTENDABLE_DID_CLOSE: 'osuny-extendable-did-close',
 }
 
