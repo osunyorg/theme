@@ -8,7 +8,7 @@
 
 {{ $title_attributes := printf "class='%s-title'" $type }}
 {{ with $itemprop }}
-  {{ $title_attributes = printf "%s %s" $title_attributes . }}
+  {{ $title_attributes = printf "%s itemprop='%s'" $title_attributes . }}
 {{ end }}
 {{ $link_title := safeHTML (i18n "commons.more_aria" (dict "Title" $item.Title)) }}
 
@@ -22,7 +22,8 @@
 {{ end }}
 
 {{ $heading_tag.open }}
-  <a href="{{ $item.Permalink }}" title="{{ $link_title }}" {{ if $itemprop }} itemprop="url" {{ end }} >
+  {{ $permalink := partial "GetPermalink" $item }}
+  <a href="{{ $permalink }}" title="{{ $link_title }}" {{ if $itemprop }} itemprop="url" {{ end }} >
     {{ $item.Title }}
   </a>
 {{ $heading_tag.close }}

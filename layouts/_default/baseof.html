@@ -16,11 +16,9 @@
     {{- partial "header/accessibility.html" -}}
     {{- partial "hooks/before-header" . -}}
     {{- partial "header/header.html" . -}}
-    <main
-        id="main"
-        {{ if .Params.contents }} class="page-with-blocks"{{ end }} 
-        {{ if site.Params.search.active }}data-pagefind-body{{ end }}
-        {{ if .Params.search_ignore }}data-pagefind-ignore{{ end }}
+    <main id="main"
+        {{ partial "GetMainClass" . | safeHTMLAttr }}
+        {{ partial "GetMainSearchAttributes" . | safeHTMLAttr }}
         >
       {{ partial "commons/search/button.html" "fixed" }}
       {{- block "main" . }}{{- end }}

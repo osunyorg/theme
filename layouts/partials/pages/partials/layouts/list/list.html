@@ -34,8 +34,8 @@
                   "kind" "pages"
                 )}}
               {{ end }}
-              {{/*  TODO: set right options when admin is ready  */}}
-              {{ if site.Params.pages.index.options.categories }}
+
+              {{ if and $options.categories .Params.taxonomies }}
                 {{ partial "commons/categories" ( dict
                   "context" .
                   "kind" "page"

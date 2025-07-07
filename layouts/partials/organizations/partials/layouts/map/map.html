@@ -1,5 +1,6 @@
 {{ $logo_index := .logo_index }}
 {{ $options := .options }}
+{{ $layout := .layout }}
 {{ $block_index := .block_index }}
 {{ $id_transcription := printf "block-%d-transcription" $block_index }}
 {{ $heading_level := .heading_level | default 2 }}
@@ -25,6 +26,7 @@
                       "address" true
                       "logo" false
                     ))
+                    "layout" $layout
                     "heading_level" $heading_level
                   ) }}
               </li>

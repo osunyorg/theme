@@ -1,20 +1,6 @@
 @mixin offcanvas-toc
+    @include offcanvas
     background: $toc-background-color
-    position: fixed
-    top: 0
-    right: 0
-    bottom: 0
-    margin-top: 0
-    z-index: $zindex-toc-offcanvas
-    width: calc(#{columns(4)} + var(--grid-gutter) * 2)
-    transform: translateX(100%)
-    transition: transform $toc-offcanvas-duration ease-in-out
-    @include media-breakpoint-down(desktop)
-        width: calc(100% - var(--grid-gutter))
-    &.is-opened
-        transform: translateX(0)
-    &[aria-hidden="true"]
-        display: none
     .toc-content
         display: flex
         flex-direction: column
