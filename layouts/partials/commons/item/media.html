@@ -1,20 +1,17 @@
 {{ $image := .image }}
 {{ $type := .type | default "page" }}
 {{ $layout := .layout | default "item" }}
-{{ $sizes := site.Params.image_sizes.sections.pages.item }}
+{{ $sizes := .sizes }}
 {{ $class := "media" }}
 {{ with .class }}
   {{ $class = printf "%s %s" $class . }}
 {{ end }}
 
-{{ with index site.Params.image_sizes.sections $type }}
-{{ with index . $layout }}
-    {{ $sizes = . }}
-  {{ end }}
-{{ end }}
-
-{{ if .sizes }}
-  {{ $sizes = .sizes }}
+{{ if not $sizes }}
+  {{ $sizes = partial "GetSiteParamWithDefault" (dict 
+    "param" (printf "image_sizes.sections.%s.%s" $type $layout)
+    "default" "image_sizes.design_system.item"
+  ) }}
 {{ end }}
 
 <div class="{{ $class }}">

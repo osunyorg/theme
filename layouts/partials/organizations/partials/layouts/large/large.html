@@ -3,7 +3,7 @@
 {{ $layout := .layout }}
 {{ $heading_level := .heading_level | default 2 }}
 
-<div class="large organizations {{- if $options.summary }} with-summaries {{- end }}">
+<div class="organizations large {{- if $options.summary }} with-summaries {{- end }}">
   {{- range .organizations }}
     {{ if .path }}
       {{ with site.GetPage .path }}
