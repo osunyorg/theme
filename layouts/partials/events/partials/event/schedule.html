@@ -1,6 +1,7 @@
 {{ partial "commons/item/schedule.html" (dict
     "dates" .dates
     "time_slot" .time_slot
+    "is_repeating" (gt .time_slots 1)
     "layout" .layout
     "type" "event"
   ) }}

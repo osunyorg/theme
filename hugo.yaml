@@ -120,6 +120,7 @@ params:
         show_name: true
     sitemap:
       ignore_children: false
+    time_format: "15h04"
   categories:
     index:
       layout: grid # alternate | cards | grid | large | list
@@ -193,7 +194,9 @@ params:
         position: content # hero | content
       time_slots:
         date_format: ":date_long"
-        time_format: "15h04"
+    list:
+      time_slots:
+        date_format: ":date_short"
     # share_links: # Optional
     #   enabled: true
     #   email: false
@@ -219,7 +222,6 @@ params:
         subtitle: true
         summary: true
       per_page: 10
-      
       truncate_description: 200 # Set to 0 to disable truncate
     single:
       calendar_links: false
