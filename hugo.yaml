@@ -133,7 +133,6 @@ params:
   events:
     default_image: false
     date_format: false # You can add date format to override the date from static (two_lines) 
-    time_format: false # You can add time format to override the time from static (from.hour & to.hour)
     # sitemap:
     #   ignore_children: true
     filters:
@@ -193,7 +192,9 @@ params:
         position: content # hero | content
       time_slots:
         date_format: ":date_long"
-        time_format: "15h04"
+    list:
+      time_slots:
+        date_format: ":date_long"
     # share_links: # Optional
     #   enabled: true
     #   email: false
@@ -206,7 +207,6 @@ params:
   exhibitions:
     default_image: false
     date_format: false # You can add date format to override the date from static (two_lines) 
-    time_format: false # You can add time format to override the time from static (from.hour & to.hour)
     index:
       group_by_date: "Monday 2 January <span>2006</span>"
       highlight_exhibitions: true
@@ -219,7 +219,6 @@ params:
         subtitle: true
         summary: true
       per_page: 10
-      
       truncate_description: 200 # Set to 0 to disable truncate
     single:
       calendar_links: false
