@@ -1,0 +1,10 @@
+{{/*  Get alerts filtered by lang  */}}
+{{ $alerts := index site.Data site.Language.Lang "alerts" }}
+
+{{ if $alerts }}
+  <div class="alerts">
+    {{ range $alerts }}
+      {{ partial "commons/alerts/alert.html" . }}
+    {{ end }}
+  </div>
+{{ end }}
