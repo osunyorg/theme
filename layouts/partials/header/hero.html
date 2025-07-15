@@ -31,7 +31,7 @@
 <header class="hero {{ if .image }}hero--with-image hero--image-{{- $direction }}{{ end }} {{ if $breadcrumb_is_after_hero }} hero--no-margin {{ end }} {{ $breadcrumb_class }} ">
 
   {{- partial "hooks/after-hero-start" . -}}
-
+  <meta data-pagefind-filter="{{ .context.Type }}">
   <div class="container">
     {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-start") }}
       {{ partial "header/breadcrumbs.html" .context }}
@@ -43,6 +43,7 @@
             <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .title }}</h1>
             {{ with $subtitle }}
               {{ safeHTML . }}
+              <meta data-pagefind-default-meta="summary:{{ safeHTML . }}">
             {{ end }}
           </hgroup>
         {{ else }}
