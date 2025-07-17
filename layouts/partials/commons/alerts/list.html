@@ -1,5 +1,5 @@
 {{/*  Get alerts filtered by lang  */}}
-{{ $alerts := index site.Data site.Language.Lang "alerts" }}
+{{ $alerts := index site.Data "alerts" site.Language.Lang }}
 
 {{ if $alerts }}
   <div class="alerts">
