@@ -18,6 +18,7 @@
         + .rich-text
             margin-top: $spacing-1
     &--danger
+        --color-text: #{$alert-danger-color} // Update color text to handle links color and decoration inside rich text
         background: $alert-danger-background
         color: $alert-danger-color
         display: flex
@@ -28,11 +29,13 @@
         .button
             @extend .button--reversed
     &--warning
+        --color-text: #{$alert-warning-color}
         background: $alert-warning-background
         color: $alert-warning-color
         .button
             @extend .button--reversed
     &--info
+        --color-text: #{$alert-info-color}
         background: $alert-info-background
         color: $alert-info-color
         .button
