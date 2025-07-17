@@ -23,7 +23,16 @@ window.osuny.Search.prototype.setPageFind = function () {
     var options = {
             element: this.element,
             showSubResults: true,
-            translations: osuny.i18n.search
+            openFilters: ['type'],
+            translations: osuny.i18n.search,
+            // processResult: function (result) {
+                // if (result.filters.type.includes('jobs')) {
+                //     console.log(result.filters.type)
+                //     return result;
+                // } else {
+                //     return {image: ''};
+                // }
+            // }
         },
         attribut;
 
