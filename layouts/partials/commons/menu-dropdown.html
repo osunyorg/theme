@@ -4,13 +4,13 @@
 {{- $level_options := index $options (printf "level_%d" $level) -}}
 {{- $slug := anchorize .parent.title -}}
 {{- $submenu := .submenu -}}
-{{- $class := "dropdown-menu" -}}
+{{- $class := "dropdown-menu extendable" -}}
 
 {{ if $level_options.title.active }}
   {{ $class = printf "%s is-titled" $class }}
 {{ end }}
 
-<div class="{{ $class }}" aria-labelledby="dropdown-{{ $slug }}">
+<div class="{{ $class }}" id="dropdown-list-{{ $slug }}" aria-labelledby="dropdown-{{ $slug }}" data-extendable-auto-close="true">
   {{- with $level_options.title }}
     {{ if .active }}
       <div class="container">

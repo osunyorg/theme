@@ -17,7 +17,8 @@ class MainMenu {
         this.upperMenu = this.element.querySelector('.upper-menu');
         // this.a11yButton = document.querySelector('[href="#navigation"]');
 
-        this.dropdownsButtons = this.element.querySelectorAll('.has-children [role="button"]');
+        // this.dropdownsButtons = this.element.querySelectorAll('.has-children [role="button"]');
+        this.dropdownsButtons = []
 
         this.state = {
             isOpened: false,

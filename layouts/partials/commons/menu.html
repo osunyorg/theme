@@ -44,7 +44,7 @@
 
     {{- if and (gt (len .children) 0) $dropdown (eq $level 1) -}}
       {{- $has_dropdown = true -}}
-      {{- $attributes = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" $slug -}}
+      {{- $attributes = printf "id=\"dropdown-%s\" role=\"button\" aria-controls=\"dropdown-list-%s\" aria-expanded=\"false\" tabindex=\"0\"" $slug $slug -}}
     {{- end -}}
 
     {{- if .new_tab -}}
