@@ -13,14 +13,31 @@
     {{ $exhibitions := where .Pages "Section" "exhibitions" }}
     {{ partial "events/section/exhibitions.html" $exhibitions }}
   {{ end }}
-  <div class="container">
-    {{ $events := where .Pages "Section" "events" }}
 
-    {{ partial "events/partials/events.html" (dict
-        "events" $events
-        "context" .
-        "order" "desc"
-      )}}
+  {{ $per_page := site.Params.events.index.per_page }}
+  <div class="container">
+
+    {{ $futur_and_current := where .Pages "Section" "events" }}
+    {{ $futur_and_current = where $futur_and_current "Params.dates.archive" false }}
+    {{ $futur_and_current_group := $futur_and_current.GroupByDate site.Params.events.index.group_by_date "asc" }}
+
+    {{ $archived := where .Pages "Section" "events" }}
+    {{ $archived = where $archived "Params.dates.archive" true }}
+    {{ $archived_group := $archived.GroupByDate site.Params.events.index.group_by_date "desc" }}
+    {{ $agenda := $futur_and_current_group | append $archived_group }}
+
+    {{ $paginator := .Paginate $agenda $per_page }}
+
+    {{ if not $paginator.PageGroups }}
+      <p class="none">{{ i18n "events.none" }}</p>
+    {{ else }}
+      {{ partial "events/partials/agenda.html" (dict
+        "layout" site.Params.events.index.layout
+        "options" site.Params.events.index.options
+        "agenda" $paginator.PageGroups
+      ) }}
+    {{ end }}
+
     {{ partial "commons/pagination.html" . }}
   </div>
 </div>
