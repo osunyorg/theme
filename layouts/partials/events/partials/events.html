@@ -1,18 +1,7 @@
 {{ $collection := where .events "Params.parent" "eq" nil }}
-{{ $layout := site.Params.events.index.layout }}
 {{ $per_page := .per_page | default site.Params.events.index.per_page }}
 {{ $order := .order | default "asc" }}
 
-{{/* {{ if $is_archive }}
-  {{ $order = "desc" }}
-{{ else }}
-  {{ $collection = where $collection "Params.dates.archive" false }}
-{{ end }}  */}}
-{{/*  {{ $collection = where $collection "Params.date" "2025-02-22" }}
-{{ $collection = where $collection "Params.dates.from.day" "2025-01-14" }}  */}}
-{{/*  {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}  */}}
-
-{{/*  {{ $collection := where $collection "Params.dates" "ne" nil }}  */}}
 {{ $agenda := $collection.GroupByDate site.Params.events.index.group_by_date $order }}
 {{ $paginator := .context.Paginate $agenda $per_page }}
 
