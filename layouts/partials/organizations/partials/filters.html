@@ -1,0 +1,18 @@
+{{/*  Get categories list  */}}
+{{ $categories := slice }}
+
+{{ range . }}
+  {{ $organization := site.GetPage .path }}
+  {{ with $organization }}
+    {{ $organization_categories := .GetTerms "organizations_categories" }}
+    {{ $categories = $categories | union $organization_categories }}
+  {{ end }}
+{{ end }}
+
+<ul>
+  {{ range $categories }}
+    <li data-filter="{{ .Slug }}">
+      {{ .Title }}
+    </li>
+  {{ end }}
+</ul>

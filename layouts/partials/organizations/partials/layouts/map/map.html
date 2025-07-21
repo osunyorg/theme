@@ -43,6 +43,11 @@
   {{ end }}
 
   {{ $aria_label := i18n "commons.maps.label" $title }}
+
+  {{ if $options.filters }}
+    {{ partial "organizations/partials/filters.html" $organizations }}
+  {{ end }}
+
   <div class="organizations map" 
       data-map data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}"
       role="region"
