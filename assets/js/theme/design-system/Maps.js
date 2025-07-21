@@ -22,6 +22,7 @@ osuny.Map.prototype.init = function () {
     this.setMarkers();
     this.fitToMapBounds();
     this.setAccessibility();
+    this.setFilters();
     window.addEventListener('resize', this.resize.bind(this));
 };
 
@@ -45,6 +46,35 @@ osuny.Map.prototype.setMap = function () {
     });
 
     this.layers.addTo(this.map);
+};
+
+osuny.Map.prototype.setFilters = function () {
+    this.filters = this.element.querySelectorAll('.map-filters input[type="checkbox"]');
+    console.log(this.element)
+    this.filters.forEach(function (filter) {
+        filter.addEventListener('change', function () {
+            this.updateFilters();
+        }.bind(this));
+    }.bind(this));
+};
+
+osuny.Map.prototype.updateFilters = function () {
+    var selection = [];
+    this.filters.forEach(function (filter) {
+        if (filter.checked) {
+            selection.push(filter.value);
+        }
+    });
+
+    console.log(selection);
+
+    var selectedIcons = this.markers.filter(function(marker) {
+        console.log(marker)
+    });
+
+    // selection.forEach(function (selection) {
+
+    // });
 };
 
 osuny.Map.prototype.setMarkers = function () {
@@ -76,9 +106,11 @@ osuny.Map.prototype.createMarker = function (element, opened) {
 
 osuny.Map.prototype.addMarker = function (location, element) {
     var title = element.getAttribute('data-title'),
+        categories = element.getAttribute('data-categories'),
         marker = new L.marker(location, {
             title: title,
-            alt: ''
+            alt: '',
+            categories: categories
         }),
         popup = new L.Popup(location, this.options.popup);
 

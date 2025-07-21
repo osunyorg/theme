@@ -7,6 +7,7 @@
     "attributes" "class='organization-title'"
 )}}
 {{ $with_geolocation := .with_geolocation | default false }}
+{{ $with_categories := .with_categories | default false }}
 
 {{ with $organization }}
   {{ $title := partial "PrepareHTML" .Title }}
@@ -18,7 +19,9 @@
         {{ with .latitude }}data-latitude="{{ . }}"{{ end }}
       {{ end }}
     {{ end }}
-    data-filter="{{ .Slug }}"
+    {{ if $with_categories }}
+      data-categories="{{ (partial "GetCategoriesSlug" .) | encoding.Jsonify }}"
+    {{ end }}
     >
 
     <div class="organization-content">

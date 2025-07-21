@@ -44,15 +44,19 @@
 
   {{ $aria_label := i18n "commons.maps.label" $title }}
 
-  {{ if $options.filters }}
-    {{ partial "organizations/partials/filters.html" $organizations }}
-  {{ end }}
-
   <div class="organizations map" 
       data-map data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}"
       role="region"
       aria-label="{{ $aria_label }}"
       >
+
+    {{ if $options.filters }}
+      {{ partial "organizations/partials/filters.html" ( dict
+          "organizations" $organizations
+          "index" $block_index
+        ) }}
+    {{ end }}
+
     {{- range $organizations }}
       {{ with site.GetPage .path }}
           {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
@@ -61,6 +65,7 @@
                 "organization" .
                 "options" $options
                 "with_geolocation" true
+                "with_categories" true
                 "heading_level" $heading_level
               ) }}
           {{ end }}

@@ -1,0 +1,8 @@
+{{ $categories := .GetTerms ( printf "%s_categories" .Type ) }}
+{{ $slugs := slice }}
+
+{{ range $categories }}
+  {{ $slugs = $slugs | append .Slug }}
+{{ end }}
+
+{{ return $slugs }}

@@ -1,7 +1,8 @@
 {{/*  Get categories list  */}}
 {{ $categories := slice }}
+{{ $index := .index }}
 
-{{ range . }}
+{{ range .organizations }}
   {{ $organization := site.GetPage .path }}
   {{ with $organization }}
     {{ $organization_categories := .GetTerms "organizations_categories" }}
@@ -9,10 +10,12 @@
   {{ end }}
 {{ end }}
 
-<ul>
+<ul class="map-filters" id="map-filters-{{- $index }}">
   {{ range $categories }}
+    {{ $id := printf "%s-%s" $index .Slug }}
     <li data-filter="{{ .Slug }}">
-      {{ .Title }}
+      <input type="checkbox" value="{{ .Slug }}" checked="true" id="filter-{{- $id }}">
+      <label for="filter-{{- $id }}">{{ .Title }}</label>
     </li>
   {{ end }}
 </ul>
