@@ -49,7 +49,7 @@ osuny.Map.prototype.setMap = function () {
 };
 
 osuny.Map.prototype.setFilters = function () {
-    this.filters = this.element.querySelectorAll('.map-filters input[type="checkbox"]');
+    this.filters = this.element.parentNode.querySelectorAll('.map-filters input[type="checkbox"]');
     this.filters.forEach(function (filter) {
         filter.addEventListener('change', function () {
             this.updateFilters();
