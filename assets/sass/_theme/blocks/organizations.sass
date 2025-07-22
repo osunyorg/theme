@@ -7,11 +7,29 @@
                     position: relative
 
     &--map
+        position: relative
         .block-content
             display: flex
             flex-direction: column
         .transcription
             order: 2
+        // Filters
+        .offcanvas
+            @include offcanvas
+            z-index: $zindex-up-leaflet-map
+            ul
+                @include list-reset
+        .offcanvas-button
+            --btn-min-width: 0
+            --btn-background-color: var(--color-background)
+            @extend .button
+            @extend .button--small
+            @include meta
+            @include icon("menu-line", before)
+            position: absolute
+            right: space(3)
+            top: space(3)
+            z-index: $zindex-up-leaflet-map
         .map
             height: 600px
             z-index: 1
