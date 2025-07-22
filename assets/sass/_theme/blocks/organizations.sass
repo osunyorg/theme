@@ -21,14 +21,15 @@
                 @include list-reset
         .offcanvas-button
             --btn-min-width: 0
-            @extend .button 
+            --btn-background-color: var(--color-background)
+            @extend .button
             @extend .button--small
-            position: absolute
-            top: space(3)
-            right: space(3)
-            z-index: $zindex-up-leaflet-map
             @include meta
             @include icon("menu-line", before)
+            position: absolute
+            right: space(3)
+            top: space(3)
+            z-index: $zindex-up-leaflet-map
         .map
             height: 600px
             z-index: 1
