@@ -10,7 +10,7 @@
         order: -1
         overflow: hidden
         &:empty
-          display: none
+            display: none
         img
             object-fit: cover
             // max-width: max-content
@@ -19,20 +19,8 @@
                 aspect-ratio: $aspect-ratio
     p + time
             margin-top: $spacing-2
-    .post-categories, .project-categories
-        @include list-reset
-        @include meta
-        margin-top: $spacing-2
-        margin-bottom: $spacing-2
-        position: relative
-        display: flex
-        flex-wrap: wrap
-        gap: 0 $spacing-2
-        z-index: 2
-        a
-            @include link(var(--color-accent))
-        li
-            margin: 0
+    .post-categories, .project-categories, .job-categories
+        @include item-categories-list
     time
         @include meta
         color: var(--color-text-alt)

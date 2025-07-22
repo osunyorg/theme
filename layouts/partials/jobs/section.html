@@ -9,15 +9,10 @@
     {{ partial "contents/list.html" . }}
   {{ end }}
 
+  {{ partial "taxonomies/section-list-container.html" . }}
+
   <div class="container">
-    {{ partial "taxonomies/section-list.html" . }}
-
-    {{ partial "jobs/partials/jobs.html" (dict 
-        "jobs" .RegularPages
-        "layout" site.Params.jobs.index.layout
-        "options" site.Params.jobs.index.options
-      )}}
-
+    {{ partial "jobs/partials/jobs.html" . }}
     {{ partial "commons/pagination.html" . }}
   </div>
 </div>

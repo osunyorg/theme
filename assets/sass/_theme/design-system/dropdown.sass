@@ -19,24 +19,19 @@
         display: none
         position: absolute
         z-index: $zindex-dropdown
-        @include media-breakpoint-down(desktop)
+    @include media-breakpoint-down(desktop)
+        position: relative
+        #{$content-selector}
             right: var(--grid-gutter-negative)
             left: var(--grid-gutter-negative)
     @if $full
-        position: static
         > button, > span[role="button"]
             margin-bottom: 0
             &[aria-expanded="true"]
                 background: var(--dropdown-background)
         #{$content-selector}
-            @include inset(100%, 0, auto, 0)
             padding-top: var(--grid-gutter)
             padding-bottom: var(--grid-gutter)
-            @include media-breakpoint-up(desktop)
-                // To set a real full screen width
-                $empty-grid-space: calc((100vw - var(--grid-width)) / 2 * -1)
-                margin-left: $empty-grid-space
-                margin-right: $empty-grid-space
             ul
                 @include container
                 @include grid(1)
@@ -48,12 +43,21 @@
                         @include icon(arrow-right-line, after, true)
                         @include hover-translate-icon
                         text-decoration: none
+        @include media-breakpoint-up(md)
+            position: static
+            #{$content-selector}
+                @include inset(100%, 0, auto, 0)
+                // To set a real full screen width
+                $empty-grid-space: calc((100vw - var(--grid-width)) / 2 * -1)
+                margin-left: $empty-grid-space
+                margin-right: $empty-grid-space
     @else
         position: relative
         #{$content-selector}
             @include list-reset
             top: calc(100% + #{$spacing-2})
-            left: 0
+            @include media-breakpoint-up(desktop)
+                left: 0
             li
                 display: block
                 &:not(:first-child)

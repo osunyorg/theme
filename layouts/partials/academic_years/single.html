@@ -1,0 +1,11 @@
+{{ partial "academic_years/single/hero.html" . }}
+
+<div class="document-content">
+  {{ with .Params.persons }}
+    <div class="container">
+      {{ $persons := partial "GetObjectsFromPathSlice" . }}
+      {{ partial "academic_years/partials/persons.html" $persons }}
+    </div>
+  {{ end }}
+  {{ partial "hooks/before-document-content-end.html" . }}
+</div>

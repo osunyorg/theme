@@ -1,4 +1,5 @@
 {{ $options := .options | default site.Params.organizations.index.options }}
+{{ $layout := .layout }}
 {{ $organization := .organization }}
 {{ $heading_level := .heading_level | default 2 }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
@@ -16,10 +17,13 @@
         {{ with .longitude }}data-longitude="{{ . }}"{{ end }} 
         {{ with .latitude }}data-latitude="{{ . }}"{{ end }}
       {{ end }}
-    {{ end }}>
+    {{ end }}
+    {{ if and $options.filters .Params.organizations_categories }}
+      data-filters="{{ (partial "GetCategoriesSlug" .) | encoding.Jsonify }}"
+    {{ end }}
+    >
 
     <div class="organization-content">
-
       {{ $heading_tag.open }}
         {{- if $options.link -}}
           <a href="{{ .Permalink }}" 
@@ -46,11 +50,19 @@
       {{ if and $options.address .Params.contact_details }}
         {{ partial "commons/address.html" .Params.contact_details.postal_address }}
       {{ end }}
+
+      {{ if and $options.categories .Params.organizations_categories }}
+        {{ partial "commons/categories.html" (dict
+            "context" .
+            "kind" "organization"
+          )}}
+      {{ end }}
     </div>
     {{ if $options.logo }}
-      {{ if $options.logo }}
-        {{ partial "organizations/partials/organization/image.html" . }}
-      {{ end }}
+      {{ partial "organizations/partials/organization/media.html" (dict
+          "context" .
+          "layout" $layout
+        )}}
     {{ end }}
   </article>
 {{ end }}

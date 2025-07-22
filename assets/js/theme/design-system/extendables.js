@@ -79,8 +79,13 @@ osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
         this.focusFirstElement();
     }
 
+    this.dispatchOpeningEvents();
+};
+
+osuny.Extendable.prototype.dispatchOpeningEvents = function () {
     if (this.state.opened) {
         window.dispatchEvent(new Event(window.osuny.EVENTS.EXTENDABLE_HAS_OPEN));
+        window.dispatchEvent(new Event('resize'));
     }
 };
 

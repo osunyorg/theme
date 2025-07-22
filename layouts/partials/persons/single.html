@@ -12,7 +12,10 @@
 {{ $researcher := site.GetPage (printf "/researchers/%s" $slug) }}
 
 {{ $posts := where $author.Pages "Section" "posts" }}
+
 {{ $publications := where $researcher.Pages "Section" "publications" }}
+{{ $publications = partial "FilterPublications" $publications }}
+
 {{ $papers := where $researcher.Pages "Section" "papers" }}
 
 {{ partial "persons/single/hero.html" . }}
@@ -73,7 +76,7 @@
 
     {{ partial "taxonomies/single-list-container.html" . }}
 
-    {{ partial "commons/contact-details.html" . }}
+    {{ partial "commons/contact-details.html" (dict "subject" .) }}
   </div>
 
   {{ partial "contents/list.html" . }}
