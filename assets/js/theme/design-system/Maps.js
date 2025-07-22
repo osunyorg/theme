@@ -50,7 +50,6 @@ osuny.Map.prototype.setMap = function () {
 
 osuny.Map.prototype.setFilters = function () {
     this.filters = this.element.querySelectorAll('.map-filters input[type="checkbox"]');
-    console.log(this.element)
     this.filters.forEach(function (filter) {
         filter.addEventListener('change', function () {
             this.updateFilters();
@@ -60,21 +59,38 @@ osuny.Map.prototype.setFilters = function () {
 
 osuny.Map.prototype.updateFilters = function () {
     var selection = [];
+
     this.filters.forEach(function (filter) {
         if (filter.checked) {
             selection.push(filter.value);
         }
     });
 
-    console.log(selection);
+    if (selection.length === this.filters.length) {
+        this.displayAllMarkers();
+    } else {
+        this.filterMarkers(selection);
+    }
+};
 
-    var selectedIcons = this.markers.filter(function(marker) {
-        console.log(marker)
-    });
+osuny.Map.prototype.displayAllMarkers = function () {
+    this.markers.forEach(function (marker) {
+        this.map.addLayer(marker);
+    }.bind(this));
+};
 
-    // selection.forEach(function (selection) {
-
-    // });
+osuny.Map.prototype.filterMarkers = function (filters) {
+    var intersection = [];
+    this.markers.forEach(function (marker) {
+        intersection = filters.filter( function (filter) {
+            return marker.options.filters.indexOf(filter) !== -1;
+        });
+        if (intersection.length > 0) {
+            this.map.addLayer(marker);
+        } else {
+            marker.remove();
+        }
+    }.bind(this));
 };
 
 osuny.Map.prototype.setMarkers = function () {
@@ -106,11 +122,11 @@ osuny.Map.prototype.createMarker = function (element, opened) {
 
 osuny.Map.prototype.addMarker = function (location, element) {
     var title = element.getAttribute('data-title'),
-        categories = element.getAttribute('data-categories'),
+        filters = element.getAttribute('data-filters'),
         marker = new L.marker(location, {
             title: title,
             alt: '',
-            categories: categories
+            filters: JSON.parse(filters)
         }),
         popup = new L.Popup(location, this.options.popup);
 

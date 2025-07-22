@@ -13,12 +13,20 @@
             flex-direction: column
         .transcription
             order: 2
-        .map-filters
+        // Filters
+        .offcanvas
+            @include offcanvas
+            z-index: $zindex-up-leaflet-map
+            ul
+                @include list-reset
+        .offcanvas-button
+            --btn-min-width: 0
             position: absolute
-            background: white
-            right: 0
-            top: 0
-            z-index: 500
+            top: space(3)
+            right: space(3)
+            z-index: $zindex-up-leaflet-map
+            @include meta
+            @include icon("menu-line", before)
         .map
             height: 600px
             z-index: 1
