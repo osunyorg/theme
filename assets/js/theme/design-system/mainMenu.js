@@ -15,10 +15,7 @@ class MainMenu {
         this.menu = this.element.querySelector('.menu');
         this.mainButton = this.element.querySelector('button.header-button');
         this.upperMenu = this.element.querySelector('.upper-menu');
-        // this.a11yButton = document.querySelector('[href="#navigation"]');
-
-        // this.dropdownsButtons = this.element.querySelectorAll('.has-children [role="button"]');
-        this.dropdownsButtons = []
+        this.dropdownsButtons = this.element.querySelectorAll('.has-children [role="button"]');
 
         this.state = {
             isOpened: false,
@@ -46,15 +43,6 @@ class MainMenu {
                 this.toggleMainMenu();
             });
         }
-
-        // if (this.a11yButton) {
-        //     a11yClick(this.a11yButton, (event) => {
-        //         if (this.state.isMobile) {
-        //             event.preventDefault();
-        //             this.mainButton.focus();
-        //         }
-        //     });
-        // }
 
         this.dropdownsButtons.forEach((button) => {
             a11yClick(button, (event) => {
@@ -136,16 +124,16 @@ class MainMenu {
         }
 
         // Close all dropdowns except selected
-        this.dropdownsButtons.forEach(button => {
-            if (clickedButton === button) {
-                clickedButton.setAttribute('aria-expanded', !isExpanded);
-            } else {
-                button.setAttribute('aria-expanded', 'false');
-            }
-        });
+        // this.dropdownsButtons.forEach(button => {
+        //     if (clickedButton === button) {
+        //         clickedButton.setAttribute('aria-expanded', !isExpanded);
+        //     } else {
+        //         button.setAttribute('aria-expanded', 'false');
+        //     }
+        // });
 
         // Now menu is expanded or closed
-        isExpanded = !isExpanded;
+        // isExpanded = !isExpanded;
         this.state.hasDropdownOpened = isExpanded;
 
         // Update global overlay

@@ -80,8 +80,6 @@ osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
     }
 
     this.dispatchOpeningEvents();
-
-    console.log(this.state.opened)
 };
 
 osuny.Extendable.prototype.dispatchOpeningEvents = function () {
@@ -92,7 +90,6 @@ osuny.Extendable.prototype.dispatchOpeningEvents = function () {
 };
 
 osuny.Extendable.prototype.setButtonAriaExpanded = function () {
-    console.log(this.buttons)
     this.buttons.forEach(function (button) {
         if (button.getAttribute('aria-expanded')) {
             button.setAttribute('aria-expanded', this.state.opened);
