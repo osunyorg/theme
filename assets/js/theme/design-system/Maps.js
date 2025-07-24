@@ -122,7 +122,7 @@ osuny.Map.prototype.createMarker = function (element, opened) {
 
 osuny.Map.prototype.addMarker = function (location, element) {
     var title = element.getAttribute('data-title'),
-        filters = element.getAttribute('data-filters'),
+        filters = element.getAttribute('data-filters') || '[]',
         marker = new L.marker(location, {
             title: title,
             alt: '',
