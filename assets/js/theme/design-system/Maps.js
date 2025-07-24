@@ -22,6 +22,7 @@ osuny.Map.prototype.init = function () {
     this.setMarkers();
     this.fitToMapBounds();
     this.setAccessibility();
+    this.setFilters();
     window.addEventListener('resize', this.resize.bind(this));
 };
 
@@ -45,6 +46,51 @@ osuny.Map.prototype.setMap = function () {
     });
 
     this.layers.addTo(this.map);
+};
+
+osuny.Map.prototype.setFilters = function () {
+    this.filters = this.element.parentNode.querySelectorAll('.map-filters input[type="checkbox"]');
+    this.filters.forEach(function (filter) {
+        filter.addEventListener('change', function () {
+            this.updateFilters();
+        }.bind(this));
+    }.bind(this));
+};
+
+osuny.Map.prototype.updateFilters = function () {
+    var selection = [];
+
+    this.filters.forEach(function (filter) {
+        if (filter.checked) {
+            selection.push(filter.value);
+        }
+    });
+
+    if (selection.length === this.filters.length) {
+        this.displayAllMarkers();
+    } else {
+        this.filterMarkers(selection);
+    }
+};
+
+osuny.Map.prototype.displayAllMarkers = function () {
+    this.markers.forEach(function (marker) {
+        this.map.addLayer(marker);
+    }.bind(this));
+};
+
+osuny.Map.prototype.filterMarkers = function (filters) {
+    var intersection = [];
+    this.markers.forEach(function (marker) {
+        intersection = filters.filter( function (filter) {
+            return marker.options.filters.indexOf(filter) !== -1;
+        });
+        if (intersection.length > 0) {
+            this.map.addLayer(marker);
+        } else {
+            marker.remove();
+        }
+    }.bind(this));
 };
 
 osuny.Map.prototype.setMarkers = function () {
@@ -76,9 +122,11 @@ osuny.Map.prototype.createMarker = function (element, opened) {
 
 osuny.Map.prototype.addMarker = function (location, element) {
     var title = element.getAttribute('data-title'),
+        filters = element.getAttribute('data-filters'),
         marker = new L.marker(location, {
             title: title,
-            alt: ''
+            alt: '',
+            filters: JSON.parse(filters)
         }),
         popup = new L.Popup(location, this.options.popup);
 

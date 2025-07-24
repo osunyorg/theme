@@ -17,7 +17,11 @@
         {{ with .longitude }}data-longitude="{{ . }}"{{ end }} 
         {{ with .latitude }}data-latitude="{{ . }}"{{ end }}
       {{ end }}
-    {{ end }}>
+    {{ end }}
+    {{ if and $options.filters .Params.organizations_categories }}
+      data-filters="{{ (partial "GetCategoriesSlug" .) | encoding.Jsonify }}"
+    {{ end }}
+    >
 
     <div class="organization-content">
       {{ $heading_tag.open }}
@@ -45,6 +49,13 @@
 
       {{ if and $options.address .Params.contact_details }}
         {{ partial "commons/address.html" .Params.contact_details.postal_address }}
+      {{ end }}
+
+      {{ if and $options.categories .Params.organizations_categories }}
+        {{ partial "commons/categories.html" (dict
+            "context" .
+            "kind" "organization"
+          )}}
       {{ end }}
     </div>
     {{ if $options.logo }}
