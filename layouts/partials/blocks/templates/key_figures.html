@@ -24,7 +24,7 @@
                         "sizes"    site.Params.image_sizes.blocks.key_figures
                       )}}
                   {{ end }}
-                  {{ if .number }}
+                  {{ if or .number (eq .number 0) }}
                     <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
                   {{ end }}
                 </span>
