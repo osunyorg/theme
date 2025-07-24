@@ -4,7 +4,7 @@
   {{ if .Params.ignore.in_search }}
     {{ $attribute = "data-pagefind-ignore" }}
   {{ else }}
-    {{ $attribute = "data-pagefind-body" }}
+    {{ $attribute = printf "data-pagefind-body data-pagefind-filter=\"type:%s\"" .Type }}
   {{ end }}
 {{ end }}
 
