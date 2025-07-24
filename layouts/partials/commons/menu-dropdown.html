@@ -10,7 +10,9 @@
   {{ $class = printf "%s is-titled" $class }}
 {{ end }}
 
-<div class="{{ $class }}" id="dropdown-list-{{ $slug }}" aria-labelledby="dropdown-{{ $slug }}" data-extendable-auto-close="true">
+<div  class="{{ $class }}"
+      id="dropdown-list-{{ $slug }}"
+      aria-labelledby="dropdown-{{ $slug }}">
   {{- with $level_options.title }}
     {{ if .active }}
       <div class="container">

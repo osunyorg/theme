@@ -45,6 +45,8 @@ class MainMenu {
         }
 
         this.dropdownsButtons.forEach((button) => {
+            var instance = window.osuny.utils.getInstance(button, 'Extendable');
+            console.log(instance)
             a11yClick(button, (event) => {
                 event.preventDefault();
                 this.toggleDropdown(button);
@@ -117,23 +119,12 @@ class MainMenu {
     }
 
     toggleDropdown (clickedButton) {
-        let isExpanded = true;
+        let isExpanded = false;
 
         if (clickedButton) {
-            isExpanded = clickedButton.getAttribute('aria-expanded') === 'true';
+            isExpanded = this.element.querySelectorAll('.has-children [aria-expanded=true]').length > 0;
         }
 
-        // Close all dropdowns except selected
-        // this.dropdownsButtons.forEach(button => {
-        //     if (clickedButton === button) {
-        //         clickedButton.setAttribute('aria-expanded', !isExpanded);
-        //     } else {
-        //         button.setAttribute('aria-expanded', 'false');
-        //     }
-        // });
-
-        // Now menu is expanded or closed
-        // isExpanded = !isExpanded;
         this.state.hasDropdownOpened = isExpanded;
 
         // Update global overlay

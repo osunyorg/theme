@@ -3,6 +3,7 @@ import { a11yClick, getFocusableElements } from '../utils/a11y';
 var osuny = window.osuny || {};
 
 osuny.Extendable = function (element) {
+    this.constructorName = "Extendable";
     this.element = element;
     this.buttons = document.querySelectorAll('[aria-controls=' + this.element.id + ']');
     this.state = {
@@ -13,8 +14,9 @@ osuny.Extendable = function (element) {
     this.options = {
         // This attribute determine if extendable should close others when opened
         closeSiblings: this.element.getAttribute('data-extendable-close-siblings') === 'true',
+        siblingsParent: this.element.getAttribute('data-extendable-siblings-parent'),
         autoClose: this.element.getAttribute('data-extendable-auto-close') === 'true',
-        focusFirst: this.element.getAttribute('data-extendable-focus-first') === 'true'
+        focusFirst: this.element.getAttribute('data-extendable-focus-first') === 'true',
     };
 
     this.listen();
@@ -112,6 +114,10 @@ osuny.Extendable.prototype.closeSiblings = function () {
         parent = parent.parentNode;
     }
 
+    if (this.options.siblingsParent) {
+        parent = this.element.closest(this.options.siblingsParent);
+    }
+    
     extendables = parent.querySelectorAll('.extendable');
     extendables.forEach(function (extendable) {
         if (this.element !== extendable) {
