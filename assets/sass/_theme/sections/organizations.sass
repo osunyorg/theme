@@ -117,9 +117,6 @@
         .taxonomies-container
             &:not(:first-child)
                 margin-top: $spacing-5
-        .contacts-details
-            ul
-                @include grid(2, md)
     @include media-breakpoint-down(md)
         .document-content
             .organization-logo
@@ -136,3 +133,8 @@
                 width: columns(8)
                 + .organization-logo
                     width: columns(3)
+            .contacts-details
+                ul
+                    @include grid(2)
+                    li
+                        margin-top: 0
