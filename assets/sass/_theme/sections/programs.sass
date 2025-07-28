@@ -302,14 +302,24 @@ ol.programs--light
                 color: var(--color-accent)
             &:first-child
                 border-top: var(--border-width) solid var(--color-border)
-    .related-posts
-        .category-link
-            display: block
-            text-decoration: none
-            @include icon(arrow-right-line, after, true)
-            @include hover-translate-icon
-            @include media-breakpoint-down(desktop)
-                margin-bottom: $spacing-3
+    .program-related
+        .content
+            h2
+                margin-bottom: $spacing-2
+            .category-link
+                display: block
+                text-decoration: none
+                margin-top: 0
+                @include icon(arrow-right-line, after, true)
+                @include hover-translate-icon
+            .blocks
+                --block-space-y: 0
+                padding-top: 0
+            .projects--list > li:first-child
+                padding-top: 0
+            .events--list article:last-child
+                margin-bottom: 0
+                padding-bottom: 0
     .programs-index
         .programs
             margin-bottom: $spacing-5
