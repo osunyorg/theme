@@ -1,0 +1,42 @@
+.alerts
+    padding-top: var(--header-height)
+
+.alert
+    padding-top: var(--grid-gutter)
+    padding-bottom: var(--grid-gutter)
+    .container
+        display: flex
+        gap: var(--grid-gutter)
+        @include media-breakpoint-down(desktop)
+            flex-direction: column
+        @include media-breakpoint-up(desktop)
+            align-items: center
+            .rich-text
+                width: columns(8)
+    &__title
+        @include h2
+        + .rich-text
+            margin-top: $spacing-1
+    &--danger
+        --color-text: #{$alert-danger-color} // Update color text to handle links color and decoration inside rich text
+        background: $alert-danger-background
+        color: $alert-danger-color
+        display: flex
+        flex-direction: column
+        justify-content: center
+        min-height: 70vh
+        position: relative
+        .button
+            @extend .button--reversed
+    &--warning
+        --color-text: #{$alert-warning-color}
+        background: $alert-warning-background
+        color: $alert-warning-color
+        .button
+            @extend .button--reversed
+    &--info
+        --color-text: #{$alert-info-color}
+        background: $alert-info-background
+        color: $alert-info-color
+        .button
+            @extend .button--alt

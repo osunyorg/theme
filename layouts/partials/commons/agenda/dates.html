@@ -28,11 +28,12 @@
           {{ $event_date := $time_slot.start.date | time.Format site.Params.events.single.time_slots.date_format }}
           <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ $event_date | strings.FirstUpper }}</span>
           <p class="hours">
+            {{ $time_format := ( i18n "commons.time_format" ) }}
             {{ if $time_slot.start.datetime }}
-              <time datetime="{{ .start.time }}">{{ $time_slot.start.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
+              <time datetime="{{ .start.time }}">{{ $time_slot.start.datetime | time.Format $time_format }}</time>
             {{ end }}
             {{ if $time_slot.end.datetime }}
-              <time datetime="{{ .end.time }}">{{ $time_slot.end.datetime | time.Format site.Params.events.single.time_slots.time_format }}</time>
+              <time datetime="{{ .end.time }}">{{ $time_slot.end.datetime | time.Format $time_format }}</time>
             {{ end }}
           </p>
           {{ with $time_slot.place }}

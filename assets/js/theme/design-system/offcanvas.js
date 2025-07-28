@@ -7,6 +7,8 @@ osuny.Offcanvas = function (element) {
         bodyclass: 'has-offcanvas-opened',
         opened: 'is-opened'
     }
+
+    this.handleAutoClose();
 };
 
 osuny.Offcanvas.prototype = Object.create(osuny.Extendable.prototype);
