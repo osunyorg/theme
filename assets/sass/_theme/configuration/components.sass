@@ -1,3 +1,16 @@
+$avatar-border-radius: 50% !default
+// Alert
+$alert-danger-background: var(--color-danger) !default
+// By default color danger is a dark red, so white color is used for text instead of classic fallback text color to ensure accessibility
+$alert-danger-color: white !default
+$alert-warning-background: $alert-danger-background !default
+$alert-warning-color: $alert-danger-color !default
+$alert-info-background: var(--color-background-alt) !default
+$alert-info-color: var(--color-text) !default
+
+// Border
+$border-width: 1px !default
+
 // Button
 $btn-font-family: $heading-font-family !default
 $btn-font-size: $meta-size !default
@@ -10,7 +23,8 @@ $btn-color: var(--color-text) !default
 $btn-hover-color: var(--color-text) !default
 $btn-background: transparent !default
 $btn-hover-background: var(--color-background) !default
-$btn-border: pxToRem(1) solid var(--color-border) !default
+$btn-border-width: 1px !default
+$btn-border: $btn-border-width solid var(--color-border) !default
 $btn-hover-border: $btn-border !default
 $btn-border-desktop: $btn-border !default
 $btn-border-radius: pxToRem(4) !default
@@ -19,11 +33,26 @@ $btn-padding: pxToRem(12) pxToRem(10) !default
 $btn-padding-desktop: pxToRem(18) pxToRem(16) !default
 $btn-min-width: pxToRem(100) !default
 $btn-min-width-desktop: pxToRem(190) !default
+$btn-disabled-color: var(--color-text-alt) !default
+$btn-disabled-background: var(--color-background-alt) !default
+$btn-disabled-border: $btn-disabled-background !default
+
+$btn-small-font-size: $btn-font-size !default
+$btn-small-font-size-desktop: $btn-font-size-desktop !default
+$btn-small-line-height: $btn-line-height !default
+$btn-small-padding: pxToRem(6) pxToRem(10) !default
+$btn-small-padding-desktop: pxToRem(6) pxToRem(10) !default
+
+$btn-large-font-size: $btn-font-size !default
+$btn-large-font-size-desktop: $btn-font-size-desktop !default
+$btn-large-line-height: $btn-line-height !default
+$btn-large-padding: pxToRem(14) pxToRem(12) !default
+$btn-large-padding-desktop: pxToRem(20) pxToRem(18) !default
 
 // Chip
 $chip-background: var(--color-background) !default
 $chip-background-hover: var(--color-background-alt) !default
-$chip-border: 1px solid var(--color-border) !default
+$chip-border: var(--border-width) solid var(--color-border) !default
 $chip-border-radius: $btn-border-radius !default
 $chip-color: var(--color-text) !default
 
@@ -36,15 +65,15 @@ $form-input-border-radius: 4px !default
 $header-color: var(--color-text) !default
 $header-hover-color: var(--color-accent) !default // TODO : Réflechir à plus élégant / générique
 $header-background: var(--color-background-alt) !default
-$header-transition: 0.3s !default
+$header-duration: 0.3s !default
 $header-dropdown-full: false !default
 $header-dropdown-background: $header-background !default
 $header-dropdown-color: $header-color !default
-$header-dropdown-transition: $header-transition !default
+$header-dropdown-transition: $header-duration !default
 $header-sticky-enabled: true !default
 $header-sticky-background: var(--color-background) !default
 $header-sticky-color: $header-color !default
-$header-sticky-transition: $header-transition !default
+$header-sticky-transition: $header-duration !default
 $header-sticky-dropdown-background: $header-sticky-background !default
 $header-sticky-dropdown-color: $header-sticky-color !default
 $header-nav-padding-y: pxToRem(20) !default
@@ -54,7 +83,7 @@ $header-logo-height-desktop: $header-logo-height !default
 $header-height: 87px !default
 $header-height-desktop: 96px !default
 $header-sticky-invert-logo: false !default
-$header-border-bottom-width: 1px !default
+$header-border-bottom-width: var(--border-width) !default
 $header-dropdown-title-summary-font-family: $lead-hero-font-family !default
 $header-dropdown-title-summary-font-size: $body-size !default
 $header-dropdown-title-summary-font-size-desktop: $lead-hero-size-desktop !default
@@ -70,7 +99,8 @@ $header-upper-menu-padding-y: $header-nav-padding-y !default
 $header-upper-menu-padding-y-desktop: $header-upper-menu-padding-y !default
 $header-upper-menu-mobile-height: pxToRem(50) !default
 $header-upper-menu-active-style-for-sites: false !default // set to 'true' to target non external website instead of active page
-$header-upper-menu-active-box-shadow: inset 0 -4px 0 0 var(--color-border) !default
+$header-upper-menu-active-decoration-color: var(--color-border) !default
+$header-upper-menu-active-decoration-height: 4px !default
 
 // Navs
 $body-overlay-color: rgba(0, 0, 0, 0.3) !default
@@ -84,6 +114,8 @@ $footer-icons-enabled: true !default
 $footer-icons-size: pxToRem(20) !default
 $footer-icons-size-desktop: pxToRem(16) !default
 $footer-text-hidden: false !default
+
+$dropdown-border-width: 1px !default
 $dropdown-i18n-background-color: var(--color-background) !default
 $dropdown-i18n-color: var(--color-text) !default
 
@@ -92,7 +124,8 @@ $hero-height: 300px !default
 $hero-height-desktop: 500px !default
 $hero-color: var(--color-text) !default
 $hero-background-color: var(--color-background-alt) !default
-$hero-credit-color: var(--color-text-alt) !default
+$hero-credit-color: $color-text-alt !default
+$hero-credit-color-desktop: $hero-credit-color !default
 
 // Breadcrumb
 $breadcrumb-color: $hero-color !default
@@ -103,7 +136,7 @@ $breadcrumb-icon-color: var(--color-text-alt) !default
 // System
 
 // Lightbox
-$lightbox-backdrop: blur(5px) !default
+$lightbox-backdrop: $backdrop !default
 $lightbox-background-color: rgba(0, 0, 0, 0.80) !default
 $lightbox-focus-outline-color: white !default
 $lightbox-button-background-color: var(--color-background) !default
@@ -116,6 +149,9 @@ $lightbox-detail-color: var(--color-text) !default
 $lightbox-detail-meta-color: var(--color-text-alt) !default
 $lightbox-focus-outline-color: black !default
 
+// Offcanvas
+$offcanvas-duration: $header-duration !default
+
 // Table of content
 $toc-color: var(--color-text) !default
 $toc-active-color: var(--color-accent) !default // TODO : checker ce que ça fait
@@ -127,14 +163,16 @@ $toc-line-height: $body-line-height !default
 $toc-title-font-family: $meta-font-family !default
 $toc-title-font-size: $meta-size !default
 $toc-title-font-size-desktop: $meta-size-desktop !default
-$toc-sticky-transition: 0.4s
+$toc-sticky-transition: $header-duration !default
 $toc-overlay-color: $body-overlay-color !default
+$toc-border-width: 1px !default
 
 // Table
 $table-head-font-size: $h4-size !default
 $table-head-font-size-desktop: $h4-size-desktop !default
 $table-body-size: $body-size !default
 $table-body-size-desktop: $body-size-desktop !default
+$table-border-width: var(--border-width) !default
 
 // Search
 $search-button-header-icon: true !default

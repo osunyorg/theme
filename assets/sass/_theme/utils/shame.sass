@@ -18,80 +18,25 @@
             &::before
                 content: ' • '
 
-// Utilisé pour .post, .project, .page, .person, .program, .volume
-@mixin article($aspect-ratio: $article-media-aspect-ratio)
-    position: relative
-    display: flex
-    flex-direction: column
-    .media
-        @include handle-svg-fit
-        margin-bottom: $spacing-3
-        order: -1
-        overflow: hidden
-        img
-            display: block
-            object-fit: cover
-            // max-width: max-content
-            width: 100%
-            @if $aspect-ratio
-                aspect-ratio: $aspect-ratio
-    p + time
-            margin-top: $spacing-2
-    .post-categories, .project-categories
-        @include list-reset
-        @include meta
-        margin-top: $spacing-2
-        margin-bottom: $spacing-2
-        position: relative
-        display: flex
-        flex-wrap: wrap
-        gap: 0 $spacing-2
-        z-index: 2
-        a
-            @include link(var(--color-accent))
-        li
-            margin: 0
-    time
-        @include meta
-        color: var(--color-text-alt)
-        display: block
-
-@mixin article-title
-    @include h3
-    a
-        @include stretched-link(before)
-        display: block
-        text-decoration: none
-
 @mixin list-section
     @include list-reset
     > li
-        border-bottom: 1px solid var(--color-border)
+        border-bottom: var(--border-width) solid var(--color-border)
         padding-bottom: $spacing-3
         padding-top: $spacing-3
         position: relative
         > .title
             @include h2
-            transition: color 0.55s
+            transition: color $color-duration
             @include media-breakpoint-down(desktop)
                 @include icon(arrow-right-line, after, true)
                     bottom: $spacing-2
                     position: absolute
                     right: 0
-            @include media-breakpoint-up(desktop)
-                @include arrow-right-hover
-                display: block
-                &::after
-                    transform: translateX(0)
-                    position: relative
-                &:hover
-                    &::after
-                        transform: translateX($spacing-2)
         a
             text-decoration: none
             &:hover
                 color: var(--color-accent)
-
         @include media-breakpoint-down(desktop)
             a:nth-child(2)
                 margin-top: calc(#{$spacing-2} / 2)
@@ -111,21 +56,21 @@
 
 
 @mixin top-flex
-    @include in-page-without-sidebar
-        align-items: baseline
-        display: flex
-        .block-title
-            width: columns(4)
-            + .description
-                margin-left: var(--grid-gutter)
-        .description
-            margin-top: 0
-            width: columns(8)
+    align-items: baseline
+    display: flex
+    .block-title
+        width: columns(4)
+        + .description
+            margin-left: var(--grid-gutter)
+    .description
+        margin-top: 0
+        width: columns(8)
 
 @mixin collapsed-figcaption
+    // TODO: remove hero specifics variables
     figcaption
         @include meta
-        color: var(--color-text-alt)
+        color: $hero-credit-color
         position: absolute
         display: block
         left: 0
@@ -153,10 +98,11 @@
         a
             color: inherit
             text-decoration-color: inherit
-        &:focus
+        &:focus, &:focus-within
             .credit
                 display: block
         @include media-breakpoint-up(desktop)
+            color: $hero-credit-color-desktop
             &:before
                 padding-right: 0
         @include media-breakpoint-down(desktop)

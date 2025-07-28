@@ -3,10 +3,6 @@ blocks:
     title: Appel à actions
   categories:
     title: Catégories
-    items:
-      count:
-        one: "1 article"
-        other: "{{ .Count }} articles"
   chapter:
     title: Chapitre
   contact:
@@ -17,10 +13,6 @@ blocks:
     title: Définitions
   embed:
     title: Intégration HTML
-  events:
-    current: En cours
-    future: À venir
-    archive: Archive
   files:
     title: Fichiers
   gallery:
@@ -49,11 +41,7 @@ blocks:
   posts:
     title: Actualités
   projects:
-    title: Catégories
-    items:
-      count: 
-        one: "1 projet"
-        other: "{{ .Count }} projets"
+    title: Projets
   programs:
     title: Formations
   publications:
@@ -71,12 +59,21 @@ blocks:
     play: Lancer la vidéo
 categories:
   label: Catégories
-  no_post: Aucun article dans cette catégorie
-  no_project: Aucun projet dans cette catégorie
+  no_event: Aucun événement dans cette catégorie
+  no_organization: Aucune organisation dans cette catégorie
+  no_page: Aucune page dans cette catégorie
   no_person: Aucune personne dans cette catégorie
-  see_more:
-    one: Voir l'article
-    other: Voir les {{ .Count }} articles
+  no_post: Aucun article dans cette catégorie
+  no_program: Aucune formation dans cette catégorie
+  no_project: Aucun projet dans cette catégorie
+  type:
+    events_categories: Catégories d'événements
+    organizations_categories: Catégories des organisations
+    pages_categories: Catégories des pages
+    persons_categories: Catégories des personnes
+    posts_categories: Catégories des actualités
+    programs_categories: Catégories des formations
+    projects_categories: Catégories des projets
 commons:
   accessibility:
     main_content: Accéder au contenu principal
@@ -87,13 +84,22 @@ commons:
     transcription: Transcription
     map_transcription : Données textuelles
     credits: "Droits réservés : "
-  search:
-    label: Recherche
-    title: Rechercher
-    close: Fermer la recherche
+  add_to_calendar:
+    title: Ajouter à mon agenda
+    ical: Télécharger un fichier .ICS
+    google: Google Calendar
+    office: Office 365
+    outlook: Microsoft Outlook
+    regular_event: Ajouter toute la période de l'événement à mon agenda
+    yahoo: Yahoo! Calendar
+  authors:
+    one: Auteur·ice
+    other: Auteur·rices
   backtotop: Haut de page
   biography: Biographie
-  breadcrumb: Fil d’ariane
+  breadcrumb: 
+    show: Voir le fil d'ariane
+    title: Fil d’ariane
   click_to_copy:
     aria_label: Cliquez pour copier {{ .description }}
     button_title: Cliquez pour copier
@@ -120,14 +126,31 @@ commons:
         email: Contacter {{ .name }} par email
         rss: Consulter le flux RSS du site {{ .name }}
         website: Consultez le website de {{ .name }}
+      social_networks:
+        email: Email
+        facebook: Facebook
+        github: Github
+        instagram: Instagram
+        linkedin: LinkedIn
+        mastodon: Mastodon
+        peertube: Peertube
+        rss: RSS
+        tiktok: Tiktok
+        twitter: X, ex-Twitter
+        vimeo: Vimeo
+        x: X, ex-Twitter
+        youtube: YouTube
   credit: Un site éco-conçu produit avec <a href="https://www.osuny.org/" title="Osuny - lien externe" target="_blank" rel="noreferrer">Osuny</a>
-  date: Date
+  date:
+    one: Date
+    other: Dates
   download:
     singular_name: Télécharger
     pdf: Télécharger le PDF
   extentions:
     PDF: Adobe Portable Document Format
   "false": Non
+  hour: Heure
   in: Dans
   index: Accueil - {{ .Title }}
   language: Langue
@@ -188,7 +211,22 @@ commons:
   pdf_with_size: PDF ({{ .Size }})
   read: Lire
   read_online: Lire en ligne
+  schedule:
+    from:
+      day: Date de début
+      hour: Heure de début
+    to:
+      day: Jour de fin
+      hour: Heure de fin
+  search:
+    close: Fermer la recherche
+    label: Recherche
+    placeholder: Rechercher
+    search_label: Recherche sur ce site
+    title: Rechercher
   share: Partager
+  share_on: Partager sur
+  share_on_aria: Partager sur “{{ .Title }}” - lien externe
   slider:
     default_title: Carrousel
     goto: Aller à l'élément
@@ -197,7 +235,10 @@ commons:
     pause: Carrousel en cours de lecture. Mettre en pause le carrousel.
     play: Carrousel actuellement en pause. Démarrer le carrousel.
     previous: Aller à l'élément précédent
-  toc: Table des matières
+  time_format: 15h04
+  toc: 
+    title: Table des matières
+    button_label: ", en cours - Table des matières"
   "true": Oui
   units:
     GB: Go
@@ -208,8 +249,19 @@ commons:
     megabytes: Mégaoctets
     kilobytes: Kilooctets
     bytes: octets
+agenda:
+  access:
+    partical_informations: Informations pratiques
+  filters:
+    dates: 
+      aria_label: Afficher le calendrier des dates
+      title: Dates
+    taxonomies: Filtrer
 diplomas:
   type: Type de diplôme
+  count:
+    one: "1 diplôme"
+    other: "{{ .Count }} diplômes"
 errors:
   error_404:
     title: Erreur 404
@@ -218,34 +270,67 @@ errors:
       Nous vous proposons de retourner à la <a href="/">page d'accueil de notre site</a>.<br>
       Merci de votre compréhension.
 events:
-  archives: Accéder aux archives des événements passés
-  add_to_calendar:
-    title: Ajouter à mon agenda
-    ical: Télécharger un fichier .ICS
-    google: Google Calendar
-    office: Office 365
-    outlook: Microsoft Outlook
-    yahoo: Yahoo! Calendar
-  category:
-    one: Catégorie
-    other: Catégories
-  date: Date
-  hour: Heure
+  archives:
+    by_year: Agenda par années
+    latest: Archives
+    list:
+      title: "Archives de l'année {{ .year }}"
+  calendar:
+    day:
+      link: Consulter tous les événements du {{ .date }}
+    month:
+      link: Consulter tous les événements du mois de {{ .month }}
+    week_days:
+      short:
+        monday: Lun.
+        tuesday: Mar.
+        wednesday: Mer.
+        thursday: Jeu.
+        friday: Ven.
+        saturday: Sam.
+        sunday: Dim.
+      long:
+        monday: Lundi
+        tuesday: Mardi
+        wednesday: Mercredi
+        thursday: Jeudi
+        friday: Vendredi
+        saturday: Samedi
+        sunday: Dimanche
+  count:
+    one: "1 événement"
+    other: "{{ .Count }} événements"
+  item:
+    federated: "Événement du réseau <span>{{ . }}</span>"
+  more_dates: Afficher toutes les dates
   none: Aucun événement
   next: Événement suivant
   next_aria: Événement suivant “{{ .Title }}”
+  part_of: Cet événement fait partie de
   previous: Événement précédent
   previous_aria: Événement précédent “{{ .Title }}”
-  from:
-    day: Date de début
-    hour: Heure de début
   see_all_in_program: Voir tous les événements de la formation
-  share: Partager sur
   title: Événements
-  to:
-    day: Jour de fin
-    hour: Heure de fin
+  regular_event: Événement régulier
+  see_programme: Accéder au programme
+  status:
+    current: En cours
+    future: À venir
+    archive: Archive
   unique_day: Date
+  year:
+    anchor: Accéder aux événements
+exhibitions:
+  archives: Expositions passées
+  none: Aucune exposition.
+  current: En ce moment
+  future: Bientôt
+  item:
+    federated: "Exposition du réseau <span>{{ . }}</span>"
+  status:
+    current: En cours
+    future: À venir
+    archive: Archive
 formats:
   pdf: Adobe Portable Document Format
   jpg: JPEG image
@@ -261,11 +346,32 @@ formats:
   zip: Compressed archive
   gz: Compressed archive
   tar: Compressed archive
+jobs:
+  dates:
+    from: Date
+    to: Date de clôture
+  next: Offre suivante
+  next_aria: Offre suivante “{{ .Title }}”
+  previous: Offre précédente
+  previous_aria: Offre précédente “{{ .Title }}”
 organizations:
+  backlinks:
+    events: Événements mentionnant
+    pages: Pages mentionnant
+    posts: Actualités mentionnant
+    projects: Projets mentionnant
+  count:
+    one: "1 organisation"
+    other: "{{ .Count }} organisations"
   logo: Logo
+  none: Aucune organisation
 pages:
+  count:
+    one: "1 page"
+    other: "{{ .Count }} pages"
   details: En détail
   informations: Informations
+  none: Aucune page
   posts: Actualités
 papers:
   abstract: Abstract
@@ -281,6 +387,15 @@ papers:
     references: Références
     content: Texte intégral
 persons:
+  backlinks:
+    events: Événements mentionnant
+    pages: Pages mentionnant
+    posts: Actualités mentionnant
+    projects: Projets mentionnant
+  count:
+    one: "1 personne"
+    other: "{{ .Count }} personnes"
+  none: Aucune personne
   posts:
     recent: Actualités publiées récemment
     all: Voir toutes les actualités publiées par {{ .author }}
@@ -291,59 +406,38 @@ persons:
     recent: Publications récentes
     all: Voir toutes les publications de {{ .author }}
   programs: Enseignements
-  backlinks:
-    events: Événements mentionnant
-    pages: Pages mentionnant
-    posts: Actualités mentionnant
-    projects: Projets mentionnant
 posts:
   author: Auteur·rice
   authors:
     label: "Auteur·rice·s"
     a11y_title: Auteurs, autrices de cet article
     more: Plus d'information
-  category:
-    one: Catégorie
-    other: Catégories
+  count: 
+    one: "1 article"
+    other: "{{ .Count }} articles"
   date: Date
   informations: Informations
   next: Article suivant
   next_aria: Article suivant “{{ .Title }}”
+  none: Aucun article publié
   previous: Article précédent
   previous_aria: Article précédent “{{ .Title }}”
   reading_time: Temps de lecture
   see_all: Voir toutes les actualités
   see_all_in_program: Voir toutes les actualités de la formation
   see_all_in_category: Voir toutes les actualités “{{ .Title }}”
-  share: Partager sur
-  share_aria: Partager sur “{{ .Title }}” - lien externe
   title: Actualités
-projects:
-  author: Auteur·rice
-  authors: "Auteur·rice·s"
-  category:
-    one: Catégorie
-    other: Catégories
-  informations: Informations
-  next: Projet suivant
-  next_aria: Projet suivant “{{ .Title }}”
-  previous: Projet précédent
-  previous_aria: Projet précédent “{{ .Title }}”
-  reading_time: Temps de lecture
-  see_all: Voir toutes les projets
-  see_all_in_program: Voir toutes les projets de la formation
-  see_all_in_category: Voir toutes les projets “{{ .Title }}”
-  share: Partager sur
-  share_aria: Partager sur “{{ .Title }}” - lien externe
-  title: Projets
-  year: Année
 programs:
   accessibility: Accessibilité
   administrative_information: Informations administratives
   certifications:
     qualiopi: Qualiopi, processus certifié, République Française
   children: Parcours
+  cohorts: Promotions
   contacts: Contacts
+  count:
+    one: "1 formation"
+    other: "{{ .Count }} formations"
   evaluation: Modalités d’évaluation
   objectives: Objectifs
   opportunities: Débouchés
@@ -368,15 +462,15 @@ programs:
   ects_credits: Crédits ECTS
   level: Niveau
   mention: Mention
-  no_program: Aucune formation
+  none: Aucune formation
   posts: Actualités
-  # TODO déplacer la clé location
   location:
     one: Campus
     other: Campus
   toc:
     admission: Admission
     certification: Certification
+    cohorts: Promotions
     essential: Essentiel
     pedagogy: Pédagogie
     presentation: Présentation
@@ -389,15 +483,38 @@ programs:
     apprenticeship: Apprentissage
     initial: Formation initiale
     continuing: Formation continue
+projects:
+  author: Auteur·rice
+  authors: "Auteur·rice·s"
+  count:
+    one: "1 projet"
+    other: "{{ .Count }} projets"
+  informations: Informations
+  next: Projet suivant
+  next_aria: Projet suivant “{{ .Title }}”
+  none: Aucun projet
+  previous: Projet précédent
+  previous_aria: Projet précédent “{{ .Title }}”
+  reading_time: Temps de lecture
+  see_all: Voir toutes les projets
+  see_all_in_program: Voir toutes les projets de la formation
+  see_all_in_category: Voir toutes les projets “{{ .Title }}”
+  title: Projets
+  year: Année
 publications:
   downloads: Téléchargements
   next: Publication suivante
   previous: Publication précédente
   citations: Citations
   stats:
-    label: publications
+    label:
+      one: publication
+      other: publications
 sitemap:
   pages: Arborescence
+taxonomies:
+  list:
+    title: "Parcourir :"
 volumes:
   abstract: Résumé
   paper:

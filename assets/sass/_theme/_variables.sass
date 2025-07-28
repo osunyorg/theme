@@ -3,13 +3,14 @@
   //     COLORS     //
   // ---------------//
   --color-accent: #{$color-accent}
+  --color-danger: #{$color-danger}
   --color-text: #{$color-text}
   --color-text-alt: #{$color-text-alt}
-  --color-selection: #{$color-selection}
-  --color-selection-background: #{$color-selection-background}
   --color-border: #{$color-border}
   --color-background-alt: #{$color-background-alt}
   --color-background: #{$color-background}
+  --color-selection: #{$color-selection}
+  --color-selection-background: #{$color-selection-background}
 
   @if $has-dark-mode
     @media (prefers-color-scheme: dark)
@@ -128,13 +129,26 @@
   --btn-border-radius: #{$btn-border-radius}
   --btn-padding: #{$btn-padding}
   --btn-min-width: #{$btn-min-width}
+  --btn-disabled-color: #{$btn-disabled-color}
+  --btn-disabled-background: #{$btn-disabled-background}
+  --btn-disabled-border: #{$btn-disabled-border}
+  --btn-small-font-size: #{$btn-small-font-size}
+  --btn-small-line-height: #{$btn-small-line-height}
+  --btn-small-padding: #{$btn-small-padding}
+  --btn-large-font-size: #{$btn-large-font-size}
+  --btn-large-line-height: #{$btn-large-line-height}
+  --btn-large-padding: #{$btn-large-padding}
   @include media-breakpoint-up(desktop)
     --btn-font-size: #{$btn-font-size-desktop}
     --btn-padding: #{$btn-padding-desktop}
     --btn-border: #{$btn-border-desktop}
     --btn-border-radius: #{$btn-border-radius-desktop}
     --btn-min-width: #{$btn-min-width-desktop}
-  
+    --btn-small-font-size: #{$btn-small-font-size-desktop}
+    --btn-small-padding: #{$btn-small-padding-desktop}
+    --btn-large-font-size: #{$btn-large-font-size-desktop}
+    --btn-large-padding: #{$btn-large-padding-desktop}
+
   // -------------- //
   //      GRID      //
   // ---------------//
@@ -168,10 +182,16 @@
   // ---------------//
 
   --block-space-y: #{$block-space-y}
-  @include in-page-without-sidebar
-    --block-space-y: #{$block-space-y-desktop}
-  @include in-page-with-sidebar
-    --block-space-y: #{$block-space-y-with-sidebar}
+  @include media-breakpoint-up(desktop)
+    body:not(.full-width)
+      --block-space-y: #{$block-space-y-with-sidebar}
+    main > .blocks, body.full-width
+      --block-space-y: #{$block-space-y-desktop}
+
+  // -------------- //
+  //     BORDER     //
+  // ---------------//
+  --border-width: #{$border-width}
 
   // -------------- //
   //     HEADING    //
@@ -194,6 +214,7 @@
   // Used in i18n footer and diplomas select
   --dropdown-background: var(--color-background-alt)
   --dropdown-border-color: var(--color-border)
+  --dropdown-border-width: #{$dropdown-border-width}
   --dropdown-color: var(--color-text)
   --dropdown-hover-color: var(--color-background)
   --dropdown-hover-background: var(--color-accent)

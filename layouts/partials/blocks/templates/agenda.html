@@ -13,11 +13,11 @@
             {{ range .events }}
               {{ $event := site.GetPage .path }}
               {{ with $event }}
-                  {{ partial "events/event" (dict
+                  {{ partial "events/partials/event.html" (dict
                     "event" .
                     "layout" $layout
                     "options" $options
-                    "heading" (printf "h%d" $block.ranks.children)
+                    "heading_level" $block.ranks.children
                   ) }}
               {{ end }}
             {{ end }}

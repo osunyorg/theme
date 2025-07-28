@@ -1,13 +1,18 @@
 {{- $isTocPresent := .context.Params.design.toc.present -}}
 
+{{ if site.Params.toc.disabled }}
+  {{ $isTocPresent = false }}
+{{ end }}
+
 {{- if $isTocPresent -}}
   {{- partial "toc/cta" -}}
 
   <div class="toc-container" aria-hidden="false" aria-labelledby="toc-title">
     <div class="toc-content">
       {{/* TODO : quelle balise pour le titre du toc ? */}}
-      <div id="toc-title" class="toc-title" role="heading" aria-level="2">{{ i18n "commons.toc" }}</div>      {{- partial (printf .toc) . -}}
-      <button name="{{ i18n "commons.close" }}">{{ i18n "commons.close" }}</button>
+      <div id="toc-title" class="toc-title" role="heading" aria-level="2">{{ i18n "commons.toc.title" }}</div>
+      {{- partial (printf .toc) . -}}
+      <button name="{{ i18n "commons.close" }}" type="button">{{ i18n "commons.close" }}</button>
     </div>
   </div>
 {{- end -}}

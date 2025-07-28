@@ -1,10 +1,15 @@
 {{ $menu := partial "GetMenu" "legal" }}
+{{ $class := "nav-legal" }}
+
 {{ if $menu }}
+  {{ if not (in site.Params.i18n.positions "footer") }}
+    {{ $class = printf "%s without-i18n" $class }}
+  {{ end }}
   {{ partial "commons/menu.html"
     (dict
-      "kind"        "legal"
-      "level"       1
-      "class"       "nav-legal"
+      "kind" "legal"
+      "level" 1
+      "class" $class
+      "context" .
     )}}
 {{ end }}
-{{ partial "footer/credit.html" }}

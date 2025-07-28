@@ -1,24 +1,32 @@
-ul.categories
-    &:not(.categories--grid)
-        @include list-section
-        li
-            a:first-child
-                & + p 
-                    text-align: right
-                    white-space: nowrap
-
-.posts_categories__term, .events_categories__term
+body:where([class*="_categories__term"])
     main
         padding-bottom: $spacing-5
 
-.document-content
-    .project-categories
-        --block-space-y: #{$block-space-y}
-        margin-bottom: var(--block-space-y)
+.category-item
+    .articles-count
+        @include meta
+        color: var(--color-text-alt)
 
-article.category
-    @include article
-    .category-title
-        @include article-title
-        + p
-            margin-top: $spacing-1
+.children-categories
+    ul
+        @include list-reset
+        @include meta
+        align-items: baseline
+        display: flex
+        flex-wrap: wrap
+        column-gap: $spacing-3
+        row-gap: $spacing-2
+        margin-bottom: var(--grid-gutter)
+        margin-top: var(--grid-gutter)
+
+.categories
+    &--alternate
+        @include layout-alternate
+    &--cards
+        @include layout-cards
+    &--grid
+        @include layout-grid
+    &--large
+        @include layout-large
+    &--list
+        @include layout-list

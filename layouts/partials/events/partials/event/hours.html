@@ -1,0 +1,12 @@
+{{ if .start }}
+  <p class="event-hours">
+    <span>
+      {{- if .start.datetime -}}
+        <time datetime="{{ .start.time }}">{{- .start.datetime | time.Format ( i18n "commons.time_format" ) -}}</time>
+      {{- end -}}
+      {{- if .end.datetime -}}
+        <time datetime="{{ .end.time }}">{{- .end.datetime | time.Format ( i18n "commons.time_format" ) -}}</time>
+      {{- end -}}
+    </span>
+  </p>
+{{ end }}

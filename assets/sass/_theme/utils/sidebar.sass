@@ -6,7 +6,7 @@
 @mixin in-page-without-sidebar
     @include media-breakpoint-up(desktop)
         main > .blocks &,
-        body.full-width &,
+        body.full-width &
             @content
 
 // Use this mixin to override with-aside or without-aside rules
@@ -31,7 +31,7 @@
     .programs__section &
         @content
 
-@mixin sticky($offset-y: 0)
+@mixin sticky($offset-y: 0px)
     position: sticky
     top: $offset-y
     @if $header-sticky-enabled
@@ -58,7 +58,92 @@
         & > div
             @include sticky($spacing-3)
         .toc-container
-            border-top: 1px solid var(--color-border)
-            padding-top: $spacing-3
             position: static
             margin-left: 0
+        &:has(aside)
+            .toc-container
+                border-top: var(--border-width) solid var(--color-border)
+                padding-top: $spacing-3
+@mixin sidebar-infos
+    @include meta
+    @include list-reset
+    font-size: $table-body-size
+    margin-bottom: 0
+    @include media-breakpoint-up(desktop)
+        font-size: $table-body-size-desktop
+    @include media-breakpoint-down(desktop)
+        margin-top: $spacing-3
+    > li:first-child
+        > ul:first-child, &
+            > li:first-child, &, &
+                padding-top: 0
+    > li,
+    .taxonomies-single.with-label > li
+        @include meta
+        display: flex
+        gap: $spacing-3
+        justify-content: space-between
+        padding-top: $spacing-2
+        padding-bottom: $spacing-2
+        border-color: var(--color-border)
+        &:not(:first-child)
+            border-top: var(--border-width) solid var(--color-border)
+        > span
+            @include meta
+            color: var(--color-text-alt)
+            padding-left: 0
+            white-space: nowrap
+            vertical-align: top
+        .share
+            text-align: right
+            flex: 1
+        &.authors,
+        &.terms
+            margin: 0
+            ul
+                text-align: right
+            li
+                display: inline-block
+                vertical-align: middle
+                margin-left: $spacing-1
+                &:last-child
+                    &::after
+                        content: none
+            @include media-breakpoint-up(desktop)
+                align-items: baseline
+                li
+                    display: block
+                    + li
+                        margin-top: space()
+
+    .taxonomies-single
+        flex: 1
+        li:last-child
+            padding-bottom: 0
+        &.without-label
+            display: block
+            li, a
+                display: inline
+            li + li
+                padding-left: $spacing-1 
+    a
+        @include link(var(--color-accent))
+        text-align: right
+    .share
+        display: flex
+        flex-wrap: wrap
+        justify-content: end
+        margin-right: -$spacing-2
+        li
+            display: inline-block
+        a
+            color: inherit
+            text-decoration: none
+
+@mixin document-min-height($min-height: 350px)
+    min-height: $min-height
+    // Add after element to avoid "min-height" to ignore the last block's margin-bottom
+    &::after
+        content: ''
+        display: block
+        height: 1px

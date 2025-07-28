@@ -2,7 +2,7 @@
 @mixin hover-translate-icon($pseudo: after, $distance: 10, $fade: false)
     &::#{$pseudo}
         display: inline-block
-        transition: 0.55s $arrow-ease-transition
+        transition: $arrow-duration $arrow-ease-transition
         transform: translateX(0)
         @if $fade
             opacity: 0
@@ -14,6 +14,7 @@
 
 @mixin icon($icon-name: '', $pseudo-element: before, $non-breaking: false)
     &::#{$pseudo-element}
+        content: map-get($icons, $icon-name)
         content: map-get($icons, $icon-name) #{/ ""} // Add ‘ / ""‘ to hide from screen reader
         font-family: 'Icon'
         font-style: normal
@@ -23,8 +24,11 @@
         speak: never
         text-transform: none
         @if $non-breaking
-            content: " #{map-get($icons, $icon-name)}"
             display: inline
+            @if $pseudo-element == "after"
+                content: " #{map-get($icons, $icon-name)}"
+            @if $pseudo-element == "before"
+                content: "#{map-get($icons, $icon-name)} "
         @content // TODO : important de documenter ça
 
 @mixin icon-block($icon-name: '', $pseudo-element: before, $non-breaking: false)
@@ -39,14 +43,14 @@
 
 @mixin icon-frame($icon-name: '', $pseudo-element: before, $non-breaking: false, $hoverable: false)
     @include icon($icon-name, $pseudo-element, $non-breaking)
-        border: 1px solid var(--color-border)
+        border: var(--border-width) solid var(--color-border)
         display: inline-block
         flex-shrink: 0
         height: pxToRem(64)
         line-height: pxToRem(64)
         margin-right: $spacing-2
         text-align: center
-        transition: background 0.3s ease, border 0.3s ease
+        transition: background $background-duration ease, border $background-duration ease
         vertical-align: middle
         width: pxToRem(64)
         @include media-breakpoint-up(desktop)
@@ -59,18 +63,31 @@
                 border-color: transparent
                 color: var(--color-background)
 
-@mixin arrow-right-hover
-    position: relative
-    display: flex
-    justify-content: space-between
-    align-items: center
-    @include icon(arrow-right-line, after)
-        opacity: 0
-        transform: translateX(-20px)
-        transition: 0.55s $arrow-ease-transition
-        position: absolute
-        right: 0
+@mixin arrow-right-hover($target: "&", $size: pxToRem(40))
+    #{$target}
+        position: relative
+        display: flex
+        justify-content: space-between
+        align-items: center
+        @include icon(arrow-right-line, after)
+            font-size: $size
+            opacity: 0
+            position: absolute
+            right: 0
+            transform: translateX(-20px)
+            transition: $arrow-duration $arrow-ease-transition
     &:hover
-        &:after
-            opacity: 1
-            transform: translateX(0)
+        #{$target}
+            &:after
+                opacity: 1
+                transform: translateX(0)
+
+@mixin small-arrow-right-hover($target: "&")
+    #{$target}
+        @include icon(arrow-right-line, after, true)
+            display: inline-block
+            transition: transform 0.3s ease
+    &:hover 
+        #{$target}
+            &:after
+                transform: translateX($spacing-1)

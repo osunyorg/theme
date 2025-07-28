@@ -1,0 +1,82 @@
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading := printf "h%d" $heading_level }}
+{{ $heading_tag := (dict 
+  "open" ((printf "<%s class='post-title' itemprop='headline'>" $heading) | safeHTML)
+  "close" ((printf "</%s>" $heading) | safeHTML)
+  ) }}
+{{ $options := .options }}
+
+<div class="highlight">
+  {{ $highlight := index .posts 0 }}
+  {{ $highlight = site.GetPage $highlight.path}}
+  {{ $list := .posts }}
+
+  {{ with $highlight }}
+    <div class="highlight-post">
+      {{ partial "posts/partials/post.html" (dict 
+        "post" .
+        "heading" $heading
+        "options" $options
+        ) }}
+    </div>
+  {{ end }}
+
+  {{ with $list }}
+    {{ $first := true }}
+    <div class="list">
+      {{ range after 1 . }}
+        {{ with site.GetPage .path }}
+          <article class="post">
+            <div class="post-content">
+              {{- $title := partial "PrepareHTML" .Title -}}
+              {{ if and $options.subtitle .Params.subtitle }}
+                <hgroup>
+              {{ end }}
+              {{ $heading_tag.open }}
+                <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+              {{ $heading_tag.close }}
+              {{ if and $options.subtitle .Params.subtitle }}
+                <p class="post-subtitle">{{ partial "PrepareHTML" .Params.subtitle }}</p>
+              {{ end }}
+              {{ if and $options.subtitle .Params.subtitle }}
+                </hgroup>
+              {{ end }}
+  
+              {{ if $options.categories }}
+                {{ partial "commons/categories" ( dict
+                  "context" .
+                  "kind" "post"
+                )}}
+              {{ end }}
+
+              {{ if and $options.summary .Params.summary }}
+                {{ partial "GetRichSummary" ( dict 
+                  "summary" .Params.summary
+                  "kind" "posts"
+                )}}
+              {{ end }}
+
+              {{ if and .Params.contents_reading_time $options.reading_time }}
+                <span class="post-reading-time">
+                  {{ i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" .Params.contents_reading_time.text }}
+                </span>
+              {{ end }}
+            </div>
+
+            {{- if or $options.author $options.date -}}
+              <div class="post-meta">
+                {{- if $options.date -}}
+                  <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
+                {{ end }}
+                {{ if $options.author }}
+                  {{- partial "posts/partials/author.html" . -}}
+                {{ end }}
+              </div>
+            {{ end }}
+          </article>
+        {{ end }}
+      {{ end }}
+    </div>
+  {{ end }}
+</div>
+

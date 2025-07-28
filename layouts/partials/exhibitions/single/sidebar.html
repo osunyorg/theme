@@ -1,0 +1,15 @@
+<div class="section-sidebar exhibition-sidebar">
+  <div>
+    {{ if site.Params.exhibitions.single.meta_in_sidebar }}
+      <aside>
+        {{- partial "exhibitions/single/exhibition-infos.html" . -}}
+      </aside>
+    {{ end }}
+    {{ partial "toc/container.html"
+      (dict
+          "toc" "toc/default.html"
+          "context" .
+      )
+    }}
+  </div>
+</div>

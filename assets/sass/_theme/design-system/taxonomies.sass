@@ -21,12 +21,88 @@
                 display: inline-block
                 margin-left: $spacing-1
 
+.section-taxonomies-container
+    @include container
+    position: relative
+    @include in-page-with-sidebar
+        z-index: $zindex-toc + 1
+        .taxonomies-list
+            padding-left: offset(4)
+
+.taxonomies-list
+    > p
+        @include meta
+    .dropdown
+        @include dropdown(".taxonomy-categories", $section-taxonomies-full-width)
+    .taxonomy-categories
+        ul
+            @include list-reset
+    &--dropdown
+        align-items: baseline
+        display: flex
+        margin-bottom: var(--grid-gutter)
+        margin-top: var(--grid-gutter)
+        flex-wrap: wrap
+    &--inline
+        @include grid(3)
+        margin-bottom: $spacing-5
+        .taxonomy-categories
+            ul
+                a
+                    @include meta
+    @include media-breakpoint-down(md)
+        flex-direction: column
+        .dropdown 
+            margin-top: $spacing-2
+            width: 100%
+    @include media-breakpoint-up(md)
+        &--dropdown
+            gap: $spacing-3
+            .taxonomy-categories
+                min-width: max-content
+                margin-left: -$spacing-1
+
 .taxonomies-single
-    ul
+    &, ul
         @include list-reset
+    li a
+        display: block
     .taxonomy-title
         @include meta
+    .hero &
+        margin-top: $spacing-4
+        display: block
+        a
+            @include small
+        &.with-label
+            > li
+                ul
+                    display: flex
+                    flex-wrap: wrap
+                    gap: $spacing-1
+                    text-align: right
+                @include media-breakpoint-up(xl)
+                    align-items: baseline
+                    display: flex
+                    justify-content: space-between
+            @include media-breakpoint-up(lg)
+                width: columns(4)
+    @include media-breakpoint-down(desktop)
+        .hero &, &
+            &.without-label
+                li, a
+                    display: inline
+                li
+                    padding-right: $spacing-1
+    @include media-breakpoint-up(desktop)
+        .hero &, &
+            &.without-label
+                display: flex
+                flex-wrap: wrap
+                column-gap: $spacing-2
+                margin-bottom: $spacing-3
 
+// For index pages
 .taxonomy-categories--grid
     @include list-reset
     @include grid(1, false, $spacing-4)
@@ -36,14 +112,22 @@
         margin-top: var(--block-space-y)
 
 .document-content
-    .persons-taxonomies, .organizations-taxonomies, .projects-taxonomies
-        @include grid(3, desktop)
-        @include media-breakpoint-down(desktop)
-            margin-top: $spacing-5
-            > li + li
-                    margin-top: $spacing-3
-        &, ul
-            // for organizations
-            [itemprop="articleBody"] &,
-            &
+    .taxonomies-container
+        margin-bottom: $spacing-5
+        .taxonomies-single
+            &.with-label
+                @include grid(3, desktop, $spacing-3)
+            ul, &
                 @include list-reset
+            @include media-breakpoint-down(desktop)
+                margin-top: $spacing-5
+                > li + li
+                        margin-top: $spacing-3
+            &.organizations-taxonomies
+                @include grid(2, desktop)
+            &.pages-taxonomies,
+            &.projects-taxonomies
+                margin-bottom: var(--heading-margin-top)
+                @include in-page-with-sidebar
+                    @include grid(2, desktop)
+                    padding-left: offset(4)

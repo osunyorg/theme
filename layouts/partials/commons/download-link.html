@@ -16,9 +16,7 @@
     {{ $a11y_title = $file.name }}
   {{ end }}
 
-  {{ $size := partial "GetHumanSize" $file.size }}
-  {{ $extension := partial "GetExtensionFile" $file.name }}
-  {{ $extension_with_size := (printf "%.2f %s - %s" $size.weight $size.unit $extension) }}
+  {{ $extension_with_size := partial "GetFileExtensionWithSize" $file }}
   {{ $title_with_size := printf "%s (%s)" $a11y_title $extension_with_size }}
   {{ $url := $file.url }}
   {{ if site.Params.keycdn }}
@@ -29,8 +27,7 @@
   </a>
   {{ if .with_caption }}
     <figcaption>
-      <abbr title="{{ i18n (printf "commons.extensions.%s" $extension) }}">{{ $extension }}</abbr>
-      - {{ $size.weight }} <abbr title="{{ $size.full_unit }}">{{ $size.unit }}</abbr>
+      {{ partial "commons/extension-and-size.html" $file }}
     </figcaption>
   {{ end }}
 {{ end }}

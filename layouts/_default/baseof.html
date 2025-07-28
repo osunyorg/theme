@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ partial "head/init.html" . }}
     {{ partial "head/csp.html" }}
     {{ partial "head/css.html" }}
     {{ partial "head/seo.html" . }}
@@ -15,12 +16,17 @@
     {{- partial "header/accessibility.html" -}}
     {{- partial "hooks/before-header" . -}}
     {{- partial "header/header.html" . -}}
-    <main{{ if .Params.contents }} class="page-with-blocks"{{ end }} id="main">
+    {{- partial "commons/alerts/list.html" }}
+    <main id="main"
+        {{ partial "GetMainClass" . | safeHTMLAttr }}
+        {{ partial "GetMainSearchAttributes" . | safeHTMLAttr }}
+        >
       {{ partial "commons/search/button.html" "fixed" }}
       {{- block "main" . }}{{- end }}
       {{- partial "hooks/before-main-end" . -}}
     </main>
     {{- partial "footer/footer.html" . -}}
+    {{- partial "hooks/after-footer-end.html" -}}
     {{- partial "commons/lightbox/lightbox.html" . -}}
     {{- partial "commons/search/modal.html" . -}}
     {{- partial "footer/plausible.html" . -}}

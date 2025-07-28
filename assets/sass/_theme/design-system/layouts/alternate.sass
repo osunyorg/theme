@@ -1,0 +1,17 @@
+@mixin layout-alternate
+    @include list-reset
+    @include alternate("> li")
+    article
+        @include article(initial)
+        @include layout-item
+    @include media-breakpoint-down(desktop)
+        > li + li
+            margin-top: $spacing-4
+    @include media-breakpoint-up(desktop)
+        .more
+            @include icon(arrow-right-line, after, true)
+                display: inline-block
+                transition: transform $arrow-duration $arrow-ease-transition
+        article:hover
+            .more::after
+                transform: translateX(pxToRem(5))

@@ -1,0 +1,9 @@
+<div class="volumes">
+  {{ range .Paginator.Pages }}
+    <div>
+      {{ partial "volumes/partials/volume.html" (dict 
+          "volume" .
+      )}}
+    </div>
+  {{ end }}
+</div>

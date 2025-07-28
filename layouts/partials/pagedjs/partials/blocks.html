@@ -1,0 +1,11 @@
+{{ range . }}
+  <div class="block block-{{ .template }}">
+    {{ partial "blocks/top.html" .top }}
+    {{ $partialPath := printf "pagedjs/partials/blocks/%s.html" .template }}
+    {{ if templates.Exists ( printf "partials/%s" $partialPath ) }}
+      {{ partial $partialPath . }}
+    {{ else }}
+      {{ .template }} not implemented for Paged.js yet
+    {{ end }}
+  </div>
+{{ end }}

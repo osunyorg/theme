@@ -1,0 +1,14 @@
+<div class="container" itemtype="subEvents">
+  <div class="event-programme" id="programme">
+    {{ $events := partial "GetObjectsFromPathSlice" . }}
+    {{ if $events }}
+      {{ $agenda := $events.GroupByDate site.Params.events.index.group_by_date "asc" }}
+      {{ partial "events/partials/agenda.html" (dict
+          "layout" site.Params.events.single.agenda.layout
+          "options" site.Params.events.single.agenda.options
+          "agenda" $agenda
+          "is_sub_event" true
+        ) }}
+      {{ end }}
+  </div>
+</div>

@@ -24,8 +24,38 @@
                 color: $breadcrumb-icon-color
 
 .breadcrumb-nav
+    &--extendable
+        button
+            display: none
     @include media-breakpoint-down(desktop)
-        margin-left: var(--grid-gutter-negative)
-        margin-right: var(--grid-gutter-negative)
-        > ol
-            padding: 0 var(--grid-gutter)
+        li
+            a
+                text-decoration-color: var(--color-border)
+        &--extendable
+            ol
+                height: auto
+            button
+                @include button-reset
+                @include link
+                @include meta
+                display: block
+                padding: 0
+                // When not expanded
+                + .extendable
+                    display: none
+                    li
+                        display: inline
+                        padding-left: 0
+                        white-space: initial
+                        > a, > span
+                            display: inline-block
+                // When expanded
+                &[aria-expanded="true"]
+                    display: none
+                    + .extendable
+                        display: block
+        &:where(:not(.breadcrumb-nav--extendable))
+            margin-left: var(--grid-gutter-negative)
+            margin-right: var(--grid-gutter-negative)
+            > ol
+                padding: 0 var(--grid-gutter)

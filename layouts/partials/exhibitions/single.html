@@ -1,0 +1,30 @@
+{{ partial "exhibitions/single/hero.html" . }}
+
+<div itemscope itemtype="https://schema.org/Event">
+  {{ partial "commons/agenda/access.html" . }}
+  <div class="document-content">
+    <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+    <meta itemprop="url" content="{{ .Permalink }}">
+    {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
+  
+    {{ partial "exhibitions/single/sidebar.html" . }}
+  
+    {{ partial "exhibitions/single/summary.html" (dict
+        "context" .
+        "block_wrapped" true
+      ) }}
+  
+    {{ partial "contents/list.html" . }}
+
+    {{ if site.Params.events.single.navigation.active }}
+      {{ partial "commons/siblings-navigation.html" (dict
+        "context" .
+        "previous_label" (i18n "events.previous")
+        "next_label" (i18n "events.next")
+        "reversed" (not .Params.dates.archive)
+      ) }}
+    {{ end }}
+  
+    {{ partial "hooks/before-document-content-end.html" . }}
+  </div>
+</div>

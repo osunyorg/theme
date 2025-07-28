@@ -1,0 +1,114 @@
+{{ $event := .event }}
+{{ $layout := .layout | default "list" }}
+{{ $heading_level := .heading_level | default 3 }}
+{{ $is_sub_event := .is_sub_event }}
+{{ $is_sup_event := .is_sup_event }}
+{{ $with_more := .with_more }}
+
+{{ $heading_tag := (dict 
+    "open" ((printf "<h%d itemprop='name' class='event-title'>" $heading_level) | safeHTML)
+    "close" ((printf "</h%d>" $heading_level) | safeHTML)
+    ) }}
+{{ $index := .index }}
+{{ $alternate := .alternate }}
+{{ $options := .options }}
+
+{{ with $event }}
+  {{ $class := "event" }}
+  {{ if and .Params.image $options.image }}
+    {{ $class = printf "%s event--with-image" $class }}
+  {{ end }}
+  {{ if .Params.children }}
+    {{ $class = printf "%s event--parent" $class }}
+  {{ end }}
+  {{ if .Params.parent }}
+    {{ $class = printf "%s event--child" $class }}
+  {{ end }}
+  {{ if .Params.federation.active }}
+    {{ $class = printf "%s is-federated" $class }}
+  {{ end }}
+
+  {{ $dates := .Params.dates }}
+
+  <article class="{{ $class }}" 
+      {{ if $is_sub_event }} itemprop="subEvent" {{ end }}
+      {{ if $is_sup_event }} itemprop="superEvent" {{ end }}
+      itemscope itemtype="https://schema.org/Event">
+
+    {{ if or .Params.dates .Params.current_time_slot }}
+      {{ partial "events/partials/event/meta-dates.html" (dict
+          "dates" .Params.dates 
+          "time_slot" .Params.current_time_slot
+        )}}
+    {{ end }}
+
+    <div class="event-content">
+      {{ partial "events/partials/event/heading.html" (dict
+          "item" .
+          "options" $options
+          "level" $heading_level
+          "itemprop" "name"
+        ) }}
+
+      {{ partial "events/partials/event/federated.html" . }}
+
+      {{ if ne $layout "agenda" }}
+        {{ partial "events/partials/event/parent.html" . }}
+      {{ end }}
+
+      {{ if eq $layout "agenda" }}
+        {{ with .Params.current_time_slot }}
+          {{ partial "events/partials/event/hours.html" . }}
+        {{ end }}
+      {{ end }}
+
+      {{ if $options.dates }}
+        {{ partial "events/partials/event/schedule.html" (dict 
+            "dates" .Params.dates
+            "time_slot" .Params.current_time_slot
+            "time_slots" .Params.time_slots
+            "on_two_lines" (ne $layout "list")
+          )}}
+      {{ end }}
+
+      {{ if and $dates.status $options.status }}
+        {{ partial "events/partials/event/status.html" $dates.status }}
+      {{ end }}
+
+      {{ if and $options.summary .Params.summary }}
+        <div class="event-description" itemprop="description">
+          {{ partial "GetRichSummary" ( dict 
+            "summary" .Params.summary
+            "kind" "events"
+          )}}
+          {{ if eq $layout "large" }}
+            <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+          {{ end }}
+        </div>
+      {{ end }}
+
+      {{ if $options.categories }}
+        {{ partial "commons/categories.html" ( dict
+          "context" .
+          "kind" "event"
+        )}}
+      {{- end -}}
+
+      {{ if $with_more }}
+        {{ partial "commons/item/more.html" . }}
+      {{- end -}}
+    </div>
+    <div class="media">
+      {{- if and $options.image .Params.image -}}
+        {{ $sizes := index site.Params.image_sizes.blocks.events $layout }}
+        {{- partial "commons/image.html"
+            (dict
+              "image"    .Params.image
+              "sizes"    $sizes
+            ) -}}
+      {{- else -}}
+        {{- partial "commons/image-default.html" "events" -}}
+      {{- end -}}
+    </div>
+  </article>
+{{ end }}

@@ -1,0 +1,17 @@
+{{ $jobs := .Paginator.Pages }}
+{{ $layout := default site.Params.jobs.index.layout }}
+{{ $options := default site.Params.jobs.index.options }}
+{{ $heading_level := 2 }}
+
+<ul class="jobs jobs--{{- $layout }}">
+  {{ range $jobs }}
+    <li>
+      {{ partial "jobs/partials/job.html" (dict
+          "job" .
+          "heading_level" $heading_level
+          "layout" $layout
+          "options" $options
+        )}}
+    </li>
+  {{ end }}
+</ul>

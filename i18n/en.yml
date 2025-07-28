@@ -3,10 +3,6 @@ blocks:
     title: Call to action
   categories:
     title: Catégories
-    items:
-      count:
-        one: "1 article"
-        other: "{{ .Count }} articles"
   chapter:
     title: Chapter
   contact:
@@ -48,6 +44,8 @@ blocks:
     title: People
   posts:
     title: Posts
+  projects:
+    title: Projets
   programs:
     title: Programs
   publications:
@@ -65,12 +63,21 @@ blocks:
     play: Play video
 categories:
   label: Categories
-  no_post: No post in this category
-  no_project: No project in this category
+  no_event: No event in this category
+  no_organization: No organization in this category
+  no_page: No pages in this category
   no_person: No people in this category
-  see_more:
-    one: See the post
-    other: See the {{ .Count }} posts
+  no_post: No posts in this category
+  no_program: No programs in this category
+  no_project: No projects in this category
+  type:
+    events_categories: Event categories
+    organizations_categories: Organizations categories
+    pages_categories: Page categories
+    persons_categories: Persons categories
+    posts_categories: News categories
+    programs_categories: Programs categories
+    projects_categories: Projects categories
 commons:
   accessibility:
     main_content: Go to main content
@@ -79,10 +86,25 @@ commons:
     search: Go to search
     shortcut_navigation: Navigation Links
     transcription: Transcription
+    map_transcription : Transcription
     credits: "Rights reserved: "
+  add_to_calendar:
+    title: Add to my calendar
+    ical: Download an .ICS file
+    google: Google Calendar
+    office: Office 365
+    outlook: Microsoft Outlook
+    regular_event: Add the entire event period to my calendar
+    yahoo: Yahoo! Calendar
+  authors:
+    one: Author
+    other: Authors
   search:
-    title: Search
     close: Close search
+    label: Search
+    placeholder: Search
+    search_label: Search this site
+    title: Search
   backtotop: Back to top
   biography: Biography
   breadcrumb: Breadcrumb
@@ -112,6 +134,20 @@ commons:
         email: Contact {{ .name }} by email
         rss: Read the RSS feed for {{ .name }}
         website: Visit the website of {{ .name }}
+      social_networks:
+        email: Email
+        facebook: Facebook
+        github: Github
+        instagram: Instagram
+        linkedin: LinkedIn
+        mastodon: Mastodon
+        peertube: Peertube
+        rss: RSS
+        tiktok: Tiktok
+        twitter: X, ex-Twitter
+        vimeo: Vimeo
+        x: X, ex-Twitter
+        youtube: YouTube
   credit: A low impact website crafted with <a href="https://www.osuny.org/" title="Osuny - external link" target="_blank" rel="noreferrer">Osuny</a>
   date: Date
   download:
@@ -121,6 +157,7 @@ commons:
   extensions:
     PDF: Adobe Portable Document Format
   in: In
+  index: Home - {{ .Title }}
   language: Language
   lightbox:
     button: View larger image
@@ -146,6 +183,13 @@ commons:
     blank: external link
     blank_aria: “{{ .Title }}” - external link
     download: “Download {{ .Title }}” - external link
+  maps:
+    attribution_title:  Leaflet a javascript library for interactive maps
+    label: Map view - {{ . }} - move with keyboard arrows.
+    marker_label: Display map information 
+    popup_close: Close map information
+    zoom_in: Zoom in
+    zoom_out: Zoom out
   menu:
     label: Menu
     legal: Legals menu
@@ -173,6 +217,8 @@ commons:
   read: Read
   read_online: Read online
   share: Share
+  share_on: Share on
+  share_on_aria: Share on “{{ .Title }}” - extern link
   slider:
     default_title: Carousel
     goto: Go to element
@@ -181,7 +227,10 @@ commons:
     pause: Carousel is playing. Pause the carousel.
     play: Carousel is currently paused. Start the carousel.
     previous: Go to the previous element
-  toc: Table of contents
+  time_format: 15:04
+  toc: 
+    title: Table of contents
+    button_label: ", current - Table of contents"
   "yes": "Yes"
   units:
     GB: GB
@@ -192,8 +241,19 @@ commons:
     megabytes: Megabytes
     kilobytes: Kilobytes
     bytes: bytes
+agenda:
+  access:
+    partical_informations:  Practical information
+  filters:
+    dates:
+      aria_label: Display the calendar
+      title: Dates
+    taxonomies: Filter
 diplomas:
-  type: Type de diplôme
+  type: Diploma kind
+  count:
+    one: "1 diploma"
+    other: "{{ .Count }} diplomas"
 errors:
   error_404:
     title: "404 error"
@@ -202,19 +262,44 @@ errors:
       We suggest you return to the <a href="/">home page of our site</a>.<br>
       Thank you for your understanding.
 events:
-  archives: Previous events archive
-  add_to_calendar:
-    title: Add to calendar
-    ical: Download .ICS file
-    google: Google Calendar
-    office: Office 365
-    outlook: Microsoft Outlook
-    yahoo: Yahoo! Calendar
-  category:
-    one: Category
-    other: Categories
-  date: Date
-  hour: Time
+  archives:
+    by_year: Archives by year
+    latest: Archives
+    list:
+      title: "Archives for the year {{ .year }}"
+  calendar:
+    day:
+      link: Show all for {{ .date }}
+    month:
+      link: Show all for {{ .month }}
+    week_days:
+      monday: 
+        short: Mon
+        long: Monday
+      tuesday: 
+        short: Tue
+        long: Tuesday
+      wednesday: 
+        short: Wed
+        long: Wednesday
+      thursday: 
+        short: Jeu
+        long: Thursday
+      friday: 
+        short: Fri
+        long: Friday
+      saturday:
+        short: Sam
+        long: Saturday
+      sunday: 
+        short: Sun
+        long: Sunday
+  count:
+    one: "1 event"
+    other: "{{ .Count }} events"
+  item:
+    federated: "Event from <span>{{ . }}</span>"
+  more_dates: Show all dates
   none: No event
   next: Next event
   next_aria: Next event “{{ .Title }}”
@@ -224,12 +309,26 @@ events:
     day: From day
     hour: From hour
   see_all_in_program: See all program's events
-  share: Share on
   title: Events
   to:
     day: To day
     hour: To hour
+  status:
+    current: Now
+    future: Soon
+    archive: Passed
   unique_day: Date
+exhibitions:
+  archives: Previous exhibitions archive
+  none: No exhibition.
+  current: Now
+  future: Coming soon
+  item:
+    federated: "Exhibition from <span>{{ . }}</span>"
+  status:
+    current: Now
+    future: Soon
+    archive: Passed
 formats:
   pdf: Adobe Portable Document Format
   jpg: JPEG image
@@ -245,9 +344,29 @@ formats:
   zip: Compressed archive
   gz: Compressed archive
   tar: Compressed archive
+jobs:
+  dates:
+    from: Date
+    to: Closing date
+  next: Next offer
+  next_aria: Next offer “{{ .Title }}”
+  previous: Previous offer
+  previous_aria: Previous offer “{{ .Title }}”
 organizations:
+  backlinks:
+    events: Events mentioning
+    pages: Pages mentioning
+    posts: Posts mentioning
+    projects: Projects mentioning
+  count:
+    one: "1 organization"
+    other: "{{ .Count }} organizations"
   logo: Logo
+  none: No organization
 pages:
+  count:
+    one: "1 page"
+    other: "{{ .Count }} pages"
   details: Details
   informations: Informations
   posts: News
@@ -265,6 +384,15 @@ papers:
     references: References
     content: Content
 persons:
+  backlinks:
+    events: Events mentioning
+    pages: Pages mentioning
+    posts: Posts mentioning
+    projects: Projects mentioning
+  count:
+    one: "1 person"
+    other: "{{ .Count }} persons"
+  none: No person
   posts:
     recent: Latest news
     all: View all news posted by {{ .author }}
@@ -275,58 +403,38 @@ persons:
     recent: Latest publications
     all: View all publications by {{ .author }}
   programs: Teachings
-  backlinks:
-    events: Events mentioning
-    pages: Pages mentioning
-    posts: Posts mentioning
-    projects: Projects mentioning
 posts:
   author: Author
   authors:
     label: "Authors"
     a11y_title: Authors of this article
     more: More information
-  category:
-    one: Category
-    other: Categories
+  count: 
+    one: "1 article"
+    other: "{{ .Count }} articles"
   date: Date
   informations: Informations
   next: Next article
   next_aria: Next article “{{ .Title }}”
+  none: No article
   previous: Previous article
   previous_aria: Previous article “{{ .Title }}”
   reading_time: Reading time
   see_all: See all posts
   see_all_in_program: See all program's news
   see_all_in_category: See all news in “{{ .Title }}”
-  share: Please, share
-  share_aria: Share on “{{ .Title }}” - extern link
   title: News
-projects:
-  author: Author
-  category:
-    one: Category
-    other: Categories
-  informations: Informations
-  next: Next project
-  next_aria: Next project “{{ .Title }}”
-  previous: Previous project
-  previous_aria: Previous project “{{ .Title }}”
-  reading_time: Reading time
-  see_all: See all posts
-  see_all_in_program: See all program's projects
-  see_all_in_category: See all projects in “{{ .Title }}”
-  share: Please, share
-  share_aria: Share on “{{ .Title }}” - extern link
-  title: Projects
-  year: Year
 programs:
   accessibility: Accessibility
   administrative_information: Administrative information
   certifications:
     qualiopi: Qualiopi, processus certifié, République Française
   children: Options
+  cohorts: Promotions
   contacts: Contacts
+  count:
+    one: "1 program"
+    other: "{{ .Count }} programs"
   evaluation: Evaluation
   objectives: Objectives
   opportunities: Opportunities
@@ -335,6 +443,10 @@ programs:
   prerequisites: Prerequisites
   presentation: Summary
   pricing: Pricing
+  pricing_initial: Costs of initial training
+  pricing_continuing: Costs of continuing training
+  pricing_apprenticeship: Apprenticeship costs
+  website: Visit the website
   registration: Registration
   roles: Management
   teachers: Teachers
@@ -347,7 +459,7 @@ programs:
   ects_credits: ECTS credits
   level: Level
   mention: Mention
-  no_program: No program
+  none: No program
   posts: News
   location:
     one: Campus
@@ -355,6 +467,7 @@ programs:
   toc:
     admission: Admission
     certification: Certification
+    cohorts: Promotions
     essential: Essential
     pedagogy: Pedagogy
     presentation: Presentation
@@ -367,15 +480,38 @@ programs:
     apprenticeship: Apprenticeship
     initial: Initial program
     continuing: Continuing program
+projects:
+  author: Author
+  authors: "Authors"
+  count:
+    one: "1 project"
+    other: "{{ .Count }} projects"
+  informations: Informations
+  next: Next project
+  next_aria: Next project “{{ .Title }}”
+  none: No project
+  previous: Previous project
+  previous_aria: Previous project “{{ .Title }}”
+  reading_time: Reading time
+  see_all: See all projects
+  see_all_in_program: See all program's projects
+  see_all_in_category: See all projects in “{{ .Title }}”
+  title: Projects
+  year: Year
 publications:
   downloads: Downloads
   next: Next publication
   previous: Previous publication
   citations: Citations
   stats:
-    label: publications
+    label:
+      one: publication
+      other: publications
 sitemap:
   pages: Arborescence
+taxonomies:
+  list:
+    title: Filter by
 volumes:
   abstract: Abstract
   paper:

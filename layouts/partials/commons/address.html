@@ -8,6 +8,11 @@
           {{ partial "PrepareHTML" . }}
         </span>
       {{ end }}
+      {{ with .address_additional }}
+        <span itemprop="extendedAddress">
+          {{ partial "PrepareHTML" . }}
+        </span>
+      {{ end }}
       {{ with .zipcode }}
         <span itemprop="postalCode">
           {{ partial "PrepareHTML" . }}

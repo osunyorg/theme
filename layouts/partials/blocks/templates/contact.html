@@ -48,7 +48,7 @@
               {{ if or .websites .emails }}
                 <div>
                   {{ $heading_items.open }}
-                    {{ if .url }}
+                    {{ if .websites }}
                       {{- i18n "commons.contact.web" -}}
                     {{ else }}
                       {{- i18n "commons.contact.email.label" -}}
@@ -113,7 +113,7 @@
                             .time_slot_morning.from
                             .time_slot_morning.to
                           }}
-                          <span>
+                          <span class="schedule-table__morning">
                             {{- if .time_slot_morning.from }}
                               <time datetime="{{ .time_slot_morning.from }}">{{ .time_slot_morning.from }}</time>
                             {{ end -}}
@@ -126,7 +126,7 @@
                             .time_slot_afternoon.from
                             .time_slot_afternoon.to
                           }}
-                          <span>
+                          <span class="schedule-table__afternoon">
                             {{- if .time_slot_afternoon.from }}
                               <time datetime="{{ .time_slot_afternoon.from }}">{{ .time_slot_afternoon.from }}</time>
                             {{ end -}}

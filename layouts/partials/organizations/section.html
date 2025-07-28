@@ -1,0 +1,32 @@
+{{- $is_organizations_block_present := false -}}
+
+{{ range .Params.contents }}
+  {{- if eq .template "organizations" -}}
+    {{- $is_organizations_block_present = true -}}
+  {{ end }}
+{{ end }}
+
+{{ partial "organizations/section/hero.html" . }}
+
+<div class="document-content">
+  {{ partial "organizations/section/summary.html" (dict
+      "context" .
+      "with_container" true
+    ) }}
+
+  {{ if (partial "IsFirstPage" .) }}
+    {{ partial "toc/container.html" (dict
+        "toc" "pages/single/toc.html"
+        "context" .
+      ) }}
+    {{ partial "taxonomies/section-list-container.html" . }}
+    {{ partial "contents/list.html" . }}
+  {{ end }}
+
+  {{- if not $is_organizations_block_present -}}
+    <div class="container">
+      {{ partial "organizations/partials/organizations.html" . }}
+      {{ partial "commons/pagination.html" . }}
+    </div>
+  {{ end }}
+</div>

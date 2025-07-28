@@ -19,7 +19,6 @@
             width: 100%
             img
                 aspect-ratio: 3/2
-                display: block
                 object-fit: cover
         @include media-breakpoint-down(desktop)
             &-description
@@ -32,8 +31,8 @@
             .location
                 flex-direction: row-reverse
                 gap: var(--grid-gutter)
-                &:not(:last-child)
-                    border-bottom: 1px solid var(--color-border)
+                &:where(:not(:last-child))
+                    border-bottom: var(--border-width) solid var(--color-border)
                     padding-bottom: $spacing-3
                 + .location
                     margin-top: $spacing-3
@@ -156,7 +155,6 @@
                         @include media-breakpoint-up(xl)
                             width: calc(var(--grid-gutter) + var(--column-width))
                         img
-                            display: block
                             height: 100%
                             object-fit: cover
                 &-wrapper
@@ -167,3 +165,4 @@
 
     .locations__taxonomy &
         margin-top: $spacing-6
+        margin-bottom: -($spacing-5)

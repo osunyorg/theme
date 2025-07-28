@@ -68,6 +68,9 @@
                         display: inline
                         &::before
                             content: ' • '
+                .post-categories
+                    li
+                        margin-right: space(2)
         @include media-breakpoint-up(desktop)
             .large
                 .post
@@ -128,7 +131,8 @@
                                 width: columns(8)
     &--list
         article
-            border-bottom: 1px solid var(--color-border)
+            &:where(:not(:last-child))
+                border-bottom: var(--border-width) solid var(--color-border)
             .media
                 background: none
                 margin: 0
@@ -173,21 +177,32 @@
 
         @include in-page-without-sidebar
             article
-                border-bottom: 1px solid var(--color-border)
                 gap: var(--grid-gutter)
                 padding-bottom: $spacing-5
                 position: relative
                 .media
                     width: columns(3)
                 .post-content
+                    display: flex
+                    flex-direction: column
                     width: columns(6)
                 + article
                     margin-top: $spacing-5
                 .post-meta
-                    position: absolute
-                    right: 0
-                    top: 0
-                    margin-top: 0.3em
+                    margin-top: auto
+                    padding-top: $spacing-3
+                    time
+                        margin-top: 0.3em
+                        position: absolute
+                        right: 0
+                        top: 0
+                    .post-reading-time,
+                        display: block
+                        &::before
+                            content: none
+                    .post-author:first-of-type
+                        [itemprop="name"]::before
+                            content: none
 
     &--highlight
         .highlight-post
@@ -198,12 +213,13 @@
                     aspect-ratio: auto
         .list
             margin-top: $spacing-3
-            border-top: 1px solid var(--color-border)
+            border-top: var(--border-width) solid var(--color-border)
             article
-                border-bottom: 1px solid var(--color-border)
                 position: relative
                 padding-bottom: $spacing-3
                 margin-top: $spacing-3
+                &:where(:not(:last-child))
+                    border-bottom: var(--border-width) solid var(--color-border)
         article
             > * + * 
                 margin-top: $spacing-2
@@ -211,7 +227,7 @@
                 margin-top: 0
         @include media-breakpoint-down(desktop)
             .list
-                border-top: 1px solid var(--color-border)
+                border-top: var(--border-width) solid var(--color-border)
                 [itemprop="abstract"]
                     margin-top: 0
         @include media-breakpoint-up(desktop)
@@ -320,15 +336,14 @@
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts
-    .categories--grid
+    .categories
         @include list-reset
-        display: flex
-        flex-direction: column
-        row-gap: $spacing-3
         li
             background: var(--color-background-alt)
             padding: $spacing-3
             position: relative
+            + li
+                margin-top: $spacing-3
             a
                 @include h3
                 font-weight: bold
@@ -336,8 +351,5 @@
                 @include stretched-link
             p
                 display: block
-        @include in-page-with-sidebar
-            @include grid(2)
         @include in-page-without-sidebar
-            @include grid(3, md)
             @include grid(4, xxl)

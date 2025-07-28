@@ -24,12 +24,12 @@
             {{ range site.Taxonomies.posts_categories }}
               <li data-title="{{ .Page.Title }}">
                 <a href="{{ .Page.Permalink }}" class="title" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Page.Title) }}">{{ partial "PrepareHTML" .Page.Title }}</a>
-                <p>{{ i18n "blocks.categories.items.count" ( len . ) }}</p>
+                <p>{{ i18n "posts.items.count" ( len . ) }}</p>
               </li>
             {{ end }}
           </ul>
         {{ else if .posts }}
-          {{ partial (printf "blocks/templates/posts/%s.html" $layout) (dict
+          {{ partial (printf "posts/partials/layouts/%s/%s.html" $layout $layout) (dict
             "posts" .posts
             "heading_level" $block.ranks.children
             "options" $options

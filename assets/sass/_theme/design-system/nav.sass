@@ -23,13 +23,13 @@
         @include meta
         color: $header-color
         cursor: pointer
-        transition: text-decoration 0.15s
+        transition: text-decoration $menu-link-duration
         display: block
         &[aria-expanded]
             @include icon(arrow-down-s-line, after)
                 display: inline-block
                 margin-left: pxToRem(5)
-                transition: transform 0.15s
+                transition: transform $menu-link-duration
             &[aria-expanded="true"]
                 &::after
                     transform: rotate(180deg)
@@ -125,26 +125,13 @@
         p
             @include small
 
-    .header-i18n
-        position: relative
-        [role="button"]
-            text-transform: uppercase
-        .dropdown-menu
-            @include media-breakpoint-up(desktop)
-                right: 0
-                margin-top: $header-nav-padding-y
-                padding: $spacing-2 $spacing-3
-            li a
-                padding: $spacing-1 0
-                display: flex
-
     @include media-breakpoint-up(desktop)
         .nav-level-1
             align-items: baseline
         .nav-level-3
             li
                 margin-top: $spacing-2
-        .has-children:not(.header-i18n)
+        .has-children:not(.upper-menu-i18n, .primary-i18n)
             @if $header-dropdown-full
                 .dropdown-menu
                     @include inset(100%, 0, auto, 0)
@@ -190,13 +177,6 @@
                         + li.has-children
                             margin-top: $spacing-3
 
-        .header-i18n
-            [role="button"]
-                @include icon(global-line, after)
-                &[aria-expanded][aria-expanded="true"]
-                    &::after
-                        transform: none
-
     @include media-breakpoint-down(desktop)
         display: none
         flex-basis: 100vw
@@ -214,7 +194,7 @@
                     padding: $spacing-1 0
                     display: block
             > li:not(:last-child) 
-                border-bottom: 1px solid $color-border
+                border-bottom: var(--border-width) solid $color-border
             > li
                 > a, > span, > button
                     padding-bottom: $spacing-3
@@ -261,6 +241,3 @@
     display: none
 [aria-expanded="true"] ~ .dropdown-menu
     display: block
-    animation-duration: 0.3s
-    animation-fill-mode: both
-    animation-name: showIn

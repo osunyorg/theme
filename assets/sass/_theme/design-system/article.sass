@@ -1,0 +1,34 @@
+
+// Utilisé pour .post, .project, .page, .person, .program, .volume
+@mixin article($aspect-ratio: $article-media-aspect-ratio)
+    position: relative
+    display: flex
+    flex-direction: column
+    .media
+        @include handle-svg-fit
+        margin-bottom: $spacing-3
+        order: -1
+        overflow: hidden
+        &:empty
+            display: none
+        img
+            object-fit: cover
+            // max-width: max-content
+            width: 100%
+            @if $aspect-ratio
+                aspect-ratio: $aspect-ratio
+    p + time
+            margin-top: $spacing-2
+    .post-categories, .project-categories, .job-categories
+        @include item-categories-list
+    time
+        @include meta
+        color: var(--color-text-alt)
+        display: block
+
+@mixin article-title
+    @include h3
+    a
+        @include stretched-link(before)
+        display: block
+        text-decoration: none

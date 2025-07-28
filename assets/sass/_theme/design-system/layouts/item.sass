@@ -1,0 +1,9 @@
+@mixin layout-item
+    position: relative
+    [class$="-title"]
+        a
+            @include stretched-link(before)
+            text-decoration: none
+    [class$="-content"]
+        > * + *
+            margin-top: $spacing-2

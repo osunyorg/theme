@@ -1,0 +1,23 @@
+{{- $title := or .Params.header_text .Title -}}
+{{ $share := site.Params.events.share_links.enabled | default site.Params.share_links.enabled }}
+{{ $sizes := "" }}
+
+{{ with .Params.subtitle }}
+  {{- $title = printf "%s <span>%s</span>" $title . -}}
+{{ end }}
+
+{{ $image := .Params.image }}
+{{ with $image }}
+  {{ $image_format := partial "GetImageDirection" . }}
+  {{ $sizes = index site.Params.image_sizes.sections.events.hero_single $image_format }}
+{{ end }}
+
+{{- partial "header/hero.html"
+  (dict
+    "title" $title
+    "image" $image
+    "sizes" $sizes
+    "context" .
+    "share" $share
+    "button" false
+  ) -}}

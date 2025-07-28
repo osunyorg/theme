@@ -7,26 +7,29 @@
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
         <div>
-          {{ partial "blocks/top.html" $block.top }}
-
           {{ if .file }}
             {{ $file := partial "GetMedia" .file.id }}
             {{ if $file }}
-              <audio src="{{ $file.direct_url }}" controls title="{{ .title | safeHTML }}"></audio>
-            {{ end }}
-          {{ end }}
-
-          {{ if .title }}
-            {{ $described_by_id = printf "block-sound-title-%d" $block_index }}
-            <p aria-hidden="true" id="{{- $described_by_id -}}">{{- partial "PrepareHTML" .title -}}</p>
+              <figure>
+                <audio src="{{ $file.direct_url }}" controls title="{{ .title | safeHTML }}"></audio>
+                <figcaption>
+                  {{ if .title }}
+                    {{ $described_by_id = printf "block-sound-title-%d" $block_index }}
+                    <p aria-hidden="true" id="{{- $described_by_id -}}">{{- partial "PrepareHTML" .title -}}</p>
+                  {{ end }}
+                  <p>{{ partial "commons/extension-and-size.html" $file }}</p>
+                </figcaption>
+              {{ end }}
+            </figure>
           {{ end }}
 
           {{ partial "commons/transcription" ( dict
-            "block_index" $block_index
-            "described_by" $described_by_id
-            "transcription" .transcription
-          ) }}
+              "block_index" $block_index
+              "described_by" $described_by_id
+              "transcription" .transcription
+            ) }}
         </div>
       </div>
     </div>

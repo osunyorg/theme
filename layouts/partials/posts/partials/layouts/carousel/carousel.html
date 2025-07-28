@@ -1,0 +1,16 @@
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading := printf "h%d" $heading_level }}
+{{ $options := .options }}
+{{ $template := printf "posts/partials/post.html" }}
+
+<div data-slider="{{ site.Params.blocks.posts.slider | encoding.Jsonify }}">
+  {{ range $post := .posts -}}
+    {{ with site.GetPage .path }}
+      {{ partial "posts/partials/post.html" (dict 
+          "post" .
+          "heading" $heading
+          "options" $options
+        )}}
+    {{ end }}
+  {{ end }}
+</div>

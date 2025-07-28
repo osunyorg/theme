@@ -1,0 +1,37 @@
+{{ $item := .item }}
+{{ $level := .level }}
+{{ $type := $item.Type | default "page" }}
+{{ $type = $type | singularize }}
+{{ $subtitle := $item.Params.subtitle }}
+{{ $options := .options }}
+{{ $itemprop := .itemprop }}
+
+{{ $title_attributes := printf "class='%s-title'" $type }}
+{{ with $itemprop }}
+  {{ $title_attributes = printf "%s itemprop='%s'" $title_attributes . }}
+{{ end }}
+{{ $link_title := safeHTML (i18n "commons.more_aria" (dict "Title" $item.Title)) }}
+
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+    "level" $level
+    "attributes" $title_attributes
+  )}}
+
+{{ if and $options.subtitle $subtitle }}
+  <hgroup>
+{{ end }}
+
+{{ $heading_tag.open }}
+  {{ $permalink := partial "GetPermalink" $item }}
+  <a href="{{ $permalink }}" title="{{ $link_title }}" {{ if $itemprop }} itemprop="url" {{ end }} >
+    {{ $item.Title }}
+  </a>
+{{ $heading_tag.close }}
+
+{{ if and $options.subtitle $subtitle }}
+  <p class="{{- $type -}}-subtitle">{{ partial "PrepareHTML" $subtitle }}</p>
+{{ end }}
+
+{{ if and $options.subtitle $subtitle }}
+  </hgroup>
+{{ end }}

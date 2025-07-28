@@ -1,0 +1,52 @@
+@mixin layout-list
+    @include list-reset
+    > li
+        padding-bottom: $spacing-3
+        padding-top: $spacing-3
+        &:where(:not(:last-child))
+            border-bottom: var(--border-width) solid var(--color-border)
+    article
+        display: flex
+        flex-direction: row
+        @include layout-item
+        .media
+            order: -1
+    @include media-breakpoint-down(desktop)
+        article
+            flex-direction: column
+            gap: var(--grid-gutter)
+            .media
+                width: 33.33333%
+    @include in-page-with-sidebar
+        article
+            display: flex
+            gap: var(--grid-gutter)
+            [class$="-content"]
+                flex-shrink: 0
+                flex: 1
+            [class$="-title"],
+            [class$="-subtitle"]
+                @include h4
+            .media
+                width: columns(2)
+    @include in-page-without-sidebar
+        article
+            display: flex
+            gap: var(--grid-gutter)
+            [class$="-content"]
+                flex: 1
+                [class$="-title"]
+                    @include h3
+                .articles-count
+                    position: absolute
+                    right: 0
+                    top: 0
+                    margin-top: $spacing-2
+                .rich-text
+                    width: columns(6)
+            [class$="-title"],
+            [class$="-subtitle"]
+                @include h3
+            .media
+                flex-shrink: 0
+                width: columns(3)

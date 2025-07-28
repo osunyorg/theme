@@ -1,0 +1,13 @@
+{{ $categories := . }}
+<div class="container children-categories">
+  <ul aria-label="{{ i18n "categories.label" }}">
+    {{ range $categories }}
+      {{ $category := site.GetPage .path }}
+      {{ with $category }}
+        <li>
+          <a href="{{ .Permalink }}">{{ .Title }}</a>
+        </li>
+      {{ end }}
+    {{ end }}
+    </ul>
+  </div>

@@ -1,0 +1,9 @@
+{{ $anchor := .date | time.Format .format }}
+{{ $anchor = anchorize $anchor }}
+{{ $anchor = printf "#%s" $anchor }}
+
+{{ with .permalink }}
+  {{ $anchor = printf "%s%s" . $anchor }}
+{{ end }}
+
+{{ return $anchor }}

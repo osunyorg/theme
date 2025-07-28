@@ -1,0 +1,11 @@
+{{ $summary := .Params.summary }}
+{{ $type := .Type | default "pages" }}
+
+{{ with $summary }}
+  <div class="rich-text">
+    {{ partial "GetRichSummary" ( dict 
+        "summary" $summary
+        "kind" $type
+      )}}
+  </div>
+{{ end }}

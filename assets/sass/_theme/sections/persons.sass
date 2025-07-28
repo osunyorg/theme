@@ -7,23 +7,14 @@
         a, address
             @include small
             position: relative
-            text-align: right
             z-index: 2
-        li
-            align-items: baseline
-            display: flex
-            justify-content: space-between
-            + li
-                margin-top: $spacing-1
-        ul + ul
-            margin-top: $spacing-1
+        li + li
+                margin-top: $spacing-2
     @include media-breakpoint-down(md)
         .contacts-details
             margin-top: $spacing-3
             span
                 flex-shrink: 0
-            a, address
-                text-align: right
 
 article.person
     @include article
@@ -39,19 +30,22 @@ article.person
         a
             @include stretched-link
             text-decoration: none
-        + p
-            margin-top: $spacing-1
+    .person-role
+        margin-top: $spacing-1
     .description
         @include small
         flex-grow: 1
+        // margin-top: $spacing-3
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing-3
+        // .description
+        //     margin-top: $spacing-2
         .avatar
             align-self: start
             flex-shrink: 0
             margin-bottom: 0
-            width: 100px
+            width: columns(3)
     @include media-breakpoint-down(md)
         justify-content: space-between
         .description
@@ -59,7 +53,6 @@ article.person
         .avatar
             order: 1
             margin-right: 0
-            width: 68px
     @include in-page-without-sidebar
         .avatar
             width: 100%
@@ -91,11 +84,11 @@ article.person
 ol.persons--list
     @include list-reset
     > li
-        border-bottom: 1px solid var(--color-border)
+        border-bottom: var(--border-width) solid var(--color-border)
         padding-bottom: $spacing-3
         padding-top: $spacing-3
         position: relative
-        transition: color 0.5s
+        transition: color $color-duration
         @include icon(arrow-right-line, after)
             margin-left: auto
         &:hover
@@ -124,7 +117,7 @@ ol.persons--list
 .avatar
     // @include aspect-ratio(50, 'img')
     background-color: $persons-avatar-background-color
-    border-radius: 50%
+    border-radius: $avatar-border-radius
     // margin-bottom: $spacing-4
     overflow: hidden
     position: relative
@@ -151,7 +144,11 @@ ol.persons--list
     .persons-categories + .taxonomies-persons
         margin-top: $spacing-3
 
-.persons__page
+.persons__page,
+.administrators__term,
+.authors__term,
+.researchers__term,
+.teachers__term
     .hero
         &--with-image
             .hero-text
@@ -159,18 +156,21 @@ ol.persons--list
             figure picture
                 @extend .avatar
             @include media-breakpoint-down(desktop)
-                .container
+                margin-bottom: $spacing-4
+                > .container:where(:only-child)
                     margin-bottom: calc(#{columns(2)} + #{$spacing-5})
+                    figure
+                        margin-bottom: calc(#{columns(2)} * -1)
                 figure
                     width: columns(4)
                     margin-left: auto
-                    margin-bottom: calc(#{columns(2)} * -1)
             @include media-breakpoint-down(md)
-                .container
+                > .container:where(:only-child)
                     margin-bottom: calc(#{columns(3)} + #{$spacing-5})
+                    figure
+                        margin-bottom: calc(#{columns(3)} * -1)
                 figure
                     width: columns(6)
-                    margin-bottom: calc(#{columns(3)} * -1)
             @include media-breakpoint-up(desktop)
                 .content
                     align-items: center
@@ -183,20 +183,6 @@ ol.persons--list
                     figure
                         margin-bottom: 0
                         width: columns(3)
-        .taxonomies-single
-            margin-top: $spacing-4
-            display: block
-            a
-                @include small
-            > li
-                display: flex
-                justify-content: space-between
-                align-items: baseline
-                ul
-                    text-align: right
-                    display: flex
-                    flex-wrap: wrap
-                    gap: $spacing-1
     .roles
         a
             @include small
@@ -210,7 +196,7 @@ ol.persons--list
             @include icon(arrow-right-line, after, true)
                 display: inline-flex
                 margin-left: $spacing-1
-                transition: transform .3s ease
+                transition: transform $arrow-duration $arrow-ease-transition
             &:hover::after
                 transform: translateX($spacing-2)
         .more
@@ -219,7 +205,7 @@ ol.persons--list
             margin-top: $spacing-3
             &::after
                 margin-left: space()
-                transition: 0.55s $arrow-ease-transition
+                transition: $arrow-duration $arrow-ease-transition
             &:hover:after
                 transform: translateX($spacing-1)
     .person-publications
@@ -259,9 +245,6 @@ ol.persons--list
         .roles
             margin-top: $spacing-4
     @include media-breakpoint-up(lg)
-        .hero
-            .taxonomies-single
-                width: columns(3)
         .informations
             @include grid
             margin-bottom: $spacing-4

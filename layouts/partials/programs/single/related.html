@@ -1,0 +1,27 @@
+{{ with .Params.related_categories }}
+
+  {{ $post_category := site.GetPage ( printf "/posts_categories/%s" .posts ) }}
+  {{ with $post_category }}
+    {{ partial "programs/single/related-posts.html" (dict 
+        "posts" ( first site.Params.programs.related_posts.quantity .Pages )
+        "context" .
+      ) }}
+  {{ end }}
+
+  {{ $event_category := site.GetPage (printf "/events_categories/%s" .events ) }}
+  {{ with $event_category }}
+    {{ partial "programs/single/related-events.html" (dict
+        "projects" ( first site.Params.programs.related_events.quantity .Pages )
+        "context" .
+      ) }}
+  {{ end }}
+
+  {{ $project_category := site.GetPage (printf "/projects_categories/%s" .projects ) }}
+  {{ with $project_category }}
+    {{ partial "programs/single/related-projects.html" (dict
+        "projects" ( first site.Params.programs.related_projects.quantity .Pages )
+        "context" .
+      ) }}
+  {{ end }}
+
+{{ end }}

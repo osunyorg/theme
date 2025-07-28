@@ -11,8 +11,7 @@
     {{- $person := site.GetPage .path -}}
     {{- $role := .role -}}
     {{- $summary := $person.Params.summary -}}
-    {{- $content := $person.Content -}}
-    {{ with (or $role $summary $content)}}
+    {{ with (or $role $summary) }}
       {{- $content_length := len . -}}
       {{ if ge $content_length $char_limit }}
         {{- $is_large = true -}}
@@ -34,7 +33,7 @@
         {{ partial "blocks/top.html" $block.top }}
 
         {{ if eq .layout "list" }}
-          {{ partial "blocks/templates/persons/list.html" (dict
+          {{ partial "persons/partials/layouts/list/list.html" (dict
               "options" $options
               "block" $block
             )}}
@@ -42,8 +41,9 @@
           <div class="persons">
             {{- range .persons -}}
               {{ $person := site.GetPage .path }}
-              {{ partial "persons/person.html" (dict
+              {{ partial "persons/partials/person.html" (dict
                   "options" $options
+                  "heading_level" $block.ranks.children
                   "person" $person
                   "role" .role
                   "layout" $layout

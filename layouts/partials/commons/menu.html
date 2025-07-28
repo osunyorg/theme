@@ -72,7 +72,7 @@
           {{ if gt .level 1 }}
             {{ $link_class = printf "%s disabled" $link_class }}
           {{ end }}
-          <span {{ with $link_class }}class="{{ . }}"{{ end }} {{ safeHTMLAttr $attributes }}>{{ .title }}</span>
+          <span {{ with $link_class }}class="{{ . }}"{{ end }} {{ safeHTMLAttr $attributes }}>{{ .title | markdownify }}</span>
         {{- end -}}
 
         {{- if and (ne $stop $level) (gt (len .children) 0) -}}
@@ -103,7 +103,13 @@
       {{ partial "commons/search/button.html" $kind }}
     </li>
   {{ end }}
-  {{ if .i18n }}
-    {{ partial "header/i18n.html" .context }}
+  {{ if eq $kind "legal" }}
+    {{ $kind = "footer" }}
+  {{ end }}
+  {{ if in site.Params.i18n.positions $kind }}
+    {{ partial "commons/i18n.html" (dict
+        "context" $context
+        "position" $kind
+      )}}
   {{ end }}
 </ul>

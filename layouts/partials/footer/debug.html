@@ -359,3 +359,11 @@
   }
 
 </script>
+
+{{/*  Generate sample json file for non-regression tool  */}}
+{{ with resources.Get "sample.json" }}
+  {{ with resources.ExecuteAsTemplate "sample.json" $ . }}
+    {{/*  {{ call permalink to generate file }}  */}}
+    {{ $dumb := .Permalink }}
+  {{ end }}
+{{ end }}

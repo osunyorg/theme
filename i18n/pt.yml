@@ -54,9 +54,21 @@ blocks:
     play: Play
 categories:
   label: Categorias
-  no_post: Nenhum artigo nesta categoria
-  no_project: Nenhum projeto nesta categoria
+  no_event: Nenhum evento nesta categoria
+  no_organization: Nenhuma organização nesta categoria
+  no_page: Nenhuma página nesta categoria
   no_person: Nenhuma pessoa nesta categoria
+  no_post: Nenhum artigo nesta categoria
+  no_program: Nenhuma formação nesta categoria
+  no_project: Nenhum projeto nesta categoria
+  type:
+    events_categories: Categorias de eventos
+    organizations_categories: Categorias de organizaçãoes
+    pages_categories: Categorias de página
+    persons_categories: Categorias de pessoas
+    posts_categories: Categorias de notícias
+    programs_categories: Categorias de formação
+    projects_categories: Categorias de projectos
   see_more:
     one: Ver o artigo
     other: Ver os {{ .Count }} artigos
@@ -70,6 +82,7 @@ commons:
     transcription: Transcrição
     credits: "Direitos reservados: "
   search:
+    label: Pesquisa
     title: Buscar
     close: Fechar a busca
   backtotop: Topo da página
@@ -101,6 +114,20 @@ commons:
         email: Contactar {{ .name }} por correio eletrónico
         rss: Consultar o feed RSS do sítio {{ .name }}
         website: Visite o sítio Web de {{ .name }}
+      social_networks:
+        email: Email
+        facebook: Facebook
+        github: Github
+        instagram: Instagram
+        linkedin: LinkedIn
+        mastodon: Mastodon
+        peertube: Peertube
+        rss: RSS
+        tiktok: Tiktok
+        twitter: X, ex-Twitter
+        vimeo: Vimeo
+        x: X, ex-Twitter
+        youtube: YouTube
   credit: Um site eco-responsável produzido com <a href="https://www.osuny.org/" title="Osuny - link externo" target="_blank" rel="noreferrer">Osuny</a>
   date: Data
   download:
@@ -162,6 +189,8 @@ commons:
   read: Ler
   read_online: Ler online
   share: Compartilhar
+  share_on: Compartilhar em
+  share_aria: Compartilhar em “{{ .Title }}” - link externo
   slider:
     default_title: Carrossel
     goto: Ir para o slide
@@ -170,7 +199,10 @@ commons:
     pause: Pausar o carrossel
     play: Iniciar o carrossel
     previous: Ir para o item anterior
-  toc: Índice
+  time_format: 15:04
+  toc: 
+    title: Índice
+    button_label: ", atual - Índice"
   "true": Sim
   units:
     GB: GB
@@ -181,6 +213,14 @@ commons:
     megabytes: Megabytes
     kilobytes: Kilobytes
     bytes: bytes
+agenda:
+  access:
+    partical_informations: Informações práticas
+  filters:
+    dates:
+      aria_label: Visualizar o calendário de datas
+      title: Datas
+    taxonomies: Filtrar
 diplomas:
   type: Tipo de diploma
 errors:
@@ -213,12 +253,14 @@ events:
     day: Data de início
     hour: Hora de início
   see_all_in_program: Ver todos os eventos do curso
-  share: Compartilhar em
   title: Eventos
   to:
     day: Data de término
     hour: Hora de término
   unique_day: Data
+exhibitions:
+  archives: Acessar os arquivos de exposições anteriores
+  none: Nenhuma exposição.
 formats:
   pdf: Formato de Documento Portátil Adobe
   jpg: Imagem JPEG
@@ -234,12 +276,30 @@ formats:
   zip: Arquivo compactado
   gz: Arquivo compactado
   tar: Arquivo compactado
+jobs:
+  dates:
+    from: Data
+    to: Data de fecho
+  next: Próxima oferta
+  next_aria: Próxima oferta “{{ .Title }}”
+  previous: Oferta anterior
+  previous_aria: Oferta anterior “{{ .Title }}”
 organizations:
+  backlinks:
+    events: Eventos mencionando
+    pages: Páginas mencionando
+    posts: Notícias mencionando
+    projects: Projetos mencionando
+  count:
+    one: "1 organização"
+    other: "{{ .Count }} organizações"
   logo: Logotipo
+  none: Nenhuma organização
 pages:
   details: Em detalhes
   informations: Informações
   posts: Notícias
+  none: Nenhuma página
 papers:
   abstract: Resumo
   citations: Citações
@@ -277,14 +337,13 @@ posts:
   informations: Informações
   next: Artigo seguinte
   next_aria: Artigo seguinte “{{ .Title }}”
+  none: Nenhuma publicação
   previous: Artigo anterior
   previous_aria: Artigo anterior “{{ .Title }}”
   reading_time: Tempo de leitura
   see_all: Ver todas as notícias
   see_all_in_program: Ver todas as notícias do curso
   see_all_in_category: Ver todas as notícias “{{ .Title }}”
-  share: Compartilhar em
-  share_aria: Compartilhar em “{{ .Title }}” - link externo
   title: Notícias
 projects:
   author: Autor/a
@@ -294,14 +353,13 @@ projects:
   informations: Informações
   next: Próximo projeto
   next_aria: Próximo projeto “{{ .Title }}”
+  none: Nenhum projeto
   previous: Projeto anterior
   previous_aria: Projeto anterior “{{ .Title }}”
   reading_time: Tempo de leitura
   see_all: Ver todos os projetos
   see_all_in_program: Ver todos os projetos do curso
   see_all_in_category: Ver todos os projetos “{{ .Title }}”
-  share: Compartilhar em
-  share_aria: Compartilhar em “{{ .Title }}” - link externo
   title: Projetos
   year: Ano
 programs:
@@ -309,6 +367,7 @@ programs:
   administrative_information: Informações administrativas
   certifications:
     qualiopi: Qualiopi, processo certificado, República Francesa
+  cohorts: Promoções
   contacts: Contatos
   children: Cursos
   evaluation: Modalidades de avaliação
@@ -335,7 +394,7 @@ programs:
   ects_credits: Créditos ECTS
   level: Nível
   mention: Menção
-  no_program: Nenhum curso
+  none: Nenhum curso
   posts: Notícias
   location:
     one: Campus
@@ -343,6 +402,7 @@ programs:
   toc:
     admission: Admissão
     certification: Certificação
+    cohorts: Promoções
     essential: Essencial
     pedagogy: Pedagogia
     presentation: Apresentação
@@ -361,9 +421,14 @@ publications:
   previous: Publicação anterior
   citations: Citações
   stats:
-    label: publicações
+    label:
+      one: Publicação
+      other: publicações
 sitemap:
   pages: Mapa do site
+taxonomies:
+  list:
+    title: Ordenar por
 volumes:
   abstract: Resumo
   paper:

@@ -1,0 +1,38 @@
+@mixin layout-large
+    @include list-reset
+    > li + li
+        margin-top: $spacing-5
+    article
+        @include article
+        @include layout-item
+        [class$="-title"]
+            @include h2
+        .more
+            @include icon(arrow-right-line, after, true)
+                display: inline-block
+                transition: transform $arrow-duration $arrow-ease-transition
+        &:hover
+            .more::after
+                transform: translateX(pxToRem(5))
+        @include media-breakpoint-down(desktop)
+            .media
+                margin-left: var(--grid-gutter-negative)
+                margin-right: var(--grid-gutter-negative)
+        @include media-breakpoint-up(desktop)
+            flex-direction: row
+            gap: var(--grid-gutter)
+    @include in-page-with-sidebar
+        article
+            [class$="-content"]
+                width: columns(4)
+            .media
+                width: columns(4)
+    @include in-page-without-sidebar
+        article
+            [class$="-title"]
+                @include lead
+            [class$="-content"]
+                width: columns(6)
+                padding-right: columns(1)
+            .media
+                width: columns(6)

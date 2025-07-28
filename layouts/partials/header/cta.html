@@ -1,0 +1,13 @@
+
+{{ if and .display .label }}
+  {{ $is_external := .external | default false }}
+  {{ $title := .label }}
+  {{ $link_title := cond $is_external (safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title))) $title }}
+
+  <a href="{{ .target | default "#"}}" title="{{ $link_title }}" 
+    class="btn {{ if not .target }} disabled {{ end }}" 
+    {{ if $is_external -}} target="_blank" rel="noopener" {{- end }}
+    >
+      {{ .label }}
+  </a>
+{{ end }}

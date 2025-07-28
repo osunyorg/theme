@@ -1,0 +1,29 @@
+{{/*  Get categories list  */}}
+{{ $categories := .categories }}
+{{ $index := .index }}
+{{ $filters_id := printf "map-filters-%d" $index }}
+
+<div class="map-filters">
+  <div id="{{ $filters_id }}" class="offcanvas">
+    <div class="offcanvas-title">
+      <span>{{ i18n "agenda.filters.taxonomies"}}</span>
+      <button class="close" aria-controls="{{ $filters_id }}" aria-expanded="false">
+        <span class="sr-only">{{ i18n "commons.close" }}</span>
+      </button>
+    </div>
+
+    <div class="offcanvas-content">
+      <ul>
+        {{ range $categories }}
+          {{ with site.GetPage .path }}
+            {{ $id := printf "%s-%s" $index .Slug }}
+            <li data-filter="{{ .Slug }}">
+              <input type="checkbox" value="{{ .Slug }}" checked="true" id="filter-{{- $id }}">
+              <label for="filter-{{- $id }}">{{ .Title }}</label>
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    </div>
+  </div>
+</div>

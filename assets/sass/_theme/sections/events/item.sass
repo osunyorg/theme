@@ -1,0 +1,50 @@
+.event
+    &-title
+        a
+            @include stretched-link
+            text-decoration: none
+    &-subtitle
+        @include h3
+        color: var(--color-text-alt)
+    &-categories
+        @include item-categories-list
+        margin-bottom: 0
+        column-gap: $spacing-1
+        li:not(:last-child)
+            a::after
+                content: ', '
+    &-schedule
+        p + p
+            margin-top: 0
+    &-dates
+        span + span
+            &::before
+                content: ' — '
+    &-time
+        @include meta
+        span
+            white-space: nowrap
+            + span
+                @include icon(arrow-right-line, before)
+                    margin-left: space()
+                    margin-right: space()
+    &-hours
+        time + time
+            @include icon(arrow-right-line, before)
+                margin-left: space()
+                margin-right: space()
+    .event-parent
+        @include meta
+        order: -1
+    .media
+        &:empty
+            display: none
+    &.is-federated
+        .event-content
+            display: flex
+            flex-direction: column
+        .event-federation
+            order: -1
+    @include media-breakpoint-up(desktop)
+        &-time
+            display: flex

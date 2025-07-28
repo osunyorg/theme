@@ -5,8 +5,6 @@
   {{- $seoDescription = partial "PrepareHTML" .Params.meta_description -}}
 {{- else if .Params.summary -}}
   {{- $seoDescription = .Params.summary | plainify | truncate 150 -}}
-{{- else if .Content -}}
-  {{- $seoDescription = .Content | safeHTML | truncate 150 -}}
 {{- else if .Params.contents -}}
   {{- range first 1 .Params.contents -}}
     {{- if .title -}}

@@ -1,10 +1,13 @@
 {{ $in_gallery := .gallery | default false }}
+{{ $focusable_figcaption := .focusable_figcaption }}
 
 {{ if .image.id }}
   {{ $sizes := .sizes }}
   {{ $lazy := default true .lazy }}
+  {{ $crop := .crop }}
   {{ $image := partial "GetMedia" .image.id }}
-  {{ $image_class := printf "image-%s" (partial "GetImageDirection" .image) }}
+  {{ $image_class := .image_class | default "" }}
+  {{ $image_class = printf "%s image-%s" $image_class (partial "GetImageDirection" .image) }}
   {{ $with_lightbox := not site.Params.image_sizes.design_system.lightbox.disabled }}
   {{ if and $with_lightbox $in_gallery }}
     {{ $with_lightbox = not site.Params.image_sizes.design_system.lightbox.in_gallery.disabled }}
@@ -24,6 +27,7 @@
           "alt" .alt
           "sizes" $sizes
           "lazy" $lazy
+          "crop" $crop
       ) }}
 
       {{ if $with_lightbox }}
@@ -33,9 +37,9 @@
       {{ end }}
 
       {{ if or .text .credit }}
-        <figcaption>
+        <figcaption {{ if $focusable_figcaption }} tabindex="0" {{ end }}>
           {{ with .text }}
-            {{ . | safeHTML }}
+            <div>{{ . | safeHTML }}</div>
           {{ end }}
           {{ with .credit }}
             <div class="credit">

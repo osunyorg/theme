@@ -8,11 +8,14 @@
 {{- if os.FileExists "static/assets/images/favicons/favicon-16x16.png" -}}
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicons/favicon-16x16.png">
 {{ end -}}
-{{- if os.FileExists "static/assets/images/favicons/favicon.ico" -}}
-  <link rel="icon" type="image/ico" href="/assets/images/favicons/favicon.ico">
-{{ end -}}
 {{- if os.FileExists "static/assets/images/favicons/favicon.png" -}}
   <link rel="icon" type="image/png" href="/assets/images/favicons/favicon.png">
+{{ end -}}
+{{- if os.FileExists "static/assets/images/favicons/favicon.ico" -}}
+  <link rel="icon" type="image/x-icon" href="/assets/images/favicons/favicon.ico">
+{{ end -}}
+{{- if os.FileExists "static/assets/images/favicons/favicon.svg" -}}
+  <link rel="icon" type="image/svg" href="/assets/images/favicons/favicon.svg">
 {{ end -}}
 {{- if os.FileExists "static/site.webmanifest" -}}
   <link rel="manifest" href="/site.webmanifest">
