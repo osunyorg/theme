@@ -9,13 +9,13 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         <div class="papers">
-          {{ range $paper := .papers -}}
-            {{ with site.GetPage (printf "/papers/%s" $paper) }}
+          {{ range .papers -}}
+            {{ with site.GetPage .path }}
               {{ partial "papers/partials/paper.html" (dict 
                   "paper" .
                   "actions" false
                   "heading_level" $block.ranks.children
-              )}}
+                )}}
             {{ end }}
           {{ end}}
         </div>
