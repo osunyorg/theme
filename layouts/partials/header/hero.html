@@ -3,7 +3,6 @@
 {{ $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero" }}
 {{ $display_breadcrumb := .breadcrumb | default true }}
 {{ $subtitle := .subtitle }}
-{{ $description := .description }}
 {{ if .image }}
   {{ $direction = partial "GetImageDirection" .image }}
 {{ end }}
@@ -11,7 +10,8 @@
 {{ $summary := .context.Params.summary | safeHTML }}
 {{ $subtitle_is_summary := false }}
 
-{{ $button := .button | default .context.Params.header_cta }}
+{{ $button := .button | default (cond .context.Params.header_cta.display .context.Params.header_cta nil) }}
+
 {{ $title_attribute := "" | safeHTMLAttr }}
 {{ if site.Params.search.active }}
   {{ $title_attribute = "data-pagefind-weight='10'" | safeHTMLAttr }}
@@ -29,13 +29,16 @@
 {{ $breadcrumb_class := printf "has-breadcrumb-%s" site.Params.breadcrumb.position }}
 
 <header class="hero {{ if .image }}hero--with-image hero--image-{{- $direction }}{{ end }} {{ if $breadcrumb_is_after_hero }} hero--no-margin {{ end }} {{ $breadcrumb_class }} ">
+
+  {{- partial "hooks/after-hero-start" . -}}
+
   <div class="container">
     {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-start") }}
       {{ partial "header/breadcrumbs.html" .context }}
     {{ end }}
     <div class="content">
       <div class="hero-text">
-        {{ if or $subtitle $description }}
+        {{ if $subtitle }}
           <hgroup {{ if $subtitle_is_summary -}} class="has-lead" {{- end }}>
             <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .title }}</h1>
             {{ with $subtitle }}
@@ -48,6 +51,11 @@
 
         {{ if .hero_text_complement }}
           {{ partial .hero_text_complement .context }}
+        {{ end }}
+
+        {{ $taxonomies_position := partial "GetTaxonomiesPosition" .context }}
+        {{ if and .context.Params.taxonomies (eq $taxonomies_position "hero") }}
+          {{ partial "taxonomies/single-list.html" .context }}
         {{ end }}
 
         {{ if or $button .share }}
@@ -67,19 +75,20 @@
       {{ end }}
 
       {{ if .image }}
-        <!-- TODO Peut etre aligner la stucture des données avec les autres cas d'images -->
         {{ partial "commons/image-figure.html" (dict
-          "image"    .image
-          "sizes"    ( .sizes | default site.Params.image_sizes.design_system.hero )
-          "lazy"      false
-          )
-        }}
+            "image" .image
+            "sizes" ( .sizes | default site.Params.image_sizes.design_system.hero )
+            "lazy" false
+            "focusable_figcaption" true
+          ) }}
       {{ end }}
 
       {{ if .hero_after_image_complement }}
         {{ partial .hero_after_image_complement .context }}
       {{ end }}
+
     </div>
+    {{ partial "hooks/before-hero-content-end.html" .context }}
   </div>
 
   {{ if .hero_complement }}

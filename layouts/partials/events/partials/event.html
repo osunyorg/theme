@@ -17,30 +17,43 @@
   {{ $class := "event" }}
   {{ if and .Params.image $options.image }}
     {{ $class = printf "%s event--with-image" $class }}
-  {{ end -}}
+  {{ end }}
   {{ if .Params.children }}
     {{ $class = printf "%s event--parent" $class }}
-  {{ end -}}
+  {{ end }}
   {{ if .Params.parent }}
     {{ $class = printf "%s event--child" $class }}
-  {{ end -}}
+  {{ end }}
+  {{ if .Params.federation.active }}
+    {{ $class = printf "%s is-federated" $class }}
+  {{ end }}
+
   {{ $dates := .Params.dates }}
 
   <article class="{{ $class }}" 
       {{ if $is_sub_event }} itemprop="subEvent" {{ end }}
       {{ if $is_sup_event }} itemprop="superEvent" {{ end }}
       itemscope itemtype="https://schema.org/Event">
+
+    {{ if or .Params.dates .Params.current_time_slot }}
+      {{ partial "events/partials/event/meta-dates.html" (dict
+          "dates" .Params.dates 
+          "time_slot" .Params.current_time_slot
+        )}}
+    {{ end }}
+
     <div class="event-content">
-      {{- $title := partial "PrepareHTML" .Title -}}
-      {{ if and $options.subtitle .Params.subtitle }}
-        <hgroup>
-      {{ end }}
-      {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-      {{ $heading_tag.close }}
-      {{ if and $options.subtitle .Params.subtitle }}
-          <p class="event-subtitle">{{ partial "PrepareText" .Params.subtitle }}</p>
-        </hgroup>
+      {{ partial "events/partials/event/heading.html" (dict
+          "item" .
+          "options" $options
+          "level" $heading_level
+          "itemprop" "name"
+        ) }}
+
+      {{ partial "events/partials/event/federated.html" . }}
+
+      {{ if ne $layout "agenda" }}
+        {{ partial "events/partials/event/parent.html" . }}
       {{ end }}
 
       {{ if eq $layout "agenda" }}
@@ -52,13 +65,10 @@
       {{ if $options.dates }}
         {{ partial "events/partials/event/schedule.html" (dict 
             "dates" .Params.dates
+            "time_slot" .Params.current_time_slot
+            "time_slots" .Params.time_slots
             "on_two_lines" (ne $layout "list")
           )}}
-      {{ else }}
-        {{ with .Params.dates }}
-          <meta itemprop="startDate" content="{{- if .from.day -}}{{ .from.day }}{{- end -}}{{- if .from.hour -}}T{{ .from.hour }}{{- end -}}">
-          <meta itemprop="endDate" content="{{- if .to.day -}}{{ .to.day }}{{- end -}}{{- if .to.hour -}}T{{ .to.hour }}{{- end -}}">
-        {{ end }}
       {{ end }}
 
       {{ if and $dates.status $options.status }}
@@ -78,7 +88,7 @@
       {{ end }}
 
       {{ if $options.categories }}
-        {{ partial "commons/categories" ( dict
+        {{ partial "commons/categories.html" ( dict
           "context" .
           "kind" "event"
         )}}

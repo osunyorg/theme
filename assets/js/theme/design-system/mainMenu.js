@@ -76,10 +76,7 @@ class MainMenu {
     }
 
     resize () {
-        if (!this.state.isOpened) {
-            document.documentElement.style.setProperty('--header-height', this.element.offsetHeight + 'px');
-            document.documentElement.style.setProperty('--header-menu-max-height', window.innerHeight - this.element.offsetHeight + 'px');
-        }
+        this.setHeaderHeightVariables();
 
         // is state changed ?
         if (this.state.isMobile === isMobile()) {
@@ -92,6 +89,13 @@ class MainMenu {
 
         if (this.upperMenu) {
             this.updateUpperMenuPosition();
+        }
+    }
+
+    setHeaderHeightVariables () {
+        if (!this.state.isOpened) {
+            document.documentElement.style.setProperty('--header-height', Math.floor(this.element.offsetHeight) + 'px');
+            document.documentElement.style.setProperty('--header-menu-max-height', Math.floor(window.innerHeight - this.element.offsetHeight) + 'px');
         }
     }
 
@@ -195,6 +199,8 @@ class MainMenu {
         if (hasChanged) {
             this.state.previousScrollY = y;
         }
+
+        this.setHeaderHeightVariables();
     }
 }
 

@@ -7,23 +7,14 @@
         a, address
             @include small
             position: relative
-            text-align: right
             z-index: 2
-        li
-            align-items: baseline
-            display: flex
-            justify-content: space-between
-            + li
-                margin-top: $spacing-1
-        ul + ul
-            margin-top: $spacing-1
+        li + li
+                margin-top: $spacing-2
     @include media-breakpoint-down(md)
         .contacts-details
             margin-top: $spacing-3
             span
                 flex-shrink: 0
-            a, address
-                text-align: right
 
 article.person
     @include article
@@ -39,19 +30,22 @@ article.person
         a
             @include stretched-link
             text-decoration: none
-        + p
-            margin-top: $spacing-1
+    .person-role
+        margin-top: $spacing-1
     .description
         @include small
         flex-grow: 1
+        // margin-top: $spacing-3
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing-3
+        // .description
+        //     margin-top: $spacing-2
         .avatar
             align-self: start
             flex-shrink: 0
             margin-bottom: 0
-            width: 100px
+            width: columns(3)
     @include media-breakpoint-down(md)
         justify-content: space-between
         .description
@@ -59,7 +53,6 @@ article.person
         .avatar
             order: 1
             margin-right: 0
-            width: 68px
     @include in-page-without-sidebar
         .avatar
             width: 100%
@@ -95,7 +88,7 @@ ol.persons--list
         padding-bottom: $spacing-3
         padding-top: $spacing-3
         position: relative
-        transition: color 0.5s
+        transition: color $color-duration
         @include icon(arrow-right-line, after)
             margin-left: auto
         &:hover
@@ -124,7 +117,7 @@ ol.persons--list
 .avatar
     // @include aspect-ratio(50, 'img')
     background-color: $persons-avatar-background-color
-    border-radius: 50%
+    border-radius: $avatar-border-radius
     // margin-bottom: $spacing-4
     overflow: hidden
     position: relative
@@ -203,7 +196,7 @@ ol.persons--list
             @include icon(arrow-right-line, after, true)
                 display: inline-flex
                 margin-left: $spacing-1
-                transition: transform .3s ease
+                transition: transform $arrow-duration $arrow-ease-transition
             &:hover::after
                 transform: translateX($spacing-2)
         .more
@@ -212,7 +205,7 @@ ol.persons--list
             margin-top: $spacing-3
             &::after
                 margin-left: space()
-                transition: 0.55s $arrow-ease-transition
+                transition: $arrow-duration $arrow-ease-transition
             &:hover:after
                 transform: translateX($spacing-1)
     .person-publications
@@ -264,8 +257,9 @@ ol.persons--list
                     text-align: right
             .lead + div
                 margin-top: $spacing-4
-    .contacts-details ul
-        @include grid(3, md, 0)
-        li
-            margin-top: 0
-            margin-bottom: $spacing-3
+    @include media-breakpoint-up(md)
+        .contacts-details
+            ul
+                @include grid(3)
+                li
+                    margin-top: 0

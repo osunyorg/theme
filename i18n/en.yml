@@ -35,7 +35,7 @@ blocks:
       by-nc-sa: Creative Commons license - Attribution to the creator - Non-commercial - Share alike
       by-nc-nd: Creative Commons license - Attribution to the creator - Non-commercial - No derivative works
   locations:
-    button_location: Discover the site     
+    button_location: Discover the site
   organizations:
     title: Organizations
   pages:
@@ -88,13 +88,23 @@ commons:
     transcription: Transcription
     map_transcription : Transcription
     credits: "Rights reserved: "
+  add_to_calendar:
+    title: Add to my calendar
+    ical: Download an .ICS file
+    google: Google Calendar
+    office: Office 365
+    outlook: Microsoft Outlook
+    regular_event: Add the entire event period to my calendar
+    yahoo: Yahoo! Calendar
   authors:
     one: Author
     other: Authors
   search:
-    label: Search
-    title: Search
     close: Close search
+    label: Search
+    placeholder: Search
+    search_label: Search this site
+    title: Search
   backtotop: Back to top
   biography: Biography
   breadcrumb: Breadcrumb
@@ -119,7 +129,7 @@ commons:
     schedule: Hours
     socials:
       title: Social Media
-      label: 
+      label:
         social_media: See the {{ .name }} page on {{ .media }}
         email: Contact {{ .name }} by email
         rss: Read the RSS feed for {{ .name }}
@@ -217,7 +227,10 @@ commons:
     pause: Carousel is playing. Pause the carousel.
     play: Carousel is currently paused. Start the carousel.
     previous: Go to the previous element
-  toc: Table of contents
+  time_format: 15:04
+  toc: 
+    title: Table of contents
+    button_label: ", current - Table of contents"
   "yes": "Yes"
   units:
     GB: GB
@@ -228,6 +241,14 @@ commons:
     megabytes: Megabytes
     kilobytes: Kilobytes
     bytes: bytes
+agenda:
+  access:
+    partical_informations:  Practical information
+  filters:
+    dates:
+      aria_label: Display the calendar
+      title: Dates
+    taxonomies: Filter
 diplomas:
   type: Diploma kind
   count:
@@ -247,6 +268,10 @@ events:
     list:
       title: "Archives for the year {{ .year }}"
   calendar:
+    day:
+      link: Show all for {{ .date }}
+    month:
+      link: Show all for {{ .month }}
     week_days:
       monday: 
         short: Mon
@@ -272,8 +297,9 @@ events:
   count:
     one: "1 event"
     other: "{{ .Count }} events"
-  date: Date
-  hour: Time
+  item:
+    federated: "Event from <span>{{ . }}</span>"
+  more_dates: Show all dates
   none: No event
   next: Next event
   next_aria: Next event “{{ .Title }}”
@@ -282,13 +308,27 @@ events:
   from:
     day: From day
     hour: From hour
+  see_all_in_program: See all program's events
+  title: Events
   to:
     day: To day
     hour: To hour
+  status:
+    current: Now
+    future: Soon
+    archive: Passed
   unique_day: Date
 exhibitions:
   archives: Previous exhibitions archive
   none: No exhibition.
+  current: Now
+  future: Coming soon
+  item:
+    federated: "Exhibition from <span>{{ . }}</span>"
+  status:
+    current: Now
+    future: Soon
+    archive: Passed
 formats:
   pdf: Adobe Portable Document Format
   jpg: JPEG image
@@ -304,7 +344,21 @@ formats:
   zip: Compressed archive
   gz: Compressed archive
   tar: Compressed archive
+jobs:
+  dates:
+    from: Date
+    to: Closing date
+  next: Next offer
+  next_aria: Next offer “{{ .Title }}”
+  previous: Previous offer
+  previous_aria: Previous offer “{{ .Title }}”
 organizations:
+  backlinks:
+    exhibitions: Exhibitions mentioning
+    events: Events mentioning
+    pages: Pages mentioning
+    posts: Posts mentioning
+    projects: Projects mentioning
   count:
     one: "1 organization"
     other: "{{ .Count }} organizations"
@@ -332,6 +386,7 @@ papers:
     content: Content
 persons:
   backlinks:
+    exhibitions: Exhibitions mentioning
     events: Events mentioning
     pages: Pages mentioning
     posts: Posts mentioning
@@ -343,7 +398,7 @@ persons:
   posts:
     recent: Latest news
     all: View all news posted by {{ .author }}
-  papers: 
+  papers:
     recent: Latest papers
     all: View all papers published by {{ .author }}
   publications:
@@ -374,9 +429,10 @@ posts:
 programs:
   accessibility: Accessibility
   administrative_information: Administrative information
-  certifications: 
+  certifications:
     qualiopi: Qualiopi, processus certifié, République Française
   children: Options
+  cohorts: Promotions
   contacts: Contacts
   count:
     one: "1 program"
@@ -413,10 +469,14 @@ programs:
   toc:
     admission: Admission
     certification: Certification
+    cohorts: Promotions
     essential: Essential
     pedagogy: Pedagogy
     presentation: Presentation
-    related: News
+    related:
+      events: Events
+      posts: News
+      projects: Projects
     results: After the program
   type:
     apprenticeship: Apprenticeship
@@ -435,7 +495,7 @@ projects:
   previous: Previous project
   previous_aria: Previous project “{{ .Title }}”
   reading_time: Reading time
-  see_all: See all posts
+  see_all: See all projects
   see_all_in_program: See all program's projects
   see_all_in_category: See all projects in “{{ .Title }}”
   title: Projects
@@ -446,7 +506,9 @@ publications:
   previous: Previous publication
   citations: Citations
   stats:
-    label: publications
+    label:
+      one: publication
+      other: publications
 sitemap:
   pages: Arborescence
 taxonomies:

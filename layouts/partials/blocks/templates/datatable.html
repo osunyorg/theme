@@ -14,7 +14,7 @@
             <thead>
               <tr>
                 {{ range .columns }}
-                  <th scope="col">{{ . }}</th>
+                  <th scope="col">{{ . | markdownify }}</th>
                 {{ end }}
               </tr>
             </thead>
@@ -23,7 +23,7 @@
               {{ range .rows }}
                 <tr>
                   {{ range . }}
-                    <td>{{ .  | markdownify }}</td>
+                    <td>{{ . | markdownify }}</td>
                   {{ end }}
                 </tr>
               {{ end }}

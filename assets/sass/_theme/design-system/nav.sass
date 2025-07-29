@@ -23,13 +23,13 @@
         @include meta
         color: $header-color
         cursor: pointer
-        transition: text-decoration 0.15s
+        transition: text-decoration $menu-link-duration
         display: block
         &[aria-expanded]
             @include icon(arrow-down-s-line, after)
                 display: inline-block
                 margin-left: pxToRem(5)
-                transition: transform 0.15s
+                transition: transform $menu-link-duration
             &[aria-expanded="true"]
                 &::after
                     transform: rotate(180deg)

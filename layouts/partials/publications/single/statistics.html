@@ -1,10 +1,10 @@
 <div class="publications-statistics">
   <ol>
-    {{ range first 6 (.Pages.GroupByDate "2006") }}
+    {{ range first 6 (.GroupByDate "2006") }}
       <li>
         <p>
           <b>{{ len .Pages }}</b>
-          <span>{{ i18n "publications.stats.label"}}</span>
+          <span>{{ i18n "publications.stats.label" (len .Pages) }}</span>
           <span>{{ .Key }}</span>
         </p>
       </li>

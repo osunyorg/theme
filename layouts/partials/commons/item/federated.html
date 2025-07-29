@@ -1,0 +1,8 @@
+{{ $type := .Type }}
+{{ with .Params.federation }}
+  {{ if .active }}
+    <p class="meta {{ $type | singularize -}}-federation">
+      {{ i18n ( printf "%s.item.federated" $type ) .website.name | safeHTML }}
+    </p>
+  {{ end }}
+{{ end }}

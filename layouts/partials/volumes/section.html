@@ -6,5 +6,7 @@
     {{ partial "commons/pagination.html" . }}
   </div>
 
-  {{ partial "contents/list.html" . }}
+  {{ if (partial "IsFirstPage" .) }}
+    {{ partial "contents/list.html" . }}
+  {{ end }}
 </div>

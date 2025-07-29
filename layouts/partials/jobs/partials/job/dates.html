@@ -1,0 +1,14 @@
+{{ with .Params.dates }}
+  <p class="job-dates">
+    {{ with .from }}
+      <time itemprop="datePosted" datetime="{{ .day }}">
+        {{ time.Format site.Params.jobs.date_format .day }}
+      </time>
+    {{ end }}
+    {{ with .to }}
+      <time datetime="{{ .day }}">
+        {{ time.Format site.Params.jobs.date_format .day }}
+      </time>
+    {{ end }}
+  </p>
+{{ end }}

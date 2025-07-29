@@ -1,13 +1,21 @@
 {{ $about := .Title }}
+{{ $params := "" }}
+{{ $type := .Type }}
+
 <div class="backlinks">
   {{ with .Params.backlinks.current_website }}
-    {{ with .events }}
-      {{ partial "blocks/templates/agenda.html" (dict
+    {{ with .exhibitions }}
+      {{ $title := i18n (printf "%s.backlinks.exhibitions" $type) }}
+      {{ $params = partial "GetLayoutAndOptions" (dict 
+          "param" "persons.single.exhibitions"
+          "default" "exhibitions.index"
+        ) }}
+      {{ partial "blocks/templates/exhibitions.html" (dict
         "block" (dict 
           "top" (dict
             "active" true
             "title" (dict
-              "value" (printf "%s %s" (i18n "persons.backlinks.events") $about)
+              "value" (printf "%s %s" $title $about)
               "heading" 2
             )
           )
@@ -17,49 +25,81 @@
             "self" 2
           )
           "data" (dict
-            "layout" site.Params.events.index.layout
+            "exhibitions" .
+            "layout" $params.layout
+            "options" $params.options
+          )
+        )
+      ) }}
+    {{ end }}
+    {{ with .events }}
+      {{ $title := i18n (printf "%s.backlinks.events" $type) }}
+      {{ $params = partial "GetLayoutAndOptions" (dict 
+          "param" "persons.single.events"
+          "default" "events.index"
+        ) }}
+      {{ partial "blocks/templates/agenda.html" (dict
+        "block" (dict 
+          "top" (dict
+            "active" true
+            "title" (dict
+              "value" (printf "%s %s" $title $about)
+              "heading" 2
+            )
+          )
+          "template" "agenda"
+          "ranks" (dict 
+            "base" 2
+            "self" 2
+          )
+          "data" (dict
             "events" .
-            "options" site.Params.events.index.options
+            "layout" $params.layout
+            "options" $params.options
           )
         )
       ) }}
     {{ end }}
     {{ with .pages }}
+      {{ $title := i18n (printf "%s.backlinks.pages" $type) }}
+      {{ $params = partial "GetLayoutAndOptions" (dict 
+          "param" "persons.single.pages"
+          "default" "pages.index"
+        ) }}
       {{ partial "blocks/templates/pages.html" (dict
         "block" (dict 
           "top" (dict
             "active" true
             "title" (dict
-              "value" (printf "%s %s" (i18n "persons.backlinks.pages") $about)
+              "value" (printf "%s %s" $title $about)
               "heading" 2
             )
           )
           "template" "pages"
-          "ranks" (dict 
+          "ranks" (dict
             "base" 2
             "self" 2
           )
-          "data" (dict 
-            "layout" site.Params.pages.index.layout
-            "options" ( dict
-              "main_summary" false
-              "summaries" true
-              "image" true
-            )
+          "data" (dict
             "pages" .
-            "layout" site.Params.pages.index.layout
-            "options" site.Params.pages.index.options
+            "layout" $params.layout
+            "options" $params.options
           )
         )
       ) }}
     {{ end }}
     {{ with .projects }}
+      {{ $title := i18n (printf "%s.backlinks.projects" $type) }}
+      {{ $params = partial "GetLayoutAndOptions" (dict 
+          "param" "persons.single.projects"
+          "default" "projects.index"
+        ) }}
       {{ partial "blocks/templates/projects.html" (dict
         "block" (dict 
           "top" (dict
             "active" true
             "title" (dict
-              "value" (printf "%s %s" (i18n "persons.backlinks.projects") $about)
+              "value" (printf "%s %s" $title $about)
               "heading" 2
             )
           )
@@ -70,19 +110,24 @@
           )
           "data" (dict
             "projects" .
-            "layout" site.Params.projects.index.layout
-            "options" site.Params.projects.index.options
+            "layout" $params.layout
+            "options" $params.options
           )
         )
       ) }}
     {{ end }}
     {{ with .posts }}
+      {{ $title := i18n (printf "%s.backlinks.posts" $type) }}
+      {{ $params = partial "GetLayoutAndOptions" (dict 
+          "param" "persons.single.posts"
+          "default" "posts.index"
+        ) }}
       {{ partial "blocks/templates/posts.html" (dict
         "block" (dict 
           "top" (dict
             "active" true
             "title" (dict
-              "value" (printf "%s %s" (i18n "persons.backlinks.posts") $about)
+              "value" (printf "%s %s" $title $about)
               "heading" 2
             )
           )
@@ -92,9 +137,9 @@
             "self" 2
           )
           "data" (dict
-            "layout" site.Params.posts.index.layout
             "posts" .
-            "options" site.Params.posts.index.options
+            "layout" $params.layout
+            "options" $params.options
           )
         )
       ) }}

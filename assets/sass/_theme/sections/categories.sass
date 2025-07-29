@@ -2,19 +2,24 @@ body:where([class*="_categories__term"])
     main
         padding-bottom: $spacing-5
 
-.document-content
-    .project-categories
-        --block-space-y: #{$block-space-y}
-        margin-bottom: var(--block-space-y)
-
 .category-item
     .articles-count
         @include meta
         color: var(--color-text-alt)
 
+.children-categories
+    ul
+        @include list-reset
+        @include meta
+        align-items: baseline
+        display: flex
+        flex-wrap: wrap
+        column-gap: $spacing-3
+        row-gap: $spacing-2
+        margin-bottom: var(--grid-gutter)
+        margin-top: var(--grid-gutter)
+
 .categories
-    .media:empty
-        display: none // Is this generic ?
     &--alternate
         @include layout-alternate
     &--cards

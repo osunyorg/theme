@@ -4,11 +4,14 @@
       "with_container" true
       "context" .
     ) }}
-    
-  {{ partial "contents/list.html" . }}
+
+    {{ partial "taxonomies/section-list-container.html" . }}
+
+    {{ if (partial "IsFirstPage" .) }}
+      {{ partial "contents/list.html" . }}
+    {{ end }}
   
   <div class="container">
-    {{ partial "taxonomies/section-list.html" . }}
     {{ partial "projects/partials/projects.html" . }}
     {{ partial "commons/pagination.html" . }}
   </div>

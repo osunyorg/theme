@@ -7,21 +7,35 @@
 
   {{ partial "contents/list.html" . }}
 
-  <div class="container">
-    {{ partial "taxonomies/section-list.html" . }}
-  </div>
+  {{ partial "taxonomies/section-list-container.html" . }}
+
   {{ if site.Params.events.index.highlight_exhibitions.active }}
     {{ $exhibitions := where .Pages "Section" "exhibitions" }}
     {{ partial "events/section/exhibitions.html" $exhibitions }}
   {{ end }}
+
   <div class="container">
     {{ $events := where .Pages "Section" "events" }}
 
-    {{ partial "events/partials/events.html" (dict
-        "events" $events
-        "context" .
-        "order" "desc"
-      )}}
+    {{ $futur_and_current := where $events "Params.dates.archive" false }}
+    {{ $futur_and_current_group := $futur_and_current.GroupByDate site.Params.events.index.group_by_date "asc" }}
+
+    {{ $archived := where $events "Params.dates.archive" true }}
+    {{ $archived_group := $archived.GroupByDate site.Params.events.index.group_by_date "desc" }}
+
+    {{ $agenda := $futur_and_current_group | append $archived_group }}
+    {{ $paginator := .Paginate $agenda site.Params.events.index.per_page }}
+
+    {{ if not $paginator.PageGroups }}
+      <p class="none">{{ i18n "events.none" }}</p>
+    {{ else }}
+      {{ partial "events/partials/agenda.html" (dict
+        "layout" site.Params.events.index.layout
+        "options" site.Params.events.index.options
+        "agenda" $paginator.PageGroups
+      ) }}
+    {{ end }}
+
     {{ partial "commons/pagination.html" . }}
   </div>
 </div>

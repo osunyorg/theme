@@ -10,6 +10,9 @@
     {{ $class = printf "%s exhibition--with-image" $class }}
   {{ end -}}
   {{ $dates := .Params.dates }}
+  {{ if .Params.federation.active }}
+    {{ $class = printf "%s is-federated" $class }}
+  {{ end }}
 
   <article class="{{ $class }}" 
       itemscope itemtype="https://schema.org/ExhibitionEvent">
@@ -21,6 +24,8 @@
           "level" $heading_level
           "itemprop" "name"
         )}}
+
+      {{ partial "exhibitions/partials/exhibition/federated.html" . }}
 
       {{ if $options.dates }}
         {{ partial "exhibitions/partials/exhibition/schedule.html" (dict 

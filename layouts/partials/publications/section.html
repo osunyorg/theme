@@ -1,9 +1,13 @@
 {{ partial "publications/section/hero.html" . }}
 <div class="document-content">
+
   {{ partial "contents/list.html" . }}
 
   <div class="container">
-    {{ partial "publications/single/statistics.html" . }}
+    {{ $publications := partial "FilterPublications" .Pages }}
+    {{ $paginator := .Paginate $publications }}
+
+    {{ partial "publications/single/statistics.html" $publications }}
     {{ partial "publications/partials/publications.html" . }}
     {{ partial "commons/pagination.html" . }}
   </div>

@@ -1,7 +1,7 @@
 {{ $years := .Pages }}
 {{ with $years.ByTitle.Reverse }}
   <div class="container events-archives-years">
-    <h2 class="sr-only">{{ i18n "events.archives.by_year" }}</h2>
+    <h2>{{ i18n "events.archives.by_year" }}</h2>
     <ol>
       {{ range . }}
         {{ if .Params.is_year }}

@@ -1,0 +1,38 @@
+{{ $projects := .projects }}
+{{ $context := .context }}
+
+{{ with $projects }}
+  <section class="related-projects" id="{{ anchorize (i18n "programs.toc.related.projects") }}">
+    <div class="container">
+      <div class="content">
+        <h2 id="page-projects">{{ i18n "projects.title" }}</h2>
+        <a href="{{ $context.Permalink }}" class="category-link">
+          {{ $category_name := safeHTML $context.Title | truncate 30 }}
+          {{ i18n "projects.see_all_in_program" (dict "Title" $category_name) }}
+        </a>
+
+        <div class="blocks">
+          {{ $projects = partial "GetPathSliceFromObjects" . }}
+          {{ $params := partial "GetLayoutAndOptions" (dict 
+              "param" "programs.related_projects"
+              "default" "projects.index"
+            ) }}
+          {{ partial "blocks/templates/projects.html" (dict
+              "block" (dict
+                "template" "projects"
+                "ranks" (dict
+                  "base" 2
+                  "self" 2
+                )
+                "data" (dict
+                  "projects" $projects
+                  "layout" $params.layout
+                  "options" $params.options
+                )
+              )
+            ) }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

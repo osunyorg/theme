@@ -7,14 +7,9 @@
         @include h3
         color: var(--color-text-alt)
     &-categories
-        @include meta
-        @include list-reset
-        margin-top: $spacing-2
-        display: flex
-        flex-wrap: wrap
+        @include item-categories-list
+        margin-bottom: 0
         column-gap: $spacing-1
-        position: relative
-        z-index: 2
         li:not(:last-child)
             a::after
                 content: ', '
@@ -33,9 +28,23 @@
                 @include icon(arrow-right-line, before)
                     margin-left: space()
                     margin-right: space()
+    &-hours
+        time + time
+            @include icon(arrow-right-line, before)
+                margin-left: space()
+                margin-right: space()
+    .event-parent
+        @include meta
+        order: -1
     .media
         &:empty
             display: none
+    &.is-federated
+        .event-content
+            display: flex
+            flex-direction: column
+        .event-federation
+            order: -1
     @include media-breakpoint-up(desktop)
         &-time
             display: flex

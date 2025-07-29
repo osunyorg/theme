@@ -1,0 +1,31 @@
+{{ partial "jobs/single/hero.html" . }}
+
+<div class="document-content" itemscope itemtype="https://schema.org/JobPosting">
+  <meta itemprop="title" content="{{ partial "PrepareHTML" .Title }}">
+  <meta itemprop="url" content="{{ .Permalink }}">
+  {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
+
+  {{ partial "jobs/single/sidebar.html" . }}
+
+  {{ $taxonomies_position := partial "GetTaxonomiesPosition" . }}
+  {{ if and .Params.design.full_width .Params.taxonomies (eq $taxonomies_position "content") }}
+    <div class="container">
+      {{ partial "taxonomies/single-list-container.html" . }}
+    </div>
+  {{ end }}
+
+  {{ partial "jobs/single/summary.html" (dict
+      "context" .
+      "block_wrapped" true
+    ) }}
+
+  {{ partial "contents/list.html" . }}
+
+  {{ partial "commons/siblings-navigation.html" (dict
+    "context" .
+    "previous_label" (i18n "jobs.previous")
+    "next_label" (i18n "jobs.next")
+  ) }}
+
+  {{ partial "hooks/before-document-content-end.html" . }}
+</div>

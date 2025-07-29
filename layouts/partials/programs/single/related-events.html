@@ -1,0 +1,38 @@
+{{ $events := .events }}
+{{ $context := .context }}
+
+{{ with $events }}
+  <section class="related-events" id="{{ anchorize (i18n "programs.toc.related.events") }}">
+    <div class="container">
+      <div class="content">
+        <h2 id="page-events">{{ i18n "events.title" }}</h2>
+        <a href="{{ $context.Permalink }}" class="category-link">
+          {{ $category_name := safeHTML $context.Title | truncate 30 }}
+          {{ i18n "events.see_all_in_program" (dict "Title" $category_name) }}
+        </a>
+
+        {{ $events = partial "GetPathSliceFromObjects" . }}
+        {{ $params := partial "GetLayoutAndOptions" (dict 
+            "param" "programs.related_events"
+            "default" "events.index"
+          ) }}
+        <div class="blocks">
+          {{ partial "blocks/templates/agenda.html" (dict
+              "block" (dict 
+                "template" "agenda"
+                "ranks" (dict 
+                  "base" 2
+                  "self" 2
+                )
+                "data" (dict
+                  "events" $events
+                  "layout" $params.layout
+                  "options" $params.options
+                )
+              )
+            ) }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

@@ -1,4 +1,4 @@
-@mixin layout-list($columns: 3)
+@mixin layout-list
     @include list-reset
     > li
         padding-bottom: $spacing-3
@@ -7,6 +7,7 @@
             border-bottom: var(--border-width) solid var(--color-border)
     article
         display: flex
+        flex-direction: row
         @include layout-item
         .media
             order: -1
@@ -32,10 +33,6 @@
         article
             display: flex
             gap: var(--grid-gutter)
-            // align title to the next article title if image options is active
-            &:has(.media:empty)
-                [class$="-content"]
-                    margin-left: offset(3)
             [class$="-content"]
                 flex: 1
                 [class$="-title"]
@@ -45,6 +42,8 @@
                     right: 0
                     top: 0
                     margin-top: $spacing-2
+                .rich-text
+                    width: columns(6)
             [class$="-title"],
             [class$="-subtitle"]
                 @include h3

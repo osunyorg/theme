@@ -1,8 +1,11 @@
 <ul class="post-infos">
-  {{ if .Params.posts_categories }}
-    <li>
-      {{ partial "taxonomies/single-list.html" . }}
-    </li>
+  {{ $taxonomies_position := partial "GetTaxonomiesPosition" . }}
+  {{ if ne $taxonomies_position "hero" }}
+    {{ if .Params.posts_categories }}
+      <li>
+        {{ partial "taxonomies/single-list.html" . }}
+      </li>
+    {{ end }}
   {{ end }}
 
   <li>

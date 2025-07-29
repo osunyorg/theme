@@ -1,3 +1,13 @@
+$avatar-border-radius: 50% !default
+// Alert
+$alert-danger-background: var(--color-danger) !default
+// By default color danger is a dark red, so white color is used for text instead of classic fallback text color to ensure accessibility
+$alert-danger-color: white !default
+$alert-warning-background: $alert-danger-background !default
+$alert-warning-color: $alert-danger-color !default
+$alert-info-background: var(--color-background-alt) !default
+$alert-info-color: var(--color-text) !default
+
 // Border
 $border-width: 1px !default
 
@@ -21,13 +31,23 @@ $btn-border-radius: pxToRem(4) !default
 $btn-border-radius-desktop: $btn-border-radius !default
 $btn-padding: pxToRem(12) pxToRem(10) !default
 $btn-padding-desktop: pxToRem(18) pxToRem(16) !default
-$btn-padding-small: pxToRem(6) pxToRem(10) !default
-$btn-padding-small-desktop: pxToRem(6) pxToRem(10) !default
 $btn-min-width: pxToRem(100) !default
 $btn-min-width-desktop: pxToRem(190) !default
 $btn-disabled-color: var(--color-text-alt) !default
 $btn-disabled-background: var(--color-background-alt) !default
 $btn-disabled-border: $btn-disabled-background !default
+
+$btn-small-font-size: $btn-font-size !default
+$btn-small-font-size-desktop: $btn-font-size-desktop !default
+$btn-small-line-height: $btn-line-height !default
+$btn-small-padding: pxToRem(6) pxToRem(10) !default
+$btn-small-padding-desktop: pxToRem(6) pxToRem(10) !default
+
+$btn-large-font-size: $btn-font-size !default
+$btn-large-font-size-desktop: $btn-font-size-desktop !default
+$btn-large-line-height: $btn-line-height !default
+$btn-large-padding: pxToRem(14) pxToRem(12) !default
+$btn-large-padding-desktop: pxToRem(20) pxToRem(18) !default
 
 // Chip
 $chip-background: var(--color-background) !default
@@ -45,15 +65,15 @@ $form-input-border-radius: 4px !default
 $header-color: var(--color-text) !default
 $header-hover-color: var(--color-accent) !default // TODO : Réflechir à plus élégant / générique
 $header-background: var(--color-background-alt) !default
-$header-transition: 0.3s !default
+$header-duration: 0.3s !default
 $header-dropdown-full: false !default
 $header-dropdown-background: $header-background !default
 $header-dropdown-color: $header-color !default
-$header-dropdown-transition: $header-transition !default
+$header-dropdown-transition: $header-duration !default
 $header-sticky-enabled: true !default
 $header-sticky-background: var(--color-background) !default
 $header-sticky-color: $header-color !default
-$header-sticky-transition: $header-transition !default
+$header-sticky-transition: $header-duration !default
 $header-sticky-dropdown-background: $header-sticky-background !default
 $header-sticky-dropdown-color: $header-sticky-color !default
 $header-nav-padding-y: pxToRem(20) !default
@@ -129,6 +149,9 @@ $lightbox-detail-color: var(--color-text) !default
 $lightbox-detail-meta-color: var(--color-text-alt) !default
 $lightbox-focus-outline-color: black !default
 
+// Offcanvas
+$offcanvas-duration: $header-duration !default
+
 // Table of content
 $toc-color: var(--color-text) !default
 $toc-active-color: var(--color-accent) !default // TODO : checker ce que ça fait
@@ -140,7 +163,7 @@ $toc-line-height: $body-line-height !default
 $toc-title-font-family: $meta-font-family !default
 $toc-title-font-size: $meta-size !default
 $toc-title-font-size-desktop: $meta-size-desktop !default
-$toc-sticky-transition: 0.4s
+$toc-sticky-transition: $header-duration !default
 $toc-overlay-color: $body-overlay-color !default
 $toc-border-width: 1px !default
 

@@ -16,6 +16,7 @@
 
     @include in-page-without-sidebar
         .top
+            @include top-flex
             a
                 @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon
@@ -23,8 +24,6 @@
                 @include h2
 
     &--grid
-        .top
-            @include top-flex
         .grid
             .page-title a
                 @include icon(arrow-right-line, after, true)
@@ -38,8 +37,6 @@
             margin-top: 0
         .blocks &:last-of-type
             margin-bottom: 0
-        .top
-            @include top-flex
         .cards
             @include grid(2, desktop)
             @include in-page-without-sidebar
@@ -53,7 +50,7 @@
             @include arrow-right-hover(".more")
             padding: $spacing-3
             background-color: $block-pages-card-page-background
-            transition: background 0.3s, color 0.3s
+            transition: background $background-duration, color $color-duration
             display: flex
             flex: auto
             flex-direction: column
@@ -78,7 +75,7 @@
                 padding-top: $spacing-3
             a,
             .more
-                transition: text-decoration-color .3s ease, color .3s ease
+                transition: text-decoration-color $color-duration ease, color $color-duration ease
             &:hover
                 background-color: $block-pages-card-page-background-hover
                 &, a, .more
@@ -140,9 +137,11 @@
                     width: columns(6)
 
         @include in-page-without-sidebar
-            .block-title
             .top
+                .block-title + .description
+                    margin-left: 0
                 .description
+                    width: auto
                     p
                         @include h2
             article
@@ -191,8 +190,6 @@
                         grid-column: 7 / 13
 
     &--alternate
-        .top
-            @include top-flex
         .alternate
             @include alternate
             article 
@@ -217,8 +214,6 @@
                     @include body-text
 
     &--large
-        .top
-            @include top-flex
         .page
             position: relative
             + .page

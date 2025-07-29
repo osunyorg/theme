@@ -103,7 +103,7 @@ header#document-header
             display: none
             position: absolute
             top: var(--header-height)
-            transition-delay: 0.3
+            transition-delay: $header-duration
             .container
                 padding-left: 0
                 padding-right: 0
@@ -189,7 +189,7 @@ body
         pointer-events: none
         position: fixed
         opacity: 0
-        transition: opacity $header-transition
+        transition: opacity $header-duration
         z-index: $zindex-body-overlay
 
     html.has-menu-opened &,
@@ -216,7 +216,7 @@ body
             opacity: 0
 
 header#document-header
-    nav.primary-menu
+    .primary-menu
         padding-bottom: $header-nav-padding-y
         padding-top: $header-nav-padding-y
         @include media-breakpoint-up(desktop)

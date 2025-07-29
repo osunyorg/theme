@@ -1,0 +1,16 @@
+{{ $has_administrative_information := false }}
+
+{{ if .Params.information.administrative }}
+  {{ $has_administrative_information = true }}
+{{ end }}
+
+{{ if .Params.diplomas }}
+  {{ with .Params.diplomas }}
+    {{ $diploma := site.GetPage (printf "/diplomas/%s" .) }}
+    {{ if $diploma.Params.ects }}
+      {{ $has_administrative_information = true }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ return $has_administrative_information }}

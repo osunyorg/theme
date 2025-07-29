@@ -8,7 +8,7 @@
 
   <div class="blocks">
   {{- range $index, $content := .Params.contents -}}
-    {{ if eq .kind "block" }}
+    {{ if and (eq .kind "block") (not (in site.Params.blocks.ignored .html_class) ) }}
       {{ $is_last_content := eq (add $index 1) (len $contents) }}
       {{ $is_title := eq .template "title" }}
       {{ $is_layout_collapsed := eq .data.layout "collapsed" }}

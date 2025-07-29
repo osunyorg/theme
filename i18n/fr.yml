@@ -97,7 +97,9 @@ commons:
     other: Auteur·rices
   backtotop: Haut de page
   biography: Biographie
-  breadcrumb: Fil d’ariane
+  breadcrumb: 
+    show: Voir le fil d'ariane
+    title: Fil d’ariane
   click_to_copy:
     aria_label: Cliquez pour copier {{ .description }}
     button_title: Cliquez pour copier
@@ -119,7 +121,7 @@ commons:
     schedule: Horaires
     socials:
       title: Réseaux sociaux
-      label: 
+      label:
         social_media: Consulter la page {{ .name }} sur {{ .media }}
         email: Contacter {{ .name }} par email
         rss: Consulter le flux RSS du site {{ .name }}
@@ -217,9 +219,11 @@ commons:
       day: Jour de fin
       hour: Heure de fin
   search:
-    label: Recherche
-    title: Rechercher
     close: Fermer la recherche
+    label: Recherche
+    placeholder: Rechercher
+    search_label: Recherche sur ce site
+    title: Rechercher
   share: Partager
   share_on: Partager sur
   share_on_aria: Partager sur “{{ .Title }}” - lien externe
@@ -231,7 +235,10 @@ commons:
     pause: Carrousel en cours de lecture. Mettre en pause le carrousel.
     play: Carrousel actuellement en pause. Démarrer le carrousel.
     previous: Aller à l'élément précédent
-  toc: Table des matières
+  time_format: 15h04
+  toc: 
+    title: Table des matières
+    button_label: ", en cours - Table des matières"
   "true": Oui
   units:
     GB: Go
@@ -242,6 +249,14 @@ commons:
     megabytes: Mégaoctets
     kilobytes: Kilooctets
     bytes: octets
+agenda:
+  access:
+    partical_informations: Informations pratiques
+  filters:
+    dates: 
+      aria_label: Afficher le calendrier des dates
+      title: Dates
+    taxonomies: Filtrer
 diplomas:
   type: Type de diplôme
   count:
@@ -253,7 +268,7 @@ errors:
     text: >-
       Ce lien semble erroné.<br>
       Nous vous proposons de retourner à la <a href="/">page d'accueil de notre site</a>.<br>
-      Merci de votre compréhension. 
+      Merci de votre compréhension.
 events:
   archives:
     by_year: Agenda par années
@@ -285,8 +300,8 @@ events:
   count:
     one: "1 événement"
     other: "{{ .Count }} événements"
-  access:
-    partical_informations: Informations pratiques
+  item:
+    federated: "Événement du réseau <span>{{ . }}</span>"
   more_dates: Afficher toutes les dates
   none: Aucun événement
   next: Événement suivant
@@ -294,21 +309,24 @@ events:
   part_of: Cet événement fait partie de
   previous: Événement précédent
   previous_aria: Événement précédent “{{ .Title }}”
+  see_all_in_program: Voir tous les événements de la formation
+  title: Événements
   regular_event: Événement régulier
-  unique_day: Date
   see_programme: Accéder au programme
   status:
     current: En cours
     future: À venir
     archive: Archive
+  unique_day: Date
   year:
     anchor: Accéder aux événements
-
 exhibitions:
   archives: Expositions passées
   none: Aucune exposition.
   current: En ce moment
   future: Bientôt
+  item:
+    federated: "Exposition du réseau <span>{{ . }}</span>"
   status:
     current: En cours
     future: À venir
@@ -328,7 +346,21 @@ formats:
   zip: Compressed archive
   gz: Compressed archive
   tar: Compressed archive
+jobs:
+  dates:
+    from: Date
+    to: Date de clôture
+  next: Offre suivante
+  next_aria: Offre suivante “{{ .Title }}”
+  previous: Offre précédente
+  previous_aria: Offre précédente “{{ .Title }}”
 organizations:
+  backlinks:
+    events: Événements mentionnant
+    exhibitions: Expositions mentionnant
+    pages: Pages mentionnant
+    posts: Actualités mentionnant
+    projects: Projets mentionnant
   count:
     one: "1 organisation"
     other: "{{ .Count }} organisations"
@@ -358,6 +390,7 @@ papers:
 persons:
   backlinks:
     events: Événements mentionnant
+    exhibitions: Expositions mentionnant
     pages: Pages mentionnant
     posts: Actualités mentionnant
     projects: Projets mentionnant
@@ -368,7 +401,7 @@ persons:
   posts:
     recent: Actualités publiées récemment
     all: Voir toutes les actualités publiées par {{ .author }}
-  papers: 
+  papers:
     recent: Papiers publiés récemment
     all: Voir tous les papiers publiés par {{ .author }}
   publications:
@@ -399,9 +432,10 @@ posts:
 programs:
   accessibility: Accessibilité
   administrative_information: Informations administratives
-  certifications: 
+  certifications:
     qualiopi: Qualiopi, processus certifié, République Française
   children: Parcours
+  cohorts: Promotions
   contacts: Contacts
   count:
     one: "1 formation"
@@ -438,10 +472,14 @@ programs:
   toc:
     admission: Admission
     certification: Certification
+    cohorts: Promotions
     essential: Essentiel
     pedagogy: Pédagogie
     presentation: Présentation
-    related: Actualités
+    related:
+      events: Événements
+      posts: Actualités
+      projects: Projets
     results: Après la formation
   type:
     apprenticeship: Apprentissage
@@ -471,7 +509,9 @@ publications:
   previous: Publication précédente
   citations: Citations
   stats:
-    label: publications
+    label:
+      one: publication
+      other: publications
 sitemap:
   pages: Arborescence
 taxonomies:

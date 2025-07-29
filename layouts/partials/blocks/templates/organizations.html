@@ -12,11 +12,13 @@
 
 {{- with .block.data -}}
   {{ $options := .options }}
+  {{ if $options.logo }}
+    {{ $block_class = printf "%s %s" $block_class "organizations--with-images" }}
+  {{ end }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-
         {{ partial (printf "organizations/partials/layouts/%s/%s.html" $layout $layout) (dict
             "block_index" $block_index
             "heading_level" $block.ranks.children
@@ -24,6 +26,8 @@
             "logo_index" $logo_index
             "organizations" .organizations
             "options" $options
+            "layout" $layout
+            "categories" .categories
           )}}
       </div>
     </div>

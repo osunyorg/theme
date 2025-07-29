@@ -47,7 +47,7 @@ section.programs
     @include grid(2, desktop)
     @include grid(3, xl)
 
-ol.programs
+ol.programs:where(:not(.programs--grid))
     @include list-section
     .program
         align-items: start
@@ -55,7 +55,7 @@ ol.programs
             @include hover-translate-icon($fade: true)
             @include icon(arrow-right-line, after, true)
                 display: inline
-            transition: color 0.55s
+            transition: color $color-duration
             &:hover
                 color: var(--color-accent)
         @include media-breakpoint-down(md)
@@ -97,14 +97,15 @@ ol.programs
                 width: columns(9)
             .program-diploma
                 margin-left: offset(1)
-    &--light
-        .program
-            &:first-child
-                border-top: var(--border-width) solid var(--color-border)
-            .program-title:last-child
-                @include h4
+ol.programs--light
+    .program
+        &:first-child
+            border-top: var(--border-width) solid var(--color-border)
+        .program-title:last-child
+            @include h4
 
-.programs-grid
+.programs-grid,
+.programs--grid
     align-items: start
     @include grid(1, false, $spacing-5)
     @include grid(2, xl)
@@ -301,14 +302,28 @@ ol.programs
                 color: var(--color-accent)
             &:first-child
                 border-top: var(--border-width) solid var(--color-border)
-    .related-posts
-        .category-link
-            display: block
-            text-decoration: none
-            @include icon(arrow-right-line, after, true)
-            @include hover-translate-icon
-            @include media-breakpoint-down(desktop)
-                margin-bottom: $spacing-3
+    .program-related
+        .content
+            h2
+                margin-bottom: $spacing-2
+            .category-link
+                display: block
+                text-decoration: none
+                margin-top: 0
+                @include icon(arrow-right-line, after, true)
+                @include hover-translate-icon
+            .blocks
+                --block-space-y: 0
+                padding-top: 0
+            .projects--list > li:first-child
+                padding-top: 0
+            .events--list article:last-child
+                margin-bottom: 0
+                padding-bottom: 0
     .programs-index
         .programs
             margin-bottom: $spacing-5
+    .academic_years-list
+        .academic_year
+            &-title
+                @include h5

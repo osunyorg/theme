@@ -86,7 +86,7 @@ details
         cursor: pointer
         @include icon(arrow-down-s-line, after)
             line-height: pxToRem(22)
-            transition: transform 0.25s
+            transition: transform $default-duration
             // Add left margin if text is before arrow
             &:not(:first-child)
                 margin-left: pxToRem(10)
@@ -112,7 +112,7 @@ details
     margin: 0
     z-index: $zindex-modal
     opacity: 0
-    transition: opacity 0.3s
+    transition: opacity $opacity-duration
     &.is-opened
         opacity: 1
         display: flex

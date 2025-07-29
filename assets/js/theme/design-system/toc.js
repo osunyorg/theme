@@ -14,9 +14,10 @@ class TableOfContents {
         this.content = this.element.querySelector('.toc-content');
         this.nav = this.element.querySelector('.toc');
         this.links = this.element.querySelectorAll('a');
-        this.sections = document.querySelectorAll('.heading[id]');
+        this.sections = document.querySelectorAll('main .heading[id]');
         // TODO : handle sublinks update in toc 
         this.ctaTitle = document.querySelector('.toc-cta-title span');
+        this.openerButton = document.querySelector('.toc-cta button');
         this.togglers = document.querySelectorAll('.toc-cta button, .toc-container button');
         this.state = {
             opened: false,
@@ -25,7 +26,6 @@ class TableOfContents {
             isOffcanvas: this.isOffcanvas()
         };
         this.listen();
-
         if (this.state.isOffcanvas) {
             this.element.setAttribute('aria-hidden', true);
         }
@@ -37,6 +37,8 @@ class TableOfContents {
 
     listen () {
         window.addEventListener('scroll', this.update.bind(this), false);
+
+        window.addEventListener('resize', this.resize.bind(this), false);
 
         this.togglers.forEach(toggler => {
             toggler.addEventListener('click', () => {
@@ -64,6 +66,9 @@ class TableOfContents {
     }
 
     toggle (open) {
+        if (!this.state.isOffcanvas) {
+            return;
+        }
         this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
         const classAction = this.state.opened ? 'add' : 'remove',
             transitionDuration = this.state.opened ? 0 : this.getTransitionDuration();
@@ -129,6 +134,7 @@ class TableOfContents {
 
     updateCtaTitle (link) {
         if (isMobile()) {
+            this.openerButton.setAttribute('aria-label', link.innerText +  osuny.i18n.toc.button_label);
             this.ctaTitle.innerText = link.innerText;
         } else {
             this.ctaTitle.innerText = this.ctaTitle.getAttribute('data-default');
@@ -144,6 +150,10 @@ class TableOfContents {
                 top: progress
             });
         }
+    }
+
+    resize () {
+        this.state.isOffcanvas = this.isOffcanvas();
     }
 }
 
