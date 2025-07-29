@@ -4,6 +4,34 @@
 
 <div class="backlinks">
   {{ with .Params.backlinks.current_website }}
+    {{ with .exhibitions }}
+      {{ $title := i18n (printf "%s.backlinks.exhibitions" $type) }}
+      {{ $params = partial "GetLayoutAndOptions" (dict 
+          "param" "persons.single.exhibitions"
+          "default" "exhibitions.index"
+        ) }}
+      {{ partial "blocks/templates/exhibitions.html" (dict
+        "block" (dict 
+          "top" (dict
+            "active" true
+            "title" (dict
+              "value" (printf "%s %s" $title $about)
+              "heading" 2
+            )
+          )
+          "template" "agenda"
+          "ranks" (dict 
+            "base" 2
+            "self" 2
+          )
+          "data" (dict
+            "exhibitions" .
+            "layout" $params.layout
+            "options" $params.options
+          )
+        )
+      ) }}
+    {{ end }}
     {{ with .events }}
       {{ $title := i18n (printf "%s.backlinks.events" $type) }}
       {{ $params = partial "GetLayoutAndOptions" (dict 
