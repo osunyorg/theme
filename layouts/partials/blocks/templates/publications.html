@@ -4,23 +4,22 @@
 {{- $title := .block.title -}}
 {{ $heading_level := $block.ranks.children }}
 
-{{- with .block.data -}}
-
+{{ with .block.data }}
   <div class="block block-publications {{- if $title }} block-with-title {{- end -}}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         <div class="publications">
-          {{ range $publication := .publications -}}
-            {{ with site.GetPage (printf "/publications/%s" $publication) }}
+          {{ range .publications }}
+            {{ with site.GetPage .path }}
               {{ partial "publications/partials/publication.html" (dict 
-                "publication" . 
-                "heading_level" $heading_level
-              )}}
-            {{ end}}
-          {{ end}}
+                  "publication" . 
+                  "heading_level" $heading_level
+                )}}
+            {{ end }}
+          {{ end }}
         </div>
       </div>
     </div>
   </div>
-{{- end -}}
+{{ end }}
