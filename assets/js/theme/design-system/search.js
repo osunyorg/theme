@@ -22,7 +22,7 @@ window.osuny.Search.prototype._setup = function () {
 window.osuny.Search.prototype.setPageFind = function () {
     var options = {
             element: this.element,
-            showSubResults: true,
+            showSubResults: false,
             translations: osuny.i18n.search
         },
         attribut;
