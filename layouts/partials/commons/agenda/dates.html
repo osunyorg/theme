@@ -3,6 +3,7 @@
 {{ $is_parent := .Params.children }}
 {{ $is_simple_event := and .Params.dates (not .Params.time_slots) }}
 {{ $has_primary_date := or $is_repeating $multiple_dates_event $is_parent $is_simple_event }}
+{{ $is_archive := eq .Params.dates.status "archive" }}
 
 <div class="event-slots {{- if $is_parent }} parent-event {{ end }} {{ if $is_simple_event }} simple-event {{ end }}">
   <h2 class="events-slots-title">{{ i18n "commons.date" (cond $has_primary_date 2 1) }}</h2>
@@ -15,10 +16,12 @@
       {{ with .Params.place }}
         <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">{{ . }}</span>
       {{ end }}
-      {{ partial "commons/agenda/dropdown-calendar.html" (dict
-          "index" "primary"
-          "calendar_links" .Params.dates.add_to_calendar
-        )}}
+      {{ if not $is_archive}}
+        {{ partial "commons/agenda/dropdown-calendar.html" (dict
+            "index" "primary"
+            "calendar_links" .Params.dates.add_to_calendar
+          )}}
+      {{ end }}
     </div>
   {{ end }}
   {{ with .Params.time_slots }}
@@ -39,10 +42,12 @@
           {{ with $time_slot.place }}
             <span class="location" itemprop="location">{{ . }}</span>
           {{ end }}
-          {{ partial "commons/agenda/dropdown-calendar.html" (dict
-              "index" $index
-              "calendar_links" $time_slot.add_to_calendar
-            )}}
+          {{ if not $is_archive}}
+            {{ partial "commons/agenda/dropdown-calendar.html" (dict
+                "index" $index
+                "calendar_links" $time_slot.add_to_calendar
+              )}}
+          {{ end }}
         </li>
       {{ end }}
     </ul>
