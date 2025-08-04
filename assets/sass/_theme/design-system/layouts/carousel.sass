@@ -1,0 +1,17 @@
+@mixin layout-carousel
+    overflow: hidden
+    .slider
+        .slider-list
+            @include list-reset
+            gap: var(--grid-gutter)
+        @include media-breakpoint-down(desktop)
+            .slider-arrows
+                width: columns(12)
+            .slider-slide
+                width: columns(10)
+        @include in-page-with-sidebar
+            .slider-slide
+                width: columns(3)
+        @include in-page-without-sidebar
+            .slider-slide
+                width: columns(4)

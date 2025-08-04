@@ -1,0 +1,39 @@
+{{ $logo_index := .logo_index }}
+{{ $options := .options }}
+{{ $layout := .layout }}
+{{ $heading_level := .heading_level | default 2 }}
+
+<div class="organizations">
+  <ul data-slider="{{ site.Params.blocks.organizations.slider | encoding.Jsonify }}">
+    {{- range .organizations }}
+      {{ if .path }}
+        {{ with site.GetPage .path }}
+          <li>
+            {{ partial "organizations/partials/organization.html" (dict
+                "organization" .
+                "options" $options
+                "layout" $layout
+                "heading_level" $heading_level
+              ) }}
+          </li>
+        {{ end }}
+      {{ else }}
+        <li>
+          {{ partial "organizations/partials/organization.html" (dict
+              "organization" (dict
+                "Title" .name
+                "Permalink" .url
+                "Params" (dict 
+                  "logo" .logo
+                  "external" true
+                )
+              )
+              "options" $options
+              "layout" $layout
+              "heading_level" $heading_level
+            ) }}
+        </li>
+      {{ end }}
+    {{ end -}}
+  </ul>
+</div>

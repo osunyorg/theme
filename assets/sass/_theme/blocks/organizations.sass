@@ -5,7 +5,15 @@
                 @include stretched-link(before)
                 @include icon(links-line, after, true)
                     position: relative
-
+    &--carousel
+        @include layout-carousel
+        .slider
+            @include in-page-with-sidebar
+                .slider-slide
+                    width: columns(3)
+            @include in-page-without-sidebar
+                .slider-slide
+                    width: columns(2)
     &--map
         position: relative
         .block-content
