@@ -294,33 +294,21 @@
                     margin-top: $spacing-5
 
     &--carousel
-        overflow: hidden
-        z-index: 0
-        .post
-            word-break: break-word
-            margin-right: calc(var(--grid-gutter))
-            .media
-                img
-                    aspect-ratio: 1.55
-        @include media-breakpoint-down(desktop)
-            .slider-arrows
-                width: columns(12)
-            .post
-                width: columns(10)
+        @include layout-carousel
         @include in-page-with-sidebar
             .post
-                width: columns(3)
                 .post-title,
                 .post-subtitle
                     @include h4
-            .slider-arrows
-                justify-content: space-between
-                width: columns(7)
-            @include media-breakpoint-down(xl)
-                .post
-                    width: columns(4)
+            .slider
                 .slider-arrows
-                    width: columns(8)
+                    justify-content: space-between
+                    width: columns(4)
+                @include media-breakpoint-down(xxxl)
+                    .slider-slide
+                        width: columns(4)
+                    .slider-arrows
+                        width: columns(5)
         @include in-page-without-sidebar
             .block-content
                 display: flex
@@ -328,11 +316,10 @@
                 .top
                     flex-shrink: 0
                     width: columns(3)
-                .post
-                    width: columns(4)
-                .slider-arrows
-                    justify-content: space-between
-                    width: columns(9)
+                .slider
+                    .slider-arrows
+                        justify-content: space-between
+                        width: columns(9)
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts
