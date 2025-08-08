@@ -2,15 +2,12 @@
 {{ if .params }}
   {{ $post = site.GetPage (printf "/posts/%s" .params )}}
 {{ end }}
-
-{{ $direction := "" }}
-{{ $heading := .heading | default "h2" }}
-{{ $heading_tag := (dict 
-    "open" ((printf "<%s class='post-title' itemprop='headline'>" $heading) | safeHTML)
-    "close" ((printf "</%s>" $heading) | safeHTML)
-    ) }}
-    
 {{ $options := .options }}
+{{ $direction := "" }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+  "level" .heading_level 
+  "attributes" "class='post-title' itemprop='headline'"
+)}}
 
 {{ with $post }}
   {{ $post_class := "post" }}
