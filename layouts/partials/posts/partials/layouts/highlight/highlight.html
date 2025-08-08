@@ -1,10 +1,9 @@
-{{ $heading_level := .heading_level | default 3 }}
-{{ $heading := printf "h%d" $heading_level }}
-{{ $heading_tag := (dict 
-  "open" ((printf "<%s class='post-title' itemprop='headline'>" $heading) | safeHTML)
-  "close" ((printf "</%s>" $heading) | safeHTML)
-  ) }}
 {{ $options := .options }}
+{{ $heading_level := .heading_level | default 3 }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+  "level" $heading_level 
+  "attributes" "class='post-title' itemprop='headline'"
+)}}
 
 <div class="highlight">
   {{ $highlight := index .posts 0 }}
@@ -14,10 +13,10 @@
   {{ with $highlight }}
     <div class="highlight-post">
       {{ partial "posts/partials/post.html" (dict 
-        "post" .
-        "heading" $heading
-        "options" $options
-        ) }}
+          "post" .
+          "heading_level" $heading_level
+          "options" $options
+        )}}
     </div>
   {{ end }}
 
