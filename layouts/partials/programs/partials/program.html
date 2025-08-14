@@ -4,7 +4,9 @@
   "open" ((printf "<%s class='program-title' itemprop='name'>" $heading) | safeHTML)
   "close" ((printf "</%s>" $heading) | safeHTML)
   ) }}
+{{ $layout := .layout }}
 {{ $options := .options }}
+{{ $sizes := cond (eq $layout "list") site.Params.image_sizes.blocks.programs.list "" }}
 
 <li class="program" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
   <div class="program-content">
@@ -14,6 +16,14 @@
         {{ $title }}
       </a>
     {{ $heading_tag.close }}
+
+    {{/*  TODO: remove when option is added to the block  */}}
+    {{ if or site.Params.programs.index.options.categories $options.categories }}
+      {{ partial "commons/categories.html" ( dict
+        "context" $program
+        "kind" "program"
+      )}}
+    {{ end }}
 
     {{ $diploma := $program.Params.diplomas }}
     {{ if and $options.diploma $diploma }}
@@ -30,7 +40,7 @@
           "kind" "programs"
         )}}
       </div>
-  {{ end }}
+    {{ end }}
 
     {{ if $options.button }}
       <p class="btn">{{ i18n "commons.more" }}</p>
@@ -65,14 +75,11 @@
       {{ end }}
     </div>
   {{ end }}
-
   {{ if and $program.Params.image $options.image }}
-    <div class="media">
-      {{ partial "commons/image.html"
-          (dict
-            "image" $program.Params.image
-            "sizes" site.Params.image_sizes.blocks.programs
-          ) }}
-    </div>
+    {{ partial "programs/partials/program/media.html" (dict 
+        "image" $program.Params.image
+        "layout" $layout
+        "sizes" $sizes
+      ) }}
   {{ end }}
 </li>

@@ -1,12 +1,16 @@
+{{ $layout := site.Params.posts.index.layout }}
+{{ $options := site.Params.posts.index.options }}
+
 <section class="person-posts">
   <div class="top">
     <h2 class="h5">{{ i18n "persons.posts.recent" }}</h2>
   </div>
-  <div class="posts posts--{{- site.Params.posts.index.layout -}}">
+  <div class="posts posts--{{- $layout -}}">
     {{ range first 3 .posts }}
       {{ partial "posts/partials/post.html" (dict 
         "post" . 
-        "options" site.Params.posts.index.options
+        "layout" $layout
+        "options" $options
       )}}
     {{ end }}
   </div>
