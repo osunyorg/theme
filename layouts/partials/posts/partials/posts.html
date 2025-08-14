@@ -1,5 +1,8 @@
-{{ $list_class := printf "posts posts--%s" site.Params.posts.index.layout }}
-{{ $list_class = printf "%s %s" $list_class (cond site.Params.posts.index.options.image "with-images" "without-images") }}
+{{ $layout := site.Params.posts.index.layout }}
+{{ $options := site.Params.posts.index.options }}
+
+{{ $list_class := printf "posts posts--%s" $layout }}
+{{ $list_class = printf "%s %s" $list_class (cond $options.image "with-images" "without-images") }}
 <div class="{{ $list_class }}">
   {{ if not .Paginator.Pages }}
     {{ $is_term := eq .Kind "term" }}
@@ -9,7 +12,8 @@
     {{  partial "posts/partials/post.html" 
         (dict 
           "post" .
-          "options" site.Params.posts.index.options
+          "layout" $layout
+          "options" $options
         )}}
   {{ end }}
 </div>

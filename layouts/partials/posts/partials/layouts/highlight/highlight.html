@@ -70,7 +70,7 @@
                   <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
                 {{ end }}
                 {{ if $options.author }}
-                  {{- partial "posts/partials/author.html" . -}}
+                  {{- partial "posts/partials/post/author.html" . -}}
                 {{ end }}
               </div>
             {{ end }}
