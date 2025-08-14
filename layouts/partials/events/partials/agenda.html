@@ -17,6 +17,7 @@
           "layout" $layout
           "options" site.Params.events.index.options
           "is_sub_event" $is_sub_event
+          "sizes" site.Params.image_sizes.blocks.events.agenda.parents
         )}}
 
       {{ range .Params.children_for_the_day }}
@@ -26,6 +27,7 @@
               "layout" $layout
               "options" $options
               "is_sub_event" true
+              "sizes" site.Params.image_sizes.blocks.events.agenda.children
             )}}
         {{ end }}
       {{ end }}
