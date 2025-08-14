@@ -10,6 +10,7 @@
     "close" ((printf "</%s>" $heading) | safeHTML)
     ) }}
     
+{{ $layout := .layout }}
 {{ $options := .options }}
 
 {{ with $post }}
@@ -71,17 +72,10 @@
       {{ end }}
     </div>
     {{ if $options.image }}
-      <div class="media">
-        {{- if .Params.image -}}
-          {{- partial "commons/image.html"
-              (dict
-                "image"    .Params.image
-                "sizes"    site.Params.image_sizes.sections.posts.item
-              ) -}}
-        {{- else -}}
-          {{- partial "commons/image-default.html" "posts" -}}
-        {{- end -}}
-      </div>
+      {{ partial "categories/partials/category/media.html" (dict 
+          "image" .Params.image
+          "layout" $layout
+        ) }}
     {{- end -}}
   </article>
 {{ end }}

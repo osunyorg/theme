@@ -5,6 +5,7 @@
         "attributes" "class='post-title' itemprop='headline'"
 )}}
 {{ $index := .index}}
+{{ $layout := "large" }}
 {{ $options := .options }}
 {{ $image := $options.image }}
 
@@ -64,23 +65,16 @@
               {{ i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" .Params.contents_reading_time.text }}
             </span>
           {{ end }}
-
+          
           <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
         </div>
-
+        
         {{ if $options.image }}
-          <div class="media">
-            {{- if .Params.image -}}
-              {{- partial "commons/image.html"
-                  (dict
-                    "image"    .Params.image
-                    "sizes"    site.Params.image_sizes.sections.posts.item
-                  ) -}}
-            {{- else -}}
-              {{- partial "commons/image-default.html" "posts" -}}
-            {{- end -}}
-          </div>
-        {{- end -}}
+          {{ partial "categories/partials/category/media.html" (dict 
+              "image" .Params.image
+              "layout" $layout
+            ) }}
+        {{ end }}
       </article>
     {{ end }}
   {{ end }}
