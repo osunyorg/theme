@@ -42,20 +42,31 @@
                     .media
                         width: columns(2)
                 @include in-page-without-sidebar
-                    &-content,
+                    &-content
+                        display: grid
+                        grid-gap: $spacing-2 var(--grid-gutter)
+                        position: relative
+                        grid-template-columns: 1fr 1fr
+                        &:only-child
+                            grid-template-columns: 1fr 1fr 1fr
+                            .location-description
+                                grid-column: 3
+                        &:not(:only-child)
+                            .location-description
+                                grid-row: 1 / 3
+                            address
+                                margin-top: auto
+                                grid-row: 2
                     &-description
                         display: flex
-                    &-content
-                        gap: var(--grid-gutter)
-                    &-description
                         flex-direction: column
                         justify-content: space-between
-                    &-title
-                        min-width: columns(4)
                     .media
                         width: columns(4)
                     .more
                         line-height: 1
+                    &:where(.media)
+                        border: 4px solid red
 
     &--grid
         @include in-page-with-sidebar
