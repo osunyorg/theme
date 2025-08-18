@@ -12,6 +12,7 @@
     
 {{ $layout := .layout }}
 {{ $options := .options }}
+{{ $sizes := cond (eq $layout "highlight") site.Params.image_sizes.blocks.posts.highlight "" }}
 
 {{ with $post }}
   {{ $post_class := "post" }}
@@ -75,6 +76,7 @@
       {{ partial "posts/partials/post/media.html" (dict 
           "image" .Params.image
           "layout" $layout
+          "sizes" $sizes
         ) }}
     {{- end -}}
   </article>
