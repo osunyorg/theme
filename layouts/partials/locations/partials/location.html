@@ -1,10 +1,12 @@
 {{ $location := .location }}
 {{ $heading := .heading | default "h2" }}
 {{ $heading_tag := (dict 
-    "open" ((printf "<%s itemprop='headline' class='location-title'>" $heading) | safeHTML)
-    "close" ((printf "</%s>" $heading) | safeHTML)
-    ) }}
+  "open" ((printf "<%s itemprop='headline' class='location-title'>" $heading) | safeHTML)
+  "close" ((printf "</%s>" $heading) | safeHTML)
+  ) }}
+{{ $layout := .layout }}
 {{ $options := .options }}
+{{ $sizes := cond (eq $layout "list") site.Params.image_sizes.blocks.locations.list "" }}
 
 {{ with $location }}
   <article class="location" itemscope itemtype="https://schema.org/EducationalOrganization">
@@ -30,15 +32,11 @@
       </div>
 
     {{ if $options.image }}
-      {{- if .Params.image -}}
-        <div class="media">
-          {{- partial "commons/image.html"
-              (dict
-                "image"    .Params.image
-                "sizes"    site.Params.image_sizes.sections.locations.item
-              ) -}}
-          </div>
-        {{- end -}}
+      {{ partial "locations/partials/location/media.html" (dict 
+          "image" .Params.image
+          "layout" $layout
+          "sizes" $sizes
+        )}}
     {{- end -}}
   </article>
 {{ end }}
