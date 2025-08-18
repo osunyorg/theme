@@ -14,7 +14,8 @@
             @include icon(arrow-right-line, after)
                 margin-left: $spacing-2
             margin-top: $spacing-1
-
+        address
+            margin-top: $spacing-1
         .media
             width: 100%
             img
@@ -39,6 +40,8 @@
                 &-content
                     flex: 1
                 @include in-page-with-sidebar
+                    address + .location-description
+                        margin-top: $spacing-2
                     .media
                         width: columns(2)
                 @include in-page-without-sidebar
@@ -74,8 +77,11 @@
             @include grid(2)
         @include in-page-without-sidebar
             @include grid(3)
-        .location-title
-            @include h3
+        .location
+            .location-title
+                @include h3
+            address + .location-description
+                margin-top: $spacing-2
 
 .locations__term
     .hero
