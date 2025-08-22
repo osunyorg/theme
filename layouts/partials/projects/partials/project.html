@@ -4,7 +4,6 @@
 {{ $project := site.GetPage .project.path }}
 {{ $group_meta := .group_meta }}
 {{ $with_more := .with_more }}
-{{ $sizes := .image_sizes | default "" }}
 
 {{ with $project }}
   <article class="project {{ .Params.bodyclass }}" itemscope itemtype="https://schema.org/CreativeWork">
@@ -60,7 +59,7 @@
       {{ partial "projects/partials/project/media.html" (dict 
           "image" $project.Params.image 
           "layout" $layout
-          "sizes" $sizes
+          "type" "project"
         ) }}
     {{ end }}
   </article>

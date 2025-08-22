@@ -12,11 +12,7 @@
 {{ $index := .index }}
 {{ $alternate := .alternate }}
 {{ $options := .options }}
-
-{{ $sizes := cond (eq $layout "list") site.Params.image_sizes.blocks.events.list "" }}
-{{ with .sizes }}
-  {{ $sizes = . }}
-{{ end }}
+{{ $sizes := .sizes | default "" }}
 
 {{ with $event }}
   {{ $class := "event" }}

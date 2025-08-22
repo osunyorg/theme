@@ -4,9 +4,8 @@
   "open" ((printf "<%s class='program-title' itemprop='name'>" $heading) | safeHTML)
   "close" ((printf "</%s>" $heading) | safeHTML)
   ) }}
-{{ $layout := .layout }}
+{{ $layout := .layout | default "list" }}
 {{ $options := .options }}
-{{ $sizes := cond (eq $layout "list") site.Params.image_sizes.blocks.programs.list "" }}
 
 <li class="program" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
   <div class="program-content">
@@ -79,7 +78,7 @@
     {{ partial "programs/partials/program/media.html" (dict 
         "image" $program.Params.image
         "layout" $layout
-        "sizes" $sizes
+        "type" "programs"
       ) }}
   {{ end }}
 </li>

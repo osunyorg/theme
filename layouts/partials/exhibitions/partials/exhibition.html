@@ -3,7 +3,7 @@
 {{ $heading_level := .heading_level }}
 {{ $with_more := .with_more }}
 {{ $options := .options }}
-{{ $sizes := cond (eq $layout "grid") site.Params.image_sizes.blocks.exhibitions.grid "" }}
+{{ $layout := .layout }}
 
 {{ with $exhibition }}
   {{ $class := "exhibition" }}
@@ -64,7 +64,7 @@
       {{ partial "exhibitions/partials/exhibition/media.html" (dict 
           "image" $exhibition.Params.image
           "layout" $layout
-          "sizes" $sizes
+          "type" "exhibitions"
         )}}
     {{ end }}
   </article>
