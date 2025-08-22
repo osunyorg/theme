@@ -35,7 +35,10 @@
         <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
 
         {{ if $options.image }}
-          {{- partial "pages/partials/page/page-media.html" . -}}
+          {{ partial "pages/partials/page/media.html" (dict 
+              "image" .Params.image
+              "layout" "cards"
+            )}}
         {{ end }}
       </article>
     {{- end -}}
