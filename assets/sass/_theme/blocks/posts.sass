@@ -21,17 +21,17 @@
                 margin-top: 0
 
     &--grid
-        @include media-breakpoint-down(desktop)
-            article + article
-                margin-top: $spacing-5
-        @include in-page-with-sidebar
-            .grid
-                @include grid(2)
-        @include in-page-without-sidebar
-            .grid
+        .grid
+            @include media-breakpoint-down(desktop)
+                > li + li
+                    margin-top: $spacing-5
+            @include in-page-without-sidebar
                 @include grid($block-posts-grid-columns)
                 .media picture img
                     width: 100%
+            @include in-page-with-sidebar
+                @include grid(2)
+
     &--large
         .post
             .more
@@ -130,79 +130,83 @@
                             .post-content
                                 width: columns(8)
     &--list
-        article
-            &:where(:not(:last-child))
+        .list
+            > li:where(:not(:last-child))
                 border-bottom: var(--border-width) solid var(--color-border)
-            .media
-                background: none
-                margin: 0
-                &, img
-                    aspect-ratio: auto
-
-        @include media-breakpoint-down(desktop)
             article
-                position: relative
-                padding-bottom: $spacing-3
-                + article
-                    margin-top: $spacing-3
-                .post-content
+                .media
+                    background: none
+                    margin: 0
+                    &, img
+                        aspect-ratio: auto
+
+            @include media-breakpoint-down(desktop)
+                > li
+                    position: relative
+                    padding-bottom: $spacing-3
+                    + li
+                        margin-top: $spacing-3
+                article
+                    .post-content
+                        display: flex
+                        flex-direction: column
+                        padding-top: $spacing-2
+                        .post-title
+                            margin-bottom: 0
+                        .post-categories
+                            margin-bottom: 0
+                        [itemprop="abstract"]
+                            margin-top: $spacing-1
+                    .media
+                        order: -1
+                        max-width: 33%
+
+            @include media-breakpoint-up(desktop)
+                article
                     display: flex
-                    flex-direction: column
-                    padding-top: $spacing-2
-                    .post-title
-                        margin-bottom: 0
-                    .post-categories
-                        margin-bottom: 0
-                    [itemprop="abstract"]
-                        margin-top: $spacing-1
-                .media
-                    order: -1
-                    max-width: 33%
+                    flex-direction: row
 
-        @include media-breakpoint-up(desktop)
-            article
-                display: flex
-                flex-direction: row
+            @include in-page-with-sidebar
+                > li
+                    padding-bottom: $spacing-3
+                    + li
+                        margin-top: $spacing-3
+                article
+                    gap: var(--grid-gutter) // gap plutôt que marge pour l'affichage avec ou sans image
+                    .media
+                        width: columns(2)
+                    .post-content
+                        width: columns(6)
 
-        @include in-page-with-sidebar
-            article
-                padding-bottom: $spacing-3
-                gap: var(--grid-gutter) // gap plutôt que marge pour l'affichage avec ou sans image
-                + article
-                    margin-top: $spacing-3
-                .media
-                    width: columns(2)
-                .post-content
-                    width: columns(6)
-
-        @include in-page-without-sidebar
-            article
-                gap: var(--grid-gutter)
-                padding-bottom: $spacing-5
-                position: relative
-                .media
-                    width: columns(3)
-                .post-content
-                    display: flex
-                    flex-direction: column
-                    width: columns(6)
-                + article
-                    margin-top: $spacing-5
-                .post-meta
-                    margin-top: auto
-                    padding-top: $spacing-3
-                    time
-                        margin-top: 0.3em
-                        position: absolute
-                        right: 0
-                        top: 0
-                    .post-reading-time,
-                        display: block
-                        &::before
-                            content: none
-                    .post-author:first-of-type
-                        [itemprop="name"]::before
-                            content: none
+            @include in-page-without-sidebar
+                > li
+                    padding-bottom: $spacing-5
+                    + li
+                        margin-top: $spacing-5
+                article
+                    gap: var(--grid-gutter)
+                    position: relative
+                    .media
+                        width: columns(3)
+                    .post-content
+                        display: flex
+                        flex-direction: column
+                        width: columns(6)
+                    .post-meta
+                        margin-top: auto
+                        padding-top: $spacing-3
+                        time
+                            margin-top: 0.3em
+                            position: absolute
+                            right: 0
+                            top: 0
+                        .post-reading-time,
+                            display: block
+                            &::before
+                                content: none
+                        .post-author:first-of-type
+                            [itemprop="name"]::before
+                                content: none
 
     &--highlight
         .highlight-post
@@ -212,9 +216,10 @@
                 img
                     aspect-ratio: auto
         .list
+            @include list-reset
             margin-top: $spacing-3
             border-top: var(--border-width) solid var(--color-border)
-            article
+            > li
                 position: relative
                 padding-bottom: $spacing-3
                 margin-top: $spacing-3
@@ -275,23 +280,24 @@
             .list
                 border-top: 0
                 margin-top: 0
-                article:first-child
+                > li:first-child
                     margin-top: 0
 
-    &--alternate .alternate
-        @include alternate
-        @include media-breakpoint-up(desktop)
-            &.without-images
-                .post
-                    margin-top: 0 !important
-        @include media-breakpoint-down(desktop)
-            .post
-                .post-meta
-                    margin-top: $spacing-1
-                .media
-                    margin-bottom: $spacing-2
-                + .post
+    &--alternate 
+        .alternate
+            @include alternate("li")
+            @include media-breakpoint-up(desktop)
+                &.without-images
+                    .post
+                        margin-top: 0 !important
+            @include media-breakpoint-down(desktop)
+                >li + li
                     margin-top: $spacing-5
+                .post
+                    .post-meta
+                        margin-top: $spacing-1
+                    .media
+                        margin-bottom: $spacing-2
 
     &--carousel
         @include layout-carousel
