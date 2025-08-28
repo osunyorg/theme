@@ -9,7 +9,7 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         {{ if .events }}
-          <div class="events events--{{- $layout -}}">
+          <ul class="events events--{{- $layout -}}">
             {{ range .events }}
               {{ $event := site.GetPage .path }}
               {{ with $event }}
@@ -21,7 +21,7 @@
                   ) }}
               {{ end }}
             {{ end }}
-          </div>
+          </ul>
         {{ else if .no_event_message }}
           <p>{{ partial "PrepareHTML" .no_event_message }}</p>
         {{ end }}
