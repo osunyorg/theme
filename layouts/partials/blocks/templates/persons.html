@@ -38,7 +38,7 @@
               "block" $block
             )}}
         {{ else }}
-          <div class="persons">
+          <ul class="persons">
             {{- range .persons -}}
               {{ $person := site.GetPage .path }}
               {{ partial "persons/partials/person.html" (dict
@@ -50,7 +50,7 @@
                   "image_sizes" $image_sizes
                 )}}
             {{- end -}}
-          </div>
+          </ul>
         {{ end }}
       </div>
     </div>
