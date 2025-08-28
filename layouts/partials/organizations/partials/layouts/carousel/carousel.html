@@ -3,7 +3,7 @@
 {{ $layout := .layout }}
 {{ $heading_level := .heading_level | default 2 }}
 
-<div class="organizations">
+<ul class="organizations">
   <ul data-slider="{{ site.Params.blocks.organizations.slider | encoding.Jsonify }}">
     {{- range .organizations }}
       {{ if .path }}
@@ -36,4 +36,4 @@
       {{ end }}
     {{ end -}}
   </ul>
-</div>
+</ul>
