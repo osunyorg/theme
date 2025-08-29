@@ -13,12 +13,14 @@
             {{ range .events }}
               {{ $event := site.GetPage .path }}
               {{ with $event }}
-                {{ partial "events/partials/event.html" (dict
-                    "event" .
-                    "layout" $layout
-                    "options" $options
-                    "heading_level" $block.ranks.children
-                  ) }}
+                <li itemscope itemtype="https://schema.org/Event">
+                  {{ partial "events/partials/event.html" (dict
+                      "event" .
+                      "layout" $layout
+                      "options" $options
+                      "heading_level" $block.ranks.children
+                    ) }}
+                </li>
               {{ end }}
             {{ end }}
           </ul>
