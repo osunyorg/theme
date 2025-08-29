@@ -1,9 +1,7 @@
-<div class="volumes">
-  <ul class="volumes">
-    {{ range .Paginator.Pages }}
-      {{ partial "volumes/partials/volume.html" (dict 
-          "volume" .
-        )}}
-    {{ end }}
-  </ul>
-</div>
+<ul class="volumes">
+  {{ range .Paginator.Pages }}
+    {{ partial "volumes/partials/volume.html" (dict 
+        "volume" .
+      )}}
+  {{ end }}
+</ul>
