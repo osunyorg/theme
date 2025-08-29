@@ -1,10 +1,9 @@
 {{ $program := .program }}
-{{ $heading := .heading | default "h2" }}
-{{ $heading_tag := (dict 
-  "open" ((printf "<%s class='program-title' itemprop='name'>" $heading) | safeHTML)
-  "close" ((printf "</%s>" $heading) | safeHTML)
-  ) }}
 {{ $options := .options }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+  "level" .heading_level
+  "attributes" "class='program-title' itemprop='name'"
+)}}
 
 <li class="program" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
   <div class="program-content">

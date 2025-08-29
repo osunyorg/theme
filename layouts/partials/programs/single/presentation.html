@@ -29,7 +29,7 @@
                   {{ $child := site.GetPage .path }}
                   {{ partial "programs/partials/program.html" (dict 
                       "program" $child
-                      "heading" "h4"
+                      "heading_level" 4
                       "options" site.Params.programs.single.children.options
                     )}}
                 {{- end -}}
