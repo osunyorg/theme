@@ -9,7 +9,7 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        <div class="publications">
+        <ul class="publications">
           {{ range .publications }}
             {{ with site.GetPage .path }}
               {{ partial "publications/partials/publication.html" (dict 
@@ -18,7 +18,7 @@
                 )}}
             {{ end }}
           {{ end }}
-        </div>
+        </ul>
       </div>
     </div>
   </div>
