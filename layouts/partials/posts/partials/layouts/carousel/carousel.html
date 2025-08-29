@@ -3,7 +3,7 @@
 {{ $options := .options }}
 {{ $template := printf "posts/partials/post.html" }}
 
-<div data-slider="{{ site.Params.blocks.posts.slider | encoding.Jsonify }}">
+<ul data-slider="{{ site.Params.blocks.posts.slider | encoding.Jsonify }}">
   {{ range $post := .posts -}}
     {{ with site.GetPage .path }}
       {{ partial "posts/partials/post.html" (dict 
@@ -13,4 +13,4 @@
         )}}
     {{ end }}
   {{ end }}
-</div>
+</ul>

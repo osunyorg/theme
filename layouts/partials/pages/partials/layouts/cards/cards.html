@@ -4,40 +4,42 @@
         "level" $heading_level
         "attributes" "class='page-title'"
 )}}
-<div class="cards">
+<ul class="cards">
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
     {{ with $page }}
-      <article class="card">
-        {{ $heading_tag.open }}
-          <a href="{{- .Permalink -}}">
-            {{- partial "PrepareHTML" .Title -}}
-          </a>
-        {{ $heading_tag.close }}
+      <li>
+        <article class="card">
+          {{ $heading_tag.open }}
+            <a href="{{- .Permalink -}}">
+              {{- partial "PrepareHTML" .Title -}}
+            </a>
+          {{ $heading_tag.close }}
 
-        {{- partial "pages/partials/page/hook-after-title.html" . -}}
+          {{- partial "pages/partials/page/hook-after-title.html" . -}}
 
-        {{ if and $options.summary .Params.summary }}
-          {{ partial "GetRichSummary" ( dict 
-            "summary" .Params.summary
-            "kind" "pages"
-          )}}
-        {{ end }}
+          {{ if and $options.summary .Params.summary }}
+            {{ partial "GetRichSummary" ( dict 
+              "summary" .Params.summary
+              "kind" "pages"
+            )}}
+          {{ end }}
 
-        {{/*  TODO: set right options when admin is ready  */}}
-        {{ if and $options.categories .Params.taxonomies }}
-          {{ partial "commons/categories" ( dict
-            "context" .
-            "kind" "page"
-          )}}
-        {{ end }}
+          {{/*  TODO: set right options when admin is ready  */}}
+          {{ if and $options.categories .Params.taxonomies }}
+            {{ partial "commons/categories" ( dict
+              "context" .
+              "kind" "page"
+            )}}
+          {{ end }}
 
-        <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+          <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
 
-        {{ if $options.image }}
-          {{- partial "pages/partials/page/page-media.html" . -}}
-        {{ end }}
-      </article>
+          {{ if $options.image }}
+            {{- partial "pages/partials/page/page-media.html" . -}}
+          {{ end }}
+        </article>
+      </li>
     {{- end -}}
   {{ end }}
-</div>
+</ul>

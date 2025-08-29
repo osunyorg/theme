@@ -1,7 +1,7 @@
 {{ $publications := partial "FilterPublications" .Pages }}
 {{ $paginator := .Paginate $publications }}
 
-<div class="publications">
+<ul class="publications">
   {{ if site.Params.publications.index.group_by_year }}
     {{ $publications_by_years := .Paginator.Pages.GroupByDate "2006" }}
     {{ range $publications_by_years }}
@@ -17,4 +17,4 @@
       {{ partial "publications/partials/publication.html" (dict "publication" . ) }}
     {{ end }}
   {{ end }}
-</div>
+</ul>

@@ -11,16 +11,16 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        <div class="volumes">
+        <ul class="volumes">
           {{ range .volumes }}
-            {{ with site.GetPage . }}
+            {{ with site.GetPage .path }}
               {{ partial "volumes/partials/volume.html" (dict 
                   "volume" .
                   "heading" $heading
                 ) }}
             {{ end }}
           {{ end }}
-        </div>
+        </ul>
       </div>
     </div>
   </div>
