@@ -2,6 +2,7 @@
 {{ $options := .options }}
 {{ $agenda := .agenda }}
 {{ $is_sub_event := .is_sub_event }}
+{{ $event_attributes := "itemscope itemtype='https://schema.org/Event'" }}
 
 <ul class="events events--{{-  $layout -}}">
   {{ range $agenda }}
@@ -11,19 +12,22 @@
       {{ end }}
       <ol class="events-scheduled">
         {{ range .Pages }}
-        <li>
-          {{ partial "events/partials/event.html" (dict
-              "event" .
-              "layout" $layout
-              "options" site.Params.events.index.options
-              "is_sub_event" $is_sub_event
-            )}}
-
+          {{ if .Params.children_for_the_day }}
+            {{ $event_attributes := printf "%s %s" "ok" "itemprop='superEvent'" }}
+          {{ end}}
+          <li {{ $event_attributes | safeHTMLAttr -}} >
+            {{ partial "events/partials/event.html" (dict
+                "event" .
+                "layout" $layout
+                "options" site.Params.events.index.options
+                "is_sub_event" $is_sub_event
+              )}}
           {{ with .Params.children_for_the_day }}
             <ol class="event-children">
               {{ range $index, $children := . }}
                 {{ with (site.GetPage .path) }}
-                  <li>
+                  {{ $event_attributes := printf "%s %s" $event_attributes "itemprop='subEvent'"}}
+                  <li {{ $event_attributes | safeHTMLAttr -}} >
                     {{ partial "events/partials/event.html" (dict
                       "event" .
                       "layout" $layout
