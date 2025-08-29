@@ -14,12 +14,10 @@
         <ul class="volumes">
           {{ range .volumes }}
             {{ with site.GetPage .path }}
-              <li>
-                {{ partial "volumes/partials/volume.html" (dict 
-                    "volume" .
-                    "heading" $heading
-                  ) }}
-              </li>
+              {{ partial "volumes/partials/volume.html" (dict 
+                  "volume" .
+                  "heading" $heading
+                ) }}
             {{ end }}
           {{ end }}
         </ul>
