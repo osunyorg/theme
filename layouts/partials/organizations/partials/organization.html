@@ -4,13 +4,13 @@
 {{ $heading_level := .heading_level | default 2 }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
     "level" $heading_level
-    "attributes" "class='organization-title'"
+    "attributes" "class='organization-title' itemprop='name'"
 )}}
 {{ $with_geolocation := .with_geolocation | default false }}
 
 {{ with $organization }}
   {{ $title := partial "PrepareHTML" .Title }}
-  <article class="organization"
+  <article class="organization" itemscope itemtype="https://schema.org/Organization"
     {{ if $with_geolocation }}
       {{ with .Params.contact_details.postal_address.geolocation }}
         data-title="{{ $title }}" 
