@@ -1,6 +1,3 @@
-{{ $heading_level := .heading_level | default 3 }}
-{{ $heading := printf "h%d" $heading_level }}
-
 {{- $block := .block -}}
 {{- $template := .block.template -}}
 {{- $position := .block.position -}}
@@ -16,7 +13,7 @@
             {{ with site.GetPage . }}
               {{ partial "volumes/partials/volume.html" (dict 
                   "volume" .
-                  "heading" $heading
+                  "heading_level" $block.ranks.children
                 ) }}
             {{ end }}
           {{ end }}
