@@ -56,10 +56,20 @@
         position: absolute
         width: columns(4)
         & > div
-            @include sticky($spacing-3)
+            display: flex
+            flex-direction: column
+            height: 100%
+            position: relative
         .toc-container
-            position: static
             margin-left: 0
+        .toc-content
+            @include sticky
+            max-height: 100vh
+            overflow: auto
+            pointer-events: auto
+        html.is-scrolling-down &
+            [class$="-title"]
+                padding-top: $spacing-3
         &:has(aside)
             .toc-container
                 border-top: var(--border-width) solid var(--color-border)
