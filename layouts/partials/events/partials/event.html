@@ -82,7 +82,7 @@
             "kind" "events"
           )}}
           {{ if eq $layout "large" }}
-            <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+            {{ partial "events/partials/event/more.html" . }}
           {{ end }}
         </div>
       {{ end }}
@@ -94,8 +94,8 @@
         )}}
       {{- end -}}
 
-      {{ if $with_more }}
-        {{ partial "commons/item/more.html" . }}
+      {{ if and $with_more (ne $layout "large") }}
+        {{ partial "events/partials/event/more.html" . }}
       {{- end -}}
     </div>
     <div class="media">

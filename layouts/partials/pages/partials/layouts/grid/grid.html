@@ -1,9 +1,14 @@
 {{ $options := .options }}
 {{ $heading_level := .heading_level | default 3 }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
-        "level" $heading_level
-        "attributes" "class='page-title'"
-)}}
+    "level" $heading_level
+    "attributes" "class='page-title'"
+  )}}
+{{ $with_more := partial "GetTypeParamWithDefault" (dict
+    "param" "layouts.grid.more"
+    "type" "pages"
+  ) }}
+
 {{ with .pages }}
   <div class="grid">
     {{ range . }}
@@ -38,6 +43,11 @@
               "kind" "page"
             )}}
           {{ end }}
+
+          {{ if $with_more }}
+            {{ partial "pages/partials/page/more.html" . }}
+          {{ end }}
+
           {{ if $options.image }}
             {{- partial "pages/partials/page/page-media.html" . -}}
           {{ end }}
