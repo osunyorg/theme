@@ -5,16 +5,16 @@
         gap: calc(var(--grid-gutter) / 2)
         justify-content: flex-end
         position: relative
-        &-title a
-            @include stretched-link(after)
-            text-decoration: none
+        &-title
+            margin-bottom: $spacing-1
+            a
+                @include stretched-link(after)
+                text-decoration: none
         .more
             @include hover-translate-icon(after)
             @include meta
             @include icon(arrow-right-line, after)
                 margin-left: $spacing-2
-            margin-top: $spacing-1
-        address
             margin-top: $spacing-1
         .media
             width: 100%
@@ -46,12 +46,10 @@
                         width: columns(2)
                 @include in-page-without-sidebar
                     &-content
-                        display: grid
-                        grid-gap: $spacing-2 var(--grid-gutter)
+                        @include grid(2, $gap-y: 0)
                         position: relative
-                        grid-template-columns: 1fr 1fr
                         &:only-child
-                            grid-template-columns: 1fr 1fr 1fr
+                            @include grid(3)
                             .location-description
                                 grid-column: 3
                         &:not(:only-child)
