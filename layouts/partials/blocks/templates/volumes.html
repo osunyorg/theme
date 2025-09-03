@@ -10,7 +10,7 @@
         {{ partial "blocks/top.html" $block.top }}
         <div class="volumes">
           {{ range .volumes }}
-            {{ with site.GetPage . }}
+            {{ with site.GetPage .path }}
               {{ partial "volumes/partials/volume.html" (dict 
                   "volume" .
                   "heading_level" $block.ranks.children
