@@ -5,8 +5,8 @@
 
   <div class="extendable dates-filters" id="dropdown-dates" data-extendable-close-siblings="true" data-extendable-auto-close="true">
     <div class="dates-filters__months" data-slider='{"arrows": "true", "perPage": 3}'>
-      {{ range $index, $seq := (seq site.Params.events.filters.number_of_months) }}
-        {{ with ( partial "GetMonthFromNow" $index ) }}
+      {{ range .Params.next_months }}
+        {{ with site.GetPage .path }}
           {{ partial "events/section/calendar/month.html" (dict
               "name" .Title
               "days" .Params.days
