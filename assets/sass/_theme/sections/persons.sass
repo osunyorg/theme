@@ -39,6 +39,8 @@ article.person
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing-3
+        .description
+            text-align: left
         // .description
         //     margin-top: $spacing-2
         .avatar
@@ -62,6 +64,12 @@ article.person
     @include grid(2, md)
     @include grid(4, lg)
     @include grid(6, xxl)
+    @include media-breakpoint-up(lg)
+        .avatar
+            margin-left: auto
+            margin-right: auto
+        .description
+            text-align: center
 
 .persons__section,
 .persons_categories__term,
@@ -72,14 +80,6 @@ article.person
     .page-with-blocks
         .persons
             margin-bottom: $spacing-5
-    .persons--grid
-        @include media-breakpoint-up(md)
-            .avatar
-                margin-left: auto
-                margin-right: auto
-            .person-name,
-            .person-role
-                text-align: center
 
 ol.persons--list
     @include list-reset
