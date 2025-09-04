@@ -1,12 +1,11 @@
 {{ $location := .location }}
-{{ $heading := .heading | default "h2" }}
-{{ $heading_tag := (dict 
-  "open" ((printf "<%s itemprop='headline' class='location-title'>" $heading) | safeHTML)
-  "close" ((printf "</%s>" $heading) | safeHTML)
-  ) }}
-{{ $layout := .layout }}
 {{ $options := .options }}
+{{ $layout := .layout }}
 {{ $sizes := cond (eq $layout "list") site.Params.image_sizes.blocks.locations.list "" }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+  "level" .heading_level
+  "attributes" "class='location-title' itemprop='headline'"
+)}}
 
 {{ with $location }}
   <article class="location" itemscope itemtype="https://schema.org/EducationalOrganization">

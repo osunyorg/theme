@@ -1,9 +1,8 @@
 {{ $volume := .volume }}
-{{ $heading := .heading | default "h2" }}
-{{ $heading_tag := (dict 
-  "open" ((printf "<%s class='volume-title'>" $heading) | safeHTML)
-  "close" ((printf "</%s>" $heading) | safeHTML)
-) }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+  "level" .heading_level 
+  "attributes" "class='volume-title'"
+)}}
 
 {{ with $volume }}
   <article class="volume" itemscope itemtype="https://schema.org/Book https://schema.org/PublicationVolume">
