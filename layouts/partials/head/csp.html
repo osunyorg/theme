@@ -3,7 +3,7 @@
       content="
         default-src 'self' {{ delimit . " " }}
         {{ if or (not hugo.IsProduction) site.Params.debug.active }}'unsafe-inline'{{ end }}
-        {{ with site.Params.additional }}{{ . }}{{ end }}
+        {{ with site.Params.additional_cors }}{{ . }}{{ end }}
         {{ if site.Params.search.active }}'wasm-unsafe-eval'{{ end }};
       " />
 {{- end -}}
