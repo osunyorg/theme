@@ -16,7 +16,7 @@
       {{ with .Params.place }}
         <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">{{ . }}</span>
       {{ end }}
-      {{ if not $is_archive}}
+      {{ if not $is_archive }}
         {{ partial "commons/agenda/dropdown-calendar.html" (dict
             "index" "primary"
             "calendar_links" .Params.dates.add_to_calendar
