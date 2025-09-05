@@ -17,12 +17,12 @@
 {{- $ogImage := "" -}}
 {{- $twitterImage := "" -}}
 {{- $pagefindImage := "" -}}
-{{- if index site.Data.website.default "shared_image" -}}
-  {{- $sharedImage = partial "GetMedia" (index site.Data.website.default.shared_image "id") -}}
+{{- with index site.Data.website.default "shared_image" -}}
+  {{- $sharedImage = partial "GetMedia" (index . "id") -}}
 {{- end -}}
-{{ with .Params.image }}
+{{- with or .Params.shared_image .Params.image }}
   {{- $sharedImage = partial "GetMedia" .id -}}
-{{ end }}
+{{ end -}}
 
 {{- with $sharedImage -}}
   {{- $ogImage = partial "GetImageUrl" (dict
@@ -48,7 +48,7 @@
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $seoDescription }}">
 {{- with $ogImage }}
-<meta property="og:image" content="{{ . }}">
+  <meta property="og:image" content="{{ . }}">
 {{ end -}}
 <meta property="og:url" content="{{ $seoUrl }}">
 <meta property="og:type" content="website">
@@ -57,13 +57,13 @@
 <meta name="twitter:title" content="{{ $title }}">
 <meta name="twitter:description" content="{{ $seoDescription }}">
 {{- with $twitterImage }}
-<meta name="twitter:image" content="{{ . }}">
+  <meta name="twitter:image" content="{{ . }}">
 {{ end -}}
 <meta name="twitter:card" content="summary_large_image">
 {{- if site.Data.school.twitter }}
-<meta name="twitter:site" content="@{{ site.Data.school.twitter }}" />
+  <meta name="twitter:site" content="@{{ site.Data.school.twitter }}" />
 {{ else if site.Data.journal.twitter }}
-<meta name="twitter:site" content="@{{ site.Data.journal.twitter }}" />
+  <meta name="twitter:site" content="@{{ site.Data.journal.twitter }}" />
 {{ end -}}
 
 {{ if site.Params.search.active }}
