@@ -1,20 +1,25 @@
-<div class="dropdown dropdown-dates">
-  <button aria-controls="dropdown-dates" aria-expanded="false" aria-label="{{ i18n "agenda.filters.dates.aria_label" }}">
-    {{ i18n "agenda.filters.dates.title" }}
-  </button>
+{{ if .Params.next_months }}
+  <div class="dropdown dropdown-dates">
+    <button aria-controls="dropdown-dates" aria-expanded="false" aria-label="{{ i18n "agenda.filters.dates.aria_label" }}">
+      {{ i18n "agenda.filters.dates.title" }}
+    </button>
 
-  <div class="extendable dates-filters" id="dropdown-dates" data-extendable-close-siblings="true" data-extendable-auto-close="true">
-    <div class="dates-filters__months" data-slider='{"arrows": "true", "perPage": 3}'>
-      {{ range .Params.next_months }}
-        {{ with site.GetPage .path }}
-          {{ partial "events/section/calendar/month.html" (dict
-              "name" .Title
-              "days" .Params.days
-              "permalink" .Permalink
-              "label_type" "short"
-            ) }}
-        {{ end }}
-      {{ end }}
+    <div class="extendable dates-filters" id="dropdown-dates" data-extendable-close-siblings="true" data-extendable-auto-close="true">
+      <div class="dates-filters__months" data-slider='{"arrows": "true", "perPage": 3}'>
+
+          {{ range .Params.next_months }}
+            {{ with site.GetPage .path }}
+              {{ partial "events/section/calendar/month.html" (dict
+                  "name" .Title
+                  "days" .Params.days
+                  "permalink" .Permalink
+                  "label_type" "short"
+                ) }}
+            {{ end }}
+          {{ end }}
+          
+
+      </div>
     </div>
   </div>
-</div>
+{{ end }}
