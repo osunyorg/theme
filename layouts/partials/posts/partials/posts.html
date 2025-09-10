@@ -5,7 +5,7 @@
     {{ $is_term := eq .Kind "term" }}
     <p>{{ i18n (cond $is_term "categories.no_post" "posts.none") }}</p>
   {{ end }}
-  {{ range .Paginator.Pages }}
+  {{ range (uniq .Paginator.Pages) }}
     {{  partial "posts/partials/post.html" 
         (dict 
           "post" .
