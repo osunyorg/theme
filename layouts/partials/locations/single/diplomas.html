@@ -14,7 +14,7 @@
           {{ $program := site.GetPage .path }}
           {{- partial "programs/partials/program.html" (dict
             "program" $program
-            "heading" "h3"
+            "heading_level" 3
             "options" site.Params.locations.single.programs.options
             ) -}}
         {{- end -}}

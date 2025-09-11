@@ -25,6 +25,7 @@ markup:
 pagination:
   pagerSize: 36
 params:
+  additional_csp: ''
   debug:
     active: false
     productionUrl: ""
@@ -135,8 +136,6 @@ params:
     date_format: false # You can add date format to override the date from static (two_lines) 
     # sitemap:
     #   ignore_children: true
-    filters:
-      number_of_months: 6
     index:
       archives: true
       years: true
@@ -335,9 +334,12 @@ params:
         summary: true
         subtitle: true
       truncate_description: 200 # Set to 0 to disable truncate
-      
     single:
-      author_signature: false
+      options:
+        authors: true
+        reading_time: true
+        signature: false
+        updated_at: true
     # share_links: # Optional
     #   enabled: true
     #   email: false
@@ -401,8 +403,10 @@ params:
         subtitle: true
         summary: true
         year: false
-      
       truncate_description: 200 # Set to 0 to disable truncate
+    single:
+      navigation:
+        reversed: false
     # share_links: # Optional
     #   enabled: true
     #   email: false

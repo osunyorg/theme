@@ -1,17 +1,16 @@
 {{ $heading_level := .heading_level | default 3 }}
-{{ $heading := printf "h%d" $heading_level }}
 {{ $options := .options }}
 
 <ul class="alternate {{- if not $options.image }} without-images{{ end }}">
   {{ range $i, $post := .posts -}}
     {{ with site.GetPage .path }}
       {{ partial "posts/partials/post.html" (dict 
-        "post" .
-        "heading" $heading
-        "index" $i
-        "alternate" true
-        "options" $options
-        ) }}
+          "post" .
+          "heading_level" $heading_level
+          "index" $i
+          "alternate" true
+          "options" $options
+        )}}
     {{ end }}
   {{ end }}
 </ul>

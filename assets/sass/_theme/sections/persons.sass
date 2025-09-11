@@ -38,12 +38,11 @@ article.person
     .description
         @include small
         flex-grow: 1
-        // margin-top: $spacing-3
     @include media-breakpoint-down(lg)
         flex-direction: row
         gap: $spacing-3
-        // .description
-        //     margin-top: $spacing-2
+        .description
+            text-align: left
         .avatar
             align-self: start
             flex-shrink: 0
@@ -65,6 +64,12 @@ article.person
     @include grid(2, md)
     @include grid(4, lg)
     @include grid(6, xxl)
+    @include media-breakpoint-up(lg)
+        .avatar
+            margin-left: auto
+            margin-right: auto
+        .description
+            text-align: center
 
 .persons__section,
 .persons_categories__term,
@@ -75,14 +80,6 @@ article.person
     .page-with-blocks
         .persons
             margin-bottom: $spacing-5
-    .persons--grid
-        @include media-breakpoint-up(md)
-            .avatar
-                margin-left: auto
-                margin-right: auto
-            .person-name,
-            .person-role
-                text-align: center
 
 ol.persons--list
     @include list-reset
@@ -118,13 +115,10 @@ ol.persons--list
                 top: calc(#{$spacing-3} + 10px)
 
 .avatar
-    // @include aspect-ratio(50, 'img')
     background-color: $persons-avatar-background-color
     border-radius: $avatar-border-radius
-    // margin-bottom: $spacing-4
     overflow: hidden
     position: relative
-    // width: 100%
     &::before
         content: ""
         display: block

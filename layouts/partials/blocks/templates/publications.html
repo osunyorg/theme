@@ -2,7 +2,6 @@
 {{- $template := .block.template -}}
 {{- $position := .block.position -}}
 {{- $title := .block.title -}}
-{{ $heading_level := $block.ranks.children }}
 
 {{ with .block.data }}
   <div class="block block-publications {{- if $title }} block-with-title {{- end -}}">
@@ -14,7 +13,7 @@
             {{ with site.GetPage .path }}
               {{ partial "publications/partials/publication.html" (dict 
                   "publication" . 
-                  "heading_level" $heading_level
+                  "heading_level" $block.ranks.children
                 )}}
             {{ end }}
           {{ end }}

@@ -3,14 +3,14 @@
 {{ $organization := .organization }}
 {{ $heading_level := .heading_level | default 2 }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
-    "level" $heading_level
-    "attributes" "class='organization-title'"
+  "level" $heading_level
+  "attributes" "class='organization-title' itemprop='name'"
 )}}
 {{ $with_geolocation := .with_geolocation | default false }}
 
 {{ with $organization }}
   {{ $title := partial "PrepareHTML" .Title }}
-  <li class="organization"
+  <li class="organization" itemscope itemtype="https://schema.org/Organization"
     {{ if $with_geolocation }}
       {{ with .Params.contact_details.postal_address.geolocation }}
         data-title="{{ $title }}" 
