@@ -23,25 +23,26 @@ console.log(`
 const command = process.argv[2];
 
 let pagefindExclude = '';
-// Categories: No list of categories
+// Agenda
+pagefindExclude += '.events__section, .block-agenda, .events_categories__taxonomy, .events_categories__term, ';
+pagefindExclude += '.exhibitions__section, .block-exhibitions, .exhibitions_categories__taxonomy, .exhibitions_categories__term, ';
+// Categories
 pagefindExclude += '.categories__taxonomy, .categories__term, ';
-pagefindExclude += '.posts_categories__taxonomy, .posts_categories__term, ';
-pagefindExclude += '.events_categories__taxonomy, .events_categories__term, ';
-// Diplomas: No list of diplomas or block diplomas
-pagefindExclude += '.diplomas__taxonomy, .block-diplomas, ';
-// Agenda events: No list of events or block events
-pagefindExclude += '.events__section, .block-agenda, ';
-// Organizations: No list of organizations or block organizations
-pagefindExclude += '.organizations__section, .block-organizations, ';
-// Pages: No block pages (there's no difference between list and page)
+// Diplomas
+pagefindExclude += '.diplomas__taxonomy, .block-diplomas, .diplomas_categories__taxonomy, .diplomas_categories__term, ';
+// Job board
+pagefindExclude += '.jobs__section, .block-jobs, .jobs_categories__taxonomy, .jobs_categories__term, ';
+// Organizations
+pagefindExclude += '.organizations__section, .block-organizations, .organizations_categories__taxonomy, .organizations_categories__term, ';
+// Pages (there's no difference between index and single, only sections)
 pagefindExclude += '.block-pages, ';
-// Persons: no list or block
-pagefindExclude += '.persons__section, .block-persons, ';
-// No list of people's facets
-pagefindExclude += '.administrators__term, .authors__term, .researchers__term, .teachers__term,';
-// Posts: no list, block posts, or post sidebar
-pagefindExclude += '.posts__section, .block-posts, .post-sidebar, ';
-// Programs: no block
+// Persons
+pagefindExclude += '.persons__section, .block-persons, .administrators__term, .authors__term, .researchers__term, .teachers__term, ';
+// Portfolio
+pagefindExclude += '.projects__section, .block-projects, .projects_categories__taxonomy, .projects_categories__term, ';
+// Posts
+pagefindExclude += '.posts__section, .block-posts, .post-sidebar, .posts_categories__taxonomy, .posts_categories__term, ';
+// Programs (there's no difference between index and single, only sections)
 pagefindExclude += '.block-programs';
 
 
