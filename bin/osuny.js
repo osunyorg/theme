@@ -22,29 +22,7 @@ console.log(`
 
 const command = process.argv[2];
 
-let pagefindExclude = '';
-// Agenda
-pagefindExclude += '.events__section, .block-agenda, .events_categories__taxonomy, .events_categories__term, ';
-pagefindExclude += '.exhibitions__section, .block-exhibitions, .exhibitions_categories__taxonomy, .exhibitions_categories__term, ';
-// Categories
-pagefindExclude += '.categories__taxonomy, .categories__term, ';
-// Diplomas
-pagefindExclude += '.diplomas__taxonomy, .block-diplomas, .diplomas_categories__taxonomy, .diplomas_categories__term, ';
-// Job board
-pagefindExclude += '.jobs__section, .block-jobs, .jobs_categories__taxonomy, .jobs_categories__term, ';
-// Organizations
-pagefindExclude += '.organizations__section, .block-organizations, .organizations_categories__taxonomy, .organizations_categories__term, ';
-// Pages (there's no difference between index and single, only sections)
-pagefindExclude += '.block-pages, ';
-// Persons
-pagefindExclude += '.persons__section, .block-persons, .administrators__term, .authors__term, .researchers__term, .teachers__term, ';
-// Portfolio
-pagefindExclude += '.projects__section, .block-projects, .projects_categories__taxonomy, .projects_categories__term, ';
-// Posts
-pagefindExclude += '.posts__section, .block-posts, .post-sidebar, .posts_categories__taxonomy, .posts_categories__term, ';
-// Programs (there's no difference between index and single, only sections)
-pagefindExclude += '.block-programs';
-
+let pagefindExclude = '.block-agenda, .block-diplomas, .block-exhibitions, .block-jobs, .block-organizations, .block-pages, .block-persons, .block-projects, .block-posts, .block-programs, .post-sidebar';
 
 function execute(string) {
     console.log("OSUNY runs " + string);
