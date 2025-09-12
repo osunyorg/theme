@@ -27,6 +27,7 @@
   {{ with .Params.time_slots }}
     <ul id="all-dates" class="extendable-list">
       {{ range $index, $time_slot := . }}
+        {{ $is_archive = eq .status "archive" }}
         <li class="event-time-slot" itemprop="subEvent">
           {{ $event_date := $time_slot.start.date | time.Format site.Params.events.single.time_slots.date_format }}
           <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ $event_date | strings.FirstUpper }}</span>
