@@ -44,14 +44,10 @@
 
             {{ if $options.image }}
               <div class="media">
-                {{- if .Params.image -}}
-                  {{- partial "commons/image.html" (dict
-                      "image"    .Params.image
-                      "sizes"    site.Params.image_sizes.blocks.pages.list
-                    ) -}}
-                {{- else -}}
-                  {{- partial "commons/image-default.html" "pages" -}}
-                {{- end -}}
+                {{ partial "pages/partials/page/media.html" (dict 
+                    "image" .Params.image
+                    "layout" "list"
+                  )}}
               </div>
             {{ end }}
           </article>
