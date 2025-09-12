@@ -9,19 +9,21 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         {{ if .events }}
-          <div class="events events--{{- $layout -}}">
+          <ul class="events events--{{- $layout -}}">
             {{ range .events }}
               {{ $event := site.GetPage .path }}
               {{ with $event }}
-                {{ partial "events/partials/event.html" (dict
-                    "event" .
-                    "layout" $layout
-                    "options" $options
-                    "heading_level" $block.ranks.children
-                  ) }}
+                <li itemscope itemtype="https://schema.org/Event">
+                  {{ partial "events/partials/event.html" (dict
+                      "event" .
+                      "layout" $layout
+                      "options" $options
+                      "heading_level" $block.ranks.children
+                    ) }}
+                </li>
               {{ end }}
             {{ end }}
-          </div>
+          </ul>
         {{ else if .no_event_message }}
           <p>{{ partial "PrepareHTML" .no_event_message }}</p>
         {{ end }}

@@ -1,7 +1,7 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $options := .options }}
 
-<div class="grid">
+<ul class="grid">
   {{ range $post := .posts -}}
     {{ with site.GetPage .path }}
       {{ partial "posts/partials/post.html" (dict 
@@ -11,4 +11,4 @@
         )}}
     {{ end }}
   {{ end }}
-</div>
+</ul>
