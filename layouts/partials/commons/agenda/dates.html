@@ -27,7 +27,6 @@
   {{ with .Params.time_slots }}
     <ul id="all-dates" class="extendable-list">
       {{ range $index, $time_slot := . }}
-        {{ $is_archive = eq .status "archive" }}
         <li class="event-time-slot" itemprop="subEvent">
           {{ $event_date := $time_slot.start.date | time.Format site.Params.events.single.time_slots.date_format }}
           <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ $event_date | strings.FirstUpper }}</span>
@@ -43,7 +42,7 @@
           {{ with $time_slot.place }}
             <span class="location" itemprop="location">{{ . }}</span>
           {{ end }}
-          {{ if not $is_archive }}
+          {{ if ne .status "archive" }}
             {{ partial "commons/agenda/dropdown-calendar.html" (dict
                 "index" $index
                 "calendar_links" $time_slot.add_to_calendar
