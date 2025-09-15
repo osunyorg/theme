@@ -22,7 +22,27 @@ console.log(`
 
 const command = process.argv[2];
 
-let pagefindExclude = '.block-agenda, .block-diplomas, .block-exhibitions, .block-jobs, .block-organizations, .block-pages, .block-persons, .block-projects, .block-posts, .block-programs, .post-sidebar';
+let pagefindExclude = `
+    .block-agenda,
+    .block-diplomas,
+    .block-categories,
+    .block-exhibitions,
+    .block-jobs,
+    .block-locations,
+    .block-organizations,
+    .block-pages,
+    .block-papers,
+    .block-persons,
+    .block-posts,
+    .block-programs,
+    .block-projects,
+    .block-publications,
+    .block-volumes,
+    .persons-papers,
+    .persons-posts,
+    .persons-programs,
+    .persons-publications,
+    .post-sidebar`;
 
 function execute(string) {
     console.log("OSUNY runs " + string);
