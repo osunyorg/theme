@@ -1,0 +1,39 @@
+{{ $school := .school }}
+{{ $layout := .layout | default "list" }}
+{{ $heading_level := .heading_level }}
+{{ $options := .options }}
+{{ with $school }}
+  {{ $class := "school" }}
+  {{ if and .Params.image $options.image }}
+    {{ $class = printf "%s school--with-image" $class }}
+    {{ $image_direction := partial "GetImageDirection" .Params.image }}
+    {{ $class = printf "%s %s" $class $image_direction }}
+  {{ end }}
+
+  {{ $dates := .Params.dates }}
+
+  <article class="{{ $class }}" 
+      itemscope itemtype="https://schema.org/CollegeOrUniversity">
+    <div class="school-content">
+      {{ partial "schools/partials/school/heading.html" (dict
+          "item" .
+          "options" $options
+          "level" $heading_level
+          "itemprop" "title"
+        )}}
+
+      {{ if and $options.summary .Params.summary }}
+        <div class="school-description" itemprop="abstract">
+          {{ partial "schools/partials/school/summary.html" . }}
+        </div>
+      {{ end }}
+    </div>
+
+    {{ if $options.image }}
+      {{ partial "schools/partials/school/media.html" (dict 
+          "image" $school.Params.image
+          "layout" $layout
+        )}}
+    {{ end }}
+  </article>
+{{ end }}
