@@ -9,7 +9,7 @@
   )}}
 {{ end }}
 
-{{ with (or site.Params.contact_details site.Data.website.social) }}
+{{ with site.Params.contact_details }}
   {{ $site_social_links := . }}
   {{ if $site_social_links }}
     <ul class="footer-social site-links">
