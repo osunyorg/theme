@@ -1,0 +1,13 @@
+{{ $image := site.Params.logo.header.default | default site.Params.logo.header }}
+
+<div itemscope itemtype="https://schema.org/Periodical">
+
+  <meta itemprop="image" content="site.Params.logo.header">
+
+  <p itemprop="name">{{ .Params.name }}</p>
+
+  {{ with .Params.issn }}
+    <p itemprop="issn">{{ . }}</p>
+  {{ end }}
+
+</div>

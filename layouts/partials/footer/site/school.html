@@ -1,0 +1,36 @@
+{{ $name := .Params.name }}
+{{ $logo := partial "GetMedia" .Params.logo.id }}
+
+<div itemscope itemtype="https://schema.org/CollegeOrUniversity">
+  {{ with $logo }}
+    <meta itemprop="logo" content="{{ $logo.url }}">
+  {{ end }}
+
+  <p itemprop="name">{{ $name }}</p>
+
+  {{ with .Params.contact_details }}
+    {{ with .postal_address }}
+      {{ partial "commons/address.html" . }}
+    {{ end }}
+
+    {{ with .phone_numbers.phone }}
+      <p>
+        {{ partial "commons/links/tel.html" (dict
+            "value" .value
+            "label" .label
+            "title" ( i18n "commons.contact.phone.a11y_label" ( dict "phone_number" .label ) )
+          ) }}
+      </p>
+    {{ end }}
+
+    {{ with .websites.website }}
+      <p>
+        {{ partial "commons/links/website.html" (dict
+            "value" .value
+            "label" .label
+            "title" ( i18n "commons.contact.socials.label.website" ( dict "name" $name ) )
+          ) }}
+      </p>
+    {{ end }}
+  {{ end }}
+</div>

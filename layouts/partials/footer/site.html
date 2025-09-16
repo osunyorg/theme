@@ -1,41 +1,15 @@
-{{ $logo := site.Params.logo.header }}
+{{ $schools := site.GetPage "schools" }}
+{{ $laboratories := site.GetPage "laboratories" }}
+{{ $journals := site.GetPage "journals" }}
 
-{{- with site.Data.school -}}
-  <div itemscope itemtype="https://schema.org/CollegeOrUniversity">
-    <meta itemprop="logo" content="{{ $logo }}">
-    <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
-    {{ with .contact_details }}
-      {{ with .postal_address }}
-        {{ partial "commons/address.html" . }}
-      {{ end }}
-      {{- with .phone_numbers.phone -}}
-        <p>
-          <a itemprop="telephone" href="{{.value}}">{{ .label }}</a>
-        </p>
-      {{- end }}
-    {{- end }}
-  </div>
+{{ range $schools.Pages }}
+  {{ partial "footer/site/school.html" . }}
+{{ end }}
+
+{{- with $laboratories.Pages -}}
+  {{ partial "footer/site/laboratory.html" . }}
 {{- end -}}
-{{- with site.Data.laboratory -}}
-  <div itemscope itemtype="https://schema.org/ResearchOrganization">
-    <meta itemprop="logo" content="{{ $logo }}">
-    <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
-    {{ with .contact_details }} 
-      {{ with .postal_address }}
-        {{ partial "commons/address.html" . }}
-      {{ end}}
-      {{- with .phone_numbers.phone -}}
-          <p>
-            <a itemprop="telephone" href="{{.value}}">{{ .label }}</a>
-          </p>
-      {{- end }}
-    {{- end }}
-  </div>
-{{- end -}}
-{{- with site.Data.journal -}}
-  <div itemscope itemtype="https://schema.org/Periodical">
-    <meta itemprop="image" content="/assets/images/logo.svg">
-    <p itemprop="name">{{ htmlUnescape (trim .name "\n") }}</p>
-    <p itemprop="issn">{{ trim .issn "\n" }}</p>
-  </div>
+
+{{- with $journals.Pages -}}
+  {{ partial "footer/site/journal.html" . }}
 {{- end -}}
