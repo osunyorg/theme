@@ -1,8 +1,11 @@
 {{ $name := .Title }}
-{{ $logo := partial "GetMedia" .Params.logo.id }}
 
 <div itemscope itemtype="https://schema.org/ResearchOrganization">
-  {{ with $logo }}
+  {{ with .Params.logo }}
+    {{- $logo := partial "GetImageUrl" (dict
+        "media" .
+        "size" "1200"
+      ) -}}
     <meta itemprop="logo" content="{{ $logo.url }}">
   {{ end }}
 
