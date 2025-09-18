@@ -1,15 +1,7 @@
-{{ $name := .Title }}
-
 <div itemscope itemtype="https://schema.org/ResearchOrganization">
-  {{ with .Params.logo }}
-    {{- $logo := partial "GetImageUrl" (dict
-        "media" .
-        "size" "1200"
-      ) -}}
-    <meta itemprop="logo" content="{{ $logo.url }}">
-  {{ end }}
+  <meta itemprop="image" content="{{ partial "GetLogoUrl" }}">
 
-  <p itemprop="name">{{ $name }}</p>
+  <p itemprop="name">{{ .Title }}</p>
 
   {{ with .Params.contact_details }}
     {{ with .postal_address }}
