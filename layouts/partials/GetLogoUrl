@@ -1,0 +1,5 @@
+{{ $logo_url := index site.Params.logo.header }}
+{{ if eq (printf "%T" $logo_url) "array" }}
+  {{ $logo_url = site.Params.logo.header.default }}
+{{ end }}
+{{ return $logo_url }}

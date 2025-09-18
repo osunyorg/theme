@@ -1,22 +1,18 @@
 {{ $menu := partial "GetMenu" "social" }}
 
 {{ if $menu.items }}
-  {{ partial "commons/menu.html"
-    (dict
-      "kind"        "social"
-      "level"       1
-      "class"       "nav-social"
-  )}}
+  {{ partial "commons/menu.html" (dict
+      "kind" "social"
+      "level" 1
+      "class" "nav-social"
+    )}}
 {{ end }}
 
-{{ with (or site.Params.contact_details site.Data.website.social) }}
-  {{ $site_social_links := . }}
-  {{ if $site_social_links }}
-    <ul class="footer-social site-links">
-      {{ partial "commons/socials" (dict
-          "use_default_email_label" true
-          "context" .
-        )}}
-    </ul>
-  {{ end }}
+{{ with site.Params.contact_details }}
+  <ul class="footer-social site-links">
+    {{ partial "commons/socials" (dict
+        "use_default_email_label" true
+        "context" .
+      )}}
+  </ul>
 {{ end }}
