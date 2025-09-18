@@ -1,8 +1,11 @@
-{{ $image := site.Params.logo.header.default | default site.Params.logo.header }}
+{{ $image := index site.Params.logo.header }}
+{{ if eq (printf "%T" $image) "array" }}
+  {{ $image = site.Params.logo.header.default }}
+{{ end }}
 
 <div itemscope itemtype="https://schema.org/Periodical">
 
-  <meta itemprop="image" content="site.Params.logo.header">
+  <meta itemprop="image" content="{{ $image }}">
 
   <p itemprop="name">{{ .Title }}</p>
 
