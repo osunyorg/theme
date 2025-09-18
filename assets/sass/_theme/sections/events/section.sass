@@ -13,10 +13,11 @@
                 margin-bottom: $spacing-3
                 &:where(:not(:first-child))
                     margin-top: $spacing-5
-    .container + .container
-        margin-top: $spacing-4
-        @include media-breakpoint-up(up)
-            margin-top: $spacing-5
+    .document-content
+        > .container + .container
+            margin-top: $spacing-4
+            @include media-breakpoint-up(up)
+                margin-top: $spacing-5
 
 .events__section
     .events-archives-years
