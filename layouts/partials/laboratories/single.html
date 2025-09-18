@@ -5,10 +5,14 @@
   <meta itemprop="url" content="{{ .Permalink }}">
   {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
 
-  {{ partial "laboratories/single/summary.html" (dict
+  {{ partial "schools/single/summary.html" (dict
       "context" .
       "block_wrapped" true
     ) }}
+
+  <div class="container">
+    {{ partial "commons/contact-details.html" (dict "subject" .) }}
+  </div>
 
   {{ partial "contents/list.html" . }}
 
