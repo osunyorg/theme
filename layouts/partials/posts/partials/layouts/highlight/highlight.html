@@ -11,14 +11,12 @@
   {{ $list := .posts }}
 
   {{ with $highlight }}
-    <div class="highlight-post">
-      {{ partial "posts/partials/post.html" (dict 
-          "post" .
-          "heading_level" $heading_level
-          "options" $options
-          "layout" "highlight"
-        )}}
-    </div>
+    {{ partial "posts/partials/post.html" (dict 
+        "post" .
+        "heading_level" $heading_level
+        "options" $options
+        "layout" "highlight"
+      )}}
   {{ end }}
 
   {{ with $list }}

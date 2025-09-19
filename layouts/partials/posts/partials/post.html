@@ -20,7 +20,7 @@
   {{ else }}
     {{ $post_class = printf "%s %s" $post_class "without-image" }}
   {{ end }}
-  <li {{- if $highlight }} class="highlight-post" {{- end -}}>
+  <li {{- if eq $layout "highlight" }} class="highlight-post" {{- end -}}>
     <article class="{{ $post_class }}" itemscope itemtype="http://schema.org/BlogPosting">
       <div class="post-content">
         {{- $title := partial "PrepareHTML" .Title -}}
