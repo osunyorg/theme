@@ -29,23 +29,20 @@
                 {{ end }}
               </div>
             {{ end }}
+          {{ else }}
+            {{ if $options.categories }}
+              {{ partial "projects/partials/project/categories.html" . }}
+            {{ end }}
           {{ end }}
   
           {{ if $options.summary }}
             {{ partial "projects/partials/project/summary.html" . }}
           {{ end }}
   
-          {{ if not $group_meta }}
-            {{ if $options.categories }}
-              {{ partial "projects/partials/project/categories.html" . }}
-            {{ end }}
-          {{ end }}
-  
           {{ if $with_more }}
             {{ partial "commons/item/more.html" . }}
           {{ end }}
         </div>
-  
         {{ if not $group_meta }}
           {{ if $options.year }}
             <div class="project-meta">
@@ -54,7 +51,7 @@
           {{ end }}
         {{ end }}
       </div>
-  
+
       {{ if $options.image }}
         {{ partial "projects/partials/project/media.html" (dict 
             "image" $project.Params.image 
