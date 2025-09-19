@@ -26,23 +26,24 @@
 
             {{- partial "pages/partials/page/hook-after-title.html" . -}}
 
-            {{ if and $options.summary .Params.summary }}
-              {{ partial "GetRichSummary" ( dict 
-                "summary" .Params.summary
-                "kind" "pages"
-              )}}
-            {{ end }}
-            {{ if and $options.categories .Params.taxonomies }}
-              {{ partial "commons/categories" ( dict
-                "context" .
-                "kind" "page"
-              )}}
-            {{ end }}
-            {{ if $options.image }}
-              {{- partial "pages/partials/page/page-media.html" . -}}
-            {{ end }}
-          </article>
-        </li>
+          {{ if and $options.categories .Params.taxonomies }}
+            {{ partial "commons/categories" ( dict
+              "context" .
+              "kind" "page"
+            )}}
+          {{ end }}
+
+          {{ if and $options.summary .Params.summary }}
+            {{ partial "GetRichSummary" ( dict 
+              "summary" .Params.summary
+              "kind" "pages"
+            )}}
+          {{ end }}
+
+          {{ if $options.image }}
+            {{- partial "pages/partials/page/page-media.html" . -}}
+          {{ end }}
+        </article>
       {{- end -}}
     {{ end }}
   </ul>

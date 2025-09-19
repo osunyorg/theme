@@ -68,6 +68,13 @@
         {{ partial "events/partials/event/status.html" $dates.status }}
       {{ end }}
 
+      {{ if $options.categories }}
+        {{ partial "commons/categories.html" ( dict
+          "context" .
+          "kind" "event"
+        )}}
+      {{- end -}}
+
       {{ if and $options.summary .Params.summary }}
         <div class="event-description" itemprop="description">
           {{ partial "GetRichSummary" ( dict 
@@ -79,13 +86,6 @@
           {{ end }}
         </div>
       {{ end }}
-
-      {{ if $options.categories }}
-        {{ partial "commons/categories.html" ( dict
-          "context" .
-          "kind" "event"
-        )}}
-      {{- end -}}
 
       {{ if $with_more }}
         {{ partial "commons/item/more.html" . }}

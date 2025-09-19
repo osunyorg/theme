@@ -67,6 +67,9 @@
             {{ end }}
           </div>
         {{ end }}
+        {{ if $options.with_more }}
+          {{ partial "posts/partials/post/more.html" . }}
+        {{ end }}
       </div>
       {{ if $options.image }}
         <div class="media">
