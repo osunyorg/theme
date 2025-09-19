@@ -1,0 +1,10 @@
+{{ $contents := index site.Data.website site.Language.Lang "contents" }}
+
+{{ if $contents }}
+  <div class="footer-blocks">
+    {{ partial "contents/list.html" (dict 
+        "context" .
+        "contents" $contents
+      ) }}
+  </div>
+{{ end }}

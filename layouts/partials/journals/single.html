@@ -10,7 +10,10 @@
       "block_wrapped" true
     ) }}
 
-  {{ partial "contents/list.html" . }}
+  {{ partial "contents/list.html" (dict 
+  "context" . 
+  "contents" .Params.contents
+) }}
 
   {{ partial "hooks/before-document-content-end.html" . }}
 </div>

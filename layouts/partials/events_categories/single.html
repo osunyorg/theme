@@ -5,7 +5,10 @@
       "context" .
     ) }}
 
-  {{ partial "contents/list.html" . }}
+  {{ partial "contents/list.html" (dict 
+  "context" . 
+  "contents" .Params.contents
+) }}
 
   {{ partial "taxonomies/section-list-container.html" . }}
 
