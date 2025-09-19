@@ -13,7 +13,10 @@
       "block_wrapped" true
     ) }}
 
-  {{ partial "contents/list.html" . }}
+  {{ partial "contents/list.html" (dict 
+  "context" . 
+  "contents" .Params.contents
+) }}
 
   {{ partial "posts/single/after-contents.html" . }}
 
