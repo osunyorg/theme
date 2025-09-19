@@ -1,5 +1,7 @@
 {{ $location := .location }}
 {{ $options := .options }}
+{{ $layout := .layout }}
+{{ $sizes := cond (eq $layout "list") site.Params.image_sizes.blocks.locations.list "" }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level
   "attributes" "class='location-title' itemprop='headline'"
@@ -30,15 +32,11 @@
         </div>
   
       {{ if $options.image }}
-        {{- if .Params.image -}}
-          <div class="media">
-            {{- partial "commons/image.html"
-                (dict
-                  "image"    .Params.image
-                  "sizes"    site.Params.image_sizes.sections.locations.item
-                ) -}}
-            </div>
-          {{- end -}}
+        {{ partial "locations/partials/location/media.html" (dict 
+            "image" .Params.image
+            "layout" $layout
+            "type" "locations"
+          )}}
       {{- end -}}
     </article>
   </li>

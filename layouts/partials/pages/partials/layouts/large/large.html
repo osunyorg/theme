@@ -36,7 +36,10 @@
         </div>
 
         {{- if $options.image -}}
-          {{- partial "pages/partials/page/page-media.html" . -}}
+          {{ partial "pages/partials/page/media.html" (dict 
+              "image" .Params.image
+              "layout" "large"
+            )}}
         {{- end -}}
       </article>
     {{- end -}}

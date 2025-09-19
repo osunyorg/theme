@@ -465,6 +465,31 @@ params:
         progression: true
   image_sizes:
     design_system:
+      layouts:
+        alternate:
+          mobile:   360
+          tablet:   555
+          desktop:  520
+        cards:
+          mobile:   360
+          tablet:   555
+          desktop:  575
+        carousel:
+          mobile:   360
+          tablet:   555
+          desktop:  575
+        grid:
+          mobile:   360
+          tablet:   555
+          desktop:  575
+        large: 
+          mobile:   400
+          tablet:   555
+          desktop:  894
+        list:
+          mobile:   360
+          tablet:   555
+          desktop:  374
       lightbox:
         disabled: false
         # TODO mobile et tablet
@@ -482,6 +507,7 @@ params:
         tablet:   450
         desktop:  450
     blocks:
+      # specifics cases independant from layouts default config
       call_to_action:
         mobile:   375
         tablet:   500
@@ -489,7 +515,7 @@ params:
       chapter:
         mobile:   350
         tablet:   450
-        desktop:  800
+        desktop:  864
       features:
         mobile:   350
         tablet:   400
@@ -523,6 +549,11 @@ params:
         mobile:   350
         tablet:   400
         desktop:  750
+      locations:
+        list:
+          mobile:   360
+          tablet:   555
+          desktop:  575
       organizations:
         mobile:   164
         tablet:   216
@@ -535,11 +566,7 @@ params:
         list:
           mobile:   400
           tablet:   800
-          desktop:  300
-        large:
-          mobile:   400
-          tablet:   800
-          desktop:  1080
+          desktop:  216
       partners: # LEGACY
         mobile:   164
         tablet:   216
@@ -557,61 +584,47 @@ params:
           mobile:   90
           tablet:   360
           desktop:  255
+      posts:
+        highlight:
+          mobile:   400
+          tablet:   555
+          desktop:  812
       projects:
         alternate: 
           mobile:   350
-          tablet:   709
+          tablet:   555
           desktop:  1019
         grid:
-          mobile:   327
-          tablet:   555
-          desktop:  864
-        large:
           mobile:   350
           tablet:   555
-          desktop:  1019
-      events:
-        grid:
-          mobile:   400
-          tablet:   360
-          desktop:  690
-        large:
-          mobile:   400
-          tablet:   360
-          desktop:  1019
-        list:
-          mobile:   90
-          tablet:   200
-          desktop:  255
-        agenda:
-          mobile:   400
-          tablet:   360
-          desktop:  645
-        parent:
-          mobile:   400
-          tablet:   360
-          desktop:  645
+          desktop:  864
       exhibitions:
-        grid:
-          mobile:   400
-          tablet:   360
-          desktop:  555
-        large:
-          mobile:   400
-          tablet:   360
-          desktop:  645
-        list:
-          mobile:   90
-          tablet:   200
-          desktop:  255
         agenda:
           mobile:   400
           tablet:   360
           desktop:  645
+        grid:
+          mobile:   350
+          tablet:   555
+          desktop:  864
+      events:
+        agenda:
+          parents:    # same as default list (3 columss)
+            mobile:   360
+            tablet:   555
+            desktop:  374
+          children:
+            mobile:   360
+            tablet:   555
+            desktop:  255
+        list:
+          mobile:   90
+          tablet:   200
+          desktop:  255
         parent:
           mobile:   400
           tablet:   360
-          desktop:  645
+          desktop:  1213
       testimonials:
         mobile:   80
         tablet:   160
@@ -630,9 +643,10 @@ params:
           tablet:   800
           desktop:  1920
       programs:
-        mobile:   400
-        tablet:   800
-        desktop:  600
+        list:
+          mobile:   90
+          tablet:   200
+          desktop:  255
     sections:
       categories:
         hero:

@@ -1,15 +1,17 @@
 {{ $block := .block }}
+{{ $layout := $block.data.layout }}
 {{ $block_class := partial "GetBlockClass" .block }}
 
 {{ with .block.data }}
   {{ $options := .options }}
+  {{ $layout := .layout }}
   
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
 
-        {{ if eq $block.data.layout "grid" }}
+        {{ if eq $layout "grid" }}
           <ul class="programs-grid">
             {{ range .programs }}
               {{ $program := site.GetPage .path }}
@@ -55,17 +57,14 @@
                 </div>
 
                 {{ if and $program.Params.image $options.image }}
-                  <div class="media">
-                    {{ partial "commons/image.html" (dict
-                        "image"    $program.Params.image
-                        "sizes"    site.Params.image_sizes.blocks.programs
-                      )}}
-                  </div>
+                  {{ partial "programs/partials/program/media.html" (dict 
+                      "image" $program.Params.image
+                      "layout" $layout
+                    ) }}
                 {{ end }}
               </li>
             {{ end }}
-            </ul>
-
+          </ul>
         {{ else }}
           <ol class="programs">
             {{ range .programs }}
@@ -73,6 +72,7 @@
               {{ partial "programs/partials/program.html" (dict 
                   "program" $program
                   "heading_level" $block.ranks.children
+                  "layout" $layout
                   "options" $options
                 )}}
             {{ end }}

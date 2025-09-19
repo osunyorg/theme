@@ -1,6 +1,6 @@
 {{ $image := .image }}
 {{ $type := .type | default "page" }}
-{{ $layout := .layout | default "item" }}
+{{ $layout := .layout }}
 {{ $sizes := .sizes }}
 {{ $class := "media" }}
 {{ with .class }}
@@ -9,8 +9,8 @@
 
 {{ if not $sizes }}
   {{ $sizes = partial "GetSiteParamWithDefault" (dict 
-    "param" (printf "image_sizes.sections.%s.%s" $type $layout)
-    "default" "image_sizes.design_system.item"
+    "param" (printf "image_sizes.blocks.%s.%s" $type $layout)
+    "default" (printf "image_sizes.design_system.layouts.%s" $layout)
   ) }}
 {{ end }}
 

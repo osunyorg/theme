@@ -1,5 +1,6 @@
 {{ $program := .program }}
 {{ $options := .options }}
+{{ $layout := .layout | default "list" }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level
   "attributes" "class='program-title' itemprop='name'"
@@ -72,14 +73,11 @@
       {{ end }}
     </div>
   {{ end }}
-
   {{ if and $program.Params.image $options.image }}
-    <div class="media">
-      {{ partial "commons/image.html"
-          (dict
-            "image" $program.Params.image
-            "sizes" site.Params.image_sizes.blocks.programs
-          ) }}
-    </div>
+    {{ partial "programs/partials/program/media.html" (dict 
+        "image" $program.Params.image
+        "layout" $layout
+        "type" "programs"
+      ) }}
   {{ end }}
 </li>

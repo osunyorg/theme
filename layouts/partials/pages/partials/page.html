@@ -2,6 +2,7 @@
 {{ $class := "page" }}
 {{ $custom_class := "" }}
 {{ $options := .options }}
+{{ $layout := .layout | default "grid"}}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level
   "attributes" "class='page-title'"
@@ -38,7 +39,11 @@
       {{ end -}}
     </div>
     {{ if $options.image }}
-      {{- partial "pages/partials/page/page-media.html" . -}}
+      {{ partial "pages/partials/page/media.html" (dict 
+          "image" .Params.image
+          "layout" $layout
+          "type" "page"
+        )}}
     {{- end -}}
   </article>
 {{ end }}

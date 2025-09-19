@@ -13,17 +13,10 @@
           <a href="{{ .Permalink }}" title="{{ i18n "commons.more_aria" (dict "Title" .Title) }}" itemprop="name">{{ partial "PrepareHTML" .Title }}</a>
         {{ $heading_tag.close }}
       </hgroup>
-      <div class="media">
-        {{- if .Params.image -}}
-          {{- partial "commons/image.html"
-                (dict
-                  "image"    .Params.image
-                  "alt"      .Title
-                  "sizes"    site.Params.image_sizes.sections.volumes.item
-                ) -}}
-        {{- else -}}
-          {{- partial "commons/image-default.html" "volumes" -}}
-        {{- end -}}
+      {{ partial "volumes/partials/volume/media.html" (dict 
+          "image" .Params.image
+          "sizes" site.Params.image_sizes.sections.volumes.item
+        ) }}
       </div>
     </article>
   </li>

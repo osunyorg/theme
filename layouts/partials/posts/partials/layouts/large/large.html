@@ -1,20 +1,19 @@
-{{- $direction := "" -}}
-{{ $heading_level := .heading_level | default 3 }}
-
+{{ $direction := "" }}
 {{ $index := .index }}
 {{ $options := .options }}
-{{/* TODO: remove this merge with PR #1124 */}}
-{{ $options = merge $options (dict "with_more" true) }}
 {{ $image := $options.image }}
+{{ $heading_level := .heading_level }}
 
-<div class="large {{- if not $image }} without-images{{ end }}">
+<ul class="large {{- if not $image }} without-images{{ end }}">
   {{ range $post := .posts -}}
     {{ with site.GetPage .path }}
       {{ partial "posts/partials/post.html" (dict 
           "post" . 
           "options" $options
           "heading_level" $heading_level
+          "layout" "large"
+          "with_more" true
         )}}
     {{ end }}
   {{ end }}
-</div>
+</ul>

@@ -8,6 +8,7 @@
 {{ $index := .index }}
 {{ $alternate := .alternate }}
 {{ $options := .options }}
+{{ $sizes := .sizes | default "" }}
 
 {{ with $event }}
   {{ $class := "event" }}
@@ -16,6 +17,7 @@
   {{ end }}
   {{ if .Params.children }}
     {{ $class = printf "%s event--parent" $class }}
+    {{ $sizes = site.Params.image_sizes.blocks.events.parent }}
   {{ end }}
   {{ if .Params.parent }}
     {{ $class = printf "%s event--child" $class }}
@@ -91,17 +93,12 @@
         {{ partial "commons/item/more.html" . }}
       {{- end -}}
     </div>
-    <div class="media">
-      {{- if and $options.image .Params.image -}}
-        {{ $sizes := index site.Params.image_sizes.blocks.events $layout }}
-        {{- partial "commons/image.html"
-            (dict
-              "image"    .Params.image
-              "sizes"    $sizes
-            ) -}}
-      {{- else -}}
-        {{- partial "commons/image-default.html" "events" -}}
-      {{- end -}}
-    </div>
+    {{ if $options.image }}
+      {{ partial "events/partials/event/media.html" (dict 
+          "image" .Params.image
+          "layout" $layout
+          "sizes" $sizes
+        ) }}
+    {{ end }}
   </article>
 {{ end }}
