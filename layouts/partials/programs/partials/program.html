@@ -14,6 +14,14 @@
       </a>
     {{ $heading_tag.close }}
 
+    {{/*  TODO: remove when option is added to the block  */}}
+    {{ if or site.Params.programs.index.options.categories $options.categories }}
+      {{ partial "commons/categories.html" ( dict
+        "context" $program
+        "kind" "program"
+      )}}
+    {{ end }}
+
     {{ $diploma := $program.Params.diplomas }}
     {{ if and $options.diploma $diploma }}
       {{- $diploma = site.GetPage (printf "/diplomas/%s" $diploma) -}}
@@ -29,7 +37,7 @@
           "kind" "programs"
         )}}
       </div>
-  {{ end }}
+    {{ end }}
 
     {{ if $options.button }}
       <p class="btn">{{ i18n "commons.more" }}</p>

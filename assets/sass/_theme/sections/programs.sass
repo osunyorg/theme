@@ -58,6 +58,8 @@ ol.programs:where(:not(.programs--grid))
             transition: color $color-duration
             &:hover
                 color: var(--color-accent)
+        .program-categories
+            width: 100%
         @include media-breakpoint-down(md)
             .media
                 display: none
@@ -79,16 +81,12 @@ ol.programs:where(:not(.programs--grid))
                 .program-title,
                 [itemprop="abstract"]
                     min-width: columns(6)
-                .program-diploma
-                    width: var(--grid-gutter)
-                    text-align: center
             .media
                 flex-shrink: 0
                 margin-bottom: 0
                 width: columns(2)
         @include in-page-with-sidebar
-            .program-diploma + [itemprop="abstract"]
-                padding-right: var(--grid-gutter)
+            .program-diploma 
                 width: 100%
         @include in-page-without-sidebar
             .program-title
@@ -97,6 +95,11 @@ ol.programs:where(:not(.programs--grid))
                 width: columns(9)
             .program-diploma
                 margin-left: offset(1)
+                text-align: center
+                width: var(--grid-gutter)
+            .program-categories
+                order: 3
+
 ol.programs--light
     .program
         &:first-child
