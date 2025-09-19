@@ -20,7 +20,7 @@
           {{ if $group_meta }}
             {{ if or $options.year $options.categories }}
               <div class="project-meta">
-                {{ if and $project.Params.year $options.year }}
+                {{ if $options.year }}
                   {{ partial "projects/partials/project/year.html" $project.Params.year }}
                 {{ end }}
   
@@ -47,7 +47,7 @@
         </div>
   
         {{ if not $group_meta }}
-          {{ if and $project.Params.year $options.year }}
+          {{ if $options.year }}
             <div class="project-meta">
               {{ partial "projects/partials/project/year.html" $project.Params.year }}
             </div>
@@ -55,13 +55,6 @@
         {{ end }}
       </div>
   
-      {{ if $options.image }}
-        {{ partial "projects/partials/project/media.html" (dict 
-            "image" $project.Params.image 
-            "layout" $layout
-          ) }}
-      {{ end }}
-
       {{ if $options.image }}
         {{ partial "projects/partials/project/media.html" (dict 
             "image" $project.Params.image 
