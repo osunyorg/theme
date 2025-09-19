@@ -1,0 +1,10 @@
+<a
+    href="{{ chomp .value | safeURL }}" 
+    target="_blank"
+    rel="noopener noreferrer"
+    itemprop="url"
+    title="{{ safeHTML .title }}"
+  >
+  {{ chomp .label }}
+  <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+</a>

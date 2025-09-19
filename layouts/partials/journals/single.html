@@ -1,0 +1,16 @@
+{{ partial "journals/single/hero.html" . }}
+
+<div class="document-content" itemscope itemtype="https://schema.org/Periodical">
+  <meta itemprop="title" content="{{ partial "PrepareHTML" .Title }}">
+  <meta itemprop="url" content="{{ .Permalink }}">
+  {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
+
+  {{ partial "journals/single/summary.html" (dict
+      "context" .
+      "block_wrapped" true
+    ) }}
+
+  {{ partial "contents/list.html" . }}
+
+  {{ partial "hooks/before-document-content-end.html" . }}
+</div>

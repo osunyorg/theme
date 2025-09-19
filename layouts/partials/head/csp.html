@@ -1,8 +1,9 @@
-{{- with (or site.Data.content_security_policy.allowed_domains site.Data.website.external_domains) -}}
+{{- with site.Data.content_security_policy.allowed_domains -}}
 <meta http-equiv="Content-Security-Policy"
       content="
         default-src 'self' {{ delimit . " " }}
         {{ if or (not hugo.IsProduction) site.Params.debug.active }}'unsafe-inline'{{ end }}
+        {{ with site.Params.additional_csp }}{{ . }}{{ end }}
         {{ if site.Params.search.active }}'wasm-unsafe-eval'{{ end }};
       " />
 {{- end -}}

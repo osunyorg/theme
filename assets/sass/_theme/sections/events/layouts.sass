@@ -240,19 +240,20 @@
         @include media-breakpoint-up(desktop)
             .events-date
                 padding-bottom: $spacing-5
-            .events-date-title
-                @include sticky
-                bottom: $spacing-4
-                padding-top: 0
-                width: 100%
-                z-index: 1
-                span
-                    display: block
-                    padding-top: $spacing-5
-                &.is-down
-                    max-width: columns(3)
-                    @include h3
-                    margin-bottom: var(--title-margin-bottom)
+            .events-date--sticky
+                .events-date-title
+                    @include sticky
+                    bottom: $spacing-4
+                    padding-top: 0
+                    width: 100%
+                    z-index: 1
+                    span
+                        display: block
+                        padding-top: $spacing-5
+                    &.is-down
+                        max-width: columns(3)
+                        @include h3
+                        margin-bottom: var(--title-margin-bottom)
             .event
                 padding-left: offset(3)
                 flex-direction: row

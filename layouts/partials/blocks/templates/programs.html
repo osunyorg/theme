@@ -1,10 +1,5 @@
 {{ $block := .block }}
 {{ $block_class := partial "GetBlockClass" .block }}
-{{ $heading := .heading | default "h3" }}
-{{ $heading_tag := (dict 
-  "open" ((printf "<%s class='program-title' itemprop='name'>" $heading) | safeHTML)
-  "close" ((printf "</%s>" $heading) | safeHTML)
-  ) }}
 
 {{ with .block.data }}
   {{ $options := .options }}
@@ -21,6 +16,11 @@
               {{ $title := $program.Title | safeHTML }}
               <article class="program" itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
                 <div class="program-content">
+                  {{ $heading_tag := partial "GetHeadingTag" (dict 
+                      "level" $block.ranks.children
+                      "attributes" "class='program-title' itemprop='name'"
+                    )}}
+
                   {{ $heading_tag.open }}
                     <a class="title" href="{{ $program.Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
                       {{ $title }}
@@ -72,7 +72,7 @@
             {{ $program := site.GetPage .path }}
               {{ partial "programs/partials/program.html" (dict 
                   "program" $program
-                  "heading" $heading
+                  "heading_level" $block.ranks.children
                   "options" $options
                 )}}
             {{ end }}

@@ -1,0 +1,17 @@
+{{ $laboratories := .Paginator.Pages }}
+{{ $layout := default site.Params.laboratories.index.layout }}
+{{ $options := default site.Params.laboratories.index.options }}
+{{ $heading_level := 2 }}
+
+<ul class="laboratories laboratories--{{- $layout }}">
+  {{ range $laboratories }}
+    <li>
+      {{ partial "laboratories/partials/laboratory.html" (dict
+          "laboratory" .
+          "heading_level" $heading_level
+          "layout" $layout
+          "options" $options
+        )}}
+    </li>
+  {{ end }}
+</ul>

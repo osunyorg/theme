@@ -25,6 +25,7 @@ markup:
 pagination:
   pagerSize: 36
 params:
+  additional_csp: ''
   debug:
     active: false
     productionUrl: ""
@@ -135,11 +136,8 @@ params:
     date_format: false # You can add date format to override the date from static (two_lines) 
     # sitemap:
     #   ignore_children: true
-    filters:
-      number_of_months: 6
     index:
       archives: true
-      years: true
       group_by_date: "Monday 2 January 2006"
       highlight_exhibitions:
         active: true
@@ -170,7 +168,9 @@ params:
         subtitle: true
         summary: true
       per_page: 10
+      sticky_dates: true
       truncate_description: 200 # Set to 0 to disable truncate
+      years: true
     single:
       taxonomies:
         position: hero
@@ -245,6 +245,16 @@ params:
         dates: true
         with_more: true
       truncate_description: 200 # Set to 0 to disable truncate
+  journals:
+    index:
+      layout: list
+      options:
+        summary: true
+  laboratories:
+    index:
+      layout: list
+      options:
+        summary: true
   organizations:
     dark_logo_background: false
     map_marker_icon: '/assets/images/map-marker.svg'
@@ -279,6 +289,11 @@ params:
       group_by_year: false
     filters:
       anr: false
+  schools:
+    index:
+      layout: list
+      options:
+        summary: true
   volumes:
     default_image: false
   locations:
@@ -335,9 +350,12 @@ params:
         summary: true
         subtitle: true
       truncate_description: 200 # Set to 0 to disable truncate
-      
     single:
-      author_signature: false
+      options:
+        authors: true
+        reading_time: true
+        signature: false
+        updated_at: true
     # share_links: # Optional
     #   enabled: true
     #   email: false
@@ -402,8 +420,10 @@ params:
         subtitle: true
         summary: true
         year: false
-      
       truncate_description: 200 # Set to 0 to disable truncate
+    single:
+      navigation:
+        reversed: false
     # share_links: # Optional
     #   enabled: true
     #   email: false
@@ -702,6 +722,23 @@ params:
           mobile:   400
           tablet:   800
           desktop:  750
+      locations:
+        hero:
+          mobile:   400
+          tablet:   800
+          desktop:  900
+        hero_single:
+          mobile:   400
+          tablet:   800
+          desktop:  900
+        item:
+          mobile:   350
+          tablet:   450
+          desktop:  900
+        map: 
+          mobile:   300
+          tablet:   300
+          desktop:  300
       organizations:
         hero:
           mobile:   400
@@ -810,6 +847,15 @@ params:
           mobile:   400
           tablet:   800
           desktop:  750
+      schools:
+        hero:
+          mobile:   400
+          tablet:   800
+          desktop:  750
+        hero_single:
+          mobile:   400
+          tablet:   800
+          desktop:  750
       volumes:
         hero:
           mobile:   400
@@ -819,20 +865,3 @@ params:
           mobile:   327x388
           tablet:   208x247
           desktop:  300x356
-      locations:
-        hero:
-          mobile:   400
-          tablet:   800
-          desktop:  900
-        hero_single:
-          mobile:   400
-          tablet:   800
-          desktop:  900
-        item:
-          mobile:   350
-          tablet:   450
-          desktop:  900
-        map: 
-          mobile:   300
-          tablet:   300
-          desktop:  300
