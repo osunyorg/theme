@@ -1,0 +1,17 @@
+{{ $journals := .Paginator.Pages }}
+{{ $layout := default site.Params.journals.index.layout }}
+{{ $options := default site.Params.journals.index.options }}
+{{ $heading_level := 2 }}
+
+<ul class="journals journals--{{- $layout }}">
+  {{ range $journals }}
+    <li>
+      {{ partial "journals/partials/journal.html" (dict
+          "journal" .
+          "heading_level" $heading_level
+          "layout" $layout
+          "options" $options
+        )}}
+    </li>
+  {{ end }}
+</ul>

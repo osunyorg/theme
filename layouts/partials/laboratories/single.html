@@ -1,0 +1,20 @@
+{{ partial "laboratories/single/hero.html" . }}
+
+<div class="document-content" itemscope itemtype="https://schema.org/ResearchOrganization">
+  <meta itemprop="title" content="{{ partial "PrepareHTML" .Title }}">
+  <meta itemprop="url" content="{{ .Permalink }}">
+  {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
+
+  {{ partial "schools/single/summary.html" (dict
+      "context" .
+      "block_wrapped" true
+    ) }}
+
+  <div class="container">
+    {{ partial "commons/contact-details.html" (dict "subject" .) }}
+  </div>
+
+  {{ partial "contents/list.html" . }}
+
+  {{ partial "hooks/before-document-content-end.html" . }}
+</div>
