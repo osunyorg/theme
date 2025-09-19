@@ -28,10 +28,7 @@
 
   {{ $dates := .Params.dates }}
 
-  <article class="{{ $class }}" 
-      {{ if $is_sub_event }} itemprop="subEvent" {{ end }}
-      {{ if $is_sup_event }} itemprop="superEvent" {{ end }}
-      itemscope itemtype="https://schema.org/Event">
+  <article class="{{ $class }}">
 
     {{ if or .Params.dates .Params.current_time_slot }}
       {{ partial "events/partials/event/meta-dates.html" (dict

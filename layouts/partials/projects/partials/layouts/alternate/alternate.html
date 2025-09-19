@@ -1,7 +1,7 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $options := .options | default site.Params.projects.index.options }}
 
-<div class="alternate projects--alternate">
+<ul class="alternate projects--alternate">
   {{ range .projects -}}
     {{ partial "projects/partials/layouts/alternate/alternate-item.html" (dict 
         "heading_level" $heading_level
@@ -11,4 +11,4 @@
         "project" .
       )}}
   {{ end }}
-</div>
+</ul>

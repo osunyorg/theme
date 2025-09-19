@@ -3,42 +3,44 @@
   "level" ( .heading_level | default 3 )
   "attributes" "class='page-title'"
 )}}
-<div class="cards">
+<ul class="cards">
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
     {{ with $page }}
-      <article class="card">
-        {{ $heading_tag.open }}
-          <a href="{{- .Permalink -}}">
-            {{- partial "PrepareHTML" .Title -}}
-          </a>
-        {{ $heading_tag.close }}
+      <li>
+        <article class="card">
+          {{ $heading_tag.open }}
+            <a href="{{- .Permalink -}}">
+              {{- partial "PrepareHTML" .Title -}}
+            </a>
+          {{ $heading_tag.close }}
 
-        {{- partial "pages/partials/page/hook-after-title.html" . -}}
+          {{- partial "pages/partials/page/hook-after-title.html" . -}}
 
-        {{ if and $options.categories .Params.taxonomies }}
-          {{ partial "commons/categories" ( dict
-            "context" .
-            "kind" "page"
-          )}}
-        {{ end }}
-
-        {{ if and $options.summary .Params.summary }}
-          {{ partial "GetRichSummary" ( dict 
-            "summary" .Params.summary
-            "kind" "pages"
-          )}}
-        {{ end }}
-
-        <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
-
-        {{ if $options.image }}
-          {{ partial "pages/partials/page/media.html" (dict 
-              "image" .Params.image
-              "layout" "cards"
+          {{ if and $options.categories .Params.taxonomies }}
+            {{ partial "commons/categories" ( dict
+              "context" .
+              "kind" "page"
             )}}
-        {{ end }}
-      </article>
+          {{ end }}
+
+          {{ if and $options.summary .Params.summary }}
+            {{ partial "GetRichSummary" ( dict 
+              "summary" .Params.summary
+              "kind" "pages"
+            )}}
+          {{ end }}
+
+          <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+
+          {{ if $options.image }}
+            {{ partial "pages/partials/page/media.html" (dict 
+                "image" .Params.image
+                "layout" "cards"
+              )}}
+          {{ end }}
+        </article>
+      </li>
     {{- end -}}
   {{ end }}
-</div>
+</ul>

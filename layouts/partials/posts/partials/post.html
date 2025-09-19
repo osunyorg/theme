@@ -5,6 +5,7 @@
 {{ $options := .options }}
 {{ $layout := .layout }}
 {{ $direction := "" }}
+{{ $highlight := .highlight | default false }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level 
   "attributes" "class='post-title' itemprop='headline'"
@@ -19,63 +20,64 @@
   {{ else }}
     {{ $post_class = printf "%s %s" $post_class "without-image" }}
   {{ end }}
+  <li {{- if $highlight }} class="highlight-post" {{- end -}}>
+    <article class="{{ $post_class }}" itemscope itemtype="http://schema.org/BlogPosting">
+      <div class="post-content">
+        {{- $title := partial "PrepareHTML" .Title -}}
+        {{ if and $options.subtitle .Params.subtitle }}
+          <hgroup>
+        {{ end }}
+        {{ $heading_tag.open }}
+          <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
+        {{ $heading_tag.close }}
+        {{ if and $options.subtitle .Params.subtitle }}
+          <p class="post-subtitle">{{ .Params.subtitle }}</p>
+        {{ end }}
+        {{ if and $options.subtitle .Params.subtitle }}
+          </hgroup>
+        {{ end }}
   
-  <article class="{{ $post_class }}" itemscope itemtype="http://schema.org/BlogPosting">
-    <div class="post-content">
-      {{- $title := partial "PrepareHTML" .Title -}}
-      {{ if and $options.subtitle .Params.subtitle }}
-        <hgroup>
-      {{ end }}
-      {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-      {{ $heading_tag.close }}
-      {{ if and $options.subtitle .Params.subtitle }}
-        <p class="post-subtitle">{{ .Params.subtitle }}</p>
-      {{ end }}
-      {{ if and $options.subtitle .Params.subtitle }}
-        </hgroup>
-      {{ end }}
-
-      {{ if $options.categories }}
-        {{ partial "commons/categories.html" ( dict
-          "context" .
-          "kind" "post"
-        )}}
-      {{ end }}
-
-      {{ if and $options.summary  .Params.summary }}
-        <div itemprop="abstract">
-          {{ partial "GetRichSummary" ( dict 
-            "summary" .Params.summary
-            "kind" "posts"
+        {{ if $options.categories }}
+          {{ partial "commons/categories.html" ( dict
+            "context" .
+            "kind" "post"
           )}}
-        </div>
+        {{ end }}
+  
+        {{ if and $options.summary  .Params.summary }}
+          <div itemprop="abstract">
+            {{ partial "GetRichSummary" ( dict 
+              "summary" .Params.summary
+              "kind" "posts"
+            )}}
+          </div>
+        {{- end -}}
+        
+        {{ if or $options.author $options.date $options.reading_time }}
+          <div class="post-meta">
+            {{ if $options.date }}
+              <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
+            {{ end }}
+            {{ if $options.author }}
+              {{- partial "posts/partials/post/author.html" . -}}
+            {{ end }}
+            {{ if and $reading_time $options.reading_time }}
+              <span class="post-reading-time">
+                {{- i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" $reading_time.text -}}
+              </span>
+            {{ end }}
+          </div>
+        {{ end }}
+        {{ if $options.with_more }}
+          {{ partial "posts/partials/post/more.html" . }}
+        {{ end }}
+      </div>
+      {{ if $options.image }}
+        {{ partial "posts/partials/post/media.html" (dict 
+            "image" .Params.image
+            "layout" $layout
+          ) }}
       {{- end -}}
-      
-      {{ if or $options.author $options.date $options.reading_time }}
-        <div class="post-meta">
-          {{ if $options.date }}
-            <time itemprop="datePublished" datetime="{{ .Date.Format "2006-01-02T15:04" }}">{{ .Date | time.Format site.Params.posts.date_format }}</time>
-          {{ end }}
-          {{ if $options.author }}
-            {{- partial "posts/partials/post/author.html" . -}}
-          {{ end }}
-          {{ if and $reading_time $options.reading_time }}
-            <span class="post-reading-time">
-              {{- i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" $reading_time.text -}}
-            </span>
-          {{ end }}
-        </div>
-      {{ end }}
-      {{ if $options.with_more }}
-        {{ partial "posts/partials/post/more.html" . }}
-      {{ end }}
-    </div>
-    {{ if $options.image }}
-      {{ partial "posts/partials/post/media.html" (dict 
-          "image" .Params.image
-          "layout" $layout
-        ) }}
-    {{- end -}}
-  </article>
+    </article>
+  </li>
 {{ end }}
