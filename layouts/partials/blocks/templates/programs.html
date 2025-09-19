@@ -28,6 +28,14 @@
                     </a>
                   {{ $heading_tag.close }}
 
+                  {{/*  TODO: remove when option is added to the block  */}}
+                  {{ if or site.Params.programs.index.options.categories $options.categories }}
+                    {{ partial "commons/categories.html" ( dict
+                      "context" $program
+                      "kind" "program"
+                    )}}
+                  {{ end }}
+
                   {{ if and $options.summary $program.Params.summary }}
                     <div itemprop="abstract">
                       {{ partial "GetRichSummary" ( dict 
