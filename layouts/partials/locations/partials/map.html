@@ -14,7 +14,7 @@
     {{ range $locations }}
       {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
       {{ if and $address_geolocation.longitude $address_geolocation.latitude }}
-        <li class="location" data-title="{{ .Params.title }}" data-longitude="{{ $address_geolocation.longitude }}" data-latitude="{{ $address_geolocation.latitude }}">
+        <li class="location" data-title="{{ .Params.title }}" data-longitude="{{ $address_geolocation.longitude }}" data-latitude="{{ $address_geolocation.latitude }}" itemscope itemtype="https://schema.org/EducationalOrganization">
           {{ $title := "" }}
           {{ if .Params.title }}
             <div class="location-content">
