@@ -41,7 +41,7 @@ osuny.StickyTitle.prototype.setTitleHeight = function () {
 
 // Setup agenda page titles
 (function () {
-    var events = document.querySelectorAll('.events-date');
+    var events = document.querySelectorAll('.events-date.events-date--sticky');
     events.forEach(function (event) {
         new osuny.StickyTitle(event, '.events-date-title');
     });

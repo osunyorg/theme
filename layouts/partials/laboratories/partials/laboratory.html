@@ -1,0 +1,39 @@
+{{ $laboratory := .laboratory }}
+{{ $layout := .layout | default "list" }}
+{{ $heading_level := .heading_level }}
+{{ $options := .options }}
+{{ with $laboratory }}
+  {{ $class := "laboratory" }}
+  {{ if and .Params.image $options.image }}
+    {{ $class = printf "%s laboratory--with-image" $class }}
+    {{ $image_direction := partial "GetImageDirection" .Params.image }}
+    {{ $class = printf "%s %s" $class $image_direction }}
+  {{ end }}
+
+  {{ $dates := .Params.dates }}
+
+  <article class="{{ $class }}" 
+      itemscope itemtype="https://schema.org/ResearchOrganization">
+    <div class="laboratory-content">
+      {{ partial "laboratories/partials/laboratory/heading.html" (dict
+          "item" .
+          "options" $options
+          "level" $heading_level
+          "itemprop" "title"
+        )}}
+
+      {{ if and $options.summary .Params.summary }}
+        <div class="laboratory-description" itemprop="abstract">
+          {{ partial "laboratories/partials/laboratory/summary.html" . }}
+        </div>
+      {{ end }}
+    </div>
+
+    {{ if $options.image }}
+      {{ partial "laboratories/partials/laboratory/media.html" (dict 
+          "image" $laboratory.Params.image
+          "layout" $layout
+        )}}
+    {{ end }}
+  </article>
+{{ end }}

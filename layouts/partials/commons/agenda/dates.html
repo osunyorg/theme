@@ -3,6 +3,7 @@
 {{ $is_parent := .Params.children }}
 {{ $is_simple_event := and .Params.dates (not .Params.time_slots) }}
 {{ $has_primary_date := or $is_repeating $multiple_dates_event $is_parent $is_simple_event }}
+{{ $name := .Title }}
 
 <div class="event-slots {{- if $is_parent }} parent-event {{ end }} {{ if $is_simple_event }} simple-event {{ end }}">
   <h2 class="events-slots-title">{{ i18n "commons.date" (cond $has_primary_date 2 1) }}</h2>
@@ -15,16 +16,21 @@
       {{ with .Params.place }}
         <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">{{ . }}</span>
       {{ end }}
-      {{ partial "commons/agenda/dropdown-calendar.html" (dict
-          "index" "primary"
-          "calendar_links" .Params.dates.add_to_calendar
-        )}}
+      {{ with .Params.dates }}
+        {{ if ne .status "archive" }}
+          {{ partial "commons/agenda/dropdown-calendar.html" (dict
+              "index" "primary"
+              "calendar_links" .add_to_calendar
+            )}}
+        {{ end }}
+      {{ end }}
     </div>
   {{ end }}
   {{ with .Params.time_slots }}
     <ul id="all-dates" class="extendable-list">
       {{ range $index, $time_slot := . }}
-        <li class="event-time-slot" itemprop="subEvent">
+        <li class="event-time-slot" itemprop="subEvent" itemscope itemtype="https://schema.org/Event">
+          <meta itemprop="name" content="{{ $name }}">
           {{ $event_date := $time_slot.start.date | time.Format site.Params.events.single.time_slots.date_format }}
           <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ $event_date | strings.FirstUpper }}</span>
           <p class="hours">
@@ -39,10 +45,12 @@
           {{ with $time_slot.place }}
             <span class="location" itemprop="location">{{ . }}</span>
           {{ end }}
-          {{ partial "commons/agenda/dropdown-calendar.html" (dict
-              "index" $index
-              "calendar_links" $time_slot.add_to_calendar
-            )}}
+          {{ if ne .status "archive" }}
+            {{ partial "commons/agenda/dropdown-calendar.html" (dict
+                "index" $index
+                "calendar_links" $time_slot.add_to_calendar
+              )}}
+          {{ end }}
         </li>
       {{ end }}
     </ul>

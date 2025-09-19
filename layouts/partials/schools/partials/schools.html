@@ -1,0 +1,17 @@
+{{ $schools := .Paginator.Pages }}
+{{ $layout := default site.Params.schools.index.layout }}
+{{ $options := default site.Params.schools.index.options }}
+{{ $heading_level := 2 }}
+
+<ul class="schools schools--{{- $layout }}">
+  {{ range $schools }}
+    <li>
+      {{ partial "schools/partials/school.html" (dict
+          "school" .
+          "heading_level" $heading_level
+          "layout" $layout
+          "options" $options
+        )}}
+    </li>
+  {{ end }}
+</ul>

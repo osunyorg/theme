@@ -6,7 +6,7 @@
 
 <ul class="events events--{{-  $layout -}}">
   {{ range $agenda }}
-    <li class="events-date">
+    <li class="events-date {{- if site.Params.events.index.sticky_dates }} events-date--sticky {{- end }}">
       {{ if eq $layout "agenda" }}
         <h2 class="events-date-title" id="{{ anchorize .Key }}"><span>{{ .Key | strings.FirstUpper | safeHTML }}</span></h2>
       {{ end }}
