@@ -191,7 +191,7 @@
 
     &--alternate
         .alternate
-            @include alternate
+            @include layout-alternate
             article 
                 position: relative
                 display: flex
@@ -206,8 +206,9 @@
                     img
                         aspect-ratio: unset
         @include media-breakpoint-down(desktop)
-            article + article
-                margin-top: $spacing-4
+            .alternate
+                > li + li
+                    margin-top: $spacing-4
         @include in-page-without-sidebar
             .top
                 .description

@@ -3,19 +3,20 @@
   "level" ( .heading_level | default 3 )
   "attributes" "class='page-title'"
 )}}
-<div class="large">
+<ul class="large">
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
     {{ with $page }}
-      <article class="page">
-        <div class="page-content">
-          {{ $heading_tag.open }}
-            <a href="{{- .Permalink -}}">
-              {{- partial "PrepareHTML" .Title -}}
-            </a>
-          {{ $heading_tag.close }}
+      <li>
+        <article class="page">
+          <div class="page-content">
+            {{ $heading_tag.open }}
+              <a href="{{- .Permalink -}}">
+                {{- partial "PrepareHTML" .Title -}}
+              </a>
+            {{ $heading_tag.close }}
 
-          {{- partial "pages/partials/page/hook-after-title.html" . -}}
+            {{- partial "pages/partials/page/hook-after-title.html" . -}}
 
           {{ if and $options.categories .Params.taxonomies }}
             {{ partial "commons/categories" ( dict
@@ -40,4 +41,4 @@
       </article>
     {{- end -}}
   {{ end }}
-</div>
+</ul>

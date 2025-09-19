@@ -8,31 +8,27 @@
     {{- range .organizations }}
       {{ if .path }}
         {{ with site.GetPage .path }}
-          <li>
-            {{ partial "organizations/partials/organization.html" (dict
-                "organization" .
-                "options" $options
-                "layout" $layout
-                "heading_level" $heading_level
-              ) }}
-          </li>
-        {{ end }}
-      {{ else }}
-        <li>
           {{ partial "organizations/partials/organization.html" (dict
-              "organization" (dict
-                "Title" .name
-                "Permalink" .url
-                "Params" (dict 
-                  "logo" .logo
-                  "external" true
-                )
-              )
+              "organization" .
               "options" $options
               "layout" $layout
               "heading_level" $heading_level
-            ) }}
-        </li>
+            )}}
+        {{ end }}
+      {{ else }}
+        {{ partial "organizations/partials/organization.html" (dict
+            "organization" (dict
+              "Title" .name
+              "Permalink" .url
+              "Params" (dict 
+                "logo" .logo
+                "external" true
+              )
+            )
+            "options" $options
+            "layout" $layout
+            "heading_level" $heading_level
+          )}}
       {{ end }}
     {{ end -}}
   </ul>

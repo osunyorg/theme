@@ -1,8 +1,6 @@
 {{- $direction := "" -}}
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-  "level" ( .heading_level | default 3 )
-  "attributes" "class='post-title' itemprop='headline'"
-)}}
+{{ $heading_level := .heading_level | default 3 }}
+
 {{ $index := .index }}
 {{ $options := .options }}
 {{/* TODO: remove this merge with PR #1124 */}}
@@ -13,9 +11,10 @@
   {{ range $post := .posts -}}
     {{ with site.GetPage .path }}
       {{ partial "posts/partials/post.html" (dict 
-        "post" . 
-        "options" $options
-        "heading" $heading) }}
+          "post" . 
+          "options" $options
+          "heading_level" $heading_level
+        )}}
     {{ end }}
   {{ end }}
 </div>
