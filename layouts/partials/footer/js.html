@@ -1,27 +1,4 @@
-{{ $isLeafletNeeded := false }}
-
-{{ if .Params.contents }}
-  {{ range .Params.contents }}
-    {{ if or (eq .template "locations") (eq .template "organizations") }}
-      {{ with .data }}
-        {{ if eq .layout "map" }}
-          {{ $isLeafletNeeded = true }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-{{ if and (eq .Kind "taxonomy") (eq .Section "locations") }}
-  {{ $isLeafletNeeded = true }}
-{{ end }}
-
-
-<!-- check if map needed  -->
-{{ if .Params.contact_details.postal_address.geolocation }} 
-  {{ $isLeafletNeeded = true }}
-{{ end }}
-
-{{ if $isLeafletNeeded }}
+{{ if partial "isInteractiveMapPresent" . }}
   <!-- CSS -->
   {{- $cssOpts := (dict
     "targetPath" "assets/css/leaflet.css"
