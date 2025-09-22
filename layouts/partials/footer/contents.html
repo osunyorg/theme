@@ -1,15 +1,15 @@
 {{ $contents := index site.Data.website site.Language.Lang "contents" }}
 {{ $index_offset := 0 }}
-{{ if .Params.contents }}
-  {{ $index_offset = len .Params.contents }}
+{{ with .Params.contents }}
+  {{ $index_offset = len . }}
 {{ end }}
 
 {{ if $contents }}
   <div class="footer-contents contents-full-width">
     {{ partial "contents/list.html" (dict
-        "context" .
-        "contents" $contents
-        "index_offset" $index_offset
-      ) }}
+      "context" .
+      "contents" $contents
+      "index_offset" $index_offset
+    ) }}
   </div>
 {{ end }}
