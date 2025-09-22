@@ -7,9 +7,9 @@
       "block_wrapped" true
     ) }}
   {{ partial "contents/list.html" (dict 
-  "context" . 
-  "contents" .Params.contents
-) }}
+      "context" . 
+      "contents" .Params.contents
+    ) }}
   <div class="container">
     {{ $programs_options := site.Params.diplomas.single.programs.options }}
     <ol class="programs {{ if eq $programs_options false }}programs--default{{ end }}">
