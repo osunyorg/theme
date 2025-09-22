@@ -1,11 +1,13 @@
 @mixin in-page-with-sidebar
     @include media-breakpoint-up(desktop)
-        body:not(.full-width) &
+        body:not(.full-width) main &
             @content
 
 @mixin in-page-without-sidebar
     @include media-breakpoint-up(desktop)
         main > .blocks &,
+        main > .blocks &,
+        .footer-blocks &,
         body.full-width &
             @content
 
