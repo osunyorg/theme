@@ -10,7 +10,11 @@
       "block_wrapped" true
     ) }}
 
-  {{ partial "contents/list.html" . }}
+  {{ partial "contents/list.html" (dict
+    "context" .
+    "contents" .Params.contents
+  ) }}
+
   {{ partial "locations/single/diplomas.html" . }}
 </div>
 {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}

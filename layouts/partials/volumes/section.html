@@ -7,6 +7,9 @@
   </div>
 
   {{ if (partial "IsFirstPage" .) }}
-    {{ partial "contents/list.html" . }}
+    {{ partial "contents/list.html" (dict
+      "context" .
+      "contents" .Params.contents
+    ) }}
   {{ end }}
 </div>

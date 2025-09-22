@@ -18,7 +18,10 @@
         "block_wrapped" true
       ) }}
 
-    {{ partial "contents/list.html" . }}
+    {{ partial "contents/list.html" (dict
+      "context" .
+      "contents" .Params.contents
+    ) }}
 
     {{ if site.Params.events.single.navigation.active }}
       {{ partial "commons/siblings-navigation.html" (dict

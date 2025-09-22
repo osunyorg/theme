@@ -18,7 +18,10 @@
     </div>
   {{ end }}
 
-  {{ partial "contents/list.html" . }}
+  {{ partial "contents/list.html" (dict
+    "context" .
+    "contents" .Params.contents
+  ) }}
 
   <div class="container events-programme" id="events-programme">
     {{ partial "events/partials/events.html" (dict
