@@ -1,33 +1,23 @@
 {{ $is_interactive_map_present := false }}
-{{ $page_content := .Params.contents }}
+{{ $page_contents := .Params.contents }}
 {{ $website_content := index site.Data.website site.Language.Lang "contents" }}
 
-{{ range .Params.contents }}
-  {{ if or (eq .template "locations") (eq .template "organizations") }}
-    {{ with .data }}
-      {{ if eq .layout "map" }}
-        {{ $is_interactive_map_present = true }}
+{{ range slice $page_contents $website_content }}
+  {{ range . }}
+    {{ if or (eq .template "locations") (eq .template "organizations") }}
+      {{ with .data }}
+        {{ if eq .layout "map" }}
+          {{ $is_interactive_map_present = true }}
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
 {{ end }}
-
-{{ range $website_content }}
-  {{ if or (eq .template "locations") (eq .template "organizations") }}
-    {{ with .data }}
-      {{ if eq .layout "map" }}
-        {{ $is_interactive_map_present = true }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-
 
 {{ if and (eq .Kind "taxonomy") (eq .Section "locations") }}
   {{ $is_interactive_map_present = true }}
 {{ end }}
 
-<!-- check if map needed  -->
 {{ if .Params.contact_details.postal_address.geolocation }} 
   {{ $is_interactive_map_present = true }}
 {{ end }}
