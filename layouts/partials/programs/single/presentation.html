@@ -39,10 +39,10 @@
         </div>
       {{ end }}
 
-      {{- partial "contents/list.html" (dict 
-  "context" . 
-  "contents" .Params.contents
-) }}
+      {{ partial "contents/list.html" (dict
+        "context" .
+        "contents" .Params.contents
+      ) }}
 
       {{ if ( partial "HasAdministrativeInformation" . ) }}
         <div>

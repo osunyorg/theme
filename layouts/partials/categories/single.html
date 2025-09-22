@@ -11,10 +11,10 @@
     "block_wrapped" true
   ) }}
 
-  {{ partial "contents/list.html" (dict 
-      "context" . 
-      "contents" .Params.contents
-    ) }}
+  {{ partial "contents/list.html" (dict
+    "context" .
+    "contents" .Params.contents
+  ) }}
 
   {{ with .Params.children }}
     {{ partial "categories/single/categories.html" . }}
