@@ -1,6 +1,6 @@
 @mixin in-page-with-sidebar
     @include media-breakpoint-up(desktop)
-        body:not(.full-width) main &
+        body:not(.full-width) *:where:not(.contents-full-width) &
             @content
 
 @mixin in-page-without-sidebar
