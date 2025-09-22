@@ -1,7 +1,7 @@
 {{ $contents := index site.Data.website site.Language.Lang "contents" }}
 
 {{ if $contents }}
-  <div class="footer-blocks">
+  <div class="footer-contents contents-full-width">
     {{ partial "contents/list.html" (dict 
         "context" .
         "contents" $contents
