@@ -1,5 +1,6 @@
 {{ $context := .context }}
 {{ $contents := .contents }}
+{{ $index_offset := .index_offset | default 0 }}
 
 {{- if $contents -}}
 
@@ -8,6 +9,7 @@
 
   <div class="blocks">
     {{- range $index, $content := $contents -}}
+      {{ $index = add $index $index_offset }}
       {{ if and (eq .kind "block") (not (in site.Params.blocks.ignored .html_class) ) }}
         {{ $is_last_content := eq (add $index 1) (len $contents) }}
         {{ $is_title := eq .template "title" }}
