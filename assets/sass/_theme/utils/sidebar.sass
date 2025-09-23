@@ -1,21 +1,24 @@
 @mixin in-page-with-sidebar
     @include media-breakpoint-up(desktop)
-        body:not(.full-width) *:where:not(.contents-full-width) &
+        body:where(:not(.full-width)) main &
             @content
 
 @mixin in-page-without-sidebar
     @include media-breakpoint-up(desktop)
+        body.full-width &,
+        body.full-width main &,
         main > .blocks &,
-        .contents-full-width &,
-        body.full-width &
+        .contents-full-width &
             @content
 
 // Use this mixin to override with-aside or without-aside rules
 @mixin in-page-with-or-without-sidebar
     @include media-breakpoint-up(desktop)
         body:not(.full-width) &,
+        body:not(.full-width) main &,
         main > .blocks &,
-        body.full-width &,
+        .contents-full-width &,
+        body.full-width &
             @content
 
 // Aliases
@@ -65,6 +68,7 @@
             .toc-container
                 border-top: var(--border-width) solid var(--color-border)
                 padding-top: $spacing-3
+
 @mixin sidebar-infos
     @include meta
     @include list-reset
