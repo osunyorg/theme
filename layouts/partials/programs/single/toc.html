@@ -48,41 +48,41 @@
           {{- end -}}
         </ol>
     </li>
-    <li>
-      <a href="#{{ anchorize (i18n "programs.toc.pedagogy") }}">{{ i18n "programs.toc.pedagogy" }}</a>
-      {{- if or $content $pedagogy $evaluation $teachers }}
-      <ol>
-        {{- if $content -}}
-          <li><a href="#{{ anchorize (i18n "programs.content") }}">{{ i18n "programs.content" }}</a></li>
-        {{- end -}}
-        {{- if $pedagogy -}}
-          <li><a href="#{{ anchorize (i18n "programs.pedagogy") }}">{{ i18n "programs.pedagogy" }}</a></li>
-        {{- end -}}
-        {{- if $evaluation -}}
-          <li><a href="#{{ anchorize (i18n "programs.evaluation") }}">{{ i18n "programs.evaluation" }}</a></li>
-        {{- end -}}
-        {{- if $teachers -}}
-          <li><a href="#{{ anchorize (i18n "programs.teachers") }}">{{ i18n "programs.teachers" }}</a></li>
-        {{- end -}}
-      </ol>
-      {{ end -}}
-    </li>
-    <li>
-      <a href="#{{ anchorize (i18n "programs.toc.results") }}">{{ i18n "programs.toc.results" }}</a>
-      {{- if or $opportunities $results }}
-      <ol>
-        {{- if $opportunities -}}
-          <li><a href="#{{ anchorize (i18n "programs.opportunities") }}">{{ i18n "programs.opportunities" }}</a></li>
-        {{- end -}}
-        {{- if $results -}}
-          <li><a href="#{{ anchorize (i18n "programs.results") }}">{{ i18n "programs.results" }}</a></li>
-        {{- end -}}
-      </ol>
-      {{ end -}}
-    </li>
+    {{- if or $content $pedagogy $evaluation $teachers }}
+      <li>
+        <a href="#{{ anchorize (i18n "programs.toc.pedagogy") }}">{{ i18n "programs.toc.pedagogy" }}</a>
+        <ol>
+          {{- if $content -}}
+            <li><a href="#{{ anchorize (i18n "programs.content") }}">{{ i18n "programs.content" }}</a></li>
+          {{- end -}}
+          {{- if $pedagogy -}}
+            <li><a href="#{{ anchorize (i18n "programs.pedagogy") }}">{{ i18n "programs.pedagogy" }}</a></li>
+          {{- end -}}
+          {{- if $evaluation -}}
+            <li><a href="#{{ anchorize (i18n "programs.evaluation") }}">{{ i18n "programs.evaluation" }}</a></li>
+          {{- end -}}
+          {{- if $teachers -}}
+            <li><a href="#{{ anchorize (i18n "programs.teachers") }}">{{ i18n "programs.teachers" }}</a></li>
+          {{- end -}}
+        </ol>
+      </li>
+    {{ end -}}
+    {{- if or $opportunities $results }}
+      <li>
+        <a href="#{{ anchorize (i18n "programs.toc.results") }}">{{ i18n "programs.toc.results" }}</a>
+        <ol>
+          {{- if $opportunities -}}
+            <li><a href="#{{ anchorize (i18n "programs.opportunities") }}">{{ i18n "programs.opportunities" }}</a></li>
+          {{- end -}}
+          {{- if $results -}}
+            <li><a href="#{{ anchorize (i18n "programs.results") }}">{{ i18n "programs.results" }}</a></li>
+          {{- end -}}
+        </ol>
+      </li>
+    {{ end -}}
+    {{- if or $prerequisites $pricing $registration $accessibility $other $roles $contacts }}
     <li>
       <a href="#{{ anchorize (i18n "programs.toc.admission") }}">{{ i18n "programs.toc.admission" }}</a>
-      {{- if or $prerequisites $pricing $registration $accessibility $other $roles $contacts }}
       <ol>
         {{- if $prerequisites -}}
           <li><a href="#{{ anchorize (i18n "programs.prerequisites") }}">{{ i18n "programs.prerequisites" }}</a></li>
@@ -115,8 +115,8 @@
           <li><a href="#{{ anchorize (i18n "programs.contacts") }}">{{ i18n "programs.contacts" }}</a></li>
         {{- end -}}
       </ol>
-      {{ end -}}
     </li>
+    {{ end -}}
     {{- if $certification -}}
       <li>
         <a href="#{{ anchorize (i18n "programs.toc.certification") }}">{{ i18n "programs.toc.certification" }}</a>
