@@ -1,6 +1,6 @@
 @mixin in-page-with-sidebar
     @include media-breakpoint-up(desktop)
-        body:not(.full-width) *:where(:not(.contents-full-width)) &
+        body:where(:not(.full-width)) main &
             @content
 
 @mixin in-page-without-sidebar
@@ -17,6 +17,7 @@
         body:not(.full-width) &,
         body:not(.full-width) main &,
         main > .blocks &,
+        .contents-full-width &,
         body.full-width &
             @content
 

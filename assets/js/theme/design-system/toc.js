@@ -29,6 +29,8 @@ class TableOfContents {
         if (this.state.isOffcanvas) {
             this.element.setAttribute('aria-hidden', true);
         }
+
+        console.log(this.sections)
     }
 
     isOffcanvas () {
@@ -158,6 +160,7 @@ class TableOfContents {
 }
 
 const toc = document.querySelector('.toc-container');
+console.log(toc)
 if (toc) {
     new TableOfContents(toc);
 }

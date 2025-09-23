@@ -1,23 +1,16 @@
 {{ define "main" }}
-  {{- $title := or .Params.header_text .Title -}}
-  {{- partial "header/hero.html"
-        (dict
-          "title" $title
-          "image" .Params.image
-          "context" .
-        ) -}}
-
+  {{ partial "pages/single/hero.html" . }}
+  {{ partial "hooks/after-page-hero.html" . }}
   <div class="document-content">
-    {{ partial "toc/container.html"
-      (dict
-          "toc" "sitemap/toc.html"
-          "context" .
-      ) }}
+    {{ partial "toc/container.html" (dict
+      "toc" "sitemap/toc.html"
+      "context" .
+    ) }}
 
     {{ partial "sitemap/summary.html" (dict
       "context" .
       "block_wrapped" true
-      ) }}
+    ) }}
 
     {{ partial "contents/list.html" (dict
       "context" .
@@ -27,7 +20,7 @@
     <div class="block block-sitemap" id="pages">
       <div class="container">
         <div class="block-content">
-          <h2>{{ i18n "sitemap.pages" }}</h2>
+          <h2 class="heading" id="pages">{{ i18n "sitemap.pages" }}</h2>
           <ul>
             {{ range (where .Site.Pages "Type" "pages") }}
               {{ if eq .Parent.Path "/pages" }}
@@ -52,7 +45,7 @@
         <div class="block block-sitemap" id="{{ .Type }}">
           <div class="container">
             <div class="block-content">
-              <h2>
+              <h2 class="heading" id="#{{ .Type }}">
                 <a href="{{ $permalink }}">{{ safeHTML .Title }}</a>
               </h2>
               {{ $ignore_children := partial "GetSiteParamWithDefault" (dict
