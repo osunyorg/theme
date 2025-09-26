@@ -40,36 +40,43 @@
     </div>
 
     {{ range .Site.Sections }}
+      
       {{ if and (ne .Type "sitemap") (ne .Type "pages") }}
-        {{ $permalink := .Permalink }}
-        <div class="block block-sitemap" id="{{ .Type }}">
-          <div class="container">
-            <div class="block-content">
-              <h2 class="heading" id="#{{ .Type }}">
-                {{ if .Permalink }}
-                  <a href="{{ $permalink }}">{{ safeHTML .Title }}</a>
-                {{ else }}
-                  {{ safeHTML .Title }}
-                {{ end }}
-              </h2>
-              {{ $ignore_children := partial "GetSiteParamWithDefault" (dict
-                  "param" (printf "%s.sitemap.ignore_children" .Type)
-                  "default" "default.sitemap.ignore_children"
-                ) }}
-              {{ if not $ignore_children }}
-                <ul>
-                  {{ range where .Site.Pages "Section" .Type }}
-                    {{ if not .Params.ignore.in_sitemap }}
-                      {{ if ne $permalink .Permalink }}
-                        <li><a href="{{ .Permalink }}">{{ safeHTML .Title }}</a></li>
+        {{ $ignore_section := partial "GetSiteParamWithDefault" (dict
+            "param" (printf "%s.sitemap.ignore" .Type)
+            "default" "default.sitemap.ignore"
+          ) }}
+        {{ if not $ignore_section }}
+          {{ $permalink := .Permalink }}
+          <div class="block block-sitemap" id="{{ .Type }}">
+            <div class="container">
+              <div class="block-content">
+                <h2 class="heading" id="#{{ .Type }}">
+                  {{ if .Permalink }}
+                    <a href="{{ $permalink }}">{{ safeHTML .Title }}</a>
+                  {{ else }}
+                    {{ safeHTML .Title }}
+                  {{ end }}
+                </h2>
+                {{ $ignore_children := partial "GetSiteParamWithDefault" (dict
+                    "param" (printf "%s.sitemap.ignore_children" .Type)
+                    "default" "default.sitemap.ignore_children"
+                  ) }}
+                {{ if not $ignore_children }}
+                  <ul>
+                    {{ range where .Site.Pages "Section" .Type }}
+                      {{ if not .Params.ignore.in_sitemap }}
+                        {{ if ne $permalink .Permalink }}
+                          <li><a href="{{ .Permalink }}">{{ safeHTML .Title }}</a></li>
+                        {{ end }}
                       {{ end }}
                     {{ end }}
-                  {{ end }}
-                </ul>
-              {{ end }}
+                  </ul>
+                {{ end }}
+              </div>
             </div>
           </div>
-        </div>
+        {{ end }}
       {{ end }}
     {{ end }}
 
