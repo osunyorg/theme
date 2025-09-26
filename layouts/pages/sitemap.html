@@ -41,9 +41,9 @@
 
     {{ range .Site.Sections }}
       {{ $ignore_section := partial "GetSiteParamWithDefault" (dict
-          "param" (printf "%s.sitemap.ignore" .Type)
-          "default" "default.sitemap.ignore"
-        ) }}
+        "param" (printf "%s.sitemap.ignore" .Type)
+        "default" "default.sitemap.ignore"
+      ) }}
       {{ if and (ne .Type "sitemap") (ne .Type "pages") (not $ignore_section) }}
         {{ $permalink := .Permalink }}
         <div class="block block-sitemap" id="{{ .Type }}">
