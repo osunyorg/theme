@@ -4,12 +4,11 @@
     ul
         @include list-reset
         @include grid(2, md)
-        @include in-page-with-sidebar
-            @include grid(2)
-        &.even-items
-            @include grid(4, desktop)
         &.odd-items
             @include grid(3, desktop)
+        @include in-page-without-sidebar
+            &.even-items
+                @include grid(4, desktop)
     .top + ul
         margin-top: $spacing-4
         align-items: baseline
