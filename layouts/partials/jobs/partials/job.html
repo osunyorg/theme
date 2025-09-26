@@ -23,6 +23,13 @@
           "itemprop" "title"
         )}}
 
+      {{ if $options.categories }}
+        {{ partial "commons/categories.html" ( dict
+          "context" .
+          "kind" "job"
+        )}}
+      {{- end -}}
+
       {{ if and $options.summary .Params.summary }}
         <div class="job-description" itemprop="abstract">
           {{ partial "jobs/partials/job/summary.html" . }}
@@ -32,13 +39,6 @@
       {{ if $options.dates }}
         {{ partial "jobs/partials/job/dates.html" . }}
       {{ end }}
-
-      {{ if $options.categories }}
-        {{ partial "commons/categories.html" ( dict
-          "context" .
-          "kind" "job"
-        )}}
-      {{- end -}}
 
       {{ if $with_more }}
         {{ partial "commons/item/more.html" . }}
