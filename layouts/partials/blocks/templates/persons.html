@@ -31,14 +31,7 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-
-        {{ if eq .layout "list" }}
-          {{ partial "persons/partials/layouts/list/list.html" (dict
-              "options" $options
-              "block" $block
-            )}}
-        {{ else }}
-          <ul class="persons">
+          <ul class="persons persons-{{ $layout }} {{- if $options.contact }} with-contacts {{- end }}">
             {{- range .persons -}}
               {{ $person := site.GetPage .path }}
               {{ partial "persons/partials/person.html" (dict
@@ -51,7 +44,6 @@
                 )}}
             {{- end -}}
           </ul>
-        {{ end }}
       </div>
     </div>
   </div>

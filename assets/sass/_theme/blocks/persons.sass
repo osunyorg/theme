@@ -118,6 +118,7 @@
                 padding-bottom: $spacing-3
                 padding-top: $spacing-3
                 .person-name
+                    @include body-text
                     a
                         @extend %underline-on-hover
                 .person-role
@@ -126,39 +127,60 @@
                 + li
                     border-top: var(--border-width) solid var(--color-border)
             @include media-breakpoint-up(desktop)
+                article
+                    align-items: baseline
+                    flex-direction: row
                 .contacts-details
                     margin-top: 0
                     a, address
-                        width: columns(4)
+                        width: columns(3)
                         text-align: left
                     li
                         align-items: baseline
                         display: flex
                     li > span
                         width: offset(1)
-                > li
+            @include in-page-without-sidebar
+                .description
                     align-items: baseline
                     display: flex
                     gap: var(--grid-gutter)
-                    > div:first-child
-                        align-items: baseline
-                        display: flex
-                        width: columns(8)
-                        gap: var(--grid-gutter)
-                        > *
+                    width: offset(11)
+                    .person-name
+                        flex: 1
+                    .person-role
+                        width: columns(3)
+                    .contacts-details
+                        margin-top: 0
+                        width: columns(5)
+                        a, address
                             width: columns(4)
-            @include in-page-without-sidebar
-                > li
-                    > div:first-child
-                        width: columns(7)
-                .contacts-details
-                    width: columns(5)
             @include in-page-with-sidebar
+                .description
+                    @include grid(2)
+                    row-gap: space()
+                    width: offset(7)
+                    .person-name
+                        grid-row: 1
+                        width: offset(3)
+                        + *
+                            width: columns(4)
                 &.with-contacts
-                    > li
-                        > div:first-child
-                            display: block
-                            width: columns(3)
-                        .contacts-details
-                            width: columns(5)
-
+                    .person-role
+                        order: 3
+                        grid-row: 2
+                        width: offset(3)
+                    .contacts-details
+                        grid-row: 1 / span 2
+        @include in-page-with-or-without-sidebar
+            &:where(:not(.without-photo))
+                .persons-list
+                    article
+                        gap: unset
+                    .description
+                        align-items: baseline
+                        flex: unset
+                        margin-left: auto
+                    .avatar
+                        width: space(10)
+                        min-width: space(10)
