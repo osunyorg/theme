@@ -1,8 +1,6 @@
 .block-links
     ul
         @include list-reset
-        @include grid(2, md)
-        align-items: flex-start
         li
             position: relative
         .link-content
@@ -27,18 +25,56 @@
                     img
                         max-width: $block-links-icon-max-width
     &--grid
+        ul
+            @include grid(2, md)
         li
             display: flex
             flex-direction: column
             gap: $spacing-2
-        .link-content
+            .link-content
+                a
+                    @include h3
+                p
+                    margin-top: space()
+            .media
+                order: -1
+    &--list
+        li
+            padding-bottom: $spacing-2
+            padding-top: $spacing-2
+            + li
+                border-top: 1px solid var(--color-border)
             a
                 @include h3
-            p
-                margin-top: space()
-        .media
-            order: -1
+            @include media-breakpoint-up(md)
+                display: flex
+                gap: var(--grid-gutter)
+                .link-content
+                    flex: 1
+                    &:only-child
+                        @include grid(2)
+                        align-items: baseline
+                .media
+                    width: columns(2)
+                    picture.is-png,
+                    picture.is-svg
+                        img
+                            margin-left: auto
+            @include in-page-without-sidebar
+                .link-content
+                    align-items: baseline
+                    display: flex
+                    gap: var(--grid-gutter)
+                    margin-bottom: $spacing-2
+                    margin-top: $spacing-2
+                    a
+                        width: columns(4)
+                    p
+                        flex: 1
     &--cards
+        ul
+            @include grid(2, md)
+            align-items: flex-start
         li
             background-color: $block-links-card-background
             color: $block-links-card-color
@@ -51,6 +87,7 @@
                 line-height: 100%
                 padding: space(4) space(4) space(8)
                 min-height: pxToRem(130)
+            .media
                 picture
                     // display images as icons
                     &.is-png,
@@ -80,8 +117,10 @@
             .description
                 flex: 1
                 margin-top: 0
-        ul
-            @include grid(3, md)
+        &--grid,
+        &--cards
+            ul
+                @include grid(3, md)
     @include media-breakpoint-down(md)
         ul
             li + li
