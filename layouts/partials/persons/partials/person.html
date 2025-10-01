@@ -34,7 +34,7 @@
           "with_labels" site.Params.persons.contact_details.with_labels
         ) }}
     {{ end }}
-    {{ if eq $layout "large" }}
+    {{ if and $options.link (eq $layout "large") }}
       <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
     {{ end }}
     {{ if $options.cohorts }}
