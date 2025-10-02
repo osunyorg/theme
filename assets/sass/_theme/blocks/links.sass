@@ -54,10 +54,8 @@
                         align-items: baseline
                 .media
                     width: columns(2)
-                    picture.is-png,
-                    picture.is-svg
-                        img
-                            margin-left: auto
+                    &--icon img
+                        margin-left: auto
             @include in-page-without-sidebar
                 .link-content
                     align-items: baseline
@@ -86,12 +84,8 @@
                 padding: space(4) space(4) space(8)
                 min-height: pxToRem(130)
             .media
-                picture
-                    // display images as icons
-                    &.is-png,
-                    &.is-svg
-                        img
-                            margin: space(4) space(4) 0
+                &--icon img
+                    margin: space(4) space(4) 0
             a::after
                 bottom: space(3)
                 position: absolute
