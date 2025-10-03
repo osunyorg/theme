@@ -1,4 +1,4 @@
-{{ $job := .job }}
+{{ $job := .item }}
 {{ $layout := .layout | default "list" }}
 {{ $heading_level := .heading_level }}
 {{ $with_more := .with_more | default site.Params.jobs.index.options.with_more }}
@@ -25,12 +25,12 @@
 
       {{ if and $options.summary .Params.summary }}
         <div class="job-description" itemprop="abstract">
-          {{ partial "jobs/partials/job/summary.html" . }}
+          {{ partial "jobs/fragments/list/item/summary.html" . }}
         </div>
       {{ end }}
 
       {{ if $options.dates }}
-        {{ partial "jobs/partials/job/dates.html" . }}
+        {{ partial "jobs/fragments/list/item/dates.html" . }}
       {{ end }}
 
       {{ if $options.categories }}
@@ -41,12 +41,12 @@
       {{- end -}}
 
       {{ if $with_more }}
-        {{ partial "commons/item/more.html" . }}
+        {{ partial "commons/list/item/more.html" . }}
       {{- end -}}
     </div>
 
     {{ if $options.image }}
-      {{ partial "jobs/partials/job/media.html" (dict 
+      {{ partial "jobs/fragments/list/item/media.html" (dict 
           "image" $job.Params.image
           "layout" $layout
         )}}

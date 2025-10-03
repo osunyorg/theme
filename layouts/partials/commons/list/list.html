@@ -1,0 +1,19 @@
+{{ $type := .type }}
+{{ $layout := .layout }}
+{{ $items := .items }}
+{{ $heading_level := .heading_level }}
+{{ $options := .options }}
+{{ $item_partial := (printf "%s/fragments/list/item.html" $type )}}
+
+<ul class="{{ $type }} {{ $type }}--{{- $layout }}">
+  {{ range $items }}
+    <li>
+      {{ partial $item_partial (dict
+        "item" .
+        "heading_level" $heading_level
+        "layout" $layout
+        "options" $options
+      )}}
+    </li>
+  {{ end }}
+</ul>

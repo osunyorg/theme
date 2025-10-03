@@ -7,15 +7,23 @@
 
   {{ if (partial "IsFirstPage" .) }}
     {{ partial "contents/list.html" (dict
-      "context" .
       "contents" .Params.contents
+      "context" .
     ) }}
   {{ end }}
 
   {{ partial "taxonomies/section-list-container.html" . }}
 
   <div class="container">
-    {{ partial "jobs/partials/jobs.html" . }}
+    {{ partial "jobs/fragments/list.html" (dict
+      "_context" .
+      "type" "jobs"
+      "items" .Paginator.Pages
+      "layout" site.Params.jobs.index.layout
+      "options" site.Params.jobs.index.options
+      "heading_level" 2
+    ) }}
+    
     {{ partial "commons/pagination.html" . }}
   </div>
 </div>

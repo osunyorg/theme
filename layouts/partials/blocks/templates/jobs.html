@@ -8,21 +8,17 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         {{ if .jobs }}
-          <ul class="jobs jobs--{{- $layout -}}">
-            {{ range .jobs }}
-              {{ $job := site.GetPage .path }}
-              {{ with $job }}
-                <li>
-                  {{ partial "jobs/partials/job.html" (dict
-                    "job" .
-                    "layout" $layout
-                    "options" $options
-                    "heading_level" $block.ranks.children
-                  ) }}
-                </li>
-              {{ end }}
-            {{ end }}
-          </ul>
+
+          {{ $jobs := partial "GetObjectsFromPathSlice" .jobs }}
+
+          {{ partial "jobs/fragments/list.html" (dict
+            "_context" .
+            "type" "jobs"
+            "items" $jobs
+            "layout" $layout
+            "options" $options
+            "heading_level" 2
+          ) }}
         {{ end }}
       </div>
     </div>

@@ -2,7 +2,7 @@
 {{ $layout := .layout }}
 
 {{- if and $prefer_images .context.Params.image -}}
-  {{ partial "commons/item/media.html" (dict
+  {{ partial "commons/list/item/media.html" (dict
       "image" .context.Params.image
       "class" "media--image"
       "type" "organizations"

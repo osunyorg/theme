@@ -13,7 +13,14 @@
   {{ end }}
 
   <div class="container">
-    {{ partial "schools/partials/schools.html" . }}
+    {{ partial "schools/fragments/list.html" (dict
+      "_context" .
+      "type" "schools"
+      "items" .Paginator.Pages
+      "layout" site.Params.schools.index.layout
+      "options" site.Params.schools.index.options
+      "heading_level" 2
+    ) }}
     {{ partial "commons/pagination.html" . }}
   </div>
 </div>
