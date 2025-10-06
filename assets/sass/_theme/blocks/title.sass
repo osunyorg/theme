@@ -9,6 +9,8 @@
     @include in-page-without-sidebar
         h2
             max-width: columns(8)
+        &::after
+            width: 100%
     &--collapsed
         align-items: end
         cursor: pointer
@@ -33,7 +35,6 @@
                 display: block
                 margin-top: $spacing-2
                 order: 3
-                width: 100%
                 @include media-breakpoint-up(md)
                     margin-top: $spacing-3
             + .collapse
