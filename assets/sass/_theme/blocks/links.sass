@@ -24,6 +24,7 @@
                     max-width: $block-links-icon-max-width
     &--grid
         ul
+            @include grid(1)
             @include grid(2, md)
         li
             display: flex
@@ -32,24 +33,35 @@
             .link-content
                 a
                     @include h3
+                    @include set-inner-icon(links-line)
                 p
                     margin-top: space()
             .media
                 order: -1
             @include media-breakpoint-down(md)
                 gap: space(4)
-                + li
-                    margin-top: $spacing-4
     &--list
         li
             display: flex
+            gap: var(--grid-gutter)
             padding-top: $spacing-2
+            padding-bottom: $spacing-2
             + li
                 border-top: 1px solid var(--color-border)
             a
                 @include h3
+                &[target="_blank"]
+                    @include set-inner-icon(links-line, $pseudo-element: after, $target: "span[itemprop='name']")
+            @include media-breakpoint-down(md)
+                flex-direction: column
+                gap: $spacing-2
+                padding-bottom: $spacing-3
+                padding-top: $spacing-3
+                .media
+                    order: -1
+                    width: columns(6)
             @include media-breakpoint-up(md)
-                gap: var(--grid-gutter)
+                align-items: center
                 .link-content
                     flex: 1
                     &:only-child
@@ -59,14 +71,6 @@
                     width: columns(2)
                     &--icon img
                         margin-left: auto
-            @include media-breakpoint-down(md)
-                flex-direction: column
-                gap: space(4)
-                padding-bottom: $spacing-3
-                padding-top: $spacing-3
-                .media
-                    order: -1
-                    width: columns(6)
             @include in-page-without-sidebar
                 padding-bottom: $spacing-2
                 .link-content
@@ -81,6 +85,7 @@
                         flex: 1
     &--cards
         ul
+            @include grid(1)
             @include grid(2, md)
             align-items: flex-start
         li
@@ -112,10 +117,7 @@
                     filter: $block-links-png-hover-filter
                 .is-svg
                     filter: $block-links-svg-hover-filter
-        @include media-breakpoint-down(md)
-            ul
-                li + li
-                    margin-top: $spacing-3
+
     @include in-page-without-sidebar
         .top
             display: flex

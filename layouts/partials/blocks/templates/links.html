@@ -27,11 +27,10 @@
               </div>
               {{- if .image -}}
                 <div class="media {{- if $options.icons }} media--icon {{- end }}">
-                  {{- partial "commons/image.html"
-                    (dict
-                      "image"    .image
-                      "alt"      .alt
-                      "sizes"    site.Params.image_sizes.blocks.links
+                  {{- partial "commons/image.html" (dict
+                    "image"    .image
+                    "alt"      .alt
+                    "sizes"    site.Params.image_sizes.blocks.links
                   ) -}}
                 </div>
               {{- end -}}
