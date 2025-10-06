@@ -22,3 +22,10 @@
         top: 0
         z-index: $zindex-stretched-link
 
+
+@mixin set-inner-icon($icon, $pseudo-element: after, $target: span)
+    &::#{$pseudo-element}
+        display: none
+    #{$target}
+        @include icon($icon, after, true)
+            vertical-align: baseline
