@@ -240,6 +240,19 @@
     color: black;
   }
 
+  .block:has(.block-debug){
+    position: relative;
+  }
+  .block .block-debug {
+    font-family: sans-serif;
+    font-size: 14px;
+    background: black;
+    color: white;
+    padding: 3px 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 </style>
 
 <script>
@@ -260,6 +273,9 @@
     }
     if (e.ctrlKey && e.key === 'd') {
       toggleDebug();
+    }
+    if (e.ctrlKey && e.key === 'b') {
+      showBlockInfo();
     }
   });
 
@@ -356,6 +372,17 @@
     if (productionUrl) {
       window.open(`${productionUrl}${window.location.pathname}`);
     }
+  }
+
+  function showBlockInfo() {
+    document.querySelectorAll('.block').forEach(block => {
+      const info = document.createElement('div'),
+        template = block.getAttribute('class');
+      info.classList.add('block-debug');
+
+      block.append(info);
+      info.innerHTML = `<p>${String(block.classList).replaceAll('block-', '')}</p>`;
+    });
   }
 
 </script>
