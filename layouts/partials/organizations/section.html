@@ -20,7 +20,10 @@
         "context" .
       ) }}
     {{ partial "taxonomies/section-list-container.html" . }}
-    {{ partial "contents/list.html" . }}
+    {{ partial "contents/list.html" (dict
+      "context" .
+      "contents" .Params.contents
+    ) }}
   {{ end }}
 
   {{- if not $is_organizations_block_present -}}

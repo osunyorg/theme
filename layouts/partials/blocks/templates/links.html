@@ -1,7 +1,8 @@
 {{- $block := .block -}}
-{{- $block_class := partial "GetBlockClass" .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}  
 
 {{- with .block.data -}}
+  {{ $options := .options }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
@@ -25,12 +26,11 @@
                 {{ end }}
               </div>
               {{- if .image -}}
-                <div class="media">
-                  {{- partial "commons/image.html"
-                    (dict
-                      "image"    .image
-                      "alt"      .alt
-                      "sizes"    site.Params.image_sizes.blocks.links
+                <div class="media {{- if $options.icons }} media--icon {{- end }}">
+                  {{- partial "commons/image.html" (dict
+                    "image"    .image
+                    "alt"      .alt
+                    "sizes"    site.Params.image_sizes.blocks.links
                   ) -}}
                 </div>
               {{- end -}}

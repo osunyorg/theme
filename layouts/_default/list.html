@@ -16,7 +16,10 @@
       ) }}
 
     {{ if .Params.contents }}
-      {{ partial "contents/list.html" . }}
+      {{ partial "contents/list.html" (dict
+        "context" .
+        "contents" .Params.contents
+      ) }}
     {{ else }}
       {{ partial "pages/partials/children.html" . }}
     {{ end }}

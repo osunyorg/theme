@@ -1,0 +1,25 @@
+{{ $is_interactive_map_present := false }}
+{{ $page_contents := .Params.contents }}
+{{ $website_content := index site.Data.website site.Language.Lang "contents" }}
+
+{{ range slice $page_contents $website_content }}
+  {{ range . }}
+    {{ if or (eq .template "locations") (eq .template "organizations") }}
+      {{ with .data }}
+        {{ if eq .layout "map" }}
+          {{ $is_interactive_map_present = true }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if and (eq .Kind "taxonomy") (eq .Section "locations") }}
+  {{ $is_interactive_map_present = true }}
+{{ end }}
+
+{{ if .Params.contact_details.postal_address.geolocation }} 
+  {{ $is_interactive_map_present = true }}
+{{ end }}
+
+{{ return $is_interactive_map_present }}
