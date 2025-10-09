@@ -110,23 +110,24 @@ ol.programs--light
     @include grid(1, false, $spacing-5)
     @include grid(2, xl)
     .program
+        @include small-arrow-right-hover('.more')
         flex-direction: column
         gap: 0
         .program-content
+            display: flex
             flex-direction: column
-            &:hover .more:after
-                transform: translateX($spacing-1)
             .program-title
                 margin-bottom: $spacing-1
-                order: -1
             .program-diploma
-                order: 0
-            [itemprop='abstract'],
-            .more
+                margin: 0
+                order: 1
+            [itemprop='abstract']
+                margin-top: $spacing-2
                 order: 2
             .more
-                @include icon(arrow-right-line, after, true)
-                @include hover-translate-icon
+                margin-top: $spacing-2
+                order: 3
+
         .media
             margin-bottom: $spacing-3
     @include in-page-without-sidebar
