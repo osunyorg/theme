@@ -68,8 +68,6 @@ osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
         this.closeSiblings();
     }
 
-    console.log(opened)
-
     this.setButtonAriaExpanded();
 
     if (!this.state.opened && this.state.openedByButton && !fromOutside) {
