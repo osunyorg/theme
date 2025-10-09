@@ -3,6 +3,11 @@
 {{ $siteLang := "" }}
 {{ $url := "" }}
 {{ $position := .position }}
+{{ $dropdown_class := "dropdown-menu dropdown-languages" }}
+
+{{ if ne $position "primary" }}
+  {{ $dropdown_class = printf "%s extendable" $dropdown_class }}
+{{ end }}
 
 {{ if gt (len site.Languages) 1 }}
   <li class="{{ $position }}-i18n has-children">
@@ -16,7 +21,7 @@
         tabindex="0">
           {{- $language -}}
       </span>
-      <div class="dropdown-menu dropdown-languages extendable" id="{{ $position }}-i18n-list">
+      <div class="{{ $dropdown_class }}" id="{{ $position }}-i18n-list">
         <ul>
           {{ range site.Languages }}
             {{ $siteLang := . }}
