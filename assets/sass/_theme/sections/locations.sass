@@ -1,4 +1,5 @@
 .locations
+    @include list-reset
     .location
         @include small-arrow-right-hover('.more')
         display: flex
@@ -19,22 +20,17 @@
             img
                 aspect-ratio: 3/2
                 object-fit: cover
-        @include media-breakpoint-down(desktop)
-            &-description
-                margin-top: $spacing-1
-            + .location
-                margin-top: $spacing-4
+    @include media-breakpoint-down(desktop)
+        .location-description
+            margin-top: $spacing-1
+        > li + li
+            margin-top: $spacing-4
 
     &--list
         @include media-breakpoint-up(desktop)
             .location
                 flex-direction: row-reverse
                 gap: var(--grid-gutter)
-                &:where(:not(:last-child))
-                    border-bottom: var(--border-width) solid var(--color-border)
-                    padding-bottom: $spacing-3
-                + .location
-                    margin-top: $spacing-3
                 &-content
                     flex: 1
                 @include in-page-with-sidebar
@@ -63,6 +59,12 @@
                         justify-content: space-between
                     .media
                         width: columns(4)
+            > li
+                &:where(:not(:last-child))
+                    border-bottom: var(--border-width) solid var(--color-border)
+                    padding-bottom: $spacing-3 
+                + li
+                    margin-top: $spacing-3
 
     &--grid
         @include in-page-with-sidebar
@@ -108,6 +110,7 @@
                 @extend .sr-only
 .locations-map
     .map
+        @include list-reset
         height: 300px
         z-index: 1
         @include media-breakpoint-up(desktop)

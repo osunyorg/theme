@@ -1,7 +1,4 @@
 .organization
-    display: flex
-    flex-direction: column
-    position: relative
     &-title
         a
             @include stretched-link(before)
@@ -11,7 +8,6 @@
         .organization-title
             @include meta
     .media
-        @include handle-svg-fit
         background: $organization-background-color
         margin-bottom: $spacing-2
         order: -1
@@ -40,6 +36,11 @@
 
 
 .organizations
+    @include list-reset
+    article
+        display: flex
+        flex-direction: column
+        position: relative
     &.grid
         max-width: 100%
         @include grid(2)
@@ -59,10 +60,11 @@
                 @include grid(2, lg)
                 @include grid(3, xl)
             .organization
-                align-items: flex-start
-                flex-direction: row
-                gap: var(--grid-gutter)
-                width: 100%
+                article
+                    align-items: flex-start
+                    flex-direction: row
+                    gap: var(--grid-gutter)
+                    width: 100%
                 .organization-content
                     flex: 1
                     .organization-title
