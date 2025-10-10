@@ -1,8 +1,13 @@
 .alerts
     padding-top: var(--header-height)
-    ~ main
-        > .hero
-            padding-top: 0
+    @include media-breakpoint-down(desktop)
+        ~ main
+            > .hero
+                padding-top: 1px // use 1px to keep space with inner margin
+    @include media-breakpoint-up(desktop)
+        ~ main
+            > .hero
+                padding-top: 0
 
 .alert
     padding-top: var(--grid-gutter)

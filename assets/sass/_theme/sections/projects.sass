@@ -1,5 +1,6 @@
 .project
     @include article(auto)
+    @include small-arrow-right-hover('.more')
     .project-content
         display: flex
         gap: $spacing-3
@@ -115,14 +116,6 @@
                 margin-top: $spacing-2
             * + .more
                 margin-top: $spacing-2
-            .more
-                @include icon(arrow-right-line, after)
-                    display: inline-block
-                    margin-left: $spacing-1
-                    transition: transform $arrow-duration $arrow-ease-transition
-            &:hover 
-                .more::after
-                    transform: translateX(5px)
         > li + li
             margin-top: $spacing-4
         @include media-breakpoint-up(desktop)

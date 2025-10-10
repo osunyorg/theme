@@ -21,16 +21,10 @@
             margin-top: var(--grid-gutter)
         .exhibition
             @include layout-item
+            @include small-arrow-right-hover('.more')
             &-subtitle
                 @include h3
                 color: var(--color-text-alt)
-            .more
-                @include icon(arrow-right-line, after)
-                    display: inline-block
-                    margin-left: space()
-                    transition: transform $arrow-duration $arrow-ease-transition
-            &:hover .more::after
-                transform: translateX(pxToRem(5))
         @include media-breakpoint-down(desktop)
             > li + li
                 margin-top: $spacing-3

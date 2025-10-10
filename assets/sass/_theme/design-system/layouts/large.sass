@@ -5,15 +5,9 @@
     article
         @include article
         @include layout-item
+        @include small-arrow-right-hover('.more')
         [class$="-title"]
             @include h2
-        .more
-            @include icon(arrow-right-line, after, true)
-                display: inline-block
-                transition: transform $arrow-duration $arrow-ease-transition
-        &:hover
-            .more::after
-                transform: translateX(pxToRem(5))
         @include media-breakpoint-down(desktop)
             .media
                 margin-left: var(--grid-gutter-negative)

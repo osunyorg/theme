@@ -56,6 +56,7 @@
                         text-align: center
     &--large
         .person
+            @include small-arrow-right-hover('.more')
             display: flex
             flex-direction: column
             + .person
@@ -69,14 +70,7 @@
                 + div
                     margin-top: $spacing-2
             .more
-                position: relative
                 margin-top: space(8)
-                @include icon(arrow-right-line, after, true)
-                    margin-left: space()
-                    transition: $arrow-duration $arrow-ease-transition
-            &:hover
-                .more::after
-                    margin-left: space(2)
             @include media-breakpoint-down(md)
                 .more
                     text-align: center

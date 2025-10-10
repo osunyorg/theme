@@ -1,6 +1,7 @@
 .locations
     @include list-reset
     .location
+        @include small-arrow-right-hover('.more')
         display: flex
         flex-direction: column-reverse
         gap: calc(var(--grid-gutter) / 2)
@@ -12,10 +13,7 @@
                 @include stretched-link(after)
                 text-decoration: none
         .more
-            @include hover-translate-icon(after)
             @include meta
-            @include icon(arrow-right-line, after)
-                margin-left: $spacing-2
             margin-top: $spacing-1
         .media
             width: 100%

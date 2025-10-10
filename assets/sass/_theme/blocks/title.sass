@@ -2,6 +2,8 @@
     margin-bottom: var(--heading-margin-bottom)
     &:not(:first-child)
         margin-top: var(--heading-margin-top)
+    &::after
+        width: 100%
     @include in-page-with-sidebar
         &::after
             width: columns(8)
@@ -9,8 +11,6 @@
     @include in-page-without-sidebar
         h2
             max-width: columns(8)
-        &::after
-            width: 100%
     &--collapsed
         align-items: end
         cursor: pointer
