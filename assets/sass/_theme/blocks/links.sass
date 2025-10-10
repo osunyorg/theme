@@ -1,67 +1,126 @@
 .block-links
     ul
         @include list-reset
-        @include grid(2, md)
-        align-items: flex-start
-    li
-        background-color: $block-links-card-background
-        color: $block-links-card-color
-        display: flex
-        flex-direction: column-reverse
-        justify-content: flex-end
-        position: relative
-        transition: background $background-duration ease
+        li
+            display: flex
+            position: relative
         .link-content
-            flex: 1
-            line-height: 100%
-            padding: space(4) space(4) space(8)
-            min-height: pxToRem(130)
-        a
-            @include stretched-link(before)
-            text-decoration: none
-            color: inherit
-            &::after
+            a
+                @include stretched-link(before)
+                text-decoration: none
+                color: inherit
+            p
+                @include small
+        .media
+            &:where(:not(.media--icon))
+                img
+                    display: block
+                    object-fit: cover
+                    width: 100%
+                    height: 100%
+                    aspect-ratio: 16/9
+            &--icon
+                img
+                    max-width: $block-links-icon-max-width
+    &--grid
+        ul
+            @include grid(1, false, $spacing-4)
+            @include grid(2, md)
+        li
+            flex-direction: column
+            gap: $spacing-2
+            .link-content
+                a
+                    @include h3
+                    @include set-inner-icon(links-line)
+                p
+                    margin-top: space()
+            .media
+                order: -1
+            @include media-breakpoint-down(md)
+                gap: space(4)
+    &--list
+        li
+            gap: var(--grid-gutter)
+            padding-top: $spacing-2
+            padding-bottom: $spacing-2
+            + li
+                border-top: 1px solid var(--color-border)
+            a
+                @include h3
+                &[target="_blank"]
+                    @include set-inner-icon(links-line, $pseudo-element: after, $target: "span[itemprop='name']")
+            @include media-breakpoint-down(md)
+                flex-direction: column
+                gap: $spacing-2
+                padding-bottom: $spacing-3
+                padding-top: $spacing-3
+                .media
+                    order: -1
+                    width: columns(6)
+            @include media-breakpoint-up(md)
+                align-items: center
+                .link-content
+                    flex: 1
+                    &:only-child
+                        @include grid(2)
+                        align-items: baseline
+                .media
+                    width: columns(2)
+                    &--icon img
+                        margin-left: auto
+            @include in-page-without-sidebar
+                padding-bottom: $spacing-2
+                .link-content
+                    align-items: baseline
+                    display: flex
+                    gap: var(--grid-gutter)
+                    margin-bottom: $spacing-2
+                    margin-top: $spacing-2
+                    a
+                        width: columns(4)
+                    p
+                        flex: 1
+    &--cards
+        ul
+            @include grid(1)
+            @include grid(2, md)
+            align-items: flex-start
+        li
+            background-color: $block-links-card-background
+            color: $block-links-card-color
+            flex-direction: column-reverse
+            justify-content: flex-end
+            transition: background $background-duration ease
+            .link-content
+                flex: 1
+                line-height: 100%
+                padding: space(4) space(4) space(8)
+                min-height: pxToRem(130)
+            .media
+                &--icon
+                    img
+                        margin: space(4) space(4) 0
+            a::after
                 bottom: space(3)
                 position: absolute
                 right: space(3)
-        p
-            @include small
-            margin-top: space(3)
-        .media
-            picture
-                &:not(.is-svg, .is-png) 
-                    img
-                        display: block
-                        object-fit: cover
-                        width: 100%
-                        height: 100%
-                        aspect-ratio: 16/9
-                // display images as icons
-                &.is-png,
-                &.is-svg
-                    img
-                        margin: space(4) space(4) 0
-                        max-width: $block-links-icon-max-width
-        &:hover
-            background-color: $block-links-card-hover-background
-            &, a
-                color: $block-links-card-hover-color
-            .is-png
-                filter: $block-links-png-hover-filter
-            .is-svg
-                filter: $block-links-svg-hover-filter
+            p
+                margin-top: space(3)
+            &:hover
+                background-color: $block-links-card-hover-background
+                &, a
+                    color: $block-links-card-hover-color
+                .media--icon
+                    .is-svg
+                        filter: $block-links-svg-hover-filter
+                    .is-png
+                        filter: $block-links-png-hover-filter
+
     @include in-page-without-sidebar
         .top
-            display: flex
-            gap: var(--grid-gutter)
-            .block-title
-                width: columns(4)
-            .description
-                flex: 1
-                margin-top: 0
-        ul
-            @include grid(3, md)
-    @include media-breakpoint-down(md)
-        ul
-            li + li
-                margin-top: $spacing-3
+            @include top-flex
+        &--grid,
+        &--cards
+            ul
+                @include grid(3, md)
