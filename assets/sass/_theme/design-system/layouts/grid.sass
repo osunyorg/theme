@@ -3,12 +3,15 @@
     article
         @include article
         @include layout-item
-        > *:where([class$="-title"])
+        @include small-arrow-right-hover('.more')
+        *:where([class$="-title"])
             @include h2
-            a
-                @include icon(arrow-right-line, after, true)
-                    font-size: 0.8em
-                @include hover-translate-icon(after)
+        &:not(:has(.more))
+            [class$="-title"]
+                a
+                    @include icon(arrow-right-line, after, true)
+                        font-size: 0.8em
+                    @include hover-translate-icon(after)
     @include media-breakpoint-down(desktop)
         > li + li
             margin-top: $spacing-5
