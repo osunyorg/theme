@@ -50,3 +50,32 @@ jobs:
         with:
           url: ${{ secrets.OSUNY_STAGING_API_AUTOUPDATE_THEME_URL }}
           data: "{\"secret_key\":\"${{ secrets.OSUNY_API_AUTOUPDATE_THEME_KEY }}\"}"
+  update_template_theme:
+    runs-on: ubuntu-latest
+    needs: update_version_file
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+        with:
+          repository: osunyorg/template
+          submodules: 'recursive'
+          token: ${{ secrets.OSUNY_EXAMPLE_TOKEN }}
+
+      - name: Set Git user
+        run: |
+          git config user.name osuny-bot
+          git config user.email osuny@noesya.coop
+
+      - name: Checkout submodule
+        uses: actions/checkout@v5
+        with:
+          repository: osunyorg/theme
+          token: ${{ secrets.OSUNY_EXAMPLE_TOKEN }}
+          path: themes/osuny
+          ref: ${{ github.head_ref || github.ref_name }}
+
+      - name: Pushing on template
+        run: |
+          git add .
+          git commit -m "Update theme version to ${{ github.event.release.name }}."
+          git push origin main
