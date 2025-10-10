@@ -7,8 +7,8 @@
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
     {{ with $page }}
-      <li>
-        <article class="card">
+      <li class="card">
+        <article class="page">
           {{ $heading_tag.open }}
             <a href="{{- .Permalink -}}">
               {{- partial "PrepareHTML" .Title -}}

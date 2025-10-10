@@ -15,9 +15,9 @@
     {{ $page := site.GetPage $path }}
 
     {{ with $page }}
-      <li class="page">
+      <li>
         {{ if or $options.summary $options.image }}
-          <article>
+          <article class="page">
             <div class="page-content">
               {{ $heading_tag.open }}
                 <a href="{{- .Permalink -}}">

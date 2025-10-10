@@ -1,6 +1,8 @@
 .block-pages
     .top
         a
+            @include icon(arrow-right-line, after, true)
+            @include hover-translate-icon
             text-decoration: none
 
     @include media-breakpoint-up(desktop)
@@ -11,15 +13,12 @@
         .top
             .block-title
                 @include h5
-        .description
-            @include h2
+            .description
+                @include h2
 
     @include in-page-without-sidebar
         .top
             @include top-flex
-            a
-                @include icon(arrow-right-line, after, true)
-                @include hover-translate-icon
             .description
                 @include h2
 
@@ -86,6 +85,7 @@
                 .more
                     text-decoration-color: $block-pages-card-page-color-hover
     &--list
+        @include layout-list
         .list
             @include list-reset
             .page
@@ -192,27 +192,6 @@
     &--alternate
         .alternate
             @include layout-alternate
-            article 
-                position: relative
-                display: flex
-                flex-direction: column
-                .page-title a
-                    text-decoration: none
-                &:hover .more::after
-                    padding-left: pxToRem(10)
-                .media 
-                    margin-bottom: $spacing-2
-                    order: -1
-                    img
-                        aspect-ratio: unset
-        @include media-breakpoint-down(desktop)
-            .alternate
-                > li + li
-                    margin-top: $spacing-4
-        @include in-page-without-sidebar
-            .top
-                .description
-                    @include body-text
 
     &--large
         .page
