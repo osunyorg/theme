@@ -3,35 +3,37 @@
   "level" ( .heading_level | default 3 )
   "attributes" "class='page-title'"
 )}}
-<ul class="cards">
+<ul class="pages">
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
     {{ with $page }}
-      <li class="card">
+      <li>
         <article class="page">
-          {{ $heading_tag.open }}
-            <a href="{{- .Permalink -}}">
-              {{- partial "PrepareHTML" .Title -}}
-            </a>
-          {{ $heading_tag.close }}
-
-          {{- partial "pages/partials/page/hook-after-title.html" . -}}
-
-          {{ if and $options.categories .Params.taxonomies }}
-            {{ partial "commons/categories" ( dict
-              "context" .
-              "kind" "page"
-            )}}
-          {{ end }}
-
-          {{ if and $options.summary .Params.summary }}
-            {{ partial "GetRichSummary" ( dict 
-              "summary" .Params.summary
-              "kind" "pages"
-            )}}
-          {{ end }}
-
-          <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+          <div class="page-content">
+            {{ $heading_tag.open }}
+              <a href="{{- .Permalink -}}">
+                {{- partial "PrepareHTML" .Title -}}
+              </a>
+            {{ $heading_tag.close }}
+  
+            {{- partial "pages/partials/page/hook-after-title.html" . -}}
+  
+            {{ if and $options.categories .Params.taxonomies }}
+              {{ partial "commons/categories" ( dict
+                "context" .
+                "kind" "page"
+              )}}
+            {{ end }}
+  
+            {{ if and $options.summary .Params.summary }}
+              {{ partial "GetRichSummary" ( dict 
+                "summary" .Params.summary
+                "kind" "pages"
+              )}}
+            {{ end }}
+  
+            <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
+          </div>
 
           {{ if $options.image }}
             {{ partial "pages/partials/page/media.html" (dict 

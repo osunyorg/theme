@@ -32,58 +32,16 @@
         background-color: $block-pages-card-background
         padding-bottom: var(--grid-gutter)
         padding-top: var(--grid-gutter)
+        .pages
+            @include layout-cards($block-pages-card-page-background, $block-pages-card-page-background-hover, $block-pages-card-page-color, $block-pages-card-page-color-hover)
         *:not(.heading) + &
             margin-top: 0
         .blocks &:last-of-type
             margin-bottom: 0
-        .cards
-            @include grid(2, desktop)
-            @include in-page-without-sidebar
-                @include grid(3)
-        // TODO: move this //
+        // // TODO: move this //
         .block-gallery + &,
         .block-pages--cards + &
             margin-top: 0
-        // ----------------- //
-        .card
-            @include arrow-right-hover(".more")
-            padding: $spacing-3
-            background-color: $block-pages-card-page-background
-            transition: background $background-duration, color $color-duration
-            display: flex
-            flex: auto
-            flex-direction: column
-            min-height: 320px
-            &,
-            a
-                color: $block-pages-card-page-color
-            .media
-                margin-bottom: 0
-                margin-left: -$spacing-3
-                margin-right: -$spacing-3
-                margin-top: -$spacing-3
-                img
-                    min-width: 100%
-            .page-categories
-                a
-                    @include link(var(--color-accent))
-            .more
-                @include link($block-pages-card-page-color)
-                position: relative
-                margin-top: auto
-                padding-top: $spacing-3
-            a,
-            .more
-                transition: text-decoration-color $color-duration ease, color $color-duration ease
-            &:hover
-                background-color: $block-pages-card-page-background-hover
-                &, a, .more
-                    color: $block-pages-card-page-color-hover
-                .page-categories
-                    a
-                        @include link($block-pages-card-page-color-hover)
-                .more
-                    text-decoration-color: $block-pages-card-page-color-hover
     &--list
         @include layout-list
         .list

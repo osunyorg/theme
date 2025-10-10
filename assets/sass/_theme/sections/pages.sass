@@ -1,8 +1,8 @@
 .page
-    @include article
-    .page-title
-        a
-            @include stretched-link(before)
+    @include article($page-media-aspect-ratio)
+    // .page-title
+    //     a
+    //         @include stretched-link(before)
             // exclusion for blocks with "more" link
             // .block:not(.block-pages--large, .block-pages--alternate) &
             //     @include icon(arrow-right-line, after, true)
@@ -39,7 +39,6 @@
                 + p
                     margin-top: $spacing-2
             .media
-                @include handle-svg-fit
                 order: -1
                 margin-bottom: $spacing-3
                 &:empty
