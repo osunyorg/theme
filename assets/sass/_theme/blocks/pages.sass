@@ -42,17 +42,16 @@
         .block-gallery + &,
         .block-pages--cards + &
             margin-top: 0
+
     &--list
-        @include layout-list
         .list
-            @include list-reset
-            .page
-                > a
-                    @include icon(arrow-right-line, before, true)
-                        padding-right: $spacing-2
-                    @include hover-translate-icon(before, 5)
-                    @extend %underline-on-hover
-                article
+            @include layout-list
+            margin-top: var(--grid-gutter)
+            > li
+                border-bottom: none
+                padding: 0
+                margin-bottom: var(--grid-gutter)
+                .page
                     .page-title
                         @include h3
                         a
@@ -60,16 +59,13 @@
                             @include hover-translate-icon(after)
                             @extend %underline-on-hover
         @include media-breakpoint-down(desktop)
-            .top
-                margin-bottom: $spacing-2
             .list
-                margin-top: $spacing-3
-                .page + .page
-                    margin-top: $spacing-2
+                article
+                    gap: $spacing-1
+                    .media
+                        width: auto
         @include media-breakpoint-up(desktop)
             .list:not(.title-only)
-                .page + .page
-                    margin-top: var(--grid-gutter)
                 article
                     gap: var(--grid-gutter)
                     flex-direction: row
@@ -102,7 +98,7 @@
                     width: auto
                     p
                         @include h2
-            article
+            article.page
                 .media
                     width: columns(2)
                 .page-content

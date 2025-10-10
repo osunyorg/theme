@@ -1,12 +1,5 @@
 .page
-    @include article($page-media-aspect-ratio)
-    // .page-title
-    //     a
-    //         @include stretched-link(before)
-            // exclusion for blocks with "more" link
-            // .block:not(.block-pages--large, .block-pages--alternate) &
-            //     @include icon(arrow-right-line, after, true)
-            //     @include hover-translate-icon(after)
+    // @include article($page-media-aspect-ratio)
     .more
         @include icon(arrow-right-line, after, true)
         @include hover-translate-icon(after)
@@ -38,15 +31,6 @@
                     text-decoration: none
                 + p
                     margin-top: $spacing-2
-            .media
-                order: -1
-                margin-bottom: $spacing-3
-                &:empty
-                    display: none
-                img
-                    aspect-ratio: $page-media-aspect-ratio
-                    object-fit: cover
-                    width: 100%
             @include media-breakpoint-down(desktop)
                 margin-top: $spacing-3
     .grid, .cards
@@ -59,11 +43,11 @@
         .page-title
             @include h4
 
-// .pages
-    // &--grid
-    //     @extend .block-pages--grid
-    // &--list
-        // @extend .block-pages--list
+.pages
+    &--grid
+        @extend .block-pages--grid
+    &--list
+        @extend .block-pages--list
 
 .page__children
     margin-top: $spacing-5

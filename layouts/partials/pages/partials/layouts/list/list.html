@@ -43,12 +43,10 @@
             </div>
 
             {{ if $options.image }}
-              <div class="media">
-                {{ partial "pages/partials/page/media.html" (dict 
-                    "image" .Params.image
-                    "layout" "list"
-                  )}}
-              </div>
+              {{ partial "pages/partials/page/media.html" (dict 
+                  "image" .Params.image
+                  "layout" "list"
+                )}}
             {{ end }}
           </article>
         {{ else }}
