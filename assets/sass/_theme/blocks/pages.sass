@@ -44,7 +44,18 @@
             margin-top: 0
 
     &--list
-        .list
+        .page-title
+            a
+                @include icon(arrow-right-line, after, true)
+                @include hover-translate-icon(after)
+                @extend %underline-on-hover
+        .list.title-only
+            > a
+                @include icon(arrow-right-line, before, true)
+                    padding-right: $spacing-2
+                @include hover-translate-icon(before, 5)
+                @extend %underline-on-hover
+        .list:not(.title-only)
             @include layout-list
             margin-top: var(--grid-gutter)
             > li
@@ -54,20 +65,13 @@
                 .page
                     .page-title
                         @include h3
-                        a
-                            @include icon(arrow-right-line, after, true)
-                            @include hover-translate-icon(after)
-                            @extend %underline-on-hover
-        @include media-breakpoint-down(desktop)
-            .list
+            @include media-breakpoint-down(desktop)
                 article
                     gap: $spacing-1
                     .media
                         width: auto
-        @include media-breakpoint-up(desktop)
-            .list:not(.title-only)
+            @include media-breakpoint-up(desktop)
                 article
-                    gap: var(--grid-gutter)
                     flex-direction: row
                     .media
                         flex-shrink: 0
