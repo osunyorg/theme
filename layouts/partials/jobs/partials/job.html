@@ -24,14 +24,12 @@
         )}}
 
       {{ if and $options.summary .Params.summary }}
-        <div class="job-description" itemprop="abstract">
+        <div class="job-description" itemprop="description">
           {{ partial "jobs/partials/job/summary.html" . }}
         </div>
       {{ end }}
 
-      {{ if $options.dates }}
-        {{ partial "jobs/partials/job/dates.html" . }}
-      {{ end }}
+      {{ partial "jobs/partials/job/dates.html" . }}
 
       {{ if $options.categories }}
         {{ partial "commons/categories.html" ( dict
