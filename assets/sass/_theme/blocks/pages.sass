@@ -24,6 +24,8 @@
 
     &--grid
         .grid
+            .page
+                @include article
             .page-title a
                 @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon(after)
@@ -152,39 +154,46 @@
             @include layout-alternate
 
     &--large
+        @include layout-large
         .page
-            position: relative
-            + .page
-                margin-top: $spacing-5
-            &:hover .more:after
-                transform: translateX(#{pxToRem(10)})
             .media
                 img
                     aspect-ratio: 1
-        @include media-breakpoint-up(desktop)
-            .page
-                flex-direction: row
-                gap: var(--grid-gutter)
 
-        @include in-page-with-sidebar
-            .page
-                &-title
-                    @include h2
-                    margin-bottom: space(4)
-                &-content
-                    flex: 1
-                .media 
-                    flex: 1
-        @include in-page-without-sidebar
-            .top
-                .description
-                    @include body-text
-            .page
-                align-items: center
-                &-title
-                    @include lead
-                    margin-bottom: space(4)
-                &-content
-                    width: columns(5)
-                .media
-                    width: columns(6)
+        // .page
+        //     @include article
+        //     position: relative
+        //     + .page
+        //         margin-top: $spacing-5
+        //     &:hover .more:after
+        //         transform: translateX(#{pxToRem(10)})
+        //     .media
+        //         img
+        //             aspect-ratio: 1
+        // @include media-breakpoint-up(desktop)
+        //     .page
+        //         flex-direction: row
+        //         gap: var(--grid-gutter)
+
+        // @include in-page-with-sidebar
+        //     .page
+        //         &-title
+        //             @include h2
+        //             margin-bottom: space(4)
+        //         &-content
+        //             flex: 1
+        //         .media 
+        //             flex: 1
+        // @include in-page-without-sidebar
+        //     .top
+        //         .description
+        //             @include body-text
+        //     .page
+        //         align-items: center
+        //         &-title
+        //             @include lead
+        //             margin-bottom: space(4)
+        //         &-content
+        //             width: columns(5)
+        //         .media
+        //             width: columns(6)
