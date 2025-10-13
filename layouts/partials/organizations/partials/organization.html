@@ -10,7 +10,7 @@
 
 {{ with $organization }}
   {{ $title := partial "PrepareHTML" .Title }}
-  <li class="organization" itemscope itemtype="https://schema.org/Organization"
+  <article class="organization" itemscope itemtype="https://schema.org/Organization"
     {{ if $with_geolocation }}
       {{ with .Params.contact_details.postal_address.geolocation }}
         data-title="{{ $title }}" 
@@ -20,50 +20,47 @@
     {{ end }}
     {{ if and $options.filters .Params.organizations_categories }}
       data-filters="{{ (partial "GetCategoriesSlug" .) | encoding.Jsonify }}"
-    {{ end }}
-    >
-    <article>
-      <div class="organization-content">
-        {{ $heading_tag.open }}
-          {{- if $options.link -}}
-            <a href="{{ .Permalink }}" 
-              {{ if .Params.external }}
-                target="_blank" rel="noopener noreferrer"
-                title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}"
-              {{ else }}
-                title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}"
-              {{ end }}
-              >
-          {{- end -}}
-          {{ $title }}
-          {{- if $options.link -}}
-            </a>
-          {{- end -}}
-        {{ $heading_tag.close }}
-  
-        {{ if and $options.summary .Params.summary }}
-          <div class="organization-summary">
-            {{ safeHTML .Params.summary }}
-          </div>
-        {{ end }}
-  
-        {{ if and $options.address .Params.contact_details }}
-          {{ partial "commons/address.html" .Params.contact_details.postal_address }}
-        {{ end }}
-  
-        {{ if and $options.categories .Params.organizations_categories }}
-          {{ partial "commons/categories.html" (dict
-              "context" .
-              "kind" "organization"
-            )}}
-        {{ end }}
-      </div>
-      {{ if $options.logo }}
-        {{ partial "organizations/partials/organization/media.html" (dict
+    {{ end }}>
+    <div class="organization-content">
+      {{ $heading_tag.open }}
+        {{- if $options.link -}}
+          <a href="{{ .Permalink }}" 
+            {{ if .Params.external }}
+              target="_blank" rel="noopener noreferrer"
+              title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" $title)) }}"
+            {{ else }}
+              title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}"
+            {{ end }}
+            >
+        {{- end -}}
+        {{ $title }}
+        {{- if $options.link -}}
+          </a>
+        {{- end -}}
+      {{ $heading_tag.close }}
+
+      {{ if and $options.summary .Params.summary }}
+        <div class="organization-summary">
+          {{ safeHTML .Params.summary }}
+        </div>
+      {{ end }}
+
+      {{ if and $options.address .Params.contact_details }}
+        {{ partial "commons/address.html" .Params.contact_details.postal_address }}
+      {{ end }}
+
+      {{ if and $options.categories .Params.organizations_categories }}
+        {{ partial "commons/categories.html" (dict
             "context" .
-            "layout" $layout
+            "kind" "organization"
           )}}
       {{ end }}
-    </article>
-  </li>
+    </div>
+    {{ if $options.logo }}
+      {{ partial "organizations/partials/organization/media.html" (dict
+          "context" .
+          "layout" $layout
+        )}}
+    {{ end }}
+  </article>
 {{ end }}

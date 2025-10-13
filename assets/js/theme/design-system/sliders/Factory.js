@@ -17,6 +17,8 @@ osuny.SlidersFactory = function () {
 osuny.SlidersFactory.prototype.create = function (element, index) {
     var titleId;
 
+    console.log(titleId)
+
     // Check if carousel as more than one slide
     if (element.children.length > 1) {
         titleId = this.getTitleId(element, index);
