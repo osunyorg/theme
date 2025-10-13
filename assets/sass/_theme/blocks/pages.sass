@@ -52,11 +52,12 @@
                 @include hover-translate-icon(after)
                 @extend %underline-on-hover
         .list.title-only
-            > a
-                @include icon(arrow-right-line, before, true)
-                    padding-right: $spacing-2
-                @include hover-translate-icon(before, 5)
-                @extend %underline-on-hover
+            li
+                > a
+                    @include icon(arrow-right-line, before, true)
+                        padding-right: $spacing-2
+                    @include hover-translate-icon(before, 5)
+                    @extend %underline-on-hover
         .list:not(.title-only)
             @include layout-list
             margin-top: var(--grid-gutter)
@@ -84,9 +85,8 @@
                     margin-bottom: $spacing-3
             .list.title-only
                 @include grid(2, desktop, $spacing-2)
-                display: flex
                 li
-                    margin-top: 0
+                    line-height: 1
                     a
                         @include meta
             article
@@ -139,10 +139,9 @@
                         grid-column: 9 / 13
                         grid-row: 2
                         display: block
+                        margin-top: 0
                         .page + .page
-                            // margin-top: $spacing-2
-                            article
-                                margin-top: $spacing-5
+                            margin-top: var(--grid-gutter)
                 &.with-images
                     .top
                         grid-column: 1 / 7
