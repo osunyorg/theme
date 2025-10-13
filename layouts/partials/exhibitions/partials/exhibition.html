@@ -42,18 +42,18 @@
         )}}
       {{ end }}
 
+      {{ if and $options.summary .Params.summary }}
+        <div class="exhibition-description" itemprop="description">
+          {{ partial "exhibitions/partials/exhibition/summary.html" . }}
+        </div>
+      {{ end }}
+
       {{ if $options.categories }}
         {{ partial "commons/categories" ( dict
           "context" .
           "kind" "event"
         )}}
       {{- end -}}
-
-      {{ if and $options.summary .Params.summary }}
-        <div class="exhibition-description" itemprop="description">
-          {{ partial "exhibitions/partials/exhibition/summary.html" . }}
-        </div>
-      {{ end }}
 
       {{ if $with_more }}
         {{ partial "commons/item/more.html" . }}

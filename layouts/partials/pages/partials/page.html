@@ -27,23 +27,23 @@
 
       {{- partial "pages/partials/page/hook-after-title.html" . -}}
 
+      {{- with and $options.summary  .Params.summary }}
+        {{ . | safeHTML }}
+      {{ end -}}
+
       {{ if and $options.categories .Params.taxonomies }}
         {{ partial "commons/categories" ( dict
           "context" .
           "kind" "page"
         )}}
       {{ end }}
-
-      {{- with and $options.summary  .Params.summary }}
-        {{ . | safeHTML }}
-      {{ end -}}
     </div>
     {{ if $options.image }}
       {{ partial "pages/partials/page/media.html" (dict 
-          "image" .Params.image
-          "layout" $layout
-          "type" "page"
-        )}}
+        "image" .Params.image
+        "layout" $layout
+        "type" "page"
+      )}}
     {{- end -}}
   </article>
 {{ end }}

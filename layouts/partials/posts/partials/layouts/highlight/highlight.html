@@ -25,10 +25,11 @@
       <ul class="list">
         {{ range after 1 . }}
           {{ with site.GetPage .path }}
+            {{ $title := partial "PrepareHTML" .Title }}
+            {{ $reading_time := .Params.contents_reading_time }}
             <li>
               <article class="post">
                 <div class="post-content">
-                  {{- $title := partial "PrepareHTML" .Title -}}
                   {{ if and $options.subtitle .Params.subtitle }}
                     <hgroup>
                   {{ end }}
@@ -41,25 +42,23 @@
                   {{ if and $options.subtitle .Params.subtitle }}
                     </hgroup>
                   {{ end }}
-      
-                  {{ if $options.categories }}
-                    {{ partial "commons/categories" ( dict
-                      "context" .
-                      "kind" "post"
-                    )}}
-                  {{ end }}
-    
+
                   {{ if and $options.summary .Params.summary }}
                     {{ partial "GetRichSummary" ( dict 
                       "summary" .Params.summary
                       "kind" "posts"
                     )}}
                   {{ end }}
-    
-                  {{ if and .Params.contents_reading_time $options.reading_time }}
-                    <span class="post-reading-time">
-                      {{ i18n "posts.reading_time" }} : {{ partial "GetTextFromHTML" .Params.contents_reading_time.text }}
-                    </span>
+
+                  {{ if $options.categories }}
+                    {{ partial "commons/categories" ( dict
+                      "context" .
+                      "kind" "post"
+                    )}}
+                  {{ end }}
+  
+                  {{ if and $reading_time $options.reading_time }}
+                    {{ partial "posts/partials/post/reading-time.html" $reading_time }}
                   {{ end }}
                 </div>
     

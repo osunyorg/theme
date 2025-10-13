@@ -18,30 +18,31 @@
 
             {{- partial "pages/partials/page/hook-after-title.html" . -}}
 
-          {{ if and $options.categories .Params.taxonomies }}
-            {{ partial "commons/categories" ( dict
-              "context" .
-              "kind" "page"
-            )}}
-          {{ end }}
+            {{ if and $options.summary .Params.summary }}
+              {{ partial "GetRichSummary" ( dict 
+                "summary" .Params.summary
+                "kind" "pages"
+              )}}
+            {{ end }}
 
-          {{ if and $options.summary .Params.summary }}
-            {{ partial "GetRichSummary" ( dict 
-              "summary" .Params.summary
-              "kind" "pages"
-            )}}
-          {{ end }}
+            {{ if and $options.categories .Params.taxonomies }}
+              {{ partial "commons/categories" ( dict
+                "context" .
+                "kind" "page"
+              )}}
+            {{ end }}
 
-          <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
-        </div>
+            {{ partial "commons/item/more.html" . }}
+          </div>
 
-        {{- if $options.image -}}
-          {{ partial "pages/partials/page/media.html" (dict 
+          {{- if $options.image -}}
+            {{ partial "pages/partials/page/media.html" (dict 
               "image" .Params.image
               "layout" "large"
             )}}
-        {{- end -}}
-      </article>
-    {{- end -}}
+          {{- end -}}
+        </article>
+      {{- end -}}
+    </li>
   {{ end }}
 </ul>
