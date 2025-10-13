@@ -23,12 +23,14 @@
                 @include h2
 
     &--grid
-        .grid
+        .pages
+            @include layout-grid
             .page
-                @include article
-            .page-title a
-                @include icon(arrow-right-line, after, true)
-                @include hover-translate-icon(after)
+                .page-title
+                    @include h3
+                    a
+                        @include icon(arrow-right-line, after, true)
+                        @include hover-translate-icon(after)
 
     &--cards
         background-color: $block-pages-card-background
@@ -149,12 +151,13 @@
                         grid-column: 7 / 13
 
     &--alternate
-        .alternate
+        .pages
             @include layout-alternate
 
     &--large
-        @include layout-large
-        .page
-            .media
-                img
-                    aspect-ratio: 1
+        .pages
+            @include layout-large
+            .page
+                .media
+                    img
+                        aspect-ratio: 1
