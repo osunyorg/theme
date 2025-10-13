@@ -77,7 +77,7 @@
       {{ if .image }}
         {{ partial "commons/image-figure.html" (dict
             "image" .image
-            "sizes" ( .sizes | default site.Params.image_sizes.design_system.hero )
+            "sizes" ( .sizes | default site.Params.image_sizes._default.hero )
             "lazy" false
             "focusable_figcaption" true
           ) }}

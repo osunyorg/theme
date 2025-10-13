@@ -6,7 +6,7 @@
 {{- with .block.data -}}
   {{ $layout := .layout | default "grid" }}
   {{ $options := .options }}
-  {{ $image_sizes := index site.Params.image_sizes.blocks.persons $layout }}
+  {{ $image_sizes := index site.Params.image_sizes.sections.persons $layout }}
   {{ range .persons }}
     {{- $person := site.GetPage .path -}}
     {{- $role := .role -}}
