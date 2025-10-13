@@ -464,7 +464,11 @@ params:
         arrows: true
         progression: true
   image_sizes:
-    default:
+    _default:
+      hero:
+        mobile:   400
+        tablet:   800
+        desktop:  750
       layouts:
         alternate:
           mobile:   360
@@ -489,7 +493,7 @@ params:
         list:
           mobile:   360
           tablet:   555
-          desktop:  374 
+          desktop:  374
     components:
       lightbox:
         disabled: false
@@ -500,7 +504,6 @@ params:
         in_gallery:
           disabled: false
     blocks:
-      # specifics cases independant from layouts default config
       call_to_action:
         mobile:   375
         tablet:   500
@@ -521,27 +524,28 @@ params:
         mobile:   480x850
         tablet:   768x1360
         desktop:  1920x1920
-      jobs:
-        alternate: 
-          mobile:   350
-          tablet:   709
-          desktop:  1019
-        grid:
-          mobile:   327
-          tablet:   555
-          desktop:  864
-        large:
-          mobile:   350
-          tablet:   555
-          desktop:  1019
-        list: 
-          mobile:   350
-          tablet:   709
-          desktop:  1019
       links:
         mobile:   350
         tablet:   400
         desktop:  750
+      testimonials:
+        mobile:   80
+        tablet:   160
+        desktop:  260
+      gallery:
+        carousel:
+          mobile:   400
+          tablet:   600
+          desktop:  1024
+        grid:
+          mobile:   170
+          tablet:   350
+          desktop:  555
+        large:
+          mobile:   400
+          tablet:   800
+          desktop:  1920
+    sections:
       locations:
         list:
           mobile:   360
@@ -592,6 +596,11 @@ params:
           mobile:   350
           tablet:   555
           desktop:  864
+      programs:
+        list:
+          mobile:   90
+          tablet:   200
+          desktop:  255
       events:
         agenda:
           parents:    # same as default list (3 columss)
@@ -610,29 +619,23 @@ params:
           mobile:   400
           tablet:   360
           desktop:  1213
-      testimonials:
-        mobile:   80
-        tablet:   160
-        desktop:  260
-      gallery:
-        carousel:
-          mobile:   400
-          tablet:   600
-          desktop:  1024
+      jobs:
+        alternate: 
+          mobile:   350
+          tablet:   709
+          desktop:  1019
         grid:
-          mobile:   170
-          tablet:   350
-          desktop:  555
+          mobile:   327
+          tablet:   555
+          desktop:  864
         large:
-          mobile:   400
-          tablet:   800
-          desktop:  1920
-      programs:
-        list:
-          mobile:   90
-          tablet:   200
-          desktop:  255
-    sections:
+          mobile:   350
+          tablet:   555
+          desktop:  1019
+        list: 
+          mobile:   350
+          tablet:   709
+          desktop:  1019
       categories:
         hero:
           mobile:   400
