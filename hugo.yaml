@@ -294,8 +294,6 @@ params:
       layout: list
       options:
         summary: true
-  volumes:
-    default_image: false
   locations:
     default_image: false
     index:
@@ -436,6 +434,13 @@ params:
   volumes:
     default_image: false
 
+  # COMPONENTS
+  components:
+    lightbox:
+      disabled: false
+      in_gallery:
+        disabled: false
+
   # BLOCKS
   blocks:
     gallery:
@@ -444,27 +449,33 @@ params:
         progression: true
     key_figures:
       animated: true
+    organizations:
+      slider:
+        arrows: true
+        progression: true
     pages:
       alternate:
         more: true
     posts:
       slider:
         arrows: true
-    organizations:
-      slider:
-        arrows: true
-        progression: true
     testimonials:
       slider:
-        pagination: true
         autoplay: true
         interval: 5000
+        pagination: true
     timeline:
       slider:
         arrows: true
         progression: true
   image_sizes:
-    design_system:
+    _default:
+      lightbox:
+        desktop:   1920x2560
+      hero: &image_sizes_hero
+        mobile:   400
+        tablet:   800
+        desktop:  750
       layouts:
         alternate:
           mobile:   360
@@ -490,24 +501,11 @@ params:
           mobile:   360
           tablet:   555
           desktop:  374
-      lightbox:
-        disabled: false
-        # TODO mobile et tablet
-        mobile:   1920x2560
-        tablet:   1920x2560
-        desktop:  1920x2560
-        in_gallery:
-          disabled: false
-      hero:
-        mobile:   400
-        tablet:   800
-        desktop:  750
-      item:
-        mobile:   350
-        tablet:   450
-        desktop:  450
+        map:
+          mobile:   300
+          tablet:   300
+          desktop:  300
     blocks:
-      # specifics cases independant from layouts default config
       call_to_action:
         mobile:   375
         tablet:   500
@@ -515,112 +513,11 @@ params:
       chapter:
         mobile:   350
         tablet:   450
-        desktop:  864
+        desktop:  448
       features:
         mobile:   350
         tablet:   400
         desktop:  750
-      key_figures:
-        mobile:   100
-        tablet:   100
-        desktop:  150
-      image:
-        mobile:   480x850
-        tablet:   768x1360
-        desktop:  1920x1920
-      jobs:
-        alternate: 
-          mobile:   350
-          tablet:   709
-          desktop:  1019
-        grid:
-          mobile:   327
-          tablet:   555
-          desktop:  864
-        large:
-          mobile:   350
-          tablet:   555
-          desktop:  1019
-        list: 
-          mobile:   350
-          tablet:   709
-          desktop:  1019
-      links:
-        mobile:   350
-        tablet:   400
-        desktop:  750
-      locations:
-        list:
-          mobile:   360
-          tablet:   555
-          desktop:  575
-      organizations:
-        mobile:   164
-        tablet:   216
-        desktop:  196
-      pages:
-        list:
-          mobile:   400
-          tablet:   800
-          desktop:  216
-      persons:
-        grid:
-          mobile:   90
-          tablet:   220
-          desktop:  245
-        large:
-          mobile:   400
-          tablet:   360
-          desktop:  645
-        list:
-          mobile:   40
-          tablet:   40
-          desktop:  40
-      posts:
-        highlight:
-          mobile:   400
-          tablet:   555
-          desktop:  812
-      projects:
-        alternate: 
-          mobile:   350
-          tablet:   555
-          desktop:  1019
-        grid:
-          mobile:   350
-          tablet:   555
-          desktop:  864
-      exhibitions:
-        agenda:
-          mobile:   400
-          tablet:   360
-          desktop:  645
-        grid:
-          mobile:   350
-          tablet:   555
-          desktop:  864
-      events:
-        agenda:
-          parents:    # same as default list (3 columss)
-            mobile:   360
-            tablet:   555
-            desktop:  374
-          children:
-            mobile:   360
-            tablet:   555
-            desktop:  255
-        list:
-          mobile:   90
-          tablet:   200
-          desktop:  255
-        parent:
-          mobile:   400
-          tablet:   360
-          desktop:  1213
-      testimonials:
-        mobile:   80
-        tablet:   160
-        desktop:  260
       gallery:
         carousel:
           mobile:   400
@@ -634,11 +531,22 @@ params:
           mobile:   400
           tablet:   800
           desktop:  1920
-      programs:
-        list:
-          mobile:   90
-          tablet:   200
-          desktop:  255
+      image:
+        mobile:   480x850
+        tablet:   768x1360
+        desktop:  1920x1920
+      key_figures:
+        mobile:   100
+        tablet:   100
+        desktop:  150
+      links:
+        mobile:   350
+        tablet:   400
+        desktop:  600
+      testimonials:
+        mobile:   80
+        tablet:   160
+        desktop:  260
     sections:
       categories:
         hero:
@@ -653,29 +561,29 @@ params:
           mobile:   350
           tablet:   990
           desktop:  600
-        large:
-          mobile:   360
-          tablet:   555
-          desktop:  864
-        list:
-          mobile:   90
-          tablet:   360
-          desktop:  400
+        layouts:
+          large:
+            mobile:   360
+            tablet:   555
+            desktop:  864
+          list:
+            mobile:   90
+            tablet:   360
+            desktop:  400
       diplomas:
         hero:
           mobile:   400
           tablet:   800
           desktop:  750
         hero_single:
-          mobile:   351
-          tablet:   456
-          desktop:  856
-      home:
-        hero:
           mobile:   400
           tablet:   800
           desktop:  750
       events:
+        children_in_agenda:
+          mobile:   240
+          tablet:   240
+          desktop:  245
         hero:
           mobile:   400
           tablet:   800
@@ -697,6 +605,19 @@ params:
           mobile:   350
           tablet:   450
           desktop:  750
+        layouts:
+          agenda:
+            mobile:   400
+            tablet:   768
+            desktop:  400
+          parent:
+            mobile:   400
+            tablet:   360
+            desktop:  1213
+          list:
+            mobile:   90
+            tablet:   200
+            desktop:  255
       exhibitions:
         hero:
           mobile:   400
@@ -719,6 +640,20 @@ params:
           mobile:   350
           tablet:   450
           desktop:  750
+        layouts:
+          agenda:
+            mobile:   400
+            tablet:   360
+            desktop:  645
+          grid:
+            mobile:   350
+            tablet:   555
+            desktop:  864
+      home:
+        hero:
+          mobile:   400
+          tablet:   800
+          desktop:  750
       jobs:
         hero:
           mobile:   400
@@ -732,19 +667,24 @@ params:
         hero:
           mobile:   400
           tablet:   800
-          desktop:  900
+          desktop:  750
         hero_single:
           mobile:   400
           tablet:   800
-          desktop:  900
+          desktop:  750
         item:
           mobile:   350
           tablet:   450
           desktop:  900
-        map: 
-          mobile:   300
-          tablet:   300
-          desktop:  300
+        layouts:
+          list:
+            mobile:   360
+            tablet:   555
+            desktop:  575
+          map: 
+            mobile:   200
+            tablet:   200
+            desktop:  200
       organizations:
         hero:
           mobile:   400
@@ -758,14 +698,19 @@ params:
           mobile:   144
           tablet:   196
           desktop:  246
-        grid:
-          mobile:   144
-          tablet:   196
-          desktop:  246
-        large:
-          mobile:   350
-          tablet:   555
-          desktop:  864
+        layouts:
+          grid:
+            mobile:   144
+            tablet:   196
+            desktop:  246
+          large:
+            mobile:   350
+            tablet:   555
+            desktop:  864
+          map:
+            mobile:   144
+            tablet:   196
+            desktop:  246
       pages:
         hero:
           mobile:   400
@@ -775,6 +720,11 @@ params:
           mobile:   350
           tablet:   990
           desktop:  600
+        layouts:
+          list:
+            mobile:   400
+            tablet:   800
+            desktop:  400
       papers:
         hero:
           mobile:   400
@@ -793,6 +743,19 @@ params:
           mobile:   80
           tablet:   100
           desktop:  255
+        layouts:
+          grid:
+            mobile:   90
+            tablet:   220
+            desktop:  245
+          large:
+            mobile:   400
+            tablet:   360
+            desktop:  645
+          list:
+            mobile:   40
+            tablet:   40
+            desktop:  40
       posts:
         hero:
           mobile:   400
@@ -806,35 +769,11 @@ params:
           mobile:   350
           tablet:   450
           desktop:  600
-      projects:
-        hero:
-          mobile:   400
-          tablet:   800
-          desktop:  750
-        hero_single:
-          mobile:   400
-          tablet:   800
-          desktop:  750
-        item:
-          mobile:   350
-          tablet:   450
-          desktop:  600
-        list:
-          mobile:   90
-          tablet:   350
-          desktop:  555
-        alternate: 
-          mobile:   350
-          tablet:   555
-          desktop:  1019
-        grid:
-          mobile:   327
-          tablet:   555
-          desktop:  864
-        large:
-          mobile:   350
-          tablet:   555
-          desktop:  1019
+        layouts:
+          highlight:
+            mobile:   400
+            tablet:   555
+            desktop:  812
       programs:
         hero:
           mobile:   400
@@ -848,13 +787,48 @@ params:
           mobile:   350
           tablet:   450
           desktop:  600
-      publications:
+        layouts:
+          list:
+            mobile:   90
+            tablet:   200
+            desktop:  255
+      projects:
         hero:
           mobile:   400
           tablet:   800
           desktop:  750
+        hero_single:
+          mobile:   400
+          tablet:   800
+          desktop:  750
+        item:
+          mobile:   350
+          tablet:   450
+          desktop:  600
+        layouts:
+          alternate: 
+            mobile:   350
+            tablet:   555
+            desktop:  1019
+          grid:
+            mobile:   350
+            tablet:   555
+            desktop:  864
+          large:
+            mobile:   350
+            tablet:   555
+            desktop:  1019
+          list:
+            mobile:   90
+            tablet:   350
+            desktop:  415
+      publications:
+        hero: 
+          mobile:   400
+          tablet:   800
+          desktop:  750
       schools:
-        hero:
+        hero: 
           mobile:   400
           tablet:   800
           desktop:  750

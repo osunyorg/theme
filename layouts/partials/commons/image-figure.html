@@ -8,9 +8,9 @@
   {{ $image := partial "GetMedia" .image.id }}
   {{ $image_class := .image_class | default "" }}
   {{ $image_class = printf "%s image-%s" $image_class (partial "GetImageDirection" .image) }}
-  {{ $with_lightbox := not site.Params.image_sizes.design_system.lightbox.disabled }}
+  {{ $with_lightbox := not site.Params.components.lightbox.disabled }}
   {{ if and $with_lightbox $in_gallery }}
-    {{ $with_lightbox = not site.Params.image_sizes.design_system.lightbox.in_gallery.disabled }}
+    {{ $with_lightbox = not site.Params.components.lightbox.in_gallery.disabled }}
   {{ end }}
 
   {{ if $image }}
