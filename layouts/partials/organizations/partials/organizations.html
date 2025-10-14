@@ -1,4 +1,5 @@
 {{ $options := site.Params.organizations.index.options }}
+{{ $layout := default "grid" }}
 
 <div class="organizations grid {{- if $options.summary }} with-summaries {{- end }}">
   {{ if not .Paginator.Pages }}
@@ -9,6 +10,7 @@
     {{ partial "organizations/partials/organization.html" (dict
         "organization" .
         "options" $options
+        "layout" $layout
         "heading_level" 2
       ) }}
   {{ end }}
