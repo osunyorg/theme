@@ -19,8 +19,8 @@
     margin-top: var(--heading-margin-bottom)
 
 // Specific
-$backgrounded_blocks: ".block-call_to_action--accent_background, .block-chapter--accent_background, .block-chapter--alt_background, .block-timeline--horizontal, .block-pages--cards"
-main
+$backgrounded_blocks: "[class*="--accent_background"], [class*="--alt_background"], .block-timeline--horizontal, .block-pages--cards"
+main 
     .blocks
         .block:first-child
             margin-top: 0
@@ -29,6 +29,16 @@ main
         .block:last-child
             &:is(#{$backgrounded_blocks})
                 margin-bottom: 0
+
+body.full-width
+    .hero + .document-content
+        > div:first-child.blocks
+            background: red
+            #{$backgrounded_blocks}
+                &:first-child
+                    margin-top: -$spacing-3
+                    @include media-breakpoint-up(desktop)
+                        margin-top: -$spacing-5
 
 // Following chapters
 .block-chapter
