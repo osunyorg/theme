@@ -55,16 +55,9 @@
                     a, address
                         text-align: center
     &--large
+        .persons
+            @include layout-large
         .person
-            @include small-arrow-right-hover('.more')
-            display: flex
-            flex-direction: column
-            + .person
-                margin-top: $spacing-4
-                @include media-breakpoint-up(md)
-                    margin-top: $spacing-6
-            .description
-                flex: 1
             .person-name
                 @include lead
                 + div
@@ -86,7 +79,6 @@
                     li > span
                         width: offset(1)
             @include in-page-without-sidebar
-                align-items: center
                 .avatar
                     width: columns(4)
                 .contacts-details
@@ -94,10 +86,6 @@
                         @include grid(2, false, $spacing-2)
                         li + li
                             margin-top: 0
-            @include in-page-with-or-without-sidebar
-                flex-direction: row
-                gap: var(--grid-gutter)
-                text-align: left
             @include media-breakpoint-down(md)
                 &-name,
                 &-role
