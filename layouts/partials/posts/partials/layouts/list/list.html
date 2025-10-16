@@ -2,7 +2,7 @@
 {{ $alternate := .alternate }}
 {{ $options := .options }}
 
-<ul class="list">
+<ul class="posts posts--list">
   {{ range $post := .posts -}}
     {{ with site.GetPage .path }}
       {{ partial "posts/partials/post.html" (dict 

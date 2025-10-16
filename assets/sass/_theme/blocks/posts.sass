@@ -5,9 +5,9 @@
             @include icon(arrow-right-line, after, true)
             @include hover-translate-icon
             text-decoration: none
-    .posts
-        @include grid(1)
-        @include grid($block-posts-grid-columns, desktop)
+    // .posts
+    //     @include grid(1)
+    //     @include grid($block-posts-grid-columns, desktop)
     article
         @include author-and-time-side-to-side
         .post-title
@@ -19,7 +19,6 @@
                 margin-top: $spacing-2
             .media
                 margin-top: 0
-
     &--grid
         .grid
             @include media-breakpoint-down(desktop)
@@ -120,85 +119,6 @@
                         @include media-breakpoint-down(xl)
                             .post-content
                                 width: columns(8)
-    &--list
-        .list
-            > li:where(:not(:last-child))
-                border-bottom: var(--border-width) solid var(--color-border)
-            article
-                .media
-                    background: none
-                    margin: 0
-                    &, img
-                        aspect-ratio: auto
-
-            @include media-breakpoint-down(desktop)
-                > li
-                    position: relative
-                    padding-bottom: $spacing-3
-                    + li
-                        margin-top: $spacing-3
-                article
-                    .post-content
-                        display: flex
-                        flex-direction: column
-                        padding-top: $spacing-2
-                        .post-title
-                            margin-bottom: 0
-                        .post-categories
-                            margin-bottom: 0
-                        [itemprop="abstract"]
-                            margin-top: $spacing-1
-                    .media
-                        order: -1
-                        max-width: 33%
-
-            @include media-breakpoint-up(desktop)
-                article
-                    display: flex
-                    flex-direction: row
-
-            @include in-page-with-sidebar
-                > li
-                    padding-bottom: $spacing-3
-                    + li
-                        margin-top: $spacing-3
-                article
-                    gap: var(--grid-gutter) // gap plutôt que marge pour l'affichage avec ou sans image
-                    .media
-                        width: columns(2)
-                    .post-content
-                        width: columns(6)
-
-            @include in-page-without-sidebar
-                > li
-                    padding-bottom: $spacing-5
-                    + li
-                        margin-top: $spacing-5
-                article
-                    gap: var(--grid-gutter)
-                    position: relative
-                    .media
-                        width: columns(3)
-                    .post-content
-                        display: flex
-                        flex-direction: column
-                        width: columns(6)
-                    .post-meta
-                        margin-top: auto
-                        padding-top: $spacing-3
-                        time
-                            margin-top: 0.3em
-                            position: absolute
-                            right: 0
-                            top: 0
-                        .post-reading-time,
-                            display: block
-                            &::before
-                                content: none
-                        .post-author:first-of-type
-                            [itemprop="name"]::before
-                                content: none
-
     &--highlight
         .highlight-post
             .media
