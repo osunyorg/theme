@@ -1,7 +1,6 @@
 {{ $location := .location }}
 {{ $options := .options }}
 {{ $layout := .layout }}
-{{ $sizes := cond (eq $layout "list") site.Params.image_sizes.blocks.locations.list "" }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level
   "attributes" "class='location-title' itemprop='headline'"
