@@ -5,9 +5,6 @@
             @include icon(arrow-right-line, after, true)
             @include hover-translate-icon
             text-decoration: none
-    // .posts
-    //     @include grid(1)
-    //     @include grid($block-posts-grid-columns, desktop)
     article
         @include author-and-time-side-to-side
         .post-title
@@ -37,23 +34,6 @@
                     margin-top: $spacing-4
         .post
             @include small-arrow-right-hover('.more')
-            // Masquer le point entre l'auteur et la date (mixin author-and-time-side-to-side)
-            // .post-author p,
-            // .post-reading-time
-            //     &::before
-            //         display: none
-
-            // Permet d'aligner correctement les différents line-height des différents composants du post meta
-            // .post-meta
-            //     display: block
-            //     // > *
-            //     //     margin-right: $spacing-3
-            //     time
-            //         vertical-align: baseline
-            //     .post-author
-            //         &, p
-            //             display: inline
-            // Désactiver le ratio forcé de la configuration $article-media-aspect-ratio
             .media
                 &, img
                     aspect-ratio: auto
