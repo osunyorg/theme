@@ -33,6 +33,9 @@
                 @include grid(2)
 
     &--large
+        .large
+            > li + li
+                    margin-top: $spacing-4
         .post
             @include small-arrow-right-hover('.more')
             // Masquer le point entre l'auteur et la date (mixin author-and-time-side-to-side)
@@ -56,8 +59,6 @@
                 &, img
                     aspect-ratio: auto
         @include media-breakpoint-down(desktop)
-            li + li
-                    margin-top: $spacing-4
             .post
                 [itemprop="abstract"]
                     margin-top: 0
@@ -75,8 +76,6 @@
                 .post
                     flex-direction: row
                     gap: var(--grid-gutter)
-                    + .post
-                        margin-top: $spacing-4
                     .post-title,
                     .post-subtitle
                         @include h2
