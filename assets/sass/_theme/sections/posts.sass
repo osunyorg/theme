@@ -18,7 +18,83 @@
 
 .posts
     @include list-reset
+    &--list
+        > li:where(:not(:last-child))
+            border-bottom: var(--border-width) solid var(--color-border)
+        article
+            .media
+                background: none
+                margin: 0
+                &, img
+                    aspect-ratio: auto
 
+        @include media-breakpoint-down(desktop)
+            > li
+                position: relative
+                padding-bottom: $spacing-3
+                + li
+                    margin-top: $spacing-3
+            article
+                .post-content
+                    display: flex
+                    flex-direction: column
+                    padding-top: $spacing-2
+                    .post-title
+                        margin-bottom: 0
+                    .post-categories
+                        margin-bottom: 0
+                    [itemprop="abstract"]
+                        margin-top: $spacing-1
+                .media
+                    order: -1
+                    max-width: 33%
+
+        @include media-breakpoint-up(desktop)
+            article
+                display: flex
+                flex-direction: row
+
+        @include in-page-with-sidebar
+            > li
+                padding-bottom: $spacing-3
+                + li
+                    margin-top: $spacing-3
+            article
+                gap: var(--grid-gutter) // gap plutôt que marge pour l'affichage avec ou sans image
+                .media
+                    width: columns(2)
+                .post-content
+                    width: columns(6)
+
+        @include in-page-without-sidebar
+            > li
+                padding-bottom: $spacing-5
+                + li
+                    margin-top: $spacing-5
+            article
+                gap: var(--grid-gutter)
+                position: relative
+                .media
+                    width: columns(3)
+                .post-content
+                    display: flex
+                    flex-direction: column
+                    width: columns(6)
+                .post-meta
+                    margin-top: auto
+                    padding-top: $spacing-3
+                    time
+                        margin-top: 0.3em
+                        position: absolute
+                        right: 0
+                        top: 0
+                    .post-reading-time,
+                        display: block
+                        &::before
+                            content: none
+                    .post-author:first-of-type
+                        [itemprop="name"]::before
+                            content: none
 .posts__section,
 .posts_categories__term,
 .persons__page,
@@ -26,58 +102,6 @@
 .authors__term,
 .researchers__term,
 .teachers__term
-    .posts--list
-        article
-            border-bottom: var(--border-width) solid var(--color-border)
-            display: flex
-            margin-bottom: $spacing-3
-            padding-bottom: $spacing-3
-            flex-direction: row
-            .post-title + p:not(.post-subtitle)
-                margin-top: $spacing-2
-            @include media-breakpoint-up(desktop)
-                @include grid
-                margin-bottom: $spacing-5
-                padding-bottom: $spacing-5
-            .post-content
-                // TODO: replace grid by flex
-                grid-column: 4/13
-                .post-meta
-                    > *
-                        display: block
-                @include media-breakpoint-down(desktop)
-                    flex: 1
-            .media
-                background: none
-                margin: 0
-                @include media-breakpoint-down(desktop)
-                    margin-right: $spacing-2
-                    width: 33.33333%
-                @include media-breakpoint-up(desktop)
-                    grid-column: 1/4
-                    &:empty
-                        background: var(--color-background-alt)
-                        aspect-ratio: 3/2
-                &, img
-                    aspect-ratio: auto
-            @include media-breakpoint-up(desktop)
-                .post-meta
-                    max-width: columns(3)
-                    position: absolute
-                    right: 0
-                    text-align: right
-                    top: 0
-                    time,
-                    .post-reading-time
-                        font-size: $h5-size
-                .post-content
-                    .post-title,
-                    [itemprop="abstract"]
-                        max-width: columns(6)
-        &.without-images
-            article
-                .post-content
-                    grid-column-start: 1
     .posts--grid
         @include grid(1)
         @include grid(2, desktop)

@@ -154,16 +154,16 @@ ol.persons--list
                 @extend .avatar
             @include media-breakpoint-down(desktop)
                 margin-bottom: $spacing-4
-                > .container:where(:only-child)
-                    margin-bottom: calc(#{columns(2)} + #{$spacing-5})
+                &:has(> .container:where(:only-child))
+                    margin-bottom: calc(#{columns(2)} + var(--grid-gutter))
                     figure
                         margin-bottom: calc(#{columns(2)} * -1)
                 figure
                     width: columns(4)
                     margin-left: auto
             @include media-breakpoint-down(md)
-                > .container:where(:only-child)
-                    margin-bottom: calc(#{columns(3)} + #{$spacing-5})
+                &:has(> .container:where(:only-child))
+                    margin-bottom: calc(#{columns(3)} + var(--grid-gutter))
                     figure
                         margin-bottom: calc(#{columns(3)} * -1)
                 figure
