@@ -10,7 +10,7 @@
 {{ end }}
 {{ $scale := .scale }}
 {{ $fit := "" }}
-{{ $quality := site.Params.keycdn.quality | default "" }}
+{{ $quality := site.Params.keycdn.quality }}
 {{ with .size }}
   {{ $sizes := split . "x" }}
   {{ $width := int (index $sizes 0) }}
