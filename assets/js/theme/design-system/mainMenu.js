@@ -202,6 +202,15 @@ class MainMenu {
 
         this.setHeaderHeightVariables();
     }
+
+    open () {
+        this.toggleMainMenu(true);
+    }
+
+    close () {
+        this.toggleMainMenu(false);
+    }
 }
 
-export default new MainMenu('header#document-header');
+window.osuny = window.osuny || {};
+window.osuny.menu = new MainMenu('header#document-header');
