@@ -3,46 +3,46 @@
   "level" ( .heading_level | default 3 )
   "attributes" "class='page-title'"
 )}}
-<div class="large">
+<ul class="pages">
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
     {{ with $page }}
-      <article class="page">
-        <div class="page-content">
-          {{ $heading_tag.open }}
-            <a href="{{- .Permalink -}}">
-              {{- partial "PrepareHTML" .Title -}}
-            </a>
-          {{ $heading_tag.close }}
+      <li>
+        <article class="page">
+          <div class="page-content">
+            {{ $heading_tag.open }}
+              <a href="{{- .Permalink -}}">
+                {{- partial "PrepareHTML" .Title -}}
+              </a>
+            {{ $heading_tag.close }}
 
-          {{- partial "pages/partials/page/hook-after-title.html" . -}}
+            {{- partial "pages/partials/page/hook-after-title.html" . -}}
 
-          {{ if and $options.summary .Params.summary }}
-            {{ partial "GetRichSummary" ( dict 
-              "summary" .Params.summary
-              "kind" "pages"
-            )}}
-          {{ end }}
+            {{ if and $options.summary .Params.summary }}
+              {{ partial "GetRichSummary" ( dict 
+                "summary" .Params.summary
+                "kind" "pages"
+              )}}
+            {{ end }}
 
-          {{ if and $options.categories .Params.taxonomies }}
-            {{ partial "commons/categories" ( dict
-              "context" .
-              "kind" "page"
-            )}}
-          {{ end }}
+            {{ if and $options.categories .Params.taxonomies }}
+              {{ partial "commons/categories" ( dict
+                "context" .
+                "kind" "page"
+              )}}
+            {{ end }}
 
-          <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
-        </div>
-
-        {{- if and $options.image .Params.image -}}
-          <div class="media">
-            {{- partial "commons/image.html" (dict
-                "image"    .Params.image
-                "sizes"    site.Params.image_sizes.blocks.pages.large
-              ) -}}
+            {{ partial "commons/item/more.html" . }}
           </div>
-        {{- end -}}
-      </article>
-    {{- end -}}
+
+          {{- if $options.image -}}
+            {{ partial "pages/partials/page/media.html" (dict 
+              "image" .Params.image
+              "layout" "large"
+            )}}
+          {{- end -}}
+        </article>
+      {{- end -}}
+    </li>
   {{ end }}
-</div>
+</ul>
