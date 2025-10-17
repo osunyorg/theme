@@ -250,13 +250,11 @@
                     position: absolute
                     left: 0
                     top: 0
-                    margin-top: $spacing-3
                     time + time
                         @include meta
                 &--child
                     padding-left: offset(1)
                     .event-hours
-                        margin-top: $spacing-3
                         time + time
                             display: block
                             &::before
@@ -269,7 +267,7 @@
                         bottom: 0
                         span
                             @include sticky(var(--title-height))
-            .event--parent + .event-children
+            .event--parent ~ .event-children
                 > li
                     margin-left: offset(3)
                     .event
