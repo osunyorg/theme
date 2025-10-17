@@ -74,9 +74,6 @@
             "summary" .Params.summary
             "kind" "events"
           )}}
-          {{ if eq $layout "large" }}
-            <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
-          {{ end }}
         </div>
       {{ end }}
 
@@ -87,7 +84,7 @@
         )}}
       {{- end -}}
 
-      {{ if $with_more }}
+      {{ if or (eq $layout "large") $with_more }}
         {{ partial "commons/item/more.html" . }}
       {{- end -}}
     </div>
