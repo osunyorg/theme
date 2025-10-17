@@ -11,10 +11,22 @@
 
     {{ $event_category := site.GetPage (printf "/events_categories/%s" .events ) }}
     {{ with $event_category }}
-      {{ partial "programs/single/related-events.html" (dict
-          "events" ( first site.Params.programs.related_events.quantity .Pages )
+      {{ $events := where .Pages "Type" "events" }}
+      {{ if $events }}
+        {{ partial "programs/single/related-events.html" (dict
+          "events" ( first site.Params.programs.related_events.quantity $events )
           "context" .
         ) }}
+      {{ end }}
+
+      {{ $exhibitions := where .Pages "Type" "exhibitions" }}
+      {{ if $exhibitions }}
+        {{ partial "programs/single/related-exhibitions.html" (dict
+          "exhibitions" ( first site.Params.programs.related_exhibitions.quantity $exhibitions )
+          "context" .
+        ) }}
+      {{ end }}
+
     {{ end }}
 
     {{ $project_category := site.GetPage (printf "/projects_categories/%s" .projects ) }}
