@@ -1,5 +1,5 @@
 {{ $status := .status }}
-{{ $type := .type }}
+{{ $type := pluralize .type }}
 
 <p class="{{- $type -}}-status">
   {{ i18n (printf "%s.status.%s" $type $status) }}
