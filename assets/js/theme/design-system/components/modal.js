@@ -1,4 +1,4 @@
-import { focusTrap } from '../utils/focus-trap';
+import { focusTrap } from '../../utils/focus-trap';
 
 const CLASSES = {
     modalOpened: 'has-modal-opened',
@@ -62,10 +62,4 @@ class Modal {
     }
 }
 
-// Selectors
-(function () {
-    const modalButtons = document.querySelectorAll('[data-open-modal]');
-    modalButtons.forEach(button => {
-        new Modal(button);
-    });
-}());
+window.osuny.page.addComponent("[data-open-modal]", Modal);

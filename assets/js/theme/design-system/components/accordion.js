@@ -1,4 +1,6 @@
-function Accordion(element) {
+window.osuny = window.osuny || {};
+
+window.osuny.Accordion = function (element) {
     this.element = element;
     this.button = this.element.querySelector('summary');
 
@@ -7,17 +9,17 @@ function Accordion(element) {
     };
 
     this.listen();
-}
+};
 
-Accordion.prototype.listen = function() {
+window.osuny.Accordion.prototype.listen = function () {
     var self = this;
 
-    this.button.addEventListener('click', function() {
+    this.button.addEventListener('click', function () {
         self.toggleAccordion();
     });
 };
 
-Accordion.prototype.toggleAccordion = function(open) {
+window.osuny.Accordion.prototype.toggleAccordion = function (open) {
     if (typeof open === 'undefined') {
         open = !this.state.isOpened;
     }
@@ -25,9 +27,4 @@ Accordion.prototype.toggleAccordion = function(open) {
     this.button.setAttribute('aria-expanded', this.state.isOpened);
 };
 
-(function () {
-    var accordions = document.querySelectorAll('details');
-    accordions.forEach(function (accordion) {
-        new Accordion(accordion);
-    });
-}());
+window.osuny.page.addComponent("details", window.osuny.Accordion);

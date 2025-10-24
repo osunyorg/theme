@@ -41,7 +41,8 @@ class Note {
     }
 
     deactivateAllNotes () {
-        window.notes.forEach(note => {
+        var notes = window.osuny.page.getComponents(Note);
+        notes.forEach(note => {
             note.deactivate();
         });
     }
@@ -81,10 +82,4 @@ class Note {
     }
 }
 
-(function () {
-    window.notes = [];
-    const notes = document.querySelectorAll('.note');
-    notes.forEach(note => {
-        window.notes.push(new Note(note));
-    });
-}());
+window.osuny.page.addComponent(".note", Note);
