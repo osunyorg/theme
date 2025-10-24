@@ -1,5 +1,4 @@
 window.osuny = window.osuny || {};
-window.osuny.ExtendableList = window.osuny.ExtendableList || {};
 
 window.osuny.ExtendableList = function (element) {
     window.osuny.Extendable.call(this, element);
