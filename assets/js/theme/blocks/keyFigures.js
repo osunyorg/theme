@@ -117,11 +117,5 @@ class KeyFigures {
     }
 }
 
-window.addEventListener('load', () => {
-    const keyFigures = document.querySelectorAll('.block-key_figures');
-    keyFigures.forEach((dom) => {
-        new KeyFigures(dom);
-    });
-});
-
+window.osuny.page.addComponent(".block-key_figures", KeyFigures);
 
