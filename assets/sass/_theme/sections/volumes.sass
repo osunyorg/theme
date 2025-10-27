@@ -8,6 +8,10 @@
 .volumes
     @include grid(2, md)
     @include grid(3, lg)
+    @include media-breakpoint-down(desktop)
+        > div + div,
+        > li + li
+            margin-top: $spacing-4
     
 .volumes__taxonomy
     .volume
