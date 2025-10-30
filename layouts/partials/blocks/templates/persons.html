@@ -6,7 +6,7 @@
 {{- with .block.data -}}
   {{ $layout := .layout | default "grid" }}
   {{ $options := .options }}
-  {{ $image_sizes := index site.Params.image_sizes.blocks.persons $layout }}
+  {{ $image_sizes := index site.Params.image_sizes.sections.persons.layouts $layout }}
   {{ range .persons }}
     {{- $person := site.GetPage .path -}}
     {{- $role := .role -}}
@@ -31,14 +31,7 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-
-        {{ if eq .layout "list" }}
-          {{ partial "persons/partials/layouts/list/list.html" (dict
-              "options" $options
-              "block" $block
-            )}}
-        {{ else }}
-          <div class="persons">
+          <ul class="persons persons-{{ $layout }} {{- if $options.contact }} with-contacts {{- end }}">
             {{- range .persons -}}
               {{ $person := site.GetPage .path }}
               {{ partial "persons/partials/person.html" (dict
@@ -50,8 +43,7 @@
                   "image_sizes" $image_sizes
                 )}}
             {{- end -}}
-          </div>
-        {{ end }}
+          </ul>
       </div>
     </div>
   </div>

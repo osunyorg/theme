@@ -4,7 +4,7 @@
   "attributes" "class='page-title'"
 )}}
 {{ with .pages }}
-  <div class="grid">
+  <ul class="pages">
     {{ range . }}
       {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
       {{- $path := false -}}
@@ -16,32 +16,39 @@
       {{ $page := site.GetPage $path }}
 
       {{ with $page }}
-        <article class="page">
-          {{ $heading_tag.open }}
-            <a href="{{- .Permalink -}}">
-              {{- partial "PrepareHTML" .Title -}}
-            </a>
-          {{ $heading_tag.close }}
+        <li>
+          <article class="page">
+            {{ $heading_tag.open }}
+              <a href="{{- .Permalink -}}">
+                {{- partial "PrepareHTML" .Title -}}
+              </a>
+            {{ $heading_tag.close }}
 
-          {{- partial "pages/partials/page/hook-after-title.html" . -}}
+            {{- partial "pages/partials/page/hook-after-title.html" . -}}
 
-          {{ if and $options.summary .Params.summary }}
-            {{ partial "GetRichSummary" ( dict 
-              "summary" .Params.summary
-              "kind" "pages"
-            )}}
-          {{ end }}
-          {{ if and $options.categories .Params.taxonomies }}
-            {{ partial "commons/categories" ( dict
-              "context" .
-              "kind" "page"
-            )}}
-          {{ end }}
-          {{ if $options.image }}
-            {{- partial "pages/partials/page/page-media.html" . -}}
-          {{ end }}
-        </article>
-      {{- end -}}
+            {{ if and $options.summary .Params.summary }}
+              {{ partial "GetRichSummary" ( dict 
+                "summary" .Params.summary
+                "kind" "pages"
+              )}}
+            {{ end }}
+
+            {{ if and $options.categories .Params.taxonomies }}
+              {{ partial "commons/categories" ( dict
+                "context" .
+                "kind" "page"
+              )}}
+            {{ end }}
+
+            {{ if $options.image }}
+              {{ partial "pages/partials/page/media.html" (dict 
+                "image" .Params.image
+                "layout" "grid"
+              )}}
+            {{ end }}
+          </article>
+        {{- end -}}
+      </li>
     {{ end }}
-  </div>
+  </ul>
 {{ end }}

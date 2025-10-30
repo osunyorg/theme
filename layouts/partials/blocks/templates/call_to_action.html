@@ -29,14 +29,9 @@
               </div>
             {{- end -}}
           </div>
-          {{ if .image }}
+          {{ with .image }}
             {{ partial "commons/image-figure.html" (dict
-                "image" (dict 
-                          "alt" .alt
-                          "id" .image.id
-                          "file" .image.file
-                          "credit" .credit
-                        )
+                "image" .
                 "sizes" site.Params.image_sizes.blocks.call_to_action
               ) }}
           {{ end }}

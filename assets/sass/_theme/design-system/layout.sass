@@ -43,11 +43,6 @@ iframe
 [id]
     scroll-margin-top: var(--header-height)
 
-.container
-    @include container
-    .hero + &
-        margin-top: $spacing-5
-
 .hidden
     display: none
 
@@ -64,12 +59,19 @@ ol
     margin-bottom: $spacing-5
     margin-top: $spacing-5
 
-.document-content
-    .container > .lead
-        margin-bottom: $spacing-5
+
+.container
+    @include container
+    .hero + &
+        margin-top: $spacing-5
+
 
 .document-content
     position: relative
+    .container > .lead
+        margin-bottom: $spacing-5
+    > div:not(.blocks, .toc-container, .breadcrumb-container, .agenda-exhibitions)
+        margin-top: var(--grid-gutter)
     @include in-page-with-sidebar
         .heading h2, .block .block-content
             padding-left: offset(4)

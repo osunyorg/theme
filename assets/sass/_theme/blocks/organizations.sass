@@ -2,6 +2,7 @@
     .organization
         .organization-title
             a[target="_blank"]
+                position: relative
                 @include stretched-link(before)
                 @include icon(links-line, after, true)
                     position: relative
@@ -76,15 +77,12 @@
                 a.leaflet-popup-close-button
                     color: var(--color-text)
     &--large
-        @include layout-large
+        .organizations
+            @include layout-large
         .organization
             .organization-content
                 display: flex
                 flex-direction: column
-                .organization-title
-                    @include h2
-                    a
-                        @include link
                 .organization-summary
                     flex: 1
             + .organization

@@ -1,6 +1,7 @@
 {{ $layout := site.Params.pages.index.layout }}
 {{ $list_class := printf "pages pages--%s" $layout }}
 {{ $list_class = printf "%s %s" $list_class (cond site.Params.pages.index.options.image "with-images" "without-images") }}
+
 <div class="{{ $list_class }}">
   {{ if not .Paginator.Pages }}
     {{ $is_term := eq .Kind "term" }}
@@ -11,6 +12,7 @@
         {{  partial "pages/partials/page.html" (dict 
             "page" .
             "options" site.Params.pages.index.options
+            "layout" $layout
           )}}
       {{ end }}
     </div>
