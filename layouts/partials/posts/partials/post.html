@@ -18,6 +18,9 @@
   {{ else }}
     {{ $post_class = printf "%s %s" $post_class "without-image" }}
   {{ end }}
+  {{ if .Params.federation.active }}
+    {{ $post_class = printf "%s is-federated" $post_class }}
+  {{ end }}
   
   <article class="{{ $post_class }}" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="post-content">
@@ -34,6 +37,8 @@
       {{ if and $options.subtitle .Params.subtitle }}
         </hgroup>
       {{ end }}
+      
+      {{ partial "posts/partials/post/federated.html" . }}
 
       {{ if $options.categories }}
         {{ partial "commons/categories.html" ( dict

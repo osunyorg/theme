@@ -10,12 +10,16 @@
 <div class="large {{- if not $image }} without-images{{ end }}">
   {{ range .posts }}
     {{ with site.GetPage .path }}
+      {{ $post_class := "post" }}
+      {{ if .Params.federation.active }}
+        {{ $post_class = printf "%s is-federated" $post_class }}
+      {{ end }}
 
       {{ if and .Params.image $options.image }}
         {{- $direction = partial "GetImageDirection" .Params.image -}}
       {{ end }}
 
-      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <article class="{{ $post_class }}" itemscope itemtype="http://schema.org/BlogPosting">
         <div class="post-content">
           {{- $title := partial "PrepareHTML" .Title -}}
 
@@ -31,6 +35,8 @@
           {{ if and $options.subtitle .Params.subtitle }}
             </hgroup>
           {{ end }}
+
+          {{ partial "posts/partials/post/federated.html" . }}
           
           <div class="post-meta">
             {{ if $options.author }}
