@@ -18,7 +18,7 @@
           {{ with site.GetPage .path }}
             {{ $id := printf "%s-%s" $index .Slug }}
             <li data-filter="{{ .Slug }}">
-              <input type="checkbox" value="{{ .Slug }}" checked="true" id="filter-{{- $id }}">
+              <input type="checkbox" value="{{ .Slug }}" checked id="filter-{{- $id }}">
               <label for="filter-{{- $id }}">{{ .Title }}</label>
             </li>
           {{ end }}

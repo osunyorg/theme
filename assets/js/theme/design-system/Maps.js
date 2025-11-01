@@ -95,7 +95,7 @@ osuny.Map.prototype.filterMarkers = function (filters) {
 
 osuny.Map.prototype.setMarkers = function () {
     this.setMarkerIcon();
-    this.elements = Array.prototype.slice.call(this.element.children);
+    this.elements = this.element.querySelectorAll('[data-longitude]');
     this.elements.forEach(this.createMarker.bind(this));
 
     if (this.popups.length === 1) {
