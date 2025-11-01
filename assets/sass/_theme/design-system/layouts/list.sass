@@ -12,6 +12,8 @@
         flex-direction: row
         .media
             order: -1
+        [class$="-categories"]
+            @include item-categories-list
     @include media-breakpoint-down(desktop)
         article
             flex-direction: column
@@ -28,6 +30,8 @@
             [class$="-title"],
             [class$="-subtitle"]
                 @include h4
+            [class$="-categories"]
+                @include item-categories-list
             .media
                 width: columns(2)
     @include in-page-without-sidebar

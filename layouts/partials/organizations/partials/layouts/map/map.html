@@ -52,12 +52,11 @@
       ) }}
   {{ end }}
   
-  <div class="organizations map" 
+  <div class="organizations map"
       data-map
       data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}"
       role="region"
-      aria-label="{{ $aria_label }}"
-      >
+      aria-label="{{ $aria_label }}">
     {{ if and $options.filters $categories }}
       {{ partial "organizations/partials/layouts/map/filters-button.html" $block_index }}
     {{ end }}
@@ -68,6 +67,7 @@
           {{ if $address_geolocation }}
             {{ partial "organizations/partials/organization.html" (dict
                 "organization" .
+                "layout" $layout
                 "options" $options
                 "with_geolocation" true
                 "heading_level" $heading_level

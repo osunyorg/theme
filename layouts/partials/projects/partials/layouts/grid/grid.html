@@ -1,13 +1,14 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $options := .options | default site.Params.projects.index.options }}
 
-<div class="grid projects--grid">
+<ul class="grid projects--grid">
   {{ range .projects -}}
     {{ partial "projects/partials/layouts/grid/grid-item.html" (dict
         "heading_level" $heading_level
         "layout" "grid"
         "options" $options
         "project" .
+        "image_sizes" site.Params.image_sizes.sections.projects.grid
       ) }}
   {{ end }}
-</div>
+</ul>
