@@ -5,8 +5,6 @@ window.osuny.Page = function () {
 };
 
 window.osuny.Page.prototype.addComponent = function (selector, kind) {
-    console.log(selector, kind)
-
     this.components.push({
         kind: kind,
         selector: selector,

@@ -58,7 +58,6 @@ class Modal {
         
         this.element.setAttribute('aria-hidden', !this.state.opened);
         this.element.classList[classAction](CLASSES.modalIsOpened);
-        
     }
 }
 

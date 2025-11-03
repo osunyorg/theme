@@ -1,85 +1,85 @@
-class Note {
-    constructor (note) {
-        this.note = note;
-        this.active = false;
-        this.call = this.note.querySelector('.note__call');
-        this.content = this.note.querySelector('.note__content');
-        this.call.addEventListener('click', this.toggle.bind(this));
+window.osuny = window.osuny || {};
 
-        this.note.addEventListener('keydown', (event) => {
-            if (event.keyCode === 13 || event.key === 'Enter' || event.keyCode === 32 || event.key === 'Space') {
-                event.preventDefault();
-                this.toggle();
-            }
-        });
-    }
+window.osuny.Note = function (element) {
+    this.note = element;
+    this.active = false;
+    this.call = this.note.querySelector('.note__call');
+    this.content = this.note.querySelector('.note__content');
+    this.call.addEventListener('click', this.toggle.bind(this));
 
-    toggle () {
-        if (this.active) {
-            this.deactivate();
-        } else {
-            this.activate();
+    this.note.addEventListener('keydown', function (event) {
+        if (event.keyCode === 13 || event.key === 'Enter' || event.keyCode === 32 || event.key === 'Space') {
+            event.preventDefault();
+            this.toggle();
         }
-    }
+    }.bind(this));
+};
 
-    activate () {
-        this.deactivateAllNotes();
-        this.active = true;
-        this.note.classList.add('note--active');
-        this.content.removeAttribute('aria-hidden');
-        this.call.setAttribute('aria-expanded', 'true');
-        this.definePosition();
-        this.a11yDisabling();
-    }
-
-    deactivate () {
-        this.active = false;
-        this.content.setAttribute('aria-hidden', 'true');
-        this.note.classList.remove('note--active');
-        this.call.setAttribute('aria-expanded', 'false');
-        this.removeA11yDisabling();
-    }
-
-    deactivateAllNotes () {
-        var notes = window.osuny.page.getComponents(Note);
-        notes.forEach(note => {
-            note.deactivate();
-        });
-    }
-
-    a11yDisabling () {
-        this.closeWithKeyboard = (event) => {
-            if (event.keyCode === 27 || event.key === 'Escape' || event.key === 'Tab' || event.keyCode === 9) {
-                this.deactivateAllNotes();
-                this.call.focus();
-            }
-        };
-
-        this.closeWithClick = (event) => {
-            if (!event.target.closest('.note--active')) {
-                this.deactivateAllNotes();
-            }
-        };
-
-        window.addEventListener('keydown', this.closeWithKeyboard);
-        document.addEventListener('click', this.closeWithClick);
-    }
-
-    removeA11yDisabling () {
-        window.removeEventListener('keydown', this.closeWithKeyboard);
-        document.removeEventListener('click', this.closeWithClick);
-    }
-
-    definePosition () {
-        let isOnTheLeftSide = this.note.offsetLeft < window.innerWidth / 2;
-        if (isOnTheLeftSide) {
-            this.note.classList.add('note--left');
-            this.note.classList.remove('note--right');
-        } else {
-            this.note.classList.add('note--right');
-            this.note.classList.remove('note--left');
-        }
+window.osuny.Note.prototype.toggle = function () {
+    if (this.active) {
+        this.deactivate();
+    } else {
+        this.activate();
     }
 }
 
-window.osuny.page.addComponent(".note", Note);
+window.osuny.Note.prototype.activate = function () {
+    this.deactivateAllNotes();
+    this.active = true;
+    this.note.classList.add('note--active');
+    this.content.removeAttribute('aria-hidden');
+    this.call.setAttribute('aria-expanded', 'true');
+    this.definePosition();
+    this.a11yDisabling();
+}
+
+window.osuny.Note.prototype.deactivate = function () {
+    this.active = false;
+    this.content.setAttribute('aria-hidden', 'true');
+    this.note.classList.remove('note--active');
+    this.call.setAttribute('aria-expanded', 'false');
+    this.removeA11yDisabling();
+}
+
+window.osuny.Note.prototype.deactivateAllNotes = function () {
+    var notes = window.osuny.page.getComponents(window.osuny.Note);
+    notes.forEach(note => {
+        note.deactivate();
+    });
+}
+
+window.osuny.Note.prototype.a11yDisabling = function () {
+    this.closeWithKeyboard = (event) => {
+        if (event.keyCode === 27 || event.key === 'Escape' || event.key === 'Tab' || event.keyCode === 9) {
+            this.deactivateAllNotes();
+            this.call.focus();
+        }
+    };
+
+    this.closeWithClick = (event) => {
+        if (!event.target.closest('.note--active')) {
+            this.deactivateAllNotes();
+        }
+    };
+
+    window.addEventListener('keydown', this.closeWithKeyboard);
+    document.addEventListener('click', this.closeWithClick);
+}
+
+window.osuny.Note.prototype.removeA11yDisabling = function () {
+    window.removeEventListener('keydown', this.closeWithKeyboard);
+    document.removeEventListener('click', this.closeWithClick);
+}
+
+window.osuny.Note.prototype.definePosition = function () {
+    var isOnTheLeftSide = this.note.offsetLeft < window.innerWidth / 2;
+    if (isOnTheLeftSide) {
+        this.note.classList.add('note--left');
+        this.note.classList.remove('note--right');
+    } else {
+        this.note.classList.add('note--right');
+        this.note.classList.remove('note--left');
+    }
+}
+
+window.osuny.page.addComponent(".note", window.osuny.Note);
