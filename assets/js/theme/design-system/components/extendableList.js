@@ -2,7 +2,7 @@ window.osuny = window.osuny || {};
 
 window.osuny.ExtendableList = function (element) {
     window.osuny.Extendable.call(this, element);
-    this.hideClass = "truncated-list";
+    this.hideClass = 'truncated-list';
     this.element.classList.add(this.hideClass);
     this.hiddenChildren = this.getHiddenChildren();
     if (this.hiddenChildren.length === 0) {

@@ -208,4 +208,4 @@ window.osuny.Map.prototype.setZoomAria = function (buttonKey, id, i18nKey) {
     }
 };
 
-window.osuny.page.addComponent("[data-map]", window.osuny.Map);
+window.osuny.page.addComponent('[data-map]', window.osuny.Map);

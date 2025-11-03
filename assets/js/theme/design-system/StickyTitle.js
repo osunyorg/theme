@@ -26,7 +26,7 @@ window.osuny.StickyTitle.prototype.listen = function () {
             this.title.classList.remove('is-down');
         }
 
-        this.title.style.maxHeight = titleOriginalHeight + "px";
+        this.title.style.maxHeight = titleOriginalHeight + 'px';
         this.container.style.setProperty('--title-height', titleDownHeight + 'px');
 
         if (hours) {

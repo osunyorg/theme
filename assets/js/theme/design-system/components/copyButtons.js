@@ -29,4 +29,4 @@ window.osuny.CopyButton.prototype.copy = function () {
     }.bind(this));
 };
 
-window.osuny.page.addComponent("[data-click-to-copy]", window.osuny.CopyButton);
+window.osuny.page.addComponent('[data-click-to-copy]', window.osuny.CopyButton);

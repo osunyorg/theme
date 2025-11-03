@@ -38,7 +38,7 @@ window.osuny.Modal.prototype.listen = function () {
     window.addEventListener('keydown', function (event) {
         if (event.keyCode === 27 || event.key === 'Escape') {
             this.toggle(false);
-        } else if (event.key === "Tab" && this.state.isOpened) {
+        } else if (event.key === 'Tab' && this.state.isOpened) {
             focusTrap(event, this.element, this.state.isOpened);
             event.preventDefault();
         }
@@ -61,4 +61,4 @@ window.osuny.Modal.prototype.toggle = function (open) {
     this.element.classList[classAction](CLASSES.modalIsOpened);
 };
 
-window.osuny.page.addComponent("[data-open-modal]", window.osuny.Modal);
+window.osuny.page.addComponent('[data-open-modal]', window.osuny.Modal);

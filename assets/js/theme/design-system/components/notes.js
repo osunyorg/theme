@@ -82,4 +82,4 @@ window.osuny.Note.prototype.definePosition = function () {
     }
 }
 
-window.osuny.page.addComponent(".note", window.osuny.Note);
+window.osuny.page.addComponent('.note', window.osuny.Note);

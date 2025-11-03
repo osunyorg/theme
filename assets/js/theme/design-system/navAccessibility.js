@@ -14,4 +14,4 @@ window.osuny.NavAccessibility.prototype.focusMain = function () {
     main.setAttribute('tabindex', '-1');
 }
 
-window.osuny.page.addComponent("#nav-accessibility", window.osuny.NavAccessibility);
+window.osuny.page.addComponent('#nav-accessibility', window.osuny.NavAccessibility);
