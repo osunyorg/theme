@@ -1,6 +1,6 @@
-var osuny = window.osuny || {};
+window.osuny = window.osuny || {};
 
-osuny.StickyTitle = function (container, titleSelector) {
+window.osuny.StickyTitle = function (container, titleSelector) {
     this.container = container;
     this.title = container.querySelector(titleSelector);
 
@@ -9,7 +9,7 @@ osuny.StickyTitle = function (container, titleSelector) {
     }
 }
 
-osuny.StickyTitle.prototype.listen = function () {
+window.osuny.StickyTitle.prototype.listen = function () {
     var distance = 0,
         threshold = 5,
         titleOriginalHeight = this.title.offsetHeight,
@@ -35,7 +35,7 @@ osuny.StickyTitle.prototype.listen = function () {
     }.bind(this));
 };
 
-osuny.StickyTitle.prototype.setTitleHeight = function () {
+window.osuny.StickyTitle.prototype.setTitleHeight = function () {
     
 };
 
@@ -43,6 +43,6 @@ osuny.StickyTitle.prototype.setTitleHeight = function () {
 (function () {
     var events = document.querySelectorAll('.events-date.events-date--sticky');
     events.forEach(function (event) {
-        new osuny.StickyTitle(event, '.events-date-title');
+        new window.osuny.StickyTitle(event, '.events-date-title');
     });
 }());

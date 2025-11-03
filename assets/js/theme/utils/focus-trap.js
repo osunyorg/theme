@@ -5,21 +5,21 @@ export function focusTrap(event, element, isOpened) {
         return;
     }
 
-    const focusableElements = getFocusableElements(element);
+    var focusableElements = getFocusableElements(element);
     if (focusableElements.length === 0) {
         return;
     }
 
-    const firstFocusable = focusableElements[0];
-    const lastFocusable = focusableElements[focusableElements.length - 1];
+    var firstFocusable = focusableElements[0];
+    var lastFocusable = focusableElements[focusableElements.length - 1];
     handleTabLoop(event, firstFocusable, lastFocusable, element);
 }
 
 function handleTabLoop(event, firstFocusable, lastFocusable, element) {
-    const goingBackward = event.shiftKey;
-    const focusTarget = goingBackward ? lastFocusable : firstFocusable;
+    var goingBackward = event.shiftKey;
+    var focusTarget = goingBackward ? lastFocusable : firstFocusable;
     // get focus position (we want first or last) to create the focus loop
-    const focusOnLimit = isElementFocused(element, goingBackward ? firstFocusable : lastFocusable);
+    var focusOnLimit = isElementFocused(element, goingBackward ? firstFocusable : lastFocusable);
     if (focusOnLimit) {
         event.preventDefault();
         focusTarget.focus();

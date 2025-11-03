@@ -43,24 +43,24 @@ window.osuny.Note.prototype.deactivate = function () {
 
 window.osuny.Note.prototype.deactivateAllNotes = function () {
     var notes = window.osuny.page.getComponents(window.osuny.Note);
-    notes.forEach(note => {
+    notes.forEach(function (note) {
         note.deactivate();
     });
 }
 
 window.osuny.Note.prototype.a11yDisabling = function () {
-    this.closeWithKeyboard = (event) => {
+    this.closeWithKeyboard = function (event) {
         if (event.keyCode === 27 || event.key === 'Escape' || event.key === 'Tab' || event.keyCode === 9) {
             this.deactivateAllNotes();
             this.call.focus();
         }
-    };
+    }.bind(this);
 
-    this.closeWithClick = (event) => {
+    this.closeWithClick = function (event) {
         if (!event.target.closest('.note--active')) {
             this.deactivateAllNotes();
         }
-    };
+    }.bind(this);
 
     window.addEventListener('keydown', this.closeWithKeyboard);
     document.addEventListener('click', this.closeWithClick);

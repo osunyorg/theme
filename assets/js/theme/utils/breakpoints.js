@@ -1,4 +1,4 @@
-const breakpoints = {
+var breakpoints = {
     xs: 0,
     sm: 576,
     md: 768,
@@ -8,7 +8,7 @@ const breakpoints = {
     xxxl: 1600
 };
 
-const isMobile = function() {
+var isMobile = function() {
     return window.innerWidth <= breakpoints.lg 
 }
 
