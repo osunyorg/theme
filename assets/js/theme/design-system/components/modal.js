@@ -1,10 +1,3 @@
-import { focusTrap } from '../../utils/focus-trap';
-
-var CLASSES = {
-    modalOpened: 'has-modal-opened',
-    modalIsOpened: 'is-opened'
-};
-
 window.osuny = window.osuny || {};
 
 window.osuny.Modal = function (button) {
@@ -22,7 +15,6 @@ window.osuny.Modal.prototype._listen = function () {
     window.osuny.Popup.prototype._listen.call(this);
 
     this.button.addEventListener('click', this.open.bind(this, this.button));
-}
+};
 
 window.osuny.page.addComponent('[data-open-modal]', window.osuny.Modal);
-

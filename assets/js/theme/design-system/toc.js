@@ -1,4 +1,6 @@
 import { isMobile } from '../utils/breakpoints';
+import { focusTrap } from '../utils/focus-trap';
+
 window.osuny = window.osuny || {};
 
 var CLASSES = {
@@ -63,6 +65,7 @@ window.osuny.TableOfContents.prototype.listen = function () {
         if (event.keyCode === 27 || event.key === 'Escape') {
             this.toggle(false);
         }
+        focusTrap(event, this.element, this.state.opened);
     }.bind(this));
 };
 

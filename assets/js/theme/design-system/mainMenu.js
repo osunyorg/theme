@@ -59,9 +59,8 @@ window.osuny.MainMenu.prototype.listen = function () {
     window.addEventListener('keydown', function (event) {
         if (event.keyCode === 27 || event.key === 'Escape') {
             this.closeEverything();
-        } else if (event.key === 'Tab' && this.state.opened) {
-            focusTrap(event, this.element, true);
         }
+        focusTrap(event, this.element, this.state.opened);
     }.bind(this));
 };
 
