@@ -6,6 +6,10 @@ window.osuny.pagefindOptions = window.osuny.pagefindOptions || {};
 window.osuny.Search = function (element) {
     window.osuny.Popup.call(this, element);
 
+    if (typeof PagefindUI === 'undefined') {
+        return;
+    }
+
     this.buttons = document.querySelectorAll('.search-button');
 
     this._setup();
@@ -168,10 +172,4 @@ window.osuny.Search.prototype.updateAccessibilityMessage = function () {
     }
 };
 
-// Selectors
-window.addEventListener('DOMContentLoaded', function () {
-    var element = document.querySelector('#search');
-    if (typeof PagefindUI !== 'undefined' && element) {
-        window.osuny.search = new window.osuny.Search(element);
-    }
-});
+window.osuny.page.addComponent("#search", window.osuny.Search);

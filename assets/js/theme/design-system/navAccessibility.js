@@ -1,8 +1,8 @@
-var osuny = window.osuny || {};
+window.osuny = window.osuny || {};
 
-osuny.navAccessibility = {
-    init: function (element) {
-        this.element = element;
+window.osuny.navAccessibility = {
+    init: function () {
+        this.element = document.getElementById('nav-accessibility');
 
         if (!this.element) {
             return;
@@ -20,9 +20,4 @@ osuny.navAccessibility = {
     }
 };
 
-(function () {
-    var navAccessibilityElement = document.getElementById('nav-accessibility')
-    if (navAccessibilityElement) {
-        osuny.navAccessibility.init(navAccessibilityElement);
-    }
-}());
+window.osuny.navAccessibility.init();
