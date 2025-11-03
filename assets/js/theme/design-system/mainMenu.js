@@ -21,7 +21,7 @@ window.osuny.MainMenu = function (selector) {
     this.dropdownsButtons = this.element.querySelectorAll('.has-children [role="button"]');
 
     this.state = {
-        isOpened: false,
+        opened: false,
         isMobile: false,
         hasDropdownOpened: false,
         previousScrollY: window.scrollY
@@ -59,7 +59,7 @@ window.osuny.MainMenu.prototype.listen = function () {
     window.addEventListener('keydown', function (event) {
         if (event.keyCode === 27 || event.key === 'Escape') {
             this.closeEverything();
-        } else if (event.key === 'Tab' && this.state.isOpened) {
+        } else if (event.key === 'Tab' && this.state.opened) {
             focusTrap(event, this.element, true);
         }
     }.bind(this));
@@ -83,7 +83,7 @@ window.osuny.MainMenu.prototype.resize = function () {
 };
 
 window.osuny.MainMenu.prototype.setHeaderHeightVariables = function () {
-    if (!this.state.isOpened) {
+    if (!this.state.opened) {
         document.documentElement.style.setProperty('--header-height', Math.floor(this.element.offsetHeight) + 'px');
         document.documentElement.style.setProperty('--header-menu-max-height', Math.floor(window.innerHeight - this.element.offsetHeight) + 'px');
     }
@@ -98,13 +98,13 @@ window.osuny.MainMenu.prototype.updateUpperMenuPosition = function () {
 };
 
 window.osuny.MainMenu.prototype.open = function () {
-    this.state.isOpened = true;
+    this.state.opened = true;
     this.menu.classList.add(CLASSES.mainMenuOpened);
     this.onChange();
 };
 
 window.osuny.MainMenu.prototype.close = function () {
-    this.state.isOpened = false;
+    this.state.opened = false;
     this.menu.classList.remove(CLASSES.mainMenuOpened);
 
     // Close dropdown to avoid keeping overlay when mobile and menu closed
@@ -116,15 +116,15 @@ window.osuny.MainMenu.prototype.close = function () {
 };
 
 window.osuny.MainMenu.prototype.onChange = function () {
-    this.mainButton.setAttribute('aria-expanded', this.state.isOpened);
+    this.mainButton.setAttribute('aria-expanded', this.state.opened);
     if (this.state.isMobile) {
-        ariaHideBodyChildren(this.element, this.state.isOpened);
+        ariaHideBodyChildren(this.element, this.state.opened);
     }
     this.updateOverlay();
 };
 
 window.osuny.MainMenu.prototype.toggle = function () {
-    if (this.state.isOpened) {
+    if (this.state.opened) {
         this.close();
     } else {
         this.open();
@@ -132,7 +132,7 @@ window.osuny.MainMenu.prototype.toggle = function () {
 };
 
 window.osuny.MainMenu.prototype.closeEverything = function () {
-    if (!this.state.isOpened && !this.state.hasDropdownOpened) {
+    if (!this.state.opened && !this.state.hasDropdownOpened) {
         return;
     }
 
@@ -163,7 +163,7 @@ window.osuny.MainMenu.prototype.toggleDropdown = function (clickedButton) {
 };
 
 window.osuny.MainMenu.prototype.updateOverlay = function () {
-    var classAction = this.state.hasDropdownOpened || this.state.isOpened ? 'add' : 'remove';
+    var classAction = this.state.hasDropdownOpened || this.state.opened ? 'add' : 'remove';
     document.documentElement.classList[classAction](CLASSES.menusOpened);
 
     // Add class for animation transition

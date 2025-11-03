@@ -2,7 +2,7 @@ import { ariaHideBodyChildren } from '../utils/a11y';
 import { focusTrap } from '../utils/focus-trap';
 
 var CLASSES = {
-    popupOpened: 'has-modal-opened',
+    hasPopupOpened: 'has-modal-opened',
     popupIsOpened: 'is-opened'
 };
 
@@ -27,9 +27,8 @@ window.osuny.Popup.prototype._listen = function () {
     window.addEventListener('keydown', function (event) {
         if (event.keyCode === 27 || event.key === 'Escape') {
             this.toggle(false);
-        } else if (event.key === 'Tab' && this.state.opened) {
-            focusTrap(event, this.element, this.state.opened);
         }
+        focusTrap(event, this.element, this.state.opened);
     }.bind(this));
 
     window.addEventListener('click', function (event) {
@@ -44,7 +43,7 @@ window.osuny.Popup.prototype.toggle = function (open, triggerElement) {
     this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
     classAction = this.state.opened ? 'add' : 'remove';
 
-    document.documentElement.classList[classAction](CLASSES.popupOpened);
+    document.documentElement.classList[classAction](CLASSES.hasPopupOpened);
 
     this.element.setAttribute('aria-hidden', !this.state.opened);
     this.element.classList[classAction](CLASSES.popupIsOpened);
@@ -64,6 +63,14 @@ window.osuny.Popup.prototype.toggle = function (open, triggerElement) {
     if (!this.state.opened && this.lastTriggerElement) {
         this.lastTriggerElement.focus();
     }
+};
+
+window.osuny.Popup.prototype.open = function () {
+    this.toggle(true);
+};
+
+window.osuny.Popup.prototype.close = function () {
+    this.toggle(false);
 };
 
 window.osuny.Popup.prototype.closeExtendables = function () {

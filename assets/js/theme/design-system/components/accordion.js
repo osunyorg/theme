@@ -5,7 +5,7 @@ window.osuny.Accordion = function (element) {
     this.button = this.element.querySelector('summary');
 
     this.state = {
-        isOpened: false
+        opened: false
     };
 
     this.listen();
@@ -21,10 +21,10 @@ window.osuny.Accordion.prototype.listen = function () {
 
 window.osuny.Accordion.prototype.toggleAccordion = function (open) {
     if (typeof open === 'undefined') {
-        open = !this.state.isOpened;
+        open = !this.state.opened;
     }
-    this.state.isOpened = open;
-    this.button.setAttribute('aria-expanded', this.state.isOpened);
+    this.state.opened = open;
+    this.button.setAttribute('aria-expanded', this.state.opened);
 };
 
 window.osuny.page.addComponent('details', window.osuny.Accordion);

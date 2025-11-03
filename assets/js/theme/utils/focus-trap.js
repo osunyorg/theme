@@ -7,6 +7,7 @@ export function focusTrap(event, element, isOpened) {
 
     var focusableElements = getFocusableElements(element);
     if (focusableElements.length === 0) {
+        console.log('ok ')
         return;
     }
 

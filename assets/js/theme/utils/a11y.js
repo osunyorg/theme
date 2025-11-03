@@ -88,11 +88,14 @@ setDescribedBy = function () {
 };
 
 getFocusableElements = function (element) {
-    var focusables = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]';
-    var elements = element.querySelectorAll(focusables);
-    return Array.from(elements).filter( function (el) {
-        !el.disabled && el.tabIndex >= 0
+    var focusables = 'a, button, input, textarea, select, details, [tabindex]:not([tabindex="-1"]), [contenteditable="true"]',
+        elements = element.querySelectorAll(focusables);
+
+    elements = Array.from(elements).filter(function (el) {
+        return !el.disabled && el.tabIndex >= 0
     });
+
+    return elements
 }
 
 setDescribedBy();
