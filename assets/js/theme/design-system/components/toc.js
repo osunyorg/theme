@@ -1,5 +1,5 @@
-import { isMobile } from '../utils/breakpoints';
-import { focusTrap } from '../utils/focus-trap';
+import { isMobile } from '../../utils/breakpoints';
+import { focusTrap } from '../../utils/focus-trap';
 
 window.osuny = window.osuny || {};
 

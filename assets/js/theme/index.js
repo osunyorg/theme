@@ -5,14 +5,14 @@ import './body';
 
 import './page';
 import './design-system/events';
-import './design-system/toc';
+import './design-system/components/toc';
 import './design-system/Popup';
 import './design-system/lightbox';
 import './design-system/sliders';
-import './design-system/search';
+import './design-system/components/search';
 import './design-system/stickyTitle';
 import './design-system/mainMenu';
-import './design-system/navAccessibility';
+import './design-system/components/navAccessibility';
 import './design-system/components/accordion';
 import './design-system/components/copyButtons';
 import './design-system/components/extendables';
