@@ -3,7 +3,6 @@ import { setButtonEnability, setDefaultAltToImages } from '../utils/a11y';
 
 /* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
-window.osuny.Lightbox = window.osuny.Lightbox || {};
 
 window.osuny.Lightbox = function () {
     var element = document.getElementById('lightbox');

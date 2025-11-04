@@ -1,8 +1,8 @@
-import { a11yClick, getFocusableElements } from '../utils/a11y';
+import { a11yClick, getFocusableElements } from '../../utils/a11y';
 
-var osuny = window.osuny || {};
+window.osuny = window.osuny || {};
 
-osuny.Extendable = function (element) {
+window.osuny.Extendable = function (element) {
     this.element = element;
     this.buttons = document.querySelectorAll('[aria-controls=' + this.element.id + ']');
     this.state = {
@@ -20,7 +20,7 @@ osuny.Extendable = function (element) {
     this.listen();
 };
 
-osuny.Extendable.prototype.listen = function () {
+window.osuny.Extendable.prototype.listen = function () {
     if (this.options.autoClose) {
         this.handleAutoClose();
     }
@@ -39,10 +39,10 @@ osuny.Extendable.prototype.listen = function () {
         }
     }.bind(this));
 
-    this.element.addEventListener(window.osuny.EVENTS.EXTENDABLE_CLOSE, this.toggle.bind(this, false, true));
+    this.element.addEventListener(window.window.osuny.EVENTS.EXTENDABLE_CLOSE, this.toggle.bind(this, false, true));
 };
 
-osuny.Extendable.prototype.handleAutoClose = function () {
+window.osuny.Extendable.prototype.handleAutoClose = function () {
     var isInTarget = false;
     window.addEventListener('click', function (event) {
         isInTarget = this.state.openedByButton ? this.state.openedByButton.contains(event.target) : false;
@@ -55,13 +55,13 @@ osuny.Extendable.prototype.handleAutoClose = function () {
     }.bind(this));
 };
 
-osuny.Extendable.prototype.a11yFocus = function (button) {
+window.osuny.Extendable.prototype.a11yFocus = function (button) {
     if (this.state.opened) {
         this.state.openedByButton = button;
     }
 };
 
-osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
+window.osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
     this.state.opened = typeof opened !== 'undefined' ? opened : !this.state.opened;
 
     if (this.state.opened && this.options.closeSiblings) {
@@ -82,14 +82,14 @@ osuny.Extendable.prototype.toggle = function (opened, fromOutside) {
     this.dispatchOpeningEvents();
 };
 
-osuny.Extendable.prototype.dispatchOpeningEvents = function () {
+window.osuny.Extendable.prototype.dispatchOpeningEvents = function () {
     if (this.state.opened) {
-        window.dispatchEvent(new Event(window.osuny.EVENTS.EXTENDABLE_HAS_OPEN));
+        window.dispatchEvent(new Event(window.window.osuny.EVENTS.EXTENDABLE_HAS_OPEN));
         window.dispatchEvent(new Event('resize'));
     }
 };
 
-osuny.Extendable.prototype.setButtonAriaExpanded = function () {
+window.osuny.Extendable.prototype.setButtonAriaExpanded = function () {
     this.buttons.forEach(function (button) {
         if (button.getAttribute('aria-expanded')) {
             button.setAttribute('aria-expanded', this.state.opened);
@@ -97,14 +97,14 @@ osuny.Extendable.prototype.setButtonAriaExpanded = function () {
     }.bind(this));
 };
 
-osuny.Extendable.prototype.focusFirstElement = function () {
+window.osuny.Extendable.prototype.focusFirstElement = function () {
     var focusableElements = getFocusableElements(this.element);
     if (focusableElements.length > 0) {
         focusableElements[0].focus();
     }
 };
 
-osuny.Extendable.prototype.closeSiblings = function () {
+window.osuny.Extendable.prototype.closeSiblings = function () {
     var parent = this.element.parentNode,
         extendables;
 
@@ -115,11 +115,9 @@ osuny.Extendable.prototype.closeSiblings = function () {
     extendables = parent.querySelectorAll('.extendable');
     extendables.forEach(function (extendable) {
         if (this.element !== extendable) {
-            extendable.dispatchEvent(new Event(window.osuny.EVENTS.EXTENDABLE_CLOSE));
+            extendable.dispatchEvent(new Event(window.window.osuny.EVENTS.EXTENDABLE_CLOSE));
         }
     }.bind(this));
 };
 
-(function () {
-    osuny.utils.instanciateAll('.extendable, .collapse', osuny.Extendable);
-}());
+window.osuny.page.addComponent('.extendable, .collapse', window.osuny.Extendable);
