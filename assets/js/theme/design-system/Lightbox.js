@@ -1,4 +1,4 @@
-import './touchControl';
+import './TouchControl';
 import { setButtonEnability, setDefaultAltToImages } from '../utils/a11y';
 
 /* eslint-disable no-underscore-dangle */
