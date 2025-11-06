@@ -1,5 +1,5 @@
-export const isReducedMotionPrefered = function () {
+export var isReducedMotionPrefered = function () {
     // Grab the prefers reduced media query.
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     return !mediaQuery || mediaQuery.matches;
 };

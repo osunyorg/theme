@@ -29,7 +29,9 @@ params:
   debug:
     active: false
     productionUrl: ""
-  keycdn: https://osuny-1b4da.kxcdn.com
+  keycdn:
+    quality: 80
+    url: https://osuny-1b4da.kxcdn.com
   plausible: false
   seo:
     title:
@@ -344,7 +346,7 @@ params:
         categories: true
         date: true
         image: true
-        reading_time: true
+        reading_time: false
         summary: true
         subtitle: true
       truncate_description: 200 # Set to 0 to disable truncate
@@ -473,9 +475,10 @@ params:
         progression: true
   image_sizes:
     _default:
+      pagefind: "244"
       lightbox:
         desktop:   1920x2560
-      hero: &image_sizes_hero
+      hero:
         mobile:   400
         tablet:   800
         desktop:  750

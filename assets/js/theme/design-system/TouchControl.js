@@ -1,8 +1,8 @@
-var osuny = window.osuny || {};
+window.osuny = window.osuny || {};
 /*
 * Parameter parent can be a Slider or a Lightbox
 */
-osuny.TouchControl = function (parent, container) {
+window.osuny.TouchControl = function (parent, container) {
     this.parent = parent;
     this.container = container;
 
@@ -33,18 +33,18 @@ osuny.TouchControl = function (parent, container) {
     this.listen();
 };
 
-osuny.TouchControl.classes = {
+window.osuny.TouchControl.classes = {
     isGrabbing: 'is-grabbing'
 };
 
-Object.defineProperty(osuny.TouchControl.prototype, 'isGrabbing', {
+Object.defineProperty(window.osuny.TouchControl.prototype, 'isGrabbing', {
     get: function () {
         return this.state.isGrabbing;
     },
     set: function (_isGrabbing) {
         var classAction = _isGrabbing ? 'add' : 'remove';
         this.state.isGrabbing = _isGrabbing;
-        this.container.classList[classAction](osuny.TouchControl.classes.isGrabbing);
+        this.container.classList[classAction](window.osuny.TouchControl.classes.isGrabbing);
 
         if (_isGrabbing) {
             this.state.shouldPreventClicks = true;
@@ -52,25 +52,25 @@ Object.defineProperty(osuny.TouchControl.prototype, 'isGrabbing', {
     }
 });
 
-osuny.TouchControl.prototype.listen = function () {
+window.osuny.TouchControl.prototype.listen = function () {
     this.container.style.touchAction = 'pan-y';
-    osuny.utils.bindEvents(this.container, 'touchstart mousedown', this.onStart.bind(this), { passive: true });
-    osuny.utils.bindEvents(this.container, 'touchmove mousemove', this.onMove.bind(this), { passive: true });
-    osuny.utils.bindEvents(this.container, 'touchend mouseup touchcancel click', this.onEnd.bind(this), true);
-    osuny.utils.bindEvents(window, 'touchend mouseup touchcancel click', this.onEnd.bind(this), true);
+    window.osuny.utils.bindEvents(this.container, 'touchstart mousedown', this.onStart.bind(this), { passive: true });
+    window.osuny.utils.bindEvents(this.container, 'touchmove mousemove', this.onMove.bind(this), { passive: true });
+    window.osuny.utils.bindEvents(this.container, 'touchend mouseup touchcancel click', this.onEnd.bind(this), true);
+    window.osuny.utils.bindEvents(window, 'touchend mouseup touchcancel click', this.onEnd.bind(this), true);
     window.addEventListener('blur', this.onEnd.bind(this));
     window.addEventListener('resize', this.onResize.bind(this));
 };
 
-osuny.TouchControl.prototype.onStart = function (event) {
+window.osuny.TouchControl.prototype.onStart = function (event) {
     this.state.isPointerDown = true;
     this.isGrabbing = false;
-    this.state.start = osuny.utils.getEventClientCoord(event);
-    this.state.startedAt = osuny.utils.getTime();
+    this.state.start = window.osuny.utils.getEventClientCoord(event);
+    this.state.startedAt = window.osuny.utils.getTime();
 };
 
-osuny.TouchControl.prototype.onMove = function (event) {
-    var time = osuny.utils.getTime(),
+window.osuny.TouchControl.prototype.onMove = function (event) {
+    var time = window.osuny.utils.getTime(),
         isGrabbing = time > this.state.startedAt + this.options.threshold.duration;
 
     if (!this.state.isPointerDown) {
@@ -79,17 +79,17 @@ osuny.TouchControl.prototype.onMove = function (event) {
     }
 
     if (this.isGrabbing !== isGrabbing && isGrabbing) {
-        this.state.start = osuny.utils.getEventClientCoord(event);
+        this.state.start = window.osuny.utils.getEventClientCoord(event);
         this.isGrabbing = isGrabbing;
     }
 
     if (this.isGrabbing) {
-        this.state.end = osuny.utils.getEventClientCoord(event);
+        this.state.end = window.osuny.utils.getEventClientCoord(event);
         this.drag();
     }
 };
 
-osuny.TouchControl.prototype.drag = function () {
+window.osuny.TouchControl.prototype.drag = function () {
     var distance = {
         x: this.state.start.x - this.state.end.x,
         y: this.state.start.y - this.state.end.y
@@ -106,7 +106,7 @@ osuny.TouchControl.prototype.drag = function () {
     }
 };
 
-osuny.TouchControl.prototype.onEnd = function (event) {
+window.osuny.TouchControl.prototype.onEnd = function (event) {
     this.preventClicks(event);
 
     if (!this.state.isPointerDown) {
@@ -122,10 +122,10 @@ osuny.TouchControl.prototype.onEnd = function (event) {
     this.dispatch(event);
 };
 
-osuny.TouchControl.prototype.dispatch = function (event) {
+window.osuny.TouchControl.prototype.dispatch = function (event) {
     var threshold = this.options.threshold.action;
 
-    this.state.end = osuny.utils.getEventClientCoord(event);
+    this.state.end = window.osuny.utils.getEventClientCoord(event);
     
     if (this.state.start.x > this.state.end.x + threshold) {
         this.parent.next();
@@ -140,7 +140,7 @@ osuny.TouchControl.prototype.dispatch = function (event) {
     }
 };
 
-osuny.TouchControl.prototype.preventClicks = function (event) {
+window.osuny.TouchControl.prototype.preventClicks = function (event) {
     if (this.state.shouldPreventClicks && event.type === 'click') {
         event.preventDefault();
         event.stopPropagation();
@@ -152,12 +152,12 @@ osuny.TouchControl.prototype.preventClicks = function (event) {
     }.bind(this), 10);
 };
 
-osuny.TouchControl.prototype.clear = function () {
+window.osuny.TouchControl.prototype.clear = function () {
     this.state.direction = null;
     this.state.isPointerDown = false;
     this.isGrabbing = false;
 };
 
-osuny.TouchControl.prototype.onResize = function () {
+window.osuny.TouchControl.prototype.onResize = function () {
     this.options.threshold.action = Math.max(30, window.innerWidth * 0.15);
 };
