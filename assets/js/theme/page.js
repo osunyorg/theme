@@ -29,6 +29,18 @@ window.osuny.Page.prototype.getComponents = function (kind) {
     return components;
 };
 
+window.osuny.Page.prototype.getComponentInstanceById = function (id) {
+    var componentInstance = null;
+    this.components.forEach(function (component) {
+        component.instances.forEach(function (instance) {
+            if (instance.id === id) {
+                componentInstance = instance;
+            }
+        });
+    });
+    return componentInstance;
+};
+
 window.osuny.page = new window.osuny.Page();
 
 window.addEventListener('DOMContentLoaded', function () {

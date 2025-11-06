@@ -1,7 +1,6 @@
 import './polyfills';
 import './utils/utils';
 import './utils/realViewportHeight';
-import './body';
 
 import './page';
 import './design-system/events';
