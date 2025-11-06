@@ -27,15 +27,17 @@ window.osuny.Page.prototype.getComponents = function (name) {
     return this.components[name].instances;
 };
 
-window.osuny.Page.prototype.getComponentInstanceById = function (id) {
+window.osuny.Page.prototype.getComponentInstanceById = function (name, id) {
     var componentInstance = null;
-    this.components.forEach(function (component) {
+
+    for (name in this.components) {
         component.instances.forEach(function (instance) {
             if (instance.id === id) {
                 componentInstance = instance;
             }
         });
-    });
+    }
+
     return componentInstance;
 };
 
