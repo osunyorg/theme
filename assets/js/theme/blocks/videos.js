@@ -30,4 +30,8 @@ window.osuny.VideoPlayer.prototype.cloneIframe = function () {
     return clone;
 };
 
-window.osuny.page.addComponent('.block-video', window.osuny.VideoPlayer);
+window.osuny.page.registerComponent({
+    name: 'videoPlayer',
+    selector: '.block-video',
+    klass: window.osuny.VideoPlayer
+});

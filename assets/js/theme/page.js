@@ -1,32 +1,30 @@
 window.osuny = window.osuny || {};
 
 window.osuny.Page = function () {
-    this.components = [];
+    this.components = {};
 };
 
-window.osuny.Page.prototype.addComponent = function (selector, kind) {
-    this.components.push({
-        kind: kind,
-        selector: selector,
-        instances: []
-    });
+window.osuny.Page.prototype.registerComponent = function (component) {
+    this.components[component.name] = component;
 };
 
 window.osuny.Page.prototype.init = function () {
-    this.components.forEach(function (component) {
-        component.instances = window.osuny.utils.instanciateAll(component.selector, component.kind);
-    });
+    var name;
+
+    for (name in this.components) {
+        this.initComponents(name);
+    }
+
     document.body.classList.add('is-loaded');
 };
 
-window.osuny.Page.prototype.getComponents = function (kind) {
-    var components = [];
-    this.components.forEach(function (component) {
-        if (component.kind === kind) {
-            components = component.instances;
-        }
-    });
-    return components;
+window.osuny.Page.prototype.initComponents = function (name) {
+    var component = this.components[name];
+    component.instances = window.osuny.utils.instanciateAll(component.selector, component.klass);
+};
+
+window.osuny.Page.prototype.getComponents = function (name) {
+    return this.components[name].instances;
 };
 
 window.osuny.Page.prototype.getComponentInstanceById = function (id) {

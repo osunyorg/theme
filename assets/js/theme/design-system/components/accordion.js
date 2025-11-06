@@ -27,4 +27,8 @@ window.osuny.Accordion.prototype.toggleAccordion = function (open) {
     this.button.setAttribute('aria-expanded', this.state.opened);
 };
 
-window.osuny.page.addComponent('details', window.osuny.Accordion);
+window.osuny.page.registerComponent({
+    name: 'accordion',
+    selector: 'details',
+    klass: window.osuny.Accordion
+});

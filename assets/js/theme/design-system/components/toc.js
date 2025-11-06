@@ -160,6 +160,8 @@ window.osuny.TableOfContents.prototype.resize = function () {
     this.state.isOffcanvas = this.isOffcanvas();
 };
 
-
-window.osuny.page.addComponent('.toc-container', window.osuny.TableOfContents);
-
+window.osuny.page.registerComponent({
+    name: 'tableOfContents',
+    selector: '.toc-container',
+    klass: window.osuny.TableOfContents
+});
