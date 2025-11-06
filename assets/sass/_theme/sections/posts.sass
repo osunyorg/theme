@@ -9,12 +9,19 @@
     .post-subtitle
         @include h3
         color: var(--color-text-alt)
-    time
-        color: $post-time-color
+    .federated
+        order: -1
     .post-meta,
     .post-reading-time
         @include meta
         color: var(--color-text-alt)
+    &.is-federated
+        .post-content
+            display: flex
+            flex-direction: column
+        .post-federation
+            order: -1
+            margin-top: 0
 
 .posts
     @include list-reset
