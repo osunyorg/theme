@@ -156,7 +156,7 @@ window.osuny.Lightbox.prototype._update = function (data, focus) {
 };
 
 window.osuny.Lightbox.prototype._setPlayer = function (data) {
-    var videoPlayer = window.osuny.videoPlayerFactory.get(data.videoId),
+    var videoPlayer = window.osuny.page.getComponentInstanceById(data.videoId),
         iframe;
     if (videoPlayer) {
         iframe = videoPlayer.cloneIframe();

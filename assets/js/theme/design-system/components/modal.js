@@ -17,4 +17,8 @@ window.osuny.Modal.prototype._listen = function () {
     this.button.addEventListener('click', this.open.bind(this, this.button));
 };
 
-window.osuny.page.addComponent('[data-open-modal]', window.osuny.Modal);
+window.osuny.page.registerComponent({
+    name: 'modal',
+    selector: '[data-open-modal]',
+    klass: window.osuny.Modal
+});

@@ -34,4 +34,8 @@ window.osuny.Timeline.prototype.getTitleHeight = function (event) {
     return eventTitle ? eventTitle.offsetHeight : 0;
 };
 
-window.osuny.page.addComponent('.block-timeline--horizontal', window.osuny.Timeline);
+window.osuny.page.registerComponent({
+    name: 'timeline',
+    selector: '.block-timeline--horizontal',
+    klass: window.osuny.Timeline
+});

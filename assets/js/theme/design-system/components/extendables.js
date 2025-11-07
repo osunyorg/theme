@@ -120,4 +120,8 @@ window.osuny.Extendable.prototype.closeSiblings = function () {
     }.bind(this));
 };
 
-window.osuny.page.addComponent('.extendable, .collapse', window.osuny.Extendable);
+window.osuny.page.registerComponent({
+    name: 'extendable',
+    selector: '.extendable, .collapse',
+    klass: window.osuny.Extendable
+});
