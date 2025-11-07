@@ -21,7 +21,7 @@
           </div>
         {{ end }}
 
-        {{ if templates.Exists ( printf "partials/%s" $template ) }}
+        {{ if templates.Exists ( printf "_partials/%s" $template ) }}
           {{ partial $template (dict
             "block" $content
             "context" $context
