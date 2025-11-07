@@ -30,18 +30,18 @@
 
     {{ if or .Params.dates .Params.current_time_slot }}
       {{ partial "events/partials/event/meta-dates.html" (dict
-          "dates" .Params.dates 
-          "time_slot" .Params.current_time_slot
-        )}}
+        "dates" .Params.dates 
+        "time_slot" .Params.current_time_slot
+      ) }}
     {{ end }}
 
     <div class="event-content">
       {{ partial "events/partials/event/heading.html" (dict
-          "item" .
-          "options" $options
-          "level" $heading_level
-          "itemprop" "name"
-        ) }}
+        "item" .
+        "options" $options
+        "level" $heading_level
+        "itemprop" "name"
+      ) }}
 
       {{ partial "events/partials/event/federated.html" . }}
 
@@ -57,11 +57,11 @@
 
       {{ if $options.dates }}
         {{ partial "events/partials/event/schedule.html" (dict 
-            "dates" .Params.dates
-            "time_slot" .Params.current_time_slot
-            "time_slots" .Params.time_slots
-            "on_two_lines" (ne $layout "list")
-          )}}
+          "dates" .Params.dates
+          "time_slot" .Params.current_time_slot
+          "time_slots" .Params.time_slots
+          "on_two_lines" (ne $layout "list")
+        ) }}
       {{ end }}
 
       {{ if and $dates.status $options.status }}
@@ -73,7 +73,7 @@
           {{ partial "GetRichSummary" ( dict 
             "summary" .Params.summary
             "kind" "events"
-          )}}
+          ) }}
         </div>
       {{ end }}
 
@@ -81,7 +81,7 @@
         {{ partial "commons/categories.html" ( dict
           "context" .
           "kind" "event"
-        )}}
+        ) }}
       {{- end -}}
 
       {{ if or (eq $layout "large") $with_more }}
@@ -94,10 +94,10 @@
         {{ $sizes = site.Params.image_sizes.sections.events.children_in_agenda }}
       {{ end }}
       {{ partial "events/partials/event/media.html" (dict 
-          "image" .Params.image
-          "layout" $layout
-          "sizes" $sizes
-        ) }}
+        "image" .Params.image
+        "layout" $layout
+        "sizes" $sizes
+      ) }}
     {{ end }}
   </article>
 {{ end }}

@@ -9,11 +9,11 @@
   {{ else }}
     <div class="{{ $layout }}">
       {{ range .Paginator.Pages }}
-        {{  partial "pages/partials/page.html" (dict 
-            "page" .
-            "options" site.Params.pages.index.options
-            "layout" $layout
-          )}}
+        {{ partial "pages/partials/page.html" (dict 
+          "page" .
+          "options" site.Params.pages.index.options
+          "layout" $layout
+        ) }}
       {{ end }}
     </div>
   {{ end }}

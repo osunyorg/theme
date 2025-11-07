@@ -9,7 +9,7 @@
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level 
   "attributes" "class='post-title' itemprop='headline'"
-)}}
+) }}
 
 {{ with $post }}
   {{ $post_class := "post" }}
@@ -48,7 +48,7 @@
             {{ partial "GetRichSummary" ( dict 
               "summary" .Params.summary
               "kind" "posts"
-            )}}
+            ) }}
           </div>
         {{- end -}}
 
@@ -56,7 +56,7 @@
           {{ partial "commons/categories.html" ( dict
             "context" .
             "kind" "post"
-          )}}
+          ) }}
         {{ end }}
 
         {{ if or $options.author $options.date $options.reading_time }}
@@ -79,9 +79,9 @@
       </div>
       {{ if $options.image }}
         {{ partial "posts/partials/post/media.html" (dict 
-            "image" .Params.image
-            "layout" $layout
-          ) }}
+          "image" .Params.image
+          "layout" $layout
+        ) }}
       {{- end -}}
     </article>
   </li>

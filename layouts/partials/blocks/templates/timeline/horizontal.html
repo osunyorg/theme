@@ -1,7 +1,7 @@
-{{ $heading_tag := partial "GetHeadingTag" (dict 
+{{- $heading_tag := partial "GetHeadingTag" (dict 
   "level" .block.ranks.children
   "attributes" "class='title' itemprop='name'"
-)}}
+) -}}
 
 {{ with .block.data }}
   <ol data-slider="{{ site.Params.blocks.timeline.slider | encoding.Jsonify }}">

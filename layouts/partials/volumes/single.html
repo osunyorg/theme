@@ -11,19 +11,16 @@
   {{- end -}}
 
   <div class="container">
-
     {{ partial "volumes/single/document-aside.html" . }}
 
     <div class="content">
       {{ partial "volumes/single/text.html" . }}
       {{ partial "volumes/single/papers.html" . }}
     </div>
-
   </div>
 
   {{ partial "contents/list.html" (dict
     "context" .
     "contents" .Params.contents
   ) }}
-
 </div>

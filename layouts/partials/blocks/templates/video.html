@@ -17,10 +17,10 @@
 
           {{ if eq .layout "button" }}
             {{ $options := (dict
-                "mode" "player"
-                "videoId" $video_id
-                "transcription" (printf "<p>%s</p>%s" .video_title .transcription)
-              )}}
+              "mode" "player"
+              "videoId" $video_id
+              "transcription" (printf "<p>%s</p>%s" .video_title .transcription)
+            ) }}
             <button class="btn"
               id="play-{{ $video_id }}"
               data-lightbox="{{ $options | encoding.Jsonify }}">
@@ -43,7 +43,7 @@
             <p aria-hidden="true" id="{{ $described_by_id }}">{{- partial "PrepareHTML" .video_title -}}</p>
           {{ end }}
 
-          {{ partial "commons/transcription" ( dict
+          {{ partial "commons/transcription.html" ( dict
             "block_index" $block_index
             "described_by" $described_by_id
             "transcription" .transcription

@@ -31,14 +31,14 @@
                 {{ partial "GetRichSummary" ( dict 
                   "summary" .Params.summary
                   "kind" "pages"
-                )}}
+                ) }}
               {{ end }}
 
               {{ if and $options.categories .Params.taxonomies }}
                 {{ partial "commons/categories" ( dict
                   "context" .
                   "kind" "page"
-                )}}
+                ) }}
               {{ end }}
             </div>
 
@@ -46,7 +46,7 @@
               {{ partial "pages/partials/page/media.html" (dict 
                 "image" .Params.image
                 "layout" "list"
-              )}}
+              ) }}
             {{ end }}
           </article>
         {{ else }}

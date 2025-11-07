@@ -9,11 +9,10 @@
     )}}
 {{ end }}
 
-{{- partial "header/hero.html"
-      (dict
-        "title" $title
-        "image" .Params.image
-        "sizes" site.Params.image_sizes.sections.events.hero
-        "button" $button
-        "context" .
-      ) -}}
+{{- partial "header/hero.html" (dict
+  "title" $title
+  "image" .Params.image
+  "sizes" site.Params.image_sizes.sections.events.hero
+  "button" $button
+  "context" .
+) -}}

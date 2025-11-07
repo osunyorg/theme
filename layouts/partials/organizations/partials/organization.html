@@ -51,16 +51,16 @@
 
       {{ if and $options.categories .Params.organizations_categories }}
         {{ partial "commons/categories.html" (dict
-            "context" .
-            "kind" "organization"
-          )}}
+          "context" .
+          "kind" "organization"
+        ) }}
       {{ end }}
     </div>
     {{ if $options.logo }}
       {{ partial "organizations/partials/organization/media.html" (dict
-          "context" .
-          "layout" $layout
-        )}}
+        "context" .
+        "layout" $layout
+      ) }}
     {{ end }}
   </article>
 {{ end }}

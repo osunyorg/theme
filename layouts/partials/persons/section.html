@@ -10,9 +10,9 @@
 
 <div class="document-content">
   {{ partial "toc/container.html" (dict
-        "toc" "toc/default.html"
-        "context" .
-      ) }}
+    "toc" "toc/default.html"
+    "context" .
+  ) }}
 
   {{ $summary_block := false }}
   {{ if .Params.contents }}
@@ -22,10 +22,10 @@
   {{ end }}
 
   {{ partial "persons/section/summary.html" (dict
-      "context" .
-      "with_container" (not $summary_block)
-      "block_wrapped" $summary_block
-    ) }}
+    "context" .
+    "with_container" (not $summary_block)
+    "block_wrapped" $summary_block
+  ) }}
 
   {{ partial "taxonomies/section-list-container.html" . }}
 

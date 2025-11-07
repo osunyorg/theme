@@ -2,7 +2,7 @@
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level 
   "attributes" "class='volume-title'"
-)}}
+) }}
 
 {{ with $volume }}
   <li>
@@ -14,9 +14,9 @@
         {{ $heading_tag.close }}
       </hgroup>
       {{ partial "volumes/partials/volume/media.html" (dict 
-          "image" .Params.image
-          "sizes" site.Params.image_sizes.sections.volumes.item
-        ) }}
+        "image" .Params.image
+        "sizes" site.Params.image_sizes.sections.volumes.item
+      ) }}
     </article>
   </li>
 {{ end }}

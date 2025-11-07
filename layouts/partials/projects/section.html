@@ -1,18 +1,18 @@
 {{ partial "projects/section/hero.html" . }}
 <div class="document-content">
   {{ partial "projects/section/summary.html" (dict
-      "with_container" true
+    "with_container" true
+    "context" .
+  ) }}
+
+  {{ partial "taxonomies/section-list-container.html" . }}
+
+  {{ if (partial "IsFirstPage" .) }}
+    {{ partial "contents/list.html" (dict
       "context" .
+      "contents" .Params.contents
     ) }}
-
-    {{ partial "taxonomies/section-list-container.html" . }}
-
-    {{ if (partial "IsFirstPage" .) }}
-      {{ partial "contents/list.html" (dict
-        "context" .
-        "contents" .Params.contents
-      ) }}
-    {{ end }}
+  {{ end }}
   
   <div class="container">
     {{ partial "projects/partials/projects.html" . }}

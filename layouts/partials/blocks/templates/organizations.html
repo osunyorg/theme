@@ -1,10 +1,10 @@
 {{- $block := .block -}}
 {{- $block_index := .index -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
-{{ $logo_index := "logo" }}
-{{ $longitude := "" }}
-{{ $latitude := "" }}
-{{- $layout := .block.data.layout | default "grid" }}
+{{- $logo_index := "logo" -}}
+{{- $longitude := "" -}}
+{{- $latitude := "" -}}
+{{- $layout := .block.data.layout | default "grid" -}}
 
 {{ if site.Params.organizations.dark_logo_background }}
   {{ $logo_index = "logo_on_dark_background" }}
@@ -20,15 +20,15 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         {{ partial (printf "organizations/partials/layouts/%s/%s.html" $layout $layout) (dict
-            "block_index" $block_index
-            "heading_level" $block.ranks.children
-            "title" $block.title
-            "logo_index" $logo_index
-            "organizations" .organizations
-            "options" $options
-            "layout" $layout
-            "categories" .categories
-          )}}
+          "block_index" $block_index
+          "heading_level" $block.ranks.children
+          "title" $block.title
+          "logo_index" $logo_index
+          "organizations" .organizations
+          "options" $options
+          "layout" $layout
+          "categories" .categories
+        ) }}
       </div>
     </div>
   </div>

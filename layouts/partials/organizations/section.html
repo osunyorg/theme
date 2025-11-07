@@ -10,15 +10,15 @@
 
 <div class="document-content">
   {{ partial "organizations/section/summary.html" (dict
-      "context" .
-      "with_container" true
-    ) }}
+    "context" .
+    "with_container" true
+  ) }}
 
   {{ if (partial "IsFirstPage" .) }}
     {{ partial "toc/container.html" (dict
-        "toc" "pages/single/toc.html"
-        "context" .
-      ) }}
+      "toc" "pages/single/toc.html"
+      "context" .
+    ) }}
     {{ partial "taxonomies/section-list-container.html" . }}
     {{ partial "contents/list.html" (dict
       "context" .

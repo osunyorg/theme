@@ -10,11 +10,11 @@
           {{ range .Params.next_months }}
             {{ with site.GetPage .path }}
               {{ partial "events/section/calendar/month.html" (dict
-                  "name" .Title
-                  "days" .Params.days
-                  "permalink" .Permalink
-                  "label_type" "short"
-                ) }}
+                "name" .Title
+                "days" .Params.days
+                "permalink" .Permalink
+                "label_type" "short"
+              ) }}
             {{ end }}
           {{ end }}
           

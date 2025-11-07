@@ -28,10 +28,10 @@
                 {{- range . -}}
                   {{ $child := site.GetPage .path }}
                   {{ partial "programs/partials/program.html" (dict 
-                      "program" $child
-                      "heading_level" 4
-                      "options" site.Params.programs.single.children.options
-                    )}}
+                    "program" $child
+                    "heading_level" 4
+                    "options" site.Params.programs.single.children.options
+                  ) }}
                 {{- end -}}
               </ol>
             </section>
@@ -85,7 +85,6 @@
           </section>
         </div>
       {{ end }}
-
     </div>
   </div>
 </section>

@@ -13,9 +13,9 @@
             </figure>
             {{ with .image }}
               {{ partial "commons/image.html" (dict
-                  "image"    .
-                  "sizes"    site.Params.image_sizes.blocks.call_to_action
-                )}}
+                "image" .
+                "sizes" site.Params.image_sizes.blocks.call_to_action
+              )}}
             {{ end }}
             {{ with partial "GetMedia" .id }}
               {{ partial "pagedjs/partials/qr.html" (dict "text" .download_url "class" "block-files__qr") }}

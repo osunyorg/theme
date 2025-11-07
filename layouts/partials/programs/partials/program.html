@@ -28,7 +28,7 @@
         {{ partial "GetRichSummary" ( dict 
           "summary" $program.Params.summary
           "kind" "programs"
-        )}}
+        ) }}
       </div>
     {{ end }}
 
@@ -37,7 +37,7 @@
       {{ partial "commons/categories.html" (dict
         "context" $program
         "kind" "program"
-      )}}
+      ) }}
     {{ end }}
 
     {{ if $options.button }}
@@ -49,7 +49,7 @@
         "image" $program.Params.logo
         "lazy" false
         "html_class" "program-logo"
-      )}}
+      ) }}
     {{ end }}
   </div>
 
@@ -74,9 +74,9 @@
   {{ end }}
   {{ if and $program.Params.image $options.image }}
     {{ partial "programs/partials/program/media.html" (dict 
-        "image" $program.Params.image
-        "layout" $layout
-        "type" "programs"
-      ) }}
+      "image" $program.Params.image
+      "layout" $layout
+      "type" "programs"
+    ) }}
   {{ end }}
 </li>

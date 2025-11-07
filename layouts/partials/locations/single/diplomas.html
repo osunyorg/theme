@@ -1,25 +1,25 @@
 <div class="container diplomas">
-{{ range .Params.diplomas }}
-  {{ $diploma := site.GetPage .path }}
-  {{ if $diploma }}
-    <h2>
-      <a href="{{ $diploma.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $diploma.Title) }}">
-        {{- partial "PrepareHTML" $diploma.Title -}}
-      </a>
-    </h2>
+  {{ range .Params.diplomas }}
+    {{ $diploma := site.GetPage .path }}
+    {{ if $diploma }}
+      <h2>
+        <a href="{{ $diploma.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $diploma.Title) }}">
+          {{- partial "PrepareHTML" $diploma.Title -}}
+        </a>
+      </h2>
 
-    {{ with .programs }}
-      <ol class="programs">
-        {{- range . -}}
-          {{ $program := site.GetPage .path }}
-          {{- partial "programs/partials/program.html" (dict
-            "program" $program
-            "heading_level" 3
-            "options" site.Params.locations.single.programs.options
+      {{ with .programs }}
+        <ol class="programs">
+          {{- range . -}}
+            {{ $program := site.GetPage .path }}
+            {{- partial "programs/partials/program.html" (dict
+              "program" $program
+              "heading_level" 3
+              "options" site.Params.locations.single.programs.options
             ) -}}
-        {{- end -}}
-      </ol>
+          {{- end -}}
+        </ol>
+      {{ end }}
     {{ end }}
   {{ end }}
-{{ end }}
 </div>

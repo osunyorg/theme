@@ -1,16 +1,14 @@
 {{ partial "programs/section/hero.html" . }}
 <div class="document-content programs-index">
-  {{ partial "toc/container.html"
-    (dict
-          "toc" "toc/default.html"
-          "context" .
-      )
-    }}
+  {{ partial "toc/container.html" (dict
+    "toc" "toc/default.html"
+    "context" .
+  ) }}
 
   {{ partial "programs/section/summary.html" (dict
-      "with_container" true
-      "context" .
-    ) }}
+    "with_container" true
+    "context" .
+  ) }}
 
   {{ partial "contents/list.html" (dict
     "context" .
@@ -31,10 +29,10 @@
     <ol class="programs programs--{{ $layout }}">
       {{- range $programs -}}
         {{ partial "programs/partials/program.html" (dict 
-            "program" .
-            "heading_level" 2
-            "options" site.Params.programs.index.options
-          )}}
+          "program" .
+          "heading_level" 2
+          "options" site.Params.programs.index.options
+        ) }}
       {{- end -}}
     </ol>
   </div>
