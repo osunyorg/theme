@@ -47,4 +47,8 @@ window.osuny.ExtendableList.prototype.focusFirstItem = function (opened) {
     firstElement.removeAttribute('tabindex');
 };
 
-window.osuny.page.addComponent('.extendable-list', window.osuny.ExtendableList);
+window.osuny.page.registerComponent({
+    name: 'extendableList',
+    selector: '.extendable-list',
+    klass: window.osuny.ExtendableList
+});

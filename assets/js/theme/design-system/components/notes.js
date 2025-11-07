@@ -42,7 +42,7 @@ window.osuny.Note.prototype.deactivate = function () {
 }
 
 window.osuny.Note.prototype.deactivateAllNotes = function () {
-    var notes = window.osuny.page.getComponents(window.osuny.Note);
+    var notes = window.osuny.page.getComponents('note');
     notes.forEach(function (note) {
         note.deactivate();
     });
@@ -80,6 +80,10 @@ window.osuny.Note.prototype.definePosition = function () {
         this.note.classList.add('note--right');
         this.note.classList.remove('note--left');
     }
-}
+};
 
-window.osuny.page.addComponent('.note', window.osuny.Note);
+window.osuny.page.registerComponent({
+    name: 'note',
+    selector: '.note',
+    klass: window.osuny.Note
+});

@@ -172,4 +172,8 @@ window.osuny.Search.prototype.updateAccessibilityMessage = function () {
     }
 };
 
-window.osuny.page.addComponent('#search', window.osuny.Search);
+window.osuny.page.registerComponent({
+    name: 'search',
+    selector: '#search',
+    klass: window.osuny.Search
+});
