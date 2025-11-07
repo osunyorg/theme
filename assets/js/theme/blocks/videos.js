@@ -1,7 +1,5 @@
 /* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
-window.osuny.VideoPlayerFactory = window.osuny.VideoPlayerFactory || {};
-window.osuny.VideoPlayer = window.osuny.VideoPlayer || {};
 
 window.osuny.VideoPlayer = function (element) {
     this.element = element;
