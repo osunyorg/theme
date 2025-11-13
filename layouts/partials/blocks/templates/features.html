@@ -2,7 +2,8 @@
 {{- $block_class := partial "GetBlockClass" .block -}}
 
 {{- with .block.data -}}
-  {{- $features := .elements }}
+  {{ $features := .elements }}
+  {{ $options := .options }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
@@ -29,7 +30,7 @@
                   </div>
                 {{ end }}
                 {{- if .image -}}
-                  <figure {{- with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
+                  <figure {{- if $options.icons }} class="media--icon" {{ end -}} {{- with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
                     {{- partial "commons/image.html"
                       (dict
                         "image"    .image
