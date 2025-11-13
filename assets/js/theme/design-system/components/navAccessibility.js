@@ -12,6 +12,10 @@ window.osuny.NavAccessibility = function (element) {
 window.osuny.NavAccessibility.prototype.focusMain = function () {
     var main = document.getElementById('main');
     main.setAttribute('tabindex', '-1');
-}
+};
 
-window.osuny.page.addComponent('#nav-accessibility', window.osuny.NavAccessibility);
+window.osuny.page.registerComponent({
+    name: 'navAccessibility',
+    selector: '#nav-accessibility',
+    klass: window.osuny.NavAccessibility
+});
