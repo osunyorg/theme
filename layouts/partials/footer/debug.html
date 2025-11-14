@@ -224,6 +224,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
+    text-align: left !important;
     font-family: sans-serif;
     white-space: nowrap;
     opacity: 0.9;
@@ -315,7 +316,7 @@
 
         const threshold = 0.2, // 20% of tolerance
           parent = img.parentElement,
-          pixelRatio = window.devicePixelRatio,
+          pixelRatio = Math.round(window.devicePixelRatio * 10) / 10,
           dimensions = {
             width: Math.round(img.naturalWidth * pixelRatio),
             height: Math.round(img.naturalHeight * pixelRatio)
@@ -325,9 +326,10 @@
             height: Math.round(img.height * window.devicePixelRatio)
           },
           essential = 
-`<b>Loaded</b> : ${dimensions.width}x${dimensions.height}<br>
+`<b>Ratio</b> : ${pixelRatio}<br>
+<b>Loaded</b> : ${dimensions.width}x${dimensions.height}<br>
 <b>Needed</b> : ${target.width}x${target.height}<br>
-<b>Ideal config</b> : ${target.width / pixelRatio}x${target.height / pixelRatio}`
+<b>Ideal config</b> : ${img.width}x${img.height}`
           result =`
   Rendered size: ${img.width}x${img.height}
   Intrinsic size: ${dimensions.width}x${dimensions.height}

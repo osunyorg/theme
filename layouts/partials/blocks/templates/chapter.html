@@ -25,17 +25,11 @@
               </div>
             {{ end -}}
           </div>
-          {{ if .image }}
-          <!-- TODO: aligner la stucture des données avec les autres cas d'images -->
+          {{ with .image }}
             {{ partial "commons/image-figure.html" (dict
-              "image" (dict 
-                        "alt" .alt
-                        "id" .image.id
-                        "file" .image.file
-                        "credit" .credit
-                      )
-              "sizes" site.Params.image_sizes.blocks.chapter
-            ) }}
+                "image" .
+                "sizes" site.Params.image_sizes.blocks.chapter
+              ) }}
           {{ end -}}
         </div>
       </div>
