@@ -106,10 +106,10 @@ osuny.Slider.prototype.setup = function () {
 
     this.container.style.setProperty('--slider-transition-duration', this.options.transition + 'ms');
 
-    this.addComponents();
+    this.registerComponents();
 };
 
-osuny.Slider.prototype.addComponents = function () {
+osuny.Slider.prototype.registerComponents = function () {
     this.components = {};
 
     ['arrows', 'pagination', 'autoplay'].forEach(function (name) {

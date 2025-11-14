@@ -23,4 +23,8 @@ window.osuny.Offcanvas.prototype.toggle = function (opened, fromOutside) {
     document.documentElement.classList[classAction](this.classes.bodyclass);
 };
 
-window.window.osuny.page.addComponent('.offcanvas', window.osuny.Offcanvas);
+window.osuny.page.registerComponent({
+    name: 'offcanvas',
+    selector: '.offcanvas',
+    klass: window.osuny.Offcanvas
+});
