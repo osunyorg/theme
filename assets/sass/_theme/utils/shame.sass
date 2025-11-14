@@ -9,19 +9,6 @@
     white-space: nowrap !important
     width: 1px !important
 
-@mixin author-and-time-side-to-side
-    .post-meta
-        *
-            display: inline
-        > * + .post-author p,
-        > * + .post-reading-time
-            &::before
-                content: ' • '
-                display: inline-block
-                vertical-align: middle
-                padding-left: pxToRem(5)
-                padding-right: pxToRem(5)
-
 @mixin list-section
     @include list-reset
     > li

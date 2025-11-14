@@ -6,7 +6,6 @@
             @include hover-translate-icon
             text-decoration: none
     article
-        @include author-and-time-side-to-side
         .post-title
             a
                 @include stretched-link
@@ -16,6 +15,7 @@
                 margin-top: $spacing-2
             .media
                 margin-top: 0
+    
     &--grid
         .grid
             @include media-breakpoint-down(desktop)
@@ -115,6 +115,11 @@
                 margin-top: $spacing-3
                 &:where(:not(:last-child))
                     border-bottom: var(--border-width) solid var(--color-border)
+            article
+                .post-meta
+                    *::before
+                        content: none
+                        padding: 0
         article
             > * + * 
                 margin-top: $spacing-2

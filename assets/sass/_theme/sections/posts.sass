@@ -15,6 +15,18 @@
     .post-reading-time
         @include meta
         color: var(--color-text-alt)
+
+    .post-meta
+        *
+            display: inline
+        * + *
+            &::before
+                content: ' • '
+                display: inline-block
+                vertical-align: middle
+                padding-left: space()
+                padding-right: space()
+    
     &.is-federated
         .post-content
             display: flex
@@ -67,7 +79,7 @@
                 + li
                     margin-top: $spacing-3
             article
-                gap: var(--grid-gutter) // gap plutôt que marge pour l'affichage avec ou sans image
+                gap: var(--grid-gutter)
                 .media
                     width: columns(2)
                 .post-content
@@ -89,19 +101,17 @@
                     width: columns(6)
                 .post-meta
                     margin-top: auto
-                    padding-top: $spacing-3
+                    &:where(:has(*:not(time)))
+                        padding-top: $spacing-3
                     time
-                        margin-top: 0.3em
+                        margin-top: space()
                         position: absolute
                         right: 0
                         top: 0
-                    .post-reading-time,
-                        display: block
-                        &::before
+                        + *::before
                             content: none
-                    .post-author:first-of-type
-                        [itemprop="name"]::before
-                            content: none
+                            padding: 0
+
 .posts__section,
 .posts_categories__term,
 .persons__page,
@@ -114,7 +124,6 @@
         @include grid(2, desktop)
         @include grid($posts-grid-columns, xxl)
         .post
-            @include author-and-time-side-to-side
             .post-meta
                 margin-top: $spacing-2
 
