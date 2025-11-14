@@ -1,0 +1,26 @@
+{{ define "main" }}
+  {{ partial "home/hero.html" . }}
+
+  <div class="document-content">
+    {{- if not site.Params.home.toc.disabled -}}
+      {{ partial "toc/container.html" (dict
+        "toc" "toc/default.html"
+        "context" .
+      ) }}
+    {{- end -}}
+
+    {{ partial "home/summary.html" (dict
+      "block_wrapped" true
+      "context" .
+    ) }}
+
+    {{ if .Params.contents }}
+      {{ partial "contents/list.html" (dict
+        "context" .
+        "contents" .Params.contents
+      ) }}
+    {{ else }}
+      {{ partial "pages/partials/children.html" . }}
+    {{ end }}
+  </div>
+{{ end }}

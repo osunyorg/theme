@@ -1,0 +1,79 @@
+{{- $title := partial "GetHeadTitle" . -}}
+
+{{- $seoDescription := "" -}}
+{{- if .Params.meta_description -}}
+  {{- $seoDescription = partial "PrepareHTML" .Params.meta_description -}}
+{{- else if .Params.summary -}}
+  {{- $seoDescription = .Params.summary | plainify | truncate 150 -}}
+{{- else if .Params.contents -}}
+  {{- range first 1 .Params.contents -}}
+    {{- if .title -}}
+      {{- $seoDescription = .title | safeHTML | truncate 150 -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $sharedImage := "" -}}
+{{- $ogImage := "" -}}
+{{- $twitterImage := "" -}}
+{{- $pagefindImage := "" -}}
+
+{{- with index site.Data.website site.Language.Lang "default" "shared_image" -}}
+  {{- $sharedImage = partial "GetMedia" (index . "id") -}}
+{{- end -}}
+{{- with or .Params.shared_image .Params.image }}
+  {{- $sharedImage = partial "GetMedia" .id -}}
+{{ end -}}
+
+{{- with $sharedImage -}}
+  {{- $ogImage = partial "GetImageUrl" (dict
+    "media" .
+    "size" "1200"
+  ) -}}
+  {{- $twitterImage = partial "GetImageUrl" (dict
+    "media" .
+    "size" "1200"
+  ) -}}
+  {{- $pagefindImage = partial "GetImageUrl" (dict
+    "media" .
+    "size" site.Params.image_sizes._default.pagefind
+  ) -}}
+{{- end -}}
+{{- $seoUrl := .Permalink -}}
+
+<!-- HTML Meta Tags -->
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $seoDescription }}">
+
+<!-- Facebook Meta Tags -->
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $seoDescription }}">
+{{- with $ogImage }}
+  <meta property="og:image" content="{{ . }}">
+{{ end -}}
+<meta property="og:url" content="{{ $seoUrl }}">
+<meta property="og:type" content="website">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:description" content="{{ $seoDescription }}">
+{{- with $twitterImage }}
+  <meta name="twitter:image" content="{{ . }}">
+{{ end -}}
+<meta name="twitter:card" content="summary_large_image">
+
+{{ if site.Params.search.active }}
+  {{ with $pagefindImage }}
+    <meta property="pagefind:image" content="" data-pagefind-meta="image:{{ . }}">
+  {{ end }}
+{{ end }}
+
+{{ range .Params.metadata }}
+  <meta name="{{ .name }}" content="{{ .content }}">
+{{ end }}
+
+{{/*
+Limiter le tracking par le CDN
+https://framagit.org/chatons/CHATONS/-/issues/200#note_1987024
+*/}}
+<meta name="referrer" content="no-referrer">
