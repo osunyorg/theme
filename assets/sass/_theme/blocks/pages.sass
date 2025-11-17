@@ -52,6 +52,7 @@
                 @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon(after)
                 @extend %underline-on-hover
+        
         .list.title-only
             li
                 > a
@@ -59,6 +60,7 @@
                         padding-right: $spacing-2
                     @include hover-translate-icon(before, 5)
                     @extend %underline-on-hover
+        
         .list:not(.title-only)
             @include layout-list
             margin-top: var(--grid-gutter)
@@ -66,20 +68,22 @@
                 border-bottom: none
                 padding: 0
                 margin-bottom: var(--grid-gutter)
-                .page
-                    .page-title
-                        @include h3
+                .page-title
+                    @include h3
+            
             @include media-breakpoint-down(desktop)
                 article
                     gap: $spacing-1
                     .media
                         width: auto
+            
             @include media-breakpoint-up(desktop)
                 article
                     flex-direction: row
                     .media
                         flex-shrink: 0
                         margin-bottom: 0
+        
         @include in-page-with-sidebar
             .block-content
                 .top
@@ -110,7 +114,11 @@
                     width: columns(2)
                 .page-content
                     width: columns(4)
+            
             &:not(.with-description)
+                .pages
+                    > li + li
+                        margin-top: 0
                 .list.title-only
                     @include grid(4, desktop, $spacing-1)
                     grid-column: 1 / 13
@@ -118,8 +126,7 @@
                         margin-top: 0
                 .list:not(.title-only)
                     @include grid(2, desktop)
-                    .page + .page
-                        margin-top: 0
+            
             &.with-description
                 .block-content
                     @include grid(12, desktop, $spacing-4)
@@ -141,13 +148,15 @@
                         grid-row: 2
                         display: block
                         margin-top: 0
-                        .page + .page
-                            margin-top: var(--grid-gutter)
+                .pages
+                    > li + li
+                        margin-top: var(--grid-gutter)
+                
                 &.with-images
                     .top
                         grid-column: 1 / 7
-                    .top + .list
-                        grid-column: 7 / 13
+                        + .list
+                            grid-column: 7 / 13
 
     &--alternate
         .pages
