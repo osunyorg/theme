@@ -11,6 +11,8 @@
     "block_wrapped" true
   ) }}
 
+  {{ partial "taxonomies/term-list-container.html" (dict "taxonomy" .Type) }}
+
   {{ partial "contents/list.html" (dict
     "context" .
     "contents" .Params.contents

@@ -14,7 +14,7 @@
     @if $icon
         @include icon($icon, after)
 
-.button, .btn
+@mixin button
     @include button-reset
     font-family: var(--btn-font-family)
     font-size: var(--btn-font-size)
@@ -42,9 +42,12 @@
         border: var(--btn-disabled-border)
         color: var(--btn-disabled-color)
 
+.button, .btn
+    @include button
+
 .button--accent,
-.button-accent // Legacy
-    @extend .button
+.button-accent 
+    @include button
     --btn-color: #{$color-background}
     --btn-background: #{$color-accent}
     --btn-border: #{$btn-border-width} solid var(--btn-background)
@@ -54,7 +57,7 @@
 
 .button--alt,
 .button-alt // Legacy
-    @extend .button
+    @include button
     --btn-color: #{$color-background}
     --btn-background: #{$color-text-alt}
     --btn-border: #{$btn-border-width} solid var(--btn-background)
@@ -63,7 +66,7 @@
     --btn-hover-border: #{$btn-border-width} solid var(--btn-hover-background)
 
 .button--reversed
-    @extend .button
+    @include button
     --btn-color: #{$color-text-alt}
     --btn-background: #{$color-background}
     --btn-border: #{$btn-border-width} solid var(--btn-background)
