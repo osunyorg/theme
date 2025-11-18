@@ -5,17 +5,6 @@
             @include icon(arrow-right-line, after, true)
             @include hover-translate-icon
             text-decoration: none
-    article
-        .post-title
-            a
-                @include stretched-link
-                text-decoration: none
-        .post-content
-            > * + * 
-                margin-top: $spacing-2
-            .media
-                margin-top: 0
-    
     &--grid
         .grid
             @include media-breakpoint-down(desktop)
@@ -101,7 +90,6 @@
     &--highlight
         .highlight-post
             .media
-                margin-bottom: $spacing-2
                 background: none
                 img
                     aspect-ratio: auto
@@ -115,16 +103,6 @@
                 margin-top: $spacing-3
                 &:where(:not(:last-child))
                     border-bottom: var(--border-width) solid var(--color-border)
-            article
-                .post-meta
-                    *::before
-                        content: none
-                        padding: 0
-        article
-            > * + * 
-                margin-top: $spacing-2
-            .media
-                margin-top: 0
         @include media-breakpoint-down(desktop)
             .list
                 border-top: var(--border-width) solid var(--color-border)
@@ -163,8 +141,9 @@
                         width: columns(2)
                         > *
                             display: block
-                        .post-author p::before
-                            content: none
+                            &::before
+                                content: none
+                                padding: 0
                     [itemprop="abstract"]
                         grid-column: 1 / 7
                         order: 3

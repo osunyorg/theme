@@ -15,7 +15,6 @@
     .post-reading-time
         @include meta
         color: var(--color-text-alt)
-
     .post-meta
         *
             display: inline
@@ -26,7 +25,9 @@
                 vertical-align: middle
                 padding-left: space()
                 padding-right: space()
-    
+    .post-content
+        > * + * 
+            margin-top: $spacing-2
     &.is-federated
         .post-content
             display: flex
