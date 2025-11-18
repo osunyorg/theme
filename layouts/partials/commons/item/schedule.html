@@ -32,24 +32,5 @@
       {{ partial "PrepareHTML" $formated_date }}
     </p>
 
-    {{- if $time_slot }}
-      {{- $hour := "" -}}
-      <p class="{{ $type }}-time">
-        {{ with $time_slot.start.time }}
-          {{- $hour = . -}}
-          {{- with $time_format }}
-            {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
-          {{ end -}}
-          <span>{{- $hour -}}</span>
-        {{- end -}}
-        {{- with $time_slot.end.time -}}
-          {{- $hour = . -}}
-          {{- with $time_format -}}
-            {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
-          {{- end -}}
-          <span>{{- $hour -}}</span>
-        {{ end -}}
-      </p>
-    {{ end -}}
   </div>
 {{ end }}
