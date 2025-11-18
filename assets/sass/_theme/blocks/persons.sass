@@ -13,12 +13,13 @@
     @include in-page-without-sidebar
         .top .description
             max-width: columns(8)
-        &.block-with-long-text
-            &:not(.block-persons--large)
-                .persons
-                    @include grid(2)
-                    article
-                        @include person-avatar-end
+        // &.block-with-long-text
+        // TODO : fix this, it breaks the list layout
+        //     &:not(.block-persons--large)
+        //         .persons
+        //             @include grid(2)
+        //             article
+        //                 @include person-avatar-end
     @include in-page-with-sidebar
         article
             flex-direction: row
@@ -166,3 +167,4 @@
                     .avatar
                         width: space(10)
                         min-width: space(10)
+                        margin-right: $spacing-2
