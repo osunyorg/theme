@@ -2,6 +2,7 @@
 {{ $time_slot := .time_slot }}
 {{ $is_repeating := .is_repeating }}
 {{ $on_two_lines := .on_two_lines }}
+{{ $with_hours := .with_hours }}
 {{ $type := .type }}
 {{ $date_format := index site.Params (printf "%ss" $type) "date_format" }}
 {{ $time_format := ( i18n "commons.time_format" ) }}
@@ -32,5 +33,24 @@
       {{ partial "PrepareHTML" $formated_date }}
     </p>
 
+    {{- if and $with_hours $time_slot }}
+      {{- $hour := "" -}}
+      <p class="{{ $type }}-time">
+        {{ with $time_slot.start.time }}
+          {{- $hour = . -}}
+          {{- with $time_format }}
+            {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
+          {{ end -}}
+          <span>{{- $hour -}}</span>
+        {{- end -}}
+        {{- with $time_slot.end.time -}}
+          {{- $hour = . -}}
+          {{- with $time_format -}}
+            {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
+          {{- end -}}
+          <span>{{- $hour -}}</span>
+        {{ end -}}
+      </p>
+    {{ end -}}
   </div>
 {{ end }}
