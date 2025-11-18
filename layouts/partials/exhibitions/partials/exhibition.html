@@ -29,9 +29,9 @@
 
       {{ if $options.dates }}
         {{ partial "exhibitions/partials/exhibition/schedule.html" (dict 
-            "dates" .Params.dates
-            "on_two_lines" (ne $layout "list")
-          )}}
+          "dates" .Params.dates
+          "on_two_lines" false
+        )}}
       {{ end }}
 
       {{ if and $dates.status $options.status }}
