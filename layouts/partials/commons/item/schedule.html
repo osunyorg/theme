@@ -33,7 +33,7 @@
       {{ partial "PrepareHTML" $formated_date }}
     </p>
 
-    {{- if and $with_hours $time_slot }}
+    {{- if and $with_hours $time_slot (not $is_repeating) }}
       {{- $hour := "" -}}
       <p class="{{ $type }}-time">
         {{ with $time_slot.start.time }}
