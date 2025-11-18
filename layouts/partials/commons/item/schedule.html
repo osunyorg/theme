@@ -3,9 +3,9 @@
 {{ $is_repeating := .is_repeating }}
 {{ $on_two_lines := .on_two_lines }}
 {{ $type := .type }}
-{{ $date_format := index site.Params $type "date_format" }}
+{{ $date_format := index site.Params (printf "%ss" $type) "date_format" }}
 {{ $time_format := ( i18n "commons.time_format" ) }}
-  
+
 {{ if or $dates.computed.short $dates.computed.two_lines.short $time_slot }}
   <div class="{{ $type }}-schedule">
     <p class="{{ $type }}-dates">
