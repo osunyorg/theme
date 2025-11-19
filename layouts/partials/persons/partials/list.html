@@ -6,7 +6,7 @@
     {{ range $persons }}
       <li itemscope itemtype="https://schema.org/Person">
         <p itemprop="name"><a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a></p>
-        {{- if and $options.summary (partial "GetTextFromHTML" .Params.summary) }}
+        {{- if and $options.summary .Params.summary }}
           <div itemprop="jobTitle">{{- .Params.summary | safeHTML -}}</div>
         {{ end -}}
       </li>
