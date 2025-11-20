@@ -1,0 +1,33 @@
+{{- $block := .block }}
+{{- $block_class := partial "GetBlockClass" .block -}}
+{{- with .block.data -}}
+  {{- $options := .options -}}
+  {{- $layout := .layout | default "list" -}}
+  
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ if .events }}
+          <ul class="events events--{{- $layout -}}">
+            {{ range .events }}
+              {{ $event := site.GetPage .path }}
+              {{ with $event }}
+                <li itemscope itemtype="https://schema.org/Event">
+                  {{ partial "events/partials/event.html" (dict
+                    "event" .
+                    "layout" $layout
+                    "options" $options
+                    "heading_level" $block.ranks.children
+                  ) }}
+                </li>
+              {{ end }}
+            {{ end }}
+          </ul>
+        {{ else if .no_event_message }}
+          <p>{{ partial "PrepareHTML" .no_event_message }}</p>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end -}}

@@ -1,0 +1,40 @@
+{{- $block := .block -}}
+{{- $isAnimated := site.Params.blocks.key_figures.animated -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+
+{{- with .block.data -}}
+  {{- $figures := .figures }}
+  <div class="{{ $block_class }} {{- if $isAnimated }} is-animated {{ end }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ if $figures }}
+          {{ $list_class := "odd-items" }}
+          {{ if (modBool (len $figures) 2) }}
+            {{ $list_class = "even-items" }}
+          {{ end }}
+          <ul class="{{ $list_class }}">
+            {{- range .figures }}
+              <li {{- if .image }} class="with-image" {{- end -}}>
+                {{ with .image }}
+                  {{ partial "commons/image.html" (dict
+                    "image" .
+                    "sizes" site.Params.image_sizes.blocks.key_figures
+                  ) }}
+                {{ end }}
+                <div class="key-figure-text">
+                  <span>
+                    {{ if or .number (eq .number 0) }}
+                      <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
+                    {{ end }}
+                  </span>
+                  {{ partial "PrepareHTML" .description }}
+                </div>
+              </li>
+            {{ end -}}
+          </ul>
+        {{ end -}}
+      </div>
+    </div>
+  </div>
+{{- end -}}
