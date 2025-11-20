@@ -12,8 +12,8 @@
         "researcher" $researcher
       )}}
     {{ end }}
-    {{ if $researcher.Params }}
-      <a href="{{ $researcher.Permalink }}" class="more">{{ i18n "persons.publications.all" (dict "author" $researcher.Params.person) }}</a>
-    {{ end }}
   </ul>
+  {{ if $researcher.Params }}
+    <a href="{{ $researcher.Permalink }}" class="more">{{ i18n "persons.publications.all" (dict "author" $researcher.Params.person) }}</a>
+  {{ end }}
 </section>
