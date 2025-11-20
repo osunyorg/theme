@@ -1,13 +1,15 @@
 .events
     &--list
+        > li
+            margin-bottom: $spacing-3
+            padding-bottom: $spacing-3
+            &:where(:not(:last-child))
+                border-bottom: var(--border-width) solid var(--color-border)
+        
         .event
             display: flex
             flex-direction: column
-            margin-bottom: $spacing-3
-            padding-bottom: $spacing-3
             position: relative
-            &:where(:not(:last-child))
-                border-bottom: var(--border-width) solid var(--color-border)
             &-title
                 @include h3
             &-schedule
