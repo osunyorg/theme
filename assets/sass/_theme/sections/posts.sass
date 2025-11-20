@@ -38,6 +38,125 @@
 
 .posts
     @include list-reset
+
+    &--alternate
+        @include alternate("> li")
+        @include media-breakpoint-up(desktop)
+            &.without-images
+                .post
+                    margin-top: 0 !important
+        @include media-breakpoint-down(desktop)
+            >li + li
+                margin-top: $spacing-5
+            .post
+                .post-meta
+                    margin-top: $spacing-1
+
+    &--carousel
+        @include layout-carousel
+        @include in-page-with-sidebar
+            .post
+                .post-title,
+                .post-subtitle
+                    @include h4
+            .slider
+                .slider-arrows
+                    justify-content: space-between
+                    width: columns(4)
+                @include media-breakpoint-down(xxxl)
+                    .slider-slide
+                        width: columns(4)
+                    .slider-arrows
+                        width: columns(5)
+        @include in-page-without-sidebar
+            .block-content
+                display: flex
+                gap: var(--grid-gutter)
+                .top
+                    flex-shrink: 0
+                    width: columns(3)
+                .slider
+                    .slider-arrows
+                        justify-content: space-between
+                        width: columns(9)
+    &--grid
+        @include media-breakpoint-down(desktop)
+            > li + li
+                margin-top: $spacing-5
+        @include in-page-without-sidebar
+            @include grid($block-posts-grid-columns)
+            .media picture img
+                width: 100%
+        @include in-page-with-sidebar
+            @include grid(2)
+
+    &--large
+        > li + li
+                margin-top: $spacing-4
+        .post
+            @include small-arrow-right-hover('.more')
+            .media
+                &, img
+                    aspect-ratio: auto
+        @include media-breakpoint-down(desktop)
+            .post
+                [itemprop="abstract"]
+                    margin-top: 0
+                .post-author 
+                    margin-right: 0
+                    + time
+                        display: inline
+                        &::before
+                            content: ' • '
+                .post-categories
+                    li
+                        margin-right: space(2)
+        @include media-breakpoint-up(desktop)
+            .post
+                flex-direction: row
+                gap: var(--grid-gutter)
+                .post-title,
+                .post-subtitle
+                    @include h2
+                [itemprop="abstract"]
+                    margin-top: $spacing-3
+
+        @include in-page-with-sidebar
+            .post
+                @include media-breakpoint-down(xl)
+                    flex-direction: column
+                    gap: unset
+                    [itemprop="abstract"]
+                        margin-top: $spacing-2
+                @include media-breakpoint-up(xl)
+                    .media,
+                    .post-content
+                        width: columns(4)
+            @include media-breakpoint-up(xl)
+                &.without-images
+                    .post
+                        .post-content
+                            width: columns(8)
+        @include in-page-without-sidebar
+            .post
+                gap: var(--grid-gutter)
+                .media
+                    width: columns(6)
+                .post-content
+                    width: columns(5)
+                .post-title,
+                .post-subtitle
+                    @include lead
+            &.without-images
+                .post
+                    @include media-breakpoint-up(xl)
+                        margin-left: offset(4)
+                        .post-content
+                            width: columns(6)
+                    @include media-breakpoint-down(xl)
+                        .post-content
+                            width: columns(8)
+
     &--list
         > li:where(:not(:last-child))
             border-bottom: var(--border-width) solid var(--color-border)
@@ -113,20 +232,20 @@
                             content: none
                             padding: 0
 
-.posts__section,
-.posts_categories__term,
-.persons__page,
-.administrators__term,
-.authors__term,
-.researchers__term,
-.teachers__term
-    .posts--grid
-        @include grid(1)
-        @include grid(2, desktop)
-        @include grid($posts-grid-columns, xxl)
-        .post
-            .post-meta
-                margin-top: $spacing-2
+// .posts__section,
+// .posts_categories__term,
+// .persons__page,
+// .administrators__term,
+// .authors__term,
+// .researchers__term,
+// .teachers__term
+//     .posts--grid
+//         @include grid(1)
+//         @include grid(2, desktop)
+//         @include grid($posts-grid-columns, xxl)
+//         .post
+//             .post-meta
+//                 margin-top: $spacing-2
 
 .posts__page
     .lead
