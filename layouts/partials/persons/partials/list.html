@@ -13,12 +13,12 @@
     {{ end }}
   </ol>
 {{ else if eq site.Params.persons.index.layout "grid" }}
-  <div class="persons persons--grid">
+  <ol class="persons persons--grid">
     {{ range $persons }}
       {{ partial "persons/partials/person.html" (dict
         "person" .
         "image_sizes" site.Params.image_sizes.sections.persons.layouts.grid
       )}}
     {{ end }}
-  </div>
+  </ol>
 {{ end }}
