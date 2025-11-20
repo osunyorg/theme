@@ -30,7 +30,7 @@
                   </div>
                 {{ end }}
                 {{- if .image -}}
-                  <figure {{- if $options.icons }} class="media--icon" {{ end -}} {{- with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
+                  <figure class="media {{- if $options.icons }} media--icon {{- end -}}" {{- with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
                     {{- partial "commons/image.html"
                       (dict
                         "image"    .image
