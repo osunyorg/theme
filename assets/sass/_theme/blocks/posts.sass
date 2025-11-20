@@ -5,103 +5,10 @@
             @include icon(arrow-right-line, after, true)
             @include hover-translate-icon
             text-decoration: none
-    article
-        @include author-and-time-side-to-side
-        .post-title
-            a
-                @include stretched-link
-                text-decoration: none
-        .post-content
-            > * + * 
-                margin-top: $spacing-2
-            .media
-                margin-top: 0
-    &--grid
-        .grid
-            @include media-breakpoint-down(desktop)
-                > li + li
-                    margin-top: $spacing-5
-            @include in-page-without-sidebar
-                @include grid($block-posts-grid-columns)
-                .media picture img
-                    width: 100%
-            @include in-page-with-sidebar
-                @include grid(2)
 
-    &--large
-        .large
-            > li + li
-                    margin-top: $spacing-4
-        .post
-            @include small-arrow-right-hover('.more')
-            .media
-                &, img
-                    aspect-ratio: auto
-        @include media-breakpoint-down(desktop)
-            .post
-                [itemprop="abstract"]
-                    margin-top: 0
-                .post-author 
-                    margin-right: 0
-                    + time
-                        display: inline
-                        &::before
-                            content: ' • '
-                .post-categories
-                    li
-                        margin-right: space(2)
-        @include media-breakpoint-up(desktop)
-            .large
-                .post
-                    flex-direction: row
-                    gap: var(--grid-gutter)
-                    .post-title,
-                    .post-subtitle
-                        @include h2
-                    [itemprop="abstract"]
-                        margin-top: $spacing-3
-
-        @include in-page-with-sidebar
-            .large
-                .post
-                    @include media-breakpoint-down(xl)
-                        flex-direction: column
-                        gap: unset
-                        [itemprop="abstract"]
-                            margin-top: $spacing-2
-                    @include media-breakpoint-up(xl)
-                        .media,
-                        .post-content
-                            width: columns(4)
-                @include media-breakpoint-up(xl)
-                    &.without-images
-                        .post
-                            .post-content
-                                width: columns(8)
-        @include in-page-without-sidebar
-            .large
-                .post
-                    gap: var(--grid-gutter)
-                    .media
-                        width: columns(6)
-                    .post-content
-                        width: columns(5)
-                    .post-title,
-                    .post-subtitle
-                        @include lead
-                &.without-images
-                    .post
-                        @include media-breakpoint-up(xl)
-                            margin-left: offset(4)
-                            .post-content
-                                width: columns(6)
-                        @include media-breakpoint-down(xl)
-                            .post-content
-                                width: columns(8)
     &--highlight
         .highlight-post
             .media
-                margin-bottom: $spacing-2
                 background: none
                 img
                     aspect-ratio: auto
@@ -115,11 +22,6 @@
                 margin-top: $spacing-3
                 &:where(:not(:last-child))
                     border-bottom: var(--border-width) solid var(--color-border)
-        article
-            > * + * 
-                margin-top: $spacing-2
-            .media
-                margin-top: 0
         @include media-breakpoint-down(desktop)
             .list
                 border-top: var(--border-width) solid var(--color-border)
@@ -158,8 +60,9 @@
                         width: columns(2)
                         > *
                             display: block
-                        .post-author p::before
-                            content: none
+                            &::before
+                                content: none
+                                padding: 0
                     [itemprop="abstract"]
                         grid-column: 1 / 7
                         order: 3
@@ -173,49 +76,6 @@
                 > li:first-child
                     margin-top: 0
 
-    &--alternate 
-        .alternate
-            @include alternate("> li")
-            @include media-breakpoint-up(desktop)
-                &.without-images
-                    .post
-                        margin-top: 0 !important
-            @include media-breakpoint-down(desktop)
-                >li + li
-                    margin-top: $spacing-5
-                .post
-                    .post-meta
-                        margin-top: $spacing-1
-                    .media
-                        margin-bottom: $spacing-2
-
-    &--carousel
-        @include layout-carousel
-        @include in-page-with-sidebar
-            .post
-                .post-title,
-                .post-subtitle
-                    @include h4
-            .slider
-                .slider-arrows
-                    justify-content: space-between
-                    width: columns(4)
-                @include media-breakpoint-down(xxxl)
-                    .slider-slide
-                        width: columns(4)
-                    .slider-arrows
-                        width: columns(5)
-        @include in-page-without-sidebar
-            .block-content
-                display: flex
-                gap: var(--grid-gutter)
-                .top
-                    flex-shrink: 0
-                    width: columns(3)
-                .slider
-                    .slider-arrows
-                        justify-content: space-between
-                        width: columns(9)
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts

@@ -15,7 +15,7 @@
             "item" $project
             "level" $heading_level
             "options" $options
-          )}}
+          ) }}
 
           {{ if $group_meta }}
             {{ if or $options.year $options.categories }}
@@ -57,6 +57,7 @@
           "image" $project.Params.image 
           "layout" $layout
           "type" "project"
+          "context" .
         ) }}
       {{ end }}
     </article>

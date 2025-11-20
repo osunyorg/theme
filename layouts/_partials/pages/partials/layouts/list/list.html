@@ -3,7 +3,7 @@
   "level" ( .heading_level | default 3 )
   "attributes" "class='page-title'"
 )}}
-<ul class="list {{ if and (not $options.summary) (not $options.image) }} title-only {{ end }}">
+<ul class="pages list {{- if and (not $options.summary) (not $options.image) }} title-only {{- end }}">
   {{ range .pages }}
     {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
     {{- $path := false -}}

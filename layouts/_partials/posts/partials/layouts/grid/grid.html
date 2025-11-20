@@ -1,11 +1,11 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $options := .options }}
 
-<ul class="grid">
+<ul class="posts posts--grid">
   {{ range $post := .posts -}}
     {{ with site.GetPage .path }}
-      {{ partial "posts/partials/post.html" (dict 
-          "post" .
+      {{ partial "posts/partials/post.html" (dict
+        "post" .
         "heading_level" $heading_level
         "options" $options
         "layout" "grid"

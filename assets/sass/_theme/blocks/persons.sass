@@ -13,12 +13,6 @@
     @include in-page-without-sidebar
         .top .description
             max-width: columns(8)
-        &.block-with-long-text
-            &:not(.block-persons--large)
-                .persons
-                    @include grid(2)
-                    article
-                        @include person-avatar-end
     @include in-page-with-sidebar
         article
             flex-direction: row
@@ -49,6 +43,11 @@
                 .description
                     margin-top: $spacing-3
         @include in-page-without-sidebar
+            &.block-with-long-text
+                .persons
+                    @include grid(2)
+                    article
+                        @include person-avatar-end
             .person
                 text-align: center
                 .contacts-details
@@ -166,3 +165,4 @@
                     .avatar
                         width: space(10)
                         min-width: space(10)
+                        margin-right: $spacing-2
