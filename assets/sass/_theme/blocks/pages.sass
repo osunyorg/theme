@@ -31,6 +31,8 @@
                     a
                         @include icon(arrow-right-line, after, true)
                         @include hover-translate-icon(after)
+                    + p
+                        margin-top: $spacing-1
 
     &--cards
         background-color: $block-pages-card-background
@@ -161,7 +163,9 @@
     &--alternate
         .pages
             @include layout-alternate
-
+            .page-title
+                + p
+                    margin-top: $spacing-1
     &--large
         .pages
             @include layout-large
