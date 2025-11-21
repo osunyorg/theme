@@ -3,31 +3,33 @@
 {{ $layout := .layout }}
 {{ $heading_level := .heading_level | default 2 }}
 
-<div class="organizations grid {{- if $options.summary }} with-summaries {{- end }}">
+<ul class="organizations organizations--grid {{- if $options.summary }} with-summaries {{- end }}">
   {{- range .organizations }}
-    {{ if .path }}
-      {{ with site.GetPage .path }}
+    <li>
+      {{ if .path }}
+        {{ with site.GetPage .path }}
+          {{ partial "organizations/partials/organization.html" (dict
+              "organization" .
+              "options" $options
+              "layout" $layout
+              "heading_level" $heading_level
+            ) }}
+        {{ end }}
+      {{ else }}
         {{ partial "organizations/partials/organization.html" (dict
-            "organization" .
+            "organization" (dict
+              "Title" .name
+              "Permalink" .url
+              "Params" (dict 
+                "logo" .logo
+                "external" true
+              )
+            )
             "options" $options
             "layout" $layout
             "heading_level" $heading_level
           ) }}
       {{ end }}
-    {{ else }}
-      {{ partial "organizations/partials/organization.html" (dict
-          "organization" (dict
-            "Title" .name
-            "Permalink" .url
-            "Params" (dict 
-              "logo" .logo
-              "external" true
-            )
-          )
-          "options" $options
-          "layout" $layout
-          "heading_level" $heading_level
-        ) }}
-    {{ end }}
+    </li>
   {{ end -}}
-</div>
+</ul>
