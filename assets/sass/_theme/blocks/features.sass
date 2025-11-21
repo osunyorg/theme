@@ -11,25 +11,28 @@
         figure
             order: -1
             margin-bottom: $spacing-3
-            picture
-                img
-                    margin: auto
-            picture:not(.is-png, .is-svg)
-                img
-                    object-fit: cover
-                    width: 100%
-                    aspect-ratio: 16/9
+            img
+                margin: auto
             figcaption
                 @include meta
                 margin-top: $spacing-2
                 text-align: right
-            picture.is-png
+            
+            &:where(:not(.media--icon))
+                img
+                    aspect-ratio: 16/9
+                    object-fit: cover
+                    width: 100%
+            
+            &.media--icon
                 padding-top: $spacing-3
                 img
                     margin: initial
                     max-width: $block-features-icon-max-width
+                
                 @include media-breakpoint-down(desktop)
                     margin-bottom: $spacing-2
+    
     @include in-page-with-sidebar
         li
             flex-direction: row
@@ -37,7 +40,7 @@
                 width: columns(2)
                 flex-shrink: 0
                 margin-right: var(--grid-gutter)
-                picture.is-png
+                &.media--icon
                     img
                         margin: auto
 
