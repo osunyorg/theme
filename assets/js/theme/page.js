@@ -28,9 +28,11 @@ window.osuny.Page.prototype.getComponents = function (name) {
 };
 
 window.osuny.Page.prototype.getComponentInstanceById = function (name, id) {
-    var componentInstance = null;
+    var componentInstance = null,
+        component;
 
     for (name in this.components) {
+        component = this.components[name];
         component.instances.forEach(function (instance) {
             if (instance.id === id) {
                 componentInstance = instance;
