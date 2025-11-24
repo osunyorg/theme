@@ -27,7 +27,7 @@ window.osuny.Page.prototype.getComponents = function (name) {
     return this.components[name].instances;
 };
 
-window.osuny.Page.prototype.getComponentInstanceById = function (name, id) {
+window.osuny.Page.prototype.getComponentInstanceById = function (id) {
     var componentInstance = null,
         component;
 
