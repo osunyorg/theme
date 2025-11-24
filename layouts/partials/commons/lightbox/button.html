@@ -17,7 +17,7 @@
     {{ $title = i18n "commons.lightbox.button" }}
   {{ end }}
 
-  <div role="button" class="lightbox-button" data-lightbox="{{ $options | encoding.Jsonify }}">
+  <div role="button" tabindex="0" class="lightbox-button" data-lightbox="{{ $options | encoding.Jsonify }}">
     <span class="sr-only">{{ $title | plainify }}</span>
     {{ $image }}
   </div>
