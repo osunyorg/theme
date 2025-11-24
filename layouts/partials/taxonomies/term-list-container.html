@@ -1,10 +1,11 @@
+{{ $section := replace .taxonomy "_categories" "" }}
+{{ $index := site.GetPage $section }}
 {{ $display := partial "GetSiteParamWithDefault" (dict 
-  "param" (printf "%s.categories.single.taxonomies.display" .Type)
+  "param" (printf "%s.categories.taxonomies.display" $section)
   "default" "categories.single.taxonomies.display"
 ) }}
+
 {{ if $display }}
-  {{ $section := replace .taxonomy "_categories" "" }}
-  {{ $index := site.GetPage $section }}
   {{ with $index }}
     {{ partial "taxonomies/section-list-container" . }}
   {{ end }}
