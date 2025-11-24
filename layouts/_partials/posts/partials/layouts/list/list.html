@@ -1,0 +1,16 @@
+{{ $heading_level := .heading_level | default 3 }}
+{{ $alternate := .alternate }}
+{{ $options := .options }}
+
+<ul class="posts posts--list">
+  {{ range $post := .posts -}}
+    {{ with site.GetPage .path }}
+      {{ partial "posts/partials/post.html" (dict 
+        "post" . 
+        "options" $options
+        "layout" "list"
+        "heading_level" $heading_level 
+      ) }}
+    {{ end }}
+  {{ end }}
+</ul>

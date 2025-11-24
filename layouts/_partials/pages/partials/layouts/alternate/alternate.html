@@ -1,0 +1,53 @@
+{{ $options := .options }}
+{{ $heading_tag := partial "GetHeadingTag" (dict
+  "level" ( .heading_level | default 3 )
+  "attributes" "class='page-title'"
+)}}
+
+<ul class="pages">
+  {{ range .pages }}
+    {{ $page := site.GetPage .path }}
+    {{ with $page }}
+      {{ $image_class := "without-image" }}
+      {{ with .Params.image }}
+        {{ $image_class = partial "GetImageDirection" . }}
+      {{ end }}
+      <li>
+        <article class="page {{ $image_class }}">
+          {{ $heading_tag.open }}
+            <a href="{{- .Permalink -}}">
+              {{- partial "PrepareHTML" .Title -}}
+            </a>
+          {{ $heading_tag.close }}
+
+          {{- partial "pages/partials/page/hook-after-title.html" . -}}
+
+          {{ if and $options.summary .Params.summary }}
+            {{ partial "GetRichSummary" ( dict 
+              "summary" .Params.summary
+              "kind" "pages"
+            ) }}
+          {{ end }}
+
+          {{ if and $options.categories .Params.taxonomies }}
+            {{ partial "commons/categories" ( dict
+              "context" .
+              "kind" "page"
+            ) }}
+          {{ end }}
+
+          {{ if site.Params.blocks.pages.alternate.more }}
+            {{ partial "commons/item/more.html" . }}
+          {{ end }}
+
+          {{ if $options.image }}
+            {{ partial "pages/partials/page/media.html" (dict 
+              "image" .Params.image
+              "layout" "alternate"
+            ) }}
+          {{ end }}
+        </article>
+      </li>
+    {{- end -}}
+  {{ end }}
+</ul>

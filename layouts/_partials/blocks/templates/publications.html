@@ -1,0 +1,24 @@
+{{- $block := .block -}}
+{{- $template := .block.template -}}
+{{- $position := .block.position -}}
+{{- $title := .block.title -}}
+
+{{ with .block.data }}
+  <div class="block block-publications {{- if $title }} block-with-title {{- end -}}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        <ul class="publications">
+          {{ range .publications }}
+            {{ with site.GetPage .path }}
+              {{ partial "publications/partials/publication.html" (dict 
+                "publication" . 
+                "heading_level" $block.ranks.children
+              ) }}
+            {{ end }}
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  </div>
+{{ end }}

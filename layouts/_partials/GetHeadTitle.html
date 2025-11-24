@@ -1,0 +1,17 @@
+{{ $pageTitle := chomp (htmlUnescape .Title) }}
+{{ $siteTitle := htmlUnescape site.Title }}
+{{ $separator := htmlUnescape site.Params.seo.title.separator }}
+{{ $title := printf "%s %s %s" $pageTitle $separator $siteTitle }}
+
+{{ $option := "both" }}
+{{ if .IsHome }}
+  {{ $option = site.Params.home.head.title }}
+{{ end }}
+
+{{ if eq $option "page" }}
+  {{ $title = $pageTitle }}
+{{ else if eq $option "site" }}
+  {{ $title = $siteTitle }}
+{{ end }}
+
+{{ return $title }}
