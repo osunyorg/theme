@@ -31,17 +31,21 @@
         #{$content-selector}
             padding-top: var(--grid-gutter)
             padding-bottom: var(--grid-gutter)
-            ul
+            > ul
                 @include container
                 @include grid(1)
                 @include grid(2, md)
                 @include grid(3, xl)
                 @include grid(4, xxl)
-                li
-                    > a
-                        @include icon(arrow-right-line, after, true)
-                        @include hover-translate-icon
-                        text-decoration: none
+                > li
+                    > ul
+                        li
+                            @include meta
+                li a
+                    @include icon(arrow-right-line, after, true)
+                    @include hover-translate-icon
+                    text-decoration: none
+
         @include media-breakpoint-up(md)
             position: static
             #{$content-selector}

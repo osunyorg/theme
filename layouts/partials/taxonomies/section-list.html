@@ -20,16 +20,12 @@
             <div class="taxonomy-categories">
               {{ if $options.show_name }}<span>{{ .name }}</span>{{ end }}
           {{ end }}
-            <ul>
-            {{ range .categories }}
-              {{ $category := site.GetPage .path }}
-              {{ with $category }}
-                <li>
-                  <a href="{{ .Permalink }}">{{ .Title }}</a>
-                </li>
-              {{ end }}
-            {{ end }}
-              </ul>
+              {{ $categories := partial "GetObjectsFromPathSlice" .categories }}
+              {{ partial "commons/categories.html" (dict 
+                "categories" $categories
+                "depth" true
+                "kind" $type
+              ) }}
             </div>
           {{ if eq $options.layout "dropdown" }}
             </div>

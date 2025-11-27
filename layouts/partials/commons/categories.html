@@ -1,10 +1,13 @@
 {{ $kind := .kind | singularize }}
-{{ $class := .class | default ( printf "%s-categories" $kind ) }}
+{{/*  TODO: rename all call from this partial to `type` instead of `kind`.  */}}
+{{ $type := ( .type | singularize ) | default $kind }}
+{{ $class := .class | default ( printf "%s-categories" $type ) }}
 {{ $categories := .categories }}
+{{ $depth := .depth }}
 
 {{ if not $categories }}
-  {{ $categories_kind := printf "%ss_categories" $kind }}
-  {{ $categories = .context.GetTerms $categories_kind }}
+  {{ $categories_type := printf "%ss_categories" $type }}
+  {{ $categories = .context.GetTerms $categories_type }}
 {{ end }}
 
 {{- if $categories -}}
@@ -14,6 +17,13 @@
         <a href="{{ .Permalink }}">
           {{- safeHTML .Title -}}
         </a>
+        {{ if and $depth .Params.children }}
+          {{ $children := partial "GetObjectsFromPathSlice" .Params.children }}
+          {{ partial "commons/categories.html" (dict
+            "categories" $children
+            "type" $type
+          ) }}
+        {{ end }}
       </li>
     {{- end }}
   </ul>
