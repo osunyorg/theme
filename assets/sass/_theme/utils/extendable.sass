@@ -5,8 +5,7 @@
         + .extendable
             display: block
     @if $with-icon
-        @include icon(arrow-down-s-line, after)
-            display: inline-block
+        @include icon(arrow-down-s-line, after, $non-breaking: true)
             vertical-align: middle
         &[aria-expanded="true"]
-            @include icon(arrow-up-s-line, after)
+            @include icon(arrow-up-s-line, after, $non-breaking: true)

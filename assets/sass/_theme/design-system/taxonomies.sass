@@ -39,9 +39,19 @@
             @include list-reset
         > ul
             > li
-                // span
-                //     @include extendable($with-icon: true)
+                .extendable-button
+                    @include extendable($with-icon: true)
+                    display: block
+                    &[aria-expanded="true"]
+                        color: var(--color-accent)
                 ul
+                    border-top: var(--border-width) solid var(--color-accent)
+                    display: flex
+                    gap: $spacing-1 var(--grid-gutter)
+                    flex-wrap: wrap
+                    padding-top: space(5)
+                    margin-top: space(4)
+                    flex-flow: column
                     li
                         @include meta
     &--dropdown
@@ -68,6 +78,11 @@
             .taxonomy-categories
                 min-width: max-content
                 margin-left: -$spacing-1
+                > ul
+                    > li
+                        ul
+                            li
+                                width: columns(2)
 
 .taxonomies-single
     &, ul
