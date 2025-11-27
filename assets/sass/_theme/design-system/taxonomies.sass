@@ -54,14 +54,12 @@
                             color: var(--color-accent)
                     ul
                         border-top: var(--border-width) solid var(--color-accent)
-                        display: flex
-                        flex-wrap: wrap
-                        flex-flow: column
-                        gap: $spacing-1 var(--grid-gutter)
                         padding-top: space(5)
                         margin-top: space(4)
                         li
                             @include meta
+                            padding-bottom: $spacing-1
+
     &--inline
         @include grid(3)
         margin-bottom: $spacing-5
@@ -83,10 +81,19 @@
                 > ul
                     > li
                         ul
-                            flex-flow: row
-                            flex-wrap: wrap
+                            columns: 2
+                            column-gap: var(--grid-gutter)
+                            li
+                                width: columns(3)
+    @include media-breakpoint-up(xl)
+        &--dropdown
+            .taxonomy-categories
+                > ul
+                    > li
+                        ul
                             li
                                 width: columns(2)
+
 
 .taxonomies-single
     &, ul
