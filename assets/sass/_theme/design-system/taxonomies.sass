@@ -37,29 +37,30 @@
     .taxonomy-categories
         ul
             @include list-reset
-        > ul
-            > li
-                .extendable-button
-                    @include extendable($with-icon: true)
-                    display: block
-                    &[aria-expanded="true"]
-                        color: var(--color-accent)
-                ul
-                    border-top: var(--border-width) solid var(--color-accent)
-                    display: flex
-                    gap: $spacing-1 var(--grid-gutter)
-                    flex-wrap: wrap
-                    padding-top: space(5)
-                    margin-top: space(4)
-                    flex-flow: column
-                    li
-                        @include meta
     &--dropdown
         align-items: baseline
         display: flex
         margin-bottom: var(--grid-gutter)
         margin-top: var(--grid-gutter)
         flex-wrap: wrap
+        .taxonomy-categories
+            > ul
+                > li
+                    .extendable-button
+                        @include extendable($with-icon: true)
+                        display: block
+                        &[aria-expanded="true"]
+                            color: var(--color-accent)
+                    ul
+                        border-top: var(--border-width) solid var(--color-accent)
+                        display: flex
+                        flex-wrap: wrap
+                        flex-flow: column
+                        gap: $spacing-1 var(--grid-gutter)
+                        padding-top: space(5)
+                        margin-top: space(4)
+                        li
+                            @include meta
     &--inline
         @include grid(3)
         margin-bottom: $spacing-5
@@ -81,6 +82,8 @@
                 > ul
                     > li
                         ul
+                            flex-flow: row
+                            flex-wrap: wrap
                             li
                                 width: columns(2)
 
