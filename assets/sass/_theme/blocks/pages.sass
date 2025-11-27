@@ -43,7 +43,7 @@
                 @include hover-translate-icon(after)
                 @extend %underline-on-hover
         
-        .list.title-only
+        .pages.title-only
             li
                 > a
                     @include icon(arrow-right-line, before, true)
@@ -51,15 +51,16 @@
                     @include hover-translate-icon(before, 5)
                     @extend %underline-on-hover
         
-        .list:not(.title-only)
+        .pages:where(:not(.title-only))
             @include layout-list
             margin-top: var(--grid-gutter)
             > li
                 border-bottom: none
                 padding: 0
-                margin-bottom: var(--grid-gutter)
                 .page-title
                     @include h3
+                + li
+                    margin-top: $spacing-4
             
             @include media-breakpoint-down(desktop)
                 article
@@ -78,7 +79,7 @@
             .block-content
                 .top
                     margin-bottom: $spacing-3
-            .list.title-only
+            .pages.title-only
                 @include grid(2, desktop, $spacing-2)
                 li
                     line-height: 1
@@ -109,12 +110,12 @@
                 .pages
                     > li + li
                         margin-top: 0
-                .list.title-only
+                .pages.title-only
                     @include grid(4, desktop, $spacing-1)
                     grid-column: 1 / 13
                     .page
                         margin-top: 0
-                .list:not(.title-only)
+                .pages:not(.title-only)
                     @include grid(2, desktop)
             
             &.with-description
@@ -133,19 +134,16 @@
                             @include body-text
                             margin-top: 0
                     // If page description
-                    .top + .list
+                    .top + .pages
                         grid-column: 9 / 13
                         grid-row: 2
                         display: block
                         margin-top: 0
-                .pages:where:not(.title-only)
-                    > li + li
-                        margin-top: var(--grid-gutter)
                 
                 &.with-images
                     .top
                         grid-column: 1 / 7
-                        + .list
+                        + .pages
                             grid-column: 7 / 13
 
     &--alternate
