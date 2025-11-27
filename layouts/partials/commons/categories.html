@@ -14,15 +14,26 @@
   <ul class="{{ $class }}" aria-label="{{ i18n "categories.label" }}">
     {{- range $categories -}}
       <li {{ with .Params.bodyclass }}class="{{ . }}"{{ end }}>
-        <a href="{{ .Permalink }}">
-          {{- safeHTML .Title -}}
-        </a>
-        {{ if and $depth .Params.children }}
-          {{ $children := partial "GetObjectsFromPathSlice" .Params.children }}
-          {{ partial "commons/categories.html" (dict
-            "categories" $children
-            "type" $type
-          ) }}
+        {{ $id := printf "%s-children-list" ( .Slug | anchorize) }}
+        {{ $children := partial "GetObjectsFromPathSlice" .Params.children }}
+        {{ if and $depth $children }}
+          {{/*  <span href="{{ .Permalink }}" aria-expanded="false" aria-controls="{{ $id }}" role="button">
+            {{- safeHTML .Title -}}
+          </span>  */}}
+          <a href="{{ .Permalink }}">
+            {{- safeHTML .Title -}}
+          </a>
+          {{/*  <div id="{{ $id }}" class="extendable dropdown">  */}}
+          <div id="{{ $id }}">
+            {{ partial "commons/categories.html" (dict
+              "categories" $children
+              "type" $type
+            ) }}
+          </div>
+        {{ else }}
+          <a href="{{ .Permalink }}">
+            {{- safeHTML .Title -}}
+          </a>
         {{ end }}
       </li>
     {{- end }}
