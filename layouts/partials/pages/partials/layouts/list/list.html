@@ -15,8 +15,8 @@
     {{ $page := site.GetPage $path }}
 
     {{ with $page }}
-      <li>
-        {{ if or $options.summary $options.image }}
+      {{ if or $options.summary $options.image }}
+        <li>
           <article class="page">
             <div class="page-content">
               {{ $heading_tag.open }}
@@ -49,12 +49,14 @@
               )}}
             {{ end }}
           </article>
-        {{ else }}
+        </li>
+      {{ else }}
+        <li class="page">
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}
           </a>
-        {{ end }}
-      </li>
+        </li>
+      {{ end }}
     {{- end -}}
   {{ end }}
 </ul>
