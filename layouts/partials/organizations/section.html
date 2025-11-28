@@ -16,15 +16,16 @@
 
   {{ if (partial "IsFirstPage" .) }}
     {{ partial "toc/container.html" (dict
-        "toc" "pages/single/toc.html"
-        "context" .
-      ) }}
-    {{ partial "taxonomies/section-list-container.html" . }}
+      "toc" "pages/single/toc.html"
+      "context" .
+    ) }}
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents
     ) }}
   {{ end }}
+
+  {{ partial "taxonomies/section-list-container.html" . }}
 
   {{- if not $is_organizations_block_present -}}
     <div class="container">

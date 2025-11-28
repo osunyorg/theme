@@ -3,7 +3,7 @@
   "level" ( .heading_level | default 3 )
   "attributes" "class='page-title'"
 )}}
-<ul class="list {{ if and (not $options.summary) (not $options.image) }} title-only {{ end }}">
+<ul class="pages list {{- if and (not $options.summary) (not $options.image) }} title-only {{- end }}">
   {{ range .pages }}
     {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
     {{- $path := false -}}
@@ -15,9 +15,9 @@
     {{ $page := site.GetPage $path }}
 
     {{ with $page }}
-      <li class="page">
-        {{ if or $options.summary $options.image }}
-          <article>
+      {{ if or $options.summary $options.image }}
+        <li>
+          <article class="page">
             <div class="page-content">
               {{ $heading_tag.open }}
                 <a href="{{- .Permalink -}}">
@@ -43,24 +43,20 @@
             </div>
 
             {{ if $options.image }}
-              <div class="media">
-                {{- if .Params.image -}}
-                  {{- partial "commons/image.html" (dict
-                      "image"    .Params.image
-                      "sizes"    site.Params.image_sizes.blocks.pages.list
-                    ) -}}
-                {{- else -}}
-                  {{- partial "commons/image-default.html" "pages" -}}
-                {{- end -}}
-              </div>
+              {{ partial "pages/partials/page/media.html" (dict 
+                "image" .Params.image
+                "layout" "list"
+              )}}
             {{ end }}
           </article>
-        {{ else }}
+        </li>
+      {{ else }}
+        <li class="page">
           <a href="{{- .Permalink -}}">
             {{- partial "PrepareHTML" .Title -}}
           </a>
-        {{ end }}
-      </li>
+        </li>
+      {{ end }}
     {{- end -}}
   {{ end }}
 </ul>

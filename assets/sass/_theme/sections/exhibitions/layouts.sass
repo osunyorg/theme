@@ -5,15 +5,18 @@
     &--grid
         @include layout-grid(2)
         .exhibition
-            &-title
-                @include h3
+            &-title,
             &-subtitle
                 @include h3
-                color: var(--color-text-alt)
     &--cards
         @include layout-cards
     &--large
         @include layout-large
+        .exhibition
+            &-subtitle
+                @include h3
+                @include in-page-without-sidebar
+                    @include lead
     &--alternate
         @include layout-alternate
     &--agenda

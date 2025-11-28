@@ -10,7 +10,7 @@
 {{ end }}
 {{ $scale := .scale }}
 {{ $fit := "" }}
-{{ $quality := site.Params.keycdn.quality }}
+{{ $quality := site.Params.keycdn.quality.default }}
 {{ with .size }}
   {{ $sizes := split . "x" }}
   {{ $width := int (index $sizes 0) }}
@@ -18,7 +18,7 @@
   {{ with $scale }}
     {{ $width = mul $width $scale }}
     {{ $height = mul $height $scale }}
-    {{ $quality = 50 }}
+    {{ $quality = site.Params.keycdn.quality.high_ratio }}
   {{ end }}
   {{ $fit = "inside" }}
   {{ $result = printf "%swidth=%d&height=%d&" $result $width $height }}

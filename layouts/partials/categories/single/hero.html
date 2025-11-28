@@ -4,10 +4,9 @@
   {{- $title = printf "%s <span>%s</span>" $title . -}}
 {{ end }}
 
-{{- partial "header/hero.html"
-    (dict
-      "title" $title
-      "image" .Params.image
-      "sizes" site.Params.image_sizes.sections.categories.hero_term
-      "context"  .
-    ) -}}
+{{ partial "header/hero.html" (dict
+  "title" $title
+  "image" .Params.image
+  "sizes" site.Params.image_sizes.sections.categories.hero_term
+  "context"  .
+) }}

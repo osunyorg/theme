@@ -3,13 +3,11 @@
 
 <ul class="list projects--list">
   {{ range .projects -}}
-    <li>
-      {{ partial "projects/partials/layouts/list/list-item.html" (dict
-          "heading_level" $heading_level
-          "options" $options
-          "layout" "list"
-          "project" .
-        ) }}
-    </li>
+    {{ partial "projects/partials/layouts/list/list-item.html" (dict
+        "heading_level" $heading_level
+        "options" $options
+        "layout" "list"
+        "project" .
+      ) }}
   {{ end }}
 </ul>

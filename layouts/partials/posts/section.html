@@ -5,14 +5,14 @@
       "context" .
     ) }}
 
-  {{ partial "taxonomies/section-list-container.html" . }}
-
   {{ if (partial "IsFirstPage" .) }}
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents
     ) }}
   {{ end }}
+
+  {{ partial "taxonomies/section-list-container.html" . }}
 
   <div class="container">
     {{ partial "posts/partials/posts.html" . }}

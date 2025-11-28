@@ -1,7 +1,10 @@
+.events
+    @include list-reset
+
 .events__section, .events_categories__term
     .agenda-exhibitions
-        margin-bottom: var(--grid-gutter)
         background: var(--color-background-alt)
+        margin-bottom: var(--grid-gutter)
         padding-top: var(--grid-gutter)
         padding-bottom: var(--grid-gutter)
         h2
@@ -48,6 +51,10 @@
                 @include media-breakpoint-up(desktop)
                     p
                         flex: 1
+    @include media-breakpoint-up(desktop)
+        .events-archives-latest
+            h2 + *
+                margin-top: $spacing-4
 
 .events__section-month
     .events-calendar
