@@ -9,8 +9,9 @@
     {{ range first 3 $publications }}
       {{ partial "publications/partials/publication.html" (dict 
         "publication" .
+        "heading_level" 3
         "researcher" $researcher
-      )}}
+      ) }}
     {{ end }}
   </ul>
   {{ if $researcher.Params }}

@@ -13,72 +13,70 @@
             display: block
 
 .publication
-    border-bottom: var(--border-width) solid var(--color-border)
-    padding-bottom: $spacing-2
-    padding-top: $spacing-2
+    display: flex
+    flex-direction: column
+    padding-bottom: $spacing-3
+    padding-top: $spacing-3
     position: relative
+    &:not(:last-child)
+        border-bottom: var(--border-width) solid var(--color-border)
+    .publication-content
+        &:hover
+            a, &::before
+                color: var(--color-accent)
+
+    .publication-title
+        @include h3
+        a
+            @include stretched-link(after)
+            text-decoration: none
+
+    .publication-meta,
+    .publication-authors
+        @include meta
+        &, a
+            color: var(--color-text-alt)
+
+    .publication-meta
+        margin-top: $spacing-1
+        * + *
+            display: inline
+            &::before
+                content: ', '
+
+    @include media-breakpoint-down(desktop)
+        .publication-authors
+            margin-top: $spacing-1
+
     @include media-breakpoint-up(desktop)
-        align-items: center
+        @include icon(arrow-right-line, after)
+        align-items: baseline
         display: flex
         gap: $spacing-3
         justify-content: space-between
-        @include icon(arrow-right-line, after)
-            font-size: pxToRem(40)
-    a
-        text-decoration: none
-    .publication-content
-        display: flex
-        flex-direction: column
-        .publication-title
-            a
-                @include stretched-link(after)
-        .publication-meta
-            margin-bottom: space()
-            order: -1
-            * + *
-                &::before
-                    content: ', '
-        .publication-ref
-            @include meta
-            color: var(--color-text-alt)
-            margin-top: $spacing-1
-            a
-                color: var(--color-text-alt)
-    &:hover
-        a, &::before
-            color: var(--color-accent)
-    @include media-breakpoint-down(desktop)
-        .publication-meta
-            padding-right: $spacing-4
+        align-items: baseline
+        column-gap: var(--grid-gutter)
+        flex-direction: row
+        flex-wrap: wrap
+        .publication-content
+            width: columns(8)
+        .publication-authors
+            margin-bottom: 0
+            flex: 1
 
 .publications
     @include list-reset
     margin-top: $spacing-5
 
 .publications__section
-    .publications-year + .publication
-        margin-top: $spacing-3
+    .publications-year
+        margin-top: $spacing-5
+        & + .publications
+            margin-top: $spacing-3
     section + section
         margin-top: $spacing-5
-    .publication
-        @include media-breakpoint-up(desktop)
-            align-items: baseline
-            &::after
-                font-size: inherit
-            .publication-content
-                align-items: baseline
-                column-gap: var(--grid-gutter)
-                flex-direction: row
-                flex-wrap: wrap
-                .publication-title
-                    order: -1
-                .publication-title,
-                .publication-ref
-                    width: columns(8)
-                .publication-meta
-                    @include meta
-                    margin-bottom: 0
-                    flex: 1
+    .publications
+        margin-top: $spacing-5
 
 .publications__page
     .hero
