@@ -1,5 +1,5 @@
 import './TouchControl';
-import { setButtonEnability, setDefaultAltToImages } from '../utils/a11y';
+import { a11yClick, setButtonEnability, setDefaultAltToImages } from '../utils/a11y';
 
 /* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
@@ -35,12 +35,12 @@ window.osuny.Lightbox.prototype._setup = function () {
     this.bindButtons();
 };
 
-window.osuny.Lightbox.prototype.bindButtons = function (key) {
+window.osuny.Lightbox.prototype.bindButtons = function () {
     this.buttons = document.querySelectorAll('[data-lightbox]');
     setDefaultAltToImages(this.buttons);
 
     this.buttons.forEach(function (button, index) {
-        button.addEventListener('click', this.open.bind(this, button));
+        a11yClick(button, this.open.bind(this, button));
         this._setAriaDescribed(button, index);
     }.bind(this));
 };

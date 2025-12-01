@@ -22,8 +22,16 @@
 {{ $roles := .context.Params.roles }}
 {{ $contacts := partial "GetTextFromHTML" .context.Params.contacts }}
 
-{{ $category := site.GetPage (printf "/posts_categories/%s" .context.Params.related_categories.posts ) }}
-{{ $related_posts := $category.Pages }}
+{{ $post_category := site.GetPage (printf "/posts_categories/%s" .context.Params.related_categories.posts ) }}
+{{ $related_posts := $post_category.Pages }}
+
+{{ $project_category := site.GetPage (printf "/projects_categories/%s" .context.Params.related_categories.projects ) }}
+{{ $related_projects := $project_category.Pages }}
+
+{{ $event_category := site.GetPage (printf "/events_categories/%s" .context.Params.related_categories.events ) }}
+{{ $related_events := where $event_category.Pages "Type" "events" }}
+{{ $related_exhibitions := where $event_category.Pages "Type" "exhibitions" }}
+
 
 {{/* nav-link required for toggle active class */}}
 <nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc.title" }}">
@@ -122,9 +130,24 @@
         <a {{ partial "AnchorAttribute" (i18n "programs.toc.certification") }}>{{ i18n "programs.toc.certification" }}</a>
       </li>
     {{- end -}}
-    {{- if gt (len $related_posts) 0 -}}
+    {{- if $related_posts -}}
       <li>
-        <a {{ partial "AnchorAttribute" (i18n "programs.toc.related") }}>{{ i18n "programs.toc.related" }}</a>
+        <a {{ partial "AnchorAttribute" (i18n "programs.toc.related.posts") }}>{{ i18n "programs.toc.related.posts" }}</a>
+      </li>
+    {{- end -}}
+    {{- if $related_events -}}
+      <li>
+        <a {{ partial "AnchorAttribute" (i18n "programs.toc.related.events") }}>{{ i18n "programs.toc.related.events" }}</a>
+      </li>
+    {{- end -}}
+    {{- if $related_exhibitions -}}
+      <li>
+        <a {{ partial "AnchorAttribute" (i18n "programs.toc.related.exhibitions") }}>{{ i18n "programs.toc.related.exhibitions" }}</a>
+      </li>
+    {{- end -}}
+    {{- if $related_projects -}}
+      <li>
+        <a {{ partial "AnchorAttribute" (i18n "programs.toc.related.projects") }}>{{ i18n "programs.toc.related.projects" }}</a>
       </li>
     {{- end -}}
   </ol>
