@@ -1,0 +1,4 @@
+{{ $anchor := anchorize . }}
+{{ $attribute := printf "href=\"#%s\"" $anchor }}
+{{ return (safeHTMLAttr $attribute) }}
+
