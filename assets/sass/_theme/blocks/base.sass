@@ -24,10 +24,13 @@
 $backgrounded_blocks: "[class*="--accent_background"], [class*="--alt_background"], .block-timeline--horizontal, .block-pages--cards"
 main
     .blocks
-        .block:first-child:is(#{$backgrounded_blocks})
-            margin-top: 0
         .block:last-child:is(#{$backgrounded_blocks})
             margin-bottom: 0
+        .block:first-child:is(#{$backgrounded_blocks})
+            @include in-page-without-sidebar
+                margin-top: 0
+            @include media-breakpoint-down(desktop)
+                margin-top: 0
 
 // Following chapters
 .block-chapter
