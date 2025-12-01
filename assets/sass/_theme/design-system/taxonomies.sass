@@ -37,6 +37,21 @@
     .taxonomy-categories
         ul
             @include list-reset
+        > ul
+            > li
+                .extendable-button
+                    @include extendable($with-icon: true)
+                    display: block
+                    &[aria-expanded="true"]
+                        color: var(--color-accent)
+                ul
+                    border-top: var(--border-width) solid var(--color-accent)
+                    padding-top: space(5)
+                    margin-top: space(4)
+                    li
+                        @include meta
+                        padding-bottom: $spacing-1
+
     &--dropdown
         align-items: baseline
         display: flex
@@ -44,34 +59,30 @@
         margin-top: var(--grid-gutter)
         flex-wrap: wrap
         justify-content: end
+
+    &--inline
+        @include grid(3, md)
+        margin-bottom: $spacing-5
         .taxonomy-categories
             > ul
                 > li
-                    .extendable-button
-                        @include extendable($with-icon: true)
-                        display: block
-                        &[aria-expanded="true"]
-                            color: var(--color-accent)
+                    margin-top: $spacing-1
                     ul
-                        border-top: var(--border-width) solid var(--color-accent)
-                        padding-top: space(5)
-                        margin-top: space(4)
-                        li
-                            @include meta
-                            padding-bottom: $spacing-1
-
-    &--inline
-        @include grid(3)
-        margin-bottom: $spacing-5
-        .taxonomy-categories
-            ul
-                a
+                        padding-top: space(3)
+                        margin-top: space(2)
+                        padding-left: $spacing-2
+                li, a, span
                     @include meta
+
     @include media-breakpoint-down(md)
         flex-direction: column
         .dropdown 
             margin-top: $spacing-2
             width: 100%
+        &--inline
+            .taxonomy-categories + .taxonomy-categories
+                margin-top: $spacing-3
+
     @include media-breakpoint-up(md)
         &--dropdown
             gap: $spacing-3
