@@ -13,7 +13,7 @@
       ) }}
       {{ if and (ne .Type "sitemap") (ne .Type "pages") (not $ignore_section) }}
         <li>
-          <a href="#{{ .Type }}">{{ safeHTML .Title }}</a>
+          <a {{ partial "AnchorAttribute" .Type }}>{{ safeHTML .Title }}</a>
         </li>
       {{ end }}
     {{ end }}

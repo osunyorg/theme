@@ -16,8 +16,7 @@ window.osuny.TableOfContents = function (element) {
     this.content = this.element.querySelector('.toc-content');
     this.nav = this.element.querySelector('.toc');
     this.links = this.element.querySelectorAll('a');
-    this.sections = document.querySelectorAll('main .heading[id]');
-    // TODO : handle sublinks update in toc 
+    this.sections = this.getSections();
     this.ctaTitle = document.querySelector('.toc-cta-title span');
     this.openerButton = document.querySelector('.toc-cta button');
     this.togglers = document.querySelectorAll('.toc-cta button, .toc-container button');
@@ -28,10 +27,27 @@ window.osuny.TableOfContents = function (element) {
         isOffcanvas: null
     };
     this.listen();
+    
     this.state.isOffcanvas = this.isOffcanvas()
     if (this.state.isOffcanvas) {
         this.element.setAttribute('aria-hidden', true);
     }
+};
+
+window.osuny.TableOfContents.prototype.getSections = function () {
+    var sections = [],
+        id,
+        section;
+
+    this.links.forEach(function (link) {
+        id = link.getAttribute('href').replace('#', '');
+        section = document.getElementById(id);
+        if (section) {
+            sections.push(section);
+        }
+    });
+
+    return sections;
 };
 
 window.osuny.TableOfContents.prototype.isOffcanvas = function () {
