@@ -75,17 +75,14 @@ ol
     > .blocks
         .block:first-child
             margin-top: var(--grid-gutter)
-    
     @include in-page-with-sidebar
         .heading h2, .block .block-content
             padding-left: offset(4)
-    
-    // @include in-page-without-sidebar
-    //     > .blocks
-    //         .block:first-child
-    //             &[class*="--accent_background"],
-    //             &[class*="--alt_background"]
-    //                 margin-top: 0
+    .has-breadcrumb-hero-end + &
+        @include in-page-with-sidebar
+            > .blocks
+                margin-top: var(--grid-gutter)
+
 details
     &:not([open]):hover
         summary::after
