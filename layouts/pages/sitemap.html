@@ -44,7 +44,7 @@
         "param" (printf "%s.sitemap.ignore" .Type)
         "default" "default.sitemap.ignore"
       ) }}
-      {{ if and (ne .Type "sitemap") (ne .Type "pages") (not $ignore_section) }}
+      {{ if and (ne .Type "sitemap") (ne .Type "pages") (not $ignore_section) .Permalink }}
         {{ $permalink := .Permalink }}
         <div class="block block-sitemap" id="{{ .Type }}">
           <div class="container">
