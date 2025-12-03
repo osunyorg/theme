@@ -76,6 +76,20 @@
                 > li:first-child
                     margin-top: 0
 
+    &--carousel
+        overflow: hidden
+        @include in-page-without-sidebar
+            .block-content
+                display: flex
+                gap: var(--grid-gutter)
+                .top
+                    flex-shrink: 0
+                    width: columns(3)
+                .slider
+                    .slider-arrows
+                        justify-content: space-between
+                        width: columns(9)
+
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts

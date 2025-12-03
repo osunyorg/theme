@@ -54,6 +54,7 @@
 
     &--carousel
         @include layout-carousel
+        
         @include in-page-with-sidebar
             .post
                 .post-title,
@@ -68,17 +69,7 @@
                         width: columns(4)
                     .slider-arrows
                         width: columns(5)
-        @include in-page-without-sidebar
-            .block-content
-                display: flex
-                gap: var(--grid-gutter)
-                .top
-                    flex-shrink: 0
-                    width: columns(3)
-                .slider
-                    .slider-arrows
-                        justify-content: space-between
-                        width: columns(9)
+    
     &--grid
         @include media-breakpoint-down(desktop)
             > li + li
