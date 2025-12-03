@@ -1,14 +1,15 @@
 {{ $layout := site.Params.posts.index.layout }}
 {{ $options := site.Params.posts.index.options }}
+{{ $paginator := .Paginate ( .Pages | uniq ) }}
 
 {{ $list_class := printf "posts posts--%s" $layout }}
 {{ $list_class = printf "%s %s" $list_class (cond $options.image "with-images" "without-images") }}
 <ul class="{{ $list_class }}">
-  {{ if not .Paginator.Pages }}
+  {{ if not $paginator.Pages }}
     {{ $is_term := eq .Kind "term" }}
     <p>{{ i18n (cond $is_term "categories.no_post" "posts.none") }}</p>
   {{ else }}
-    {{ range .Paginator.Pages }}
+    {{ range $paginator.Pages }}
       {{ partial "posts/partials/post.html" (dict 
         "post" .
         "layout" $layout
