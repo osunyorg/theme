@@ -112,8 +112,10 @@
                 align-self: baseline
                 display: inline
             .project-categories
-                li 
+                li
                     display: inline
+                    &:before
+                        content: ' '
             * + .project-summary
                 margin-top: $spacing-2
             * + .more
@@ -136,7 +138,6 @@
                 &-title,
                 &-subtitle
                     @include h2
-                    margin-bottom: $spacing-1
                 &-content
                     flex: 1
                 .media 
@@ -146,7 +147,6 @@
                 &-title,
                 &-subtitle
                     @include lead
-                    margin-bottom: space(4)
                 &-content
                     width: columns(5)
                 .media
