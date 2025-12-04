@@ -17,6 +17,10 @@
             "options" $options
           )}}
 
+          {{ if $options.summary }}
+            {{ partial "projects/partials/project/summary.html" . }}
+          {{ end }}
+
           {{ if $group_meta }}
             {{ if or $options.year $options.categories }}
               <div class="project-meta">
@@ -34,11 +38,7 @@
               {{ partial "projects/partials/project/categories.html" . }}
             {{ end }}
           {{ end }}
-  
-          {{ if $options.summary }}
-            {{ partial "projects/partials/project/summary.html" . }}
-          {{ end }}
-  
+
           {{ if $with_more }}
             {{ partial "commons/item/more.html" . }}
           {{ end }}
