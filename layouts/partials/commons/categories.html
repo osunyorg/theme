@@ -17,7 +17,7 @@
         {{ $id := printf "%s-children-list" ( .Slug | anchorize) }}
         {{ $children := partial "GetObjectsFromPathSlice" .Params.children }}
         {{ if and $depth $children }}
-          <span href="{{ .Permalink }}" class="extendable-button" aria-expanded="false" aria-controls="{{ $id }}" role="button" tabindex="0">
+          <span class="extendable-button" aria-expanded="false" aria-controls="{{ $id }}" role="button" tabindex="0">
             {{- safeHTML .Title -}}
           </span>
           <div id="{{ $id }}" class="extendable dropdown" data-extendable-auto-close="true">
