@@ -125,7 +125,14 @@ osuny.Slider.prototype.listen = function () {
 
 osuny.Slider.prototype.resize = function () {
     this.state.slideBy = isMobile() ? 1 : this.options.perPage;
+
+    if (this.state.slideBy >= this.slides.length) {
+        this.goTo(0);
+    }
+
+    this.updatePositionState();
     this.translate();
+    this.update();
 };
 
 osuny.Slider.prototype.loop = function () {
@@ -155,15 +162,20 @@ osuny.Slider.prototype.goTo = function (index, event) {
     }
 
     this.state.index = index;
-    this.state.isFirst = this.state.index === 0;
-    this.state.isLast = this.state.index === this.slides.length - this.state.slideBy;
 
+    this.updatePositionState();
     this.translate();
     this.update();
 };
 
+osuny.Slider.prototype.updatePositionState = function () {
+    this.state.isFirst = this.state.index === 0;
+    this.state.isLast = this.state.index >= this.slides.length - this.state.slideBy;
+};
+
 osuny.Slider.prototype.update = function () {
     var componentKey;
+
     this.slides.forEach(this.updateSlide.bind(this));
 
     for (componentKey in this.components) {

@@ -30,7 +30,6 @@
                 .offcanvas-content
                     text-align: left
     .dates-filters
-        @include container
         .slider
             overflow: hidden
             position: relative
@@ -50,11 +49,17 @@
             display: flex
             gap: var(--grid-gutter)
             width: 100%
-            @include media-breakpoint-down(desktop)
+        @include media-breakpoint-down(desktop)
+            margin-left: var(--grid-gutter)
+            margin-right: var(--grid-gutter)
+            &__months
                 .calendar-month
                     + .calendar-month
                         margin-top: 0
-            @include media-breakpoint-up(desktop)
+        @include media-breakpoint-up(desktop)
+            .container
+                padding-left: var(--grid-gutter) !important
+            &__months
                 .calendar-month
                     width: columns(4)
     .dropdown-dates
