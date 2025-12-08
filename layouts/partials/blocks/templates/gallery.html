@@ -1,5 +1,7 @@
-{{- $block := .block -}}
-{{- $block_class := partial "GetBlockClass" .block -}}
+{{ $block := .block }}
+{{ $block_class := partial "GetBlockClass" .block }}
+{{ $with_lightbox := not site.Params.components.lightbox.in_gallery.disabled }}
+
 {{- with .block.data -}}
   {{- $sizes := index site.Params.image_sizes.blocks.gallery .layout -}}
   {{- $has_text := false -}}
@@ -23,6 +25,7 @@
                 "image"    .
                 "sizes"    $sizes
                 "gallery" true
+                "with_lightbox" $with_lightbox
               )}}
           {{ end -}}
         </div>

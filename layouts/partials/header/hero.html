@@ -2,6 +2,7 @@
 {{ $direction := "" }}
 {{ $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero" }}
 {{ $display_breadcrumb := .breadcrumb | default true }}
+{{ $with_lightbox := not site.Params.components.lightbox.in_hero.disabled }}
 {{ $subtitle := .subtitle }}
 {{ if .image }}
   {{ $direction = partial "GetImageDirection" .image }}
@@ -80,6 +81,7 @@
             "sizes" ( .sizes | default site.Params.image_sizes._default.hero )
             "lazy" false
             "focusable_figcaption" true
+            "with_lightbox" $with_lightbox
           ) }}
       {{ end }}
 
