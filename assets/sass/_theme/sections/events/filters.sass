@@ -7,6 +7,7 @@
         @include media-breakpoint-up(desktop)
             gap: $spacing-3
         @include media-breakpoint-down(desktop)
+            padding-top: $spacing-2
             .dropdown-dates,
             .filter-taxonomies
                 flex: 50%
@@ -14,6 +15,10 @@
                 > button
                     width: 100%
                     text-align: left
+            .taxonomies-list,
+            .dropdown-dates > button,
+            .filter-taxonomies, .offcanvas-button
+                display: block
             .filter-taxonomies
                 .offcanvas-button
                     @include button-reset
@@ -94,6 +99,11 @@
                     padding-top: $spacing-1
                     ul
                         grid-gap: $spacing-2
+                        // Cancel container behaviour
+                        max-width: none
+                        width: auto
+                        padding-left: 0
+                        padding-right: 0
                         li > a
                             padding-left: 0
 
