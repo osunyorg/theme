@@ -18,9 +18,10 @@
     "contents" .Params.contents
   ) }}
 
-  {{ with .Params.children }}
-    {{ partial "categories/single/categories.html" . }}
-  {{ end }}
+  {{ partial "categories/single/categories.html" (dict 
+    "categories" .Params.children
+    "context" .
+  ) }}
 
   <div class="container">
     {{ $section_type := strings.TrimSuffix "_categories" .Type }}
