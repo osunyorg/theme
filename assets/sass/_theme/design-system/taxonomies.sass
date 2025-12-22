@@ -44,10 +44,15 @@
                     display: block
                     &[aria-expanded="true"]
                         color: var(--color-accent)
-                ul
+                .extendable
                     border-top: var(--border-width) solid var(--color-accent)
                     padding-top: space(5)
                     margin-top: space(4)
+                    > a
+                        @include meta
+                        display: block
+                        padding-bottom: $spacing-1
+                ul
                     li
                         @include meta
                         padding-bottom: $spacing-1

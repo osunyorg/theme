@@ -21,6 +21,9 @@
             {{- safeHTML .Title -}}
           </span>
           <div id="{{ $id }}" class="extendable dropdown" data-extendable-auto-close="true">
+            <a href="{{ .Permalink }}">
+              {{- safeHTML .Title -}}
+            </a>
             {{ partial "commons/categories.html" (dict
               "categories" $children
               "type" $type
