@@ -38,6 +38,7 @@
     @include in-page-with-sidebar
         figure 
             width: columns(8)
+    
     @include in-page-without-sidebar
         .testimonials
             width: columns(12)
@@ -71,3 +72,7 @@
                     background-color: $block-testimonials-pagination-background
                 &::after
                     background-color: $block-testimonials-pagination-progress-background
+
+        @include in-page-without-sidebar
+            &-controls
+                margin-left: offset(4)
