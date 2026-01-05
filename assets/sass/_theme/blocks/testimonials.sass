@@ -1,34 +1,35 @@
 .block-testimonials
-    .testimonials
+    &--grid,
+    &--list
+        .testimonial
+            .avatar
+                width: space(10)
 
-        &--grid,
-        &--list
-            .testimonial
-                .avatar
-                    width: space(10)
-                    @include media-breakpoint-up(desktop)
-                        width: calc(#{columns(1)} / 2)
-                figcaption
-                    span
-                        display: block
-                        + span
-                            margin-top: space()
+    &:where(:not(.block-testimonials--carousel))
+        .testimonial
+            figcaption
+                align-items: flex-start
+                display: flex
+                gap: $spacing-2
+                > p
+                    flex: 1
+                span
+                    display: block
+                    + span
+                        margin-top: space()
+                
+                @include media-breakpoint-down(desktop)
+                    margin-top: space(5)
 
     &--grid
         .testimonials
             @include layout-grid
 
         .testimonial
-            figcaption
-                align-items: flex-start
-                display: flex
-                gap: $spacing-2
-                margin-top: $spacing-3
-                > p
-                    flex: 1
-
-                @include media-breakpoint-up(desktop)
-                    gap: calc(#{columns(1)} / 2)
+            @include media-breakpoint-up(desktop)
+                figcaption
+                    gap: calc(#{columns(1)} - #{space(10)})
+                    margin-top: $spacing-3
         
     &--list
         .testimonials
@@ -40,16 +41,44 @@
                 gap: var(--grid-gutter)
                 figcaption
                     flex: 1
-                    .avatar + p
-                        margin-top: space()
 
             @include in-page-without-sidebar
                 blockquote
                     width: columns(8)
+                figcaption
+                    gap: calc(#{columns(1)} - #{space(10)})
 
             @include in-page-with-sidebar
                 blockquote
                     width: columns(5)
+                figcaption
+                    flex-direction: column
+                    gap: space()
+                    .avatar + p
+                        margin-top: space()
+    
+    &--large
+        .testimonials
+            @include layout-large
+                
+        .testimonial
+            figcaption
+                span
+                    display: block
+                    + span
+                        margin-top: space()
+                
+            @include media-breakpoint-up(desktop)
+                .avatar
+                    width: calc(#{columns(1)} + var(--grid-gutter))
+                figcaption
+                    align-items: center
+                    gap: calc(#{columns(1)} / 2)
+                    margin-top: $spacing-3
+            
+            @include media-breakpoint-down(desktop)
+                .avatar
+                    width: space(10)
 
     &--carousel
         .container
@@ -91,6 +120,7 @@
         @include in-page-with-sidebar
             figure 
                 width: columns(8)
+        
         @include in-page-without-sidebar
             .testimonials
                 width: columns(12)
