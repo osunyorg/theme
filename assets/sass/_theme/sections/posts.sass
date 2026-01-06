@@ -121,7 +121,8 @@
                     .media,
                     .post-content
                         width: columns(4)
-            @include media-breakpoint-up(xl)
+                    .media
+                        margin-bottom: 0
                 &.without-images
                     .post
                         .post-content
@@ -136,6 +137,9 @@
                 .post-title,
                 .post-subtitle
                     @include lead
+                @include media-breakpoint-up(lg)
+                    .media
+                        margin-bottom: 0
             &.without-images
                 .post
                     @include media-breakpoint-up(xl)

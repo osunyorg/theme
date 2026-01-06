@@ -2,7 +2,7 @@
 {{ $layout := .layout | default "list" }}
 {{ $is_sub_event := .is_sub_event }}
 {{ $is_sup_event := .is_sup_event }}
-{{ $with_more := .with_more }}
+{{ $with_more := .with_more | default site.Params.events.list.with_more }}
 {{ $heading_level := .heading_level | default 3 }}
 
 {{ $index := .index }}
@@ -51,7 +51,7 @@
 
       {{ if eq $layout "agenda" }}
         {{ with .Params.current_time_slot }}
-          {{ partial "events/partials/event/hours.html" . }}
+          {{ partial "events/partials/event/timeslot.html" . }}
         {{ end }}
       {{ end }}
 

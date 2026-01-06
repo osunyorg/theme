@@ -1,12 +1,13 @@
 {{ $options := site.Params.organizations.index.options }}
 {{ $layout := "grid" }}
+{{ $paginator := .Paginate ( .Pages | uniq ) }}
 
-{{ if not .Paginator.Pages }}
+{{ if not $paginator.Pages }}
   {{ $is_term := eq .Kind "term" }}
   <p>{{ i18n (cond $is_term "categories.no_organization" "organizations.none") }}</p>
 {{ else }}
   <ul class="organizations organizations--grid {{- if $options.summary }} with-summaries {{- end }}">
-    {{ range .Paginator.Pages }}
+    {{ range $paginator.Pages }}
       <li>
         {{ partial "organizations/partials/organization.html" (dict
             "organization" .

@@ -171,6 +171,11 @@
                 margin-top: $spacing-2
             &-hours
                 @include h3
+            &-place
+                @include meta
+            &-timeslot
+                * + * 
+                    margin-top: $spacing-1
         .events-date
             ol > li
                 margin-top: $spacing-3
@@ -195,12 +200,12 @@
                 &-content
                     display: flex
                     flex-direction: column
-                &-hours
+                &-timeslot
                     margin-bottom: $spacing-2
                     order: -1
                     @include h4
                 &--with-image
-                    .event-hours
+                    .event-timeslot
                         margin-top: $spacing-2
                     .media
                         margin-bottom: $spacing-3
@@ -213,7 +218,7 @@
                         width: 33.3%
                         order: 2
                         margin-bottom: 0
-                    .event-hours
+                    .event-timeslot
                         margin-top: 0
                 &--parent
                     .media
@@ -249,7 +254,7 @@
                     flex: 1
                 .media
                     width: columns(3)
-                &-hours
+                &-timeslot
                     position: absolute
                     left: 0
                     top: 0
@@ -266,7 +271,7 @@
                         .event-content
                             margin-left: offset(3)
                 &:not(.event--child)
-                    .event-hours
+                    .event-timeslot
                         bottom: 0
                         span
                             @include sticky(var(--title-height))

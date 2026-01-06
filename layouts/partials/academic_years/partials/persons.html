@@ -1,17 +1,15 @@
 {{ with . }}
   <div class="academic_years__persons">
-    <ol class="persons">
+    <ol class="persons persons--grid">
       {{ range . }}
-        <li>
-          {{ partial "persons/partials/person.html" (dict
-              "person" .
-              "options" (dict
-                "cohorts" true
-                "image" true
-                "link" true
-              )
-            ) }}
-        </li>
+        {{ partial "persons/partials/person.html" (dict
+          "person" .
+          "options" (dict
+            "cohorts" true
+            "image" true
+            "link" true
+          )
+        ) }}
       {{ end }}
     </ol>
   </div>
