@@ -50,6 +50,10 @@
         {{ end }}
       {{ end }}
 
+      {{ with .Params.registration_url }}
+        <a href="{{ . }}" class="btn registration_url" target="_blank">{{ i18n "programs.registration_url" }}</a>
+      {{ end }}
+
       {{ if site.Params.programs.share_links.enabled | default site.Params.share_links.enabled }}
         {{ partial "commons/share/dropdown.html" . }}
       {{ end }}
