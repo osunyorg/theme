@@ -1,4 +1,4 @@
-{{- if or (partial "GetTextFromHTML" .Params.prerequisites) (partial "GetTextFromHTML" .Params.pricing) (partial "GetTextFromHTML" .Params.registration) (partial "GetTextFromHTML" .Params.accessibility) (partial "GetTextFromHTML" .Params.other) -}}
+{{- if or (partial "GetTextFromHTML" .Params.prerequisites) (partial "GetTextFromHTML" .Params.pricing) (partial "GetTextFromHTML" .Params.registration) .Params.registration_url (partial "GetTextFromHTML" .Params.accessibility) (partial "GetTextFromHTML" .Params.other) -}}
 <section id="{{ anchorize (i18n "programs.toc.admission") }}">
   <div class="container">
     <div class="content">
