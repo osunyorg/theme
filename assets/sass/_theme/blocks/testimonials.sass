@@ -37,6 +37,7 @@
 
         .testimonial
             @include media-breakpoint-up(desktop)
+                align-items: baseline
                 display: flex
                 gap: var(--grid-gutter)
                 figcaption
@@ -80,7 +81,8 @@
                 .avatar
                     width: space(10)
 
-    &--carousel
+    &--carousel,
+    &:has(.testimonials--carousel) // Todo : remove after data has been migrate
         .container
             overflow: hidden
         blockquote
