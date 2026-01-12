@@ -13,10 +13,17 @@
             @include article-title
         .project-subtitle
             color: var(--color-text-alt)
+        .project-summary
+            margin-top: $spacing-2
+        .project-categories
+            margin-bottom: 0
     .media img
         width: 100%
 
 .projects
+    > ul
+        @include list-reset
+
     &--grid
         @include grid(2, md)
         .project
@@ -25,7 +32,7 @@
             &-subtitle
                 @include h3
         @include media-breakpoint-down(md)
-            .project + .project
+            > li + li
                 margin-top: $spacing-4
             .project
                 .media
@@ -49,33 +56,28 @@
                 @include hover-translate-icon(after, $fade: true)
                 &:hover
                     color: $color-accent
-        @include media-breakpoint-down(md)
-            .project
+            @include media-breakpoint-down(md)
                 .media
                     margin-bottom: 0
                     order: -1
-                &-meta
+                .project-meta
                     margin-top: $spacing-1
-        @include media-breakpoint-up(md)
-            .project
+            @include media-breakpoint-up(md)
                 flex-direction: row
                 .media
                     order: 1
-                &-categories
+                .project-categories
                     display: flex
                     width: fit-content
-        @include media-breakpoint-between(sm, desktop)
-            .project
+            @include media-breakpoint-between(sm, desktop)
                 .media
                     width: columns(4)
-        article
             @include in-page-with-sidebar
-                .project
-                    &-title,
-                    &-subtitle
-                        @include h3
+                .project-title,
+                .project-subtitle
+                    @include h3
             @include in-page-without-sidebar
-                &.project
+                .project-content
                     .project-title,
                     .project-subtitle
                         @include h2
@@ -83,22 +85,22 @@
         .project-subtitle
             @include h3
         @include media-breakpoint-down(desktop)
-            .project + .project
+            > li + li
                 margin-top: $spacing-4
         @include media-breakpoint-up(desktop)
-            article
-                + article
+            > li
+                + li
                     margin-top: $spacing-6
                 &:nth-child(odd)
                     margin-left: auto
         @include in-page-with-sidebar
-            article
+            > li
                 width: columns(5)
         @include in-page-without-sidebar
             .top
                 .description
                     @include body-text
-            article
+            > li
                 width: columns(7)
     &--large
         .project
@@ -106,22 +108,21 @@
                 line-height: $body-size
                 margin-bottom: $spacing-2
                 margin-top: $spacing-2
-                time
-                    + .project-categories::before
-                        content: ' — '
             time,
             ul.project-categories
                 align-self: baseline
                 display: inline
             .project-categories
-                li 
+                li
                     display: inline
+                    &:before
+                        content: ' '
             * + .project-summary
                 margin-top: $spacing-2
             * + .more
                 margin-top: $spacing-2
-            + .project
-                margin-top: $spacing-4
+        > li + li
+            margin-top: $spacing-4
         @include media-breakpoint-up(desktop)
             .project
                 align-items: flex-end
@@ -138,7 +139,6 @@
                 &-title,
                 &-subtitle
                     @include h2
-                    margin-bottom: $spacing-1
                 &-content
                     flex: 1
                 .media 
@@ -148,7 +148,6 @@
                 &-title,
                 &-subtitle
                     @include lead
-                    margin-bottom: space(4)
                 &-content
                     width: columns(5)
                 .media

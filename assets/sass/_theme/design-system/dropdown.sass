@@ -14,7 +14,6 @@
             + #{$content-selector}
                 display: block
     #{$content-selector}
-        @include list-reset
         background-color: var(--dropdown-background)
         display: none
         position: absolute
@@ -32,17 +31,17 @@
         #{$content-selector}
             padding-top: var(--grid-gutter)
             padding-bottom: var(--grid-gutter)
-            ul
+            > ul
                 @include container
                 @include grid(1)
-                @include grid(2, md)
-                @include grid(3, xl)
-                @include grid(4, xxl)
-                li
-                    > a
-                        @include icon(arrow-right-line, after, true)
-                        @include hover-translate-icon
-                        text-decoration: none
+                @include grid(2, md, $spacing-3)
+                @include grid(3, xl, $spacing-3)
+                li a
+                    @include icon(arrow-right-line, after, true)
+                    text-decoration-color: transparent
+                    &:hover
+                        color: var(--color-accent)
+
         @include media-breakpoint-up(md)
             position: static
             #{$content-selector}
@@ -68,6 +67,8 @@
                     padding: $spacing-2
                     text-decoration: none
                     white-space: normal
+                    @include media-breakpoint-down(desktop)
+                        padding: $spacing-2 var(--grid-gutter)
                     @include media-breakpoint-up(desktop)
                         &:hover
                             background-color: var(--dropdown-hover-background)

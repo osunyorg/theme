@@ -1,7 +1,4 @@
 .organization
-    display: flex
-    flex-direction: column
-    position: relative
     &-title
         a
             @include stretched-link(before)
@@ -11,7 +8,6 @@
         .organization-title
             @include meta
     .media
-        @include handle-svg-fit
         background: $organization-background-color
         margin-bottom: $spacing-2
         order: -1
@@ -40,12 +36,19 @@
 
 
 .organizations
-    &.grid
+    @include list-reset
+    article
+        display: flex
+        flex-direction: column
+        position: relative
+    &--grid
         max-width: 100%
         @include grid(2)
         @include grid(3, md)
         @include grid(4, lg)
         @include grid(6, xl)
+        @include in-page-with-sidebar
+            @include grid(4, xl)
         @include in-page-program
             @include grid(3, md)
             @include grid(3, lg)
@@ -54,7 +57,8 @@
             grid-column-gap: $spacing-3 !important
         &.with-summaries
             @include grid(1)
-            @include grid(1, md)
+            @include in-page-with-sidebar
+                @include grid(2, xl)
             @include in-page-without-sidebar
                 @include grid(2, lg)
                 @include grid(3, xl)
@@ -82,6 +86,28 @@
                     width: columns(4)
                     .media
                         width: columns(2)
+
+    &--large
+        @include layout-large
+        .organization
+            .organization-content
+                display: flex
+                flex-direction: column
+                .organization-summary
+                    flex: 1
+            + .organization
+                margin-top: $spacing-4
+                @include media-breakpoint-up(md)
+                    margin-top: $spacing-3
+            .media--logo
+                padding: $spacing-5
+                img
+                    object-fit: contain
+                @include media-breakpoint-up(md)
+                    padding: $spacing-6
+            @include in-page-with-or-without-sidebar
+                .media
+                    margin-bottom: 0
 
 .organizations__section
     .organizations

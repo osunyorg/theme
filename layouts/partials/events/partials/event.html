@@ -2,7 +2,7 @@
 {{ $layout := .layout | default "list" }}
 {{ $is_sub_event := .is_sub_event }}
 {{ $is_sup_event := .is_sup_event }}
-{{ $with_more := .with_more }}
+{{ $with_more := .with_more | default site.Params.events.list.with_more }}
 {{ $heading_level := .heading_level | default 3 }}
 
 {{ $index := .index }}
@@ -26,10 +26,7 @@
 
   {{ $dates := .Params.dates }}
 
-  <article class="{{ $class }}" 
-      {{ if $is_sub_event }} itemprop="subEvent" {{ end }}
-      {{ if $is_sup_event }} itemprop="superEvent" {{ end }}
-      itemscope itemtype="https://schema.org/Event">
+  <article class="{{ $class }}">
 
     {{ if or .Params.dates .Params.current_time_slot }}
       {{ partial "events/partials/event/meta-dates.html" (dict
@@ -54,17 +51,18 @@
 
       {{ if eq $layout "agenda" }}
         {{ with .Params.current_time_slot }}
-          {{ partial "events/partials/event/hours.html" . }}
+          {{ partial "events/partials/event/timeslot.html" . }}
         {{ end }}
       {{ end }}
 
       {{ if $options.dates }}
         {{ partial "events/partials/event/schedule.html" (dict 
-            "dates" .Params.dates
-            "time_slot" .Params.current_time_slot
-            "time_slots" .Params.time_slots
-            "on_two_lines" (ne $layout "list")
-          )}}
+          "dates" .Params.dates
+          "time_slot" .Params.current_time_slot
+          "time_slots" .Params.time_slots
+          "on_two_lines" false
+          "with_hours" false
+        ) }}
       {{ end }}
 
       {{ if and $dates.status $options.status }}
@@ -77,9 +75,6 @@
             "summary" .Params.summary
             "kind" "events"
           )}}
-          {{ if eq $layout "large" }}
-            <p class="more meta" aria-hidden="true">{{- i18n "commons.more" -}}</p>
-          {{ end }}
         </div>
       {{ end }}
 
@@ -90,21 +85,20 @@
         )}}
       {{- end -}}
 
-      {{ if $with_more }}
+      {{ if or (eq $layout "large") $with_more }}
         {{ partial "commons/item/more.html" . }}
       {{- end -}}
     </div>
-    <div class="media">
-      {{- if and $options.image .Params.image -}}
-        {{ $sizes := index site.Params.image_sizes.blocks.events $layout }}
-        {{- partial "commons/image.html"
-            (dict
-              "image"    .Params.image
-              "sizes"    $sizes
-            ) -}}
-      {{- else -}}
-        {{- partial "commons/image-default.html" "events" -}}
-      {{- end -}}
-    </div>
+    {{ if $options.image }}
+      {{ $sizes := index site.Params.image_sizes.sections.events $layout }}
+      {{ if and .Params.parent (eq $layout "agenda") }}
+        {{ $sizes = site.Params.image_sizes.sections.events.children_in_agenda }}
+      {{ end }}
+      {{ partial "events/partials/event/media.html" (dict 
+          "image" .Params.image
+          "layout" $layout
+          "sizes" $sizes
+        ) }}
+    {{ end }}
   </article>
 {{ end }}

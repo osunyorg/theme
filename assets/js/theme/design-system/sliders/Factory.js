@@ -5,13 +5,21 @@ osuny.SlidersFactory = osuny.SlidersFactory || {};
 osuny.lightbox = osuny.lightbox || {};
 
 osuny.SlidersFactory = function () {
+    this.init();
+    this.listen();
+};
+
+osuny.SlidersFactory.prototype.init = function () {
     this.sliders = [];
     this.activeSlider = null;
 
     document.querySelectorAll('[data-slider]').forEach(this.create.bind(this));
 
     this.activate();
-    this.listen();
+};
+
+osuny.SlidersFactory.prototype.reinit = function () {
+    this.init();
 };
 
 osuny.SlidersFactory.prototype.create = function (element, index) {

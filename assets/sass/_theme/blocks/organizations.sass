@@ -1,12 +1,8 @@
 .block-organizations
-    .organization
-        .organization-title
-            a[target="_blank"]
-                @include stretched-link(before)
-                @include icon(links-line, after, true)
-                    position: relative
     &--carousel
         @include layout-carousel
+        overflow: hidden
+        
         .slider
             @include in-page-with-sidebar
                 .slider-slide
@@ -14,6 +10,7 @@
             @include in-page-without-sidebar
                 .slider-slide
                     width: columns(2)
+    
     &--map
         position: relative
         .block-content
@@ -75,41 +72,13 @@
                     z-index: 2
                 a.leaflet-popup-close-button
                     color: var(--color-text)
-    &--large
-        @include layout-large
-        .organization
-            .organization-content
-                display: flex
-                flex-direction: column
-                .organization-title
-                    @include h2
-                    a
-                        @include link
-                .organization-summary
-                    flex: 1
-            + .organization
-                margin-top: $spacing-4
-                @include media-breakpoint-up(md)
-                    margin-top: $spacing-3
-            .media--logo
-                padding: $spacing-5
-                @include media-breakpoint-up(md)
-                    padding: $spacing-6
-            @include in-page-with-or-without-sidebar
-                .media
-                    margin-bottom: 0
+
 
     @include media-breakpoint-down(md)
         details
             ul
                 li + li
                     margin-top: $spacing-3
-    @include in-page-with-sidebar
-        .grid
-            @include grid(4, lg)
-            &.with-summaries
-                @include grid(1, lg)
-                @include grid(2, xl)
 
     @include in-page-without-sidebar
         .top .description

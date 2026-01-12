@@ -1,0 +1,38 @@
+{{ $exhibitions := .exhibitions }}
+{{ $context := .context }}
+
+{{ with $exhibitions }}
+  <section class="related-exhibitions" id="{{ anchorize (i18n "programs.toc.related.exhibitions") }}">
+    <div class="container">
+      <div class="content">
+        <h2 id="page-exhibitions">{{ i18n "exhibitions.title" }}</h2>
+        <a href="{{ $context.Permalink }}" class="category-link">
+          {{ $category_name := safeHTML $context.Title | truncate 30 }}
+          {{ i18n "exhibitions.see_all_in_program" (dict "Title" $category_name) }}
+        </a>
+
+        {{ $exhibitions = partial "GetPathSliceFromObjects" . }}
+        {{ $params := partial "GetLayoutAndOptions" (dict 
+          "param" "programs.related_exhibitions"
+          "default" "exhibitions.index"
+        ) }}
+        <div class="blocks">
+          {{ partial "blocks/templates/exhibitions.html" (dict
+            "block" (dict 
+              "template" "exhibitions"
+              "ranks" (dict 
+                "base" 2
+                "self" 2
+              )
+              "data" (dict
+                "exhibitions" $exhibitions
+                "layout" $params.layout
+                "options" $params.options
+              )
+            )
+          ) }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{ end }}

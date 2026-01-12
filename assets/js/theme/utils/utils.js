@@ -5,10 +5,12 @@ window.osuny.utils = window.osuny.utils || {};
 window.osuny.i18n = params.i18n;
 
 window.osuny.utils.instanciateAll = function (selector, Klass) {
-    var instances = document.querySelectorAll(selector);
-    instances.forEach(function (instance) {
-        new Klass(instance);
+    var elements = document.querySelectorAll(selector),
+        instances = [];
+    elements.forEach(function (element) {
+        instances.push(new Klass(element));
     });
+    return instances;
 };
 
 window.osuny.utils.insertSROnly = function (element, text) {

@@ -1,6 +1,6 @@
-var osuny = window.osuny || {};
+window.osuny = window.osuny || {};
 
-osuny.StickyTitle = function (container, titleSelector) {
+window.osuny.StickyTitle = function (container, titleSelector) {
     this.container = container;
     this.title = container.querySelector(titleSelector);
 
@@ -9,12 +9,12 @@ osuny.StickyTitle = function (container, titleSelector) {
     }
 }
 
-osuny.StickyTitle.prototype.listen = function () {
+window.osuny.StickyTitle.prototype.listen = function () {
     var distance = 0,
         threshold = 5,
         titleOriginalHeight = this.title.offsetHeight,
         titleDownHeight = this.title.querySelector('span').offsetHeight,
-        hours = this.container.querySelector('.event:last-child .event-hours span');
+        hours = this.container.querySelector('.events-scheduled > li:last-child .event .event-hours');
 
     window.addEventListener('scroll', function() {
         distance = Math.abs(this.title.offsetTop - this.container.offsetTop);
@@ -26,16 +26,16 @@ osuny.StickyTitle.prototype.listen = function () {
             this.title.classList.remove('is-down');
         }
 
-        this.title.style.maxHeight = titleOriginalHeight + "px";
+        this.title.style.maxHeight = titleOriginalHeight + 'px';
         this.container.style.setProperty('--title-height', titleDownHeight + 'px');
 
         if (hours) {
-            this.container.style.setProperty('--title-margin-bottom', (titleDownHeight/2)  + 'px');
+            this.container.style.setProperty('--title-margin-bottom', (hours.offsetHeight + (titleDownHeight - titleOriginalHeight))  + 'px');
         }
     }.bind(this));
 };
 
-osuny.StickyTitle.prototype.setTitleHeight = function () {
+window.osuny.StickyTitle.prototype.setTitleHeight = function () {
     
 };
 
@@ -43,6 +43,6 @@ osuny.StickyTitle.prototype.setTitleHeight = function () {
 (function () {
     var events = document.querySelectorAll('.events-date.events-date--sticky');
     events.forEach(function (event) {
-        new osuny.StickyTitle(event, '.events-date-title');
+        new window.osuny.StickyTitle(event, '.events-date-title');
     });
 }());

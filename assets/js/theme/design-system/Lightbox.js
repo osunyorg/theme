@@ -1,17 +1,16 @@
 import './TouchControl';
-import { setButtonEnability, setDefaultAltToImages } from '../utils/a11y';
+import { a11yClick, setButtonEnability, setDefaultAltToImages } from '../utils/a11y';
 
 /* eslint-disable no-underscore-dangle */
 window.osuny = window.osuny || {};
-window.osuny.Lightbox = window.osuny.Lightbox || {};
 
 window.osuny.Lightbox = function () {
     var element = document.getElementById('lightbox');
     window.osuny.Popup.call(this, element);
 
-    this.state.currentData = {};
-    this.state.previousData = {};
-    this.state.nextData = {};
+    this.state.currentData = null;
+    this.state.previousData = null;
+    this.state.nextData = null;
 
     this._setup();
     this._listen();
@@ -20,7 +19,6 @@ window.osuny.Lightbox = function () {
 window.osuny.Lightbox.prototype = Object.create(window.osuny.Popup.prototype);
 
 window.osuny.Lightbox.prototype._setup = function () {
-    this.buttons = document.querySelectorAll('[data-lightbox]');
     this.contentElements = {
         media: this.element.querySelector('#lightbox-media'),
         image: null,
@@ -34,16 +32,21 @@ window.osuny.Lightbox.prototype._setup = function () {
         nextButton: this.element.querySelector('.lightbox-button-next')
     };
     this.touchControl = new window.osuny.TouchControl(this, this.contentElements.media);
+    this.bindButtons();
+};
+
+window.osuny.Lightbox.prototype.bindButtons = function () {
+    this.buttons = document.querySelectorAll('[data-lightbox]');
     setDefaultAltToImages(this.buttons);
+
+    this.buttons.forEach(function (button, index) {
+        a11yClick(button, this.open.bind(this, button));
+        this._setAriaDescribed(button, index);
+    }.bind(this));
 };
 
 window.osuny.Lightbox.prototype._listen = function () {
     window.osuny.Popup.prototype._listen.call(this);
-
-    this.buttons.forEach(function (button, index) {
-        button.addEventListener('click', this.open.bind(this, button));
-        this._setAriaDescribed(button, index);
-    }.bind(this));
 
     this.contentElements.previousButton.addEventListener('click', this.navigateTo.bind(this, 'previousData'));
     this.contentElements.nextButton.addEventListener('click', this.navigateTo.bind(this, 'nextData'));
@@ -95,6 +98,8 @@ window.osuny.Lightbox.prototype._setSiblings = function () {
     if (!galleryElement || galleryElement.children.length === 1) {
         this.contentElements.previousButton.style.display = 'none';
         this.contentElements.nextButton.style.display = 'none';
+        this.state.previousData = null;
+        this.state.nextData = null;
         return;
     }
 
@@ -151,7 +156,7 @@ window.osuny.Lightbox.prototype._update = function (data, focus) {
 };
 
 window.osuny.Lightbox.prototype._setPlayer = function (data) {
-    var videoPlayer = window.osuny.videoPlayerFactory.get(data.videoId),
+    var videoPlayer = window.osuny.page.getComponentInstanceById(data.videoId),
         iframe;
     if (videoPlayer) {
         iframe = videoPlayer.cloneIframe();
@@ -210,6 +215,10 @@ window.osuny.Lightbox.prototype.navigateTo = function (key) {
     if (this.state[key]) {
         this._update(this.state[key], true);
     }
+};
+
+window.osuny.Lightbox.prototype.reinit = function () {
+    this.bindButtons();
 };
 
 window.osuny.lightbox = new window.osuny.Lightbox();

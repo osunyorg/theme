@@ -1,42 +1,49 @@
-@mixin layout-cards
+@mixin layout-cards($background: $layout-cards-item-background, $background-hover: $layout-cards-item-background-hover, $color: $layout-cards-item-color, $color-hover: $layout-cards-item-color-hover, $aspect-ratio: $article-media-aspect-ratio)
     @include list-reset
     article
-        @include article
+        @include article($aspect-ratio)
         @include layout-item
-        background: $layout-cards-item-background
-        color: $layout-cards-item-color
+        @include arrow-right-hover(".more")
+        background: $background
+        color: $color
         padding: $spacing-3
         position: relative
         transition: background $background-duration, color $background-duration
-        @include arrow-right-hover(".more")
-        height: 100%
         [class$="-title"]
             @include h3
-        @include media-breakpoint-up(desktop)
-            height: 100%
+            a
+                color: inherit
+        [class$="-content"]
+            display: flex
+            flex-direction: column
+            flex: 1
         .media
+            @include handle-svg-fit
             margin-left: -$spacing-3
             margin-right: -$spacing-3
             margin-top: -$spacing-3
             img
                 min-width: 100%
         .more
-            @include link($layout-cards-item-color)
-            margin-top: $spacing-4
+            @include link($color)
+            padding-top: $spacing-4
+            margin-top: auto
         a, p
             transition: text-decoration-color .3s ease, color .3s ease
         &:hover
-            background-color: $layout-cards-item-background-hover
+            background-color: $background-hover
             &, a, p
-                color: $layout-cards-item-color-hover
-            .more
-                text-decoration-color: $layout-cards-item-color-hover
+                color: $color-hover
+            .more, [class$="-categories"] a
+                @include link($color-hover)
     @include media-breakpoint-down(desktop)
         > li + li
             margin-top: $spacing-3
     @include media-breakpoint-up(desktop)
         align-items: stretch
         min-height: 320px
+        article
+            height: 100%
     @include in-page-with-sidebar
         @include grid(2)
     @include in-page-without-sidebar

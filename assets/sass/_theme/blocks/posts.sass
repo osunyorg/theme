@@ -5,225 +5,23 @@
             @include icon(arrow-right-line, after, true)
             @include hover-translate-icon
             text-decoration: none
-    .posts
-        @include grid(1)
-        @include grid($block-posts-grid-columns, desktop)
-    article
-        @include author-and-time-side-to-side
-        .post-title
-            a
-                @include stretched-link
-                text-decoration: none
-        .post-content
-            > * + * 
-                margin-top: $spacing-2
-            .media
-                margin-top: 0
-
-    &--grid
-        @include media-breakpoint-down(desktop)
-            article + article
-                margin-top: $spacing-5
-        @include in-page-with-sidebar
-            .grid
-                @include grid(2)
-        @include in-page-without-sidebar
-            .grid
-                @include grid($block-posts-grid-columns)
-                .media picture img
-                    width: 100%
-    &--large
-        .post
-            @include small-arrow-right-hover('.more')
-            // Masquer le point entre l'auteur et la date (mixin author-and-time-side-to-side)
-            .post-author p,
-            .post-reading-time
-                &::before
-                    display: none
-
-            // Permet d'aligner correctement les différents line-height des différents composants du post meta
-            .post-meta
-                display: block
-                > *
-                    margin-right: $spacing-3
-                time
-                    vertical-align: baseline
-                .post-author
-                    &, p
-                        display: inline
-            // Désactiver le ratio forcé de la configuration $article-media-aspect-ratio
-            .media
-                &, img
-                    aspect-ratio: auto
-        @include media-breakpoint-down(desktop)
-            .post
-                + .post
-                    margin-top: $spacing-4
-                [itemprop="abstract"]
-                    margin-top: 0
-                .post-author 
-                    margin-right: 0
-                    + time
-                        display: inline
-                        &::before
-                            content: ' • '
-                .post-categories
-                    li
-                        margin-right: space(2)
-        @include media-breakpoint-up(desktop)
-            .large
-                .post
-                    flex-direction: row
-                    gap: var(--grid-gutter)
-                    + .post
-                        margin-top: $spacing-4
-                    .post-title,
-                    .post-subtitle
-                        @include h2
-                    [itemprop="abstract"]
-                        margin-top: $spacing-3
-                    &-categories
-                        display: inline
-                        *
-                            display: inline-block
-                        li
-                            margin-right: $spacing-2
-                            a
-                                display: inline
-
-        @include in-page-with-sidebar
-            .large
-                .post
-                    @include media-breakpoint-down(xl)
-                        flex-direction: column
-                        gap: unset
-                        [itemprop="abstract"]
-                            margin-top: $spacing-2
-                    @include media-breakpoint-up(xl)
-                        .media,
-                        .post-content
-                            width: columns(4)
-                @include media-breakpoint-up(xl)
-                    &.without-images
-                        .post
-                            .post-content
-                                width: columns(8)
-        @include in-page-without-sidebar
-            .large
-                .post
-                    gap: var(--grid-gutter)
-                    .media
-                        width: columns(6)
-                    .post-content
-                        width: columns(5)
-                    .post-title,
-                    .post-subtitle
-                        @include lead
-                &.without-images
-                    .post
-                        @include media-breakpoint-up(xl)
-                            margin-left: offset(4)
-                            .post-content
-                                width: columns(6)
-                        @include media-breakpoint-down(xl)
-                            .post-content
-                                width: columns(8)
-    &--list
-        article
-            &:where(:not(:last-child))
-                border-bottom: var(--border-width) solid var(--color-border)
-            .media
-                background: none
-                margin: 0
-                &, img
-                    aspect-ratio: auto
-
-        @include media-breakpoint-down(desktop)
-            article
-                position: relative
-                padding-bottom: $spacing-3
-                + article
-                    margin-top: $spacing-3
-                .post-content
-                    display: flex
-                    flex-direction: column
-                    padding-top: $spacing-2
-                    .post-title
-                        margin-bottom: 0
-                    .post-categories
-                        margin-bottom: 0
-                    [itemprop="abstract"]
-                        margin-top: $spacing-1
-                .media
-                    order: -1
-                    max-width: 33%
-
-        @include media-breakpoint-up(desktop)
-            article
-                display: flex
-                flex-direction: row
-
-        @include in-page-with-sidebar
-            article
-                padding-bottom: $spacing-3
-                gap: var(--grid-gutter) // gap plutôt que marge pour l'affichage avec ou sans image
-                + article
-                    margin-top: $spacing-3
-                .media
-                    width: columns(2)
-                .post-content
-                    width: columns(6)
-
-        @include in-page-without-sidebar
-            article
-                gap: var(--grid-gutter)
-                padding-bottom: $spacing-5
-                position: relative
-                .media
-                    width: columns(3)
-                .post-content
-                    display: flex
-                    flex-direction: column
-                    width: columns(6)
-                + article
-                    margin-top: $spacing-5
-                .post-meta
-                    margin-top: auto
-                    padding-top: $spacing-3
-                    time
-                        margin-top: 0.3em
-                        position: absolute
-                        right: 0
-                        top: 0
-                    .post-reading-time,
-                        display: block
-                        &::before
-                            content: none
-                    .post-author:first-of-type
-                        [itemprop="name"]::before
-                            content: none
 
     &--highlight
         .highlight-post
             .media
-                margin-bottom: $spacing-2
                 background: none
                 img
                     aspect-ratio: auto
         .list
+            @include list-reset
             margin-top: $spacing-3
             border-top: var(--border-width) solid var(--color-border)
-            article
+            > li
                 position: relative
                 padding-bottom: $spacing-3
                 margin-top: $spacing-3
                 &:where(:not(:last-child))
                     border-bottom: var(--border-width) solid var(--color-border)
-        article
-            > * + * 
-                margin-top: $spacing-2
-            .media
-                margin-top: 0
         @include media-breakpoint-down(desktop)
             .list
                 border-top: var(--border-width) solid var(--color-border)
@@ -262,8 +60,9 @@
                         width: columns(2)
                         > *
                             display: block
-                        .post-author p::before
-                            content: none
+                            &::before
+                                content: none
+                                padding: 0
                     [itemprop="abstract"]
                         grid-column: 1 / 7
                         order: 3
@@ -274,40 +73,11 @@
             .list
                 border-top: 0
                 margin-top: 0
-                article:first-child
+                > li:first-child
                     margin-top: 0
 
-    &--alternate .alternate
-        @include alternate
-        @include media-breakpoint-up(desktop)
-            &.without-images
-                .post
-                    margin-top: 0 !important
-        @include media-breakpoint-down(desktop)
-            .post
-                .post-meta
-                    margin-top: $spacing-1
-                .media
-                    margin-bottom: $spacing-2
-                + .post
-                    margin-top: $spacing-5
-
     &--carousel
-        @include layout-carousel
-        @include in-page-with-sidebar
-            .post
-                .post-title,
-                .post-subtitle
-                    @include h4
-            .slider
-                .slider-arrows
-                    justify-content: space-between
-                    width: columns(4)
-                @include media-breakpoint-down(xxxl)
-                    .slider-slide
-                        width: columns(4)
-                    .slider-arrows
-                        width: columns(5)
+        overflow: hidden
         @include in-page-without-sidebar
             .block-content
                 display: flex
@@ -319,6 +89,7 @@
                     .slider-arrows
                         justify-content: space-between
                         width: columns(9)
+
 
 // Move this part to blocks/categories when categories block is ready
 .block-posts
