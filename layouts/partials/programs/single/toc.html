@@ -13,7 +13,7 @@
 {{ $pricing_initial := partial "GetTextFromHTML" .context.Params.pricing_initial }}
 {{ $pricing_continuing := partial "GetTextFromHTML" .context.Params.pricing_continuing }}
 {{ $pricing_apprenticeship := partial "GetTextFromHTML" .context.Params.pricing_apprenticeship }}
-{{ $registration := partial "GetTextFromHTML" .context.Params.registration }}
+{{ $registration := or (partial "GetTextFromHTML" .context.Params.registration) .context.Params.registration_url }}
 {{ $accessibility := partial "GetTextFromHTML" .context.Params.accessibility }}
 {{ $other := partial "GetTextFromHTML" .context.Params.other }}
 
@@ -56,25 +56,25 @@
           {{- end -}}
         </ol>
     </li>
-    <li>
-      <a {{ partial "AnchorAttribute" (i18n "programs.toc.pedagogy") }}>{{ i18n "programs.toc.pedagogy" }}</a>
-      {{- if or $content $pedagogy $evaluation $teachers }}
-      <ol>
-        {{- if $content -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.content") }}>{{ i18n "programs.content" }}</a></li>
-        {{- end -}}
-        {{- if $pedagogy -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.pedagogy") }}>{{ i18n "programs.pedagogy" }}</a></li>
-        {{- end -}}
-        {{- if $evaluation -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.evaluation") }}>{{ i18n "programs.evaluation" }}</a></li>
-        {{- end -}}
-        {{- if $teachers -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.teachers") }}>{{ i18n "programs.teachers" }}</a></li>
-        {{- end -}}
-      </ol>
-      {{ end -}}
-    </li>
+    {{- if or $content $pedagogy $evaluation $teachers }}
+      <li>
+        <a {{ partial "AnchorAttribute" (i18n "programs.toc.pedagogy") }}>{{ i18n "programs.toc.pedagogy" }}</a>
+        <ol>
+          {{- if $content -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.content") }}>{{ i18n "programs.content" }}</a></li>
+          {{- end -}}
+          {{- if $pedagogy -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.pedagogy") }}>{{ i18n "programs.pedagogy" }}</a></li>
+          {{- end -}}
+          {{- if $evaluation -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.evaluation") }}>{{ i18n "programs.evaluation" }}</a></li>
+          {{- end -}}
+          {{- if $teachers -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.teachers") }}>{{ i18n "programs.teachers" }}</a></li>
+          {{- end -}}
+        </ol>
+      </li>
+    {{ end -}}
     <li>
       <a {{ partial "AnchorAttribute" ( i18n "programs.toc.results" ) }} >{{ i18n "programs.toc.results" }}</a>
       {{- if or $opportunities $results }}
