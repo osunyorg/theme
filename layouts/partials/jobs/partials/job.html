@@ -29,7 +29,9 @@
         </div>
       {{ end }}
 
-      {{ partial "jobs/partials/job/dates.html" . }}
+      {{ if $options.dates }}
+        {{ partial "jobs/partials/job/dates.html" . }}
+      {{ end }}
 
       {{ if $options.categories }}
         {{ partial "commons/categories.html" ( dict
