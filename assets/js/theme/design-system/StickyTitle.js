@@ -15,7 +15,7 @@ window.osuny.StickyTitle.prototype.listen = function () {
         titleOriginalHeight = this.title.offsetHeight,
         titleDownHeight = this.title.querySelector('span').offsetHeight,
         hours = this.container.querySelector('.events-scheduled > li:last-child .event .event-hours');
-    console.log(hours)
+
     window.addEventListener('scroll', function() {
         distance = Math.abs(this.title.offsetTop - this.container.offsetTop);
 
@@ -30,8 +30,7 @@ window.osuny.StickyTitle.prototype.listen = function () {
         this.container.style.setProperty('--title-height', titleDownHeight + 'px');
 
         if (hours) {
-            console.log(hours.offsetHeight)
-            this.container.style.setProperty('--title-margin-bottom', (hours.offsetHeight)  + 'px');
+            this.container.style.setProperty('--title-margin-bottom', (hours.offsetHeight + (titleDownHeight - titleOriginalHeight))  + 'px');
         }
     }.bind(this));
 };
