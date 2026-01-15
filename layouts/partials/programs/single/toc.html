@@ -1,37 +1,10 @@
-{{ $content := partial "GetTextFromHTML" .context.Params.content }}
-{{ $presentation :=  partial "GetTextFromHTML" .context.Params.presentation }}
-{{ $objectives :=  partial "GetTextFromHTML" .context.Params.objectives }}
-{{ $pedagogy :=  partial "GetTextFromHTML" .context.Params.pedagogy }}
-{{ $evaluation :=  partial "GetTextFromHTML" .context.Params.evaluation }}
-{{ $teachers := .context.Params.teachers }}
-
-{{ $opportunities := partial "GetTextFromHTML" .context.Params.opportunities }}
-{{ $results := partial "GetTextFromHTML" .context.Params.results }}
-
-{{ $prerequisites := partial "GetTextFromHTML" .context.Params.prerequisites }}
-{{ $pricing := partial "GetTextFromHTML" .context.Params.pricing }}
-{{ $pricing_initial := partial "GetTextFromHTML" .context.Params.pricing_initial }}
-{{ $pricing_continuing := partial "GetTextFromHTML" .context.Params.pricing_continuing }}
-{{ $pricing_apprenticeship := partial "GetTextFromHTML" .context.Params.pricing_apprenticeship }}
-{{ $registration := or (partial "GetTextFromHTML" .context.Params.registration) .context.Params.registration_url }}
-{{ $accessibility := partial "GetTextFromHTML" .context.Params.accessibility }}
-{{ $other := partial "GetTextFromHTML" .context.Params.other }}
-
-{{ $certification := .context.Params.certifications.qualiopi.certified  }}
-
-{{ $roles := .context.Params.roles }}
-{{ $contacts := partial "GetTextFromHTML" .context.Params.contacts }}
-
 {{ $post_category := site.GetPage (printf "/posts_categories/%s" .context.Params.related_categories.posts ) }}
 {{ $related_posts := $post_category.Pages }}
-
-{{ $project_category := site.GetPage (printf "/projects_categories/%s" .context.Params.related_categories.projects ) }}
-{{ $related_projects := $project_category.Pages }}
-
 {{ $event_category := site.GetPage (printf "/events_categories/%s" .context.Params.related_categories.events ) }}
 {{ $related_events := where $event_category.Pages "Type" "events" }}
 {{ $related_exhibitions := where $event_category.Pages "Type" "exhibitions" }}
-
+{{ $project_category := site.GetPage (printf "/projects_categories/%s" .context.Params.related_categories.projects ) }}
+{{ $related_projects := $project_category.Pages }}
 
 {{/* nav-link required for toggle active class */}}
 <nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc.title" }}">
@@ -39,116 +12,119 @@
     <li>
       <a {{ partial "AnchorAttribute" (i18n "programs.toc.essential") }}>{{ i18n "programs.toc.essential" }}</a>
     </li>
-    <li>
-      <a {{ partial "AnchorAttribute" (i18n "programs.toc.presentation") }}>{{ i18n "programs.toc.presentation" }}</a>
+    {{ with .context.Params }}
+      <li>
+        <a {{ partial "AnchorAttribute" (i18n "programs.toc.presentation") }}>{{ i18n "programs.toc.presentation" }}</a>
+          <ol>
+            {{- if .presentation -}}
+              <li><a {{ partial "AnchorAttribute" (i18n "programs.presentation") }}>{{ i18n "programs.presentation" }}</a></li>
+            {{- end -}}
+            {{- if .objectives -}}
+              <li><a {{ partial "AnchorAttribute" (i18n "programs.objectives") }}>{{ i18n "programs.objectives" }}</a></li>
+            {{- end -}}
+            {{ if ( partial "HasAdministrativeInformation" . ) }}
+              <li><a {{ partial "AnchorAttribute" (i18n "programs.administrative_information") }}>{{ i18n "programs.administrative_information" }}</a></li>
+            {{- end -}}
+            {{- with .contents -}}
+              {{- partial "blocks/toc" . -}}
+            {{- end -}}
+          </ol>
+      </li>
+      {{- if or .content .pedagogy .evaluation .teachers }}
+        <li>
+          <a {{ partial "AnchorAttribute" (i18n "programs.toc.pedagogy") }}>{{ i18n "programs.toc.pedagogy" }}</a>
+          <ol>
+            {{- if .content -}}
+              <li><a {{ partial "AnchorAttribute" (i18n "programs.content") }}>{{ i18n "programs.content" }}</a></li>
+            {{- end -}}
+            {{- if .pedagogy -}}
+              <li><a {{ partial "AnchorAttribute" (i18n "programs.pedagogy") }}>{{ i18n "programs.pedagogy" }}</a></li>
+            {{- end -}}
+            {{- if .evaluation -}}
+              <li><a {{ partial "AnchorAttribute" (i18n "programs.evaluation") }}>{{ i18n "programs.evaluation" }}</a></li>
+            {{- end -}}
+            {{- if .teachers -}}
+              <li><a {{ partial "AnchorAttribute" (i18n "programs.teachers") }}>{{ i18n "programs.teachers" }}</a></li>
+            {{- end -}}
+          </ol>
+        </li>
+      {{ end -}}
+      <li>
+        <a {{ partial "AnchorAttribute" ( i18n "programs.toc.results" ) }} >{{ i18n "programs.toc.results" }}</a>
+        {{- if or .opportunities .results }}
         <ol>
-          {{- if $presentation -}}
-            <li><a {{ partial "AnchorAttribute" (i18n "programs.presentation") }}>{{ i18n "programs.presentation" }}</a></li>
+          {{- if .opportunities -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.opportunities") }}>{{ i18n "programs.opportunities" }}</a></li>
           {{- end -}}
-          {{- if $objectives -}}
-            <li><a {{ partial "AnchorAttribute" (i18n "programs.objectives") }}>{{ i18n "programs.objectives" }}</a></li>
-          {{- end -}}
-          {{ if ( partial "HasAdministrativeInformation" .context ) }}
-            <li><a {{ partial "AnchorAttribute" (i18n "programs.administrative_information") }}>{{ i18n "programs.administrative_information" }}</a></li>
-          {{- end -}}
-          {{- if .context.Params.contents -}}
-            {{- partial "blocks/toc" .context.Params.contents -}}
+          {{- if .results -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.results") }}>{{ i18n "programs.results" }}</a></li>
           {{- end -}}
         </ol>
-    </li>
-    {{- if or $content $pedagogy $evaluation $teachers }}
+        {{ end -}}
+      </li>
       <li>
-        <a {{ partial "AnchorAttribute" (i18n "programs.toc.pedagogy") }}>{{ i18n "programs.toc.pedagogy" }}</a>
+        <a {{ partial "AnchorAttribute" (i18n "programs.toc.admission") }}>{{ i18n "programs.toc.admission" }}</a>
+        {{- if or .prerequisites .pricing .registration .accessibility .other .roles .contacts }}
         <ol>
-          {{- if $content -}}
-            <li><a {{ partial "AnchorAttribute" (i18n "programs.content") }}>{{ i18n "programs.content" }}</a></li>
+          {{- if .prerequisites -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.prerequisites") }}>{{ i18n "programs.prerequisites" }}</a></li>
           {{- end -}}
-          {{- if $pedagogy -}}
-            <li><a {{ partial "AnchorAttribute" (i18n "programs.pedagogy") }}>{{ i18n "programs.pedagogy" }}</a></li>
+          {{- if .pricing -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.pricing") }}>{{ i18n "programs.pricing" }}</a></li>
           {{- end -}}
-          {{- if $evaluation -}}
-            <li><a {{ partial "AnchorAttribute" (i18n "programs.evaluation") }}>{{ i18n "programs.evaluation" }}</a></li>
+          {{- if .pricing_initial -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.pricing_initial") }}>{{ i18n "programs.pricing_initial" }}</a></li>
           {{- end -}}
-          {{- if $teachers -}}
-            <li><a {{ partial "AnchorAttribute" (i18n "programs.teachers") }}>{{ i18n "programs.teachers" }}</a></li>
+          {{- if .pricing_continuing -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.pricing_continuing") }}>{{ i18n "programs.pricing_continuing" }}</a></li>
+          {{- end -}}
+          {{- if .pricing_apprenticeship -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.pricing_apprenticeship") }}>{{ i18n "programs.pricing_apprenticeship" }}</a></li>
+          {{- end -}}
+          {{- if .registration -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.registration") }}>{{ i18n "programs.registration" }}</a></li>
+          {{- end -}}
+          {{- if .accessibility -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.accessibility") }}>{{ i18n "programs.accessibility" }}</a></li>
+          {{- end -}}
+          {{- if .other -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs._other") }}>{{ i18n "programs._other" }}</a></li>
+          {{- end -}}
+          {{- if .roles -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.roles") }}>{{ i18n "programs.roles" }}</a></li>
+          {{- end -}}
+          {{- if .contacts -}}
+            <li><a {{ partial "AnchorAttribute" (i18n "programs.contacts") }}>{{ i18n "programs.contacts" }}</a></li>
           {{- end -}}
         </ol>
+        {{ end -}}
       </li>
-    {{ end -}}
-    <li>
-      <a {{ partial "AnchorAttribute" ( i18n "programs.toc.results" ) }} >{{ i18n "programs.toc.results" }}</a>
-      {{- if or $opportunities $results }}
-      <ol>
-        {{- if $opportunities -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.opportunities") }}>{{ i18n "programs.opportunities" }}</a></li>
-        {{- end -}}
-        {{- if $results -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.results") }}>{{ i18n "programs.results" }}</a></li>
-        {{- end -}}
-      </ol>
-      {{ end -}}
-    </li>
-    <li>
-      <a {{ partial "AnchorAttribute" (i18n "programs.toc.admission") }}>{{ i18n "programs.toc.admission" }}</a>
-      {{- if or $prerequisites $pricing $registration $accessibility $other $roles $contacts }}
-      <ol>
-        {{- if $prerequisites -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.prerequisites") }}>{{ i18n "programs.prerequisites" }}</a></li>
-        {{- end -}}
-        {{- if $pricing -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.pricing") }}>{{ i18n "programs.pricing" }}</a></li>
-        {{- end -}}
-        {{- if $pricing_initial -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.pricing_initial") }}>{{ i18n "programs.pricing_initial" }}</a></li>
-        {{- end -}}
-        {{- if $pricing_continuing -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.pricing_continuing") }}>{{ i18n "programs.pricing_continuing" }}</a></li>
-        {{- end -}}
-        {{- if $pricing_apprenticeship -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.pricing_apprenticeship") }}>{{ i18n "programs.pricing_apprenticeship" }}</a></li>
-        {{- end -}}
-        {{- if $registration -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.registration") }}>{{ i18n "programs.registration" }}</a></li>
-        {{- end -}}
-        {{- if $accessibility -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.accessibility") }}>{{ i18n "programs.accessibility" }}</a></li>
-        {{- end -}}
-        {{- if $other -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs._other") }}>{{ i18n "programs._other" }}</a></li>
-        {{- end -}}
-        {{- if $roles -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.roles") }}>{{ i18n "programs.roles" }}</a></li>
-        {{- end -}}
-        {{- if $contacts -}}
-          <li><a {{ partial "AnchorAttribute" (i18n "programs.contacts") }}>{{ i18n "programs.contacts" }}</a></li>
-        {{- end -}}
-      </ol>
-      {{ end -}}
-    </li>
-    {{- if $certification -}}
-      <li>
-        <a {{ partial "AnchorAttribute" (i18n "programs.toc.certification") }}>{{ i18n "programs.toc.certification" }}</a>
-      </li>
-    {{- end -}}
-    {{- if $related_posts -}}
-      <li>
-        <a {{ partial "AnchorAttribute" (i18n "programs.toc.related.posts") }}>{{ i18n "programs.toc.related.posts" }}</a>
-      </li>
-    {{- end -}}
-    {{- if $related_events -}}
+      {{- if .certification -}}
+        <li>
+          <a {{ partial "AnchorAttribute" (i18n "programs.toc.certification") }}>{{ i18n "programs.toc.certification" }}</a>
+        </li>
+      {{- end -}}
+      {{- if $related_posts -}}
+        <li>
+          <a {{ partial "AnchorAttribute" (i18n "programs.toc.related.posts") }}>{{ i18n "programs.toc.related.posts" }}</a>
+        </li>
+      {{- end -}}
+      {{- if $related_events -}}
       <li>
         <a {{ partial "AnchorAttribute" (i18n "programs.toc.related.events") }}>{{ i18n "programs.toc.related.events" }}</a>
       </li>
-    {{- end -}}
-    {{- if $related_exhibitions -}}
-      <li>
-        <a {{ partial "AnchorAttribute" (i18n "programs.toc.related.exhibitions") }}>{{ i18n "programs.toc.related.exhibitions" }}</a>
-      </li>
-    {{- end -}}
-    {{- if $related_projects -}}
-      <li>
-        <a {{ partial "AnchorAttribute" (i18n "programs.toc.related.projects") }}>{{ i18n "programs.toc.related.projects" }}</a>
-      </li>
+      {{- end -}}
+
+      {{- if $related_exhibitions -}}
+        <li>
+          <a {{ partial "AnchorAttribute" (i18n "programs.toc.related.exhibitions") }}>{{ i18n "programs.toc.related.exhibitions" }}</a>
+        </li>
+      {{- end -}}
+      {{- if $related_projects -}}
+        <li>
+          <a {{ partial "AnchorAttribute" (i18n "programs.toc.related.projects") }}>{{ i18n "programs.toc.related.projects" }}</a>
+        </li>
+      {{- end -}}
     {{- end -}}
   </ol>
 </nav>

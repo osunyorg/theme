@@ -14,14 +14,14 @@
         <div class="chapter">
           <div class="text">
             {{ partial "blocks/top.html" $block.top }}
-            {{ if (partial "GetTextFromHTML" .text) -}}
+            {{ with .text }}
               <div class="rich-text">
-                {{ partial "PrepareHTML" .text }}
+                {{ partial "PrepareHTML" . }}
               </div>
             {{ end -}}
-            {{ if (partial "GetTextFromHTML" .notes) }}
+            {{ with .notes }}
               <div class="notes">
-                {{ partial "PrepareHTML" .notes }}
+                {{ partial "PrepareHTML" . }}
               </div>
             {{ end -}}
           </div>

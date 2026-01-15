@@ -14,9 +14,9 @@
         "context" .
       ) }}
 
-      {{ if (partial "GetTextFromHTML" .Params.text) }}
+      {{ with .Params.text }}
         <div class="organization-presentation rich-text">
-          {{ partial "PrepareHTML" .Params.text }}
+          {{ partial "PrepareHTML" . }}
         </div>
       {{ end }}
 
