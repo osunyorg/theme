@@ -29,9 +29,13 @@
     {{ end }}
   {{ end }}
 
-  {{ partial "authors/partials/authors.html" . }}
+  {{ if site.Params.jobs.single.options.authors }}
+    {{ partial "authors/partials/authors.html" . }}
+  {{ end }}
 
-  {{ partial "commons/reading-time.html" . }}
+  {{ if site.Params.jobs.single.options.reading_time }}
+    {{ partial "commons/reading-time.html" . }}
+  {{ end }}
 
   {{ if site.Params.jobs.share_links.enabled | default site.Params.share_links.enabled }}
     {{ partial "commons/share/list-item.html" . }}
