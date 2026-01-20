@@ -6,11 +6,11 @@
   <ol class="programs programs--{{ $layout }}">
     {{ range .Paginator.Pages }}
       {{- partial "programs/partials/program.html" (dict
-          "program" .
-          "options" site.Params.programs.index.options
-          "layout" $layout
-          "type" "programs"
-        ) -}}
+        "program" .
+        "options" site.Params.programs.index.options
+        "layout" $layout
+        "type" "programs"
+      ) -}}
     {{ end }}
   </ol>
 {{ end }}

@@ -21,7 +21,7 @@
                   {{ $heading_tag := partial "GetHeadingTag" (dict 
                     "level" $block.ranks.children
                     "attributes" "class='program-title' itemprop='name'"
-                  )}}
+                  ) }}
 
                   {{ $heading_tag.open }}
                     <a class="title" href="{{ $program.Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
@@ -34,7 +34,7 @@
                       {{ partial "GetRichSummary" ( dict 
                         "summary" $program.Params.summary
                         "kind" "programs"
-                      )}}
+                      ) }}
                     </div>
                   {{ end }}
 
@@ -43,7 +43,7 @@
                     {{ partial "commons/categories.html" ( dict
                       "context" $program
                       "kind" "program"
-                    )}}
+                    ) }}
                   {{ end }}
 
                   {{ partial "commons/item/more.html" . }}
@@ -63,7 +63,7 @@
                     "layout" $layout
                     "options" $options
                     "type" "programs"
-                  )}}
+                  ) }}
                 {{ end }}
               </li>
             {{ end }}
@@ -77,7 +77,7 @@
                 "heading_level" $block.ranks.children
                 "layout" $layout
                 "options" $options
-              )}}
+              ) }}
             {{ end }}
           </ol>
 

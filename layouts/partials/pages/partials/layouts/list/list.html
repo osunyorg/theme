@@ -2,7 +2,8 @@
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" ( .heading_level | default 3 )
   "attributes" "class='page-title'"
-)}}
+) }}
+
 <ul class="pages list {{- if and (not $options.summary) (not $options.image) }} title-only {{- end }}">
   {{ range .pages }}
     {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
@@ -28,17 +29,17 @@
               {{- partial "pages/partials/page/hook-after-title.html" . -}}
 
               {{ if and $options.summary .Params.summary }}
-                {{ partial "GetRichSummary" ( dict 
+                {{ partial "GetRichSummary" (dict 
                   "summary" .Params.summary
                   "kind" "pages"
-                )}}
+                ) }}
               {{ end }}
 
               {{ if and $options.categories .Params.taxonomies }}
-                {{ partial "commons/categories" ( dict
+                {{ partial "commons/categories" (dict
                   "context" .
                   "kind" "page"
-                )}}
+                ) }}
               {{ end }}
             </div>
 
@@ -46,7 +47,7 @@
               {{ partial "pages/partials/page/media.html" (dict 
                 "image" .Params.image
                 "layout" "list"
-              )}}
+              ) }}
             {{ end }}
           </article>
         </li>

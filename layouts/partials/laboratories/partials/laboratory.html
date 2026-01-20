@@ -16,11 +16,11 @@
       itemscope itemtype="https://schema.org/ResearchOrganization">
     <div class="laboratory-content">
       {{ partial "laboratories/partials/laboratory/heading.html" (dict
-          "item" .
-          "options" $options
-          "level" $heading_level
-          "itemprop" "title"
-        )}}
+        "item" .
+        "options" $options
+        "level" $heading_level
+        "itemprop" "title"
+      ) }}
 
       {{ if and $options.summary .Params.summary }}
         <div class="laboratory-description" itemprop="abstract">
@@ -31,9 +31,9 @@
 
     {{ if $options.image }}
       {{ partial "laboratories/partials/laboratory/media.html" (dict 
-          "image" $laboratory.Params.image
-          "layout" $layout
-        )}}
+        "image" $laboratory.Params.image
+        "layout" $layout
+      ) }}
     {{ end }}
   </article>
 {{ end }}

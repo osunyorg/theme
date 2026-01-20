@@ -16,20 +16,20 @@
     {{ with .phone_numbers.phone }}
       <p>
         {{ partial "commons/links/tel.html" (dict
-            "value" .value
-            "label" .label
-            "title" ( i18n "commons.contact.phone.a11y_label" ( dict "phone_number" .label ) )
-          ) }}
+          "value" .value
+          "label" .label
+          "title" ( i18n "commons.contact.phone.a11y_label" ( dict "phone_number" .label ) )
+        ) }}
       </p>
     {{ end }}
 
     {{ with .websites.website }}
       <p>
         {{ partial "commons/links/website.html" (dict
-            "value" .value
-            "label" .label
-            "title" ( i18n "commons.contact.socials.label.website" ( dict "name" $name ) )
-          ) }}
+          "value" .value
+          "label" .label
+          "title" ( i18n "commons.contact.socials.label.website" ( dict "name" $name ) )
+        ) }}
       </p>
     {{ end }}
   {{ end }}

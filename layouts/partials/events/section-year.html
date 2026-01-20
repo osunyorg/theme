@@ -1,9 +1,9 @@
 {{ partial "events/section/hero.html" . }}
 <div class="document-content">
   {{ partial "events/section/summary.html" (dict
-      "with_container" true
-      "context" .
-    ) }}
+    "with_container" true
+    "context" .
+  ) }}
 
   {{ partial "events/section/calendar.html" . }}
 
@@ -25,10 +25,10 @@
 
   <div class="container events-programme" id="events-programme">
     {{ partial "events/partials/events.html" (dict
-        "events" .RegularPagesRecursive
-        "context" .
-        "per_page" site.Params.events.index.per_page
-      )}}
+      "events" .RegularPagesRecursive
+      "context" .
+      "per_page" site.Params.events.index.per_page
+    ) }}
 
     {{ partial "commons/pagination.html" . }}
   </div>

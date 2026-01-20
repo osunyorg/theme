@@ -10,11 +10,11 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
 
-        {{- partial (printf "categories/partials/layouts/%s/%s.html" $layout $layout) (dict 
-            "categories" .categories
-            "heading_level" $block.ranks.children
-            "options" .options
-          ) }}
+        {{ partial (printf "categories/partials/layouts/%s/%s.html" $layout $layout) (dict 
+          "categories" .categories
+          "heading_level" $block.ranks.children
+          "options" .options
+        ) }}
       </div>
     </div>
   </div>

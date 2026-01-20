@@ -2,17 +2,17 @@
 
 {{ if $menu.items }}
   {{ partial "commons/menu.html" (dict
-      "kind" "social"
-      "level" 1
-      "class" "nav-social"
-    )}}
+    "kind" "social"
+    "level" 1
+    "class" "nav-social"
+  ) }}
 {{ end }}
 
 {{ with site.Params.contact_details }}
   <ul class="footer-social site-links">
     {{ partial "commons/socials" (dict
-        "use_default_email_label" true
-        "context" .
-      )}}
+      "use_default_email_label" true
+      "context" .
+    ) }}
   </ul>
 {{ end }}

@@ -3,9 +3,9 @@
 <div class="document-content">
 
   {{ partial "diplomas/single/summary.html" (dict
-      "context" .
-      "block_wrapped" true
-    ) }}
+    "context" .
+    "block_wrapped" true
+  ) }}
 
   {{ partial "contents/list.html" (dict
     "context" .
@@ -19,9 +19,9 @@
         {{/*  TODO Cleanup figma and reduce number of program layout */}}
         {{ if $programs_options }}
           {{ partial "programs/partials/program.html" (dict
-              "program" .
-              "options" $programs_options
-            )}}
+            "program" .
+            "options" $programs_options
+          ) }}
         {{ else }}
           <li itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
             {{- $title := partial "PrepareHTML" .Title -}}

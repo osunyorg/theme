@@ -12,10 +12,10 @@
           {{ range .papers -}}
             {{ with site.GetPage .path }}
               {{ partial "papers/partials/paper.html" (dict 
-                  "paper" .
-                  "actions" false
-                  "heading_level" $block.ranks.children
-                )}}
+                "paper" .
+                "actions" false
+                "heading_level" $block.ranks.children
+              ) }}
             {{ end }}
           {{ end}}
         </ul>

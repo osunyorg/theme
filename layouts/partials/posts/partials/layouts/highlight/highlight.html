@@ -3,7 +3,7 @@
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" $heading_level 
   "attributes" "class='post-title' itemprop='headline'"
-)}}
+) }}
 
 <ul class="highlight">
   {{ $highlight := index .posts 0 }}
@@ -16,7 +16,7 @@
       "heading_level" $heading_level
       "options" $options
       "layout" "highlight"
-    )}}
+    ) }}
   {{ end }}
 
   {{ with $list }}
@@ -44,17 +44,17 @@
                   {{ end }}
 
                   {{ if and $options.summary .Params.summary }}
-                    {{ partial "GetRichSummary" ( dict 
+                    {{ partial "GetRichSummary" (dict 
                       "summary" .Params.summary
                       "kind" "posts"
-                    )}}
+                    ) }}
                   {{ end }}
 
                   {{ if $options.categories }}
-                    {{ partial "commons/categories" ( dict
+                    {{ partial "commons/categories" (dict
                       "context" .
                       "kind" "post"
-                    )}}
+                    ) }}
                   {{ end }}
 
                   {{ if and $reading_time $options.reading_time }}

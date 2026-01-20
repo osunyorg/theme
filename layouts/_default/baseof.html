@@ -22,18 +22,18 @@
         {{ partial "GetMainSearchAttributes" . | safeHTMLAttr }}
         >
       {{ partial "commons/search/button.html" "fixed" }}
-      {{- block "main" . }}{{- end }}
-      {{- partial "hooks/before-main-end" . -}}
+      {{ block "main" . }}{{ end }}
+      {{ partial "hooks/before-main-end" . }}
     </main>
-    {{- partial "footer/footer.html" . -}}
-    {{- partial "hooks/after-footer-end.html" -}}
-    {{- partial "commons/lightbox/lightbox.html" . -}}
-    {{- partial "commons/search/modal.html" . -}}
-    {{- partial "footer/plausible.html" . -}}
-    {{- partial "footer/js.html" . -}}
-    {{- partial "footer/script.html" . -}}
-    {{- if or (not hugo.IsProduction) site.Params.debug.active -}}
-      {{- partial "footer/debug.html" . -}}
-    {{- end -}}
+    {{ partial "footer/footer.html" . }}
+    {{ partial "hooks/after-footer-end.html" }}
+    {{ partial "commons/lightbox/lightbox.html" . }}
+    {{ partial "commons/search/modal.html" . }}
+    {{ partial "footer/plausible.html" . }}
+    {{ partial "footer/js.html" . }}
+    {{ partial "footer/script.html" . }}
+    {{ if or (not hugo.IsProduction) site.Params.debug.active }}
+      {{ partial "footer/debug.html" . }}
+    {{ end -}}
   </body>
 </html>

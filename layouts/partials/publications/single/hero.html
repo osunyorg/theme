@@ -11,9 +11,8 @@
   {{- end -}}
 {{ end }}
 
-{{- partial "header/hero.html"
-      (dict
-        "title" .Title
-        "subtitle" (partial "PrepareHTML" $subtitle)
-        "context" .
-      ) -}}
+{{- partial "header/hero.html" (dict
+  "title" .Title
+  "subtitle" (partial "PrepareHTML" $subtitle)
+  "context" .
+) -}}

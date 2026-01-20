@@ -35,13 +35,13 @@
             {{- range .persons -}}
               {{ $person := site.GetPage .path }}
               {{ partial "persons/partials/person.html" (dict
-                  "options" $options
-                  "heading_level" $block.ranks.children
-                  "person" $person
-                  "role" .role
-                  "layout" $layout
-                  "image_sizes" $image_sizes
-                )}}
+                "options" $options
+                "heading_level" $block.ranks.children
+                "person" $person
+                "role" .role
+                "layout" $layout
+                "image_sizes" $image_sizes
+              ) }}
             {{- end -}}
           </ul>
       </div>

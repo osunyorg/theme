@@ -16,11 +16,11 @@
       itemscope itemtype="https://schema.org/Periodical">
     <div class="journal-content">
       {{ partial "journals/partials/journal/heading.html" (dict
-          "item" .
-          "options" $options
-          "level" $heading_level
-          "itemprop" "title"
-        )}}
+        "item" .
+        "options" $options
+        "level" $heading_level
+        "itemprop" "title"
+      ) }}
 
       {{ if and $options.summary .Params.summary }}
         <div class="journal-description" itemprop="abstract">
@@ -31,9 +31,9 @@
 
     {{ if $options.image }}
       {{ partial "journals/partials/journal/media.html" (dict 
-          "image" $journal.Params.image
-          "layout" $layout
-        )}}
+        "image" $journal.Params.image
+        "layout" $layout
+      ) }}
     {{ end }}
   </article>
 {{ end }}

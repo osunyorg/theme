@@ -7,9 +7,9 @@
   <article class="category-item {{ .Params.bodyclass }}" data-title="{{ .Title }}">
     <div class="category-content">
       {{ partial "categories/partials/category/heading.html" (dict
-          "item" .
-          "level" $heading_level
-        ) }}
+        "item" .
+        "level" $heading_level
+      ) }}
 
       {{ if $options.summary }}
         {{ partial "categories/partials/category/summary.html" . }}
@@ -26,9 +26,9 @@
 
     {{ if $options.image }}
       {{ partial "categories/partials/category/media.html" (dict 
-          "image" .Params.image
-          "layout" $layout
-        ) }}
+        "image" .Params.image
+        "layout" $layout
+      ) }}
     {{ end }}
   </article>
 {{ end }}
