@@ -28,12 +28,11 @@
   </div>
 
   {{- if $with_modal }}
-    {{ partial "papers/partials/modal.html"
-      (dict
-        "modalId" $modalId
-        "title" .Title
-        "abstract" .Params.abstract
-      ) }}
+    {{ partial "papers/partials/modal.html" (dict
+      "modalId" $modalId
+      "title" .Title
+      "abstract" .Params.abstract
+    ) }}
   {{ end -}}
 
 {{ end }}

@@ -20,15 +20,15 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         {{ partial (printf "organizations/partials/layouts/%s/%s.html" $layout $layout) (dict
-            "block_index" $block_index
-            "heading_level" $block.ranks.children
-            "title" $block.title
-            "logo_index" $logo_index
-            "organizations" .organizations
-            "options" $options
-            "layout" $layout
-            "categories" .categories
-          )}}
+          "block_index" $block_index
+          "heading_level" $block.ranks.children
+          "title" $block.title
+          "logo_index" $logo_index
+          "organizations" .organizations
+          "options" $options
+          "layout" $layout
+          "categories" .categories
+        ) }}
       </div>
     </div>
   </div>

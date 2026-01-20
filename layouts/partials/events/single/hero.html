@@ -12,12 +12,11 @@
   {{ $sizes = index site.Params.image_sizes.sections.events.hero_single $image_format }}
 {{ end }}
 
-{{- partial "header/hero.html"
-  (dict
-    "title" $title
-    "image" $image
-    "sizes" $sizes
-    "context" .
-    "share" $share
-    "button" false
-  ) -}}
+{{- partial "header/hero.html" (dict
+  "title" $title
+  "image" $image
+  "sizes" $sizes
+  "context" .
+  "share" $share
+  "button" false
+) -}}

@@ -10,11 +10,11 @@
   {{ range $post := .posts -}}
     {{ with site.GetPage .path }}
       {{ partial "posts/partials/post.html" (dict 
-          "post" . 
-          "options" $options
-          "heading_level" $heading_level
-          "layout" "large"
-        )}}
+        "post" . 
+        "options" $options
+        "heading_level" $heading_level
+        "layout" "large"
+      ) }}
     {{ end }}
   {{ end }}
 </ul>

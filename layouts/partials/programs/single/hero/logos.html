@@ -2,11 +2,10 @@
   <div class="hero-logos">
     {{ if and site.Params.programs.single.options.logo .Params.logo }}
       <div class="logo">
-        {{ partial "commons/image.html"
-          (dict
-            "image" .Params.logo
-            "lazy" false
-          ) }}
+        {{ partial "commons/image.html" (dict
+          "image" .Params.logo
+          "lazy" false
+        ) }}
       </div>
     {{ end }}
     {{ if site.Params.programs.single.options.diploma_certification }}

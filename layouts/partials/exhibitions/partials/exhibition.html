@@ -20,11 +20,11 @@
     <div class="exhibition-content">
 
       {{ partial "exhibitions/partials/exhibition/heading.html" (dict
-          "item" .
-          "options" $options
-          "level" $heading_level
-          "itemprop" "name"
-        )}}
+        "item" .
+        "options" $options
+        "level" $heading_level
+        "itemprop" "name"
+      ) }}
 
       {{ partial "exhibitions/partials/exhibition/federated.html" . }}
 
@@ -32,14 +32,14 @@
         {{ partial "exhibitions/partials/exhibition/schedule.html" (dict 
           "dates" .Params.dates
           "on_two_lines" false
-        )}}
+        ) }}
       {{ end }}
 
       {{ if and $dates.status $options.status }}
         {{ partial "exhibitions/partials/exhibition/status.html" (dict 
           "status" $dates.status
           "type" "exhibition"
-        )}}
+        ) }}
       {{ end }}
 
       {{ if and $options.summary .Params.summary }}
@@ -52,7 +52,7 @@
         {{ partial "commons/categories" ( dict
           "context" .
           "kind" "event"
-        )}}
+        ) }}
       {{- end -}}
 
       {{ if $with_more }}
@@ -62,10 +62,10 @@
 
     {{ if $options.image }}
       {{ partial "exhibitions/partials/exhibition/media.html" (dict 
-          "image" $exhibition.Params.image
-          "layout" $layout
-          "type" "exhibitions"
-        )}}
+        "image" $exhibition.Params.image
+        "layout" $layout
+        "type" "exhibitions"
+      ) }}
     {{ end }}
   </article>
 {{ end }}

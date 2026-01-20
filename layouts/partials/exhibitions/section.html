@@ -1,9 +1,9 @@
 {{ partial "exhibitions/section/hero.html" . }}
 <div class="document-content">
   {{ partial "exhibitions/section/summary.html" (dict
-      "with_container" true
-      "context" .
-    ) }}
+    "with_container" true
+    "context" .
+  ) }}
 
   {{ if (partial "IsFirstPage" .) }}
     {{ partial "contents/list.html" (dict
@@ -16,10 +16,10 @@
 
   <div class="container">
     {{ partial "exhibitions/partials/exhibitions.html" (dict 
-        "exhibitions" .RegularPages
-        "layout" site.Params.exhibitions.index.layout
-        "options" site.Params.exhibitions.index.options
-      )}}
+      "exhibitions" .RegularPages
+      "layout" site.Params.exhibitions.index.layout
+      "options" site.Params.exhibitions.index.options
+    ) }}
     {{ partial "commons/section/archive-link.html" . }}
     {{ partial "commons/pagination.html" . }}
   </div>

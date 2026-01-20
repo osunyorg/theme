@@ -6,9 +6,9 @@
   {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
 
   {{ partial "locations/single/summary.html" (dict
-      "context" .
-      "block_wrapped" true
-    ) }}
+    "context" .
+    "block_wrapped" true
+  ) }}
 
   {{ partial "contents/list.html" (dict
     "context" .
@@ -22,5 +22,5 @@
   {{ partial "locations/partials/map.html" (dict
     "locations" (slice .)
     "title" .Title
-  )}}
+  ) }}
 {{ end }}

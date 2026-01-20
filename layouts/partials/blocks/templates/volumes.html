@@ -12,9 +12,9 @@
           {{ range .volumes }}
             {{ with site.GetPage .path }}
               {{ partial "volumes/partials/volume.html" (dict 
-                  "volume" .
-                  "heading_level" $block.ranks.children
-                ) }}
+                "volume" .
+                "heading_level" $block.ranks.children
+              ) }}
             {{ end }}
           {{ end }}
         </ul>

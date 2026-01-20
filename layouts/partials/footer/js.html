@@ -47,7 +47,7 @@
       )
     )
   )
-)}}
+) }}
 
 {{ $js := resources.Get "js/main.js" | js.Build $build_options | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

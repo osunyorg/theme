@@ -2,7 +2,8 @@
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" ( .heading_level | default 3 )
   "attributes" "class='page-title'"
-)}}
+) }}
+
 <ul class="pages">
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
@@ -19,17 +20,17 @@
             {{- partial "pages/partials/page/hook-after-title.html" . -}}
 
             {{ if and $options.summary .Params.summary }}
-              {{ partial "GetRichSummary" ( dict 
+              {{ partial "GetRichSummary" (dict 
                 "summary" .Params.summary
                 "kind" "pages"
-              )}}
+              ) }}
             {{ end }}
 
             {{ if and $options.categories .Params.taxonomies }}
-              {{ partial "commons/categories" ( dict
+              {{ partial "commons/categories" (dict
                 "context" .
                 "kind" "page"
-              )}}
+              ) }}
             {{ end }}
 
             {{ partial "commons/item/more.html" . }}
@@ -39,7 +40,7 @@
             {{ partial "pages/partials/page/media.html" (dict 
               "image" .Params.image
               "layout" "large"
-            )}}
+            ) }}
           {{- end -}}
         </article>
       </li>

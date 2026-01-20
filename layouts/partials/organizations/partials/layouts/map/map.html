@@ -22,14 +22,14 @@
             {{ if $address_geolocation }}
               <li>
                 {{ partial "organizations/partials/organization.html" (dict
-                    "organization" .
-                    "options" (merge $options (dict
-                      "address" true
-                      "logo" false
-                    ))
-                    "layout" $layout
-                    "heading_level" $heading_level
-                  ) }}
+                  "organization" .
+                  "options" (merge $options (dict
+                    "address" true
+                    "logo" false
+                  ))
+                  "layout" $layout
+                  "heading_level" $heading_level
+                ) }}
               </li>
             {{ end }}
           {{ end }}
@@ -47,9 +47,9 @@
 
   {{ if and $options.filters $categories }}
     {{ partial "organizations/partials/layouts/map/filters.html" ( dict
-        "categories" $categories
-        "index" $block_index
-      ) }}
+      "categories" $categories
+      "index" $block_index
+    ) }}
   {{ end }}
   
   <div class="organizations map"
@@ -66,12 +66,12 @@
           {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
           {{ if $address_geolocation }}
             {{ partial "organizations/partials/organization.html" (dict
-                "organization" .
-                "layout" $layout
-                "options" $options
-                "with_geolocation" true
-                "heading_level" $heading_level
-              ) }}
+              "organization" .
+              "layout" $layout
+              "options" $options
+              "with_geolocation" true
+              "heading_level" $heading_level
+            ) }}
           {{ end }}
         {{ end }}
     {{ end -}}

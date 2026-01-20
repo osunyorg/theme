@@ -2,7 +2,7 @@
 {{ $heading_tag := partial "GetHeadingTag" (dict
   "level" ( .heading_level | default 3 )
   "attributes" "class='page-title'"
-)}}
+) }}
 
 <ul class="pages">
   {{ range .pages }}
@@ -27,14 +27,14 @@
             {{ partial "GetRichSummary" ( dict 
               "summary" .Params.summary
               "kind" "pages"
-            )}}
+            ) }}
           {{ end }}
 
           {{ if and $options.categories .Params.taxonomies }}
             {{ partial "commons/categories" ( dict
               "context" .
               "kind" "page"
-            )}}
+            ) }}
           {{ end }}
 
           {{ if site.Params.blocks.pages.alternate.more }}
@@ -45,7 +45,7 @@
             {{ partial "pages/partials/page/media.html" (dict 
               "image" .Params.image
               "layout" "alternate"
-            )}}
+            ) }}
           {{ end }}
         </article>
       </li>

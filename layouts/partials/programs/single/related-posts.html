@@ -14,23 +14,23 @@
         <div class="blocks">
           {{ $posts = partial "GetPathSliceFromObjects" . }}
           {{ $params := partial "GetLayoutAndOptions" (dict 
-              "param" "programs.related_posts"
-              "default" "posts.index"
-            ) }}
+            "param" "programs.related_posts"
+            "default" "posts.index"
+          ) }}
           {{ partial "blocks/templates/posts.html" (dict
-              "block" (dict
-                "template" "posts"
-                "ranks" (dict
-                  "base" 2
-                  "self" 2
-                )
-                "data" (dict
-                  "posts" $posts
-                  "layout" $params.layout
-                  "options" $params.options
-                )
+            "block" (dict
+              "template" "posts"
+              "ranks" (dict
+                "base" 2
+                "self" 2
               )
-            ) }}
+              "data" (dict
+                "posts" $posts
+                "layout" $params.layout
+                "options" $params.options
+              )
+            )
+          ) }}
         </div>
       </div>
     </div>

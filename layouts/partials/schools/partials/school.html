@@ -16,11 +16,11 @@
       itemscope itemtype="https://schema.org/CollegeOrUniversity">
     <div class="school-content">
       {{ partial "schools/partials/school/heading.html" (dict
-          "item" .
-          "options" $options
-          "level" $heading_level
-          "itemprop" "title"
-        )}}
+        "item" .
+        "options" $options
+        "level" $heading_level
+        "itemprop" "title"
+      ) }}
 
       {{ if and $options.summary .Params.summary }}
         <div class="school-description" itemprop="abstract">
@@ -31,9 +31,9 @@
 
     {{ if $options.image }}
       {{ partial "schools/partials/school/media.html" (dict 
-          "image" $school.Params.logo
-          "layout" $layout
-        )}}
+        "image" $school.Params.logo
+        "layout" $layout
+      ) }}
     {{ end }}
   </article>
 {{ end }}

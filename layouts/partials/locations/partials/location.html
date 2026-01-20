@@ -4,7 +4,7 @@
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level
   "attributes" "class='location-title' itemprop='headline'"
-)}}
+) }}
 
 {{ with $location }}
   <li>
@@ -22,7 +22,7 @@
             {{ partial "GetRichSummary" ( dict 
               "summary" .Params.summary
               "kind" "locations"
-            )}}
+            ) }}
             <p class="more meta">
               {{- i18n "blocks.locations.button_location" -}}
             </p>
@@ -32,10 +32,10 @@
   
       {{ if $options.image }}
         {{ partial "locations/partials/location/media.html" (dict 
-            "image" .Params.image
-            "layout" $layout
-            "type" "locations"
-          )}}
+          "image" .Params.image
+          "layout" $layout
+          "type" "locations"
+        ) }}
       {{- end -}}
     </article>
   </li>

@@ -6,9 +6,9 @@
   {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
 
   {{ partial "schools/single/summary.html" (dict
-      "context" .
-      "block_wrapped" true
-    ) }}
+    "context" .
+    "block_wrapped" true
+  ) }}
 
   <div class="container">
     {{ partial "commons/contact-details.html" (dict "subject" .) }}

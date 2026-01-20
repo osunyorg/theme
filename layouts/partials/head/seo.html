@@ -27,17 +27,17 @@
 
 {{- with $sharedImage -}}
   {{- $ogImage = partial "GetImageUrl" (dict
-          "media" .
-          "size" "1200"
-        ) -}}
+    "media" .
+    "size" "1200"
+  ) -}}
   {{- $twitterImage = partial "GetImageUrl" (dict
-          "media" .
-          "size" "1200"
-        ) -}}
+    "media" .
+    "size" "1200"
+  ) -}}
   {{- $pagefindImage = partial "GetImageUrl" (dict
-          "media" .
-          "size" site.Params.image_sizes._default.pagefind
-        ) -}}
+    "media" .
+    "size" site.Params.image_sizes._default.pagefind
+  ) -}}
 {{- end -}}
 {{- $seoUrl := .Permalink -}}
 

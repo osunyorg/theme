@@ -64,9 +64,9 @@
             {{ .title | markdownify }}
           </a>
           {{ partial "GetMenuSummary" (dict 
-              "summary" $level_options.summary
-              "path" .path
-            ) }}
+            "summary" $level_options.summary
+            "path" .path
+          ) }}
         {{- else -}}
           {{ if gt .level 1 }}
             {{ $link_class = printf "%s disabled" $link_class }}
@@ -84,11 +84,11 @@
             ) -}}
           {{- if $has_dropdown }}
             {{ partial "commons/menu-dropdown" (dict
-                "parent" .
-                "level" $next_level
-                "options" $options
-                "submenu" $submenu
-              )}}
+              "parent" .
+              "level" $next_level
+              "options" $options
+              "submenu" $submenu
+            ) }}
           {{- else -}}
             {{- $submenu -}}
           {{- end -}}
@@ -107,8 +107,8 @@
   {{ end }}
   {{ if in site.Params.i18n.positions $kind }}
     {{ partial "commons/i18n.html" (dict
-        "context" $context
-        "position" $kind
-      )}}
+      "context" $context
+      "position" $kind
+    ) }}
   {{ end }}
 </ul>

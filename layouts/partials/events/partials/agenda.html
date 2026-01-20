@@ -17,11 +17,11 @@
           {{ end}}
           <li {{ $event_attributes | safeHTMLAttr -}} >
             {{ partial "events/partials/event.html" (dict
-                "event" .
-                "layout" $layout
-                "options" site.Params.events.index.options
-                "is_sub_event" $is_sub_event
-              )}}
+              "event" .
+              "layout" $layout
+              "options" site.Params.events.index.options
+              "is_sub_event" $is_sub_event
+            ) }}
           {{ with .Params.children_for_the_day }}
             <ol class="event-children">
               {{ range $index, $children := . }}
@@ -33,7 +33,7 @@
                       "layout" $layout
                       "options" $options
                       "is_sub_event" true
-                    )}}
+                    ) }}
                   </li>
                 {{ end }}
               {{ end }}
