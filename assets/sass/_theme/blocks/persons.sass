@@ -153,18 +153,12 @@
                         width: offset(3)
                     .contacts-details
                         grid-row: 1 / span 2
-        @include in-page-with-sidebar
-            &:where(:not(.without-photo))
-                .persons-list
-                    .description
-                        width: auto
+
         @include in-page-without-sidebar
             &:where(:not(.without-photo))
                 .persons-list
                     .person
                         position: relative
-                        .description
-                            width: auto
                         .avatar
                             position: absolute
                             left: 0
@@ -180,6 +174,7 @@
                     .description
                         align-items: baseline
                         flex: unset
+                        width: auto
                     .avatar
                         width: space(10)
                         min-width: space(10)
