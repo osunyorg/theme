@@ -1,0 +1,54 @@
+{{ $options := .options }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+  "level" ( .heading_level | default 3 )
+  "attributes" "class='page-title'"
+) }}
+{{ with .pages }}
+  <ul class="pages pages--grid">
+    {{ range . }}
+      {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
+      {{- $path := false -}}
+      {{ if reflect.IsMap . }}
+        {{ $path = .path }}
+      {{ else }}
+        {{ $path = . }}
+      {{ end }}
+      {{ $page := site.GetPage $path }}
+
+      {{ with $page }}
+        <li>
+          <article class="page">
+            {{ $heading_tag.open }}
+              <a href="{{- .Permalink -}}">
+                {{- partial "PrepareHTML" .Title -}}
+              </a>
+            {{ $heading_tag.close }}
+
+            {{- partial "pages/partials/page/hook-after-title.html" . -}}
+
+            {{ if and $options.summary .Params.summary }}
+              {{ partial "GetRichSummary" (dict 
+                "summary" .Params.summary
+                "kind" "pages"
+              ) }}
+            {{ end }}
+
+            {{ if and $options.categories .Params.taxonomies }}
+              {{ partial "commons/categories.html" (dict
+                "context" .
+                "kind" "page"
+              ) }}
+            {{ end }}
+
+            {{ if $options.image }}
+              {{ partial "pages/partials/page/media.html" (dict 
+                "image" .Params.image
+                "layout" "grid"
+              ) }}
+            {{ end }}
+          </article>
+        </li>
+      {{ end }}
+    {{ end }}
+  </ul>
+{{ end }}
