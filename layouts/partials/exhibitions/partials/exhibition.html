@@ -2,6 +2,7 @@
 {{ $layout := .layout | default "list" }}
 {{ $heading_level := .heading_level }}
 {{ $with_more := .with_more }}
+{{ $with_place := .with_place }}
 {{ $options := .options }}
 {{ $layout := .layout }}
 
@@ -28,15 +29,14 @@
 
       {{ partial "exhibitions/partials/exhibition/federated.html" . }}
 
-      {{ if $options.dates }}
-        {{ partial "exhibitions/partials/exhibition/schedule.html" (dict 
-          "dates" .Params.dates
-          "on_two_lines" false
-        ) }}
-      {{ end }}
-
-      {{ if site.Params.exhibitions.index.options.place }}
-        {{ partial "exhibitions/partials/exhibition/place.html" . }}
+      {{ if or $options.dates $with_place }}
+        <div class="exhibition-meta">
+          {{ partial "exhibitions/partials/exhibition/schedule.html" (dict 
+            "dates" .Params.dates
+            "on_two_lines" false
+          ) }}
+          {{ partial "exhibitions/partials/exhibition/place.html" . }}
+        </div>
       {{ end }}
 
       {{ if and $dates.status $options.status }}
