@@ -1,6 +1,6 @@
-{{ $block := .block }}
-{{ $block_class := partial "GetBlockClass" .block }}
-{{ $layout := .block.data.layout | default "grid" }}
+{{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+{{- $layout := .block.data.layout | default "grid" -}}
 
 {{- with .block.data -}}
   {{ $options := .options }}

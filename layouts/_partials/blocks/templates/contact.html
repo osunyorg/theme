@@ -89,58 +89,58 @@
                 </div>
               {{ end }}
             {{ end }}
-              {{ if .timetable }}
-                {{ $time_size := "full-size" }}
-                {{ $contacts := .contact_details }}
-                {{ if and (or $contacts.emails.list $contacts.websites.website) $contacts.phone_numbers.list $contacts.social_networks }}
-                  {{ $time_size = "reduced" }}
-                {{ end}}
-                <div class="schedule-table {{ $time_size -}}">
-                  {{ $heading_items.open }}
-                    {{- i18n "commons.contact.schedule" -}}
-                  {{ $heading_items.close }}
-                  <ul>
-                    {{ range .timetable }}
-                      {{ if or
-                        .time_slot_morning.from
-                        .time_slot_morning.to
-                        .time_slot_afternoon.from
-                        .time_slot_afternoon.to
-                      }}
-                        <li>
-                          <span>{{ .title }}</span>
-                          {{ if or
-                            .time_slot_morning.from
-                            .time_slot_morning.to
-                          }}
-                          <span class="schedule-table__morning">
-                            {{- if .time_slot_morning.from }}
-                              <time datetime="{{ .time_slot_morning.from }}">{{ .time_slot_morning.from }}</time>
-                            {{ end -}}
-                            {{- if .time_slot_morning.to }}
-                              <time datetime="{{ .time_slot_morning.to }}">{{ .time_slot_morning.to }}</time>
-                            {{ end -}}
-                          </span>
-                          {{ end }}
-                          {{ if or
-                            .time_slot_afternoon.from
-                            .time_slot_afternoon.to
-                          }}
-                          <span class="schedule-table__afternoon">
-                            {{- if .time_slot_afternoon.from }}
-                              <time datetime="{{ .time_slot_afternoon.from }}">{{ .time_slot_afternoon.from }}</time>
-                            {{ end -}}
-                            {{- if .time_slot_afternoon.to }}
-                              <time datetime="{{ .time_slot_afternoon.to }}">{{ .time_slot_afternoon.to }}</time>
-                            {{ end -}}
-                          </span>
-                          {{ end -}}
-                        </li>
-                      {{ end }}
-                    {{ end }}
-                  </ul>
-                </div>
+            {{ if .timetable }}
+              {{ $time_size := "full-size" }}
+              {{ $contacts := .contact_details }}
+              {{ if and (or $contacts.emails.list $contacts.websites.website) $contacts.phone_numbers.list $contacts.social_networks }}
+                {{ $time_size = "reduced" }}
               {{ end }}
+              <div class="schedule-table {{ $time_size -}}">
+                {{ $heading_items.open }}
+                  {{- i18n "commons.contact.schedule" -}}
+                {{ $heading_items.close }}
+                <ul>
+                  {{ range .timetable }}
+                    {{ if or
+                      .time_slot_morning.from
+                      .time_slot_morning.to
+                      .time_slot_afternoon.from
+                      .time_slot_afternoon.to
+                    }}
+                      <li>
+                        <span>{{ .title }}</span>
+                        {{ if or
+                          .time_slot_morning.from
+                          .time_slot_morning.to
+                        }}
+                        <span class="schedule-table__morning">
+                          {{- if .time_slot_morning.from }}
+                            <time datetime="{{ .time_slot_morning.from }}">{{ .time_slot_morning.from }}</time>
+                          {{ end -}}
+                          {{- if .time_slot_morning.to }}
+                            <time datetime="{{ .time_slot_morning.to }}">{{ .time_slot_morning.to }}</time>
+                          {{ end -}}
+                        </span>
+                        {{ end }}
+                        {{ if or
+                          .time_slot_afternoon.from
+                          .time_slot_afternoon.to
+                        }}
+                        <span class="schedule-table__afternoon">
+                          {{- if .time_slot_afternoon.from }}
+                            <time datetime="{{ .time_slot_afternoon.from }}">{{ .time_slot_afternoon.from }}</time>
+                          {{ end -}}
+                          {{- if .time_slot_afternoon.to }}
+                            <time datetime="{{ .time_slot_afternoon.to }}">{{ .time_slot_afternoon.to }}</time>
+                          {{ end -}}
+                        </span>
+                        {{ end -}}
+                      </li>
+                    {{ end }}
+                  {{ end }}
+                </ul>
+              </div>
+            {{ end }}
           </div>
         </div>
       </div>

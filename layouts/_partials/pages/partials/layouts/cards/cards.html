@@ -3,7 +3,6 @@
   "level" ( .heading_level | default 3 )
   "attributes" "class='page-title'"
 ) }}
-
 <ul class="pages">
   {{ range .pages }}
     {{ $page := site.GetPage .path }}
@@ -27,7 +26,7 @@
             {{ end }}
 
             {{ if and $options.categories .Params.taxonomies }}
-              {{ partial "commons/categories" (dict
+              {{ partial "commons/categories.html" (dict
                 "context" .
                 "kind" "page"
               ) }}

@@ -2,7 +2,7 @@
   {{ partial "home/hero.html" . }}
 
   <div class="document-content">
-    {{- if not $.Site.Params.home.toc.disabled -}}
+    {{- if not site.Params.home.toc.disabled -}}
       {{ partial "toc/container.html" (dict
         "toc" "toc/default.html"
         "context" .
