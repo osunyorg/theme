@@ -46,16 +46,18 @@
                     order: -1
                     width: columns(5)
                     flex-shrink: 1
-                &-schedule
-                    position: absolute
-                    left: 0
-                    top: 0
-                    width: columns(3)
+                &-meta
+                    &.with-place,
+                    &:not(.with-place) .exhibition-schedule
+                        position: absolute
+                        left: 0
+                        top: 0
+                        width: columns(3)
                 &-dates
                     @include h3
                 &-content
                     flex: 1
-                    > * + .exhibition-schedule
+                    > * + .exhibition-meta
                         margin-top: 0
                 &--with-image
                     display: flex

@@ -1,0 +1,7 @@
+{{ $type := .type }}
+
+{{ with .place }}
+  <p itemscope itemtype="https://schema.org/Place" itemprop="location" class="{{ $type | singularize -}}-place">
+    <span itemprop="name">{{ . }}</span>
+  </p>
+{{ end }}
