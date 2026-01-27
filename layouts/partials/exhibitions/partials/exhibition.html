@@ -35,7 +35,9 @@
             "dates" .Params.dates
             "on_two_lines" false
           ) }}
-          {{ partial "exhibitions/partials/exhibition/place.html" . }}
+          {{ if $with_place }}
+            {{ partial "exhibitions/partials/exhibition/place.html" . }}
+          {{ end }} 
         </div>
       {{ end }}
 
