@@ -30,7 +30,7 @@
       {{ partial "exhibitions/partials/exhibition/federated.html" . }}
 
       {{ if or $options.dates $with_place }}
-        <div class="exhibition-meta">
+        <div class="exhibition-meta {{- if $with_place }} with-place {{- end }}">
           {{ partial "exhibitions/partials/exhibition/schedule.html" (dict 
             "dates" .Params.dates
             "on_two_lines" false

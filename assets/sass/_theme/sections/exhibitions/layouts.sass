@@ -28,9 +28,6 @@
             &-subtitle
                 @include h3
                 color: var(--color-text-alt)
-            &-place
-                @include meta
-                margin-top: $spacing-1
         @include media-breakpoint-down(desktop)
             > li + li
                 margin-top: $spacing-3
@@ -50,10 +47,12 @@
                     width: columns(5)
                     flex-shrink: 1
                 &-meta
-                    position: absolute
-                    left: 0
-                    top: 0
-                    width: columns(3)
+                    &.with-place,
+                    &:not(.with-place) .exhibition-schedule
+                        position: absolute
+                        left: 0
+                        top: 0
+                        width: columns(3)
                 &-dates
                     @include h3
                 &-content
