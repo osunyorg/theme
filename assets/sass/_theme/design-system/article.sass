@@ -4,6 +4,8 @@
     position: relative
     display: flex
     flex-direction: column
+    [class$="-subtitle"]
+        color: var(--color-text-alt)
     .media
         margin-bottom: $spacing-3
         order: -1
@@ -33,3 +35,5 @@
         @include stretched-link(before)
         display: block
         text-decoration: none
+    + [class$="-subtitle"]
+        @include h3
