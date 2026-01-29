@@ -2,10 +2,11 @@
 {{ $class := "page" }}
 {{ $custom_class := "" }}
 {{ $options := .options }}
+{{ $layout := .layout | default "grid"}}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level
   "attributes" "class='page-title'"
-)}}
+) }}
 
 {{ if .Params.bodyclass }}
   {{ $class = printf "%s page-%s" $class .Params.bodyclass }}
@@ -34,21 +35,15 @@
         {{ partial "commons/categories" ( dict
           "context" .
           "kind" "page"
-        )}}
+        ) }}
       {{ end }}
     </div>
     {{ if $options.image }}
-      <div class="media">
-        {{- if .Params.image -}}
-          {{- partial "commons/image.html"
-              (dict
-                "image"    .Params.image
-                "sizes"    site.Params.image_sizes.sections.posts.item
-              ) -}}
-        {{- else -}}
-          {{- partial "commons/image-default.html" "posts" -}}
-        {{- end -}}
-      </div>
+      {{ partial "pages/partials/page/media.html" (dict 
+        "image" .Params.image
+        "layout" $layout
+        "type" "page"
+      ) }}
     {{- end -}}
   </article>
 {{ end }}

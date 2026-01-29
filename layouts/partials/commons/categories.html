@@ -1,19 +1,36 @@
 {{ $kind := .kind | singularize }}
-{{ $class := .class | default ( printf "%s-categories" $kind ) }}
+{{/*  TODO: rename all call from this partial to `type` instead of `kind`.  */}}
+{{ $type := ( .type | singularize ) | default $kind }}
+{{ $class := .class | default ( printf "%s-categories" $type ) }}
 {{ $categories := .categories }}
+{{ $depth := .depth }}
 
 {{ if not $categories }}
-  {{ $categories_kind := printf "%ss_categories" $kind }}
-  {{ $categories = .context.GetTerms $categories_kind }}
+  {{ $categories_type := printf "%ss_categories" $type }}
+  {{ $categories = .context.GetTerms $categories_type }}
 {{ end }}
 
 {{- if $categories -}}
   <ul class="{{ $class }}" aria-label="{{ i18n "categories.label" }}">
     {{- range $categories -}}
       <li {{ with .Params.bodyclass }}class="{{ . }}"{{ end }}>
-        <a href="{{ .Permalink }}">
-          {{- safeHTML .Title -}}
-        </a>
+        {{ $id := printf "%s-children-list" ( .Slug | anchorize) }}
+        {{ $children := partial "GetObjectsFromPathSlice" .Params.children }}
+        {{ if and $depth $children }}
+          <span class="extendable-button" aria-expanded="false" aria-controls="{{ $id }}" role="button" tabindex="0">
+            {{- safeHTML .Title -}}
+          </span>
+          <div id="{{ $id }}" class="extendable dropdown" data-extendable-auto-close="true">
+            {{ partial "commons/categories.html" (dict
+              "categories" $children
+              "type" $type
+            ) }}
+          </div>
+        {{ else }}
+          <a href="{{ .Permalink }}">
+            {{- safeHTML .Title -}}
+          </a>
+        {{ end }}
       </li>
     {{- end }}
   </ul>

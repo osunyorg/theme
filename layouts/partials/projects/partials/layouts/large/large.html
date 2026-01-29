@@ -1,13 +1,13 @@
 {{ $heading_level := .heading_level | default 3 }}
 {{ $options := .options | default site.Params.projects.index.options }}
 
-<div class="large projects--large">
+<ul class="large projects projects--large">
   {{ range .projects -}}
     {{ partial "projects/partials/layouts/large/large-item.html" (dict
-        "heading_level" $heading_level
-        "options" $options
-        "layout" "large"
-        "project" .
-      ) }}
+      "heading_level" $heading_level
+      "options" $options
+      "layout" "large"
+      "project" .
+    ) }}
   {{ end }}
-</div>
+</ul>

@@ -2,10 +2,11 @@
 {{ $time_slot := .time_slot }}
 {{ $is_repeating := .is_repeating }}
 {{ $on_two_lines := .on_two_lines }}
+{{ $with_hours := .with_hours }}
 {{ $type := .type }}
-{{ $date_format := index site.Params $type "date_format" }}
+{{ $date_format := index site.Params (pluralize $type) "date_format" }}
 {{ $time_format := ( i18n "commons.time_format" ) }}
-  
+
 {{ if or $dates.computed.short $dates.computed.two_lines.short $time_slot }}
   <div class="{{ $type }}-schedule">
     <p class="{{ $type }}-dates">
@@ -32,7 +33,7 @@
       {{ partial "PrepareHTML" $formated_date }}
     </p>
 
-    {{- if $time_slot }}
+    {{- if and $with_hours $time_slot (not $is_repeating) }}
       {{- $hour := "" -}}
       <p class="{{ $type }}-time">
         {{ with $time_slot.start.time }}

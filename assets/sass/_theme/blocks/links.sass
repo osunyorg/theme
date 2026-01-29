@@ -22,6 +22,12 @@
             &--icon
                 img
                     max-width: $block-links-icon-max-width
+
+    &:where(:not(.block-links--cards))
+        .link-content
+            a
+                @include h3
+
     &--grid
         ul
             @include grid(1, false, $spacing-4)
@@ -30,9 +36,6 @@
             flex-direction: column
             gap: $spacing-2
             .link-content
-                a
-                    @include h3
-                    @include set-inner-icon(links-line)
                 p
                     margin-top: space()
             .media
@@ -46,10 +49,7 @@
             padding-bottom: $spacing-2
             + li
                 border-top: 1px solid var(--color-border)
-            a
-                @include h3
-                &[target="_blank"]
-                    @include set-inner-icon(links-line, $pseudo-element: after, $target: "span[itemprop='name']")
+            
             @include media-breakpoint-down(md)
                 flex-direction: column
                 gap: $spacing-2

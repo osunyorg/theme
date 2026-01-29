@@ -1,9 +1,10 @@
 {{ $program := .program }}
 {{ $options := .options }}
+{{ $layout := .layout | default "list" }}
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level
   "attributes" "class='program-title' itemprop='name'"
-)}}
+) }}
 
 <li class="program" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
   <div class="program-content">
@@ -24,24 +25,31 @@
 
     {{ if and $options.summary $program.Params.summary }}
       <div itemprop="abstract">
-        {{ partial "GetRichSummary" ( dict 
+        {{ partial "GetRichSummary" (dict 
           "summary" $program.Params.summary
           "kind" "programs"
-        )}}
+        ) }}
       </div>
-  {{ end }}
+    {{ end }}
+
+    {{/*  TODO: remove when option is added to the block  */}}
+    {{ if or site.Params.programs.index.options.categories $options.categories }}
+      {{ partial "commons/categories.html" (dict
+        "context" $program
+        "kind" "program"
+      ) }}
+    {{ end }}
 
     {{ if $options.button }}
       <p class="btn">{{ i18n "commons.more" }}</p>
     {{ end }}
 
     {{ if and $options.logo $program.Params.logo }}
-      {{ partial "commons/image.html"
-        (dict
-          "image" $program.Params.logo
-          "lazy" false
-          "html_class" "program-logo"
-        ) }}
+      {{ partial "commons/image.html" (dict
+        "image" $program.Params.logo
+        "lazy" false
+        "html_class" "program-logo"
+      ) }}
     {{ end }}
   </div>
 
@@ -64,14 +72,11 @@
       {{ end }}
     </div>
   {{ end }}
-
   {{ if and $program.Params.image $options.image }}
-    <div class="media">
-      {{ partial "commons/image.html"
-          (dict
-            "image" $program.Params.image
-            "sizes" site.Params.image_sizes.blocks.programs
-          ) }}
-    </div>
+    {{ partial "programs/partials/program/media.html" (dict 
+      "image" $program.Params.image
+      "layout" $layout
+      "type" "programs"
+    ) }}
   {{ end }}
 </li>

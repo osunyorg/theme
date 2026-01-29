@@ -17,8 +17,8 @@
                   <div>
                     {{ with .title }}
                       {{- $heading_tag := partial "GetHeadingTag" (dict 
-                          "level" $block.ranks.children
-                          "attributes" "class='name'"
+                        "level" $block.ranks.children
+                        "attributes" "class='name'"
                       ) -}}
                       {{ $heading_tag.open -}}
                         {{ . | safeHTML }}
@@ -30,18 +30,17 @@
                   </div>
                 {{ end }}
                 {{- if .image -}}
-                  <figure class="media {{- if $options.icons }} media--icon {{- end -}}" {{- with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
-                    {{- partial "commons/image.html"
-                      (dict
-                        "image"    .image
-                        "alt"      .alt
-                        "sizes"    site.Params.image_sizes.blocks.features
-                      ) -}}
-                      {{- if .credit -}}
-                        <figcaption class="credit">
-                          {{ partial "PrepareHTML" .credit }}
-                        </figcaption>
-                      {{- end -}}
+                  <figure {{- with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
+                    {{- partial "commons/image.html" (dict
+                      "image" .image
+                      "alt" .alt
+                      "sizes" site.Params.image_sizes.blocks.features
+                    ) -}}
+                    {{- if .credit -}}
+                      <figcaption class="credit">
+                        {{ partial "PrepareHTML" .credit }}
+                      </figcaption>
+                    {{- end -}}
                   </figure>
                 {{- end -}}
               </li>

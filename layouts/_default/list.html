@@ -3,17 +3,15 @@
   {{ partial "hooks/after-page-hero.html" . }}
 
   <div class="document-content">
-    {{ partial "toc/container.html"
-        (dict
-            "toc" "pages/single/toc.html"
-            "context" .
-        )
-    }}
+    {{ partial "toc/container.html" (dict
+      "toc" "pages/single/toc.html"
+      "context" .
+    ) }}
 
     {{ partial "pages/single/summary.html" (dict
-        "context" .
-        "block_wrapped" true
-      ) }}
+      "context" .
+      "block_wrapped" true
+    ) }}
 
     {{ if .Params.contents }}
       {{ partial "contents/list.html" (dict

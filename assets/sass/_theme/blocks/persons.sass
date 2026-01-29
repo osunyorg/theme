@@ -13,12 +13,6 @@
     @include in-page-without-sidebar
         .top .description
             max-width: columns(8)
-        &.block-with-long-text
-            &:not(.block-persons--large)
-                .persons
-                    @include grid(2)
-                    article
-                        @include person-avatar-end
     @include in-page-with-sidebar
         article
             flex-direction: row
@@ -49,22 +43,20 @@
                 .description
                     margin-top: $spacing-3
         @include in-page-without-sidebar
+            &.block-with-long-text
+                .persons
+                    @include grid(2)
+                    article
+                        @include person-avatar-end
             .person
                 text-align: center
                 .contacts-details
                     a, address
                         text-align: center
     &--large
+        .persons
+            @include layout-large
         .person
-            @include small-arrow-right-hover('.more')
-            display: flex
-            flex-direction: column
-            + .person
-                margin-top: $spacing-4
-                @include media-breakpoint-up(md)
-                    margin-top: $spacing-6
-            .description
-                flex: 1
             .person-name
                 @include lead
                 + div
@@ -86,7 +78,6 @@
                     li > span
                         width: offset(1)
             @include in-page-without-sidebar
-                align-items: center
                 .avatar
                     width: columns(4)
                 .contacts-details
@@ -94,10 +85,6 @@
                         @include grid(2, false, $spacing-2)
                         li + li
                             margin-top: 0
-            @include in-page-with-or-without-sidebar
-                flex-direction: row
-                gap: var(--grid-gutter)
-                text-align: left
             @include media-breakpoint-down(md)
                 &-name,
                 &-role
@@ -108,11 +95,11 @@
 
     &--list
         .persons-list
-            @include list-reset
             > li
                 padding-bottom: $spacing-3
                 padding-top: $spacing-3
                 .person-name
+                    @include body-text
                     a
                         @extend %underline-on-hover
                 .person-role
@@ -121,39 +108,74 @@
                 + li
                     border-top: var(--border-width) solid var(--color-border)
             @include media-breakpoint-up(desktop)
+                article
+                    align-items: baseline
+                    flex-direction: row
                 .contacts-details
                     margin-top: 0
                     a, address
-                        width: columns(4)
+                        width: columns(3)
                         text-align: left
                     li
                         align-items: baseline
                         display: flex
                     li > span
                         width: offset(1)
-                > li
+            @include in-page-without-sidebar
+                .description
                     align-items: baseline
                     display: flex
                     gap: var(--grid-gutter)
-                    > div:first-child
-                        align-items: baseline
-                        display: flex
-                        width: columns(8)
-                        gap: var(--grid-gutter)
-                        > *
+                    width: offset(11)
+                    .person-name
+                        width: offset(3)
+                    .person-role
+                        width: columns(3)
+                    .contacts-details
+                        margin-top: 0
+                        width: columns(5)
+                        a, address
                             width: columns(4)
-            @include in-page-without-sidebar
-                > li
-                    > div:first-child
-                        width: columns(7)
-                .contacts-details
-                    width: columns(5)
             @include in-page-with-sidebar
+                .description
+                    @include grid(2)
+                    row-gap: space()
+                    width: offset(7)
+                    .person-name
+                        grid-row: 1
+                        width: offset(3)
+                        + *
+                            width: columns(4)
                 &.with-contacts
-                    > li
-                        > div:first-child
-                            display: block
-                            width: columns(3)
-                        .contacts-details
-                            width: columns(5)
+                    .person-role
+                        order: 3
+                        grid-row: span 2
+                        width: offset(3)
+                    .contacts-details
+                        grid-row: 1 / span 2
 
+        @include in-page-without-sidebar
+            &:where(:not(.without-photo))
+                .persons-list
+                    .person
+                        position: relative
+                        .avatar
+                            position: absolute
+                            left: 0
+                        .person-name
+                            padding-left: space(13) // avatar width + avatar margin-right
+                            width: columns(4)
+
+        @include in-page-with-or-without-sidebar
+            &:where(:not(.without-photo))
+                .persons-list
+                    article
+                        gap: unset
+                    .description
+                        align-items: baseline
+                        flex: unset
+                        width: auto
+                    .avatar
+                        width: space(10)
+                        min-width: space(10)
+                        margin-right: space(3)

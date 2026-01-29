@@ -19,9 +19,9 @@
       {{ with .Params.dates }}
         {{ if ne .status "archive" }}
           {{ partial "commons/agenda/dropdown-calendar.html" (dict
-              "index" "primary"
-              "calendar_links" .add_to_calendar
-            )}}
+            "index" "primary"
+            "calendar_links" .add_to_calendar
+          ) }}
         {{ end }}
       {{ end }}
     </div>
@@ -47,9 +47,9 @@
           {{ end }}
           {{ if ne .status "archive" }}
             {{ partial "commons/agenda/dropdown-calendar.html" (dict
-                "index" $index
-                "calendar_links" $time_slot.add_to_calendar
-              )}}
+              "index" $index
+              "calendar_links" $time_slot.add_to_calendar
+            ) }}
           {{ end }}
         </li>
       {{ end }}

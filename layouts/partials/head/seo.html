@@ -27,17 +27,17 @@
 
 {{- with $sharedImage -}}
   {{- $ogImage = partial "GetImageUrl" (dict
-          "media" .
-          "size" "1200"
-        ) -}}
+    "media" .
+    "size" "1200"
+  ) -}}
   {{- $twitterImage = partial "GetImageUrl" (dict
-          "media" .
-          "size" "1200"
-        ) -}}
+    "media" .
+    "size" "1200"
+  ) -}}
   {{- $pagefindImage = partial "GetImageUrl" (dict
-          "media" .
-          "size" site.Params.image_sizes._default.pagefind
-        ) -}}
+    "media" .
+    "size" site.Params.image_sizes._default.pagefind
+  ) -}}
 {{- end -}}
 {{- $seoUrl := .Permalink -}}
 
@@ -72,8 +72,10 @@
   <meta name="{{ .name }}" content="{{ .content }}">
 {{ end }}
 
-{{/*
-Limiter le tracking par le CDN
-https://framagit.org/chatons/CHATONS/-/issues/200#note_1987024
-*/}}
-<meta name="referrer" content="no-referrer">
+{{ if site.Params.seo.head_no_referrer }}
+    {{/*
+    Limiter le tracking par le CDN
+    https://framagit.org/chatons/CHATONS/-/issues/200#note_1987024
+    */}}
+    <meta name="referrer" content="no-referrer">
+{{ end }}

@@ -2,27 +2,21 @@
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level 
   "attributes" "class='volume-title'"
-)}}
+) }}
 
 {{ with $volume }}
-  <article class="volume" itemscope itemtype="https://schema.org/Book https://schema.org/PublicationVolume">
-    <hgroup>
-      <p class="suptitle" itemprop="volumeNumber">{{ i18n "volumes.volume_number" (dict "Number" .Params.Number) }}</p>
-      {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" title="{{ i18n "commons.more_aria" (dict "Title" .Title) }}" itemprop="name">{{ partial "PrepareHTML" .Title }}</a>
-      {{ $heading_tag.close }}
-    </hgroup>
-    <div class="media">
-      {{- if .Params.image -}}
-        {{- partial "commons/image.html"
-              (dict
-                "image"    .Params.image
-                "alt"      .Title
-                "sizes"    site.Params.image_sizes.sections.volumes.item
-              ) -}}
-      {{- else -}}
-        {{- partial "commons/image-default.html" "volumes" -}}
-      {{- end -}}
-    </div>
-  </article>
+  <li>
+    <article class="volume" itemscope itemtype="https://schema.org/Book https://schema.org/PublicationVolume">
+      <hgroup>
+        <p class="suptitle" itemprop="volumeNumber">{{ i18n "volumes.volume_number" (dict "Number" .Params.Number) }}</p>
+        {{ $heading_tag.open }}
+          <a href="{{ .Permalink }}" title="{{ i18n "commons.more_aria" (dict "Title" .Title) }}" itemprop="name">{{ partial "PrepareHTML" .Title }}</a>
+        {{ $heading_tag.close }}
+      </hgroup>
+      {{ partial "volumes/partials/volume/media.html" (dict 
+        "image" .Params.image
+        "sizes" site.Params.image_sizes.sections.volumes.item
+      ) }}
+    </article>
+  </li>
 {{ end }}

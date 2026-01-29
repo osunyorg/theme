@@ -3,10 +3,10 @@
 {{ $heading_tag := partial "GetHeadingTag" (dict 
   "level" .heading_level 
   "attributes" "class='publication-title' itemprop='headline'"
-)}}
+) }}
 
 {{ with $publication }}
-  <article class="publication" itemscope itemtype="http://schema.org/ScholarlyArticle">
+  <li class="publication" itemscope itemtype="http://schema.org/ScholarlyArticle">
     <div class="publication-content">
       {{- $title := partial "PrepareHTML" .Title -}}
 
@@ -16,23 +16,26 @@
 
       {{ if or .Params.journal_title .Params.date .Params.authors_list }}
         <div class="publication-meta">
-          {{- with .Params.journal_title -}}
-            <span>{{ partial "PrepareHTML" . }}</span>
-          {{- end -}}
           {{- with .Params.date -}}
-            <span>{{ .Format "2006" }}</span>
+            <span>{{- .Format "2006" -}}</span>
           {{- end -}}
-          {{- with .Params.authors_list -}}
-            <span itemprop="author">{{ partial "PrepareHTML" . }}</span>
-          {{- end -}}
-        </div>
-      {{ end }}
 
-      {{ with .Params.ref }}
-        <div class="publication-ref" itemprop="isPartOf" itemscope itemtype="http://schema.org/PublicationIssue">
-          <span itemprop="name">{{ partial "PrepareHTML" . }}</span>
+          {{- with .Params.journal_title -}}
+            <span>{{- partial "PrepareHTML" . -}}</span>
+          {{- end -}}
+
+          {{- with .Params.ref -}}
+            <div class="publication-ref" itemprop="isPartOf" itemscope itemtype="http://schema.org/PublicationIssue">
+              <span itemprop="name">{{- partial "PrepareHTML" . -}}</span>
+            </div>
+          {{- end -}}
         </div>
       {{ end }}
     </div>
-  </article>
+    {{ with .Params.authors_list }}
+      <div class="publication-authors">
+        <span itemprop="author">{{ partial "PrepareHTML" . }}</span>
+      </div>
+    {{ end }}
+  </li>
 {{ end }}

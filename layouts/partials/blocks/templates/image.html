@@ -11,15 +11,14 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        <!-- TODO Peut etre aligner la stucture des données avec les autres cas d'images -->
         {{ partial "commons/image-figure.html" (dict
           "image" (dict 
-                    "alt" .image.alt
-                    "id" .image.id
-                    "file" .image.file
-                    "credit" .image.credit
-                    "text" .text
-                  )
+            "alt" .image.alt
+            "id" .image.id
+            "file" .image.file
+            "credit" .image.credit
+            "text" .text
+          )
           "sizes" site.Params.image_sizes.blocks.image
         ) }}
       </div>

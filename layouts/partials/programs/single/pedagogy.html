@@ -29,12 +29,11 @@
           {{ $title := i18n "programs.teachers" -}}
           <section id="{{ anchorize $title }}">
             <h3>{{ $title }}</h3>
-            {{- partial "programs/single/teachers.html"
-                          (dict
-                            "title" $title
-                            "teachers" .Params.teachers
-                            "descriptions" .Params.teachers_description
-                          ) -}}
+            {{- partial "programs/single/teachers.html" (dict
+              "title" $title
+              "teachers" .Params.teachers
+              "descriptions" .Params.teachers_description
+            ) -}}
           </section>
         {{- end -}}
       </div>

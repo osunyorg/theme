@@ -13,24 +13,24 @@
 
         {{ $events = partial "GetPathSliceFromObjects" . }}
         {{ $params := partial "GetLayoutAndOptions" (dict 
-            "param" "programs.related_events"
-            "default" "events.index"
-          ) }}
+          "param" "programs.related_events"
+          "default" "events.index"
+        ) }}
         <div class="blocks">
           {{ partial "blocks/templates/agenda.html" (dict
-              "block" (dict 
-                "template" "agenda"
-                "ranks" (dict 
-                  "base" 2
-                  "self" 2
-                )
-                "data" (dict
-                  "events" $events
-                  "layout" $params.layout
-                  "options" $params.options
-                )
+            "block" (dict 
+              "template" "agenda"
+              "ranks" (dict 
+                "base" 2
+                "self" 2
               )
-            ) }}
+              "data" (dict
+                "events" $events
+                "layout" $params.layout
+                "options" $params.options
+              )
+            )
+          ) }}
         </div>
       </div>
     </div>

@@ -26,10 +26,10 @@
         {{ $date := $day.day | time.AsTime }}
         {{ $formated_date := $date | time.Format "2" }}
         {{ $anchor := partial "GetDayAnchor" (dict
-            "date" $date
-            "format" site.Params.events.index.group_by_date
-            "permalink" $permalink
-          ) }}
+          "date" $date
+          "format" site.Params.events.index.group_by_date
+          "permalink" $permalink
+        ) }}
 
         {{ if eq $index 0 }}
             {{ range (seq (sub $day.cwday 1)) }}

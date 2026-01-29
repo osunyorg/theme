@@ -24,19 +24,20 @@
           {{ end }}
 
           {{ partial "locations/partials/map.html" (dict
-              "locations" $locations
-              "title" $map_title
-            )}}
+            "locations" $locations
+            "title" $map_title
+          ) }}
         {{ else }}
-          <div class="locations locations--{{- $layout }}">
+          <ul class="locations locations--{{- $layout }}">
             {{ range $locations }}
               {{ partial "locations/partials/location.html" (dict 
                 "location" .
                 "heading_level" $block.ranks.children
                 "options" $options
+                "layout" $layout
               ) }}
             {{ end }}
-          </div>
+          </ul>
         {{ end }}
       </div>
     </div>

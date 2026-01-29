@@ -17,14 +17,14 @@
       itemscope itemtype="https://schema.org/JobPosting">
     <div class="job-content">
       {{ partial "jobs/partials/job/heading.html" (dict
-          "item" .
-          "options" $options
-          "level" $heading_level
-          "itemprop" "title"
-        )}}
+        "item" .
+        "options" $options
+        "level" $heading_level
+        "itemprop" "title"
+      ) }}
 
       {{ if and $options.summary .Params.summary }}
-        <div class="job-description" itemprop="abstract">
+        <div class="job-description" itemprop="description">
           {{ partial "jobs/partials/job/summary.html" . }}
         </div>
       {{ end }}
@@ -37,7 +37,7 @@
         {{ partial "commons/categories.html" ( dict
           "context" .
           "kind" "job"
-        )}}
+        ) }}
       {{- end -}}
 
       {{ if $with_more }}
@@ -47,9 +47,9 @@
 
     {{ if $options.image }}
       {{ partial "jobs/partials/job/media.html" (dict 
-          "image" $job.Params.image
-          "layout" $layout
-        )}}
+        "image" $job.Params.image
+        "layout" $layout
+      ) }}
     {{ end }}
   </article>
 {{ end }}

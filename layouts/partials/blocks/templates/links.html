@@ -3,6 +3,7 @@
 
 {{- with .block.data -}}
   {{ $options := .options }}
+  {{ $layout := .layout }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
@@ -26,11 +27,16 @@
                 {{ end }}
               </div>
               {{- if .image -}}
+                {{- $sizes := (index site.Params.image_sizes.blocks.links $layout) -}}
+                {{ if $options.icons }}
+                  {{ $sizes = site.Params.image_sizes.blocks.links.icons }}
+                {{ end }}
+                
                 <div class="media {{- if $options.icons }} media--icon {{- end }}">
                   {{- partial "commons/image.html" (dict
-                    "image"    .image
-                    "alt"      .alt
-                    "sizes"    site.Params.image_sizes.blocks.links
+                    "image" .image
+                    "alt" .alt
+                    "sizes" $sizes
                   ) -}}
                 </div>
               {{- end -}}

@@ -9,16 +9,15 @@
               <span itemprop="name">{{ .Title }}</span>
               <div class="media">
                 {{- if .Params.image -}}
-                  {{- partial "commons/image.html"
-                        (dict
-                          "image"    .Params.image
-                          "alt"      .Title
-                          "sizes"    (dict 
-                            "mobile"   "327x388"
-                            "tablet"   "208x247"
-                            "desktop"  "408x485"
-                          )
-                        ) -}}
+                  {{- partial "commons/image.html" (dict
+                    "image"    .Params.image
+                    "alt"      .Title
+                    "sizes"    (dict 
+                      "mobile"   "327x388"
+                      "tablet"   "208x247"
+                      "desktop"  "408x485"
+                    )
+                  ) -}}
                 {{- else -}}
                   {{- partial "commons/image-default.html" "papers" -}}
                 {{- end -}}
@@ -66,12 +65,10 @@
         {{ end }}
       </dl>
     </aside>
-    {{ partial "toc/container.html"
-      (dict
-            "toc" "papers/single/toc.html"
-            "context" .
-        )
-    }}
+    {{ partial "toc/container.html" (dict
+      "toc" "papers/single/toc.html"
+      "context" .
+    ) }}
   </div>
 </div>
 

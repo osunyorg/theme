@@ -7,6 +7,7 @@
         @include media-breakpoint-up(desktop)
             gap: $spacing-3
         @include media-breakpoint-down(desktop)
+            padding-top: $spacing-2
             .dropdown-dates,
             .filter-taxonomies
                 flex: 50%
@@ -14,7 +15,12 @@
                 > button
                     width: 100%
                     text-align: left
+            .taxonomies-list,
+            .dropdown-dates > button,
+            .filter-taxonomies, .offcanvas-button
+                display: block
             .filter-taxonomies
+                --dropdown-background: transparent
                 .offcanvas-button
                     @include button-reset
                     text-align: right
@@ -30,7 +36,6 @@
                 .offcanvas-content
                     text-align: left
     .dates-filters
-        @include container
         .slider
             overflow: hidden
             position: relative
@@ -50,11 +55,17 @@
             display: flex
             gap: var(--grid-gutter)
             width: 100%
-            @include media-breakpoint-down(desktop)
+        @include media-breakpoint-down(desktop)
+            margin-left: var(--grid-gutter)
+            margin-right: var(--grid-gutter)
+            &__months
                 .calendar-month
                     + .calendar-month
                         margin-top: 0
-            @include media-breakpoint-up(desktop)
+        @include media-breakpoint-up(desktop)
+            .container
+                padding-left: var(--grid-gutter) !important
+            &__months
                 .calendar-month
                     width: columns(4)
     .dropdown-dates
@@ -89,6 +100,11 @@
                     padding-top: $spacing-1
                     ul
                         grid-gap: $spacing-2
+                        // Cancel container behaviour
+                        max-width: none
+                        width: auto
+                        padding-left: 0
+                        padding-right: 0
                         li > a
                             padding-left: 0
 

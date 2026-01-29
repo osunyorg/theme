@@ -1,5 +1,7 @@
-{{- $block := .block -}}
-{{- $block_class := partial "GetBlockClass" .block -}}
+{{ $block := .block }}
+{{ $block_class := partial "GetBlockClass" .block }}
+{{ $with_lightbox := not site.Params.components.lightbox.in_gallery.disabled }}
+
 {{- with .block.data -}}
   {{- $sizes := index site.Params.image_sizes.blocks.gallery .layout -}}
   {{- $has_text := false -}}
@@ -20,10 +22,10 @@
           >
           {{- range .images }}
             {{ partial "commons/image-figure.html" (dict
-                "image"    .
-                "sizes"    $sizes
-                "gallery" true
-              )}}
+              "image" .
+              "sizes" $sizes
+              "with_lightbox" $with_lightbox
+            ) }}
           {{ end -}}
         </div>
       </div>

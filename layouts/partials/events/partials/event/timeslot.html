@@ -1,0 +1,8 @@
+{{ if or .start .place }}
+  <div class="event-timeslot">
+    {{ partial "events/partials/event/hours.html" . }}
+    {{ if site.Params.events.index.options.place }}
+      {{ partial "events/partials/event/place.html" . }}
+    {{ end }}
+  </div>
+{{ end }}

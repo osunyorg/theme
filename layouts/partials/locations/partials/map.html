@@ -8,13 +8,13 @@
 
 {{ if $has_address }}
 <div class="locations-map">
-  <div class="map" data-map data-marker-icon="{{ "/assets/images/map-marker.svg" }}" 
+  <ul class="map" data-map data-marker-icon="{{ "/assets/images/map-marker.svg" }}" 
         role="region"
         aria-label="{{ $aria_label }}">
     {{ range $locations }}
       {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
       {{ if and $address_geolocation.longitude $address_geolocation.latitude }}
-        <article class="location" data-title="{{ .Params.title }}" data-longitude="{{ $address_geolocation.longitude }}" data-latitude="{{ $address_geolocation.latitude }}">
+        <li class="location" data-title="{{ .Params.title }}" data-longitude="{{ $address_geolocation.longitude }}" data-latitude="{{ $address_geolocation.latitude }}" itemscope itemtype="https://schema.org/EducationalOrganization">
           {{ $title := "" }}
           {{ if .Params.title }}
             <div class="location-content">
@@ -36,17 +36,16 @@
           {{ end -}}
           {{- if .Params.image -}}
             <div class="media">
-              {{- partial "commons/image.html"
-                (dict
-                  "image"  .Params.image
-                  "alt"    $title
-                  "sizes"  site.Params.image_sizes.sections.locations.map
-                ) -}}
+              {{- partial "commons/image.html" (dict
+                "image" .Params.image
+                "alt" $title
+                "sizes" site.Params.image_sizes.sections.locations.layouts.map
+              ) -}}
             </div>
           {{- end -}}
-        </article>
+        </li>
       {{ end }}
     {{ end }}
-  </div>
+      </ul>
 </div>
 {{ end }}
