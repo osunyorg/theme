@@ -1,6 +1,6 @@
 {{ $length := .length }}
 
-{{ if not (eq (printf "%T" $length) "int") }}
+{{ if not (partial "IsInteger" $length) }}
   {{ $length = 0 }}
 {{ end }}
 
