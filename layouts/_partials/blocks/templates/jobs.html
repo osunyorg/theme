@@ -1,0 +1,30 @@
+{{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+{{- with .block.data -}}
+  {{- $options := .options -}}
+  {{- $layout := .layout | default "grid" -}}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ if .jobs }}
+          <ul class="jobs jobs--{{- $layout -}}">
+            {{ range .jobs }}
+              {{ $job := site.GetPage .path }}
+              {{ with $job }}
+                <li>
+                  {{ partial "jobs/partials/job.html" (dict
+                    "job" .
+                    "layout" $layout
+                    "options" $options
+                    "heading_level" $block.ranks.children
+                  ) }}
+                </li>
+              {{ end }}
+            {{ end }}
+          </ul>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end -}}
