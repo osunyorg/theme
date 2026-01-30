@@ -8,9 +8,9 @@
         color: $color
         padding: $spacing-3
         position: relative
-        transition: background $background-duration, color $background-duration
+        transition: background $background-duration
         [class$="-title"]
-            @include h3
+            @include article-title
             a
                 color: inherit
         [class$="-content"]
@@ -29,7 +29,7 @@
             padding-top: $spacing-4
             margin-top: auto
         a, p
-            transition: text-decoration-color .3s ease, color .3s ease
+            transition: text-decoration-color $background-duration ease, color $background-duration ease
         &:hover
             background-color: $background-hover
             &, a, p
