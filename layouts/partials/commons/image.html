@@ -82,6 +82,7 @@
               height="{{ $height }}"
               {{- if .class }} class="{{ .class }}"{{- end -}}
               {{- if $lazy }} loading="lazy"{{- end -}}
+              {{- with .fetch_priority }} fetchpriority="{{ . }}"{{- end -}}
               {{- if .itemprop }} itemprop="image"{{- end -}}>
       {{- end -}}
 

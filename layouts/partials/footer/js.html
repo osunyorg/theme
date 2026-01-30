@@ -9,10 +9,10 @@
   {{ if hugo.IsProduction }}
     {{- $styles = resources.Get "sass/_theme/dependencies/leaflet.sass" | toCSS $cssOpts | postCSS | minify | fingerprint -}}
   {{ end }}
-  <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}">
+  <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" fetchpriority="low">
 
   {{ $leaflet_js := resources.Get "js/vendors/leaflet.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
-  <script src="{{ $leaflet_js.RelPermalink }}" integrity="{{ $leaflet_js.Data.Integrity }}"></script>
+  <script src="{{ $leaflet_js.RelPermalink }}" integrity="{{ $leaflet_js.Data.Integrity }}" fetchpriority="low"></script>
 {{ end }}
 
 {{ $build_options := (dict 

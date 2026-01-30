@@ -3,6 +3,7 @@
 {{ if .image.id }}
   {{ $sizes := .sizes }}
   {{ $lazy := default true .lazy }}
+  {{ $fetch_priority := .fetch_priority }}
   {{ $crop := .crop }}
   {{ $image := partial "GetMedia" .image.id }}
   {{ $image_class := .image_class | default "" }}
@@ -24,6 +25,7 @@
         "sizes" $sizes
         "lazy" $lazy
         "crop" $crop
+        "fetch_priority" $fetch_priority
       ) }}
 
       {{ if $with_lightbox }}
