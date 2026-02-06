@@ -1,8 +1,5 @@
 {{ $options := .options }}
-{{ $heading_tag := partial "GetHeadingTag" (dict
-  "level" ( .heading_level | default 3 )
-  "attributes" "class='page-title'"
-) }}
+{{ $heading_level := .heading_level }}
 
 <ul class="pages pages--alternate">
   {{ range .pages }}
@@ -14,11 +11,11 @@
       {{ end }}
       <li>
         <article class="page {{ $image_class }}">
-          {{ $heading_tag.open }}
-            <a href="{{- .Permalink -}}">
-              {{- partial "PrepareHTML" .Title -}}
-            </a>
-          {{ $heading_tag.close }}
+            {{ partial "pages/partials/page/heading.html" (dict
+              "item" .
+              "level" $heading_level
+              "options" $options
+            ) }}
 
           {{- partial "pages/partials/page/hook-after-title.html" . -}}
 

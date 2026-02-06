@@ -1,6 +1,7 @@
 .page
     @include article($aspect-ratio: $page-media-aspect-ratio)
-    .page-title
+    .page-title,
+    .page-subtitle
         @include h4
     .more
         @include icon(arrow-right-line, after, true)
@@ -22,11 +23,15 @@
 .pages
     &--grid
         @include layout-grid
+
         .page
             .page-title
-                @include h3
+                @include article-title
                 a
                     @include icon(arrow-right-line, after, true)
                     @include hover-translate-icon(after)
+                
+            hgroup,
+            > .page-title 
                 + p
                     margin-top: $spacing-1
