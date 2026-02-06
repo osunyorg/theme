@@ -2,7 +2,7 @@
 {{ $layout := .layout | default site.Params.exhibitions.index.layout }}
 {{ $options := .options | default site.Params.exhibitions.index.options }}
 {{ $heading_level := .heading_level | default 2 }}
-{{ $with_more := eq $layout "agenda" }}
+{{ $with_more := or (eq $layout "agenda") site.Params.exhibitions.list.with_more }}
 
 <ol class="exhibitions exhibitions--{{- $layout }}">
   {{ range $exhibitions }}
