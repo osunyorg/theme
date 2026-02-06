@@ -3,8 +3,6 @@
 {{ $options := .options | default site.Params.exhibitions.index.options }}
 {{ $heading_level := .heading_level | default 2 }}
 {{ $with_more := eq $layout "agenda" }}
-{{ $with_place := or site.Params.events.index.highlight_exhibitions.current.options.place site.Params.events.index.highlight_exhibitions.future.options.place }}
-{{ $with_place = and (eq $layout "agenda") $with_place }}
 
 <ol class="exhibitions exhibitions--{{- $layout }}">
   {{ range $exhibitions }}
@@ -15,7 +13,6 @@
         "layout" $layout
         "options" $options
         "with_more" $with_more
-        "with_place" $with_place
       ) }}
     </li>
   {{ end }}
