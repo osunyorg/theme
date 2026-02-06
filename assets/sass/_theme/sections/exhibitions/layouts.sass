@@ -12,11 +12,6 @@
         @include layout-cards
     &--large
         @include layout-large
-        .exhibition
-            &-subtitle
-                @include h3
-                @include in-page-without-sidebar
-                    @include lead
     &--alternate
         @include layout-alternate
     &--agenda
@@ -46,7 +41,7 @@
                     order: -1
                     width: columns(5)
                     flex-shrink: 1
-                &-schedule
+                &-meta
                     position: absolute
                     left: 0
                     top: 0
@@ -55,7 +50,7 @@
                     @include h3
                 &-content
                     flex: 1
-                    > * + .exhibition-schedule
+                    > * + .exhibition-meta
                         margin-top: 0
                 &--with-image
                     display: flex
