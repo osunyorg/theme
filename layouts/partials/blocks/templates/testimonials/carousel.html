@@ -11,12 +11,12 @@
 
     <figure class="testimonial {{ if.photo }}with-picture{{ end }}" 
       {{ with $aria_label -}} role="figure" aria-label="{{ . }}" {{- end }}>
-      {{ $text := .text | default "" }}
-
-      {{ $is_long := gt (len $text) 150 }}
-      <blockquote {{- if $is_long }} class="is-long" {{- end }}>
-        {{- partial "PrepareHTML" $text -}}
-      </blockquote>
+      {{ with .text }}
+        {{ $is_long := gt (len .) 150 }}
+        <blockquote {{- if $is_long }} class="is-long" {{- end }}>
+          {{- partial "PrepareHTML" . -}}
+        </blockquote>
+      {{ end }}
       {{ if or .photo .author .job -}}
         <figcaption>
           {{ if .photo -}}
