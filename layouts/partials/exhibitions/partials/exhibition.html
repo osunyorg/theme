@@ -28,12 +28,10 @@
 
       {{ partial "exhibitions/partials/exhibition/federated.html" . }}
 
-      {{ if $options.dates }}
-        {{ partial "exhibitions/partials/exhibition/schedule.html" (dict 
-          "dates" .Params.dates
-          "on_two_lines" false
-        ) }}
-      {{ end }}
+      {{ partial "exhibitions/partials/exhibition/meta.html" (dict
+        "context" .
+        "options" $options
+      ) }}
 
       {{ if and $dates.status $options.status }}
         {{ partial "exhibitions/partials/exhibition/status.html" (dict 
