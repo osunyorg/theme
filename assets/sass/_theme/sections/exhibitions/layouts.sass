@@ -1,7 +1,5 @@
 .exhibitions
     @include list-reset
-    &--list
-        @include layout-list
     &--grid
         @include layout-grid(2)
         .exhibition
@@ -14,7 +12,8 @@
         @include layout-large
     &--alternate
         @include layout-alternate
-    &--agenda
+    &--agenda,
+    &--list
         > li + li
             margin-top: var(--grid-gutter)
         .exhibition
@@ -34,7 +33,9 @@
                 .media
                     order: -1
                     margin-bottom: $spacing-3
-        @include media-breakpoint-up(desktop)
+        @include in-page-with-sidebar
+            @include layout-list
+        @include in-page-without-sidebar
             .exhibition
                 padding-left: offset(3)
                 .media
