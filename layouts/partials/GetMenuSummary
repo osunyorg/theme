@@ -4,8 +4,7 @@
 {{ $text := "" }}
 
 {{ if and $page $summary.active }}
-
-
+  # Check presence of source key in page
   {{ with index $page.Params .summary.source }} 
     {{ if eq $summary.source "Summary" }}
       {{ $text = $page.Params.Summary }}
@@ -17,7 +16,7 @@
   {{ if $text }}
     {{ $text = partial "GetTruncatedText" (dict
       "text" $text
-      "length" .truncate
+      "length" $summary.truncate
     ) }}
   {{ end }}
 
