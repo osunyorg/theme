@@ -9,7 +9,6 @@ permissions:
   pull-requests: write
 
 jobs:
-  # Analyse des templates Hugo
   template-lint:
     name: Lint Hugo Templates
     runs-on: ubuntu-latest
@@ -19,15 +18,15 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
 
       - name: Install djLint
         run: pip install djlint
 
       - name: Lint layouts
-        if: hashFiles('layouts/**/*.html') != ''
         run: |
-          echo "## 🎨 Template Analysis" >> $GITHUB_STEP_SUMMARY
-          djlint layouts/ --profile=golang --lint --quiet || true
-          echo "✅ Layouts checked" >> $GITHUB_STEP_SUMMARY
+          echo "## 🎨 Template Analysis" >> message.txt
+          djlint layouts/ >> message.txt
+
+      - uses: mshick/add-pr-comment@v2
+        with:
+          message-path: message.txt
