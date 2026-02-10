@@ -17,7 +17,9 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13' 
 
       - name: Install djLint
         run: pip install djlint
@@ -27,6 +29,7 @@ jobs:
           echo "## 🎨 Template Analysis" >> message.txt
           djlint layouts/ >> message.txt
 
-      - uses: mshick/add-pr-comment@v2
+      - name: Comment pull request
+        uses: mshick/add-pr-comment@v2
         with:
           message-path: message.txt
