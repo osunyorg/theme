@@ -25,7 +25,8 @@ jobs:
 
       - name: Lint layouts
         run: |
-          echo "## 🎨 Template Analysis ```" >> report.txt
+          echo "## 🎨 Template Analysis" >> report.txt
+          echo "```" >> report.txt
           djlint layouts/ >> report.txt || true
           echo "```" >> report.txt
 
