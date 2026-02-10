@@ -27,6 +27,16 @@ jobs:
         run: |
           echo "## djLint" >> report.txt
           djlint layouts/ >> report.txt || true
+      
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 'latest'
+
+      - name: Complexity
+        run: |
+          echo "## Complexity" >> report.txt
+          ruby bin/analyze.rb >> report.txt || true
 
       - name: Comment pull request
         uses: mshick/add-pr-comment@v2
