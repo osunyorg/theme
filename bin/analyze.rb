@@ -37,6 +37,7 @@ end
 files.sort_by! { |hash| hash[:complexity] }.reverse!
 
 puts "| File | Complexity | State |"
+puts "|---|---|---|"
 files.each do |hash|
   next if hash[:complexity] < WARNING
   icon = hash[:complexity] > DANGER ? '❌' : '⚠️'
