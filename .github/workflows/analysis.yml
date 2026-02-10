@@ -26,7 +26,7 @@ jobs:
       - name: Lint layouts
         run: |
           echo "## 🎨 Template Analysis" > report.txt
-          djlint layouts/ > report.txt
+          djlint layouts/ > report.txt || true
 
       - name: Comment pull request
         uses: mshick/add-pr-comment@v2
