@@ -4,12 +4,12 @@
 {{ $text := "" }}
 
 {{ if and $page $summary.active }}
-  # Check presence of source key in page
-  {{ with index $page.Params .summary.source }} 
-    {{ if eq $summary.source "Summary" }}
-      {{ $text = $page.Params.Summary }}
-    {{ else if eq $summary.source "meta_description" }}
-      {{ $text = printf "<p>%s</p>" $page.Params.meta_description }}
+
+  {{ if eq $summary.source "Summary" }}
+    {{ $text = $page.Params.Summary }}
+  {{ else if eq $summary.source "meta_description" }}
+    {{ with index $page.Params "meta_description" }}
+      {{ $text = printf "<p>%s</p>" . }}
     {{ end }}
   {{ end }}
 
