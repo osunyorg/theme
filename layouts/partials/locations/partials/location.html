@@ -18,7 +18,7 @@
           {{ partial "commons/address" .postal_address }}
         {{ end }}
         <div class="location-description" itemprop="description">
-          {{- if and .Params.summary  $options.summary -}}
+          {{- if and .Params.summary $options.summary -}}
             {{ partial "GetRichSummary" ( dict 
               "summary" .Params.summary
               "kind" "locations"
