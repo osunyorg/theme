@@ -3,11 +3,13 @@
 {{ $text := "" }}
 
 {{ with .summary }}
+  {{ $source := .summary.source }}
   {{ if and .active $page }}
     {{ $text = index $page.Params .source }}
-
-    {{ if eq .source "meta_description" }}
-      {{ $text = printf "<p>%s</p>" $text }}
+    {{ with $text }}
+      {{ if eq $source "meta_description" }}
+        {{ $text = printf "<p>%s</p>" $text }}
+      {{ end }}
     {{ end }}
 
     {{ $text = partial "GetTruncatedText" (dict
