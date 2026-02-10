@@ -1,20 +1,25 @@
 {{ $path := .path | default "" }}
 {{ $page := site.GetPage $path }}
+{{ $summary := .summary }}
 {{ $text := "" }}
 
-{{ with .summary }}
-  {{ if and .active $page }}
-    {{ $text = index $page.Params .source }}
+{{ if and $page $summary.active }}
 
-    {{ if eq .source "meta_description" }}
-      {{ $text = printf "<p>%s</p>" $text }}
+  {{ if eq $summary.source "Summary" }}
+    {{ $text = $page.Params.Summary }}
+  {{ else if eq $summary.source "meta_description" }}
+    {{ with index $page.Params "meta_description" }}
+      {{ $text = printf "<p>%s</p>" . }}
     {{ end }}
+  {{ end }}
 
+  {{ if $text }}
     {{ $text = partial "GetTruncatedText" (dict
       "text" $text
-      "length" .truncate
+      "length" $summary.truncate
     ) }}
   {{ end }}
+
 {{ end }}
 
 {{ return $text }}
