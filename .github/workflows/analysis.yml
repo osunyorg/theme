@@ -1,8 +1,6 @@
 name: Hugo Static Analysis
 
 on: push
-  # pull_request:
-  #   types: [opened, reopened, synchronize]
 
 permissions:
   contents: read
@@ -26,10 +24,11 @@ jobs:
 
       - name: Lint layouts
         run: |
-          echo "## 🎨 Template Analysis" >> message.txt
-          djlint layouts/ >> message.txt
+          echo "## 🎨 Template Analysis" >> $GITHUB_STEP_SUMMARY
+          djlint layouts/ || $GITHUB_STEP_SUMMARY
 
       - name: Comment pull request
         uses: mshick/add-pr-comment@v2
         with:
-          message-path: message.txt
+          message: |
+            $GITHUB_STEP_SUMMARY
