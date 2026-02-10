@@ -16,15 +16,20 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Python
+<<<<<<< HEAD
         uses: actions/setup-python@v6
         with:
           python-version: '3.13' 
+=======
+        uses: actions/setup-python@v5
+>>>>>>> 662ac5ba (message)
 
       - name: Install djLint
         run: pip install djlint
 
       - name: Lint layouts
         run: |
+<<<<<<< HEAD
           echo "## djLint" >> report.txt
           djlint layouts/ >> report.txt || true
       
@@ -42,3 +47,11 @@ jobs:
         with:
           message-path: |
             report.txt
+=======
+          echo "## 🎨 Template Analysis" >> message.txt
+          djlint layouts/ >> message.txt
+
+      - uses: mshick/add-pr-comment@v2
+        with:
+          message-path: message.txt
+>>>>>>> 662ac5ba (message)
