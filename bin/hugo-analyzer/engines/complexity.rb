@@ -15,6 +15,7 @@ module HugoAnalyzer
 
       def to_s
         message = "## Complexity\n"
+        message = "Cyclomatic complexity should not be too high.\n"
         message += "| Id | State | Complexity | File |\n"
         message += "|---|---|---|---|\n"
         index = 1

@@ -1,20 +1,20 @@
 module HugoAnalyzer
   module Engines
-    class Directories < Base
+    class Lines < Base
 
-      DANGER = 20
-      WARNING = 10
+      DANGER = 50
+      WARNING = 25
 
       def to_s
-        message = "## Directories \n"
-        message = "Directories should not contain too many files, it's probably a sign of mess.\n"
-        message += "| Id | State | Files | Directory |\n"
+        message = "## Too many lines \n"
+        message = "Files should not be too long, it's a sign of mess and a difficulty for overrides.\n"
+        message += "| Id | State | Lines | Path |\n"
         message += "|---|---|---|---|\n"
         index = 1
         analyzed_files.each do |file|
-          directory = file.json[:directory]
-          next unless directory[:problem]
-          message += "| dir-#{index} | #{directory[:icon]} | #{directory[:count]} | #{file.short_path} |\n"
+          lines = file.json[:lines]
+          next unless lines[:problem]
+          message += "| lin-#{index} | #{lines[:icon]} | #{lines[:count]} | #{file.short_path} |\n"
           index += 1
         end
         message
@@ -23,11 +23,11 @@ module HugoAnalyzer
       protected 
 
       def should_analyze?(file)
-        file.directory?
+        !file.directory?
       end
 
       def analyze(file)
-        count = Dir["#{file.path}/*"].length
+        count = file.data.lines.count
         problem = count > WARNING
         icon = ICON_OK
         if count > DANGER
@@ -35,7 +35,7 @@ module HugoAnalyzer
         elsif count > WARNING
           icon = ICON_WARNING
         end
-        file.json[:directory] = {
+        file.json[:lines] = {
           count: count,
           icon: icon,
           problem: problem
@@ -44,7 +44,7 @@ module HugoAnalyzer
       end
 
       def sort!
-        @analyzed_files.sort_by! { |file| file.json[:directory][:count] }
+        @analyzed_files.sort_by! { |file| file.json[:lines][:count] }
                        .reverse!
       end
     end
