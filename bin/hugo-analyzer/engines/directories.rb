@@ -7,12 +7,14 @@ module HugoAnalyzer
 
       def to_s
         message = "## Too many files in directory \n"
-        message += "| State | Files | Directory |\n"
-        message += "|---|---|---|\n"
+        message += "| Id | State | Files | Directory |\n"
+        message += "|---|---|---|---|\n"
+        index = 1
         analyzed_files.each do |file|
           directory = file.json[:directory]
           next unless directory[:problem]
-          message += "| #{directory[:icon]} | #{directory[:count]} | #{file.short_path} |\n"
+          message += "| dir-#{index} | #{directory[:icon]} | #{directory[:count]} | #{file.short_path} |\n"
+          index += 1
         end
         message
       end

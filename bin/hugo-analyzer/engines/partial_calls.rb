@@ -6,12 +6,14 @@ module HugoAnalyzer
 
       def to_s
         message = "## Partials calls\n"
-        message += "| State | Calls | Partial |\n"
-        message += "|---|---|---|\n"
+        message += "| Id | State | Calls | Partial |\n"
+        message += "|---|---|---|---|\n"
+        index = 1
         analyzed_files.each do |file|
           calls = file.json[:calls]
           next unless calls[:problem]
-          message += "| #{calls[:icon]} | #{calls[:count]} | #{calls[:fragment]} |\n"
+          message += "| cal-#{index} | #{calls[:icon]} | #{calls[:count]} | #{calls[:fragment]} |\n"
+          index += 1
         end
         message
       end

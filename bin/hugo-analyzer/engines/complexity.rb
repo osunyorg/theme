@@ -15,12 +15,14 @@ module HugoAnalyzer
 
       def to_s
         message = "## Complexity\n"
-        message += "| State | Complexity | File |\n"
-        message += "|---|---|---|\n"
+        message += "| Id | State | Complexity | File |\n"
+        message += "|---|---|---|---|\n"
+        index = 1
         analyzed_files.each do |file|
           complexity = file.json[:complexity]
           next unless complexity[:problem]
-          message += "| #{complexity[:icon]} | #{complexity[:score]} | #{file.short_path} |\n"
+          message += "| cpl-#{index} | #{complexity[:icon]} | #{complexity[:score]} | #{file.short_path} |\n"
+          index += 1
         end
         message
       end
