@@ -6,11 +6,12 @@ module HugoAnalyzer
 
       def to_s
         message = "## Partials calls\n"
-        message += "| Calls | Partial |\n"
-        message += "|---|---|\n"
+        message += "| State | Calls | Partial |\n"
+        message += "|---|---|---|\n"
         analyzed_files.each do |file|
           calls = file.json[:calls]
-          message += "| #{calls[:count]} | #{calls[:fragment]} |\n"
+          next unless calls[:problem]
+          message += "| #{calls[:icon]} | #{calls[:count]} | #{calls[:fragment]} |\n"
         end
         message
       end
@@ -26,9 +27,21 @@ module HugoAnalyzer
         fragment = file.path.gsub(ROOT, '').gsub('.html', '')
         call = "partial \"#{fragment}"
         count = HugoAnalyzer::Utils.occurrences_in_files(call, engine.files)
+        if count == 0
+          problem = true
+          icon = HugoAnalyzer::Analyzer::ICON_DANGER
+        elsif count == 1
+          problem = true
+          icon = HugoAnalyzer::Analyzer::ICON_WARNING
+        else
+          problem = false
+          icon = HugoAnalyzer::Analyzer::ICON_OK
+        end
         file.json[:calls] = {
           fragment: fragment,
-          count: count
+          count: count,
+          problem: problem,
+          icon: icon
         }
         file
       end

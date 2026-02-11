@@ -9,6 +9,10 @@ module HugoAnalyzer
 
     LAYOUTS = './layouts/**/*'
 
+    ICON_DANGER = '❌'
+    ICON_WARNING = '⚠️'
+    ICON_OK = '✅'
+
     def self.run
       new.to_s
     end

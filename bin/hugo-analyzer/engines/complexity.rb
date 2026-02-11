@@ -16,7 +16,7 @@ module HugoAnalyzer
       def to_s
         message = "## Complexity\n"
         message += "| State | Complexity | File |\n"
-        message += "|---|---|---|"
+        message += "|---|---|---|\n"
         analyzed_files.each do |file|
           complexity = file.json[:complexity]
           next unless complexity[:problem]
@@ -41,11 +41,11 @@ module HugoAnalyzer
           score += HugoAnalyzer::Utils.occurences("#{keyword} ", file.data)
         end
         problem = score > WARNING
-        icon = '✅'
+        icon = HugoAnalyzer::Analyzer::ICON_OK
         if score > DANGER
-          icon = '❌'
+          icon = HugoAnalyzer::Analyzer::ICON_DANGER
         elsif score > WARNING
-          icon = '⚠️'
+          icon = HugoAnalyzer::Analyzer::ICON_WARNING
         end
         file.json[:complexity] = {
           score: score,
