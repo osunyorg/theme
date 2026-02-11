@@ -7,7 +7,7 @@ module HugoAnalyzer
 
       def to_s
         message = "## Directories \n"
-        message = "Directories should not contain too many files, it's probably a sign of mess.\n"
+        message += "Directories should not contain too many files, it's probably a sign of mess.\n"
         message += "| Id | State | Files | Directory |\n"
         message += "|---|---|---|---|\n"
         index = 1

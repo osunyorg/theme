@@ -6,7 +6,7 @@ module HugoAnalyzer
 
       def to_s
         message = "## Partial called\n"
-        message = "Partials called once might be in the wrong place. Partials never called might be metaprogrammed, or obsolete."
+        message += "Partials called once might be in the wrong place. Partials never called might be metaprogrammed, or obsolete.\n"
         message += "| Id | State | Calls | Partial |\n"
         message += "|---|---|---|---|\n"
         index = 1
