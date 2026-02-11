@@ -22,7 +22,7 @@ module HugoAnalyzer
         analyzed_files.each do |file|
           complexity = file.json[:complexity]
           next unless complexity[:problem]
-          message += "| cpl-#{index} | #{complexity[:icon]} | #{complexity[:score]} | #{file.short_path} |\n"
+          message += "| cpx-#{index} | #{complexity[:icon]} | #{complexity[:score]} | #{file.short_path} |\n"
           index += 1
         end
         message
