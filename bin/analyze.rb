@@ -36,10 +36,12 @@ end
 
 files.sort_by! { |hash| hash[:complexity] }.reverse!
 
-puts "| File | Complexity | State |"
+puts "| State | Complexity | File |"
 puts "|---|---|---|"
 files.each do |hash|
   next if hash[:complexity] < WARNING
   icon = hash[:complexity] > DANGER ? '❌' : '⚠️'
-  puts "| #{icon} | #{hash[:complexity]} | #{hash[:path]} |"
+  path = hash[:path].gsub('./layouts/', '')
+  complexity = hash[:complexity]
+  puts "| #{icon} | #{complexity} | #{path} |"
 end
