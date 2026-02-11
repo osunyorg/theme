@@ -41,11 +41,11 @@ module HugoAnalyzer
           score += HugoAnalyzer::Utils.occurences("#{keyword} ", file.data)
         end
         problem = score > WARNING
-        icon = HugoAnalyzer::Analyzer::ICON_OK
+        icon = ICON_OK
         if score > DANGER
-          icon = HugoAnalyzer::Analyzer::ICON_DANGER
+          icon = ICON_DANGER
         elsif score > WARNING
-          icon = HugoAnalyzer::Analyzer::ICON_WARNING
+          icon = ICON_WARNING
         end
         file.json[:complexity] = {
           score: score,

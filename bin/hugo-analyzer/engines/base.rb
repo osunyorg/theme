@@ -3,6 +3,10 @@ module HugoAnalyzer
     class Base
       attr_reader :engine
 
+      ICON_DANGER = '❌'
+      ICON_WARNING = '⚠️'
+      ICON_OK = '✅'
+
       def initialize(engine)
         @engine = engine
       end

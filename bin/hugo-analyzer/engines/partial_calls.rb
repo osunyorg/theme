@@ -29,13 +29,13 @@ module HugoAnalyzer
         count = HugoAnalyzer::Utils.occurrences_in_files(call, engine.files)
         if count == 0
           problem = true
-          icon = HugoAnalyzer::Analyzer::ICON_DANGER
+          icon = ICON_DANGER
         elsif count == 1
           problem = true
-          icon = HugoAnalyzer::Analyzer::ICON_WARNING
+          icon = ICON_WARNING
         else
           problem = false
-          icon = HugoAnalyzer::Analyzer::ICON_OK
+          icon = ICON_OK
         end
         file.json[:calls] = {
           fragment: fragment,

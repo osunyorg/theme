@@ -2,13 +2,17 @@ module HugoAnalyzer
   module Engines
     class Directories < Base
 
+      DANGER = 20
+      WARNING = 10
+
       def to_s
         message = "## Too many files in directory \n"
-        message += "| Files | Directory |\n"
-        message += "|---|---|\n"
+        message += "| State | Files | Directory |\n"
+        message += "|---|---|---|\n"
         analyzed_files.each do |file|
           directory = file.json[:directory]
-          message += "| #{directory[:count]} | #{directory[:path]} |\n"
+          next unless directory[:problem]
+          message += "| #{directory[:icon]} | #{directory[:count]} | #{file.short_path} |\n"
         end
         message
       end
@@ -16,23 +20,28 @@ module HugoAnalyzer
       protected 
 
       def should_analyze?(file)
-        !file.directory? &&
-        file.path.include?(ROOT)
+        file.directory?
       end
 
       def analyze(file)
-        fragment = file.path.gsub(ROOT, '').gsub('.html', '')
-        call = "partial \"#{fragment}"
-        count = HugoAnalyzer::Utils.occurrences_in_files(call, engine.files)
-        file.json[:calls] = {
-          fragment: fragment,
-          count: count
+        count = Dir["#{file.path}/*"].length
+        problem = count > WARNING
+        icon = ICON_OK
+        if count > DANGER
+          icon = ICON_DANGER
+        elsif count > WARNING
+          icon = ICON_WARNING
+        end
+        file.json[:directory] = {
+          count: count,
+          icon: icon,
+          problem: problem
         }
         file
       end
 
       def sort!
-        @analyzed_files.sort_by! { |file| file.json[:calls][:count] }
+        @analyzed_files.sort_by! { |file| file.json[:directory][:count] }
                        .reverse!
       end
     end
