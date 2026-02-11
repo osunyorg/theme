@@ -16,7 +16,7 @@ module HugoAnalyzer
     end
 
     def to_s
-      message = ''
+      message = "## Hugo analyzer\n"
       message += Engines::Complexity.new(self).to_s
       message += Engines::PartialCalls.new(self).to_s
       message += Engines::Directories.new(self).to_s
