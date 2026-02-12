@@ -27,6 +27,7 @@ module HugoAnalyzer
       end
 
       def analyze(file)
+        # TODO only count files
         count = Dir["#{file.path}/*"].length
         problem = count > WARNING
         icon = ICON_OK
