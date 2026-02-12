@@ -1,4 +1,4 @@
-module HugoAnalyzer
+module Hugolint
   class Utils
     def self.occurences(needle, haystack)
       return 0 if haystack.empty?

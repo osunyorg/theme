@@ -1,4 +1,4 @@
-module HugoAnalyzer
+module Hugolint
   module Engines
     class Complexity < Base
 
@@ -31,6 +31,7 @@ module HugoAnalyzer
       protected
 
       def should_analyze?(file)
+        super &&
         !file.directory?
       end
 
@@ -41,7 +42,7 @@ module HugoAnalyzer
       def analyze(file)
         score = 1
         KEYWORDS.each do |keyword|
-          score += HugoAnalyzer::Utils.occurences("#{keyword} ", file.data)
+          score += Hugolint::Utils.occurences("#{keyword} ", file.data)
         end
         problem = score > WARNING
         icon = ICON_OK

@@ -5,11 +5,13 @@ require_relative 'engines/lines'
 require_relative 'engines/partial_calls'
 require_relative 'file'
 require_relative 'utils'
+require 'yaml'
 
-module HugoAnalyzer
+module Hugolint
   class Analyzer
 
     LAYOUTS = './layouts/**/*'
+    CONFIG = '.hugolint'
 
     def self.run
       new.to_s
@@ -29,7 +31,11 @@ module HugoAnalyzer
     end
 
     def files
-      @files ||= paths.map { |path| HugoAnalyzer::File.new(path) }
+      @files ||= paths.map { |path| Hugolint::File.new(path) }
+    end
+
+    def config
+      @config ||= YAML.load_file(CONFIG)
     end
   end
 end

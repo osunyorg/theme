@@ -1,4 +1,4 @@
-module HugoAnalyzer
+module Hugolint
   class File
     attr_reader :path, :json 
 

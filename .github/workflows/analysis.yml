@@ -35,7 +35,7 @@ jobs:
 
       - name: Complexity
         run: |
-          ruby bin/hugo-analyzer.rb >> report.txt || true
+          ruby bin/hugolint.rb >> report.txt || true
 
       - name: Comment pull request
         uses: mshick/add-pr-comment@v2

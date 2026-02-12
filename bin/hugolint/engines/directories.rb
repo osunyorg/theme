@@ -1,4 +1,4 @@
-module HugoAnalyzer
+module Hugolint
   module Engines
     class Directories < Base
 
@@ -23,6 +23,7 @@ module HugoAnalyzer
       protected 
 
       def should_analyze?(file)
+        super &&
         file.directory?
       end
 

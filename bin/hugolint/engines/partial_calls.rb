@@ -1,4 +1,4 @@
-module HugoAnalyzer
+module Hugolint
   module Engines
     class PartialCalls < Base
 
@@ -22,6 +22,7 @@ module HugoAnalyzer
       protected 
 
       def should_analyze?(file)
+        super &&
         !file.directory? &&
         file.path.include?(ROOT)
       end
@@ -29,7 +30,7 @@ module HugoAnalyzer
       def analyze(file)
         fragment = file.path.gsub(ROOT, '').gsub('.html', '')
         call = "partial \"#{fragment}"
-        count = HugoAnalyzer::Utils.occurrences_in_files(call, engine.files)
+        count = Hugolint::Utils.occurrences_in_files(call, analyzer.files)
         if count == 0
           problem = true
           icon = ICON_DANGER
