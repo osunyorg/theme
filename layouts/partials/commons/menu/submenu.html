@@ -1,0 +1,17 @@
+{{ $submenu := partial "commons/menu/ul" (dict
+    "items" .items
+    "level" .level
+    "options" .options
+    "context" .context
+  ) }}
+{{- if .has_dropdown }}
+  {{ partial "commons/menu/dropdown" (dict
+      "parent" .parent
+      "level" .level
+      "options" .options
+      "submenu" $submenu
+      "context" .context
+    ) }}
+{{- else -}}
+  {{- $submenu -}}
+{{- end -}}

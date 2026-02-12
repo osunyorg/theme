@@ -1,0 +1,12 @@
+{{ $kind := .kind }}
+{{ $context := .context }}
+{{/* Alors là, il faut au moins expliquer, parce que c'est très chelou: si c'est le menu légal le i18n va dans le footer? */}}
+{{ if eq $kind "legal" }}
+  {{ $kind = "footer" }}
+{{ end }}
+{{ if in site.Params.i18n.positions $kind }}
+  {{ partial "commons/i18n.html" (dict
+    "context" $context
+    "position" $kind
+  ) }}
+{{ end }}
