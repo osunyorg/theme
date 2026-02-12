@@ -1,6 +1,6 @@
 module Hugolint
   module Engines
-    class PartialCalls < Base
+    class Calls < Base
 
       ROOT = './layouts/partials/'
 

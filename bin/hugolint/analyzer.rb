@@ -2,7 +2,7 @@ require_relative 'engines/base'
 require_relative 'engines/complexity'
 require_relative 'engines/directories'
 require_relative 'engines/lines'
-require_relative 'engines/partial_calls'
+require_relative 'engines/calls'
 require_relative 'file'
 require_relative 'utils'
 require 'yaml'
@@ -20,7 +20,7 @@ module Hugolint
     def to_s
       message = "## Hugo analyzer\n"
       message += Engines::Directories.new(self).to_s
-      message += Engines::PartialCalls.new(self).to_s
+      message += Engines::Calls.new(self).to_s
       message += Engines::Lines.new(self).to_s
       message += Engines::Complexity.new(self).to_s
       message
