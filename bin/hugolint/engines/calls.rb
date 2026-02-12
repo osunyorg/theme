@@ -7,13 +7,13 @@ module Hugolint
       def to_s
         message = "### Partials calls\n"
         message += "Partials called once might be in the wrong place. Partials never called might be metaprogrammed, or obsolete.\n"
-        message += "| Id | State | Calls | Partial |\n"
-        message += "|---|---|---|---|\n"
+        message += "| Id | State | Calls | Fragment | Partial |\n"
+        message += "|---|---|---|---|---|\n"
         index = 1
         analyzed_files.each do |file|
           calls = file.json[:calls]
           next unless calls[:problem]
-          message += "| cal-#{index} | #{calls[:icon]} | #{calls[:count]} | #{calls[:fragment]} |\n"
+          message += "| cal-#{index} | #{calls[:icon]} | #{calls[:count]} | #{calls[:fragment]} | #{file.short_path} |\n"
           index += 1
         end
         message
