@@ -50,12 +50,12 @@
 {{- if or (ne .stop 1) (and (eq .stop 1) (ne .kind "blank")) -}}
   <li{{ with $item_class }} class="{{ . }}"{{ end }}>
     {{ partial "commons/menu/item/title" (dict
-        "item" $item
-        "link_class" $link_class
-        "attributes" $attributes
-        "title_attribute" $title_attribute
-        "level_options" .level_options
-      ) }}
+      "item" $item
+      "link_class" $link_class
+      "attributes" $attributes
+      "title_attribute" $title_attribute
+      "level_options" .level_options
+    ) }}
     {{- if and (ne .stop .level) $has_children -}}
       {{ partial "commons/menu/item/children" (dict 
         "items" $item.children

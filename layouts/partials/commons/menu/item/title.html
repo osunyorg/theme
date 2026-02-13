@@ -1,5 +1,5 @@
 {{- if ne .item.kind "blank" -}}
-  <a href="{{ .item.target }}" {{ with .link_class }} class="{{ . }}" {{ end }} {{ safeHTMLAttr .attributes }} {{ safeHTMLAttr .title_attribute }}>
+  <a href="{{ .item.target }}" {{ with .link_class }} class="{{ . }}"{{ end }} {{ safeHTMLAttr .attributes }} {{ safeHTMLAttr .title_attribute }}>
     {{ .item.title | markdownify }}
   </a>
   {{ if .level_options }}
@@ -12,5 +12,7 @@
   {{ if gt .level 1 }}
     {{ $link_class = printf "%s disabled" .link_class }}
   {{ end }}
-  <span {{ with .link_class }}class="{{ . }}"{{ end }} {{ safeHTMLAttr .attributes }}>{{ .item.title | markdownify }}</span>
+  <span {{ with .link_class }}class="{{ . }}"{{ end }} {{ safeHTMLAttr .attributes }}>
+    {{ .item.title | markdownify }}
+  </span>
 {{- end -}}
