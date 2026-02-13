@@ -2,41 +2,29 @@
 {{- $context := .context -}}
 {{- $is_active := eq $context.RelPermalink $item.target -}}
 {{- $item_class := "" -}}
-
-{{/* C'est quoi ce cas particulier, sur un menu qui n'existe plus ? */}}
-{{ if eq .kind "social" }}
-  {{- $item_class = printf $item.title | lower -}}
-{{ end }}
-
 {{ with .level_options }}
   {{ if .summary.active }}
     {{ $item_class = printf "%s with-summary" $item_class }}
   {{ end }}
 {{ end }}
-
-{{/* La condition est incompréhensible, il faut clarifier avec une variable */}}
-{{/* Je ne comprends pas ce qui se passe (ou pas) seulement au niveau 1 */}}
-{{- if or (ne .stop 1) (and (eq .stop 1) (ne .kind "blank")) -}}
-  {{ if $item.children }}
-    {{ partial "commons/menu/item/with-children" (dict
-      "item" $item
-      "is_active" $is_active
-      "item_class" $item_class
-      "level" .level
-      "level_options" .level_options
-      "options" .options
-      "dropdown" .dropdown
-      "context" .context
-    ) }}
-  {{ else }}
-    {{ partial "commons/menu/item/without-children" (dict
-      "item" $item
-      "is_active" $is_active
-      "item_class" $item_class
-      "level" .level
-      "level_options" .level_options
-      "context" .context
-    ) }}
-  {{ end }}
+{{ if $item.children }}
+  {{ partial "commons/menu/item/with-children" (dict
+    "item" $item
+    "is_active" $is_active
+    "item_class" $item_class
+    "level" .level
+    "level_options" .level_options
+    "options" .options
+    "dropdown" .dropdown
+    "context" .context
+  ) }}
+{{ else }}
+  {{ partial "commons/menu/item/without-children" (dict
+    "item" $item
+    "is_active" $is_active
+    "item_class" $item_class
+    "level" .level
+    "level_options" .level_options
+    "context" .context
+  ) }}
 {{ end }}
-
