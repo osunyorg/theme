@@ -1,4 +1,5 @@
 {{ $level_options := index .options (printf "level_%d" .level) }}
+
 {{ if $level_options.title.active }}
   {{ partial "commons/menu/item/children/dropdown/with-title" (dict
     "parent" .parent
