@@ -2,8 +2,8 @@ module Hugolint
   module Engines
     class Lines < Base
 
-      DANGER = 50
-      WARNING = 25
+      DANGER = 70
+      WARNING = 35
 
       def to_s
         message = "### Too many lines \n"
