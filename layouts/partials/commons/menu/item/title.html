@@ -9,6 +9,7 @@
     ) }}
   {{ end }}
 {{- else -}}
+  {{/* On disable pas les blanks au niveau 1 ? */}}
   {{ if gt .level 1 }}
     {{ $link_class = printf "%s disabled" .link_class }}
   {{ end }}
