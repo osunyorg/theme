@@ -76,7 +76,7 @@ params:
           truncate: 125
   breadcrumb:
     extendable: false
-    position: hero-start #  hero-start |  hero-end | after-hero | none
+    position: hero-start # hero-start | hero-end | after-hero | after-hero-title | none
   design:
     force_full_width: false
   summary:
@@ -145,38 +145,40 @@ params:
     # sitemap:
     #   ignore_children: true
     index:
-      archives: true
+      archives: false
       group_by_date: "Monday 2 January 2006"
       highlight_exhibitions:
         active: true
         current:
           layout: agenda
           options:
-            dates: true
             categories: true
+            dates: true
             image: true
+            place: true
             status: false
             subtitle: true
             summary: true
         future:
           layout: agenda
           options:
-            dates: true
             categories: true
+            dates: true
             image: false
+            place: true
             status: false
             subtitle: true
             summary: true
       layout: agenda # grid | list
       options:
-        dates: false
         categories: true
+        dates: false
         image: true
+        place: false
         status: false
         subtitle: true
         summary: true
-        place: false
-      per_page: 10
+      per_page: 20
       sticky_dates: true
       truncate_description: 200 # Set to 0 to disable truncate
       years: true
@@ -226,6 +228,7 @@ params:
         status: false
         subtitle: true
         summary: true
+        place: true
       truncate_description: 200 # Set to 0 to disable truncate
     single:
       calendar_links: false
@@ -400,11 +403,6 @@ params:
         summary: false
       truncate_description: 200 # Set to 0 to disable truncate
     single:
-      options:
-        diploma_certification: true
-        logo: true
-        website_link: true
-        registration_link: false
       children:
         options:
           button: false
@@ -414,6 +412,13 @@ params:
           image: false
           logo: false
           summary: false
+      date_format: ":date_long"
+      options:
+        diploma_certification: true
+        logo: true
+        registration_link: false
+        updated_at: true
+        website_link: true
     # share_links: # Optional
     #   enabled: true
     #   email: false

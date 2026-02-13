@@ -1,10 +1,10 @@
 .events
     &--list
         > li
-            margin-bottom: $spacing-3
-            padding-bottom: $spacing-3
             &:where(:not(:last-child))
                 border-bottom: var(--border-width) solid var(--color-border)
+                margin-bottom: $spacing-3
+                padding-bottom: $spacing-3
         
         .event
             display: flex
@@ -95,9 +95,6 @@
             &-schedule
                 @include meta
                 margin-top: $spacing-2
-            &-content
-                .event-title, hgroup
-                    @include h3
             &-description
                 margin-top: $spacing-2
             .media
@@ -262,6 +259,9 @@
                         @include meta
                 &--child
                     padding-left: offset(1)
+                    .event-timeslot
+                        padding-right: $spacing-2
+                        width: offset(1)
                     .event-hours
                         time + time
                             display: block
