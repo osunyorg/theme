@@ -8,9 +8,8 @@
 {{ $options = index site.Params.menu $kind }}
 {{ $level_options := index $options (printf "level_%d" $level) }}
 {{ $context := .context }}
-
 <ul class="{{ with $level }}nav-level-{{ . }}{{ end }} {{ .class }}">
-  {{ range $items -}}
+  {{ range $items }}
     {{ partial "commons/menu/item" (dict
       "item" .
       "kind" $kind
@@ -21,7 +20,7 @@
       "stop" $stop
       "context" $context
     ) }}
-  {{ end -}}
+  {{ end }}
   {{ partial "commons/menu/search" (dict
     "kind" $kind
     "context" $context
