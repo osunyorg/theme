@@ -47,6 +47,8 @@
   {{ end }}
 {{ end }}
 
+{{/* La condition est incompréhensible, il faut clarifier avec une variable */}}
+{{/* Je ne comprends pas ce qui se passe (ou pas) seulement au niveau 1 */}}
 {{- if or (ne .stop 1) (and (eq .stop 1) (ne .kind "blank")) -}}
   <li{{ with $item_class }} class="{{ . }}"{{ end }}>
     {{ partial "commons/menu/item/title" (dict
