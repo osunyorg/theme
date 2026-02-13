@@ -1,45 +1,12 @@
 {{- $item := .item -}}
 {{- $context := .context -}}
-{{- $active := eq $context.RelPermalink $item.target -}}
+{{- $is_active := eq $context.RelPermalink $item.target -}}
 {{- $item_class := "" -}}
-{{- $link_class := "" -}}
-{{- $attributes := "" -}}
-{{- $title_attribute := printf "title=\"%s\"" $item.title -}}
-{{- $has_dropdown := false -}}
-{{- $has_children := gt (len $item.children) 0 -}}
-
-{{ if $active }}
-  {{ $link_class = "active" }}
-{{ end }}
 
 {{/* C'est quoi ce cas particulier, sur un menu qui n'existe plus ? */}}
 {{ if eq .kind "social" }}
   {{- $item_class = printf $item.title | lower -}}
 {{ end }}
-
-{{- if $has_children -}}
-  {{- $item_class = printf "%s has-children" $item_class -}}
-  {{ range $item.children -}}
-    {{/* Il y a un défaut, ça ne regarde pas dans les enfants des enfants */}}
-    {{- if eq $context.RelPermalink .target }}
-      {{ $link_class = printf "%s %s" $link_class "has-children-active" }}
-    {{ end }}
-  {{ end -}}
-{{- end -}}
-
-{{/* Là il y a un problème, si ça se fait uniquement au niveau 1, il ne faut pas le calculer dans un partiel récursif */}}
-{{- if and $has_children .dropdown (eq .level 1) -}}
-  {{- $has_dropdown = true -}}
-  {{/* On peut précalculer ça, ce sera plus rapide à compiler */}}
-  {{- $slug := anchorize $item.title -}}
-  {{- $attributes = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" $slug -}}
-{{- end -}}
-
-{{- if $item.new_tab -}}
-  {{- $external_link := i18n "commons.link.blank" -}}
-  {{- $title_attribute = printf "title=\"%s - %s\"" $item.title $external_link -}}
-  {{- $attributes = " target=\"_blank\" rel=\"noreferrer\"" -}}
-{{- end -}}
 
 {{ with .level_options }}
   {{ if .summary.active }}
@@ -50,23 +17,26 @@
 {{/* La condition est incompréhensible, il faut clarifier avec une variable */}}
 {{/* Je ne comprends pas ce qui se passe (ou pas) seulement au niveau 1 */}}
 {{- if or (ne .stop 1) (and (eq .stop 1) (ne .kind "blank")) -}}
-  <li{{ with $item_class }} class="{{ . }}"{{ end }}>
-    {{ partial "commons/menu/item/title" (dict
+  {{ if $item.children }}
+    {{ partial "commons/menu/item/with-children" (dict
       "item" $item
-      "link_class" $link_class
-      "attributes" $attributes
-      "title_attribute" $title_attribute
+      "is_active" $is_active
+      "item_class" $item_class
+      "level" .level
       "level_options" .level_options
+      "options" .options
+      "dropdown" .dropdown
+      "context" .context
     ) }}
-    {{- if and (ne .stop .level) $has_children -}}
-      {{ partial "commons/menu/item/children" (dict 
-        "items" $item.children
-        "parent" $item
-        "level" (add .level 1)
-        "options" .options
-        "context" $context
-        "has_dropdown" $has_dropdown
-      )}}
-    {{- end -}}
-  </li>
-{{- end -}}
+  {{ else }}
+    {{ partial "commons/menu/item/without-children" (dict
+      "item" $item
+      "is_active" $is_active
+      "item_class" $item_class
+      "level" .level
+      "level_options" .level_options
+      "context" .context
+    ) }}
+  {{ end }}
+{{ end }}
+

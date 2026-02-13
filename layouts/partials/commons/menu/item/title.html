@@ -1,5 +1,27 @@
-{{- if ne .item.kind "blank" -}}
-  <a href="{{ .item.target }}" {{ with .link_class }} class="{{ . }}"{{ end }} {{ safeHTMLAttr .attributes }} {{ safeHTMLAttr .title_attribute }}>
+{{- $attributes := .attributes -}}
+{{- $link_class := .link_class -}}
+{{- $title_attribute := printf "title=\"%s\"" .item.title -}}
+
+{{ if .is_active }}
+  {{ $link_class = "active" }}
+{{ end }}
+
+{{ if .item.new_tab -}}
+  {{ $external_link := i18n "commons.link.blank" -}}
+  {{ $attributes = " target=\"_blank\" rel=\"noreferrer\"" }}
+  {{ $title_attribute = printf "title=\"%s - %s\"" .item.title $external_link }}
+{{ end }}
+
+{{- if eq .item.kind "blank" -}}
+  {{/* On disable pas les blanks au niveau 1 ? */}}
+  {{ if gt .level 1 }}
+    {{ $link_class = printf "%s disabled" $link_class }}
+  {{ end }}
+  <span {{ with $link_class }}class="{{ . }}"{{ end }} {{ safeHTMLAttr $attributes }}>
+    {{ .item.title | markdownify }}
+  </span>
+{{- else -}}
+  <a href="{{ .item.target }}" {{ with $link_class }} class="{{ . }}"{{ end }} {{ safeHTMLAttr $attributes }} {{ safeHTMLAttr $title_attribute }}>
     {{ .item.title | markdownify }}
   </a>
   {{ if .level_options }}
@@ -8,12 +30,4 @@
       "path" .path
     ) }}
   {{ end }}
-{{- else -}}
-  {{/* On disable pas les blanks au niveau 1 ? */}}
-  {{ if gt .level 1 }}
-    {{ $link_class = printf "%s disabled" .link_class }}
-  {{ end }}
-  <span {{ with .link_class }}class="{{ . }}"{{ end }} {{ safeHTMLAttr .attributes }}>
-    {{ .item.title | markdownify }}
-  </span>
 {{- end -}}

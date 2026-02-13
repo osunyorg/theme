@@ -1,14 +1,13 @@
 {{ $kind := .kind }}
 {{ $dropdown := .dropdown }}
-{{ $items := .items }}
-{{ $context := .context }}
 {{ $options := .options }}
 {{ $level := .level }}
 {{ $stop := .stop }}
 {{ $menu := partial "GetMenu" $kind }}
-{{ $items = $menu.items }}
+{{ $items := $menu.items }}
 {{ $options = index site.Params.menu $kind }}
 {{ $level_options := index $options (printf "level_%d" $level) }}
+{{ $context := .context }}
 
 <ul class="{{ with $level }}nav-level-{{ . }}{{ end }} {{ .class }}">
   {{ range $items -}}
@@ -25,6 +24,7 @@
   {{ end -}}
   {{ partial "commons/menu/search" (dict
     "kind" $kind
+    "context" $context
   ) }}
   {{ partial "commons/menu/i18n" (dict
     "kind" $kind

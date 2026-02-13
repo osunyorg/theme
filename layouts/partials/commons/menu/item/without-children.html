@@ -1,0 +1,11 @@
+<li{{ with .item_class }} class="{{ . }}"{{ end }}>
+  {{ partial "commons/menu/item/title" (dict
+    "item" .item
+    "is_active" .is_active
+    "link_class" .link_class
+    "attributes" .attributes
+    "title_attribute" .title_attribute
+    "level_options" .level_options
+    "context" .context
+  ) }}
+</li>
