@@ -31,10 +31,13 @@ module Hugolint
         fragment = file.path.gsub(ROOT, '').gsub('.html', '')
         call = "partial \"#{fragment}"
         count = Hugolint::Utils.occurrences_in_files(call, analyzer.files)
+        # Les fichiers ont le droit d'être utilisés 1 seule fois, 
+        # si et seulement si ce ne sont pas des helpers à la racine
+        is_helper = !fragment.include?('/')
         if count == 0
           problem = true
           icon = ICON_DANGER
-        elsif count == 1
+        elsif count == 1 && is_helper
           problem = true
           icon = ICON_WARNING
         else
