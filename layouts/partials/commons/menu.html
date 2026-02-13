@@ -12,7 +12,7 @@
 
 <ul class="{{ with $level }}nav-level-{{ . }}{{ end }} {{ .class }}">
   {{ range $items -}}
-    {{ partial "commons/menu/li" (dict
+    {{ partial "commons/menu/item" (dict
       "item" .
       "kind" $kind
       "dropdown" $dropdown
