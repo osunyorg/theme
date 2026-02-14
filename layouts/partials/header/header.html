@@ -8,7 +8,7 @@
   {{ if $upper_menu.items }}
     <nav class="upper-menu" aria-label="{{ i18n "commons.menu.upper" }}">
       <div class="container">
-        {{ partial "commons/menu.html" (dict
+        {{ partial "commons/menu" (dict
           "context" .
           "kind" "upper-menu"
           "level" 1
@@ -23,7 +23,7 @@
       {{ if $primary.items }}
         {{ partial "header/button.html" }}
         <div class="menu" id="navigation">
-          {{ partial "commons/menu.html" (dict
+          {{ partial "commons/menu" (dict
             "kind" "primary"
             "dropdown" true
             "level" 1
