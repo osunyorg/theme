@@ -1,0 +1,44 @@
+<div class="d-cross"></div>
+
+<style>
+  .d-cross {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 2px;
+    background: gray;
+    display: none;
+    pointer-events: none;
+    z-index: 100;
+  }
+  .d-cross.is-visible {
+    display: block;
+  }
+  .d-cross:after, .d-cross:before{
+    content: '';
+    position: absolute;
+    background: red;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 1px;
+  }
+  .d-cross:after{
+    height: 200vh;
+  }
+  .d-cross:before{
+    width: 200vw;
+  }
+</style>
+
+<script>
+  window.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'g') {
+      document.querySelector('.d-cross').classList.toggle('is-visible');
+    }
+  });
+  window.addEventListener('pointermove', e => {
+    document.querySelector('.d-cross').style.left = e.clientX + "px";
+    document.querySelector('.d-cross').style.top = e.clientY + "px";
+  });
+</script>

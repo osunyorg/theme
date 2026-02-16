@@ -1,0 +1,85 @@
+<div class="d-help">
+  <a href="#" class="d-help__toggle">
+    <img src="/osuny/icon.png" alt="Aide Osuny" class="d-help__icon" />
+  </a>
+  <div class="d-help__content" id="help">
+    <table>
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Raccourci</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Afficher l'outil de débogage</td>
+          <td>Ctrl + d</td>
+        </tr>
+        <tr>
+          <td>Afficher la grille</td>
+          <td>Ctrl + g</td>
+        </tr>
+        <tr>
+          <td>Passer d’une page pleine largeur à une page avec barre latérale, et inversement</td>
+          <td>Ctrl + w</td>
+        </tr>
+        <tr>
+          <td>Contrôler les dimensions des images chargées</td>
+          <td>Ctrl + i</td>
+        </tr>
+        <tr>
+          <td>Ouvre la page en production, si dans config.yaml debug.productionUrl est spécifié</td>
+          <td>Ctrl + p</td>
+        </tr>
+        <tr>
+          <td>Afficher les informations d'un bloc</td>
+          <td>Ctrl + b</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .d-help {
+    bottom: 10px;
+    left: 10px;
+    position: fixed;
+    width: 40px;
+    z-index: 9999999999;
+  }
+  .d-help__content {
+    display: none;
+    background: var(--color-background-alt);
+    border-radius: 24px;
+    position: fixed;
+    width: 600px;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px 20px 60px;
+  }
+  .d-help--active .d-help__content {
+    display: block;
+  }
+  .d-help__icon {
+    bottom: 10px;
+    left: 10px;
+    position: fixed;
+    width: 40px;
+    z-index: 1;
+  }
+</style>
+
+<script>
+  window.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'd') {
+      toggleDebug();
+    }
+  });  document.querySelector('.d-help__toggle').addEventListener('click', e => {
+    e.preventDefault()
+    toggleDebug()
+  });
+  function toggleDebug() {
+    document.querySelector('.d-help').classList.toggle('d-help--active')
+  }
+</script>

@@ -1,0 +1,74 @@
+<div class="d-spacing">
+  <div><span>1 (8px) </span></div>
+  <div><span>2 (12px) </span></div>
+  <div><span>3 (24px) </span></div>
+  <div><span>4 (48px) </span></div>
+  <div><span>5 (64px) </span></div>
+  <div><span>6 (128px) </span></div>
+  <div><span>7 (256px) </span></div>
+</div>
+
+<style>
+  .d-spacing {
+    display: none;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    opacity: 0.5;
+    font-family: sans-serif;
+    font-size: 12px;
+  }
+  .d-spacing.is-visible {
+    display: block;
+  }
+  .d-spacing > div {
+    position: relative;
+  }
+  .d-spacing > div span {
+    position: absolute;
+    color: var(--color-text);
+  }
+  .d-spacing > div {
+    width: 100%;
+    border-bottom: 1px solid var(--color-text);;
+    display: block;
+    color: white;
+    text-indent: 5px;
+  }
+  .d-spacing > div:nth-child(1){
+    border-top: 1px solid white;
+    height: var(--spacing-1);
+  }
+  .d-spacing > div:nth-child(1) span{
+    margin-top: -10px;
+  }
+  .d-spacing > div:nth-child(2){
+    height: var(--spacing-2);
+  }
+  .d-spacing > div:nth-child(3){
+    height: var(--spacing-3);
+  }
+  .d-spacing > div:nth-child(4){
+    height: var(--spacing-4);
+  }
+  .d-spacing > div:nth-child(5){
+    height: var(--spacing-5);
+  }
+  .d-spacing > div:nth-child(6){
+    height: var(--spacing-6);
+  }
+  .d-spacing > div:nth-child(7){
+    height: var(--spacing-7);
+  }
+</style>
+
+<script>
+  window.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'g') {
+      document.querySelector('.d-spacing').classList.toggle('is-visible');
+    }
+  });
+</script>
