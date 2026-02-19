@@ -1,0 +1,49 @@
+{{ $options := .options }}
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+  "level" ( .heading_level | default 3 )
+  "attributes" "class='page-title'"
+) }}
+
+<ul class="pages pages--cards">
+  {{ range .pages }}
+    {{ $page := site.GetPage .path }}
+    {{ with $page }}
+      <li>
+        <article class="page">
+          <div class="page-content">
+            {{ $heading_tag.open }}
+              <a href="{{- .Permalink -}}">
+                {{- partial "PrepareHTML" .Title -}}
+              </a>
+            {{ $heading_tag.close }}
+
+            {{- partial "pages/partials/page/hook-after-title.html" . -}}
+
+            {{ if and $options.summary .Params.summary }}
+              {{ partial "GetRichSummary" (dict 
+                "summary" .Params.summary
+                "kind" "pages"
+              ) }}
+            {{ end }}
+
+            {{ if and $options.categories .Params.taxonomies }}
+              {{ partial "commons/categories.html" (dict
+                "context" .
+                "kind" "page"
+              ) }}
+            {{ end }}
+
+            {{ partial "commons/item/more.html" . }}
+          </div>
+
+          {{ if $options.image }}
+            {{ partial "pages/partials/page/media.html" (dict 
+              "image" .Params.image
+              "layout" "cards"
+            ) }}
+          {{ end }}
+        </article>
+      </li>
+    {{- end -}}
+  {{ end }}
+</ul>
