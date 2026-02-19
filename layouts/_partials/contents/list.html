@@ -1,0 +1,43 @@
+{{ $context := .context }}
+{{ $contents := .contents }}
+{{ $index_offset := .index_offset | default 0 }}
+
+{{- if $contents -}}
+
+  {{ $collapsed_started := false }}
+  {{ $is_last_content := false }}
+
+  <div class="blocks">
+    {{- range $index, $content := $contents -}}
+      {{ $index = add $index $index_offset }}
+      {{ if and (eq .kind "block") (not (in site.Params.blocks.ignored .html_class) ) }}
+        {{ $is_last_content := eq (add $index 1) (len $contents) }}
+        {{ $is_title := eq .template "title" }}
+        {{ $is_layout_collapsed := eq .data.layout "collapsed" }}
+        {{ $template := printf "blocks/templates/%s.html" .template }}
+
+        {{ if and $is_title $collapsed_started }}
+          {{ $collapsed_started = false }}
+          </div>
+        {{ end }}
+
+        {{ if templates.Exists ( printf "_partials/%s" $template ) }}
+          {{ partial $template (dict
+            "block" $content
+            "context" $context
+            "index" $index
+          ) }}
+        {{ end }}
+
+        {{ if and $is_title $is_layout_collapsed }}
+          {{ $collapsed_started = true }}
+          <div class="collapse" id="collapse-{{- .slug -}}">
+        {{ end }}
+
+        {{ if and $collapsed_started $is_last_content }}
+          </div>
+        {{ end }}
+      {{ end }}
+    {{- end -}}
+  </div>
+{{- end -}}
