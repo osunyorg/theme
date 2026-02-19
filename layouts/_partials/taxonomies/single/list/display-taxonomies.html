@@ -1,0 +1,22 @@
+{{ $context := .context }}
+<ul class="taxonomies-single {{ .type }}-taxonomies with-label" aria-label="{{ i18n "categories.label" }}">
+  {{ range .taxonomies }}
+    {{ $taxonomy := site.GetPage .path }}
+    {{ if .categories }}
+      <li class="terms
+        {{- if .slug }} taxonomy-{{- .slug }} {{ end -}}
+        {{- with $taxonomy.Params.bodyclass -}}{{ . }}{{- end }}">
+        <span class="taxonomy-title">{{ .name }}</span>
+        {{ with .categories }}
+          {{ $categories := partial "GetObjectsFromPathSlice" . }}
+          {{ partial "commons/categories.html" (dict 
+            "kind" $context.Kind
+            "context" $context
+            "categories" $categories
+            "class" "taxonomy-children"
+          ) }}
+        {{ end }}
+      </li>
+    {{ end }}
+  {{ end }}
+</ul>

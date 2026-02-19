@@ -1,5 +1,5 @@
 <ul class="post-infos">
-  {{ $taxonomies_position := partial "GetTaxonomiesPosition" . }}
+  {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" . }}
   {{ if ne $taxonomies_position "hero" }}
     {{ if .Params.posts_categories }}
       <li>

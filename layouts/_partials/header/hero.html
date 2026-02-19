@@ -60,7 +60,7 @@
           {{ partial .hero_text_complement .context }}
         {{ end }}
 
-        {{ $taxonomies_position := partial "GetTaxonomiesPosition" .context }}
+        {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" .context }}
         {{ if and .context.Params.taxonomies (eq $taxonomies_position "hero") }}
           {{ partial "taxonomies/single/list.html" .context }}
         {{ end }}
