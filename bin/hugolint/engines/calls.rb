@@ -2,7 +2,7 @@ module Hugolint
   module Engines
     class Calls < Base
 
-      ROOT = './layouts/partials/'
+      ROOT = './_layouts/partials/'
 
       def to_s
         message = "### Partials calls\n"
