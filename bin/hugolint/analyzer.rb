@@ -10,7 +10,7 @@ require 'yaml'
 module Hugolint
   class Analyzer
 
-    LAYOUTS = './_layouts/**/*'
+    LAYOUTS = './layouts/**/*'
     CONFIG = '.hugolint'
 
     def self.run
