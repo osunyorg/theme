@@ -1,0 +1,402 @@
+<div class="d-help">
+  <a href="#" class="d-help__toggle">
+    <img src="/osuny/icon.png" alt="Aide Osuny" class="d-help__icon" />
+  </a>
+  <div class="d-help__content" id="help">
+    <table>
+      <thead>
+        <tr>
+          <th>Action</th>
+          <th>Raccourci</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Afficher l'outil de débogage</td>
+          <td>Ctrl + d</td>
+        </tr>
+        <tr>
+          <td>Afficher la grille</td>
+          <td>Ctrl + g</td>
+        </tr>
+        <tr>
+          <td>Passer d’une page pleine largeur à une page avec barre latérale, et inversement</td>
+          <td>Ctrl + w</td>
+        </tr>
+        <tr>
+          <td>Contrôler les dimensions des images chargées</td>
+          <td>Ctrl + i</td>
+        </tr>
+        <tr>
+          <td>Ouvre la page en production, si dans config.yaml debug.productionUrl est spécifié</td>
+          <td>Ctrl + p</td>
+        </tr>
+        <tr>
+          <td>Afficher les informations d'un bloc</td>
+          <td>Ctrl + b</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="d-grid">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+  <div>5</div>
+  <div>6</div>
+  <div>7</div>
+  <div>8</div>
+  <div>9</div>
+  <div>10</div>
+  <div>11</div>
+  <div>12</div>
+</div>
+
+<div class="d-spacing">
+  <div><span>1 (8px) </span></div>
+  <div><span>2 (12px) </span></div>
+  <div><span>3 (24px) </span></div>
+  <div><span>4 (48px) </span></div>
+  <div><span>5 (64px) </span></div>
+  <div><span>6 (128px) </span></div>
+  <div><span>7 (256px) </span></div>
+</div>
+
+<div class="d-cross"></div>
+<style>
+  .d-help {
+    bottom: 10px;
+    left: 10px;
+    position: fixed;
+    width: 40px;
+    z-index: 9999999999;
+  }
+  .d-help__content {
+    display: none;
+    background: var(--color-background-alt);
+    border-radius: 24px;
+    position: fixed;
+    width: 600px;
+    bottom: 10px;
+    left: 10px;
+    padding: 10px 20px 60px;
+  }
+  .d-help--active .d-help__content {
+    display: block;
+  }
+  .d-help__icon {
+    bottom: 10px;
+    left: 10px;
+    position: fixed;
+    width: 40px;
+    z-index: 1;
+  }
+  .d-grid {
+    bottom: 0;
+    display: none;
+    grid-gap: var(--grid-gutter);
+    grid-template-columns: repeat(12, 1fr);
+    opacity: 0.2;
+    mix-blend-mode: multiply;
+    padding: 0 var(--grid-gutter);
+    pointer-events: none;
+    position: fixed;
+    margin: auto;
+    max-width: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--grid-max-width);
+    z-index: 9999;
+    font-family: sans-serif;
+    font-size: 12px;
+  }
+  .d-grid.is-visible {
+    display: grid;
+  }
+  .d-grid > div {
+    background: fuchsia;
+    text-align: center;
+  }
+  .d-spacing {
+    display: none;
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    opacity: 0.5;
+    font-family: sans-serif;
+    font-size: 12px;
+  }
+  .d-spacing.is-visible {
+    display: block;
+  }
+  .d-spacing > div {
+    position: relative;
+  }
+  .d-spacing > div span {
+    position: absolute;
+    color: var(--color-text);
+  }
+  .d-spacing > div {
+    width: 100%;
+    border-bottom: 1px solid var(--color-text);;
+    display: block;
+    color: white;
+    text-indent: 5px;
+  }
+  .d-spacing > div:nth-child(1){
+    border-top: 1px solid white;
+    height: var(--spacing-1);
+  }
+  .d-spacing > div:nth-child(1) span{
+    margin-top: -10px;
+  }
+  .d-spacing > div:nth-child(2){
+    height: var(--spacing-2);
+  }
+  .d-spacing > div:nth-child(3){
+    height: var(--spacing-3);
+  }
+  .d-spacing > div:nth-child(4){
+    height: var(--spacing-4);
+  }
+  .d-spacing > div:nth-child(5){
+    height: var(--spacing-5);
+  }
+  .d-spacing > div:nth-child(6){
+    height: var(--spacing-6);
+  }
+  .d-spacing > div:nth-child(7){
+    height: var(--spacing-7);
+  }
+  .d-cross {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 2px;
+    background: gray;
+    display: none;
+    pointer-events: none;
+    z-index: 100;
+  }
+  .d-cross.is-visible {
+    display: block;
+  }
+  .d-cross:after, .d-cross:before{
+    content: '';
+    position: absolute;
+    background: red;
+    transform: translate(-50%, -50%);
+    width: 1px;
+    height: 1px;
+  }
+  .d-cross:after{
+    height: 200vh;
+  }
+  .d-cross:before{
+    width: 200vw;
+  }
+
+  @media (max-width: 768px) {
+    .d-grid > div {
+      display: none;
+    }
+    .d-grid {
+      border-left: calc(var(--grid-gutter-sm) / 2) solid fuchsia;
+      border-right: calc(var(--grid-gutter-sm) / 2) solid fuchsia;
+    }
+  }
+
+  .img-debug {
+    font-size: 1.1rem; 
+    line-height: 1.2;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    text-align: left !important;
+    font-family: sans-serif;
+    white-space: nowrap;
+    opacity: 0.9;
+  }
+
+  .img-debug small {
+    font-size: 0.9rem; 
+    font-family: sans-serif;
+    display: none;
+  }
+
+  .img-debug:hover small {
+    display: block;
+  }
+
+  .img-debug.is-bad {
+    background: tomato;
+    color: black;
+  }
+
+  .block:has(.block-debug){
+    position: relative;
+  }
+  .block .block-debug {
+    font-family: sans-serif;
+    font-size: 14px;
+    background: black;
+    color: white;
+    padding: 3px 10px;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+</style>
+
+<script>
+  window.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'g') {
+      document.querySelector('.d-grid').classList.toggle('is-visible');
+      document.querySelector('.d-spacing').classList.toggle('is-visible');
+      document.querySelector('.d-cross').classList.toggle('is-visible');
+    }
+    if (e.ctrlKey && e.key === 'w') {
+      document.body.classList.toggle('full-width');
+    }
+    if (e.ctrlKey && e.key === 'i') {
+      showImageDimension();
+    }
+    if (e.ctrlKey && e.key === 'p') {
+      openInProd();
+    }
+    if (e.ctrlKey && e.key === 'd') {
+      toggleDebug();
+    }
+    if (e.ctrlKey && e.key === 'b') {
+      showBlockInfo();
+    }
+  });
+
+  window.addEventListener('pointermove', e => {
+    document.querySelector('.d-cross').style.left = e.clientX + "px";
+    document.querySelector('.d-cross').style.top = e.clientY + "px";
+  });
+
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('click', e => {
+      if (e.altKey) {
+        e.preventDefault()
+        e.stopImmediatePropagation()
+        responsiveImageDebugOutput(img)
+      }
+    })
+  })
+
+  document.querySelector('.d-help__toggle').addEventListener('click', e => {
+    e.preventDefault()
+    toggleDebug()
+  });
+
+  function toggleDebug() {
+    document.querySelector('.d-help').classList.toggle('d-help--active')
+  }
+
+  function showImageDimension() {
+    document.querySelectorAll('img').forEach(img => {
+      const listener = function () {
+        // Return if svg
+        if (img.src.split('.')[1] === 'svg') return;
+
+        const threshold = 0.2, // 20% of tolerance
+          parent = img.parentElement,
+          pixelRatio = Math.round(window.devicePixelRatio * 10) / 10,
+          dimensions = {
+            width: Math.round(img.naturalWidth * pixelRatio),
+            height: Math.round(img.naturalHeight * pixelRatio)
+          },
+          target = {
+            width: Math.round(img.width * window.devicePixelRatio),
+            height: Math.round(img.height * window.devicePixelRatio)
+          },
+          essential = 
+`<b>Ratio</b> : ${pixelRatio}<br>
+<b>Loaded</b> : ${dimensions.width}x${dimensions.height}<br>
+<b>Needed</b> : ${target.width}x${target.height}<br>
+<b>Ideal config</b> : ${img.width}x${img.height}`
+          result =`
+  Rendered size: ${img.width}x${img.height}
+  Intrinsic size: ${dimensions.width}x${dimensions.height}
+  Device Pixel ratio: ${window.devicePixelRatio}`,
+          p = parent.querySelector('.img-debug') || document.createElement('p'),
+          small = document.createElement('small');
+        
+        small.innerText = result;
+        p.innerHTML = essential
+        p.append(small);
+        p.classList.add('img-debug');
+        const ratio = getImageWidthRatio(dimensions, target);
+        if (ratio > threshold) {
+          p.classList.add('is-bad');
+        } else {
+          p.classList.remove('is-bad');
+        }
+
+        const debug = img.querySelector('.img-debug');
+        if (debug) parent.removeChild();
+
+        parent.append(p);
+        parent.style.position = 'relative';
+      };
+
+      if (img.complete) listener();
+      img.addEventListener('load', listener);
+      window.addEventListener('resize', listener);
+    });
+  }
+
+  function getImageWidthRatio(source, target) {
+    return Math.abs((source.width - target.width) / Math.max(source.width, target.width));
+  }
+
+  function getImageRatio(source, target) {
+    const widthRatio = Math.abs((source.width - target.width) / Math.max(source.width, target.width)),
+      heightRatio = Math.abs((source.height - target.height) / Math.max(source.height, target.height));
+
+    return (widthRatio + heightRatio) / 2;
+  }
+
+  function openInProd() {
+    // To use this debug method, add params.productionUrl key to your hugo config.yaml
+    const productionUrl = '{{ index site.Params.debug "productionUrl" }}';
+    if (productionUrl) {
+      window.open(`${productionUrl}${window.location.pathname}`);
+    }
+  }
+
+  function showBlockInfo() {
+    document.querySelectorAll('.block').forEach(block => {
+      const info = document.createElement('div'),
+        template = block.getAttribute('class');
+      info.classList.add('block-debug');
+
+      block.append(info);
+      info.innerHTML = `<p>${String(block.classList).replaceAll('block-', '')}</p>`;
+    });
+  }
+
+</script>
+
+{{/*  Generate sample json file for non-regression tool  */}}
+{{ with resources.Get "sample.json" }}
+  {{ with resources.ExecuteAsTemplate "sample.json" $ . }}
+    {{/*  {{ call permalink to generate file }}  */}}
+    {{ $dumb := .Permalink }}
+  {{ end }}
+{{ end }}
