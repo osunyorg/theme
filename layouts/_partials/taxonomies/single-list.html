@@ -31,7 +31,7 @@
       {{ end }}
     </ul>
   {{ else }}
-    {{ $all_categories := partial "GetTermsFromTaxonomies" . }}
+    {{ $all_categories := partial "taxonomies/helpers/GetTermsFromTaxonomies" . }}
     {{ $class := printf "taxonomies-single without-label %s-taxonomies" $type }}
     {{ partial "commons/categories.html" (dict 
       "kind" $context.Kind
