@@ -1,8 +1,12 @@
-{{- $title := or .Params.header_text .Title -}}
+{{ $title := or .Params.header_text .Title }}
 
-{{- partial "header/hero.html" (dict
+{{ with .Params.subtitle }}
+  {{ $title = printf "%s <span>%s</span>" $title . }}
+{{ end }}
+
+{{ partial "header/hero.html" (dict
   "title" $title
   "image" .Params.image
   "sizes" site.Params.image_sizes.sections.pages.hero
   "context" .
-) -}}
+) }}
