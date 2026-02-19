@@ -1,6 +1,6 @@
-{{ $taxonomies_position := partial "GetTaxonomiesPosition" . }}
+{{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" . }}
 {{ if and .Params.taxonomies (eq $taxonomies_position "content") }}
   <div class="taxonomies-container">
-    {{ partial "taxonomies/single-list.html" . }}
+    {{ partial "taxonomies/single/list.html" . }}
   </div>
 {{ end }}

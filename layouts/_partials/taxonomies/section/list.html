@@ -1,0 +1,26 @@
+{{ $type := .Type }}
+{{ $taxonomies := .Params.section_taxonomies }}
+{{ $param := (printf "%s.index.taxonomies" $type) }}
+{{ $options := partial "GetSiteParamWithDefault" (dict 
+  "param" $param
+  "default" "default.index.taxonomies"
+) }}
+{{ if $options.display }}
+  <div class="taxonomies-list taxonomies-list--{{ $options.layout }}">
+    {{ range $taxonomies }}
+      {{ if .categories }}
+        {{ if eq $options.layout "dropdown" }}
+          {{ partial "taxonomies/section/layouts/dropdown.html" (dict
+            "taxonomy" .
+            "type" $type
+          ) }}
+        {{ else }}
+          {{ partial "taxonomies/section/layouts/default.html" (dict
+            "taxonomy" .
+            "show_name" $options.show_name
+          ) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}

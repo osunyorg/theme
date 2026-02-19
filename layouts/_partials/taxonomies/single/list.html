@@ -1,0 +1,26 @@
+{{ $context := . }}
+{{ $type := .Type }}
+{{ $taxonomies := .Params.taxonomies }}
+{{ $param := printf "%s.single.taxonomies.show_name" $type }}
+{{ $display_taxonomies := partial "GetSiteParamWithDefault" (dict 
+  "param" $param
+  "default" "default.single.taxonomies.show_name"
+) }}
+{{ with $taxonomies }}
+  {{ if $display_taxonomies }}
+    {{ partial "taxonomies/single/list/display-taxonomies.html" (dict
+      "type" $type
+      "taxonomies" $taxonomies
+      "context" $context
+    ) }}
+  {{ else }}
+    {{ $all_categories := partial "taxonomies/helpers/GetCategories" . }}
+    {{ $class := printf "taxonomies-single without-label %s-taxonomies" $type }}
+    {{ partial "commons/categories.html" (dict 
+      "kind" $context.Kind
+      "context" $context
+      "categories" $all_categories
+      "class" $class
+    ) }}
+  {{ end }}
+{{ end }}

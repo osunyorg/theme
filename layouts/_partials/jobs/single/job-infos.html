@@ -1,10 +1,10 @@
 
 <ul class="job-infos">
-  {{ $taxonomies_position := partial "GetTaxonomiesPosition" . }}
+  {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" . }}
   {{ if ne $taxonomies_position "hero" }}
     {{ if .Params.jobs_categories }}
       <li>
-        {{ partial "taxonomies/single-list.html" . }}
+        {{ partial "taxonomies/single/list.html" . }}
       </li>
     {{ end }}
   {{ end }}

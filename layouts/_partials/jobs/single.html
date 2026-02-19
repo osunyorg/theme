@@ -7,10 +7,10 @@
 
   {{ partial "jobs/single/sidebar.html" . }}
 
-  {{ $taxonomies_position := partial "GetTaxonomiesPosition" . }}
+  {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" . }}
   {{ if and .Params.design.full_width .Params.taxonomies (eq $taxonomies_position "content") }}
     <div class="container">
-      {{ partial "taxonomies/single-list-container.html" . }}
+      {{ partial "taxonomies/single/container.html" . }}
     </div>
   {{ end }}
 
