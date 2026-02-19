@@ -1,5 +1,5 @@
 <div class="taxonomy-categories">
-  {{ if .options.show_name }}<span>{{ .taxonomy.name }}</span>{{ end }}
+  {{ if .show_name }}<span>{{ .taxonomy.name }}</span>{{ end }}
   {{ $categories := partial "GetObjectsFromPathSlice" .taxonomy.categories }}
   {{ partial "commons/categories.html" (dict 
     "categories" $categories

@@ -10,14 +10,14 @@
     {{ range $taxonomies }}
       {{ if .categories }}
         {{ if eq $options.layout "dropdown" }}
-          {{ partial "taxonomies/section/list/with-dropdown.html" (dict
+          {{ partial "taxonomies/section/layouts/dropdown.html" (dict
             "taxonomy" .
             "type" $type
           ) }}
         {{ else }}
-          {{ partial "taxonomies/section/list/without-dropdown.html" (dict
+          {{ partial "taxonomies/section/layouts/default.html" (dict
             "taxonomy" .
-            "options" $options
+            "show_name" $options.show_name
           ) }}
         {{ end }}
       {{ end }}
