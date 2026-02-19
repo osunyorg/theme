@@ -1,0 +1,42 @@
+
+<ul class="job-infos">
+  {{ $taxonomies_position := partial "GetTaxonomiesPosition" . }}
+  {{ if ne $taxonomies_position "hero" }}
+    {{ if .Params.jobs_categories }}
+      <li>
+        {{ partial "taxonomies/single-list.html" . }}
+      </li>
+    {{ end }}
+  {{ end }}
+
+  {{ with .Params.dates }}
+    {{ with .from }}
+      <li>
+        <span>{{ i18n "jobs.dates.from" }}</span>
+        <time itemprop="datePosted" datetime="{{ .day }}">
+          {{ time.Format site.Params.jobs.date_format .day }}
+        </time>
+      </li>
+    {{ end }}
+    {{ with .to }}
+      <li>
+        <span>{{ i18n "jobs.dates.to" }}</span>
+        <time datetime="{{ .day }}">
+          {{ time.Format site.Params.jobs.date_format .day }}
+        </time>
+      </li>
+    {{ end }}
+  {{ end }}
+
+  {{ if site.Params.jobs.single.options.authors }}
+    {{ partial "authors/partials/authors.html" . }}
+  {{ end }}
+
+  {{ if site.Params.jobs.single.options.reading_time }}
+    {{ partial "commons/reading-time.html" . }}
+  {{ end }}
+
+  {{ if site.Params.jobs.share_links.enabled | default site.Params.share_links.enabled }}
+    {{ partial "commons/share/list-item.html" . }}
+  {{ end }}
+</ul>

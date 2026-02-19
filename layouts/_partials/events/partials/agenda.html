@@ -1,0 +1,47 @@
+{{ $layout := .layout }}
+{{ $options := .options }}
+{{ $agenda := .agenda }}
+{{ $is_sub_event := .is_sub_event }}
+{{ $event_attributes := "itemscope itemtype='https://schema.org/Event'" }}
+
+<ul class="events events--{{- $layout -}}">
+  {{ range $agenda }}
+    <li class="events-date {{- if site.Params.events.index.sticky_dates }} events-date--sticky {{- end }}">
+      {{ if eq $layout "agenda" }}
+        <h2 class="events-date-title" id="{{ anchorize .Key }}"><span>{{ .Key | strings.FirstUpper | safeHTML }}</span></h2>
+      {{ end }}
+      <ol class="events-scheduled">
+        {{ range .Pages }}
+          {{ if .Params.children_for_the_day }}
+            {{ $event_attributes := printf "%s %s" "ok" "itemprop='superEvent'" }}
+          {{ end}}
+          <li {{ $event_attributes | safeHTMLAttr -}} >
+            {{ partial "events/partials/event.html" (dict
+              "event" .
+              "layout" $layout
+              "options" site.Params.events.index.options
+              "is_sub_event" $is_sub_event
+            ) }}
+          {{ with .Params.children_for_the_day }}
+            <ol class="event-children">
+              {{ range $index, $children := . }}
+                {{ with (site.GetPage .path) }}
+                  {{ $event_attributes := printf "%s %s" $event_attributes "itemprop='subEvent'"}}
+                  <li {{ $event_attributes | safeHTMLAttr -}} >
+                    {{ partial "events/partials/event.html" (dict
+                      "event" .
+                      "layout" $layout
+                      "options" $options
+                      "is_sub_event" true
+                    ) }}
+                  </li>
+                {{ end }}
+              {{ end }}
+            </ol>
+          {{ end }}
+        </li>
+        {{ end }}
+      </ol>
+    </li>
+  {{ end }}
+</ul>

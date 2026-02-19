@@ -1,0 +1,55 @@
+{{- $block := .block -}}
+{{- $block_class := partial "GetBlockClass" .block -}}
+{{- $block_index := .index -}}
+{{- $described_by_id := "" -}}
+{{- $video_id := printf "video-%d" $block_index -}}
+{{- with .block.data -}}
+  <div class="{{ $block_class }}" id="{{ $video_id }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+
+        {{ if .url }}
+          {{ $title := "video" }}
+          {{ with .video_title }}
+            {{ $title = . }}
+          {{ end }}
+
+          {{ if eq .layout "button" }}
+            {{ $options := (dict
+              "mode" "player"
+              "videoId" $video_id
+              "transcription" (printf "<p>%s</p>%s" .video_title .transcription)
+            ) }}
+            <button class="btn"
+              id="play-{{ $video_id }}"
+              data-lightbox="{{ $options | encoding.Jsonify }}">
+                <span>{{ i18n "blocks.video.play" }}</span>
+            </button>
+          {{ end }}
+
+          <div class="video">
+            {{ if eq .video.platform "default" }}
+              {{ partial "PrepareHTML" .video.iframe }}
+            {{ else }}
+              {{ partial "blocks/templates/video/lazy-container" .video }}
+            {{ end }}
+          </div>
+        {{ end }}
+
+        {{ if ne .layout "button" }}
+          {{ if .video_title }}
+            {{ $described_by_id = printf "block-video-title-%d" $block_index }}
+            <p aria-hidden="true" id="{{ $described_by_id }}">{{- partial "PrepareHTML" .video_title -}}</p>
+          {{ end }}
+
+          {{ partial "commons/transcription.html" ( dict
+            "block_index" $block_index
+            "described_by" $described_by_id
+            "transcription" .transcription
+          ) }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{- end -}}
