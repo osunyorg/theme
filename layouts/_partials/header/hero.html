@@ -62,7 +62,7 @@
 
         {{ $taxonomies_position := partial "GetTaxonomiesPosition" .context }}
         {{ if and .context.Params.taxonomies (eq $taxonomies_position "hero") }}
-          {{ partial "taxonomies/single-list.html" .context }}
+          {{ partial "taxonomies/single/list.html" .context }}
         {{ end }}
 
         {{ if or $button .share }}
