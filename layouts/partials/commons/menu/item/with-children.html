@@ -1,0 +1,32 @@
+{{ $context := .context }}
+{{ $link_class := .link_class }}
+{{ $attributes := "" }}
+{{ if in .item.descendants_targets $context.RelPermalink }}
+  {{ $link_class = printf "%s %s" $link_class "has-children-active" }}
+{{ end -}}
+{{ if .level_options.dropdown }}
+  {{ $attributes = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" .item.slug -}}
+{{ end }}
+
+<li class="{{ .item_class }} has-children">
+  {{ partialCached "commons/menu/item/title" (dict
+    "item" .item
+    "level" .level
+    "is_active" .is_active
+    "link_class" $link_class
+    "attributes" $attributes
+    "title_attribute" .title_attribute
+    "level_options" .level_options
+    "context" .context
+  ) .item .is_active $link_class }}
+  {{ if ne .stop .level }}
+    {{ partial "commons/menu/item/children" (dict 
+      "items" .item.children
+      "parent" .item
+      "level" (add .level 1)
+      "options" .options
+      "has_dropdown" .level_options.dropdown
+      "context" .context
+    )}}
+  {{ end }}
+</li>

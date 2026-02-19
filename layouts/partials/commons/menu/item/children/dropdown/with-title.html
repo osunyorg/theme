@@ -1,0 +1,25 @@
+<div class="dropdown-menu is-titled">
+  <div class="container">
+    <div class="dropdown-menu-heading">
+      {{ if .parent.target }}
+        <a href="{{ .parent.target }}" class="dropdown-menu-title">{{ .parent.title }}</a>
+      {{ else }}
+        <p class="dropdown-menu-title">{{ .parent.title }}</p>
+      {{ end }}
+      {{ if .parent.path }}
+        {{ with partial "commons/menu/helpers/GetSummary" (dict 
+          "summary" .summary
+          "path" .parent.path
+        ) }}
+          <div class="dropdown-menu-summary">{{ . }}</div>
+        {{ end }}
+      {{ end }}
+    </div>
+    {{ partial "commons/menu/ul" (dict
+      "items" .items
+      "level" .level
+      "options" .options
+      "context" .context
+    ) }}
+  </div>
+</div>
