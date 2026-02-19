@@ -1,9 +1,9 @@
 {{ $context := .context }}
-{{ $name := .name }}
-{{ $slug := .slug }}
 <ul class="taxonomies-single {{ .type }}-taxonomies with-label" aria-label="{{ i18n "categories.label" }}">
   {{ range .taxonomies }}
     {{ $taxonomy := site.GetPage .path }}
+    {{ $name := .name }}
+    {{ $slug := .slug }}
     {{ with .categories }}
       <li class="terms {{ with $slug }} taxonomy-{{ . }} {{ end }} {{ $taxonomy.Params.bodyclass }}">
         <span class="taxonomy-title">{{ $name }}</span>
