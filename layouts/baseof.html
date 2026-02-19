@@ -3,18 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{ partial "head/preconnect.html" . }}
     {{ partial "head/init.html" . }}
-    {{ partial "head/csp.html" }}
-    {{ partial "head/css.html" }}
+    {{ partialCached "head/preconnect.html" . }}
+    {{ partialCached "head/csp.html" . }}
+    {{ partialCached "head/css.html" . }}
+    {{ partialCached "head/favicons.html" . }}
+    {{ partialCached "head/extras.html" . }}
     {{ partial "head/seo.html" . }}
-    {{ partial "head/favicons.html" . }}
     {{ partial "head/rss.html" . }}
     {{ partial "head/script.html" . }}
-    {{ partial "head/extras.html" . }}
   </head>
   <body class="{{ partial "GetBodyclass" . }}">
-    {{- partial "header/accessibility.html" -}}
+    {{- partialCached "header/accessibility.html" . -}}
     {{- partial "hooks/before-header" . -}}
     {{- partial "header/header.html" . -}}
     {{- partial "commons/alerts/list.html" }}
@@ -28,9 +28,9 @@
     </main>
     {{ partial "footer/footer.html" . }}
     {{ partial "hooks/after-footer-end.html" }}
-    {{ partial "commons/lightbox/lightbox.html" . }}
-    {{ partial "commons/search/modal.html" . }}
-    {{ partial "footer/plausible.html" . }}
+    {{ partialCached "commons/lightbox/lightbox.html" . }}
+    {{ partialCached "commons/search/modal.html" . }}
+    {{ partialCached "footer/plausible.html" . }}
     {{ partial "footer/js.html" . }}
     {{ partial "footer/script.html" . }}
     {{ if or (not hugo.IsProduction) site.Params.debug.active }}
