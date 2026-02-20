@@ -18,10 +18,12 @@
     {{ partial "commons/pagination.html" . }}
   </div>
   {{ if site.Params.locations.index.map }}
-    {{ $locations := .Pages }}
-    {{ partial "locations/partials/map.html" (dict
-      "locations" $locations
-      "title" (i18n "programs.location" $locations)
-    ) }}
+    {{ with .Pages }}
+      {{ partial "locations/partials/map.html" (dict
+        "locations" .
+        "title" ( i18n "programs.location" . )
+      ) }}
+    {{ end }}
+
   {{ end }}
 </div>
