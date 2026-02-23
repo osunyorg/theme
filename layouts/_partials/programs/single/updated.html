@@ -1,0 +1,10 @@
+{{ if site.Params.programs.single.options.updated_at }}
+  {{ with .Params.lastmod }}
+    <div class="container program-updated">
+      <p class="meta">
+        <span>{{ i18n "programs.updated_at" }}</span>
+        <time datetime="{{ .Format "2006-01-02T15:04" }}">{{ . | time.Format site.Params.programs.single.date_format }}</time>
+      </p>
+    </div>
+  {{ end }}
+{{ end }}
