@@ -1,7 +1,7 @@
 {{- $item := .item -}}
 {{- $context := .context -}}
 {{- $is_active := eq $context.RelPermalink $item.target -}}
-{{- $item_class := "" -}}
+{{- $item_class := $item.html_class | default "" -}}
 {{ with .level_options }}
   {{ if .summary.active }}
     {{ $item_class = printf "%s with-summary" $item_class }}
