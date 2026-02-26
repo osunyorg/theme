@@ -1,0 +1,44 @@
+name: Hugo Static Analysis
+
+on: push
+
+permissions:
+  contents: read
+  pull-requests: write
+  checks: write
+
+jobs:
+  template-lint:
+    name: Lint Hugo Templates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13' 
+
+      - name: Install djLint
+        run: pip install djlint
+
+      - name: Lint layouts
+        run: |
+          echo "## djLint" >> report.txt
+          djlint layouts/ >> report.txt || true
+      
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4.1'
+
+      - name: Complexity
+        run: |
+          ruby bin/hugolint.rb >> report.txt || true
+
+      - name: Comment pull request
+        uses: mshick/add-pr-comment@v2
+        with:
+          message-path: |
+            report.txt

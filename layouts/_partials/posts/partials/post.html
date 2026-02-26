@@ -46,7 +46,7 @@
 
         {{ partial "posts/partials/post/federated.html" . }}
 
-        {{ if and $options.summary  .Params.summary }}
+        {{ if and $options.summary .Params.summary }}
           <div itemprop="abstract">
             {{ partial "GetRichSummary" ( dict 
               "summary" .Params.summary
