@@ -9,7 +9,7 @@
 {{ end }}
 
 {{ if $item.children }}
-  {{ partial "commons/menu/item/with-children" (dict
+  {{ partial "commons/menu/item/with-children.html" (dict
     "item" $item
     "is_active" $is_active
     "item_class" $item_class
@@ -20,7 +20,7 @@
     "context" .context
   ) }}
 {{ else }}
-  {{ partial "commons/menu/item/without-children" (dict
+  {{ partial "commons/menu/item/without-children.html" (dict
     "item" $item
     "is_active" $is_active
     "item_class" $item_class

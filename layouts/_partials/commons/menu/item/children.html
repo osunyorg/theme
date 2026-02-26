@@ -1,5 +1,5 @@
 {{ if .has_dropdown }}
-  {{ partial "commons/menu/item/children/dropdown" (dict
+  {{ partial "commons/menu/item/children/dropdown.html" (dict
     "parent" .parent
     "items" .items
     "level" .level
@@ -7,7 +7,7 @@
     "context" .context
   ) }}
 {{ else }}
-  {{ partial "commons/menu/ul" (dict
+  {{ partial "commons/menu/ul.html" (dict
     "items" .items
     "level" .level
     "options" .options
