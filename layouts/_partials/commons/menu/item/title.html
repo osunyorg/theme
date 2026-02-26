@@ -14,11 +14,11 @@
 
 {{ if eq .item.kind "blank" }}
   <span{{ with $link_class }} class="{{ . }}"{{ end }} {{ safeHTMLAttr $attributes }}>
-    {{ .item.title | markdownify }}
+    {{- .item.title | markdownify -}}
   </span>
 {{ else }}
   <a href="{{ .item.target }}" {{ with $link_class }} class="{{ . }}"{{ end }} {{ safeHTMLAttr $attributes }} {{ safeHTMLAttr $title_attribute }}>
-    {{ .item.title | markdownify }}
+    {{- .item.title | markdownify -}}
   </a>
   {{ if .level_options }}
     {{ partial "commons/menu/helpers/GetSummary" (dict 
