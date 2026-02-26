@@ -161,13 +161,13 @@
                             display: block
                     .media
                         aspect-ratio: 1
-                        height: auto
+                        align-self: start
                         width: columns(5)
                         @include media-breakpoint-up(md)
                             width: columns(2)
                         @include media-breakpoint-up(xl)
-                            width: calc(var(--grid-gutter) + var(--column-width))
-                        img
+                            width: offset(1)
+                        picture, img
                             height: 100%
                             object-fit: cover
                 &-wrapper
