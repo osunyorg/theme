@@ -1,6 +1,13 @@
-{{ if in site.Params.i18n.positions .kind }}
+{{ $kind := .kind }}
+{{/*  When site config `i18n.positions` include `footer`, inject i18n dropdown into the `legal` menu  */}}
+{{/*  TODO : Rewrite this unclear logic  */}}
+{{ if eq $kind "legal" }}
+  {{ $kind = "footer" }}
+{{ end }}
+
+{{ if in site.Params.i18n.positions $kind }}
   {{ partial "commons/i18n.html" (dict
-    "position" .kind
+    "position" $kind
     "context" .context
   ) }}
 {{ end }}
