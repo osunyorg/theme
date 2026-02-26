@@ -14,6 +14,6 @@
   {{ $aria_label = $credit }}
 {{ end }}
 
-{{ $aria_label = ( partial "RemoveSrOnlyTag" $aria_label ) | plainify }}
+{{ $aria_label = (replaceRE "<span class=\"sr-only\">(.*?)</span>" "" $aria_label) | plainify }}
 
 {{ return $aria_label }}
