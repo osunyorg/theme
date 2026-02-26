@@ -14,9 +14,12 @@
     {{ with .image }}
       {{ $aria_label := partial "GetFigureAriaLabel" (dict "text" .text "credit" .credit )}}
       <figure class="{{ $image_class }}{{ if $with_lightbox }} lightbox-figure {{ end }}"
-              {{- with $aria_label }}
+              {{ if or .text .credit }}
                 role="figure"
-                aria-label="{{- . -}}"
+                aria-label="{{ partial "commons/image/figure/aria-label.html" (dict 
+                  "text" .text
+                  "credit" .credit
+                ) }}"
               {{ end }} >
 
       {{ $image_tag := partial "commons/image.html" (dict
@@ -41,7 +44,7 @@
           {{ end }}
           {{ with .credit }}
             <div class="credit">
-              {{ partial "AddCreditMention" . }}
+              {{ partial "commons/image/credit.html" . }}
             </div>
           {{ end }}
         </figcaption>
