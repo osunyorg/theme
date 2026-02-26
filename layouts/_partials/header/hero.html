@@ -111,7 +111,7 @@
   {{ end }}
 </header>
 
-{{ if and $display_breadcrumb $breadcrumb_is_after_hero }}
+{{ if and $display_breadcrumb $breadcrumb_is_after_hero .context.Params.breadcrumbs }}
   <div class="container breadcrumb-container">
     {{ partial "header/breadcrumbs.html" .context }}
   </div>
