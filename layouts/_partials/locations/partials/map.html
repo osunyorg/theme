@@ -9,8 +9,8 @@
 {{ if $has_address }}
 <div class="locations-map">
   <ul class="map" data-map data-marker-icon="{{ "/assets/images/map-marker.svg" }}" 
-        role="region"
-        aria-label="{{ $aria_label }}">
+    role="region"
+    aria-label="{{ $aria_label }}">
     {{ range $locations }}
       {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
       {{ if and $address_geolocation.longitude $address_geolocation.latitude }}
@@ -46,6 +46,6 @@
         </li>
       {{ end }}
     {{ end }}
-      </ul>
+  </ul>
 </div>
 {{ end }}
