@@ -1,12 +1,8 @@
-{{ $menu := partial "GetMenu" "social" }}
-
-{{ if $menu.items }}
-  {{ partial "commons/menu" (dict
-    "kind" "social"
-    "level" 1
-    "class" "nav-social"
-  ) }}
-{{ end }}
+{{ partial "commons/menu" (dict
+  "kind" "social"
+  "level" 1
+  "class" "nav-social"
+) }}
 
 {{ with site.Params.contact_details }}
   <ul class="footer-social site-links">
