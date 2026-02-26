@@ -1,4 +1,3 @@
-{{ $dropdown := .dropdown }}
 {{ $options := .options }}
 {{ $level := .level }}
 {{ $level_options := index $options (printf "level_%d" $level) }}
@@ -9,7 +8,6 @@
   {{ range .items -}}
     {{ partial "commons/menu/item.html" (dict
       "item" .
-      "dropdown" $dropdown
       "options" $options
       "level" $level
       "level_options" $level_options

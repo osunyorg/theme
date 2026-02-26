@@ -2,7 +2,6 @@
 {{ $menu := partial "GetMenu" $kind }}
 {{ $level := .level | default 1 }}
 {{ $stop := .stop }}
-{{ $dropdown := .dropdown }}
 {{ $items := $menu.items }}
 {{ $options := index site.Params.menu $kind }}
 {{ with .options }}
@@ -17,7 +16,6 @@
       {{ partial "commons/menu/item.html" (dict
         "item" .
         "kind" $kind
-        "dropdown" $dropdown
         "options" $options
         "level" $level
         "level_options" $level_options

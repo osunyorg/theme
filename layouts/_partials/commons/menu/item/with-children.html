@@ -4,8 +4,8 @@
 {{ if in .item.descendants_targets $context.RelPermalink }}
   {{ $link_class = printf "%s %s" $link_class "has-children-active" }}
 {{ end -}}
-
-{{ if .level_options.dropdown }}
+{{ $dropdown := index .level_options "dropdown" | default false }}
+{{ if $dropdown }}
   {{ $attributes = printf "id=\"dropdown-%s\" role=\"button\" aria-expanded=\"false\" tabindex=\"0\"" .item.slug -}}
 {{ end }}
 
@@ -26,7 +26,7 @@
       "parent" .item
       "level" (add .level 1)
       "options" .options
-      "has_dropdown" .level_options.dropdown
+      "has_dropdown" $dropdown
       "context" .context
     ) }}
   {{ end }}
