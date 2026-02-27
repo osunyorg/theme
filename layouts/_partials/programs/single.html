@@ -9,21 +9,6 @@
     "context" .
   ) }}
 
-  {{- if .Params.image -}}
-    {{- $id := .Params.image -}}
-    {{- if isset .Params.image "id" -}}
-      {{- $id = .Params.image.id -}}
-    {{- end -}}
-    {{- $image := partial "GetMedia" $id -}}
-    {{- if $image -}}
-      {{- $url := $image.url -}}
-      {{- if site.Params.keycdn -}}
-        {{- $url = $image.direct_url -}}
-      {{- end -}}
-      <meta itemprop="image" content="{{ $url }}">
-    {{- end -}}
-  {{- end -}}
-
   {{ partial "programs/single/summary.html" (dict
     "with_container" true
     "context" .
