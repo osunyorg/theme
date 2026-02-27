@@ -20,31 +20,27 @@
         "text" .text
         "credit" .credit
       ) }}
-      {{ $image_tag := partial "commons/image.html" (dict
-        "image" .id
-        "alt" .alt
-        "sizes" $sizes
-        "lazy" $lazy
-        "crop" $crop
-        "fetch_priority" $fetch_priority
-      ) }}
+        {{ $image_tag := partial "commons/image.html" (dict
+          "image" .id
+          "alt" .alt
+          "sizes" $sizes
+          "lazy" $lazy
+          "crop" $crop
+          "fetch_priority" $fetch_priority
+        ) }}
 
-      {{ if $with_lightbox }}
-        {{ partial "commons/lightbox/button.html" (dict "image" $image_tag "context" .) }}
-      {{ else }}
-        {{ $image_tag }}
-      {{ end }}
+        {{ if $with_lightbox }}
+          {{ partial "commons/lightbox/button.html" (dict "image" $image_tag "context" .) }}
+        {{ else }}
+          {{ $image_tag }}
+        {{ end }}
 
-      {{ if or .text .credit }}
-        <figcaption {{ if $focusable_figcaption }} tabindex="0" {{ end }}>
-          {{ with .text }}
-            <div>{{ . | safeHTML }}</div>
-          {{ end }}
-          {{ with .credit }}
-            {{ partial "commons/image/credit.html" . }}
-          {{ end }}
-        </figcaption>
-      {{ end }}
+        {{ partial "commons/image/figcaption.html" (dict
+          "text" .text
+          "credit" .credit
+          "focusable_figcaption" $focusable_figcaption
+        ) }}
+
       </figure>
     {{ end }}
   {{ end }}
