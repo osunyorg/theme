@@ -7,9 +7,7 @@
       {{ . | safeHTML }}
     {{ end }}
     {{ with .credit }}
-      <div class="credit">
-        {{ partial "AddCreditMention" . }}
-      </div>
+      {{ partial "commons/image/credit.html" . }}
     {{ end }}
   </figcaption>
 {{ end }}
