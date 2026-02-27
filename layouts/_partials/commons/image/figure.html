@@ -1,0 +1,31 @@
+{{ $lazy := .lazy | default true }}
+{{ $media := partial "GetMedia" .image.id }}
+
+{{ if $media }}
+  {{ $image_tag := partial "commons/image.html" (dict
+    "image" .image.id
+    "alt" .image.alt
+    "sizes" .sizes
+    "lazy" $lazy
+    "crop" .crop
+    "fetch_priority" .fetch_priority
+  ) }}
+  {{ $with_lightbox := .with_lightbox | default (not site.Params.components.lightbox.disabled) }}
+  {{ $attributes := partial "commons/image/figure/attributes.html" (dict
+    "image" .image
+    "with_lightbox" $with_lightbox
+  ) }}
+
+  <figure {{ $attributes | safeHTMLAttr }}>
+    {{ if $with_lightbox }}
+      {{ partial "commons/lightbox/button.html" (dict "image" $image_tag "context" .image) }}
+    {{ else }}
+      {{ $image_tag }}
+    {{ end }}
+
+    {{ partial "commons/image/figure/figcaption.html" (dict
+      "image" .image
+      "focusable_figcaption" .focusable_figcaption
+    ) }}
+  </figure>
+{{ end }}
