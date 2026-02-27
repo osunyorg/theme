@@ -1,8 +1,10 @@
-<figure class="{{ .image_class }}"
-{{ if or .text .credit }}
+{{- with .image_class }}
+  class="{{ . }}"
+{{- end -}}
+{{ if or .text .credit -}}
   role="figure" aria-label="{{ .text | plainify | chomp }}
-  {{ with .credit }}
+  {{- with .credit }}
     {{ i18n "commons.accessibility.credits" }}
     {{ replaceRE "<span class=\"sr-only\">(.*?)</span>" "" . | plainify | chomp }}
-  {{ end }}"
-{{ end }}>
+  {{ end -}}"
+{{ end -}}

@@ -15,11 +15,12 @@
     {{ end }}
 
     {{ with .image }}
-      {{ partial "commons/image/figure/tag.html" (dict
+      <figure {{ partial "commons/image/figure/attributes.html" (dict
         "image_class" $image_class
         "text" .text
         "credit" .credit
-      ) }}
+      ) | safeHTMLAttr }}>
+      
         {{ $image_tag := partial "commons/image.html" (dict
           "image" .id
           "alt" .alt
