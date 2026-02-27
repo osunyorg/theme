@@ -2,7 +2,8 @@
   class="{{ . }}"
 {{- end -}}
 {{ if or .text .credit -}}
-  role="figure" aria-label="{{ .text | plainify | chomp }}
+  role="figure"
+  aria-label="{{ .text | plainify | chomp }}
   {{- with .credit }}
     {{ i18n "commons.accessibility.credits" }}
     {{ replaceRE "<span class=\"sr-only\">(.*?)</span>" "" . | plainify | chomp }}

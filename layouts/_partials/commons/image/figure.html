@@ -2,7 +2,7 @@
 
 {{ if .image.id }}
   {{ $sizes := .sizes }}
-  {{ $lazy := default true .lazy }}
+  {{ $lazy := .lazy | default true }}
   {{ $fetch_priority := .fetch_priority }}
   {{ $crop := .crop }}
   {{ $image := partial "GetMedia" .image.id }}
@@ -41,7 +41,6 @@
           "credit" .credit
           "focusable_figcaption" $focusable_figcaption
         ) }}
-
       </figure>
     {{ end }}
   {{ end }}
