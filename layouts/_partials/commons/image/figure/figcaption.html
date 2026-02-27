@@ -1,9 +1,9 @@
-{{ if or .text .credit }}
+{{ if or .image.text .image.credit }}
   <figcaption {{ if .focusable_figcaption }} tabindex="0" {{ end }}>
-    {{ with .text }}
+    {{ with .image.text }}
       <div>{{ . | safeHTML }}</div>
     {{ end }}
-    {{ with .credit }}
+    {{ with .image.credit }}
       {{ partial "commons/image/credit.html" . }}
     {{ end }}
   </figcaption>

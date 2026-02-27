@@ -1,9 +1,0 @@
-{{ $image_class := .image_class | default "" }}
-{{ $image_direction := partial "GetImageDirection" .image }}
-{{ $image_class = printf "%s image-%s" $image_class $image_direction }}
-
-{{ if .with_lightbox }}
-  {{ $image_class = printf "%s lightbox-figure" $image_class }}
-{{ end }}
-
-{{ return $image_class }}
