@@ -7,7 +7,7 @@
   {{ $crop := .crop }}
   {{ $image := partial "GetMedia" .image.id }}
   {{ $image_class := .image_class | default "" }}
-  {{ $image_class = printf "%s image-%s" $image_class (partial "GetImageDirection" .image) }}
+  {{ $image_class = printf "%s image-%s" $image_class (partial "commons/image/helpers/get/Direction" .image) }}
   {{ $with_lightbox := .with_lightbox | default (not site.Params.components.lightbox.disabled) }}
 
   {{ if $image }}

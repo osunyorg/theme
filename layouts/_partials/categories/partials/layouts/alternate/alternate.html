@@ -8,7 +8,7 @@
     {{ $category := site.GetPage .path }}
     {{ with $category }}
       {{ with .Params.image }}
-        {{ $li_class = partial "GetImageDirection" . }}
+        {{ $li_class = partial "commons/image/helpers/get/Direction" . }}
       {{ end }}
     {{ end }}
 

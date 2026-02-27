@@ -37,7 +37,7 @@
 
       {{- if $is_svg -}}
 
-        <img src="{{ partial "GetImageUrl" (dict "url" $url) }}"
+        <img src="{{ partial "commons/image/helpers/get/Url" (dict "url" $url) }}"
             alt="{{ chomp (plainify $alt) }}"
             {{ if $width }}width="{{ $width }}"{{ end }}
             {{ if $height }}height="{{ $height }}"{{ end }}
@@ -51,32 +51,32 @@
         {{ with .sizes.desktop -}}
           <source media="(min-width: 1024px)"
                   type="image/webp"
-                  srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop ) }},
-                          {{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x">
+                  srcset="{{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "format" "webp" "crop" $crop ) }},
+                          {{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x">
           <source media="(min-width: 1024px)" 
-                  srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "crop" $crop ) }},
-                          {{ partial "GetImageUrl" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x">
+                  srcset="{{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "crop" $crop ) }},
+                          {{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x">
         {{- end }}
 
         {{ with .sizes.tablet -}}
           <source media="(min-width: 768px)"
                   type="image/webp"
-                  srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop) }},
-                          {{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x">
+                  srcset="{{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "format" "webp" "crop" $crop) }},
+                          {{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x">
           <source media="(min-width: 768px)"
-                  srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "crop" $crop ) }},
-                          {{ partial "GetImageUrl" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x">
+                  srcset="{{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "crop" $crop ) }},
+                          {{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x">
         {{- end }}
 
         {{ with .sizes.mobile -}}
           <source type="image/webp"
-                  srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop) }},
-                          {{ partial "GetImageUrl" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x">
-          <source srcset="{{ partial "GetImageUrl" (dict "url" $url "size" . "crop" $crop ) }},
-                      {{ partial "GetImageUrl" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x">
+                  srcset="{{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "format" "webp" "crop" $crop) }},
+                          {{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x">
+          <source srcset="{{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "crop" $crop ) }},
+                      {{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x">
         {{- end }}
 
-        <img src="{{ partial "GetImageUrl" (dict "url" $url "size" $default "crop" $crop ) }}"
+        <img src="{{ partial "commons/image/helpers/get/Url" (dict "url" $url "size" $default "crop" $crop ) }}"
               alt="{{ chomp (plainify $alt) }}"
               width="{{ $width }}"
               height="{{ $height }}"
