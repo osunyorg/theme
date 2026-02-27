@@ -8,7 +8,7 @@
 
 {{ $image := .Params.image }}
 {{ with $image }}
-  {{ $image_format := partial "commons/image/helpers/get/Direction" . }}
+  {{ $image_format := partial "commons/image/helpers/GetDirection" . }}
   {{ $sizes = index site.Params.image_sizes.sections.events.hero_single $image_format }}
 {{ end }}
 

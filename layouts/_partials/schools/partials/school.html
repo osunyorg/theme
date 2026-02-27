@@ -6,7 +6,7 @@
   {{ $class := "school" }}
   {{ if and .Params.image $options.image }}
     {{ $class = printf "%s school--with-image" $class }}
-    {{ $image_direction := partial "commons/image/helpers/get/Direction" .Params.image }}
+    {{ $image_direction := partial "commons/image/helpers/GetDirection" .Params.image }}
     {{ $class = printf "%s %s" $class $image_direction }}
   {{ end }}
 

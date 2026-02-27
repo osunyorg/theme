@@ -11,7 +11,7 @@
   {{- if site.Params.keycdn -}}
     {{- $url = $image.direct_url -}}
   {{- end -}}
-  {{ $url = partial "commons/image/helpers/get/Url" (dict "url" $url "size" $lightbox_sizes ) }}
+  {{ $url = partial "commons/image/helpers/GetUrl" (dict "url" $url "size" $lightbox_sizes ) }}
 {{- end -}}
 
 {{ return $url }}
