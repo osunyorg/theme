@@ -7,12 +7,12 @@
   {{ $crop := .crop }}
   {{ $image := partial "GetMedia" .image.id }}
   {{ if $image }}
-    {{ $image_class := .image_class | default "" }}
-    {{ $image_class = printf "%s image-%s" $image_class (partial "GetImageDirection" .image) }}
     {{ $with_lightbox := .with_lightbox | default (not site.Params.components.lightbox.disabled) }}
-    {{ if $with_lightbox }}
-      {{ $image_class = printf "%s lightbox-figure" $image_class }}
-    {{ end }}
+    {{ $image_class := partial "commons/image/helpers/GetClass.html" (dict
+      "image" .image
+      "image_class" .image_class
+      "with_lightbox" $with_lightbox
+    ) }}
 
     {{ with .image }}
       {{ $attributes := partial "commons/image/figure/attributes.html" (dict
@@ -21,7 +21,6 @@
         "credit" .credit
       ) }}
       <figure {{ $attributes | safeHTMLAttr }}>
-      
         {{ $image_tag := partial "commons/image.html" (dict
           "image" .id
           "alt" .alt
