@@ -1,6 +1,8 @@
 {{ $credit := replace (replace . "<p>" "") "</p>" "" }}
-<p>
-  <span class="sr-only">{{ i18n "commons.accessibility.credits" }}</span>
-  <span aria-hidden="true">© </span>
-  {{- $credit | safeHTML }}
-</p>
+<div class="credit">
+  <p>
+    <span class="sr-only">{{ i18n "commons.accessibility.credits" }}</span>
+    <span aria-hidden="true">© </span>
+    {{- $credit | safeHTML }}
+  </p>
+</div>
