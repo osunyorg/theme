@@ -15,6 +15,6 @@
   aria-label="{{ .image.text | plainify | chomp }}
   {{- with .image.credit }}
     {{ i18n "commons.accessibility.credits" }}
-    {{ replaceRE "<span class=\"sr-only\">(.*?)</span>" "" . | plainify | chomp }}
+    {{ replaceRE `<span class="sr-only">(.*?)</span>` "" . | plainify | chomp }}
   {{ end -}}"
 {{ end -}}
