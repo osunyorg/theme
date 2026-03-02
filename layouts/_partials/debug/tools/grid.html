@@ -1,0 +1,61 @@
+<div class="d-grid">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+  <div>5</div>
+  <div>6</div>
+  <div>7</div>
+  <div>8</div>
+  <div>9</div>
+  <div>10</div>
+  <div>11</div>
+  <div>12</div>
+</div>
+
+<style>
+  .d-grid {
+    bottom: 0;
+    display: none;
+    grid-gap: var(--grid-gutter);
+    grid-template-columns: repeat(12, 1fr);
+    opacity: 0.2;
+    mix-blend-mode: multiply;
+    padding: 0 var(--grid-gutter);
+    pointer-events: none;
+    position: fixed;
+    margin: auto;
+    max-width: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: var(--grid-max-width);
+    z-index: 9999;
+    font-family: sans-serif;
+    font-size: 12px;
+  }
+  .d-grid.is-visible {
+    display: grid;
+  }
+  .d-grid > div {
+    background: fuchsia;
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .d-grid > div {
+      display: none;
+    }
+    .d-grid {
+      border-left: calc(var(--grid-gutter-sm) / 2) solid fuchsia;
+      border-right: calc(var(--grid-gutter-sm) / 2) solid fuchsia;
+    }
+  }
+</style>
+
+<script>
+  window.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 'g') {
+      document.querySelector('.d-grid').classList.toggle('is-visible');
+    }
+  });
+</script>
