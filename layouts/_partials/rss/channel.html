@@ -1,0 +1,22 @@
+{{ $title := .context.Site.Title }}
+{{ if not (eq .context.Site.Title .context.Title) }}
+  {{ $title = printf "%s, %s" .context.Title .context.Site.Title }}
+{{ end }}
+<title>{{ $title }}</title>
+<link>{{ .context.Permalink }}</link>
+{{ with .context.Summary }}
+<description>
+  {{ printf "<![CDATA[" | safeHTML }}
+    {{ . }}
+  {{ printf "]]>" | safeHTML }}
+</description>
+{{ end -}}
+<generator>Hugo+Osuny</generator>
+<language>{{ site.Language.LanguageCode }}</language>{{ with .authorEmail }}
+<managingEditor>{{.}}{{ with .authorName }} ({{ . }}){{ end }}</managingEditor>{{ end }}{{ with .authorEmail }}
+<webMaster>{{ . }}{{ with .authorName }} ({{ . }}){{ end }}</webMaster>{{ end }}{{ with .Site.Copyright }}
+<copyright>{{ . }}</copyright>{{ end }}{{ if not .Date.IsZero }}
+<lastBuildDate>{{ .lastBuildDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
+{{ with .context.OutputFormats.Get "RSS" }}
+{{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+{{ end }}
