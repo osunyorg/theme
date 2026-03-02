@@ -1,5 +1,4 @@
 {{ with .Params.related_categories }}
-
   <div class="program-related">
     {{ $post_category := site.GetPage ( printf "/posts_categories/%s" .posts ) }}
     {{ with $post_category }}
@@ -8,7 +7,6 @@
         "context" .
       ) }}
     {{ end }}
-
     {{ $event_category := site.GetPage (printf "/events_categories/%s" .events ) }}
     {{ with $event_category }}
       {{ $events := where .Pages "Type" "events" }}
@@ -18,7 +16,6 @@
           "context" .
         ) }}
       {{ end }}
-
       {{ $exhibitions := where .Pages "Type" "exhibitions" }}
       {{ if $exhibitions }}
         {{ partial "programs/single/related/exhibitions.html" (dict
@@ -26,9 +23,7 @@
           "context" .
         ) }}
       {{ end }}
-
     {{ end }}
-
     {{ $project_category := site.GetPage (printf "/projects_categories/%s" .projects ) }}
     {{ with $project_category }}
       {{ partial "programs/single/related/projects.html" (dict
@@ -37,5 +32,4 @@
       ) }}
     {{ end }}
   </div>
-
 {{ end }}

@@ -1,6 +1,5 @@
 {{ $events := .events }}
 {{ $context := .context }}
-
 {{ with $events }}
   <section class="related-events" id="{{ anchorize (i18n "programs.toc.related.events") }}">
     <div class="container">
@@ -10,7 +9,6 @@
           {{ $category_name := safeHTML $context.Title | truncate 30 }}
           {{ i18n "events.see_all_in_program" (dict "Title" $category_name) }}
         </a>
-
         {{ $events = partial "GetPathSliceFromObjects" . }}
         {{ $params := partial "GetLayoutAndOptions" (dict 
           "param" "programs.related_events"
