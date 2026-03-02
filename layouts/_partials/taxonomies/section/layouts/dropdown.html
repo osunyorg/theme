@@ -1,0 +1,17 @@
+{{ $categories := partial "GetObjectsFromPathSlice" .taxonomy.categories }}
+<div class="dropdown">
+  <button aria-controls="categories-{{ .taxonomy.slug }}" aria-expanded="false">
+    {{ .taxonomy.name }}
+  </button>
+  <div  id="categories-{{ .taxonomy.slug }}"
+        class="extendable taxonomy-categories"
+        data-extendable-close-siblings="true"
+        data-extendable-auto-close="true">
+    {{ partial "commons/categories.html" (dict 
+      "categories" $categories
+      "depth" true
+      "class" "taxonomy-categories-list"
+      "kind" .type
+    ) }}
+  </div>
+</div>
