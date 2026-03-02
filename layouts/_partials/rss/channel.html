@@ -16,7 +16,9 @@
 <managingEditor>{{.}}{{ with .authorName }} ({{ . }}){{ end }}</managingEditor>{{ end }}{{ with .authorEmail }}
 <webMaster>{{ . }}{{ with .authorName }} ({{ . }}){{ end }}</webMaster>{{ end }}{{ with .Site.Copyright }}
 <copyright>{{ . }}</copyright>{{ end }}{{ if not .Date.IsZero }}
-<lastBuildDate>{{ .lastBuildDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
+{{ with .lastBuildDate }}
+<lastBuildDate>{{ .Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end }}
+{{ end }}
 {{ with .context.OutputFormats.Get "RSS" }}
 {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
 {{ end }}
