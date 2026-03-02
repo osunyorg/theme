@@ -25,7 +25,7 @@
       {{ range $index, $day := .days }}
         {{ $date := $day.day | time.AsTime }}
         {{ $formated_date := $date | time.Format "2" }}
-        {{ $anchor := partial "GetDayAnchor" (dict
+        {{ $anchor := partial "events/section/calendar/helpers/GetDayAnchor" (dict
           "date" $date
           "format" site.Params.events.index.group_by_date
           "permalink" $permalink
