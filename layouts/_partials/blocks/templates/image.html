@@ -5,13 +5,13 @@
 {{- with .block.data -}}
   {{- $buttons := and .button.text .button_secondary.text -}}
   {{- if .image -}}
-    {{- $image_class = printf "image-%s" (partial "GetImageDirection" .image ) -}}
+    {{- $image_class = printf "image-%s" (partial "commons/image/helpers/GetDirection" .image ) -}}
   {{- end -}}
   <div class="{{ $block_class }} {{ $image_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        {{ partial "commons/image-figure.html" (dict
+        {{ partial "commons/image/figure.html" (dict
           "image" (dict 
             "alt" .image.alt
             "id" .image.id

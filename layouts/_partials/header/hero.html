@@ -5,7 +5,7 @@
 {{ $with_lightbox := not site.Params.components.lightbox.in_hero.disabled }}
 {{ $subtitle := .subtitle }}
 {{ if .image }}
-  {{ $direction = partial "GetImageDirection" .image }}
+  {{ $direction = partial "commons/image/helpers/GetDirection" .image }}
 {{ end }}
 
 {{ $summary := .context.Params.summary | safeHTML }}
@@ -82,7 +82,7 @@
       {{ end }}
 
       {{ if .image }}
-        {{ partial "commons/image-figure.html" (dict
+        {{ partial "commons/image/figure.html" (dict
           "image" .image
           "sizes" ( .sizes | default site.Params.image_sizes._default.hero )
           "lazy" false

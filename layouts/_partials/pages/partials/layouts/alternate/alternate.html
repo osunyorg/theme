@@ -10,7 +10,7 @@
     {{ with $page }}
       {{ $image_class := "without-image" }}
       {{ with .Params.image }}
-        {{ $image_class = partial "GetImageDirection" . }}
+        {{ $image_class = partial "commons/image/helpers/GetDirection" . }}
       {{ end }}
       <li>
         <article class="page {{ $image_class }}">
@@ -20,8 +20,7 @@
             </a>
           {{ $heading_tag.close }}
 
-          {{- partial "pages/partials/page/hook-after-title.html" . -}}
-
+          {{ partial "pages/partials/page/hook-after-title.html" . }}
 
           {{ if and $options.summary .Params.summary }}
             {{ partial "GetRichSummary" ( dict 
@@ -49,6 +48,6 @@
           {{ end }}
         </article>
       </li>
-    {{- end -}}
+    {{ end }}
   {{ end }}
 </ul>

@@ -15,7 +15,7 @@
   {{ $post_class := "post" }}
   {{ $reading_time := .Params.contents_reading_time }}
   {{ if and .Params.image $options.image }}
-    {{ $direction = partial "GetImageDirection" .Params.image }}
+    {{ $direction = partial "commons/image/helpers/GetDirection" .Params.image }}
     {{ $post_class = printf "%s %s" $post_class $direction }}
   {{ else }}
     {{ $post_class = printf "%s %s" $post_class "without-image" }}

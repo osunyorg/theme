@@ -5,7 +5,7 @@
 {{- with .block.data -}}
   {{ if .image }}
     {{- $block_class = printf "%s block-chapter--with-image" $block_class -}}
-    {{- $image_class = printf "image-%s" (partial "GetImageDirection" .image) -}}
+    {{- $image_class = printf "image-%s" (partial "commons/image/helpers/GetDirection" .image) -}}
   {{ end }}
 
   <div class="{{ $block_class }}">
@@ -26,7 +26,7 @@
             {{ end -}}
           </div>
           {{ with .image }}
-            {{ partial "commons/image-figure.html" (dict
+            {{ partial "commons/image/figure.html" (dict
               "image" .
               "sizes" site.Params.image_sizes.blocks.chapter
             ) }}
