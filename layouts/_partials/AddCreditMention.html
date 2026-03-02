@@ -1,7 +1,0 @@
-{{ $credit := . }}
-
-{{ $sr_only_text := printf "<span class=\"sr-only\">%s</span>" (i18n "commons.accessibility.credits") }}
-{{ $icon := "<span aria-hidden=\"true\">©</span>" }}
-{{ $credit = replace $credit "<p>" (printf "<p>%s%s" $sr_only_text $icon) 1 }}
-
-{{ return ($credit | safeHTML) }}
