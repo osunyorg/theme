@@ -1,0 +1,22 @@
+{{ with . }}
+  {{ $media := partial "GetMedia" .id }}
+  {{ if $media }}
+    {{ $url := partial "GetImageUrl" (dict "media" $media "size" 450 "scale" 2 ) }}
+    <media:content url="{{ $url }}" medium="image" width="900">
+      {{ with .alt }}
+        <media:description type="plain">
+          {{ printf "<![CDATA[" | safeHTML }}
+            {{ . }}
+          {{ printf "]]>" | safeHTML }}
+        </media:description>
+      {{ end }}
+      {{ with .credit }}
+        <media:credit type="html">
+          {{ printf "<![CDATA[" | safeHTML }}
+            {{ . | safeHTML }}
+          {{ printf "]]>" | safeHTML }}
+        </media:credit>
+      {{ end }}
+    </media:content>
+  {{ end }}
+{{ end }}
