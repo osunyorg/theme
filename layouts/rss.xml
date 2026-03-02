@@ -19,11 +19,52 @@
       "lastBuildDate" $lastBuildDate
     ) }}
     {{- range $pages }}
-      {{ partial "rss/item.html" (dict 
-        "item" .
-        "authorName" $authorName
-        "authorName" $authorEmail
-      ) }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      {{- with $authorEmail }}<author>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</author>{{ end }}
+      <guid>{{ .Permalink }}</guid>
+      {{- with .Summary }}
+      <description>
+        {{- printf "<![CDATA[" | safeHTML -}}
+          {{ . | safeHTML }}
+        {{- printf "]]>" | safeHTML -}}
+      </description>
+      {{ end -}}
+      {{- with .Params.image -}}
+        {{- $media := partial "GetMedia" .id -}}
+        {{- if $media -}}
+          {{- $url := partial "commons/image/helpers/GetUrl" (dict "media" $media "size" 450 "scale" 2 ) -}}
+          <media:content url="{{ $url }}" medium="image" width="900">
+            {{- with .alt -}}
+              <media:description type="plain">
+                {{- printf "<![CDATA[" | safeHTML -}}
+                  {{ . }}
+                {{- printf "]]>" | safeHTML -}}
+              </media:description>
+            {{- end -}}
+            {{- with .credit -}}
+              <media:credit type="html">
+                {{- printf "<![CDATA[" | safeHTML -}}
+                  {{ . | safeHTML }}
+                {{- printf "]]>" | safeHTML -}}
+              </media:credit>
+            {{- end -}}
+          </media:content>
+        {{- end -}}
+      {{ end -}}
+      {{- range .Params.taxonomies -}}
+        {{ range .categories }}
+          {{- $category := site.GetPage .path -}}
+          <category>
+          {{- printf "<![CDATA[" | safeHTML -}}
+            {{ $category.Title }}
+          {{- printf "]]>" | safeHTML -}}
+          </category>
+        {{- end -}}
+      {{- end -}}
+    </item>
     {{- end }}
   </channel>
 </rss>
