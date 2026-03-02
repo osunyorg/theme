@@ -1,5 +1,5 @@
 {{ $image_class := .image_class | default "" }}
-{{ $image_direction := partial "GetImageDirection" .image }}
+{{ $image_direction := partial "commons/image/helpers/GetDirection" .image }}
 {{ $image_class = printf "%s image-%s" $image_class $image_direction }}
 
 {{ if .with_lightbox }}

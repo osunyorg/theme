@@ -26,15 +26,15 @@
 {{ end -}}
 
 {{- with $sharedImage -}}
-  {{- $ogImage = partial "GetImageUrl" (dict
+  {{- $ogImage = partial "commons/image/helpers/GetUrl" (dict
     "media" .
     "size" "1200"
   ) -}}
-  {{- $twitterImage = partial "GetImageUrl" (dict
+  {{- $twitterImage = partial "commons/image/helpers/GetUrl" (dict
     "media" .
     "size" "1200"
   ) -}}
-  {{- $pagefindImage = partial "GetImageUrl" (dict
+  {{- $pagefindImage = partial "commons/image/helpers/GetUrl" (dict
     "media" .
     "size" site.Params.image_sizes._default.pagefind
   ) -}}
