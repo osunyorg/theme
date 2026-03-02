@@ -27,22 +27,11 @@
   <li {{- if eq $layout "highlight" }} class="highlight-post" {{- end -}}>
     <article class="{{ $post_class }}" itemscope itemtype="http://schema.org/BlogPosting">
       <div class="post-content">
-        {{- $title := partial "PrepareHTML" .Title -}}
-        {{ if and $options.subtitle .Params.subtitle }}
-          <hgroup>
-        {{ end }}
-
-        {{ $permalink := partial "GetPermalink" . }}
-        {{ $heading_tag.open }}
-          <a href="{{ $permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-        {{ $heading_tag.close }}
-
-        {{ if and $options.subtitle .Params.subtitle }}
-          <p class="post-subtitle">{{ .Params.subtitle }}</p>
-        {{ end }}
-        {{ if and $options.subtitle .Params.subtitle }}
-          </hgroup>
-        {{ end }}
+        {{ partial "posts/partials/post/heading.html" (dict
+          "item" $post
+          "level" $heading_level
+          "options" $options
+        ) }}
 
         {{ partial "posts/partials/post/federated.html" . }}
 
