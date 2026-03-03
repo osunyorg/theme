@@ -1,0 +1,23 @@
+<section id="{{ anchorize (i18n "programs.toc.presentation") }}">
+  <div class="container">
+    <div class="content">
+      <h2>{{ i18n "programs.toc.presentation" }}</h2>
+
+      {{ if or .Params.image .Params.presentation .Params.objectives .Pages }}
+        <div>
+          {{ partial "programs/single/content/presentation/image.html" . }}
+          {{ partial "programs/single/content/presentation/rich-text.html" . }}
+          {{ partial "programs/single/content/presentation/objectives.html" . }}
+          {{ partial "programs/single/content/presentation/children.html" . }}
+        </div>
+      {{ end }}
+
+      {{ partial "contents/list.html" (dict
+        "context" .
+        "contents" .Params.contents
+      ) }}
+
+      {{ partial "programs/single/content/presentation/administrative-information.html" . }}
+    </div>
+  </div>
+</section>
