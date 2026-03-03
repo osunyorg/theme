@@ -16,12 +16,12 @@
             {{ partial "blocks/top.html" $block.top }}
             {{ if (partial "GetTextFromHTML" .text) -}}
               <div class="rich-text">
-                {{ partial "PrepareHTML" .text }}
+                {{ safeHTML .text }}
               </div>
             {{ end -}}
             {{ if (partial "GetTextFromHTML" .notes) }}
               <div class="notes">
-                {{ partial "PrepareHTML" .notes }}
+                {{ safeHTML .notes }}
               </div>
             {{ end -}}
           </div>

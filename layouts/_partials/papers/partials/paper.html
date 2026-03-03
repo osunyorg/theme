@@ -12,7 +12,7 @@
       <div>
         {{ $heading_tag.open }}
           <a href="{{ .Permalink }}" itemprop="url">
-            <span itemprop="name">{{ partial "PrepareHTML" .Title }}</span>
+            <span itemprop="name">{{ safeHTML .Title }}</span>
           </a>
         {{ $heading_tag.close }}
         <div class="paper-meta">

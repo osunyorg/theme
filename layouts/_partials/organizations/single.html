@@ -16,7 +16,7 @@
 
       {{ if (partial "GetTextFromHTML" .Params.text) }}
         <div class="organization-presentation rich-text">
-          {{ partial "PrepareHTML" .Params.text }}
+          {{ safeHTML .Params.text }}
         </div>
       {{ end }}
 

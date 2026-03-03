@@ -41,13 +41,13 @@
       <div class="hero-text">
         {{ if $subtitle }}
           <hgroup {{ if $subtitle_is_summary -}} class="has-lead" {{- end }}>
-            <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .title }}</h1>
+            <h1 {{ $title_attribute }}>{{ safeHTML .title }}</h1>
             {{ with $subtitle }}
               {{ safeHTML . }}
             {{ end }}
           </hgroup>
         {{ else }}
-          <h1 {{ $title_attribute }}>{{ partial "PrepareHTML" .title }}</h1>
+          <h1 {{ $title_attribute }}>{{ safeHTML .title }}</h1>
         {{ end }}
 
         {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "after-hero-title") }}

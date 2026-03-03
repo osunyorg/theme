@@ -5,11 +5,11 @@
   {{ $options := dict "imageSrc" ( partial "GetLightboxUrl" .id ) }}
 
   {{ with .text }}
-    {{ $options = merge $options (dict "information" (partial "PrepareHTML" . )) }}
+    {{ $options = merge $options (dict "information" (safeHTML . )) }}
   {{ end }}
 
   {{ with .credit }}
-    {{ $options = merge $options (dict "credit" (partial "PrepareHTML" . )) }}
+    {{ $options = merge $options (dict "credit" (safeHTML . )) }}
   {{ end }}
 
   {{ with .alt }}

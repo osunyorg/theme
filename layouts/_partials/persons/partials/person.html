@@ -16,7 +16,7 @@
         {{ if $options.link }}
           <a href="{{ $person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" $person.Title) }}">
         {{ end }}
-          {{ partial "PrepareHTML" $person.Title }}
+          {{ safeHTML $person.Title }}
         {{ if $options.link }}
           </a>
         {{ end }}
@@ -24,9 +24,9 @@
       {{ if and $options.summary (or $role $person.Params.summary) }}
         <div class="person-role" itemprop="jobTitle">
           {{ if (partial "GetTextFromHTML" $role) }}
-            <p>{{ partial "PrepareHTML" $role }}</p>
+            <p>{{ safeHTML $role }}</p>
           {{ else if $person.Params.summary }}
-            {{ partial "PrepareHTML" $person.Params.summary }}
+            {{ safeHTML $person.Params.summary }}
           {{ end }}
         </div>
       {{ end }}

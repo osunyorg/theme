@@ -27,7 +27,7 @@
   <li {{- if eq $layout "highlight" }} class="highlight-post" {{- end -}}>
     <article class="{{ $post_class }}" itemscope itemtype="http://schema.org/BlogPosting">
       <div class="post-content">
-        {{- $title := partial "PrepareHTML" .Title -}}
+        {{- $title := safeHTML .Title -}}
         {{ if and $options.subtitle .Params.subtitle }}
           <hgroup>
         {{ end }}
