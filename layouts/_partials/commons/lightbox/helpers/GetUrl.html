@@ -7,11 +7,14 @@
 {{ $url := "" }}
 
 {{ if $image }}
-  {{- $url = $image.url -}}
-  {{- if site.Params.keycdn -}}
-    {{- $url = $image.direct_url -}}
-  {{- end -}}
-  {{ $url = partial "commons/image/helpers/GetUrl" (dict "url" $url "size" $lightbox_sizes ) }}
-{{- end -}}
+  {{ $url = $image.url }}
+  {{ if site.Params.keycdn }}
+    {{ $url = $image.direct_url }}
+  {{ end }}
+  {{ $url = partial "commons/image/helpers/GetUrl" (dict 
+    "url" $url 
+    "size" $lightbox_sizes
+  ) }}
+{{ end }}
 
 {{ return $url }}
