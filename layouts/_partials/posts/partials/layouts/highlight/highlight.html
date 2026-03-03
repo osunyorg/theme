@@ -1,13 +1,9 @@
 {{ $options := .options }}
 {{ $heading_level := .heading_level | default 3 }}
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-  "level" $heading_level 
-  "attributes" "class='post-title' itemprop='headline'"
-) }}
 
 <ul class="highlight">
   {{ $highlight := index .posts 0 }}
-  {{ $highlight = site.GetPage $highlight.path}}
+  {{ $highlight = site.GetPage $highlight.path }}
   {{ $list := .posts }}
 
   {{ with $highlight }}
@@ -25,23 +21,16 @@
       <ul class="list">
         {{ range after 1 . }}
           {{ with site.GetPage .path }}
-            {{ $title := safeHTML .Title }}
             {{ $reading_time := .Params.contents_reading_time }}
             <li>
               <article class="post">
                 <div class="post-content">
-                  {{ if and $options.subtitle .Params.subtitle }}
-                    <hgroup>
-                  {{ end }}
-                  {{ $heading_tag.open }}
-                    <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-                  {{ $heading_tag.close }}
-                  {{ if and $options.subtitle .Params.subtitle }}
-                    <p class="post-subtitle">{{ safeHTML .Params.subtitle }}</p>
-                  {{ end }}
-                  {{ if and $options.subtitle .Params.subtitle }}
-                    </hgroup>
-                  {{ end }}
+                  {{ partial "posts/partials/post/heading.html" (dict
+                    "item" .
+                    "options" $options
+                    "level" $heading_level
+                    "itemprop" "headline"
+                  ) }}
 
                   {{ if and $options.summary .Params.summary }}
                     {{ partial "GetRichSummary" (dict 
