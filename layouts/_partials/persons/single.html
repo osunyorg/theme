@@ -26,7 +26,7 @@
     "context" .
   ) }}
   <div itemscope itemtype="https://schema.org/Person" class="container">
-    <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+    <meta itemprop="name" content="{{ safeHTML .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ with .Params.image }}
       {{ $image_id := "" }}
@@ -50,7 +50,7 @@
             ) }}
             {{ if (partial "GetTextFromHTML" .Params.biography) }}
               <div class="rich-text">
-                {{ partial "PrepareHTML" .Params.biography }}
+                {{ safeHTML .Params.biography }}
               </div>
             {{ end }}
           </div>

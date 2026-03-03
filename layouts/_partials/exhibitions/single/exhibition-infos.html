@@ -4,7 +4,7 @@
     {{ if .computed }}
       <li class="exhibition-date">
         <span>{{ i18n "exhibitions.date" }}</span>
-        {{ partial "PrepareHTML" .computed.two_lines.long }}
+        {{ safeHTML .computed.two_lines.long }}
       </li>
     {{ end }}
   {{ end }}

@@ -3,15 +3,15 @@
     <dl class="essential">
       {{- if .Params.level -}}
         <dt>{{ i18n "programs.level" }}</dt>
-        <dd>{{ partial "PrepareHTML" .Params.level }}</dd>
+        <dd>{{ safeHTML .Params.level }}</dd>
       {{- end -}}
       {{- if .Params.duration -}}
         <dt>{{ i18n "programs.duration" }}</dt>
-        <dd>{{ partial "PrepareHTML" .Params.duration }}</dd>
+        <dd>{{ safeHTML .Params.duration }}</dd>
       {{- end -}}
       {{- if .Params.ects -}}
         <dt>{{ i18n "programs.ects_credits" }}</dt>
-        <dd>{{ partial "PrepareHTML" .Params.ects }}</dd>
+        <dd>{{ safeHTML .Params.ects }}</dd>
       {{- end -}}
     </dl>
   </div>

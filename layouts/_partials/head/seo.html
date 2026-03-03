@@ -2,7 +2,7 @@
 
 {{- $seoDescription := "" -}}
 {{- if .Params.meta_description -}}
-  {{- $seoDescription = partial "PrepareHTML" .Params.meta_description -}}
+  {{- $seoDescription = safeHTML .Params.meta_description -}}
 {{- else if .Params.summary -}}
   {{- $seoDescription = .Params.summary | plainify | truncate 150 -}}
 {{- else if .Params.contents -}}

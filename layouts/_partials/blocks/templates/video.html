@@ -30,7 +30,7 @@
 
           <div class="video">
             {{ if eq .video.platform "default" }}
-              {{ partial "PrepareHTML" .video.iframe }}
+              {{ safeHTML .video.iframe }}
             {{ else }}
               {{ partial "blocks/templates/video/lazy-container" .video }}
             {{ end }}
@@ -40,7 +40,7 @@
         {{ if ne .layout "button" }}
           {{ if .video_title }}
             {{ $described_by_id = printf "block-video-title-%d" $block_index }}
-            <p aria-hidden="true" id="{{ $described_by_id }}">{{- partial "PrepareHTML" .video_title -}}</p>
+            <p aria-hidden="true" id="{{ $described_by_id }}">{{- safeHTML .video_title -}}</p>
           {{ end }}
 
           {{ partial "commons/transcription.html" ( dict

@@ -4,7 +4,7 @@
     {{ with .computed }}
       <li class="event-date">
         <span>{{ i18n "commons.date.one" }}</span>
-        {{ partial "PrepareHTML" .two_lines.long }}
+        {{ safeHTML .two_lines.long }}
       </li>
     {{ end }}
   {{ end }}
