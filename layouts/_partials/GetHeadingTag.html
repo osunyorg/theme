@@ -1,11 +1,5 @@
-{{ $level := . }}
-{{ $attributes := "" }}
-{{ if isset . "level" }}
-    {{ $level = .level | default 2 }}
-{{ end }}
-{{ if isset . "attributes" }}
-  {{ $attributes = .attributes }}
-{{ end }}
+{{ $level := .level | default 2 }}
+{{ $attributes := .attributes | default "" }}
 
 {{ $tag := printf "h%d" $level }}
 
