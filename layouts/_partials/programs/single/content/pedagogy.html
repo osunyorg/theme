@@ -1,24 +1,25 @@
-{{- if or (partial "GetTextFromHTML" .Params.content) (partial "GetTextFromHTML" .Params.pedagogy) (partial "GetTextFromHTML" .Params.evaluation) (.Params.teachers) -}}
+{{ $hasPedagogy := partial "programs/single/helpers/hasPedagogy" . }}
+{{- if $hasPedagogy }}
 <section id="{{ anchorize ( i18n "programs.toc.pedagogy" ) }}">
   <div class="container">
     <div class="content">
       <h2>{{ i18n "programs.toc.pedagogy" }}</h2>
       <div>
-        {{- if partial "GetTextFromHTML" .Params.content -}}
+        {{- if .Params.content -}}
           <section class="rich-text" id="{{ anchorize (i18n "programs.content") }}">
             <h3>{{ i18n "programs.content" }}</h3>
             {{- safeHTML .Params.content -}}
           </section>
         {{- end -}}
 
-        {{- if partial "GetTextFromHTML" .Params.pedagogy -}}
+        {{- if .Params.pedagogy -}}
           <section class="rich-text" id="{{ anchorize (i18n "programs.pedagogy") }}">
             <h3>{{ i18n "programs.pedagogy" }}</h3>
             {{- safeHTML .Params.pedagogy -}}
           </section>
         {{- end -}}
 
-        {{- if partial "GetTextFromHTML" .Params.evaluation -}}
+        {{- if .Params.evaluation -}}
           <section class="rich-text" id="{{ anchorize (i18n "programs.evaluation") }}">
             <h3>{{ i18n "programs.evaluation" }}</h3>
             {{- safeHTML .Params.evaluation -}}
@@ -29,7 +30,7 @@
           {{ $title := i18n "programs.teachers" -}}
           <section id="{{ anchorize $title }}">
             <h3>{{ $title }}</h3>
-            {{- partial "programs/single/content/teachers.html" (dict
+            {{- partial "programs/single/content/pedagogy/teachers.html" (dict
               "title" $title
               "teachers" .Params.teachers
               "descriptions" .Params.teachers_description
