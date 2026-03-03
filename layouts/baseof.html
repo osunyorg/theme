@@ -13,14 +13,14 @@
     {{ partial "head/script.html" . }}
     {{ partial "head/extras.html" . }}
   </head>
-  <body class="{{ partial "GetBodyclass" . }}">
+  <body class="{{ partial "body/helpers/GetBodyclass" . }}">
     {{- partial "header/accessibility.html" -}}
     {{- partial "hooks/before-header" . -}}
     {{- partial "header/header.html" . -}}
     {{- partial "commons/alerts/list.html" }}
     <main id="main"
-        {{ partial "GetMainClass" . | safeHTMLAttr }}
-        {{ partial "GetMainSearchAttributes" . | safeHTMLAttr }}
+        {{ partial "main/helpers/GetClass" . | safeHTMLAttr }}
+        {{ partial "main/helpers/GetSearchAttribute" . | safeHTMLAttr }}
         >
       {{ partial "commons/search/button.html" "fixed" }}
       {{ block "main" . }}{{ end }}
@@ -34,7 +34,7 @@
     {{ partial "footer/js.html" . }}
     {{ partial "footer/script.html" . }}
     {{ if or (not hugo.IsProduction) site.Params.debug.active }}
-      {{ partial "footer/debug.html" . }}
+      {{ partial "debug/debug.html" . }}
     {{ end -}}
   </body>
 </html>

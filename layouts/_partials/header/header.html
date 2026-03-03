@@ -8,11 +8,10 @@
   {{ if $upper_menu.items }}
     <nav class="upper-menu" aria-label="{{ i18n "commons.menu.upper" }}">
       <div class="container">
-        {{ partial "commons/menu" (dict
-          "context" .
+        {{ partial "commons/menu.html" (dict
           "kind" "upper-menu"
-          "level" 1
           "stop" 1
+          "context" .
         ) }}
       </div>
     </nav>
@@ -25,8 +24,6 @@
         <div class="menu" id="navigation">
           {{ partial "commons/menu" (dict
             "kind" "primary"
-            "dropdown" true
-            "level" 1
             "context" .
           ) }}
         </div>

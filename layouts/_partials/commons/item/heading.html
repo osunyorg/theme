@@ -29,7 +29,7 @@
 {{ $heading_tag.close }}
 
 {{ if and $options.subtitle $subtitle }}
-  <p class="{{- $type -}}-subtitle">{{ partial "PrepareHTML" $subtitle }}</p>
+  <p class="{{- $type -}}-subtitle">{{ safeHTML $subtitle }}</p>
 {{ end }}
 
 {{ if and $options.subtitle $subtitle }}

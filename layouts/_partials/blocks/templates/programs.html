@@ -52,7 +52,7 @@
                   {{ if and $options.diploma $diploma }}
                     {{- $diploma = site.GetPage (printf "/diplomas/%s" $diploma) -}}
                     {{- with $diploma -}}
-                      <span class="program-diploma">{{ partial "PrepareHTML" .Params.short_name }}</span>
+                      <span class="program-diploma">{{ safeHTML .Params.short_name }}</span>
                     {{- end -}}
                   {{ end }}
                 </div>

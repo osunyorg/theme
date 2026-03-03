@@ -1,0 +1,18 @@
+{{ $options := .options }}
+{{ $level := .level }}
+{{ $level_options := index $options (printf "level_%d" $level) }}
+{{ $stop := .stop }}
+{{ $context := .context }}
+
+<ul class="{{ with $level }}nav-level-{{ . }}{{ end }} {{ .class }}">
+  {{ range .items -}}
+    {{ partial "commons/menu/item.html" (dict
+      "item" .
+      "options" $options
+      "level" $level
+      "level_options" $level_options
+      "stop" $stop
+      "context" $context
+    ) }}
+  {{ end -}}
+</ul>
