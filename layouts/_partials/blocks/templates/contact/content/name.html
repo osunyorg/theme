@@ -1,21 +1,18 @@
-{{ $heading_rank := .block.ranks.children | default 2 }}
+{{ $heading_rank := .block.ranks.children }}
 {{ $heading_name := partial "GetHeadingTag" (dict 
   "level" $heading_rank
   "attributes" "itemprop='name'"
 ) }}
-{{ if .block.data.information }}
+
+{{ if or .block.data.name .block.data.information }}
   <div class="informations">
     {{ with .block.data.name }}
       {{ $heading_name.open }}
         {{- . -}}
       {{ $heading_name.close }}
     {{ end }}
-    <div>{{ safeHTML .block.data.information }}</div>
+    {{ with .block.data.information }}
+      {{ safeHTML . }}
+    {{ end }}
   </div>
-{{ else }}
-  {{ with .block.data.name }}
-    {{ $heading_name.open }}
-      {{- . -}}
-    {{ $heading_name.close }}
-  {{ end }}
 {{ end }}
