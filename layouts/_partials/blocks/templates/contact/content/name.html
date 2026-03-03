@@ -6,12 +6,16 @@
 {{ if .block.data.information }}
   <div class="informations">
     {{ with .block.data.name }}
-      {{ $heading_name.open }}{{ . }}{{ $heading_name.close }}
+      {{ $heading_name.open }}
+        {{- . -}}
+      {{ $heading_name.close }}
     {{ end }}
     <div>{{ safeHTML .block.data.information }}</div>
   </div>
 {{ else }}
   {{ with .block.data.name }}
-    {{ $heading_name.open }}{{ . }}{{ $heading_name.close }}
+    {{ $heading_name.open }}
+      {{- . -}}
+    {{ $heading_name.close }}
   {{ end }}
 {{ end }}
