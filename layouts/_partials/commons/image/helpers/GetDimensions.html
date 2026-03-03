@@ -5,7 +5,6 @@
 {{ else }}
   {{ $file = .file }}
 {{ end }}
-
 {{ if strings.HasSuffix $file ".svg"}}
   {{ $dimensions = partial "commons/image/helpers/get-dimensions/GetSvg" $file }}
 {{ else }}
@@ -14,5 +13,4 @@
     {{ $dimensions = slice (math.Round .Width) (math.Round .Height )}}
   {{ end }}
 {{ end }}
-
 {{ return $dimensions }}
