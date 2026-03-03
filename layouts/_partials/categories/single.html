@@ -7,15 +7,15 @@
   ) }}
 
   {{ partial "categories/single/summary.html" (dict
-    "context" .
     "block_wrapped" true
+    "context" .
   ) }}
 
   {{ partial "taxonomies/single/term.html" (dict "taxonomy" .Type) }}
 
   {{ partial "contents/list.html" (dict
-    "context" .
     "contents" .Params.contents
+    "context" .
   ) }}
 
   {{ partial "categories/single/categories.html" (dict 
