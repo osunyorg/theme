@@ -27,9 +27,9 @@
                 <div class="post-content">
                   {{ partial "posts/partials/post/heading.html" (dict
                     "item" .
-                    "level" $heading_level
-                    "attributes" "class='post-title' itemprop='headline'"
                     "options" $options
+                    "level" $heading_level
+                    "itemprop" "headline"
                   ) }}
 
                   {{ if and $options.summary .Params.summary }}
