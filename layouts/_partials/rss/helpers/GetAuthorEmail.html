@@ -1,0 +1,9 @@
+{{ $authorEmail := "" }}
+{{ with site.Params.author }}
+  {{ if reflect.IsMap . }}
+    {{ with .email }}
+      {{ $authorEmail = . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $authorEmail }}

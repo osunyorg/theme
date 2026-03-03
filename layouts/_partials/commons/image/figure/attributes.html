@@ -1,0 +1,20 @@
+{{ $image_class := .image_class | default "" }}
+{{ $image_direction := partial "commons/image/helpers/GetDirection" .image }}
+{{ $image_class = printf "%s image-%s" $image_class $image_direction }}
+
+{{ if .with_lightbox }}
+  {{ $image_class = printf "%s lightbox-figure" $image_class }}
+{{ end }}
+
+{{- with $image_class }}
+  class="{{ . }}"
+{{- end -}}
+
+{{- if or .image.text .image.credit -}}
+  role="figure"
+  aria-label="{{ .image.text | plainify | chomp }}
+  {{- with .image.credit }}
+    {{ i18n "commons.accessibility.credits" }}
+    {{ replaceRE `<span class="sr-only">(.*?)</span>` "" . | plainify | chomp }}
+  {{ end -}}"
+{{ end -}}

@@ -9,7 +9,7 @@
         {{- with .link -}}
           <a href="{{ . }}">
         {{- end -}}
-        {{ partial "PrepareHTML" .value }}
+        {{ safeHTML .value }}
         {{- with .link -}}
           </a>
         {{- end -}}
@@ -17,7 +17,7 @@
     {{ end }}
     {{ with .description }}
       <div class="description">
-        {{- partial "PrepareHTML" . -}}
+        {{- safeHTML . -}}
       </div>
     {{ end }}
   </div>

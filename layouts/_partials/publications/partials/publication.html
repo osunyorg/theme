@@ -8,7 +8,7 @@
 {{ with $publication }}
   <li class="publication" itemscope itemtype="http://schema.org/ScholarlyArticle">
     <div class="publication-content">
-      {{- $title := partial "PrepareHTML" .Title -}}
+      {{- $title := safeHTML .Title -}}
 
       {{ $heading_tag.open }}
         <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
@@ -21,12 +21,12 @@
           {{- end -}}
 
           {{- with .Params.journal_title -}}
-            <span>{{- partial "PrepareHTML" . -}}</span>
+            <span>{{- safeHTML . -}}</span>
           {{- end -}}
 
           {{- with .Params.ref -}}
             <div class="publication-ref" itemprop="isPartOf" itemscope itemtype="http://schema.org/PublicationIssue">
-              <span itemprop="name">{{- partial "PrepareHTML" . -}}</span>
+              <span itemprop="name">{{- safeHTML . -}}</span>
             </div>
           {{- end -}}
         </div>
@@ -34,7 +34,7 @@
     </div>
     {{ with .Params.authors_list }}
       <div class="publication-authors">
-        <span itemprop="author">{{ partial "PrepareHTML" . }}</span>
+        <span itemprop="author">{{ safeHTML . }}</span>
       </div>
     {{ end }}
   </li>

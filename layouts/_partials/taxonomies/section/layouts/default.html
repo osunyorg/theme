@@ -1,0 +1,10 @@
+<div class="taxonomy-categories">
+  {{ if .show_name }}<span>{{ .taxonomy.name }}</span>{{ end }}
+  {{ $categories := partial "GetObjectsFromPathSlice" .taxonomy.categories }}
+  {{ partial "commons/categories.html" (dict 
+    "categories" $categories
+    "depth" true
+    "class" "taxonomy-categories-list"
+    "kind" .type
+  ) }}
+</div>

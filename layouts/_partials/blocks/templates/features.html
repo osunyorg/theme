@@ -24,7 +24,7 @@
                       {{ $heading_tag.close -}}
                     {{ end }}
                     {{ with .description }}
-                      <div>{{ partial "PrepareHTML" . }}</div>
+                      <div>{{ safeHTML . }}</div>
                     {{ end }}
                   </div>
                 {{ end }}
@@ -37,7 +37,7 @@
                     ) -}}
                     {{- if .credit -}}
                       <figcaption class="credit">
-                        {{ partial "PrepareHTML" .credit }}
+                        {{ safeHTML .credit }}
                       </figcaption>
                     {{- end -}}
                   </figure>

@@ -13,6 +13,6 @@
 
 {{- partial "header/hero.html" (dict
   "title" .Title
-  "subtitle" (partial "PrepareHTML" $subtitle)
+  "subtitle" (safeHTML $subtitle)
   "context" .
 ) -}}

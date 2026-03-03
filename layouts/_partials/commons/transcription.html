@@ -10,7 +10,7 @@
         {{ with .described_by -}}aria-describedby="{{ . }}"{{- end }}>
         {{ $title }}
       </summary>
-      {{- $transcription := partial "PrepareHTML" .transcription -}}
+      {{- $transcription := safeHTML .transcription -}}
       {{ safeHTML $transcription }}
     </details>
   </div>

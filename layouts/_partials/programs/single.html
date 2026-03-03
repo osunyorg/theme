@@ -1,28 +1,13 @@
 {{ partial "programs/single/hero.html" . }}
 
 <div class="document-content {{ with .Params.diplomas }}diploma-{{.}}{{ end }}" itemscope itemtype="https://schema.org/EducationalOccupationalCredential">
-  <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+  <meta itemprop="name" content="{{ safeHTML .Title }}">
   <meta itemprop="url" content="{{ .Permalink }}">
 
   {{ partial "toc/container.html" (dict
     "toc" "programs/single/toc.html"
     "context" .
   ) }}
-
-  {{- if .Params.image -}}
-    {{- $id := .Params.image -}}
-    {{- if isset .Params.image "id" -}}
-      {{- $id = .Params.image.id -}}
-    {{- end -}}
-    {{- $image := partial "GetMedia" $id -}}
-    {{- if $image -}}
-      {{- $url := $image.url -}}
-      {{- if site.Params.keycdn -}}
-        {{- $url = $image.direct_url -}}
-      {{- end -}}
-      <meta itemprop="image" content="{{ $url }}">
-    {{- end -}}
-  {{- end -}}
 
   {{ partial "programs/single/summary.html" (dict
     "with_container" true

@@ -13,7 +13,7 @@
           {{ $heading_tag.close -}}
         {{ end }}
         {{ with .text }}
-          <div itemprop="text">{{- partial "PrepareHTML" . -}}</div>
+          <div itemprop="text">{{- safeHTML . -}}</div>
         {{ end }}
       </article>
     {{ end -}}

@@ -4,7 +4,7 @@
     {{ with .computed }}
       <li class="event-date">
         <span>{{ i18n "commons.date.one" }}</span>
-        {{ partial "PrepareHTML" .two_lines.long }}
+        {{ safeHTML .two_lines.long }}
       </li>
     {{ end }}
   {{ end }}
@@ -24,7 +24,7 @@
 
   {{ if .Params.events_categories }}
     <li>
-      {{ partial "taxonomies/single-list.html" . }}
+      {{ partial "taxonomies/single/list.html" . }}
     </li>
   {{ end }}
 
