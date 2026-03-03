@@ -25,10 +25,10 @@
                 <div class="key-figure-text">
                   <span>
                     {{ if or .number (eq .number 0) }}
-                      <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
+                      <strong>{{ .number }}</strong>{{ safeHTML .unit }}
                     {{ end }}
                   </span>
-                  {{ partial "PrepareHTML" .description }}
+                  {{ safeHTML .description }}
                 </div>
               </li>
             {{ end -}}

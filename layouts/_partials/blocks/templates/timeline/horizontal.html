@@ -12,7 +12,7 @@
         {{ $heading_tag.close -}}
         <div class="line"></div>
         {{ with .text }}
-          <div itemprop="text">{{- partial "PrepareHTML" . -}}</div>
+          <div itemprop="text">{{- safeHTML . -}}</div>
         {{ end }}
       </li>
     {{ end }}

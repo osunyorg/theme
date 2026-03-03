@@ -25,7 +25,7 @@
             {{ end }}
           </ul>
         {{ else if .no_event_message }}
-          <p>{{ partial "PrepareHTML" .no_event_message }}</p>
+          <p>{{ safeHTML .no_event_message }}</p>
         {{ end }}
       </div>
     </div>

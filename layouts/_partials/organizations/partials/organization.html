@@ -9,7 +9,7 @@
 {{ $with_geolocation := .with_geolocation | default false }}
 
 {{ with $organization }}
-  {{ $title := partial "PrepareHTML" .Title }}
+  {{ $title := safeHTML .Title }}
   <article class="organization" itemscope itemtype="https://schema.org/Organization"
     {{ if $with_geolocation }}
       {{ with .Params.contact_details.postal_address.geolocation }}

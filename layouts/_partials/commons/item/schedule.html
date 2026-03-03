@@ -30,7 +30,7 @@
         {{ end }}
       {{ end }}
       
-      {{ partial "PrepareHTML" $formated_date }}
+      {{ safeHTML $formated_date }}
     </p>
 
     {{- if and $with_hours $time_slot (not $is_repeating) }}

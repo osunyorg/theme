@@ -9,7 +9,7 @@
         {{ partial "blocks/top.html" $block.top }}
 
         {{- if .code }}
-          {{ partial "PrepareHTML" .code }}
+          {{ safeHTML .code }}
         {{ end -}}
 
         {{ partial "commons/transcription.html" ( dict

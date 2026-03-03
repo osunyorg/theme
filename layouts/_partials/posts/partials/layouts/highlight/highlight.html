@@ -25,7 +25,7 @@
       <ul class="list">
         {{ range after 1 . }}
           {{ with site.GetPage .path }}
-            {{ $title := partial "PrepareHTML" .Title }}
+            {{ $title := safeHTML .Title }}
             {{ $reading_time := .Params.contents_reading_time }}
             <li>
               <article class="post">
@@ -37,7 +37,7 @@
                     <a href="{{ .Permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
                   {{ $heading_tag.close }}
                   {{ if and $options.subtitle .Params.subtitle }}
-                    <p class="post-subtitle">{{ partial "PrepareHTML" .Params.subtitle }}</p>
+                    <p class="post-subtitle">{{ safeHTML .Params.subtitle }}</p>
                   {{ end }}
                   {{ if and $options.subtitle .Params.subtitle }}
                     </hgroup>

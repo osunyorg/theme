@@ -14,7 +14,7 @@
       {{ with .text }}
         {{ $is_long := gt (len .) 150 }}
         <blockquote {{- if $is_long }} class="is-long" {{- end }}>
-          {{- partial "PrepareHTML" . -}}
+          {{- safeHTML . -}}
         </blockquote>
       {{ end }}
       {{ if or .photo .author .job -}}
@@ -30,10 +30,10 @@
           {{ if or .author .job -}}
             <p>
               {{- if .author -}}
-                <span class="signature">{{ partial "PrepareHTML" .author }}</span>
+                <span class="signature">{{ safeHTML .author }}</span>
               {{- end }}
               {{- if .job -}}
-                <span class="meta">{{- partial "PrepareHTML" .job -}}</span>
+                <span class="meta">{{- safeHTML .job -}}</span>
               {{- end }}
             </p>
           {{- end }}
