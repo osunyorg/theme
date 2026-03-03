@@ -1,0 +1,19 @@
+{{ if .contact_details.social_networks }}
+  {{ $a11y_name := "" }}
+  {{ if .block.data.name }}
+    {{ $a11y_name := .block.data.name }}
+  {{ else }}
+    {{ $a11y_name := i18n "commons.contact.empty_name" }}
+  {{ end }}
+  <div>
+    {{ .heading_items.open }}
+      {{- i18n "commons.contact.socials.title" -}}
+    {{ .heading_items.close }}
+    <ul class="socials-list">
+      {{ partial "commons/socials.html" (dict
+        "context" .contact_details
+        "name" $a11y_name
+      ) }}
+    </ul>
+  </div>
+{{ end }}
