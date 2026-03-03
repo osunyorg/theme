@@ -2,7 +2,7 @@
 
 {{ with .context }}
   {{ $title := i18n "commons.lightbox.button_without_alt" }}
-  {{ $options := dict "imageSrc" ( partial "GetLightboxUrl" .id ) }}
+  {{ $options := dict "imageSrc" ( partial "commons/lightbox/helpers/GetUrl" .id ) }}
 
   {{ with .text }}
     {{ $options = merge $options (dict "information" (safeHTML . )) }}
