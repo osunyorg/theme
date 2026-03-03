@@ -16,7 +16,9 @@
         {{ if .name }}
           {{ $heading_rank = $heading_rank | add 1 }}
         {{ end }}
-        {{ $heading_items := partial "GetHeadingTag" (dict "level" $heading_rank) }}
+        {{ $heading_items := partial "GetHeadingTag" (dict
+          "level" $heading_rank
+        ) }}
 
         <div class="contact-content" itemscope itemtype="https://schema.org/Organization">
           {{ with .information }}
