@@ -1,6 +1,5 @@
 {{ $exhibitions := .exhibitions }}
 {{ $context := .context }}
-
 {{ with $exhibitions }}
   <section class="related-exhibitions" id="{{ anchorize (i18n "programs.toc.related.exhibitions") }}">
     <div class="container">
@@ -10,7 +9,6 @@
           {{ $category_name := safeHTML $context.Title | truncate 30 }}
           {{ i18n "exhibitions.see_all_in_program" (dict "Title" $category_name) }}
         </a>
-
         {{ $exhibitions = partial "GetPathSliceFromObjects" . }}
         {{ $params := partial "GetLayoutAndOptions" (dict 
           "param" "programs.related_exhibitions"
