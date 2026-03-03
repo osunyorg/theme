@@ -1,0 +1,15 @@
+{{ with .Params.children }}
+  <section id="programs">
+    <h3>{{ i18n "programs.children" }}</h3>
+    <ol class="programs programs--light">
+      {{- range . -}}
+        {{ $child := site.GetPage .path }}
+        {{ partial "programs/partials/program.html" (dict 
+          "program" $child
+          "heading_level" 4
+          "options" site.Params.programs.single.children.options
+        ) }}
+      {{- end -}}
+    </ol>
+  </section>
+{{ end }}

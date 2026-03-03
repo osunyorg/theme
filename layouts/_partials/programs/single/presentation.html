@@ -5,37 +5,10 @@
 
       {{ if or .Params.image .Params.presentation .Params.objectives .Pages }}
         <div>
-          {{- partial "programs/single/image.html" .Params.image -}}
-
-          {{- if partial "GetTextFromHTML" .Params.presentation -}}
-            <section class="rich-text" id="{{ anchorize (i18n "programs.presentation") }}">
-              <h3>{{ i18n "programs.presentation" }}</h3>
-              {{- safeHTML .Params.presentation -}}
-            </section>
-          {{- end -}}
-
-          {{- if partial "GetTextFromHTML" .Params.objectives -}}
-            <section class="rich-text" id="{{ anchorize (i18n "programs.objectives") }}">
-              <h3>{{ i18n "programs.objectives" }}</h3>
-              {{- safeHTML .Params.objectives -}}
-            </section>
-          {{- end -}}
-          
-          {{ with .Params.children }}
-            <section id="programs">
-              <h3>{{ i18n "programs.children" }}</h3>
-              <ol class="programs programs--light">
-                {{- range . -}}
-                  {{ $child := site.GetPage .path }}
-                  {{ partial "programs/partials/program.html" (dict 
-                    "program" $child
-                    "heading_level" 4
-                    "options" site.Params.programs.single.children.options
-                  ) }}
-                {{- end -}}
-              </ol>
-            </section>
-          {{ end }}
+          {{ partial "programs/single/presentation/image.html" . }}
+          {{ partial "programs/single/presentation/rich-text.html" . }}
+          {{ partial "programs/single/presentation/objectives.html" . }}
+          {{ partial "programs/single/presentation/children.html" . }}
         </div>
       {{ end }}
 
