@@ -1,0 +1,22 @@
+{{ $heading_rank := .block.ranks.children | default 2 }}
+{{ if .block.data.name }}
+  {{ $heading_rank = $heading_rank | add 1 }}
+{{ end }}
+{{ $heading_items := partial "GetHeadingTag" (dict
+  "level" $heading_rank
+) }}
+<div class="contact-content" itemscope itemtype="https://schema.org/Organization">
+  {{ partial "blocks/templates/contact/content/name" (dict
+    "block" .block
+  )}}
+  <div class="contacts">
+    {{ partial "blocks/templates/contact/content/contact_details.html" (dict
+        "block" .block
+        "heading_items" $heading_items
+    )}}
+    {{ partial "blocks/templates/contact/content/timetable.html" (dict
+        "block" .block
+        "heading_items" $heading_items
+    )}}
+  </div>
+</div>

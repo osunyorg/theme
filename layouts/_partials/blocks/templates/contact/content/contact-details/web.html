@@ -1,0 +1,18 @@
+{{ if or .contact_details.websites .contact_details.emails }}
+  {{ $label := i18n "commons.contact.email.label" }}
+  {{ if .contact_details.websites }}
+    {{ $label = i18n "commons.contact.web" }}
+  {{ end }}
+  <div>
+    {{ .heading_items.open }}{{ $label }}{{ .heading_items.close }}
+    {{ with .contact_details.emails }}
+      {{ $emails := cond .list .list .email }}
+      {{ range $emails }}
+        <p><a itemprop="email" href="{{ chomp .value | safeURL }}" title="{{ safeHTML (i18n "commons.contact.email.a11y_label" (dict "email" .label )) }}">{{ .label }}</a></p>
+      {{ end }}
+    {{ end }}
+    {{ with .contact_details.websites.website }}
+      <p><a href="{{ chomp .value | safeURL }}" target="_blank" rel="noreferrer">{{ .label }}</a></p>
+    {{ end }}
+  </div>
+{{ end }}
