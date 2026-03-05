@@ -1,0 +1,45 @@
+{{ $heading_level := .heading_level }}
+{{ $options := .options }}
+<ul class="programs-grid">
+  {{ range .programs }}
+    {{ $program := site.GetPage .path }}
+    {{ $title := $program.Title | safeHTML }}
+    <li class="program" itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
+      <div class="program-content">
+        {{ partial "programs/partials/program/heading.html" (dict
+          "item" $program
+          "level" $heading_level
+          "options" $options
+          "itemprop" "name"
+        ) }}
+
+        {{ if and $options.summary $program.Params.summary }}
+          {{ partial "programs/partials/program/summary.html" $program }}
+        {{ end }}
+
+        {{/*  TODO: remove when option is added to the block  */}}
+        {{ if or site.Params.programs.index.options.categories $options.categories }}
+          {{ partial "commons/categories.html" ( dict
+            "context" $program
+            "kind" "program"
+          ) }}
+        {{ end }}
+
+        {{ partial "commons/item/more.html" . }}
+
+        {{ if and $options.diploma }}
+          {{ partial "programs/partials/program/diploma.html" $program }}
+        {{ end }}
+      </div>
+
+      {{ if and $program.Params.image $options.image }}
+        {{ partial "programs/partials/program/media.html" (dict 
+          "image" $program.Params.image
+          "layout" "grid"
+          "options" $options
+          "type" "programs"
+        ) }}
+      {{ end }}
+    </li>
+  {{ end }}
+</ul>
