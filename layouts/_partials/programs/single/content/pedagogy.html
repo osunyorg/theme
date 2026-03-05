@@ -1,35 +1,16 @@
 {{ $hasPedagogy := partial "programs/single/helpers/hasPedagogy" . }}
 {{- if $hasPedagogy }}
-<section id="{{ anchorize ( i18n "programs.toc.pedagogy" ) }}">
-  <div class="container">
-    <div class="content">
-      <h2>{{ i18n "programs.toc.pedagogy" }}</h2>
-      <div>
-        {{- if .Params.content -}}
-          <section class="rich-text" id="{{ anchorize (i18n "programs.content") }}">
-            <h3>{{ i18n "programs.content" }}</h3>
-            {{- safeHTML .Params.content -}}
-          </section>
-        {{- end -}}
-
-        {{- if .Params.pedagogy -}}
-          <section class="rich-text" id="{{ anchorize (i18n "programs.pedagogy") }}">
-            <h3>{{ i18n "programs.pedagogy" }}</h3>
-            {{- safeHTML .Params.pedagogy -}}
-          </section>
-        {{- end -}}
-
-        {{- if .Params.evaluation -}}
-          <section class="rich-text" id="{{ anchorize (i18n "programs.evaluation") }}">
-            <h3>{{ i18n "programs.evaluation" }}</h3>
-            {{- safeHTML .Params.evaluation -}}
-          </section>
-        {{- end -}}
-
-        {{- partial "programs/single/content/pedagogy/teachers.html" . -}}
-
+  <section id="{{ anchorize ( i18n "programs.toc.pedagogy" ) }}">
+    <div class="container">
+      <div class="content">
+        <h2>{{ i18n "programs.toc.pedagogy" }}</h2>
+        <div>
+          {{- partial "programs/single/content/pedagogy/content.html" . -}}
+          {{- partial "programs/single/content/pedagogy/pedagogy.html" . -}}
+          {{- partial "programs/single/content/pedagogy/evaluation.html" . -}}
+          {{- partial "programs/single/content/pedagogy/teachers.html" . -}}
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 {{- end -}}
