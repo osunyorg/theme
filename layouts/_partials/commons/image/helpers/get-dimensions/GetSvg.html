@@ -1,0 +1,29 @@
+{{ $svgContent := . | readFile }}
+{{ $width := index (
+              split (
+                index (
+                  split $svgContent "width="
+                  ) 1
+                ) `"`
+              ) 1 }}
+{{ $height := index (
+              split (
+                index (
+                  split $svgContent "height="
+                  ) 1
+                ) `"`
+              ) 1 }}
+{{ if not (and $width $height) }}
+  {{ $svgViewBoxSizes := split (
+                          index (
+                            split (
+                              index (
+                                split $svgContent "viewBox="
+                                ) 1
+                              ) `"`
+                            ) 1
+                          ) " " }}
+  {{ $width = index $svgViewBoxSizes 2 }}
+  {{ $height = index $svgViewBoxSizes 3 }}
+{{ end }}
+{{ return slice (math.Round $width) (math.Round $height) }}
