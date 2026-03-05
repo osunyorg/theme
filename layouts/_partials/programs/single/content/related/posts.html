@@ -1,6 +1,5 @@
-{{ $posts := .posts }}
 {{ $context := .context }}
-{{ with $posts }}
+{{ with .posts }}
   <section class="related-posts" id="{{ anchorize (i18n "programs.toc.related.posts") }}">
     <div class="container">
       <div class="content">
@@ -10,7 +9,7 @@
           {{ i18n "posts.see_all_in_program" (dict "Title" $category_name) }}
         </a>
         <div class="blocks">
-          {{ $posts = partial "GetPathSliceFromObjects" . }}
+          {{ $posts := partial "GetPathSliceFromObjects" . }}
           {{ $params := partial "GetLayoutAndOptions" (dict 
             "param" "programs.related_posts"
             "default" "posts.index"
