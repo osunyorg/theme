@@ -3,7 +3,6 @@
 <ul class="programs-grid">
   {{ range .programs }}
     {{ $program := site.GetPage .path }}
-    {{ $title := $program.Title | safeHTML }}
     <li class="program" itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
       <div class="program-content">
         {{ partial "programs/partials/program/heading.html" (dict
