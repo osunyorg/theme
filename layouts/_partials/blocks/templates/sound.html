@@ -1,6 +1,6 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
-{{- $block_index := .index -}}
+{{- $html_id := .html_id -}}
 {{- $described_by_id := "" -}}
 
 {{- with .block.data -}}
@@ -16,7 +16,7 @@
                 <audio src="{{ $file.direct_url }}" controls title="{{ .title | safeHTML }}"></audio>
                 <figcaption>
                   {{ if .title }}
-                    {{ $described_by_id = printf "block-sound-title-%d" $block_index }}
+                    {{ $described_by_id = printf "block-sound-title-%s" $html_id }}
                     <p aria-hidden="true" id="{{- $described_by_id -}}">{{- safeHTML .title -}}</p>
                   {{ end }}
                   <p>{{ partial "commons/extension-and-size.html" $file }}</p>
@@ -26,7 +26,7 @@
           {{ end }}
 
           {{ partial "commons/transcription.html" (dict
-            "block_index" $block_index
+            "html_id" $html_id
             "described_by" $described_by_id
             "transcription" .transcription
           ) }}
