@@ -1,8 +1,7 @@
 {{ $inside_volume := .inside_volume | default false }}
 {{ $actions := .actions | default true }}
-{{ $modalId := print "modalID_" .index }}
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-  "level" ( .heading_level | default 3 ) 
+{{ $heading_tag := partial "GetHeadingTag" (dict
+  "level" ( .heading_level | default 3 )
   "attributes" "class='paper-title' itemprop='headline'"
 ) }}
 
