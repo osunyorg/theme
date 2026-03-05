@@ -1,0 +1,23 @@
+<div class="buttons">
+  {{ if site.Params.programs.single.options.website_link }}
+    {{ $target := .Params.website_url }}
+    {{ $label := (i18n "programs.website") }}
+    {{ if and $target $label }}
+      <a href="{{ $target }}" class="btn website" target="_blank">{{ $label }}</a>
+    {{ end }}
+  {{ end }}
+
+  {{ if and site.Params.programs.single.options.registration_link .Params.registration_url }}
+    <a href="{{ .Params.registration_url }}" class="btn registration-url" target="_blank">{{ i18n "programs.apply" }}</a>
+  {{ end }}
+
+  {{ if site.Params.programs.share_links.enabled | default site.Params.share_links.enabled }}
+    {{ partial "commons/share/dropdown.html" . }}
+  {{ end }}
+
+  {{ partial "commons/download-link" (dict
+    "id" .Params.downloadable_summary
+    "title" (i18n "commons.download.singular_name")
+    "use_filename_for_a11y_title" true
+  ) }}
+</div>
