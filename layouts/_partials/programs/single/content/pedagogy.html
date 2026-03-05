@@ -26,17 +26,8 @@
           </section>
         {{- end -}}
 
-        {{- if .Params.teachers -}}
-          {{ $title := i18n "programs.teachers" -}}
-          <section id="{{ anchorize $title }}">
-            <h3>{{ $title }}</h3>
-            {{- partial "programs/single/content/pedagogy/teachers.html" (dict
-              "title" $title
-              "teachers" .Params.teachers
-              "descriptions" .Params.teachers_description
-            ) -}}
-          </section>
-        {{- end -}}
+        {{- partial "programs/single/content/pedagogy/teachers.html" . -}}
+
       </div>
     </div>
   </div>

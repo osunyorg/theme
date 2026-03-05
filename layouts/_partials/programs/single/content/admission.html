@@ -1,53 +1,19 @@
 {{ $has_admission := partial "programs/single/helpers/HasAdmission" . }}
 {{- if $has_admission -}}
-<section id="{{ anchorize (i18n "programs.toc.admission") }}">
-  <div class="container">
-    <div class="content">
-      <h2>{{ i18n "programs.toc.admission" }}</h2>
-      <div>
-        {{- if .Params.prerequisites -}}
-          <section class="rich-text program-admission-prerequisites" id="{{ anchorize (i18n "programs.prerequisites") }}">
-            <h3>{{ i18n "programs.prerequisites" }}</h3>
-            {{- safeHTML .Params.prerequisites -}}
-          </section>
-        {{- end -}}
-
-        {{ partial "programs/single/content/admission/pricing.html" . }}
-
-        {{- if or .Params.registration .Params.registration_url -}}
-          <section class="rich-text program-admission-registration" id="{{ anchorize (i18n "programs.registration") }}">
-            <h3>{{ i18n "programs.registration" }}</h3>
-            {{- safeHTML .Params.registration -}}
-            {{- if .Params.registration_url -}}
-              <p><a href="{{- safeHTML .Params.registration_url -}}" class="registration">{{ i18n "programs.apply" }}</a></p>
-            {{- end -}}
-          </section>
-        {{- end -}}
-
-        {{- if .Params.accessibility -}}
-          <section class="rich-text program-admission-accessibility" id="{{ anchorize (i18n "programs.accessibility") }}">
-            <h3>{{ i18n "programs.accessibility" }}</h3>
-            {{- safeHTML .Params.accessibility -}}
-          </section>
-        {{- end -}}
-
-        {{- if .Params.other -}}
-          <section class="rich-text program-admission-other" id="{{ anchorize (i18n "programs._other") }}">
-            <h3>{{ i18n "programs._other" }}</h3>
-            {{- safeHTML .Params.other -}}
-          </section>
-        {{- end -}}
-
-        {{ partial "programs/single/content/admission/roles.html" . }}
-
-        {{- if .Params.contacts -}}
-          <section class="rich-text" id="{{ anchorize (i18n "programs.contacts") }}">
-            <h3>{{ i18n "programs.contacts" }}</h3>
-            {{- safeHTML .Params.contacts -}}
-          </section>
-        {{- end -}}
+  <section id="{{ anchorize (i18n "programs.toc.admission") }}">
+    <div class="container">
+      <div class="content">
+        <h2>{{ i18n "programs.toc.admission" }}</h2>
+        <div>
+          {{ partial "programs/single/content/admission/prerequisites.html" . }}
+          {{ partial "programs/single/content/admission/pricing.html" . }}
+          {{ partial "programs/single/content/admission/registration.html" . }}
+          {{ partial "programs/single/content/admission/accessibility.html" . }}
+          {{ partial "programs/single/content/admission/other.html" . }}
+          {{ partial "programs/single/content/admission/roles.html" . }}
+          {{ partial "programs/single/content/admission/contact.html" . }}
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 {{- end -}}
