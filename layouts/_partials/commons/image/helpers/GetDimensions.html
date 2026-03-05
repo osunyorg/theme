@@ -10,7 +10,7 @@
 {{ else }}
   {{ $imgData := imageConfig $file }}
   {{ with $imgData }}
-    {{ $dimensions = slice (math.Round .Width) (math.Round .Height )}}
+    {{ $dimensions = slice (math.Round .Width) (math.Round .Height) }}
   {{ end }}
 {{ end }}
 {{ return $dimensions }}
