@@ -1,0 +1,20 @@
+{{ $hasPedagogy := partial "programs/single/helpers/HasPedagogy" . }}
+{{- if $hasPedagogy }}
+  <li>
+    <a {{ partial "AnchorAttribute" (i18n "programs.toc.pedagogy") }}>{{ i18n "programs.toc.pedagogy" }}</a>
+    <ol>
+      {{- if .Params.content -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.content") }}
+      {{- end -}}
+      {{- if .Params.pedagogy -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.pedagogy") }}
+      {{- end -}}
+      {{- if .Params.evaluation -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.evaluation") }}
+      {{- end -}}
+      {{- if .Params.teachers -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.teachers") }}
+      {{- end -}}
+    </ol>
+  </li>
+{{ end -}}

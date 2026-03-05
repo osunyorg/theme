@@ -1,6 +1,6 @@
-{{ if . }}
+{{ if .Params.image }}
   {{ partial "commons/image/figure.html" (dict
-    "image" .
+    "image" .Params.image
     "sizes" site.Params.image_sizes.sections.programs.image
     "itemprop" true
     "image_class" "featured-image"

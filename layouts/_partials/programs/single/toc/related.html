@@ -1,0 +1,17 @@
+{{ $related_posts := partial "programs/single/helpers/GetRelatedPosts" . }}
+{{ $related_projects := partial "programs/single/helpers/GetRelatedProjects" . }}
+{{ $related_events := partial "programs/single/helpers/GetRelatedEvents" . }}
+{{ $related_exhibitions := partial "programs/single/helpers/GetRelatedExhibitions" . }}
+
+{{- if $related_posts -}}
+  {{ partial "programs/single/toc/item.html" (i18n "programs.toc.related.posts") }}
+{{- end -}}
+{{- if $related_events -}}
+  {{ partial "programs/single/toc/item.html" (i18n "programs.toc.related.events") }}
+{{- end -}}
+{{- if $related_exhibitions -}}
+  {{ partial "programs/single/toc/item.html" (i18n "programs.toc.related.exhibitions") }}
+{{- end -}}
+{{- if $related_projects -}}
+  {{ partial "programs/single/toc/item.html" (i18n "programs.toc.related.projects") }}
+{{- end -}}

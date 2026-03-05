@@ -1,6 +1,5 @@
-{{ $projects := .projects }}
 {{ $context := .context }}
-{{ with $projects }}
+{{ with .projects }}
   <section class="related-projects" id="{{ anchorize (i18n "programs.toc.related.projects") }}">
     <div class="container">
       <div class="content">
@@ -10,7 +9,7 @@
           {{ i18n "projects.see_all_in_program" (dict "Title" $category_name) }}
         </a>
         <div class="blocks">
-          {{ $projects = partial "GetPathSliceFromObjects" . }}
+          {{ $projects := partial "GetPathSliceFromObjects" . }}
           {{ $params := partial "GetLayoutAndOptions" (dict 
             "param" "programs.related_projects"
             "default" "projects.index"

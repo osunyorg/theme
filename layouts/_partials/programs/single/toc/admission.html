@@ -1,0 +1,28 @@
+{{ $hasAdmission := partial "programs/single/helpers/HasAdmission" . }}
+
+{{ if $hasAdmission }}
+  <li>
+    <a {{ partial "AnchorAttribute" (i18n "programs.toc.admission") }}>{{ i18n "programs.toc.admission" }}</a>
+    <ol>
+      {{- if .Params.prerequisites -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.prerequisites") }}
+      {{- end -}}
+      {{ partial "programs/single/toc/admission/pricing.html" . }}
+      {{- if or .Params.registration .Params.registration_url -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.registration") }}
+      {{- end -}}
+      {{- if .Params.accessibility -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.accessibility") }}
+      {{- end -}}
+      {{- if .Params.other -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs._other") }}
+      {{- end -}}
+      {{- if .Params.roles -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.roles") }}
+      {{- end -}}
+      {{- if .Params.contacts -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.contacts") }}
+      {{- end -}}
+    </ol>
+  </li>
+{{ end -}}
