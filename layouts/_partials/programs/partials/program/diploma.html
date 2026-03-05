@@ -1,0 +1,6 @@
+{{ with .Params.diplomas }}
+  {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
+  {{- with $diploma -}}
+    <span class="program-diploma">{{ safeHTML .Params.short_name }}</span>
+  {{- end -}}
+{{- end -}}
