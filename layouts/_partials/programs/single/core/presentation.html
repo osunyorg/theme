@@ -5,10 +5,10 @@
 
       {{ if or .Params.image .Params.presentation .Params.objectives .Pages }}
         <div>
-          {{ partial "programs/single/content/presentation/image.html" . }}
-          {{ partial "programs/single/content/presentation/rich-text.html" . }}
-          {{ partial "programs/single/content/presentation/objectives.html" . }}
-          {{ partial "programs/single/content/presentation/children.html" . }}
+          {{ partial "programs/single/core/presentation/image.html" . }}
+          {{ partial "programs/single/core/presentation/rich-text.html" . }}
+          {{ partial "programs/single/core/presentation/objectives.html" . }}
+          {{ partial "programs/single/core/presentation/children.html" . }}
         </div>
       {{ end }}
 
@@ -17,7 +17,7 @@
         "contents" .Params.contents
       ) }}
 
-      {{ partial "programs/single/content/presentation/administrative-information.html" . }}
+      {{ partial "programs/single/core/presentation/administrative-information.html" . }}
     </div>
   </div>
 </section>
