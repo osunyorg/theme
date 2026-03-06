@@ -1,9 +1,8 @@
 {{- $block := .block -}}
 {{- $block_class := partial "GetBlockClass" .block -}}
-{{- $block_index := .index -}}
+{{- $html_id := .html_id -}}
 
 {{- with .block.data -}}
-  {{ .Params.position }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
@@ -11,7 +10,7 @@
 
         <div class="definitions">
           {{- range $index, $element := .elements }}
-            {{ $id := printf "block-%d-element-%d" $block_index $index }}
+            {{ $id := printf "block-%s-element-%d" $html_id $index }}
             <details id="{{ $id }}" itemscope itemtype="https://schema.org/DefinedTerm">
               <summary itemprop="name" aria-controls="{{ $id }}" aria-expanded="false">{{ $element.title | safeHTML }}</summary>
               <div itemprop="description">{{ safeHTML $element.description }}</div>

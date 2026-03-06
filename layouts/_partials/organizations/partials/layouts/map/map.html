@@ -1,8 +1,8 @@
 {{ $logo_index := .logo_index }}
 {{ $options := .options }}
 {{ $layout := .layout }}
-{{ $block_index := .block_index }}
-{{ $id_transcription := printf "block-%d-transcription" $block_index }}
+{{ $html_id := .html_id }}
+{{ $id_transcription := printf "block-%s-transcription" $html_id }}
 {{ $heading_level := .heading_level | default 2 }}
 {{ $categories := .categories }}
 
@@ -38,9 +38,11 @@
     </details>
   </div>
 
-  {{ $title := printf "%s %d" (i18n "blocks.organizations.title") $block_index }}
+  {{ $title := "" }}
   {{ if .title }}
     {{ $title = .title }}
+  {{ else }}
+    {{ $title = printf "%s %s" (i18n "blocks.organizations.title") $html_id }}
   {{ end }}
 
   {{ $aria_label := i18n "commons.maps.label" $title }}
@@ -48,7 +50,7 @@
   {{ if and $options.filters $categories }}
     {{ partial "organizations/partials/layouts/map/filters.html" ( dict
       "categories" $categories
-      "index" $block_index
+      "html_id" $html_id
     ) }}
   {{ end }}
   
@@ -58,7 +60,7 @@
       role="region"
       aria-label="{{ $aria_label }}">
     {{ if and $options.filters $categories }}
-      {{ partial "organizations/partials/layouts/map/filters-button.html" $block_index }}
+      {{ partial "organizations/partials/layouts/map/filters-button.html" $html_id }}
     {{ end }}
 
     {{- range $organizations }}

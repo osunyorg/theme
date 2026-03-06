@@ -1,6 +1,5 @@
 {{ if (partial "GetTextFromHTML" .transcription) }}
-  {{ $block_index := .block_index }}
-  {{ $id := printf "block-%d-transcription" $block_index }}
+  {{ $id := printf "block-%s-transcription" .html_id }}
   {{ $title := .title | default ( i18n "commons.accessibility.transcription" ) }}
   <div class="transcription">
     <details id="{{- $id -}}">
