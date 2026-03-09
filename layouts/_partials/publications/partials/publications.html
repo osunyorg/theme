@@ -1,4 +1,4 @@
-{{ $publications := partial "FilterPublications" .Pages }}
+{{ $publications := partial "publications/helpers/FilterByAnrProjectReferences" .Pages }}
 {{ $paginator := .Paginate $publications }}
 
 {{ if site.Params.publications.index.group_by_year }}
