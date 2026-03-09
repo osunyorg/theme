@@ -19,7 +19,7 @@
 {{ end }}
 
 {{ if not $subtitle }}
-  {{ $summary_position := partial "GetSummaryPosition" .context }}
+  {{ $summary_position := partial "commons/summary/helpers/GetPosition" .context }}
 
   {{ if and (eq $summary_position "hero") $summary }}
     {{ $subtitle = $summary }}

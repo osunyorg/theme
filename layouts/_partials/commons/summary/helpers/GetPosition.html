@@ -1,0 +1,9 @@
+{{ $kind := cond (or (eq .Kind "section") (eq .Kind "taxonomy")) "section" "single" }}
+{{ $param := (printf "%s.%s.summary.position" .Type $kind )}}
+
+{{ $position := partial "GetSiteParamWithDefault" (dict 
+  "param" $param
+  "default" "summary.position"
+) }}
+
+{{ return $position }}
