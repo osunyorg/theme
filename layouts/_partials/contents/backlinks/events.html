@@ -1,0 +1,30 @@
+{{ $about := .about }}
+{{ $type := .type }}
+{{ with .events }}
+  {{ $title := i18n (printf "%s.backlinks.events" $type) }}
+  {{ $params := partial "GetLayoutAndOptions" (dict 
+    "param" "persons.single.events"
+    "default" "events.index"
+  ) }}
+  {{ partial "blocks/templates/agenda.html" (dict
+    "block" (dict 
+      "top" (dict
+        "active" true
+        "title" (dict
+          "value" (printf "%s %s" $title $about)
+          "heading" 2
+        )
+      )
+      "template" "agenda"
+      "ranks" (dict 
+        "base" 2
+        "self" 2
+      )
+      "data" (dict
+        "events" .
+        "layout" $params.layout
+        "options" $params.options
+      )
+    )
+  ) }}
+{{ end }}
