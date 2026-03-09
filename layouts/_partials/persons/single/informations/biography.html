@@ -1,0 +1,10 @@
+<div class="biography">
+  {{ partial "persons/single/summary.html" (dict
+    "context" .
+  ) }}
+  {{ with .Params.biography }}
+    <div class="rich-text">
+      {{ safeHTML . }}
+    </div>
+  {{ end }}
+</div>
