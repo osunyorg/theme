@@ -7,7 +7,7 @@
   ) }}
 
   <div class="container">
-    {{ $publications := partial "FilterPublications" .Pages }}
+    {{ $publications := partial "publications/helpers/FilterByAnrProjectReferences" .Pages }}
     {{ $paginator := .Paginate $publications }}
 
     {{ partial "publications/single/statistics.html" $publications }}
