@@ -1,0 +1,28 @@
+{{ if .projects }}
+  {{ $title := i18n "backlinks.projects" .about }}
+  {{ $params := partial "GetLayoutAndOptions" (dict 
+    "param" "persons.single.projects"
+    "default" "projects.index"
+  ) }}
+  {{ partial "blocks/templates/projects.html" (dict
+    "block" (dict
+      "top" (dict
+        "active" true
+        "title" (dict
+          "value" $title
+          "heading" 2
+        )
+      )
+      "template" "projects"
+      "ranks" (dict
+        "base" 2
+        "self" 2
+      )
+      "data" (dict
+        "projects" .projects
+        "layout" $params.layout
+        "options" $params.options
+      )
+    )
+  ) }}
+{{ end }}
