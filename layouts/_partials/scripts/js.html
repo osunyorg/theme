@@ -1,4 +1,4 @@
-{{ if partial "footer/helpers/IsInteractiveMapPresent" . }}
+{{ if partial "scripts/helpers/IsInteractiveMapPresent" . }}
   <!-- CSS -->
   {{- $cssOpts := (dict
     "targetPath" "assets/css/leaflet.css"
@@ -15,7 +15,7 @@
   <script src="{{ $leaflet_js.RelPermalink }}" integrity="{{ $leaflet_js.Data.Integrity }}" fetchpriority="low"></script>
 {{ end }}
 
-{{ $build_options := partial "footer/helpers/GetJavascriptOptions" . }}
+{{ $build_options := partial "scripts/helpers/GetJavascriptOptions" . }}
 
 {{ $js := resources.Get "js/main.js" | js.Build $build_options | fingerprint }}
 <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
