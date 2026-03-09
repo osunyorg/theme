@@ -22,7 +22,7 @@
 {{ end }}
 
 {{ $heading_tag.open }}
-  {{ $permalink := partial "GetPermalink" $item }}
+  {{ $permalink := partial "commons/item/helpers/GetPermalink" $item }}
   <a href="{{ $permalink }}" title="{{ $link_title }}" {{ if $itemprop }} itemprop="url" {{ end }} >
     {{ $item.Title }}
   </a>
