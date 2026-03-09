@@ -1,7 +1,5 @@
-{{ $about := .about }}
-{{ $type := .type }}
-{{ with .projects }}
-  {{ $title := i18n (printf "%s.backlinks.projects" $type) }}
+{{ if .projects }}
+  {{ $title := i18n "backlinks.projects" .about }}
   {{ $params := partial "GetLayoutAndOptions" (dict 
     "param" "persons.single.projects"
     "default" "projects.index"
@@ -11,7 +9,7 @@
       "top" (dict
         "active" true
         "title" (dict
-          "value" (printf "%s %s" $title $about)
+          "value" $title
           "heading" 2
         )
       )
@@ -21,7 +19,7 @@
         "self" 2
       )
       "data" (dict
-        "projects" .
+        "projects" .projects
         "layout" $params.layout
         "options" $params.options
       )

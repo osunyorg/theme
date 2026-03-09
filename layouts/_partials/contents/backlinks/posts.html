@@ -1,7 +1,5 @@
-{{ $about := .about }}
-{{ $type := .type }}
-{{ with .posts }}
-  {{ $title := i18n (printf "%s.backlinks.posts" $type) }}
+{{ if .posts }}
+  {{ $title := i18n "backlinks.posts" .about }}
   {{ $params := partial "GetLayoutAndOptions" (dict 
     "param" "persons.single.posts"
     "default" "posts.index"
@@ -11,7 +9,7 @@
       "top" (dict
         "active" true
         "title" (dict
-          "value" (printf "%s %s" $title $about)
+          "value" $title
           "heading" 2
         )
       )
@@ -21,7 +19,7 @@
         "self" 2
       )
       "data" (dict
-        "posts" .
+        "posts" .posts
         "layout" $params.layout
         "options" $params.options
       )
