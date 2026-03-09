@@ -23,7 +23,7 @@
           {{ partial "pages/partials/page/hook-after-title.html" . }}
 
           {{ if and $options.summary .Params.summary }}
-            {{ partial "GetRichSummary" ( dict 
+            {{ partial "commons/summary/helpers/GetTruncated" ( dict 
               "summary" .Params.summary
               "kind" "pages"
             ) }}
