@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>{{ .Permalink }}</title>
-    <link rel="canonical" href="{{ .Permalink }}"/>
-    <meta name="robots" content="noindex">
-    <meta charset="utf-8"/>
-    <noscript>
-      <meta http-equiv="refresh" content="0; url={{ .Permalink }}"/>
-    </noscript>
-    {{ partial "alias/multilingual/script.html" . }}
-  </head>
-  <body>
-    <h1>Redirection</h1>
-    <p>You should be redirected in a moment, if not click here: <a href="{{ .Permalink }}">{{ .Permalink }}</a>.</p>
-  </body>
-</html>
+<noscript>
+  <meta http-equiv="refresh" content="0; url={{ .Permalink }}"/>
+</noscript>
+{{ partial "alias/multilingual/script.html" . }}
