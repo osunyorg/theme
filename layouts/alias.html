@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html>
-  <head lang="{{ site.Language.Locale }}">
+<html lang="{{ site.Language.LanguageCode }}">
+  <head>
     <title>{{ .Permalink }}</title>
     <link rel="canonical" href="{{ .Permalink }}"/>
     <meta name="robots" content="noindex">
     <meta charset="utf-8"/>
     {{ if hugo.IsMultilingual }}
-      {{ partial "alias/multilingual.html" . }}
+      {{ partial "alias/multilingual/head.html" . }}
     {{ else }}
-      {{ partial "alias/monolingual.html" . }}
+      {{ partial "alias/monolingual/head.html" . }}
     {{ end }}
   </head>
   {{ if hugo.IsMultilingual }}
     {{ partial "alias/multilingual/body.html" . }}
-  {{ else }}
+  {{ end }}
 </html>
