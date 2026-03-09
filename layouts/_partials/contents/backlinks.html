@@ -1,32 +1,25 @@
 {{ $about := .Title }}
-{{ $type := .Type }}
-
 <div class="backlinks">
   {{ with .Params.backlinks.current_website }}
     {{ partial "contents/backlinks/exhibitions.html" (dict
       "exhibitions" .exhibitions
       "about" $about
-      "type" $type
     ) }}
     {{ partial "contents/backlinks/events.html" (dict
       "events" .events
       "about" $about
-      "type" $type
     ) }}
     {{ partial "contents/backlinks/pages.html" (dict
       "pages" .pages
       "about" $about
-      "type" $type
     ) }}
     {{ partial "contents/backlinks/projects.html" (dict
       "projects" .projects
       "about" $about
-      "type" $type
     ) }}
     {{ partial "contents/backlinks/posts.html" (dict
       "posts" .posts
       "about" $about
-      "type" $type
     ) }}
   {{ end }}
 </div>
