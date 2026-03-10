@@ -1,0 +1,28 @@
+{{ if .exhibitions }}
+  {{ $title := i18n "backlinks.exhibitions" .about }}
+  {{ $params := partial "GetLayoutAndOptions" (dict 
+    "param" "persons.single.exhibitions"
+    "default" "exhibitions.index"
+  ) }}
+  {{ partial "blocks/templates/exhibitions.html" (dict
+    "block" (dict
+      "top" (dict
+        "active" true
+        "title" (dict
+          "value" $title
+          "heading" 2
+        )
+      )
+      "template" "agenda"
+      "ranks" (dict
+        "base" 2
+        "self" 2
+      )
+      "data" (dict
+        "exhibitions" .exhibitions
+        "layout" $params.layout
+        "options" $params.options
+      )
+    )
+  ) }}
+{{ end }}
