@@ -6,7 +6,7 @@
     {{ partial "commons/section/pagination.html" . }}
   </div>
 
-  {{ if (partial "commons/section/helpers/IsFirstPage" .) }}
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents

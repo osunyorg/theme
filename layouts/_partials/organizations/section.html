@@ -14,7 +14,7 @@
     "with_container" true
   ) }}
 
-  {{ if (partial "commons/section/helpers/IsFirstPage" .) }}
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
     {{ partial "toc/container.html" (dict
       "toc" "pages/single/toc.html"
       "context" .
