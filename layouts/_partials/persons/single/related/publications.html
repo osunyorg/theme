@@ -1,11 +1,14 @@
-{{ $researcher := .researcher }}
-{{ if .publications }}
+{{ $researcher := site.GetPage (printf "/researchers/%s" .Slug) }}
+{{ $publications := where $researcher.Pages "Section" "publications" }}
+{{ $publications = partial "publications/helpers/FilterByAnrProjectReferences" $publications }}
+
+{{ if $publications }}
   <section class="person-publications">
     <div class="top">
       <h2 class="h5">{{ i18n "persons.publications.recent" }}</h2>
     </div>
     <ul class="publications">
-      {{ range first 3 .publications }}
+      {{ range first 3 $publications }}
         {{ partial "publications/partials/publication.html" (dict 
           "publication" .
           "heading_level" 3
@@ -14,7 +17,9 @@
       {{ end }}
     </ul>
     {{ if $researcher.Params }}
-      <a href="{{ $researcher.Permalink }}" class="more">{{ i18n "persons.publications.all" (dict "author" $researcher.Params.person) }}</a>
+      <a href="{{ $researcher.Permalink }}" class="more">
+        {{- i18n "persons.publications.all" (dict "author" $researcher.Params.person) -}}
+      </a>
     {{ end }}
   </section>
 {{ end }}
