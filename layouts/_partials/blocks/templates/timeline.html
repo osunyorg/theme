@@ -6,8 +6,11 @@
   <div class="container">
     <div class="block-content">
       {{ partial "blocks/top.html" $block.top }}
-      {{ $template := printf "blocks/templates/timeline/%s.html" $layout }}
-      {{ partial $template (dict "block" $block ) }}
+      {{ if eq $layout "horizontal" }}
+        {{ partial "blocks/templates/timeline/horizontal.html" . }}
+      {{ else }}
+        {{ partial "blocks/templates/timeline/vertical.html" . }}
+      {{ end }}
     </div>
   </div>
 </div>
