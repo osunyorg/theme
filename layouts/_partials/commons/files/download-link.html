@@ -16,7 +16,7 @@
     {{ $a11y_title = $file.name }}
   {{ end }}
 
-  {{ $extension_with_size := partial "GetFileExtensionWithSize" $file }}
+  {{ $extension_with_size := partial "commons/files/helpers/GetFileExtensionWithSize" $file }}
   {{ $title_with_size := printf "%s (%s)" $a11y_title $extension_with_size }}
   {{ $url := $file.url }}
   {{ if site.Params.keycdn }}
@@ -27,7 +27,7 @@
   </a>
   {{ if .with_caption }}
     <figcaption>
-      {{ partial "commons/extension-and-size.html" $file }}
+      {{ partial "commons/files/extension-and-size.html" $file }}
     </figcaption>
   {{ end }}
 {{ end }}
