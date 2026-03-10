@@ -1,23 +1,6 @@
-{{ $related := partial "persons/single/helpers/GetRelated" . }}
-
 <div class="container person-objects">
-  {{ partial "persons/single/related/programs.html" (dict
-    "programs" $related.programs
-    "slug" .Slug
-  ) }}
-
-  {{ partial "persons/single/related/publications.html" (dict
-    "publications" $related.publications
-    "researcher" $related.researcher
-  ) }}
-
-  {{ partial "persons/single/related/posts.html" (dict
-    "posts" $related.posts
-    "author" $related.author
-  ) }}
-
-  {{ partial "persons/single/related/papers.html" (dict
-    "papers" $related.papers
-    "researcher" $related.researcher
-  ) }}
+  {{ partial "persons/single/related/programs.html" . }}
+  {{ partial "persons/single/related/publications.html" . }}
+  {{ partial "persons/single/related/posts.html" . }}
+  {{ partial "persons/single/related/papers.html" . }}
 </div>

@@ -1,13 +1,19 @@
-{{ $slug := .slug }}
-{{ if .programs }}
+{{ $slug := .Slug }}
+{{ $programs := partial "persons/single/helpers/GetPrograms" (dict
+  "slug" $slug
+  "type" "teachers"
+) }}
+{{ if $programs }}
   <section class="person-programs">
     <div class="top">
       <h2 class="h5">{{ i18n "persons.programs" }}</h2>
     </div>
     <ol class="programs" itemscope itemtype="https://schema.org/CreativeWork">
-      {{ range .programs }}
+      {{ range $programs }}
         <li>
-          <p itemscope itemtype="https://schema.org/EducationalOccupationalProgram"><a href="{{ .Permalink }}" itemprop="name">{{ safeHTML .Title }}</a></p>
+          <p itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
+            <a href="{{ .Permalink }}" itemprop="name">{{ safeHTML .Title }}</a>
+          </p>
           <p itemprop="educationalRole">{{ safeHTML (index .Params.teachers_description $slug) }}</p>
         </li>
       {{ end }}

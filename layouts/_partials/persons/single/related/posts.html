@@ -1,13 +1,15 @@
+{{ $author := site.GetPage (printf "/authors/%s" .Slug) }}
+{{ $posts := where $author.Pages "Section" "posts" }}
 {{ $layout := site.Params.posts.index.layout }}
 {{ $options := site.Params.posts.index.options }}
 
-{{ if .posts }}
+{{ if $posts }}
   <section class="person-posts">
     <div class="top">
       <h2 class="h5">{{ i18n "persons.posts.recent" }}</h2>
     </div>
     <ul class="posts posts--{{- $layout -}}">
-      {{ range first 3 .posts }}
+      {{ range first 3 $posts }}
         {{ partial "posts/partials/post.html" (dict 
           "post" . 
           "layout" $layout
@@ -15,6 +17,6 @@
         ) }}
       {{ end }}
     </ul>
-    <a href="{{ .author.Permalink }}" class="more">{{ i18n "persons.posts.all" (dict "author" .author.Params.Person )}}</a>
+    <a href="{{ $author.Permalink }}" class="more">{{ i18n "persons.posts.all" (dict "author" $author.Params.Person )}}</a>
   </section>
 {{ end }}
