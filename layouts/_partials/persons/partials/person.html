@@ -23,7 +23,7 @@
       {{ $heading_tag.close }}
       {{ if and $options.summary (or $role $person.Params.summary) }}
         <div class="person-role" itemprop="jobTitle">
-          {{ if (partial "GetTextFromHTML" $role) }}
+          {{ if (partial "helpers/text/GetFromHTML" $role) }}
             <p>{{ safeHTML $role }}</p>
           {{ else if $person.Params.summary }}
             {{ safeHTML $person.Params.summary }}

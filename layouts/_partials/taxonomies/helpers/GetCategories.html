@@ -2,7 +2,7 @@
 
 {{ range . }}
   {{ with .categories }}
-    {{ $categories := partial "GetObjectsFromPathSlice" . }}
+    {{ $categories := partial "helpers/objects/GetFromPathSlice" . }}
     {{ $all_categories = union $all_categories $categories }}
   {{ end }}
 {{ end }}

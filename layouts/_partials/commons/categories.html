@@ -15,7 +15,7 @@
     {{- range $categories -}}
       <li {{ with .Params.bodyclass }}class="{{ . }}"{{ end }}>
         {{ $id := printf "%s-children-list" ( .Slug | anchorize) }}
-        {{ $children := partial "GetObjectsFromPathSlice" .Params.children }}
+        {{ $children := partial "helpers/objects/GetFromPathSlice" .Params.children }}
         {{ if and $depth $children }}
           <span class="extendable-button" aria-expanded="false" aria-controls="{{ $id }}" role="button" tabindex="0">
             {{- safeHTML .Title -}}

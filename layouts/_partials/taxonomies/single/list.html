@@ -2,7 +2,7 @@
 {{ $type := .Type }}
 {{ $taxonomies := .Params.taxonomies }}
 {{ $param := printf "%s.single.taxonomies.show_name" $type }}
-{{ $display_taxonomies := partial "GetSiteParamWithDefault" (dict 
+{{ $display_taxonomies := partial "helpers/param/GetSiteParamWithDefault" (dict 
   "param" $param
   "default" "default.single.taxonomies.show_name"
 ) }}

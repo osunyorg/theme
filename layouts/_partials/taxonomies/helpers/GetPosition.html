@@ -4,7 +4,7 @@
 {{ end }}
 {{ $param := (printf "%s.%s.taxonomies.position" .Type $kind )}}
 
-{{ $position := partial "GetSiteParamWithDefault" (dict 
+{{ $position := partial "helpers/param/GetSiteParamWithDefault" (dict 
   "param" $param
   "default" (printf "default.%s.taxonomies.position" $kind)
 ) }}

@@ -8,7 +8,7 @@
 {{ end }}
 
 {{ if not $sizes }}
-  {{ $sizes = partial "GetSiteParamWithDefault" (dict 
+  {{ $sizes = partial "helpers/param/GetSiteParamWithDefault" (dict 
     "param" (printf "image_sizes.sections.%s.layouts.%s" $type $layout)
     "default" (printf "image_sizes._default.layouts.%s" $layout)
   ) }}
