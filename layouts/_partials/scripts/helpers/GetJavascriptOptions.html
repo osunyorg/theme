@@ -1,21 +1,4 @@
-{{ if partial "isInteractiveMapPresent" . }}
-  <!-- CSS -->
-  {{- $cssOpts := (dict
-    "targetPath" "assets/css/leaflet.css"
-    "enableSourceMap" true
-    "includePaths" (slice "node_modules")
-  ) -}}
-  {{- $styles := resources.Get "sass/_theme/dependencies/leaflet.sass" | toCSS $cssOpts -}}
-  {{ if hugo.IsProduction }}
-    {{- $styles = resources.Get "sass/_theme/dependencies/leaflet.sass" | toCSS $cssOpts | postCSS | minify | fingerprint -}}
-  {{ end }}
-  <link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}" fetchpriority="low">
-
-  {{ $leaflet_js := resources.Get "js/vendors/leaflet.js" | js.Build (dict "minify" hugo.IsProduction) | fingerprint }}
-  <script src="{{ $leaflet_js.RelPermalink }}" integrity="{{ $leaflet_js.Data.Integrity }}" fetchpriority="low"></script>
-{{ end }}
-
-{{ $build_options := (dict 
+{{ return (dict 
   "minify" hugo.IsProduction 
   "params" (dict
     "i18n" (dict
@@ -48,6 +31,3 @@
     )
   )
 ) }}
-
-{{ $js := resources.Get "js/main.js" | js.Build $build_options | fingerprint }}
-<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>

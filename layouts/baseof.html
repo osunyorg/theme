@@ -15,7 +15,7 @@
   </head>
   <body class="{{ partial "body/helpers/GetBodyclass" . }}">
     {{- partial "header/accessibility.html" -}}
-    {{- partial "hooks/before-header" . -}}
+    {{- partial "hooks/before-header.html" . -}}
     {{- partial "header/header.html" . -}}
     {{- partial "commons/alerts/list.html" }}
     <main id="main"
@@ -24,17 +24,11 @@
         >
       {{ partial "commons/search/button.html" "fixed" }}
       {{ block "main" . }}{{ end }}
-      {{ partial "hooks/before-main-end" . }}
+      {{ partial "hooks/before-main-end.html" . }}
     </main>
     {{ partial "footer/footer.html" . }}
-    {{ partial "hooks/after-footer-end.html" }}
     {{ partial "commons/lightbox/lightbox.html" . }}
     {{ partial "commons/search/modal.html" . }}
-    {{ partial "footer/plausible.html" . }}
-    {{ partial "footer/js.html" . }}
-    {{ partial "footer/script.html" . }}
-    {{ if or (not hugo.IsProduction) site.Params.debug.active }}
-      {{ partial "debug/debug.html" . }}
-    {{ end -}}
+    {{ partial "scripts/scripts.html" . }}
   </body>
 </html>
