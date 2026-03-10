@@ -19,7 +19,7 @@
         {{ end }}
         <div class="location-description" itemprop="description">
           {{- if and .Params.summary $options.summary -}}
-            {{ partial "GetRichSummary" ( dict 
+            {{ partial "commons/summary/helpers/GetTruncated" ( dict 
               "summary" .Params.summary
               "kind" "locations"
             ) }}
