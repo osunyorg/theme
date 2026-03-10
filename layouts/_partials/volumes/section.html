@@ -3,10 +3,10 @@
 <div class="document-content">
   <div class="container">
     {{ partial "volumes/partials/volumes.html" . }}
-    {{ partial "commons/pagination.html" . }}
+    {{ partial "commons/section/pagination.html" . }}
   </div>
 
-  {{ if (partial "IsFirstPage" .) }}
+  {{ if (partial "commons/section/helpers/IsFirstPage" .) }}
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents

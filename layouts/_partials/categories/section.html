@@ -11,7 +11,7 @@
     "block_wrapped" true
   ) }}
 
-  {{ if (partial "IsFirstPage" .) }}
+  {{ if (partial "commons/section/helpers/IsFirstPage" .) }}
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents
