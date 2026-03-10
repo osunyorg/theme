@@ -4,8 +4,9 @@
   <meta itemprop="name" content="{{ safeHTML .Title }}">
   <meta itemprop="url" content="{{ .Permalink }}">
 
+  {{ $toc := partial "programs/single/toc.html" . }}
   {{ partial "toc/container.html" (dict
-    "toc" "programs/single/toc.html"
+    "toc" $toc
     "context" .
   ) }}
 

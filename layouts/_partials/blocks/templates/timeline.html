@@ -8,6 +8,13 @@
       {{ partial "blocks/top.html" $block.top }}
       {{ $template := printf "blocks/templates/timeline/%s.html" $layout }}
       {{ partial $template (dict "block" $block ) }}
+
+      {{ if eq $layout "horizontal" }}
+        {{ partial $template (dict
+          "block" $block
+        ) }}
+      {{ else }}
+      {{ end }}
     </div>
   </div>
 </div>
