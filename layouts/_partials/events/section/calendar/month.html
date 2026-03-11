@@ -22,6 +22,7 @@
   </thead>
   <tbody>
     <tr>
+      {{ $daysLen := (len .days) }}
       {{ range $index, $day := .days }}
         {{ $date := $day.day | time.AsTime }}
         {{ $formated_date := $date | time.Format "2" }}
@@ -43,7 +44,7 @@
               <span>{{ $formated_date }}</span>
             {{ end }}
           </td>
-        {{ if and (gt $day.cwday 0) (eq (mod $day.cwday 7) 0) }}
+        {{ if and (and (gt $day.cwday 0) (eq (mod $day.cwday 7) 0)) (ne $index (sub $daysLen 1)) }}
           </tr><tr>
         {{ end }}
       {{ end }}
