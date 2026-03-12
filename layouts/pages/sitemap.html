@@ -40,7 +40,7 @@
     </div>
 
     {{ range .Site.Sections }}
-      {{ $ignore_section := partial "GetSiteParamWithDefault" (dict
+      {{ $ignore_section := partial "helpers/param/GetSiteParamWithDefault" (dict
         "param" (printf "%s.sitemap.ignore" .Type)
         "default" "default.sitemap.ignore"
       ) }}
@@ -56,7 +56,7 @@
                   {{ safeHTML .Title }}
                 {{ end }}
               </h2>
-              {{ $ignore_children := partial "GetSiteParamWithDefault" (dict
+              {{ $ignore_children := partial "helpers/param/GetSiteParamWithDefault" (dict
                 "param" (printf "%s.sitemap.ignore_children" .Type)
                 "default" "default.sitemap.ignore_children"
               ) }}

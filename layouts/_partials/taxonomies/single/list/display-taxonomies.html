@@ -7,7 +7,7 @@
     {{ with .categories }}
       <li class="terms {{ with $slug }} taxonomy-{{ . }} {{ end }} {{ $taxonomy.Params.bodyclass }}">
         <span class="taxonomy-title">{{ $name }}</span>
-        {{ $categories := partial "GetObjectsFromPathSlice" . }}
+        {{ $categories := partial "helpers/objects/GetFromPathSlice" . }}
         {{ partial "commons/categories.html" (dict 
           "kind" $context.Kind
           "categories" $categories

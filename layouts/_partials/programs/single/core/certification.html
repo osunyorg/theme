@@ -6,7 +6,7 @@
         <div>
           <section class="rich-text" id="{{ anchorize (i18n "programs.certifications.qualiopi") }}">
             <img src="/assets/images/certifications/qualiopi.svg" alt="{{ i18n "programs.certifications.qualiopi" }}" class="logo-qualiopi">
-            {{- if partial "GetTextFromHTML" .Params.certifications.qualiopi.text -}}
+            {{- if partial "helpers/text/GetFromHTML" .Params.certifications.qualiopi.text -}}
               {{- safeHTML .Params.certifications.qualiopi.text -}}
             {{- end -}}
           </section>

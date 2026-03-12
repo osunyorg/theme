@@ -1,7 +1,7 @@
 {{ $has_results := partial "programs/single/helpers/HasResults" . }}
 {{ if $has_results }}
   <li>
-    <a {{ partial "AnchorAttribute" ( i18n "programs.toc.results" ) }} >{{ i18n "programs.toc.results" }}</a>
+    <a {{ partial "helpers/anchor/GetAttribute" ( i18n "programs.toc.results" ) }} >{{ i18n "programs.toc.results" }}</a>
     <ol>
       {{- if .Params.opportunities -}}
         {{ partial "programs/single/toc/item.html" (i18n "programs.opportunities") }}

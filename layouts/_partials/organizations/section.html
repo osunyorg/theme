@@ -14,7 +14,7 @@
     "with_container" true
   ) }}
 
-  {{ if (partial "IsFirstPage" .) }}
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
     {{ partial "toc/container.html" (dict
       "toc" "pages/single/toc.html"
       "context" .
@@ -30,7 +30,7 @@
   {{- if not $is_organizations_block_present -}}
     <div class="container">
       {{ partial "organizations/partials/organizations.html" . }}
-      {{ partial "commons/pagination.html" . }}
+      {{ partial "commons/section/pagination.html" . }}
     </div>
   {{ end }}
 </div>

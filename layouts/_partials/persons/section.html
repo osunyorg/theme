@@ -27,7 +27,7 @@
     "block_wrapped" $summary_block
   ) }}
 
-  {{ if (partial "IsFirstPage" .) }}
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents
@@ -40,7 +40,7 @@
     <div class="container">
       {{ partial "persons/section/persons-taxonomies.html" . }}
       {{ partial "persons/partials/list.html" .Paginator.Pages }}
-      {{ partial "commons/pagination.html" . }}
+      {{ partial "commons/section/pagination.html" . }}
     </div>
   {{- end -}}
 </div>

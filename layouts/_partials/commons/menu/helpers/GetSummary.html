@@ -12,7 +12,7 @@
     {{ end }}
   {{ end }}
   {{ if $text }}
-    {{ $text = partial "GetTruncatedText" (dict
+    {{ $text = partial "helpers/text/Truncate" (dict
       "text" $text
       "length" $summary.truncate
     ) }}

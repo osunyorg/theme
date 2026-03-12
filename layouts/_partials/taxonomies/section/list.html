@@ -1,7 +1,7 @@
 {{ $type := .Type }}
 {{ $taxonomies := .Params.section_taxonomies }}
 {{ $param := (printf "%s.index.taxonomies" $type) }}
-{{ $options := partial "GetSiteParamWithDefault" (dict 
+{{ $options := partial "helpers/param/GetSiteParamWithDefault" (dict 
   "param" $param
   "default" "default.index.taxonomies"
 ) }}
