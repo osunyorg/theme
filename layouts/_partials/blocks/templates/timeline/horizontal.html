@@ -1,9 +1,9 @@
 {{ $heading_tag := partial "GetHeadingTag" (dict 
-  "level" .block.ranks.children
+  "level" .ranks.children
   "attributes" "class='title' itemprop='name'"
 ) }}
 
-{{ with .block.data }}
+{{ with .data }}
   <ol data-slider="{{ site.Params.blocks.timeline.slider | encoding.Jsonify }}">
     {{ range .events }}
       <li class="timeline-event" itemscope itemtype="https://schema.org/Article">
