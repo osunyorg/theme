@@ -6,17 +6,26 @@ window.osuny.pagefindOptions = window.osuny.pagefindOptions || {};
 window.osuny.Search = function (element) {
     window.osuny.Popup.call(this, element);
 
-    if (typeof PagefindUI === 'undefined') {
-        return;
+    if (this._isPagefindLoaded()) {
+        this._init();
+    } else {
+        window.addEventListener('load', this._init.bind(this));
     }
-
-    this.buttons = document.querySelectorAll('.search-button');
-
-    this._setup();
-    this._listen();
 };
 
 window.osuny.Search.prototype = Object.create(window.osuny.Popup.prototype);
+
+window.osuny.Search.prototype._init = function () {
+    if (this._isPagefindLoaded()) {
+        this.buttons = document.querySelectorAll('.search-button');
+        this._setup();
+        this._listen();
+    }
+};
+
+window.osuny.Search.prototype._isPagefindLoaded = function () {
+    return typeof PagefindUI !== 'undefined';
+};
 
 window.osuny.Search.prototype._setup = function () {
     this.setPageFind();
