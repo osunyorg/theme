@@ -14,6 +14,10 @@ window.osuny.Search = function (element) {
 
 window.osuny.Search.prototype = Object.create(window.osuny.Popup.prototype);
 
+window.osuny.Search.prototype._canInit = function () {
+    return typeof PagefindUI !== 'undefined';
+};
+
 window.osuny.Search.prototype._initOrDefer = function () {
     if (this._canInit()) {
         this._init();
@@ -29,10 +33,6 @@ window.osuny.Search.prototype._init = function () {
     this._setup();
     this._listen();
     this.isInitiated = true;
-};
-
-window.osuny.Search.prototype._canInit = function () {
-    return typeof PagefindUI !== 'undefined';
 };
 
 window.osuny.Search.prototype._setup = function () {
