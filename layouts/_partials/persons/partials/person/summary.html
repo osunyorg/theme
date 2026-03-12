@@ -1,0 +1,9 @@
+{{ if or .role .person.Params.summary }}
+  <div class="person-role" itemprop="jobTitle">
+    {{ if .role }}
+      <p>{{ safeHTML .role }}</p>
+    {{ else if .person.Params.summary }}
+      {{ safeHTML .person.Params.summary }}
+    {{ end }}
+  </div>
+{{ end }}

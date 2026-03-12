@@ -1,0 +1,14 @@
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+  "level" .heading_level 
+  "attributes" "class='person-name' itemprop='name'"
+) }}
+
+{{ $heading_tag.open }}
+  {{ if .options.link }}
+    <a href="{{ .person.Permalink }}" aria-label="{{ i18n "commons.more_aria" (dict "Title" .person.Title) }}">
+  {{ end }}
+    {{ safeHTML .person.Title }}
+  {{ if .options.link }}
+    </a>
+  {{ end }}
+{{ $heading_tag.close }}
