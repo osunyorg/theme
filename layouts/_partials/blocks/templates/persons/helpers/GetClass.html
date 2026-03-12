@@ -1,0 +1,29 @@
+{{ $block := . }}
+{{ $char_limit := 80 }}
+{{ $is_large := false }}
+{{ $block_class := partial "blocks/helpers/GetClass" $block }}
+
+{{ with $block.data }}
+  {{ $options := .options }}
+  {{ range .persons }}
+    {{ $person := site.GetPage .path }}
+    {{ $role := .role }}
+    {{ $summary := $person.Params.summary }}
+    {{ with (or $role $summary) }}
+      {{ $content_length := len . }}
+      {{ if ge $content_length $char_limit }}
+        {{ $is_large = true }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ if and $is_large $options.summary }}
+    {{ $block_class = printf "%s block-with-long-text" $block_class }}
+  {{ end }}
+
+  {{ if not $options.image }}
+    {{ $block_class = printf "%s without-photo" $block_class }}
+  {{ end }}
+{{ end }}
+
+{{ return $block_class }}
