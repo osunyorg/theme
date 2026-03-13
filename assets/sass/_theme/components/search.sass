@@ -132,6 +132,9 @@
         &__result-title a
             @include h4
             @include stretched-link
+        &__filter-name,
+        &__filter-group-label
+            display: none
         @include media-breakpoint-up(desktop)
             &__form
                 position: relative
@@ -143,17 +146,31 @@
             &__search-input,
             &__message
                 width: columns(8)
+            &__filter-panel
+                position: absolute
+                left: offset(9)
+                width: columns(3)
+                top: $spacing-6
+                text-align: right
+            &__filter-value
+                display: flex
+                flex-direction: row-reverse
+                input,
+                label
+                    margin-top: $spacing-1
+                input
+                    margin-left: $spacing-1
             &__results-area
                 padding-top: $spacing-6
         @include media-breakpoint-down(desktop)
+            &__filter-panel
+                margin-top: space(16)
             &__search-input,
             &__message
                 left: var(--grid-gutter)
                 right: var(--grid-gutter)
             &__message
                 top: space(46)
-            &__results-area
-                padding-top: space(17)
 
 // Toggle button appareance
 
