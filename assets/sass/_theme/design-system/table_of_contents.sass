@@ -72,14 +72,15 @@
         body.offcanvas-toc &
             display: flex
     @include media-breakpoint-down(desktop)
-        border-top: $toc-border-width solid var(--color-border)
+        // border-top: $toc-border-width solid var(--color-border)
         position: fixed
-        bottom: -200px
-        background: $toc-background-color
-        left: 0
-        width: 100%
+        bottom: space(2)
+        border-radius: space(2)
+        left: var(--grid-gutter)
+        right: var(--grid-gutter)
         padding: 0 var(--grid-gutter)
-        padding-bottom: 200px
+        background: $toc-background-color
+        box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1)
         z-index: $zindex-toc-cta
         html.has-menu-opened &
             z-index: $zindex-toc-cta-when-menu-opened
