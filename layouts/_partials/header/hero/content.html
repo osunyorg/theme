@@ -1,15 +1,15 @@
 <div class="content">
   <div class="hero-text">
-    {{ partial "header/hero/text.html" . }}
-    {{ partial "header/hero/taxonomies.html" . }}
-    {{ partial "header/hero/actions.html" . }}
+    {{ partial "header/hero/content/text.html" . }}
+    {{ partial "header/hero/content/taxonomies.html" . }}
+    {{ partial "header/hero/content/actions.html" . }}
   </div>
 
   {{ if .hero_content_complement }}
     {{ partial .hero_content_complement .context }}
   {{ end }}
 
-  {{ partial "header/hero/image.html" (dict
+  {{ partial "header/hero/content/image.html" (dict
     "image" .image
     "sizes" .sizes
     "context" .context
