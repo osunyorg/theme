@@ -1,0 +1,9 @@
+{{ $shoud_display := partial "header/hero/breadcrumbs/helpers/ShouldDisplay" (dict
+  "position" "after-hero"
+  "hero" .
+) }}
+{{ if $shoud_display }}
+  <div class="container breadcrumb-container">
+    {{ partial "header/breadcrumbs.html" .context }}
+  </div>
+{{ end }}

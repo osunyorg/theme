@@ -1,0 +1,34 @@
+{{ $subtitle := .subtitle }}
+{{ $summary := .context.Params.summary | safeHTML }}
+{{ $subtitle_is_summary := false }}
+
+{{ $title_attribute := "" | safeHTMLAttr }}
+{{ if site.Params.search.active }}
+  {{ $title_attribute = "data-pagefind-weight='10'" | safeHTMLAttr }}
+{{ end }}
+
+{{ if not $subtitle }}
+  {{ $summary_position := partial "commons/summary/helpers/GetPosition" .context }}
+
+  {{ if and (eq $summary_position "hero") $summary }}
+    {{ $subtitle = $summary }}
+    {{ $subtitle_is_summary = true }}
+  {{ end }}
+{{ end }}
+
+{{ if $subtitle }}
+  <hgroup {{ if $subtitle_is_summary -}} class="has-lead" {{- end }}>
+    <h1 {{ $title_attribute }}>{{ safeHTML .title }}</h1>
+    {{ with $subtitle }}
+      {{ safeHTML . }}
+    {{ end }}
+  </hgroup>
+{{ else }}
+  <h1 {{ $title_attribute }}>{{ safeHTML .title }}</h1>
+{{ end }}
+
+{{ partial "header/hero/breadcrumbs/after-title.html" . }}
+
+{{ if .hero_text_complement }}
+  {{ partial .hero_text_complement .context }}
+{{ end }}

@@ -1,0 +1,11 @@
+{{ $button := .button | default .context.Params.header_cta }}
+{{ if or $button .share }}
+  <div class="hero-actions">
+    {{ with $button }}
+      {{ partial "header/cta.html" . }}
+    {{ end }}
+    {{ if .share }}
+      {{ partial "commons/share/dropdown.html" .context }}
+    {{ end }}
+  </div>
+{{ end }}
