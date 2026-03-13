@@ -1,50 +1,17 @@
+
+{{ $hide_breadcrumb := eq .breadcrumb "false" }}
 {{ $display_breadcrumb := .breadcrumb | default true }}
 {{ $class := partial "header/hero/helpers/GetClass" . }}
 <header class="{{ $class }}">
   {{- partial "hooks/after-hero-start" . -}}
   <div class="container">
-    {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-start") }}
-      {{ partial "header/breadcrumbs.html" .context }}
-    {{ end }}
-    <div class="content">
-      <div class="hero-text">
-        {{ partial "header/hero/text.html" . }}
-
-        {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "after-hero-title") }}
-          <div class="breadcrumb-container">
-            {{ partial "header/breadcrumbs.html" .context }}
-          </div>
-        {{ end }}
-
-        {{ if .hero_text_complement }}
-          {{ partial .hero_text_complement .context }}
-        {{ end }}
-
-        {{ partial "header/hero/taxonomies.html" . }}
-        {{ partial "header/hero/actions.html" . }}
-      </div>
-
-      {{ if .hero_content_complement }}
-        {{ partial .hero_content_complement .context }}
-      {{ end }}
-
-      {{ partial "header/hero/image.html" (dict
-        "image" .image
-        "sizes" .sizes
-        "context" .context
-      ) }}
-    </div>
+    {{ partial "header/hero/breadcrumbs/start.html" . }}
+    {{ partial "header/hero/content.html" . }}
     {{ partial "hooks/before-hero-content-end.html" .context }}
   </div>
-
   {{ if .hero_complement }}
     {{ partial .hero_complement .context }}
   {{ end }}
-
-  {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-end") }}
-    {{ partial "header/breadcrumbs/container.html" . }}
-  {{ end }}
+  {{ partial "header/hero/breadcrumbs/end.html" . }}
 </header>
-{{ if and $display_breadcrumb .context.Params.breadcrumbs (eq site.Params.breadcrumb.position "after-hero" ) }}
-  {{ partial "header/breadcrumbs/container.html" . }}
-{{ end }}
+{{ partial "header/hero/breadcrumbs/after.html" . }}

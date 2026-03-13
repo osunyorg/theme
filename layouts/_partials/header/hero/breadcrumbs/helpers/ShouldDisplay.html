@@ -1,0 +1,15 @@
+{{ $should_display := true }}
+
+{{ if eq .hero.breadcrumb "false" }}
+  {{ $should_display = false }}
+{{ end }}
+
+{{ if not (eq site.Params.breadcrumb.position .position) }}
+  {{ $should_display = false }}
+{{ end }}
+
+{{ if not .hero.context.Params.breadcrumbs }}
+  {{ $should_display = false }}
+{{ end }}
+
+{{ return $should_display }}
