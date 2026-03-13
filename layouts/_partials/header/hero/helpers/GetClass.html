@@ -1,0 +1,17 @@
+{{ $class := "hero" }}
+
+{{ if .image }}
+  {{ $direction := partial "commons/image/helpers/GetDirection" .image }}
+  {{ $class = printf "%s hero--with-image hero--image-%s" $class $direction }}
+{{ end }}
+
+{{ if ( .breadcrumb | default true ) }}
+  {{ $breadcrumb_position :=  site.Params.breadcrumb.position }}
+  {{ $class = printf "%s has-breadcrumb-%s" $class $breadcrumb_position }}
+
+  {{ if eq $breadcrumb_position "after-hero" }}
+    {{ $class = printf "%s hero--no-margin" $class }}
+  {{ end }}
+{{ end }}
+
+{{ return $class }}
