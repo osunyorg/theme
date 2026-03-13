@@ -74,12 +74,15 @@
     @include media-breakpoint-down(desktop)
         border-top: $toc-border-width solid var(--color-border)
         position: fixed
-        bottom: 0
+        bottom: -200px
         background: $toc-background-color
         left: 0
         width: 100%
         padding: 0 var(--grid-gutter)
+        padding-bottom: 200px
         z-index: $zindex-toc-cta
+        html.has-menu-opened &
+            z-index: $zindex-toc-cta-when-menu-opened
     button
         @include link-icon(menu-3-line)
         border: 0
