@@ -4,7 +4,7 @@
   <div class="document-content">
     {{- if not site.Params.home.toc.disabled -}}
       {{ partial "toc/container.html" (dict
-        "toc" "toc/default.html"
+        "toc" ( partial "toc/default.html" . )
         "context" .
       ) }}
     {{- end -}}

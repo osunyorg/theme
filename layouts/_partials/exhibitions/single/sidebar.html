@@ -6,7 +6,7 @@
       </aside>
     {{ end }}
     {{ partial "toc/container.html" (dict
-      "toc" "toc/default.html"
+      "toc" ( partial "toc/default.html" . )
       "context" .
     ) }}
   </div>
