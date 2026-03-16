@@ -5,17 +5,21 @@ module Hugolint
       ROOT = './layouts/_partials/'
 
       def to_s
-        message = "### Partials calls\n"
-        message += "Partials called once might be in the wrong place. Partials never called might be metaprogrammed, or obsolete.\n"
-        message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
-        message += "| Id | State | Calls | Fragment | Partial |\n"
-        message += "|---|---|---|---|---|\n"
-        index = 1
-        analyzed_files.each do |file|
-          calls = file.json[:calls]
-          next unless calls[:problem]
-          message += "| cal-#{index} | #{calls[:icon]} | #{calls[:count]} | #{calls[:fragment]} | #{file.short_path} |\n"
-          index += 1
+        if clean?
+          message = "### Partials calls are perfect ✅\n"
+        else
+          message = "### Partials calls\n"
+          message += "Partials called once might be in the wrong place. Partials never called might be metaprogrammed, or obsolete.\n"
+          message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
+          message += "| Id | State | Calls | Fragment | Partial |\n"
+          message += "|---|---|---|---|---|\n"
+          index = 1
+          analyzed_files.each do |file|
+            calls = file.json[:calls]
+            next unless calls[:problem]
+            message += "| cal-#{index} | #{calls[:icon]} | #{calls[:count]} | #{calls[:fragment]} | #{file.short_path} |\n"
+            index += 1
+          end
         end
         message
       end

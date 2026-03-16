@@ -31,7 +31,7 @@ module Hugolint
       protected
 
       def clean?
-        @warnings.zero? && @dangers.zero?
+        analyzed_files && @warnings.zero? && @dangers.zero?
       end
 
       def should_analyze?(file)

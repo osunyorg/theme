@@ -6,17 +6,21 @@ module Hugolint
       WARNING = 35
 
       def to_s
-        message = "### Too many lines \n"
-        message += "Files should not be too long, it's a sign of mess and a difficulty for overrides.\n"
-        message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
-        message += "| Id | State | Lines | Path |\n"
-        message += "|---|---|---|---|\n"
-        index = 1
-        analyzed_files.each do |file|
-          lines = file.json[:lines]
-          next unless lines[:problem]
-          message += "| lin-#{index} | #{lines[:icon]} | #{lines[:count]} | #{file.short_path} |\n"
-          index += 1
+        if clean?
+          message = "### Lines are perfect ✅\n"
+        else
+          message = "### Too many lines \n"
+          message += "Files should not be too long, it's a sign of mess and a difficulty for overrides.\n"
+          message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
+          message += "| Id | State | Lines | Path |\n"
+          message += "|---|---|---|---|\n"
+          index = 1
+          analyzed_files.each do |file|
+            lines = file.json[:lines]
+            next unless lines[:problem]
+            message += "| lin-#{index} | #{lines[:icon]} | #{lines[:count]} | #{file.short_path} |\n"
+            index += 1
+          end
         end
         message
       end

@@ -14,17 +14,21 @@ module Hugolint
       WARNING = 5
 
       def to_s
-        message = "### Complexity\n"
-        message += "Cyclomatic complexity should not be too high.\n"
-        message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
-        message += "| Id | State | Complexity | File |\n"
-        message += "|---|---|---|---|\n"
-        index = 1
-        analyzed_files.each do |file|
-          complexity = file.json[:complexity]
-          next unless complexity[:problem]
-          message += "| cpx-#{index} | #{complexity[:icon]} | #{complexity[:score]} | #{file.short_path} |\n"
-          index += 1
+        if clean?
+          message = "### Complexity is perfect ✅\n"
+        else
+          message = "### Complexity\n"
+          message += "Cyclomatic complexity should not be too high.\n"
+          message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
+          message += "| Id | State | Complexity | File |\n"
+          message += "|---|---|---|---|\n"
+          index = 1
+          analyzed_files.each do |file|
+            complexity = file.json[:complexity]
+            next unless complexity[:problem]
+            message += "| cpx-#{index} | #{complexity[:icon]} | #{complexity[:score]} | #{file.short_path} |\n"
+            index += 1
+          end
         end
         message
       end
