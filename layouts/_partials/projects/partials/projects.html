@@ -1,7 +1,7 @@
 {{ $options := site.Params.projects.index.options }}
 {{ $layout := site.Params.projects.index.layout }}
 {{ $layout_partial := printf "projects/partials/layouts/%s/%s.html" $layout $layout }}
-{{ $projects := partial "GetPathSliceFromObjects" .Paginator.Pages }}
+{{ $projects := partial "helpers/objects/GetPathSlice" .Paginator.Pages }}
 
 <div class="projects">
   {{ partial $layout_partial (dict

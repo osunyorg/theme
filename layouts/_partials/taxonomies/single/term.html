@@ -1,6 +1,6 @@
 {{ $section := replace .taxonomy "_categories" "" }}
 {{ $index := site.GetPage $section }}
-{{ $display := partial "GetSiteParamWithDefault" (dict 
+{{ $display := partial "helpers/param/GetSiteParamWithDefault" (dict 
   "param" (printf "%s.categories.taxonomies.display" $section)
   "default" "categories.single.taxonomies.display"
 ) }}

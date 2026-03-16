@@ -69,7 +69,7 @@
 
       {{ if and $options.summary .Params.summary }}
         <div class="event-description" itemprop="description">
-          {{ partial "GetRichSummary" ( dict 
+          {{ partial "commons/summary/helpers/GetTruncated" ( dict 
             "summary" .Params.summary
             "kind" "events"
           ) }}

@@ -7,13 +7,13 @@
       <a href="#pages">{{ i18n "sitemap.pages" }}</a>
     </li>
     {{ range site.Sections }}
-      {{ $ignore_section := partial "GetSiteParamWithDefault" (dict
+      {{ $ignore_section := partial "helpers/param/GetSiteParamWithDefault" (dict
         "param" (printf "%s.sitemap.ignore" .Type)
         "default" "default.sitemap.ignore"
       ) }}
       {{ if and (ne .Type "sitemap") (ne .Type "pages") (not $ignore_section) }}
         <li>
-          <a {{ partial "AnchorAttribute" .Type }}>{{ safeHTML .Title }}</a>
+          <a {{ partial "helpers/anchor/GetAttribute" .Type }}>{{ safeHTML .Title }}</a>
         </li>
       {{ end }}
     {{ end }}

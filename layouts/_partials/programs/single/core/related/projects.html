@@ -9,8 +9,8 @@
           {{ i18n "projects.see_all_in_program" (dict "Title" $category_name) }}
         </a>
         <div class="blocks">
-          {{ $projects := partial "GetPathSliceFromObjects" . }}
-          {{ $params := partial "GetLayoutAndOptions" (dict 
+          {{ $projects := partial "helpers/objects/GetPathSlice" . }}
+          {{ $params := partial "helpers/param/GetLayoutAndOptions" (dict 
             "param" "programs.related_projects"
             "default" "projects.index"
           ) }}

@@ -3,7 +3,7 @@
 
 {{ if or $has_presentation $has_administrative_informations }}
   <li>
-    <a {{ partial "AnchorAttribute" (i18n "programs.toc.presentation") }}>{{ i18n "programs.toc.presentation" }}</a>
+    <a {{ partial "helpers/anchor/GetAttribute" (i18n "programs.toc.presentation") }}>{{ i18n "programs.toc.presentation" }}</a>
     <ol>
       {{- if .Params.presentation -}}
         {{ partial "programs/single/toc/item.html" (i18n "programs.presentation") }}

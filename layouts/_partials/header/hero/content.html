@@ -1,0 +1,21 @@
+<div class="content">
+  <div class="hero-text">
+    {{ partial "header/hero/content/text.html" . }}
+    {{ partial "header/hero/content/taxonomies.html" . }}
+    {{ partial "header/hero/content/actions.html" . }}
+  </div>
+
+  {{ if .hero_content_complement }}
+    {{ partial .hero_content_complement .context }}
+  {{ end }}
+
+  {{ partial "header/hero/content/image.html" (dict
+    "image" .image
+    "sizes" .sizes
+    "context" .context
+  ) }}
+
+  {{ if .hero_after_image_complement }}
+    {{ partial .hero_after_image_complement .context }}
+  {{ end }}
+</div>

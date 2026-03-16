@@ -1,0 +1,9 @@
+{{ $image_sizes := .sizes | default site.Params.image_sizes.sections.persons.item }}
+<div class="avatar" itemprop="image">
+  {{ if .person.Params.image }}
+    {{ partial "commons/image.html" (dict
+      "image" .person.Params.image
+      "sizes" $image_sizes
+    ) }}
+  {{ end }}
+</div>

@@ -5,7 +5,7 @@
     "context" .
   ) }}
 
-  {{ if (partial "IsFirstPage" .) }}
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents
@@ -16,6 +16,6 @@
 
   <div class="container">
     {{ partial "jobs/partials/jobs.html" . }}
-    {{ partial "commons/pagination.html" . }}
+    {{ partial "commons/section/pagination.html" . }}
   </div>
 </div>

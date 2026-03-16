@@ -18,7 +18,7 @@ module Hugolint
     end
 
     def to_s
-      message = "## Hugo analyzer\n"
+      message = "## Hugolint\n"
       message += Engines::Directories.new(self).to_s
       message += Engines::Calls.new(self).to_s
       message += Engines::Lines.new(self).to_s

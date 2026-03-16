@@ -1,118 +1,14 @@
-
-{{ $direction := "" }}
-{{ $breadcrumb_is_after_hero := eq site.Params.breadcrumb.position "after-hero" }}
-{{ $display_breadcrumb := .breadcrumb | default true }}
-{{ $with_lightbox := not site.Params.components.lightbox.in_hero.disabled }}
-{{ $subtitle := .subtitle }}
-{{ if .image }}
-  {{ $direction = partial "commons/image/helpers/GetDirection" .image }}
-{{ end }}
-
-{{ $summary := .context.Params.summary | safeHTML }}
-{{ $subtitle_is_summary := false }}
-
-{{ $button := .button | default .context.Params.header_cta }}
-
-{{ $title_attribute := "" | safeHTMLAttr }}
-{{ if site.Params.search.active }}
-  {{ $title_attribute = "data-pagefind-weight='10'" | safeHTMLAttr }}
-{{ end }}
-
-{{ if not $subtitle }}
-  {{ $summary_position := partial "GetSummaryPosition" .context }}
-
-  {{ if and (eq $summary_position "hero") $summary }}
-    {{ $subtitle = $summary }}
-    {{ $subtitle_is_summary = true }}
-  {{ end }}
-{{ end }}
-
-{{ $breadcrumb_class := printf "has-breadcrumb-%s" site.Params.breadcrumb.position }}
-
-<header class="hero {{ if .image }}hero--with-image hero--image-{{- $direction }}{{ end }} {{ if $breadcrumb_is_after_hero }} hero--no-margin {{ end }} {{ $breadcrumb_class }} ">
-
+{{ $class := partial "header/hero/helpers/GetClass" . }}
+<header class="{{ $class }}">
   {{- partial "hooks/after-hero-start" . -}}
-
   <div class="container">
-    {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-start") }}
-      {{ partial "header/breadcrumbs.html" .context }}
-    {{ end }}
-    <div class="content">
-      <div class="hero-text">
-        {{ if $subtitle }}
-          <hgroup {{ if $subtitle_is_summary -}} class="has-lead" {{- end }}>
-            <h1 {{ $title_attribute }}>{{ safeHTML .title }}</h1>
-            {{ with $subtitle }}
-              {{ safeHTML . }}
-            {{ end }}
-          </hgroup>
-        {{ else }}
-          <h1 {{ $title_attribute }}>{{ safeHTML .title }}</h1>
-        {{ end }}
-
-        {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "after-hero-title") }}
-          <div class="breadcrumb-container">
-            {{ partial "header/breadcrumbs.html" .context }}
-          </div>
-        {{ end }}
-
-        {{ if .hero_text_complement }}
-          {{ partial .hero_text_complement .context }}
-        {{ end }}
-
-        {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" .context }}
-        {{ if and .context.Params.taxonomies (eq $taxonomies_position "hero") }}
-          {{ partial "taxonomies/single/list.html" .context }}
-        {{ end }}
-
-        {{ if or $button .share }}
-          <div class="hero-actions">
-            {{ with $button }}
-              {{ partial "header/cta.html" . }}
-            {{ end }}
-            {{ if .share }}
-              {{ partial "commons/share/dropdown.html" . }}
-            {{ end }}
-          </div>
-        {{ end }}
-      </div>
-
-      {{ if .hero_content_complement }}
-        {{ partial .hero_content_complement .context }}
-      {{ end }}
-
-      {{ if .image }}
-        {{ partial "commons/image/figure.html" (dict
-          "image" .image
-          "sizes" ( .sizes | default site.Params.image_sizes._default.hero )
-          "lazy" false
-          "focusable_figcaption" true
-          "with_lightbox" $with_lightbox
-          "fetch_priority" "high"
-        ) }}
-      {{ end }}
-
-      {{ if .hero_after_image_complement }}
-        {{ partial .hero_after_image_complement .context }}
-      {{ end }}
-
-    </div>
+    {{ partial "header/hero/breadcrumbs/start.html" . }}
+    {{ partial "header/hero/content.html" . }}
     {{ partial "hooks/before-hero-content-end.html" .context }}
   </div>
-
   {{ if .hero_complement }}
     {{ partial .hero_complement .context }}
   {{ end }}
-
-  {{ if and $display_breadcrumb (eq site.Params.breadcrumb.position "hero-end") }}
-    <div class="container breadcrumb-container">
-      {{ partial "header/breadcrumbs.html" .context }}
-    </div>
-  {{ end }}
+  {{ partial "header/hero/breadcrumbs/end.html" . }}
 </header>
-
-{{ if and $display_breadcrumb $breadcrumb_is_after_hero .context.Params.breadcrumbs }}
-  <div class="container breadcrumb-container">
-    {{ partial "header/breadcrumbs.html" .context }}
-  </div>
-{{ end }}
+{{ partial "header/hero/breadcrumbs/after.html" . }}

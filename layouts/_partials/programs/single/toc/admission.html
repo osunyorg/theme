@@ -2,7 +2,7 @@
 
 {{ if $hasAdmission }}
   <li>
-    <a {{ partial "AnchorAttribute" (i18n "programs.toc.admission") }}>{{ i18n "programs.toc.admission" }}</a>
+    <a {{ partial "helpers/anchor/GetAttribute" (i18n "programs.toc.admission") }}>{{ i18n "programs.toc.admission" }}</a>
     <ol>
       {{- if .Params.prerequisites -}}
         {{ partial "programs/single/toc/item.html" (i18n "programs.prerequisites") }}

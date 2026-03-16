@@ -3,7 +3,7 @@
 <div class="document-content">
   {{ with .Params.persons }}
     <div class="container">
-      {{ $persons := partial "GetObjectsFromPathSlice" . }}
+      {{ $persons := partial "helpers/objects/GetFromPathSlice" . }}
       {{ partial "academic_years/partials/persons.html" $persons }}
     </div>
   {{ end }}

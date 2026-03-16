@@ -9,8 +9,8 @@
           {{ i18n "posts.see_all_in_program" (dict "Title" $category_name) }}
         </a>
         <div class="blocks">
-          {{ $posts := partial "GetPathSliceFromObjects" . }}
-          {{ $params := partial "GetLayoutAndOptions" (dict 
+          {{ $posts := partial "helpers/objects/GetPathSlice" . }}
+          {{ $params := partial "helpers/param/GetLayoutAndOptions" (dict 
             "param" "programs.related_posts"
             "default" "posts.index"
           ) }}

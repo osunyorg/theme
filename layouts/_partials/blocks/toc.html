@@ -1,7 +1,7 @@
 {{ range . -}}
   {{- if and (eq .template "title") .title }}
     <li>
-      <a {{ partial "AnchorAttribute" .slug }}>{{ safeHTML .title }}</a>
+      <a {{ partial "helpers/anchor/GetAttribute" .slug }}>{{ safeHTML .title }}</a>
     </li>
   {{ end -}}
 {{- end -}}

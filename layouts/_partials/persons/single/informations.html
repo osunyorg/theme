@@ -1,0 +1,18 @@
+{{ $administrator_programs := partial "persons/single/helpers/GetPrograms" (dict 
+  "slug" .Slug
+  "type" "administrators"
+) }}
+
+{{ if or .Params.biography $administrator_programs }}
+  <div class="informations">
+    {{ if .Params.biography }}
+      {{ partial "persons/single/informations/biography.html" . }}
+    {{ end }}
+    {{ if $administrator_programs }}
+      {{ partial "persons/single/informations/program-roles.html" (dict
+        "programs" $administrator_programs 
+        "slug" .Slug
+        ) }}
+    {{ end }}
+  </div>
+{{ end }}

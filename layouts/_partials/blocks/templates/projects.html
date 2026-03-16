@@ -10,7 +10,7 @@
         {{ partial "blocks/top.html" $block.top }}
         {{ if eq .mode "categories" }}
           {{ with site.Taxonomies.projects_categories }}
-            {{ $categories := partial "GetPathSliceFromObjects" . }}
+            {{ $categories := partial "helpers/objects/GetPathSlice" . }}
             {{ partial "categories/partials/layouts/cards/cards.html" (dict
               "categories" $categories
               "heading_level" $block.ranks.base

@@ -1,0 +1,4 @@
+{{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" .context }}
+{{ if and .context.Params.taxonomies (eq $taxonomies_position "hero") }}
+  {{ partial "taxonomies/single/list.html" .context }}
+{{ end }}

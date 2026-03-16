@@ -9,6 +9,8 @@ module Hugolint
 
       def initialize(analyzer)
         @analyzer = analyzer
+        @dangers = 0
+        @warnings = 0
       end
 
       def analyzed_files
@@ -27,6 +29,14 @@ module Hugolint
       end
 
       protected
+
+      def level
+        @dangers + @warnings
+      end
+
+      def clean?
+        analyzed_files && @warnings.zero? && @dangers.zero?
+      end
 
       def should_analyze?(file)
         !files_excluded.include?(file.short_path)

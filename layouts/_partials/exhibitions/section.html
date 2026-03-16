@@ -5,7 +5,7 @@
     "context" .
   ) }}
 
-  {{ if (partial "IsFirstPage" .) }}
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents
@@ -21,6 +21,6 @@
       "options" site.Params.exhibitions.index.options
     ) }}
     {{ partial "commons/section/archive-link.html" . }}
-    {{ partial "commons/pagination.html" . }}
+    {{ partial "commons/section/pagination.html" . }}
   </div>
 </div>

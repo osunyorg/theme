@@ -1,7 +1,7 @@
 {{ $hasPedagogy := partial "programs/single/helpers/HasPedagogy" . }}
 {{- if $hasPedagogy }}
   <li>
-    <a {{ partial "AnchorAttribute" (i18n "programs.toc.pedagogy") }}>{{ i18n "programs.toc.pedagogy" }}</a>
+    <a {{ partial "helpers/anchor/GetAttribute" (i18n "programs.toc.pedagogy") }}>{{ i18n "programs.toc.pedagogy" }}</a>
     <ol>
       {{- if .Params.content -}}
         {{ partial "programs/single/toc/item.html" (i18n "programs.content") }}

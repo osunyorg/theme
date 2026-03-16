@@ -14,16 +14,21 @@ module Hugolint
       WARNING = 5
 
       def to_s
-        message = "### Complexity\n"
-        message += "Cyclomatic complexity should not be too high.\n"
-        message += "| Id | State | Complexity | File |\n"
-        message += "|---|---|---|---|\n"
-        index = 1
-        analyzed_files.each do |file|
-          complexity = file.json[:complexity]
-          next unless complexity[:problem]
-          message += "| cpx-#{index} | #{complexity[:icon]} | #{complexity[:score]} | #{file.short_path} |\n"
-          index += 1
+        if clean?
+          message = "### Complexity is perfect ✅\n"
+        else
+          message = "### Complexity (#{level})\n"
+          message += "Cyclomatic complexity should not be too high.\n\n"
+          message += "#{ @dangers } ❌\n #{ @warnings } ⚠️\n\n"
+          message += "| Id | State | Complexity | File |\n"
+          message += "|---|---|---|---|\n"
+          index = 1
+          analyzed_files.each do |file|
+            complexity = file.json[:complexity]
+            next unless complexity[:problem]
+            message += "| cpx-#{index} | #{complexity[:icon]} | #{complexity[:score]} | #{file.short_path} |\n"
+            index += 1
+          end
         end
         message
       end
@@ -48,8 +53,10 @@ module Hugolint
         icon = ICON_OK
         if score > DANGER
           icon = ICON_DANGER
+          @dangers += 1
         elsif score > WARNING
           icon = ICON_WARNING
+          @warnings += 1
         end
         file.json[:complexity] = {
           score: score,
