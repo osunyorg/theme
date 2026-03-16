@@ -5,30 +5,14 @@
 
 <ul class="organizations organizations--grid {{ if $options.summary }} with-summaries{{ end }}">
   {{ range .organizations }}
+    {{ $organization := partial "organizations/helpers/GetObjectOrData" . }}
     <li>
-      {{ if .path }}
-        {{ $organization := site.GetPage .path }}
-        {{ partial "organizations/partials/organization.html" (dict
-          "organization" $organization
-          "options" $options
-          "layout" $layout
-          "heading_level" $heading_level
-        ) }}
-      {{ else }}
-        {{ partial "organizations/partials/organization.html" (dict
-          "organization" (dict
-            "Title" .name
-            "Permalink" .url
-            "Params" (dict 
-              "logo" .logo
-              "external" true
-            )
-          )
-          "options" $options
-          "layout" $layout
-          "heading_level" $heading_level
-        ) }}
-      {{ end }}
+      {{ partial "organizations/partials/organization.html" (dict
+        "organization" $organization
+        "options" $options
+        "layout" $layout
+        "heading_level" $heading_level
+      ) }}
     </li>
   {{ end }}
 </ul>
