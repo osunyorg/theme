@@ -6,7 +6,7 @@
   </div>
 
   {{ if .hero_content_complement }}
-    {{ partial .hero_content_complement .context }}
+    {{ .hero_content_complement }}
   {{ end }}
 
   {{ partial "header/hero/content/image.html" (dict
@@ -16,6 +16,6 @@
   ) }}
 
   {{ if .hero_after_image_complement }}
-    {{ partial .hero_after_image_complement .context }}
+    {{ .hero_after_image_complement }}
   {{ end }}
 </div>
