@@ -9,8 +9,8 @@ module Hugolint
           message = "### Partials calls are perfect ✅\n"
         else
           message = "### Partials calls (#{level})\n"
-          message += "Partials called once might be in the wrong place. Partials never called might be metaprogrammed, or obsolete.\n"
-          message += "#{ @dangers } ❌, #{ @warnings } ⚠️\n"
+          message += "Partials called once might be in the wrong place. Partials never called might be metaprogrammed, or obsolete.\n\n"
+          message += "#{ @dangers } ❌\n #{ @warnings } ⚠️\n\n"
           message += "| Id | State | Calls | Fragment | Partial |\n"
           message += "|---|---|---|---|---|\n"
           index = 1

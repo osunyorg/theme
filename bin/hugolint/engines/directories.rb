@@ -10,8 +10,8 @@ module Hugolint
           message = "### Directories are perfect ✅\n"
         else
           message = "### Directories (#{level})\n"
-          message += "Directories should not contain too many files, it's probably a sign of mess.\n"
-          message += "#{ @dangers } ❌, #{ @warnings } ⚠️\n"
+          message += "Directories should not contain too many files, it's probably a sign of mess.\n\n"
+          message += "#{ @dangers } ❌\n #{ @warnings } ⚠️\n\n"
           message += "| Id | State | Files | Directory |\n"
           message += "|---|---|---|---|\n"
           index = 1
