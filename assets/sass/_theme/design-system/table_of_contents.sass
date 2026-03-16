@@ -31,26 +31,30 @@
                 margin-top: 0
     button
         @include button-reset
-        @include icon-block(close-line, after)
-            margin-right: -14px
+        @include icon(close-line, after)
             font-size: 1.5em
+            margin-left: $spacing-2
         align-items: center
-        border-top: $toc-border-width solid var(--color-border)
         display: flex
-        justify-content: space-between
-        padding: 0 $spacing-3
-        line-height: $body-line-height
+        font-size: $toc-title-font-size
+        position: absolute
+        padding-right: 0
+        right: var(--grid-gutter)
+        @include media-breakpoint-down(desktop)
+            top: pxToRem(11)
+            line-height: var(--body-line-height)
+            span
+                @include sr-only
         @include media-breakpoint-up(desktop)
-            border-top: 0
-            position: absolute
-            padding-right: 0
-            top: 0
-            padding-top: 0
-            padding-bottom: 0
-            line-height: var(--header-height)
-            right: var(--grid-gutter)
-            &::after
-                margin-left: $spacing-2
+            line-height: calc(var(--header-height) - #{$toc-border-width})
+
+.toc-title, .toc-cta, .toc-container button
+    font-family: $toc-title-font-family
+    font-size: $toc-title-font-size
+    line-height: var(--body-line-height)
+    color: $toc-color
+    @include media-breakpoint-up(desktop)
+        font-size: $toc-title-font-size-desktop
 
 .toc-cta
     display: flex
@@ -156,14 +160,6 @@
             margin-bottom: 0
             html.is-scrolling-down &
                 max-height: none
-
-.toc-title, .toc-cta, .toc-container button
-    font-family: $toc-title-font-family
-    font-size: $toc-title-font-size
-    color: $toc-color
-    @include media-breakpoint-up(desktop)
-        font-size: $toc-title-font-size-desktop
-
 .toc
     font-family: $toc-font-family
     line-height: $toc-line-height
