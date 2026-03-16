@@ -11,7 +11,7 @@ module Hugolint
         else
           message = "### Too many lines (#{level})\n"
           message += "Files should not be too long, it's a sign of mess and a difficulty for overrides.\n"
-          message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
+          message += "#{ @dangers } ❌, #{ @warnings } ⚠️\n"
           message += "| Id | State | Lines | Path |\n"
           message += "|---|---|---|---|\n"
           index = 1

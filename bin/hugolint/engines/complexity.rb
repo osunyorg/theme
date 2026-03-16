@@ -19,7 +19,7 @@ module Hugolint
         else
           message = "### Complexity (#{level})\n"
           message += "Cyclomatic complexity should not be too high.\n"
-          message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
+          message += "#{ @dangers } ❌, #{ @warnings } ⚠️\n"
           message += "| Id | State | Complexity | File |\n"
           message += "|---|---|---|---|\n"
           index = 1
