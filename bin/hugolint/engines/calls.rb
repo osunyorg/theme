@@ -7,6 +7,7 @@ module Hugolint
       def to_s
         message = "### Partials calls\n"
         message += "Partials called once might be in the wrong place. Partials never called might be metaprogrammed, or obsolete.\n"
+        message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
         message += "| Id | State | Calls | Fragment | Partial |\n"
         message += "|---|---|---|---|---|\n"
         index = 1
@@ -42,9 +43,11 @@ module Hugolint
         if count == 0
           problem = true
           icon = ICON_DANGER
+          @dangers += 1
         elsif count == 1 && is_helper
           problem = true
           icon = ICON_WARNING
+          @warnings += 1
         else
           problem = false
           icon = ICON_OK

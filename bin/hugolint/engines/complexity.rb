@@ -16,6 +16,7 @@ module Hugolint
       def to_s
         message = "### Complexity\n"
         message += "Cyclomatic complexity should not be too high.\n"
+        message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
         message += "| Id | State | Complexity | File |\n"
         message += "|---|---|---|---|\n"
         index = 1
@@ -48,8 +49,10 @@ module Hugolint
         icon = ICON_OK
         if score > DANGER
           icon = ICON_DANGER
+          @dangers += 1
         elsif score > WARNING
           icon = ICON_WARNING
+          @warnings += 1
         end
         file.json[:complexity] = {
           score: score,

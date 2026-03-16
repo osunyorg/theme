@@ -8,6 +8,7 @@ module Hugolint
       def to_s
         message = "### Too many lines \n"
         message += "Files should not be too long, it's a sign of mess and a difficulty for overrides.\n"
+        message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
         message += "| Id | State | Lines | Path |\n"
         message += "|---|---|---|---|\n"
         index = 1
@@ -33,8 +34,10 @@ module Hugolint
         icon = ICON_OK
         if count > DANGER
           icon = ICON_DANGER
+          @dangers += 1
         elsif count > WARNING
           icon = ICON_WARNING
+          @warnings += 1
         end
         file.json[:lines] = {
           count: count,
