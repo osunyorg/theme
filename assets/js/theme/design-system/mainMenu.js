@@ -7,6 +7,7 @@ var CLASSES = {
     isAnimating: 'is-animating',
     scrollingDown: 'is-scrolling-down',
     menusOpened: 'has-menu-opened',
+    hasMenuSticky: 'has-menu-sticky',
     sticky: 'is-sticky'
 };
 
@@ -82,9 +83,10 @@ window.osuny.MainMenu.prototype.resize = function () {
 };
 
 window.osuny.MainMenu.prototype.setHeaderHeightVariables = function () {
+    var htmlElement = document.documentElement;
     if (!this.state.opened) {
-        document.documentElement.style.setProperty('--header-height', Math.floor(this.element.offsetHeight) + 'px');
-        document.documentElement.style.setProperty('--header-menu-max-height', Math.floor(window.innerHeight - this.element.offsetHeight) + 'px');
+        htmlElement.style.setProperty('--header-height', Math.floor(this.element.offsetHeight) + 'px');
+        htmlElement.style.setProperty('--header-menu-max-height', Math.floor(window.innerHeight - this.element.offsetHeight) + 'px');
     }
 };
 
@@ -162,16 +164,17 @@ window.osuny.MainMenu.prototype.toggleDropdown = function (clickedButton) {
 };
 
 window.osuny.MainMenu.prototype.updateOverlay = function () {
-    var classAction = this.state.hasDropdownOpened || this.state.opened ? 'add' : 'remove';
-    document.documentElement.classList[classAction](CLASSES.menusOpened);
+    var classAction = this.state.hasDropdownOpened || this.state.opened ? 'add' : 'remove',
+        htmlElement = document.documentElement;
+    htmlElement.classList[classAction](CLASSES.menusOpened);
 
     // Add class for animation transition
     var transitionDuration = window.getComputedStyle(this.element).transitionDuration;
     // TODO : regex for getting 'ms' or other units value
     transitionDuration = parseFloat(transitionDuration.replace('s', ''));
-    document.documentElement.classList.add(CLASSES.isAnimating);
+    htmlElement.classList.add(CLASSES.isAnimating);
     setTimeout(function () {
-        document.documentElement.classList.remove(CLASSES.isAnimating);
+        htmlElement.classList.remove(CLASSES.isAnimating);
     }, transitionDuration * 1000);
 };
 
@@ -181,19 +184,22 @@ window.osuny.MainMenu.prototype.onScroll = function () {
         y = window.scrollY,
         isNearTop = y < offset,
         threshold = 50,
-        hasChanged = false;
+        hasChanged = false,
+        htmlElement = document.documentElement;
 
     if (isNearTop) {
         this.element.classList.remove(CLASSES.sticky);
+        htmlElement.classList.remove(CLASSES.hasMenuSticky);
     } else {
         this.element.classList.add(CLASSES.sticky);
+        htmlElement.classList.add(CLASSES.hasMenuSticky);
     }
 
     if (y > this.state.previousScrollY + threshold && !isNearTop) {
-        document.documentElement.classList.add(CLASSES.scrollingDown);
+        htmlElement.classList.add(CLASSES.scrollingDown);
         hasChanged = true;
     } else if (y < this.state.previousScrollY - threshold) {
-        document.documentElement.classList.remove(CLASSES.scrollingDown);
+        htmlElement.classList.remove(CLASSES.scrollingDown);
         hasChanged = true;
     }
 
