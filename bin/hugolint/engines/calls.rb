@@ -8,7 +8,7 @@ module Hugolint
         if clean?
           message = "### Partials calls are perfect ✅\n"
         else
-          message = "### Partials calls\n"
+          message = "### Partials calls (#{level})\n"
           message += "Partials called once might be in the wrong place. Partials never called might be metaprogrammed, or obsolete.\n"
           message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
           message += "| Id | State | Calls | Fragment | Partial |\n"

@@ -30,6 +30,10 @@ module Hugolint
 
       protected
 
+      def level
+        @dangers + @warnings
+      end
+
       def clean?
         analyzed_files && @warnings.zero? && @dangers.zero?
       end

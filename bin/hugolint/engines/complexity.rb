@@ -17,7 +17,7 @@ module Hugolint
         if clean?
           message = "### Complexity is perfect ✅\n"
         else
-          message = "### Complexity\n"
+          message = "### Complexity (#{level})\n"
           message += "Cyclomatic complexity should not be too high.\n"
           message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
           message += "| Id | State | Complexity | File |\n"

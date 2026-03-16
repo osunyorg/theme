@@ -9,7 +9,7 @@ module Hugolint
         if clean?
           message = "### Directories are perfect ✅\n"
         else
-          message = "### Directories \n"
+          message = "### Directories (#{level})\n"
           message += "Directories should not contain too many files, it's probably a sign of mess.\n"
           message += "#{ @dangers } dangers, #{ @warnings } warnings\n"
           message += "| Id | State | Files | Directory |\n"
