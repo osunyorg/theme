@@ -6,21 +6,26 @@ module Hugolint
       WARNING = 10
 
       def to_s
-        message = "### Directories \n"
-        message += "Directories should not contain too many files, it's probably a sign of mess.\n"
-        message += "| Id | State | Files | Directory |\n"
-        message += "|---|---|---|---|\n"
-        index = 1
-        analyzed_files.each do |file|
-          directory = file.json[:directory]
-          next unless directory[:problem]
-          message += "| dir-#{index} | #{directory[:icon]} | #{directory[:count]} | #{file.short_path} |\n"
-          index += 1
+        if clean?
+          message = "### Directories are perfect ✅\n"
+        else
+          message = "### Directories (#{level})\n"
+          message += "Directories should not contain too many files, it's probably a sign of mess.\n\n"
+          message += "#{ @dangers } ❌\n #{ @warnings } ⚠️\n\n"
+          message += "| Id | State | Files | Directory |\n"
+          message += "|---|---|---|---|\n"
+          index = 1
+          analyzed_files.each do |file|
+            directory = file.json[:directory]
+            next unless directory[:problem]
+            message += "| dir-#{index} | #{directory[:icon]} | #{directory[:count]} | #{file.short_path} |\n"
+            index += 1
+          end
         end
         message
       end
 
-      protected 
+      protected
 
       def should_analyze?(file)
         super &&
@@ -33,8 +38,10 @@ module Hugolint
         icon = ICON_OK
         if count > DANGER
           icon = ICON_DANGER
+          @dangers += 1
         elsif count > WARNING
           icon = ICON_WARNING
+          @warnings += 1
         end
         file.json[:directory] = {
           count: count,
