@@ -42,7 +42,7 @@
         url = '{{ .Permalink }}'; // default url
 
     {{ with site.Languages }}
-      {{ range site.Languages }}
+      {{ range . }}
         if (preferLang.indexOf('{{ . }}') > -1) {
           url = '/{{ . }}/';
         }

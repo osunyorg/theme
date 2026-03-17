@@ -5,14 +5,19 @@
 {{ $position := .position }}
 {{ $dropdown_class := "dropdown-menu dropdown-languages" }}
 
+
+{{ $languages := site.Languages }} 
+{{/*  Should use .Rotate, but it seems unavalaible in 404 page  */}}
+{{/*  {{ $languages := .Rotate "language" }}  */}}
+
 {{ if eq $position "footer" }}
   {{ $dropdown_class = printf "%s extendable" $dropdown_class }}
 {{ end }}
 
-{{ if gt (len site.Languages) 1 }}
+{{ if gt (len $languages) 1 }}
   <li class="i18n-dropdown {{ $position }}-i18n has-children">
-    {{ with site.Languages }}
-      {{ $language := cond (eq $position "footer") site.Language.LanguageName site.Language }}
+    {{ with $languages }}
+      {{ $language := cond (eq $position "footer") site.Language.Label site.Language }}
       <span
         role="button"
         aria-controls="{{ $position }}-i18n-list"
@@ -23,18 +28,18 @@
       </span>
       <div class="{{ $dropdown_class }}" id="{{ $position }}-i18n-list">
         <ul>
-          {{ range site.Languages }}
+          {{ range $languages }}
             {{ $siteLang := . }}
-            {{ $url = printf "/%s/" .Lang }}
+            {{ $url = printf "/%s/" .Name }}
             {{ range $pageWithTranslations }}
-              {{ if eq .Lang $siteLang.Lang }}
+              {{ if eq .Name $siteLang.Name }}
                 {{ $url = .Permalink }}
               {{ end }}
             {{ end }}
             {{ if not (eq $siteLang site.Language) }}
               <li>
                 <a href="{{ $url }}" lang="{{ $siteLang }}" hreflang="{{ $siteLang }}" >
-                  {{- $siteLang.LanguageName -}}
+                  {{- $siteLang.Label -}}
                 </a>
               </li>
             {{ end }}
