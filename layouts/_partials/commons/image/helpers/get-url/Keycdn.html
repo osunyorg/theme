@@ -1,8 +1,4 @@
-{%/ $url is deprecated, media should be used instead %}
-{{ $url := .url }}
-{{ if .media }}
-  {{ $url = .media.direct_url }}
-{{ end }}
+{{ $url := .media.direct_url }}
 {{ $parsedUrl := urls.Parse $url }}
 {{ $result := printf "%s%s?" site.Params.keycdn.url $parsedUrl.Path }}
 {{ with .format }}
