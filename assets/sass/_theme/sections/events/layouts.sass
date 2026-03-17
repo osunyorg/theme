@@ -1,4 +1,9 @@
 .events
+    .event-hours
+        time
+            display: inline
+    .event-status
+        @include meta
     &--list
         > li
             &:where(:not(:last-child))
@@ -52,7 +57,7 @@
                         + span
                             &::before
                                 display: none
-                &-time
+                &-hours
                     margin-top: $spacing-2
                 &-content
                     @include grid(10, desktop, 0)
@@ -80,7 +85,7 @@
                 &-schedule
                     margin-top: $spacing-1
                     margin-bottom: $spacing-2
-                &-time
+                &-hours
                     display: inline
                 .media
                     grid-column: 2 span
@@ -94,6 +99,8 @@
             &-schedule
                 @include meta
                 margin-top: $spacing-2
+                display: flex
+                justify-content: space-between
             &-description
                 margin-top: $spacing-2
             &-content
@@ -118,7 +125,7 @@
             &-dates
                 @include h4
                 margin-top: $spacing-2
-                + .event-time
+                + .event-hours
                     margin-top: $spacing-1
             .more
                 margin-top: $spacing-3

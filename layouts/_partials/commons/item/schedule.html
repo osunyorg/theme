@@ -5,52 +5,19 @@
 {{ $with_hours := .with_hours }}
 {{ $type := .type }}
 {{ $date_format := index site.Params (pluralize $type) "date_format" }}
-{{ $time_format := ( i18n "commons.time_format" ) }}
 
 {{ if or $dates.computed.short $dates.computed.two_lines.short $time_slot }}
   <div class="{{ $type }}-schedule">
     <p class="{{ $type }}-dates">
-      {{ $formated_date := $dates.computed.short }}
-
-      {{ if $on_two_lines }}
-        {{ $formated_date = $dates.computed.two_lines.short }}
-      {{ end }}
-
-      {{ with $date_format }}
-        {{ $formated_date = $dates.from.day | time.Format . }}
-        {{ if ne $dates.from.day $dates.to.day }}
-          {{ $formated_date = printf "<span>%s</span><span>%s</span>" $formated_date ( $dates.to.day | time.Format . ) }}
-        {{ end }}
-      {{ end }}
-
-      {{ if and $is_repeating $time_slot }}
-        {{ $date_format = index site.Params $type "list.time_slots.date_format" }}
-        {{ with $time_slot }}
-          {{ $formated_date = .start.date | time.Format site.Params.events.list.time_slots.date_format }}
-        {{ end }}
-      {{ end }}
-      
+      {{ $formated_date := partial "commons/item/helpers/GetFormatedDate.html" . }}
       {{ safeHTML $formated_date }}
     </p>
 
     {{- if and $with_hours $time_slot (not $is_repeating) }}
-      {{- $hour := "" -}}
-      <p class="{{ $type }}-time">
-        {{ with $time_slot.start.time }}
-          {{- $hour = . -}}
-          {{- with $time_format }}
-            {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
-          {{ end -}}
-          <span>{{- $hour -}}</span>
-        {{- end -}}
-        {{- with $time_slot.end.time -}}
-          {{- $hour = . -}}
-          {{- with $time_format -}}
-            {{- $hour = time.Format . (printf "2021-09-01T%s:00" $hour) -}}
-          {{- end -}}
-          <span>{{- $hour -}}</span>
-        {{ end -}}
-      </p>
+      {{ partial "commons/item/schedule/hours.html" (dict
+        "hours" $time_slot
+        "type" $type
+      ) }}
     {{ end -}}
   </div>
 {{ end }}
