@@ -1,0 +1,9 @@
+{{ if .options.summary }}
+  {{ partial "events/partials/event/core/summary.html" .event }}
+{{ end }}
+{{ if .options.categories }}
+  {{ partial "commons/categories.html" . }}
+{{- end -}}
+{{ if or (eq .layout "large") .with_more }}
+  {{ partial "events/partials/event/core/more.html" .event }}
+{{- end -}}

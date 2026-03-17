@@ -1,6 +1,10 @@
+{{ $sizes := index site.Params.image_sizes.sections.events .layout }}
+{{ if and .event.Params.parent (eq .layout "agenda") }}
+  {{ $sizes = site.Params.image_sizes.sections.events.children_in_agenda }}
+{{ end }}
 {{ partial "commons/item/media.html" (dict
-  "image" .image
+  "image" .event.Params.image
   "type" "events"
   "layout" .layout
-  "sizes" .sizes
+  "sizes" $sizes
 ) }}
