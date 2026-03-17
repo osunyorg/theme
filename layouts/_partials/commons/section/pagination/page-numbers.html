@@ -1,0 +1,15 @@
+{{ $paginator := . }}
+{{ range $paginator.Pagers }}
+  {{ $should_show := partial "commons/section/helpers/ShouldShowPageNumber" (dict
+    "paginator" $paginator
+    "context" .
+  ) }}
+  {{ if $should_show }}
+    {{ $label := i18n "commons.pagination.page" (dict "Number" .PageNumber) }}
+    <li {{ if eq . $paginator }} class="active"{{ end }}>
+      <a href="{{ .URL }}" aria-label="{{ $label }}">
+        {{ .PageNumber }}
+      </a>
+    </li>
+  {{ end }}
+{{ end }}
