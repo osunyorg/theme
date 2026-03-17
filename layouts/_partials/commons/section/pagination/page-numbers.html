@@ -1,29 +1,9 @@
 {{ $paginator := . }}
-{{/* Number of links on either side of the current page */}}
-{{ $adjacent_links := 1 }}
-{{ $max_links := (add (mul $adjacent_links 2) 1) -}}
-{{ $lower_limit := (add $adjacent_links 1) -}}
-{{ $upper_limit := (sub $paginator.TotalPages $adjacent_links) }}
 {{ range $paginator.Pagers }}
-  {{ $show_page_number := false }}
-  {{ if gt $paginator.TotalPages $max_links }}
-    {{ if le $paginator.PageNumber $lower_limit }}
-      {{ if le .PageNumber $max_links }}
-        {{ $show_page_number = true }}
-      {{ end }}
-    {{ else if ge $paginator.PageNumber $upper_limit }}
-      {{ if gt .PageNumber (sub $paginator.TotalPages $max_links) }}
-        {{ $show_page_number = true }}
-      {{ end }}
-    {{ else if ge .PageNumber (sub $paginator.PageNumber $adjacent_links) }}
-      {{ if le .PageNumber (add $paginator.PageNumber $adjacent_links) }}
-        {{ $show_page_number = true }}
-      {{ end }}
-    {{ end }}
-  {{ else }}
-    {{ $show_page_number = true -}}
-  {{ end }}
-  {{ if $show_page_number }}
+  {{ if partial "commons/section/helpers/ShouldShowPageNumber" (dict
+      "paginator" $paginator
+      "context" .
+    ) }}
     {{ $label := i18n "commons.pagination.page" (dict "Number" .PageNumber) }}
     <li{{ if eq . $paginator }} class="active"{{ end }}>
       <a href="{{ .URL }}" aria-label="{{ $label }}">
