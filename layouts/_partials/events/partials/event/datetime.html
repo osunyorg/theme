@@ -1,8 +1,4 @@
-{{ partial "events/partials/event/datetime/meta-dates.html" (dict
-  "dates" .event.Params.dates 
-  "time_slot" .event.Params.current_time_slot
-) }}
-
+{{ partial "events/partials/event/datetime/meta-dates.html" .event }}
 {{ if eq .layout "agenda" }}
   {{ with .event.Params.current_time_slot }}
     {{ partial "events/partials/event/datetime/timeslot.html" . }}
