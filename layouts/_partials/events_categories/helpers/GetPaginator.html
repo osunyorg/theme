@@ -1,0 +1,13 @@
+{{ $events := where .Pages "Section" "events" }}
+
+{{ $futur_and_current := where $events "Params.dates.archive" false }}
+{{ $futur_and_current_group := $futur_and_current.GroupByDate site.Params.events.index.group_by_date "asc" }}
+
+{{ $archived := where $events "Params.dates.archive" true }}
+{{ $archived_group := $archived.GroupByDate site.Params.events.index.group_by_date "desc" }}
+
+{{ $agenda := $futur_and_current_group | append $archived_group }}
+
+{{ $paginator := .Paginate $agenda site.Params.events.index.per_page }}
+
+{{ return $paginator }}
