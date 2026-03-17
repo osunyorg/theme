@@ -1,0 +1,11 @@
+<li{{ if eq .PageNumber 1 }} class="disabled"{{ end }}>
+  <a  href="{{ .First.URL }}"
+      aria-label="{{ i18n "commons.pagination.first" }}"
+      {{ if eq .PageNumber 1 }}
+        aria-disabled="true"
+        role="button"
+        tabindex="-1"
+      {{ end }}
+      >
+  </a>
+</li>

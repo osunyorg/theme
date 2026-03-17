@@ -1,38 +1,15 @@
-{{- $paginator := .Paginator -}}
-
-<!-- Number of links either side of the current page. -->
-{{- $adjacent_links := 1 -}}
-
-<!-- $max_links = ($adjacent_links * 2) + 1 -->
-{{- $max_links := (add (mul $adjacent_links 2) 1) -}}
-
-<!-- $lower_limit = $adjacent_links + 1 -->
+{{ $paginator := .Paginator }}
+{{/* Number of links either side of the current page */}}
+{{ $adjacent_links := 1 }}
+{{ $max_links := (add (mul $adjacent_links 2) 1) -}}
 {{- $lower_limit := (add $adjacent_links 1) -}}
-
-<!-- $upper_limit = $paginator.TotalPages - $adjacent_links -->
-{{- $upper_limit := (sub $paginator.TotalPages $adjacent_links) -}}
-
-<!-- If there's more than one page. -->
-{{- if gt $paginator.TotalPages 1 -}}
+{{- $upper_limit := (sub $paginator.TotalPages $adjacent_links) }}
+{{/* If there's more than one page. */}}
+{{ if gt $paginator.TotalPages 1 }}
   <nav aria-label="{{ i18n "commons.pagination.label" }}">
     <ul class="pagination">
-
-      <!-- First page. -->
-      <li{{ if eq $paginator.PageNumber 1 }} class="disabled"{{ end }}>
-        <a href="{{ $paginator.First.URL }}"
-            aria-label="{{ i18n "commons.pagination.first" }}"
-            {{- if eq $paginator.PageNumber 1 }} aria-disabled="true" role="button" tabindex="-1"{{ end }}>
-        </a>
-      </li>
-
-      <!-- Previous page. -->
-      <li{{ if eq $paginator.HasPrev false }} class="disabled"{{ end }}>
-        <a href="{{ if $paginator.HasPrev }}{{ $paginator.Prev.URL }}{{ else }}{{ $paginator.First.URL }}{{ end }}"
-            aria-label="{{ i18n "commons.pagination.previous" }}"
-            {{- if eq $paginator.HasPrev false }} aria-disabled="true" role="button" tabindex="-1"{{ end }}>
-        </a>
-      </li>
-
+      {{ partial "commons/section/pagination/first-page.html" $paginator }}
+      {{ partial "commons/section/pagination/previous-page.html" $paginator }}
       <!-- Page numbers. -->
       {{- range $paginator.Pagers -}}
         {{- $.Scratch.Set "page_number_flag" false -}}
@@ -84,23 +61,8 @@
         {{- end -}}
 
       {{- end -}}
-
-      <!-- Next page. -->
-      <li{{ if eq $paginator.HasNext false }} class="disabled"{{ end }}>
-        <a href="{{ if $paginator.HasNext }}{{ $paginator.Next.URL }}{{else}}{{ $paginator.Last.URL }}{{ end }}"
-            aria-label="{{ i18n "commons.pagination.next" }}"
-            {{- if eq $paginator.HasNext false }} aria-disabled="true" role="button" tabindex="-1"{{ end }}>
-        </a>
-      </li>
-
-      <!-- Last page. -->
-      <li{{ if eq $paginator.PageNumber $paginator.TotalPages }} class="disabled"{{ end }}>
-        <a href="{{ $paginator.Last.URL }}"
-            aria-label="{{ i18n "commons.pagination.last" }}"
-            {{- if eq $paginator.PageNumber $paginator.TotalPages }} aria-disabled="true" role="button" tabindex="-1"{{ end }}>
-        </a>
-      </li>
-
-    </ul><!-- .pagination -->
+      {{ partial "commons/section/pagination/next-page.html" $paginator }}
+      {{ partial "commons/section/pagination/last-page.html" $paginator }}
+    </ul>
   </nav>
 {{- end -}}

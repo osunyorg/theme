@@ -1,0 +1,15 @@
+{{ $href := .Last.URL }}
+{{ if .HasNext }}
+  {{ $href = .Next.URL }}
+{{ end }}
+<li{{ if eq .HasNext false }} class="disabled"{{ end }}>
+  <a  href="{{ $href }}"
+      aria-label="{{ i18n "commons.pagination.next" }}"
+      {{ if eq .HasNext false }}
+        aria-disabled="true"
+        role="button"
+        tabindex="-1"
+      {{ end }}
+      >
+  </a>
+</li>
