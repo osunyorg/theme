@@ -8,10 +8,10 @@
 
 {{ if or $dates.computed.short $dates.computed.two_lines.short $time_slot }}
   <div class="{{ $type }}-schedule">
-    <p class="{{ $type }}-dates">
-      {{ $formated_date := partial "commons/item/helpers/GetFormatedDate.html" . }}
-      {{ safeHTML $formated_date }}
-    </p>
+    {{ partial "commons/item/schedule/dates.html" (dict
+      "type" $type
+      "context" .
+    ) }}
 
     {{- if and $with_hours $time_slot (not $is_repeating) }}
       {{ partial "commons/item/schedule/hours.html" (dict
