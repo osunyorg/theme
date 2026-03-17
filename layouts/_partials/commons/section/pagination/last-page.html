@@ -1,0 +1,11 @@
+<li {{ if eq .PageNumber .TotalPages }} class="disabled" {{ end }}>
+  <a href="{{ .Last.URL }}"
+    aria-label="{{ i18n "commons.pagination.last" }}"
+    {{ if eq .PageNumber .TotalPages }}
+      aria-disabled="true"
+      role="button"
+      tabindex="-1"
+    {{ end }}
+    >
+  </a>
+</li>
