@@ -4,8 +4,8 @@
 ) }}
 
 {{ if eq .layout "agenda" }}
-  {{ with .Params.current_time_slot }}
-    {{ partial "events/partials/event/datetime/timeslot.html" .event }}
+  {{ with .event.Params.current_time_slot }}
+    {{ partial "events/partials/event/datetime/timeslot.html" . }}
   {{ end }}
 {{ end }}
 
