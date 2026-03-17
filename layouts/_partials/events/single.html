@@ -3,26 +3,16 @@
 <div itemscope itemtype="https://schema.org/Event">
   {{ partial "commons/agenda/access.html" . }}
   <div class="document-content">
-    <meta itemprop="name" content="{{ safeHTML .Title }}">
-    <meta itemprop="url" content="{{ .Permalink }}">
-    {{ partial "events/partials/event/datetime/meta-dates.html" (dict
-      "dates" .Params.dates 
-      "time_slot" .Params.current_time_slot
-    ) }}
-    {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
-
+    {{ partial "events/single/meta.html" . }}
     {{ partial "events/single/sidebar.html" . }}
-
     {{ partial "events/single/summary.html" (dict
       "context" .
       "block_wrapped" true
     ) }}
-
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents
     ) }}
-
     {{ if site.Params.events.single.navigation.active }}
       {{ partial "commons/single/siblings-navigation.html" (dict
         "context" .
@@ -31,16 +21,9 @@
         "reversed" (not .Params.dates.archive)
       ) }}
     {{ end }}
-  
     {{ partial "hooks/before-document-content-end.html" . }}
   </div>
 
-  {{ with .Params.children }}
-    {{ partial "events/single/programme.html" . }}
-  {{ end }}
-
-  {{ with .Params.parent }}
-    {{ partial "events/single/parent.html" . }}
-  {{ end }}
+  {{ partial "events/single/programme.html" .Params.children }}
+  {{ partial "events/single/parent.html" .Params.parent }}
 </div>
-

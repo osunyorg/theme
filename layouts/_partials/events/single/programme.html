@@ -1,13 +1,15 @@
-<div class="container" itemscope itemtype="https://schema.org/subEvents">
-  <div class="event-programme" id="programme">
-    {{ $events := partial "helpers/objects/GetFromPathSlice" . }}
-    {{ if $events }}
-      {{ $agenda := $events.GroupByDate site.Params.events.index.group_by_date "asc" }}
-      {{ partial "events/partials/agenda.html" (dict
-        "options" site.Params.events.single.agenda.options
-        "agenda" $agenda
-        "is_sub_event" true
-      ) }}
-    {{ end }}
+{{ with . }}
+  <div class="container" itemscope itemtype="https://schema.org/subEvents">
+    <div class="event-programme" id="programme">
+      {{ $events := partial "helpers/objects/GetFromPathSlice" . }}
+      {{ if $events }}
+        {{ $agenda := $events.GroupByDate site.Params.events.index.group_by_date "asc" }}
+        {{ partial "events/partials/agenda.html" (dict
+          "options" site.Params.events.single.agenda.options
+          "agenda" $agenda
+          "is_sub_event" true
+        ) }}
+      {{ end }}
+    </div>
   </div>
-</div>
+{{ end }}
