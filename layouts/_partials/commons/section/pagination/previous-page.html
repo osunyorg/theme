@@ -2,14 +2,14 @@
 {{ if .HasPrev }}
   {{ $href = .Prev.URL }}
 {{ end }}
-<li{{ if eq .HasPrev false }} class="disabled"{{ end }}>
-  <a  href="{{ $href }}"
-      aria-label="{{ i18n "commons.pagination.previous" }}"
-      {{ if eq .HasPrev false }}
-        aria-disabled="true"
-        role="button"
-        tabindex="-1"
-      {{ end }}
-      >
+<li {{ if eq .HasPrev false }} class="disabled"{{ end }}>
+  <a href="{{ $href }}"
+    aria-label="{{ i18n "commons.pagination.previous" }}"
+    {{ if eq .HasPrev false }}
+      aria-disabled="true"
+      role="button"
+      tabindex="-1"
+    {{ end }}
+    >
   </a>
 </li>
