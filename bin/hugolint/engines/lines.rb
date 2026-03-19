@@ -18,7 +18,7 @@ module Hugolint
           analyzed_files.each do |file|
             lines = file.json[:lines]
             next unless lines[:problem]
-            message += "| lin-#{index} | #{lines[:icon]} | #{lines[:count]} | #{file.short_path} |\n"
+            message += "| lin#{index} | #{lines[:icon]} | #{lines[:count]} | #{file.short_path} |\n"
             index += 1
           end
         end

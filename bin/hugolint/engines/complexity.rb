@@ -10,8 +10,8 @@ module Hugolint
         'with',
       ].freeze
 
-      DANGER = 10
-      WARNING = 5
+      DANGER = 20
+      WARNING = 10
 
       def to_s
         if clean?
@@ -26,7 +26,7 @@ module Hugolint
           analyzed_files.each do |file|
             complexity = file.json[:complexity]
             next unless complexity[:problem]
-            message += "| cpx-#{index} | #{complexity[:icon]} | #{complexity[:score]} | #{file.short_path} |\n"
+            message += "| cpx#{index} | #{complexity[:icon]} | #{complexity[:score]} | #{file.short_path} |\n"
             index += 1
           end
         end
