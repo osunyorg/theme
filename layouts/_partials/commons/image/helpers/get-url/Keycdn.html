@@ -1,4 +1,8 @@
-{{ $url := .media.direct_url }}
+{{/*  Todo : simplify usage with only media  */}}
+{{ $url := .url }}
+{{ if .media }}
+  {{ $url = .media.direct_url }}
+{{ end }}
 {{ $parsedUrl := urls.Parse $url }}
 {{ $result := printf "%s%s?" site.Params.keycdn.url $parsedUrl.Path }}
 {{ with .format }}
