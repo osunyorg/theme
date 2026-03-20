@@ -1,7 +1,7 @@
 {{ $cropValues := slice "top" "left" "right" "bottom" "center" }}
 {{ $scaleValues := slice "2" "3" }}
 
-{%/ $url is deprecated, media should be used instead %}
+{{/*  Todo : simplify usage with only media  */}}
 {{ $url := .url }}
 {{ if .media }}
   {{ $url = .media.url }}
@@ -21,7 +21,7 @@
   {{ if eq (string .crop) "true" }}
     {{ $crop = "center" }}
   {{ else }}
-    {{ range $cropValues }}&
+    {{ range $cropValues }}
       {{ if eq .crop . }}
         {{ $crop = . }}
       {{ end }}

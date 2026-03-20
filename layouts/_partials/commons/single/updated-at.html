@@ -1,0 +1,6 @@
+<li>
+  <span>{{ i18n "commons.updated_at" }}</span>
+  <time datetime="{{ .context.Params.lastmod.Format "2006-01-02T15:04" }}">
+    {{- .context.Params.lastmod | time.Format .format -}}
+  </time>
+</li>

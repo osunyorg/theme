@@ -1,9 +1,8 @@
-{{- $block := .block -}}
-{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
-{{- $html_id := .html_id -}}
-{{- $described_by_id := "" -}}
-
-{{- with .block.data -}}
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+{{ $html_id := .html_id }}
+{{ $described_by_id := "" }}
+{{ with .block.data }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
@@ -24,7 +23,6 @@
               {{ end }}
             </figure>
           {{ end }}
-
           {{ partial "commons/transcription.html" (dict
             "html_id" $html_id
             "described_by" $described_by_id
@@ -34,4 +32,4 @@
       </div>
     </div>
   </div>
-{{- end -}}
+{{ end }}
