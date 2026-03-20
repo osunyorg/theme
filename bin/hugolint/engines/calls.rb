@@ -17,7 +17,7 @@ module Hugolint
           analyzed_files.each do |file|
             calls = file.json[:calls]
             next unless calls[:problem]
-            message += "| cal-#{index} | #{calls[:icon]} | #{calls[:count]} | #{calls[:fragment]} | #{file.short_path} |\n"
+            message += "| cal#{index} | #{calls[:icon]} | #{calls[:count]} | #{calls[:fragment]} | #{file.short_path} |\n"
             index += 1
           end
         end

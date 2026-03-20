@@ -1,0 +1,8 @@
+{{ $label_type := . }}
+<thead>
+  <tr>
+    {{ range (slice "monday" "tuesday" "wednesday" "thursday" "friday" "saturday" "sunday") }}
+      <th>{{ i18n (printf "events.calendar.week_days.%s.%s" $label_type .) }}</th>
+    {{ end }}
+  </tr>
+</thead>

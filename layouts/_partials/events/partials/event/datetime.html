@@ -1,0 +1,19 @@
+{{ partial "events/partials/event/datetime/meta-dates.html" .event }}
+{{ if eq .layout "agenda" }}
+  {{ with .event.Params.current_time_slot }}
+    {{ partial "events/partials/event/datetime/timeslot.html" . }}
+  {{ end }}
+{{ end }}
+
+{{ if .options.dates }}
+  {{ partial "events/partials/event/datetime/schedule.html" (dict 
+    "dates" .event.Params.dates
+    "time_slot" .event.Params.current_time_slot
+    "time_slots" .event.Params.time_slots
+    "with_hours" (ne .layout "agenda")
+  ) }}
+{{ end }}
+
+{{ if and .event.Params.dates.status .options.status }}
+  {{ partial "events/partials/event/datetime/status.html" .event.Params.dates.status }}
+{{ end }}

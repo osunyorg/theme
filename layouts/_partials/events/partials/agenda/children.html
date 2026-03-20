@@ -1,0 +1,17 @@
+{{ $options := .options }}
+{{ with .children }}
+  <ol class="event-children">
+    {{ range $index, $children := . }}
+      {{ with (site.GetPage .path) }}
+        <li itemscope itemtype="https://schema.org/Event" itemprop="subEvent">
+          {{ partial "events/partials/event.html" (dict
+            "event" .
+            "layout" "agenda"
+            "options" $options
+            "is_sub_event" true
+          ) }}
+        </li>
+      {{ end }}
+    {{ end }}
+  </ol>
+{{ end }}

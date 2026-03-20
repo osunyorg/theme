@@ -1,0 +1,29 @@
+{{ if or .Params.dates .Params.current_time_slot }}
+  {{ $dates := .Params.dates }}
+  {{ $time_slot := .Params.current_time_slot }}
+
+  {{ $start_time := "" }}
+  {{ $end_time := "" }}
+
+  {{- with $dates.from.day -}}
+    {{ $start_time = . }}
+  {{- end -}}
+  {{- with $time_slot.start.time -}}
+    {{ $start_time = printf "%sT%s" $start_time . }}
+  {{- end -}}
+
+  {{- with $dates.to.day -}}
+    {{ $end_time = . }}
+  {{- end -}}
+  {{- with $time_slot.end.time -}}
+    {{ $end_time = printf "%sT%s" $end_time . }}
+  {{- end -}}
+
+  {{- with $start_time }}
+    <meta itemprop="startDate" content="{{ . }}">
+  {{ end -}}
+
+  {{- with $end_time }}
+    <meta itemprop="endDate" content="{{ . }}">
+  {{ end -}}
+{{ end }}
