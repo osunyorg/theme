@@ -9,13 +9,15 @@
   {{ if site.Params.posts.single.options.published_at }}
     {{ partial "commons/single/published-at.html" (dict 
       "format" site.Params.posts.date_format
-      "context" .) }}
+      "context" .
+    ) }}
   {{ end }}
 
   {{ if site.Params.posts.single.options.updated_at }}
     {{ partial "commons/single/updated-at.html" (dict 
       "format" site.Params.posts.date_format
-      "context" .) }}
+      "context" .
+    ) }}
   {{ end }}
 
   {{ if site.Params.posts.single.options.authors }}
