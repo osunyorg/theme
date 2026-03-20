@@ -21,7 +21,7 @@
   {{ if eq (string .crop) "true" }}
     {{ $crop = "center" }}
   {{ else }}
-    {{ range $cropValues }}&
+    {{ range $cropValues }}
       {{ if eq .crop . }}
         {{ $crop = . }}
       {{ end }}
