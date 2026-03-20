@@ -1,0 +1,24 @@
+{{ $title := partial "head/helpers/GetTitle" . }}
+{{ $description := partial "head/helpers/GetDescription" . }}
+{{ $image := partial "head/helpers/GetImage" . }}
+
+<!-- HTML Meta Tags -->
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $description }}">
+
+{{ partial "head/meta/socials.html" (dict
+  "title" $title
+  "description" $description
+  "image" $image
+  "url" .Permalink
+  "context" .
+) }}
+{{ partial "head/meta/search.html" (dict
+  "image" $image
+  "context" .
+) }}
+
+{{ partial "head/meta/referrer.html" . }}
+{{ partial "head/meta/csp.html" . }}
+{{ partial "head/meta/app.html" . }}
+{{ partial "head/meta/params.html" . }}
