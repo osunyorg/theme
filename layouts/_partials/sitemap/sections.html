@@ -1,0 +1,11 @@
+{{ $sections := partial "sitemap/helpers/GetSections" . }}
+{{ range $sections }}
+  {{ if .Permalink }}
+    {{ partial "sitemap/sections/list.html" (dict
+      "type" .Type
+      "title" .Title
+      "link" .Permalink
+      "pages" .Pages
+    ) }}
+  {{ end }}
+{{ end }}
