@@ -3,21 +3,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{ partial "head/preconnect.html" . }}
+    {{ partialCached "head/preconnect.html" . }}
     {{ partial "head/init.html" . }}
-    {{ partial "head/csp.html" }}
-    {{ partial "head/css.html" }}
+    {{ partialCached "head/csp.html" . }}
+    {{ partialCached "head/css.html" . }}
     {{ partial "head/seo.html" . }}
-    {{ partial "head/favicons.html" . }}
+    {{ partialCached "head/favicons.html" . }}
     {{ partial "head/rss.html" . }}
     {{ partial "head/script.html" . }}
-    {{ partial "head/extras.html" . }}
+    {{ partialCached "head/extras.html" . }}
   </head>
   <body class="{{ partial "body/helpers/GetBodyclass" . }}">
-    {{- partial "header/accessibility.html" -}}
-    {{- partial "hooks/before-header.html" . -}}
-    {{- partial "header/header.html" . -}}
-    {{- partial "commons/alerts/list.html" }}
+    {{ partialCached "header/accessibility.html" . }}
+    {{ partial "hooks/before-header.html" . }}
+    {{ partial "header/header.html" . }}
+    {{ partial "commons/alerts/list.html" }}
     <main id="main"
         {{ partial "main/helpers/GetClass" . | safeHTMLAttr }}
         {{ partial "main/helpers/GetSearchAttribute" . | safeHTMLAttr }}

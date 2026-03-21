@@ -1,6 +1,6 @@
-{{ partial "scripts/plausible.html" . }}
+{{ partialCached "scripts/plausible.html" . }}
 {{ partial "scripts/js.html" . }}
 {{ partial "scripts/additional.html" . }}
 {{ if or (not hugo.IsProduction) site.Params.debug.active }}
-  {{ partial "scripts/debug.html" . }}
+  {{ partialCached "scripts/debug.html" . }}
 {{ end }}
