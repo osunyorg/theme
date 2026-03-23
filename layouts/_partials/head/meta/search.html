@@ -1,0 +1,9 @@
+{{ if site.Params.search.active }}
+  {{ $image := partial "commons/image/helpers/GetUrl" (dict
+    "media" .image
+    "size" site.Params.image_sizes._default.pagefind
+  ) }}
+  {{ with $image }}
+    <meta property="pagefind:image" content="" data-pagefind-meta="image:{{ . }}">
+  {{ end }}
+{{ end }}
