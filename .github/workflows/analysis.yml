@@ -1,6 +1,13 @@
 name: Hugo Static Analysis
 
-on: push
+on:
+  push:
+    branches-ignore:
+      - master
+  pull_request:
+    types:
+      - opened
+      - edited
 
 permissions:
   contents: read
