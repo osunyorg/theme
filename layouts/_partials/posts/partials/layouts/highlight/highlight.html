@@ -42,14 +42,14 @@
                   {{ end }}
                 </div>
 
-                {{- if or $options.author $options.date -}}
+                {{- if or $options.author $options.date }}
                   <div class="post-meta">
-                    {{- if $options.date -}}
-                      {{- partial "posts/partials/post/core/meta/date.html" . -}}
-                    {{- end -}}
-                    {{- if $options.author -}}
-                      {{- partial "posts/partials/post/core/meta/author.html" . -}}
-                    {{- end -}}
+                    {{ if $options.date }}
+                      {{ partial "posts/partials/post/core/meta/date.html" . }}
+                    {{ end }}
+                    {{ if $options.author }}
+                      {{ partial "posts/partials/post/core/meta/author.html" . }}
+                    {{ end }}
                   </div>
                 {{ end }}
               </article>
