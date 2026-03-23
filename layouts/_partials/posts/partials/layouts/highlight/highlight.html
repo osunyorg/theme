@@ -1,11 +1,8 @@
 {{ $options := .options }}
 {{ $heading_level := .heading_level | default 3 }}
-
 <ul class="highlight">
   {{ $highlight := index .posts 0 }}
   {{ $highlight = site.GetPage $highlight.path }}
-  {{ $list := .posts }}
-
   {{ with $highlight }}
     {{ partial "posts/partials/post.html" (dict 
       "post" .
@@ -14,50 +11,21 @@
       "layout" "highlight"
     ) }}
   {{ end }}
-
-  {{ with $list }}
-    {{ $first := true }}
+  {{ with .posts }}
+    {{ $options = merge $options ( dict "image" false ) }}
     <li>
       <ul class="list">
         {{ range after 1 . }}
           {{ with site.GetPage .path }}
-            {{ $reading_time := .Params.contents_reading_time }}
-            <li>
-              <article class="post">
-                <div class="post-content">
-                  {{ partial "posts/partials/post/core/heading.html" (dict
-                    "item" .
-                    "options" $options
-                    "level" $heading_level
-                    "itemprop" "headline"
-                  ) }}
-                  {{ if $options.summary }}
-                    {{ partial "posts/partials/post/core/summary.html" . }}
-                  {{ end }}
-                  {{ if $options.categories }}
-                      {{ partial "posts/partials/post/core/categories.html" . }}
-                  {{ end }}
-                  {{ if and $reading_time $options.reading_time }}
-                    {{ partial "posts/partials/post/core/meta/reading-time.html" $reading_time }}
-                  {{ end }}
-                </div>
-
-                {{- if or $options.author $options.date }}
-                  <div class="post-meta">
-                    {{ if $options.date }}
-                      {{ partial "posts/partials/post/core/meta/date.html" . }}
-                    {{ end }}
-                    {{ if $options.author }}
-                      {{ partial "posts/partials/post/core/meta/author.html" . }}
-                    {{ end }}
-                  </div>
-                {{ end }}
-              </article>
-            </li>
+            {{ partial "posts/partials/post.html" (dict 
+              "post" .
+              "heading_level" $heading_level
+              "options" $options
+              "layout" "list"
+            ) }}
           {{ end }}
         {{ end }}
       </ul>
     </li>
   {{ end }}
-  </ul>
-
+</ul>
