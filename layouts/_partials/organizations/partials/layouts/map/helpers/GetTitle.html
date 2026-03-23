@@ -1,0 +1,7 @@
+{{ $title := "" }}
+{{ if .title }}
+  {{ $title = .title }}
+{{ else }}
+  {{ $title = printf "%s %s" (i18n "blocks.organizations.title") .html_id }}
+{{ end }}
+{{ return $title }}
