@@ -1,6 +1,7 @@
 {{ $block_class := partial "blocks/helpers/GetClass" .block }}
-{{ if .block.data }}
-  {{ $layout := .block.data.layout | default "grid" }}
+{{ $block := .block }}
+{{ with .block.data }}
+  {{ $layout := .layout | default "grid" }}
   {{ $page_class := "" }}
   {{ $page := "" }}
   {{ with .page }}
@@ -17,10 +18,10 @@
   <div class="{{ $block_class }} {{ $page_class }}">
     <div class="container">
       <div class="block-content">
-        {{ partial "blocks/top.html" .block.top }}
+        {{ partial "blocks/top.html" $block.top }}
         {{ partial (printf "pages/partials/layouts/%s/%s.html" $layout $layout) (dict 
           "pages" .pages
-          "heading_level" .block.ranks.children
+          "heading_level" $block.ranks.children
           "options" .options
         ) }}
       </div>

@@ -1,8 +1,4 @@
 {{ $is_repeating := gt .Params.time_slots 1 }}
-{{ $multiple_dates_event := ne .Params.dates.from.day .Params.dates.to.day }}
-{{ $is_parent := .Params.children }}
-{{ $is_simple_event := and .Params.dates (not .Params.time_slots) }}
-
 <div class="event-summary">
   <span class="date" itemprop="startDate" content="{{ .Params.dates.from.day }}">{{ .Params.dates.computed.long }}</span>
   {{ if $is_repeating }}
@@ -13,7 +9,7 @@
   {{ end }}
   {{ with .Params.dates }}
     {{ if ne .status "archive" }}
-      {{ partial "commons/agenda/dropdown-calendar.html" (dict
+      {{ partial "commons/agenda/dates/dropdown-calendar.html" (dict
         "index" "primary"
         "calendar_links" .add_to_calendar
       ) }}
