@@ -3,19 +3,19 @@
 <a href="{{ .Permalink }}" itemprop="url">
     <span itemprop="name">{{ .Title }}</span>
     <div class="media">
-    {{- if .Params.image -}}
-        {{- partial "commons/image.html" (dict
+    {{ if .Params.image }}
+      {{ partial "commons/image.html" (dict
         "image"    .Params.image
         "alt"      .Title
         "sizes"    (dict 
-            "mobile"   "327x388"
-            "tablet"   "208x247"
-            "desktop"  "408x485"
+          "mobile"   "327x388"
+          "tablet"   "208x247"
+          "desktop"  "408x485"
         )
-        ) -}}
-    {{- else -}}
-        {{- partial "commons/image-default.html" "papers" -}}
-    {{- end -}}
+      ) }}
+    {{ else }}
+        {{ partial "commons/imagedefault.html" "papers" }}
+    {{ end }}
     </div>
 </a>
 </dd>
