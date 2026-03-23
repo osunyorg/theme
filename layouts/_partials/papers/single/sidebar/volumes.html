@@ -7,11 +7,7 @@
         {{ partial "commons/image.html" (dict
           "image" .Params.image
           "alt" .Title
-          "sizes" (dict
-            "mobile" "327x388"
-            "tablet" "208x247"
-            "desktop" "408x485"
-          )
+          "sizes" site.Params.image_sizes.sections.papers.sidebar.volume
         ) }}
       {{ else }}
         {{ partial "commons/image-default.html" "papers" }}
