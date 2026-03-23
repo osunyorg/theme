@@ -1,8 +1,8 @@
 <dt>{{ i18n "volumes.singular_name" }}</dt>
 <dd itemprop="isPartOf" itemscope itemtype="https://schema.org/PublicationVolume">
 <a href="{{ .Permalink }}" itemprop="url">
-    <span itemprop="name">{{ .Title }}</span>
-    <div class="media">
+  <span itemprop="name">{{ .Title }}</span>
+  <div class="media">
     {{ if .Params.image }}
       {{ partial "commons/image.html" (dict
         "image"    .Params.image
@@ -14,8 +14,8 @@
         )
       ) }}
     {{ else }}
-        {{ partial "commons/imagedefault.html" "papers" }}
+      {{ partial "commons/imagedefault.html" "papers" }}
     {{ end }}
-    </div>
+  </div>
 </a>
 </dd>
