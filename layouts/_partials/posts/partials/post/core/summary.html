@@ -1,0 +1,8 @@
+{{ with .Params.summary }}
+  <div itemprop="abstract">
+    {{ partial "commons/summary/helpers/GetTruncated" (dict
+      "summary" .
+      "kind" "posts"
+    ) }}
+  </div>
+{{ end }}
