@@ -3,10 +3,10 @@
     <aside class="document-nav">
       <dl>
         {{ range .GetTerms "volumes" }}
-          {{ partial "papers/single/sidebar/volumes" . }}
+          {{ partial "papers/single/sidebar/volumes.html" . }}
         {{ end }}
         
-        {{ partial "papers/single/sidebar/informations" . }}
+        {{ partial "papers/single/sidebar/informations.html" . }}
       </dl>
     </aside>
     {{ partial "toc/container.html" (dict
