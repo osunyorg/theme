@@ -1,6 +1,8 @@
 {{/*  Todo : simplify usage with only media  */}}
 {{ $url := .url }}
-{{ if .media }}{{ $url = .media.url }}{{ end }}
+{{ if .media }}
+  {{ $url = .media.url }}
+{{ end }}
 {{ $parsedUrl := urls.Parse $url }}
 
 {{ $crop := partial "commons/image/helpers/get-url/osuny/GetCrop" (dict
@@ -9,7 +11,6 @@
 {{ $scale := partial "commons/image/helpers/get-url/osuny/GetScale" (dict
   "scale" .scale
 ) }}
-
 {{ $pathParts := split $parsedUrl.Path "/" }}
 {{ $lastIndex := sub (len $pathParts) 1 }}
 {{ $filename := index $pathParts $lastIndex }}
