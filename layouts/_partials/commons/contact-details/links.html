@@ -1,5 +1,6 @@
-{{ $name := .name}}
-{{ $with_labels := .with_labels}}
+{{ $name := .name }}
+{{ $with_labels := .with_labels }}
+
 {{ with .context.websites.website }}
   {{ partial "commons/contact-details/links/website.html" (dict
     "name" $name
@@ -8,7 +9,6 @@
     "with_labels" $with_labels
   ) }}
 {{ end }}
-
 {{ partial "commons/socials" (dict
   "context" .context
   "name" $name
