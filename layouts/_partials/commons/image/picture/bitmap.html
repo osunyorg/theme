@@ -1,0 +1,27 @@
+{{ if .sizes }}
+  {{ partial "commons/image/picture/bitmap/size.html" (dict
+    "crop" .crop
+    "media" "min-width: 1024px"
+    "size" .sizes.desktop
+    "url" .url
+  ) }}
+  {{ partial "commons/image/picture/bitmap/size.html" (dict
+    "crop" .crop
+    "media" "min-width: 768px"
+    "size" .sizes.tablet
+    "url" .url
+  ) }}
+  {{ partial "commons/image/picture/bitmap/size.html" (dict
+    "crop" .crop
+    "size" .sizes.mobile
+    "url" .url
+  ) }}
+{{ end }}
+<img src="{{ partial "commons/image/helpers/GetUrl" (dict "url" .url "size" .default "crop" .crop ) }}"
+      alt="{{ chomp (plainify .alt) }}"
+      width="{{ .image.width }}"
+      height="{{ .image.height }}"
+      {{ with .class }} class="{{ . }}"{{ end }}
+      {{ with .fetch_priority }} fetchpriority="{{ . }}"{{ end }}
+      {{ if .lazy }} loading="lazy"{{ end }}
+      {{ if .itemprop }} itemprop="image"{{ end }}>

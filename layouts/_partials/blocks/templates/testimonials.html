@@ -1,8 +1,8 @@
-{{- $block := .block -}}
-{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
-{{- $layout := .block.data.layout | default "carousel" -}}
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+{{ $layout := .block.data.layout | default "carousel" }}
 
-{{- with .block.data -}}
+{{ with .block.data }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
@@ -35,4 +35,4 @@
       </div>
     </div>
   </div>
-{{- end -}}
+{{ end }}
