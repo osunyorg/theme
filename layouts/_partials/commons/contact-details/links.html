@@ -1,9 +1,10 @@
 {{ $name := .name}}
 {{ $with_labels := .with_labels}}
-
-{{ with .websites.website }}
+{{ with .context.websites.website }}
   {{ partial "commons/contact-details/links/website.html" (dict
     "name" $name
+    "value" .value
+    "label" .label
     "with_labels" $with_labels
   ) }}
 {{ end }}
@@ -15,7 +16,7 @@
   "in_itemscope" true
 ) }}
 
-{{ with .phone_numbers }}
+{{ with .context.phone_numbers }}
   {{ with or .phone_mobile .phone }}
     {{ partial "commons/contact-details/links/phone.html" (dict
       "with_labels" $with_labels
@@ -23,7 +24,6 @@
       "label" .label
     ) }}
   {{ end }}
-
   {{ with .phone_professional }}
     {{ partial "commons/contact-details/links/phone.html" (dict
       "with_labels" $with_labels
