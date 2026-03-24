@@ -1,9 +1,9 @@
 {{ $aria_label := .aria_label }}
 {{ $layout := .layout }}
+
 {{ with .testimonial }}
   <figure class="testimonial {{ if.photo }}with-picture{{ end }}" 
           {{ with $aria_label -}} role="figure" aria-label="{{ . }}" {{- end }}>
-
     <blockquote>
       {{- safeHTML .text -}}
     </blockquote>
@@ -16,7 +16,7 @@
             "layout" $layout
           ) }}
         {{ end }}
-        
+
         {{ if or .author .job -}}
           {{ partial "blocks/templates/testimonials/figure/author.html" (dict
             "author" .author
