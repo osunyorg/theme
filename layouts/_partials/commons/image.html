@@ -1,28 +1,35 @@
 {{ if .image }}
   {{ $id := .image }}
-  {{ if isset .image "id" }}{{ $id = .image.id }}{{ end }}
+  {{ if isset .image "id" }}
+    {{ $id = .image.id }}
+  {{ end }}
   {{ $image := partial "GetMedia" $id }}
   {{ if $image }}
     {{ $url := $image.url }}
-    {{ if site.Params.keycdn }}{{ $url = $image.direct_url }}{{ end }}
+    {{ if site.Params.keycdn }}
+      {{ $url = $image.direct_url }}
+    {{ end }}
     {{ $lazy := default true .lazy }}
     {{ $alt := or .alt "" }}
-    {{ if isset .image "alt" }}{{ $alt = .image.alt }}{{ end }}
+    {{ if isset .image "alt" }}
+      {{ $alt = .image.alt }}
+    {{ end }}
     {{ $default := "1280x720" }}
-    {{ if .desktop }}{{ $default = .desktop }}{{ end }}
+    {{ if .desktop }}
+      {{ $default = .desktop }}
+    {{ end }}
     {{ $crop := false }}
-    {{ if .crop }}{{ $crop = true }}{{ end }}
+    {{ if .crop }}
+      {{ $crop = true }}
+    {{ end }}
     {{ partial "commons/image/picture.html" (dict
       "image" $image
       "url" $url
       "alt" $alt
       "lazy" $lazy
-      "size_desktop" .sizes.desktop
-      "size_tablet" .sizes.tablet
-      "size_mobile" .sizes.mobile
       "default" $default
       "crop" $crop
       "context" .
-    )}}
+    ) }}
   {{ end }}
 {{ end }}
