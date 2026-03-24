@@ -10,13 +10,7 @@
         "level" .heading_level
         "itemprop" "name"
       ) }}
-      {{ partial "exhibitions/partials/exhibition/core.html" (dict 
-        "exhibition" .exhibition
-        "options" .options
-      ) }}
-      {{ if .with_more }}
-        {{ partial "exhibitions/partials/exhibition/more.html" .exhibition }}
-      {{ end }}
+      {{ partial "exhibitions/partials/exhibition/core.html" . }}
     </div>
     {{ if .options.image }}
       {{ partial "exhibitions/partials/exhibition/media.html" (dict
