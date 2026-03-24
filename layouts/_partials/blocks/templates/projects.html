@@ -18,8 +18,9 @@
             ) }}
           {{ end }}
         {{ else if .projects }}
+          {{ $projects := partial "helpers/objects/GetFromPathSlice" .projects }}
           {{- partial (printf "projects/partials/layouts/%s/%s.html" $layout $layout) (dict 
-            "projects" .projects
+            "projects" $projects
             "heading_level" $block.ranks.children
             "options" .options
           ) }}
