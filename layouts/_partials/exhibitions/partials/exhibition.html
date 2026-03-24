@@ -1,9 +1,4 @@
-{{ $exhibition := .exhibition }}
 {{ $layout := .layout | default "list" }}
-{{ $heading_level := .heading_level }}
-{{ $with_more := .with_more }}
-{{ $options := .options }}
-{{ $layout := .layout }}
 {{ $class := partial "exhibitions/partials/exhibition/helpers/GetClass" . }}
 
 {{ if .exhibition }}
@@ -11,19 +6,19 @@
     <div class="exhibition-content">
       {{ partial "exhibitions/partials/exhibition/heading.html" (dict
         "item" .exhibition
-        "options" $options
-        "level" $heading_level
+        "options" .options
+        "level" .heading_level
         "itemprop" "name"
       ) }}
       {{ partial "exhibitions/partials/exhibition/core.html" (dict 
         "exhibition" .exhibition
-        "options" $options
+        "options" .options
       ) }}
-      {{ if $with_more }}
+      {{ if .with_more }}
         {{ partial "exhibitions/partials/exhibition/more.html" .exhibition }}
-      {{- end -}}
+      {{ end }}
     </div>
-    {{ if $options.image }}
+    {{ if .options.image }}
       {{ partial "exhibitions/partials/exhibition/media.html" (dict
         "exhibition" .exhibition
         "layout" $layout
