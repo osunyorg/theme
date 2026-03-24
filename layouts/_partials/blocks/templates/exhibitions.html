@@ -1,9 +1,8 @@
-{{- $block := .block }}
+{{ $block := .block }}
 {{ $block_class := partial "blocks/helpers/GetClass" .block }}
 {{ with .block.data }}
-  {{- $options := .options -}}
-  {{- $layout := .layout | default "list" -}}
-  
+  {{ $options := .options }}
+  {{ $layout := .layout | default "list" }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
@@ -30,4 +29,4 @@
       </div>
     </div>
   </div>
-{{ end -}}
+{{ end }}
