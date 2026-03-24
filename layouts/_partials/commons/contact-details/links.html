@@ -1,0 +1,34 @@
+{{ $name := .name}}
+{{ $with_labels := .with_labels}}
+
+{{ with .websites.website }}
+  {{ partial "commons/contact-details/links/website.html" (dict
+    "name" $name
+    "with_labels" $with_labels
+  ) }}
+{{ end }}
+
+{{ partial "commons/socials" (dict
+  "name" $name
+  "with_labels" $with_labels
+  "in_itemscope" true
+) }}
+
+{{ with .phone_numbers }}
+  {{ with or .phone_mobile .phone }}
+    {{ partial "commons/contact-details/links/phone.html" (dict
+      "with_labels" $with_labels
+      "value" .value
+      "label" .label
+    ) }}
+  {{ end }}
+
+  {{ with .phone_professional }}
+    {{ partial "commons/contact-details/links/phone.html" (dict
+      "with_labels" $with_labels
+      "value" .value
+      "label" .label
+      "title" (i18n "commons.contact.phone_professional.a11y_label" (dict "phone_number" .label ))
+    ) }}
+  {{ end }}
+{{ end }}
