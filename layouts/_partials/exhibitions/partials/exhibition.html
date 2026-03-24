@@ -8,36 +8,11 @@
     "context" .
   ) }}
   <article class="{{ $class }}" itemscope itemtype="https://schema.org/ExhibitionEvent">
-    <div class="exhibition-content">
-      {{ partial "exhibitions/partials/exhibition/heading.html" (dict
-        "item" .
-        "options" $options
-        "level" $heading_level
-        "itemprop" "name"
-      ) }}
-      {{ partial "exhibitions/partials/exhibition/federated.html" . }}
-      {{ partial "exhibitions/partials/exhibition/meta.html" (dict
-        "context" .
-        "options" $options
-      ) }}
-      {{ partial "exhibitions/partials/exhibition/status.html" (dict 
-        "status" .Params.dates.status
-        "options" $options
-        "type" "exhibition"
-      ) }}
-      {{ partial "exhibitions/partials/exhibition/summary.html" (dict
-        "context" .
-        "options" $options
-      ) }}
-      {{ partial "exhibitions/partials/exhibition/categories.html" (dict
-        "context" .
-        "options" $options
-      ) }}
-      {{ partial "exhibitions/partials/exhibition/more.html" (dict
-        "context" .
-        "with_more" $with_more
-      ) }}
-    </div>
+    {{ partial "exhibitions/partials/exhibition/content.html" (dict
+      "context" .
+      "options" $options
+      "with_more" $with_more
+    ) }}
     {{ partial "exhibitions/partials/exhibition/media.html" (dict 
       "image" .Params.image
       "options" $options

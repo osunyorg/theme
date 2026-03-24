@@ -1,0 +1,29 @@
+<div class="exhibition-content">
+  {{ partial "commons/item/heading.html" (dict
+    "item" .context
+    "options" .options
+    "level" .heading_level
+    "itemprop" "name"
+  ) }}
+  {{ partial "exhibitions/partials/exhibition/content/federated.html" . }}
+  {{ partial "exhibitions/partials/exhibition/content/meta.html" (dict
+    "context" .context
+    "options" .options
+  ) }}
+  {{ partial "exhibitions/partials/exhibition/content/status.html" (dict 
+    "context" .context
+    "options" .options
+  ) }}
+  {{ partial "exhibitions/partials/exhibition/content/summary.html" (dict
+    "context" .context
+    "options" .options
+  ) }}
+  {{ partial "exhibitions/partials/exhibition/content/categories.html" (dict
+    "context" .context
+    "options" .options
+  ) }}
+  {{ partial "exhibitions/partials/exhibition/content/more.html" (dict
+    "context" .context
+    "with_more" .with_more
+  ) }}
+</div>

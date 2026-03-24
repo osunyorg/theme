@@ -1,0 +1,6 @@
+{{ if and .context.Params.dates.status .options.status }}
+  {{ partial "commons/item/status.html" (dict 
+    "status" .context.Params.dates.status
+    "type" "exhibition"
+  ) }}
+{{ end }}
