@@ -8,8 +8,8 @@
             <a href="{{ .Permalink }}" itemprop="url">
               <span itemprop="name">{{ .Title }}</span>
               <div class="media">
-                {{- if .Params.image -}}
-                  {{- partial "commons/image.html" (dict
+                {{ if .Params.image }}
+                  {{ partial "commons/image.html" (dict
                     "image"    .Params.image
                     "alt"      .Title
                     "sizes"    (dict 
@@ -17,10 +17,10 @@
                       "tablet"   "208x247"
                       "desktop"  "408x485"
                     )
-                  ) -}}
-                {{- else -}}
-                  {{- partial "commons/image-default.html" "papers" -}}
-                {{- end -}}
+                  ) }}
+                {{ else }}
+                  {{ partial "commons/image-default.html" "papers" -}}
+                {{ end }}
               </div>
             </a>
           </dd>

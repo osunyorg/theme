@@ -19,7 +19,7 @@
       {{ end }}
       {{ if or .photo .author .job -}}
         <figcaption>
-          {{ if .photo -}}
+          {{ if .photo }}
             <div class="avatar">
               {{ partial "commons/image.html" (dict
                 "image" .photo
