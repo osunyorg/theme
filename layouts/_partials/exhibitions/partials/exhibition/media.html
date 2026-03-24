@@ -1,6 +1,8 @@
-{{ partial "commons/item/media.html" (dict
-  "image" .image
-  "type" "exhibitions"
-  "layout" .layout
-  "sizes" .sizes
-) }}
+{{ if .options.image }}
+  {{ partial "commons/item/media.html" (dict
+    "image" .image
+    "type" "exhibitions"
+    "layout" .layout
+    "sizes" .sizes
+  ) }}
+{{ end }}

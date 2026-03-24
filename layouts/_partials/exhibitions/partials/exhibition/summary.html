@@ -1,1 +1,5 @@
-{{ partial "commons/item/summary.html" . }}
+{{ if and .options.summary .context.Params.summary }}
+  <div class="exhibition-description" itemprop="description">
+    {{ partial "commons/item/summary.html" .context }}
+  </div>
+{{ end }}

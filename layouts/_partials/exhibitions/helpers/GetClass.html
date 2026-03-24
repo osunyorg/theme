@@ -1,0 +1,9 @@
+{{ $class := "exhibition" }}
+{{ if and .context.Params.image .options.image }}
+  {{ $class = printf "%s exhibition--with-image" $class }}
+{{ end }}
+{{ $dates := .context.Params.dates }}
+{{ if .context.Params.federation.active }}
+  {{ $class = printf "%s is-federated" $class }}
+{{ end }}
+{{ return $class }}
