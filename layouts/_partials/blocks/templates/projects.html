@@ -1,9 +1,9 @@
-{{- $block := .block -}}
+{{ $block := .block }}
 {{- $block_title := .block.title -}}
-{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
 {{- $layout := .block.data.layout | default "grid" -}}
 
-{{- with .block.data -}}
+{{ with .block.data }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
