@@ -23,35 +23,11 @@
               {{ end }}
 
               <li>
-                <figure class="testimonial {{ if.photo }}with-picture{{ end }}" 
-                  {{ with $aria_label -}} role="figure" aria-label="{{ . }}" {{- end }}>
-                  <blockquote>
-                    {{- safeHTML .text -}}
-                  </blockquote>
-                  {{ if or .photo .author .job -}}
-                    <figcaption>
-                      {{ if .photo -}}
-                        <div class="avatar">
-                          {{- partial "commons/image.html" (dict
-                            "image" .photo
-                            "sizes" site.Params.image_sizes.blocks.testimonials
-                            "layout" $layout
-                          ) -}}
-                        </div>
-                      {{- end }}
-                      {{ if or .author .job -}}
-                        <p>
-                          {{- if .author -}}
-                            <span class="signature">{{ safeHTML .author }}</span>
-                          {{- end }}
-                          {{- if .job -}}
-                            <span class="meta">{{- safeHTML .job -}}</span>
-                          {{- end }}
-                        </p>
-                      {{ end }}
-                    </figcaption>
-                  {{ end }}
-                </figure>
+                {{ partial "blocks/templates/testimonials/figure.html" (dict
+                  "testimonial" .
+                  "aria_label" $aria_label
+                  "layout" $layout
+                )}}
               </li>
             {{ end }}
           </ul>
