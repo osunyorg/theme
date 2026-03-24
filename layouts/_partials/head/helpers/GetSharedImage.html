@@ -1,0 +1,8 @@
+{{ $sharedImage := "" }}
+{{ with index site.Data.website site.Language.Lang "default" "shared_image" }}
+  {{ $sharedImage = partial "GetMedia" (index . "id") }}
+{{ end }}
+{{ with or .Params.shared_image .Params.image }}
+  {{ $sharedImage = partial "GetMedia" .id }}
+{{ end }}
+{{ return $sharedImage }}

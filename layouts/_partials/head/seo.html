@@ -1,41 +1,24 @@
 {{ $title := partial "head/helpers/GetTitle" . }}
-{{ $seoDescription := "" }}
-{{ if .Params.meta_description }}
-  {{ $seoDescription = safeHTML .Params.meta_description }}
-{{ else if .Params.summary }}
-  {{ $seoDescription = .Params.summary | plainify | truncate 150 }}
-{{ else if .Params.contents }}
-  {{ range first 1 .Params.contents }}
-    {{ if .title }}
-      {{ $seoDescription = .title | safeHTML | truncate 150 }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-{{ $sharedImage := "" }}
-{{ with index site.Data.website site.Language.Lang "default" "shared_image" }}
-  {{ $sharedImage = partial "GetMedia" (index . "id") }}
-{{ end }}
-{{ with or .Params.shared_image .Params.image }}
-  {{ $sharedImage = partial "GetMedia" .id }}
-{{ end }}
+{{ $description := partial "head/helpers/GetDescription" . }}
+{{ $image := partial "head/helpers/GetSharedImage" . }}
 {{ partial "head/seo/core.html" (dict
   "title" $title
-  "description" $seoDescription
+  "description" $description
   "metadata" .Params.metadata
 )}}
 {{ partial "head/seo/og.html" (dict
   "title" $title
-  "description" $seoDescription
-  "image" $sharedImage
+  "description" $description
+  "image" $image
   "url" .Permalink
 )}}
 {{ partial "head/seo/twitter.html" (dict
   "title" $title
-  "description" $seoDescription
-  "image" $sharedImage
+  "description" $description
+  "image" $image
   "url" .Permalink
 )}}
 {{ partial "head/seo/pagefind.html" (dict
-  "image" $sharedImage
+  "image" $image
 )}}
 {{ partial "head/seo/referrer.html" }}
