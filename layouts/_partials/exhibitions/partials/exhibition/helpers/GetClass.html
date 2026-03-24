@@ -1,0 +1,11 @@
+{{ $class := "exhibition" }}
+
+{{ if and .exhibition.Params.image .options.image }}
+  {{ $class = printf "%s exhibition--with-image" $class }}
+{{ end -}}
+
+{{ if .exhibition.Params.federation.active }}
+  {{ $class = printf "%s is-federated" $class }}
+{{ end }}
+
+{{ return $class }}

@@ -1,0 +1,15 @@
+{{ $dates := .exhibition.Params.dates}}
+{{ partial "exhibitions/partials/exhibition/core/federated.html" .exhibition }}
+{{ partial "exhibitions/partials/exhibition/core/meta.html" (dict
+  "context" .exhibition
+  "options" .options
+) }}
+{{ if and $dates.status .options.status }}
+  {{ partial "exhibitions/partials/exhibition/core/status.html" $dates.status }}
+{{ end }}
+{{ if .options.summary }}
+  {{ partial "exhibitions/partials/exhibition/core/summary.html" .exhibition }}
+{{ end }}
+{{ if .options.categories }}
+  {{ partial "exhibitions/partials/exhibition/core/categories.html" .exhibition }}
+{{- end -}}
