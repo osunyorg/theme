@@ -1,6 +1,6 @@
 {{ $block := .block }}
 {{ $block_class := partial "blocks/helpers/GetClass" .block }}
-{{- $html_id := .html_id -}}
+{{ $html_id := .html_id }}
 
 {{ with .block.data }}
   <div class="{{ $block_class }}">
@@ -20,4 +20,4 @@
       </div>
     </div>
   </div>
-{{- end -}}
+{{ end }}
