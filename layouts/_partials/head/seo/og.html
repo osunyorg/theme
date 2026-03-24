@@ -1,0 +1,12 @@
+{{/* Facebook Meta Tags */}}
+<meta property="og:title" content="{{ .title }}">
+<meta property="og:description" content="{{ .description }}">
+{{ with .image }}
+  {{ $ogImage := partial "commons/image/helpers/GetUrl" (dict
+    "media" .
+    "size" "1200"
+  ) }}
+  <meta property="og:image" content="{{ $ogImage }}">
+{{ end }}
+<meta property="og:url" content="{{ .url }}">
+<meta property="og:type" content="website">
