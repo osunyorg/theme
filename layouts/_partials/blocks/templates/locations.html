@@ -1,8 +1,8 @@
-{{- $block := .block -}}
-{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
 {{- $layout := .block.data.layout | default "grid" -}}
 
-{{- with .block.data -}}
+{{ with .block.data }}
   {{ $options := .options }}
 
   <div class="{{ $block_class }}">

@@ -1,8 +1,8 @@
-{{- $block := .block -}}
-{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
-{{- $layout := .block.data.layout | default "carousel" -}}
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+{{ $layout := .block.data.layout | default "carousel" }}
 
-{{- with .block.data -}}
+{{ with .block.data }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
@@ -25,28 +25,26 @@
               <li>
                 <figure class="testimonial {{ if.photo }}with-picture{{ end }}" 
                   {{ with $aria_label -}} role="figure" aria-label="{{ . }}" {{- end }}>
-                  <blockquote>
-                    {{- safeHTML .text -}}
-                  </blockquote>
-                  {{ if or .photo .author .job -}}
+                  <blockquote>{{ safeHTML .text }}</blockquote>
+                  {{ if or .photo .author .job }}
                     <figcaption>
-                      {{ if .photo -}}
+                      {{ if .photo }}
                         <div class="avatar">
-                          {{- partial "commons/image.html" (dict
+                          {{ partial "commons/image.html" (dict
                             "image" .photo
                             "sizes" site.Params.image_sizes.blocks.testimonials
                             "layout" $layout
-                          ) -}}
+                          ) }}
                         </div>
-                      {{- end }}
+                      {{ end }}
                       {{ if or .author .job -}}
                         <p>
-                          {{- if .author -}}
+                          {{ if .author }}
                             <span class="signature">{{ safeHTML .author }}</span>
-                          {{- end }}
-                          {{- if .job -}}
-                            <span class="meta">{{- safeHTML .job -}}</span>
-                          {{- end }}
+                          {{ end }}
+                          {{ if .job }}
+                            <span class="meta">{{ safeHTML .job }}</span>
+                          {{ end }}
                         </p>
                       {{ end }}
                     </figcaption>
@@ -59,4 +57,4 @@
       </div>
     </div>
   </div>
-{{- end -}}
+{{ end }}
