@@ -1,0 +1,7 @@
+<img  src="{{ partial "commons/image/helpers/GetUrl" (dict "url" .url) }}"
+      alt="{{ chomp (plainify .alt) }}"
+      {{ with .image.width }} width="{{ . }}"{{ end }}
+      {{ with .image.height }} height="{{ . }}"{{ end }}
+      {{ with .class }} class="{{ . }}"{{ end }}
+      {{ if .lazy }} loading="lazy"{{ end }}
+      {{ if .itemprop }} itemprop="image"{{ end }}>

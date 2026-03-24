@@ -1,0 +1,35 @@
+{{ $url := .url }}
+{{ $crop := .crop }}
+{{ with .size_desktop }}
+  <source media="(min-width: 1024px)"
+          type="image/webp"
+          srcset="{{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop ) }},
+                  {{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x">
+  <source media="(min-width: 1024px)" 
+          srcset="{{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "crop" $crop ) }},
+                  {{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x">
+{{ end }}
+{{ with .size_tablet }}
+  <source media="(min-width: 768px)"
+          type="image/webp"
+          srcset="{{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop) }},
+                  {{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x">
+  <source media="(min-width: 768px)"
+          srcset="{{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "crop" $crop ) }},
+                  {{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x">
+{{ end }}
+{{ with .size_mobile }}
+  <source type="image/webp"
+          srcset="{{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "format" "webp" "crop" $crop) }},
+                  {{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "format" "webp" "scale" 2 "crop" $crop) }} 2x">
+  <source srcset="{{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "crop" $crop ) }},
+                  {{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" . "scale" 2 "crop" $crop) }} 2x">
+{{ end }}
+<img src="{{ partial "commons/image/helpers/GetUrl" (dict "url" $url "size" .default "crop" $crop ) }}"
+      alt="{{ chomp (plainify .alt) }}"
+      width="{{ .image.width }}"
+      height="{{ .image.height }}"
+      {{ with .class }} class="{{ . }}"{{ end }}
+      {{ with .fetch_priority }} fetchpriority="{{ . }}"{{ end }}
+      {{ if .lazy }} loading="lazy"{{ end }}
+      {{ if .itemprop }} itemprop="image"{{ end }}>
