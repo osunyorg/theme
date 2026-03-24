@@ -9,7 +9,8 @@
     "with_labels" $with_labels
   ) }}
 {{ end }}
-{{ partial "commons/socials" (dict
+
+{{ partial "commons/socials.html" (dict
   "context" .context
   "name" $name
   "with_labels" $with_labels
@@ -17,19 +18,8 @@
 ) }}
 
 {{ with .context.phone_numbers }}
-  {{ with or .phone_mobile .phone }}
-    {{ partial "commons/contact-details/links/phone.html" (dict
-      "with_labels" $with_labels
-      "value" .value
-      "label" .label
-    ) }}
-  {{ end }}
-  {{ with .phone_professional }}
-    {{ partial "commons/contact-details/links/phone.html" (dict
-      "with_labels" $with_labels
-      "value" .value
-      "label" .label
-      "title" (i18n "commons.contact.phone_professional.a11y_label" (dict "phone_number" .label ))
-    ) }}
-  {{ end }}
+  {{ partial "commons/contact-details/links/phones.html" (dict
+    "phones" .
+    "with_labels" $with_labels
+  ) }}
 {{ end }}
