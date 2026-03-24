@@ -2,8 +2,9 @@
 {{ $group_meta := .group_meta }}
 {{ $with_more := .with_more }}
 {{ if .project }}
+  {{ $class := partial "projects/partials/project/helpers/GetClass" . }}
   <li>
-    <article class="project {{ .project.Params.bodyclass }}" itemscope itemtype="https://schema.org/CreativeWork">
+    <article class="{{ $class }}" itemscope itemtype="https://schema.org/CreativeWork">
       <div class="project-content">
         <div class="project-description">
           {{ partial "projects/partials/project/core.html" . }}
