@@ -9,19 +9,13 @@
     {{ if site.Params.keycdn }}
       {{ $url = $image.direct_url }}
     {{ end }}
+    {{ $alt := partial "commons/image/helpers/GetAlt" . }}
     {{ $lazy := default true .lazy }}
-    {{ $alt := or .alt "" }}
-    {{ if isset .image "alt" }}
-      {{ $alt = .image.alt }}
-    {{ end }}
     {{ $default := "1280x720" }}
     {{ if .desktop }}
       {{ $default = .desktop }}
     {{ end }}
-    {{ $crop := false }}
-    {{ if .crop }}
-      {{ $crop = true }}
-    {{ end }}
+    {{ $crop := .crop | default false }}
     {{ partial "commons/image/picture.html" (dict
       "image" $image
       "url" $url
