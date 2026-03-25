@@ -1,0 +1,11 @@
+
+{{ $options := (dict
+  "mode" "player"
+  "videoId" .video_id
+  "transcription" (printf "<p>%s</p>%s" .video_title .transcription)
+) }}
+<button class="btn"
+  id="play-{{ .video_id }}"
+  data-lightbox="{{ $options | encoding.Jsonify }}">
+    <span>{{ i18n "blocks.video.play" }}</span>
+</button>

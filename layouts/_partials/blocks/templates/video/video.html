@@ -1,0 +1,7 @@
+<div class="video">
+  {{ if eq .platform "default" }}
+    {{ safeHTML .iframe }}
+  {{ else }}
+    {{ partial "blocks/templates/video/lazy-container" . }}
+  {{ end }}
+</div>
