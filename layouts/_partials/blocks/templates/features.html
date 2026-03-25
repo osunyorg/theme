@@ -7,41 +7,14 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-
         {{ if $features }}
           <ul>
             {{ range $features }}
               <li>
-                {{ if or .title .description }}
-                  <div>
-                    {{ with .title }}
-                      {{- $heading_tag := partial "GetHeadingTag" (dict 
-                        "level" $block.ranks.children
-                        "attributes" "class='name'"
-                      ) -}}
-                      {{ $heading_tag.open -}}
-                        {{ . | safeHTML }}
-                      {{ $heading_tag.close -}}
-                    {{ end }}
-                    {{ with .description }}
-                      <div>{{ safeHTML . }}</div>
-                    {{ end }}
-                  </div>
-                {{ end }}
-                {{ if .image }}
-                  <figure {{ with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
-                    {{ partial "commons/image.html" (dict
-                      "image" .image
-                      "alt" .alt
-                      "sizes" site.Params.image_sizes.blocks.features
-                    ) }}
-                    {{ if .credit }}
-                      <figcaption class="credit">
-                        {{ safeHTML .credit }}
-                      </figcaption>
-                    {{ end }}
-                  </figure>
-                {{ end }}
+                {{ partial "blocks/templates/features/core.html" (dict
+                  "feature" .
+                  "heading_level" $block.ranks.children
+                ) }}
               </li>
             {{ end }}
           </ul>
