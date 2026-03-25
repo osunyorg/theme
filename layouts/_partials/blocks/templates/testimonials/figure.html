@@ -1,12 +1,16 @@
 {{ $aria_label := .aria_label }}
 {{ $layout := .layout }}
+{{ $is_long := false }}
 
 {{ with .testimonial }}
-  <figure class="testimonial {{ if.photo }}with-picture{{ end }}" 
+  <figure class="testimonial {{- if.photo }} with-picture {{- end }} {{- if $is_long }} is-long {{- end }}" 
           {{ with $aria_label -}} role="figure" aria-label="{{ . }}" {{- end }}>
-    <blockquote>
-      {{- safeHTML .text -}}
-    </blockquote>
+    {{ with .text }}
+      {{ $is_long = and (eq $layout "carousel") (gt (len .) 150)}}
+      <blockquote {{- if $is_long }} class="is-long" {{- end }}>
+        {{- safeHTML . -}}
+      </blockquote>
+    {{ end }}
     
     {{ if or .photo .author .job -}}
       <figcaption>
