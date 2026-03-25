@@ -1,30 +1,31 @@
 {{ $job := .job }}
 {{ $layout := .layout | default "list" }}
 {{ $heading_level := .heading_level }}
-{{ $options := .options }}
-{{ .with_more}}
+{{ $with_more := .with_more | default site.Params.jobs.index.options.with_more }}
+
 {{ if $job }}
   {{ $class := "job" }}
-  {{ if and .Params.image $options.image }}
+  {{ if and .Params.image .options.image }}
     {{ $class = printf "%s job--with-image" $class }}
     {{ $image_direction := partial "commons/image/helpers/GetDirection" .Params.image }}
     {{ $class = printf "%s %s" $class $image_direction }}
   {{ end }}
 
-  {{ $dates := .Params.dates }}
-
   <article class="{{ $class }}" itemscope itemtype="https://schema.org/JobPosting">
     <div class="job-content">
       {{ partial "jobs/partials/job/heading.html" (dict
         "item" $job
-        "options" $options
+        "options" .options
         "level" $heading_level
         "itemprop" "title"
       ) }}
-      {{ partial "jobs/partials/job/core.html" . }}
+      {{ partial "jobs/partials/job/core.html" (dict
+        "item" $job
+        "options" .options
+        "with_more" $with_more
+      ) }}
     </div>
-
-    {{ if $options.image }}
+    {{ if .options.image }}
       {{ partial "jobs/partials/job/media.html" (dict 
         "image" $job.Params.image
         "layout" $layout

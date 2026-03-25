@@ -1,7 +1,6 @@
 {{ $jobs := .Paginator.Pages }}
 {{ $layout := default site.Params.jobs.index.layout }}
 {{ $options := default site.Params.jobs.index.options }}
-{{ $with_more := $options.with_more | default site.Params.jobs.index.options.with_more }}
 {{ $heading_level := 2 }}
 
 <ul class="jobs jobs--{{- $layout }}">
@@ -12,7 +11,6 @@
         "heading_level" $heading_level
         "layout" $layout
         "options" $options
-        "with_more" $with_more
       ) }}
     </li>
   {{ end }}

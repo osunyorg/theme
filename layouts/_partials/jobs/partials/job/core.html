@@ -1,12 +1,12 @@
-{{ if and .options.summary .job.Params.summary }}
-  {{ partial "jobs/partials/job/core/summary.html" .job }}
+{{ if and .options.summary .item.Params.summary }}
+  {{ partial "jobs/partials/job/core/summary.html" .item }}
 {{ end }}
 {{ if .options.date }}
   {{ partial "jobs/partials/job/core/dates.html" . }}
 {{ end }}
 {{ if .options.categories }}
-  {{ partial "jobs/partials/job/core/categories.html" .job }}
+  {{ partial "jobs/partials/job/core/categories.html" .item }}
 {{ end }}
 {{ if .with_more }}
-  {{ partial "jobs/partials/job/core/more.html" .job }}
+  {{ partial "jobs/partials/job/core/more.html" .item }}
 {{ end }}
