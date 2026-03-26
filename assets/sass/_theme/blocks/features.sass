@@ -1,10 +1,10 @@
 .block-features
     ul
         @include list-reset
-    li
+    .feature
         display: flex
         flex-direction: column
-        + li
+        + .feature
             margin-top: $spacing-5
         .name
             margin-bottom: $spacing-2
@@ -31,7 +31,7 @@
                 @include media-breakpoint-down(desktop)
                     margin-bottom: $spacing-2
     @include in-page-with-sidebar
-        li
+        .feature
             flex-direction: row
             figure
                 width: columns(2)
@@ -44,11 +44,11 @@
     @include in-page-without-sidebar
         .top
             width: columns(8)
-        ul
+        .features
             @include list-reset
             @include grid(3, desktop)
-        li
+        .feature
             display: flex
-            + li
+            + .feature
                 margin-top: 0
 

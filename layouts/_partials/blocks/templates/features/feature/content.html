@@ -1,0 +1,17 @@
+{{ $heading_level := .heading_level }}
+
+<div class="feature-content">
+  {{ with .feature.title }}
+    {{- $heading_tag := partial "GetHeadingTag" (dict
+      "level" $heading_level
+      "attributes" "class='name'"
+    ) -}}
+    {{ $heading_tag.open -}}
+      {{ safeHTML . }}
+    {{ $heading_tag.close -}}
+  {{ end }}
+
+  {{ with .feature.description }}
+    <div>{{ safeHTML . }}</div>
+  {{ end }}
+</div>
