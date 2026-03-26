@@ -5,10 +5,7 @@
 {{ $options := .options }}
 
 {{ if $job }}
-  {{ $class := partial "jobs/partials/job/helpers/GetClass" (dict
-    "job" $job
-    "options" $options
-  ) }}
+  {{ $class := partial "jobs/partials/job/helpers/GetClass" . }}
   <article class="{{ $class }}" itemscope itemtype="https://schema.org/JobPosting">
     <div class="job-content">
       {{ partial "jobs/partials/job/heading.html" (dict
