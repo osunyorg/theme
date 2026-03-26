@@ -1,6 +1,7 @@
 {{ $options := .options | default site.Params.persons.index.options }}
+{{ $class := partial "persons/partials/person/helper/GetClass" . }}
 <li>
-  <article class="person" itemscope itemtype="https://schema.org/Person">
+  <article class="{{ $class }}" itemscope itemtype="https://schema.org/Person">
     <div class="description">
       {{ partial "persons/partials/person/name.html" (dict
         "person" .person
