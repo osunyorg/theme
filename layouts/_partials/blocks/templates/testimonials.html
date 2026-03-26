@@ -7,31 +7,10 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        
-        {{ if eq $layout "carousel" }}
-          {{ partial "blocks/templates/testimonials/carousel.html" . }}
-        {{ else }}
-          <ul class="testimonials testimonials--{{ $layout }}">
-            {{ range .testimonials }}
-              {{ $aria_label := "" }}
-              {{ if and .author .job }}
-                {{ $aria_label = delimit (slice .author .job) ", " }}
-              {{ else }}
-                {{ with or .author .job }}
-                  {{ $aria_label = . }}
-                {{ end }}
-              {{ end }}
-
-              <li>
-                {{ partial "blocks/templates/testimonials/figure.html" (dict
-                  "testimonial" .
-                  "aria_label" $aria_label
-                  "layout" $layout
-                )}}
-              </li>
-            {{ end }}
-          </ul>
-        {{ end }}
+        {{ partial "blocks/templates/testimonials/list.html" (dict
+          "layout" $layout
+          "testimonials" .testimonials
+        ) }}
       </div>
     </div>
   </div>
