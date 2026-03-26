@@ -1,9 +1,0 @@
-{{ $feature := .feature }}
-
-{{ if or $feature.title $feature.description }}
-  {{ partial "blocks/templates/features/core/content.html" . }}
-{{ end }}
-
-{{ if $feature.image }}
-  {{ partial "blocks/templates/features/core/media.html" $feature }}
-{{ end }}
