@@ -2,12 +2,12 @@
 
 <div class="feature-content">
   {{ with .feature.title }}
-    {{- $heading_tag := partial "GetHeadingTag" (dict
+    {{ $heading_tag := partial "GetHeadingTag" (dict
       "level" $heading_level
       "attributes" "class='name'"
-    ) -}}
+    ) }}
     {{ $heading_tag.open -}}
-      {{ safeHTML . }}
+      {{ safeHTML . | markdownify }}
     {{ $heading_tag.close -}}
   {{ end }}
 
