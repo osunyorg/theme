@@ -9,25 +9,7 @@
         <div class="call_to_action call_to_action--with{{ if not .image }}out{{ end }}-image {{ if $block.title }}call_to_action--with-title{{ end }} {{- if not $block.top.description }} call_to_action--without-text {{ end -}}">
           <div>
             {{ partial "blocks/top.html" $block.top }}
-            {{ if .buttons }}
-              <div class="actions" {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
-                {{ range .buttons }}
-                  {{ if .title }}
-                    {{ $title := safeHTML .title }}
-                    <a href="{{ .url }}"
-                      {{ if .target_blank }}
-                        title="{{ i18n "commons.link.blank_aria" (dict "Title" $title) }}"
-                        target="_blank"
-                        rel="noreferrer noopener"
-                      {{ else }}
-                        title="{{ $title }}"
-                      {{ end }}
-                      >{{- $title -}}
-                    </a>
-                  {{ end }}
-                {{ end }}
-              </div>
-            {{ end }}
+            {{ partial "blocks/templates/call-to-action/actions.html" . }}
           </div>
           {{ with .image }}
             {{ partial "commons/image/figure.html" (dict
