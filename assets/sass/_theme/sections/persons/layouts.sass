@@ -1,12 +1,5 @@
 .persons
     @include list-reset
-    @include in-page-with-sidebar
-        .person
-            flex-direction: row
-            gap: $spacing-3
-            @include media-breakpoint-up(md)
-                .avatar
-                    width: columns(2)
     &--grid
         @include grid(1)
         @include grid(2, md)
@@ -21,6 +14,7 @@
             @include media-breakpoint-up(xxl)
                 @include grid(2)
             .person
+                flex-direction: row
                 gap: calc(var(--grid-gutter) / 2)
                 .avatar
                     // One column width + half gutter width
