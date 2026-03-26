@@ -7,7 +7,7 @@
       "attributes" "class='name'"
     ) -}}
     {{ $heading_tag.open -}}
-      {{ safeHTML . }}
+      {{ safeHTML . | markdownify }}
     {{ $heading_tag.close -}}
   {{ end }}
 
