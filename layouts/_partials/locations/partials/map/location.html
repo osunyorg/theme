@@ -1,0 +1,26 @@
+{{ $options := .options }}
+{{ with .location }}
+  {{ $geolocation := .Params.contact_details.postal_address.geolocation }}
+  <li class="location"
+    data-title="{{ .Params.title }}"
+    data-longitude="{{ $geolocation.longitude }}"
+    data-latitude="{{ $geolocation.latitude }}"
+    itemscope itemtype="https://schema.org/EducationalOrganization">
+    <div class="location-content">
+      <p class="location-title" itemprop="name">
+        <a href="{{ .Permalink }}">
+          {{- safeHTML .Params.title -}}
+        </a>
+      </p>
+      {{ with .Params.contact_details.postal_address }}
+        {{ partial "commons/address" . }}
+      {{ end }}
+    </div>
+    {{ if $options.image }}
+      {{ partial "locations/partials/location/media.html" (dict 
+        "location" .
+        "layout" "map"
+      ) }}
+    {{ end }}
+  </li>
+{{ end }}
