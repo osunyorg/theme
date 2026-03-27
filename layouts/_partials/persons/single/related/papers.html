@@ -6,13 +6,9 @@
     <div class="top">
       <h2 class="h5">{{ i18n "persons.papers.recent" }}</h2>
     </div>
-    <ul class="papers">
-      {{ range first 3 $papers }}
-        {{ partial "papers/partials/paper.html" (dict
-          "paper" .
-        ) }}
-      {{ end }}
-    </ul>
+    {{ partial "papers/partials/papers.html" (dict
+      "papers" ( first 3 $papers )
+    ) }}
     <a href="{{ $researcher.Permalink }}" class="more">
       {{- i18n "persons.papers.all" (dict "author" $researcher.Params.person) -}}
     </a>
