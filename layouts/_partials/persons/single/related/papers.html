@@ -7,7 +7,7 @@
       <h2 class="h5">{{ i18n "persons.papers.recent" }}</h2>
     </div>
     {{ partial "papers/partials/papers.html" (dict
-      "papers" ( first 3 $papers )
+      "papers" ( first 5 $papers )
     ) }}
     <a href="{{ $researcher.Permalink }}" class="more">
       {{- i18n "persons.papers.all" (dict "author" $researcher.Params.person) -}}

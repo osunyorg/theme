@@ -14,8 +14,6 @@
     .paper-meta
         @include meta
         color: var(--color-text-alt)
-        @include media-breakpoint-up(desktop)
-            width: columns(5)
         p
             display: block
         .paper-volume
@@ -28,6 +26,14 @@
             &::before
                 content: '— '
                 display: inline-block
+    @include media-breakpoint-down(desktop)
+        flex-direction: column
+        .paper-actions
+            flex-direction: row
+
+    @include media-breakpoint-up(desktop)
+        .paper-meta
+            width: columns(5)
 
 .top + .papers
     margin-top: $spacing-3
@@ -49,6 +55,7 @@
                 width: columns(2)
             figure
                 width: columns(3)
+
 .papers__page
     @include media-breakpoint-down(desktop)
         .document-content
