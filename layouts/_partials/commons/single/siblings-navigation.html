@@ -10,7 +10,7 @@
     {{ $previous_content = .NextInSection }}
     {{ $next_content = .PrevInSection }}
   {{ end }}
-  {{- if or .PrevInSection .NextInSection -}}
+  {{ if or .PrevInSection .NextInSection }}
     <div class="block block-siblings-navigation">
       <div class="container">
         <div class="block-content">
@@ -29,5 +29,5 @@
         </div>
       </div>
     </div>
-  {{- end -}}
-{{- end -}}
+  {{ end }}
+{{ end }}
