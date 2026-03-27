@@ -1,6 +1,6 @@
 {{ $page := .context }}
-{{ $pageWithTranslations := $page.Translations | append $page }}
-{{ $siteLang := "" }}
+{{ $page_with_translations := $page.Translations | append $page }}
+{{ $site_lang := "" }}
 {{ $url := "" }}
 {{ $position := .position }}
 {{ $dropdown_class := "dropdown-menu dropdown-languages" }}
@@ -22,24 +22,9 @@
           {{- $language -}}
       </span>
       <div class="{{ $dropdown_class }}" id="{{ $position }}-i18n-list">
-        <ul>
-          {{ range site.Languages }}
-            {{ $siteLang := . }}
-            {{ $url = printf "/%s/" .Lang }}
-            {{ range $pageWithTranslations }}
-              {{ if eq .Lang $siteLang.Lang }}
-                {{ $url = .Permalink }}
-              {{ end }}
-            {{ end }}
-            {{ if not (eq $siteLang site.Language) }}
-              <li>
-                <a href="{{ $url }}" lang="{{ $siteLang }}" hreflang="{{ $siteLang }}" >
-                  {{- $siteLang.LanguageName -}}
-                </a>
-              </li>
-            {{ end }}
-          {{ end }}
-        </ul>
+        {{ partial "commons/i18n/list.html" (dict 
+          "page_with_translations" $page_with_translations
+        ) }}
       </div>
     {{ end }}
   </li>
