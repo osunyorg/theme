@@ -1,31 +1,18 @@
 {{ $block := .block }}
 {{ $block_class := partial "blocks/helpers/GetClass" .block }}
-{{- $layout := .block.data.layout | default "grid" -}}
+{{ $layout := .block.data.layout | default "grid" }}
 
 {{ with .block.data }}
   {{ $options := .options }}
-
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-
-        {{ $locations := slice }}
-        {{ $location := "" }}
-        {{ range .locations }}
-          {{ $location = site.GetPage .path }}
-          {{ $locations = $locations | append $location }}
-        {{ end }}
-
+        {{ $locations := partial "helpers/objects/GetFromPathSlice" .locations }}
         {{ if eq $layout "map" }}
-          {{ $map_title := i18n "programs.location" $locations }}
-          {{ if $block.title }}
-            {{ $map_title = $block.title }}
-          {{ end }}
-
           {{ partial "locations/partials/map.html" (dict
             "locations" $locations
-            "title" $map_title
+            "title" $block.title
           ) }}
         {{ else }}
           <ul class="locations locations--{{- $layout }}">

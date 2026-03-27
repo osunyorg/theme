@@ -1,5 +1,5 @@
 {{ $locations := .locations }}
-{{ $title := .title }}
+{{ $title := .title | default (i18n "programs.location" .locations) }}
 {{ $aria_label := i18n "commons.maps.label" $title }}
 
 {{/*  Check if has campus with address  */}}
