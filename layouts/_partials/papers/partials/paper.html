@@ -1,6 +1,6 @@
 {{ $inside_volume := .inside_volume | default false }}
-{{ $actions := .actions | default true }}
-{{ $heading_level := .heading_level}}
+{{ $with_actions := .with_actions | default true }}
+{{ $heading_level := .heading_level }}
 
 {{ with .paper }}
   <li>
@@ -15,7 +15,7 @@
           "inside_volume" $inside_volume
         ) }}
       </div>
-      {{ if eq $actions true }}
+      {{ if $with_actions }}
         {{ partial "papers/partials/paper/actions.html" (dict 
           "paper" .
         ) }}

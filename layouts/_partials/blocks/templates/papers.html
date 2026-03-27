@@ -9,7 +9,7 @@
         {{ $papers := partial "helpers/objects/GetFromPathSlice" .papers }}
         {{ partial "papers/partials/papers.html" (dict
           "papers" $papers
-          "actions" false
+          "with_actions" false
           "heading_level" $block.ranks.children
         ) }}
       </div>
