@@ -1,10 +1,8 @@
 {{ $block := .block }}
 {{ $block_class := partial "blocks/helpers/GetClass" .block }}
-{{ $image_class := "" }}
 {{ with .block.data }}
   {{ if .image }}
     {{ $block_class = printf "%s block-chapter--with-image" $block_class }}
-    {{ $image_class = printf "image-%s" (partial "commons/image/helpers/GetDirection" .image) }}
   {{ end }}
   <div class="{{ $block_class }}">
     <div class="container">
@@ -12,25 +10,12 @@
         <div class="chapter">
           <div class="text">
             {{ partial "blocks/top.html" $block.top }}
-            {{ if (partial "helpers/text/GetFromHTML" .text) -}}
-              <div class="rich-text">
-                {{ safeHTML .text }}
-              </div>
-            {{ end -}}
-            {{ if (partial "helpers/text/GetFromHTML" .notes) }}
-              <div class="notes">
-                {{ safeHTML .notes }}
-              </div>
-            {{ end -}}
+            {{ partial "blocks/templates/chapter/text.html" . }}
+            {{ partial "blocks/templates/chapter/notes.html" . }}
           </div>
-          {{ with .image }}
-            {{ partial "commons/image/figure.html" (dict
-              "image" .
-              "sizes" site.Params.image_sizes.blocks.chapter
-            ) }}
-          {{ end -}}
+          {{ partial "blocks/templates/chapter/image.html" . }}
         </div>
       </div>
     </div>
   </div>
-{{- end -}}
+{{ end }}
