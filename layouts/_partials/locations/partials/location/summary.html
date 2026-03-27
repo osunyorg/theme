@@ -1,0 +1,11 @@
+{{ with .Params.summary }}
+  <div class="location-description" itemprop="description">
+    {{ partial "commons/summary/helpers/GetTruncated" ( dict 
+      "summary" .
+      "kind" "locations"
+    ) }}
+    <p class="more meta">
+      {{- i18n "blocks.locations.button_location" -}}
+    </p>
+  </div>
+{{ end }}
