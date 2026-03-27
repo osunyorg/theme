@@ -1,5 +1,5 @@
 {{ $page := .context }}
-{{ $page_with_translations := $page.Translations | append $page }}
+{{ $translations := $page.Translations | append $page }}
 {{ $site_lang := "" }}
 {{ $url := "" }}
 {{ $position := .position }}
@@ -23,7 +23,7 @@
       </span>
       <div class="{{ $dropdown_class }}" id="{{ $position }}-i18n-list">
         {{ partial "commons/i18n/list.html" (dict
-          "page_with_translations" $page_with_translations
+          "translations" $translations
         ) }}
       </div>
     {{ end }}

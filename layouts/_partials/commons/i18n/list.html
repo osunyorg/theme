@@ -1,9 +1,9 @@
-{{ $page_with_translations := .page_with_translations }}
+{{ $translations := .translations }}
 <ul>
   {{ range site.Languages }}
     {{ $language := . }}
     {{ $url := printf "/%s/" .Lang }}
-    {{ range $page_with_translations }}
+    {{ range $translations }}
       {{ if eq .Lang $language.Lang }}
         {{ $url = .Permalink }}
       {{ end }}
