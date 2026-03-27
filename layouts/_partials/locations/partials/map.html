@@ -4,7 +4,7 @@
 {{ $aria_label := i18n "commons.maps.label" $title }}
 
 {{ $locations = partial "locations/partials/helpers/GetGeolocated" $locations }}
-{{ if gt (len $locations) 1 }}
+{{ if $locations }}
   <div class="locations-map">
     <ul class="map" data-map data-marker-icon="{{ "/assets/images/map-marker.svg" }}"
       role="region"
