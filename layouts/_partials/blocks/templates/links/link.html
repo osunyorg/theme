@@ -16,12 +16,10 @@
         {{ . | safeHTML }}
       {{ end }}
     </div>
-    {{ if .image }}
-      {{ partial "block/templates/links/link/image.html" (dict
-        "link" .
-        "options" $options
-        "layout" $layout
-      )}}
-    {{ end }}
+    {{ partial "blocks/templates/links/link/image.html" (dict
+      "link" .
+      "options" $options
+      "layout" $layout
+    ) }}
   </li>
 {{ end }}
