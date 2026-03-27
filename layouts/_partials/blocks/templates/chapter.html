@@ -12,23 +12,10 @@
         <div class="chapter">
           <div class="text">
             {{ partial "blocks/top.html" $block.top }}
-            {{ if (partial "helpers/text/GetFromHTML" .text) -}}
-              <div class="rich-text">
-                {{ safeHTML .text }}
-              </div>
-            {{ end -}}
-            {{ if (partial "helpers/text/GetFromHTML" .notes) }}
-              <div class="notes">
-                {{ safeHTML .notes }}
-              </div>
-            {{ end -}}
+            {{ partial "blocks/templates/chapter/text.html" . }}
+            {{ partial "blocks/templates/chapter/notes.html" . }}
           </div>
-          {{ with .image }}
-            {{ partial "commons/image/figure.html" (dict
-              "image" .
-              "sizes" site.Params.image_sizes.blocks.chapter
-            ) }}
-          {{ end -}}
+          {{ partial "blocks/templates/chapter/image.html" . }}
         </div>
       </div>
     </div>
