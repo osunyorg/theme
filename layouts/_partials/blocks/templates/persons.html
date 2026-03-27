@@ -1,9 +1,9 @@
-{{- $block := .block -}}
+{{ $block := .block }}
 {{- $block_class := partial "blocks/templates/persons/helpers/GetClass" .block }}
 {{- $char_limit := 80 -}}
 {{- $is_large := false -}}
 
-{{- with .block.data -}}
+{{ with .block.data }}
   {{ $layout := .layout | default "grid" }}
   {{ $options := .options }}
   {{ $image_sizes := index site.Params.image_sizes.sections.persons.layouts $layout }}

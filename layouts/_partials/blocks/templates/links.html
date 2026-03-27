@@ -1,7 +1,7 @@
-{{- $block := .block -}}
-{{- $block_class := partial "blocks/helpers/GetClass" .block -}}  
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}  
 
-{{- with .block.data -}}
+{{ with .block.data }}
   {{ $options := .options }}
   {{ $layout := .layout }}
   <div class="{{ $block_class }}">
@@ -9,15 +9,15 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         <ul class="links">
-          {{- range .links }}
-            <li itemscope itemtype="https://schema.org/WebPage" {{- if .image -}} class="with-image" {{- end -}}>
+          {{ range .links }}
+            <li itemscope itemtype="https://schema.org/WebPage"{{ if .image }} class="with-image"{{ end }}>
               <div class="link-content">
                 {{ $url := .url }}
                 {{ $is_external := .external | default true }}
 
                 <link itemprop="url" href="{{ .url }}">
-                <a itemprop="relatedLink" href="{{ .url }}" {{ if $is_external -}} target="_blank" rel="noopener" {{- end }}>
-                  <span itemprop="name">{{- safeHTML .title -}}</span>
+                <a itemprop="relatedLink" href="{{ .url }}" {{ if $is_external }} target="_blank" rel="noopener" {{ end }}>
+                  <span itemprop="name">{{ safeHTML .title }}</span>
                   {{ if $is_external }}
                     <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
                   {{ end }}
@@ -26,24 +26,24 @@
                   {{ . | safeHTML }}
                 {{ end }}
               </div>
-              {{- if .image -}}
-                {{- $sizes := (index site.Params.image_sizes.blocks.links $layout) -}}
+              {{ if .image }}
+                {{ $sizes := (index site.Params.image_sizes.blocks.links $layout) }}
                 {{ if $options.icons }}
                   {{ $sizes = site.Params.image_sizes.blocks.links.icons }}
                 {{ end }}
                 
-                <div class="media {{- if $options.icons }} media--icon {{- end }}">
-                  {{- partial "commons/image.html" (dict
+                <div class="media{{ if $options.icons }} media--icon {{ end }}">
+                  {{ partial "commons/image.html" (dict
                     "image" .image
                     "alt" .alt
                     "sizes" $sizes
-                  ) -}}
+                  ) }}
                 </div>
-              {{- end -}}
+              {{ end }}
             </li>
-          {{ end -}}
+          {{ end }}
         </ul>
       </div>
     </div>
   </div>
-{{- end -}}
+{{ end }}

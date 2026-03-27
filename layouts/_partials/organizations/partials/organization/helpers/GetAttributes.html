@@ -1,0 +1,26 @@
+{{ $attributes := "" }}
+{{ $organization := .organization }}
+{{ $options := .options }}
+{{ $with_geolocation := eq .layout "map" }}
+
+{{ $title := $organization.Title }}
+{{ $geolocation := $organization.Params.contact_details.postal_address.geolocation }}
+{{ if $with_geolocation }}
+  {{ with $geolocation }}
+    {{ $attributes = printf "data-title=\"%s\"" $title }}
+    {{ with .longitude }}
+      {{ $attributes = printf "%s data-longitude=\"%f\"" $attributes . }}
+    {{ end }} 
+    {{ with .latitude }}
+      {{ $attributes = printf "%s data-latitude=\"%f\"" $attributes . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if and $options.filters $organization.Params.organizations_categories }}
+  {{ $categories := partial "organizations/helpers/GetCategoriesSlug" $organization }}
+  {{ $categories = $categories | encoding.Jsonify }}
+  {{ $attributes = printf "%s data-filters=\"%q\"" $attributes $categories }}
+{{ end }}
+
+{{ return $attributes }}

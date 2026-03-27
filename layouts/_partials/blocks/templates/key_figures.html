@@ -1,10 +1,10 @@
-{{- $block := .block -}}
-{{- $isAnimated := site.Params.blocks.key_figures.animated -}}
-{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
+{{ $block := .block }}
+{{ $isAnimated := site.Params.blocks.key_figures.animated }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
 
-{{- with .block.data -}}
-  {{- $figures := .figures }}
-  <div class="{{ $block_class }} {{- if $isAnimated }} is-animated {{ end }}">
+{{ with .block.data }}
+  {{ $figures := .figures }}
+  <div class="{{ $block_class }}{{ if $isAnimated }} is-animated {{ end }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
@@ -14,8 +14,8 @@
             {{ $list_class = "even-items" }}
           {{ end }}
           <ul class="{{ $list_class }}">
-            {{- range .figures }}
-              <li {{- if .image }} class="with-image" {{- end -}}>
+            {{ range .figures }}
+              <li {{ if .image }} class="with-image" {{ end }}>
                 {{ with .image }}
                   {{ partial "commons/image.html" (dict
                     "image" .
@@ -31,10 +31,10 @@
                   {{ safeHTML .description }}
                 </div>
               </li>
-            {{ end -}}
+            {{ end }}
           </ul>
-        {{ end -}}
+        {{ end }}
       </div>
     </div>
   </div>
-{{- end -}}
+{{ end }}

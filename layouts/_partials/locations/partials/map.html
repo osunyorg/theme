@@ -33,16 +33,16 @@
                 {{ partial "commons/address" . }}
               {{ end }}
             </div>
-          {{ end -}}
-          {{- if .Params.image -}}
+          {{ end }}
+          {{ if .Params.image }}
             <div class="media">
-              {{- partial "commons/image.html" (dict
+              {{ partial "commons/image.html" (dict
                 "image" .Params.image
                 "alt" $title
                 "sizes" site.Params.image_sizes.sections.locations.layouts.map
-              ) -}}
+              ) }}
             </div>
-          {{- end -}}
+          {{ end }}
         </li>
       {{ end }}
     {{ end }}

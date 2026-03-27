@@ -2,7 +2,7 @@
 {{ $block_class := partial "blocks/helpers/GetClass" .block }}
 {{ $with_lightbox := not site.Params.components.lightbox.in_gallery.disabled }}
 
-{{- with .block.data -}}
+{{ with .block.data }}
   {{- $sizes := index site.Params.image_sizes.blocks.gallery .layout -}}
   {{- $has_text := false -}}
   {{- range .images }}

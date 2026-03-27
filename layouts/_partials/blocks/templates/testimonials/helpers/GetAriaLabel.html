@@ -1,0 +1,11 @@
+{{ $aria_label := "" }}
+
+{{ if and .author .job }}
+  {{ $aria_label = delimit (slice .author .job) ", " }}
+{{ else }}
+  {{ with or .author .job }}
+    {{ $aria_label = . }}
+  {{ end }}
+{{ end }}
+
+{{ return $aria_label }}

@@ -1,0 +1,7 @@
+{{ $class := "project" }}
+
+{{ with .project.Params.bodyclass }}
+  {{ $class = printf "%s %s" $class . }}
+{{ end }}
+
+{{ return $class }}
