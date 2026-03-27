@@ -5,16 +5,16 @@
 
 {{ $locations = partial "locations/partials/helpers/GetGeolocated" $locations }}
 {{ if gt (len $locations) 1 }}
-<div class="locations-map">
-  <ul class="map" data-map data-marker-icon="{{ "/assets/images/map-marker.svg" }}"
-    role="region"
-    aria-label="{{ $aria_label }}">
-    {{ range $locations }}
-      {{ partial "locations/partials/map/location.html" (dict
-        "location" .
-        "options" $options
-      ) }}
-    {{ end }}
-  </ul>
-</div>
+  <div class="locations-map">
+    <ul class="map" data-map data-marker-icon="{{ "/assets/images/map-marker.svg" }}"
+      role="region"
+      aria-label="{{ $aria_label }}">
+      {{ range $locations }}
+        {{ partial "locations/partials/map/location.html" (dict
+          "location" .
+          "options" $options
+        ) }}
+      {{ end }}
+    </ul>
+  </div>
 {{ end }}
