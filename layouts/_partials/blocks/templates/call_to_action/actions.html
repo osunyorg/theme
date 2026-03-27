@@ -1,5 +1,6 @@
 {{ if .buttons }}
-  <div class="actions" {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
+  <div class="actions"
+    {{ if gt (len .buttons) 1 }}role="group"{{ end -}}>
     {{ range .buttons }}
       {{ if .title }}
         {{ $title := safeHTML .title }}
