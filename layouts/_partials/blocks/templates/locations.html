@@ -15,16 +15,12 @@
             "title" $block.title
           ) }}
         {{ else }}
-          <ul class="locations locations--{{- $layout }}">
-            {{ range $locations }}
-              {{ partial "locations/partials/location.html" (dict 
-                "location" .
-                "heading_level" $block.ranks.children
-                "options" $options
-                "layout" $layout
-              ) }}
-            {{ end }}
-          </ul>
+          {{ partial "locations/partials/locations.html" (dict
+            "locations" $locations
+            "heading_level" $block.ranks.children
+            "options" $options
+            "layout" $layout
+          ) }}
         {{ end }}
       </div>
     </div>
