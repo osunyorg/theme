@@ -4,46 +4,30 @@
 {{ $reversed := .reversed | default false }}
 
 {{ with .context }}
-
   {{ $previous_content := .PrevInSection }}
   {{ $next_content := .NextInSection }}
   {{ if $reversed }}
     {{ $previous_content = .NextInSection }}
     {{ $next_content = .PrevInSection }}
   {{ end }}
-
   {{- if or .PrevInSection .NextInSection -}}
-  <div class="block block-siblings-navigation">
-    <div class="container">
-      <div class="block-content">
-        <nav class="siblings-navigation" aria-label="{{ i18n "commons.pagination.between.posts" }}">
-          <ul>
-            {{ with $previous_content }}
-              <li class="previous">
-                {{ $title := safeHTML .Title -}}
-                <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.previous_aria" (dict "Title" $title)) }}">
-                  <span>
-                    {{- $previous_label -}}
-                  </span>
-                  {{- $title -}}
-                </a>
-              </li>
-            {{ end }}
-            {{ with $next_content }}
-              <li class="next">
-                {{ $title := safeHTML .Title -}}
-                <a href="{{.RelPermalink}}" title="{{ safeHTML (i18n "posts.next_aria" (dict "Title" $title)) }}">
-                  <span>
-                    {{- $next_label -}}
-                  </span>
-                  {{- $title -}}
-                </a>
-              </li>
-            {{ end }}
-          </ul>
-        </nav>
+    <div class="block block-siblings-navigation">
+      <div class="container">
+        <div class="block-content">
+          <nav class="siblings-navigation" aria-label="{{ i18n "commons.pagination.between.posts" }}">
+            <ul>
+              {{ partial "commons/single/siblings-navigation/previous.html" (dict
+                "label" $previous_label
+                "page" $previous_content
+              ) }}
+              {{ partial "commons/single/siblings-navigation/next.html" (dict
+                "label" $next_label
+                "page" $next_content
+              ) }}
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
-  </div>
   {{- end -}}
 {{- end -}}

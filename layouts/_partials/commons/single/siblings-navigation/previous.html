@@ -1,0 +1,13 @@
+{{ $label := .label }}
+{{ with .page }}
+  <li class="previous">
+    {{ $title := safeHTML .Title }}
+    <a href="{{ .RelPermalink }}"
+      title="{{ safeHTML (i18n "posts.previous_aria" (dict "Title" $title)) }}">
+      <span>
+        {{- $label -}}
+      </span>
+      {{- $title -}}
+    </a>
+  </li>
+{{ end }}
