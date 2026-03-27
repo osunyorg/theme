@@ -17,17 +17,11 @@
       {{ end }}
     </div>
     {{ if .image }}
-      {{ $sizes := (index site.Params.image_sizes.blocks.links $layout) }}
-      {{ if $options.icons }}
-        {{ $sizes = site.Params.image_sizes.blocks.links.icons }}
-      {{ end }}
-      <div class="media{{ if $options.icons }} media--icon {{ end }}">
-        {{ partial "commons/image.html" (dict
-          "image" .image
-          "alt" .alt
-          "sizes" $sizes
-        ) }}
-      </div>
+      {{ partial "block/templates/links/link/image.html" (dict
+        "link" .
+        "options" $options
+        "layout" $layout
+      )}}
     {{ end }}
   </li>
 {{ end }}
