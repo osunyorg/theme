@@ -8,7 +8,7 @@
     ) }}
 
     {{ if and .options.summary .program.Params.summary }}
-      {{ partial "programs/partials/program/summary.html" .program }}
+      {{ partial "programs/partials/program/core/summary.html" .program }}
     {{ end }}
 
     {{ if or site.Params.programs.index.options.categories .options.categories }}
@@ -21,7 +21,7 @@
     {{ partial "commons/item/more.html" . }}
 
     {{ if and .options.diploma }}
-      {{ partial "programs/partials/program/diploma.html" .program }}
+      {{ partial "programs/partials/program/core/diploma.html" .program }}
     {{ end }}
   </div>
   {{ if and .program.Params.image .options.image }}
