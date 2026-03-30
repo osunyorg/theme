@@ -1,10 +1,10 @@
 ul.diplomas
     @include list-reset
-    > li
+    a:hover
+        color: var(--color-accent)
+    .diploma
         margin-bottom: $spacing-2
-        @include media-breakpoint-up(desktop)
-            margin-bottom: $spacing-5
-        > a
+        .diploma-title
             @include h2
             display: block
             text-decoration: none
@@ -15,20 +15,6 @@ ul.diplomas
             @include icon(arrow-right-line, after)
                 align-self: center
                 margin-left: auto
-            &:hover
-                color: var(--color-accent)
-            @include media-breakpoint-down(desktop)
-                position: relative
-                padding-right: $spacing-3
-                &::after
-                    position: absolute
-                    bottom: $spacing-3
-                    right: 0
-            @include media-breakpoint-up(desktop)
-                display: flex
-                align-items: baseline
-                span
-                    margin-left: $spacing-3
 
         .content
             @include grid(2, desktop)
@@ -36,43 +22,54 @@ ul.diplomas
             padding-top: $spacing-3
 
         .programs
-            @include media-breakpoint-down(desktop)
-                margin-top: $spacing-3
+            > li
+                a
+                    @include h3
             li
                 display: block
                 border-bottom: 0
                 padding: 0
                 + li, > ol
                     margin-top: $spacing-2
-                    @include media-breakpoint-up(sm) 
-                        margin-top: $spacing-3
-                > a:hover
-                    color: var(--color-accent)
-                ol li > a   
-                    @include inherit-text
-                    @include icon(corner-down-right-line, before)
-                        margin-left: var(--border-width)
-                        margin-right: $spacing-1
-                        margin-top: 6px
-                        @include media-breakpoint-up(sm)
-                            margin-right: $spacing-2
-                        @include media-breakpoint-up(md)
-                            margin-top: 8px
+                ol
+                    padding-left: $spacing-3
+                    li > a
+                        @include body-text
+                        display: flex
+                        align-items: baseline
+                        @include icon(corner-down-right-line, before)
+                            margin-right: $spacing-1
+    @include media-breakpoint-down(desktop)
+        .diploma
+            .diploma-title
+                position: relative
+                padding-right: $spacing-3
+                &::after
+                    position: absolute
+                    bottom: $spacing-3
+                    right: 0
+            .programs
+                margin-top: $spacing-3
+    @include media-breakpoint-up(sm)
+        .diploma
+            .programs
+                li + li,
+                > ol
+                    margin-top: $spacing-3
+    @include media-breakpoint-up(desktop)
+        .diploma
+            margin-bottom: $spacing-5
+            .diploma-title
+                display: flex
+                align-items: baseline
+                span
+                    margin-left: $spacing-3
                     display: flex
-                    ol
-                        margin-left: $spacing-3
-            > li > a 
-                @include h3
-
         .program
             div
-                @include media-breakpoint-up(desktop)
-                    display: flex
-                    > p
-                        width: columns(6)
-            .title
-                @include h4
-
+                display: flex
+                > p
+                    width: columns(6)
 .diplomas-select
     @include dropdown
     text-align: right
