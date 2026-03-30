@@ -1,0 +1,15 @@
+{{ partial "pages/partials/page/core/heading.html" (dict
+  "item" .page
+  "level" .heading_level
+  "options" .options
+) }}
+
+{{ partial "pages/partials/page/hooks/after-title.html" .page }}
+
+{{ if .options.summary }}
+  {{ partial "pages/partials/page/core/summary.html" .page }}
+{{ end }}
+
+{{ if .options.categories }}
+  {{ partial "pages/partials/page/core/categories.html" .page }}
+{{ end }}
