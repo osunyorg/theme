@@ -1,41 +1,17 @@
 {{ $publication := .publication }}
 {{ $researcher := .researcher }}
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-  "level" .heading_level 
-  "attributes" "class='publication-title' itemprop='headline'"
-) }}
+{{ $heading_level := .heading_level }}
 
 {{ with $publication }}
   <li class="publication" itemscope itemtype="http://schema.org/ScholarlyArticle">
     <div class="publication-content">
-      {{- $title := safeHTML .Title -}}
-
-      {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-      {{ $heading_tag.close }}
-
-      {{ if or .Params.journal_title .Params.date .Params.authors_list }}
-        <div class="publication-meta">
-          {{- with .Params.date -}}
-            <span>{{- .Format "2006" -}}</span>
-          {{- end -}}
-
-          {{- with .Params.journal_title -}}
-            <span>{{- safeHTML . -}}</span>
-          {{- end -}}
-
-          {{- with .Params.ref -}}
-            <div class="publication-ref" itemprop="isPartOf" itemscope itemtype="http://schema.org/PublicationIssue">
-              <span itemprop="name">{{- safeHTML . -}}</span>
-            </div>
-          {{- end -}}
-        </div>
-      {{ end }}
+      {{ partial "projects/partials/project/core/heading.html" (dict
+        "item" .
+        "level" $heading_level
+        "itemprop" "headline"
+      ) }}
+      {{ partial "publications/partials/publication/meta.html" . }}
     </div>
-    {{ with .Params.authors_list }}
-      <div class="publication-authors">
-        <span itemprop="author">{{ safeHTML . }}</span>
-      </div>
-    {{ end }}
+    {{ partial "publications/partials/publication/authors.html" . }}
   </li>
 {{ end }}
