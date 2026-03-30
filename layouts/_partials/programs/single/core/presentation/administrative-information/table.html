@@ -13,15 +13,15 @@
     {{ with .Params.information.administrative }}
       <tr>
         <th scope="row">{{ i18n "programs.type.initial" }}</th>
-        <td>{{ if .initial }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+        <td>{{ partial "programs/single/helpers/GetAdministrativeLabel" .initial }}</td>
       </tr>
       <tr>
         <th scope="row">{{ i18n "programs.type.continuing" }}</th>
-        <td>{{ if .continuing }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+        <td>{{ partial "programs/single/helpers/GetAdministrativeLabel" .continuing }}</td>
       </tr>
       <tr>
         <th scope="row">{{ i18n "programs.type.apprenticeship" }}</th>
-        <td>{{ if .apprenticeship }}{{ i18n "commons.true" }}{{ else }}{{ i18n "commons.false" }}{{ end }}</td>
+        <td>{{ partial "programs/single/helpers/GetAdministrativeLabel" .apprenticeship }}</td>
       </tr>
       {{- with .capacity -}}
         <tr>
