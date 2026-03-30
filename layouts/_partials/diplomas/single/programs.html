@@ -1,27 +1,18 @@
+{{ $layout := site.Params.diplomas.single.programs.layout }}
+{{ $options := site.Params.diplomas.single.programs.options }}
+{{ $class := printf "programs programs--%s" $layout }}
+{{ if $options.image }}
+  {{ $class = printf "%s with-images" $class }}
+{{ end }}
 <div class="container">
-  {{ $programs_options := site.Params.diplomas.single.programs.options }}
-  <ol class="programs {{ if eq $programs_options false }}programs--default{{ end }}">
-    {{- range .Pages -}}
-      {{/*  TODO Cleanup figma and reduce number of program layout */}}
-      {{ if $programs_options }}
-        {{ partial "programs/partials/program.html" (dict
-          "program" .
-          "options" $programs_options
-        ) }}
-      {{ else }}
-        <li itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
-          {{- $title := safeHTML .Title -}}
-          {{/*  TODO: check title class relevance */}}
-          <a href="{{ .Permalink }}" itemprop="url" class="title" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">
-            {{- $title -}}
-          </a>
-          {{ if .Params.summary }}
-            <div class="description" itemprop="abstract">
-              {{- safeHTML .Params.summary -}}
-            </div>
-          {{ end }}
-        </li>
-      {{- end -}}
-    {{- end -}}
+  <ol class="{{ $class }}">
+    {{ range .Pages }}
+      {{ partial "programs/partials/program.html" (dict
+        "program" .
+        "heading_level" 2
+        "options" site.Params.diplomas.single.programs.options
+        "layout" $layout
+      ) }}
+    {{ end }}
   </ol>
 </div>

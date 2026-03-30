@@ -90,26 +90,13 @@ ul.diplomas
 .diplomas__term
     .blocks + .container
         margin-bottom: $spacing-6 // If blocks are present, add space before footer
-    ol.programs--default
-        li
-            @include grid(2, desktop)
-            align-items: start
-            position: relative
-            a.title
-                @include icon(arrow-right-line, after, true)
-                    opacity: 0
-                    transition: opacity $opacity-duration
-                @include stretched-link(before)
-                position: initial
-                &:hover
-                    &::after
-                        opacity: 1
-                @include media-breakpoint-down(desktop)
-                    margin-right: $spacing-2
-                    &::after
-                        align-self: center
-                        bottom: unset
-                        position: relative
-                        margin-left: $spacing-1
-                    + div
-                        margin-top: $spacing-2
+    @include media-breakpoint-up(desktop)
+        ol.programs:not(.with-images)
+            .program-content
+                flex-direction: row
+                gap: var(--grid-gutter)
+                .program-title
+                    width: columns(6)
+                    flex-grow: 0
+                .program-summary
+                    width: columns(6)
