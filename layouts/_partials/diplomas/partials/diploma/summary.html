@@ -1,3 +1,5 @@
-<div class="description">
-  {{- .Params.summary | safeHTML -}}
-</div>
+{{ with .Params.summary }}
+  <div class="description">
+    {{ . | safeHTML }}
+  </div>
+{{ end }}

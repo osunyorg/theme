@@ -1,8 +1,13 @@
 <li class="diploma">
   {{ partial "diplomas/partials/diploma/title.html" . }}
 
-  <div class="content">
-    {{ partial "diplomas/partials/diploma/summary.html" . }}
-    {{ partial "diplomas/partials/diploma/programs.html" .Params.programs }}
-  </div>
+  {{ if or .Params.programs .Params.summary }}
+    <div class="content">
+      {{ partial "diplomas/partials/diploma/summary.html" . }}
+      {{ if .Params.programs }}
+        {{ partial "diplomas/partials/diploma/programs.html" .Params.programs }}
+      {{ end }}
+    </div>
+  {{ end }}
+
 </li>
