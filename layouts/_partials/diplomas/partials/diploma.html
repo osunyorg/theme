@@ -1,0 +1,34 @@
+<li class="diploma">
+  {{ partial "diplomas/partials/diploma/title.html" . }}
+
+  <div class="content">
+    {{ partial "diplomas/partials/diploma/summary.html" . }}
+
+    <ol class="programs">
+      {{- range .Params.programs -}}
+        {{- template "programsList" . -}}
+      {{- end -}}
+    </ol>
+  </div>
+</li>
+
+
+{{- define "programsList" -}}
+  <li>
+    <a href="{{ .permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
+      {{- safeHTML .label -}}
+    </a>
+    <ol>
+      {{- range .children -}}
+        <li>
+          <a href="{{ .permalink }}" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .label)) }}">
+            {{- safeHTML .label -}}
+          </a>
+          {{ if .children }}
+            {{- template "programsList" . -}}
+          {{ end }}
+        </li>
+      {{ end }}
+    </ol>
+  </li>
+{{- end -}}
