@@ -11,29 +11,14 @@
       {{ $path = . }}
     {{ end }}
     {{ $page := site.GetPage $path }}
-
     {{ with $page }}
       {{ if or $options.summary $options.image }}
-        {{ $class := partial "pages/partials/page/helpers/GetClass" (dict 
-          "options" $options
-          "page" .
-        ) }}
         <li>
-          <article class="{{ $class }}">
-            <div class="page-content">
-              {{ partial "pages/partials/page/core.html" (dict
-                "page" .
-                "heading_level" $heading_level
-                "options" $options
-              ) }}
-            </div>
-            {{ if $options.image }}
-              {{ partial "pages/partials/page/media.html" (dict 
-                "image" .Params.image
-                "layout" "list"
-              ) }}
-            {{ end }}
-          </article>
+          {{ partial "pages/partials/page.html" (dict 
+            "page" .
+            "options" $options
+            "heading_level" $heading_level
+          )}}
         </li>
       {{ else }}
         <li class="page">
@@ -42,6 +27,6 @@
           </a>
         </li>
       {{ end }}
-    {{- end -}}
+    {{ end }}
   {{ end }}
 </ul>
