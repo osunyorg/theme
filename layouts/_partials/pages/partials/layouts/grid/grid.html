@@ -1,37 +1,26 @@
 {{ $options := .options }}
 {{ $heading_level := .heading_level }}
-{{ with .pages }}
-  <ul class="pages pages--grid">
-    {{ range . }}
-      {{/*  Check if . is a map or page url, necessary when pages/list is called outside block context */}}
-      {{- $path := false -}}
-      {{ if reflect.IsMap . }}
-        {{ $path = .path }}
-      {{ else }}
-        {{ $path = . }}
-      {{ end }}
-      {{ $page := site.GetPage $path }}
-      {{ with $page }}
-        {{ $class := partial "pages/partials/page/helpers/GetClass" (dict
-          "options" $options
+
+<ul class="pages pages--grid">
+  {{ range .pages }}
+    {{ $class := partial "pages/partials/page/helpers/GetClass" (dict
+      "options" $options
+      "page" .
+    ) }}
+    <li>
+      <article class="{{ $class }}">
+        {{ partial "pages/partials/page/core.html" (dict
           "page" .
+          "heading_level" $heading_level
+          "options" $options
         ) }}
-        <li>
-          <article class="{{ $class }}">
-            {{ partial "pages/partials/page/core.html" (dict
-              "page" .
-              "heading_level" $heading_level
-              "options" $options
-            ) }}
-            {{ if $options.image }}
-              {{ partial "pages/partials/page/media.html" (dict 
-                "image" .Params.image
-                "layout" "grid"
-              ) }}
-            {{ end }}
-          </article>
-        </li>
-      {{ end }}
-    {{ end }}
-  </ul>
-{{ end }}
+        {{ if $options.image }}
+          {{ partial "pages/partials/page/media.html" (dict 
+            "image" .Params.image
+            "layout" "grid"
+          ) }}
+        {{ end }}
+      </article>
+    </li>
+  {{ end }}
+</ul>

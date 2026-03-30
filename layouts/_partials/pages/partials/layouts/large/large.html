@@ -3,30 +3,27 @@
 
 <ul class="pages pages--large">
   {{ range .pages }}
-    {{ $page := site.GetPage .path }}
-    {{ with $page }}
-      {{ $class := partial "pages/partials/page/helpers/GetClass" (dict 
-        "options" $options
-        "page" .
-      ) }}
-      <li>
-        <article class="{{ $class }}">
-          <div class="page-content">
-            {{ partial "pages/partials/page/core.html" (dict
-              "page" .
-              "heading_level" $heading_level
-              "options" $options
-            ) }}
-            {{ partial "pages/partials/page/more.html" . }}
-          </div>
-          {{ if $options.image }}
-            {{ partial "pages/partials/page/media.html" (dict 
-              "image" .Params.image
-              "layout" "large"
-            ) }}
-          {{ end }}
-        </article>
-      </li>
-    {{ end }}
+    {{ $class := partial "pages/partials/page/helpers/GetClass" (dict 
+      "options" $options
+      "page" .
+    ) }}
+    <li>
+      <article class="{{ $class }}">
+        <div class="page-content">
+          {{ partial "pages/partials/page/core.html" (dict
+            "page" .
+            "heading_level" $heading_level
+            "options" $options
+          ) }}
+          {{ partial "pages/partials/page/more.html" . }}
+        </div>
+        {{ if $options.image }}
+          {{ partial "pages/partials/page/media.html" (dict 
+            "image" .Params.image
+            "layout" "large"
+          ) }}
+        {{ end }}
+      </article>
+    </li>
   {{ end }}
 </ul>
