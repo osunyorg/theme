@@ -1,26 +1,11 @@
 {{ $paginator := .paginator }}
 {{ $context := .context }}
-{{ $show_page_number := false }}
 {{/* Number of links on either side of the current page */}}
-{{ $adjacent_links := 1 }}
-{{ $max_links := 3 }}
-{{ $lower_limit := 2 }}
-{{ $upper_limit := (sub $paginator.TotalPages $adjacent_links) }}
-{{ if gt $paginator.TotalPages $max_links }}
-  {{ if le $paginator.PageNumber $lower_limit }}
-    {{ if le $context.PageNumber $max_links }}
-      {{ $show_page_number = true }}
-    {{ end }}
-  {{ else if ge $paginator.PageNumber $upper_limit }}
-    {{ if gt $context.PageNumber (sub $paginator.TotalPages $max_links) }}
-      {{ $show_page_number = true }}
-    {{ end }}
-  {{ else if ge $context.PageNumber (sub $paginator.PageNumber $adjacent_links) }}
-    {{ if le $context.PageNumber (add $paginator.PageNumber $adjacent_links) }}
-      {{ $show_page_number = true }}
-    {{ end }}
-  {{ end }}
-{{ else }}
-  {{ $show_page_number = true }}
-{{ end }}
+{{ $slots := 3 }}
+{{ $min := math.Max 1 (sub $paginator.PageNumber 1) }}
+{{ $max := add $min $slots }}
+{{ $show_page_number := and 
+  (ge $context.PageNumber $min)
+  (lt $context.PageNumber $max)
+}}
 {{ return $show_page_number }}
