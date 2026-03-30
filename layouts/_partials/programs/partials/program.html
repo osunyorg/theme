@@ -16,8 +16,8 @@
     ) }}
   </div>
 
-  {{ if and $options.contact $program.Params.roles }}
-    {{ partial "programs/partials/program/core/contact.html" . }}
+  {{ if $options.contact }}
+    {{ partial "programs/partials/program/contact.html" $program }}
   {{ end }}
 
   {{ if and $program.Params.image $options.image }}
