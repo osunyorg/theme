@@ -1,37 +1,23 @@
 {{ $page := .page }}
-{{ $class := "page" }}
-{{ $custom_class := "" }}
 {{ $options := .options }}
 {{ $layout := .layout | default "grid"}}
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-  "level" .heading_level
-  "attributes" "class='page-title'"
-) }}
-
-{{ if .Params.bodyclass }}
-  {{ $class = printf "%s page-%s" $class .Params.bodyclass }}
-{{ end }}
+{{ $heading_level := .heading_level }}
 {{ $class := partial "pages/partials/page/helpers/GetClass" . }}
 {{ with $page }}
   <article class="{{ $class }}">
     <div class="page-content">
-      {{ $heading_tag.open }}
-        <a href="{{ .Permalink }}">
-          {{- safeHTML .Title -}}
-        </a>
-      {{ $heading_tag.close }}
+      {{ partial "pages/partials/page/heading.html" (dict
+        "item" .
+        "level" $heading_level
+        "options" $options
+      ) }}
+      {{ partial "pages/partials/page/hook-after-title.html" . }}
+      {{ if $options.summary }}
+        {{ partial "pages/partials/page/summary.html" . }}
+      {{ end }}
 
-      {{- partial "pages/partials/page/hook-after-title.html" . -}}
-
-      {{- with and $options.summary .Params.summary }}
-        {{ . | safeHTML }}
-      {{ end -}}
-
-      {{ if and $options.categories .Params.taxonomies }}
-        {{ partial "commons/categories" ( dict
-          "context" .
-          "kind" "page"
-        ) }}
+      {{ if $options.categories }}
+        {{ partial "pages/partials/page/categories.html" . }}
       {{ end }}
     </div>
     {{ if $options.image }}
@@ -40,6 +26,6 @@
         "layout" $layout
         "type" "page"
       ) }}
-    {{- end -}}
+    {{ end }}
   </article>
 {{ end }}
