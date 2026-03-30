@@ -1,15 +1,24 @@
-{{ $paginator := .paginator }}
-{{ $context := .context }}
-{{/* Number of links on either side of the current page */}}
-{{ $slots := 3 }}
-{{ $min := math.Max 1 (sub $paginator.PageNumber 1) }}
-{{ if not $context.HasNext }}
-  {{/* Dernière page, 2 créneaux à gauche */}}
-  {{/* $min = sub $paginator.PageNumber $slots */}}
+{{/* La page en cours de rendu */}}
+{{ $currentPage := .currentPage }}
+{{/* La page à afficher (ou pas) */}}
+{{ $testedPage := .testedPage }}
+{{ $totalPages := .totalPages }}
+{{ $slots := .slots }}
+{{/* Une moitié à gauche, une moitié à droite (sauf les bords !)*/}}
+{{ $slotsDivided := div $slots 2 }}
+{{ $min := sub $currentPage $slotsDivided }}
+{{ if lt $min 1 }}
+  {{/* Pas trop à gauche */}}
+  {{ $min = 1 }}
 {{ end }}
 {{ $max := add $min $slots }}
+{{ if gt $max $totalPages }}
+  {{/* Pas trop à droite */}}
+  {{ $max = add $totalPages 1 }}
+  {{ $min = sub $max $slots }}
+{{ end }}
 {{ $show_page_number := and 
-  (ge $context.PageNumber $min)
-  (lt $context.PageNumber $max)
+  (ge $testedPage $min)
+  (lt $testedPage $max)
 }}
 {{ return $show_page_number }}
