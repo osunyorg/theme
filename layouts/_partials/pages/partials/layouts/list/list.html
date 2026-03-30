@@ -1,8 +1,5 @@
 {{ $options := .options }}
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-  "level" ( .heading_level | default 3 )
-  "attributes" "class='page-title'"
-) }}
+{{ $heading_level := .heading_level | default 3 }}
 
 <ul class="pages pages--list list {{- if and (not $options.summary) (not $options.image) }} title-only {{- end }}">
   {{ range .pages }}
@@ -17,32 +14,19 @@
 
     {{ with $page }}
       {{ if or $options.summary $options.image }}
+        {{ $class := partial "pages/partials/page/helpers/GetClass" (dict 
+          "options" $options
+          "page" .
+        ) }}
         <li>
-          <article class="page">
+          <article class="{{ $class }}">
             <div class="page-content">
-              {{ $heading_tag.open }}
-                <a href="{{- .Permalink -}}">
-                  {{- safeHTML .Title -}}
-                </a>
-              {{ $heading_tag.close }}
-
-              {{- partial "pages/partials/page/hook-after-title.html" . -}}
-
-              {{ if and $options.summary .Params.summary }}
-                {{ partial "commons/summary/helpers/GetTruncated" (dict 
-                  "summary" .Params.summary
-                  "kind" "pages"
-                ) }}
-              {{ end }}
-
-              {{ if and $options.categories .Params.taxonomies }}
-                {{ partial "commons/categories" (dict
-                  "context" .
-                  "kind" "page"
-                ) }}
-              {{ end }}
+              {{ partial "pages/partials/page/core.html" (dict
+                "page" .
+                "heading_level" $heading_level
+                "options" $options
+              ) }}
             </div>
-
             {{ if $options.image }}
               {{ partial "pages/partials/page/media.html" (dict 
                 "image" .Params.image

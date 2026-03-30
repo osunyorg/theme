@@ -6,25 +6,16 @@
 {{ with $page }}
   <article class="{{ $class }}">
     <div class="page-content">
-      {{ partial "pages/partials/page/heading.html" (dict
-        "item" .
-        "level" $heading_level
+      {{ partial "pages/partials/page/core.html" (dict
+        "page" .
+        "heading_level" $heading_level
         "options" $options
       ) }}
-      {{ partial "pages/partials/page/hook-after-title.html" . }}
-      {{ if $options.summary }}
-        {{ partial "pages/partials/page/summary.html" . }}
-      {{ end }}
-
-      {{ if $options.categories }}
-        {{ partial "pages/partials/page/categories.html" . }}
-      {{ end }}
     </div>
     {{ if $options.image }}
-      {{ partial "pages/partials/page/media.html" (dict 
+      {{ partial "pages/partials/page/media.html" (dict
         "image" .Params.image
         "layout" $layout
-        "type" "page"
       ) }}
     {{ end }}
   </article>

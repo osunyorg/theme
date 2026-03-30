@@ -1,5 +1,12 @@
 {{ $class := "page" }}
 
+{{ if .page.Params.image }}
+  {{ $direction := partial "commons/image/helpers/GetDirection" .page.Params.image }}
+  {{ $class = printf "%s %s" $class $direction }}
+{{ else }}
+  {{ $class = printf "%s without-image" $class }}
+{{ end }}
+
 {{ if .page.Params.bodyclass }}
   {{ $class = printf "%s page-%s" $class .Params.bodyclass }}
 {{ end }}
