@@ -8,10 +8,7 @@
 
 {{/*  TODO: remove when option is added to the block  */}}
 {{ if or site.Params.programs.index.options.categories .options.categories }}
-  {{ partial "commons/categories.html" (dict
-    "context" .
-    "kind" "program"
-  ) }}
+  {{ partial "programs/partials/program/core/categories.html" .program }}
 {{ end }}
 
 {{ if .options.button }}
