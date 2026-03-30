@@ -20,10 +20,6 @@
   {{ if and $is_large $options.summary }}
     {{ $block_class = printf "%s block-with-long-text" $block_class }}
   {{ end }}
-
-  {{ if not $options.image }}
-    {{ $block_class = printf "%s without-photo" $block_class }}
-  {{ end }}
 {{ end }}
 
 {{ return $block_class }}
