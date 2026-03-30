@@ -3,6 +3,10 @@
 {{/* Number of links on either side of the current page */}}
 {{ $slots := 3 }}
 {{ $min := math.Max 1 (sub $paginator.PageNumber 1) }}
+{{ if not $context.HasNext }}
+  {{/* Dernière page, 2 créneaux à gauche */}}
+  {{/* $min = sub $paginator.PageNumber $slots */}}
+{{ end }}
 {{ $max := add $min $slots }}
 {{ $show_page_number := and 
   (ge $context.PageNumber $min)
