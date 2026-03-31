@@ -1,6 +1,3 @@
-{{ $cropValues := slice "top" "left" "right" "bottom" "center" }}
-{{ $scaleValues := slice "2" "3" }}
-
 {{/*  Todo : simplify usage with only media  */}}
 {{ $url := .url }}
 {{ if .media }}
@@ -8,56 +5,30 @@
 {{ end }}
 {{ $parsedUrl := urls.Parse $url }}
 
+{{ $crop := partial "commons/image/helpers/get-url/osuny/GetCrop" (dict
+  "crop" .crop
+) }}
+{{ $scale := partial "commons/image/helpers/get-url/osuny/GetScale" (dict
+  "scale" .scale
+) }}
 {{ $pathParts := split $parsedUrl.Path "/" }}
 {{ $lastIndex := sub (len $pathParts) 1 }}
 {{ $filename := index $pathParts $lastIndex }}
 {{ $pathParts = first $lastIndex $pathParts }}
-
 {{ $baseFilename := strings.TrimSuffix (path.Ext $filename) $filename }}
 {{ $baseFilename = delimit (slice $baseFilename .size) "_" }}
-
-{{ $crop := "" }}
-{{ if .crop }}
-  {{ if eq (string .crop) "true" }}
-    {{ $crop = "center" }}
-  {{ else }}
-    {{ range $cropValues }}
-      {{ if eq .crop . }}
-        {{ $crop = . }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-{{ if ne $crop "" }}
-  {{ $baseFilename = delimit (slice $baseFilename $crop) "_crop_" }}
-{{ end }}
-
-{{ $scale := "" }}
-{{ if .scale }}
-  {{ $rawStringScale := string .scale }}
-  {{ range $scaleValues }}
-    {{ if eq $rawStringScale . }}
-      {{ $scale = . }}
-    {{ end }}
-  {{ end }}
-{{ end }}
 {{ if ne $scale "" }}
   {{ $baseFilename = delimit (slice $baseFilename "@" $scale "x") "" }}
 {{ end }}
-
 {{ $pathParts = $pathParts | append $baseFilename }}
 {{ $joinedPath := path.Join $pathParts }}
 
-{{ $fileExtension := "" }}
-{{ if .format }}
-  {{ $fileExtension = delimit (slice "." .format) "" }}
-{{ else }}
-  {{ $fileExtension = path.Ext $filename }}
-{{ end }}
+{{ $fileExtension := partial "commons/image/helpers/get-url/osuny/GetExtension" (dict
+  "format" .format
+  "filename" $filename
+) }}
 
 {{ $domain := printf "%s://%s/" $parsedUrl.Scheme $parsedUrl.Host }}
-
 {{ $resultSlice := slice $domain $joinedPath $fileExtension }}
 {{ $result := delimit $resultSlice "" }}
-
 {{ return $result }}

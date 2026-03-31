@@ -1,0 +1,20 @@
+{{ $image := partial "commons/image/helpers/GetUrl" (dict
+  "media" .image
+  "size" "1200"
+) }}
+<!-- Facebook Meta Tags -->
+<meta property="og:title" content="{{ .title }}">
+<meta property="og:description" content="{{ .description }}">
+{{ with $image }}
+  <meta property="og:image" content="{{ . }}">
+{{ end }}
+<meta property="og:url" content="{{ .url }}">
+<meta property="og:type" content="website">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:title" content="{{ .title }}">
+<meta name="twitter:description" content="{{ .description }}">
+{{ with $image }}
+  <meta name="twitter:image" content="{{ . }}">
+{{ end }}
+<meta name="twitter:card" content="summary_large_image">

@@ -1,0 +1,19 @@
+{{ $translations := .translations }}
+<ul>
+  {{ range site.Languages }}
+    {{ $language := . }}
+    {{ $url := printf "/%s/" .Lang }}
+    {{ range $translations }}
+      {{ if eq .Lang $language.Lang }}
+        {{ $url = .Permalink }}
+      {{ end }}
+    {{ end }}
+    {{ if not (eq $language site.Language) }}
+      <li>
+        <a href="{{ $url }}" lang="{{ $language }}" hreflang="{{ $language }}" >
+          {{- $language.LanguageName -}}
+        </a>
+      </li>
+    {{ end }}
+  {{ end }}
+</ul>

@@ -1,1 +1,7 @@
-{{ partial "commons/item/media.html" . }}
+{{ if .location.Params.image }}
+  {{ partial "commons/item/media.html" (dict 
+    "image" .location.Params.image
+    "layout" .layout
+    "type" "locations"
+  ) }}
+{{ end }}

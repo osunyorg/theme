@@ -1,0 +1,13 @@
+{{ $post_class := "post" }}
+
+{{ if and .context.Params.image .options.image }}
+  {{ $direction := partial "commons/image/helpers/GetDirection" .context.Params.image }}
+  {{ $post_class = printf "%s %s" $post_class $direction }}
+{{ else }}
+  {{ $post_class = printf "%s %s" $post_class "without-image" }}
+{{ end }}
+{{ if .context.Params.federation.active }}
+  {{ $post_class = printf "%s is-federated" $post_class }}
+{{ end }}
+
+{{ return $post_class }}

@@ -14,7 +14,9 @@
   {{ end }}
 
   <div class="container">
-    {{ partial "locations/partials/locations.html" . }}
+    {{ partial "locations/partials/locations.html" (dict
+      "locations" .Paginator.Pages
+    ) }}
     {{ partial "commons/section/pagination.html" . }}
   </div>
   {{ if site.Params.locations.index.map }}

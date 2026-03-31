@@ -1,24 +1,17 @@
-{{- $block := .block -}}
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
+{{ $block := .block }}
+{{ $block_class := partial "blocks/templates/persons/helpers/GetClass" .block }}
 
-{{- with .block.data -}}
-  <div class="block block-papers {{- if $title }} block-with-title {{- end -}}">
+{{ with .block.data }}
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        <ul class="papers">
-          {{ range .papers -}}
-            {{ with site.GetPage .path }}
-              {{ partial "papers/partials/paper.html" (dict 
-                "paper" .
-                "actions" false
-                "heading_level" $block.ranks.children
-              ) }}
-            {{ end }}
-          {{ end}}
-        </ul>
+        {{ $papers := partial "helpers/objects/GetFromPathSlice" .papers }}
+        {{ partial "papers/partials/papers.html" (dict
+          "papers" $papers
+          "with_actions" false
+          "heading_level" $block.ranks.children
+        ) }}
       </div>
     </div>
   </div>

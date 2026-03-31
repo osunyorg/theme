@@ -1,0 +1,13 @@
+{{ $media := "" }}
+{{ with .media }}
+  {{ $media = printf "media=\"(%s)\"" . }}
+{{ end }}
+{{ if .size }}
+  <source {{ $media | safeHTMLAttr }}
+    type="image/webp"
+    srcset="{{ partial "commons/image/helpers/GetUrl" (dict "url" .url "size" .size "format" "webp" "crop" .crop ) }},
+            {{ partial "commons/image/helpers/GetUrl" (dict "url" .url "size" .size "format" "webp" "scale" 2 "crop" .crop) }} 2x">
+  <source {{ $media | safeHTMLAttr }}
+    srcset="{{ partial "commons/image/helpers/GetUrl" (dict "url" .url "size" .size "crop" .crop ) }},
+            {{ partial "commons/image/helpers/GetUrl" (dict "url" .url "size" .size "scale" 2 "crop" .crop) }} 2x">
+{{ end }}

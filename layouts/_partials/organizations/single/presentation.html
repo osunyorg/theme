@@ -1,0 +1,6 @@
+{{ $text := partial "helpers/text/GetFromHTML" .Params.text }}
+{{ with $text }}
+  <div class="organization-presentation rich-text">
+    {{ safeHTML . }}
+  </div>
+{{ end }}

@@ -2,16 +2,8 @@
 {{ $layout := .layout | default "list" }}
 {{ $heading_level := .heading_level }}
 {{ $options := .options }}
+{{ $class := partial "journals/partials/journal/helpers/GetClass" . }}
 {{ with $journal }}
-  {{ $class := "journal" }}
-  {{ if and .Params.image $options.image }}
-    {{ $class = printf "%s journal--with-image" $class }}
-    {{ $image_direction := partial "commons/image/helpers/GetDirection" .Params.image }}
-    {{ $class = printf "%s %s" $class $image_direction }}
-  {{ end }}
-
-  {{ $dates := .Params.dates }}
-
   <article class="{{ $class }}" 
       itemscope itemtype="https://schema.org/Periodical">
     <div class="journal-content">
@@ -21,14 +13,10 @@
         "level" $heading_level
         "itemprop" "title"
       ) }}
-
-      {{ if and $options.summary .Params.summary }}
-        <div class="journal-description" itemprop="abstract">
-          {{ partial "journals/partials/journal/summary.html" . }}
-        </div>
+      {{ if $options.summary }}
+        {{ partial "journals/partials/journal/summary.html" . }}
       {{ end }}
     </div>
-
     {{ if $options.image }}
       {{ partial "journals/partials/journal/media.html" (dict 
         "image" $journal.Params.image
