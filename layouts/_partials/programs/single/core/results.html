@@ -1,0 +1,24 @@
+{{- if or (partial "helpers/text/GetFromHTML" .Params.opportunities) (partial "helpers/text/GetFromHTML" .Params.results) -}}
+<section id="{{ anchorize ( i18n "programs.toc.results" ) }}">
+  <div class="container">
+    <div class="content">
+      <h2>{{ i18n "programs.toc.results" }}</h2>
+      <div>
+        {{- if partial "helpers/text/GetFromHTML" .Params.opportunities -}}
+          <section class="rich-text" id="{{ anchorize (i18n "programs.opportunities") }}">
+            <h3>{{ i18n "programs.opportunities" }}</h3>
+            {{- safeHTML .Params.opportunities -}}
+          </section>
+        {{- end -}}
+
+        {{- if partial "helpers/text/GetFromHTML" .Params.results -}}
+          <section class="rich-text" id="{{ anchorize (i18n "programs.results") }}">
+            <h3>{{ i18n "programs.results" }}</h3>
+            {{- safeHTML .Params.results -}}
+          </section>
+        {{- end -}}
+      </div>
+    </div>
+  </div>
+</section>
+{{- end -}}

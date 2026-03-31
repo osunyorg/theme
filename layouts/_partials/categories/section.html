@@ -1,0 +1,23 @@
+{{ partial "categories/section/hero.html" . }}
+
+<div class="document-content">
+  {{ partial "toc/container.html" (dict
+    "context" .
+  ) }}
+
+  {{ partial "categories/section/summary.html" (dict
+    "context" .
+    "block_wrapped" true
+  ) }}
+
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
+    {{ partial "contents/list.html" (dict
+      "context" .
+      "contents" .Params.contents
+    ) }}
+  {{ end }}
+
+  <div class="container">
+    {{ partial "categories/section/categories.html" . }}
+  </div>
+</div>

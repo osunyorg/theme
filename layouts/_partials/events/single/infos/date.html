@@ -1,0 +1,8 @@
+{{ with .Params.dates }}
+  {{ with .computed }}
+    <li class="event-date">
+      <span>{{ i18n "commons.date.one" }}</span>
+      {{ safeHTML .two_lines.long }}
+    </li>
+  {{ end }}
+{{ end }}

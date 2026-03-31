@@ -1,0 +1,19 @@
+{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
+
+{{ with .block }}
+  {{ $title := .title }}
+  {{ $slug := .slug }}
+  {{ $is_collapsed := eq .data.layout "collapsed" }}
+
+  {{ with .data }}
+    <div id="{{- $slug -}}" class="heading container {{ $block_class }}"
+      {{ if $is_collapsed }}
+        aria-controls="collapse-{{- $slug -}}"
+        aria-expanded="false"
+        role="button"
+        tabindex="0"
+      {{ end }}>
+      <h2>{{ safeHTML $title }}</h2>
+    </div>
+  {{ end }}
+{{ end }}

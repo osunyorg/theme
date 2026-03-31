@@ -1,0 +1,30 @@
+{{- $block := .block -}}
+{{- $block_title := .block.title -}}
+{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
+{{- $layout := .block.data.layout | default "grid" -}}
+
+{{- with .block.data -}}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ if eq .mode "categories" }}
+          {{ with site.Taxonomies.projects_categories }}
+            {{ $categories := partial "helpers/objects/GetPathSlice" . }}
+            {{ partial "categories/partials/layouts/cards/cards.html" (dict
+              "categories" $categories
+              "heading_level" $block.ranks.base
+              "options" .options
+            ) }}
+          {{ end }}
+        {{ else if .projects }}
+          {{- partial (printf "projects/partials/layouts/%s/%s.html" $layout $layout) (dict 
+            "projects" .projects
+            "heading_level" $block.ranks.children
+            "options" .options
+          ) }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{- end -}}

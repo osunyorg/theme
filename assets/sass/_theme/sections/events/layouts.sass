@@ -1,11 +1,15 @@
 .events
+    .event-hours
+        time
+            display: inline
+    .event-status
+        @include meta
     &--list
         > li
             &:where(:not(:last-child))
                 border-bottom: var(--border-width) solid var(--color-border)
                 margin-bottom: $spacing-3
                 padding-bottom: $spacing-3
-        
         .event
             display: flex
             flex-direction: column
@@ -53,7 +57,7 @@
                         + span
                             &::before
                                 display: none
-                &-time
+                &-hours
                     margin-top: $spacing-2
                 &-content
                     @include grid(10, desktop, 0)
@@ -62,8 +66,8 @@
                     width: columns(10)
                     > .event-title, 
                     > hgroup, 
-                    .event-categories, 
-                    .event-description, 
+                    .event-categories,
+                    .event-description,
                     .event-parent,
                     .event-status
                         grid-column: 5 / 11
@@ -81,7 +85,7 @@
                 &-schedule
                     margin-top: $spacing-1
                     margin-bottom: $spacing-2
-                &-time
+                &-hours
                     display: inline
                 .media
                     grid-column: 2 span
@@ -94,9 +98,18 @@
             position: relative
             &-schedule
                 @include meta
+                align-items: baseline
+                display: flex
+                gap: $spacing-2
+                justify-content: space-between
                 margin-top: $spacing-2
+                .event-hours
+                    flex-shrink: 0
             &-description
                 margin-top: $spacing-2
+            &-content
+                .event-title, hgroup
+                    @include h3
             .media
                 margin-bottom: $spacing-2
                 order: -1
@@ -116,8 +129,6 @@
             &-dates
                 @include h4
                 margin-top: $spacing-2
-                + .event-time
-                    margin-top: $spacing-1
             .more
                 margin-top: $spacing-3
             .media img
@@ -171,7 +182,7 @@
             &-place
                 @include meta
             &-timeslot
-                * + * 
+                > * + *
                     margin-top: $spacing-1
         .events-date
             ol > li
@@ -180,7 +191,7 @@
             .events-scheduled > li + li,
             .event-children > li
                 border-top: var(--border-width) solid var(--color-border)
-            + .events-date 
+            + .events-date
                 margin-top: var(--heading-margin-bottom)
         @include media-breakpoint-down(desktop)
             .events-date

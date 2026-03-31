@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode | default "fr" }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {{ partial "head/preconnect.html" . }}
+    {{ partial "head/init.html" . }}
+    {{ partial "head/csp.html" }}
+    {{ partial "head/css.html" }}
+    {{ partial "head/seo.html" . }}
+    {{ partial "head/favicons.html" . }}
+    {{ partial "head/rss.html" . }}
+    {{ partial "head/script.html" . }}
+    {{ partial "head/extras.html" . }}
+  </head>
+  <body class="{{ partial "body/helpers/GetBodyclass" . }}">
+    {{- partial "header/accessibility.html" -}}
+    {{- partial "hooks/before-header.html" . -}}
+    {{- partial "header/header.html" . -}}
+    {{- partial "commons/alerts/list.html" }}
+    <main id="main"
+        {{ partial "main/helpers/GetClass" . | safeHTMLAttr }}
+        {{ partial "main/helpers/GetSearchAttribute" . | safeHTMLAttr }}
+        >
+      {{ partial "commons/search/button.html" "fixed" }}
+      {{ block "main" . }}{{ end }}
+      {{ partial "hooks/before-main-end.html" . }}
+    </main>
+    {{ partial "footer/footer.html" . }}
+    {{ partial "commons/lightbox/lightbox.html" . }}
+    {{ partial "commons/search/modal.html" . }}
+    {{ partial "scripts/scripts.html" . }}
+  </body>
+</html>

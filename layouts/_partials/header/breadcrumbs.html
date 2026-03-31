@@ -1,0 +1,33 @@
+{{ $is_extendable := site.Params.breadcrumb.extendable }}
+
+{{ if .Params.breadcrumbs }}
+  <nav class="breadcrumb-nav {{ if $is_extendable }} breadcrumb-nav--extendable{{ end }}" aria-label="{{ i18n "commons.breadcrumb.title" }}">
+
+    {{ if $is_extendable }}
+      <button class="link" aria-controls="breadcrumb" aria-expanded="false" type="button">
+        {{ i18n "commons.breadcrumb.show" }}
+      </button>
+    {{ end }}
+
+    {{- $path := strings.TrimSuffix "/" .RelPermalink -}}
+    {{- $length := len (split $path "/") }}
+    <ol id="breadcrumb"
+        itemscope itemtype="https://schema.org/BreadcrumbList" 
+        class="breadcrumb {{ if $is_extendable }}extendable{{ end }}"
+        {{ if $is_extendable }} data-extendable-focus-first="true" {{ end }}
+        >
+      {{ range $index, $item := .Params.breadcrumbs }}
+        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" class="breadcrumb-item{{- if not $item.path }} active{{ end }}"{{- if not $item.path }} aria-current="page"{{ end }}>
+          {{- if $item.path -}}
+            <a itemprop="item" href="{{ $item.path }}">
+          {{- end -}}
+            <span itemprop="name">{{- safeHTML $item.title -}}</span>
+          {{- if $item.path -}}
+            </a>
+          {{- end -}}
+          <meta itemprop="position" content="{{- add $index 1 -}}">
+        </li>
+      {{ end }}
+    </ol>
+  </nav>
+{{ end }}

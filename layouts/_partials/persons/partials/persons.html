@@ -1,0 +1,9 @@
+{{ $persons := .Pages | uniq }}
+{{ $paginator := .Paginate ($persons.ByParam "last_name") }}
+
+{{ if not $paginator.Pages }}
+  {{ $is_term := eq .Kind "term" }}
+  <p>{{ i18n (cond $is_term "categories.no_person" "persons.none") }}</p>
+{{ else }}
+  {{ partial "persons/partials/list.html" $paginator.Pages }}
+{{ end }}

@@ -1,0 +1,49 @@
+{{ $program := .program }}
+{{ $options := .options }}
+{{ $layout := .layout | default "list" }}
+<li class="program" itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
+  <div class="program-content">
+    {{ partial "programs/partials/program/heading.html" (dict
+      "item" $program
+      "level" .heading_level
+      "options" $options
+      "itemprop" "name"
+    ) }}
+
+    {{ if $options.diploma }}
+      {{ partial "programs/partials/program/diploma.html" $program }}
+    {{ end }}
+
+    {{ if and $options.summary $program.Params.summary }}
+      {{ partial "programs/partials/program/summary.html" $program }}
+    {{ end }}
+
+    {{/*  TODO: remove when option is added to the block  */}}
+    {{ if or site.Params.programs.index.options.categories $options.categories }}
+      {{ partial "commons/categories.html" (dict
+        "context" $program
+        "kind" "program"
+      ) }}
+    {{ end }}
+
+    {{ if $options.button }}
+      {{ partial "programs/partials/program/more.html" $program }}
+    {{ end }}
+
+    {{ if and $options.logo $program.Params.logo }}
+      {{ partial "programs/partials/program/logo.html" $program }}
+    {{ end }}
+  </div>
+
+  {{ if and $options.contact $program.Params.roles }}
+    {{ partial "programs/partials/program/contact.html" $program }}
+  {{ end }}
+
+  {{ if and $program.Params.image $options.image }}
+    {{ partial "programs/partials/program/media.html" (dict 
+      "image" $program.Params.image
+      "layout" $layout
+      "type" "programs"
+    ) }}
+  {{ end }}
+</li>

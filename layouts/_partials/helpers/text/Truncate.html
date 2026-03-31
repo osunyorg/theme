@@ -1,0 +1,14 @@
+{{ $length := .length }}
+{{ $length_type := printf "%T" $length }}
+{{ $length_is_integer := (or (eq $length_type "uint64") (eq $length_type "int")) }}
+
+{{ if not $length_is_integer }}
+  {{ $length = 0 }}
+{{ end }}
+
+{{ $text := .text | safeHTML }}
+{{ if gt $length 0 }}
+  {{ $text = $text | truncate $length }}
+{{ end }}
+
+{{ return $text }}

@@ -309,7 +309,7 @@ ol.programs--light
                 border-top: var(--border-width) solid var(--color-border)
     .program-related
         .content
-            h2
+            > h2
                 margin-bottom: $spacing-2
             .category-link
                 display: block
@@ -320,6 +320,11 @@ ol.programs--light
             .blocks
                 --block-space-y: 0
                 padding-top: 0
+                .block[class$="--list"]
+                    hgroup,
+                    [class$="-title"],
+                    [class$="-subtitle"]
+                        @include h3
             .projects--list > li:first-child
                 padding-top: 0
     .program-updated

@@ -1,0 +1,28 @@
+{{ if .posts }}
+  {{ $title := i18n "backlinks.posts" .about }}
+  {{ $params := partial "helpers/param/GetLayoutAndOptions" (dict 
+    "param" "persons.single.posts"
+    "default" "posts.index"
+  ) }}
+  {{ partial "blocks/templates/posts.html" (dict
+    "block" (dict
+      "top" (dict
+        "active" true
+        "title" (dict
+          "value" $title
+          "heading" 2
+        )
+      )
+      "template" "posts"
+      "ranks" (dict
+        "base" 2
+        "self" 2
+      )
+      "data" (dict
+        "posts" .posts
+        "layout" $params.layout
+        "options" $params.options
+      )
+    )
+  ) }}
+{{ end }}

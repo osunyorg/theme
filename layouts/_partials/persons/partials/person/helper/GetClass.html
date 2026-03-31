@@ -1,0 +1,7 @@
+{{ $class := "person" }}
+
+{{ if .options.image }}
+  {{ $class = printf "%s with-avatar" $class }}
+{{ end }}
+
+{{ return $class }}

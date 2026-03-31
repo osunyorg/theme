@@ -1,0 +1,16 @@
+{{ if (partial "helpers/text/GetFromHTML" .transcription) }}
+  {{ $id := printf "block-%s-transcription" .html_id }}
+  {{ $title := .title | default ( i18n "commons.accessibility.transcription" ) }}
+  <div class="transcription">
+    <details id="{{- $id -}}">
+      <summary 
+        aria-controls="{{- $id -}}" 
+        aria-expanded="false" 
+        {{ with .described_by -}}aria-describedby="{{ . }}"{{- end }}>
+        {{ $title }}
+      </summary>
+      {{- $transcription := safeHTML .transcription -}}
+      {{ safeHTML $transcription }}
+    </details>
+  </div>
+{{ end }}

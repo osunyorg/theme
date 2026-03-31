@@ -1,0 +1,34 @@
+{{ partial "events/section/hero.html" . }}
+<div class="document-content">
+  {{ partial "events/section/summary.html" (dict
+    "with_container" true
+    "context" .
+  ) }}
+
+  {{ partial "contents/list.html" (dict
+    "context" .
+    "contents" .Params.contents
+  ) }}
+
+  {{ partial "taxonomies/section/container.html" . }}
+
+  {{ if site.Params.events.index.highlight_exhibitions.active }}
+    {{ $exhibitions := where .Pages "Section" "exhibitions" }}
+    {{ partial "events/section/exhibitions.html" $exhibitions }}
+  {{ end }}
+
+  <div class="container">
+    {{ $paginator := partial "events_categories/helpers/GetPaginator" . }}
+
+    {{ if not $paginator.PageGroups }}
+      <p class="none">{{ i18n "events.none" }}</p>
+    {{ else }}
+      {{ partial "events/partials/agenda.html" (dict
+        "options" site.Params.events.index.options
+        "agenda" $paginator.PageGroups
+      ) }}
+    {{ end }}
+
+    {{ partial "commons/section/pagination.html" . }}
+  </div>
+</div>

@@ -1,0 +1,33 @@
+{{ $block := .block }}
+{{ $layout := $block.data.layout }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+
+{{ with .block.data }}
+  {{ $options := .options }}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ if eq $layout "grid" }}
+          {{ partial "programs/partials/layouts/grid/grid.html" (dict
+            "programs" .programs
+            "options" $options
+            "heading_level" $block.ranks.children
+          ) }}
+        {{ else }}
+          <ol class="programs">
+            {{ range .programs }}
+              {{ $program := site.GetPage .path }}
+              {{ partial "programs/partials/program.html" (dict 
+                "program" $program
+                "heading_level" $block.ranks.children
+                "layout" $layout
+                "options" $options
+              ) }}
+            {{ end }}
+          </ol>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}

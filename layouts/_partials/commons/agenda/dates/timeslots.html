@@ -1,0 +1,34 @@
+{{ $title := .Title }}
+{{ with .Params.time_slots }}
+  <ul id="all-dates" class="extendable-list">
+    {{ range $index, $time_slot := . }}
+      <li class="event-time-slot" itemprop="subEvent" itemscope itemtype="https://schema.org/Event">
+        <meta itemprop="name" content="{{ $title }}">
+        {{ $event_date := $time_slot.start.date | time.Format site.Params.events.single.time_slots.date_format }}
+        <span class="date" itemprop="startDate" content="{{ .start.datetime }}">{{ $event_date | strings.FirstUpper }}</span>
+        <p class="hours">
+          {{ $time_format := ( i18n "commons.time_format" ) }}
+          {{ if $time_slot.start.datetime }}
+            <time datetime="{{ .start.time }}">{{ $time_slot.start.datetime | time.Format $time_format }}</time>
+          {{ end }}
+          {{ if $time_slot.end.datetime }}
+            <time datetime="{{ .end.time }}">{{ $time_slot.end.datetime | time.Format $time_format }}</time>
+          {{ end }}
+        </p>
+        {{ with $time_slot.place }}
+          <span class="location" itemprop="location">{{ . }}</span>
+        {{ end }}
+        {{ if ne .status "archive" }}
+          {{ partial "commons/agenda/dropdown-calendar.html" (dict
+            "index" $index
+            "calendar_links" $time_slot.add_to_calendar
+          ) }}
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+{{ end }}
+
+{{ if gt .Params.time_slots 1 }}
+  <button aria-controls="all-dates" aria-expanded="false" class="btn">{{ i18n (printf "events.more_dates") }}</button>
+{{ end }}

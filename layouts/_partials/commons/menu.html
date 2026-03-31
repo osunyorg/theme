@@ -1,0 +1,35 @@
+{{ $kind := .kind }}
+{{ $menu := partial "GetMenu" $kind }}
+{{ $level := .level | default 1 }}
+{{ $stop := .stop }}
+{{ $items := $menu.items }}
+{{ $options := index site.Params.menu $kind }}
+{{ with .options }}
+  {{ $options = merge $options . }}
+{{ end }}
+{{ $level_options := index $options (printf "level_%d" $level) }}
+{{ $context := .context }}
+
+{{ if $items }}
+  <ul class="{{ with $level }}nav-level-{{ . }}{{ end }} {{ .class }}">
+    {{ range $items }}
+      {{ partial "commons/menu/item.html" (dict
+        "item" .
+        "kind" $kind
+        "options" $options
+        "level" $level
+        "level_options" $level_options
+        "stop" $stop
+        "context" $context
+      ) }}
+    {{ end }}
+    {{ partial "commons/menu/search.html" (dict
+      "kind" $kind
+      "context" $context
+    ) }}
+    {{ partial "commons/menu/i18n.html" (dict
+      "kind" $kind
+      "context" $context
+    ) }}
+  </ul>
+{{ end }}

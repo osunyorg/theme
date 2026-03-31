@@ -1,0 +1,20 @@
+{{ $direction := "" }}
+{{ $index := .index }}
+{{ $options := .options }}
+{{ $image := $options.image }}
+{{ $heading_level := .heading_level }}
+
+{{ $options = merge $options ( dict "with_more" true ) }}
+
+<ul class="posts posts--large {{- if not $image }} without-images{{ end }}">
+  {{ range $post := .posts -}}
+    {{ with site.GetPage .path }}
+      {{ partial "posts/partials/post.html" (dict
+        "post" .
+        "options" $options
+        "heading_level" $heading_level
+        "layout" "large"
+      ) }}
+    {{ end }}
+  {{ end }}
+</ul>

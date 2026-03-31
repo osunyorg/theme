@@ -1,0 +1,10 @@
+{{ range . }}
+  {{ range .categories }}
+    {{ $category := site.GetPage .path }}
+    <category>
+    {{ printf "<![CDATA[" | safeHTML }}
+      {{ $category.Title }}
+    {{ printf "]]>" | safeHTML }}
+    </category>
+  {{ end }}
+{{ end }}

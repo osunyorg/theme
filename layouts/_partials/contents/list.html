@@ -1,0 +1,33 @@
+{{ $context := .context }}
+{{ $prefix := .prefix | default "" }}
+{{ if .contents }}
+  {{ $quantity_of_blocks := len .contents }}
+  {{ $is_collapsed := false }}
+  {{ $is_last_content := false }}
+  <div class="blocks">
+    {{ range $index, $content := .contents }}
+      {{ if and (eq .kind "block") (not (in site.Params.blocks.ignored .html_class) ) }}
+        {{ $is_last_content := eq (add $index 1) $quantity_of_blocks }}
+        {{ $is_title := eq .template "title" }}
+        {{ $is_layout_collapsed := eq .data.layout "collapsed" }}
+        {{ $html_id := printf "%s%d" $prefix $index }}
+        {{ if and $is_title $is_collapsed }}
+          {{ $is_collapsed = false }}
+          {{ partial "contents/collapsed/end.html" }}
+        {{ end }}
+        {{ partial "blocks/template.html" (dict
+          "block" $content
+          "context" $context
+          "html_id" $html_id
+        ) }}
+        {{ if and $is_title $is_layout_collapsed }}
+          {{ $is_collapsed = true }}
+          {{ partial "contents/collapsed/start.html" .slug }}
+        {{ end }}
+        {{ if and $is_collapsed $is_last_content }}
+          {{ partial "contents/collapsed/end.html" }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}

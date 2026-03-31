@@ -1,0 +1,13 @@
+<div class="section-sidebar project-sidebar">
+  <div>
+    {{ if not .Params.design.full_width }}
+      <aside>
+        {{- partial "projects/single/project-infos.html" . -}}
+      </aside>
+    {{ end }}
+
+    {{ partial "toc/container.html" (dict
+      "context" .
+    ) }}
+  </div>
+</div>

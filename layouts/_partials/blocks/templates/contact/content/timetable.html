@@ -1,0 +1,17 @@
+{{ if .block.data.timetable }}
+  {{ $time_size := "full-size" }}
+  {{ $contacts := .block.data.contact_details }}
+  {{ if and (or $contacts.emails.list $contacts.websites.website) $contacts.phone_numbers.list $contacts.social_networks }}
+    {{ $time_size = "reduced" }}
+  {{ end }}
+  <div class="schedule-table {{ $time_size -}}">
+    {{ .heading_items.open }}
+      {{- i18n "commons.contact.schedule" -}}
+    {{ .heading_items.close }}
+    <ul>
+      {{ range .block.data.timetable }}
+        {{ partial "blocks/templates/contact/content/timetable/time_slot.html" . }}
+      {{ end }}
+    </ul>
+  </div>
+{{ end }}

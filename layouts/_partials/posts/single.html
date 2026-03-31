@@ -1,0 +1,34 @@
+{{ partial "posts/single/hero.html" . }}
+
+<div class="document-content" itemscope itemtype="https://schema.org/NewsArticle">
+  <meta itemprop="headline" content="{{ safeHTML .Title }}">
+  <meta itemprop="url" content="{{ .Permalink }}">
+  {{ with .Date }}<meta itemprop="datePublished" content="{{ .Format "2006-01-02T15:04" }}">{{ end }}
+  {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
+
+  {{ partial "posts/single/sidebar.html" . }}
+
+  {{ partial "posts/single/summary.html" (dict
+    "context" .
+    "block_wrapped" true
+  ) }}
+
+  {{ partial "contents/list.html" (dict
+    "context" .
+    "contents" .Params.contents
+  ) }}
+
+  {{ partial "posts/single/after-contents.html" . }}
+
+  {{ if and site.Params.posts.single.options.signature .Params.authors }}
+    {{ partial "posts/single/signature.html" . }}
+  {{ end }}
+
+  {{ partial "commons/single/siblings-navigation.html" (dict
+    "context" .
+    "previous_label" (i18n "posts.previous")
+    "next_label" (i18n "posts.next")
+  ) }}
+
+  {{ partial "hooks/before-document-content-end.html" . }}
+</div>

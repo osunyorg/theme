@@ -11,7 +11,7 @@
         padding: $spacing-2 $spacing-3
         @include media-breakpoint-up(desktop)
             font-size: $toc-title-font-size-desktop
-            padding: $header-nav-padding-y var(--grid-gutter) calc(#{$header-nav-padding-y} + $toc-border-width)
+            padding: $header-nav-padding-y var(--grid-gutter) calc(#{$header-nav-padding-y} + #{$toc-border-width})
             padding: calc((var(--header-height)) / 2 - #{$body-size}) var(--grid-gutter)
             padding-top: 0
             padding-bottom: 0
@@ -31,55 +31,35 @@
                 margin-top: 0
     button
         @include button-reset
-        @include icon-block(close-line, after)
-            margin-right: -14px
+        @include icon(close-line, after)
             font-size: 1.5em
+            margin-left: $spacing-2
         align-items: center
-        border-top: $toc-border-width solid var(--color-border)
         display: flex
-        justify-content: space-between
-        padding: 0 $spacing-3
-        line-height: $body-line-height
+        font-size: $toc-title-font-size
+        position: absolute
+        padding-right: 0
+        right: var(--grid-gutter)
+        @include media-breakpoint-down(desktop)
+            top: pxToRem(11)
+            line-height: var(--body-line-height)
+            span
+                @include sr-only
         @include media-breakpoint-up(desktop)
-            border-top: 0
-            position: absolute
-            padding-right: 0
-            top: 0
-            padding-top: 0
-            padding-bottom: 0
-            line-height: var(--header-height)
-            right: var(--grid-gutter)
-            &::after
-                margin-left: $spacing-2
+            line-height: calc(var(--header-height) - #{$toc-border-width})
+
+.toc-title, .toc-cta, .toc-container button
+    font-family: $toc-title-font-family
+    font-size: $toc-title-font-size
+    line-height: var(--body-line-height)
+    color: $toc-color
+    @include media-breakpoint-up(desktop)
+        font-size: $toc-title-font-size-desktop
 
 .toc-cta
     display: flex
     position: relative
-    @include in-page-with-sidebar
-        display: none
-    @include media-breakpoint-up(desktop)
-        @include container
-        background: var(--color-background)
-        justify-content: end
-        margin-bottom: $spacing-5
-        position: sticky
-        text-align: right
-        top: calc(var(--header-height) * -1)
-        transition: top $toc-sticky-transition
-        z-index: $zindex-toc-cta
-        html:not(.is-scrolling-down) &
-            top: var(--header-height)
-        body.offcanvas-toc &
-            display: flex
-    @include media-breakpoint-down(desktop)
-        border-top: $toc-border-width solid var(--color-border)
-        position: fixed
-        bottom: 0
-        background: $toc-background-color
-        left: 0
-        width: 100%
-        padding: 0 var(--grid-gutter)
-        z-index: $zindex-toc-cta
+    transition: top $toc-sticky-transition
     button
         @include link-icon(menu-3-line)
         border: 0
@@ -91,20 +71,47 @@
             color: $toc-color
             text-overflow: ellipsis
             overflow: hidden
-            @include media-breakpoint-down(desktop)
-                flex: 1
         &::after
             color: $toc-color
             margin-right: $icon-toc-margin-right
             text-align: center
-
-        @include media-breakpoint-down(desktop)
+    @include in-page-with-sidebar
+        display: none
+    @include media-breakpoint-up(desktop)
+        @include container
+        background: var(--color-background)
+        justify-content: end
+        margin-bottom: var(--grid-gutter)
+        position: sticky
+        text-align: right
+        top: calc(var(--header-height) * -1)
+        z-index: $zindex-toc-cta
+        html:not(.is-scrolling-down) &
+            top: var(--header-height)
+        body.offcanvas-toc &
+            display: flex
+    @include media-breakpoint-down(desktop)
+        border-top: $border-width solid var(--color-border)
+        position: fixed
+        top: calc(var(--header-height) * -1)
+        margin-top: 0 !important
+        background: $toc-background-color
+        left: 0
+        width: 100%
+        padding: 0 var(--grid-gutter)
+        z-index: $zindex-toc-cta
+        html.has-menu-sticky:not(.is-scrolling-down) &
+            top: var(--header-height)
+        button
             align-items: center
             display: flex
             gap: space()
             justify-content: space-between
             text-align: left
             width: 100%
+            span
+                flex: 1
+
 
 .toc-container
     // in full width page or under md breakpoint (mobile)
@@ -153,14 +160,6 @@
             margin-bottom: 0
             html.is-scrolling-down &
                 max-height: none
-
-.toc-title, .toc-cta, .toc-container button
-    font-family: $toc-title-font-family
-    font-size: $toc-title-font-size
-    color: $toc-color
-    @include media-breakpoint-up(desktop)
-        font-size: $toc-title-font-size-desktop
-
 .toc
     font-family: $toc-font-family
     line-height: $toc-line-height
