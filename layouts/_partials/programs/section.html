@@ -1,7 +1,6 @@
 {{ partial "programs/section/hero.html" . }}
 <div class="document-content programs-index">
   {{ partial "toc/container.html" (dict
-    "toc" "toc/default.html"
     "context" .
   ) }}
 
@@ -15,25 +14,7 @@
     "contents" .Params.contents
   ) }}
 
-  {{ partial "taxonomies/section-list-container.html" . }}
+  {{ partial "taxonomies/section/container.html" . }}
 
-  <div class="container">
-    {{ partial "diplomas/section/diplomas-select.html" . }}
-    {{/* Toutes les formations... */}}
-    {{ $programs := where .Site.Pages "Section" "programs" }}
-    {{/* mais pas l'accueil des formations... */}}
-    {{ $programs = where $programs "Permalink" "!=" .FirstSection.Permalink }}
-    {{/* et pas non plus les pages enfants (parcours) */}}
-    {{ $programs = where $programs "Params.parent" "eq" nil }}
-    {{ $layout := site.Params.programs.index.layout | default "list" }}
-    <ol class="programs programs--{{ $layout }}">
-      {{- range $programs -}}
-        {{ partial "programs/partials/program.html" (dict 
-          "program" .
-          "heading_level" 2
-          "options" site.Params.programs.index.options
-        ) }}
-      {{- end -}}
-    </ol>
-  </div>
+  {{ partial "programs/section/programs.html" . }}
 </div>

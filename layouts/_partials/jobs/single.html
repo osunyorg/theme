@@ -2,16 +2,16 @@
 {{ partial "jobs/single/pagefind.html" . }}
 
 <div class="document-content" itemscope itemtype="https://schema.org/JobPosting">
-  <meta itemprop="title" content="{{ partial "PrepareHTML" .Title }}">
+  <meta itemprop="title" content="{{ safeHTML .Title }}">
   <meta itemprop="url" content="{{ .Permalink }}">
   {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
 
   {{ partial "jobs/single/sidebar.html" . }}
 
-  {{ $taxonomies_position := partial "GetTaxonomiesPosition" . }}
+  {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" . }}
   {{ if and .Params.design.full_width .Params.taxonomies (eq $taxonomies_position "content") }}
     <div class="container">
-      {{ partial "taxonomies/single-list-container.html" . }}
+      {{ partial "taxonomies/single/container.html" . }}
     </div>
   {{ end }}
 
@@ -25,7 +25,7 @@
     "contents" .Params.contents
   ) }}
 
-  {{ partial "commons/siblings-navigation.html" (dict
+  {{ partial "commons/single/siblings-navigation.html" (dict
     "context" .
     "previous_label" (i18n "jobs.previous")
     "next_label" (i18n "jobs.next")

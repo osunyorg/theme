@@ -1,0 +1,10 @@
+{{ $years := where .Pages ".Params.is_year" true }}
+<ul>
+  {{ range $years }}
+    <li>
+      <a href="{{ .Permalink }}">{{ .Title }}</a>
+      {{ $events := where .RegularPagesRecursive "Params.dates.archive" false }}
+      {{ partial "sitemap/sections/children.html" $events }}
+    </li>
+  {{ end }}
+</ul>

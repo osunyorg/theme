@@ -6,7 +6,7 @@
     "context" .
   ) }}
 
-  {{ if (partial "IsFirstPage" .) }}
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents
@@ -15,13 +15,14 @@
 
   <div class="container">
     {{ partial "locations/partials/locations.html" . }}
-    {{ partial "commons/pagination.html" . }}
+    {{ partial "commons/section/pagination.html" . }}
   </div>
   {{ if site.Params.locations.index.map }}
-    {{ $locations := .Pages }}
-    {{ partial "locations/partials/map.html" (dict
-      "locations" $locations
-      "title" (i18n "programs.location" $locations)
-    ) }}
+    {{ with .Pages }}
+      {{ partial "locations/partials/map.html" (dict
+        "locations" .
+        "title" ( i18n "programs.location" . )
+      ) }}
+    {{ end }}
   {{ end }}
 </div>

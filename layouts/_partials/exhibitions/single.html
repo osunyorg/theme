@@ -4,7 +4,7 @@
 <div itemscope itemtype="https://schema.org/Event">
   {{ partial "commons/agenda/access.html" . }}
   <div class="document-content">
-    <meta itemprop="name" content="{{ partial "PrepareHTML" .Title }}">
+    <meta itemprop="name" content="{{ safeHTML .Title }}">
     <meta itemprop="url" content="{{ .Permalink }}">
     {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
   
@@ -21,7 +21,7 @@
     ) }}
 
     {{ if site.Params.events.single.navigation.active }}
-      {{ partial "commons/siblings-navigation.html" (dict
+      {{ partial "commons/single/siblings-navigation.html" (dict
         "context" .
         "previous_label" (i18n "events.previous")
         "next_label" (i18n "events.next")

@@ -1,0 +1,16 @@
+{{ $class := "event" }}
+
+{{ if and .event.Params.image .options.image }}
+  {{ $class = printf "%s event--with-image" $class }}
+{{ end }}
+{{ if .event.Params.children }}
+  {{ $class = printf "%s event--parent" $class }}
+{{ end }}
+{{ if .event.Params.parent }}
+  {{ $class = printf "%s event--child" $class }}
+{{ end }}
+{{ if .event.Params.federation.active }}
+  {{ $class = printf "%s is-federated" $class }}
+{{ end }}
+
+{{ return $class }}

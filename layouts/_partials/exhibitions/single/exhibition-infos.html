@@ -4,14 +4,14 @@
     {{ if .computed }}
       <li class="exhibition-date">
         <span>{{ i18n "exhibitions.date" }}</span>
-        {{ partial "PrepareHTML" .computed.two_lines.long }}
+        {{ safeHTML .computed.two_lines.long }}
       </li>
     {{ end }}
   {{ end }}
 
   {{ if .Params.exhibitions_categories }}
     <li>
-      {{ partial "taxonomies/single-list.html" . }}
+      {{ partial "taxonomies/single/list.html" . }}
     </li>
   {{ end }}
   {{ if site.Params.exhibitions.share_links.enabled | default site.Params.share_links.enabled }}

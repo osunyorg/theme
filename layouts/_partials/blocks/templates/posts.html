@@ -1,5 +1,5 @@
 {{- $block := .block -}}
-{{- $block_class := partial "GetBlockClass" .block -}}
+{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
 
 {{- $term := false -}}
 {{- $layout := .block.data.layout | default "grid" -}}
@@ -23,7 +23,7 @@
           <ul class="categories categories--grid">
             {{ range site.Taxonomies.posts_categories }}
               <li data-title="{{ .Page.Title }}">
-                <a href="{{ .Page.Permalink }}" class="title" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Page.Title) }}">{{ partial "PrepareHTML" .Page.Title }}</a>
+                <a href="{{ .Page.Permalink }}" class="title" aria-label="{{ i18n "commons.more_aria" (dict "Title" .Page.Title) }}">{{ safeHTML .Page.Title }}</a>
                 <p>{{ i18n "posts.items.count" ( len . ) }}</p>
               </li>
             {{ end }}

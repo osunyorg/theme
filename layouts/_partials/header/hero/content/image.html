@@ -1,0 +1,13 @@
+{{ $with_lightbox := not site.Params.components.lightbox.in_hero.disabled }}
+
+{{ if .image }}
+  {{ partial "commons/image/figure.html" (dict
+    "image" .image
+    "sizes" ( .sizes | default site.Params.image_sizes._default.hero )
+    "lazy" false
+    "focusable_figcaption" true
+    "with_lightbox" $with_lightbox
+    "image_class" "hero-image"
+    "fetch_priority" "high"
+  ) }}
+{{ end }}

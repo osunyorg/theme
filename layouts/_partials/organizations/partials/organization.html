@@ -9,7 +9,7 @@
 {{ $with_geolocation := .with_geolocation | default false }}
 
 {{ with $organization }}
-  {{ $title := partial "PrepareHTML" .Title }}
+  {{ $title := safeHTML .Title }}
   <article class="organization" itemscope itemtype="https://schema.org/Organization"
     {{ if $with_geolocation }}
       {{ with .Params.contact_details.postal_address.geolocation }}
@@ -19,7 +19,7 @@
       {{ end }}
     {{ end }}
     {{ if and $options.filters .Params.organizations_categories }}
-      data-filters="{{ (partial "GetCategoriesSlug" .) | encoding.Jsonify }}"
+      data-filters="{{ (partial "organizations/helpers/GetCategoriesSlug" .) | encoding.Jsonify }}"
     {{ end }}>
     <div class="organization-content">
       {{ $heading_tag.open }}

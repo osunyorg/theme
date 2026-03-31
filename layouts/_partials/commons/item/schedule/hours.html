@@ -1,0 +1,12 @@
+{{ if .hours.start }}
+  <p class="{{ .type }}-hours">
+    <span>
+      {{- with .hours.start -}}
+        <time datetime="{{ .time }}">{{- .datetime | time.Format ( i18n "commons.time_format" ) -}}</time>
+      {{- end -}}
+      {{- with .hours.end -}}
+        <time datetime="{{ .time }}">{{- .datetime | time.Format ( i18n "commons.time_format" ) -}}</time>
+      {{- end -}}
+    </span>
+  </p>
+{{ end }}

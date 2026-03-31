@@ -1,0 +1,74 @@
+module Hugolint
+  module Engines
+    class Calls < Base
+
+      ROOT = './layouts/_partials/'
+
+      def to_s
+        if clean?
+          message = "### Partials calls are perfect ✅\n"
+        else
+          message = "### Partials calls (#{level})\n"
+          message += "Partials called once might be in the wrong place. Partials never called might be metaprogrammed, or obsolete.\n\n"
+          message += "#{ @dangers } ❌\n #{ @warnings } ⚠️\n\n"
+          message += "| Id | State | Calls | Fragment | Partial |\n"
+          message += "|---|---|---|---|---|\n"
+          index = 1
+          analyzed_files.each do |file|
+            calls = file.json[:calls]
+            next unless calls[:problem]
+            message += "| cal#{index} | #{calls[:icon]} | #{calls[:count]} | #{calls[:fragment]} | #{file.short_path} |\n"
+            index += 1
+          end
+        end
+        message
+      end
+
+      protected 
+
+      def should_analyze?(file)
+        super &&
+        !file.directory? &&
+        file.path.include?(ROOT)
+      end
+
+      def analyze(file)
+        fragment = file.path.gsub(ROOT, '').gsub('.html', '')
+        calls = [
+          "partial \"#{fragment}",
+          "partialCached \"#{fragment}"
+        ]
+        count = calls.sum do |call|
+          Hugolint::Utils.occurrences_in_files(call, analyzer.files)
+        end
+        # Les fichiers ont le droit d'être utilisés 1 seule fois, 
+        # si et seulement si ce ne sont pas des helpers à la racine
+        is_helper = !fragment.include?('/')
+        if count == 0
+          problem = true
+          icon = ICON_DANGER
+          @dangers += 1
+        elsif count == 1 && is_helper
+          problem = true
+          icon = ICON_WARNING
+          @warnings += 1
+        else
+          problem = false
+          icon = ICON_OK
+        end
+        file.json[:calls] = {
+          fragment: fragment,
+          count: count,
+          problem: problem,
+          icon: icon
+        }
+        file
+      end
+
+      def sort!
+        @analyzed_files.sort_by! { |file| file.json[:calls][:count] }
+                       .reverse!
+      end
+    end
+  end
+end

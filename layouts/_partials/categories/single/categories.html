@@ -1,7 +1,7 @@
 {{ $categories := .categories }}
 {{/*  If categories/taxonomies filters is displayed, do not display category's children list  */}}
 {{ $section := replace .Params.taxonomy "_categories" "" }}
-{{ $is_filters_displayed := partial "GetSiteParamWithDefault" (dict 
+{{ $is_filters_displayed := partial "helpers/param/GetSiteParamWithDefault" (dict 
   "param" (printf "%s.categories.taxonomies.display" $section)
   "default" "categories.single.taxonomies.display"
 ) }}

@@ -1,0 +1,12 @@
+<ul>
+  {{ range . }}
+    {{ if not .Params.ignore.in_sitemap }}
+      <li>
+        <a href="{{ .Permalink }}">{{ safeHTML .Title }}</a>
+        {{ with .Pages }}
+          {{ partial "sitemap/sections/children.html" . }}
+        {{ end }}
+      </li>
+    {{ end }}
+  {{ end }}
+</ul>

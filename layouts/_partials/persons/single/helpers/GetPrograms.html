@@ -1,0 +1,5 @@
+{{- $programs := slice -}}
+{{ if isset site.Taxonomies .type -}}
+  {{ $programs = index site.Taxonomies .type .slug }}
+{{- end }}
+{{ return $programs }}

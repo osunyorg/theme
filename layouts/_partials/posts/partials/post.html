@@ -1,21 +1,15 @@
 {{ $post := .post }}
-{{ if .params }}
-  {{ $post = site.GetPage (printf "/posts/%s" .params )}}
-{{ end }}
 {{ $options := .options }}
 {{ $layout := .layout }}
 {{ $direction := "" }}
 {{ $highlight := .highlight | default false }}
-{{ $heading_tag := partial "GetHeadingTag" (dict 
-  "level" .heading_level 
-  "attributes" "class='post-title' itemprop='headline'"
-) }}
+{{ $heading_level := .heading_level }}
 
 {{ with $post }}
   {{ $post_class := "post" }}
   {{ $reading_time := .Params.contents_reading_time }}
   {{ if and .Params.image $options.image }}
-    {{ $direction = partial "GetImageDirection" .Params.image }}
+    {{ $direction = partial "commons/image/helpers/GetDirection" .Params.image }}
     {{ $post_class = printf "%s %s" $post_class $direction }}
   {{ else }}
     {{ $post_class = printf "%s %s" $post_class "without-image" }}
@@ -27,28 +21,18 @@
   <li {{- if eq $layout "highlight" }} class="highlight-post" {{- end -}}>
     <article class="{{ $post_class }}" itemscope itemtype="http://schema.org/BlogPosting">
       <div class="post-content">
-        {{- $title := partial "PrepareHTML" .Title -}}
-        {{ if and $options.subtitle .Params.subtitle }}
-          <hgroup>
-        {{ end }}
-
-        {{ $permalink := partial "GetPermalink" . }}
-        {{ $heading_tag.open }}
-          <a href="{{ $permalink }}" itemprop="url" title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" $title)) }}">{{ $title }}</a>
-        {{ $heading_tag.close }}
-
-        {{ if and $options.subtitle .Params.subtitle }}
-          <p class="post-subtitle">{{ .Params.subtitle }}</p>
-        {{ end }}
-        {{ if and $options.subtitle .Params.subtitle }}
-          </hgroup>
-        {{ end }}
+        {{ partial "posts/partials/post/heading.html" (dict
+          "item" .
+          "options" $options
+          "level" $heading_level
+          "itemprop" "headline"
+        ) }}
 
         {{ partial "posts/partials/post/federated.html" . }}
 
-        {{ if and $options.summary  .Params.summary }}
+        {{ if and $options.summary .Params.summary }}
           <div itemprop="abstract">
-            {{ partial "GetRichSummary" ( dict 
+            {{ partial "commons/summary/helpers/GetTruncated" ( dict 
               "summary" .Params.summary
               "kind" "posts"
             ) }}

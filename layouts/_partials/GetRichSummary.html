@@ -1,8 +1,0 @@
-{{ $length := index site.Params .kind "index" "truncate_description" }}
-
-{{ $summary := partial "GetTruncatedText" (dict 
-  "text" .summary
-  "length" $length
-) }}
-
-{{ return $summary }}

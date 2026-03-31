@@ -8,14 +8,14 @@
   {{ end }}
 {{ end }}
 
-{{  if $is_taxonomy_present }}
+{{ if $is_taxonomy_present }}
   <ul class="taxonomies-persons">
     {{- range $taxonomies -}}
       {{- if index $has . -}}
         {{- with $.Site.GetPage "taxonomyTerm" . }}
           {{- if .Pages }}
             <li>
-              <a href="{{ .Permalink }}">{{ partial "PrepareHTML" .Title }}</a>
+              <a href="{{ .Permalink }}">{{ safeHTML .Title }}</a>
             </li>
           {{ end -}}
         {{ end -}}

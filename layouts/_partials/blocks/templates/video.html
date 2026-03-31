@@ -1,8 +1,7 @@
 {{- $block := .block -}}
-{{- $block_class := partial "GetBlockClass" .block -}}
-{{- $block_index := .index -}}
+{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
 {{- $described_by_id := "" -}}
-{{- $video_id := printf "video-%d" $block_index -}}
+{{- $video_id := printf "video-%s" .html_id -}}
 {{- with .block.data -}}
   <div class="{{ $block_class }}" id="{{ $video_id }}">
     <div class="container">
@@ -30,7 +29,7 @@
 
           <div class="video">
             {{ if eq .video.platform "default" }}
-              {{ partial "PrepareHTML" .video.iframe }}
+              {{ safeHTML .video.iframe }}
             {{ else }}
               {{ partial "blocks/templates/video/lazy-container" .video }}
             {{ end }}
@@ -39,12 +38,12 @@
 
         {{ if ne .layout "button" }}
           {{ if .video_title }}
-            {{ $described_by_id = printf "block-video-title-%d" $block_index }}
-            <p aria-hidden="true" id="{{ $described_by_id }}">{{- partial "PrepareHTML" .video_title -}}</p>
+            {{ $described_by_id = printf "block-video-title-%s" $video_id }}
+            <p aria-hidden="true" id="{{ $described_by_id }}">{{- safeHTML .video_title -}}</p>
           {{ end }}
 
           {{ partial "commons/transcription.html" ( dict
-            "block_index" $block_index
+            "html_id" $video_id
             "described_by" $described_by_id
             "transcription" .transcription
           ) }}

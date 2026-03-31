@@ -1,6 +1,6 @@
 {{- $block := .block -}}
-{{- $block_index := .index -}}
-{{- $block_class := partial "GetBlockClass" .block -}}
+{{- $html_id := .html_id -}}
+{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
 {{- $logo_index := "logo" -}}
 {{- $longitude := "" -}}
 {{- $latitude := "" -}}
@@ -20,7 +20,7 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         {{ partial (printf "organizations/partials/layouts/%s/%s.html" $layout $layout) (dict
-          "block_index" $block_index
+          "html_id" $html_id
           "heading_level" $block.ranks.children
           "title" $block.title
           "logo_index" $logo_index

@@ -2,7 +2,6 @@
 
 <div class="document-content">
   {{ partial "toc/container.html" (dict
-    "toc" "toc/default.html"
     "context" .
   ) }}
 
@@ -11,7 +10,7 @@
     "block_wrapped" true
   ) }}
 
-  {{ if (partial "IsFirstPage" .) }}
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents

@@ -1,6 +1,6 @@
 {{- $block := .block -}}
 {{- $isAnimated := site.Params.blocks.key_figures.animated -}}
-{{- $block_class := partial "GetBlockClass" .block -}}
+{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
 
 {{- with .block.data -}}
   {{- $figures := .figures }}
@@ -25,10 +25,10 @@
                 <div class="key-figure-text">
                   <span>
                     {{ if or .number (eq .number 0) }}
-                      <strong>{{ .number }}</strong>{{ partial "PrepareHTML" .unit }}
+                      <strong>{{ .number }}</strong>{{ safeHTML .unit }}
                     {{ end }}
                   </span>
-                  {{ partial "PrepareHTML" .description }}
+                  {{ safeHTML .description }}
                 </div>
               </li>
             {{ end -}}

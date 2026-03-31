@@ -22,14 +22,14 @@
             <div class="page-content">
               {{ $heading_tag.open }}
                 <a href="{{- .Permalink -}}">
-                  {{- partial "PrepareHTML" .Title -}}
+                  {{- safeHTML .Title -}}
                 </a>
               {{ $heading_tag.close }}
 
               {{- partial "pages/partials/page/hook-after-title.html" . -}}
 
               {{ if and $options.summary .Params.summary }}
-                {{ partial "GetRichSummary" (dict 
+                {{ partial "commons/summary/helpers/GetTruncated" (dict 
                   "summary" .Params.summary
                   "kind" "pages"
                 ) }}
@@ -54,7 +54,7 @@
       {{ else }}
         <li class="page">
           <a href="{{- .Permalink -}}">
-            {{- partial "PrepareHTML" .Title -}}
+            {{- safeHTML .Title -}}
           </a>
         </li>
       {{ end }}

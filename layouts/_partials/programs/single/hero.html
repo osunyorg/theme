@@ -3,6 +3,6 @@
 {{ partial "header/hero.html" (dict
   "title" $title
   "context" .
-  "hero_content_complement" "programs/single/hero/logos.html"
-  "hero_complement" "programs/single/hero/essential.html"
+  "hero_content_complement" ( partial "programs/single/hero/logos.html" . )
+  "hero_complement" ( partial "programs/single/hero/essential.html" . )
 ) }}

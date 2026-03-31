@@ -1,0 +1,30 @@
+{{- if .Params.roles -}}
+  <section id="{{ anchorize (i18n "programs.roles") }}">
+    <h3>{{ i18n "programs.roles" }}</h3>
+    {{- with .Params.roles -}}
+      {{- range . }}
+        {{ $title := .title }}
+        {{- range .persons -}}
+          {{ $slug := . }}
+          {{ with site.GetPage "persons" }}
+            {{ with .GetPage $slug }}
+              <p>
+                <b>{{ $title }}</b>
+                <br>
+                <a href="{{ .Permalink }}">{{ safeHTML .Title }}</a>
+                {{ if .Params.phone }}
+                  <br>
+                  {{ safeHTML .Params.phone }}
+                {{ end }}
+                {{ if .Params.email }}
+                  <br>
+                  <a href="mailto:{{ .Params.email }}" rel="noreferrer" target="_blank">{{ .Params.email }}</a>
+                {{ end }}
+              </p>
+            {{ end }}
+          {{ end }}
+        {{ end }}
+      {{ end -}}
+    {{- end -}}
+  </section>
+{{- end -}}

@@ -1,4 +1,4 @@
-{{- $block_class := partial "GetBlockClass" .block -}}
+{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
 
 {{ with .block }}
   {{ $title := .title }}
@@ -13,7 +13,7 @@
         role="button"
         tabindex="0"
       {{ end }}>
-      <h2>{{ partial "PrepareHTML" $title }}</h2>
+      <h2>{{ safeHTML $title }}</h2>
     </div>
   {{ end }}
 {{ end }}

@@ -1,11 +1,11 @@
 {{- $block := .block -}}
-{{- $block_class := partial "GetBlockClass" .block -}}
+{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
 {{- $image_class := "" -}}
 
 {{- with .block.data -}}
   {{ if .image }}
     {{- $block_class = printf "%s block-chapter--with-image" $block_class -}}
-    {{- $image_class = printf "image-%s" (partial "GetImageDirection" .image) -}}
+    {{- $image_class = printf "image-%s" (partial "commons/image/helpers/GetDirection" .image) -}}
   {{ end }}
 
   <div class="{{ $block_class }}">
@@ -14,19 +14,19 @@
         <div class="chapter">
           <div class="text">
             {{ partial "blocks/top.html" $block.top }}
-            {{ if (partial "GetTextFromHTML" .text) -}}
+            {{ if (partial "helpers/text/GetFromHTML" .text) -}}
               <div class="rich-text">
-                {{ partial "PrepareHTML" .text }}
+                {{ safeHTML .text }}
               </div>
             {{ end -}}
-            {{ if (partial "GetTextFromHTML" .notes) }}
+            {{ if (partial "helpers/text/GetFromHTML" .notes) }}
               <div class="notes">
-                {{ partial "PrepareHTML" .notes }}
+                {{ safeHTML .notes }}
               </div>
             {{ end -}}
           </div>
           {{ with .image }}
-            {{ partial "commons/image-figure.html" (dict
+            {{ partial "commons/image/figure.html" (dict
               "image" .
               "sizes" site.Params.image_sizes.blocks.chapter
             ) }}

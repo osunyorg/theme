@@ -5,17 +5,17 @@
     "context" .
   ) }}
 
-  {{ if (partial "IsFirstPage" .) }}
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
     {{ partial "contents/list.html" (dict
       "context" .
       "contents" .Params.contents
     ) }}
   {{ end }}
 
-  {{ partial "taxonomies/section-list-container.html" . }}
+  {{ partial "taxonomies/section/container.html" . }}
 
   <div class="container">
     {{ partial "posts/partials/posts.html" . }}
-    {{ partial "commons/pagination.html" . }}
+    {{ partial "commons/section/pagination.html" . }}
   </div>
 </div>

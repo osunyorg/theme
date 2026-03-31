@@ -2,20 +2,19 @@
 
 <div class="document-content">
   {{ partial "toc/container.html" (dict
-    "toc" "toc/default.html"
     "context" .
   ) }}
 
   {{ partial "categories/single/summary.html" (dict
-    "context" .
     "block_wrapped" true
+    "context" .
   ) }}
 
-  {{ partial "taxonomies/term-list-container.html" (dict "taxonomy" .Type) }}
+  {{ partial "taxonomies/single/term.html" (dict "taxonomy" .Type) }}
 
   {{ partial "contents/list.html" (dict
-    "context" .
     "contents" .Params.contents
+    "context" .
   ) }}
 
   {{ partial "categories/single/categories.html" (dict 
@@ -29,6 +28,6 @@
     {{ if templates.Exists ( printf "_partials/%s" $list_partial ) }}
       {{ partial $list_partial . }}
     {{ end }}
-    {{ partial "commons/pagination.html" . }}
+    {{ partial "commons/section/pagination.html" . }}
   </div>
 </div>

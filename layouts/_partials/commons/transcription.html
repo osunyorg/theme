@@ -1,6 +1,5 @@
-{{ if (partial "GetTextFromHTML" .transcription) }}
-  {{ $block_index := .block_index }}
-  {{ $id := printf "block-%d-transcription" $block_index }}
+{{ if (partial "helpers/text/GetFromHTML" .transcription) }}
+  {{ $id := printf "block-%s-transcription" .html_id }}
   {{ $title := .title | default ( i18n "commons.accessibility.transcription" ) }}
   <div class="transcription">
     <details id="{{- $id -}}">
@@ -10,7 +9,7 @@
         {{ with .described_by -}}aria-describedby="{{ . }}"{{- end }}>
         {{ $title }}
       </summary>
-      {{- $transcription := partial "PrepareHTML" .transcription -}}
+      {{- $transcription := safeHTML .transcription -}}
       {{ safeHTML $transcription }}
     </details>
   </div>

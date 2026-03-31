@@ -1,0 +1,22 @@
+{{ $has_administrative_informations := partial "programs/single/helpers/HasAdministrativeInformation" . }}
+{{ $has_presentation := partial "programs/single/helpers/HasPresentation" . }}
+
+{{ if or $has_presentation $has_administrative_informations }}
+  <li>
+    <a {{ partial "helpers/anchor/GetAttribute" (i18n "programs.toc.presentation") }}>{{ i18n "programs.toc.presentation" }}</a>
+    <ol>
+      {{- if .Params.presentation -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.presentation") }}
+      {{- end -}}
+      {{- if .Params.objectives -}}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.objectives") }}
+      {{- end -}}
+      {{ if $has_administrative_informations }}
+        {{ partial "programs/single/toc/item.html" (i18n "programs.administrative_information") }}
+      {{- end -}}
+      {{- with .Params.contents -}}
+        {{- partial "blocks/toc" . -}}
+      {{- end -}}
+    </ol>
+  </li>
+{{ end }}
