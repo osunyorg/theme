@@ -1,8 +1,10 @@
 {{ $paginator := . }}
 {{ range $paginator.Pagers }}
   {{ $should_show := partial "commons/section/helpers/ShouldShowPageNumber" (dict
-    "paginator" $paginator
-    "context" .
+    "current_page" $paginator.PageNumber
+    "total_pages" $paginator.TotalPages
+    "tested_page" .PageNumber
+    "slots" 3
   ) }}
   {{ if $should_show }}
     {{ $label := i18n "commons.pagination.page" (dict "Number" .PageNumber) }}
