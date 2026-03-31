@@ -19,8 +19,9 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
+        {{ $pages := partial "helpers/objects/GetFromPathSlice" .pages }}
         {{ partial (printf "pages/partials/layouts/%s/%s.html" $layout $layout) (dict 
-          "pages" .pages
+          "pages" $pages
           "heading_level" $block.ranks.children
           "options" .options
         ) }}

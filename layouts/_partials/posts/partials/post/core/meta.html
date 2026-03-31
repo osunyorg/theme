@@ -1,0 +1,13 @@
+{{ if or .options.author .options.date .options.reading_time }}
+  <div class="post-meta">
+    {{ if .options.date -}}
+      {{ partial "posts/partials/post/core/meta/date.html" .context }}
+    {{- end -}}
+    {{- if .options.author -}}
+      {{- partial "posts/partials/post/core/meta/author.html" .context -}}
+    {{- end -}}
+    {{- if .options.reading_time -}}
+      {{- partial "posts/partials/post/core/meta/reading-time.html" .context -}}
+    {{- end }}
+  </div>
+{{ end }}

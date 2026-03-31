@@ -15,12 +15,12 @@
 {{ end }}
 
 <div class="{{ $class }}">
-  {{- if $image -}}
-    {{- partial "commons/image.html" (dict
+  {{ if $image }}
+    {{ partial "commons/image.html" (dict
       "image" $image
       "sizes" $sizes
-    ) -}}
-  {{- else -}}
-    {{- partial "commons/image-default.html" $type -}}
-  {{- end -}}
+    ) }}
+  {{ else }}
+    {{ partial "commons/image/default.html" $type }}
+  {{ end }}
 </div>

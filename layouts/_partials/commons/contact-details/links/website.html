@@ -1,0 +1,13 @@
+{{ $title := i18n "commons.contact.socials.label.website" (dict "name" .name ) }}
+
+<li class="website">
+  {{ if .with_labels }}
+    <span>{{ i18n "commons.contact.website" }}</span>
+  {{ end }}
+
+  {{ partial "commons/links/website.html" (dict
+    "value" .value
+    "label" .label
+    "title" $title
+  ) }}
+</li>

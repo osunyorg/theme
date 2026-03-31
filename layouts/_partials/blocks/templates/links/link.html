@@ -1,0 +1,25 @@
+{{ $options := .options }}
+{{ $layout := .layout }}
+{{ with .link }}
+  <li itemscope itemtype="https://schema.org/WebPage" {{ if .image -}} class="with-image" {{- end }}>
+    <div class="link-content">
+      {{ $url := .url }}
+      {{ $is_external := .external | default true }}
+      <link itemprop="url" href="{{ .url }}">
+      <a itemprop="relatedLink" href="{{ .url }}" {{ if $is_external }} target="_blank" rel="noopener" {{ end }}>
+        <span itemprop="name">{{ safeHTML .title }}</span>
+        {{ if $is_external }}
+          <span class="sr-only"> - {{ safeHTML (i18n "commons.link.blank") }}</span>
+        {{ end }}
+      </a>
+      {{ with .description }}
+        {{ . | safeHTML }}
+      {{ end }}
+    </div>
+    {{ partial "blocks/templates/links/link/image.html" (dict
+      "link" .
+      "options" $options
+      "layout" $layout
+    ) }}
+  </li>
+{{ end }}

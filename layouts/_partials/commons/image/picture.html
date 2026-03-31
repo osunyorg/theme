@@ -1,0 +1,33 @@
+{{ $image_class := .context.html_class | default "" }}
+{{ $is_png := strings.HasSuffix .image.name "png" }}
+{{ $is_svg := strings.HasSuffix .image.name "svg" }}
+{{ if $is_png }}
+  {{ $image_class = printf "%s is-png" $image_class }}
+{{ else if $is_svg }}
+  {{ $image_class = printf "%s is-svg" $image_class }}
+{{ end }}
+<picture {{- with $image_class }} class="{{ . }}" {{- end }}>
+  {{ if $is_svg }}
+    {{ partial "commons/image/picture/svg.html" (dict
+      "image" .image
+      "url" .url
+      "alt" .alt
+      "class" .context.class
+      "lazy" .lazy
+      "itemprop" .context.itemprop
+    ) }}
+  {{ else }}
+    {{ partial "commons/image/picture/bitmap.html" (dict
+      "image" .image
+      "url" .url
+      "alt" .alt
+      "class" .context.class
+      "lazy" .lazy
+      "itemprop" .context.itemprop
+      "fetch_priority" .context.fetch_priority
+      "sizes" .context.sizes
+      "default" .default
+      "crop" .crop
+    ) }}
+  {{ end }}
+</picture>

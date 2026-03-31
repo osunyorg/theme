@@ -1,0 +1,6 @@
+{{ with .text }}
+  {{ $is_long := gt (len .) 150 }}
+  <blockquote {{- if $is_long }} class="is-long" {{- end }}>
+    {{- safeHTML . -}}
+  </blockquote>
+{{ end }}

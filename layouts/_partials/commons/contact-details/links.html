@@ -1,0 +1,25 @@
+{{ $name := .name }}
+{{ $with_labels := .with_labels }}
+
+{{ with .context.websites.website }}
+  {{ partial "commons/contact-details/links/website.html" (dict
+    "name" $name
+    "value" .value
+    "label" .label
+    "with_labels" $with_labels
+  ) }}
+{{ end }}
+
+{{ partial "commons/socials.html" (dict
+  "context" .context
+  "name" $name
+  "with_labels" $with_labels
+  "in_itemscope" true
+) }}
+
+{{ with .context.phone_numbers }}
+  {{ partial "commons/contact-details/links/phones.html" (dict
+    "phones" .
+    "with_labels" $with_labels
+  ) }}
+{{ end }}

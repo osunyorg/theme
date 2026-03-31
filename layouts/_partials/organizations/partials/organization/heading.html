@@ -1,0 +1,19 @@
+{{ $heading_tag := partial "GetHeadingTag" (dict 
+  "level" .heading_level
+  "attributes" "class='organization-title' itemprop='name'"
+) }}
+{{ $heading_tag.open }}
+  {{ if .options.link }}
+    <a href="{{ .organization.Permalink }}" 
+      {{ if .organization.Params.external }}
+        target="_blank" rel="noopener noreferrer"
+        title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" .organization.Title)) }}"
+      {{ else }}
+        title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .organization.Title)) }}"
+      {{ end }}>
+  {{ end }}
+  {{- .organization.Title -}}
+  {{ if .options.link }}
+    </a>
+  {{ end }}
+{{ $heading_tag.close }}

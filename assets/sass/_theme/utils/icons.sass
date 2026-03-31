@@ -42,18 +42,20 @@
         @content
 
 @mixin icon-frame($icon-name: '', $pseudo-element: before, $non-breaking: false, $hoverable: false)
+    --icon-frame-size: #{pxToRem(50)}
     @include icon($icon-name, $pseudo-element, $non-breaking)
         border: var(--border-width) solid var(--color-border)
         display: inline-block
         flex-shrink: 0
-        height: pxToRem(64)
-        line-height: pxToRem(64)
+        height: var(--icon-frame-size)
+        line-height: var(--icon-frame-size)
         margin-right: $spacing-2
         text-align: center
         transition: background $background-duration ease, border $background-duration ease
         vertical-align: middle
-        width: pxToRem(64)
+        width: var(--icon-frame-size)
         @include media-breakpoint-up(desktop)
+            --icon-frame-size: #{pxToRem(64)}
             font-size: pxToRem(20)
         @content
     @if $hoverable

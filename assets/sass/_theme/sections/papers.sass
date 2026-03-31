@@ -5,6 +5,7 @@
         transition: color $color-duration ease
         @extend %underline-on-hover
     .paper-title
+        @include h3
         margin-bottom: $spacing-2
         a:hover
             color: var(--color-accent)
@@ -13,8 +14,6 @@
     .paper-meta
         @include meta
         color: var(--color-text-alt)
-        @include media-breakpoint-up(desktop)
-            width: columns(5)
         p
             display: block
         .paper-volume
@@ -27,6 +26,14 @@
             &::before
                 content: '— '
                 display: inline-block
+    @include media-breakpoint-down(desktop)
+        flex-direction: column
+        .paper-actions
+            flex-direction: row
+
+    @include media-breakpoint-up(desktop)
+        .paper-meta
+            width: columns(5)
 
 .top + .papers
     margin-top: $spacing-3
@@ -48,6 +55,7 @@
                 width: columns(2)
             figure
                 width: columns(3)
+
 .papers__page
     @include media-breakpoint-down(desktop)
         .document-content
@@ -93,6 +101,7 @@
                 h2
                     @include meta
                 .authors
+                    @include list-reset
                     @include grid(2, desktop)
                     article
                         margin-top: $spacing-3

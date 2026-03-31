@@ -1,0 +1,30 @@
+{{ $id_transcription := printf "block-%s-transcription" .html_id }}
+{{ $options := .options }}
+{{ $heading_level := .heading_level }}
+<div class="transcription">
+  <details id="{{- $id_transcription -}}" class="map-transcription">
+    <summary aria-controls="{{- $id_transcription -}}" aria-expanded="false" data-describedby=".block-title">
+      {{ i18n "commons.accessibility.map_transcription" }}
+    </summary>
+    <ul>
+      {{ range .organizations }}
+        {{ with site.GetPage .path }}
+          {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
+          {{ if $address_geolocation }}
+            <li>
+              {{ partial "organizations/partials/organization.html" (dict
+                "organization" .
+                "options" (merge $options (dict
+                  "address" true
+                  "logo" false
+                ))
+                "layout" "map"
+                "heading_level" $heading_level
+              ) }}
+            </li>
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    </ul>
+  </details>
+</div>

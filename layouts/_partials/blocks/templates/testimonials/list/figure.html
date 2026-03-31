@@ -1,0 +1,28 @@
+{{ $aria_label := .aria_label }}
+{{ $layout := .layout }}
+{{ with .testimonial }}
+  {{ $aria_label := partial "blocks/templates/testimonials/helpers/GetAriaLabel" . }}
+  <figure class="testimonial {{- if.photo }} with-picture {{- end }}"
+      {{ with $aria_label -}} role="figure" aria-label="{{ . }}" {{- end }}>
+
+    {{ partial "blocks/templates/testimonials/list/figure/blockquote.html" . }}
+
+    {{ if or .photo .author .job -}}
+      <figcaption>
+        {{ with .photo -}}
+          {{ partial "blocks/templates/testimonials/list/figure/avatar.html" (dict
+            "avatar" .
+            "layout" $layout
+          ) }}
+        {{ end }}
+
+        {{ if or .author .job -}}
+          {{ partial "blocks/templates/testimonials/list/figure/author.html" (dict
+            "author" .author
+            "job" .job
+          ) }}
+        {{ end }}
+      </figcaption>
+    {{ end }}
+  </figure>
+{{ end }}
