@@ -1,10 +1,10 @@
 {{ $class := partial "header/hero/helpers/GetClass" . }}
 <header class="{{ $class }}">
-  {{- partial "hooks/after-hero-start" . -}}
+  {{- partial "header/hero/hooks/after-hero-start" . -}}
   <div class="container">
     {{ partial "header/hero/breadcrumbs/start.html" . }}
     {{ partial "header/hero/content.html" . }}
-    {{ partial "hooks/before-hero-content-end.html" .context }}
+    {{ partial "header/hero/hooks/before-hero-content-end.html" .context }}
   </div>
   {{ if .hero_complement }}
     {{ .hero_complement }}

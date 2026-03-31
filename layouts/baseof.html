@@ -13,7 +13,7 @@
   </head>
   <body class="{{ partial "body/helpers/GetBodyclass" . }}">
     {{- partial "header/accessibility.html" -}}
-    {{- partial "hooks/before-header.html" . -}}
+    {{- partial "header/hooks/before-header.html" . -}}
     {{- partial "header/header.html" . -}}
     {{- partial "commons/alerts/list.html" }}
     <main id="main"
@@ -22,7 +22,7 @@
         >
       {{ partial "commons/search/button.html" "fixed" }}
       {{ block "main" . }}{{ end }}
-      {{ partial "hooks/before-main-end.html" . }}
+      {{ partial "commons/hooks/before-main-end.html" . }}
     </main>
     {{ partial "footer/footer.html" . }}
     {{ partial "commons/lightbox/lightbox.html" . }}
