@@ -1,0 +1,17 @@
+{{ $class := "call_to_action" }}
+
+{{ if .image }}
+  {{ $class = printf "%s call_to_action--with-image" $class }}
+{{ else }}
+  {{ $class = printf "%s call_to_action--without-image" $class }}
+{{ end }}
+
+{{ if .block.title }}
+  {{ $class = printf "%s call_to_action--with-title" $class }}
+{{ end }}
+
+{{ if not .block.top.description }}
+  {{ $class = printf "%s call_to_action--without-text" $class }}
+{{ end }}
+
+{{ return $class }}

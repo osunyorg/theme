@@ -1,62 +1,17 @@
-{{- $block := .block -}}
-{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
-{{- $layout := .block.data.layout | default "carousel" -}}
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+{{ $layout := .block.data.layout | default "carousel" }}
 
-{{- with .block.data -}}
+{{ with .block.data }}
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        
-        {{ if eq $layout "carousel" }}
-          {{ partial "blocks/templates/testimonials/carousel.html" . }}
-        {{ else }}
-          <ul class="testimonials testimonials--{{ $layout }}">
-            {{ range .testimonials }}
-              {{ $aria_label := "" }}
-              {{ if and .author .job }}
-                {{ $aria_label = delimit (slice .author .job) ", " }}
-              {{ else }}
-                {{ with or .author .job }}
-                  {{ $aria_label = . }}
-                {{ end }}
-              {{ end }}
-
-              <li>
-                <figure class="testimonial {{ if.photo }}with-picture{{ end }}" 
-                  {{ with $aria_label -}} role="figure" aria-label="{{ . }}" {{- end }}>
-                  <blockquote>
-                    {{- safeHTML .text -}}
-                  </blockquote>
-                  {{ if or .photo .author .job -}}
-                    <figcaption>
-                      {{ if .photo -}}
-                        <div class="avatar">
-                          {{- partial "commons/image.html" (dict
-                            "image" .photo
-                            "sizes" site.Params.image_sizes.blocks.testimonials
-                            "layout" $layout
-                          ) -}}
-                        </div>
-                      {{- end }}
-                      {{ if or .author .job -}}
-                        <p>
-                          {{- if .author -}}
-                            <span class="signature">{{ safeHTML .author }}</span>
-                          {{- end }}
-                          {{- if .job -}}
-                            <span class="meta">{{- safeHTML .job -}}</span>
-                          {{- end }}
-                        </p>
-                      {{ end }}
-                    </figcaption>
-                  {{ end }}
-                </figure>
-              </li>
-            {{ end }}
-          </ul>
-        {{ end }}
+        {{ partial "blocks/templates/testimonials/list.html" (dict
+          "layout" $layout
+          "testimonials" .testimonials
+        ) }}
       </div>
     </div>
   </div>
-{{- end -}}
+{{ end }}

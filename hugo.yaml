@@ -126,7 +126,9 @@ params:
   diplomas:
     single:
       programs:
-        options: false # You can set options for programs layout (see programs.index.options)
+        layout: list
+        options:
+          summary: true
   events:
     default_image: false
     date_format: false # You can add date format to override the date from static (two_lines) 
@@ -221,6 +223,8 @@ params:
     single:
       calendar_links: false
       meta_in_sidebar: false
+    list:
+      with_more: false
     # share_links: # Optional
     #   enabled: true
     #   email: false
@@ -295,6 +299,7 @@ params:
     index:
       layout: list
       options:
+        image: true
         summary: true
   locations:
     default_image: false
@@ -751,6 +756,11 @@ params:
           mobile:   400
           tablet:   800
           desktop:  750
+        sidebar:
+          volume:
+            mobile: 327
+            tablet: 720
+            desktop: 255
       persons:
         hero:
           mobile:   400

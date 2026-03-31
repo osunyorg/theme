@@ -1,0 +1,15 @@
+{{ $layout := .layout }}
+{{ $attributes := "" }}
+{{ if eq $layout "carousel" }}
+  {{ $attributes = printf "data-slider='%s'" (  site.Params.blocks.testimonials.slider | encoding.Jsonify ) }}
+{{ end }}
+<ul class="testimonials testimonials--{{ $layout }}" {{ $attributes | safeHTMLAttr }}>
+  {{ range .testimonials }}
+    <li>
+      {{ partial "blocks/templates/testimonials/list/figure.html" (dict
+        "testimonial" .
+        "layout" $layout
+      ) }}
+    </li>
+  {{ end }}
+</ul>

@@ -1,17 +1,19 @@
-{{ $first_role := index .Params.roles 0 }}
-{{ $person := index $first_role.persons 0 }}
-{{ $person = site.GetPage (printf "/persons/%s" $person) }}
-<div class="program-contact meta">
-  <span class="program-contact-title">{{ $first_role.title }}</span>
-  {{ with $person }}
-    <span>
-      {{ .Title }} — 
-      {{ with or .Params.contact_details.phone .Params.contact_details.phone_professional }}
-        <a href="{{ chomp .value }}">{{ .label }}</a>
-      {{ end }}
-      {{ with .Params.contact_details.email }}
-        <a href="{{ chomp .value }}">{{ .label }}</a>
-      {{ end }}
-    </span>
-  {{ end }}
-</div>
+{{ if .Params.roles }}
+  {{ $first_role := index .Params.roles 0 }}
+  {{ $person := index $first_role.persons 0 }}
+  {{ $person = site.GetPage (printf "/persons/%s" $person) }}
+  <div class="program-contact meta">
+    <span class="program-contact-title">{{ $first_role.title }}</span>
+    {{ with $person }}
+      <span>
+        {{ .Title }} — 
+        {{ with or .Params.contact_details.phone .Params.contact_details.phone_professional }}
+          <a href="{{ chomp .value }}">{{ .label }}</a>
+        {{ end }}
+        {{ with .Params.contact_details.email }}
+          <a href="{{ chomp .value }}">{{ .label }}</a>
+        {{ end }}
+      </span>
+    {{ end }}
+  </div>
+{{ end }}

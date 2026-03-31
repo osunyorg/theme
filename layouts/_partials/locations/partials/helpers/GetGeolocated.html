@@ -1,0 +1,5 @@
+{{ $locations := . }}
+{{ $locations = where $locations ".Params.contact_details.postal_address.geolocation" "ne" nil }}
+{{ $locations = where $locations ".Params.contact_details.postal_address.geolocation.longitude" "ne" nil }}
+{{ $locations = where $locations ".Params.contact_details.postal_address.geolocation.latitude" "ne" nil }}
+{{ return $locations }}

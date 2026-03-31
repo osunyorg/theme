@@ -1,0 +1,18 @@
+{{- if .Params.pdf -}}
+  {{- $file := partial "GetMedia" .Params.pdf -}}
+  {{- $extension_with_size := partial "commons/files/helpers/GetFileExtensionWithSize" $file -}}
+  {{- $title_with_size := printf "%s (%s)" $file.name $extension_with_size -}}
+  {{- $url := $file.url -}}
+  {{- if site.Params.keycdn -}}
+    {{- $url = $file.direct_url -}}
+  {{- end -}}
+  {{ if $file }}
+    <figure>
+      <a href="{{ $url }}" download="{{ safeHTML $file.name }}" target="_blank" title="{{ i18n "commons.link.blank_aria" (dict "Title" $title_with_size) }}">
+        <figcaption>
+          {{ partial "commons/files/extension-and-size.html" $file }}
+        </figcaption>
+      </a>
+    </figure>
+  {{ end }}
+{{- end -}}

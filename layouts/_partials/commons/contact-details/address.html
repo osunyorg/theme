@@ -1,0 +1,8 @@
+{{ if .postal_address }}
+  <li class="address">
+    {{ if .with_labels }}
+      <span class="meta">{{ i18n "commons.contact.address" }}</span>
+    {{ end }}
+    {{ partial "commons/address.html" .postal_address }}
+  </li>
+{{ end }}
