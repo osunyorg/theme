@@ -1,6 +1,6 @@
 {{ $primary := partial "GetMenu" "primary" }}
 {{ $upper_menu := partial "GetMenu" "upper-menu" }}
-
+{{ partial "header/hooks/before-start.html" . }}
 <header id="document-header" role="banner"
   {{ if $upper_menu.items }}
     class="has-upper-menu"
@@ -31,5 +31,5 @@
       {{ partial "header/hooks/before-primary-menu-end.html" . }}
     </div>
   </nav>
-  {{ partial "header/hooks/before-header-end.html" . }}
+  {{ partial "header/hooks/before-end.html" . }}
 </header>
