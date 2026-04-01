@@ -1,8 +1,4 @@
-{{- $title := or .Params.header_text .Title -}}
-
-{{ with .Params.subtitle }}
-  {{- $title = printf "%s <span>%s</span>" $title . -}}
-{{ end }}
+{{ $title := partial "header/helpers/GetTitle" . }}
 
 {{- partial "header/hero.html" (dict
   "title" $title
