@@ -1,6 +1,6 @@
 {{ $item := .item }}
 {{ $level := .level }}
-{{ $type := $item.Type | default "page" }}
+{{ $type := .type | default $item.Type | default "page" }}
 {{ $type = $type | singularize }}
 {{ $subtitle := $item.Params.subtitle }}
 {{ $options := .options }}

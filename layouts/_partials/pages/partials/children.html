@@ -8,8 +8,13 @@
   <div class="container">
     <div class="block-content">
       {{/*  {{ $pages := partial "helpers/objects/GetFromPathSlice" .Params.children }}  */}}
+      {{ $pages := slice }}
+      {{ range .Params.children }}
+        {{ $page := site.GetPage . }}
+        {{ $pages = $pages | append $page }}
+      {{ end }}
       {{ partial (printf "pages/partials/layouts/%s/%s.html" site.Params.pages.index.layout site.Params.pages.index.layout) (dict 
-        "pages" .Pages
+        "pages" $pages
         "heading_level" 2
         "options" $options
       ) }}
