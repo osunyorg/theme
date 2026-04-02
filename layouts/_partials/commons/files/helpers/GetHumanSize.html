@@ -6,15 +6,15 @@
 {{ $kilobytes_threshold := 1024 }}
 
 {{ if ge $weight $gigabytes_threshold }}
-  {{ $weight = (div $weight $gigabytes_threshold) }}
+  {{ $weight = math.Ceil (div $weight $gigabytes_threshold) }}
   {{ $unit = i18n "commons.units.GB" }}
   {{ $full_unit = i18n "commons.units.gigabytes" }}
 {{ else if ge $weight $megabytes_threshold }}
-  {{ $weight = (div $weight $megabytes_threshold) }}
+  {{ $weight = math.Ceil (div $weight $megabytes_threshold) }}
   {{ $unit = i18n "commons.units.MB" }}
   {{ $full_unit = i18n "commons.units.megabytes" }}
 {{ else if ge $weight $kilobytes_threshold }}
-  {{ $weight = (div $weight $kilobytes_threshold) }}
+  {{ $weight = math.Ceil (div $weight $kilobytes_threshold) }}
   {{ $unit = i18n "commons.units.kB" }}
   {{ $full_unit = i18n "commons.units.kilobytes" }}
 {{ end }}
