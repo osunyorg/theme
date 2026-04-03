@@ -1,5 +1,9 @@
 <script>
   ;(function () {
+    if (window.location.pathname !== '/') {
+      return;
+    }
+
     var preferLang = getFirstBrowserLanguage(),
         url = '{{ .Permalink }}'; // default url
 
