@@ -1,0 +1,17 @@
+<dt>{{ i18n "volumes.singular_name" }}</dt>
+<dd itemprop="isPartOf" itemscope itemtype="https://schema.org/PublicationVolume">
+  <a href="{{ .Permalink }}" itemprop="url">
+    <span itemprop="name">{{ .Title }}</span>
+    <div class="media">
+      {{ if .Params.image }}
+        {{ partial "commons/image.html" (dict
+          "image" .Params.image
+          "alt" .Title
+          "sizes" site.Params.image_sizes.sections.papers.sidebar.volume
+        ) }}
+      {{ else }}
+        {{ partial "commons/image/default.html" "papers" }}
+      {{ end }}
+    </div>
+  </a>
+</dd>

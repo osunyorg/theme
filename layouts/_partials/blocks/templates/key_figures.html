@@ -1,40 +1,24 @@
-{{- $block := .block -}}
-{{- $isAnimated := site.Params.blocks.key_figures.animated -}}
-{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
+{{ $block := .block }}
+{{ $is_animated := site.Params.blocks.key_figures.animated }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
 
-{{- with .block.data -}}
-  {{- $figures := .figures }}
-  <div class="{{ $block_class }} {{- if $isAnimated }} is-animated {{ end }}">
+{{ with .block.data }}
+  <div class="{{ $block_class }}{{ if $is_animated }} is-animated {{ end }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        {{ if $figures }}
+        {{ if .figures }}
           {{ $list_class := "odd-items" }}
-          {{ if (modBool (len $figures) 2) }}
+          {{ if (modBool (len .figures) 2) }}
             {{ $list_class = "even-items" }}
           {{ end }}
           <ul class="{{ $list_class }}">
-            {{- range .figures }}
-              <li {{- if .image }} class="with-image" {{- end -}}>
-                {{ with .image }}
-                  {{ partial "commons/image.html" (dict
-                    "image" .
-                    "sizes" site.Params.image_sizes.blocks.key_figures
-                  ) }}
-                {{ end }}
-                <div class="key-figure-text">
-                  <span>
-                    {{ if or .number (eq .number 0) }}
-                      <strong>{{ .number }}</strong>{{ safeHTML .unit }}
-                    {{ end }}
-                  </span>
-                  {{ safeHTML .description }}
-                </div>
-              </li>
-            {{ end -}}
+            {{ range .figures }}
+              {{ partial "blocks/templates/key_figures/key_figure.html" . }}
+            {{ end }}
           </ul>
-        {{ end -}}
+        {{ end }}
       </div>
     </div>
   </div>
-{{- end -}}
+{{ end }}

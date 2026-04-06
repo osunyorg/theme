@@ -42,7 +42,6 @@
                 @include icon(arrow-right-line, after, true)
                 @include hover-translate-icon(after)
                 @extend %underline-on-hover
-        
         .pages.title-only
             li
                 > a
@@ -105,7 +104,9 @@
                     width: columns(2)
                 .page-content
                     width: columns(4)
-            
+                    .page-description
+                        .rich-text
+                            width: auto
             &:not(.with-description)
                 .pages
                     > li + li
@@ -123,7 +124,7 @@
                     @include grid(12, desktop, $spacing-4)
                     .top
                         align-items: initial
-                        grid-column: 1 / 8
+                        grid-column: 1 / 7
                         margin-bottom: 0
                         display: grid
                         grid-template-rows: subgrid
@@ -135,23 +136,23 @@
                             margin-top: 0
                     // If page description
                     .top + .pages
-                        grid-column: 9 / 13
+                        grid-column: 7 / 13
                         grid-row: 2
                         display: block
                         margin-top: 0
-                
-                &.with-images
+                &.with-title-only
                     .top
-                        grid-column: 1 / 7
+                        grid-column: 1 / 8
                         + .pages
-                            grid-column: 7 / 13
+                            grid-column: 9 / 13
 
     &--alternate
         .pages
             @include layout-alternate
-            .page-title
-                + p
-                    margin-top: $spacing-1
+            .rich-text
+                margin-top: $spacing-1
+            .more
+                margin-top: $spacing-2
     &--large
         .pages
             @include layout-large

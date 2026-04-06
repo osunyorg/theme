@@ -1,0 +1,20 @@
+<script>
+  ;(function () {
+    if (window.location.pathname !== '/') {
+      return;
+    }
+
+    var preferLang = getFirstBrowserLanguage(),
+        url = '{{ .Permalink }}'; // default url
+
+    {{ with site.Languages }}
+      {{ range site.Languages }}
+        if (preferLang.indexOf('{{ . }}') > -1) {
+          url = '/{{ . }}/';
+        }
+      {{ end }}
+    {{ end }}
+
+    window.location.replace(url);
+  })();
+</script>

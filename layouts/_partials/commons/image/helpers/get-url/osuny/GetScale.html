@@ -1,0 +1,11 @@
+{{ $scaleValues := slice "2" "3" }}
+{{ $scale := "" }}
+{{ if .scale }}
+  {{ $rawStringScale := string .scale }}
+  {{ range $scaleValues }}
+    {{ if eq $rawStringScale . }}
+      {{ $scale = . }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $scale }}

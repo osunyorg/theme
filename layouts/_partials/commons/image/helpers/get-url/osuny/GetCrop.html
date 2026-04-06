@@ -1,0 +1,17 @@
+{{ $cropValues := slice "top" "left" "right" "bottom" "center" }}
+{{ $crop := "" }}
+{{ if .crop }}
+  {{ if eq (string .crop) "true" }}
+    {{ $crop = "center" }}
+  {{ else }}
+    {{ range $cropValues }}
+      {{ if eq .crop . }}
+        {{ $crop = . }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if ne $crop "" }}
+  {{ $baseFilename = delimit (slice $baseFilename $crop) "_crop_" }}
+{{ end }}
+{{ return $crop }}

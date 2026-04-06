@@ -1,4 +1,5 @@
-{{- $title := or .Params.header_text .Title -}}
+{{ $title := partial "header/helpers/GetTitle" . }}
+
 {{ partial "header/hero.html" (dict
   "title" $title
   "image" .Params.image

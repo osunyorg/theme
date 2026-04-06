@@ -1,0 +1,17 @@
+{{ if or .Params.journal_title .Params.date .Params.authors_list }}
+  <div class="publication-meta">
+    {{- with .Params.date -}}
+      <span>{{- .Format "2006" -}}</span>
+    {{- end -}}
+
+    {{- with .Params.journal_title -}}
+      <span>{{- safeHTML . -}}</span>
+    {{- end -}}
+
+    {{- with .Params.ref -}}
+      <div class="publication-ref" itemprop="isPartOf" itemscope itemtype="http://schema.org/PublicationIssue">
+        <span itemprop="name">{{- safeHTML . -}}</span>
+      </div>
+    {{- end -}}
+  </div>
+{{ end }}

@@ -1,0 +1,5 @@
+{{ if ne .Type "error" }}
+  {{ with .OutputFormats.Canonical }}
+    {{ printf "<link rel=%q type=%q href=%q>" .Rel .MediaType.Type .Permalink | safeHTML }}
+  {{ end }}
+{{ end }}

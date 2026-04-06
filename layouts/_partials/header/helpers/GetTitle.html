@@ -1,0 +1,5 @@
+{{ $title := or .Params.header_text .Title }}
+{{ with .Params.subtitle }}
+  {{ $title = printf "%s <span>%s</span>" $title . }}
+{{ end }}
+{{ return $title }}

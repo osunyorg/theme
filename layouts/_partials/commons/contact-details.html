@@ -1,67 +1,19 @@
-{{ $subject := .subject }}
-{{ $name := $subject.Title }}
+{{ $name := .subject.Title }}
 {{ $with_labels := .with_labels | default true }}
-{{ with $subject.Params.contact_details }}
+
+{{ with .subject.Params.contact_details }}
   <div class="contacts-details">
     {{ if or .websites .social_networks .emails .phone_numbers .phone_professional .postal_address }}
       <ul>
-        {{ with .websites.website }}
-          <li class="website">
-            {{ if $with_labels }}
-              <span>{{ i18n "commons.contact.website" }}</span>
-            {{ end }}
-            {{ partial "commons/links/website.html" (dict
-              "value" .value
-              "label" .label
-              "title" (i18n "commons.contact.socials.label.website" (dict "name" $name ))
-            ) }}
-          </li>
-        {{ end }}
-
-        {{ partial "commons/socials" (dict
+        {{ partial "commons/contact-details/links.html" (dict
           "context" .
           "name" $name
           "with_labels" $with_labels
-          "in_itemscope" true
         ) }}
-
-        {{ with .phone_numbers }}
-          {{ with or .phone_mobile .phone }}
-            <li class="phone">
-              {{ if $with_labels }}
-                <span>{{ i18n "commons.contact.phone.label" }}</span>
-              {{ end }}
-              {{ partial "commons/links/tel.html" (dict
-                "value" .value
-                "label" .label
-                "title" (i18n "commons.contact.phone.a11y_label" (dict "phone_number" .label))
-              ) }}
-            </li>
-          {{ end }}
-
-          {{ with .phone_professional }}
-            <li class="phone">
-              {{ if $with_labels }}
-                <span>{{ i18n "commons.contact.phone_professional.label" }}</span>
-              {{ end }}
-              {{ partial "commons/links/tel.html" (dict
-                "value" .value
-                "label" .label
-                "title" (i18n "commons.contact.phone_professional.a11y_label" (dict "phone_number" .label ))
-              ) }}
-            </li>
-          {{ end }}
-        {{ end }}
-
-        {{ with .postal_address }}
-          <li class="address">
-            {{ if $with_labels }}
-              <span class="meta">{{ i18n "commons.contact.address" }}</span>
-            {{ end }}
-            {{ partial "commons/address.html" . }}
-          </li>
-        {{ end }}
-
+        {{ partial "commons/contact-details/address.html" (dict
+          "postal_address" .postal_address
+          "with_labels" $with_labels
+        ) }}
       </ul>
     {{ end }}
   </div>
