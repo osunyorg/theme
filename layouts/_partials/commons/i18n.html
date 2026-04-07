@@ -1,14 +1,10 @@
 {{ $page := .context }}
-{{ $translations := $page.Translations | append $page }}
+{{ $translations := $page.AllTranslations }}
 {{ $site_lang := "" }}
 {{ $url := "" }}
 {{ $position := .position }}
 {{ $dropdown_class := "dropdown-menu dropdown-languages" }}
-
-
-{{ $languages := site.Languages }} 
-{{/*  Should use .Rotate, but it seems unavalaible in 404 page  */}}
-{{/*  {{ $languages := .Rotate "language" }}  */}}
+{{ $languages := site.Home.AllTranslations }}
 
 {{ if eq $position "footer" }}
   {{ $dropdown_class = printf "%s extendable" $dropdown_class }}

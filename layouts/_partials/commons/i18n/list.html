@@ -1,17 +1,17 @@
 {{ $translations := .translations }}
 <ul>
-  {{ range site.Languages }}
-    {{ $language := . }}
-    {{ $url := printf "/%s/" .Name }}
+  {{ range site.Home.AllTranslations }}
+    {{ $language := .Language }}
+    {{ $url := printf "/%s/" $language.Locale }}
     {{ range $translations }}
-      {{ if eq .Name $language.Name }}
+      {{ if eq .Lang $language.Name }}
         {{ $url = .Permalink }}
       {{ end }}
     {{ end }}
     {{ if not (eq $language site.Language) }}
       <li>
-        <a href="{{ $url }}" lang="{{ $language }}" hreflang="{{ $language }}" >
-          {{- $language.LanguageName -}}
+        <a href="{{ $url }}" lang="{{ $language }}" hreflang="{{ $language }}">
+          {{- $language.Label -}}
         </a>
       </li>
     {{ end }}
