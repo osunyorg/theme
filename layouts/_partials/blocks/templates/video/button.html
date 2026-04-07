@@ -1,5 +1,5 @@
 {{ $transcription := .video.title }}
-{{ with .transcription }}
+{{ if .transcription }}
   {{ $transcription = printf "<p>%s</p>%s" $transcription .transcription}}
 {{ end}}
 
