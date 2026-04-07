@@ -1,0 +1,24 @@
+{{ $ignore_children := partial "helpers/param/GetSiteParamWithDefault" (dict
+  "param" (printf "%s.sitemap.ignore_children" .Type)
+  "default" "default.sitemap.ignore_children"
+) }}
+<div class="block block-sitemap block-sitemap--{{ .Type }}">
+  <div class="container">
+    <div class="block-content">
+      <h2 class="heading" id="{{ .Type }}">
+        {{ if .Permalink }}
+          <a href="{{ .Permalink }}">{{- safeHTML .Title -}}</a>
+        {{ else }}
+          {{- .Title -}}
+        {{ end }}
+      </h2>
+      {{ if not $ignore_children }}
+        {{ if eq .Type "events" }}
+          {{ partial "sitemap/sections/events.html" . }}
+        {{ else }}
+          {{ partial "sitemap/sections/children.html" .Pages }}
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</div>

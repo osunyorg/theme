@@ -1,0 +1,28 @@
+{{ $options := .options }}
+{{ $heading_level := .heading_level }}
+{{ $title := partial "organizations/partials/layouts/map/helpers/GetTitle" . }}
+{{ $aria_label := i18n "commons.maps.label" $title }}
+<div class="organizations map"
+    data-map
+    data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}"
+    role="region"
+    aria-label="{{ $aria_label }}">
+  {{ if and .options.filters .categories }}
+    {{ partial "organizations/partials/layouts/map/filters-button.html" .html_id }}
+  {{ end }}
+
+  {{- range .organizations }}
+    {{ with site.GetPage .path }}
+        {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
+        {{ if $address_geolocation }}
+          {{ partial "organizations/partials/organization.html" (dict
+            "organization" .
+            "layout" "map"
+            "options" $options
+            "with_geolocation" true
+            "heading_level" $heading_level
+          ) }}
+        {{ end }}
+      {{ end }}
+  {{ end -}}
+</div>

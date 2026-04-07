@@ -4,15 +4,13 @@
 {{ $class := .class | default ( printf "%s-categories" $type ) }}
 {{ $categories := .categories }}
 {{ $depth := .depth }}
-
 {{ if not $categories }}
   {{ $categories_type := printf "%ss_categories" $type }}
   {{ $categories = .context.GetTerms $categories_type }}
 {{ end }}
-
-{{- if $categories -}}
+{{ if $categories }}
   <ul class="{{ $class }}" aria-label="{{ i18n "categories.label" }}">
-    {{- range $categories -}}
+    {{ range $categories }}
       <li {{ with .Params.bodyclass }}class="{{ . }}"{{ end }}>
         {{ $id := printf "%s-children-list" ( .Slug | anchorize) }}
         {{ $children := partial "helpers/objects/GetFromPathSlice" .Params.children }}
@@ -27,11 +25,9 @@
             ) }}
           </div>
         {{ else }}
-          <a href="{{ .Permalink }}">
-            {{- safeHTML .Title -}}
-          </a>
+          <a href="{{ .Permalink }}">{{- safeHTML .Title -}}</a>
         {{ end }}
       </li>
-    {{- end }}
+    {{ end }}
   </ul>
-{{- end -}}
+{{ end }}

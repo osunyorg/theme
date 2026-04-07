@@ -1,0 +1,6 @@
+{{ if site.Params.events.share_links.enabled | default site.Params.share_links.enabled }}
+  <li>
+    <span>{{ i18n "commons.share_on" }}</span>
+    {{ partial "commons/share/links.html" . }}
+  </li>
+{{ end }}

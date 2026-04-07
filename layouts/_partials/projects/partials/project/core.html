@@ -1,0 +1,27 @@
+{{ partial "projects/partials/project/core/heading.html" (dict
+  "item" .project
+  "level" .heading_level
+  "options" .options
+) }}
+{{ if .options.summary }}
+  {{ partial "projects/partials/project/core/summary.html" .project }}
+{{ end }}
+{{ if .group_meta }}
+  {{ if or .options.year .options.categories }}
+    <div class="project-meta">
+      {{ if .options.year }}
+        {{ partial "projects/partials/project/core/year.html" .project.Params.year }}
+      {{ end }}
+      {{ if .options.categories }}
+        {{ partial "projects/partials/project/core/categories.html" .project }}
+      {{ end }}
+    </div>
+  {{ end }}
+{{ else }}
+  {{ if .options.categories }}
+    {{ partial "projects/partials/project/core/categories.html" .project }}
+  {{ end }}
+{{ end }}
+{{ if .with_more }}
+  {{ partial "projects/partials/project/core/more.html" .project }}
+{{ end }}

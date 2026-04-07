@@ -1,0 +1,9 @@
+{{ $class := "school" }}
+
+{{ if and .school.Params.image .options.image }}
+  {{ $class = printf "%s school--with-image" $class }}
+  {{ $image_direction := partial "commons/image/helpers/GetDirection" .school.Params.image }}
+  {{ $class = printf "%s %s" $class $image_direction }}
+{{ end }}
+
+{{ return $class }}

@@ -1,6 +1,5 @@
-{%/ $url is deprecated, media should be used instead %}
 {{ $url := .url }}
-{{ if .media }}
+{{ if .media }} {{/*  Todo : simplify usage with only media  */}}
   {{ $url = .media.direct_url }}
 {{ end }}
 {{ $parsedUrl := urls.Parse $url }}

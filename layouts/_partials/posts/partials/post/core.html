@@ -1,0 +1,22 @@
+<div class="post-content">
+  {{ partial "posts/partials/post/core/heading.html" (dict
+    "item" .context
+    "options" .options
+    "level" .heading_level
+    "itemprop" "headline"
+  ) }}
+  {{ partial "posts/partials/post/core/federated.html" .context }}
+  {{ if .options.summary }}
+    {{ partial "posts/partials/post/core/summary.html" .context }}
+  {{- end -}}
+  {{ if .options.categories }}
+    {{ partial "posts/partials/post/core/categories.html" .context }}
+  {{ end }}
+  {{ partial "posts/partials/post/core/meta.html" (dict 
+    "options" .options
+    "context" .context
+  ) }}
+  {{ if .options.with_more }}
+    {{ partial "posts/partials/post/core/more.html" .context }}
+  {{ end }}
+</div>

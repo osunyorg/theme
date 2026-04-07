@@ -1,0 +1,11 @@
+<p class="paper-volume">
+  {{ with .Params.paper_kind }}
+    <span class="paper-kind">{{ . }}</span>
+  {{ end }}
+  {{ range .Params.Volumes }}
+    {{ $volume := site.GetPage (printf "/volumes/%s" .) }}
+    {{ if $volume }}
+      <a href="{{ $volume.Permalink }}">{{ $volume.Title }}</a>
+    {{ end }}
+  {{ end }}
+</p>

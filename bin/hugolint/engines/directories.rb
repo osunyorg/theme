@@ -18,7 +18,7 @@ module Hugolint
           analyzed_files.each do |file|
             directory = file.json[:directory]
             next unless directory[:problem]
-            message += "| dir-#{index} | #{directory[:icon]} | #{directory[:count]} | #{file.short_path} |\n"
+            message += "| dir#{index} | #{directory[:icon]} | #{directory[:count]} | #{file.short_path} |\n"
             index += 1
           end
         end

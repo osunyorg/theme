@@ -1,0 +1,77 @@
+@mixin avatar
+    background-color: $persons-avatar-background-color
+    border-radius: $avatar-border-radius
+    overflow: hidden
+    position: relative
+    &::before
+        content: ""
+        display: block
+        padding-top: 100%
+    picture, img
+        @include inset(0)
+        height: 100%
+        width: 100%
+        position: absolute
+    img
+        object-fit: cover
+
+.avatar
+    @include avatar
+
+.person
+    .contacts-details
+        margin-top: $spacing-2
+        li > span
+            padding-right: $spacing-2
+            flex-shrink: 0
+        a, address
+            @include small
+            position: relative
+            z-index: 2
+        li + li
+                margin-top: $spacing-2
+    @include media-breakpoint-down(md)
+        .contacts-details
+            margin-top: $spacing-3
+            span
+                flex-shrink: 0
+
+article.person
+    @include article
+    word-break: break-word
+    gap: $spacing-3
+    .avatar
+        align-self: start
+        flex-shrink: 0
+        order: -1
+        min-width: $spacing-5
+    .person-name
+        @include h4
+        a
+            @include stretched-link
+            text-decoration: none
+    .person-role
+        margin-top: $spacing-1
+    .description
+        @include small
+        flex-grow: 1
+    @include media-breakpoint-down(lg)
+        flex-direction: row
+        gap: $spacing-3
+        .description
+            text-align: left
+        .avatar
+            align-self: start
+            flex-shrink: 0
+            margin-bottom: 0
+            width: columns(3)
+    @include media-breakpoint-down(md)
+        justify-content: space-between
+        .description
+            flex: 1
+        .avatar
+            order: 1
+            margin-right: 0
+    @include in-page-without-sidebar
+        .avatar
+            width: 100%

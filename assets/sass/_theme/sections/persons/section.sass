@@ -1,0 +1,25 @@
+.persons__section
+    * + .persons
+        margin-top: $spacing-4
+    .persons:last-child
+        padding-bottom: $spacing-5
+    .taxonomies-persons
+        @extend .taxonomies-section
+    .persons-categories + .taxonomies-persons
+        margin-top: $spacing-3
+    @include media-breakpoint-up(desktop)
+        &:not(.full-width)
+            .taxonomies-persons
+                padding-left: offset(4)
+            ol.persons
+                padding-left: offset(4)
+
+.persons__section,
+.persons_categories__term,
+.administrators__taxonomy,
+.authors__taxonomy,
+.researchers__taxonomy,
+.teachers__taxonomy,
+    .page-with-blocks
+        .persons
+            margin-bottom: $spacing-5

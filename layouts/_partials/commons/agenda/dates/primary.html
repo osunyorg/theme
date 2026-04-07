@@ -1,0 +1,18 @@
+{{ $is_repeating := gt .Params.time_slots 1 }}
+<div class="event-summary">
+  <span class="date" itemprop="startDate" content="{{ .Params.dates.from.day }}">{{ .Params.dates.computed.long }}</span>
+  {{ if $is_repeating }}
+    <span class="type">{{ i18n (printf "events.regular_event") }}</span>
+  {{ end }}
+  {{ with .Params.place }}
+    <span class="location" itemprop="location" itemscope itemtype="https://schema.org/Place">{{ . }}</span>
+  {{ end }}
+  {{ with .Params.dates }}
+    {{ if ne .status "archive" }}
+      {{ partial "commons/agenda/dates/dropdown-calendar.html" (dict
+        "index" "primary"
+        "calendar_links" .add_to_calendar
+      ) }}
+    {{ end }}
+  {{ end }}
+</div>

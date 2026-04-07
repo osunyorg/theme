@@ -1,0 +1,6 @@
+{{ if .video_title }}
+  {{ $described_by_id := printf "block-video-title-%s" .html_id }}
+  <p aria-hidden="true" id="{{ $described_by_id }}">{{- safeHTML .video_title -}}</p>
+{{ end }}
+
+{{ partial "commons/transcription.html" . }}

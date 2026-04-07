@@ -1,0 +1,9 @@
+{{ $class := "job" }}
+
+{{ if and .job.Params.image .options.image }}
+  {{ $class = printf "%s job--with-image" $class }}
+  {{ $image_direction := partial "commons/image/helpers/GetDirection" .job.Params.image }}
+  {{ $class = printf "%s %s" $class $image_direction }}
+{{ end }}
+
+{{ return $class }}

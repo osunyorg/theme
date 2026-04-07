@@ -1,6 +1,6 @@
 {{- $block := .block }}
-{{- $block_class := partial "blocks/helpers/GetClass" .block -}}
-{{- with .block.data -}}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+{{ with .block.data }}
   {{- $options := .options -}}
   {{- $layout := .layout | default "list" -}}
   

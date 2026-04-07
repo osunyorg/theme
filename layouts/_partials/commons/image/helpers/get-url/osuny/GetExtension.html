@@ -1,0 +1,7 @@
+{{ $fileExtension := "" }}
+{{ if .format }}
+  {{ $fileExtension = delimit (slice "." .format) "" }}
+{{ else }}
+  {{ $fileExtension = path.Ext .filename }}
+{{ end }}
+{{ return $fileExtension }}

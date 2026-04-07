@@ -42,8 +42,9 @@ window.osuny.Map.prototype.setMap = function () {
     });
 
     this.layers = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        referrerPolicy: "origin"
     });
 
     this.layers.addTo(this.map);

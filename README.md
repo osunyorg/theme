@@ -2,7 +2,7 @@
 
 [Documentation officielle sur developers.osuny.org](https://developers.osuny.org)
 
-La version d'Hugo nécessaire est intégrée dans le numéro de release, par exemple `v9.1.0-hugo-0.154.5.` indique que la release `9.1.0` nécessite la version `0.154.5`.
+La version d'Hugo nécessaire est intégrée dans le numéro de release, par exemple `v9.1.0-hugo-0.157.0` indique que la release `9.1.0` nécessite la version `0.157.0`.
 
 
 

@@ -2,13 +2,9 @@
 
 <div class="document-content">
   <div class="container">
-    <ul class="papers">
-      {{ range .Paginator.Pages }}
-        <li>
-          {{ partial "papers/partials/paper.html" (dict "paper" . ) }}
-        </li>
-      {{ end }}
-    </ul>
+    {{ partial "papers/partials/papers.html" (dict
+      "papers" .Paginator.Pages
+    ) }}
     {{ partial "commons/section/pagination.html" . }}
   </div>
 

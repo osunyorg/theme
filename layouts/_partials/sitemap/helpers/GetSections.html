@@ -1,0 +1,17 @@
+{{ $selected_sections := slice }}
+
+{{ $sections := slice (site.GetPage "/pages") }}
+{{ $sections = $sections | append site.Sections }}
+{{ $sections = $sections | uniq }}
+
+{{ range $sections }}
+  {{ $ignored := partial "helpers/param/GetSiteParamWithDefault" (dict
+    "param" (printf "%s.sitemap.ignore" .Type)
+    "default" "default.sitemap.ignore"
+  ) }}
+  {{ if and (not $ignored) .Permalink }}
+    {{ $selected_sections = $selected_sections | append . }}
+  {{ end }}
+{{ end }}
+
+{{ return $selected_sections }}

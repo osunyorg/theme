@@ -1,0 +1,14 @@
+{{ $heading_level := .heading_level }}
+{{ $inside_volume := .inside_volume }}
+{{ $with_actions := .with_actions }}
+<ul class="papers">
+  {{ range $index, $paper := .papers }}
+    {{ partial "papers/partials/paper.html" (dict 
+      "paper" .
+      "with_actions" $with_actions
+      "inside_volume" $inside_volume
+      "heading_level" $heading_level
+      "index" $index
+    ) }}
+  {{ end }}
+</ul>
