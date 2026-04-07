@@ -1,13 +1,16 @@
 {{ if site.Params.search.active }}
-  <script src="/pagefind/pagefind-ui.js" defer async></script>
-
-  <div id="search" class="search" aria-hidden="true" aria-modal="true" role="dialog" aria-label="{{ i18n "commons.search.label" }}">
-    <button class="search__close popup-close" aria-label="{{ i18n "commons.search.close" }}">
-      {{ i18n "commons.search.close" }}
-    </button>
-    <p role="heading" aria-level="1" class="sr-only">{{ i18n "commons.search.title" }}</p>
-
-    {{ partial "commons/search/hooks/before-modal-end.html" . }}
-  </div>
-
+  <pagefind-modal>
+    <pagefind-modal-header>
+      <pagefind-input></pagefind-input>
+      <pagefind-filter-pane></pagefind-filter-pane>
+    </pagefind-modal-header>
+    <pagefind-modal-body>
+      <pagefind-summary></pagefind-summary>
+      <pagefind-results show-images></pagefind-results>
+    </pagefind-modal-body>
+    <pagefind-modal-footer>
+      <pagefind-keyboard-hints></pagefind-keyboard-hints>
+    </pagefind-modal-footer>
+  </pagefind-modal>
+  <script src="/pagefind/pagefind-component-ui.js" defer async></script>
 {{ end }}
