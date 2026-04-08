@@ -1,54 +1,86 @@
 .block-features
-    ul
-        @include list-reset
-    .feature
-        display: flex
-        flex-direction: column
-        + .feature
-            margin-top: $spacing-5
-        .name
-            margin-bottom: $spacing-2
-        figure
-            order: -1
-            margin-bottom: $spacing-3
-            picture
-                img
-                    margin: auto
-            picture:not(.is-png, .is-svg)
-                img
-                    object-fit: cover
-                    width: 100%
-                    aspect-ratio: 16/9
-            figcaption
-                @include meta
-                margin-top: $spacing-2
-                text-align: right
-            picture.is-png
-                padding-top: $spacing-3
-                img
-                    margin: initial
-                    max-width: $block-features-icon-max-width
-                @include media-breakpoint-down(desktop)
-                    margin-bottom: $spacing-2
-    @include in-page-with-sidebar
-        .feature
-            flex-direction: row
-            figure
-                width: columns(2)
-                flex-shrink: 0
-                margin-right: var(--grid-gutter)
-                picture.is-png
-                    img
-                        margin: auto
-
     @include in-page-without-sidebar
         .top
             width: columns(8)
-        .features
-            @include list-reset
-            @include grid(3, desktop)
+    
+    .features
+        @include list-reset
         .feature
             display: flex
-            + .feature
-                margin-top: 0
+            figure
+                order: -1
+                figcaption
+                    @include meta
+                    margin-top: $spacing-1
+                picture
+                    &:not(.is-png)
+                        img
+                            aspect-ratio: 16/9
+                            object-fit: cover
+                    &.is-png
+                        img
+                            max-width: $block-features-icon-max-width
+        
+    &--grid
+        .features
+            @include layout-grid
+            .feature
+                flex-direction: column
+                figure
+                    margin-bottom: $spacing-1
 
+    &--list
+        .features
+            @include layout-list
+            @include media-breakpoint-down(desktop)
+                .feature
+                    flex-direction: column
+                    gap: space(3)
+                    &-content
+                        div
+                            margin-left: offset(1)
+                            margin-top: $spacing-1
+                    figure
+                        display: flex
+                        gap: var(--grid-gutter)
+                        figcaption
+                            margin-top: auto
+                            flex: 1
+                        picture
+                            img
+                                width: columns(4)
+                            &.is-png
+                                img
+                                    max-width: $block-features-icon-max-width-mobile
+            
+            @include media-breakpoint-up(desktop)
+                .feature
+                    gap: var(--grid-gutter)
+                    &-content
+                        display: flex
+                        flex: 1
+                        gap: var(--grid-gutter)
+                    figure
+                        width: columns(2)
+            
+            @include in-page-with-sidebar
+                .feature
+                    &-content
+                        > *
+                            width: columns(4)
+                    &:has(figure)
+                        .feature-content
+                            display: block
+                            > *
+                                width: columns(6)
+
+            @include in-page-without-sidebar
+                .feature
+                    &-content
+                        display: flex
+                        gap: var(--grid-gutter)
+                        .name
+                            width: columns(4)
+                        > div
+                            width: columns(6)
+                            margin-left: auto
