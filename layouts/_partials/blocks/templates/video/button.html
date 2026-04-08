@@ -1,6 +1,6 @@
-{{ $transcription := .video.title }}
+{{ $transcription := printf "<p>%s</p>" .video.title }}
 {{ if .transcription }}
-  {{ $transcription = printf "<p>%s</p>%s" $transcription .transcription}}
+  {{ $transcription = printf "%s%s" $transcription .transcription }}
 {{ end}}
 
 {{ $options := (dict
