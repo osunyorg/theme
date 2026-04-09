@@ -1,0 +1,14 @@
+{{/*  This avoid events children duplication in term single. This happen when a child event share the same category as its parent  */}}
+{{ $term := .term }}
+{{ $child_events := where .events "Params.dates.event.is_child" true }}
+{{ $children_with_same_category := slice }}
+
+{{ range $index, $child := $child_events }}
+  {{ with site.GetPage .Params.parent.path }}
+    {{ if in .Params.events_categories $term.Slug }}
+      {{ $children_with_same_category = $children_with_same_category | append $child }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ return $children_with_same_category  }}
