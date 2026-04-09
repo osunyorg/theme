@@ -1,4 +1,8 @@
-{{ $media_type := cond .options.icons "icon" "image" }}
+{{ $options := .options }}
+{{ $media_type := "" }}
+{{ with $options }}
+  {{ $media_type = cond .icons "icon" "image" }}
+{{ end }}
 
 <figure class="media media--{{ $media_type }}" {{ with or .feature.alt .feature.credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
   {{ partial "commons/image.html" (dict
