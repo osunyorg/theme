@@ -6,9 +6,6 @@
     {{ partial "blocks/templates/features/feature/content.html" . }}
   {{ end }}
   {{ if $feature.image }}
-    {{ partial "blocks/templates/features/feature/media.html" (dict
-      "feature" $feature
-      "options" $options
-    ) }}
+    {{ partial "blocks/templates/features/feature/media.html" . }}
   {{ end }}
 </li>
