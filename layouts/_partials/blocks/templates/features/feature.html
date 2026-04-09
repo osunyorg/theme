@@ -1,0 +1,14 @@
+{{ $feature := .feature }}
+{{ $options := .options }}
+
+<li class="feature">
+  {{ if or $feature.title $feature.description }}
+    {{ partial "blocks/templates/features/feature/content.html" . }}
+  {{ end }}
+  {{ if $feature.image }}
+    {{ partial "blocks/templates/features/feature/media.html" (dict
+      "feature" $feature
+      "options" $options
+    ) }}
+  {{ end }}
+</li>

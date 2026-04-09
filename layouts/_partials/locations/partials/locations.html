@@ -1,0 +1,14 @@
+{{ $layout := .layout | default site.Params.locations.index.layout }}
+{{ $options := .options | default site.Params.locations.index.options }}
+{{ $heading_level := .heading_level | default 2 }}
+{{ $locations := .locations | default .Paginator.Pages }}
+<ul class="locations locations--{{- $layout -}}">
+  {{ range $locations }}
+    {{ partial "locations/partials/location.html" (dict 
+      "location" .
+      "heading_level" $heading_level
+      "layout" $layout
+      "options" $options
+    ) }}
+  {{ end }}
+</ul>

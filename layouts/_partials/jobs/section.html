@@ -1,0 +1,21 @@
+{{ partial "jobs/section/hero.html" . }}
+<div class="document-content">
+  {{ partial "jobs/section/summary.html" (dict
+    "with_container" true
+    "context" .
+  ) }}
+
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
+    {{ partial "contents/list.html" (dict
+      "context" .
+      "contents" .Params.contents
+    ) }}
+  {{ end }}
+
+  {{ partial "taxonomies/section/container.html" . }}
+
+  <div class="container">
+    {{ partial "jobs/partials/jobs.html" . }}
+    {{ partial "commons/section/pagination.html" . }}
+  </div>
+</div>

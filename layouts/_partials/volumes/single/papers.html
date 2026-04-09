@@ -1,0 +1,10 @@
+<section>
+  <div class="top">
+    <h2>{{ i18n "volumes.table_contents" }}</h2>
+  </div>
+  {{ partial "papers/partials/papers.html" (dict
+    "papers" .Paginator.Pages
+    "inside_volume" true
+    "heading_level" 3
+  ) }}
+</section>

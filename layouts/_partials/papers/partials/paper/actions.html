@@ -1,0 +1,18 @@
+{{ $only_file := .only_file | default false }}
+{{ $with_modal := and (not $only_file) .paper.Params.abstract }}
+{{ $id := printf "modal-%s" .paper.Slug }}
+
+{{ with .paper }}
+  <div class="paper-actions" role="group">
+    {{- if $with_modal }}
+      <button type="button" data-open-modal="{{ $id }}">{{ i18n "volumes.abstract" }}</button>
+    {{ end -}}
+    {{ partial "papers/partials/paper/actions/pdf.html" . }}
+  </div>
+  {{- if $with_modal }}
+    {{ partial "papers/partials/paper/actions/modal.html" (dict
+      "paper" .
+      "id" $id
+      ) }}
+  {{ end -}}
+{{ end }}

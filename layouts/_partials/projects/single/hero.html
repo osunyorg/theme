@@ -1,0 +1,10 @@
+{{ $title := partial "header/helpers/GetTitle" . }}
+{{ $share := site.Params.projects.share_links.enabled | default site.Params.share_links.enabled }}
+{{ partial "header/hero.html" (dict
+  "title" $title
+  "image" .Params.image
+  "sizes" site.Params.image_sizes.sections.projects.hero_single
+  "hero_text_complement" ( partial "projects/single/hero/infos.html" . )
+  "context" .
+  "share" $share
+) }}

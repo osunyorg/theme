@@ -1,0 +1,20 @@
+{{ $name := .subject.Title }}
+{{ $with_labels := .with_labels | default true }}
+
+{{ with .subject.Params.contact_details }}
+  <div class="contacts-details">
+    {{ if or .websites .social_networks .emails .phone_numbers .phone_professional .postal_address }}
+      <ul>
+        {{ partial "commons/contact-details/links.html" (dict
+          "context" .
+          "name" $name
+          "with_labels" $with_labels
+        ) }}
+        {{ partial "commons/contact-details/address.html" (dict
+          "postal_address" .postal_address
+          "with_labels" $with_labels
+        ) }}
+      </ul>
+    {{ end }}
+  </div>
+{{ end }}

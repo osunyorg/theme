@@ -1,0 +1,14 @@
+{{ partial "commons/menu.html" (dict
+  "kind" "social"
+  "class" "nav-social"
+  "context" .
+) }}
+
+{{ with site.Params.contact_details }}
+  <ul class="footer-social site-links">
+    {{ partial "commons/socials.html" (dict
+      "use_default_email_label" true
+      "context" .
+    ) }}
+  </ul>
+{{ end }}

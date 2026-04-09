@@ -1,0 +1,7 @@
+
+<meta itemprop="name" content="{{ safeHTML .Title }}">
+<meta itemprop="url" content="{{ .Permalink }}">
+{{ partial "events/partials/event/datetime/meta-dates.html" . }}
+{{ with .Params.summary }}
+  <meta itemprop="description" content="{{ . | safeHTML }}">
+{{ end }}

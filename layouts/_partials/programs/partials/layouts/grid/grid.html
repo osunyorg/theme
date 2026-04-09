@@ -1,0 +1,12 @@
+{{ $heading_level := .heading_level }}
+{{ $options := .options }}
+<ul class="programs-grid">
+  {{ range .programs }}
+    {{ $program := site.GetPage .path }}
+    {{ partial "programs/partials/layouts/grid/grid-item.html" (dict
+      "program" $program
+      "heading_level" $heading_level
+      "options" $options
+    ) }}
+  {{ end }}
+</ul>

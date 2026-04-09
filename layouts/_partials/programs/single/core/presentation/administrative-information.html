@@ -1,0 +1,9 @@
+{{ $hasAdministrativeInformation := partial "programs/single/helpers/HasAdministrativeInformation" . }}
+{{ if $hasAdministrativeInformation }}
+  <div>
+    <section id="{{ anchorize (i18n "programs.administrative_information") }}">
+      <h3>{{ i18n "programs.administrative_information" }}</h3>
+      {{ partial "programs/single/core/presentation/administrative-information/table.html" . }}
+    </section>
+  </div>
+{{ end }}

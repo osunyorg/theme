@@ -1,0 +1,35 @@
+{{ $primary := partial "GetMenu" "primary" }}
+{{ $upper_menu := partial "GetMenu" "upper-menu" }}
+{{ partial "header/hooks/before-start.html" . }}
+<header id="document-header" role="banner"
+  {{ if $upper_menu.items }}
+    class="has-upper-menu"
+  {{ end }}>
+  {{ if $upper_menu.items }}
+    <nav class="upper-menu" aria-label="{{ i18n "commons.menu.upper" }}">
+      <div class="container">
+        {{ partial "commons/menu.html" (dict
+          "kind" "upper-menu"
+          "stop" 1
+          "context" .
+        ) }}
+      </div>
+    </nav>
+  {{ end }}
+  <nav class="primary-menu" aria-label="{{ i18n "commons.menu.main" }}">
+    <div class="container">
+      {{ partial "header/logo.html" }}
+      {{ if $primary.items }}
+        {{ partial "header/button.html" }}
+        <div class="menu" id="navigation">
+          {{ partial "commons/menu.html" (dict
+            "kind" "primary"
+            "context" .
+          ) }}
+        </div>
+      {{ end }}
+      {{ partial "header/hooks/before-primary-menu-end.html" . }}
+    </div>
+  </nav>
+  {{ partial "header/hooks/before-end.html" . }}
+</header>

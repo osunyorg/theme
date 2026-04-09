@@ -1,0 +1,5 @@
+{{ $size := partial "commons/files/helpers/GetHumanSize" .size }}
+{{ $extension := partial "commons/files/helpers/GetExtensionFile" .name }}
+{{ $extension_with_size := (printf "%.0f %s - %s" $size.weight $size.unit $extension) }}
+
+{{ return $extension_with_size }}

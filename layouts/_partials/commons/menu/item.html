@@ -1,0 +1,30 @@
+{{- $item := .item -}}
+{{- $context := .context -}}
+{{- $is_active := eq $context.RelPermalink $item.target -}}
+{{- $item_class := $item.html_class | default "" -}}
+{{ with .level_options }}
+  {{ if .summary.active }}
+    {{ $item_class = printf "%s with-summary" $item_class }}
+  {{ end }}
+{{ end }}
+
+{{ if $item.children }}
+  {{ partial "commons/menu/item/with-children.html" (dict
+    "item" $item
+    "is_active" $is_active
+    "item_class" $item_class
+    "level" .level
+    "level_options" .level_options
+    "options" .options
+    "context" .context
+  ) }}
+{{ else }}
+  {{ partial "commons/menu/item/without-children.html" (dict
+    "item" $item
+    "is_active" $is_active
+    "item_class" $item_class
+    "level" .level
+    "level_options" .level_options
+    "context" .context
+  ) }}
+{{ end }}

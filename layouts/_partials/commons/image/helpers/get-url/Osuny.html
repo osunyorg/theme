@@ -1,0 +1,34 @@
+{{/*  Todo : simplify usage with only media  */}}
+{{ $url := .url }}
+{{ if .media }}
+  {{ $url = .media.url }}
+{{ end }}
+{{ $parsedUrl := urls.Parse $url }}
+
+{{ $crop := partial "commons/image/helpers/get-url/osuny/GetCrop" (dict
+  "crop" .crop
+) }}
+{{ $scale := partial "commons/image/helpers/get-url/osuny/GetScale" (dict
+  "scale" .scale
+) }}
+{{ $pathParts := split $parsedUrl.Path "/" }}
+{{ $lastIndex := sub (len $pathParts) 1 }}
+{{ $filename := index $pathParts $lastIndex }}
+{{ $pathParts = first $lastIndex $pathParts }}
+{{ $baseFilename := strings.TrimSuffix (path.Ext $filename) $filename }}
+{{ $baseFilename = delimit (slice $baseFilename .size) "_" }}
+{{ if ne $scale "" }}
+  {{ $baseFilename = delimit (slice $baseFilename "@" $scale "x") "" }}
+{{ end }}
+{{ $pathParts = $pathParts | append $baseFilename }}
+{{ $joinedPath := path.Join $pathParts }}
+
+{{ $fileExtension := partial "commons/image/helpers/get-url/osuny/GetExtension" (dict
+  "format" .format
+  "filename" $filename
+) }}
+
+{{ $domain := printf "%s://%s/" $parsedUrl.Scheme $parsedUrl.Host }}
+{{ $resultSlice := slice $domain $joinedPath $fileExtension }}
+{{ $result := delimit $resultSlice "" }}
+{{ return $result }}

@@ -1,0 +1,18 @@
+{{ $block := .block }}
+{{ $block_class := partial "blocks/templates/persons/helpers/GetClass" .block }}
+
+{{ with .block.data }}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ $papers := partial "helpers/objects/GetFromPathSlice" .papers }}
+        {{ partial "papers/partials/papers.html" (dict
+          "papers" $papers
+          "with_actions" false
+          "heading_level" $block.ranks.children
+        ) }}
+      </div>
+    </div>
+  </div>
+{{- end -}}

@@ -1,0 +1,27 @@
+{{ $morning := or .time_slot_morning.from .time_slot_morning.to }}
+{{ $afternoon := or .time_slot_afternoon.from .time_slot_afternoon.to }}
+{{ if or $morning $afternoon }}
+  <li>
+    <span>{{ .title }}</span>
+    {{ if $morning }}
+      <span class="schedule-table__morning">
+        {{ with .time_slot_morning.from }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+        {{ with .time_slot_morning.to }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+      </span>
+    {{ end }}
+    {{ if $afternoon }}
+      <span class="schedule-table__afternoon">
+        {{ with .time_slot_afternoon.from }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+        {{ with .time_slot_afternoon.to }}
+          <time datetime="{{ . }}">{{ . }}</time>
+        {{ end }}
+      </span>
+    {{ end }}
+  </li>
+{{ end }}

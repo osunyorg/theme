@@ -1,0 +1,8 @@
+{{ with .Params.dates }}
+  {{ if .computed }}
+    <li class="exhibition-date">
+      <span>{{ i18n "exhibitions.date" }}</span>
+      {{ safeHTML .computed.two_lines.long }}
+    </li>
+  {{ end }}
+{{ end }}

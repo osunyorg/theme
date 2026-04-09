@@ -1,0 +1,32 @@
+<li class="program" itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
+  <div class="program-content">
+    {{ partial "programs/partials/program/heading.html" (dict
+      "item" .program
+      "level" .heading_level
+      "options" .options
+      "itemprop" "name"
+    ) }}
+
+    {{ if and .options.summary .program.Params.summary }}
+      {{ partial "programs/partials/program/core/summary.html" .program }}
+    {{ end }}
+
+    {{ if or site.Params.programs.index.options.categories .options.categories }}
+      {{ partial "programs/partials/program/core/categories.html" .program }}
+    {{ end }}
+
+    {{ partial "commons/item/more.html" . }}
+
+    {{ if and .options.diploma }}
+      {{ partial "programs/partials/program/core/diploma.html" .program }}
+    {{ end }}
+  </div>
+  {{ if and .program.Params.image .options.image }}
+    {{ partial "programs/partials/program/media.html" (dict 
+      "image" .program.Params.image
+      "layout" "grid"
+      "options" .options
+      "type" "programs"
+    ) }}
+  {{ end }}
+</li>

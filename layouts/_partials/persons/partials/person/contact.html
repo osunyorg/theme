@@ -1,0 +1,6 @@
+{{ if .Params.contact_details }}
+  {{ partial "commons/contact-details.html" (dict
+    "subject" .
+    "with_labels" site.Params.persons.contact_details.with_labels
+  ) }}
+{{ end }}

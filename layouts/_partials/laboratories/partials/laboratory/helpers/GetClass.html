@@ -1,0 +1,9 @@
+{{ $class := "laboratory" }}
+
+{{ if and .laboratory.Params.image .options.image }}
+  {{ $class = printf "%s laboratory--with-image" $class }}
+  {{ $image_direction := partial "commons/image/helpers/GetDirection" .laboratory.Params.image }}
+  {{ $class = printf "%s %s" $class $image_direction }}
+{{ end }}
+
+{{ return $class }}

@@ -2,14 +2,16 @@
     @include list-reset
     &--list
         @include layout-list
+        .exhibition
+            &-title,
+            &-subtitle
+                @include h3
     &--grid
         @include layout-grid(2)
         .exhibition
-            &-title
-                @include h3
+            &-title,
             &-subtitle
                 @include h3
-                color: var(--color-text-alt)
     &--cards
         @include layout-cards
     &--large
@@ -43,7 +45,7 @@
                     order: -1
                     width: columns(5)
                     flex-shrink: 1
-                &-schedule
+                &-meta
                     position: absolute
                     left: 0
                     top: 0
@@ -52,7 +54,7 @@
                     @include h3
                 &-content
                     flex: 1
-                    > * + .exhibition-schedule
+                    > * + .exhibition-meta
                         margin-top: 0
                 &--with-image
                     display: flex

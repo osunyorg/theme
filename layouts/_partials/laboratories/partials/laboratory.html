@@ -1,0 +1,27 @@
+{{ $laboratory := .laboratory }}
+{{ $layout := .layout | default "list" }}
+{{ $heading_level := .heading_level }}
+{{ $options := .options }}
+{{ $class := partial "laboratories/partials/laboratory/helpers/GetClass" . }}
+{{ with $laboratory }}
+  <article class="{{ $class }}" 
+      itemscope itemtype="https://schema.org/ResearchOrganization">
+    <div class="laboratory-content">
+      {{ partial "laboratories/partials/laboratory/heading.html" (dict
+        "item" .
+        "options" $options
+        "level" $heading_level
+        "itemprop" "title"
+      ) }}
+      {{ if $options.summary }}
+        {{ partial "laboratories/partials/laboratory/summary.html" . }}
+      {{ end }}
+    </div>
+    {{ if $options.image }}
+      {{ partial "laboratories/partials/laboratory/media.html" (dict 
+        "image" $laboratory.Params.image
+        "layout" $layout
+      ) }}
+    {{ end }}
+  </article>
+{{ end }}

@@ -1,0 +1,30 @@
+{{/*  Use general configuration  */}}
+{{ $options := site.Params.share_links }}
+{{/*  Use Section configuration if it exists  */}}
+{{ with index (index site.Params .Section) "share_links" }}
+  {{ $options = . }}
+{{ end }}
+
+<ul class="share">
+  {{ if $options.facebook }}
+    {{ partial "commons/share/links/facebook.html" . }}
+  {{ end }}
+  {{ if $options.linkedin }}
+    {{ partial "commons/share/links/linkedin.html" . }}
+  {{ end }}
+  {{ if $options.mastodon }}
+    {{ partial "commons/share/links/mastodon.html" . }}
+  {{ end }}
+  {{ if $options.twitter }}
+    {{ partial "commons/share/links/twitter.html" . }}
+  {{ end }}
+  {{ if $options.whatsapp }}
+    {{ partial "commons/share/links/whatsapp.html" . }}
+  {{ end }}
+  {{ if $options.telegram }}
+    {{ partial "commons/share/links/telegram.html" . }}
+  {{ end }}
+  {{ if $options.email }}
+    {{ partial "commons/share/links/email.html" . }}
+  {{ end }}
+</ul>

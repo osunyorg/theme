@@ -1,0 +1,7 @@
+{{ range . -}}
+  {{- if and (eq .template "title") .title }}
+    <li>
+      <a {{ partial "helpers/anchor/GetAttribute" .slug }}>{{ safeHTML .title }}</a>
+    </li>
+  {{ end -}}
+{{- end -}}

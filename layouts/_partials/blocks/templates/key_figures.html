@@ -1,0 +1,24 @@
+{{ $block := .block }}
+{{ $is_animated := site.Params.blocks.key_figures.animated }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+
+{{ with .block.data }}
+  <div class="{{ $block_class }}{{ if $is_animated }} is-animated {{ end }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ if .figures }}
+          {{ $list_class := "odd-items" }}
+          {{ if (modBool (len .figures) 2) }}
+            {{ $list_class = "even-items" }}
+          {{ end }}
+          <ul class="{{ $list_class }}">
+            {{ range .figures }}
+              {{ partial "blocks/templates/key_figures/key_figure.html" . }}
+            {{ end }}
+          </ul>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}

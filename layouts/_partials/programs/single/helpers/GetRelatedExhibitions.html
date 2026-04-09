@@ -1,0 +1,3 @@
+{{ $event_category := site.GetPage (printf "/events_categories/%s" .Params.related_categories.events ) }}
+{{ $related_exhibitions := where $event_category.Pages "Type" "exhibitions" }}
+{{ return $related_exhibitions }}

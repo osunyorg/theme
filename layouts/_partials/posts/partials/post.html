@@ -1,0 +1,28 @@
+{{ $post := .post }}
+{{ $options := .options }}
+{{ $layout := .layout }}
+{{ $direction := "" }}
+{{ $highlight := .highlight | default false }}
+{{ $heading_level := .heading_level }}
+
+{{ with $post }}
+  {{ $post_class := partial "posts/partials/post/helpers/GetClass" (dict
+    "options" $options
+    "context" .
+  ) }}
+  <li {{- if eq $layout "highlight" }} class="highlight-post" {{- end -}}>
+    <article class="{{ $post_class }}" itemscope itemtype="http://schema.org/BlogPosting">
+      {{ partial "posts/partials/post/core.html" (dict
+        "heading_level" $heading_level
+        "options" $options
+        "context" .
+      ) }}
+      {{ if $options.image }}
+        {{ partial "posts/partials/post/media.html" (dict
+          "image" .Params.image
+          "layout" $layout
+        ) }}
+      {{- end -}}
+    </article>
+  </li>
+{{ end }}

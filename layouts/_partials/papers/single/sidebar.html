@@ -1,0 +1,17 @@
+<div class="section-sidebar paper-sidebar">
+  <div>
+    <aside class="document-nav">
+      <dl>
+        {{ range .GetTerms "volumes" }}
+          {{ partial "papers/single/sidebar/volumes.html" . }}
+        {{ end }}
+
+        {{ partial "papers/single/sidebar/informations.html" . }}
+      </dl>
+    </aside>
+    {{ partial "toc/container.html" (dict
+      "toc" ( partial "papers/single/sidebar/toc.html" . )
+      "context" .
+    ) }}
+  </div>
+</div>

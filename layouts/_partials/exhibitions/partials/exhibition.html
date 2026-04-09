@@ -1,0 +1,23 @@
+{{ $layout := .layout | default "list" }}
+{{ $class := partial "exhibitions/partials/exhibition/helpers/GetClass" . }}
+
+{{ if .exhibition }}
+  <article class="{{ $class }}" itemscope itemtype="https://schema.org/ExhibitionEvent">
+    <div class="exhibition-content">
+      {{ partial "exhibitions/partials/exhibition/heading.html" (dict
+        "item" .exhibition
+        "options" .options
+        "level" .heading_level
+        "itemprop" "name"
+      ) }}
+      {{ partial "exhibitions/partials/exhibition/core.html" . }}
+    </div>
+    {{ if .options.image }}
+      {{ partial "exhibitions/partials/exhibition/media.html" (dict
+        "exhibition" .exhibition
+        "layout" $layout
+        "type" "exhibitions"
+      ) }}
+    {{ end }}
+  </article>
+{{ end }}

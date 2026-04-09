@@ -1,0 +1,30 @@
+{{ partial "locations/section/hero.html" . }}
+
+<div class="document-content">
+  {{ partial "locations/section/summary.html" (dict
+    "with_container" true
+    "context" .
+  ) }}
+
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
+    {{ partial "contents/list.html" (dict
+      "context" .
+      "contents" .Params.contents
+    ) }}
+  {{ end }}
+
+  <div class="container">
+    {{ partial "locations/partials/locations.html" (dict
+      "locations" .Paginator.Pages
+    ) }}
+    {{ partial "commons/section/pagination.html" . }}
+  </div>
+  {{ if site.Params.locations.index.map }}
+    {{ with .Pages }}
+      {{ partial "locations/partials/map.html" (dict
+        "locations" .
+        "title" ( i18n "programs.location" . )
+      ) }}
+    {{ end }}
+  {{ end }}
+</div>

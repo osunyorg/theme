@@ -1,0 +1,19 @@
+{{ $title := partial "header/helpers/GetTitle" . }}
+
+{{ $share := site.Params.events.share_links.enabled | default site.Params.share_links.enabled }}
+{{ $sizes := "" }}
+
+{{ $image := .Params.image }}
+{{ with $image }}
+  {{ $image_format := partial "commons/image/helpers/GetDirection" . }}
+  {{ $sizes = index site.Params.image_sizes.sections.events.hero_single $image_format }}
+{{ end }}
+
+{{ partial "header/hero.html" (dict
+  "title" $title
+  "image" $image
+  "sizes" $sizes
+  "context" .
+  "share" $share
+  "button" false
+) }}

@@ -1,0 +1,34 @@
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+{{ with .block.data }}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        <div class="table-responsive">
+          <table>
+            {{ if .caption }}
+              <caption>{{ safeHTML .caption }}</caption>
+            {{ end }}
+            <thead>
+              <tr>
+                {{ range .columns }}
+                  <th scope="col">{{ . | markdownify }}</th>
+                {{ end }}
+              </tr>
+            </thead>
+            <tbody>
+              {{ range .rows }}
+                <tr>
+                  {{ range . }}
+                    <td>{{ . | markdownify }}</td>
+                  {{ end }}
+                </tr>
+              {{ end }}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

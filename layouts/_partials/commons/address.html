@@ -1,0 +1,33 @@
+{{ with .html }}
+  {{ safeHTML . }}
+{{ else }}
+  {{ with .data }}
+    <address itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+      {{ with .address }}
+        <span itemprop="streetAddress">
+          {{ safeHTML . }}
+        </span>
+      {{ end }}
+      {{ with .address_additional }}
+        <span itemprop="extendedAddress">
+          {{ safeHTML . }}
+        </span>
+      {{ end }}
+      {{ with .zipcode }}
+        <span itemprop="postalCode">
+          {{ safeHTML . }}
+        </span>
+      {{ end }}
+      {{ with .city }}
+        <span itemprop="addressLocality">
+          {{ safeHTML . }}
+        </span>
+      {{ end }}
+      {{ with .country.name }}
+        <span itemprop="addressCountry">
+          {{ safeHTML . }}
+        </span>
+      {{ end }}
+    </address>
+  {{ end }}
+{{ end }}

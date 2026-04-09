@@ -160,7 +160,7 @@
   // Elle inclut les gouttières extérieures
   // Si la largeur de l'écran est inférieure à 1980px, on prend la largeur totale.
   // La grille n'est jamais plus grande que 1980px
-  --grid-width: Min(var(--grid-max-width), 100vw)
+  --grid-width: Min(var(--grid-max-width), #{rvw(100)})
 
   // Largeur d'une colonne
   // On soustrait à la largeur de la grille les 13 gouttières (les 2 extérieures et les 11 intérieures), puis on divise par 12
@@ -202,7 +202,7 @@
   // In page without sidebar
   @include media-breakpoint-up(desktop)
     body:not(.full-width)
-      --heading-margin-top: #{ $heading-margin-top-with-sidebar}
+      --heading-margin-top: #{$heading-margin-top-with-sidebar}
       --heading-margin-bottom: #{$heading-margin-bottom-with-sidebar}
     main > .blocks, body.full-width
       --heading-margin-top: #{ $heading-margin-top-desktop}

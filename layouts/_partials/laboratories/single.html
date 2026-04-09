@@ -1,0 +1,23 @@
+{{ partial "laboratories/single/hero.html" . }}
+
+<div class="document-content" itemscope itemtype="https://schema.org/ResearchOrganization">
+  <meta itemprop="title" content="{{ safeHTML .Title }}">
+  <meta itemprop="url" content="{{ .Permalink }}">
+  {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
+
+  {{ partial "laboratories/single/summary.html" (dict
+    "context" .
+    "block_wrapped" true
+  ) }}
+
+  <div class="container">
+    {{ partial "commons/contact-details.html" (dict "subject" .) }}
+  </div>
+
+  {{ partial "contents/list.html" (dict
+    "context" .
+    "contents" .Params.contents
+  ) }}
+
+  {{ partial "commons/single/hooks/before-content-end.html" . }}
+</div>

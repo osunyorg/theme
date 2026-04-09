@@ -1,0 +1,7 @@
+{{ $alt := or .alt "" }}
+
+{{ if isset .image "alt" }}
+  {{ $alt = .image.alt }}
+{{ end }}
+
+{{ return $alt }}

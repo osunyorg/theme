@@ -1,0 +1,14 @@
+{{ $organization := "" }}
+{{ if .path }}
+  {{ $organization = site.GetPage .path }}
+{{ else }}
+  {{ $organization = (dict
+      "Title" .name
+      "Permalink" .url
+      "Params" (dict 
+        "logo" .logo
+        "external" true
+      )
+    ) }}
+{{ end }}
+{{ return $organization }}

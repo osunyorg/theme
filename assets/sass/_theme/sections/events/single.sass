@@ -225,6 +225,7 @@
 
     .event-parent
         margin-top: $spacing-6
+        margin-bottom: var(--grid-gutter)
         &__title
             @include meta
             margin-bottom: $spacing-3
@@ -253,9 +254,9 @@
                 padding-left: offset(4)
                 .event-content
                     width: columns(5)
-                .event-hours
+                .event-timeslot
                     bottom: 0
-                    span
+                    .event-hours
                         @include sticky(var(--title-height))
                 &:where(:not(.event--with-image))
                     .event-content

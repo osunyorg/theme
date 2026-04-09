@@ -1,0 +1,18 @@
+{{ partial "persons/section/hero.html" . }}
+
+<div class="document-content">
+
+  {{ partial "persons/section/summary.html" (dict
+    "with_container" true
+    "context" .
+  ) }}
+
+  {{ partial "contents/list.html" (dict
+    "context" .
+    "contents" .Params.contents
+  ) }}
+
+  <div class="container">
+    {{ partial "persons/partials/list-by-role.html" . }}
+  </div>
+</div>

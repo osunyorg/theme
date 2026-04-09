@@ -1,0 +1,24 @@
+{{/* La page en cours de rendu */}}
+{{ $current_page := .current_page }}
+{{/* La page à afficher (ou pas) */}}
+{{ $tested_page := .tested_page }}
+{{ $total_pages := .total_pages }}
+{{ $slots := .slots }}
+{{/* Une moitié à gauche, une moitié à droite (sauf les bords !)*/}}
+{{ $slots_divided := div $slots 2 }}
+{{ $min := sub $current_page $slots_divided }}
+{{ if lt $min 1 }}
+  {{/* Pas trop à gauche */}}
+  {{ $min = 1 }}
+{{ end }}
+{{ $max := add $min $slots }}
+{{ if gt $max $total_pages }}
+  {{/* Pas trop à droite */}}
+  {{ $max = add $total_pages 1 }}
+  {{ $min = sub $max $slots }}
+{{ end }}
+{{ $show_page_number := and 
+  (ge $tested_page $min)
+  (lt $tested_page $max)
+}}
+{{ return $show_page_number }}

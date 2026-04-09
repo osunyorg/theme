@@ -20,6 +20,7 @@ window.osuny.VideoPlayer = function (element) {
 window.osuny.VideoPlayer.prototype.play = function () {
     this.cover.style.display = 'none';
     this.iframe.src = this.src;
+    this.iframe.parentNode.append(this.iframe);
 };
 
 window.osuny.VideoPlayer.prototype.cloneIframe = function () {

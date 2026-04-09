@@ -1,0 +1,31 @@
+{{ $options := .options }}
+{{ $heading_level := .heading_level | default 3 }}
+<ul class="highlight">
+  {{ $highlight := index .posts 0 }}
+  {{ $highlight = site.GetPage $highlight.path }}
+  {{ with $highlight }}
+    {{ partial "posts/partials/post.html" (dict 
+      "post" .
+      "heading_level" $heading_level
+      "options" $options
+      "layout" "highlight"
+    ) }}
+  {{ end }}
+  {{ with .posts }}
+    {{ $options = merge $options ( dict "image" false ) }}
+    <li>
+      <ul class="list">
+        {{ range after 1 . }}
+          {{ with site.GetPage .path }}
+            {{ partial "posts/partials/post.html" (dict 
+              "post" .
+              "heading_level" $heading_level
+              "options" $options
+              "layout" "list"
+            ) }}
+          {{ end }}
+        {{ end }}
+      </ul>
+    </li>
+  {{ end }}
+</ul>

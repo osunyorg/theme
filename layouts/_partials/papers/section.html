@@ -1,0 +1,15 @@
+{{ partial "papers/section/hero.html" . }}
+
+<div class="document-content">
+  <div class="container">
+    {{ partial "papers/partials/papers.html" (dict
+      "papers" .Paginator.Pages
+    ) }}
+    {{ partial "commons/section/pagination.html" . }}
+  </div>
+
+  {{ partial "contents/list.html" (dict
+    "context" .
+    "contents" .Params.contents
+  ) }}
+</div>

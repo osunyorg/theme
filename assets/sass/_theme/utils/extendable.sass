@@ -1,0 +1,13 @@
+@mixin extendable($with-icon: false)
+    &
+        cursor: pointer
+    & + .extendable
+        display: none
+    &[aria-expanded="true"]
+        + .extendable
+            display: block
+    @if $with-icon
+        @include icon(arrow-down-s-line, after, $non-breaking: true)
+            vertical-align: middle
+        &[aria-expanded="true"]
+            @include icon(arrow-up-s-line, after, $non-breaking: true)

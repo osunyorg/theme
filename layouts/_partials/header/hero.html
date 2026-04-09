@@ -1,0 +1,16 @@
+{{ $class := partial "header/hero/helpers/GetClass" . }}
+<header class="{{ $class }}">
+  {{ partial "header/hero/hooks/after-start.html" . }}
+  <div class="container">
+    {{ partial "header/hero/breadcrumbs/start.html" . }}
+    {{ partial "header/hero/content.html" . }}
+    {{ partial "header/hero/hooks/before-content-end.html" .context }}
+  </div>
+  {{ if .hero_complement }}
+    {{ .hero_complement }}
+  {{ end }}
+  {{ partial "header/hero/breadcrumbs/end.html" . }}
+  {{ partial "header/hero/hooks/before-end.html" . }}
+</header>
+{{ partial "header/hero/breadcrumbs/after.html" . }}
+{{ partial "header/hero/hooks/after-end.html" . }}

@@ -1,0 +1,27 @@
+{{ $journal := .journal }}
+{{ $layout := .layout | default "list" }}
+{{ $heading_level := .heading_level }}
+{{ $options := .options }}
+{{ $class := partial "journals/partials/journal/helpers/GetClass" . }}
+{{ with $journal }}
+  <article class="{{ $class }}" 
+      itemscope itemtype="https://schema.org/Periodical">
+    <div class="journal-content">
+      {{ partial "journals/partials/journal/heading.html" (dict
+        "item" .
+        "options" $options
+        "level" $heading_level
+        "itemprop" "title"
+      ) }}
+      {{ if $options.summary }}
+        {{ partial "journals/partials/journal/summary.html" . }}
+      {{ end }}
+    </div>
+    {{ if $options.image }}
+      {{ partial "journals/partials/journal/media.html" (dict 
+        "image" $journal.Params.image
+        "layout" $layout
+      ) }}
+    {{ end }}
+  </article>
+{{ end }}

@@ -1,0 +1,18 @@
+<div class="essential-container" id="{{ anchorize (i18n "programs.toc.essential") }}">
+  <div class="container">
+    <dl class="essential">
+      {{- if .Params.level -}}
+        <dt>{{ i18n "programs.level" }}</dt>
+        <dd>{{ safeHTML .Params.level }}</dd>
+      {{- end -}}
+      {{- if .Params.duration -}}
+        <dt>{{ i18n "programs.duration" }}</dt>
+        <dd>{{ safeHTML .Params.duration }}</dd>
+      {{- end -}}
+      {{- if .Params.ects -}}
+        <dt>{{ i18n "programs.ects_credits" }}</dt>
+        <dd>{{ safeHTML .Params.ects }}</dd>
+      {{- end -}}
+    </dl>
+  </div>
+</div>

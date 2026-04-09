@@ -1,0 +1,25 @@
+{{ $inside_volume := .inside_volume | default false }}
+{{ $with_actions := .with_actions | default true }}
+{{ $heading_level := .heading_level }}
+
+{{ with .paper }}
+  <li>
+    <article class="paper" itemscope itemtype="https://schema.org/ScholarlyArticle" {{- if $inside_volume }} itemProp="hasPart" {{- end -}}>
+      <div>
+        {{ partial "papers/partials/paper/heading.html" (dict
+          "paper" .
+          "heading_level" $heading_level
+        ) }}
+        {{ partial "papers/partials/paper/meta.html" (dict
+          "paper" .
+          "inside_volume" $inside_volume
+        ) }}
+      </div>
+      {{ if $with_actions }}
+        {{ partial "papers/partials/paper/actions.html" (dict 
+          "paper" .
+        ) }}
+      {{ end }}
+    </article>
+  </li>
+{{ end }}

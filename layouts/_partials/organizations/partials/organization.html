@@ -1,0 +1,30 @@
+{{ $options := .options | default site.Params.organizations.index.options }}
+{{ $layout := .layout }}
+{{ $heading_level := .heading_level | default 2 }}
+{{ $attributes := partial "organizations/partials/organization/helpers/GetAttributes" . }}
+{{ with .organization }}
+  <article class="organization" itemscope itemtype="https://schema.org/Organization" {{ $attributes | safeHTMLAttr }}>
+    <div class="organization-content">
+      {{ partial "organizations/partials/organization/heading.html" (dict
+        "heading_level" $heading_level
+        "organization" .
+        "options" $options
+      ) }}
+      {{ if $options.summary }}
+        {{ partial "organizations/partials/organization/summary.html" . }}
+      {{ end }}
+      {{ if and $options.address .Params.contact_details }}
+        {{ partial "commons/address.html" .Params.contact_details.postal_address }}
+      {{ end }}
+      {{ if $options.categories }}
+        {{ partial "organizations/partials/organization/categories.html" . }}
+      {{ end }}
+    </div>
+    {{ if $options.logo }}
+      {{ partial "organizations/partials/organization/media.html" (dict
+        "context" .
+        "layout" $layout
+      ) }}
+    {{ end }}
+  </article>
+{{ end }}

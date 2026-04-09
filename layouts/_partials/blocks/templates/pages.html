@@ -1,0 +1,18 @@
+{{ $class := partial "blocks/templates/pages/helpers/GetClass" . }}
+{{ $block := .block }}
+{{ with .block.data }}
+  {{ $layout := .layout | default "grid" }}
+  <div class="{{ $class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ $pages := partial "helpers/objects/GetFromPathSlice" .pages }}
+        {{ partial (printf "pages/partials/layouts/%s/%s.html" $layout $layout) (dict
+          "pages" $pages
+          "heading_level" $block.ranks.children
+          "options" .options
+        ) }}
+      </div>
+    </div>
+  </div>
+{{ end }}

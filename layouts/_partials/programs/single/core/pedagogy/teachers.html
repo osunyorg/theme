@@ -1,0 +1,23 @@
+{{- if .Params.teachers -}}
+  {{ $title := i18n "programs.teachers" -}}
+  <section id="{{ anchorize $title }}">
+    <h3>{{ $title }}</h3>
+    <ul class="list-persons">
+      {{- $descriptions := .Params.teachers_description -}}
+      {{- range .Params.teachers -}}
+        {{- $slug := . -}}
+        {{- $person := site.GetPage (printf "/persons/%s" $slug) -}}
+        {{- with $person -}}
+          <li>
+            <a href="{{ .Permalink }}">
+              {{- safeHTML .Title -}}
+            </a>
+            <p>
+              {{- safeHTML (index $descriptions $slug) -}}
+            </p>
+          </li>
+        {{- end -}}
+      {{- end -}}
+    </ul>
+  </section>
+{{- end -}}

@@ -1,0 +1,13 @@
+{{ if or .options.dates .options.place }}
+  <div class="exhibition-meta {{- if .with_place }} with-place {{- end }}">
+    {{ if .options.dates }}
+      {{ partial "exhibitions/partials/exhibition/core/meta/schedule.html" (dict
+        "dates" .exhibition.Params.dates
+        "on_two_lines" false
+      ) }}
+    {{ end }}
+    {{ if .options.place }}
+      {{ partial "exhibitions/partials/exhibition/core/meta/place.html" .exhibition }}
+    {{ end }}
+  </div>
+{{ end }}

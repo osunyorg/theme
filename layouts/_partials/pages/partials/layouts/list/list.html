@@ -1,0 +1,22 @@
+{{ $options := .options }}
+{{ $heading_level := .heading_level | default 3 }}
+
+<ul class="pages pages--list list {{- if and (not $options.summary) (not $options.image) }} title-only {{- end }}">
+  {{ range .pages }}
+    {{ if or $options.summary $options.image }}
+      <li>
+        {{ partial "pages/partials/page.html" (dict 
+          "page" .
+          "options" $options
+          "heading_level" $heading_level
+        ) }}
+      </li>
+    {{ else }}
+      <li class="page">
+        <a href="{{- .Permalink -}}">
+          {{- safeHTML .Title -}}
+        </a>
+      </li>
+    {{ end }}
+  {{ end }}
+</ul>

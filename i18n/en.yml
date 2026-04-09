@@ -1,3 +1,9 @@
+backlinks:
+  events: Events mentioning {{ . }}
+  exhibitions: Exhibitions mentioning {{ . }}
+  pages: Pages mentioning {{ . }}
+  posts: Posts mentioning {{ . }}
+  projects: Projects mentioning {{ . }}
 blocks:
   call_to_action:
     title: Call to action
@@ -105,7 +111,6 @@ commons:
     placeholder: Search
     search_label: Search this site
     title: Search
-  backtotop: Back to top
   biography: Biography
   breadcrumb: Breadcrumb
   click_to_copy:
@@ -304,9 +309,7 @@ events:
   more_dates: Show all dates
   none: No event
   next: Next event
-  next_aria: Next event “{{ .Title }}”
   previous: Previous event
-  previous_aria: Previous event “{{ .Title }}”
   from:
     day: From day
     hour: From hour
@@ -322,15 +325,17 @@ events:
   unique_day: Date
 exhibitions:
   archives: Previous exhibitions archive
-  none: No exhibition.
   current: Now
   future: Coming soon
   item:
     federated: "Exhibition from <span>{{ . }}</span>"
+  none: No exhibition.
+  see_all_in_program: See all program's exhibitions
   status:
+    archive: Passed
     current: Now
     future: Soon
-    archive: Passed
+  title: Exhibitions
 formats:
   pdf: Adobe Portable Document Format
   jpg: JPEG image
@@ -351,16 +356,8 @@ jobs:
     from: Date
     to: Closing date
   next: Next offer
-  next_aria: Next offer “{{ .Title }}”
   previous: Previous offer
-  previous_aria: Previous offer “{{ .Title }}”
 organizations:
-  backlinks:
-    exhibitions: Exhibitions mentioning
-    events: Events mentioning
-    pages: Pages mentioning
-    posts: Posts mentioning
-    projects: Projects mentioning
   count:
     one: "1 organization"
     other: "{{ .Count }} organizations"
@@ -387,12 +384,6 @@ papers:
     references: References
     content: Content
 persons:
-  backlinks:
-    exhibitions: Exhibitions mentioning
-    events: Events mentioning
-    pages: Pages mentioning
-    posts: Posts mentioning
-    projects: Projects mentioning
   count:
     one: "1 person"
     other: "{{ .Count }} persons"
@@ -419,10 +410,8 @@ posts:
   date: Date
   informations: Informations
   next: Next article
-  next_aria: Next article “{{ .Title }}”
   none: No article
   previous: Previous article
-  previous_aria: Previous article “{{ .Title }}”
   reading_time: Reading time
   see_all: See all posts
   see_all_in_program: See all program's news
@@ -492,10 +481,8 @@ projects:
     other: "{{ .Count }} projects"
   informations: Informations
   next: Next project
-  next_aria: Next project “{{ .Title }}”
   none: No project
   previous: Previous project
-  previous_aria: Previous project “{{ .Title }}”
   reading_time: Reading time
   see_all: See all projects
   see_all_in_program: See all program's projects
@@ -512,7 +499,7 @@ publications:
       one: publication
       other: publications
 sitemap:
-  pages: Arborescence
+  pages: Pages
 taxonomies:
   list:
     title: Filter by

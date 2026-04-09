@@ -5,20 +5,21 @@ const shell = require("shelljs"),
     migrate = require("./migrate/migrate");
 
 shell.set('-e'); // exit upon first error
-console.log(`
-  .=*#%%#*=        -*#%%#*=.      =+-      ++.     .+ .+#%%#+.     :++      -+-
- :@@=:..:+@@.     #@#:..:+@@.     *@*      @@:     -@#@+:..-@@-    -@@      *@*
- +@*      %@=    .@@.     %@=     *@*      @@:     -@@.     *@*    -@@      *@*
- +@*      %@=     %@*     *%=     *@*      @@:     -@@      *@*    -@@      *@*
- +@*      %@=      +@@=           *@*      @@:     -@@      *@*    -@@      *@*
- +@*      %@=       .+@@+.        *@*      @@:     -@@      *@*    -@@      *@*
- +@*      %@=         .+@@+.      *@*      @@:     -@@      *@*    .@@=.   :@@=
- +@*      %@=     ==     +@@:     *@*      @@:     -@@      *@*     .+%@@@@%*-
- +@*      %@=    .@@.     +@#     *@*     .@@:     -@@      *@*         @@-
- =@%     .@@-     @@-     #@#     +@#    :#@@:     -@@      *@*         @@-
-  =%@%##%@%=      :#@%##%@@*       *@@##@%=:@:     :@@      *@+         %@-
-     .:..            ..:.            ...
- `);
+console.log(`                                                                     
+     +**=           ++***++     =*=        **=   =++  +***++    =**+        =*+=
+  +*#%@@%#**+     *###**#%%#+   *%*       #@%*   *@%####*#%%#+  +%%%+       #@%+
+=#%%#*+ #+#%%#=  #@%#    +**+-  *%*       *%%*   *%%%#=   +%%%+  *%%#      *%@# 
+*%%*       +%%*  #@%#           *%*       *%@*   *%%+      #@%*   *%%*    +%%%  
+*%#         #@*  *%@%#*****+    *%*       *%%*   *%#       +%@*    #@%*   #%%*  
+*@#         #%*    %#*+*+#%%#-  *%*       +@%*   *%*       *%%*     %%%* *%%*   
++%%+       *%%+ =#%%      %%@+  *%#       #@%*   *%*       *%%*     #%%%#%@#    
+ #%%#*+ #*#%%*  =%@%#    +%%%+  +%%#*+  +#%%@+   *%*       *%@*      *%@%@%=    
+  +**#%@@%#*+     *#%%#*#%%#+    +#%%%###%%@@*   *%*       #@%*       #%@%*     
+      =**=          +#+***+        +***+   **=   =*=        **=       #%@#      
+                                                                      %%%       
+                                                                  +*#%%%#       
+                                                                 =+***+         
+`);
 
 const command = process.argv[2];
 
@@ -50,20 +51,20 @@ function execute(string) {
 }
 
 if (command === "watch") {
-    execute("hugo server");
+    execute("hugo server --minify");
 }
 
 if (command === "dev") {
     execute("hugo");
     execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
-    execute("hugo server");
+    execute("hugo server --minify");
 }
 
 if (command === "local") {
     var IP = dev.network["en0"][0] || "0.0.0.0";
     execute("hugo");
     execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
-    execute("hugo server --bind=" + IP + " --baseURL=http://" + IP + ":1313 -D");
+    execute("hugo server --minify --bind=" + IP + " --baseURL=http://" + IP + ":1313 -D");
 }
 
 if (command === "build") {

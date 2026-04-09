@@ -1,0 +1,13 @@
+{{ if .block.data }}
+  <div class="{{ partial "blocks/helpers/GetClass" .block }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" .block.top }}
+        {{ partial "blocks/templates/contact/content.html" (dict
+          "block" .block
+          "context" .
+        ) }}
+      </div>
+    </div>
+  </div>
+{{ end }}

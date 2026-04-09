@@ -1,0 +1,22 @@
+{{ $page := .page }}
+{{ $options := .options }}
+{{ $layout := .layout | default "grid"}}
+{{ $heading_level := .heading_level }}
+{{ $class := partial "pages/partials/page/helpers/GetClass" . }}
+{{ with $page }}
+  <article class="{{ $class }}">
+    <div class="page-content">
+      {{ partial "pages/partials/page/core.html" (dict
+        "page" .
+        "heading_level" $heading_level
+        "options" $options
+      ) }}
+    </div>
+    {{ if $options.image }}
+      {{ partial "pages/partials/page/media.html" (dict
+        "image" .Params.image
+        "layout" $layout
+      ) }}
+    {{ end }}
+  </article>
+{{ end }}

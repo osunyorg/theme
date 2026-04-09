@@ -1,0 +1,8 @@
+{{ if .contact_details.postal_address }}
+  <div class="address">
+    {{ .heading_items.open }}
+      {{- i18n "commons.contact.address" -}}
+    {{ .heading_items.close }}
+    {{ partial "commons/address.html" .contact_details.postal_address }}
+  </div>
+{{ end }}

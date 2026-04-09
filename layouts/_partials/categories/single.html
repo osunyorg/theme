@@ -1,0 +1,33 @@
+{{ partial "categories/single/hero.html" . }}
+
+<div class="document-content">
+  {{ partial "toc/container.html" (dict
+    "context" .
+  ) }}
+
+  {{ partial "categories/single/summary.html" (dict
+    "block_wrapped" true
+    "context" .
+  ) }}
+
+  {{ partial "taxonomies/single/term.html" (dict "taxonomy" .Type) }}
+
+  {{ partial "contents/list.html" (dict
+    "contents" .Params.contents
+    "context" .
+  ) }}
+
+  {{ partial "categories/single/categories.html" (dict 
+    "categories" .Params.children
+    "context" .
+  ) }}
+
+  <div class="container">
+    {{ $section_type := strings.TrimSuffix "_categories" .Type }}
+    {{ $list_partial := printf "%s/partials/%s.html" $section_type $section_type }}
+    {{ if templates.Exists ( printf "_partials/%s" $list_partial ) }}
+      {{ partial $list_partial . }}
+    {{ end }}
+    {{ partial "commons/section/pagination.html" . }}
+  </div>
+</div>

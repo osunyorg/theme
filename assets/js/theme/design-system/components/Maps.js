@@ -42,8 +42,9 @@ window.osuny.Map.prototype.setMap = function () {
     });
 
     this.layers = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
         maxZoom: 19,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        referrerPolicy: "origin"
     });
 
     this.layers.addTo(this.map);
@@ -96,7 +97,7 @@ window.osuny.Map.prototype.filterMarkers = function (filters) {
 
 window.osuny.Map.prototype.setMarkers = function () {
     this.setMarkerIcon();
-    this.elements = Array.prototype.slice.call(this.element.children);
+    this.elements = this.element.querySelectorAll('[data-longitude]');
     this.elements.forEach(this.createMarker.bind(this));
 
     if (this.popups.length === 1) {

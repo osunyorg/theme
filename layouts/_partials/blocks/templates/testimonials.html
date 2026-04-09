@@ -1,0 +1,17 @@
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+{{ $layout := .block.data.layout | default "carousel" }}
+
+{{ with .block.data }}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ partial "blocks/templates/testimonials/list.html" (dict
+          "layout" $layout
+          "testimonials" .testimonials
+        ) }}
+      </div>
+    </div>
+  </div>
+{{ end }}

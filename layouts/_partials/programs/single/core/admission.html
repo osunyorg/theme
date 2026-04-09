@@ -1,0 +1,19 @@
+{{ $has_admission := partial "programs/single/helpers/HasAdmission" . }}
+{{- if $has_admission -}}
+  <section id="{{ anchorize (i18n "programs.toc.admission") }}">
+    <div class="container">
+      <div class="content">
+        <h2>{{ i18n "programs.toc.admission" }}</h2>
+        <div>
+          {{ partial "programs/single/core/admission/prerequisites.html" . }}
+          {{ partial "programs/single/core/admission/pricing.html" . }}
+          {{ partial "programs/single/core/admission/registration.html" . }}
+          {{ partial "programs/single/core/admission/accessibility.html" . }}
+          {{ partial "programs/single/core/admission/other.html" . }}
+          {{ partial "programs/single/core/admission/roles.html" . }}
+          {{ partial "programs/single/core/admission/contact.html" . }}
+        </div>
+      </div>
+    </div>
+  </section>
+{{- end -}}

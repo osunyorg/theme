@@ -1,0 +1,29 @@
+{{ if .image }}
+  {{ $id := .image }}
+  {{ if isset .image "id" }}
+    {{ $id = .image.id }}
+  {{ end }}
+  {{ $image := partial "GetMedia" $id }}
+  {{ if $image }}
+    {{ $url := $image.url }}
+    {{ if site.Params.keycdn }}
+      {{ $url = $image.direct_url }}
+    {{ end }}
+    {{ $alt := partial "commons/image/helpers/GetAlt" . }}
+    {{ $lazy := default true .lazy }}
+    {{ $default := "1280x720" }}
+    {{ if .desktop }}
+      {{ $default = .desktop }}
+    {{ end }}
+    {{ $crop := .crop | default false }}
+    {{ partial "commons/image/picture.html" (dict
+      "image" $image
+      "url" $url
+      "alt" $alt
+      "lazy" $lazy
+      "default" $default
+      "crop" $crop
+      "context" .
+    ) }}
+  {{ end }}
+{{ end }}

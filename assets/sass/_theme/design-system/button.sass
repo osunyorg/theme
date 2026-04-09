@@ -14,7 +14,7 @@
     @if $icon
         @include icon($icon, after)
 
-.button, .btn
+@mixin button
     @include button-reset
     font-family: var(--btn-font-family)
     font-size: var(--btn-font-size)
@@ -42,9 +42,11 @@
         border: var(--btn-disabled-border)
         color: var(--btn-disabled-color)
 
-.button--accent,
-.button-accent // Legacy
-    @extend .button
+.button, .btn
+    @include button
+
+@mixin button-accent
+    @include button
     --btn-color: #{$color-background}
     --btn-background: #{$color-accent}
     --btn-border: #{$btn-border-width} solid var(--btn-background)
@@ -52,9 +54,12 @@
     --btn-hover-background: #{alphaColor($color-accent, 0.85)}
     --btn-hover-border: #{$btn-border-width} solid var(--btn-hover-background)
 
-.button--alt,
-.button-alt // Legacy
-    @extend .button
+.button--accent,
+.button-accent
+    @include button-accent
+
+@mixin button-alt
+    @include button
     --btn-color: #{$color-background}
     --btn-background: #{$color-text-alt}
     --btn-border: #{$btn-border-width} solid var(--btn-background)
@@ -62,8 +67,12 @@
     --btn-hover-background: #{$color-text}
     --btn-hover-border: #{$btn-border-width} solid var(--btn-hover-background)
 
-.button--reversed
-    @extend .button
+.button--alt,
+.button-alt // Legacy
+    @include button-alt
+
+@mixin button-reversed
+    @include button
     --btn-color: #{$color-text-alt}
     --btn-background: #{$color-background}
     --btn-border: #{$btn-border-width} solid var(--btn-background)
@@ -71,15 +80,26 @@
     --btn-hover-background: #{$color-text}
     --btn-hover-border: #{$btn-border-width} solid var(--btn-hover-background)
 
-.button--small
+.button--reversed
+    @include button-reversed
+
+@mixin button-small
+    @include button
     font-size: var(--btn-small-font-size)
     line-height: var(--btn-small-line-height)
     padding: var(--btn-small-padding)
 
-.button--large
+.button--small
+    @include button-small
+
+@mixin button-large
+    @include button
     font-size: var(--btn-large-font-size)
     line-height: var(--btn-large-line-height)
     padding: var(--btn-large-padding)
+
+.button--large
+    @include button-large
 
 @mixin link-icon($icon: false)
     @include button-reset
@@ -88,14 +108,6 @@
     @if $icon
         @include icon-block($icon, after)
 
-@mixin button-icon($icon: false)
-    white-space: nowrap
-    display: inline-flex
-    align-items: center
-    justify-content: space-between
-    gap: $spacing-1
-    @if $icon
-        @include icon($icon, after)
 
 a.btn[target="_blank"]
     @include button-icon(links-line-raw)

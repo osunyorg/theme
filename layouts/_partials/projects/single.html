@@ -1,0 +1,35 @@
+{{ partial "projects/single/hero.html" . }}
+
+<div class="document-content" itemscope itemtype="https://schema.org/CreativeWork">
+  <meta itemprop="name" content="{{ safeHTML .Title }}">
+  <meta itemprop="url" content="{{ .Permalink }}">
+  {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
+
+  {{ partial "projects/single/sidebar.html" . }}
+
+  {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" . }}
+  {{ if and .Params.design.full_width .Params.taxonomies (eq $taxonomies_position "content") }}
+    <div class="container">
+      {{ partial "taxonomies/single/container.html" . }}
+    </div>
+  {{ end }}
+
+  {{ partial "projects/single/summary.html" (dict
+    "context" .
+    "block_wrapped" true
+  ) }}
+
+  {{ partial "contents/list.html" (dict
+    "context" .
+    "contents" .Params.contents
+  ) }}
+
+  {{ partial "commons/single/siblings-navigation.html" (dict
+    "context" .
+    "reversed" site.Params.projects.single.navigation.reversed
+    "previous_label" (i18n "projects.previous")
+    "next_label" (i18n "projects.next")
+  ) }}
+
+  {{ partial "commons/single/hooks/before-content-end.html" . }}
+</div>

@@ -1,0 +1,7 @@
+{{ $title := partial "header/helpers/GetTitle" . }}
+{{ partial "header/hero.html" (dict
+  "title" $title
+  "image" .Params.logo
+  "sizes" site.Params.image_sizes.sections.schools.hero_single
+  "context" .
+) }}

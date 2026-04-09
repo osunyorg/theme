@@ -1,0 +1,32 @@
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+{{ $html_id := printf "video-%s" .html_id }}
+
+{{ with .block.data }}
+  <div class="{{ $block_class }}" id="{{ $html_id }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ if .url }}
+          {{ if eq .layout "button" }}
+            {{ partial "blocks/templates/video/button.html" (dict
+              "video" .video
+              "html_id" $html_id
+              "title" .video.title
+              "transcription" .transcription
+            ) }}
+          {{ end }}
+          {{ partial "blocks/templates/video/video.html" .video }}
+        {{ end }}
+        {{ if ne .layout "button" }}
+          {{ partial "blocks/templates/video/informations.html" (dict
+            "video" .video
+            "html_id" $html_id
+            "video_title" .video_title
+            "transcription" .transcription
+          ) }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end }}

@@ -1,0 +1,17 @@
+{{ $publication := .publication }}
+{{ $researcher := .researcher }}
+{{ $heading_level := .heading_level }}
+
+{{ with $publication }}
+  <li class="publication" itemscope itemtype="http://schema.org/ScholarlyArticle">
+    <div class="publication-content">
+      {{ partial "publications/partials/publication/heading.html" (dict
+        "item" .
+        "level" $heading_level
+        "itemprop" "headline"
+      ) }}
+      {{ partial "publications/partials/publication/meta.html" . }}
+    </div>
+    {{ partial "publications/partials/publication/authors.html" . }}
+  </li>
+{{ end }}

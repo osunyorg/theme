@@ -1,0 +1,25 @@
+{{ $layout := .layout }}
+{{ $group_meta := .group_meta }}
+{{ $with_more := .with_more }}
+{{ if .project }}
+  {{ $class := partial "projects/partials/project/helpers/GetClass" . }}
+  <li>
+    <article class="{{ $class }}" itemscope itemtype="https://schema.org/CreativeWork">
+      <div class="project-content">
+        <div class="project-description">
+          {{ partial "projects/partials/project/core.html" . }}
+        </div>
+        {{ if not .group_meta }}
+          {{ if .options.year }}
+            <div class="project-meta">
+              {{ partial "projects/partials/project/core/year.html" .project.Params.year }}
+            </div>
+          {{ end }}
+        {{ end }}
+      </div>
+      {{ if .options.image }}
+        {{ partial "projects/partials/project/media.html" . }}
+      {{ end }}
+    </article>
+  </li>
+{{ end }}

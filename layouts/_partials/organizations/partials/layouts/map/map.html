@@ -1,0 +1,24 @@
+{{ $heading_level := .heading_level | default 2 }}
+{{/*  In map layout, all organization should have .path to get coordinates  */}}
+{{ $organizations := where (default slice .organizations) "path" "ne" nil }}
+{{ if $organizations }}
+  {{ partial "organizations/partials/layouts/map/transcription.html" (dict 
+    "heading_level" $heading_level
+    "html_id" .html_id
+    "options" .options
+    "organizations" $organizations
+  ) }}
+  {{ if and .options.filters .categories }}
+    {{ partial "organizations/partials/layouts/map/filters.html" ( dict
+      "categories" .categories
+      "html_id" .html_id
+    ) }}
+  {{ end }}
+  {{ partial "organizations/partials/layouts/map/list.html" (dict 
+    "categories" .categories
+    "heading_level" $heading_level
+    "html_id" .html_id
+    "options" .options
+    "organizations" $organizations
+  ) }}
+{{ end }}

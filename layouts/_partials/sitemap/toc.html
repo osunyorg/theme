@@ -1,0 +1,13 @@
+{{ $sections := partial "sitemap/helpers/GetSections" . }}
+<nav class="toc" id="nav-toc" aria-label="{{ i18n "commons.toc.title" }}">
+  <ol>
+    {{- if .Params.contents -}}
+      {{- partial "blocks/toc.html" .Params.contents -}}
+    {{- end -}}
+    {{ range $sections }}
+      <li>
+        <a {{ partial "helpers/anchor/GetAttribute" .Type }}>{{ safeHTML .Title }}</a>
+      </li>
+    {{ end }}
+  </ol>
+</nav>

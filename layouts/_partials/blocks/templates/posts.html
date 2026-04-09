@@ -1,0 +1,26 @@
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+{{- $term := false -}}
+{{- $layout := .block.data.layout | default "grid" -}}
+
+{{- with .block.data }}
+  {{ $options := .options }}
+  {{ if .category }}
+    {{- $term = site.GetPage (printf "/posts_categories%s" .category) -}}
+  {{ end }}
+  
+  <div itemscope itemtype="http://schema.org/Blog" class="{{ $block_class }} {{ if $term }} term-{{ replace $term.Slug "/" "" }} {{- end -}}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ with .posts }}
+          {{ partial (printf "posts/partials/layouts/%s/%s.html" $layout $layout) (dict
+            "posts" .
+            "heading_level" $block.ranks.children
+            "options" $options
+          ) }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{ end -}}

@@ -1,0 +1,15 @@
+{{ $slug := .slug }}
+<div class="roles">
+  {{ range .programs }}
+    {{ $program := . }}
+    {{ range .Params.roles }}
+      {{ $role := .title }}
+      {{ if in .persons $slug }}
+        <p>
+          {{ safeHTML $role }}<br>
+          <a href="{{ $program.Permalink }}" class="link">{{ safeHTML $program.Title }}</a>
+        </p>
+      {{ end }}
+    {{ end }}
+  {{ end }}
+</div>

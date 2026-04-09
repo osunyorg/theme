@@ -1,0 +1,30 @@
+{{ $program := .program }}
+{{ $options := .options }}
+{{ $layout := .layout | default "list" }}
+
+<li class="program" itemscope itemtype="https://schema.org/EducationalOccupationalProgram">
+  <div class="program-content">
+    {{ partial "programs/partials/program/heading.html" (dict
+      "item" $program
+      "level" .heading_level
+      "options" $options
+      "itemprop" "name"
+    ) }}
+    {{ partial "programs/partials/program/core.html" (dict
+      "program" $program
+      "options" $options
+    ) }}
+  </div>
+
+  {{ if $options.contact }}
+    {{ partial "programs/partials/program/contact.html" $program }}
+  {{ end }}
+
+  {{ if and $program.Params.image $options.image }}
+    {{ partial "programs/partials/program/media.html" (dict 
+      "image" $program.Params.image
+      "layout" $layout
+      "type" "programs"
+    ) }}
+  {{ end }}
+</li>

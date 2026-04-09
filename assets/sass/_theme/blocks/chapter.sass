@@ -52,12 +52,13 @@
             background: none
             padding-bottom: 0
             padding-top: 0
-            .chapter .text
-                padding: var(--grid-gutter)
-            figure
-                margin-bottom: 0
-                figcaption
-                    padding-left: var(--grid-gutter)
+            .chapter
+                .text
+                    padding: var(--grid-gutter)
+                figure
+                    margin-bottom: 0
+                    figcaption
+                        padding-left: var(--grid-gutter)
         &--alt_background
             .chapter
                 background: $block-chapter-layout-alt-background
@@ -66,11 +67,13 @@
                 background: $block-chapter-layout-accent-background
 
     @include in-page-without-sidebar
-        &--alt_background, 
+        &--alt_background,
         &--accent_background
             padding-top: var(--grid-gutter)
             padding-bottom: var(--grid-gutter)
             margin-bottom: 0
+            &:first-child
+                margin-top: 0
         .chapter
             flex-direction: row
             justify-content: space-between

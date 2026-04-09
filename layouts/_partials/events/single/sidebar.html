@@ -1,0 +1,17 @@
+{{ $events := partial "helpers/objects/GetFromPathSlice" .Params.children }}
+
+<div class="section-sidebar event-sidebar">
+  <div>
+    {{ if site.Params.events.single.meta_in_sidebar }}
+      <aside>
+        {{- partial "events/single/infos.html" . -}}
+      </aside>
+    {{ end }}
+    {{ partial "toc/container.html" (dict
+      "context" .
+    ) }}
+    {{ if $events }}
+      <a href="#programme" class="btn programme-btn">{{ i18n "events.see_programme" }}</a>
+    {{ end }}
+  </div>
+</div>

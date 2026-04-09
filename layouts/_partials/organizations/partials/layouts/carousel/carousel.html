@@ -1,0 +1,18 @@
+{{ $logo_index := .logo_index }}
+{{ $options := .options }}
+{{ $layout := .layout }}
+{{ $heading_level := .heading_level | default 2 }}
+
+<ul class="organizations" data-slider="{{ site.Params.blocks.organizations.slider | encoding.Jsonify }}">
+  {{ range .organizations }}
+    {{ $organization := partial "organizations/helpers/GetObjectOrData" . }}
+    <li>
+      {{ partial "organizations/partials/organization.html" (dict
+        "organization" $organization
+        "options" $options
+        "layout" $layout
+        "heading_level" $heading_level
+      ) }}
+    </li>
+  {{ end }}
+</ul>

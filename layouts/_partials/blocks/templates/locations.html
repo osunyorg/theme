@@ -1,0 +1,29 @@
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+{{ $layout := .block.data.layout | default "grid" }}
+
+{{ with .block.data }}
+  {{ $options := .options }}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        {{ $locations := partial "helpers/objects/GetFromPathSlice" .locations }}
+        {{ if eq $layout "map" }}
+          {{ partial "locations/partials/map.html" (dict
+            "locations" $locations
+            "title" $block.title
+            "options" $options
+          ) }}
+        {{ else }}
+          {{ partial "locations/partials/locations.html" (dict
+            "locations" $locations
+            "heading_level" $block.ranks.children
+            "options" $options
+            "layout" $layout
+          ) }}
+        {{ end }}
+      </div>
+    </div>
+  </div>
+{{- end -}}

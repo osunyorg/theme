@@ -32,8 +32,18 @@ osuny.SliderArrows.prototype.listen = function () {
 };
 
 osuny.SliderArrows.prototype.update = function () {
-    setButtonEnability(this.previous, !this.slider.state.isFirst);
-    setButtonEnability(this.next, !this.slider.state.isLast);
+    var showPrevious = !this.slider.state.isFirst,
+        showNext = !this.slider.state.isLast;
+
+    setButtonEnability(this.previous, showPrevious);
+    setButtonEnability(this.next, showNext);
+
+    if (showPrevious || showNext) {
+        this.show();
+    } else {
+        this.hide();
+    }
+
     if (this.progression) {
         this.updateProgression();
     }
@@ -47,4 +57,14 @@ osuny.SliderArrows.prototype.addProgression = function () {
     this.progression = document.createElement('p');
     this.progression.classList.add('slider-progression');
     this.next.before(this.progression);
+};
+
+osuny.SliderArrows.prototype.hide = function () {
+    this.previous.style.display = 'none';
+    this.next.style.display = 'none';
+};
+
+osuny.SliderArrows.prototype.show = function () {
+    this.previous.style.display = 'block';
+    this.next.style.display = 'block';
 };

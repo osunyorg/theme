@@ -1,0 +1,21 @@
+{{ $class := partial "blocks/helpers/GetClass" .block }}
+
+{{ with .block.data }}
+  {{ if .options.image }}
+    {{ $class = printf "%s %s" $class "with-images" }}
+  {{ else if not .options.summary }}
+    {{ $class = printf "%s with-title-only" $class }}
+  {{ end }}
+
+  {{ $page := "" }}
+  {{ with .page }}
+    {{ $page = site.GetPage .path }}
+  {{ end }}
+  {{ with $page }}
+    {{ if .Params.bodyclass }}
+      {{ $class = printf "%s block-%s" $class .Params.bodyclass }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ return $class }}

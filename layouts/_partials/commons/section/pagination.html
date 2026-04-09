@@ -1,0 +1,13 @@
+{{ $paginator := .Paginator }}
+{{/* If there's more than one page. */}}
+{{ if gt $paginator.TotalPages 1 }}
+  <nav aria-label="{{ i18n "commons.pagination.label" }}">
+    <ul class="pagination">
+      {{ partial "commons/section/pagination/first-page.html" $paginator }}
+      {{ partial "commons/section/pagination/previous-page.html" $paginator }}
+      {{ partial "commons/section/pagination/page-numbers.html" $paginator }}
+      {{ partial "commons/section/pagination/next-page.html" $paginator }}
+      {{ partial "commons/section/pagination/last-page.html" $paginator }}
+    </ul>
+  </nav>
+{{- end -}}

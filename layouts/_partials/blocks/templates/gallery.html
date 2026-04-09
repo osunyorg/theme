@@ -1,0 +1,34 @@
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+{{ $with_lightbox := not site.Params.components.lightbox.in_gallery.disabled }}
+
+{{ with .block.data }}
+  {{- $sizes := index site.Params.image_sizes.blocks.gallery .layout -}}
+  {{- $has_text := false -}}
+  {{- range .images }}
+    {{- if .text }}
+      {{- $has_text = true -}}
+    {{ end -}}
+  {{ end -}}
+
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+        <div class="gallery{{- if $has_text }} gallery--with-text {{ end -}}"
+          {{ if eq .layout "carousel" }}
+            data-slider="{{ site.Params.blocks.gallery.slider | encoding.Jsonify }}"
+          {{ end -}}
+          >
+          {{- range .images }}
+            {{ partial "commons/image/figure.html" (dict
+              "image" .
+              "sizes" $sizes
+              "with_lightbox" $with_lightbox
+            ) }}
+          {{ end -}}
+        </div>
+      </div>
+    </div>
+  </div>
+{{- end -}}

@@ -1,0 +1,31 @@
+{{ $page := .context }}
+{{ $translations := $page.Translations | append $page }}
+{{ $site_lang := "" }}
+{{ $url := "" }}
+{{ $position := .position }}
+{{ $dropdown_class := "dropdown-menu dropdown-languages" }}
+
+{{ if eq $position "footer" }}
+  {{ $dropdown_class = printf "%s extendable" $dropdown_class }}
+{{ end }}
+
+{{ if gt (len site.Languages) 1 }}
+  <li class="i18n-dropdown {{ $position }}-i18n has-children">
+    {{ with site.Languages }}
+      {{ $language := cond (eq $position "footer") site.Language.LanguageName site.Language }}
+      <span
+        role="button"
+        aria-controls="{{ $position }}-i18n-list"
+        aria-expanded="false"
+        aria-label="{{ i18n "commons.accessibility.menu_lang" }}"
+        tabindex="0">
+          {{- $language -}}
+      </span>
+      <div class="{{ $dropdown_class }}" id="{{ $position }}-i18n-list">
+        {{ partial "commons/i18n/list.html" (dict
+          "translations" $translations
+        ) }}
+      </div>
+    {{ end }}
+  </li>
+{{ end }}

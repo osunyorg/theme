@@ -1,0 +1,30 @@
+{{ $options := .options }}
+{{ $heading_level := .heading_level }}
+
+<ul class="pages pages--cards">
+  {{ range .pages }}
+    {{ $class := partial "pages/partials/page/helpers/GetClass" (dict 
+      "options" $options
+      "page" .
+    ) }}
+    <li>
+      <article class="{{ $class }}">
+        <div class="page-content">
+          {{ partial "pages/partials/page/core.html" (dict
+            "page" .
+            "heading_level" $heading_level
+            "options" $options
+          ) }}
+          {{ partial "pages/partials/page/more.html" . }}
+        </div>
+        {{ if $options.image }}
+          {{ partial "pages/partials/page/media.html" (dict 
+            "image" .Params.image
+            "layout" "cards"
+          ) }}
+        {{ end }}
+      </article>
+    </li>
+
+  {{ end }}
+</ul>

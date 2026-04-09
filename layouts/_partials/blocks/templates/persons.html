@@ -1,0 +1,29 @@
+{{ $block := .block }}
+{{ $block_class := partial "blocks/templates/persons/helpers/GetClass" .block }}
+
+{{ with .block.data }}
+  {{ $layout := .layout | default "grid" }}
+  {{ $options := .options }}
+  {{ $image_sizes := index site.Params.image_sizes.sections.persons.layouts $layout }}
+
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ partial "blocks/top.html" $block.top }}
+          <ul class="persons persons--{{ $layout }} {{- if $options.contact }} with-contacts {{- end }}">
+            {{ range .persons }}
+              {{ $person := site.GetPage .path }}
+              {{ partial "persons/partials/person.html" (dict
+                "options" $options
+                "heading_level" $block.ranks.children
+                "person" $person
+                "role" .role
+                "layout" $layout
+                "image_sizes" $image_sizes
+              ) }}
+            {{ end }}
+          </ul>
+      </div>
+    </div>
+  </div>
+{{- end -}}

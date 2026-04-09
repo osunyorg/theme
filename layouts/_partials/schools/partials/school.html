@@ -1,0 +1,27 @@
+{{ $school := .school }}
+{{ $layout := .layout | default "list" }}
+{{ $heading_level := .heading_level }}
+{{ $options := .options }}
+{{ $class := partial "schools/partials/school/helpers/GetClass" . }}
+{{ with $school }}
+  <article class="{{ $class }}" 
+      itemscope itemtype="https://schema.org/CollegeOrUniversity">
+    <div class="school-content">
+      {{ partial "schools/partials/school/heading.html" (dict
+        "item" .
+        "options" $options
+        "level" $heading_level
+        "itemprop" "title"
+      ) }}
+      {{ if $options.summary }}
+        {{ partial "schools/partials/school/summary.html" . }}
+      {{ end }}
+    </div>
+    {{ if $options.image }}
+      {{ partial "schools/partials/school/media.html" (dict 
+        "image" $school.Params.logo
+        "layout" $layout
+      ) }}
+    {{ end }}
+  </article>
+{{ end }}

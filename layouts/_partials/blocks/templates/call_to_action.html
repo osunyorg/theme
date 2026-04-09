@@ -1,0 +1,28 @@
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+
+{{ with .block.data }}
+  {{ $buttons := and .button.text .button_secondary.text }}
+  <div class="{{ $block_class }}">
+    <div class="container">
+      <div class="block-content">
+        {{ $class := partial "blocks/templates/call_to_action/helpers/GetClass" (dict
+          "image" .image
+          "block" $block
+        ) }}
+        <div class="{{ $class }}">
+          <div>
+            {{ partial "blocks/top.html" $block.top }}
+            {{ partial "blocks/templates/call_to_action/actions.html" . }}
+          </div>
+          {{ with .image }}
+            {{ partial "commons/image/figure.html" (dict
+              "image" .
+              "sizes" site.Params.image_sizes.blocks.call_to_action
+            ) }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+{{ end }}

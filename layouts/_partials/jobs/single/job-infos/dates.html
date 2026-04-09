@@ -1,0 +1,16 @@
+{{ with .from }}
+  <li>
+    <span>{{ i18n "jobs.dates.from" }}</span>
+    <time itemprop="datePosted" datetime="{{ .day }}">
+      {{ time.Format site.Params.jobs.date_format .day }}
+    </time>
+  </li>
+{{ end }}
+{{ with .to }}
+  <li>
+    <span>{{ i18n "jobs.dates.to" }}</span>
+    <time datetime="{{ .day }}">
+      {{ time.Format site.Params.jobs.date_format .day }}
+    </time>
+  </li>
+{{ end }}

@@ -1,0 +1,16 @@
+{{ $dimensions := slice 1 1 }}
+{{ $file := "" }}
+{{ if .static }}
+  {{ $file = delimit (slice "/static" .file) "" }}
+{{ else }}
+  {{ $file = .file }}
+{{ end }}
+{{ if strings.HasSuffix $file ".svg"}}
+  {{ $dimensions = partial "commons/image/helpers/get-dimensions/GetSvg" $file }}
+{{ else }}
+  {{ $imgData := imageConfig $file }}
+  {{ with $imgData }}
+    {{ $dimensions = slice (math.Round .Width) (math.Round .Height) }}
+  {{ end }}
+{{ end }}
+{{ return $dimensions }}

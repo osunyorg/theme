@@ -1,0 +1,23 @@
+{{ $dates := .dates }}
+{{ $time_slot := .time_slot }}
+{{ $is_repeating := .is_repeating }}
+{{ $on_two_lines := .on_two_lines }}
+{{ $with_hours := .with_hours }}
+{{ $type := .type }}
+{{ $date_format := index site.Params (pluralize $type) "date_format" }}
+
+{{ if or $dates.computed.short $dates.computed.two_lines.short $time_slot }}
+  <div class="{{ $type }}-schedule">
+    {{ partial "commons/item/schedule/dates.html" (dict
+      "type" $type
+      "context" .
+    ) }}
+
+    {{- if and $with_hours $time_slot (not $is_repeating) }}
+      {{ partial "commons/item/schedule/hours.html" (dict
+        "hours" $time_slot
+        "type" $type
+      ) }}
+    {{ end -}}
+  </div>
+{{ end }}

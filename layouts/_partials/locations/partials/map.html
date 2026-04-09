@@ -1,0 +1,20 @@
+{{ $locations := .locations }}
+{{ $options := .options | default site.Params.locations.index.options }}
+{{ $title := .title | default (i18n "programs.location" .locations) }}
+{{ $aria_label := i18n "commons.maps.label" $title }}
+
+{{ $locations = partial "locations/partials/helpers/GetGeolocated" $locations }}
+{{ if $locations }}
+  <div class="locations-map">
+    <ul class="map" data-map data-marker-icon="{{ "/assets/images/map-marker.svg" }}"
+      role="region"
+      aria-label="{{ $aria_label }}">
+      {{ range $locations }}
+        {{ partial "locations/partials/map/location.html" (dict
+          "location" .
+          "options" $options
+        ) }}
+      {{ end }}
+    </ul>
+  </div>
+{{ end }}

@@ -24,26 +24,26 @@
         z-index: 2
     button
         @include button-reset
-        @include icon-block(play-fill, before)
+        @include icon(play-fill, before)
             font-size: pxToRem(50)
             transition: color $color-duration ease
             vertical-align: middle
             padding-left: pxToRem(3)
-            @include media-breakpoint-down(desktop)
-                font-size: pxToRem(20)
-                padding-left: pxToRem(4)
         border: var(--border-width) solid white
         border-radius: 100%
         color: white
-        height: $spacing-6
+        height: space(32)
         padding: $spacing-1
         transition: background-color $background-duration ease
-        width: $spacing-6
+        width: space(32)
         z-index: 3
         &:hover
             background-color: white
             &::before
                 color: black
         @include media-breakpoint-down(desktop)
-            height: $spacing-5
-            width: $spacing-5
+            height: space(16)
+            width: space(16)
+            &::before
+                font-size: pxToRem(20)
+                padding-left: pxToRem(4)

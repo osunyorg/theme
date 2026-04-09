@@ -1,0 +1,18 @@
+
+{{ $label := .label }}
+{{ $direction := .direction }}
+{{ $link_title := .link_title }}
+
+{{ with .page }}
+  {{ $title := safeHTML .Title }}
+  {{ $link_title := printf "%s \"%s\"" $label $title }}
+  <li class="{{ $direction }}">
+    <a href="{{ .RelPermalink }}"
+      title="{{ $link_title }}">
+      <span>
+        {{- $label -}}
+      </span>
+      {{- $title -}}
+    </a>
+  </li>
+{{ end }}

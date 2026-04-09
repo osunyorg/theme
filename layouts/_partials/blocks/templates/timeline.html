@@ -1,0 +1,16 @@
+{{ $block := .block }}
+{{ $block_class := partial "blocks/helpers/GetClass" .block }}
+
+{{- $layout := .block.data.layout | default "vertical" -}}
+<div class="{{ $block_class }}">
+  <div class="container">
+    <div class="block-content">
+      {{ partial "blocks/top.html" $block.top }}
+      {{ if eq $layout "horizontal" }}
+        {{ partial "blocks/templates/timeline/horizontal.html" $block }}
+      {{ else }}
+        {{ partial "blocks/templates/timeline/vertical.html" $block }}
+      {{ end }}
+    </div>
+  </div>
+</div>

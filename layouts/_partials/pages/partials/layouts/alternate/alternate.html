@@ -1,0 +1,29 @@
+{{ $options := .options }}
+{{ $heading_level := .heading_level }}
+
+<ul class="pages pages--alternate">
+  {{ range .pages }}
+    {{ $class := partial "pages/partials/page/helpers/GetClass" (dict
+      "page" .
+      "options" $options
+    ) }}
+    <li>
+      <article class="{{ $class }}">
+        {{ partial "pages/partials/page/core.html" (dict
+          "page" .
+          "heading_level" $heading_level
+          "options" $options
+        ) }}
+        {{ if site.Params.blocks.pages.alternate.more }}
+          {{ partial "pages/partials/page/more.html" . }}
+        {{ end }}
+        {{ if $options.image }}
+          {{ partial "pages/partials/page/media.html" (dict 
+            "image" .Params.image
+            "layout" "alternate"
+          ) }}
+        {{ end }}
+      </article>
+    </li>
+  {{ end }}
+</ul>
