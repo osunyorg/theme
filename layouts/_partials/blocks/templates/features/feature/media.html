@@ -1,11 +1,13 @@
-<figure {{ with or .alt .credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
+{{ $media_type := cond .options.icons "icon" "image" }}
+
+<figure class="media media--{{ $media_type }}" {{ with or .feature.alt .feature.credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
   {{ partial "commons/image.html" (dict
-    "image" .image
-    "alt" .alt
+    "image" .feature.image
+    "alt" .feature.alt
     "sizes" site.Params.image_sizes.blocks.features
   ) }}
 
-  {{ with .credit }}
+  {{ with .feature.credit }}
     <figcaption class="credit">
       {{- safeHTML . -}}
     </figcaption>
