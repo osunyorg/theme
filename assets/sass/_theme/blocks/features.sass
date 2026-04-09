@@ -5,21 +5,22 @@
     
     .features
         @include list-reset
-        .feature
-            display: flex
-            figure
-                order: -1
-                figcaption
-                    @include meta
-                    margin-top: $spacing-1
-                picture
-                    &:not(.is-png, .is-svg)
-                        img
-                            aspect-ratio: 16/9
-                            object-fit: cover
-                    &.is-png
-                        img
-                            max-width: $block-features-icon-max-width
+    
+    .feature
+        display: flex
+        figure
+            order: -1
+            figcaption
+                @include meta
+                margin-top: $spacing-1
+            picture
+                &:not(.is-png, .is-svg)
+                    img
+                        aspect-ratio: 16/9
+                        object-fit: cover
+                &.is-png
+                    img
+                        max-width: $block-features-icon-max-width
         
     &--grid
         .features
