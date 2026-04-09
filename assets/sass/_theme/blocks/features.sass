@@ -32,55 +32,56 @@
     &--list
         .features
             @include layout-list
-            @include media-breakpoint-down(desktop)
-                .feature
-                    flex-direction: column
-                    gap: space(3)
-                    &-content
-                        div
-                            margin-left: offset(1)
-                            margin-top: $spacing-1
-                    figure
-                        display: flex
-                        gap: var(--grid-gutter)
-                        figcaption
-                            margin-top: auto
-                            flex: 1
-                        picture
-                            img
-                                width: columns(4)
-                            &.is-png
-                                img
-                                    max-width: $block-features-list-icon-max-width-mobile
-            
-            @include media-breakpoint-up(desktop)
-                .feature
+        
+        @include media-breakpoint-down(desktop)
+            .feature
+                flex-direction: column
+                gap: space(3)
+                &-content
+                    div
+                        margin-left: offset(1)
+                        margin-top: $spacing-1
+                figure
+                    display: flex
                     gap: var(--grid-gutter)
-                    &-content
-                        display: flex
+                    figcaption
+                        margin-top: auto
                         flex: 1
-                        gap: var(--grid-gutter)
-                    figure
-                        width: columns(2)
-            
-            @include in-page-with-sidebar
-                .feature
-                    &-content
+                    picture
+                        img
+                            width: columns(4)
+                        &.is-png
+                            img
+                                max-width: $block-features-list-icon-max-width-mobile
+        
+        @include media-breakpoint-up(desktop)
+            .feature
+                gap: var(--grid-gutter)
+                &-content
+                    display: flex
+                    flex: 1
+                    gap: var(--grid-gutter)
+                figure
+                    width: columns(2)
+        
+        @include in-page-with-sidebar
+            .feature
+                &-content
+                    > *
+                        width: columns(4)
+                &:where(:has(figure))
+                    .feature-content
+                        display: block
                         > *
-                            width: columns(4)
-                    &:has(figure)
-                        .feature-content
-                            display: block
-                            > *
-                                width: columns(6)
-
-            @include in-page-without-sidebar
-                .feature
-                    &-content
-                        display: flex
-                        gap: var(--grid-gutter)
-                        .name
-                            width: columns(4)
-                        > div
                             width: columns(6)
-                            margin-left: auto
+
+        @include in-page-without-sidebar
+            .feature
+                &-content
+                    display: flex
+                    gap: var(--grid-gutter)
+                    .name
+                        width: columns(4)
+                    > div
+                        width: columns(6)
+                        margin-left: auto
