@@ -5,8 +5,7 @@
       <audio src="{{ $file.direct_url }}" controls title="{{ .title | safeHTML }}"></audio>
       <figcaption>
         {{ if .title }}
-          {{ $described_by := printf "block-sound-title-%s" .html_id | default .described_by }}
-          <p aria-hidden="true" id="{{- $described_by -}}">{{- safeHTML .title -}}</p>
+          <p aria-hidden="true" id="{{- .described_by -}}">{{- safeHTML .title -}}</p>
         {{ end }}
         <p>{{ partial "commons/files/extension-and-size.html" $file }}</p>
       </figcaption>
