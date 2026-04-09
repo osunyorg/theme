@@ -15,8 +15,6 @@
 @mixin icon($icon-name: '', $pseudo-element: before, $non-breaking: false)
     $icon-code: map-get($icons, $icon-name)
     &::#{$pseudo-element}
-        content: $icon-code
-        content: $icon-code #{/ ""} // Add ‘ / ""‘ to hide from screen reader
         font-family: 'Icon'
         font-style: normal
         font-variant: normal
@@ -29,12 +27,17 @@
             @if $icon-custom-code
                 font-family: $icons-custom-font-family
                 $icon-code: $icon-custom-code
+                @if $icons-custom-size-ratio
+                    font-size: #{$icons-custom-size-ratio}em
         @if $non-breaking
             display: inline
             @if $pseudo-element == "after"
                 content: " #{$icon-code}"
             @if $pseudo-element == "before"
                 content: "#{$icon-code} "
+        @else
+            content: $icon-code
+            content: $icon-code #{/ ""} // Add ‘ / ""‘ to hide from screen reader
         @content // TODO : important de documenter ça
 
 @mixin icon-block($icon-name: '', $pseudo-element: before, $non-breaking: false)
