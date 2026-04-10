@@ -1,7 +1,5 @@
-{{ $event := .event }}
-{{ $class := partial "events/partials/event/helpers/GetClass" . }}
-
-{{ if $event }}
+{{ if .event }}
+  {{ $class := partial "events/partials/event/helpers/GetClass" . }}
   <article class="{{ $class }}">
     <div class="event-content">
       {{ partial "events/partials/event/heading.html" . }}
