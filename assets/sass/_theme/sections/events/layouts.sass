@@ -224,17 +224,18 @@
                     .media
                         margin-left: var(--grid-gutter-negative)
                         margin-right: var(--grid-gutter-negative)
-                    .event--child
-                        flex-direction: row
-                        gap: var(--grid-gutter)
-                        .event-content
-                            flex: 1
-                        .media
-                            width: 33.3%
-                            order: 2
-                            margin-bottom: 0
-                        .event-timeslot
-                            margin-top: 0
+                    + .event-children
+                        .event--child
+                            flex-direction: row
+                            gap: var(--grid-gutter)
+                            .event-content
+                                flex: 1
+                            .media
+                                width: 33.3%
+                                order: 2
+                                margin-bottom: 0
+                            .event-timeslot
+                                margin-top: 0
         @include media-breakpoint-up(desktop)
             .events-date
                 padding-bottom: $spacing-5
@@ -272,19 +273,20 @@
                     time + time
                         @include meta
                 &--parent
-                    .event--child
-                        padding-left: offset(1)
-                        .event-timeslot
-                            padding-right: $spacing-2
-                            width: offset(1)
-                        .event-hours
-                            time + time
-                                display: block
-                                &::before
-                                    margin-left: 0
-                        &:where(:not(.event--with-image))
-                            .event-content
-                                margin-left: offset(3)
+                    + .event-children
+                        .event--child
+                            padding-left: offset(1)
+                            .event-timeslot
+                                padding-right: $spacing-2
+                                width: offset(1)
+                            .event-hours
+                                time + time
+                                    display: block
+                                    &::before
+                                        margin-left: 0
+                            &:where(:not(.event--with-image))
+                                .event-content
+                                    margin-left: offset(3)
                 &:not(.event--child)
                     .event-timeslot
                         bottom: 0
