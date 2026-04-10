@@ -6,7 +6,7 @@
 {{ if .event.Params.children }}
   {{ $class = printf "%s event--parent" $class }}
 {{ end }}
-{{ if and .event.Params.parent .sub_event }}
+{{ if and .event.Params.parent .is_sub_event }}
   {{ $class = printf "%s event--child" $class }}
 {{ end }}
 {{ if .event.Params.federation.active }}
