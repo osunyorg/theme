@@ -1,7 +1,8 @@
 {{ if site.Params.search.active }}
-  {{ $script := resources.Get "js/pagefind-ui.js" | fingerprint }}
-
-  <script src="{{ $script.Permalink }}" integrity="{{ $script.Data.Integrity }}" defer async></script>
+  {{ $pagefind_ui := resources.Get "js/pagefind-ui.js" | fingerprint }}
+  {{ if $pagefind_ui }}
+    <script src="{{ $pagefind_ui.Permalink }}" integrity="{{ $pagefind_ui.Data.Integrity }}" defer async></script>
+  {{ end }}
 
   <div id="search" class="search" aria-hidden="true" aria-modal="true" role="dialog" aria-label="{{ i18n "commons.search.label" }}">
     <button class="search__close popup-close" aria-label="{{ i18n "commons.search.close" }}">
