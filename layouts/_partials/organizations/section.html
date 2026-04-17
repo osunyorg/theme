@@ -22,7 +22,7 @@
 
   {{- if not ( partial "organizations/section/helpers/HasBlockOrganizations" . ) -}}
     <div class="container">
-      {{ partial "organizations/partials/organizations.html" $paginator }}
+      {{ partial "organizations/partials/organizations.html" . }}
       {{ partial "commons/section/pagination.html" . }}
     </div>
   {{ end }}
