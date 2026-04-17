@@ -21,7 +21,23 @@
                 &.is-png
                     img
                         max-width: $block-features-icon-max-width
-        
+            // Legacy
+            &:not(.media--icon, .media--image)
+                picture
+                    img
+                        margin: auto
+                picture:not(.is-png, .is-svg)
+                    img
+                        object-fit: cover
+                        width: 100%
+                        aspect-ratio: 16/9
+                picture.is-png
+                    padding-top: $spacing-3
+                    img
+                        margin: initial
+                        max-width: $block-features-icon-max-width
+                    @include media-breakpoint-down(desktop)
+                        margin-bottom: $spacing-2
     &--grid
         .features
             @include layout-grid
@@ -74,6 +90,11 @@
                         display: block
                         > *
                             width: columns(6)
+                // Legacy
+                figure:not(.media--icon, .media--image)
+                    picture.is-png
+                        img
+                            margin: auto
 
         @include in-page-without-sidebar
             .feature
