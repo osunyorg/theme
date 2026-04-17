@@ -1,10 +1,4 @@
-{{- $is_organizations_block_present := false -}}
-
-{{ range .Params.contents }}
-  {{- if eq .template "organizations" -}}
-    {{- $is_organizations_block_present = true -}}
-  {{ end }}
-{{ end }}
+{{ $paginator := partial "organizations/section/helpers/GetPaginator" . }}
 
 {{ partial "organizations/section/hero.html" . }}
 
@@ -14,7 +8,7 @@
     "with_container" true
   ) }}
 
-  {{ if partial "commons/section/helpers/IsFirstPage" . }}
+  {{ if eq $paginator.PageNumber 1 }}
     {{ partial "toc/container.html" (dict
       "context" .
     ) }}
@@ -26,9 +20,9 @@
 
   {{ partial "taxonomies/section/container.html" . }}
 
-  {{- if not $is_organizations_block_present -}}
+  {{- if not ( partial "organizations/section/helpers/HasBlockOrganizations" . ) -}}
     <div class="container">
-      {{ partial "organizations/partials/organizations.html" . }}
+      {{ partial "organizations/partials/organizations.html" $paginator }}
       {{ partial "commons/section/pagination.html" . }}
     </div>
   {{ end }}
