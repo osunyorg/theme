@@ -14,6 +14,10 @@
   {{ $class = printf "%s block-%s--%s" $class .template .data.layout }}
 {{ end }}
 
+{{ if .data.layout }}
+  {{ $class = printf "%s layout--%s" $class .data.layout }}
+{{ end }}
+
 {{ range $key, $value := .data.options }}
   {{ $class = printf "%s option__%s--%v" $class $key $value }}
 {{ end }}
