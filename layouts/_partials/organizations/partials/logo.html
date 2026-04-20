@@ -8,7 +8,7 @@
     {{ $class = "organization-logo--on-dark-background" }}
   {{ end }}
 
-  <figure class="organization-logo"{{ with .Title }} role="figure" aria-label="{{ . }}"{{ end }}>
+  <figure class="organization-logo {{ $class }}"{{ with .Title }} role="figure" aria-label="{{ . }}"{{ end }}>
     {{ partial "commons/image.html" (dict
       "image" $logo
       "alt" .Title
