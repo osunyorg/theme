@@ -4,7 +4,7 @@
 {{ $heading_level := 2 }}
 
 <ul class="jobs jobs--{{- $layout }}">
-  {{ range $jobs }}
+  {{ range sort $jobs ".Params.dates.from.day" "desc" }}
     <li>
       {{ partial "jobs/partials/job.html" (dict
         "job" .
