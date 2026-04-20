@@ -15,7 +15,7 @@
 {{ end }}
 
 {{ range $key, $value := .data.options }}
-  {{ $class = printf "%s option__%s--%v" $class $key $value }}
+  {{ $class = printf "%s block--option-%s-%v" $class $key $value }}
 {{ end }}
 
 {{ if .html_class }}
