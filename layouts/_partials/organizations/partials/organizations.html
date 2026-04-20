@@ -1,6 +1,6 @@
 {{ $options := site.Params.organizations.index.options }}
 {{ $layout := "grid" }}
-{{ $paginator := .Paginate ( .Pages | uniq ) }}
+{{ $paginator := partial "organizations/section/helpers/GetPaginator" . }}
 
 {{ if not $paginator.Pages }}
   {{ $is_term := eq .Kind "term" }}

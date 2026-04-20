@@ -1,5 +1,11 @@
 {{ $events := where .Pages "Section" "events" }}
 
+{{ $children_with_same_category := partial "events_categories/helpers/GetChildrenFromSharedParentCategory" (dict
+  "term" .
+  "events" $events
+) }}
+{{ $events = $events | complement $children_with_same_category }}
+
 {{ $futur_and_current := where $events "Params.dates.archive" false }}
 {{ $futur_and_current_group := $futur_and_current.GroupByDate site.Params.events.index.group_by_date "asc" }}
 
