@@ -1,9 +1,11 @@
 {{ if .Params.logo }}
   {{ $logo := index .Params "logo" }}
   {{ $logo_on_dark_background := index .Params "logo_on_dark_background" }}
+  {{ $class := "organization-logo--default" }}
 
   {{ if and site.Params.organizations.dark_logo_background $logo_on_dark_background }}
     {{ $logo = $logo_on_dark_background }}
+    {{ $class := "organization-logo--on-dark-background" }}
   {{ end }}
 
   <figure class="organization-logo"{{ with .Title }} role="figure" aria-label="{{ . }}"{{ end }}>
