@@ -36,15 +36,13 @@
                 display: flex
                 gap: var(--grid-gutter)
 
-            @include media-breakpoint-down(desktop)
-                .feature
+                @include media-breakpoint-down(desktop)
                     figure
                         &.media--icon
                             img
                                 max-width: $block-features-list-icon-max-width-mobile
 
-            @include in-page-with-or-without-sidebar
-                .feature
+                @include in-page-with-or-without-sidebar
                     .feature-content
                         align-items: baseline
                         display: flex
@@ -58,15 +56,14 @@
                     figure.media
                         width: columns(2)
 
-            @include in-page-with-sidebar
-                .feature:has(.media)
-                    .feature-content
-                        display: block
-                        .feature-description
-                            width: auto
+                @include in-page-with-sidebar
+                    &:has(.media)
+                        .feature-content
+                            display: block
+                            .feature-description
+                                width: auto
 
-            @include in-page-without-sidebar
-                .feature
+                @include in-page-without-sidebar
                     .feature-content
                         .feature-description
                             width: columns(6)
