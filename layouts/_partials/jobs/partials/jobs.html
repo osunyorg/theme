@@ -2,9 +2,10 @@
 {{ $layout := default site.Params.jobs.index.layout }}
 {{ $options := default site.Params.jobs.index.options }}
 {{ $heading_level := 2 }}
+{{ $paginator := partial "jobs/section/helpers/GetPaginator" . }}
 
 <ul class="jobs jobs--{{- $layout }}">
-  {{ range sort $jobs ".Params.dates.from.day" "desc" }}
+  {{ range $paginator.Pages }}
     <li>
       {{ partial "jobs/partials/job.html" (dict
         "job" .
