@@ -1,11 +1,11 @@
-@mixin layout-list
+@mixin layout-list($item-selector: article)
     @include list-reset
     > li
         padding-bottom: $spacing-3
         padding-top: $spacing-3
         &:where(:not(:last-child))
             border-bottom: var(--border-width) solid var(--color-border)
-    article
+    #{$item-selector}
         @include layout-item
         @include small-arrow-right-hover('.more')
         display: flex
@@ -16,14 +16,14 @@
             @include item-categories-list
     
     @include media-breakpoint-down(desktop)
-        article
+        #{$item-selector}
             flex-direction: column
             gap: var(--grid-gutter)
             .media
                 width: 33.33333%
     
     @include in-page-with-sidebar
-        article
+        #{$item-selector}
             display: flex
             gap: var(--grid-gutter)
             [class$="-content"]
@@ -38,7 +38,7 @@
                 width: columns(2)
     
     @include in-page-without-sidebar
-        article
+        #{$item-selector}
             display: flex
             gap: var(--grid-gutter)
             [class$="-content"]

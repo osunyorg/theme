@@ -2,107 +2,71 @@
     @include in-page-without-sidebar
         .top
             width: columns(8)
-    
+
     .features
         @include list-reset
-    
-    .feature
-        display: flex
-        figure
-            order: -1
-            figcaption
-                @include meta
-                margin-top: $spacing-1
-            picture
-                &:not(.is-png, .is-svg)
+        .feature
+            display: flex
+            .name
+                @include h3
+            figure
+                order: -1
+                figcaption
+                    @include meta
+                    margin-top: $spacing-1
+                &.media--image
+                        img
+                            aspect-ratio: 16/9
+                            object-fit: cover
+                            width: 100%
+                &.media--icon
                     img
-                        aspect-ratio: 16/9
-                        object-fit: cover
-                &.is-png
-                    img
+                        object-fit: contain
+                        aspect-ratio: auto
                         max-width: $block-features-icon-max-width
-            // Legacy
-            &:not(.media--icon, .media--image)
-                picture
-                    img
-                        margin: auto
-                picture:not(.is-png, .is-svg)
-                    img
-                        object-fit: cover
-                        width: 100%
-                        aspect-ratio: 16/9
-                picture.is-png
-                    padding-top: $spacing-3
-                    img
-                        margin: initial
-                        max-width: $block-features-icon-max-width
-                    @include media-breakpoint-down(desktop)
-                        margin-bottom: $spacing-2
+
     &--grid
         .features
-            @include layout-grid
-            .feature
-                flex-direction: column
-                figure
-                    margin-bottom: $spacing-1
+            @include layout-grid($item-selector: ".feature")
 
     &--list
         .features
-            @include layout-list
-        
-        @include media-breakpoint-down(desktop)
+            @include layout-list($item-selector: ".feature")
             .feature
-                flex-direction: column
-                gap: space(3)
-                &-content
-                    div
-                        margin-top: $spacing-1
-                figure
-                    display: flex
-                    gap: var(--grid-gutter)
-                    figcaption
-                        margin-top: auto
-                        flex: 1
-                    picture
-                        img
-                            width: columns(4)
-                        &.is-png
+                display: flex
+                gap: var(--grid-gutter)
+
+            @include media-breakpoint-down(desktop)
+                .feature
+                    figure
+                        &.media--icon
                             img
                                 max-width: $block-features-list-icon-max-width-mobile
-        
-        @include media-breakpoint-up(desktop)
-            .feature
-                gap: var(--grid-gutter)
-                &-content
-                    display: flex
-                    flex: 1
-                    gap: var(--grid-gutter)
-                figure
-                    width: columns(2)
-        
-        @include in-page-with-sidebar
-            .feature
-                &-content
-                    > *
-                        width: columns(4)
-                &:where(:has(figure))
+
+            @include in-page-with-or-without-sidebar
+                .feature
+                    .feature-content
+                        align-items: baseline
+                        display: flex
+                        gap: var(--grid-gutter)
+                        .name
+                            width: columns(4)
+                        .feature-description
+                            margin-top: 0
+                            margin-left: auto
+                            width: columns(4)
+                    figure.media
+                        width: columns(2)
+
+            @include in-page-with-sidebar
+                .feature:has(.media)
                     .feature-content
                         display: block
-                        > *
-                            width: columns(6)
-                // Legacy
-                figure:not(.media--icon, .media--image)
-                    picture.is-png
-                        img
-                            margin: auto
+                        .feature-description
+                            width: auto
 
-        @include in-page-without-sidebar
-            .feature
-                &-content
-                    display: flex
-                    gap: var(--grid-gutter)
-                    .name
-                        width: columns(4)
-                    > div
-                        width: columns(6)
-                        margin-left: auto
+            @include in-page-without-sidebar
+                .feature
+                    .feature-content
+                        .feature-description
+                            width: columns(6)
