@@ -6,7 +6,7 @@
 {{ end }}
 
 {{ if .options.dates }}
-  {{ $with_hours := and (eq .mode "all") (ne .layout "agenda") }}
+  {{ $with_hours := and (ne .mode "selection") (ne .layout "agenda") }}
   {{ partial "events/partials/event/datetime/schedule.html" (dict 
     "dates" .event.Params.dates
     "time_slot" .event.Params.current_time_slot
