@@ -6,11 +6,12 @@
 {{ end }}
 
 {{ if .options.dates }}
+  {{ $with_hours := and (eq .mode "all") (ne .layout "agenda") }}
   {{ partial "events/partials/event/datetime/schedule.html" (dict 
     "dates" .event.Params.dates
     "time_slot" .event.Params.current_time_slot
     "time_slots" .event.Params.time_slots
-    "with_hours" (ne .layout "agenda")
+    "with_hours" $with_hours
   ) }}
 {{ end }}
 
