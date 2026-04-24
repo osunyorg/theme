@@ -1,8 +1,16 @@
+{{ $is_selection := eq .mode "selection" }}
+
+{{/*  show hours if outside agenda and not in selection mode  */}}
+{{ $with_hours := and (ne .layout "agenda") (not $is_selection) }}
+
+{{/*  ignore repeating state if event is in selection mode  */}}
+{{ $is_repeating := (and (gt .time_slots 1) (not $is_selection)) }}
+
 {{ partial "commons/item/schedule.html" (dict
   "dates" .dates
   "time_slot" .time_slot
   "on_two_lines" false
-  "is_repeating" (gt .time_slots 1)
   "type" "event"
-  "with_hours" .with_hours
+  "is_repeating" $is_repeating
+  "with_hours" $with_hours
 ) }}
