@@ -19,6 +19,7 @@ window.osuny.TableOfContents = function (element) {
     this.sections = this.getSections();
     this.ctaTitle = document.querySelector('.toc-cta-title span');
     this.openerButton = document.querySelector('.toc-cta button');
+    this.closingButton = document.querySelector('.toc-content > button');
     this.togglers = document.querySelectorAll('.toc-cta button, .toc-container button');
     this.state = {
         opened: false,
@@ -93,6 +94,8 @@ window.osuny.TableOfContents.prototype.toggle = function (open) {
     var classAction = this.state.opened ? 'add' : 'remove',
         transitionDuration = this.state.opened ? 0 : this.getTransitionDuration();
 
+    
+    
     // TODO: refacto timeout and css transition
     setTimeout( function () {
         this.element.setAttribute('aria-hidden', !this.state.opened);
@@ -100,6 +103,11 @@ window.osuny.TableOfContents.prototype.toggle = function (open) {
 
     setTimeout( function () {
         this.element.classList[classAction](CLASSES.isOpened);
+        if (this.state.opened) {
+            this.closingButton.focus();
+        } else {
+            this.openerButton.focus();
+        }
     }.bind(this), 50);
 
     document.documentElement.classList[classAction](CLASSES.offcanvasOpened);
