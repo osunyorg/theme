@@ -103,8 +103,7 @@ window.osuny.TableOfContents.prototype.toggle = function (open, hasTarget) {
         this.element.classList[classAction](CLASSES.isOpened);
         if (this.state.opened) {
             this.closingButton.focus();
-        }
-        if (!this.state.opened && !hasTarget) {
+        } else if (!hasTarget) {
             this.openerButton.focus();
         }
     }.bind(this), 50);
