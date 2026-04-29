@@ -68,7 +68,7 @@ window.osuny.TableOfContents.prototype.listen = function () {
 
     this.links.forEach( function (links) {
         links.addEventListener('click', function () {
-            this.toggle(false);
+            this.toggle(false, true);
         }.bind(this));
     }.bind(this));
 
@@ -86,7 +86,7 @@ window.osuny.TableOfContents.prototype.listen = function () {
     }.bind(this));
 };
 
-window.osuny.TableOfContents.prototype.toggle = function (open) {
+window.osuny.TableOfContents.prototype.toggle = function (open, hasTarget) {
     if (!this.state.isOffcanvas) {
         return;
     }
@@ -94,8 +94,6 @@ window.osuny.TableOfContents.prototype.toggle = function (open) {
     var classAction = this.state.opened ? 'add' : 'remove',
         transitionDuration = this.state.opened ? 0 : this.getTransitionDuration();
 
-    
-    
     // TODO: refacto timeout and css transition
     setTimeout( function () {
         this.element.setAttribute('aria-hidden', !this.state.opened);
@@ -105,12 +103,14 @@ window.osuny.TableOfContents.prototype.toggle = function (open) {
         this.element.classList[classAction](CLASSES.isOpened);
         if (this.state.opened) {
             this.closingButton.focus();
-        } else {
+        }
+        if (!this.state.opened && !hasTarget) {
             this.openerButton.focus();
         }
     }.bind(this), 50);
 
     document.documentElement.classList[classAction](CLASSES.offcanvasOpened);
+
 };
 
 window.osuny.TableOfContents.prototype.getTransitionDuration = function () {
