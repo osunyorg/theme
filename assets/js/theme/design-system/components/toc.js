@@ -176,7 +176,7 @@ window.osuny.TableOfContents.prototype.pressEscape = function (event) {
 
 window.osuny.TableOfContents.prototype.checkFocusTrap = function (event) {
     if (this.state.opened) {
-        focusTrap(event, this.element, true);
+        focusTrap(event, this.elements.root, true);
     }
 };
 
