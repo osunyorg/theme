@@ -80,8 +80,7 @@ window.osuny.TableOfContents.prototype.listen = function () {
     window.addEventListener('scroll', this.update.bind(this));
     window.addEventListener('resize', this.resize.bind(this));
     window.addEventListener('click', this.clickOnBackground.bind(this));
-    window.addEventListener('keydown', this.pressEscape.bind(this));
-    window.addEventListener('keydown', this.checkFocusTrap.bind(this));
+    window.addEventListener('keydown', this.keyDown.bind(this));
 
     if (this.elements.buttonOpen) {
         this.elements.buttonOpen.addEventListener('click', this.open.bind(this));
@@ -174,21 +173,22 @@ window.osuny.TableOfContents.prototype.resize = function () {
 };
 
 window.osuny.TableOfContents.prototype.clickOnBackground = function (event) {
-    if (this.state.opened && event.target === document.body) {
+    if (!this.state.opened) {
+        return;
+    }
+    if (event.target === document.body) {
         this.closeAndFocusButtonOpen();
     }
 };
 
-window.osuny.TableOfContents.prototype.pressEscape = function (event) {
-    if (this.state.opened && (event.keyCode === 27 || event.key === 'Escape')) {
+window.osuny.TableOfContents.prototype.keyDown = function (event) {
+    if (!this.state.opened) {
+        return;
+    }
+    if (event.keyCode === 27 || event.key === 'Escape') {
         this.closeAndFocusButtonOpen();
     }
-};
-
-window.osuny.TableOfContents.prototype.checkFocusTrap = function (event) {
-    if (this.state.opened) {
-        focusTrap(event, this.elements.root, true);
-    }
+    focusTrap(event, this.elements.root, true);
 };
 
 window.osuny.page.registerComponent({
