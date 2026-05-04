@@ -62,7 +62,7 @@ window.osuny.TableOfContents.prototype.isOffcanvas = function () {
 
 window.osuny.TableOfContents.prototype.getTransitionDuration = function () {
     var style = getComputedStyle(this.elements.root),
-        property = style.getPropertyValue('transition-duration');
+        property = style.getPropertyValue('transition-duration'),
         milliseconds = parseFloat(property.replace('s', '')) * 1000;
     return milliseconds;
 };
@@ -167,13 +167,13 @@ window.osuny.TableOfContents.prototype.resize = function () {
 };
 
 window.osuny.TableOfContents.prototype.clickOnBackground = function (event) {
-    if (event.target === document.body) {
+    if (this.state.opened && event.target === document.body) {
         this.closeAndFocusButtonOpen();
     }
 };
 
 window.osuny.TableOfContents.prototype.pressEscape = function (event) {
-    if (event.keyCode === 27 || event.key === 'Escape') {
+    if (this.state.opened && (event.keyCode === 27 || event.key === 'Escape')) {
         this.closeAndFocusButtonOpen();
     }
 };
