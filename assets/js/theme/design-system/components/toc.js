@@ -9,7 +9,7 @@ window.osuny.TableOfContents = function (element) {
         content: element.querySelector('.toc-content'),
         nav: element.querySelector('.toc'),
         links: element.querySelectorAll('a'),
-        sections: null,
+        sections: [],
         buttonOpen: document.querySelector('.toc-cta button'),
         buttonClose: document.querySelector('.toc-content > button')
     }
@@ -39,7 +39,7 @@ window.osuny.TableOfContents = function (element) {
 window.osuny.TableOfContents.prototype.initializeSections = function () {
     var id,
         section,
-        sections = this.elements.sections = [];
+        sections = this.elements.sections;
     this.elements.links.forEach( function (link) {
         id = link.getAttribute('href').replace('#', '');
         section = document.getElementById(id);
