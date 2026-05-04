@@ -18,7 +18,7 @@ window.osuny.TableOfContents = function (element) {
         opened: false,
         currentId: null,
         currentLink: 0,
-        isOffcanvas: this.isOffcanvas()
+        isOffcanvas: null
     };
 
     this.classes = {
@@ -50,6 +50,7 @@ window.osuny.TableOfContents.prototype.getSections = function () {
 };
 
 window.osuny.TableOfContents.prototype.initializeAria = function () {
+    this.state.isOffcanvas = this.isOffcanvas()
     if (this.state.isOffcanvas) {
         this.element.setAttribute('aria-hidden', true);
     }
@@ -60,27 +61,16 @@ window.osuny.TableOfContents.prototype.isOffcanvas = function () {
 };
 
 window.osuny.TableOfContents.prototype.listen = function () {
-    window.addEventListener('scroll', this.update.bind(this), false);
-    window.addEventListener('resize', this.resize.bind(this), false);
+    window.addEventListener('scroll', this.update.bind(this));
+    window.addEventListener('resize', this.resize.bind(this));
+    window.addEventListener('click', this.clickOnBackground.bind(this));
+    window.addEventListener('keydown', this.pressEscape.bind(this));
 
     this.buttonOpen.addEventListener('click', this.open.bind(this));
     this.buttonClose.addEventListener('click', this.close.bind(this));
 
     this.links.forEach( function (link) {
         link.addEventListener('click', this.close.bind(this));
-    }.bind(this));
-
-    window.addEventListener('click', function (event) {
-        if (event.target === document.body) {
-            this.close();
-        }
-    }.bind(this));
-
-    window.addEventListener('keydown', function (event) {
-        if (event.keyCode === 27 || event.key === 'Escape') {
-            this.close();
-        }
-        focusTrap(event, this.element, this.state.opened);
     }.bind(this));
 };
 
@@ -168,6 +158,19 @@ window.osuny.TableOfContents.prototype.updateScrollspy = function (scroll) {
 
 window.osuny.TableOfContents.prototype.resize = function () {
     this.state.isOffcanvas = this.isOffcanvas();
+};
+
+window.osuny.TableOfContents.prototype.clickOnBackground = function (event) {
+    if (event.target === document.body) {
+        this.close();
+    }
+};
+
+window.osuny.TableOfContents.prototype.pressEscape = function (event) {
+    if (event.keyCode === 27 || event.key === 'Escape') {
+        this.close();
+    }
+    focusTrap(event, this.element, this.state.opened);
 };
 
 window.osuny.page.registerComponent({
