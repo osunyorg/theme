@@ -52,7 +52,7 @@ window.osuny.TableOfContents.prototype.initializeSections = function () {
 window.osuny.TableOfContents.prototype.initializeAria = function () {
     this.state.isOffcanvas = this.isOffcanvas()
     if (this.state.isOffcanvas) {
-        this.elements.root.setAttribute('aria-hidden', true);
+        this.elements.root.setAttribute('aria-hidden', 'true');
     }
 }
 
@@ -83,8 +83,12 @@ window.osuny.TableOfContents.prototype.listen = function () {
     window.addEventListener('keydown', this.pressEscape.bind(this));
     window.addEventListener('keydown', this.checkFocusTrap.bind(this));
 
-    this.elements.buttonOpen.addEventListener('click', this.open.bind(this));
-    this.elements.buttonClose.addEventListener('click', this.closeAndFocusButtonOpen.bind(this));
+    if (this.elements.buttonOpen) {
+        this.elements.buttonOpen.addEventListener('click', this.open.bind(this));
+    }
+    if (this.elements.buttonClose) {
+        this.elements.buttonClose.addEventListener('click', this.closeAndFocusButtonOpen.bind(this));
+    }
     this.elements.links.forEach( function (link) {
         link.addEventListener('click', this.close.bind(this));
     }.bind(this));
@@ -97,7 +101,7 @@ window.osuny.TableOfContents.prototype.open = function () {
         return;
     }
     this.state.opened = true;
-    this.elements.root.setAttribute('aria-hidden', false);
+    this.elements.root.setAttribute('aria-hidden', 'false');
     document.documentElement.classList.add(this.classes.offcanvasOpened);
     setTimeout( function () {
         this.elements.root.classList.add(this.classes.isOpened);
@@ -106,11 +110,14 @@ window.osuny.TableOfContents.prototype.open = function () {
 };
 
 window.osuny.TableOfContents.prototype.close = function () {
+    if (!this.state.isOffcanvas) {
+        return;
+    }
     this.state.opened = false;
     this.elements.root.classList.remove(this.classes.isOpened);
     document.documentElement.classList.remove(this.classes.offcanvasOpened);
     setTimeout( function () {
-        this.elements.root.setAttribute('aria-hidden', true);
+        this.elements.root.setAttribute('aria-hidden', 'true');
     }.bind(this), this.getTransitionDuration());
 };
 
