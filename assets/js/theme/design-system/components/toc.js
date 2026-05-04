@@ -35,6 +35,7 @@ window.osuny.TableOfContents = function (element) {
 };
 
 // Initialisation
+
 window.osuny.TableOfContents.prototype.initializeSections = function () {
     var id,
         section,
@@ -59,6 +60,22 @@ window.osuny.TableOfContents.prototype.isOffcanvas = function () {
     return isMobile() || document.body.classList.contains(this.classes.fullWidth) || document.body.classList.contains(this.classes.offcanvas);
 };
 
+window.osuny.TableOfContents.prototype.getTransitionDuration = function () {
+    var style = getComputedStyle(this.elements.root),
+        property = style.getPropertyValue('transition-duration');
+        milliseconds = parseFloat(property.replace('s', '')) * 1000;
+    return milliseconds;
+};
+
+window.osuny.TableOfContents.prototype.getAbsoluteOffsetTop = function (element) {
+    var top = 0;
+    do {
+        top += element.offsetTop || 0;
+        element = element.offsetParent;
+    } while (element);
+    return top;
+};
+
 window.osuny.TableOfContents.prototype.listen = function () {
     window.addEventListener('scroll', this.update.bind(this));
     window.addEventListener('resize', this.resize.bind(this));
@@ -67,8 +84,7 @@ window.osuny.TableOfContents.prototype.listen = function () {
     window.addEventListener('keydown', this.checkFocusTrap.bind(this));
 
     this.elements.buttonOpen.addEventListener('click', this.open.bind(this));
-    this.elements.buttonClose.addEventListener('click', this.close.bind(this));
-
+    this.elements.buttonClose.addEventListener('click', this.closeAndFocusButtonOpen.bind(this));
     this.elements.links.forEach( function (link) {
         link.addEventListener('click', this.close.bind(this));
     }.bind(this));
@@ -92,42 +108,16 @@ window.osuny.TableOfContents.prototype.open = function () {
 window.osuny.TableOfContents.prototype.close = function () {
     this.state.opened = false;
     this.elements.root.classList.remove(this.classes.isOpened);
-    this.elements.buttonOpen.focus();
     document.documentElement.classList.remove(this.classes.offcanvasOpened);
     setTimeout( function () {
         this.elements.root.setAttribute('aria-hidden', true);
     }.bind(this), this.getTransitionDuration());
 };
 
-window.osuny.TableOfContents.prototype.getTransitionDuration = function () {
-    var style = getComputedStyle(this.elements.root),
-        property = style.getPropertyValue('transition-duration');
-        milliseconds = parseFloat(property.replace('s', '')) * 1000;
-    return milliseconds;
-};
-
-window.osuny.TableOfContents.prototype.update = function () {
-    var scroll = document.documentElement.scrollTop || document.body.scrollTop;
-    var id = null;
-    this.elements.sections.forEach(function (section) {
-        if (this.getAbsoluteOffsetTop(section) <= scroll + window.innerHeight / 2) {
-            id = section.id;
-        }
-    }.bind(this));
-
-    if (id && id !== this.state.currentId) {
-        this.activateLink(id);
-    }
-    this.updateScrollspy(scroll);
-};
-
-window.osuny.TableOfContents.prototype.getAbsoluteOffsetTop = function (element) {
-    var top = 0;
-    do {
-        top += element.offsetTop || 0;
-        element = element.offsetParent;
-    } while (element);
-    return top;
+// focus opener button, see: https://github.com/osunyorg/theme/issues/1015
+window.osuny.TableOfContents.prototype.closeAndFocusButtonOpen = function () {
+    this.close();
+    this.elements.buttonOpen.focus();
 };
 
 window.osuny.TableOfContents.prototype.activateLink = function (id) {
@@ -146,6 +136,20 @@ window.osuny.TableOfContents.prototype.activateLink = function (id) {
     }.bind(this));
 };
 
+window.osuny.TableOfContents.prototype.update = function () {
+    var scroll = document.documentElement.scrollTop || document.body.scrollTop;
+    var id = null;
+    this.elements.sections.forEach(function (section) {
+        if (this.getAbsoluteOffsetTop(section) <= scroll + window.innerHeight / 2) {
+            id = section.id;
+        }
+    }.bind(this));
+
+    if (id && id !== this.state.currentId) {
+        this.activateLink(id);
+    }
+    this.updateScrollspy(scroll);
+};
 
 window.osuny.TableOfContents.prototype.updateScrollspy = function (scroll) {
     var container = this.state.isOffcanvas ? this.elements.nav : this.elements.content;
@@ -164,13 +168,13 @@ window.osuny.TableOfContents.prototype.resize = function () {
 
 window.osuny.TableOfContents.prototype.clickOnBackground = function (event) {
     if (event.target === document.body) {
-        this.close();
+        this.closeAndFocusButtonOpen();
     }
 };
 
 window.osuny.TableOfContents.prototype.pressEscape = function (event) {
     if (event.keyCode === 27 || event.key === 'Escape') {
-        this.close();
+        this.closeAndFocusButtonOpen();
     }
 };
 
