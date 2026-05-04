@@ -64,6 +64,7 @@ window.osuny.TableOfContents.prototype.listen = function () {
     window.addEventListener('resize', this.resize.bind(this));
     window.addEventListener('click', this.clickOnBackground.bind(this));
     window.addEventListener('keydown', this.pressEscape.bind(this));
+    window.addEventListener('keydown', this.checkFocusTrap.bind(this));
 
     this.elements.buttonOpen.addEventListener('click', this.open.bind(this));
     this.elements.buttonClose.addEventListener('click', this.close.bind(this));
@@ -171,7 +172,12 @@ window.osuny.TableOfContents.prototype.pressEscape = function (event) {
     if (event.keyCode === 27 || event.key === 'Escape') {
         this.close();
     }
-    focusTrap(event, this.elements.root, this.state.opened);
+};
+
+window.osuny.TableOfContents.prototype.checkFocusTrap = function (event) {
+    if (this.state.opened) {
+        focusTrap(event, this.element, true);
+    }
 };
 
 window.osuny.page.registerComponent({
