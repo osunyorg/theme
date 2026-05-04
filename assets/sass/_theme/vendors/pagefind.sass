@@ -3,3 +3,43 @@
     --pf-searchbox-max-width: none
     --pf-modal-max-width: 100%
     --pf-modal-max-height: 100svh
+    --pf-modal-top: 0
+
+    --pf-input-height: auto
+    --pf-border: 0
+    --pf-border-radius: 0
+
+.nav-search
+    color: var(--color-text)
+    button
+        @include button-reset
+        @include meta
+        color: var(--color-text)
+        &:focus
+            box-shadow: none
+    
+    .search-button
+        .pf-trigger-icon
+            display: none
+        
+        &--primary, &--upper-menu
+            .pf-trigger-btn
+                @if not $search-button-header-text
+                    span
+                        @extend .sr-only
+                @if $search-button-header-icon
+                    @include icon(search-line, after)
+        
+        &--footer
+            .pf-trigger-btn
+                @if not $search-button-footer-text
+                    span
+                        @extend .sr-only
+                @if $search-button-footer-icon
+                    @include icon(search-line, after)
+
+dialog.pf-modal
+    border-radius: 0 !important
+    height: 100svh !important
+    .pf-modal-content
+        display: flex
