@@ -145,7 +145,7 @@ window.osuny.TableOfContents.prototype.activateLink = function (id) {
         if (link === currentLink) {
             link.classList.add(this.classes.linkActive);
             link.setAttribute('aria-current', 'true');
-            this.state.id = id;
+            this.state.currentId = id;
             this.state.currentLink = link;
         } else {
             link.classList.remove(this.classes.linkActive);
