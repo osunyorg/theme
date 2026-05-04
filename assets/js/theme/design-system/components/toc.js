@@ -4,15 +4,15 @@ import { focusTrap } from '../../utils/focus-trap';
 window.osuny = window.osuny || {};
 
 window.osuny.TableOfContents = function (element) {
-    this.element = element;
-    this.content = this.element.querySelector('.toc-content');
-    this.nav = this.element.querySelector('.toc');
-    this.links = this.element.querySelectorAll('a');
-    this.sections = this.getSections();
-    this.ctaTitle = document.querySelector('.toc-cta-title span');
-    this.buttonOpen = document.querySelector('.toc-cta button');
-    this.buttonClose = document.querySelector('.toc-content > button');
-    this.togglers = document.querySelectorAll('.toc-cta button, .toc-container button');
+    this.elements = {
+        root: element,
+        content: element.querySelector('.toc-content'),
+        nav: element.querySelector('.toc'),
+        links: element.querySelectorAll('a'),
+        sections: null,
+        buttonOpen: document.querySelector('.toc-cta button'),
+        buttonClose: document.querySelector('.toc-content > button')
+    }
 
     this.state = {
         opened: false,
@@ -29,30 +29,29 @@ window.osuny.TableOfContents = function (element) {
         offcanvas: 'offcanvas-toc'
     };
 
-    this.listen();
+    this.initializeSections();
     this.initializeAria();
+    this.listen();
 };
 
-window.osuny.TableOfContents.prototype.getSections = function () {
-    var sections = [],
-        id,
-        section;
-
-    this.links.forEach(function (link) {
+// Initialisation
+window.osuny.TableOfContents.prototype.initializeSections = function () {
+    var id,
+        section,
+        sections = this.elements.sections = [];
+    this.elements.links.forEach( function (link) {
         id = link.getAttribute('href').replace('#', '');
         section = document.getElementById(id);
         if (section) {
             sections.push(section);
         }
     });
-
-    return sections;
 };
 
 window.osuny.TableOfContents.prototype.initializeAria = function () {
     this.state.isOffcanvas = this.isOffcanvas()
     if (this.state.isOffcanvas) {
-        this.element.setAttribute('aria-hidden', true);
+        this.elements.root.setAttribute('aria-hidden', true);
     }
 }
 
@@ -66,39 +65,41 @@ window.osuny.TableOfContents.prototype.listen = function () {
     window.addEventListener('click', this.clickOnBackground.bind(this));
     window.addEventListener('keydown', this.pressEscape.bind(this));
 
-    this.buttonOpen.addEventListener('click', this.open.bind(this));
-    this.buttonClose.addEventListener('click', this.close.bind(this));
+    this.elements.buttonOpen.addEventListener('click', this.open.bind(this));
+    this.elements.buttonClose.addEventListener('click', this.close.bind(this));
 
-    this.links.forEach( function (link) {
+    this.elements.links.forEach( function (link) {
         link.addEventListener('click', this.close.bind(this));
     }.bind(this));
 };
+
+// Méthodes
 
 window.osuny.TableOfContents.prototype.open = function () {
     if (!this.state.isOffcanvas) {
         return;
     }
     this.state.opened = true;
-    this.element.setAttribute('aria-hidden', false);
+    this.elements.root.setAttribute('aria-hidden', false);
     document.documentElement.classList.add(this.classes.offcanvasOpened);
     setTimeout( function () {
-        this.element.classList.add(this.classes.isOpened);
-        this.buttonClose.focus();
+        this.elements.root.classList.add(this.classes.isOpened);
+        this.elements.buttonClose.focus();
     }.bind(this), 50);
 };
 
 window.osuny.TableOfContents.prototype.close = function () {
     this.state.opened = false;
-    this.element.classList.remove(this.classes.isOpened);
-    this.buttonOpen.focus();
+    this.elements.root.classList.remove(this.classes.isOpened);
+    this.elements.buttonOpen.focus();
     document.documentElement.classList.remove(this.classes.offcanvasOpened);
     setTimeout( function () {
-        this.element.setAttribute('aria-hidden', true);
+        this.elements.root.setAttribute('aria-hidden', true);
     }.bind(this), this.getTransitionDuration());
 };
 
 window.osuny.TableOfContents.prototype.getTransitionDuration = function () {
-    var style = getComputedStyle(this.element),
+    var style = getComputedStyle(this.elements.root),
         property = style.getPropertyValue('transition-duration');
         milliseconds = parseFloat(property.replace('s', '')) * 1000;
     return milliseconds;
@@ -107,7 +108,7 @@ window.osuny.TableOfContents.prototype.getTransitionDuration = function () {
 window.osuny.TableOfContents.prototype.update = function () {
     var scroll = document.documentElement.scrollTop || document.body.scrollTop;
     var id = null;
-    this.sections.forEach(function (section) {
+    this.elements.sections.forEach(function (section) {
         if (this.getAbsoluteOffsetTop(section) <= scroll + window.innerHeight / 2) {
             id = section.id;
         }
@@ -129,9 +130,9 @@ window.osuny.TableOfContents.prototype.getAbsoluteOffsetTop = function (element)
 };
 
 window.osuny.TableOfContents.prototype.activateLink = function (id) {
-    var currentLink = this.element.querySelector(`[href*='${id}']`);
+    var currentLink = this.elements.root.querySelector(`[href*='${id}']`);
 
-    this.links.forEach( function (link) {
+    this.elements.links.forEach( function (link) {
         if (link === currentLink) {
             link.classList.add(this.classes.linkActive);
             link.setAttribute('aria-current', 'true');
@@ -146,7 +147,7 @@ window.osuny.TableOfContents.prototype.activateLink = function (id) {
 
 
 window.osuny.TableOfContents.prototype.updateScrollspy = function (scroll) {
-    var container = this.state.isOffcanvas ? this.nav : this.content;
+    var container = this.state.isOffcanvas ? this.elements.nav : this.elements.content;
     if (this.state.currentLink && scroll > window.innerHeight) {
         var progress = this.getAbsoluteOffsetTop(this.state.currentLink) - container.offsetHeight / 2;
         progress = this.state.isOffcanvas ? progress : progress - scroll;
@@ -170,7 +171,7 @@ window.osuny.TableOfContents.prototype.pressEscape = function (event) {
     if (event.keyCode === 27 || event.key === 'Escape') {
         this.close();
     }
-    focusTrap(event, this.element, this.state.opened);
+    focusTrap(event, this.elements.root, this.state.opened);
 };
 
 window.osuny.page.registerComponent({
