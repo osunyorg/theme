@@ -44,7 +44,9 @@ window.osuny.Search.prototype.setPageFind = function () {
     var options = {
             element: this.element,
             showSubResults: false,
-            translations: osuny.i18n.search
+            translations: osuny.i18n.search,
+            showEmptyFilters: false,
+            openFilters: ['type']
         },
         attribut;
 
