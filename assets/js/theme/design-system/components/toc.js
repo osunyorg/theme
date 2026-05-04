@@ -98,9 +98,6 @@ window.osuny.TableOfContents.prototype.open = function () {
 };
 
 window.osuny.TableOfContents.prototype.close = function () {
-    if (!this.state.isOffcanvas) {
-        return;
-    }
     this.state.opened = false;
     this.element.classList.remove(this.classes.isOpened);
     this.buttonOpen.focus();
