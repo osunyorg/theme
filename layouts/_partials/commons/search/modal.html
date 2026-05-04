@@ -2,15 +2,17 @@
   <pagefind-modal>
     <pagefind-modal-header>
       <pagefind-input></pagefind-input>
-      <pagefind-filter-pane></pagefind-filter-pane>
     </pagefind-modal-header>
     <pagefind-modal-body>
       <pagefind-summary></pagefind-summary>
-      <pagefind-results show-images></pagefind-results>
+      <div class="pf-modal-content">
+        <div class="pf-modal-aside">
+          <pagefind-filter-pane expanded></pagefind-filter-pane>
+          <pagefind-keyboard-hints></pagefind-keyboard-hints>
+        </div>
+        <pagefind-results show-images></pagefind-results>
+      </div>
     </pagefind-modal-body>
-    <pagefind-modal-footer>
-      <pagefind-keyboard-hints></pagefind-keyboard-hints>
-    </pagefind-modal-footer>
   </pagefind-modal>
   <script src="/pagefind/pagefind-component-ui.js" defer async></script>
 {{ end }}
