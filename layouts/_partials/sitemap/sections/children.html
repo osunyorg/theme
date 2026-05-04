@@ -1,11 +1,11 @@
-{{ $pages := .items }}
+{{ $items := .items }}
 {{ $type := .type }}
 {{ if in (slice "persons" "organizations" "programs") $type }}
-  {{ $pages = sort $pages "Title" }}
+  {{ $items = $items.ByTitle }}
 {{ end }}
 
 <ul>
-  {{ range $pages }}
+  {{ range $items }}
     {{ if not .Params.ignore.in_sitemap }}
       <li>
         <a href="{{ .Permalink }}">{{ safeHTML .Title }}</a>
