@@ -3,14 +3,6 @@ import { focusTrap } from '../../utils/focus-trap';
 
 window.osuny = window.osuny || {};
 
-var CLASSES = {
-    offcanvasOpened: 'has-offcanvas-opened',
-    linkActive: 'active',
-    isOpened: 'is-opened',
-    fullWidth: 'full-width',
-    offcanvas: 'offcanvas-toc'
-};
-
 window.osuny.TableOfContents = function (element) {
     this.element = element;
     this.content = this.element.querySelector('.toc-content');
@@ -18,21 +10,27 @@ window.osuny.TableOfContents = function (element) {
     this.links = this.element.querySelectorAll('a');
     this.sections = this.getSections();
     this.ctaTitle = document.querySelector('.toc-cta-title span');
-    this.openerButton = document.querySelector('.toc-cta button');
-    this.closingButton = document.querySelector('.toc-content > button');
+    this.buttonOpen = document.querySelector('.toc-cta button');
+    this.buttonClose = document.querySelector('.toc-content > button');
     this.togglers = document.querySelectorAll('.toc-cta button, .toc-container button');
+
     this.state = {
         opened: false,
         currentId: null,
         currentLink: 0,
-        isOffcanvas: null
+        isOffcanvas: this.isOffcanvas()
     };
+
+    this.classes = {
+        offcanvasOpened: 'has-offcanvas-opened',
+        linkActive: 'active',
+        isOpened: 'is-opened',
+        fullWidth: 'full-width',
+        offcanvas: 'offcanvas-toc'
+    };
+
     this.listen();
-    
-    this.state.isOffcanvas = this.isOffcanvas()
-    if (this.state.isOffcanvas) {
-        this.element.setAttribute('aria-hidden', true);
-    }
+    this.initializeAria();
 };
 
 window.osuny.TableOfContents.prototype.getSections = function () {
@@ -51,71 +49,72 @@ window.osuny.TableOfContents.prototype.getSections = function () {
     return sections;
 };
 
+window.osuny.TableOfContents.prototype.initializeAria = function () {
+    if (this.state.isOffcanvas) {
+        this.element.setAttribute('aria-hidden', true);
+    }
+}
+
 window.osuny.TableOfContents.prototype.isOffcanvas = function () {
-    return isMobile() || document.body.classList.contains(CLASSES.fullWidth) || document.body.classList.contains(CLASSES.offcanvas);
+    return isMobile() || document.body.classList.contains(this.classes.fullWidth) || document.body.classList.contains(this.classes.offcanvas);
 };
 
 window.osuny.TableOfContents.prototype.listen = function () {
     window.addEventListener('scroll', this.update.bind(this), false);
-
     window.addEventListener('resize', this.resize.bind(this), false);
 
-    this.togglers.forEach( function (toggler) {
-        toggler.addEventListener('click', function () {
-            this.toggle();
-        }.bind(this));
-    }.bind(this));
+    this.buttonOpen.addEventListener('click', this.open.bind(this));
+    this.buttonClose.addEventListener('click', this.close.bind(this));
 
-    this.links.forEach( function (links) {
-        links.addEventListener('click', function () {
-            this.toggle(false, true);
-        }.bind(this));
+    this.links.forEach( function (link) {
+        link.addEventListener('click', this.close.bind(this));
     }.bind(this));
 
     window.addEventListener('click', function (event) {
         if (event.target === document.body) {
-            this.toggle(false);
+            this.close();
         }
     }.bind(this));
 
     window.addEventListener('keydown', function (event) {
         if (event.keyCode === 27 || event.key === 'Escape') {
-            this.toggle(false);
+            this.close();
         }
         focusTrap(event, this.element, this.state.opened);
     }.bind(this));
 };
 
-window.osuny.TableOfContents.prototype.toggle = function (open, hasTarget) {
+window.osuny.TableOfContents.prototype.open = function () {
     if (!this.state.isOffcanvas) {
         return;
     }
-    this.state.opened = typeof open !== 'undefined' ? open : !this.state.opened;
-    var classAction = this.state.opened ? 'add' : 'remove',
-        transitionDuration = this.state.opened ? 0 : this.getTransitionDuration();
-
-    // TODO: refacto timeout and css transition
+    this.state.opened = true;
+    this.element.setAttribute('aria-hidden', false);
+    document.documentElement.classList.add(this.classes.offcanvasOpened);
     setTimeout( function () {
-        this.element.setAttribute('aria-hidden', !this.state.opened);
-    }.bind(this), transitionDuration * 1000);
-
-    setTimeout( function () {
-        this.element.classList[classAction](CLASSES.isOpened);
-        if (this.state.opened) {
-            this.closingButton.focus();
-        } else if (!hasTarget) {
-            this.openerButton.focus();
-        }
+        this.element.classList.add(this.classes.isOpened);
+        this.buttonClose.focus();
     }.bind(this), 50);
+};
 
-    document.documentElement.classList[classAction](CLASSES.offcanvasOpened);
-
+window.osuny.TableOfContents.prototype.close = function () {
+    if (!this.state.isOffcanvas) {
+        return;
+    }
+    this.state.opened = false;
+    this.element.classList.remove(this.classes.isOpened);
+    this.buttonOpen.focus();
+    document.documentElement.classList.remove(this.classes.offcanvasOpened);
+    setTimeout( function () {
+        this.element.setAttribute('aria-hidden', true);
+    }.bind(this), this.getTransitionDuration());
 };
 
 window.osuny.TableOfContents.prototype.getTransitionDuration = function () {
-    var transitionDuration = getComputedStyle(this.element).getPropertyValue('--toc-transition-duration');
-    transitionDuration = parseFloat(transitionDuration.replace('s', ''))
-    return transitionDuration;
+    var style = getComputedStyle(this.element),
+        property = style.getPropertyValue('transition-duration');
+        milliseconds = parseFloat(property.replace('s', '')) * 1000;
+    return milliseconds;
 };
 
 window.osuny.TableOfContents.prototype.update = function () {
@@ -147,26 +146,17 @@ window.osuny.TableOfContents.prototype.activateLink = function (id) {
 
     this.links.forEach( function (link) {
         if (link === currentLink) {
-            link.classList.add(CLASSES.linkActive);
+            link.classList.add(this.classes.linkActive);
             link.setAttribute('aria-current', 'true');
-            this.updateCtaTitle(link);
             this.state.id = id;
             this.state.currentLink = link;
         } else {
-            link.classList.remove(CLASSES.linkActive);
+            link.classList.remove(this.classes.linkActive);
             link.removeAttribute('aria-current');
         }
     }.bind(this));
 };
 
-window.osuny.TableOfContents.prototype.updateCtaTitle = function (link) {
-    if (isMobile()) {
-        this.openerButton.setAttribute('aria-label', link.innerText +  osuny.i18n.toc.button_label);
-        this.ctaTitle.innerText = link.innerText;
-    } else {
-        this.ctaTitle.innerText = this.ctaTitle.getAttribute('data-default');
-    }
-};
 
 window.osuny.TableOfContents.prototype.updateScrollspy = function (scroll) {
     var container = this.state.isOffcanvas ? this.nav : this.content;
