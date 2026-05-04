@@ -4,7 +4,10 @@
     <li>
       <a href="{{ .Permalink }}">{{ .Title }}</a>
       {{ $events := where .RegularPagesRecursive "Params.dates.archive" false }}
-      {{ partial "sitemap/sections/children.html" $events }}
+      {{ partial "sitemap/sections/children.html" (dict 
+        "items" $events
+        "type" "events"
+      ) }}
     </li>
   {{ end }}
 </ul>
