@@ -103,7 +103,9 @@ window.osuny.TableOfContents.prototype.open = function () {
     this.elements.root.setAttribute('aria-hidden', 'false');
     document.documentElement.classList.add(this.classes.offcanvasOpened);
     setTimeout( function () {
+        // Pour permettre l'animation d'apparition
         this.elements.root.classList.add(this.classes.isOpened);
+        // Pour éviter de donner le focus à un élément caché
         this.elements.buttonClose.focus();
     }.bind(this), 50);
 };
