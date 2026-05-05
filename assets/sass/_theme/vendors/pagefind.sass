@@ -124,6 +124,8 @@ dialog.pf-modal
                 display: none
     
     .pf-modal-header
+        display: flex
+        justify-content: space-between
         position: relative
 
     .pf-modal-results
@@ -160,8 +162,6 @@ dialog.pf-modal
             .pf-filter-group
                 border: 0
                 padding: 0
-                .pf-filter-group-title
-                    @include sr-only
                 .pf-filter-checkbox
                     display: flex
                     input
@@ -185,15 +185,6 @@ dialog.pf-modal
                 margin-left: space()
     
     @include media-breakpoint-up(desktop)
-        .pf-modal-header
-            display: flex
-            justify-content: space-between
-            .pf-modal-close
-                top: 50%
-                transform: translateY(-50%)
-                right: 0
-                position: absolute
-
         .pf-input-wrapper
             width: columns(8)
             input
@@ -203,6 +194,16 @@ dialog.pf-modal
         .pf-modal-content
             display: flex
             gap: var(--grid-gutter)
+
+        .pf-modal-close
+            position: absolute
+            right: 0
+            top: 50%
+            transform: translateY(-50%)
+
+        .pf-filter-pane
+            .pf-filter-group-title
+                @include sr-only
 
         .pf-modal-results
             .pf-results
@@ -225,3 +226,10 @@ dialog.pf-modal
             margin-left: offset(1)
             order: 2
             width: columns(3)
+
+    @include media-breakpoint-down(desktop)
+        .pf-modal-header
+            flex-direction: column
+            .pf-modal-close
+                order: -1
+                margin-left: auto
