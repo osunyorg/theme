@@ -19,7 +19,7 @@ window.osuny.Search = function (element) {
 
     this.listen();
 };
-  
+
 window.osuny.Search.prototype.listen = function () {
     window.addEventListener('resize', this.resize.bind(this));
 
@@ -40,7 +40,7 @@ window.osuny.Search.prototype.listen = function () {
                 this.close();
             }
         }
-    }.bind(this));
+    }.bind(this), true);
 };
 
 window.osuny.Search.prototype.resize = function () {
@@ -54,7 +54,7 @@ window.osuny.Search.prototype.resize = function () {
 window.osuny.Search.prototype.getDetails = function () {
     setTimeout(function() {
         this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group');
- 
+
         this.details.forEach( function (detail) {
             detail.open = true;
         }.bind(this));
@@ -74,7 +74,6 @@ window.osuny.Search.prototype.open = function () {
 };
 
 window.osuny.Search.prototype.close = function () {
-    console.log(this.elements.triggerButton)
     this.state.isOpened = false;
     this.setDetailsAttribute(false);
 
