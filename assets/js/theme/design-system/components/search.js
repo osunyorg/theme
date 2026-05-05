@@ -1,5 +1,4 @@
 import { isMobile } from '../../utils/breakpoints';
-import { focusTrap } from '../../utils/focus-trap';
 
 window.osuny = window.osuny || {};
 
@@ -8,8 +7,9 @@ window.osuny.Search = function (element) {
         root: element,
         sections: [],
         detailsContainer: element.querySelector('.pf-filter-pane'),
-        buttonOpen: document.querySelector('.pf-trigger-btn'),
-        buttonClose: document.querySelector('.pf-modal-close')
+        buttonsOpen: document.querySelectorAll('.pf-trigger-btn'),
+        buttonClose: document.querySelector('.pf-modal-close'),
+        triggerButton: null
     }
 
     this.state = {
@@ -23,12 +23,24 @@ window.osuny.Search = function (element) {
 window.osuny.Search.prototype.listen = function () {
     window.addEventListener('resize', this.resize.bind(this));
 
-    if (this.elements.buttonOpen) {
-        this.elements.buttonOpen.addEventListener('click', this.open.bind(this));
-    }
+    this.elements.buttonsOpen.forEach(button => {
+        button.addEventListener('click', (event) => {
+            this.elements.triggerButton = event.currentTarget;
+            this.open();
+        });
+    });
+
     if (this.elements.buttonClose) {
         this.elements.buttonClose.addEventListener('click', this.close.bind(this));
     }
+
+    window.addEventListener('keydown', function (event) {
+        if (this.state.isOpened) {
+            if (event.keyCode === 27 || event.key === 'Escape') {
+                this.close();
+            }
+        }
+    }.bind(this));
 };
 
 window.osuny.Search.prototype.resize = function () {
@@ -41,7 +53,8 @@ window.osuny.Search.prototype.resize = function () {
 
 window.osuny.Search.prototype.getDetails = function () {
     setTimeout(function() {
-        this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group'); 
+        this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group');
+ 
         this.details.forEach( function (detail) {
             detail.open = true;
         }.bind(this));
@@ -61,8 +74,14 @@ window.osuny.Search.prototype.open = function () {
 };
 
 window.osuny.Search.prototype.close = function () {
+    console.log(this.elements.triggerButton)
     this.state.isOpened = false;
     this.setDetailsAttribute(false);
+
+    // focus clicked search button
+    setTimeout(function() {
+        this.elements.triggerButton.focus();
+    }.bind(this), 300);
 }
 
 window.osuny.Search.prototype.setDetailsAttribute = function (open) {
