@@ -1,4 +1,5 @@
 import { isMobile } from '../../utils/breakpoints';
+import { focusTrap } from '../../utils/focus-trap';
 
 window.osuny = window.osuny || {};
 
@@ -40,6 +41,7 @@ window.osuny.Search.prototype.listen = function () {
                 this.close();
             }
         }
+        focusTrap(event, this.elements.root, this.state.isOpened);
     }.bind(this), true);
 };
 
