@@ -1,10 +1,22 @@
 .nav-search
     button
-        @include button-reset
         @include meta
         color: var(--color-text)
     
+    @include media-breakpoint-down(desktop)
+        header#document-header &
+            .pf-trigger-btn
+                padding-bottom: $spacing-3
+                padding-top: $spacing-3
+                width: 100%
+    
 .search-button
+    .pf-trigger-btn
+        @include button-reset
+        align-items: baseline
+        display: flex
+        gap: space()
+        padding: 0
     .pf-trigger-icon
         display: none
     
@@ -47,9 +59,12 @@
                 border-top: var(--border-width) solid #eee
                 bottom: pxToRem(44)
                 padding: 0 var(--grid-gutter)
+                
         @include media-breakpoint-up(desktop)
             @if $search-button-fixed-text
                 width: columns(2)
+
+
 
 dialog.pf-modal
     @include meta
@@ -257,6 +272,9 @@ dialog.pf-modal
                 width: columns(6)
 
         .pf-modal-aside
+            .pf-filter-pane
+                .pf-filter-fieldset
+                    margin-bottom: $spacing-3
             .pf-keyboard-hints
                 @include sr-only
 
