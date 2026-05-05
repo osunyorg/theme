@@ -23,18 +23,18 @@ window.osuny.Search = function (element) {
     window.addEventListener('resize', this.resize.bind(this));
 
     if (this.elements.buttonOpen) {
-        this.elements.buttonOpen.addEventListener('click', this.openDetails.bind(this));
+        this.elements.buttonOpen.addEventListener('click', this.open.bind(this));
     }
     if (this.elements.buttonClose) {
-        this.elements.buttonClose.addEventListener('click', this.closeDetails.bind(this));
+        this.elements.buttonClose.addEventListener('click', this.close.bind(this));
     }
 };
 
 window.osuny.Search.prototype.resize = function () {
     if (isMobile()) {
-        this.closeDetails();
+        this.close();
     } else {
-        this.openDetails();
+        this.open();
     }
 };
 
@@ -47,7 +47,7 @@ window.osuny.Search.prototype.getDetails = function () {
     }.bind(this), 200);
 }
 
-window.osuny.Search.prototype.openDetails = function () {
+window.osuny.Search.prototype.open = function () {
     if (this.state.isMobile) {
         return;
     }
@@ -58,7 +58,7 @@ window.osuny.Search.prototype.openDetails = function () {
     }.bind(this), 200);
 };
 
-window.osuny.Search.prototype.closeDetails = function () {
+window.osuny.Search.prototype.close = function () {
     this.state.isOpened = false;
     this.setDetailsAttribute(false);
 }
