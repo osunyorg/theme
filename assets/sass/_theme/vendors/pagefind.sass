@@ -1,8 +1,4 @@
 .nav-search
-    button
-        @include meta
-        color: var(--color-text)
-    
     @include media-breakpoint-down(desktop)
         header#document-header &
             .pf-trigger-btn
@@ -13,7 +9,9 @@
 .search-button
     .pf-trigger-btn
         @include button-reset
+        @include meta
         align-items: baseline
+        color: var(--color-text)
         display: flex
         gap: space()
         padding: 0
@@ -37,32 +35,34 @@
                 @include icon(search-line, after)
     
     &--fixed
-        background: var(--color-background-alt)
-        bottom: 0
-        color: var(--color-text)
-        left: var(--grid-gutter)
-        min-height: $minimum-accessible-size
-        padding:  0 $spacing-2 $spacing-1
-        position: fixed
-        z-index: $zindex-search-button-fixed
-        @if not $search-button-fixed-text
-            span
-                @extend .sr-only
-        @if $search-button-fixed-icon
-            @include icon(search-line, after)
+        .pf-trigger-btn
+            align-items: center
+            background: var(--color-background-alt)
+            bottom: 0
+            color: var(--color-text)
+            justify-content: space-between
+            left: var(--grid-gutter)
+            min-height: $minimum-accessible-size
+            padding:  $spacing-1 $spacing-2 
+            position: fixed
+            z-index: $zindex-search-button-fixed
+            @if not $search-button-fixed-text
+                .pf-trigger-text
+                    @extend .sr-only
+            @if $search-button-fixed-icon
+                @include icon(search-line, after)
         
-        @include media-breakpoint-down(desktop)
-            left: 0
-            width: 100vw
-            &.in-page-with-toc
-                background: var(--color-background)
-                border-top: var(--border-width) solid #eee
-                bottom: pxToRem(44)
-                padding: 0 var(--grid-gutter)
+            @include media-breakpoint-down(desktop)
+                left: 0
+                width: 100vw
+                body:not(.full-width) &
+                    background: var(--color-background)
+                    border-top: var(--border-width) solid #eee
+                    padding: 0 var(--grid-gutter)
                 
-        @include media-breakpoint-up(desktop)
-            @if $search-button-fixed-text
-                width: columns(2)
+            @include media-breakpoint-up(desktop)
+                @if $search-button-fixed-text
+                    width: columns(2)
 
 
 
