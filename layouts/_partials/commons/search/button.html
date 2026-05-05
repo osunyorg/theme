@@ -1,12 +1,5 @@
 {{ $position := . }}
 {{ if and site.Params.search.active (in site.Params.search.positions $position) }}
-  <pagefind-modal-trigger
-      placeholder="{{ i18n "commons.search.title" }}"
-      hide-shortcut="true"
-      id="search-button-{{ $position }}"
-      class="search-button search-button--{{ $position }}"
-      aria-expanded="false" 
-      aria-label='{{- i18n (printf "commons.search.title") -}}'
-      >
+  <pagefind-modal-trigger hide-shortcut>
   </pagefind-modal-trigger>
 {{ end }}

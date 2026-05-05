@@ -1,15 +1,10 @@
 {{ if site.Params.search.active }}
   <pagefind-modal>
-    <pagefind-modal-header>
-      <div class="container">
+    <div class="container">
+      <pagefind-modal-header>
         <pagefind-input></pagefind-input>
-        <button class="search__close popup-close" aria-label="{{ i18n "commons.search.close" }}">
-          {{ i18n "commons.search.close" }}
-        </button>
-      </div>
-    </pagefind-modal-header>
-    <pagefind-modal-body>
-      <div class="container">
+      </pagefind-modal-header>
+      <pagefind-modal-body>
         <div class="pf-modal-content">
           <div class="pf-modal-aside">
             <pagefind-summary></pagefind-summary>
@@ -18,9 +13,9 @@
           </div>
           <pagefind-results show-images class="pf-modal-results"></pagefind-results>
         </div>
-      </div>
-    </pagefind-modal-body>
-    {{ partial "commons/search/hooks/before-modal-end.html" . }}
+      </pagefind-modal-body>
+      {{ partial "commons/search/hooks/before-modal-end.html" . }}
+    </div>
   </pagefind-modal>
   <script src="/pagefind/pagefind-component-ui.js" defer async></script>
 {{ end }}

@@ -95,9 +95,6 @@ dialog.pf-modal
     button
         @include button-reset
 
-    .pf-modal-close
-        display: none
-
     .pf-input-wrapper
         @include icon(search-line)
         border-bottom: 1px solid var(--color-border)
@@ -125,7 +122,10 @@ dialog.pf-modal
                 display: none
             &[type="search"]::-webkit-search-cancel-button
                 display: none
-                
+    
+    .pf-modal-header
+        position: relative
+
     .pf-modal-results
         .pf-results
             @include list-reset
@@ -148,7 +148,6 @@ dialog.pf-modal
                 margin-top: $spacing-3
                 > li + li
                     margin-top: $spacing-1
-
         mark
             background: var(--color-background-alt)
             font-weight: normal
@@ -186,19 +185,24 @@ dialog.pf-modal
                 margin-left: space()
     
     @include media-breakpoint-up(desktop)
+        .pf-modal-header
+            display: flex
+            justify-content: space-between
+            .pf-modal-close
+                top: 50%
+                transform: translateY(-50%)
+                right: 0
+                position: absolute
+
         .pf-input-wrapper
+            width: columns(8)
             input
-                width: columns(8)
+                width: 100%
 
         .pf-modal-content, 
-        .pf-modal-header-content .container
+        .pf-modal-content
             display: flex
             gap: var(--grid-gutter)
-
-        .pf-modal-header-content 
-            .container
-                align-items: baseline
-                justify-content: space-between
 
         .pf-modal-results
             .pf-results
