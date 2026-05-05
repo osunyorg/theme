@@ -23,49 +23,54 @@ window.osuny.Search = function (element) {
     window.addEventListener('resize', this.resize.bind(this));
 
     if (this.elements.buttonOpen) {
-        this.elements.buttonOpen.addEventListener('click', this.toggleDetails.bind(this));
+        this.elements.buttonOpen.addEventListener('click', this.openDetails.bind(this));
     }
     if (this.elements.buttonClose) {
-        this.elements.buttonClose.addEventListener('click', this.toggleDetails.bind(this));
+        this.elements.buttonClose.addEventListener('click', this.closeDetails.bind(this));
     }
-    if (this.state.isOpened) {
-        this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group');
-    }
-};
-    
-window.osuny.Search.prototype.toggleDetails = function () {
-    if (this.state.isMobile) {
-        return;
-    }
-
-    this.state.isOpened = !this.state.isOpened;
-
-    setTimeout(function() {
-        if (this.state.isOpened) {
-            this.openDetails(this.state.isOpened);
-        }
-    }.bind(this), 200);
 };
 
 window.osuny.Search.prototype.resize = function () {
     if (isMobile()) {
-        this.openDetails(false);
+        this.closeDetails();
     } else {
-        this.openDetails(true);
+        this.openDetails();
     }
 };
 
-window.osuny.Search.prototype.openDetails = function (shouldOpen) {
+window.osuny.Search.prototype.getDetails = function () {
+    setTimeout(function() {
+        this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group'); 
+        this.details.forEach( function (detail) {
+            detail.open = true;
+        }.bind(this));
+    }.bind(this), 200);
+}
+
+window.osuny.Search.prototype.openDetails = function () {
+    if (this.state.isMobile) {
+        return;
+    }
+
+    this.state.isOpened = true;
+    setTimeout(function() {
+        this.setDetailsAttribute(true);
+    }.bind(this), 200);
+};
+
+window.osuny.Search.prototype.closeDetails = function () {
+    this.state.isOpened = false;
+    this.setDetailsAttribute(false);
+}
+
+window.osuny.Search.prototype.setDetailsAttribute = function (open) {
     this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group'); 
+    this.attribute = open ? 'open' : '';
 
     this.details.forEach( function (detail) {
-        if (shouldOpen) {
-            detail.setAttribute('open', 'open');
-        } else {
-            detail.removeAttribute('open');
-        }
+        detail.open = open;
     }.bind(this));
-};
+}
 
 window.osuny.page.registerComponent({
     name: 'search',
