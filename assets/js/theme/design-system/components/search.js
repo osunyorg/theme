@@ -1,4 +1,5 @@
 import { isMobile } from '../../utils/breakpoints';
+import { focusTrap } from '../../utils/focus-trap';
 
 window.osuny = window.osuny || {};
 
@@ -19,7 +20,7 @@ window.osuny.Search = function (element) {
     this.listen();
 };
   
-  window.osuny.Search.prototype.listen = function () {
+window.osuny.Search.prototype.listen = function () {
     window.addEventListener('resize', this.resize.bind(this));
 
     if (this.elements.buttonOpen) {
@@ -53,9 +54,10 @@ window.osuny.Search.prototype.open = function () {
     }
 
     this.state.isOpened = true;
+
     setTimeout(function() {
         this.setDetailsAttribute(true);
-    }.bind(this), 200);
+    }.bind(this), 300);
 };
 
 window.osuny.Search.prototype.close = function () {
@@ -66,7 +68,7 @@ window.osuny.Search.prototype.close = function () {
 window.osuny.Search.prototype.setDetailsAttribute = function (open) {
     this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group'); 
     this.attribute = open ? 'open' : '';
-
+    
     this.details.forEach( function (detail) {
         detail.open = open;
     }.bind(this));

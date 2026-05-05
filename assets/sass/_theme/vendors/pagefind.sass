@@ -4,53 +4,52 @@
         @include meta
         color: var(--color-text)
     
-    .search-button
-        vertical-align: text-bottom
-        .pf-trigger-icon
-            display: none
-        
-        &--primary, &--upper-menu
-            .pf-trigger-btn
-                @if not $search-button-header-text
-                    span
-                        @extend .sr-only
-                @if $search-button-header-icon
-                    @include icon(search-line, after)
-        
-        &--footer
-            .pf-trigger-btn
-                @if not $search-button-footer-text
-                    span
-                        @extend .sr-only
-                @if $search-button-footer-icon
-                    @include icon(search-line, after)
-        
-        &--fixed
-            background: var(--color-background-alt)
-            bottom: 0
-            color: var(--color-text)
-            left: var(--grid-gutter)
-            min-height: $minimum-accessible-size
-            padding:  0 $spacing-2 $spacing-1
-            position: fixed
-            z-index: $zindex-search-button-fixed
-            @if not $search-button-fixed-text
-                span
+.search-button
+    .pf-trigger-icon
+        display: none
+    
+    &--primary, &--upper-menu
+        .pf-trigger-btn
+            @if not $search-button-header-text
+                .pf-trigger-text
                     @extend .sr-only
-            @if $search-button-fixed-icon
+            @if $search-button-header-icon
                 @include icon(search-line, after)
-            
-            @include media-breakpoint-down(desktop)
-                left: 0
-                width: 100vw
-                &.in-page-with-toc
-                    background: var(--color-background)
-                    border-top: var(--border-width) solid #eee
-                    bottom: pxToRem(44)
-                    padding: 0 var(--grid-gutter)
-            @include media-breakpoint-up(desktop)
-                @if $search-button-fixed-text
-                    width: columns(2)
+    
+    &--footer
+        .pf-trigger-btn
+            @if not $search-button-footer-text
+                .pf-trigger-text
+                    @extend .sr-only
+            @if $search-button-footer-icon
+                @include icon(search-line, after)
+    
+    &--fixed
+        background: var(--color-background-alt)
+        bottom: 0
+        color: var(--color-text)
+        left: var(--grid-gutter)
+        min-height: $minimum-accessible-size
+        padding:  0 $spacing-2 $spacing-1
+        position: fixed
+        z-index: $zindex-search-button-fixed
+        @if not $search-button-fixed-text
+            span
+                @extend .sr-only
+        @if $search-button-fixed-icon
+            @include icon(search-line, after)
+        
+        @include media-breakpoint-down(desktop)
+            left: 0
+            width: 100vw
+            &.in-page-with-toc
+                background: var(--color-background)
+                border-top: var(--border-width) solid #eee
+                bottom: pxToRem(44)
+                padding: 0 var(--grid-gutter)
+        @include media-breakpoint-up(desktop)
+            @if $search-button-fixed-text
+                width: columns(2)
 
 dialog.pf-modal
     @include meta
@@ -65,34 +64,6 @@ dialog.pf-modal
     button,
     fieldset
         @include button-reset
-
-    .pf-input-wrapper
-        @include icon(search-line)
-        border-bottom: 1px solid var(--color-border)
-        position: relative
-        &::before,
-        .pf-input-clear
-            position: absolute
-            top: 50%
-            transform: translateY(-50%)
-        .pf-input-clear
-            right: 0
-        &:focus-within
-            border-bottom-width: 2px
-        [data-pf-sr-hidden="true"]
-            @include sr-only
-        input
-            @include button-reset
-            @include body-text
-            padding: $spacing-1 $spacing-3
-            &:focus,
-            &:focus-visible
-                outline: none
-            // hide shadow dom cross
-            &::-ms-clear
-                display: none
-            &[type="search"]::-webkit-search-cancel-button
-                display: none
     
     .pf-modal-header
         @include container
@@ -108,6 +79,39 @@ dialog.pf-modal
         z-index: 9
         .pf-modal-close
             padding: 0
+            text-align: right
+        .pf-modal-close-text
+            pointer-events: none
+
+    .pf-input-wrapper
+        @include icon(search-line, after)
+        border-bottom: 1px solid var(--color-border)
+        position: relative
+        &::after
+            color: var(--color-text-alt)
+            position: absolute
+            right: 0
+            top: 50%
+            transform: translateY(-50%)
+        .pf-input-clear
+            display: none
+        &:focus-within
+            border-bottom-width: 2px
+        [data-pf-sr-hidden="true"]
+            @include sr-only
+        input
+            @include button-reset
+            @include body-text
+            padding: $spacing-1 $spacing-3 $spacing-1 0
+            width: 100%
+            &:focus,
+            &:focus-visible
+                outline: none
+            // hide shadow dom cross
+            &::-ms-clear
+                display: none
+            &[type="search"]::-webkit-search-cancel-button
+                display: none
 
     .pf-modal-results
         .pf-results
@@ -142,7 +146,7 @@ dialog.pf-modal
 
     .pf-modal-aside
         .pf-summary
-            margin-bottom: $spacing-3
+            margin-bottom: $spacing-2
 
         .pf-filter-pane
             .pf-filter-group
@@ -185,8 +189,19 @@ dialog.pf-modal
         .pf-modal-header
             align-items: baseline
             padding-top: $spacing-4
+            &-content
+                align-items: baseline
+                display: flex
+                gap: var(--grid-gutter)
+                .pf-modal-close-text
+                    align-self: center
+                    position: absolute
+                    right: var(--grid-gutter)
+                    width: columns(3)
+            .pf-modal-close
+                margin-left: offset(1)
+                width: columns(3)
 
-        .pf-modal-content, 
         .pf-modal-content
             display: flex
             gap: var(--grid-gutter)
@@ -215,17 +230,35 @@ dialog.pf-modal
             margin-left: offset(1)
             order: 2
             width: columns(3)
+            .pf-summary
+                margin-bottom: $spacing-3
             .pf-filter-pane
                 .pf-filter-group-title
                     @include sr-only
 
     @include media-breakpoint-down(desktop)
+        padding-top: space(40)
         .pf-modal-header
             flex-direction: column
-            gap: $spacing-4
+            align-items: flex-end
+            &-content
+                width: 100%
             .pf-modal-close
                 order: -1
+                position: absolute
+                right: var(--grid-gutter)
+            .pf-modal-close-text
+                display: block
+                margin-bottom: $spacing-4
                 margin-left: auto
+
+            .pf-modal-close-text,
+            .pf-modal-close
+                width: columns(6)
+
+        .pf-modal-aside
+            .pf-keyboard-hints
+                @include sr-only
 
         .pf-result
             &-image
