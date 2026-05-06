@@ -1,5 +1,6 @@
-import { isMobile } from '../../utils/breakpoints';
+import { ariaHideBodyChildren } from '../../utils/a11y';
 import { focusTrap } from '../../utils/focus-trap';
+import { isMobile } from '../../utils/breakpoints';
 
 window.osuny = window.osuny || {};
 
@@ -17,10 +18,6 @@ window.osuny.Search = function (element) {
         isOpened: false,
         isMobile: isMobile()
     };
-
-    this.classes= {
-        bodyclass: 'has-modal-opened'
-    }
 
     this.listen();
 };
@@ -73,7 +70,7 @@ window.osuny.Search.prototype.open = function () {
     }
 
     this.state.isOpened = true;
-    document.documentElement.classList.add(this.classes.bodyclass);
+    this.updateDocumentAccessibility(true);
 
     setTimeout(function() {
         this.setDetailsAttribute(true);
@@ -83,7 +80,7 @@ window.osuny.Search.prototype.open = function () {
 window.osuny.Search.prototype.close = function () {
     this.state.isOpened = false;
     this.setDetailsAttribute(false);
-    document.documentElement.classList.remove(this.classes.bodyclass);
+    this.updateDocumentAccessibility(false);
 
     // focus clicked search button
     setTimeout(function() {
@@ -99,6 +96,12 @@ window.osuny.Search.prototype.setDetailsAttribute = function (open) {
         detail.open = open;
     }.bind(this));
 }
+
+window.osuny.Search.prototype.updateDocumentAccessibility = function (isOpen) {
+    console.log(isOpen)
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
+    ariaHideBodyChildren(this.elements.root, isOpen);
+};
 
 window.osuny.page.registerComponent({
     name: 'search',
