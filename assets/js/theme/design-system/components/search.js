@@ -70,7 +70,7 @@ window.osuny.Search.prototype.open = function () {
     }
 
     this.state.isOpened = true;
-    this.updateDocumentAccessibility(true);
+    this.updateDocumentAccessibility();
 
     setTimeout(function() {
         this.setDetailsAttribute(true);
@@ -80,7 +80,7 @@ window.osuny.Search.prototype.open = function () {
 window.osuny.Search.prototype.close = function () {
     this.state.isOpened = false;
     this.setDetailsAttribute(false);
-    this.updateDocumentAccessibility(false);
+    this.updateDocumentAccessibility();
 
     // focus clicked search button
     setTimeout(function() {
@@ -97,10 +97,10 @@ window.osuny.Search.prototype.setDetailsAttribute = function (open) {
     }.bind(this));
 }
 
-window.osuny.Search.prototype.updateDocumentAccessibility = function (isOpen) {
-    console.log(isOpen)
-    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
-    ariaHideBodyChildren(this.elements.root, isOpen);
+window.osuny.Search.prototype.updateDocumentAccessibility = function () {
+    console.log(this.state.isOpened)
+    document.body.style.overflow = this.state.isOpened ? 'hidden' : 'auto';
+    ariaHideBodyChildren(this.elements.root, this.state.isOpened);
 };
 
 window.osuny.page.registerComponent({
