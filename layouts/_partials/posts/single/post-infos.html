@@ -1,34 +1,36 @@
 <ul class="post-infos">
   {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" . }}
-  {{ if ne $taxonomies_position "hero" }}
+  {{ if eq $taxonomies_position "content" }}
     {{ if .Params.posts_categories }}
       <li>{{ partial "taxonomies/single/list.html" . }}</li>
     {{ end }}
   {{ end }}
+  
+  {{ if eq site.Params.default.single.infos.position "content" }}
+    {{ if site.Params.posts.single.options.published_at }}
+      {{ partial "commons/single/published-at.html" (dict 
+        "format" site.Params.posts.date_format
+        "context" .
+      ) }}
+    {{ end }}
 
-  {{ if site.Params.posts.single.options.published_at }}
-    {{ partial "commons/single/published-at.html" (dict 
-      "format" site.Params.posts.date_format
-      "context" .
-    ) }}
-  {{ end }}
+    {{ if site.Params.posts.single.options.updated_at }}
+      {{ partial "commons/single/updated-at.html" (dict 
+        "format" site.Params.posts.date_format
+        "context" .
+      ) }}
+    {{ end }}
 
-  {{ if site.Params.posts.single.options.updated_at }}
-    {{ partial "commons/single/updated-at.html" (dict 
-      "format" site.Params.posts.date_format
-      "context" .
-    ) }}
-  {{ end }}
+    {{ if site.Params.posts.single.options.authors }}
+      {{ partial "authors/partials/authors.html" . }}
+    {{ end }}
 
-  {{ if site.Params.posts.single.options.authors }}
-    {{ partial "authors/partials/authors.html" . }}
-  {{ end }}
+    {{ if site.Params.posts.single.options.reading_time }}
+      {{ partial "commons/single/reading-time.html" . }}
+    {{ end }}
 
-  {{ if site.Params.posts.single.options.reading_time }}
-    {{ partial "commons/single/reading-time.html" . }}
+    {{ if site.Params.posts.share_links.enabled | default site.Params.share_links.enabled }}
+      {{ partial "commons/share/list-item.html" . }}
+    {{ end }}
   {{ end }}
-
-  {{ if site.Params.posts.share_links.enabled | default site.Params.share_links.enabled }}
-    {{ partial "commons/share/list-item.html" . }}
-  {{ end }}
-</ul>
+  </ul>
