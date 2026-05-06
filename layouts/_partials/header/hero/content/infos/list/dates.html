@@ -15,7 +15,9 @@
     {{ end }}
   {{ end }}
 
-  {{ if eq .Kind "jobs" }}
-    {{ partial "jobs/partials/job/core/dates.html" }}
+  {{ if eq .Type "jobs" }}
+  {{ with .Params.dates }}
+    {{ partial "jobs/single/job-infos/dates.html" . }}
+  {{ end }}
   {{ end }}
 {{ end }}
