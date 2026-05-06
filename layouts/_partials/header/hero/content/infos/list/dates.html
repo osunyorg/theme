@@ -1,0 +1,21 @@
+{{ if site.Params.default.single.infos.options.dates }}
+  {{ if eq .Kind "posts " }}
+    {{ if site.Params.posts.single.options.published_at }}
+      {{ partial "commons/single/published-at.html" (dict 
+        "format" site.Params.posts.date_format
+        "context" .
+      ) }}
+    {{ end }}
+
+    {{ if site.Params.posts.single.options.updated_at }}
+      {{ partial "commons/single/updated-at.html" (dict 
+        "format" site.Params.posts.date_format
+        "context" .
+      ) }}
+    {{ end }}
+  {{ end }}
+
+  {{ if eq .Kind "jobs" }}
+    {{ partial "jobs/partials/job/core/dates.html" }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,6 @@
+{{ $infos_position := partial "header/hero/content/infos/helpers/GetPosition" .context }}
+
+{{ if and .context.Params.meta (eq $infos_position "hero") }}
+  {{ partial "header/hero/content/infos/list" .context }}
+{{ end }}
+

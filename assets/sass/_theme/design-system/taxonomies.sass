@@ -125,12 +125,22 @@
                     flex-wrap: wrap
                     gap: $spacing-1
                     text-align: right
+                + li
+                    margin-top: $spacing-2
+                
                 @include media-breakpoint-up(xl)
                     align-items: baseline
                     display: flex
+                    gap: var(--grid-gutter)
                     justify-content: space-between
+                    ul
+                        justify-content: flex-end
+            
             @include media-breakpoint-up(lg)
                 width: columns(4)
+                > li + li
+                    margin-top: $spacing-3
+
     @include media-breakpoint-down(desktop)
         .hero &, &
             &.without-label

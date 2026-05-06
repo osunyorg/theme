@@ -1,0 +1,10 @@
+{{ $hide_label := partial "commons/infos/helpers/HideLabel" . }}
+
+{{ if and (ne .Kind "home") (eq site.Params.default.single.infos.position "hero")}}
+  <ul class="hero-infos {{- if $hide_label }} hero-infos--option-label-false {{- end }}">
+    {{ partial "header/hero/content/infos/list/author.html" . }}
+    {{ partial "header/hero/content/infos/list/dates.html" . }}
+    {{ partial "header/hero/content/infos/list/reading-time.html" . }}
+    {{ partial "header/hero/content/infos/list/share.html" . }}
+  </ul>
+{{ end }}

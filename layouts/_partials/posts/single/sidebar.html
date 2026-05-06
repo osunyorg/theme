@@ -1,8 +1,10 @@
 <div class="section-sidebar post-sidebar">
   <div>
-    <aside>
-      {{- partial "posts/single/post-infos.html" . -}}
-    </aside>
+    {{ if eq site.Params.default.single.infos.position "content" }}
+      <aside>
+        {{- partial "posts/single/post-infos.html" . -}}
+      </aside>
+    {{ end }}
 
     {{ partial "toc/container.html" (dict
       "context" .

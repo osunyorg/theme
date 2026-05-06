@@ -40,11 +40,44 @@
         hgroup.has-lead > p
             @include lead-hero
         figure
+            @include collapsed-figcaption
             position: relative
             img, button, > [role="button"]
                 width: 100%
                 height: auto
-            @include collapsed-figcaption
+
+        .hero-infos
+            @include grid(4)
+            @include meta
+            padding-top: var(--grid-gutter)
+            &:empty
+                display: none
+            &, ul
+                @include list-reset
+            li
+                span:not(.sr-only)
+                    display: block
+                    margin-bottom: $spacing-1
+                    &:first-child
+                        color: var(--color-text-alt)
+            .share
+                li:first-child
+                    a
+                        padding-left: 0
+            .reading-time 
+                span:first-letter
+                    text-transform: capitalize
+            
+            &--option-label-false
+                display: flex
+                gap: 0
+                > li + li::before
+                    content: ' • '
+                    margin-left: $spacing-2
+                    margin-right: $spacing-2
+                .share
+                    display: inline-flex
+
 
     .breadcrumb-nav + .content
         padding-top: 0

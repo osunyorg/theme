@@ -1,0 +1,9 @@
+
+{{ $hide_label := eq site.Params.default.single.infos.options.label false }}
+{{ $label_position := site.Params.default.single.infos.position }}
+
+{{ if and (eq $label_position "hero") $hide_label }}
+  {{ $hide_label = true }}
+{{ end }}
+
+{{ return $hide_label }}
