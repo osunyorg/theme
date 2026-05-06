@@ -48,8 +48,9 @@
 
         .hero-infos
             @include grid(2)
-            @include grid(4, desktop)
+            @include grid(3, desktop)
             @include meta
+            row-gap: $spacing-3
             padding-top: var(--grid-gutter)
             &:empty
                 display: none
@@ -72,18 +73,20 @@
                     text-transform: capitalize
             
             @include media-breakpoint-up(desktop)
+                row-gap: $spacing-3
+                width: columns(6)
                 &--option-label-false
                     display: flex
                     gap: 0
                     > li 
-                        > span
-                            margin-bottom: $spacing-1
-                            &:first-of-type
-                                @include sr-only
                         + li::before
                             content: ' • '
                             margin-left: $spacing-2
                             margin-right: $spacing-2
+                        > span
+                            margin-bottom: $spacing-1
+                            &:first-of-type
+                                @include sr-only
                         .share
                             display: inline-flex
 
