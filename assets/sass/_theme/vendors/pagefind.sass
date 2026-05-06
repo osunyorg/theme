@@ -93,8 +93,11 @@ dialog.pf-modal
         right: 0
         z-index: 9
         .pf-modal-close
+            @include icon-block(close-line)
             padding: 0
             text-align: right
+            svg
+                display: none
         .pf-modal-close-text
             pointer-events: none
 
@@ -202,7 +205,7 @@ dialog.pf-modal
                 width: 100%
         
         .pf-modal-header
-            align-items: baseline
+            align-items: center
             padding-top: $spacing-4
             &-content
                 align-items: baseline
@@ -245,6 +248,9 @@ dialog.pf-modal
             margin-left: offset(1)
             order: 2
             width: columns(3)
+            .pf-modal-aside-content
+                position: sticky
+                top: calc(var(--header-height) * -1)
             .pf-summary
                 margin-bottom: $spacing-3
             .pf-filter-pane
@@ -262,15 +268,14 @@ dialog.pf-modal
                 order: -1
                 position: absolute
                 right: var(--grid-gutter)
+                width: offset(6)
             .pf-modal-close-text
                 display: block
                 margin-bottom: $spacing-4
                 margin-left: auto
-
-            .pf-modal-close-text,
-            .pf-modal-close
-                width: columns(6)
-
+                margin-right: offset(1)
+                text-align: right
+        
         .pf-modal-aside
             .pf-filter-pane
                 .pf-filter-fieldset

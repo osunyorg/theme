@@ -18,6 +18,10 @@ window.osuny.Search = function (element) {
         isMobile: isMobile()
     };
 
+    this.classes= {
+        bodyclass: 'has-modal-opened'
+    }
+
     this.listen();
 };
 
@@ -69,6 +73,7 @@ window.osuny.Search.prototype.open = function () {
     }
 
     this.state.isOpened = true;
+    document.documentElement.classList.add(this.classes.bodyclass);
 
     setTimeout(function() {
         this.setDetailsAttribute(true);
@@ -78,6 +83,7 @@ window.osuny.Search.prototype.open = function () {
 window.osuny.Search.prototype.close = function () {
     this.state.isOpened = false;
     this.setDetailsAttribute(false);
+    document.documentElement.classList.remove(this.classes.bodyclass);
 
     // focus clicked search button
     setTimeout(function() {
