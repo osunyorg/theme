@@ -40,11 +40,61 @@
         hgroup.has-lead > p
             @include lead-hero
         figure
+            @include collapsed-figcaption
             position: relative
             img, button, > [role="button"]
                 width: 100%
                 height: auto
-            @include collapsed-figcaption
+
+        .hero-infos
+            @include meta
+            row-gap: $spacing-3
+            padding-top: var(--grid-gutter)
+            &:empty
+                display: none
+            &, ul
+                @include list-reset
+            li
+                span
+                    margin-bottom: 0
+                    display: inline-block
+                > span:first-of-type
+                    display: block
+                    color: var(--color-text-alt)
+                    margin-bottom: $spacing-1
+            .share
+                li:first-child
+                    a
+                        padding-left: 0
+            .reading-time 
+                span:first-letter
+                    text-transform: capitalize
+            
+            @include media-breakpoint-down(desktop)            
+                @include grid(2)
+
+            @include media-breakpoint-up(desktop)
+                align-items: baseline
+                display: flex
+                flex-wrap: wrap
+                gap: $spacing-3 var(--grid-gutter)
+                width: columns(6)
+                > li
+                    width: columns(2)
+        //         &--option-label-false
+        //             display: flex
+        //             gap: 0
+        //             > li 
+        //                 + li::before
+        //                     content: ' • '
+        //                     margin-left: $spacing-2
+        //                     margin-right: $spacing-2
+        //                 > span
+        //                     margin-bottom: $spacing-1
+        //                     &:first-of-type
+        //                         @include sr-only
+        //                 .share
+        //                     display: inline-flex
 
     .breadcrumb-nav + .content
         padding-top: 0
@@ -55,6 +105,7 @@
             position: relative
             > a
                 @include stretched-link
+    
     @include media-breakpoint-down(desktop)
         .content
             padding-top: 0
