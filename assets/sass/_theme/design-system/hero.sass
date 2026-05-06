@@ -47,7 +47,8 @@
                 height: auto
 
         .hero-infos
-            @include grid(4)
+            @include grid(2)
+            @include grid(4, desktop)
             @include meta
             padding-top: var(--grid-gutter)
             &:empty
@@ -55,11 +56,13 @@
             &, ul
                 @include list-reset
             li
-                span:not(.sr-only)
-                    display: block
-                    margin-bottom: $spacing-1
-                    &:first-child
-                        color: var(--color-text-alt)
+                span
+                    margin-bottom: 0
+                    &:not(.sr-only)
+                        display: inline-block
+                        margin-bottom: space()
+                > span:first-of-type
+                    color: var(--color-text-alt)
             .share
                 li:first-child
                     a
@@ -68,15 +71,21 @@
                 span:first-letter
                     text-transform: capitalize
             
-            &--option-label-false
-                display: flex
-                gap: 0
-                > li + li::before
-                    content: ' • '
-                    margin-left: $spacing-2
-                    margin-right: $spacing-2
-                .share
-                    display: inline-flex
+            @include media-breakpoint-up(desktop)
+                &--option-label-false
+                    display: flex
+                    gap: 0
+                    > li 
+                        > span
+                            margin-bottom: $spacing-1
+                            &:first-of-type
+                                @include sr-only
+                        + li::before
+                            content: ' • '
+                            margin-left: $spacing-2
+                            margin-right: $spacing-2
+                        .share
+                            display: inline-flex
 
 
     .breadcrumb-nav + .content
@@ -88,6 +97,7 @@
             position: relative
             > a
                 @include stretched-link
+    
     @include media-breakpoint-down(desktop)
         .content
             padding-top: 0

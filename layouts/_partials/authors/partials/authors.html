@@ -1,8 +1,6 @@
-{{ $hide_label := partial "commons/infos/helpers/HideLabel" . }}
-
 {{ if .Params.authors }}
   <li class="authors">
-    <span {{- if $hide_label }} class="sr-only" {{- end }}>{{ i18n "commons.authors" (len .Params.authors) }}</span>
+    <span>{{ i18n "commons.authors" (len .Params.authors) }}</span>
     <ul>
       {{- range .GetTerms "authors" -}}
         <li>
