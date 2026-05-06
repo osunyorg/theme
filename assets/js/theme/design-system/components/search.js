@@ -98,7 +98,6 @@ window.osuny.Search.prototype.setDetailsAttribute = function (open) {
 }
 
 window.osuny.Search.prototype.updateDocumentAccessibility = function () {
-    console.log(this.state.isOpened)
     document.body.style.overflow = this.state.isOpened ? 'hidden' : 'auto';
     ariaHideBodyChildren(this.elements.root, this.state.isOpened);
 };
