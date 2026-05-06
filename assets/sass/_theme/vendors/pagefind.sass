@@ -93,7 +93,7 @@ dialog.pf-modal
         right: 0
         z-index: 9
         .pf-modal-close
-            @include icon-block(close-line)
+            @include icon(close-line)
             padding: 0
             text-align: right
             svg
@@ -178,6 +178,10 @@ dialog.pf-modal
                         margin-left: auto
                     + .pf-filter-checkbox
                         margin-top: $spacing-1
+                .pf-filter-group-title::after
+                    content: ''
+                .pf-filter-group-count
+                    display: none
                 
             .pf-filter-fieldset
                 margin: 0
@@ -269,6 +273,8 @@ dialog.pf-modal
                 position: absolute
                 right: var(--grid-gutter)
                 width: offset(6)
+                &::before
+                    line-height: var(--meta-line-height)
             .pf-modal-close-text
                 display: block
                 margin-bottom: $spacing-4
@@ -280,6 +286,15 @@ dialog.pf-modal
             .pf-filter-pane
                 .pf-filter-fieldset
                     margin-bottom: $spacing-3
+                .pf-filter-group-name
+                    @include icon(arrow-down-s-line, after)
+                    align-items: baseline
+                    display: flex
+                    gap: var(--grid-gutter)
+                    justify-content: space-between
+                    &::after
+                        font-size: var(--body-size)
+                        margin-left: auto
             .pf-keyboard-hints
                 @include sr-only
 
