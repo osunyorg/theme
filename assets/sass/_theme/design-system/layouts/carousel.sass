@@ -1,7 +1,14 @@
 @mixin layout-carousel
+    ul
+        @include list-reset
+        li:only-child
+            @include in-page-with-sidebar
+                width: columns(3)
+            @include in-page-without-sidebar
+                width: columns(4)
+    
     .slider
         .slider-list
-            @include list-reset
             gap: var(--grid-gutter)
         @include media-breakpoint-down(desktop)
             .slider-arrows
