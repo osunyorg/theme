@@ -1,9 +1,12 @@
 {{ $hide_label := partial "commons/infos/helpers/HideLabel" . }}
 
-{{ if and (ne .Kind "home") (eq site.Params.default.single.infos.position "hero")}}
-  <ul class="hero-infos {{- if $hide_label }} hero-infos--option-label-false {{- end }}">
-    {{ partial "header/hero/content/infos/list/author.html" . }}
+{{ $label_class := cond $hide_label "without-label" "with-label" }}
+{{ $hero_infos_classes := printf "hero-infos %s" $label_class }}
+
+{{ if and (ne .Kind "home") (eq site.Params.default.single.infos.position "hero") }}
+  <ul class="{{ $hero_infos_classes }}">
     {{ partial "header/hero/content/infos/list/dates.html" . }}
+    {{ partial "header/hero/content/infos/list/author.html" . }}
     {{ partial "header/hero/content/infos/list/reading-time.html" . }}
     {{ partial "header/hero/content/infos/list/share.html" . }}
   </ul>

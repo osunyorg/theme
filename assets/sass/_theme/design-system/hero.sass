@@ -46,55 +46,175 @@
                 width: 100%
                 height: auto
 
-        .hero-infos
+        .hero-meta
             @include meta
-            row-gap: $spacing-3
-            padding-top: var(--grid-gutter)
-            &:empty
-                display: none
-            &, ul
+            margin-top: var(--grid-gutter)
+            ul
                 @include list-reset
+            > ul + ul
+                margin-top: $spacing-5
             li
-                span
-                    margin-bottom: 0
-                    display: inline-block
                 > span:first-of-type
-                    display: block
                     color: var(--color-text-alt)
-                    margin-bottom: $spacing-1
-            .share
-                li:first-child
-                    a
-                        padding-left: 0
-            .reading-time 
-                span:first-letter
-                    text-transform: capitalize
+
+            .hero-infos
+                .reading-time 
+                    span:first-letter
+                        text-transform: capitalize
+                .share
+                    li:first-child
+                        a
+                            padding-left: 0
+                    li:last-child
+                        a
+                            padding-right: 0
+                
+                &.without-label
+                    > li
+                        &:where(:not(.update_date))
+                            > span
+                                margin-bottom: $spacing-1
+                                &:first-of-type
+                                    @include sr-only
+                    .update_date,
+                    .share
+                        display: inline-flex
+                    .update_date
+                        text-transform: lowercase
+                        span
+                            color: var(--color-text)
+                        &::before
+                            content: '('
+                        &::after
+                            content: ')'
+                        time
+                            margin-left: space()
             
-            @include media-breakpoint-down(desktop)            
-                @include grid(2)
+            @include media-breakpoint-down(desktop)
+                ul + ul
+                    margin-top: $spacing-4
+                
+                .hero-infos,
+                .taxonomies-single
+                    &.with-label
+                        > li
+                            @include grid(2)
+                            span + *
+                                text-align: right
+                            .share
+                                justify-content: flex-end
+                            + li
+                                margin-top: $spacing-2
+
+                .hero-infos.without-label
+                    > li + li
+                        margin-top: $spacing-2
+            
+                .taxonomies-single.without-label
+                    align-items: baseline
+                    display: flex
+                    flex-wrap: wrap
+                    gap: $spacing-2
 
             @include media-breakpoint-up(desktop)
-                align-items: baseline
-                display: flex
-                flex-wrap: wrap
-                gap: $spacing-3 var(--grid-gutter)
-                width: columns(6)
-                > li
-                    width: columns(2)
-        //         &--option-label-false
+                > ul 
+                    &:empty
+                        display: none
+
+                .hero-infos,
+                .taxonomies-single
+                    align-items: baseline
+                    display: flex
+                    flex-wrap: wrap
+                    width: columns(6)
+
+                    &.with-label
+                        gap: $spacing-3 var(--grid-gutter)
+                        > li
+                            width: columns(2)
+                            span:first-of-type
+                                display: block
+                                margin-bottom: $spacing-1
+                    
+                    &.without-label
+                        gap: $spacing-2 $spacing-3
+                        + ul
+                            margin-top: $spacing-2
+                
+                .taxonomies-single
+                    .taxonomy-children
+                        li + li
+                            margin-top: $spacing-1
+                
+
+
+        // .hero-infos
+        //     @include meta
+        //     row-gap: $spacing-3
+        //     padding-top: var(--grid-gutter)
+        //     &:empty
+        //         display: none
+        //     &, ul
+        //         @include list-reset
+        //     li
+        //         > span:first-of-type
+        //             color: var(--color-text-alt)
+        //         .reading-time 
+        //             span:first-letter
+        //                 text-transform: capitalize
+        //         .share
+        //             li:first-child
+        //                 a
+        //                     padding-left: 0
+            
+        //     @include media-breakpoint-down(desktop)
+        //         > li
+        //             align-items: baseline
         //             display: flex
-        //             gap: 0
-        //             > li 
-        //                 + li::before
-        //                     content: ' • '
-        //                     margin-left: $spacing-2
-        //                     margin-right: $spacing-2
+        //             gap: var(--grid-gutter)
+        //             justify-content: space-between
+        //             + li
+        //                 margin-top: $spacing-2
+
+        //     @include media-breakpoint-up(desktop)
+        //         align-items: baseline
+        //         display: flex
+        //         flex-wrap: wrap
+        //         width: columns(6)
+                
+        //         &--option-hide-label-false
+        //             gap: $spacing-3 var(--grid-gutter)
+        //             > li
+        //                 width: columns(2)
         //                 > span
-        //                     margin-bottom: $spacing-1
+        //                     margin-bottom: 0
+        //                     display: inline-block
         //                     &:first-of-type
-        //                         @include sr-only
+        //                         display: block
+        //                         margin-bottom: $spacing-1
+                
+        //         &--option-hide-label-true
+        //             display: flex
+        //             gap: $spacing-2 $spacing-3
+        //             + .taxonomies-single
+        //                 margin-top: $spacing-2
+        //             > li
+        //                 &:where(:not(.update_date))
+        //                     > span
+        //                         margin-bottom: $spacing-1
+        //                         &:first-of-type
+        //                             @include sr-only
+        //                 .update_date,
         //                 .share
         //                     display: inline-flex
+        //                 .update_date
+        //                     text-transform: lowercase
+        //                     &::before
+        //                         content: '('
+        //                     &::after
+        //                         content: ')'
+        //                     time
+        //                         margin-left: space()
 
     .breadcrumb-nav + .content
         padding-top: 0

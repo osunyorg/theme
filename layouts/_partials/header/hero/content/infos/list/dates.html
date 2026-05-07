@@ -1,5 +1,5 @@
-{{ if site.Params.default.single.infos.options.dates }}
-  {{ if eq .Kind "posts " }}
+{{ if site.Params.default.single.meta.options.dates }}
+  {{ if eq .Type "posts" }}
     {{ if site.Params.posts.single.options.published_at }}
       {{ partial "commons/single/published-at.html" (dict 
         "format" site.Params.posts.date_format
