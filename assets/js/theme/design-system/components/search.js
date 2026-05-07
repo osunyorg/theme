@@ -24,18 +24,18 @@ window.osuny.Search = function (element) {
 
 window.osuny.Search.prototype.listen = function () {
     window.addEventListener('resize', this.resize.bind(this));
-
+    
     this.elements.buttonsOpen.forEach(button => {
         button.addEventListener('click', (event) => {
             this.elements.triggerButton = event.currentTarget;
             this.open();
         });
     });
-
+    
     if (this.elements.buttonClose) {
         this.elements.buttonClose.addEventListener('click', this.close.bind(this));
     }
-
+    
     window.addEventListener('keydown', function (event) {
         if (this.state.isOpened) {
             if (event.keyCode === 27 || event.key === 'Escape') {
@@ -47,10 +47,14 @@ window.osuny.Search.prototype.listen = function () {
 };
 
 window.osuny.Search.prototype.resize = function () {
-    if (isMobile()) {
-        this.close();
-    } else {
-        this.open();
+    this.state.isMobile = isMobile();
+    if (this.state.isOpened) {
+        if (isMobile()) {
+            this.close();
+        }
+        else {
+            this.open();
+        }
     }
 };
 
@@ -73,19 +77,21 @@ window.osuny.Search.prototype.open = function () {
     this.updateDocumentAccessibility();
 
     setTimeout(function() {
-        this.setDetailsAttribute(true);
+        this.setDetailsAttribute(this.state.isOpened);
     }.bind(this), 300);
 };
 
 window.osuny.Search.prototype.close = function () {
     this.state.isOpened = false;
-    this.setDetailsAttribute(false);
+    this.setDetailsAttribute(this.state.isOpened);
     this.updateDocumentAccessibility();
 
     // focus clicked search button
-    setTimeout(function() {
-        this.elements.triggerButton.focus();
-    }.bind(this), 300);
+    if (this.elements.triggerButton) {
+        setTimeout(function() {
+            this.elements.triggerButton.focus();
+        }.bind(this), 300);
+    }
 }
 
 window.osuny.Search.prototype.setDetailsAttribute = function (open) {
