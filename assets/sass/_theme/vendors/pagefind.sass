@@ -1,0 +1,307 @@
+.nav-search
+    @include media-breakpoint-down(desktop)
+        header#document-header &
+            .pf-trigger-btn
+                padding-bottom: $spacing-3
+                padding-top: $spacing-3
+                width: 100%
+    
+.search-button
+    .pf-trigger-btn
+        @include button-reset
+        @include meta
+        align-items: baseline
+        color: var(--color-text)
+        display: flex
+        gap: space()
+        padding: 0
+    .pf-trigger-icon
+        display: none
+    
+    &--primary, &--upper-menu
+        .pf-trigger-btn
+            @if not $search-button-header-text
+                .pf-trigger-text
+                    @extend .sr-only
+            @if $search-button-header-icon
+                @include icon(search-line, after)
+    
+    &--footer
+        .pf-trigger-btn
+            @if not $search-button-footer-text
+                .pf-trigger-text
+                    @extend .sr-only
+            @if $search-button-footer-icon
+                @include icon(search-line, after)
+    
+    &--fixed
+        .pf-trigger-btn
+            align-items: center
+            background: var(--color-background-alt)
+            bottom: 0
+            color: var(--color-text)
+            justify-content: space-between
+            left: var(--grid-gutter)
+            min-height: $minimum-accessible-size
+            padding:  $spacing-1 $spacing-2 
+            position: fixed
+            z-index: $zindex-search-button-fixed
+            @if not $search-button-fixed-text
+                .pf-trigger-text
+                    @extend .sr-only
+            @if $search-button-fixed-icon
+                @include icon(search-line, after)
+        
+            @include media-breakpoint-down(desktop)
+                left: 0
+                width: 100vw
+                body:not(.full-width) &
+                    background: var(--color-background)
+                    border-top: var(--border-width) solid #eee
+                    padding: 0 var(--grid-gutter)
+                
+            @include media-breakpoint-up(desktop)
+                @if $search-button-fixed-text
+                    width: columns(2)
+
+
+
+dialog.pf-modal
+    @include meta
+    border: 0
+    height: 100svh
+    padding: $spacing-6 0 var(--grid-gutter)
+    margin: 0
+    max-height: unset
+    max-width: unset
+    width: 100vw
+
+    button,
+    fieldset
+        @include button-reset
+    
+    .pf-modal-header
+        @include container
+        background: var(--color-background)
+        display: flex
+        justify-content: space-between
+        left: 0
+        padding-bottom: $spacing-2
+        padding-top: var(--grid-gutter)
+        position: fixed
+        top: 0
+        right: 0
+        z-index: 9
+        .pf-modal-close
+            @include icon(close-line)
+            padding: 0
+            text-align: right
+            svg
+                display: none
+        .pf-modal-close-text
+            pointer-events: none
+
+    .pf-input-wrapper
+        @include icon(search-line, after)
+        border-bottom: 1px solid var(--color-border)
+        position: relative
+        &::after
+            color: var(--color-text-alt)
+            position: absolute
+            right: 0
+            top: 50%
+            transform: translateY(-50%)
+        .pf-input-clear
+            display: none
+        &:focus-within
+            border-bottom-width: 2px
+        [data-pf-sr-hidden="true"]
+            @include sr-only
+        input
+            @include button-reset
+            @include body-text
+            padding: $spacing-1 $spacing-3 $spacing-1 0
+            width: 100%
+            &:focus,
+            &:focus-visible
+                outline: none
+            // hide shadow dom cross
+            &::-ms-clear
+                display: none
+            &[type="search"]::-webkit-search-cancel-button
+                display: none
+
+    .pf-modal-results
+        .pf-results
+            @include list-reset
+            > li + li
+                margin-top: $spacing-3
+        .pf-result
+            &-card,
+            .pf-heading-chip
+                position: relative
+                .pf-result-link,
+                .pf-heading-link
+                    @include stretched-link
+            &-image
+                aspect-ratio: 3/2
+                object-fit: cover
+                &[src*=".svg"]
+                    object-fit: contain
+            &-title
+                @include h4
+            &-link
+                text-decoration: none
+                &:hover
+                    @include link
+            .pf-heading-chips
+                @include list-reset
+                padding-left: $spacing-2
+                margin-top: $spacing-2
+                > li + li
+                    margin-top: $spacing-1
+        mark
+            background: var(--color-background-alt)
+            font-weight: normal
+
+    .pf-modal-aside
+        .pf-summary
+            margin-bottom: $spacing-2
+
+        .pf-filter-pane
+            .pf-filter-group
+                border: 0
+                padding: 0
+                .pf-filter-checkbox
+                    display: flex
+                    input
+                        margin-right: $spacing-1
+                    span
+                        margin-left: auto
+                    + .pf-filter-checkbox
+                        margin-top: $spacing-1
+                .pf-filter-group-title::after
+                    content: ''
+                .pf-filter-group-count
+                    display: none
+                
+            .pf-filter-fieldset
+                margin: 0
+                padding: 0
+                legend
+                    @include sr-only
+        
+        .pf-keyboard-hints
+            color: var(--color-text-alt)
+            display: flex
+            flex-wrap: wrap
+            gap: space()
+            margin-top: $spacing-4
+            .pf-keyboard-key
+                background: var(--color-background-alt)
+                border-radius: 4px
+                color: var(--color-text)
+                padding: space()
+                margin-left: space()
+    
+    @include media-breakpoint-up(desktop)
+        .pf-input-wrapper
+            width: columns(8)
+            input
+                width: 100%
+        
+        .pf-modal-header
+            align-items: center
+            padding-top: $spacing-4
+            &-content
+                align-items: baseline
+                display: flex
+                gap: var(--grid-gutter)
+                .pf-modal-close-text
+                    align-self: center
+                    position: absolute
+                    right: var(--grid-gutter)
+                    width: columns(3)
+            .pf-modal-close
+                margin-left: offset(1)
+                width: columns(3)
+
+        .pf-modal-content
+            display: flex
+            gap: var(--grid-gutter)
+
+        .pf-modal-results
+            .pf-results
+                width: columns(8)
+            .pf-result
+                &-card
+                    align-items: flex-start
+                    display: flex
+                    gap: calc(var(--grid-gutter) / 2)
+                &-content
+                    flex: 1
+                &-title,
+                &-excerpt,
+                .pf-heading-chip
+                    width: columns(5)
+                &-image
+                    width: calc(#{columns(1)} + (var(--grid-gutter) / 2))
+                .pf-heading-chips
+                    margin-top: $spacing-3
+                    padding-left: offset(1)
+        
+        .pf-modal-aside
+            margin-left: offset(1)
+            order: 2
+            width: columns(3)
+            .pf-modal-aside-content
+                position: sticky
+                top: 0
+            .pf-summary
+                margin-bottom: $spacing-3
+            .pf-filter-pane
+                .pf-filter-group-title
+                    @include sr-only
+
+    @include media-breakpoint-down(desktop)
+        padding-top: space(40)
+        .pf-modal-header
+            flex-direction: column
+            align-items: flex-end
+            &-content
+                width: 100%
+            .pf-modal-close
+                order: -1
+                position: absolute
+                right: var(--grid-gutter)
+                width: offset(6)
+                &::before
+                    line-height: var(--meta-line-height)
+            .pf-modal-close-text
+                display: block
+                margin-bottom: $spacing-4
+                margin-left: auto
+                margin-right: offset(1)
+                text-align: right
+        
+        .pf-modal-aside
+            .pf-filter-pane
+                .pf-filter-fieldset
+                    margin-bottom: $spacing-3
+                .pf-filter-group-name
+                    @include icon(arrow-down-s-line, after)
+                    align-items: baseline
+                    display: flex
+                    gap: var(--grid-gutter)
+                    justify-content: space-between
+                    &::after
+                        font-size: var(--body-size)
+                        margin-left: auto
+            .pf-keyboard-hints
+                @include sr-only
+
+        .pf-result
+            &-image
+                display: none
+            &-excerpt
+                margin-top: $spacing-1

@@ -8,7 +8,6 @@ import './design-system/components/toc';
 import './design-system/Popup';
 import './design-system/Lightbox';
 import './design-system/sliders';
-import './design-system/components/search';
 import './design-system/StickyTitle';
 import './design-system/mainMenu';
 import './design-system/components/navAccessibility';
@@ -20,6 +19,7 @@ import './design-system/components/offcanvas';
 import './design-system/components/Maps';
 import './design-system/components/modal';
 import './design-system/components/notes';
+import './design-system/components/search';
 import './design-system/font';
 
 import './blocks/keyFigures';
