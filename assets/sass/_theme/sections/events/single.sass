@@ -219,12 +219,9 @@
                                 opacity: 1
         .event-summary + ul
             margin-top: $spacing-3
-        // Hide li childs:
-        // - after 6th one (included)
-        // - if its status is 'archive'
+        // Hide li childs after 6th one (included)
         ul.truncated-list
-            li:nth-child(n+7),
-            li.event-time-slot--archive
+            li:nth-child(n+7)
                 display: none
         ul:not(.truncated-list)
             + .btn
