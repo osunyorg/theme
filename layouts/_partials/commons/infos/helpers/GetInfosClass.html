@@ -1,0 +1,6 @@
+{{ $infos_position := site.Params.default.single.meta.position }}
+{{ $with_labels := eq site.Params.default.single.meta.options.with_labels true }}
+{{ $label_class := cond $with_labels "with-labels" "without-label" }}
+{{ $label_class = printf "%s-infos %s" $infos_position $label_class }}
+
+{{ return $label_class }}

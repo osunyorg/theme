@@ -119,6 +119,27 @@
                     display: block
                     + li
                         margin-top: space()
+    
+    &.without-label
+        ul, ol
+            padding: 0
+        > li[class]
+            > span:first-of-type
+                @include sr-only
+            ul
+                align-items: baseline
+                display: flex
+                flex-wrap: wrap
+                > li
+                    margin-left: 0
+        .authors
+            li + li::before
+                content: ', '
+        .share
+            justify-content: flex-start
+            li:first-child
+                a
+                    padding-left: 0
 
     .taxonomies-single
         flex: 1
