@@ -1,6 +1,7 @@
 {{ $options := .options | default site.Params.categories.index.options }}
 {{ $heading_level := .heading_level }}
 {{ $category := site.GetPage .category.path }}
+{{ $count := .category.count }}
 {{ $layout := .layout }}
 
 {{ with $category }}
@@ -16,7 +17,7 @@
       {{ end }}
 
       {{ if $options.count }}
-        {{ partial "categories/partials/category/articles-count.html" . }}
+        {{ partial "categories/partials/category/articles-count.html" $count }}
       {{ end }}
 
       {{ if $options.more }}
