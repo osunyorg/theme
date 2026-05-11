@@ -3,7 +3,7 @@
 {{ $label_class := cond $hide_label "without-label" "with-label" }}
 {{ $hero_infos_classes := printf "hero-infos %s" $label_class }}
 
-{{ if and (ne .Kind "home") (eq site.Params.default.single.infos.position "hero") }}
+{{ if and (ne .Kind "home") (eq site.Params.default.single.meta.position "hero") }}
   <ul class="{{ $hero_infos_classes }}">
     {{ partial "header/hero/content/infos/list/dates.html" . }}
     {{ partial "header/hero/content/infos/list/author.html" . }}

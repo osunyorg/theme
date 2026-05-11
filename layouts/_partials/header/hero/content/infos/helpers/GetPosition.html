@@ -3,11 +3,11 @@
   {{ $kind = "single" }}
 {{ end }}
 
-{{ $param := (printf "%s.%s.infos.position" .Type $kind )}}
+{{ $param := (printf "%s.%s.meta.position" .Type $kind )}}
 
 {{ $position := partial "helpers/param/GetSiteParamWithDefault" (dict 
   "param" $param
-  "default" (printf "default.%s.infos.position" $kind)
+  "default" (printf "default.%s.meta.position" $kind)
 ) }}
 
 {{ return $position }}
