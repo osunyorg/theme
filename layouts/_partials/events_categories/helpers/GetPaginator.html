@@ -5,7 +5,7 @@
   "events" $events
 ) }}
 {{ $events = $events | complement $children_with_same_category }}
-
+{{ $events = $events | uniq }}
 {{ $futur_and_current := where $events "Params.dates.archive" false }}
 {{ $futur_and_current_group := $futur_and_current.GroupByDate site.Params.events.index.group_by_date "asc" }}
 
