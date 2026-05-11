@@ -1,6 +1,6 @@
 {{ $label_class := partial "commons/infos/helpers/GetInfosClass" . }}
 
-{{ if and (ne .Kind "home") (eq site.Params.default.single.meta.position "hero") }}
+{{ if and (ne .Kind "home") (ne .Type "events") (eq site.Params.default.single.meta.position "hero") }}
   <ul class="hero-infos {{ $label_class }}">
     {{ partial "header/hero/content/infos/list/dates.html" . }}
     {{ partial "header/hero/content/infos/list/author.html" . }}
