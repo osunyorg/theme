@@ -1,0 +1,81 @@
+.page-meta
+    @include meta
+
+    &, ul
+        @include list-reset
+    
+    li
+        > span:first-of-type
+            color: var(--color-text-alt)
+    
+    .reading-time 
+        span:first-letter
+            text-transform: capitalize
+
+    .taxonomies
+        width: 100%
+
+    .share
+        li:first-child
+            a
+                padding-left: 0
+        li:last-child
+            a
+                padding-right: 0
+
+    &.without-label
+        &, .taxonomies-single
+            align-items: baseline
+            display: flex
+            flex-wrap: wrap
+            gap: $spacing-2 $spacing-3
+        > ul
+            margin-top: $spacing-2
+        > li
+            &:where(:not(.update_date))
+                > span
+                    margin-bottom: $spacing-1
+                    &:first-of-type
+                        @include sr-only
+        .update_date,
+        .share
+            display: inline-flex
+        .update_date
+            text-transform: lowercase
+            time
+                margin-left: space()
+        .authors
+            ul
+                li
+                    display: inline
+                    + li::before
+                        content: ' • '
+
+        &.with_label
+            .taxonomy-children
+                li + li
+                    margin-top: $spacing-1
+
+
+    &.hero-meta
+        margin-top: var(--grid-gutter)
+        width: columns(6)
+    
+    &.with-labels
+        &, .taxonomies-single
+            align-items: baseline
+            display: flex
+            flex-wrap: wrap
+            gap: $spacing-3 var(--grid-gutter)
+            > li
+                width: columns(2)
+                span:first-of-type
+                    display: block
+                    margin-bottom: $spacing-1
+            > .taxonomies
+                width: 100%
+
+    
+    @include in-page-with-sidebar
+        &.content-meta
+            width: columns(10)
