@@ -50,7 +50,7 @@
             @include meta
             &, ul
                 @include list-reset
-            > li + .taxonomies-single
+            > li + .taxonomies
                 margin-top: $spacing-5
             li
                 > span:first-of-type
@@ -91,23 +91,23 @@
 
             @include media-breakpoint-up(desktop)
                 margin-top: var(--grid-gutter)
-                
-                &,
-                .taxonomies-single
+                width: columns(6)
+                &, .taxonomies-single
                     align-items: baseline
                     display: flex
                     flex-wrap: wrap
-                    width: columns(6)
             
                 &.with-labels
+                    gap: $spacing-3 var(--grid-gutter)
                     &, .taxonomies-single
                         gap: $spacing-3 var(--grid-gutter)
-                        > li,
-                        .taxonomies-single > li
+                        > li
                             width: columns(2)
                             span:first-of-type
                                 display: block
                                 margin-bottom: $spacing-1
+                    .taxonomies
+                        width: 100%
                 
                 &.without-label
                     &, .taxonomies-single
