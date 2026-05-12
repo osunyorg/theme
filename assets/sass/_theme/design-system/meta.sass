@@ -1,10 +1,9 @@
 .page-meta
-    @include meta
-
     &, ul
         @include list-reset
     
     li
+        @include meta
         > span:first-of-type
             color: var(--color-text-alt)
     
@@ -51,10 +50,10 @@
                     + li::before
                         content: ' • '
 
-        &.with_label
-            .taxonomy-children
-                li + li
-                    margin-top: $spacing-1
+    &.with_label
+        .taxonomy-children
+            li + li
+                margin-top: $spacing-1
 
 
     &.hero-meta
@@ -79,7 +78,20 @@
     @include in-page-with-sidebar
         &.without-label
             padding-bottom: $spacing-3
+
+        &.with-labels
+            gap: 0
+            &, .taxonomies ul
+                flex-direction: column
+                > li
+                    width: 100%
     
     @include in-page-without-sidebar
         &.content-meta
             width: columns(10)
+            ul
+                li 
+                    a
+                        text-align: left
+            .share
+                justify-content: start
