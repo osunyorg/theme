@@ -1,7 +1,7 @@
 
 <ul class="project-infos">
   {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" . }}
-  {{ if ne $taxonomies_position "hero" }}
+  {{ if eq $taxonomies_position "content" }}
     {{ if .Params.projects_categories }}
       <li>
         {{ partial "taxonomies/single/list.html" . }}

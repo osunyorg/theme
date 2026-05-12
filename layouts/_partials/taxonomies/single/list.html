@@ -4,7 +4,7 @@
 {{ $param := printf "%s.single.taxonomies.show_name" $type }}
 {{ $display_taxonomies := partial "helpers/param/GetSiteParamWithDefault" (dict 
   "param" $param
-  "default" "default.single.taxonomies.show_name"
+  "default" "default.single.meta.options.with_label"
 ) }}
 {{ with $taxonomies }}
   {{ if $display_taxonomies }}

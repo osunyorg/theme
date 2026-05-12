@@ -2,6 +2,7 @@
 
 {{ if and (ne .Kind "home") (ne .Type "events") (eq site.Params.default.single.meta.position "hero") }}
   <ul class="hero-infos {{ $label_class }}">
+    {{ partial "header/hero/content/meta/list/year.html" . }}
     {{ partial "header/hero/content/meta/list/dates.html" . }}
     {{ partial "header/hero/content/meta/list/author.html" . }}
     {{ partial "header/hero/content/meta/list/reading-time.html" . }}

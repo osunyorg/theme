@@ -1,6 +1,6 @@
 <div class="section-sidebar project-sidebar">
   <div>
-    {{ if not .Params.design.full_width }}
+    {{ if and (eq site.Params.default.single.meta.position "content") (not .Params.design.full_width) }}
       <aside>
         {{- partial "projects/single/project-infos.html" . -}}
       </aside>

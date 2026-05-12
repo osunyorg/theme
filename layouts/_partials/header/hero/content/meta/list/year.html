@@ -1,0 +1,8 @@
+{{ if and site.Params.default.single.meta.options.year .Params.year }}
+  <li class="year">
+    {{ if site.Params.default.single.meta.options.with_labels }}
+      <span>{{ i18n "projects.year" }}</span>
+    {{ end }}
+    <time datetime="{{ . }}">{{ .Params.year }}</time>
+  </li>
+{{ end }}
