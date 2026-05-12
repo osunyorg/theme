@@ -1,6 +1,9 @@
-{{ $infos_position := site.Params.default.single.meta.position }}
+{{ $meta_position := site.Params.default.single.meta.position }}
 {{ $with_labels := eq site.Params.default.single.meta.options.with_labels true }}
-{{ $label_class := cond $with_labels "with-label" "without-label" }}
-{{ $label_class = printf "%s-infos %s" $infos_position $label_class }}
-
-{{ return $label_class }}
+{{ $meta_class := cond $with_labels "with-labels" "without-label" }}
+{{ $meta_class = printf "%s-meta %s" $meta_position $meta_class }}
+{{ $meta_class = printf "%s-meta %s" .Type $meta_class }}
+{{ if eq site.Params.default.single.meta.position "content" }}
+  {{ $meta_class = printf "%s %s-infos" $meta_class ( singularize .Type ) }}
+{{ end }}
+{{ return $meta_class }}
