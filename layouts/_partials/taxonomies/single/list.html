@@ -1,10 +1,10 @@
 {{ $context := . }}
 {{ $type := .Type }}
 {{ $taxonomies := .Params.taxonomies }}
-{{ $param := printf "%s.single.taxonomies.show_name" $type }}
+{{ $param := printf "%s.single.meta.options.with_labels" $type }}
 {{ $display_taxonomies := partial "helpers/param/GetSiteParamWithDefault" (dict 
   "param" $param
-  "default" "default.single.meta.options.with_label"
+  "default" "default.single.meta.options.with_labels"
 ) }}
 {{ with $taxonomies }}
   {{ if $display_taxonomies }}

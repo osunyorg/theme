@@ -8,6 +8,7 @@
   {{ $categories_type := printf "%ss_categories" $type }}
   {{ $categories = .context.GetTerms $categories_type }}
 {{ end }}
+
 {{ if $categories }}
   <ul class="{{ $class }}" aria-label="{{ i18n "categories.label" }}">
     {{ range $categories }}
