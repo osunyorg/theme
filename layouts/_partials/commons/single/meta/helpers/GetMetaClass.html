@@ -3,7 +3,7 @@
 {{ $meta_class := cond $with_labels "with-labels" "without-label" }}
 {{ $meta_class = printf "single-meta %s-meta %s" $meta_position $meta_class }}
 {{ $meta_class = printf "%s-meta %s" .Type $meta_class }}
-{{ if eq site.Params.default.single.meta.position "content" }}
+{{ if eq  $meta_position "content" }}
   {{/*  legacy: 'infos' class  */}}
   {{ $meta_class = printf "%s %s-infos" $meta_class ( singularize .Type ) }}
 {{ end }}
