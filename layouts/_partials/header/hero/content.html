@@ -1,7 +1,9 @@
 <div class="content">
   <div class="hero-text">
     {{ partial "header/hero/content/text.html" . }}
-    {{ partial "header/hero/content/meta.html" . }}
+    {{ if eq site.Params.default.single.meta.position "hero" }}
+      {{ .meta }}
+    {{ end }}
     {{ partial "header/hero/content/actions.html" . }}
   </div>
   {{ if .hero_content_complement }}

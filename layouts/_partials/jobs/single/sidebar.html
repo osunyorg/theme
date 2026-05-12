@@ -2,7 +2,7 @@
   <div>
     {{ if and (eq site.Params.default.single.meta.position "content") (not .Params.design.full_width) }}
       <aside>
-        {{- partial "jobs/single/job-infos.html" . -}}
+        {{- partial "jobs/single/meta.html" . -}}
       </aside>
     {{ end }}
     {{ partial "toc/container.html" (dict

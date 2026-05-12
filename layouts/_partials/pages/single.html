@@ -11,7 +11,7 @@
     "block_wrapped" true
   ) }}
 
-  {{ if and .Params.taxonomies (eq site.Params.pages.single.taxonomies.position "content") }}
+  {{ if and .Params.taxonomies (eq site.Params.pages.meta.taxonomies.position "content") }}
     <div class="container taxonomies-container">
       {{ partial "taxonomies/single/list.html" . }}
     </div>

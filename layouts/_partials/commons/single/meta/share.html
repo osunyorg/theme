@@ -1,0 +1,5 @@
+{{ $enabled_share := site.Params.projects.share_links.enabled | default site.Params.share_links.enabled }}
+
+{{ if and site.Params.default.single.meta.options.share $enabled_share }}
+  {{ partial "commons/share/list-item.html" . }}
+{{ end }}
