@@ -77,69 +77,50 @@
         font-size: $table-body-size-desktop
     @include media-breakpoint-down(desktop)
         margin-top: $spacing-3
-    > li:first-child
-        > ul:first-child, &
-            > li:first-child, &, &
-                padding-top: 0
-    > li,
-    .taxonomies-single.with-label > li
-        @include meta
-        display: flex
-        gap: $spacing-3
-        justify-content: space-between
-        padding-top: $spacing-2
-        padding-bottom: $spacing-2
-        border-color: var(--color-border)
-        &:not(:first-child)
-            border-top: var(--border-width) solid var(--color-border)
-        > span
-            @include meta
-            color: var(--color-text-alt)
-            padding-left: 0
-            white-space: nowrap
-            vertical-align: top
-        .share
-            text-align: right
-            flex: 1
-        &.authors,
-        &.terms
-            margin: 0
-            ul
-                text-align: right
-            li
-                display: inline-block
-                vertical-align: middle
-                margin-left: $spacing-1
-                &:last-child
-                    &::after
-                        content: none
-            @include media-breakpoint-up(desktop)
-                align-items: baseline
-                li
-                    display: block
-                    + li
-                        margin-top: space()
     
-    &.without-label
-        ul, ol
-            padding: 0
-        > li[class]
-            > span:first-of-type
-                @include sr-only
-            ul
-                align-items: baseline
-                display: flex
-                flex-wrap: wrap
-                > li
-                    margin-left: 0
-        .authors
-            li + li::before
-                content: ', '
-        .share
-            justify-content: flex-start
-            li:first-child
-                a
-                    padding-left: 0
+    @include in-page-with-sidebar
+        > li:first-child
+            > ul:first-child, &
+                > li:first-child, &, &
+                    padding-top: 0
+        > li,
+        .taxonomies-single.with-label > li
+            @include meta
+            display: flex
+            gap: $spacing-3
+            justify-content: space-between
+            padding-top: $spacing-2
+            padding-bottom: $spacing-2
+            border-color: var(--color-border)
+            &:not(:first-child)
+                border-top: var(--border-width) solid var(--color-border)
+            > span
+                @include meta
+                color: var(--color-text-alt)
+                padding-left: 0
+                white-space: nowrap
+                vertical-align: top
+            .share
+                text-align: right
+                flex: 1
+            &.authors,
+            &.terms
+                margin: 0
+                ul
+                    text-align: right
+                li
+                    display: inline-block
+                    vertical-align: middle
+                    margin-left: $spacing-1
+                    &:last-child
+                        &::after
+                            content: none
+                @include media-breakpoint-up(desktop)
+                    align-items: baseline
+                    li
+                        display: block
+                        + li
+                            margin-top: space()
 
     .taxonomies-single
         flex: 1
