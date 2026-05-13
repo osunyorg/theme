@@ -3,9 +3,14 @@
   "default" "default.single.meta.options.updated_at"
 ) }}
 
+{{ $date_format := partial "helpers/param/GetSiteParamWithDefault" (dict
+  "param" (printf "%s.date_format" .Type)
+  "default" "date_format"
+) }}
+
 {{ if $with_update_date }}
   {{ partial "commons/single/updated-at.html" (dict 
-    "format" site.Params.posts.date_format
+    "format" $date_format
     "context" .
   ) }}
 {{ end }}
