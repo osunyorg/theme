@@ -1,6 +1,8 @@
+{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" . }}
+
 <div class="section-sidebar project-sidebar">
   <div>
-    {{ if not .Params.design.full_width }}
+    {{ if and (not .Params.design.full_width) (eq $meta_position "content") }}
       <aside>
         {{- partial "projects/single/meta.html" . -}}
       </aside>

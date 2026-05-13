@@ -1,6 +1,8 @@
+{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" . }}
+
 <div class="section-sidebar post-sidebar">
   <div>
-    {{ if eq site.Params.default.single.meta.position "content" }}
+    {{ if eq $meta_position "content" }}
       <aside>
         {{- partial "posts/single/meta.html" . -}}
       </aside>

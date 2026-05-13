@@ -11,9 +11,6 @@
         span:first-letter
             text-transform: capitalize
 
-    .taxonomies
-        width: 100%
-
     .share
         li:first-child
             a
@@ -61,13 +58,18 @@
             display: flex
             flex-wrap: wrap
             gap: $spacing-3 var(--grid-gutter)
-            > li
-                width: columns(2)
-                span:first-of-type
-                    display: block
-                    margin-bottom: $spacing-1
             > .taxonomies
                 width: 100%
+
+        &.hero-meta
+            &, .taxonomies-single
+                > li
+                    width: columns(2)
+                    span:first-of-type
+                        display: block
+                        margin-bottom: $spacing-1
+                .taxonomies
+                    width: 100%
 
     // in hero: 6 cols bc of picture
     &.hero-meta
@@ -84,13 +86,27 @@
                 gap: 0
                 > li
                     width: 100%
-    
+        
     @include in-page-without-sidebar
+        &.with-labels
+            .taxonomy-children
+                li + li
+                    margin-top: $spacing-1
+            &, .taxonomies-single
+                > li
+                    width: columns(2)
+                    span:first-of-type
+                        display: block
+                        margin-bottom: $spacing-1
+        li.taxonomies
+            width: 100%
+        
         &.content-meta
             width: columns(10)
             ul
                 li 
                     a
                         text-align: left
+            
             .share
                 justify-content: start

@@ -1,7 +1,9 @@
+{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" .context }}
+
 <div class="content">
   <div class="hero-text">
     {{ partial "header/hero/content/text.html" . }}
-    {{ if eq site.Params.default.single.meta.position "hero" }}
+    {{ if and .meta (eq $meta_position "hero") }}
       {{ .meta }}
     {{ end }}
     {{ partial "header/hero/content/actions.html" . }}

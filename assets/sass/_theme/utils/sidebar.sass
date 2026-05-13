@@ -85,22 +85,23 @@
                     padding-top: 0
         &.with-labels
             > li,
-            .taxonomies-single.with-label > li
+            .taxonomies-single > li
                 @include meta
+                align-items: baseline
+                border-color: var(--color-border)
                 display: flex
                 gap: $spacing-3
                 justify-content: space-between
                 padding-top: $spacing-2
                 padding-bottom: $spacing-2
-                border-color: var(--color-border)
                 &:not(:first-child)
                     border-top: var(--border-width) solid var(--color-border)
                 > span
                     @include meta
                     color: var(--color-text-alt)
                     padding-left: 0
-                    white-space: nowrap
                     vertical-align: top
+                    white-space: nowrap
                 .share
                     text-align: right
                     flex: 1
@@ -112,7 +113,6 @@
                     li
                         display: inline-block
                         vertical-align: middle
-                        margin-left: $spacing-1
                         &:last-child
                             &::after
                                 content: none
@@ -122,6 +122,9 @@
                             display: block
                             + li
                                 margin-top: space()
+            li.taxonomies
+                padding-top: 0
+                padding-bottom: 0
 
     .taxonomies-single
         flex: 1
