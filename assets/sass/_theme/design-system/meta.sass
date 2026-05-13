@@ -1,7 +1,7 @@
 .single-meta
     &, ul
         @include list-reset
-    
+
     li
         @include meta
         > span:first-of-type
@@ -20,11 +20,8 @@
                 padding-right: 0
 
     &.without-label
-        &, .taxonomies-single
-            align-items: baseline
-            display: flex
-            flex-wrap: wrap
-            gap: $spacing-1 $spacing-1
+        gap: $spacing-1 $spacing-3
+
         > ul
             margin-top: $spacing-2
         > li
@@ -40,6 +37,7 @@
             text-transform: lowercase
             time
                 margin-left: space()
+        
         .authors
             ul
                 li
@@ -47,22 +45,64 @@
                     + li::before
                         content: ' • '
 
-    &.with_label
+        .taxonomies-single
+            gap: $spacing-1
+
+    &.with-labels
         .taxonomy-children
             li + li
                 margin-top: $spacing-1
 
-    // with labels: horizontal flex by default (vertical in sidebar without label)
-    &.with-labels
+        // with labels: horizontal flex by default (vertical in sidebar without label)
+        &, .taxonomies-single
+            gap: $spacing-3 var(--grid-gutter)
+            > .taxonomies
+                width: 100%
+                
+    @include media-breakpoint-down(desktop)
+        > li, 
+        .taxonomies-single > li
+            padding-bottom: $spacing-2
+            padding-top: $spacing-2
+        
+        .taxonomies
+            padding-top: 0
+            li
+                margin-bottom: 0
+            .taxonomy-children
+                margin: 0
+        
+        &.without-label
+            .taxonomies-single
+                display: flex
+                flex-wrap: wrap
+                padding-top: $spacing-2
+                > li
+                    padding: 0
+
+        &.with-labels
+            > li, 
+            .taxonomies-single > li
+                display: flex
+                justify-content: space-between
+                gap: var(--grid-gutter)
+                > *
+                    flex: 1
+                span:first-of-type + *
+                    text-align: right
+                + li
+                    border-top: 1px solid var(--color-border)
+            
+            .share
+                justify-content: flex-end
+
+    @include media-breakpoint-up(desktop)
         &, .taxonomies-single
             align-items: baseline
             display: flex
             flex-wrap: wrap
-            gap: $spacing-3 var(--grid-gutter)
-            > .taxonomies
-                width: 100%
 
-        &.hero-meta
+        &.with-labels.hero-meta
             &, .taxonomies-single
                 > li
                     width: columns(2)
@@ -72,10 +112,10 @@
                 .taxonomies
                     width: 100%
 
-    // in hero: 6 cols bc of picture
-    &.hero-meta
-        margin-top: $spacing-4
-        width: columns(6)
+        // in hero: 6 cols bc of picture
+        &.hero-meta
+            margin-top: $spacing-4
+            width: columns(6)
     
     @include in-page-with-sidebar
         // padding before toc separator
