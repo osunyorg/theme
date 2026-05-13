@@ -5,20 +5,20 @@ const shell = require("shelljs"),
     migrate = require("./migrate/migrate");
 
 shell.set('-e'); // exit upon first error
-console.log(`                                                                     
+console.log(`
      +**=           ++***++     =*=        **=   =++  +***++    =**+        =*+=
   +*#%@@%#**+     *###**#%%#+   *%*       #@%*   *@%####*#%%#+  +%%%+       #@%+
-=#%%#*+ #+#%%#=  #@%#    +**+-  *%*       *%%*   *%%%#=   +%%%+  *%%#      *%@# 
-*%%*       +%%*  #@%#           *%*       *%@*   *%%+      #@%*   *%%*    +%%%  
-*%#         #@*  *%@%#*****+    *%*       *%%*   *%#       +%@*    #@%*   #%%*  
-*@#         #%*    %#*+*+#%%#-  *%*       +@%*   *%*       *%%*     %%%* *%%*   
-+%%+       *%%+ =#%%      %%@+  *%#       #@%*   *%*       *%%*     #%%%#%@#    
- #%%#*+ #*#%%*  =%@%#    +%%%+  +%%#*+  +#%%@+   *%*       *%@*      *%@%@%=    
-  +**#%@@%#*+     *#%%#*#%%#+    +#%%%###%%@@*   *%*       #@%*       #%@%*     
-      =**=          +#+***+        +***+   **=   =*=        **=       #%@#      
-                                                                      %%%       
-                                                                  +*#%%%#       
-                                                                 =+***+         
+=#%%#*+ #+#%%#=  #@%#    +**+-  *%*       *%%*   *%%%#=   +%%%+  *%%#      *%@#
+*%%*       +%%*  #@%#           *%*       *%@*   *%%+      #@%*   *%%*    +%%%
+*%#         #@*  *%@%#*****+    *%*       *%%*   *%#       +%@*    #@%*   #%%*
+*@#         #%*    %#*+*+#%%#-  *%*       +@%*   *%*       *%%*     %%%* *%%*
++%%+       *%%+ =#%%      %%@+  *%#       #@%*   *%*       *%%*     #%%%#%@#
+ #%%#*+ #*#%%*  =%@%#    +%%%+  +%%#*+  +#%%@+   *%*       *%@*      *%@%@%=
+  +**#%@@%#*+     *#%%#*#%%#+    +#%%%###%%@@*   *%*       #@%*       #%@%*
+      =**=          +#+***+        +***+   **=   =*=        **=       #%@#
+                                                                      %%%
+                                                                  +*#%%%#
+                                                                 =+***+
 `);
 
 const command = process.argv[2];
@@ -61,6 +61,11 @@ let pagefindExclude = `
     .schools,
     .volumes`;
 
+// Pagefind command, exporting to public/pagefind
+let pagefindCommand = "npm_config_yes=true npx pagefind --site \"public\" --glob \"**/index.{html}\" --exclude-selectors \"" + pagefindExclude + "\"";
+// Pagefind variant command, exporting to static/pagefind, useful for local environment
+let pagefindDevCommand = pagefindCommand + " --output-subdir \"../static/pagefind\"";
+
 function execute(string) {
     console.log("OSUNY runs " + string);
     shell.exec(string);
@@ -73,14 +78,14 @@ if (command === "watch") {
 if (command === "dev") {
     execute("rm -rf public");
     execute("hugo");
-    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
+    execute(pagefindDevCommand);
     execute("hugo server --minify");
 }
 
 if (command === "local") {
     var IP = dev.network["en0"][0] || "0.0.0.0";
     execute("hugo");
-    execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
+    execute(pagefindDevCommand);
     execute("hugo server --minify --bind=" + IP + " --baseURL=http://" + IP + ":1313 -D");
 }
 
@@ -88,13 +93,13 @@ if (command === "build") {
     execute("yarn upgrade osuny");
     execute("yarn install");
     execute("hugo --minify");
-    execute("npm_config_yes=true npx pagefind --site 'public' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
+    execute(pagefindCommand);
 }
 
 if (command === "percy-build") {
     execute("yarn upgrade");
     execute("hugo --baseURL=/");
-    execute("npm_config_yes=true npx pagefind --site 'public' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
+    execute(pagefindCommand);
 }
 
 if (command === "update") {
