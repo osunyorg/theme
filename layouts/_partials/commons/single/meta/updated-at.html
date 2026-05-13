@@ -1,4 +1,9 @@
-{{ if site.Params.posts.single.options.updated_at }}
+{{ $with_update_date := partial "helpers/param/GetSiteParamWithDefault" (dict
+  "param" (printf "%s.single.meta.options.updated_at" .Type)
+  "default" "default.single.meta.options.updated_at"
+) }}
+
+{{ if $with_update_date }}
   {{ partial "commons/single/updated-at.html" (dict 
     "format" site.Params.posts.date_format
     "context" .
