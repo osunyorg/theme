@@ -9,7 +9,11 @@
                 &::before
                     content: ' • '
 
-.job-sidebar
-    @include sidebar
-    .job-infos
-        @include sidebar-infos
+// sidebar
+.jobs__page
+    &:not(.full-width)
+        .section-sidebar
+            @include sidebar
+
+.job-infos
+    @include sidebar-infos
