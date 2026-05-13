@@ -52,6 +52,7 @@
             li + li
                 margin-top: $spacing-1
 
+    // with labels: horizontal flex by default (vertical in sidebar without label)
     &.with-labels
         &, .taxonomies-single
             align-items: baseline
@@ -77,6 +78,7 @@
         width: columns(6)
     
     @include in-page-with-sidebar
+        // padding before toc separator
         &.without-label
             padding-bottom: $spacing-3
 
@@ -92,15 +94,19 @@
             .taxonomy-children
                 li + li
                     margin-top: $spacing-1
+            
             &, .taxonomies-single
                 > li
                     width: columns(2)
                     span:first-of-type
                         display: block
                         margin-bottom: $spacing-1
+
+        // always display taxonomies in 6 or 10 cols to return to the line
         li.taxonomies
             width: 100%
         
+        // in full width: display on 10 cols alongside toc
         &.content-meta
             width: columns(10)
             ul
