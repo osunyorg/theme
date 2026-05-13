@@ -3,7 +3,7 @@
 <div class="content">
   <div class="hero-text">
     {{ partial "header/hero/content/text.html" . }}
-    {{ if and .meta (eq $meta_position "hero") }}
+    {{ if (eq $meta_position "hero") }}
       {{ .meta }}
     {{ end }}
     {{ partial "header/hero/content/actions.html" . }}

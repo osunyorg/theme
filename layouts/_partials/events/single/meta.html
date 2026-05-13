@@ -1,3 +1,4 @@
+{{ $meta_class := partial "commons/single/meta/helpers/GetMetaClass" . }}
 
 <meta itemprop="name" content="{{ safeHTML .Title }}">
 <meta itemprop="url" content="{{ .Permalink }}">
@@ -5,3 +6,7 @@
 {{ with .Params.summary }}
   <meta itemprop="description" content="{{ . | safeHTML }}">
 {{ end }}
+
+<ul class="{{ $meta_class }}">
+  {{ partial "commons/single/meta/taxonomies.html" . }}
+</ul>
