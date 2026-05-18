@@ -5,7 +5,7 @@
 {{ $meta_class = printf "single-meta %s-meta %s" $meta_position $meta_class }}
 {{ $meta_class = printf "%s-meta %s" .Type $meta_class }}
 
-{{ if eq  $meta_position "content" }}
+{{ if eq $meta_position "content" }}
   {{/*  legacy: 'x-infos' classes  */}}
   {{ $meta_class = printf "%s %s-infos" $meta_class ( singularize .Type ) }}
 {{ end }}
