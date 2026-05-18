@@ -2,7 +2,7 @@
 
 <div class="section-sidebar job-sidebar">
   <div>
-    {{ if and (eq $meta_position "content") (not .Params.design.full_width) }}
+    {{ if eq $meta_position "content" }}
       <aside>
         {{- partial "jobs/single/meta.html" . -}}
       </aside>

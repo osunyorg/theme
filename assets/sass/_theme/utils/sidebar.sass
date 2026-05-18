@@ -73,8 +73,10 @@
     @include list-reset
     font-size: $table-body-size
     margin-bottom: 0
+    
     @include media-breakpoint-up(desktop)
         font-size: $table-body-size-desktop
+
     @include media-breakpoint-down(desktop)
         margin-top: $spacing-3
     
@@ -149,6 +151,19 @@
         a
             color: inherit
             text-decoration: none
+
+@mixin sidebar-full-width
+    @include container
+    > div
+        display: flex
+        align-items: start
+        margin-bottom: $spacing-5
+    .toc-cta
+        padding-right: 0
+    aside
+        flex-shrink: 0
+    @include media-breakpoint-down(desktop)
+        margin-bottom: $spacing-5
 
 @mixin document-min-height($min-height: 350px)
     min-height: $min-height

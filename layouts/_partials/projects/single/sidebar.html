@@ -2,7 +2,7 @@
 
 <div class="section-sidebar project-sidebar">
   <div>
-    {{ if and (not .Params.design.full_width) (eq $meta_position "content") }}
+    {{ if eq $meta_position "content" }}
       <aside>
         {{- partial "projects/single/meta.html" . -}}
       </aside>

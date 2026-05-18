@@ -178,6 +178,11 @@
     &:not(.full-width)
         .project-sidebar
             @include sidebar
+
+    &.full-width
+        @include media-breakpoint-up(desktop)
+            .project-sidebar
+                @include sidebar-full-width
     
     @include media-breakpoint-up(sm)
         .hero

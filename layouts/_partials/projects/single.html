@@ -7,13 +7,6 @@
 
   {{ partial "projects/single/sidebar.html" . }}
 
-  {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" . }}
-  {{ if and .Params.design.full_width .Params.taxonomies (eq $taxonomies_position "content") }}
-    <div class="container">
-      {{ partial "taxonomies/single/container.html" . }}
-    </div>
-  {{ end }}
-
   {{ partial "projects/single/summary.html" (dict
     "context" .
     "block_wrapped" true
