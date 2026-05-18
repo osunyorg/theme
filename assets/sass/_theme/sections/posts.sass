@@ -267,8 +267,11 @@
                     margin-top: $spacing-3
 
     &.full-width
-        @include media-breakpoint-up(desktop)
-            .post-sidebar
+        .post-sidebar
+            @include media-breakpoint-down(desktop)
+                @include container
+            
+            @include media-breakpoint-up(desktop)
                 @include sidebar-full-width
 
 .post-infos

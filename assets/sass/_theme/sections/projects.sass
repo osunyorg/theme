@@ -180,8 +180,11 @@
             @include sidebar
 
     &.full-width
-        @include media-breakpoint-up(desktop)
-            .project-sidebar
+        .project-sidebar
+            @include media-breakpoint-down(desktop)
+                @include container
+            
+            @include media-breakpoint-up(desktop)
                 @include sidebar-full-width
     
     @include media-breakpoint-up(sm)
