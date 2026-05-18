@@ -1,8 +1,10 @@
+{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" . }}
+
 <div class="section-sidebar exhibition-sidebar">
   <div>
-    {{ if site.Params.exhibitions.single.meta_in_sidebar }}
+    {{ if eq $meta_position "content" }}
       <aside>
-        {{- partial "exhibitions/single/infos.html" . -}}
+        {{- partial "events/single/meta.html" . -}}
       </aside>
     {{ end }}
     {{ partial "toc/container.html" (dict
