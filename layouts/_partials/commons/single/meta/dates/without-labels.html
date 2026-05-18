@@ -1,0 +1,16 @@
+<li class="published-at">
+  <p>
+    {{ if .with_published_at }}
+      <span class="sr-only">{{ i18n "commons.published_at" }}</span>
+      <time datetime="{{ .context.Date.Format "2006-01-02T15:04" }}">
+        {{- .context.Date | time.Format .format -}}
+      </time>
+    {{- end -}}
+    {{- if .with_updated_at -}}
+      , <span>{{ i18n "commons.update_at_inline" }}</span>
+      <time datetime="{{ .context.Params.lastmod.Format "2006-01-02T15:04" }}">
+        {{- .context.Params.lastmod | time.Format .format -}}
+      </time>
+    {{ end }}
+  </p>
+</li>
