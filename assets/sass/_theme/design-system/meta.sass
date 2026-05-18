@@ -16,11 +16,11 @@
     .share
         a
             text-decoration: none
-        @include media-breakpoint-up(desktop)
-            li:first-child
+        li
+            &:first-child
                 a
                     padding-left: 0
-            li:last-child
+            &:last-child
                 a
                     padding-right: 0
 
@@ -72,6 +72,9 @@
         
         .taxonomies
             padding-top: 0
+            &, 
+            > li:last-child
+                padding-bottom: 0
             li
                 margin-bottom: 0
             .taxonomy-children
@@ -126,6 +129,12 @@
         // padding before toc separator
         &.without-label
             padding-bottom: $spacing-3
+
+            // vertical alignment for meta in sidebar
+            &.content-meta
+                flex-direction: column
+                > li + li
+                    margin-top: $spacing-1
 
         &.content-meta.with-labels
             &, .taxonomies ul
