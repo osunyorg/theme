@@ -16,12 +16,13 @@
     .share
         a
             text-decoration: none
-        li:first-child
-            a
-                padding-left: 0
-        li:last-child
-            a
-                padding-right: 0
+        @include media-breakpoint-up(desktop)
+            li:first-child
+                a
+                    padding-left: 0
+            li:last-child
+                a
+                    padding-right: 0
 
     &.without-label
         gap: $spacing-1 $spacing-3
