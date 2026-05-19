@@ -38,6 +38,29 @@
                 margin-bottom: $spacing-1
             &.taxonomies
                 width: 100%
+                order: 2
+
+@mixin meta-without-labels-inline
+    &, .taxonomies > ul
+        display: flex
+        gap: $spacing-1 $spacing-3
+        flex-wrap: wrap
+        > li
+            > span
+                &:first-of-type
+                    @include sr-only
+
+        .authors
+            ul
+                display: flex
+                gap: space()
+                li:not(:last-child)
+                    span::after
+                        display: inline
+                        content: ','
+
+        .taxonomies-single
+            gap: $spacing-1
 
 .single-meta
     &, ul
@@ -73,32 +96,7 @@
         margin-top: $spacing-3
 
     &.without-label
-        gap: $spacing-1 $spacing-3
-        > ul
-            margin-top: $spacing-2
-        > li
-            > span
-                &:first-of-type
-                    @include sr-only
-
-        .updated-at,
-        .share
-            display: inline-flex
-
-        .updated-at
-            text-transform: lowercase
-            time
-                margin-left: space()
-
-        .authors
-            ul
-                li
-                    display: inline
-                    + li::before
-                        content: ' • '
-
-        .taxonomies-single
-            gap: $spacing-1
+        @include meta-without-labels-inline
 
     &.with-labels
         li > ul
