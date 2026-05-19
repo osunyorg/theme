@@ -28,9 +28,8 @@
 @mixin meta-with-labels-columns
     &, .taxonomies > ul
         align-items: baseline
-        display: flex
-        flex-wrap: wrap
         flex-direction: row
+        gap: var(--grid-gutter)
         > li
             width: columns(2)
             > span
@@ -42,9 +41,7 @@
 
 @mixin meta-without-labels-inline
     &, .taxonomies > ul
-        display: flex
-        gap: $spacing-1 $spacing-3
-        flex-wrap: wrap
+        gap: $spacing-2 $spacing-3
         > li
             > span
                 &:first-of-type
@@ -59,8 +56,9 @@
                         display: inline
                         content: ','
 
-        .taxonomies-single
-            gap: $spacing-1
+        .taxonomies
+            > ul
+                gap: $spacing-1
 
 .single-meta
     &, ul
@@ -77,6 +75,9 @@
         span:first-letter
             text-transform: capitalize
 
+    .taxonomies
+        width: 100%
+
     .social-share
         ul.share
             align-items: center
@@ -92,6 +93,10 @@
                     a
                         padding-right: 0
 
+    &, .taxonomies > ul
+        display: flex
+        flex-wrap: wrap
+
     &.hero-meta
         margin-top: $spacing-3
 
@@ -104,21 +109,7 @@
             flex-direction: column
             gap: space()
 
-        // with labels: horizontal flex by default (vertical in sidebar without label)
-        &, .taxonomies-single
-            gap: $spacing-3 var(--grid-gutter)
-            > .taxonomies
-                width: 100%
-
     @include media-breakpoint-down(desktop)
-        &.without-label
-            .taxonomies-single
-                display: flex
-                flex-wrap: wrap
-                padding-top: $spacing-2
-                > li
-                    padding: 0
-
         &.with-labels
             @include meta-with-labels-table
 
