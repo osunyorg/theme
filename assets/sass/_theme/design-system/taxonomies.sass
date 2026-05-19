@@ -102,12 +102,20 @@
         margin-top: var(--block-space-y)
         margin-bottom: var(--block-space-y)
         .taxonomies-single
+            &, ul
+                @include list-reset
             &.with-label
                 @include grid(3, desktop, $spacing-3)
             @include media-breakpoint-down(desktop)
                 margin-top: $spacing-5
                 > li + li
                         margin-top: $spacing-3
+            &.without-label
+                @include media-breakpoint-up(desktop)
+                    display: flex
+                    flex-wrap: wrap
+                    column-gap: $spacing-2
+                    margin-bottom: $spacing-3
             &.organizations-taxonomies
                 @include grid(2, desktop)
             &.pages-taxonomies,
