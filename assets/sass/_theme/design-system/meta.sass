@@ -53,10 +53,11 @@
                     a
                         padding-right: 0
 
+    &.hero-meta
+        margin-top: $spacing-3
+        
     &.without-label
         gap: $spacing-1 $spacing-3
-        > ul
-            margin-top: $spacing-2
         > li
             > span
                 margin-bottom: $spacing-1
@@ -79,6 +80,7 @@
 
         .taxonomies-single
             gap: $spacing-1
+            margin-top: $spacing-2
 
     &.with-labels
         li > ul
@@ -94,10 +96,11 @@
 
     @include media-breakpoint-down(desktop)
         &.without-label
+            > li + li
+                margin-top: $spacing-2
             .taxonomies-single
                 display: flex
                 flex-wrap: wrap
-                padding-top: $spacing-2
                 > li
                     padding: 0
 
