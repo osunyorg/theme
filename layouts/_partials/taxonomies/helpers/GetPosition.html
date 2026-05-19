@@ -2,11 +2,11 @@
 {{ if eq .Type "pages" }}
   {{ $kind = "single" }}
 {{ end }}
-{{ $param := (printf "%s.%s.meta.position" .Type $kind )}}
+{{ $param := (printf "%s.%s.taxonomies.position" .Type $kind )}}
 
 {{ $position := partial "helpers/param/GetSiteParamWithDefault" (dict 
   "param" $param
-  "default" (printf "default.%s.meta.position" $kind)
+  "default" (printf "default.%s.taxonomies.position" $kind)
 ) }}
 
 {{ return $position }}
