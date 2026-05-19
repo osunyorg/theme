@@ -33,7 +33,7 @@
         > span:first-of-type
             color: var(--color-text-alt)
         a
-            @include link(var(--color-text))
+            @include link(var(--color-accent))
 
     .reading-time
         span:first-letter
@@ -44,6 +44,7 @@
             align-items: center
             flex-direction: row
             a
+                @include link(inherit)
                 text-decoration: none
             li
                 &:first-child
@@ -146,8 +147,9 @@
                 > li + li
                     margin-top: $spacing-1
 
-        &.content-meta.with-labels
-            @include meta-as-table
+        &.with-labels
+            &.content-meta
+                @include meta-as-table
 
     @include in-page-without-sidebar
         &.with-labels
