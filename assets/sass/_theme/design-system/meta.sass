@@ -58,6 +58,8 @@
 
     &.without-label
         gap: $spacing-1 $spacing-3
+        > ul
+            margin-top: $spacing-2
         > li
             > span
                 margin-bottom: $spacing-1
@@ -80,7 +82,6 @@
 
         .taxonomies-single
             gap: $spacing-1
-            margin-top: $spacing-2
 
     &.with-labels
         li > ul
@@ -96,13 +97,15 @@
 
     @include media-breakpoint-down(desktop)
         &.without-label
-            > li + li
-                margin-top: $spacing-2
             .taxonomies-single
                 display: flex
                 flex-wrap: wrap
+                padding-top: $spacing-2
                 > li
                     padding: 0
+            
+            > li + li
+                margin-top: $spacing-1
 
         &.with-labels
             @include meta-as-table
@@ -127,6 +130,10 @@
         &.hero-meta
             margin-top: $spacing-4
             width: columns(6)
+
+        &.with-labels
+            .taxonomies-single
+                flex-direction: row
 
     @include in-page-with-sidebar
         // padding before toc separator
