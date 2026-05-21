@@ -1,0 +1,6 @@
+{{ $position := partial "helpers/param/GetSiteParamWithDefault" (dict
+  "param" (printf "%s.single.meta.position" .Type)
+  "default" "default.single.meta.position"
+) }}
+
+{{ return $position }}

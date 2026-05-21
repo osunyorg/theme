@@ -104,6 +104,8 @@ params:
     telegram: false
     twitter: false
     whatsapp: false
+    
+  date_format: ":date_long"
 
   # SECTIONS
   default:
@@ -113,8 +115,19 @@ params:
         layout: dropdown # dropdown | inline
         show_name: true
     single:
-      taxonomies:
+      meta:
         position: content
+        options:
+          authors: true
+          dates: true
+          published_at: true
+          reading_time: false
+          share: true
+          taxonomies: true
+          updated_at: true
+          with_labels: true
+      taxonomies: # for organizations, persons, events and exhibitions (to be removed with meta)
+        position: content # content | hero | none
         show_name: true
     sitemap:
       ignore_children: false
@@ -135,7 +148,6 @@ params:
           summary: true
   events:
     default_image: false
-    date_format: false # You can add date format to override the date from static (two_lines) 
     # sitemap:
     #   ignore_children: true
     index:
@@ -177,8 +189,11 @@ params:
       truncate_description: 200 # Set to 0 to disable truncate
       years: true
     single:
-      taxonomies:
+      meta:
         position: hero
+        options:
+          with_labels: false
+      taxonomies:
         show_name: false
       agenda:
         layout: agenda
@@ -192,7 +207,6 @@ params:
       calendar_links: false
       navigation:
         active: false
-      meta_in_sidebar: false
       summary:
         position: content # hero | content
       time_slots:
@@ -211,7 +225,6 @@ params:
     #   twitter: true
     #   whatsapp: false
   exhibitions:
-    date_format: false # You can add date format to override the date from static (two_lines) 
     default_image: false
     index:
       layout: grid # grid | list
@@ -226,7 +239,12 @@ params:
       truncate_description: 200 # Set to 0 to disable truncate
     single:
       calendar_links: false
-      meta_in_sidebar: false
+      meta:
+        position: hero
+        options:
+          with_labels: false
+      taxonomies:
+        show_name: false
     list:
       with_more: false
     # share_links: # Optional
@@ -251,10 +269,6 @@ params:
         dates: true
         with_more: true
       truncate_description: 200 # Set to 0 to disable truncate
-    single:
-      options:
-        authors: true
-        reading_time: true
   journals:
     index:
       layout: list
@@ -361,12 +375,12 @@ params:
         subtitle: true
       truncate_description: 200 # Set to 0 to disable truncate
     single:
+      meta:
+        options:
+          categories: false
+          reading_time: false
       options:
-        authors: true
-        published_at: true
-        reading_time: true
         signature: false
-        updated_at: true
     # share_links: # Optional
     #   enabled: true
     #   email: false
@@ -377,6 +391,7 @@ params:
     #   twitter: true
     #   whatsapp: false
   programs:
+    date_format: ":date_long"
     related_events:
       layout: list
       quantity: 4
@@ -410,7 +425,6 @@ params:
           image: false
           logo: false
           summary: false
-      date_format: ":date_long"
       options:
         diploma_certification: true
         logo: true
@@ -715,7 +729,11 @@ params:
           map: 
             mobile:   200
             tablet:   200
-            desktop:  200
+            desktop:  350
+          list:
+            mobile:   350
+            tablet:   555
+            desktop:  555
       organizations:
         hero:
           mobile:   400

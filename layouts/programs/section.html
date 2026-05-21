@@ -1,3 +1,9 @@
+{{ define "itemscope" }}
+  {{ if ne .File.Path "programs/_index.html" }}
+    itemscope itemtype="https://schema.org/EducationalOccupationalCredential"
+  {{ end }}
+{{ end }}
+
 {{ define "main" }}
   {{ if eq .File.Path "programs/_index.html" }}
     {{ partial "programs/section.html" . }}

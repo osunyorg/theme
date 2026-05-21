@@ -1,18 +1,11 @@
 {{ partial "jobs/single/hero.html" . }}
 
-<div class="document-content" itemscope itemtype="https://schema.org/JobPosting">
+<div class="document-content">
   <meta itemprop="title" content="{{ safeHTML .Title }}">
   <meta itemprop="url" content="{{ .Permalink }}">
   {{ with .Params.summary }}<meta itemprop="abstract" content="{{ . | safeHTML }}">{{ end }}
 
   {{ partial "jobs/single/sidebar.html" . }}
-
-  {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" . }}
-  {{ if and .Params.design.full_width .Params.taxonomies (eq $taxonomies_position "content") }}
-    <div class="container">
-      {{ partial "taxonomies/single/container.html" . }}
-    </div>
-  {{ end }}
 
   {{ partial "jobs/single/summary.html" (dict
     "context" .

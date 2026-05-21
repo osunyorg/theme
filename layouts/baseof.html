@@ -18,6 +18,7 @@
     <main id="main"
         {{ partial "main/helpers/GetClass" . | safeHTMLAttr }}
         {{ partial "main/helpers/GetSearchAttribute" . | safeHTMLAttr }}
+        {{ block "itemscope" . }}{{ end }}
         >
       {{ partial "commons/search/button.html" "fixed" }}
       {{ block "main" . }}{{ end }}

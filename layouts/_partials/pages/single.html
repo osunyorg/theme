@@ -1,3 +1,5 @@
+{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" . }}
+
 {{ partial "pages/single/hero.html" . }}
 
 <div class="document-content">
@@ -11,7 +13,7 @@
     "block_wrapped" true
   ) }}
 
-  {{ if and .Params.taxonomies (eq site.Params.pages.single.taxonomies.position "content") }}
+  {{ if and .Params.taxonomies (eq $meta_position "content") }}
     <div class="container taxonomies-container">
       {{ partial "taxonomies/single/list.html" . }}
     </div>

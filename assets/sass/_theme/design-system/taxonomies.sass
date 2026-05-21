@@ -1,13 +1,4 @@
-.taxonomies
-    @include list-reset
-    li
-        @include media-breakpoint-down(desktop)
-            margin-bottom: $spacing-3
-            a
-                display: block
-
 .taxonomies-section
-    @extend .taxonomies
     margin-top: var(--block-space-y)
     margin-bottom: var(--block-space-y)
     li
@@ -105,60 +96,27 @@
                             li
                                 width: columns(2)
 
-
-.taxonomies-single
-    &, ul
-        @include list-reset
-    li a
-        display: block
-    .taxonomy-title
-        @include meta
-    .hero &
-        margin-top: $spacing-4
-        display: block
-        a
-            @include small
-        &.with-label
-            > li
-                ul
-                    display: flex
-                    flex-wrap: wrap
-                    gap: $spacing-1
-                    text-align: right
-                @include media-breakpoint-up(xl)
-                    align-items: baseline
-                    display: flex
-                    justify-content: space-between
-            @include media-breakpoint-up(lg)
-                width: columns(4)
-    @include media-breakpoint-down(desktop)
-        .hero &, &
-            &.without-label
-                li, a
-                    display: inline
-                li
-                    padding-right: $spacing-1
-    @include media-breakpoint-up(desktop)
-        .hero &, &
-            &.without-label
-                display: flex
-                flex-wrap: wrap
-                column-gap: $spacing-2
-                margin-bottom: $spacing-3
-
 .document-content
     .taxonomies-container
         margin-top: var(--block-space-y)
         margin-bottom: var(--block-space-y)
         .taxonomies-single
+            &, ul
+                @include list-reset
             &.with-label
                 @include grid(3, desktop, $spacing-3)
-            ul, &
-                @include list-reset
+                .taxonomy-title
+                    @include meta
             @include media-breakpoint-down(desktop)
                 margin-top: $spacing-5
                 > li + li
                         margin-top: $spacing-3
+            &.without-label
+                @include media-breakpoint-up(desktop)
+                    display: flex
+                    flex-wrap: wrap
+                    column-gap: $spacing-2
+                    margin-bottom: $spacing-3
             &.organizations-taxonomies
                 @include grid(2, desktop)
             &.pages-taxonomies,
