@@ -160,6 +160,8 @@ dialog.pf-modal
     .pf-modal-aside
         .pf-summary
             margin-bottom: $spacing-2
+            &:empty
+                display: none
 
         .pf-filter-pane
             .pf-filter-group
@@ -229,10 +231,10 @@ dialog.pf-modal
                     @include sr-only
 
     @include media-breakpoint-down(desktop)
-        padding-top: space(40)
         .pf-modal-header
-            flex-direction: column
             align-items: flex-end
+            flex-direction: column
+            gap: $spacing-2
             &-content
                 width: 100%
             .pf-modal-close
