@@ -1,10 +1,11 @@
 {{ $events := partial "helpers/objects/GetFromPathSlice" .Params.children }}
+{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" . }}
 
 <div class="section-sidebar event-sidebar">
   <div>
-    {{ if site.Params.events.single.meta_in_sidebar }}
+    {{ if eq $meta_position "content" }}
       <aside>
-        {{- partial "events/single/infos.html" . -}}
+        {{- partial "events/single/meta.html" . -}}
       </aside>
     {{ end }}
     {{ partial "toc/container.html" (dict

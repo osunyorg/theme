@@ -7,8 +7,9 @@
   {{/* et pas non plus les pages enfants (parcours) */}}
   {{ $programs = where $programs "Params.parent" "eq" nil }}
   {{ $layout := site.Params.programs.index.layout | default "list" }}
+
   <ol class="programs programs--{{ $layout }}">
-    {{- range $programs -}}
+    {{- range $programs.ByTitle -}}
       {{ partial "programs/partials/program.html" (dict 
         "program" .
         "heading_level" 2

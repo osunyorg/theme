@@ -13,9 +13,8 @@
                 opacity: 1
 
 @mixin icon($icon-name: '', $pseudo-element: before, $non-breaking: false)
+    $icon-code: map-get($icons, $icon-name)
     &::#{$pseudo-element}
-        content: map-get($icons, $icon-name)
-        content: map-get($icons, $icon-name) #{/ ""} // Add ‘ / ""‘ to hide from screen reader
         font-family: 'Icon'
         font-style: normal
         font-variant: normal
@@ -23,12 +22,20 @@
         line-height: 1
         speak: never
         text-transform: none
+        @if $icons-custom
+            $icon-custom-code: map-get($icons-custom, $icon-name)
+            @if $icon-custom-code
+                font-family: $icons-custom-font-family
+                $icon-code: $icon-custom-code
         @if $non-breaking
             display: inline
             @if $pseudo-element == "after"
-                content: " #{map-get($icons, $icon-name)}"
+                content: " #{$icon-code}"
             @if $pseudo-element == "before"
-                content: "#{map-get($icons, $icon-name)} "
+                content: "#{$icon-code} "
+        @else
+            content: $icon-code
+            content: $icon-code #{/ ""} // Add ‘ / ""‘ to hide from screen reader
         @content // TODO : important de documenter ça
 
 @mixin icon-block($icon-name: '', $pseudo-element: before, $non-breaking: false)

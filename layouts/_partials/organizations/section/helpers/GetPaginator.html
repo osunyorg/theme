@@ -1,0 +1,3 @@
+{{ $organizations := .Pages.ByTitle | uniq }}
+{{ $paginator := .Paginate $organizations }}
+{{ return $paginator }}

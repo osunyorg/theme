@@ -1,8 +1,10 @@
+{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" . }}
+
 <div class="section-sidebar job-sidebar">
   <div>
-    {{ if not .Params.design.full_width }}
+    {{ if eq $meta_position "content" }}
       <aside>
-        {{- partial "jobs/single/job-infos.html" . -}}
+        {{- partial "jobs/single/meta.html" . -}}
       </aside>
     {{ end }}
     {{ partial "toc/container.html" (dict

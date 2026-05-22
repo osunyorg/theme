@@ -7,10 +7,10 @@
     var preferLang = getFirstBrowserLanguage(),
         url = '{{ .Permalink }}'; // default url
 
-    {{ with site.Languages }}
-      {{ range site.Languages }}
-        if (preferLang.indexOf('{{ . }}') > -1) {
-          url = '/{{ . }}/';
+    {{ with site.Home.AllTranslations }}
+      {{ range . }}
+        if (preferLang.indexOf('{{ .Language.Locale }}') > -1) {
+          url = '/{{ .Language.Locale }}/';
         }
       {{ end }}
     {{ end }}

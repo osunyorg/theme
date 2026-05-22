@@ -1,7 +1,9 @@
 {{ $result := "" }}
-{{ if site.Params.keycdn }}
-  {{ $result = partial "commons/image/helpers/get-url/Keycdn" . }}
-{{ else }}
-  {{ $result = partial "commons/image/helpers/get-url/Osuny" . }}
+{{ if or .media .url }}
+  {{ if site.Params.keycdn }}
+    {{ $result = partial "commons/image/helpers/get-url/Keycdn" . }}
+  {{ else }}
+    {{ $result = partial "commons/image/helpers/get-url/Osuny" . }}
+  {{ end }}
 {{ end }}
 {{ return $result }}

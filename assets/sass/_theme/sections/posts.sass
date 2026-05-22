@@ -267,23 +267,12 @@
                     margin-top: $spacing-3
 
     &.full-width
-        @include media-breakpoint-up(desktop)
-            .post-sidebar
-                @include container
-                > div
-                    display: flex
-                    align-items: start
-                    margin-bottom: $spacing-5
-                .toc-cta
-                    padding-right: 0
-                aside
-                    width: columns(5)
-                    flex-shrink: 0
+        .post-sidebar
             @include media-breakpoint-down(desktop)
-                margin-bottom: $spacing-5
-
-.post-infos
-    @include sidebar-infos
+                @include container
+            
+            @include media-breakpoint-up(desktop)
+                @include sidebar-full-width
 
 .related
     margin-top: $spacing-3
