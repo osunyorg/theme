@@ -11,7 +11,6 @@
         @include button-reset
         @include meta
         align-items: baseline
-        color: var(--color-text)
         display: flex
         gap: space()
         padding: 0
@@ -21,6 +20,7 @@
     &--primary, 
     &--upper-menu
         .pf-trigger-btn
+            color: $header-color
             @if not $search-button-header-text
                 .pf-trigger-text
                     @extend .sr-only
@@ -29,6 +29,7 @@
 
     &--footer
         .pf-trigger-btn
+            color: var(--color-text)
             @if not $search-button-footer-text
                 .pf-trigger-text
                     @extend .sr-only
@@ -37,6 +38,7 @@
 
     &--fixed
         .pf-trigger-btn
+            color: var(--color-text)
             @if not $search-button-fixed-text
                 .pf-trigger-text
                     @extend .sr-only
