@@ -1,0 +1,14 @@
+{{ if .file }}
+  {{ $file := partial "GetMedia" .file.id }}
+  {{ if $file }}
+    <figure>
+      <audio src="{{ $file.direct_url }}" controls title="{{ .title | safeHTML }}"></audio>
+      <figcaption>
+        {{ if .title }}
+          <p aria-hidden="true" id="{{- .described_by -}}">{{- safeHTML .title -}}</p>
+        {{ end }}
+        <p>{{ partial "commons/files/extension-and-size.html" $file }}</p>
+      </figcaption>
+    {{ end }}
+  </figure>
+{{ end }}

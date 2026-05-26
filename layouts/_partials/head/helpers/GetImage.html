@@ -1,5 +1,5 @@
 {{ $image := "" }}
-{{ with index site.Data.website site.Language.Lang "default" "shared_image" }}
+{{ with index hugo.Data.website site.Language.Name "default" "shared_image" }}
   {{ $image = partial "GetMedia" (index . "id") }}
 {{ end }}
 {{ with or .Params.shared_image .Params.image }}

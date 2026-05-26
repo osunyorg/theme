@@ -1,0 +1,9 @@
+{{ $is_organizations_block_present := false }}
+
+{{ range .Params.contents }}
+  {{- if eq .template "organizations" -}}
+    {{- $is_organizations_block_present = true -}}
+  {{ end }}
+{{ end }}
+
+{{ return $is_organizations_block_present }}

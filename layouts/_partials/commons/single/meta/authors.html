@@ -1,0 +1,8 @@
+{{ $with_authors := partial "helpers/param/GetSiteParamWithDefault" (dict
+  "param" (printf "%s.single.meta.options.authors" .Type)
+  "default" "default.single.meta.options.authors"
+) }}
+
+{{ if $with_authors }}
+  {{ partial "authors/partials/authors.html" . }}
+{{ end }}

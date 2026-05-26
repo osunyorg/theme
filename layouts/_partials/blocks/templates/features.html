@@ -2,6 +2,8 @@
 {{ $block_class := partial "blocks/helpers/GetClass" .block }}
 
 {{ with .block.data }}
+  {{ $options := .options }}
+
   <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
@@ -11,6 +13,7 @@
             {{ range . }}
               {{ partial "blocks/templates/features/feature.html" (dict
                 "feature" .
+                "options" $options
                 "heading_level" $block.ranks.children
               ) }}
             {{ end }}

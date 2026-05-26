@@ -36,6 +36,7 @@ osuny.Slider.classes = {
 osuny.Slider.prototype.setState = function () {
     this.state = {
         index: 0,
+        isInert: false,
         isFirst: true,
         isLast: false,
         slideBy: 1,
@@ -104,6 +105,8 @@ osuny.Slider.prototype.setup = function () {
 
     this.slides = this.list.querySelectorAll('.' + classes.slide);
 
+    this.state.isInert = this.slides.length < 2;
+
     this.container.style.setProperty('--slider-transition-duration', this.options.transition + 'ms');
 
     this.registerComponents();
@@ -111,6 +114,10 @@ osuny.Slider.prototype.setup = function () {
 
 osuny.Slider.prototype.registerComponents = function () {
     this.components = {};
+
+    if (this.state.isInert) {
+        return;
+    }
 
     ['arrows', 'pagination', 'autoplay'].forEach(function (name) {
         if (this.options[name]) {

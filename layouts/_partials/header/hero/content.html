@@ -1,10 +1,13 @@
+{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" .context }}
+
 <div class="content">
   <div class="hero-text">
     {{ partial "header/hero/content/text.html" . }}
-    {{ partial "header/hero/content/taxonomies.html" . }}
+    {{ if (eq $meta_position "hero") }}
+      {{ .meta }}
+    {{ end }}
     {{ partial "header/hero/content/actions.html" . }}
   </div>
-
   {{ if .hero_content_complement }}
     {{ .hero_content_complement }}
   {{ end }}
