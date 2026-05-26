@@ -1,10 +1,3 @@
-@mixin display-search-button-content
-    @if not $search-button-header-text
-        .pf-trigger-text
-            @extend .sr-only
-    @if $search-button-header-icon
-        @include icon(search-line, after)
-    
 .nav-search
     @include media-breakpoint-down(desktop)
         header#document-header &
@@ -12,7 +5,7 @@
                 padding-bottom: $spacing-3
                 padding-top: $spacing-3
                 width: 100%
-    
+
 .search-button
     .pf-trigger-btn
         @include button-reset
@@ -24,19 +17,31 @@
         padding: 0
     .pf-trigger-icon
         display: none
-    
+
     &--primary, 
     &--upper-menu
         .pf-trigger-btn
-            @include display-search-button-content
+            @if not $search-button-header-text
+                .pf-trigger-text
+                    @extend .sr-only
+            @if $search-button-header-icon
+                @include icon(search-line, after)
 
     &--footer
         .pf-trigger-btn
-            @include display-search-button-content
-    
+            @if not $search-button-footer-text
+                .pf-trigger-text
+                    @extend .sr-only
+            @if $search-button-footer-icon
+                @include icon(search-line, after)
+
     &--fixed
         .pf-trigger-btn
-            @include display-search-button-content
+            @if not $search-button-fixed-text
+                .pf-trigger-text
+                    @extend .sr-only
+            @if $search-button-fixed-icon
+                @include icon(search-line, after)
             align-items: center
             background: var(--color-background-alt)
             bottom: 0
@@ -185,13 +190,13 @@ dialog.pf-modal
                 padding: 0
                 legend
                     @include sr-only
-    
+
     @include media-breakpoint-up(desktop)
         .pf-input-wrapper
             width: columns(8)
             input
                 width: 100%
-        
+
         .pf-modal-header
             padding-top: $spacing-4
 
@@ -216,7 +221,7 @@ dialog.pf-modal
                 .pf-heading-chips
                     margin-top: $spacing-3
                     padding-left: offset(1)
-        
+
         .pf-modal-aside
             margin-left: offset(1)
             order: 2
@@ -239,7 +244,7 @@ dialog.pf-modal
                 width: 100%
             .pf-modal-close
                 order: -1
-        
+
         .pf-modal-aside
             .pf-filter-pane
                 .pf-filter-fieldset
