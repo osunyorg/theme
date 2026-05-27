@@ -1,5 +1,5 @@
 {{ if site.Params.search.active }}
-    <pagefind-modal>
+    <pagefind-modal reset-on-close="true">
     <div class="container">
       <pagefind-modal-header>
         <pagefind-input class="pf-input"></pagefind-input>
@@ -12,7 +12,7 @@
               <pagefind-filter-pane label="{{ i18n "commons.search.filters" }}"></pagefind-filter-pane>
             </div>
           </div>
-          <pagefind-results show-images hide-sub-results="true" class="pf-modal-results" max-results="10"></pagefind-results>
+          <pagefind-results show-images hide-sub-results="true" class="pf-modal-results" max-results="20"></pagefind-results>
         </div>
       </pagefind-modal-body>
       {{ partial "commons/search/hooks/before-modal-end.html" . }}
