@@ -11,6 +11,9 @@ window.osuny.Search = function (element) {
         detailsContainer: element.querySelector('.pf-filter-pane'),
         buttonsOpen: document.querySelectorAll('.pf-trigger-btn'),
         buttonClose: document.querySelector('.pf-modal-close'),
+        buttonSearchInType: document.querySelector('.search-button--taxonomies'),
+        pagefindInstance: window.PagefindComponents.getInstanceManager().getInstance('default'),
+        pagefindFilters: document.querySelector('pagefind-filter-pane'),
         triggerButton: null
     }
 
@@ -34,6 +37,10 @@ window.osuny.Search.prototype.listen = function () {
     
     if (this.elements.buttonClose) {
         this.elements.buttonClose.addEventListener('click', this.close.bind(this));
+    }
+
+    if (this.elements.buttonSearchInType) {
+        this.elements.buttonSearchInType.addEventListener('click', this.searchInType.bind(this));
     }
     
     window.addEventListener('keydown', function (event) {
@@ -69,6 +76,9 @@ window.osuny.Search.prototype.getDetails = function () {
 }
 
 window.osuny.Search.prototype.open = function () {
+    if (this.elements.buttonSearchInType) {
+        this.resetType();
+    }
     if (this.state.isMobile) {
         return;
     }
@@ -106,6 +116,18 @@ window.osuny.Search.prototype.setDetailsAttribute = function (open) {
 window.osuny.Search.prototype.updateDocumentAccessibility = function () {
     document.body.style.overflow = this.state.isOpened ? 'hidden' : 'auto';
     ariaHideBodyChildren(this.elements.root, this.state.isOpened);
+};
+
+window.osuny.Search.prototype.searchInType = function () {
+    var container = document.querySelector('.section-taxonomies-container'),
+        type = container.getAttribute('data-organization-title');
+    this.elements.pagefindInstance.triggerFilter('type', [type]);
+    this.elements.pagefindFilters.style.visibility = 'hidden';
+};
+
+window.osuny.Search.prototype.resetType = function () {
+    this.elements.pagefindInstance.triggerFilter('type', []);
+    this.elements.pagefindFilters.style.visibility = 'visible';
 };
 
 window.osuny.page.registerComponent({
