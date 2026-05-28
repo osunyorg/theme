@@ -1,6 +1,11 @@
-{{ with .Params.year }}
+{{ $with_year := partial "helpers/param/GetSiteParamWithDefault" (dict
+  "param" (printf "%s.single.meta.options.year" .Type)
+  "default" "default.single.meta.options.year"
+) }}
+
+{{ if and $with_year .Params.year }}
   <li class="year">
     <span>{{ i18n "projects.year" }}</span>
-    <time datetime="{{ . }}">{{ . }}</time>
+    <time datetime="{{ .Params.year }}">{{ .Params.year }}</time>
   </li>
 {{ end }}
