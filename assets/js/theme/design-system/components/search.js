@@ -120,9 +120,10 @@ window.osuny.Search.prototype.updateDocumentAccessibility = function () {
 
 window.osuny.Search.prototype.searchInType = function () {
     var container = document.querySelector('.section-taxonomies-container'),
-        type = container.getAttribute('data-organization-title');
+        type = container.getAttribute('data-filter-type');
+    console.log(type)
     this.elements.pagefindInstance.triggerFilter('type', [type]);
-    this.elements.pagefindFilters.style.visibility = 'hidden';
+    // this.elements.pagefindFilters.style.visibility = 'hidden';
 };
 
 window.osuny.Search.prototype.resetType = function () {
