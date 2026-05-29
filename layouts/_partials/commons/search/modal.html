@@ -1,14 +1,22 @@
 {{ if site.Params.search.active }}
-  {{ $pagefind_ui := resources.Get "js/vendors/pagefind-ui.js"  | fingerprint }}
-  <script src="{{ $pagefind_ui.Permalink }}" integrity="{{ $pagefind_ui.Data.Integrity }}"></script>
-
-  <div id="search" class="search" aria-hidden="true" aria-modal="true" role="dialog" aria-label="{{ i18n "commons.search.label" }}">
-    <button class="search__close popup-close" aria-label="{{ i18n "commons.search.close" }}">
-      {{ i18n "commons.search.close" }}
-    </button>
-    <p role="heading" aria-level="1" class="sr-only">{{ i18n "commons.search.title" }}</p>
-
-    {{ partial "commons/search/hooks/before-modal-end.html" . }}
-  </div>
-
+    <pagefind-modal reset-on-close="true">
+    <div class="container">
+      <pagefind-modal-header>
+        <pagefind-input class="pf-input"></pagefind-input>
+      </pagefind-modal-header>
+      <pagefind-modal-body>
+        <div class="pf-modal-content">
+          <div class="pf-modal-aside">
+            <div class="pf-modal-aside-content">
+              <pagefind-summary></pagefind-summary>
+              <pagefind-filter-pane label="{{ i18n "commons.search.filters" }}"></pagefind-filter-pane>
+            </div>
+          </div>
+          <pagefind-results show-images hide-sub-results="true" class="pf-modal-results" max-results="20"></pagefind-results>
+        </div>
+      </pagefind-modal-body>
+      {{ partial "commons/search/hooks/before-modal-end.html" . }}
+    </div>
+  </pagefind-modal>
+  <script src="/pagefind/pagefind-component-ui.js" defer async></script>
 {{ end }}
