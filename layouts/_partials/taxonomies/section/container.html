@@ -1,7 +1,5 @@
 {{ if .Params.section_taxonomies }}
-  {{ $type := partial "commons/search/helpers/GetFilterLabelByType" . }}
-  <div class="section-taxonomies-container" data-filter-type="{{ $type }}">
-    {{ partial "commons/search/button.html" "taxonomies" }}
+  <div class="section-taxonomies-container">
     {{ partial "taxonomies/section/list.html" . }}
   </div>
 {{ end }}
