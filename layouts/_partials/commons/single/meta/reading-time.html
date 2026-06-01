@@ -1,0 +1,8 @@
+{{ $reading_time := partial "helpers/param/GetSiteParamWithDefault" (dict
+  "param" (printf "%s.single.meta.options.reading_time" .Type)
+  "default" "default.single.meta.options.reading_time"
+) }}
+
+{{ if $reading_time }}
+  {{ partial "commons/single/reading-time.html" . }}
+{{ end }}

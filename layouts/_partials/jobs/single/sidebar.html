@@ -1,12 +1,17 @@
-<div class="section-sidebar job-sidebar">
-  <div>
-    {{ if not .Params.design.full_width }}
-      <aside>
-        {{- partial "jobs/single/job-infos.html" . -}}
-      </aside>
-    {{ end }}
-    {{ partial "toc/container.html" (dict
-      "context" .
-    ) }}
+{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" . }}
+{{ $meta_in_content := eq $meta_position "content" }}
+
+{{ if or .Params.design.toc.present $meta_in_content }}
+  <div class="section-sidebar job-sidebar">
+    <div>
+      {{ if eq $meta_position "content" }}
+        <aside>
+          {{- partial "jobs/single/meta.html" . -}}
+        </aside>
+      {{ end }}
+      {{ partial "toc/container.html" (dict
+        "context" .
+      ) }}
+    </div>
   </div>
-</div>
+{{ end }}

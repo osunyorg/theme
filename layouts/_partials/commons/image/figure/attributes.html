@@ -10,7 +10,7 @@
   class="{{ . }}"
 {{- end -}}
 
-{{- if or .image.text .image.credit -}}
+{{- if or .image.text .image.credit }}
   role="figure"
   aria-label="{{ .image.text | plainify | chomp }}
   {{- with .image.credit }}
