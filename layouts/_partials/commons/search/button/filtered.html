@@ -4,7 +4,8 @@
 ) }}
 {{ if and site.Params.search.active $search_in_index }}
   {{ $type_label := partial "commons/search/helpers/GetFilterLabelByType" .context }}
-  {{ $placeholder := i18n "commons.search.filtered_by.placeholder" $type_label }}
+  {{ $default_placeholder := i18n "commons.search.filtered_by.placeholder" $type_label }}
+  {{ $placeholder := i18n (printf "%s.index.search.label" .context.Type) | default $default_placeholder }}
   <pagefind-modal-trigger
     placeholder="{{ $placeholder }}"
     hide-shortcut="true"
