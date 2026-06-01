@@ -11,7 +11,7 @@ window.osuny.Search = function (element) {
         detailsContainer: element.querySelector('.pf-filter-pane'),
         buttonsOpen: document.querySelectorAll('.pf-trigger-btn'),
         buttonClose: document.querySelector('.pf-modal-close'),
-        buttonSearchInType: document.querySelector('.search-button--taxonomies'),
+        buttonSearchInType: document.querySelector('[data-search-in-type]'),
         pagefindInstance: window.PagefindComponents.getInstanceManager().getInstance('default'),
         pagefindFilters: document.querySelector('pagefind-filter-pane'),
         triggerButton: null
@@ -107,7 +107,7 @@ window.osuny.Search.prototype.close = function () {
 window.osuny.Search.prototype.setDetailsAttribute = function (open) {
     this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group'); 
     this.attribute = open ? 'open' : '';
-    
+
     this.details.forEach( function (detail) {
         detail.open = open;
     }.bind(this));
@@ -119,8 +119,8 @@ window.osuny.Search.prototype.updateDocumentAccessibility = function () {
 };
 
 window.osuny.Search.prototype.searchInType = function () {
-    var container = document.querySelector('.section-taxonomies-container'),
-        type = container.getAttribute('data-filter-type');
+    var type = this.elements.buttonSearchInType.getAttribute('data-search-in-type');
+    console.log(type)
     this.elements.pagefindInstance.triggerFilter('type', [type]);
     this.elements.pagefindFilters.style.visibility = 'hidden';
 };
