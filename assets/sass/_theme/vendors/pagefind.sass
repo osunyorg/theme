@@ -127,12 +127,17 @@
         display: block
         height: 100%
         overflow: hidden
-
+    .pf-modal-container
+        display: flex
+        flex-direction: column
+    .pf-modal-body
+        height: stretch
     .pf-modal-results
         overflow-y: auto
         height: 100%
         display: block
         padding-top: $spacing-2
+        padding-bottom: var(--grid-gutter)
         .pf-results
             @include list-reset
             > li + li
@@ -227,9 +232,6 @@
         .pf-modal-aside
             order: 2
             width: columns(3)
-            .pf-modal-aside-content
-                position: sticky
-                top: 0
             .pf-summary
                 margin-bottom: $spacing-3
             .pf-filter-pane
