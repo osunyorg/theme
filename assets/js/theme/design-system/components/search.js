@@ -12,10 +12,11 @@ window.osuny.Search = function (element) {
         buttonsOpen: document.querySelectorAll('.pf-trigger-btn'),
         buttonClose: document.querySelector('.pf-modal-close'),
         buttonSearchInType: document.querySelector('[data-search-in-type]'),
-        pagefindInstance: window.PagefindComponents.getInstanceManager().getInstance('default'),
         pagefindFilters: document.querySelector('pagefind-filter-pane'),
         triggerButton: null
-    }
+    };
+
+    this.pagefindInstance = window.PagefindComponents.getInstanceManager().getInstance('default');
 
     this.state = {
         isOpened: false,
@@ -51,6 +52,20 @@ window.osuny.Search.prototype.listen = function () {
         }
         focusTrap(event, this.elements.root, this.state.isOpened);
     }.bind(this), true);
+
+    this.updateSearchFiltersToAny();
+};
+
+window.osuny.Search.prototype.updateSearchFiltersToAny = function () {
+    this.pagefindInstance.on('search', function (term, filters) {
+        // Update the searchFilters instance to allow 'OR' : one or more of the conditions match.
+        // https://pagefind.app/docs/js-api-filtering/#using-compound-filters
+        this.pagefindInstance.searchFilters = {
+            type: {
+                any: filters.type
+            }
+        };
+    }.bind(this));
 };
 
 window.osuny.Search.prototype.resize = function () {
@@ -58,9 +73,6 @@ window.osuny.Search.prototype.resize = function () {
     if (this.state.isOpened) {
         if (isMobile()) {
             this.close();
-        }
-        else {
-            this.open();
         }
     }
 };
@@ -73,7 +85,7 @@ window.osuny.Search.prototype.getDetails = function () {
             detail.open = true;
         }.bind(this));
     }.bind(this), 200);
-}
+};
 
 window.osuny.Search.prototype.open = function () {
     if (this.elements.buttonSearchInType) {
@@ -120,12 +132,12 @@ window.osuny.Search.prototype.updateDocumentAccessibility = function () {
 
 window.osuny.Search.prototype.searchInType = function () {
     var type = this.elements.buttonSearchInType.getAttribute('data-search-in-type');
-    this.elements.pagefindInstance.triggerFilter('type', [type]);
+    this.pagefindInstance.triggerFilter('type', [type]);
     this.elements.pagefindFilters.style.visibility = 'hidden';
 };
 
 window.osuny.Search.prototype.resetType = function () {
-    this.elements.pagefindInstance.triggerFilter('type', []);
+    this.pagefindInstance.triggerFilter('type', []);
     this.elements.pagefindFilters.style.visibility = 'visible';
 };
 
