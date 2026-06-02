@@ -120,7 +120,6 @@ window.osuny.Search.prototype.updateDocumentAccessibility = function () {
 
 window.osuny.Search.prototype.searchInType = function () {
     var type = this.elements.buttonSearchInType.getAttribute('data-search-in-type');
-    console.log(type)
     this.elements.pagefindInstance.triggerFilter('type', [type]);
     this.elements.pagefindFilters.style.visibility = 'hidden';
 };
