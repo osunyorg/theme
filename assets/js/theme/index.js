@@ -1,4 +1,5 @@
 import './polyfills';
+import './utils/ecoindex';
 import './utils/utils';
 import './utils/realViewportDimensions';
 
