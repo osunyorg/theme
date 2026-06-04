@@ -192,12 +192,11 @@
                     content: ''
                 .pf-filter-group-count
                     display: none
-                
+
             .pf-filter-fieldset
                 margin: 0
                 padding: 0
-                legend
-                    @include sr-only
+
 
     @include media-breakpoint-up(desktop)
         .pf-input-wrapper
@@ -234,9 +233,8 @@
             width: columns(3)
             .pf-summary
                 margin-bottom: $spacing-3
-            .pf-filter-pane
-                .pf-filter-group-title
-                    @include sr-only
+            .pf-filter-group-title
+                @include sr-only
 
     @include media-breakpoint-down(desktop)
         .pf-modal-header
@@ -252,6 +250,8 @@
             .pf-filter-pane
                 .pf-filter-fieldset
                     margin-bottom: $spacing-3
+                    legend
+                        display: none
                 .pf-filter-group-name
                     @include icon(arrow-down-s-line, after)
                     align-items: baseline
