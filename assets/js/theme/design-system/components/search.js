@@ -89,7 +89,6 @@ window.osuny.Search.prototype.updateDocumentAccessibility = function () {
 
 
 window.osuny.Search.prototype.openFilters = function () {
-    console.log('open filter')
     this.toggleFilters(true);
 };
 
@@ -99,7 +98,7 @@ window.osuny.Search.prototype.closeFilters = function () {
 
 window.osuny.Search.prototype.toggleFilters = function (opened = true) {
     this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group');
-    console.log(this.details)
+
     this.details.forEach( function (detail) {
         detail.open = opened;
     }.bind(this));
