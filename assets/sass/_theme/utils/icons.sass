@@ -91,12 +91,16 @@
                 opacity: 1
                 transform: translateX(0)
 
-@mixin small-arrow-right-hover($target: "&")
+@mixin small-arrow-right-hover($target: "&", $opacity: false)
     #{$target}
         @include icon(arrow-right-line, after, true)
             display: inline-block
             transition: $arrow-duration $arrow-ease-transition
+            @if $opacity
+                opacity: 0
     &:hover 
         #{$target}
             &:after
                 transform: translateX($spacing-1)
+                @if $opacity
+                    opacity: 1
