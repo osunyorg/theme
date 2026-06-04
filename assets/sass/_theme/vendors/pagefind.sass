@@ -69,8 +69,9 @@
 
 .pf-modal
     @include meta
+    background: var(--color-background)
     border: 0
-    height: 100svh
+    height: 100vh
     padding: 0
     margin: 0
     max-height: unset
@@ -192,12 +193,11 @@
                     content: ''
                 .pf-filter-group-count
                     display: none
-                
+
             .pf-filter-fieldset
                 margin: 0
                 padding: 0
-                legend
-                    @include sr-only
+
 
     @include media-breakpoint-up(desktop)
         .pf-input-wrapper
@@ -234,9 +234,8 @@
             width: columns(3)
             .pf-summary
                 margin-bottom: $spacing-3
-            .pf-filter-pane
-                .pf-filter-group-title
-                    @include sr-only
+            .pf-filter-group-title
+                @include sr-only
 
     @include media-breakpoint-down(desktop)
         .pf-modal-header
@@ -252,6 +251,8 @@
             .pf-filter-pane
                 .pf-filter-fieldset
                     margin-bottom: $spacing-3
+                    legend
+                        display: none
                 .pf-filter-group-name
                     @include icon(arrow-down-s-line, after)
                     align-items: baseline
@@ -265,8 +266,14 @@
                     .pf-filter-group-name::after
                         transform: rotate(180deg)
 
-        .pf-result
-            &-image
-                display: none
-            &-excerpt
-                margin-top: $spacing-1
+        .pf-modal-content
+            display: flex
+            flex-direction: column
+        
+        .pf-modal-results
+            flex: 1
+            .pf-result
+                &-image
+                    display: none
+                &-excerpt
+                    margin-top: $spacing-1

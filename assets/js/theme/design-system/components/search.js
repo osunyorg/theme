@@ -1,5 +1,4 @@
 import { ariaHideBodyChildren } from '../../utils/a11y';
-import { focusTrap } from '../../utils/focus-trap';
 import { isMobile } from '../../utils/breakpoints';
 
 window.osuny = window.osuny || {};
@@ -7,10 +6,8 @@ window.osuny = window.osuny || {};
 window.osuny.Search = function (element) {
     this.elements = {
         root: element,
-        sections: [],
         detailsContainer: element.querySelector('.pf-filter-pane'),
-        buttonsOpen: document.querySelectorAll('.pf-trigger-btn'),
-        buttonClose: document.querySelector('.pf-modal-close'),
+        triggerButtons: document.querySelectorAll('.pf-trigger-btn'),
         buttonSearchInType: document.querySelector('[data-search-in-type]'),
         pagefindFilters: document.querySelector('pagefind-filter-pane'),
         triggerButton: null
@@ -24,34 +21,23 @@ window.osuny.Search = function (element) {
     };
 
     this.listen();
+    this.resize();
 };
 
 window.osuny.Search.prototype.listen = function () {
     window.addEventListener('resize', this.resize.bind(this));
-    
-    this.elements.buttonsOpen.forEach(button => {
-        button.addEventListener('click', (event) => {
-            this.elements.triggerButton = event.currentTarget;
-            this.open();
-        });
-    });
-    
-    if (this.elements.buttonClose) {
-        this.elements.buttonClose.addEventListener('click', this.close.bind(this));
-    }
 
     if (this.elements.buttonSearchInType) {
         this.elements.buttonSearchInType.addEventListener('click', this.searchInType.bind(this));
     }
-    
-    window.addEventListener('keydown', function (event) {
-        if (this.state.isOpened) {
-            if (event.keyCode === 27 || event.key === 'Escape') {
-                this.close();
-            }
-        }
-        focusTrap(event, this.elements.root, this.state.isOpened);
-    }.bind(this), true);
+
+    this.elements.triggerButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            this.elements.triggerButton = button;
+        }.bind(this));
+    }.bind(this));
+
+    this.elements.root.addEventListener('toggle', this.onToggle.bind(this));
 
     this.updateSearchFiltersToAny();
 };
@@ -70,75 +56,57 @@ window.osuny.Search.prototype.updateSearchFiltersToAny = function () {
 
 window.osuny.Search.prototype.resize = function () {
     this.state.isMobile = isMobile();
-    if (this.state.isOpened) {
-        if (isMobile()) {
-            this.close();
-        }
-    }
-};
-
-window.osuny.Search.prototype.getDetails = function () {
-    setTimeout(function() {
-        this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group');
-
-        this.details.forEach( function (detail) {
-            detail.open = true;
-        }.bind(this));
-    }.bind(this), 200);
-};
-
-window.osuny.Search.prototype.open = function () {
-    if (this.elements.buttonSearchInType) {
-        this.resetType();
-    }
+    this.elements.pagefindFilters.expanded = !this.state.isMobile;
     if (this.state.isMobile) {
-        return;
+        this.closeFilters();
+    } else {
+        this.openFilters();
     }
 
-    this.state.isOpened = true;
-    this.updateDocumentAccessibility();
-
-    setTimeout(function() {
-        this.setDetailsAttribute(this.state.isOpened);
-    }.bind(this), 300);
 };
 
-window.osuny.Search.prototype.close = function () {
-    this.state.isOpened = false;
-    this.setDetailsAttribute(this.state.isOpened);
-    this.updateDocumentAccessibility();
-
-    // focus clicked search button
-    if (this.elements.triggerButton) {
-        setTimeout(function() {
-            this.elements.triggerButton.focus();
-        }.bind(this), 300);
+window.osuny.Search.prototype.onToggle = function (event) {
+    this.state.isOpened = event.newState === 'open';
+    if (!this.state.isOpened) {
+        this.onClose();
     }
-}
+    this.resize();
+    this.updateDocumentAccessibility();
+};
 
-window.osuny.Search.prototype.setDetailsAttribute = function (open) {
-    this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group'); 
-    this.attribute = open ? 'open' : '';
 
-    this.details.forEach( function (detail) {
-        detail.open = open;
-    }.bind(this));
-}
+window.osuny.Search.prototype.onClose = function () {
+    if (this.elements.triggerButton) {
+        this.elements.triggerButton.focus();
+        this.elements.triggerButton = null;
+    }
+};
 
 window.osuny.Search.prototype.updateDocumentAccessibility = function () {
     document.body.style.overflow = this.state.isOpened ? 'hidden' : 'auto';
     ariaHideBodyChildren(this.elements.root, this.state.isOpened);
 };
 
+
+window.osuny.Search.prototype.openFilters = function () {
+    this.toggleFilters(true);
+};
+
+window.osuny.Search.prototype.closeFilters = function () {
+    this.toggleFilters(false);
+};
+
+window.osuny.Search.prototype.toggleFilters = function (opened = true) {
+    this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group');
+
+    this.details.forEach( function (detail) {
+        detail.open = opened;
+    }.bind(this));
+};
+
 window.osuny.Search.prototype.searchInType = function () {
     var type = this.elements.buttonSearchInType.getAttribute('data-search-in-type');
     this.pagefindInstance.triggerFilter('type', [type]);
-    this.elements.pagefindFilters.style.visibility = 'hidden';
-};
-
-window.osuny.Search.prototype.resetType = function () {
-    this.pagefindInstance.triggerFilter('type', []);
-    this.elements.pagefindFilters.style.visibility = 'visible';
 };
 
 window.osuny.page.registerComponent({
