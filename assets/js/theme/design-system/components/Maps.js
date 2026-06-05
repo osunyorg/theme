@@ -11,8 +11,6 @@ window.osuny = window.osuny || {};
 window.osuny.Map = function (element) {
     this.element = element;
     this.markers = [];
-    this.popups = [];
-    this.organizations = [];
     this.options = {
         popup: { maxWidth: 1000 }
     };
@@ -38,22 +36,20 @@ window.osuny.Map.prototype.loadFromJson = function (src) {
     fetch(src)
         .then(function (response) { return response.json(); })
         .then(function (data) {
-            self.organizations = data.organizations || [];
-            self.organizations.forEach(self.createMarkerFromData.bind(self));
-            if (self.popups.length === 1) {
-                self.map.openPopup(self.popups[0]);
-            }
-            self.fitToMapBounds();
-            self.setAccessibility();
-            self.setFilters();
+            (data.organizations || []).forEach(self.createMarkerFromData.bind(self));
+            self.finalize();
         });
 };
 
 window.osuny.Map.prototype.loadFromDom = function () {
-    this.elements = this.element.querySelectorAll('[data-longitude]');
-    this.elements.forEach(this.createMarkerFromElement.bind(this));
-    if (this.popups.length === 1) {
-        this.map.openPopup(this.popups[0]);
+    var elements = this.element.querySelectorAll('[data-longitude]');
+    elements.forEach(this.createMarkerFromElement.bind(this));
+    this.finalize();
+};
+
+window.osuny.Map.prototype.finalize = function () {
+    if (this.markers.length === 1) {
+        this.markers[0].openPopup();
     }
     this.fitToMapBounds();
     this.setAccessibility();
@@ -61,9 +57,9 @@ window.osuny.Map.prototype.loadFromDom = function () {
 };
 
 window.osuny.Map.prototype.resize = function () {
-    if (this.popups.length === 1) {
-        this.map.closePopup(this.popups[0]);
-        this.map.openPopup(this.popups[0]);
+    if (this.markers.length === 1) {
+        this.markers[0].closePopup();
+        this.markers[0].openPopup();
         this.fitToMapBounds();
     }
 };
@@ -142,13 +138,10 @@ window.osuny.Map.prototype.createMarkerFromElement = function (element) {
     if (!latitude || !longitude) {
         return;
     }
-    var title = element.getAttribute('data-title'),
-        filters = JSON.parse(element.getAttribute('data-filters') || '[]');
     this.addMarker([latitude, longitude], {
-        title: title,
-        filters: filters,
-        contentElement: element,
-        id: element.id || null
+        title: element.getAttribute('data-title'),
+        filters: JSON.parse(element.getAttribute('data-filters') || '[]'),
+        popupContent: element
     });
 };
 
@@ -161,64 +154,46 @@ window.osuny.Map.prototype.createMarkerFromData = function (org) {
     this.addMarker([lat, lng], {
         title: org.title,
         filters: org.categories || [],
-        contentElement: this.buildPopupContent(org)
+        popupContent: this.buildPopupHTML(org)
     });
 };
 
-window.osuny.Map.prototype.buildPopupContent = function (org) {
-    var article = document.createElement('article');
-    article.className = 'organization';
-    article.setAttribute('itemscope', '');
-    article.setAttribute('itemtype', 'https://schema.org/Organization');
-    article.setAttribute('data-title', org.title);
+window.osuny.Map.prototype.escape = function (value) {
+    return String(value).replace(/[&<>"']/g, function (c) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+};
 
-    var content = document.createElement('div');
-    content.className = 'organization-content';
-    var heading = document.createElement('h2');
-    heading.className = 'organization-title';
-    heading.setAttribute('itemprop', 'name');
-    var link = document.createElement('a');
-    link.href = org.url;
-    link.textContent = org.title;
-    heading.appendChild(link);
-    content.appendChild(heading);
-    article.appendChild(content);
-
+window.osuny.Map.prototype.buildPopupHTML = function (org) {
+    var title = this.escape(org.title);
+    var html = '<article class="organization" itemscope itemtype="https://schema.org/Organization">'
+        + '<div class="organization-content">'
+        + '<h2 class="organization-title" itemprop="name">'
+        + '<a href="' + this.escape(org.url) + '">' + title + '</a>'
+        + '</h2>'
+        + '</div>';
     if (org.logo) {
-        var media = document.createElement('div');
-        media.className = 'media media--logo';
-        var figure = document.createElement('figure');
-        figure.className = 'organization-logo organization-logo--default';
-        figure.setAttribute('role', 'figure');
-        figure.setAttribute('aria-label', org.title);
-        var img = document.createElement('img');
-        img.src = org.logo;
-        img.alt = org.title;
-        img.loading = 'lazy';
-        figure.appendChild(img);
-        media.appendChild(figure);
-        article.appendChild(media);
+        html += '<div class="media media--logo">'
+            + '<figure class="organization-logo organization-logo--default" role="figure" aria-label="' + title + '">'
+            + '<img src="' + this.escape(org.logo) + '" alt="' + title + '" loading="lazy">'
+            + '</figure>'
+            + '</div>';
     }
-
-    return article;
+    html += '</article>';
+    return html;
 };
 
 window.osuny.Map.prototype.addMarker = function (location, options) {
     var marker = new L.marker(location, {
-            title: options.title,
-            alt: '',
-            filters: options.filters
-        }),
-        popup = new L.Popup(location, this.options.popup);
+        title: options.title,
+        alt: '',
+        filters: options.filters
+    });
 
-    marker.id = options.id || ('leaflet-item-' + this.map._leaflet_id + this.markers.length);
-    options.contentElement.id = marker.id;
-    popup.setContent(options.contentElement);
+    marker.id = 'leaflet-item-' + this.map._leaflet_id + this.markers.length;
+    marker.bindPopup(options.popupContent, this.options.popup);
 
     this.map.addLayer(marker);
-    marker.bindPopup(popup);
-
-    this.popups.push(popup);
     this.markers.push(marker);
 };
 
@@ -273,13 +248,24 @@ window.osuny.Map.prototype.setAccessibility = function () {
 
     this.markers.forEach(this.setMarkerAccessibility);
 
-    this.map.on('popupopen', this.setPopupAccessibility.bind(this))
+    this.map.on('popupopen', this.setPopupAccessibility.bind(this));
 };
 
 window.osuny.Map.prototype.setPopupAccessibility = function (event) {
     var button = event.popup._closeButton,
-        content = event.popup._content;
-    button.setAttribute('aria-label', window.osuny.i18n.maps.popup_close + ' ' + content.getAttribute('data-title'));
+        markerTitle = (event.popup._source && event.popup._source.options.title) || '';
+    button.setAttribute('aria-label', window.osuny.i18n.maps.popup_close + ' ' + markerTitle);
+
+    // Update aria-controls on the icon to point at the popup container now that it exists.
+    var marker = event.popup._source,
+        icon = marker && marker._icon,
+        container = event.popup._container;
+    if (icon && container) {
+        if (!container.id) {
+            container.id = marker.id;
+        }
+        icon.setAttribute('aria-controls', container.id);
+    }
 };
 
 window.osuny.Map.prototype.setZoomAria = function (buttonKey, id, i18nKey) {
