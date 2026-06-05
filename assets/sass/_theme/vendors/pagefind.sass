@@ -26,6 +26,9 @@
                     @extend .sr-only
             @if $search-button-header-icon
                 @include icon(search-line, after)
+                    @if not $search-button-header-text
+                        padding: space(5)
+                        margin: space(-5)
 
     &--footer
         .pf-trigger-btn
@@ -94,10 +97,10 @@
                 display: none
 
     .pf-input-wrapper
-        @include icon(search-line, after)
+        @include body-text
         border-bottom: var(--border-width) solid var(--color-border)
         position: relative
-        &::after
+        @include icon(search-line, after)
             color: var(--color-text-alt)
             position: absolute
             right: 0
