@@ -2,27 +2,43 @@
 {{ $heading_level := .heading_level }}
 {{ $title := partial "organizations/partials/layouts/map/helpers/GetTitle" . }}
 {{ $aria_label := i18n "commons.maps.label" $title }}
+{{ $marker_icon := site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}
+
+{{/*  When the current page exposes a mapjson output, the map fetches its data from there
+      and skips inline marker rendering. Falls back to inline markers otherwise.  */}}
+{{ $mapjson := "" }}
+{{ with .context }}
+  {{ if or (eq .Type "organizations") (eq .Type "organizations_categories") }}
+    {{ with .OutputFormats.Get "mapjson" }}
+      {{ $mapjson = .RelPermalink }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
 <div class="organizations map"
     data-map
-    data-marker-icon="{{ site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}"
+    data-marker-icon="{{ $marker_icon }}"
+    {{ with $mapjson }}data-map-src="{{ . }}"{{ end }}
     role="region"
     aria-label="{{ $aria_label }}">
   {{ if and .options.filters .categories }}
     {{ partial "organizations/partials/layouts/map/filters-button.html" .html_id }}
   {{ end }}
 
-  {{- range .organizations }}
-    {{ with site.GetPage .path }}
-        {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
-        {{ if $address_geolocation }}
-          {{ partial "organizations/partials/organization.html" (dict
-            "organization" .
-            "layout" "map"
-            "options" $options
-            "with_geolocation" true
-            "heading_level" $heading_level
-          ) }}
+  {{ if not $mapjson }}
+    {{- range .organizations }}
+      {{ with site.GetPage .path }}
+          {{ $address_geolocation := .Params.contact_details.postal_address.geolocation }}
+          {{ if $address_geolocation }}
+            {{ partial "organizations/partials/organization.html" (dict
+              "organization" .
+              "layout" "map"
+              "options" $options
+              "with_geolocation" true
+              "heading_level" $heading_level
+            ) }}
+          {{ end }}
         {{ end }}
-      {{ end }}
-  {{ end -}}
+    {{ end -}}
+  {{ end }}
 </div>

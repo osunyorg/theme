@@ -12,6 +12,7 @@ window.osuny.Map = function (element) {
     this.element = element;
     this.markers = [];
     this.popups = [];
+    this.organizations = [];
     this.options = {
         popup: { maxWidth: 1000 }
     };
@@ -20,11 +21,43 @@ window.osuny.Map = function (element) {
 
 window.osuny.Map.prototype.init = function () {
     this.setMap();
-    this.setMarkers();
+    this.setMarkerIcon();
+
+    var src = this.element.getAttribute('data-map-src');
+    if (src) {
+        this.loadFromJson(src);
+    } else {
+        this.loadFromDom();
+    }
+
+    window.addEventListener('resize', this.resize.bind(this));
+};
+
+window.osuny.Map.prototype.loadFromJson = function (src) {
+    var self = this;
+    fetch(src)
+        .then(function (response) { return response.json(); })
+        .then(function (data) {
+            self.organizations = data.organizations || [];
+            self.organizations.forEach(self.createMarkerFromData.bind(self));
+            if (self.popups.length === 1) {
+                self.map.openPopup(self.popups[0]);
+            }
+            self.fitToMapBounds();
+            self.setAccessibility();
+            self.setFilters();
+        });
+};
+
+window.osuny.Map.prototype.loadFromDom = function () {
+    this.elements = this.element.querySelectorAll('[data-longitude]');
+    this.elements.forEach(this.createMarkerFromElement.bind(this));
+    if (this.popups.length === 1) {
+        this.map.openPopup(this.popups[0]);
+    }
     this.fitToMapBounds();
     this.setAccessibility();
     this.setFilters();
-    window.addEventListener('resize', this.resize.bind(this));
 };
 
 window.osuny.Map.prototype.resize = function () {
@@ -95,16 +128,6 @@ window.osuny.Map.prototype.filterMarkers = function (filters) {
     }.bind(this));
 };
 
-window.osuny.Map.prototype.setMarkers = function () {
-    this.setMarkerIcon();
-    this.elements = this.element.querySelectorAll('[data-longitude]');
-    this.elements.forEach(this.createMarker.bind(this));
-
-    if (this.popups.length === 1) {
-        this.map.openPopup(this.popups[0]);
-    }
-};
-
 window.osuny.Map.prototype.setMarkerIcon = function () {
     var url = this.element.getAttribute('data-marker-icon') || '/assets/images/map-marker.svg';
     L.Marker.prototype.options.icon = L.icon({
@@ -113,28 +136,84 @@ window.osuny.Map.prototype.setMarkerIcon = function () {
     });
 };
 
-window.osuny.Map.prototype.createMarker = function (element, opened) {
+window.osuny.Map.prototype.createMarkerFromElement = function (element) {
     var latitude = parseFloat(element.getAttribute('data-latitude')),
-        longitude = parseFloat(element.getAttribute('data-longitude')),
-        coordinates = [latitude, longitude];
-    if (Boolean(coordinates[0]) && Boolean(coordinates[1])) {
-        this.addMarker(coordinates, element, opened);
+        longitude = parseFloat(element.getAttribute('data-longitude'));
+    if (!latitude || !longitude) {
+        return;
     }
+    var title = element.getAttribute('data-title'),
+        filters = JSON.parse(element.getAttribute('data-filters') || '[]');
+    this.addMarker([latitude, longitude], {
+        title: title,
+        filters: filters,
+        contentElement: element,
+        id: element.id || null
+    });
 };
 
-window.osuny.Map.prototype.addMarker = function (location, element) {
-    var title = element.getAttribute('data-title'),
-        filters = element.getAttribute('data-filters') || '[]',
-        marker = new L.marker(location, {
-            title: title,
+window.osuny.Map.prototype.createMarkerFromData = function (org) {
+    var lat = parseFloat(org.lat),
+        lng = parseFloat(org.lng);
+    if (!lat || !lng) {
+        return;
+    }
+    this.addMarker([lat, lng], {
+        title: org.title,
+        filters: org.categories || [],
+        contentElement: this.buildPopupContent(org)
+    });
+};
+
+window.osuny.Map.prototype.buildPopupContent = function (org) {
+    var article = document.createElement('article');
+    article.className = 'organization';
+    article.setAttribute('itemscope', '');
+    article.setAttribute('itemtype', 'https://schema.org/Organization');
+    article.setAttribute('data-title', org.title);
+
+    var content = document.createElement('div');
+    content.className = 'organization-content';
+    var heading = document.createElement('h2');
+    heading.className = 'organization-title';
+    heading.setAttribute('itemprop', 'name');
+    var link = document.createElement('a');
+    link.href = org.url;
+    link.textContent = org.title;
+    heading.appendChild(link);
+    content.appendChild(heading);
+    article.appendChild(content);
+
+    if (org.logo) {
+        var media = document.createElement('div');
+        media.className = 'media media--logo';
+        var figure = document.createElement('figure');
+        figure.className = 'organization-logo organization-logo--default';
+        figure.setAttribute('role', 'figure');
+        figure.setAttribute('aria-label', org.title);
+        var img = document.createElement('img');
+        img.src = org.logo;
+        img.alt = org.title;
+        img.loading = 'lazy';
+        figure.appendChild(img);
+        media.appendChild(figure);
+        article.appendChild(media);
+    }
+
+    return article;
+};
+
+window.osuny.Map.prototype.addMarker = function (location, options) {
+    var marker = new L.marker(location, {
+            title: options.title,
             alt: '',
-            filters: JSON.parse(filters)
+            filters: options.filters
         }),
         popup = new L.Popup(location, this.options.popup);
 
-    marker.id = 'leaflet-item-' + this.map._leaflet_id + this.markers.length;
-    element.id = marker.id;
-    popup.setContent(element);
+    marker.id = options.id || ('leaflet-item-' + this.map._leaflet_id + this.markers.length);
+    options.contentElement.id = marker.id;
+    popup.setContent(options.contentElement);
 
     this.map.addLayer(marker);
     marker.bindPopup(popup);
@@ -164,6 +243,9 @@ window.osuny.Map.prototype.setMarkerAccessibility = function (marker) {
 };
 
 window.osuny.Map.prototype.fitToMapBounds = function () {
+    if (!this.markers.length) {
+        return;
+    }
     var group = L.featureGroup(this.markers).addTo(this.map);
     this.map.fitBounds(group.getBounds());
 };

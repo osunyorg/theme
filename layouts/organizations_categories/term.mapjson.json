@@ -1,0 +1,8 @@
+{{- $organizations := slice -}}
+{{- range .Pages -}}
+  {{- $organization := partial "organizations/helpers/GetMapMarker" (dict "organization" .) -}}
+  {{- with $organization -}}
+    {{- $organizations = $organizations | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- dict "title" .Title "organizations" $organizations | jsonify -}}

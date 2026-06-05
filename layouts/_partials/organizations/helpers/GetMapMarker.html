@@ -1,0 +1,31 @@
+{{/*
+  Builds a map marker dict for one organization page.
+  Returns nil if the organization has no geolocation.
+
+  @param organization Page  the organization page
+*/}}
+{{ $marker := "" }}
+{{ $organization := .organization }}
+{{ with $organization.Params.contact_details.postal_address.geolocation }}
+  {{ if and .latitude .longitude }}
+    {{ $logo_url := "" }}
+    {{ with $organization.Params.logo }}
+      {{ $media := partial "GetMedia" . }}
+      {{ with $media }}
+        {{ $logo_url = partial "commons/image/helpers/GetUrl" (dict
+          "media" .
+          "size" "200x0"
+        ) }}
+      {{ end }}
+    {{ end }}
+    {{ $marker = dict
+      "slug" $organization.File.ContentBaseName
+      "title" $organization.Title
+      "url" $organization.RelPermalink
+      "lat" .latitude
+      "lng" .longitude
+      "logo" $logo_url
+    }}
+  {{ end }}
+{{ end }}
+{{ return $marker }}

@@ -18,6 +18,24 @@ security:
     permissions:
       allowRead:
         - "*"
+outputFormats:
+  mapjson:
+    mediaType: application/json
+    baseName: map
+    isPlainText: true
+    notAlternative: true
+cascade:
+  - target:
+      path: /organizations
+    outputs:
+    - html
+    - rss
+    - mapjson
+  - target:
+      path: /organizations_categories/**
+    outputs:
+    - html
+    - mapjson
 params:
   additional_csp: ''
   debug:

@@ -1,4 +1,5 @@
 {{ $block := .block }}
+{{ $context := .context }}
 {{- $html_id := .html_id -}}
 {{ $block_class := partial "blocks/helpers/GetClass" .block }}
 {{- $logo_index := "logo" -}}
@@ -20,6 +21,7 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         {{ partial (printf "organizations/partials/layouts/%s/%s.html" $layout $layout) (dict
+          "context" $context
           "html_id" $html_id
           "heading_level" $block.ranks.children
           "title" $block.title
