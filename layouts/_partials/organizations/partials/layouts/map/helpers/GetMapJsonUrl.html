@@ -1,0 +1,9 @@
+{{ $url := "" }}
+{{ with . }}
+  {{ if or (eq .Type "organizations") (eq .Type "organizations_categories") }}
+    {{ with .OutputFormats.Get "mapjson" }}
+      {{ $url = .RelPermalink }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $url }}
