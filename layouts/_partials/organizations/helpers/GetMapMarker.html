@@ -1,9 +1,3 @@
-{{/*
-  Builds a map marker dict for one organization page.
-  Returns nil if the organization has no geolocation.
-
-  @param organization Page  the organization page
-*/}}
 {{ $marker := "" }}
 {{ $organization := .organization }}
 {{ with $organization.Params.contact_details.postal_address.geolocation }}
