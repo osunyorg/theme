@@ -9,9 +9,9 @@
             display: flex
             gap: $spacing-3
             justify-content: space-between
-            padding-top: $spacing-2
             padding-bottom: $spacing-2
             &:not(:first-child)
+                padding-top: $spacing-2
                 border-top: var(--border-width) solid var(--color-border)
             > ul
                 text-align: right
@@ -121,9 +121,6 @@
     @include media-breakpoint-down(desktop)
         &.with-labels
             @include meta-with-labels-table
-
-            > li:first-child
-                padding-top: 0
 
     @include media-breakpoint-up(desktop)
         // in hero: 6 cols bc of picture
