@@ -44,14 +44,22 @@ let pagefindExclude = `
     .persons-programs,
     .persons-publications,
     .post-sidebar,
-    .authors__term,
-    .authors__taxonomy,
-    .researchers__term,
-    .researchers__taxonomy,
-    .administrators__term,
-    .administrators__taxonomy,
-    .teachers__term,
-    .teachers__taxonomy`;
+    .events,
+    .exhibitions,
+    .jobs,
+    .journals,
+    .laboratories,
+    .organizations,
+    .pages,
+    .papers,
+    .persons,
+    .posts,
+    .programs,
+    .projects,
+    .publications,
+    .papers,
+    .schools,
+    .volumes`;
 
 function execute(string) {
     console.log("OSUNY runs " + string);
