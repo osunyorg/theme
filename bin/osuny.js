@@ -43,7 +43,15 @@ let pagefindExclude = `
     .persons-posts,
     .persons-programs,
     .persons-publications,
-    .post-sidebar`;
+    .post-sidebar,
+    .authors__term,
+    .authors__taxonomy,
+    .researchers__term,
+    .researchers__taxonomy,
+    .administrators__term,
+    .administrators__taxonomy,
+    .teachers__term,
+    .teachers__taxonomy`;
 
 function execute(string) {
     console.log("OSUNY runs " + string);
