@@ -6,6 +6,7 @@
     background: var(--color-background);
     padding: 20px;
     z-index: 9999;
+    display: none;
   }
 </style>
 
@@ -21,7 +22,9 @@
   });
 
   function countHtmlTags() {
-    var count = document.querySelectorAll('*').length;
-    document.querySelector('.d-tags p').innerText = 'Nombre de balises html : ' + count;
+    var count = document.querySelectorAll('*').length,
+      container = document.querySelector('.d-tags');
+    container.querySelector('p').innerText = 'Nombre de balises html : ' + count;
+    container.style.display = 'block';
   }
 </script>
