@@ -7,7 +7,7 @@
 {{ with .context.Summary }}
 <description>
   {{ printf "<![CDATA[" | safeHTML }}
-    {{ . }}
+    {{ . | transform.XMLEscape | safeHTML  }}
   {{ printf "]]>" | safeHTML }}
 </description>
 {{ end -}}
