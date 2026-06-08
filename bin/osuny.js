@@ -43,7 +43,23 @@ let pagefindExclude = `
     .persons-posts,
     .persons-programs,
     .persons-publications,
-    .post-sidebar`;
+    .post-sidebar,
+    .events,
+    .exhibitions,
+    .jobs,
+    .journals,
+    .laboratories,
+    .organizations,
+    .pages,
+    .papers,
+    .persons,
+    .posts,
+    .programs,
+    .projects,
+    .publications,
+    .papers,
+    .schools,
+    .volumes`;
 
 function execute(string) {
     console.log("OSUNY runs " + string);
