@@ -1,5 +1,5 @@
 {{ $context := .context }}
-{{ $link_class := .link_class }}
+{{ $link_class := "" }}
 {{ $attributes := "" }}
 {{ if in .item.descendants_targets $context.RelPermalink }}
   {{ $link_class = printf "%s %s" $link_class "has-children-active" }}

@@ -10,6 +10,7 @@
     .pf-trigger-btn
         @include button-reset
         @include meta
+        color: inherit
         align-items: baseline
         display: flex
         gap: space()
@@ -26,6 +27,9 @@
                     @extend .sr-only
             @if $search-button-header-icon
                 @include icon(search-line, after)
+                    @if not $search-button-header-text
+                        padding: space(5)
+                        margin: space(-5)
 
     &--footer
         .pf-trigger-btn
@@ -70,6 +74,7 @@
 .pf-modal
     @include meta
     background: var(--color-background)
+    color: var(--color-text)
     border: 0
     height: 100vh
     padding: 0
@@ -87,6 +92,7 @@
         padding-top: var(--grid-gutter)
         .pf-modal-close
             @include icon(close-line)
+            color: inherit
             font-size: space(6)
             padding: 0
             text-align: right
@@ -94,10 +100,10 @@
                 display: none
 
     .pf-input-wrapper
-        @include icon(search-line, after)
+        @include body-text
         border-bottom: var(--border-width) solid var(--color-border)
         position: relative
-        &::after
+        @include icon(search-line, after)
             color: var(--color-text-alt)
             position: absolute
             right: 0
@@ -110,6 +116,7 @@
         input
             @include button-reset
             @include body-text
+            color: inherit
             padding: $spacing-1 $spacing-3 $spacing-1 0
             width: 100%
             &:focus,
@@ -140,7 +147,6 @@
         padding-top: $spacing-2
         padding-bottom: var(--grid-gutter)
         .pf-results
-            @include list-reset
             > li + li
                 margin-top: $spacing-3
         .pf-result
@@ -162,12 +168,12 @@
                 &:hover
                     @include link
             .pf-heading-chips
-                @include list-reset
                 padding-left: $spacing-2
                 margin-top: $spacing-2
                 > li + li
                     margin-top: $spacing-1
         mark
+            color: inherit
             background: var(--color-background-alt)
             font-weight: normal
 

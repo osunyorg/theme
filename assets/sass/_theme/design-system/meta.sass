@@ -9,16 +9,17 @@
             display: flex
             gap: $spacing-3
             justify-content: space-between
-            padding-top: $spacing-2
             padding-bottom: $spacing-2
             &:not(:first-child)
+                padding-top: $spacing-2
                 border-top: var(--border-width) solid var(--color-border)
             > ul
                 text-align: right
             &.taxonomies
                 padding-top: 0
                 padding-bottom: 0
-
+        li.terms:first-child
+            padding-top: 0
         .taxonomy-title
             text-align: left
 
@@ -43,7 +44,10 @@
             > span
                 &:first-of-type
                     @include sr-only
-
+            &.taxonomies
+                order: 2
+            &.social-share
+                order: 3
         .authors
             ul
                 display: flex
@@ -65,9 +69,6 @@
 .single-meta
     &:empty
         display: none
-
-    &, ul
-        @include list-reset
 
     li
         @include meta
@@ -93,10 +94,10 @@
             li
                 &:first-child
                     a
-                        padding-left: 0
+                        margin-left: -$spacing-2
                 &:last-child
                     a
-                        padding-right: 0
+                        margin-right: -$spacing-2
 
     &, .taxonomies > ul
         display: flex
@@ -117,9 +118,6 @@
     @include media-breakpoint-down(desktop)
         &.with-labels
             @include meta-with-labels-table
-
-            > li:first-child
-                padding-top: 0
 
     @include media-breakpoint-up(desktop)
         // in hero: 6 cols bc of picture

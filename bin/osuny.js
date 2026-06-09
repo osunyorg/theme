@@ -43,7 +43,23 @@ let pagefindExclude = `
     .persons-posts,
     .persons-programs,
     .persons-publications,
-    .post-sidebar`;
+    .post-sidebar,
+    .events,
+    .exhibitions,
+    .jobs,
+    .journals,
+    .laboratories,
+    .organizations,
+    .pages,
+    .papers,
+    .persons,
+    .posts,
+    .programs,
+    .projects,
+    .publications,
+    .papers,
+    .schools,
+    .volumes`;
 
 function execute(string) {
     console.log("OSUNY runs " + string);
@@ -55,6 +71,7 @@ if (command === "watch") {
 }
 
 if (command === "dev") {
+    execute("rm -rf public");
     execute("hugo");
     execute("npx pagefind --site 'public' --output-subdir '../static/pagefind' --glob '**/index.{html}' --exclude-selectors '" + pagefindExclude + "'");
     execute("hugo server --minify");
