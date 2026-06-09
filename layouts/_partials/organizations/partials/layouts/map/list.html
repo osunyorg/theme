@@ -2,17 +2,23 @@
 {{ $aria_label := i18n "commons.maps.label" $title }}
 {{ $marker_icon := site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}
 {{ $mapjson := partial "organizations/partials/layouts/map/helpers/GetMapJsonUrl" .context }}
+{{ $organizations := partial "helpers/objects/GetFromPathSlice" .organizations }}
+{{ $json := partial "organizations/helpers/GetMapJson" (dict
+  "title" $title
+  "organizations" $organizations
+) }}
 
 <div class="organizations map"
     data-map
     data-marker-icon="{{ $marker_icon }}"
     {{ with $mapjson }}data-map-src="{{ . }}"{{ end }}
+    {{ with $json }}data-map-json="{{ . }}"{{ end }}
     role="region"
     aria-label="{{ $aria_label }}">
   {{ if and .options.filters .categories }}
     {{ partial "organizations/partials/layouts/map/filters-button.html" .html_id }}
   {{ end }}
-  {{ if not $mapjson }}
+  {{ if and (not $mapjson) (not $json) }}
     {{ partial "organizations/partials/layouts/map/inline-markers.html" . }}
   {{ end }}
 </div>

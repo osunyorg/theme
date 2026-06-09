@@ -20,25 +20,34 @@ window.osuny.Map = function (element) {
 window.osuny.Map.prototype.init = function () {
     this.setMap();
     this.setMarkerIcon();
-
-    var src = this.element.getAttribute('data-map-src');
-    if (src) {
-        this.loadFromJson(src);
-    } else {
-        this.loadFromDom();
-    }
+    this.selectSource();
 
     window.addEventListener('resize', this.resize.bind(this));
 };
 
-window.osuny.Map.prototype.loadFromJson = function (src) {
-    var self = this;
+window.osuny.Map.prototype.selectSource = function () {
+    var src = this.element.getAttribute('data-map-src'),
+        json = this.element.getAttribute('data-map-json');
+
+    if (json) {
+        var data = JSON.parse(json);
+        this.loadFromJson(data);
+    } else if (src) {
+        this.fetchJson(src);
+    } else {
+        this.loadFromDom();
+    }
+};
+
+window.osuny.Map.prototype.fetchJson = function (src) {
     fetch(src)
         .then(function (response) { return response.json(); })
-        .then(function (data) {
-            (data.organizations || []).forEach(self.createMarkerFromData.bind(self));
-            self.finalize();
-        });
+        .then(this.loadFromJson.bind(this, data));
+};
+
+window.osuny.Map.prototype.loadFromJson = function (data) {
+    (data.organizations || []).forEach(this.createMarkerFromData.bind(this));
+    this.finalize();
 };
 
 window.osuny.Map.prototype.loadFromDom = function () {
