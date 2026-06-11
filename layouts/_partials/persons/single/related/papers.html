@@ -1,5 +1,5 @@
 {{ $researcher := site.GetPage (printf "/researchers/%s" .Slug) }}
-{{ $papers := where $researcher.Pages "Section" "papers" }}
+{{ $papers := partial "persons/single/helpers/GetPapers" . }}
 
 {{ if $papers }}
   <section class="persons-papers">

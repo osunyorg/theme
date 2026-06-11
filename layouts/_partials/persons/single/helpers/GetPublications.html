@@ -1,0 +1,6 @@
+{{ $researcher := site.GetPage (printf "/researchers/%s" .Slug) }}
+{{ $publications := slice }}
+{{ with $researcher }}
+  {{ $publications = .Params.publications }}
+{{ end }}
+{{ return $publications }}

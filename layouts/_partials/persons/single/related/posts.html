@@ -1,5 +1,5 @@
 {{ $author := site.GetPage (printf "/authors/%s" .Slug) }}
-{{ $posts := where $author.Pages "Section" "posts" }}
+{{ $posts := partial "persons/single/helpers/GetPosts" . }}
 {{ $layout := site.Params.posts.index.layout }}
 {{ $options := site.Params.posts.index.options }}
 
