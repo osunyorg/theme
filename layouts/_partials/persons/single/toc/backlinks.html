@@ -1,0 +1,27 @@
+{{ with .Params.backlinks.current_website }}
+  {{ if .exhibitions }}
+    <li>
+      <a {{ partial "helpers/anchor/GetAttribute" (i18n "commons.toc.backlinks.exhibitions") }}>{{ i18n "commons.toc.backlinks.exhibitions" }}</a>
+    </li>
+  {{ end }}
+  {{ if .events }}
+    <li>
+      <a {{ partial "helpers/anchor/GetAttribute" (i18n "commons.toc.backlinks.events") }}>{{ i18n "commons.toc.backlinks.events" }}</a>
+    </li>
+  {{ end }}
+  {{ if .pages }}
+    <li>
+      <a {{ partial "helpers/anchor/GetAttribute" (i18n "commons.toc.backlinks.pages") }}>{{ i18n "commons.toc.backlinks.pages" }}</a>
+    </li>
+  {{ end }}
+  {{ if .projects }}
+    <li>
+      <a {{ partial "helpers/anchor/GetAttribute" (i18n "commons.toc.backlinks.projects") }}>{{ i18n "commons.toc.backlinks.projects" }}</a>
+    </li>
+  {{ end }}
+  {{ if .posts }}
+    <li>
+      <a {{ partial "helpers/anchor/GetAttribute" (i18n "commons.toc.backlinks.posts") }}>{{ i18n "commons.toc.backlinks.posts" }}</a>
+    </li>
+  {{ end }}
+{{ end }}
