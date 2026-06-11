@@ -1,6 +1,6 @@
 {{ $researcher := site.GetPage (printf "/researchers/%s" .Slug) }}
 {{ $papers := slice }}
 {{ with $researcher }}
-  {{ $papers =  where .Pages "Section" "papers" }}
+  {{ $papers = where .Pages "Section" "papers" }}
 {{ end }}
 {{ return $papers }}
