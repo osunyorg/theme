@@ -1,24 +1,31 @@
 {{ $researcher := site.GetPage (printf "/researchers/%s" .Slug) }}
 {{ $publications_grouped := partial "persons/single/helpers/GetPublications" . }}
-{{ range $index, $group := $publications_grouped }}
-  {{/*  Research.publications give publications grouped by types  */}}
-  {{ $publications := partial "publications/helpers/FilterByAnrProjectReferences" .publications }}
-  {{ if $publications }}
-    <section class="person-publications person-publications-{{ $group.type }}" id="{{ anchorize $group.type }}">
-      <div class="top">
-        <h2 class="h5">{{ $group.label }}</h2>
+{{ if $publications_grouped }}
+<section class="person-publications" id="{{ anchorize ( i18n "persons.publications" ) }}">
+  <div class="top">
+    <h2 class="h5">{{ i18n "persons.publications" }}</h2>
+  </div>
+  {{ range $index, $group := $publications_grouped }}
+    {{/*  Research.publications give publications grouped by types  */}}
+    {{ $publications := partial "publications/helpers/FilterByAnrProjectReferences" .publications }}
+    {{ if $publications }}
+      <div class="person-publications-type person-publications-type-{{ $group.type }}" id="{{ anchorize $group.type }}">
+        <div class="top">
+          <h3 class="h5">{{ $group.label }}</h3>
+        </div>
+        <ul class="publications">
+          {{ range $publications }}
+            {{ $publication := site.GetPage .path }}
+            {{ partial "publications/partials/publication.html" (dict 
+              "publication" $publication
+              "heading_level" 4
+              "researcher" $researcher
+            ) }}
+          {{ end }}
+        </ul>
       </div>
-      <ul class="publications">
-        {{ range $publications }}
-          {{ $publication := site.GetPage .path }}
-          {{ partial "publications/partials/publication.html" (dict 
-            "publication" $publication
-            "heading_level" 3
-            "researcher" $researcher
-          ) }}
-        {{ end }}
-      </ul>
-    </section>
+    {{ end }}
   {{ end }}
+</section>
 
 {{ end }}

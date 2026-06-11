@@ -1,11 +1,14 @@
 {{ $publications := partial "persons/single/helpers/GetPublications" . }}
 {{ if $publications }}
+  {{ $title := i18n "persons.toc.publications" }}
   <li>
-    <span>{{ i18n "persons.toc.publications" }}</span>
-    <ul>
+    <a {{ partial "helpers/anchor/GetAttribute" $title }}>{{ $title }}</a>
+    <ol>
       {{ range $publications }}
-        <a {{ partial "helpers/anchor/GetAttribute" .type }}>{{ .label }}</a>
+        <li>
+          <a {{ partial "helpers/anchor/GetAttribute" .type }}>{{ .label }}</a>
+        </li>
       {{ end }}
-    </ul>
+    </ol>
   </li>
 {{ end }}

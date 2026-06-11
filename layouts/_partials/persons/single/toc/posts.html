@@ -1,0 +1,6 @@
+{{ $posts := partial "persons/single/helpers/GetPosts" . }}
+{{ if $posts }}
+  <li>
+    <a {{ partial "helpers/anchor/GetAttribute" (i18n "persons.toc.posts") }}>{{ i18n "persons.toc.posts" }}</a>
+  </li>
+{{ end }}
