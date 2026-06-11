@@ -2,17 +2,16 @@
 {{ partial "organizations/single/pagefind.html" . }}
 
 <div class="document-content">
-  {{ partial "toc/container.html" (dict
-    "context" .
-  ) }}
   <div class="container">
     <div itemprop="articleBody">
       {{ partial "organizations/single/summary.html" (dict
-        "context" .
+      "context" .
       ) }}
+      {{ $meta_position := partial "commons/single/meta/helpers/GetPosition" . }}
+      {{ if eq $meta_position "content" }}
+        {{ partial "organizations/single/meta.html" . }}
+      {{ end }}
       {{ partial "organizations/single/presentation.html" . }}
-      {{ partial "taxonomies/single/container.html" . }}
-      {{ partial "commons/contact-details.html" (dict "subject" .) }}
     </div>
     {{ partial "organizations/partials/logo.html" . }}
   </div>
