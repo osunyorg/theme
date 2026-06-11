@@ -4,8 +4,10 @@
 <div class="document-content">
   {{ partial "toc/container.html" (dict
     "context" .
+    "toc" ( partial "persons/single/toc.html" . )
   ) }}
-  <div itemscope itemtype="https://schema.org/Person" class="container">
+
+  <div class="container">
     {{ partial "persons/single/meta.html" . }}
     {{ partial "persons/single/informations.html" . }}
     {{ partial "taxonomies/single/container.html" . }}
