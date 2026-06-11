@@ -1,8 +1,8 @@
-{{- $is_block_programs_present := false -}}
+{{ $is_block_programs_present := false }}
 
 {{ range .Params.contents }}
-  {{- if eq .template "programs" -}}
-    {{- $is_block_programs_present = true -}}
+  {{ if eq .template "programs" }}
+    {{ $is_block_programs_present = true }}
   {{ end }}
 {{ end }}
 
