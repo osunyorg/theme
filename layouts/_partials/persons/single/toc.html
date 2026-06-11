@@ -5,5 +5,8 @@
     {{ partial "persons/single/toc/publications.html" . }}
     {{ partial "persons/single/toc/posts.html" . }}
     {{ partial "persons/single/toc/papers.html" . }}
+    {{ if site.Params.persons.single.backlinks }}
+      {{ partial "persons/single/toc/backlinks.html" . }}
+    {{ end }}
   </ol>
 </nav>
