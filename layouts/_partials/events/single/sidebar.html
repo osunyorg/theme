@@ -2,17 +2,15 @@
 {{ $meta_position := partial "commons/single/meta/helpers/GetPosition" . }}
 
 <div class="section-sidebar event-sidebar">
-  <div>
-    {{ if eq $meta_position "content" }}
-      <aside>
-        {{- partial "events/single/meta.html" . -}}
-      </aside>
-    {{ end }}
-    {{ partial "toc/container.html" (dict
-      "context" .
-    ) }}
-    {{ if $events }}
-      <a href="#programme" class="btn programme-btn">{{ i18n "events.see_programme" }}</a>
-    {{ end }}
-  </div>
+  {{ if eq $meta_position "content" }}
+    <aside>
+      {{- partial "events/single/meta.html" . -}}
+    </aside>
+  {{ end }}
+  {{ partial "toc/container.html" (dict
+    "context" .
+  ) }}
+  {{ if $events }}
+    <a href="#programme" class="btn programme-btn">{{ i18n "events.see_programme" }}</a>
+  {{ end }}
 </div>
