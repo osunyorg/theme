@@ -1,18 +1,14 @@
 {{ $title := partial "organizations/partials/layouts/map/helpers/GetTitle" . }}
 {{ $aria_label := i18n "commons.maps.label" $title }}
 {{ $marker_icon := site.Params.organizations.map_marker_icon | default "/assets/images/map-marker.svg" }}
-{{ $mapjson := partial "organizations/partials/layouts/map/helpers/GetMapJsonUrl" .context }}
 
 <div class="organizations map"
-    data-map
-    data-marker-icon="{{ $marker_icon }}"
-    {{ with $mapjson }}data-map-src="{{ . }}"{{ end }}
-    role="region"
-    aria-label="{{ $aria_label }}">
+  data-map
+  data-marker-icon="{{ $marker_icon }}"
+  role="region"
+  aria-label="{{ $aria_label }}">
   {{ if and .options.filters .categories }}
     {{ partial "organizations/partials/layouts/map/filters-button.html" .html_id }}
   {{ end }}
-  {{ if not $mapjson }}
-    {{ partial "organizations/partials/layouts/map/inline-markers.html" . }}
-  {{ end }}
+  {{ partial "organizations/partials/layouts/map/inline-markers.html" . }}
 </div>
