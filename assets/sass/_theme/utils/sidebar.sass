@@ -58,10 +58,9 @@
         height: 100%
         position: absolute
         width: columns(4)
-        & > div
-            @include sticky($spacing-3)
         .toc-container
-            position: static
+            @include sticky(calc(var(--border-width) * -1))
+            height: auto
             margin-left: 0
         &:has(aside)
             .toc-container

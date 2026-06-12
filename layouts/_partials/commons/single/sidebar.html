@@ -6,7 +6,7 @@
 
 {{ if or $context.Params.design.toc.present $meta_in_content }}
   <div class="section-sidebar {{ $type }}-sidebar">
-    <div>
+
       {{ if eq $meta_position "content" }}
         <aside>
           {{- $meta -}}
@@ -16,6 +16,5 @@
         "context" $context
         "toc" .toc
       ) }}
-    </div>
   </div>
 {{ end }}
