@@ -1,14 +1,6 @@
-<meta itemprop="name" content="{{ safeHTML .Title }}">
-<meta itemprop="url" content="{{ .Permalink }}">
-{{ with .Params.image }}
-  {{ $image_id := "" }}
-  {{/*  LEGACY : à retirer une fois que le format de donnée des images des personnes sera homogène aux autres images  */}}
-  {{ if eq (printf "%T" .) "string" }}
-    {{ $image_id = . }}
-  {{ else }}
-    {{ $image_id = index . "id" }}
-  {{ end }}
-  {{- with partial "GetMedia" $image_id -}}
-    <meta itemprop="image" content="{{ .url }}">
-  {{- end -}}
-{{ end }}
+{{ $meta_class := partial "commons/single/meta/helpers/GetMetaClass" . }}
+
+<ul class="{{ $meta_class }}">
+  {{ partial "commons/single/meta/taxonomies.html" . }}
+  {{ partial "commons/single/meta/contacts.html" . }}
+</ul>

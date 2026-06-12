@@ -43,7 +43,6 @@
     .blocks
         margin-top: $spacing-5
     .person-objects
-        margin-top: $spacing-5
         > * + *
             margin-top: $spacing-5
         .top h2 a
@@ -62,6 +61,9 @@
                 transition: $arrow-duration $arrow-ease-transition
             &:hover:after
                 transform: translateX($spacing-1)
+        @include media-breakpoint-up(desktop)
+            &:not(.full-width)
+                padding-left: offset(4)
     .person-publications
         .top
             margin-bottom: $spacing-2
@@ -115,9 +117,3 @@
                     text-align: right
             .lead + div
                 margin-top: $spacing-4
-    @include media-breakpoint-up(md)
-        .contacts-details
-            ul
-                @include grid(3)
-                li
-                    margin-top: 0
