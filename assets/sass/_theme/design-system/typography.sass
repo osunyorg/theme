@@ -167,24 +167,38 @@ h2, .h2
 small, .small
     @include small
 
+
 %multiple-lists
     ul, ol
+        // https://since1979.dev/aligning-your-lists-with-your-text/
+        // list-style: 
+        list-style-position: outside
+        padding-left: var(--body-size)
+        > li
+            > p
+                display: inline
         ul, ol
             padding-left: $spacing-2
             @include media-breakpoint-up(desktop)
                 padding-left: $spacing-3
+    
+    ul
+        list-style-type: disc
+
+    ol
+        list-style-type: decimal
 
 .rich-text
     word-break: break-word
     @extend %multiple-lists
-    h1, h2, h3, h4, h5, h6, p, ul, ol
-        margin-top: $spacing-3
-        &:first-child, meta + &
-            margin-top: 0
-
-.content
-    section 
-        @extend %multiple-lists
+    > * + *
+        // margin-top: space(4)
+        margin-top: 1.25em
+    > * + ul, > * + ol
+        // margin-top: space(2)
+        margin-top: 0.3em
+    meta + *
+        margin-top: 0
 
 @mixin inherit-text
     font-family: inherit
@@ -193,9 +207,6 @@ small, .small
     font-size: inherit
     line-height: inherit
     letter-spacing: inherit
-
-[itemprop="articleBody"]
-    @extend .rich-text
 
 @mixin blockquote
     margin: 0
@@ -225,10 +236,6 @@ p
         margin-top: $spacing-2
     &:empty
         display: none
-
-p + ul,
-p + ol
-    margin-top: 0
 
 figcaption
     a
