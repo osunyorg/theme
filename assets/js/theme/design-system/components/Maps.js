@@ -11,6 +11,7 @@ window.osuny = window.osuny || {};
 window.osuny.Map = function (element) {
     this.element = element;
     this.markers = [];
+    this.popups = [];
     this.options = {
         popup: { maxWidth: 1000 }
     };
@@ -19,47 +20,17 @@ window.osuny.Map = function (element) {
 
 window.osuny.Map.prototype.init = function () {
     this.setMap();
-    this.setMarkerIcon();
-
-    var src = this.element.getAttribute('data-map-src');
-    if (src) {
-        this.loadFromJson(src);
-    } else {
-        this.loadFromDom();
-    }
-
-    window.addEventListener('resize', this.resize.bind(this));
-};
-
-window.osuny.Map.prototype.loadFromJson = function (src) {
-    var self = this;
-    fetch(src)
-        .then(function (response) { return response.json(); })
-        .then(function (data) {
-            (data.organizations || []).forEach(self.createMarkerFromData.bind(self));
-            self.finalize();
-        });
-};
-
-window.osuny.Map.prototype.loadFromDom = function () {
-    var elements = this.element.querySelectorAll('[data-longitude]');
-    elements.forEach(this.createMarkerFromElement.bind(this));
-    this.finalize();
-};
-
-window.osuny.Map.prototype.finalize = function () {
-    if (this.markers.length === 1) {
-        this.markers[0].openPopup();
-    }
+    this.setMarkers();
     this.fitToMapBounds();
     this.setAccessibility();
     this.setFilters();
+    window.addEventListener('resize', this.resize.bind(this));
 };
 
 window.osuny.Map.prototype.resize = function () {
-    if (this.markers.length === 1) {
-        this.markers[0].closePopup();
-        this.markers[0].openPopup();
+    if (this.popups.length === 1) {
+        this.map.closePopup(this.popups[0]);
+        this.map.openPopup(this.popups[0]);
         this.fitToMapBounds();
     }
 };
@@ -124,6 +95,16 @@ window.osuny.Map.prototype.filterMarkers = function (filters) {
     }.bind(this));
 };
 
+window.osuny.Map.prototype.setMarkers = function () {
+    this.setMarkerIcon();
+    this.elements = this.element.querySelectorAll('[data-longitude]');
+    this.elements.forEach(this.createMarker.bind(this));
+
+    if (this.popups.length === 1) {
+        this.map.openPopup(this.popups[0]);
+    }
+};
+
 window.osuny.Map.prototype.setMarkerIcon = function () {
     var url = this.element.getAttribute('data-marker-icon') || '/assets/images/map-marker.svg';
     L.Marker.prototype.options.icon = L.icon({
@@ -132,68 +113,33 @@ window.osuny.Map.prototype.setMarkerIcon = function () {
     });
 };
 
-window.osuny.Map.prototype.createMarkerFromElement = function (element) {
+window.osuny.Map.prototype.createMarker = function (element, opened) {
     var latitude = parseFloat(element.getAttribute('data-latitude')),
-        longitude = parseFloat(element.getAttribute('data-longitude'));
-    if (!latitude || !longitude) {
-        return;
+        longitude = parseFloat(element.getAttribute('data-longitude')),
+        coordinates = [latitude, longitude];
+    if (Boolean(coordinates[0]) && Boolean(coordinates[1])) {
+        this.addMarker(coordinates, element, opened);
     }
-    this.addMarker([latitude, longitude], {
-        title: element.getAttribute('data-title'),
-        filters: JSON.parse(element.getAttribute('data-filters') || '[]'),
-        popupContent: element
-    });
 };
 
-window.osuny.Map.prototype.createMarkerFromData = function (org) {
-    var lat = parseFloat(org.lat),
-        lng = parseFloat(org.lng);
-    if (!lat || !lng) {
-        return;
-    }
-    this.addMarker([lat, lng], {
-        title: org.title,
-        filters: org.categories || [],
-        popupContent: this.buildPopupHTML(org)
-    });
-};
-
-window.osuny.Map.prototype.escape = function (value) {
-    return String(value).replace(/[&<>"']/g, function (c) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-};
-
-window.osuny.Map.prototype.buildPopupHTML = function (org) {
-    var title = this.escape(org.title);
-    var html = '<article class="organization" itemscope itemtype="https://schema.org/Organization">'
-        + '<div class="organization-content">'
-        + '<h2 class="organization-title" itemprop="name">'
-        + '<a href="' + this.escape(org.url) + '">' + title + '</a>'
-        + '</h2>'
-        + '</div>';
-    if (org.logo) {
-        html += '<div class="media media--logo">'
-            + '<figure class="organization-logo organization-logo--default" role="figure" aria-label="' + title + '">'
-            + '<img src="' + this.escape(org.logo) + '" alt="' + title + '" loading="lazy">'
-            + '</figure>'
-            + '</div>';
-    }
-    html += '</article>';
-    return html;
-};
-
-window.osuny.Map.prototype.addMarker = function (location, options) {
-    var marker = new L.marker(location, {
-        title: options.title,
-        alt: '',
-        filters: options.filters
-    });
+window.osuny.Map.prototype.addMarker = function (location, element) {
+    var title = element.getAttribute('data-title'),
+        filters = element.getAttribute('data-filters') || '[]',
+        marker = new L.marker(location, {
+            title: title,
+            alt: '',
+            filters: JSON.parse(filters)
+        }),
+        popup = new L.Popup(location, this.options.popup);
 
     marker.id = 'leaflet-item-' + this.map._leaflet_id + this.markers.length;
-    marker.bindPopup(options.popupContent, this.options.popup);
+    element.id = marker.id;
+    popup.setContent(element);
 
     this.map.addLayer(marker);
+    marker.bindPopup(popup);
+
+    this.popups.push(popup);
     this.markers.push(marker);
 };
 
@@ -218,9 +164,6 @@ window.osuny.Map.prototype.setMarkerAccessibility = function (marker) {
 };
 
 window.osuny.Map.prototype.fitToMapBounds = function () {
-    if (!this.markers.length) {
-        return;
-    }
     var group = L.featureGroup(this.markers).addTo(this.map);
     this.map.fitBounds(group.getBounds());
 };
@@ -248,24 +191,13 @@ window.osuny.Map.prototype.setAccessibility = function () {
 
     this.markers.forEach(this.setMarkerAccessibility);
 
-    this.map.on('popupopen', this.setPopupAccessibility.bind(this));
+    this.map.on('popupopen', this.setPopupAccessibility.bind(this))
 };
 
 window.osuny.Map.prototype.setPopupAccessibility = function (event) {
     var button = event.popup._closeButton,
-        markerTitle = (event.popup._source && event.popup._source.options.title) || '';
-    button.setAttribute('aria-label', window.osuny.i18n.maps.popup_close + ' ' + markerTitle);
-
-    // Update aria-controls on the icon to point at the popup container now that it exists.
-    var marker = event.popup._source,
-        icon = marker && marker._icon,
-        container = event.popup._container;
-    if (icon && container) {
-        if (!container.id) {
-            container.id = marker.id;
-        }
-        icon.setAttribute('aria-controls', container.id);
-    }
+        content = event.popup._content;
+    button.setAttribute('aria-label', window.osuny.i18n.maps.popup_close + ' ' + content.getAttribute('data-title'));
 };
 
 window.osuny.Map.prototype.setZoomAria = function (buttonKey, id, i18nKey) {
