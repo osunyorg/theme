@@ -4,14 +4,15 @@
 {{ partial "organizations/single/pagefind.html" . }}
 
 <div class="document-content">
+  {{ partial "posts/single/sidebar.html" . }}
+
   <div class="container">
     <div itemprop="articleBody">
       {{ partial "organizations/single/summary.html" . }}
       {{ partial "organizations/single/presentation.html" . }}
-      {{ if and .Params.taxonomies (eq $meta_position "content") }}
-        {{ partial "taxonomies/single/container.html" . }}
-        {{ partial "commons/contact-details.html" (dict "subject" .) }}
-      {{ end }}
+      {{/*  {{ if eq $meta_position "content" }}
+        {{ partial "organizations/single/meta.html" . }}
+      {{ end }}  */}}
     </div>
     {{ partial "organizations/partials/logo.html" . }}
   </div>
