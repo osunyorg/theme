@@ -118,14 +118,12 @@
                 .btn
                     margin-top: $spacing-3
         .event-slots
-            ul
-                @include list-reset
-                + .btn
-                    --btn-background: var(--color-background-alt)
-                    --btn-border: none
-                    --btn-hover-border: none
-                    --btn-hover-background: var(--color-border)
-                    margin-top: $spacing-3
+            ul + .btn
+                --btn-background: var(--color-background-alt)
+                --btn-border: none
+                --btn-hover-border: none
+                --btn-hover-background: var(--color-border)
+                margin-top: $spacing-3
             @include media-breakpoint-up(desktop)
                 &.parent-event, &.simple-event
                     display: flex
@@ -276,13 +274,10 @@
 
 .event-infos,
 .exhibition-infos
-    @include list-reset
     @include media-breakpoint-up(desktop)
         font-size: $table-body-size-desktop
     [class$="-date"]
         text-transform: capitalize
-    ul
-        @include list-reset
     > li, .taxonomies-single > li
         > span
             white-space: nowrap
