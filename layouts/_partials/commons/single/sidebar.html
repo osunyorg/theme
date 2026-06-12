@@ -3,6 +3,7 @@
 {{ $meta_in_content := eq $meta_position "content" }}
 {{ $type := ( $context.Type | singularize ) }}
 {{ $meta := .meta | default (partial "commons/single/meta.html" $context) }}
+{{ $toc := .toc }}
 
 {{ if or $context.Params.design.toc.present $meta_in_content }}
   <div class="section-sidebar {{ $type }}-sidebar">

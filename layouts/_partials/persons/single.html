@@ -2,17 +2,12 @@
 {{ partial "persons/single/pagefind.html" . }}
 
 <div class="document-content">
-  {{ partial "toc/container.html" (dict
-    "context" .
-    "toc" ( partial "persons/single/toc.html" . )
-  ) }}
-
   <div class="container">
     {{ partial "persons/single/meta.html" . }}
     {{ partial "persons/single/informations.html" . }}
-    {{ partial "taxonomies/single/container.html" . }}
-    {{ partial "commons/contact-details.html" (dict "subject" .) }}
   </div>
+
+  {{ partial "persons/single/sidebar.html" . }}
 
   {{ partial "contents/list.html" (dict
     "context" .
