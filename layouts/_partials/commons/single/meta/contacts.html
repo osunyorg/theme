@@ -1,18 +1,20 @@
-{{ $has_contacts := partial "commons/single/meta/helpers/has/Contacts" . }}
 {{ $name := .Title }}
+{{ $has_contacts := partial "commons/single/meta/helpers/has/Contacts" . }}
 {{ $with_labels := partial "commons/single/meta/helpers/WithLabels" . }}
-{{ with $has_contacts }}
-  {{ if or .websites .social_networks .emails .phone_numbers .phone_professional }}
-    {{ partial "commons/contact-details/links.html" (dict
-      "context" .
-      "name" $name
-      "with_labels" $with_labels
-    ) }}
-  {{ end }}
-  {{ if .postal_address }}
-    {{ partial "commons/contact-details/address.html" (dict
-      "postal_address" .postal_address
-      "with_labels" $with_labels
-    ) }}
+{{ if $has_contacts }}
+  {{ with .Params.contact_details }}
+    {{ if or .websites .social_networks .emails .phone_numbers .phone_professional }}
+      {{ partial "commons/contact-details/links.html" (dict
+        "context" .
+        "name" $name
+        "with_labels" $with_labels
+      ) }}
+    {{ end }}
+    {{ if .postal_address }}
+      {{ partial "commons/contact-details/address.html" (dict
+        "postal_address" .postal_address
+        "with_labels" $with_labels
+      ) }}
+    {{ end }}
   {{ end }}
 {{ end }}
