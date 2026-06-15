@@ -35,12 +35,13 @@
         @content
 
 @mixin sticky($offset-y: 0px)
+    --sticky-offset-y: #{$offset-y}
     position: sticky
-    top: $offset-y
+    top: var(--sticky-offset-y)
     @if $header-sticky-enabled
         transition: top $header-sticky-transition
         html:not(.is-scrolling-down) &
-            top: calc(var(--header-height) + #{$offset-y})
+            top: calc(var(--header-height) + var(--sticky-offset-y))
 
 @mixin sidebar($side: start)
     @include media-breakpoint-down(desktop)
@@ -64,8 +65,9 @@
             margin-left: 0
         &.section-sidebar--with-toc
             .meta-container
-                // margin-bottom: $spacing-3
                 border-bottom: var(--border-width) solid var(--color-border)
+                margin-bottom: $spacing-3
+
 
 @mixin aside-full-width
     @include container
