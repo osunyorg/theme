@@ -1,25 +1,28 @@
-{{ $context := .context }}
-{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" $context }}
-{{ $meta_in_content := eq $meta_position "content" }}
-{{ $meta := .meta | default (partial "commons/single/meta.html" $context) }}
-{{ $has_meta := partial "commons/single/meta/helpers/HasContent" $context }}
+{{ $meta := .meta | default (partial "commons/single/meta.html" .context) }}
+{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" .context }}
 {{ $with_toc := partial "toc/helpers/IsPresent" .context }}
+
+{{ $has_meta := false }}
+{{ if eq $meta_position "content" }}
+  {{ $has_meta = partial "commons/single/meta/helpers/HasContent" .context }}
+{{ end }}
+
 {{ $class := partial "commons/single/sidebar/helpers/GetClass" (dict 
-  "with_meta" (and $meta_in_content $has_meta)
+  "with_meta" $has_meta
   "with_toc" $with_toc
   "context" .context
 ) }}
 
-{{ if or $with_toc $meta_in_content }}
+{{ if or $with_toc $has_meta }}
   <div class="{{ $class }}">
-      {{ if and $meta_in_content $has_meta }}
+      {{ if $has_meta }}
         <aside class="meta-container">
           {{- $meta -}}
         </aside>
       {{ end }}
       {{ if $with_toc }}
         {{ partial "toc/container.html" (dict
-          "context" $context
+          "context" .context
           "toc" .toc
         ) }}
       {{ end }}
