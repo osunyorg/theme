@@ -137,6 +137,8 @@
             margin-top: -$spacing-3
             padding-bottom: $spacing-4
             pointer-events: auto
+            @include sticky($spacing-3)
+            transition: top $header-sticky-transition, max-height $header-sticky-transition
             html.is-scrolling-down &
                 max-height: calc(100vh)
         .toc-title
