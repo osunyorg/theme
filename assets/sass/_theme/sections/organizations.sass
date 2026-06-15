@@ -117,7 +117,7 @@
 
 .organizations__page
     .document-content
-        [itemprop="articleBody"] + .organization-logo
+        .organization-presentation + .organization-logo
             figcaption
                 text-align: right
                 @include meta
@@ -141,7 +141,7 @@
             &:not(:first-child)
                 margin-top: $spacing-5
     &:not(.full-width)
-        [itemprop="articleBody"]
+        .organization-presentation
             padding-left: offset(4)
     @include media-breakpoint-down(md)
         .document-content
@@ -155,7 +155,7 @@
                 display: flex
                 justify-content: space-between
                 gap: var(--grid-gutter)
-            [itemprop="articleBody"]
+            .organization-presentation
                 width: columns(8)
                 + .organization-logo
                     width: columns(3)
