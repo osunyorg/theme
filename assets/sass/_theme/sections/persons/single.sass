@@ -98,12 +98,13 @@
                     @include small
             &:hover
                 color: var(--color-accent)
+
     @include media-breakpoint-down(lg)
         .roles
             margin-top: $spacing-4
 
-    &.full-width
-        @include media-breakpoint-up(lg)
+    @include media-breakpoint-up(desktop)
+        &.full-width
             .informations
                 @include grid
                 margin-bottom: $spacing-4
@@ -116,7 +117,6 @@
                         text-align: right
                 .lead + div
                     margin-top: $spacing-4
-    @include media-breakpoint-up(desktop)
         &:not(.full-width)
             .informations,
             .person-objects
