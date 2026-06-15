@@ -1,9 +1,6 @@
-{{ $taxonomies := partial "helpers/param/GetSiteParamWithDefault" (dict
-  "param" (printf "%s.single.meta.options.taxonomies" .Type)
-  "default" "default.single.meta.options.taxonomies"
-) }}
+{{ $has_taxonomies := partial "commons/single/meta/helpers/has/Taxonomies" . }}
 
-{{ if and $taxonomies .Params.taxonomies }}
+{{ if $has_taxonomies }}
   <li class="taxonomies">
     {{ partial "taxonomies/single/list.html" . }}
   </li>

@@ -1,6 +1,7 @@
+{{ $has_contacts := partial "commons/single/meta/helpers/has/Contacts" . }}
 {{ $name := .Title }}
 {{ $with_labels := partial "commons/single/meta/helpers/WithLabels" . }}
-{{ with .Params.contact_details }}
+{{ with $has_contacts }}
   {{ if or .websites .social_networks .emails .phone_numbers .phone_professional }}
     {{ partial "commons/contact-details/links.html" (dict
       "context" .
