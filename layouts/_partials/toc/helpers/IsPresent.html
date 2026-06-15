@@ -1,0 +1,7 @@
+{{ $is_present := .Params.design.toc.present }}
+
+{{ if site.Params.toc.disabled }}
+  {{ $is_present = false }}
+{{ end }}
+
+{{ return $is_present }}

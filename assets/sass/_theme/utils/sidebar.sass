@@ -59,13 +59,13 @@
         position: absolute
         width: columns(4)
         .toc-container
-            @include sticky(calc(var(--border-width) * -1))
+            @include sticky(#{$spacing-3})
             height: auto
             margin-left: 0
-            padding-top: $spacing-3
-        &:has(aside)
-            .toc-container
-                border-top: var(--border-width) solid var(--color-border)
+        &.section-sidebar--with-toc
+            .meta-container
+                margin-bottom: $spacing-3
+                border-bottom: var(--border-width) solid var(--color-border)
 
 @mixin aside-full-width
     @include container
