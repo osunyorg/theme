@@ -1,10 +1,6 @@
-{{ $is_toc_present := .context.Params.design.toc.present }}
+{{ $is_present := partial "toc/helpers/IsPresent" .context }}
 
-{{ if site.Params.toc.disabled }}
-  {{ $is_toc_present = false }}
-{{ end }}
-
-{{ if $is_toc_present }}
+{{ if $is_present }}
   {{ partial "toc/cta.html" }}
 
   <div class="toc-container" aria-hidden="false">

@@ -43,7 +43,6 @@
     .blocks
         margin-top: $spacing-5
     .person-objects
-        margin-top: $spacing-5
         > * + *
             margin-top: $spacing-5
         .top h2 a
@@ -99,25 +98,26 @@
                     @include small
             &:hover
                 color: var(--color-accent)
+
     @include media-breakpoint-down(lg)
         .roles
             margin-top: $spacing-4
-    @include media-breakpoint-up(lg)
-        .informations
-            @include grid
-            margin-bottom: $spacing-4
-            .roles
-                grid-column: 1 / -1
-            .biography
-                grid-column: 1 / 9
-                + .roles
-                    grid-column: 9 / 13
-                    text-align: right
-            .lead + div
-                margin-top: $spacing-4
-    @include media-breakpoint-up(md)
-        .contacts-details
-            ul
-                @include grid(3)
-                li
-                    margin-top: 0
+
+    @include media-breakpoint-up(desktop)
+        &.full-width
+            .informations
+                @include grid
+                margin-bottom: $spacing-4
+                .roles
+                    grid-column: 1 / -1
+                .biography
+                    grid-column: 1 / 9
+                    + .roles
+                        grid-column: 9 / 13
+                        text-align: right
+                .lead + div
+                    margin-top: $spacing-4
+        &:not(.full-width)
+            .informations,
+            .person-objects
+                padding-left: offset(4)

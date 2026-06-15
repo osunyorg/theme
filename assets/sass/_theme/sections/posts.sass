@@ -229,9 +229,6 @@
         // Safe spacing if post is empty
     .document-content
         @include document-min-height(600px)
-    &:not(.full-width)
-        .post-sidebar
-            @include sidebar
     .block-signatures
         .signatures
             border-top: var(--border-width) solid var(--color-border)
@@ -262,14 +259,6 @@
                         text-decoration-color: var(--color-accent)
                 + li
                     margin-top: $spacing-3
-
-    &.full-width
-        .post-sidebar
-            @include media-breakpoint-down(desktop)
-                @include container
-            
-            @include media-breakpoint-up(desktop)
-                @include aside-full-width
 
 .related
     margin-top: $spacing-3

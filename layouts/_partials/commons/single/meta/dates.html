@@ -1,14 +1,6 @@
 {{ $with_labels := partial "commons/single/meta/helpers/WithLabels" . }}
-
-{{ $with_published_at := partial "helpers/param/GetSiteParamWithDefault" (dict
-  "param" (printf "%s.single.meta.options.published_at" .Type)
-  "default" "default.single.meta.options.published_at"
-) }}
-
-{{ $with_updated_at := partial "helpers/param/GetSiteParamWithDefault" (dict
-  "param" (printf "%s.single.meta.options.updated_at" .Type)
-  "default" "default.single.meta.options.updated_at"
-) }}
+{{ $has_published_at := partial "commons/single/meta/helpers/has/PublishedAt" . }}
+{{ $has_updated_at := partial "commons/single/meta/helpers/has/UpdatedAt" . }}
 
 {{ $date_format := partial "helpers/param/GetSiteParamWithDefault" (dict
   "param" (printf "%s.date_format" .Type)
@@ -16,13 +8,13 @@
 ) }}
 
 {{ $params := (dict
-  "with_published_at" $with_published_at
-  "with_updated_at" $with_updated_at
+  "has_published_at" $has_published_at
+  "has_updated_at" $has_updated_at
   "format" $date_format
   "context" .
 ) }}
 
-{{ if or $with_published_at $with_updated_at }}
+{{ if or $has_published_at $has_updated_at }}
   {{ if $with_labels }}
     {{ partial "commons/single/meta/dates/with-labels.html" $params }}
   {{ else }}

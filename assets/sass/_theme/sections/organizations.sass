@@ -116,15 +116,8 @@
         margin-top: $spacing-4
 
 .organizations__page
-    .lead
-        font-family: $lead-sidebar-font-family
-        font-weight: $lead-sidebar-weight
-        line-height: $lead-sidebar-line-height
-        margin-bottom: $spacing-3
-        @include media-breakpoint-up(desktop)
-            font-size: $lead-sidebar-size-desktop
     .document-content
-        [itemprop="articleBody"] + .organization-logo
+        .organization-presentation + .organization-logo
             figcaption
                 text-align: right
                 @include meta
@@ -147,6 +140,9 @@
                 margin-top: 0
             &:not(:first-child)
                 margin-top: $spacing-5
+    &:not(.full-width)
+        .organization-presentation
+            padding-left: offset(4)
     @include media-breakpoint-down(md)
         .document-content
             .organization-logo
@@ -159,12 +155,7 @@
                 display: flex
                 justify-content: space-between
                 gap: var(--grid-gutter)
-            [itemprop="articleBody"]
+            .organization-presentation
                 width: columns(8)
                 + .organization-logo
                     width: columns(3)
-            .contacts-details
-                ul
-                    @include grid(2)
-                    li
-                        margin-top: 0

@@ -133,11 +133,14 @@
         .toc-content
             overflow-y: auto
             max-height: calc(100vh - var(--header-height))
+            padding-top: var(--grid-gutter)
+            margin-top: var(--grid-gutter-negative)
             padding-bottom: $spacing-4
             pointer-events: auto
             @include sticky($spacing-3)
+            transition: top $header-sticky-transition, max-height $header-sticky-transition
             html.is-scrolling-down &
-                max-height: calc(100vh - #{$spacing-3})
+                max-height: calc(100vh)
         .toc-title
             color: var(--color-text-alt)
         button
