@@ -61,9 +61,6 @@
                 transition: $arrow-duration $arrow-ease-transition
             &:hover:after
                 transform: translateX($spacing-1)
-        @include media-breakpoint-up(desktop)
-            &:not(.full-width)
-                padding-left: offset(4)
     .person-publications
         .top
             margin-bottom: $spacing-2
@@ -107,18 +104,20 @@
 
     &.full-width
         @include media-breakpoint-up(lg)
-        .informations
-            @include grid
-            margin-bottom: $spacing-4
-            .roles
-                grid-column: 1 / -1
-            .biography
-                grid-column: 1 / 9
-                + .roles
-                    grid-column: 9 / 13
-                    text-align: right
-            .lead + div
-                margin-top: $spacing-4
-    &:not(.full-width)
-        .informations
-            padding-left: offset(4)
+            .informations
+                @include grid
+                margin-bottom: $spacing-4
+                .roles
+                    grid-column: 1 / -1
+                .biography
+                    grid-column: 1 / 9
+                    + .roles
+                        grid-column: 9 / 13
+                        text-align: right
+                .lead + div
+                    margin-top: $spacing-4
+    @include media-breakpoint-up(desktop)
+        &:not(.full-width)
+            .informations,
+            .person-objects
+                padding-left: offset(4)
