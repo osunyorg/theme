@@ -1,11 +1,11 @@
 {{ $meta := .meta | default (partial "commons/single/meta.html" .context) }}
 {{ $meta_position := partial "commons/single/meta/helpers/GetPosition" .context }}
-{{ $with_toc := partial "toc/helpers/IsPresent" .context }}
-
 {{ $has_meta := false }}
 {{ if eq $meta_position "content" }}
   {{ $has_meta = partial "commons/single/meta/helpers/HasContent" .context }}
 {{ end }}
+
+{{ $with_toc := partial "toc/helpers/IsPresent" .context }}
 
 {{ $class := partial "commons/single/sidebar/helpers/GetClass" (dict 
   "with_meta" $has_meta
