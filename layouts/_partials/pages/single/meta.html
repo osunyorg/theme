@@ -1,5 +1,7 @@
 {{ $meta_class := partial "commons/single/meta/helpers/GetMetaClass" . }}
-
-<ul class="{{ $meta_class }}">
-  {{ partial "commons/single/meta/taxonomies.html" . }}
-</ul>
+{{ $has_taxonomies := partial "commons/single/meta/helpers/has/Taxonomies" . }}
+{{ if $has_taxonomies }}
+  <ul class="{{ $meta_class }}">
+    {{ partial "commons/single/meta/taxonomies.html" . }}
+  </ul>
+{{ end }}
