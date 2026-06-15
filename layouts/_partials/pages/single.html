@@ -4,18 +4,12 @@
 {{ partial "pages/single/pagefind.html" . }}
 
 <div class="document-content">
-  {{ partial "persons/single/sidebar.html" . }}
+  {{ partial "pages/single/sidebar.html" . }}
 
   {{ partial "pages/single/summary.html" (dict
     "context" .
     "block_wrapped" true
   ) }}
-
-  {{ if and .Params.taxonomies (eq $meta_position "content") }}
-    <div class="container taxonomies-container">
-      {{ partial "taxonomies/single/list.html" . }}
-    </div>
-  {{ end }}
 
   {{ if .Params.contents }}
     {{ partial "contents/list.html" (dict
