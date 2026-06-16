@@ -1,10 +1,8 @@
 {{ $block := .block }}
-{{- $template := .block.template -}}
-{{- $position := .block.position -}}
-{{- $title := .block.title -}}
 
 {{ with .block.data }}
-  <div class="block block-publications {{- if $title }} block-with-title {{- end -}}">
+  {{ $block_class := partial "blocks/helpers/GetClass" .block }}
+  <div class="{{ $block_class }}">
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
