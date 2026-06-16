@@ -171,7 +171,6 @@ small, .small
 %multiple-lists
     ul, ol
         // https://since1979.dev/aligning-your-lists-with-your-text/
-        // list-style: 
         list-style-position: outside
         padding-left: var(--body-size)
         > li
@@ -185,19 +184,19 @@ small, .small
         list-style-type: disc
         ul
             list-style-type: circle
-
-    // ol
-    //     list-style-type: decimal
     ol
+        // https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Counter_styles/Using_counters
         counter-reset: section
         list-style-type: none
-        li::before
+        list-style-position: inside
+        > li::before
             counter-increment: section
             content: counters(section, ".") " "
     > ol
-        list-style-type: decimal
+        padding-left: 0
         > li::before
-            content: ""
+            content: counters(section, "") ". "
+
 
 
 .rich-text
