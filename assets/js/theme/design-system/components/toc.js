@@ -168,7 +168,8 @@ window.osuny.TableOfContents.prototype.updateScrollspy = function (scroll) {
             progress = progress - Math.min(scrollLimit, scroll);
         }
         container.scrollTo({
-            top: progress
+            top: progress,
+            behavior: "smooth"
         });
     }
 };
