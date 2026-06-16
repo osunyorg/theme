@@ -186,8 +186,19 @@ small, .small
         ul
             list-style-type: circle
 
+    // ol
+    //     list-style-type: decimal
     ol
+        counter-reset: section
+        list-style-type: none
+        li::before
+            counter-increment: section
+            content: counters(section, ".") " "
+    > ol
         list-style-type: decimal
+        > li::before
+            content: ""
+
 
 .rich-text
     word-break: break-word
