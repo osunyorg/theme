@@ -1,8 +1,12 @@
-<div class="container">
-  <div class="person-objects">
-    {{ partial "persons/single/related/programs.html" . }}
-    {{ partial "persons/single/related/publications.html" . }}
-    {{ partial "persons/single/related/posts.html" . }}
-    {{ partial "persons/single/related/papers.html" . }}
+{{ $has_related := partial "persons/single/helpers/HasRelated" . }}
+
+{{ if $has_related }}
+  <div class="container">
+    <div class="person-objects">
+      {{ partial "persons/single/related/programs.html" . }}
+      {{ partial "persons/single/related/publications.html" . }}
+      {{ partial "persons/single/related/posts.html" . }}
+      {{ partial "persons/single/related/papers.html" . }}
+    </div>
   </div>
-</div>
+{{ end }}

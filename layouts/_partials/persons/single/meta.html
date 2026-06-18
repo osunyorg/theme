@@ -1,6 +1,10 @@
 {{ $meta_class := partial "commons/single/meta/helpers/GetMetaClass" . }}
+{{ $has_taxonomies := partial "commons/single/meta/helpers/has/Taxonomies" . }}
+{{ $has_contacts := partial "commons/single/meta/helpers/has/Contacts" . }}
 
-<ul class="{{ $meta_class }}">
-  {{ partial "commons/single/meta/taxonomies.html" . }}
-  {{ partial "commons/single/meta/contacts.html" . }}
-</ul>
+{{ if or $has_taxonomies $has_contacts }}
+  <ul class="{{ $meta_class }}">
+    {{ partial "commons/single/meta/taxonomies.html" . }}
+    {{ partial "commons/single/meta/contacts.html" . }}
+  </ul>
+{{ end }}
