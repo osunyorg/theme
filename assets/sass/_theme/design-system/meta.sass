@@ -108,6 +108,9 @@
 
     &.without-label
         @include meta-without-labels-inline
+        .dropdown-share
+            width: columns(12)
+            margin-top: $spacing-2
 
     &.with-labels
         li > ul
@@ -126,6 +129,11 @@
             width: columns(6)
             &.with-labels
                 @include meta-with-labels-columns
+
+        &.without-label
+            .dropdown-share
+                margin-top: $spacing-2
+                width: columns(3)
 
     @include in-page-with-sidebar
         // padding before toc separator

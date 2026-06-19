@@ -1,5 +1,15 @@
 {{ $has_share := partial "commons/single/meta/helpers/has/Share" . }}
+{{ $with_labels := partial "helpers/param/GetSiteParamWithDefault" (dict
+  "param" (printf "%s.single.meta.options.with_labels" .Type)
+  "default" "default.single.meta.options.with_labels"
+) }}
 
 {{ if $has_share }}
-  {{ partial "commons/share/list-item.html" . }}
+  {{ if $with_labels }}
+    {{ partial "commons/share/list-item.html" . }}
+  {{ else }}
+    <li class="social-share">
+      {{ partial "commons/share/dropdown.html" . }}
+    </li>
+  {{ end }}
 {{ end }}
