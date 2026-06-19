@@ -178,11 +178,19 @@
             font-weight: normal
 
     .pf-modal-aside
+        
         .pf-summary
             margin-bottom: $spacing-2
             &:empty
                 display: none
-
+        .pf-filter-pane-container
+            display: none
+            &--desktop
+                @include media-breakpoint-up(desktop)
+                    display: block
+            &--mobile
+                @include media-breakpoint-down(desktop)
+                    display: block
         .pf-filter-pane
             .pf-filter-group
                 border: 0

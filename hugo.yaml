@@ -128,16 +128,15 @@ params:
       meta:
         position: content
         options:
-          authors: true
-          dates: true
-          published_at: true
-          reading_time: true
-          share: true
+          authors: false
+          dates: false
+          published_at: false
+          reading_time: false
+          share: false
           taxonomies: true
-          updated_at: true
+          updated_at: false
           with_labels: true
       taxonomies: # for organizations, persons, events and exhibitions (to be removed with meta)
-        position: content # content | hero | none
         show_name: true
     sitemap:
       ignore_children: false
@@ -279,6 +278,11 @@ params:
         dates: true
         with_more: true
       truncate_description: 200 # Set to 0 to disable truncate
+    single:
+      meta:
+        options:
+          dates: true
+          share: true
   journals:
     index:
       layout: list
@@ -301,8 +305,6 @@ params:
         summary: false
     single:
       backlinks: false
-      meta:
-        position: hero
   pages:
     default_image: false
     index:
@@ -316,8 +318,9 @@ params:
       truncate_description: 200 # Set to 0 to disable truncate
     single:
       meta:
+        position: hero
         options:
-          published_at: true
+          published_at: false
           reading_time: false
           share: false
           updated_at: false
@@ -374,8 +377,6 @@ params:
           status: false
           subtitle: true
           summary: true
-      taxonomies:
-        position: content # content | hero | none
   posts:
     default_image: false
     date_format: ":date_long"
@@ -391,6 +392,13 @@ params:
         subtitle: true
       truncate_description: 200 # Set to 0 to disable truncate
     single:
+      meta:
+        options:
+          authors: true
+          published_at: true
+          reading_time: true
+          share: true
+          updated_at: true
       options:
         signature: false
     # share_links: # Optional
