@@ -1,10 +1,10 @@
 {{ $author := site.GetPage (printf "/authors/%s" .Slug) }}
-{{ $posts := where $author.Pages "Section" "posts" }}
+{{ $posts := partial "persons/single/helpers/GetPosts" . }}
 {{ $layout := site.Params.posts.index.layout }}
 {{ $options := site.Params.posts.index.options }}
 
 {{ if $posts }}
-  <section class="person-posts">
+  <section class="person-posts" id="{{ anchorize (i18n "persons.toc.posts") }}">
     <div class="top">
       <h2 class="h5">{{ i18n "persons.posts.recent" }}</h2>
     </div>
