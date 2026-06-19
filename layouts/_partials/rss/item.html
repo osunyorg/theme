@@ -9,11 +9,11 @@
   {{- with .authorEmail }}<author>{{ . }}{{ with .authorName }} ({{ . }}){{ end }}</author>{{ end }}
   <guid>{{ .item.Permalink }}</guid>
   {{- with .item.Summary }}
-  <description>
-    {{- printf "<![CDATA[" | safeHTML -}}
-      {{ . | plainify }}
-    {{- printf "]]>" | safeHTML -}}
-  </description>
+    <description>
+      {{- printf "<![CDATA[" | safeHTML -}}
+        {{ . | plainify }}
+      {{- printf "]]>" | safeHTML -}}
+    </description>
   {{ end -}}
   {{ partial "rss/item/image.html" .item.Params.image }}
   {{ partial "rss/item/taxonomies.html" .item.Params.taxonomies }}
