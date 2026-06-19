@@ -66,11 +66,6 @@ let pagefindCommand = "npm_config_yes=true npx pagefind --site \"public\" --glob
 // Pagefind variant command, exporting to static/pagefind, useful for local environment
 let pagefindDevCommand = pagefindCommand + " --output-subdir \"../static/pagefind\"";
 
-// Pagefind command, exporting to public/pagefind
-let pagefindCommand = "npm_config_yes=true npx pagefind --site \"public\" --glob \"**/index.{html}\" --exclude-selectors \"" + pagefindExclude + "\"";
-// Pagefind variant command, exporting to static/pagefind, useful for local environment
-let pagefindDevCommand = pagefindCommand + " --output-subdir \"../static/pagefind\"";
-
 function execute(string) {
     console.log("OSUNY runs " + string);
     shell.exec(string);
@@ -98,12 +93,6 @@ if (command === "build") {
     execute("yarn upgrade osuny");
     execute("yarn install");
     execute("hugo --minify");
-    execute(pagefindCommand);
-}
-
-if (command === "percy-build") {
-    execute("yarn upgrade");
-    execute("hugo --baseURL=/");
     execute(pagefindCommand);
 }
 
