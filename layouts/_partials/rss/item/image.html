@@ -3,5 +3,19 @@
   {{ if $media }}
     {{ $url := partial "commons/image/helpers/GetUrl" (dict "media" $media "size" 450 "scale" 2 ) }}
     <media:content url="{{ $url }}" medium="image" width="900"></media:content>
+    {{ with .alt }}
+      <media:description type="plain">
+        {{ printf "<![CDATA[" | safeHTML }}
+          {{ . }}
+        {{ printf "]]>" | safeHTML }}
+      </media:description>
+    {{ end }}
+    {{ with .credit }}
+      <media:credit>
+        {{ printf "<![CDATA[" | safeHTML }}
+          {{ . | plainify }}
+        {{ printf "]]>" | safeHTML }}
+      </media:credit>
+    {{ end }}
   {{ end }}
 {{ end }}
