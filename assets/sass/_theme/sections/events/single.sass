@@ -5,13 +5,6 @@
             display: flex
             @include media-breakpoint-down(desktop)
                 flex-direction: column
-        .taxonomies-single
-            a
-                @include meta
-                @include link(var(--color-accent))
-            .taxonomy-children
-                li
-                    line-height: 100%
         @include media-breakpoint-up(desktop)
             margin-bottom: 0
             figure
@@ -38,6 +31,7 @@
                 .hero-text
                     align-items: flex-end
                     flex-wrap: wrap
+                    gap: var(--grid-gutter)
                     width: columns(12)
                     .taxonomies-single
                         order: 2
@@ -285,20 +279,12 @@
     @include list-reset
     @include media-breakpoint-up(desktop)
         font-size: $table-body-size-desktop
-        padding-bottom: $spacing-4
     [class$="-date"]
         text-transform: capitalize
     ul
         @include list-reset
     > li, .taxonomies-single > li
-        padding-top: $spacing-2
-        &:not(:last-child)
-            padding-bottom: $spacing-2
         > span
-            @include meta
-            color: var(--color-text-alt)
-            padding-left: 0
-            display: block
             white-space: nowrap
         time + time
             @include icon(arrow-right-line)

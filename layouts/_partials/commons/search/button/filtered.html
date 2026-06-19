@@ -1,0 +1,16 @@
+{{ $search_in_index := partial "helpers/param/GetSiteParamWithDefault" (dict 
+  "param" (printf "%s.index.search.active" .context.Type)
+  "default" "default.index.search.active"
+) }}
+{{ if and site.Params.search.active $search_in_index }}
+  {{ $type_label := partial "commons/search/helpers/GetFilterLabelByType" .context }}
+  {{ $default_placeholder := i18n "commons.search.filtered_by.placeholder" $type_label }}
+  {{ $placeholder := i18n (printf "%s.index.search.label" .context.Type) | default $default_placeholder }}
+  <pagefind-modal-trigger
+    placeholder="{{ $placeholder }}"
+    hide-shortcut="true"
+    class="search-button search-button--taxonomies"
+    data-search-in-type="{{ $type_label }}"
+    >
+  </pagefind-modal-trigger>
+{{ end }}

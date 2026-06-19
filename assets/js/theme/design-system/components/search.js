@@ -1,196 +1,116 @@
-/* eslint-disable no-undef, no-underscore-dangle */
+import { ariaHideBodyChildren } from '../../utils/a11y';
+import { isMobile } from '../../utils/breakpoints';
+
 window.osuny = window.osuny || {};
-window.osuny.Search = window.osuny.Search || {};
-window.osuny.pagefindOptions = window.osuny.pagefindOptions || {};
 
 window.osuny.Search = function (element) {
-    window.osuny.Popup.call(this, element);
+    this.elements = {
+        root: element,
+        detailsContainer: element.querySelector('.pf-filter-pane'),
+        triggerButtons: document.querySelectorAll('.pf-trigger-btn'),
+        buttonSearchInType: document.querySelector('[data-search-in-type]'),
+        pagefindFilters: document.querySelector('pagefind-filter-pane'),
+        triggerButton: null
+    };
 
-    this.isInitiated = false;
-    this.buttons = [];
+    this.pagefindInstance = window.PagefindComponents.getInstanceManager().getInstance('default');
 
-    this._initOrDefer();
+    this.state = {
+        isOpened: false,
+        isMobile: isMobile()
+    };
+
+    this.listen();
+    this.resize();
 };
 
-window.osuny.Search.prototype = Object.create(window.osuny.Popup.prototype);
+window.osuny.Search.prototype.listen = function () {
+    window.addEventListener('resize', this.resize.bind(this));
 
-window.osuny.Search.prototype._canInit = function () {
-    return typeof PagefindUI !== 'undefined';
-};
-
-window.osuny.Search.prototype._initOrDefer = function () {
-    if (this._canInit()) {
-        this._init();
-    } else {
-        window.addEventListener('load', this._init.bind(this));
-    }
-};
-
-window.osuny.Search.prototype._init = function () {
-    if (this.isInitiated || !this._canInit()) return;
-
-    this.buttons = document.querySelectorAll('.search-button');
-    this._setup();
-    this._listen();
-    this.isInitiated = true;
-};
-
-window.osuny.Search.prototype._setup = function () {
-    this.setPageFind();
-    this.setAccessibility();
-};
-
-window.osuny.Search.prototype.setPageFind = function () {
-    var options = {
-            element: this.element,
-            showSubResults: false,
-            translations: osuny.i18n.search
-        },
-        attribut;
-
-    for (attribut in window.osuny.pagefindOptions) {
-        options[attribut] = window.osuny.pagefindOptions[attribut];
+    if (this.elements.buttonSearchInType) {
+        this.elements.buttonSearchInType.addEventListener('click', this.searchInType.bind(this));
     }
 
-    this.pageFindUI = new PagefindUI(options);
-
-    // Listen to user's input
-    this.input = document.querySelector('.pagefind-ui__search-input');
-};
-
-window.osuny.Search.prototype._listen = function () {
-    var inPageWithToc = document.body.querySelector('.toc-cta');
-    window.osuny.Popup.prototype._listen.call(this);
-
-    this.buttons.forEach(function (button) {
-        button.addEventListener('click', this.toggle.bind(this, true, button));
-        if (inPageWithToc) {
-            button.classList.add('in-page-with-toc');
-        }
+    this.elements.triggerButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            this.elements.triggerButton = button;
+        }.bind(this));
     }.bind(this));
 
-    this.input.addEventListener('input', this.onInputChange.bind(this));
+    this.elements.root.addEventListener('toggle', this.onToggle.bind(this));
 
-    this.observeMutations();
+    this.updateSearchFiltersToAny();
 };
 
-window.osuny.Search.prototype.observeMutations = function () {
-    var previousResults = [],
-        results = [],
-        firstResult;
-
-    this.observer = new MutationObserver(function () {
-        results = this.element.querySelectorAll('.pagefind-ui__result');
-        if (results.length > 0 && previousResults.length > 0 && results.length !== previousResults.length) {
-            firstResult = results[previousResults.length];
-            setTimeout(this.focusFirstNextResult.bind(firstResult), 100);
-        }
-        previousResults = results;
+window.osuny.Search.prototype.updateSearchFiltersToAny = function () {
+    this.pagefindInstance.on('search', function (term, filters) {
+        // Update the searchFilters instance to allow 'OR' : one or more of the conditions match.
+        // https://pagefind.app/docs/js-api-filtering/#using-compound-filters
+        this.pagefindInstance.searchFilters = {
+            type: {
+                any: filters.type
+            }
+        };
     }.bind(this));
-
-    this.observer.observe(this.element, { childList: true, subtree: true });
 };
 
-window.osuny.Search.prototype.focusFirstNextResult = function () {
-    var anchor = this.querySelector('a');
-    if (anchor) {
-        anchor.focus();
-    }
-};
-
-window.osuny.Search.prototype.onInputChange = function () {
-    // Delay before screen readers speak results message
-    var speakDelay = 1500;
-
-    // Clear aria live
-    this.accessibleMessageContainer.innerHTML = '';
-    clearTimeout(this.a11yTimeout);
-    this.a11yTimeout = setTimeout(this.updateAccessibility.bind(this), speakDelay);
-
-};
-
-window.osuny.Search.prototype.toggle = function (open, triggerElement) {
-    window.osuny.Popup.prototype.toggle.call(this, open, triggerElement);
-    if (this.state.opened) {
-        this.input.focus();
+window.osuny.Search.prototype.resize = function () {
+    this.state.isMobile = isMobile();
+    this.elements.pagefindFilters.expanded = !this.state.isMobile;
+    if (this.state.isMobile) {
+        this.closeFilters();
     } else {
-        this.clear();
+        this.openFilters();
+    }
+
+};
+
+window.osuny.Search.prototype.onToggle = function (event) {
+    this.state.isOpened = event.newState === 'open';
+    if (!this.state.isOpened) {
+        this.onClose();
+    }
+    this.resize();
+    this.updateDocumentAccessibility();
+};
+
+
+window.osuny.Search.prototype.onClose = function () {
+    if (this.elements.triggerButton) {
+        this.elements.triggerButton.focus();
+        this.elements.triggerButton = null;
     }
 };
 
-window.osuny.Search.prototype.clear = function () {
-    var button = this.element.querySelector('.pagefind-ui__button'),
-        message = this.element.querySelector('.pagefind-ui__message'),
-        results = this.element.querySelector('.pagefind-ui__results');
-
-    if (this.input) {
-        this.input.value = '';
-    }
-
-    if (button) {
-        button.parentElement.removeChild(button);
-    }
-
-    if (message) {
-        message.innerText = '';
-    }
-
-    if (results) {
-        results.innerHTML = '';
-    }
+window.osuny.Search.prototype.updateDocumentAccessibility = function () {
+    document.body.style.overflow = this.state.isOpened ? 'hidden' : 'auto';
+    ariaHideBodyChildren(this.elements.root, this.state.isOpened);
 };
 
-window.osuny.Search.prototype.setAccessibility = function () {
-    this.input.setAttribute('title', this.input.getAttribute('placeholder'));
 
-    // Add element to alert screen reader of the search results
-    this.accessibleMessageContainer = document.createElement('div');
-    this.element.append(this.accessibleMessageContainer);
-    this.accessibleMessageContainer.setAttribute('aria-live', 'polite');
-    this.accessibleMessageContainer.setAttribute('aria-atomic', 'true');
-    this.accessibleMessageContainer.classList.add('sr-only', 'pagefind-ui__accessible-message');
+window.osuny.Search.prototype.openFilters = function () {
+    this.toggleFilters(true);
 };
 
-window.osuny.Search.prototype.updateAccessibility = function () {
-    this.updateAccessibilityMessage();
-    this.updateAccessibilityTags();
+window.osuny.Search.prototype.closeFilters = function () {
+    this.toggleFilters(false);
 };
 
-window.osuny.Search.prototype.updateAccessibilityTags = function () {
-    var results = this.element.querySelectorAll('.pagefind-ui__result');
-    results.forEach(this.updateAccessibilityResult);
+window.osuny.Search.prototype.toggleFilters = function (opened = true) {
+    this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group');
+
+    this.details.forEach( function (detail) {
+        detail.open = opened;
+    }.bind(this));
 };
 
-window.osuny.Search.prototype.updateAccessibilityResult = function (result) {
-    var image = result.querySelector('img'),
-        title = result.querySelector('.pagefind-ui__result-title');
-
-    if (image) {
-        image.setAttribute('alt', '');
-    }
-
-    if (title) {
-        title.setAttribute('role', 'heading');
-        title.setAttribute('aria-level', '2');
-    }
-};
-
-window.osuny.Search.prototype.updateAccessibilityMessage = function () {
-    var message = this.element.querySelector('.pagefind-ui__message');
-    if (!message) {
-        return;
-    }
-    message.setAttribute('aria-hidden', 'true');
-
-    if (this.input.value !== '') {
-        this.accessibleMessage = document.createElement('p');
-        this.accessibleMessage.innerText = message.innerText;
-        this.accessibleMessageContainer.appendChild(this.accessibleMessage);
-    }
+window.osuny.Search.prototype.searchInType = function () {
+    var type = this.elements.buttonSearchInType.getAttribute('data-search-in-type');
+    this.pagefindInstance.triggerFilter('type', [type]);
 };
 
 window.osuny.page.registerComponent({
     name: 'search',
-    selector: '#search',
+    selector: '.pf-modal',
     klass: window.osuny.Search
 });

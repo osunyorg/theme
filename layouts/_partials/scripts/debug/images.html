@@ -44,7 +44,7 @@
     })
   })
   function showImageDimension() {
-    document.querySelectorAll('img').forEach(img => {
+    document.querySelectorAll('img:not(.d-help__icon)').forEach(img => {
       const listener = function () {
         // Return if svg
         if (img.src.split('.')[1] === 'svg') return;

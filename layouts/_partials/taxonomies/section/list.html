@@ -7,6 +7,10 @@
 ) }}
 {{ if $options.display }}
   <div class="taxonomies-list taxonomies-list--{{ $options.layout }}">
+    {{ partial "commons/search/button/filtered.html" (dict
+      "position" "taxonomies"
+      "context" .
+    ) }}
     {{ range $taxonomies }}
       {{ if .categories }}
         {{ if eq $options.layout "dropdown" }}

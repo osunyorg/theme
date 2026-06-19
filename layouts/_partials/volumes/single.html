@@ -1,6 +1,7 @@
 {{ partial "volumes/section/hero.html" . }}
+{{ partial "volumes/single/pagefind.html" . }}
 
-<div class="document-content" itemscope itemtype="https://schema.org/PublicationVolume">
+<div class="document-content">
   <meta itemprop="name" content="{{ safeHTML .Title }}">
   {{- if .Params.image -}}
     {{- $image := partial "GetMedia" .Params.image.id -}}

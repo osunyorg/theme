@@ -178,8 +178,15 @@
     &:not(.full-width)
         .project-sidebar
             @include sidebar
-            .project-infos
-                @include sidebar-infos
+
+    &.full-width
+        .project-sidebar
+            @include media-breakpoint-down(desktop)
+                @include container
+            
+            @include media-breakpoint-up(desktop)
+                @include aside-full-width
+    
     @include media-breakpoint-up(sm)
         .hero
             .project-infos

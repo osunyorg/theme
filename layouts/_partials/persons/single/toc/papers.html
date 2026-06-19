@@ -1,0 +1,6 @@
+{{ $papers := partial "persons/single/helpers/GetPapers" . }}
+{{ if $papers }}
+  <li>
+    <a {{ partial "helpers/anchor/GetAttribute" (i18n "persons.toc.papers") }}>{{ i18n "persons.toc.papers" }}</a>
+  </li>
+{{ end }}

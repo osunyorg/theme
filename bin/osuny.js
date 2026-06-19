@@ -43,7 +43,28 @@ let pagefindExclude = `
     .persons-posts,
     .persons-programs,
     .persons-publications,
-    .post-sidebar`;
+    .post-sidebar,
+    .events,
+    .exhibitions,
+    .jobs,
+    .journals,
+    .laboratories,
+    .organizations,
+    .pages,
+    .papers,
+    .persons,
+    .posts,
+    .programs,
+    .projects,
+    .publications,
+    .papers,
+    .schools,
+    .volumes`;
+
+// Pagefind command, exporting to public/pagefind
+let pagefindCommand = "npm_config_yes=true npx pagefind --site \"public\" --glob \"**/index.{html}\" --exclude-selectors \"" + pagefindExclude + "\"";
+// Pagefind variant command, exporting to static/pagefind, useful for local environment
+let pagefindDevCommand = pagefindCommand + " --output-subdir \"../static/pagefind\"";
 
 // Pagefind command, exporting to public/pagefind
 let pagefindCommand = "npm_config_yes=true npx pagefind --site \"public\" --glob \"**/index.{html}\" --exclude-selectors \"" + pagefindExclude + "\"";
@@ -60,6 +81,7 @@ if (command === "watch") {
 }
 
 if (command === "dev") {
+    execute("rm -rf public");
     execute("hugo");
     execute(pagefindDevCommand);
     execute("hugo server --minify");
