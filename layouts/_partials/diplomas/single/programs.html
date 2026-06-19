@@ -6,7 +6,7 @@
 {{ end }}
 <div class="container">
   <ol class="{{ $class }}">
-    {{ range .Params.programs }}
+    {{ range .Params.all_programs }}
       {{ $program := site.GetPage .path }}
       {{ partial "programs/partials/program.html" (dict
         "program" $program
