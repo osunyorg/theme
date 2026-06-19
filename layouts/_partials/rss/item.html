@@ -1,8 +1,8 @@
 <item>
   <title>
-    {{- printf "<![CDATA[" | safeHTML -}}
+    {{- printf "<![CDATA[" | safeHTML }}
       {{ .item.Title }}
-    {{- printf "]]>" | safeHTML -}}
+    {{ printf "]]>" | safeHTML -}}
   </title>
   <link>{{ .item.Permalink }}</link>
   <pubDate>{{ .item.PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
@@ -10,9 +10,9 @@
   <guid>{{ .item.Permalink }}</guid>
   {{- with .item.Summary }}
     <description>
-      {{- printf "<![CDATA[" | safeHTML -}}
+      {{- printf "<![CDATA[" | safeHTML }}
         {{ . | plainify }}
-      {{- printf "]]>" | safeHTML -}}
+      {{ printf "]]>" | safeHTML -}}
     </description>
   {{ end -}}
   {{ partial "rss/item/image.html" .item.Params.image }}
