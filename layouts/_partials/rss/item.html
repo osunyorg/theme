@@ -1,15 +1,19 @@
 <item>
-  <title>{{ .item.Title }}</title>
+  <title>
+    {{- printf "<![CDATA[" | safeHTML }}
+      {{ .item.Title }}
+    {{ printf "]]>" | safeHTML -}}
+  </title>
   <link>{{ .item.Permalink }}</link>
   <pubDate>{{ .item.PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
   {{- with .authorEmail }}<author>{{ . }}{{ with .authorName }} ({{ . }}){{ end }}</author>{{ end }}
   <guid>{{ .item.Permalink }}</guid>
   {{- with .item.Summary }}
-  <description>
-    {{- printf "<![CDATA[" | safeHTML -}}
-      {{ . | safeHTML }}
-    {{- printf "]]>" | safeHTML -}}
-  </description>
+    <description>
+      {{- printf "<![CDATA[" | safeHTML }}
+        {{ . | plainify }}
+      {{ printf "]]>" | safeHTML -}}
+    </description>
   {{ end -}}
   {{ partial "rss/item/image.html" .item.Params.image }}
   {{ partial "rss/item/taxonomies.html" .item.Params.taxonomies }}
