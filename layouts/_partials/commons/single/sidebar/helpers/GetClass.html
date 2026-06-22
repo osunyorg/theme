@@ -1,0 +1,16 @@
+{{ $class := "section-sidebar" }}
+{{ $type := ( .context.Type | singularize ) }}
+
+{{ with $type }}
+  {{ $class = printf "%s section-%s" $class . }}
+{{ end }}
+
+{{ if .with_meta }}
+  {{ $class = printf "%s section-sidebar--with-meta" $class }}
+{{ end }}
+
+{{ if .with_toc }}
+  {{ $class = printf "%s section-sidebar--with-toc" $class }}
+{{ end }}
+
+{{ return $class }}

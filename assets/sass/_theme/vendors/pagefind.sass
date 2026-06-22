@@ -147,7 +147,6 @@
         padding-top: $spacing-2
         padding-bottom: var(--grid-gutter)
         .pf-results
-            @include list-reset
             > li + li
                 margin-top: $spacing-3
         .pf-result
@@ -169,7 +168,6 @@
                 &:hover
                     @include link
             .pf-heading-chips
-                @include list-reset
                 padding-left: $spacing-2
                 margin-top: $spacing-2
                 > li + li
@@ -180,11 +178,19 @@
             font-weight: normal
 
     .pf-modal-aside
+        
         .pf-summary
             margin-bottom: $spacing-2
             &:empty
                 display: none
-
+        .pf-filter-pane-container
+            display: none
+            &--desktop
+                @include media-breakpoint-up(desktop)
+                    display: block
+            &--mobile
+                @include media-breakpoint-down(desktop)
+                    display: block
         .pf-filter-pane
             .pf-filter-group
                 border: 0

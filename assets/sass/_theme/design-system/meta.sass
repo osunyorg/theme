@@ -13,7 +13,7 @@
             &:not(:first-child)
                 padding-top: $spacing-2
                 border-top: var(--border-width) solid var(--color-border)
-            > ul
+            > ul, > :last-child
                 text-align: right
             &.taxonomies
                 padding-top: 0
@@ -23,13 +23,13 @@
         .taxonomy-title
             text-align: left
 
-@mixin meta-with-labels-columns
+@mixin meta-with-labels-columns($columns: 2)
     &, .taxonomies > ul
         align-items: baseline
         flex-direction: row
         gap: var(--grid-gutter)
         > li
-            width: columns(2)
+            width: columns($columns)
             > span
                 display: block
                 margin-bottom: $spacing-1
@@ -69,9 +69,6 @@
 .single-meta
     &:empty
         display: none
-
-    &, ul
-        @include list-reset
 
     li
         @include meta
@@ -145,6 +142,6 @@
     @include in-page-without-sidebar
         // in full width: display on 10 cols alongside toc
         &.content-meta
-            width: columns(10)
+            width: columns(12)
             &.with-labels
-                @include meta-with-labels-columns
+                @include meta-with-labels-columns(3)

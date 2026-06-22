@@ -21,8 +21,6 @@
         width: 100%
 
 .projects
-    > ul
-        @include list-reset
     &--grid
         @include grid(2, md)
         .project
@@ -168,25 +166,11 @@
             display: flex
             gap: $spacing-3
             > ul
-                @include list-reset
                 display: flex
                 column-gap: $spacing-3
                 flex-wrap: wrap
                 li
                     white-space: nowrap
-    
-    &:not(.full-width)
-        .project-sidebar
-            @include sidebar
-
-    &.full-width
-        .project-sidebar
-            @include media-breakpoint-down(desktop)
-                @include container
-            
-            @include media-breakpoint-up(desktop)
-                @include aside-full-width
-    
     @include media-breakpoint-up(sm)
         .hero
             .project-infos

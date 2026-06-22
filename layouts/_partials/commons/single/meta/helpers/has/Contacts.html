@@ -1,0 +1,7 @@
+{{ $has_contacts := false }}
+
+{{ with .Params.contact_details }}
+  {{ $has_contacts = or .postal_address .websites .social_networks .emails .phone_numbers .phone_professional }}
+{{ end }}
+
+{{ return $has_contacts }}

@@ -4,7 +4,7 @@ services:
 module:
   hugoVersion:
     extended: true
-    min: 0.161.1
+    min: 0.162.1
 removePathAccents: true
 ignoreLogs: ['warning-goldmark-raw-html']
 markup:
@@ -14,6 +14,8 @@ markup:
 pagination:
   pagerSize: 36
 security:
+  allowContent:
+    - html
   node:
     permissions:
       allowRead:
@@ -126,16 +128,15 @@ params:
       meta:
         position: content
         options:
-          authors: true
-          dates: true
-          published_at: true
-          reading_time: true
-          share: true
+          authors: false
+          dates: false
+          published_at: false
+          reading_time: false
+          share: false
           taxonomies: true
-          updated_at: true
+          updated_at: false
           with_labels: true
       taxonomies: # for organizations, persons, events and exhibitions (to be removed with meta)
-        position: content # content | hero | none
         show_name: true
     sitemap:
       ignore_children: false
@@ -277,6 +278,11 @@ params:
         dates: true
         with_more: true
       truncate_description: 200 # Set to 0 to disable truncate
+    single:
+      meta:
+        options:
+          dates: true
+          share: true
   journals:
     index:
       layout: list
@@ -297,7 +303,6 @@ params:
         link: true
         logo: true
         summary: false
-      
     single:
       backlinks: false
   pages:
@@ -312,8 +317,13 @@ params:
         summary: true
       truncate_description: 200 # Set to 0 to disable truncate
     single:
-      taxonomies:
-        position: content # content | hero | none
+      meta:
+        position: hero
+        options:
+          published_at: false
+          reading_time: false
+          share: false
+          updated_at: false
   papers:
     default_image: false
     sidebar:
@@ -367,8 +377,6 @@ params:
           status: false
           subtitle: true
           summary: true
-      taxonomies:
-        position: content # content | hero | none
   posts:
     default_image: false
     date_format: ":date_long"
@@ -384,6 +392,13 @@ params:
         subtitle: true
       truncate_description: 200 # Set to 0 to disable truncate
     single:
+      meta:
+        options:
+          authors: true
+          published_at: true
+          reading_time: true
+          share: true
+          updated_at: true
       options:
         signature: false
     # share_links: # Optional

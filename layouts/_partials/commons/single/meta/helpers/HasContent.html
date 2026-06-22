@@ -1,0 +1,17 @@
+{{ $has_authors := partial "commons/single/meta/helpers/has/Authors" . }}
+{{ $has_contacts := partial "commons/single/meta/helpers/has/Contacts" . }}
+{{ $has_published_at := partial "commons/single/meta/helpers/has/PublishedAt" . }}
+{{ $has_reading_time := partial "commons/single/meta/helpers/has/ReadingTime" . }}
+{{ $has_share := partial "commons/single/meta/helpers/has/Share" . }}
+{{ $has_taxonomies := partial "commons/single/meta/helpers/has/Taxonomies" . }}
+{{ $has_updated_at := partial "commons/single/meta/helpers/has/UpdatedAt" . }}
+
+{{ return (or
+  $has_authors
+  $has_contacts
+  $has_published_at
+  $has_reading_time
+  $has_share
+  $has_taxonomies
+  $has_updated_at
+) }}

@@ -163,9 +163,13 @@ window.osuny.TableOfContents.prototype.updateScrollspy = function (scroll) {
     var container = this.state.isOffcanvas ? this.elements.nav : this.elements.content;
     if (this.state.currentLink && scroll > window.innerHeight) {
         var progress = this.getAbsoluteOffsetTop(this.state.currentLink) - container.offsetHeight / 2;
-        progress = this.state.isOffcanvas ? progress : progress - scroll;
+        var scrollLimit = this.elements.root.offsetTop + window.innerHeight;
+        if (!this.state.isOffcanvas) {
+            progress = progress - Math.min(scrollLimit, scroll);
+        }
         container.scrollTo({
-            top: progress
+            top: progress,
+            behavior: "smooth"
         });
     }
 };
