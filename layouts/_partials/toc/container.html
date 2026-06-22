@@ -1,8 +1,10 @@
 {{ $is_present := partial "toc/helpers/IsPresent" .context }}
+{{ $with_cta := .with_cta | default true }}
 
 {{ if $is_present }}
-  {{ partial "toc/cta.html" }}
-
+  {{ if $with_cta }}
+    {{ partial "toc/cta.html" . }}
+  {{ end }}
   <div class="toc-container" aria-hidden="false">
     <div class="toc-content">
       {{/* TODO : quelle balise pour le titre du toc ? */}}
