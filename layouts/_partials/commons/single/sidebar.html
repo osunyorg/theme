@@ -14,8 +14,9 @@
 ) }}
 
 {{ if or $with_toc $has_meta }}
-  {{ partial "toc/cta.html" }}
-
+  {{ if $with_toc }}
+    {{ partial "toc/cta.html" . }}
+  {{ end }}
   <div class="{{ $class }}">
       {{ if $has_meta }}
         <aside class="meta-container">
