@@ -1,4 +1,5 @@
 {{ $is_present := partial "toc/helpers/IsPresent" .context }}
+{{ $with_cta := .with_cta | default true }}
 
 {{ if $is_present }}
   {{ partial "toc/cta.html" }}

@@ -14,6 +14,8 @@
 ) }}
 
 {{ if or $with_toc $has_meta }}
+  {{ partial "toc/cta.html" }}
+
   <div class="{{ $class }}">
       {{ if $has_meta }}
         <aside class="meta-container">
@@ -23,6 +25,7 @@
       {{ if $with_toc }}
         {{ partial "toc/container.html" (dict
           "context" .context
+          "with_cta" false
           "toc" .toc
         ) }}
       {{ end }}
