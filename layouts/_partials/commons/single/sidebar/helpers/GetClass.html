@@ -2,7 +2,7 @@
 {{ $type := ( .context.Type | singularize ) }}
 
 {{ with $type }}
-  {{ $class = printf "%s section-%s" $class . }}
+  {{ $class = printf "%s %s-sidebar" $class . }}
 {{ end }}
 
 {{ if .with_meta }}
