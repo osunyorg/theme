@@ -2,6 +2,8 @@
 {{ $class := partial "persons/partials/person/helper/GetClass" . }}
 <li>
   <article class="{{ $class }}" itemscope itemtype="https://schema.org/Person">
+    <meta itemprop="url" content="{{ .person.Permalink }}">
+    <meta itemprop="image" content="{{ .person.Params.image }}">
     <div class="description">
       {{ partial "persons/partials/person/name.html" (dict
         "person" .person
