@@ -1,8 +1,6 @@
 <item>
   <title>
-    {{- printf "<![CDATA[" | safeHTML }}
-      {{ .item.Title }}
-    {{ printf "]]>" | safeHTML -}}
+    {{ printf "<title><![CDATA[%s]]></title>" .item.Title | safeHTML }}
   </title>
   <link>{{ .item.Permalink }}</link>
   <pubDate>{{ .item.PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
