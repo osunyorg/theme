@@ -1,7 +1,7 @@
 {{ $duration := .Params.duration }}
 {{ $diploma := "" }}
 {{ with .Params.diplomas }}
-  {{ $diploma = site.GetPage (printf "/diplomas/%s" .) }}
+  {{ $diploma = site.GetPage .path }}
   {{ $duration = $duration | default $diploma.Params.duration }}
 {{ end }}
 {{- if or $diploma $duration .Params.parent .Params.locations -}}
@@ -15,8 +15,9 @@
       {{- end -}}
     {{- end -}}
     {{- with .Params.parent -}}
+      {{ $parent := site.GetPage .path }}
       <dt>{{ i18n "programs.mention" }}</dt>
-      <dd><a href="{{ .url }}">{{ safeHTML .title }}</a></dd>
+      <dd><a href="{{ .Permalink }}">{{ safeHTML $parent.Title }}</a></dd>
     {{- end -}}
     {{- with $duration -}}
       <dt>{{ i18n "programs.duration" }}</dt>

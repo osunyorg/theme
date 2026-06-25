@@ -6,9 +6,10 @@
 {{ end }}
 <div class="container">
   <ol class="{{ $class }}">
-    {{ range .Pages.ByTitle }}
+    {{ range .Params.all_programs }}
+      {{ $program := site.GetPage .path }}
       {{ partial "programs/partials/program.html" (dict
-        "program" .
+        "program" $program
         "heading_level" 2
         "options" site.Params.diplomas.single.programs.options
         "layout" $layout
