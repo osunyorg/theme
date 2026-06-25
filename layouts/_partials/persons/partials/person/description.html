@@ -1,0 +1,22 @@
+<div class="description">
+  {{ partial "persons/partials/person/name.html" (dict
+    "person" .person
+    "options" .options
+    "heading_level" .heading_level
+  ) }}
+  {{ if .options.summary }}
+    {{ partial "persons/partials/person/summary.html" (dict
+      "person" .person
+      "role" .role
+    ) }}
+  {{ end }}
+  {{ if .options.contact }}
+    {{ partial "persons/partials/person/contact.html" .person }}
+  {{ end }}
+  {{ if and .options.link (eq .layout "large") }}
+    {{ partial "persons/partials/person/more.html" .person }}
+  {{ end }}
+  {{ if .options.cohorts }}
+    {{ partial "persons/partials/person/cohorts.html" .person.Params.cohorts }}
+  {{ end }}
+</div>
