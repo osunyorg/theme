@@ -3,18 +3,18 @@
 <li>
   <article class="{{ $class }}" itemscope itemtype="https://schema.org/Person">
     <meta itemprop="url" content="{{ .person.Permalink }}">
-    <meta itemprop="image" content="{{ .person.Params.image }}">
-      {{ partial "persons/partials/person/description.html" (dict
-        "person" .person
-        "options" $options
-        "role" .role
-        "heading_level" .heading_level
-        "layout" .layout
-      ) }}
+    {{ partial "persons/partials/person/description.html" (dict
+      "person" .person
+      "options" $options
+      "role" .role
+      "heading_level" .heading_level
+      "layout" .layout
+    ) }}
     {{ if $options.image }}
       {{ partial "persons/partials/person/avatar.html" (dict
         "person" .person
         "sizes" .image_sizes
+        "itemprop" "image"
       ) }}
     {{ end }}
   </article>
