@@ -1,5 +1,5 @@
-{{ with .Params.diplomas }}
-  {{- $diploma := site.GetPage (printf "/diplomas/%s" .) -}}
+{{ with .Params.diploma }}
+  {{- $diploma := site.GetPage .path -}}
   {{- with $diploma -}}
     {{- with .Params.short_name -}}
       <span class="program-diploma">{{ safeHTML . }}</span>
