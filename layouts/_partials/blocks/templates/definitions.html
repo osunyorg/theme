@@ -13,7 +13,9 @@
             {{ $id := printf "block-%s-element-%d" $html_id $index }}
             <details id="{{ $id }}" class="definition" itemscope itemtype="https://schema.org/DefinedTerm">
               <summary itemprop="name" aria-controls="{{ $id }}" aria-expanded="false">{{ $element.title | safeHTML }}</summary>
-              <div itemprop="description" class="definition-content rich-text">{{ safeHTML $element.description }}</div>
+              {{ with $element.description }}
+                <div itemprop="description" class="definition-content rich-text">{{ safeHTML . }}</div>
+              {{ end }}
             </details>
           {{ end }}
         </div>
