@@ -11,9 +11,11 @@
       {{ else }}
         title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .organization.Title)) }}"
       {{ end }}>
-  {{ end }}
-  {{- .organization.Title -}}
-  {{ if .options.link }}
+  {{ end -}}
+  <span>
+    {{- .organization.Title -}}
+  </span>
+  {{- if .options.link }}
     </a>
   {{ end }}
 {{ $heading_tag.close }}
