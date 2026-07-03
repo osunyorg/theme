@@ -1,0 +1,34 @@
+{{ $meta := .meta | default (partial "commons/single/meta.html" .context) }}
+{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" .context }}
+{{ $has_meta := false }}
+{{ if eq $meta_position "content" }}
+  {{ $has_meta = partial "commons/single/meta/helpers/HasContent" .context }}
+{{ end }}
+
+{{ $with_toc := partial "toc/helpers/IsPresent" .context }}
+
+{{ $class := partial "commons/single/sidebar/helpers/GetClass" (dict 
+  "with_meta" $has_meta
+  "with_toc" $with_toc
+  "context" .context
+) }}
+
+{{ if or $with_toc $has_meta }}
+  {{ if $with_toc }}
+    {{ partial "toc/cta.html" . }}
+  {{ end }}
+  <div class="{{ $class }}">
+      {{ if $has_meta }}
+        <aside class="meta-container">
+          {{- $meta -}}
+        </aside>
+      {{ end }}
+      {{ if $with_toc }}
+        {{ partial "toc/container.html" (dict
+          "context" .context
+          "with_cta" false
+          "toc" .toc
+        ) }}
+      {{ end }}
+  </div>
+{{ end }}

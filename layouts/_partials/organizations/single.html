@@ -2,21 +2,17 @@
 {{ partial "organizations/single/pagefind.html" . }}
 
 <div class="document-content">
-  {{ partial "toc/container.html" (dict
-    "context" .
-  ) }}
+  
   <div class="container">
-    <div itemprop="articleBody">
-      {{ partial "organizations/single/summary.html" (dict
-        "context" .
-      ) }}
+    <div itemprop="articleBody" class="organization-presentation-container">
+      {{ partial "organizations/single/summary.html" . }}
       {{ partial "organizations/single/presentation.html" . }}
-      {{ partial "taxonomies/single/container.html" . }}
-      {{ partial "commons/contact-details.html" (dict "subject" .) }}
     </div>
     {{ partial "organizations/partials/logo.html" . }}
   </div>
 
+  {{ partial "organizations/single/sidebar.html" . }}
+  
   {{ partial "contents/list.html" (dict
     "context" .
     "contents" .Params.contents

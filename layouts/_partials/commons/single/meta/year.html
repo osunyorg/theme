@@ -1,6 +1,6 @@
-{{ $with_year := site.Params.projects.single.meta.options.year }}
+{{ $has_year := partial "commons/single/meta/helpers/has/Year" . }}
 
-{{ if and $with_year .Params.year }}
+{{ if and $has_year .Params.year }}
   <li class="year">
     <span>{{ i18n "projects.year" }}</span>
     <time datetime="{{ .Params.year }}">{{ .Params.year }}</time>

@@ -1,0 +1,5 @@
+{{ $class := partial "blocks/helpers/GetClass" . }}
+{{ if .data.options.logo }}
+  {{ $class = printf "%s organizations--with-images" $class }}
+{{ end }}
+{{ return $class }}

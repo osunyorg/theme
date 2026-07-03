@@ -1,0 +1,15 @@
+{{ $papers := partial "persons/single/helpers/GetPapers" . }}
+{{ $posts := partial "persons/single/helpers/GetPosts" . }}
+{{ $programs := partial "persons/single/helpers/GetPrograms" (dict
+  "slug" .Slug
+  "type" "teachers"
+) }}
+
+{{ $publications_grouped := partial "persons/single/helpers/GetPublications" . }}
+
+{{ return (or
+  $papers
+  $posts
+  $programs
+  $publications_grouped
+) }}

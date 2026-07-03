@@ -56,13 +56,6 @@ window.osuny.Search.prototype.updateSearchFiltersToAny = function () {
 
 window.osuny.Search.prototype.resize = function () {
     this.state.isMobile = isMobile();
-    this.elements.pagefindFilters.expanded = !this.state.isMobile;
-    if (this.state.isMobile) {
-        this.closeFilters();
-    } else {
-        this.openFilters();
-    }
-
 };
 
 window.osuny.Search.prototype.onToggle = function (event) {
@@ -85,23 +78,6 @@ window.osuny.Search.prototype.onClose = function () {
 window.osuny.Search.prototype.updateDocumentAccessibility = function () {
     document.body.style.overflow = this.state.isOpened ? 'hidden' : 'auto';
     ariaHideBodyChildren(this.elements.root, this.state.isOpened);
-};
-
-
-window.osuny.Search.prototype.openFilters = function () {
-    this.toggleFilters(true);
-};
-
-window.osuny.Search.prototype.closeFilters = function () {
-    this.toggleFilters(false);
-};
-
-window.osuny.Search.prototype.toggleFilters = function (opened = true) {
-    this.details = this.elements.detailsContainer.querySelectorAll('.pf-filter-group');
-
-    this.details.forEach( function (detail) {
-        detail.open = opened;
-    }.bind(this));
 };
 
 window.osuny.Search.prototype.searchInType = function () {

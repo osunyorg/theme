@@ -1,4 +1,5 @@
 {{ if site.Params.search.active }}
+  <script src="/pagefind/pagefind-component-ui.js?v=9.5" type="module"></script>
   <pagefind-modal reset-on-close="true">
     <div class="container pf-modal-container">
       <pagefind-modal-header>
@@ -9,7 +10,8 @@
           <div class="pf-modal-aside">
             <div class="pf-modal-aside-content">
               <pagefind-summary></pagefind-summary>
-              <pagefind-filter-pane expanded auto-open-threshold="0" label="{{ i18n "commons.search.filters" }}"></pagefind-filter-pane>
+              <pagefind-filter-pane class="pf-filter-pane-container pf-filter-pane-container--desktop" expanded auto-open-threshold="0" label="{{ i18n "commons.search.filters" }}"></pagefind-filter-pane>
+              <pagefind-filter-pane class="pf-filter-pane-container pf-filter-pane-container--mobile" auto-open-threshold="0" label="{{ i18n "commons.search.filters" }}"></pagefind-filter-pane>
             </div>
           </div>
           <pagefind-results
@@ -23,5 +25,4 @@
       {{ partial "commons/search/hooks/before-modal-end.html" . }}
     </div>
   </pagefind-modal>
-  <script src="/pagefind/pagefind-component-ui.js" defer async></script>
 {{ end }}

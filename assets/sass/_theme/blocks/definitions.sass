@@ -19,13 +19,12 @@
             &:hover
                 color: $block-definition-color-hovered
         summary,
-        p
+        .definition-content *
             font-size: $block-definition-font-size
             @include media-breakpoint-up(desktop)
                 font-size: $block-definition-font-size-desktop
-        p
-            margin-block-start: 0
-            margin-block-end: $spacing-3
+        .definition-content
+            padding-bottom: $spacing-3
         &::after
             content: ""
             border-bottom: var(--border-width) solid $block-definition-border-color

@@ -10,11 +10,6 @@ $button-selector: "a:first-child"
             margin-bottom: $spacing-2
             + .description
                 margin-top: 0
-        .description
-            * + ul, * + ol
-                margin-top: space(4)
-            ul:last-child, ol:last-child
-                margin-bottom: 0
     .call_to_action
         color: #{$block-call-to-action-color}
         .description
@@ -23,6 +18,8 @@ $button-selector: "a:first-child"
                 text-decoration-color: #{$block-call-to-action-color}
             p
                 @include h2
+                + p
+                    margin-top: space(2)
         .actions
             [role="group"]
                 @include media-breakpoint-down(desktop)

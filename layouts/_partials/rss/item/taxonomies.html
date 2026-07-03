@@ -3,7 +3,7 @@
     {{ $category := site.GetPage .path }}
     <category>
     {{ printf "<![CDATA[" | safeHTML }}
-      {{ $category.Title }}
+      {{ $category.Title | plainify }}
     {{ printf "]]>" | safeHTML }}
     </category>
   {{ end }}

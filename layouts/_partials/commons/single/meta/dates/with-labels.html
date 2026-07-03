@@ -1,4 +1,4 @@
-{{ if .with_published_at }}
+{{ if .has_published_at }}
   <li class="meta-dates published-at">
     <span>{{ i18n "commons.published_at" }}</span>
     <time datetime="{{ .context.Date.Format "2006-01-02T15:04" }}">
@@ -6,7 +6,7 @@
     </time>
   </li>
 {{ end }}
-{{ if .with_updated_at }}
+{{ if .has_updated_at }}
   <li class="meta-dates updated-at">
     <span>{{ i18n "commons.updated_at" }}</span>
     <time datetime="{{ .context.Params.lastmod.Format "2006-01-02T15:04" }}">

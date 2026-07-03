@@ -1,0 +1,15 @@
+{{ $with_toc := partial "toc/helpers/IsPresent" .context }}
+{{ $class := partial "commons/single/sidebar/helpers/GetClass" (dict 
+  "with_meta" false
+  "with_toc" $with_toc
+  "context" .context
+) }}
+
+{{ if $with_toc }}
+  <div class="{{ $class }}">
+    {{ partial "toc/container.html" (dict
+      "context" .context
+      "toc" .toc
+    ) }}
+  </div>
+{{ end }}

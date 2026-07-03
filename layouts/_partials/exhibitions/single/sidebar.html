@@ -1,14 +1,5 @@
-{{ $meta_position := partial "commons/single/meta/helpers/GetPosition" . }}
+{{ partial "commons/single/sidebar.html" (dict
+  "context" .
+  "meta" ( partial "events/single/meta.html" . )
+) }}
 
-<div class="section-sidebar exhibition-sidebar">
-  <div>
-    {{ if eq $meta_position "content" }}
-      <aside>
-        {{- partial "events/single/meta.html" . -}}
-      </aside>
-    {{ end }}
-    {{ partial "toc/container.html" (dict
-      "context" .
-    ) }}
-  </div>
-</div>

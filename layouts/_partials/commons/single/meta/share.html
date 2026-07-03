@@ -1,12 +1,5 @@
-{{ $enabled_share := partial "helpers/param/GetSiteParamWithDefault" (dict
-  "param" (printf "%s.share_links.enabled" .Type)
-  "default" "share_links.enabled"
-) }}
-{{ $with_share := partial "helpers/param/GetSiteParamWithDefault" (dict
-  "param" (printf "%s.single.meta.options.share" .Type)
-  "default" "default.single.meta.options.share"
-) }}
+{{ $has_share := partial "commons/single/meta/helpers/has/Share" . }}
 
-{{ if and $with_share $enabled_share }}
+{{ if $has_share }}
   {{ partial "commons/share/list-item.html" . }}
 {{ end }}
