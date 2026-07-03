@@ -1,10 +1,19 @@
+{{ $items := .items }}
+{{ $type := .type }}
+{{ if in (slice "persons" "organizations" "programs") $type }}
+  {{ $items = $items.ByTitle }}
+{{ end }}
+
 <ul>
-  {{ range . }}
+  {{ range $items }}
     {{ if not .Params.ignore.in_sitemap }}
       <li>
         <a href="{{ .Permalink }}">{{ safeHTML .Title }}</a>
         {{ with .Pages }}
-          {{ partial "sitemap/sections/children.html" . }}
+          {{ partial "sitemap/sections/children.html" (dict
+            "items" .
+            "type" $type
+          ) }}
         {{ end }}
       </li>
     {{ end }}

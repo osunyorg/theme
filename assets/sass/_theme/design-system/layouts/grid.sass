@@ -1,6 +1,5 @@
-@mixin layout-grid($columns: 3)
-    @include list-reset
-    article
+@mixin layout-grid($columns: 3, $item-selector: article)
+    #{$item-selector}
         @include article
         @include layout-item
         @include small-arrow-right-hover('.more')

@@ -1,7 +1,12 @@
+{{ $transcription := printf "<p>%s</p>" .video.title }}
+{{ if .transcription }}
+  {{ $transcription = printf "%s%s" $transcription .transcription }}
+{{ end }}
+
 {{ $options := (dict
   "mode" "player"
   "videoId" .html_id
-  "transcription" (printf "<p>%s</p>%s" .video.title .transcription)
+  "transcription" $transcription
 ) }}
 <button class="btn"
   id="play-{{ .html_id }}"

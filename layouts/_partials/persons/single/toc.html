@@ -1,0 +1,12 @@
+<nav class="toc toc-persons" id="nav-toc" aria-labelledby="toc-title">
+  <ol>
+    {{ partial "persons/single/toc/contents.html" . }}
+    {{ partial "persons/single/toc/programs.html" . }}
+    {{ partial "persons/single/toc/publications.html" . }}
+    {{ partial "persons/single/toc/posts.html" . }}
+    {{ partial "persons/single/toc/papers.html" . }}
+    {{ if site.Params.persons.single.backlinks }}
+      {{ partial "persons/single/toc/backlinks.html" . }}
+    {{ end }}
+  </ol>
+</nav>

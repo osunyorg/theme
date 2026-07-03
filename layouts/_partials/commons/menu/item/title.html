@@ -1,5 +1,5 @@
 {{ $attributes := .attributes }}
-{{ $link_class := .link_class }}
+{{ $link_class := .link_class | default "" }}
 {{ $title_attribute := printf "title=\"%s\"" .item.title }}
 
 {{ if .is_active }}

@@ -1,0 +1,8 @@
+{{ $type_label := i18n "sitemap.pages" }}
+{{ $index_page := .GetPage .Type }}
+
+{{ with $index_page }}
+  {{ $type_label = .Title }}
+{{ end }}
+
+{{ return $type_label }}

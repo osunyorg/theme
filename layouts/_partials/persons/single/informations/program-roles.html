@@ -6,7 +6,7 @@
       {{ $role := .title }}
       {{ if in .persons $slug }}
         <p>
-          {{ safeHTML $role }}<br>
+          <span>{{ safeHTML $role }}</span>
           <a href="{{ $program.Permalink }}" class="link">{{ safeHTML $program.Title }}</a>
         </p>
       {{ end }}

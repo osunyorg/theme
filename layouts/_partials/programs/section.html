@@ -16,5 +16,7 @@
 
   {{ partial "taxonomies/section/container.html" . }}
 
-  {{ partial "programs/section/programs.html" . }}
+  {{ if not ( partial "programs/section/helpers/HasBlockPrograms" . ) }}
+    {{ partial "programs/section/programs.html" . }}
+  {{ end }}
 </div>

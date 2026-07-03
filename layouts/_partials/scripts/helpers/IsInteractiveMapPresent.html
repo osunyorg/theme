@@ -1,6 +1,6 @@
 {{ $is_interactive_map_present := false }}
 {{ $page_contents := .Params.contents }}
-{{ $website_content := index site.Data.website site.Language.Lang "contents" }}
+{{ $website_content := index hugo.Data.website site.Language.Name "contents" }}
 
 {{ range slice $page_contents $website_content }}
   {{ range . }}

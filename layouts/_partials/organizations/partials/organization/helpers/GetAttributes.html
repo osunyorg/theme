@@ -20,7 +20,7 @@
 {{ if and $options.filters $organization.Params.organizations_categories }}
   {{ $categories := partial "organizations/helpers/GetCategoriesSlug" $organization }}
   {{ $categories = $categories | encoding.Jsonify }}
-  {{ $attributes = printf "%s data-filters=\"%q\"" $attributes $categories }}
+  {{ $attributes = printf "%s data-filters='%s'" $attributes $categories }}
 {{ end }}
 
 {{ return $attributes }}

@@ -1,0 +1,6 @@
+{{ $taxonomies := partial "helpers/param/GetSiteParamWithDefault" (dict
+  "param" (printf "%s.single.meta.options.taxonomies" .Type)
+  "default" "default.single.meta.options.taxonomies"
+) }}
+
+{{ return (and $taxonomies .Params.taxonomies) }}

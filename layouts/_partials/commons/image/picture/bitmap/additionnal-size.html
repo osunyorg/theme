@@ -1,0 +1,10 @@
+{{ $url := .url }}
+{{ $crop := .crop }}
+{{ range .sizes.additionnal }}
+  {{ partial "commons/image/picture/bitmap/size.html" (dict
+    "crop" $crop
+    "media" .rule
+    "size" .size
+    "url" $url
+  ) }}
+{{ end }}

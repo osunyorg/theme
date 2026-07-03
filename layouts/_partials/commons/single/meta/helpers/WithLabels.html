@@ -1,0 +1,6 @@
+{{ $with_labels := partial "helpers/param/GetSiteParamWithDefault" (dict
+  "param" (printf "%s.single.meta.options.with_labels" .Type)
+  "default" "default.single.meta.options.with_labels"
+) }}
+
+{{ return $with_labels }}

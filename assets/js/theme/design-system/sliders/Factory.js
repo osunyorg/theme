@@ -25,11 +25,8 @@ osuny.SlidersFactory.prototype.reinit = function () {
 osuny.SlidersFactory.prototype.create = function (element, index) {
     var titleId;
 
-    // Check if carousel as more than one slide
-    if (element.children.length > 1) {
-        titleId = this.getTitleId(element, index);
-        this.sliders.push(new osuny.Slider(element, titleId));
-    }
+    titleId = this.getTitleId(element, index);
+    this.sliders.push(new osuny.Slider(element, titleId));
 };
 
 osuny.SlidersFactory.prototype.activate = function () {

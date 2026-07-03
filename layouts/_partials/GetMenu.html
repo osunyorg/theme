@@ -1,5 +1,5 @@
 {{ $kind := . }}
-{{ $menus := index site.Data.menus (printf "%s" site.Language) }}
+{{ $menus := index hugo.Data.menus (printf "%s" site.Language) }}
 {{ $menu := "" }}
 {{/*  Try to get menus from the data/menus/<lang> directory  */}}
 {{ if (and $menus (isset $menus $kind)) }}
@@ -7,7 +7,7 @@
   {{ $menu = index $menus $kind }}
 {{ else }}
   {{/*  Fallback to menu in the data/menus directory  */}}
-  {{ $menu = index site.Data.menus $kind }}
+  {{ $menu = index hugo.Data.menus $kind }}
 {{ end }}
 
 {{ if reflect.IsSlice $menu }}

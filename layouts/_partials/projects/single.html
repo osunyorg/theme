@@ -1,18 +1,12 @@
 {{ partial "projects/single/hero.html" . }}
+{{ partial "projects/single/pagefind.html" . }}
 
-<div class="document-content" itemscope itemtype="https://schema.org/CreativeWork">
+<div class="document-content">
   <meta itemprop="name" content="{{ safeHTML .Title }}">
   <meta itemprop="url" content="{{ .Permalink }}">
   {{ with .Params.summary }}<meta itemprop="description" content="{{ . | safeHTML }}">{{ end }}
 
   {{ partial "projects/single/sidebar.html" . }}
-
-  {{ $taxonomies_position := partial "taxonomies/helpers/GetPosition" . }}
-  {{ if and .Params.design.full_width .Params.taxonomies (eq $taxonomies_position "content") }}
-    <div class="container">
-      {{ partial "taxonomies/single/container.html" . }}
-    </div>
-  {{ end }}
 
   {{ partial "projects/single/summary.html" (dict
     "context" .

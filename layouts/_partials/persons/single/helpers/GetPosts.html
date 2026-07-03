@@ -1,0 +1,6 @@
+{{ $author := site.GetPage (printf "/authors/%s" .Slug) }}
+{{ $posts := slice }}
+{{ with $author }}
+  {{ $posts = where .Pages "Section" "posts" }}
+{{ end }}
+{{ return $posts }}

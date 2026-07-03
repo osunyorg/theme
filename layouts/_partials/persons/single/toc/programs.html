@@ -1,0 +1,9 @@
+{{ $programs := partial "persons/single/helpers/GetPrograms" (dict
+  "slug" .Slug
+  "type" "teachers"
+) }}
+{{ if $programs }}
+  <li>
+    <a {{ partial "helpers/anchor/GetAttribute" (i18n "persons.toc.programs") }}>{{ i18n "persons.toc.programs" }}</a>
+  </li>
+{{ end }}

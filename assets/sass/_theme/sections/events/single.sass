@@ -5,13 +5,6 @@
             display: flex
             @include media-breakpoint-down(desktop)
                 flex-direction: column
-        .taxonomies-single
-            a
-                @include meta
-                @include link(var(--color-accent))
-            .taxonomy-children
-                li
-                    line-height: 100%
         @include media-breakpoint-up(desktop)
             margin-bottom: 0
             figure
@@ -38,6 +31,7 @@
                 .hero-text
                     align-items: flex-end
                     flex-wrap: wrap
+                    gap: var(--grid-gutter)
                     width: columns(12)
                     .taxonomies-single
                         order: 2
@@ -79,12 +73,13 @@
                 &.image-square
                     width: columns(6)
         @include h3
-    &:not(.full-width)
-        .section-sidebar
-            @include sidebar
     .programme-btn
         @extend .button--alt
         @extend .button--small
+        margin-bottom: var(--grid-gutter)
+    .section-sidebar
+        aside + .programme-btn
+            margin-top: var(--grid-gutter)
     .event-access
         > div:first-child
             padding-top: $spacing-4
@@ -124,14 +119,12 @@
                 .btn
                     margin-top: $spacing-3
         .event-slots
-            ul
-                @include list-reset
-                + .btn
-                    --btn-background: var(--color-background-alt)
-                    --btn-border: none
-                    --btn-hover-border: none
-                    --btn-hover-background: var(--color-border)
-                    margin-top: $spacing-3
+            ul + .btn
+                --btn-background: var(--color-background-alt)
+                --btn-border: none
+                --btn-hover-border: none
+                --btn-hover-background: var(--color-border)
+                margin-top: $spacing-3
             @include media-breakpoint-up(desktop)
                 &.parent-event, &.simple-event
                     display: flex
@@ -155,6 +148,8 @@
                 time + time
                     @include icon(arrow-right-line)
                         padding-right: space()
+            &__archive
+                @include small
             .dropdown-calendar
                 @include dropdown
                 @include meta
@@ -203,6 +198,8 @@
                 .hours
                     width: columns(2)
                     white-space: nowrap
+                &__archive
+                    margin-left: auto
             .event-summary + ul
                 .dropdown-calendar
                     button
@@ -278,23 +275,12 @@
 
 .event-infos,
 .exhibition-infos
-    @include list-reset
     @include media-breakpoint-up(desktop)
         font-size: $table-body-size-desktop
-        padding-bottom: $spacing-4
     [class$="-date"]
         text-transform: capitalize
-    ul
-        @include list-reset
     > li, .taxonomies-single > li
-        padding-top: $spacing-2
-        &:not(:last-child)
-            padding-bottom: $spacing-2
         > span
-            @include meta
-            color: var(--color-text-alt)
-            padding-left: 0
-            display: block
             white-space: nowrap
         time + time
             @include icon(arrow-right-line)

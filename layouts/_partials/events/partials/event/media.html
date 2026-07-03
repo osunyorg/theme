@@ -1,5 +1,5 @@
 {{ $sizes := index site.Params.image_sizes.sections.events .layout }}
-{{ if and .event.Params.parent (eq .layout "agenda") }}
+{{ if and .event.Params.parent (eq .layout "agenda") .is_sub_event }}
   {{ $sizes = site.Params.image_sizes.sections.events.children_in_agenda }}
 {{ end }}
 {{ partial "commons/item/media.html" (dict

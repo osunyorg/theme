@@ -1,11 +1,12 @@
 @mixin layout-large
-    @include list-reset
+    
     > li + li
         margin-top: $spacing-5
     article
         @include article
         @include layout-item
         @include small-arrow-right-hover('.more')
+        hgroup,
         [class$="-title"]
             @include h2
         @include media-breakpoint-down(desktop)

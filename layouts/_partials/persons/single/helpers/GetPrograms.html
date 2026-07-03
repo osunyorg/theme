@@ -1,5 +1,6 @@
 {{- $programs := slice -}}
 {{ if isset site.Taxonomies .type -}}
   {{ $programs = index site.Taxonomies .type .slug }}
+  {{ $programs = where $programs "Section" "programs" }}
 {{- end }}
 {{ return $programs }}

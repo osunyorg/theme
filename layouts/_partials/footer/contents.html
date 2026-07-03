@@ -1,4 +1,4 @@
-{{ $contents := index site.Data.website site.Language.Lang "contents" }}
+{{ $contents := index hugo.Data.website site.Language.Name "contents" }}
 {{ if $contents }}
   <div class="footer-contents contents-full-width">
     {{ partial "contents/list.html" (dict

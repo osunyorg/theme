@@ -1,22 +1,32 @@
-<div class="d-grid">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
-  <div>5</div>
-  <div>6</div>
-  <div>7</div>
-  <div>8</div>
-  <div>9</div>
-  <div>10</div>
-  <div>11</div>
-  <div>12</div>
+<div class="d-grid-container" popover>
+  <div class="d-grid">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div>8</div>
+    <div>9</div>
+    <div>10</div>
+    <div>11</div>
+    <div>12</div>
+  </div>
 </div>
 
 <style>
+  .d-grid-container {
+    display: none;
+    background: none;
+    border: none;
+  }
+  .d-grid-container.is-visible {
+    display: block;
+  }
   .d-grid {
     bottom: 0;
-    display: none;
+    display: grid;
     grid-gap: var(--grid-gutter);
     grid-template-columns: repeat(12, 1fr);
     padding: 0 var(--grid-gutter);
@@ -31,9 +41,6 @@
     z-index: 9999;
     font-family: sans-serif;
     font-size: 12px;
-  }
-  .d-grid.is-visible {
-    display: grid;
   }
   .d-grid > div {
     background: rgba(255,0,255,0.2);
@@ -55,7 +62,9 @@
 <script>
   window.addEventListener('keydown', e => {
     if (e.ctrlKey && e.key === 'g') {
-      document.querySelector('.d-grid').classList.toggle('is-visible');
+      const grid = document.querySelector('.d-grid-container');
+      grid.classList.toggle('is-visible');
+      grid.showPopover();
     }
   });
 </script>

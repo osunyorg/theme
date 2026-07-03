@@ -1,4 +1,7 @@
 {{ $with_lightbox := not site.Params.components.lightbox.in_hero.disabled }}
+{{ if site.Params.components.lightbox.disabled }}
+  {{ $with_lightbox = false }}
+{{ end }}
 
 {{ if .image }}
   {{ partial "commons/image/figure.html" (dict

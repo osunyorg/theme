@@ -1,9 +1,8 @@
-{{ $feature := .feature }}
 <li class="feature">
-  {{ if or $feature.title $feature.description }}
+  {{ if or .feature.title .feature.description }}
     {{ partial "blocks/templates/features/feature/content.html" . }}
   {{ end }}
-  {{ if $feature.image }}
-    {{ partial "blocks/templates/features/feature/media.html" $feature }}
+  {{ if .feature.image }}
+    {{ partial "blocks/templates/features/feature/media.html" . }}
   {{ end }}
 </li>

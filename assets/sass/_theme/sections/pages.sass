@@ -1,12 +1,14 @@
 .page
     @include article($aspect-ratio: $page-media-aspect-ratio)
+    hgroup,
     .page-title
         @include h4
+    .page-subtitle
+        color: var(--color-text-alt)
     .more
         @include icon(arrow-right-line, after, true)
         @include hover-translate-icon(after)
     &-categories
-        @include list-reset
         display: flex
         flex-wrap: wrap
         gap: 0 $spacing-2
@@ -23,6 +25,7 @@
     &--grid
         @include layout-grid
         .page
+            hgroup,
             .page-title
                 @include h3
                 a

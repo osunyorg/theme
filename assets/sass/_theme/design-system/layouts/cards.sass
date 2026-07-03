@@ -1,5 +1,4 @@
 @mixin layout-cards($background: $layout-cards-item-background, $background-hover: $layout-cards-item-background-hover, $color: $layout-cards-item-color, $color-hover: $layout-cards-item-color-hover, $aspect-ratio: $article-media-aspect-ratio)
-    @include list-reset
     article
         @include article($aspect-ratio)
         @include layout-item
@@ -9,6 +8,7 @@
         padding: $spacing-3
         position: relative
         transition: background $background-duration, color $background-duration
+        hgroup,
         [class$="-title"]
             @include h3
             a
@@ -29,7 +29,7 @@
             padding-top: $spacing-4
             margin-top: auto
         a, p
-            transition: text-decoration-color .3s ease, color .3s ease
+            transition: text-decoration-color $color-duration ease, color $color-duration ease
         &:hover
             background-color: $background-hover
             &, a, p

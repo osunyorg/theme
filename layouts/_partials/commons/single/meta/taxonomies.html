@@ -1,0 +1,7 @@
+{{ $has_taxonomies := partial "commons/single/meta/helpers/has/Taxonomies" . }}
+
+{{ if $has_taxonomies }}
+  <li class="taxonomies">
+    {{ partial "taxonomies/single/list.html" . }}
+  </li>
+{{ end }}

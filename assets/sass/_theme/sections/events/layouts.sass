@@ -85,6 +85,9 @@
                 &-schedule
                     margin-top: $spacing-1
                     margin-bottom: $spacing-2
+                    display: flex
+                    align-items: baseline
+                    gap: $spacing-3
                 &-hours
                     display: inline
                 .media
@@ -126,6 +129,9 @@
     &--large
         @include layout-large
         .event
+            &-title,
+            hgroup
+                @include h2
             &-dates
                 @include h4
                 margin-top: $spacing-2
@@ -158,9 +164,6 @@
             padding-bottom: $spacing-4
             &:where(:not(:first-child))
                 border-top: var(--border-width) solid var(--color-border)
-            > ol, 
-            .event-children
-                @include list-reset
         .events-date-title
             @include h3
             color: var(--color-text-alt)

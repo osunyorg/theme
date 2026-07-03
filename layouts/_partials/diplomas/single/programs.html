@@ -6,7 +6,7 @@
 {{ end }}
 <div class="container">
   <ol class="{{ $class }}">
-    {{ range .Pages }}
+    {{ range .Pages.ByTitle }}
       {{ partial "programs/partials/program.html" (dict
         "program" .
         "heading_level" 2

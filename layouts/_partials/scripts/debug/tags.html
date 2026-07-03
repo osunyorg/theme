@@ -1,0 +1,30 @@
+<style>
+  .d-tags {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background: var(--color-background);
+    padding: 20px;
+    z-index: 9999;
+    display: none;
+  }
+</style>
+
+<div class="d-tags">
+  <p>Nombre de balises html</p>
+</div>
+
+<script>
+  window.addEventListener('keydown', e => {
+    if (e.ctrlKey && e.key === 't') {
+      countHtmlTags();
+    }
+  });
+
+  function countHtmlTags() {
+    var count = document.querySelectorAll('*').length,
+      container = document.querySelector('.d-tags');
+    container.querySelector('p').innerText = 'Nombre de balises html : ' + count;
+    container.style.display = 'block';
+  }
+</script>

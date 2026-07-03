@@ -105,12 +105,6 @@ commons:
   authors:
     one: Author
     other: Authors
-  search:
-    close: Close search
-    label: Search
-    placeholder: Search
-    search_label: Search this site
-    title: Search
   biography: Biography
   breadcrumb: Breadcrumb
   click_to_copy:
@@ -222,6 +216,16 @@ commons:
   published_at: Published at
   read: Read
   read_online: Read online
+  search:
+    close: Close search
+    filtered_by:
+      # placeholder: "Search in : {{ . }}"
+      placeholder: "Search"
+    filters: Filters
+    label: Search
+    placeholder: Search
+    search_label: Search this site
+    title: Search
   share: Share
   share_on: Share on
   share_on_aria: Share on “{{ .Title }}” - extern link
@@ -239,6 +243,7 @@ commons:
     button_label: ", current - Table of contents"
   "yes": "Yes"
   updated_at: Updated at
+  update_at_inline: Updated on
   units:
     GB: GB
     MB: MB
@@ -265,9 +270,9 @@ errors:
   error_404:
     title: "404 error"
     text: >-
-      This link seems incorrect.<br>
+      <p>This link seems incorrect.<br>
       We suggest you return to the <a href="/">home page of our site</a>.<br>
-      Thank you for your understanding.
+      Thank you for your understanding.</p>
 events:
   archives:
     by_year: Archives by year
@@ -304,24 +309,25 @@ events:
   count:
     one: "1 event"
     other: "{{ .Count }} events"
-  item:
-    federated: "Event from <span>{{ . }}</span>"
-  more_dates: Show all dates
-  none: No event
-  next: Next event
-  previous: Previous event
   from:
     day: From day
     hour: From hour
+  item:
+    federated: "Event from <span>{{ . }}</span>"
+  more_dates: Show all dates
+  next: Next event
+  none: No event
+  passed: passed event
+  previous: Previous event
   see_all_in_program: See all program's events
   title: Events
   to:
     day: To day
     hour: To hour
   status:
+    archive: Passed
     current: Now
     future: Soon
-    archive: Passed
   unique_day: Date
 exhibitions:
   archives: Previous exhibitions archive
@@ -394,9 +400,6 @@ persons:
   papers:
     recent: Latest papers
     all: View all papers published by {{ .author }}
-  publications:
-    recent: Latest publications
-    all: View all publications by {{ .author }}
   programs: Teachings
 posts:
   author: Author

@@ -1,0 +1,8 @@
+{{ $has_year := partial "commons/single/meta/helpers/has/Year" . }}
+
+{{ if and $has_year .Params.year }}
+  <li class="year">
+    <span>{{ i18n "projects.year" }}</span>
+    <time datetime="{{ .Params.year }}">{{ .Params.year }}</time>
+  </li>
+{{ end }}

@@ -40,11 +40,11 @@
         hgroup.has-lead > p
             @include lead-hero
         figure
+            @include collapsed-figcaption
             position: relative
             img, button, > [role="button"]
                 width: 100%
                 height: auto
-            @include collapsed-figcaption
 
     .breadcrumb-nav + .content
         padding-top: 0
@@ -55,6 +55,7 @@
             position: relative
             > a
                 @include stretched-link
+    
     @include media-breakpoint-down(desktop)
         .content
             padding-top: 0
@@ -116,7 +117,7 @@
                 justify-content: space-between
         .essential
             @include meta
-            color: $header-color
+            color: $hero-color
             flex-wrap: wrap
             font-size: $program-essential-font-size
             margin-bottom: 0

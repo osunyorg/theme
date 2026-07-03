@@ -1,8 +1,8 @@
-{{- $is_block_persons_present := false -}}
+{{ $is_block_persons_present := false }}
 
 {{ range .Params.contents }}
-  {{- if eq .template "persons" -}}
-    {{- $is_block_persons_present = true -}}
+  {{ if eq .template "persons" }}
+    {{ $is_block_persons_present = true }}
   {{ end }}
 {{ end }}
 

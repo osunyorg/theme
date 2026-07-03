@@ -1,0 +1,23 @@
+{{ $with_labels := partial "commons/single/meta/helpers/WithLabels" . }}
+{{ $has_published_at := partial "commons/single/meta/helpers/has/PublishedAt" . }}
+{{ $has_updated_at := partial "commons/single/meta/helpers/has/UpdatedAt" . }}
+
+{{ $date_format := partial "helpers/param/GetSiteParamWithDefault" (dict
+  "param" (printf "%s.date_format" .Type)
+  "default" "date_format"
+) }}
+
+{{ $params := (dict
+  "has_published_at" $has_published_at
+  "has_updated_at" $has_updated_at
+  "format" $date_format
+  "context" .
+) }}
+
+{{ if or $has_published_at $has_updated_at }}
+  {{ if $with_labels }}
+    {{ partial "commons/single/meta/dates/with-labels.html" $params }}
+  {{ else }}
+    {{ partial "commons/single/meta/dates/without-labels.html" $params }}
+  {{ end }}
+{{ end }}

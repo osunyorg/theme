@@ -20,11 +20,11 @@
     {{ $quality = site.Params.keycdn.quality.high_ratio }}
   {{ end }}
   {{ $fit = "inside" }}
-  {{ $result = printf "%swidth=%d&height=%d&" $result $width $height }}
+  {{ $result = printf "%swidth=%d&height=%d" $result $width $height }}
 {{ end }}
 {{ with .crop }}
   {{ $fit = "crop" }}
-  {{ $result = printf "%scrop=smart" $result }}
+  {{ $result = printf "%s&crop=smart" $result }}
 {{ end }}
 {{ if ne $fit "" }}
   {{ $result = printf "%s&fit=%s" $result $fit }}

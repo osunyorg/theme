@@ -1,11 +1,8 @@
 <script>
-  ;(function () {
-    // Only do i18n at root, 
-    // otherwise, redirect immediately
-    if (window.location.pathname !== '/') {
-      // As we stopped hugo redirect (meta refresh) we must do it in js
-      window.location.replace('{{ .Permalink }}');
-      return;
-    }
-  });
+  // Only do i18n at root,
+  // otherwise, redirect immediately
+  if (window.location.pathname !== '/') {
+    // As we stopped hugo redirect (meta refresh) we must do it in js
+    window.location.replace('{{ .Permalink }}');
+  }
 </script>

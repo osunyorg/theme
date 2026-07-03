@@ -1,10 +1,12 @@
 {{ $layout := site.Params.programs.index.layout | default "list" }}
-{{ if not .Paginator.Pages }}
+{{ $paginator := .Paginate ( .Pages | uniq ) }}
+
+{{ if not $paginator.Pages }}
   {{ $is_term := eq .Kind "term" }}
   <p>{{ i18n (cond $is_term "categories.no_program" "programs.none") }}</p>
 {{ else }}
   <ol class="programs programs--{{ $layout }}">
-    {{ range .Paginator.Pages }}
+    {{ range $paginator.Pages }}
       {{- partial "programs/partials/program.html" (dict
         "program" .
         "options" site.Params.programs.index.options

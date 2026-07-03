@@ -1,8 +1,8 @@
 {{ $directoryName := slicestr . 0 2 }}
 {{ $directory := "" }}
 {{ $media := "" }}
-{{ if isset site.Data.media $directoryName }}
-  {{ $directory = index site.Data.media $directoryName }}
+{{ if isset hugo.Data.media $directoryName }}
+  {{ $directory = index hugo.Data.media $directoryName }}
   {{ if isset $directory . }}
     {{ $media = index $directory . }}
   {{ end }}
