@@ -48,21 +48,24 @@ section.programs
     @include grid(3, xl)
 
 ol.programs:where(:not(.programs--grid))
-    @include list-section
+    > li
+        padding-bottom: $spacing-3
+        padding-top: $spacing-3
+        position: relative
+        + li
+            border-top: var(--border-width) solid var(--color-border)
     .program
         align-items: start
-        .program-title a
-            @include hover-translate-icon($fade: true)
-            @include icon(arrow-right-line, after, true)
-                display: inline
-            transition: color $color-duration
-            &:hover
-                color: var(--color-accent)
+        .program-title
+            a
+                @include hover-translate-icon($fade: true)
+                @include icon(arrow-right-line, after, true)
+                    display: inline
+                transition: color $color-duration
+                &:hover
+                    color: var(--color-accent)
         .program-categories
             width: 100%
-        @include media-breakpoint-down(md)
-            .media
-                display: none
         @include media-breakpoint-down(md)
             flex-direction: column-reverse
             gap: $spacing-2
@@ -72,6 +75,9 @@ ol.programs:where(:not(.programs--grid))
                 justify-content: space-between
                 &::after
                     opacity: 1
+            .media
+                display: none
+
         @include media-breakpoint-up(md)
             flex-direction: row-reverse
             .program-content
