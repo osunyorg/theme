@@ -2,10 +2,6 @@ header#document-header
     background: $header-background
     border-bottom: $header-border-bottom-width solid var(--color-border)
     color: $header-color
-    position: fixed
-    left: 0
-    top: 0
-    transition: transform $header-sticky-transition, background $header-sticky-transition
     width: 100%
     z-index: $zindex-header
     @include media-breakpoint-down(desktop)
@@ -13,33 +9,6 @@ header#document-header
         width: 100%
     .dropdown-menu
         transition: background $header-sticky-transition
-    &.is-sticky, html.has-menu-opened &
-        background: $header-sticky-background
-        color: $header-sticky-color
-        .menu
-            a,
-            a:hover,
-            a:focus,
-            a:active,
-            span
-                color: inherit
-        @if $header-sticky-invert-logo
-            .logo
-                img, .logo-text
-                    filter: invert(1)
-        @include media-breakpoint-up(desktop)
-            .dropdown-menu
-                background: $header-sticky-dropdown-background
-                color: $header-sticky-dropdown-color
-    &.is-sticky
-        .search-button
-            color: $header-sticky-color
-    html.is-scrolling-down:not(.has-menu-opened, .has-modal-opened) &
-        @include media-breakpoint-down(desktop)
-            transform: translateY(-100%)
-        @include media-breakpoint-up(desktop)
-            &:not(:hover, :focus-within)
-                transform: translateY(-100%)
     .logo
         @extend %logo
         color: $header-color
@@ -49,6 +18,42 @@ header#document-header
                 transition: filter $header-sticky-transition
             @include media-breakpoint-up(desktop)
                 height: $header-logo-height-desktop
+    @if $header-sticky-enabled
+        position: fixed
+        left: 0
+        top: 0
+        transition: transform $header-sticky-transition, background $header-sticky-transition
+        &.is-sticky, html.has-menu-opened &
+            background: $header-sticky-background
+            color: $header-sticky-color
+            .menu
+                a,
+                a:hover,
+                a:focus,
+                a:active,
+                span
+                    color: inherit
+            @if $header-sticky-invert-logo
+                .logo
+                    img, .logo-text
+                        filter: invert(1)
+            @include media-breakpoint-up(desktop)
+                .dropdown-menu
+                    background: $header-sticky-dropdown-background
+                    color: $header-sticky-dropdown-color
+        &.is-sticky
+            .search-button
+                color: $header-sticky-color
+        html.is-scrolling-down:not(.has-menu-opened, .has-modal-opened) &
+            @include media-breakpoint-down(desktop)
+                transform: translateY(-100%)
+            @include media-breakpoint-up(desktop)
+                &:not(:hover, :focus-within)
+                    transform: translateY(-100%)
+    @else 
+        position: absolute
+        top: 0
+        left: 0
 
     // i18n
     .primary-i18n,
