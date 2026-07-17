@@ -151,52 +151,9 @@
                     width: columns(7)
 
 .projects__page
-    .hero
-        .content
-            align-items: stretch
-        .hero-text
-            align-items: start
-            display: flex
-            flex-direction: column
-            gap: $spacing-3
-        .project-infos
-            --color-text: #{$project-infos-color-text}
-            --color-text-alt: #{$project-infos-color-text-alt}
-            @include meta
-            display: flex
-            gap: $spacing-3
-            > ul
-                display: flex
-                column-gap: $spacing-3
-                flex-wrap: wrap
-                li
-                    white-space: nowrap
-    @include media-breakpoint-up(sm)
-        .hero
-            .project-infos
-                width: columns(8)
-    @include media-breakpoint-up(md)
-        .hero
-            .project-infos
-                width: columns(6)
-            .dropdown-share
-                button
-                    width: columns(2)
     @include media-breakpoint-up(desktop)
         .hero
-            .content
-                align-items: stretch
-            .project-infos
-                width: columns(4)
             figure
                 width: columns(6)
             .hero-text
-                gap: $spacing-3
                 width: columns(6)
-                // Safe space for dropdown share button wich is in a absolute position
-                position: relative
-                padding-bottom: calc(#{$spacing-5} + #{$spacing-2}) 
-            .dropdown-share
-                position: absolute
-                bottom: 0
-                right: 0

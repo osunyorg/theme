@@ -9,41 +9,12 @@
     white-space: nowrap !important
     width: 1px !important
 
-@mixin list-section
-    > li
-        border-bottom: var(--border-width) solid var(--color-border)
-        padding-bottom: $spacing-3
-        padding-top: $spacing-3
-        position: relative
-        > .title
-            @include h2
-            transition: color $color-duration
-            @include media-breakpoint-down(desktop)
-                @include icon(arrow-right-line, after, true)
-                    bottom: $spacing-2
-                    position: absolute
-                    right: 0
-        a
-            text-decoration: none
-            &:hover
-                color: var(--color-accent)
-        @include media-breakpoint-down(desktop)
-            a:nth-child(2)
-                margin-top: calc(#{$spacing-2} / 2)
-            a, p
-                display: block
-        @include media-breakpoint-up(desktop)
-            align-items: baseline
-            display: flex
-            justify-content: space-between
-
 @mixin text-underline
     text-decoration-color: var(--color-border)
     text-decoration-line: underline
     text-decoration-thickness: 1px
     text-underline-offset: 3px
     text-decoration-line: underline
-
 
 @mixin top-flex
     align-items: baseline
