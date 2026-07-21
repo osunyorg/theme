@@ -4,8 +4,20 @@
     <li>
       <a href="{{ .Permalink }}">{{ .Title }}</a>
       {{ $events := where .RegularPagesRecursive "Params.dates.archive" false }}
+
+      {{ $events_slugs := slice }}
+      {{ $unique_events := slice }}
+
+      {{ range $events }}
+        {{ $slug := .Params.slug }}
+        {{ if not (in $events_slugs $slug) }}
+          {{ $events_slugs = $events_slugs | append $slug }}
+          {{ $unique_events = $unique_events | append . }}
+        {{ end }}
+      {{ end }}
+
       {{ partial "sitemap/sections/children.html" (dict 
-        "items" $events
+        "items" $unique_events
         "type" "events"
       ) }}
     </li>
