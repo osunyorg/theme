@@ -5,21 +5,15 @@
       <a href="{{ .Permalink }}">{{ .Title }}</a>
       {{ $events := where .RegularPagesRecursive "Params.dates.archive" false }}
 
-      {{ $events_slugs := slice }}
-      {{ $unique_events := slice }}
-
-      {{ range $events }}
-        {{ $event_slug := .Params.slug }}
-        {{ if not (in $events_slugs $event_slug) }}
-          {{ $events_slugs = $events_slugs | append $event_slug }}
-          {{ $unique_events = $unique_events | append . }}
-        {{ end }}
+      {{/*  Group by slug to avoid duplication of recurring events and parents events with multiple dates  */}}
+      {{ range $events.GroupByParam "slug" }}
+        {{/*  Get only the first event of the group as the group contains duplicated events */}}
+        {{ $event := .Pages | first 1 }}
+        {{ partial "sitemap/sections/children.html" (dict 
+          "items" $event
+          "type" "events"
+        ) }}
       {{ end }}
-
-      {{ partial "sitemap/sections/children.html" (dict 
-        "items" $unique_events
-        "type" "events"
-      ) }}
     </li>
   {{ end }}
 </ul>
