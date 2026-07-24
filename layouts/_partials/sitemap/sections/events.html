@@ -4,10 +4,16 @@
     <li>
       <a href="{{ .Permalink }}">{{ .Title }}</a>
       {{ $events := where .RegularPagesRecursive "Params.dates.archive" false }}
-      {{ partial "sitemap/sections/children.html" (dict 
-        "items" $events
-        "type" "events"
-      ) }}
+
+      {{/*  Group by slug to avoid duplication of recurring events and parents events with multiple dates  */}}
+      {{ range $events.GroupByParam "slug" }}
+        {{/*  Get only the first event of the group as the group contains duplicated events */}}
+        {{ $event := .Pages | first 1 }}
+        {{ partial "sitemap/sections/children.html" (dict 
+          "items" $event
+          "type" "events"
+        ) }}
+      {{ end }}
     </li>
   {{ end }}
 </ul>
