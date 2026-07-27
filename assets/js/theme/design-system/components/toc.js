@@ -137,9 +137,11 @@ window.osuny.TableOfContents.prototype.activateLink = function (id) {
             link.setAttribute('aria-current', 'true');
             this.state.currentId = id;
             this.state.currentLink = link;
+            link.setAttribute('title', link.innerHTML + window.osuny.i18n.toc.active_label );
         } else {
             link.classList.remove(this.classes.linkActive);
             link.removeAttribute('aria-current');
+            link.removeAttribute('title');
         }
     }.bind(this));
 };
