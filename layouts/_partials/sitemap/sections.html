@@ -1,6 +1,6 @@
 {{ $sections := partial "sitemap/helpers/GetSections" . }}
 {{ range $sections }}
-  {{ if .Permalink }}
+  {{ if and .Pages .Permalink }}
     {{ partial "sitemap/sections/list.html" . }}
   {{ end }}
 {{ end }}
