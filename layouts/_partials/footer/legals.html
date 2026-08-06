@@ -1,7 +1,12 @@
 {{ $menu := partial "GetMenu" "legal" }}
 {{ $class := "nav-legal" }}
+{{ $has_i18n := false }}
 
-{{ if $menu }}
+{{ if gt (len site.Languages) 1 }}
+  {{ $has_i18n = true}}
+{{ end }}
+
+{{ if or $menu $has_i18n }}
   {{ if not (in site.Params.i18n.positions "footer") }}
     {{ $class = printf "%s without-i18n" $class }}
   {{ end }}
@@ -9,5 +14,6 @@
     "kind" "legal"
     "class" $class
     "context" .
+    "has_i18n" $has_i18n
   ) }}
 {{ end }}

@@ -10,6 +10,7 @@
 {{ end }}
 {{ $level_options := index $options (printf "level_%d" $level) }}
 {{ $context := .context }}
+
 {{ if or $items $has_i18n}}
   <ul class="{{ with $level }}nav-level-{{ . }}{{ end }} {{ .class }}">
     {{ range $items }}
