@@ -1,9 +1,5 @@
 {{ $primary := .primary }}
-{{ $has_i18n := false }}
-
-{{ if gt (len site.Languages) 1 }}
-  {{ $has_i18n = true}}
-{{ end }}
+{{ $has_i18n := partial "commons/menu/helpers/HasI18n" . }}
 
 {{ if or $primary.items $has_i18n }}
   {{ partial "header/button.html" }}
