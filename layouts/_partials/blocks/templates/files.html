@@ -6,9 +6,9 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        {{ if (index .files 0).id }}
-          {{/* Legacy */}}
-          <ul class="files">
+        <ul class="files">
+          {{ if (index .files 0).id }}
+            {{/* Legacy */}}
             {{ range .files }}
               {{ if ne .id "" }}
                 {{ if partial "GetMedia" .id }}
@@ -30,11 +30,9 @@
                 {{ end }}
               {{ end }}
             {{ end }}
-          </ul>
-        {{ else }}
-          {{/* New version */}}
-          {{ $files := partial "helpers/objects/GetFromPathSlice" .files }}
-          <ul class="files">
+          {{ else }}
+            {{/* New version */}}
+            {{ $files := partial "helpers/objects/GetFromPathSlice" .files }}
             {{ range $files }}
               {{ if partial "GetMedia" .Params.original_blob.id }}
                 <li>
@@ -48,8 +46,8 @@
                 </li>
               {{ end }}
             {{ end }}
-          </ul>
-        {{ end }}
+          {{ end }}
+        </ul>
       </div>
     </div>
   </div>
