@@ -6,29 +6,50 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        <ul class="files">
-          {{ range .files }}
-            {{ if ne .id "" }}
-              {{ if partial "GetMedia" .id }}
-                <li{{ if .image }} class="with-image"{{ end }}>
+        {{ if (index .files 0).id }}
+          {{/* Legacy */}}
+          <ul class="files">
+            {{ range .files }}
+              {{ if ne .id "" }}
+                {{ if partial "GetMedia" .id }}
+                  <li{{ if .image }} class="with-image"{{ end }}>
+                    <figure>
+                      {{ partial "commons/files/download-link.html" (dict
+                        "id" .id
+                        "title" .title
+                        "with_caption" true
+                      ) }}
+                    </figure>
+                    {{ with .image }}
+                      {{ partial "commons/image.html" (dict
+                        "image" .
+                        "sizes" site.Params.image_sizes.blocks.call_to_action
+                      ) }}
+                    {{ end }}
+                  </li>
+                {{ end }}
+              {{ end }}
+            {{ end }}
+          </ul>
+        {{ else }}
+          {{/* New version */}}
+          {{ $files := partial "helpers/objects/GetFromPathSlice" .files }}
+          <ul class="files">
+            {{ range $files }}
+              {{ if partial "GetMedia" .Params.original_blob.id }}
+                <li>
                   <figure>
                     {{ partial "commons/files/download-link.html" (dict
-                      "id" .id
-                      "title" .title
+                      "id" .Params.original_blob.id
+                      "title" .Title
                       "with_caption" true
                     ) }}
                   </figure>
-                  {{ with .image }}
-                    {{ partial "commons/image.html" (dict
-                      "image" .
-                      "sizes" site.Params.image_sizes.blocks.call_to_action
-                    ) }}
-                  {{ end }}
                 </li>
               {{ end }}
             {{ end }}
-          {{ end }}
-        </ul>
+          </ul>
+        {{ end }}
       </div>
     </div>
   </div>
