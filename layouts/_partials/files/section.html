@@ -1,0 +1,19 @@
+{{ partial "files/section/hero.html" . }}
+<div class="document-content">
+  {{ partial "files/section/summary.html" (dict
+    "with_container" true
+    "context" .
+  ) }}
+
+  {{ if partial "commons/section/helpers/IsFirstPage" . }}
+    {{ partial "contents/list.html" (dict
+      "context" .
+      "contents" .Params.contents
+    ) }}
+  {{ end }}
+
+  <div class="container">
+    {{ partial "files/partials/files.html" . }}
+    {{ partial "commons/section/pagination.html" . }}
+  </div>
+</div>

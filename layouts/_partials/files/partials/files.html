@@ -1,0 +1,17 @@
+{{ $files := .Paginator.Pages }}
+{{ $layout := default site.Params.files.index.layout }}
+{{ $options := default site.Params.files.index.options }}
+{{ $heading_level := 2 }}
+
+<ul class="files files--{{- $layout }} default-layout--{{- $layout }}">
+  {{ range $files }}
+    <li>
+      {{ partial "files/partials/file.html" (dict
+        "file" .
+        "heading_level" $heading_level
+        "layout" $layout
+        "options" $options
+      ) }}
+    </li>
+  {{ end }}
+</ul>

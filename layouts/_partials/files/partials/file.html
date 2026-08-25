@@ -1,0 +1,25 @@
+{{ $file := .file }}
+{{ $layout := .layout | default "list" }}
+{{ $heading_level := .heading_level }}
+{{ $options := .options }}
+{{ $class := partial "files/partials/file/helpers/GetClass" . }}
+{{ with $file }}
+  <article class="{{ $class }}">
+    <div class="file-content">
+      {{ partial "files/partials/file/heading.html" (dict
+        "item" .
+        "options" $options
+        "level" $heading_level
+      ) }}
+      {{ if $options.summary }}
+        {{ partial "files/partials/file/summary.html" . }}
+      {{ end }}
+    </div>
+    {{ if $options.image }}
+      {{ partial "files/partials/file/media.html" (dict 
+        "image" $file.Params.image
+        "layout" $layout
+      ) }}
+    {{ end }}
+  </article>
+{{ end }}
