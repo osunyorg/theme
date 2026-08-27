@@ -1,25 +1,27 @@
-{{ $file := .file }}
-{{ $layout := .layout | default "list" }}
-{{ $heading_level := .heading_level }}
-{{ $options := .options }}
-{{ $class := partial "files/partials/file/helpers/GetClass" . }}
-{{ with $file }}
-  <article class="{{ $class }}">
-    <div class="file-content">
-      {{ partial "files/partials/file/heading.html" (dict
-        "item" .
-        "options" $options
-        "level" $heading_level
-      ) }}
-      {{ if $options.summary }}
-        {{ partial "files/partials/file/summary.html" . }}
+{{ if partial "GetMedia" .id }}
+  <li>
+    <article class="file {{ if .image }} with-image {{ end }} {{ if .download }} file--download {{ end }}">
+      <figure>
+        {{ if .download }}
+          {{ partial "commons/files/download-link.html" (dict
+            "id" .id
+            "title" .title
+            "with_caption" true
+          ) }}
+        {{ else }}
+          {{ partial "files/partials/file/permalink.html" (dict
+            "title" .title
+            "id" .id
+            "context" .context
+          ) }}
+        {{ end }}
+      </figure>
+      {{ with .image }}
+        {{ partial "commons/image.html" (dict
+          "image" .
+          "sizes" site.Params.image_sizes.blocks.files
+        ) }}
       {{ end }}
-    </div>
-    {{ if $options.image }}
-      {{ partial "files/partials/file/media.html" (dict 
-        "image" $file.Params.image
-        "layout" $layout
-      ) }}
-    {{ end }}
-  </article>
+    </article>
+  </li>
 {{ end }}

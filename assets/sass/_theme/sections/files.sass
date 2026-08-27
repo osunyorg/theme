@@ -1,4 +1,38 @@
-@include layout-defaults(".files")
+.file
+    @include icon-frame(download-2-line, $hoverable: true)
+    align-items: start
+    display: flex
+    position: relative
+    &.with-image
+        flex-wrap: wrap
+        figure
+            flex: 1
+        picture
+            margin-bottom: $spacing-2
+            order: -1
+            width: 100%
+            img
+                width: columns(2)
+    a
+        @include stretched-link(before)
+        @include small
+        text-decoration: none
+        display: block
+        &::after
+            content: none !important // Remove default icon _blank
+    figcaption
+        @include meta
+        margin-top: $spacing-1
+
+.files
+    &--grid
+        @include media-breakpoint-down(desktop)
+            li + li
+                margin-top: $spacing-3
+        @include in-page-with-sidebar
+            @include grid(2, $gap-y: $spacing-3)
+        @include in-page-without-sidebar
+            @include grid(3, $gap-y: $spacing-4)
 
 .files__page
     .file-hero-download
