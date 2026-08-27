@@ -5,7 +5,7 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        <ul class="files">
+        <ul class="files files--grid">
           {{ if (index .files 0).id }} {{/* Legacy */}}
             {{ range .files }}
               {{ if ne .id "" }}
