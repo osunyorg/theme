@@ -6,8 +6,7 @@
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
         <ul class="files">
-          {{ if (index .files 0).id }}
-            {{/* Legacy */}}
+          {{ if (index .files 0).id }} {{/* Legacy */}}
             {{ range .files }}
               {{ if ne .id "" }}
                 {{ partial "files/partials/file.html" (dict
@@ -18,8 +17,7 @@
                 ) }}
               {{ end }}
             {{ end }}
-          {{ else }}
-            {{/* New version */}}
+          {{ else }} {{/* New version */}}
             {{ $files := partial "helpers/objects/GetFromPathSlice" .files }}
             {{ range $files }}
               {{ partial "files/partials/file.html" (dict

@@ -1,6 +1,6 @@
 {{ if partial "GetMedia" .id }}
   <li>
-    <article class="file {{ if .image }} with-image {{ end }} {{ if .download }} file--download {{ end }}">
+    <article class="file {{ if .image }} with-image {{ end }} {{ if .download }} with-download {{ end }}">
       <figure>
         {{ if .download }}
           {{ partial "commons/files/download-link.html" (dict

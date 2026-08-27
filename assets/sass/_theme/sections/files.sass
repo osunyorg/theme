@@ -1,8 +1,11 @@
 .file
-    @include icon-frame(download-2-line, $hoverable: true)
     align-items: start
     display: flex
     position: relative
+    &.with-download
+        @include icon-frame(download-2-line, $hoverable: true)
+    &:not(.with-download)
+        @include icon-frame(eye-line, $hoverable: true)
     &.with-image
         flex-wrap: wrap
         figure
@@ -37,5 +40,8 @@
 .files__page
     .file-hero-download
         margin-top: var(--grid-gutter)
-        a
-            @include button
+        a[download]
+            @include icon-frame(download-2-line, $hoverable: true)
+            text-decoration: none
+            &::after
+                display: none
