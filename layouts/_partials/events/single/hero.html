@@ -1,6 +1,10 @@
 {{ $title := partial "header/helpers/GetTitle" . }}
 
 {{ $share := site.Params.events.share_links.enabled | default site.Params.share_links.enabled }}
+{{ if .Params.dates.archive }}
+  {{ $share = false }}
+{{ end }}
+
 {{ $sizes := "" }}
 
 {{ $image := .Params.image }}
