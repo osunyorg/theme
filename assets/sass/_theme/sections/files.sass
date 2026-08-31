@@ -6,16 +6,6 @@
         @include icon-frame(download-2-line, $hoverable: true)
     &:not(.with-download)
         @include icon-frame(eye-line, $hoverable: true)
-    &.with-image
-        flex-wrap: wrap
-        figure
-            flex: 1
-        picture
-            margin-bottom: $spacing-2
-            order: -1
-            width: 100%
-            img
-                width: columns(2)
     a
         @include stretched-link(before)
         @include small
@@ -26,6 +16,23 @@
     figcaption
         @include meta
         margin-top: $spacing-1
+    &.with-image
+        figure
+            flex: 1
+        @include media-breakpoint-down(desktop)
+            figure
+                order: 2
+                margin-left: $spacing-2
+            picture
+                width: columns(4)
+        @include media-breakpoint-up(desktop)
+            flex-wrap: wrap
+            picture
+                margin-bottom: $spacing-2
+                order: -1
+                width: 100%
+            img
+                width: columns(2)
 
 .files
     &--grid
