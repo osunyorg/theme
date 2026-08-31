@@ -5,11 +5,11 @@
   {{ $size := partial "commons/files/helpers/GetHumanSize" .size }}
   {{ $extension := partial "commons/files/helpers/GetExtensionFile" .name }}
   <li>
-    <span>Poids</span>
+    <span>{{ i18n "files.weight" }}</span>
     <span>{{ $size.weight }} <abbr title="{{ $size.full_unit }}">{{ $size.unit }}</abbr></span>
   </li>
   <li>
-    <span>Extension</span>
+    <span>{{ i18n "files.type" }}</span>
     <abbr title="{{ i18n (printf "files.formats.%s" $extension) }}">{{ $extension }}</abbr>
   </li>
 {{ end }}
