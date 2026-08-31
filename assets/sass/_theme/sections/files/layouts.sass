@@ -1,0 +1,9 @@
+.files
+    &--grid
+        @include media-breakpoint-down(desktop)
+            li + li
+                margin-top: $spacing-3
+        @include in-page-with-sidebar
+            @include grid(2, $gap-y: $spacing-3)
+        @include in-page-without-sidebar
+            @include grid(3, $gap-y: $spacing-4)
