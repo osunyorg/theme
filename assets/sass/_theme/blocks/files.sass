@@ -6,15 +6,8 @@
             display: flex
             position: relative
             &.with-image
-                flex-wrap: wrap
                 figure
                     flex: 1
-                picture
-                    margin-bottom: $spacing-2
-                    order: -1
-                    width: 100%
-                    img
-                        width: columns(2)
         a
             @include stretched-link(before)
             @include small
@@ -29,7 +22,24 @@
     @include media-breakpoint-down(desktop)
         .files
             li + li
-                margin-top: $spacing-3
+                    margin-top: $spacing-3
+            .with-image
+                figure
+                    order: 2
+                    margin-left: $spacing-2
+                picture
+                    width: columns(4)
+
+    @include media-breakpoint-up(desktop)
+        .files
+            li.with-image
+                flex-wrap: wrap
+                picture
+                    margin-bottom: $spacing-2
+                    order: -1
+                    width: 100%
+                img
+                    width: columns(2)
 
     @include in-page-with-sidebar
         .files
