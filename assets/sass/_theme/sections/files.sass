@@ -27,6 +27,10 @@
         @include meta
         margin-top: $spacing-1
 
+    @include media-breakpoint-down(desktop)
+        a
+            word-break: break-word
+
 .files
     &--grid
         @include media-breakpoint-down(desktop)
@@ -38,10 +42,15 @@
             @include grid(3, $gap-y: $spacing-4)
 
 .files__page
+    .hero
+        h1
+            word-break: break-word
+
     .file-hero-download
         margin-top: var(--grid-gutter)
         a[download]
             @include icon-frame(download-2-line, $hoverable: true)
+            display: flex
             text-decoration: none
             &::after
                 display: none
