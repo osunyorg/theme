@@ -1,0 +1,39 @@
+.file
+    align-items: start
+    display: flex
+    position: relative
+    &.with-download
+        @include icon-frame(download-2-line, $hoverable: true)
+    &:not(.with-download)
+        @include icon-frame(eye-line, $hoverable: true)
+    a
+        @include stretched-link(before)
+        @include small
+        text-decoration: none
+        display: block
+        &::after
+            content: none !important // Remove default icon _blank
+    figcaption
+        @include meta
+        margin-top: $spacing-1
+    &.with-image
+        figure
+            flex: 1
+        @include media-breakpoint-down(desktop)
+            figure
+                order: 2
+                margin-left: $spacing-2
+            picture
+                width: columns(4)
+        @include media-breakpoint-up(desktop)
+            flex-wrap: wrap
+            picture
+                margin-bottom: $spacing-2
+                order: -1
+                width: 100%
+            img
+                width: columns(2)
+
+    @include media-breakpoint-down(desktop)
+        a
+            word-break: break-word

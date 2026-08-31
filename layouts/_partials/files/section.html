@@ -1,5 +1,7 @@
 {{ partial "files/section/hero.html" . }}
 <div class="document-content">
+  {{ partial "pages/single/sidebar.html" . }}
+
   {{ partial "files/section/summary.html" (dict
     "with_container" true
     "context" .
@@ -12,7 +14,7 @@
     ) }}
   {{ end }}
 
-  <div class="container">
+  <div class="container files-section-list">
     {{ partial "files/partials/files.html" . }}
     {{ partial "commons/section/pagination.html" . }}
   </div>
