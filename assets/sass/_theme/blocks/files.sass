@@ -21,17 +21,14 @@
 
     @include media-breakpoint-down(desktop)
         .files
-            li
-                gap: var(--grid-gutter)
-                &::before
-                    order: -2
-                    margin-right: 0
-                + li
+            li + li
                     margin-top: $spacing-3
-                &.with-image
-                    picture
-                        order: -1
-                        width: columns(4)
+            .with-image
+                figure
+                    order: 2
+                    margin-left: $spacing-2
+                picture
+                    width: columns(4)
 
     @include media-breakpoint-up(desktop)
         .files
