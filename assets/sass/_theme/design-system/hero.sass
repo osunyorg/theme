@@ -39,7 +39,7 @@
                     width: columns(6)
         hgroup.has-lead > p
             @include lead-hero
-        figure
+        .hero-image
             @include collapsed-figcaption
             position: relative
             img, button, > [role="button"]
@@ -51,7 +51,7 @@
     .content + .breadcrumb-nav
         margin-top: $spacing-5
     &--with-image
-        figure
+        .hero-image
             position: relative
             > a
                 @include stretched-link
@@ -66,18 +66,18 @@
                     margin-bottom: $spacing-4
         &--image-landscape
             .content
-                figure
+                .hero-image
                     margin-left: var(--grid-gutter-negative)
                     margin-right: var(--grid-gutter-negative)
         &--image-portrait, &--image-square
             &:where(:not(.has-breadcrumb-hero-end))
                 margin-bottom: $spacing-7
-                figure
+                .hero-image
                     margin-bottom: calc(#{-$spacing-7} + #{$spacing-4})
             .container
                 display: flex
                 flex-direction: column
-        figure
+        .hero-image
             > button, > [role="button"]
                 width: 100%
 
@@ -92,7 +92,7 @@
                 justify-content: space-between
                 .hero-text
                     width: columns(7)
-                figure
+                .hero-image
                     width: columns(5)
         &--image-portrait, &--image-square
             .breadcrumb-nav
@@ -103,7 +103,7 @@
             .content
                 .hero-text
                     width: columns(8)
-                figure
+                .hero-image
                     width: columns(3)
         + .breadcrumb-container
             margin-top: 0
