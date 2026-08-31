@@ -1,0 +1,9 @@
+{{ $permalink := partial "commons/item/helpers/GetPermalink" .context }}
+{{ $link_title := safeHTML (i18n "commons.more_aria" (dict "Title" .title)) }}
+{{ $file := partial "GetMedia" .id }}
+<a href="{{ $permalink }}" title="{{ $link_title }}">
+  {{- .title -}}
+</a>
+<figcaption>
+  {{ partial "commons/files/extension-and-size.html" $file }}
+</figcaption>

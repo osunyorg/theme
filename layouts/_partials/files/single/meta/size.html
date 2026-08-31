@@ -1,0 +1,15 @@
+{{ $id := .Params.original_blob.id }}
+{{ $file := partial "GetMedia" $id }}
+
+{{ with $file }}
+  {{ $size := partial "commons/files/helpers/GetHumanSize" .size }}
+  {{ $extension := partial "commons/files/helpers/GetExtensionFile" .name }}
+  <li>
+    <span>Poids</span>
+    {{ $size.weight }} <abbr title="{{ $size.full_unit }}">{{ $size.unit }}</abbr>
+  </li>
+  <li>
+    <span>Extension</span>
+    <abbr title="{{ i18n (printf "files.formats.%s" $extension) }}">{{ $extension }}</abbr>
+  </li>
+{{ end }}

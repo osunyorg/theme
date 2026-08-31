@@ -5,25 +5,25 @@
     <div class="container">
       <div class="block-content">
         {{ partial "blocks/top.html" $block.top }}
-        <ul class="files">
-          {{ if (index .files 0).id }}
-            {{/* Legacy */}}
+        <ul class="files files--grid">
+          {{ if (index .files 0).id }} {{/* Legacy */}}
             {{ range .files }}
               {{ if ne .id "" }}
-                {{ partial "blocks/templates/files/file.html" (dict
+                {{ partial "files/partials/file.html" (dict
                   "id" .id
                   "title" .title
+                  "download" true
                   "image" .image
                 ) }}
               {{ end }}
             {{ end }}
-          {{ else }}
-            {{/* New version */}}
+          {{ else }} {{/* New version */}}
             {{ $files := partial "helpers/objects/GetFromPathSlice" .files }}
             {{ range $files }}
-              {{ partial "blocks/templates/files/file.html" (dict
+              {{ partial "files/partials/file.html" (dict
                 "id" .Params.original_blob.id
                 "title" .Title
+                "download" true
                 "image" .Params.image
               ) }}
             {{ end }}
