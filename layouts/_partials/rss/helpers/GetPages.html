@@ -8,6 +8,10 @@
 {{ else }}
   {{ $pages = $pctx.Pages }}
 {{ end }}
+
+{{/*  Section filtering  */}}
+{{ $pages = where $pages "Section" "not in" site.Params.rss.ignore }}
+
 {{ $limit := .Site.Config.Services.RSS.Limit }}
 {{ if ge $limit 1 }}
   {{ $pages = $pages | first $limit }}
