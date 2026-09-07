@@ -2,7 +2,8 @@
 {{ $level := .level }}
 {{ $type := .type | default $item.Type | default "page" }}
 {{ $type = $type | singularize }}
-{{ $subtitle := $item.Params.subtitle }}
+{{ $title := .title | default $item.Title }}
+{{ $subtitle := .subtitle | default $item.Params.subtitle }}
 {{ $options := .options }}
 {{ $itemprop := .itemprop }}
 
@@ -23,7 +24,7 @@
 {{ $heading_tag.open }}
   {{ $permalink := partial "commons/item/helpers/GetPermalink" $item }}
   <a href="{{ $permalink }}" title="{{ $link_title }}" {{ if $itemprop }} itemprop="url" {{ end }} >
-    {{ $item.Title }}
+    {{ $title }}
   </a>
 {{ $heading_tag.close }}
 {{ if and $options.subtitle $subtitle }}
