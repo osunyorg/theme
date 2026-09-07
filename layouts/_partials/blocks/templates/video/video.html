@@ -1,5 +1,5 @@
 <div class="video">
-  {{ if eq .platform "default" }}
+  {{ if or (eq .platform "default") (eq .platform "instagram") }}
     {{ safeHTML .iframe }}
   {{ else }}
     {{ partial "blocks/templates/video/lazy-container" . }}
