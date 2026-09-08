@@ -98,6 +98,10 @@ if (command === "build") {
     execute(pagefindCommand);
 }
 
+if (command === "purgecss") {
+    execute("purgecss --config ./purgecss.config.js");
+}
+
 if (command === "update") {
     execute("git pull --recurse-submodules --depth 1");
     execute("git submodule update --remote");
