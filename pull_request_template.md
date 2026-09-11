@@ -4,6 +4,7 @@
 - [ ] Bug
 - [ ] Ajustement
 - [ ] Rangement
+- [ ] Mise à jour
 
 ## Description
 
