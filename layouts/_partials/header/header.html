@@ -19,15 +19,10 @@
   <nav class="primary-menu" aria-label="{{ i18n "commons.menu.main" }}">
     <div class="container">
       {{ partial "header/logo.html" }}
-      {{ if $primary.items }}
-        {{ partial "header/button.html" }}
-        <div class="menu" id="navigation">
-          {{ partial "commons/menu.html" (dict
-            "kind" "primary"
-            "context" .
-          ) }}
-        </div>
-      {{ end }}
+      {{ partial "header/header/menu.html" (dict
+        "context" .
+        "primary" $primary
+      )}}
       {{ partial "header/hooks/before-primary-menu-end.html" . }}
     </div>
   </nav>
