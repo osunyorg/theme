@@ -246,20 +246,30 @@ header#document-header
                 outline-offset: 5px
                 outline-style: dashed
                 outline-width: 1px
-            @include media-breakpoint-down(desktop)
-                display: flex
-                align-items: center
-            span:first-of-type
+            .button-title
                 @include meta
                 font-size: pxToRem(14)
                 text-transform: uppercase
+                &--close
+                    display: none
+
             span:last-of-type
-                background: none
                 @include icon-block(menu-line, before)
-                    vertical-align: baseline
                     margin-right: $icon-burger-margin-right
+                    vertical-align: baseline
+                background: none
+
             &[aria-expanded="true"]
+                .button-title
+                    &--open
+                        display: none
+                    &--close
+                        display: block
                 span:last-of-type
                     &::before
                         content: map-get($icons, "close-line")
                         margin-right: $icon-close-margin-right
+
+            @include media-breakpoint-down(desktop)
+                align-items: center
+                display: flex
