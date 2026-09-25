@@ -1,0 +1,13 @@
+{{ $primary := .primary }}
+{{ $has_i18n := partial "commons/menu/helpers/HasI18n" . }}
+
+{{ if or $primary.items $has_i18n }}
+  {{ partial "header/button.html" }}
+  <div class="menu" id="navigation">
+    {{ partial "commons/menu.html" (dict
+      "kind" "primary"
+      "has_i18n" $has_i18n
+      "context" .
+    ) }}
+  </div>
+{{ end }}
