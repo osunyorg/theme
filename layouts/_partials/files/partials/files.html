@@ -7,6 +7,7 @@
   {{ range $files }}
     {{ partial "files/partials/file.html" (dict
       "id" .Params.original_blob.id
+      "file_server" .Params.file_server
       "title" .Title
       "image" .Params.image
       "download" false

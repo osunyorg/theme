@@ -2,15 +2,14 @@
 {{ if .id }}
   {{ $file = partial "GetMedia" .id }}
 {{ end }}
-
 {{ $title := .title }}
 {{ $with_caption := .with_caption }}
+{{ $file_server_url := .file_server_url }}
 
 {{ if $file }}
   {{ if (not $title) }}
     {{ $title = $file.name }}
   {{ end }}
-
   {{ $a11y_title := $title }}
   {{ if .use_filename_for_a11y_title }}
     {{ $a11y_title = $file.name }}
@@ -21,6 +20,9 @@
   {{ $url := $file.url }}
   {{ if site.Params.keycdn }}
     {{ $url = $file.download_url }}
+  {{ end }}
+  {{ if $file_server_url }}
+    {{ $url = $file_server_url }}
   {{ end }}
   <a href="{{ $url }}" download="{{ safeHTML $file.name }}" target="_blank" title="{{ i18n "commons.link.download" (dict "Title" $title_with_size) }}">
     {{ $title }}
