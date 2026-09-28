@@ -1,11 +1,15 @@
 {{ if partial "GetMedia" .id }}
+  {{ $file_server_url := "" }}
+  {{ with .file_server }}
+    {{ $file_server_url = .url }}
+  {{ end }}
   <li>
     <article class="file {{ if .image }} with-image {{ end }} {{ if .download }} with-download {{ end }}">
       <figure>
         {{ if .download }}
           {{ partial "commons/files/download-link.html" (dict
             "id" .id
-            "file_server_url" .file_server.url
+            "file_server_url" $file_server_url
             "title" .title
             "with_caption" true
           ) }}
