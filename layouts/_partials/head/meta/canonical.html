@@ -1,11 +1,11 @@
 {{ if ne .Type "error" }}
+  {{ $context := . }}
   {{ $permalink := .OutputFormats.Canonical.Permalink }}
 
-  {{ if .Params.federation.active }}
-    {{ $permalink = .Params.federation.canonical_url }}
-  {{ end }}
-
   {{ with .OutputFormats.Canonical }}
+    {{ if $context.Params.federation.active }}
+      {{ $permalink = $context.Params.federation.canonical_url }}
+    {{ end }}
     {{ printf "<link rel=%q type=%q href=%q>" .Rel .MediaType.Type $permalink | safeHTML }}
   {{ end }}
 {{ end }}
