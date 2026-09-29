@@ -12,7 +12,7 @@
         h2
             max-width: columns(8)
     &--collapsed
-        align-items: end
+        align-items: center
         cursor: pointer
         display: flex
         flex-wrap: wrap
@@ -44,3 +44,7 @@
             @include icon(arrow-up-s-line, before)
         &[aria-expanded="false"] + .collapse + &
             margin-top: 0
+
+        @include in-page-without-sidebar
+            h2
+                max-width: columns(11)
