@@ -1,8 +1,8 @@
 {{ if ne .Type "error" }}
   {{ $context := . }}
-  {{ $permalink := .OutputFormats.Canonical.Permalink }}
 
   {{ with .OutputFormats.Canonical }}
+    {{ $permalink := .Permalink }}
     {{ if $context.Params.federation.active }}
       {{ $permalink = $context.Params.federation.canonical_url }}
     {{ end }}
