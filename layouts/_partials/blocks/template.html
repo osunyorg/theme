@@ -1,6 +1,23 @@
-{{ $template := printf "blocks/templates/%s.html" .block.template }}
-{{ if templates.Exists ( printf "_partials/%s" $template ) }}
-  {{ partial $template (dict
+{{ $chosen_path := "" }}
+{{ $template := .block.template }}
+{{ $template_path := printf "blocks/templates/%s.html" $template }}
+{{ $template_partial_path := printf "_partials/%s" $template_path }}
+{{ if templates.Exists $template_partial_path }}
+  {{ $chosen_path = $template_path }}
+{{ end }}
+{{ $custom_classes := split .block.html_class " " }}
+{{ range $custom_classes }}
+  {{ if . }}
+    {{ $modifier := replace . "block-class-" "" }}
+    {{ $custom_path := printf "custom/blocks/%s--%s.html" $template $modifier }}
+    {{ $custom_partial_path := printf "_partials/%s" $custom_path }}
+    {{ if templates.Exists $custom_partial_path }}
+      {{ $chosen_path = $custom_path }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ if $chosen_path }}
+  {{ partial $chosen_path (dict
     "block" .block
     "context" .context
     "html_id" .html_id
