@@ -1,6 +1,6 @@
-{{ $template := printf "blocks/templates/%s.html" .block.template }}
-{{ if templates.Exists ( printf "_partials/%s" $template ) }}
-  {{ partial $template (dict
+{{ $path := partial "blocks/helpers/GetPath" .block }}
+{{ if $path }}
+  {{ partial $path (dict
     "block" .block
     "context" .context
     "html_id" .html_id

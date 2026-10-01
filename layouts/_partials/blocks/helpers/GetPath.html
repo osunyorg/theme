@@ -1,0 +1,21 @@
+{{ $path := "" }}
+{{/* Chemin par défaut */}}
+{{ $template := .template }}
+{{ $template_path := printf "blocks/templates/%s.html" $template }}
+{{ $template_partial_path := printf "_partials/%s" $template_path }}
+{{ if templates.Exists $template_partial_path }}
+  {{ $path = $template_path }}
+{{ end }}
+{{/* Chemins liés à la classe de bloc */}}
+{{ $custom_classes := split .html_class " " }}
+{{ range $custom_classes }}
+  {{ if . }}
+    {{ $modifier := replace . "block-class-" "" }}
+    {{ $custom_path := printf "custom/blocks/%s--%s.html" $template $modifier }}
+    {{ $custom_partial_path := printf "_partials/%s" $custom_path }}
+    {{ if templates.Exists $custom_partial_path }}
+      {{ $path = $custom_path }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ return $path }}
