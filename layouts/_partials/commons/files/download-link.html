@@ -1,4 +1,7 @@
-{{ $media := partial "GetMedia" .id }}
+{{ $media := "" }}
+{{ if .id }}
+  {{ $media = partial "GetMedia" .id }}
+{{ end }}
 {{ if $media }}
   {{ $title := .title | default $media.name }}
 
