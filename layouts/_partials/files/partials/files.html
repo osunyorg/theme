@@ -6,9 +6,7 @@
 <ul class="files files--{{ $layout }}">
   {{ range $files }}
     {{ partial "files/partials/file.html" (dict
-      "id" .Params.original_blob.id
-      "title" .Title
-      "image" .Params.image
+      "file" .
       "download" false
       "context" .
     ) }}
