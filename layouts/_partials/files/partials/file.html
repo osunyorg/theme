@@ -1,33 +1,30 @@
 {{ $download := .download }}
 {{ $context := .context }}
 {{ with .file }}
-  {{ $media := partial "GetMedia" .Params.original_blob.id }}
-  {{ if $media }}
-    <li>
-      <article class="file {{ if .Params.image }} with-image {{ end }} {{ if $download }} with-download {{ end }}">
-        <figure>
-          {{ if $download }}
-            {{ partial "commons/files/download-link.html" (dict
-              "id" .Params.original_blob.id
-              "file_server" .Params.file_server
-              "title" .Params.Title
-              "with_caption" true
-            ) }}
-          {{ else }}
-            {{ partial "files/partials/file/permalink.html" (dict
-              "title" .Params.Title
-              "id" .Params.original_blob.id
-              "context" $context
-            ) }}
-          {{ end }}
-        </figure>
-        {{ with .Params.image }}
-          {{ partial "commons/image.html" (dict
-            "image" .
-            "sizes" site.Params.image_sizes.blocks.files
+  <li>
+    <article class="file {{ if .Params.image }} with-image {{ end }} {{ if $download }} with-download {{ end }}">
+      <figure>
+        {{ if $download }}
+          {{ partial "commons/files/download-link.html" (dict
+            "id" .Params.original_blob.id
+            "file_server" .Params.file_server
+            "title" .Params.Title
+            "with_caption" true
+          ) }}
+        {{ else }}
+          {{ partial "files/partials/file/permalink.html" (dict
+            "title" .Params.Title
+            "id" .Params.original_blob.id
+            "context" $context
           ) }}
         {{ end }}
-      </article>
-    </li>
-  {{ end }}
+      </figure>
+      {{ with .Params.image }}
+        {{ partial "commons/image.html" (dict
+          "image" .
+          "sizes" site.Params.image_sizes.blocks.files
+        ) }}
+      {{ end }}
+    </article>
+  </li>
 {{ end }}
