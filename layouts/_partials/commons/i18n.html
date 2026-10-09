@@ -4,10 +4,12 @@
 {{ $url := "" }}
 {{ $position := .position }}
 {{ $dropdown_class := "dropdown-menu dropdown-languages" }}
+{{ $dropdown_attributes := "" }}
 {{ $languages := site.Home.AllTranslations }}
 
 {{ if eq $position "footer" }}
   {{ $dropdown_class = printf "%s extendable" $dropdown_class }}
+  {{ $dropdown_attributes = "data-extendable-auto-close='true'" }}
 {{ end }}
 
 {{ if gt (len $languages) 1 }}
@@ -22,7 +24,7 @@
         tabindex="0">
           {{- $language -}}
       </span>
-      <div class="{{ $dropdown_class }}" id="{{ $position }}-i18n-list">
+      <div class="{{ $dropdown_class }}" id="{{ $position }}-i18n-list" {{ $dropdown_attributes | safeHTMLAttr }}>
         {{ partial "commons/i18n/list.html" (dict
           "translations" $translations
         ) }}
