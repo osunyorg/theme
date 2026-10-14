@@ -63,8 +63,12 @@ let pagefindExclude = `
     .schools,
     .volumes`;
 
+// Pagefind is not a yarn dependency: yarn 1 downloads its binaries for every platform (~750 MB),
+// whereas npx only fetches the one for the current platform, and caches it.
+// The version is pinned, so prefer-offline lets npx reuse its cache without asking the registry.
+let pagefindVersion = "1.5.2";
 // Pagefind command, exporting to public/pagefind
-let pagefindCommand = "npm_config_yes=true npx pagefind --site \"public\" --glob \"**/index.{html}\" --exclude-selectors \"" + pagefindExclude + "\"";
+let pagefindCommand = "npm_config_yes=true npm_config_prefer_offline=true npx pagefind@" + pagefindVersion + " --site \"public\" --glob \"**/index.{html}\" --exclude-selectors \"" + pagefindExclude + "\"";
 // Pagefind variant command, exporting to static/pagefind, useful for local environment
 let pagefindDevCommand = pagefindCommand + " --output-subdir \"../static/pagefind\"";
 
