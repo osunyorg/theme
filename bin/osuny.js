@@ -23,52 +23,13 @@ console.log(`
 
 const command = process.argv[2];
 
-let pagefindExclude = `
-    .block-agenda,
-    .block-diplomas,
-    .block-categories,
-    .block-exhibitions,
-    .block-jobs,
-    .block-locations,
-    .block-organizations,
-    .block-pages,
-    .block-papers,
-    .block-persons,
-    .block-posts,
-    .block-programs,
-    .block-projects,
-    .block-publications,
-    .block-volumes,
-    .person-objects,
-    .person-papers,
-    .person-posts,
-    .person-programs,
-    .person-publications,
-    .program-related,
-    .post-sidebar,
-    .events,
-    .exhibitions,
-    .jobs,
-    .journals,
-    .laboratories,
-    .organizations,
-    .pages,
-    .papers,
-    .persons,
-    .posts,
-    .programs,
-    .projects,
-    .publications,
-    .papers,
-    .schools,
-    .volumes`;
-
 // Pagefind is not a yarn dependency: yarn 1 downloads its binaries for every platform (~750 MB),
 // whereas npx only fetches the one for the current platform, and caches it.
 // The version is pinned, so prefer-offline lets npx reuse its cache without asking the registry.
 let pagefindVersion = "1.5.2";
 // Pagefind command, exporting to public/pagefind
-let pagefindCommand = "npm_config_yes=true npm_config_prefer_offline=true npx pagefind@" + pagefindVersion + " --site \"public\" --glob \"**/index.{html}\" --exclude-selectors \"" + pagefindExclude + "\"";
+// Run from the theme directory, where pagefind reads pagefind.yml (site, glob, excluded selectors)
+let pagefindCommand = "cd themes/osuny && npm_config_yes=true npm_config_prefer_offline=true npx pagefind@" + pagefindVersion;
 // Pagefind variant command, exporting to static/pagefind, useful for local environment
 let pagefindDevCommand = pagefindCommand + " --output-subdir \"../static/pagefind\"";
 
