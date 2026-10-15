@@ -4,6 +4,9 @@
   {{ $title := .title }}
   {{ $slug := .slug }}
   {{ $is_collapsed := eq .data.layout "collapsed" }}
+  {{ $heading_tag := partial "GetHeadingTag" (dict 
+    "level" .ranks.self
+  ) }}
 
   {{ with .data }}
     <div id="{{- $slug -}}" class="heading container {{ $block_class }}"
@@ -13,7 +16,7 @@
         role="button"
         tabindex="0"
       {{ end }}>
-      <h2>{{ safeHTML $title }}</h2>
+      {{ $heading_tag.open -}}{{ safeHTML $title }}{{ $heading_tag.close -}}
     </div>
   {{ end }}
 {{ end }}
