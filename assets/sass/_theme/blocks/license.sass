@@ -5,8 +5,9 @@
             display: none
     @include in-page-without-sidebar
         .block-content
-            @include grid
+            display: flex
+            gap: var(--grid-gutter)
             .top
-                grid-column: 1 / 5
+                width: columns(5)
             .license
-                grid-column: 5 / 13
+                flex: 1
