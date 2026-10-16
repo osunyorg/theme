@@ -1,7 +1,7 @@
 {{ $kind := .kind | singularize }}
 {{/*  TODO: rename all call from this partial to `type` instead of `kind`.  */}}
 {{ $type := ( .type | singularize ) | default $kind }}
-{{ $class := .class | default ( printf "%s-categories" $type ) }}
+{{ $class := .class | default ( printf "%s-categories item-categories" $type ) }}
 {{ $categories := .categories }}
 {{ $depth := .depth }}
 {{ if not $categories }}
