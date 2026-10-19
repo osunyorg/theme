@@ -1,5 +1,5 @@
 {{ $has_i18n := false }}
 
-{{ if gt (len .Site.Languages) 1 }}
+{{ with .Rotate "language" }}
   {{ $has_i18n = true }}
 {{ end }}
