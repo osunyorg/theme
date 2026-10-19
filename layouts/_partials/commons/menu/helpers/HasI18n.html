@@ -1,6 +1,7 @@
+{{ $languages := site.Home.AllTranslations }}
 {{ $has_i18n := false }}
 
-{{ with gt (.Rotate "language") 1 }}
+{{ with gt $languages 1 }}
   {{ $has_i18n = true }}
 {{ end }}
 
