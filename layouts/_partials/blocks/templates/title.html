@@ -5,7 +5,7 @@
   {{ $slug := .slug }}
   {{ $is_collapsed := eq .data.layout "collapsed" }}
   {{ $heading_tag := partial "GetHeadingTag" (dict 
-    "level" .ranks.self
+    "level" (.ranks.self | default 2)
   ) }}
 
   {{ with .data }}
