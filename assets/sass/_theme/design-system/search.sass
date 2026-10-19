@@ -18,10 +18,9 @@
     .pf-trigger-icon
         display: none
 
-    &--primary, 
+    &--primary,
     &--upper-menu
         .pf-trigger-btn
-            color: $header-color
             @if not $search-button-header-text
                 .pf-trigger-text
                     @extend .sr-only
@@ -33,7 +32,6 @@
 
     &--footer
         .pf-trigger-btn
-            color: $footer-color
             @if not $search-button-footer-text
                 .pf-trigger-text
                     @extend .sr-only
@@ -42,7 +40,6 @@
 
     &--fixed
         .pf-trigger-btn
-            color: var(--color-text)
             @if not $search-button-fixed-text
                 .pf-trigger-text
                     @extend .sr-only
@@ -51,14 +48,12 @@
             align-items: center
             background: var(--color-background-alt)
             bottom: 0
-            color: var(--color-text)
             justify-content: space-between
             left: var(--grid-gutter)
             min-height: $minimum-accessible-size
             padding:  $spacing-1 $spacing-2
             position: fixed
             z-index: $zindex-search-button-fixed
-        
             @include media-breakpoint-down(desktop)
                 left: 0
                 width: 100vw
@@ -66,7 +61,6 @@
                     background: var(--color-background)
                     border-top: var(--border-width) solid #eee
                     padding: 0 var(--grid-gutter)
-                
             @include media-breakpoint-up(desktop)
                 @if $search-button-fixed-text
                     width: columns(2)
