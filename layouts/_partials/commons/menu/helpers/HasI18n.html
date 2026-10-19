@@ -1,5 +1,7 @@
 {{ $has_i18n := false }}
 
-{{ with .Rotate "language" }}
+{{ with gt (.Rotate "language") 1 }}
   {{ $has_i18n = true }}
 {{ end }}
+
+{{ return $has_i18n }}
