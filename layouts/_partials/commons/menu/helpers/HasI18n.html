@@ -1,5 +1,8 @@
+{{ $languages := site.Home.AllTranslations }}
 {{ $has_i18n := false }}
 
-{{ if gt (len site.Languages) 1 }}
-  {{ $has_i18n = true}}
+{{ with gt $languages 1 }}
+  {{ $has_i18n = true }}
 {{ end }}
+
+{{ return $has_i18n }}
