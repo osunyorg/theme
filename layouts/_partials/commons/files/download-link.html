@@ -1,33 +1,33 @@
-{{ $file := false }}
+{{ $media := "" }}
 {{ if .id }}
-  {{ $file = partial "GetMedia" .id }}
+  {{ $media = partial "GetMedia" .id }}
 {{ end }}
+{{ if $media }}
+  {{ $title := .title | default $media.name }}
 
-{{ $title := .title }}
-{{ $with_caption := .with_caption }}
-
-{{ if $file }}
-  {{ if (not $title) }}
-    {{ $title = $file.name }}
+  {{ $url := $media.url }}
+  {{ if site.Params.keycdn }}
+    {{ $url = $media.download_url }}
+  {{ end }}
+  {{ with .file_server }}
+    {{ $url = .url }}
+    {{ $title = .name }}
   {{ end }}
 
   {{ $a11y_title := $title }}
   {{ if .use_filename_for_a11y_title }}
-    {{ $a11y_title = $file.name }}
+    {{ $a11y_title = $media.name }}
   {{ end }}
 
-  {{ $extension_with_size := partial "commons/files/helpers/GetFileExtensionWithSize" $file }}
+  {{ $extension_with_size := partial "commons/files/helpers/GetFileExtensionWithSize" $media }}
   {{ $title_with_size := printf "%s (%s)" $a11y_title $extension_with_size }}
-  {{ $url := $file.url }}
-  {{ if site.Params.keycdn }}
-    {{ $url = $file.download_url }}
-  {{ end }}
-  <a href="{{ $url }}" download="{{ safeHTML $file.name }}" target="_blank" title="{{ i18n "commons.link.download" (dict "Title" $title_with_size) }}">
+
+  <a href="{{ $url }}" download="{{ safeHTML $media.name }}" target="_blank" title="{{ i18n "commons.link.download" (dict "Title" $title_with_size) }}">
     {{ $title }}
   </a>
   {{ if .with_caption }}
     <figcaption>
-      {{ partial "commons/files/extension-and-size.html" $file }}
+      {{ partial "commons/files/extension-and-size.html" $media }}
     </figcaption>
   {{ end }}
 {{ end }}
