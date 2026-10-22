@@ -1,8 +1,8 @@
 {{ if .testimonials }}
   {{ $layout := .layout }}
   {{ $attributes := "" }}
-  {{ if eq $layout "carousel" }}
-    {{ $attributes = printf "data-slider='%s'" (  site.Params.blocks.testimonials.slider | encoding.Jsonify ) }}
+  {{ if and (eq $layout "carousel") (gt .testimonials 1) }}
+    {{ $attributes = printf "data-slider='%s'" ( site.Params.blocks.testimonials.slider | encoding.Jsonify ) }}
   {{ end }}
 
   <ul class="testimonials testimonials--{{ $layout }}" {{ $attributes | safeHTMLAttr }}>
