@@ -3,17 +3,17 @@
   "attributes" "class='organization-title' itemprop='name'"
 ) }}
 {{ $heading_tag.open }}
-  {{ if .options.link }}
+  {{ if .has_link }}
     <a href="{{ .organization.Permalink }}" 
       {{ if .organization.Params.external }}
         target="_blank" rel="noopener noreferrer"
-        title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" .organization.Title)) }}"
+        title="{{ safeHTML (i18n "commons.link.blank_aria" (dict "Title" .Title)) }}"
       {{ else }}
-        title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .organization.Title)) }}"
+        title="{{ safeHTML (i18n "commons.more_aria" (dict "Title" .Title)) }}"
       {{ end }}>
   {{ end }}
-  {{- .organization.Title -}}
-  {{ if .options.link }}
+  {{- .title -}}
+  {{ if .has_link }}
     </a>
   {{ end }}
 {{ $heading_tag.close }}

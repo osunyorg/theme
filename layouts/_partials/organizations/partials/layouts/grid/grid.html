@@ -5,7 +5,10 @@
 
 <ul class="organizations organizations--grid {{ if $options.summary }} with-summaries{{ end }}">
   {{ range .organizations }}
-    {{ $organization := partial "organizations/helpers/GetObjectOrData" . }}
+    {{ $organization := . }}
+    {{ if not .external }}
+      {{ $organization = partial "organizations/helpers/GetObjectOrData" . }}
+    {{ end}}
     <li>
       {{ partial "organizations/partials/organization.html" (dict
         "organization" $organization

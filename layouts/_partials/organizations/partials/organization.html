@@ -5,13 +5,20 @@
 {{ with .organization }}
   <article class="organization" itemscope itemtype="https://schema.org/Organization" {{ $attributes | safeHTMLAttr }}>
     <div class="organization-content">
+      {{ $title := cond .external .name .params.Title }}
+      {{ $link := cond .external .url .params.Permalink }}
+      {{ $summary := cond .external .role .params.summary }}
+
       {{ partial "organizations/partials/organization/heading.html" (dict
         "heading_level" $heading_level
         "organization" .
         "options" $options
+        "title" $title
+        "link" $link
+        "has_link" .options.link
       ) }}
       {{ if $options.summary }}
-        {{ partial "organizations/partials/organization/summary.html" . }}
+        {{ partial "organizations/partials/organization/summary.html" $summary }}
       {{ end }}
       {{ if and $options.address .Params.contact_details }}
         {{ partial "commons/address.html" .Params.contact_details.postal_address }}

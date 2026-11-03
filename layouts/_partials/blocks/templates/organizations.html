@@ -13,7 +13,7 @@
         {{ partial (printf "organizations/partials/layouts/%s/%s.html" $layout $layout) (dict
           "context" $context
           "html_id" $html_id
-          "heading_level" $block.ranks.children
+          "heading_level" (or $block.ranks.children $block.ranks.base)
           "title" $block.title
           "logo_index" $logo_index
           "organizations" .organizations
