@@ -6,6 +6,7 @@ var CLASSES = {
     mainMenuOpened: 'is-opened',
     isAnimating: 'is-animating',
     scrollingDown: 'is-scrolling-down',
+    scrollingUp: 'is-scrolling-up',
     menusOpened: 'has-menu-opened',
     hasMenuSticky: 'has-menu-sticky',
     sticky: 'is-sticky'
@@ -197,8 +198,10 @@ window.osuny.MainMenu.prototype.onScroll = function () {
 
     if (y > this.state.previousScrollY + threshold && !isNearTop) {
         htmlElement.classList.add(CLASSES.scrollingDown);
+        htmlElement.classList.remove(CLASSES.scrollingUp);
         hasChanged = true;
     } else if (y < this.state.previousScrollY - threshold) {
+        htmlElement.classList.add(CLASSES.scrollingUp);
         htmlElement.classList.remove(CLASSES.scrollingDown);
         hasChanged = true;
     }
