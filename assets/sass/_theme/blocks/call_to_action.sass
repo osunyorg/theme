@@ -4,18 +4,59 @@ $button-selector: "a:first-child"
     $button-selector: "a"
 
 .block-call_to_action
+    background-color: var(--cta-background-color)
+    color: var(--cta-color)
+    margin-bottom: 0
+
+    // Colors options
+    &--no_background
+        --cta-background-color: #{$block-call-to-action-background}
+        --cta-color: #{$block-call-to-action-color}
+        --cta-color-alpha: alphaColor($block-call-to-action-color, 0.3)
+
+        --cta-btn-background: #{$block-call-to-action-button-background}
+        --cta-btn-border: #{$block-call-to-action-button-border}
+        --cta-btn-color: #{$block-call-to-action-button-color}
+        --cta-btn-hover-background: #{$block-call-to-action-button-hover-background}
+        --cta-btn-hover-border: #{$block-call-to-action-button-hover-border}
+        --cta-btn-hover-color: #{$block-call-to-action-button-hover-color}
+
+    &--accent_background
+        --cta-background-color: #{$block-call-to-action-accent-background}
+        --cta-color: #{$block-call-to-action-accent-color}
+        --cta-color-alpha: alphaColor($block-call-to-action-accent-color, 0.3)
+
+        --cta-btn-background: #{$block-call-to-action-accent-button-background}
+        --cta-btn-border: #{$block-call-to-action-accent-button-border}
+        --cta-btn-color: #{$block-call-to-action-accent-button-color}
+        --cta-btn-hover-background: #{$block-call-to-action-accent-button-hover-background}
+        --cta-btn-hover-border: #{$block-call-to-action-accent-button-hover-border}
+        --cta-btn-hover-color: #{$block-call-to-action-accent-button-hover-color}
+
+    &--alt_background
+        --cta-background-color: #{$block-call-to-action-alt-background}
+        --cta-color: #{$block-call-to-action-alt-color}
+        --cta-color-alpha: alphaColor($block-call-to-action-alt-color, 0.3)
+
+        --cta-btn-background: #{$block-call-to-action-alt-button-background}
+        --cta-btn-border: #{$block-call-to-action-alt-button-border}
+        --cta-btn-color: #{$block-call-to-action-alt-button-color}
+        --cta-btn-hover-background: #{$block-call-to-action-alt-button-hover-background}
+        --cta-btn-hover-border: #{$block-call-to-action-alt-button-hover-border}
+        --cta-btn-hover-color: #{$block-call-to-action-alt-button-hover-color}
+
     .top
         margin-bottom: 0
         .block-title
             margin-bottom: $spacing-2
             + .description
                 margin-top: 0
+
     .call_to_action
-        color: #{$block-call-to-action-color}
         .description
             a
                 color: inherit
-                text-decoration-color: #{$block-call-to-action-color}
+                text-decoration-color: var(--cta-color-alpha)
             p
                 @include h2
                 + p
@@ -26,78 +67,48 @@ $button-selector: "a:first-child"
                     display: flex
                     flex-direction: column
             a
-                @if not $block-call-to-action-all-actions-as-buttons
-                    @include meta
-                    @extend %underline-on-hover
-                    text-decoration-color: alphaColor(#{$block-call-to-action-color}, 0.3)
-                    color: #{$block-call-to-action-color}
                 margin-right: $spacing-3
                 margin-top: $spacing-3
                 display: inline-block
                 &:last-child
                     margin-bottom: 0
+                &:focus,
+                &:focus-visible
+                    outline-color: currentColor
+                @if not $block-call-to-action-all-actions-as-buttons
+                    @include meta
+                    @extend %underline-on-hover
+                    text-decoration-color: var(--cta-color-alpha)
+                    color: var(--cta-color)
             #{$button-selector}
-                --btn-background: #{$block-call-to-action-button-background}
-                --btn-border: #{$block-call-to-action-button-border}
-                --btn-color: #{$block-call-to-action-button-color}
-                --btn-hover-background: #{$block-call-to-action-button-hover-background}
-                --btn-hover-border: #{$block-call-to-action-button-hover-border}
-                --btn-hover-color: #{$block-call-to-action-button-hover-color}
+                --btn-background: var(--cta-btn-background)
+                --btn-border: var(--cta-btn-border)
+                --btn-color: var(--cta-btn-color)
+                --btn-hover-background: var(--cta-btn-hover-background)
+                --btn-hover-border: var(--cta-btn-hover-border)
+                --btn-hover-color: var(--cta-btn-hover-color)
                 --btn-min-width: #{columns(2)}
                 @extend .button
+
+        * + .actions
+            margin-top: $spacing-3
+
         figure
+            img
+                width: 100%
             figcaption
                 @include meta
+                margin-top: $spacing-2
+                a
+                    color: inherit
+                    text-decoration-color: currentColor
                 .credit
                     margin-left: auto
                     width: fit-content
-        * + .actions
-            margin-top: $spacing-3
-    &--no_background
-        .actions
-            a:first-child
-                &:focus,
-                &:focus-visible
-                    outline-color: var(--color-text)
-        .call_to_action--with-image
-            figure
-                img
-                    width: 100%
-                figcaption
-                    margin-top: $spacing-2
-    &--accent_background
-        --cta-background-color: #{$block-call-to-action-accent-background}
-        margin-bottom: 0
-        .call_to_action
-            color: #{$block-call-to-action-accent-color}
-            .description
-                a
-                    text-decoration-color: #{$block-call-to-action-accent-color}
-            figure
-                a
-                    color: #{$block-call-to-action-accent-color}
-                    text-decoration-color: alphaColor(#{$block-call-to-action-accent-color}, 0.3)
-            .actions
-                #{$button-selector}
-                    --btn-background: #{$block-call-to-action-accent-button-background}
-                    --btn-border: #{$block-call-to-action-accent-button-border}
-                    --btn-color: #{$block-call-to-action-accent-button-color}
-                    --btn-hover-background: #{$block-call-to-action-accent-button-hover-background}
-                    --btn-hover-border: #{$block-call-to-action-accent-button-hover-border}
-                    --btn-hover-color: #{$block-call-to-action-accent-button-hover-color}
-                @if not $block-call-to-action-all-actions-as-buttons
-                    a
-                        color: #{$block-call-to-action-accent-color}
-                        text-decoration-color: alphaColor(#{$block-call-to-action-accent-color}, 0.3)
+
     @include media-breakpoint-down(desktop)
-        &--accent_background
-            background-color: var(--cta-background-color)
-            .call_to_action
-                padding: var(--block-space-y) 0
-                figure
-                    figcaption
-                        margin-top: $spacing-2
         .call_to_action
+            padding: var(--block-space-y) 0
             .actions
                 a
                     &:last-child
@@ -110,6 +121,7 @@ $button-selector: "a:first-child"
                 order: 2
             figure
                 margin-bottom: offset(1)
+                margin-top: $spacing-2
                 order: 1
 
     @include in-page-with-sidebar
@@ -125,7 +137,9 @@ $button-selector: "a:first-child"
                     figure
                         margin-left: var(--grid-gutter)
                         width: columns(3)
-        &--accent_background
+        &--accent_background,
+        &--alt_background
+            background: none
             .call_to_action
                 flex-direction: column
                 > div
@@ -165,7 +179,6 @@ $button-selector: "a:first-child"
                         padding-top: calc(var(--grid-gutter) * 2 + #{$spacing-3})
 
     @include in-page-without-sidebar
-        background-color: var(--cta-background-color)
         padding-top: 0
         padding-bottom: 0
         .block-content
