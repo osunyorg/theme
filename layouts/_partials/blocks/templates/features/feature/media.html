@@ -7,11 +7,11 @@
 <figure class="media media--{{ $media_type }}" {{ with or .feature.alt .feature.credit }} role="figure" aria-label="{{ . | plainify }}" {{ end }}>
   {{ partial "commons/image.html" (dict
     "image" .feature.image
-    "alt" .feature.alt
+    "alt" .feature.image.alt
     "sizes" site.Params.image_sizes.blocks.features
   ) }}
 
-  {{ with .feature.credit }}
+  {{ with .feature.image.credit }}
     <figcaption class="credit">
       {{- safeHTML . -}}
     </figcaption>
