@@ -16,6 +16,11 @@ window.osuny = window.osuny || {};
 
 window.osuny.MainMenu = function (selector) {
     this.element = document.querySelector(selector);
+
+    if (!this.element) {
+        return;
+    }
+
     this.menu = this.element.querySelector('.menu');
     this.mainButton = this.element.querySelector('button.header-button');
     this.upperMenu = this.element.querySelector('.upper-menu');
