@@ -6,6 +6,11 @@ window.osuny = window.osuny || {};
 
 window.osuny.Lightbox = function () {
     var element = document.getElementById('lightbox');
+
+    if (!element) {
+        return;
+    }
+
     window.osuny.Popup.call(this, element);
 
     this.state.currentData = null;
