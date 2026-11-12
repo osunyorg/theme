@@ -2,9 +2,8 @@
 <nav aria-label="{{ i18n "commons.accessibility.shortcut_navigation" }}" class="nav-accessibility" id="nav-accessibility">
   <ul>
     <li><a href="#main">{{ i18n "commons.accessibility.main_content" }}</a></li>
-
-    {{ if .Params.design.toc.present }}
-      {{ $toc_item_focus := cond .Params.design.toc.offcanvas "#toc-cta-title" "#toc-container" }}
+    {{ if and (not site.Params.toc.disabled) (or (not site.Params.home.toc.disabled) (not .IsHome)) }}
+      {{ $toc_item_focus := cond .Params.toc.force_offcanvas "#toc-container" "#toc-cta-title"  }}
       <li><a href="{{ $toc_item_focus }}">{{ i18n "commons.accessibility.table_of_contents" }}</a></li>
     {{ end }}
 
