@@ -34,6 +34,7 @@ window.osuny.Dismissible.prototype.close = function () {
 
 window.osuny.Dismissible.prototype.open = function () {
     this.element.removeAttribute('aria-hidden');
+    this.close.setAttribute('aria-expanded', 'true');
 };
 
 window.osuny.Dismissible.prototype.isDismissed = function () {
