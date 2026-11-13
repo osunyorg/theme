@@ -1,6 +1,5 @@
 {{ $is_present := .Params.design.toc.present }}
-
-{{ if site.Params.toc.disabled }}
+{{ if or (site.Params.toc.disabled) (and (site.Params.home.toc.disabled) (.IsHome)) }}
   {{ $is_present = false }}
 {{ end }}
 

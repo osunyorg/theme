@@ -1,10 +1,11 @@
 {{ $search_positions := site.Params.search.positions }}
+{{ $with_toc := partial "toc/helpers/IsPresent" . }}
 <nav aria-label="{{ i18n "commons.accessibility.shortcut_navigation" }}" class="nav-accessibility" id="nav-accessibility">
   <ul>
     <li><a href="#main">{{ i18n "commons.accessibility.main_content" }}</a></li>
-
-    {{ if .Params.design.toc.present }}
-      {{ $toc_item_focus := cond .Params.design.toc.offcanvas "#toc-cta-title" "#toc-container" }}
+    {{ if $with_toc }}
+      {{ $is_off_canvas := or (.Params.design.toc.offcanvas) (site.Params.toc.force_offcanvas) }}
+      {{ $toc_item_focus := cond $is_off_canvas "#toc-cta-title" "#toc-container" }}
       <li><a href="{{ $toc_item_focus }}">{{ i18n "commons.accessibility.table_of_contents" }}</a></li>
     {{ end }}
 
