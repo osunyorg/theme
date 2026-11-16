@@ -20,6 +20,7 @@ import './design-system/components/Maps';
 import './design-system/components/modal';
 import './design-system/components/notes';
 import './design-system/components/search';
+import './design-system/components/Dismissible';
 import './design-system/font';
 
 import './blocks/keyFigures';
