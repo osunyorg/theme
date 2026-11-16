@@ -50,5 +50,3 @@ window.osuny.page.registerComponent({
     selector: '.dismissible',
     klass: window.osuny.Dismissible
 });
-
-console.log('yo')
