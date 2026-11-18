@@ -1,4 +1,4 @@
-{{ with .Params.summary }}
+{{ with or .Params.role .Params.summary }}
   <div class="organization-summary">
     {{ safeHTML . }}
   </div>
