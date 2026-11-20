@@ -24,7 +24,7 @@
             font-size: pxToRem(25)
             order: 2
         // When collapse is closed
-        &[aria-expanded="false"]
+        &:has([aria-expanded="false"])
             &:nth-last-child(2)
                 margin-bottom: var(--block-space-y)
                 &::after
@@ -40,9 +40,9 @@
             + .collapse
                 display: none
         // When collapse is opened
-        &[aria-expanded="true"]
+        &:has([aria-expanded="true"])
             @include icon(arrow-up-s-line, before)
-        &[aria-expanded="false"] + .collapse + &
+        &:has([aria-expanded="false"]) + .collapse + &
             margin-top: 0
 
         @include in-page-without-sidebar

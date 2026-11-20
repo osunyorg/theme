@@ -9,16 +9,18 @@
   ) }}
 
   {{ with .data }}
-    <div id="{{- $slug -}}" class="heading container {{ $block_class }}"
-      {{ if $is_collapsed }}
-        aria-controls="collapse-{{- $slug -}}"
-        aria-expanded="false"
-        role="button"
-        tabindex="0"
-      {{ end }}>
+    <div id="{{- $slug -}}" class="heading container {{ $block_class }}">
       {{ $heading_tag.open }}
         {{- safeHTML $title -}}
       {{ $heading_tag.close }}
+      {{ if $is_collapsed }}
+        <span aria-controls="collapse-{{- $slug -}}"
+          aria-expanded="false"
+          role="button"
+          tabindex="0">
+          ouvrir
+        </span>
+      {{ end }}
     </div>
   {{ end }}
 {{ end }}
