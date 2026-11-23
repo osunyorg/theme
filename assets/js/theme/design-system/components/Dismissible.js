@@ -54,7 +54,9 @@ window.osuny.Dismissible.prototype.isExpired = function () {
         currentTime = new Date().getTime(),
         isExpired = false;
 
-    if (closedTime) {
+    if (!closedTime) {
+        return false;
+    } else {
         isExpired = currentTime - closedTime > this.expirationDuration;
     }
 
