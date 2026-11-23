@@ -14,11 +14,13 @@
         {{- safeHTML $title -}}
       {{ $heading_tag.close }}
       {{ if $is_collapsed }}
-        <span aria-controls="collapse-{{- $slug -}}"
+        <span
+          class="block-title-button"
+          aria-controls="collapse-{{- $slug -}}"
           aria-expanded="false"
           role="button"
           tabindex="0">
-          ouvrir
+          <span class="sr-only">étendre</span>
         </span>
       {{ end }}
     </div>
