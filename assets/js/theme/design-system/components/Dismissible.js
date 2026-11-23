@@ -22,18 +22,23 @@ window.osuny.Dismissible.prototype._init = function () {
 };
 
 window.osuny.Dismissible.prototype._listen = function () {
-    this.closeButton.addEventListener('click', this.close.bind(this));
+    this.closeButton.addEventListener('click', this.onClickCloseButton.bind(this));
 };
 
-window.osuny.Dismissible.prototype.close = function () {
+window.osuny.Dismissible.prototype.onClickCloseButton = function () {
     var currentTime = new Date().getTime();
-    this.element.setAttribute('aria-hidden', 'true');
 
     try {
         window.localStorage.setItem(this.storageKey, currentTime);
     } catch (e) {
         // everything's fine
     }
+
+    this.close();
+};
+
+window.osuny.Dismissible.prototype.close = function () {
+    this.element.setAttribute('aria-hidden', 'true');
 };
 
 window.osuny.Dismissible.prototype.open = function () {
