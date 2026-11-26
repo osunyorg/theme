@@ -3,8 +3,11 @@
   {{ $pctx = .Site }}
 {{ end }}
 {{ $pages := slice }}
-{{ if or $.IsHome $.IsSection }}
+{{ if or $.IsHome (and $.IsSection (ne $.Type "events" )) }}
   {{ $pages = $pctx.RegularPages }}
+{{ else if and $.IsSection (eq $.Type "events" ) }}
+  {{ $pages = where .Site.RegularPages "Section" "events" }}
+  {{ $pages = $pages | append (where .Site.RegularPages "Section" "exhibitions") }}
 {{ else }}
   {{ $pages = $pctx.Pages }}
 {{ end }}
