@@ -1,3 +1,8 @@
+{{ $display_header_cta := true }}
+{{ if and .Params.dates.archive site.Params.events.single.hide_archive_hero_button }}
+  {{ $display_header_cta = false }}
+{{ end }}
+
 <div class="event-practicals" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
   <h2>{{ i18n (printf "agenda.access.partical_informations") }}</h2>
   <div>
@@ -6,7 +11,7 @@
       {{ safeHTML .Params.notes }}
     </div>
   </div>
-  {{ with .Params.header_cta }}
-    {{ partial "header/cta.html" . }}
+  {{ if $display_header_cta }}
+    {{ partial "header/cta.html" .Params.header_cta }}
   {{ end }}
 </div>
